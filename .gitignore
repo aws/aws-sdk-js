@@ -1,1 +1,6 @@
 configuration
+
+# vim files
+*~
+*.swp
+*.swo
