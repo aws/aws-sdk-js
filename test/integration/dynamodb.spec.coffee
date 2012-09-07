@@ -1,4 +1,4 @@
-AWS = require('../lib/aws')
+AWS = require('../../lib/aws')
 config = new AWS.FileSystemConfig('configuration')
 
 integration = (expected) ->
@@ -18,4 +18,4 @@ describe 'AWS.DynamoDB', ->
 
   describe 'listTables', ->
     it 'should send a request', ->
-      integration.apply(this, ['{"TableNames":[]}'])
+      helpers.integration.apply(this, ['{"TableNames":[]}'])

@@ -40,6 +40,6 @@
         "glacier"
     ],
     "scripts" : {
-        "test" : "tap test/*.js test/integration/*.js"
+        "test" : "jasmine-node --coffee test/unit"
     }
 }
