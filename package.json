@@ -10,6 +10,7 @@
     "homepage": "https://github.com/aws/aws-sdk-js",
     "contributors": [],
     "devDependencies": {
+      "jasmine-node": "*"
     },
     "dependencies": {
     },
