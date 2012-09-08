@@ -9,9 +9,6 @@ describe 'AWS.Config', ->
 
     it 'useSSL should be true', ->
       expect(config.useSSL).toEqual(true)
-    
-    it 'handler should be AWS.HttpHandler', ->
-      expect(config.handler).toEqual(new AWS.HttpHandler)
 
     it 'debug should be false', ->
       expect(config.debug).toEqual(false)
