@@ -14,12 +14,31 @@ describe 'AWS.util.date', ->
 describe 'AWS.util.crypto', ->
   util = AWS.util.crypto
 
-  describe 'hmachex', ->
-    it 'should return a keyed hash as hex digest', ->
-      result = '116a3725a3540067a09e4dba64bb6b3fb27b4d98a1a2e2dbcb8b4cffa73585d5'
-      expect(util.hmachex('KEY', 'foo')).toBe(result)
+  describe 'toHex', ->
+    it 'should convert binary data to hex string', ->
+      expect(util.toHex('ABC')).toBe('414243')
 
-  describe 'sha256hex', ->
-    it 'should return data hashed with sha256', ->
-      result = '2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae'
-      expect(util.sha256hex('foo')).toBe(result)
+  describe 'hmac', ->
+    input = 'foo'
+    key = 'KEY'
+    result = '116a3725a3540067a09e4dba64bb6b3fb27b4d98a1a2e2dbcb8b4cffa73585d5'
+
+    it 'should return a keyed hash as a binary digest', ->
+      expected = util.hmac(key, input)
+      expect(util.toHex(expected)).toBe(result)
+
+    it 'should return a keyed hash as hex digest', ->
+      expected = util.hmachex(key, input)
+      expect(expected).toBe(result)
+
+  describe 'sha256', ->
+    input = 'foo'
+    result = '2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae'
+
+    it 'should return binary data hashed with sha256', ->
+      expected = util.sha256(input)
+      expect(util.toHex(expected)).toBe(result)
+
+    it 'should return hex data hashed with sha256', ->
+      expected = util.sha256hex(input)
+      expect(expected).toBe(result)
