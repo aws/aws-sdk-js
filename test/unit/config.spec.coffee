@@ -1,25 +1,40 @@
 AWS = require('../../lib/aws')
 
 describe 'AWS.Config', ->
-  describe 'Defaults', ->
-    config = new AWS.Config({}) # TODO take out {}
 
-    it 'region should be null', ->
-      expect(config.region).toEqual(null)
+  configure = (options) -> new AWS.Config(options)
 
-    it 'useSSL should be true', ->
-      expect(config.useSSL).toEqual(true)
+  describe 'region', ->
+    it 'defaults to null', ->
+      expect(configure().region).toEqual(null)
+    it 'can be set to a string', ->
+      expect(configure({ region: 'us-west-1' }).region).toEqual('us-west-1')
 
-    it 'debug should be false', ->
-      expect(config.debug).toEqual(false)
+  describe 'maxRetries', ->
+    it 'defaults to 3', ->
+      expect(configure().maxRetries).toEqual(3)
+    it 'can be set to an integer', ->
+      expect(configure({ maxRetries: 2 }).maxRetries).toEqual(2)
+
+  describe 'useSSL', ->
+    it 'defaults to true', ->
+      expect(configure().useSSL).toEqual(true)
+    it 'can be set to false', ->
+      expect(configure({ useSSL: false }).useSSL).toEqual(false)
+
+  describe 'debug', ->
+    it 'defaults to false', ->
+      expect(configure().debug).toEqual(false)
+    it 'can be set to true', ->
+      expect(configure({ debug: true }).debug).toEqual(true)
 
   describe 'Credentials', ->
     it 'should allow setting of credentials with keys', ->
-      creds =
+      config = configure(
         accessKeyId: 'akid'
         secretAccessKey: 'secret'
         sessionToken: 'session'
-      config = new AWS.Config(creds)
+      )
       expect(config.credentials.accessKeyId).toBe('akid')
       expect(config.credentials.secretAccessKey).toBe('secret')
       expect(config.credentials.sessionToken).toBe('session')
@@ -29,7 +44,7 @@ describe 'AWS.Config', ->
         accessKeyId: 'akid'
         secretAccessKey: 'secret'
         sessionToken: 'session'
-      config = new AWS.Config({credentials: new AWS.Credentials(creds)})
+      config = configure({credentials: new AWS.Credentials(creds)})
       expect(config.credentials.accessKeyId).toBe('akid')
       expect(config.credentials.secretAccessKey).toBe('secret')
       expect(config.credentials.sessionToken).toBe('session')
