@@ -19,4 +19,4 @@ describe 'AWS.DynamoDB', ->
     it 'should send a request', ->
       integration this, (resp) ->
         expect(resp.error).toBe(null)
-        expect(JSON.stringify(resp.data)).toEqual('{"TableNames":[]}')
+        expect(JSON.stringify(resp.data)).toMatch(/\{"TableNames":.*\}/)
