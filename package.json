@@ -8,7 +8,10 @@
         "url":"http://aws.amazon.com/"
     },
     "homepage": "https://github.com/aws/aws-sdk-js",
-    "contributors": [],
+    "contributors": [
+      "Loren Segal <lsegal@amazon.com>",
+      "Trevor Rowe <trevrowe@amazon.com>"
+    ],
     "devDependencies": {
       "jasmine-node": "*"
     },
@@ -40,6 +43,8 @@
         "glacier"
     ],
     "scripts" : {
-        "test" : "jasmine-node --coffee test/unit"
+        "test" : "jasmine-node --coffee test",
+        "unit" : "jasmine-node --coffee test/unit",
+        "integration": "jasmine-node --coffee test/integration"
     }
 }
