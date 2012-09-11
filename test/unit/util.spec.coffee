@@ -1,4 +1,4 @@
-AWS = require('../../lib/aws')
+AWS = require('../../lib/core')
 
 describe 'AWS.util.date', ->
   util = AWS.util.date

@@ -1,4 +1,5 @@
-AWS = require('../../lib/aws')
+AWS = require('../../lib/core')
+require('../../lib/service/dynamodb')
 
 buildRequest = ->
   req = new AWS.DynamoDB.HttpRequest('listTables', {foo: 'bar'})
