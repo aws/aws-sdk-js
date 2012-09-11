@@ -88,5 +88,9 @@ describe 'AWS.SignatureV4Signer', ->
       expect(signer.canonicalHeaders()).toEqual('abc:a\nbar:d\nbca:b\nqux:c')
 
     it 'should compact multiple spaces in keys/values to a single space', ->
-      signer.request.headers = {'Header   with spaces': 'Value     with  Multiple   \t spaces'}
-      expect(signer.canonicalHeaders()).toEqual('header with spaces:Value with Multiple spaces')
+      signer.request.headers = {'Header': 'Value     with  Multiple   \t spaces'}
+      expect(signer.canonicalHeaders()).toEqual('header:Value with Multiple spaces')
+
+    it 'should strip starting and end of line spaces', ->
+      signer.request.headers = {'Header': ' \t   Value  \t  '}
+      expect(signer.canonicalHeaders()).toEqual('header:Value')
