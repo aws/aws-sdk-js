@@ -8,7 +8,7 @@ buildRequest = ->
 buildSigner = (request) ->
   return new AWS.SignatureV4Signer(request || buildRequest())
 
-describe 'SignatureV4Signer', ->
+describe 'AWS.SignatureV4Signer', ->
   date = new Date(1935346573456)
   datetime = AWS.util.date.getISODateString(date)
   creds = {accessKeyId: 'akid', secretAccessKey: 'secret', sessionToken: 'session'}
