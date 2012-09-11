@@ -57,9 +57,9 @@ describe 'SignatureV4Signer', ->
 
   describe 'stringToSign', ->
     it 'should sign correctly generated input string', ->
-      expect(signer.stringToSign(datetime)).toEqual "AWS4-HMAC-SHA256\n" +
-        datetime + "\n" +
-        "20310430/region/dynamodb/aws4_request\n" +
+      expect(signer.stringToSign(datetime)).toEqual 'AWS4-HMAC-SHA256\n' +
+        datetime + '\n' +
+        '20310430/region/dynamodb/aws4_request\n' +
         signer.hexEncodedHash(signer.canonicalString())
 
   describe 'canonicalHeaders', ->
@@ -73,4 +73,20 @@ describe 'SignatureV4Signer', ->
         'x-amz-date:' + datetime,
         'x-amz-security-token:session',
         'x-amz-target:DynamoDB_20111205.ListTables'
-      ].join("\n")
+      ].join('\n')
+
+    it 'should ignore Authorization header', ->
+      signer.request.headers = {'Authorization': 'foo'}
+      expect(signer.canonicalHeaders()).toEqual('')
+
+    it 'should lowercase all header names (not values)', ->
+      signer.request.headers = {'FOO': 'BAR'}
+      expect(signer.canonicalHeaders()).toEqual('foo:BAR')
+
+    it 'should sort headers by key', ->
+      signer.request.headers = {abc: 'a', bca: 'b', Qux: 'c', bar: 'd'}
+      expect(signer.canonicalHeaders()).toEqual('abc:a\nbar:d\nbca:b\nqux:c')
+
+    it 'should compact multiple spaces in keys/values to a single space', ->
+      signer.request.headers = {'Header   with spaces': 'Value     with  Multiple   \t spaces'}
+      expect(signer.canonicalHeaders()).toEqual('header with spaces:Value with Multiple spaces')
