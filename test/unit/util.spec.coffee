@@ -7,9 +7,13 @@ describe 'AWS.util.date', ->
     it 'should return current date by default', ->
       expect(util.getDate().getTime()).toBeCloseTo(new Date().getTime(), 5)
 
+  describe 'getISODateString', ->
     it 'should return date formatted as YYYYMMDDTHHnnssZ', ->
       spyOn(util, 'getDate').andCallFake -> new Date(600000)
       expect(util.getISODateString()).toEqual('19700101T001000Z')
+
+    it 'should allow date parameter', ->
+      expect(util.getISODateString(new Date(600000))).toEqual('19700101T001000Z')
 
 describe 'AWS.util.crypto', ->
   util = AWS.util.crypto
