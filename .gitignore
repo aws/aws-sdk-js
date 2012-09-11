@@ -1,6 +1,7 @@
 configuration
 node_modules
 npm-debug.log
+out
 
 # vim files
 *~
