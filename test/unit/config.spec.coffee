@@ -35,9 +35,9 @@ describe 'AWS.Config', ->
         secretAccessKey: 'secret'
         sessionToken: 'session'
       )
-      expect(config.credentials.accessKeyId).toBe('akid')
-      expect(config.credentials.secretAccessKey).toBe('secret')
-      expect(config.credentials.sessionToken).toBe('session')
+      expect(config.credentials.accessKeyId).toEqual('akid')
+      expect(config.credentials.secretAccessKey).toEqual('secret')
+      expect(config.credentials.sessionToken).toEqual('session')
 
     it 'should allow setting of credentials as object', ->
       creds =
@@ -45,6 +45,6 @@ describe 'AWS.Config', ->
         secretAccessKey: 'secret'
         sessionToken: 'session'
       config = configure({credentials: new AWS.Credentials(creds)})
-      expect(config.credentials.accessKeyId).toBe('akid')
-      expect(config.credentials.secretAccessKey).toBe('secret')
-      expect(config.credentials.sessionToken).toBe('session')
+      expect(config.credentials.accessKeyId).toEqual('akid')
+      expect(config.credentials.secretAccessKey).toEqual('secret')
+      expect(config.credentials.sessionToken).toEqual('session')

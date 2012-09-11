@@ -9,14 +9,14 @@ describe 'AWS.util.date', ->
 
     it 'should return date formatted as YYYYMMDDTHHnnssZ', ->
       spyOn(util, 'getDate').andCallFake -> new Date(600000)
-      expect(util.getISODateString()).toBe('19700101T001000Z')
+      expect(util.getISODateString()).toEqual('19700101T001000Z')
 
 describe 'AWS.util.crypto', ->
   util = AWS.util.crypto
 
   describe 'toHex', ->
     it 'should convert binary data to hex string', ->
-      expect(util.toHex('ABC')).toBe('414243')
+      expect(util.toHex('ABC')).toEqual('414243')
 
   describe 'hmac', ->
     input = 'foo'
@@ -25,11 +25,11 @@ describe 'AWS.util.crypto', ->
 
     it 'should return a keyed hash as a binary digest', ->
       expected = util.hmac(key, input)
-      expect(util.toHex(expected)).toBe(result)
+      expect(util.toHex(expected)).toEqual(result)
 
     it 'should return a keyed hash as hex digest', ->
       expected = util.hmachex(key, input)
-      expect(expected).toBe(result)
+      expect(expected).toEqual(result)
 
   describe 'sha256', ->
     input = 'foo'
@@ -37,8 +37,8 @@ describe 'AWS.util.crypto', ->
 
     it 'should return binary data hashed with sha256', ->
       expected = util.sha256(input)
-      expect(util.toHex(expected)).toBe(result)
+      expect(util.toHex(expected)).toEqual(result)
 
     it 'should return hex data hashed with sha256', ->
       expected = util.sha256hex(input)
-      expect(expected).toBe(result)
+      expect(expected).toEqual(result)
