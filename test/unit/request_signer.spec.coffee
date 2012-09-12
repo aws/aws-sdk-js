@@ -1,9 +1,11 @@
 AWS = require('../../lib/core')
-require('../../lib/service/dynamodb')
+require('../../lib/services/dynamodb')
 
 buildRequest = ->
-  req = new AWS.DynamoDB.HttpRequest('listTables', {foo: 'bar'})
+  req = new AWS.DynamoDB.HttpRequest();
   req.endpoint = {region: 'region', scheme: 'https', host: 'localhost', port: 443}
+  builder = new AWS.JsonRequestBuilder({ n:'ListTables' })
+  builder.populateRequest({ foo: 'bar' },req)
   return req
 
 buildSigner = (request) ->
@@ -70,7 +72,7 @@ describe 'AWS.SignatureV4Signer', ->
         'content-type:application/x-amz-json-1.0',
         'date:' + datetime,
         'host:localhost',
-        'user-agent:' + signer.request.userAgent,
+        'user-agent:aws-sdk-js/' + AWS.VERSION,
         'x-amz-date:' + datetime,
         'x-amz-security-token:session',
         'x-amz-target:DynamoDB_20111205.ListTables'

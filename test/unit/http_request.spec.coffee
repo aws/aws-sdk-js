@@ -1,34 +1,47 @@
 AWS = require('../../lib/core')
-require('../../lib/service/dynamodb')
 
-describe 'AWS.DynamoDB.HttpRequest', ->
+describe 'AWS.HttpRequest', ->
+
+  request = null
+  beforeEach ->
+    request = new AWS.HttpRequest()
+
   describe 'constructor', ->
-    request = new AWS.DynamoDB.HttpRequest('operationName', {foo: 'bar'})
 
-    it 'should use POST method requests', ->
+    it 'defaults to POST method requests', ->
       expect(request.method).toEqual('POST')
 
-    it 'should perform all operations on root (/)', ->
+    it 'defaults the uri to /', ->
       expect(request.uri).toEqual('/')
 
-    it 'should set serviceName to dynamodb', ->
-      expect(request.serviceName).toEqual('dynamodb')
+    it 'provides headers with a default user agent', ->
+      userAgent = 'aws-sdk-js/' + AWS.VERSION
+      expect(request.headers).toEqual({ 'User-Agent': userAgent })
 
-    it 'should set Content-Type header', ->
-      type = 'application/x-amz-json-1.0'
-      expect(request.headers['Content-Type']).toEqual(type)
+    it 'defaults body to undefined', ->
+      expect(request.body).toEqual(undefined)
 
-    it 'should set User-Agent', ->
-      agent = AWS.HttpRequest.prototype.userAgent
-      expect(request.headers['User-Agent']).toEqual(agent)
+    it 'defaults endpoint to undefined', ->
+      expect(request.endpoint).toEqual(undefined)
 
-    it 'should set X-Amz-Target header', ->
-      parts = request.headers['X-Amz-Target'].split('.')
-      expect(parts[0]).toEqual(request.targetPrefix)
-      expect(parts[1]).toEqual('OperationName')
+    it 'defaults serviceName to undefined', ->
+      expect(request.serviceName).toEqual(undefined)
 
-    it 'should set Content-Length to body length', ->
-      expect(request.headers['Content-Length']).toEqual(13)
+  describe 'pathname', ->
 
-    it 'should serialize params input object to string', ->
-      expect(request.body).toEqual('{"foo":"bar"}')
+    it 'defaults to /', ->
+      expect(request.pathname()).toEqual('/')
+
+    it 'returns the path portion of the uri', ->
+      request.uri = '/abc/xyz?mno=hjk'
+      expect(request.pathname()).toEqual('/abc/xyz')
+
+  describe 'search', ->
+
+    it 'defaults to an empty string', ->
+      expect(request.search()).toEqual('')
+
+    it 'returns the querystring portion of the uri', ->
+      request.uri = '/abc/xyz?mno=hjk'
+      expect(request.search()).toEqual('mno=hjk')
+

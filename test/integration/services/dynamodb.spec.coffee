@@ -1,5 +1,5 @@
 AWS = require('../../../lib/core')
-require('../../../lib/service/dynamodb')
+require('../../../lib/services/dynamodb')
 config = new AWS.FileSystemConfig('configuration')
 
 integration = (test, callback) ->

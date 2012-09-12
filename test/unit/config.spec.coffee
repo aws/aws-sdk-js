@@ -48,3 +48,4 @@ describe 'AWS.Config', ->
       expect(config.credentials.accessKeyId).toEqual('akid')
       expect(config.credentials.secretAccessKey).toEqual('secret')
       expect(config.credentials.sessionToken).toEqual('session')
+
