@@ -5,14 +5,14 @@ describe 'AWS.Config', ->
   configure = (options) -> new AWS.Config(options)
 
   describe 'region', ->
-    it 'defaults to null', ->
-      expect(configure().region).toEqual(null)
+    it 'defaults to undefined', ->
+      expect(configure().region).toEqual(undefined)
     it 'can be set to a string', ->
       expect(configure({ region: 'us-west-1' }).region).toEqual('us-west-1')
 
   describe 'maxRetries', ->
-    it 'defaults to 3', ->
-      expect(configure().maxRetries).toEqual(3)
+    it 'defaults to unefined', ->
+      expect(configure().maxRetries).toEqual(undefined)
     it 'can be set to an integer', ->
       expect(configure({ maxRetries: 2 }).maxRetries).toEqual(2)
 
