@@ -16,6 +16,7 @@
       "yuidocjs": "*",
       "jasmine-node": "*",
       "coffee-script": "*"
+      "nodelint": "*"
     },
     "dependencies": {
     },
@@ -47,6 +48,7 @@
     "scripts" : {
         "test" : "jasmine-node --coffee test",
         "unit" : "jasmine-node --coffee test/unit",
-        "integration": "jasmine-node --coffee test/integration"
+        "integration": "jasmine-node --coffee test/integration",
+        "hint" : "jshint lib"
     }
 }
