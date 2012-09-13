@@ -5,7 +5,7 @@ describe 'AWS.util.date', ->
 
   describe 'getDate', ->
     it 'should return current date by default', ->
-      expect(util.getDate().getTime()).toBeCloseTo(new Date().getTime(), 5)
+      expect(util.getDate().getTime()).toBeCloseTo(new Date().getTime(), 10)
 
   describe 'getISODateString', ->
     it 'should return date formatted as YYYYMMDDTHHnnssZ', ->
