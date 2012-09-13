@@ -69,6 +69,13 @@ describe 'AWS.util.each', ->
       parts.push([key, item])
     expect(parts).toEqual([['a', 1], ['b', 2], ['c', 3]])
 
+  it 'callback should not change "this" scope', ->
+    new ->
+      this.class = 'MyClass'
+      self = this
+      AWS.util.each.apply this, [[1, 2, 3], ->
+        expect(this).toBe(self)]
+
 describe 'AWS.util.copy', ->
   it 'should perform a shallow copy of an object', ->
     obj = a: 1, b: 2, c: 3
