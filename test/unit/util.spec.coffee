@@ -46,3 +46,82 @@ describe 'AWS.util.crypto', ->
     it 'should return hex data hashed with sha256', ->
       expected = util.sha256hex(input)
       expect(expected).toEqual(result)
+
+describe 'AWS.util.each', ->
+  it 'should iterate over a hash', ->
+    parts = []
+    AWS.util.each {a: 1, b: 2, c: 3}, (item, key) ->
+      parts.push([key, item])
+    expect(parts).toEqual([['a', 1], ['b', 2], ['c', 3]])
+
+  it 'should iterate over an array', ->
+    total = 0
+    AWS.util.each [1, 2, 3], (item) ->
+      total += item
+    expect(total).toEqual(6)
+
+  it 'should ignore inherited properties', ->
+    objCtor = -> this.a = 1; this.b = 2; this.c = 3
+    objCtor.prototype = d: 4, e: 5, f: 6
+    obj = new objCtor()
+    parts = []
+    AWS.util.each obj, (item, key) ->
+      parts.push([key, item])
+    expect(parts).toEqual([['a', 1], ['b', 2], ['c', 3]])
+
+describe 'AWS.util.copy', ->
+  it 'should perform a shallow copy of an object', ->
+    obj = a: 1, b: 2, c: 3
+    copied = AWS.util.copy(obj)
+    expect(copied).not.toBe(obj)
+    expect(copied).toEqual(a: 1, b: 2, c: 3)
+
+  it 'should copy inherited properties', ->
+    objCtor = -> this.a = 1; this.b = 2; this.c = 3
+    objCtor.prototype = d: 4
+    obj = new objCtor()
+    copied = AWS.util.copy(obj)
+    expect(copied).not.toBe(obj)
+    expect(copied).toEqual(a: 1, b: 2, c: 3, d: 4)
+
+describe 'AWS.util.merge', ->
+  it 'should merge an object into another and return new object', ->
+    obj = a: 1, b: 2, c: 3
+    newObj = AWS.util.merge(obj, {d: 4, e: 5, a: 6})
+    expect(newObj).toEqual(a: 6, b: 2, c: 3, d: 4, e: 5)
+    expect(obj).toEqual(a: 1, b: 2, c: 3)
+
+describe 'AWS.util.update', ->
+  it 'should merge an object into another', ->
+    obj = a: 1, b: 2, c: 3
+    AWS.util.update(obj, {d: 4, e: 5, a: 6})
+    expect(obj).toEqual(a: 6, b: 2, c: 3, d: 4, e: 5)
+
+  it 'should return the merged object', ->
+    obj = a: 1, b: 2
+    expect(AWS.util.update(obj, c: 3)).toBe(obj)
+
+describe 'AWS.util.inherit', ->
+  it 'should inherit an object and append features', ->
+    Base = (value) ->
+      this.defaultValue = value
+
+    Base.prototype =
+      main: -> 'main'
+      other: 'other'
+
+    Derived = AWS.util.inherit Base,
+      constructor: (value) ->
+        Base.apply(this, [value + 5])
+
+      main: -> 'notMain'
+      foo: -> 'bar'
+
+    derived = new Derived(5)
+# TODO: make this work
+#    expect(derived instanceof Base).toBeTruthy()
+    expect(derived.constructor).toBe(Derived)
+    expect(derived.main()).toEqual('notMain')
+    expect(derived.other).toEqual('other')
+    expect(derived.defaultValue).toEqual(10)
+    expect(derived.foo()).toEqual('bar')
