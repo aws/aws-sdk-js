@@ -1,11 +1,9 @@
 AWS = require('../../lib/core')
 
-AWS.MockService = (config) ->
-  AWS.Service.apply(this, ['MockService', config])
-
-AWS.MockService.prototype = new AWS.Service(null)
-AWS.MockService.prototype.newHttpRequest = -> {sign: ->}
-AWS.MockService.HttpRequest = AWS.HttpRequest
+MockService = AWS.util.inherit AWS.Service,
+  constructor: (config) -> AWS.Service.call(this, config)
+  newHttpRequest: -> {sign: ->}
+MockService.HttpRequest = AWS.HttpRequest
 
 describe 'AWS.Service', ->
 
@@ -26,7 +24,7 @@ describe 'AWS.Service', ->
     totalWaited = 0
     delays = []
     config = new AWS.Config(maxRetries: 3)
-    service = new AWS.MockService(config)
+    service = new MockService(config)
     context = new AWS.AWSResponse(service: service,
       method: 'mockMethod', params: {foo: 'bar'})
     request = new AWS.AWSRequest(context)

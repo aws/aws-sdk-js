@@ -7,7 +7,7 @@ describe 'AWS.Service', ->
 
   beforeEach ->
     config = new AWS.Config()
-    service = new AWS.Service('MockService', config)
+    service = new AWS.Service(config)
 
   describe 'shouldRetry', ->
     it 'should not retry on null error', ->
