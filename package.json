@@ -14,7 +14,8 @@
     ],
     "devDependencies": {
       "yuidocjs": "*",
-      "jasmine-node": "*"
+      "jasmine-node": "*",
+      "coffee-script": "*"
     },
     "dependencies": {
     },
