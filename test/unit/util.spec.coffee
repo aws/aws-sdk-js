@@ -125,8 +125,7 @@ describe 'AWS.util.inherit', ->
       foo: -> 'bar'
 
     derived = new Derived(5)
-# TODO: make this work
-#    expect(derived instanceof Base).toBeTruthy()
+    expect(derived instanceof Base).toBeTruthy()
     expect(derived.constructor).toBe(Derived)
     expect(derived.main()).toEqual('notMain')
     expect(derived.other).toEqual('other')
