@@ -16,7 +16,7 @@
       "yuidocjs": "*",
       "jasmine-node": "*",
       "coffee-script": "*",
-      "nodelint": "*"
+      "jshint": "*"
     },
     "dependencies": {
     },
