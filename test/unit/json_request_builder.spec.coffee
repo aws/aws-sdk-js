@@ -34,3 +34,7 @@ describe 'AWS.JsonRequestBuilder', ->
       httpRequest = buildRequest({ foo: 'bar' })
       expect(httpRequest.body).toEqual('{"foo":"bar"}')
 
+    it 'should preserve numeric types', ->
+      httpRequest = buildRequest({ count: 3 })
+      expect(httpRequest.body).toEqual('{"count":3}')
+

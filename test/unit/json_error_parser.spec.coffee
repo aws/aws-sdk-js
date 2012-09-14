@@ -65,3 +65,4 @@ describe 'AWS.HttpRequest', ->
       it 'returns null when the body is blank', ->
         error = extract(resp({ statusCode: 500,  body: null }))
         expect(error.message).toEqual(null)
+
