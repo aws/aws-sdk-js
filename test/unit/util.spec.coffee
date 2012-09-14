@@ -50,13 +50,13 @@ describe 'AWS.util.crypto', ->
 describe 'AWS.util.each', ->
   it 'should iterate over a hash', ->
     parts = []
-    AWS.util.each {a: 1, b: 2, c: 3}, (item, key) ->
-      parts.push([key, item])
-    expect(parts).toEqual([['a', 1], ['b', 2], ['c', 3]])
+    AWS.util.each {a: 1, b: 2, c: 3}, (key, item) ->
+      parts.push([key + '_', item + 1])
+    expect(parts).toEqual([['a_', 2], ['b_', 3], ['c_', 4]])
 
   it 'should iterate over an array', ->
     total = 0
-    AWS.util.each [1, 2, 3], (item) ->
+    AWS.util.each [1, 2, 3], (idx, item) ->
       total += item
     expect(total).toEqual(6)
 
@@ -65,9 +65,9 @@ describe 'AWS.util.each', ->
     objCtor.prototype = d: 4, e: 5, f: 6
     obj = new objCtor()
     parts = []
-    AWS.util.each obj, (item, key) ->
-      parts.push([key, item])
-    expect(parts).toEqual([['a', 1], ['b', 2], ['c', 3]])
+    AWS.util.each obj, (key, item) ->
+      parts.push([key + '_', item + 1])
+    expect(parts).toEqual([['a_', 2], ['b_', 3], ['c_', 4]])
 
   it 'callback should not change "this" scope', ->
     new ->
@@ -75,6 +75,20 @@ describe 'AWS.util.each', ->
       self = this
       AWS.util.each.apply this, [[1, 2, 3], ->
         expect(this).toBe(self)]
+
+describe 'AWS.util.arrayEach', ->
+  it 'should iterate over arrays', ->
+    total = 0
+    AWS.util.arrayEach [1, 2, 3], (item) ->
+      total += item
+    expect(total).toEqual(6)
+
+  it 'should pass index as second parameter', ->
+    lastIndex = null
+    AWS.util.arrayEach [1, 2, 3], (item, idx) ->
+      expect(typeof(idx)).toEqual('number')
+      expect(lastIndex).toEqual(idx - 1) if lastIndex != null
+      lastIndex = idx
 
 describe 'AWS.util.copy', ->
   it 'should perform a shallow copy of an object', ->
