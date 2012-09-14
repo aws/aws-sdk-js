@@ -32,7 +32,7 @@ describe 'AWS.util.crypto', ->
       expect(util.toHex(expected)).toEqual(result)
 
     it 'should return a keyed hash as hex digest', ->
-      expected = util.hmachex(key, input)
+      expected = util.hmacHex(key, input)
       expect(expected).toEqual(result)
 
   describe 'sha256', ->
