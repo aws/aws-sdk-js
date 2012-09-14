@@ -46,7 +46,7 @@
         "glacier"
     ],
     "scripts" : {
-        "test" : "([ -f configuration ] && jasmine-node --coffee test) || npm run-script unit",
+        "test" : "([ -f configuration ] && jasmine-node --coffee test) || npm --loglevel silent run-script unit",
         "unit" : "jasmine-node --coffee test/unit",
         "integration": "jasmine-node --coffee test/integration",
         "lint" : "jshint lib"

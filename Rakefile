@@ -1,26 +1,28 @@
+LOGLEVEL = (DEBUG || ENV['DEBUG']) ? '' : '--loglevel silent'
+
 task :default => :test
 
 desc 'Build dependencies'
 task :build do
-  system 'npm install'
+  system "npm #{LOGLEVEL} install"
 end
 
 desc 'Run all tests'
 task :test => :build do
-  system 'npm test'
+  system "npm #{LOGLEVEL} test"
 end
 
 desc 'Run unit tests'
 task 'test:unit' => :build do
-  system 'npm run-script unit'
+  system "npm #{LOGLEVEL} run-script unit"
 end
 
 desc 'Run integration tests'
 task 'test:integration' => :build do
-  system 'npm run-script integration'
+  system "npm #{LOGLEVEL} run-script integration"
 end
 
 desc 'Run JSHint'
 task :lint do
-  system 'npm run-script lint'
+  system "npm #{LOGLEVEL} run-script lint"
 end
