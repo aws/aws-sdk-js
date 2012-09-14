@@ -1,23 +1,20 @@
-AWS = require('../../../lib/core')
-require('../../../lib/services/dynamodb')
-config = new AWS.FileSystemConfig('configuration')
-
-integration = (test, callback) ->
-  req = test.suite.parentSuite.service[test.suite.description]()
-  resp = null
-  runs ->
-    req.always (respObject) ->
-      resp = respObject
-  waitsFor ->
-    resp != null
-  runs ->
-    callback(resp)
+helpers = require('./helpers'); AWS = helpers.AWS
 
 describe 'AWS.DynamoDB', ->
-  this.service = new AWS.DynamoDB(config)
+  service = new AWS.DynamoDB(helpers.config)
 
   describe 'listTables', ->
-    it 'should send a request', ->
-      integration this, (resp) ->
-        expect(resp.error).toBe(null)
+    it 'should send a request with parameters', ->
+      helpers.integration (-> service.listTables(Limit: 3)), (resp) ->
+        expect(resp.error).toEqual(null)
         expect(JSON.stringify(resp.data)).toMatch(/\{"TableNames":.*\}/)
+        expect(resp.httpRequest.body).toEqual('{"Limit":3}')
+
+  describe 'deleteItem', ->
+    it 'should fail if TableName not provided', ->
+      helpers.integration (-> service.deleteItem()), (resp) ->
+        errObj =
+          code: 'ValidationException',
+          message: 'The paramater \'tableName\' is required but was not present in the request'
+        expect(resp.error).toEqual(errObj)
+        expect(resp.data).toEqual(null)
