@@ -1,4 +1,4 @@
-LOGLEVEL = (DEBUG || ENV['DEBUG']) ? '' : '--loglevel silent'
+LOGLEVEL = ($DEBUG || ENV['DEBUG']) ? '' : '-s'
 
 task :default => :test
 
