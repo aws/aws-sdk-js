@@ -21,6 +21,6 @@ task 'test:integration' => :build do
 end
 
 desc 'Run JSHint'
-task :hint do
-  system 'npm run-script hint'
+task :lint do
+  system 'npm run-script lint'
 end
