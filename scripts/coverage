@@ -7,6 +7,15 @@ var FFI = require("node-ffi");
 var libc = new FFI.Library(null, {"system": ["int32", ["string"]]});
 var exec = libc.system;
 
+var jsRequire = require.extensions['.js'];
+require.extensions['.js'] = function(module, filename) {
+  var baseFile = path.relative(path.join(__dirname, '..'), filename);
+  if (baseFile.match(/^lib\//)) {
+    filename = filename.replace(/\/lib\//, '/lib-cov/');
+  }
+  jsRequire(module, filename);
+}
+
 function printStats(file, covered, total) {
   var maxFileLength = 26;
   var pad = maxFileLength - file.length;
@@ -17,7 +26,16 @@ function printStats(file, covered, total) {
     "(" + covered + "/" + total + ")");
 }
 
-process.on("exit", function() {
+function cleanup() {
+  exec('rm -rf lib-cov');
+}
+
+process.on('uncaughtException', function(err) {
+  cleanup();
+  throw err;
+});
+
+process.on('exit', function() {
   var out = 'NO COVERAGE';
   if (typeof(_$jscoverage) !== 'undefined') {
     var stats = {}
@@ -101,8 +119,8 @@ process.on("exit", function() {
   console.log("");
   printStats('Total', entireCovered, entireTotal);
 
-  exec('rm -rf lib && mv lib-old lib');
+  cleanup();
 });
 
-exec('mv lib lib-old && ./node_modules/visionmedia-jscoverage/jscoverage lib-old lib')
+exec('./node_modules/visionmedia-jscoverage/jscoverage lib lib-cov')
 require(path.join(__dirname, '../node_modules/jasmine-node/lib/jasmine-node/cli.js'));
