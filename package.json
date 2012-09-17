@@ -16,6 +16,8 @@
       "yuidocjs": "*",
       "jasmine-node": "*",
       "coffee-script": "*",
+      "visionmedia-jscoverage": "*",
+      "node-ffi": "*",
       "jshint": "*"
     },
     "dependencies": {

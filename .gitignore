@@ -2,8 +2,12 @@ configuration
 node_modules
 npm-debug.log
 out
+coverage.html
 
 # vim files
 *~
 *.swp
 *.swo
+
+# OSX files
+.DS_Store
