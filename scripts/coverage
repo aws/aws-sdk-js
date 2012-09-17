@@ -3,8 +3,8 @@
 var fs = require('fs');
 var path = require('path');
 
-var FFI = require("node-ffi");
-var libc = new FFI.Library(null, {"system": ["int32", ["string"]]});
+var FFI = require('node-ffi');
+var libc = new FFI.Library(null, {'system': ['int32', ['string']]});
 var exec = libc.system;
 
 var jsRequire = require.extensions['.js'];
@@ -20,10 +20,10 @@ function printStats(file, covered, total) {
   var maxFileLength = 26;
   var pad = maxFileLength - file.length;
   for (var i = 0; i < pad; i++) file += ' ';
-  console.log(file + "   " +
-    (parseFloat(covered) / parseFloat(total) * 100).toFixed(2) + "%" +
-    ((covered != total) ? "  " : " ") +
-    "(" + covered + "/" + total + ")");
+  console.log(file + '   ' +
+    (parseFloat(covered) / parseFloat(total) * 100).toFixed(2) + '%' +
+    ((covered != total) ? '  ' : ' ') +
+    '(' + covered + '/' + total + ')');
 }
 
 function cleanup() {
@@ -57,9 +57,9 @@ process.on('exit', function() {
       entireCovered += covered;
       entireTotal += total;
 
-      out += "<h2>" + file + " <small>(" + covered + "/" + total + ", " +
+      out += '<h2>' + file + ' <small>(' + covered + '/' + total + ', ' +
         (parseFloat(covered) / parseFloat(total) * 100).toFixed(2) +
-        "% covered) [<a href='#code_"+id+"' id='show_" + id + "'>+</a>]</small></h2>\n";
+        '% covered) [<a href="#code_'+id+'" id="show_' + id + '">+</a>]</small></h2>\n';
       var lineAccess = [];
 
       out += "<table border='0' cellspacing='0' width='95%' style='display:none' id='code_"+id+"'>";
@@ -98,9 +98,9 @@ process.on('exit', function() {
   var body = out;
   body = "<p>Total coverage: " + (parseFloat(entireCovered) / parseFloat(entireTotal) * 100).toFixed(2) + "%</p>\n" + body;
   var page = "<html>\n<head>\n"+head+"\n</head>\n<body>\n"+body+"\n</body>\n</html>\n";
-  fs.writeFileSync("coverage.html", page);
+  fs.writeFileSync('coverage.html', page);
 
-  console.log("Test coverage:\n");
+  console.log('Test coverage:\n');
   var files = [];
   for (var file in stats) {
     files.push([file, stats[file]]);
@@ -116,7 +116,7 @@ process.on('exit', function() {
     printStats(file, stats.covered, stats.total)
   }
 
-  console.log("");
+  console.log('');
   printStats('Total', entireCovered, entireTotal);
 
   cleanup();
