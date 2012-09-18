@@ -7,19 +7,19 @@ task :build do
   system "npm #{LOGLEVEL} install"
 end
 
-desc 'Run all tests'
-task :test => :build do
-  system "npm #{LOGLEVEL} test"
-end
+[nil, 'unit', 'integration'].each do |type|
+  dir_suffix = type ? "/#{type}" : ""
+  name_suffix = type ? ":#{type}" : ""
 
-desc 'Run unit tests'
-task 'test:unit' => :build do
-  system "npm #{LOGLEVEL} run-script unit"
-end
+  desc "Run #{type || 'all'} tests"
+  task "test#{name_suffix}" => :build do
+    system "npm #{LOGLEVEL} test#{dir_suffix}"
+  end
 
-desc 'Run integration tests'
-task 'test:integration' => :build do
-  system "npm #{LOGLEVEL} run-script integration"
+  desc "Run #{type || 'all'} tests with coverage"
+  task "cov#{name_suffix}" => :build do
+    system "./scripts/coverage --coffee test#{dir_suffix}"
+  end
 end
 
 desc 'Run JSHint'
