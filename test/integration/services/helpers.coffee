@@ -1,9 +1,8 @@
 AWS = require('../../../lib/aws')
-config = new AWS.FileSystemConfig(__dirname + '/../../../configuration')
+AWS.configuration = new AWS.FileSystemConfig(__dirname + '/../../../configuration')
 
 module.exports =
   AWS: AWS,
-  config: config,
   integration: (reqBuilder, respCallback) ->
     req = reqBuilder()
     resp = null

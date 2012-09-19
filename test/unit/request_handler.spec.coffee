@@ -23,8 +23,7 @@ describe 'AWS.Service', ->
 
     totalWaited = 0
     delays = []
-    config = new AWS.Config(maxRetries: 3)
-    service = new MockService(config)
+    service = new MockService(maxRetries: 3)
     context = new AWS.AWSResponse(service: service,
       method: 'mockMethod', params: {foo: 'bar'})
     request = new AWS.AWSRequest(context)
@@ -40,13 +39,13 @@ describe 'AWS.Service', ->
 
   describe 'handleHttpResponse', ->
     it 'should retry a request with a set maximum retries', ->
-      config.maxRetries = 10
+      service.config.maxRetries = 10
       AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb) ->
         cb.onError(code: 'NetworkingError', message: "FAIL!")
 
       handler.makeRequest()
 
-      expect(context.retryCount).toEqual(config.maxRetries + 1);
+      expect(context.retryCount).toEqual(service.config.maxRetries + 1);
       expect(request.notifyFail).toHaveBeenCalled()
       expect(request.notifyDone).not.toHaveBeenCalled()
 
@@ -72,7 +71,7 @@ describe 'AWS.Service', ->
       expect(context.error).toEqual(code: 'ERROR', message: 'FOO')
       expect(request.notifyFail).toHaveBeenCalled()
       expect(request.notifyDone).not.toHaveBeenCalled()
-      expect(context.retryCount).toEqual(config.maxRetries + 1);
+      expect(context.retryCount).toEqual(service.config.maxRetries + 1);
 
     it 'should not call notifyFail if retried fewer than maxRetries', ->
       spyOn(service, 'extractError').andReturn(null)
@@ -91,7 +90,7 @@ describe 'AWS.Service', ->
       expect(context.data).toEqual('{"data":"BAR"}')
       expect(request.notifyFail).not.toHaveBeenCalled()
       expect(request.notifyDone).toHaveBeenCalled()
-      expect(context.retryCount).toBeLessThan(config.maxRetries);
+      expect(context.retryCount).toBeLessThan(service.config.maxRetries);
 
     it 'should notifyFail if error found and should not be retrying', ->
       spyOn(service, 'shouldRetry').andReturn(false)

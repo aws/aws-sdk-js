@@ -1,7 +1,7 @@
 helpers = require('./helpers'); AWS = helpers.AWS
 
 describe 'AWS.SimpleWorkflow', ->
-  service = new AWS.SimpleWorkflow(helpers.config)
+  service = new AWS.SimpleWorkflow()
 
   describe 'listDomains', ->
     it 'should send a request with parameters', ->

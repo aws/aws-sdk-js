@@ -1,7 +1,7 @@
 helpers = require('./helpers'); AWS = helpers.AWS
 
 describe 'AWS.DynamoDB', ->
-  service = new AWS.DynamoDB(helpers.config)
+  service = new AWS.DynamoDB()
 
   describe 'listTables', ->
     it 'should send a request with parameters', ->

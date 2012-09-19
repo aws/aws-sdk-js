@@ -9,6 +9,25 @@ describe 'AWS.Service', ->
     config = new AWS.Config()
     service = new AWS.Service(config)
 
+  describe 'constructor', ->
+    it 'should use AWS.configuration copy if no config is provided', ->
+      service = new AWS.Service()
+      expect(service.config).not.toBe(AWS.configuration)
+      expect(service.config.useSSL).toEqual(true)
+
+    it 'should merge custom options on top of global defaults if config provided', ->
+      service = new AWS.Service(maxRetries: 5)
+      expect(service.config.useSSL).toEqual(true)
+      expect(service.config.maxRetries).toEqual(5)
+
+    it 'should allow AWS.configuration to be object literal', ->
+      cfg = AWS.configuration
+      AWS.configuration = maxRetries: 20
+      service = new AWS.Service({})
+      expect(service.config.maxRetries).toEqual(20)
+      expect(service.config.useSSL).toEqual(true)
+      AWS.configuration = cfg
+
   describe 'shouldRetry', ->
     it 'should not retry on null error', ->
       shouldRetry(200, null, false)
