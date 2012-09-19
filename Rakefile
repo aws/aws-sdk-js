@@ -13,16 +13,16 @@ end
 
   desc "Run #{type || 'all'} tests"
   task "test#{name_suffix}" => :build do
-    system "npm #{LOGLEVEL} test#{dir_suffix}"
+    sh "npm #{LOGLEVEL} test#{dir_suffix}"
   end
 
   desc "Run #{type || 'all'} tests with coverage"
   task "cov#{name_suffix}" => :build do
-    system "./scripts/coverage --coffee test#{dir_suffix}"
+    sh "./scripts/coverage --coffee test#{dir_suffix}"
   end
 end
 
 desc 'Run JSHint'
 task :lint do
-  system "npm #{LOGLEVEL} run-script lint"
+  sh "npm #{LOGLEVEL} run-script lint"
 end
