@@ -16,7 +16,16 @@ describe 'AWS.util.date', ->
       expect(util.getISODateString()).toEqual('19700101T001000Z')
 
     it 'should allow date parameter', ->
-      expect(util.getISODateString(new Date(600000))).toEqual('19700101T001000Z')
+      expect(util.getISODateString(new Date(660000))).toEqual('19700101T001100Z')
+
+  describe 'getUTCDateString', ->
+    it 'should return date formatted as YYYYMMDDTHHnnssZ', ->
+      spyOn(util, 'getDate').andCallFake -> new Date(600000)
+      expect(util.getUTCDateString()).toEqual('Thu, 01 Jan 1970 00:10:00 GMT')
+
+    it 'should allow date parameter', ->
+      expect(util.getUTCDateString(new Date(660000))).toEqual('Thu, 01 Jan 1970 00:11:00 GMT')
+
 
 describe 'AWS.util.crypto', ->
   util = AWS.util.crypto
