@@ -7,7 +7,7 @@ describe 'AWS.DynamoDB', ->
     it 'should send a request with parameters', ->
       helpers.integration (-> service.listTables(Limit: 3)), (resp) ->
         expect(resp.error).toEqual(null)
-        expect(JSON.stringify(resp.data)).toMatch(/\{"TableNames":.*\}/)
+        expect(JSON.stringify(resp.data)).toMatch(/\{.*"TableNames":.*\}/)
         expect(resp.httpRequest.body).toEqual('{"Limit":3}')
 
   describe 'deleteItem', ->

@@ -4,7 +4,7 @@ require('../../lib/services/dynamodb')
 buildRequest = ->
   req = new AWS.DynamoDB.HttpRequest();
   req.endpoint = {region: 'region', scheme: 'https', host: 'localhost', port: 443}
-  builder = new AWS.JsonRequestBuilder({ n:'ListTables' })
+  builder = new AWS.RPCRequestBuilder({ n:'ListTables' })
   builder.populateRequest({ foo: 'bar' },req)
   return req
 

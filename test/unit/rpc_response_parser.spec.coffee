@@ -1,6 +1,7 @@
 AWS = require('../../lib/core')
+require('../../lib/rpc')
 
-describe 'AWS.JsonResponseParser', ->
+describe 'AWS.RPCResponseParser', ->
 
   resp = (options) ->
     r = new AWS.HttpResponse()
@@ -14,7 +15,7 @@ describe 'AWS.JsonResponseParser', ->
     return r
 
   parse = (r) ->
-    parser = new AWS.JsonResponseParser
+    parser = new AWS.RPCResponseParser
     return parser.parse(r)
 
   describe 'parse', ->

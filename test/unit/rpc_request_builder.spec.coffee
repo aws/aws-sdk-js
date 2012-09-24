@@ -1,11 +1,12 @@
 AWS = require('../../lib/core')
+require('../../lib/rpc')
 
-describe 'AWS.JsonRequestBuilder', ->
+describe 'AWS.RPCRequestBuilder', ->
 
   buildRequest = (params) ->
     httpRequest = new AWS.HttpRequest()
     httpRequest.targetPrefix = 'Prefix.'
-    serializer = new AWS.JsonRequestBuilder({ n: 'Operation' })
+    serializer = new AWS.RPCRequestBuilder({ n: 'Operation' })
     serializer.populateRequest(params, httpRequest)
     httpRequest
 

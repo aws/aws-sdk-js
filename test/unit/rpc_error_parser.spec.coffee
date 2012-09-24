@@ -1,8 +1,9 @@
 AWS = require('../../lib/core')
+require('../../lib/rpc')
 
 describe 'AWS.HttpRequest', ->
 
-  parser = new AWS.JsonErrorParser()
+  parser = new AWS.RPCErrorParser()
 
   extract = (response) ->
     return parser.extractError(response)
