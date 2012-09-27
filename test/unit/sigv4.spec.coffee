@@ -8,7 +8,7 @@ buildRequest = ->
   return req
 
 buildSigner = (request) ->
-  return new AWS.SignatureV4Signer(request || buildRequest())
+  return new AWS.SignatureV4Signer(request || buildRequest(), 'dynamodb')
 
 describe 'AWS.SignatureV4Signer', ->
   date = new Date(1935346573456)
