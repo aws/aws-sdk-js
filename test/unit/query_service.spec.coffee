@@ -3,21 +3,20 @@ require('../../lib/rpc_service')
 
 describe 'AWS.RPCService', ->
 
-  MockService = AWS.util.inherit AWS.RPCService,
-    constructor: (config) -> AWS.RPCService.call(this, config)
+  MockQueryService = AWS.util.inherit AWS.QueryService,
+    constructor: (config) -> 
+      this.serviceName = 'mockservice'
+      AWS.QueryService.call(this, config)
 
-  AWS.util.update MockService,
-    Endpoint: AWS.Endpoint
-
-  MockService.prototype.api =
-    targetPrefix: 'prefix-'
+  MockQueryService.prototype.api =
+    apiVersion: '2012-01-01'
     operations:
       simpleMethod:
         n: 'OperationName'
 
-  AWS.Service.defineMethods(MockService)
+  AWS.Service.defineMethods(MockQueryService)
 
-  svc = new MockService()
+  svc = new MockQueryService()
 
   it 'defines a method for each api operation', ->
     expect(typeof svc.simpleMethod).toEqual('function')
@@ -33,100 +32,12 @@ describe 'AWS.RPCService', ->
       expect(req.uri).toEqual('/')
 
     it 'should set Content-Type header', ->
-      expect(req.headers['Content-Type']).toEqual('application/x-amz-json-1.0')
+      expect(req.headers['Content-Type']).
+        toEqual('application/x-www-form-urlencoded; charset=utf-8')
 
-    it 'should set X-Amz-Target header', ->
-      expect(req.headers['X-Amz-Target']).toEqual('prefix-OperationName')
+    it 'should add the api version param', ->
+      expect(req.params.toString()).toMatch(/Version=2012-01-01/)
 
-    it 'should set Content-Length to body length', ->
-      expect(req.body).toEqual('{}')
-      expect(req.headers['Content-Length']).toEqual(2)
-
-    it 'should set the body to JSON serialized params', ->
-      req = svc.buildRequest('simpleMethod', { foo: 'bar' })
-      expect(req.body).toEqual('{"foo":"bar"}')
-
-    it 'should preserve numeric types', ->
-      req = svc.buildRequest('simpleMethod', { count: 3 })
-      expect(req.body).toEqual('{"count":3}')
-
-  describe 'parseResponse', ->
-
-    it 'JSON parses http response bodies', ->
-      resp = new AWS.HttpResponse()
-      resp.body = '{"a":1, "b":"xyz"}'
-      expect(svc.parseResponse(resp)).toEqual({a:1, b:'xyz'})
-
-    it 'returns an empty object when the body is an empty string', ->
-      resp = new AWS.HttpResponse()
-      resp.body = ''
-      expect(svc.parseResponse(resp)).toEqual({})
-
-    it 'returns an empty object when the body is null', ->
-      resp = new AWS.HttpResponse()
-      resp.body = null
-      expect(svc.parseResponse(resp)).toEqual({})
-
-  describe 'extractError', ->
-
-    resp = (options) ->
-      r = new AWS.HttpResponse()
-      r.statusCode = options.statusCode
-      if (options.headers)
-        r.headers = options.headers
-      else
-        r.headers = {}
-      if (options.body)
-        r.body = options.body
-      return r
-
-    extract = (httpResponse) ->
-      svc.extractError(httpResponse)
-
-    it 'returns null for 200 status', ->
-      expect(extract(resp({ statusCode: 200 }))).toEqual(null)
-
-    describe 'code', ->
-
-      it 'splits the error type on # to determine the error code', ->
-        body = '{"__type":"com.amazon.coral.service#ErrorCode" }'
-        error = extract(resp({ statusCode: 400,  body: body }))
-        expect(error.code).toEqual('ErrorCode')
-
-      it 'returns the full type when a # is not present', ->
-        body = '{"__type":"ErrorCode" }'
-        error = extract(resp({ statusCode: 400,  body: body }))
-        expect(error.code).toEqual('ErrorCode')
-
-      it 'returns the status code when the body is blank', ->
-        error = extract(resp({ statusCode: 500,  body: null }))
-        expect(error.code).toEqual('500')
-
-    describe 'message', ->
-
-      it 'returns null for the message when not present', ->
-        body = '{"__type":"ErrorCode" }'
-        error = extract(resp({ statusCode: 400,  body: body }))
-        expect(error.message).toEqual(null)
-
-      it 'returns the message when present', ->
-        body = '{"__type":"ErrorCode", "message":"Error Message" }'
-        error = extract(resp({ statusCode: 400,  body: body }))
-        expect(error.message).toEqual('Error Message')
-
-      # DynamoDB and SWF return error message properties with different case
-      it 'returns the message when the message property is upper-cased', ->
-        body = '{"__type":"ErrorCode", "Message":"Error Message" }'
-        error = extract(resp({ statusCode: 400,  body: body }))
-        expect(error.message).toEqual('Error Message')
-
-      it 'returns a special message for RequestEntityToLarge errors', ->
-        body = '{"__type":"RequestEntityTooLarge" }'
-        error = extract(resp({ statusCode: 400,  body: body }))
-        expect(error.message).toEqual('Request body must be less than 1 MB')
-
-      it 'returns null when the body is blank', ->
-        error = extract(resp({ statusCode: 500,  body: null }))
-        expect(error.message).toEqual(null)
-
+    it 'should add the operation name as Action', ->
+      expect(req.params.toString()).toMatch(/Action=OperationName/)
 

@@ -3,21 +3,20 @@ require('../../lib/rpc_service')
 
 describe 'AWS.RPCService', ->
 
-  MockService = AWS.util.inherit AWS.RPCService,
-    constructor: (config) -> AWS.RPCService.call(this, config)
+  MockRPCService = AWS.util.inherit AWS.RPCService,
+    constructor: (config) ->
+      this.serviceName = 'mockservice'
+      AWS.RPCService.call(this, config)
 
-  AWS.util.update MockService,
-    Endpoint: AWS.Endpoint
-
-  MockService.prototype.api =
+  MockRPCService.prototype.api =
     targetPrefix: 'prefix-'
     operations:
       simpleMethod:
         n: 'OperationName'
 
-  AWS.Service.defineMethods(MockService)
+  AWS.Service.defineMethods(MockRPCService)
 
-  svc = new MockService()
+  svc = new MockRPCService()
 
   it 'defines a method for each api operation', ->
     expect(typeof svc.simpleMethod).toEqual('function')
