@@ -7,7 +7,6 @@ describe 'AWS.RPCService', ->
     constructor: (config) -> AWS.RPCService.call(this, config)
 
   AWS.util.update MockService,
-    HttpRequest: AWS.HttpRequest
     Endpoint: AWS.Endpoint
 
   MockService.prototype.api =
