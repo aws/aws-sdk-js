@@ -2,10 +2,9 @@ AWS = require('../../lib/core')
 require('../../lib/services/dynamodb')
 
 buildRequest = ->
-  req = new AWS.DynamoDB.HttpRequest();
-  req.endpoint = {region: 'region', scheme: 'https', host: 'localhost', port: 443}
-  builder = new AWS.RPCRequestBuilder({ n:'ListTables' })
-  builder.populateRequest({ foo: 'bar' },req)
+  ddb = new AWS.DynamoDB({ region:'region' })
+  req = ddb.buildRequest('listTables', { foo: 'bar' })
+  req.endpoint.host = 'localhost'
   return req
 
 buildSigner = (request) ->

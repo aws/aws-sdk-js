@@ -3,13 +3,14 @@ AWS = require('../../lib/core')
 MockService = AWS.util.inherit AWS.Service,
   constructor: (config) -> AWS.Service.call(this, config)
   newHttpRequest: -> {sign: ->}
+  buildRequest: -> this.newHttpRequest()
+  parseResponse: (httpResponse) -> httpResponse.body
+
 MockService.HttpRequest = AWS.HttpRequest
 
 describe 'AWS.Service', ->
 
   oldSetTimeout = setTimeout
-  builder = {populateRequest: ->}
-  parser = {parse: (resp) -> resp.body}
   config = null; service = null; totalWaited = null; delays = []
   context = null; request = null; handler = null
 
@@ -27,7 +28,7 @@ describe 'AWS.Service', ->
     context = new AWS.AWSResponse(service: service,
       method: 'mockMethod', params: {foo: 'bar'})
     request = new AWS.AWSRequest(context)
-    handler = new AWS.RequestHandler(request, builder, parser)
+    handler = new AWS.RequestHandler(request)
 
     # Useful spies
     spyOn(request, 'notifyFail')
