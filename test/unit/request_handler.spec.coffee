@@ -2,9 +2,10 @@ AWS = require('../../lib/core')
 
 MockService = AWS.util.inherit AWS.Service,
   constructor: (config) -> AWS.Service.call(this, config)
-  newHttpRequest: -> {sign: ->}
+  newHttpRequest: -> new AWS.HttpRequest()
   buildRequest: -> this.newHttpRequest()
   parseResponse: (httpResponse) -> httpResponse.body
+  signRequest: -> {sign: ->}
 
 MockService.HttpRequest = AWS.HttpRequest
 
