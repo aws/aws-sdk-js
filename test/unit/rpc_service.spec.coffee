@@ -1,5 +1,5 @@
 AWS = require('../../lib/core')
-require('../../lib/rpc')
+require('../../lib/rpc_service')
 
 describe 'AWS.RPCService', ->
 
