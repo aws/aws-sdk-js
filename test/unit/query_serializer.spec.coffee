@@ -1,12 +1,12 @@
 AWS = require('../../lib/core')
 require('../../lib/query_service')
 
-describe 'AWS.QueryParamBuilder', ->
+describe 'AWS.QuerySerializer', ->
 
   serialize = (requestParams, rules, memberedLists) ->
     params = []
-    builder = new AWS.QueryParamBuilder(rules, memberedLists)
-    builder.serialize(requestParams, (name, value) ->
+    serializer = new AWS.QuerySerializer(rules, memberedLists)
+    serializer.serialize(requestParams, (name, value) ->
       params.push([name, value])
     )
     params
