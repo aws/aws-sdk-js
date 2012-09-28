@@ -8,9 +8,9 @@ buildRequest = ->
   return req
 
 buildSigner = (request) ->
-  return new AWS.SignatureV4Signer(request || buildRequest(), 'dynamodb')
+  return new AWS.SigV4(request || buildRequest(), 'dynamodb')
 
-describe 'AWS.SignatureV4Signer', ->
+describe 'AWS.SigV4', ->
   date = new Date(1935346573456)
   datetime = AWS.util.date.getISODateString(date)
   creds = {accessKeyId: 'akid', secretAccessKey: 'secret', sessionToken: 'session'}

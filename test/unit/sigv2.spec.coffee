@@ -2,7 +2,7 @@ AWS = require('../../lib/core')
 require('../../lib/query_service')
 require('../../lib/sigv2')
 
-describe 'AWS.SignatureV2Signer', ->
+describe 'AWS.SigV2', ->
 
   credentials = null
   date = null
@@ -17,10 +17,10 @@ describe 'AWS.SignatureV2Signer', ->
     request
 
   buildSigner = (request) ->
-    new AWS.SignatureV2Signer(request)
+    new AWS.SigV2(request)
 
   signRequest = (request) ->
-    signer = new AWS.SignatureV2Signer(request)
+    signer = new AWS.SigV2(request)
     signer.addAuthorization(credentials, date)
 
   beforeEach ->
