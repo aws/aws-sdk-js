@@ -3,9 +3,9 @@ require('../../lib/query_service')
 
 describe 'AWS.QueryParamBuilder', ->
 
-  serialize = (requestParams, rules) ->
+  serialize = (requestParams, rules, memberedLists) ->
     params = []
-    builder = new AWS.QueryParamBuilder(rules)
+    builder = new AWS.QueryParamBuilder(rules, memberedLists)
     builder.serialize(requestParams, (name, value) ->
       params.push([name, value])
     )
@@ -46,6 +46,13 @@ describe 'AWS.QueryParamBuilder', ->
         ['Root2', '3']
       ])
 
+    it 'applies structure member names', ->
+      rules = {Root:{t:'o',n:'ROOT',m:{Leaf:{n:'lEAF'}}}}
+      params = serialize({Root:{Leaf:'value'}}, rules)
+      expect(params).toEqual([
+        ['ROOT.lEAF', 'value']
+      ])
+
   describe 'lists', ->
 
     it 'numbers list members starting at 1', ->
@@ -76,3 +83,22 @@ describe 'AWS.QueryParamBuilder', ->
         ['Root.2.Bb', 'b2'],
       ])
 
+  describe 'membered lists', -> # member lists name their list members
+
+    it 'numbers list members starting at 1', ->
+      rules = {Person:{t:'a',m:{}}} # array of strings
+      params = serialize({Person:['a','b','c']}, rules, true)
+      expect(params).toEqual([
+        ['Person.member.1', 'a'],
+        ['Person.member.2', 'b'],
+        ['Person.member.3', 'c'],
+      ])
+
+    it 'applies member name traits', ->
+      rules = {Person:{t:'a',m:{n:'Name'}}} # array of strings
+      params = serialize({Person:['a','b','c']}, rules, true)
+      expect(params).toEqual([
+        ['Person.Name.1', 'a'],
+        ['Person.Name.2', 'b'],
+        ['Person.Name.3', 'c'],
+      ])
