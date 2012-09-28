@@ -102,3 +102,34 @@ describe 'AWS.QueryParamBuilder', ->
         ['Person.Name.2', 'b'],
         ['Person.Name.3', 'c'],
       ])
+
+  describe 'maps', -> # maps are hashes with user defined keys
+
+    it 'accepts a hash (object) of arbitrary key/value pairs', ->
+      rules = {Attributes:{t:'m',k:{},m:{}}} # map of strings => strings
+      data = {Attributes:{Color:'red',Size:'large',Value:'low'}}
+      params = serialize(data, rules)
+      expect(params).toEqual([
+        ['Attributes.1.key', 'Color'],
+        ['Attributes.1.value', 'red'],
+        ['Attributes.2.key', 'Size'],
+        ['Attributes.2.value', 'large'],
+        ['Attributes.3.key', 'Value'],
+        ['Attributes.3.value', 'low'],
+      ])
+
+  describe 'maps with member names', ->
+
+    it 'applies member name traits', ->
+      rules = {Attributes:{t:'m',k:{n:'Name'},m:{n:'Value'}}}
+      data = {Attributes:{Color:'red',Size:'large',Value:'low'}}
+      params = serialize(data, rules, true)
+      expect(params).toEqual([
+        ['Attributes.1.Name', 'Color'],
+        ['Attributes.1.Value', 'red'],
+        ['Attributes.2.Name', 'Size'],
+        ['Attributes.2.Value', 'large'],
+        ['Attributes.3.Name', 'Value'],
+        ['Attributes.3.Value', 'low'],
+      ])
+
