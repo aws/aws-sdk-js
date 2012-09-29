@@ -24,7 +24,7 @@ describe 'AWS.QueryService', ->
 
   describe 'buildRequest', ->
 
-    req = svc.buildRequest('simpleMethod', { Input:'foo+bar yuck/baz~' })
+    req = svc.buildRequest('simpleMethod', { Input:'foo+bar: yuck/baz=~' })
 
     it 'should use POST method requests', ->
       expect(req.method).toEqual('POST')
@@ -43,5 +43,5 @@ describe 'AWS.QueryService', ->
       expect(req.params.toString()).toMatch(/Action=OperationName/)
 
     it 'should uri encode params properly', ->
-      expect(req.params.toString()).toMatch(/foo%2Bbar%20yuck%2Fbaz~/);
+      expect(req.params.toString()).toMatch(/foo%2Bbar%3A%20yuck%2Fbaz%3D~/);
 
