@@ -11,7 +11,7 @@ describe 'AWS.RPCService', ->
   MockRPCService.prototype.api =
     targetPrefix: 'prefix-'
     operations:
-      simpleMethod:
+      operationName:
         n: 'OperationName'
 
   AWS.Service.defineMethods(MockRPCService)
@@ -19,11 +19,11 @@ describe 'AWS.RPCService', ->
   svc = new MockRPCService()
 
   it 'defines a method for each api operation', ->
-    expect(typeof svc.simpleMethod).toEqual('function')
+    expect(typeof svc.operationName).toEqual('function')
 
   describe 'buildRequest', ->
 
-    req = svc.buildRequest('simpleMethod', {})
+    req = svc.buildRequest('operationName', {})
 
     it 'should use POST method requests', ->
       expect(req.method).toEqual('POST')
@@ -42,11 +42,11 @@ describe 'AWS.RPCService', ->
       expect(req.headers['Content-Length']).toEqual(2)
 
     it 'should set the body to JSON serialized params', ->
-      req = svc.buildRequest('simpleMethod', { foo: 'bar' })
+      req = svc.buildRequest('operationName', { foo: 'bar' })
       expect(req.body).toEqual('{"foo":"bar"}')
 
     it 'should preserve numeric types', ->
-      req = svc.buildRequest('simpleMethod', { count: 3 })
+      req = svc.buildRequest('operationName', { count: 3 })
       expect(req.body).toEqual('{"count":3}')
 
   describe 'parseResponse', ->
@@ -54,17 +54,20 @@ describe 'AWS.RPCService', ->
     it 'JSON parses http response bodies', ->
       resp = new AWS.HttpResponse()
       resp.body = '{"a":1, "b":"xyz"}'
-      expect(svc.parseResponse(resp)).toEqual({a:1, b:'xyz'})
+      svc.parseResponse resp, 'operationName', (data) ->
+        expect(data).toEqual({a:1, b:'xyz'})
 
     it 'returns an empty object when the body is an empty string', ->
       resp = new AWS.HttpResponse()
       resp.body = ''
-      expect(svc.parseResponse(resp)).toEqual({})
+      svc.parseResponse resp, 'operationName', (data) ->
+        expect(data).toEqual({})
 
     it 'returns an empty object when the body is null', ->
       resp = new AWS.HttpResponse()
       resp.body = null
-      expect(svc.parseResponse(resp)).toEqual({})
+      svc.parseResponse resp, 'operationName', (data) ->
+        expect(data).toEqual({})
 
   describe 'extractError', ->
 

@@ -56,7 +56,7 @@ describe 'AWS.SigV2', ->
       expect(request.params.toString()).toMatch(/SecurityToken=session/)
 
     it 'populates the body', ->
-      expect(request.body).toEqual('AWSAccessKeyId=akid&Signature=a78P5VVSxdpSke0jfVIc%20ZLMyREIPcaNwbtBiBdN070%3D&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2031-04-30T20%3A16%3A13.456Z')
+      expect(request.body).toEqual('AWSAccessKeyId=akid&Signature=a78P5VVSxdpSke0jfVIc%2BZLMyREIPcaNwbtBiBdN070%3D&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2031-04-30T20%3A16%3A13.456Z')
 
     it 'populates content-length header', ->
       expect(request.headers['Content-Length']).toEqual(163)

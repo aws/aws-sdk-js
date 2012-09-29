@@ -4,10 +4,11 @@ MockService = AWS.util.inherit AWS.Service,
   constructor: (config) -> AWS.Service.call(this, config)
   newHttpRequest: -> new AWS.HttpRequest()
   buildRequest: -> this.newHttpRequest()
-  parseResponse: (httpResponse) -> httpResponse.body
+  parseResponse: (httpResponse, method, callback) ->
+    callback.call(this, httpResponse.body)
   signRequest: -> {sign: ->}
 
-MockService.HttpRequest = AWS.HttpRequest
+MockService.prototype.extractError = -> null
 
 describe 'AWS.Service', ->
 
@@ -59,24 +60,22 @@ describe 'AWS.Service', ->
 
       expect(delays).toEqual([30, 60, 120])
 
-    it 'should retry if shouldRetry(resp, error) is true', ->
+    it 'should retry if shouldRetry(error) is true', ->
       spyOn(service, 'shouldRetry').andReturn(true)
-      spyOn(service, 'extractError').andReturn(code: 'ERROR', message: 'FOO')
+      spyOn(service, 'extractError').andReturn(code: 'ERROR', message: 'FOO', statusCode:500)
 
       AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb) ->
-        cb.onHeaders(300, {})
+        cb.onHeaders(500, {})
         cb.onData('{"error":"MESSAGE"}')
         cb.onEnd()
 
       handler.makeRequest()
 
-      expect(context.error).toEqual(code: 'ERROR', message: 'FOO')
-      expect(request.notifyFail).toHaveBeenCalled()
+      expect(request.notifyFail).toHaveBeenCalledWith(code: 'ERROR', message: 'FOO', statusCode:500)
       expect(request.notifyDone).not.toHaveBeenCalled()
       expect(context.retryCount).toEqual(service.config.maxRetries + 1);
 
     it 'should not call notifyFail if retried fewer than maxRetries', ->
-      spyOn(service, 'extractError').andReturn(null)
 
       AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb) ->
         if context.retryCount < 2
@@ -89,9 +88,6 @@ describe 'AWS.Service', ->
       handler.makeRequest()
 
       expect(totalWaited).toEqual(90)
-      expect(context.data).toEqual('{"data":"BAR"}')
-      expect(request.notifyFail).not.toHaveBeenCalled()
-      expect(request.notifyDone).toHaveBeenCalled()
       expect(context.retryCount).toBeLessThan(service.config.maxRetries);
 
     it 'should notifyFail if error found and should not be retrying', ->
@@ -106,7 +102,6 @@ describe 'AWS.Service', ->
       expect(request.notifyDone).not.toHaveBeenCalled()
 
     it 'should not retry and notifyDone with data if no error was found', ->
-      spyOn(service, 'extractError').andReturn(null)
       spyOn(handler, 'retryRequest')
 
       AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb) ->
@@ -118,5 +113,5 @@ describe 'AWS.Service', ->
 
       expect(handler.retryRequest).not.toHaveBeenCalled()
       expect(request.notifyFail).not.toHaveBeenCalled()
-      expect(request.notifyDone).toHaveBeenCalled()
-      expect(context.data).toEqual("Success!")
+      expect(request.notifyDone).toHaveBeenCalledWith("Success!")
+

@@ -16,5 +16,6 @@ describe 'AWS.DynamoDB', ->
         errObj =
           code: 'ValidationException',
           message: 'The paramater \'tableName\' is required but was not present in the request'
+          statusCode: 400
         expect(resp.error).toEqual(errObj)
         expect(resp.data).toEqual(null)

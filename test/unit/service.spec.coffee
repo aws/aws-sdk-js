@@ -1,9 +1,10 @@
 AWS = require('../../lib/core')
 
 describe 'AWS.Service', ->
+
   config = null; service = null
-  shouldRetry = (status, error, result) ->
-    expect(service.shouldRetry({statusCode: status}, error)).toEqual(result)
+  shouldRetry = (error, result) ->
+    expect(service.shouldRetry(error)).toEqual(result)
 
   beforeEach ->
     config = new AWS.Config()
@@ -29,20 +30,21 @@ describe 'AWS.Service', ->
       AWS.configuration = cfg
 
   describe 'shouldRetry', ->
-    it 'should not retry on null error', ->
-      shouldRetry(200, null, false)
 
     it 'should retry on throttle error', ->
-      shouldRetry(400, {code: 'ProvisionedThroughputExceededException'}, true)
+      shouldRetry({code: 'ProvisionedThroughputExceededException', statusCode:400}, true)
 
-    it 'should not retry when no error found and < 500 level status code', ->
-      shouldRetry(200, {code: 'Nothing'}, false)
-      shouldRetry(304, null, false)
-      shouldRetry(404, {code: 'NotThrottling'}, false)
+    it 'should retry on expired credentials error', ->
+      shouldRetry({code: 'ExpiredTokenException', statusCode:400}, true)
 
     it 'should retry on 500 or above regardless of error', ->
-      shouldRetry(500, null, true)
-      shouldRetry(505, {code: 'Error'}, true)
+      shouldRetry({code: 'Error', statusCode:500 }, true)
+      shouldRetry({code: 'RandomError', statusCode:505 }, true)
+
+    it 'should not retry when error is < 500 level status code', ->
+      shouldRetry({code: 'Error', statusCode:200 }, false)
+      shouldRetry({code: 'Error', statusCode:302 }, false)
+      shouldRetry({code: 'Error', statusCode:404 }, false)
 
   describe 'numRetries', ->
     it 'should use config max retry value if defined', ->
