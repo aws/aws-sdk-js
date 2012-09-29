@@ -1,6 +1,5 @@
 {
     "accessKeyId": "AKID",
     "secretAccessKey": "SECRET",
-    "sessionToken": "SESSION",
     "region": "us-east-1"
 }
