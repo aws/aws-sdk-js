@@ -1,5 +1,5 @@
 {
-    "accessKeyId": "AKID",
-    "secretAccessKey": "SECRET",
+    "accessKeyId": "YOUR_ACCESS_KEY_ID",
+    "secretAccessKey": "YOUR_SECRET_ACCESS_KEY",
     "region": "us-west-1"
 }
