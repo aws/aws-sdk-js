@@ -1,7 +1,7 @@
 AWS = require('../../lib/core')
-require('../../lib/rpc_service')
+require('../../lib/query_service')
 
-describe 'AWS.RPCService', ->
+describe 'AWS.QueryService', ->
 
   MockQueryService = AWS.util.inherit AWS.QueryService,
     constructor: (config) -> 
@@ -13,6 +13,7 @@ describe 'AWS.RPCService', ->
     operations:
       simpleMethod:
         n: 'OperationName'
+        i: { Input:{} }
 
   AWS.Service.defineMethods(MockQueryService)
 
@@ -23,7 +24,7 @@ describe 'AWS.RPCService', ->
 
   describe 'buildRequest', ->
 
-    req = svc.buildRequest('simpleMethod', {})
+    req = svc.buildRequest('simpleMethod', { Input:'foo+bar yuck/baz~' })
 
     it 'should use POST method requests', ->
       expect(req.method).toEqual('POST')
@@ -40,4 +41,7 @@ describe 'AWS.RPCService', ->
 
     it 'should add the operation name as Action', ->
       expect(req.params.toString()).toMatch(/Action=OperationName/)
+
+    it 'should uri encode params properly', ->
+      expect(req.params.toString()).toMatch(/foo%2Bbar%20yuck%2Fbaz~/);
 
