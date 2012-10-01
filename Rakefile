@@ -13,13 +13,20 @@ end
 
   desc "Run #{type || 'all'} tests"
   task "test#{name_suffix}" => :build do
-    sh "npm #{LOGLEVEL} test#{dir_suffix}"
+    if type
+      # run only unit or integration
+      sh "npm #{LOGLEVEL} run-script #{name_suffix.gsub(':', '')}"
+    else
+      # runs both unit and integration
+      sh "npm #{LOGLEVEL} run-script test"
+    end
   end
 
   desc "Run #{type || 'all'} tests with coverage"
   task "cov#{name_suffix}" => :build do
     sh "./scripts/coverage --coffee test#{dir_suffix}"
   end
+
 end
 
 desc 'Run JSHint'
