@@ -24,3 +24,17 @@ describe 'AWS.XMLParser', ->
       parse xml, rules, (data) ->
         expect(data).toEqual({foo:{bar:'yuck'}})
 
+  describe 'parsing errors', ->
+
+    it 'throws an error when unable to parse the xml', ->
+      xml = 'asdf'
+      rules = {}
+      message = """
+      Non-whitespace before first tag.
+      Line: 0
+      Column: 1
+      Char: a
+      """
+      error = { code: 'AWS.XMLParser.Error', message: message }
+      expect(-> new AWS.XMLParser(rules).parse(xml)).toThrow(error)
+
