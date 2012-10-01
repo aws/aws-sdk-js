@@ -21,6 +21,7 @@
       "jshint": "*"
     },
     "dependencies": {
+      "xml2js": "*"
     },
     "main": "lib/aws.js",
     "directories":  {
