@@ -115,3 +115,21 @@ describe 'AWS.Service', ->
       expect(request.notifyFail).not.toHaveBeenCalled()
       expect(request.notifyDone).toHaveBeenCalledWith("Success!")
 
+describe 'AWS.RequestHandler', ->
+
+  it 'notifies the response with any errors thrown by the parser', ->
+
+    error = { error: 'ParseError', message: 'error message' }
+
+    svc = {}
+    svc.parseResponse = ->
+      throw error
+
+    context = new AWS.AWSResponse({ service: svc })
+
+    awsRequest = new AWS.AWSRequest(context)
+    awsRequest.always((resp) -> expect(resp.error).toBe(error))
+
+    handler = new AWS.RequestHandler(awsRequest)
+    handler.parseResponse({})
+
