@@ -40,6 +40,19 @@ describe 'AWS.XMLParser', ->
       xml = """
       <xml>
         <items>
+          <member>abc</member>
+          <member>xyz</member>
+        </items>
+      </xml>
+      """
+      rules = {items:{t:'a',m:{}}}
+      parse xml, rules, (data) ->
+        expect(data).toEqual({items:['abc','xyz']})
+
+    it 'Observes list member names when present', ->
+      xml = """
+      <xml>
+        <items>
           <item>abc</item>
           <item>xyz</item>
         </items>
