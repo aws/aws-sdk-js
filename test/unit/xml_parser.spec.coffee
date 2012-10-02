@@ -24,11 +24,44 @@ describe 'AWS.XMLParser', ->
       parse xml, rules, (data) ->
         expect(data).toEqual({foo:{bar:'yuck'}})
 
-    # to create an array, rules MUST define element as a list
-    it 'flattens lists into a scalars', ->
+    it 'returns everything as a string (even numbers)', ->
+      xml = '<xml><count>123</count></xml>'
+      parse xml, rules, (data) ->
+        expect(data).toEqual({count:'123'})
+
+    it 'flattens sibling elements of the same name', ->
       xml = '<xml><foo><bar>1</bar><bar>2</bar></foo></xml>'
       parse xml, rules, (data) ->
         expect(data).toEqual({foo:{bar:'1'}})
+
+  describe 'lists', ->
+
+    it 'Converts xml lists of strings into arrays of strings', ->
+      xml = """
+      <xml>
+        <items>
+          <item>abc</item>
+          <item>xyz</item>
+        </items>
+      </xml>
+      """
+      rules = {items:{t:'a',m:{n:'item'}}}
+      parse xml, rules, (data) ->
+        expect(data).toEqual({items:['abc','xyz']})
+
+  describe 'flattened lists', ->
+
+  describe 'maps', ->
+
+  describe 'booleans', ->
+
+  describe 'timestamp', ->
+
+  describe 'numbers', ->
+
+  describe 'integers', ->
+
+  describe 'renaming elements', ->
 
   describe 'parsing errors', ->
 
