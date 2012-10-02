@@ -24,6 +24,12 @@ describe 'AWS.XMLParser', ->
       parse xml, rules, (data) ->
         expect(data).toEqual({foo:{bar:'yuck'}})
 
+    # to create an array, rules MUST define element as a list
+    it 'flattens lists into a scalars', ->
+      xml = '<xml><foo><bar>1</bar><bar>2</bar></foo></xml>'
+      parse xml, rules, (data) ->
+        expect(data).toEqual({foo:{bar:'1'}})
+
   describe 'parsing errors', ->
 
     it 'throws an error when unable to parse the xml', ->
