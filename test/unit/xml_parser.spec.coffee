@@ -68,6 +68,23 @@ describe 'AWS.XMLParser', ->
 
   describe 'booleans', ->
 
+    rules = {enabled:{t:'b'}}
+
+    it 'converts the string "true" in to the boolean value true', ->
+      xml = "<xml><enabled>true</enabled></xml>"
+      parse xml, rules, (data) ->
+        expect(data).toEqual({enabled:true})
+
+    it 'converts the string "false" in to the boolean value false', ->
+      xml = "<xml><enabled>false</enabled></xml>"
+      parse xml, rules, (data) ->
+        expect(data).toEqual({enabled:false})
+
+    it 'converts the empty elements into false', ->
+      xml = "<xml><enabled/></xml>"
+      parse xml, rules, (data) ->
+        expect(data).toEqual({enabled:false})
+
   describe 'timestamp', ->
 
   describe 'numbers', ->
