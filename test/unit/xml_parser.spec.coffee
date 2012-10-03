@@ -122,6 +122,18 @@ describe 'AWS.XMLParser', ->
 
   describe 'renaming elements', ->
 
+    it 'can rename scalar elements', ->
+      rules = {alias:{n:'aka'}}
+      xml = "<xml><alias>John Doe</alias></xml>"
+      parse xml, rules, (data) ->
+        expect(data).toEqual({aka:'John Doe'})
+
+    it 'can rename nested elements', ->
+      rules = {person:{m:{alias:{n:'aka'}}}}
+      xml = "<xml><person><name>Joe</name><alias>John Doe</alias></person></xml>"
+      parse xml, rules, (data) ->
+        expect(data).toEqual({person:{name:'Joe',aka:'John Doe'}})
+
   describe 'parsing errors', ->
 
     it 'throws an error when unable to parse the xml', ->
