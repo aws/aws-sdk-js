@@ -3,13 +3,3 @@ node_modules
 npm-debug.log
 out
 coverage.html
-sample.js
-todo
-
-# vim files
-*~
-*.swp
-*.swo
-
-# OSX files
-.DS_Store
