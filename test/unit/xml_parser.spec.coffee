@@ -69,6 +69,25 @@ describe 'AWS.XMLParser', ->
 
   describe 'flattened lists', ->
 
+    xml = """
+    <xml>
+      <person>
+        <name>Unknown</name>
+        <alias>John Doe</alias>
+        <alias>Jane Doe</alias>
+      </person>
+    </xml>
+    """
+
+    it 'flattens siblings of the same name into a single element', ->
+      parse xml, {}, (data) ->
+        expect(data).toEqual({person:{name:'Unknown',alias:'John Doe'}})
+
+    it 'collects sibling elements of the same name', ->
+      rules = {person:{m:{alias:{n:'aka',t:'f',m:{}}}}}
+      parse xml, rules, (data) ->
+        expect(data).toEqual({person:{name:'Unknown',aka:['John Doe', 'Jane Doe']}})
+
   describe 'maps', ->
 
   describe 'booleans', ->
