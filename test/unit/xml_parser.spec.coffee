@@ -88,6 +88,25 @@ describe 'AWS.XMLParser', ->
       parse xml, rules, (data) ->
         expect(data).toEqual({person:{name:'Unknown',aka:['John Doe', 'Jane Doe']}})
 
+    it 'flattened lists can be composed of complex obects', ->
+      xml = """
+      <xml>
+        <name>Name</name>
+        <complexValue>
+          <a>1</a>
+          <b>2</b>
+        </complexValue>
+        <complexValue>
+          <a>3</a>
+          <b>4</b>
+        </complexValue>
+      </xml>
+      """
+      rules = {name:{},complexValue:{t:'f',n:'values',m:{t:'o',m:{}}}}
+      values = {name:'Name',values:[{a:'1',b:'2'},{a:'3',b:'4'}]}
+      parse xml, rules, (data) ->
+        expect(data).toEqual(values)
+
   describe 'maps', ->
 
   describe 'booleans', ->
