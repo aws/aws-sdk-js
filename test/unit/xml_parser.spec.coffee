@@ -14,6 +14,11 @@ describe 'AWS.XMLParser', ->
       parse xml, rules, (data) ->
         expect(data).toEqual({})
 
+    it 'returns empty elements as null', ->
+      xml = '<xml><element/></xml>'
+      parse xml, rules, (data) ->
+        expect(data).toEqual({element:null})
+
     it 'converts string elements to properties', ->
       xml = '<xml><foo>abc</foo><bar>xyz</bar></xml>'
       parse xml, rules, (data) ->
@@ -80,16 +85,28 @@ describe 'AWS.XMLParser', ->
       parse xml, rules, (data) ->
         expect(data).toEqual({enabled:false})
 
-    it 'converts the empty elements into false', ->
+    it 'converts the empty elements into null', ->
       xml = "<xml><enabled/></xml>"
       parse xml, rules, (data) ->
-        expect(data).toEqual({enabled:false})
+        expect(data).toEqual({enabled:null})
 
   describe 'timestamp', ->
 
   describe 'numbers', ->
 
   describe 'integers', ->
+
+    rules = {count:{t:'i'}}
+
+    it 'integer parses elements types as integer', ->
+      xml = "<xml><count>123</count></xml>"
+      parse xml, rules, (data) ->
+        expect(data).toEqual({count:123})
+
+    it 'returns null for empty elements', ->
+      xml = "<xml><count/></xml>"
+      parse xml, rules, (data) ->
+        expect(data).toEqual({count:null})
 
   describe 'renaming elements', ->
 
