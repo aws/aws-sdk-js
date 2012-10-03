@@ -50,8 +50,8 @@
     ],
     "scripts" : {
         "test" : "npm -s run-script lint && (([ -f configuration ] && jasmine-node --coffee test) || ([ ! -f configuration ] && npm -s run-script unit))",
-        "unit" : "jasmine-node --coffee test/unit",
-        "integration": "jasmine-node --coffee test/integration",
+        "unit" : "jasmine-node --noColor --coffee test/unit",
+        "integration": "jasmine-node --noColor --coffee test/integration",
         "lint" : "jshint lib"
     }
 }
