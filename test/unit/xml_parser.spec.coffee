@@ -94,6 +94,18 @@ describe 'AWS.XMLParser', ->
 
   describe 'numbers', ->
 
+    rules = {decimal:{t:'n'}}
+
+    it 'float parses elements types as integer', ->
+      xml = "<xml><decimal>123.456</decimal></xml>"
+      parse xml, rules, (data) ->
+        expect(data).toEqual({decimal:123.456})
+
+    it 'returns null for empty elements', ->
+      xml = "<xml><decimal/></xml>"
+      parse xml, rules, (data) ->
+        expect(data).toEqual({decimal:null})
+
   describe 'integers', ->
 
     rules = {count:{t:'i'}}
