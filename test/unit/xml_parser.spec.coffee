@@ -72,7 +72,31 @@ describe 'AWS.XMLParser', ->
       parse xml, rules, (data) ->
         expect(data).toEqual({items:['abc','xyz']})
 
-    # TODO : test lists of structures (with rename)
+    it 'can parse lists of strucures', ->
+      xml = """
+      <xml>
+        <People>
+          <member><Name>abc</Name></member>>
+          <member><Name>xyz</Name></member>>
+        </People>
+      </xml>
+      """
+      rules = {People:{t:'a',m:{t:'o',m:{Name:{t:'s'}}}}}
+      parse xml, rules, (data) ->
+        expect(data).toEqual({People:[{Name:'abc'},{Name:'xyz'}]})
+
+    it 'can parse lists of strucures with renames', ->
+      xml = """
+      <xml>
+        <People>
+          <Person><Name>abc</Name></Person>>
+          <Person><Name>xyz</Name></Person>>
+        </People>
+      </xml>
+      """
+      rules = {People:{t:'a',m:{t:'o',n:'Person',m:{Name:{t:'s'}}}}}
+      parse xml, rules, (data) ->
+        expect(data).toEqual({People:[{Name:'abc'},{Name:'xyz'}]})
 
   describe 'flattened lists', ->
 
@@ -113,6 +137,18 @@ describe 'AWS.XMLParser', ->
       values = {name:'Name',values:[{a:'1',b:'2'},{a:'3',b:'4'}]}
       parse xml, rules, (data) ->
         expect(data).toEqual(values)
+
+    it 'can parse flattened lists of complex objects', ->
+      xml = """
+      <xml>
+        <Count>2</Count>
+        <Person><Name>abc</Name></Person>
+        <Person><Name>xyz</Name></Person>
+      </xml>
+      """
+      rules = {Count:{t:'i'},Person:{t:'a',f:1,n:'People',m:{t:'o',n:'Person'}}}
+      parse xml, rules, (data) ->
+        expect(data).toEqual({Count:2,People:[{Name:'abc'},{Name:'xyz'}]})
 
   describe 'maps', ->
 
