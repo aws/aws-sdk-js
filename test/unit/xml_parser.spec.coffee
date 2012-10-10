@@ -72,6 +72,8 @@ describe 'AWS.XMLParser', ->
       parse xml, rules, (data) ->
         expect(data).toEqual({items:['abc','xyz']})
 
+    # TODO : test lists of structures (with rename)
+
   describe 'flattened lists', ->
 
     xml = """
@@ -89,7 +91,7 @@ describe 'AWS.XMLParser', ->
         expect(data).toEqual({person:{name:'Unknown',alias:'John Doe'}})
 
     it 'collects sibling elements of the same name', ->
-      rules = {person:{m:{alias:{n:'aka',t:'fl',m:{}}}}}
+      rules = {person:{m:{alias:{n:'aka',t:'a',f:1,m:{}}}}}
       parse xml, rules, (data) ->
         expect(data).toEqual({person:{name:'Unknown',aka:['John Doe', 'Jane Doe']}})
 
@@ -107,7 +109,7 @@ describe 'AWS.XMLParser', ->
         </complexValue>
       </xml>
       """
-      rules = {complexValue:{t:'fl',n:'values',m:{t:'o',m:{}}}}
+      rules = {complexValue:{t:'a',f:1,n:'values',m:{t:'o',m:{}}}}
       values = {name:'Name',values:[{a:'1',b:'2'},{a:'3',b:'4'}]}
       parse xml, rules, (data) ->
         expect(data).toEqual(values)
