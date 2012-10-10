@@ -39,6 +39,11 @@ describe 'AWS.XMLParser', ->
       parse xml, rules, (data) ->
         expect(data).toEqual({foo:{bar:'1'}})
 
+    it 'ignores xmlns on the root element', ->
+      xml = '<xml xmlns="http://foo.bar.com"><Abc>xyz</Abc></xml>'
+      parse xml, rules, (data) ->
+        expect(data).toEqual({Abc:'xyz'})
+
   describe 'lists', ->
 
     it 'Converts xml lists of strings into arrays of strings', ->
