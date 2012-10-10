@@ -44,7 +44,21 @@ describe 'AWS.XMLParser', ->
       parse xml, rules, (data) ->
         expect(data).toEqual({Abc:'xyz'})
 
+  describe 'structures', ->
+
+    it 'returns empty objects as {}', ->
+      xml = '<xml><Item/></xml>'
+      rules = {Item:{t:'o',m:{Name:{t:'s'}}}}
+      parse xml, rules, (data) ->
+        expect(data).toEqual({Item:{}})
+
   describe 'lists', ->
+
+    it 'returns empty lists as []', ->
+      xml = '<xml><items/></xml>'
+      rules = {items:{t:'a',m:{t:'s'}}}
+      parse xml, rules, (data) ->
+        expect(data).toEqual({items:[]})
 
     it 'Converts xml lists of strings into arrays of strings', ->
       xml = """
