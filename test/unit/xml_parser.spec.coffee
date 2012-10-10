@@ -137,6 +137,52 @@ describe 'AWS.XMLParser', ->
 
   describe 'timestamp', ->
 
+    rules = { CreatedAt:{t:'t'} }
+
+    it 'returns an empty element as null', ->
+      xml = "<xml><CreatedAt/></xml>"
+      parse xml, rules, (data) ->
+        expect(data).toEqual({CreatedAt:null})
+
+    it 'understands unix timestamps', ->
+      timestamp = 1349908100
+      date = new Date(timestamp * 1000)
+      xml = "<xml><CreatedAt>#{timestamp}</CreatedAt></xml>"
+      parse xml, rules, (data) ->
+        expect(data).toEqual({CreatedAt:date})
+
+    it 'understands basic iso8601 strings', ->
+      timestamp = '2012-09-10T15:47:10.001Z'
+      date = new Date(2012, 0, 1);
+      date.setMonth(9)
+      date.setDate(10)
+      date.setHours(15)
+      date.setMinutes(47)
+      date.setSeconds(10)
+      date.setMilliseconds(1)
+      xml = "<xml><CreatedAt>#{timestamp}</CreatedAt></xml>"
+      parse xml, rules, (data) ->
+        expect(data).toEqual({CreatedAt:date})
+
+    it 'understands basic rfc822 strings', ->
+      timestamp = 'Wed, 10 Oct 2012 15:59:55 -0700'
+      date = new Date(2012, 0, 1);
+      date.setMonth(9)
+      date.setDate(10)
+      date.setHours(15)
+      date.setMinutes(59)
+      date.setSeconds(55)
+      xml = "<xml><CreatedAt>#{timestamp}</CreatedAt></xml>"
+      parse xml, rules, (data) ->
+        expect(data).toEqual({CreatedAt:date})
+
+    it 'throws an error when unable to determine the format', ->
+      timestamp = 'bad-date-format'
+      xml = "<xml><CreatedAt>#{timestamp}</CreatedAt></xml>"
+      message = 'unhandled timestamp format: ' + timestamp
+      error = { code: 'AWS.XMLParser.Error', message: message }
+      expect(-> new AWS.XMLParser(rules).parse(xml)).toThrow(error)
+
   describe 'numbers', ->
 
     rules = {decimal:{t:'n'}}
