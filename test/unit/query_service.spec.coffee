@@ -45,3 +45,27 @@ describe 'AWS.QueryService', ->
     it 'should uri encode params properly', ->
       expect(req.params.toString()).toMatch(/foo%2Bbar%3A%20yuck%2Fbaz%3D~/);
 
+  describe 'extractError', ->
+
+    httpResponse = new AWS.HttpResponse()
+    httpResponse.statusCode = 400
+    httpResponse.body = """
+    <Response>
+      <Errors>
+        <Error>
+          <Code>InvalidInstanceID.Malformed</Code>
+          <Message>Invalid id: "i-12345678"</Message>
+        </Error>
+      </Errors>
+      <RequestID>ab123mno-6432-dceb-asdf-123mno543123</RequestID>
+    </Response>
+    """
+
+    it 'extracts the error code', ->
+      expect(svc.extractError(httpResponse).code).
+        toEqual('InvalidInstanceID.Malformed')
+
+    it 'extracts the error message', ->
+      expect(svc.extractError(httpResponse).message).
+        toEqual('Invalid id: "i-12345678"')
+
