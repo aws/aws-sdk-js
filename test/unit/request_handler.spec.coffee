@@ -1,4 +1,5 @@
 AWS = require('../../lib/core')
+require('../../lib/sigv4')
 
 MockService = AWS.util.inherit AWS.Service,
   constructor: (config) -> AWS.Service.call(this, config)
@@ -8,7 +9,8 @@ MockService = AWS.util.inherit AWS.Service,
   extractError: (httpResponse) ->
     retryable = httpResponse.statusCode >= 500
     return { code: httpResponse.statusCode, message: null, retryable: retryable }
-  signRequest: -> {sign: ->}
+  serviceName: 'mockservice'
+  signatureVersion:  AWS.SigV4
 
 describe 'AWS.Service', ->
 
