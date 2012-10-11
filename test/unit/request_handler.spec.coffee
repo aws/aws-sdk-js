@@ -4,8 +4,7 @@ MockService = AWS.util.inherit AWS.Service,
   constructor: (config) -> AWS.Service.call(this, config)
   newHttpRequest: -> new AWS.HttpRequest()
   buildRequest: -> this.newHttpRequest()
-  parseResponse: (httpResponse, method, callback) ->
-    callback.call(this, httpResponse.body)
+  parseResponse: (httpResponse) -> return httpResponse.body
   signRequest: -> {sign: ->}
 
 MockService.prototype.extractError = -> null
@@ -122,8 +121,7 @@ describe 'AWS.RequestHandler', ->
     error = { error: 'ParseError', message: 'error message' }
 
     svc = {}
-    svc.parseResponse = ->
-      throw error
+    svc.parseResponse = -> throw error
 
     context = new AWS.AWSResponse({ service: svc })
 

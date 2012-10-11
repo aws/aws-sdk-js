@@ -54,20 +54,20 @@ describe 'AWS.RPCService', ->
     it 'JSON parses http response bodies', ->
       resp = new AWS.HttpResponse()
       resp.body = '{"a":1, "b":"xyz"}'
-      svc.parseResponse resp, 'operationName', (data) ->
-        expect(data).toEqual({a:1, b:'xyz'})
+      data = svc.parseResponse resp, 'operationName'
+      expect(data).toEqual({a:1, b:'xyz'})
 
     it 'returns an empty object when the body is an empty string', ->
       resp = new AWS.HttpResponse()
       resp.body = ''
-      svc.parseResponse resp, 'operationName', (data) ->
-        expect(data).toEqual({})
+      data = svc.parseResponse resp, 'operationName'
+      expect(data).toEqual({})
 
     it 'returns an empty object when the body is null', ->
       resp = new AWS.HttpResponse()
       resp.body = null
-      svc.parseResponse resp, 'operationName', (data) ->
-        expect(data).toEqual({})
+      data = svc.parseResponse resp, 'operationName'
+      expect(data).toEqual({})
 
   describe 'extractError', ->
 

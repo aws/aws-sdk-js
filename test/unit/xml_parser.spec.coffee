@@ -3,7 +3,7 @@ helpers = require('../helpers'); AWS = helpers.AWS
 describe 'AWS.XMLParser', ->
 
   parse = (xml, rules, callback) ->
-    new AWS.XMLParser(rules).parse(xml, callback)
+    callback.call(this, new AWS.XMLParser(rules).parse(xml))
 
   describe 'default behavior', ->
 
