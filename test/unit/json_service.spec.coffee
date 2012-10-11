@@ -1,22 +1,22 @@
 AWS = require('../../lib/core')
-require('../../lib/rpc_service')
+require('../../lib/json_service')
 
-describe 'AWS.RPCService', ->
+describe 'AWS.JSONService', ->
 
-  MockRPCService = AWS.util.inherit AWS.RPCService,
+  MockJSONService = AWS.util.inherit AWS.JSONService,
     constructor: (config) ->
       this.serviceName = 'mockservice'
-      AWS.RPCService.call(this, config)
+      AWS.JSONService.call(this, config)
 
-  MockRPCService.prototype.api =
+  MockJSONService.prototype.api =
     targetPrefix: 'prefix-'
     operations:
       operationName:
         n: 'OperationName'
 
-  AWS.Service.defineMethods(MockRPCService)
+  AWS.Service.defineMethods(MockJSONService)
 
-  svc = new MockRPCService()
+  svc = new MockJSONService()
 
   it 'defines a method for each api operation', ->
     expect(typeof svc.operationName).toEqual('function')
