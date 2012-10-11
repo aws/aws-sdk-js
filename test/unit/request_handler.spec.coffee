@@ -2,12 +2,13 @@ AWS = require('../../lib/core')
 
 MockService = AWS.util.inherit AWS.Service,
   constructor: (config) -> AWS.Service.call(this, config)
-  newHttpRequest: -> new AWS.HttpRequest()
   buildRequest: -> this.newHttpRequest()
-  parseResponse: (httpResponse) -> return httpResponse.body
+  extractData: (httpResponse) ->
+    return httpResponse.body
+  extractError: (httpResponse) ->
+    retryable = httpResponse.statusCode >= 500
+    return { code: httpResponse.statusCode, message: null, retryable: retryable }
   signRequest: -> {sign: ->}
-
-MockService.prototype.extractError = -> null
 
 describe 'AWS.Service', ->
 
@@ -40,8 +41,12 @@ describe 'AWS.Service', ->
   afterEach -> `setTimeout = oldSetTimeout`
 
   describe 'handleHttpResponse', ->
+
     it 'should retry a request with a set maximum retries', ->
+
       service.config.maxRetries = 10
+
+      # fail every request with a fake networking error
       AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb) ->
         cb.onError(code: 'NetworkingError', message: "FAIL!")
 
@@ -59,18 +64,20 @@ describe 'AWS.Service', ->
 
       expect(delays).toEqual([30, 60, 120])
 
-    it 'should retry if shouldRetry(error) is true', ->
-      spyOn(service, 'shouldRetry').andReturn(true)
-      spyOn(service, 'extractError').andReturn(code: 'ERROR', message: 'FOO', statusCode:500)
+    it 'should retry if status code is >= 500', ->
 
       AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb) ->
         cb.onHeaders(500, {})
-        cb.onData('{"error":"MESSAGE"}')
         cb.onEnd()
 
       handler.makeRequest()
 
-      expect(request.notifyFail).toHaveBeenCalledWith(code: 'ERROR', message: 'FOO', statusCode:500)
+      expect(request.notifyFail).toHaveBeenCalledWith(
+        code: 500,
+        message: null,
+        statusCode: 500
+        retryable: true)
+
       expect(request.notifyDone).not.toHaveBeenCalled()
       expect(context.retryCount).toEqual(service.config.maxRetries + 1);
 
@@ -89,18 +96,8 @@ describe 'AWS.Service', ->
       expect(totalWaited).toEqual(90)
       expect(context.retryCount).toBeLessThan(service.config.maxRetries);
 
-    it 'should notifyFail if error found and should not be retrying', ->
-      spyOn(service, 'shouldRetry').andReturn(false)
+    it 'notifies done on a successful response', ->
 
-      AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb) ->
-        cb.onError('fail')
-
-      handler.makeRequest()
-
-      expect(request.notifyFail).toHaveBeenCalled()
-      expect(request.notifyDone).not.toHaveBeenCalled()
-
-    it 'should not retry and notifyDone with data if no error was found', ->
       spyOn(handler, 'retryRequest')
 
       AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb) ->
@@ -114,20 +111,33 @@ describe 'AWS.Service', ->
       expect(request.notifyFail).not.toHaveBeenCalled()
       expect(request.notifyDone).toHaveBeenCalledWith("Success!")
 
-describe 'AWS.RequestHandler', ->
+    it 'should notifyFail if error found and should not be retrying', ->
 
-  it 'notifies the response with any errors thrown by the parser', ->
+      AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb) ->
+        cb.onHeaders(400, {})
+        cb.onEnd()
 
-    error = { error: 'ParseError', message: 'error message' }
+      handler.makeRequest()
 
-    svc = {}
-    svc.parseResponse = -> throw error
+      expect(request.notifyFail).toHaveBeenCalled()
+      expect(request.notifyDone).not.toHaveBeenCalled()
 
-    context = new AWS.AWSResponse({ service: svc })
+    it 'notifies fail if an error is thrown', ->
 
-    awsRequest = new AWS.AWSRequest(context)
-    awsRequest.always((resp) -> expect(resp.error).toBe(error))
+      # throw by the service while parsing a response
+      error = { error: 'ParseError', message: 'error message' }
 
-    handler = new AWS.RequestHandler(awsRequest)
-    handler.parseResponse({})
+      AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb) ->
+        cb.onHeaders(200, {})
+        cb.onData("Success!")
+        cb.onEnd()
+
+      spyOn(service, 'parseResponse').andThrow(error)
+      spyOn(handler, 'retryRequest')
+
+      handler.makeRequest({})
+
+      expect(handler.retryRequest).not.toHaveBeenCalled()
+      expect(request.notifyFail).toHaveBeenCalledWith(error)
+      expect(request.notifyDone).not.toHaveBeenCalled()
 

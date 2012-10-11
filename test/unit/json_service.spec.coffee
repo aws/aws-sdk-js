@@ -51,84 +51,82 @@ describe 'AWS.JSONService', ->
 
   describe 'parseResponse', ->
 
-    it 'JSON parses http response bodies', ->
-      resp = new AWS.HttpResponse()
-      resp.body = '{"a":1, "b":"xyz"}'
-      data = svc.parseResponse resp, 'operationName'
-      expect(data).toEqual({a:1, b:'xyz'})
+    parse = (callback) ->
+      svc.parseResponse resp, 'operationName', (error,data) ->
+        callback.call(this, error, data)
 
-    it 'returns an empty object when the body is an empty string', ->
-      resp = new AWS.HttpResponse()
-      resp.body = ''
-      data = svc.parseResponse resp, 'operationName'
-      expect(data).toEqual({})
+    resp = new AWS.HttpResponse()
+    resp.headers = {}
 
-    it 'returns an empty object when the body is null', ->
-      resp = new AWS.HttpResponse()
-      resp.body = null
-      data = svc.parseResponse resp, 'operationName'
-      expect(data).toEqual({})
+    describe 'with data', ->
 
-  describe 'extractError', ->
+      beforeEach ->
+        resp.statusCode = 200
 
-    resp = (options) ->
-      r = new AWS.HttpResponse()
-      r.statusCode = options.statusCode
-      if (options.headers)
-        r.headers = options.headers
-      else
-        r.headers = {}
-      if (options.body)
-        r.body = options.body
-      return r
+      it 'JSON parses http response bodies', ->
+        resp.body = '{"a":1, "b":"xyz"}'
+        parse (error, data) ->
+          expect(error).toEqual(null)
+          expect(data).toEqual({a:1, b:'xyz'})
 
-    extract = (httpResponse) ->
-      svc.extractError(httpResponse)
+      it 'returns an empty object when the body is an empty string', ->
+        resp.body = ''
+        parse (error, data) ->
+          expect(error).toEqual(null)
+          expect(data).toEqual({})
 
-    it 'returns null for 200 status', ->
-      expect(extract(resp({ statusCode: 200 }))).toEqual(null)
+      it 'returns an empty object when the body is null', ->
+        resp.body = null
+        parse (error, data) ->
+          expect(error).toEqual(null)
+          expect(data).toEqual({})
 
-    describe 'code', ->
+    describe 'with error', ->
 
-      it 'splits the error type on # to determine the error code', ->
-        body = '{"__type":"com.amazon.coral.service#ErrorCode" }'
-        error = extract(resp({ statusCode: 400,  body: body }))
-        expect(error.code).toEqual('ErrorCode')
+      beforeEach ->
+        resp.statusCode = 500
 
-      it 'returns the full type when a # is not present', ->
-        body = '{"__type":"ErrorCode" }'
-        error = extract(resp({ statusCode: 400,  body: body }))
-        expect(error.code).toEqual('ErrorCode')
+      it 'removes prefixes from the error code', ->
+        resp.body = '{"__type":"com.amazon.coral.service#ErrorCode" }'
+        parse (error, data) ->
+          expect(error.code).toEqual('ErrorCode')
+          expect(data).toEqual(null)
+
+      it 'returns the full code when a # is not present', ->
+        resp.body = '{"__type":"ErrorCode" }'
+        parse (error, data) ->
+          expect(error.code).toEqual('ErrorCode')
+          expect(data).toEqual(null)
 
       it 'returns the status code when the body is blank', ->
-        error = extract(resp({ statusCode: 500,  body: null }))
-        expect(error.code).toEqual('500')
-
-    describe 'message', ->
+        resp.body = null
+        parse (error, data) ->
+          expect(error.code).toEqual(500)
+          expect(error.message).toEqual(null)
+          expect(data).toEqual(null)
 
       it 'returns null for the message when not present', ->
-        body = '{"__type":"ErrorCode" }'
-        error = extract(resp({ statusCode: 400,  body: body }))
-        expect(error.message).toEqual(null)
+        resp.body = '{"__type":"ErrorCode" }'
+        parse (error, data) ->
+          expect(error.message).toEqual(null)
+          expect(data).toEqual(null)
 
       it 'returns the message when present', ->
-        body = '{"__type":"ErrorCode", "message":"Error Message" }'
-        error = extract(resp({ statusCode: 400,  body: body }))
-        expect(error.message).toEqual('Error Message')
+        resp.body = '{"__type":"ErrorCode", "message":"Error Message" }'
+        parse (error, data) ->
+          expect(error.message).toEqual('Error Message')
+          expect(data).toEqual(null)
 
       # DynamoDB and SWF return error message properties with different case
       it 'returns the message when the message property is upper-cased', ->
-        body = '{"__type":"ErrorCode", "Message":"Error Message" }'
-        error = extract(resp({ statusCode: 400,  body: body }))
-        expect(error.message).toEqual('Error Message')
+        resp.body = '{"__type":"ErrorCode", "Message":"Error Message" }'
+        parse (error, data) ->
+          expect(error.message).toEqual('Error Message')
+          expect(data).toEqual(null)
 
       it 'returns a special message for RequestEntityToLarge errors', ->
-        body = '{"__type":"RequestEntityTooLarge" }'
-        error = extract(resp({ statusCode: 400,  body: body }))
-        expect(error.message).toEqual('Request body must be less than 1 MB')
-
-      it 'returns null when the body is blank', ->
-        error = extract(resp({ statusCode: 500,  body: null }))
-        expect(error.message).toEqual(null)
-
+        resp.body = '{"__type":"RequestEntityTooLarge" }'
+        parse (error, data) ->
+          expect(error.message).toEqual('Request body must be less than 1 MB')
+          expect(data).toEqual(null)
 

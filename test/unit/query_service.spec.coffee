@@ -11,7 +11,7 @@ describe 'AWS.QueryService', ->
   MockQueryService.prototype.api =
     apiVersion: '2012-01-01'
     operations:
-      simpleMethod:
+      operationName:
         n: 'OperationName'
         i: {Input:{}}
         o: {Data:{t:'o',m:{Name:{t:'s'},Count:{t:'i'}}}}
@@ -21,11 +21,11 @@ describe 'AWS.QueryService', ->
   svc = new MockQueryService()
 
   it 'defines a method for each api operation', ->
-    expect(typeof svc.simpleMethod).toEqual('function')
+    expect(typeof svc.operationName).toEqual('function')
 
   describe 'buildRequest', ->
 
-    req = svc.buildRequest('simpleMethod', { Input:'foo+bar: yuck/baz=~' })
+    req = svc.buildRequest('operationName', { Input:'foo+bar: yuck/baz=~' })
 
     it 'should use POST method requests', ->
       expect(req.method).toEqual('POST')
@@ -48,43 +48,62 @@ describe 'AWS.QueryService', ->
 
   describe 'parseResponse', ->
 
-    httpResponse = new AWS.HttpResponse()
-    httpResponse.status = 200
-    httpResponse.headers = {}
-    httpResponse.body = """
-      <xml>
-        <Data>
-          <Name>abc</Name>
-          <Count>123</Count>
-        </Data>
-      </xml>
-    """
+    parse = (callback) ->
+      svc.parseResponse resp, 'operationName', (error,data) ->
+        callback.call(this, error, data)
 
-    it 'parses the response using the operation output rules', ->
-      data = svc.parseResponse(httpResponse, 'simpleMethod')
-      expect(data).toEqual({Data:{Name:'abc',Count:123}})
+    resp = new AWS.HttpResponse()
+    resp.headers = {}
 
-  describe 'extractError', ->
 
-    httpResponse = new AWS.HttpResponse()
-    httpResponse.statusCode = 400
-    httpResponse.body = """
-    <Response>
-      <Errors>
-        <Error>
-          <Code>InvalidInstanceID.Malformed</Code>
-          <Message>Invalid id: "i-12345678"</Message>
-        </Error>
-      </Errors>
-      <RequestID>ab123mno-6432-dceb-asdf-123mno543123</RequestID>
-    </Response>
-    """
+    describe 'with data', ->
 
-    it 'extracts the error code', ->
-      expect(svc.extractError(httpResponse).code).
-        toEqual('InvalidInstanceID.Malformed')
+      beforeEach ->
+        resp.statusCode = 200
+        resp.body = """
+          <xml>
+            <Data>
+              <Name>abc</Name>
+              <Count>123</Count>
+            </Data>
+          </xml>
+        """
 
-    it 'extracts the error message', ->
-      expect(svc.extractError(httpResponse).message).
-        toEqual('Invalid id: "i-12345678"')
+      it 'parses the response using the operation output rules', ->
+        parse (error, data) ->
+          expect(error).toEqual(null)
+          expect(data).toEqual({Data:{Name:'abc',Count:123}})
+
+    describe 'with error', ->
+
+      beforeEach ->
+        resp.statusCode = 400
+        resp.body = """
+        <Response>
+          <Errors>
+            <Error>
+              <Code>InvalidInstanceID.Malformed</Code>
+              <Message>Invalid id: "i-12345678"</Message>
+            </Error>
+          </Errors>
+          <RequestID>ab123mno-6432-dceb-asdf-123mno543123</RequestID>
+        </Response>
+        """
+
+      it 'extracts the error code', ->
+        parse (error, data) ->
+          expect(error.code).toEqual('InvalidInstanceID.Malformed')
+          expect(data).toEqual(null)
+
+      it 'extracts the error message', ->
+        parse (error, data) ->
+          expect(error.message).toEqual('Invalid id: "i-12345678"')
+          expect(data).toEqual(null)
+
+      it 'returns an empty error when the body is blank', ->
+        resp.body = ''
+        parse (error, data) ->
+          expect(error.code).toEqual(400)
+          expect(error.message).toEqual(null)
+          expect(data).toEqual(null)
 
