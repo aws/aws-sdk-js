@@ -13,7 +13,8 @@ describe 'AWS.QueryService', ->
     operations:
       simpleMethod:
         n: 'OperationName'
-        i: { Input:{} }
+        i: {Input:{}}
+        o: {Data:{t:'o',m:{Name:{t:'s'},Count:{t:'i'}}}}
 
   AWS.Service.defineMethods(MockQueryService)
 
@@ -44,6 +45,24 @@ describe 'AWS.QueryService', ->
 
     it 'should uri encode params properly', ->
       expect(req.params.toString()).toMatch(/foo%2Bbar%3A%20yuck%2Fbaz%3D~/);
+
+  describe 'parseResponse', ->
+
+    httpResponse = new AWS.HttpResponse()
+    httpResponse.status = 200
+    httpResponse.headers = {}
+    httpResponse.body = """
+      <xml>
+        <Data>
+          <Name>abc</Name>
+          <Count>123</Count>
+        </Data>
+      </xml>
+    """
+
+    it 'parses the response using the operation output rules', ->
+      data = svc.parseResponse(httpResponse, 'simpleMethod')
+      expect(data).toEqual({Data:{Name:'abc',Count:123}})
 
   describe 'extractError', ->
 
