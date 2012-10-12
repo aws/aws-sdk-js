@@ -83,3 +83,28 @@ describe 'AWS.RESTXMLService', ->
         operation.i = {Id:{l:'uri'}}
         expect(buildRequest().uri).toEqual('/path')
 
+      it 'accpets multiple query params with uri params', ->
+        operation.u = '/{Abc}/{Xyz}?foo={Foo}&bar={Bar}'
+        operation.i = {Abc:{l:'uri'},Xyz:{l:'uri'},Foo:{l:'uri'},Bar:{l:'uri'}}
+        params = { Abc:'abc', Xyz:'xyz', Bar:'bar' } # omitted Foo
+        expect(buildRequest(params).uri).toEqual('/abc/xyz?bar=bar')
+
+    describe 'http request headers', ->
+
+      it 'defaults headers to an empty hash', ->
+        expect(buildRequest().headers).toEqual({})
+
+      it 'populates the headers with present params', ->
+        operation.i = {ACL:{l:'header',n:'x-amz-acl'}}
+        expect(buildRequest(ACL:'public-read').headers).toEqual('x-amz-acl':'public-read')
+
+      it 'works with map types', ->
+        operation.i = {Metadata:{t:'m',l:'header',n:'x-amz-meta-'}}
+        params =
+          Metadata:
+            foo: 'bar'
+            abc: 'xyz'
+        expect(buildRequest(params).headers).toEqual(
+          'x-amz-meta-foo': 'bar'
+          'x-amz-meta-abc': 'xyz'
+        )
