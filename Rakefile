@@ -46,3 +46,10 @@ desc 'Run JSHint'
 task :lint do
   sh "npm #{LOGLEVEL} run-script lint"
 end
+
+# Vendor tasks
+root = File.dirname(__FILE__)
+Dir[File.join(root, 'vendor', '*', 'Rakefile')].each do |vendor_rakefile|
+  load vendor_rakefile
+end
+
