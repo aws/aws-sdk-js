@@ -16,7 +16,10 @@ require('../../lib/sigv4')
 
 MockService = AWS.util.inherit AWS.Service,
   constructor: (config) -> AWS.Service.call(this, config)
-  buildRequest: -> this.newHttpRequest()
+  buildRequest: ->
+    req = this.newHttpRequest()
+    req.sign = ->
+    req
   extractData: (httpResponse) ->
     return httpResponse.body
   extractError: (httpResponse) ->
