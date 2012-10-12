@@ -16,26 +16,45 @@ require('../../lib/rest_xml_service')
 
 describe 'AWS.RESTXMLService', ->
 
+  operation = null
+
   MockRESTXMLService = AWS.util.inherit AWS.RESTXMLService,
     constructor: (config) ->
       this.serviceName = 'mockservice'
       AWS.RESTXMLService.call(this, config)
 
-  MockRESTXMLService.prototype.api =
-    operations:
-      operationName:
-        n: 'OperationName'
+  beforeEach ->
 
-  AWS.Service.defineMethods(MockRESTXMLService)
+    MockRESTXMLService.prototype.api =
+      operations:
+        sampleOperation:
+          m: 'POST' # http method
+          u: '/'    # uri
+          i: null   # no params
+          o: null   # no ouputs
+
+    AWS.Service.defineMethods(MockRESTXMLService)
+
+    operation = MockRESTXMLService.prototype.api.operations.sampleOperation
 
   svc = new MockRESTXMLService()
 
   it 'defines a method for each api operation', ->
-    expect(typeof svc.operationName).toEqual('function')
+    expect(typeof svc.sampleOperation).toEqual('function')
 
   describe 'buildRequest', ->
 
+    buildRequest = (params) ->
+      svc.buildRequest('sampleOperation', params)
+
     it 'returns an http request', ->
-      req = svc.buildRequest('operationName', {})
+      req = svc.buildRequest('sampleOperation', {})
       expect(req.constructor).toBe(AWS.HttpRequest)
+
+    describe 'http request method', ->
+
+      it 'populates method from the operation', ->
+        operation.m = 'GET'
+        req = buildRequest()
+        expect(req.method).toEqual('GET')
 
