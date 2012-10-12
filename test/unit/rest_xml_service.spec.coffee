@@ -55,6 +55,31 @@ describe 'AWS.RESTXMLService', ->
 
       it 'populates method from the operation', ->
         operation.m = 'GET'
-        req = buildRequest()
-        expect(req.method).toEqual('GET')
+        expect(buildRequest().method).toEqual('GET')
+
+    describe 'http request uri', ->
+
+      it 'populates uri from the operation', ->
+        operation.u = '/path'
+        expect(buildRequest().uri).toEqual('/path')
+
+      it 'replaces param placeholders', ->
+        operation.u = '/Owner/{Id}'
+        operation.i = {Id:{l:'uri'}}
+        expect(buildRequest({'Id': 'abc'}).uri).toEqual('/Owner/abc')
+
+      it 'can replace multiple path placeholders', ->
+        operation.u = '/{Id}/{Count}'
+        operation.i = {Id:{l:'uri'},Count:{t:'i',l:'uri'}}
+        expect(buildRequest({Id:'abc',Count:123}).uri).toEqual('/abc/123')
+
+      it 'performs querystring param replacements', ->
+        operation.u = '/path?id-param={Id}'
+        operation.i = {Id:{l:'uri'}}
+        expect(buildRequest({Id:'abc'}).uri).toEqual('/path?id-param=abc')
+
+      it 'omits querystring when param is not provided', ->
+        operation.u = '/path?id-param={Id}'
+        operation.i = {Id:{l:'uri'}}
+        expect(buildRequest().uri).toEqual('/path')
 
