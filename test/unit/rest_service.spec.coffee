@@ -14,18 +14,18 @@
 AWS = require('../../lib/core')
 require('../../lib/rest_xml_service')
 
-describe 'AWS.RESTXMLService', ->
+describe 'AWS.RESTService', ->
 
   operation = null
 
-  MockRESTXMLService = AWS.util.inherit AWS.RESTXMLService,
+  MockRESTService = AWS.util.inherit AWS.RESTService,
     constructor: (config) ->
       this.serviceName = 'mockservice'
-      AWS.RESTXMLService.call(this, config)
+      AWS.RESTService.call(this, config)
 
   beforeEach ->
 
-    MockRESTXMLService.prototype.api =
+    MockRESTService.prototype.api =
       operations:
         sampleOperation:
           m: 'POST' # http method
@@ -33,11 +33,11 @@ describe 'AWS.RESTXMLService', ->
           i: null   # no params
           o: null   # no ouputs
 
-    AWS.Service.defineMethods(MockRESTXMLService)
+    AWS.Service.defineMethods(MockRESTService)
 
-    operation = MockRESTXMLService.prototype.api.operations.sampleOperation
+    operation = MockRESTService.prototype.api.operations.sampleOperation
 
-  svc = new MockRESTXMLService()
+  svc = new MockRESTService()
 
   it 'defines a method for each api operation', ->
     expect(typeof svc.sampleOperation).toEqual('function')
@@ -51,13 +51,13 @@ describe 'AWS.RESTXMLService', ->
       req = svc.buildRequest('sampleOperation', {})
       expect(req.constructor).toBe(AWS.HttpRequest)
 
-    describe 'http request method', ->
+    describe 'method', ->
 
       it 'populates method from the operation', ->
         operation.m = 'GET'
         expect(buildRequest().method).toEqual('GET')
 
-    describe 'http request uri', ->
+    describe 'uri', ->
 
       it 'populates uri from the operation', ->
         operation.u = '/path'
@@ -89,7 +89,7 @@ describe 'AWS.RESTXMLService', ->
         params = { Abc:'abc', Xyz:'xyz', Bar:'bar' } # omitted Foo
         expect(buildRequest(params).uri).toEqual('/abc/xyz?bar=bar')
 
-    describe 'http request headers', ->
+    describe 'headers', ->
 
       it 'defaults headers to an empty hash', ->
         expect(buildRequest().headers).toEqual({})
