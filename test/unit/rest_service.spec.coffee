@@ -91,12 +91,14 @@ describe 'AWS.RESTService', ->
 
     describe 'headers', ->
 
-      it 'defaults headers to an empty hash', ->
-        expect(buildRequest().headers).toEqual({})
+      it 'populates default headers', ->
+        req = new AWS.HttpRequest()
+        expect(buildRequest().headers).toEqual(req.headers)
 
       it 'populates the headers with present params', ->
         operation.i = {ACL:{l:'header',n:'x-amz-acl'}}
-        expect(buildRequest(ACL:'public-read').headers).toEqual('x-amz-acl':'public-read')
+        headers = buildRequest(ACL:'public-read').headers
+        expect(headers['x-amz-acl']).toEqual('public-read')
 
       it 'works with map types', ->
         operation.i = {Metadata:{t:'m',l:'header',n:'x-amz-meta-'}}
@@ -104,7 +106,6 @@ describe 'AWS.RESTService', ->
           Metadata:
             foo: 'bar'
             abc: 'xyz'
-        expect(buildRequest(params).headers).toEqual(
-          'x-amz-meta-foo': 'bar'
-          'x-amz-meta-abc': 'xyz'
-        )
+        headers = buildRequest(params).headers
+        expect(headers['x-amz-meta-foo']).toEqual('bar')
+        expect(headers['x-amz-meta-abc']).toEqual('xyz')
