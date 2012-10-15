@@ -47,8 +47,18 @@ describe 'AWS.RESTXMLService', ->
     buildRequest = (params) ->
       svc.buildRequest('sampleOperation', params)
 
-    describe 'body', ->
+    describe 'empty bodies', ->
 
-      it 'defaults to an empty body when there is no payload', ->
+      it 'defaults body to null when there are no inputs', ->
+        operation.i = null
         expect(buildRequest().body).toEqual(null)
+
+      it 'defaults body to null when all inputs are uri or header values', ->
+        operation.u = '/{Bucket}'
+        operation.i = {Bucket:{l:'uri',r:1},ACL:{l:'header',n:'x-amz-acl'}}
+        params = { Bucket:'abc', ACL:'canned-acl' }
+        req = buildRequest(params)
+        expect(req.body).toEqual(null)
+        expect(req.uri).toEqual('/abc')
+        expect(req.headers['x-amz-acl']).toEqual('canned-acl')
 
