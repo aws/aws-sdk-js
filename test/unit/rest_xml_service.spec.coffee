@@ -62,3 +62,11 @@ describe 'AWS.RESTXMLService', ->
         expect(req.uri).toEqual('/abc')
         expect(req.headers['x-amz-acl']).toEqual('canned-acl')
 
+    describe 'string bodies', ->
+
+      it 'populates the body with string types directly', ->
+        operation.u = '/{Bucket}'
+        operation.i = {Bucket:{l:'uri',r:1},Data:{l:'body',t:'s'}}
+        params = { Data:'abc' }
+        expect(buildRequest(params).body).toEqual('abc')
+
