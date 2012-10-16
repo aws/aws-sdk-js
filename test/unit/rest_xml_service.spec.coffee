@@ -16,6 +16,8 @@ require('../../lib/rest_xml_service')
 
 describe 'AWS.RESTXMLService', ->
 
+  xmlns = 'http://mockservice.com/xmlns'
+
   operation = null
 
   MockRESTXMLService = AWS.util.inherit AWS.RESTXMLService,
@@ -26,6 +28,7 @@ describe 'AWS.RESTXMLService', ->
   beforeEach ->
 
     MockRESTXMLService.prototype.api =
+      xmlNamespace: xmlns
       operations:
         sampleOperation:
           m: 'POST' # http method
@@ -69,4 +72,28 @@ describe 'AWS.RESTXMLService', ->
         operation.i = {Bucket:{l:'uri',r:1},Data:{l:'body',t:'s'}}
         params = { Data:'abc' }
         expect(buildRequest(params).body).toEqual('abc')
+
+    describe 'xml bodies', ->
+
+      flattenXML = (xml) ->
+        if xml == null
+          return xml
+        xml.split("\n").join('').   # remove newlines
+          replace(/>\s+</g, '><').  # prunes whitespace between elements
+          replace(/^\s+|\s+$/g, '') # trims whitespace from ends
+
+      # Compares to XMl strings by flattening them and removing whitespace first.
+      matchXML = (xml1, xml2) ->
+        expect(flattenXML(xml1)).toEqual(flattenXML(xml2))
+
+      it 'wraps simple structures with location of body', ->
+        operation.i = {Configuration:{t:'o',l:'body',m:{Name:{},Status:{}}}}
+        params = { Name:'abc', Status:'Enabled' }
+        xml = """
+        <Configuration xmlns="#{xmlns}">
+          <Name>abc</Name>
+          <Status>Enabled</Status>
+        </Configuration>
+        """
+        matchXML(buildRequest(params).body, xml)
 
