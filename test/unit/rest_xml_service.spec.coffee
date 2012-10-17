@@ -87,13 +87,24 @@ describe 'AWS.RESTXMLService', ->
         expect(flattenXML(xml1)).toEqual(flattenXML(xml2))
 
       it 'wraps simple structures with location of body', ->
-        operation.i = {Configuration:{t:'o',l:'body',m:{Name:{},Status:{}}}}
-        params = { Name:'abc', Status:'Enabled' }
+        operation.i = {Config:{t:'o',l:'body',m:{Name:{},State:{}}}}
+        params = { Name:'abc', State:'Enabled' }
         xml = """
-        <Configuration xmlns="#{xmlns}">
+        <Config xmlns="#{xmlns}">
           <Name>abc</Name>
-          <Status>Enabled</Status>
-        </Configuration>
+          <State>Enabled</State>
+        </Config>
+        """
+        matchXML(buildRequest(params).body, xml)
+
+      it 'orders xml members by the order they appear in the rules', ->
+        operation.i = {Config:{t:'o',l:'body',m:{Count:{t:'i'},State:{}}}}
+        params = { State: 'Disabled', Count: 123 }
+        xml = """
+        <Config xmlns="#{xmlns}">
+          <Count>123</Count>
+          <State>Disabled</State>
+        </Config>
         """
         matchXML(buildRequest(params).body, xml)
 
