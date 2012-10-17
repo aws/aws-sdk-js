@@ -166,9 +166,25 @@ describe 'AWS.RESTXMLService', ->
         """
         matchXML(buildRequest(params).body, xml)
 
-      xit 'serializes booleans (true)', ->
+      it 'serializes booleans (true)', ->
+        operation.i = {Data:{t:'o',l:'body',m:{Enabled:{t:'b'}}}}
+        params = { Enabled: true }
+        xml = """
+        <Data xmlns="#{xmlns}">
+          <Enabled>true</Enabled>
+        </Data>
+        """
+        matchXML(buildRequest(params).body, xml)
 
-      xit 'serializes booleans (false)', ->
+      it 'serializes booleans (false)', ->
+        operation.i = {Data:{t:'o',l:'body',m:{Enabled:{t:'b'}}}}
+        params = { Enabled: false }
+        xml = """
+        <Data xmlns="#{xmlns}">
+          <Enabled>false</Enabled>
+        </Data>
+        """
+        matchXML(buildRequest(params).body, xml)
 
       xit 'serializes timestamps (iso8601)', ->
 
