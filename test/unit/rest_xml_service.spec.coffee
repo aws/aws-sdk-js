@@ -140,3 +140,27 @@ describe 'AWS.RESTXMLService', ->
 
         matchXML(buildRequest(params).body, xml)
 
+      xit 'serializes lists (default member names)', ->
+
+      xit 'serializes lists (custom member names)', ->
+
+      xit 'serializes maps', ->
+
+      xit 'serializes numbers (integers)', ->
+
+      xit 'serializes nubmers (floats)', ->
+
+      xit 'serializes booleans (true)', ->
+
+      xit 'serializes booleans (false)', ->
+
+      xit 'serializes timestamps (iso8601)', ->
+
+      xit 'serializes timestamps (rfc822)', ->
+
+      xit 'serializes timestamps (unix timestamp)', ->
+
+      xit 'serializes structures to the body when no location provided', ->
+
+      xit 'omits missing params from the XML', ->
+
