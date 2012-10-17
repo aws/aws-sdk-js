@@ -140,9 +140,78 @@ describe 'AWS.RESTXMLService', ->
 
         matchXML(buildRequest(params).body, xml)
 
-      xit 'serializes lists (default member names)', ->
+      xit 'serializes empty structures as empty element', ->
 
-      xit 'serializes lists (custom member names)', ->
+      xit 'does not serialize missing members', ->
+
+      it 'serializes lists (default member names)', ->
+        operation.i = {Data:{t:'o',l:'body',m:{Aliases:{t:'a',m:{}}}}}
+        params = {Aliases:['abc','mno','xyz']}
+        xml = """
+        <Data xmlns="#{xmlns}">
+          <Aliases>
+            <member>abc</member>
+            <member>mno</member>
+            <member>xyz</member>
+          </Aliases>
+        </Data>
+        """
+        matchXML(buildRequest(params).body, xml)
+
+      it 'serializes lists (custom member names)', ->
+        operation.i = {Data:{t:'o',l:'body',m:{Aliases:{t:'a',m:{n:'Alias'}}}}}
+        params = {Aliases:['abc','mno','xyz']}
+        xml = """
+        <Data xmlns="#{xmlns}">
+          <Aliases>
+            <Alias>abc</Alias>
+            <Alias>mno</Alias>
+            <Alias>xyz</Alias>
+          </Aliases>
+        </Data>
+        """
+        matchXML(buildRequest(params).body, xml)
+
+      it 'includes lists elements even if they have no members', ->
+        operation.i = {Data:{t:'o',l:'body',m:{Aliases:{t:'a',m:{n:'Alias'}}}}}
+        params = {Aliases:[]}
+        xml = """
+        <Data xmlns="#{xmlns}">
+          <Aliases/>
+        </Data>
+        """
+        matchXML(buildRequest(params).body, xml)
+
+      it 'serializes lists of structures', ->
+        operation.i =
+          Data:
+            t: 'o'
+            l: 'body'
+            m:
+              Points:
+                t: 'a'
+                m:
+                  t: 'o'
+                  n: 'Point'
+                  m:
+                    X: {t:'n'}
+                    Y: {t:'n'}
+        params = {Points:[{X:1.2,Y:2.1},{X:3.4,Y:4.3}]}
+        xml = """
+        <Data xmlns="#{xmlns}">
+          <Points>
+            <Point>
+              <X>1.2</X>
+              <Y>2.1</Y>
+            </Point>
+            <Point>
+              <X>3.4</X>
+              <Y>4.3</Y>
+            </Point>
+          </Points>
+        </Data>
+        """
+        matchXML(buildRequest(params).body, xml)
 
       xit 'serializes maps', ->
 
@@ -157,7 +226,7 @@ describe 'AWS.RESTXMLService', ->
         matchXML(buildRequest(params).body, xml)
 
       it 'serializes nubmers (floats)', ->
-        operation.i = {Data:{t:'o',l:'body',m:{Count:{t:'f'}}}}
+        operation.i = {Data:{t:'o',l:'body',m:{Count:{t:'n'}}}}
         params = { Count: 123.123 }
         xml = """
         <Data xmlns="#{xmlns}">
@@ -193,6 +262,4 @@ describe 'AWS.RESTXMLService', ->
       xit 'serializes timestamps (unix timestamp)', ->
 
       xit 'serializes structures to the body when no location provided', ->
-
-      xit 'omits missing params from the XML', ->
 
