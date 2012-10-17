@@ -25,7 +25,7 @@ buildSigner = (request) ->
 
 describe 'AWS.SigV4', ->
   date = new Date(1935346573456)
-  datetime = AWS.util.date.getISODateString(date)
+  datetime = AWS.util.date.iso8601(date).replace(/[:\-]|\.\d{3}/g, '')
   creds = {accessKeyId: 'akid', secretAccessKey: 'secret', sessionToken: 'session'}
   signature = '3e5fc3cac486c843144891dc0be6f8c2e89fe1d7b542b3722f65d1b351f43ea2'
   authorization = 'AWS4-HMAC-SHA256 Credential=akid/20310430/region/dynamodb/aws4_request, ' +

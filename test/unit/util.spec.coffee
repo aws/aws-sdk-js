@@ -23,21 +23,33 @@ describe 'AWS.util.date', ->
       expect(util.getDate()).toBe(now)
       `Date = oldDate;`
 
-  describe 'getISODateString', ->
+  describe 'iso8601', ->
     it 'should return date formatted as YYYYMMDDTHHnnssZ', ->
       spyOn(util, 'getDate').andCallFake -> new Date(600000)
-      expect(util.getISODateString()).toEqual('19700101T001000Z')
+      expect(util.iso8601()).toEqual('1970-01-01T00:10:00.000Z')
 
     it 'should allow date parameter', ->
-      expect(util.getISODateString(new Date(660000))).toEqual('19700101T001100Z')
+      expect(util.iso8601(new Date(660000))).toEqual('1970-01-01T00:11:00.000Z')
 
-  describe 'getUTCDateString', ->
+  describe 'rfc822', ->
     it 'should return date formatted as YYYYMMDDTHHnnssZ', ->
       spyOn(util, 'getDate').andCallFake -> new Date(600000)
-      expect(util.getUTCDateString()).toEqual('Thu, 01 Jan 1970 00:10:00 GMT')
+      expect(util.rfc822()).toEqual('Thu, 01 Jan 1970 00:10:00 GMT')
 
     it 'should allow date parameter', ->
-      expect(util.getUTCDateString(new Date(660000))).toEqual('Thu, 01 Jan 1970 00:11:00 GMT')
+      expect(util.rfc822(new Date(660000))).toEqual('Thu, 01 Jan 1970 00:11:00 GMT')
+
+  describe 'unixTimestamp', ->
+    it 'should return date formatted as unix timestamp', ->
+      spyOn(util, 'getDate').andCallFake -> new Date(600000)
+      expect(util.unixTimestamp()).toEqual(600)
+
+    it 'should allow date parameter', ->
+      expect(util.unixTimestamp(new Date(660000))).toEqual(660)
+
+    it 'should return date formatted as unix timestamp with milliseconds', ->
+      spyOn(util, 'getDate').andCallFake -> new Date(600123)
+      expect(util.unixTimestamp()).toEqual(600.123)
 
 
 describe 'AWS.util.crypto', ->
