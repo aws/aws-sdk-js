@@ -108,3 +108,35 @@ describe 'AWS.RESTXMLService', ->
         """
         matchXML(buildRequest(params).body, xml)
 
+      it 'can serializes structures into XML', ->
+
+        operation.i =
+          Data:
+            t: 'o'
+            l: 'body'
+            m:
+              Name: {}
+              Details:
+                t: 'o'
+                m:
+                  Abc: {}
+                  Xyz: {}
+
+        params =
+          Details:
+            Xyz: 'xyz'
+            Abc: 'abc'
+          Name: 'john'
+
+        xml = """
+        <Data xmlns="#{xmlns}">
+          <Name>john</Name>
+          <Details>
+            <Abc>abc</Abc>
+            <Xyz>xyz</Xyz>
+          </Details>
+        </Data>
+        """
+
+        matchXML(buildRequest(params).body, xml)
+
