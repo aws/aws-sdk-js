@@ -146,9 +146,25 @@ describe 'AWS.RESTXMLService', ->
 
       xit 'serializes maps', ->
 
-      xit 'serializes numbers (integers)', ->
+      it 'serializes numbers (integers)', ->
+        operation.i = {Data:{t:'o',l:'body',m:{Count:{t:'i'}}}}
+        params = { Count: 123.0 }
+        xml = """
+        <Data xmlns="#{xmlns}">
+          <Count>123</Count>
+        </Data>
+        """
+        matchXML(buildRequest(params).body, xml)
 
-      xit 'serializes nubmers (floats)', ->
+      it 'serializes nubmers (floats)', ->
+        operation.i = {Data:{t:'o',l:'body',m:{Count:{t:'f'}}}}
+        params = { Count: 123.123 }
+        xml = """
+        <Data xmlns="#{xmlns}">
+          <Count>123.123</Count>
+        </Data>
+        """
+        matchXML(buildRequest(params).body, xml)
 
       xit 'serializes booleans (true)', ->
 
