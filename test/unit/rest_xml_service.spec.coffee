@@ -227,8 +227,6 @@ describe 'AWS.RESTXMLService', ->
         """
         matchXML(buildRequest(params).body, xml)
 
-      xit 'serializes maps', ->
-
       it 'serializes numbers (integers)', ->
         operation.i = {Data:{t:'o',l:'body',m:{Count:{t:'i'}}}}
         params = { Count: 123.0 }
@@ -269,11 +267,42 @@ describe 'AWS.RESTXMLService', ->
         """
         matchXML(buildRequest(params).body, xml)
 
-      xit 'serializes timestamps (iso8601)', ->
+      describe 'timestamps', ->
 
-      xit 'serializes timestamps (rfc822)', ->
+        time = new Date()
 
-      xit 'serializes timestamps (unix timestamp)', ->
+        it 'iso8601', ->
+          MockRESTXMLService.prototype.api.timestampFormat = 'iso8601'
+          operation.i = {Data:{t:'o',l:'body',m:{Expires:{t:'t'}}}}
+          params = { Expires: time }
+          xml = """
+          <Data xmlns="#{xmlns}">
+            <Expires>#{AWS.util.date.iso8601(time)}</Expires>
+          </Data>
+          """
+          matchXML(buildRequest(params).body, xml)
+
+        it 'rfc822', ->
+          MockRESTXMLService.prototype.api.timestampFormat = 'rfc822'
+          operation.i = {Data:{t:'o',l:'body',m:{Expires:{t:'t'}}}}
+          params = { Expires: time }
+          xml = """
+          <Data xmlns="#{xmlns}">
+            <Expires>#{AWS.util.date.rfc822(time)}</Expires>
+          </Data>
+          """
+          matchXML(buildRequest(params).body, xml)
+
+        it 'unix timestamp', ->
+          MockRESTXMLService.prototype.api.timestampFormat = 'unixTimestamp'
+          operation.i = {Data:{t:'o',l:'body',m:{Expires:{t:'t'}}}}
+          params = { Expires: time }
+          xml = """
+          <Data xmlns="#{xmlns}">
+            <Expires>#{AWS.util.date.unixTimestamp(time)}</Expires>
+          </Data>
+          """
+          matchXML(buildRequest(params).body, xml)
 
       xit 'serializes structures to the body when no location provided', ->
 
