@@ -109,7 +109,6 @@ describe 'AWS.RESTXMLService', ->
         matchXML(buildRequest(params).body, xml)
 
       it 'can serializes structures into XML', ->
-
         operation.i =
           Data:
             t: 'o'
@@ -121,13 +120,11 @@ describe 'AWS.RESTXMLService', ->
                 m:
                   Abc: {}
                   Xyz: {}
-
         params =
           Details:
             Xyz: 'xyz'
             Abc: 'abc'
           Name: 'john'
-
         xml = """
         <Data xmlns="#{xmlns}">
           <Name>john</Name>
@@ -137,12 +134,29 @@ describe 'AWS.RESTXMLService', ->
           </Details>
         </Data>
         """
-
         matchXML(buildRequest(params).body, xml)
 
-      xit 'serializes empty structures as empty element', ->
+      it 'serializes empty structures as empty element', ->
+        operation.i = {Data:{t:'o',l:'body',m:{Config:{t:'o',m:{Foo:{},Bar:{}}}}}}
+        params = { Config: {} }
+        xml = """
+        <Data xmlns="#{xmlns}">
+          <Config/>
+        </Data>
+        """
+        matchXML(buildRequest(params).body, xml)
 
-      xit 'does not serialize missing members', ->
+      it 'does not serialize missing members', ->
+        operation.i = {Data:{t:'o',l:'body',m:{Config:{t:'o',m:{Foo:{},Bar:{}}}}}}
+        params = { Config: { Foo: 'abc' } }
+        xml = """
+        <Data xmlns="#{xmlns}">
+          <Config>
+            <Foo>abc</Foo>
+          </Config>
+        </Data>
+        """
+        matchXML(buildRequest(params).body, xml)
 
       it 'serializes lists (default member names)', ->
         operation.i = {Data:{t:'o',l:'body',m:{Aliases:{t:'a',m:{}}}}}
