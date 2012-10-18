@@ -58,7 +58,7 @@ describe 'AWS.RESTXMLService', ->
 
       it 'defaults body to null when all inputs are uri or header values', ->
         operation.u = '/{Bucket}'
-        operation.i = {Bucket:{l:'uri',r:1},ACL:{l:'header',n:'x-amz-acl'}}
+        operation.i = {m:{Bucket:{l:'uri',r:1},ACL:{n:'x-amz-acl',l:'header'}}}
         params = { Bucket:'abc', ACL:'canned-acl' }
         req = buildRequest(params)
         expect(req.body).toEqual(null)
@@ -69,14 +69,14 @@ describe 'AWS.RESTXMLService', ->
 
       it 'populates the body with string types directly', ->
         operation.u = '/{Bucket}'
-        operation.i = {Bucket:{l:'uri',r:1},Data:{l:'body',t:'s'}}
-        params = { Data:'abc' }
+        operation.i = {m:{Bucket:{l:'uri',r:1},Data:{t:'s',l:'body'}}}
+        params = { Bucket: 'bucket-name', Data: 'abc' }
         expect(buildRequest(params).body).toEqual('abc')
 
     describe 'xml bodies', ->
 
       flattenXML = (xml) ->
-        if xml == null
+        if (!xml)
           return xml
         xml.split("\n").join('').   # remove newlines
           replace(/>\s+</g, '><').  # prunes whitespace between elements
@@ -89,8 +89,8 @@ describe 'AWS.RESTXMLService', ->
       describe 'structures', ->
 
         it 'wraps simple structures with location of body', ->
-          operation.i = {Config:{t:'o',l:'body',m:{Name:{},State:{}}}}
-          params = { Name:'abc', State:'Enabled' }
+          operation.i = {n:'Config',m:{Name:{},State:{}}}
+          params = { Name:'abc', State: 'Enabled' }
           xml = """
           <Config xmlns="#{xmlns}">
             <Name>abc</Name>
@@ -100,7 +100,7 @@ describe 'AWS.RESTXMLService', ->
           matchXML(buildRequest(params).body, xml)
 
         it 'orders xml members by the order they appear in the rules', ->
-          operation.i = {Config:{t:'o',l:'body',m:{Count:{t:'i'},State:{}}}}
+          operation.i = {n:'Config',m:{Count:{t:'i'},State:{}}}
           params = { State: 'Disabled', Count: 123 }
           xml = """
           <Config xmlns="#{xmlns}">
@@ -112,16 +112,14 @@ describe 'AWS.RESTXMLService', ->
 
         it 'can serializes structures into XML', ->
           operation.i =
-            Data:
-              t: 'o'
-              l: 'body'
-              m:
-                Name: {}
-                Details:
-                  t: 'o'
-                  m:
-                    Abc: {}
-                    Xyz: {}
+            n: 'Data',
+            m:
+              Name: {}
+              Details:
+                t: 'o'
+                m:
+                  Abc: {}
+                  Xyz: {}
           params =
             Details:
               Xyz: 'xyz'
@@ -139,7 +137,7 @@ describe 'AWS.RESTXMLService', ->
           matchXML(buildRequest(params).body, xml)
 
         it 'serializes empty structures as empty element', ->
-          operation.i = {Data:{t:'o',l:'body',m:{Config:{t:'o',m:{Foo:{},Bar:{}}}}}}
+          operation.i = {n:'Data',m:{Config:{t:'o',m:{Foo:{},Bar:{}}}}}
           params = { Config: {} }
           xml = """
           <Data xmlns="#{xmlns}">
@@ -149,7 +147,7 @@ describe 'AWS.RESTXMLService', ->
           matchXML(buildRequest(params).body, xml)
 
         it 'does not serialize missing members', ->
-          operation.i = {Data:{t:'o',l:'body',m:{Config:{t:'o',m:{Foo:{},Bar:{}}}}}}
+          operation.i = {n:'Data',m:{Config:{t:'o',m:{Foo:{},Bar:{}}}}}
           params = { Config: { Foo: 'abc' } }
           xml = """
           <Data xmlns="#{xmlns}">
@@ -163,7 +161,7 @@ describe 'AWS.RESTXMLService', ->
       describe 'lists', ->
 
         it 'serializes lists (default member names)', ->
-          operation.i = {Data:{t:'o',l:'body',m:{Aliases:{t:'a',m:{}}}}}
+          operation.i = {n:'Data',m:{Aliases:{t:'a',m:{}}}}
           params = {Aliases:['abc','mno','xyz']}
           xml = """
           <Data xmlns="#{xmlns}">
@@ -177,7 +175,7 @@ describe 'AWS.RESTXMLService', ->
           matchXML(buildRequest(params).body, xml)
 
         it 'serializes lists (custom member names)', ->
-          operation.i = {Data:{t:'o',l:'body',m:{Aliases:{t:'a',m:{n:'Alias'}}}}}
+          operation.i = {n:'Data',m:{Aliases:{t:'a',m:{n:'Alias'}}}}
           params = {Aliases:['abc','mno','xyz']}
           xml = """
           <Data xmlns="#{xmlns}">
@@ -191,7 +189,7 @@ describe 'AWS.RESTXMLService', ->
           matchXML(buildRequest(params).body, xml)
 
         it 'includes lists elements even if they have no members', ->
-          operation.i = {Data:{t:'o',l:'body',m:{Aliases:{t:'a',m:{n:'Alias'}}}}}
+          operation.i = {n:'Data',m:{Aliases:{t:'a',m:{n:'Alias'}}}}
           params = {Aliases:[]}
           xml = """
           <Data xmlns="#{xmlns}">
@@ -202,18 +200,16 @@ describe 'AWS.RESTXMLService', ->
 
         it 'serializes lists of structures', ->
           operation.i =
-            Data:
-              t: 'o'
-              l: 'body'
-              m:
-                Points:
-                  t: 'a'
+            n: 'Data'
+            m:
+              Points:
+                t: 'a'
+                m:
+                  t: 'o'
+                  n: 'Point'
                   m:
-                    t: 'o'
-                    n: 'Point'
-                    m:
-                      X: {t:'n'}
-                      Y: {t:'n'}
+                    X: {t:'n'}
+                    Y: {t:'n'}
           params = {Points:[{X:1.2,Y:2.1},{X:3.4,Y:4.3}]}
           xml = """
           <Data xmlns="#{xmlns}">
@@ -234,7 +230,7 @@ describe 'AWS.RESTXMLService', ->
       describe 'numbers', ->
 
         it 'integers', ->
-          operation.i = {Data:{t:'o',l:'body',m:{Count:{t:'i'}}}}
+          operation.i = {n:'Data',m:{Count:{t:'i'}}}
           params = { Count: 123.0 }
           xml = """
           <Data xmlns="#{xmlns}">
@@ -244,7 +240,7 @@ describe 'AWS.RESTXMLService', ->
           matchXML(buildRequest(params).body, xml)
 
         it 'floats', ->
-          operation.i = {Data:{t:'o',l:'body',m:{Count:{t:'n'}}}}
+          operation.i = {n:'Data',m:{Count:{t:'n'}}}
           params = { Count: 123.123 }
           xml = """
           <Data xmlns="#{xmlns}">
@@ -256,7 +252,7 @@ describe 'AWS.RESTXMLService', ->
       describe 'timestamps', ->
 
         it 'true', ->
-          operation.i = {Data:{t:'o',l:'body',m:{Enabled:{t:'b'}}}}
+          operation.i = {n:'Data',m:{Enabled:{t:'b'}}}
           params = { Enabled: true }
           xml = """
           <Data xmlns="#{xmlns}">
@@ -266,7 +262,7 @@ describe 'AWS.RESTXMLService', ->
           matchXML(buildRequest(params).body, xml)
 
         it 'false', ->
-          operation.i = {Data:{t:'o',l:'body',m:{Enabled:{t:'b'}}}}
+          operation.i = {n:'Data',m:{Enabled:{t:'b'}}}
           params = { Enabled: false }
           xml = """
           <Data xmlns="#{xmlns}">
@@ -281,7 +277,7 @@ describe 'AWS.RESTXMLService', ->
 
         it 'iso8601', ->
           MockRESTXMLService.prototype.api.timestampFormat = 'iso8601'
-          operation.i = {Data:{t:'o',l:'body',m:{Expires:{t:'t'}}}}
+          operation.i = {n:'Data',m:{Expires:{t:'t'}}}
           params = { Expires: time }
           xml = """
           <Data xmlns="#{xmlns}">
@@ -292,7 +288,7 @@ describe 'AWS.RESTXMLService', ->
 
         it 'rfc822', ->
           MockRESTXMLService.prototype.api.timestampFormat = 'rfc822'
-          operation.i = {Data:{t:'o',l:'body',m:{Expires:{t:'t'}}}}
+          operation.i = {n:'Data',m:{Expires:{t:'t'}}}
           params = { Expires: time }
           xml = """
           <Data xmlns="#{xmlns}">
@@ -303,7 +299,7 @@ describe 'AWS.RESTXMLService', ->
 
         it 'unix timestamp', ->
           MockRESTXMLService.prototype.api.timestampFormat = 'unixTimestamp'
-          operation.i = {Data:{t:'o',l:'body',m:{Expires:{t:'t'}}}}
+          operation.i = {n:'Data',m:{Expires:{t:'t'}}}
           params = { Expires: time }
           xml = """
           <Data xmlns="#{xmlns}">

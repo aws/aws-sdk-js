@@ -65,27 +65,27 @@ describe 'AWS.RESTService', ->
 
       it 'replaces param placeholders', ->
         operation.u = '/Owner/{Id}'
-        operation.i = {Id:{l:'uri'}}
+        operation.i = {m:{Id:{l:'uri'}}}
         expect(buildRequest({'Id': 'abc'}).uri).toEqual('/Owner/abc')
 
       it 'can replace multiple path placeholders', ->
         operation.u = '/{Id}/{Count}'
-        operation.i = {Id:{l:'uri'},Count:{t:'i',l:'uri'}}
+        operation.i = {m:{Id:{l:'uri'},Count:{t:'i',l:'uri'}}}
         expect(buildRequest({Id:'abc',Count:123}).uri).toEqual('/abc/123')
 
       it 'performs querystring param replacements', ->
         operation.u = '/path?id-param={Id}'
-        operation.i = {Id:{l:'uri'}}
+        operation.i = {m:{Id:{l:'uri'}}}
         expect(buildRequest({Id:'abc'}).uri).toEqual('/path?id-param=abc')
 
       it 'omits querystring when param is not provided', ->
         operation.u = '/path?id-param={Id}'
-        operation.i = {Id:{l:'uri'}}
+        operation.i = {m:{Id:{l:'uri'}}}
         expect(buildRequest().uri).toEqual('/path')
 
       it 'accpets multiple query params with uri params', ->
         operation.u = '/{Abc}/{Xyz}?foo={Foo}&bar={Bar}'
-        operation.i = {Abc:{l:'uri'},Xyz:{l:'uri'},Foo:{l:'uri'},Bar:{l:'uri'}}
+        operation.i = {m:{Abc:{l:'uri'},Xyz:{l:'uri'},Foo:{l:'uri'},Bar:{l:'uri'}}}
         params = { Abc:'abc', Xyz:'xyz', Bar:'bar' } # omitted Foo
         expect(buildRequest(params).uri).toEqual('/abc/xyz?bar=bar')
 
@@ -96,12 +96,12 @@ describe 'AWS.RESTService', ->
         expect(buildRequest().headers).toEqual(req.headers)
 
       it 'populates the headers with present params', ->
-        operation.i = {ACL:{l:'header',n:'x-amz-acl'}}
+        operation.i = {m:{ACL:{l:'header',n:'x-amz-acl'}}}
         headers = buildRequest(ACL:'public-read').headers
         expect(headers['x-amz-acl']).toEqual('public-read')
 
       it 'works with map types', ->
-        operation.i = {Metadata:{t:'m',l:'header',n:'x-amz-meta-'}}
+        operation.i = {m:{Metadata:{t:'m',l:'header',n:'x-amz-meta-'}}}
         params =
           Metadata:
             foo: 'bar'

@@ -26,7 +26,7 @@ describe 'AWS.QueryService', ->
     operations:
       operationName:
         n: 'OperationName'
-        i: {Input:{}}
+        i: {m:{Input:{m:{}}}}
         o: {Data:{t:'o',m:{Name:{t:'s'},Count:{t:'i'}}}}
 
   AWS.Service.defineMethods(MockQueryService)
