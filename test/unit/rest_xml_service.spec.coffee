@@ -86,186 +86,194 @@ describe 'AWS.RESTXMLService', ->
       matchXML = (xml1, xml2) ->
         expect(flattenXML(xml1)).toEqual(flattenXML(xml2))
 
-      it 'wraps simple structures with location of body', ->
-        operation.i = {Config:{t:'o',l:'body',m:{Name:{},State:{}}}}
-        params = { Name:'abc', State:'Enabled' }
-        xml = """
-        <Config xmlns="#{xmlns}">
-          <Name>abc</Name>
-          <State>Enabled</State>
-        </Config>
-        """
-        matchXML(buildRequest(params).body, xml)
+      describe 'structures', ->
 
-      it 'orders xml members by the order they appear in the rules', ->
-        operation.i = {Config:{t:'o',l:'body',m:{Count:{t:'i'},State:{}}}}
-        params = { State: 'Disabled', Count: 123 }
-        xml = """
-        <Config xmlns="#{xmlns}">
-          <Count>123</Count>
-          <State>Disabled</State>
-        </Config>
-        """
-        matchXML(buildRequest(params).body, xml)
-
-      it 'can serializes structures into XML', ->
-        operation.i =
-          Data:
-            t: 'o'
-            l: 'body'
-            m:
-              Name: {}
-              Details:
-                t: 'o'
-                m:
-                  Abc: {}
-                  Xyz: {}
-        params =
-          Details:
-            Xyz: 'xyz'
-            Abc: 'abc'
-          Name: 'john'
-        xml = """
-        <Data xmlns="#{xmlns}">
-          <Name>john</Name>
-          <Details>
-            <Abc>abc</Abc>
-            <Xyz>xyz</Xyz>
-          </Details>
-        </Data>
-        """
-        matchXML(buildRequest(params).body, xml)
-
-      it 'serializes empty structures as empty element', ->
-        operation.i = {Data:{t:'o',l:'body',m:{Config:{t:'o',m:{Foo:{},Bar:{}}}}}}
-        params = { Config: {} }
-        xml = """
-        <Data xmlns="#{xmlns}">
-          <Config/>
-        </Data>
-        """
-        matchXML(buildRequest(params).body, xml)
-
-      it 'does not serialize missing members', ->
-        operation.i = {Data:{t:'o',l:'body',m:{Config:{t:'o',m:{Foo:{},Bar:{}}}}}}
-        params = { Config: { Foo: 'abc' } }
-        xml = """
-        <Data xmlns="#{xmlns}">
-          <Config>
-            <Foo>abc</Foo>
+        it 'wraps simple structures with location of body', ->
+          operation.i = {Config:{t:'o',l:'body',m:{Name:{},State:{}}}}
+          params = { Name:'abc', State:'Enabled' }
+          xml = """
+          <Config xmlns="#{xmlns}">
+            <Name>abc</Name>
+            <State>Enabled</State>
           </Config>
-        </Data>
-        """
-        matchXML(buildRequest(params).body, xml)
+          """
+          matchXML(buildRequest(params).body, xml)
 
-      it 'serializes lists (default member names)', ->
-        operation.i = {Data:{t:'o',l:'body',m:{Aliases:{t:'a',m:{}}}}}
-        params = {Aliases:['abc','mno','xyz']}
-        xml = """
-        <Data xmlns="#{xmlns}">
-          <Aliases>
-            <member>abc</member>
-            <member>mno</member>
-            <member>xyz</member>
-          </Aliases>
-        </Data>
-        """
-        matchXML(buildRequest(params).body, xml)
+        it 'orders xml members by the order they appear in the rules', ->
+          operation.i = {Config:{t:'o',l:'body',m:{Count:{t:'i'},State:{}}}}
+          params = { State: 'Disabled', Count: 123 }
+          xml = """
+          <Config xmlns="#{xmlns}">
+            <Count>123</Count>
+            <State>Disabled</State>
+          </Config>
+          """
+          matchXML(buildRequest(params).body, xml)
 
-      it 'serializes lists (custom member names)', ->
-        operation.i = {Data:{t:'o',l:'body',m:{Aliases:{t:'a',m:{n:'Alias'}}}}}
-        params = {Aliases:['abc','mno','xyz']}
-        xml = """
-        <Data xmlns="#{xmlns}">
-          <Aliases>
-            <Alias>abc</Alias>
-            <Alias>mno</Alias>
-            <Alias>xyz</Alias>
-          </Aliases>
-        </Data>
-        """
-        matchXML(buildRequest(params).body, xml)
-
-      it 'includes lists elements even if they have no members', ->
-        operation.i = {Data:{t:'o',l:'body',m:{Aliases:{t:'a',m:{n:'Alias'}}}}}
-        params = {Aliases:[]}
-        xml = """
-        <Data xmlns="#{xmlns}">
-          <Aliases/>
-        </Data>
-        """
-        matchXML(buildRequest(params).body, xml)
-
-      it 'serializes lists of structures', ->
-        operation.i =
-          Data:
-            t: 'o'
-            l: 'body'
-            m:
-              Points:
-                t: 'a'
-                m:
+        it 'can serializes structures into XML', ->
+          operation.i =
+            Data:
+              t: 'o'
+              l: 'body'
+              m:
+                Name: {}
+                Details:
                   t: 'o'
-                  n: 'Point'
                   m:
-                    X: {t:'n'}
-                    Y: {t:'n'}
-        params = {Points:[{X:1.2,Y:2.1},{X:3.4,Y:4.3}]}
-        xml = """
-        <Data xmlns="#{xmlns}">
-          <Points>
-            <Point>
-              <X>1.2</X>
-              <Y>2.1</Y>
-            </Point>
-            <Point>
-              <X>3.4</X>
-              <Y>4.3</Y>
-            </Point>
-          </Points>
-        </Data>
-        """
-        matchXML(buildRequest(params).body, xml)
+                    Abc: {}
+                    Xyz: {}
+          params =
+            Details:
+              Xyz: 'xyz'
+              Abc: 'abc'
+            Name: 'john'
+          xml = """
+          <Data xmlns="#{xmlns}">
+            <Name>john</Name>
+            <Details>
+              <Abc>abc</Abc>
+              <Xyz>xyz</Xyz>
+            </Details>
+          </Data>
+          """
+          matchXML(buildRequest(params).body, xml)
 
-      it 'serializes numbers (integers)', ->
-        operation.i = {Data:{t:'o',l:'body',m:{Count:{t:'i'}}}}
-        params = { Count: 123.0 }
-        xml = """
-        <Data xmlns="#{xmlns}">
-          <Count>123</Count>
-        </Data>
-        """
-        matchXML(buildRequest(params).body, xml)
+        it 'serializes empty structures as empty element', ->
+          operation.i = {Data:{t:'o',l:'body',m:{Config:{t:'o',m:{Foo:{},Bar:{}}}}}}
+          params = { Config: {} }
+          xml = """
+          <Data xmlns="#{xmlns}">
+            <Config/>
+          </Data>
+          """
+          matchXML(buildRequest(params).body, xml)
 
-      it 'serializes nubmers (floats)', ->
-        operation.i = {Data:{t:'o',l:'body',m:{Count:{t:'n'}}}}
-        params = { Count: 123.123 }
-        xml = """
-        <Data xmlns="#{xmlns}">
-          <Count>123.123</Count>
-        </Data>
-        """
-        matchXML(buildRequest(params).body, xml)
+        it 'does not serialize missing members', ->
+          operation.i = {Data:{t:'o',l:'body',m:{Config:{t:'o',m:{Foo:{},Bar:{}}}}}}
+          params = { Config: { Foo: 'abc' } }
+          xml = """
+          <Data xmlns="#{xmlns}">
+            <Config>
+              <Foo>abc</Foo>
+            </Config>
+          </Data>
+          """
+          matchXML(buildRequest(params).body, xml)
 
-      it 'serializes booleans (true)', ->
-        operation.i = {Data:{t:'o',l:'body',m:{Enabled:{t:'b'}}}}
-        params = { Enabled: true }
-        xml = """
-        <Data xmlns="#{xmlns}">
-          <Enabled>true</Enabled>
-        </Data>
-        """
-        matchXML(buildRequest(params).body, xml)
+      describe 'lists', ->
 
-      it 'serializes booleans (false)', ->
-        operation.i = {Data:{t:'o',l:'body',m:{Enabled:{t:'b'}}}}
-        params = { Enabled: false }
-        xml = """
-        <Data xmlns="#{xmlns}">
-          <Enabled>false</Enabled>
-        </Data>
-        """
-        matchXML(buildRequest(params).body, xml)
+        it 'serializes lists (default member names)', ->
+          operation.i = {Data:{t:'o',l:'body',m:{Aliases:{t:'a',m:{}}}}}
+          params = {Aliases:['abc','mno','xyz']}
+          xml = """
+          <Data xmlns="#{xmlns}">
+            <Aliases>
+              <member>abc</member>
+              <member>mno</member>
+              <member>xyz</member>
+            </Aliases>
+          </Data>
+          """
+          matchXML(buildRequest(params).body, xml)
+
+        it 'serializes lists (custom member names)', ->
+          operation.i = {Data:{t:'o',l:'body',m:{Aliases:{t:'a',m:{n:'Alias'}}}}}
+          params = {Aliases:['abc','mno','xyz']}
+          xml = """
+          <Data xmlns="#{xmlns}">
+            <Aliases>
+              <Alias>abc</Alias>
+              <Alias>mno</Alias>
+              <Alias>xyz</Alias>
+            </Aliases>
+          </Data>
+          """
+          matchXML(buildRequest(params).body, xml)
+
+        it 'includes lists elements even if they have no members', ->
+          operation.i = {Data:{t:'o',l:'body',m:{Aliases:{t:'a',m:{n:'Alias'}}}}}
+          params = {Aliases:[]}
+          xml = """
+          <Data xmlns="#{xmlns}">
+            <Aliases/>
+          </Data>
+          """
+          matchXML(buildRequest(params).body, xml)
+
+        it 'serializes lists of structures', ->
+          operation.i =
+            Data:
+              t: 'o'
+              l: 'body'
+              m:
+                Points:
+                  t: 'a'
+                  m:
+                    t: 'o'
+                    n: 'Point'
+                    m:
+                      X: {t:'n'}
+                      Y: {t:'n'}
+          params = {Points:[{X:1.2,Y:2.1},{X:3.4,Y:4.3}]}
+          xml = """
+          <Data xmlns="#{xmlns}">
+            <Points>
+              <Point>
+                <X>1.2</X>
+                <Y>2.1</Y>
+              </Point>
+              <Point>
+                <X>3.4</X>
+                <Y>4.3</Y>
+              </Point>
+            </Points>
+          </Data>
+          """
+          matchXML(buildRequest(params).body, xml)
+
+      describe 'numbers', ->
+
+        it 'integers', ->
+          operation.i = {Data:{t:'o',l:'body',m:{Count:{t:'i'}}}}
+          params = { Count: 123.0 }
+          xml = """
+          <Data xmlns="#{xmlns}">
+            <Count>123</Count>
+          </Data>
+          """
+          matchXML(buildRequest(params).body, xml)
+
+        it 'floats', ->
+          operation.i = {Data:{t:'o',l:'body',m:{Count:{t:'n'}}}}
+          params = { Count: 123.123 }
+          xml = """
+          <Data xmlns="#{xmlns}">
+            <Count>123.123</Count>
+          </Data>
+          """
+          matchXML(buildRequest(params).body, xml)
+
+      describe 'timestamps', ->
+
+        it 'true', ->
+          operation.i = {Data:{t:'o',l:'body',m:{Enabled:{t:'b'}}}}
+          params = { Enabled: true }
+          xml = """
+          <Data xmlns="#{xmlns}">
+            <Enabled>true</Enabled>
+          </Data>
+          """
+          matchXML(buildRequest(params).body, xml)
+
+        it 'false', ->
+          operation.i = {Data:{t:'o',l:'body',m:{Enabled:{t:'b'}}}}
+          params = { Enabled: false }
+          xml = """
+          <Data xmlns="#{xmlns}">
+            <Enabled>false</Enabled>
+          </Data>
+          """
+          matchXML(buildRequest(params).body, xml)
 
       describe 'timestamps', ->
 
@@ -303,6 +311,4 @@ describe 'AWS.RESTXMLService', ->
           </Data>
           """
           matchXML(buildRequest(params).body, xml)
-
-      xit 'serializes structures to the body when no location provided', ->
 
