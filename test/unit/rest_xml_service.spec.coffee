@@ -75,225 +75,96 @@ describe 'AWS.RESTXMLService', ->
 
     describe 'xml bodies', ->
 
-      describe 'structures', ->
-
-        it 'wraps simple structures with location of body', ->
-          operation.i = {n:'Config',m:{Name:{},State:{}}}
-          params = { Name:'abc', State: 'Enabled' }
-          xml = """
-          <Config xmlns="#{xmlns}">
-            <Name>abc</Name>
-            <State>Enabled</State>
-          </Config>
-          """
-          matchXML(buildRequest(params).body, xml)
-
-        it 'orders xml members by the order they appear in the rules', ->
-          operation.i = {n:'Config',m:{Count:{t:'i'},State:{}}}
-          params = { State: 'Disabled', Count: 123 }
-          xml = """
-          <Config xmlns="#{xmlns}">
-            <Count>123</Count>
-            <State>Disabled</State>
-          </Config>
-          """
-          matchXML(buildRequest(params).body, xml)
-
-        it 'can serializes structures into XML', ->
-          operation.i =
-            n: 'Data',
-            m:
-              Name: {}
-              Details:
-                t: 'o'
-                m:
-                  Abc: {}
-                  Xyz: {}
-          params =
-            Details:
-              Xyz: 'xyz'
-              Abc: 'abc'
-            Name: 'john'
-          xml = """
-          <Data xmlns="#{xmlns}">
-            <Name>john</Name>
-            <Details>
-              <Abc>abc</Abc>
-              <Xyz>xyz</Xyz>
-            </Details>
-          </Data>
-          """
-          matchXML(buildRequest(params).body, xml)
-
-        it 'serializes empty structures as empty element', ->
-          operation.i = {n:'Data',m:{Config:{t:'o',m:{Foo:{},Bar:{}}}}}
-          params = { Config: {} }
-          xml = """
-          <Data xmlns="#{xmlns}">
-            <Config/>
-          </Data>
-          """
-          matchXML(buildRequest(params).body, xml)
-
-        it 'does not serialize missing members', ->
-          operation.i = {n:'Data',m:{Config:{t:'o',m:{Foo:{},Bar:{}}}}}
-          params = { Config: { Foo: 'abc' } }
-          xml = """
-          <Data xmlns="#{xmlns}">
-            <Config>
-              <Foo>abc</Foo>
-            </Config>
-          </Data>
-          """
-          matchXML(buildRequest(params).body, xml)
-
-      describe 'lists', ->
-
-        it 'serializes lists (default member names)', ->
-          operation.i = {n:'Data',m:{Aliases:{t:'a',m:{}}}}
-          params = {Aliases:['abc','mno','xyz']}
-          xml = """
-          <Data xmlns="#{xmlns}">
-            <Aliases>
-              <member>abc</member>
-              <member>mno</member>
-              <member>xyz</member>
-            </Aliases>
-          </Data>
-          """
-          matchXML(buildRequest(params).body, xml)
-
-        it 'serializes lists (custom member names)', ->
-          operation.i = {n:'Data',m:{Aliases:{t:'a',m:{n:'Alias'}}}}
-          params = {Aliases:['abc','mno','xyz']}
-          xml = """
-          <Data xmlns="#{xmlns}">
-            <Aliases>
-              <Alias>abc</Alias>
-              <Alias>mno</Alias>
-              <Alias>xyz</Alias>
-            </Aliases>
-          </Data>
-          """
-          matchXML(buildRequest(params).body, xml)
-
-        it 'includes lists elements even if they have no members', ->
-          operation.i = {n:'Data',m:{Aliases:{t:'a',m:{n:'Alias'}}}}
-          params = {Aliases:[]}
-          xml = """
-          <Data xmlns="#{xmlns}">
-            <Aliases/>
-          </Data>
-          """
-          matchXML(buildRequest(params).body, xml)
-
-        it 'serializes lists of structures', ->
-          operation.i =
-            n: 'Data'
-            m:
-              Points:
-                t: 'a'
-                m:
-                  t: 'o'
-                  n: 'Point'
+      it 'populates the body with XML from the params w/out a location', ->
+        operation.u = '/{Bucket}?next-marker={Marker}&limit={Limit}'
+        operation.i =
+          n: 'ComplexRequest', # the root xml element name
+          m:
+            Bucket: # uri path param
+              t: 's'
+              l: 'uri'
+              r: 1
+            Marker: # uri querystring param
+              t: 's'
+              l: 'uri'
+            Limit: # uri querystring integer param
+              t: 'i'
+              l: 'uri'
+            ACL: # header string param
+              t: 's'
+              l: 'header'
+              n: 'x-amz-acl'
+            Metadata: # header map param
+              t: 'm'
+              l: 'header'
+              n: 'x-amz-meta-'
+            Config: # structure of mixed tpyes
+              t: 'o'
+              r: 1
+              m:
+                Abc: {} # string
+                Locations: # array of strings
+                  t: 'a'
                   m:
-                    X: {t:'n'}
-                    Y: {t:'n'}
-          params = {Points:[{X:1.2,Y:2.1},{X:3.4,Y:4.3}]}
-          xml = """
-          <Data xmlns="#{xmlns}">
-            <Points>
-              <Point>
-                <X>1.2</X>
-                <Y>2.1</Y>
-              </Point>
-              <Point>
-                <X>3.4</X>
-                <Y>4.3</Y>
-              </Point>
-            </Points>
-          </Data>
-          """
-          matchXML(buildRequest(params).body, xml)
+                    t: 's'
+                    n: 'Location'
+                Data: # array of structures
+                  t: 'a'
+                  m:
+                    t: 'o'
+                    m:
+                      Foo: {}
+                      Bar: {}
+            Enabled: # boolean
+              t: 'b'
 
-      describe 'numbers', ->
+        params = {
+          Enabled: true
+          ACL: 'canned-acl'
+          Config:
+            Abc: 'abc'
+            Locations: ['a', 'b', 'c']
+            Data: [
+              { Foo:'foo1', Bar:'bar1' },
+              { Foo:'foo2', Bar:'bar2' },
+            ]
+          Bucket: 'bucket-name'
+          Marker: 'marker'
+          Limit: 123
+          Metadata:
+            abc: 'xyz'
+            mno: 'hjk'
+        }
 
-        it 'integers', ->
-          operation.i = {n:'Data',m:{Count:{t:'i'}}}
-          params = { Count: 123.0 }
-          xml = """
-          <Data xmlns="#{xmlns}">
-            <Count>123</Count>
-          </Data>
-          """
-          matchXML(buildRequest(params).body, xml)
+        xml = """
+        <ComplexRequest xmlns="http://mockservice.com/xmlns">
+          <Config>
+            <Abc>abc</Abc>
+            <Locations>
+              <Location>a</Location>
+              <Location>b</Location>
+              <Location>c</Location>
+            </Locations>
+            <Data>
+              <member>
+                <Foo>foo1</Foo>
+                <Bar>bar1</Bar>
+              </member>
+              <member>
+                <Foo>foo2</Foo>
+                <Bar>bar2</Bar>
+              </member>
+            </Data>
+          </Config>
+          <Enabled>true</Enabled>
+        </ComplexRequest>
+        """
 
-        it 'floats', ->
-          operation.i = {n:'Data',m:{Count:{t:'n'}}}
-          params = { Count: 123.123 }
-          xml = """
-          <Data xmlns="#{xmlns}">
-            <Count>123.123</Count>
-          </Data>
-          """
-          matchXML(buildRequest(params).body, xml)
-
-      describe 'timestamps', ->
-
-        it 'true', ->
-          operation.i = {n:'Data',m:{Enabled:{t:'b'}}}
-          params = { Enabled: true }
-          xml = """
-          <Data xmlns="#{xmlns}">
-            <Enabled>true</Enabled>
-          </Data>
-          """
-          matchXML(buildRequest(params).body, xml)
-
-        it 'false', ->
-          operation.i = {n:'Data',m:{Enabled:{t:'b'}}}
-          params = { Enabled: false }
-          xml = """
-          <Data xmlns="#{xmlns}">
-            <Enabled>false</Enabled>
-          </Data>
-          """
-          matchXML(buildRequest(params).body, xml)
-
-      describe 'timestamps', ->
-
-        time = new Date()
-
-        it 'iso8601', ->
-          MockRESTXMLService.prototype.api.timestampFormat = 'iso8601'
-          operation.i = {n:'Data',m:{Expires:{t:'t'}}}
-          params = { Expires: time }
-          xml = """
-          <Data xmlns="#{xmlns}">
-            <Expires>#{AWS.util.date.iso8601(time)}</Expires>
-          </Data>
-          """
-          matchXML(buildRequest(params).body, xml)
-
-        it 'rfc822', ->
-          MockRESTXMLService.prototype.api.timestampFormat = 'rfc822'
-          operation.i = {n:'Data',m:{Expires:{t:'t'}}}
-          params = { Expires: time }
-          xml = """
-          <Data xmlns="#{xmlns}">
-            <Expires>#{AWS.util.date.rfc822(time)}</Expires>
-          </Data>
-          """
-          matchXML(buildRequest(params).body, xml)
-
-        it 'unix timestamp', ->
-          MockRESTXMLService.prototype.api.timestampFormat = 'unixTimestamp'
-          operation.i = {n:'Data',m:{Expires:{t:'t'}}}
-          params = { Expires: time }
-          xml = """
-          <Data xmlns="#{xmlns}">
-            <Expires>#{AWS.util.date.unixTimestamp(time)}</Expires>
-          </Data>
-          """
-          matchXML(buildRequest(params).body, xml)
+        req = buildRequest(params)
+        expect(req.method).toEqual('POST')
+        expect(req.uri).toEqual('/bucket-name?next-marker=marker&limit=123')
+        expect(req.headers['x-amz-acl']).toEqual('canned-acl')
+        expect(req.headers['x-amz-meta-abc']).toEqual('xyz')
+        expect(req.headers['x-amz-meta-mno']).toEqual('hjk')
+        helpers.matchXML(req.body, xml)
 
