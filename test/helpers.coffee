@@ -26,8 +26,19 @@ integration = (reqBuilder, respCallback) ->
   waitsFor -> resp != null
   runs -> respCallback(resp)
 
+flattenXML = (xml) ->
+  if (!xml)
+    return xml
+  xml.split("\n").join('').   # remove newlines
+    replace(/>\s+</g, '><').  # prunes whitespace between elements
+    replace(/^\s+|\s+$/g, '') # trims whitespace from ends
+
+matchXML = (xml1, xml2) ->
+  expect(flattenXML(xml1)).toEqual(flattenXML(xml2))
+
 module.exports =
   AWS: require('../lib/aws')
   sync: sync
   integration: integration
+  matchXML: matchXML
 

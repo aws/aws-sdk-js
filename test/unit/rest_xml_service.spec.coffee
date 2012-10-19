@@ -11,7 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-AWS = require('../../lib/core')
+helpers = require('../helpers'); AWS = helpers.AWS
 require('../../lib/rest_xml_service')
 
 describe 'AWS.RESTXMLService', ->
@@ -74,17 +74,6 @@ describe 'AWS.RESTXMLService', ->
         expect(buildRequest(params).body).toEqual('abc')
 
     describe 'xml bodies', ->
-
-      flattenXML = (xml) ->
-        if (!xml)
-          return xml
-        xml.split("\n").join('').   # remove newlines
-          replace(/>\s+</g, '><').  # prunes whitespace between elements
-          replace(/^\s+|\s+$/g, '') # trims whitespace from ends
-
-      # Compares to XMl strings by flattening them and removing whitespace first.
-      matchXML = (xml1, xml2) ->
-        expect(flattenXML(xml1)).toEqual(flattenXML(xml2))
 
       describe 'structures', ->
 
