@@ -73,7 +73,7 @@ describe 'AWS.util.crypto', ->
       expect(expected).toEqual(result)
 
     it 'accepts the cytpo function as an argument', ->
-      r = util.crypto.hmac('secret', 'the quick brown fox', 'base64', 'sha1');
+      r = util.hmac('secret', 'the quick brown fox', 'base64', 'sha1')
       expect(r).toEqual('z1BzGT+uG/2qGzE1UHb5m/skn1E=')
 
   describe 'sha256', ->
