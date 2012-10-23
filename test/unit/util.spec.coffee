@@ -13,7 +13,36 @@
 
 AWS = require('../../lib/core')
 
+describe 'uriEscape', ->
+
+  e = AWS.util.uriEscape
+
+  it 'escapes spaces as %20', ->
+    expect(e('a b')).toEqual('a%20b')
+
+  it 'escapes + as %2B', ->
+    expect(e('a+b')).toEqual('a%2Bb')
+
+  it 'escapes / as %2F', ->
+    expect(e('a/b')).toEqual('a%2Fb')
+
+  it 'does not escape ~', ->
+    expect(e('a~b')).toEqual('a~b')
+
+describe 'uriEscapePath', ->
+
+  e = AWS.util.uriEscapePath
+
+  it 'does not escape forward slashes', ->
+    s = 'a&b/x=y/1+2/m?n'
+    expect(e(s)).toEqual('a%26b/x%3Dy/1%2B2/m%3Fn')
+
+  it 'leaves leading and trailing forward slashes in place', ->
+    s = '/ab cd/'
+    expect(e(s)).toEqual('/ab%20cd/')
+
 describe 'AWS.util.date', ->
+
   util = AWS.util.date
 
   describe 'getDate', ->
@@ -53,6 +82,7 @@ describe 'AWS.util.date', ->
 
 
 describe 'AWS.util.crypto', ->
+
   util = AWS.util.crypto
 
   describe 'toHex', ->
