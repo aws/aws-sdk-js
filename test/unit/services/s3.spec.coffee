@@ -65,6 +65,12 @@ describe 'AWS.S3', ->
             expect(req.endpoint.host).toEqual('s3.amazonaws.com')
             expect(req.uri).toEqual('/bucket.name')
 
+          it 'puts dns-compat bucket names in path if configured to do so', ->
+            s3 = new AWS.S3({ useSSL: true, s3ForcePathStyle: true })
+            req = s3.buildRequest('listObjects', {Bucket:'bucket-name'})
+            expect(req.endpoint.host).toEqual('s3.amazonaws.com')
+            expect(req.uri).toEqual('/bucket-name')
+
           it 'puts dns-incompat bucket names in path', ->
             req = s3.buildRequest('listObjects', {Bucket:'bucket_name'})
             expect(req.endpoint.host).toEqual('s3.amazonaws.com')
