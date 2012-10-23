@@ -71,6 +71,19 @@ describe 'AWS.S3', ->
 
     describe 'buildRequest', ->
 
+      describe 'uri escaped params', ->
+
+        it 'uri-escapes path and querystring params', ->
+          # bucket param ends up as part of the host
+          params = { Bucket: 'bucket', Key: 'a b c', VersionId: 'a&b' }
+          req = s3.buildRequest('headObject', params)
+          expect(req.uri).toEqual('/a%20b%20c?versionId=a%26b')
+
+        it 'does not uri-escape forward slashes in the path', ->
+          params = { Bucket: 'bucket', Key: 'k e/y' }
+          req = s3.buildRequest('headObject', params)
+          expect(req.uri).toEqual('/k%20e/y')
+
       describe 'vitual-hosted vs path-style bucket requests', ->
 
         describe 'HTTPS', ->
