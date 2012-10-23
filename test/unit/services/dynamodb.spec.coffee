@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 AWS = require('../../../lib/core')
-require('../../../lib/services/dynamodb');
+require('../../../lib/services/dynamodb')
 
 describe 'AWS.DynamoDB', ->
 

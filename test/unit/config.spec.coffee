@@ -78,3 +78,8 @@ describe 'AWS.Config', ->
       expect(config.credentials.secretAccessKey).toEqual('secret')
       expect(config.credentials.sessionToken).toEqual('session')
 
+    it 'defaults credentials to undefined when not passed', ->
+      config = configure()
+      expect(config.credentials.accessKeyId).toBe(undefined)
+      expect(config.credentials.secretAccessKey).toBe(undefined)
+      expect(config.credentials.sessionToken).toBe(undefined)
