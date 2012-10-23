@@ -26,6 +26,35 @@ describe 'AWS.S3', ->
 
     describe 'dnsCompatibleBucketName', ->
 
+      it 'must be at least 3 characters', ->
+        expect(s3.dnsCompatibleBucketName('aa')).toBe(false)
+
+      it 'must not be longer than 63 characters', ->
+        b = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+        expect(s3.dnsCompatibleBucketName(b)).toBe(false)
+
+      it 'must start with a lower-cased letter or number', ->
+        expect(s3.dnsCompatibleBucketName('Abc')).toBe(false)
+        expect(s3.dnsCompatibleBucketName('-bc')).toBe(false)
+        expect(s3.dnsCompatibleBucketName('abc')).toBe(true)
+
+      it 'must end with a lower-cased letter or number', ->
+        expect(s3.dnsCompatibleBucketName('abC')).toBe(false)
+        expect(s3.dnsCompatibleBucketName('ab-')).toBe(false)
+        expect(s3.dnsCompatibleBucketName('abc')).toBe(true)
+
+      it 'may not contain multiple contiguous dots', ->
+        expect(s3.dnsCompatibleBucketName('abc.123')).toBe(true)
+        expect(s3.dnsCompatibleBucketName('abc..123')).toBe(false)
+
+      it 'may only contain letters numbers and dots', ->
+        expect(s3.dnsCompatibleBucketName('abc123')).toBe(true)
+        expect(s3.dnsCompatibleBucketName('abc_123')).toBe(false)
+
+      it 'must not look like an ip address', ->
+        expect(s3.dnsCompatibleBucketName('1.2.3.4')).toBe(false)
+        expect(s3.dnsCompatibleBucketName('a.b.c.d')).toBe(true)
+
     describe 'endpoint', ->
 
       it 'sets host to s3.amazonaws.com when region is un-specified', ->
