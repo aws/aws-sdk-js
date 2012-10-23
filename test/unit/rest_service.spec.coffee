@@ -89,6 +89,12 @@ describe 'AWS.RESTService', ->
         params = { Abc:'abc', Xyz:'xyz', Bar:'bar' } # omitted Foo
         expect(buildRequest(params).uri).toEqual('/abc/xyz?bar=bar')
 
+      it 'uri escapes params in both path and querystring', ->
+        operation.u = '/{Path}?query={Query}'
+        operation.i = {m:{Path:{l:'uri'},Query:{l:'uri'}}}
+        params = { Path:'a b', Query:'a/b' }
+        expect(buildRequest(params).uri).toEqual('/a%20b?query=a%2Fb')
+
     describe 'headers', ->
 
       it 'populates default headers', ->
