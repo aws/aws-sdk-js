@@ -146,6 +146,41 @@ describe 'AWS.S3', ->
           expect(req.endpoint.host).toEqual('s3.amazonaws.com')
           expect(req.uri).toEqual('/bucket_name')
 
+  # S3 returns a handful of errors without xml bodies (to match the http spec)
+  # these tests ensure we give meaningful codes/messages for these.
+  describe 'errors with no XML body', ->
+
+    extractError = (resp) ->
+      s3.extractError(resp)
+
+    it 'handles 304 errors', ->
+      resp = new AWS.HttpResponse()
+      resp.statusCode = 304
+      error = extractError(resp)
+      expect(error.code).toEqual('NotModified')
+      expect(error.message).toEqual(304)
+
+    it 'handles 403 errors', ->
+      resp = new AWS.HttpResponse()
+      resp.statusCode = 403
+      error = extractError(resp)
+      expect(error.code).toEqual('Forbidden')
+      expect(error.message).toEqual(403)
+
+    it 'handles 404 errors', ->
+      resp = new AWS.HttpResponse()
+      resp.statusCode = 404
+      error = extractError(resp)
+      expect(error.code).toEqual('NoSuchKey')
+      expect(error.message).toEqual(404)
+
+    it 'misc errors not known to return an empty body', ->
+      resp = new AWS.HttpResponse()
+      resp.statusCode = 412 # made up
+      error = extractError(resp)
+      expect(error.code).toEqual(412)
+      expect(error.message).toEqual(null)
+
   # tests from this point on are "special cases" for specific aws operations
 
   describe 'completeMultipartUpload', ->
