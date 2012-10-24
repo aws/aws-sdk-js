@@ -146,9 +146,61 @@ describe 'AWS.S3', ->
           expect(req.endpoint.host).toEqual('s3.amazonaws.com')
           expect(req.uri).toEqual('/bucket_name')
 
-  describe 'getBucketLocation', ->
+  # tests from this point on are "special cases" for specific aws operations
 
-    s3 = new AWS.S3()
+  describe 'completeMultipartUpload', ->
+
+    it 'returns data when the resp is 200 with valid response', ->
+      resp =
+        statusCode: 200
+        headers:
+          'x-amz-id-2': 'Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg=='
+          'x-amz-request-id': '656c76696e6727732072657175657374'
+        body: """
+        <?xml version="1.0" encoding="UTF-8"?>
+        <CompleteMultipartUploadResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+          <Location>http://Example-Bucket.s3.amazonaws.com/Example-Object</Location>
+          <Bucket>Example-Bucket</Bucket>
+          <Key>Example-Object</Key>
+          <ETag>"3858f62230ac3c915f300c664312c11f-9"</ETag>
+        </CompleteMultipartUploadResult>
+        """
+      s3.parseResponse resp, 'completeMultipartUpload', (error, data) ->
+        expect(error).toBe(null)
+        expect(data).toEqual({
+          Location: 'http://Example-Bucket.s3.amazonaws.com/Example-Object'
+          Bucket: 'Example-Bucket'
+          Key: 'Example-Object'
+          ETag: '"3858f62230ac3c915f300c664312c11f-9"'
+        })
+
+    it 'returns an error when the resp is 200 with an error xml document', ->
+      resp =
+        statusCode: 200
+        headers: {}
+        body: """
+          <?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+          <Error>
+            <Code>InternalError</Code>
+            <Message>We encountered an internal error. Please try again.</Message>
+            <RequestId>656c76696e6727732072657175657374</RequestId>
+            <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>
+          </Error>
+        """
+      s3.parseResponse resp, 'completeMultipartUpload', (error, data) ->
+        expect(error).toEqual({
+          code: 'InternalError',
+          message: 'We encountered an internal error. Please try again.',
+          statusCode: 200,
+          retryable: true
+        })
+        expect(data).toEqual(null)
+
+  describe 'getBucketLocation', ->
 
     it 'returns null for the location constraint when not present', ->
       resp =
