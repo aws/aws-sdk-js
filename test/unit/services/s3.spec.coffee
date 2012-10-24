@@ -84,6 +84,16 @@ describe 'AWS.S3', ->
           req = s3.buildRequest('headObject', params)
           expect(req.uri).toEqual('/k%20e/y')
 
+        it 'ensures a single forward slash exists', ->
+
+          req = s3.buildRequest('listObjects', { Bucket: 'bucket' })
+          expect(req.uri).toEqual('/')
+
+          req = s3.buildRequest('listObjects', { Bucket: 'bucket', MaxKeys:123 })
+          expect(req.uri).toEqual('/?max-keys=123')
+
+        it 'ensures a single forward slash exists when querystring is present', ->
+
       describe 'vitual-hosted vs path-style bucket requests', ->
 
         describe 'HTTPS', ->
