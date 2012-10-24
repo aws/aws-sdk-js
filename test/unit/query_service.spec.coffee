@@ -61,13 +61,11 @@ describe 'AWS.QueryService', ->
 
   describe 'parseResponse', ->
 
+    resp = new AWS.HttpResponse()
+
     parse = (callback) ->
       svc.parseResponse resp, 'operationName', (error,data) ->
         callback.call(this, error, data)
-
-    resp = new AWS.HttpResponse()
-    resp.headers = {}
-
 
     describe 'with data', ->
 
@@ -92,25 +90,20 @@ describe 'AWS.QueryService', ->
       beforeEach ->
         resp.statusCode = 400
         resp.body = """
-        <Response>
-          <Errors>
-            <Error>
-              <Code>InvalidInstanceID.Malformed</Code>
-              <Message>Invalid id: "i-12345678"</Message>
-            </Error>
-          </Errors>
-          <RequestID>ab123mno-6432-dceb-asdf-123mno543123</RequestID>
-        </Response>
+        <Error>
+          <Code>InvalidArgument</Code>
+          <Message>Provided param is bad</Message>
+        </Error>
         """
 
       it 'extracts the error code', ->
         parse (error, data) ->
-          expect(error.code).toEqual('InvalidInstanceID.Malformed')
+          expect(error.code).toEqual('InvalidArgument')
           expect(data).toEqual(null)
 
       it 'extracts the error message', ->
         parse (error, data) ->
-          expect(error.message).toEqual('Invalid id: "i-12345678"')
+          expect(error.message).toEqual('Provided param is bad')
           expect(data).toEqual(null)
 
       it 'returns an empty error when the body is blank', ->

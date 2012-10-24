@@ -168,22 +168,62 @@ describe 'AWS.RESTXMLService', ->
         expect(req.headers['x-amz-meta-mno']).toEqual('hjk')
         helpers.matchXML(req.body, xml)
 
-  describe 'extractData', ->
+  describe 'parseResponse', ->
 
-    extractData = (resp) ->
-      svc.extractData(resp, 'sampleOperation')
+    resp = null
 
-    it 'xml parses the body', ->
-      operation.o = {Foo:{},Bar:{t:'a',m:{n:'Item'}}}
+    beforeEach ->
       resp = new AWS.HttpResponse()
-      resp.body = """
-      <xml>
-        <Foo>foo</Foo>
-        <Bar>
-          <Item>a</Item>
-          <Item>b</Item>
-          <Item>c</Item>
-        </Bar>
-      </xml>
-      """
-      expect(extractData(resp)).toEqual({Foo:'foo', Bar:['a', 'b', 'c']})
+
+    parse = (callback) ->
+      svc.parseResponse resp, 'sampleOperation', (error,data) ->
+        callback.call(this, error, data)
+
+    describe 'with data', ->
+
+      extractData = (resp) ->
+        svc.extractData(resp, 'sampleOperation')
+
+      it 'parses the xml body', ->
+        operation.o = {Foo:{},Bar:{t:'a',m:{n:'Item'}}}
+        resp = new AWS.HttpResponse()
+        resp.status = 200
+        resp.body = """
+        <xml>
+          <Foo>foo</Foo>
+          <Bar>
+            <Item>a</Item>
+            <Item>b</Item>
+            <Item>c</Item>
+          </Bar>
+        </xml>
+        """
+        expect(extractData(resp)).toEqual({Foo:'foo', Bar:['a', 'b', 'c']})
+
+    describe 'with error', ->
+
+      beforeEach ->
+        resp.statusCode = 400
+        resp.body = """
+        <Error>
+          <Code>InvalidArgument</Code>
+          <Message>Provided param is bad</Message>
+        </Error>
+        """
+
+      it 'extracts the error code', ->
+        parse (error, data) ->
+          expect(error.code).toEqual('InvalidArgument')
+          expect(data).toEqual(null)
+
+      it 'extracts the error message', ->
+        parse (error, data) ->
+          expect(error.message).toEqual('Provided param is bad')
+          expect(data).toEqual(null)
+
+      it 'returns an empty error when the body is blank', ->
+        resp.body = ''
+        parse (error, data) ->
+          expect(error.code).toEqual(400)
+          expect(error.message).toEqual(null)
+          expect(data).toEqual(null)
