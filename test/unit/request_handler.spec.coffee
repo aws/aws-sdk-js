@@ -158,4 +158,3 @@ describe 'AWS.Service', ->
       expect(handler.retryRequest).not.toHaveBeenCalled()
       expect(request.notifyFail).toHaveBeenCalledWith(error)
       expect(request.notifyDone).not.toHaveBeenCalled()
-
