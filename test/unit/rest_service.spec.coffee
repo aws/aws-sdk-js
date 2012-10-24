@@ -118,3 +118,39 @@ describe 'AWS.RESTService', ->
 
   describe 'extractData', ->
 
+    extractData = (resp) ->
+      svc.extractData(resp, 'sampleOperation')
+
+    describe 'headers', ->
+
+      it 'extracts header values', ->
+        operation.o = {ContentType:{t:'s',l:'header',n:'content-type'}}
+        resp = new AWS.HttpResponse()
+        resp.headers['content-type'] = 'text/plain'
+        expect(extractData(resp).ContentType).toEqual('text/plain')
+
+      it 'extracts headers when the rule name is camel-cased', ->
+        operation.o = {ContentType:{t:'s',l:'header',n:'Content-Type'}}
+        resp = new AWS.HttpResponse()
+        resp.headers['content-type'] = 'text/plain'
+        expect(extractData(resp).ContentType).toEqual('text/plain')
+
+      it 'extracts headers when the header name is camel-cased', ->
+        operation.o = {ContentType:{t:'s',l:'header',n:'content-type'}}
+        resp = new AWS.HttpResponse()
+        resp.headers['Content-Type'] = 'text/plain'
+        expect(extractData(resp).ContentType).toEqual('text/plain')
+
+    describe 'status code', ->
+
+      it 'extracts the http status when instructed to', ->
+        operation.o = {Result:{t:'i',l:'status'}}
+        resp = new AWS.HttpResponse()
+        resp.statusCode = 200
+        expect(extractData(resp).Result).toEqual(200)
+
+      it 'casts string status codes to integers', ->
+        operation.o = {Result:{t:'i',l:'status'}}
+        resp = new AWS.HttpResponse()
+        resp.statusCode = '202'
+        expect(extractData(resp).Result).toEqual(202)

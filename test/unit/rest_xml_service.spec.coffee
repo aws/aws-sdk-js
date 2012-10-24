@@ -168,3 +168,22 @@ describe 'AWS.RESTXMLService', ->
         expect(req.headers['x-amz-meta-mno']).toEqual('hjk')
         helpers.matchXML(req.body, xml)
 
+  describe 'extractData', ->
+
+    extractData = (resp) ->
+      svc.extractData(resp, 'sampleOperation')
+
+    it 'xml parses the body', ->
+      operation.o = {Foo:{},Bar:{t:'a',m:{n:'Item'}}}
+      resp = new AWS.HttpResponse()
+      resp.body = """
+      <xml>
+        <Foo>foo</Foo>
+        <Bar>
+          <Item>a</Item>
+          <Item>b</Item>
+          <Item>c</Item>
+        </Bar>
+      </xml>
+      """
+      expect(extractData(resp)).toEqual({Foo:'foo', Bar:['a', 'b', 'c']})

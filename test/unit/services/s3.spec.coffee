@@ -148,3 +148,26 @@ describe 'AWS.S3', ->
             expect(req.endpoint.host).toEqual('s3.amazonaws.com')
             expect(req.uri).toEqual('/bucket_name')
 
+  describe 'getBucketLocation', ->
+
+    s3 = new AWS.S3()
+
+    it 'returns null for the location constraint when not present', ->
+      resp =
+        statusCode: 200
+        headers: {}
+        body: '<?xml version="1.0" encoding="UTF-8"?>\n<LocationConstraint xmlns="http://s3.amazonaws.com/doc/2006-03-01/"/>'
+      s3.parseResponse resp, 'getBucketLocation', (error, data) ->
+        expect(error).toBe(null)
+        expect(data).toEqual({})
+
+
+    xit 'parses the location constraint from the root xml', ->
+      this.pending()
+      resp =
+        statusCode: 200
+        headers: {}
+        body: '<?xml version="1.0" encoding="UTF-8"?>\n<LocationConstraint xmlns="http://s3.amazonaws.com/doc/2006-03-01/">EU</LocationConstraint>'
+      s3.parseResponse resp, 'getBucketLocation', (error, data) ->
+        expect(error).toBe(null)
+        expect(data.LocationConstraint).toEqual('EU')
