@@ -246,8 +246,7 @@ describe 'AWS.S3', ->
         expect(error).toBe(null)
         expect(data).toEqual({})
 
-    xit 'parses the location constraint from the root xml', ->
-      this.pending()
+    it 'parses the location constraint from the root xml', ->
       resp =
         statusCode: 200
         headers: {}
