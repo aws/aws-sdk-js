@@ -115,3 +115,6 @@ describe 'AWS.RESTService', ->
         headers = buildRequest(params).headers
         expect(headers['x-amz-meta-foo']).toEqual('bar')
         expect(headers['x-amz-meta-abc']).toEqual('xyz')
+
+  describe 'extractData', ->
+
