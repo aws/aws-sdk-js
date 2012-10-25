@@ -207,6 +207,7 @@ describe 'AWS.S3', ->
           Bucket: 'Example-Bucket'
           Key: 'Example-Object'
           ETag: '"3858f62230ac3c915f300c664312c11f-9"'
+          RequestId: '656c76696e6727732072657175657374'
         })
 
     it 'returns an error when the resp is 200 with an error xml document', ->
