@@ -16,7 +16,10 @@ require('../../../lib/services/s3')
 
 describe 'AWS.S3', ->
 
-  s3 = new AWS.S3()
+  s3 = null
+
+  beforeEach ->
+    s3 = new AWS.S3()
 
   describe 'dnsCompatibleBucketName', ->
 
@@ -68,6 +71,14 @@ describe 'AWS.S3', ->
     it 'returns a http request object', ->
       req = s3.buildRequest('listBuckets')
       expect(req.constructor).toEqual(AWS.HttpRequest)
+
+    it 'obeys the configuration for s3ForcePathStyle', ->
+      config = new AWS.Config({s3ForcePathStyle: true })
+      s3 = new AWS.S3(config)
+      expect(s3.config.s3ForcePathStyle).toEqual(true)
+      req = s3.buildRequest('headObject', {Bucket:'bucket', Key:'key'})
+      expect(req.endpoint.host).toEqual('s3.amazonaws.com')
+      expect(req.uri).toEqual('/bucket/key')
 
     describe 'uri escaped params', ->
 
@@ -250,8 +261,11 @@ describe 'AWS.S3', ->
     it 'parses the location constraint from the root xml', ->
       resp =
         statusCode: 200
-        headers: {}
+        headers: { 'x-amz-request-id': 'abcxyz' }
         body: '<?xml version="1.0" encoding="UTF-8"?>\n<LocationConstraint xmlns="http://s3.amazonaws.com/doc/2006-03-01/">EU</LocationConstraint>'
       s3.parseResponse resp, 'getBucketLocation', (error, data) ->
         expect(error).toBe(null)
-        expect(data.LocationConstraint).toEqual('EU')
+        expect(data).toEqual({
+          LocationConstraint: 'EU',
+          RequestId: 'abcxyz',
+        })
