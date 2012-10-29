@@ -22,6 +22,9 @@
     },
     "dependencies": {
       "xml2js": "*",
+      "xmlbuilder": "*"
+    },
+    "optionalDependencies": {
       "libxmljs": "*"
     },
     "main": "lib/aws.js",
