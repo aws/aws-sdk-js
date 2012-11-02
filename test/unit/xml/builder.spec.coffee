@@ -11,19 +11,18 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-helpers = require('../helpers')
+helpers = require('../../helpers')
 AWS = helpers.AWS
 matchXML = helpers.matchXML
-require('../../lib/xml/builder')
 
-describe 'AWS.XMLBuilder', ->
+describe 'AWS.XML.Builder', ->
 
   xmlns = 'http://mockservice.com/xmlns'
 
   toXML = (rules, params, options) ->
     options = {} if (!options)
     options.xmlNamespace = xmlns
-    builder = new AWS.XMLBuilder('Data', rules, options)
+    builder = new AWS.XML.Builder('Data', rules, options)
     builder.toXML(params)
 
   describe 'toXML', ->

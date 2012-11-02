@@ -11,12 +11,12 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-helpers = require('../helpers'); AWS = helpers.AWS
+helpers = require('../../helpers'); AWS = helpers.AWS
 
-describe 'AWS.XMLParser', ->
+describe 'AWS.XML.Parser', ->
 
   parse = (xml, rules, callback) ->
-    callback.call(this, new AWS.XMLParser(rules).parse(xml))
+    callback.call(this, new AWS.XML.Parser(rules).parse(xml))
 
   describe 'default behavior', ->
 
@@ -243,8 +243,8 @@ describe 'AWS.XMLParser', ->
       timestamp = 'bad-date-format'
       xml = "<xml><CreatedAt>#{timestamp}</CreatedAt></xml>"
       message = 'unhandled timestamp format: ' + timestamp
-      error = { code: 'AWS.XMLParser.Error', message: message }
-      expect(-> new AWS.XMLParser(rules).parse(xml)).toThrow(error)
+      error = { code: 'AWS.XML.Parser.Error', message: message }
+      expect(-> new AWS.XML.Parser(rules).parse(xml)).toThrow(error)
 
   describe 'numbers', ->
 
@@ -299,6 +299,6 @@ describe 'AWS.XMLParser', ->
       Column: 1
       Char: a
       """
-      error = { code: 'AWS.XMLParser.Error', message: message }
-      expect(-> new AWS.XMLParser(rules).parse(xml)).toThrow(error)
+      error = { code: 'AWS.XML.Parser.Error', message: message }
+      expect(-> new AWS.XML.Parser(rules).parse(xml)).toThrow(error)
 
