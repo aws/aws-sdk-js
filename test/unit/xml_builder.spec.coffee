@@ -14,7 +14,7 @@
 helpers = require('../helpers')
 AWS = helpers.AWS
 matchXML = helpers.matchXML
-require('../../lib/xml_builder')
+require('../../lib/xml/builder')
 
 describe 'AWS.XMLBuilder', ->
 
