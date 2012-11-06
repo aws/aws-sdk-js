@@ -43,17 +43,10 @@ describe 'AWS.Config', ->
     it 'can be set to false', ->
       expect(configure(useSSL: false).useSSL).toEqual(false)
 
-  describe 'debug', ->
-    it 'defaults to false', ->
-      expect(configure().debug).toEqual(false)
-    it 'can be set to true', ->
-      expect(configure(debug: true).debug).toEqual(true)
-
   describe 'default', ->
     it 'should have a default Config object', ->
       expect(AWS.configuration.useSSL).toEqual(true)
       expect(AWS.configuration.maxRetries).toEqual(undefined)
-      expect(AWS.configuration.debug).toEqual(false)
 
     it 'can set default config to an object literal', ->
 
