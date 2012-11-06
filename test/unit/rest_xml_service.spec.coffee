@@ -168,6 +168,14 @@ describe 'AWS.RESTXMLService', ->
         expect(req.headers['x-amz-meta-mno']).toEqual('hjk')
         helpers.matchXML(req.body, xml)
 
+      it 'omits the body xml when body params are not present', ->
+        operation.u = '/{Bucket}'
+        operation.i = {n:'CreateBucketConfig', m:{Bucket:{l:'uri',r:1},Config:{}}}
+        params = { Bucket:'abc' } # omitting Config purposefully
+        req = buildRequest(params)
+        expect(req.body).toEqual(null)
+        expect(req.uri).toEqual('/abc')
+
   describe 'parseResponse', ->
 
     resp = null
