@@ -14,18 +14,19 @@
     ],
     "devDependencies": {
       "yuidocjs": "*",
-      "jasmine-node": "*",
-      "coffee-script": "*",
-      "visionmedia-jscoverage": "*",
-      "node-ffi": "*",
-      "jshint": "*"
+      "jasmine-node": "latest",
+      "coffee-script": "latest",
+      "visionmedia-jscoverage": "latest",
+      "node-ffi": "latest",
+      "jshint": "latest",
+      "cucumber": "latest"
     },
     "dependencies": {
-      "xml2js": "*",
-      "xmlbuilder": "*"
+      "xml2js": "latest",
+      "xmlbuilder": "latest"
     },
     "optionalDependencies": {
-      "libxmljs": "*"
+      "libxmljs": "latest"
     },
     "main": "lib/aws.js",
     "directories":  {
