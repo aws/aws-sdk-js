@@ -11,14 +11,6 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-sync = (code, finished) ->
-  resp = null
-  runs ->
-    code() ->
-      resp = arguments
-  waitsFor -> resp != null
-  runs -> finished(resp)
-
 integration = (reqBuilder, respCallback) ->
   req = reqBuilder()
   resp = null
@@ -38,7 +30,6 @@ matchXML = (xml1, xml2) ->
 
 module.exports =
   AWS: require('../lib/aws')
-  sync: sync
   integration: integration
   matchXML: matchXML
 
