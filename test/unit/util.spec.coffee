@@ -216,3 +216,11 @@ describe 'AWS.util.inherit', ->
     expect(derived.other).toEqual('other')
     expect(derived.defaultValue).toEqual(10)
     expect(derived.foo()).toEqual('bar')
+
+describe 'AWS.util.isEmpty', ->
+
+  it 'returns true when passed an empty object literal', ->
+    expect(AWS.util.isEmpty({})).toEqual(true)
+
+  it 'returns true when passed a non-empty object literal', ->
+    expect(AWS.util.isEmpty({a:1})).toEqual(false)
