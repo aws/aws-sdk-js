@@ -66,6 +66,10 @@ describe 'AWS.S3', ->
       s3 = new AWS.S3({ region: 'us-east-1' })
       expect(s3.endpoint.region).toEqual('us-east-1')
 
+    it 'combines the region with s3 in the endpoint using a - instead of .', ->
+      s3 = new AWS.S3({ region: 'us-west-1' })
+      expect(s3.endpoint.host).toEqual('s3-us-west-1.amazonaws.com')
+
   describe 'buildRequest', ->
 
     it 'returns a http request object', ->
