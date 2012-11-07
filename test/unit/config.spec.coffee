@@ -13,9 +13,9 @@
 
 AWS = require('../../lib/core')
 
-describe 'AWS.Config', ->
+configure = (options) -> new AWS.Config(options)
 
-  configure = (options) -> new AWS.Config(options)
+describe 'AWS.Config', ->
 
   describe 'constructor', ->
     it 'should be able to pass in a Config object as parameter', ->
@@ -49,30 +49,6 @@ describe 'AWS.Config', ->
       expect(AWS.configuration.maxRetries).toEqual(undefined)
 
     it 'can set default config to an object literal', ->
+      AWS.configuration = {}
+      expect(AWS.configuration).toEqual({})
 
-  describe 'Credentials', ->
-    it 'should allow setting of credentials with keys', ->
-      config = configure(
-        accessKeyId: 'akid'
-        secretAccessKey: 'secret'
-        sessionToken: 'session'
-      )
-      expect(config.credentials.accessKeyId).toEqual('akid')
-      expect(config.credentials.secretAccessKey).toEqual('secret')
-      expect(config.credentials.sessionToken).toEqual('session')
-
-    it 'should allow setting of credentials as object', ->
-      creds =
-        accessKeyId: 'akid'
-        secretAccessKey: 'secret'
-        sessionToken: 'session'
-      config = configure({credentials: new AWS.Credentials(creds)})
-      expect(config.credentials.accessKeyId).toEqual('akid')
-      expect(config.credentials.secretAccessKey).toEqual('secret')
-      expect(config.credentials.sessionToken).toEqual('session')
-
-    it 'defaults credentials to undefined when not passed', ->
-      config = configure()
-      expect(config.credentials.accessKeyId).toBe(undefined)
-      expect(config.credentials.secretAccessKey).toBe(undefined)
-      expect(config.credentials.sessionToken).toBe(undefined)

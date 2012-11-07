@@ -102,7 +102,7 @@ describe 'AWS.util.crypto', ->
       expected = util.hmac(key, input, 'hex')
       expect(expected).toEqual(result)
 
-    it 'accepts the cytpo function as an argument', ->
+    it 'accepts the crypto function as an argument', ->
       r = util.hmac('secret', 'the quick brown fox', 'base64', 'sha1')
       expect(r).toEqual('z1BzGT+uG/2qGzE1UHb5m/skn1E=')
 
@@ -147,6 +147,14 @@ describe 'AWS.util.each', ->
       AWS.util.each.apply this, [[1, 2, 3], ->
         expect(this).toBe(self)]
 
+  it 'can abort out of loop', ->
+    string = ''
+    AWS.util.each {a: 1, b: 2, c: 3}, (key, item) ->
+      return AWS.util.abort if item == 2
+      string += key
+
+    expect(string).toEqual('a')
+
 describe 'AWS.util.arrayEach', ->
   it 'should iterate over arrays', ->
     total = 0
@@ -160,6 +168,14 @@ describe 'AWS.util.arrayEach', ->
       expect(typeof(idx)).toEqual('number')
       expect(lastIndex).toEqual(idx - 1) if lastIndex != null
       lastIndex = idx
+
+  it 'can abort out of loop', ->
+    total = 0
+    AWS.util.arrayEach [1, 2, 3], (item, idx) ->
+      return AWS.util.abort if idx == 1
+      total += item
+
+    expect(total).toEqual(1)
 
 describe 'AWS.util.copy', ->
   it 'should perform a shallow copy of an object', ->

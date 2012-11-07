@@ -14,6 +14,10 @@
 helpers = require('../helpers'); 
 
 AWS = helpers.AWS
-AWS.configuration = new AWS.FileSystemConfig(__dirname + '/../../configuration')
+
+configFile = __dirname + '/../../configuration'
+creds = new AWS.FileSystemCredentials(configFile)
+AWS.configuration = new AWS.FileSystemConfig(configFile)
+AWS.configuration.credentials = new AWS.DefaultCredentials(creds)
 
 module.exports = helpers
