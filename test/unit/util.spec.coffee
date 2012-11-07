@@ -102,7 +102,7 @@ describe 'AWS.util.crypto', ->
       expected = util.hmac(key, input, 'hex')
       expect(expected).toEqual(result)
 
-    it 'accepts the cytpo function as an argument', ->
+    it 'accepts the crypto function as an argument', ->
       r = util.hmac('secret', 'the quick brown fox', 'base64', 'sha1')
       expect(r).toEqual('z1BzGT+uG/2qGzE1UHb5m/skn1E=')
 
