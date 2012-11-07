@@ -74,4 +74,4 @@ describe 'AWS.AWSRequest', ->
       sharedBehaviour('always', 'notifyDone')
 
     describe 'with notifyFail', ->
-    sharedBehaviour('always', 'notifyFail')
+      sharedBehaviour('always', 'notifyFail')
