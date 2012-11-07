@@ -32,18 +32,17 @@ describe 'AWS.Credentials', ->
       accessKeyId: 'akid'
       secretAccessKey: 'secret'
       sessionToken: 'session'
-    config = new AWS.Config(credentials: new AWS.Credentials(creds))
-    validateCredentials(config.credentials)
+    validateCredentials(new AWS.Credentials(creds))
 
   it 'defaults credentials to undefined when not passed', ->
-    config = new AWS.Config()
-    expect(config.credentials.accessKeyId).toBe(undefined)
-    expect(config.credentials.secretAccessKey).toBe(undefined)
-    expect(config.credentials.sessionToken).toBe(undefined)
+    creds = new AWS.Credentials()
+    expect(creds.accessKeyId).toBe(undefined)
+    expect(creds.secretAccessKey).toBe(undefined)
+    expect(creds.sessionToken).toBe(undefined)
 
 describe 'AWS.EnvironmentCredentials', ->
   beforeEach ->
-    spyOn(process, 'env')
+    process.env = {}
 
   describe 'constructor', ->
     it 'should be able to read credentials from env with a prefix', ->
@@ -72,7 +71,7 @@ describe 'AWS.EnvironmentCredentials', ->
 
 describe 'AWS.DefaultCredentials', ->
   beforeEach ->
-    spyOn(process, 'env')
+    process.env = {}
 
   describe 'constructor', ->
     it 'should search AWS_ prefix first', ->
@@ -89,6 +88,19 @@ describe 'AWS.DefaultCredentials', ->
     it 'should not set credentials if no environment set', ->
       creds = new AWS.DefaultCredentials()
       expect(creds.accessKeyId).toBe(undefined)
+
+    it 'can take extra providers as objects', ->
+      creds = new AWS.DefaultCredentials([accessKeyId: 'SET'])
+      expect(creds.accessKeyId).toEqual('SET')
+
+    it 'can take extra providers as functions', ->
+      creds = new AWS.DefaultCredentials([-> return {accessKeyId: 'SET'}])
+      expect(creds.accessKeyId).toEqual('SET')
+
+    it 'can override default providers', ->
+      creds = new AWS.DefaultCredentials(
+        [-> return {accessKeyId: 'SET'}], [accessKeyId: 'OVERRIDE'])
+      expect(creds.accessKeyId).toEqual('OVERRIDE')
 
 describe 'AWS.FileSystemCredentials', ->
   describe 'constructor', ->
