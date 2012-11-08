@@ -186,7 +186,7 @@ describe 'AWS.S3', ->
       resp = new AWS.HttpResponse()
       resp.statusCode = 404
       error = extractError(resp)
-      expect(error.code).toEqual('NoSuchKey')
+      expect(error.code).toEqual('NotFound')
       expect(error.message).toEqual(404)
 
     it 'misc errors not known to return an empty body', ->
