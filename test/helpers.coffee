@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+AWS = require('../lib/aws')
+
 integration = (reqBuilder, respCallback) ->
   req = reqBuilder()
   resp = null
@@ -28,8 +30,22 @@ flattenXML = (xml) ->
 matchXML = (xml1, xml2) ->
   expect(flattenXML(xml1)).toEqual(flattenXML(xml2))
 
+MockService = AWS.util.inherit AWS.Service,
+  constructor: (config) -> AWS.Service.call(this, config)
+  buildRequest: ->
+    req = this.newHttpRequest()
+    req.sign = ->
+    req
+  extractData: (httpResponse) ->
+    return httpResponse.body
+  extractError: (httpResponse) ->
+    retryable = httpResponse.statusCode >= 500
+    return { code: httpResponse.statusCode, message: null, retryable: retryable }
+  serviceName: 'mockservice'
+  signatureVersion: require('../lib/sigv4')
+
 module.exports =
-  AWS: require('../lib/aws')
+  AWS: AWS
   integration: integration
   matchXML: matchXML
-
+  MockService: MockService

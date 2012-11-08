@@ -11,22 +11,9 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-AWS = require('../../lib/core')
-require('../../lib/sigv4')
-
-MockService = AWS.util.inherit AWS.Service,
-  constructor: (config) -> AWS.Service.call(this, config)
-  buildRequest: ->
-    req = this.newHttpRequest()
-    req.sign = ->
-    req
-  extractData: (httpResponse) ->
-    return httpResponse.body
-  extractError: (httpResponse) ->
-    retryable = httpResponse.statusCode >= 500
-    return { code: httpResponse.statusCode, message: null, retryable: retryable }
-  serviceName: 'mockservice'
-  signatureVersion:  AWS.SigV4
+helpers = require('../helpers')
+AWS = helpers.AWS
+MockService = helpers.MockService
 
 describe 'AWS.RequestHandler', ->
 
