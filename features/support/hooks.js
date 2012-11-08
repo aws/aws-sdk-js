@@ -17,11 +17,4 @@ module.exports = function () {
 
   this.World = require("./world.js").World;
 
-  // Making the cucumber world object available to global makes it possible
-  // to cleanup shared resources at process exit.
-  this.Before(function (next) {
-    global.world = this;
-    next();
-  });
-
 };
