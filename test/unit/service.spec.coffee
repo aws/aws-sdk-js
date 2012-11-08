@@ -44,6 +44,17 @@ describe 'AWS.Service', ->
       expect(service.config.useSSL).toEqual(true)
       AWS.configuration = cfg
 
+  describe 'makeRequest', ->
+    it 'should allow extra configuration applied per request', ->
+      service = new MockService(maxRetries: 10, useSSL: false)
+      request = service.makeRequest('foo', {}, {useSSL: true, maxRetries: 0})
+
+      expect(request.awsResponse.service.config.useSSL).toEqual(true)
+      expect(request.awsResponse.service.config.maxRetries).toEqual(0)
+      expect(request.awsResponse.service).not.toBe(service)
+      expect(service.config.useSSL).toEqual(false)
+      expect(service.config.maxRetries).toEqual(10)
+
   describe 'retryableError', ->
 
     it 'should retry on throttle error', ->
