@@ -28,7 +28,7 @@ MockService = AWS.util.inherit AWS.Service,
   serviceName: 'mockservice'
   signatureVersion:  AWS.SigV4
 
-describe 'AWS.Service', ->
+describe 'AWS.RequestHandler', ->
 
   oldSetTimeout = setTimeout
   config = null; service = null; totalWaited = null; delays = []
@@ -57,6 +57,35 @@ describe 'AWS.Service', ->
 
   # Safely tear down setTimeout hack
   afterEach -> `setTimeout = oldSetTimeout`
+
+  describe 'handleHttpData', ->
+
+    beforeEach ->
+      AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb) ->
+        cb.onHeaders(200, {})
+        cb.onData("FOO")
+        cb.onData("BAR")
+        cb.onData("BAZ")
+        cb.onData("QUX")
+        cb.onEnd()
+
+    it 'notifies data if there are promise callbacks', ->
+
+      calls = []
+
+      # Add a promise callback
+      request.data((resp) -> calls.push(resp.data))
+
+      handler.makeRequest()
+
+      expect(request.awsResponse.httpResponse.body).toEqual(null)
+      expect(calls).toEqual(['FOO', 'BAR', 'BAZ', 'QUX'])
+
+    it 'does not notify if there are no callbacks registered', ->
+
+      spyOn(request, 'notifyData')
+      handler.makeRequest()
+      expect(request.notifyData).not.toHaveBeenCalled()
 
   describe 'handleHttpResponse', ->
 

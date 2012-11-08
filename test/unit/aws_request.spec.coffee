@@ -11,7 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-AWS = require('../../lib/core')
+helpers = require('../helpers')
+AWS = helpers.AWS
 
 describe 'AWS.AWSRequest', ->
   request = null
@@ -20,31 +21,32 @@ describe 'AWS.AWSRequest', ->
     response = new AWS.AWSResponse(service: null, method: 'POST', params: {})
     request = new AWS.AWSRequest(response)
 
-  sharedBehaviour = (cbMethod, notifyMethod) ->
+  sharedBehaviour = (cbMethod, notifyMethod, data) ->
     it 'can register callback', ->
-      spy = jasmine.createSpy()
+      spy = jasmine.createSpy(cbMethod + '_register')
       request[cbMethod](spy)
-      request[notifyMethod]()
+      request[notifyMethod](data)
       expect(spy).toHaveBeenCalled()
 
     it 'will trigger even if registered after notification', ->
-      spy = jasmine.createSpy()
-      request[notifyMethod]()
+      spy = jasmine.createSpy(cbMethod + '_trigger_after_notification')
+      request[notifyMethod](data)
       request[cbMethod](spy)
       expect(spy).toHaveBeenCalled()
 
     it 'can register multiple callbacks', ->
-      spies = [jasmine.createSpy(), jasmine.createSpy()]
-      request[notifyMethod]()
+      spies = [jasmine.createSpy(cbMethod + '_multiple_cb'),
+               jasmine.createSpy(cbMethod + '_multiple_cb')]
+      request[notifyMethod](data)
       for index of spies
         request[cbMethod](spies[index])
         expect(spies[index]).toHaveBeenCalled()
 
     it 'can chain callbacks', ->
-      spy1 = jasmine.createSpy()
-      spy2 = jasmine.createSpy()
+      spy1 = jasmine.createSpy(cbMethod + '_chain')
+      spy2 = jasmine.createSpy(cbMethod + '_chain')
       retVal = request[cbMethod](spy1)[cbMethod](spy2)
-      request[notifyMethod]()
+      request[notifyMethod](data)
       expect(retVal).toBe(request)
       expect(spy1).toHaveBeenCalled()
       expect(spy2).toHaveBeenCalled()
@@ -52,16 +54,19 @@ describe 'AWS.AWSRequest', ->
     it 'should be triggered in default binding of response object', ->
       request[cbMethod] ->
         expect(this).toBe(response)
-      request[notifyMethod]()
+      request[notifyMethod](data)
 
     it 'should be triggered with response object as param', ->
       request[cbMethod] (context) ->
         expect(context).toBe(response)
-      request[notifyMethod]()
+      request[notifyMethod](data)
 
     it 'should allow overriding of binding', ->
       request[cbMethod]((-> expect(this).toEqual('foo')), bind: 'foo')
-      request[notifyMethod]()
+      request[notifyMethod](data)
+
+  describe 'data', ->
+    sharedBehaviour('data', 'notifyData', 'FOO')
 
   describe 'done', ->
     sharedBehaviour('done', 'notifyDone')
