@@ -169,8 +169,10 @@ describe 'AWS.RequestHandler', ->
       spyOn(service, 'parseResponse').andThrow(error)
       spyOn(handler, 'retryRequest')
 
-      handler.makeRequest({})
+      try
+        handler.makeRequest({})
+      catch e
+        expect(e).toBe(error)
 
       expect(handler.retryRequest).not.toHaveBeenCalled()
-      expect(request.notifyFail).toHaveBeenCalledWith(error)
       expect(request.notifyDone).not.toHaveBeenCalled()

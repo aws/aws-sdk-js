@@ -65,6 +65,47 @@ describe 'AWS.AWSRequest', ->
       request[cbMethod]((-> expect(this).toEqual('foo')), bind: 'foo')
       request[notifyMethod](data)
 
+
+  describe 'constructor', ->
+    it 'should add data callback passed in via service config (onData)', ->
+      result = null
+      response.service =
+        config:
+          onData: (resp) -> result = resp.data
+      request = new AWS.AWSRequest(response)
+      request.notifyData('FOO')
+      expect(result).toEqual('FOO')
+
+    it 'should allow callbacks to be passed in as an array', ->
+      result1 = null
+      result2 = null
+      response.service =
+        config:
+          onData: [
+            (resp) -> result1 = resp.data + '1',
+            (resp) -> result2 = resp.data + '2'
+          ]
+      request = new AWS.AWSRequest(response)
+      request.notifyData('FOO')
+      expect(result1).toEqual('FOO1')
+      expect(result2).toEqual('FOO2')
+
+    it 'should work for other callbacks', ->
+      result = []
+      response.service =
+        config:
+          onData: -> result.push('data')
+          onAlways: -> result.push('always')
+          onFail: -> result.push('fail')
+          onDone: -> result.push('done')
+      request = new AWS.AWSRequest(response)
+      request.notifyData()
+      request.notifyFail()
+      request.notifyDone()
+      expect(result).toEqual [
+        'data', 'fail', 'always', 'done', 'always'
+      ]
+
   describe 'data', ->
     sharedBehaviour('data', 'notifyData', 'FOO')
 
