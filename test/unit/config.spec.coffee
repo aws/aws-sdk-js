@@ -45,10 +45,10 @@ describe 'AWS.Config', ->
 
   describe 'default', ->
     it 'should have a default Config object', ->
-      expect(AWS.configuration.useSSL).toEqual(true)
-      expect(AWS.configuration.maxRetries).toEqual(undefined)
+      expect(AWS.config.useSSL).toEqual(true)
+      expect(AWS.config.maxRetries).toEqual(undefined)
 
     it 'can set default config to an object literal', ->
-      AWS.configuration = {}
-      expect(AWS.configuration).toEqual({})
+      AWS.config = {}
+      expect(AWS.config).toEqual({})
 

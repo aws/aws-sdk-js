@@ -26,9 +26,9 @@ describe 'AWS.Service', ->
     service = new AWS.Service(config)
 
   describe 'constructor', ->
-    it 'should use AWS.configuration copy if no config is provided', ->
+    it 'should use AWS.config copy if no config is provided', ->
       service = new AWS.Service()
-      expect(service.config).not.toBe(AWS.configuration)
+      expect(service.config).not.toBe(AWS.config)
       expect(service.config.useSSL).toEqual(true)
 
     it 'should merge custom options on top of global defaults if config provided', ->
@@ -36,16 +36,16 @@ describe 'AWS.Service', ->
       expect(service.config.useSSL).toEqual(true)
       expect(service.config.maxRetries).toEqual(5)
 
-    it 'should allow AWS.configuration to be object literal', ->
-      cfg = AWS.configuration
-      AWS.configuration = maxRetries: 20
+    it 'should allow AWS.config to be object literal', ->
+      cfg = AWS.config
+      AWS.config = maxRetries: 20
       service = new AWS.Service({})
       expect(service.config.maxRetries).toEqual(20)
       expect(service.config.useSSL).toEqual(true)
-      AWS.configuration = cfg
+      AWS.config = cfg
 
   describe 'makeRequest', ->
-    it 'should allow extra configuration applied per request', ->
+    it 'should allow extra config applied per request', ->
       service = new MockService(maxRetries: 10, useSSL: false)
       request = service.makeRequest('foo', {}, {useSSL: true, maxRetries: 0})
 

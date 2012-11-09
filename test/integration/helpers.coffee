@@ -17,7 +17,7 @@ AWS = helpers.AWS
 
 configFile = __dirname + '/../../configuration'
 creds = new AWS.FileSystemCredentials(configFile)
-AWS.configuration = new AWS.FileSystemConfig(configFile)
-AWS.configuration.credentials = new AWS.DefaultCredentials(creds)
+AWS.config = new AWS.FileSystemConfig(configFile)
+AWS.config.credentials = new AWS.DefaultCredentials(creds)
 
 module.exports = helpers
