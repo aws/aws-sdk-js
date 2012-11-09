@@ -20,3 +20,9 @@ Feature: Working with Buckets
     Then the bucket should exist
     When I delete the bucket
     Then the bucket should not exist
+
+  # this test will exercise following 307 redirects
+  Scenario: Creating a bucket with a location constraint
+    When I create a bucket with the location constraint "EU"
+    Then the bucket should have a location constraint of "EU"
+    And I delete the bucket

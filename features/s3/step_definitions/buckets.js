@@ -22,7 +22,7 @@ module.exports = function() {
   });
 
   this.When(/^I create a bucket with the location constraint "([^"]*)"$/, function(loc, next) {
-    this.bucket = 'aws-sdk-js-integration-' +
+    this.bucket = 'aws-sdk-js.integration-' +
       this.AWS.util.date.unixTimestamp() * 1000;
     var params = { Bucket: this.bucket, LocationConstraint: loc };
     this.request('s3', 'createBucket', params, next);
@@ -53,7 +53,7 @@ module.exports = function() {
       if (resp.data && resp.data.LocationConstraint == loc)
         next();
       else
-        fail("Failed to create a bucket with a location constraint.");
+        fail();
     });
   });
 
