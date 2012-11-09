@@ -15,15 +15,9 @@
 
 var WorldConstructor = function WorldConstructor(callback) {
 
-  var AWS = require('../../lib/aws');
-
-  var configFile = __dirname + '/../../configuration';
-  var creds = new AWS.FileSystemCredentials(configFile);
-  AWS.configuration = new AWS.FileSystemConfig(configFile);
-  AWS.configuration.credentials = new AWS.DefaultCredentials(creds);
-
   var world = require('./helpers');
-  world.AWS = AWS;
+  world.AWS = require('../../lib/aws');
+  world.AWS.loadConfig(__dirname + '/../../configuration');
 
   callback(world);
 
