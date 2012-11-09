@@ -54,13 +54,13 @@ describe 'AWS.S3', ->
 
   describe 'endpoint', ->
 
-    it 'sets host to s3.amazonaws.com when region is un-specified', ->
+    it 'sets hostname to s3.amazonaws.com when region is un-specified', ->
       s3 = new AWS.S3()
-      expect(s3.endpoint.host).toEqual('s3.amazonaws.com')
+      expect(s3.endpoint.hostname).toEqual('s3.amazonaws.com')
 
-    it 'sets host to s3.amazonaws.com when region is us-east-1', ->
+    it 'sets hostname to s3.amazonaws.com when region is us-east-1', ->
       s3 = new AWS.S3({ region: 'us-east-1' })
-      expect(s3.endpoint.host).toEqual('s3.amazonaws.com')
+      expect(s3.endpoint.hostname).toEqual('s3.amazonaws.com')
 
     it 'sets region to us-east-1 when unspecified', ->
       s3 = new AWS.S3({ region: 'us-east-1' })
@@ -68,7 +68,7 @@ describe 'AWS.S3', ->
 
     it 'combines the region with s3 in the endpoint using a - instead of .', ->
       s3 = new AWS.S3({ region: 'us-west-1' })
-      expect(s3.endpoint.host).toEqual('s3-us-west-1.amazonaws.com')
+      expect(s3.endpoint.hostname).toEqual('s3-us-west-1.amazonaws.com')
 
   describe 'buildRequest', ->
 
@@ -81,29 +81,29 @@ describe 'AWS.S3', ->
       s3 = new AWS.S3(config)
       expect(s3.config.s3ForcePathStyle).toEqual(true)
       req = s3.buildRequest('headObject', {Bucket:'bucket', Key:'key'})
-      expect(req.endpoint.host).toEqual('s3.amazonaws.com')
-      expect(req.uri).toEqual('/bucket/key')
+      expect(req.endpoint.hostname).toEqual('s3.amazonaws.com')
+      expect(req.path).toEqual('/bucket/key')
 
     describe 'uri escaped params', ->
 
       it 'uri-escapes path and querystring params', ->
-        # bucket param ends up as part of the host
+        # bucket param ends up as part of the hostname
         params = { Bucket: 'bucket', Key: 'a b c', VersionId: 'a&b' }
         req = s3.buildRequest('headObject', params)
-        expect(req.uri).toEqual('/a%20b%20c?versionId=a%26b')
+        expect(req.path).toEqual('/a%20b%20c?versionId=a%26b')
 
       it 'does not uri-escape forward slashes in the path', ->
         params = { Bucket: 'bucket', Key: 'k e/y' }
         req = s3.buildRequest('headObject', params)
-        expect(req.uri).toEqual('/k%20e/y')
+        expect(req.path).toEqual('/k%20e/y')
 
       it 'ensures a single forward slash exists', ->
 
         req = s3.buildRequest('listObjects', { Bucket: 'bucket' })
-        expect(req.uri).toEqual('/')
+        expect(req.path).toEqual('/')
 
         req = s3.buildRequest('listObjects', { Bucket: 'bucket', MaxKeys:123 })
-        expect(req.uri).toEqual('/?max-keys=123')
+        expect(req.path).toEqual('/?max-keys=123')
 
       it 'ensures a single forward slash exists when querystring is present', ->
 
@@ -114,52 +114,52 @@ describe 'AWS.S3', ->
         beforeEach ->
           s3 = new AWS.S3({ useSSL: true, region: 'us-east-1' })
 
-        it 'puts dns-compat bucket names in the host', ->
+        it 'puts dns-compat bucket names in the hostname', ->
           req = s3.buildRequest('headObject', {Bucket:'bucket-name',Key:'abc'})
           expect(req.method).toEqual('HEAD')
-          expect(req.endpoint.host).toEqual('bucket-name.s3.amazonaws.com')
-          expect(req.uri).toEqual('/abc')
+          expect(req.endpoint.hostname).toEqual('bucket-name.s3.amazonaws.com')
+          expect(req.path).toEqual('/abc')
 
         it 'ensures the path contains / at a minimum when moving bucket', ->
           req = s3.buildRequest('listObjects', {Bucket:'bucket-name'})
-          expect(req.endpoint.host).toEqual('bucket-name.s3.amazonaws.com')
-          expect(req.uri).toEqual('/')
+          expect(req.endpoint.hostname).toEqual('bucket-name.s3.amazonaws.com')
+          expect(req.path).toEqual('/')
 
         it 'puts dns-compat bucket names in path if they contain a dot', ->
           req = s3.buildRequest('listObjects', {Bucket:'bucket.name'})
-          expect(req.endpoint.host).toEqual('s3.amazonaws.com')
-          expect(req.uri).toEqual('/bucket.name')
+          expect(req.endpoint.hostname).toEqual('s3.amazonaws.com')
+          expect(req.path).toEqual('/bucket.name')
 
         it 'puts dns-compat bucket names in path if configured to do so', ->
           s3 = new AWS.S3({ useSSL: true, s3ForcePathStyle: true })
           req = s3.buildRequest('listObjects', {Bucket:'bucket-name'})
-          expect(req.endpoint.host).toEqual('s3.amazonaws.com')
-          expect(req.uri).toEqual('/bucket-name')
+          expect(req.endpoint.hostname).toEqual('s3.amazonaws.com')
+          expect(req.path).toEqual('/bucket-name')
 
         it 'puts dns-incompat bucket names in path', ->
           req = s3.buildRequest('listObjects', {Bucket:'bucket_name'})
-          expect(req.endpoint.host).toEqual('s3.amazonaws.com')
-          expect(req.uri).toEqual('/bucket_name')
+          expect(req.endpoint.hostname).toEqual('s3.amazonaws.com')
+          expect(req.path).toEqual('/bucket_name')
 
       describe 'HTTP', ->
 
         beforeEach ->
           s3 = new AWS.S3({ useSSL: false, region: 'us-east-1' })
 
-        it 'puts dns-compat bucket names in the host', ->
+        it 'puts dns-compat bucket names in the hostname', ->
           req = s3.buildRequest('listObjects', {Bucket:'bucket-name'})
-          expect(req.endpoint.host).toEqual('bucket-name.s3.amazonaws.com')
-          expect(req.uri).toEqual('/')
+          expect(req.endpoint.hostname).toEqual('bucket-name.s3.amazonaws.com')
+          expect(req.path).toEqual('/')
 
-        it 'puts dns-compat bucket names in the host if they contain a dot', ->
+        it 'puts dns-compat bucket names in the hostname if they contain a dot', ->
           req = s3.buildRequest('listObjects', {Bucket:'bucket.name'})
-          expect(req.endpoint.host).toEqual('bucket.name.s3.amazonaws.com')
-          expect(req.uri).toEqual('/')
+          expect(req.endpoint.hostname).toEqual('bucket.name.s3.amazonaws.com')
+          expect(req.path).toEqual('/')
 
         it 'puts dns-incompat bucket names in path', ->
           req = s3.buildRequest('listObjects', {Bucket:'bucket_name'})
-          expect(req.endpoint.host).toEqual('s3.amazonaws.com')
-          expect(req.uri).toEqual('/bucket_name')
+          expect(req.endpoint.hostname).toEqual('s3.amazonaws.com')
+          expect(req.path).toEqual('/bucket_name')
 
   # S3 returns a handful of errors without xml bodies (to match the http spec)
   # these tests ensure we give meaningful codes/messages for these.

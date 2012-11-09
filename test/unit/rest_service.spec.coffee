@@ -61,39 +61,39 @@ describe 'AWS.RESTService', ->
 
       it 'populates uri from the operation', ->
         operation.u = '/path'
-        expect(buildRequest().uri).toEqual('/path')
+        expect(buildRequest().path).toEqual('/path')
 
       it 'replaces param placeholders', ->
         operation.u = '/Owner/{Id}'
         operation.i = {m:{Id:{l:'uri'}}}
-        expect(buildRequest({'Id': 'abc'}).uri).toEqual('/Owner/abc')
+        expect(buildRequest({'Id': 'abc'}).path).toEqual('/Owner/abc')
 
       it 'can replace multiple path placeholders', ->
         operation.u = '/{Id}/{Count}'
         operation.i = {m:{Id:{l:'uri'},Count:{t:'i',l:'uri'}}}
-        expect(buildRequest({Id:'abc',Count:123}).uri).toEqual('/abc/123')
+        expect(buildRequest({Id:'abc',Count:123}).path).toEqual('/abc/123')
 
       it 'performs querystring param replacements', ->
         operation.u = '/path?id-param={Id}'
         operation.i = {m:{Id:{l:'uri'}}}
-        expect(buildRequest({Id:'abc'}).uri).toEqual('/path?id-param=abc')
+        expect(buildRequest({Id:'abc'}).path).toEqual('/path?id-param=abc')
 
       it 'omits querystring when param is not provided', ->
         operation.u = '/path?id-param={Id}'
         operation.i = {m:{Id:{l:'uri'}}}
-        expect(buildRequest().uri).toEqual('/path')
+        expect(buildRequest().path).toEqual('/path')
 
       it 'accpets multiple query params with uri params', ->
         operation.u = '/{Abc}/{Xyz}?foo={Foo}&bar={Bar}'
         operation.i = {m:{Abc:{l:'uri'},Xyz:{l:'uri'},Foo:{l:'uri'},Bar:{l:'uri'}}}
         params = { Abc:'abc', Xyz:'xyz', Bar:'bar' } # omitted Foo
-        expect(buildRequest(params).uri).toEqual('/abc/xyz?bar=bar')
+        expect(buildRequest(params).path).toEqual('/abc/xyz?bar=bar')
 
       it 'uri escapes params in both path and querystring', ->
         operation.u = '/{Path}?query={Query}'
         operation.i = {m:{Path:{l:'uri'},Query:{l:'uri'}}}
         params = { Path:'a b', Query:'a/b' }
-        expect(buildRequest(params).uri).toEqual('/a%20b?query=a%2Fb')
+        expect(buildRequest(params).path).toEqual('/a%20b?query=a%2Fb')
 
     describe 'headers', ->
 

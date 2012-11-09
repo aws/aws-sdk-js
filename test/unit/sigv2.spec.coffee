@@ -25,7 +25,7 @@ describe 'AWS.SigV2', ->
   buildRequest = ->
     request = new AWS.HttpRequest()
     request.endpoint = new AWS.Endpoint({ region: 'us-west-1' })
-    request.endpoint.host = 'locahost'
+    request.endpoint.hostname = 'locahost'
     request.params = new AWS.QueryParamList()
     request
 

@@ -25,7 +25,7 @@ describe 'AWS.HttpRequest', ->
       expect(request.method).toEqual('POST')
 
     it 'defaults the uri to /', ->
-      expect(request.uri).toEqual('/')
+      expect(request.path).toEqual('/')
 
     it 'provides headers with a default user agent', ->
       userAgent = 'aws-sdk-js/' + AWS.VERSION
@@ -46,7 +46,7 @@ describe 'AWS.HttpRequest', ->
       expect(request.pathname()).toEqual('/')
 
     it 'returns the path portion of the uri', ->
-      request.uri = '/abc/xyz?mno=hjk'
+      request.path = '/abc/xyz?mno=hjk'
       expect(request.pathname()).toEqual('/abc/xyz')
 
   describe 'search', ->
@@ -55,6 +55,6 @@ describe 'AWS.HttpRequest', ->
       expect(request.search()).toEqual('')
 
     it 'returns the querystring portion of the uri', ->
-      request.uri = '/abc/xyz?mno=hjk'
+      request.path = '/abc/xyz?mno=hjk'
       expect(request.search()).toEqual('mno=hjk')
 

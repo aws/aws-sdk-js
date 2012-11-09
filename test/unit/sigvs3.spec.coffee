@@ -18,7 +18,7 @@ describe 'AWS.SigVS3', ->
 
   # these can be overriden in tests
   method = null
-  uri = null
+  path = null
   headers = null
   body = null
   date = null
@@ -30,7 +30,7 @@ describe 'AWS.SigVS3', ->
   # reset the overriden variable before each test
   beforeEach ->
     method = 'POST'
-    uri = '/'
+    path = '/'
     virtualHostedBucket = null
     date = undefined
     headers = {}
@@ -42,7 +42,7 @@ describe 'AWS.SigVS3', ->
   buildRequest = () ->
     req = new AWS.HttpRequest()
     req.method = method
-    req.uri = uri
+    req.path = path
     req.headers = headers
     req.body = body
     req.virtualHostedBucket = virtualHostedBucket
@@ -195,8 +195,8 @@ describe 'AWS.SigVS3', ->
       /
       """)
 
-    it 'builds a canonical resource from the uri', ->
-      uri = '/bucket_name/key'
+    it 'builds a canonical resource from the path', ->
+      path = '/bucket_name/key'
       expect(stringToSign()).toEqual("""
       POST
 
@@ -205,8 +205,8 @@ describe 'AWS.SigVS3', ->
       /bucket_name/key
       """)
 
-    it 'appends the bucket to the path when it is part of the host', ->
-      uri = '/'
+    it 'appends the bucket to the path when it is part of the hostname', ->
+      path = '/'
       virtualHostedBucket = 'bucket-name'
       expect(stringToSign()).toEqual("""
       POST
@@ -216,8 +216,8 @@ describe 'AWS.SigVS3', ->
       /bucket-name/
       """)
 
-    it 'appends the subresource portion of the uri querystring', ->
-      uri = '/?acl'
+    it 'appends the subresource portion of the path querystring', ->
+      path = '/?acl'
       virtualHostedBucket = 'bucket-name'
       expect(stringToSign()).toEqual("""
       POST
@@ -228,7 +228,7 @@ describe 'AWS.SigVS3', ->
       """)
 
     it 'includes the sub resource value when present', ->
-      uri = '/bucket_name/key?versionId=123'
+      path = '/bucket_name/key?versionId=123'
       expect(stringToSign()).toEqual("""
       POST
 
@@ -238,7 +238,7 @@ describe 'AWS.SigVS3', ->
       """)
 
     it 'omits non-sub-resource querystring params from the resource string', ->
-      uri = '/?versionId=abc&next-marker=xyz'
+      path = '/?versionId=abc&next-marker=xyz'
       expect(stringToSign()).toEqual("""
       POST
 
@@ -248,7 +248,7 @@ describe 'AWS.SigVS3', ->
       """)
 
     it 'sorts sub resources by name', ->
-      uri = '/?logging&acl&website&torrent=123' # made up example
+      path = '/?logging&acl&website&torrent=123' # made up example
       expect(stringToSign()).toEqual("""
       POST
 
@@ -258,7 +258,7 @@ describe 'AWS.SigVS3', ->
       """)
 
     it 'sorts sub resources by name', ->
-      uri = '/?logging&acl&website&torrent=123' # made up example
+      path = '/?logging&acl&website&torrent=123' # made up example
       expect(stringToSign()).toEqual("""
       POST
 
@@ -268,7 +268,7 @@ describe 'AWS.SigVS3', ->
       """)
 
     it 'includes the un-decoded query string param for sub resources', ->
-      uri = '/?versionId=a%2Bb' # a+b
+      path = '/?versionId=a%2Bb' # a+b
       expect(stringToSign()).toEqual("""
       POST
 
@@ -278,7 +278,7 @@ describe 'AWS.SigVS3', ->
       """)
 
     it 'includes the non-encoded query string get header overrides', ->
-      uri = '/?response-content-type=a%2Bb' # a+b
+      path = '/?response-content-type=a%2Bb' # a+b
       expect(stringToSign()).toEqual("""
       POST
 

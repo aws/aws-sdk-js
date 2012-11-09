@@ -42,7 +42,7 @@ describe 'AWS.JSONService', ->
       expect(req.method).toEqual('POST')
 
     it 'should perform all operations on root (/)', ->
-      expect(req.uri).toEqual('/')
+      expect(req.path).toEqual('/')
 
     it 'should set Content-Type header', ->
       expect(req.headers['Content-Type']).toEqual('application/x-amz-json-1.0')

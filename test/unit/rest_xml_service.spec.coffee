@@ -62,7 +62,7 @@ describe 'AWS.RESTXMLService', ->
         params = { Bucket:'abc', ACL:'canned-acl' }
         req = buildRequest(params)
         expect(req.body).toEqual(null)
-        expect(req.uri).toEqual('/abc')
+        expect(req.path).toEqual('/abc')
         expect(req.headers['x-amz-acl']).toEqual('canned-acl')
 
     describe 'string bodies', ->
@@ -162,7 +162,7 @@ describe 'AWS.RESTXMLService', ->
 
         req = buildRequest(params)
         expect(req.method).toEqual('POST')
-        expect(req.uri).toEqual('/bucket-name?next-marker=marker&limit=123')
+        expect(req.path).toEqual('/bucket-name?next-marker=marker&limit=123')
         expect(req.headers['x-amz-acl']).toEqual('canned-acl')
         expect(req.headers['x-amz-meta-abc']).toEqual('xyz')
         expect(req.headers['x-amz-meta-mno']).toEqual('hjk')
@@ -174,7 +174,7 @@ describe 'AWS.RESTXMLService', ->
         params = { Bucket:'abc' } # omitting Config purposefully
         req = buildRequest(params)
         expect(req.body).toEqual(null)
-        expect(req.uri).toEqual('/abc')
+        expect(req.path).toEqual('/abc')
 
   describe 'parseResponse', ->
 
