@@ -34,7 +34,18 @@ describe 'AWS.CredentialProviderChain', ->
       expect(creds.secretAccessKey).toEqual(undefined)
       expect(creds.sessionToken).toEqual(undefined)
 
-    it 'returns AWS credentials found in ENV', ->
+    it 'returns credentials found in ENV', ->
+
+      process.env['ACCESS_KEY_ID'] = 'akid'
+      process.env['SECRET_ACCESS_KEY'] = 'secret'
+      process.env['SESSION_TOKEN'] = 'session'
+
+      creds = chain.resolve()
+      expect(creds.accessKeyId).toEqual('akid')
+      expect(creds.secretAccessKey).toEqual('secret')
+      expect(creds.sessionToken).toEqual('session')
+
+    it 'returns AWS-prefixed credentials found in ENV', ->
 
       process.env['AWS_ACCESS_KEY_ID'] = 'akid'
       process.env['AWS_SECRET_ACCESS_KEY'] = 'secret'
@@ -45,11 +56,26 @@ describe 'AWS.CredentialProviderChain', ->
       expect(creds.secretAccessKey).toEqual('secret')
       expect(creds.sessionToken).toEqual('session')
 
-    it 'returns AMAZON credentials found in ENV', ->
+    it 'returns AMAZON-prefixed credentials found in ENV', ->
 
       process.env['AMAZON_ACCESS_KEY_ID'] = 'akid'
       process.env['AMAZON_SECRET_ACCESS_KEY'] = 'secret'
       process.env['AMAZON_SESSION_TOKEN'] = 'session'
+
+      creds = chain.resolve()
+      expect(creds.accessKeyId).toEqual('akid')
+      expect(creds.secretAccessKey).toEqual('secret')
+      expect(creds.sessionToken).toEqual('session')
+
+    it 'prefers non-prefixed credentials to AWS credentials', ->
+
+      process.env['ACCESS_KEY_ID'] = 'akid'
+      process.env['SECRET_ACCESS_KEY'] = 'secret'
+      process.env['SESSION_TOKEN'] = 'session'
+
+      process.env['AWS_ACCESS_KEY_ID'] = 'akid2'
+      process.env['AWS_SECRET_ACCESS_KEY'] = 'secret2'
+      process.env['AWS_SESSION_TOKEN'] = 'session2'
 
       creds = chain.resolve()
       expect(creds.accessKeyId).toEqual('akid')

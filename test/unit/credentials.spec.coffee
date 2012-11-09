@@ -69,62 +69,25 @@ describe 'AWS.EnvironmentCredentials', ->
       creds.refresh()
       expect(creds.accessKeyId).toEqual('akid')
 
-describe 'AWS.DefaultCredentials', ->
-  beforeEach ->
-    process.env = {}
-
-  describe 'constructor', ->
-    it 'should search AWS_ prefix first', ->
-      process.env.AWS_ACCESS_KEY_ID = 'AWS'
-      process.env.AMAZON_ACCESS_KEY_ID = 'AMAZON'
-      creds = new AWS.DefaultCredentials()
-      expect(creds.accessKeyId).toEqual('AWS')
-
-    it 'should search AMAZON_ prefix second', ->
-      process.env.AMAZON_ACCESS_KEY_ID = 'AMAZON'
-      creds = new AWS.DefaultCredentials()
-      expect(creds.accessKeyId).toEqual('AMAZON')
-
-    it 'should not set credentials if no environment set', ->
-      creds = new AWS.DefaultCredentials()
-      expect(creds.accessKeyId).toBe(undefined)
-
-    it 'can take extra providers as objects', ->
-      creds = new AWS.DefaultCredentials([accessKeyId: 'SET'])
-      expect(creds.accessKeyId).toEqual('SET')
-
-    it 'can take extra providers as functions', ->
-      creds = new AWS.DefaultCredentials([-> return {accessKeyId: 'SET'}])
-      expect(creds.accessKeyId).toEqual('SET')
-
-    it 'can override default providers', ->
-      creds = new AWS.DefaultCredentials(
-        [-> return {accessKeyId: 'SET'}], [accessKeyId: 'OVERRIDE'])
-      expect(creds.accessKeyId).toEqual('OVERRIDE')
-
 describe 'AWS.FileSystemCredentials', ->
   describe 'constructor', ->
     it 'should accept filename and load credentials from root doc', ->
-      mock = readFileSync: ->
-        return '{"accessKeyId":"akid",
-          "secretAccessKey":"secret","sessionToken":"session"}'
-      spyOn(AWS.FileSystemCredentials.prototype, 'fs').andReturn(mock)
+      mock = '{"accessKeyId":"akid", "secretAccessKey":"secret","sessionToken":"session"}'
+      spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
       creds = new AWS.FileSystemCredentials('foo')
       validateCredentials(creds)
 
     it 'should accept filename and load credentials from credentials block', ->
-      mock = readFileSync: ->
-        return '{"credentials":{"accessKeyId":"akid",
-          "secretAccessKey":"secret","sessionToken":"session"}}'
-      spyOn(AWS.FileSystemCredentials.prototype, 'fs').andReturn(mock)
+      mock = '{"credentials":{"accessKeyId":"akid", "secretAccessKey":"secret","sessionToken":"session"}}'
+      spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
       creds = new AWS.FileSystemCredentials('foo')
       validateCredentials(creds)
 
     it 'should accept filename and use initialCredentials', ->
-      mock = readFileSync: -> return '{}'
-      spyOn(AWS.FileSystemCredentials.prototype, 'fs').andReturn(mock)
+      mock = '{}'
+      spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
       values =
         accessKeyId: "akid"
@@ -135,10 +98,8 @@ describe 'AWS.FileSystemCredentials', ->
 
   describe 'refresh', ->
     it 'should refresh from given filename', ->
-      mock = readFileSync: ->
-        return '{"credentials":{"accessKeyId":"RELOADED",
-          "secretAccessKey":"RELOADED","sessionToken":"RELOADED"}}'
-      spyOn(AWS.FileSystemCredentials.prototype, 'fs').andReturn(mock)
+      mock = '{"credentials":{"accessKeyId":"RELOADED", "secretAccessKey":"RELOADED","sessionToken":"RELOADED"}}'
+      spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
       values =
         accessKeyId: "akid"
