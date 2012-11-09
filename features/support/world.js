@@ -15,11 +15,15 @@
 
 var WorldConstructor = function WorldConstructor(callback) {
 
-  var world = require('./helpers');
+  var AWS = require('../../lib/aws');
 
-  world.AWS = require('../../lib/aws');
-  world.AWS.configuration =
-    new world.AWS.FileSystemConfig(__dirname + '/../../configuration');
+  var configFile = __dirname + '/../../configuration';
+  var creds = new AWS.FileSystemCredentials(configFile);
+  AWS.configuration = new AWS.FileSystemConfig(configFile);
+  AWS.configuration.credentials = new AWS.DefaultCredentials(creds);
+
+  var world = require('./helpers');
+  world.AWS = AWS;
 
   callback(world);
 
