@@ -11,47 +11,96 @@ The official JavaScript implementation of the AWS SDK for node.js.
 Require the AWS package in your node application via `require`:
 
 ```js
-var AWS = require('aws');
+var AWS = require('aws-sdk');
 ```
+### Configuration
 
-Load up a configuration by passing your AWS credentials to `AWS.Config`:
+The SDK will attempt also to load credentials from the environment.  It will look in the following places:
+
+    AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY
+    AWS_SESSION_TOKEN # optional
+
+    AMAZON_ACCESS_KEY_ID
+    AMAZON_SECRET_ACCESS_KEY
+    AMAZON_SESSION_TOKEN # optional
+    
+You can also load configuration and credentials from disk using `AWS.loadConfig`:
 
 ```js
-var creds = {'accessKeyId': 'ACCESSKEY', 'secretAccessKey': 'SECRET'};
-var config = new AWS.Config(creds);
+AWS.loadConfig('./configuration.json')
 ```
 
-You can also specify a region in the configuration:
+Example configuration file contents:
+
+    {
+        "accessKeyId": "akid",
+        "secretAccessKey": "secret",
+        "region": "us-east-1"
+    }
+    
+### Making Requests
+
+To make a request you should start by creating a service interface.
 
 ```js
-config.region = 'us-east-1';
+// uses configuration from AWS.config
+var ddb = new AWS.DynamoDB();
+
+// merges configuration with AWS.config
+var ddbWest = new AWS.DynamoDB({region:'us-west-1'});
 ```
 
-Create a service request by passing the configuration to the service:
+Services interfaces provide one function for each API operation.  These functions return an `AWSRequest` promise object.  You can then register callbacks on the request object.  The callbacks will receive an `AWSResponse` object.
 
 ```js
-db = new AWS.DynamoDB(config);
-var req = db.listTables();
-```
+var req = ddb.listTables();
 
-Operations return an `AWSRequest` promise object that can be registered with
-callbacks. The callbacks give you an `AWSResponse` object:
+// called when the request is successful
+req.done(function (response) {
+  console.log(resp.data);
+  // prints: {TableNames: ["Table1", "Table2", ...]}
+});
 
-```js
-req.done(function(response) {
-  console.log(response.data)
-})
-req.fail(function(response) {
-  console.log(response.error)
-})
+// called when the request generates an error
+req.fail(function (response) {
+  console.log(resp.error);
+  // errors have code and message properties
+});
 
-// prints: {TableNames: ["Table1", "Table2", ...]}
+// called for every request
+req.always(function (response) {
+  if (resp.error) {
+    console.log(resp.error);
+  } else {
+    console.log(resp.data);
+  }
+});
 ```
 
 You can also **chain** callbacks:
 
 ```js
 req.done(function() { ... }).fail(function() { ... })
+```
+### Example: Listing buckets in Amazon S3
+
+In the example below, I will print the name and creation date of all of the buckets in my AWS account.
+
+```js
+var AWS = require('aws-sdk');
+AWS.loadConfig('./configuration.json');
+
+var s3 = new AWS.S3();
+s3.listBuckets().always(function (resp) {
+  if (resp.error) {
+    console.log(error.message);
+  } else {
+    AWS.util.arrayEach(resp.data.Buckets, function(bucket) {
+      console.log("Bucket: ", bucket.Name, ' : ', bucket.CreationDate);
+    });
+  }
+});
 ```
 
 # License
