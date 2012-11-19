@@ -13,7 +13,6 @@
       "Trevor Rowe <trevrowe@amazon.com>"
     ],
     "devDependencies": {
-      "yuidocjs": "*",
       "jasmine-node": "latest",
       "coffee-script": "latest",
       "visionmedia-jscoverage": "latest",
