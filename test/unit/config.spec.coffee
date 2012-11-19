@@ -19,10 +19,10 @@ describe 'AWS.Config', ->
 
   describe 'constructor', ->
     it 'should be able to pass in a Config object as parameter', ->
-      config = new AWS.Config(useSSL: false, maxRetries: 0)
+      config = new AWS.Config(sslEnabled: false, maxRetries: 0)
       copyConfig = new AWS.Config(config)
       expect(copyConfig).not.toBe(config)
-      expect(copyConfig.useSSL).toEqual(false)
+      expect(copyConfig.sslEnabled).toEqual(false)
       expect(copyConfig.maxRetries).toEqual(0)
 
   describe 'region', ->
@@ -37,15 +37,15 @@ describe 'AWS.Config', ->
     it 'can be set to an integer', ->
       expect(configure(maxRetries: 2).maxRetries).toEqual(2)
 
-  describe 'useSSL', ->
+  describe 'sslEnabled', ->
     it 'defaults to true', ->
-      expect(configure().useSSL).toEqual(true)
+      expect(configure().sslEnabled).toEqual(true)
     it 'can be set to false', ->
-      expect(configure(useSSL: false).useSSL).toEqual(false)
+      expect(configure(sslEnabled: false).sslEnabled).toEqual(false)
 
   describe 'default', ->
     it 'should have a default Config object', ->
-      expect(AWS.config.useSSL).toEqual(true)
+      expect(AWS.config.sslEnabled).toEqual(true)
       expect(AWS.config.maxRetries).toEqual(undefined)
 
     it 'can set default config to an object literal', ->

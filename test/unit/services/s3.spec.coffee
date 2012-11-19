@@ -112,7 +112,7 @@ describe 'AWS.S3', ->
       describe 'HTTPS', ->
 
         beforeEach ->
-          s3 = new AWS.S3({ useSSL: true, region: 'us-east-1' })
+          s3 = new AWS.S3({ sslEnabled: true, region: 'us-east-1' })
 
         it 'puts dns-compat bucket names in the hostname', ->
           req = s3.buildRequest('headObject', {Bucket:'bucket-name',Key:'abc'})
@@ -131,7 +131,7 @@ describe 'AWS.S3', ->
           expect(req.path).toEqual('/bucket.name')
 
         it 'puts dns-compat bucket names in path if configured to do so', ->
-          s3 = new AWS.S3({ useSSL: true, s3ForcePathStyle: true })
+          s3 = new AWS.S3({ sslEnabled: true, s3ForcePathStyle: true })
           req = s3.buildRequest('listObjects', {Bucket:'bucket-name'})
           expect(req.endpoint.hostname).toEqual('s3.amazonaws.com')
           expect(req.path).toEqual('/bucket-name')
@@ -144,7 +144,7 @@ describe 'AWS.S3', ->
       describe 'HTTP', ->
 
         beforeEach ->
-          s3 = new AWS.S3({ useSSL: false, region: 'us-east-1' })
+          s3 = new AWS.S3({ sslEnabled: false, region: 'us-east-1' })
 
         it 'puts dns-compat bucket names in the hostname', ->
           req = s3.buildRequest('listObjects', {Bucket:'bucket-name'})
