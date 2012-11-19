@@ -24,7 +24,7 @@ describe 'AWS.SigV2', ->
 
   buildRequest = ->
     request = new AWS.HttpRequest()
-    request.endpoint = new AWS.Endpoint({ region: 'us-west-1' })
+    request.endpoint = new AWS.Endpoint('localhost')
     request.endpoint.hostname = 'locahost'
     request.params = new AWS.QueryParamList()
     request
@@ -69,15 +69,15 @@ describe 'AWS.SigV2', ->
       expect(request.params.toString()).toMatch(/SecurityToken=session/)
 
     it 'populates the body', ->
-      expect(request.body).toEqual('AWSAccessKeyId=akid&Signature=a78P5VVSxdpSke0jfVIc%2BZLMyREIPcaNwbtBiBdN070%3D&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2031-04-30T20%3A16%3A13.456Z')
+      expect(request.body).toEqual('AWSAccessKeyId=akid&Signature=%2FrumhWptMPvyb4aaeOv5iGpl6%2FLfs5uVHu8k1d3NNfc%3D&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2031-04-30T20%3A16%3A13.456Z')
 
     it 'populates content-length header', ->
-      expect(request.headers['Content-Length']).toEqual(163)
+      expect(request.headers['Content-Length']).toEqual(165)
 
     it 'signs additional body params', ->
       request = buildRequest()
       request.params.add('Param.1', 'abc')
       request.params.add('Param.2', 'xyz')
       signRequest(request)
-      expect(request.body).toEqual('AWSAccessKeyId=akid&Param.1=abc&Param.2=xyz&Signature=9IXfN6PmgrIdEuP8MSltyExyhTjVZEuXAUq6NKT8qDE%3D&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2031-04-30T20%3A16%3A13.456Z')
+      expect(request.body).toEqual('AWSAccessKeyId=akid&Param.1=abc&Param.2=xyz&Signature=3pcXIWw0eVd4wFmp%2Blo24L93UTMGcYSNE%2BFYNNqzDts%3D&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2031-04-30T20%3A16%3A13.456Z')
 

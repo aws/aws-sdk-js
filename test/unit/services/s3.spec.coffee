@@ -64,7 +64,7 @@ describe 'AWS.S3', ->
 
     it 'sets region to us-east-1 when unspecified', ->
       s3 = new AWS.S3({ region: 'us-east-1' })
-      expect(s3.endpoint.region).toEqual('us-east-1')
+      expect(s3.config.region).toEqual('us-east-1')
 
     it 'combines the region with s3 in the endpoint using a - instead of .', ->
       s3 = new AWS.S3({ region: 'us-west-1' })
