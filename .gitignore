@@ -4,3 +4,5 @@ npm-debug.log
 out
 coverage.html
 vendor
+.yardoc
+doc
