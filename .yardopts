@@ -1,0 +1,3 @@
+--exclude api.js
+--no-api private
+lib/**/*.js
