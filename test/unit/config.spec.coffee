@@ -25,6 +25,15 @@ describe 'AWS.Config', ->
       expect(copyConfig.sslEnabled).toEqual(false)
       expect(copyConfig.maxRetries).toEqual(0)
 
+    it 'should be able to pass credential values directly', ->
+      config = new AWS.Config(
+        accessKeyId: 'akid',
+        secretAccessKey: 'secret',
+        sessionToken: 'session')
+      expect(config.credentials.accessKeyId).toEqual('akid')
+      expect(config.credentials.secretAccessKey).toEqual('secret')
+      expect(config.credentials.sessionToken).toEqual('session')
+
   describe 'region', ->
     it 'defaults to undefined', ->
       expect(configure().region).toEqual(undefined)
@@ -43,12 +52,64 @@ describe 'AWS.Config', ->
     it 'can be set to false', ->
       expect(configure(sslEnabled: false).sslEnabled).toEqual(false)
 
-  describe 'default', ->
-    it 'should have a default Config object', ->
-      expect(AWS.config.sslEnabled).toEqual(true)
-      expect(AWS.config.maxRetries).toEqual(undefined)
+  describe 'set', ->
+    it 'should set a default value for a key', ->
+      config = new AWS.Config()
+      config.set('maxRetries', undefined, 'DEFAULT')
+      expect(config.maxRetries).toEqual('DEFAULT')
 
-    it 'can set default config to an object literal', ->
-      AWS.config = {}
-      expect(AWS.config).toEqual({})
+    it 'should execute default value if it is a function', ->
+      mock = jasmine.createSpy()
+      config = new AWS.Config()
+      config.set('maxRetries', undefined, mock)
+      expect(mock).toHaveBeenCalled()
 
+    it 'should not expand default value function if value is present', ->
+      mock = jasmine.createSpy()
+      config = new AWS.Config()
+      config.set('maxRetries', 'VALUE', mock)
+      expect(mock).not.toHaveBeenCalled()
+
+  describe 'clear', ->
+    it 'should be able to clear all key values from a config object', ->
+      config = new AWS.Config(maxRetries: 300, sslEnabled: 'foo')
+      expect(config.maxRetries).toEqual(300)
+      expect(config.sslEnabled).toEqual('foo')
+      expect(config.credentials).not.toEqual(undefined)
+
+      config.clear()
+
+      expect(config.maxRetries).toEqual(undefined)
+      expect(config.sslEnabled).toEqual(undefined)
+      expect(config.credentials).not.toEqual(undefined)
+
+  describe 'update', ->
+    it 'should be able to update keyed values', ->
+      config = new AWS.Config()
+      expect(config.maxRetries).toEqual(undefined)
+      config.update(maxRetries: 10)
+      expect(config.maxRetries).toEqual(10)
+
+    it 'should ignore non-keyed values', ->
+      config = new AWS.Config()
+      config.update(foo: 10)
+      expect(config.foo).toEqual(undefined)
+
+    it 'should be able to update literal credentials', ->
+      config = new AWS.Config()
+      config.update(
+        accessKeyId: 'akid',
+        secretAccessKey: 'secret',
+        sessionToken: 'session')
+      expect(config.credentials.accessKeyId).toEqual('akid')
+      expect(config.credentials.secretAccessKey).toEqual('secret')
+      expect(config.credentials.sessionToken).toEqual('session')
+
+describe 'AWS.config', ->
+  it 'should be a default Config object', ->
+    expect(AWS.config.sslEnabled).toEqual(true)
+    expect(AWS.config.maxRetries).toEqual(undefined)
+
+  it 'can set default config to an object literal', ->
+    AWS.config = {}
+    expect(AWS.config).toEqual({})

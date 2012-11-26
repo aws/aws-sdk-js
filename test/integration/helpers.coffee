@@ -14,6 +14,6 @@
 helpers = require('../helpers'); 
 
 AWS = helpers.AWS
-AWS.loadConfig(__dirname + '/../../configuration');
+AWS.config.loadFromPath(__dirname + '/../../configuration');
 
 module.exports = helpers
