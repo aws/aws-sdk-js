@@ -19,16 +19,16 @@ The SDK will attempt also to load credentials from the environment.  It will loo
 
     AWS_ACCESS_KEY_ID
     AWS_SECRET_ACCESS_KEY
-    AWS_SESSION_TOKEN # optional
+    AWS_SESSION_TOKEN (optional)
 
     AMAZON_ACCESS_KEY_ID
     AMAZON_SECRET_ACCESS_KEY
-    AMAZON_SESSION_TOKEN # optional
+    AMAZON_SESSION_TOKEN (optional)
     
-You can also load configuration and credentials from disk using `AWS.loadConfig`:
+You can also load configuration and credentials from disk using `AWS.config.loadFromPath`:
 
 ```js
-AWS.loadConfig('./configuration.json')
+AWS.config.loadFromPath('./configuration.json')
 ```
 
 Example configuration file contents:
