@@ -1,123 +1,77 @@
-# AWS JavaScript SDK
+# AWS SDK for Node.js
 
-The official JavaScript implementation of the AWS SDK for node.js.
+The official JavaScript implementation of the AWS SDK for Node.js.
 
 ## Installing
 
-    npm install aws-sdk
+The preferred way to install the AWS SDK for Node.js is to use the
+[npm](http://npmjs.org) package manager for Node.js. Simply type the following
+into the a terminal window:
 
-## Using
+```sh
+npm install aws-sdk
+```
 
-Require the AWS package in your node application via `require`:
+## Usage
+
+After you've installed the SDK, you can require the AWS package in your node
+application using `require`:
 
 ```js
 var AWS = require('aws-sdk');
 ```
-### Configuration
 
-The SDK will attempt also to load credentials from the environment.  It will look in the following places:
-
-    AWS_ACCESS_KEY_ID
-    AWS_SECRET_ACCESS_KEY
-    AWS_SESSION_TOKEN (optional)
-
-    AMAZON_ACCESS_KEY_ID
-    AMAZON_SECRET_ACCESS_KEY
-    AMAZON_SESSION_TOKEN (optional)
-    
-You can also load configuration and credentials from disk using `AWS.config.loadFromPath`:
+Here is a quick example that makes some requests against S3 with the SDK:
 
 ```js
-AWS.config.loadFromPath('./configuration.json')
-```
-
-Example configuration file contents:
-
-    {
-        "accessKeyId": "akid",
-        "secretAccessKey": "secret",
-        "region": "us-east-1"
-    }
-    
-### Making Requests
-
-To make a request you should start by creating a service interface.
-
-```js
-// uses configuration from AWS.config
-var ddb = new AWS.DynamoDB();
-
-// merges configuration with AWS.config
-var ddbWest = new AWS.DynamoDB({region:'us-west-1'});
-```
-
-Services interfaces provide one function for each API operation.  These functions return an `AWSRequest` promise object.  You can then register callbacks on the request object.  The callbacks will receive an `AWSResponse` object.
-
-```js
-var req = ddb.listTables();
-
-// called when the request is successful
-req.done(function (response) {
-  console.log(resp.data);
-  // prints: {TableNames: ["Table1", "Table2", ...]}
-});
-
-// called when the request generates an error
-req.fail(function (response) {
-  console.log(resp.error);
-  // errors have code and message properties
-});
-
-// called for every request
-req.always(function (response) {
-  if (resp.error) {
-    console.log(resp.error);
-  } else {
-    console.log(resp.data);
-  }
-});
-```
-
-You can also **chain** callbacks:
-
-```js
-req.done(function() { ... }).fail(function() { ... })
-```
-### Example: Listing buckets in Amazon S3
-
-In the example below, I will print the name and creation date of all of the buckets in my AWS account.
-
-```js
+// Load the AWS SDK for Node.js
 var AWS = require('aws-sdk');
-AWS.loadConfig('./configuration.json');
 
+/**
+ * Don't hardcode your credentials!
+ * You should load them from disk or your environment instead.
+ */
+// AWS.config.update({accessKeyId: 'AKID', secretAccessKey: 'SECRET'});
+
+// Instead, do this:
+AWS.config.loadFromPath('./path/to/credentials.json');
+
+// Set your region for future requests
+AWS.config.update({region: 'us-east-1'});
+
+// Create a bucket and put something in it.
 var s3 = new AWS.S3();
-s3.listBuckets().always(function (resp) {
-  if (resp.error) {
-    console.log(error.message);
-  } else {
-    AWS.util.arrayEach(resp.data.Buckets, function(bucket) {
-      console.log("Bucket: ", bucket.Name, ' : ', bucket.CreationDate);
-    });
-  }
+s3.createBucket({Bucket: 'myBucket'}).done(function(resp) {
+  var data = {Bucket: 'myBucket', Key: 'myKey', Body: 'Hello!'};
+  s3.putObject(data).done(function(resp) {
+    console.log("Successfully uploaded data to myBucket/myKey");
+  });
 });
 ```
 
-# License
+## Getting Started Guide
+
+A getting started guide can be found at:
+
+http://TBD
+
+## License
 
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
-    Copyright 2012 Amazon Web Services
+```no-highlight
+Copyright 2012 Amazon Web Services
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-        http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
