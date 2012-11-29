@@ -1,0 +1,10 @@
+-t guide
+--title "AWS SDK for Node.js"
+--no-highlight
+-
+README.md
+doc-src/guide/Installing.md
+doc-src/guide/Configuring.md
+doc-src/guide/MakingRequests.md
+doc-src/guide/Services.md
+doc-src/guide/Examples.md

@@ -1,7 +1,6 @@
 configuration
 node_modules
 npm-debug.log
-out
 coverage.html
 vendor
 .yardoc
