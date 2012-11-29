@@ -15,7 +15,7 @@ AWS = require('../../lib/core')
 require('../../lib/services/dynamodb')
 
 buildRequest = ->
-  ddb = new AWS.DynamoDB({ region:'region' })
+  ddb = new AWS.DynamoDB.Client({ region:'region' })
   req = ddb.buildRequest('listTables', { foo: 'bar' })
   req.endpoint.hostname = 'localhost'
   return req

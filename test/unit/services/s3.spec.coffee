@@ -14,12 +14,12 @@
 AWS = require('../../../lib/core')
 require('../../../lib/services/s3')
 
-describe 'AWS.S3', ->
+describe 'AWS.S3.Client', ->
 
   s3 = null
 
   beforeEach ->
-    s3 = new AWS.S3()
+    s3 = new AWS.S3.Client()
 
   describe 'dnsCompatibleBucketName', ->
 
@@ -55,19 +55,19 @@ describe 'AWS.S3', ->
   describe 'endpoint', ->
 
     it 'sets hostname to s3.amazonaws.com when region is un-specified', ->
-      s3 = new AWS.S3()
+      s3 = new AWS.S3.Client()
       expect(s3.endpoint.hostname).toEqual('s3.amazonaws.com')
 
     it 'sets hostname to s3.amazonaws.com when region is us-east-1', ->
-      s3 = new AWS.S3({ region: 'us-east-1' })
+      s3 = new AWS.S3.Client({ region: 'us-east-1' })
       expect(s3.endpoint.hostname).toEqual('s3.amazonaws.com')
 
     it 'sets region to us-east-1 when unspecified', ->
-      s3 = new AWS.S3({ region: 'us-east-1' })
+      s3 = new AWS.S3.Client({ region: 'us-east-1' })
       expect(s3.config.region).toEqual('us-east-1')
 
     it 'combines the region with s3 in the endpoint using a - instead of .', ->
-      s3 = new AWS.S3({ region: 'us-west-1' })
+      s3 = new AWS.S3.Client({ region: 'us-west-1' })
       expect(s3.endpoint.hostname).toEqual('s3-us-west-1.amazonaws.com')
 
   describe 'buildRequest', ->
@@ -78,7 +78,7 @@ describe 'AWS.S3', ->
 
     it 'obeys the configuration for s3ForcePathStyle', ->
       config = new AWS.Config({s3ForcePathStyle: true })
-      s3 = new AWS.S3(config)
+      s3 = new AWS.S3.Client(config)
       expect(s3.config.s3ForcePathStyle).toEqual(true)
       req = s3.buildRequest('headObject', {Bucket:'bucket', Key:'key'})
       expect(req.endpoint.hostname).toEqual('s3.amazonaws.com')
@@ -112,7 +112,7 @@ describe 'AWS.S3', ->
       describe 'HTTPS', ->
 
         beforeEach ->
-          s3 = new AWS.S3({ sslEnabled: true, region: 'us-east-1' })
+          s3 = new AWS.S3.Client({ sslEnabled: true, region: 'us-east-1' })
 
         it 'puts dns-compat bucket names in the hostname', ->
           req = s3.buildRequest('headObject', {Bucket:'bucket-name',Key:'abc'})
@@ -131,7 +131,7 @@ describe 'AWS.S3', ->
           expect(req.path).toEqual('/bucket.name')
 
         it 'puts dns-compat bucket names in path if configured to do so', ->
-          s3 = new AWS.S3({ sslEnabled: true, s3ForcePathStyle: true })
+          s3 = new AWS.S3.Client({ sslEnabled: true, s3ForcePathStyle: true })
           req = s3.buildRequest('listObjects', {Bucket:'bucket-name'})
           expect(req.endpoint.hostname).toEqual('s3.amazonaws.com')
           expect(req.path).toEqual('/bucket-name')
@@ -144,7 +144,7 @@ describe 'AWS.S3', ->
       describe 'HTTP', ->
 
         beforeEach ->
-          s3 = new AWS.S3({ sslEnabled: false, region: 'us-east-1' })
+          s3 = new AWS.S3.Client({ sslEnabled: false, region: 'us-east-1' })
 
         it 'puts dns-compat bucket names in the hostname', ->
           req = s3.buildRequest('listObjects', {Bucket:'bucket-name'})
@@ -161,8 +161,8 @@ describe 'AWS.S3', ->
           expect(req.endpoint.hostname).toEqual('s3.amazonaws.com')
           expect(req.path).toEqual('/bucket_name')
 
-  # S3 returns a handful of errors without xml bodies (to match the http spec)
-  # these tests ensure we give meaningful codes/messages for these.
+  # S3.Client returns a handful of errors without xml bodies (to match the
+  # http spec) these tests ensure we give meaningful codes/messages for these.
   describe 'errors with no XML body', ->
 
     extractError = (resp) ->

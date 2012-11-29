@@ -12,11 +12,11 @@
 # language governing permissions and limitations under the License.
 
 AWS = require('../../../lib/core')
-require('../../../lib/services/s3')
+require('../../../lib/services/ec2')
 
-describe 'AWS.EC2', ->
+describe 'AWS.EC2.Client', ->
 
-  ec2 = new AWS.EC2()
+  ec2 = new AWS.EC2.Client()
 
   describe 'parseResponse', ->
 

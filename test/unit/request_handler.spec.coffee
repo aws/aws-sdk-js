@@ -18,7 +18,7 @@ MockClient = helpers.MockClient
 describe 'AWS.RequestHandler', ->
 
   oldSetTimeout = setTimeout
-  config = null; service = null; totalWaited = null; delays = []
+  config = null; client = null; totalWaited = null; delays = []
   context = null; request = null; handler = null
 
   beforeEach ->
@@ -31,8 +31,8 @@ describe 'AWS.RequestHandler', ->
 
     totalWaited = 0
     delays = []
-    service = new MockClient(maxRetries: 3)
-    context = new AWS.AWSResponse(service: service,
+    client = new MockClient(maxRetries: 3)
+    context = new AWS.AWSResponse(client: client,
       method: 'mockMethod', params: {foo: 'bar'})
     request = new AWS.AWSRequest(context)
     handler = new AWS.RequestHandler(request)
@@ -78,7 +78,7 @@ describe 'AWS.RequestHandler', ->
 
     it 'should retry a request with a set maximum retries', ->
 
-      service.config.maxRetries = 10
+      client.config.maxRetries = 10
 
       # fail every request with a fake networking error
       AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb) ->
@@ -86,7 +86,7 @@ describe 'AWS.RequestHandler', ->
 
       handler.makeRequest()
 
-      expect(context.retryCount).toEqual(service.config.maxRetries + 1);
+      expect(context.retryCount).toEqual(client.config.maxRetries + 1);
       expect(request.notifyFail).toHaveBeenCalled()
       expect(request.notifyDone).not.toHaveBeenCalled()
 
@@ -113,7 +113,7 @@ describe 'AWS.RequestHandler', ->
         retryable: true)
 
       expect(request.notifyDone).not.toHaveBeenCalled()
-      expect(context.retryCount).toEqual(service.config.maxRetries + 1);
+      expect(context.retryCount).toEqual(client.config.maxRetries + 1);
 
     it 'should not call notifyFail if retried fewer than maxRetries', ->
 
@@ -128,7 +128,7 @@ describe 'AWS.RequestHandler', ->
       handler.makeRequest()
 
       expect(totalWaited).toEqual(90)
-      expect(context.retryCount).toBeLessThan(service.config.maxRetries);
+      expect(context.retryCount).toBeLessThan(client.config.maxRetries);
 
     it 'notifies done on a successful response', ->
 
@@ -158,7 +158,7 @@ describe 'AWS.RequestHandler', ->
 
     it 'notifies fail if an error is thrown', ->
 
-      # throw by the service while parsing a response
+      # throw by the client while parsing a response
       error = { error: 'ParseError', message: 'error message' }
 
       AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb) ->
@@ -166,7 +166,7 @@ describe 'AWS.RequestHandler', ->
         cb.onData("Success!")
         cb.onEnd()
 
-      spyOn(service, 'parseResponse').andThrow(error)
+      spyOn(client, 'parseResponse').andThrow(error)
       spyOn(handler, 'retryRequest')
 
       try

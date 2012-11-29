@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 AWS = require('../../lib/core')
-require('../../lib/rest_xml_service')
+require('../../lib/rest_xml_client')
 
 describe 'AWS.RESTClient', ->
 

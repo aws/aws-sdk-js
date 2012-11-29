@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 helpers = require('../helpers'); AWS = helpers.AWS
-require('../../lib/rest_xml_service')
+require('../../lib/rest_xml_client')
 
 describe 'AWS.RESTXMLClient', ->
 

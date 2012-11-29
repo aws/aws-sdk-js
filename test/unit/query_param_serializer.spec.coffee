@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 AWS = require('../../lib/core')
-require('../../lib/query_service')
+require('../../lib/query_client')
 
 describe 'AWS.QueryParamSerializer', ->
 

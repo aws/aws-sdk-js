@@ -14,19 +14,19 @@
 AWS = require('../../../lib/core')
 require('../../../lib/services/dynamodb')
 
-describe 'AWS.DynamoDB', ->
+describe 'AWS.DynamoDB.Client', ->
 
   configure = (options) ->
     new AWS.Config(options)
 
   ddb = (options) ->
-    new AWS.DynamoDB(configure(options))
+    new AWS.DynamoDB.Client(configure(options))
 
   describe 'config', ->
 
     it 'returns the configuration object it was constructed with', ->
       config = configure()
-      dynamo = new AWS.DynamoDB(config)
+      dynamo = new AWS.DynamoDB.Client(config)
       expect(dynamo.config).toEqual(config)
 
   describe 'numRetries', ->

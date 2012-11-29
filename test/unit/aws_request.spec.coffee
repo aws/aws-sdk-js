@@ -18,7 +18,7 @@ describe 'AWS.AWSRequest', ->
   request = null
   response = null
   beforeEach ->
-    response = new AWS.AWSResponse(service: null, method: 'POST', params: {})
+    response = new AWS.AWSResponse(client: null, method: 'POST', params: {})
     request = new AWS.AWSRequest(response)
 
   sharedBehaviour = (cbMethod, notifyMethod, data) ->
@@ -67,9 +67,9 @@ describe 'AWS.AWSRequest', ->
 
 
   describe 'constructor', ->
-    it 'should add data callback passed in via service config (onData)', ->
+    it 'should add data callback passed in via client config (onData)', ->
       result = null
-      response.service =
+      response.client =
         config:
           onData: (resp) -> result = resp.data
       request = new AWS.AWSRequest(response)
@@ -79,7 +79,7 @@ describe 'AWS.AWSRequest', ->
     it 'should allow callbacks to be passed in as an array', ->
       result1 = null
       result2 = null
-      response.service =
+      response.client =
         config:
           onData: [
             (resp) -> result1 = resp.data + '1',
@@ -92,7 +92,7 @@ describe 'AWS.AWSRequest', ->
 
     it 'should work for other callbacks', ->
       result = []
-      response.service =
+      response.client =
         config:
           onData: -> result.push('data')
           onAlways: -> result.push('always')

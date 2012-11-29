@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 AWS = require('../../lib/core')
-require('../../lib/json_service')
+require('../../lib/json_client')
 
 describe 'AWS.JSONClient', ->
 
