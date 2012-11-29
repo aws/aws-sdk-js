@@ -14,14 +14,14 @@
 AWS = require('../../lib/core')
 require('../../lib/query_service')
 
-describe 'AWS.QueryService', ->
+describe 'AWS.QueryClient', ->
 
-  MockQueryService = AWS.util.inherit AWS.QueryService,
+  MockQueryClient = AWS.util.inherit AWS.QueryClient,
     constructor: (config) -> 
       this.serviceName = 'mockservice'
-      AWS.QueryService.call(this, config)
+      AWS.QueryClient.call(this, config)
 
-  MockQueryService.prototype.api =
+  MockQueryClient.prototype.api =
     apiVersion: '2012-01-01'
     operations:
       operationName:
@@ -29,9 +29,9 @@ describe 'AWS.QueryService', ->
         i: {m:{Input:{m:{}}}}
         o: {Data:{t:'o',m:{Name:{t:'s'},Count:{t:'i'}}}}
 
-  AWS.Service.defineMethods(MockQueryService)
+  AWS.Client.defineMethods(MockQueryClient)
 
-  svc = new MockQueryService()
+  svc = new MockQueryClient()
 
   it 'defines a method for each api operation', ->
     expect(typeof svc.operationName).toEqual('function')

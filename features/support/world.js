@@ -17,7 +17,7 @@ var WorldConstructor = function WorldConstructor(callback) {
 
   var world = require('./helpers');
   world.AWS = require('../../lib/aws');
-  world.AWS.loadConfig(__dirname + '/../../configuration');
+  world.AWS.config.loadFromPath(__dirname + '/../../configuration');
 
   callback(world);
 

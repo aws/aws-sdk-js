@@ -14,22 +14,22 @@
 AWS = require('../../lib/core')
 require('../../lib/json_service')
 
-describe 'AWS.JSONService', ->
+describe 'AWS.JSONClient', ->
 
-  MockJSONService = AWS.util.inherit AWS.JSONService,
+  MockJSONClient = AWS.util.inherit AWS.JSONClient,
     constructor: (config) ->
       this.serviceName = 'mockservice'
-      AWS.JSONService.call(this, config)
+      AWS.JSONClient.call(this, config)
 
-  MockJSONService.prototype.api =
+  MockJSONClient.prototype.api =
     targetPrefix: 'prefix-'
     operations:
       operationName:
         n: 'OperationName'
 
-  AWS.Service.defineMethods(MockJSONService)
+  AWS.Client.defineMethods(MockJSONClient)
 
-  svc = new MockJSONService()
+  svc = new MockJSONClient()
 
   it 'defines a method for each api operation', ->
     expect(typeof svc.operationName).toEqual('function')

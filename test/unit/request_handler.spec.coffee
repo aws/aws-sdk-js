@@ -13,7 +13,7 @@
 
 helpers = require('../helpers')
 AWS = helpers.AWS
-MockService = helpers.MockService
+MockClient = helpers.MockClient
 
 describe 'AWS.RequestHandler', ->
 
@@ -31,7 +31,7 @@ describe 'AWS.RequestHandler', ->
 
     totalWaited = 0
     delays = []
-    service = new MockService(maxRetries: 3)
+    service = new MockClient(maxRetries: 3)
     context = new AWS.AWSResponse(service: service,
       method: 'mockMethod', params: {foo: 'bar'})
     request = new AWS.AWSRequest(context)

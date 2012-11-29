@@ -14,18 +14,18 @@
 AWS = require('../../lib/core')
 require('../../lib/rest_xml_service')
 
-describe 'AWS.RESTService', ->
+describe 'AWS.RESTClient', ->
 
   operation = null
 
-  MockRESTService = AWS.util.inherit AWS.RESTService,
+  MockRESTClient = AWS.util.inherit AWS.RESTClient,
     constructor: (config) ->
       this.serviceName = 'mockservice'
-      AWS.RESTService.call(this, config)
+      AWS.RESTClient.call(this, config)
 
   beforeEach ->
 
-    MockRESTService.prototype.api =
+    MockRESTClient.prototype.api =
       operations:
         sampleOperation:
           m: 'POST' # http method
@@ -33,11 +33,11 @@ describe 'AWS.RESTService', ->
           i: null   # no params
           o: null   # no ouputs
 
-    AWS.Service.defineMethods(MockRESTService)
+    AWS.Client.defineMethods(MockRESTClient)
 
-    operation = MockRESTService.prototype.api.operations.sampleOperation
+    operation = MockRESTClient.prototype.api.operations.sampleOperation
 
-  svc = new MockRESTService()
+  svc = new MockRESTClient()
 
   it 'defines a method for each api operation', ->
     expect(typeof svc.sampleOperation).toEqual('function')

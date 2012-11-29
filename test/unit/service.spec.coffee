@@ -13,9 +13,9 @@
 
 helpers = require('../helpers')
 AWS = helpers.AWS
-MockService = helpers.MockService
+MockClient = helpers.MockClient
 
-describe 'AWS.Service', ->
+describe 'AWS.Client', ->
 
   config = null; service = null
   retryableError = (error, result) ->
@@ -23,30 +23,30 @@ describe 'AWS.Service', ->
 
   beforeEach ->
     config = new AWS.Config()
-    service = new AWS.Service(config)
+    service = new AWS.Client(config)
 
   describe 'constructor', ->
     it 'should use AWS.config copy if no config is provided', ->
-      service = new AWS.Service()
+      service = new AWS.Client()
       expect(service.config).not.toBe(AWS.config)
       expect(service.config.sslEnabled).toEqual(true)
 
     it 'should merge custom options on top of global defaults if config provided', ->
-      service = new AWS.Service(maxRetries: 5)
+      service = new AWS.Client(maxRetries: 5)
       expect(service.config.sslEnabled).toEqual(true)
       expect(service.config.maxRetries).toEqual(5)
 
     it 'should allow AWS.config to be object literal', ->
       cfg = AWS.config
       AWS.config = maxRetries: 20
-      service = new AWS.Service({})
+      service = new AWS.Client({})
       expect(service.config.maxRetries).toEqual(20)
       expect(service.config.sslEnabled).toEqual(true)
       AWS.config = cfg
 
   describe 'makeRequest', ->
     it 'should allow extra config applied per request', ->
-      service = new MockService(maxRetries: 10, sslEnabled: false)
+      service = new MockClient(maxRetries: 10, sslEnabled: false)
       request = service.makeRequest('foo', {}, {sslEnabled: true, maxRetries: 0})
 
       expect(request.awsResponse.service.config.sslEnabled).toEqual(true)

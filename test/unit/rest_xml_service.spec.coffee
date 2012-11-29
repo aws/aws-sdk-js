@@ -14,20 +14,20 @@
 helpers = require('../helpers'); AWS = helpers.AWS
 require('../../lib/rest_xml_service')
 
-describe 'AWS.RESTXMLService', ->
+describe 'AWS.RESTXMLClient', ->
 
   xmlns = 'http://mockservice.com/xmlns'
 
   operation = null
 
-  MockRESTXMLService = AWS.util.inherit AWS.RESTXMLService,
+  MockRESTXMLClient = AWS.util.inherit AWS.RESTXMLClient,
     constructor: (config) ->
       this.serviceName = 'mockservice'
-      AWS.RESTXMLService.call(this, config)
+      AWS.RESTXMLClient.call(this, config)
 
   beforeEach ->
 
-    MockRESTXMLService.prototype.api =
+    MockRESTXMLClient.prototype.api =
       xmlNamespace: xmlns
       operations:
         sampleOperation:
@@ -36,11 +36,11 @@ describe 'AWS.RESTXMLService', ->
           i: null   # no params
           o: null   # no ouputs
 
-    AWS.Service.defineMethods(MockRESTXMLService)
+    AWS.Client.defineMethods(MockRESTXMLClient)
 
-    operation = MockRESTXMLService.prototype.api.operations.sampleOperation
+    operation = MockRESTXMLClient.prototype.api.operations.sampleOperation
 
-  svc = new MockRESTXMLService()
+  svc = new MockRESTXMLClient()
 
   it 'defines a method for each api operation', ->
     expect(typeof svc.sampleOperation).toEqual('function')

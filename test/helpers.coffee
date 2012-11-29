@@ -30,8 +30,8 @@ flattenXML = (xml) ->
 matchXML = (xml1, xml2) ->
   expect(flattenXML(xml1)).toEqual(flattenXML(xml2))
 
-MockService = AWS.util.inherit AWS.Service,
-  constructor: (config) -> AWS.Service.call(this, config)
+MockClient = AWS.util.inherit AWS.Client,
+  constructor: (config) -> AWS.Client.call(this, config)
   buildRequest: ->
     req = this.newHttpRequest()
     req.sign = ->
@@ -48,4 +48,4 @@ module.exports =
   AWS: AWS
   integration: integration
   matchXML: matchXML
-  MockService: MockService
+  MockClient: MockClient
