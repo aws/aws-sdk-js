@@ -14,7 +14,7 @@ object as "request", which can be used to register callbacks:
 
 ```js
 // request is a AWS.AWSRequest object
-var request = ec2.describeInstances();
+var request = ec2.client.describeInstances();
 
 // register callbacks on request to retrieve response data
 request.done(function(response) {
@@ -72,7 +72,7 @@ with the serialized response data from the service.
 For example:
 
 ```js
-s3.listBuckets().done(function(response) {
+s3.client.listBuckets().done(function(response) {
   console.log(response.data);
 });
 ```
@@ -96,7 +96,7 @@ the error data:
 
 ```js
 s3.config.credentials.accessKeyId = 'invalid';
-s3.listBuckets().fail(function(response) {
+s3.client.listBuckets().fail(function(response) {
   console.log(response.error)
 });
 ```
