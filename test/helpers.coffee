@@ -44,8 +44,14 @@ MockClient = AWS.util.inherit AWS.Client,
   serviceName: 'mockservice'
   signatureVersion: require('../lib/sigv4')
 
+MockService = AWS.util.inherit AWS.Service,
+  constructor: (config) -> AWS.Service.call(this, config)
+
+MockService.Client = MockClient
+
 module.exports =
   AWS: AWS
   integration: integration
   matchXML: matchXML
   MockClient: MockClient
+  MockService: MockService
