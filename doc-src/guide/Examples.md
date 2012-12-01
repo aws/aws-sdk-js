@@ -2,7 +2,7 @@
 
 All of these examples assume that the AWS library is required,
 credentials are loaded via environment variables (`AWS_ACCESS_KEY_ID`
-and `AWS_SECRET_ACCESS_KEY`), and region is set via 
+and `AWS_SECRET_ACCESS_KEY`), and the region is set via 
 `AWS.config.update({region: 'us-east-1'});`.
 
 The common preamble code can be summarized as follows:
@@ -12,9 +12,9 @@ var AWS = require('aws-sdk');
 AWS.config.update({region: 'us-east-1'});
 ```
 
-## Simple Storage Service (S3)
+## Amazon Simple Storage Service (Amazon S3)
 
-### S3: List All of Your Buckets (listBuckets)
+### Amazon S3: List All of Your Buckets (listBuckets)
 
 The following example lists all buckets associated with your AWS account:
 
@@ -28,7 +28,7 @@ s3.client.listBuckets().done(function(resp) {
 });
 ```
 
-### S3: Create a New Bucket and Object (createBucket, putObject)
+### Amazon S3: Create a New Bucket and Object (createBucket, putObject)
 
 The following example puts the string 'Hello!' inside the
 object 'myKey' of bucket 'myBucket':
@@ -43,9 +43,9 @@ s3.client.createBucket({Bucket: 'myBucket'}).done(function(resp) {
 });
 ```
 
-## DynamoDB
+## Amazon DynamoDB
 
-### DynamoDB: Listing Tables
+### Amazon DynamoDB: Listing Tables
 
 The following example will list all tables in a DynamoDB instance:
 
