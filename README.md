@@ -53,7 +53,7 @@ s3.client.createBucket({Bucket: 'myBucket'}).done(function(resp) {
 
 You can find a getting started guide at:
 
-http://TBD
+http://docs.amazonwebservices.com/nodejs/latest/dg/
 
 ## License
 
