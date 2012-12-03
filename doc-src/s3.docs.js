@@ -122,7 +122,10 @@ AWS = {};
  *     * +GrantFullControl+ - (<tt>String</tt>) Allows grantee the read,
  *       write, read ACP, and write ACP permissions on the bucket.
  *   @param [Object] options
- *   @return [AWS.AWSRequest]
+ *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
+ *     object that is passed to the registered callbacks has the
+ *     following properties:
+ *     * +Location+ - (<tt>String</tt>)
  *
  * @!method createMultipartUpload(params, options)
  *   Initiates a multipart upload and returns an upload ID.
