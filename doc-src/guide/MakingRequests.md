@@ -6,14 +6,14 @@
 
 All requests made through the SDK are asynchronous and use an
 event-based promise callback interface. Each service method
-that kicks off a request will return an `AWS.AWSRequest` promise
+that kicks off a request returns an `AWS.AWSRequest` promise
 object that you can use to register callbacks.
 
 For example, the following service method returns the request
 object as "request", which can be used to register callbacks:
 
 ```js
-// request is a AWS.AWSRequest object
+// request is an AWS.AWSRequest object
 var request = ec2.client.describeInstances();
 
 // register callbacks on request to retrieve response data
@@ -31,8 +31,9 @@ is passed in contains two important properties to get at this data:
 #### The `data` property
 
 The `response.data` property contains the serialized object data
-retrieved from the service request. For instance, for a DynamoDB
-`listTables` method call, the response data might look like:
+retrieved from the service request. For instance, for an
+Amazon DynamoDB `listTables` method call, the response data might 
+look like this:
 
 ```js
 > resp.data
@@ -60,7 +61,7 @@ before attempting to access the `response.data` property.
 
 ### Supported Callbacks
 
-Currently, callbacks can be registered for various events
+Currently, you can register callbacks for various events by
 using the following methods:
 
 #### `done(function(response) { ... })`
@@ -109,7 +110,7 @@ Prints:
 
 #### `data(function(response) { ... })`
 
-<p class="note">If a <code>data</code> callback is registered,
+<p class="note">If you register a <code>data</code> callback,
   <code>response.data</code> will not contain serialized output
   for the entire request. Instead, it will be your responsibility
   to stream the output and de-serialize the result on your own.
@@ -145,9 +146,9 @@ TODO: discuss bindings.
 
 ## Multiple Callbacks and Chaining
 
-Multiple callbacks can be registered on any request object. The
+You can register multiple callbacks on any request object. The
 callbacks can be registered for different events, or all for the
-same event. In addition, callback registration can be chained, for
+same event. In addition, you can chain callback registration, for
 example:
 
 ```js

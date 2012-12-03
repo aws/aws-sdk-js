@@ -21,22 +21,22 @@ application using `require`:
 var AWS = require('aws-sdk');
 ```
 
-Here is a quick example that makes some requests against S3 with the SDK:
+Here is a quick example that makes some requests against Amazon S3 with the SDK:
 
 ```js
 // Load the AWS SDK for Node.js
 var AWS = require('aws-sdk');
 
 /**
- * Don't hardcode your credentials!
- * You should load them from disk or your environment instead.
+ * Don't hard-code your credentials!
+ * Load them from disk or your environment instead.
  */
 // AWS.config.update({accessKeyId: 'AKID', secretAccessKey: 'SECRET'});
 
 // Instead, do this:
 AWS.config.loadFromPath('./path/to/credentials.json');
 
-// Set your region for future requests
+// Set your region for future requests.
 AWS.config.update({region: 'us-east-1'});
 
 // Create a bucket and put something in it.
@@ -51,7 +51,7 @@ s3.client.createBucket({Bucket: 'myBucket'}).done(function(resp) {
 
 ## Getting Started Guide
 
-A getting started guide can be found at:
+You can find a getting started guide at:
 
 http://TBD
 
@@ -61,7 +61,7 @@ This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
 ```no-highlight
-Copyright 2012 Amazon Web Services
+Copyright 2012. Amazon Web Services, Inc. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

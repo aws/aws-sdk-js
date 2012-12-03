@@ -43,14 +43,14 @@ recommendation:
 
 1. Loaded from environment variables,
 2. Loaded from a JSON file on disk,
-3. Loaded from EC2 meta-data service,
+3. Loaded from EC2 metadata service,
 4. Hardcoded in your application
 
-It is not recommended to hardcode your AWS credentials in your application,
-however, it is reasonable to temporarily hardcode credential information
-in small personal scripts to toy with the services.
+We recommend you not hard-code your AWS credentials in your application;
+however, it is reasonable to temporarily hard-code credential information
+in small personal scripts or for testing purposes.
 
-#### Credentials From Environment Variables
+#### Credentials from Environment Variables
 
 By default, the AWS SDK for Node.js will automatically detect AWS credentials
 set in your environment and use them for requests. This means that if you
@@ -69,7 +69,7 @@ Alternately, the SDK can accept the `AMAZON_` prefix instead:
 AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY, AMAZON_SESSION_TOKEN (optional)
 ```
 
-#### Credentials From Disk
+#### Credentials from Disk
 
 You can also load configuration and credentials from disk using
 `AWS.config.loadFromPath` by passing a file to a JSON document
@@ -90,14 +90,14 @@ Note that the `loadFromPath` method clobbers all existing configuration on
 the object. If you are adding extra configuration, make sure you add it
 after this call.
 
-#### Hardcoding Credentials
+#### Hard-Coding Credentials
 
-<p class="note">It is <strong>not recommended</strong> to hardcode
-  credentials inside an application. You should only use this method for
+<p class="note">We recommend you <strong>not</strong> hard-code
+  credentials inside an application. Use this method only for
   small personal scripts or for testing purposes.
 </p>
 
-Credentials can be hardcoded by passing the credential information to the
+You can hard-code credentials by passing the credential information to the
 configuration object using `AWS.config.update()`:
 
 ```js
@@ -114,12 +114,12 @@ using `AWS.config.update()`:
 AWS.config.update({region: 'us-west-1'});
 ```
 
-## Service Specific Configuration
+## Service-Specific Configuration
 
-Occasionally you might want to apply configuration only to one service.
+Occasionally, you might want to apply configuration only to one service.
 For instance, you want to use multiple EC2 objects in different regions.
-You can do this by passing configuration data to the service object constructor
-directly:
+You can do this by passing configuration data directly to the service object 
+constructor:
 
 ```js
 var ec2 = new AWS.EC2({region: 'ap-southeast-2', maxRetries: 15});
