@@ -4543,5 +4543,8 @@ AWS = {};
  *         * +State+ - (<tt>String</tt>) The state of monitoring on an
  *           Amazon EC2 instance (ex: enabled, disabled).
  *
+ * @!attribute endpoint
+ *   @return [AWS.Endpoint] an Endpoint object representing
+ *     the endpoint URL for service requests.
  */
 AWS.EC2.Client = inherit({});

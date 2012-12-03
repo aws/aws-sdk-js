@@ -1089,5 +1089,8 @@ AWS = {};
  *       * +TableSizeBytes+ - (<tt>Integer</tt>)
  *       * +ItemCount+ - (<tt>Integer</tt>)
  *
+ * @!attribute endpoint
+ *   @return [AWS.Endpoint] an Endpoint object representing
+ *     the endpoint URL for service requests.
  */
 AWS.DynamoDB.Client = inherit({});

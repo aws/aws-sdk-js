@@ -332,10 +332,20 @@ AWS = {};
  *       * +Status+ - (<tt>String</tt>) If 'Enabled', the rule is
  *         currently being applied. If 'Disabled', the rule is not
  *         currently being applied.
+ *       * +Transition+ - (<tt>Object</tt>)
+ *         * +Days+ - (<tt>Integer</tt>) Indicates the lifetime, in days,
+ *           of the objects that are subject to the rule. The value must
+ *           be a non-zero positive integer.
+ *         * +Date+ - (<tt>Date</tt>) Indicates at what date the object
+ *           is to be moved or deleted. Should be in GMT ISO 8601 Format.
+ *         * +StorageClass+ - (<tt>String</tt>) The class of storage used
+ *           to store the object.
  *       * +Expiration+ - (<tt>Object</tt>)
  *         * +Days+ - (<tt>Integer</tt>) Indicates the lifetime, in days,
  *           of the objects that are subject to the rule. The value must
  *           be a non-zero positive integer.
+ *         * +Date+ - (<tt>Date</tt>) Indicates at what date the object
+ *           is to be moved or deleted. Should be in GMT ISO 8601 Format.
  *
  * @!method getBucketLocation(params, options)
  *   Returns the region the bucket resides in.
@@ -949,10 +959,22 @@ AWS = {};
  *         * +Status+ - (*required*, <tt>String</tt>) If 'Enabled', the
  *           rule is currently being applied. If 'Disabled', the rule is
  *           not currently being applied.
- *         * +Expiration+ - (*required*, <tt>Object</tt>)
+ *         * +Transition+ - (<tt>Object</tt>)
+ *           * +Days+ - (<tt>Integer</tt>) Indicates the lifetime, in
+ *             days, of the objects that are subject to the rule. The
+ *             value must be a non-zero positive integer.
+ *           * +Date+ - (<tt>Date</tt>) Indicates at what date the object
+ *             is to be moved or deleted. Should be in GMT ISO 8601
+ *             Format.
+ *           * +StorageClass+ - (<tt>String</tt>) The class of storage
+ *             used to store the object.
+ *         * +Expiration+ - (<tt>Object</tt>)
  *           * +Days+ - (*required*, <tt>Integer</tt>) Indicates the
  *             lifetime, in days, of the objects that are subject to the
  *             rule. The value must be a non-zero positive integer.
+ *           * +Date+ - (<tt>Date</tt>) Indicates at what date the object
+ *             is to be moved or deleted. Should be in GMT ISO 8601
+ *             Format.
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
@@ -1160,11 +1182,26 @@ AWS = {};
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
+ * @!method restoreObject(params, options)
+ *   Restores an archived copy of an object back into Amazon S3
+ *   @param [Object] params
+ *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * +Key+ - (*required*, <tt>String</tt>)
+ *     * +RestoreRequest+ - (<tt>Object</tt>)
+ *       * +Days+ - (*required*, <tt>Integer</tt>) Lifetime of the active
+ *         copy in days
+ *   @param [Object] options
+ *   @return [AWS.AWSRequest]
+ *
  * @!method uploadPart(params, options)
  *   Uploads a part in a multipart upload.
  *   @param [Object] params
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
+ *     * +UploadId+ - (*required*, <tt>String</tt>) Upload ID identifying
+ *       the multipart upload whose part is being uploaded.
+ *     * +PartNumber+ - (*required*, <tt>String</tt>) Part number of part
+ *       being uploaded.
  *     * +Body+ - (<tt>Base64 Encoded Data</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
@@ -1180,6 +1217,10 @@ AWS = {};
  *   @param [Object] params
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
+ *     * +UploadId+ - (*required*, <tt>String</tt>) Upload ID identifying
+ *       the multipart upload whose part is being copied.
+ *     * +PartNumber+ - (*required*, <tt>String</tt>) Part number of part
+ *       being copied.
  *     * +CopySourceRange+ - (<tt>String</tt>) The range of bytes to copy
  *       from the source object. The range value must use the form
  *       bytes=first-last, where the first and last are the zero-based
@@ -1211,5 +1252,8 @@ AWS = {};
  *     * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
  *       encryption algorithm used when storing this object in S3.
  *
+ * @!attribute endpoint
+ *   @return [AWS.Endpoint] an Endpoint object representing
+ *     the endpoint URL for service requests.
  */
 AWS.S3.Client = inherit({});

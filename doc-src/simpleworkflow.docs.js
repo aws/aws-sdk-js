@@ -1307,5 +1307,8 @@ AWS = {};
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
+ * @!attribute endpoint
+ *   @return [AWS.Endpoint] an Endpoint object representing
+ *     the endpoint URL for service requests.
  */
 AWS.SimpleWorkflow.Client = inherit({});
