@@ -76,8 +76,8 @@ AWS = {};
  *       a RequestItems parameter (so the value can be provided directly
  *       to a subsequent BatchGetItem operation). For more information,
  *       see the above RequestItems parameter.
- *       * +Keys+ - (*required*, <tt>Array<Object></tt>)
- *         * +HashKeyElement+ - (*required*, <tt>Object</tt>) A hash key
+ *       * +Keys+ - (<tt>Array<Object></tt>)
+ *         * +HashKeyElement+ - (<tt>Object</tt>) A hash key
  *           element is treated as the primary key, and can be a string
  *           or a number. Single attribute primary keys have one index
  *           value. The value can be String, Number, StringSet,
@@ -197,7 +197,7 @@ AWS = {};
  *       which we could not successfully process in a BatchWriteItem call
  *       is returned as UnprocessedItems
  *       * +PutRequest+ - (<tt>Object</tt>)
- *         * +Item+ - (*required*, <tt>Object<Object></tt>) The item to
+ *         * +Item+ - (<tt>Object<Object></tt>) The item to
  *           put
  *           * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8
  *             binary encoding. The maximum size is limited by the size
@@ -214,9 +214,9 @@ AWS = {};
  *           * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of
  *             binary attributes.
  *       * +DeleteRequest+ - (<tt>Object</tt>)
- *         * +Key+ - (*required*, <tt>Object</tt>) The item's key to be
+ *         * +Key+ - (<tt>Object</tt>) The item's key to be
  *           delete
- *           * +HashKeyElement+ - (*required*, <tt>Object</tt>) A hash
+ *           * +HashKeyElement+ - (<tt>Object</tt>) A hash
  *             key element is treated as the primary key, and can be a
  *             string or a number. Single attribute primary keys have one
  *             index value. The value can be String, Number, StringSet,
@@ -301,14 +301,14 @@ AWS = {};
  *       * +TableName+ - (<tt>String</tt>) The name of the table being
  *         described.
  *       * +KeySchema+ - (<tt>Object</tt>)
- *         * +HashKeyElement+ - (*required*, <tt>Object</tt>) A hash key
+ *         * +HashKeyElement+ - (<tt>Object</tt>) A hash key
  *           element is treated as the primary key, and can be a string
  *           or a number. Single attribute primary keys have one index
  *           value. The value can be String, Number, StringSet,
  *           NumberSet.
- *           * +AttributeName+ - (*required*, <tt>String</tt>) The
+ *           * +AttributeName+ - (<tt>String</tt>) The
  *             AttributeName of the KeySchemaElement.
- *           * +AttributeType+ - (*required*, <tt>String</tt>) The
+ *           * +AttributeType+ - (<tt>String</tt>) The
  *             AttributeType of the KeySchemaElement which can be a
  *             String or a Number.
  *         * +RangeKeyElement+ - (<tt>Object</tt>) A range key element is
@@ -316,9 +316,9 @@ AWS = {};
  *           primary key), and can be a string or a number, and is only
  *           used for hash-and-range primary keys. The value can be
  *           String, Number, StringSet, NumberSet.
- *           * +AttributeName+ - (*required*, <tt>String</tt>) The
+ *           * +AttributeName+ - (<tt>String</tt>) The
  *             AttributeName of the KeySchemaElement.
- *           * +AttributeType+ - (*required*, <tt>String</tt>) The
+ *           * +AttributeType+ - (<tt>String</tt>) The
  *             AttributeType of the KeySchemaElement which can be a
  *             String or a Number.
  *       * +TableStatus+ - (<tt>String</tt>)
@@ -430,14 +430,14 @@ AWS = {};
  *       * +TableName+ - (<tt>String</tt>) The name of the table being
  *         described.
  *       * +KeySchema+ - (<tt>Object</tt>)
- *         * +HashKeyElement+ - (*required*, <tt>Object</tt>) A hash key
+ *         * +HashKeyElement+ - (<tt>Object</tt>) A hash key
  *           element is treated as the primary key, and can be a string
  *           or a number. Single attribute primary keys have one index
  *           value. The value can be String, Number, StringSet,
  *           NumberSet.
- *           * +AttributeName+ - (*required*, <tt>String</tt>) The
+ *           * +AttributeName+ - (<tt>String</tt>) The
  *             AttributeName of the KeySchemaElement.
- *           * +AttributeType+ - (*required*, <tt>String</tt>) The
+ *           * +AttributeType+ - (<tt>String</tt>) The
  *             AttributeType of the KeySchemaElement which can be a
  *             String or a Number.
  *         * +RangeKeyElement+ - (<tt>Object</tt>) A range key element is
@@ -445,9 +445,9 @@ AWS = {};
  *           primary key), and can be a string or a number, and is only
  *           used for hash-and-range primary keys. The value can be
  *           String, Number, StringSet, NumberSet.
- *           * +AttributeName+ - (*required*, <tt>String</tt>) The
+ *           * +AttributeName+ - (<tt>String</tt>) The
  *             AttributeName of the KeySchemaElement.
- *           * +AttributeType+ - (*required*, <tt>String</tt>) The
+ *           * +AttributeType+ - (<tt>String</tt>) The
  *             AttributeType of the KeySchemaElement which can be a
  *             String or a Number.
  *       * +TableStatus+ - (<tt>String</tt>)
@@ -475,14 +475,14 @@ AWS = {};
  *       * +TableName+ - (<tt>String</tt>) The name of the table being
  *         described.
  *       * +KeySchema+ - (<tt>Object</tt>)
- *         * +HashKeyElement+ - (*required*, <tt>Object</tt>) A hash key
+ *         * +HashKeyElement+ - (<tt>Object</tt>) A hash key
  *           element is treated as the primary key, and can be a string
  *           or a number. Single attribute primary keys have one index
  *           value. The value can be String, Number, StringSet,
  *           NumberSet.
- *           * +AttributeName+ - (*required*, <tt>String</tt>) The
+ *           * +AttributeName+ - (<tt>String</tt>) The
  *             AttributeName of the KeySchemaElement.
- *           * +AttributeType+ - (*required*, <tt>String</tt>) The
+ *           * +AttributeType+ - (<tt>String</tt>) The
  *             AttributeType of the KeySchemaElement which can be a
  *             String or a Number.
  *         * +RangeKeyElement+ - (<tt>Object</tt>) A range key element is
@@ -490,9 +490,9 @@ AWS = {};
  *           primary key), and can be a string or a number, and is only
  *           used for hash-and-range primary keys. The value can be
  *           String, Number, StringSet, NumberSet.
- *           * +AttributeName+ - (*required*, <tt>String</tt>) The
+ *           * +AttributeName+ - (<tt>String</tt>) The
  *             AttributeName of the KeySchemaElement.
- *           * +AttributeType+ - (*required*, <tt>String</tt>) The
+ *           * +AttributeType+ - (<tt>String</tt>) The
  *             AttributeType of the KeySchemaElement which can be a
  *             String or a Number.
  *       * +TableStatus+ - (<tt>String</tt>)
@@ -766,7 +766,7 @@ AWS = {};
  *       this value in the new request. The LastEvaluatedKey is null when
  *       the entire query result set is complete (i.e. the operation
  *       processed the "last page").
- *       * +HashKeyElement+ - (*required*, <tt>Object</tt>) A hash key
+ *       * +HashKeyElement+ - (<tt>Object</tt>) A hash key
  *         element is treated as the primary key, and can be a string or
  *         a number. Single attribute primary keys have one index value.
  *         The value can be String, Number, StringSet, NumberSet.
@@ -898,7 +898,7 @@ AWS = {};
  *       subsequent scan operation to continue the operation from that
  *       point. The LastEvaluatedKey is null when the entire scan result
  *       set is complete (i.e. the operation processed the "last page").
- *       * +HashKeyElement+ - (*required*, <tt>Object</tt>) A hash key
+ *       * +HashKeyElement+ - (<tt>Object</tt>) A hash key
  *         element is treated as the primary key, and can be a string or
  *         a number. Single attribute primary keys have one index value.
  *         The value can be String, Number, StringSet, NumberSet.
@@ -1059,14 +1059,14 @@ AWS = {};
  *       * +TableName+ - (<tt>String</tt>) The name of the table being
  *         described.
  *       * +KeySchema+ - (<tt>Object</tt>)
- *         * +HashKeyElement+ - (*required*, <tt>Object</tt>) A hash key
+ *         * +HashKeyElement+ - (<tt>Object</tt>) A hash key
  *           element is treated as the primary key, and can be a string
  *           or a number. Single attribute primary keys have one index
  *           value. The value can be String, Number, StringSet,
  *           NumberSet.
- *           * +AttributeName+ - (*required*, <tt>String</tt>) The
+ *           * +AttributeName+ - (<tt>String</tt>) The
  *             AttributeName of the KeySchemaElement.
- *           * +AttributeType+ - (*required*, <tt>String</tt>) The
+ *           * +AttributeType+ - (<tt>String</tt>) The
  *             AttributeType of the KeySchemaElement which can be a
  *             String or a Number.
  *         * +RangeKeyElement+ - (<tt>Object</tt>) A range key element is
@@ -1074,9 +1074,9 @@ AWS = {};
  *           primary key), and can be a string or a number, and is only
  *           used for hash-and-range primary keys. The value can be
  *           String, Number, StringSet, NumberSet.
- *           * +AttributeName+ - (*required*, <tt>String</tt>) The
+ *           * +AttributeName+ - (<tt>String</tt>) The
  *             AttributeName of the KeySchemaElement.
- *           * +AttributeType+ - (*required*, <tt>String</tt>) The
+ *           * +AttributeType+ - (<tt>String</tt>) The
  *             AttributeType of the KeySchemaElement which can be a
  *             String or a Number.
  *       * +TableStatus+ - (<tt>String</tt>)
