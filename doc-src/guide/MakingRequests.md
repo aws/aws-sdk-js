@@ -98,14 +98,14 @@ the error data:
 ```js
 s3.config.credentials.accessKeyId = 'invalid';
 s3.client.listBuckets().fail(function(response) {
-  console.log(response.error)
+  console.log(response.error);
 });
 ```
 
 Prints:
 
 ```js
-{ code: 403, message: 'Forbidden' }
+{ code: 'Forbidden', message: 403 }
 ```
 
 #### `data(function(response) { ... })`
