@@ -123,7 +123,7 @@ memory.
 
 #### `always(function(response) { ... })`
 
-The `always` event is triggered in any final state of a request, i.e.,
+The `always` event triggers a callback in any final state of a request, i.e.,
 both `done` and `fail`. Use this callback to handle any request cleanup
 that must be executed regardless of the success state. Note that if you
 do intend to use response data inside of this callback, you must check
