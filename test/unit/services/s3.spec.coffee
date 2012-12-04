@@ -273,3 +273,12 @@ describe 'AWS.S3.Client', ->
           LocationConstraint: 'EU',
           RequestId: 'abcxyz',
         })
+
+  describe 'createBucket', ->
+    it 'auto-populates the LocationConstraint based on the region', ->
+      loc = null
+      s3 = new AWS.S3.Client(region:'eu-west-1')
+      s3.makeRequest = (op, params) ->
+        loc = params.LocationConstraint
+      s3.createBucket(Bucket:'name')
+      expect(loc).toEqual('eu-west-1')
