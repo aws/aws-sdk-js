@@ -173,21 +173,21 @@ describe 'AWS.S3.Client', ->
       resp.statusCode = 304
       error = extractError(resp)
       expect(error.code).toEqual('NotModified')
-      expect(error.message).toEqual(304)
+      expect(error.message).toEqual(null)
 
     it 'handles 403 errors', ->
       resp = new AWS.HttpResponse()
       resp.statusCode = 403
       error = extractError(resp)
       expect(error.code).toEqual('Forbidden')
-      expect(error.message).toEqual(403)
+      expect(error.message).toEqual(null)
 
     it 'handles 404 errors', ->
       resp = new AWS.HttpResponse()
       resp.statusCode = 404
       error = extractError(resp)
       expect(error.code).toEqual('NotFound')
-      expect(error.message).toEqual(404)
+      expect(error.message).toEqual(null)
 
     it 'misc errors not known to return an empty body', ->
       resp = new AWS.HttpResponse()

@@ -105,7 +105,7 @@ s3.client.listBuckets().fail(function(response) {
 Prints:
 
 ```js
-{ code: 'Forbidden', message: 403 }
+{ code: 'Forbidden', message: null }
 ```
 
 #### `data(function(response) { ... })`
