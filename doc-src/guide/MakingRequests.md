@@ -50,7 +50,7 @@ In the event of a service error (or transfer error), the
 error data in the form:
 
 ```js
-{ code: NUMERIC_ERROR_CODE,
+{ code: 'SHORT_UNIQUE_ERROR_CODE',
   message: 'Some human readable error message' }
 ```
 
