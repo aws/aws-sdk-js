@@ -17,6 +17,32 @@
 AWS = {};
 
 /**
+ * Constructs a service interface and a low-level {Client}.  Use the +client+
+ * property to make API calls.  Each API operation is exposed as a function on
+ * the +client+.
+ *
+ * === Sending a Request Using SimpleWorkflow
+ *
+ *   svc = new AWS.SimpleWorkflow();
+ *   svc.client.OPERATION_NAME(params).always(function (resp) {
+ *     console.log(resp.data, resp.error);
+ *   });
+ *
+ * @!method constructor(options)
+ *   Constructs a service interface.  The returned service will have a {client}
+ *   property that provides access to the API operations.
+ *   @option (see AWS.SimpleWorkflow.Client.constructor)
+ *
+ * @!attribute client
+ *   @return [AWS.SimpleWorkflow.Client] A client that provides one method for each
+ *     API operation.
+ *
+ * @see AWS.SimpleWorkflow.Client
+ *
+ */
+AWS.SimpleWorkflow = inherit({})
+
+/**
  * @!method countClosedWorkflowExecutions(params, options)
  *   Calls the CountClosedWorkflowExecutions API operation.
  *   @param [Object] params
@@ -1310,7 +1336,9 @@ AWS = {};
  *
  *
  * @!method constructor(options)
- *   @option options [String] endpoint The HTTP(s) endpoint to send requests
+ *   Constructs a service client object.  This client has one method for
+ *   each API operation.
+ *   @option options [String] endpoint The endpoint URI to send requests
  *     to.  The default endpoint is built from the configured +region+.
  *     The endpoint should be a string like <tt>'https://s3.amazonaws.com'</tt>.
  *   @option (see AWS.Config.constructor)

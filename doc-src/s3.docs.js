@@ -17,6 +17,32 @@
 AWS = {};
 
 /**
+ * Constructs a service interface and a low-level {Client}.  Use the +client+
+ * property to make API calls.  Each API operation is exposed as a function on
+ * the +client+.
+ *
+ * === Sending a Request Using S3
+ *
+ *   svc = new AWS.S3();
+ *   svc.client.OPERATION_NAME(params).always(function (resp) {
+ *     console.log(resp.data, resp.error);
+ *   });
+ *
+ * @!method constructor(options)
+ *   Constructs a service interface.  The returned service will have a {client}
+ *   property that provides access to the API operations.
+ *   @option (see AWS.S3.Client.constructor)
+ *
+ * @!attribute client
+ *   @return [AWS.S3.Client] A client that provides one method for each
+ *     API operation.
+ *
+ * @see AWS.S3.Client
+ *
+ */
+AWS.S3 = inherit({})
+
+/**
  * @!method abortMultipartUpload(params, options)
  *   Aborts a multipart upload.
  *   @param [Object] params
@@ -1255,7 +1281,9 @@ AWS = {};
  *
  *
  * @!method constructor(options)
- *   @option options [String] endpoint The HTTP(s) endpoint to send requests
+ *   Constructs a service client object.  This client has one method for
+ *   each API operation.
+ *   @option options [String] endpoint The endpoint URI to send requests
  *     to.  The default endpoint is built from the configured +region+.
  *     The endpoint should be a string like <tt>'https://s3.amazonaws.com'</tt>.
  *   @option (see AWS.Config.constructor)
