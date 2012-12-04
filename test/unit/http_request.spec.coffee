@@ -28,8 +28,7 @@ describe 'AWS.HttpRequest', ->
       expect(request.path).toEqual('/')
 
     it 'provides headers with a default user agent', ->
-      userAgent = 'aws-sdk-js/' + AWS.VERSION
-      expect(request.headers).toEqual({ 'User-Agent': userAgent })
+      expect(request.headers).toEqual({ 'User-Agent': AWS.util.userAgent() })
 
     it 'defaults body to undefined', ->
       expect(request.body).toEqual(undefined)

@@ -14,6 +14,9 @@
 AWS = require('../../lib/core')
 require('../../lib/services/dynamodb')
 
+beforeEach ->
+  spyOn(AWS.util, 'userAgent').andReturn('aws-sdk-js/0.1')
+
 buildRequest = ->
   ddb = new AWS.DynamoDB.Client({ region:'region' })
   req = ddb.buildRequest('listTables', { foo: 'bar' })
@@ -84,7 +87,7 @@ describe 'AWS.SigV4', ->
         'content-type:application/x-amz-json-1.0',
         'date:' + datetime,
         'host:localhost',
-        'user-agent:aws-sdk-js/' + AWS.VERSION,
+        'user-agent:' + AWS.util.userAgent(),
         'x-amz-date:' + datetime,
         'x-amz-security-token:session',
         'x-amz-target:DynamoDB_20111205.ListTables'
