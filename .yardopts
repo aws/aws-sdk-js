@@ -1,4 +1,5 @@
 --exclude api.js
 --no-api private
+--no-highlight
 lib/**/*.js
 doc-src/*.js
