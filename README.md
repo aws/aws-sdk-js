@@ -43,7 +43,7 @@ AWS.config.update({region: 'us-east-1'});
 var s3 = new AWS.S3();
 s3.client.createBucket({Bucket: 'myBucket'}).done(function(resp) {
   var data = {Bucket: 'myBucket', Key: 'myKey', Body: 'Hello!'};
-  s3.putObject(data).done(function(resp) {
+  s3.client.putObject(data).done(function(resp) {
     console.log("Successfully uploaded data to myBucket/myKey");
   });
 });
