@@ -4544,8 +4544,16 @@ AWS = {};
  *         * +State+ - (<tt>String</tt>) The state of monitoring on an
  *           Amazon EC2 instance (ex: enabled, disabled).
  *
+ *
+ * @!method constructor(options)
+ *   @option options [String] endpoint The HTTP(s) endpoint to send requests
+ *     to.  The default endpoint is built from the configured +region+.
+ *     The endpoint should be a string like <tt>'https://s3.amazonaws.com'</tt>.
+ *   @option (see AWS.Config.constructor)
+ *
  * @!attribute endpoint
- *   @return [AWS.Endpoint] an Endpoint object representing
- *     the endpoint URL for service requests.
+ *   @return [AWS.Endpoint] an Endpoint object representing'
+ *     the endpoint URL for service requests.'
+ *
  */
-AWS.EC2.Client = inherit({});
+AWS.EC2.Client = inherit({});"

@@ -1090,8 +1090,16 @@ AWS = {};
  *       * +TableSizeBytes+ - (<tt>Integer</tt>)
  *       * +ItemCount+ - (<tt>Integer</tt>)
  *
+ *
+ * @!method constructor(options)
+ *   @option options [String] endpoint The HTTP(s) endpoint to send requests
+ *     to.  The default endpoint is built from the configured +region+.
+ *     The endpoint should be a string like <tt>'https://s3.amazonaws.com'</tt>.
+ *   @option (see AWS.Config.constructor)
+ *
  * @!attribute endpoint
- *   @return [AWS.Endpoint] an Endpoint object representing
- *     the endpoint URL for service requests.
+ *   @return [AWS.Endpoint] an Endpoint object representing'
+ *     the endpoint URL for service requests.'
+ *
  */
-AWS.DynamoDB.Client = inherit({});
+AWS.DynamoDB.Client = inherit({});"
