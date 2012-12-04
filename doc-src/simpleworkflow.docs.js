@@ -43,6 +43,9 @@ AWS = {};
 AWS.SimpleWorkflow = inherit({})
 
 /**
+ * The low-level SimpleWorkflow client class.  This class provides one function
+ * for each API operation on the service.
+ *
  * @!method countClosedWorkflowExecutions(params, options)
  *   Calls the CountClosedWorkflowExecutions API operation.
  *   @param [Object] params

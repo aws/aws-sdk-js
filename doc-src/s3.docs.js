@@ -43,6 +43,9 @@ AWS = {};
 AWS.S3 = inherit({})
 
 /**
+ * The low-level S3 client class.  This class provides one function
+ * for each API operation on the service.
+ *
  * @!method abortMultipartUpload(params, options)
  *   Aborts a multipart upload.
  *   @param [Object] params

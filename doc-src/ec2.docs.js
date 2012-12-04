@@ -43,6 +43,9 @@ AWS = {};
 AWS.EC2 = inherit({})
 
 /**
+ * The low-level EC2 client class.  This class provides one function
+ * for each API operation on the service.
+ *
  * @!method activateLicense(params, options)
  *   Activates a specific number of licenses for a 90-day period.
  *   Activations can be done against a specific license ID.

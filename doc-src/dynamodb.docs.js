@@ -43,6 +43,9 @@ AWS = {};
 AWS.DynamoDB = inherit({})
 
 /**
+ * The low-level DynamoDB client class.  This class provides one function
+ * for each API operation on the service.
+ *
  * @!method batchGetItem(params, options)
  *   Retrieves the attributes for multiple items from multiple tables
  *   using their primary keys.
