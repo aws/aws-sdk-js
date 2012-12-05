@@ -48,6 +48,8 @@ s3.client.createBucket({Bucket: 'myBucket'}).done(function(resp) {
   s3.client.putObject(data).done(function(resp) {
     console.log("Successfully uploaded data to myBucket/myKey");
   });
+}).fail(function(resp) {
+  console.log(resp.error);
 });
 ```
 
