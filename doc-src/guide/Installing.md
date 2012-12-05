@@ -12,6 +12,8 @@ into a terminal window:
 npm install aws-sdk
 ```
 
+**Please Note**: Installing the aws-sdk npm package on Windows may display errors while trying to install the optional dependency for libxmljs.  This error can be safely ignored.
+
 ## Verifying the Installation
 
 After you've installed the SDK, you can require the AWS package in your node
