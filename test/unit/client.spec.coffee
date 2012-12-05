@@ -45,6 +45,13 @@ describe 'AWS.Client', ->
       AWS.config = cfg
 
   describe 'makeRequest', ->
+    it 'accepts a callback as the last parameter', ->
+      err = null; data = null
+      client = new MockClient()
+      client.makeRequest 'foo', {}, {}, (e, d) ->
+        err = e
+        data = d
+
     it 'should allow extra config applied per request', ->
       client = new MockClient(maxRetries: 10, sslEnabled: false)
       request = client.makeRequest('foo', {}, {sslEnabled: true, maxRetries: 0})
