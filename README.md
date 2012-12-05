@@ -6,7 +6,7 @@ The official JavaScript implementation of the AWS SDK for Node.js.
 
 The preferred way to install the AWS SDK for Node.js is to use the
 [npm](http://npmjs.org) package manager for Node.js. Simply type the following
-into the a terminal window:
+into a terminal window:
 
 ```sh
 npm install aws-sdk
