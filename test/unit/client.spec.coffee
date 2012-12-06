@@ -48,7 +48,7 @@ describe 'AWS.Client', ->
     it 'accepts a callback as the last parameter', ->
       err = null; data = null
       client = new MockClient()
-      client.makeRequest 'foo', {}, {}, (e, d) ->
+      req = client.makeRequest 'foo', {}, (e, d) ->
         err = e
         data = d
 
