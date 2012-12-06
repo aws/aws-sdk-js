@@ -52,16 +52,6 @@ describe 'AWS.Client', ->
         err = e
         data = d
 
-    it 'should allow extra config applied per request', ->
-      client = new MockClient(maxRetries: 10, sslEnabled: false)
-      request = client.makeRequest('foo', {}, {sslEnabled: true, maxRetries: 0})
-
-      expect(request.awsResponse.client.config.sslEnabled).toEqual(true)
-      expect(request.awsResponse.client.config.maxRetries).toEqual(0)
-      expect(request.awsResponse.client).not.toBe(client)
-      expect(client.config.sslEnabled).toEqual(false)
-      expect(client.config.maxRetries).toEqual(10)
-
   describe 'retryableError', ->
 
     it 'should retry on throttle error', ->
