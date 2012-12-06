@@ -45,12 +45,37 @@ describe 'AWS.Client', ->
       AWS.config = cfg
 
   describe 'makeRequest', ->
-    it 'accepts a callback as the last parameter', ->
+
+    it 'yields data to the callback', ->
+      helpers.mockHttpResponse(200, {}, ['FOO', 'BAR'])
       err = null; data = null
       client = new MockClient()
-      req = client.makeRequest 'foo', {}, (e, d) ->
+      req = client.makeRequest 'operation', {}, (e, d) ->
         err = e
         data = d
+      expect(err).toEqual(null)
+      expect(data).toEqual('FOOBAR')
+
+    it 'yields service errors to the callback', ->
+      helpers.mockHttpResponse(500, {}, ['service error'])
+      err = null; data = null
+      client = new MockClient(maxRetries: 0)
+      req = client.makeRequest 'operation', {}, (e, d) ->
+        err = e
+        data = d
+      expect(err).toEqual({code:500, message:null, retryable:true, statusCode:500})
+      expect(data).toEqual(null)
+
+    it 'yields network errors to the callback', ->
+      error = { code: 'NetworkingError' }
+      helpers.mockHttpResponse(error)
+      err = null; data = null
+      client = new MockClient(maxRetries: 0)
+      req = client.makeRequest 'operation', {}, (e, d) ->
+        err = e
+        data = d
+      expect(err).toEqual(error)
+      expect(data).toEqual(null)
 
   describe 'retryableError', ->
 
@@ -76,5 +101,5 @@ describe 'AWS.Client', ->
 
     it 'should use defaultRetries defined on object if undefined on config', ->
       client.defaultRetryCount = 13
-      client.config.maxRetries = undefined;
+      client.config.maxRetries = undefined
       expect(client.numRetries()).toEqual(13)

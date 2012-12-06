@@ -39,8 +39,7 @@ MockClient = AWS.util.inherit AWS.Client,
   extractData: (httpResponse) ->
     return httpResponse.body
   extractError: (httpResponse) ->
-    retryable = httpResponse.statusCode >= 500
-    return { code: httpResponse.statusCode, message: null, retryable: retryable }
+    return { code: httpResponse.statusCode, message: null, retryable: false }
   serviceName: 'mockservice'
   signatureVersion: require('../lib/sigv4')
 
@@ -49,9 +48,22 @@ MockService = AWS.util.inherit AWS.Service,
 
 MockService.Client = MockClient
 
+mockHttpResponse = (status, headers, data) ->
+  spyOn(AWS.HttpClient, 'getInstance')
+  if typeof status == 'number'
+    AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb) ->
+      cb.onHeaders(status, headers)
+      AWS.util.arrayEach data, (str) ->
+        cb.onData(str)
+      cb.onEnd()
+  else
+    AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb) ->
+      cb.onError(status)
+
 module.exports =
   AWS: AWS
   integration: integration
   matchXML: matchXML
+  mockHttpResponse: mockHttpResponse
   MockClient: MockClient
   MockService: MockService
