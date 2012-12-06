@@ -77,6 +77,12 @@ describe 'AWS.Client', ->
       expect(err).toEqual(error)
       expect(data).toEqual(null)
 
+    it 'does not send the request if a callback function is omitted', ->
+      httpClient = AWS.HttpClient.getInstance()
+      spyOn(httpClient, 'handleRequest')
+      new MockClient().makeRequest('operation')
+      expect(httpClient.handleRequest).not.toHaveBeenCalled()
+
   describe 'retryableError', ->
 
     it 'should retry on throttle error', ->

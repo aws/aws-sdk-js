@@ -16,7 +16,9 @@ AWS = require('../lib/aws')
 integration = (reqBuilder, respCallback) ->
   req = reqBuilder()
   resp = null
-  runs -> req.always (respObject) -> resp = respObject
+  runs ->
+    req.always (respObject) -> resp = respObject
+    req.send()
   waitsFor -> resp != null
   runs -> respCallback(resp)
 

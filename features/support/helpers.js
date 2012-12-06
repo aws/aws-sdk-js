@@ -78,7 +78,7 @@ module.exports = {
         this.resp = resp;
         next();
       }
-    }, { bind: this });
+    }, { bind: this }).send();
   },
 
   /**

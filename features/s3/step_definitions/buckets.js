@@ -30,8 +30,8 @@ module.exports = function() {
 
   this.Then(/^the bucket should exist$/, function(next) {
     this.eventually(next, function (retry) {
-      this.s3.headBucket({Bucket:this.bucket}).always(function (resp) {
-        resp.error ? retry() : next();
+      this.s3.headBucket({Bucket:this.bucket}, function(err) {
+        err ? retry() : next();
       });
     });
   });
@@ -42,15 +42,15 @@ module.exports = function() {
 
   this.Then(/^the bucket should not exist$/, function(next) {
     this.eventually(next, function (retry) {
-      this.s3.headBucket({Bucket:this.bucket}).always(function (resp) {
-        resp.error && resp.error.code == 'NotFound' ? next() : retry();
+      this.s3.headBucket({Bucket:this.bucket}, function(err) {
+        err && err.code == 'NotFound' ? next() : retry();
       });
     });
   });
 
   this.Then(/^the bucket should have a location constraint of "([^"]*)"$/, function(loc, next) {
-    this.s3.getBucketLocation({Bucket:this.bucket}).always(function (resp) {
-      if (resp.data && resp.data.LocationConstraint == loc)
+    this.s3.getBucketLocation({Bucket:this.bucket}, function(err, data) {
+      if (data && data.LocationConstraint == loc)
         next();
       else
         fail();
