@@ -20,7 +20,7 @@ The following example lists all buckets associated with your AWS account:
 
 ```js
 var s3 = new AWS.S3();
-s3.client.listBuckets().done(function(resp) {
+s3.client.listBuckets(function(err, data) {
   for (var index in resp.data.Buckets) {
     var bucket = resp.data.Buckets[index];
     console.log("Bucket: ", bucket.Name, ' : ', bucket.CreationDate);
@@ -35,7 +35,7 @@ object 'myKey' of bucket 'myBucket':
 
 ```js
 var s3 = new AWS.S3();
-s3.client.createBucket({Bucket: 'myBucket'}).done(function(resp) {
+s3.client.createBucket({Bucket: 'myBucket'}, function(err, data) {
   var data = {Bucket: 'myBucket', Key: 'myKey', Body: 'Hello!'};
   s3.client.putObject(data).done(function(resp) {
     console.log("Successfully uploaded data to myBucket/myKey");
@@ -51,7 +51,7 @@ The following example will list all tables in a DynamoDB instance:
 
 ```js
 var db = new AWS.DynamoDB();
-db.client.listTables().done(function(resp) {
+db.client.listTables(function(err, data) {
   console.log(resp.data.TableNames);
 });
 ```

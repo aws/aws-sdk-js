@@ -2,24 +2,45 @@
 
 # Making Requests
 
-## Asynchronous Promise Objects (`AWS.AWSRequest`)
+## Asynchronous Callbacks
 
-All requests made through the SDK are asynchronous and use an
-event-based promise callback interface. Each service method
-that kicks off a request returns an `AWS.AWSRequest` promise
-object that you can use to register callbacks.
+All requests made through the SDK are asynchronous and use a
+callback interface. Each service method that kicks off a request
+can accept a callback as the last parameter with the signature
+`function(error, data) { ... }`. This callback will be called when
+the response or error data is available.
 
-For example, the following service method returns the request
-object as "request", which can be used to register callbacks:
+For example, the following service method can be called with
+a standard callback to retrieve the response data or error:
 
 ```js
-// request is an AWS.AWSRequest object
-var request = ec2.client.describeInstances();
-
-// register callbacks on request to retrieve response data
-request.done(function(response) {
-  console.log(resp.data);
+new AWS.EC2().client.describeInstances(function(error, data) {
+  if (error) {
+    console.log(error); // an error occurred
+  } else {
+    console.log(data); // request succeeded
+  }
 });
+```
+
+The `error` and `data` parameters are described in the "Response Object"
+section below.
+
+Note that if you do not specify a callback, the operation will
+return an `AWS.AWSRequest` object that must be manually sent using
+the `send()` method:
+
+```js
+// create the AWS.AWSRequest object
+var request = new AWS.EC2().client.describeInstances();
+
+// register a callback to report on the data
+request.done(function(resp) {
+  console.log(resp.data); // log the successful data response
+});
+
+// send the request
+request.send();
 ```
 
 ### The Response Object (`AWS.AWSResponse`)
@@ -27,6 +48,10 @@ request.done(function(response) {
 The response object is passed into each callback function so
 that you can access response data. The `AWS.AWSResponse` object that
 is passed in contains two important properties to get at this data:
+
+When using the standard callback mechanism, the two properties will
+be made available as parameters on the callback method in the form:
+`function(error, data) { ... }`
 
 #### The `data` property
 
@@ -62,9 +87,62 @@ before attempting to access the `response.data` property.
 ### Supported Callbacks
 
 Currently, you can register callbacks for various events by
-using the following methods:
+either using the simplified callback syntax, or by using the callback
+methods on the returned `AWS.AWSRequest` object.
 
-#### `done(function(response) { ... })`
+#### Simplified Callback Method
+
+Each operation supports a simplified callback that can be passed as the last
+parameter to any low-level client operation. The callback function should
+accept an `error` parameter, followed by the `data` from the response.
+
+For example:
+
+```js
+s3.client.listBuckets(function(error, data) {
+  if (err) {
+    console.log(error); // error is AWSResponse.error
+  } else {
+    console.log(data); // data is AWSResponse.data
+  }
+});
+```
+
+Prints (assuming the request succeeded):
+
+```js
+{ Owner: { ID: '...', DisplayName: '...' },
+  Buckets:
+   [ { Name: 'someBucketName', CreationDate: someCreationDate },
+     { Name: 'otherBucketName', CreationDate: otherCreationDate } ],
+  RequestId: '...' }
+```
+
+The error and data parameters accepted are equivalent to the `error` and
+`data` properties discussed in the `AWS.AWSResponse` response object section
+above.
+
+If you are passing parameters to the operation, the callback should be placed
+after the parameters:
+
+```
+s3.client.getObject({Bucket: 'bucket', Key: 'key'}, function(err, data) {
+  // ...
+});
+```
+
+#### AWS.AWSRequest Callbacks
+
+You can alternatively register callbacks on events provided by the
+`AWS.AWSRequest` object returned by each low-level client operation method.
+This request object exposes the `done`, `fail`, `data`, and `always`
+events, each taking a callback that accepts the response object.
+
+Note that if you omit the simplified callback parameter on the operation
+method, you must call `send()` on the returned request object in order to
+kick off the request to the remote server.
+
+##### `done(function(response) { ... })`
 
 This event registers a callback to be called when a successful response
 from the server is returned. The response contains a `.data` field
@@ -75,7 +153,7 @@ For example:
 ```js
 s3.client.listBuckets().done(function(response) {
   console.log(response.data);
-});
+}).send();
 ```
 
 Prints:
@@ -99,7 +177,7 @@ the error data:
 s3.config.credentials.accessKeyId = 'invalid';
 s3.client.listBuckets().fail(function(response) {
   console.log(response.error);
-});
+}).send();
 ```
 
 Prints:
@@ -137,7 +215,7 @@ request.always(function(response) {
   } else {
     // we can use response.data here
   }
-});
+}).send();
 ```
 
 ## Binding Custom Context Data on a Callback
@@ -161,7 +239,8 @@ request.
   }).
   always(function(response) {
     console.log("Always!");
-  });
+  }).
+  send();
 ```
 
 The above example will print either "Success! Always!", or "Error! Always!",
