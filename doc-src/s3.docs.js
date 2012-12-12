@@ -543,7 +543,7 @@ AWS.S3 = inherit({})
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +Body+ - (<tt>Base64 Encoded Data</tt>) Object data.
+ *     * +Body+ - (<tt>String</tt>) Object data.
  *     * +DeleteMarker+ - (<tt>String</tt>) Specifies whether the object
  *       retrieved was (true) or was not (false) a Delete Marker. If
  *       false, this response header does not appear in the response.
@@ -612,7 +612,7 @@ AWS.S3 = inherit({})
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +Body+ - (<tt>Base64 Encoded Data</tt>)
+ *     * +Body+ - (<tt>String</tt>)
  *
  * @!method headBucket(params, options)
  *   This operation is useful to determine if a bucket exists and you
@@ -1150,7 +1150,7 @@ AWS.S3 = inherit({})
  *       configured as a website, redirects requests for this object to
  *       another object in the same bucket or to an external URL. Amazon
  *       S3 stores the value of this header in the object metadata.
- *     * +Body+ - (<tt>Base64 Encoded Data</tt>)
+ *     * +Body+ - (<tt>String</tt>)
  *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the object.
  *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to read the
  *       object data and its metadata.
@@ -1232,7 +1232,7 @@ AWS.S3 = inherit({})
  *       the multipart upload whose part is being uploaded.
  *     * +PartNumber+ - (*required*, <tt>String</tt>) Part number of part
  *       being uploaded.
- *     * +Body+ - (<tt>Base64 Encoded Data</tt>)
+ *     * +Body+ - (<tt>String</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
