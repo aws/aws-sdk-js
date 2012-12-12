@@ -220,7 +220,21 @@ request.always(function(response) {
 
 ## Binding Custom Context Data on a Callback
 
-TODO: discuss bindings.
+By default, the `this` context of a callback function registered on an
+event will be the `AWS.AWSResponse` object returned from the service.
+In some cases, it may be necessary to pass extra custom context to these
+functions; in these cases, you can bind a custom value to be used as the
+`this` context object when the callbacks are executed. To do so, pass
+the `bind` option to the asynchronous registration method:
+
+```js
+var myContext = new Object();
+request.always(function(response) {
+  console.log(this === myContext);
+}, {bind: myContext}).send();
+```
+
+The above callback will print `true` when the callback function is executed.
 
 ## Multiple Callbacks and Chaining
 
