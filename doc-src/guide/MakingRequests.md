@@ -166,7 +166,7 @@ Prints:
   RequestId: '...' }
 ```
 
-#### `fail(function(response) { ... })`
+##### `fail(function(response) { ... })`
 
 The `fail` event works similarly to the `done` event, except that it
 triggers in the case of a request failure. In this case, `response.data`
@@ -186,7 +186,7 @@ Prints:
 { code: 'Forbidden', message: null }
 ```
 
-#### `data(function(response) { ... })`
+##### `data(function(response) { ... })`
 
 <p class="note">If you register a <code>data</code> callback,
   <code>response.data</code> will not contain serialized output
@@ -199,7 +199,7 @@ service packet-by-packet. This event is mostly used for large responses,
 when it is inefficient (or impossible) to load the entire response into
 memory.
 
-#### `always(function(response) { ... })`
+##### `always(function(response) { ... })`
 
 The `always` event triggers a callback in any final state of a request, i.e.,
 both `done` and `fail`. Use this callback to handle any request cleanup
