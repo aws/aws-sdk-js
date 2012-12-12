@@ -24,8 +24,12 @@ AWS = {};
  * === Sending a Request Using DynamoDB
  *
  *   svc = new AWS.DynamoDB();
- *   svc.client.OPERATION_NAME(params).always(function (resp) {
- *     console.log(resp.data, resp.error);
+ *   svc.client.OPERATION_NAME(params, function (err, data) {
+ *     if (err) {
+ *       console.log(err); // an error occurred
+ *     } else { 
+ *       console.log(data); // successful response
+ *     }
  *   });
  *
  * @!method constructor(options)
@@ -46,10 +50,10 @@ AWS.DynamoDB = inherit({})
  * The low-level DynamoDB client class.  This class provides one function
  * for each API operation on the service.
  *
- * @!method batchGetItem(params, options)
+ * @!method batchGetItem(params, callback)
  *   Retrieves the attributes for multiple items from multiple tables
  *   using their primary keys.
- *   @param [Object] params
+ *   @param params [Object]
  *     * +RequestItems+ - (*required*, <tt>Object<Object></tt>)
  *       * +Keys+ - (*required*, <tt>Array<Object></tt>)
  *         * +HashKeyElement+ - (*required*, <tt>Object</tt>) A hash key
@@ -92,66 +96,73 @@ AWS.DynamoDB = inherit({})
  *             binary attributes.
  *       * +AttributesToGet+ - (<tt>Array<String></tt>)
  *       * +ConsistentRead+ - (<tt>Boolean</tt>)
- *   @param [Object] options
- *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
- *     object that is passed to the registered callbacks has the
- *     following properties:
- *     * +Responses+ - (<tt>Object<Object></tt>)
- *       * +Items+ - (<tt>Array<Object<Object>></tt>)
- *       * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
- *     * +UnprocessedKeys+ - (<tt>Object<Object></tt>) Contains a map of
- *       tables and their respective keys that were not processed with
- *       the current response, possibly due to reaching a limit on the
- *       response size. The UnprocessedKeys value is in the same form as
- *       a RequestItems parameter (so the value can be provided directly
- *       to a subsequent BatchGetItem operation). For more information,
- *       see the above RequestItems parameter.
- *       * +Keys+ - (<tt>Array<Object></tt>)
- *         * +HashKeyElement+ - (<tt>Object</tt>) A hash key
- *           element is treated as the primary key, and can be a string
- *           or a number. Single attribute primary keys have one index
- *           value. The value can be String, Number, StringSet,
- *           NumberSet.
- *           * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8
- *             binary encoding. The maximum size is limited by the size
- *             of the primary key (1024 bytes as a range part of a key or
- *             2048 bytes as a single part hash key) or the item size
- *             (64k).
- *           * +N+ - (<tt>String</tt>) Numbers are positive or negative
- *             exact-value decimals and integers. A number can have up to
- *             38 digits precision and can be between 10^-128 to 10^+126.
- *           * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
- *             sequences of unsigned bytes.
- *           * +SS+ - (<tt>Array<String></tt>) A set of strings.
- *           * +NS+ - (<tt>Array<String></tt>) A set of numbers.
- *           * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of
- *             binary attributes.
- *         * +RangeKeyElement+ - (<tt>Object</tt>) A range key element is
- *           treated as a secondary key (used in conjunction with the
- *           primary key), and can be a string or a number, and is only
- *           used for hash-and-range primary keys. The value can be
- *           String, Number, StringSet, NumberSet.
- *           * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8
- *             binary encoding. The maximum size is limited by the size
- *             of the primary key (1024 bytes as a range part of a key or
- *             2048 bytes as a single part hash key) or the item size
- *             (64k).
- *           * +N+ - (<tt>String</tt>) Numbers are positive or negative
- *             exact-value decimals and integers. A number can have up to
- *             38 digits precision and can be between 10^-128 to 10^+126.
- *           * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
- *             sequences of unsigned bytes.
- *           * +SS+ - (<tt>Array<String></tt>) A set of strings.
- *           * +NS+ - (<tt>Array<String></tt>) A set of numbers.
- *           * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of
- *             binary attributes.
- *       * +AttributesToGet+ - (<tt>Array<String></tt>)
- *       * +ConsistentRead+ - (<tt>Boolean</tt>)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to +null+ if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to +null+ if a request error occurs.
+ *       The +data+ object has the following properties:
+ *       * +Responses+ - (<tt>Object<Object></tt>)
+ *         * +Items+ - (<tt>Array<Object<Object>></tt>)
+ *         * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
+ *       * +UnprocessedKeys+ - (<tt>Object<Object></tt>) Contains a map of
+ *         tables and their respective keys that were not processed with
+ *         the current response, possibly due to reaching a limit on the
+ *         response size. The UnprocessedKeys value is in the same form as
+ *         a RequestItems parameter (so the value can be provided directly
+ *         to a subsequent BatchGetItem operation). For more information,
+ *         see the above RequestItems parameter.
+ *         * +Keys+ - (<tt>Array<Object></tt>)
+ *           * +HashKeyElement+ - (<tt>Object</tt>) A hash key
+ *             element is treated as the primary key, and can be a string
+ *             or a number. Single attribute primary keys have one index
+ *             value. The value can be String, Number, StringSet,
+ *             NumberSet.
+ *             * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8
+ *               binary encoding. The maximum size is limited by the size
+ *               of the primary key (1024 bytes as a range part of a key or
+ *               2048 bytes as a single part hash key) or the item size
+ *               (64k).
+ *             * +N+ - (<tt>String</tt>) Numbers are positive or negative
+ *               exact-value decimals and integers. A number can have up to
+ *               38 digits precision and can be between 10^-128 to 10^+126.
+ *             * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
+ *               sequences of unsigned bytes.
+ *             * +SS+ - (<tt>Array<String></tt>) A set of strings.
+ *             * +NS+ - (<tt>Array<String></tt>) A set of numbers.
+ *             * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of
+ *               binary attributes.
+ *           * +RangeKeyElement+ - (<tt>Object</tt>) A range key element is
+ *             treated as a secondary key (used in conjunction with the
+ *             primary key), and can be a string or a number, and is only
+ *             used for hash-and-range primary keys. The value can be
+ *             String, Number, StringSet, NumberSet.
+ *             * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8
+ *               binary encoding. The maximum size is limited by the size
+ *               of the primary key (1024 bytes as a range part of a key or
+ *               2048 bytes as a single part hash key) or the item size
+ *               (64k).
+ *             * +N+ - (<tt>String</tt>) Numbers are positive or negative
+ *               exact-value decimals and integers. A number can have up to
+ *               38 digits precision and can be between 10^-128 to 10^+126.
+ *             * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
+ *               sequences of unsigned bytes.
+ *             * +SS+ - (<tt>Array<String></tt>) A set of strings.
+ *             * +NS+ - (<tt>Array<String></tt>) A set of numbers.
+ *             * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of
+ *               binary attributes.
+ *         * +AttributesToGet+ - (<tt>Array<String></tt>)
+ *         * +ConsistentRead+ - (<tt>Boolean</tt>)
+ *   @return [AWS.AWSRequest] a handle to the operation request for
+ *     subsequent event callback registration.
  *
- * @!method batchWriteItem(params, options)
+ * @!method batchWriteItem(params, callback)
  *   Allows to execute a batch of Put and/or Delete Requests for many
  *   tables in a single call. A total of 25 requests are allowed.
- *   @param [Object] params
+ *   @param params [Object]
  *     * +RequestItems+ - (*required*, <tt>Object<Array<Object>></tt>) A
  *       map of table name to list-of-write-requests. Used as input to
  *       the BatchWriteItem API call
@@ -215,81 +226,88 @@ AWS.DynamoDB = inherit({})
  *             * +NS+ - (<tt>Array<String></tt>) A set of numbers.
  *             * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of
  *               binary attributes.
- *   @param [Object] options
- *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
- *     object that is passed to the registered callbacks has the
- *     following properties:
- *     * +Responses+ - (<tt>Object<Object></tt>) The response object as a
- *       result of BatchWriteItem call. This is essentially a map of
- *       table name to ConsumedCapacityUnits.
- *       * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
- *     * +UnprocessedItems+ - (<tt>Object<Array<Object>></tt>) The Items
- *       which we could not successfully process in a BatchWriteItem call
- *       is returned as UnprocessedItems
- *       * +PutRequest+ - (<tt>Object</tt>)
- *         * +Item+ - (<tt>Object<Object></tt>) The item to
- *           put
- *           * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8
- *             binary encoding. The maximum size is limited by the size
- *             of the primary key (1024 bytes as a range part of a key or
- *             2048 bytes as a single part hash key) or the item size
- *             (64k).
- *           * +N+ - (<tt>String</tt>) Numbers are positive or negative
- *             exact-value decimals and integers. A number can have up to
- *             38 digits precision and can be between 10^-128 to 10^+126.
- *           * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
- *             sequences of unsigned bytes.
- *           * +SS+ - (<tt>Array<String></tt>) A set of strings.
- *           * +NS+ - (<tt>Array<String></tt>) A set of numbers.
- *           * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of
- *             binary attributes.
- *       * +DeleteRequest+ - (<tt>Object</tt>)
- *         * +Key+ - (<tt>Object</tt>) The item's key to be
- *           delete
- *           * +HashKeyElement+ - (<tt>Object</tt>) A hash
- *             key element is treated as the primary key, and can be a
- *             string or a number. Single attribute primary keys have one
- *             index value. The value can be String, Number, StringSet,
- *             NumberSet.
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to +null+ if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to +null+ if a request error occurs.
+ *       The +data+ object has the following properties:
+ *       * +Responses+ - (<tt>Object<Object></tt>) The response object as a
+ *         result of BatchWriteItem call. This is essentially a map of
+ *         table name to ConsumedCapacityUnits.
+ *         * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
+ *       * +UnprocessedItems+ - (<tt>Object<Array<Object>></tt>) The Items
+ *         which we could not successfully process in a BatchWriteItem call
+ *         is returned as UnprocessedItems
+ *         * +PutRequest+ - (<tt>Object</tt>)
+ *           * +Item+ - (<tt>Object<Object></tt>) The item to
+ *             put
  *             * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8
  *               binary encoding. The maximum size is limited by the size
- *               of the primary key (1024 bytes as a range part of a key
- *               or 2048 bytes as a single part hash key) or the item
- *               size (64k).
+ *               of the primary key (1024 bytes as a range part of a key or
+ *               2048 bytes as a single part hash key) or the item size
+ *               (64k).
  *             * +N+ - (<tt>String</tt>) Numbers are positive or negative
- *               exact-value decimals and integers. A number can have up
- *               to 38 digits precision and can be between 10^-128 to
- *               10^+126.
- *             * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes
- *               are sequences of unsigned bytes.
+ *               exact-value decimals and integers. A number can have up to
+ *               38 digits precision and can be between 10^-128 to 10^+126.
+ *             * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
+ *               sequences of unsigned bytes.
  *             * +SS+ - (<tt>Array<String></tt>) A set of strings.
  *             * +NS+ - (<tt>Array<String></tt>) A set of numbers.
  *             * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of
  *               binary attributes.
- *           * +RangeKeyElement+ - (<tt>Object</tt>) A range key element
- *             is treated as a secondary key (used in conjunction with
- *             the primary key), and can be a string or a number, and is
- *             only used for hash-and-range primary keys. The value can
- *             be String, Number, StringSet, NumberSet.
- *             * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8
- *               binary encoding. The maximum size is limited by the size
- *               of the primary key (1024 bytes as a range part of a key
- *               or 2048 bytes as a single part hash key) or the item
- *               size (64k).
- *             * +N+ - (<tt>String</tt>) Numbers are positive or negative
- *               exact-value decimals and integers. A number can have up
- *               to 38 digits precision and can be between 10^-128 to
- *               10^+126.
- *             * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes
- *               are sequences of unsigned bytes.
- *             * +SS+ - (<tt>Array<String></tt>) A set of strings.
- *             * +NS+ - (<tt>Array<String></tt>) A set of numbers.
- *             * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of
- *               binary attributes.
+ *         * +DeleteRequest+ - (<tt>Object</tt>)
+ *           * +Key+ - (<tt>Object</tt>) The item's key to be
+ *             delete
+ *             * +HashKeyElement+ - (<tt>Object</tt>) A hash
+ *               key element is treated as the primary key, and can be a
+ *               string or a number. Single attribute primary keys have one
+ *               index value. The value can be String, Number, StringSet,
+ *               NumberSet.
+ *               * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8
+ *                 binary encoding. The maximum size is limited by the size
+ *                 of the primary key (1024 bytes as a range part of a key
+ *                 or 2048 bytes as a single part hash key) or the item
+ *                 size (64k).
+ *               * +N+ - (<tt>String</tt>) Numbers are positive or negative
+ *                 exact-value decimals and integers. A number can have up
+ *                 to 38 digits precision and can be between 10^-128 to
+ *                 10^+126.
+ *               * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes
+ *                 are sequences of unsigned bytes.
+ *               * +SS+ - (<tt>Array<String></tt>) A set of strings.
+ *               * +NS+ - (<tt>Array<String></tt>) A set of numbers.
+ *               * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of
+ *                 binary attributes.
+ *             * +RangeKeyElement+ - (<tt>Object</tt>) A range key element
+ *               is treated as a secondary key (used in conjunction with
+ *               the primary key), and can be a string or a number, and is
+ *               only used for hash-and-range primary keys. The value can
+ *               be String, Number, StringSet, NumberSet.
+ *               * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8
+ *                 binary encoding. The maximum size is limited by the size
+ *                 of the primary key (1024 bytes as a range part of a key
+ *                 or 2048 bytes as a single part hash key) or the item
+ *                 size (64k).
+ *               * +N+ - (<tt>String</tt>) Numbers are positive or negative
+ *                 exact-value decimals and integers. A number can have up
+ *                 to 38 digits precision and can be between 10^-128 to
+ *                 10^+126.
+ *               * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes
+ *                 are sequences of unsigned bytes.
+ *               * +SS+ - (<tt>Array<String></tt>) A set of strings.
+ *               * +NS+ - (<tt>Array<String></tt>) A set of numbers.
+ *               * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of
+ *                 binary attributes.
+ *   @return [AWS.AWSRequest] a handle to the operation request for
+ *     subsequent event callback registration.
  *
- * @!method createTable(params, options)
+ * @!method createTable(params, callback)
  *   Adds a new table to your account.
- *   @param [Object] params
+ *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table you want to create. Allowed characters are a-z, A-Z, 0-9,
  *       _ (underscore), - (hyphen) and . (period).
@@ -323,47 +341,54 @@ AWS.DynamoDB = inherit({})
  *         WriteCapacityUnits are in terms of strictly consistent reads,
  *         assuming items of 1k. 2k items require twice the
  *         WriteCapacityUnits.
- *   @param [Object] options
- *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
- *     object that is passed to the registered callbacks has the
- *     following properties:
- *     * +TableDescription+ - (<tt>Object</tt>)
- *       * +TableName+ - (<tt>String</tt>) The name of the table being
- *         described.
- *       * +KeySchema+ - (<tt>Object</tt>)
- *         * +HashKeyElement+ - (<tt>Object</tt>) A hash key
- *           element is treated as the primary key, and can be a string
- *           or a number. Single attribute primary keys have one index
- *           value. The value can be String, Number, StringSet,
- *           NumberSet.
- *           * +AttributeName+ - (<tt>String</tt>) The
- *             AttributeName of the KeySchemaElement.
- *           * +AttributeType+ - (<tt>String</tt>) The
- *             AttributeType of the KeySchemaElement which can be a
- *             String or a Number.
- *         * +RangeKeyElement+ - (<tt>Object</tt>) A range key element is
- *           treated as a secondary key (used in conjunction with the
- *           primary key), and can be a string or a number, and is only
- *           used for hash-and-range primary keys. The value can be
- *           String, Number, StringSet, NumberSet.
- *           * +AttributeName+ - (<tt>String</tt>) The
- *             AttributeName of the KeySchemaElement.
- *           * +AttributeType+ - (<tt>String</tt>) The
- *             AttributeType of the KeySchemaElement which can be a
- *             String or a Number.
- *       * +TableStatus+ - (<tt>String</tt>)
- *       * +CreationDateTime+ - (<tt>Date</tt>)
- *       * +ProvisionedThroughput+ - (<tt>Object</tt>)
- *         * +LastIncreaseDateTime+ - (<tt>Date</tt>)
- *         * +LastDecreaseDateTime+ - (<tt>Date</tt>)
- *         * +ReadCapacityUnits+ - (<tt>Integer</tt>)
- *         * +WriteCapacityUnits+ - (<tt>Integer</tt>)
- *       * +TableSizeBytes+ - (<tt>Integer</tt>)
- *       * +ItemCount+ - (<tt>Integer</tt>)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to +null+ if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to +null+ if a request error occurs.
+ *       The +data+ object has the following properties:
+ *       * +TableDescription+ - (<tt>Object</tt>)
+ *         * +TableName+ - (<tt>String</tt>) The name of the table being
+ *           described.
+ *         * +KeySchema+ - (<tt>Object</tt>)
+ *           * +HashKeyElement+ - (<tt>Object</tt>) A hash key
+ *             element is treated as the primary key, and can be a string
+ *             or a number. Single attribute primary keys have one index
+ *             value. The value can be String, Number, StringSet,
+ *             NumberSet.
+ *             * +AttributeName+ - (<tt>String</tt>) The
+ *               AttributeName of the KeySchemaElement.
+ *             * +AttributeType+ - (<tt>String</tt>) The
+ *               AttributeType of the KeySchemaElement which can be a
+ *               String or a Number.
+ *           * +RangeKeyElement+ - (<tt>Object</tt>) A range key element is
+ *             treated as a secondary key (used in conjunction with the
+ *             primary key), and can be a string or a number, and is only
+ *             used for hash-and-range primary keys. The value can be
+ *             String, Number, StringSet, NumberSet.
+ *             * +AttributeName+ - (<tt>String</tt>) The
+ *               AttributeName of the KeySchemaElement.
+ *             * +AttributeType+ - (<tt>String</tt>) The
+ *               AttributeType of the KeySchemaElement which can be a
+ *               String or a Number.
+ *         * +TableStatus+ - (<tt>String</tt>)
+ *         * +CreationDateTime+ - (<tt>Date</tt>)
+ *         * +ProvisionedThroughput+ - (<tt>Object</tt>)
+ *           * +LastIncreaseDateTime+ - (<tt>Date</tt>)
+ *           * +LastDecreaseDateTime+ - (<tt>Date</tt>)
+ *           * +ReadCapacityUnits+ - (<tt>Integer</tt>)
+ *           * +WriteCapacityUnits+ - (<tt>Integer</tt>)
+ *         * +TableSizeBytes+ - (<tt>Integer</tt>)
+ *         * +ItemCount+ - (<tt>Integer</tt>)
+ *   @return [AWS.AWSRequest] a handle to the operation request for
+ *     subsequent event callback registration.
  *
- * @!method deleteItem(params, options)
+ * @!method deleteItem(params, callback)
  *   Deletes a single item in a table by primary key.
- *   @param [Object] params
+ *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table in which you want to delete an item. Allowed characters
  *       are a-z, A-Z, 0-9, _ (underscore), - (hyphen) and . (period).
@@ -423,122 +448,143 @@ AWS.DynamoDB = inherit({})
  *       * +Exists+ - (<tt>Boolean</tt>) Specify whether or not a value
  *         already exists for the attribute name-value pair.
  *     * +ReturnValues+ - (<tt>String</tt>)
- *   @param [Object] options
- *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
- *     object that is passed to the registered callbacks has the
- *     following properties:
- *     * +Attributes+ - (<tt>Object<Object></tt>) If the ReturnValues
- *       parameter is provided as ALL_OLD in the request, Amazon DynamoDB
- *       returns an array of attribute name-value pairs (essentially, the
- *       deleted item). Otherwise, the response contains an empty set.
- *       * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8 binary
- *         encoding. The maximum size is limited by the size of the
- *         primary key (1024 bytes as a range part of a key or 2048 bytes
- *         as a single part hash key) or the item size (64k).
- *       * +N+ - (<tt>String</tt>) Numbers are positive or negative
- *         exact-value decimals and integers. A number can have up to 38
- *         digits precision and can be between 10^-128 to 10^+126.
- *       * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
- *         sequences of unsigned bytes.
- *       * +SS+ - (<tt>Array<String></tt>) A set of strings.
- *       * +NS+ - (<tt>Array<String></tt>) A set of numbers.
- *       * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
- *         attributes.
- *     * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to +null+ if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to +null+ if a request error occurs.
+ *       The +data+ object has the following properties:
+ *       * +Attributes+ - (<tt>Object<Object></tt>) If the ReturnValues
+ *         parameter is provided as ALL_OLD in the request, Amazon DynamoDB
+ *         returns an array of attribute name-value pairs (essentially, the
+ *         deleted item). Otherwise, the response contains an empty set.
+ *         * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8 binary
+ *           encoding. The maximum size is limited by the size of the
+ *           primary key (1024 bytes as a range part of a key or 2048 bytes
+ *           as a single part hash key) or the item size (64k).
+ *         * +N+ - (<tt>String</tt>) Numbers are positive or negative
+ *           exact-value decimals and integers. A number can have up to 38
+ *           digits precision and can be between 10^-128 to 10^+126.
+ *         * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
+ *           sequences of unsigned bytes.
+ *         * +SS+ - (<tt>Array<String></tt>) A set of strings.
+ *         * +NS+ - (<tt>Array<String></tt>) A set of numbers.
+ *         * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
+ *           attributes.
+ *       * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
+ *   @return [AWS.AWSRequest] a handle to the operation request for
+ *     subsequent event callback registration.
  *
- * @!method deleteTable(params, options)
+ * @!method deleteTable(params, callback)
  *   Deletes a table and all of its items.
- *   @param [Object] params
+ *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table you want to delete. Allowed characters are a-z, A-Z, 0-9,
  *       _ (underscore), - (hyphen) and . (period).
- *   @param [Object] options
- *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
- *     object that is passed to the registered callbacks has the
- *     following properties:
- *     * +TableDescription+ - (<tt>Object</tt>)
- *       * +TableName+ - (<tt>String</tt>) The name of the table being
- *         described.
- *       * +KeySchema+ - (<tt>Object</tt>)
- *         * +HashKeyElement+ - (<tt>Object</tt>) A hash key
- *           element is treated as the primary key, and can be a string
- *           or a number. Single attribute primary keys have one index
- *           value. The value can be String, Number, StringSet,
- *           NumberSet.
- *           * +AttributeName+ - (<tt>String</tt>) The
- *             AttributeName of the KeySchemaElement.
- *           * +AttributeType+ - (<tt>String</tt>) The
- *             AttributeType of the KeySchemaElement which can be a
- *             String or a Number.
- *         * +RangeKeyElement+ - (<tt>Object</tt>) A range key element is
- *           treated as a secondary key (used in conjunction with the
- *           primary key), and can be a string or a number, and is only
- *           used for hash-and-range primary keys. The value can be
- *           String, Number, StringSet, NumberSet.
- *           * +AttributeName+ - (<tt>String</tt>) The
- *             AttributeName of the KeySchemaElement.
- *           * +AttributeType+ - (<tt>String</tt>) The
- *             AttributeType of the KeySchemaElement which can be a
- *             String or a Number.
- *       * +TableStatus+ - (<tt>String</tt>)
- *       * +CreationDateTime+ - (<tt>Date</tt>)
- *       * +ProvisionedThroughput+ - (<tt>Object</tt>)
- *         * +LastIncreaseDateTime+ - (<tt>Date</tt>)
- *         * +LastDecreaseDateTime+ - (<tt>Date</tt>)
- *         * +ReadCapacityUnits+ - (<tt>Integer</tt>)
- *         * +WriteCapacityUnits+ - (<tt>Integer</tt>)
- *       * +TableSizeBytes+ - (<tt>Integer</tt>)
- *       * +ItemCount+ - (<tt>Integer</tt>)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to +null+ if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to +null+ if a request error occurs.
+ *       The +data+ object has the following properties:
+ *       * +TableDescription+ - (<tt>Object</tt>)
+ *         * +TableName+ - (<tt>String</tt>) The name of the table being
+ *           described.
+ *         * +KeySchema+ - (<tt>Object</tt>)
+ *           * +HashKeyElement+ - (<tt>Object</tt>) A hash key
+ *             element is treated as the primary key, and can be a string
+ *             or a number. Single attribute primary keys have one index
+ *             value. The value can be String, Number, StringSet,
+ *             NumberSet.
+ *             * +AttributeName+ - (<tt>String</tt>) The
+ *               AttributeName of the KeySchemaElement.
+ *             * +AttributeType+ - (<tt>String</tt>) The
+ *               AttributeType of the KeySchemaElement which can be a
+ *               String or a Number.
+ *           * +RangeKeyElement+ - (<tt>Object</tt>) A range key element is
+ *             treated as a secondary key (used in conjunction with the
+ *             primary key), and can be a string or a number, and is only
+ *             used for hash-and-range primary keys. The value can be
+ *             String, Number, StringSet, NumberSet.
+ *             * +AttributeName+ - (<tt>String</tt>) The
+ *               AttributeName of the KeySchemaElement.
+ *             * +AttributeType+ - (<tt>String</tt>) The
+ *               AttributeType of the KeySchemaElement which can be a
+ *               String or a Number.
+ *         * +TableStatus+ - (<tt>String</tt>)
+ *         * +CreationDateTime+ - (<tt>Date</tt>)
+ *         * +ProvisionedThroughput+ - (<tt>Object</tt>)
+ *           * +LastIncreaseDateTime+ - (<tt>Date</tt>)
+ *           * +LastDecreaseDateTime+ - (<tt>Date</tt>)
+ *           * +ReadCapacityUnits+ - (<tt>Integer</tt>)
+ *           * +WriteCapacityUnits+ - (<tt>Integer</tt>)
+ *         * +TableSizeBytes+ - (<tt>Integer</tt>)
+ *         * +ItemCount+ - (<tt>Integer</tt>)
+ *   @return [AWS.AWSRequest] a handle to the operation request for
+ *     subsequent event callback registration.
  *
- * @!method describeTable(params, options)
+ * @!method describeTable(params, callback)
  *   Retrieves information about the table, including the current status
  *   of the table, the primary key schema and when the table was created.
- *   @param [Object] params
+ *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table you want to describe. Allowed characters are a-z, A-Z,
  *       0-9, _ (underscore), - (hyphen) and . (period).
- *   @param [Object] options
- *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
- *     object that is passed to the registered callbacks has the
- *     following properties:
- *     * +Table+ - (<tt>Object</tt>)
- *       * +TableName+ - (<tt>String</tt>) The name of the table being
- *         described.
- *       * +KeySchema+ - (<tt>Object</tt>)
- *         * +HashKeyElement+ - (<tt>Object</tt>) A hash key
- *           element is treated as the primary key, and can be a string
- *           or a number. Single attribute primary keys have one index
- *           value. The value can be String, Number, StringSet,
- *           NumberSet.
- *           * +AttributeName+ - (<tt>String</tt>) The
- *             AttributeName of the KeySchemaElement.
- *           * +AttributeType+ - (<tt>String</tt>) The
- *             AttributeType of the KeySchemaElement which can be a
- *             String or a Number.
- *         * +RangeKeyElement+ - (<tt>Object</tt>) A range key element is
- *           treated as a secondary key (used in conjunction with the
- *           primary key), and can be a string or a number, and is only
- *           used for hash-and-range primary keys. The value can be
- *           String, Number, StringSet, NumberSet.
- *           * +AttributeName+ - (<tt>String</tt>) The
- *             AttributeName of the KeySchemaElement.
- *           * +AttributeType+ - (<tt>String</tt>) The
- *             AttributeType of the KeySchemaElement which can be a
- *             String or a Number.
- *       * +TableStatus+ - (<tt>String</tt>)
- *       * +CreationDateTime+ - (<tt>Date</tt>)
- *       * +ProvisionedThroughput+ - (<tt>Object</tt>)
- *         * +LastIncreaseDateTime+ - (<tt>Date</tt>)
- *         * +LastDecreaseDateTime+ - (<tt>Date</tt>)
- *         * +ReadCapacityUnits+ - (<tt>Integer</tt>)
- *         * +WriteCapacityUnits+ - (<tt>Integer</tt>)
- *       * +TableSizeBytes+ - (<tt>Integer</tt>)
- *       * +ItemCount+ - (<tt>Integer</tt>)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to +null+ if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to +null+ if a request error occurs.
+ *       The +data+ object has the following properties:
+ *       * +Table+ - (<tt>Object</tt>)
+ *         * +TableName+ - (<tt>String</tt>) The name of the table being
+ *           described.
+ *         * +KeySchema+ - (<tt>Object</tt>)
+ *           * +HashKeyElement+ - (<tt>Object</tt>) A hash key
+ *             element is treated as the primary key, and can be a string
+ *             or a number. Single attribute primary keys have one index
+ *             value. The value can be String, Number, StringSet,
+ *             NumberSet.
+ *             * +AttributeName+ - (<tt>String</tt>) The
+ *               AttributeName of the KeySchemaElement.
+ *             * +AttributeType+ - (<tt>String</tt>) The
+ *               AttributeType of the KeySchemaElement which can be a
+ *               String or a Number.
+ *           * +RangeKeyElement+ - (<tt>Object</tt>) A range key element is
+ *             treated as a secondary key (used in conjunction with the
+ *             primary key), and can be a string or a number, and is only
+ *             used for hash-and-range primary keys. The value can be
+ *             String, Number, StringSet, NumberSet.
+ *             * +AttributeName+ - (<tt>String</tt>) The
+ *               AttributeName of the KeySchemaElement.
+ *             * +AttributeType+ - (<tt>String</tt>) The
+ *               AttributeType of the KeySchemaElement which can be a
+ *               String or a Number.
+ *         * +TableStatus+ - (<tt>String</tt>)
+ *         * +CreationDateTime+ - (<tt>Date</tt>)
+ *         * +ProvisionedThroughput+ - (<tt>Object</tt>)
+ *           * +LastIncreaseDateTime+ - (<tt>Date</tt>)
+ *           * +LastDecreaseDateTime+ - (<tt>Date</tt>)
+ *           * +ReadCapacityUnits+ - (<tt>Integer</tt>)
+ *           * +WriteCapacityUnits+ - (<tt>Integer</tt>)
+ *         * +TableSizeBytes+ - (<tt>Integer</tt>)
+ *         * +ItemCount+ - (<tt>Integer</tt>)
+ *   @return [AWS.AWSRequest] a handle to the operation request for
+ *     subsequent event callback registration.
  *
- * @!method getItem(params, options)
+ * @!method getItem(params, callback)
  *   Retrieves a set of Attributes for an item that matches the primary
  *   key.
- *   @param [Object] params
+ *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table in which you want to get an item. Allowed characters are
  *       a-z, A-Z, 0-9, _ (underscore), - (hyphen) and . (period).
@@ -580,51 +626,65 @@ AWS.DynamoDB = inherit({})
  *           attributes.
  *     * +AttributesToGet+ - (<tt>Array<String></tt>)
  *     * +ConsistentRead+ - (<tt>Boolean</tt>)
- *   @param [Object] options
- *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
- *     object that is passed to the registered callbacks has the
- *     following properties:
- *     * +Item+ - (<tt>Object<Object></tt>) Contains the requested
- *       attributes.
- *       * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8 binary
- *         encoding. The maximum size is limited by the size of the
- *         primary key (1024 bytes as a range part of a key or 2048 bytes
- *         as a single part hash key) or the item size (64k).
- *       * +N+ - (<tt>String</tt>) Numbers are positive or negative
- *         exact-value decimals and integers. A number can have up to 38
- *         digits precision and can be between 10^-128 to 10^+126.
- *       * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
- *         sequences of unsigned bytes.
- *       * +SS+ - (<tt>Array<String></tt>) A set of strings.
- *       * +NS+ - (<tt>Array<String></tt>) A set of numbers.
- *       * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to +null+ if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to +null+ if a request error occurs.
+ *       The +data+ object has the following properties:
+ *       * +Item+ - (<tt>Object<Object></tt>) Contains the requested
  *         attributes.
- *     * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
+ *         * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8 binary
+ *           encoding. The maximum size is limited by the size of the
+ *           primary key (1024 bytes as a range part of a key or 2048 bytes
+ *           as a single part hash key) or the item size (64k).
+ *         * +N+ - (<tt>String</tt>) Numbers are positive or negative
+ *           exact-value decimals and integers. A number can have up to 38
+ *           digits precision and can be between 10^-128 to 10^+126.
+ *         * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
+ *           sequences of unsigned bytes.
+ *         * +SS+ - (<tt>Array<String></tt>) A set of strings.
+ *         * +NS+ - (<tt>Array<String></tt>) A set of numbers.
+ *         * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
+ *           attributes.
+ *       * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
+ *   @return [AWS.AWSRequest] a handle to the operation request for
+ *     subsequent event callback registration.
  *
- * @!method listTables(params, options)
+ * @!method listTables(params, callback)
  *   Retrieves a paginated list of table names created by the AWS Account
  *   of the caller in the AWS Region (e.g. us-east-1).
- *   @param [Object] params
+ *   @param params [Object]
  *     * +ExclusiveStartTableName+ - (<tt>String</tt>) The name of the
  *       table that starts the list. If you already ran a ListTables
  *       operation and received a LastEvaluatedTableName value in the
  *       response, use that value here to continue the list.
  *     * +Limit+ - (<tt>Integer</tt>)
- *   @param [Object] options
- *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
- *     object that is passed to the registered callbacks has the
- *     following properties:
- *     * +TableNames+ - (<tt>Array<String></tt>)
- *     * +LastEvaluatedTableName+ - (<tt>String</tt>) The name of the
- *       last table in the current list. Use this value as the
- *       ExclusiveStartTableName in a new request to continue the list
- *       until all the table names are returned. If this value is null,
- *       all table names have been returned.
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to +null+ if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to +null+ if a request error occurs.
+ *       The +data+ object has the following properties:
+ *       * +TableNames+ - (<tt>Array<String></tt>)
+ *       * +LastEvaluatedTableName+ - (<tt>String</tt>) The name of the
+ *         last table in the current list. Use this value as the
+ *         ExclusiveStartTableName in a new request to continue the list
+ *         until all the table names are returned. If this value is null,
+ *         all table names have been returned.
+ *   @return [AWS.AWSRequest] a handle to the operation request for
+ *     subsequent event callback registration.
  *
- * @!method putItem(params, options)
+ * @!method putItem(params, callback)
  *   Creates a new item, or replaces an old item with a new item
  *   (including all the attributes).
- *   @param [Object] params
+ *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table in which you want to put an item. Allowed characters are
  *       a-z, A-Z, 0-9, _ (underscore), - (hyphen) and . (period).
@@ -662,32 +722,39 @@ AWS.DynamoDB = inherit({})
  *       * +Exists+ - (<tt>Boolean</tt>) Specify whether or not a value
  *         already exists for the attribute name-value pair.
  *     * +ReturnValues+ - (<tt>String</tt>)
- *   @param [Object] options
- *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
- *     object that is passed to the registered callbacks has the
- *     following properties:
- *     * +Attributes+ - (<tt>Object<Object></tt>) Attribute values before
- *       the put operation, but only if the ReturnValues parameter is
- *       specified as ALL_OLD in the request.
- *       * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8 binary
- *         encoding. The maximum size is limited by the size of the
- *         primary key (1024 bytes as a range part of a key or 2048 bytes
- *         as a single part hash key) or the item size (64k).
- *       * +N+ - (<tt>String</tt>) Numbers are positive or negative
- *         exact-value decimals and integers. A number can have up to 38
- *         digits precision and can be between 10^-128 to 10^+126.
- *       * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
- *         sequences of unsigned bytes.
- *       * +SS+ - (<tt>Array<String></tt>) A set of strings.
- *       * +NS+ - (<tt>Array<String></tt>) A set of numbers.
- *       * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
- *         attributes.
- *     * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to +null+ if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to +null+ if a request error occurs.
+ *       The +data+ object has the following properties:
+ *       * +Attributes+ - (<tt>Object<Object></tt>) Attribute values before
+ *         the put operation, but only if the ReturnValues parameter is
+ *         specified as ALL_OLD in the request.
+ *         * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8 binary
+ *           encoding. The maximum size is limited by the size of the
+ *           primary key (1024 bytes as a range part of a key or 2048 bytes
+ *           as a single part hash key) or the item size (64k).
+ *         * +N+ - (<tt>String</tt>) Numbers are positive or negative
+ *           exact-value decimals and integers. A number can have up to 38
+ *           digits precision and can be between 10^-128 to 10^+126.
+ *         * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
+ *           sequences of unsigned bytes.
+ *         * +SS+ - (<tt>Array<String></tt>) A set of strings.
+ *         * +NS+ - (<tt>Array<String></tt>) A set of numbers.
+ *         * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
+ *           attributes.
+ *       * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
+ *   @return [AWS.AWSRequest] a handle to the operation request for
+ *     subsequent event callback registration.
  *
- * @!method query(params, options)
+ * @!method query(params, callback)
  *   Gets the values of one or more items and its attributes by primary
  *   key (composite primary key, only).
- *   @param [Object] params
+ *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table in which you want to query. Allowed characters are a-z,
  *       A-Z, 0-9, _ (underscore), - (hyphen) and . (period).
@@ -784,59 +851,66 @@ AWS.DynamoDB = inherit({})
  *         * +NS+ - (<tt>Array<String></tt>) A set of numbers.
  *         * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
  *           attributes.
- *   @param [Object] options
- *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
- *     object that is passed to the registered callbacks has the
- *     following properties:
- *     * +Items+ - (<tt>Array<Object<Object>></tt>)
- *     * +Count+ - (<tt>Integer</tt>) Number of items in the response.
- *     * +LastEvaluatedKey+ - (<tt>Object</tt>) Primary key of the item
- *       where the query operation stopped, inclusive of the previous
- *       result set. Use this value to start a new operation excluding
- *       this value in the new request. The LastEvaluatedKey is null when
- *       the entire query result set is complete (i.e. the operation
- *       processed the "last page").
- *       * +HashKeyElement+ - (<tt>Object</tt>) A hash key
- *         element is treated as the primary key, and can be a string or
- *         a number. Single attribute primary keys have one index value.
- *         The value can be String, Number, StringSet, NumberSet.
- *         * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8
- *           binary encoding. The maximum size is limited by the size of
- *           the primary key (1024 bytes as a range part of a key or 2048
- *           bytes as a single part hash key) or the item size (64k).
- *         * +N+ - (<tt>String</tt>) Numbers are positive or negative
- *           exact-value decimals and integers. A number can have up to
- *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
- *           sequences of unsigned bytes.
- *         * +SS+ - (<tt>Array<String></tt>) A set of strings.
- *         * +NS+ - (<tt>Array<String></tt>) A set of numbers.
- *         * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
- *           attributes.
- *       * +RangeKeyElement+ - (<tt>Object</tt>) A range key element is
- *         treated as a secondary key (used in conjunction with the
- *         primary key), and can be a string or a number, and is only
- *         used for hash-and-range primary keys. The value can be String,
- *         Number, StringSet, NumberSet.
- *         * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8
- *           binary encoding. The maximum size is limited by the size of
- *           the primary key (1024 bytes as a range part of a key or 2048
- *           bytes as a single part hash key) or the item size (64k).
- *         * +N+ - (<tt>String</tt>) Numbers are positive or negative
- *           exact-value decimals and integers. A number can have up to
- *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
- *           sequences of unsigned bytes.
- *         * +SS+ - (<tt>Array<String></tt>) A set of strings.
- *         * +NS+ - (<tt>Array<String></tt>) A set of numbers.
- *         * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
- *           attributes.
- *     * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to +null+ if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to +null+ if a request error occurs.
+ *       The +data+ object has the following properties:
+ *       * +Items+ - (<tt>Array<Object<Object>></tt>)
+ *       * +Count+ - (<tt>Integer</tt>) Number of items in the response.
+ *       * +LastEvaluatedKey+ - (<tt>Object</tt>) Primary key of the item
+ *         where the query operation stopped, inclusive of the previous
+ *         result set. Use this value to start a new operation excluding
+ *         this value in the new request. The LastEvaluatedKey is null when
+ *         the entire query result set is complete (i.e. the operation
+ *         processed the "last page").
+ *         * +HashKeyElement+ - (<tt>Object</tt>) A hash key
+ *           element is treated as the primary key, and can be a string or
+ *           a number. Single attribute primary keys have one index value.
+ *           The value can be String, Number, StringSet, NumberSet.
+ *           * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8
+ *             binary encoding. The maximum size is limited by the size of
+ *             the primary key (1024 bytes as a range part of a key or 2048
+ *             bytes as a single part hash key) or the item size (64k).
+ *           * +N+ - (<tt>String</tt>) Numbers are positive or negative
+ *             exact-value decimals and integers. A number can have up to
+ *             38 digits precision and can be between 10^-128 to 10^+126.
+ *           * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
+ *             sequences of unsigned bytes.
+ *           * +SS+ - (<tt>Array<String></tt>) A set of strings.
+ *           * +NS+ - (<tt>Array<String></tt>) A set of numbers.
+ *           * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
+ *             attributes.
+ *         * +RangeKeyElement+ - (<tt>Object</tt>) A range key element is
+ *           treated as a secondary key (used in conjunction with the
+ *           primary key), and can be a string or a number, and is only
+ *           used for hash-and-range primary keys. The value can be String,
+ *           Number, StringSet, NumberSet.
+ *           * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8
+ *             binary encoding. The maximum size is limited by the size of
+ *             the primary key (1024 bytes as a range part of a key or 2048
+ *             bytes as a single part hash key) or the item size (64k).
+ *           * +N+ - (<tt>String</tt>) Numbers are positive or negative
+ *             exact-value decimals and integers. A number can have up to
+ *             38 digits precision and can be between 10^-128 to 10^+126.
+ *           * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
+ *             sequences of unsigned bytes.
+ *           * +SS+ - (<tt>Array<String></tt>) A set of strings.
+ *           * +NS+ - (<tt>Array<String></tt>) A set of numbers.
+ *           * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
+ *             attributes.
+ *       * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
+ *   @return [AWS.AWSRequest] a handle to the operation request for
+ *     subsequent event callback registration.
  *
- * @!method scan(params, options)
+ * @!method scan(params, callback)
  *   Retrieves one or more items and its attributes by performing a full
  *   scan of a table.
- *   @param [Object] params
+ *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table in which you want to scan. Allowed characters are a-z,
  *       A-Z, 0-9, _ (underscore), - (hyphen) and . (period).
@@ -913,61 +987,68 @@ AWS.DynamoDB = inherit({})
  *         * +NS+ - (<tt>Array<String></tt>) A set of numbers.
  *         * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
  *           attributes.
- *   @param [Object] options
- *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
- *     object that is passed to the registered callbacks has the
- *     following properties:
- *     * +Items+ - (<tt>Array<Object<Object>></tt>)
- *     * +Count+ - (<tt>Integer</tt>) Number of items in the response.
- *     * +ScannedCount+ - (<tt>Integer</tt>) Number of items in the
- *       complete scan before any filters are applied. A high
- *       ScannedCount value with few, or no, Count results indicates an
- *       inefficient Scan operation.
- *     * +LastEvaluatedKey+ - (<tt>Object</tt>) Primary key of the item
- *       where the scan operation stopped. Provide this value in a
- *       subsequent scan operation to continue the operation from that
- *       point. The LastEvaluatedKey is null when the entire scan result
- *       set is complete (i.e. the operation processed the "last page").
- *       * +HashKeyElement+ - (<tt>Object</tt>) A hash key
- *         element is treated as the primary key, and can be a string or
- *         a number. Single attribute primary keys have one index value.
- *         The value can be String, Number, StringSet, NumberSet.
- *         * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8
- *           binary encoding. The maximum size is limited by the size of
- *           the primary key (1024 bytes as a range part of a key or 2048
- *           bytes as a single part hash key) or the item size (64k).
- *         * +N+ - (<tt>String</tt>) Numbers are positive or negative
- *           exact-value decimals and integers. A number can have up to
- *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
- *           sequences of unsigned bytes.
- *         * +SS+ - (<tt>Array<String></tt>) A set of strings.
- *         * +NS+ - (<tt>Array<String></tt>) A set of numbers.
- *         * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
- *           attributes.
- *       * +RangeKeyElement+ - (<tt>Object</tt>) A range key element is
- *         treated as a secondary key (used in conjunction with the
- *         primary key), and can be a string or a number, and is only
- *         used for hash-and-range primary keys. The value can be String,
- *         Number, StringSet, NumberSet.
- *         * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8
- *           binary encoding. The maximum size is limited by the size of
- *           the primary key (1024 bytes as a range part of a key or 2048
- *           bytes as a single part hash key) or the item size (64k).
- *         * +N+ - (<tt>String</tt>) Numbers are positive or negative
- *           exact-value decimals and integers. A number can have up to
- *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
- *           sequences of unsigned bytes.
- *         * +SS+ - (<tt>Array<String></tt>) A set of strings.
- *         * +NS+ - (<tt>Array<String></tt>) A set of numbers.
- *         * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
- *           attributes.
- *     * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to +null+ if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to +null+ if a request error occurs.
+ *       The +data+ object has the following properties:
+ *       * +Items+ - (<tt>Array<Object<Object>></tt>)
+ *       * +Count+ - (<tt>Integer</tt>) Number of items in the response.
+ *       * +ScannedCount+ - (<tt>Integer</tt>) Number of items in the
+ *         complete scan before any filters are applied. A high
+ *         ScannedCount value with few, or no, Count results indicates an
+ *         inefficient Scan operation.
+ *       * +LastEvaluatedKey+ - (<tt>Object</tt>) Primary key of the item
+ *         where the scan operation stopped. Provide this value in a
+ *         subsequent scan operation to continue the operation from that
+ *         point. The LastEvaluatedKey is null when the entire scan result
+ *         set is complete (i.e. the operation processed the "last page").
+ *         * +HashKeyElement+ - (<tt>Object</tt>) A hash key
+ *           element is treated as the primary key, and can be a string or
+ *           a number. Single attribute primary keys have one index value.
+ *           The value can be String, Number, StringSet, NumberSet.
+ *           * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8
+ *             binary encoding. The maximum size is limited by the size of
+ *             the primary key (1024 bytes as a range part of a key or 2048
+ *             bytes as a single part hash key) or the item size (64k).
+ *           * +N+ - (<tt>String</tt>) Numbers are positive or negative
+ *             exact-value decimals and integers. A number can have up to
+ *             38 digits precision and can be between 10^-128 to 10^+126.
+ *           * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
+ *             sequences of unsigned bytes.
+ *           * +SS+ - (<tt>Array<String></tt>) A set of strings.
+ *           * +NS+ - (<tt>Array<String></tt>) A set of numbers.
+ *           * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
+ *             attributes.
+ *         * +RangeKeyElement+ - (<tt>Object</tt>) A range key element is
+ *           treated as a secondary key (used in conjunction with the
+ *           primary key), and can be a string or a number, and is only
+ *           used for hash-and-range primary keys. The value can be String,
+ *           Number, StringSet, NumberSet.
+ *           * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8
+ *             binary encoding. The maximum size is limited by the size of
+ *             the primary key (1024 bytes as a range part of a key or 2048
+ *             bytes as a single part hash key) or the item size (64k).
+ *           * +N+ - (<tt>String</tt>) Numbers are positive or negative
+ *             exact-value decimals and integers. A number can have up to
+ *             38 digits precision and can be between 10^-128 to 10^+126.
+ *           * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
+ *             sequences of unsigned bytes.
+ *           * +SS+ - (<tt>Array<String></tt>) A set of strings.
+ *           * +NS+ - (<tt>Array<String></tt>) A set of numbers.
+ *           * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
+ *             attributes.
+ *       * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
+ *   @return [AWS.AWSRequest] a handle to the operation request for
+ *     subsequent event callback registration.
  *
- * @!method updateItem(params, options)
+ * @!method updateItem(params, callback)
  *   Edits an existing item's attributes.
- *   @param [Object] params
+ *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table in which you want to update an item. Allowed characters
  *       are a-z, A-Z, 0-9, _ (underscore), - (hyphen) and . (period).
@@ -1043,31 +1124,38 @@ AWS.DynamoDB = inherit({})
  *       * +Exists+ - (<tt>Boolean</tt>) Specify whether or not a value
  *         already exists for the attribute name-value pair.
  *     * +ReturnValues+ - (<tt>String</tt>)
- *   @param [Object] options
- *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
- *     object that is passed to the registered callbacks has the
- *     following properties:
- *     * +Attributes+ - (<tt>Object<Object></tt>) A map of attribute
- *       name-value pairs, but only if the ReturnValues parameter is
- *       specified as something other than NONE in the request.
- *       * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8 binary
- *         encoding. The maximum size is limited by the size of the
- *         primary key (1024 bytes as a range part of a key or 2048 bytes
- *         as a single part hash key) or the item size (64k).
- *       * +N+ - (<tt>String</tt>) Numbers are positive or negative
- *         exact-value decimals and integers. A number can have up to 38
- *         digits precision and can be between 10^-128 to 10^+126.
- *       * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
- *         sequences of unsigned bytes.
- *       * +SS+ - (<tt>Array<String></tt>) A set of strings.
- *       * +NS+ - (<tt>Array<String></tt>) A set of numbers.
- *       * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
- *         attributes.
- *     * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to +null+ if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to +null+ if a request error occurs.
+ *       The +data+ object has the following properties:
+ *       * +Attributes+ - (<tt>Object<Object></tt>) A map of attribute
+ *         name-value pairs, but only if the ReturnValues parameter is
+ *         specified as something other than NONE in the request.
+ *         * +S+ - (<tt>String</tt>) Strings are Unicode with UTF-8 binary
+ *           encoding. The maximum size is limited by the size of the
+ *           primary key (1024 bytes as a range part of a key or 2048 bytes
+ *           as a single part hash key) or the item size (64k).
+ *         * +N+ - (<tt>String</tt>) Numbers are positive or negative
+ *           exact-value decimals and integers. A number can have up to 38
+ *           digits precision and can be between 10^-128 to 10^+126.
+ *         * +B+ - (<tt>Base64 Encoded Data</tt>) Binary attributes are
+ *           sequences of unsigned bytes.
+ *         * +SS+ - (<tt>Array<String></tt>) A set of strings.
+ *         * +NS+ - (<tt>Array<String></tt>) A set of numbers.
+ *         * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
+ *           attributes.
+ *       * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
+ *   @return [AWS.AWSRequest] a handle to the operation request for
+ *     subsequent event callback registration.
  *
- * @!method updateTable(params, options)
+ * @!method updateTable(params, callback)
  *   Updates the provisioned throughput for the given table.
- *   @param [Object] params
+ *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table you want to update. Allowed characters are a-z, A-Z, 0-9,
  *       _ (underscore), - (hyphen) and . (period).
@@ -1081,43 +1169,50 @@ AWS.DynamoDB = inherit({})
  *         WriteCapacityUnits are in terms of strictly consistent reads,
  *         assuming items of 1k. 2k items require twice the
  *         WriteCapacityUnits.
- *   @param [Object] options
- *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
- *     object that is passed to the registered callbacks has the
- *     following properties:
- *     * +TableDescription+ - (<tt>Object</tt>)
- *       * +TableName+ - (<tt>String</tt>) The name of the table being
- *         described.
- *       * +KeySchema+ - (<tt>Object</tt>)
- *         * +HashKeyElement+ - (<tt>Object</tt>) A hash key
- *           element is treated as the primary key, and can be a string
- *           or a number. Single attribute primary keys have one index
- *           value. The value can be String, Number, StringSet,
- *           NumberSet.
- *           * +AttributeName+ - (<tt>String</tt>) The
- *             AttributeName of the KeySchemaElement.
- *           * +AttributeType+ - (<tt>String</tt>) The
- *             AttributeType of the KeySchemaElement which can be a
- *             String or a Number.
- *         * +RangeKeyElement+ - (<tt>Object</tt>) A range key element is
- *           treated as a secondary key (used in conjunction with the
- *           primary key), and can be a string or a number, and is only
- *           used for hash-and-range primary keys. The value can be
- *           String, Number, StringSet, NumberSet.
- *           * +AttributeName+ - (<tt>String</tt>) The
- *             AttributeName of the KeySchemaElement.
- *           * +AttributeType+ - (<tt>String</tt>) The
- *             AttributeType of the KeySchemaElement which can be a
- *             String or a Number.
- *       * +TableStatus+ - (<tt>String</tt>)
- *       * +CreationDateTime+ - (<tt>Date</tt>)
- *       * +ProvisionedThroughput+ - (<tt>Object</tt>)
- *         * +LastIncreaseDateTime+ - (<tt>Date</tt>)
- *         * +LastDecreaseDateTime+ - (<tt>Date</tt>)
- *         * +ReadCapacityUnits+ - (<tt>Integer</tt>)
- *         * +WriteCapacityUnits+ - (<tt>Integer</tt>)
- *       * +TableSizeBytes+ - (<tt>Integer</tt>)
- *       * +ItemCount+ - (<tt>Integer</tt>)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to +null+ if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to +null+ if a request error occurs.
+ *       The +data+ object has the following properties:
+ *       * +TableDescription+ - (<tt>Object</tt>)
+ *         * +TableName+ - (<tt>String</tt>) The name of the table being
+ *           described.
+ *         * +KeySchema+ - (<tt>Object</tt>)
+ *           * +HashKeyElement+ - (<tt>Object</tt>) A hash key
+ *             element is treated as the primary key, and can be a string
+ *             or a number. Single attribute primary keys have one index
+ *             value. The value can be String, Number, StringSet,
+ *             NumberSet.
+ *             * +AttributeName+ - (<tt>String</tt>) The
+ *               AttributeName of the KeySchemaElement.
+ *             * +AttributeType+ - (<tt>String</tt>) The
+ *               AttributeType of the KeySchemaElement which can be a
+ *               String or a Number.
+ *           * +RangeKeyElement+ - (<tt>Object</tt>) A range key element is
+ *             treated as a secondary key (used in conjunction with the
+ *             primary key), and can be a string or a number, and is only
+ *             used for hash-and-range primary keys. The value can be
+ *             String, Number, StringSet, NumberSet.
+ *             * +AttributeName+ - (<tt>String</tt>) The
+ *               AttributeName of the KeySchemaElement.
+ *             * +AttributeType+ - (<tt>String</tt>) The
+ *               AttributeType of the KeySchemaElement which can be a
+ *               String or a Number.
+ *         * +TableStatus+ - (<tt>String</tt>)
+ *         * +CreationDateTime+ - (<tt>Date</tt>)
+ *         * +ProvisionedThroughput+ - (<tt>Object</tt>)
+ *           * +LastIncreaseDateTime+ - (<tt>Date</tt>)
+ *           * +LastDecreaseDateTime+ - (<tt>Date</tt>)
+ *           * +ReadCapacityUnits+ - (<tt>Integer</tt>)
+ *           * +WriteCapacityUnits+ - (<tt>Integer</tt>)
+ *         * +TableSizeBytes+ - (<tt>Integer</tt>)
+ *         * +ItemCount+ - (<tt>Integer</tt>)
+ *   @return [AWS.AWSRequest] a handle to the operation request for
+ *     subsequent event callback registration.
  *
  *
  * @!method constructor(options)

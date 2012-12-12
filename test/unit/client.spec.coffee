@@ -45,15 +45,54 @@ describe 'AWS.Client', ->
       AWS.config = cfg
 
   describe 'makeRequest', ->
-    it 'should allow extra config applied per request', ->
-      client = new MockClient(maxRetries: 10, sslEnabled: false)
-      request = client.makeRequest('foo', {}, {sslEnabled: true, maxRetries: 0})
 
-      expect(request.awsResponse.client.config.sslEnabled).toEqual(true)
-      expect(request.awsResponse.client.config.maxRetries).toEqual(0)
-      expect(request.awsResponse.client).not.toBe(client)
-      expect(client.config.sslEnabled).toEqual(false)
-      expect(client.config.maxRetries).toEqual(10)
+    it 'it treats params as an optinal parameter', ->
+      helpers.mockHttpResponse(200, {}, ['FOO', 'BAR'])
+      client = new MockClient()
+      client.buildRequest = (operation, params) ->
+        expect(operation).toEqual('operationName')
+        expect(params).toEqual({})
+        req = this.newHttpRequest()
+        req.sign = ->
+        req
+      client.makeRequest 'operationName', (err, data) ->
+
+    it 'yields data to the callback', ->
+      helpers.mockHttpResponse(200, {}, ['FOO', 'BAR'])
+      err = null; data = null
+      client = new MockClient()
+      req = client.makeRequest 'operation', {}, (e, d) ->
+        err = e
+        data = d
+      expect(err).toEqual(null)
+      expect(data).toEqual('FOOBAR')
+
+    it 'yields service errors to the callback', ->
+      helpers.mockHttpResponse(500, {}, ['service error'])
+      err = null; data = null
+      client = new MockClient(maxRetries: 0)
+      req = client.makeRequest 'operation', {}, (e, d) ->
+        err = e
+        data = d
+      expect(err).toEqual({code:500, message:null, retryable:true, statusCode:500})
+      expect(data).toEqual(null)
+
+    it 'yields network errors to the callback', ->
+      error = { code: 'NetworkingError' }
+      helpers.mockHttpResponse(error)
+      err = null; data = null
+      client = new MockClient(maxRetries: 0)
+      req = client.makeRequest 'operation', {}, (e, d) ->
+        err = e
+        data = d
+      expect(err).toEqual(error)
+      expect(data).toEqual(null)
+
+    it 'does not send the request if a callback function is omitted', ->
+      httpClient = AWS.HttpClient.getInstance()
+      spyOn(httpClient, 'handleRequest')
+      new MockClient().makeRequest('operation')
+      expect(httpClient.handleRequest).not.toHaveBeenCalled()
 
   describe 'retryableError', ->
 
@@ -79,5 +118,5 @@ describe 'AWS.Client', ->
 
     it 'should use defaultRetries defined on object if undefined on config', ->
       client.defaultRetryCount = 13
-      client.config.maxRetries = undefined;
+      client.config.maxRetries = undefined
       expect(client.numRetries()).toEqual(13)

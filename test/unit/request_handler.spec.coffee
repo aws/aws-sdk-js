@@ -19,7 +19,7 @@ describe 'AWS.RequestHandler', ->
 
   oldSetTimeout = setTimeout
   config = null; client = null; totalWaited = null; delays = []
-  context = null; request = null; handler = null
+  response = null; request = null; handler = null
 
   beforeEach ->
     # Mock the timer manually (jasmine.Clock does not work in node)
@@ -32,9 +32,8 @@ describe 'AWS.RequestHandler', ->
     totalWaited = 0
     delays = []
     client = new MockClient(maxRetries: 3)
-    context = new AWS.AWSResponse(client: client,
-      method: 'mockMethod', params: {foo: 'bar'})
-    request = new AWS.AWSRequest(context)
+    request = new AWS.AWSRequest(client, 'mockMethod', {foo:'bar'})
+    response = request.awsResponse
     handler = new AWS.RequestHandler(request)
 
     # Useful spies
@@ -86,7 +85,7 @@ describe 'AWS.RequestHandler', ->
 
       handler.makeRequest()
 
-      expect(context.retryCount).toEqual(client.config.maxRetries + 1);
+      expect(response.retryCount).toEqual(client.config.maxRetries + 1);
       expect(request.notifyFail).toHaveBeenCalled()
       expect(request.notifyDone).not.toHaveBeenCalled()
 
@@ -113,22 +112,22 @@ describe 'AWS.RequestHandler', ->
         retryable: true)
 
       expect(request.notifyDone).not.toHaveBeenCalled()
-      expect(context.retryCount).toEqual(client.config.maxRetries + 1);
+      expect(response.retryCount).toEqual(client.config.maxRetries + 1);
 
     it 'should not call notifyFail if retried fewer than maxRetries', ->
 
       AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb) ->
-        if context.retryCount < 2
+        if response.retryCount < 2
           cb.onError(code: 'NetworkingError', message: "FAIL!")
         else
-          cb.onHeaders(context.retryCount < 2 ? 500 : 200, {})
+          cb.onHeaders(response.retryCount < 2 ? 500 : 200, {})
           cb.onData('{"data":"BAR"}')
           cb.onEnd()
 
       handler.makeRequest()
 
       expect(totalWaited).toEqual(90)
-      expect(context.retryCount).toBeLessThan(client.config.maxRetries);
+      expect(response.retryCount).toBeLessThan(client.config.maxRetries);
 
     it 'notifies done on a successful response', ->
 

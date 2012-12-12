@@ -28,7 +28,7 @@ module.exports = function () {
     this.sharedBucket = 'aws-sdk-js-integration-' +
       this.AWS.util.date.unixTimestamp() * 1000;
 
-    this.s3.createBucket({Bucket:this.sharedBucket}).done(function () {
+    this.s3.createBucket({Bucket:this.sharedBucket}, function(err, data) {
       callback();
     });
 
@@ -41,8 +41,8 @@ module.exports = function () {
 
   this.Then(/^the object with the key "([^"]*)" should contain "([^"]*)"$/, function(key, contents, next) {
     this.eventually(next, function (retry) {
-      this.s3.getObject({Bucket:this.sharedBucket,Key:key}).always(function (resp) {
-        if (resp.data && resp.data.Body == contents)
+      this.s3.getObject({Bucket:this.sharedBucket,Key:key}, function(err, data) {
+        if (data && data.Body == contents)
           next();
         else
           retry();
@@ -58,13 +58,13 @@ module.exports = function () {
   this.Then(/^the object with the key "([^"]*)" should (not )?exist$/, function(key, shouldNotExist, next) {
     var params = { Bucket:this.sharedBucket, Key:key };
     this.eventually(next, function (retry) {
-      this.s3.headObject(params).always(function (resp) {
+      this.s3.headObject(params, function(err, data) {
         if (shouldNotExist) {
-          (resp.error && resp.error.code == 'NotFound') ? next() : retry();
+          (err && err.code == 'NotFound') ? next() : retry();
         } else { // should exist
-          resp.error ? retry() : next();
+          err ? retry() : next();
         }
-      }, {bind: this});
+      });
     });
   });
 
