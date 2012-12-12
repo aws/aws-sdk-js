@@ -27,7 +27,7 @@ AWS = {};
  *   svc.client.OPERATION_NAME(params, function (err, data) {
  *     if (err) {
  *       console.log(err); // an error occurred
- *     } else { 
+ *     } else {
  *       console.log(data); // successful response
  *     }
  *   });
