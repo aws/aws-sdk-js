@@ -50,9 +50,9 @@ AWS.EC2 = inherit({})
  *   Activates a specific number of licenses for a 90-day period.
  *   Activations can be done against a specific license ID.
  *   @param [Object] params
- *     * +licenseId+ - (*required*, <tt>String</tt>) Specifies the ID for
+ *     * +LicenseId+ - (*required*, <tt>String</tt>) Specifies the ID for
  *       the specific license to activate against.
- *     * +capacity+ - (*required*, <tt>Integer</tt>) Specifies the
+ *     * +Capacity+ - (*required*, <tt>Integer</tt>) Specifies the
  *       additional number of licenses to activate.
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
@@ -69,16 +69,16 @@ AWS.EC2 = inherit({})
  *     following properties:
  *     * +PublicIp+ - (<tt>String</tt>) IP address for use with your
  *       account.
- *     * +domain+ - (<tt>String</tt>)
- *     * +allocationId+ - (<tt>String</tt>)
+ *     * +Domain+ - (<tt>String</tt>)
+ *     * +AllocationId+ - (<tt>String</tt>)
  *
  * @!method assignPrivateIpAddresses(params, options)
  *   Calls the AssignPrivateIpAddresses API operation.
  *   @param [Object] params
- *     * +networkInterfaceId+ - (*required*, <tt>String</tt>)
- *     * +privateIpAddresses+ - (<tt>Array<String></tt>)
- *     * +secondaryPrivateIpAddressCount+ - (<tt>Integer</tt>)
- *     * +allowReassignment+ - (<tt>Boolean</tt>)
+ *     * +NetworkInterfaceId+ - (*required*, <tt>String</tt>)
+ *     * +PrivateIpAddresses+ - (<tt>Array<String></tt>)
+ *     * +SecondaryPrivateIpAddressCount+ - (<tt>Integer</tt>)
+ *     * +AllowReassignment+ - (<tt>Boolean</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
@@ -93,14 +93,14 @@ AWS.EC2 = inherit({})
  *     * +AllocationId+ - (<tt>String</tt>) The allocation ID that AWS
  *       returned when you allocated the elastic IP address for use with
  *       Amazon VPC.
- *     * +networkInterfaceId+ - (<tt>String</tt>)
- *     * +privateIpAddress+ - (<tt>String</tt>)
- *     * +allowReassociation+ - (<tt>Boolean</tt>)
+ *     * +NetworkInterfaceId+ - (<tt>String</tt>)
+ *     * +PrivateIpAddress+ - (<tt>String</tt>)
+ *     * +AllowReassociation+ - (<tt>Boolean</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +associationId+ - (<tt>String</tt>)
+ *     * +AssociationId+ - (<tt>String</tt>)
  *
  * @!method associateDhcpOptions(params, options)
  *   Associates a set of DHCP options (that you've previously created)
@@ -129,37 +129,37 @@ AWS.EC2 = inherit({})
  *   want to disassociate the route table from the subnet later. A route
  *   table can be associated with multiple subnets.
  *   @param [Object] params
- *     * +subnetId+ - (*required*, <tt>String</tt>) The ID of the subnet.
- *     * +routeTableId+ - (*required*, <tt>String</tt>) The ID of the
+ *     * +SubnetId+ - (*required*, <tt>String</tt>) The ID of the subnet.
+ *     * +RouteTableId+ - (*required*, <tt>String</tt>) The ID of the
  *       route table.
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +associationId+ - (<tt>String</tt>)
+ *     * +AssociationId+ - (<tt>String</tt>)
  *
  * @!method attachInternetGateway(params, options)
  *   Attaches an Internet gateway to a VPC, enabling connectivity between
  *   the Internet and the VPC. For more information about your VPC and
  *   Internet gateway, go to the Amazon Virtual Private Cloud User Guide.
  *   @param [Object] params
- *     * +internetGatewayId+ - (*required*, <tt>String</tt>) The ID of
+ *     * +InternetGatewayId+ - (*required*, <tt>String</tt>) The ID of
  *       the Internet gateway to attach.
- *     * +vpcId+ - (*required*, <tt>String</tt>) The ID of the VPC.
+ *     * +VpcId+ - (*required*, <tt>String</tt>) The ID of the VPC.
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
  * @!method attachNetworkInterface(params, options)
  *   Calls the AttachNetworkInterface API operation.
  *   @param [Object] params
- *     * +networkInterfaceId+ - (*required*, <tt>String</tt>)
- *     * +instanceId+ - (*required*, <tt>String</tt>)
- *     * +deviceIndex+ - (*required*, <tt>Integer</tt>)
+ *     * +NetworkInterfaceId+ - (*required*, <tt>String</tt>)
+ *     * +InstanceId+ - (*required*, <tt>String</tt>)
+ *     * +DeviceIndex+ - (*required*, <tt>Integer</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +attachmentId+ - (<tt>String</tt>)
+ *     * +AttachmentId+ - (<tt>String</tt>)
  *
  * @!method attachVolume(params, options)
  *   Attach a previously created volume to a running instance.
@@ -185,7 +185,7 @@ AWS.EC2 = inherit({})
  *       * +State+ - (<tt>String</tt>)
  *       * +AttachTime+ - (<tt>Date</tt>) Timestamp when this attachment
  *         initiated.
- *       * +deleteOnTermination+ - (<tt>Boolean</tt>)
+ *       * +DeleteOnTermination+ - (<tt>Boolean</tt>)
  *
  * @!method attachVpnGateway(params, options)
  *   Attaches a VPN gateway to a VPC. This is the last step required to
@@ -211,15 +211,15 @@ AWS.EC2 = inherit({})
  *   Virtual Private Cloud and VPC security groups, go to the Amazon
  *   Virtual Private Cloud User Guide.
  *   @param [Object] params
- *     * +groupId+ - (*required*, <tt>String</tt>) ID of the VPC security
+ *     * +GroupId+ - (*required*, <tt>String</tt>) ID of the VPC security
  *       group to modify.
- *     * +sourceSecurityGroupName+ - (<tt>String</tt>) Deprecated.
- *     * +sourceSecurityGroupOwnerId+ - (<tt>String</tt>) Deprecated.
- *     * +ipProtocol+ - (<tt>String</tt>) Deprecated.
- *     * +fromPort+ - (<tt>Integer</tt>) Deprecated.
- *     * +toPort+ - (<tt>Integer</tt>) Deprecated.
- *     * +cidrIp+ - (<tt>String</tt>) Deprecated.
- *     * +ipPermissions+ - (<tt>Array<Object></tt>) List of IP
+ *     * +SourceSecurityGroupName+ - (<tt>String</tt>) Deprecated.
+ *     * +SourceSecurityGroupOwnerId+ - (<tt>String</tt>) Deprecated.
+ *     * +IpProtocol+ - (<tt>String</tt>) Deprecated.
+ *     * +FromPort+ - (<tt>Integer</tt>) Deprecated.
+ *     * +ToPort+ - (<tt>Integer</tt>) Deprecated.
+ *     * +CidrIp+ - (<tt>String</tt>) Deprecated.
+ *     * +IpPermissions+ - (<tt>Array<Object></tt>) List of IP
  *       permissions to authorize on the specified security group.
  *       Specifying permissions through IP permissions is the preferred
  *       way of authorizing permissions since it offers more flexibility
@@ -401,58 +401,58 @@ AWS.EC2 = inherit({})
  * @!method cancelConversionTask(params, options)
  *   Calls the CancelConversionTask API operation.
  *   @param [Object] params
- *     * +conversionTaskId+ - (*required*, <tt>String</tt>)
- *     * +reasonMessage+ - (<tt>String</tt>)
+ *     * +ConversionTaskId+ - (*required*, <tt>String</tt>)
+ *     * +ReasonMessage+ - (<tt>String</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
  * @!method cancelExportTask(params, options)
  *   Calls the CancelExportTask API operation.
  *   @param [Object] params
- *     * +exportTaskId+ - (*required*, <tt>String</tt>)
+ *     * +ExportTaskId+ - (*required*, <tt>String</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
  * @!method cancelReservedInstancesListing(params, options)
  *   Calls the CancelReservedInstancesListing API operation.
  *   @param [Object] params
- *     * +reservedInstancesListingId+ - (*required*, <tt>String</tt>)
+ *     * +ReservedInstancesListingId+ - (*required*, <tt>String</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +reservedInstancesListings+ - (<tt>Array<Object></tt>)
- *       * +reservedInstancesListingId+ - (<tt>String</tt>)
- *       * +reservedInstancesId+ - (<tt>String</tt>)
- *       * +createDate+ - (<tt>Date</tt>)
- *       * +updateDate+ - (<tt>Date</tt>)
- *       * +status+ - (<tt>String</tt>)
- *       * +statusMessage+ - (<tt>String</tt>)
- *       * +instanceCounts+ - (<tt>Array<Object></tt>)
- *         * +state+ - (<tt>String</tt>)
- *         * +instanceCount+ - (<tt>Integer</tt>)
- *       * +priceSchedules+ - (<tt>Array<Object></tt>)
- *         * +term+ - (<tt>Integer</tt>)
- *         * +price+ - (<tt>Float</tt>)
- *         * +currencyCode+ - (<tt>String</tt>)
- *         * +active+ - (<tt>Boolean</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>)
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
- *       * +clientToken+ - (<tt>String</tt>)
+ *     * +ReservedInstancesListings+ - (<tt>Array<Object></tt>)
+ *       * +ReservedInstancesListingId+ - (<tt>String</tt>)
+ *       * +ReservedInstancesId+ - (<tt>String</tt>)
+ *       * +CreateDate+ - (<tt>Date</tt>)
+ *       * +UpdateDate+ - (<tt>Date</tt>)
+ *       * +Status+ - (<tt>String</tt>)
+ *       * +StatusMessage+ - (<tt>String</tt>)
+ *       * +InstanceCounts+ - (<tt>Array<Object></tt>)
+ *         * +State+ - (<tt>String</tt>)
+ *         * +InstanceCount+ - (<tt>Integer</tt>)
+ *       * +PriceSchedules+ - (<tt>Array<Object></tt>)
+ *         * +Term+ - (<tt>Integer</tt>)
+ *         * +Price+ - (<tt>Float</tt>)
+ *         * +CurrencyCode+ - (<tt>String</tt>)
+ *         * +Active+ - (<tt>Boolean</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +ClientToken+ - (<tt>String</tt>)
  *
  * @!method cancelSpotInstanceRequests(params, options)
  *   Cancels one or more Spot Instance requests.
  *   @param [Object] params
- *     * +spotInstanceRequestIds+ - (*required*, <tt>Array<String></tt>)
+ *     * +SpotInstanceRequestIds+ - (*required*, <tt>Array<String></tt>)
  *       Specifies the ID of the Spot Instance request.
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +cancelledSpotInstanceRequests+ - (<tt>Array<Object></tt>)
- *       * +spotInstanceRequestId+ - (<tt>String</tt>)
- *       * +state+ - (<tt>String</tt>)
+ *     * +CancelledSpotInstanceRequests+ - (<tt>Array<Object></tt>)
+ *       * +SpotInstanceRequestId+ - (<tt>String</tt>)
+ *       * +State+ - (<tt>String</tt>)
  *
  * @!method confirmProductInstance(params, options)
  *   The ConfirmProductInstance operation returns true if the specified
@@ -504,10 +504,10 @@ AWS.EC2 = inherit({})
  *         IP address of the customer gateway's outside interface.
  *       * +BgpAsn+ - (<tt>String</tt>) Specifies the customer gateway's
  *         Border Gateway Protocol (BGP) Autonomous System Number (ASN).
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *         CustomerGateway.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method createDhcpOptions(params, options)
  *   Creates a set of DHCP options that you can then associate with one
@@ -536,10 +536,10 @@ AWS.EC2 = inherit({})
  *           option.
  *         * +Values+ - (<tt>Array<String></tt>) Contains a set of values
  *           for a DHCP option.
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *         DhcpOptions.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method createImage(params, options)
  *   Creates an Amazon EBS-backed AMI from a "running" or "stopped"
@@ -548,70 +548,70 @@ AWS.EC2 = inherit({})
  *   storage that persists on instance failure, and can be stopped and
  *   started.
  *   @param [Object] params
- *     * +instanceId+ - (*required*, <tt>String</tt>) The ID of the
+ *     * +InstanceId+ - (*required*, <tt>String</tt>) The ID of the
  *       instance from which to create the new image.
- *     * +name+ - (*required*, <tt>String</tt>) The name for the new AMI
+ *     * +Name+ - (*required*, <tt>String</tt>) The name for the new AMI
  *       being created.
- *     * +description+ - (<tt>String</tt>) The description for the new
+ *     * +Description+ - (<tt>String</tt>) The description for the new
  *       AMI being created.
- *     * +noReboot+ - (<tt>Boolean</tt>) By default this property is set
+ *     * +NoReboot+ - (<tt>Boolean</tt>) By default this property is set
  *       to false, which means Amazon EC2 attempts to cleanly shut down
  *       the instance before image creation and reboots the instance
  *       afterwards. When set to true, Amazon EC2 will not shut down the
  *       instance before creating the image. When this option is used,
  *       file system integrity on the created image cannot be guaranteed.
- *     * +blockDeviceMappings+ - (<tt>Array<Object></tt>)
+ *     * +BlockDeviceMappings+ - (<tt>Array<Object></tt>)
  *       * +VirtualName+ - (<tt>String</tt>) Specifies the virtual device
  *         name.
  *       * +DeviceName+ - (<tt>String</tt>) Specifies the device name
  *         (e.g., /dev/sdh).
- *       * +ebs+ - (<tt>Object</tt>) Specifies parameters used to
+ *       * +Ebs+ - (<tt>Object</tt>) Specifies parameters used to
  *         automatically setup Amazon EBS volumes when the instance is
  *         launched.
- *         * +snapshotId+ - (<tt>String</tt>) The ID of the snapshot from
+ *         * +SnapshotId+ - (<tt>String</tt>) The ID of the snapshot from
  *           which the volume will be created.
- *         * +volumeSize+ - (<tt>Integer</tt>) The size of the volume, in
+ *         * +VolumeSize+ - (<tt>Integer</tt>) The size of the volume, in
  *           gigabytes.
- *         * +deleteOnTermination+ - (<tt>Boolean</tt>) Specifies whether
+ *         * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies whether
  *           the Amazon EBS volume is deleted on instance termination.
- *         * +volumeType+ - (<tt>String</tt>)
- *         * +iops+ - (<tt>Integer</tt>)
- *       * +noDevice+ - (<tt>String</tt>) Specifies the device name to
+ *         * +VolumeType+ - (<tt>String</tt>)
+ *         * +Iops+ - (<tt>Integer</tt>)
+ *       * +NoDevice+ - (<tt>String</tt>) Specifies the device name to
  *         suppress during instance launch.
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +imageId+ - (<tt>String</tt>) The ID of the new AMI.
+ *     * +ImageId+ - (<tt>String</tt>) The ID of the new AMI.
  *
  * @!method createInstanceExportTask(params, options)
  *   Calls the CreateInstanceExportTask API operation.
  *   @param [Object] params
- *     * +description+ - (<tt>String</tt>)
- *     * +instanceId+ - (*required*, <tt>String</tt>)
- *     * +targetEnvironment+ - (<tt>String</tt>)
- *     * +exportToS3Task+ - (<tt>Object</tt>)
- *       * +diskImageFormat+ - (<tt>String</tt>)
- *       * +containerFormat+ - (<tt>String</tt>)
- *       * +s3Bucket+ - (<tt>String</tt>)
- *       * +s3Prefix+ - (<tt>String</tt>)
+ *     * +Description+ - (<tt>String</tt>)
+ *     * +InstanceId+ - (*required*, <tt>String</tt>)
+ *     * +TargetEnvironment+ - (<tt>String</tt>)
+ *     * +ExportToS3Task+ - (<tt>Object</tt>)
+ *       * +DiskImageFormat+ - (<tt>String</tt>)
+ *       * +ContainerFormat+ - (<tt>String</tt>)
+ *       * +S3Bucket+ - (<tt>String</tt>)
+ *       * +S3Prefix+ - (<tt>String</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +exportTask+ - (<tt>Object</tt>)
- *       * +exportTaskId+ - (<tt>String</tt>)
- *       * +description+ - (<tt>String</tt>)
- *       * +state+ - (<tt>String</tt>)
- *       * +statusMessage+ - (<tt>String</tt>)
- *       * +instanceExportDetails+ - (<tt>Object</tt>)
- *         * +instanceId+ - (<tt>String</tt>)
- *         * +targetEnvironment+ - (<tt>String</tt>)
- *       * +exportToS3Task+ - (<tt>Object</tt>)
- *         * +diskImageFormat+ - (<tt>String</tt>)
- *         * +containerFormat+ - (<tt>String</tt>)
- *         * +s3Bucket+ - (<tt>String</tt>)
- *         * +s3Key+ - (<tt>String</tt>)
+ *     * +ExportTask+ - (<tt>Object</tt>)
+ *       * +ExportTaskId+ - (<tt>String</tt>)
+ *       * +Description+ - (<tt>String</tt>)
+ *       * +State+ - (<tt>String</tt>)
+ *       * +StatusMessage+ - (<tt>String</tt>)
+ *       * +InstanceExportDetails+ - (<tt>Object</tt>)
+ *         * +InstanceId+ - (<tt>String</tt>)
+ *         * +TargetEnvironment+ - (<tt>String</tt>)
+ *       * +ExportToS3Task+ - (<tt>Object</tt>)
+ *         * +DiskImageFormat+ - (<tt>String</tt>)
+ *         * +ContainerFormat+ - (<tt>String</tt>)
+ *         * +S3Bucket+ - (<tt>String</tt>)
+ *         * +S3Key+ - (<tt>String</tt>)
  *
  * @!method createInternetGateway(params, options)
  *   Creates a new Internet gateway in your AWS account. After creating
@@ -623,14 +623,14 @@ AWS.EC2 = inherit({})
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +internetGateway+ - (<tt>Object</tt>)
- *       * +internetGatewayId+ - (<tt>String</tt>)
- *       * +attachments+ - (<tt>Array<Object></tt>)
- *         * +vpcId+ - (<tt>String</tt>)
- *         * +state+ - (<tt>String</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>)
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *     * +InternetGateway+ - (<tt>Object</tt>)
+ *       * +InternetGatewayId+ - (<tt>String</tt>)
+ *       * +Attachments+ - (<tt>Array<Object></tt>)
+ *         * +VpcId+ - (<tt>String</tt>)
+ *         * +State+ - (<tt>String</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method createKeyPair(params, options)
  *   The CreateKeyPair operation creates a new 2048 bit RSA key pair and
@@ -656,41 +656,41 @@ AWS.EC2 = inherit({})
  *   your VPC. For more information about network ACLs, go to Network
  *   ACLs in the Amazon Virtual Private Cloud User Guide.
  *   @param [Object] params
- *     * +vpcId+ - (*required*, <tt>String</tt>) The ID of the VPC where
+ *     * +VpcId+ - (*required*, <tt>String</tt>) The ID of the VPC where
  *       the network ACL will be created.
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +networkAcl+ - (<tt>Object</tt>)
- *       * +networkAclId+ - (<tt>String</tt>)
- *       * +vpcId+ - (<tt>String</tt>)
- *       * +isDefault+ - (<tt>Boolean</tt>)
- *       * +entries+ - (<tt>Array<Object></tt>)
- *         * +ruleNumber+ - (<tt>Integer</tt>)
- *         * +protocol+ - (<tt>String</tt>)
- *         * +ruleAction+ - (<tt>String</tt>)
- *         * +egress+ - (<tt>Boolean</tt>)
- *         * +cidrBlock+ - (<tt>String</tt>)
- *         * +icmpTypeCode+ - (<tt>Object</tt>)
- *           * +type+ - (<tt>Integer</tt>) For the ICMP protocol, the
+ *     * +NetworkAcl+ - (<tt>Object</tt>)
+ *       * +NetworkAclId+ - (<tt>String</tt>)
+ *       * +VpcId+ - (<tt>String</tt>)
+ *       * +IsDefault+ - (<tt>Boolean</tt>)
+ *       * +Entries+ - (<tt>Array<Object></tt>)
+ *         * +RuleNumber+ - (<tt>Integer</tt>)
+ *         * +Protocol+ - (<tt>String</tt>)
+ *         * +RuleAction+ - (<tt>String</tt>)
+ *         * +Egress+ - (<tt>Boolean</tt>)
+ *         * +CidrBlock+ - (<tt>String</tt>)
+ *         * +IcmpTypeCode+ - (<tt>Object</tt>)
+ *           * +Type+ - (<tt>Integer</tt>) For the ICMP protocol, the
  *             ICMP type. A value of -1 is a wildcard meaning all types.
  *             Required if specifying icmp for the protocol.
- *           * +code+ - (<tt>Integer</tt>) For the ICMP protocol, the
+ *           * +Code+ - (<tt>Integer</tt>) For the ICMP protocol, the
  *             ICMP code. A value of -1 is a wildcard meaning all codes.
  *             Required if specifying icmp for the protocol.
- *         * +portRange+ - (<tt>Object</tt>)
- *           * +from+ - (<tt>Integer</tt>) The first port in the range.
+ *         * +PortRange+ - (<tt>Object</tt>)
+ *           * +From+ - (<tt>Integer</tt>) The first port in the range.
  *             Required if specifying tcp or udp for the protocol.
- *           * +to+ - (<tt>Integer</tt>) The last port in the range.
+ *           * +To+ - (<tt>Integer</tt>) The last port in the range.
  *             Required if specifying tcp or udp for the protocol.
- *       * +associations+ - (<tt>Array<Object></tt>)
- *         * +networkAclAssociationId+ - (<tt>String</tt>)
- *         * +networkAclId+ - (<tt>String</tt>)
- *         * +subnetId+ - (<tt>String</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>)
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *       * +Associations+ - (<tt>Array<Object></tt>)
+ *         * +NetworkAclAssociationId+ - (<tt>String</tt>)
+ *         * +NetworkAclId+ - (<tt>String</tt>)
+ *         * +SubnetId+ - (<tt>String</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method createNetworkAclEntry(params, options)
  *   Creates an entry (i.e., rule) in a network ACL with a rule number
@@ -700,32 +700,32 @@ AWS.EC2 = inherit({})
  *   with the ACL, Amazon VPC processes the entries in the ACL according
  *   to the rule numbers, in ascending order.
  *   @param [Object] params
- *     * +networkAclId+ - (*required*, <tt>String</tt>) ID of the ACL
+ *     * +NetworkAclId+ - (*required*, <tt>String</tt>) ID of the ACL
  *       where the entry will be created.
- *     * +ruleNumber+ - (*required*, <tt>Integer</tt>) Rule number to
+ *     * +RuleNumber+ - (*required*, <tt>Integer</tt>) Rule number to
  *       assign to the entry (e.g., 100). ACL entries are processed in
  *       ascending order by rule number.
- *     * +protocol+ - (*required*, <tt>String</tt>) IP protocol the rule
+ *     * +Protocol+ - (*required*, <tt>String</tt>) IP protocol the rule
  *       applies to. Valid Values: tcp, udp, icmp or an IP protocol
  *       number.
- *     * +ruleAction+ - (*required*, <tt>String</tt>) Whether to allow or
+ *     * +RuleAction+ - (*required*, <tt>String</tt>) Whether to allow or
  *       deny traffic that matches the rule.
- *     * +egress+ - (*required*, <tt>Boolean</tt>) Whether this rule
+ *     * +Egress+ - (*required*, <tt>Boolean</tt>) Whether this rule
  *       applies to egress traffic from the subnet (true) or ingress
  *       traffic to the subnet (false).
- *     * +cidrBlock+ - (*required*, <tt>String</tt>) The CIDR range to
+ *     * +CidrBlock+ - (*required*, <tt>String</tt>) The CIDR range to
  *       allow or deny, in CIDR notation (e.g., 172.16.0.0/24).
- *     * +icmpTypeCode+ - (<tt>Object</tt>) ICMP values.
- *       * +type+ - (<tt>Integer</tt>) For the ICMP protocol, the ICMP
+ *     * +IcmpTypeCode+ - (<tt>Object</tt>) ICMP values.
+ *       * +Type+ - (<tt>Integer</tt>) For the ICMP protocol, the ICMP
  *         type. A value of -1 is a wildcard meaning all types. Required
  *         if specifying icmp for the protocol.
- *       * +code+ - (<tt>Integer</tt>) For the ICMP protocol, the ICMP
+ *       * +Code+ - (<tt>Integer</tt>) For the ICMP protocol, the ICMP
  *         code. A value of -1 is a wildcard meaning all codes. Required
  *         if specifying icmp for the protocol.
- *     * +portRange+ - (<tt>Object</tt>) Port ranges.
- *       * +from+ - (<tt>Integer</tt>) The first port in the range.
+ *     * +PortRange+ - (<tt>Object</tt>) Port ranges.
+ *       * +From+ - (<tt>Integer</tt>) The first port in the range.
  *         Required if specifying tcp or udp for the protocol.
- *       * +to+ - (<tt>Integer</tt>) The last port in the range. Required
+ *       * +To+ - (<tt>Integer</tt>) The last port in the range. Required
  *         if specifying tcp or udp for the protocol.
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
@@ -733,68 +733,68 @@ AWS.EC2 = inherit({})
  * @!method createNetworkInterface(params, options)
  *   Calls the CreateNetworkInterface API operation.
  *   @param [Object] params
- *     * +subnetId+ - (*required*, <tt>String</tt>)
- *     * +description+ - (<tt>String</tt>)
- *     * +privateIpAddress+ - (<tt>String</tt>)
- *     * +groups+ - (<tt>Array<String></tt>)
- *     * +privateIpAddresses+ - (<tt>Array<Object></tt>)
- *       * +privateIpAddress+ - (*required*, <tt>String</tt>)
- *       * +primary+ - (<tt>Boolean</tt>)
- *     * +secondaryPrivateIpAddressCount+ - (<tt>Integer</tt>)
+ *     * +SubnetId+ - (*required*, <tt>String</tt>)
+ *     * +Description+ - (<tt>String</tt>)
+ *     * +PrivateIpAddress+ - (<tt>String</tt>)
+ *     * +Groups+ - (<tt>Array<String></tt>)
+ *     * +PrivateIpAddresses+ - (<tt>Array<Object></tt>)
+ *       * +PrivateIpAddress+ - (*required*, <tt>String</tt>)
+ *       * +Primary+ - (<tt>Boolean</tt>)
+ *     * +SecondaryPrivateIpAddressCount+ - (<tt>Integer</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +networkInterface+ - (<tt>Object</tt>)
- *       * +networkInterfaceId+ - (<tt>String</tt>)
- *       * +subnetId+ - (<tt>String</tt>)
- *       * +vpcId+ - (<tt>String</tt>)
- *       * +availabilityZone+ - (<tt>String</tt>)
- *       * +description+ - (<tt>String</tt>)
- *       * +ownerId+ - (<tt>String</tt>)
- *       * +requesterId+ - (<tt>String</tt>)
- *       * +requesterManaged+ - (<tt>Boolean</tt>)
- *       * +status+ - (<tt>String</tt>)
- *       * +macAddress+ - (<tt>String</tt>)
- *       * +privateIpAddress+ - (<tt>String</tt>)
- *       * +privateDnsName+ - (<tt>String</tt>)
- *       * +sourceDestCheck+ - (<tt>Boolean</tt>)
- *       * +groups+ - (<tt>Array<Object></tt>)
+ *     * +NetworkInterface+ - (<tt>Object</tt>)
+ *       * +NetworkInterfaceId+ - (<tt>String</tt>)
+ *       * +SubnetId+ - (<tt>String</tt>)
+ *       * +VpcId+ - (<tt>String</tt>)
+ *       * +AvailabilityZone+ - (<tt>String</tt>)
+ *       * +Description+ - (<tt>String</tt>)
+ *       * +OwnerId+ - (<tt>String</tt>)
+ *       * +RequesterId+ - (<tt>String</tt>)
+ *       * +RequesterManaged+ - (<tt>Boolean</tt>)
+ *       * +Status+ - (<tt>String</tt>)
+ *       * +MacAddress+ - (<tt>String</tt>)
+ *       * +PrivateIpAddress+ - (<tt>String</tt>)
+ *       * +PrivateDnsName+ - (<tt>String</tt>)
+ *       * +SourceDestCheck+ - (<tt>Boolean</tt>)
+ *       * +Groups+ - (<tt>Array<Object></tt>)
  *         * +GroupName+ - (<tt>String</tt>)
- *         * +groupId+ - (<tt>String</tt>)
- *       * +attachment+ - (<tt>Object</tt>)
- *         * +attachmentId+ - (<tt>String</tt>)
- *         * +instanceId+ - (<tt>String</tt>)
- *         * +instanceOwnerId+ - (<tt>String</tt>)
- *         * +deviceIndex+ - (<tt>Integer</tt>)
- *         * +status+ - (<tt>String</tt>)
- *         * +attachTime+ - (<tt>Date</tt>)
- *         * +deleteOnTermination+ - (<tt>Boolean</tt>)
- *       * +association+ - (<tt>Object</tt>)
- *         * +publicIp+ - (<tt>String</tt>)
- *         * +ipOwnerId+ - (<tt>String</tt>)
- *         * +allocationId+ - (<tt>String</tt>)
- *         * +associationId+ - (<tt>String</tt>)
- *       * +tagSet+ - (<tt>Array<Object></tt>)
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
- *       * +privateIpAddresses+ - (<tt>Array<Object></tt>)
- *         * +privateIpAddress+ - (<tt>String</tt>)
- *         * +primary+ - (<tt>Boolean</tt>)
- *         * +association+ - (<tt>Object</tt>)
- *           * +publicIp+ - (<tt>String</tt>)
- *           * +ipOwnerId+ - (<tt>String</tt>)
- *           * +allocationId+ - (<tt>String</tt>)
- *           * +associationId+ - (<tt>String</tt>)
+ *         * +GroupId+ - (<tt>String</tt>)
+ *       * +Attachment+ - (<tt>Object</tt>)
+ *         * +AttachmentId+ - (<tt>String</tt>)
+ *         * +InstanceId+ - (<tt>String</tt>)
+ *         * +InstanceOwnerId+ - (<tt>String</tt>)
+ *         * +DeviceIndex+ - (<tt>Integer</tt>)
+ *         * +Status+ - (<tt>String</tt>)
+ *         * +AttachTime+ - (<tt>Date</tt>)
+ *         * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *       * +Association+ - (<tt>Object</tt>)
+ *         * +PublicIp+ - (<tt>String</tt>)
+ *         * +IpOwnerId+ - (<tt>String</tt>)
+ *         * +AllocationId+ - (<tt>String</tt>)
+ *         * +AssociationId+ - (<tt>String</tt>)
+ *       * +TagSet+ - (<tt>Array<Object></tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +PrivateIpAddresses+ - (<tt>Array<Object></tt>)
+ *         * +PrivateIpAddress+ - (<tt>String</tt>)
+ *         * +Primary+ - (<tt>Boolean</tt>)
+ *         * +Association+ - (<tt>Object</tt>)
+ *           * +PublicIp+ - (<tt>String</tt>)
+ *           * +IpOwnerId+ - (<tt>String</tt>)
+ *           * +AllocationId+ - (<tt>String</tt>)
+ *           * +AssociationId+ - (<tt>String</tt>)
  *
  * @!method createPlacementGroup(params, options)
  *   Creates a PlacementGroup into which multiple Amazon EC2 instances
  *   can be launched. Users must give the group a name unique within the
  *   scope of the user account.
  *   @param [Object] params
- *     * +groupName+ - (*required*, <tt>String</tt>) The name of the
+ *     * +GroupName+ - (*required*, <tt>String</tt>) The name of the
  *       PlacementGroup.
- *     * +strategy+ - (*required*, <tt>String</tt>) The PlacementGroup
+ *     * +Strategy+ - (*required*, <tt>String</tt>) The PlacementGroup
  *       strategy.
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
@@ -802,55 +802,55 @@ AWS.EC2 = inherit({})
  * @!method createReservedInstancesListing(params, options)
  *   Calls the CreateReservedInstancesListing API operation.
  *   @param [Object] params
- *     * +reservedInstancesId+ - (*required*, <tt>String</tt>)
- *     * +instanceCount+ - (*required*, <tt>Integer</tt>)
- *     * +priceSchedules+ - (*required*, <tt>Array<Object></tt>)
- *       * +term+ - (<tt>Integer</tt>)
- *       * +price+ - (<tt>Float</tt>)
- *       * +currencyCode+ - (<tt>String</tt>)
- *     * +clientToken+ - (*required*, <tt>String</tt>)
+ *     * +ReservedInstancesId+ - (*required*, <tt>String</tt>)
+ *     * +InstanceCount+ - (*required*, <tt>Integer</tt>)
+ *     * +PriceSchedules+ - (*required*, <tt>Array<Object></tt>)
+ *       * +Term+ - (<tt>Integer</tt>)
+ *       * +Price+ - (<tt>Float</tt>)
+ *       * +CurrencyCode+ - (<tt>String</tt>)
+ *     * +ClientToken+ - (*required*, <tt>String</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +reservedInstancesListings+ - (<tt>Array<Object></tt>)
- *       * +reservedInstancesListingId+ - (<tt>String</tt>)
- *       * +reservedInstancesId+ - (<tt>String</tt>)
- *       * +createDate+ - (<tt>Date</tt>)
- *       * +updateDate+ - (<tt>Date</tt>)
- *       * +status+ - (<tt>String</tt>)
- *       * +statusMessage+ - (<tt>String</tt>)
- *       * +instanceCounts+ - (<tt>Array<Object></tt>)
- *         * +state+ - (<tt>String</tt>)
- *         * +instanceCount+ - (<tt>Integer</tt>)
- *       * +priceSchedules+ - (<tt>Array<Object></tt>)
- *         * +term+ - (<tt>Integer</tt>)
- *         * +price+ - (<tt>Float</tt>)
- *         * +currencyCode+ - (<tt>String</tt>)
- *         * +active+ - (<tt>Boolean</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>)
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
- *       * +clientToken+ - (<tt>String</tt>)
+ *     * +ReservedInstancesListings+ - (<tt>Array<Object></tt>)
+ *       * +ReservedInstancesListingId+ - (<tt>String</tt>)
+ *       * +ReservedInstancesId+ - (<tt>String</tt>)
+ *       * +CreateDate+ - (<tt>Date</tt>)
+ *       * +UpdateDate+ - (<tt>Date</tt>)
+ *       * +Status+ - (<tt>String</tt>)
+ *       * +StatusMessage+ - (<tt>String</tt>)
+ *       * +InstanceCounts+ - (<tt>Array<Object></tt>)
+ *         * +State+ - (<tt>String</tt>)
+ *         * +InstanceCount+ - (<tt>Integer</tt>)
+ *       * +PriceSchedules+ - (<tt>Array<Object></tt>)
+ *         * +Term+ - (<tt>Integer</tt>)
+ *         * +Price+ - (<tt>Float</tt>)
+ *         * +CurrencyCode+ - (<tt>String</tt>)
+ *         * +Active+ - (<tt>Boolean</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +ClientToken+ - (<tt>String</tt>)
  *
  * @!method createRoute(params, options)
  *   Creates a new route in a route table within a VPC. The route's
  *   target can be either a gateway attached to the VPC or a NAT instance
  *   in the VPC.
  *   @param [Object] params
- *     * +routeTableId+ - (*required*, <tt>String</tt>) The ID of the
+ *     * +RouteTableId+ - (*required*, <tt>String</tt>) The ID of the
  *       route table where the route will be added.
- *     * +destinationCidrBlock+ - (*required*, <tt>String</tt>) The CIDR
+ *     * +DestinationCidrBlock+ - (*required*, <tt>String</tt>) The CIDR
  *       address block used for the destination match. For example:
  *       0.0.0.0/0. Routing decisions are based on the most specific
  *       match.
- *     * +gatewayId+ - (<tt>String</tt>) The ID of a VPN or Internet
+ *     * +GatewayId+ - (<tt>String</tt>) The ID of a VPN or Internet
  *       gateway attached to your VPC. You must provide either GatewayId
  *       or InstanceId, but not both.
- *     * +instanceId+ - (<tt>String</tt>) The ID of a NAT instance in
+ *     * +InstanceId+ - (<tt>String</tt>) The ID of a NAT instance in
  *       your VPC. You must provide either GatewayId or InstanceId, but
  *       not both.
- *     * +networkInterfaceId+ - (<tt>String</tt>)
+ *     * +NetworkInterfaceId+ - (<tt>String</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
@@ -860,37 +860,37 @@ AWS.EC2 = inherit({})
  *   more information about route tables, go to Route Tables in the
  *   Amazon Virtual Private Cloud User Guide.
  *   @param [Object] params
- *     * +vpcId+ - (*required*, <tt>String</tt>) The ID of the VPC where
+ *     * +VpcId+ - (*required*, <tt>String</tt>) The ID of the VPC where
  *       the route table will be created.
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +routeTable+ - (<tt>Object</tt>)
- *       * +routeTableId+ - (<tt>String</tt>)
- *       * +vpcId+ - (<tt>String</tt>)
- *       * +routes+ - (<tt>Array<Object></tt>)
- *         * +destinationCidrBlock+ - (<tt>String</tt>)
- *         * +gatewayId+ - (<tt>String</tt>)
- *         * +instanceId+ - (<tt>String</tt>)
- *         * +instanceOwnerId+ - (<tt>String</tt>)
- *         * +networkInterfaceId+ - (<tt>String</tt>)
- *         * +state+ - (<tt>String</tt>)
- *       * +associations+ - (<tt>Array<Object></tt>)
- *         * +routeTableAssociationId+ - (<tt>String</tt>)
- *         * +routeTableId+ - (<tt>String</tt>)
- *         * +subnetId+ - (<tt>String</tt>)
- *         * +main+ - (<tt>Boolean</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>)
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
- *       * +propagatingVgws+ - (<tt>Array<Object></tt>)
- *         * +gatewayId+ - (<tt>String</tt>)
- *       * +propagatedRoutes+ - (<tt>Array<Object></tt>)
- *         * +destinationCidrBlock+ - (<tt>String</tt>)
- *         * +gatewayId+ - (<tt>String</tt>)
- *         * +status+ - (<tt>String</tt>)
- *         * +sourceId+ - (<tt>String</tt>)
+ *     * +RouteTable+ - (<tt>Object</tt>)
+ *       * +RouteTableId+ - (<tt>String</tt>)
+ *       * +VpcId+ - (<tt>String</tt>)
+ *       * +Routes+ - (<tt>Array<Object></tt>)
+ *         * +DestinationCidrBlock+ - (<tt>String</tt>)
+ *         * +GatewayId+ - (<tt>String</tt>)
+ *         * +InstanceId+ - (<tt>String</tt>)
+ *         * +InstanceOwnerId+ - (<tt>String</tt>)
+ *         * +NetworkInterfaceId+ - (<tt>String</tt>)
+ *         * +State+ - (<tt>String</tt>)
+ *       * +Associations+ - (<tt>Array<Object></tt>)
+ *         * +RouteTableAssociationId+ - (<tt>String</tt>)
+ *         * +RouteTableId+ - (<tt>String</tt>)
+ *         * +SubnetId+ - (<tt>String</tt>)
+ *         * +Main+ - (<tt>Boolean</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +PropagatingVgws+ - (<tt>Array<Object></tt>)
+ *         * +GatewayId+ - (<tt>String</tt>)
+ *       * +PropagatedRoutes+ - (<tt>Array<Object></tt>)
+ *         * +DestinationCidrBlock+ - (<tt>String</tt>)
+ *         * +GatewayId+ - (<tt>String</tt>)
+ *         * +Status+ - (<tt>String</tt>)
+ *         * +SourceId+ - (<tt>String</tt>)
  *
  * @!method createSecurityGroup(params, options)
  *   The CreateSecurityGroup operation creates a new security group.
@@ -904,7 +904,7 @@ AWS.EC2 = inherit({})
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +groupId+ - (<tt>String</tt>)
+ *     * +GroupId+ - (<tt>String</tt>)
  *
  * @!method createSnapshot(params, options)
  *   Create a snapshot of the volume identified by volume ID. A volume
@@ -934,39 +934,39 @@ AWS.EC2 = inherit({})
  *       * +Description+ - (<tt>String</tt>) Description of the snapshot.
  *       * +VolumeSize+ - (<tt>Integer</tt>) The size of the volume, in
  *         gigabytes.
- *       * +ownerAlias+ - (<tt>String</tt>) The AWS account alias (e.g.,
+ *       * +OwnerAlias+ - (<tt>String</tt>) The AWS account alias (e.g.,
  *         "amazon", "redhat", "self", etc.) or AWS account ID that owns
  *         the AMI.
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *         Snapshot.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method createSpotDatafeedSubscription(params, options)
  *   Creates the data feed for Spot Instances, enabling you to view Spot
  *   Instance usage logs. You can create one data feed per account.
  *   @param [Object] params
- *     * +bucket+ - (*required*, <tt>String</tt>) The Amazon S3 bucket in
+ *     * +Bucket+ - (*required*, <tt>String</tt>) The Amazon S3 bucket in
  *       which to store the Spot Instance datafeed.
- *     * +prefix+ - (<tt>String</tt>) The prefix that is prepended to
+ *     * +Prefix+ - (<tt>String</tt>) The prefix that is prepended to
  *       datafeed files.
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +spotDatafeedSubscription+ - (<tt>Object</tt>)
- *       * +ownerId+ - (<tt>String</tt>) Specifies the AWS account ID of
+ *     * +SpotDatafeedSubscription+ - (<tt>Object</tt>)
+ *       * +OwnerId+ - (<tt>String</tt>) Specifies the AWS account ID of
  *         the account.
- *       * +bucket+ - (<tt>String</tt>) Specifies the Amazon S3 bucket
+ *       * +Bucket+ - (<tt>String</tt>) Specifies the Amazon S3 bucket
  *         where the Spot Instance data feed is located.
- *       * +prefix+ - (<tt>String</tt>) Contains the prefix that is
+ *       * +Prefix+ - (<tt>String</tt>) Contains the prefix that is
  *         prepended to data feed files.
- *       * +state+ - (<tt>String</tt>) Specifies the state of the Spot
+ *       * +State+ - (<tt>String</tt>) Specifies the state of the Spot
  *         Instance request.
- *       * +fault+ - (<tt>Object</tt>) Specifies a fault code for the
+ *       * +Fault+ - (<tt>Object</tt>) Specifies a fault code for the
  *         Spot Instance request, if present.
- *         * +code+ - (<tt>String</tt>)
- *         * +message+ - (<tt>String</tt>)
+ *         * +Code+ - (<tt>String</tt>)
+ *         * +Message+ - (<tt>String</tt>)
  *
  * @!method createSubnet(params, options)
  *   Creates a subnet in an existing VPC. You can create up to 20 subnets
@@ -1005,24 +1005,24 @@ AWS.EC2 = inherit({})
  *         number of unused IP addresses in the subnet.
  *       * +AvailabilityZone+ - (<tt>String</tt>) Specifies the
  *         Availability Zone the subnet is in.
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *         Subnet.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method createTags(params, options)
  *   Adds or overwrites tags for the specified resources. Each resource
  *   can have a maximum of 10 tags. Each tag consists of a key-value
  *   pair. Tag keys must be unique per resource.
  *   @param [Object] params
- *     * +resources+ - (*required*, <tt>Array<String></tt>) One or more
+ *     * +Resources+ - (*required*, <tt>Array<String></tt>) One or more
  *       IDs of resources to tag. This could be the ID of an AMI, an
  *       instance, an EBS volume, or snapshot, etc.
- *     * +tags+ - (*required*, <tt>Array<Object></tt>) The tags to add or
+ *     * +Tags+ - (*required*, <tt>Array<Object></tt>) The tags to add or
  *       overwrite for the specified resources. Each tag item consists of
  *       a key-value pair.
- *       * +key+ - (<tt>String</tt>) The tag's key.
- *       * +value+ - (<tt>String</tt>) The tag's value.
+ *       * +Key+ - (<tt>String</tt>) The tag's key.
+ *       * +Value+ - (<tt>String</tt>) The tag's value.
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
@@ -1063,13 +1063,13 @@ AWS.EC2 = inherit({})
  *         * +State+ - (<tt>String</tt>)
  *         * +AttachTime+ - (<tt>Date</tt>) Timestamp when this
  *           attachment initiated.
- *         * +deleteOnTermination+ - (<tt>Boolean</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *         * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *         Volume.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
- *       * +volumeType+ - (<tt>String</tt>)
- *       * +iops+ - (<tt>Integer</tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +VolumeType+ - (<tt>String</tt>)
+ *       * +Iops+ - (<tt>Integer</tt>)
  *
  * @!method createVpc(params, options)
  *   Creates a VPC with the CIDR block you specify. The smallest VPC you
@@ -1079,7 +1079,7 @@ AWS.EC2 = inherit({})
  *   Virtual Private Cloud Developer Guide.
  *   @param [Object] params
  *     * +CidrBlock+ - (*required*, <tt>String</tt>) A valid CIDR block.
- *     * +instanceTenancy+ - (<tt>String</tt>) The allowed tenancy of
+ *     * +InstanceTenancy+ - (<tt>String</tt>) The allowed tenancy of
  *       instances launched into the VPC. A value of default means
  *       instances can be launched with any tenancy; a value of dedicated
  *       means instances must be launched with tenancy as dedicated.
@@ -1097,10 +1097,10 @@ AWS.EC2 = inherit({})
  *       * +DhcpOptionsId+ - (<tt>String</tt>) Specifies the ID of the
  *         set of DHCP options associated with the VPC. Contains a value
  *         of default if the default options are associated with the VPC.
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the VPC.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
- *       * +instanceTenancy+ - (<tt>String</tt>) The allowed tenancy of
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the VPC.
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +InstanceTenancy+ - (<tt>String</tt>) The allowed tenancy of
  *         instances launched into the VPC.
  *
  * @!method createVpnConnection(params, options)
@@ -1113,8 +1113,8 @@ AWS.EC2 = inherit({})
  *       the customer gateway.
  *     * +VpnGatewayId+ - (*required*, <tt>String</tt>) The ID of the VPN
  *       gateway.
- *     * +options+ - (<tt>Object</tt>)
- *       * +staticRoutesOnly+ - (<tt>Boolean</tt>)
+ *     * +Options+ - (<tt>Object</tt>)
+ *       * +StaticRoutesOnly+ - (<tt>Boolean</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
@@ -1134,22 +1134,22 @@ AWS.EC2 = inherit({})
  *         customer gateway at the end of the VPN connection.
  *       * +VpnGatewayId+ - (<tt>String</tt>) Specfies the ID of the VPN
  *         gateway at the VPC end of the VPN connection.
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *         VpnConnection.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
- *       * +vgwTelemetry+ - (<tt>Array<Object></tt>)
- *         * +outsideIpAddress+ - (<tt>String</tt>)
- *         * +status+ - (<tt>String</tt>)
- *         * +lastStatusChange+ - (<tt>Date</tt>)
- *         * +statusMessage+ - (<tt>String</tt>)
- *         * +acceptedRouteCount+ - (<tt>Integer</tt>)
- *       * +options+ - (<tt>Object</tt>)
- *         * +staticRoutesOnly+ - (<tt>Boolean</tt>)
- *       * +routes+ - (<tt>Array<Object></tt>)
- *         * +destinationCidrBlock+ - (<tt>String</tt>)
- *         * +source+ - (<tt>String</tt>)
- *         * +state+ - (<tt>String</tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +VgwTelemetry+ - (<tt>Array<Object></tt>)
+ *         * +OutsideIpAddress+ - (<tt>String</tt>)
+ *         * +Status+ - (<tt>String</tt>)
+ *         * +LastStatusChange+ - (<tt>Date</tt>)
+ *         * +StatusMessage+ - (<tt>String</tt>)
+ *         * +AcceptedRouteCount+ - (<tt>Integer</tt>)
+ *       * +Options+ - (<tt>Object</tt>)
+ *         * +StaticRoutesOnly+ - (<tt>Boolean</tt>)
+ *       * +Routes+ - (<tt>Array<Object></tt>)
+ *         * +DestinationCidrBlock+ - (<tt>String</tt>)
+ *         * +Source+ - (<tt>String</tt>)
+ *         * +State+ - (<tt>String</tt>)
  *
  * @!method createVpnConnectionRoute(params, options)
  *   Calls the CreateVpnConnectionRoute API operation.
@@ -1186,19 +1186,19 @@ AWS.EC2 = inherit({})
  *         information about the VPCs attached to the VPN gateway.
  *         * +VpcId+ - (<tt>String</tt>)
  *         * +State+ - (<tt>String</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *         VpnGateway.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method deactivateLicense(params, options)
  *   Deactivates a specific number of licenses. Deactivations can be done
  *   against a specific license ID after they have persisted for at least
  *   a 90-day period.
  *   @param [Object] params
- *     * +licenseId+ - (*required*, <tt>String</tt>) Specifies the ID for
+ *     * +LicenseId+ - (*required*, <tt>String</tt>) Specifies the ID for
  *       the specific license to deactivate against.
- *     * +capacity+ - (*required*, <tt>Integer</tt>) Specifies the amount
+ *     * +Capacity+ - (*required*, <tt>Integer</tt>) Specifies the amount
  *       of capacity to deactivate against the license.
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
@@ -1228,7 +1228,7 @@ AWS.EC2 = inherit({})
  *   not be attached to a VPC. For more information about your VPC and
  *   Internet gateway, go to Amazon Virtual Private Cloud User Guide.
  *   @param [Object] params
- *     * +internetGatewayId+ - (*required*, <tt>String</tt>) The ID of
+ *     * +InternetGatewayId+ - (*required*, <tt>String</tt>) The ID of
  *       the Internet gateway to be deleted.
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
@@ -1247,7 +1247,7 @@ AWS.EC2 = inherit({})
  *   more information about network ACLs, go to Network ACLs in the
  *   Amazon Virtual Private Cloud User Guide.
  *   @param [Object] params
- *     * +networkAclId+ - (*required*, <tt>String</tt>) The ID of the
+ *     * +NetworkAclId+ - (*required*, <tt>String</tt>) The ID of the
  *       network ACL to be deleted.
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
@@ -1257,11 +1257,11 @@ AWS.EC2 = inherit({})
  *   For more information about network ACLs, go to Network ACLs in the
  *   Amazon Virtual Private Cloud User Guide.
  *   @param [Object] params
- *     * +networkAclId+ - (*required*, <tt>String</tt>) ID of the network
+ *     * +NetworkAclId+ - (*required*, <tt>String</tt>) ID of the network
  *       ACL.
- *     * +ruleNumber+ - (*required*, <tt>Integer</tt>) Rule number for
+ *     * +RuleNumber+ - (*required*, <tt>Integer</tt>) Rule number for
  *       the entry to delete.
- *     * +egress+ - (*required*, <tt>Boolean</tt>) Whether the rule to
+ *     * +Egress+ - (*required*, <tt>Boolean</tt>) Whether the rule to
  *       delete is an egress rule (true) or ingress rule (false).
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
@@ -1269,7 +1269,7 @@ AWS.EC2 = inherit({})
  * @!method deleteNetworkInterface(params, options)
  *   Calls the DeleteNetworkInterface API operation.
  *   @param [Object] params
- *     * +networkInterfaceId+ - (*required*, <tt>String</tt>)
+ *     * +NetworkInterfaceId+ - (*required*, <tt>String</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
@@ -1277,7 +1277,7 @@ AWS.EC2 = inherit({})
  *   Deletes a PlacementGroup from a user's account. Terminate all Amazon
  *   EC2 instances in the placement group before deletion.
  *   @param [Object] params
- *     * +groupName+ - (*required*, <tt>String</tt>) The name of the
+ *     * +GroupName+ - (*required*, <tt>String</tt>) The name of the
  *       PlacementGroup to delete.
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
@@ -1287,9 +1287,9 @@ AWS.EC2 = inherit({})
  *   about route tables, go to Route Tables in the Amazon Virtual Private
  *   Cloud User Guide.
  *   @param [Object] params
- *     * +routeTableId+ - (*required*, <tt>String</tt>) The ID of the
+ *     * +RouteTableId+ - (*required*, <tt>String</tt>) The ID of the
  *       route table where the route will be deleted.
- *     * +destinationCidrBlock+ - (*required*, <tt>String</tt>) The CIDR
+ *     * +DestinationCidrBlock+ - (*required*, <tt>String</tt>) The CIDR
  *       range for the route you want to delete. The value you specify
  *       must exactly match the CIDR for the route you want to delete.
  *   @param [Object] options
@@ -1301,7 +1301,7 @@ AWS.EC2 = inherit({})
  *   more information about route tables, go to Route Tables in the
  *   Amazon Virtual Private Cloud User Guide.
  *   @param [Object] params
- *     * +routeTableId+ - (*required*, <tt>String</tt>) The ID of the
+ *     * +RouteTableId+ - (*required*, <tt>String</tt>) The ID of the
  *       route table to be deleted.
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
@@ -1343,13 +1343,13 @@ AWS.EC2 = inherit({})
  * @!method deleteTags(params, options)
  *   Deletes tags from the specified Amazon EC2 resources.
  *   @param [Object] params
- *     * +resources+ - (*required*, <tt>Array<String></tt>) A list of one
+ *     * +Resources+ - (*required*, <tt>Array<String></tt>) A list of one
  *       or more resource IDs. This could be the ID of an AMI, an
  *       instance, an EBS volume, or snapshot, etc.
- *     * +tags+ - (<tt>Array<Object></tt>) The tags to delete from the
+ *     * +Tags+ - (<tt>Array<Object></tt>) The tags to delete from the
  *       specified resources. Each tag item consists of a key-value pair.
- *       * +key+ - (<tt>String</tt>) The tag's key.
- *       * +value+ - (<tt>String</tt>) The tag's value.
+ *       * +Key+ - (<tt>String</tt>) The tag's key.
+ *       * +Value+ - (<tt>String</tt>) The tag's value.
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
@@ -1425,14 +1425,14 @@ AWS.EC2 = inherit({})
  *   @param [Object] params
  *     * +PublicIps+ - (<tt>Array<String></tt>) The optional list of
  *       Elastic IP addresses to describe.
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for Addresses. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
  *       * +Name+ - (<tt>String</tt>) Specifies the name of the filter.
  *       * +Values+ - (<tt>Array<String></tt>) Contains one or more
  *         values for the filter.
- *     * +allocationIds+ - (<tt>Array<String></tt>)
+ *     * +AllocationIds+ - (<tt>Array<String></tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
@@ -1440,12 +1440,12 @@ AWS.EC2 = inherit({})
  *     * +Addresses+ - (<tt>Array<Object></tt>) The list of Elastic IPs.
  *       * +InstanceId+ - (<tt>String</tt>)
  *       * +PublicIp+ - (<tt>String</tt>)
- *       * +allocationId+ - (<tt>String</tt>)
- *       * +associationId+ - (<tt>String</tt>)
- *       * +domain+ - (<tt>String</tt>)
- *       * +networkInterfaceId+ - (<tt>String</tt>)
- *       * +networkInterfaceOwnerId+ - (<tt>String</tt>)
- *       * +privateIpAddress+ - (<tt>String</tt>)
+ *       * +AllocationId+ - (<tt>String</tt>)
+ *       * +AssociationId+ - (<tt>String</tt>)
+ *       * +Domain+ - (<tt>String</tt>)
+ *       * +NetworkInterfaceId+ - (<tt>String</tt>)
+ *       * +NetworkInterfaceOwnerId+ - (<tt>String</tt>)
+ *       * +PrivateIpAddress+ - (<tt>String</tt>)
  *
  * @!method describeAvailabilityZones(params, options)
  *   The DescribeAvailabilityZones operation describes availability zones
@@ -1453,7 +1453,7 @@ AWS.EC2 = inherit({})
  *   @param [Object] params
  *     * +ZoneNames+ - (<tt>Array<String></tt>) A list of the
  *       availability zone names to describe.
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for AvailabilityZones. For a complete reference
  *       to the available filter keys for this operation, see the Amazon
  *       EC2 API reference.
@@ -1466,13 +1466,13 @@ AWS.EC2 = inherit({})
  *     following properties:
  *     * +AvailabilityZones+ - (<tt>Array<Object></tt>) The list of
  *       described Amazon EC2 availability zones.
- *       * +zoneName+ - (<tt>String</tt>) Name of the Availability Zone.
+ *       * +ZoneName+ - (<tt>String</tt>) Name of the Availability Zone.
  *       * +State+ - (<tt>String</tt>) State of the Availability Zone.
- *       * +regionName+ - (<tt>String</tt>) Name of the region in which
+ *       * +RegionName+ - (<tt>String</tt>) Name of the region in which
  *         this zone resides.
- *       * +messages+ - (<tt>Array<Object></tt>) A list of messages about
+ *       * +Messages+ - (<tt>Array<Object></tt>) A list of messages about
  *         the Availability Zone.
- *         * +message+ - (<tt>String</tt>)
+ *         * +Message+ - (<tt>String</tt>)
  *
  * @!method describeBundleTasks(params, options)
  *   The DescribeBundleTasks operation describes in-progress and recent
@@ -1482,7 +1482,7 @@ AWS.EC2 = inherit({})
  *   @param [Object] params
  *     * +BundleIds+ - (<tt>Array<String></tt>) The list of bundle task
  *       IDs to describe.
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for BundleTasks. For a complete reference to
  *       the available filter keys for this operation, see the Amazon EC2
  *       API reference.
@@ -1528,53 +1528,53 @@ AWS.EC2 = inherit({})
  * @!method describeConversionTasks(params, options)
  *   Calls the DescribeConversionTasks API operation.
  *   @param [Object] params
- *     * +filters+ - (<tt>Array<Object></tt>)
+ *     * +Filters+ - (<tt>Array<Object></tt>)
  *       * +Name+ - (<tt>String</tt>) Specifies the name of the filter.
  *       * +Values+ - (<tt>Array<String></tt>) Contains one or more
  *         values for the filter.
- *     * +conversionTaskIds+ - (<tt>Array<String></tt>)
+ *     * +ConversionTaskIds+ - (<tt>Array<String></tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +conversionTasks+ - (<tt>Array<Object></tt>)
- *       * +conversionTaskId+ - (<tt>String</tt>)
- *       * +expirationTime+ - (<tt>String</tt>)
- *       * +importInstance+ - (<tt>Object</tt>)
- *         * +volumes+ - (<tt>Array<Object></tt>)
- *           * +bytesConverted+ - (<tt>Integer</tt>)
- *           * +availabilityZone+ - (<tt>String</tt>)
- *           * +image+ - (<tt>Object</tt>)
- *             * +format+ - (<tt>String</tt>)
- *             * +size+ - (<tt>Integer</tt>)
- *             * +importManifestUrl+ - (<tt>String</tt>)
- *             * +checksum+ - (<tt>String</tt>)
- *           * +volume+ - (<tt>Object</tt>)
- *             * +size+ - (<tt>Integer</tt>)
- *             * +id+ - (<tt>String</tt>)
- *           * +status+ - (<tt>String</tt>)
- *           * +statusMessage+ - (<tt>String</tt>)
- *           * +description+ - (<tt>String</tt>)
- *         * +instanceId+ - (<tt>String</tt>)
- *         * +platform+ - (<tt>String</tt>)
- *         * +description+ - (<tt>String</tt>)
- *       * +importVolume+ - (<tt>Object</tt>)
- *         * +bytesConverted+ - (<tt>Integer</tt>)
- *         * +availabilityZone+ - (<tt>String</tt>)
- *         * +description+ - (<tt>String</tt>)
- *         * +image+ - (<tt>Object</tt>)
- *           * +format+ - (<tt>String</tt>)
- *           * +size+ - (<tt>Integer</tt>)
- *           * +importManifestUrl+ - (<tt>String</tt>)
- *           * +checksum+ - (<tt>String</tt>)
- *         * +volume+ - (<tt>Object</tt>)
- *           * +size+ - (<tt>Integer</tt>)
- *           * +id+ - (<tt>String</tt>)
- *       * +state+ - (<tt>String</tt>)
- *       * +statusMessage+ - (<tt>String</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>)
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *     * +ConversionTasks+ - (<tt>Array<Object></tt>)
+ *       * +ConversionTaskId+ - (<tt>String</tt>)
+ *       * +ExpirationTime+ - (<tt>String</tt>)
+ *       * +ImportInstance+ - (<tt>Object</tt>)
+ *         * +Volumes+ - (<tt>Array<Object></tt>)
+ *           * +BytesConverted+ - (<tt>Integer</tt>)
+ *           * +AvailabilityZone+ - (<tt>String</tt>)
+ *           * +Image+ - (<tt>Object</tt>)
+ *             * +Format+ - (<tt>String</tt>)
+ *             * +Size+ - (<tt>Integer</tt>)
+ *             * +ImportManifestUrl+ - (<tt>String</tt>)
+ *             * +Checksum+ - (<tt>String</tt>)
+ *           * +Volume+ - (<tt>Object</tt>)
+ *             * +Size+ - (<tt>Integer</tt>)
+ *             * +Id+ - (<tt>String</tt>)
+ *           * +Status+ - (<tt>String</tt>)
+ *           * +StatusMessage+ - (<tt>String</tt>)
+ *           * +Description+ - (<tt>String</tt>)
+ *         * +InstanceId+ - (<tt>String</tt>)
+ *         * +Platform+ - (<tt>String</tt>)
+ *         * +Description+ - (<tt>String</tt>)
+ *       * +ImportVolume+ - (<tt>Object</tt>)
+ *         * +BytesConverted+ - (<tt>Integer</tt>)
+ *         * +AvailabilityZone+ - (<tt>String</tt>)
+ *         * +Description+ - (<tt>String</tt>)
+ *         * +Image+ - (<tt>Object</tt>)
+ *           * +Format+ - (<tt>String</tt>)
+ *           * +Size+ - (<tt>Integer</tt>)
+ *           * +ImportManifestUrl+ - (<tt>String</tt>)
+ *           * +Checksum+ - (<tt>String</tt>)
+ *         * +Volume+ - (<tt>Object</tt>)
+ *           * +Size+ - (<tt>Integer</tt>)
+ *           * +Id+ - (<tt>String</tt>)
+ *       * +State+ - (<tt>String</tt>)
+ *       * +StatusMessage+ - (<tt>String</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method describeCustomerGateways(params, options)
  *   Gives you information about your customer gateways. You can filter
@@ -1615,10 +1615,10 @@ AWS.EC2 = inherit({})
  *         IP address of the customer gateway's outside interface.
  *       * +BgpAsn+ - (<tt>String</tt>) Specifies the customer gateway's
  *         Border Gateway Protocol (BGP) Autonomous System Number (ASN).
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *         CustomerGateway.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method describeDhcpOptions(params, options)
  *   Gives you information about one or more sets of DHCP options. You
@@ -1627,7 +1627,7 @@ AWS.EC2 = inherit({})
  *   of:
  *   @param [Object] params
  *     * +DhcpOptionsIds+ - (<tt>Array<String></tt>)
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for DhcpOptions. For a complete reference to
  *       the available filter keys for this operation, see the Amazon EC2
  *       API reference.
@@ -1647,32 +1647,32 @@ AWS.EC2 = inherit({})
  *           option.
  *         * +Values+ - (<tt>Array<String></tt>) Contains a set of values
  *           for a DHCP option.
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *         DhcpOptions.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method describeExportTasks(params, options)
  *   Calls the DescribeExportTasks API operation.
  *   @param [Object] params
- *     * +exportTaskIds+ - (<tt>Array<String></tt>)
+ *     * +ExportTaskIds+ - (<tt>Array<String></tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +exportTasks+ - (<tt>Array<Object></tt>)
- *       * +exportTaskId+ - (<tt>String</tt>)
- *       * +description+ - (<tt>String</tt>)
- *       * +state+ - (<tt>String</tt>)
- *       * +statusMessage+ - (<tt>String</tt>)
- *       * +instanceExportDetails+ - (<tt>Object</tt>)
- *         * +instanceId+ - (<tt>String</tt>)
- *         * +targetEnvironment+ - (<tt>String</tt>)
- *       * +exportToS3Task+ - (<tt>Object</tt>)
- *         * +diskImageFormat+ - (<tt>String</tt>)
- *         * +containerFormat+ - (<tt>String</tt>)
- *         * +s3Bucket+ - (<tt>String</tt>)
- *         * +s3Key+ - (<tt>String</tt>)
+ *     * +ExportTasks+ - (<tt>Array<Object></tt>)
+ *       * +ExportTaskId+ - (<tt>String</tt>)
+ *       * +Description+ - (<tt>String</tt>)
+ *       * +State+ - (<tt>String</tt>)
+ *       * +StatusMessage+ - (<tt>String</tt>)
+ *       * +InstanceExportDetails+ - (<tt>Object</tt>)
+ *         * +InstanceId+ - (<tt>String</tt>)
+ *         * +TargetEnvironment+ - (<tt>String</tt>)
+ *       * +ExportToS3Task+ - (<tt>Object</tt>)
+ *         * +DiskImageFormat+ - (<tt>String</tt>)
+ *         * +ContainerFormat+ - (<tt>String</tt>)
+ *         * +S3Bucket+ - (<tt>String</tt>)
+ *         * +S3Key+ - (<tt>String</tt>)
  *
  * @!method describeImageAttribute(params, options)
  *   The DescribeImageAttribute operation returns information about an
@@ -1700,34 +1700,34 @@ AWS.EC2 = inherit({})
  *         * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an AWS
  *           DevPay product code.
  *         * +ProductCodeType+ - (<tt>String</tt>)
- *       * +kernelId+ - (<tt>Object</tt>) Kernel ID of the associated
+ *       * +KernelId+ - (<tt>Object</tt>) Kernel ID of the associated
  *         AMI.
- *         * +value+ - (<tt>String</tt>)
- *       * +ramdiskId+ - (<tt>Object</tt>) Ramdisk ID of the associated
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +RamdiskId+ - (<tt>Object</tt>) Ramdisk ID of the associated
  *         AMI.
- *         * +value+ - (<tt>String</tt>)
- *       * +description+ - (<tt>Object</tt>) User-created description of
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +Description+ - (<tt>Object</tt>) User-created description of
  *         the associated AMI.
- *         * +value+ - (<tt>String</tt>)
+ *         * +Value+ - (<tt>String</tt>)
  *       * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) Block device
  *         mappings for the associated AMI.
  *         * +VirtualName+ - (<tt>String</tt>) Specifies the virtual
  *           device name.
  *         * +DeviceName+ - (<tt>String</tt>) Specifies the device name
  *           (e.g., /dev/sdh).
- *         * +ebs+ - (<tt>Object</tt>) Specifies parameters used to
+ *         * +Ebs+ - (<tt>Object</tt>) Specifies parameters used to
  *           automatically setup Amazon EBS volumes when the instance is
  *           launched.
- *           * +snapshotId+ - (<tt>String</tt>) The ID of the snapshot
+ *           * +SnapshotId+ - (<tt>String</tt>) The ID of the snapshot
  *             from which the volume will be created.
- *           * +volumeSize+ - (<tt>Integer</tt>) The size of the volume,
+ *           * +VolumeSize+ - (<tt>Integer</tt>) The size of the volume,
  *             in gigabytes.
- *           * +deleteOnTermination+ - (<tt>Boolean</tt>) Specifies
+ *           * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies
  *             whether the Amazon EBS volume is deleted on instance
  *             termination.
- *           * +volumeType+ - (<tt>String</tt>)
- *           * +iops+ - (<tt>Integer</tt>)
- *         * +noDevice+ - (<tt>String</tt>) Specifies the device name to
+ *           * +VolumeType+ - (<tt>String</tt>)
+ *           * +Iops+ - (<tt>Integer</tt>)
+ *         * +NoDevice+ - (<tt>String</tt>) Specifies the device name to
  *           suppress during instance launch.
  *
  * @!method describeImages(params, options)
@@ -1753,7 +1753,7 @@ AWS.EC2 = inherit({})
  *       AMIs for which the sender of the request has explicit launch
  *       permissions, or 'all' to return AMIs with public launch
  *       permissions.
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for Images. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
@@ -1793,57 +1793,57 @@ AWS.EC2 = inherit({})
  *         the image, if any. Only applicable for machine images.
  *       * +Platform+ - (<tt>String</tt>) The operating platform of the
  *         AMI.
- *       * +stateReason+ - (<tt>Object</tt>) The reason for the state
+ *       * +StateReason+ - (<tt>Object</tt>) The reason for the state
  *         change.
- *         * +code+ - (<tt>String</tt>) Reason code for the state change.
- *         * +message+ - (<tt>String</tt>) Descriptive message for the
+ *         * +Code+ - (<tt>String</tt>) Reason code for the state change.
+ *         * +Message+ - (<tt>String</tt>) Descriptive message for the
  *           state change.
- *       * +imageOwnerAlias+ - (<tt>String</tt>) The AWS account alias
+ *       * +ImageOwnerAlias+ - (<tt>String</tt>) The AWS account alias
  *         (e.g., "amazon", "redhat", "self", etc.) or AWS account ID
  *         that owns the AMI.
- *       * +name+ - (<tt>String</tt>) The name of the AMI that was
+ *       * +Name+ - (<tt>String</tt>) The name of the AMI that was
  *         provided during image creation.
- *       * +description+ - (<tt>String</tt>) The description of the AMI
+ *       * +Description+ - (<tt>String</tt>) The description of the AMI
  *         that was provided during image creation.
- *       * +rootDeviceType+ - (<tt>String</tt>) The root device type used
+ *       * +RootDeviceType+ - (<tt>String</tt>) The root device type used
  *         by the AMI. The AMI can use an Amazon EBS or instance store
  *         root device.
- *       * +rootDeviceName+ - (<tt>String</tt>) The root device name
+ *       * +RootDeviceName+ - (<tt>String</tt>) The root device name
  *         (e.g., /dev/sda1).
- *       * +blockDeviceMappings+ - (<tt>Array<Object></tt>) Specifies how
+ *       * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) Specifies how
  *         block devices are exposed to the instance.
  *         * +VirtualName+ - (<tt>String</tt>) Specifies the virtual
  *           device name.
  *         * +DeviceName+ - (<tt>String</tt>) Specifies the device name
  *           (e.g., /dev/sdh).
- *         * +ebs+ - (<tt>Object</tt>) Specifies parameters used to
+ *         * +Ebs+ - (<tt>Object</tt>) Specifies parameters used to
  *           automatically setup Amazon EBS volumes when the instance is
  *           launched.
- *           * +snapshotId+ - (<tt>String</tt>) The ID of the snapshot
+ *           * +SnapshotId+ - (<tt>String</tt>) The ID of the snapshot
  *             from which the volume will be created.
- *           * +volumeSize+ - (<tt>Integer</tt>) The size of the volume,
+ *           * +VolumeSize+ - (<tt>Integer</tt>) The size of the volume,
  *             in gigabytes.
- *           * +deleteOnTermination+ - (<tt>Boolean</tt>) Specifies
+ *           * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies
  *             whether the Amazon EBS volume is deleted on instance
  *             termination.
- *           * +volumeType+ - (<tt>String</tt>)
- *           * +iops+ - (<tt>Integer</tt>)
- *         * +noDevice+ - (<tt>String</tt>) Specifies the device name to
+ *           * +VolumeType+ - (<tt>String</tt>)
+ *           * +Iops+ - (<tt>Integer</tt>)
+ *         * +NoDevice+ - (<tt>String</tt>) Specifies the device name to
  *           suppress during instance launch.
- *       * +virtualizationType+ - (<tt>String</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *       * +VirtualizationType+ - (<tt>String</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *         Image.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
- *       * +hypervisor+ - (<tt>String</tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +Hypervisor+ - (<tt>String</tt>)
  *
  * @!method describeInstanceAttribute(params, options)
  *   Returns information about an attribute of an instance. Only one
  *   attribute can be specified per call.
  *   @param [Object] params
- *     * +instanceId+ - (*required*, <tt>String</tt>) The ID of the
+ *     * +InstanceId+ - (*required*, <tt>String</tt>) The ID of the
  *       instance whose instance attribute is being described.
- *     * +attribute+ - (*required*, <tt>String</tt>) The name of the
+ *     * +Attribute+ - (*required*, <tt>String</tt>) The name of the
  *       attribute to describe.
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
@@ -1851,51 +1851,51 @@ AWS.EC2 = inherit({})
  *     following properties:
  *     * +InstanceAttribute+ - (<tt>Object</tt>) The described instance
  *       attribute.
- *       * +instanceId+ - (<tt>String</tt>) The ID of the associated
+ *       * +InstanceId+ - (<tt>String</tt>) The ID of the associated
  *         instance.
- *       * +instanceType+ - (<tt>Object</tt>) The instance type (e.g.,
+ *       * +InstanceType+ - (<tt>Object</tt>) The instance type (e.g.,
  *         m1.small, c1.medium, m2.2xlarge, and so on).
- *         * +value+ - (<tt>String</tt>)
- *       * +kernelId+ - (<tt>Object</tt>) The kernel ID of the associated
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +KernelId+ - (<tt>Object</tt>) The kernel ID of the associated
  *         instance.
- *         * +value+ - (<tt>String</tt>)
- *       * +ramdiskId+ - (<tt>Object</tt>) The ramdisk ID of the
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +RamdiskId+ - (<tt>Object</tt>) The ramdisk ID of the
  *         associated instance.
- *         * +value+ - (<tt>String</tt>)
- *       * +userData+ - (<tt>Object</tt>) MIME, Base64-encoded user data.
- *         * +value+ - (<tt>String</tt>)
- *       * +disableApiTermination+ - (<tt>Object</tt>) Whether this
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +UserData+ - (<tt>Object</tt>) MIME, Base64-encoded user data.
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +DisableApiTermination+ - (<tt>Object</tt>) Whether this
  *         instance can be terminated. You must modify this attribute
  *         before you can terminate any "locked" instances.
- *         * +value+ - (<tt>Boolean</tt>)
- *       * +instanceInitiatedShutdownBehavior+ - (<tt>Object</tt>)
+ *         * +Value+ - (<tt>Boolean</tt>)
+ *       * +InstanceInitiatedShutdownBehavior+ - (<tt>Object</tt>)
  *         Whether this instance's Amazon EBS volumes are deleted when
  *         the instance is shut down.
- *         * +value+ - (<tt>String</tt>)
- *       * +rootDeviceName+ - (<tt>Object</tt>) The root device name
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +RootDeviceName+ - (<tt>Object</tt>) The root device name
  *         (e.g., /dev/sda1).
- *         * +value+ - (<tt>String</tt>)
- *       * +blockDeviceMappings+ - (<tt>Array<Object></tt>) How block
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) How block
  *         devices are exposed to this instance. Each mapping is made up
  *         of a virtualName and a deviceName.
- *         * +deviceName+ - (<tt>String</tt>) The device name (e.g.,
+ *         * +DeviceName+ - (<tt>String</tt>) The device name (e.g.,
  *           /dev/sdh) at which the block device is exposed on the
  *           instance.
- *         * +ebs+ - (<tt>Object</tt>) The optional EBS device mapped to
+ *         * +Ebs+ - (<tt>Object</tt>) The optional EBS device mapped to
  *           the specified device name.
- *           * +volumeId+ - (<tt>String</tt>) The ID of the EBS volume.
- *           * +status+ - (<tt>String</tt>) The status of the EBS volume.
- *           * +attachTime+ - (<tt>Date</tt>) The time at which the EBS
+ *           * +VolumeId+ - (<tt>String</tt>) The ID of the EBS volume.
+ *           * +Status+ - (<tt>String</tt>) The status of the EBS volume.
+ *           * +AttachTime+ - (<tt>Date</tt>) The time at which the EBS
  *             volume was attached to the associated instance.
- *           * +deleteOnTermination+ - (<tt>Boolean</tt>) Specifies
+ *           * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies
  *             whether the Amazon EBS volume is deleted on instance
  *             termination.
- *       * +productCodes+ - (<tt>Array<Object></tt>)
+ *       * +ProductCodes+ - (<tt>Array<Object></tt>)
  *         * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an AWS
  *           DevPay product code.
  *         * +ProductCodeType+ - (<tt>String</tt>)
- *       * +ebsOptimized+ - (<tt>Object</tt>)
- *         * +value+ - (<tt>Boolean</tt>)
+ *       * +EbsOptimized+ - (<tt>Object</tt>)
+ *         * +Value+ - (<tt>Boolean</tt>)
  *
  * @!method describeInstanceStatus(params, options)
  *   Describes the status of an Amazon Elastic Compute Cloud (Amazon EC2)
@@ -1903,44 +1903,44 @@ AWS.EC2 = inherit({})
  *   scheduled events for an instance that may require your attention:
  *   @param [Object] params
  *     * +InstanceIds+ - (<tt>Array<String></tt>)
- *     * +filters+ - (<tt>Array<Object></tt>)
+ *     * +Filters+ - (<tt>Array<Object></tt>)
  *       * +Name+ - (<tt>String</tt>) Specifies the name of the filter.
  *       * +Values+ - (<tt>Array<String></tt>) Contains one or more
  *         values for the filter.
  *     * +NextToken+ - (<tt>String</tt>)
  *     * +MaxResults+ - (<tt>Integer</tt>)
- *     * +includeAllInstances+ - (<tt>Boolean</tt>)
+ *     * +IncludeAllInstances+ - (<tt>Boolean</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +instanceStatuses+ - (<tt>Array<Object></tt>)
- *       * +instanceId+ - (<tt>String</tt>)
- *       * +availabilityZone+ - (<tt>String</tt>)
- *       * +events+ - (<tt>Array<Object></tt>)
- *         * +code+ - (<tt>String</tt>)
- *         * +description+ - (<tt>String</tt>)
- *         * +notBefore+ - (<tt>Date</tt>)
- *         * +notAfter+ - (<tt>Date</tt>)
- *       * +instanceState+ - (<tt>Object</tt>)
+ *     * +InstanceStatuses+ - (<tt>Array<Object></tt>)
+ *       * +InstanceId+ - (<tt>String</tt>)
+ *       * +AvailabilityZone+ - (<tt>String</tt>)
+ *       * +Events+ - (<tt>Array<Object></tt>)
+ *         * +Code+ - (<tt>String</tt>)
+ *         * +Description+ - (<tt>String</tt>)
+ *         * +NotBefore+ - (<tt>Date</tt>)
+ *         * +NotAfter+ - (<tt>Date</tt>)
+ *       * +InstanceState+ - (<tt>Object</tt>)
  *         * +Code+ - (<tt>Integer</tt>) A 16-bit unsigned integer. The
  *           high byte is an opaque internal value and should be ignored.
  *           The low byte is set based on the state represented.
  *         * +Name+ - (<tt>String</tt>) The current state of the
  *           instance.
- *       * +systemStatus+ - (<tt>Object</tt>)
- *         * +status+ - (<tt>String</tt>)
- *         * +details+ - (<tt>Array<Object></tt>)
- *           * +name+ - (<tt>String</tt>)
- *           * +status+ - (<tt>String</tt>)
- *           * +impairedSince+ - (<tt>Date</tt>)
- *       * +instanceStatus+ - (<tt>Object</tt>)
- *         * +status+ - (<tt>String</tt>)
- *         * +details+ - (<tt>Array<Object></tt>)
- *           * +name+ - (<tt>String</tt>)
- *           * +status+ - (<tt>String</tt>)
- *           * +impairedSince+ - (<tt>Date</tt>)
- *     * +nextToken+ - (<tt>String</tt>)
+ *       * +SystemStatus+ - (<tt>Object</tt>)
+ *         * +Status+ - (<tt>String</tt>)
+ *         * +Details+ - (<tt>Array<Object></tt>)
+ *           * +Name+ - (<tt>String</tt>)
+ *           * +Status+ - (<tt>String</tt>)
+ *           * +ImpairedSince+ - (<tt>Date</tt>)
+ *       * +InstanceStatus+ - (<tt>Object</tt>)
+ *         * +Status+ - (<tt>String</tt>)
+ *         * +Details+ - (<tt>Array<Object></tt>)
+ *           * +Name+ - (<tt>String</tt>)
+ *           * +Status+ - (<tt>String</tt>)
+ *           * +ImpairedSince+ - (<tt>Date</tt>)
+ *     * +NextToken+ - (<tt>String</tt>)
  *
  * @!method describeInstances(params, options)
  *   The DescribeInstances operation returns information about instances
@@ -1948,7 +1948,7 @@ AWS.EC2 = inherit({})
  *   @param [Object] params
  *     * +InstanceIds+ - (<tt>Array<String></tt>) An optional list of the
  *       instances to describe.
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for Instances. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
@@ -1970,7 +1970,7 @@ AWS.EC2 = inherit({})
  *       * +Groups+ - (<tt>Array<Object></tt>) The list of security
  *         groups requested for the instances in this reservation.
  *         * +GroupName+ - (<tt>String</tt>)
- *         * +groupId+ - (<tt>String</tt>)
+ *         * +GroupId+ - (<tt>String</tt>)
  *       * +Instances+ - (<tt>Array<Object></tt>) The list of Amazon EC2
  *         instances included in this reservation.
  *         * +InstanceId+ - (<tt>String</tt>) Unique ID of the instance
@@ -2015,12 +2015,12 @@ AWS.EC2 = inherit({})
  *           instance launched.
  *           * +AvailabilityZone+ - (<tt>String</tt>) The availability
  *             zone in which an Amazon EC2 instance runs.
- *           * +groupName+ - (<tt>String</tt>) The name of the
+ *           * +GroupName+ - (<tt>String</tt>) The name of the
  *             PlacementGroup in which an Amazon EC2 instance runs.
  *             Placement groups are primarily used for launching High
  *             Performance Computing instances in the same group to
  *             ensure fast connection speeds.
- *           * +tenancy+ - (<tt>String</tt>) The allowed tenancy of
+ *           * +Tenancy+ - (<tt>String</tt>) The allowed tenancy of
  *             instances launched into the VPC. A value of default means
  *             instances can be launched with any tenancy; a value of
  *             dedicated means all instances launched into the VPC will
@@ -2044,76 +2044,76 @@ AWS.EC2 = inherit({})
  *           IP address that is assigned to the instance (Amazon VPC).
  *         * +PublicIpAddress+ - (<tt>String</tt>) Specifies the IP
  *           address of the instance.
- *         * +stateReason+ - (<tt>Object</tt>) The reason for the state
+ *         * +StateReason+ - (<tt>Object</tt>) The reason for the state
  *           change.
- *           * +code+ - (<tt>String</tt>) Reason code for the state
+ *           * +Code+ - (<tt>String</tt>) Reason code for the state
  *             change.
- *           * +message+ - (<tt>String</tt>) Descriptive message for the
+ *           * +Message+ - (<tt>String</tt>) Descriptive message for the
  *             state change.
- *         * +architecture+ - (<tt>String</tt>) The architecture of this
+ *         * +Architecture+ - (<tt>String</tt>) The architecture of this
  *           instance.
- *         * +rootDeviceType+ - (<tt>String</tt>) The root device type
+ *         * +RootDeviceType+ - (<tt>String</tt>) The root device type
  *           used by the AMI. The AMI can use an Amazon EBS or instance
  *           store root device.
- *         * +rootDeviceName+ - (<tt>String</tt>) The root device name
+ *         * +RootDeviceName+ - (<tt>String</tt>) The root device name
  *           (e.g., /dev/sda1).
- *         * +blockDeviceMappings+ - (<tt>Array<Object></tt>) Block
+ *         * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) Block
  *           device mapping set.
- *           * +deviceName+ - (<tt>String</tt>) The device name (e.g.,
+ *           * +DeviceName+ - (<tt>String</tt>) The device name (e.g.,
  *             /dev/sdh) at which the block device is exposed on the
  *             instance.
- *           * +ebs+ - (<tt>Object</tt>) The optional EBS device mapped
+ *           * +Ebs+ - (<tt>Object</tt>) The optional EBS device mapped
  *             to the specified device name.
- *             * +volumeId+ - (<tt>String</tt>) The ID of the EBS volume.
- *             * +status+ - (<tt>String</tt>) The status of the EBS
+ *             * +VolumeId+ - (<tt>String</tt>) The ID of the EBS volume.
+ *             * +Status+ - (<tt>String</tt>) The status of the EBS
  *               volume.
- *             * +attachTime+ - (<tt>Date</tt>) The time at which the EBS
+ *             * +AttachTime+ - (<tt>Date</tt>) The time at which the EBS
  *               volume was attached to the associated instance.
- *             * +deleteOnTermination+ - (<tt>Boolean</tt>) Specifies
+ *             * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies
  *               whether the Amazon EBS volume is deleted on instance
  *               termination.
- *         * +virtualizationType+ - (<tt>String</tt>)
- *         * +instanceLifecycle+ - (<tt>String</tt>)
- *         * +spotInstanceRequestId+ - (<tt>String</tt>)
- *         * +license+ - (<tt>Object</tt>)
- *           * +pool+ - (<tt>String</tt>) The license pool from which
+ *         * +VirtualizationType+ - (<tt>String</tt>)
+ *         * +InstanceLifecycle+ - (<tt>String</tt>)
+ *         * +SpotInstanceRequestId+ - (<tt>String</tt>)
+ *         * +License+ - (<tt>Object</tt>)
+ *           * +Pool+ - (<tt>String</tt>) The license pool from which
  *             this license was used (ex: 'windows').
- *         * +clientToken+ - (<tt>String</tt>)
- *         * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *         * +ClientToken+ - (<tt>String</tt>)
+ *         * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *           Instance.
- *           * +key+ - (<tt>String</tt>) The tag's key.
- *           * +value+ - (<tt>String</tt>) The tag's value.
- *         * +securityGroups+ - (<tt>Array<Object></tt>)
+ *           * +Key+ - (<tt>String</tt>) The tag's key.
+ *           * +Value+ - (<tt>String</tt>) The tag's value.
+ *         * +SecurityGroups+ - (<tt>Array<Object></tt>)
  *           * +GroupName+ - (<tt>String</tt>)
- *           * +groupId+ - (<tt>String</tt>)
- *         * +sourceDestCheck+ - (<tt>Boolean</tt>)
- *         * +hypervisor+ - (<tt>String</tt>)
- *         * +networkInterfaces+ - (<tt>Array<Object></tt>)
- *           * +networkInterfaceId+ - (<tt>String</tt>)
- *           * +subnetId+ - (<tt>String</tt>)
- *           * +vpcId+ - (<tt>String</tt>)
- *           * +description+ - (<tt>String</tt>)
- *           * +ownerId+ - (<tt>String</tt>)
- *           * +status+ - (<tt>String</tt>)
- *           * +privateIpAddress+ - (<tt>String</tt>)
- *           * +privateDnsName+ - (<tt>String</tt>)
- *           * +sourceDestCheck+ - (<tt>Boolean</tt>)
- *           * +groups+ - (<tt>Array<Object></tt>)
+ *           * +GroupId+ - (<tt>String</tt>)
+ *         * +SourceDestCheck+ - (<tt>Boolean</tt>)
+ *         * +Hypervisor+ - (<tt>String</tt>)
+ *         * +NetworkInterfaces+ - (<tt>Array<Object></tt>)
+ *           * +NetworkInterfaceId+ - (<tt>String</tt>)
+ *           * +SubnetId+ - (<tt>String</tt>)
+ *           * +VpcId+ - (<tt>String</tt>)
+ *           * +Description+ - (<tt>String</tt>)
+ *           * +OwnerId+ - (<tt>String</tt>)
+ *           * +Status+ - (<tt>String</tt>)
+ *           * +PrivateIpAddress+ - (<tt>String</tt>)
+ *           * +PrivateDnsName+ - (<tt>String</tt>)
+ *           * +SourceDestCheck+ - (<tt>Boolean</tt>)
+ *           * +Groups+ - (<tt>Array<Object></tt>)
  *             * +GroupName+ - (<tt>String</tt>)
- *             * +groupId+ - (<tt>String</tt>)
- *           * +attachment+ - (<tt>Object</tt>)
- *             * +attachmentId+ - (<tt>String</tt>)
- *             * +deviceIndex+ - (<tt>Integer</tt>)
- *             * +status+ - (<tt>String</tt>)
- *             * +attachTime+ - (<tt>Date</tt>)
- *             * +deleteOnTermination+ - (<tt>Boolean</tt>)
- *           * +association+ - (<tt>Object</tt>)
- *             * +publicIp+ - (<tt>String</tt>)
- *             * +ipOwnerId+ - (<tt>String</tt>)
- *         * +iamInstanceProfile+ - (<tt>Object</tt>)
- *           * +arn+ - (<tt>String</tt>)
- *           * +id+ - (<tt>String</tt>)
- *         * +ebsOptimized+ - (<tt>Boolean</tt>)
+ *             * +GroupId+ - (<tt>String</tt>)
+ *           * +Attachment+ - (<tt>Object</tt>)
+ *             * +AttachmentId+ - (<tt>String</tt>)
+ *             * +DeviceIndex+ - (<tt>Integer</tt>)
+ *             * +Status+ - (<tt>String</tt>)
+ *             * +AttachTime+ - (<tt>Date</tt>)
+ *             * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *           * +Association+ - (<tt>Object</tt>)
+ *             * +PublicIp+ - (<tt>String</tt>)
+ *             * +IpOwnerId+ - (<tt>String</tt>)
+ *         * +IamInstanceProfile+ - (<tt>Object</tt>)
+ *           * +Arn+ - (<tt>String</tt>)
+ *           * +Id+ - (<tt>String</tt>)
+ *         * +EbsOptimized+ - (<tt>Boolean</tt>)
  *
  * @!method describeInternetGateways(params, options)
  *   Gives you information about your Internet gateways. You can filter
@@ -2123,9 +2123,9 @@ AWS.EC2 = inherit({})
  *   match at least one of the specified values for it to be included in
  *   the results.
  *   @param [Object] params
- *     * +internetGatewayIds+ - (<tt>Array<String></tt>) One or more
+ *     * +InternetGatewayIds+ - (<tt>Array<String></tt>) One or more
  *       Internet gateway IDs.
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for Internet Gateways. For a complete reference
  *       to the available filter keys for this operation, see the Amazon
  *       EC2 API reference.
@@ -2136,14 +2136,14 @@ AWS.EC2 = inherit({})
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +internetGateways+ - (<tt>Array<Object></tt>)
- *       * +internetGatewayId+ - (<tt>String</tt>)
- *       * +attachments+ - (<tt>Array<Object></tt>)
- *         * +vpcId+ - (<tt>String</tt>)
- *         * +state+ - (<tt>String</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>)
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *     * +InternetGateways+ - (<tt>Array<Object></tt>)
+ *       * +InternetGatewayId+ - (<tt>String</tt>)
+ *       * +Attachments+ - (<tt>Array<Object></tt>)
+ *         * +VpcId+ - (<tt>String</tt>)
+ *         * +State+ - (<tt>String</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method describeKeyPairs(params, options)
  *   The DescribeKeyPairs operation returns information about key pairs
@@ -2153,7 +2153,7 @@ AWS.EC2 = inherit({})
  *   @param [Object] params
  *     * +KeyNames+ - (<tt>Array<String></tt>) The optional list of key
  *       pair names to describe.
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for KeyPairs. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
@@ -2175,9 +2175,9 @@ AWS.EC2 = inherit({})
  *   may be specified on the call. When one or more license IDs are
  *   specified, only data for the specified IDs are returned.
  *   @param [Object] params
- *     * +licenseIds+ - (<tt>Array<String></tt>) Specifies the license
+ *     * +LicenseIds+ - (<tt>Array<String></tt>) Specifies the license
  *       registration for which details are to be returned.
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for Licenses. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
@@ -2188,34 +2188,34 @@ AWS.EC2 = inherit({})
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +licenses+ - (<tt>Array<Object></tt>) Specifies active licenses
+ *     * +Licenses+ - (<tt>Array<Object></tt>) Specifies active licenses
  *       in use and attached to an Amazon EC2 instance.
- *       * +licenseId+ - (<tt>String</tt>) The unique ID identifying the
+ *       * +LicenseId+ - (<tt>String</tt>) The unique ID identifying the
  *         license.
- *       * +type+ - (<tt>String</tt>) The license type (ex.
+ *       * +Type+ - (<tt>String</tt>) The license type (ex.
  *         "Microsoft/Windows/Standard").
- *       * +pool+ - (<tt>String</tt>) The name of the pool in which the
+ *       * +Pool+ - (<tt>String</tt>) The name of the pool in which the
  *         license is kept.
- *       * +capacities+ - (<tt>Array<Object></tt>) The capacities
+ *       * +Capacities+ - (<tt>Array<Object></tt>) The capacities
  *         available for this license, indicating how many licenses are
  *         in use, how many are available, how many Amazon EC2 instances
  *         can be supported, etc.
- *         * +capacity+ - (<tt>Integer</tt>) The number of licenses
+ *         * +Capacity+ - (<tt>Integer</tt>) The number of licenses
  *           available.
- *         * +instanceCapacity+ - (<tt>Integer</tt>) The number of Amazon
+ *         * +InstanceCapacity+ - (<tt>Integer</tt>) The number of Amazon
  *           EC2 instances that can be supported with the license's
  *           capacity.
- *         * +state+ - (<tt>String</tt>) The state of this license
+ *         * +State+ - (<tt>String</tt>) The state of this license
  *           capacity, indicating whether the license is actively being
  *           used or not.
- *         * +earliestAllowedDeactivationTime+ - (<tt>Date</tt>) The
+ *         * +EarliestAllowedDeactivationTime+ - (<tt>Date</tt>) The
  *           earliest allowed time at which a license can be deactivated.
  *           Some licenses have time restrictions on when they can be
  *           activated and reactivated.
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *         License.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method describeNetworkAcls(params, options)
  *   Gives you information about the network ACLs in your VPC. You can
@@ -2225,9 +2225,9 @@ AWS.EC2 = inherit({})
  *   least one of the specified values for it to be included in the
  *   results.
  *   @param [Object] params
- *     * +networkAclIds+ - (<tt>Array<String></tt>) One or more network
+ *     * +NetworkAclIds+ - (<tt>Array<String></tt>) One or more network
  *       ACL IDs.
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for Network ACLs. For a complete reference to
  *       the available filter keys for this operation, see the Amazon EC2
  *       API reference.
@@ -2238,70 +2238,70 @@ AWS.EC2 = inherit({})
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +networkAcls+ - (<tt>Array<Object></tt>)
- *       * +networkAclId+ - (<tt>String</tt>)
- *       * +vpcId+ - (<tt>String</tt>)
- *       * +isDefault+ - (<tt>Boolean</tt>)
- *       * +entries+ - (<tt>Array<Object></tt>)
- *         * +ruleNumber+ - (<tt>Integer</tt>)
- *         * +protocol+ - (<tt>String</tt>)
- *         * +ruleAction+ - (<tt>String</tt>)
- *         * +egress+ - (<tt>Boolean</tt>)
- *         * +cidrBlock+ - (<tt>String</tt>)
- *         * +icmpTypeCode+ - (<tt>Object</tt>)
- *           * +type+ - (<tt>Integer</tt>) For the ICMP protocol, the
+ *     * +NetworkAcls+ - (<tt>Array<Object></tt>)
+ *       * +NetworkAclId+ - (<tt>String</tt>)
+ *       * +VpcId+ - (<tt>String</tt>)
+ *       * +IsDefault+ - (<tt>Boolean</tt>)
+ *       * +Entries+ - (<tt>Array<Object></tt>)
+ *         * +RuleNumber+ - (<tt>Integer</tt>)
+ *         * +Protocol+ - (<tt>String</tt>)
+ *         * +RuleAction+ - (<tt>String</tt>)
+ *         * +Egress+ - (<tt>Boolean</tt>)
+ *         * +CidrBlock+ - (<tt>String</tt>)
+ *         * +IcmpTypeCode+ - (<tt>Object</tt>)
+ *           * +Type+ - (<tt>Integer</tt>) For the ICMP protocol, the
  *             ICMP type. A value of -1 is a wildcard meaning all types.
  *             Required if specifying icmp for the protocol.
- *           * +code+ - (<tt>Integer</tt>) For the ICMP protocol, the
+ *           * +Code+ - (<tt>Integer</tt>) For the ICMP protocol, the
  *             ICMP code. A value of -1 is a wildcard meaning all codes.
  *             Required if specifying icmp for the protocol.
- *         * +portRange+ - (<tt>Object</tt>)
- *           * +from+ - (<tt>Integer</tt>) The first port in the range.
+ *         * +PortRange+ - (<tt>Object</tt>)
+ *           * +From+ - (<tt>Integer</tt>) The first port in the range.
  *             Required if specifying tcp or udp for the protocol.
- *           * +to+ - (<tt>Integer</tt>) The last port in the range.
+ *           * +To+ - (<tt>Integer</tt>) The last port in the range.
  *             Required if specifying tcp or udp for the protocol.
- *       * +associations+ - (<tt>Array<Object></tt>)
- *         * +networkAclAssociationId+ - (<tt>String</tt>)
- *         * +networkAclId+ - (<tt>String</tt>)
- *         * +subnetId+ - (<tt>String</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>)
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *       * +Associations+ - (<tt>Array<Object></tt>)
+ *         * +NetworkAclAssociationId+ - (<tt>String</tt>)
+ *         * +NetworkAclId+ - (<tt>String</tt>)
+ *         * +SubnetId+ - (<tt>String</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method describeNetworkInterfaceAttribute(params, options)
  *   Calls the DescribeNetworkInterfaceAttribute API operation.
  *   @param [Object] params
- *     * +networkInterfaceId+ - (*required*, <tt>String</tt>)
- *     * +description+ - (<tt>String</tt>)
- *     * +sourceDestCheck+ - (<tt>String</tt>)
- *     * +groups+ - (<tt>String</tt>)
- *     * +attachment+ - (<tt>String</tt>)
+ *     * +NetworkInterfaceId+ - (*required*, <tt>String</tt>)
+ *     * +Description+ - (<tt>String</tt>)
+ *     * +SourceDestCheck+ - (<tt>String</tt>)
+ *     * +Groups+ - (<tt>String</tt>)
+ *     * +Attachment+ - (<tt>String</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +networkInterfaceId+ - (<tt>String</tt>)
- *     * +description+ - (<tt>Object</tt>)
- *       * +value+ - (<tt>String</tt>)
- *     * +sourceDestCheck+ - (<tt>Object</tt>)
- *       * +value+ - (<tt>Boolean</tt>)
- *     * +groups+ - (<tt>Array<Object></tt>)
+ *     * +NetworkInterfaceId+ - (<tt>String</tt>)
+ *     * +Description+ - (<tt>Object</tt>)
+ *       * +Value+ - (<tt>String</tt>)
+ *     * +SourceDestCheck+ - (<tt>Object</tt>)
+ *       * +Value+ - (<tt>Boolean</tt>)
+ *     * +Groups+ - (<tt>Array<Object></tt>)
  *       * +GroupName+ - (<tt>String</tt>)
- *       * +groupId+ - (<tt>String</tt>)
- *     * +attachment+ - (<tt>Object</tt>)
- *       * +attachmentId+ - (<tt>String</tt>)
- *       * +instanceId+ - (<tt>String</tt>)
- *       * +instanceOwnerId+ - (<tt>String</tt>)
- *       * +deviceIndex+ - (<tt>Integer</tt>)
- *       * +status+ - (<tt>String</tt>)
- *       * +attachTime+ - (<tt>Date</tt>)
- *       * +deleteOnTermination+ - (<tt>Boolean</tt>)
+ *       * +GroupId+ - (<tt>String</tt>)
+ *     * +Attachment+ - (<tt>Object</tt>)
+ *       * +AttachmentId+ - (<tt>String</tt>)
+ *       * +InstanceId+ - (<tt>String</tt>)
+ *       * +InstanceOwnerId+ - (<tt>String</tt>)
+ *       * +DeviceIndex+ - (<tt>Integer</tt>)
+ *       * +Status+ - (<tt>String</tt>)
+ *       * +AttachTime+ - (<tt>Date</tt>)
+ *       * +DeleteOnTermination+ - (<tt>Boolean</tt>)
  *
  * @!method describeNetworkInterfaces(params, options)
  *   Calls the DescribeNetworkInterfaces API operation.
  *   @param [Object] params
- *     * +networkInterfaceIds+ - (<tt>Array<String></tt>)
- *     * +filters+ - (<tt>Array<Object></tt>)
+ *     * +NetworkInterfaceIds+ - (<tt>Array<String></tt>)
+ *     * +Filters+ - (<tt>Array<Object></tt>)
  *       * +Name+ - (<tt>String</tt>) Specifies the name of the filter.
  *       * +Values+ - (<tt>Array<String></tt>) Contains one or more
  *         values for the filter.
@@ -2309,55 +2309,55 @@ AWS.EC2 = inherit({})
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +networkInterfaces+ - (<tt>Array<Object></tt>)
- *       * +networkInterfaceId+ - (<tt>String</tt>)
- *       * +subnetId+ - (<tt>String</tt>)
- *       * +vpcId+ - (<tt>String</tt>)
- *       * +availabilityZone+ - (<tt>String</tt>)
- *       * +description+ - (<tt>String</tt>)
- *       * +ownerId+ - (<tt>String</tt>)
- *       * +requesterId+ - (<tt>String</tt>)
- *       * +requesterManaged+ - (<tt>Boolean</tt>)
- *       * +status+ - (<tt>String</tt>)
- *       * +macAddress+ - (<tt>String</tt>)
- *       * +privateIpAddress+ - (<tt>String</tt>)
- *       * +privateDnsName+ - (<tt>String</tt>)
- *       * +sourceDestCheck+ - (<tt>Boolean</tt>)
- *       * +groups+ - (<tt>Array<Object></tt>)
+ *     * +NetworkInterfaces+ - (<tt>Array<Object></tt>)
+ *       * +NetworkInterfaceId+ - (<tt>String</tt>)
+ *       * +SubnetId+ - (<tt>String</tt>)
+ *       * +VpcId+ - (<tt>String</tt>)
+ *       * +AvailabilityZone+ - (<tt>String</tt>)
+ *       * +Description+ - (<tt>String</tt>)
+ *       * +OwnerId+ - (<tt>String</tt>)
+ *       * +RequesterId+ - (<tt>String</tt>)
+ *       * +RequesterManaged+ - (<tt>Boolean</tt>)
+ *       * +Status+ - (<tt>String</tt>)
+ *       * +MacAddress+ - (<tt>String</tt>)
+ *       * +PrivateIpAddress+ - (<tt>String</tt>)
+ *       * +PrivateDnsName+ - (<tt>String</tt>)
+ *       * +SourceDestCheck+ - (<tt>Boolean</tt>)
+ *       * +Groups+ - (<tt>Array<Object></tt>)
  *         * +GroupName+ - (<tt>String</tt>)
- *         * +groupId+ - (<tt>String</tt>)
- *       * +attachment+ - (<tt>Object</tt>)
- *         * +attachmentId+ - (<tt>String</tt>)
- *         * +instanceId+ - (<tt>String</tt>)
- *         * +instanceOwnerId+ - (<tt>String</tt>)
- *         * +deviceIndex+ - (<tt>Integer</tt>)
- *         * +status+ - (<tt>String</tt>)
- *         * +attachTime+ - (<tt>Date</tt>)
- *         * +deleteOnTermination+ - (<tt>Boolean</tt>)
- *       * +association+ - (<tt>Object</tt>)
- *         * +publicIp+ - (<tt>String</tt>)
- *         * +ipOwnerId+ - (<tt>String</tt>)
- *         * +allocationId+ - (<tt>String</tt>)
- *         * +associationId+ - (<tt>String</tt>)
- *       * +tagSet+ - (<tt>Array<Object></tt>)
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
- *       * +privateIpAddresses+ - (<tt>Array<Object></tt>)
- *         * +privateIpAddress+ - (<tt>String</tt>)
- *         * +primary+ - (<tt>Boolean</tt>)
- *         * +association+ - (<tt>Object</tt>)
- *           * +publicIp+ - (<tt>String</tt>)
- *           * +ipOwnerId+ - (<tt>String</tt>)
- *           * +allocationId+ - (<tt>String</tt>)
- *           * +associationId+ - (<tt>String</tt>)
+ *         * +GroupId+ - (<tt>String</tt>)
+ *       * +Attachment+ - (<tt>Object</tt>)
+ *         * +AttachmentId+ - (<tt>String</tt>)
+ *         * +InstanceId+ - (<tt>String</tt>)
+ *         * +InstanceOwnerId+ - (<tt>String</tt>)
+ *         * +DeviceIndex+ - (<tt>Integer</tt>)
+ *         * +Status+ - (<tt>String</tt>)
+ *         * +AttachTime+ - (<tt>Date</tt>)
+ *         * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *       * +Association+ - (<tt>Object</tt>)
+ *         * +PublicIp+ - (<tt>String</tt>)
+ *         * +IpOwnerId+ - (<tt>String</tt>)
+ *         * +AllocationId+ - (<tt>String</tt>)
+ *         * +AssociationId+ - (<tt>String</tt>)
+ *       * +TagSet+ - (<tt>Array<Object></tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +PrivateIpAddresses+ - (<tt>Array<Object></tt>)
+ *         * +PrivateIpAddress+ - (<tt>String</tt>)
+ *         * +Primary+ - (<tt>Boolean</tt>)
+ *         * +Association+ - (<tt>Object</tt>)
+ *           * +PublicIp+ - (<tt>String</tt>)
+ *           * +IpOwnerId+ - (<tt>String</tt>)
+ *           * +AllocationId+ - (<tt>String</tt>)
+ *           * +AssociationId+ - (<tt>String</tt>)
  *
  * @!method describePlacementGroups(params, options)
  *   Returns information about one or more PlacementGroup instances in a
  *   user's account.
  *   @param [Object] params
- *     * +groupNames+ - (<tt>Array<String></tt>) The name of the
+ *     * +GroupNames+ - (<tt>Array<String></tt>) The name of the
  *       PlacementGroup.
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for Placement Groups. For a complete reference
  *       to the available filter keys for this operation, see the Amazon
  *       EC2 API reference.
@@ -2368,13 +2368,13 @@ AWS.EC2 = inherit({})
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +placementGroups+ - (<tt>Array<Object></tt>) Contains
+ *     * +PlacementGroups+ - (<tt>Array<Object></tt>) Contains
  *       information about the specified PlacementGroups.
- *       * +groupName+ - (<tt>String</tt>) The name of this
+ *       * +GroupName+ - (<tt>String</tt>) The name of this
  *         PlacementGroup.
- *       * +strategy+ - (<tt>String</tt>) The strategy to use when
+ *       * +Strategy+ - (<tt>String</tt>) The strategy to use when
  *         allocating Amazon EC2 instances for the PlacementGroup.
- *       * +state+ - (<tt>String</tt>) The state of this PlacementGroup.
+ *       * +State+ - (<tt>String</tt>) The state of this PlacementGroup.
  *
  * @!method describeRegions(params, options)
  *   The DescribeRegions operation describes regions zones that are
@@ -2382,7 +2382,7 @@ AWS.EC2 = inherit({})
  *   @param [Object] params
  *     * +RegionNames+ - (<tt>Array<String></tt>) The optional list of
  *       regions to describe.
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for Regions. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
@@ -2404,14 +2404,14 @@ AWS.EC2 = inherit({})
  *   @param [Object] params
  *     * +ReservedInstancesIds+ - (<tt>Array<String></tt>) The optional
  *       list of Reserved Instance IDs to describe.
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for ReservedInstances. For a complete reference
  *       to the available filter keys for this operation, see the Amazon
  *       EC2 API reference.
  *       * +Name+ - (<tt>String</tt>) Specifies the name of the filter.
  *       * +Values+ - (<tt>Array<String></tt>) Contains one or more
  *         values for the filter.
- *     * +offeringType+ - (<tt>String</tt>)
+ *     * +OfferingType+ - (<tt>String</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
@@ -2438,26 +2438,26 @@ AWS.EC2 = inherit({})
  *         Instances product description (ex: Windows or Unix/Linux).
  *       * +State+ - (<tt>String</tt>) The state of the Reserved
  *         Instances purchase.
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *         ReservedInstances.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
- *       * +instanceTenancy+ - (<tt>String</tt>) The tenancy of the
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +InstanceTenancy+ - (<tt>String</tt>) The tenancy of the
  *         reserved instance (ex: default or dedicated).
- *       * +currencyCode+ - (<tt>String</tt>) The currency of the
+ *       * +CurrencyCode+ - (<tt>String</tt>) The currency of the
  *         reserved instance. Specified using ISO 4217 standard (e.g.,
  *         USD, JPY).
- *       * +offeringType+ - (<tt>String</tt>)
- *       * +recurringCharges+ - (<tt>Array<Object></tt>)
- *         * +frequency+ - (<tt>String</tt>)
- *         * +amount+ - (<tt>Float</tt>)
+ *       * +OfferingType+ - (<tt>String</tt>)
+ *       * +RecurringCharges+ - (<tt>Array<Object></tt>)
+ *         * +Frequency+ - (<tt>String</tt>)
+ *         * +Amount+ - (<tt>Float</tt>)
  *
  * @!method describeReservedInstancesListings(params, options)
  *   Calls the DescribeReservedInstancesListings API operation.
  *   @param [Object] params
- *     * +reservedInstancesId+ - (<tt>String</tt>)
- *     * +reservedInstancesListingId+ - (<tt>String</tt>)
- *     * +filters+ - (<tt>Array<Object></tt>)
+ *     * +ReservedInstancesId+ - (<tt>String</tt>)
+ *     * +ReservedInstancesListingId+ - (<tt>String</tt>)
+ *     * +Filters+ - (<tt>Array<Object></tt>)
  *       * +Name+ - (<tt>String</tt>) Specifies the name of the filter.
  *       * +Values+ - (<tt>Array<String></tt>) Contains one or more
  *         values for the filter.
@@ -2465,25 +2465,25 @@ AWS.EC2 = inherit({})
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +reservedInstancesListings+ - (<tt>Array<Object></tt>)
- *       * +reservedInstancesListingId+ - (<tt>String</tt>)
- *       * +reservedInstancesId+ - (<tt>String</tt>)
- *       * +createDate+ - (<tt>Date</tt>)
- *       * +updateDate+ - (<tt>Date</tt>)
- *       * +status+ - (<tt>String</tt>)
- *       * +statusMessage+ - (<tt>String</tt>)
- *       * +instanceCounts+ - (<tt>Array<Object></tt>)
- *         * +state+ - (<tt>String</tt>)
- *         * +instanceCount+ - (<tt>Integer</tt>)
- *       * +priceSchedules+ - (<tt>Array<Object></tt>)
- *         * +term+ - (<tt>Integer</tt>)
- *         * +price+ - (<tt>Float</tt>)
- *         * +currencyCode+ - (<tt>String</tt>)
- *         * +active+ - (<tt>Boolean</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>)
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
- *       * +clientToken+ - (<tt>String</tt>)
+ *     * +ReservedInstancesListings+ - (<tt>Array<Object></tt>)
+ *       * +ReservedInstancesListingId+ - (<tt>String</tt>)
+ *       * +ReservedInstancesId+ - (<tt>String</tt>)
+ *       * +CreateDate+ - (<tt>Date</tt>)
+ *       * +UpdateDate+ - (<tt>Date</tt>)
+ *       * +Status+ - (<tt>String</tt>)
+ *       * +StatusMessage+ - (<tt>String</tt>)
+ *       * +InstanceCounts+ - (<tt>Array<Object></tt>)
+ *         * +State+ - (<tt>String</tt>)
+ *         * +InstanceCount+ - (<tt>Integer</tt>)
+ *       * +PriceSchedules+ - (<tt>Array<Object></tt>)
+ *         * +Term+ - (<tt>Integer</tt>)
+ *         * +Price+ - (<tt>Float</tt>)
+ *         * +CurrencyCode+ - (<tt>String</tt>)
+ *         * +Active+ - (<tt>Boolean</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +ClientToken+ - (<tt>String</tt>)
  *
  * @!method describeReservedInstancesOfferings(params, options)
  *   The DescribeReservedInstancesOfferings operation describes Reserved
@@ -2502,18 +2502,20 @@ AWS.EC2 = inherit({})
  *       which the Reserved Instance can be used.
  *     * +ProductDescription+ - (<tt>String</tt>) The Reserved Instance
  *       product description.
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for ReservedInstancesOfferings. For a complete
  *       reference to the available filter keys for this operation, see
  *       the Amazon EC2 API reference.
  *       * +Name+ - (<tt>String</tt>) Specifies the name of the filter.
  *       * +Values+ - (<tt>Array<String></tt>) Contains one or more
  *         values for the filter.
- *     * +instanceTenancy+ - (<tt>String</tt>) The tenancy of the
+ *     * +InstanceTenancy+ - (<tt>String</tt>) The tenancy of the
  *       Reserved Instance offering. A Reserved Instance with tenancy of
  *       dedicated will run on single-tenant hardware and can only be
  *       launched within a VPC.
- *     * +offeringType+ - (<tt>String</tt>)
+ *     * +OfferingType+ - (<tt>String</tt>)
+ *     * +NextToken+ - (<tt>String</tt>)
+ *     * +MaxResults+ - (<tt>Integer</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
@@ -2534,20 +2536,20 @@ AWS.EC2 = inherit({})
  *         Reserved Instance.
  *       * +ProductDescription+ - (<tt>String</tt>) The Reserved
  *         Instances description (ex: Windows or Unix/Linux).
- *       * +instanceTenancy+ - (<tt>String</tt>) The tenancy of the
+ *       * +InstanceTenancy+ - (<tt>String</tt>) The tenancy of the
  *         reserved instance (ex: default or dedicated).
- *       * +currencyCode+ - (<tt>String</tt>) The currency of the
+ *       * +CurrencyCode+ - (<tt>String</tt>) The currency of the
  *         reserved instance. Specified using ISO 4217 standard (e.g.,
  *         USD, JPY).
- *       * +offeringType+ - (<tt>String</tt>)
- *       * +recurringCharges+ - (<tt>Array<Object></tt>)
- *         * +frequency+ - (<tt>String</tt>)
- *         * +amount+ - (<tt>Float</tt>)
- *       * +marketplace+ - (<tt>Boolean</tt>)
- *       * +pricingDetails+ - (<tt>Array<Object></tt>)
- *         * +price+ - (<tt>Float</tt>)
- *         * +count+ - (<tt>Integer</tt>)
- *     * +nextToken+ - (<tt>String</tt>)
+ *       * +OfferingType+ - (<tt>String</tt>)
+ *       * +RecurringCharges+ - (<tt>Array<Object></tt>)
+ *         * +Frequency+ - (<tt>String</tt>)
+ *         * +Amount+ - (<tt>Float</tt>)
+ *       * +Marketplace+ - (<tt>Boolean</tt>)
+ *       * +PricingDetails+ - (<tt>Array<Object></tt>)
+ *         * +Price+ - (<tt>Float</tt>)
+ *         * +Count+ - (<tt>Integer</tt>)
+ *     * +NextToken+ - (<tt>String</tt>)
  *
  * @!method describeRouteTables(params, options)
  *   Gives you information about your route tables. You can filter the
@@ -2557,9 +2559,9 @@ AWS.EC2 = inherit({})
  *   values for the filter. The table must match at least one of the
  *   specified values for it to be included in the results.
  *   @param [Object] params
- *     * +routeTableIds+ - (<tt>Array<String></tt>) One or more route
+ *     * +RouteTableIds+ - (<tt>Array<String></tt>) One or more route
  *       table IDs.
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for Route Tables. For a complete reference to
  *       the available filter keys for this operation, see the Amazon EC2
  *       API reference.
@@ -2570,31 +2572,31 @@ AWS.EC2 = inherit({})
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +routeTables+ - (<tt>Array<Object></tt>)
- *       * +routeTableId+ - (<tt>String</tt>)
- *       * +vpcId+ - (<tt>String</tt>)
- *       * +routes+ - (<tt>Array<Object></tt>)
- *         * +destinationCidrBlock+ - (<tt>String</tt>)
- *         * +gatewayId+ - (<tt>String</tt>)
- *         * +instanceId+ - (<tt>String</tt>)
- *         * +instanceOwnerId+ - (<tt>String</tt>)
- *         * +networkInterfaceId+ - (<tt>String</tt>)
- *         * +state+ - (<tt>String</tt>)
- *       * +associations+ - (<tt>Array<Object></tt>)
- *         * +routeTableAssociationId+ - (<tt>String</tt>)
- *         * +routeTableId+ - (<tt>String</tt>)
- *         * +subnetId+ - (<tt>String</tt>)
- *         * +main+ - (<tt>Boolean</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>)
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
- *       * +propagatingVgws+ - (<tt>Array<Object></tt>)
- *         * +gatewayId+ - (<tt>String</tt>)
- *       * +propagatedRoutes+ - (<tt>Array<Object></tt>)
- *         * +destinationCidrBlock+ - (<tt>String</tt>)
- *         * +gatewayId+ - (<tt>String</tt>)
- *         * +status+ - (<tt>String</tt>)
- *         * +sourceId+ - (<tt>String</tt>)
+ *     * +RouteTables+ - (<tt>Array<Object></tt>)
+ *       * +RouteTableId+ - (<tt>String</tt>)
+ *       * +VpcId+ - (<tt>String</tt>)
+ *       * +Routes+ - (<tt>Array<Object></tt>)
+ *         * +DestinationCidrBlock+ - (<tt>String</tt>)
+ *         * +GatewayId+ - (<tt>String</tt>)
+ *         * +InstanceId+ - (<tt>String</tt>)
+ *         * +InstanceOwnerId+ - (<tt>String</tt>)
+ *         * +NetworkInterfaceId+ - (<tt>String</tt>)
+ *         * +State+ - (<tt>String</tt>)
+ *       * +Associations+ - (<tt>Array<Object></tt>)
+ *         * +RouteTableAssociationId+ - (<tt>String</tt>)
+ *         * +RouteTableId+ - (<tt>String</tt>)
+ *         * +SubnetId+ - (<tt>String</tt>)
+ *         * +Main+ - (<tt>Boolean</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +PropagatingVgws+ - (<tt>Array<Object></tt>)
+ *         * +GatewayId+ - (<tt>String</tt>)
+ *       * +PropagatedRoutes+ - (<tt>Array<Object></tt>)
+ *         * +DestinationCidrBlock+ - (<tt>String</tt>)
+ *         * +GatewayId+ - (<tt>String</tt>)
+ *         * +Status+ - (<tt>String</tt>)
+ *         * +SourceId+ - (<tt>String</tt>)
  *
  * @!method describeSecurityGroups(params, options)
  *   The DescribeSecurityGroups operation returns information about
@@ -2603,7 +2605,7 @@ AWS.EC2 = inherit({})
  *     * +GroupNames+ - (<tt>Array<String></tt>) The optional list of
  *       Amazon EC2 security groups to describe.
  *     * +GroupIds+ - (<tt>Array<String></tt>)
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for SecurityGroups. For a complete reference to
  *       the available filter keys for this operation, see the Amazon EC2
  *       API reference.
@@ -2620,7 +2622,7 @@ AWS.EC2 = inherit({})
  *         owner of the security group.
  *       * +GroupName+ - (<tt>String</tt>) The name of this security
  *         group.
- *       * +groupId+ - (<tt>String</tt>)
+ *       * +GroupId+ - (<tt>String</tt>)
  *       * +Description+ - (<tt>String</tt>) The description of this
  *         security group.
  *       * +IpPermissions+ - (<tt>Array<Object></tt>) The permissions
@@ -2647,7 +2649,7 @@ AWS.EC2 = inherit({})
  *         * +IpRanges+ - (<tt>Array<Object></tt>) The list of CIDR IP
  *           ranges included in this permission.
  *           * +CidrIp+ - (<tt>String</tt>) The list of CIDR IP ranges.
- *       * +ipPermissionsEgress+ - (<tt>Array<Object></tt>)
+ *       * +IpPermissionsEgress+ - (<tt>Array<Object></tt>)
  *         * +IpProtocol+ - (<tt>String</tt>) The IP protocol of this
  *           permission.
  *         * +FromPort+ - (<tt>Integer</tt>) Start of port range for the
@@ -2670,10 +2672,10 @@ AWS.EC2 = inherit({})
  *         * +IpRanges+ - (<tt>Array<Object></tt>) The list of CIDR IP
  *           ranges included in this permission.
  *           * +CidrIp+ - (<tt>String</tt>) The list of CIDR IP ranges.
- *       * +vpcId+ - (<tt>String</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>)
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *       * +VpcId+ - (<tt>String</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method describeSnapshotAttribute(params, options)
  *   Returns information about an attribute of a snapshot. Only one
@@ -2687,7 +2689,7 @@ AWS.EC2 = inherit({})
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +snapshotId+ - (<tt>String</tt>) The ID of the snapshot whose
+ *     * +SnapshotId+ - (<tt>String</tt>) The ID of the snapshot whose
  *       attribute is being described.
  *     * +CreateVolumePermissions+ - (<tt>Array<Object></tt>) The list of
  *       permissions describing who can create a volume from the
@@ -2696,7 +2698,7 @@ AWS.EC2 = inherit({})
  *         create volumes from the snapshot.
  *       * +Group+ - (<tt>String</tt>) The group that is allowed to
  *         create volumes from the snapshot (currently supports "all").
- *     * +productCodes+ - (<tt>Array<Object></tt>)
+ *     * +ProductCodes+ - (<tt>Array<Object></tt>)
  *       * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an AWS
  *         DevPay product code.
  *       * +ProductCodeType+ - (<tt>String</tt>)
@@ -2715,7 +2717,7 @@ AWS.EC2 = inherit({})
  *     * +RestorableByUserIds+ - (<tt>Array<String></tt>) The optional
  *       list of users who have permission to create volumes from the
  *       described EBS snapshots.
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for Snapshots. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
@@ -2743,13 +2745,13 @@ AWS.EC2 = inherit({})
  *       * +Description+ - (<tt>String</tt>) Description of the snapshot.
  *       * +VolumeSize+ - (<tt>Integer</tt>) The size of the volume, in
  *         gigabytes.
- *       * +ownerAlias+ - (<tt>String</tt>) The AWS account alias (e.g.,
+ *       * +OwnerAlias+ - (<tt>String</tt>) The AWS account alias (e.g.,
  *         "amazon", "redhat", "self", etc.) or AWS account ID that owns
  *         the AMI.
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *         Snapshot.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method describeSpotDatafeedSubscription(params, options)
  *   Describes the data feed for Spot Instances.
@@ -2758,20 +2760,20 @@ AWS.EC2 = inherit({})
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +spotDatafeedSubscription+ - (<tt>Object</tt>) The Spot Instance
+ *     * +SpotDatafeedSubscription+ - (<tt>Object</tt>) The Spot Instance
  *       datafeed subscription.
- *       * +ownerId+ - (<tt>String</tt>) Specifies the AWS account ID of
+ *       * +OwnerId+ - (<tt>String</tt>) Specifies the AWS account ID of
  *         the account.
- *       * +bucket+ - (<tt>String</tt>) Specifies the Amazon S3 bucket
+ *       * +Bucket+ - (<tt>String</tt>) Specifies the Amazon S3 bucket
  *         where the Spot Instance data feed is located.
- *       * +prefix+ - (<tt>String</tt>) Contains the prefix that is
+ *       * +Prefix+ - (<tt>String</tt>) Contains the prefix that is
  *         prepended to data feed files.
- *       * +state+ - (<tt>String</tt>) Specifies the state of the Spot
+ *       * +State+ - (<tt>String</tt>) Specifies the state of the Spot
  *         Instance request.
- *       * +fault+ - (<tt>Object</tt>) Specifies a fault code for the
+ *       * +Fault+ - (<tt>Object</tt>) Specifies a fault code for the
  *         Spot Instance request, if present.
- *         * +code+ - (<tt>String</tt>)
- *         * +message+ - (<tt>String</tt>)
+ *         * +Code+ - (<tt>String</tt>)
+ *         * +Message+ - (<tt>String</tt>)
  *
  * @!method describeSpotInstanceRequests(params, options)
  *   Describes Spot Instance requests. Spot Instances are instances that
@@ -2782,9 +2784,9 @@ AWS.EC2 = inherit({})
  *   Instances, refer to the Amazon Elastic Compute Cloud Developer Guide
  *   or Amazon Elastic Compute Cloud User Guide.
  *   @param [Object] params
- *     * +spotInstanceRequestIds+ - (<tt>Array<String></tt>) The ID of
+ *     * +SpotInstanceRequestIds+ - (<tt>Array<String></tt>) The ID of
  *       the request.
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for SpotInstances. For a complete reference to
  *       the available filter keys for this operation, see the Amazon EC2
  *       API reference.
@@ -2795,134 +2797,138 @@ AWS.EC2 = inherit({})
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +spotInstanceRequests+ - (<tt>Array<Object></tt>)
- *       * +spotInstanceRequestId+ - (<tt>String</tt>)
- *       * +spotPrice+ - (<tt>String</tt>)
- *       * +type+ - (<tt>String</tt>)
- *       * +state+ - (<tt>String</tt>)
- *       * +fault+ - (<tt>Object</tt>)
- *         * +code+ - (<tt>String</tt>)
- *         * +message+ - (<tt>String</tt>)
- *       * +validFrom+ - (<tt>Date</tt>)
- *       * +validUntil+ - (<tt>Date</tt>)
- *       * +launchGroup+ - (<tt>String</tt>)
- *       * +availabilityZoneGroup+ - (<tt>String</tt>)
- *       * +launchSpecification+ - (<tt>Object</tt>)
- *         * +imageId+ - (<tt>String</tt>) The AMI ID.
- *         * +keyName+ - (<tt>String</tt>) The name of the key pair.
+ *     * +SpotInstanceRequests+ - (<tt>Array<Object></tt>)
+ *       * +SpotInstanceRequestId+ - (<tt>String</tt>)
+ *       * +SpotPrice+ - (<tt>String</tt>)
+ *       * +Type+ - (<tt>String</tt>)
+ *       * +State+ - (<tt>String</tt>)
+ *       * +Fault+ - (<tt>Object</tt>)
+ *         * +Code+ - (<tt>String</tt>)
+ *         * +Message+ - (<tt>String</tt>)
+ *       * +Status+ - (<tt>Object</tt>)
+ *         * +Code+ - (<tt>String</tt>)
+ *         * +UpdateTime+ - (<tt>Date</tt>)
+ *         * +Message+ - (<tt>String</tt>)
+ *       * +ValidFrom+ - (<tt>Date</tt>)
+ *       * +ValidUntil+ - (<tt>Date</tt>)
+ *       * +LaunchGroup+ - (<tt>String</tt>)
+ *       * +AvailabilityZoneGroup+ - (<tt>String</tt>)
+ *       * +LaunchSpecification+ - (<tt>Object</tt>)
+ *         * +ImageId+ - (<tt>String</tt>) The AMI ID.
+ *         * +KeyName+ - (<tt>String</tt>) The name of the key pair.
  *         * +SecurityGroups+ - (<tt>Array<Object></tt>)
  *           * +GroupName+ - (<tt>String</tt>)
- *           * +groupId+ - (<tt>String</tt>)
- *         * +userData+ - (<tt>String</tt>) Optional data, specific to a
+ *           * +GroupId+ - (<tt>String</tt>)
+ *         * +UserData+ - (<tt>String</tt>) Optional data, specific to a
  *           user's application, to provide in the launch request. All
  *           instances that collectively comprise the launch request have
  *           access to this data. User data is never returned through API
  *           responses.
- *         * +addressingType+ - (<tt>String</tt>) Deprecated.
- *         * +instanceType+ - (<tt>String</tt>) Specifies the instance
+ *         * +AddressingType+ - (<tt>String</tt>) Deprecated.
+ *         * +InstanceType+ - (<tt>String</tt>) Specifies the instance
  *           type.
- *         * +placement+ - (<tt>Object</tt>) Defines a placement item.
- *           * +availabilityZone+ - (<tt>String</tt>) The availability
+ *         * +Placement+ - (<tt>Object</tt>) Defines a placement item.
+ *           * +AvailabilityZone+ - (<tt>String</tt>) The availability
  *             zone in which an Amazon EC2 instance runs.
- *           * +groupName+ - (<tt>String</tt>) The name of the
+ *           * +GroupName+ - (<tt>String</tt>) The name of the
  *             PlacementGroup in which an Amazon EC2 instance runs.
  *             Placement groups are primarily used for launching High
  *             Performance Computing instances in the same group to
  *             ensure fast connection speeds.
- *         * +kernelId+ - (<tt>String</tt>) Specifies the ID of the
+ *         * +KernelId+ - (<tt>String</tt>) Specifies the ID of the
  *           kernel to select.
- *         * +ramdiskId+ - (<tt>String</tt>) Specifies the ID of the RAM
+ *         * +RamdiskId+ - (<tt>String</tt>) Specifies the ID of the RAM
  *           disk to select. Some kernels require additional drivers at
  *           launch. Check the kernel requirements for information on
  *           whether or not you need to specify a RAM disk and search for
  *           the kernel ID.
- *         * +blockDeviceMappings+ - (<tt>Array<Object></tt>) Specifies
+ *         * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) Specifies
  *           how block devices are exposed to the instance. Each mapping
  *           is made up of a virtualName and a deviceName.
  *           * +VirtualName+ - (<tt>String</tt>) Specifies the virtual
  *             device name.
  *           * +DeviceName+ - (<tt>String</tt>) Specifies the device name
  *             (e.g., /dev/sdh).
- *           * +ebs+ - (<tt>Object</tt>) Specifies parameters used to
+ *           * +Ebs+ - (<tt>Object</tt>) Specifies parameters used to
  *             automatically setup Amazon EBS volumes when the instance
  *             is launched.
- *             * +snapshotId+ - (<tt>String</tt>) The ID of the snapshot
+ *             * +SnapshotId+ - (<tt>String</tt>) The ID of the snapshot
  *               from which the volume will be created.
- *             * +volumeSize+ - (<tt>Integer</tt>) The size of the
+ *             * +VolumeSize+ - (<tt>Integer</tt>) The size of the
  *               volume, in gigabytes.
- *             * +deleteOnTermination+ - (<tt>Boolean</tt>) Specifies
+ *             * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies
  *               whether the Amazon EBS volume is deleted on instance
  *               termination.
- *             * +volumeType+ - (<tt>String</tt>)
- *             * +iops+ - (<tt>Integer</tt>)
- *           * +noDevice+ - (<tt>String</tt>) Specifies the device name
+ *             * +VolumeType+ - (<tt>String</tt>)
+ *             * +Iops+ - (<tt>Integer</tt>)
+ *           * +NoDevice+ - (<tt>String</tt>) Specifies the device name
  *             to suppress during instance launch.
- *         * +monitoringEnabled+ - (<tt>Boolean</tt>) Enables monitoring
+ *         * +MonitoringEnabled+ - (<tt>Boolean</tt>) Enables monitoring
  *           for the instance.
- *         * +subnetId+ - (<tt>String</tt>) Specifies the Amazon VPC
+ *         * +SubnetId+ - (<tt>String</tt>) Specifies the Amazon VPC
  *           subnet ID within which to launch the instance(s) for Amazon
  *           Virtual Private Cloud.
- *         * +networkInterfaces+ - (<tt>Array<Object></tt>)
- *           * +networkInterfaceId+ - (<tt>String</tt>)
- *           * +deviceIndex+ - (<tt>Integer</tt>)
- *           * +subnetId+ - (<tt>String</tt>)
- *           * +description+ - (<tt>String</tt>)
- *           * +privateIpAddress+ - (<tt>String</tt>)
- *           * +groups+ - (<tt>Array<String></tt>)
- *           * +deleteOnTermination+ - (<tt>Boolean</tt>)
- *           * +privateIpAddresses+ - (<tt>Array<Object></tt>)
- *             * +privateIpAddress+ - (<tt>String</tt>)
- *             * +primary+ - (<tt>Boolean</tt>)
- *           * +secondaryPrivateIpAddressCount+ - (<tt>Integer</tt>)
- *         * +iamInstanceProfile+ - (<tt>Object</tt>)
- *           * +arn+ - (<tt>String</tt>)
- *           * +name+ - (<tt>String</tt>)
- *         * +ebsOptimized+ - (<tt>Boolean</tt>)
- *       * +instanceId+ - (<tt>String</tt>)
- *       * +createTime+ - (<tt>Date</tt>)
- *       * +productDescription+ - (<tt>String</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for this spot
+ *         * +NetworkInterfaces+ - (<tt>Array<Object></tt>)
+ *           * +NetworkInterfaceId+ - (<tt>String</tt>)
+ *           * +DeviceIndex+ - (<tt>Integer</tt>)
+ *           * +SubnetId+ - (<tt>String</tt>)
+ *           * +Description+ - (<tt>String</tt>)
+ *           * +PrivateIpAddress+ - (<tt>String</tt>)
+ *           * +Groups+ - (<tt>Array<String></tt>)
+ *           * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *           * +PrivateIpAddresses+ - (<tt>Array<Object></tt>)
+ *             * +PrivateIpAddress+ - (<tt>String</tt>)
+ *             * +Primary+ - (<tt>Boolean</tt>)
+ *           * +SecondaryPrivateIpAddressCount+ - (<tt>Integer</tt>)
+ *         * +IamInstanceProfile+ - (<tt>Object</tt>)
+ *           * +Arn+ - (<tt>String</tt>)
+ *           * +Name+ - (<tt>String</tt>)
+ *         * +EbsOptimized+ - (<tt>Boolean</tt>)
+ *       * +InstanceId+ - (<tt>String</tt>)
+ *       * +CreateTime+ - (<tt>Date</tt>)
+ *       * +ProductDescription+ - (<tt>String</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for this spot
  *         instance request.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
- *       * +launchedAvailabilityZone+ - (<tt>String</tt>) The
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +LaunchedAvailabilityZone+ - (<tt>String</tt>) The
  *         Availability Zone in which the bid is launched.
  *
  * @!method describeSpotPriceHistory(params, options)
  *   Describes the Spot Price history.
  *   @param [Object] params
- *     * +startTime+ - (<tt>Date</tt>) The start date and time of the
+ *     * +StartTime+ - (<tt>Date</tt>) The start date and time of the
  *       Spot Instance price history data.
- *     * +endTime+ - (<tt>Date</tt>) The end date and time of the Spot
+ *     * +EndTime+ - (<tt>Date</tt>) The end date and time of the Spot
  *       Instance price history data.
- *     * +instanceTypes+ - (<tt>Array<String></tt>) Specifies the
+ *     * +InstanceTypes+ - (<tt>Array<String></tt>) Specifies the
  *       instance type to return.
- *     * +productDescriptions+ - (<tt>Array<String></tt>) The description
+ *     * +ProductDescriptions+ - (<tt>Array<String></tt>) The description
  *       of the AMI.
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for SpotPriceHistory. For a complete reference
  *       to the available filter keys for this operation, see the Amazon
  *       EC2 API reference.
  *       * +Name+ - (<tt>String</tt>) Specifies the name of the filter.
  *       * +Values+ - (<tt>Array<String></tt>) Contains one or more
  *         values for the filter.
- *     * +availabilityZone+ - (<tt>String</tt>) Filters the results by
+ *     * +AvailabilityZone+ - (<tt>String</tt>) Filters the results by
  *       availability zone (ex: 'us-east-1a').
- *     * +maxResults+ - (<tt>Integer</tt>) Specifies the number of rows
+ *     * +MaxResults+ - (<tt>Integer</tt>) Specifies the number of rows
  *       to return.
- *     * +nextToken+ - (<tt>String</tt>) Specifies the next set of rows
+ *     * +NextToken+ - (<tt>String</tt>) Specifies the next set of rows
  *       to return.
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +spotPriceHistory+ - (<tt>Array<Object></tt>)
- *       * +instanceType+ - (<tt>String</tt>)
- *       * +productDescription+ - (<tt>String</tt>)
- *       * +spotPrice+ - (<tt>String</tt>)
- *       * +timestamp+ - (<tt>Date</tt>)
- *       * +availabilityZone+ - (<tt>String</tt>)
- *     * +nextToken+ - (<tt>String</tt>) The string marking the next set
+ *     * +SpotPriceHistory+ - (<tt>Array<Object></tt>)
+ *       * +InstanceType+ - (<tt>String</tt>)
+ *       * +ProductDescription+ - (<tt>String</tt>)
+ *       * +SpotPrice+ - (<tt>String</tt>)
+ *       * +Timestamp+ - (<tt>Date</tt>)
+ *       * +AvailabilityZone+ - (<tt>String</tt>)
+ *     * +NextToken+ - (<tt>String</tt>) The string marking the next set
  *       of results returned. Displays empty if there are no more results
  *       to be returned.
  *
@@ -2958,15 +2964,15 @@ AWS.EC2 = inherit({})
  *         number of unused IP addresses in the subnet.
  *       * +AvailabilityZone+ - (<tt>String</tt>) Specifies the
  *         Availability Zone the subnet is in.
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *         Subnet.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method describeTags(params, options)
  *   Describes the tags for the specified resources.
  *   @param [Object] params
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for tags.
  *       * +Name+ - (<tt>String</tt>) Specifies the name of the filter.
  *       * +Values+ - (<tt>Array<String></tt>) Contains one or more
@@ -2975,14 +2981,14 @@ AWS.EC2 = inherit({})
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +tags+ - (<tt>Array<Object></tt>) A list of the tags for the
+ *     * +Tags+ - (<tt>Array<Object></tt>) A list of the tags for the
  *       specified resources.
- *       * +resourceId+ - (<tt>String</tt>) The resource ID for the tag.
- *       * +resourceType+ - (<tt>String</tt>) The type of resource
+ *       * +ResourceId+ - (<tt>String</tt>) The resource ID for the tag.
+ *       * +ResourceType+ - (<tt>String</tt>) The type of resource
  *         identified by the associated resource ID (ex: instance, AMI,
  *         EBS volume, etc).
- *       * +key+ - (<tt>String</tt>) The tag's key.
- *       * +value+ - (<tt>String</tt>) The tag's value.
+ *       * +Key+ - (<tt>String</tt>) The tag's key.
+ *       * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method describeVolumeAttribute(params, options)
  *   Calls the DescribeVolumeAttribute API operation.
@@ -2993,10 +2999,10 @@ AWS.EC2 = inherit({})
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +volumeId+ - (<tt>String</tt>)
- *     * +autoEnableIO+ - (<tt>Object</tt>)
- *       * +value+ - (<tt>Boolean</tt>)
- *     * +productCodes+ - (<tt>Array<Object></tt>)
+ *     * +VolumeId+ - (<tt>String</tt>)
+ *     * +AutoEnableIO+ - (<tt>Object</tt>)
+ *       * +Value+ - (<tt>Boolean</tt>)
+ *     * +ProductCodes+ - (<tt>Array<Object></tt>)
  *       * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an AWS
  *         DevPay product code.
  *       * +ProductCodeType+ - (<tt>String</tt>)
@@ -3005,7 +3011,7 @@ AWS.EC2 = inherit({})
  *   Describes the status of a volume.
  *   @param [Object] params
  *     * +VolumeIds+ - (<tt>Array<String></tt>)
- *     * +filters+ - (<tt>Array<Object></tt>)
+ *     * +Filters+ - (<tt>Array<Object></tt>)
  *       * +Name+ - (<tt>String</tt>) Specifies the name of the filter.
  *       * +Values+ - (<tt>Array<String></tt>) Contains one or more
  *         values for the filter.
@@ -3015,26 +3021,26 @@ AWS.EC2 = inherit({})
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +volumeStatuses+ - (<tt>Array<Object></tt>)
- *       * +volumeId+ - (<tt>String</tt>)
- *       * +availabilityZone+ - (<tt>String</tt>)
- *       * +volumeStatus+ - (<tt>Object</tt>)
- *         * +status+ - (<tt>String</tt>)
- *         * +details+ - (<tt>Array<Object></tt>)
- *           * +name+ - (<tt>String</tt>)
- *           * +status+ - (<tt>String</tt>)
- *       * +events+ - (<tt>Array<Object></tt>)
- *         * +eventType+ - (<tt>String</tt>)
- *         * +description+ - (<tt>String</tt>)
- *         * +notBefore+ - (<tt>Date</tt>)
- *         * +notAfter+ - (<tt>Date</tt>)
- *         * +eventId+ - (<tt>String</tt>)
- *       * +actions+ - (<tt>Array<Object></tt>)
- *         * +code+ - (<tt>String</tt>)
- *         * +description+ - (<tt>String</tt>)
- *         * +eventType+ - (<tt>String</tt>)
- *         * +eventId+ - (<tt>String</tt>)
- *     * +nextToken+ - (<tt>String</tt>)
+ *     * +VolumeStatuses+ - (<tt>Array<Object></tt>)
+ *       * +VolumeId+ - (<tt>String</tt>)
+ *       * +AvailabilityZone+ - (<tt>String</tt>)
+ *       * +VolumeStatus+ - (<tt>Object</tt>)
+ *         * +Status+ - (<tt>String</tt>)
+ *         * +Details+ - (<tt>Array<Object></tt>)
+ *           * +Name+ - (<tt>String</tt>)
+ *           * +Status+ - (<tt>String</tt>)
+ *       * +Events+ - (<tt>Array<Object></tt>)
+ *         * +EventType+ - (<tt>String</tt>)
+ *         * +Description+ - (<tt>String</tt>)
+ *         * +NotBefore+ - (<tt>Date</tt>)
+ *         * +NotAfter+ - (<tt>Date</tt>)
+ *         * +EventId+ - (<tt>String</tt>)
+ *       * +Actions+ - (<tt>Array<Object></tt>)
+ *         * +Code+ - (<tt>String</tt>)
+ *         * +Description+ - (<tt>String</tt>)
+ *         * +EventType+ - (<tt>String</tt>)
+ *         * +EventId+ - (<tt>String</tt>)
+ *     * +NextToken+ - (<tt>String</tt>)
  *
  * @!method describeVolumes(params, options)
  *   Describes the status of the indicated volume or, in lieu of any
@@ -3043,7 +3049,7 @@ AWS.EC2 = inherit({})
  *   @param [Object] params
  *     * +VolumeIds+ - (<tt>Array<String></tt>) The optional list of EBS
  *       volumes to describe.
- *     * +filters+ - (<tt>Array<Object></tt>) A list of filters used to
+ *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for Volumes. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
@@ -3076,13 +3082,13 @@ AWS.EC2 = inherit({})
  *         * +State+ - (<tt>String</tt>)
  *         * +AttachTime+ - (<tt>Date</tt>) Timestamp when this
  *           attachment initiated.
- *         * +deleteOnTermination+ - (<tt>Boolean</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *         * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *         Volume.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
- *       * +volumeType+ - (<tt>String</tt>)
- *       * +iops+ - (<tt>Integer</tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +VolumeType+ - (<tt>String</tt>)
+ *       * +Iops+ - (<tt>Integer</tt>)
  *
  * @!method describeVpcs(params, options)
  *   Gives you information about your VPCs. You can filter the results to
@@ -3111,10 +3117,10 @@ AWS.EC2 = inherit({})
  *       * +DhcpOptionsId+ - (<tt>String</tt>) Specifies the ID of the
  *         set of DHCP options associated with the VPC. Contains a value
  *         of default if the default options are associated with the VPC.
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the VPC.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
- *       * +instanceTenancy+ - (<tt>String</tt>) The allowed tenancy of
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the VPC.
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +InstanceTenancy+ - (<tt>String</tt>) The allowed tenancy of
  *         instances launched into the VPC.
  *
  * @!method describeVpnConnections(params, options)
@@ -3148,22 +3154,22 @@ AWS.EC2 = inherit({})
  *         customer gateway at the end of the VPN connection.
  *       * +VpnGatewayId+ - (<tt>String</tt>) Specfies the ID of the VPN
  *         gateway at the VPC end of the VPN connection.
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *         VpnConnection.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
- *       * +vgwTelemetry+ - (<tt>Array<Object></tt>)
- *         * +outsideIpAddress+ - (<tt>String</tt>)
- *         * +status+ - (<tt>String</tt>)
- *         * +lastStatusChange+ - (<tt>Date</tt>)
- *         * +statusMessage+ - (<tt>String</tt>)
- *         * +acceptedRouteCount+ - (<tt>Integer</tt>)
- *       * +options+ - (<tt>Object</tt>)
- *         * +staticRoutesOnly+ - (<tt>Boolean</tt>)
- *       * +routes+ - (<tt>Array<Object></tt>)
- *         * +destinationCidrBlock+ - (<tt>String</tt>)
- *         * +source+ - (<tt>String</tt>)
- *         * +state+ - (<tt>String</tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +VgwTelemetry+ - (<tt>Array<Object></tt>)
+ *         * +OutsideIpAddress+ - (<tt>String</tt>)
+ *         * +Status+ - (<tt>String</tt>)
+ *         * +LastStatusChange+ - (<tt>Date</tt>)
+ *         * +StatusMessage+ - (<tt>String</tt>)
+ *         * +AcceptedRouteCount+ - (<tt>Integer</tt>)
+ *       * +Options+ - (<tt>Object</tt>)
+ *         * +StaticRoutesOnly+ - (<tt>Boolean</tt>)
+ *       * +Routes+ - (<tt>Array<Object></tt>)
+ *         * +DestinationCidrBlock+ - (<tt>String</tt>)
+ *         * +Source+ - (<tt>String</tt>)
+ *         * +State+ - (<tt>String</tt>)
  *
  * @!method describeVpnGateways(params, options)
  *   Gives you information about your VPN gateways. You can filter the
@@ -3199,10 +3205,10 @@ AWS.EC2 = inherit({})
  *         information about the VPCs attached to the VPN gateway.
  *         * +VpcId+ - (<tt>String</tt>)
  *         * +State+ - (<tt>String</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *         VpnGateway.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method detachInternetGateway(params, options)
  *   Detaches an Internet gateway from a VPC, disabling connectivity
@@ -3211,17 +3217,17 @@ AWS.EC2 = inherit({})
  *   about your VPC and Internet gateway, go to Amazon Virtual Private
  *   Cloud User Guide.
  *   @param [Object] params
- *     * +internetGatewayId+ - (*required*, <tt>String</tt>) The ID of
+ *     * +InternetGatewayId+ - (*required*, <tt>String</tt>) The ID of
  *       the Internet gateway to detach.
- *     * +vpcId+ - (*required*, <tt>String</tt>) The ID of the VPC.
+ *     * +VpcId+ - (*required*, <tt>String</tt>) The ID of the VPC.
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
  * @!method detachNetworkInterface(params, options)
  *   Calls the DetachNetworkInterface API operation.
  *   @param [Object] params
- *     * +attachmentId+ - (*required*, <tt>String</tt>)
- *     * +force+ - (<tt>Boolean</tt>)
+ *     * +AttachmentId+ - (*required*, <tt>String</tt>)
+ *     * +Force+ - (<tt>Boolean</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
@@ -3251,7 +3257,7 @@ AWS.EC2 = inherit({})
  *       * +State+ - (<tt>String</tt>)
  *       * +AttachTime+ - (<tt>Date</tt>) Timestamp when this attachment
  *         initiated.
- *       * +deleteOnTermination+ - (<tt>Boolean</tt>)
+ *       * +DeleteOnTermination+ - (<tt>Boolean</tt>)
  *
  * @!method detachVpnGateway(params, options)
  *   Detaches a VPN gateway from a VPC. You do this if you're planning to
@@ -3290,7 +3296,7 @@ AWS.EC2 = inherit({})
  * @!method disassociateRouteTable(params, options)
  *   Disassociates a subnet from a route table.
  *   @param [Object] params
- *     * +associationId+ - (*required*, <tt>String</tt>) The association
+ *     * +AssociationId+ - (*required*, <tt>String</tt>) The association
  *       ID representing the current association between the route table
  *       and subnet.
  *   @param [Object] options
@@ -3307,7 +3313,7 @@ AWS.EC2 = inherit({})
  * @!method enableVolumeIO(params, options)
  *   Enable IO on the volume after an event has occured.
  *   @param [Object] params
- *     * +volumeId+ - (*required*, <tt>String</tt>)
+ *     * +VolumeId+ - (*required*, <tt>String</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
@@ -3347,174 +3353,174 @@ AWS.EC2 = inherit({})
  * @!method importInstance(params, options)
  *   Calls the ImportInstance API operation.
  *   @param [Object] params
- *     * +description+ - (<tt>String</tt>)
- *     * +launchSpecification+ - (<tt>Object</tt>)
- *       * +architecture+ - (<tt>String</tt>)
- *       * +securityGroups+ - (<tt>Array<String></tt>)
- *       * +additionalInfo+ - (<tt>String</tt>)
- *       * +userData+ - (<tt>String</tt>)
- *       * +instanceType+ - (<tt>String</tt>)
- *       * +placement+ - (<tt>Object</tt>)
+ *     * +Description+ - (<tt>String</tt>)
+ *     * +LaunchSpecification+ - (<tt>Object</tt>)
+ *       * +Architecture+ - (<tt>String</tt>)
+ *       * +SecurityGroups+ - (<tt>Array<String></tt>)
+ *       * +AdditionalInfo+ - (<tt>String</tt>)
+ *       * +UserData+ - (<tt>String</tt>)
+ *       * +InstanceType+ - (<tt>String</tt>)
+ *       * +Placement+ - (<tt>Object</tt>)
  *         * +AvailabilityZone+ - (<tt>String</tt>) The availability zone
  *           in which an Amazon EC2 instance runs.
- *         * +groupName+ - (<tt>String</tt>) The name of the
+ *         * +GroupName+ - (<tt>String</tt>) The name of the
  *           PlacementGroup in which an Amazon EC2 instance runs.
  *           Placement groups are primarily used for launching High
  *           Performance Computing instances in the same group to ensure
  *           fast connection speeds.
- *         * +tenancy+ - (<tt>String</tt>) The allowed tenancy of
+ *         * +Tenancy+ - (<tt>String</tt>) The allowed tenancy of
  *           instances launched into the VPC. A value of default means
  *           instances can be launched with any tenancy; a value of
  *           dedicated means all instances launched into the VPC will be
  *           launched as dedicated tenancy regardless of the tenancy
  *           assigned to the instance at launch.
- *       * +blockDeviceMappings+ - (<tt>Array<Object></tt>)
+ *       * +BlockDeviceMappings+ - (<tt>Array<Object></tt>)
  *         * +VirtualName+ - (<tt>String</tt>) Specifies the virtual
  *           device name.
  *         * +DeviceName+ - (<tt>String</tt>) Specifies the device name
  *           (e.g., /dev/sdh).
- *         * +ebs+ - (<tt>Object</tt>) Specifies parameters used to
+ *         * +Ebs+ - (<tt>Object</tt>) Specifies parameters used to
  *           automatically setup Amazon EBS volumes when the instance is
  *           launched.
- *           * +snapshotId+ - (<tt>String</tt>) The ID of the snapshot
+ *           * +SnapshotId+ - (<tt>String</tt>) The ID of the snapshot
  *             from which the volume will be created.
- *           * +volumeSize+ - (<tt>Integer</tt>) The size of the volume,
+ *           * +VolumeSize+ - (<tt>Integer</tt>) The size of the volume,
  *             in gigabytes.
- *           * +deleteOnTermination+ - (<tt>Boolean</tt>) Specifies
+ *           * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies
  *             whether the Amazon EBS volume is deleted on instance
  *             termination.
- *           * +volumeType+ - (<tt>String</tt>)
- *           * +iops+ - (<tt>Integer</tt>)
- *         * +noDevice+ - (<tt>String</tt>) Specifies the device name to
+ *           * +VolumeType+ - (<tt>String</tt>)
+ *           * +Iops+ - (<tt>Integer</tt>)
+ *         * +NoDevice+ - (<tt>String</tt>) Specifies the device name to
  *           suppress during instance launch.
- *       * +monitoring+ - (<tt>Boolean</tt>)
- *       * +subnetId+ - (<tt>String</tt>)
- *       * +disableApiTermination+ - (<tt>Boolean</tt>)
- *       * +instanceInitiatedShutdownBehavior+ - (<tt>String</tt>)
- *       * +privateIpAddress+ - (<tt>String</tt>)
- *     * +diskImages+ - (<tt>Array<Object></tt>)
+ *       * +Monitoring+ - (<tt>Boolean</tt>)
+ *       * +SubnetId+ - (<tt>String</tt>)
+ *       * +DisableApiTermination+ - (<tt>Boolean</tt>)
+ *       * +InstanceInitiatedShutdownBehavior+ - (<tt>String</tt>)
+ *       * +PrivateIpAddress+ - (<tt>String</tt>)
+ *     * +DiskImages+ - (<tt>Array<Object></tt>)
  *       * +Image+ - (<tt>Object</tt>)
- *         * +format+ - (*required*, <tt>String</tt>)
- *         * +bytes+ - (*required*, <tt>Integer</tt>)
- *         * +importManifestUrl+ - (*required*, <tt>String</tt>)
+ *         * +Format+ - (*required*, <tt>String</tt>)
+ *         * +Bytes+ - (*required*, <tt>Integer</tt>)
+ *         * +ImportManifestUrl+ - (*required*, <tt>String</tt>)
  *       * +Description+ - (<tt>String</tt>)
  *       * +Volume+ - (<tt>Object</tt>)
- *         * +size+ - (*required*, <tt>Integer</tt>)
- *     * +platform+ - (*required*, <tt>String</tt>)
+ *         * +Size+ - (*required*, <tt>Integer</tt>)
+ *     * +Platform+ - (*required*, <tt>String</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +conversionTask+ - (<tt>Object</tt>)
- *       * +conversionTaskId+ - (<tt>String</tt>)
- *       * +expirationTime+ - (<tt>String</tt>)
- *       * +importInstance+ - (<tt>Object</tt>)
- *         * +volumes+ - (<tt>Array<Object></tt>)
- *           * +bytesConverted+ - (<tt>Integer</tt>)
- *           * +availabilityZone+ - (<tt>String</tt>)
- *           * +image+ - (<tt>Object</tt>)
- *             * +format+ - (<tt>String</tt>)
- *             * +size+ - (<tt>Integer</tt>)
- *             * +importManifestUrl+ - (<tt>String</tt>)
- *             * +checksum+ - (<tt>String</tt>)
- *           * +volume+ - (<tt>Object</tt>)
- *             * +size+ - (<tt>Integer</tt>)
- *             * +id+ - (<tt>String</tt>)
- *           * +status+ - (<tt>String</tt>)
- *           * +statusMessage+ - (<tt>String</tt>)
- *           * +description+ - (<tt>String</tt>)
- *         * +instanceId+ - (<tt>String</tt>)
- *         * +platform+ - (<tt>String</tt>)
- *         * +description+ - (<tt>String</tt>)
- *       * +importVolume+ - (<tt>Object</tt>)
- *         * +bytesConverted+ - (<tt>Integer</tt>)
- *         * +availabilityZone+ - (<tt>String</tt>)
- *         * +description+ - (<tt>String</tt>)
- *         * +image+ - (<tt>Object</tt>)
- *           * +format+ - (<tt>String</tt>)
- *           * +size+ - (<tt>Integer</tt>)
- *           * +importManifestUrl+ - (<tt>String</tt>)
- *           * +checksum+ - (<tt>String</tt>)
- *         * +volume+ - (<tt>Object</tt>)
- *           * +size+ - (<tt>Integer</tt>)
- *           * +id+ - (<tt>String</tt>)
- *       * +state+ - (<tt>String</tt>)
- *       * +statusMessage+ - (<tt>String</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>)
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *     * +ConversionTask+ - (<tt>Object</tt>)
+ *       * +ConversionTaskId+ - (<tt>String</tt>)
+ *       * +ExpirationTime+ - (<tt>String</tt>)
+ *       * +ImportInstance+ - (<tt>Object</tt>)
+ *         * +Volumes+ - (<tt>Array<Object></tt>)
+ *           * +BytesConverted+ - (<tt>Integer</tt>)
+ *           * +AvailabilityZone+ - (<tt>String</tt>)
+ *           * +Image+ - (<tt>Object</tt>)
+ *             * +Format+ - (<tt>String</tt>)
+ *             * +Size+ - (<tt>Integer</tt>)
+ *             * +ImportManifestUrl+ - (<tt>String</tt>)
+ *             * +Checksum+ - (<tt>String</tt>)
+ *           * +Volume+ - (<tt>Object</tt>)
+ *             * +Size+ - (<tt>Integer</tt>)
+ *             * +Id+ - (<tt>String</tt>)
+ *           * +Status+ - (<tt>String</tt>)
+ *           * +StatusMessage+ - (<tt>String</tt>)
+ *           * +Description+ - (<tt>String</tt>)
+ *         * +InstanceId+ - (<tt>String</tt>)
+ *         * +Platform+ - (<tt>String</tt>)
+ *         * +Description+ - (<tt>String</tt>)
+ *       * +ImportVolume+ - (<tt>Object</tt>)
+ *         * +BytesConverted+ - (<tt>Integer</tt>)
+ *         * +AvailabilityZone+ - (<tt>String</tt>)
+ *         * +Description+ - (<tt>String</tt>)
+ *         * +Image+ - (<tt>Object</tt>)
+ *           * +Format+ - (<tt>String</tt>)
+ *           * +Size+ - (<tt>Integer</tt>)
+ *           * +ImportManifestUrl+ - (<tt>String</tt>)
+ *           * +Checksum+ - (<tt>String</tt>)
+ *         * +Volume+ - (<tt>Object</tt>)
+ *           * +Size+ - (<tt>Integer</tt>)
+ *           * +Id+ - (<tt>String</tt>)
+ *       * +State+ - (<tt>String</tt>)
+ *       * +StatusMessage+ - (<tt>String</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method importKeyPair(params, options)
  *   Imports the public key from an RSA key pair created with a
  *   third-party tool. This operation differs from CreateKeyPair as the
  *   private key is never transferred between the caller and AWS servers.
  *   @param [Object] params
- *     * +keyName+ - (*required*, <tt>String</tt>) The unique name for
+ *     * +KeyName+ - (*required*, <tt>String</tt>) The unique name for
  *       the key pair.
- *     * +publicKeyMaterial+ - (*required*, <tt>String</tt>) The public
+ *     * +PublicKeyMaterial+ - (*required*, <tt>String</tt>) The public
  *       key portion of the key pair being imported.
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +keyName+ - (<tt>String</tt>) The specified unique key pair
+ *     * +KeyName+ - (<tt>String</tt>) The specified unique key pair
  *       name.
- *     * +keyFingerprint+ - (<tt>String</tt>) The MD5 public key
+ *     * +KeyFingerprint+ - (<tt>String</tt>) The MD5 public key
  *       fingerprint as specified in section 4 of RFC4716 .
  *
  * @!method importVolume(params, options)
  *   Calls the ImportVolume API operation.
  *   @param [Object] params
- *     * +availabilityZone+ - (<tt>String</tt>)
- *     * +image+ - (<tt>Object</tt>)
- *       * +format+ - (*required*, <tt>String</tt>)
- *       * +bytes+ - (*required*, <tt>Integer</tt>)
- *       * +importManifestUrl+ - (*required*, <tt>String</tt>)
- *     * +description+ - (<tt>String</tt>)
- *     * +volume+ - (<tt>Object</tt>)
- *       * +size+ - (*required*, <tt>Integer</tt>)
+ *     * +AvailabilityZone+ - (<tt>String</tt>)
+ *     * +Image+ - (<tt>Object</tt>)
+ *       * +Format+ - (*required*, <tt>String</tt>)
+ *       * +Bytes+ - (*required*, <tt>Integer</tt>)
+ *       * +ImportManifestUrl+ - (*required*, <tt>String</tt>)
+ *     * +Description+ - (<tt>String</tt>)
+ *     * +Volume+ - (<tt>Object</tt>)
+ *       * +Size+ - (*required*, <tt>Integer</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +conversionTask+ - (<tt>Object</tt>)
- *       * +conversionTaskId+ - (<tt>String</tt>)
- *       * +expirationTime+ - (<tt>String</tt>)
- *       * +importInstance+ - (<tt>Object</tt>)
- *         * +volumes+ - (<tt>Array<Object></tt>)
- *           * +bytesConverted+ - (<tt>Integer</tt>)
- *           * +availabilityZone+ - (<tt>String</tt>)
- *           * +image+ - (<tt>Object</tt>)
- *             * +format+ - (<tt>String</tt>)
- *             * +size+ - (<tt>Integer</tt>)
- *             * +importManifestUrl+ - (<tt>String</tt>)
- *             * +checksum+ - (<tt>String</tt>)
- *           * +volume+ - (<tt>Object</tt>)
- *             * +size+ - (<tt>Integer</tt>)
- *             * +id+ - (<tt>String</tt>)
- *           * +status+ - (<tt>String</tt>)
- *           * +statusMessage+ - (<tt>String</tt>)
- *           * +description+ - (<tt>String</tt>)
- *         * +instanceId+ - (<tt>String</tt>)
- *         * +platform+ - (<tt>String</tt>)
- *         * +description+ - (<tt>String</tt>)
- *       * +importVolume+ - (<tt>Object</tt>)
- *         * +bytesConverted+ - (<tt>Integer</tt>)
- *         * +availabilityZone+ - (<tt>String</tt>)
- *         * +description+ - (<tt>String</tt>)
- *         * +image+ - (<tt>Object</tt>)
- *           * +format+ - (<tt>String</tt>)
- *           * +size+ - (<tt>Integer</tt>)
- *           * +importManifestUrl+ - (<tt>String</tt>)
- *           * +checksum+ - (<tt>String</tt>)
- *         * +volume+ - (<tt>Object</tt>)
- *           * +size+ - (<tt>Integer</tt>)
- *           * +id+ - (<tt>String</tt>)
- *       * +state+ - (<tt>String</tt>)
- *       * +statusMessage+ - (<tt>String</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>)
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
+ *     * +ConversionTask+ - (<tt>Object</tt>)
+ *       * +ConversionTaskId+ - (<tt>String</tt>)
+ *       * +ExpirationTime+ - (<tt>String</tt>)
+ *       * +ImportInstance+ - (<tt>Object</tt>)
+ *         * +Volumes+ - (<tt>Array<Object></tt>)
+ *           * +BytesConverted+ - (<tt>Integer</tt>)
+ *           * +AvailabilityZone+ - (<tt>String</tt>)
+ *           * +Image+ - (<tt>Object</tt>)
+ *             * +Format+ - (<tt>String</tt>)
+ *             * +Size+ - (<tt>Integer</tt>)
+ *             * +ImportManifestUrl+ - (<tt>String</tt>)
+ *             * +Checksum+ - (<tt>String</tt>)
+ *           * +Volume+ - (<tt>Object</tt>)
+ *             * +Size+ - (<tt>Integer</tt>)
+ *             * +Id+ - (<tt>String</tt>)
+ *           * +Status+ - (<tt>String</tt>)
+ *           * +StatusMessage+ - (<tt>String</tt>)
+ *           * +Description+ - (<tt>String</tt>)
+ *         * +InstanceId+ - (<tt>String</tt>)
+ *         * +Platform+ - (<tt>String</tt>)
+ *         * +Description+ - (<tt>String</tt>)
+ *       * +ImportVolume+ - (<tt>Object</tt>)
+ *         * +BytesConverted+ - (<tt>Integer</tt>)
+ *         * +AvailabilityZone+ - (<tt>String</tt>)
+ *         * +Description+ - (<tt>String</tt>)
+ *         * +Image+ - (<tt>Object</tt>)
+ *           * +Format+ - (<tt>String</tt>)
+ *           * +Size+ - (<tt>Integer</tt>)
+ *           * +ImportManifestUrl+ - (<tt>String</tt>)
+ *           * +Checksum+ - (<tt>String</tt>)
+ *         * +Volume+ - (<tt>Object</tt>)
+ *           * +Size+ - (<tt>Integer</tt>)
+ *           * +Id+ - (<tt>String</tt>)
+ *       * +State+ - (<tt>String</tt>)
+ *       * +StatusMessage+ - (<tt>String</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>)
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *
  * @!method modifyImageAttribute(params, options)
  *   The ModifyImageAttribute operation modifies an attribute of an AMI.
@@ -3551,69 +3557,69 @@ AWS.EC2 = inherit({})
  *         * +Group+ - (<tt>String</tt>) The AWS group of the user
  *           involved in this launch permission.
  *     * +Description+ - (<tt>Object</tt>)
- *       * +value+ - (<tt>String</tt>)
+ *       * +Value+ - (<tt>String</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
  * @!method modifyInstanceAttribute(params, options)
  *   Modifies an attribute of an instance.
  *   @param [Object] params
- *     * +instanceId+ - (*required*, <tt>String</tt>) The ID of the
+ *     * +InstanceId+ - (*required*, <tt>String</tt>) The ID of the
  *       instance whose attribute is being modified.
- *     * +attribute+ - (<tt>String</tt>) The name of the attribute being
+ *     * +Attribute+ - (<tt>String</tt>) The name of the attribute being
  *       modified.
- *     * +value+ - (<tt>String</tt>) The new value of the instance
+ *     * +Value+ - (<tt>String</tt>) The new value of the instance
  *       attribute being modified.
- *     * +blockDeviceMappings+ - (<tt>Array<Object></tt>) The new block
+ *     * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) The new block
  *       device mappings for the instance whose attributes are being
  *       modified.
- *       * +deviceName+ - (<tt>String</tt>) The device name (e.g.,
+ *       * +DeviceName+ - (<tt>String</tt>) The device name (e.g.,
  *         /dev/sdh) at which the block device is exposed on the
  *         instance.
- *       * +ebs+ - (<tt>Object</tt>) The EBS instance block device
+ *       * +Ebs+ - (<tt>Object</tt>) The EBS instance block device
  *         specification describing the EBS block device to map to the
  *         specified device name on a running instance.
- *         * +volumeId+ - (<tt>String</tt>) The ID of the EBS volume that
+ *         * +VolumeId+ - (<tt>String</tt>) The ID of the EBS volume that
  *           should be mounted as a block device on an Amazon EC2
  *           instance.
- *         * +deleteOnTermination+ - (<tt>Boolean</tt>) Specifies whether
+ *         * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies whether
  *           the Amazon EBS volume is deleted on instance termination.
- *       * +virtualName+ - (<tt>String</tt>) The virtual device name.
- *       * +noDevice+ - (<tt>String</tt>) When set to the empty string,
+ *       * +VirtualName+ - (<tt>String</tt>) The virtual device name.
+ *       * +NoDevice+ - (<tt>String</tt>) When set to the empty string,
  *         specifies that the device name in this object should not be
  *         mapped to any real device.
  *     * +SourceDestCheck+ - (<tt>Object</tt>)
- *       * +value+ - (<tt>Boolean</tt>)
- *     * +disableApiTermination+ - (<tt>Object</tt>)
- *       * +value+ - (<tt>Boolean</tt>)
- *     * +instanceType+ - (<tt>Object</tt>)
- *       * +value+ - (<tt>String</tt>)
- *     * +kernel+ - (<tt>Object</tt>)
- *       * +value+ - (<tt>String</tt>)
- *     * +ramdisk+ - (<tt>Object</tt>)
- *       * +value+ - (<tt>String</tt>)
- *     * +userData+ - (<tt>Object</tt>)
- *       * +value+ - (<tt>String</tt>)
- *     * +instanceInitiatedShutdownBehavior+ - (<tt>Object</tt>)
- *       * +value+ - (<tt>String</tt>)
- *     * +groups+ - (<tt>Array<String></tt>)
- *     * +ebsOptimized+ - (<tt>Object</tt>)
- *       * +value+ - (<tt>Boolean</tt>)
+ *       * +Value+ - (<tt>Boolean</tt>)
+ *     * +DisableApiTermination+ - (<tt>Object</tt>)
+ *       * +Value+ - (<tt>Boolean</tt>)
+ *     * +InstanceType+ - (<tt>Object</tt>)
+ *       * +Value+ - (<tt>String</tt>)
+ *     * +Kernel+ - (<tt>Object</tt>)
+ *       * +Value+ - (<tt>String</tt>)
+ *     * +Ramdisk+ - (<tt>Object</tt>)
+ *       * +Value+ - (<tt>String</tt>)
+ *     * +UserData+ - (<tt>Object</tt>)
+ *       * +Value+ - (<tt>String</tt>)
+ *     * +InstanceInitiatedShutdownBehavior+ - (<tt>Object</tt>)
+ *       * +Value+ - (<tt>String</tt>)
+ *     * +Groups+ - (<tt>Array<String></tt>)
+ *     * +EbsOptimized+ - (<tt>Object</tt>)
+ *       * +Value+ - (<tt>Boolean</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
  * @!method modifyNetworkInterfaceAttribute(params, options)
  *   Calls the ModifyNetworkInterfaceAttribute API operation.
  *   @param [Object] params
- *     * +networkInterfaceId+ - (*required*, <tt>String</tt>)
- *     * +description+ - (<tt>Object</tt>)
- *       * +value+ - (<tt>String</tt>)
- *     * +sourceDestCheck+ - (<tt>Object</tt>)
- *       * +value+ - (<tt>Boolean</tt>)
- *     * +groups+ - (<tt>Array<String></tt>)
- *     * +attachment+ - (<tt>Object</tt>)
- *       * +attachmentId+ - (<tt>String</tt>)
- *       * +deleteOnTermination+ - (<tt>Boolean</tt>)
+ *     * +NetworkInterfaceId+ - (*required*, <tt>String</tt>)
+ *     * +Description+ - (<tt>Object</tt>)
+ *       * +Value+ - (<tt>String</tt>)
+ *     * +SourceDestCheck+ - (<tt>Object</tt>)
+ *       * +Value+ - (<tt>Boolean</tt>)
+ *     * +Groups+ - (<tt>Array<String></tt>)
+ *     * +Attachment+ - (<tt>Object</tt>)
+ *       * +AttachmentId+ - (<tt>String</tt>)
+ *       * +DeleteOnTermination+ - (<tt>Boolean</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
@@ -3686,9 +3692,9 @@ AWS.EC2 = inherit({})
  *       purchased.
  *     * +InstanceCount+ - (*required*, <tt>Integer</tt>) The number of
  *       Reserved Instances to purchase.
- *     * +limitPrice+ - (<tt>Object</tt>)
- *       * +amount+ - (<tt>Float</tt>)
- *       * +currencyCode+ - (<tt>String</tt>)
+ *     * +LimitPrice+ - (<tt>Object</tt>)
+ *       * +Amount+ - (<tt>Float</tt>)
+ *       * +CurrencyCode+ - (<tt>String</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
@@ -3714,16 +3720,16 @@ AWS.EC2 = inherit({})
  *   information, see RunInstances.
  *   @param [Object] params
  *     * +ImageLocation+ - (<tt>String</tt>)
- *     * +name+ - (<tt>String</tt>) The name to give the new Amazon
+ *     * +Name+ - (<tt>String</tt>) The name to give the new Amazon
  *       Machine Image.
- *     * +description+ - (<tt>String</tt>)
- *     * +architecture+ - (<tt>String</tt>)
- *     * +kernelId+ - (<tt>String</tt>)
- *     * +ramdiskId+ - (<tt>String</tt>) The optional ID of a specific
+ *     * +Description+ - (<tt>String</tt>)
+ *     * +Architecture+ - (<tt>String</tt>)
+ *     * +KernelId+ - (<tt>String</tt>)
+ *     * +RamdiskId+ - (<tt>String</tt>) The optional ID of a specific
  *       ramdisk to register with the new AMI.
- *     * +rootDeviceName+ - (<tt>String</tt>) The root device name (e.g.,
+ *     * +RootDeviceName+ - (<tt>String</tt>) The root device name (e.g.,
  *       /dev/sda1).
- *     * +blockDeviceMappings+ - (<tt>Array<Object></tt>) The block
+ *     * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) The block
  *       device mappings for the new AMI, which specify how different
  *       block devices (ex: EBS volumes and ephemeral drives) will be
  *       exposed on instances launched from the new image.
@@ -3731,18 +3737,18 @@ AWS.EC2 = inherit({})
  *         name.
  *       * +DeviceName+ - (<tt>String</tt>) Specifies the device name
  *         (e.g., /dev/sdh).
- *       * +ebs+ - (<tt>Object</tt>) Specifies parameters used to
+ *       * +Ebs+ - (<tt>Object</tt>) Specifies parameters used to
  *         automatically setup Amazon EBS volumes when the instance is
  *         launched.
- *         * +snapshotId+ - (<tt>String</tt>) The ID of the snapshot from
+ *         * +SnapshotId+ - (<tt>String</tt>) The ID of the snapshot from
  *           which the volume will be created.
- *         * +volumeSize+ - (<tt>Integer</tt>) The size of the volume, in
+ *         * +VolumeSize+ - (<tt>Integer</tt>) The size of the volume, in
  *           gigabytes.
- *         * +deleteOnTermination+ - (<tt>Boolean</tt>) Specifies whether
+ *         * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies whether
  *           the Amazon EBS volume is deleted on instance termination.
- *         * +volumeType+ - (<tt>String</tt>)
- *         * +iops+ - (<tt>Integer</tt>)
- *       * +noDevice+ - (<tt>String</tt>) Specifies the device name to
+ *         * +VolumeType+ - (<tt>String</tt>)
+ *         * +Iops+ - (<tt>Integer</tt>)
+ *       * +NoDevice+ - (<tt>String</tt>) Specifies the device name to
  *         suppress during instance launch.
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
@@ -3768,47 +3774,47 @@ AWS.EC2 = inherit({})
  *   default network ACL. For more information about network ACLs, go to
  *   Network ACLs in the Amazon Virtual Private Cloud User Guide.
  *   @param [Object] params
- *     * +associationId+ - (*required*, <tt>String</tt>) The ID
+ *     * +AssociationId+ - (*required*, <tt>String</tt>) The ID
  *       representing the current association between the original
  *       network ACL and the subnet.
- *     * +networkAclId+ - (*required*, <tt>String</tt>) The ID of the new
+ *     * +NetworkAclId+ - (*required*, <tt>String</tt>) The ID of the new
  *       ACL to associate with the subnet.
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +newAssociationId+ - (<tt>String</tt>)
+ *     * +NewAssociationId+ - (<tt>String</tt>)
  *
  * @!method replaceNetworkAclEntry(params, options)
  *   Replaces an entry (i.e., rule) in a network ACL. For more
  *   information about network ACLs, go to Network ACLs in the Amazon
  *   Virtual Private Cloud User Guide.
  *   @param [Object] params
- *     * +networkAclId+ - (*required*, <tt>String</tt>) ID of the ACL
+ *     * +NetworkAclId+ - (*required*, <tt>String</tt>) ID of the ACL
  *       where the entry will be replaced.
- *     * +ruleNumber+ - (*required*, <tt>Integer</tt>) Rule number of the
+ *     * +RuleNumber+ - (*required*, <tt>Integer</tt>) Rule number of the
  *       entry to replace.
- *     * +protocol+ - (*required*, <tt>String</tt>) IP protocol the rule
+ *     * +Protocol+ - (*required*, <tt>String</tt>) IP protocol the rule
  *       applies to. Valid Values: tcp, udp, icmp or an IP protocol
  *       number.
- *     * +ruleAction+ - (*required*, <tt>String</tt>) Whether to allow or
+ *     * +RuleAction+ - (*required*, <tt>String</tt>) Whether to allow or
  *       deny traffic that matches the rule.
- *     * +egress+ - (*required*, <tt>Boolean</tt>) Whether this rule
+ *     * +Egress+ - (*required*, <tt>Boolean</tt>) Whether this rule
  *       applies to egress traffic from the subnet (true) or ingress
  *       traffic (false).
- *     * +cidrBlock+ - (*required*, <tt>String</tt>) The CIDR range to
+ *     * +CidrBlock+ - (*required*, <tt>String</tt>) The CIDR range to
  *       allow or deny, in CIDR notation (e.g., 172.16.0.0/24).
- *     * +icmpTypeCode+ - (<tt>Object</tt>) ICMP values.
- *       * +type+ - (<tt>Integer</tt>) For the ICMP protocol, the ICMP
+ *     * +IcmpTypeCode+ - (<tt>Object</tt>) ICMP values.
+ *       * +Type+ - (<tt>Integer</tt>) For the ICMP protocol, the ICMP
  *         type. A value of -1 is a wildcard meaning all types. Required
  *         if specifying icmp for the protocol.
- *       * +code+ - (<tt>Integer</tt>) For the ICMP protocol, the ICMP
+ *       * +Code+ - (<tt>Integer</tt>) For the ICMP protocol, the ICMP
  *         code. A value of -1 is a wildcard meaning all codes. Required
  *         if specifying icmp for the protocol.
- *     * +portRange+ - (<tt>Object</tt>) Port ranges.
- *       * +from+ - (<tt>Integer</tt>) The first port in the range.
+ *     * +PortRange+ - (<tt>Object</tt>) Port ranges.
+ *       * +From+ - (<tt>Integer</tt>) The first port in the range.
  *         Required if specifying tcp or udp for the protocol.
- *       * +to+ - (<tt>Integer</tt>) The last port in the range. Required
+ *       * +To+ - (<tt>Integer</tt>) The last port in the range. Required
  *         if specifying tcp or udp for the protocol.
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
@@ -3818,17 +3824,17 @@ AWS.EC2 = inherit({})
  *   information about route tables, go to Route Tables in the Amazon
  *   Virtual Private Cloud User Guide.
  *   @param [Object] params
- *     * +routeTableId+ - (*required*, <tt>String</tt>) The ID of the
+ *     * +RouteTableId+ - (*required*, <tt>String</tt>) The ID of the
  *       route table where the route will be replaced.
- *     * +destinationCidrBlock+ - (*required*, <tt>String</tt>) The CIDR
+ *     * +DestinationCidrBlock+ - (*required*, <tt>String</tt>) The CIDR
  *       address block used for the destination match. For example:
  *       0.0.0.0/0. The value you provide must match the CIDR of an
  *       existing route in the table.
- *     * +gatewayId+ - (<tt>String</tt>) The ID of a VPN or Internet
+ *     * +GatewayId+ - (<tt>String</tt>) The ID of a VPN or Internet
  *       gateway attached to your VPC.
- *     * +instanceId+ - (<tt>String</tt>) The ID of a NAT instance in
+ *     * +InstanceId+ - (<tt>String</tt>) The ID of a NAT instance in
  *       your VPC.
- *     * +networkInterfaceId+ - (<tt>String</tt>)
+ *     * +NetworkInterfaceId+ - (<tt>String</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
@@ -3839,214 +3845,218 @@ AWS.EC2 = inherit({})
  *   tables, go to Route Tables in the Amazon Virtual Private Cloud User
  *   Guide.
  *   @param [Object] params
- *     * +associationId+ - (*required*, <tt>String</tt>) The ID
+ *     * +AssociationId+ - (*required*, <tt>String</tt>) The ID
  *       representing the current association between the original route
  *       table and the subnet.
- *     * +routeTableId+ - (*required*, <tt>String</tt>) The ID of the new
+ *     * +RouteTableId+ - (*required*, <tt>String</tt>) The ID of the new
  *       route table to associate with the subnet.
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +newAssociationId+ - (<tt>String</tt>)
+ *     * +NewAssociationId+ - (<tt>String</tt>)
  *
  * @!method reportInstanceStatus(params, options)
  *   Calls the ReportInstanceStatus API operation.
  *   @param [Object] params
- *     * +instances+ - (<tt>Array<String></tt>)
- *     * +status+ - (<tt>String</tt>)
- *     * +startTime+ - (<tt>Date</tt>)
- *     * +endTime+ - (<tt>Date</tt>)
- *     * +reasonCodes+ - (<tt>Array<String></tt>)
- *     * +description+ - (<tt>String</tt>)
+ *     * +Instances+ - (<tt>Array<String></tt>)
+ *     * +Status+ - (<tt>String</tt>)
+ *     * +StartTime+ - (<tt>Date</tt>)
+ *     * +EndTime+ - (<tt>Date</tt>)
+ *     * +ReasonCodes+ - (<tt>Array<String></tt>)
+ *     * +Description+ - (<tt>String</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
  * @!method requestSpotInstances(params, options)
  *   Creates a Spot Instance request.
  *   @param [Object] params
- *     * +spotPrice+ - (*required*, <tt>String</tt>) Specifies the
+ *     * +SpotPrice+ - (*required*, <tt>String</tt>) Specifies the
  *       maximum hourly price for any Spot Instance launched to fulfill
  *       the request.
- *     * +instanceCount+ - (<tt>Integer</tt>) Specifies the maximum
+ *     * +InstanceCount+ - (<tt>Integer</tt>) Specifies the maximum
  *       number of Spot Instances to launch.
- *     * +type+ - (<tt>String</tt>) Specifies the Spot Instance type.
- *     * +validFrom+ - (<tt>Date</tt>) Defines the start date of the
+ *     * +Type+ - (<tt>String</tt>) Specifies the Spot Instance type.
+ *     * +ValidFrom+ - (<tt>Date</tt>) Defines the start date of the
  *       request.
- *     * +validUntil+ - (<tt>Date</tt>) End date of the request.
- *     * +launchGroup+ - (<tt>String</tt>) Specifies the instance launch
+ *     * +ValidUntil+ - (<tt>Date</tt>) End date of the request.
+ *     * +LaunchGroup+ - (<tt>String</tt>) Specifies the instance launch
  *       group. Launch groups are Spot Instances that launch and
  *       terminate together.
- *     * +availabilityZoneGroup+ - (<tt>String</tt>) Specifies the
+ *     * +AvailabilityZoneGroup+ - (<tt>String</tt>) Specifies the
  *       Availability Zone group.
- *     * +launchSpecification+ - (<tt>Object</tt>) Specifies additional
+ *     * +LaunchSpecification+ - (<tt>Object</tt>) Specifies additional
  *       launch instance information.
- *       * +imageId+ - (<tt>String</tt>) The AMI ID.
- *       * +keyName+ - (<tt>String</tt>) The name of the key pair.
+ *       * +ImageId+ - (<tt>String</tt>) The AMI ID.
+ *       * +KeyName+ - (<tt>String</tt>) The name of the key pair.
  *       * +SecurityGroups+ - (<tt>Array<Object></tt>)
  *         * +GroupName+ - (<tt>String</tt>)
- *         * +groupId+ - (<tt>String</tt>)
- *       * +userData+ - (<tt>String</tt>) Optional data, specific to a
+ *         * +GroupId+ - (<tt>String</tt>)
+ *       * +UserData+ - (<tt>String</tt>) Optional data, specific to a
  *         user's application, to provide in the launch request. All
  *         instances that collectively comprise the launch request have
  *         access to this data. User data is never returned through API
  *         responses.
- *       * +addressingType+ - (<tt>String</tt>) Deprecated.
- *       * +instanceType+ - (<tt>String</tt>) Specifies the instance
+ *       * +AddressingType+ - (<tt>String</tt>) Deprecated.
+ *       * +InstanceType+ - (<tt>String</tt>) Specifies the instance
  *         type.
- *       * +placement+ - (<tt>Object</tt>) Defines a placement item.
- *         * +availabilityZone+ - (<tt>String</tt>) The availability zone
+ *       * +Placement+ - (<tt>Object</tt>) Defines a placement item.
+ *         * +AvailabilityZone+ - (<tt>String</tt>) The availability zone
  *           in which an Amazon EC2 instance runs.
- *         * +groupName+ - (<tt>String</tt>) The name of the
+ *         * +GroupName+ - (<tt>String</tt>) The name of the
  *           PlacementGroup in which an Amazon EC2 instance runs.
  *           Placement groups are primarily used for launching High
  *           Performance Computing instances in the same group to ensure
  *           fast connection speeds.
- *       * +kernelId+ - (<tt>String</tt>) Specifies the ID of the kernel
+ *       * +KernelId+ - (<tt>String</tt>) Specifies the ID of the kernel
  *         to select.
- *       * +ramdiskId+ - (<tt>String</tt>) Specifies the ID of the RAM
+ *       * +RamdiskId+ - (<tt>String</tt>) Specifies the ID of the RAM
  *         disk to select. Some kernels require additional drivers at
  *         launch. Check the kernel requirements for information on
  *         whether or not you need to specify a RAM disk and search for
  *         the kernel ID.
- *       * +blockDeviceMappings+ - (<tt>Array<Object></tt>) Specifies how
+ *       * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) Specifies how
  *         block devices are exposed to the instance. Each mapping is
  *         made up of a virtualName and a deviceName.
  *         * +VirtualName+ - (<tt>String</tt>) Specifies the virtual
  *           device name.
  *         * +DeviceName+ - (<tt>String</tt>) Specifies the device name
  *           (e.g., /dev/sdh).
- *         * +ebs+ - (<tt>Object</tt>) Specifies parameters used to
+ *         * +Ebs+ - (<tt>Object</tt>) Specifies parameters used to
  *           automatically setup Amazon EBS volumes when the instance is
  *           launched.
- *           * +snapshotId+ - (<tt>String</tt>) The ID of the snapshot
+ *           * +SnapshotId+ - (<tt>String</tt>) The ID of the snapshot
  *             from which the volume will be created.
- *           * +volumeSize+ - (<tt>Integer</tt>) The size of the volume,
+ *           * +VolumeSize+ - (<tt>Integer</tt>) The size of the volume,
  *             in gigabytes.
- *           * +deleteOnTermination+ - (<tt>Boolean</tt>) Specifies
+ *           * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies
  *             whether the Amazon EBS volume is deleted on instance
  *             termination.
- *           * +volumeType+ - (<tt>String</tt>)
- *           * +iops+ - (<tt>Integer</tt>)
- *         * +noDevice+ - (<tt>String</tt>) Specifies the device name to
+ *           * +VolumeType+ - (<tt>String</tt>)
+ *           * +Iops+ - (<tt>Integer</tt>)
+ *         * +NoDevice+ - (<tt>String</tt>) Specifies the device name to
  *           suppress during instance launch.
- *       * +monitoringEnabled+ - (<tt>Boolean</tt>) Enables monitoring
+ *       * +MonitoringEnabled+ - (<tt>Boolean</tt>) Enables monitoring
  *         for the instance.
- *       * +subnetId+ - (<tt>String</tt>) Specifies the Amazon VPC subnet
+ *       * +SubnetId+ - (<tt>String</tt>) Specifies the Amazon VPC subnet
  *         ID within which to launch the instance(s) for Amazon Virtual
  *         Private Cloud.
- *       * +networkInterfaces+ - (<tt>Array<Object></tt>)
- *         * +networkInterfaceId+ - (<tt>String</tt>)
- *         * +deviceIndex+ - (<tt>Integer</tt>)
- *         * +subnetId+ - (<tt>String</tt>)
- *         * +description+ - (<tt>String</tt>)
- *         * +privateIpAddress+ - (<tt>String</tt>)
- *         * +groups+ - (<tt>Array<String></tt>)
- *         * +deleteOnTermination+ - (<tt>Boolean</tt>)
- *         * +privateIpAddresses+ - (<tt>Array<Object></tt>)
- *           * +privateIpAddress+ - (*required*, <tt>String</tt>)
- *           * +primary+ - (<tt>Boolean</tt>)
- *         * +secondaryPrivateIpAddressCount+ - (<tt>Integer</tt>)
- *       * +iamInstanceProfile+ - (<tt>Object</tt>)
- *         * +arn+ - (<tt>String</tt>)
- *         * +name+ - (<tt>String</tt>)
- *       * +ebsOptimized+ - (<tt>Boolean</tt>)
+ *       * +NetworkInterfaces+ - (<tt>Array<Object></tt>)
+ *         * +NetworkInterfaceId+ - (<tt>String</tt>)
+ *         * +DeviceIndex+ - (<tt>Integer</tt>)
+ *         * +SubnetId+ - (<tt>String</tt>)
+ *         * +Description+ - (<tt>String</tt>)
+ *         * +PrivateIpAddress+ - (<tt>String</tt>)
+ *         * +Groups+ - (<tt>Array<String></tt>)
+ *         * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *         * +PrivateIpAddresses+ - (<tt>Array<Object></tt>)
+ *           * +PrivateIpAddress+ - (*required*, <tt>String</tt>)
+ *           * +Primary+ - (<tt>Boolean</tt>)
+ *         * +SecondaryPrivateIpAddressCount+ - (<tt>Integer</tt>)
+ *       * +IamInstanceProfile+ - (<tt>Object</tt>)
+ *         * +Arn+ - (<tt>String</tt>)
+ *         * +Name+ - (<tt>String</tt>)
+ *       * +EbsOptimized+ - (<tt>Boolean</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +spotInstanceRequests+ - (<tt>Array<Object></tt>) Contains a
+ *     * +SpotInstanceRequests+ - (<tt>Array<Object></tt>) Contains a
  *       list of Spot Instance requests.
- *       * +spotInstanceRequestId+ - (<tt>String</tt>)
- *       * +spotPrice+ - (<tt>String</tt>)
- *       * +type+ - (<tt>String</tt>)
- *       * +state+ - (<tt>String</tt>)
- *       * +fault+ - (<tt>Object</tt>)
- *         * +code+ - (<tt>String</tt>)
- *         * +message+ - (<tt>String</tt>)
- *       * +validFrom+ - (<tt>Date</tt>)
- *       * +validUntil+ - (<tt>Date</tt>)
- *       * +launchGroup+ - (<tt>String</tt>)
- *       * +availabilityZoneGroup+ - (<tt>String</tt>)
- *       * +launchSpecification+ - (<tt>Object</tt>)
- *         * +imageId+ - (<tt>String</tt>) The AMI ID.
- *         * +keyName+ - (<tt>String</tt>) The name of the key pair.
+ *       * +SpotInstanceRequestId+ - (<tt>String</tt>)
+ *       * +SpotPrice+ - (<tt>String</tt>)
+ *       * +Type+ - (<tt>String</tt>)
+ *       * +State+ - (<tt>String</tt>)
+ *       * +Fault+ - (<tt>Object</tt>)
+ *         * +Code+ - (<tt>String</tt>)
+ *         * +Message+ - (<tt>String</tt>)
+ *       * +Status+ - (<tt>Object</tt>)
+ *         * +Code+ - (<tt>String</tt>)
+ *         * +UpdateTime+ - (<tt>Date</tt>)
+ *         * +Message+ - (<tt>String</tt>)
+ *       * +ValidFrom+ - (<tt>Date</tt>)
+ *       * +ValidUntil+ - (<tt>Date</tt>)
+ *       * +LaunchGroup+ - (<tt>String</tt>)
+ *       * +AvailabilityZoneGroup+ - (<tt>String</tt>)
+ *       * +LaunchSpecification+ - (<tt>Object</tt>)
+ *         * +ImageId+ - (<tt>String</tt>) The AMI ID.
+ *         * +KeyName+ - (<tt>String</tt>) The name of the key pair.
  *         * +SecurityGroups+ - (<tt>Array<Object></tt>)
  *           * +GroupName+ - (<tt>String</tt>)
- *           * +groupId+ - (<tt>String</tt>)
- *         * +userData+ - (<tt>String</tt>) Optional data, specific to a
+ *           * +GroupId+ - (<tt>String</tt>)
+ *         * +UserData+ - (<tt>String</tt>) Optional data, specific to a
  *           user's application, to provide in the launch request. All
  *           instances that collectively comprise the launch request have
  *           access to this data. User data is never returned through API
  *           responses.
- *         * +addressingType+ - (<tt>String</tt>) Deprecated.
- *         * +instanceType+ - (<tt>String</tt>) Specifies the instance
+ *         * +AddressingType+ - (<tt>String</tt>) Deprecated.
+ *         * +InstanceType+ - (<tt>String</tt>) Specifies the instance
  *           type.
- *         * +placement+ - (<tt>Object</tt>) Defines a placement item.
- *           * +availabilityZone+ - (<tt>String</tt>) The availability
+ *         * +Placement+ - (<tt>Object</tt>) Defines a placement item.
+ *           * +AvailabilityZone+ - (<tt>String</tt>) The availability
  *             zone in which an Amazon EC2 instance runs.
- *           * +groupName+ - (<tt>String</tt>) The name of the
+ *           * +GroupName+ - (<tt>String</tt>) The name of the
  *             PlacementGroup in which an Amazon EC2 instance runs.
  *             Placement groups are primarily used for launching High
  *             Performance Computing instances in the same group to
  *             ensure fast connection speeds.
- *         * +kernelId+ - (<tt>String</tt>) Specifies the ID of the
+ *         * +KernelId+ - (<tt>String</tt>) Specifies the ID of the
  *           kernel to select.
- *         * +ramdiskId+ - (<tt>String</tt>) Specifies the ID of the RAM
+ *         * +RamdiskId+ - (<tt>String</tt>) Specifies the ID of the RAM
  *           disk to select. Some kernels require additional drivers at
  *           launch. Check the kernel requirements for information on
  *           whether or not you need to specify a RAM disk and search for
  *           the kernel ID.
- *         * +blockDeviceMappings+ - (<tt>Array<Object></tt>) Specifies
+ *         * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) Specifies
  *           how block devices are exposed to the instance. Each mapping
  *           is made up of a virtualName and a deviceName.
  *           * +VirtualName+ - (<tt>String</tt>) Specifies the virtual
  *             device name.
  *           * +DeviceName+ - (<tt>String</tt>) Specifies the device name
  *             (e.g., /dev/sdh).
- *           * +ebs+ - (<tt>Object</tt>) Specifies parameters used to
+ *           * +Ebs+ - (<tt>Object</tt>) Specifies parameters used to
  *             automatically setup Amazon EBS volumes when the instance
  *             is launched.
- *             * +snapshotId+ - (<tt>String</tt>) The ID of the snapshot
+ *             * +SnapshotId+ - (<tt>String</tt>) The ID of the snapshot
  *               from which the volume will be created.
- *             * +volumeSize+ - (<tt>Integer</tt>) The size of the
+ *             * +VolumeSize+ - (<tt>Integer</tt>) The size of the
  *               volume, in gigabytes.
- *             * +deleteOnTermination+ - (<tt>Boolean</tt>) Specifies
+ *             * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies
  *               whether the Amazon EBS volume is deleted on instance
  *               termination.
- *             * +volumeType+ - (<tt>String</tt>)
- *             * +iops+ - (<tt>Integer</tt>)
- *           * +noDevice+ - (<tt>String</tt>) Specifies the device name
+ *             * +VolumeType+ - (<tt>String</tt>)
+ *             * +Iops+ - (<tt>Integer</tt>)
+ *           * +NoDevice+ - (<tt>String</tt>) Specifies the device name
  *             to suppress during instance launch.
- *         * +monitoringEnabled+ - (<tt>Boolean</tt>) Enables monitoring
+ *         * +MonitoringEnabled+ - (<tt>Boolean</tt>) Enables monitoring
  *           for the instance.
- *         * +subnetId+ - (<tt>String</tt>) Specifies the Amazon VPC
+ *         * +SubnetId+ - (<tt>String</tt>) Specifies the Amazon VPC
  *           subnet ID within which to launch the instance(s) for Amazon
  *           Virtual Private Cloud.
- *         * +networkInterfaces+ - (<tt>Array<Object></tt>)
- *           * +networkInterfaceId+ - (<tt>String</tt>)
- *           * +deviceIndex+ - (<tt>Integer</tt>)
- *           * +subnetId+ - (<tt>String</tt>)
- *           * +description+ - (<tt>String</tt>)
- *           * +privateIpAddress+ - (<tt>String</tt>)
- *           * +groups+ - (<tt>Array<String></tt>)
- *           * +deleteOnTermination+ - (<tt>Boolean</tt>)
- *           * +privateIpAddresses+ - (<tt>Array<Object></tt>)
- *             * +privateIpAddress+ - (<tt>String</tt>)
- *             * +primary+ - (<tt>Boolean</tt>)
- *           * +secondaryPrivateIpAddressCount+ - (<tt>Integer</tt>)
- *         * +iamInstanceProfile+ - (<tt>Object</tt>)
- *           * +arn+ - (<tt>String</tt>)
- *           * +name+ - (<tt>String</tt>)
- *         * +ebsOptimized+ - (<tt>Boolean</tt>)
- *       * +instanceId+ - (<tt>String</tt>)
- *       * +createTime+ - (<tt>Date</tt>)
- *       * +productDescription+ - (<tt>String</tt>)
- *       * +tags+ - (<tt>Array<Object></tt>) A list of tags for this spot
+ *         * +NetworkInterfaces+ - (<tt>Array<Object></tt>)
+ *           * +NetworkInterfaceId+ - (<tt>String</tt>)
+ *           * +DeviceIndex+ - (<tt>Integer</tt>)
+ *           * +SubnetId+ - (<tt>String</tt>)
+ *           * +Description+ - (<tt>String</tt>)
+ *           * +PrivateIpAddress+ - (<tt>String</tt>)
+ *           * +Groups+ - (<tt>Array<String></tt>)
+ *           * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *           * +PrivateIpAddresses+ - (<tt>Array<Object></tt>)
+ *             * +PrivateIpAddress+ - (<tt>String</tt>)
+ *             * +Primary+ - (<tt>Boolean</tt>)
+ *           * +SecondaryPrivateIpAddressCount+ - (<tt>Integer</tt>)
+ *         * +IamInstanceProfile+ - (<tt>Object</tt>)
+ *           * +Arn+ - (<tt>String</tt>)
+ *           * +Name+ - (<tt>String</tt>)
+ *         * +EbsOptimized+ - (<tt>Boolean</tt>)
+ *       * +InstanceId+ - (<tt>String</tt>)
+ *       * +CreateTime+ - (<tt>Date</tt>)
+ *       * +ProductDescription+ - (<tt>String</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for this spot
  *         instance request.
- *         * +key+ - (<tt>String</tt>) The tag's key.
- *         * +value+ - (<tt>String</tt>) The tag's value.
- *       * +launchedAvailabilityZone+ - (<tt>String</tt>) The
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +LaunchedAvailabilityZone+ - (<tt>String</tt>) The
  *         Availability Zone in which the bid is launched.
  *
  * @!method resetImageAttribute(params, options)
@@ -4063,9 +4073,9 @@ AWS.EC2 = inherit({})
  * @!method resetInstanceAttribute(params, options)
  *   Resets an attribute of an instance to its default value.
  *   @param [Object] params
- *     * +instanceId+ - (*required*, <tt>String</tt>) The ID of the
+ *     * +InstanceId+ - (*required*, <tt>String</tt>) The ID of the
  *       Amazon EC2 instance whose attribute is being reset.
- *     * +attribute+ - (*required*, <tt>String</tt>) The name of the
+ *     * +Attribute+ - (*required*, <tt>String</tt>) The name of the
  *       attribute being reset.
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
@@ -4073,8 +4083,8 @@ AWS.EC2 = inherit({})
  * @!method resetNetworkInterfaceAttribute(params, options)
  *   Calls the ResetNetworkInterfaceAttribute API operation.
  *   @param [Object] params
- *     * +networkInterfaceId+ - (*required*, <tt>String</tt>)
- *     * +sourceDestCheck+ - (<tt>String</tt>)
+ *     * +NetworkInterfaceId+ - (*required*, <tt>String</tt>)
+ *     * +SourceDestCheck+ - (<tt>String</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
@@ -4094,15 +4104,15 @@ AWS.EC2 = inherit({})
  *   Private Cloud and VPC security groups, go to the Amazon Virtual
  *   Private Cloud User Guide.
  *   @param [Object] params
- *     * +groupId+ - (*required*, <tt>String</tt>) ID of the VPC security
+ *     * +GroupId+ - (*required*, <tt>String</tt>) ID of the VPC security
  *       group to modify.
- *     * +sourceSecurityGroupName+ - (<tt>String</tt>) Deprecated.
- *     * +sourceSecurityGroupOwnerId+ - (<tt>String</tt>) Deprecated.
- *     * +ipProtocol+ - (<tt>String</tt>) Deprecated.
- *     * +fromPort+ - (<tt>Integer</tt>) Deprecated.
- *     * +toPort+ - (<tt>Integer</tt>) Deprecated.
- *     * +cidrIp+ - (<tt>String</tt>) Deprecated.
- *     * +ipPermissions+ - (<tt>Array<Object></tt>) List of IP
+ *     * +SourceSecurityGroupName+ - (<tt>String</tt>) Deprecated.
+ *     * +SourceSecurityGroupOwnerId+ - (<tt>String</tt>) Deprecated.
+ *     * +IpProtocol+ - (<tt>String</tt>) Deprecated.
+ *     * +FromPort+ - (<tt>Integer</tt>) Deprecated.
+ *     * +ToPort+ - (<tt>Integer</tt>) Deprecated.
+ *     * +CidrIp+ - (<tt>String</tt>) Deprecated.
+ *     * +IpPermissions+ - (<tt>Array<Object></tt>) List of IP
  *       permissions to authorize on the specified security group.
  *       Specifying permissions through IP permissions is the preferred
  *       way of authorizing permissions since it offers more flexibility
@@ -4205,11 +4215,11 @@ AWS.EC2 = inherit({})
  *       constraints (Availability Zones) for launching the instances.
  *       * +AvailabilityZone+ - (<tt>String</tt>) The availability zone
  *         in which an Amazon EC2 instance runs.
- *       * +groupName+ - (<tt>String</tt>) The name of the PlacementGroup
+ *       * +GroupName+ - (<tt>String</tt>) The name of the PlacementGroup
  *         in which an Amazon EC2 instance runs. Placement groups are
  *         primarily used for launching High Performance Computing
  *         instances in the same group to ensure fast connection speeds.
- *       * +tenancy+ - (<tt>String</tt>) The allowed tenancy of instances
+ *       * +Tenancy+ - (<tt>String</tt>) The allowed tenancy of instances
  *         launched into the VPC. A value of default means instances can
  *         be launched with any tenancy; a value of dedicated means all
  *         instances launched into the VPC will be launched as dedicated
@@ -4230,62 +4240,62 @@ AWS.EC2 = inherit({})
  *         name.
  *       * +DeviceName+ - (<tt>String</tt>) Specifies the device name
  *         (e.g., /dev/sdh).
- *       * +ebs+ - (<tt>Object</tt>) Specifies parameters used to
+ *       * +Ebs+ - (<tt>Object</tt>) Specifies parameters used to
  *         automatically setup Amazon EBS volumes when the instance is
  *         launched.
- *         * +snapshotId+ - (<tt>String</tt>) The ID of the snapshot from
+ *         * +SnapshotId+ - (<tt>String</tt>) The ID of the snapshot from
  *           which the volume will be created.
- *         * +volumeSize+ - (<tt>Integer</tt>) The size of the volume, in
+ *         * +VolumeSize+ - (<tt>Integer</tt>) The size of the volume, in
  *           gigabytes.
- *         * +deleteOnTermination+ - (<tt>Boolean</tt>) Specifies whether
+ *         * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies whether
  *           the Amazon EBS volume is deleted on instance termination.
- *         * +volumeType+ - (<tt>String</tt>)
- *         * +iops+ - (<tt>Integer</tt>)
- *       * +noDevice+ - (<tt>String</tt>) Specifies the device name to
+ *         * +VolumeType+ - (<tt>String</tt>)
+ *         * +Iops+ - (<tt>Integer</tt>)
+ *       * +NoDevice+ - (<tt>String</tt>) Specifies the device name to
  *         suppress during instance launch.
  *     * +Monitoring+ - (<tt>Object</tt>) Enables monitoring for the
  *       instance.
- *       * +enabled+ - (*required*, <tt>Boolean</tt>)
+ *       * +Enabled+ - (*required*, <tt>Boolean</tt>)
  *     * +SubnetId+ - (<tt>String</tt>) Specifies the subnet ID within
  *       which to launch the instance(s) for Amazon Virtual Private
  *       Cloud.
- *     * +disableApiTermination+ - (<tt>Boolean</tt>) Specifies whether
+ *     * +DisableApiTermination+ - (<tt>Boolean</tt>) Specifies whether
  *       the instance can be terminated using the APIs. You must modify
  *       this attribute before you can terminate any "locked" instances
  *       from the APIs.
- *     * +instanceInitiatedShutdownBehavior+ - (<tt>String</tt>)
+ *     * +InstanceInitiatedShutdownBehavior+ - (<tt>String</tt>)
  *       Specifies whether the instance's Amazon EBS volumes are stopped
  *       or terminated when the instance is shut down.
- *     * +license+ - (<tt>Object</tt>) Specifies active licenses in use
+ *     * +License+ - (<tt>Object</tt>) Specifies active licenses in use
  *       and attached to an Amazon EC2 instance.
- *       * +pool+ - (<tt>String</tt>) The license pool from which to take
+ *       * +Pool+ - (<tt>String</tt>) The license pool from which to take
  *         a license when starting Amazon EC2 instances in the associated
  *         RunInstances request.
- *     * +privateIpAddress+ - (<tt>String</tt>) If you're using Amazon
+ *     * +PrivateIpAddress+ - (<tt>String</tt>) If you're using Amazon
  *       Virtual Private Cloud, you can optionally use this parameter to
  *       assign the instance a specific available IP address from the
  *       subnet.
- *     * +clientToken+ - (<tt>String</tt>) Unique, case-sensitive
+ *     * +ClientToken+ - (<tt>String</tt>) Unique, case-sensitive
  *       identifier you provide to ensure idempotency of the request. For
  *       more information, go to How to Ensure Idempotency in the Amazon
  *       Elastic Compute Cloud User Guide.
- *     * +additionalInfo+ - (<tt>String</tt>)
- *     * +networkInterfaces+ - (<tt>Array<Object></tt>)
- *       * +networkInterfaceId+ - (<tt>String</tt>)
- *       * +deviceIndex+ - (<tt>Integer</tt>)
- *       * +subnetId+ - (<tt>String</tt>)
- *       * +description+ - (<tt>String</tt>)
- *       * +privateIpAddress+ - (<tt>String</tt>)
- *       * +groups+ - (<tt>Array<String></tt>)
- *       * +deleteOnTermination+ - (<tt>Boolean</tt>)
- *       * +privateIpAddresses+ - (<tt>Array<Object></tt>)
- *         * +privateIpAddress+ - (*required*, <tt>String</tt>)
- *         * +primary+ - (<tt>Boolean</tt>)
- *       * +secondaryPrivateIpAddressCount+ - (<tt>Integer</tt>)
- *     * +iamInstanceProfile+ - (<tt>Object</tt>)
- *       * +arn+ - (<tt>String</tt>)
- *       * +name+ - (<tt>String</tt>)
- *     * +ebsOptimized+ - (<tt>Boolean</tt>)
+ *     * +AdditionalInfo+ - (<tt>String</tt>)
+ *     * +NetworkInterfaces+ - (<tt>Array<Object></tt>)
+ *       * +NetworkInterfaceId+ - (<tt>String</tt>)
+ *       * +DeviceIndex+ - (<tt>Integer</tt>)
+ *       * +SubnetId+ - (<tt>String</tt>)
+ *       * +Description+ - (<tt>String</tt>)
+ *       * +PrivateIpAddress+ - (<tt>String</tt>)
+ *       * +Groups+ - (<tt>Array<String></tt>)
+ *       * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *       * +PrivateIpAddresses+ - (<tt>Array<Object></tt>)
+ *         * +PrivateIpAddress+ - (*required*, <tt>String</tt>)
+ *         * +Primary+ - (<tt>Boolean</tt>)
+ *       * +SecondaryPrivateIpAddressCount+ - (<tt>Integer</tt>)
+ *     * +IamInstanceProfile+ - (<tt>Object</tt>)
+ *       * +Arn+ - (<tt>String</tt>)
+ *       * +Name+ - (<tt>String</tt>)
+ *     * +EbsOptimized+ - (<tt>Boolean</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
@@ -4301,7 +4311,7 @@ AWS.EC2 = inherit({})
  *       * +Groups+ - (<tt>Array<Object></tt>) The list of security
  *         groups requested for the instances in this reservation.
  *         * +GroupName+ - (<tt>String</tt>)
- *         * +groupId+ - (<tt>String</tt>)
+ *         * +GroupId+ - (<tt>String</tt>)
  *       * +Instances+ - (<tt>Array<Object></tt>) The list of Amazon EC2
  *         instances included in this reservation.
  *         * +InstanceId+ - (<tt>String</tt>) Unique ID of the instance
@@ -4346,12 +4356,12 @@ AWS.EC2 = inherit({})
  *           instance launched.
  *           * +AvailabilityZone+ - (<tt>String</tt>) The availability
  *             zone in which an Amazon EC2 instance runs.
- *           * +groupName+ - (<tt>String</tt>) The name of the
+ *           * +GroupName+ - (<tt>String</tt>) The name of the
  *             PlacementGroup in which an Amazon EC2 instance runs.
  *             Placement groups are primarily used for launching High
  *             Performance Computing instances in the same group to
  *             ensure fast connection speeds.
- *           * +tenancy+ - (<tt>String</tt>) The allowed tenancy of
+ *           * +Tenancy+ - (<tt>String</tt>) The allowed tenancy of
  *             instances launched into the VPC. A value of default means
  *             instances can be launched with any tenancy; a value of
  *             dedicated means all instances launched into the VPC will
@@ -4375,76 +4385,76 @@ AWS.EC2 = inherit({})
  *           IP address that is assigned to the instance (Amazon VPC).
  *         * +PublicIpAddress+ - (<tt>String</tt>) Specifies the IP
  *           address of the instance.
- *         * +stateReason+ - (<tt>Object</tt>) The reason for the state
+ *         * +StateReason+ - (<tt>Object</tt>) The reason for the state
  *           change.
- *           * +code+ - (<tt>String</tt>) Reason code for the state
+ *           * +Code+ - (<tt>String</tt>) Reason code for the state
  *             change.
- *           * +message+ - (<tt>String</tt>) Descriptive message for the
+ *           * +Message+ - (<tt>String</tt>) Descriptive message for the
  *             state change.
- *         * +architecture+ - (<tt>String</tt>) The architecture of this
+ *         * +Architecture+ - (<tt>String</tt>) The architecture of this
  *           instance.
- *         * +rootDeviceType+ - (<tt>String</tt>) The root device type
+ *         * +RootDeviceType+ - (<tt>String</tt>) The root device type
  *           used by the AMI. The AMI can use an Amazon EBS or instance
  *           store root device.
- *         * +rootDeviceName+ - (<tt>String</tt>) The root device name
+ *         * +RootDeviceName+ - (<tt>String</tt>) The root device name
  *           (e.g., /dev/sda1).
- *         * +blockDeviceMappings+ - (<tt>Array<Object></tt>) Block
+ *         * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) Block
  *           device mapping set.
- *           * +deviceName+ - (<tt>String</tt>) The device name (e.g.,
+ *           * +DeviceName+ - (<tt>String</tt>) The device name (e.g.,
  *             /dev/sdh) at which the block device is exposed on the
  *             instance.
- *           * +ebs+ - (<tt>Object</tt>) The optional EBS device mapped
+ *           * +Ebs+ - (<tt>Object</tt>) The optional EBS device mapped
  *             to the specified device name.
- *             * +volumeId+ - (<tt>String</tt>) The ID of the EBS volume.
- *             * +status+ - (<tt>String</tt>) The status of the EBS
+ *             * +VolumeId+ - (<tt>String</tt>) The ID of the EBS volume.
+ *             * +Status+ - (<tt>String</tt>) The status of the EBS
  *               volume.
- *             * +attachTime+ - (<tt>Date</tt>) The time at which the EBS
+ *             * +AttachTime+ - (<tt>Date</tt>) The time at which the EBS
  *               volume was attached to the associated instance.
- *             * +deleteOnTermination+ - (<tt>Boolean</tt>) Specifies
+ *             * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies
  *               whether the Amazon EBS volume is deleted on instance
  *               termination.
- *         * +virtualizationType+ - (<tt>String</tt>)
- *         * +instanceLifecycle+ - (<tt>String</tt>)
- *         * +spotInstanceRequestId+ - (<tt>String</tt>)
- *         * +license+ - (<tt>Object</tt>)
- *           * +pool+ - (<tt>String</tt>) The license pool from which
+ *         * +VirtualizationType+ - (<tt>String</tt>)
+ *         * +InstanceLifecycle+ - (<tt>String</tt>)
+ *         * +SpotInstanceRequestId+ - (<tt>String</tt>)
+ *         * +License+ - (<tt>Object</tt>)
+ *           * +Pool+ - (<tt>String</tt>) The license pool from which
  *             this license was used (ex: 'windows').
- *         * +clientToken+ - (<tt>String</tt>)
- *         * +tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *         * +ClientToken+ - (<tt>String</tt>)
+ *         * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *           Instance.
- *           * +key+ - (<tt>String</tt>) The tag's key.
- *           * +value+ - (<tt>String</tt>) The tag's value.
- *         * +securityGroups+ - (<tt>Array<Object></tt>)
+ *           * +Key+ - (<tt>String</tt>) The tag's key.
+ *           * +Value+ - (<tt>String</tt>) The tag's value.
+ *         * +SecurityGroups+ - (<tt>Array<Object></tt>)
  *           * +GroupName+ - (<tt>String</tt>)
- *           * +groupId+ - (<tt>String</tt>)
- *         * +sourceDestCheck+ - (<tt>Boolean</tt>)
- *         * +hypervisor+ - (<tt>String</tt>)
- *         * +networkInterfaces+ - (<tt>Array<Object></tt>)
- *           * +networkInterfaceId+ - (<tt>String</tt>)
- *           * +subnetId+ - (<tt>String</tt>)
- *           * +vpcId+ - (<tt>String</tt>)
- *           * +description+ - (<tt>String</tt>)
- *           * +ownerId+ - (<tt>String</tt>)
- *           * +status+ - (<tt>String</tt>)
- *           * +privateIpAddress+ - (<tt>String</tt>)
- *           * +privateDnsName+ - (<tt>String</tt>)
- *           * +sourceDestCheck+ - (<tt>Boolean</tt>)
- *           * +groups+ - (<tt>Array<Object></tt>)
+ *           * +GroupId+ - (<tt>String</tt>)
+ *         * +SourceDestCheck+ - (<tt>Boolean</tt>)
+ *         * +Hypervisor+ - (<tt>String</tt>)
+ *         * +NetworkInterfaces+ - (<tt>Array<Object></tt>)
+ *           * +NetworkInterfaceId+ - (<tt>String</tt>)
+ *           * +SubnetId+ - (<tt>String</tt>)
+ *           * +VpcId+ - (<tt>String</tt>)
+ *           * +Description+ - (<tt>String</tt>)
+ *           * +OwnerId+ - (<tt>String</tt>)
+ *           * +Status+ - (<tt>String</tt>)
+ *           * +PrivateIpAddress+ - (<tt>String</tt>)
+ *           * +PrivateDnsName+ - (<tt>String</tt>)
+ *           * +SourceDestCheck+ - (<tt>Boolean</tt>)
+ *           * +Groups+ - (<tt>Array<Object></tt>)
  *             * +GroupName+ - (<tt>String</tt>)
- *             * +groupId+ - (<tt>String</tt>)
- *           * +attachment+ - (<tt>Object</tt>)
- *             * +attachmentId+ - (<tt>String</tt>)
- *             * +deviceIndex+ - (<tt>Integer</tt>)
- *             * +status+ - (<tt>String</tt>)
- *             * +attachTime+ - (<tt>Date</tt>)
- *             * +deleteOnTermination+ - (<tt>Boolean</tt>)
- *           * +association+ - (<tt>Object</tt>)
- *             * +publicIp+ - (<tt>String</tt>)
- *             * +ipOwnerId+ - (<tt>String</tt>)
- *         * +iamInstanceProfile+ - (<tt>Object</tt>)
- *           * +arn+ - (<tt>String</tt>)
- *           * +id+ - (<tt>String</tt>)
- *         * +ebsOptimized+ - (<tt>Boolean</tt>)
+ *             * +GroupId+ - (<tt>String</tt>)
+ *           * +Attachment+ - (<tt>Object</tt>)
+ *             * +AttachmentId+ - (<tt>String</tt>)
+ *             * +DeviceIndex+ - (<tt>Integer</tt>)
+ *             * +Status+ - (<tt>String</tt>)
+ *             * +AttachTime+ - (<tt>Date</tt>)
+ *             * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *           * +Association+ - (<tt>Object</tt>)
+ *             * +PublicIp+ - (<tt>String</tt>)
+ *             * +IpOwnerId+ - (<tt>String</tt>)
+ *         * +IamInstanceProfile+ - (<tt>Object</tt>)
+ *           * +Arn+ - (<tt>String</tt>)
+ *           * +Id+ - (<tt>String</tt>)
+ *         * +EbsOptimized+ - (<tt>Boolean</tt>)
  *
  * @!method startInstances(params, options)
  *   Starts an instance that uses an Amazon EBS volume as its root
@@ -4457,12 +4467,12 @@ AWS.EC2 = inherit({})
  *   @param [Object] params
  *     * +InstanceIds+ - (*required*, <tt>Array<String></tt>) The list of
  *       Amazon EC2 instances to start.
- *     * +additionalInfo+ - (<tt>String</tt>)
+ *     * +AdditionalInfo+ - (<tt>String</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +startingInstances+ - (<tt>Array<Object></tt>) The list of the
+ *     * +StartingInstances+ - (<tt>Array<Object></tt>) The list of the
  *       starting instances and details on how their state has changed.
  *       * +InstanceId+ - (<tt>String</tt>) The ID of the instance whose
  *         state changed.
@@ -4492,12 +4502,12 @@ AWS.EC2 = inherit({})
  *   @param [Object] params
  *     * +InstanceIds+ - (*required*, <tt>Array<String></tt>) The list of
  *       Amazon EC2 instances to stop.
- *     * +force+ - (<tt>Boolean</tt>)
+ *     * +Force+ - (<tt>Boolean</tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest] The +data+ property of the AWS.AWSResponse
  *     object that is passed to the registered callbacks has the
  *     following properties:
- *     * +stoppingInstances+ - (<tt>Array<Object></tt>) The list of the
+ *     * +StoppingInstances+ - (<tt>Array<Object></tt>) The list of the
  *       stopping instances and details on how their state has changed.
  *       * +InstanceId+ - (<tt>String</tt>) The ID of the instance whose
  *         state changed.
@@ -4550,8 +4560,8 @@ AWS.EC2 = inherit({})
  * @!method unassignPrivateIpAddresses(params, options)
  *   Calls the UnassignPrivateIpAddresses API operation.
  *   @param [Object] params
- *     * +networkInterfaceId+ - (*required*, <tt>String</tt>)
- *     * +privateIpAddresses+ - (*required*, <tt>Array<String></tt>)
+ *     * +NetworkInterfaceId+ - (*required*, <tt>String</tt>)
+ *     * +PrivateIpAddresses+ - (*required*, <tt>Array<String></tt>)
  *   @param [Object] options
  *   @return [AWS.AWSRequest]
  *
