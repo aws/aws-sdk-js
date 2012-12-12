@@ -12,7 +12,7 @@ into a terminal window:
 npm install aws-sdk
 ```
 
-**Please Note**: Installing the +aws-sdk+ npm package on Windows may display errors while trying to install the optional dependency for +libxmljs+.  This error can be **safely ignored**.
+**Please Note**: Installing the `aws-sdk` npm package on Windows may display errors while trying to install the optional dependency for `libxmljs`.  This error can be **safely ignored**.
 
 ## Verifying the Installation
 
