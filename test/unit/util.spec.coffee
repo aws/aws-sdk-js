@@ -240,3 +240,24 @@ describe 'AWS.util.isEmpty', ->
 
   it 'returns true when passed a non-empty object literal', ->
     expect(AWS.util.isEmpty({a:1})).toEqual(false)
+
+describe 'AWS.util.error', ->
+  it 'returns the created error object with extra options', ->
+    origError = new Error()
+    err = AWS.util.error(origError, message: 'msg', code: 'code')
+    expect(err).toBe(origError)
+    expect(err.message).toEqual('msg')
+    expect(err.code).toEqual('code')
+
+  it 'accepts missing options', ->
+    origError = new Error('ERROR')
+    err = AWS.util.error(origError)
+    expect(err).toBe(origError)
+    expect(err.message).toEqual('ERROR')
+
+  it 'maintains the original error message property', ->
+    origError = new Error('ERROR')
+    err = AWS.util.error(origError, {code: 'code'})
+    expect(err).toBe(origError)
+    expect(err.message).toEqual('ERROR')
+    expect(err.code).toEqual('code')

@@ -243,12 +243,11 @@ describe 'AWS.S3.Client', ->
           </Error>
         """
       s3.parseResponse resp, 'completeMultipartUpload', (error, data) ->
-        expect(error).toEqual({
-          code: 'InternalError',
-          message: 'We encountered an internal error. Please try again.',
-          statusCode: 200,
-          retryable: true
-        })
+        expect(error instanceof Error).toBeTruthy()
+        expect(error.code).toEqual('InternalError')
+        expect(error.message).toEqual('We encountered an internal error. Please try again.')
+        expect(error.statusCode).toEqual(200)
+        expect(error.retryable).toEqual(true)
         expect(data).toEqual(null)
 
   describe 'getBucketLocation', ->
