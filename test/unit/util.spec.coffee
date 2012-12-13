@@ -29,6 +29,9 @@ describe 'uriEscape', ->
   it 'does not escape ~', ->
     expect(e('a~b')).toEqual('a~b')
 
+  it 'encodes utf8 characters', ->
+    expect(e('ёŝ')).toEqual('%D1%91%C5%9D')
+
 describe 'uriEscapePath', ->
 
   e = AWS.util.uriEscapePath
