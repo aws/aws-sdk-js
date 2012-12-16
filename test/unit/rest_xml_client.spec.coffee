@@ -221,17 +221,20 @@ describe 'AWS.RESTXMLClient', ->
 
       it 'extracts the error code', ->
         parse (error, data) ->
+          expect(error instanceof Error).toBeTruthy()
           expect(error.code).toEqual('InvalidArgument')
           expect(data).toEqual(null)
 
       it 'extracts the error message', ->
         parse (error, data) ->
+          expect(error instanceof Error).toBeTruthy()
           expect(error.message).toEqual('Provided param is bad')
           expect(data).toEqual(null)
 
       it 'returns an empty error when the body is blank', ->
         resp.body = ''
         parse (error, data) ->
+          expect(error instanceof Error).toBeTruthy()
           expect(error.code).toEqual(400)
           expect(error.message).toEqual(null)
           expect(data).toEqual(null)

@@ -102,18 +102,21 @@ describe 'AWS.JSONClient', ->
       it 'removes prefixes from the error code', ->
         resp.body = '{"__type":"com.amazon.coral.service#ErrorCode" }'
         parse (error, data) ->
+          expect(error instanceof Error).toBeTruthy()
           expect(error.code).toEqual('ErrorCode')
           expect(data).toEqual(null)
 
       it 'returns the full code when a # is not present', ->
         resp.body = '{"__type":"ErrorCode" }'
         parse (error, data) ->
+          expect(error instanceof Error).toBeTruthy()
           expect(error.code).toEqual('ErrorCode')
           expect(data).toEqual(null)
 
       it 'returns the status code when the body is blank', ->
         resp.body = null
         parse (error, data) ->
+          expect(error instanceof Error).toBeTruthy()
           expect(error.code).toEqual(500)
           expect(error.message).toEqual(null)
           expect(data).toEqual(null)
@@ -121,12 +124,14 @@ describe 'AWS.JSONClient', ->
       it 'returns null for the message when not present', ->
         resp.body = '{"__type":"ErrorCode" }'
         parse (error, data) ->
+          expect(error instanceof Error).toBeTruthy()
           expect(error.message).toEqual(null)
           expect(data).toEqual(null)
 
       it 'returns the message when present', ->
         resp.body = '{"__type":"ErrorCode", "message":"Error Message" }'
         parse (error, data) ->
+          expect(error instanceof Error).toBeTruthy()
           expect(error.message).toEqual('Error Message')
           expect(data).toEqual(null)
 
@@ -134,12 +139,14 @@ describe 'AWS.JSONClient', ->
       it 'returns the message when the message property is upper-cased', ->
         resp.body = '{"__type":"ErrorCode", "Message":"Error Message" }'
         parse (error, data) ->
+          expect(error instanceof Error).toBeTruthy()
           expect(error.message).toEqual('Error Message')
           expect(data).toEqual(null)
 
       it 'returns a special message for RequestEntityToLarge errors', ->
         resp.body = '{"__type":"RequestEntityTooLarge" }'
         parse (error, data) ->
+          expect(error instanceof Error).toBeTruthy()
           expect(error.message).toEqual('Request body must be less than 1 MB')
           expect(data).toEqual(null)
 

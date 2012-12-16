@@ -26,10 +26,10 @@ describe 'AWS.DynamoDB', ->
   describe 'deleteItem', ->
     it 'should fail if TableName not provided', ->
       helpers.integration (-> client.deleteItem()), (resp) ->
-        errObj =
-          code: 'ValidationException',
-          message: 'The paramater \'tableName\' is required but was not present in the request'
-          retryable: false
-          statusCode: 400
-        expect(resp.error).toEqual(errObj)
+        expect(resp.error instanceof Error).toBeTruthy()
+        expect(resp.error.code).toEqual('ValidationException')
+        expect(resp.error.message).toEqual(
+          'The paramater \'tableName\' is required but was not present in the request')
+        expect(resp.error.retryable).toEqual(false)
+        expect(resp.error.statusCode).toEqual(400)
         expect(resp.data).toEqual(null)

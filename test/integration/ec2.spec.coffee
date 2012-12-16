@@ -35,10 +35,8 @@ describe 'AWS.EC2', ->
 
     helpers.integration (-> client.describeInstances(params)), (resp) ->
       expect(resp.data).toEqual(null)
-      expect(resp.error).toEqual(
-        code : 'InvalidInstanceID.NotFound',
-        message : "The instance ID 'i-12345678' does not exist",
-        statusCode : 400,
-        retryable : false
-      )
+      expect(resp.error.code).toEqual('InvalidInstanceID.NotFound')
+      expect(resp.error.message).toEqual("The instance ID 'i-12345678' does not exist")
+      expect(resp.error.statusCode).toEqual(400)
+      expect(resp.error.retryable).toEqual(false)
 
