@@ -61,7 +61,7 @@ Amazon DynamoDB `listTables` method call, the response data might
 look like this:
 
 ```js
-> resp.data
+> response.data
 { TableNames: 
    [ 'table1', 'table2', ... ] }
 ```
