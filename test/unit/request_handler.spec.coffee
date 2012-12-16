@@ -32,6 +32,7 @@ describe 'AWS.RequestHandler', ->
     totalWaited = 0
     delays = []
     client = new MockClient(maxRetries: 3)
+    client.config.credentials = AWS.util.copy(client.config.credentials)
     request = new AWS.AWSRequest(client, 'mockMethod', {foo:'bar'})
     response = request.awsResponse
     handler = new AWS.RequestHandler(request)
@@ -43,6 +44,31 @@ describe 'AWS.RequestHandler', ->
 
   # Safely tear down setTimeout hack
   afterEach -> `setTimeout = oldSetTimeout`
+
+  describe 'makeRequest', ->
+    it 'sends fail event if credentials are not set', ->
+      client.config.credentials.accessKeyId = null
+      handler.makeRequest()
+
+      client.config.credentials.accessKeyId = 'akid'
+      client.config.credentials.secretAccessKey = null
+      handler.makeRequest()
+
+      expect(request.notifyFail).toHaveBeenCalled()
+      AWS.util.arrayEach request.notifyFail.calls, (call) ->
+        expect(call.args[0] instanceof Error).toBeTruthy()
+        expect(call.args[0].code).toEqual('SigningError')
+        expect(call.args[0].message).toMatch(/Missing credentials in config/)
+
+    it 'sends fail event if region is not set', ->
+      handler.client.config.region = null
+      handler.makeRequest()
+
+      call = request.notifyFail.calls[0]
+      expect(request.notifyFail).toHaveBeenCalled()
+      expect(call.args[0] instanceof Error).toBeTruthy()
+      expect(call.args[0].code).toEqual('SigningError')
+      expect(call.args[0].message).toMatch(/Missing region in config/)
 
   describe 'handleHttpData', ->
 
