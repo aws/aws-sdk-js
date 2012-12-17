@@ -35,6 +35,7 @@ matchXML = (xml1, xml2) ->
 MockClient = AWS.util.inherit AWS.Client,
   constructor: (config) ->
     AWS.Client.call(this, config)
+    @config.credentials = accessKeyId: 'akid', secretAccessKey: 'secret'
     @config.region = 'mock-region'
   buildRequest: ->
     req = this.newHttpRequest()
