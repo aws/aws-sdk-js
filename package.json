@@ -17,7 +17,7 @@
       "coffee-script": "latest",
       "visionmedia-jscoverage": "latest",
       "node-ffi": "latest",
-      "jshint": "latest",
+      "jshint": "0.9.0",
       "cucumber": "latest"
     },
     "dependencies": {
