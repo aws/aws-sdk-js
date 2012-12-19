@@ -45,7 +45,7 @@ s3.client.createBucket({Bucket: 'myBucket'}, function() {
 
 ## Amazon DynamoDB
 
-### Amazon DynamoDB: Listing Tables
+### Amazon DynamoDB: Listing Tables (listTables)
 
 The following example will list all tables in a DynamoDB instance:
 
