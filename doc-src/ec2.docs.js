@@ -113,10 +113,10 @@ AWS.EC2 = inherit({})
  *   The AssociateAddress operation associates an elastic IP address with
  *   an instance.
  *   @param params [Object]
- *     * +InstanceId+ - (*required*, <tt>String</tt>) The instance to
- *       associate with the IP address.
- *     * +PublicIp+ - (*required*, <tt>String</tt>) IP address that you
- *       are assigning to the instance.
+ *     * +InstanceId+ - (<tt>String</tt>) The instance to associate with
+ *       the IP address.
+ *     * +PublicIp+ - (<tt>String</tt>) IP address that you are assigning
+ *       to the instance.
  *     * +AllocationId+ - (<tt>String</tt>) The allocation ID that AWS
  *       returned when you allocated the elastic IP address for use with
  *       Amazon VPC.
@@ -246,15 +246,14 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
- *       * +Attachment+ - (<tt>Object</tt>)
- *         * +VolumeId+ - (<tt>String</tt>)
- *         * +InstanceId+ - (<tt>String</tt>)
- *         * +Device+ - (<tt>String</tt>) How the device is exposed to the
- *           instance (e.g., /dev/sdh).
- *         * +State+ - (<tt>String</tt>)
- *         * +AttachTime+ - (<tt>Date</tt>) Timestamp when this attachment
- *           initiated.
- *         * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *       * +VolumeId+ - (<tt>String</tt>)
+ *       * +InstanceId+ - (<tt>String</tt>)
+ *       * +Device+ - (<tt>String</tt>) How the device is exposed to the
+ *         instance (e.g., /dev/sdh).
+ *       * +State+ - (<tt>String</tt>)
+ *       * +AttachTime+ - (<tt>Date</tt>) Timestamp when this attachment
+ *         initiated.
+ *       * +DeleteOnTermination+ - (<tt>Boolean</tt>)
  *   @return [AWS.AWSRequest] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1169,29 +1168,27 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
- *       * +Snapshot+ - (<tt>Object</tt>) The new snapshot.
- *         * +SnapshotId+ - (<tt>String</tt>) The unique ID of this
- *           snapshot.
- *         * +VolumeId+ - (<tt>String</tt>) The ID of the volume from which
- *           this snapshot was created.
- *         * +State+ - (<tt>String</tt>) Snapshot state (e.g., pending,
- *           completed, or error).
- *         * +StartTime+ - (<tt>Date</tt>) Time stamp when the snapshot was
- *           initiated.
- *         * +Progress+ - (<tt>String</tt>) The progress of the snapshot,
- *           in percentage.
- *         * +OwnerId+ - (<tt>String</tt>) AWS Access Key ID of the user
- *           who owns the snapshot.
- *         * +Description+ - (<tt>String</tt>) Description of the snapshot.
- *         * +VolumeSize+ - (<tt>Integer</tt>) The size of the volume, in
- *           gigabytes.
- *         * +OwnerAlias+ - (<tt>String</tt>) The AWS account alias (e.g.,
- *           "amazon", "redhat", "self", etc.) or AWS account ID that owns
- *           the AMI.
- *         * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
- *           Snapshot.
- *           * +Key+ - (<tt>String</tt>) The tag's key.
- *           * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +SnapshotId+ - (<tt>String</tt>) The unique ID of this snapshot.
+ *       * +VolumeId+ - (<tt>String</tt>) The ID of the volume from which
+ *         this snapshot was created.
+ *       * +State+ - (<tt>String</tt>) Snapshot state (e.g., pending,
+ *         completed, or error).
+ *       * +StartTime+ - (<tt>Date</tt>) Time stamp when the snapshot was
+ *         initiated.
+ *       * +Progress+ - (<tt>String</tt>) The progress of the snapshot, in
+ *         percentage.
+ *       * +OwnerId+ - (<tt>String</tt>) AWS Access Key ID of the user who
+ *         owns the snapshot.
+ *       * +Description+ - (<tt>String</tt>) Description of the snapshot.
+ *       * +VolumeSize+ - (<tt>Integer</tt>) The size of the volume, in
+ *         gigabytes.
+ *       * +OwnerAlias+ - (<tt>String</tt>) The AWS account alias (e.g.,
+ *         "amazon", "redhat", "self", etc.) or AWS account ID that owns
+ *         the AMI.
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *         Snapshot.
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
  *   @return [AWS.AWSRequest] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1322,34 +1319,32 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
- *       * +Volume+ - (<tt>Object</tt>) The newly created EBS volume.
- *         * +VolumeId+ - (<tt>String</tt>) The unique ID of this volume.
- *         * +Size+ - (<tt>Integer</tt>) The size of this volume, in
- *           gigabytes.
- *         * +SnapshotId+ - (<tt>String</tt>) Optional snapshot from which
- *           this volume was created.
- *         * +AvailabilityZone+ - (<tt>String</tt>) Availability zone in
- *           which this volume was created.
- *         * +State+ - (<tt>String</tt>) State of this volume (e.g.,
- *           creating, available).
- *         * +CreateTime+ - (<tt>Date</tt>) Timestamp when volume creation
- *           was initiated.
- *         * +Attachments+ - (<tt>Array<Object></tt>) Information on what
- *           this volume is attached to.
- *           * +VolumeId+ - (<tt>String</tt>)
- *           * +InstanceId+ - (<tt>String</tt>)
- *           * +Device+ - (<tt>String</tt>) How the device is exposed to
- *             the instance (e.g., /dev/sdh).
- *           * +State+ - (<tt>String</tt>)
- *           * +AttachTime+ - (<tt>Date</tt>) Timestamp when this
- *             attachment initiated.
- *           * +DeleteOnTermination+ - (<tt>Boolean</tt>)
- *         * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
- *           Volume.
- *           * +Key+ - (<tt>String</tt>) The tag's key.
- *           * +Value+ - (<tt>String</tt>) The tag's value.
- *         * +VolumeType+ - (<tt>String</tt>)
- *         * +Iops+ - (<tt>Integer</tt>)
+ *       * +VolumeId+ - (<tt>String</tt>) The unique ID of this volume.
+ *       * +Size+ - (<tt>Integer</tt>) The size of this volume, in
+ *         gigabytes.
+ *       * +SnapshotId+ - (<tt>String</tt>) Optional snapshot from which
+ *         this volume was created.
+ *       * +AvailabilityZone+ - (<tt>String</tt>) Availability zone in
+ *         which this volume was created.
+ *       * +State+ - (<tt>String</tt>) State of this volume (e.g.,
+ *         creating, available).
+ *       * +CreateTime+ - (<tt>Date</tt>) Timestamp when volume creation
+ *         was initiated.
+ *       * +Attachments+ - (<tt>Array<Object></tt>) Information on what
+ *         this volume is attached to.
+ *         * +VolumeId+ - (<tt>String</tt>)
+ *         * +InstanceId+ - (<tt>String</tt>)
+ *         * +Device+ - (<tt>String</tt>) How the device is exposed to the
+ *           instance (e.g., /dev/sdh).
+ *         * +State+ - (<tt>String</tt>)
+ *         * +AttachTime+ - (<tt>Date</tt>) Timestamp when this attachment
+ *           initiated.
+ *         * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the Volume.
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +VolumeType+ - (<tt>String</tt>)
+ *       * +Iops+ - (<tt>Integer</tt>)
  *   @return [AWS.AWSRequest] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2227,49 +2222,45 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
- *       * +ImageAttribute+ - (<tt>Object</tt>) The described image
- *         attribute of the associated AMI.
- *         * +ImageId+ - (<tt>String</tt>) The ID of the associated AMI.
- *         * +LaunchPermissions+ - (<tt>Array<Object></tt>) Launch
- *           permissions for the associated AMI.
- *           * +UserId+ - (<tt>String</tt>) The AWS user ID of the user
- *             involved in this launch permission.
- *           * +Group+ - (<tt>String</tt>) The AWS group of the user
- *             involved in this launch permission.
- *         * +ProductCodes+ - (<tt>Array<Object></tt>) Product codes for
- *           the associated AMI.
- *           * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an AWS
- *             DevPay product code.
- *           * +ProductCodeType+ - (<tt>String</tt>)
- *         * +KernelId+ - (<tt>Object</tt>) Kernel ID of the associated
- *           AMI.
- *           * +Value+ - (<tt>String</tt>)
- *         * +RamdiskId+ - (<tt>Object</tt>) Ramdisk ID of the associated
- *           AMI.
- *           * +Value+ - (<tt>String</tt>)
- *         * +Description+ - (<tt>Object</tt>) User-created description of
- *           the associated AMI.
- *           * +Value+ - (<tt>String</tt>)
- *         * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) Block device
- *           mappings for the associated AMI.
- *           * +VirtualName+ - (<tt>String</tt>) Specifies the virtual
- *             device name.
- *           * +DeviceName+ - (<tt>String</tt>) Specifies the device name
- *             (e.g., /dev/sdh).
- *           * +Ebs+ - (<tt>Object</tt>) Specifies parameters used to
- *             automatically setup Amazon EBS volumes when the instance is
- *             launched.
- *             * +SnapshotId+ - (<tt>String</tt>) The ID of the snapshot
- *               from which the volume will be created.
- *             * +VolumeSize+ - (<tt>Integer</tt>) The size of the volume,
- *               in gigabytes.
- *             * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies
- *               whether the Amazon EBS volume is deleted on instance
- *               termination.
- *             * +VolumeType+ - (<tt>String</tt>)
- *             * +Iops+ - (<tt>Integer</tt>)
- *           * +NoDevice+ - (<tt>String</tt>) Specifies the device name to
- *             suppress during instance launch.
+ *       * +ImageId+ - (<tt>String</tt>) The ID of the associated AMI.
+ *       * +LaunchPermissions+ - (<tt>Array<Object></tt>) Launch
+ *         permissions for the associated AMI.
+ *         * +UserId+ - (<tt>String</tt>) The AWS user ID of the user
+ *           involved in this launch permission.
+ *         * +Group+ - (<tt>String</tt>) The AWS group of the user involved
+ *           in this launch permission.
+ *       * +ProductCodes+ - (<tt>Array<Object></tt>) Product codes for the
+ *         associated AMI.
+ *         * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an AWS
+ *           DevPay product code.
+ *         * +ProductCodeType+ - (<tt>String</tt>)
+ *       * +KernelId+ - (<tt>Object</tt>) Kernel ID of the associated AMI.
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +RamdiskId+ - (<tt>Object</tt>) Ramdisk ID of the associated
+ *         AMI.
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +Description+ - (<tt>Object</tt>) User-created description of
+ *         the associated AMI.
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) Block device
+ *         mappings for the associated AMI.
+ *         * +VirtualName+ - (<tt>String</tt>) Specifies the virtual device
+ *           name.
+ *         * +DeviceName+ - (<tt>String</tt>) Specifies the device name
+ *           (e.g., /dev/sdh).
+ *         * +Ebs+ - (<tt>Object</tt>) Specifies parameters used to
+ *           automatically setup Amazon EBS volumes when the instance is
+ *           launched.
+ *           * +SnapshotId+ - (<tt>String</tt>) The ID of the snapshot from
+ *             which the volume will be created.
+ *           * +VolumeSize+ - (<tt>Integer</tt>) The size of the volume, in
+ *             gigabytes.
+ *           * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies whether
+ *             the Amazon EBS volume is deleted on instance termination.
+ *           * +VolumeType+ - (<tt>String</tt>)
+ *           * +Iops+ - (<tt>Integer</tt>)
+ *         * +NoDevice+ - (<tt>String</tt>) Specifies the device name to
+ *           suppress during instance launch.
  *   @return [AWS.AWSRequest] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2404,53 +2395,50 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
- *       * +InstanceAttribute+ - (<tt>Object</tt>) The described instance
- *         attribute.
- *         * +InstanceId+ - (<tt>String</tt>) The ID of the associated
+ *       * +InstanceId+ - (<tt>String</tt>) The ID of the associated
+ *         instance.
+ *       * +InstanceType+ - (<tt>Object</tt>) The instance type (e.g.,
+ *         m1.small, c1.medium, m2.2xlarge, and so on).
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +KernelId+ - (<tt>Object</tt>) The kernel ID of the associated
+ *         instance.
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +RamdiskId+ - (<tt>Object</tt>) The ramdisk ID of the associated
+ *         instance.
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +UserData+ - (<tt>Object</tt>) MIME, Base64-encoded user data.
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +DisableApiTermination+ - (<tt>Object</tt>) Whether this
+ *         instance can be terminated. You must modify this attribute
+ *         before you can terminate any "locked" instances.
+ *         * +Value+ - (<tt>Boolean</tt>)
+ *       * +InstanceInitiatedShutdownBehavior+ - (<tt>Object</tt>) Whether
+ *         this instance's Amazon EBS volumes are deleted when the instance
+ *         is shut down.
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +RootDeviceName+ - (<tt>Object</tt>) The root device name (e.g.,
+ *         /dev/sda1).
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) How block
+ *         devices are exposed to this instance. Each mapping is made up of
+ *         a virtualName and a deviceName.
+ *         * +DeviceName+ - (<tt>String</tt>) The device name (e.g.,
+ *           /dev/sdh) at which the block device is exposed on the
  *           instance.
- *         * +InstanceType+ - (<tt>Object</tt>) The instance type (e.g.,
- *           m1.small, c1.medium, m2.2xlarge, and so on).
- *           * +Value+ - (<tt>String</tt>)
- *         * +KernelId+ - (<tt>Object</tt>) The kernel ID of the associated
- *           instance.
- *           * +Value+ - (<tt>String</tt>)
- *         * +RamdiskId+ - (<tt>Object</tt>) The ramdisk ID of the
- *           associated instance.
- *           * +Value+ - (<tt>String</tt>)
- *         * +UserData+ - (<tt>Object</tt>) MIME, Base64-encoded user data.
- *           * +Value+ - (<tt>String</tt>)
- *         * +DisableApiTermination+ - (<tt>Object</tt>) Whether this
- *           instance can be terminated. You must modify this attribute
- *           before you can terminate any "locked" instances.
- *           * +Value+ - (<tt>Boolean</tt>)
- *         * +InstanceInitiatedShutdownBehavior+ - (<tt>Object</tt>)
- *           Whether this instance's Amazon EBS volumes are deleted when
- *           the instance is shut down.
- *           * +Value+ - (<tt>String</tt>)
- *         * +RootDeviceName+ - (<tt>Object</tt>) The root device name
- *           (e.g., /dev/sda1).
- *           * +Value+ - (<tt>String</tt>)
- *         * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) How block
- *           devices are exposed to this instance. Each mapping is made up
- *           of a virtualName and a deviceName.
- *           * +DeviceName+ - (<tt>String</tt>) The device name (e.g.,
- *             /dev/sdh) at which the block device is exposed on the
- *             instance.
- *           * +Ebs+ - (<tt>Object</tt>) The optional EBS device mapped to
- *             the specified device name.
- *             * +VolumeId+ - (<tt>String</tt>) The ID of the EBS volume.
- *             * +Status+ - (<tt>String</tt>) The status of the EBS volume.
- *             * +AttachTime+ - (<tt>Date</tt>) The time at which the EBS
- *               volume was attached to the associated instance.
- *             * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies
- *               whether the Amazon EBS volume is deleted on instance
- *               termination.
- *         * +ProductCodes+ - (<tt>Array<Object></tt>)
- *           * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an AWS
- *             DevPay product code.
- *           * +ProductCodeType+ - (<tt>String</tt>)
- *         * +EbsOptimized+ - (<tt>Object</tt>)
- *           * +Value+ - (<tt>Boolean</tt>)
+ *         * +Ebs+ - (<tt>Object</tt>) The optional EBS device mapped to
+ *           the specified device name.
+ *           * +VolumeId+ - (<tt>String</tt>) The ID of the EBS volume.
+ *           * +Status+ - (<tt>String</tt>) The status of the EBS volume.
+ *           * +AttachTime+ - (<tt>Date</tt>) The time at which the EBS
+ *             volume was attached to the associated instance.
+ *           * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies whether
+ *             the Amazon EBS volume is deleted on instance termination.
+ *       * +ProductCodes+ - (<tt>Array<Object></tt>)
+ *         * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an AWS
+ *           DevPay product code.
+ *         * +ProductCodeType+ - (<tt>String</tt>)
+ *       * +EbsOptimized+ - (<tt>Object</tt>)
+ *         * +Value+ - (<tt>Boolean</tt>)
  *   @return [AWS.AWSRequest] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -4021,17 +4009,14 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
- *       * +Attachment+ - (<tt>Object</tt>) The updated EBS volume
- *         attachment information after trying to detach the volume from
- *         the specified instance.
- *         * +VolumeId+ - (<tt>String</tt>)
- *         * +InstanceId+ - (<tt>String</tt>)
- *         * +Device+ - (<tt>String</tt>) How the device is exposed to the
- *           instance (e.g., /dev/sdh).
- *         * +State+ - (<tt>String</tt>)
- *         * +AttachTime+ - (<tt>Date</tt>) Timestamp when this attachment
- *           initiated.
- *         * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *       * +VolumeId+ - (<tt>String</tt>)
+ *       * +InstanceId+ - (<tt>String</tt>)
+ *       * +Device+ - (<tt>String</tt>) How the device is exposed to the
+ *         instance (e.g., /dev/sdh).
+ *       * +State+ - (<tt>String</tt>)
+ *       * +AttachTime+ - (<tt>Date</tt>) Timestamp when this attachment
+ *         initiated.
+ *       * +DeleteOnTermination+ - (<tt>Boolean</tt>)
  *   @return [AWS.AWSRequest] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -4078,8 +4063,8 @@ AWS.EC2 = inherit({})
  *   is an idempotent operation. If you enter it more than once, Amazon
  *   EC2 does not return an error.
  *   @param params [Object]
- *     * +PublicIp+ - (*required*, <tt>String</tt>) The elastic IP
- *       address that you are disassociating from the instance.
+ *     * +PublicIp+ - (<tt>String</tt>) The elastic IP address that you
+ *       are disassociating from the instance.
  *     * +AssociationId+ - (<tt>String</tt>) Association ID corresponding
  *       to the VPC elastic IP address you want to disassociate.
  *   @callback callback function(err, data)
@@ -4863,9 +4848,6 @@ AWS.EC2 = inherit({})
  *       launch instance information.
  *       * +ImageId+ - (<tt>String</tt>) The AMI ID.
  *       * +KeyName+ - (<tt>String</tt>) The name of the key pair.
- *       * +SecurityGroups+ - (<tt>Array<Object></tt>)
- *         * +GroupName+ - (<tt>String</tt>)
- *         * +GroupId+ - (<tt>String</tt>)
  *       * +UserData+ - (<tt>String</tt>) Optional data, specific to a
  *         user's application, to provide in the launch request. All
  *         instances that collectively comprise the launch request have
@@ -4931,6 +4913,8 @@ AWS.EC2 = inherit({})
  *         * +Arn+ - (<tt>String</tt>)
  *         * +Name+ - (<tt>String</tt>)
  *       * +EbsOptimized+ - (<tt>Boolean</tt>)
+ *       * +SecurityGroupIds+ - (<tt>Array<String></tt>)
+ *       * +SecurityGroups+ - (<tt>Array<String></tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.AWSRequest.send}
@@ -5334,161 +5318,154 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
- *       * +Reservation+ - (<tt>Object</tt>) The newly created reservation,
- *         containing the new instances.
- *         * +ReservationId+ - (<tt>String</tt>) The unique ID of this
- *           reservation.
- *         * +OwnerId+ - (<tt>String</tt>) The AWS Access Key ID of the
- *           user who owns the reservation.
- *         * +RequesterId+ - (<tt>String</tt>) The unique ID of the user
- *           who requested the instances in this reservation.
- *         * +Groups+ - (<tt>Array<Object></tt>) The list of security
- *           groups requested for the instances in this reservation.
+ *       * +ReservationId+ - (<tt>String</tt>) The unique ID of this
+ *         reservation.
+ *       * +OwnerId+ - (<tt>String</tt>) The AWS Access Key ID of the user
+ *         who owns the reservation.
+ *       * +RequesterId+ - (<tt>String</tt>) The unique ID of the user who
+ *         requested the instances in this reservation.
+ *       * +Groups+ - (<tt>Array<Object></tt>) The list of security groups
+ *         requested for the instances in this reservation.
+ *         * +GroupName+ - (<tt>String</tt>)
+ *         * +GroupId+ - (<tt>String</tt>)
+ *       * +Instances+ - (<tt>Array<Object></tt>) The list of Amazon EC2
+ *         instances included in this reservation.
+ *         * +InstanceId+ - (<tt>String</tt>) Unique ID of the instance
+ *           launched.
+ *         * +ImageId+ - (<tt>String</tt>) Image ID of the AMI used to
+ *           launch the instance.
+ *         * +State+ - (<tt>Object</tt>) The current state of the instance.
+ *           * +Code+ - (<tt>Integer</tt>) A 16-bit unsigned integer. The
+ *             high byte is an opaque internal value and should be ignored.
+ *             The low byte is set based on the state represented.
+ *           * +Name+ - (<tt>String</tt>) The current state of the
+ *             instance.
+ *         * +PrivateDnsName+ - (<tt>String</tt>) The private DNS name
+ *           assigned to the instance. This DNS name can only be used
+ *           inside the Amazon EC2 network. This element remains empty
+ *           until the instance enters a running state.
+ *         * +PublicDnsName+ - (<tt>String</tt>) The public DNS name
+ *           assigned to the instance. This DNS name is contactable from
+ *           outside the Amazon EC2 network. This element remains empty
+ *           until the instance enters a running state.
+ *         * +StateTransitionReason+ - (<tt>String</tt>) Reason for the
+ *           most recent state transition. This might be an empty string.
+ *         * +KeyName+ - (<tt>String</tt>) If this instance was launched
+ *           with an associated key pair, this displays the key pair name.
+ *         * +AmiLaunchIndex+ - (<tt>Integer</tt>) The AMI launch index,
+ *           which can be used to find this instance within the launch
+ *           group.
+ *         * +ProductCodes+ - (<tt>Array<Object></tt>) Product codes
+ *           attached to this instance.
+ *           * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an AWS
+ *             DevPay product code.
+ *           * +ProductCodeType+ - (<tt>String</tt>)
+ *         * +InstanceType+ - (<tt>String</tt>) The instance type. For more
+ *           information on instance types, please see the Amazon Elastic
+ *           Compute Cloud Developer Guide.
+ *         * +LaunchTime+ - (<tt>Date</tt>) The time this instance
+ *           launched.
+ *         * +Placement+ - (<tt>Object</tt>) The location where this
+ *           instance launched.
+ *           * +AvailabilityZone+ - (<tt>String</tt>) The availability zone
+ *             in which an Amazon EC2 instance runs.
+ *           * +GroupName+ - (<tt>String</tt>) The name of the
+ *             PlacementGroup in which an Amazon EC2 instance runs.
+ *             Placement groups are primarily used for launching High
+ *             Performance Computing instances in the same group to ensure
+ *             fast connection speeds.
+ *           * +Tenancy+ - (<tt>String</tt>) The allowed tenancy of
+ *             instances launched into the VPC. A value of default means
+ *             instances can be launched with any tenancy; a value of
+ *             dedicated means all instances launched into the VPC will be
+ *             launched as dedicated tenancy regardless of the tenancy
+ *             assigned to the instance at launch.
+ *         * +KernelId+ - (<tt>String</tt>) Kernel associated with this
+ *           instance.
+ *         * +RamdiskId+ - (<tt>String</tt>) RAM disk associated with this
+ *           instance.
+ *         * +Platform+ - (<tt>String</tt>) Platform of the instance (e.g.,
+ *           Windows).
+ *         * +Monitoring+ - (<tt>Object</tt>) Monitoring status for this
+ *           instance.
+ *           * +State+ - (<tt>String</tt>) The state of monitoring on an
+ *             Amazon EC2 instance (ex: enabled, disabled).
+ *         * +SubnetId+ - (<tt>String</tt>) Specifies the Amazon VPC subnet
+ *           ID in which the instance is running.
+ *         * +VpcId+ - (<tt>String</tt>) Specifies the Amazon VPC in which
+ *           the instance is running.
+ *         * +PrivateIpAddress+ - (<tt>String</tt>) Specifies the private
+ *           IP address that is assigned to the instance (Amazon VPC).
+ *         * +PublicIpAddress+ - (<tt>String</tt>) Specifies the IP address
+ *           of the instance.
+ *         * +StateReason+ - (<tt>Object</tt>) The reason for the state
+ *           change.
+ *           * +Code+ - (<tt>String</tt>) Reason code for the state change.
+ *           * +Message+ - (<tt>String</tt>) Descriptive message for the
+ *             state change.
+ *         * +Architecture+ - (<tt>String</tt>) The architecture of this
+ *           instance.
+ *         * +RootDeviceType+ - (<tt>String</tt>) The root device type used
+ *           by the AMI. The AMI can use an Amazon EBS or instance store
+ *           root device.
+ *         * +RootDeviceName+ - (<tt>String</tt>) The root device name
+ *           (e.g., /dev/sda1).
+ *         * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) Block device
+ *           mapping set.
+ *           * +DeviceName+ - (<tt>String</tt>) The device name (e.g.,
+ *             /dev/sdh) at which the block device is exposed on the
+ *             instance.
+ *           * +Ebs+ - (<tt>Object</tt>) The optional EBS device mapped to
+ *             the specified device name.
+ *             * +VolumeId+ - (<tt>String</tt>) The ID of the EBS volume.
+ *             * +Status+ - (<tt>String</tt>) The status of the EBS volume.
+ *             * +AttachTime+ - (<tt>Date</tt>) The time at which the EBS
+ *               volume was attached to the associated instance.
+ *             * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies
+ *               whether the Amazon EBS volume is deleted on instance
+ *               termination.
+ *         * +VirtualizationType+ - (<tt>String</tt>)
+ *         * +InstanceLifecycle+ - (<tt>String</tt>)
+ *         * +SpotInstanceRequestId+ - (<tt>String</tt>)
+ *         * +License+ - (<tt>Object</tt>)
+ *           * +Pool+ - (<tt>String</tt>) The license pool from which this
+ *             license was used (ex: 'windows').
+ *         * +ClientToken+ - (<tt>String</tt>)
+ *         * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *           Instance.
+ *           * +Key+ - (<tt>String</tt>) The tag's key.
+ *           * +Value+ - (<tt>String</tt>) The tag's value.
+ *         * +SecurityGroups+ - (<tt>Array<Object></tt>)
  *           * +GroupName+ - (<tt>String</tt>)
  *           * +GroupId+ - (<tt>String</tt>)
- *         * +Instances+ - (<tt>Array<Object></tt>) The list of Amazon EC2
- *           instances included in this reservation.
- *           * +InstanceId+ - (<tt>String</tt>) Unique ID of the instance
- *             launched.
- *           * +ImageId+ - (<tt>String</tt>) Image ID of the AMI used to
- *             launch the instance.
- *           * +State+ - (<tt>Object</tt>) The current state of the
- *             instance.
- *             * +Code+ - (<tt>Integer</tt>) A 16-bit unsigned integer. The
- *               high byte is an opaque internal value and should be
- *               ignored. The low byte is set based on the state
- *               represented.
- *             * +Name+ - (<tt>String</tt>) The current state of the
- *               instance.
- *           * +PrivateDnsName+ - (<tt>String</tt>) The private DNS name
- *             assigned to the instance. This DNS name can only be used
- *             inside the Amazon EC2 network. This element remains empty
- *             until the instance enters a running state.
- *           * +PublicDnsName+ - (<tt>String</tt>) The public DNS name
- *             assigned to the instance. This DNS name is contactable from
- *             outside the Amazon EC2 network. This element remains empty
- *             until the instance enters a running state.
- *           * +StateTransitionReason+ - (<tt>String</tt>) Reason for the
- *             most recent state transition. This might be an empty string.
- *           * +KeyName+ - (<tt>String</tt>) If this instance was launched
- *             with an associated key pair, this displays the key pair
- *             name.
- *           * +AmiLaunchIndex+ - (<tt>Integer</tt>) The AMI launch index,
- *             which can be used to find this instance within the launch
- *             group.
- *           * +ProductCodes+ - (<tt>Array<Object></tt>) Product codes
- *             attached to this instance.
- *             * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an
- *               AWS DevPay product code.
- *             * +ProductCodeType+ - (<tt>String</tt>)
- *           * +InstanceType+ - (<tt>String</tt>) The instance type. For
- *             more information on instance types, please see the Amazon
- *             Elastic Compute Cloud Developer Guide.
- *           * +LaunchTime+ - (<tt>Date</tt>) The time this instance
- *             launched.
- *           * +Placement+ - (<tt>Object</tt>) The location where this
- *             instance launched.
- *             * +AvailabilityZone+ - (<tt>String</tt>) The availability
- *               zone in which an Amazon EC2 instance runs.
- *             * +GroupName+ - (<tt>String</tt>) The name of the
- *               PlacementGroup in which an Amazon EC2 instance runs.
- *               Placement groups are primarily used for launching High
- *               Performance Computing instances in the same group to
- *               ensure fast connection speeds.
- *             * +Tenancy+ - (<tt>String</tt>) The allowed tenancy of
- *               instances launched into the VPC. A value of default means
- *               instances can be launched with any tenancy; a value of
- *               dedicated means all instances launched into the VPC will
- *               be launched as dedicated tenancy regardless of the tenancy
- *               assigned to the instance at launch.
- *           * +KernelId+ - (<tt>String</tt>) Kernel associated with this
- *             instance.
- *           * +RamdiskId+ - (<tt>String</tt>) RAM disk associated with
- *             this instance.
- *           * +Platform+ - (<tt>String</tt>) Platform of the instance
- *             (e.g., Windows).
- *           * +Monitoring+ - (<tt>Object</tt>) Monitoring status for this
- *             instance.
- *             * +State+ - (<tt>String</tt>) The state of monitoring on an
- *               Amazon EC2 instance (ex: enabled, disabled).
- *           * +SubnetId+ - (<tt>String</tt>) Specifies the Amazon VPC
- *             subnet ID in which the instance is running.
- *           * +VpcId+ - (<tt>String</tt>) Specifies the Amazon VPC in
- *             which the instance is running.
- *           * +PrivateIpAddress+ - (<tt>String</tt>) Specifies the private
- *             IP address that is assigned to the instance (Amazon VPC).
- *           * +PublicIpAddress+ - (<tt>String</tt>) Specifies the IP
- *             address of the instance.
- *           * +StateReason+ - (<tt>Object</tt>) The reason for the state
- *             change.
- *             * +Code+ - (<tt>String</tt>) Reason code for the state
- *               change.
- *             * +Message+ - (<tt>String</tt>) Descriptive message for the
- *               state change.
- *           * +Architecture+ - (<tt>String</tt>) The architecture of this
- *             instance.
- *           * +RootDeviceType+ - (<tt>String</tt>) The root device type
- *             used by the AMI. The AMI can use an Amazon EBS or instance
- *             store root device.
- *           * +RootDeviceName+ - (<tt>String</tt>) The root device name
- *             (e.g., /dev/sda1).
- *           * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) Block
- *             device mapping set.
- *             * +DeviceName+ - (<tt>String</tt>) The device name (e.g.,
- *               /dev/sdh) at which the block device is exposed on the
- *               instance.
- *             * +Ebs+ - (<tt>Object</tt>) The optional EBS device mapped
- *               to the specified device name.
- *               * +VolumeId+ - (<tt>String</tt>) The ID of the EBS volume.
- *               * +Status+ - (<tt>String</tt>) The status of the EBS
- *                 volume.
- *               * +AttachTime+ - (<tt>Date</tt>) The time at which the EBS
- *                 volume was attached to the associated instance.
- *               * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies
- *                 whether the Amazon EBS volume is deleted on instance
- *                 termination.
- *           * +VirtualizationType+ - (<tt>String</tt>)
- *           * +InstanceLifecycle+ - (<tt>String</tt>)
- *           * +SpotInstanceRequestId+ - (<tt>String</tt>)
- *           * +License+ - (<tt>Object</tt>)
- *             * +Pool+ - (<tt>String</tt>) The license pool from which
- *               this license was used (ex: 'windows').
- *           * +ClientToken+ - (<tt>String</tt>)
- *           * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
- *             Instance.
- *             * +Key+ - (<tt>String</tt>) The tag's key.
- *             * +Value+ - (<tt>String</tt>) The tag's value.
- *           * +SecurityGroups+ - (<tt>Array<Object></tt>)
+ *         * +SourceDestCheck+ - (<tt>Boolean</tt>)
+ *         * +Hypervisor+ - (<tt>String</tt>)
+ *         * +NetworkInterfaces+ - (<tt>Array<Object></tt>)
+ *           * +NetworkInterfaceId+ - (<tt>String</tt>)
+ *           * +SubnetId+ - (<tt>String</tt>)
+ *           * +VpcId+ - (<tt>String</tt>)
+ *           * +Description+ - (<tt>String</tt>)
+ *           * +OwnerId+ - (<tt>String</tt>)
+ *           * +Status+ - (<tt>String</tt>)
+ *           * +PrivateIpAddress+ - (<tt>String</tt>)
+ *           * +PrivateDnsName+ - (<tt>String</tt>)
+ *           * +SourceDestCheck+ - (<tt>Boolean</tt>)
+ *           * +Groups+ - (<tt>Array<Object></tt>)
  *             * +GroupName+ - (<tt>String</tt>)
  *             * +GroupId+ - (<tt>String</tt>)
- *           * +SourceDestCheck+ - (<tt>Boolean</tt>)
- *           * +Hypervisor+ - (<tt>String</tt>)
- *           * +NetworkInterfaces+ - (<tt>Array<Object></tt>)
- *             * +NetworkInterfaceId+ - (<tt>String</tt>)
- *             * +SubnetId+ - (<tt>String</tt>)
- *             * +VpcId+ - (<tt>String</tt>)
- *             * +Description+ - (<tt>String</tt>)
- *             * +OwnerId+ - (<tt>String</tt>)
+ *           * +Attachment+ - (<tt>Object</tt>)
+ *             * +AttachmentId+ - (<tt>String</tt>)
+ *             * +DeviceIndex+ - (<tt>Integer</tt>)
  *             * +Status+ - (<tt>String</tt>)
- *             * +PrivateIpAddress+ - (<tt>String</tt>)
- *             * +PrivateDnsName+ - (<tt>String</tt>)
- *             * +SourceDestCheck+ - (<tt>Boolean</tt>)
- *             * +Groups+ - (<tt>Array<Object></tt>)
- *               * +GroupName+ - (<tt>String</tt>)
- *               * +GroupId+ - (<tt>String</tt>)
- *             * +Attachment+ - (<tt>Object</tt>)
- *               * +AttachmentId+ - (<tt>String</tt>)
- *               * +DeviceIndex+ - (<tt>Integer</tt>)
- *               * +Status+ - (<tt>String</tt>)
- *               * +AttachTime+ - (<tt>Date</tt>)
- *               * +DeleteOnTermination+ - (<tt>Boolean</tt>)
- *             * +Association+ - (<tt>Object</tt>)
- *               * +PublicIp+ - (<tt>String</tt>)
- *               * +IpOwnerId+ - (<tt>String</tt>)
- *           * +IamInstanceProfile+ - (<tt>Object</tt>)
- *             * +Arn+ - (<tt>String</tt>)
- *             * +Id+ - (<tt>String</tt>)
- *           * +EbsOptimized+ - (<tt>Boolean</tt>)
+ *             * +AttachTime+ - (<tt>Date</tt>)
+ *             * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *           * +Association+ - (<tt>Object</tt>)
+ *             * +PublicIp+ - (<tt>String</tt>)
+ *             * +IpOwnerId+ - (<tt>String</tt>)
+ *         * +IamInstanceProfile+ - (<tt>Object</tt>)
+ *           * +Arn+ - (<tt>String</tt>)
+ *           * +Id+ - (<tt>String</tt>)
+ *         * +EbsOptimized+ - (<tt>Boolean</tt>)
  *   @return [AWS.AWSRequest] a handle to the operation request for
  *     subsequent event callback registration.
  *
