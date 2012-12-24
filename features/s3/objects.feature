@@ -24,7 +24,14 @@ Feature: Working with Objects in S3
     And the object with the key "hello" should contain "world"
     When I write "new world" to the key "hello"
     Then the object with the key "hello" should contain "new world"
+
+    # Empty files
+    When I write "" to the key "hello"
+    Then the object with the key "hello" should exist
+    And the object with the key "hello" should contain ""
+
     When I delete the object with the key "hello"
     Then the object with the key "hello" should not exist
+
     # final step here needs to happen to cleanup the shared bucket
     And I delete the shared bucket
