@@ -65,6 +65,14 @@ describe 'AWS.RESTXMLClient', ->
         expect(req.path).toEqual('/abc')
         expect(req.headers['x-amz-acl']).toEqual('canned-acl')
 
+      it 'includes Content-Length header if body is empty', ->
+        operation.u = '/{Bucket}'
+        operation.i = {m:{Bucket:{l:'uri',r:1},Data:{t:'s',l:'body'}}}
+        params = { Bucket: 'bucket-name', Data: '' }
+        req = buildRequest(params)
+        expect(req.body).toEqual(null)
+        expect(req.headers['Content-Length']).toEqual(0)
+
     describe 'string bodies', ->
 
       it 'populates the body with string types directly', ->
