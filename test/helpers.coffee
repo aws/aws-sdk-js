@@ -17,7 +17,7 @@ integration = (reqBuilder, respCallback) ->
   req = reqBuilder()
   resp = null
   runs ->
-    req.on('complete', (respObject) -> resp = respObject)
+    req.on('complete', (req, respObject) -> resp = respObject)
     req.send()
   waitsFor -> resp != null
   runs -> respCallback(resp)
