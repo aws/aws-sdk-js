@@ -181,6 +181,10 @@ describe 'AWS.util.arrayEach', ->
     expect(total).toEqual(1)
 
 describe 'AWS.util.copy', ->
+  it 'does not copy null or undefined', ->
+    expect(AWS.util.copy(null)).toEqual(null)
+    expect(AWS.util.copy(undefined)).toEqual(undefined)
+
   it 'should perform a shallow copy of an object', ->
     obj = a: 1, b: 2, c: 3
     copied = AWS.util.copy(obj)
