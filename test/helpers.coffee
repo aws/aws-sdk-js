@@ -17,7 +17,7 @@ integration = (reqBuilder, respCallback) ->
   req = reqBuilder()
   resp = null
   runs ->
-    req.always (respObject) -> resp = respObject
+    req.on('complete', (respObject) -> resp = respObject)
     req.send()
   waitsFor -> resp != null
   runs -> respCallback(resp)
@@ -37,14 +37,14 @@ MockClient = AWS.util.inherit AWS.Client,
     AWS.Client.call(this, config)
     @config.credentials = accessKeyId: 'akid', secretAccessKey: 'secret'
     @config.region = 'mock-region'
-  buildRequest: ->
-    req = this.newHttpRequest()
-    req.sign = ->
-    req
-  extractData: (httpResponse) ->
-    return httpResponse.body
-  extractError: (httpResponse) ->
-    return { code: httpResponse.statusCode, message: null, retryable: false }
+  setupRequestListeners: (request) ->
+    request.on 'extractData', (req, resp) ->
+      resp.data = resp.httpResponse.body
+    request.on 'extractError', (req, resp) ->
+      resp.error =
+        code: resp.httpResponse.statusCode
+        message: null
+        retryable: false
   serviceName: 'mockservice'
   signatureVersion: require('../lib/sigv4')
 
@@ -55,15 +55,15 @@ MockService.Client = MockClient
 
 mockHttpResponse = (status, headers, data) ->
   spyOn(AWS.HttpClient, 'getInstance')
-  if typeof status == 'number'
-    AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb) ->
-      cb.onHeaders(status, headers)
+  AWS.HttpClient.getInstance.andReturn handleRequest: (req, resp) ->
+    if typeof status == 'number'
+      req.emit('httpHeaders', req, resp, status, headers)
+      str = str instanceof Array ? str : [str]
       AWS.util.arrayEach data, (str) ->
-        cb.onData(str)
-      cb.onEnd()
-  else
-    AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb) ->
-      cb.onError(status)
+        req.emit('httpData', req, resp, str)
+      req.emit('httpDone', req, resp)
+    else
+      req.emit('httpError', req, status)
 
 module.exports =
   AWS: AWS

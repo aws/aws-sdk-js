@@ -12,11 +12,17 @@
 # language governing permissions and limitations under the License.
 
 AWS = require('../../../lib/core')
+helpers = require('../../helpers')
+
 require('../../../lib/services/s3')
 
 describe 'AWS.S3.Client', ->
 
   s3 = null
+  request = (operation, params) ->
+    req = new AWS.AWSRequest(s3, operation, params || {})
+    req.client.addAllRequestListeners(req)
+    req
 
   beforeEach ->
     s3 = new AWS.S3.Client()
@@ -70,42 +76,40 @@ describe 'AWS.S3.Client', ->
       s3 = new AWS.S3.Client({ region: 'us-west-1' })
       expect(s3.endpoint.hostname).toEqual('s3-us-west-1.amazonaws.com')
 
-  describe 'buildRequest', ->
-
-    it 'returns a http request object', ->
-      req = s3.buildRequest('listBuckets')
-      expect(req.constructor).toEqual(AWS.HttpRequest)
+  describe 'building a request', ->
+    build = (operation, params) ->
+      req = request(operation, params)
+      req.emitEvents('build')
+      return req.response.httpRequest
 
     it 'obeys the configuration for s3ForcePathStyle', ->
       config = new AWS.Config({s3ForcePathStyle: true })
       s3 = new AWS.S3.Client(config)
       expect(s3.config.s3ForcePathStyle).toEqual(true)
-      req = s3.buildRequest('headObject', {Bucket:'bucket', Key:'key'})
+      req = build('headObject', {Bucket:'bucket', Key:'key'})
       expect(req.endpoint.hostname).toEqual('s3.amazonaws.com')
       expect(req.path).toEqual('/bucket/key')
 
     describe 'uri escaped params', ->
-
       it 'uri-escapes path and querystring params', ->
         # bucket param ends up as part of the hostname
         params = { Bucket: 'bucket', Key: 'a b c', VersionId: 'a&b' }
-        req = s3.buildRequest('headObject', params)
+        req = build('headObject', params)
         expect(req.path).toEqual('/a%20b%20c?versionId=a%26b')
 
       it 'does not uri-escape forward slashes in the path', ->
         params = { Bucket: 'bucket', Key: 'k e/y' }
-        req = s3.buildRequest('headObject', params)
+        req = build('headObject', params)
         expect(req.path).toEqual('/k%20e/y')
 
       it 'ensures a single forward slash exists', ->
-
-        req = s3.buildRequest('listObjects', { Bucket: 'bucket' })
+        req = build('listObjects', { Bucket: 'bucket' })
         expect(req.path).toEqual('/')
 
-        req = s3.buildRequest('listObjects', { Bucket: 'bucket', MaxKeys:123 })
+        req = build('listObjects', { Bucket: 'bucket', MaxKeys:123 })
         expect(req.path).toEqual('/?max-keys=123')
 
-      it 'ensures a single forward slash exists when querystring is present', ->
+      it 'ensures a single forward slash exists when querystring is present'
 
     describe 'vitual-hosted vs path-style bucket requests', ->
 
@@ -115,29 +119,29 @@ describe 'AWS.S3.Client', ->
           s3 = new AWS.S3.Client({ sslEnabled: true, region: 'us-east-1' })
 
         it 'puts dns-compat bucket names in the hostname', ->
-          req = s3.buildRequest('headObject', {Bucket:'bucket-name',Key:'abc'})
+          req = build('headObject', {Bucket:'bucket-name',Key:'abc'})
           expect(req.method).toEqual('HEAD')
           expect(req.endpoint.hostname).toEqual('bucket-name.s3.amazonaws.com')
           expect(req.path).toEqual('/abc')
 
         it 'ensures the path contains / at a minimum when moving bucket', ->
-          req = s3.buildRequest('listObjects', {Bucket:'bucket-name'})
+          req = build('listObjects', {Bucket:'bucket-name'})
           expect(req.endpoint.hostname).toEqual('bucket-name.s3.amazonaws.com')
           expect(req.path).toEqual('/')
 
         it 'puts dns-compat bucket names in path if they contain a dot', ->
-          req = s3.buildRequest('listObjects', {Bucket:'bucket.name'})
+          req = build('listObjects', {Bucket:'bucket.name'})
           expect(req.endpoint.hostname).toEqual('s3.amazonaws.com')
           expect(req.path).toEqual('/bucket.name')
 
         it 'puts dns-compat bucket names in path if configured to do so', ->
           s3 = new AWS.S3.Client({ sslEnabled: true, s3ForcePathStyle: true })
-          req = s3.buildRequest('listObjects', {Bucket:'bucket-name'})
+          req = build('listObjects', {Bucket:'bucket-name'})
           expect(req.endpoint.hostname).toEqual('s3.amazonaws.com')
           expect(req.path).toEqual('/bucket-name')
 
         it 'puts dns-incompat bucket names in path', ->
-          req = s3.buildRequest('listObjects', {Bucket:'bucket_name'})
+          req = build('listObjects', {Bucket:'bucket_name'})
           expect(req.endpoint.hostname).toEqual('s3.amazonaws.com')
           expect(req.path).toEqual('/bucket_name')
 
@@ -147,17 +151,17 @@ describe 'AWS.S3.Client', ->
           s3 = new AWS.S3.Client({ sslEnabled: false, region: 'us-east-1' })
 
         it 'puts dns-compat bucket names in the hostname', ->
-          req = s3.buildRequest('listObjects', {Bucket:'bucket-name'})
+          req = build('listObjects', {Bucket:'bucket-name'})
           expect(req.endpoint.hostname).toEqual('bucket-name.s3.amazonaws.com')
           expect(req.path).toEqual('/')
 
         it 'puts dns-compat bucket names in the hostname if they contain a dot', ->
-          req = s3.buildRequest('listObjects', {Bucket:'bucket.name'})
+          req = build('listObjects', {Bucket:'bucket.name'})
           expect(req.endpoint.hostname).toEqual('bucket.name.s3.amazonaws.com')
           expect(req.path).toEqual('/')
 
         it 'puts dns-incompat bucket names in path', ->
-          req = s3.buildRequest('listObjects', {Bucket:'bucket_name'})
+          req = build('listObjects', {Bucket:'bucket_name'})
           expect(req.endpoint.hostname).toEqual('s3.amazonaws.com')
           expect(req.path).toEqual('/bucket_name')
 
@@ -165,34 +169,31 @@ describe 'AWS.S3.Client', ->
   # http spec) these tests ensure we give meaningful codes/messages for these.
   describe 'errors with no XML body', ->
 
-    extractError = (resp) ->
-      s3.extractError(resp)
+    extractError = (statusCode) ->
+      req = request('operation')
+      req.response.httpResponse.body = ''
+      req.response.httpResponse.statusCode = statusCode
+      req.emit('foo')
+      req.emit('extractError', req, req.response)
+      req.response.error
 
     it 'handles 304 errors', ->
-      resp = new AWS.HttpResponse()
-      resp.statusCode = 304
-      error = extractError(resp)
+      error = extractError(304)
       expect(error.code).toEqual('NotModified')
       expect(error.message).toEqual(null)
 
     it 'handles 403 errors', ->
-      resp = new AWS.HttpResponse()
-      resp.statusCode = 403
-      error = extractError(resp)
+      error = extractError(403)
       expect(error.code).toEqual('Forbidden')
       expect(error.message).toEqual(null)
 
     it 'handles 404 errors', ->
-      resp = new AWS.HttpResponse()
-      resp.statusCode = 404
-      error = extractError(resp)
+      error = extractError(404)
       expect(error.code).toEqual('NotFound')
       expect(error.message).toEqual(null)
 
     it 'misc errors not known to return an empty body', ->
-      resp = new AWS.HttpResponse()
-      resp.statusCode = 412 # made up
-      error = extractError(resp)
+      error = extractError(412) # made up
       expect(error.code).toEqual(412)
       expect(error.message).toEqual(null)
 
@@ -201,12 +202,11 @@ describe 'AWS.S3.Client', ->
   describe 'completeMultipartUpload', ->
 
     it 'returns data when the resp is 200 with valid response', ->
-      resp =
-        statusCode: 200
-        headers:
-          'x-amz-id-2': 'Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg=='
-          'x-amz-request-id': '656c76696e6727732072657175657374'
-        body: """
+      headers =
+        'x-amz-id-2': 'Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg=='
+        'x-amz-request-id': '656c76696e6727732072657175657374'
+      body =
+        """
         <?xml version="1.0" encoding="UTF-8"?>
         <CompleteMultipartUploadResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
           <Location>http://Example-Bucket.s3.amazonaws.com/Example-Object</Location>
@@ -215,7 +215,9 @@ describe 'AWS.S3.Client', ->
           <ETag>"3858f62230ac3c915f300c664312c11f-9"</ETag>
         </CompleteMultipartUploadResult>
         """
-      s3.parseResponse resp, 'completeMultipartUpload', (error, data) ->
+
+      helpers.mockHttpResponse 200, headers, body
+      s3.completeMultipartUpload (error, data) ->
         expect(error).toBe(null)
         expect(data).toEqual({
           Location: 'http://Example-Bucket.s3.amazonaws.com/Example-Object'
@@ -226,23 +228,19 @@ describe 'AWS.S3.Client', ->
         })
 
     it 'returns an error when the resp is 200 with an error xml document', ->
-      resp =
-        statusCode: 200
-        headers: {}
-        body: """
-          <?xml version="1.0" encoding="UTF-8"?>
+      body =
+      """
+      <?xml version="1.0" encoding="UTF-8"?>
+      <Error>
+        <Code>InternalError</Code>
+        <Message>We encountered an internal error. Please try again.</Message>
+        <RequestId>656c76696e6727732072657175657374</RequestId>
+        <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>
+      </Error>
+      """
 
-
-
-
-          <Error>
-            <Code>InternalError</Code>
-            <Message>We encountered an internal error. Please try again.</Message>
-            <RequestId>656c76696e6727732072657175657374</RequestId>
-            <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>
-          </Error>
-        """
-      s3.parseResponse resp, 'completeMultipartUpload', (error, data) ->
+      helpers.mockHttpResponse 200, {}, body
+      s3.completeMultipartUpload (error, data) ->
         expect(error instanceof Error).toBeTruthy()
         expect(error.code).toEqual('InternalError')
         expect(error.message).toEqual('We encountered an internal error. Please try again.')
@@ -253,20 +251,17 @@ describe 'AWS.S3.Client', ->
   describe 'getBucketLocation', ->
 
     it 'returns null for the location constraint when not present', ->
-      resp =
-        statusCode: 200
-        headers: {}
-        body: '<?xml version="1.0" encoding="UTF-8"?>\n<LocationConstraint xmlns="http://s3.amazonaws.com/doc/2006-03-01/"/>'
-      s3.parseResponse resp, 'getBucketLocation', (error, data) ->
+      body = '<?xml version="1.0" encoding="UTF-8"?>\n<LocationConstraint xmlns="http://s3.amazonaws.com/doc/2006-03-01/"/>'
+      helpers.mockHttpResponse 200, {}, body
+      s3.getBucketLocation (error, data) ->
         expect(error).toBe(null)
         expect(data).toEqual({})
 
     it 'parses the location constraint from the root xml', ->
-      resp =
-        statusCode: 200
-        headers: { 'x-amz-request-id': 'abcxyz' }
-        body: '<?xml version="1.0" encoding="UTF-8"?>\n<LocationConstraint xmlns="http://s3.amazonaws.com/doc/2006-03-01/">EU</LocationConstraint>'
-      s3.parseResponse resp, 'getBucketLocation', (error, data) ->
+      headers = { 'x-amz-request-id': 'abcxyz' }
+      body = '<?xml version="1.0" encoding="UTF-8"?>\n<LocationConstraint xmlns="http://s3.amazonaws.com/doc/2006-03-01/">EU</LocationConstraint>'
+      helpers.mockHttpResponse 200, headers, body
+      s3.getBucketLocation (error, data) ->
         expect(error).toBe(null)
         expect(data).toEqual({
           LocationConstraint: 'EU',

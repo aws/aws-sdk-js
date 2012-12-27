@@ -49,19 +49,14 @@ describe 'AWS.Client', ->
     it 'it treats params as an optinal parameter', ->
       helpers.mockHttpResponse(200, {}, ['FOO', 'BAR'])
       client = new MockClient()
-      client.buildRequest = (operation, params) ->
-        expect(operation).toEqual('operationName')
-        expect(params).toEqual({})
-        req = this.newHttpRequest()
-        req.sign = ->
-        req
       client.makeRequest 'operationName', (err, data) ->
+        expect(data).toEqual('FOOBAR')
 
     it 'yields data to the callback', ->
       helpers.mockHttpResponse(200, {}, ['FOO', 'BAR'])
       err = null; data = null
       client = new MockClient()
-      req = client.makeRequest 'operation', {}, (e, d) ->
+      req = client.makeRequest 'operation', (e, d) ->
         err = e
         data = d
       expect(err).toEqual(null)
