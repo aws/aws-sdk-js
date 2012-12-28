@@ -94,12 +94,17 @@ describe 'AWS.EventListeners', ->
 
       # register httpData event
       request = makeRequest()
-      request.on('httpData', (req, resp, chunk) -> calls.push(chunk))
+      request.on('httpData', (chunk) -> calls.push(chunk))
       request.send()
 
-      # TODO make streaming operations work
-      #expect(request.response.httpResponse.body).toEqual(null)
       expect(calls).toEqual(['FOO', 'BAR', 'BAZ', 'QUX'])
+
+    it 'clears default httpData event if another is added (allow streaming)', ->
+      request = makeRequest()
+      request.on('httpData', ->)
+      request.send()
+
+      expect(request.response.httpResponse.body).toEqual(null)
 
   describe 'retry', ->
     it 'retries a request with a set maximum retries', ->
@@ -145,7 +150,7 @@ describe 'AWS.EventListeners', ->
           req.emit('httpError', req, {code: 'NetworkingError', message: "FAIL!"})
         else
           req.emit('httpHeaders', req, resp, resp.retryCount < 2 ? 500 : 200, {})
-          req.emit('httpData', req, resp, '{"data":"BAR"}')
+          req.emit('httpData', '{"data":"BAR"}', req, resp)
           req.emit('httpDone', req, resp)
 
       request = makeRequest(->)

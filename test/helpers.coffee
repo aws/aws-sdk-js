@@ -59,7 +59,7 @@ mockHttpResponse = (status, headers, data) ->
       req.emit('httpHeaders', req, resp, status, headers)
       str = str instanceof Array ? str : [str]
       AWS.util.arrayEach data, (str) ->
-        req.emit('httpData', req, resp, str)
+        req.emit('httpData', str, req, resp)
       req.emit('httpDone', req, resp)
     else
       req.emit('httpError', req, status)
