@@ -44,7 +44,6 @@ MockClient = AWS.util.inherit AWS.Client,
       resp.error =
         code: resp.httpResponse.statusCode
         message: null
-        retryable: false
   serviceName: 'mockservice'
   signatureVersion: require('../lib/sigv4')
 
