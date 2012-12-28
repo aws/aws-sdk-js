@@ -11,22 +11,21 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-helpers = require('../helpers'); AWS = helpers.AWS
-require('../../lib/rest_xml_client')
+helpers = require('../../helpers'); AWS = helpers.AWS
+require('../../../lib/service_interface/rest_xml')
 
-describe 'AWS.RESTXMLClient', ->
+describe 'AWS.ServiceInterface.RestXml', ->
+
+  MockRESTXMLClient = AWS.util.inherit AWS.Client,
+    serviceName: 'mockservice'
 
   xmlns = 'http://mockservice.com/xmlns'
-
   operation = null
-
-  MockRESTXMLClient = AWS.util.inherit AWS.RESTXMLClient,
-    constructor: (config) ->
-      this.serviceName = 'mockservice'
-      AWS.RESTXMLClient.call(this, config)
+  request = null
+  response = null
+  svc = eval(@description)
 
   beforeEach ->
-
     MockRESTXMLClient.prototype.api =
       xmlNamespace: xmlns
       operations:
@@ -37,33 +36,31 @@ describe 'AWS.RESTXMLClient', ->
           o: null   # no ouputs
 
     AWS.Client.defineMethods(MockRESTXMLClient)
-
     operation = MockRESTXMLClient.prototype.api.operations.sampleOperation
-
-  svc = new MockRESTXMLClient()
-
-  it 'defines a method for each api operation', ->
-    expect(typeof svc.sampleOperation).toEqual('function')
+    client = new MockRESTXMLClient(region: 'region')
+    request = new AWS.AWSRequest(client, 'sampleOperation')
+    response = request.response
 
   describe 'buildRequest', ->
-
-    buildRequest = (params) ->
-      svc.buildRequest('sampleOperation', params)
+    buildRequest = (callback) ->
+      if callback
+        callback()
+      svc.buildRequest(request, response)
 
     describe 'empty bodies', ->
-
       it 'defaults body to null when there are no inputs', ->
-        operation.i = null
-        expect(buildRequest().body).toEqual(null)
+        buildRequest ->
+          operation.i = null
+        expect(response.httpRequest.body).toEqual(null)
 
       it 'defaults body to null when all inputs are uri or header values', ->
-        operation.u = '/{Bucket}'
-        operation.i = {m:{Bucket:{l:'uri',r:1},ACL:{n:'x-amz-acl',l:'header'}}}
-        params = { Bucket:'abc', ACL:'canned-acl' }
-        req = buildRequest(params)
-        expect(req.body).toEqual(null)
-        expect(req.path).toEqual('/abc')
-        expect(req.headers['x-amz-acl']).toEqual('canned-acl')
+        buildRequest ->
+          operation.u = '/{Bucket}'
+          operation.i = {m:{Bucket:{l:'uri',r:1},ACL:{n:'x-amz-acl',l:'header'}}}
+          request.params = Bucket: 'abc', ACL: 'canned-acl'
+        expect(response.httpRequest.body).toEqual(null)
+        expect(response.httpRequest.path).toEqual('/abc')
+        expect(response.httpRequest.headers['x-amz-acl']).toEqual('canned-acl')
 
       it 'includes Content-Length header if body is empty', ->
         operation.i = null
@@ -72,75 +69,74 @@ describe 'AWS.RESTXMLClient', ->
         expect(req.headers['Content-Length']).toEqual(0)
 
     describe 'string bodies', ->
-
       it 'populates the body with string types directly', ->
-        operation.u = '/{Bucket}'
-        operation.i = {m:{Bucket:{l:'uri',r:1},Data:{t:'s',l:'body'}}}
-        params = { Bucket: 'bucket-name', Data: 'abc' }
-        expect(buildRequest(params).body).toEqual('abc')
+        buildRequest ->
+          operation.u = '/{Bucket}'
+          operation.i = {m:{Bucket:{l:'uri',r:1},Data:{t:'s',l:'body'}}}
+          request.params = Bucket: 'bucket-name', Data: 'abc'
+        expect(response.httpRequest.body).toEqual('abc')
 
     describe 'xml bodies', ->
-
       it 'populates the body with XML from the params w/out a location', ->
-        operation.u = '/{Bucket}?next-marker={Marker}&limit={Limit}'
-        operation.i =
-          n: 'ComplexRequest', # the root xml element name
-          m:
-            Bucket: # uri path param
-              t: 's'
-              l: 'uri'
-              r: 1
-            Marker: # uri querystring param
-              t: 's'
-              l: 'uri'
-            Limit: # uri querystring integer param
-              t: 'i'
-              l: 'uri'
-            ACL: # header string param
-              t: 's'
-              l: 'header'
-              n: 'x-amz-acl'
-            Metadata: # header map param
-              t: 'm'
-              l: 'header'
-              n: 'x-amz-meta-'
-            Config: # structure of mixed tpyes
-              t: 'o'
-              r: 1
-              m:
-                Abc: {} # string
-                Locations: # array of strings
-                  t: 'a'
-                  m:
-                    t: 's'
-                    n: 'Location'
-                Data: # array of structures
-                  t: 'a'
-                  m:
-                    t: 'o'
+        buildRequest ->
+          operation.u = '/{Bucket}?next-marker={Marker}&limit={Limit}'
+          operation.i =
+            n: 'ComplexRequest', # the root xml element name
+            m:
+              Bucket: # uri path param
+                t: 's'
+                l: 'uri'
+                r: 1
+              Marker: # uri querystring param
+                t: 's'
+                l: 'uri'
+              Limit: # uri querystring integer param
+                t: 'i'
+                l: 'uri'
+              ACL: # header string param
+                t: 's'
+                l: 'header'
+                n: 'x-amz-acl'
+              Metadata: # header map param
+                t: 'm'
+                l: 'header'
+                n: 'x-amz-meta-'
+              Config: # structure of mixed tpyes
+                t: 'o'
+                r: 1
+                m:
+                  Abc: {} # string
+                  Locations: # array of strings
+                    t: 'a'
                     m:
-                      Foo: {}
-                      Bar: {}
-            Enabled: # boolean
-              t: 'b'
+                      t: 's'
+                      n: 'Location'
+                  Data: # array of structures
+                    t: 'a'
+                    m:
+                      t: 'o'
+                      m:
+                        Foo: {}
+                        Bar: {}
+              Enabled: # boolean
+                t: 'b'
 
-        params = {
-          Enabled: true
-          ACL: 'canned-acl'
-          Config:
-            Abc: 'abc'
-            Locations: ['a', 'b', 'c']
-            Data: [
-              { Foo:'foo1', Bar:'bar1' },
-              { Foo:'foo2', Bar:'bar2' },
-            ]
-          Bucket: 'bucket-name'
-          Marker: 'marker'
-          Limit: 123
-          Metadata:
-            abc: 'xyz'
-            mno: 'hjk'
-        }
+          request.params =
+            Enabled: true
+            ACL: 'canned-acl'
+            Config:
+              Abc: 'abc'
+              Locations: ['a', 'b', 'c']
+              Data: [
+                { Foo:'foo1', Bar:'bar1' },
+                { Foo:'foo2', Bar:'bar2' },
+              ]
+            Bucket: 'bucket-name'
+            Marker: 'marker'
+            Limit: 123
+            Metadata:
+              abc: 'xyz'
+              mno: 'hjk'
 
         xml = """
         <ComplexRequest xmlns="http://mockservice.com/xmlns">
@@ -166,81 +162,65 @@ describe 'AWS.RESTXMLClient', ->
         </ComplexRequest>
         """
 
-        req = buildRequest(params)
-        expect(req.method).toEqual('POST')
-        expect(req.path).toEqual('/bucket-name?next-marker=marker&limit=123')
-        expect(req.headers['x-amz-acl']).toEqual('canned-acl')
-        expect(req.headers['x-amz-meta-abc']).toEqual('xyz')
-        expect(req.headers['x-amz-meta-mno']).toEqual('hjk')
-        helpers.matchXML(req.body, xml)
+        expect(response.httpRequest.method).toEqual('POST')
+        expect(response.httpRequest.path).
+          toEqual('/bucket-name?next-marker=marker&limit=123')
+        expect(response.httpRequest.headers['x-amz-acl']).toEqual('canned-acl')
+        expect(response.httpRequest.headers['x-amz-meta-abc']).toEqual('xyz')
+        expect(response.httpRequest.headers['x-amz-meta-mno']).toEqual('hjk')
+        helpers.matchXML(response.httpRequest.body, xml)
 
       it 'omits the body xml when body params are not present', ->
-        operation.u = '/{Bucket}'
-        operation.i = {n:'CreateBucketConfig', m:{Bucket:{l:'uri',r:1},Config:{}}}
-        params = { Bucket:'abc' } # omitting Config purposefully
-        req = buildRequest(params)
-        expect(req.body).toEqual(null)
-        expect(req.path).toEqual('/abc')
+        buildRequest ->
+          operation.u = '/{Bucket}'
+          operation.i = {n:'CreateBucketConfig', m:{Bucket:{l:'uri',r:1},Config:{}}}
+          request.params = Bucket:'abc' # omitting Config purposefully
+        expect(response.httpRequest.body).toEqual(null)
+        expect(response.httpRequest.path).toEqual('/abc')
 
-  describe 'parseResponse', ->
-
-    resp = null
-
-    beforeEach ->
-      resp = new AWS.HttpResponse()
-
-    parse = (callback) ->
-      svc.parseResponse resp, 'sampleOperation', (error,data) ->
-        callback.call(this, error, data)
-
-    describe 'with data', ->
-
-      extractData = (resp) ->
-        svc.extractData(resp, 'sampleOperation')
-
-      it 'parses the xml body', ->
-        operation.o = {Foo:{},Bar:{t:'a',m:{n:'Item'}}}
-        resp = new AWS.HttpResponse()
-        resp.status = 200
-        resp.body = """
-        <xml>
-          <Foo>foo</Foo>
-          <Bar>
-            <Item>a</Item>
-            <Item>b</Item>
-            <Item>c</Item>
-          </Bar>
-        </xml>
-        """
-        expect(extractData(resp)).toEqual({Foo:'foo', Bar:['a', 'b', 'c']})
-
-    describe 'with error', ->
-
-      beforeEach ->
-        resp.statusCode = 400
-        resp.body = """
+  describe 'extractError', ->
+    extractError = (body) ->
+      if body == undefined
+        body = """
         <Error>
           <Code>InvalidArgument</Code>
           <Message>Provided param is bad</Message>
         </Error>
         """
+      response.httpResponse.statusCode = 400
+      response.httpResponse.body = body
+      svc.extractError(request, response)
 
-      it 'extracts the error code', ->
-        parse (error, data) ->
-          expect(error instanceof Error).toBeTruthy()
-          expect(error.code).toEqual('InvalidArgument')
-          expect(data).toEqual(null)
+    it 'extracts the error code and message', ->
+      extractError()
+      expect(response.error instanceof Error).toBeTruthy()
+      expect(response.error.code).toEqual('InvalidArgument')
+      expect(response.error.message).toEqual('Provided param is bad')
+      expect(response.data).toEqual(null)
 
-      it 'extracts the error message', ->
-        parse (error, data) ->
-          expect(error instanceof Error).toBeTruthy()
-          expect(error.message).toEqual('Provided param is bad')
-          expect(data).toEqual(null)
+    it 'returns an empty error when the body is blank', ->
+      extractError ''
+      expect(response.error instanceof Error).toBeTruthy()
+      expect(response.error.code).toEqual(400)
+      expect(response.error.message).toEqual(null)
+      expect(response.data).toEqual(null)
 
-      it 'returns an empty error when the body is blank', ->
-        resp.body = ''
-        parse (error, data) ->
-          expect(error instanceof Error).toBeTruthy()
-          expect(error.code).toEqual(400)
-          expect(error.message).toEqual(null)
-          expect(data).toEqual(null)
+  describe 'extractData', ->
+    extractData = (body) ->
+      response.httpResponse.statusCode = 200
+      response.httpResponse.body = body
+      svc.extractData(request, request.response)
+
+    it 'parses the xml body', ->
+      operation.o = {Foo:{},Bar:{t:'a',m:{n:'Item'}}}
+      extractData """
+      <xml>
+        <Foo>foo</Foo>
+        <Bar>
+          <Item>a</Item>
+          <Item>b</Item>
+          <Item>c</Item>
+        </Bar>
+      </xml>
+      """
+      expect(response.data).toEqual({Foo:'foo', Bar:['a', 'b', 'c']})
