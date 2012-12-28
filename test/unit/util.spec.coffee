@@ -240,6 +240,17 @@ describe 'AWS.util.inherit', ->
     expect(derived.defaultValue).toEqual(10)
     expect(derived.foo()).toEqual('bar')
 
+  it 'should create pass-through constructor if not defined', ->
+    Base = AWS.util.inherit
+      constructor: createSpy()
+
+    Derived = AWS.util.inherit Base,
+      other: true
+
+    derived = new Derived(1, 2, 'three')
+    expect(derived.other).toEqual(true)
+    expect(Base.prototype.constructor).toHaveBeenCalledWith(1, 2, 'three')
+
 describe 'AWS.util.isEmpty', ->
 
   it 'returns true when passed an empty object literal', ->
