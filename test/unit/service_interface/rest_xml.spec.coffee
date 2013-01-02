@@ -63,10 +63,10 @@ describe 'AWS.ServiceInterface.RestXml', ->
         expect(response.httpRequest.headers['x-amz-acl']).toEqual('canned-acl')
 
       it 'includes Content-Length header if body is empty', ->
-        operation.i = null
-        req = buildRequest()
-        expect(req.body).toEqual(null)
-        expect(req.headers['Content-Length']).toEqual(0)
+        buildRequest ->
+          operation.i = null
+        expect(response.httpRequest.body).toEqual(null)
+        expect(response.httpRequest.headers['Content-Length']).toEqual(0)
 
     describe 'string bodies', ->
       it 'populates the body with string types directly', ->

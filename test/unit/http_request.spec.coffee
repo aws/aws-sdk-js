@@ -30,8 +30,8 @@ describe 'AWS.HttpRequest', ->
     it 'provides headers with a default user agent', ->
       expect(request.headers).toEqual({ 'User-Agent': AWS.util.userAgent() })
 
-    it 'defaults body to undefined', ->
-      expect(request.body).toEqual(undefined)
+    it 'defaults body to empty string', ->
+      expect(request.body).toEqual('')
 
     it 'defaults endpoint to undefined', ->
       expect(request.endpoint).toEqual(undefined)

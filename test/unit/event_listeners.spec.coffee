@@ -104,7 +104,7 @@ describe 'AWS.EventListeners', ->
       request.on('httpData', ->)
       request.send()
 
-      expect(request.response.httpResponse.body).toEqual(null)
+      expect(request.response.httpResponse.body).toEqual('')
 
   describe 'retry', ->
     it 'retries a request with a set maximum retries', ->
