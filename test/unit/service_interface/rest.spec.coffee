@@ -44,7 +44,7 @@ describe 'AWS.ServiceInterface.Rest', ->
     buildRequest = (callback) ->
       if callback
         callback()
-      svc.buildRequest(response, request)
+      svc.buildRequest(request)
 
     describe 'method', ->
       it 'populates method from the operation', ->
@@ -120,7 +120,7 @@ describe 'AWS.ServiceInterface.Rest', ->
     extractData = (callback) ->
       if callback
         callback()
-      svc.extractData(response, request)
+      svc.extractData(response)
 
     describe 'headers', ->
       it 'extracts header values', ->

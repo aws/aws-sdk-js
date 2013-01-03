@@ -40,7 +40,7 @@ describe 'AWS.ServiceInterface.Query', ->
   describe 'buildRequest', ->
     buildRequest = ->
       request.params = Input: 'foo+bar: yuck/baz=~'
-      svc.buildRequest(response, request)
+      svc.buildRequest(request)
 
     it 'should use POST method requests', ->
       buildRequest()
@@ -81,7 +81,7 @@ describe 'AWS.ServiceInterface.Query', ->
         """
       response.httpResponse.statusCode = 400
       response.httpResponse.body = body
-      svc.extractError(response, request)
+      svc.extractError(response)
 
     it 'extracts the error code and message', ->
       extractError()
@@ -100,7 +100,7 @@ describe 'AWS.ServiceInterface.Query', ->
     extractData = (body) ->
       response.httpResponse.statusCode = 200
       response.httpResponse.body = body
-      svc.extractData(response, request)
+      svc.extractData(response)
 
     it 'parses the response using the operation output rules', ->
       extractData """

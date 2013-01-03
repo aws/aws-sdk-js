@@ -150,9 +150,9 @@ describe 'AWS.EventListeners', ->
         if resp.retryCount < 2
           req.emit('httpError', {code: 'NetworkingError', message: "FAIL!"}, resp)
         else
-          req.emit('httpHeaders', resp.retryCount < 2 ? 500 : 200, {}, resp, req)
-          req.emit('httpData', 'foo', resp, req)
-          req.emit('httpDone', resp, req)
+          req.emit('httpHeaders', resp.retryCount < 2 ? 500 : 200, {}, resp)
+          req.emit('httpData', 'foo', resp)
+          req.emit('httpDone', resp)
 
       response = makeRequest(->)
 

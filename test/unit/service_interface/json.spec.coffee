@@ -37,7 +37,7 @@ describe 'AWS.ServiceInterface.Json', ->
 
   describe 'buildRequest', ->
     buildRequest = ->
-      svc.buildRequest(response, request)
+      svc.buildRequest(request)
 
     it 'should use POST method requests', ->
       buildRequest()
@@ -76,7 +76,7 @@ describe 'AWS.ServiceInterface.Json', ->
     extractError = (body) ->
       response.httpResponse.statusCode = 500
       response.httpResponse.body = body
-      svc.extractError(response, request)
+      svc.extractError(response)
 
     it 'removes prefixes from the error code', ->
       extractError '{"__type":"com.amazon.coral.service#ErrorCode" }'
@@ -126,7 +126,7 @@ describe 'AWS.ServiceInterface.Json', ->
     extractData = (body) ->
       response.httpResponse.statusCode = 200
       response.httpResponse.body = body
-      svc.extractData(response, request)
+      svc.extractData(response)
 
     it 'JSON parses http response bodies', ->
       extractData '{"a":1, "b":"xyz"}'

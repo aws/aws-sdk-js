@@ -45,7 +45,7 @@ describe 'AWS.ServiceInterface.RestXml', ->
     buildRequest = (callback) ->
       if callback
         callback()
-      svc.buildRequest(response, request)
+      svc.buildRequest(request)
 
     describe 'empty bodies', ->
       it 'defaults body to null when there are no inputs', ->
@@ -189,7 +189,7 @@ describe 'AWS.ServiceInterface.RestXml', ->
         """
       response.httpResponse.statusCode = 400
       response.httpResponse.body = body
-      svc.extractError(response, request)
+      svc.extractError(response)
 
     it 'extracts the error code and message', ->
       extractError()
@@ -209,7 +209,7 @@ describe 'AWS.ServiceInterface.RestXml', ->
     extractData = (body) ->
       response.httpResponse.statusCode = 200
       response.httpResponse.body = body
-      svc.extractData(response, request)
+      svc.extractData(response)
 
     it 'parses the xml body', ->
       operation.o = {Foo:{},Bar:{t:'a',m:{n:'Item'}}}
