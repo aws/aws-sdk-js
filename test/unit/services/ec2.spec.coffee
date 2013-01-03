@@ -12,38 +12,34 @@
 # language governing permissions and limitations under the License.
 
 AWS = require('../../../lib/core')
+helpers = require('../../helpers')
 require('../../../lib/services/ec2')
 
 describe 'AWS.EC2.Client', ->
 
-  ec2 = new AWS.EC2.Client()
+  ec2 = new AWS.EC2.Client({region: 'us-east-1'})
 
   describe 'parseResponse', ->
-
-    resp = null
-
-    beforeEach ->
-      resp = new AWS.HttpResponse()
-
+    body = ''
     parse = (callback) ->
-      ec2.parseResponse resp, 'operationName', (error,data) ->
+      helpers.mockHttpResponse 400, {}, body
+      ec2.makeRequest 'describeInstances', (error, data) ->
         callback.call(this, error, data)
 
     describe 'with error', ->
-
       beforeEach ->
-        resp.statusCode = 400
-        resp.body = """
-        <Response>
-          <Errors>
-            <Error>
-              <Code>InvalidInstanceID.Malformed</Code>
-              <Message>Invalid id: "i-12345678"</Message>
-            </Error>
-          </Errors>
-          <RequestID>ab123mno-6432-dceb-asdf-123mno543123</RequestID>
-        </Response>
-        """
+        body =
+          """
+          <Response>
+            <Errors>
+              <Error>
+                <Code>InvalidInstanceID.Malformed</Code>
+                <Message>Invalid id: "i-12345678"</Message>
+              </Error>
+            </Errors>
+            <RequestID>ab123mno-6432-dceb-asdf-123mno543123</RequestID>
+          </Response>
+          """
 
       it 'extracts the error code', ->
         parse (error, data) ->
@@ -56,7 +52,7 @@ describe 'AWS.EC2.Client', ->
           expect(data).toEqual(null)
 
       it 'returns an empty error when the body is blank', ->
-        resp.body = ''
+        body = ''
         parse (error, data) ->
           expect(error.code).toEqual(400)
           expect(error.message).toEqual(null)

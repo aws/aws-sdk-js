@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 AWS = require('../../lib/core')
-require('../../lib/query_client')
+require('../../lib/service_interface/query')
 require('../../lib/sigv2')
 
 describe 'AWS.SigV2', ->
@@ -23,9 +23,7 @@ describe 'AWS.SigV2', ->
   signer = null
 
   buildRequest = ->
-    request = new AWS.HttpRequest()
-    request.endpoint = new AWS.Endpoint('localhost')
-    request.endpoint.hostname = 'locahost'
+    request = new AWS.HttpRequest(new AWS.Endpoint('localhost'))
     request.params = new AWS.QueryParamList()
     request
 

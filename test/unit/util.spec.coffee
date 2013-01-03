@@ -181,6 +181,10 @@ describe 'AWS.util.arrayEach', ->
     expect(total).toEqual(1)
 
 describe 'AWS.util.copy', ->
+  it 'does not copy null or undefined', ->
+    expect(AWS.util.copy(null)).toEqual(null)
+    expect(AWS.util.copy(undefined)).toEqual(undefined)
+
   it 'should perform a shallow copy of an object', ->
     obj = a: 1, b: 2, c: 3
     copied = AWS.util.copy(obj)
@@ -235,6 +239,17 @@ describe 'AWS.util.inherit', ->
     expect(derived.other).toEqual('other')
     expect(derived.defaultValue).toEqual(10)
     expect(derived.foo()).toEqual('bar')
+
+  it 'should create pass-through constructor if not defined', ->
+    Base = AWS.util.inherit
+      constructor: createSpy()
+
+    Derived = AWS.util.inherit Base,
+      other: true
+
+    derived = new Derived(1, 2, 'three')
+    expect(derived.other).toEqual(true)
+    expect(Base.prototype.constructor).toHaveBeenCalledWith(1, 2, 'three')
 
 describe 'AWS.util.isEmpty', ->
 

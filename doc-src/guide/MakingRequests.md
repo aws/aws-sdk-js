@@ -27,11 +27,11 @@ The `error` and `data` parameters are described in the "Response Object"
 section below.
 
 Note that if you do not specify a callback, the operation will
-return an `AWS.AWSRequest` object that must be manually sent using
+return an `AWS.Request` object that must be manually sent using
 the `send()` method:
 
 ```js
-// create the AWS.AWSRequest object
+// create the AWS.Request object
 var request = new AWS.EC2().client.describeInstances();
 
 // register a callback to report on the data
@@ -43,10 +43,10 @@ request.done(function(resp) {
 request.send();
 ```
 
-### The Response Object (`AWS.AWSResponse`)
+### The Response Object (`AWS.Response`)
 
 The response object is passed into each callback function so
-that you can access response data. The `AWS.AWSResponse` object that
+that you can access response data. The `AWS.Response` object that
 is passed in contains two important properties to get at this data:
 
 When using the standard callback mechanism, the two properties will
@@ -88,7 +88,7 @@ before attempting to access the `response.data` property.
 
 Currently, you can register callbacks for various events by
 either using the simplified callback syntax, or by using the callback
-methods on the returned `AWS.AWSRequest` object.
+methods on the returned `AWS.Request` object.
 
 #### Simplified Callback Method
 
@@ -101,9 +101,9 @@ For example:
 ```js
 s3.client.listBuckets(function(error, data) {
   if (err) {
-    console.log(error); // error is AWSResponse.error
+    console.log(error); // error is Response.error
   } else {
-    console.log(data); // data is AWSResponse.data
+    console.log(data); // data is Response.data
   }
 });
 ```
@@ -119,7 +119,7 @@ Prints (assuming the request succeeded):
 ```
 
 The error and data parameters accepted are equivalent to the `error` and
-`data` properties discussed in the `AWS.AWSResponse` response object section
+`data` properties discussed in the `AWS.Response` response object section
 above.
 
 If you are passing parameters to the operation, the callback should be placed
@@ -131,10 +131,10 @@ s3.client.getObject({Bucket: 'bucket', Key: 'key'}, function(err, data) {
 });
 ```
 
-#### AWS.AWSRequest Callbacks
+#### AWS.Request Callbacks
 
 You can alternatively register callbacks on events provided by the
-`AWS.AWSRequest` object returned by each low-level client operation method.
+`AWS.Request` object returned by each low-level client operation method.
 This request object exposes the `done`, `fail`, `data`, and `always`
 events, each taking a callback that accepts the response object.
 
@@ -221,7 +221,7 @@ request.always(function(response) {
 ## Binding Custom Context Data on a Callback
 
 By default, the `this` context of a callback function registered on an
-event will be the `AWS.AWSResponse` object returned from the service.
+event will be the `AWS.Response` object returned from the service.
 In some cases, it may be necessary to pass extra custom context to these
 functions; in these cases, you can bind a custom value to be used as the
 `this` context object when the callbacks are executed. To do so, pass
