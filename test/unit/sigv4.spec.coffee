@@ -12,16 +12,18 @@
 # language governing permissions and limitations under the License.
 
 AWS = require('../../lib/core')
+helpers = require('../helpers')
 require('../../lib/services/dynamodb')
 
 beforeEach ->
   spyOn(AWS.util, 'userAgent').andReturn('aws-sdk-js/0.1')
 
 buildRequest = ->
-  ddb = new AWS.DynamoDB.Client({ region:'region' })
-  req = ddb.buildRequest('listTables', { foo: 'bar' })
-  req.endpoint.hostname = 'localhost'
-  return req
+  ddb = new AWS.DynamoDB.Client({region: 'region', endpoint: 'localhost'})
+  req = ddb.makeRequest('listTables', {foo: 'bar'})
+  resp = new AWS.Response(req)
+  req.emitEvents(resp, 'validate', 'build')
+  return req.httpRequest
 
 buildSigner = (request) ->
   return new AWS.SigV4(request || buildRequest(), 'dynamodb')

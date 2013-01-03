@@ -71,7 +71,7 @@ module.exports = {
    * finish execution before moving onto the next step in the scenario.
    */
   request: function request(svc, operation, params, next) {
-    this[svc][operation](params).always(function (resp) {
+    this[svc][operation](params).on('complete', function (resp) {
       if (resp.error) {
         this.unexpectedError(resp, next);
       } else {

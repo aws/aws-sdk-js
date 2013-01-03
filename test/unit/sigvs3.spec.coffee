@@ -32,7 +32,7 @@ describe 'AWS.SigVS3', ->
     method = 'POST'
     path = '/'
     virtualHostedBucket = null
-    date = undefined
+    date = new Date(0)
     headers = {}
     body = null
     accessKeyId = 'akid'
@@ -65,33 +65,16 @@ describe 'AWS.SigVS3', ->
     signer.stringToSign()
 
   describe 'addAuthorization', ->
-
-    beforeEach ->
-      date = AWS.util.date.rfc822(new Date(0))
-
     it 'sets the date header when not present', ->
-
       req = buildRequest()
+      addAuth(req)
+      expect(req.headers['Date']).toEqual(AWS.util.date.rfc822(date))
 
-      # stub date.rfc822 to return a fixed date string
-      spyOn(AWS.util.date, 'rfc822')
-      AWS.util.date.rfc822.andReturn('date-string')
-
-      signer = new AWS.SigVS3(req)
-      signer.addAuthorization(credentials())
-
-      expect(req.headers['Date']).toEqual('date-string')
-
-    it 'does not set the date header if x-amz-date is present', ->
-
+    it 'overwrites Date if present', ->
       req = buildRequest()
-      req.headers['X-Amz-Date'] = 'date-string'
-
-      signer = new AWS.SigVS3(buildRequest())
-      signer.addAuthorization(credentials())
-
-      expect(req.headers['Date']).toEqual(null)
-      expect(req.headers['X-Amz-Date']).toEqual('date-string')
+      req.headers['Date'] = 'date-string'
+      addAuth(req)
+      expect(req.headers['Date']).toEqual(AWS.util.date.rfc822(date))
 
     it 'omits the security token header when session token is blank', ->
       sessionToken = null
