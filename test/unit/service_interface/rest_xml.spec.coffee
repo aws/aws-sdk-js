@@ -51,22 +51,22 @@ describe 'AWS.ServiceInterface.RestXml', ->
       it 'defaults body to null when there are no inputs', ->
         buildRequest ->
           operation.i = null
-        expect(response.httpRequest.body).toEqual(null)
+        expect(request.httpRequest.body).toEqual(null)
 
       it 'defaults body to null when all inputs are uri or header values', ->
         buildRequest ->
           operation.u = '/{Bucket}'
           operation.i = {m:{Bucket:{l:'uri',r:1},ACL:{n:'x-amz-acl',l:'header'}}}
           request.params = Bucket: 'abc', ACL: 'canned-acl'
-        expect(response.httpRequest.body).toEqual(null)
-        expect(response.httpRequest.path).toEqual('/abc')
-        expect(response.httpRequest.headers['x-amz-acl']).toEqual('canned-acl')
+        expect(request.httpRequest.body).toEqual(null)
+        expect(request.httpRequest.path).toEqual('/abc')
+        expect(request.httpRequest.headers['x-amz-acl']).toEqual('canned-acl')
 
       it 'includes Content-Length header if body is empty', ->
         buildRequest ->
           operation.i = null
-        expect(response.httpRequest.body).toEqual(null)
-        expect(response.httpRequest.headers['Content-Length']).toEqual(0)
+        expect(request.httpRequest.body).toEqual(null)
+        expect(request.httpRequest.headers['Content-Length']).toEqual(0)
 
     describe 'string bodies', ->
       it 'populates the body with string types directly', ->
@@ -74,7 +74,7 @@ describe 'AWS.ServiceInterface.RestXml', ->
           operation.u = '/{Bucket}'
           operation.i = {m:{Bucket:{l:'uri',r:1},Data:{t:'s',l:'body'}}}
           request.params = Bucket: 'bucket-name', Data: 'abc'
-        expect(response.httpRequest.body).toEqual('abc')
+        expect(request.httpRequest.body).toEqual('abc')
 
     describe 'xml bodies', ->
       it 'populates the body with XML from the params w/out a location', ->
@@ -162,21 +162,21 @@ describe 'AWS.ServiceInterface.RestXml', ->
         </ComplexRequest>
         """
 
-        expect(response.httpRequest.method).toEqual('POST')
-        expect(response.httpRequest.path).
+        expect(request.httpRequest.method).toEqual('POST')
+        expect(request.httpRequest.path).
           toEqual('/bucket-name?next-marker=marker&limit=123')
-        expect(response.httpRequest.headers['x-amz-acl']).toEqual('canned-acl')
-        expect(response.httpRequest.headers['x-amz-meta-abc']).toEqual('xyz')
-        expect(response.httpRequest.headers['x-amz-meta-mno']).toEqual('hjk')
-        helpers.matchXML(response.httpRequest.body, xml)
+        expect(request.httpRequest.headers['x-amz-acl']).toEqual('canned-acl')
+        expect(request.httpRequest.headers['x-amz-meta-abc']).toEqual('xyz')
+        expect(request.httpRequest.headers['x-amz-meta-mno']).toEqual('hjk')
+        helpers.matchXML(request.httpRequest.body, xml)
 
       it 'omits the body xml when body params are not present', ->
         buildRequest ->
           operation.u = '/{Bucket}'
           operation.i = {n:'CreateBucketConfig', m:{Bucket:{l:'uri',r:1},Config:{}}}
           request.params = Bucket:'abc' # omitting Config purposefully
-        expect(response.httpRequest.body).toEqual(null)
-        expect(response.httpRequest.path).toEqual('/abc')
+        expect(request.httpRequest.body).toEqual(null)
+        expect(request.httpRequest.path).toEqual('/abc')
 
   describe 'extractError', ->
     extractError = (body) ->

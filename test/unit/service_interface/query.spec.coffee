@@ -44,30 +44,30 @@ describe 'AWS.ServiceInterface.Query', ->
 
     it 'should use POST method requests', ->
       buildRequest()
-      expect(response.httpRequest.method).toEqual('POST')
+      expect(request.httpRequest.method).toEqual('POST')
 
     it 'should perform all operations on root (/)', ->
       buildRequest()
-      expect(response.httpRequest.path).toEqual('/')
+      expect(request.httpRequest.path).toEqual('/')
 
     it 'should set Content-Type header', ->
       buildRequest()
-      expect(response.httpRequest.headers['Content-Type']).
+      expect(request.httpRequest.headers['Content-Type']).
         toEqual('application/x-www-form-urlencoded; charset=utf-8')
 
     it 'should add the api version param', ->
       buildRequest()
-      expect(response.httpRequest.params.toString()).
+      expect(request.httpRequest.params.toString()).
         toMatch(/Version=2012-01-01/)
 
     it 'should add the operation name as Action', ->
       buildRequest()
-      expect(response.httpRequest.params.toString()).
+      expect(request.httpRequest.params.toString()).
         toMatch(/Action=OperationName/)
 
     it 'should uri encode params properly', ->
       buildRequest()
-      expect(response.httpRequest.params.toString()).
+      expect(request.httpRequest.params.toString()).
         toMatch(/foo%2Bbar%3A%20yuck%2Fbaz%3D~/);
 
   describe 'extractError', ->

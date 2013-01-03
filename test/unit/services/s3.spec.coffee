@@ -81,7 +81,7 @@ describe 'AWS.S3.Client', ->
       req = request(operation, params)
       resp = new AWS.AWSResponse(req)
       req.emitEvents(resp, 'build')
-      return resp.httpRequest
+      return req.httpRequest
 
     it 'obeys the configuration for s3ForcePathStyle', ->
       config = new AWS.Config({s3ForcePathStyle: true })

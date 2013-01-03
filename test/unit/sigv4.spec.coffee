@@ -23,7 +23,7 @@ buildRequest = ->
   req = ddb.makeRequest('listTables', {foo: 'bar'})
   resp = new AWS.AWSResponse(req)
   req.emitEvents(resp, 'validate', 'build')
-  return resp.httpRequest
+  return req.httpRequest
 
 buildSigner = (request) ->
   return new AWS.SigV4(request || buildRequest(), 'dynamodb')

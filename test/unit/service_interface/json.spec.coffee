@@ -41,36 +41,36 @@ describe 'AWS.ServiceInterface.Json', ->
 
     it 'should use POST method requests', ->
       buildRequest()
-      expect(response.httpRequest.method).toEqual('POST')
+      expect(request.httpRequest.method).toEqual('POST')
 
     it 'should perform all operations on root (/)', ->
       buildRequest()
-      expect(response.httpRequest.path).toEqual('/')
+      expect(request.httpRequest.path).toEqual('/')
 
     it 'should set Content-Type header', ->
       buildRequest()
-      expect(response.httpRequest.headers['Content-Type']).
+      expect(request.httpRequest.headers['Content-Type']).
         toEqual('application/x-amz-json-1.0')
 
     it 'should set X-Amz-Target header', ->
       buildRequest()
-      expect(response.httpRequest.headers['X-Amz-Target']).
+      expect(request.httpRequest.headers['X-Amz-Target']).
         toEqual('prefix-OperationName')
 
     it 'should set Content-Length to body length', ->
       buildRequest()
-      expect(response.httpRequest.body).toEqual('{}')
-      expect(response.httpRequest.headers['Content-Length']).toEqual(2)
+      expect(request.httpRequest.body).toEqual('{}')
+      expect(request.httpRequest.headers['Content-Length']).toEqual(2)
 
     it 'should set the body to JSON serialized params', ->
       request.params = foo: 'bar'
       buildRequest()
-      expect(response.httpRequest.body).toEqual('{"foo":"bar"}')
+      expect(request.httpRequest.body).toEqual('{"foo":"bar"}')
 
     it 'should preserve numeric types', ->
       request.params = count: 3
       buildRequest()
-      expect(response.httpRequest.body).toEqual('{"count":3}')
+      expect(request.httpRequest.body).toEqual('{"count":3}')
 
   describe 'extractError', ->
     extractError = (body) ->

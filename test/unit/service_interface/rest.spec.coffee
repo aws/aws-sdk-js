@@ -50,61 +50,61 @@ describe 'AWS.ServiceInterface.Rest', ->
       it 'populates method from the operation', ->
         buildRequest ->
           operation.m = 'GET'
-        expect(response.httpRequest.method).toEqual('GET')
+        expect(request.httpRequest.method).toEqual('GET')
 
     describe 'uri', ->
       it 'populates uri from the operation', ->
         buildRequest ->
           operation.u = '/path'
-        expect(response.httpRequest.path).toEqual('/path')
+        expect(request.httpRequest.path).toEqual('/path')
 
       it 'replaces param placeholders', ->
         buildRequest ->
           operation.u = '/Owner/{Id}'
           operation.i = {m:{Id:{l:'uri'}}}
           request.params = Id: 'abc'
-        expect(response.httpRequest.path).toEqual('/Owner/abc')
+        expect(request.httpRequest.path).toEqual('/Owner/abc')
 
       it 'can replace multiple path placeholders', ->
         buildRequest ->
           operation.u = '/{Id}/{Count}'
           operation.i = {m:{Id:{l:'uri'},Count:{t:'i',l:'uri'}}}
           request.params = Id: 'abc', Count: 123
-        expect(response.httpRequest.path).toEqual('/abc/123')
+        expect(request.httpRequest.path).toEqual('/abc/123')
 
       it 'performs querystring param replacements', ->
         buildRequest ->
           operation.u = '/path?id-param={Id}'
           operation.i = {m:{Id:{l:'uri'}}}
           request.params = Id: 'abc'
-        expect(response.httpRequest.path).toEqual('/path?id-param=abc')
+        expect(request.httpRequest.path).toEqual('/path?id-param=abc')
 
       it 'omits querystring when param is not provided', ->
         buildRequest ->
           operation.u = '/path?id-param={Id}'
           operation.i = {m:{Id:{l:'uri'}}}
-        expect(response.httpRequest.path).toEqual('/path')
+        expect(request.httpRequest.path).toEqual('/path')
 
       it 'accpets multiple query params with uri params', ->
         buildRequest ->
           operation.u = '/{Abc}/{Xyz}?foo={Foo}&bar={Bar}'
           operation.i = {m:{Abc:{l:'uri'},Xyz:{l:'uri'},Foo:{l:'uri'},Bar:{l:'uri'}}}
           request.params = { Abc:'abc', Xyz:'xyz', Bar:'bar' } # omitted Foo
-        expect(response.httpRequest.path).toEqual('/abc/xyz?bar=bar')
+        expect(request.httpRequest.path).toEqual('/abc/xyz?bar=bar')
 
       it 'uri escapes params in both path and querystring', ->
         buildRequest ->
           operation.u = '/{Path}?query={Query}'
           operation.i = {m:{Path:{l:'uri'},Query:{l:'uri'}}}
           request.params = { Path:'a b', Query:'a/b' }
-        expect(response.httpRequest.path).toEqual('/a%20b?query=a%2Fb')
+        expect(request.httpRequest.path).toEqual('/a%20b?query=a%2Fb')
 
     describe 'headers', ->
       it 'populates the headers with present params', ->
         buildRequest ->
           operation.i = {m:{ACL:{l:'header',n:'x-amz-acl'}}}
           request.params = ACL: 'public-read'
-        expect(response.httpRequest.headers['x-amz-acl']).toEqual('public-read')
+        expect(request.httpRequest.headers['x-amz-acl']).toEqual('public-read')
 
       it 'works with map types', ->
         buildRequest ->
@@ -113,8 +113,8 @@ describe 'AWS.ServiceInterface.Rest', ->
             Metadata:
               foo: 'bar'
               abc: 'xyz'
-        expect(response.httpRequest.headers['x-amz-meta-foo']).toEqual('bar')
-        expect(response.httpRequest.headers['x-amz-meta-abc']).toEqual('xyz')
+        expect(request.httpRequest.headers['x-amz-meta-foo']).toEqual('bar')
+        expect(request.httpRequest.headers['x-amz-meta-abc']).toEqual('xyz')
 
   describe 'extractData', ->
     extractData = (callback) ->

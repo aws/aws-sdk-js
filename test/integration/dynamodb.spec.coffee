@@ -21,7 +21,7 @@ describe 'AWS.DynamoDB', ->
       helpers.integration (-> client.listTables(Limit: 3)), (resp) ->
         expect(resp.error).toEqual(null)
         expect(JSON.stringify(resp.data)).toMatch(/\{.*"TableNames":.*\}/)
-        expect(resp.httpRequest.body).toEqual('{"Limit":3}')
+        expect(resp.request.httpRequest.body).toEqual('{"Limit":3}')
 
   describe 'deleteItem', ->
     it 'should fail if TableName not provided', ->

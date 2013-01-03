@@ -21,7 +21,7 @@ describe 'AWS.SimpleWorkflow', ->
       helpers.integration (-> client.listDomains(registrationStatus: "REGISTERED")), (resp) ->
         expect(resp.error).toEqual(null)
         expect(JSON.stringify(resp.data)).toMatch(/\{"domainInfos":.*\}/)
-        expect(resp.httpRequest.body).toEqual('{"registrationStatus":"REGISTERED"}')
+        expect(resp.request.httpRequest.body).toEqual('{"registrationStatus":"REGISTERED"}')
 
   describe 'getWorkflowExecutionHistory', ->
     it 'should fail if TableName not provided', ->
