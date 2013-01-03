@@ -12,6 +12,15 @@
 # language governing permissions and limitations under the License.
 
 AWS = require('../lib/aws')
+fs = require('fs')
+configFile = __dirname + '/../configuration'
+
+if fs.existsSync(configFile)
+  AWS.config.loadFromPath(configFile)
+else
+  AWS.config.update credentials:
+    accessKeyId: 'akid'
+    secretAccessKey: 'secret'
 
 integration = (reqBuilder, respCallback) ->
   req = reqBuilder()
