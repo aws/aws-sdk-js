@@ -42,7 +42,7 @@ module.exports = function () {
   this.Then(/^the object with the key "([^"]*)" should contain "([^"]*)"$/, function(key, contents, next) {
     this.eventually(next, function (retry) {
       this.s3.getObject({Bucket:this.sharedBucket,Key:key}, function(err, data) {
-        if (data && data.Body == contents)
+        if (data && data.Body.toString() == contents)
           next();
         else
           retry();
