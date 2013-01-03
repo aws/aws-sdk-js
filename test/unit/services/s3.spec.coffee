@@ -20,7 +20,7 @@ describe 'AWS.S3.Client', ->
 
   s3 = null
   request = (operation, params) ->
-    req = new AWS.AWSRequest(s3, operation, params || {})
+    req = new AWS.Request(s3, operation, params || {})
     req.client.addAllRequestListeners(req)
     req
 
@@ -79,7 +79,7 @@ describe 'AWS.S3.Client', ->
   describe 'building a request', ->
     build = (operation, params) ->
       req = request(operation, params)
-      resp = new AWS.AWSResponse(req)
+      resp = new AWS.Response(req)
       req.emitEvents(resp, 'build')
       return req.httpRequest
 
@@ -172,7 +172,7 @@ describe 'AWS.S3.Client', ->
 
     extractError = (statusCode) ->
       req = request('operation')
-      resp = new AWS.AWSResponse(req)
+      resp = new AWS.Response(req)
       resp.httpResponse.body = ''
       resp.httpResponse.statusCode = statusCode
       req.emit('foo')

@@ -32,8 +32,8 @@ describe 'AWS.ServiceInterface.Json', ->
 
   beforeEach ->
     client = new MockJSONClient(region: 'region')
-    request = new AWS.AWSRequest(client, 'operationName')
-    response = new AWS.AWSResponse(request)
+    request = new AWS.Request(client, 'operationName')
+    response = new AWS.Response(request)
 
   describe 'buildRequest', ->
     buildRequest = ->

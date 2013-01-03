@@ -58,13 +58,13 @@ AWS.S3 = inherit({})
  *     * +UploadId+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method completeMultipartUpload(params, callback)
@@ -82,7 +82,7 @@ AWS.S3 = inherit({})
  *           was uploaded.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -99,7 +99,7 @@ AWS.S3 = inherit({})
  *       * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
  *         encryption algorithm used when storing this object in S3.
  *       * +VersionId+ - (<tt>String</tt>) Version of the object.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method copyObject(params, callback)
@@ -154,7 +154,7 @@ AWS.S3 = inherit({})
  *       store with the object in S3.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -169,7 +169,7 @@ AWS.S3 = inherit({})
  *       * +CopySourceVersionId+ - (<tt>String</tt>)
  *       * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
  *         encryption algorithm used when storing this object in S3.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createBucket(params, callback)
@@ -192,7 +192,7 @@ AWS.S3 = inherit({})
  *       write, read ACP, and write ACP permissions on the bucket.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -200,7 +200,7 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
  *       * +Location+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createMultipartUpload(params, callback)
@@ -241,7 +241,7 @@ AWS.S3 = inherit({})
  *       store with the object in S3.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -256,7 +256,7 @@ AWS.S3 = inherit({})
  *         upload.
  *       * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
  *         encryption algorithm used when storing this object in S3.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteBucket(params, callback)
@@ -267,13 +267,13 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteBucketCors(params, callback)
@@ -282,13 +282,13 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteBucketLifecycle(params, callback)
@@ -297,13 +297,13 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteBucketPolicy(params, callback)
@@ -312,13 +312,13 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteBucketTagging(params, callback)
@@ -327,13 +327,13 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteBucketWebsite(params, callback)
@@ -342,13 +342,13 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteObject(params, callback)
@@ -360,7 +360,7 @@ AWS.S3 = inherit({})
  *     * +Key+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -372,7 +372,7 @@ AWS.S3 = inherit({})
  *         not (false) a delete marker.
  *       * +VersionId+ - (<tt>String</tt>) Returns the version ID of the
  *         delete marker created as a result of the DELETE operation.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteObjects(params, callback)
@@ -394,7 +394,7 @@ AWS.S3 = inherit({})
  *       that is displayed on your authentication device.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -411,7 +411,7 @@ AWS.S3 = inherit({})
  *         * +VersionId+ - (<tt>String</tt>)
  *         * +Code+ - (<tt>String</tt>)
  *         * +Message+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getBucketAcl(params, callback)
@@ -420,7 +420,7 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -442,7 +442,7 @@ AWS.S3 = inherit({})
  *           * +URI+ - (<tt>String</tt>) URI of the grantee group.
  *         * +Permission+ - (<tt>String</tt>) Specifies the permission
  *           given to the grantee.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getBucketCors(params, callback)
@@ -451,7 +451,7 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -472,7 +472,7 @@ AWS.S3 = inherit({})
  *           in the response that you want customers to be able to access
  *           from their applications (for example, from a JavaScript
  *           XMLHttpRequest object).
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getBucketLifecycle(params, callback)
@@ -481,7 +481,7 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -510,7 +510,7 @@ AWS.S3 = inherit({})
  *             be a non-zero positive integer.
  *           * +Date+ - (<tt>Date</tt>) Indicates at what date the object
  *             is to be moved or deleted. Should be in GMT ISO 8601 Format.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getBucketLocation(params, callback)
@@ -519,7 +519,7 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -527,7 +527,7 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
  *       * +LocationConstraint+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getBucketLogging(params, callback)
@@ -538,7 +538,7 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -568,7 +568,7 @@ AWS.S3 = inherit({})
  *               grantee.
  *             * +URI+ - (<tt>String</tt>) URI of the grantee group.
  *           * +Permission+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getBucketNotification(params, callback)
@@ -577,7 +577,7 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -590,7 +590,7 @@ AWS.S3 = inherit({})
  *           the bucket.
  *         * +Event+ - (<tt>String</tt>) Bucket event for which to send
  *           notifications.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getBucketPolicy(params, callback)
@@ -599,7 +599,7 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -608,7 +608,7 @@ AWS.S3 = inherit({})
  *       The +data+ object has the following properties:
  *       * +Policy+ - (<tt>String</tt>) The bucket policy as a JSON
  *         document.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getBucketRequestPayment(params, callback)
@@ -617,7 +617,7 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -626,7 +626,7 @@ AWS.S3 = inherit({})
  *       The +data+ object has the following properties:
  *       * +Payer+ - (<tt>String</tt>) Specifies who pays for the download
  *         and request fees.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getBucketTagging(params, callback)
@@ -635,7 +635,7 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -645,7 +645,7 @@ AWS.S3 = inherit({})
  *       * +TagSet+ - (<tt>Array<Object></tt>)
  *         * +Key+ - (<tt>String</tt>) Name of the tag.
  *         * +Value+ - (<tt>String</tt>) Value of the tag.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getBucketVersioning(params, callback)
@@ -654,7 +654,7 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -667,7 +667,7 @@ AWS.S3 = inherit({})
  *         only returned if the bucket has been configured with MFA delete.
  *         If the bucket has never been so configured, this element is not
  *         returned.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getBucketWebsite(params, callback)
@@ -676,7 +676,7 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -693,7 +693,7 @@ AWS.S3 = inherit({})
  *       * +ErrorDocument+ - (<tt>Object</tt>)
  *         * +Key+ - (<tt>String</tt>) The object key name to use when a
  *           4XX class error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getObject(params, callback)
@@ -733,7 +733,7 @@ AWS.S3 = inherit({})
  *       return a 304 (not modified).
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -772,7 +772,7 @@ AWS.S3 = inherit({})
  *       * +VersionId+ - (<tt>String</tt>) Version of the object.
  *       * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
  *         store with the object in S3.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getObjectAcl(params, callback)
@@ -784,7 +784,7 @@ AWS.S3 = inherit({})
  *       specific version of the object.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -806,7 +806,7 @@ AWS.S3 = inherit({})
  *           * +URI+ - (<tt>String</tt>) URI of the grantee group.
  *         * +Permission+ - (<tt>String</tt>) Specifies the permission
  *           given to the grantee.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getObjectTorrent(params, callback)
@@ -816,7 +816,7 @@ AWS.S3 = inherit({})
  *     * +Key+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -824,7 +824,7 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
  *       * +Body+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method headBucket(params, callback)
@@ -834,13 +834,13 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method headObject(params, callback)
@@ -871,7 +871,7 @@ AWS.S3 = inherit({})
  *       return a 304 (not modified).
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -909,7 +909,7 @@ AWS.S3 = inherit({})
  *       * +VersionId+ - (<tt>String</tt>) Version of the object.
  *       * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
  *         store with the object in S3.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method listBuckets(params, callback)
@@ -918,7 +918,7 @@ AWS.S3 = inherit({})
  *   @param params [Object]
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -931,7 +931,7 @@ AWS.S3 = inherit({})
  *       * +Owner+ - (<tt>Object</tt>)
  *         * +ID+ - (<tt>String</tt>)
  *         * +DisplayName+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method listMultipartUploads(params, callback)
@@ -954,7 +954,7 @@ AWS.S3 = inherit({})
  *       is ignored.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -999,7 +999,7 @@ AWS.S3 = inherit({})
  *             it provides the Canonical User ID. If the principal is an
  *             IAM User, it provides a user ARN value.
  *           * +DisplayName+ - (<tt>String</tt>) Name of the Principal.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method listObjectVersions(params, callback)
@@ -1019,7 +1019,7 @@ AWS.S3 = inherit({})
  *       begin with the specified prefix.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1069,7 +1069,7 @@ AWS.S3 = inherit({})
  *         results.
  *       * +CommonPrefixes+ - (<tt>Array<Object></tt>)
  *         * +Prefix+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method listObjects(params, callback)
@@ -1089,7 +1089,7 @@ AWS.S3 = inherit({})
  *       begin with the specified prefix.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1119,7 +1119,7 @@ AWS.S3 = inherit({})
  *         results.
  *       * +CommonPrefixes+ - (<tt>Array<Object></tt>)
  *         * +Prefix+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method listParts(params, callback)
@@ -1137,7 +1137,7 @@ AWS.S3 = inherit({})
  *       will be listed.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1179,7 +1179,7 @@ AWS.S3 = inherit({})
  *         * +DisplayName+ - (<tt>String</tt>)
  *       * +StorageClass+ - (<tt>String</tt>) The class of storage used to
  *         store the object.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method putBucketAcl(params, callback)
@@ -1215,13 +1215,13 @@ AWS.S3 = inherit({})
  *       write, read ACP, and write ACP permissions on the bucket.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method putBucketCors(params, callback)
@@ -1245,13 +1245,13 @@ AWS.S3 = inherit({})
  *           JavaScript XMLHttpRequest object).
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method putBucketLifecycle(params, callback)
@@ -1286,13 +1286,13 @@ AWS.S3 = inherit({})
  *             Format.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method putBucketLogging(params, callback)
@@ -1327,13 +1327,13 @@ AWS.S3 = inherit({})
  *           * +Permission+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method putBucketNotification(params, callback)
@@ -1349,13 +1349,13 @@ AWS.S3 = inherit({})
  *           notifications.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method putBucketPolicy(params, callback)
@@ -1367,13 +1367,13 @@ AWS.S3 = inherit({})
  *       JSON document.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method putBucketRequestPayment(params, callback)
@@ -1388,13 +1388,13 @@ AWS.S3 = inherit({})
  *         the download and request fees.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method putBucketTagging(params, callback)
@@ -1407,13 +1407,13 @@ AWS.S3 = inherit({})
  *         * +Value+ - (*required*, <tt>String</tt>) Value of the tag.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method putBucketVersioning(params, callback)
@@ -1434,13 +1434,13 @@ AWS.S3 = inherit({})
  *       displayed on your authentication device.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method putBucketWebsite(params, callback)
@@ -1461,13 +1461,13 @@ AWS.S3 = inherit({})
  *           use when a 4XX class error occurs.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method putObject(params, callback)
@@ -1509,7 +1509,7 @@ AWS.S3 = inherit({})
  *       store with the object in S3.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1523,7 +1523,7 @@ AWS.S3 = inherit({})
  *         encryption algorithm used when storing this object in S3.
  *       * +ETag+ - (<tt>String</tt>) Entity tag for the uploaded object.
  *       * +VersionId+ - (<tt>String</tt>) Version of the object.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method putObjectAcl(params, callback)
@@ -1561,13 +1561,13 @@ AWS.S3 = inherit({})
  *       write, read ACP, and write ACP permissions on the bucket.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method restoreObject(params, callback)
@@ -1580,13 +1580,13 @@ AWS.S3 = inherit({})
  *         copy in days
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method uploadPart(params, callback)
@@ -1601,7 +1601,7 @@ AWS.S3 = inherit({})
  *     * +Body+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1611,7 +1611,7 @@ AWS.S3 = inherit({})
  *       * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
  *         encryption algorithm used when storing this object in S3.
  *       * +ETag+ - (<tt>String</tt>) Entity tag for the uploaded object.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method uploadPartCopy(params, callback)
@@ -1643,7 +1643,7 @@ AWS.S3 = inherit({})
  *       if it has been modified since the specified time.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1659,7 +1659,7 @@ AWS.S3 = inherit({})
  *           object was uploaded.
  *       * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
  *         encryption algorithm used when storing this object in S3.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  *

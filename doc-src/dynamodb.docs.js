@@ -98,7 +98,7 @@ AWS.DynamoDB = inherit({})
  *       * +ConsistentRead+ - (<tt>Boolean</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -156,7 +156,7 @@ AWS.DynamoDB = inherit({})
  *               binary attributes.
  *         * +AttributesToGet+ - (<tt>Array<String></tt>)
  *         * +ConsistentRead+ - (<tt>Boolean</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method batchWriteItem(params, callback)
@@ -228,7 +228,7 @@ AWS.DynamoDB = inherit({})
  *               binary attributes.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -302,7 +302,7 @@ AWS.DynamoDB = inherit({})
  *               * +NS+ - (<tt>Array<String></tt>) A set of numbers.
  *               * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of
  *                 binary attributes.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createTable(params, callback)
@@ -343,7 +343,7 @@ AWS.DynamoDB = inherit({})
  *         WriteCapacityUnits.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -383,7 +383,7 @@ AWS.DynamoDB = inherit({})
  *           * +WriteCapacityUnits+ - (<tt>Integer</tt>)
  *         * +TableSizeBytes+ - (<tt>Integer</tt>)
  *         * +ItemCount+ - (<tt>Integer</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteItem(params, callback)
@@ -450,7 +450,7 @@ AWS.DynamoDB = inherit({})
  *     * +ReturnValues+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -475,7 +475,7 @@ AWS.DynamoDB = inherit({})
  *         * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
  *           attributes.
  *       * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteTable(params, callback)
@@ -486,7 +486,7 @@ AWS.DynamoDB = inherit({})
  *       _ (underscore), - (hyphen) and . (period).
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -526,7 +526,7 @@ AWS.DynamoDB = inherit({})
  *           * +WriteCapacityUnits+ - (<tt>Integer</tt>)
  *         * +TableSizeBytes+ - (<tt>Integer</tt>)
  *         * +ItemCount+ - (<tt>Integer</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeTable(params, callback)
@@ -538,7 +538,7 @@ AWS.DynamoDB = inherit({})
  *       0-9, _ (underscore), - (hyphen) and . (period).
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -578,7 +578,7 @@ AWS.DynamoDB = inherit({})
  *           * +WriteCapacityUnits+ - (<tt>Integer</tt>)
  *         * +TableSizeBytes+ - (<tt>Integer</tt>)
  *         * +ItemCount+ - (<tt>Integer</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getItem(params, callback)
@@ -628,7 +628,7 @@ AWS.DynamoDB = inherit({})
  *     * +ConsistentRead+ - (<tt>Boolean</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -651,7 +651,7 @@ AWS.DynamoDB = inherit({})
  *         * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
  *           attributes.
  *       * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method listTables(params, callback)
@@ -665,7 +665,7 @@ AWS.DynamoDB = inherit({})
  *     * +Limit+ - (<tt>Integer</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -678,7 +678,7 @@ AWS.DynamoDB = inherit({})
  *         ExclusiveStartTableName in a new request to continue the list
  *         until all the table names are returned. If this value is null,
  *         all table names have been returned.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method putItem(params, callback)
@@ -724,7 +724,7 @@ AWS.DynamoDB = inherit({})
  *     * +ReturnValues+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -748,7 +748,7 @@ AWS.DynamoDB = inherit({})
  *         * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
  *           attributes.
  *       * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method query(params, callback)
@@ -853,7 +853,7 @@ AWS.DynamoDB = inherit({})
  *           attributes.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -904,7 +904,7 @@ AWS.DynamoDB = inherit({})
  *           * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
  *             attributes.
  *       * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method scan(params, callback)
@@ -989,7 +989,7 @@ AWS.DynamoDB = inherit({})
  *           attributes.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1043,7 +1043,7 @@ AWS.DynamoDB = inherit({})
  *           * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
  *             attributes.
  *       * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method updateItem(params, callback)
@@ -1126,7 +1126,7 @@ AWS.DynamoDB = inherit({})
  *     * +ReturnValues+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1150,7 +1150,7 @@ AWS.DynamoDB = inherit({})
  *         * +BS+ - (<tt>Array<Base64 Encoded Data></tt>) A set of binary
  *           attributes.
  *       * +ConsumedCapacityUnits+ - (<tt>Float</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method updateTable(params, callback)
@@ -1171,7 +1171,7 @@ AWS.DynamoDB = inherit({})
  *         WriteCapacityUnits.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1211,7 +1211,7 @@ AWS.DynamoDB = inherit({})
  *           * +WriteCapacityUnits+ - (<tt>Integer</tt>)
  *         * +TableSizeBytes+ - (<tt>Integer</tt>)
  *         * +ItemCount+ - (<tt>Integer</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  *

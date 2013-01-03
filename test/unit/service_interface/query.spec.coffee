@@ -34,8 +34,8 @@ describe 'AWS.ServiceInterface.Query', ->
 
   beforeEach ->
     client = new MockQueryClient({region:'region'})
-    request = new AWS.AWSRequest(client, 'operationName')
-    response = new AWS.AWSResponse(request)
+    request = new AWS.Request(client, 'operationName')
+    response = new AWS.Response(request)
 
   describe 'buildRequest', ->
     buildRequest = ->

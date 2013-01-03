@@ -21,7 +21,7 @@ beforeEach ->
 buildRequest = ->
   ddb = new AWS.DynamoDB.Client({region: 'region', endpoint: 'localhost'})
   req = ddb.makeRequest('listTables', {foo: 'bar'})
-  resp = new AWS.AWSResponse(req)
+  resp = new AWS.Response(req)
   req.emitEvents(resp, 'validate', 'build')
   return req.httpRequest
 

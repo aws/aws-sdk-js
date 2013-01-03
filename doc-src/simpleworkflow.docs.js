@@ -84,7 +84,7 @@ AWS.SimpleWorkflow = inherit({})
  *       * +status+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -93,7 +93,7 @@ AWS.SimpleWorkflow = inherit({})
  *       The +data+ object has the following properties:
  *       * +count+ - (<tt>Integer</tt>)
  *       * +truncated+ - (<tt>Boolean</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method countOpenWorkflowExecutions(params, callback)
@@ -120,7 +120,7 @@ AWS.SimpleWorkflow = inherit({})
  *       * +workflowId+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -129,7 +129,7 @@ AWS.SimpleWorkflow = inherit({})
  *       The +data+ object has the following properties:
  *       * +count+ - (<tt>Integer</tt>)
  *       * +truncated+ - (<tt>Boolean</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method countPendingActivityTasks(params, callback)
@@ -145,7 +145,7 @@ AWS.SimpleWorkflow = inherit({})
  *       * +name+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -154,7 +154,7 @@ AWS.SimpleWorkflow = inherit({})
  *       The +data+ object has the following properties:
  *       * +count+ - (<tt>Integer</tt>)
  *       * +truncated+ - (<tt>Boolean</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method countPendingDecisionTasks(params, callback)
@@ -170,7 +170,7 @@ AWS.SimpleWorkflow = inherit({})
  *       * +name+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -179,7 +179,7 @@ AWS.SimpleWorkflow = inherit({})
  *       The +data+ object has the following properties:
  *       * +count+ - (<tt>Integer</tt>)
  *       * +truncated+ - (<tt>Boolean</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deprecateActivityType(params, callback)
@@ -196,13 +196,13 @@ AWS.SimpleWorkflow = inherit({})
  *       * +version+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deprecateDomain(params, callback)
@@ -217,13 +217,13 @@ AWS.SimpleWorkflow = inherit({})
  *       deprecate.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deprecateWorkflowType(params, callback)
@@ -241,13 +241,13 @@ AWS.SimpleWorkflow = inherit({})
  *       * +version+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeActivityType(params, callback)
@@ -263,7 +263,7 @@ AWS.SimpleWorkflow = inherit({})
  *       * +version+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -285,7 +285,7 @@ AWS.SimpleWorkflow = inherit({})
  *           * +name+ - (<tt>String</tt>)
  *         * +defaultTaskScheduleToStartTimeout+ - (<tt>String</tt>)
  *         * +defaultTaskScheduleToCloseTimeout+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeDomain(params, callback)
@@ -296,7 +296,7 @@ AWS.SimpleWorkflow = inherit({})
  *       describe.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -310,7 +310,7 @@ AWS.SimpleWorkflow = inherit({})
  *       * +configuration+ - (<tt>Object</tt>)
  *         * +workflowExecutionRetentionPeriodInDays+ - (*required*,
  *           <tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeWorkflowExecution(params, callback)
@@ -325,7 +325,7 @@ AWS.SimpleWorkflow = inherit({})
  *       * +runId+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -361,7 +361,7 @@ AWS.SimpleWorkflow = inherit({})
  *         * +openChildWorkflowExecutions+ - (<tt>Integer</tt>)
  *       * +latestActivityTaskTimestamp+ - (<tt>Date</tt>)
  *       * +latestExecutionContext+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeWorkflowType(params, callback)
@@ -377,7 +377,7 @@ AWS.SimpleWorkflow = inherit({})
  *       * +version+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -398,7 +398,7 @@ AWS.SimpleWorkflow = inherit({})
  *         * +defaultTaskList+ - (<tt>Object</tt>)
  *           * +name+ - (<tt>String</tt>)
  *         * +defaultChildPolicy+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getWorkflowExecutionHistory(params, callback)
@@ -427,7 +427,7 @@ AWS.SimpleWorkflow = inherit({})
  *       in ascending order of the eventTimeStamp of the events.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -766,7 +766,7 @@ AWS.SimpleWorkflow = inherit({})
  *             <tt>Integer</tt>)
  *           * +control+ - (<tt>String</tt>)
  *       * +nextPageToken+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method listActivityTypes(params, callback)
@@ -798,7 +798,7 @@ AWS.SimpleWorkflow = inherit({})
  *       activity types.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -814,7 +814,7 @@ AWS.SimpleWorkflow = inherit({})
  *         * +creationDate+ - (<tt>Date</tt>)
  *         * +deprecationDate+ - (<tt>Date</tt>)
  *       * +nextPageToken+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method listClosedWorkflowExecutions(params, callback)
@@ -869,7 +869,7 @@ AWS.SimpleWorkflow = inherit({})
  *       the executions.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -893,7 +893,7 @@ AWS.SimpleWorkflow = inherit({})
  *         * +tagList+ - (<tt>Array<String></tt>)
  *         * +cancelRequested+ - (<tt>Boolean</tt>)
  *       * +nextPageToken+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method listDomains(params, callback)
@@ -917,7 +917,7 @@ AWS.SimpleWorkflow = inherit({})
  *       domains.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -929,7 +929,7 @@ AWS.SimpleWorkflow = inherit({})
  *         * +status+ - (<tt>String</tt>)
  *         * +description+ - (<tt>String</tt>)
  *       * +nextPageToken+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method listOpenWorkflowExecutions(params, callback)
@@ -970,7 +970,7 @@ AWS.SimpleWorkflow = inherit({})
  *       * +workflowId+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -994,7 +994,7 @@ AWS.SimpleWorkflow = inherit({})
  *         * +tagList+ - (<tt>Array<String></tt>)
  *         * +cancelRequested+ - (<tt>Boolean</tt>)
  *       * +nextPageToken+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method listWorkflowTypes(params, callback)
@@ -1022,7 +1022,7 @@ AWS.SimpleWorkflow = inherit({})
  *       workflow types.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1038,7 +1038,7 @@ AWS.SimpleWorkflow = inherit({})
  *         * +creationDate+ - (<tt>Date</tt>)
  *         * +deprecationDate+ - (<tt>Date</tt>)
  *       * +nextPageToken+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method pollForActivityTask(params, callback)
@@ -1063,7 +1063,7 @@ AWS.SimpleWorkflow = inherit({})
  *       problems arise. The form of this identity is user defined.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1080,7 +1080,7 @@ AWS.SimpleWorkflow = inherit({})
  *         * +name+ - (<tt>String</tt>)
  *         * +version+ - (<tt>String</tt>)
  *       * +input+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method pollForDecisionTask(params, callback)
@@ -1113,7 +1113,7 @@ AWS.SimpleWorkflow = inherit({})
  *       in ascending order of the eventTimestamp of the events.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1461,7 +1461,7 @@ AWS.SimpleWorkflow = inherit({})
  *           * +control+ - (<tt>String</tt>)
  *       * +nextPageToken+ - (<tt>String</tt>)
  *       * +previousStartedEventId+ - (<tt>Integer</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method recordActivityTaskHeartbeat(params, callback)
@@ -1480,7 +1480,7 @@ AWS.SimpleWorkflow = inherit({})
  *       about the progress of the task.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1488,7 +1488,7 @@ AWS.SimpleWorkflow = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
  *       * +cancelRequested+ - (<tt>Boolean</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method registerActivityType(params, callback)
@@ -1536,13 +1536,13 @@ AWS.SimpleWorkflow = inherit({})
  *       activity task using the ScheduleActivityTask Decision.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method registerDomain(params, callback)
@@ -1562,13 +1562,13 @@ AWS.SimpleWorkflow = inherit({})
  *       retained at all.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method registerWorkflowType(params, callback)
@@ -1610,13 +1610,13 @@ AWS.SimpleWorkflow = inherit({})
  *       policies are:
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method requestCancelWorkflowExecution(params, callback)
@@ -1635,13 +1635,13 @@ AWS.SimpleWorkflow = inherit({})
  *       to cancel.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method respondActivityTaskCanceled(params, callback)
@@ -1655,13 +1655,13 @@ AWS.SimpleWorkflow = inherit({})
  *       cancellation.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method respondActivityTaskCompleted(params, callback)
@@ -1674,13 +1674,13 @@ AWS.SimpleWorkflow = inherit({})
  *       is a free form string that is implementation specific.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method respondActivityTaskFailed(params, callback)
@@ -1695,13 +1695,13 @@ AWS.SimpleWorkflow = inherit({})
  *       about the failure.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method respondDecisionTaskCompleted(params, callback)
@@ -1791,13 +1791,13 @@ AWS.SimpleWorkflow = inherit({})
  *       add to workflow execution.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method signalWorkflowExecution(params, callback)
@@ -1820,13 +1820,13 @@ AWS.SimpleWorkflow = inherit({})
  *       execution's history.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method startWorkflowExecution(params, callback)
@@ -1879,7 +1879,7 @@ AWS.SimpleWorkflow = inherit({})
  *       RegisterWorkflowType. The supported child policies are:
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1889,7 +1889,7 @@ AWS.SimpleWorkflow = inherit({})
  *       * +runId+ - (<tt>String</tt>) The runId of a workflow execution.
  *         This Id is generated by the service and can be used to uniquely
  *         identify the workflow execution within a domain.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method terminateWorkflowExecution(params, callback)
@@ -1917,13 +1917,13 @@ AWS.SimpleWorkflow = inherit({})
  *       are:
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  *
