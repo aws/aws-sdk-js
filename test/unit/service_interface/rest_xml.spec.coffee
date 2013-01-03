@@ -39,13 +39,13 @@ describe 'AWS.ServiceInterface.RestXml', ->
     operation = MockRESTXMLClient.prototype.api.operations.sampleOperation
     client = new MockRESTXMLClient(region: 'region')
     request = new AWS.AWSRequest(client, 'sampleOperation')
-    response = request.response
+    response = new AWS.AWSResponse(request)
 
   describe 'buildRequest', ->
     buildRequest = (callback) ->
       if callback
         callback()
-      svc.buildRequest(request, response)
+      svc.buildRequest(response, request)
 
     describe 'empty bodies', ->
       it 'defaults body to null when there are no inputs', ->
@@ -189,7 +189,7 @@ describe 'AWS.ServiceInterface.RestXml', ->
         """
       response.httpResponse.statusCode = 400
       response.httpResponse.body = body
-      svc.extractError(request, response)
+      svc.extractError(response, request)
 
     it 'extracts the error code and message', ->
       extractError()
@@ -209,7 +209,7 @@ describe 'AWS.ServiceInterface.RestXml', ->
     extractData = (body) ->
       response.httpResponse.statusCode = 200
       response.httpResponse.body = body
-      svc.extractData(request, request.response)
+      svc.extractData(response, request)
 
     it 'parses the xml body', ->
       operation.o = {Foo:{},Bar:{t:'a',m:{n:'Item'}}}

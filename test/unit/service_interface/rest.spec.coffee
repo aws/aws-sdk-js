@@ -38,13 +38,13 @@ describe 'AWS.ServiceInterface.Rest', ->
     operation = MockRESTClient.prototype.api.operations.sampleOperation
     client = new MockRESTClient(region: 'region')
     request = new AWS.AWSRequest(client, 'sampleOperation')
-    response = request.response
+    response = new AWS.AWSResponse(request)
 
   describe 'buildRequest', ->
     buildRequest = (callback) ->
       if callback
         callback()
-      svc.buildRequest(request, response)
+      svc.buildRequest(response, request)
 
     describe 'method', ->
       it 'populates method from the operation', ->
@@ -120,7 +120,7 @@ describe 'AWS.ServiceInterface.Rest', ->
     extractData = (callback) ->
       if callback
         callback()
-      svc.extractData(request, response)
+      svc.extractData(response, request)
 
     describe 'headers', ->
       it 'extracts header values', ->

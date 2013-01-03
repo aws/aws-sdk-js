@@ -17,7 +17,7 @@ integration = (reqBuilder, respCallback) ->
   req = reqBuilder()
   resp = null
   runs ->
-    req.on('complete', (req, respObject) -> resp = respObject)
+    req.on('complete', (respObject) -> resp = respObject)
     req.send()
   waitsFor -> resp != null
   runs -> respCallback(resp)
@@ -38,9 +38,9 @@ MockClient = AWS.util.inherit AWS.Client,
     @config.credentials = accessKeyId: 'akid', secretAccessKey: 'secret'
     @config.region = 'mock-region'
   setupRequestListeners: (request) ->
-    request.on 'extractData', (req, resp) ->
+    request.on 'extractData', (resp) ->
       resp.data = resp.httpResponse.body
-    request.on 'extractError', (req, resp) ->
+    request.on 'extractError', (resp) ->
       resp.error =
         code: resp.httpResponse.statusCode
         message: null
@@ -56,13 +56,13 @@ mockHttpResponse = (status, headers, data) ->
   spyOn(AWS.HttpClient, 'getInstance')
   AWS.HttpClient.getInstance.andReturn handleRequest: (req, resp) ->
     if typeof status == 'number'
-      req.emit('httpHeaders', req, resp, status, headers)
+      req.emit('httpHeaders', status, headers, resp, req)
       str = str instanceof Array ? str : [str]
       AWS.util.arrayEach data, (str) ->
-        req.emit('httpData', str, req, resp)
-      req.emit('httpDone', req, resp)
+        req.emit('httpData', str, resp, req)
+      req.emit('httpDone', resp, req)
     else
-      req.emit('httpError', req, status)
+      req.emit('httpError', status, resp)
 
 module.exports =
   AWS: AWS

@@ -79,8 +79,9 @@ describe 'AWS.S3.Client', ->
   describe 'building a request', ->
     build = (operation, params) ->
       req = request(operation, params)
-      req.emitEvents('build')
-      return req.response.httpRequest
+      resp = new AWS.AWSResponse(req)
+      req.emitEvents(resp, 'build')
+      return resp.httpRequest
 
     it 'obeys the configuration for s3ForcePathStyle', ->
       config = new AWS.Config({s3ForcePathStyle: true })
@@ -171,11 +172,12 @@ describe 'AWS.S3.Client', ->
 
     extractError = (statusCode) ->
       req = request('operation')
-      req.response.httpResponse.body = ''
-      req.response.httpResponse.statusCode = statusCode
+      resp = new AWS.AWSResponse(req)
+      resp.httpResponse.body = ''
+      resp.httpResponse.statusCode = statusCode
       req.emit('foo')
-      req.emit('extractError', req, req.response)
-      req.response.error
+      req.emit('extractError', resp, req)
+      resp.error
 
     it 'handles 304 errors', ->
       error = extractError(304)

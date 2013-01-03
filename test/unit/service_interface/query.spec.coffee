@@ -35,12 +35,12 @@ describe 'AWS.ServiceInterface.Query', ->
   beforeEach ->
     client = new MockQueryClient({region:'region'})
     request = new AWS.AWSRequest(client, 'operationName')
-    response = request.response
+    response = new AWS.AWSResponse(request)
 
   describe 'buildRequest', ->
     buildRequest = ->
       request.params = Input: 'foo+bar: yuck/baz=~'
-      svc.buildRequest(request, response)
+      svc.buildRequest(response, request)
 
     it 'should use POST method requests', ->
       buildRequest()
@@ -81,7 +81,7 @@ describe 'AWS.ServiceInterface.Query', ->
         """
       response.httpResponse.statusCode = 400
       response.httpResponse.body = body
-      svc.extractError(request, response)
+      svc.extractError(response, request)
 
     it 'extracts the error code and message', ->
       extractError()
@@ -100,7 +100,7 @@ describe 'AWS.ServiceInterface.Query', ->
     extractData = (body) ->
       response.httpResponse.statusCode = 200
       response.httpResponse.body = body
-      svc.extractData(request, response)
+      svc.extractData(response, request)
 
     it 'parses the response using the operation output rules', ->
       extractData """

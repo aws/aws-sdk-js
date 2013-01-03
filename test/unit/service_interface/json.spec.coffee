@@ -33,11 +33,11 @@ describe 'AWS.ServiceInterface.Json', ->
   beforeEach ->
     client = new MockJSONClient(region: 'region')
     request = new AWS.AWSRequest(client, 'operationName')
-    response = request.response
+    response = new AWS.AWSResponse(request)
 
   describe 'buildRequest', ->
     buildRequest = ->
-      svc.buildRequest(request, response)
+      svc.buildRequest(response, request)
 
     it 'should use POST method requests', ->
       buildRequest()
@@ -76,7 +76,7 @@ describe 'AWS.ServiceInterface.Json', ->
     extractError = (body) ->
       response.httpResponse.statusCode = 500
       response.httpResponse.body = body
-      svc.extractError(request, response)
+      svc.extractError(response, request)
 
     it 'removes prefixes from the error code', ->
       extractError '{"__type":"com.amazon.coral.service#ErrorCode" }'
@@ -126,7 +126,7 @@ describe 'AWS.ServiceInterface.Json', ->
     extractData = (body) ->
       response.httpResponse.statusCode = 200
       response.httpResponse.body = body
-      svc.extractData(request, response)
+      svc.extractData(response, request)
 
     it 'JSON parses http response bodies', ->
       extractData '{"a":1, "b":"xyz"}'

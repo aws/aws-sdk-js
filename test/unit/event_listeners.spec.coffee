@@ -51,10 +51,11 @@ describe 'AWS.EventListeners', ->
     request.on('success', successHandler)
     request.on('complete', completeHandler)
     if callback
-      request.on 'complete', (req, resp) ->
+      request.on 'complete', (resp) ->
         callback.call(resp, resp.error, resp.data)
       request.send()
-    request
+    else
+      request
 
   describe 'validate', ->
     it 'sends error event if credentials are not set', ->
@@ -71,9 +72,9 @@ describe 'AWS.EventListeners', ->
 
       expect(errorHandler).toHaveBeenCalled()
       AWS.util.arrayEach errorHandler.calls, (call) ->
-        expect(call.args[1].error instanceof Error).toBeTruthy()
-        expect(call.args[1].error.code).toEqual('SigningError')
-        expect(call.args[1].error.message).toMatch(/Missing credentials in config/)
+        expect(call.args[0].error instanceof Error).toBeTruthy()
+        expect(call.args[0].error.code).toEqual('SigningError')
+        expect(call.args[0].error.message).toMatch(/Missing credentials in config/)
 
     it 'sends error event if region is not set', ->
       client.config.region = null
@@ -81,9 +82,9 @@ describe 'AWS.EventListeners', ->
 
       call = errorHandler.calls[0]
       expect(errorHandler).toHaveBeenCalled()
-      expect(call.args[1].error instanceof Error).toBeTruthy()
-      expect(call.args[1].error.code).toEqual('SigningError')
-      expect(call.args[1].error.message).toMatch(/Missing region in config/)
+      expect(call.args[0].error instanceof Error).toBeTruthy()
+      expect(call.args[0].error.code).toEqual('SigningError')
+      expect(call.args[0].error.message).toMatch(/Missing region in config/)
 
   describe 'httpData', ->
     beforeEach ->
@@ -102,9 +103,9 @@ describe 'AWS.EventListeners', ->
     it 'clears default httpData event if another is added (allow streaming)', ->
       request = makeRequest()
       request.on('httpData', ->)
-      request.send()
+      response = request.send()
 
-      expect(request.response.httpResponse.body).toEqual('')
+      expect(response.httpResponse.body).toEqual('')
 
   describe 'retry', ->
     it 'retries a request with a set maximum retries', ->
@@ -117,18 +118,18 @@ describe 'AWS.EventListeners', ->
 
       request = makeRequest()
       request.on('send', sendHandler)
-      request.send()
+      response = request.send()
 
       expect(retryHandler).toHaveBeenCalled()
       expect(errorHandler).toHaveBeenCalled()
       expect(completeHandler).toHaveBeenCalled()
       expect(successHandler).not.toHaveBeenCalled()
-      expect(request.response.retryCount).toEqual(client.config.maxRetries);
+      expect(response.retryCount).toEqual(client.config.maxRetries);
       expect(sendHandler.calls.length).toEqual(client.config.maxRetries + 1)
 
     it 'retries with falloff', ->
       helpers.mockHttpResponse
-        code: 'NetworkingError', message: 'Cannot connect', retryable: true
+        code: 'NetworkingError', message: 'Cannot connect'
       makeRequest(->)
       expect(delays).toEqual([30, 60, 120])
 
@@ -147,16 +148,17 @@ describe 'AWS.EventListeners', ->
     it 'should not emit error if retried fewer than maxRetries', ->
       spyOn(AWS.HttpClient, 'getInstance').andReturn handleRequest: (req, resp) ->
         if resp.retryCount < 2
-          req.emit('httpError', req, {code: 'NetworkingError', message: "FAIL!"})
+          req.emit('httpError', {code: 'NetworkingError', message: "FAIL!"}, resp)
         else
-          req.emit('httpHeaders', req, resp, resp.retryCount < 2 ? 500 : 200, {})
-          req.emit('httpData', '{"data":"BAR"}', req, resp)
-          req.emit('httpDone', req, resp)
+          req.emit('httpHeaders', resp.retryCount < 2 ? 500 : 200, {}, resp, req)
+          req.emit('httpData', 'foo', resp, req)
+          req.emit('httpDone', resp, req)
 
-      request = makeRequest(->)
+      response = makeRequest(->)
 
       expect(totalWaited).toEqual(90)
-      expect(request.response.retryCount).toBeLessThan(client.config.maxRetries)
+      expect(response.retryCount).toBeLessThan(client.config.maxRetries)
+      expect(response.data).toEqual('foo')
       expect(errorHandler).not.toHaveBeenCalled()
 
   describe 'success', ->
@@ -164,26 +166,26 @@ describe 'AWS.EventListeners', ->
       # fail every request with a fake networking error
       helpers.mockHttpResponse 200, {}, 'Success!'
 
-      request = makeRequest(->)
+      response = makeRequest(->)
 
       expect(retryHandler).not.toHaveBeenCalled()
       expect(errorHandler).not.toHaveBeenCalled()
       expect(completeHandler).toHaveBeenCalled()
       expect(successHandler).toHaveBeenCalled()
-      expect(request.response.retryCount).toEqual(0);
+      expect(response.retryCount).toEqual(0);
 
   describe 'error', ->
     it 'emits error if error found and should not be retrying', ->
       # fail every request with a fake networking error
       helpers.mockHttpResponse 400, {}, ''
 
-      request = makeRequest(->)
+      response = makeRequest(->)
 
       expect(retryHandler).not.toHaveBeenCalled()
       expect(errorHandler).toHaveBeenCalled()
       expect(completeHandler).toHaveBeenCalled()
       expect(successHandler).not.toHaveBeenCalled()
-      expect(request.response.retryCount).toEqual(0);
+      expect(response.retryCount).toEqual(0);
 
     it 'emits error if an error is set in extractError', ->
       error = code: 'ParseError', message: 'error message'
@@ -193,10 +195,10 @@ describe 'AWS.EventListeners', ->
 
       request = makeRequest()
       request.on('extractData', extractDataHandler)
-      request.on('extractError', (req, resp) -> resp.error = error)
-      request.send()
+      request.on('extractError', (resp) -> resp.error = error)
+      response = request.send()
 
-      expect(request.response.error).toBe(error)
+      expect(response.error).toBe(error)
       expect(extractDataHandler).not.toHaveBeenCalled()
       expect(retryHandler).not.toHaveBeenCalled()
       expect(errorHandler).toHaveBeenCalled()

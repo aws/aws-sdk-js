@@ -54,34 +54,25 @@ describe 'AWS.Client', ->
 
     it 'yields data to the callback', ->
       helpers.mockHttpResponse(200, {}, ['FOO', 'BAR'])
-      err = null; data = null
       client = new MockClient()
-      req = client.makeRequest 'operation', (e, d) ->
-        err = e
-        data = d
-      expect(err).toEqual(null)
-      expect(data).toEqual('FOOBAR')
+      req = client.makeRequest 'operation', (err, data) ->
+        expect(err).toEqual(null)
+        expect(data).toEqual('FOOBAR')
 
     it 'yields service errors to the callback', ->
       helpers.mockHttpResponse(500, {}, ['service error'])
-      err = null; data = null
       client = new MockClient(maxRetries: 0)
-      req = client.makeRequest 'operation', {}, (e, d) ->
-        err = e
-        data = d
-      expect(err).toEqual({code:500, message:null, retryable:true, statusCode:500})
-      expect(data).toEqual(null)
+      req = client.makeRequest 'operation', {}, (err, data) ->
+        expect(err).toEqual({code:500, message:null, retryable:true, statusCode:500})
+        expect(data).toEqual(null)
 
     it 'yields network errors to the callback', ->
       error = { code: 'NetworkingError' }
       helpers.mockHttpResponse(error)
-      err = null; data = null
       client = new MockClient(maxRetries: 0)
-      req = client.makeRequest 'operation', {}, (e, d) ->
-        err = e
-        data = d
-      expect(err).toEqual(error)
-      expect(data).toEqual(null)
+      req = client.makeRequest 'operation', {}, (err, data) ->
+        expect(err).toEqual(error)
+        expect(data).toEqual(null)
 
     it 'does not send the request if a callback function is omitted', ->
       httpClient = AWS.HttpClient.getInstance()
