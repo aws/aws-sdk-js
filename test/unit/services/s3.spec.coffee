@@ -173,7 +173,7 @@ describe 'AWS.S3.Client', ->
     extractError = (statusCode) ->
       req = request('operation')
       resp = new AWS.Response(req)
-      resp.httpResponse.body = ''
+      resp.httpResponse.body = new Buffer('')
       resp.httpResponse.statusCode = statusCode
       req.emit('foo')
       req.emit('extractError', resp, req)

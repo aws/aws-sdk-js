@@ -95,7 +95,7 @@ describe 'AWS.EventListeners', ->
 
       # register httpData event
       request = makeRequest()
-      request.on('httpData', (chunk) -> calls.push(chunk))
+      request.on('httpData', (chunk) -> calls.push(chunk.toString()))
       request.send()
 
       expect(calls).toEqual(['FOO', 'BAR', 'BAZ', 'QUX'])
@@ -105,7 +105,7 @@ describe 'AWS.EventListeners', ->
       request.on('httpData', ->)
       response = request.send()
 
-      expect(response.httpResponse.body).toEqual('')
+      expect(response.httpResponse.body.toString()).toEqual('')
 
   describe 'retry', ->
     it 'retries a request with a set maximum retries', ->

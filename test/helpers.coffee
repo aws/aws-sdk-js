@@ -48,7 +48,7 @@ MockClient = AWS.util.inherit AWS.Client,
     @config.region = 'mock-region'
   setupRequestListeners: (request) ->
     request.on 'extractData', (resp) ->
-      resp.data = resp.httpResponse.body
+      resp.data = resp.httpResponse.body.toString()
     request.on 'extractError', (resp) ->
       resp.error =
         code: resp.httpResponse.statusCode
@@ -68,7 +68,7 @@ mockHttpResponse = (status, headers, data) ->
       req.emit('httpHeaders', status, headers, resp)
       str = str instanceof Array ? str : [str]
       AWS.util.arrayEach data, (str) ->
-        req.emit('httpData', str, resp)
+        req.emit('httpData', new Buffer(str), resp)
       req.emit('httpDone', resp)
     else
       req.emit('httpError', status, resp)

@@ -188,7 +188,7 @@ describe 'AWS.ServiceInterface.RestXml', ->
         </Error>
         """
       response.httpResponse.statusCode = 400
-      response.httpResponse.body = body
+      response.httpResponse.body = new Buffer(body)
       svc.extractError(response)
 
     it 'extracts the error code and message', ->
@@ -208,7 +208,7 @@ describe 'AWS.ServiceInterface.RestXml', ->
   describe 'extractData', ->
     extractData = (body) ->
       response.httpResponse.statusCode = 200
-      response.httpResponse.body = body
+      response.httpResponse.body = new Buffer(body)
       svc.extractData(response)
 
     it 'parses the xml body', ->
@@ -224,3 +224,9 @@ describe 'AWS.ServiceInterface.RestXml', ->
       </xml>
       """
       expect(response.data).toEqual({Foo:'foo', Bar:['a', 'b', 'c']})
+
+    it 'sets Body to a Buffer object', ->
+      operation.o = Body: t: 'bl'
+      extractData 'Buffer data'
+      expect(response.data.Body instanceof Buffer).toBeTruthy()
+      expect(response.data.Body.toString()).toEqual('Buffer data')

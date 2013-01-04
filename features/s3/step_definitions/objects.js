@@ -31,18 +31,17 @@ module.exports = function () {
     this.s3.createBucket({Bucket:this.sharedBucket}, function(err, data) {
       callback();
     });
-
   });
 
-  this.When(/^I write "([^"]*)" to the key "([^"]*)"$/, function(contents, key, next) {
-    var params = {Bucket:this.sharedBucket,Key:key,Body:contents};
+  this.When(/^I write (buffer )?"([^"]*)" to the key "([^"]*)"$/, function(buffer, contents, key, next) {
+    var params = {Bucket: this.sharedBucket, Key: key, Body: buffer ? new Buffer(contents) : contents};
     this.request('s3', 'putObject', params, next);
   });
 
   this.Then(/^the object with the key "([^"]*)" should contain "([^"]*)"$/, function(key, contents, next) {
     this.eventually(next, function (retry) {
       this.s3.getObject({Bucket:this.sharedBucket,Key:key}, function(err, data) {
-        if (data && data.Body == contents)
+        if (data && data.Body.toString().replace("\n", "") == contents)
           next();
         else
           retry();
@@ -68,9 +67,15 @@ module.exports = function () {
     });
   });
 
+  this.When(/^I write file "([^"]*)" to the key "([^"]*)"$/, function(filename, key, next) {
+    var fs = require('fs');
+    var params = {Bucket: this.sharedBucket, Key: key, Body:
+      fs.createReadStream(__dirname + '/../../support/fixtures/' + filename)};
+    this.request('s3', 'putObject', params, next);
+  });
+
   // this scenario is a work around for not having an after all hook
   this.Then(/^I delete the shared bucket$/, function(next) {
     this.request('s3', 'deleteBucket', {Bucket:this.sharedBucket}, next);
   });
-
 };

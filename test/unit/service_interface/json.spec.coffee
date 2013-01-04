@@ -75,7 +75,7 @@ describe 'AWS.ServiceInterface.Json', ->
   describe 'extractError', ->
     extractError = (body) ->
       response.httpResponse.statusCode = 500
-      response.httpResponse.body = body
+      response.httpResponse.body = new Buffer(body)
       svc.extractError(response)
 
     it 'removes prefixes from the error code', ->
@@ -91,7 +91,7 @@ describe 'AWS.ServiceInterface.Json', ->
       expect(response.data).toEqual(null)
 
     it 'returns the status code when the body is blank', ->
-      extractError null
+      extractError ''
       expect(response.error instanceof Error).toBeTruthy()
       expect(response.error.code).toEqual(500)
       expect(response.error.message).toEqual(null)
@@ -125,7 +125,7 @@ describe 'AWS.ServiceInterface.Json', ->
   describe 'extractData', ->
     extractData = (body) ->
       response.httpResponse.statusCode = 200
-      response.httpResponse.body = body
+      response.httpResponse.body = new Buffer(body)
       svc.extractData(response)
 
     it 'JSON parses http response bodies', ->
@@ -139,6 +139,6 @@ describe 'AWS.ServiceInterface.Json', ->
       expect(response.data).toEqual({})
 
     it 'returns an empty object when the body is null', ->
-      extractData null
+      extractData ''
       expect(response.error).toEqual(null)
       expect(response.data).toEqual({})

@@ -81,7 +81,7 @@ describe 'AWS.ServiceInterface.Query', ->
         </Error>
         """
       response.httpResponse.statusCode = 400
-      response.httpResponse.body = body
+      response.httpResponse.body = new Buffer(body)
       svc.extractError(response)
 
     it 'extracts the error code and message', ->
@@ -100,7 +100,7 @@ describe 'AWS.ServiceInterface.Query', ->
   describe 'extractData', ->
     extractData = (body) ->
       response.httpResponse.statusCode = 200
-      response.httpResponse.body = body
+      response.httpResponse.body = new Buffer(body)
       svc.extractData(response)
 
     it 'parses the response using the operation output rules', ->
