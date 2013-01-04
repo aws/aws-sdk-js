@@ -58,6 +58,14 @@ describe 'AWS.EventListeners', ->
       request
 
   describe 'validate', ->
+    it 'takes the request object as a parameter', ->
+      request = makeRequest()
+      request.on 'validate', (req) ->
+        expect(req).toBe(request)
+        throw "ERROR"
+      response = request.send()
+      expect(response.error).toEqual("ERROR")
+
     it 'sends error event if credentials are not set', ->
       errorHandler = createSpy()
       request = makeRequest()
@@ -85,6 +93,24 @@ describe 'AWS.EventListeners', ->
       expect(call.args[0].error instanceof Error).toBeTruthy()
       expect(call.args[0].error.code).toEqual('SigningError')
       expect(call.args[0].error.message).toMatch(/Missing region in config/)
+
+  describe 'build', ->
+    it 'takes the request object as a parameter', ->
+      request = makeRequest()
+      request.on 'build', (req) ->
+        expect(req).toBe(request)
+        throw "ERROR"
+      response = request.send()
+      expect(response.error).toEqual("ERROR")
+
+  describe 'sign', ->
+    it 'takes the request object as a parameter', ->
+      request = makeRequest()
+      request.on 'sign', (req) ->
+        expect(req).toBe(request)
+        throw "ERROR"
+      response = request.send()
+      expect(response.error).toEqual("ERROR")
 
   describe 'httpData', ->
     beforeEach ->
