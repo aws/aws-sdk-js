@@ -110,24 +110,22 @@ AWS.S3 = inherit({})
  *     * +MetadataDirective+ - (<tt>String</tt>) Specifies whether the
  *       metadata is copied from the source object or replaced with
  *       metadata provided in the request.
+ *     * +CacheControl+ - (<tt>String</tt>) Can be used to specify
+ *       caching behavior along the request/reply chain.
+ *     * +ContentDisposition+ - (<tt>String</tt>) Specifies
+ *       presentational information for the object.
+ *     * +ContentEncoding+ - (<tt>String</tt>) Specifies what content
+ *       encodings have been applied to the object and thus what decoding
+ *       mechanisms must be applied to obtain the media-type referenced
+ *       by the Content-Type header field.
+ *     * +ContentType+ - (<tt>String</tt>) A standard MIME type
+ *       describing the format of the object data.
+ *     * +Expires+ - (<tt>Date</tt>) The date and time at which the
+ *       object is no longer cacheable.
  *     * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
  *       configured as a website, redirects requests for this object to
- *       another object in the same bucket or to an external URL.
- *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the bucket.
- *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to list the
- *       objects in the bucket.
- *     * +GrantWrite+ - (<tt>String</tt>) Allows grantee to create,
- *       overwrite, and delete any object in the bucket.
- *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
- *       bucket ACL.
- *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
- *       ACL for the applicable bucket.
- *     * +GrantFullControl+ - (<tt>String</tt>) Allows grantee the read,
- *       write, read ACP, and write ACP permissions on the bucket.
- *     * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
- *       encryption algorithm used when storing this object in S3.
- *     * +StorageClass+ - (<tt>String</tt>) The class of storage used to
- *       store the object.
+ *       another object in the same bucket or to an external URL. Amazon
+ *       S3 stores the value of this header in the object metadata.
  *     * +CopySource+ - (*required*, <tt>String</tt>) The name of the
  *       source bucket and key name of the source object, separated by a
  *       slash (/). Must be URL-encoded.
@@ -139,6 +137,21 @@ AWS.S3 = inherit({})
  *       object if it hasn''t been modified since the specified time.
  *     * +CopySourceIfModifiedSince+ - (<tt>Date</tt>) Copies the object
  *       if it has been modified since the specified time.
+ *     * +StorageClass+ - (<tt>String</tt>) The type of storage to use
+ *       for the object. Defaults to 'STANDARD'.
+ *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the object.
+ *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to read the
+ *       object data and its metadata.
+ *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
+ *       object ACL.
+ *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
+ *       ACL for the applicable object.
+ *     * +GrantFullControl+ - (<tt>String</tt>) Gives the grantee READ,
+ *       READ_ACP, and WRITE_ACP permissions on the object.
+ *     * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
+ *       encryption algorithm used when storing this object in S3.
+ *     * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
+ *       store with the object in S3.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -207,12 +220,12 @@ AWS.S3 = inherit({})
  *       describing the format of the object data.
  *     * +Expires+ - (<tt>Date</tt>) The date and time at which the
  *       object is no longer cacheable.
- *     * +StorageClass+ - (<tt>String</tt>) The type of storage to use
- *       for the object. Defaults to 'STANDARD'.
  *     * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
  *       configured as a website, redirects requests for this object to
  *       another object in the same bucket or to an external URL. Amazon
  *       S3 stores the value of this header in the object metadata.
+ *     * +StorageClass+ - (<tt>String</tt>) The type of storage to use
+ *       for the object. Defaults to 'STANDARD'.
  *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the object.
  *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to read the
  *       object data and its metadata.
@@ -1474,13 +1487,13 @@ AWS.S3 = inherit({})
  *       describing the format of the object data.
  *     * +Expires+ - (<tt>Date</tt>) The date and time at which the
  *       object is no longer cacheable.
- *     * +StorageClass+ - (<tt>String</tt>) The type of storage to use
- *       for the object. Defaults to 'STANDARD'.
  *     * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
  *       configured as a website, redirects requests for this object to
  *       another object in the same bucket or to an external URL. Amazon
  *       S3 stores the value of this header in the object metadata.
  *     * +Body+ - (<tt>String</tt>)
+ *     * +StorageClass+ - (<tt>String</tt>) The type of storage to use
+ *       for the object. Defaults to 'STANDARD'.
  *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the object.
  *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to read the
  *       object data and its metadata.
