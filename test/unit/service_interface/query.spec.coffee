@@ -127,3 +127,27 @@ describe 'AWS.ServiceInterface.Query', ->
       """
       expect(response.error).toEqual(null)
       expect(response.data).toEqual({Data:{Name:'abc',Count:'123'}})
+
+    it 'removes wrapping result element if resultWrapped is set', ->
+      client.api.resultWrapped = true
+      extractData """
+      <xml>
+        <OperationNameResult>
+          <Data>abc</Data>
+        </OperationNameResult>
+      </xml>
+      """
+      expect(response.error).toEqual(null)
+      expect(response.data).toEqual({Data:'abc'})
+      delete client.api.resultWrapped
+
+    it 'does not fail if wrapping element is not present (resultWrapped=true)', ->
+      client.api.resultWrapped = true
+      extractData """
+      <xml>
+        <NotWrapped><Data>abc</Data></NotWrapped>
+      </xml>
+      """
+      expect(response.error).toEqual(null)
+      expect(response.data).toEqual({NotWrapped:{Data:'abc'}})
+      delete client.api.resultWrapped
