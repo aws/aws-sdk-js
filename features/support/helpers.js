@@ -88,7 +88,7 @@ module.exports = {
    * operation failed.
    */
   unexpectedError: function unexpectedError(resp, next) {
-    var svc = resp.request.client.serviceName;
+    var svc = resp.request.client.api.serviceName;
     var op = resp.request.operation;
     var code = resp.error.code;
     var msg = resp.error.message;

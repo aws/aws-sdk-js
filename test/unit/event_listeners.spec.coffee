@@ -112,6 +112,22 @@ describe 'AWS.EventListeners', ->
       response = request.send()
       expect(response.error).toEqual("ERROR")
 
+    it 'uses the api.signingName if provided', ->
+      client.api.signingName = 'SIGNING_NAME'
+      spyOn(AWS.RequestSigner, 'getVersion').andCallFake ->
+        (req, signingName) -> throw signingName
+      request = makeRequest()
+      response = request.send()
+      expect(response.error).toEqual('SIGNING_NAME')
+      delete client.api.signingName
+
+    it 'uses the api.serviceName if signingName not provided', ->
+      spyOn(AWS.RequestSigner, 'getVersion').andCallFake ->
+        (req, signingName) -> throw signingName
+      request = makeRequest()
+      response = request.send()
+      expect(response.error).toEqual('mockservice')
+
   describe 'httpData', ->
     beforeEach ->
       helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']

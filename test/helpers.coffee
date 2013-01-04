@@ -53,8 +53,9 @@ MockClient = AWS.util.inherit AWS.Client,
       resp.error =
         code: resp.httpResponse.statusCode
         message: null
-  serviceName: 'mockservice'
-  signatureVersion: require('../lib/sigv4')
+  api:
+    serviceName: 'mockservice'
+    signatureVersion: 'v4'
 
 MockService = AWS.util.inherit AWS.Service,
   constructor: (config) -> AWS.Service.call(this, config)
