@@ -5665,4 +5665,4 @@ AWS.EC2 = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.EC2.Client = inherit({});"
+AWS.EC2.Client = inherit({});
