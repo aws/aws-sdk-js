@@ -60,13 +60,13 @@ AWS.EC2 = inherit({})
  *       additional number of licenses to activate.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method allocateAddress(params, callback)
@@ -77,7 +77,7 @@ AWS.EC2 = inherit({})
  *       to your VPC. By default, will allocate to EC2.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -88,7 +88,7 @@ AWS.EC2 = inherit({})
  *         account.
  *       * +Domain+ - (<tt>String</tt>)
  *       * +AllocationId+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method assignPrivateIpAddresses(params, callback)
@@ -100,23 +100,23 @@ AWS.EC2 = inherit({})
  *     * +AllowReassignment+ - (<tt>Boolean</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method associateAddress(params, callback)
  *   The AssociateAddress operation associates an elastic IP address with
  *   an instance.
  *   @param params [Object]
- *     * +InstanceId+ - (*required*, <tt>String</tt>) The instance to
- *       associate with the IP address.
- *     * +PublicIp+ - (*required*, <tt>String</tt>) IP address that you
- *       are assigning to the instance.
+ *     * +InstanceId+ - (<tt>String</tt>) The instance to associate with
+ *       the IP address.
+ *     * +PublicIp+ - (<tt>String</tt>) IP address that you are assigning
+ *       to the instance.
  *     * +AllocationId+ - (<tt>String</tt>) The allocation ID that AWS
  *       returned when you allocated the elastic IP address for use with
  *       Amazon VPC.
@@ -125,7 +125,7 @@ AWS.EC2 = inherit({})
  *     * +AllowReassociation+ - (<tt>Boolean</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -133,7 +133,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
  *       * +AssociationId+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method associateDhcpOptions(params, callback)
@@ -154,13 +154,13 @@ AWS.EC2 = inherit({})
  *       associate the DHCP options with.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method associateRouteTable(params, callback)
@@ -176,7 +176,7 @@ AWS.EC2 = inherit({})
  *       route table.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -184,7 +184,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
  *       * +AssociationId+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method attachInternetGateway(params, callback)
@@ -197,13 +197,13 @@ AWS.EC2 = inherit({})
  *     * +VpcId+ - (*required*, <tt>String</tt>) The ID of the VPC.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method attachNetworkInterface(params, callback)
@@ -214,7 +214,7 @@ AWS.EC2 = inherit({})
  *     * +DeviceIndex+ - (*required*, <tt>Integer</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -222,7 +222,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
  *       * +AttachmentId+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method attachVolume(params, callback)
@@ -239,23 +239,22 @@ AWS.EC2 = inherit({})
  *       device is exposed to the instance (e.g., /dev/sdh).
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
- *       * +Attachment+ - (<tt>Object</tt>)
- *         * +VolumeId+ - (<tt>String</tt>)
- *         * +InstanceId+ - (<tt>String</tt>)
- *         * +Device+ - (<tt>String</tt>) How the device is exposed to the
- *           instance (e.g., /dev/sdh).
- *         * +State+ - (<tt>String</tt>)
- *         * +AttachTime+ - (<tt>Date</tt>) Timestamp when this attachment
- *           initiated.
- *         * +DeleteOnTermination+ - (<tt>Boolean</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *       * +VolumeId+ - (<tt>String</tt>)
+ *       * +InstanceId+ - (<tt>String</tt>)
+ *       * +Device+ - (<tt>String</tt>) How the device is exposed to the
+ *         instance (e.g., /dev/sdh).
+ *       * +State+ - (<tt>String</tt>)
+ *       * +AttachTime+ - (<tt>Date</tt>) Timestamp when this attachment
+ *         initiated.
+ *       * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method attachVpnGateway(params, callback)
@@ -270,7 +269,7 @@ AWS.EC2 = inherit({})
  *       attach to the VPN gateway.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -280,7 +279,7 @@ AWS.EC2 = inherit({})
  *       * +VpcAttachement+ - (<tt>Object</tt>)
  *         * +VpcId+ - (<tt>String</tt>)
  *         * +State+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method authorizeSecurityGroupEgress(params, callback)
@@ -325,13 +324,13 @@ AWS.EC2 = inherit({})
  *         * +CidrIp+ - (<tt>String</tt>) The list of CIDR IP ranges.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method authorizeSecurityGroupIngress(params, callback)
@@ -380,13 +379,13 @@ AWS.EC2 = inherit({})
  *         * +CidrIp+ - (<tt>String</tt>) The list of CIDR IP ranges.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method bundleInstance(params, callback)
@@ -415,7 +414,7 @@ AWS.EC2 = inherit({})
  *           the Base64 encoded JSON document.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -452,7 +451,7 @@ AWS.EC2 = inherit({})
  *           description of the error.
  *           * +Code+ - (<tt>String</tt>) Error code.
  *           * +Message+ - (<tt>String</tt>) Error message.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method cancelBundleTask(params, callback)
@@ -466,7 +465,7 @@ AWS.EC2 = inherit({})
  *       task to cancel.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -503,7 +502,7 @@ AWS.EC2 = inherit({})
  *           description of the error.
  *           * +Code+ - (<tt>String</tt>) Error code.
  *           * +Message+ - (<tt>String</tt>) Error message.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method cancelConversionTask(params, callback)
@@ -513,13 +512,13 @@ AWS.EC2 = inherit({})
  *     * +ReasonMessage+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method cancelExportTask(params, callback)
@@ -528,13 +527,13 @@ AWS.EC2 = inherit({})
  *     * +ExportTaskId+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method cancelReservedInstancesListing(params, callback)
@@ -543,7 +542,7 @@ AWS.EC2 = inherit({})
  *     * +ReservedInstancesListingId+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -569,7 +568,7 @@ AWS.EC2 = inherit({})
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
  *         * +ClientToken+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method cancelSpotInstanceRequests(params, callback)
@@ -579,7 +578,7 @@ AWS.EC2 = inherit({})
  *       Specifies the ID of the Spot Instance request.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -589,7 +588,7 @@ AWS.EC2 = inherit({})
  *       * +CancelledSpotInstanceRequests+ - (<tt>Array<Object></tt>)
  *         * +SpotInstanceRequestId+ - (<tt>String</tt>)
  *         * +State+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method confirmProductInstance(params, callback)
@@ -603,7 +602,7 @@ AWS.EC2 = inherit({})
  *       instance to confirm.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -612,7 +611,7 @@ AWS.EC2 = inherit({})
  *       The +data+ object has the following properties:
  *       * +OwnerId+ - (<tt>String</tt>) The instance owner's account ID.
  *         Only present if the product code is attached to the instance.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method copySnapshot(params, callback)
@@ -623,7 +622,7 @@ AWS.EC2 = inherit({})
  *     * +Description+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -631,7 +630,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
  *       * +SnapshotId+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createCustomerGateway(params, callback)
@@ -653,7 +652,7 @@ AWS.EC2 = inherit({})
  *       Border Gateway Protocol (BGP) Autonomous System Number (ASN).
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -677,7 +676,7 @@ AWS.EC2 = inherit({})
  *           CustomerGateway.
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createDhcpOptions(params, callback)
@@ -695,7 +694,7 @@ AWS.EC2 = inherit({})
  *         for a DHCP option.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -716,7 +715,7 @@ AWS.EC2 = inherit({})
  *           DhcpOptions.
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createImage(params, callback)
@@ -758,7 +757,7 @@ AWS.EC2 = inherit({})
  *         suppress during instance launch.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -766,7 +765,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
  *       * +ImageId+ - (<tt>String</tt>) The ID of the new AMI.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createInstanceExportTask(params, callback)
@@ -782,7 +781,7 @@ AWS.EC2 = inherit({})
  *       * +S3Prefix+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -802,7 +801,7 @@ AWS.EC2 = inherit({})
  *           * +ContainerFormat+ - (<tt>String</tt>)
  *           * +S3Bucket+ - (<tt>String</tt>)
  *           * +S3Key+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createInternetGateway(params, callback)
@@ -813,7 +812,7 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -828,7 +827,7 @@ AWS.EC2 = inherit({})
  *         * +Tags+ - (<tt>Array<Object></tt>)
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createKeyPair(params, callback)
@@ -840,7 +839,7 @@ AWS.EC2 = inherit({})
  *       the new key pair.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -853,7 +852,7 @@ AWS.EC2 = inherit({})
  *           DER encoded private key.
  *         * +KeyMaterial+ - (<tt>String</tt>) The unencrypted PEM encoded
  *           RSA private key.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createNetworkAcl(params, callback)
@@ -866,7 +865,7 @@ AWS.EC2 = inherit({})
  *       the network ACL will be created.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -902,7 +901,7 @@ AWS.EC2 = inherit({})
  *         * +Tags+ - (<tt>Array<Object></tt>)
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createNetworkAclEntry(params, callback)
@@ -942,13 +941,13 @@ AWS.EC2 = inherit({})
  *         if specifying tcp or udp for the protocol.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createNetworkInterface(params, callback)
@@ -964,7 +963,7 @@ AWS.EC2 = inherit({})
  *     * +SecondaryPrivateIpAddressCount+ - (<tt>Integer</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1012,7 +1011,7 @@ AWS.EC2 = inherit({})
  *             * +IpOwnerId+ - (<tt>String</tt>)
  *             * +AllocationId+ - (<tt>String</tt>)
  *             * +AssociationId+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createPlacementGroup(params, callback)
@@ -1026,13 +1025,13 @@ AWS.EC2 = inherit({})
  *       strategy.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createReservedInstancesListing(params, callback)
@@ -1047,7 +1046,7 @@ AWS.EC2 = inherit({})
  *     * +ClientToken+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1073,7 +1072,7 @@ AWS.EC2 = inherit({})
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
  *         * +ClientToken+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createRoute(params, callback)
@@ -1096,13 +1095,13 @@ AWS.EC2 = inherit({})
  *     * +NetworkInterfaceId+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createRouteTable(params, callback)
@@ -1115,7 +1114,7 @@ AWS.EC2 = inherit({})
  *       the route table will be created.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1147,7 +1146,7 @@ AWS.EC2 = inherit({})
  *           * +GatewayId+ - (<tt>String</tt>)
  *           * +Status+ - (<tt>String</tt>)
  *           * +SourceId+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createSecurityGroup(params, callback)
@@ -1160,7 +1159,7 @@ AWS.EC2 = inherit({})
  *     * +VpcId+ - (<tt>String</tt>) ID of the VPC.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1168,7 +1167,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
  *       * +GroupId+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createSnapshot(params, callback)
@@ -1181,37 +1180,35 @@ AWS.EC2 = inherit({})
  *       snapshot.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
- *       * +Snapshot+ - (<tt>Object</tt>) The new snapshot.
- *         * +SnapshotId+ - (<tt>String</tt>) The unique ID of this
- *           snapshot.
- *         * +VolumeId+ - (<tt>String</tt>) The ID of the volume from which
- *           this snapshot was created.
- *         * +State+ - (<tt>String</tt>) Snapshot state (e.g., pending,
- *           completed, or error).
- *         * +StartTime+ - (<tt>Date</tt>) Time stamp when the snapshot was
- *           initiated.
- *         * +Progress+ - (<tt>String</tt>) The progress of the snapshot,
- *           in percentage.
- *         * +OwnerId+ - (<tt>String</tt>) AWS Access Key ID of the user
- *           who owns the snapshot.
- *         * +Description+ - (<tt>String</tt>) Description of the snapshot.
- *         * +VolumeSize+ - (<tt>Integer</tt>) The size of the volume, in
- *           gigabytes.
- *         * +OwnerAlias+ - (<tt>String</tt>) The AWS account alias (e.g.,
- *           "amazon", "redhat", "self", etc.) or AWS account ID that owns
- *           the AMI.
- *         * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
- *           Snapshot.
- *           * +Key+ - (<tt>String</tt>) The tag's key.
- *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *       * +SnapshotId+ - (<tt>String</tt>) The unique ID of this snapshot.
+ *       * +VolumeId+ - (<tt>String</tt>) The ID of the volume from which
+ *         this snapshot was created.
+ *       * +State+ - (<tt>String</tt>) Snapshot state (e.g., pending,
+ *         completed, or error).
+ *       * +StartTime+ - (<tt>Date</tt>) Time stamp when the snapshot was
+ *         initiated.
+ *       * +Progress+ - (<tt>String</tt>) The progress of the snapshot, in
+ *         percentage.
+ *       * +OwnerId+ - (<tt>String</tt>) AWS Access Key ID of the user who
+ *         owns the snapshot.
+ *       * +Description+ - (<tt>String</tt>) Description of the snapshot.
+ *       * +VolumeSize+ - (<tt>Integer</tt>) The size of the volume, in
+ *         gigabytes.
+ *       * +OwnerAlias+ - (<tt>String</tt>) The AWS account alias (e.g.,
+ *         "amazon", "redhat", "self", etc.) or AWS account ID that owns
+ *         the AMI.
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *         Snapshot.
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createSpotDatafeedSubscription(params, callback)
@@ -1224,7 +1221,7 @@ AWS.EC2 = inherit({})
  *       datafeed files.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1244,7 +1241,7 @@ AWS.EC2 = inherit({})
  *           Spot Instance request, if present.
  *           * +Code+ - (<tt>String</tt>)
  *           * +Message+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createSubnet(params, callback)
@@ -1269,7 +1266,7 @@ AWS.EC2 = inherit({})
  *       create the subnet in.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1293,7 +1290,7 @@ AWS.EC2 = inherit({})
  *           Subnet.
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createTags(params, callback)
@@ -1311,13 +1308,13 @@ AWS.EC2 = inherit({})
  *       * +Value+ - (<tt>String</tt>) The tag's value.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createVolume(params, callback)
@@ -1334,42 +1331,40 @@ AWS.EC2 = inherit({})
  *     * +Iops+ - (<tt>Integer</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
- *       * +Volume+ - (<tt>Object</tt>) The newly created EBS volume.
- *         * +VolumeId+ - (<tt>String</tt>) The unique ID of this volume.
- *         * +Size+ - (<tt>Integer</tt>) The size of this volume, in
- *           gigabytes.
- *         * +SnapshotId+ - (<tt>String</tt>) Optional snapshot from which
- *           this volume was created.
- *         * +AvailabilityZone+ - (<tt>String</tt>) Availability zone in
- *           which this volume was created.
- *         * +State+ - (<tt>String</tt>) State of this volume (e.g.,
- *           creating, available).
- *         * +CreateTime+ - (<tt>Date</tt>) Timestamp when volume creation
- *           was initiated.
- *         * +Attachments+ - (<tt>Array<Object></tt>) Information on what
- *           this volume is attached to.
- *           * +VolumeId+ - (<tt>String</tt>)
- *           * +InstanceId+ - (<tt>String</tt>)
- *           * +Device+ - (<tt>String</tt>) How the device is exposed to
- *             the instance (e.g., /dev/sdh).
- *           * +State+ - (<tt>String</tt>)
- *           * +AttachTime+ - (<tt>Date</tt>) Timestamp when this
- *             attachment initiated.
- *           * +DeleteOnTermination+ - (<tt>Boolean</tt>)
- *         * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
- *           Volume.
- *           * +Key+ - (<tt>String</tt>) The tag's key.
- *           * +Value+ - (<tt>String</tt>) The tag's value.
- *         * +VolumeType+ - (<tt>String</tt>)
- *         * +Iops+ - (<tt>Integer</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *       * +VolumeId+ - (<tt>String</tt>) The unique ID of this volume.
+ *       * +Size+ - (<tt>Integer</tt>) The size of this volume, in
+ *         gigabytes.
+ *       * +SnapshotId+ - (<tt>String</tt>) Optional snapshot from which
+ *         this volume was created.
+ *       * +AvailabilityZone+ - (<tt>String</tt>) Availability zone in
+ *         which this volume was created.
+ *       * +State+ - (<tt>String</tt>) State of this volume (e.g.,
+ *         creating, available).
+ *       * +CreateTime+ - (<tt>Date</tt>) Timestamp when volume creation
+ *         was initiated.
+ *       * +Attachments+ - (<tt>Array<Object></tt>) Information on what
+ *         this volume is attached to.
+ *         * +VolumeId+ - (<tt>String</tt>)
+ *         * +InstanceId+ - (<tt>String</tt>)
+ *         * +Device+ - (<tt>String</tt>) How the device is exposed to the
+ *           instance (e.g., /dev/sdh).
+ *         * +State+ - (<tt>String</tt>)
+ *         * +AttachTime+ - (<tt>Date</tt>) Timestamp when this attachment
+ *           initiated.
+ *         * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the Volume.
+ *         * +Key+ - (<tt>String</tt>) The tag's key.
+ *         * +Value+ - (<tt>String</tt>) The tag's value.
+ *       * +VolumeType+ - (<tt>String</tt>)
+ *       * +Iops+ - (<tt>Integer</tt>)
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createVpc(params, callback)
@@ -1386,7 +1381,7 @@ AWS.EC2 = inherit({})
  *       means instances must be launched with tenancy as dedicated.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1408,7 +1403,7 @@ AWS.EC2 = inherit({})
  *           * +Value+ - (<tt>String</tt>) The tag's value.
  *         * +InstanceTenancy+ - (<tt>String</tt>) The allowed tenancy of
  *           instances launched into the VPC.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createVpnConnection(params, callback)
@@ -1425,7 +1420,7 @@ AWS.EC2 = inherit({})
  *       * +StaticRoutesOnly+ - (<tt>Boolean</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1463,7 +1458,7 @@ AWS.EC2 = inherit({})
  *           * +DestinationCidrBlock+ - (<tt>String</tt>)
  *           * +Source+ - (<tt>String</tt>)
  *           * +State+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createVpnConnectionRoute(params, callback)
@@ -1473,13 +1468,13 @@ AWS.EC2 = inherit({})
  *     * +DestinationCidrBlock+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createVpnGateway(params, callback)
@@ -1493,7 +1488,7 @@ AWS.EC2 = inherit({})
  *       which to create the VPN gateway.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1518,7 +1513,7 @@ AWS.EC2 = inherit({})
  *           VpnGateway.
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deactivateLicense(params, callback)
@@ -1532,13 +1527,13 @@ AWS.EC2 = inherit({})
  *       of capacity to deactivate against the license.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteCustomerGateway(params, callback)
@@ -1549,13 +1544,13 @@ AWS.EC2 = inherit({})
  *       the customer gateway to delete.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteDhcpOptions(params, callback)
@@ -1568,13 +1563,13 @@ AWS.EC2 = inherit({})
  *       DHCP options set to delete.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteInternetGateway(params, callback)
@@ -1586,13 +1581,13 @@ AWS.EC2 = inherit({})
  *       the Internet gateway to be deleted.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteKeyPair(params, callback)
@@ -1602,13 +1597,13 @@ AWS.EC2 = inherit({})
  *       EC2 key pair to delete.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteNetworkAcl(params, callback)
@@ -1621,13 +1616,13 @@ AWS.EC2 = inherit({})
  *       network ACL to be deleted.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteNetworkAclEntry(params, callback)
@@ -1643,13 +1638,13 @@ AWS.EC2 = inherit({})
  *       delete is an egress rule (true) or ingress rule (false).
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteNetworkInterface(params, callback)
@@ -1658,13 +1653,13 @@ AWS.EC2 = inherit({})
  *     * +NetworkInterfaceId+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deletePlacementGroup(params, callback)
@@ -1675,13 +1670,13 @@ AWS.EC2 = inherit({})
  *       PlacementGroup to delete.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteRoute(params, callback)
@@ -1696,13 +1691,13 @@ AWS.EC2 = inherit({})
  *       must exactly match the CIDR for the route you want to delete.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteRouteTable(params, callback)
@@ -1715,13 +1710,13 @@ AWS.EC2 = inherit({})
  *       route table to be deleted.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteSecurityGroup(params, callback)
@@ -1733,13 +1728,13 @@ AWS.EC2 = inherit({})
  *       group to delete.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteSnapshot(params, callback)
@@ -1749,13 +1744,13 @@ AWS.EC2 = inherit({})
  *       snapshot to delete.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteSpotDatafeedSubscription(params, callback)
@@ -1763,13 +1758,13 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteSubnet(params, callback)
@@ -1781,13 +1776,13 @@ AWS.EC2 = inherit({})
  *       you want to delete.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteTags(params, callback)
@@ -1802,13 +1797,13 @@ AWS.EC2 = inherit({})
  *       * +Value+ - (<tt>String</tt>) The tag's value.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteVolume(params, callback)
@@ -1819,13 +1814,13 @@ AWS.EC2 = inherit({})
  *       volume to delete.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteVpc(params, callback)
@@ -1839,13 +1834,13 @@ AWS.EC2 = inherit({})
  *       want to delete.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteVpnConnection(params, callback)
@@ -1862,13 +1857,13 @@ AWS.EC2 = inherit({})
  *       VPN connection to delete
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteVpnConnectionRoute(params, callback)
@@ -1878,13 +1873,13 @@ AWS.EC2 = inherit({})
  *     * +DestinationCidrBlock+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteVpnGateway(params, callback)
@@ -1899,13 +1894,13 @@ AWS.EC2 = inherit({})
  *       gateway to delete.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deregisterImage(params, callback)
@@ -1916,13 +1911,13 @@ AWS.EC2 = inherit({})
  *       deregister.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeAddresses(params, callback)
@@ -1941,7 +1936,7 @@ AWS.EC2 = inherit({})
  *     * +AllocationIds+ - (<tt>Array<String></tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1957,7 +1952,7 @@ AWS.EC2 = inherit({})
  *         * +NetworkInterfaceId+ - (<tt>String</tt>)
  *         * +NetworkInterfaceOwnerId+ - (<tt>String</tt>)
  *         * +PrivateIpAddress+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeAvailabilityZones(params, callback)
@@ -1975,7 +1970,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -1991,7 +1986,7 @@ AWS.EC2 = inherit({})
  *         * +Messages+ - (<tt>Array<Object></tt>) A list of messages about
  *           the Availability Zone.
  *           * +Message+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeBundleTasks(params, callback)
@@ -2011,7 +2006,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -2049,7 +2044,7 @@ AWS.EC2 = inherit({})
  *           description of the error.
  *           * +Code+ - (<tt>String</tt>) Error code.
  *           * +Message+ - (<tt>String</tt>) Error message.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeConversionTasks(params, callback)
@@ -2062,7 +2057,7 @@ AWS.EC2 = inherit({})
  *     * +ConversionTaskIds+ - (<tt>Array<String></tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -2107,7 +2102,7 @@ AWS.EC2 = inherit({})
  *         * +Tags+ - (<tt>Array<Object></tt>)
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeCustomerGateways(params, callback)
@@ -2135,7 +2130,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -2158,7 +2153,7 @@ AWS.EC2 = inherit({})
  *           CustomerGateway.
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeDhcpOptions(params, callback)
@@ -2177,7 +2172,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -2197,7 +2192,7 @@ AWS.EC2 = inherit({})
  *           DhcpOptions.
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeExportTasks(params, callback)
@@ -2206,7 +2201,7 @@ AWS.EC2 = inherit({})
  *     * +ExportTaskIds+ - (<tt>Array<String></tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -2226,7 +2221,7 @@ AWS.EC2 = inherit({})
  *           * +ContainerFormat+ - (<tt>String</tt>)
  *           * +S3Bucket+ - (<tt>String</tt>)
  *           * +S3Key+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeImageAttribute(params, callback)
@@ -2239,57 +2234,53 @@ AWS.EC2 = inherit({})
  *       attribute to describe.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
- *       * +ImageAttribute+ - (<tt>Object</tt>) The described image
- *         attribute of the associated AMI.
- *         * +ImageId+ - (<tt>String</tt>) The ID of the associated AMI.
- *         * +LaunchPermissions+ - (<tt>Array<Object></tt>) Launch
- *           permissions for the associated AMI.
- *           * +UserId+ - (<tt>String</tt>) The AWS user ID of the user
- *             involved in this launch permission.
- *           * +Group+ - (<tt>String</tt>) The AWS group of the user
- *             involved in this launch permission.
- *         * +ProductCodes+ - (<tt>Array<Object></tt>) Product codes for
- *           the associated AMI.
- *           * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an AWS
- *             DevPay product code.
- *           * +ProductCodeType+ - (<tt>String</tt>)
- *         * +KernelId+ - (<tt>Object</tt>) Kernel ID of the associated
- *           AMI.
- *           * +Value+ - (<tt>String</tt>)
- *         * +RamdiskId+ - (<tt>Object</tt>) Ramdisk ID of the associated
- *           AMI.
- *           * +Value+ - (<tt>String</tt>)
- *         * +Description+ - (<tt>Object</tt>) User-created description of
- *           the associated AMI.
- *           * +Value+ - (<tt>String</tt>)
- *         * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) Block device
- *           mappings for the associated AMI.
- *           * +VirtualName+ - (<tt>String</tt>) Specifies the virtual
- *             device name.
- *           * +DeviceName+ - (<tt>String</tt>) Specifies the device name
- *             (e.g., /dev/sdh).
- *           * +Ebs+ - (<tt>Object</tt>) Specifies parameters used to
- *             automatically setup Amazon EBS volumes when the instance is
- *             launched.
- *             * +SnapshotId+ - (<tt>String</tt>) The ID of the snapshot
- *               from which the volume will be created.
- *             * +VolumeSize+ - (<tt>Integer</tt>) The size of the volume,
- *               in gigabytes.
- *             * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies
- *               whether the Amazon EBS volume is deleted on instance
- *               termination.
- *             * +VolumeType+ - (<tt>String</tt>)
- *             * +Iops+ - (<tt>Integer</tt>)
- *           * +NoDevice+ - (<tt>String</tt>) Specifies the device name to
- *             suppress during instance launch.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *       * +ImageId+ - (<tt>String</tt>) The ID of the associated AMI.
+ *       * +LaunchPermissions+ - (<tt>Array<Object></tt>) Launch
+ *         permissions for the associated AMI.
+ *         * +UserId+ - (<tt>String</tt>) The AWS user ID of the user
+ *           involved in this launch permission.
+ *         * +Group+ - (<tt>String</tt>) The AWS group of the user involved
+ *           in this launch permission.
+ *       * +ProductCodes+ - (<tt>Array<Object></tt>) Product codes for the
+ *         associated AMI.
+ *         * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an AWS
+ *           DevPay product code.
+ *         * +ProductCodeType+ - (<tt>String</tt>)
+ *       * +KernelId+ - (<tt>Object</tt>) Kernel ID of the associated AMI.
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +RamdiskId+ - (<tt>Object</tt>) Ramdisk ID of the associated
+ *         AMI.
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +Description+ - (<tt>Object</tt>) User-created description of
+ *         the associated AMI.
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) Block device
+ *         mappings for the associated AMI.
+ *         * +VirtualName+ - (<tt>String</tt>) Specifies the virtual device
+ *           name.
+ *         * +DeviceName+ - (<tt>String</tt>) Specifies the device name
+ *           (e.g., /dev/sdh).
+ *         * +Ebs+ - (<tt>Object</tt>) Specifies parameters used to
+ *           automatically setup Amazon EBS volumes when the instance is
+ *           launched.
+ *           * +SnapshotId+ - (<tt>String</tt>) The ID of the snapshot from
+ *             which the volume will be created.
+ *           * +VolumeSize+ - (<tt>Integer</tt>) The size of the volume, in
+ *             gigabytes.
+ *           * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies whether
+ *             the Amazon EBS volume is deleted on instance termination.
+ *           * +VolumeType+ - (<tt>String</tt>)
+ *           * +Iops+ - (<tt>Integer</tt>)
+ *         * +NoDevice+ - (<tt>String</tt>) Specifies the device name to
+ *           suppress during instance launch.
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeImages(params, callback)
@@ -2324,7 +2315,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -2403,7 +2394,7 @@ AWS.EC2 = inherit({})
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
  *         * +Hypervisor+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeInstanceAttribute(params, callback)
@@ -2416,61 +2407,58 @@ AWS.EC2 = inherit({})
  *       attribute to describe.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
- *       * +InstanceAttribute+ - (<tt>Object</tt>) The described instance
- *         attribute.
- *         * +InstanceId+ - (<tt>String</tt>) The ID of the associated
+ *       * +InstanceId+ - (<tt>String</tt>) The ID of the associated
+ *         instance.
+ *       * +InstanceType+ - (<tt>Object</tt>) The instance type (e.g.,
+ *         m1.small, c1.medium, m2.2xlarge, and so on).
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +KernelId+ - (<tt>Object</tt>) The kernel ID of the associated
+ *         instance.
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +RamdiskId+ - (<tt>Object</tt>) The ramdisk ID of the associated
+ *         instance.
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +UserData+ - (<tt>Object</tt>) MIME, Base64-encoded user data.
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +DisableApiTermination+ - (<tt>Object</tt>) Whether this
+ *         instance can be terminated. You must modify this attribute
+ *         before you can terminate any "locked" instances.
+ *         * +Value+ - (<tt>Boolean</tt>)
+ *       * +InstanceInitiatedShutdownBehavior+ - (<tt>Object</tt>) Whether
+ *         this instance's Amazon EBS volumes are deleted when the instance
+ *         is shut down.
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +RootDeviceName+ - (<tt>Object</tt>) The root device name (e.g.,
+ *         /dev/sda1).
+ *         * +Value+ - (<tt>String</tt>)
+ *       * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) How block
+ *         devices are exposed to this instance. Each mapping is made up of
+ *         a virtualName and a deviceName.
+ *         * +DeviceName+ - (<tt>String</tt>) The device name (e.g.,
+ *           /dev/sdh) at which the block device is exposed on the
  *           instance.
- *         * +InstanceType+ - (<tt>Object</tt>) The instance type (e.g.,
- *           m1.small, c1.medium, m2.2xlarge, and so on).
- *           * +Value+ - (<tt>String</tt>)
- *         * +KernelId+ - (<tt>Object</tt>) The kernel ID of the associated
- *           instance.
- *           * +Value+ - (<tt>String</tt>)
- *         * +RamdiskId+ - (<tt>Object</tt>) The ramdisk ID of the
- *           associated instance.
- *           * +Value+ - (<tt>String</tt>)
- *         * +UserData+ - (<tt>Object</tt>) MIME, Base64-encoded user data.
- *           * +Value+ - (<tt>String</tt>)
- *         * +DisableApiTermination+ - (<tt>Object</tt>) Whether this
- *           instance can be terminated. You must modify this attribute
- *           before you can terminate any "locked" instances.
- *           * +Value+ - (<tt>Boolean</tt>)
- *         * +InstanceInitiatedShutdownBehavior+ - (<tt>Object</tt>)
- *           Whether this instance's Amazon EBS volumes are deleted when
- *           the instance is shut down.
- *           * +Value+ - (<tt>String</tt>)
- *         * +RootDeviceName+ - (<tt>Object</tt>) The root device name
- *           (e.g., /dev/sda1).
- *           * +Value+ - (<tt>String</tt>)
- *         * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) How block
- *           devices are exposed to this instance. Each mapping is made up
- *           of a virtualName and a deviceName.
- *           * +DeviceName+ - (<tt>String</tt>) The device name (e.g.,
- *             /dev/sdh) at which the block device is exposed on the
- *             instance.
- *           * +Ebs+ - (<tt>Object</tt>) The optional EBS device mapped to
- *             the specified device name.
- *             * +VolumeId+ - (<tt>String</tt>) The ID of the EBS volume.
- *             * +Status+ - (<tt>String</tt>) The status of the EBS volume.
- *             * +AttachTime+ - (<tt>Date</tt>) The time at which the EBS
- *               volume was attached to the associated instance.
- *             * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies
- *               whether the Amazon EBS volume is deleted on instance
- *               termination.
- *         * +ProductCodes+ - (<tt>Array<Object></tt>)
- *           * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an AWS
- *             DevPay product code.
- *           * +ProductCodeType+ - (<tt>String</tt>)
- *         * +EbsOptimized+ - (<tt>Object</tt>)
- *           * +Value+ - (<tt>Boolean</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *         * +Ebs+ - (<tt>Object</tt>) The optional EBS device mapped to
+ *           the specified device name.
+ *           * +VolumeId+ - (<tt>String</tt>) The ID of the EBS volume.
+ *           * +Status+ - (<tt>String</tt>) The status of the EBS volume.
+ *           * +AttachTime+ - (<tt>Date</tt>) The time at which the EBS
+ *             volume was attached to the associated instance.
+ *           * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies whether
+ *             the Amazon EBS volume is deleted on instance termination.
+ *       * +ProductCodes+ - (<tt>Array<Object></tt>)
+ *         * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an AWS
+ *           DevPay product code.
+ *         * +ProductCodeType+ - (<tt>String</tt>)
+ *       * +EbsOptimized+ - (<tt>Object</tt>)
+ *         * +Value+ - (<tt>Boolean</tt>)
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeInstanceStatus(params, callback)
@@ -2488,7 +2476,7 @@ AWS.EC2 = inherit({})
  *     * +IncludeAllInstances+ - (<tt>Boolean</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -2522,7 +2510,7 @@ AWS.EC2 = inherit({})
  *             * +Status+ - (<tt>String</tt>)
  *             * +ImpairedSince+ - (<tt>Date</tt>)
  *       * +NextToken+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeInstances(params, callback)
@@ -2540,7 +2528,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -2702,7 +2690,7 @@ AWS.EC2 = inherit({})
  *             * +Arn+ - (<tt>String</tt>)
  *             * +Id+ - (<tt>String</tt>)
  *           * +EbsOptimized+ - (<tt>Boolean</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeInternetGateways(params, callback)
@@ -2724,7 +2712,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -2739,7 +2727,7 @@ AWS.EC2 = inherit({})
  *         * +Tags+ - (<tt>Array<Object></tt>)
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeKeyPairs(params, callback)
@@ -2759,7 +2747,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -2771,7 +2759,7 @@ AWS.EC2 = inherit({})
  *         * +KeyName+ - (<tt>String</tt>) The name of the key pair.
  *         * +KeyFingerprint+ - (<tt>String</tt>) The SHA-1 digest of the
  *           DER encoded private key.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeLicenses(params, callback)
@@ -2790,7 +2778,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -2825,7 +2813,7 @@ AWS.EC2 = inherit({})
  *           License.
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeNetworkAcls(params, callback)
@@ -2847,7 +2835,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -2883,7 +2871,7 @@ AWS.EC2 = inherit({})
  *         * +Tags+ - (<tt>Array<Object></tt>)
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeNetworkInterfaceAttribute(params, callback)
@@ -2896,7 +2884,7 @@ AWS.EC2 = inherit({})
  *     * +Attachment+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -2919,7 +2907,7 @@ AWS.EC2 = inherit({})
  *         * +Status+ - (<tt>String</tt>)
  *         * +AttachTime+ - (<tt>Date</tt>)
  *         * +DeleteOnTermination+ - (<tt>Boolean</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeNetworkInterfaces(params, callback)
@@ -2932,7 +2920,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -2980,7 +2968,7 @@ AWS.EC2 = inherit({})
  *             * +IpOwnerId+ - (<tt>String</tt>)
  *             * +AllocationId+ - (<tt>String</tt>)
  *             * +AssociationId+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describePlacementGroups(params, callback)
@@ -2998,7 +2986,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3012,7 +3000,7 @@ AWS.EC2 = inherit({})
  *         * +Strategy+ - (<tt>String</tt>) The strategy to use when
  *           allocating Amazon EC2 instances for the PlacementGroup.
  *         * +State+ - (<tt>String</tt>) The state of this PlacementGroup.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeRegions(params, callback)
@@ -3030,7 +3018,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3041,7 +3029,7 @@ AWS.EC2 = inherit({})
  *         Amazon EC2 regions.
  *         * +RegionName+ - (<tt>String</tt>) Name of the region.
  *         * +Endpoint+ - (<tt>String</tt>) Region service endpoint.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeReservedInstances(params, callback)
@@ -3060,7 +3048,7 @@ AWS.EC2 = inherit({})
  *     * +OfferingType+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3102,7 +3090,7 @@ AWS.EC2 = inherit({})
  *         * +RecurringCharges+ - (<tt>Array<Object></tt>)
  *           * +Frequency+ - (<tt>String</tt>)
  *           * +Amount+ - (<tt>Float</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeReservedInstancesListings(params, callback)
@@ -3116,7 +3104,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3142,7 +3130,7 @@ AWS.EC2 = inherit({})
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
  *         * +ClientToken+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeReservedInstancesOfferings(params, callback)
@@ -3178,7 +3166,7 @@ AWS.EC2 = inherit({})
  *     * +MaxResults+ - (<tt>Integer</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3215,7 +3203,7 @@ AWS.EC2 = inherit({})
  *           * +Price+ - (<tt>Float</tt>)
  *           * +Count+ - (<tt>Integer</tt>)
  *       * +NextToken+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeRouteTables(params, callback)
@@ -3237,7 +3225,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3269,7 +3257,7 @@ AWS.EC2 = inherit({})
  *           * +GatewayId+ - (<tt>String</tt>)
  *           * +Status+ - (<tt>String</tt>)
  *           * +SourceId+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeSecurityGroups(params, callback)
@@ -3288,7 +3276,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3355,7 +3343,7 @@ AWS.EC2 = inherit({})
  *         * +Tags+ - (<tt>Array<Object></tt>)
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeSnapshotAttribute(params, callback)
@@ -3368,7 +3356,7 @@ AWS.EC2 = inherit({})
  *       attribute to describe.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3388,7 +3376,7 @@ AWS.EC2 = inherit({})
  *         * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an AWS
  *           DevPay product code.
  *         * +ProductCodeType+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeSnapshots(params, callback)
@@ -3414,7 +3402,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3445,7 +3433,7 @@ AWS.EC2 = inherit({})
  *           Snapshot.
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeSpotDatafeedSubscription(params, callback)
@@ -3453,7 +3441,7 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3474,7 +3462,7 @@ AWS.EC2 = inherit({})
  *           Spot Instance request, if present.
  *           * +Code+ - (<tt>String</tt>)
  *           * +Message+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeSpotInstanceRequests(params, callback)
@@ -3497,7 +3485,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3600,7 +3588,7 @@ AWS.EC2 = inherit({})
  *           * +Value+ - (<tt>String</tt>) The tag's value.
  *         * +LaunchedAvailabilityZone+ - (<tt>String</tt>) The
  *           Availability Zone in which the bid is launched.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeSpotPriceHistory(params, callback)
@@ -3629,7 +3617,7 @@ AWS.EC2 = inherit({})
  *       to return.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3645,7 +3633,7 @@ AWS.EC2 = inherit({})
  *       * +NextToken+ - (<tt>String</tt>) The string marking the next set
  *         of results returned. Displays empty if there are no more results
  *         to be returned.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeSubnets(params, callback)
@@ -3664,7 +3652,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3689,7 +3677,7 @@ AWS.EC2 = inherit({})
  *           Subnet.
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeTags(params, callback)
@@ -3702,7 +3690,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3717,7 +3705,7 @@ AWS.EC2 = inherit({})
  *           EBS volume, etc).
  *         * +Key+ - (<tt>String</tt>) The tag's key.
  *         * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeVolumeAttribute(params, callback)
@@ -3727,7 +3715,7 @@ AWS.EC2 = inherit({})
  *     * +Attribute+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3741,7 +3729,7 @@ AWS.EC2 = inherit({})
  *         * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an AWS
  *           DevPay product code.
  *         * +ProductCodeType+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeVolumeStatus(params, callback)
@@ -3756,7 +3744,7 @@ AWS.EC2 = inherit({})
  *     * +MaxResults+ - (<tt>Integer</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3783,7 +3771,7 @@ AWS.EC2 = inherit({})
  *           * +EventType+ - (<tt>String</tt>)
  *           * +EventId+ - (<tt>String</tt>)
  *       * +NextToken+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeVolumes(params, callback)
@@ -3802,7 +3790,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3838,7 +3826,7 @@ AWS.EC2 = inherit({})
  *           * +Value+ - (<tt>String</tt>) The tag's value.
  *         * +VolumeType+ - (<tt>String</tt>)
  *         * +Iops+ - (<tt>Integer</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeVpcs(params, callback)
@@ -3856,7 +3844,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3878,7 +3866,7 @@ AWS.EC2 = inherit({})
  *           * +Value+ - (<tt>String</tt>) The tag's value.
  *         * +InstanceTenancy+ - (<tt>String</tt>) The allowed tenancy of
  *           instances launched into the VPC.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeVpnConnections(params, callback)
@@ -3895,7 +3883,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3933,7 +3921,7 @@ AWS.EC2 = inherit({})
  *           * +DestinationCidrBlock+ - (<tt>String</tt>)
  *           * +Source+ - (<tt>String</tt>)
  *           * +State+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeVpnGateways(params, callback)
@@ -3954,7 +3942,7 @@ AWS.EC2 = inherit({})
  *         values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -3979,7 +3967,7 @@ AWS.EC2 = inherit({})
  *           VpnGateway.
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method detachInternetGateway(params, callback)
@@ -3994,13 +3982,13 @@ AWS.EC2 = inherit({})
  *     * +VpcId+ - (*required*, <tt>String</tt>) The ID of the VPC.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method detachNetworkInterface(params, callback)
@@ -4010,13 +3998,13 @@ AWS.EC2 = inherit({})
  *     * +Force+ - (<tt>Boolean</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method detachVolume(params, callback)
@@ -4033,25 +4021,22 @@ AWS.EC2 = inherit({})
  *       instance, unmounting the volume, and detaching normally).
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
- *       * +Attachment+ - (<tt>Object</tt>) The updated EBS volume
- *         attachment information after trying to detach the volume from
- *         the specified instance.
- *         * +VolumeId+ - (<tt>String</tt>)
- *         * +InstanceId+ - (<tt>String</tt>)
- *         * +Device+ - (<tt>String</tt>) How the device is exposed to the
- *           instance (e.g., /dev/sdh).
- *         * +State+ - (<tt>String</tt>)
- *         * +AttachTime+ - (<tt>Date</tt>) Timestamp when this attachment
- *           initiated.
- *         * +DeleteOnTermination+ - (<tt>Boolean</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *       * +VolumeId+ - (<tt>String</tt>)
+ *       * +InstanceId+ - (<tt>String</tt>)
+ *       * +Device+ - (<tt>String</tt>) How the device is exposed to the
+ *         instance (e.g., /dev/sdh).
+ *       * +State+ - (<tt>String</tt>)
+ *       * +AttachTime+ - (<tt>Date</tt>) Timestamp when this attachment
+ *         initiated.
+ *       * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method detachVpnGateway(params, callback)
@@ -4066,13 +4051,13 @@ AWS.EC2 = inherit({})
  *       detach the VPN gateway from.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method disableVgwRoutePropagation(params, callback)
@@ -4082,13 +4067,13 @@ AWS.EC2 = inherit({})
  *     * +GatewayId+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method disassociateAddress(params, callback)
@@ -4097,19 +4082,19 @@ AWS.EC2 = inherit({})
  *   is an idempotent operation. If you enter it more than once, Amazon
  *   EC2 does not return an error.
  *   @param params [Object]
- *     * +PublicIp+ - (*required*, <tt>String</tt>) The elastic IP
- *       address that you are disassociating from the instance.
+ *     * +PublicIp+ - (<tt>String</tt>) The elastic IP address that you
+ *       are disassociating from the instance.
  *     * +AssociationId+ - (<tt>String</tt>) Association ID corresponding
  *       to the VPC elastic IP address you want to disassociate.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method disassociateRouteTable(params, callback)
@@ -4120,13 +4105,13 @@ AWS.EC2 = inherit({})
  *       and subnet.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method enableVgwRoutePropagation(params, callback)
@@ -4136,13 +4121,13 @@ AWS.EC2 = inherit({})
  *     * +GatewayId+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method enableVolumeIO(params, callback)
@@ -4151,13 +4136,13 @@ AWS.EC2 = inherit({})
  *     * +VolumeId+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getConsoleOutput(params, callback)
@@ -4168,7 +4153,7 @@ AWS.EC2 = inherit({})
  *       instance for which you want console output.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -4180,7 +4165,7 @@ AWS.EC2 = inherit({})
  *       * +Timestamp+ - (<tt>Date</tt>) The time the output was last
  *         updated.
  *       * +Output+ - (<tt>String</tt>) The console output, Base64 encoded.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getPasswordData(params, callback)
@@ -4191,7 +4176,7 @@ AWS.EC2 = inherit({})
  *       instance for which you want the Windows administrator password.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -4204,7 +4189,7 @@ AWS.EC2 = inherit({})
  *         updated.
  *       * +PasswordData+ - (<tt>String</tt>) The Windows administrator
  *         password of the specified instance.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method importInstance(params, callback)
@@ -4266,7 +4251,7 @@ AWS.EC2 = inherit({})
  *     * +Platform+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -4311,7 +4296,7 @@ AWS.EC2 = inherit({})
  *         * +Tags+ - (<tt>Array<Object></tt>)
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method importKeyPair(params, callback)
@@ -4325,7 +4310,7 @@ AWS.EC2 = inherit({})
  *       key portion of the key pair being imported.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -4336,7 +4321,7 @@ AWS.EC2 = inherit({})
  *         name.
  *       * +KeyFingerprint+ - (<tt>String</tt>) The MD5 public key
  *         fingerprint as specified in section 4 of RFC4716 .
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method importVolume(params, callback)
@@ -4352,7 +4337,7 @@ AWS.EC2 = inherit({})
  *       * +Size+ - (*required*, <tt>Integer</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -4397,7 +4382,7 @@ AWS.EC2 = inherit({})
  *         * +Tags+ - (<tt>Array<Object></tt>)
  *           * +Key+ - (<tt>String</tt>) The tag's key.
  *           * +Value+ - (<tt>String</tt>) The tag's value.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method modifyImageAttribute(params, callback)
@@ -4438,13 +4423,13 @@ AWS.EC2 = inherit({})
  *       * +Value+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method modifyInstanceAttribute(params, callback)
@@ -4493,13 +4478,13 @@ AWS.EC2 = inherit({})
  *       * +Value+ - (<tt>Boolean</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method modifyNetworkInterfaceAttribute(params, callback)
@@ -4516,13 +4501,13 @@ AWS.EC2 = inherit({})
  *       * +DeleteOnTermination+ - (<tt>Boolean</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method modifySnapshotAttribute(params, callback)
@@ -4555,13 +4540,13 @@ AWS.EC2 = inherit({})
  *           create volumes from the snapshot (currently supports "all").
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method modifyVolumeAttribute(params, callback)
@@ -4571,13 +4556,13 @@ AWS.EC2 = inherit({})
  *     * +AutoEnableIO+ - (<tt>Boolean</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method monitorInstances(params, callback)
@@ -4587,7 +4572,7 @@ AWS.EC2 = inherit({})
  *       Amazon EC2 instances on which to enable monitoring.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -4602,7 +4587,7 @@ AWS.EC2 = inherit({})
  *           associated instance.
  *           * +State+ - (<tt>String</tt>) The state of monitoring on an
  *             Amazon EC2 instance (ex: enabled, disabled).
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method purchaseReservedInstancesOffering(params, callback)
@@ -4622,7 +4607,7 @@ AWS.EC2 = inherit({})
  *       * +CurrencyCode+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -4631,7 +4616,7 @@ AWS.EC2 = inherit({})
  *       The +data+ object has the following properties:
  *       * +ReservedInstancesId+ - (<tt>String</tt>) The unique ID of the
  *         Reserved Instances purchased for your account.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method rebootInstances(params, callback)
@@ -4645,13 +4630,13 @@ AWS.EC2 = inherit({})
  *       instances to terminate.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method registerImage(params, callback)
@@ -4692,7 +4677,7 @@ AWS.EC2 = inherit({})
  *         suppress during instance launch.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -4701,7 +4686,7 @@ AWS.EC2 = inherit({})
  *       The +data+ object has the following properties:
  *       * +ImageId+ - (<tt>String</tt>) The ID of the new Amazon Machine
  *         Image (AMI).
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method releaseAddress(params, callback)
@@ -4714,13 +4699,13 @@ AWS.EC2 = inherit({})
  *       provided when you allocated the address for use with Amazon VPC.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method replaceNetworkAclAssociation(params, callback)
@@ -4736,7 +4721,7 @@ AWS.EC2 = inherit({})
  *       ACL to associate with the subnet.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -4744,7 +4729,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
  *       * +NewAssociationId+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method replaceNetworkAclEntry(params, callback)
@@ -4780,13 +4765,13 @@ AWS.EC2 = inherit({})
  *         if specifying tcp or udp for the protocol.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method replaceRoute(params, callback)
@@ -4807,13 +4792,13 @@ AWS.EC2 = inherit({})
  *     * +NetworkInterfaceId+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method replaceRouteTableAssociation(params, callback)
@@ -4830,7 +4815,7 @@ AWS.EC2 = inherit({})
  *       route table to associate with the subnet.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -4838,7 +4823,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
  *       * +NewAssociationId+ - (<tt>String</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method reportInstanceStatus(params, callback)
@@ -4852,13 +4837,13 @@ AWS.EC2 = inherit({})
  *     * +Description+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method requestSpotInstances(params, callback)
@@ -4882,9 +4867,6 @@ AWS.EC2 = inherit({})
  *       launch instance information.
  *       * +ImageId+ - (<tt>String</tt>) The AMI ID.
  *       * +KeyName+ - (<tt>String</tt>) The name of the key pair.
- *       * +SecurityGroups+ - (<tt>Array<Object></tt>)
- *         * +GroupName+ - (<tt>String</tt>)
- *         * +GroupId+ - (<tt>String</tt>)
  *       * +UserData+ - (<tt>String</tt>) Optional data, specific to a
  *         user's application, to provide in the launch request. All
  *         instances that collectively comprise the launch request have
@@ -4950,9 +4932,11 @@ AWS.EC2 = inherit({})
  *         * +Arn+ - (<tt>String</tt>)
  *         * +Name+ - (<tt>String</tt>)
  *       * +EbsOptimized+ - (<tt>Boolean</tt>)
+ *       * +SecurityGroupIds+ - (<tt>Array<String></tt>)
+ *       * +SecurityGroups+ - (<tt>Array<String></tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -5056,7 +5040,7 @@ AWS.EC2 = inherit({})
  *           * +Value+ - (<tt>String</tt>) The tag's value.
  *         * +LaunchedAvailabilityZone+ - (<tt>String</tt>) The
  *           Availability Zone in which the bid is launched.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method resetImageAttribute(params, callback)
@@ -5069,13 +5053,13 @@ AWS.EC2 = inherit({})
  *       attribute being reset.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method resetInstanceAttribute(params, callback)
@@ -5087,13 +5071,13 @@ AWS.EC2 = inherit({})
  *       attribute being reset.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method resetNetworkInterfaceAttribute(params, callback)
@@ -5103,13 +5087,13 @@ AWS.EC2 = inherit({})
  *     * +SourceDestCheck+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method resetSnapshotAttribute(params, callback)
@@ -5121,13 +5105,13 @@ AWS.EC2 = inherit({})
  *       attribute being reset.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method revokeSecurityGroupEgress(params, callback)
@@ -5172,13 +5156,13 @@ AWS.EC2 = inherit({})
  *         * +CidrIp+ - (<tt>String</tt>) The list of CIDR IP ranges.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method revokeSecurityGroupIngress(params, callback)
@@ -5229,13 +5213,13 @@ AWS.EC2 = inherit({})
  *         * +CidrIp+ - (<tt>String</tt>) The list of CIDR IP ranges.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method runInstances(params, callback)
@@ -5346,169 +5330,162 @@ AWS.EC2 = inherit({})
  *     * +EbsOptimized+ - (<tt>Boolean</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
- *       * +Reservation+ - (<tt>Object</tt>) The newly created reservation,
- *         containing the new instances.
- *         * +ReservationId+ - (<tt>String</tt>) The unique ID of this
- *           reservation.
- *         * +OwnerId+ - (<tt>String</tt>) The AWS Access Key ID of the
- *           user who owns the reservation.
- *         * +RequesterId+ - (<tt>String</tt>) The unique ID of the user
- *           who requested the instances in this reservation.
- *         * +Groups+ - (<tt>Array<Object></tt>) The list of security
- *           groups requested for the instances in this reservation.
+ *       * +ReservationId+ - (<tt>String</tt>) The unique ID of this
+ *         reservation.
+ *       * +OwnerId+ - (<tt>String</tt>) The AWS Access Key ID of the user
+ *         who owns the reservation.
+ *       * +RequesterId+ - (<tt>String</tt>) The unique ID of the user who
+ *         requested the instances in this reservation.
+ *       * +Groups+ - (<tt>Array<Object></tt>) The list of security groups
+ *         requested for the instances in this reservation.
+ *         * +GroupName+ - (<tt>String</tt>)
+ *         * +GroupId+ - (<tt>String</tt>)
+ *       * +Instances+ - (<tt>Array<Object></tt>) The list of Amazon EC2
+ *         instances included in this reservation.
+ *         * +InstanceId+ - (<tt>String</tt>) Unique ID of the instance
+ *           launched.
+ *         * +ImageId+ - (<tt>String</tt>) Image ID of the AMI used to
+ *           launch the instance.
+ *         * +State+ - (<tt>Object</tt>) The current state of the instance.
+ *           * +Code+ - (<tt>Integer</tt>) A 16-bit unsigned integer. The
+ *             high byte is an opaque internal value and should be ignored.
+ *             The low byte is set based on the state represented.
+ *           * +Name+ - (<tt>String</tt>) The current state of the
+ *             instance.
+ *         * +PrivateDnsName+ - (<tt>String</tt>) The private DNS name
+ *           assigned to the instance. This DNS name can only be used
+ *           inside the Amazon EC2 network. This element remains empty
+ *           until the instance enters a running state.
+ *         * +PublicDnsName+ - (<tt>String</tt>) The public DNS name
+ *           assigned to the instance. This DNS name is contactable from
+ *           outside the Amazon EC2 network. This element remains empty
+ *           until the instance enters a running state.
+ *         * +StateTransitionReason+ - (<tt>String</tt>) Reason for the
+ *           most recent state transition. This might be an empty string.
+ *         * +KeyName+ - (<tt>String</tt>) If this instance was launched
+ *           with an associated key pair, this displays the key pair name.
+ *         * +AmiLaunchIndex+ - (<tt>Integer</tt>) The AMI launch index,
+ *           which can be used to find this instance within the launch
+ *           group.
+ *         * +ProductCodes+ - (<tt>Array<Object></tt>) Product codes
+ *           attached to this instance.
+ *           * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an AWS
+ *             DevPay product code.
+ *           * +ProductCodeType+ - (<tt>String</tt>)
+ *         * +InstanceType+ - (<tt>String</tt>) The instance type. For more
+ *           information on instance types, please see the Amazon Elastic
+ *           Compute Cloud Developer Guide.
+ *         * +LaunchTime+ - (<tt>Date</tt>) The time this instance
+ *           launched.
+ *         * +Placement+ - (<tt>Object</tt>) The location where this
+ *           instance launched.
+ *           * +AvailabilityZone+ - (<tt>String</tt>) The availability zone
+ *             in which an Amazon EC2 instance runs.
+ *           * +GroupName+ - (<tt>String</tt>) The name of the
+ *             PlacementGroup in which an Amazon EC2 instance runs.
+ *             Placement groups are primarily used for launching High
+ *             Performance Computing instances in the same group to ensure
+ *             fast connection speeds.
+ *           * +Tenancy+ - (<tt>String</tt>) The allowed tenancy of
+ *             instances launched into the VPC. A value of default means
+ *             instances can be launched with any tenancy; a value of
+ *             dedicated means all instances launched into the VPC will be
+ *             launched as dedicated tenancy regardless of the tenancy
+ *             assigned to the instance at launch.
+ *         * +KernelId+ - (<tt>String</tt>) Kernel associated with this
+ *           instance.
+ *         * +RamdiskId+ - (<tt>String</tt>) RAM disk associated with this
+ *           instance.
+ *         * +Platform+ - (<tt>String</tt>) Platform of the instance (e.g.,
+ *           Windows).
+ *         * +Monitoring+ - (<tt>Object</tt>) Monitoring status for this
+ *           instance.
+ *           * +State+ - (<tt>String</tt>) The state of monitoring on an
+ *             Amazon EC2 instance (ex: enabled, disabled).
+ *         * +SubnetId+ - (<tt>String</tt>) Specifies the Amazon VPC subnet
+ *           ID in which the instance is running.
+ *         * +VpcId+ - (<tt>String</tt>) Specifies the Amazon VPC in which
+ *           the instance is running.
+ *         * +PrivateIpAddress+ - (<tt>String</tt>) Specifies the private
+ *           IP address that is assigned to the instance (Amazon VPC).
+ *         * +PublicIpAddress+ - (<tt>String</tt>) Specifies the IP address
+ *           of the instance.
+ *         * +StateReason+ - (<tt>Object</tt>) The reason for the state
+ *           change.
+ *           * +Code+ - (<tt>String</tt>) Reason code for the state change.
+ *           * +Message+ - (<tt>String</tt>) Descriptive message for the
+ *             state change.
+ *         * +Architecture+ - (<tt>String</tt>) The architecture of this
+ *           instance.
+ *         * +RootDeviceType+ - (<tt>String</tt>) The root device type used
+ *           by the AMI. The AMI can use an Amazon EBS or instance store
+ *           root device.
+ *         * +RootDeviceName+ - (<tt>String</tt>) The root device name
+ *           (e.g., /dev/sda1).
+ *         * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) Block device
+ *           mapping set.
+ *           * +DeviceName+ - (<tt>String</tt>) The device name (e.g.,
+ *             /dev/sdh) at which the block device is exposed on the
+ *             instance.
+ *           * +Ebs+ - (<tt>Object</tt>) The optional EBS device mapped to
+ *             the specified device name.
+ *             * +VolumeId+ - (<tt>String</tt>) The ID of the EBS volume.
+ *             * +Status+ - (<tt>String</tt>) The status of the EBS volume.
+ *             * +AttachTime+ - (<tt>Date</tt>) The time at which the EBS
+ *               volume was attached to the associated instance.
+ *             * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies
+ *               whether the Amazon EBS volume is deleted on instance
+ *               termination.
+ *         * +VirtualizationType+ - (<tt>String</tt>)
+ *         * +InstanceLifecycle+ - (<tt>String</tt>)
+ *         * +SpotInstanceRequestId+ - (<tt>String</tt>)
+ *         * +License+ - (<tt>Object</tt>)
+ *           * +Pool+ - (<tt>String</tt>) The license pool from which this
+ *             license was used (ex: 'windows').
+ *         * +ClientToken+ - (<tt>String</tt>)
+ *         * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
+ *           Instance.
+ *           * +Key+ - (<tt>String</tt>) The tag's key.
+ *           * +Value+ - (<tt>String</tt>) The tag's value.
+ *         * +SecurityGroups+ - (<tt>Array<Object></tt>)
  *           * +GroupName+ - (<tt>String</tt>)
  *           * +GroupId+ - (<tt>String</tt>)
- *         * +Instances+ - (<tt>Array<Object></tt>) The list of Amazon EC2
- *           instances included in this reservation.
- *           * +InstanceId+ - (<tt>String</tt>) Unique ID of the instance
- *             launched.
- *           * +ImageId+ - (<tt>String</tt>) Image ID of the AMI used to
- *             launch the instance.
- *           * +State+ - (<tt>Object</tt>) The current state of the
- *             instance.
- *             * +Code+ - (<tt>Integer</tt>) A 16-bit unsigned integer. The
- *               high byte is an opaque internal value and should be
- *               ignored. The low byte is set based on the state
- *               represented.
- *             * +Name+ - (<tt>String</tt>) The current state of the
- *               instance.
- *           * +PrivateDnsName+ - (<tt>String</tt>) The private DNS name
- *             assigned to the instance. This DNS name can only be used
- *             inside the Amazon EC2 network. This element remains empty
- *             until the instance enters a running state.
- *           * +PublicDnsName+ - (<tt>String</tt>) The public DNS name
- *             assigned to the instance. This DNS name is contactable from
- *             outside the Amazon EC2 network. This element remains empty
- *             until the instance enters a running state.
- *           * +StateTransitionReason+ - (<tt>String</tt>) Reason for the
- *             most recent state transition. This might be an empty string.
- *           * +KeyName+ - (<tt>String</tt>) If this instance was launched
- *             with an associated key pair, this displays the key pair
- *             name.
- *           * +AmiLaunchIndex+ - (<tt>Integer</tt>) The AMI launch index,
- *             which can be used to find this instance within the launch
- *             group.
- *           * +ProductCodes+ - (<tt>Array<Object></tt>) Product codes
- *             attached to this instance.
- *             * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an
- *               AWS DevPay product code.
- *             * +ProductCodeType+ - (<tt>String</tt>)
- *           * +InstanceType+ - (<tt>String</tt>) The instance type. For
- *             more information on instance types, please see the Amazon
- *             Elastic Compute Cloud Developer Guide.
- *           * +LaunchTime+ - (<tt>Date</tt>) The time this instance
- *             launched.
- *           * +Placement+ - (<tt>Object</tt>) The location where this
- *             instance launched.
- *             * +AvailabilityZone+ - (<tt>String</tt>) The availability
- *               zone in which an Amazon EC2 instance runs.
- *             * +GroupName+ - (<tt>String</tt>) The name of the
- *               PlacementGroup in which an Amazon EC2 instance runs.
- *               Placement groups are primarily used for launching High
- *               Performance Computing instances in the same group to
- *               ensure fast connection speeds.
- *             * +Tenancy+ - (<tt>String</tt>) The allowed tenancy of
- *               instances launched into the VPC. A value of default means
- *               instances can be launched with any tenancy; a value of
- *               dedicated means all instances launched into the VPC will
- *               be launched as dedicated tenancy regardless of the tenancy
- *               assigned to the instance at launch.
- *           * +KernelId+ - (<tt>String</tt>) Kernel associated with this
- *             instance.
- *           * +RamdiskId+ - (<tt>String</tt>) RAM disk associated with
- *             this instance.
- *           * +Platform+ - (<tt>String</tt>) Platform of the instance
- *             (e.g., Windows).
- *           * +Monitoring+ - (<tt>Object</tt>) Monitoring status for this
- *             instance.
- *             * +State+ - (<tt>String</tt>) The state of monitoring on an
- *               Amazon EC2 instance (ex: enabled, disabled).
- *           * +SubnetId+ - (<tt>String</tt>) Specifies the Amazon VPC
- *             subnet ID in which the instance is running.
- *           * +VpcId+ - (<tt>String</tt>) Specifies the Amazon VPC in
- *             which the instance is running.
- *           * +PrivateIpAddress+ - (<tt>String</tt>) Specifies the private
- *             IP address that is assigned to the instance (Amazon VPC).
- *           * +PublicIpAddress+ - (<tt>String</tt>) Specifies the IP
- *             address of the instance.
- *           * +StateReason+ - (<tt>Object</tt>) The reason for the state
- *             change.
- *             * +Code+ - (<tt>String</tt>) Reason code for the state
- *               change.
- *             * +Message+ - (<tt>String</tt>) Descriptive message for the
- *               state change.
- *           * +Architecture+ - (<tt>String</tt>) The architecture of this
- *             instance.
- *           * +RootDeviceType+ - (<tt>String</tt>) The root device type
- *             used by the AMI. The AMI can use an Amazon EBS or instance
- *             store root device.
- *           * +RootDeviceName+ - (<tt>String</tt>) The root device name
- *             (e.g., /dev/sda1).
- *           * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) Block
- *             device mapping set.
- *             * +DeviceName+ - (<tt>String</tt>) The device name (e.g.,
- *               /dev/sdh) at which the block device is exposed on the
- *               instance.
- *             * +Ebs+ - (<tt>Object</tt>) The optional EBS device mapped
- *               to the specified device name.
- *               * +VolumeId+ - (<tt>String</tt>) The ID of the EBS volume.
- *               * +Status+ - (<tt>String</tt>) The status of the EBS
- *                 volume.
- *               * +AttachTime+ - (<tt>Date</tt>) The time at which the EBS
- *                 volume was attached to the associated instance.
- *               * +DeleteOnTermination+ - (<tt>Boolean</tt>) Specifies
- *                 whether the Amazon EBS volume is deleted on instance
- *                 termination.
- *           * +VirtualizationType+ - (<tt>String</tt>)
- *           * +InstanceLifecycle+ - (<tt>String</tt>)
- *           * +SpotInstanceRequestId+ - (<tt>String</tt>)
- *           * +License+ - (<tt>Object</tt>)
- *             * +Pool+ - (<tt>String</tt>) The license pool from which
- *               this license was used (ex: 'windows').
- *           * +ClientToken+ - (<tt>String</tt>)
- *           * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
- *             Instance.
- *             * +Key+ - (<tt>String</tt>) The tag's key.
- *             * +Value+ - (<tt>String</tt>) The tag's value.
- *           * +SecurityGroups+ - (<tt>Array<Object></tt>)
+ *         * +SourceDestCheck+ - (<tt>Boolean</tt>)
+ *         * +Hypervisor+ - (<tt>String</tt>)
+ *         * +NetworkInterfaces+ - (<tt>Array<Object></tt>)
+ *           * +NetworkInterfaceId+ - (<tt>String</tt>)
+ *           * +SubnetId+ - (<tt>String</tt>)
+ *           * +VpcId+ - (<tt>String</tt>)
+ *           * +Description+ - (<tt>String</tt>)
+ *           * +OwnerId+ - (<tt>String</tt>)
+ *           * +Status+ - (<tt>String</tt>)
+ *           * +PrivateIpAddress+ - (<tt>String</tt>)
+ *           * +PrivateDnsName+ - (<tt>String</tt>)
+ *           * +SourceDestCheck+ - (<tt>Boolean</tt>)
+ *           * +Groups+ - (<tt>Array<Object></tt>)
  *             * +GroupName+ - (<tt>String</tt>)
  *             * +GroupId+ - (<tt>String</tt>)
- *           * +SourceDestCheck+ - (<tt>Boolean</tt>)
- *           * +Hypervisor+ - (<tt>String</tt>)
- *           * +NetworkInterfaces+ - (<tt>Array<Object></tt>)
- *             * +NetworkInterfaceId+ - (<tt>String</tt>)
- *             * +SubnetId+ - (<tt>String</tt>)
- *             * +VpcId+ - (<tt>String</tt>)
- *             * +Description+ - (<tt>String</tt>)
- *             * +OwnerId+ - (<tt>String</tt>)
+ *           * +Attachment+ - (<tt>Object</tt>)
+ *             * +AttachmentId+ - (<tt>String</tt>)
+ *             * +DeviceIndex+ - (<tt>Integer</tt>)
  *             * +Status+ - (<tt>String</tt>)
- *             * +PrivateIpAddress+ - (<tt>String</tt>)
- *             * +PrivateDnsName+ - (<tt>String</tt>)
- *             * +SourceDestCheck+ - (<tt>Boolean</tt>)
- *             * +Groups+ - (<tt>Array<Object></tt>)
- *               * +GroupName+ - (<tt>String</tt>)
- *               * +GroupId+ - (<tt>String</tt>)
- *             * +Attachment+ - (<tt>Object</tt>)
- *               * +AttachmentId+ - (<tt>String</tt>)
- *               * +DeviceIndex+ - (<tt>Integer</tt>)
- *               * +Status+ - (<tt>String</tt>)
- *               * +AttachTime+ - (<tt>Date</tt>)
- *               * +DeleteOnTermination+ - (<tt>Boolean</tt>)
- *             * +Association+ - (<tt>Object</tt>)
- *               * +PublicIp+ - (<tt>String</tt>)
- *               * +IpOwnerId+ - (<tt>String</tt>)
- *           * +IamInstanceProfile+ - (<tt>Object</tt>)
- *             * +Arn+ - (<tt>String</tt>)
- *             * +Id+ - (<tt>String</tt>)
- *           * +EbsOptimized+ - (<tt>Boolean</tt>)
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *             * +AttachTime+ - (<tt>Date</tt>)
+ *             * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *           * +Association+ - (<tt>Object</tt>)
+ *             * +PublicIp+ - (<tt>String</tt>)
+ *             * +IpOwnerId+ - (<tt>String</tt>)
+ *         * +IamInstanceProfile+ - (<tt>Object</tt>)
+ *           * +Arn+ - (<tt>String</tt>)
+ *           * +Id+ - (<tt>String</tt>)
+ *         * +EbsOptimized+ - (<tt>Boolean</tt>)
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method startInstances(params, callback)
@@ -5525,7 +5502,7 @@ AWS.EC2 = inherit({})
  *     * +AdditionalInfo+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -5550,7 +5527,7 @@ AWS.EC2 = inherit({})
  *             The low byte is set based on the state represented.
  *           * +Name+ - (<tt>String</tt>) The current state of the
  *             instance.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method stopInstances(params, callback)
@@ -5567,7 +5544,7 @@ AWS.EC2 = inherit({})
  *     * +Force+ - (<tt>Boolean</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -5592,7 +5569,7 @@ AWS.EC2 = inherit({})
  *             The low byte is set based on the state represented.
  *           * +Name+ - (<tt>String</tt>) The current state of the
  *             instance.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method terminateInstances(params, callback)
@@ -5604,7 +5581,7 @@ AWS.EC2 = inherit({})
  *       instances to terminate.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -5630,7 +5607,7 @@ AWS.EC2 = inherit({})
  *             The low byte is set based on the state represented.
  *           * +Name+ - (<tt>String</tt>) The current state of the
  *             instance.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method unassignPrivateIpAddresses(params, callback)
@@ -5640,13 +5617,13 @@ AWS.EC2 = inherit({})
  *     * +PrivateIpAddresses+ - (*required*, <tt>Array<String></tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method unmonitorInstances(params, callback)
@@ -5656,7 +5633,7 @@ AWS.EC2 = inherit({})
  *       Amazon EC2 instances on which to disable monitoring.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.AWSRequest.send}
+ *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
  *       Set to +null+ if the request is successful.
@@ -5671,7 +5648,7 @@ AWS.EC2 = inherit({})
  *           associated instance.
  *           * +State+ - (<tt>String</tt>) The state of monitoring on an
  *             Amazon EC2 instance (ex: enabled, disabled).
- *   @return [AWS.AWSRequest] a handle to the operation request for
+ *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  *
