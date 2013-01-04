@@ -1676,4 +1676,4 @@ AWS.S3 = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.S3.Client = inherit({});"
+AWS.S3.Client = inherit({});

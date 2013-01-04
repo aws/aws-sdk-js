@@ -1228,4 +1228,4 @@ AWS.DynamoDB = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.DynamoDB.Client = inherit({});"
+AWS.DynamoDB.Client = inherit({});

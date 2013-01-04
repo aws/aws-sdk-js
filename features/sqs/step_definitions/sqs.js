@@ -13,11 +13,9 @@
  * language governing permissions and limitations under the License.
  */
 
-var AWS = require('./core');
-module.exports = AWS;
-
-require('./services/dynamodb');
-require('./services/ec2');
-require('./services/s3');
-require('./services/simpleworkflow');
-require('./services/sqs');
+module.exports = function() {
+  this.Before("@sqs", function (callback) {
+    this.client = new this.AWS.SQS.Client({region: 'us-east-1'});
+    callback();
+  });
+};

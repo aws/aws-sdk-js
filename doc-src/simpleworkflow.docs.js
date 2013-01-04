@@ -1940,4 +1940,4 @@ AWS.SimpleWorkflow = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.SimpleWorkflow.Client = inherit({});"
+AWS.SimpleWorkflow.Client = inherit({});
