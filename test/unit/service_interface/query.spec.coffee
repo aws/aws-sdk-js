@@ -28,6 +28,7 @@ describe 'AWS.ServiceInterface.Query', ->
 
   AWS.Client.defineMethods(MockQueryClient)
 
+  client = null
   request = null
   response = null
   svc = eval(@description)
@@ -113,3 +114,16 @@ describe 'AWS.ServiceInterface.Query', ->
       """
       expect(response.error).toEqual(null)
       expect(response.data).toEqual({Data:{Name:'abc',Count:123}})
+
+    it 'performs default xml parsing when output rule is missing', ->
+      delete client.api.operations.operationName.o
+      extractData """
+      <xml>
+        <Data>
+          <Name>abc</Name>
+          <Count>123</Count>
+        </Data>
+      </xml>
+      """
+      expect(response.error).toEqual(null)
+      expect(response.data).toEqual({Data:{Name:'abc',Count:'123'}})

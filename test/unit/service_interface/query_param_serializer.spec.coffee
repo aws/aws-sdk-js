@@ -96,6 +96,15 @@ describe 'AWS.QueryParamSerializer', ->
         ['Root.2.Bb', 'b2'],
       ])
 
+    it 'serialzes list members as strings when member rule not present', ->
+      rules = {Root:{t:'a'}} # omitting m
+      params = serialize({Root:['a', 'b', 'c']}, rules)
+      expect(params).toEqual([
+        ['Root.1', 'a'],
+        ['Root.2', 'b'],
+        ['Root.3', 'c'],
+      ])
+
   describe 'membered lists', -> # member lists name their list members
 
     it 'numbers list members starting at 1', ->
