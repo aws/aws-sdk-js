@@ -71,14 +71,15 @@ module.exports = {
    * finish execution before moving onto the next step in the scenario.
    */
   request: function request(svc, operation, params, next) {
-    this[svc][operation](params).on('complete', function (resp) {
-      if (resp.error) {
-        this.unexpectedError(resp, next);
+    var world = this;
+    this[svc][operation](params, function(err, data) {
+      if (err) {
+        world.unexpectedError(this, next);
       } else {
-        this.resp = resp;
+        world.resp = this;
         next();
       }
-    }, { bind: this }).send();
+    });
   },
 
   /**
@@ -87,8 +88,8 @@ module.exports = {
    * operation failed.
    */
   unexpectedError: function unexpectedError(resp, next) {
-    var svc = resp.service.serviceName;
-    var op = resp.method;
+    var svc = resp.request.client.serviceName;
+    var op = resp.request.operation;
     var code = resp.error.code;
     var msg = resp.error.message;
     var err = 'Received unexpected error from ' + svc + '.' + op + ', ' + code + ': ' + msg;

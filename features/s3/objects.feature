@@ -33,5 +33,17 @@ Feature: Working with Objects in S3
     When I delete the object with the key "hello"
     Then the object with the key "hello" should not exist
 
+  @buffer
+  Scenario: Buffers and streams
+    When I write buffer "world" to the key "hello"
+    Then the object with the key "hello" should exist
+    And the object with the key "hello" should contain "world"
+    And I delete the object with the key "hello"
+
+    When I write file "testfile.txt" to the key "hello"
+    Then the object with the key "hello" should exist
+    And the object with the key "hello" should contain "CONTENTS OF FILE"
+    And I delete the object with the key "hello"
+
     # final step here needs to happen to cleanup the shared bucket
     And I delete the shared bucket
