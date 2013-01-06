@@ -215,7 +215,7 @@ describe 'AWS.XML.Parser', ->
         expect(data).toEqual({CreatedAt:date})
 
     it 'understands basic iso8601 strings', ->
-      timestamp = '2012-09-10T15:47:10.001Z'
+      timestamp = '2012-10-10T15:47:10.001Z'
       date = new Date(2012, 0, 1);
       date.setUTCMonth(9)
       date.setUTCDate(10)
