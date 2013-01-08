@@ -88,6 +88,13 @@ describe 'AWS.util.crypto', ->
 
   util = AWS.util.crypto
 
+  describe 'crc32', ->
+    it 'returns the correct CRC32 value for binary data', ->
+      buffer = new Buffer(4433);
+      for i in [0...buffer.length]
+        buffer[i] = i % 256;
+      expect(util.crc32(buffer)).toEqual(899332870)
+
   describe 'toHex', ->
     it 'should convert binary data to hex string', ->
       expect(util.toHex('ABC')).toEqual('414243')
