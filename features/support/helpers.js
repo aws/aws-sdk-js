@@ -70,13 +70,17 @@ module.exports = {
    * A short-cut for calling a service operation and waiting for it to
    * finish execution before moving onto the next step in the scenario.
    */
-  request: function request(svc, operation, params, next) {
+  request: function request(svc, operation, params, next, extra) {
     var world = this;
-    this[svc][operation](params, function(err, data) {
+    if (!svc) svc = this.client;
+    if (svc instanceof String) svc = this[svc];
+    svc[operation](params, function(err, data) {
       if (err) {
+        world.error = this;
         world.unexpectedError(this, next);
       } else {
         world.resp = this;
+        extra.call(world, resp);
         next();
       }
     });
