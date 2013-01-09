@@ -15,25 +15,21 @@ AWS = require('../../../lib/core')
 require('../../../lib/service_interface/query')
 
 describe 'AWS.ServiceInterface.Query', ->
-
-  MockQueryClient = AWS.util.inherit AWS.Client,
-    serviceName: 'mockservice'
-    api:
-      apiVersion: '2012-01-01'
-      operations:
-        operationName:
-          n: 'OperationName'
-          i: {m:{Input:{m:{}}}}
-          o: {Data:{t:'o',m:{Name:{t:'s'},Count:{t:'i'}}}}
-
-  AWS.Client.defineMethods(MockQueryClient)
-
   client = null
   request = null
   response = null
   svc = eval(@description)
 
   beforeEach ->
+    MockQueryClient = AWS.Client.defineClient
+      serviceName: 'mockservice'
+      apiVersion: '2012-01-01'
+      operations:
+        operationName:
+          n: 'OperationName'
+          i: {m:{Input:{m:{}}}}
+          o: {Data:{t:'o',m:{Name:{t:'s'},Count:{t:'n'}}}}
+
     client = new MockQueryClient({region:'region'})
     request = new AWS.Request(client, 'operationName')
     response = new AWS.Response(request)
@@ -161,4 +157,3 @@ describe 'AWS.ServiceInterface.Query', ->
       """
       expect(response.error).toEqual(null)
       expect(response.data).toEqual({NotWrapped:{Data:'abc'}})
-      delete client.api.resultWrapped
