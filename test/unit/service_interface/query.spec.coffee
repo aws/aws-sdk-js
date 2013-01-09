@@ -88,6 +88,13 @@ describe 'AWS.ServiceInterface.Query', ->
       response.httpResponse.body = new Buffer(body)
       svc.extractError(response)
 
+    it 'extracts error from UnknownOperationException', ->
+      extractError '<UnknownOperationException/>'
+      expect(response.error instanceof Error).toBeTruthy()
+      expect(response.error.code).toEqual('UnknownOperation')
+      expect(response.error.message).toEqual('Unknown operation operationName')
+      expect(response.data).toEqual(null)
+
     it 'extracts the error code and message', ->
       extractError()
       expect(response.error instanceof Error).toBeTruthy()
