@@ -57,11 +57,6 @@ describe 'AWS.ServiceInterface.Json', ->
       expect(request.httpRequest.headers['X-Amz-Target']).
         toEqual('prefix-OperationName')
 
-    it 'should set Content-Length to body length', ->
-      buildRequest()
-      expect(request.httpRequest.body).toEqual('{}')
-      expect(request.httpRequest.headers['Content-Length']).toEqual(2)
-
     it 'should set the body to JSON serialized params', ->
       request.params = foo: 'bar'
       buildRequest()

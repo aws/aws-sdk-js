@@ -22,7 +22,7 @@ buildRequest = ->
   ddb = new AWS.DynamoDB.Client({region: 'region', endpoint: 'localhost'})
   req = ddb.makeRequest('listTables', {foo: 'bar'})
   resp = new AWS.Response(req)
-  req.emitEvents(resp, 'validate', 'build')
+  req.emitEvents(resp, 'validate', 'build', 'afterBuild')
   return req.httpRequest
 
 buildSigner = (request) ->

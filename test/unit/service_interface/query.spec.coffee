@@ -67,10 +67,6 @@ describe 'AWS.ServiceInterface.Query', ->
       expect(request.httpRequest.params.toString()).
         toMatch(/foo%2Bbar%3A%20yuck%2Fbaz%3D~/);
 
-    it 'should populate the content length header', ->
-      buildRequest()
-      expect(request.httpRequest.headers['Content-Length']).toEqual(75)
-
   describe 'extractError', ->
     extractError = (body) ->
       if body == undefined

@@ -103,6 +103,37 @@ describe 'AWS.EventListeners', ->
       response = request.send()
       expect(response.error).toEqual("ERROR")
 
+  describe 'afterBuild', ->
+    beforeEach ->
+      helpers.mockHttpResponse 200, {}, ['DATA']
+
+    sendRequest = (body) ->
+      request = makeRequest()
+      request.on('build', (req) -> req.httpRequest.body = body)
+      request.send()
+      request
+
+    contentLength = (body) ->
+      sendRequest(body).httpRequest.headers['Content-Length']
+
+    it 'builds Content-Length in the request headers for string content', ->
+      expect(contentLength('FOOBAR')).toEqual(6)
+
+    it 'builds Content-Length for string "0"', ->
+      expect(contentLength('0')).toEqual(1)
+
+    it 'builds Content-Length for utf-8 string body', ->
+      expect(contentLength('tï№')).toEqual(6)
+
+    it 'builds Content-Length for buffer body', ->
+      expect(contentLength(new Buffer('tï№'))).toEqual(6)
+
+    it 'builds Content-Length for file body', ->
+      fs = require('fs')
+      file = fs.createReadStream(__filename)
+      fileLen = fs.lstatSync(file.path).size
+      expect(contentLength(file)).toEqual(fileLen)
+
   describe 'sign', ->
     it 'takes the request object as a parameter', ->
       request = makeRequest()
