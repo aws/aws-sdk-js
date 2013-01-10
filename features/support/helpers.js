@@ -72,15 +72,20 @@ module.exports = {
    */
   request: function request(svc, operation, params, next, extra) {
     var world = this;
+
     if (!svc) svc = this.client;
     if (typeof svc == 'string') svc = this[svc];
+
     svc[operation](params, function(err, data) {
-      if (err) {
-        world.error = err;
+      world.error = err;
+      world.resp = this;
+      if (extra) {
+        extra.call(world, this);
+        next();
+      }
+      else if (err) {
         world.unexpectedError(this, next);
       } else {
-        world.resp = this;
-        if (extra) extra.call(world, resp);
         next();
       }
     });
