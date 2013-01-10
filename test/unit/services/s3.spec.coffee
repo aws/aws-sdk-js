@@ -170,18 +170,22 @@ describe 'AWS.S3.Client', ->
   # http spec) these tests ensure we give meaningful codes/messages for these.
   describe 'errors with no XML body', ->
 
-    extractError = (statusCode) ->
+    extractError = (statusCode, body) ->
       req = request('operation')
       resp = new AWS.Response(req)
-      resp.httpResponse.body = new Buffer('')
+      resp.httpResponse.body = new Buffer(body || '')
       resp.httpResponse.statusCode = statusCode
-      req.emit('foo')
       req.emit('extractError', resp, req)
       resp.error
 
     it 'handles 304 errors', ->
       error = extractError(304)
       expect(error.code).toEqual('NotModified')
+      expect(error.message).toEqual(null)
+
+    it 'handles 400 errors', ->
+      error = extractError(400)
+      expect(error.code).toEqual('BadRequest')
       expect(error.message).toEqual(null)
 
     it 'handles 403 errors', ->
@@ -198,6 +202,17 @@ describe 'AWS.S3.Client', ->
       error = extractError(412) # made up
       expect(error.code).toEqual(412)
       expect(error.message).toEqual(null)
+
+    it 'uses canned errors only when the body is empty', ->
+      body = """
+      <xml>
+        <Code>ErrorCode</Code>
+        <Message>ErrorMessage</Message>
+      </xml>
+      """
+      error = extractError(403, body)
+      expect(error.code).toEqual('ErrorCode')
+      expect(error.message).toEqual('ErrorMessage')
 
   # tests from this point on are "special cases" for specific aws operations
 
