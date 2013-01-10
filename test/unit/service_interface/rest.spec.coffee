@@ -106,6 +106,12 @@ describe 'AWS.ServiceInterface.Rest', ->
           request.params = ACL: 'public-read'
         expect(request.httpRequest.headers['x-amz-acl']).toEqual('public-read')
 
+      it 'uses default rule name if .n property is not present', ->
+        buildRequest ->
+          operation.i = {m:{ACL:{l:'header'}}}
+          request.params = ACL: 'public-read'
+        expect(request.httpRequest.headers['ACL']).toEqual('public-read')
+
       it 'works with map types', ->
         buildRequest ->
           operation.i = {m:{Metadata:{t:'m',l:'header',n:'x-amz-meta-'}}}
