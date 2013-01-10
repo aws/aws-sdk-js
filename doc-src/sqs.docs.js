@@ -277,7 +277,8 @@ AWS.SQS = inherit({})
  *   name (ARN). ApproximateNumberOfMessagesDelayed - returns the
  *   approximate number of messages that are pending to be added to the
  *   queue. DelaySeconds - returns the default delay on the queue in
- *   seconds.
+ *   seconds. ReceiveMessageWaitTimeSeconds - returns the time for which
+ *   a ReceiveMessage call will wait for a message to arrive.
  *   @param params [Object]
  *     * +QueueUrl+ - (*required*, <tt>String</tt>) The URL of the SQS
  *       queue to take action on.
@@ -350,7 +351,10 @@ AWS.SQS = inherit({})
  *     * +QueueUrl+ - (*required*, <tt>String</tt>) The URL of the SQS
  *       queue to take action on.
  *     * +AttributeNames+ - (<tt>Array<String></tt>) A list of attributes
- *       to retrieve information for.
+ *       that need to be returned along with each message. The set of
+ *       valid attributes are [SenderId,
+ *       ApproximateFirstReceiveTimestamp, ApproximateReceiveCount,
+ *       SentTimestamp].
  *     * +MaxNumberOfMessages+ - (<tt>Integer</tt>) The maximum number of
  *       messages to return. Amazon SQS never returns more messages than
  *       this value but may return fewer.
@@ -358,6 +362,10 @@ AWS.SQS = inherit({})
  *       seconds) that the received messages are hidden from subsequent
  *       retrieve requests after being retrieved by a ReceiveMessage
  *       request.
+ *     * +WaitTimeSeconds+ - (<tt>Integer</tt>) The duration (in seconds)
+ *       for which the call will wait for a message to arrive in the
+ *       queue before returning. If a message is available, the call will
+ *       return sooner than WaitTimeSeconds.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -478,9 +486,9 @@ AWS.SQS = inherit({})
  *     subsequent event callback registration.
  *
  * @!method setQueueAttributes(params, callback)
- *   Sets an attribute of a queue. The set of attributes that can be set
- *   are - DelaySeconds, MessageRetentionPeriod, MaximumMessageSize,
- *   VisibilityTimeout and Policy.
+ *   Sets the value of one or more queue attributes. Valid attributes
+ *   that can be set are [VisibilityTimeout, Policy, MaximumMessageSize,
+ *   MessageRetentionPeriod, ReceiveMessageWaitTimeSeconds].
  *   @param params [Object]
  *     * +QueueUrl+ - (*required*, <tt>String</tt>) The URL of the SQS
  *       queue to take action on.
