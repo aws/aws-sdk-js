@@ -83,6 +83,36 @@ describe 'AWS.util.date', ->
       spyOn(util, 'getDate').andCallFake -> new Date(600123)
       expect(util.unixTimestamp()).toEqual(600.123)
 
+describe 'AWS.util.string', ->
+  len = AWS.util.string.byteLength
+
+  describe 'byteLength', ->
+    it 'handles null/undefined objects', ->
+      expect(len(undefined)).toEqual(0)
+      expect(len(null)).toEqual(0)
+
+    it 'handles buffer input', ->
+      expect(len(new Buffer('∂ƒ©∆'))).toEqual(10)
+
+    it 'handles string input', ->
+      expect(len('')).toEqual(0)
+      expect(len('∂ƒ©∆')).toEqual(10)
+
+    it 'handles file object input (path property)', ->
+      fs = require('fs')
+      file = fs.createReadStream(__filename)
+      fileLen = fs.lstatSync(file.path).size
+      expect(len(file)).toEqual(fileLen)
+
+    it 'fails if input is not a string, buffer, or file', ->
+      err = null
+      try
+        len(3.14)
+      catch e
+        err = e
+
+      expect(err.message).toEqual('Cannot determine length of 3.14')
+      expect(err.object).toBe(3.14)
 
 describe 'AWS.util.crypto', ->
 
