@@ -95,6 +95,10 @@ describe 'AWS.util.crypto', ->
         buffer[i] = i % 256;
       expect(util.crc32(buffer)).toEqual(899332870)
 
+    it 'handles String values', ->
+      string = '{"ConsumedCapacityUnits":1.0}'
+      expect(util.crc32(string)).toEqual(2614884069)
+
   describe 'toHex', ->
     it 'should convert binary data to hex string', ->
       expect(util.toHex('ABC')).toEqual('414243')
