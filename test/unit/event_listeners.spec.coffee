@@ -149,6 +149,14 @@ describe 'AWS.EventListeners', ->
 
       expect(response.httpResponse.body.toString()).toEqual('')
 
+    it 'allows HTTP_DATA event to be re-added', ->
+      request = makeRequest()
+      request.on('httpData', ->)
+      request.on('httpData', AWS.EventListeners.Http.HTTP_DATA)
+      response = request.send()
+
+      expect(response.httpResponse.body.toString()).toEqual('FOOBARBAZQUX')
+
   describe 'retry', ->
     it 'retries a request with a set maximum retries', ->
       sendHandler = createSpy('send')
