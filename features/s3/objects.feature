@@ -30,6 +30,16 @@ Feature: Working with Objects in S3
     Then the object with the key "hello" should exist
     And the object with the key "hello" should contain ""
 
+    # UTF-8
+    When I write "åß∂ƒ©" to the key "hello"
+    Then the object with the key "hello" should exist
+    And the object with the key "hello" should contain "åß∂ƒ©"
+
+    When I copy an object with the key "hello" to "byebye"
+    Then the object with the key "byebye" should exist
+    And the object with the key "byebye" should contain "åß∂ƒ©"
+    And I delete the object with the key "byebye"
+
     When I delete the object with the key "hello"
     Then the object with the key "hello" should not exist
 

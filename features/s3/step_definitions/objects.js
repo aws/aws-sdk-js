@@ -49,6 +49,13 @@ module.exports = function () {
     });
   });
 
+  this.When(/^I copy an object with the key "([^"]*)" to "([^"]*)"$/, function(key1, key2, next) {
+    var params = {
+      Bucket: this.sharedBucket, Key: key2, CopySource: '/' + this.sharedBucket + '/' + key1
+    }
+    this.request('s3', 'copyObject', params, next);
+  });
+
   this.When(/^I delete the object with the key "([^"]*)"$/, function(key, next) {
     var params = {Bucket:this.sharedBucket,Key:key};
     this.request('s3', 'deleteObject', params, next);
