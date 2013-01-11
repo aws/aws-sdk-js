@@ -33,3 +33,11 @@ describe 'AWS.DynamoDB', ->
         expect(resp.error.retryable).toEqual(false)
         expect(resp.error.statusCode).toEqual(400)
         expect(resp.data).toEqual(null)
+
+    it 'should allow UTF-8 in data', ->
+      helpers.integration (-> client.deleteItem(TableName: 'table', Key: 'føø')), (resp) ->
+        expect(resp.error instanceof Error).toBeTruthy()
+        expect(resp.error.code).toEqual('SerializationException')
+        expect(resp.error.retryable).toEqual(false)
+        expect(resp.error.statusCode).toEqual(400)
+        expect(resp.data).toEqual(null)

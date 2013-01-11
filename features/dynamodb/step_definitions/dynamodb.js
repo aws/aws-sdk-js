@@ -14,9 +14,97 @@
  */
 
 module.exports = function() {
-  this.Before("@dynamodb", function (callback) {
+  this.Before("@dynamodb", function (next) {
     this.client = new this.AWS.DynamoDB.Client({region: 'us-west-2', maxRetries: 2});
-    callback();
+    next();
+  });
+
+  this.Given(/^I create a table with throughput (\d+), (\d+)$/, function(read, write, next) {
+    this.tableName = 'aws-sdk-js-integration-' +
+      this.AWS.util.date.unixTimestamp() * 1000;
+
+    var params = {
+      TableName: this.tableName,
+      KeySchema: {
+        HashKeyElement: { AttributeName: 'id', AttributeType: 'S' }
+      },
+      ProvisionedThroughput: {
+        ReadCapacityUnits: parseInt(read),
+        WriteCapacityUnits: parseInt(write)
+      }
+    };
+
+    this.request(null, 'createTable', params, next);
+  });
+
+  this.Then(/^the table should eventually exist$/, function(next) {
+    var world = this;
+    world.eventually(next, function (retry) {
+      world.client.describeTable({TableName: world.tableName}, function(err, data) {
+        if (data.Table && data.Table.TableStatus === 'ACTIVE')
+          next();
+        else
+          retry();
+      });
+    }, {maxTime: 500, delay: 10, backoff: 0});
+  });
+
+  this.Given(/^I have the table$/, function(next) {
+    next(); // purely aesthetic
+  });
+
+  this.Given(/^I have a table$/, function(next) {
+    var world = this;
+    this.tableName = null;
+    this.client.listTables(function(err, data) {
+      for (var i = 0; i < data.TableNames.length; i++) {
+        if (data.TableNames[i].match(/^aws-sdk-js-integration-/)) {
+          world.tableName = data.TableNames[i];
+          next();
+          return;
+        }
+      }
+      next.fail("Could not find any active tables");
+    });
+  });
+
+  this.When(/^I put the item:$/, function(string, next) {
+    var params = {TableName: this.tableName, Item: JSON.parse(string)};
+    this.request(null, 'putItem', params, next);
+  });
+
+  this.Then(/^the item with id "([^"]*)" should exist$/, function(key, next) {
+    var world = this;
+    var params = {TableName: this.tableName, Key: {HashKeyElement: {S: key}}};
+    this.client.getItem(params, function(err, data) {
+      world.resp = this;
+      world.error = err;
+      next();
+    });
+  });
+
+  this.Then(/^it should have attribute "([^"]*)" containing "([^"]*)"$/, function(attr, value, next) {
+    if (this.resp.data.Item[attr].S !== value)
+      next.fail("Attr value " + this.resp.data.Item[attr].S + " does not match " + value);
+    else
+      next();
+  });
+
+  this.When(/^I delete the table$/, function(next) {
+    var params = {TableName: this.tableName};
+    this.request(null, 'deleteTable', params, next);
+  });
+
+  this.Then(/^the table should eventually not exist$/, function(next) {
+    var world = this;
+    world.eventually(next, function (retry) {
+      world.client.listTables(function(err, data) {
+        for (var i = 0; i < data.TableNames.length; i++) {
+          if (data.TableNames[i] == world.tableName) retry();
+        }
+        next();
+      });
+    });
   });
 
   this.Given(/^my first request is corrupted with CRC checking (ON|OFF)$/, function(toggle, callback) {
