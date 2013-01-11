@@ -42,7 +42,7 @@ module.exports = {
     if (!options) options = {};
     if (!options.delay) options.delay = 0;
     if (!options.backoff) options.backoff = 500;
-    if (!options.maxTime) options.maxTime = 5 * 1000;
+    if (!options.maxTime) options.maxTime = 5;
 
     var delay = options.delay;
     var started = this.AWS.util.date.getDate();
@@ -51,7 +51,7 @@ module.exports = {
     var retry = function() {
 
       var now = self.AWS.util.date.getDate();
-      if (now - started < options.maxTime) {
+      if (now - started < options.maxTime * 1000) {
         setTimeout(function () {
           delay += options.backoff;
           block.call(self, retry);
