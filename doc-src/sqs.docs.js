@@ -333,7 +333,7 @@ AWS.SQS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
- *       * +queueUrls+ - (<tt>Array<String></tt>) A list of queue URLs, up
+ *       * +QueueUrls+ - (<tt>Array<String></tt>) A list of queue URLs, up
  *         to 1000 entries.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
