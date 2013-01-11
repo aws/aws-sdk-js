@@ -150,6 +150,10 @@ describe 'AWS.util.crypto', ->
       r = util.hmac('secret', 'the quick brown fox', 'base64', 'sha1')
       expect(r).toEqual('z1BzGT+uG/2qGzE1UHb5m/skn1E=')
 
+    it 'accepts UTF-8 input for string', ->
+      r = util.hmac('foo', 'å∆ç∂', 'hex')
+      expect(r).toEqual('b2ce6b3feec8a02f3bb2e3f32f7bf0daee0f14e79631707a266fddcf404edded')
+
   describe 'sha256', ->
     input = 'foo'
     result = '2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae'
@@ -161,6 +165,10 @@ describe 'AWS.util.crypto', ->
     it 'should return hex data hashed with sha256', ->
       expected = util.sha256(input, 'hex')
       expect(expected).toEqual(result)
+
+    it 'accepts UTF-8 input for key and string', ->
+      r = util.sha256('ß∂ƒ©', 'hex')
+      expect(r).toEqual('3c01ddd413d2cacac59a255e4aade0d9058a8a9ea8b2dfe5bb2dc4ed132b4139')
 
 describe 'AWS.util.each', ->
   it 'should iterate over a hash', ->
