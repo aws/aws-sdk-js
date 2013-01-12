@@ -12,15 +12,12 @@
 # language governing permissions and limitations under the License.
 
 # language: en
-@sqs @messages
-Feature: SQS Messages
+@sqs @queues
+Feature: SQS Queues
 
-  I want to be able to send and process messages.
+  I want to be able to create, list and delete queues.
 
-  Scenario: Send an SQS message
-    Given I create a queue
-    When I send the message "HELLO"
-    Then the result should include a message ID
-    And the result should have an MD5 digest of "eb61eead90e3b899c6bcbe27ac581660"
-    And I should eventually be able to receive "HELLO" from the queue
-    Then I should delete the queue
+  Scenario: Creating and deleting queues
+    Given I create 2 queues
+    Then list queues should eventually return the queue urls
+    And I should delete the queues

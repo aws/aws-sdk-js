@@ -14,16 +14,6 @@
  */
 
 module.exports = function () {
-  this.Given(/^I create a queue$/, function(next) {
-    var world = this;
-    this.queue = 'aws-sdk-js-integration-' +
-      this.AWS.util.date.unixTimestamp() * 1000;
-    this.client.createQueue({QueueName:this.queue}, function(err, data) {
-      world.queueUrl = data.QueueUrl;
-      if (err) next.fail();
-      else next();
-    });
-  });
 
   this.When(/^I send the message "([^"]*)"$/, function(message, callback) {
     var world = this;
@@ -48,19 +38,16 @@ module.exports = function () {
     var world = this;
     this.eventually(callback, function (retry) {
       this.client.receiveMessage({QueueUrl:world.queueUrl}, function(err, data) {
-        var params = {QueueUrl:world.queueUrl,ReceiptHandle:data.Message.ReceiptHandle};
         if (err) retry();
         else {
-          var success = data.Message.Body === message;
+          var params = {QueueUrl:world.queueUrl,ReceiptHandle:data.Messages[0].ReceiptHandle};
+          var success = data.Messages[0].Body === message;
           world.client.deleteMessage(params, function(err, data) {
-            success && err ? callback.fail() : callback();
+            (!success && err) ? callback.fail(err) : callback();
           });
         }
       });
     });
   });
 
-  this.Then(/^I should delete the queue$/, function(callback) {
-    this.request('client', 'deleteQueue', {QueueUrl:this.queueUrl}, callback);
-  });
 };

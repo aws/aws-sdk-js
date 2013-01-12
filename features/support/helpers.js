@@ -19,13 +19,13 @@ module.exports = {
    * Call this function with a block that will be executed multiple times
    * to deal with eventually consistent conditions.
    *
-   *   this.When(/^I something is eventually consistent$/, function(next) {
+   *   this.When(/^I something is eventually consistent$/, function(callback) {
    *     this.eventually(function(retry) {
    *       doSomething(function(response) {
    *         if (response != notWhatIExpect) {
    *           retry();
    *         } else {
-   *           next();
+   *           callback();
    *         }
    *       });
    *     });
@@ -37,7 +37,7 @@ module.exports = {
    *   backoff: Add this number of milliseconds to the delay between each attempt.
    *   maxTime: Maximum duration of milliseconds to wait for success.
    */
-  eventually: function eventually(next, block, options) {
+  eventually: function eventually(callback, block, options) {
 
     if (!options) options = {};
     if (!options.delay) options.delay = 0;
@@ -57,7 +57,7 @@ module.exports = {
           block.call(self, retry);
         }, delay);
       } else {
-        next.fail();
+        callback.fail();
       }
 
     };
