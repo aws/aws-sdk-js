@@ -19,7 +19,7 @@ describe 'AWS.ServiceInterface.Json', ->
   MockJSONClient = AWS.util.inherit AWS.Client,
     serviceName: 'mockservice'
     api:
-      targetPrefix: 'prefix-'
+      targetPrefix: 'prefix'
       operations:
         operationName:
           n: 'OperationName'
@@ -55,7 +55,7 @@ describe 'AWS.ServiceInterface.Json', ->
     it 'should set X-Amz-Target header', ->
       buildRequest()
       expect(request.httpRequest.headers['X-Amz-Target']).
-        toEqual('prefix-OperationName')
+        toEqual('prefix.OperationName')
 
     it 'should set the body to JSON serialized params', ->
       request.params = foo: 'bar'
