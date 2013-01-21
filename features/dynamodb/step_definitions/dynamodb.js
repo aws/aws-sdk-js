@@ -114,7 +114,7 @@ module.exports = function() {
       if (resp.retryCount == 0) {
         resp.httpResponse.body = new Buffer('{"invalid":"response"}');
       } else {
-        world.AWS.EventListeners.Http.HTTP_DATA.call(this, chunk, resp);
+        world.AWS.EventListeners.Core.HTTP_DATA.call(this, chunk, resp);
       }
     });
     req.on('complete', function(resp) {

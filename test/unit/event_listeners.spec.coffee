@@ -183,7 +183,7 @@ describe 'AWS.EventListeners', ->
     it 'allows HTTP_DATA event to be re-added', ->
       request = makeRequest()
       request.on('httpData', ->)
-      request.on('httpData', AWS.EventListeners.Http.HTTP_DATA)
+      request.on('httpData', AWS.EventListeners.Core.HTTP_DATA)
       response = request.send()
 
       expect(response.httpResponse.body.toString()).toEqual('FOOBARBAZQUX')
