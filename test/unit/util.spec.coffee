@@ -300,6 +300,22 @@ describe 'AWS.util.inherit', ->
     expect(derived.other).toEqual(true)
     expect(Base.prototype.constructor).toHaveBeenCalledWith(1, 2, 'three')
 
+describe 'AWS.util.mixin', ->
+  it 'copies properties to other object prototype', ->
+    obj = prototype: a: 1, b: 2
+    AWS.util.mixin(obj, prototype: b: 3, c: 4)
+    expect(obj.prototype).toEqual(a: 1, b: 3, c: 4)
+
+  it 'resets prototype constructor', ->
+    obj = prototype: constructor: 'PASS'
+    AWS.util.mixin(obj, prototype: constructor: 'FAIL')
+    expect(obj.prototype).toEqual(constructor: 'PASS')
+
+  it 'returns original klass', ->
+    obj = prototype: foo: 1
+    out = AWS.util.mixin(obj, prototype: bar: 2)
+    expect(out).toBe(obj)
+
 describe 'AWS.util.isEmpty', ->
 
   it 'returns true when passed an empty object literal', ->
