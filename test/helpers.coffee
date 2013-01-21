@@ -11,7 +11,16 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+delete process.env.AWS_ACCESS_KEY_ID
+delete process.env.AWS_SECRET_ACCESS_KEY
+delete process.env.AWS_REGION
+
+delete process.env.AMAZON_ACCESS_KEY_ID
+delete process.env.AMAZON_SECRET_ACCESS_KEY
+delete process.env.AMAZON_REGION
+
 AWS = require('../lib/aws')
+
 fs = require('fs')
 configFile = __dirname + '/../configuration'
 

@@ -11,7 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-AWS = require('../../lib/core')
+helpers = require('../helpers')
+AWS = helpers.AWS
 
 configure = (options) -> new AWS.Config(options)
 
@@ -35,8 +36,29 @@ describe 'AWS.Config', ->
       expect(config.credentials.sessionToken).toEqual('session')
 
   describe 'region', ->
+    afterEach ->
+      delete process.env.AWS_REGION
+      delete process.env.AMAZON_REGION
+
     it 'defaults to undefined', ->
       expect(configure().region).toEqual(undefined)
+
+    it 'grabs AWS_REGION from the env', ->
+      process.env.AWS_REGION = 'us-west-2'
+      config = new AWS.Config()
+      expect(config.region).toEqual('us-west-2')
+
+    it 'also grabs AMAZON_REGION from the env', ->
+      process.env.AMAZON_REGION = 'us-west-1'
+      config = new AWS.Config()
+      expect(config.region).toEqual('us-west-1')
+
+    it 'prefers AWS_REGION to AMAZON_REGION', ->
+      process.env.AWS_REGION = 'us-west-2'
+      process.env.AMAZON_REGION = 'us-west-1'
+      config = new AWS.Config()
+      expect(config.region).toEqual('us-west-2')
+
     it 'can be set to a string', ->
       expect(configure(region: 'us-west-1').region).toEqual('us-west-1')
 

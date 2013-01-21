@@ -11,8 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-AWS = require('../../../lib/core')
 helpers = require('../../helpers')
+AWS = helpers.AWS
 
 require('../../../lib/services/s3')
 
