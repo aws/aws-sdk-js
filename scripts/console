@@ -1,0 +1,74 @@
+#!/usr/bin/env node
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *    http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../lib/aws'),
+    repl = require('repl').start('aws-sdk> '),
+    replEval = repl.eval,
+    replHistory = require('repl.history'),
+    defaultOptions = {
+      region: process.env.AWS_REGION || 'us-east-1'
+    };
+
+
+function customEval(cmd, context, filename, callback) {
+  replEval(cmd, context, filename, function(err, value) {
+    if (err) {
+      callback(err, null);
+      return;
+    }
+    
+    // poor man's Request check
+    if (value && value.client && value.client.with && value.send) {
+      if (!value.__hasBeenSent__) {
+        value.__hasBeenSent__ = true;
+        try {
+          value.on('complete', function(resp) {
+            context.data = resp.data;
+            context.error = resp.error;
+          });
+          context.resp = value.send();
+        } catch (err2) {
+          callback(err2, null);
+          return;
+        }
+      }
+    }
+
+    callback(null, value);
+  });
+}
+
+repl.context.AWS = AWS;
+repl.eval = customEval;
+
+// setup REPL history
+replHistory(repl, process.env.HOME + '/.node_history');
+
+// load services as defined instances
+require('fs').readdirSync(__dirname + '/../lib/services').forEach(function(file) {
+  if (file.match('.api.')) return;
+  var klass = require('../lib/services/' + file),
+      svc = file.replace(".js", ""),
+      client = new klass(defaultOptions).client;
+
+  // Creates new client instances with custom options
+  client.with = function(options) {
+    return new this.constructor(AWS.util.merge(this.config, options));
+  };
+
+  repl.context[svc] = client;
+});
+

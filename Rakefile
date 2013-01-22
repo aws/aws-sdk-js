@@ -47,6 +47,11 @@ task :lint do
   sh "npm #{LOGLEVEL} run-script lint"
 end
 
+desc 'Interactive console'
+task :console do
+  system './scripts/console'
+end
+
 # Vendor tasks
 root = File.dirname(__FILE__)
 Dir[File.join(root, 'vendor', '*', 'Rakefile')].each do |vendor_rakefile|
