@@ -36,9 +36,11 @@ describe 'AWS.Config', ->
       expect(config.credentials.sessionToken).toEqual('session')
 
   describe 'region', ->
+    oldEnv = process.env
+    beforeEach ->
+      process.env = {}
     afterEach ->
-      delete process.env.AWS_REGION
-      delete process.env.AMAZON_REGION
+      process.env = oldEnv
 
     it 'defaults to undefined', ->
       expect(configure().region).toEqual(undefined)
