@@ -35,7 +35,7 @@ the `send()` method:
 var request = new AWS.EC2().client.describeInstances();
 
 // register a callback to report on the data
-request.done(function(resp) {
+request.on('success', function(resp) {
   console.log(resp.data); // log the successful data response
 });
 
@@ -84,13 +84,19 @@ Note that if you handle events that can be in a failure state,
 you should always check whether `response.error` is set
 before attempting to access the `response.data` property.
 
-### Supported Callbacks
+#### The `request` property
 
-Currently, you can register callbacks for various events by
-either using the simplified callback syntax, or by using the callback
-methods on the returned `AWS.Request` object.
+Access to the originating request object is available through this
+property. For example, to access the parameters that were sent
+with a request:
 
-#### Simplified Callback Method
+```js
+s3.getObject({Bucket: 'bucket', Key: 'key'}).on('success', function(response) {
+  console.log("Key was", response.request.params.Key);
+}).send();
+```
+
+### Simplified Callback Method
 
 Each operation supports a simplified callback that can be passed as the last
 parameter to any low-level client operation. The callback function should
@@ -131,20 +137,20 @@ s3.client.getObject({Bucket: 'bucket', Key: 'key'}, function(err, data) {
 });
 ```
 
-#### AWS.Request Callbacks
+### AWS.Request Events
 
 You can alternatively register callbacks on events provided by the
 `AWS.Request` object returned by each low-level client operation method.
-This request object exposes the `done`, `fail`, `data`, and `always`
+This request object exposes the `success`, `error`, `complete`, and `httpData`
 events, each taking a callback that accepts the response object.
 
 Note that if you omit the simplified callback parameter on the operation
 method, you must call `send()` on the returned request object in order to
 kick off the request to the remote server.
 
-##### `done(function(response) { ... })`
+#### `on('success', function(response) { ... })`
 
-This event registers a callback to be called when a successful response
+This event triggers when a successful response
 from the server is returned. The response contains a `.data` field
 with the serialized response data from the service.
 
@@ -166,9 +172,9 @@ Prints:
   RequestId: '...' }
 ```
 
-##### `fail(function(response) { ... })`
+#### `on('error', function(response) { ... })`
 
-The `fail` event works similarly to the `done` event, except that it
+The `error` event works similarly to the `success` event, except that it
 triggers in the case of a request failure. In this case, `response.data`
 will be `null` and the `response.error` field will be filled with
 the error data:
@@ -186,30 +192,17 @@ Prints:
 { code: 'Forbidden', message: null }
 ```
 
-##### `data(function(response) { ... })`
+#### `on('complete', function(response) { ... })`
 
-<p class="note">If you register a <code>data</code> callback,
-  <code>response.data</code> will not contain serialized output
-  for the entire request. Instead, it will be your responsibility
-  to stream the output and de-serialize the result on your own.
-</p>
-
-The `data` callback is used to stream response data from the
-service packet-by-packet. This event is mostly used for large responses,
-when it is inefficient (or impossible) to load the entire response into
-memory.
-
-##### `always(function(response) { ... })`
-
-The `always` event triggers a callback in any final state of a request, i.e.,
-both `done` and `fail`. Use this callback to handle any request cleanup
+The `complete` event triggers a callback in any final state of a request, i.e.,
+both `success` and `error`. Use this callback to handle any request cleanup
 that must be executed regardless of the success state. Note that if you
 do intend to use response data inside of this callback, you must check
 for the presence of `response.data` or `response.error` before attempting
 to access either property. For example:
 
 ```js
-request.always(function(response) {
+request.on('complete', function(response) {
   if (response.error) {
     // an error occurred, handle it
   } else {
@@ -218,23 +211,21 @@ request.always(function(response) {
 }).send();
 ```
 
-## Binding Custom Context Data on a Callback
+#### `on('httpData', function(chunk, response) { ... })`
 
-By default, the `this` context of a callback function registered on an
-event will be the `AWS.Response` object returned from the service.
-In some cases, it may be necessary to pass extra custom context to these
-functions; in these cases, you can bind a custom value to be used as the
-`this` context object when the callbacks are executed. To do so, pass
-the `bind` option to the asynchronous registration method:
+<p class="note">If you register a <code>httpData</code> callback,
+  <code>response.data</code> will not contain serialized output
+  for the entire request. Instead, it will be your responsibility
+  to stream the output and de-serialize the result on your own.
+</p>
 
-```js
-var myContext = new Object();
-request.always(function(response) {
-  console.log(this === myContext);
-}, {bind: myContext}).send();
-```
+The `httpData` event is used to stream response data from the
+service packet-by-packet. This event is mostly used for large responses,
+when it is inefficient (or impossible) to load the entire response into
+memory.
 
-The above callback will print `true` when the callback function is executed.
+Note that this event contains an extra `chunk` parameter containing the
+actual data passed on by the server.
 
 ## Multiple Callbacks and Chaining
 
@@ -245,13 +236,13 @@ example:
 
 ```js
 request.
-  done(function(response) {
+  on('success', function(response) {
     console.log("Success!");
   }).
-  fail(function(response) {
+  on('error', function(response) {
     console.log("Error!");
   }).
-  always(function(response) {
+  on('complete', function() {
     console.log("Always!");
   }).
   send();
