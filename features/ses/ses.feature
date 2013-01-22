@@ -31,5 +31,3 @@ Feature: SES
     Then I should get the error:
     | code                  | message                        |
     | InvalidParameterValue | Invalid email address<abc123>. |
-
-  

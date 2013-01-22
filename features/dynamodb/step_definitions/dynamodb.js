@@ -19,52 +19,46 @@ module.exports = function() {
     next();
   });
 
-  this.Given(/^I create a table with throughput (\d+), (\d+)$/, function(read, write, next) {
-    this.tableName = 'aws-sdk-js-integration-' +
-      this.AWS.util.date.unixTimestamp() * 1000;
-
+  function createTable(world, callback) {
     var params = {
-      TableName: this.tableName,
+      TableName: world.tableName,
       KeySchema: {
         HashKeyElement: { AttributeName: 'id', AttributeType: 'S' }
       },
       ProvisionedThroughput: {
-        ReadCapacityUnits: parseInt(read),
-        WriteCapacityUnits: parseInt(write)
+        ReadCapacityUnits: 10,
+        WriteCapacityUnits: 5,
       }
     };
 
-    this.request(null, 'createTable', params, next);
-  });
+    world.client.createTable(params, function(err, data) {
+      if (err) {
+        callback.fail(err);
+        return;
+      }
+      world.eventually(callback, function (retry) {
+        params = { TableName: world.tableName };
+        world.client.describeTable(params, function(err, data) {
+          if (data.Table && data.Table.TableStatus === 'ACTIVE')
+            callback();
+          else
+            retry();
+        });
+      }, {maxTime: 500, delay: 10, backoff: 0});
+    });
+  };
 
-  this.Then(/^the table should eventually exist$/, function(next) {
+  this.Given(/^I have a table$/, function(callback) {
     var world = this;
-    world.eventually(next, function (retry) {
-      world.client.describeTable({TableName: world.tableName}, function(err, data) {
-        if (data.Table && data.Table.TableStatus === 'ACTIVE')
-          next();
-        else
-          retry();
-      });
-    }, {maxTime: 500, delay: 10, backoff: 0});
-  });
-
-  this.Given(/^I have the table$/, function(next) {
-    next(); // purely aesthetic
-  });
-
-  this.Given(/^I have a table$/, function(next) {
-    var world = this;
-    this.tableName = null;
+    this.tableName = 'aws-sdk-js-integration-test';
     this.client.listTables(function(err, data) {
       for (var i = 0; i < data.TableNames.length; i++) {
-        if (data.TableNames[i].match(/^aws-sdk-js-integration-/)) {
-          world.tableName = data.TableNames[i];
-          next();
+        if (data.TableNames[i] == world.tableName) {
+          callback();
           return;
         }
       }
-      next.fail("Could not find any active tables");
+      createTable(world, callback);
     });
   });
 
@@ -100,7 +94,10 @@ module.exports = function() {
     world.eventually(next, function (retry) {
       world.client.listTables(function(err, data) {
         for (var i = 0; i < data.TableNames.length; i++) {
-          if (data.TableNames[i] == world.tableName) retry();
+          if (data.TableNames[i] == world.tableName) {
+            retry();
+            return;
+          }
         }
         next();
       });

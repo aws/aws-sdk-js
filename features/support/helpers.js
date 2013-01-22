@@ -20,7 +20,7 @@ module.exports = {
    * to deal with eventually consistent conditions.
    *
    *   this.When(/^I something is eventually consistent$/, function(callback) {
-   *     this.eventually(function(retry) {
+   *     this.eventually(callback, function(retry) {
    *       doSomething(function(response) {
    *         if (response != notWhatIExpect) {
    *           retry();

@@ -15,11 +15,6 @@
 @dynamodb @tables
 Feature: DynamoDB Tables
 
-  @slow
-  Scenario: Creating a table
-    Given I create a table with throughput 5, 10
-    Then the table should eventually exist
-
   Scenario: Item CRUD
     Given I have a table
     When I put the item:
@@ -28,9 +23,3 @@ Feature: DynamoDB Tables
     """
     Then the item with id "foo" should exist
     And it should have attribute "data" containing "bår"
-
-  Scenario: Deleting a table
-    Given I have the table
-    When I delete the table
-    Then the table should eventually not exist
-
