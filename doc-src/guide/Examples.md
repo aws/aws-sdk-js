@@ -43,6 +43,22 @@ s3.client.createBucket({Bucket: 'myBucket'}, function() {
 });
 ```
 
+### Amazon S3: Streaming Objects to Files on Disk (getObject)
+
+You can use the `createReadStream()` method on a request object to
+get a handle to a stream object which supports piping raw HTTP
+body data to a file. This is especially useful when streaming
+objects to streams like filesystem objects. The following example
+shows how you can stream an object from Amazon S3 directly to a file
+on disk:
+
+```js
+var s3 = new AWS.S3();
+var params = {Bucket: 'myBucket', Key: 'myImageFile.jpg'};
+var file = require('fs').createWriteStream('/path/to/file.jpg');
+s3.client.getObject(params).createReadStream().pipe(file);
+```
+
 ## Amazon DynamoDB
 
 ### Amazon DynamoDB: Listing Tables (listTables)
