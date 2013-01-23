@@ -81,6 +81,20 @@ module.exports = function () {
     this.request('s3', 'putObject', params, next);
   });
 
+  this.When(/^I stream key "([^"]*)"$/, function(key, callback) {
+    var params = {Bucket: this.sharedBucket, Key: key};
+    var world = this;
+    this.result = '';
+    this.client.getObject(params).createReadStream().
+      on('end', function() { callback(); }).
+      on('data', function(d) { world.result += d.toString(); });
+  });
+
+  this.Then(/^the streamed data should contain "([^"]*)"$/, function(data, callback) {
+    if (data === this.result.replace("\n", "")) callback();
+    else callback.fail("Expected " + data + ", got " + this.result);
+  });
+
   // this scenario is a work around for not having an after all hook
   this.Then(/^I delete the shared bucket$/, function(next) {
     this.request('s3', 'deleteBucket', {Bucket:this.sharedBucket}, next);
