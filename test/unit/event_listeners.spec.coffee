@@ -80,9 +80,9 @@ describe 'AWS.EventListeners', ->
 
       expect(errorHandler).toHaveBeenCalled()
       AWS.util.arrayEach errorHandler.calls, (call) ->
-        expect(call.args[0].error instanceof Error).toBeTruthy()
-        expect(call.args[0].error.code).toEqual('SigningError')
-        expect(call.args[0].error.message).toMatch(/Missing credentials in config/)
+        expect(call.args[0] instanceof Error).toBeTruthy()
+        expect(call.args[0].code).toEqual('SigningError')
+        expect(call.args[0].message).toMatch(/Missing credentials in config/)
 
     it 'sends error event if region is not set', ->
       client.config.region = null
@@ -90,9 +90,9 @@ describe 'AWS.EventListeners', ->
 
       call = errorHandler.calls[0]
       expect(errorHandler).toHaveBeenCalled()
-      expect(call.args[0].error instanceof Error).toBeTruthy()
-      expect(call.args[0].error.code).toEqual('SigningError')
-      expect(call.args[0].error.message).toMatch(/Missing region in config/)
+      expect(call.args[0] instanceof Error).toBeTruthy()
+      expect(call.args[0].code).toEqual('SigningError')
+      expect(call.args[0].message).toMatch(/Missing region in config/)
 
   describe 'build', ->
     it 'takes the request object as a parameter', ->
