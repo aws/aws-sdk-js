@@ -173,17 +173,9 @@ describe 'AWS.EventListeners', ->
 
       expect(calls).toEqual(['FOO', 'BAR', 'BAZ', 'QUX'])
 
-    it 'clears default httpData event if another is added (allow streaming)', ->
+    it 'does not clear default httpData event if another is added', ->
       request = makeRequest()
       request.on('httpData', ->)
-      response = request.send()
-
-      expect(response.httpResponse.body.toString()).toEqual('')
-
-    it 'allows HTTP_DATA event to be re-added', ->
-      request = makeRequest()
-      request.on('httpData', ->)
-      request.on('httpData', AWS.EventListeners.Core.HTTP_DATA)
       response = request.send()
 
       expect(response.httpResponse.body.toString()).toEqual('FOOBARBAZQUX')

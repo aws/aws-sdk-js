@@ -214,9 +214,10 @@ request.on('complete', function(response) {
 #### `on('httpData', function(chunk, response) { ... })`
 
 <p class="note">If you register a <code>httpData</code> callback,
-  <code>response.data</code> will not contain serialized output
-  for the entire request. Instead, it will be your responsibility
-  to stream the output and de-serialize the result on your own.
+  <code>response.data</code> will still contain serialized output
+  for the entire request. It will be your responsibility to remove
+  the default 'httpData' listener if you do not wish to have the
+  extra parsing and memory overhead from the built-in handlers.
 </p>
 
 The `httpData` event is used to stream response data from the
