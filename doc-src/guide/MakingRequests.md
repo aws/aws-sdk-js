@@ -172,16 +172,19 @@ Prints:
   RequestId: '...' }
 ```
 
-#### `on('error', function(response) { ... })`
+#### `on('error', function(error, response) { ... })`
 
 The `error` event works similarly to the `success` event, except that it
 triggers in the case of a request failure. In this case, `response.data`
 will be `null` and the `response.error` field will be filled with
-the error data:
+the error data. Note that the `error` object is also passed directly
+as the first parameter to the event:
 
 ```js
 s3.config.credentials.accessKeyId = 'invalid';
-s3.client.listBuckets().fail(function(response) {
+s3.client.listBuckets().fail(function(error, response) {
+  console.log(error);
+  // or:
   console.log(response.error);
 }).send();
 ```
