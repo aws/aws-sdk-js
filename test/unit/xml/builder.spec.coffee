@@ -165,6 +165,67 @@ describe 'AWS.XML.Builder', ->
       """
       matchXML(toXML(rules, params), xml)
 
+  describe 'lists', ->
+
+    it 'serializes lists without a base wrapper', ->
+      rules = {Aliases:{t:'a',f:1,m:{}}}
+      params = {Aliases:['abc','mno','xyz']}
+      xml = """
+      <Data xmlns="#{xmlns}">
+        <Aliases>abc</Aliases>
+        <Aliases>mno</Aliases>
+        <Aliases>xyz</Aliases>
+      </Data>
+      """
+      matchXML(toXML(rules, params), xml)
+
+    it 'serializes lists (custom member names)', ->
+      rules = {Aliases:{t:'a',f:1,n:'Alias',m:{}}}
+      params = {Aliases:['abc','mno','xyz']}
+      xml = """
+      <Data xmlns="#{xmlns}">
+        <Alias>abc</Alias>
+        <Alias>mno</Alias>
+        <Alias>xyz</Alias>
+      </Data>
+      """
+      matchXML(toXML(rules, params), xml)
+
+    it 'omits lists elements when no members are given', ->
+      rules = {Aliases:{t:'a',f:1,m:{n:'Alias'}}}
+      params = {Aliases:[]}
+      xml = """
+      <Data xmlns="#{xmlns}"/>
+      """
+      matchXML(toXML(rules, params), xml)
+
+    it 'serializes lists of structures', ->
+      rules =
+        Points:
+          t: 'a'
+          f: 1
+          n: 'Point'
+          m:
+            t: 'o'
+            n: 'Point'
+            m:
+              X: {t:'n'}
+              Y: {t:'n'}
+      params = {Points:[{X:1.2,Y:2.1},{X:3.4,Y:4.3}]}
+      xml = """
+      <Data xmlns="#{xmlns}">
+        <Point>
+          <X>1.2</X>
+          <Y>2.1</Y>
+        </Point>
+        <Point>
+          <X>3.4</X>
+          <Y>4.3</Y>
+        </Point>
+      </Data>
+      """
+      matchXML(toXML(rules, params), xml)
+
   describe 'numbers', ->
 
     it 'integers', ->
