@@ -219,13 +219,7 @@ describe 'AWS.EventListeners', ->
           toEqual(client.config.maxRetries)
 
     it 'should not emit error if retried fewer than maxRetries', ->
-      spyOn(AWS.HttpClient, 'getInstance').andReturn handleRequest: (req, resp) ->
-        if resp.retryCount < 2
-          req.emit('httpError', {code: 'NetworkingError', message: "FAIL!"}, resp)
-        else
-          req.emit('httpHeaders', resp.retryCount < 2 ? 500 : 200, {}, resp)
-          req.emit('httpData', 'foo', resp)
-          req.emit('httpDone', resp)
+      helpers.mockIntermittentFailureResponse 2, 200, {}, 'foo'
 
       response = makeRequest(->)
 

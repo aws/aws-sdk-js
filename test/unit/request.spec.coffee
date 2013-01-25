@@ -32,3 +32,85 @@ describe 'AWS.Request', ->
       runs ->
         expect(data).toEqual('FOOBARBAZQUX')
 
+    it 'does not stream data on failures', ->
+      data = ''; error = null; done = false
+      helpers.mockHttpResponse 404, {}, ['No such file']
+
+      runs ->
+        request = client.makeRequest('mockMethod')
+        s = request.createReadStream()
+        s.on 'end', -> done = true
+        s.on 'error', (e) -> error = e; done = true
+        s.on 'data', (c) -> data += c.toString()
+      waitsFor -> done == true
+      runs ->
+        expect(data).toEqual('')
+        expect(error.statusCode).toEqual(404)
+
+    it 'retries temporal errors and streams resulting successful response', ->
+      data = ''; error = null; done = false
+      helpers.mockIntermittentFailureResponse 2, 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
+
+      runs ->
+        request = client.makeRequest('mockMethod')
+        s = request.createReadStream()
+        s.on 'end', -> done = true
+        s.on 'error', (e) -> error = e; done = true
+        s.on 'data', (c) -> data += c.toString()
+      waitsFor -> done == true
+      runs ->
+        expect(data).toEqual('FOOBARBAZQUX')
+        expect(error).toEqual(null)
+
+    it 'streams partial data and raises an error', ->
+      data = ''; error = null; reqError = null; done = false
+      spyOn(AWS.HttpClient, 'getInstance')
+      AWS.HttpClient.getInstance.andReturn handleRequest: (req, resp) ->
+        req.emit('httpHeaders', 200, {}, resp)
+        AWS.util.arrayEach ['FOO', 'BAR', 'BAZ'], (str) ->
+          req.emit('httpData', new Buffer(str), resp)
+        req.emit('httpError', new Error('fail'), resp)
+
+      runs ->
+        request = client.makeRequest('mockMethod')
+        request.on 'error', (e) -> reqError = e
+        request.on 'complete', -> done = true
+        s = request.createReadStream()
+        s.on 'error', (e) -> error = e
+        s.on 'data', (c) -> data += c.toString()
+      waitsFor -> done == true
+      runs ->
+        expect(data).toEqual('FOOBARBAZ')
+        expect(error.message).toEqual('fail')
+        expect(reqError.message).toEqual('fail')
+
+    it 'retries in the middle of a failing stream', ->
+      data = ''; error = null; reqError = null; done = false
+      spyOn(AWS.HttpClient, 'getInstance')
+      AWS.HttpClient.getInstance.andReturn handleRequest: (req, resp) ->
+        process.nextTick ->
+            req.emit('httpHeaders', 200, {}, resp)
+          AWS.util.arrayEach ['FOO', 'BAR', 'BAZ', 'QUX'], (str) ->
+            if str == 'BAZ' and resp.retryCount < 1
+              process.nextTick ->
+                req.emit('httpError', code: 'NetworkingError', message: 'FAIL!', retryable: true, resp)
+              return AWS.util.abort
+            else
+              process.nextTick ->
+                req.emit('httpData', new Buffer(str), resp)
+          if resp.retryCount >= 1
+            process.nextTick ->
+              req.emit('httpDone', resp)
+
+      runs ->
+        request = client.makeRequest('mockMethod')
+        request.on 'error', (e) -> reqError = e
+        request.on 'complete', -> done = true
+        s = request.createReadStream()
+        s.on 'error', (e) -> error = e
+        s.on 'data', (c) -> data += c.toString()
+      waitsFor -> done == true
+      runs ->
+        expect(data).toEqual('FOOBARFOOBARBAZQUX')
+        expect(error).toEqual(null)
+        expect(reqError).toEqual(null)

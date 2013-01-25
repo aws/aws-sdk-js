@@ -75,10 +75,23 @@ mockHttpResponse = (status, headers, data) ->
     else
       req.emit('httpError', status, resp)
 
+mockIntermittentFailureResponse = (numFailures, status, headers, data) ->
+  spyOn(AWS.HttpClient, 'getInstance')
+  AWS.HttpClient.getInstance.andReturn handleRequest: (req, resp) ->
+    if resp.retryCount < numFailures
+      req.emit('httpError', {code: 'NetworkingError', message: 'FAIL!'}, resp)
+    else
+      req.emit('httpHeaders', (resp.retryCount < numFailures ? 500 : status), headers, resp)
+      str = str instanceof Array ? str : [str]
+      AWS.util.arrayEach data, (str) ->
+        req.emit('httpData', new Buffer(str), resp)
+      req.emit('httpDone', resp)
+
 module.exports =
   AWS: AWS
   integration: integration
   matchXML: matchXML
   mockHttpResponse: mockHttpResponse
+  mockIntermittentFailureResponse: mockIntermittentFailureResponse
   MockClient: MockClient
   MockService: MockService
