@@ -51,7 +51,7 @@ AWS.S3 = inherit({})
  * for each API operation on the service.
  *
  * @!method abortMultipartUpload(params, callback)
- *   Aborts a multipart upload.
+ *   Calls the AbortMultipartUpload API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
@@ -68,8 +68,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method completeMultipartUpload(params, callback)
- *   Completes a multipart upload by assembling previously uploaded
- *   parts.
+ *   Calls the CompleteMultipartUpload API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
@@ -103,29 +102,13 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method copyObject(params, callback)
- *   Creates a copy of an object that is already stored in Amazon S3.
+ *   Calls the CopyObject API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
  *     * +MetadataDirective+ - (<tt>String</tt>) Specifies whether the
  *       metadata is copied from the source object or replaced with
  *       metadata provided in the request.
- *     * +CacheControl+ - (<tt>String</tt>) Can be used to specify
- *       caching behavior along the request/reply chain.
- *     * +ContentDisposition+ - (<tt>String</tt>) Specifies
- *       presentational information for the object.
- *     * +ContentEncoding+ - (<tt>String</tt>) Specifies what content
- *       encodings have been applied to the object and thus what decoding
- *       mechanisms must be applied to obtain the media-type referenced
- *       by the Content-Type header field.
- *     * +ContentType+ - (<tt>String</tt>) A standard MIME type
- *       describing the format of the object data.
- *     * +Expires+ - (<tt>Date</tt>) The date and time at which the
- *       object is no longer cacheable.
- *     * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
- *       configured as a website, redirects requests for this object to
- *       another object in the same bucket or to an external URL. Amazon
- *       S3 stores the value of this header in the object metadata.
  *     * +CopySource+ - (*required*, <tt>String</tt>) The name of the
  *       source bucket and key name of the source object, separated by a
  *       slash (/). Must be URL-encoded.
@@ -148,6 +131,24 @@ AWS.S3 = inherit({})
  *       ACL for the applicable object.
  *     * +GrantFullControl+ - (<tt>String</tt>) Gives the grantee READ,
  *       READ_ACP, and WRITE_ACP permissions on the object.
+ *     * +CacheControl+ - (<tt>String</tt>) Specifies caching behavior
+ *       along the request/reply chain.
+ *     * +ContentDisposition+ - (<tt>String</tt>) Specifies
+ *       presentational information for the object.
+ *     * +ContentEncoding+ - (<tt>String</tt>) Specifies what content
+ *       encodings have been applied to the object and thus what decoding
+ *       mechanisms must be applied to obtain the media-type referenced
+ *       by the Content-Type header field.
+ *     * +ContentLanguage+ - (<tt>String</tt>) The language the content
+ *       is in.
+ *     * +ContentType+ - (<tt>String</tt>) A standard MIME type
+ *       describing the format of the object data.
+ *     * +Expires+ - (<tt>Date</tt>) The date and time at which the
+ *       object is no longer cacheable.
+ *     * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
+ *       configured as a website, redirects requests for this object to
+ *       another object in the same bucket or to an external URL. Amazon
+ *       S3 stores the value of this header in the object metadata.
  *     * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
  *       encryption algorithm used when storing this object in S3.
  *     * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
@@ -173,7 +174,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createBucket(params, callback)
- *   Creates a new bucket.
+ *   Calls the CreateBucket API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +CreateBucketConfiguration+ - (<tt>Object</tt>)
@@ -204,26 +205,10 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createMultipartUpload(params, callback)
- *   Initiates a multipart upload and returns an upload ID.
+ *   Calls the CreateMultipartUpload API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +CacheControl+ - (<tt>String</tt>) Can be used to specify
- *       caching behavior along the request/reply chain.
- *     * +ContentDisposition+ - (<tt>String</tt>) Specifies
- *       presentational information for the object.
- *     * +ContentEncoding+ - (<tt>String</tt>) Specifies what content
- *       encodings have been applied to the object and thus what decoding
- *       mechanisms must be applied to obtain the media-type referenced
- *       by the Content-Type header field.
- *     * +ContentType+ - (<tt>String</tt>) A standard MIME type
- *       describing the format of the object data.
- *     * +Expires+ - (<tt>Date</tt>) The date and time at which the
- *       object is no longer cacheable.
- *     * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
- *       configured as a website, redirects requests for this object to
- *       another object in the same bucket or to an external URL. Amazon
- *       S3 stores the value of this header in the object metadata.
  *     * +StorageClass+ - (<tt>String</tt>) The type of storage to use
  *       for the object. Defaults to 'STANDARD'.
  *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the object.
@@ -235,6 +220,24 @@ AWS.S3 = inherit({})
  *       ACL for the applicable object.
  *     * +GrantFullControl+ - (<tt>String</tt>) Gives the grantee READ,
  *       READ_ACP, and WRITE_ACP permissions on the object.
+ *     * +CacheControl+ - (<tt>String</tt>) Specifies caching behavior
+ *       along the request/reply chain.
+ *     * +ContentDisposition+ - (<tt>String</tt>) Specifies
+ *       presentational information for the object.
+ *     * +ContentEncoding+ - (<tt>String</tt>) Specifies what content
+ *       encodings have been applied to the object and thus what decoding
+ *       mechanisms must be applied to obtain the media-type referenced
+ *       by the Content-Type header field.
+ *     * +ContentLanguage+ - (<tt>String</tt>) The language the content
+ *       is in.
+ *     * +ContentType+ - (<tt>String</tt>) A standard MIME type
+ *       describing the format of the object data.
+ *     * +Expires+ - (<tt>Date</tt>) The date and time at which the
+ *       object is no longer cacheable.
+ *     * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
+ *       configured as a website, redirects requests for this object to
+ *       another object in the same bucket or to an external URL. Amazon
+ *       S3 stores the value of this header in the object metadata.
  *     * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
  *       encryption algorithm used when storing this object in S3.
  *     * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
@@ -260,9 +263,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteBucket(params, callback)
- *   Deletes the bucket. All objects (including all object versions and
- *   Delete Markers) in the bucket must be deleted before the bucket
- *   itself can be deleted.
+ *   Calls the DeleteBucket API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -277,7 +278,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteBucketCors(params, callback)
- *   Deletes the cors configuration information set for the bucket.
+ *   Calls the DeleteBucketCors API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -292,7 +293,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteBucketLifecycle(params, callback)
- *   Deletes the lifecycle configuration from the bucket.
+ *   Calls the DeleteBucketLifecycle API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -307,7 +308,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteBucketPolicy(params, callback)
- *   Deletes the policy from the bucket.
+ *   Calls the DeleteBucketPolicy API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -322,7 +323,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteBucketTagging(params, callback)
- *   Deletes the tags from the bucket.
+ *   Calls the DeleteBucketTagging API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -337,7 +338,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteBucketWebsite(params, callback)
- *   This operation removes the website configuration from the bucket.
+ *   Calls the DeleteBucketWebsite API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -352,9 +353,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteObject(params, callback)
- *   Removes the null version (if there is one) of an object and inserts
- *   a delete marker, which becomes the latest version of the object. If
- *   there isn''t a null version, Amazon S3 does not remove any objects.
+ *   Calls the DeleteObject API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
@@ -376,8 +375,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteObjects(params, callback)
- *   This operation enables you to delete multiple objects from a bucket
- *   using a single HTTP request. You may specify up to 1000 keys.
+ *   Calls the DeleteObjects API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Delete+ - (*required*, <tt>Object</tt>)
@@ -392,6 +390,7 @@ AWS.S3 = inherit({})
  *     * +MFA+ - (<tt>String</tt>) The concatenation of the
  *       authentication device''s serial number, a space, and the value
  *       that is displayed on your authentication device.
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -415,7 +414,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getBucketAcl(params, callback)
- *   Gets the access control policy for the bucket.
+ *   Calls the GetBucketAcl API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -446,7 +445,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getBucketCors(params, callback)
- *   Returns the cors configuration for the bucket.
+ *   Calls the GetBucketCors API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -476,7 +475,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getBucketLifecycle(params, callback)
- *   Returns the lifecycle configuration information set on the bucket.
+ *   Calls the GetBucketLifecycle API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -514,7 +513,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getBucketLocation(params, callback)
- *   Returns the region the bucket resides in.
+ *   Calls the GetBucketLocation API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -531,9 +530,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getBucketLogging(params, callback)
- *   Returns the logging status of a bucket and the permissions users
- *   have to view and modify that status. To use GET, you must be the
- *   bucket owner.
+ *   Calls the GetBucketLogging API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -572,7 +569,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getBucketNotification(params, callback)
- *   Return the notification configuration of a bucket.
+ *   Calls the GetBucketNotification API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -594,7 +591,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getBucketPolicy(params, callback)
- *   Returns the policy of a specified bucket.
+ *   Calls the GetBucketPolicy API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -612,7 +609,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getBucketRequestPayment(params, callback)
- *   Returns the request payment configuration of a bucket.
+ *   Calls the GetBucketRequestPayment API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -630,7 +627,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getBucketTagging(params, callback)
- *   Returns the tag set associated with the bucket.
+ *   Calls the GetBucketTagging API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -649,7 +646,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getBucketVersioning(params, callback)
- *   Returns the versioning state of a bucket.
+ *   Calls the GetBucketVersioning API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -671,7 +668,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getBucketWebsite(params, callback)
- *   Returns the website configuration for a bucket.
+ *   Calls the GetBucketWebsite API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -683,6 +680,12 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
+ *       * +RedirectAllRequestsTo+ - (<tt>Object</tt>)
+ *         * +HostName+ - (<tt>String</tt>) Name of the host where requests
+ *           will be redirected.
+ *         * +Protocol+ - (<tt>String</tt>) Protocol to use (http, https)
+ *           when redirecting requests. The default is the protocol that is
+ *           used in the original request.
  *       * +IndexDocument+ - (<tt>Object</tt>)
  *         * +Suffix+ - (<tt>String</tt>) A suffix that is appended to a
  *           request that is for a directory on the website endpoint (e.g.
@@ -693,11 +696,60 @@ AWS.S3 = inherit({})
  *       * +ErrorDocument+ - (<tt>Object</tt>)
  *         * +Key+ - (<tt>String</tt>) The object key name to use when a
  *           4XX class error occurs.
+ *       * +RoutingRules+ - (<tt>Array<Object></tt>)
+ *         * +Condition+ - (<tt>Object</tt>) A container for describing a
+ *           condition that must be met for the specified redirect to
+ *           apply. For example, 1. If request is for pages in the /docs
+ *           folder, redirect to the /documents folder. 2. If request
+ *           results in HTTP error 4xx, redirect request to another host
+ *           where you might process the error.
+ *           * +KeyPrefixEquals+ - (<tt>String</tt>) The object key name
+ *             prefix when the redirect is applied. For example, to
+ *             redirect requests for ExamplePage.html, the key prefix will
+ *             be ExamplePage.html. To redirect request for all pages with
+ *             the prefix docs/, the key prefix will be /docs, which
+ *             identifies all objects in the docs/ folder. Required when
+ *             the parent element Condition is specified and sibling
+ *             HttpErrorCodeReturnedEquals is not specified. If both
+ *             conditions are specified, both must be true for the redirect
+ *             to be applied.
+ *           * +HttpErrorCodeReturnedEquals+ - (<tt>String</tt>) The HTTP
+ *             error code when the redirect is applied. In the event of an
+ *             error, if the error code equals this value, then the
+ *             specified redirect is applied. Required when parent element
+ *             Condition is specified and sibling KeyPrefixEquals is not
+ *             specified. If both are specified, then both must be true for
+ *             the redirect to be applied.
+ *         * +Redirect+ - (<tt>Object</tt>) Container for redirect
+ *           information. You can redirect requests to another host, to
+ *           another page, or with another protocol. In the event of an
+ *           error, you can can specify a different error code to return.
+ *           * +ReplaceKeyPrefixWith+ - (<tt>String</tt>) The object key
+ *             prefix to use in the redirect request. For example, to
+ *             redirect requests for all pages with prefix docs/ (objects
+ *             in the docs/ folder) to documents/, you can set a condition
+ *             block with KeyPrefixEquals set to docs/ and in the Redirect
+ *             set ReplaceKeyPrefixWith to /documents. Not required if one
+ *             of the siblings is present. Can be present only if
+ *             ReplaceKeyWith is not provided.
+ *           * +ReplaceKeyWith+ - (<tt>String</tt>) The specific object key
+ *             to use in the redirect request. For example, redirect
+ *             request to error.html. Not required if one of the sibling is
+ *             present. Can be present only if ReplaceKeyPrefixWith is not
+ *             provided.
+ *           * +HttpRedirectCode+ - (<tt>String</tt>) The HTTP redirect
+ *             code to use on the response. Not required if one of the
+ *             siblings is present.
+ *         * +HostName+ - (<tt>String</tt>) Name of the host where requests
+ *           will be redirected.
+ *         * +Protocol+ - (<tt>String</tt>) Protocol to use (http, https)
+ *           when redirecting requests. The default is the protocol that is
+ *           used in the original request.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getObject(params, callback)
- *   Retrieves objects from Amazon S3.
+ *   Calls the GetObject API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
@@ -749,14 +801,11 @@ AWS.S3 = inherit({})
  *         this header. It includes the expiry-date and rule-id key value
  *         pairs providing object expiration information. The value of the
  *         rule-id is URL encoded.
- *       * +WebsiteRedirectLocation+ - (<tt>String</tt>) When a bucket is
- *         configured as a website, you can set this metadata on the object
- *         so the website endpoint will evaluate the request for the object
- *         as a 301 redirect to another object in the same bucket or an
- *         external URL.
+ *       * +Restore+ - (<tt>String</tt>) Provides information about object
+ *         restoration operation and expiration time of the restored object
+ *         copy.
  *       * +LastModified+ - (<tt>Date</tt>) Last modified date of the
  *         object
- *       * +ContentType+ - (<tt>String</tt>) Content type of the object
  *       * +ContentLength+ - (<tt>Integer</tt>) Size of the body in bytes.
  *       * +ETag+ - (<tt>String</tt>) An ETag is an opaque identifier
  *         assigned by a web server to a specific version of a resource
@@ -767,16 +816,34 @@ AWS.S3 = inherit({})
  *         supports more flexible metadata than the REST API. For example,
  *         using SOAP, you can create metadata whose values are not legal
  *         HTTP headers.
+ *       * +VersionId+ - (<tt>String</tt>) Version of the object.
+ *       * +CacheControl+ - (<tt>String</tt>) Specifies caching behavior
+ *         along the request/reply chain.
+ *       * +ContentDisposition+ - (<tt>String</tt>) Specifies
+ *         presentational information for the object.
+ *       * +ContentEncoding+ - (<tt>String</tt>) Specifies what content
+ *         encodings have been applied to the object and thus what decoding
+ *         mechanisms must be applied to obtain the media-type referenced
+ *         by the Content-Type header field.
+ *       * +ContentLanguage+ - (<tt>String</tt>) The language the content
+ *         is in.
+ *       * +ContentType+ - (<tt>String</tt>) A standard MIME type
+ *         describing the format of the object data.
+ *       * +Expires+ - (<tt>Date</tt>) The date and time at which the
+ *         object is no longer cacheable.
+ *       * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
+ *         configured as a website, redirects requests for this object to
+ *         another object in the same bucket or to an external URL. Amazon
+ *         S3 stores the value of this header in the object metadata.
  *       * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
  *         encryption algorithm used when storing this object in S3.
- *       * +VersionId+ - (<tt>String</tt>) Version of the object.
  *       * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
  *         store with the object in S3.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getObjectAcl(params, callback)
- *   Returns the access control list (ACL) of an object.
+ *   Calls the GetObjectAcl API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
@@ -810,7 +877,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getObjectTorrent(params, callback)
- *   Return torrent files from a bucket.
+ *   Calls the GetObjectTorrent API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
@@ -828,8 +895,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method headBucket(params, callback)
- *   This operation is useful to determine if a bucket exists and you
- *   have permission to access it.
+ *   Calls the HeadBucket API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -844,10 +910,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method headObject(params, callback)
- *   The HEAD operation retrieves metadata from an object without
- *   returning the object itself. This operation is useful if you''re
- *   only interested in an object''s metadata. To use HEAD, you must have
- *   READ access to the object.
+ *   Calls the HeadObject API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
@@ -886,14 +949,11 @@ AWS.S3 = inherit({})
  *         this header. It includes the expiry-date and rule-id key value
  *         pairs providing object expiration information. The value of the
  *         rule-id is URL encoded.
- *       * +WebsiteRedirectLocation+ - (<tt>String</tt>) When a bucket is
- *         configured as a website, you can set this metadata on the object
- *         so the website endpoint will evaluate the request for the object
- *         as a 301 redirect to another object in the same bucket or an
- *         external URL.
+ *       * +Restore+ - (<tt>String</tt>) Provides information about object
+ *         restoration operation and expiration time of the restored object
+ *         copy.
  *       * +LastModified+ - (<tt>Date</tt>) Last modified date of the
  *         object
- *       * +ContentType+ - (<tt>String</tt>) Content type of the object
  *       * +ContentLength+ - (<tt>Integer</tt>) Size of the body in bytes.
  *       * +ETag+ - (<tt>String</tt>) An ETag is an opaque identifier
  *         assigned by a web server to a specific version of a resource
@@ -904,17 +964,34 @@ AWS.S3 = inherit({})
  *         supports more flexible metadata than the REST API. For example,
  *         using SOAP, you can create metadata whose values are not legal
  *         HTTP headers.
+ *       * +VersionId+ - (<tt>String</tt>) Version of the object.
+ *       * +CacheControl+ - (<tt>String</tt>) Specifies caching behavior
+ *         along the request/reply chain.
+ *       * +ContentDisposition+ - (<tt>String</tt>) Specifies
+ *         presentational information for the object.
+ *       * +ContentEncoding+ - (<tt>String</tt>) Specifies what content
+ *         encodings have been applied to the object and thus what decoding
+ *         mechanisms must be applied to obtain the media-type referenced
+ *         by the Content-Type header field.
+ *       * +ContentLanguage+ - (<tt>String</tt>) The language the content
+ *         is in.
+ *       * +ContentType+ - (<tt>String</tt>) A standard MIME type
+ *         describing the format of the object data.
+ *       * +Expires+ - (<tt>Date</tt>) The date and time at which the
+ *         object is no longer cacheable.
+ *       * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
+ *         configured as a website, redirects requests for this object to
+ *         another object in the same bucket or to an external URL. Amazon
+ *         S3 stores the value of this header in the object metadata.
  *       * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
  *         encryption algorithm used when storing this object in S3.
- *       * +VersionId+ - (<tt>String</tt>) Version of the object.
  *       * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
  *         store with the object in S3.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method listBuckets(params, callback)
- *   Returns a list of all buckets owned by the authenticated sender of
- *   the request.
+ *   Calls the ListBuckets API operation.
  *   @param params [Object]
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -935,7 +1012,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method listMultipartUploads(params, callback)
- *   This operation lists in-progress multipart uploads.
+ *   Calls the ListMultipartUploads API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Prefix+ - (<tt>String</tt>) Lists in-progress uploads only for
@@ -1003,7 +1080,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method listObjectVersions(params, callback)
- *   Returns metadata about all of the versions of objects in a bucket.
+ *   Calls the ListObjectVersions API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +KeyMarker+ - (<tt>String</tt>) Specifies the key to start with
@@ -1073,9 +1150,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method listObjects(params, callback)
- *   Returns some or all (up to 1000) of the objects in a bucket. You can
- *   use the request parameters as selection criteria to return a subset
- *   of the objects in a bucket.
+ *   Calls the ListObjects API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Marker+ - (<tt>String</tt>) Specifies the key to start with
@@ -1123,8 +1198,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method listParts(params, callback)
- *   Lists the parts that have been uploaded for a specific multipart
- *   upload.
+ *   Calls the ListParts API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
@@ -1183,7 +1257,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method putBucketAcl(params, callback)
- *   Sets the permissions on a bucket using access control lists (ACL).
+ *   Calls the PutBucketAcl API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +AccessControlPolicy+ - (<tt>Object</tt>)
@@ -1213,6 +1287,7 @@ AWS.S3 = inherit({})
  *       ACL for the applicable bucket.
  *     * +GrantFullControl+ - (<tt>String</tt>) Allows grantee the read,
  *       write, read ACP, and write ACP permissions on the bucket.
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1225,7 +1300,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method putBucketCors(params, callback)
- *   Sets the cors configuration for a bucket.
+ *   Calls the PutBucketCors API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +CORSConfiguration+ - (<tt>Object</tt>)
@@ -1243,6 +1318,7 @@ AWS.S3 = inherit({})
  *           headers in the response that you want customers to be able
  *           to access from their applications (for example, from a
  *           JavaScript XMLHttpRequest object).
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1255,8 +1331,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method putBucketLifecycle(params, callback)
- *   Sets lifecycle configuration for your bucket. If a lifecycle
- *   configuration exists, it replaces it.
+ *   Calls the PutBucketLifecycle API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +LifecycleConfiguration+ - (<tt>Object</tt>)
@@ -1284,6 +1359,7 @@ AWS.S3 = inherit({})
  *           * +Date+ - (<tt>Date</tt>) Indicates at what date the object
  *             is to be moved or deleted. Should be in GMT ISO 8601
  *             Format.
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1296,9 +1372,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method putBucketLogging(params, callback)
- *   Set the logging parameters for a bucket and to specify permissions
- *   for who can view and modify the logging parameters. To set the
- *   logging status of a bucket, you must be the bucket owner.
+ *   Calls the PutBucketLogging API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +BucketLoggingStatus+ - (*required*, <tt>Object</tt>)
@@ -1325,6 +1399,7 @@ AWS.S3 = inherit({})
  *               grantee.
  *             * +URI+ - (<tt>String</tt>) URI of the grantee group.
  *           * +Permission+ - (<tt>String</tt>)
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1337,7 +1412,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method putBucketNotification(params, callback)
- *   Enables notifications of specified events for a bucket.
+ *   Calls the PutBucketNotification API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +NotificationConfiguration+ - (*required*, <tt>Object</tt>)
@@ -1347,6 +1422,7 @@ AWS.S3 = inherit({})
  *           the bucket.
  *         * +Event+ - (<tt>String</tt>) Bucket event for which to send
  *           notifications.
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1359,12 +1435,12 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method putBucketPolicy(params, callback)
- *   Replaces a policy on a bucket. If the bucket already has a policy,
- *   the one in this request completely replaces it.
+ *   Calls the PutBucketPolicy API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Policy+ - (*required*, <tt>String</tt>) The bucket policy as a
  *       JSON document.
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1377,15 +1453,13 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method putBucketRequestPayment(params, callback)
- *   Sets the request payment configuration for a bucket. By default, the
- *   bucket owner pays for downloads from the bucket. This configuration
- *   parameter enables the bucket owner (only) to specify that the person
- *   requesting the download will be charged for the download.
+ *   Calls the PutBucketRequestPayment API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +RequestPaymentConfiguration+ - (*required*, <tt>Object</tt>)
  *       * +Payer+ - (*required*, <tt>String</tt>) Specifies who pays for
  *         the download and request fees.
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1398,13 +1472,14 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method putBucketTagging(params, callback)
- *   Sets the tags for a bucket.
+ *   Calls the PutBucketTagging API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Tagging+ - (*required*, <tt>Object</tt>)
  *       * +TagSet+ - (*required*, <tt>Array<Object></tt>)
  *         * +Key+ - (*required*, <tt>String</tt>) Name of the tag.
  *         * +Value+ - (*required*, <tt>String</tt>) Value of the tag.
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1417,8 +1492,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method putBucketVersioning(params, callback)
- *   Sets the versioning state of an existing bucket. To set the
- *   versioning state, you must be the bucket owner.
+ *   Calls the PutBucketVersioning API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +VersioningConfiguration+ - (*required*, <tt>Object</tt>)
@@ -1432,6 +1506,7 @@ AWS.S3 = inherit({})
  *     * +MFA+ - (<tt>String</tt>) The value is the concatenation of the
  *       authentication device''s serial number, a space, and the value
  *       displayed on your authentication device.
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1444,10 +1519,16 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method putBucketWebsite(params, callback)
- *   Set the website configuration for a bucket.
+ *   Calls the PutBucketWebsite API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +WebsiteConfiguration+ - (*required*, <tt>Object</tt>)
+ *       * +RedirectAllRequestsTo+ - (<tt>Object</tt>)
+ *         * +HostName+ - (*required*, <tt>String</tt>) Name of the host
+ *           where requests will be redirected.
+ *         * +Protocol+ - (<tt>String</tt>) Protocol to use (http, https)
+ *           when redirecting requests. The default is the protocol that
+ *           is used in the original request.
  *       * +IndexDocument+ - (<tt>Object</tt>)
  *         * +Suffix+ - (*required*, <tt>String</tt>) A suffix that is
  *           appended to a request that is for a directory on the website
@@ -1459,6 +1540,57 @@ AWS.S3 = inherit({})
  *       * +ErrorDocument+ - (<tt>Object</tt>)
  *         * +Key+ - (*required*, <tt>String</tt>) The object key name to
  *           use when a 4XX class error occurs.
+ *       * +RoutingRules+ - (<tt>Array<Object></tt>)
+ *         * +Condition+ - (<tt>Object</tt>) A container for describing a
+ *           condition that must be met for the specified redirect to
+ *           apply. For example, 1. If request is for pages in the /docs
+ *           folder, redirect to the /documents folder. 2. If request
+ *           results in HTTP error 4xx, redirect request to another host
+ *           where you might process the error.
+ *           * +KeyPrefixEquals+ - (<tt>String</tt>) The object key name
+ *             prefix when the redirect is applied. For example, to
+ *             redirect requests for ExamplePage.html, the key prefix
+ *             will be ExamplePage.html. To redirect request for all
+ *             pages with the prefix docs/, the key prefix will be /docs,
+ *             which identifies all objects in the docs/ folder. Required
+ *             when the parent element Condition is specified and sibling
+ *             HttpErrorCodeReturnedEquals is not specified. If both
+ *             conditions are specified, both must be true for the
+ *             redirect to be applied.
+ *           * +HttpErrorCodeReturnedEquals+ - (<tt>String</tt>) The HTTP
+ *             error code when the redirect is applied. In the event of
+ *             an error, if the error code equals this value, then the
+ *             specified redirect is applied. Required when parent
+ *             element Condition is specified and sibling KeyPrefixEquals
+ *             is not specified. If both are specified, then both must be
+ *             true for the redirect to be applied.
+ *         * +Redirect+ - (*required*, <tt>Object</tt>) Container for
+ *           redirect information. You can redirect requests to another
+ *           host, to another page, or with another protocol. In the
+ *           event of an error, you can can specify a different error
+ *           code to return.
+ *           * +ReplaceKeyPrefixWith+ - (<tt>String</tt>) The object key
+ *             prefix to use in the redirect request. For example, to
+ *             redirect requests for all pages with prefix docs/ (objects
+ *             in the docs/ folder) to documents/, you can set a
+ *             condition block with KeyPrefixEquals set to docs/ and in
+ *             the Redirect set ReplaceKeyPrefixWith to /documents. Not
+ *             required if one of the siblings is present. Can be present
+ *             only if ReplaceKeyWith is not provided.
+ *           * +ReplaceKeyWith+ - (<tt>String</tt>) The specific object
+ *             key to use in the redirect request. For example, redirect
+ *             request to error.html. Not required if one of the sibling
+ *             is present. Can be present only if ReplaceKeyPrefixWith is
+ *             not provided.
+ *           * +HttpRedirectCode+ - (<tt>String</tt>) The HTTP redirect
+ *             code to use on the response. Not required if one of the
+ *             siblings is present.
+ *         * +HostName+ - (*required*, <tt>String</tt>) Name of the host
+ *           where requests will be redirected.
+ *         * +Protocol+ - (<tt>String</tt>) Protocol to use (http, https)
+ *           when redirecting requests. The default is the protocol that
+ *           is used in the original request.
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1471,26 +1603,10 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method putObject(params, callback)
- *   Adds an object to a bucket.
+ *   Calls the PutObject API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +CacheControl+ - (<tt>String</tt>) Can be used to specify
- *       caching behavior along the request/reply chain.
- *     * +ContentDisposition+ - (<tt>String</tt>) Specifies
- *       presentational information for the object.
- *     * +ContentEncoding+ - (<tt>String</tt>) Specifies what content
- *       encodings have been applied to the object and thus what decoding
- *       mechanisms must be applied to obtain the media-type referenced
- *       by the Content-Type header field.
- *     * +ContentType+ - (<tt>String</tt>) A standard MIME type
- *       describing the format of the object data.
- *     * +Expires+ - (<tt>Date</tt>) The date and time at which the
- *       object is no longer cacheable.
- *     * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
- *       configured as a website, redirects requests for this object to
- *       another object in the same bucket or to an external URL. Amazon
- *       S3 stores the value of this header in the object metadata.
  *     * +Body+ - (<tt>String</tt>)
  *     * +StorageClass+ - (<tt>String</tt>) The type of storage to use
  *       for the object. Defaults to 'STANDARD'.
@@ -1503,6 +1619,24 @@ AWS.S3 = inherit({})
  *       ACL for the applicable object.
  *     * +GrantFullControl+ - (<tt>String</tt>) Gives the grantee READ,
  *       READ_ACP, and WRITE_ACP permissions on the object.
+ *     * +CacheControl+ - (<tt>String</tt>) Specifies caching behavior
+ *       along the request/reply chain.
+ *     * +ContentDisposition+ - (<tt>String</tt>) Specifies
+ *       presentational information for the object.
+ *     * +ContentEncoding+ - (<tt>String</tt>) Specifies what content
+ *       encodings have been applied to the object and thus what decoding
+ *       mechanisms must be applied to obtain the media-type referenced
+ *       by the Content-Type header field.
+ *     * +ContentLanguage+ - (<tt>String</tt>) The language the content
+ *       is in.
+ *     * +ContentType+ - (<tt>String</tt>) A standard MIME type
+ *       describing the format of the object data.
+ *     * +Expires+ - (<tt>Date</tt>) The date and time at which the
+ *       object is no longer cacheable.
+ *     * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
+ *       configured as a website, redirects requests for this object to
+ *       another object in the same bucket or to an external URL. Amazon
+ *       S3 stores the value of this header in the object metadata.
  *     * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
  *       encryption algorithm used when storing this object in S3.
  *     * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
@@ -1527,8 +1661,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method putObjectAcl(params, callback)
- *   uses the acl subresource to set the access control list (ACL)
- *   permissions for an object that already exists in a bucket
+ *   Calls the PutObjectAcl API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
@@ -1559,6 +1692,7 @@ AWS.S3 = inherit({})
  *       ACL for the applicable bucket.
  *     * +GrantFullControl+ - (<tt>String</tt>) Allows grantee the read,
  *       write, read ACP, and write ACP permissions on the bucket.
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1571,7 +1705,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method restoreObject(params, callback)
- *   Restores an archived copy of an object back into Amazon S3
+ *   Calls the RestoreObject API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
@@ -1590,7 +1724,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method uploadPart(params, callback)
- *   Uploads a part in a multipart upload.
+ *   Calls the UploadPart API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
@@ -1615,8 +1749,7 @@ AWS.S3 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method uploadPartCopy(params, callback)
- *   Uploads a part by copying data from an existing object as data
- *   source.
+ *   Calls the UploadPartCopy API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)

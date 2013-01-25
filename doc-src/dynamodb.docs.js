@@ -51,8 +51,7 @@ AWS.DynamoDB = inherit({})
  * for each API operation on the service.
  *
  * @!method batchGetItem(params, callback)
- *   Retrieves the attributes for multiple items from multiple tables
- *   using their primary keys.
+ *   Calls the BatchGetItem API operation.
  *   @param params [Object]
  *     * +RequestItems+ - (*required*, <tt>Object<Object></tt>)
  *       * +Keys+ - (*required*, <tt>Array<Object></tt>)
@@ -160,8 +159,7 @@ AWS.DynamoDB = inherit({})
  *     subsequent event callback registration.
  *
  * @!method batchWriteItem(params, callback)
- *   Allows to execute a batch of Put and/or Delete Requests for many
- *   tables in a single call. A total of 25 requests are allowed.
+ *   Calls the BatchWriteItem API operation.
  *   @param params [Object]
  *     * +RequestItems+ - (*required*, <tt>Object<Array<Object>></tt>) A
  *       map of table name to list-of-write-requests. Used as input to
@@ -306,7 +304,7 @@ AWS.DynamoDB = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createTable(params, callback)
- *   Adds a new table to your account.
+ *   Calls the CreateTable API operation.
  *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table you want to create. Allowed characters are a-z, A-Z, 0-9,
@@ -387,7 +385,7 @@ AWS.DynamoDB = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteItem(params, callback)
- *   Deletes a single item in a table by primary key.
+ *   Calls the DeleteItem API operation.
  *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table in which you want to delete an item. Allowed characters
@@ -479,7 +477,7 @@ AWS.DynamoDB = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteTable(params, callback)
- *   Deletes a table and all of its items.
+ *   Calls the DeleteTable API operation.
  *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table you want to delete. Allowed characters are a-z, A-Z, 0-9,
@@ -530,8 +528,7 @@ AWS.DynamoDB = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeTable(params, callback)
- *   Retrieves information about the table, including the current status
- *   of the table, the primary key schema and when the table was created.
+ *   Calls the DescribeTable API operation.
  *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table you want to describe. Allowed characters are a-z, A-Z,
@@ -582,8 +579,7 @@ AWS.DynamoDB = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getItem(params, callback)
- *   Retrieves a set of Attributes for an item that matches the primary
- *   key.
+ *   Calls the GetItem API operation.
  *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table in which you want to get an item. Allowed characters are
@@ -655,8 +651,7 @@ AWS.DynamoDB = inherit({})
  *     subsequent event callback registration.
  *
  * @!method listTables(params, callback)
- *   Retrieves a paginated list of table names created by the AWS Account
- *   of the caller in the AWS Region (e.g. us-east-1).
+ *   Calls the ListTables API operation.
  *   @param params [Object]
  *     * +ExclusiveStartTableName+ - (<tt>String</tt>) The name of the
  *       table that starts the list. If you already ran a ListTables
@@ -682,8 +677,7 @@ AWS.DynamoDB = inherit({})
  *     subsequent event callback registration.
  *
  * @!method putItem(params, callback)
- *   Creates a new item, or replaces an old item with a new item
- *   (including all the attributes).
+ *   Calls the PutItem API operation.
  *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table in which you want to put an item. Allowed characters are
@@ -752,8 +746,7 @@ AWS.DynamoDB = inherit({})
  *     subsequent event callback registration.
  *
  * @!method query(params, callback)
- *   Gets the values of one or more items and its attributes by primary
- *   key (composite primary key, only).
+ *   Calls the Query API operation.
  *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table in which you want to query. Allowed characters are a-z,
@@ -908,8 +901,7 @@ AWS.DynamoDB = inherit({})
  *     subsequent event callback registration.
  *
  * @!method scan(params, callback)
- *   Retrieves one or more items and its attributes by performing a full
- *   scan of a table.
+ *   Calls the Scan API operation.
  *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table in which you want to scan. Allowed characters are a-z,
@@ -1047,7 +1039,7 @@ AWS.DynamoDB = inherit({})
  *     subsequent event callback registration.
  *
  * @!method updateItem(params, callback)
- *   Edits an existing item's attributes.
+ *   Calls the UpdateItem API operation.
  *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table in which you want to update an item. Allowed characters
@@ -1154,7 +1146,7 @@ AWS.DynamoDB = inherit({})
  *     subsequent event callback registration.
  *
  * @!method updateTable(params, callback)
- *   Updates the provisioned throughput for the given table.
+ *   Calls the UpdateTable API operation.
  *   @param params [Object]
  *     * +TableName+ - (*required*, <tt>String</tt>) The name of the
  *       table you want to update. Allowed characters are a-z, A-Z, 0-9,

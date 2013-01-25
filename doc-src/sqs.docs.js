@@ -51,8 +51,7 @@ AWS.SQS = inherit({})
  * for each API operation on the service.
  *
  * @!method addPermission(params, callback)
- *   The AddPermission action adds a permission to a queue for a specific
- *   principal. This allows for sharing access to the queue.
+ *   Calls the AddPermission API operation.
  *   @param params [Object]
  *     * +QueueUrl+ - (*required*, <tt>String</tt>) The URL of the SQS
  *       queue to take action on.
@@ -79,13 +78,7 @@ AWS.SQS = inherit({})
  *     subsequent event callback registration.
  *
  * @!method changeMessageVisibility(params, callback)
- *   The ChangeMessageVisibility action changes the visibility timeout of
- *   a specified message in a queue to a new value. The maximum allowed
- *   timeout value you can set the value to is 12 hours. This means you
- *   can't extend the timeout of a message in an existing queue to more
- *   than a total visibility timeout of 12 hours. (For more information
- *   visibility timeout, see Visibility Timeout in the Amazon SQS
- *   Developer Guide.)
+ *   Calls the ChangeMessageVisibility API operation.
  *   @param params [Object]
  *     * +QueueUrl+ - (*required*, <tt>String</tt>) The URL of the SQS
  *       queue to take action on.
@@ -106,10 +99,7 @@ AWS.SQS = inherit({})
  *     subsequent event callback registration.
  *
  * @!method changeMessageVisibilityBatch(params, callback)
- *   This is a batch version of ChangeMessageVisibility. It takes
- *   multiple receipt handles and performs the operation on each of the
- *   them. The result of the operation on each message is reported
- *   individually in the response.
+ *   Calls the ChangeMessageVisibilityBatch API operation.
  *   @param params [Object]
  *     * +QueueUrl+ - (*required*, <tt>String</tt>) The URL of the SQS
  *       queue to take action on.
@@ -151,14 +141,11 @@ AWS.SQS = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createQueue(params, callback)
- *   The CreateQueue action creates a new queue, or returns the URL of an
- *   existing one. When you request CreateQueue, you provide a name for
- *   the queue. To successfully create a new queue, you must provide a
- *   name that is unique within the scope of your own queues.
+ *   Calls the CreateQueue API operation.
  *   @param params [Object]
  *     * +QueueName+ - (*required*, <tt>String</tt>) The name for the
  *       queue to be created.
- *     * +attributes+ - (<tt>Object<String></tt>) A map of attributes
+ *     * +Attributes+ - (<tt>Object<String></tt>) A map of attributes
  *       with their corresponding values.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -175,10 +162,7 @@ AWS.SQS = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteMessage(params, callback)
- *   The DeleteMessage action unconditionally removes the specified
- *   message from the specified queue. Even if the message is locked by
- *   another reader due to the visibility timeout setting, it is still
- *   deleted from the queue.
+ *   Calls the DeleteMessage API operation.
  *   @param params [Object]
  *     * +QueueUrl+ - (*required*, <tt>String</tt>) The URL of the SQS
  *       queue to take action on.
@@ -196,10 +180,7 @@ AWS.SQS = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteMessageBatch(params, callback)
- *   This is a batch version of DeleteMessage. It takes multiple receipt
- *   handles and deletes each one of the messages. The result of the
- *   delete operation on each message is reported individually in the
- *   response.
+ *   Calls the DeleteMessageBatch API operation.
  *   @param params [Object]
  *     * +QueueUrl+ - (*required*, <tt>String</tt>) The URL of the SQS
  *       queue to take action on.
@@ -238,9 +219,7 @@ AWS.SQS = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteQueue(params, callback)
- *   This action unconditionally deletes the queue specified by the queue
- *   URL. Use this operation WITH CARE! The queue is deleted even if it
- *   is NOT empty.
+ *   Calls the DeleteQueue API operation.
  *   @param params [Object]
  *     * +QueueUrl+ - (*required*, <tt>String</tt>) The URL of the SQS
  *       queue to take action on.
@@ -256,33 +235,11 @@ AWS.SQS = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getQueueAttributes(params, callback)
- *   Gets attributes for the specified queue. The following attributes
- *   are supported: All - returns all values. ApproximateNumberOfMessages
- *   - returns the approximate number of visible messages in a queue. For
- *   more information, see Resources Required to Process Messages in the
- *   Amazon SQS Developer Guide. ApproximateNumberOfMessagesNotVisible -
- *   returns the approximate number of messages that are not timed-out
- *   and not deleted. For more information, see Resources Required to
- *   Process Messages in the Amazon SQS Developer Guide.
- *   VisibilityTimeout - returns the visibility timeout for the queue.
- *   For more information about visibility timeout, see Visibility
- *   Timeout in the Amazon SQS Developer Guide. CreatedTimestamp -
- *   returns the time when the queue was created (epoch time in seconds).
- *   LastModifiedTimestamp - returns the time when the queue was last
- *   changed (epoch time in seconds). Policy - returns the queue's
- *   policy. MaximumMessageSize - returns the limit of how many bytes a
- *   message can contain before Amazon SQS rejects it.
- *   MessageRetentionPeriod - returns the number of seconds Amazon SQS
- *   retains a message. QueueArn - returns the queue's Amazon resource
- *   name (ARN). ApproximateNumberOfMessagesDelayed - returns the
- *   approximate number of messages that are pending to be added to the
- *   queue. DelaySeconds - returns the default delay on the queue in
- *   seconds. ReceiveMessageWaitTimeSeconds - returns the time for which
- *   a ReceiveMessage call will wait for a message to arrive.
+ *   Calls the GetQueueAttributes API operation.
  *   @param params [Object]
  *     * +QueueUrl+ - (*required*, <tt>String</tt>) The URL of the SQS
  *       queue to take action on.
- *     * +attributeNames+ - (<tt>Array<String></tt>) A list of attributes
+ *     * +AttributeNames+ - (<tt>Array<String></tt>) A list of attributes
  *       to retrieve information for.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -293,13 +250,13 @@ AWS.SQS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
- *       * +attributes+ - (<tt>Object<String></tt>) A map of attributes to
+ *       * +Attributes+ - (<tt>Object<String></tt>) A map of attributes to
  *         the respective values.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getQueueUrl(params, callback)
- *   The GetQueueUrl action returns the URL of an existing queue.
+ *   Calls the GetQueueUrl API operation.
  *   @param params [Object]
  *     * +QueueName+ - (*required*, <tt>String</tt>) The name of the
  *       queue whose URL must be fetched.
@@ -319,7 +276,7 @@ AWS.SQS = inherit({})
  *     subsequent event callback registration.
  *
  * @!method listQueues(params, callback)
- *   Returns a list of your queues.
+ *   Calls the ListQueues API operation.
  *   @param params [Object]
  *     * +QueueNamePrefix+ - (<tt>String</tt>) A string to use for
  *       filtering the list results. Only those queues whose name begins
@@ -339,14 +296,7 @@ AWS.SQS = inherit({})
  *     subsequent event callback registration.
  *
  * @!method receiveMessage(params, callback)
- *   Retrieves one or more messages from the specified queue, including
- *   the message body and message ID of each message. Messages returned
- *   by this action stay in the queue until you delete them. However,
- *   once a message is returned to a ReceiveMessage request, it is not
- *   returned on subsequent ReceiveMessage requests for the duration of
- *   the VisibilityTimeout. If you do not specify a VisibilityTimeout in
- *   the request, the overall visibility timeout for the queue is used
- *   for the returned messages.
+ *   Calls the ReceiveMessage API operation.
  *   @param params [Object]
  *     * +QueueUrl+ - (*required*, <tt>String</tt>) The URL of the SQS
  *       queue to take action on.
@@ -357,7 +307,8 @@ AWS.SQS = inherit({})
  *       SentTimestamp].
  *     * +MaxNumberOfMessages+ - (<tt>Integer</tt>) The maximum number of
  *       messages to return. Amazon SQS never returns more messages than
- *       this value but may return fewer.
+ *       this value but may return fewer. All of the messages are not
+ *       necessarily returned.
  *     * +VisibilityTimeout+ - (<tt>Integer</tt>) The duration (in
  *       seconds) that the received messages are hidden from subsequent
  *       retrieve requests after being retrieved by a ReceiveMessage
@@ -375,7 +326,7 @@ AWS.SQS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
- *       * +messages+ - (<tt>Array<Object></tt>) A list of messages.
+ *       * +Messages+ - (<tt>Array<Object></tt>) A list of messages.
  *         * +MessageId+ - (<tt>String</tt>)
  *         * +ReceiptHandle+ - (<tt>String</tt>)
  *         * +MD5OfBody+ - (<tt>String</tt>)
@@ -385,9 +336,7 @@ AWS.SQS = inherit({})
  *     subsequent event callback registration.
  *
  * @!method removePermission(params, callback)
- *   The RemovePermission action revokes any permissions in the queue
- *   policy that matches the specified Label parameter. Only the owner of
- *   the queue can remove permissions.
+ *   Calls the RemovePermission API operation.
  *   @param params [Object]
  *     * +QueueUrl+ - (*required*, <tt>String</tt>) The URL of the SQS
  *       queue to take action on.
@@ -406,7 +355,7 @@ AWS.SQS = inherit({})
  *     subsequent event callback registration.
  *
  * @!method sendMessage(params, callback)
- *   The SendMessage action delivers a message to the specified queue.
+ *   Calls the SendMessage API operation.
  *   @param params [Object]
  *     * +QueueUrl+ - (*required*, <tt>String</tt>) The URL of the SQS
  *       queue to take action on.
@@ -434,9 +383,7 @@ AWS.SQS = inherit({})
  *     subsequent event callback registration.
  *
  * @!method sendMessageBatch(params, callback)
- *   This is a batch version of SendMessage. It takes multiple messages
- *   and adds each of them to the queue. The result of each add operation
- *   is reported individually in the response.
+ *   Calls the SendMessageBatch API operation.
  *   @param params [Object]
  *     * +QueueUrl+ - (*required*, <tt>String</tt>) The URL of the SQS
  *       queue to take action on.
@@ -486,13 +433,11 @@ AWS.SQS = inherit({})
  *     subsequent event callback registration.
  *
  * @!method setQueueAttributes(params, callback)
- *   Sets the value of one or more queue attributes. Valid attributes
- *   that can be set are [VisibilityTimeout, Policy, MaximumMessageSize,
- *   MessageRetentionPeriod, ReceiveMessageWaitTimeSeconds].
+ *   Calls the SetQueueAttributes API operation.
  *   @param params [Object]
  *     * +QueueUrl+ - (*required*, <tt>String</tt>) The URL of the SQS
  *       queue to take action on.
- *     * +attributes+ - (*required*, <tt>Object<String></tt>) A map of
+ *     * +Attributes+ - (*required*, <tt>Object<String></tt>) A map of
  *       attributes to set.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a

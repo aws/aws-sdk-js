@@ -51,8 +51,7 @@ AWS.SES = inherit({})
  * for each API operation on the service.
  *
  * @!method deleteIdentity(params, callback)
- *   Deletes the specified identity (email address or domain) from the
- *   list of verified identities.
+ *   Calls the DeleteIdentity API operation.
  *   @param params [Object]
  *     * +Identity+ - (*required*, <tt>String</tt>) The identity to be
  *       removed from the list of identities for the AWS Account.
@@ -68,8 +67,7 @@ AWS.SES = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteVerifiedEmailAddress(params, callback)
- *   Deletes the specified email address from the list of verified
- *   addresses.
+ *   Calls the DeleteVerifiedEmailAddress API operation.
  *   @param params [Object]
  *     * +EmailAddress+ - (*required*, <tt>String</tt>) An email address
  *       to be removed from the list of verified addresses.
@@ -85,8 +83,7 @@ AWS.SES = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getIdentityDkimAttributes(params, callback)
- *   Returns the DNS records, or tokens, that must be present in order
- *   for Easy DKIM to sign outgoing email messages.
+ *   Calls the GetIdentityDkimAttributes API operation.
  *   @param params [Object]
  *     * +Identities+ - (*required*, <tt>Array<String></tt>) A list of
  *       one or more verified identities - email addresses, domains, or
@@ -121,10 +118,7 @@ AWS.SES = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getIdentityNotificationAttributes(params, callback)
- *   Given a list of verified identities (email addresses and/or
- *   domains), returns a structure describing identity notification
- *   attributes. For more information about feedback notification, see
- *   the Amazon SES Developer Guide.
+ *   Calls the GetIdentityNotificationAttributes API operation.
  *   @param params [Object]
  *     * +Identities+ - (*required*, <tt>Array<String></tt>) A list of
  *       one or more identities.
@@ -156,9 +150,7 @@ AWS.SES = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getIdentityVerificationAttributes(params, callback)
- *   Given a list of identities (email addresses and/or domains), returns
- *   the verification status and (for domain identities) the verification
- *   token for each identity.
+ *   Calls the GetIdentityVerificationAttributes API operation.
  *   @param params [Object]
  *     * +Identities+ - (*required*, <tt>Array<String></tt>) A list of
  *       identities.
@@ -182,7 +174,7 @@ AWS.SES = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getSendQuota(params, callback)
- *   Returns the user's current sending limits.
+ *   Calls the GetSendQuota API operation.
  *   @param params [Object]
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -203,8 +195,7 @@ AWS.SES = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getSendStatistics(params, callback)
- *   Returns the user's sending statistics. The result is a list of data
- *   points, representing the last two weeks of sending activity.
+ *   Calls the GetSendStatistics API operation.
  *   @param params [Object]
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -230,9 +221,7 @@ AWS.SES = inherit({})
  *     subsequent event callback registration.
  *
  * @!method listIdentities(params, callback)
- *   Returns a list containing all of the identities (email addresses and
- *   domains) for a specific AWS Account, regardless of verification
- *   status.
+ *   Calls the ListIdentities API operation.
  *   @param params [Object]
  *     * +IdentityType+ - (<tt>String</tt>) The type of the identities to
  *       list. Possible values are "EmailAddress" and "Domain". If this
@@ -256,8 +245,7 @@ AWS.SES = inherit({})
  *     subsequent event callback registration.
  *
  * @!method listVerifiedEmailAddresses(params, callback)
- *   Returns a list containing all of the email addresses that have been
- *   verified.
+ *   Calls the ListVerifiedEmailAddresses API operation.
  *   @param params [Object]
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -274,8 +262,7 @@ AWS.SES = inherit({})
  *     subsequent event callback registration.
  *
  * @!method sendEmail(params, callback)
- *   Composes an email message based on input data, and then immediately
- *   queues the message for sending.
+ *   Calls the SendEmail API operation.
  *   @param params [Object]
  *     * +Source+ - (*required*, <tt>String</tt>) The identity's email
  *       address.
@@ -336,21 +323,29 @@ AWS.SES = inherit({})
  *     subsequent event callback registration.
  *
  * @!method sendRawEmail(params, callback)
- *   Sends an email message, with header and content specified by the
- *   client. The SendRawEmail action is useful for sending multipart MIME
- *   emails. The raw text of the message must comply with Internet email
- *   standards; otherwise, the message cannot be sent.
+ *   Calls the SendRawEmail API operation.
  *   @param params [Object]
- *     * +Source+ - (<tt>String</tt>) The identity's email address.
+ *     * +Source+ - (<tt>String</tt>) The identity's email address. If
+ *       you specify the Source parameter, then bounce notifications and
+ *       complaints will be sent to this email address. This takes
+ *       precedence over any Return-Path header that you might include in
+ *       the raw text of the message.
  *     * +Destinations+ - (<tt>Array<String></tt>) A list of destinations
  *       for the message.
  *     * +RawMessage+ - (*required*, <tt>Object</tt>) The raw text of the
  *       message. The client is responsible for ensuring the following:
+ *       Message must contain a header and a body, separated by a blank
+ *       line. All required header fields must be present. Each part of a
+ *       multipart MIME message must be formatted properly. MIME content
+ *       types must be among those supported by Amazon SES. Refer to the
+ *       Amazon SES Developer Guide for more details. Content must be
+ *       base64-encoded, if MIME requires it.
  *       * +Data+ - (*required*, <tt>Base64 Encoded Data</tt>) The raw
  *         data of the message. The client must ensure that the message
  *         format complies with Internet email standards regarding email
  *         header fields, MIME types, MIME encoding, and base64 encoding
- *         (if necessary).
+ *         (if necessary). For more information, go to theAmazon SES
+ *         Developer Guide.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -366,8 +361,7 @@ AWS.SES = inherit({})
  *     subsequent event callback registration.
  *
  * @!method setIdentityDkimEnabled(params, callback)
- *   Enables or disables Easy DKIM signing of email sent from an
- *   identity:
+ *   Calls the SetIdentityDkimEnabled API operation.
  *   @param params [Object]
  *     * +Identity+ - (*required*, <tt>String</tt>) The identity for
  *       which DKIM signing should be enabled or disabled.
@@ -386,11 +380,7 @@ AWS.SES = inherit({})
  *     subsequent event callback registration.
  *
  * @!method setIdentityFeedbackForwardingEnabled(params, callback)
- *   Given an identity (email address or domain), enables or disables
- *   whether Amazon SES forwards feedback notifications as email.
- *   Feedback forwarding may only be disabled when both complaint and
- *   bounce topics are set. For more information about feedback
- *   notification, see the Amazon SES Developer Guide.
+ *   Calls the SetIdentityFeedbackForwardingEnabled API operation.
  *   @param params [Object]
  *     * +Identity+ - (*required*, <tt>String</tt>) The identity for
  *       which to set feedback notification forwarding. Examples:
@@ -415,12 +405,7 @@ AWS.SES = inherit({})
  *     subsequent event callback registration.
  *
  * @!method setIdentityNotificationTopic(params, callback)
- *   Given an identity (email address or domain), sets the Amazon SNS
- *   topic to which Amazon SES will publish bounce and complaint
- *   notifications for emails sent with that identity as the Source.
- *   Publishing to topics may only be disabled when feedback forwarding
- *   is enabled. For more information about feedback notification, see
- *   the Amazon SES Developer Guide.
+ *   Calls the SetIdentityNotificationTopic API operation.
  *   @param params [Object]
  *     * +Identity+ - (*required*, <tt>String</tt>) The identity for
  *       which the topic will be set. Examples: user@example.com,
@@ -444,13 +429,7 @@ AWS.SES = inherit({})
  *     subsequent event callback registration.
  *
  * @!method verifyDomainDkim(params, callback)
- *   Returns a set of DNS records, or tokens, that must be published in
- *   the domain name's DNS to complete the DKIM verification process.
- *   These tokens are DNS CNAME records that point to DKIM public keys
- *   hosted by Amazon SES. To complete the DKIM verification process,
- *   these tokens must be published in the domain's DNS. The tokens must
- *   remain published in order for Easy DKIM signing to function
- *   correctly.
+ *   Calls the VerifyDomainDkim API operation.
  *   @param params [Object]
  *     * +Domain+ - (*required*, <tt>String</tt>) The name of the domain
  *       to be verified for Easy DKIM signing.
@@ -473,7 +452,7 @@ AWS.SES = inherit({})
  *     subsequent event callback registration.
  *
  * @!method verifyDomainIdentity(params, callback)
- *   Verifies a domain.
+ *   Calls the VerifyDomainIdentity API operation.
  *   @param params [Object]
  *     * +Domain+ - (*required*, <tt>String</tt>) The domain to be
  *       verified.
@@ -493,8 +472,7 @@ AWS.SES = inherit({})
  *     subsequent event callback registration.
  *
  * @!method verifyEmailAddress(params, callback)
- *   Verifies an email address. This action causes a confirmation email
- *   message to be sent to the specified address.
+ *   Calls the VerifyEmailAddress API operation.
  *   @param params [Object]
  *     * +EmailAddress+ - (*required*, <tt>String</tt>) The email address
  *       to be verified.
@@ -510,8 +488,7 @@ AWS.SES = inherit({})
  *     subsequent event callback registration.
  *
  * @!method verifyEmailIdentity(params, callback)
- *   Verifies an email address. This action causes a confirmation email
- *   message to be sent to the specified address.
+ *   Calls the VerifyEmailIdentity API operation.
  *   @param params [Object]
  *     * +EmailAddress+ - (*required*, <tt>String</tt>) The email address
  *       to be verified.

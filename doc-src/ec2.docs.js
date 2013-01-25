@@ -51,8 +51,7 @@ AWS.EC2 = inherit({})
  * for each API operation on the service.
  *
  * @!method activateLicense(params, callback)
- *   Activates a specific number of licenses for a 90-day period.
- *   Activations can be done against a specific license ID.
+ *   Calls the ActivateLicense API operation.
  *   @param params [Object]
  *     * +LicenseId+ - (*required*, <tt>String</tt>) Specifies the ID for
  *       the specific license to activate against.
@@ -70,8 +69,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method allocateAddress(params, callback)
- *   The AllocateAddress operation acquires an elastic IP address for use
- *   with your account.
+ *   Calls the AllocateAddress API operation.
  *   @param params [Object]
  *     * +Domain+ - (<tt>String</tt>) Set to vpc to allocate the address
  *       to your VPC. By default, will allocate to EC2.
@@ -110,8 +108,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method associateAddress(params, callback)
- *   The AssociateAddress operation associates an elastic IP address with
- *   an instance.
+ *   Calls the AssociateAddress API operation.
  *   @param params [Object]
  *     * +InstanceId+ - (<tt>String</tt>) The instance to associate with
  *       the IP address.
@@ -137,15 +134,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method associateDhcpOptions(params, callback)
- *   Associates a set of DHCP options (that you've previously created)
- *   with the specified VPC. Or, associates the default DHCP options with
- *   the VPC. The default set consists of the standard EC2 host name, no
- *   domain name, no DNS server, no NTP server, and no NetBIOS server or
- *   node type. After you associate the options with the VPC, any
- *   existing instances and all new instances that you launch in that VPC
- *   use the options. For more information about the supported DHCP
- *   options and using them with Amazon VPC, go to Using DHCP Options in
- *   the Amazon Virtual Private Cloud Developer Guide.
+ *   Calls the AssociateDhcpOptions API operation.
  *   @param params [Object]
  *     * +DhcpOptionsId+ - (*required*, <tt>String</tt>) The ID of the
  *       DHCP options to associate with the VPC. Specify "default" to
@@ -164,12 +153,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method associateRouteTable(params, callback)
- *   Associates a subnet with a route table. The subnet and route table
- *   must be in the same VPC. This association causes traffic originating
- *   from the subnet to be routed according to the routes in the route
- *   table. The action returns an association ID, which you need if you
- *   want to disassociate the route table from the subnet later. A route
- *   table can be associated with multiple subnets.
+ *   Calls the AssociateRouteTable API operation.
  *   @param params [Object]
  *     * +SubnetId+ - (*required*, <tt>String</tt>) The ID of the subnet.
  *     * +RouteTableId+ - (*required*, <tt>String</tt>) The ID of the
@@ -188,9 +172,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method attachInternetGateway(params, callback)
- *   Attaches an Internet gateway to a VPC, enabling connectivity between
- *   the Internet and the VPC. For more information about your VPC and
- *   Internet gateway, go to the Amazon Virtual Private Cloud User Guide.
+ *   Calls the AttachInternetGateway API operation.
  *   @param params [Object]
  *     * +InternetGatewayId+ - (*required*, <tt>String</tt>) The ID of
  *       the Internet gateway to attach.
@@ -226,7 +208,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method attachVolume(params, callback)
- *   Attach a previously created volume to a running instance.
+ *   Calls the AttachVolume API operation.
  *   @param params [Object]
  *     * +VolumeId+ - (*required*, <tt>String</tt>) The ID of the Amazon
  *       EBS volume. The volume and instance must be within the same
@@ -253,15 +235,14 @@ AWS.EC2 = inherit({})
  *       * +State+ - (<tt>String</tt>)
  *       * +AttachTime+ - (<tt>Date</tt>) Timestamp when this attachment
  *         initiated.
- *       * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *       * +DeleteOnTermination+ - (<tt>Boolean</tt>) ` Whether this volume
+ *         will be deleted or not when the associated instance is
+ *         terminated.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method attachVpnGateway(params, callback)
- *   Attaches a VPN gateway to a VPC. This is the last step required to
- *   get your VPC fully connected to your data center before launching
- *   instances in it. For more information, go to Process for Using
- *   Amazon VPC in the Amazon Virtual Private Cloud Developer Guide.
+ *   Calls the AttachVpnGateway API operation.
  *   @param params [Object]
  *     * +VpnGatewayId+ - (*required*, <tt>String</tt>) The ID of the VPN
  *       gateway to attach to the VPC.
@@ -283,10 +264,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method authorizeSecurityGroupEgress(params, callback)
- *   This action applies only to security groups in a VPC; it's not
- *   supported for EC2 security groups. For information about Amazon
- *   Virtual Private Cloud and VPC security groups, go to the Amazon
- *   Virtual Private Cloud User Guide.
+ *   Calls the AuthorizeSecurityGroupEgress API operation.
  *   @param params [Object]
  *     * +GroupId+ - (*required*, <tt>String</tt>) ID of the VPC security
  *       group to modify.
@@ -302,7 +280,7 @@ AWS.EC2 = inherit({})
  *       way of authorizing permissions since it offers more flexibility
  *       and control.
  *       * +IpProtocol+ - (<tt>String</tt>) The IP protocol of this
- *         permission.
+ *         permission. Valid protocol values: tcp, udp, icmp
  *       * +FromPort+ - (<tt>Integer</tt>) Start of port range for the
  *         TCP and UDP protocols, or an ICMP type number. An ICMP type
  *         number of -1 indicates a wildcard (i.e., any ICMP type
@@ -334,8 +312,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method authorizeSecurityGroupIngress(params, callback)
- *   The AuthorizeSecurityGroupIngress operation adds permissions to a
- *   security group.
+ *   Calls the AuthorizeSecurityGroupIngress API operation.
  *   @param params [Object]
  *     * +GroupName+ - (<tt>String</tt>) Name of the standard (EC2)
  *       security group to modify. The group must belong to your account.
@@ -357,7 +334,7 @@ AWS.EC2 = inherit({})
  *       way of authorizing permissions since it offers more flexibility
  *       and control.
  *       * +IpProtocol+ - (<tt>String</tt>) The IP protocol of this
- *         permission.
+ *         permission. Valid protocol values: tcp, udp, icmp
  *       * +FromPort+ - (<tt>Integer</tt>) Start of port range for the
  *         TCP and UDP protocols, or an ICMP type number. An ICMP type
  *         number of -1 indicates a wildcard (i.e., any ICMP type
@@ -389,11 +366,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method bundleInstance(params, callback)
- *   The BundleInstance operation request that an instance is bundled the
- *   next time it boots. The bundling process creates a new image from a
- *   running instance and stores the AMI data in S3. Once bundled, the
- *   image must be registered in the normal way using the RegisterImage
- *   API.
+ *   Calls the BundleInstance API operation.
  *   @param params [Object]
  *     * +InstanceId+ - (*required*, <tt>String</tt>) The ID of the
  *       instance to bundle.
@@ -402,7 +375,9 @@ AWS.EC2 = inherit({})
  *         bundling a Windows instance.
  *         * +Bucket+ - (<tt>String</tt>) The bucket in which to store
  *           the AMI. You can specify a bucket that you already own or a
- *           new bucket that Amazon EC2 creates on your behalf.
+ *           new bucket that Amazon EC2 creates on your behalf. If you
+ *           specify a bucket that belongs to someone else, Amazon EC2
+ *           returns an error.
  *         * +Prefix+ - (<tt>String</tt>) The prefix to use when storing
  *           the AMI in S3.
  *         * +AWSAccessKeyId+ - (<tt>String</tt>) The Access Key ID of
@@ -435,7 +410,9 @@ AWS.EC2 = inherit({})
  *             bundling a Windows instance.
  *             * +Bucket+ - (<tt>String</tt>) The bucket in which to store
  *               the AMI. You can specify a bucket that you already own or
- *               a new bucket that Amazon EC2 creates on your behalf.
+ *               a new bucket that Amazon EC2 creates on your behalf. If
+ *               you specify a bucket that belongs to someone else, Amazon
+ *               EC2 returns an error.
  *             * +Prefix+ - (<tt>String</tt>) The prefix to use when
  *               storing the AMI in S3.
  *             * +AWSAccessKeyId+ - (<tt>String</tt>) The Access Key ID of
@@ -455,11 +432,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method cancelBundleTask(params, callback)
- *   CancelBundleTask operation cancels a pending or in-progress bundling
- *   task. This is an asynchronous call and it make take a while for the
- *   task to be canceled. If a task is canceled while it is storing
- *   items, there may be parts of the incomplete AMI stored in S3. It is
- *   up to the caller to clean up these parts from S3.
+ *   Calls the CancelBundleTask API operation.
  *   @param params [Object]
  *     * +BundleId+ - (*required*, <tt>String</tt>) The ID of the bundle
  *       task to cancel.
@@ -486,7 +459,9 @@ AWS.EC2 = inherit({})
  *             bundling a Windows instance.
  *             * +Bucket+ - (<tt>String</tt>) The bucket in which to store
  *               the AMI. You can specify a bucket that you already own or
- *               a new bucket that Amazon EC2 creates on your behalf.
+ *               a new bucket that Amazon EC2 creates on your behalf. If
+ *               you specify a bucket that belongs to someone else, Amazon
+ *               EC2 returns an error.
  *             * +Prefix+ - (<tt>String</tt>) The prefix to use when
  *               storing the AMI in S3.
  *             * +AWSAccessKeyId+ - (<tt>String</tt>) The Access Key ID of
@@ -572,7 +547,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method cancelSpotInstanceRequests(params, callback)
- *   Cancels one or more Spot Instance requests.
+ *   Calls the CancelSpotInstanceRequests API operation.
  *   @param params [Object]
  *     * +SpotInstanceRequestIds+ - (*required*, <tt>Array<String></tt>)
  *       Specifies the ID of the Spot Instance request.
@@ -592,9 +567,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method confirmProductInstance(params, callback)
- *   The ConfirmProductInstance operation returns true if the specified
- *   product code is attached to the specified instance. The operation
- *   returns false if the product code is not attached to the instance.
+ *   Calls the ConfirmProductInstance API operation.
  *   @param params [Object]
  *     * +ProductCode+ - (*required*, <tt>String</tt>) The product code
  *       to confirm.
@@ -634,14 +607,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createCustomerGateway(params, callback)
- *   Provides information to AWS about your customer gateway device. The
- *   customer gateway is the appliance at your end of the VPN connection
- *   (compared to the VPN gateway, which is the device at the AWS side of
- *   the VPN connection). You can have a single active customer gateway
- *   per AWS account (active means that you've created a VPN connection
- *   to use with the customer gateway). AWS might delete any customer
- *   gateway that you create with this operation if you leave it inactive
- *   for an extended period of time.
+ *   Calls the CreateCustomerGateway API operation.
  *   @param params [Object]
  *     * +Type+ - (*required*, <tt>String</tt>) The type of VPN
  *       connection this customer gateway supports.
@@ -680,12 +646,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createDhcpOptions(params, callback)
- *   Creates a set of DHCP options that you can then associate with one
- *   or more VPCs, causing all existing and new instances that you launch
- *   in those VPCs to use the set of DHCP options. The following table
- *   lists the individual DHCP options you can specify. For more
- *   information about the options, go to
- *   http://www.ietf.org/rfc/rfc2132.txt
+ *   Calls the CreateDhcpOptions API operation.
  *   @param params [Object]
  *     * +DhcpConfigurations+ - (*required*, <tt>Array<Object></tt>) A
  *       set of one or more DHCP configurations.
@@ -719,11 +680,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createImage(params, callback)
- *   Creates an Amazon EBS-backed AMI from a "running" or "stopped"
- *   instance. AMIs that use an Amazon EBS root device boot faster than
- *   AMIs that use instance stores. They can be up to 1 TiB in size, use
- *   storage that persists on instance failure, and can be stopped and
- *   started.
+ *   Calls the CreateImage API operation.
  *   @param params [Object]
  *     * +InstanceId+ - (*required*, <tt>String</tt>) The ID of the
  *       instance from which to create the new image.
@@ -805,10 +762,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createInternetGateway(params, callback)
- *   Creates a new Internet gateway in your AWS account. After creating
- *   the Internet gateway, you then attach it to a VPC using
- *   AttachInternetGateway. For more information about your VPC and
- *   Internet gateway, go to Amazon Virtual Private Cloud User Guide.
+ *   Calls the CreateInternetGateway API operation.
  *   @param params [Object]
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -831,9 +785,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createKeyPair(params, callback)
- *   The CreateKeyPair operation creates a new 2048 bit RSA key pair and
- *   returns a unique ID that can be used to reference this key pair when
- *   launching new instances. For more information, see RunInstances.
+ *   Calls the CreateKeyPair API operation.
  *   @param params [Object]
  *     * +KeyName+ - (*required*, <tt>String</tt>) The unique name for
  *       the new key pair.
@@ -856,10 +808,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createNetworkAcl(params, callback)
- *   Creates a new network ACL in a VPC. Network ACLs provide an optional
- *   layer of security (on top of security groups) for the instances in
- *   your VPC. For more information about network ACLs, go to Network
- *   ACLs in the Amazon Virtual Private Cloud User Guide.
+ *   Calls the CreateNetworkAcl API operation.
  *   @param params [Object]
  *     * +VpcId+ - (*required*, <tt>String</tt>) The ID of the VPC where
  *       the network ACL will be created.
@@ -905,12 +854,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createNetworkAclEntry(params, callback)
- *   Creates an entry (i.e., rule) in a network ACL with a rule number
- *   you specify. Each network ACL has a set of numbered ingress rules
- *   and a separate set of numbered egress rules. When determining
- *   whether a packet should be allowed in or out of a subnet associated
- *   with the ACL, Amazon VPC processes the entries in the ACL according
- *   to the rule numbers, in ascending order.
+ *   Calls the CreateNetworkAclEntry API operation.
  *   @param params [Object]
  *     * +NetworkAclId+ - (*required*, <tt>String</tt>) ID of the ACL
  *       where the entry will be created.
@@ -1015,9 +959,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createPlacementGroup(params, callback)
- *   Creates a PlacementGroup into which multiple Amazon EC2 instances
- *   can be launched. Users must give the group a name unique within the
- *   scope of the user account.
+ *   Calls the CreatePlacementGroup API operation.
  *   @param params [Object]
  *     * +GroupName+ - (*required*, <tt>String</tt>) The name of the
  *       PlacementGroup.
@@ -1076,9 +1018,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createRoute(params, callback)
- *   Creates a new route in a route table within a VPC. The route's
- *   target can be either a gateway attached to the VPC or a NAT instance
- *   in the VPC.
+ *   Calls the CreateRoute API operation.
  *   @param params [Object]
  *     * +RouteTableId+ - (*required*, <tt>String</tt>) The ID of the
  *       route table where the route will be added.
@@ -1105,10 +1045,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createRouteTable(params, callback)
- *   Creates a new route table within a VPC. After you create a new route
- *   table, you can add routes and associate the table with a subnet. For
- *   more information about route tables, go to Route Tables in the
- *   Amazon Virtual Private Cloud User Guide.
+ *   Calls the CreateRouteTable API operation.
  *   @param params [Object]
  *     * +VpcId+ - (*required*, <tt>String</tt>) The ID of the VPC where
  *       the route table will be created.
@@ -1150,7 +1087,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createSecurityGroup(params, callback)
- *   The CreateSecurityGroup operation creates a new security group.
+ *   Calls the CreateSecurityGroup API operation.
  *   @param params [Object]
  *     * +GroupName+ - (*required*, <tt>String</tt>) Name of the security
  *       group.
@@ -1171,8 +1108,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createSnapshot(params, callback)
- *   Create a snapshot of the volume identified by volume ID. A volume
- *   does not have to be detached at the time the snapshot is taken.
+ *   Calls the CreateSnapshot API operation.
  *   @param params [Object]
  *     * +VolumeId+ - (*required*, <tt>String</tt>) The ID of the volume
  *       from which to create the snapshot.
@@ -1212,8 +1148,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createSpotDatafeedSubscription(params, callback)
- *   Creates the data feed for Spot Instances, enabling you to view Spot
- *   Instance usage logs. You can create one data feed per account.
+ *   Calls the CreateSpotDatafeedSubscription API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>) The Amazon S3 bucket in
  *       which to store the Spot Instance datafeed.
@@ -1245,18 +1180,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createSubnet(params, callback)
- *   Creates a subnet in an existing VPC. You can create up to 20 subnets
- *   in a VPC. If you add more than one subnet to a VPC, they're set up
- *   in a star topology with a logical router in the middle. When you
- *   create each subnet, you provide the VPC ID and the CIDR block you
- *   want for the subnet. Once you create a subnet, you can't change its
- *   CIDR block. The subnet's CIDR block can be the same as the VPC's
- *   CIDR block (assuming you want only a single subnet in the VPC), or a
- *   subset of the VPC's CIDR block. If you create more than one subnet
- *   in a VPC, the subnets' CIDR blocks must not overlap. The smallest
- *   subnet (and VPC) you can create uses a /28 netmask (16 IP
- *   addresses), and the largest uses a /18 netmask (16,384 IP
- *   addresses).
+ *   Calls the CreateSubnet API operation.
  *   @param params [Object]
  *     * +VpcId+ - (*required*, <tt>String</tt>) The ID of the VPC to
  *       create the subnet in.
@@ -1283,7 +1207,8 @@ AWS.EC2 = inherit({})
  *         * +CidrBlock+ - (<tt>String</tt>) Specifies the CIDR block
  *           assigned to the subnet.
  *         * +AvailableIpAddressCount+ - (<tt>Integer</tt>) Specifies the
- *           number of unused IP addresses in the subnet.
+ *           number of unused IP addresses in the subnet. The IP addresses
+ *           for any stopped instances are considered unavailable.
  *         * +AvailabilityZone+ - (<tt>String</tt>) Specifies the
  *           Availability Zone the subnet is in.
  *         * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
@@ -1294,9 +1219,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createTags(params, callback)
- *   Adds or overwrites tags for the specified resources. Each resource
- *   can have a maximum of 10 tags. Each tag consists of a key-value
- *   pair. Tag keys must be unique per resource.
+ *   Calls the CreateTags API operation.
  *   @param params [Object]
  *     * +Resources+ - (*required*, <tt>Array<String></tt>) One or more
  *       IDs of resources to tag. This could be the ID of an AMI, an
@@ -1318,7 +1241,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createVolume(params, callback)
- *   Initializes an empty volume of a given size.
+ *   Calls the CreateVolume API operation.
  *   @param params [Object]
  *     * +Size+ - (<tt>Integer</tt>) The size of the volume, in
  *       gigabytes. Required if you are not creating a volume from a
@@ -1358,7 +1281,9 @@ AWS.EC2 = inherit({})
  *         * +State+ - (<tt>String</tt>)
  *         * +AttachTime+ - (<tt>Date</tt>) Timestamp when this attachment
  *           initiated.
- *         * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *         * +DeleteOnTermination+ - (<tt>Boolean</tt>) ` Whether this
+ *           volume will be deleted or not when the associated instance is
+ *           terminated.
  *       * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the Volume.
  *         * +Key+ - (<tt>String</tt>) The tag's key.
  *         * +Value+ - (<tt>String</tt>) The tag's value.
@@ -1368,11 +1293,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createVpc(params, callback)
- *   Creates a VPC with the CIDR block you specify. The smallest VPC you
- *   can create uses a /28 netmask (16 IP addresses), and the largest
- *   uses a /18 netmask (16,384 IP addresses). To help you decide how big
- *   to make your VPC, go to the topic about creating VPCs in the Amazon
- *   Virtual Private Cloud Developer Guide.
+ *   Calls the CreateVpc API operation.
  *   @param params [Object]
  *     * +CidrBlock+ - (*required*, <tt>String</tt>) A valid CIDR block.
  *     * +InstanceTenancy+ - (<tt>String</tt>) The allowed tenancy of
@@ -1407,8 +1328,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createVpnConnection(params, callback)
- *   Creates a new VPN connection between an existing VPN gateway and
- *   customer gateway. The only supported connection type is ipsec.1.
+ *   Calls the CreateVpnConnection API operation.
  *   @param params [Object]
  *     * +Type+ - (*required*, <tt>String</tt>) The type of VPN
  *       connection.
@@ -1435,7 +1355,10 @@ AWS.EC2 = inherit({})
  *           and deleted.
  *         * +CustomerGatewayConfiguration+ - (<tt>String</tt>) Contains
  *           configuration information in the native XML format for the VPN
- *           connection's customer gateway.
+ *           connection's customer gateway. This element is always present
+ *           in the CreateVpnConnection response; however, it's present in
+ *           the DescribeVpnConnections response only if the VPN connection
+ *           is in the pending or available state.
  *         * +Type+ - (<tt>String</tt>) Specifies the type of VPN
  *           connection.
  *         * +CustomerGatewayId+ - (<tt>String</tt>) Specifies ID of the
@@ -1478,9 +1401,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method createVpnGateway(params, callback)
- *   Creates a new VPN gateway. A VPN gateway is the VPC-side endpoint
- *   for your VPN connection. You can create a VPN gateway before
- *   creating the VPC itself.
+ *   Calls the CreateVpnGateway API operation.
  *   @param params [Object]
  *     * +Type+ - (*required*, <tt>String</tt>) The type of VPN
  *       connection this VPN gateway supports.
@@ -1517,9 +1438,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deactivateLicense(params, callback)
- *   Deactivates a specific number of licenses. Deactivations can be done
- *   against a specific license ID after they have persisted for at least
- *   a 90-day period.
+ *   Calls the DeactivateLicense API operation.
  *   @param params [Object]
  *     * +LicenseId+ - (*required*, <tt>String</tt>) Specifies the ID for
  *       the specific license to deactivate against.
@@ -1537,8 +1456,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteCustomerGateway(params, callback)
- *   Deletes a customer gateway. You must delete the VPN connection
- *   before deleting the customer gateway.
+ *   Calls the DeleteCustomerGateway API operation.
  *   @param params [Object]
  *     * +CustomerGatewayId+ - (*required*, <tt>String</tt>) The ID of
  *       the customer gateway to delete.
@@ -1554,10 +1472,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteDhcpOptions(params, callback)
- *   Deletes a set of DHCP options that you specify. Amazon VPC returns
- *   an error if the set of options you specify is currently associated
- *   with a VPC. You can disassociate the set of options by associating
- *   either a new set of options or the default options with the VPC.
+ *   Calls the DeleteDhcpOptions API operation.
  *   @param params [Object]
  *     * +DhcpOptionsId+ - (*required*, <tt>String</tt>) The ID of the
  *       DHCP options set to delete.
@@ -1573,9 +1488,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteInternetGateway(params, callback)
- *   Deletes an Internet gateway from your AWS account. The gateway must
- *   not be attached to a VPC. For more information about your VPC and
- *   Internet gateway, go to Amazon Virtual Private Cloud User Guide.
+ *   Calls the DeleteInternetGateway API operation.
  *   @param params [Object]
  *     * +InternetGatewayId+ - (*required*, <tt>String</tt>) The ID of
  *       the Internet gateway to be deleted.
@@ -1591,7 +1504,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteKeyPair(params, callback)
- *   The DeleteKeyPair operation deletes a key pair.
+ *   Calls the DeleteKeyPair API operation.
  *   @param params [Object]
  *     * +KeyName+ - (*required*, <tt>String</tt>) The name of the Amazon
  *       EC2 key pair to delete.
@@ -1607,10 +1520,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteNetworkAcl(params, callback)
- *   Deletes a network ACL from a VPC. The ACL must not have any subnets
- *   associated with it. You can't delete the default network ACL. For
- *   more information about network ACLs, go to Network ACLs in the
- *   Amazon Virtual Private Cloud User Guide.
+ *   Calls the DeleteNetworkAcl API operation.
  *   @param params [Object]
  *     * +NetworkAclId+ - (*required*, <tt>String</tt>) The ID of the
  *       network ACL to be deleted.
@@ -1626,9 +1536,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteNetworkAclEntry(params, callback)
- *   Deletes an ingress or egress entry (i.e., rule) from a network ACL.
- *   For more information about network ACLs, go to Network ACLs in the
- *   Amazon Virtual Private Cloud User Guide.
+ *   Calls the DeleteNetworkAclEntry API operation.
  *   @param params [Object]
  *     * +NetworkAclId+ - (*required*, <tt>String</tt>) ID of the network
  *       ACL.
@@ -1663,8 +1571,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deletePlacementGroup(params, callback)
- *   Deletes a PlacementGroup from a user's account. Terminate all Amazon
- *   EC2 instances in the placement group before deletion.
+ *   Calls the DeletePlacementGroup API operation.
  *   @param params [Object]
  *     * +GroupName+ - (*required*, <tt>String</tt>) The name of the
  *       PlacementGroup to delete.
@@ -1680,9 +1587,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteRoute(params, callback)
- *   Deletes a route from a route table in a VPC. For more information
- *   about route tables, go to Route Tables in the Amazon Virtual Private
- *   Cloud User Guide.
+ *   Calls the DeleteRoute API operation.
  *   @param params [Object]
  *     * +RouteTableId+ - (*required*, <tt>String</tt>) The ID of the
  *       route table where the route will be deleted.
@@ -1701,10 +1606,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteRouteTable(params, callback)
- *   Deletes a route table from a VPC. The route table must not be
- *   associated with a subnet. You can't delete the main route table. For
- *   more information about route tables, go to Route Tables in the
- *   Amazon Virtual Private Cloud User Guide.
+ *   Calls the DeleteRouteTable API operation.
  *   @param params [Object]
  *     * +RouteTableId+ - (*required*, <tt>String</tt>) The ID of the
  *       route table to be deleted.
@@ -1720,7 +1622,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteSecurityGroup(params, callback)
- *   The DeleteSecurityGroup operation deletes a security group.
+ *   Calls the DeleteSecurityGroup API operation.
  *   @param params [Object]
  *     * +GroupName+ - (<tt>String</tt>) The name of the Amazon EC2
  *       security group to delete.
@@ -1738,7 +1640,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteSnapshot(params, callback)
- *   Deletes the snapshot identified by snapshotId.
+ *   Calls the DeleteSnapshot API operation.
  *   @param params [Object]
  *     * +SnapshotId+ - (*required*, <tt>String</tt>) The ID of the
  *       snapshot to delete.
@@ -1754,7 +1656,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteSpotDatafeedSubscription(params, callback)
- *   Deletes the data feed for Spot Instances.
+ *   Calls the DeleteSpotDatafeedSubscription API operation.
  *   @param params [Object]
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -1768,9 +1670,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteSubnet(params, callback)
- *   Deletes a subnet from a VPC. You must terminate all running
- *   instances in the subnet before deleting it, otherwise Amazon VPC
- *   returns an error.
+ *   Calls the DeleteSubnet API operation.
  *   @param params [Object]
  *     * +SubnetId+ - (*required*, <tt>String</tt>) The ID of the subnet
  *       you want to delete.
@@ -1786,13 +1686,15 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteTags(params, callback)
- *   Deletes tags from the specified Amazon EC2 resources.
+ *   Calls the DeleteTags API operation.
  *   @param params [Object]
  *     * +Resources+ - (*required*, <tt>Array<String></tt>) A list of one
  *       or more resource IDs. This could be the ID of an AMI, an
  *       instance, an EBS volume, or snapshot, etc.
  *     * +Tags+ - (<tt>Array<Object></tt>) The tags to delete from the
  *       specified resources. Each tag item consists of a key-value pair.
+ *       If a tag is specified without a value, the tag and all of its
+ *       values are deleted.
  *       * +Key+ - (<tt>String</tt>) The tag's key.
  *       * +Value+ - (<tt>String</tt>) The tag's value.
  *   @callback callback function(err, data)
@@ -1807,8 +1709,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteVolume(params, callback)
- *   Deletes a previously created volume. Once successfully deleted, a
- *   new volume can be created with the same name.
+ *   Calls the DeleteVolume API operation.
  *   @param params [Object]
  *     * +VolumeId+ - (*required*, <tt>String</tt>) The ID of the EBS
  *       volume to delete.
@@ -1824,11 +1725,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteVpc(params, callback)
- *   Deletes a VPC. You must detach or delete all gateways or other
- *   objects that are dependent on the VPC first. For example, you must
- *   terminate all running instances, delete all VPC security groups
- *   (except the default), delete all the route tables (except the
- *   default), etc.
+ *   Calls the DeleteVpc API operation.
  *   @param params [Object]
  *     * +VpcId+ - (*required*, <tt>String</tt>) The ID of the VPC you
  *       want to delete.
@@ -1844,14 +1741,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteVpnConnection(params, callback)
- *   Deletes a VPN connection. Use this if you want to delete a VPC and
- *   all its associated components. Another reason to use this operation
- *   is if you believe the tunnel credentials for your VPN connection
- *   have been compromised. In that situation, you can delete the VPN
- *   connection and create a new one that has new keys, without needing
- *   to delete the VPC or VPN gateway. If you create a new VPN
- *   connection, you must reconfigure the customer gateway using the new
- *   configuration information returned with the new VPN connection ID.
+ *   Calls the DeleteVpnConnection API operation.
  *   @param params [Object]
  *     * +VpnConnectionId+ - (*required*, <tt>String</tt>) The ID of the
  *       VPN connection to delete
@@ -1883,12 +1773,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deleteVpnGateway(params, callback)
- *   Deletes a VPN gateway. Use this when you want to delete a VPC and
- *   all its associated components because you no longer need them. We
- *   recommend that before you delete a VPN gateway, you detach it from
- *   the VPC and delete the VPN connection. Note that you don't need to
- *   delete the VPN gateway if you just want to delete and re-create the
- *   VPN connection between your VPC and data center.
+ *   Calls the DeleteVpnGateway API operation.
  *   @param params [Object]
  *     * +VpnGatewayId+ - (*required*, <tt>String</tt>) The ID of the VPN
  *       gateway to delete.
@@ -1904,8 +1789,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method deregisterImage(params, callback)
- *   The DeregisterImage operation deregisters an AMI. Once deregistered,
- *   instances of the AMI can no longer be launched.
+ *   Calls the DeregisterImage API operation.
  *   @param params [Object]
  *     * +ImageId+ - (*required*, <tt>String</tt>) The ID of the AMI to
  *       deregister.
@@ -1921,8 +1805,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeAddresses(params, callback)
- *   The DescribeAddresses operation lists elastic IP addresses assigned
- *   to your account.
+ *   Calls the DescribeAddresses API operation.
  *   @param params [Object]
  *     * +PublicIps+ - (<tt>Array<String></tt>) The optional list of
  *       Elastic IP addresses to describe.
@@ -1956,8 +1839,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeAvailabilityZones(params, callback)
- *   The DescribeAvailabilityZones operation describes availability zones
- *   that are currently available to the account and their states.
+ *   Calls the DescribeAvailabilityZones API operation.
  *   @param params [Object]
  *     * +ZoneNames+ - (<tt>Array<String></tt>) A list of the
  *       availability zone names to describe.
@@ -1990,10 +1872,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeBundleTasks(params, callback)
- *   The DescribeBundleTasks operation describes in-progress and recent
- *   bundle tasks. Complete and failed tasks are removed from the list a
- *   short time after completion. If no bundle ids are given, all bundle
- *   tasks are returned.
+ *   Calls the DescribeBundleTasks API operation.
  *   @param params [Object]
  *     * +BundleIds+ - (<tt>Array<String></tt>) The list of bundle task
  *       IDs to describe.
@@ -2028,7 +1907,9 @@ AWS.EC2 = inherit({})
  *             bundling a Windows instance.
  *             * +Bucket+ - (<tt>String</tt>) The bucket in which to store
  *               the AMI. You can specify a bucket that you already own or
- *               a new bucket that Amazon EC2 creates on your behalf.
+ *               a new bucket that Amazon EC2 creates on your behalf. If
+ *               you specify a bucket that belongs to someone else, Amazon
+ *               EC2 returns an error.
  *             * +Prefix+ - (<tt>String</tt>) The prefix to use when
  *               storing the AMI in S3.
  *             * +AWSAccessKeyId+ - (<tt>String</tt>) The Access Key ID of
@@ -2106,18 +1987,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeCustomerGateways(params, callback)
- *   Gives you information about your customer gateways. You can filter
- *   the results to return information only about customer gateways that
- *   match criteria you specify. For example, you could ask to get
- *   information about a particular customer gateway (or all) only if the
- *   gateway's state is pending or available. You can specify multiple
- *   filters (e.g., the customer gateway has a particular IP address for
- *   the Internet-routable external interface, and the gateway's state is
- *   pending or available). The result includes information for a
- *   particular customer gateway only if the gateway matches all your
- *   filters. If there's no match, no special message is returned; the
- *   response is simply empty. The following table shows the available
- *   filters.
+ *   Calls the DescribeCustomerGateways API operation.
  *   @param params [Object]
  *     * +CustomerGatewayIds+ - (<tt>Array<String></tt>) A set of one or
  *       more customer gateway IDs.
@@ -2157,10 +2027,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeDhcpOptions(params, callback)
- *   Gives you information about one or more sets of DHCP options. You
- *   can specify one or more DHCP options set IDs, or no IDs (to describe
- *   all your sets of DHCP options). The returned information consists
- *   of:
+ *   Calls the DescribeDhcpOptions API operation.
  *   @param params [Object]
  *     * +DhcpOptionsIds+ - (<tt>Array<String></tt>)
  *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
@@ -2225,13 +2092,13 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeImageAttribute(params, callback)
- *   The DescribeImageAttribute operation returns information about an
- *   attribute of an AMI. Only one attribute can be specified per call.
+ *   Calls the DescribeImageAttribute API operation.
  *   @param params [Object]
  *     * +ImageId+ - (*required*, <tt>String</tt>) The ID of the AMI
  *       whose attribute is to be described.
  *     * +Attribute+ - (*required*, <tt>String</tt>) The name of the
- *       attribute to describe.
+ *       attribute to describe. Available attribute names: productCodes,
+ *       kernel, ramdisk, launchPermisson, blockDeviceMapping
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -2247,20 +2114,20 @@ AWS.EC2 = inherit({})
  *         * +UserId+ - (<tt>String</tt>) The AWS user ID of the user
  *           involved in this launch permission.
  *         * +Group+ - (<tt>String</tt>) The AWS group of the user involved
- *           in this launch permission.
+ *           in this launch permission. Available groups: all
  *       * +ProductCodes+ - (<tt>Array<Object></tt>) Product codes for the
  *         associated AMI.
  *         * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an AWS
  *           DevPay product code.
  *         * +ProductCodeType+ - (<tt>String</tt>)
  *       * +KernelId+ - (<tt>Object</tt>) Kernel ID of the associated AMI.
- *         * +Value+ - (<tt>String</tt>)
+ *         * +Value+ - (<tt>String</tt>) String value
  *       * +RamdiskId+ - (<tt>Object</tt>) Ramdisk ID of the associated
  *         AMI.
- *         * +Value+ - (<tt>String</tt>)
+ *         * +Value+ - (<tt>String</tt>) String value
  *       * +Description+ - (<tt>Object</tt>) User-created description of
  *         the associated AMI.
- *         * +Value+ - (<tt>String</tt>)
+ *         * +Value+ - (<tt>String</tt>) String value
  *       * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) Block device
  *         mappings for the associated AMI.
  *         * +VirtualName+ - (<tt>String</tt>) Specifies the virtual device
@@ -2284,13 +2151,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeImages(params, callback)
- *   The DescribeImages operation returns information about AMIs, AKIs,
- *   and ARIs available to the user. Information returned includes image
- *   type, product codes, architecture, and kernel and RAM disk IDs.
- *   Images available to the user include public images available for any
- *   user to launch, private images owned by the user making the request,
- *   and private images owned by other users for which the user has
- *   explicit launch permissions.
+ *   Calls the DescribeImages API operation.
  *   @param params [Object]
  *     * +ImageIds+ - (<tt>Array<String></tt>) An optional list of the
  *       AMI IDs to describe. If not specified, all AMIs will be
@@ -2398,13 +2259,15 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeInstanceAttribute(params, callback)
- *   Returns information about an attribute of an instance. Only one
- *   attribute can be specified per call.
+ *   Calls the DescribeInstanceAttribute API operation.
  *   @param params [Object]
  *     * +InstanceId+ - (*required*, <tt>String</tt>) The ID of the
  *       instance whose instance attribute is being described.
  *     * +Attribute+ - (*required*, <tt>String</tt>) The name of the
- *       attribute to describe.
+ *       attribute to describe. Available attribute names: instanceType,
+ *       kernel, ramdisk, userData, disableApiTermination,
+ *       instanceInitiatedShutdownBehavior, rootDeviceName,
+ *       blockDeviceMapping
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -2418,26 +2281,26 @@ AWS.EC2 = inherit({})
  *         instance.
  *       * +InstanceType+ - (<tt>Object</tt>) The instance type (e.g.,
  *         m1.small, c1.medium, m2.2xlarge, and so on).
- *         * +Value+ - (<tt>String</tt>)
+ *         * +Value+ - (<tt>String</tt>) String value
  *       * +KernelId+ - (<tt>Object</tt>) The kernel ID of the associated
  *         instance.
- *         * +Value+ - (<tt>String</tt>)
+ *         * +Value+ - (<tt>String</tt>) String value
  *       * +RamdiskId+ - (<tt>Object</tt>) The ramdisk ID of the associated
  *         instance.
- *         * +Value+ - (<tt>String</tt>)
+ *         * +Value+ - (<tt>String</tt>) String value
  *       * +UserData+ - (<tt>Object</tt>) MIME, Base64-encoded user data.
- *         * +Value+ - (<tt>String</tt>)
+ *         * +Value+ - (<tt>String</tt>) String value
  *       * +DisableApiTermination+ - (<tt>Object</tt>) Whether this
  *         instance can be terminated. You must modify this attribute
  *         before you can terminate any "locked" instances.
- *         * +Value+ - (<tt>Boolean</tt>)
+ *         * +Value+ - (<tt>Boolean</tt>) Boolean value
  *       * +InstanceInitiatedShutdownBehavior+ - (<tt>Object</tt>) Whether
  *         this instance's Amazon EBS volumes are deleted when the instance
  *         is shut down.
- *         * +Value+ - (<tt>String</tt>)
+ *         * +Value+ - (<tt>String</tt>) String value
  *       * +RootDeviceName+ - (<tt>Object</tt>) The root device name (e.g.,
  *         /dev/sda1).
- *         * +Value+ - (<tt>String</tt>)
+ *         * +Value+ - (<tt>String</tt>) String value
  *       * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) How block
  *         devices are exposed to this instance. Each mapping is made up of
  *         a virtualName and a deviceName.
@@ -2457,22 +2320,24 @@ AWS.EC2 = inherit({})
  *           DevPay product code.
  *         * +ProductCodeType+ - (<tt>String</tt>)
  *       * +EbsOptimized+ - (<tt>Object</tt>)
- *         * +Value+ - (<tt>Boolean</tt>)
+ *         * +Value+ - (<tt>Boolean</tt>) Boolean value
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeInstanceStatus(params, callback)
- *   Describes the status of an Amazon Elastic Compute Cloud (Amazon EC2)
- *   instance. Instance status provides information about two types of
- *   scheduled events for an instance that may require your attention:
+ *   Calls the DescribeInstanceStatus API operation.
  *   @param params [Object]
- *     * +InstanceIds+ - (<tt>Array<String></tt>)
- *     * +Filters+ - (<tt>Array<Object></tt>)
+ *     * +InstanceIds+ - (<tt>Array<String></tt>) The list of instance
+ *       IDs. If not specified, all instances are described.
+ *     * +Filters+ - (<tt>Array<Object></tt>) The list of filters to
+ *       limit returned results.
  *       * +Name+ - (<tt>String</tt>) Specifies the name of the filter.
  *       * +Values+ - (<tt>Array<String></tt>) Contains one or more
  *         values for the filter.
- *     * +NextToken+ - (<tt>String</tt>)
- *     * +MaxResults+ - (<tt>Integer</tt>)
+ *     * +NextToken+ - (<tt>String</tt>) A string specifying the next
+ *       paginated set of results to return.
+ *     * +MaxResults+ - (<tt>Integer</tt>) The maximum number of
+ *       paginated instance items per response.
  *     * +IncludeAllInstances+ - (<tt>Boolean</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -2483,14 +2348,24 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
- *       * +InstanceStatuses+ - (<tt>Array<Object></tt>)
- *         * +InstanceId+ - (<tt>String</tt>)
- *         * +AvailabilityZone+ - (<tt>String</tt>)
- *         * +Events+ - (<tt>Array<Object></tt>)
- *           * +Code+ - (<tt>String</tt>)
- *           * +Description+ - (<tt>String</tt>)
- *           * +NotBefore+ - (<tt>Date</tt>)
- *           * +NotAfter+ - (<tt>Date</tt>)
+ *       * +InstanceStatuses+ - (<tt>Array<Object></tt>) Collection of
+ *         instance statuses describing the state of the requested
+ *         instances.
+ *         * +InstanceId+ - (<tt>String</tt>) The ID of the Amazon EC2
+ *           instance.
+ *         * +AvailabilityZone+ - (<tt>String</tt>) The Amazon EC2
+ *           instance's availability zone.
+ *         * +Events+ - (<tt>Array<Object></tt>) Events that affect the
+ *           status of the associated Amazon EC2 instance.
+ *           * +Code+ - (<tt>String</tt>) The associated code of the event.
+ *             Valid values: instance-reboot, system-reboot,
+ *             instance-retirement
+ *           * +Description+ - (<tt>String</tt>) A description of the
+ *             event.
+ *           * +NotBefore+ - (<tt>Date</tt>) The earliest scheduled start
+ *             time for the event.
+ *           * +NotAfter+ - (<tt>Date</tt>) The latest scheduled end time
+ *             for the event.
  *         * +InstanceState+ - (<tt>Object</tt>)
  *           * +Code+ - (<tt>Integer</tt>) A 16-bit unsigned integer. The
  *             high byte is an opaque internal value and should be ignored.
@@ -2509,13 +2384,13 @@ AWS.EC2 = inherit({})
  *             * +Name+ - (<tt>String</tt>)
  *             * +Status+ - (<tt>String</tt>)
  *             * +ImpairedSince+ - (<tt>Date</tt>)
- *       * +NextToken+ - (<tt>String</tt>)
+ *       * +NextToken+ - (<tt>String</tt>) A string specifying the next
+ *         paginated set of results to return.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeInstances(params, callback)
- *   The DescribeInstances operation returns information about instances
- *   that you own.
+ *   Calls the DescribeInstances API operation.
  *   @param params [Object]
  *     * +InstanceIds+ - (<tt>Array<String></tt>) An optional list of the
  *       instances to describe.
@@ -2694,12 +2569,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeInternetGateways(params, callback)
- *   Gives you information about your Internet gateways. You can filter
- *   the results to return information only about Internet gateways that
- *   match criteria you specify. For example, you could get information
- *   only about gateways with particular tags. The Internet gateway must
- *   match at least one of the specified values for it to be included in
- *   the results.
+ *   Calls the DescribeInternetGateways API operation.
  *   @param params [Object]
  *     * +InternetGatewayIds+ - (<tt>Array<String></tt>) One or more
  *       Internet gateway IDs.
@@ -2731,10 +2601,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeKeyPairs(params, callback)
- *   The DescribeKeyPairs operation returns information about key pairs
- *   available to you. If you specify key pairs, information about those
- *   key pairs is returned. Otherwise, information for all registered key
- *   pairs is returned.
+ *   Calls the DescribeKeyPairs API operation.
  *   @param params [Object]
  *     * +KeyNames+ - (<tt>Array<String></tt>) The optional list of key
  *       pair names to describe.
@@ -2763,9 +2630,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeLicenses(params, callback)
- *   Provides details of a user's registered licenses. Zero or more IDs
- *   may be specified on the call. When one or more license IDs are
- *   specified, only data for the specified IDs are returned.
+ *   Calls the DescribeLicenses API operation.
  *   @param params [Object]
  *     * +LicenseIds+ - (<tt>Array<String></tt>) Specifies the license
  *       registration for which details are to be returned.
@@ -2817,12 +2682,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeNetworkAcls(params, callback)
- *   Gives you information about the network ACLs in your VPC. You can
- *   filter the results to return information only about ACLs that match
- *   criteria you specify. For example, you could get information only
- *   the ACL associated with a particular subnet. The ACL must match at
- *   least one of the specified values for it to be included in the
- *   results.
+ *   Calls the DescribeNetworkAcls API operation.
  *   @param params [Object]
  *     * +NetworkAclIds+ - (<tt>Array<String></tt>) One or more network
  *       ACL IDs.
@@ -2893,9 +2753,9 @@ AWS.EC2 = inherit({})
  *       The +data+ object has the following properties:
  *       * +NetworkInterfaceId+ - (<tt>String</tt>)
  *       * +Description+ - (<tt>Object</tt>)
- *         * +Value+ - (<tt>String</tt>)
+ *         * +Value+ - (<tt>String</tt>) String value
  *       * +SourceDestCheck+ - (<tt>Object</tt>)
- *         * +Value+ - (<tt>Boolean</tt>)
+ *         * +Value+ - (<tt>Boolean</tt>) Boolean value
  *       * +Groups+ - (<tt>Array<Object></tt>)
  *         * +GroupName+ - (<tt>String</tt>)
  *         * +GroupId+ - (<tt>String</tt>)
@@ -2972,8 +2832,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describePlacementGroups(params, callback)
- *   Returns information about one or more PlacementGroup instances in a
- *   user's account.
+ *   Calls the DescribePlacementGroups API operation.
  *   @param params [Object]
  *     * +GroupNames+ - (<tt>Array<String></tt>) The name of the
  *       PlacementGroup.
@@ -3004,8 +2863,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeRegions(params, callback)
- *   The DescribeRegions operation describes regions zones that are
- *   currently available to the account.
+ *   Calls the DescribeRegions API operation.
  *   @param params [Object]
  *     * +RegionNames+ - (<tt>Array<String></tt>) The optional list of
  *       regions to describe.
@@ -3033,8 +2891,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeReservedInstances(params, callback)
- *   The DescribeReservedInstances operation describes Reserved Instances
- *   that were purchased for use with your account.
+ *   Calls the DescribeReservedInstances API operation.
  *   @param params [Object]
  *     * +ReservedInstancesIds+ - (<tt>Array<String></tt>) The optional
  *       list of Reserved Instance IDs to describe.
@@ -3045,7 +2902,8 @@ AWS.EC2 = inherit({})
  *       * +Name+ - (<tt>String</tt>) Specifies the name of the filter.
  *       * +Values+ - (<tt>Array<String></tt>) Contains one or more
  *         values for the filter.
- *     * +OfferingType+ - (<tt>String</tt>)
+ *     * +OfferingType+ - (<tt>String</tt>) The Reserved Instance
+ *       offering type.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3086,10 +2944,14 @@ AWS.EC2 = inherit({})
  *         * +CurrencyCode+ - (<tt>String</tt>) The currency of the
  *           reserved instance. Specified using ISO 4217 standard (e.g.,
  *           USD, JPY).
- *         * +OfferingType+ - (<tt>String</tt>)
- *         * +RecurringCharges+ - (<tt>Array<Object></tt>)
- *           * +Frequency+ - (<tt>String</tt>)
- *           * +Amount+ - (<tt>Float</tt>)
+ *         * +OfferingType+ - (<tt>String</tt>) The Reserved Instance
+ *           offering type.
+ *         * +RecurringCharges+ - (<tt>Array<Object></tt>) The recurring
+ *           charge tag assigned to the resource.
+ *           * +Frequency+ - (<tt>String</tt>) The frequency of the
+ *             recurring charge.
+ *           * +Amount+ - (<tt>Float</tt>) The amount of the recurring
+ *             charge.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3134,12 +2996,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeReservedInstancesOfferings(params, callback)
- *   The DescribeReservedInstancesOfferings operation describes Reserved
- *   Instance offerings that are available for purchase. With Amazon EC2
- *   Reserved Instances, you purchase the right to launch Amazon EC2
- *   instances for a period of time (without getting insufficient
- *   capacity errors) and pay a lower usage rate for the actual time
- *   used.
+ *   Calls the DescribeReservedInstancesOfferings API operation.
  *   @param params [Object]
  *     * +ReservedInstancesOfferingIds+ - (<tt>Array<String></tt>) An
  *       optional list of the unique IDs of the Reserved Instance
@@ -3161,7 +3018,8 @@ AWS.EC2 = inherit({})
  *       Reserved Instance offering. A Reserved Instance with tenancy of
  *       dedicated will run on single-tenant hardware and can only be
  *       launched within a VPC.
- *     * +OfferingType+ - (<tt>String</tt>)
+ *     * +OfferingType+ - (<tt>String</tt>) The Reserved Instance
+ *       offering type.
  *     * +NextToken+ - (<tt>String</tt>)
  *     * +MaxResults+ - (<tt>Integer</tt>)
  *   @callback callback function(err, data)
@@ -3194,10 +3052,14 @@ AWS.EC2 = inherit({})
  *         * +CurrencyCode+ - (<tt>String</tt>) The currency of the
  *           reserved instance. Specified using ISO 4217 standard (e.g.,
  *           USD, JPY).
- *         * +OfferingType+ - (<tt>String</tt>)
- *         * +RecurringCharges+ - (<tt>Array<Object></tt>)
- *           * +Frequency+ - (<tt>String</tt>)
- *           * +Amount+ - (<tt>Float</tt>)
+ *         * +OfferingType+ - (<tt>String</tt>) The Reserved Instance
+ *           offering type.
+ *         * +RecurringCharges+ - (<tt>Array<Object></tt>) The recurring
+ *           charge tag assigned to the resource.
+ *           * +Frequency+ - (<tt>String</tt>) The frequency of the
+ *             recurring charge.
+ *           * +Amount+ - (<tt>Float</tt>) The amount of the recurring
+ *             charge.
  *         * +Marketplace+ - (<tt>Boolean</tt>)
  *         * +PricingDetails+ - (<tt>Array<Object></tt>)
  *           * +Price+ - (<tt>Float</tt>)
@@ -3207,12 +3069,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeRouteTables(params, callback)
- *   Gives you information about your route tables. You can filter the
- *   results to return information only about tables that match criteria
- *   you specify. For example, you could get information only about a
- *   table associated with a particular subnet. You can specify multiple
- *   values for the filter. The table must match at least one of the
- *   specified values for it to be included in the results.
+ *   Calls the DescribeRouteTables API operation.
  *   @param params [Object]
  *     * +RouteTableIds+ - (<tt>Array<String></tt>) One or more route
  *       table IDs.
@@ -3261,8 +3118,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeSecurityGroups(params, callback)
- *   The DescribeSecurityGroups operation returns information about
- *   security groups that you own.
+ *   Calls the DescribeSecurityGroups API operation.
  *   @param params [Object]
  *     * +GroupNames+ - (<tt>Array<String></tt>) The optional list of
  *       Amazon EC2 security groups to describe.
@@ -3295,7 +3151,7 @@ AWS.EC2 = inherit({})
  *         * +IpPermissions+ - (<tt>Array<Object></tt>) The permissions
  *           enabled for this security group.
  *           * +IpProtocol+ - (<tt>String</tt>) The IP protocol of this
- *             permission.
+ *             permission. Valid protocol values: tcp, udp, icmp
  *           * +FromPort+ - (<tt>Integer</tt>) Start of port range for the
  *             TCP and UDP protocols, or an ICMP type number. An ICMP type
  *             number of -1 indicates a wildcard (i.e., any ICMP type
@@ -3318,7 +3174,7 @@ AWS.EC2 = inherit({})
  *             * +CidrIp+ - (<tt>String</tt>) The list of CIDR IP ranges.
  *         * +IpPermissionsEgress+ - (<tt>Array<Object></tt>)
  *           * +IpProtocol+ - (<tt>String</tt>) The IP protocol of this
- *             permission.
+ *             permission. Valid protocol values: tcp, udp, icmp
  *           * +FromPort+ - (<tt>Integer</tt>) Start of port range for the
  *             TCP and UDP protocols, or an ICMP type number. An ICMP type
  *             number of -1 indicates a wildcard (i.e., any ICMP type
@@ -3347,13 +3203,13 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeSnapshotAttribute(params, callback)
- *   Returns information about an attribute of a snapshot. Only one
- *   attribute can be specified per call.
+ *   Calls the DescribeSnapshotAttribute API operation.
  *   @param params [Object]
  *     * +SnapshotId+ - (*required*, <tt>String</tt>) The ID of the EBS
  *       snapshot whose attribute is being described.
  *     * +Attribute+ - (*required*, <tt>String</tt>) The name of the EBS
- *       attribute to describe.
+ *       attribute to describe. Available attribute names:
+ *       createVolumePermission
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3367,7 +3223,8 @@ AWS.EC2 = inherit({})
  *         attribute is being described.
  *       * +CreateVolumePermissions+ - (<tt>Array<Object></tt>) The list of
  *         permissions describing who can create a volume from the
- *         associated EBS snapshot.
+ *         associated EBS snapshot. Only available if the
+ *         createVolumePermission attribute is requested.
  *         * +UserId+ - (<tt>String</tt>) The user ID of the user that can
  *           create volumes from the snapshot.
  *         * +Group+ - (<tt>String</tt>) The group that is allowed to
@@ -3380,11 +3237,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeSnapshots(params, callback)
- *   Returns information about the Amazon EBS snapshots available to you.
- *   Snapshots available to you include public snapshots available for
- *   any AWS account to launch, private snapshots you own, and private
- *   snapshots owned by another AWS account but for which you've been
- *   given explicit create volume permissions.
+ *   Calls the DescribeSnapshots API operation.
  *   @param params [Object]
  *     * +SnapshotIds+ - (<tt>Array<String></tt>) The optional list of
  *       EBS snapshot IDs to describe.
@@ -3437,7 +3290,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeSpotDatafeedSubscription(params, callback)
- *   Describes the data feed for Spot Instances.
+ *   Calls the DescribeSpotDatafeedSubscription API operation.
  *   @param params [Object]
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -3466,13 +3319,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeSpotInstanceRequests(params, callback)
- *   Describes Spot Instance requests. Spot Instances are instances that
- *   Amazon EC2 starts on your behalf when the maximum price that you
- *   specify exceeds the current Spot Price. Amazon EC2 periodically sets
- *   the Spot Price based on available Spot Instance capacity and current
- *   spot instance requests. For conceptual information about Spot
- *   Instances, refer to the Amazon Elastic Compute Cloud Developer Guide
- *   or Amazon Elastic Compute Cloud User Guide.
+ *   Calls the DescribeSpotInstanceRequests API operation.
  *   @param params [Object]
  *     * +SpotInstanceRequestIds+ - (<tt>Array<String></tt>) The ID of
  *       the request.
@@ -3592,7 +3439,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeSpotPriceHistory(params, callback)
- *   Describes the Spot Price history.
+ *   Calls the DescribeSpotPriceHistory API operation.
  *   @param params [Object]
  *     * +StartTime+ - (<tt>Date</tt>) The start date and time of the
  *       Spot Instance price history data.
@@ -3637,9 +3484,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeSubnets(params, callback)
- *   Gives you information about your subnets. You can filter the results
- *   to return information only about subnets that match criteria you
- *   specify.
+ *   Calls the DescribeSubnets API operation.
  *   @param params [Object]
  *     * +SubnetIds+ - (<tt>Array<String></tt>) A set of one or more
  *       subnet IDs.
@@ -3670,7 +3515,8 @@ AWS.EC2 = inherit({})
  *         * +CidrBlock+ - (<tt>String</tt>) Specifies the CIDR block
  *           assigned to the subnet.
  *         * +AvailableIpAddressCount+ - (<tt>Integer</tt>) Specifies the
- *           number of unused IP addresses in the subnet.
+ *           number of unused IP addresses in the subnet. The IP addresses
+ *           for any stopped instances are considered unavailable.
  *         * +AvailabilityZone+ - (<tt>String</tt>) Specifies the
  *           Availability Zone the subnet is in.
  *         * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
@@ -3681,7 +3527,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeTags(params, callback)
- *   Describes the tags for the specified resources.
+ *   Calls the DescribeTags API operation.
  *   @param params [Object]
  *     * +Filters+ - (<tt>Array<Object></tt>) A list of filters used to
  *       match properties for tags.
@@ -3724,7 +3570,7 @@ AWS.EC2 = inherit({})
  *       The +data+ object has the following properties:
  *       * +VolumeId+ - (<tt>String</tt>)
  *       * +AutoEnableIO+ - (<tt>Object</tt>)
- *         * +Value+ - (<tt>Boolean</tt>)
+ *         * +Value+ - (<tt>Boolean</tt>) Boolean value
  *       * +ProductCodes+ - (<tt>Array<Object></tt>)
  *         * +ProductCodeId+ - (<tt>String</tt>) The unique ID of an AWS
  *           DevPay product code.
@@ -3733,7 +3579,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeVolumeStatus(params, callback)
- *   Describes the status of a volume.
+ *   Calls the DescribeVolumeStatus API operation.
  *   @param params [Object]
  *     * +VolumeIds+ - (<tt>Array<String></tt>)
  *     * +Filters+ - (<tt>Array<Object></tt>)
@@ -3775,9 +3621,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeVolumes(params, callback)
- *   Describes the status of the indicated volume or, in lieu of any
- *   specified, all volumes belonging to the caller. Volumes that have
- *   been deleted are not described.
+ *   Calls the DescribeVolumes API operation.
  *   @param params [Object]
  *     * +VolumeIds+ - (<tt>Array<String></tt>) The optional list of EBS
  *       volumes to describe.
@@ -3819,7 +3663,9 @@ AWS.EC2 = inherit({})
  *           * +State+ - (<tt>String</tt>)
  *           * +AttachTime+ - (<tt>Date</tt>) Timestamp when this
  *             attachment initiated.
- *           * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *           * +DeleteOnTermination+ - (<tt>Boolean</tt>) ` Whether this
+ *             volume will be deleted or not when the associated instance
+ *             is terminated.
  *         * +Tags+ - (<tt>Array<Object></tt>) A list of tags for the
  *           Volume.
  *           * +Key+ - (<tt>String</tt>) The tag's key.
@@ -3830,8 +3676,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeVpcs(params, callback)
- *   Gives you information about your VPCs. You can filter the results to
- *   return information only about VPCs that match criteria you specify.
+ *   Calls the DescribeVpcs API operation.
  *   @param params [Object]
  *     * +VpcIds+ - (<tt>Array<String></tt>) The ID of a VPC you want
  *       information about.
@@ -3870,7 +3715,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeVpnConnections(params, callback)
- *   Gives you information about your VPN connections.
+ *   Calls the DescribeVpnConnections API operation.
  *   @param params [Object]
  *     * +VpnConnectionIds+ - (<tt>Array<String></tt>) A VPN connection
  *       ID. More than one may be specified per request.
@@ -3898,7 +3743,10 @@ AWS.EC2 = inherit({})
  *           and deleted.
  *         * +CustomerGatewayConfiguration+ - (<tt>String</tt>) Contains
  *           configuration information in the native XML format for the VPN
- *           connection's customer gateway.
+ *           connection's customer gateway. This element is always present
+ *           in the CreateVpnConnection response; however, it's present in
+ *           the DescribeVpnConnections response only if the VPN connection
+ *           is in the pending or available state.
  *         * +Type+ - (<tt>String</tt>) Specifies the type of VPN
  *           connection.
  *         * +CustomerGatewayId+ - (<tt>String</tt>) Specifies ID of the
@@ -3925,9 +3773,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method describeVpnGateways(params, callback)
- *   Gives you information about your VPN gateways. You can filter the
- *   results to return information only about VPN gateways that match
- *   criteria you specify.
+ *   Calls the DescribeVpnGateways API operation.
  *   @param params [Object]
  *     * +VpnGatewayIds+ - (<tt>Array<String></tt>) A list of filters
  *       used to match properties for VPN Gateways. For a complete
@@ -3971,11 +3817,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method detachInternetGateway(params, callback)
- *   Detaches an Internet gateway from a VPC, disabling connectivity
- *   between the Internet and the VPC. The VPC must not contain any
- *   running instances with elastic IP addresses. For more information
- *   about your VPC and Internet gateway, go to Amazon Virtual Private
- *   Cloud User Guide.
+ *   Calls the DetachInternetGateway API operation.
  *   @param params [Object]
  *     * +InternetGatewayId+ - (*required*, <tt>String</tt>) The ID of
  *       the Internet gateway to detach.
@@ -4008,7 +3850,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method detachVolume(params, callback)
- *   Detach a previously attached volume from a running instance.
+ *   Calls the DetachVolume API operation.
  *   @param params [Object]
  *     * +VolumeId+ - (*required*, <tt>String</tt>) The ID of the volume
  *       to detach.
@@ -4018,7 +3860,13 @@ AWS.EC2 = inherit({})
  *       is attached on the specified instance.
  *     * +Force+ - (<tt>Boolean</tt>) Forces detachment if the previous
  *       detachment attempt did not occur cleanly (logging into an
- *       instance, unmounting the volume, and detaching normally).
+ *       instance, unmounting the volume, and detaching normally). This
+ *       option can lead to data loss or a corrupted file system. Use
+ *       this option only as a last resort to detach a volume from a
+ *       failed instance. The instance will not have an opportunity to
+ *       flush file system caches nor file system meta data. If you use
+ *       this option, you must perform file system check and repair
+ *       procedures.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -4035,15 +3883,14 @@ AWS.EC2 = inherit({})
  *       * +State+ - (<tt>String</tt>)
  *       * +AttachTime+ - (<tt>Date</tt>) Timestamp when this attachment
  *         initiated.
- *       * +DeleteOnTermination+ - (<tt>Boolean</tt>)
+ *       * +DeleteOnTermination+ - (<tt>Boolean</tt>) ` Whether this volume
+ *         will be deleted or not when the associated instance is
+ *         terminated.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method detachVpnGateway(params, callback)
- *   Detaches a VPN gateway from a VPC. You do this if you're planning to
- *   turn off the VPC and not use it anymore. You can confirm a VPN
- *   gateway has been completely detached from a VPC by describing the
- *   VPN gateway (any attachments to the VPN gateway are also described).
+ *   Calls the DetachVpnGateway API operation.
  *   @param params [Object]
  *     * +VpnGatewayId+ - (*required*, <tt>String</tt>) The ID of the VPN
  *       gateway to detach from the VPC.
@@ -4077,10 +3924,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method disassociateAddress(params, callback)
- *   The DisassociateAddress operation disassociates the specified
- *   elastic IP address from the instance to which it is assigned. This
- *   is an idempotent operation. If you enter it more than once, Amazon
- *   EC2 does not return an error.
+ *   Calls the DisassociateAddress API operation.
  *   @param params [Object]
  *     * +PublicIp+ - (<tt>String</tt>) The elastic IP address that you
  *       are disassociating from the instance.
@@ -4098,7 +3942,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method disassociateRouteTable(params, callback)
- *   Disassociates a subnet from a route table.
+ *   Calls the DisassociateRouteTable API operation.
  *   @param params [Object]
  *     * +AssociationId+ - (*required*, <tt>String</tt>) The association
  *       ID representing the current association between the route table
@@ -4131,7 +3975,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method enableVolumeIO(params, callback)
- *   Enable IO on the volume after an event has occured.
+ *   Calls the EnableVolumeIO API operation.
  *   @param params [Object]
  *     * +VolumeId+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
@@ -4146,8 +3990,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getConsoleOutput(params, callback)
- *   The GetConsoleOutput operation retrieves console output for the
- *   specified instance.
+ *   Calls the GetConsoleOutput API operation.
  *   @param params [Object]
  *     * +InstanceId+ - (*required*, <tt>String</tt>) The ID of the
  *       instance for which you want console output.
@@ -4169,8 +4012,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method getPasswordData(params, callback)
- *   Retrieves the encrypted administrator password for the instances
- *   running Windows.
+ *   Calls the GetPasswordData API operation.
  *   @param params [Object]
  *     * +InstanceId+ - (*required*, <tt>String</tt>) The ID of the
  *       instance for which you want the Windows administrator password.
@@ -4300,9 +4142,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method importKeyPair(params, callback)
- *   Imports the public key from an RSA key pair created with a
- *   third-party tool. This operation differs from CreateKeyPair as the
- *   private key is never transferred between the caller and AWS servers.
+ *   Calls the ImportKeyPair API operation.
  *   @param params [Object]
  *     * +KeyName+ - (*required*, <tt>String</tt>) The unique name for
  *       the key pair.
@@ -4386,14 +4226,15 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method modifyImageAttribute(params, callback)
- *   The ModifyImageAttribute operation modifies an attribute of an AMI.
+ *   Calls the ModifyImageAttribute API operation.
  *   @param params [Object]
  *     * +ImageId+ - (*required*, <tt>String</tt>) The ID of the AMI
  *       whose attribute you want to modify.
  *     * +Attribute+ - (<tt>String</tt>) The name of the AMI attribute
- *       you want to modify.
+ *       you want to modify. Available attributes: launchPermission,
+ *       productCodes
  *     * +OperationType+ - (<tt>String</tt>) The type of operation being
- *       requested.
+ *       requested. Available operation types: add, remove
  *     * +UserIds+ - (<tt>Array<String></tt>) The AWS user ID being added
  *       to or removed from the list of users with launch permissions for
  *       this AMI. Only valid when the launchPermission attribute is
@@ -4401,7 +4242,7 @@ AWS.EC2 = inherit({})
  *     * +UserGroups+ - (<tt>Array<String></tt>) The user group being
  *       added to or removed from the list of user groups with launch
  *       permissions for this AMI. Only valid when the launchPermission
- *       attribute is being modified.
+ *       attribute is being modified. Available user groups: all
  *     * +ProductCodes+ - (<tt>Array<String></tt>) The list of product
  *       codes being added to or removed from the specified AMI. Only
  *       valid when the productCodes attribute is being modified.
@@ -4413,14 +4254,14 @@ AWS.EC2 = inherit({})
  *         * +UserId+ - (<tt>String</tt>) The AWS user ID of the user
  *           involved in this launch permission.
  *         * +Group+ - (<tt>String</tt>) The AWS group of the user
- *           involved in this launch permission.
+ *           involved in this launch permission. Available groups: all
  *       * +Remove+ - (<tt>Array<Object></tt>)
  *         * +UserId+ - (<tt>String</tt>) The AWS user ID of the user
  *           involved in this launch permission.
  *         * +Group+ - (<tt>String</tt>) The AWS group of the user
- *           involved in this launch permission.
+ *           involved in this launch permission. Available groups: all
  *     * +Description+ - (<tt>Object</tt>)
- *       * +Value+ - (<tt>String</tt>)
+ *       * +Value+ - (<tt>String</tt>) String value
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -4433,17 +4274,24 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method modifyInstanceAttribute(params, callback)
- *   Modifies an attribute of an instance.
+ *   Calls the ModifyInstanceAttribute API operation.
  *   @param params [Object]
  *     * +InstanceId+ - (*required*, <tt>String</tt>) The ID of the
  *       instance whose attribute is being modified.
  *     * +Attribute+ - (<tt>String</tt>) The name of the attribute being
- *       modified.
+ *       modified. Available attribute names: instanceType, kernel,
+ *       ramdisk, userData, disableApiTermination,
+ *       instanceInitiatedShutdownBehavior, rootDevice,
+ *       blockDeviceMapping
  *     * +Value+ - (<tt>String</tt>) The new value of the instance
- *       attribute being modified.
+ *       attribute being modified. Only valid when kernel, ramdisk,
+ *       userData, disableApiTermination or
+ *       instanceInitiateShutdownBehavior is specified as the attribute
+ *       being modified.
  *     * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) The new block
  *       device mappings for the instance whose attributes are being
- *       modified.
+ *       modified. Only valid when blockDeviceMapping is specified as the
+ *       attribute being modified.
  *       * +DeviceName+ - (<tt>String</tt>) The device name (e.g.,
  *         /dev/sdh) at which the block device is exposed on the
  *         instance.
@@ -4460,22 +4308,22 @@ AWS.EC2 = inherit({})
  *         specifies that the device name in this object should not be
  *         mapped to any real device.
  *     * +SourceDestCheck+ - (<tt>Object</tt>)
- *       * +Value+ - (<tt>Boolean</tt>)
+ *       * +Value+ - (<tt>Boolean</tt>) Boolean value
  *     * +DisableApiTermination+ - (<tt>Object</tt>)
- *       * +Value+ - (<tt>Boolean</tt>)
+ *       * +Value+ - (<tt>Boolean</tt>) Boolean value
  *     * +InstanceType+ - (<tt>Object</tt>)
- *       * +Value+ - (<tt>String</tt>)
+ *       * +Value+ - (<tt>String</tt>) String value
  *     * +Kernel+ - (<tt>Object</tt>)
- *       * +Value+ - (<tt>String</tt>)
+ *       * +Value+ - (<tt>String</tt>) String value
  *     * +Ramdisk+ - (<tt>Object</tt>)
- *       * +Value+ - (<tt>String</tt>)
+ *       * +Value+ - (<tt>String</tt>) String value
  *     * +UserData+ - (<tt>Object</tt>)
- *       * +Value+ - (<tt>String</tt>)
+ *       * +Value+ - (<tt>String</tt>) String value
  *     * +InstanceInitiatedShutdownBehavior+ - (<tt>Object</tt>)
- *       * +Value+ - (<tt>String</tt>)
+ *       * +Value+ - (<tt>String</tt>) String value
  *     * +Groups+ - (<tt>Array<String></tt>)
  *     * +EbsOptimized+ - (<tt>Object</tt>)
- *       * +Value+ - (<tt>Boolean</tt>)
+ *       * +Value+ - (<tt>Boolean</tt>) Boolean value
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -4492,9 +4340,9 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * +NetworkInterfaceId+ - (*required*, <tt>String</tt>)
  *     * +Description+ - (<tt>Object</tt>)
- *       * +Value+ - (<tt>String</tt>)
+ *       * +Value+ - (<tt>String</tt>) String value
  *     * +SourceDestCheck+ - (<tt>Object</tt>)
- *       * +Value+ - (<tt>Boolean</tt>)
+ *       * +Value+ - (<tt>Boolean</tt>) Boolean value
  *     * +Groups+ - (<tt>Array<String></tt>)
  *     * +Attachment+ - (<tt>Object</tt>)
  *       * +AttachmentId+ - (<tt>String</tt>)
@@ -4511,22 +4359,24 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method modifySnapshotAttribute(params, callback)
- *   Adds or remove permission settings for the specified snapshot.
+ *   Calls the ModifySnapshotAttribute API operation.
  *   @param params [Object]
  *     * +SnapshotId+ - (*required*, <tt>String</tt>) The ID of the EBS
  *       snapshot whose attributes are being modified.
  *     * +Attribute+ - (<tt>String</tt>) The name of the attribute being
- *       modified.
+ *       modified. Available attribute names: createVolumePermission
  *     * +OperationType+ - (<tt>String</tt>) The operation to perform on
- *       the attribute.
+ *       the attribute. Available operation names: add, remove
  *     * +UserIds+ - (<tt>Array<String></tt>) The AWS user IDs to add to
  *       or remove from the list of users that have permission to create
  *       EBS volumes from the specified snapshot. Currently supports
- *       "all".
+ *       "all". Only valid when the createVolumePermission attribute is
+ *       being modified.
  *     * +GroupNames+ - (<tt>Array<String></tt>) The AWS group names to
  *       add to or remove from the list of groups that have permission to
  *       create EBS volumes from the specified snapshot. Currently
- *       supports "all".
+ *       supports "all". Only valid when the createVolumePermission
+ *       attribute is being modified.
  *     * +CreateVolumePermission+ - (<tt>Object</tt>)
  *       * +Add+ - (<tt>Array<Object></tt>)
  *         * +UserId+ - (<tt>String</tt>) The user ID of the user that
@@ -4566,7 +4416,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method monitorInstances(params, callback)
- *   Enables monitoring for a running instance.
+ *   Calls the MonitorInstances API operation.
  *   @param params [Object]
  *     * +InstanceIds+ - (*required*, <tt>Array<String></tt>) The list of
  *       Amazon EC2 instances on which to enable monitoring.
@@ -4591,11 +4441,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method purchaseReservedInstancesOffering(params, callback)
- *   The PurchaseReservedInstancesOffering operation purchases a Reserved
- *   Instance for use with your account. With Amazon EC2 Reserved
- *   Instances, you purchase the right to launch Amazon EC2 instances for
- *   a period of time (without getting insufficient capacity errors) and
- *   pay a lower usage rate for the actual time used.
+ *   Calls the PurchaseReservedInstancesOffering API operation.
  *   @param params [Object]
  *     * +ReservedInstancesOfferingId+ - (*required*, <tt>String</tt>)
  *       The unique ID of the Reserved Instances offering being
@@ -4620,11 +4466,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method rebootInstances(params, callback)
- *   The RebootInstances operation requests a reboot of one or more
- *   instances. This operation is asynchronous; it only queues a request
- *   to reboot the specified instance(s). The operation will succeed if
- *   the instances are valid and belong to the user. Requests to reboot
- *   terminated instances are ignored.
+ *   Calls the RebootInstances API operation.
  *   @param params [Object]
  *     * +InstanceIds+ - (*required*, <tt>Array<String></tt>) The list of
  *       instances to terminate.
@@ -4640,18 +4482,24 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method registerImage(params, callback)
- *   The RegisterImage operation registers an AMI with Amazon EC2. Images
- *   must be registered before they can be launched. For more
- *   information, see RunInstances.
+ *   Calls the RegisterImage API operation.
  *   @param params [Object]
- *     * +ImageLocation+ - (<tt>String</tt>)
+ *     * +ImageLocation+ - (<tt>String</tt>) The full path to your AMI
+ *       manifest in Amazon S3 storage.
  *     * +Name+ - (<tt>String</tt>) The name to give the new Amazon
- *       Machine Image.
- *     * +Description+ - (<tt>String</tt>)
- *     * +Architecture+ - (<tt>String</tt>)
- *     * +KernelId+ - (<tt>String</tt>)
+ *       Machine Image. Constraints: 3-128 alphanumeric characters,
+ *       parenthesis (()), commas (,), slashes (/), dashes (-), or
+ *       underscores(_)
+ *     * +Description+ - (<tt>String</tt>) The description describing the
+ *       new AMI.
+ *     * +Architecture+ - (<tt>String</tt>) The architecture of the
+ *       image. Valid Values: i386, x86_64
+ *     * +KernelId+ - (<tt>String</tt>) The optional ID of a specific
+ *       kernel to register with the new AMI.
  *     * +RamdiskId+ - (<tt>String</tt>) The optional ID of a specific
- *       ramdisk to register with the new AMI.
+ *       ramdisk to register with the new AMI. Some kernels require
+ *       additional drivers at launch. Check the kernel requirements for
+ *       information on whether you need to specify a RAM disk.
  *     * +RootDeviceName+ - (<tt>String</tt>) The root device name (e.g.,
  *       /dev/sda1).
  *     * +BlockDeviceMappings+ - (<tt>Array<Object></tt>) The block
@@ -4690,8 +4538,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method releaseAddress(params, callback)
- *   The ReleaseAddress operation releases an elastic IP address
- *   associated with your account.
+ *   Calls the ReleaseAddress API operation.
  *   @param params [Object]
  *     * +PublicIp+ - (<tt>String</tt>) The elastic IP address that you
  *       are releasing from your account.
@@ -4709,10 +4556,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method replaceNetworkAclAssociation(params, callback)
- *   Changes which network ACL a subnet is associated with. By default
- *   when you create a subnet, it's automatically associated with the
- *   default network ACL. For more information about network ACLs, go to
- *   Network ACLs in the Amazon Virtual Private Cloud User Guide.
+ *   Calls the ReplaceNetworkAclAssociation API operation.
  *   @param params [Object]
  *     * +AssociationId+ - (*required*, <tt>String</tt>) The ID
  *       representing the current association between the original
@@ -4733,9 +4577,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method replaceNetworkAclEntry(params, callback)
- *   Replaces an entry (i.e., rule) in a network ACL. For more
- *   information about network ACLs, go to Network ACLs in the Amazon
- *   Virtual Private Cloud User Guide.
+ *   Calls the ReplaceNetworkAclEntry API operation.
  *   @param params [Object]
  *     * +NetworkAclId+ - (*required*, <tt>String</tt>) ID of the ACL
  *       where the entry will be replaced.
@@ -4775,9 +4617,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method replaceRoute(params, callback)
- *   Replaces an existing route within a route table in a VPC. For more
- *   information about route tables, go to Route Tables in the Amazon
- *   Virtual Private Cloud User Guide.
+ *   Calls the ReplaceRoute API operation.
  *   @param params [Object]
  *     * +RouteTableId+ - (*required*, <tt>String</tt>) The ID of the
  *       route table where the route will be replaced.
@@ -4802,11 +4642,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method replaceRouteTableAssociation(params, callback)
- *   Changes the route table associated with a given subnet in a VPC.
- *   After you execute this action, the subnet uses the routes in the new
- *   route table it's associated with. For more information about route
- *   tables, go to Route Tables in the Amazon Virtual Private Cloud User
- *   Guide.
+ *   Calls the ReplaceRouteTableAssociation API operation.
  *   @param params [Object]
  *     * +AssociationId+ - (*required*, <tt>String</tt>) The ID
  *       representing the current association between the original route
@@ -4847,7 +4683,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method requestSpotInstances(params, callback)
- *   Creates a Spot Instance request.
+ *   Calls the RequestSpotInstances API operation.
  *   @param params [Object]
  *     * +SpotPrice+ - (*required*, <tt>String</tt>) Specifies the
  *       maximum hourly price for any Spot Instance launched to fulfill
@@ -4856,13 +4692,24 @@ AWS.EC2 = inherit({})
  *       number of Spot Instances to launch.
  *     * +Type+ - (<tt>String</tt>) Specifies the Spot Instance type.
  *     * +ValidFrom+ - (<tt>Date</tt>) Defines the start date of the
- *       request.
- *     * +ValidUntil+ - (<tt>Date</tt>) End date of the request.
+ *       request. If this is a one-time request, the request becomes
+ *       active at this date and time and remains active until all
+ *       instances launch, the request expires, or the request is
+ *       canceled. If the request is persistent, the request becomes
+ *       active at this date and time and remains active until it expires
+ *       or is canceled.
+ *     * +ValidUntil+ - (<tt>Date</tt>) End date of the request. If this
+ *       is a one-time request, the request remains active until all
+ *       instances launch, the request is canceled, or this date is
+ *       reached. If the request is persistent, it remains active until
+ *       it is canceled or this date and time is reached.
  *     * +LaunchGroup+ - (<tt>String</tt>) Specifies the instance launch
  *       group. Launch groups are Spot Instances that launch and
  *       terminate together.
  *     * +AvailabilityZoneGroup+ - (<tt>String</tt>) Specifies the
- *       Availability Zone group.
+ *       Availability Zone group. When specifying the same Availability
+ *       Zone group for all Spot Instance requests, all Spot Instances
+ *       are launched in the same Availability Zone.
  *     * +LaunchSpecification+ - (<tt>Object</tt>) Specifies additional
  *       launch instance information.
  *       * +ImageId+ - (<tt>String</tt>) The AMI ID.
@@ -5044,13 +4891,13 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method resetImageAttribute(params, callback)
- *   The ResetImageAttribute operation resets an attribute of an AMI to
- *   its default value.
+ *   Calls the ResetImageAttribute API operation.
  *   @param params [Object]
  *     * +ImageId+ - (*required*, <tt>String</tt>) The ID of the AMI
  *       whose attribute is being reset.
  *     * +Attribute+ - (*required*, <tt>String</tt>) The name of the
- *       attribute being reset.
+ *       attribute being reset. Available attribute names:
+ *       launchPermission
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -5063,12 +4910,13 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method resetInstanceAttribute(params, callback)
- *   Resets an attribute of an instance to its default value.
+ *   Calls the ResetInstanceAttribute API operation.
  *   @param params [Object]
  *     * +InstanceId+ - (*required*, <tt>String</tt>) The ID of the
  *       Amazon EC2 instance whose attribute is being reset.
  *     * +Attribute+ - (*required*, <tt>String</tt>) The name of the
- *       attribute being reset.
+ *       attribute being reset. Available attribute names: kernel,
+ *       ramdisk
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -5097,12 +4945,13 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method resetSnapshotAttribute(params, callback)
- *   Resets permission settings for the specified snapshot.
+ *   Calls the ResetSnapshotAttribute API operation.
  *   @param params [Object]
  *     * +SnapshotId+ - (*required*, <tt>String</tt>) The ID of the
  *       snapshot whose attribute is being reset.
  *     * +Attribute+ - (*required*, <tt>String</tt>) The name of the
- *       attribute being reset.
+ *       attribute being reset. Available attribute names:
+ *       createVolumePermission
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -5115,10 +4964,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method revokeSecurityGroupEgress(params, callback)
- *   This action applies only to security groups in a VPC. It doesn't
- *   work with EC2 security groups. For information about Amazon Virtual
- *   Private Cloud and VPC security groups, go to the Amazon Virtual
- *   Private Cloud User Guide.
+ *   Calls the RevokeSecurityGroupEgress API operation.
  *   @param params [Object]
  *     * +GroupId+ - (*required*, <tt>String</tt>) ID of the VPC security
  *       group to modify.
@@ -5134,7 +4980,7 @@ AWS.EC2 = inherit({})
  *       way of authorizing permissions since it offers more flexibility
  *       and control.
  *       * +IpProtocol+ - (<tt>String</tt>) The IP protocol of this
- *         permission.
+ *         permission. Valid protocol values: tcp, udp, icmp
  *       * +FromPort+ - (<tt>Integer</tt>) Start of port range for the
  *         TCP and UDP protocols, or an ICMP type number. An ICMP type
  *         number of -1 indicates a wildcard (i.e., any ICMP type
@@ -5166,9 +5012,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method revokeSecurityGroupIngress(params, callback)
- *   The RevokeSecurityGroupIngress operation revokes permissions from a
- *   security group. The permissions used to revoke must be specified
- *   using the same values used to grant the permissions.
+ *   Calls the RevokeSecurityGroupIngress API operation.
  *   @param params [Object]
  *     * +GroupName+ - (<tt>String</tt>) Name of the standard (EC2)
  *       security group to modify. The group must belong to your account.
@@ -5191,7 +5035,7 @@ AWS.EC2 = inherit({})
  *       through IP permissions is the preferred way of revoking
  *       permissions since it offers more flexibility and control.
  *       * +IpProtocol+ - (<tt>String</tt>) The IP protocol of this
- *         permission.
+ *         permission. Valid protocol values: tcp, udp, icmp
  *       * +FromPort+ - (<tt>Integer</tt>) Start of port range for the
  *         TCP and UDP protocols, or an ICMP type number. An ICMP type
  *         number of -1 indicates a wildcard (i.e., any ICMP type
@@ -5223,7 +5067,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method runInstances(params, callback)
- *   The RunInstances operation launches a specified number of instances.
+ *   Calls the RunInstances API operation.
  *   @param params [Object]
  *     * +ImageId+ - (*required*, <tt>String</tt>) Unique ID of a machine
  *       image, returned by a call to DescribeImages.
@@ -5233,7 +5077,8 @@ AWS.EC2 = inherit({})
  *     * +MaxCount+ - (*required*, <tt>Integer</tt>) Maximum number of
  *       instances to launch. If the value is more than Amazon EC2 can
  *       launch, the largest possible number above minCount will be
- *       launched instead.
+ *       launched instead. Between 1 and the maximum number allowed for
+ *       your account (default: 20).
  *     * +KeyName+ - (<tt>String</tt>) The name of the key pair.
  *     * +SecurityGroups+ - (<tt>Array<String></tt>) The names of the
  *       security groups into which the instances will be launched.
@@ -5489,13 +5334,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method startInstances(params, callback)
- *   Starts an instance that uses an Amazon EBS volume as its root
- *   device. Instances that use Amazon EBS volumes as their root devices
- *   can be quickly stopped and started. When an instance is stopped, the
- *   compute resources are released and you are not billed for hourly
- *   instance usage. However, your root partition Amazon EBS volume
- *   remains, continues to persist your data, and you are charged for
- *   Amazon EBS volume usage. You can restart your instance at any time.
+ *   Calls the StartInstances API operation.
  *   @param params [Object]
  *     * +InstanceIds+ - (*required*, <tt>Array<String></tt>) The list of
  *       Amazon EC2 instances to start.
@@ -5531,17 +5370,15 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method stopInstances(params, callback)
- *   Stops an instance that uses an Amazon EBS volume as its root device.
- *   Instances that use Amazon EBS volumes as their root devices can be
- *   quickly stopped and started. When an instance is stopped, the
- *   compute resources are released and you are not billed for hourly
- *   instance usage. However, your root partition Amazon EBS volume
- *   remains, continues to persist your data, and you are charged for
- *   Amazon EBS volume usage. You can restart your instance at any time.
+ *   Calls the StopInstances API operation.
  *   @param params [Object]
  *     * +InstanceIds+ - (*required*, <tt>Array<String></tt>) The list of
  *       Amazon EC2 instances to stop.
- *     * +Force+ - (<tt>Boolean</tt>)
+ *     * +Force+ - (<tt>Boolean</tt>) Forces the instance to stop. The
+ *       instance will not have an opportunity to flush file system
+ *       caches nor file system meta data. If you use this option, you
+ *       must perform file system check and repair procedures. This
+ *       option is not recommended for Windows instances.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -5573,9 +5410,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method terminateInstances(params, callback)
- *   The TerminateInstances operation shuts down one or more instances.
- *   This operation is idempotent; if you terminate an instance more than
- *   once, each call will succeed.
+ *   Calls the TerminateInstances API operation.
  *   @param params [Object]
  *     * +InstanceIds+ - (*required*, <tt>Array<String></tt>) The list of
  *       instances to terminate.
@@ -5627,7 +5462,7 @@ AWS.EC2 = inherit({})
  *     subsequent event callback registration.
  *
  * @!method unmonitorInstances(params, callback)
- *   Disables monitoring for a running instance.
+ *   Calls the UnmonitorInstances API operation.
  *   @param params [Object]
  *     * +InstanceIds+ - (*required*, <tt>Array<String></tt>) The list of
  *       Amazon EC2 instances on which to disable monitoring.
