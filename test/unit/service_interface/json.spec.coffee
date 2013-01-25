@@ -92,6 +92,13 @@ describe 'AWS.ServiceInterface.Json', ->
       expect(response.error.message).toEqual(null)
       expect(response.data).toEqual(null)
 
+    it 'returns UnknownError when the error type is not set', ->
+      extractError '{"message":"Error Message" }'
+      expect(response.error instanceof Error).toBeTruthy()
+      expect(response.error.code).toEqual('UnknownError')
+      expect(response.error.message).toEqual('Error Message')
+      expect(response.data).toEqual(null)
+
     it 'returns null for the message when not present', ->
       extractError '{"__type":"ErrorCode" }'
       expect(response.error instanceof Error).toBeTruthy()
