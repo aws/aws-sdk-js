@@ -166,9 +166,25 @@ describe 'AWS.util.crypto', ->
       expected = util.sha256(input, 'hex')
       expect(expected).toEqual(result)
 
-    it 'accepts UTF-8 input for key and string', ->
+    it 'accepts UTF-8 input', ->
       r = util.sha256('ß∂ƒ©', 'hex')
       expect(r).toEqual('3c01ddd413d2cacac59a255e4aade0d9058a8a9ea8b2dfe5bb2dc4ed132b4139')
+
+  describe 'md5', ->
+    input = 'foo'
+    result = 'acbd18db4cc2f85cedef654fccc4a4d8'
+
+    it 'should return binary data hashed with md5', ->
+      expected = util.md5(input)
+      expect(util.toHex(expected)).toEqual(result)
+
+    it 'should return hex data hashed with md5', ->
+      expected = util.md5(input, 'hex')
+      expect(expected).toEqual(result)
+
+    it 'accepts UTF-8 input', ->
+      r = util.md5('ￃ', 'hex')
+      expect(r).toEqual('b497dbbe19fb58cddaeef11f9d40804c')
 
 describe 'AWS.util.each', ->
   it 'should iterate over a hash', ->
