@@ -390,7 +390,6 @@ AWS.S3 = inherit({})
  *     * +MFA+ - (<tt>String</tt>) The concatenation of the
  *       authentication device''s serial number, a space, and the value
  *       that is displayed on your authentication device.
- *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
