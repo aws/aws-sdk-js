@@ -84,8 +84,8 @@ describe 'AWS.Request', ->
         expect(error.message).toEqual('fail')
         expect(reqError.message).toEqual('fail')
 
-    it 'retries in the middle of a failing stream', ->
-      data = ''; error = null; reqError = null; done = false
+    it 'fails if retry occurs in the middle of a failing stream', ->
+      data = ''; error = null; reqError = null; resp = null
       spyOn(AWS.HttpClient, 'getInstance')
       AWS.HttpClient.getInstance.andReturn handleRequest: (req, resp) ->
         process.nextTick ->
@@ -105,12 +105,13 @@ describe 'AWS.Request', ->
       runs ->
         request = client.makeRequest('mockMethod')
         request.on 'error', (e) -> reqError = e
-        request.on 'complete', -> done = true
+        request.on 'complete', (r) -> resp = r
         s = request.createReadStream()
         s.on 'error', (e) -> error = e
         s.on 'data', (c) -> data += c.toString()
-      waitsFor -> done == true
+      waitsFor -> resp != null
       runs ->
-        expect(data).toEqual('FOOBARFOOBARBAZQUX')
-        expect(error).toEqual(null)
-        expect(reqError).toEqual(null)
+        expect(data).toEqual('FOOBAR')
+        expect(error.code).toEqual('NetworkingError')
+        expect(reqError.code).toEqual('NetworkingError')
+        expect(resp.retryCount).toEqual(0)
