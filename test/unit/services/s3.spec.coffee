@@ -290,6 +290,6 @@ describe 'AWS.S3.Client', ->
       loc = null
       s3 = new AWS.S3.Client(region:'eu-west-1')
       s3.makeRequest = (op, params) ->
-        loc = params.LocationConstraint
+        loc = params.CreateBucketConfiguration.LocationConstraint
       s3.createBucket(Bucket:'name')
       expect(loc).toEqual('eu-west-1')

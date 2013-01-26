@@ -112,11 +112,8 @@ describe 'AWS.ServiceInterface.RestXml', ->
                       m:
                         Foo: {}
                         Bar: {}
-              Enabled: # boolean
-                t: 'b'
 
           request.params =
-            Enabled: true
             ACL: 'canned-acl'
             Config:
               Abc: 'abc'
@@ -133,27 +130,24 @@ describe 'AWS.ServiceInterface.RestXml', ->
               mno: 'hjk'
 
         xml = """
-        <ComplexRequest xmlns="http://mockservice.com/xmlns">
-          <Config>
-            <Abc>abc</Abc>
-            <Locations>
-              <Location>a</Location>
-              <Location>b</Location>
-              <Location>c</Location>
-            </Locations>
-            <Data>
-              <member>
-                <Foo>foo1</Foo>
-                <Bar>bar1</Bar>
-              </member>
-              <member>
-                <Foo>foo2</Foo>
-                <Bar>bar2</Bar>
-              </member>
-            </Data>
-          </Config>
-          <Enabled>true</Enabled>
-        </ComplexRequest>
+        <Config xmlns="http://mockservice.com/xmlns">
+          <Abc>abc</Abc>
+          <Locations>
+            <Location>a</Location>
+            <Location>b</Location>
+            <Location>c</Location>
+          </Locations>
+          <Data>
+            <member>
+              <Foo>foo1</Foo>
+              <Bar>bar1</Bar>
+            </member>
+            <member>
+              <Foo>foo2</Foo>
+              <Bar>bar2</Bar>
+            </member>
+          </Data>
+        </Config>
         """
 
         expect(request.httpRequest.method).toEqual('POST')
