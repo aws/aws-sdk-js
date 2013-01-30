@@ -39,7 +39,10 @@ function customEval(cmd, context, filename, callback) {
             context.data = resp.data;
             context.error = resp.error;
           });
-          context.resp = value.send();
+          context.request = value;
+          context.data = null;
+          context.error = null;
+          context.response = value.send();
         } catch (err2) {
           callback(err2, null);
           return;
