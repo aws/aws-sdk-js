@@ -213,18 +213,26 @@ describe 'AWS.ServiceInterface.RestXml', ->
       """
       expect(response.data).toEqual({Foo:'foo', Bar:['a', 'b', 'c']})
 
-    it 'sets payload element to a Buffer object', ->
+    it 'sets payload element to a Buffer object when it streams', ->
       operation.op = 'Body'
+      operation.o = {Body:{s:1}}
       extractData 'Buffer data'
       expect(response.data.Body instanceof Buffer).toBeTruthy()
       expect(response.data.Body.toString()).toEqual('Buffer data')
 
+    it 'sets payload element to String when it does not stream', ->
+      operation.op = 'Body'
+      operation.o = {Body:{}}
+      extractData 'Buffer data'
+      expect(typeof response.data.Body).toEqual('string')
+      expect(response.data.Body).toEqual('Buffer data')
+
     it 'sets payload element along with other outputs', ->
       response.httpResponse.headers['x-amz-foo'] = 'foo'
       response.httpResponse.headers['x-amz-bar'] = 'bar'
-      operation.o = {Foo:{l:'header',n:'x-amz-foo'},Bar:{l:'header',n:'x-amz-bar'}}
+      operation.o = {Foo:{l:'header',n:'x-amz-foo'},Bar:{l:'header',n:'x-amz-bar'},Baz:{}}
       operation.op = 'Baz'
       extractData 'Buffer data'
       expect(response.data.Foo).toEqual('foo')
       expect(response.data.Bar).toEqual('bar')
-      expect(response.data.Baz.toString()).toEqual('Buffer data')
+      expect(response.data.Baz).toEqual('Buffer data')
