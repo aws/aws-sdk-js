@@ -66,6 +66,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadAbort.html
+ *     Amazon S3 Documentation for AbortMultipartUpload
  *
  * @!method completeMultipartUpload(params, callback)
  *   Calls the CompleteMultipartUpload API operation.
@@ -100,6 +102,8 @@ AWS.S3 = inherit({})
  *       * +VersionId+ - (<tt>String</tt>) Version of the object.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadComplete.html
+ *     Amazon S3 Documentation for CompleteMultipartUpload
  *
  * @!method copyObject(params, callback)
  *   Calls the CopyObject API operation.
@@ -172,6 +176,8 @@ AWS.S3 = inherit({})
  *         encryption algorithm used when storing this object in S3.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectCOPY.html
+ *     Amazon S3 Documentation for CopyObject
  *
  * @!method createBucket(params, callback)
  *   Calls the CreateBucket API operation.
@@ -203,6 +209,8 @@ AWS.S3 = inherit({})
  *       * +Location+ - (<tt>String</tt>)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUT.html
+ *     Amazon S3 Documentation for CreateBucket
  *
  * @!method createMultipartUpload(params, callback)
  *   Calls the CreateMultipartUpload API operation.
@@ -261,6 +269,8 @@ AWS.S3 = inherit({})
  *         encryption algorithm used when storing this object in S3.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadInitiate.html
+ *     Amazon S3 Documentation for CreateMultipartUpload
  *
  * @!method deleteBucket(params, callback)
  *   Calls the DeleteBucket API operation.
@@ -276,6 +286,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETE.html
+ *     Amazon S3 Documentation for DeleteBucket
  *
  * @!method deleteBucketCors(params, callback)
  *   Calls the DeleteBucketCors API operation.
@@ -291,6 +303,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEcors.html
+ *     Amazon S3 Documentation for DeleteBucketCors
  *
  * @!method deleteBucketLifecycle(params, callback)
  *   Calls the DeleteBucketLifecycle API operation.
@@ -306,6 +320,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html
+ *     Amazon S3 Documentation for DeleteBucketLifecycle
  *
  * @!method deleteBucketPolicy(params, callback)
  *   Calls the DeleteBucketPolicy API operation.
@@ -321,6 +337,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEpolicy.html
+ *     Amazon S3 Documentation for DeleteBucketPolicy
  *
  * @!method deleteBucketTagging(params, callback)
  *   Calls the DeleteBucketTagging API operation.
@@ -336,6 +354,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEtagging.html
+ *     Amazon S3 Documentation for DeleteBucketTagging
  *
  * @!method deleteBucketWebsite(params, callback)
  *   Calls the DeleteBucketWebsite API operation.
@@ -351,6 +371,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEwebsite.html
+ *     Amazon S3 Documentation for DeleteBucketWebsite
  *
  * @!method deleteObject(params, callback)
  *   Calls the DeleteObject API operation.
@@ -373,6 +395,8 @@ AWS.S3 = inherit({})
  *         delete marker created as a result of the DELETE operation.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectDELETE.html
+ *     Amazon S3 Documentation for DeleteObject
  *
  * @!method deleteObjects(params, callback)
  *   Calls the DeleteObjects API operation.
@@ -411,6 +435,8 @@ AWS.S3 = inherit({})
  *         * +Message+ - (<tt>String</tt>)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/multiobjectdeleteapi.html
+ *     Amazon S3 Documentation for DeleteObjects
  *
  * @!method getBucketAcl(params, callback)
  *   Calls the GetBucketAcl API operation.
@@ -442,6 +468,8 @@ AWS.S3 = inherit({})
  *           given to the grantee.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETacl.html
+ *     Amazon S3 Documentation for GetBucketAcl
  *
  * @!method getBucketCors(params, callback)
  *   Calls the GetBucketCors API operation.
@@ -472,6 +500,8 @@ AWS.S3 = inherit({})
  *           XMLHttpRequest object).
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETcors.html
+ *     Amazon S3 Documentation for GetBucketCors
  *
  * @!method getBucketLifecycle(params, callback)
  *   Calls the GetBucketLifecycle API operation.
@@ -510,6 +540,8 @@ AWS.S3 = inherit({})
  *             is to be moved or deleted. Should be in GMT ISO 8601 Format.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html
+ *     Amazon S3 Documentation for GetBucketLifecycle
  *
  * @!method getBucketLocation(params, callback)
  *   Calls the GetBucketLocation API operation.
@@ -527,6 +559,8 @@ AWS.S3 = inherit({})
  *       * +LocationConstraint+ - (<tt>String</tt>)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlocation.html
+ *     Amazon S3 Documentation for GetBucketLocation
  *
  * @!method getBucketLogging(params, callback)
  *   Calls the GetBucketLogging API operation.
@@ -566,6 +600,8 @@ AWS.S3 = inherit({})
  *           * +Permission+ - (<tt>String</tt>)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlogging.html
+ *     Amazon S3 Documentation for GetBucketLogging
  *
  * @!method getBucketNotification(params, callback)
  *   Calls the GetBucketNotification API operation.
@@ -588,6 +624,8 @@ AWS.S3 = inherit({})
  *           notifications.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETnotification.html
+ *     Amazon S3 Documentation for GetBucketNotification
  *
  * @!method getBucketPolicy(params, callback)
  *   Calls the GetBucketPolicy API operation.
@@ -606,6 +644,8 @@ AWS.S3 = inherit({})
  *         document.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETpolicy.html
+ *     Amazon S3 Documentation for GetBucketPolicy
  *
  * @!method getBucketRequestPayment(params, callback)
  *   Calls the GetBucketRequestPayment API operation.
@@ -624,6 +664,8 @@ AWS.S3 = inherit({})
  *         and request fees.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTrequestPaymentGET.html
+ *     Amazon S3 Documentation for GetBucketRequestPayment
  *
  * @!method getBucketTagging(params, callback)
  *   Calls the GetBucketTagging API operation.
@@ -643,6 +685,8 @@ AWS.S3 = inherit({})
  *         * +Value+ - (<tt>String</tt>) Value of the tag.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETtagging.html
+ *     Amazon S3 Documentation for GetBucketTagging
  *
  * @!method getBucketVersioning(params, callback)
  *   Calls the GetBucketVersioning API operation.
@@ -665,6 +709,8 @@ AWS.S3 = inherit({})
  *         returned.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETversioningStatus.html
+ *     Amazon S3 Documentation for GetBucketVersioning
  *
  * @!method getBucketWebsite(params, callback)
  *   Calls the GetBucketWebsite API operation.
@@ -746,6 +792,8 @@ AWS.S3 = inherit({})
  *           used in the original request.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETwebsite.html
+ *     Amazon S3 Documentation for GetBucketWebsite
  *
  * @!method getObject(params, callback)
  *   Calls the GetObject API operation.
@@ -840,6 +888,8 @@ AWS.S3 = inherit({})
  *         store with the object in S3.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGET.html
+ *     Amazon S3 Documentation for GetObject
  *
  * @!method getObjectAcl(params, callback)
  *   Calls the GetObjectAcl API operation.
@@ -874,6 +924,8 @@ AWS.S3 = inherit({})
  *           given to the grantee.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETacl.html
+ *     Amazon S3 Documentation for GetObjectAcl
  *
  * @!method getObjectTorrent(params, callback)
  *   Calls the GetObjectTorrent API operation.
@@ -892,6 +944,8 @@ AWS.S3 = inherit({})
  *       * +Body+ - (<tt>String</tt>)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETtorrent.html
+ *     Amazon S3 Documentation for GetObjectTorrent
  *
  * @!method headBucket(params, callback)
  *   Calls the HeadBucket API operation.
@@ -907,6 +961,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketHEAD.html
+ *     Amazon S3 Documentation for HeadBucket
  *
  * @!method headObject(params, callback)
  *   Calls the HeadObject API operation.
@@ -988,6 +1044,8 @@ AWS.S3 = inherit({})
  *         store with the object in S3.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectHEAD.html
+ *     Amazon S3 Documentation for HeadObject
  *
  * @!method listBuckets(params, callback)
  *   Calls the ListBuckets API operation.
@@ -1009,6 +1067,8 @@ AWS.S3 = inherit({})
  *         * +DisplayName+ - (<tt>String</tt>)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTServiceGET.html
+ *     Amazon S3 Documentation for ListBuckets
  *
  * @!method listMultipartUploads(params, callback)
  *   Calls the ListMultipartUploads API operation.
@@ -1077,6 +1137,8 @@ AWS.S3 = inherit({})
  *           * +DisplayName+ - (<tt>String</tt>) Name of the Principal.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadListMPUpload.html
+ *     Amazon S3 Documentation for ListMultipartUploads
  *
  * @!method listObjectVersions(params, callback)
  *   Calls the ListObjectVersions API operation.
@@ -1147,6 +1209,8 @@ AWS.S3 = inherit({})
  *         * +Prefix+ - (<tt>String</tt>)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETVersion.html
+ *     Amazon S3 Documentation for ListObjectVersions
  *
  * @!method listObjects(params, callback)
  *   Calls the ListObjects API operation.
@@ -1195,6 +1259,8 @@ AWS.S3 = inherit({})
  *         * +Prefix+ - (<tt>String</tt>)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGET.html
+ *     Amazon S3 Documentation for ListObjects
  *
  * @!method listParts(params, callback)
  *   Calls the ListParts API operation.
@@ -1254,6 +1320,8 @@ AWS.S3 = inherit({})
  *         store the object.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadListParts.html
+ *     Amazon S3 Documentation for ListParts
  *
  * @!method putBucketAcl(params, callback)
  *   Calls the PutBucketAcl API operation.
@@ -1297,6 +1365,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTacl.html
+ *     Amazon S3 Documentation for PutBucketAcl
  *
  * @!method putBucketCors(params, callback)
  *   Calls the PutBucketCors API operation.
@@ -1328,6 +1398,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTcors.html
+ *     Amazon S3 Documentation for PutBucketCors
  *
  * @!method putBucketLifecycle(params, callback)
  *   Calls the PutBucketLifecycle API operation.
@@ -1369,6 +1441,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html
+ *     Amazon S3 Documentation for PutBucketLifecycle
  *
  * @!method putBucketLogging(params, callback)
  *   Calls the PutBucketLogging API operation.
@@ -1409,6 +1483,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTlogging.html
+ *     Amazon S3 Documentation for PutBucketLogging
  *
  * @!method putBucketNotification(params, callback)
  *   Calls the PutBucketNotification API operation.
@@ -1432,6 +1508,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTnotification.html
+ *     Amazon S3 Documentation for PutBucketNotification
  *
  * @!method putBucketPolicy(params, callback)
  *   Calls the PutBucketPolicy API operation.
@@ -1450,6 +1528,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTpolicy.html
+ *     Amazon S3 Documentation for PutBucketPolicy
  *
  * @!method putBucketRequestPayment(params, callback)
  *   Calls the PutBucketRequestPayment API operation.
@@ -1469,6 +1549,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTrequestPaymentPUT.html
+ *     Amazon S3 Documentation for PutBucketRequestPayment
  *
  * @!method putBucketTagging(params, callback)
  *   Calls the PutBucketTagging API operation.
@@ -1489,6 +1571,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTtagging.html
+ *     Amazon S3 Documentation for PutBucketTagging
  *
  * @!method putBucketVersioning(params, callback)
  *   Calls the PutBucketVersioning API operation.
@@ -1516,6 +1600,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html
+ *     Amazon S3 Documentation for PutBucketVersioning
  *
  * @!method putBucketWebsite(params, callback)
  *   Calls the PutBucketWebsite API operation.
@@ -1600,6 +1686,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html
+ *     Amazon S3 Documentation for PutBucketWebsite
  *
  * @!method putObject(params, callback)
  *   Calls the PutObject API operation.
@@ -1658,6 +1746,8 @@ AWS.S3 = inherit({})
  *       * +VersionId+ - (<tt>String</tt>) Version of the object.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectPUT.html
+ *     Amazon S3 Documentation for PutObject
  *
  * @!method putObjectAcl(params, callback)
  *   Calls the PutObjectAcl API operation.
@@ -1702,6 +1792,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectPUTacl.html
+ *     Amazon S3 Documentation for PutObjectAcl
  *
  * @!method restoreObject(params, callback)
  *   Calls the RestoreObject API operation.
@@ -1721,6 +1813,8 @@ AWS.S3 = inherit({})
  *       the request. Set to +null+ if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectRestore.html
+ *     Amazon S3 Documentation for RestoreObject
  *
  * @!method uploadPart(params, callback)
  *   Calls the UploadPart API operation.
@@ -1746,6 +1840,8 @@ AWS.S3 = inherit({})
  *       * +ETag+ - (<tt>String</tt>) Entity tag for the uploaded object.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadUploadPart.html
+ *     Amazon S3 Documentation for UploadPart
  *
  * @!method uploadPartCopy(params, callback)
  *   Calls the UploadPartCopy API operation.
@@ -1793,6 +1889,8 @@ AWS.S3 = inherit({})
  *         encryption algorithm used when storing this object in S3.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
+ *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadUploadPartCopy.html
+ *     Amazon S3 Documentation for UploadPartCopy
  *
  *
  * @!method constructor(options)
