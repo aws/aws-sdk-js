@@ -147,6 +147,19 @@ describe 'AWS.ServiceInterface.Rest', ->
           response.httpResponse.headers['Content-Type'] = 'text/plain'
         expect(response.data.ContentType).toEqual('text/plain')
 
+      it 'extracts map types from header', ->
+        extractData ->
+          operation.o = {Metadata:{t:'m',l:'header',n:'x-amz-meta-'}}
+          response.httpResponse.headers['X-AMZ-META-FOO'] = 'foo'
+          response.httpResponse.headers['x-amz-meta-bar'] = 'bar'
+        expect(response.data.Metadata.FOO).toEqual('foo')
+        expect(response.data.Metadata.bar).toEqual('bar')
+
+      it 'adds empty map if no matching headers are found', ->
+        extractData ->
+          operation.o = {Metadata:{t:'m',l:'header',n:'x-amz-meta-'}}
+        expect(response.data.Metadata).toEqual({})
+
     describe 'status code', ->
       it 'extracts the http status when instructed to', ->
         extractData ->
