@@ -179,6 +179,101 @@ describe 'AWS.XML.Parser', ->
 
   describe 'maps', ->
 
+    describe 'maps', ->
+      it 'expects entry, key, and value elements by default', ->
+        # example from IAM GetAccountSummary (output)
+        xml = """
+        <xml>
+          <SummaryMap>
+            <entry>
+              <key>Groups</key>
+              <value>31</value>
+            </entry>
+            <entry>
+              <key>GroupsQuota</key>
+              <value>50</value>
+            </entry>
+            <entry>
+              <key>UsersQuota</key>
+              <value>150</value>
+            </entry>
+          </SummaryMap>
+        </xml>
+        """
+        rules = {SummaryMap:{t:'m',m:{t:'i'}}}
+        parse xml, rules, (data) ->
+          expect(data).toEqual(SummaryMap:{Groups:31,GroupsQuota:50,UsersQuota:150})
+
+      it 'can use alternate names for key and value elements', ->
+        # using Property/Count instead of key/value, also applied a name
+        # trait to the Summary map to rename it
+        xml = """
+        <xml>
+          <SummaryMap>
+            <entry>
+              <Property>Groups</Property>
+              <Count>31</Count>
+            </entry>
+            <entry>
+              <Property>GroupsQuota</Property>
+              <Count>50</Count>
+            </entry>
+            <entry>
+              <Property>UsersQuota</Property>
+              <Count>150</Count>
+            </entry>
+          </SummaryMap>
+        </xml>
+        """
+        rules =
+          SummaryMap:
+            t: 'm'
+            n: 'Summary',
+            k:
+              n: 'Property'
+            m:
+              t: 'i'
+              n: 'Count'
+        parse xml, rules, (data) ->
+          expect(data).toEqual(Summary:{Groups:31,GroupsQuota:50,UsersQuota:150})
+
+      describe 'flattened', ->
+        it 'expects key and value elements by default', ->
+          xml = """
+          <xml>
+            <Attributes>
+              <key>color</key>
+              <value>red</value>
+            </Attributes>
+            <Attributes>
+              <key>size</key>
+              <value>large</value>
+            </Attributes>
+          </xml>
+          """
+          rules = {Attributes:{t:'m',f:1}}
+          parse xml, rules, (data) ->
+            expect(data).toEqual({Attributes:{color:'red',size:'large'}})
+
+        it 'can use alternate names for key and value elements', ->
+          # using AttrName/AttrValue instead of key/value, also applied a name
+          # trait to the Attributes map
+          xml = """
+          <xml>
+            <Attribute>
+              <AttrName>age</AttrName>
+              <AttrValue>35</AttrValue>
+            </Attribute>
+            <Attribute>
+              <AttrName>height</AttrName>
+              <AttrValue>72</AttrValue>
+            </Attribute>
+          </xml>
+          """
+          rules = {Attribute:{n:'Attributes',t:'m',f:1,k:{n:'AttrName'},m:{n:'AttrValue',t:'i'}}}
+          parse xml, rules, (data) ->
+            expect(data).toEqual({Attributes:{age:35,height:72}})
+
   describe 'booleans', ->
 
     rules = {enabled:{t:'b'}}
