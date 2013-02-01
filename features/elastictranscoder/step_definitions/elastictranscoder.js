@@ -23,9 +23,9 @@ module.exports = function() {
     var world = this;
     var timestamp = world.AWS.util.date.unixTimestamp() * 1000;
 
-    this.bucket = 'aws-sdk-js-integration-elastictranscoder';
+    this.bucket = 'aws-sdk-js-integration-elastictranscoder-' + timestamp;
     new this.AWS.S3.Client().createBucket({Bucket:this.bucket}, function(err, data) {
-      if (err) callback.fail('Could not create bucket ' + world.bucket);
+      if (err) callback.fail(err);
 
       var config = JSON.parse(world.AWS.util.readFileSync('configuration'));
       var params = {
