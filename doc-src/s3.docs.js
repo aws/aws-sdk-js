@@ -74,13 +74,13 @@ AWS.S3 = inherit({})
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +UploadId+ - (*required*, <tt>String</tt>)
  *     * +MultipartUpload+ - (<tt>Object</tt>)
  *       * +Parts+ - (<tt>Array<Object></tt>)
- *         * +PartNumber+ - (<tt>Integer</tt>) Part number that
- *           identifies the part.
  *         * +ETag+ - (<tt>String</tt>) Entity tag returned when the part
  *           was uploaded.
+ *         * +PartNumber+ - (<tt>Integer</tt>) Part number that
+ *           identifies the part.
+ *     * +UploadId+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -108,33 +108,8 @@ AWS.S3 = inherit({})
  * @!method copyObject(params, callback)
  *   Calls the CopyObject API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +MetadataDirective+ - (<tt>String</tt>) Specifies whether the
- *       metadata is copied from the source object or replaced with
- *       metadata provided in the request.
- *     * +CopySource+ - (*required*, <tt>String</tt>) The name of the
- *       source bucket and key name of the source object, separated by a
- *       slash (/). Must be URL-encoded.
- *     * +CopySourceIfMatch+ - (<tt>Date</tt>) Copies the object if its
- *       entity tag (ETag) matches the specified tag.
- *     * +CopySourceIfNoneMatch+ - (<tt>Date</tt>) Copies the object if
- *       its entity tag (ETag) is different than the specified ETag.
- *     * +CopySourceIfUnmodifiedSince+ - (<tt>Date</tt>) Copies the
- *       object if it hasn''t been modified since the specified time.
- *     * +CopySourceIfModifiedSince+ - (<tt>Date</tt>) Copies the object
- *       if it has been modified since the specified time.
- *     * +StorageClass+ - (<tt>String</tt>) The type of storage to use
- *       for the object. Defaults to 'STANDARD'.
  *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the object.
- *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to read the
- *       object data and its metadata.
- *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
- *       object ACL.
- *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
- *       ACL for the applicable object.
- *     * +GrantFullControl+ - (<tt>String</tt>) Gives the grantee READ,
- *       READ_ACP, and WRITE_ACP permissions on the object.
+ *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +CacheControl+ - (<tt>String</tt>) Specifies caching behavior
  *       along the request/reply chain.
  *     * +ContentDisposition+ - (<tt>String</tt>) Specifies
@@ -147,16 +122,41 @@ AWS.S3 = inherit({})
  *       is in.
  *     * +ContentType+ - (<tt>String</tt>) A standard MIME type
  *       describing the format of the object data.
+ *     * +CopySource+ - (*required*, <tt>String</tt>) The name of the
+ *       source bucket and key name of the source object, separated by a
+ *       slash (/). Must be URL-encoded.
+ *     * +CopySourceIfMatch+ - (<tt>Date</tt>) Copies the object if its
+ *       entity tag (ETag) matches the specified tag.
+ *     * +CopySourceIfModifiedSince+ - (<tt>Date</tt>) Copies the object
+ *       if it has been modified since the specified time.
+ *     * +CopySourceIfNoneMatch+ - (<tt>Date</tt>) Copies the object if
+ *       its entity tag (ETag) is different than the specified ETag.
+ *     * +CopySourceIfUnmodifiedSince+ - (<tt>Date</tt>) Copies the
+ *       object if it hasn''t been modified since the specified time.
  *     * +Expires+ - (<tt>Date</tt>) The date and time at which the
  *       object is no longer cacheable.
+ *     * +GrantFullControl+ - (<tt>String</tt>) Gives the grantee READ,
+ *       READ_ACP, and WRITE_ACP permissions on the object.
+ *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to read the
+ *       object data and its metadata.
+ *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
+ *       object ACL.
+ *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
+ *       ACL for the applicable object.
+ *     * +Key+ - (*required*, <tt>String</tt>)
+ *     * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
+ *       store with the object in S3.
+ *     * +MetadataDirective+ - (<tt>String</tt>) Specifies whether the
+ *       metadata is copied from the source object or replaced with
+ *       metadata provided in the request.
+ *     * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
+ *       encryption algorithm used when storing this object in S3.
+ *     * +StorageClass+ - (<tt>String</tt>) The type of storage to use
+ *       for the object. Defaults to 'STANDARD'.
  *     * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
  *       configured as a website, redirects requests for this object to
  *       another object in the same bucket or to an external URL. Amazon
  *       S3 stores the value of this header in the object metadata.
- *     * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
- *       encryption algorithm used when storing this object in S3.
- *     * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
- *       store with the object in S3.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -182,21 +182,21 @@ AWS.S3 = inherit({})
  * @!method createBucket(params, callback)
  *   Calls the CreateBucket API operation.
  *   @param params [Object]
+ *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the bucket.
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +CreateBucketConfiguration+ - (<tt>Object</tt>)
  *       * +LocationConstraint+ - (<tt>String</tt>) Specifies the region
  *         where the bucket will be created.
- *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the bucket.
- *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to list the
- *       objects in the bucket.
- *     * +GrantWrite+ - (<tt>String</tt>) Allows grantee to create,
- *       overwrite, and delete any object in the bucket.
- *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
- *       bucket ACL.
- *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
- *       ACL for the applicable bucket.
  *     * +GrantFullControl+ - (<tt>String</tt>) Allows grantee the read,
  *       write, read ACP, and write ACP permissions on the bucket.
+ *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to list the
+ *       objects in the bucket.
+ *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
+ *       bucket ACL.
+ *     * +GrantWrite+ - (<tt>String</tt>) Allows grantee to create,
+ *       overwrite, and delete any object in the bucket.
+ *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
+ *       ACL for the applicable bucket.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -215,19 +215,8 @@ AWS.S3 = inherit({})
  * @!method createMultipartUpload(params, callback)
  *   Calls the CreateMultipartUpload API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +StorageClass+ - (<tt>String</tt>) The type of storage to use
- *       for the object. Defaults to 'STANDARD'.
  *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the object.
- *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to read the
- *       object data and its metadata.
- *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
- *       object ACL.
- *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
- *       ACL for the applicable object.
- *     * +GrantFullControl+ - (<tt>String</tt>) Gives the grantee READ,
- *       READ_ACP, and WRITE_ACP permissions on the object.
+ *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +CacheControl+ - (<tt>String</tt>) Specifies caching behavior
  *       along the request/reply chain.
  *     * +ContentDisposition+ - (<tt>String</tt>) Specifies
@@ -242,14 +231,25 @@ AWS.S3 = inherit({})
  *       describing the format of the object data.
  *     * +Expires+ - (<tt>Date</tt>) The date and time at which the
  *       object is no longer cacheable.
+ *     * +GrantFullControl+ - (<tt>String</tt>) Gives the grantee READ,
+ *       READ_ACP, and WRITE_ACP permissions on the object.
+ *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to read the
+ *       object data and its metadata.
+ *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
+ *       object ACL.
+ *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
+ *       ACL for the applicable object.
+ *     * +Key+ - (*required*, <tt>String</tt>)
+ *     * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
+ *       store with the object in S3.
+ *     * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
+ *       encryption algorithm used when storing this object in S3.
+ *     * +StorageClass+ - (<tt>String</tt>) The type of storage to use
+ *       for the object. Defaults to 'STANDARD'.
  *     * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
  *       configured as a website, redirects requests for this object to
  *       another object in the same bucket or to an external URL. Amazon
  *       S3 stores the value of this header in the object metadata.
- *     * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
- *       encryption algorithm used when storing this object in S3.
- *     * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
- *       store with the object in S3.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -403,14 +403,14 @@ AWS.S3 = inherit({})
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Delete+ - (*required*, <tt>Object</tt>)
- *       * +Quiet+ - (<tt>Boolean</tt>) Element to enable quiet mode for
- *         the request. When you add this element, you must set its value
- *         to true.
  *       * +Objects+ - (*required*, <tt>Array<Object></tt>)
  *         * +Key+ - (*required*, <tt>String</tt>) Key name of the object
  *           to delete.
  *         * +VersionId+ - (<tt>String</tt>) VersionId for the specific
  *           version of the object to delete.
+ *       * +Quiet+ - (<tt>Boolean</tt>) Element to enable quiet mode for
+ *         the request. When you add this element, you must set its value
+ *         to true.
  *     * +MFA+ - (<tt>String</tt>) The concatenation of the
  *       authentication device''s serial number, a space, and the value
  *       that is displayed on your authentication device.
@@ -799,37 +799,37 @@ AWS.S3 = inherit({})
  *   Calls the GetObject API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * +IfMatch+ - (<tt>String</tt>) Return the object only if its
+ *       entity tag (ETag) is the same as the one specified, otherwise
+ *       return a 412 (precondition failed).
+ *     * +IfModifiedSince+ - (<tt>Date</tt>) Return the object only if it
+ *       has been modified since the specified time, otherwise return a
+ *       304 (not modified).
+ *     * +IfNoneMatch+ - (<tt>String</tt>) Return the object only if its
+ *       entity tag (ETag) is different from the one specified, otherwise
+ *       return a 304 (not modified).
+ *     * +IfUnmodifiedSince+ - (<tt>Date</tt>) Return the object only if
+ *       it has not been modified since the specified time, otherwise
+ *       return a 412 (precondition failed).
  *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +ResponseContentType+ - (<tt>String</tt>) Sets the Content-Type
- *       header of the response.
- *     * +ResponseContentLanguage+ - (<tt>String</tt>) Sets the
- *       Content-Language header of the response.
- *     * +ResponseExpires+ - (<tt>Date</tt>) Sets the Expires header of
- *       the response.
+ *     * +Range+ - (<tt>String</tt>) Downloads the specified range bytes
+ *       of an object. For more information about the HTTP Range header,
+ *       go to
+ *       http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.
  *     * +ResponseCacheControl+ - (<tt>String</tt>) Sets the
  *       Cache-Control header of the response.
  *     * +ResponseContentDisposition+ - (<tt>String</tt>) Sets the
  *       Content-Disposition header of the response
  *     * +ResponseContentEncoding+ - (<tt>String</tt>) Sets the
  *       Content-Encoding header of the response.
+ *     * +ResponseContentLanguage+ - (<tt>String</tt>) Sets the
+ *       Content-Language header of the response.
+ *     * +ResponseContentType+ - (<tt>String</tt>) Sets the Content-Type
+ *       header of the response.
+ *     * +ResponseExpires+ - (<tt>Date</tt>) Sets the Expires header of
+ *       the response.
  *     * +VersionId+ - (<tt>String</tt>) VersionId used to reference a
  *       specific version of the object.
- *     * +Range+ - (<tt>String</tt>) Downloads the specified range bytes
- *       of an object. For more information about the HTTP Range header,
- *       go to
- *       http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.
- *     * +IfModifiedSince+ - (<tt>Date</tt>) Return the object only if it
- *       has been modified since the specified time, otherwise return a
- *       304 (not modified).
- *     * +IfUnmodifiedSince+ - (<tt>Date</tt>) Return the object only if
- *       it has not been modified since the specified time, otherwise
- *       return a 412 (precondition failed).
- *     * +IfMatch+ - (<tt>String</tt>) Return the object only if its
- *       entity tag (ETag) is the same as the one specified, otherwise
- *       return a 412 (precondition failed).
- *     * +IfNoneMatch+ - (<tt>String</tt>) Return the object only if its
- *       entity tag (ETag) is different from the one specified, otherwise
- *       return a 304 (not modified).
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -968,25 +968,25 @@ AWS.S3 = inherit({})
  *   Calls the HeadObject API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * +IfMatch+ - (<tt>String</tt>) Return the object only if its
+ *       entity tag (ETag) is the same as the one specified, otherwise
+ *       return a 412 (precondition failed).
+ *     * +IfModifiedSince+ - (<tt>Date</tt>) Return the object only if it
+ *       has been modified since the specified time, otherwise return a
+ *       304 (not modified).
+ *     * +IfNoneMatch+ - (<tt>String</tt>) Return the object only if its
+ *       entity tag (ETag) is different from the one specified, otherwise
+ *       return a 304 (not modified).
+ *     * +IfUnmodifiedSince+ - (<tt>Date</tt>) Return the object only if
+ *       it has not been modified since the specified time, otherwise
+ *       return a 412 (precondition failed).
  *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +VersionId+ - (<tt>String</tt>) VersionId used to reference a
- *       specific version of the object.
  *     * +Range+ - (<tt>String</tt>) Downloads the specified range bytes
  *       of an object. For more information about the HTTP Range header,
  *       go to
  *       http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.
- *     * +IfModifiedSince+ - (<tt>Date</tt>) Return the object only if it
- *       has been modified since the specified time, otherwise return a
- *       304 (not modified).
- *     * +IfUnmodifiedSince+ - (<tt>Date</tt>) Return the object only if
- *       it has not been modified since the specified time, otherwise
- *       return a 412 (precondition failed).
- *     * +IfMatch+ - (<tt>String</tt>) Return the object only if its
- *       entity tag (ETag) is the same as the one specified, otherwise
- *       return a 412 (precondition failed).
- *     * +IfNoneMatch+ - (<tt>String</tt>) Return the object only if its
- *       entity tag (ETag) is different from the one specified, otherwise
- *       return a 304 (not modified).
+ *     * +VersionId+ - (<tt>String</tt>) VersionId used to reference a
+ *       specific version of the object.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1074,16 +1074,16 @@ AWS.S3 = inherit({})
  *   Calls the ListMultipartUploads API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +Prefix+ - (<tt>String</tt>) Lists in-progress uploads only for
- *       those keys that begin with the specified prefix.
  *     * +Delimiter+ - (<tt>String</tt>) Character you use to group keys.
+ *     * +KeyMarker+ - (<tt>String</tt>) Together with upload-id-marker,
+ *       this parameter specifies the multipart upload after which
+ *       listing should begin.
  *     * +MaxUploads+ - (<tt>Integer</tt>) Sets the maximum number of
  *       multipart uploads, from 1 to 1,000, to return in the response
  *       body. 1,000 is the maximum number of uploads that can be
  *       returned in a response.
- *     * +KeyMarker+ - (<tt>String</tt>) Together with upload-id-marker,
- *       this parameter specifies the multipart upload after which
- *       listing should begin.
+ *     * +Prefix+ - (<tt>String</tt>) Lists in-progress uploads only for
+ *       those keys that begin with the specified prefix.
  *     * +UploadIdMarker+ - (<tt>String</tt>) Together with key-marker,
  *       specifies the multipart upload after which listing should begin.
  *       If key-marker is not specified, the upload-id-marker parameter
@@ -1144,17 +1144,17 @@ AWS.S3 = inherit({})
  *   Calls the ListObjectVersions API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * +Delimiter+ - (<tt>String</tt>) A delimiter is a character you
+ *       use to group keys.
  *     * +KeyMarker+ - (<tt>String</tt>) Specifies the key to start with
  *       when listing objects in a bucket.
- *     * +VersionIdMarker+ - (<tt>String</tt>) Specifies the object
- *       version you want to start listing from.
  *     * +MaxKeys+ - (<tt>Integer</tt>) Sets the maximum number of keys
  *       returned in the response. The response might contain fewer keys
  *       but will never contain more.
- *     * +Delimiter+ - (<tt>String</tt>) A delimiter is a character you
- *       use to group keys.
  *     * +Prefix+ - (<tt>String</tt>) Limits the response to keys that
  *       begin with the specified prefix.
+ *     * +VersionIdMarker+ - (<tt>String</tt>) Specifies the object
+ *       version you want to start listing from.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1215,13 +1215,13 @@ AWS.S3 = inherit({})
  *   Calls the ListObjects API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * +Delimiter+ - (<tt>String</tt>) A delimiter is a character you
+ *       use to group keys.
  *     * +Marker+ - (<tt>String</tt>) Specifies the key to start with
  *       when listing objects in a bucket.
  *     * +MaxKeys+ - (<tt>Integer</tt>) Sets the maximum number of keys
  *       returned in the response. The response might contain fewer keys
  *       but will never contain more.
- *     * +Delimiter+ - (<tt>String</tt>) A delimiter is a character you
- *       use to group keys.
  *     * +Prefix+ - (<tt>String</tt>) Limits the response to keys that
  *       begin with the specified prefix.
  *   @callback callback function(err, data)
@@ -1262,13 +1262,13 @@ AWS.S3 = inherit({})
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +UploadId+ - (*required*, <tt>String</tt>) Upload ID identifying
- *       the multipart upload whose parts are being listed.
  *     * +MaxParts+ - (<tt>Integer</tt>) Sets the maximum number of parts
  *       to return.
  *     * +PartNumberMarker+ - (<tt>String</tt>) Specifies the part after
  *       which listing should begin. Only parts with higher part numbers
  *       will be listed.
+ *     * +UploadId+ - (*required*, <tt>String</tt>) Upload ID identifying
+ *       the multipart upload whose parts are being listed.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1321,35 +1321,35 @@ AWS.S3 = inherit({})
  * @!method putBucketAcl(params, callback)
  *   Calls the PutBucketAcl API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the bucket.
  *     * +AccessControlPolicy+ - (<tt>Object</tt>)
- *       * +Owner+ - (<tt>Object</tt>)
- *         * +ID+ - (<tt>String</tt>)
- *         * +DisplayName+ - (<tt>String</tt>)
  *       * +Grants+ - (<tt>Array<Object></tt>) A list of grants.
  *         * +Grantee+ - (<tt>Object</tt>)
- *           * +Type+ - (*required*, <tt>String</tt>) Type of grantee
- *           * +ID+ - (<tt>String</tt>) The canonical user ID of the
- *             grantee.
  *           * +DisplayName+ - (<tt>String</tt>) Screen name of the
  *             grantee.
  *           * +EmailAddress+ - (<tt>String</tt>) Email address of the
  *             grantee.
+ *           * +ID+ - (<tt>String</tt>) The canonical user ID of the
+ *             grantee.
+ *           * +Type+ - (*required*, <tt>String</tt>) Type of grantee
  *           * +URI+ - (<tt>String</tt>) URI of the grantee group.
  *         * +Permission+ - (<tt>String</tt>) Specifies the permission
  *           given to the grantee.
- *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the bucket.
- *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to list the
- *       objects in the bucket.
- *     * +GrantWrite+ - (<tt>String</tt>) Allows grantee to create,
- *       overwrite, and delete any object in the bucket.
- *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
- *       bucket ACL.
- *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
- *       ACL for the applicable bucket.
+ *       * +Owner+ - (<tt>Object</tt>)
+ *         * +DisplayName+ - (<tt>String</tt>)
+ *         * +ID+ - (<tt>String</tt>)
+ *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *     * +GrantFullControl+ - (<tt>String</tt>) Allows grantee the read,
  *       write, read ACP, and write ACP permissions on the bucket.
- *     * +ContentMD5+ - (<tt>String</tt>)
+ *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to list the
+ *       objects in the bucket.
+ *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
+ *       bucket ACL.
+ *     * +GrantWrite+ - (<tt>String</tt>) Allows grantee to create,
+ *       overwrite, and delete any object in the bucket.
+ *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
+ *       ACL for the applicable bucket.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1369,19 +1369,19 @@ AWS.S3 = inherit({})
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +CORSConfiguration+ - (<tt>Object</tt>)
  *       * +CORSRules+ - (<tt>Array<Object></tt>)
- *         * +AllowedOrigins+ - (<tt>Array<String></tt>) One or more
- *           origins you want customers to be able to access the bucket
- *           from.
  *         * +AllowedMethods+ - (<tt>Array<String></tt>) Identifies HTTP
  *           methods that the domain/origin specified in the rule is
  *           allowed to execute.
- *         * +MaxAgeSeconds+ - (<tt>Integer</tt>) The time in seconds
- *           that your browser is to cache the preflight response for the
- *           specified resource.
+ *         * +AllowedOrigins+ - (<tt>Array<String></tt>) One or more
+ *           origins you want customers to be able to access the bucket
+ *           from.
  *         * +ExposeHeaders+ - (<tt>Array<String></tt>) One or more
  *           headers in the response that you want customers to be able
  *           to access from their applications (for example, from a
  *           JavaScript XMLHttpRequest object).
+ *         * +MaxAgeSeconds+ - (<tt>Integer</tt>) The time in seconds
+ *           that your browser is to cache the preflight response for the
+ *           specified resource.
  *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -1400,8 +1400,16 @@ AWS.S3 = inherit({})
  *   Calls the PutBucketLifecycle API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *     * +LifecycleConfiguration+ - (<tt>Object</tt>)
  *       * +Rules+ - (*required*, <tt>Array<Object></tt>)
+ *         * +Expiration+ - (<tt>Object</tt>)
+ *           * +Date+ - (<tt>Date</tt>) Indicates at what date the object
+ *             is to be moved or deleted. Should be in GMT ISO 8601
+ *             Format.
+ *           * +Days+ - (*required*, <tt>Integer</tt>) Indicates the
+ *             lifetime, in days, of the objects that are subject to the
+ *             rule. The value must be a non-zero positive integer.
  *         * +ID+ - (<tt>String</tt>) Unique identifier for the rule. The
  *           value cannot be longer than 255 characters.
  *         * +Prefix+ - (*required*, <tt>String</tt>) Prefix identifying
@@ -1410,22 +1418,14 @@ AWS.S3 = inherit({})
  *           rule is currently being applied. If 'Disabled', the rule is
  *           not currently being applied.
  *         * +Transition+ - (<tt>Object</tt>)
+ *           * +Date+ - (<tt>Date</tt>) Indicates at what date the object
+ *             is to be moved or deleted. Should be in GMT ISO 8601
+ *             Format.
  *           * +Days+ - (<tt>Integer</tt>) Indicates the lifetime, in
  *             days, of the objects that are subject to the rule. The
  *             value must be a non-zero positive integer.
- *           * +Date+ - (<tt>Date</tt>) Indicates at what date the object
- *             is to be moved or deleted. Should be in GMT ISO 8601
- *             Format.
  *           * +StorageClass+ - (<tt>String</tt>) The class of storage
  *             used to store the object.
- *         * +Expiration+ - (<tt>Object</tt>)
- *           * +Days+ - (*required*, <tt>Integer</tt>) Indicates the
- *             lifetime, in days, of the objects that are subject to the
- *             rule. The value must be a non-zero positive integer.
- *           * +Date+ - (<tt>Date</tt>) Indicates at what date the object
- *             is to be moved or deleted. Should be in GMT ISO 8601
- *             Format.
- *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1453,20 +1453,20 @@ AWS.S3 = inherit({})
  *           target bucket. In this case you should choose a different
  *           TargetPrefix for each source bucket so that the delivered
  *           log files can be distinguished by key.
- *         * +TargetPrefix+ - (<tt>String</tt>) This element lets you
- *           specify a prefix for the keys that the log files will be
- *           stored under.
  *         * +TargetGrants+ - (<tt>Array<Object></tt>)
  *           * +Grantee+ - (<tt>Object</tt>)
- *             * +Type+ - (*required*, <tt>String</tt>) Type of grantee
- *             * +ID+ - (<tt>String</tt>) The canonical user ID of the
- *               grantee.
  *             * +DisplayName+ - (<tt>String</tt>) Screen name of the
  *               grantee.
  *             * +EmailAddress+ - (<tt>String</tt>) Email address of the
  *               grantee.
+ *             * +ID+ - (<tt>String</tt>) The canonical user ID of the
+ *               grantee.
+ *             * +Type+ - (*required*, <tt>String</tt>) Type of grantee
  *             * +URI+ - (<tt>String</tt>) URI of the grantee group.
  *           * +Permission+ - (<tt>String</tt>)
+ *         * +TargetPrefix+ - (<tt>String</tt>) This element lets you
+ *           specify a prefix for the keys that the log files will be
+ *           stored under.
  *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -1485,14 +1485,14 @@ AWS.S3 = inherit({})
  *   Calls the PutBucketNotification API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *     * +NotificationConfiguration+ - (*required*, <tt>Object</tt>)
  *       * +TopicConfiguration+ - (*required*, <tt>Object</tt>)
+ *         * +Event+ - (<tt>String</tt>) Bucket event for which to send
+ *           notifications.
  *         * +Topic+ - (<tt>String</tt>) Amazon SNS topic to which Amazon
  *           S3 will publish a message to report the specified events for
  *           the bucket.
- *         * +Event+ - (<tt>String</tt>) Bucket event for which to send
- *           notifications.
- *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1510,9 +1510,9 @@ AWS.S3 = inherit({})
  *   Calls the PutBucketPolicy API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *     * +Policy+ - (*required*, <tt>String</tt>) The bucket policy as a
  *       JSON document.
- *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1530,10 +1530,10 @@ AWS.S3 = inherit({})
  *   Calls the PutBucketRequestPayment API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *     * +RequestPaymentConfiguration+ - (*required*, <tt>Object</tt>)
  *       * +Payer+ - (*required*, <tt>String</tt>) Specifies who pays for
  *         the download and request fees.
- *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1551,11 +1551,11 @@ AWS.S3 = inherit({})
  *   Calls the PutBucketTagging API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *     * +Tagging+ - (*required*, <tt>Object</tt>)
  *       * +TagSet+ - (*required*, <tt>Array<Object></tt>)
  *         * +Key+ - (*required*, <tt>String</tt>) Name of the tag.
  *         * +Value+ - (*required*, <tt>String</tt>) Value of the tag.
- *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1573,18 +1573,18 @@ AWS.S3 = inherit({})
  *   Calls the PutBucketVersioning API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * +ContentMD5+ - (<tt>String</tt>)
+ *     * +MFA+ - (<tt>String</tt>) The value is the concatenation of the
+ *       authentication device''s serial number, a space, and the value
+ *       displayed on your authentication device.
  *     * +VersioningConfiguration+ - (*required*, <tt>Object</tt>)
- *       * +Status+ - (<tt>String</tt>) The versioning state of the
- *         bucket.
  *       * +MFADelete+ - (<tt>String</tt>) Specifies whether MFA delete
  *         is enabled in the bucket versioning configuration. This
  *         element is only returned if the bucket has been configured
  *         with MFA delete. If the bucket has never been so configured,
  *         this element is not returned.
- *     * +MFA+ - (<tt>String</tt>) The value is the concatenation of the
- *       authentication device''s serial number, a space, and the value
- *       displayed on your authentication device.
- *     * +ContentMD5+ - (<tt>String</tt>)
+ *       * +Status+ - (<tt>String</tt>) The versioning state of the
+ *         bucket.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1602,13 +1602,11 @@ AWS.S3 = inherit({})
  *   Calls the PutBucketWebsite API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *     * +WebsiteConfiguration+ - (*required*, <tt>Object</tt>)
- *       * +RedirectAllRequestsTo+ - (<tt>Object</tt>)
- *         * +HostName+ - (*required*, <tt>String</tt>) Name of the host
- *           where requests will be redirected.
- *         * +Protocol+ - (<tt>String</tt>) Protocol to use (http, https)
- *           when redirecting requests. The default is the protocol that
- *           is used in the original request.
+ *       * +ErrorDocument+ - (<tt>Object</tt>)
+ *         * +Key+ - (*required*, <tt>String</tt>) The object key name to
+ *           use when a 4XX class error occurs.
  *       * +IndexDocument+ - (<tt>Object</tt>)
  *         * +Suffix+ - (*required*, <tt>String</tt>) A suffix that is
  *           appended to a request that is for a directory on the website
@@ -1617,9 +1615,12 @@ AWS.S3 = inherit({})
  *           will be for the object with the key name images/index.html)
  *           The suffix must not be empty and must not include a slash
  *           character.
- *       * +ErrorDocument+ - (<tt>Object</tt>)
- *         * +Key+ - (*required*, <tt>String</tt>) The object key name to
- *           use when a 4XX class error occurs.
+ *       * +RedirectAllRequestsTo+ - (<tt>Object</tt>)
+ *         * +HostName+ - (*required*, <tt>String</tt>) Name of the host
+ *           where requests will be redirected.
+ *         * +Protocol+ - (<tt>String</tt>) Protocol to use (http, https)
+ *           when redirecting requests. The default is the protocol that
+ *           is used in the original request.
  *       * +RoutingRules+ - (<tt>Array<Object></tt>)
  *         * +Condition+ - (<tt>Object</tt>) A container for describing a
  *           condition that must be met for the specified redirect to
@@ -1627,6 +1628,13 @@ AWS.S3 = inherit({})
  *           folder, redirect to the /documents folder. 2. If request
  *           results in HTTP error 4xx, redirect request to another host
  *           where you might process the error.
+ *           * +HttpErrorCodeReturnedEquals+ - (<tt>String</tt>) The HTTP
+ *             error code when the redirect is applied. In the event of
+ *             an error, if the error code equals this value, then the
+ *             specified redirect is applied. Required when parent
+ *             element Condition is specified and sibling KeyPrefixEquals
+ *             is not specified. If both are specified, then both must be
+ *             true for the redirect to be applied.
  *           * +KeyPrefixEquals+ - (<tt>String</tt>) The object key name
  *             prefix when the redirect is applied. For example, to
  *             redirect requests for ExamplePage.html, the key prefix
@@ -1637,18 +1645,19 @@ AWS.S3 = inherit({})
  *             HttpErrorCodeReturnedEquals is not specified. If both
  *             conditions are specified, both must be true for the
  *             redirect to be applied.
- *           * +HttpErrorCodeReturnedEquals+ - (<tt>String</tt>) The HTTP
- *             error code when the redirect is applied. In the event of
- *             an error, if the error code equals this value, then the
- *             specified redirect is applied. Required when parent
- *             element Condition is specified and sibling KeyPrefixEquals
- *             is not specified. If both are specified, then both must be
- *             true for the redirect to be applied.
+ *         * +HostName+ - (*required*, <tt>String</tt>) Name of the host
+ *           where requests will be redirected.
+ *         * +Protocol+ - (<tt>String</tt>) Protocol to use (http, https)
+ *           when redirecting requests. The default is the protocol that
+ *           is used in the original request.
  *         * +Redirect+ - (*required*, <tt>Object</tt>) Container for
  *           redirect information. You can redirect requests to another
  *           host, to another page, or with another protocol. In the
  *           event of an error, you can can specify a different error
  *           code to return.
+ *           * +HttpRedirectCode+ - (<tt>String</tt>) The HTTP redirect
+ *             code to use on the response. Not required if one of the
+ *             siblings is present.
  *           * +ReplaceKeyPrefixWith+ - (<tt>String</tt>) The object key
  *             prefix to use in the redirect request. For example, to
  *             redirect requests for all pages with prefix docs/ (objects
@@ -1662,15 +1671,6 @@ AWS.S3 = inherit({})
  *             request to error.html. Not required if one of the sibling
  *             is present. Can be present only if ReplaceKeyPrefixWith is
  *             not provided.
- *           * +HttpRedirectCode+ - (<tt>String</tt>) The HTTP redirect
- *             code to use on the response. Not required if one of the
- *             siblings is present.
- *         * +HostName+ - (*required*, <tt>String</tt>) Name of the host
- *           where requests will be redirected.
- *         * +Protocol+ - (<tt>String</tt>) Protocol to use (http, https)
- *           when redirecting requests. The default is the protocol that
- *           is used in the original request.
- *     * +ContentMD5+ - (<tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1687,20 +1687,9 @@ AWS.S3 = inherit({})
  * @!method putObject(params, callback)
  *   Calls the PutObject API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +Body+ - (<tt>String</tt>)
- *     * +StorageClass+ - (<tt>String</tt>) The type of storage to use
- *       for the object. Defaults to 'STANDARD'.
  *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the object.
- *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to read the
- *       object data and its metadata.
- *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
- *       object ACL.
- *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
- *       ACL for the applicable object.
- *     * +GrantFullControl+ - (<tt>String</tt>) Gives the grantee READ,
- *       READ_ACP, and WRITE_ACP permissions on the object.
+ *     * +Body+ - (<tt>String</tt>)
+ *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +CacheControl+ - (<tt>String</tt>) Specifies caching behavior
  *       along the request/reply chain.
  *     * +ContentDisposition+ - (<tt>String</tt>) Specifies
@@ -1715,14 +1704,25 @@ AWS.S3 = inherit({})
  *       describing the format of the object data.
  *     * +Expires+ - (<tt>Date</tt>) The date and time at which the
  *       object is no longer cacheable.
+ *     * +GrantFullControl+ - (<tt>String</tt>) Gives the grantee READ,
+ *       READ_ACP, and WRITE_ACP permissions on the object.
+ *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to read the
+ *       object data and its metadata.
+ *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
+ *       object ACL.
+ *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
+ *       ACL for the applicable object.
+ *     * +Key+ - (*required*, <tt>String</tt>)
+ *     * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
+ *       store with the object in S3.
+ *     * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
+ *       encryption algorithm used when storing this object in S3.
+ *     * +StorageClass+ - (<tt>String</tt>) The type of storage to use
+ *       for the object. Defaults to 'STANDARD'.
  *     * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
  *       configured as a website, redirects requests for this object to
  *       another object in the same bucket or to an external URL. Amazon
  *       S3 stores the value of this header in the object metadata.
- *     * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
- *       encryption algorithm used when storing this object in S3.
- *     * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
- *       store with the object in S3.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1747,36 +1747,36 @@ AWS.S3 = inherit({})
  * @!method putObjectAcl(params, callback)
  *   Calls the PutObjectAcl API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +Key+ - (*required*, <tt>String</tt>)
+ *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the bucket.
  *     * +AccessControlPolicy+ - (<tt>Object</tt>)
- *       * +Owner+ - (<tt>Object</tt>)
- *         * +ID+ - (<tt>String</tt>)
- *         * +DisplayName+ - (<tt>String</tt>)
  *       * +Grants+ - (<tt>Array<Object></tt>) A list of grants.
  *         * +Grantee+ - (<tt>Object</tt>)
- *           * +Type+ - (*required*, <tt>String</tt>) Type of grantee
- *           * +ID+ - (<tt>String</tt>) The canonical user ID of the
- *             grantee.
  *           * +DisplayName+ - (<tt>String</tt>) Screen name of the
  *             grantee.
  *           * +EmailAddress+ - (<tt>String</tt>) Email address of the
  *             grantee.
+ *           * +ID+ - (<tt>String</tt>) The canonical user ID of the
+ *             grantee.
+ *           * +Type+ - (*required*, <tt>String</tt>) Type of grantee
  *           * +URI+ - (<tt>String</tt>) URI of the grantee group.
  *         * +Permission+ - (<tt>String</tt>) Specifies the permission
  *           given to the grantee.
- *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the bucket.
- *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to list the
- *       objects in the bucket.
- *     * +GrantWrite+ - (<tt>String</tt>) Allows grantee to create,
- *       overwrite, and delete any object in the bucket.
- *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
- *       bucket ACL.
- *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
- *       ACL for the applicable bucket.
+ *       * +Owner+ - (<tt>Object</tt>)
+ *         * +DisplayName+ - (<tt>String</tt>)
+ *         * +ID+ - (<tt>String</tt>)
+ *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * +ContentMD5+ - (<tt>String</tt>)
  *     * +GrantFullControl+ - (<tt>String</tt>) Allows grantee the read,
  *       write, read ACP, and write ACP permissions on the bucket.
- *     * +ContentMD5+ - (<tt>String</tt>)
+ *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to list the
+ *       objects in the bucket.
+ *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
+ *       bucket ACL.
+ *     * +GrantWrite+ - (<tt>String</tt>) Allows grantee to create,
+ *       overwrite, and delete any object in the bucket.
+ *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
+ *       ACL for the applicable bucket.
+ *     * +Key+ - (*required*, <tt>String</tt>)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1814,13 +1814,13 @@ AWS.S3 = inherit({})
  * @!method uploadPart(params, callback)
  *   Calls the UploadPart API operation.
  *   @param params [Object]
+ *     * +Body+ - (<tt>String</tt>)
  *     * +Bucket+ - (*required*, <tt>String</tt>)
  *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +UploadId+ - (*required*, <tt>String</tt>) Upload ID identifying
- *       the multipart upload whose part is being uploaded.
  *     * +PartNumber+ - (*required*, <tt>String</tt>) Part number of part
  *       being uploaded.
- *     * +Body+ - (<tt>String</tt>)
+ *     * +UploadId+ - (*required*, <tt>String</tt>) Upload ID identifying
+ *       the multipart upload whose part is being uploaded.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1842,28 +1842,28 @@ AWS.S3 = inherit({})
  *   Calls the UploadPartCopy API operation.
  *   @param params [Object]
  *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +UploadId+ - (*required*, <tt>String</tt>) Upload ID identifying
- *       the multipart upload whose part is being copied.
- *     * +PartNumber+ - (*required*, <tt>String</tt>) Part number of part
- *       being copied.
+ *     * +CopySource+ - (*required*, <tt>String</tt>) The name of the
+ *       source bucket and key name of the source object, separated by a
+ *       slash (/). Must be URL-encoded.
+ *     * +CopySourceIfMatch+ - (<tt>Date</tt>) Copies the object if its
+ *       entity tag (ETag) matches the specified tag.
+ *     * +CopySourceIfModifiedSince+ - (<tt>Date</tt>) Copies the object
+ *       if it has been modified since the specified time.
+ *     * +CopySourceIfNoneMatch+ - (<tt>Date</tt>) Copies the object if
+ *       its entity tag (ETag) is different than the specified ETag.
+ *     * +CopySourceIfUnmodifiedSince+ - (<tt>Date</tt>) Copies the
+ *       object if it hasn''t been modified since the specified time.
  *     * +CopySourceRange+ - (<tt>String</tt>) The range of bytes to copy
  *       from the source object. The range value must use the form
  *       bytes=first-last, where the first and last are the zero-based
  *       byte offsets to copy. For example, bytes=0-9 indicates that you
  *       want to copy the first ten bytes of the source. You can copy a
  *       range only if the source object is greater than 5 GB.
- *     * +CopySource+ - (*required*, <tt>String</tt>) The name of the
- *       source bucket and key name of the source object, separated by a
- *       slash (/). Must be URL-encoded.
- *     * +CopySourceIfMatch+ - (<tt>Date</tt>) Copies the object if its
- *       entity tag (ETag) matches the specified tag.
- *     * +CopySourceIfNoneMatch+ - (<tt>Date</tt>) Copies the object if
- *       its entity tag (ETag) is different than the specified ETag.
- *     * +CopySourceIfUnmodifiedSince+ - (<tt>Date</tt>) Copies the
- *       object if it hasn''t been modified since the specified time.
- *     * +CopySourceIfModifiedSince+ - (<tt>Date</tt>) Copies the object
- *       if it has been modified since the specified time.
+ *     * +Key+ - (*required*, <tt>String</tt>)
+ *     * +PartNumber+ - (*required*, <tt>String</tt>) Part number of part
+ *       being copied.
+ *     * +UploadId+ - (*required*, <tt>String</tt>) Upload ID identifying
+ *       the multipart upload whose part is being copied.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
