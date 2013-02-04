@@ -83,7 +83,8 @@ require('fs').readdirSync(__dirname + '/../lib/services').forEach(function(file)
 
   // Creates new client instances with custom options
   client.with = function(options) {
-    return new this.constructor(AWS.util.merge(this.config, options));
+    return new this.constructor(
+      repl.context.AWS.util.merge(this.config, options));
   };
 
   repl.context[svc] = client;
