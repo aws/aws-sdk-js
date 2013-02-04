@@ -1164,6 +1164,12 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
+ *       * +IsTruncated+ - (<tt>Boolean</tt>) A flag that indicates whether
+ *         or not Amazon S3 returned all of the results that satisfied the
+ *         search criteria. If your results were truncated, you can make a
+ *         follow-up paginated request using the NextKeyMarker and
+ *         NextVersionIdMarker response parameters as a starting place in
+ *         another request to return the rest of the results.
  *       * +KeyMarker+ - (<tt>String</tt>) Marks the last Key returned in a
  *         truncated response.
  *       * +VersionIdMarker+ - (<tt>String</tt>)
@@ -1198,13 +1204,6 @@ AWS.S3 = inherit({})
  *       * +Name+ - (<tt>String</tt>)
  *       * +Prefix+ - (<tt>String</tt>)
  *       * +MaxKeys+ - (<tt>Integer</tt>)
- *       * +IsTruncated+ - (<tt>Boolean</tt>) A flag that indicates whether
- *         (true) or not (false) Amazon S3 returned all of the results that
- *         satisfied the search criteria. If your results were truncated,
- *         you can make a follow-up paginated request using the
- *         NextKeyMarker and NextVersionIdMarker response parameters as a
- *         starting place in another request to return the rest of the
- *         results.
  *       * +CommonPrefixes+ - (<tt>Array<Object></tt>)
  *         * +Prefix+ - (<tt>String</tt>)
  *   @return [AWS.Request] a handle to the operation request for
@@ -1234,6 +1233,9 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to +null+ if a request error occurs.
  *       The +data+ object has the following properties:
+ *       * +IsTruncated+ - (<tt>Boolean</tt>) A flag that indicates whether
+ *         or not Amazon S3 returned all of the results that satisfied the
+ *         search criteria.
  *       * +Marker+ - (<tt>String</tt>)
  *       * +Contents+ - (<tt>Array<Object></tt>)
  *         * +Key+ - (<tt>String</tt>)
@@ -1248,13 +1250,6 @@ AWS.S3 = inherit({})
  *       * +Name+ - (<tt>String</tt>)
  *       * +Prefix+ - (<tt>String</tt>)
  *       * +MaxKeys+ - (<tt>Integer</tt>)
- *       * +IsTruncated+ - (<tt>Boolean</tt>) A flag that indicates whether
- *         (true) or not (false) Amazon S3 returned all of the results that
- *         satisfied the search criteria. If your results were truncated,
- *         you can make a follow-up paginated request using the
- *         NextKeyMarker and NextVersionIdMarker response parameters as a
- *         starting place in another request to return the rest of the
- *         results.
  *       * +CommonPrefixes+ - (<tt>Array<Object></tt>)
  *         * +Prefix+ - (<tt>String</tt>)
  *   @return [AWS.Request] a handle to the operation request for
