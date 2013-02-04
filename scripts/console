@@ -56,6 +56,20 @@ function customEval(cmd, context, filename, callback) {
 repl.context.AWS = require('../lib/core');
 repl.eval = customEval;
 
+// custom logger
+repl.context.AWS.events.on('send', function (resp) {
+  resp.requestStarted = new Date().getTime();
+}).on('complete', function (resp) {
+  var time = new Date().getTime(),
+      status = resp.httpResponse.statusCode,
+      params = require('util').inspect(this.params, true, true);
+
+  console.log('\n\x1B[33m[AWS', this.client.api.serviceName, status,
+    (time-resp.requestStarted)/1000, resp.retryCount + ' retries]\x1B[0;1m',
+    this.operation + '(' + params + ')\x1B[0m');
+  process.stdout.write(repl.prompt);
+});
+
 // setup REPL history
 replHistory(repl, process.env.HOME + '/.node_history');
 
