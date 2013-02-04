@@ -62,6 +62,7 @@ replHistory(repl, process.env.HOME + '/.node_history');
 // load services as defined instances
 require('fs').readdirSync(__dirname + '/../lib/services').forEach(function(file) {
   if (file.match('.api.')) return;
+  if (!file.match(/\.js$/)) return;
   var klass = require('../lib/services/' + file),
       svc = file.replace(".js", ""),
       client = new klass(defaultOptions).client;
