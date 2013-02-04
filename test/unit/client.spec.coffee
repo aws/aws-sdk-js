@@ -80,6 +80,16 @@ describe 'AWS.Client', ->
       new MockClient().makeRequest('operation')
       expect(httpClient.handleRequest).not.toHaveBeenCalled()
 
+    describe 'global events', ->
+      it 'adds AWS.events listeners to requests', ->
+        helpers.mockHttpResponse(200, {}, ['FOO', 'BAR'])
+
+        event = jasmine.createSpy()
+        AWS.events.on('complete', event)
+
+        new MockClient().makeRequest('operation').send()
+        expect(event).toHaveBeenCalled()
+
   describe 'retryableError', ->
 
     it 'should retry on throttle error', ->
