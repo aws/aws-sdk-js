@@ -44,6 +44,29 @@ describe 'AWS.Client', ->
       expect(client.config.sslEnabled).toEqual(true)
       AWS.config = cfg
 
+  describe 'setEndpoint', ->
+    FooClient = null
+
+    beforeEach ->
+      FooClient = AWS.util.inherit AWS.Client, api:
+        serviceName: 'fooservice'
+
+    it 'uses specified endpoint if provided', ->
+      client = new FooClient()
+      client.setEndpoint('notfooservice.amazonaws.com')
+      expect(client.endpoint.host).toEqual('notfooservice.amazonaws.com')
+
+    it 'uses global endpoint if defined on service API', ->
+      FooClient.prototype.api.globalEndpoint = 'fooservice.amazonaws.com'
+      client = new FooClient()
+      client.setEndpoint()
+      expect(client.endpoint.host).toEqual('fooservice.amazonaws.com')
+
+    it 'generates endpoint based on region if no global endpoint / not provided', ->
+      client = new FooClient({region:'someregion'})
+      client.setEndpoint()
+      expect(client.endpoint.host).toEqual('fooservice.someregion.amazonaws.com')
+
   describe 'makeRequest', ->
 
     it 'it treats params as an optinal parameter', ->
