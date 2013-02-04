@@ -14,8 +14,7 @@
  * language governing permissions and limitations under the License.
  */
 
-var AWS = require('../lib/aws'),
-    repl = require('repl').start('aws-sdk> '),
+var repl = require('repl').start('aws-sdk> '),
     replEval = repl.eval,
     replHistory = require('repl.history'),
     defaultOptions = {
@@ -35,7 +34,7 @@ function customEval(cmd, context, filename, callback) {
       if (!value.__hasBeenSent__) {
         value.__hasBeenSent__ = true;
         try {
-          value.on('complete', function(resp) {
+          value.on('complete', function consoleDataExtraction(resp) {
             context.data = resp.data;
             context.error = resp.error;
           });
@@ -54,7 +53,7 @@ function customEval(cmd, context, filename, callback) {
   });
 }
 
-repl.context.AWS = AWS;
+repl.context.AWS = require('../lib/core');
 repl.eval = customEval;
 
 // setup REPL history
