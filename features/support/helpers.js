@@ -83,7 +83,7 @@ module.exports = {
         extra.call(world, this);
         next();
       }
-      else if (err) {
+      else if (extra !== false && err) {
         world.unexpectedError(this, next);
       } else {
         next();
