@@ -179,7 +179,7 @@ describe 'AWS.XML.Parser', ->
 
   describe 'maps', ->
 
-    describe 'maps', ->
+    describe 'non-flattened', ->
       it 'expects entry, key, and value elements by default', ->
         # example from IAM GetAccountSummary (output)
         xml = """
