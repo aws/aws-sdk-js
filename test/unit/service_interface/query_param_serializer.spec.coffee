@@ -16,9 +16,9 @@ require('../../../lib/service_interface/query')
 
 describe 'AWS.QueryParamSerializer', ->
 
-  serialize = (requestParams, rules, memberedLists) ->
+  serialize = (requestParams, rules) ->
     params = []
-    serializer = new AWS.QueryParamSerializer(rules, memberedLists)
+    serializer = new AWS.QueryParamSerializer(rules)
     serializer.serialize(requestParams, (name, value) ->
       params.push([name, value])
     )
@@ -71,7 +71,7 @@ describe 'AWS.QueryParamSerializer', ->
     describe 'flattened', ->
 
       it 'numbers list members starting at 1', ->
-        rules = {Name:{t:'a',m:{}}} # array of strings
+        rules = {Name:{t:'a',f:1,m:{}}} # array of strings
         params = serialize({Name:['a','b','c']}, rules)
         expect(params).toEqual([
           ['Name.1', 'a'],
@@ -79,8 +79,17 @@ describe 'AWS.QueryParamSerializer', ->
           ['Name.3', 'c'],
         ])
 
+      it 'Uses list-item member names instead of the list member name', ->
+        rules = {Root:{t:'o',m:{Items:{t:'a',f:1,m:{n:'ListItem'}}}}}
+        params = serialize({Root:{Items:['a', 'b', 'c']}}, rules)
+        expect(params).toEqual([
+          ['Root.ListItem.1', 'a'],
+          ['Root.ListItem.2', 'b'],
+          ['Root.ListItem.3', 'c'],
+        ])
+
       it 'accepts nested arrays', ->
-        rules = {Person:{t:'o',m:{Name:{t:'a',m:{}}}}} # nested list of strings
+        rules = {Person:{t:'o',m:{Name:{t:'a',f:1,m:{}}}}} # nested list of strings
         params = serialize({Person:{Name:['a','b','c']}}, rules)
         expect(params).toEqual([
           ['Person.Name.1', 'a'],
@@ -89,7 +98,7 @@ describe 'AWS.QueryParamSerializer', ->
         ])
 
       it 'supports lists of complex types', ->
-        rules = {Root:{t:'a',m:{t:'o',m:{Aa:{},Bb:{}}}}} # nested list of structures
+        rules = {Root:{t:'a',f:1,m:{t:'o',m:{Aa:{},Bb:{}}}}} # nested list of structures
         params = serialize({Root:[{Aa:'a1',Bb:'b1'},{Aa:'a2',Bb:'b2'}]},rules)
         expect(params).toEqual([
           ['Root.1.Aa', 'a1'],
@@ -99,7 +108,7 @@ describe 'AWS.QueryParamSerializer', ->
         ])
 
       it 'serialzes list members as strings when member rule not present', ->
-        rules = {Root:{t:'a'}} # omitting m
+        rules = {Root:{t:'a',f:1}} # omitting m
         params = serialize({Root:['a', 'b', 'c']}, rules)
         expect(params).toEqual([
           ['Root.1', 'a'],
@@ -107,13 +116,11 @@ describe 'AWS.QueryParamSerializer', ->
           ['Root.3', 'c'],
         ])
 
-
-
     describe 'non-flat', ->
 
       it 'adds a `.member` prefix to each list member', ->
         rules = {Person:{t:'a',m:{}}} # array of strings
-        params = serialize({Person:['a','b','c']}, rules, true)
+        params = serialize({Person:['a','b','c']}, rules)
         expect(params).toEqual([
           ['Person.member.1', 'a'],
           ['Person.member.2', 'b'],
@@ -122,7 +129,16 @@ describe 'AWS.QueryParamSerializer', ->
 
       it 'replaces `.member` with the member name trait', ->
         rules = {Person:{t:'a',m:{n:'Name'}}}
-        params = serialize({Person:['a','b','c']}, rules, true)
+        params = serialize({Person:['a','b','c']}, rules)
+        expect(params).toEqual([
+          ['Person.Name.1', 'a'],
+          ['Person.Name.2', 'b'],
+          ['Person.Name.3', 'c'],
+        ])
+
+      it 'observes both list name and list member name', ->
+        rules = {People:{t:'a',n:'Person',m:{n:'Name'}}}
+        params = serialize({People:['a','b','c']}, rules)
         expect(params).toEqual([
           ['Person.Name.1', 'a'],
           ['Person.Name.2', 'b'],
@@ -149,7 +165,7 @@ describe 'AWS.QueryParamSerializer', ->
     it 'applies member name traits', ->
       rules = {Attributes:{t:'m',k:{n:'Name'},m:{n:'Value'}}}
       data = {Attributes:{Color:'red',Size:'large',Value:'low'}}
-      params = serialize(data, rules, true)
+      params = serialize(data, rules)
       expect(params).toEqual([
         ['Attributes.1.Name', 'Color'],
         ['Attributes.1.Value', 'red'],
