@@ -155,4 +155,12 @@ module.exports = function() {
     if (!failed && !this.resp.error) callback.fail('Did not fail when should have');
     callback();
   });
+
+  this.Given(/^I try to delete an item with key "([^"]*)" from table "([^"]*)"$/, function(key, table, callback) {
+    this.request(null, 'deleteItem', {TableName: table, Key: key}, callback, false);
+  });
+
+  this.Given(/^I try to delete an item with no table parameter$/, function(callback) {
+    this.request(null, 'deleteItem', {}, callback, false);
+  });
 };

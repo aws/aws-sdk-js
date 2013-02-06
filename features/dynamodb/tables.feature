@@ -23,3 +23,16 @@ Feature: DynamoDB Tables
     """
     Then the item with id "foo" should exist
     And it should have attribute "data" containing "bår"
+
+  Scenario: UTF-8 support
+    Given I try to delete an item with key "føø" from table "table"
+    Then the error code should be "SerializationException"
+
+  Scenario: Improper table deletion
+    Given I try to delete an item with no table parameter
+    Then the error code should be "ValidationException"
+    And the error message should be:
+    """
+    The paramater 'tableName' is required but was not present in the request
+    """
+    And the status code should be 400
