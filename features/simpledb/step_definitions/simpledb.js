@@ -36,10 +36,9 @@ module.exports = function() {
   });
 
   this.Then(/^the result should have attribute "([^"]*)" with "([^"]*)"$/, function(name, value, callback) {
-    this.assertions(callback, function(assert) {
-      assert.equal(this.resp.data.Attributes[0].Name, name);
-      assert.equal(this.resp.data.Attributes[0].Value, value);
-    });
+    this.assert.equal(this.resp.data.Attributes[0].Name, name);
+    this.assert.equal(this.resp.data.Attributes[0].Value, value);
+    callback();
   });
 
   this.Then(/^I delete the domain$/, function(callback) {

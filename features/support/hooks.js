@@ -20,28 +20,24 @@ module.exports = function () {
   /* Global error code steps */
 
   this.Then(/^the error code should be "([^"]*)"$/, function(code, callback) {
-    this.assertions(callback, function(assert) {
-      assert.equal(this.resp.error.code, code);
-    });
+    this.assert.equal(this.resp.error.code, code);
+    callback();
   });
 
   this.Then(/^the error message should be:$/, function(message, callback) {
-    this.assertions(callback, function(assert) {
-      assert.equal(this.error.message, message);
-    });
+    this.assert.equal(this.error.message, message);
+    callback();
   });
 
   this.Then(/^the status code should be (\d+)$/, function(status, callback) {
-    this.assertions(callback, function(assert) {
-      assert.equal(this.resp.httpResponse.statusCode, parseInt(status));
-    });
+    this.assert.equal(this.resp.httpResponse.statusCode, parseInt(status));
+    callback();
   });
 
-  this.Then(/^I should get the error:$/, function(table, next) {
+  this.Then(/^I should get the error:$/, function(table, callback) {
     var err = table.hashes()[0]
-    this.assertions(next, function(assert) {
-      assert.equal(this.error.code, err.code);
-      assert.equal(this.error.message, err.message);
-    });
+    this.assert.equal(this.error.code, err.code);
+    this.assert.equal(this.error.message, err.message);
+    callback();
   });
 };

@@ -34,9 +34,8 @@ module.exports = function() {
     this.resp.data.domainInfos.forEach(function (info) {
       items[info.name] = info;
     });
-    this.assertions(callback, function(assert) {
-      assert.ok(items[this.swfDomain]);
-    });
+    this.assert.ok(items[this.swfDomain]);
+    callback();
   });
 
   this.Then(/^I delete the SimpleWorkFlow domain$/, function(callback) {

@@ -20,17 +20,15 @@ module.exports = function() {
   });
 
   this.Given(/^I describe EC2 regions "([^"]*)"$/, function(regions, callback) {
-    regions = regions.split(/\s*,\s*/)
+    regions = regions.split(/\s*,\s*/);
     this.request(null, 'describeRegions', {RegionNames: regions}, callback);
   });
 
   this.Then(/^the EC2 endpoint for "([^"]*)" should be "([^"]*)"$/, function(region, endpoint, callback) {
-    this.assertions(callback, function(assert) {
-      this.resp.data.Regions.forEach(function(region) {
-        if (region.RegionName === region)
-          assert.equal(region.Endpoint, endpoint);
-      });
+    this.assert.contains(this.resp.data.Regions, function(region) {
+      return region.Endpoint === endpoint;
     });
+    callback();
   });
 
   this.Given(/^I describe the EC2 instance "([^"]*)"$/, function(instanceId, callback) {
