@@ -31,13 +31,11 @@ module.exports = function() {
   });
 
   this.Then(/^the list should contain the topic ARN$/, function(callback) {
-    var world = this, found = false, data = this.resp.data;
-    data.Topics.forEach(function(item) {
-      if (item.TopicArn === world.topicArn) found = true;
+    var arn = this.topicArn;
+    this.assert.contains(this.resp.data.Topics, function(topic) {
+      return topic.TopicArn === arn;
     });
-    if (found) callback();
-    else callback.fail('ARN ' + world.topicArn + ' not in topics: ' +
-      require('util').inspect(data.Topics));
+    callback();
   });
 
   this.Then(/^I delete the SNS topic$/, function(callback) {

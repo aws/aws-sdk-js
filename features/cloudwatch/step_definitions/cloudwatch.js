@@ -49,13 +49,11 @@ module.exports = function() {
   });
 
   this.Then(/^the list should contain the CloudWatch alarm$/, function(callback) {
-    var world = this, found = false, data = this.resp.data;
-    data.MetricAlarms.forEach(function(alarm) {
-      if (alarm.AlarmName === world.cloudWatchAlarm.AlarmName) found = true;
+    var name = this.cloudWatchAlarm.AlarmName;
+    this.assert.contains(this.resp.data.MetricAlarms, function(alarm) {
+      return alarm.AlarmName === name;
     });
-    if (found) callback();
-    else callback.fail('Alarm ' + world.topicArn + ' not in alarms: ' +
-      require('util').inspect(data.Users));
+    callback();
   });
 
   this.Then(/^I delete the CloudWatch alarm$/, function(callback) {

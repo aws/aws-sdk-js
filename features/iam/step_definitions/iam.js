@@ -33,13 +33,11 @@ module.exports = function() {
   });
 
   this.Then(/^the list should contain the user$/, function(callback) {
-    var world = this, found = false, data = this.resp.data;
-    data.Users.forEach(function(user) {
-      if (user.UserName === world.iamUser) found = true;
+    var name = this.iamUser;
+    this.assert.contains(this.resp.data.Users, function(user) {
+      return user.UserName === name;
     });
-    if (found) callback();
-    else callback.fail('User ' + world.topicArn + ' not in users: ' +
-      require('util').inspect(data.Users));
+    callback();
   });
 
   this.Then(/^I delete the IAM user$/, function(callback) {
