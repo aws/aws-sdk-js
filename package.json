@@ -52,10 +52,9 @@
         "glacier"
     ],
     "scripts" : {
-        "test" : "npm -s run-script lint && (([ -f configuration ] && jasmine-node --coffee test && cucumber.js) || ([ ! -f configuration ] && npm -s run-script unit))",
+        "test" : "npm -s run-script lint && npm -s run-script unit && ([ -f configuration ] && npm -s run-script integration) || true",
         "unit" : "jasmine-node --noColor --coffee test/unit",
-        "integration": "jasmine-node --noColor --coffee test/integration",
-        "features": "cucumber.js",
+        "integration": "cucumber.js",
         "lint" : "jshint lib",
         "console": "./scripts/console"
     }
