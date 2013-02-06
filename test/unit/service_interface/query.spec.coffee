@@ -107,6 +107,18 @@ describe 'AWS.ServiceInterface.Query', ->
       expect(response.error.message).toEqual(null)
       expect(response.data).toEqual(null)
 
+    it 'extracts error when inside <Errors>', ->
+      extractError """
+      <SomeResponse>
+        <Errors>
+          <Error>
+            <Code>code</Code><Message>msg</Message>
+          </Error>
+        </Errors>
+      </SomeResponse>"""
+      expect(response.error.code).toEqual('code')
+      expect(response.error.message).toEqual('msg')
+
     it 'extracts error when <Error> is nested', ->
       extractError """
       <SomeResponse>
