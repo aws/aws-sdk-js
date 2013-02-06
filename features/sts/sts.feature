@@ -17,7 +17,7 @@ Feature: AWS Security Token Service
 
   I want to use AWS Security Token Service
 
-  Scenario: Feature
+  Scenario: Get a session token
     Given I get an STS session token with a duration of 900 seconds
     Then the result should contain an access key ID and secret access key
     And the TTL on the session token credentials should be less than 900
