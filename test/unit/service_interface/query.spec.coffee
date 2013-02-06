@@ -35,8 +35,10 @@ describe 'AWS.ServiceInterface.Query', ->
     response = new AWS.Response(request)
 
   describe 'buildRequest', ->
-    buildRequest = ->
-      request.params = Input: 'foo+bar: yuck/baz=~'
+    buildRequest = (input) ->
+      if input == undefined
+        input = 'foo+bar: yuck/baz=~'
+      request.params = Input: input
       svc.buildRequest(request)
 
     it 'should use POST method requests', ->
@@ -66,6 +68,11 @@ describe 'AWS.ServiceInterface.Query', ->
       buildRequest()
       expect(request.httpRequest.params.toString()).
         toMatch(/foo%2Bbar%3A%20yuck%2Fbaz%3D~/);
+
+    it 'encodes empty string values properly', ->
+      buildRequest('')
+      expect(request.httpRequest.params.toString()).
+        toMatch(/Input=($|&)/);
 
   describe 'extractError', ->
     extractError = (body) ->
