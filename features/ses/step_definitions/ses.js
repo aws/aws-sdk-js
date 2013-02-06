@@ -19,12 +19,6 @@ module.exports = function() {
     callback();
   });
 
-  this.Then(/^the status code should be (\d+)$/, function(status, next) {
-    if (parseInt(status) !== this.resp.httpResponse.statusCode) {
-      next.fail("Expected status " + status + ", got " + this.resp.httpResponse.statusCode)
-    } else { next(); }
-  });
-
   this.When(/^I check quota$/, function(next) {
     this.request(null, 'getSendQuota', {}, next);
   });
@@ -39,12 +33,5 @@ module.exports = function() {
     this.request(null, 'verifyEmailAddress', {EmailAddress: email}, next, function() {
       // do nothing
     });
-  });
-
-  this.Then(/^I should get the error:$/, function(table, next) {
-    var err = table.hashes()[0]
-    if (err.code !== this.error.code || err.message !== this.error.message) {
-      next.fail("Expected " + err.code + ", " + err.message + ", got " + this.resp.error);
-    } else { next(); }
   });
 };

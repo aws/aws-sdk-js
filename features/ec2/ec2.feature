@@ -25,5 +25,8 @@ Feature: Amazon Elastic Compute Cloud
   Scenario: Error handling
     Given I describe the EC2 instance "i-12345678"
     Then the error code should be "InvalidInstanceID.NotFound"
-    And the error message should be "The instance ID 'i-12345678' does not exist"
+    And the error message should be:
+    """
+    The instance ID 'i-12345678' does not exist
+    """
     And the status code should be 400

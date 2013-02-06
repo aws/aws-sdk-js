@@ -85,9 +85,4 @@ module.exports = function() {
     var world = this;
     this.client.createPipeline({}, function() { world.resp = this; callback(); });
   });
-
-  this.Then(/^the error code should be "([^"]*)"$/, function(code, callback) {
-    if (this.resp.error.code === code) callback();
-    else callback.fail('Expected code ' + code + ', got ' + this.resp.error.code);
-  });
 };

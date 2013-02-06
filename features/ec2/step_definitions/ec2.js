@@ -36,10 +36,4 @@ module.exports = function() {
   this.Given(/^I describe the EC2 instance "([^"]*)"$/, function(instanceId, callback) {
     this.request(null, 'describeInstances', {InstanceIds: [instanceId]}, callback, false);
   });
-
-  this.Then(/^the error message should be "([^"]*)"$/, function(message, callback) {
-    this.assertions(callback, function(assert) {
-      assert.equal(this.error.message, message);
-    });
-  });
 };

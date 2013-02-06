@@ -17,4 +17,31 @@ module.exports = function () {
 
   this.World = require("./world.js").World;
 
+  /* Global error code steps */
+
+  this.Then(/^the error code should be "([^"]*)"$/, function(code, callback) {
+    this.assertions(callback, function(assert) {
+      assert.equal(this.resp.error.code, code);
+    });
+  });
+
+  this.Then(/^the error message should be:$/, function(message, callback) {
+    this.assertions(callback, function(assert) {
+      assert.equal(this.error.message, message);
+    });
+  });
+
+  this.Then(/^the status code should be (\d+)$/, function(status, callback) {
+    this.assertions(callback, function(assert) {
+      assert.equal(this.resp.httpResponse.statusCode, parseInt(status));
+    });
+  });
+
+  this.Then(/^I should get the error:$/, function(table, next) {
+    var err = table.hashes()[0]
+    this.assertions(next, function(assert) {
+      assert.equal(this.error.code, err.code);
+      assert.equal(this.error.message, err.message);
+    });
+  });
 };
