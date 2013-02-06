@@ -15,6 +15,17 @@
 
 module.exports = {
 
+  assert: require('assert'),
+
+  assertions: function assertions(next, callback) {
+    try {
+      callback.call(this, this.assert);
+      next();
+    } catch (err) {
+      next.fail(err);
+    }
+  },
+
   /**
    * Call this function with a block that will be executed multiple times
    * to deal with eventually consistent conditions.
