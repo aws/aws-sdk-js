@@ -16,7 +16,7 @@
 var assert = require('assert');
 
 assert.match = function assertMatches(string, matcher, message) {
-  assert.ok(expected.match(matcher), message ||
+  assert.ok(string.match(matcher), message ||
     'Expected ' + string + ' to match ' + matcher);
 };
 
