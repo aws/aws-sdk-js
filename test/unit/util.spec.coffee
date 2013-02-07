@@ -26,6 +26,9 @@ describe 'uriEscape', ->
   it 'escapes / as %2F', ->
     expect(e('a/b')).toEqual('a%2Fb')
 
+  it 'escapes * as %2A', ->
+    expect(e('a*b')).toEqual('a%2Ab')
+
   it 'does not escape ~', ->
     expect(e('a~b')).toEqual('a~b')
 

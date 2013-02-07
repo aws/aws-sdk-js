@@ -25,8 +25,8 @@ module.exports = function() {
   });
 
   this.Given(/^I put an item "([^"]*)" with attributes:$/, function(item, string, callback) {
-    var attributes = JSON.parse(string);
-    var params = {DomainName: this.domainName, ItemName: item, Attributes: attributes};
+    this.item = {Name: item, Attributes: JSON.parse(string)};
+    var params = {DomainName: this.domainName, ItemName: item, Attributes: this.item.Attributes};
     this.request(null, 'putAttributes', params, callback);
   });
 
@@ -38,6 +38,16 @@ module.exports = function() {
       };
       this.request(null, 'getAttributes', params, retry);
     });
+  });
+
+  this.Given(/^I select "([^"]*)" from the domain$/, function(expr, callback) {
+    var params = {SelectExpression: 'SELECT ' + expr + ' FROM `' + this.domainName + '`'};
+    this.request(null, 'select', params, callback);
+  });
+
+  this.Then(/^the select result should contain the item$/, function(callback) {
+    this.assert.deepEqual(this.data.Items, [this.item]);
+    callback();
   });
 
   this.Then(/^the result should have attribute "([^"]*)" with "([^"]*)"$/, function(name, value, callback) {
