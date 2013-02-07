@@ -52,13 +52,11 @@ module.exports = function() {
   });
 
   this.Then(/^the list should contain the pipeline$/, function(callback) {
-    for (var idx in this.resp.data.Pipelines) {
-      if (this.resp.data.Pipelines[idx].Id === this.pipelineId) {
-        callback();
-        return;
-      }
-    }
-    callback.fail('Pipeline ' + this.pipelineId + ' is not in pipelines');
+    var id = this.pipelineId;
+    this.assert.contains(this.data.Pipelines, function (pipeline) {
+      return pipeline.Id === id;
+    });
+    callback();
   });
 
   this.Then(/^I pause the pipeline$/, function(callback) {
@@ -70,19 +68,17 @@ module.exports = function() {
   });
 
   this.Then(/^the pipeline status should be "([^"]*)"$/, function(status, callback) {
-    if (this.resp.data.Pipeline.Status === status) callback();
-    else callback.fail('Expected status ' + status + ', got ' + this.resp.data.Pipeline.Status);
+    this.assert.equal(this.data.Pipeline.Status, status);
+    callback();
   });
 
   this.Then(/^I delete the pipeline$/, function(callback) {
-    var world = this;
     this.request(null, 'deletePipeline', {Id: this.pipelineId}, function() {
-      world.request(new world.AWS.S3.Client(), 'deleteBucket', {Bucket: world.bucket}, callback);
+      this.request(new this.AWS.S3.Client(), 'deleteBucket', {Bucket: this.bucket}, callback);
     });
   });
 
   this.Given(/^I create a pipeline with invalid parameters$/, function(callback) {
-    var world = this;
-    this.client.createPipeline({}, function() { world.resp = this; callback(); });
+    this.request(null, 'createPipeline', {}, callback, false);
   });
 };

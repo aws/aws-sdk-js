@@ -50,7 +50,7 @@ module.exports = function() {
 
   this.Then(/^the list should contain the CloudWatch alarm$/, function(callback) {
     var name = this.cloudWatchAlarm.AlarmName;
-    this.assert.contains(this.resp.data.MetricAlarms, function(alarm) {
+    this.assert.contains(this.data.MetricAlarms, function(alarm) {
       return alarm.AlarmName === name;
     });
     callback();

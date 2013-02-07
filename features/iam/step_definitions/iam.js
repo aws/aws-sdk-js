@@ -34,7 +34,7 @@ module.exports = function() {
 
   this.Then(/^the list should contain the user$/, function(callback) {
     var name = this.iamUser;
-    this.assert.contains(this.resp.data.Users, function(user) {
+    this.assert.contains(this.data.Users, function(user) {
       return user.UserName === name;
     });
     callback();

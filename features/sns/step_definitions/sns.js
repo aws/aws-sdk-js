@@ -32,7 +32,7 @@ module.exports = function() {
 
   this.Then(/^the list should contain the topic ARN$/, function(callback) {
     var arn = this.topicArn;
-    this.assert.contains(this.resp.data.Topics, function(topic) {
+    this.assert.contains(this.data.Topics, function(topic) {
       return topic.TopicArn === arn;
     });
     callback();

@@ -25,7 +25,7 @@ module.exports = function() {
   });
 
   this.Then(/^the EC2 endpoint for "([^"]*)" should be "([^"]*)"$/, function(region, endpoint, callback) {
-    this.assert.contains(this.resp.data.Regions, function(region) {
+    this.assert.contains(this.data.Regions, function(region) {
       return region.Endpoint === endpoint;
     });
     callback();

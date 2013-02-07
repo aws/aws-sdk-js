@@ -31,7 +31,7 @@ module.exports = function() {
 
   this.Then(/^the SimpleWorkFlow domain should be in the list$/, function(callback) {
     var items = {};
-    this.resp.data.domainInfos.forEach(function (info) {
+    this.data.domainInfos.forEach(function (info) {
       items[info.name] = info;
     });
     this.assert.ok(items[this.swfDomain]);

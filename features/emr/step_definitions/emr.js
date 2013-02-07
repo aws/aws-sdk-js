@@ -33,7 +33,7 @@ module.exports = function() {
   });
 
   this.Then(/^I should store the job flow ID$/, function(callback) {
-    this.jobFlowId = this.resp.data.JobFlowId;
+    this.jobFlowId = this.data.JobFlowId;
     callback();
   });
 
@@ -43,7 +43,7 @@ module.exports = function() {
 
   this.Then(/^the list should contain the job flow ID$/, function(callback) {
     var jobFlowId = this.jobFlowId;
-    this.assert.contains(this.resp.data.JobFlows, function(job) {
+    this.assert.contains(this.data.JobFlows, function(job) {
       return job.JobFlowId === jobFlowId;
     });
     callback();

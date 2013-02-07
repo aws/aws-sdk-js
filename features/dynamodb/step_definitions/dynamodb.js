@@ -70,18 +70,12 @@ module.exports = function() {
   this.Then(/^the item with id "([^"]*)" should exist$/, function(key, next) {
     var world = this;
     var params = {TableName: this.tableName, Key: {HashKeyElement: {S: key}}};
-    this.client.getItem(params, function(err, data) {
-      world.resp = this;
-      world.error = err;
-      next();
-    });
+    this.request(null, 'getItem', params, next);
   });
 
   this.Then(/^it should have attribute "([^"]*)" containing "([^"]*)"$/, function(attr, value, next) {
-    if (this.resp.data.Item[attr].S !== value)
-      next.fail("Attr value " + this.resp.data.Item[attr].S + " does not match " + value);
-    else
-      next();
+    this.assert.equal(this.data.Item[attr].S, value);
+    next();
   });
 
   this.When(/^I delete the table$/, function(next) {
@@ -118,7 +112,8 @@ module.exports = function() {
       }
     });
     req.on('complete', function(resp) {
-      world.resp = resp;
+      world.error = resp.error;
+      world.response = resp;
       if (resp.error) callback.fail(resp.error);
       else callback();
     });
@@ -126,8 +121,8 @@ module.exports = function() {
   });
 
   this.Then(/^the request should( not)? be retried$/, function(retry, callback) {
-    if (retry && this.resp.retryCount > 0) callback.fail('Request was incorrectly retried');
-    if (!retry && this.resp.retryCount == 0) callback.fail('Request was incorrectly retried');
+    if (retry && this.response.retryCount > 0) callback.fail('Request was incorrectly retried');
+    if (!retry && this.response.retryCount == 0) callback.fail('Request was incorrectly retried');
     callback();
   });
 
@@ -139,20 +134,21 @@ module.exports = function() {
       resp.httpResponse.body = new Buffer('{"invalid":"response"}');
     });
     req.on('complete', function(resp) {
-      world.resp = resp;
+      world.error = resp.error;
+      world.response = resp;
       callback();
     });
     req.send();
   });
 
   this.When(/^the request is retried the maximum number of times$/, function(callback) {
-    if (this.resp.retryCount != 2) callback.fail('Incorrect retry count');
+    if (this.response.retryCount != 2) callback.fail('Incorrect retry count');
     callback();
   });
 
   this.Then(/^the request should( not)? fail with a CRC checking error$/, function(failed, callback) {
-    if (failed && this.resp.error) callback.fail(this.resp.error);
-    if (!failed && !this.resp.error) callback.fail('Did not fail when should have');
+    if (failed && this.error) callback.fail(this.error);
+    if (!failed && !this.error) callback.fail('Did not fail when should have');
     callback();
   });
 

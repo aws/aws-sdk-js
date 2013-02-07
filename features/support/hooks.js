@@ -20,17 +20,19 @@ module.exports = function () {
   /* Global error code steps */
 
   this.Then(/^the error code should be "([^"]*)"$/, function(code, callback) {
-    this.assert.equal(this.resp.error.code, code);
+    this.assert.ok(this.error, 'Response does not contain an error');
+    this.assert.equal(this.error.code, code);
     callback();
   });
 
   this.Then(/^the error message should be:$/, function(message, callback) {
+    this.assert.ok(this.error, 'Response does not contain an error');
     this.assert.equal(this.error.message, message);
     callback();
   });
 
   this.Then(/^the status code should be (\d+)$/, function(status, callback) {
-    this.assert.equal(this.resp.httpResponse.statusCode, parseInt(status));
+    this.assert.equal(this.response.httpResponse.statusCode, parseInt(status));
     callback();
   });
 

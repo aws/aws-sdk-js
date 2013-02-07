@@ -24,13 +24,13 @@ module.exports = function() {
   });
 
   this.Then(/^the result should contain an access key ID and secret access key$/, function(callback) {
-    this.assert.compare(this.resp.data.Credentials.AccessKeyId.length, '>', 0);
-    this.assert.compare(this.resp.data.Credentials.SecretAccessKey.length, '>', 0);
+    this.assert.compare(this.data.Credentials.AccessKeyId.length, '>', 0);
+    this.assert.compare(this.data.Credentials.SecretAccessKey.length, '>', 0);
     callback();
   });
 
   this.Then(/^the TTL on the session token credentials should be less than (\d+)$/, function(duration, callback) {
-    var ttl = this.resp.data.Credentials.Expiration.getTime();
+    var ttl = this.data.Credentials.Expiration.getTime();
     ttl = (ttl - new Date().getTime()) / 1000;
     this.assert.compare(ttl, '<', duration);
     callback();

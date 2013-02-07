@@ -79,16 +79,17 @@ module.exports = {
     if (typeof svc == 'string') svc = this[svc];
 
     svc[operation](params, function(err, data) {
+      world.response = this;
       world.error = err;
-      world.resp = this;
+      world.data = data;
       if (extra) {
-        extra.call(world, this);
-        next();
+        extra.call(world, world.response);
+        next.call(world);
       }
       else if (extra !== false && err) {
-        world.unexpectedError(this, next);
+        world.unexpectedError(world.response, next);
       } else {
-        next();
+        next.call(world);
       }
     });
   },
@@ -104,7 +105,7 @@ module.exports = {
     var code = resp.error.code;
     var msg = resp.error.message;
     var err = 'Received unexpected error from ' + svc + '.' + op + ', ' + code + ': ' + msg;
-    next.fail(err);
+    next.fail(new Error(err));
   }
 
 };
