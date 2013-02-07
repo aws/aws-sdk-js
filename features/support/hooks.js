@@ -25,9 +25,11 @@ module.exports = function () {
     callback();
   });
 
-  this.Then(/^the error message should be:$/, function(message, callback) {
+  this.Then(/^the error message should (be|equal|match|contain):$/, function(matcher, message, callback) {
+    if (matcher === 'be') matcher = 'equal';
+    if (matcher === 'contain') matcher = 'match';
     this.assert.ok(this.error, 'Response does not contain an error');
-    this.assert.equal(this.error.message, message);
+    this.assert[matcher](this.error.message, message);
     callback();
   });
 
