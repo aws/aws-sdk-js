@@ -65,7 +65,7 @@ http://docs.amazonwebservices.com/nodejs/latest/dg/
 
 The SDK currently supports the following services:
 
-<table width="100%">
+<table>
   <thead>
     <th>Service Name</th>
     <th>Class Name</th>
