@@ -17,6 +17,11 @@ module.exports = {
 
   assert: require('./assertions').assert,
 
+  uniqueName: function uniqueName(base) {
+    if (base === "") return "";
+    return base + '-' + new Date().getTime();
+  },
+
   /**
    * Call this function with a block that will be executed multiple times
    * to deal with eventually consistent conditions.
