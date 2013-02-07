@@ -59,7 +59,7 @@ module.exports = {
           block.call(self, retry);
         }, delay);
       } else {
-        callback.fail();
+        callback.fail(new Error('Eventually block timed out'));
       }
 
     };
