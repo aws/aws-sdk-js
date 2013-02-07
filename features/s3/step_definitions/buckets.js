@@ -30,9 +30,7 @@ module.exports = function() {
 
   this.Then(/^the bucket should exist$/, function(next) {
     this.eventually(next, function (retry) {
-      this.s3.headBucket({Bucket:this.bucket}, function(err) {
-        err ? retry() : next();
-      });
+      this.request('s3', 'headBucket', {Bucket:this.bucket}, retry);
     });
   });
 
@@ -42,9 +40,10 @@ module.exports = function() {
 
   this.Then(/^the bucket should not exist$/, function(next) {
     this.eventually(next, function (retry) {
-      this.s3.headBucket({Bucket:this.bucket}, function(err) {
-        err && err.code == 'NotFound' ? next() : retry();
-      });
+      retry.condition = function() {
+        return this.error && this.error.code === 'NotFound';
+      }
+      this.request('s3', 'headBucket', {Bucket:this.bucket}, retry, false);
     });
   });
 

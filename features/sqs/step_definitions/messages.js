@@ -30,18 +30,11 @@ module.exports = function () {
   });
 
   this.Then(/^I should eventually be able to receive "([^"]*)" from the queue$/, function(message, callback) {
-    var world = this;
-    this.eventually(callback, function (retry) {
-      this.client.receiveMessage({QueueUrl:world.queueUrl}, function(err, data) {
-        if (err) retry();
-        else {
-          var params = {QueueUrl:world.queueUrl,ReceiptHandle:data.Messages[0].ReceiptHandle};
-          var success = data.Messages[0].Body === message;
-          world.client.deleteMessage(params, function(err, data) {
-            (!success && err) ? callback.fail(err) : callback();
-          });
-        }
-      });
+    this.eventually(callback, function (next) {
+      next.condition = function() {
+        return this.data.Messages[0].Body === message;
+      };
+      this.request(null, 'receiveMessage', {QueueUrl:this.queueUrl}, next);
     });
   });
 

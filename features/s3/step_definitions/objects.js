@@ -39,14 +39,8 @@ module.exports = function () {
   });
 
   this.Then(/^the object with the key "([^"]*)" should contain "([^"]*)"$/, function(key, contents, next) {
-    this.eventually(next, function (retry) {
-      this.s3.getObject({Bucket:this.sharedBucket,Key:key}, function(err, data) {
-        if (data && data.Body.toString().replace("\n", "") == contents)
-          next();
-        else
-          retry();
-      });
-    });
+    this.assert.equal(this.data.Body.toString().replace("\n", ""), contents);
+    next();
   });
 
   this.When(/^I copy an object with the key "([^"]*)" to "([^"]*)"$/, function(key1, key2, next) {
@@ -64,13 +58,14 @@ module.exports = function () {
   this.Then(/^the object with the key "([^"]*)" should (not )?exist$/, function(key, shouldNotExist, next) {
     var params = { Bucket:this.sharedBucket, Key:key };
     this.eventually(next, function (retry) {
-      this.s3.headObject(params, function(err, data) {
+      retry.condition = function() {
         if (shouldNotExist) {
-          (err && err.code == 'NotFound') ? next() : retry();
-        } else { // should exist
-          err ? retry() : next();
+          return this.error && this.error.code == 'NoSuchKey';
+        } else {
+          return !this.error;
         }
-      });
+      };
+      this.request('s3', 'getObject', params, retry, false);
     });
   });
 

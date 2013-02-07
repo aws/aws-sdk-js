@@ -23,6 +23,7 @@ Feature: Working with Objects in S3
     Then the object with the key "hello" should exist
     And the object with the key "hello" should contain "world"
     When I write "new world" to the key "hello"
+    Then the object with the key "hello" should exist
     Then the object with the key "hello" should contain "new world"
 
     # Empty files

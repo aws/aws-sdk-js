@@ -22,12 +22,12 @@ module.exports = {
    * to deal with eventually consistent conditions.
    *
    *   this.When(/^I something is eventually consistent$/, function(callback) {
-   *     this.eventually(callback, function(retry) {
+   *     this.eventually(callback, function(next) {
    *       doSomething(function(response) {
    *         if (response != notWhatIExpect) {
-   *           retry();
+   *           next.fail();
    *         } else {
-   *           callback();
+   *           next();
    *         }
    *       });
    *     });
@@ -50,8 +50,8 @@ module.exports = {
     var started = this.AWS.util.date.getDate();
 
     var self = this;
-    var retry = function() {
-
+    var retry = function() { callback(); };
+    retry.fail = function(err) {
       var now = self.AWS.util.date.getDate();
       if (now - started < options.maxTime * 1000) {
         setTimeout(function () {
@@ -59,9 +59,8 @@ module.exports = {
           block.call(self, retry);
         }, delay);
       } else {
-        callback.fail(new Error('Eventually block timed out'));
+        callback.fail(err || new Error('Eventually block timed out'));
       }
-
     };
 
     block.call(this, retry);
@@ -82,14 +81,27 @@ module.exports = {
       world.response = this;
       world.error = err;
       world.data = data;
-      if (extra) {
-        extra.call(world, world.response);
-        next.call(world);
-      }
-      else if (extra !== false && err) {
-        world.unexpectedError(world.response, next);
-      } else {
-        next.call(world);
+
+      try {
+        if (typeof next.condition === 'function') {
+          var condition = next.condition.call(world, world);
+          if (!condition) {
+            next.fail(new Error('Request success condition failed'));
+            return;
+          }
+        }
+
+        if (extra) {
+          extra.call(world, world.response);
+          next.call(world);
+        }
+        else if (extra !== false && err) {
+          world.unexpectedError(world.response, next);
+        } else {
+          next.call(world);
+        }
+      } catch (err) {
+        next.fail(err);
       }
     });
   },

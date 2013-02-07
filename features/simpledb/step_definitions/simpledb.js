@@ -32,7 +32,12 @@ module.exports = function() {
 
   this.Given(/^I get the item "([^"]*)"$/, function(item, callback) {
     var params = {DomainName: this.domainName, ItemName: item};
-    this.request(null, 'getAttributes', params, callback);
+    this.eventually(callback, function (retry) {
+      retry.condition = function() {
+        return this.data.Attributes.length > 0;
+      };
+      this.request(null, 'getAttributes', params, retry);
+    });
   });
 
   this.Then(/^the result should have attribute "([^"]*)" with "([^"]*)"$/, function(name, value, callback) {

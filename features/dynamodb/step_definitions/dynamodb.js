@@ -36,14 +36,12 @@ module.exports = function() {
         callback.fail(err);
         return;
       }
-      world.eventually(callback, function (retry) {
+      world.eventually(callback, function (next) {
+        next.condition = function() {
+          return this.data.Table.TableStatus === 'ACTIVE';
+        };
         params = { TableName: world.tableName };
-        world.client.describeTable(params, function(err, data) {
-          if (data.Table && data.Table.TableStatus === 'ACTIVE')
-            callback();
-          else
-            retry();
-        });
+        world.request(null, 'describeTable', params, next);
       }, {maxTime: 500, delay: 10, backoff: 0});
     });
   };
@@ -83,18 +81,17 @@ module.exports = function() {
     this.request(null, 'deleteTable', params, next);
   });
 
-  this.Then(/^the table should eventually not exist$/, function(next) {
-    var world = this;
-    world.eventually(next, function (retry) {
-      world.client.listTables(function(err, data) {
-        for (var i = 0; i < data.TableNames.length; i++) {
-          if (data.TableNames[i] == world.tableName) {
-            retry();
-            return;
+  this.Then(/^the table should eventually not exist$/, function(callback) {
+    this.eventually(callback, function (next) {
+      next.condition = function() {
+        for (var i = 0; i < this.data.TableNames.length; i++) {
+          if (this.data.TableNames[i] == this.tableName) {
+            return false;
           }
         }
-        next();
-      });
+        return true;
+      };
+      this.request(null, 'listTables', {}, next);
     });
   });
 

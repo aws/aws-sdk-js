@@ -40,34 +40,29 @@ module.exports = function () {
       createQueue(this, callback);
     }
 
-    this.eventually(callback, function (retry) {
-      if(this.createdQueues.length == count) {
-        callback();
+    this.eventually(callback, function (next) {
+      if (this.createdQueues.length == count) {
+        next();
       } else {
-        retry();
+        next.fail();
       }
     }, { maxTime: 20 });
   });
 
   this.Then(/^list queues should eventually return the queue urls$/, function(callback) {
-    var world = this;
-    var createdQueues = this.createdQueues;
-    this.eventually(callback, function (retry) {
-      this.client.listQueues(function (err, data) {
+    this.eventually(callback, function (next) {
+      next.condition = function() {
         var matchingCount = 0;
-        if (err) callback.fail(err);
-        for (var i = 0; i < createdQueues.length; ++i) {
-          for (var j = 0; j < data.QueueUrls.length; ++j) {
-            if (createdQueues[i] == data.QueueUrls[j]) {
-              matchingCount += 1;
+        for (var i = 0; i < this.createdQueues.length; ++i) {
+          for (var j = 0; j < this.data.QueueUrls.length; ++j) {
+            if (this.createdQueues[i] == this.data.QueueUrls[j]) {
+              matchingCount++;
             }
           }
         }
-        if (matchingCount == createdQueues.length)
-          callback();
-        else
-          retry();
-      });
+        return matchingCount == this.createdQueues.length;
+      };
+      this.request(null, 'listQueues', {}, next);
     }, { maxTime: 60 });
   });
 
@@ -77,11 +72,11 @@ module.exports = function () {
       deleteQueue(this.createdQueues[i], this, callback);
     }
 
-    this.eventually(callback, function (retry) {
-      if(this.deletedQueues.length == this.createdQueues.length) {
-        callback();
+    this.eventually(callback, function (next) {
+      if (this.deletedQueues.length == this.createdQueues.length) {
+        next();
       } else {
-        retry();
+        next.fail();
       }
     }, { maxTime: 20 });
   });
