@@ -61,6 +61,33 @@ You can find a getting started guide at:
 
 http://docs.amazonwebservices.com/nodejs/latest/dg/
 
+## Supported Services
+
+The SDK currently supports the following services:
+
+<table width="100%">
+  <thead>
+    <th>Service Name</th>
+    <th>Class Name</th>
+  </thead>
+  <tbody>
+    <tr><td>Auto Scaling</td><td>AWS.AutoScaling</td></tr>
+    <tr><td>Amazon CloudWatch</td><td>AWS.CloudWatch</td></tr>
+    <tr><td>Amazon DynamoDB</td><td>AWS.DynamoDB</td></tr>
+    <tr><td>Amazon EC2</td><td>AWS.EC2</td></tr>
+    <tr><td>Amazon Elastic Transcoder</td><td>AWS.ElasticTranscoder</td></tr>
+    <tr><td>Elastic Load Balancing</td><td>AWS.ELB</td></tr>
+    <tr><td>Amazon Elastic MapReduce</td><td>AWS.EMR</td></tr>
+    <tr><td>AWS Identity and Access Management</td><td>AWS.IAM</td></tr>
+    <tr><td>Amazon S3</td><td>AWS.S3</td></tr>
+    <tr><td>Amazon Simple Email Service</td><td>AWS.SES</td></tr>
+    <tr><td>Amazon SimpleDB</td><td>AWS.SimpleDB</td></tr>
+    <tr><td>Amazon Simple Notification Service</td><td>AWS.SNS</td></tr>
+    <tr><td>Amazon Simple Queue Service</td><td>AWS.SQS</td></tr>
+    <tr><td>AWS Security Token Service</td><td>AWS.STS</td></tr>
+  </tbody>
+</table>
+
 ## License
 
 This SDK is distributed under the
