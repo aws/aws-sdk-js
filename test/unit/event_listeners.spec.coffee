@@ -270,3 +270,12 @@ describe 'AWS.EventListeners', ->
       expect(retryHandler).not.toHaveBeenCalled()
       expect(errorHandler).toHaveBeenCalled()
       expect(completeHandler).toHaveBeenCalled()
+
+    it 'catches exceptions raised from error event', ->
+      helpers.mockHttpResponse 500, {}, []
+      request = makeRequest()
+      request.on 'error', ->
+        throw "ERROR"
+      response = request.send()
+      expect(completeHandler).toHaveBeenCalled()
+      expect(response.error).toBe("ERROR")
