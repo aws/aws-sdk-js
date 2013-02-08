@@ -1,7 +1,7 @@
 ##
 ## ca-bundle.crt -- Bundle of CA Root Certificates
 ##
-## Certificate data from Mozilla as of: Thu Oct 18 19:05:59 2012
+## Certificate data from Mozilla as of: Sat Dec 29 20:03:40 2012
 ##
 ## This is a bundle of X.509 certificates of public Certificate Authorities
 ## (CA). These were automatically extracted from Mozilla's root certificates
@@ -14,7 +14,7 @@
 ## Just configure this file as the SSLCACertificateFile.
 ##
 
-# @(#) $RCSfile: certdata.txt,v $ $Revision: 1.86 $ $Date: 2012/10/18 16:26:52 $
+# @(#) $RCSfile: certdata.txt,v $ $Revision: 1.87 $ $Date: 2012/12/29 16:32:45 $
 
 GTE CyberTrust Global Root
 ==========================
@@ -3846,31 +3846,6 @@ KSb12tjE8nVhz36udmNKekBlk4f4HoCMhuWG1o8O/FMsYOgWYRqiPkN7zTlgVGr18okmAWiDSKIz
 UZTLfhbrES+jkkXITHHZvMmZUldGL1DPvTVp9D0VzgalLA8+9oG6lLvDu79leNKGef9JOxqDDPDe
 eOzI8k1MGt6CKfjBWtrt7uYnXuhF0J0cUahoq0Tj0Itq4/g7u9xN12TyUb7mqqta6THuBrxzvxNi
 Cp/HuZc=
------END CERTIFICATE-----
-
-TÜRKTRUST Elektronik Sertifika Hizmet Sağlayıcısı
-======================================================
------BEGIN CERTIFICATE-----
-MIIEPTCCAyWgAwIBAgIBATANBgkqhkiG9w0BAQUFADCBvzE/MD0GA1UEAww2VMOcUktUUlVTVCBF
-bGVrdHJvbmlrIFNlcnRpZmlrYSBIaXptZXQgU2HEn2xhecSxY8Sxc8SxMQswCQYDVQQGEwJUUjEP
-MA0GA1UEBwwGQW5rYXJhMV4wXAYDVQQKDFVUw5xSS1RSVVNUIEJpbGdpIMSwbGV0acWfaW0gdmUg
-QmlsacWfaW0gR8O8dmVubGnEn2kgSGl6bWV0bGVyaSBBLsWeLiAoYykgQXJhbMSxayAyMDA3MB4X
-DTA3MTIyNTE4MzcxOVoXDTE3MTIyMjE4MzcxOVowgb8xPzA9BgNVBAMMNlTDnFJLVFJVU1QgRWxl
-a3Ryb25payBTZXJ0aWZpa2EgSGl6bWV0IFNhxJ9sYXnEsWPEsXPEsTELMAkGA1UEBhMCVFIxDzAN
-BgNVBAcMBkFua2FyYTFeMFwGA1UECgxVVMOcUktUUlVTVCBCaWxnaSDEsGxldGnFn2ltIHZlIEJp
-bGnFn2ltIEfDvHZlbmxpxJ9pIEhpem1ldGxlcmkgQS7Fni4gKGMpIEFyYWzEsWsgMjAwNzCCASIw
-DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKu3PgqMyKVYFeaK7yc9SrToJdPNM8Ig3BnuiD9N
-YvDdE3ePYakqtdTyuTFYKTsvP2qcb3N2Je40IIDu6rfwxArNK4aUyeNgsURSsloptJGXg9i3phQv
-KUmi8wUG+7RP2qFsmmaf8EMJyupyj+sA1zU511YXRxcw9L6/P8JorzZAwan0qafoEGsIiveGHtya
-KhUG9qPw9ODHFNRRf8+0222vR5YXm3dx2KdxnSQM9pQ/hTEST7ruToK4uT6PIzdezKKqdfcYbwnT
-rqdUKDT74eA7YH2gvnmJhsifLfkKS8RQouf9eRbHegsYz85M733WB2+Y8a+xwXrXgTW4qhe04MsC
-AwEAAaNCMEAwHQYDVR0OBBYEFCnFkKslrxHkYb+j/4hhkeYO/pyBMA4GA1UdDwEB/wQEAwIBBjAP
-BgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3DQEBBQUAA4IBAQAQDdr4Ouwo0RSVgrESLFF6QSU2TJ/s
-Px+EnWVUXKgWAkD6bho3hO9ynYYKVZ1WKKxmLNA6VpM0ByWtCLCPyA8JWcqdmBzlVPi5RX9ql2+I
-aE1KBiY3iAIOtsbWcpnOa3faYjGkVh+uX4132l32iPwa2Z61gfAyuOOI0JzzaqC5mxRZNTZPz/OO
-Xl0XrRWV2N2y1RVuAE6zS89mlOTgzbUF2mNXi+WzqtvALhyQRNsaXRik7r4EW5nVcV9VZWRi1aKb
-BFmGyGJ353yCRWo9F7/snXUMrqNvWtMvmDb08PUZqxFdyKbjKlhqQgnDvZImZjINXQhVdP+MmNAK
-poRq0Tl9
 -----END CERTIFICATE-----
 
 T-TeleSec GlobalRoot Class 3
