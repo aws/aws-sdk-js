@@ -117,6 +117,15 @@ describe 'AWS.util.string', ->
       expect(err.message).toEqual('Cannot determine length of 3.14')
       expect(err.object).toBe(3.14)
 
+describe 'AWS.util.buffer', ->
+  describe 'concat', ->
+    it 'concatenates a list of buffers', ->
+      buffer1 = new Buffer('abcdefg')
+      buffer2 = new Buffer('hijklmn')
+      buffer3 = AWS.util.buffer.concat([buffer1, buffer2])
+      expect(buffer3.length).toEqual(14)
+      expect(buffer3.toString()).toEqual('abcdefghijklmn')
+
 describe 'AWS.util.crypto', ->
 
   util = AWS.util.crypto
