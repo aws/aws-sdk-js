@@ -31,17 +31,12 @@ module.exports = function() {
   });
 
   this.Given(/^I get the item "([^"]*)"$/, function(item, callback) {
-    var params = {DomainName: this.domainName, ItemName: item};
-    this.eventually(callback, function (retry) {
-      retry.condition = function() {
-        return this.data.Attributes.length > 0;
-      };
-      this.request(null, 'getAttributes', params, retry);
-    });
+    var params = {DomainName: this.domainName, ItemName: item, ConsistentRead: true};
+    this.request(null, 'getAttributes', params, callback);
   });
 
   this.Given(/^I select "([^"]*)" from the domain$/, function(expr, callback) {
-    var params = {SelectExpression: 'SELECT ' + expr + ' FROM `' + this.domainName + '`'};
+    var params = {SelectExpression: 'SELECT ' + expr + ' FROM `' + this.domainName + '`', ConsistentRead: true};
     this.request(null, 'select', params, callback);
   });
 
