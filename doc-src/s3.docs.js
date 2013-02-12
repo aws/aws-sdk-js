@@ -785,11 +785,11 @@ AWS.S3 = inherit({})
  *           * +HttpRedirectCode+ - (<tt>String</tt>) The HTTP redirect
  *             code to use on the response. Not required if one of the
  *             siblings is present.
- *         * +HostName+ - (<tt>String</tt>) Name of the host where requests
- *           will be redirected.
- *         * +Protocol+ - (<tt>String</tt>) Protocol to use (http, https)
- *           when redirecting requests. The default is the protocol that is
- *           used in the original request.
+ *           * +HostName+ - (<tt>String</tt>) Name of the host where
+ *             requests will be redirected.
+ *           * +Protocol+ - (<tt>String</tt>) Protocol to use (http, https)
+ *             when redirecting requests. The default is the protocol that
+ *             is used in the original request.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETwebsite.html
@@ -1645,19 +1645,19 @@ AWS.S3 = inherit({})
  *             HttpErrorCodeReturnedEquals is not specified. If both
  *             conditions are specified, both must be true for the
  *             redirect to be applied.
- *         * +HostName+ - (*required*, <tt>String</tt>) Name of the host
- *           where requests will be redirected.
- *         * +Protocol+ - (<tt>String</tt>) Protocol to use (http, https)
- *           when redirecting requests. The default is the protocol that
- *           is used in the original request.
  *         * +Redirect+ - (*required*, <tt>Object</tt>) Container for
  *           redirect information. You can redirect requests to another
  *           host, to another page, or with another protocol. In the
  *           event of an error, you can can specify a different error
  *           code to return.
+ *           * +HostName+ - (*required*, <tt>String</tt>) Name of the
+ *             host where requests will be redirected.
  *           * +HttpRedirectCode+ - (<tt>String</tt>) The HTTP redirect
  *             code to use on the response. Not required if one of the
  *             siblings is present.
+ *           * +Protocol+ - (<tt>String</tt>) Protocol to use (http,
+ *             https) when redirecting requests. The default is the
+ *             protocol that is used in the original request.
  *           * +ReplaceKeyPrefixWith+ - (<tt>String</tt>) The object key
  *             prefix to use in the redirect request. For example, to
  *             redirect requests for all pages with prefix docs/ (objects
