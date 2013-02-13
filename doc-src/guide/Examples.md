@@ -59,6 +59,21 @@ var file = require('fs').createWriteStream('/path/to/file.jpg');
 s3.client.getObject(params).createReadStream().pipe(file);
 ```
 
+Alternatively, you can register an 'httpData' event listener on
+the request object to access each chunk of data received across
+the wire (as Buffer objects):
+
+```js
+var s3 = new AWS.S3();
+var params = {Bucket: 'myBucket', Key: 'myImageFile.jpg'};
+var file = require('fs').createWriteStream('/path/to/file.jpg');
+
+s3.client.getObject(params).
+on('httpData', function(chunk) { file.write(chunk); }).
+on('httpDone', function() { file.end(); }).
+send();
+```
+
 ## Amazon DynamoDB
 
 ### Amazon DynamoDB: Listing Tables (listTables)
