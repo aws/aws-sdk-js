@@ -68,23 +68,90 @@ The SDK currently supports the following services:
 <table>
   <thead>
     <th>Service Name</th>
+    <th>API Version</th>
     <th>Class Name</th>
   </thead>
   <tbody>
-    <tr><td>Auto Scaling</td><td>AWS.AutoScaling</td></tr>
-    <tr><td>Amazon CloudWatch</td><td>AWS.CloudWatch</td></tr>
-    <tr><td>Amazon DynamoDB</td><td>AWS.DynamoDB</td></tr>
-    <tr><td>Amazon EC2</td><td>AWS.EC2</td></tr>
-    <tr><td>Amazon Elastic Transcoder</td><td>AWS.ElasticTranscoder</td></tr>
-    <tr><td>Elastic Load Balancing</td><td>AWS.ELB</td></tr>
-    <tr><td>Amazon Elastic MapReduce</td><td>AWS.EMR</td></tr>
-    <tr><td>AWS Identity and Access Management</td><td>AWS.IAM</td></tr>
-    <tr><td>Amazon S3</td><td>AWS.S3</td></tr>
-    <tr><td>Amazon Simple Email Service</td><td>AWS.SES</td></tr>
-    <tr><td>Amazon SimpleDB</td><td>AWS.SimpleDB</td></tr>
-    <tr><td>Amazon Simple Notification Service</td><td>AWS.SNS</td></tr>
-    <tr><td>Amazon Simple Queue Service</td><td>AWS.SQS</td></tr>
-    <tr><td>AWS Security Token Service</td><td>AWS.STS</td></tr>
+    <tr>
+      <td>Auto Scaling</td>
+      <td>2011-01-01</td>
+      <td>AWS.AutoScaling</td>
+    </tr>
+    <tr>
+      <td>AWS CloudFormation</td>
+      <td>2010-05-15</td>
+      <td>AWS.CloudFormation</td>
+    </tr>
+    <tr>
+      <td>Amazon CloudWatch</td>
+      <td>2010-08-01</td>
+      <td>AWS.CloudWatch</td>
+    </tr>
+    <tr>
+      <td>Amazon DynamoDB</td>
+      <td>2011-12-05</td>
+      <td>AWS.DynamoDB</td>
+    </tr>
+    <tr>
+      <td>Amazon Elastic Compute Cloud</td>
+      <td>2012-12-01</td>
+      <td>AWS.EC2</td>
+    </tr>
+    <tr>
+      <td>Elastic Load Balancing</td>
+      <td>2012-06-01</td>
+      <td>AWS.ELB</td>
+    </tr>
+    <tr>
+      <td>Amazon Elastic MapReduce</td>
+      <td>2009-03-31</td>
+      <td>AWS.EMR</td>
+    </tr>
+    <tr>
+      <td>Amazon Elastic Transcoder</td>
+      <td>2012-09-25</td>
+      <td>AWS.ElasticTranscoder</td>
+    </tr>
+    <tr>
+      <td>AWS Identity and Access Management</td>
+      <td>2010-05-08</td>
+      <td>AWS.IAM</td>
+    </tr>
+    <tr>
+      <td>Amazon Simple Storage Solution</td>
+      <td>2006-03-01</td>
+      <td>AWS.S3</td>
+    </tr>
+    <tr>
+      <td>Amazon SimpleDB</td>
+      <td>2009-04-15</td>
+      <td>AWS.SimpleDB</td>
+    </tr>
+    <tr>
+      <td>Amazon Simple Workflow Service</td>
+      <td>2012-01-25</td>
+      <td>AWS.SimpleWorkflow</td>
+    </tr>
+    <tr>
+      <td>Amazon Simple Email Service</td>
+      <td>2010-12-01</td>
+      <td>AWS.SES</td>
+    </tr>
+    <tr>
+      <td>Amazon Simple Notification Service</td>
+      <td>2010-03-31</td>
+      <td>AWS.SNS</td>
+    </tr>
+    <tr>
+      <td>Amazon Simple Queue Service</td>
+      <td>2011-10-01</td>
+      <td>AWS.SQS</td>
+    </tr>
+    <tr>
+      <td>AWS Security Token Service</td>
+      <td>2011-06-15</td>
+      <td>AWS.STS</td>
+    </tr>
   </tbody>
 </table>
 
