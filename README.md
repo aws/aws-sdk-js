@@ -118,6 +118,11 @@ The SDK currently supports the following services:
       <td>AWS.IAM</td>
     </tr>
     <tr>
+      <td>Amazon Relational Database Service</td>
+      <td>2012-07-31</td>
+      <td>AWS.RDS</td>
+    </tr>
+    <tr>
       <td>Amazon Simple Storage Solution</td>
       <td>2006-03-01</td>
       <td>AWS.S3</td>
