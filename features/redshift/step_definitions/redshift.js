@@ -26,14 +26,13 @@ module.exports = function() {
   });
 
   this.Given(/^I describe Redshift cluster security groups$/, function(callback) {
-    this.request(null, 'describeClusterSecurityGroups', {}, callback);
+    var params = {ClusterSecurityGroupName: this.clusterGroupName};
+    this.request(null, 'describeClusterSecurityGroups', params, callback);
   });
 
   this.Then(/^the Redshift cluster security group should be in the list$/, function(callback) {
-    var groupName = this.clusterGroupName;
-    this.assert.contains(this.data.ClusterSecurityGroups, function(item) {
-      return item.ClusterSecurityGroupName === groupName;
-    });
+    var item = this.data.ClusterSecurityGroups[0];
+    this.assert.equal(item.ClusterSecurityGroupName, this.clusterGroupName);
     callback();
   });
 
