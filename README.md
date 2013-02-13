@@ -98,6 +98,11 @@ The SDK currently supports the following services:
       <td>AWS.EC2</td>
     </tr>
     <tr>
+      <td>AWS Elastic Beanstalk</td>
+      <td>2010-12-01</td>
+      <td>AWS.ElasticBeanstalk</td>
+    </tr>
+    <tr>
       <td>Elastic Load Balancing</td>
       <td>2012-06-01</td>
       <td>AWS.ELB</td>
