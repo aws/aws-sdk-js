@@ -25,6 +25,11 @@ module.exports = function() {
     this.request(null, 'createClusterSecurityGroup', params, callback, false);
   });
 
+  this.Given(/^the Redshift cluster security group name is in the result$/, function(callback) {
+    var name = this.data.ClusterSecurityGroupName;
+    this.assert.equal(name, this.clusterGroupName);
+    callback();
+  });
   this.Given(/^I describe Redshift cluster security groups$/, function(callback) {
     var params = {ClusterSecurityGroupName: this.clusterGroupName};
     this.request(null, 'describeClusterSecurityGroups', params, callback);
