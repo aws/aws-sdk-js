@@ -79,7 +79,7 @@ describe 'AWS.QueryParamSerializer', ->
           ['Name.3', 'c'],
         ])
 
-      it 'Uses list-item member names instead of the list member name', ->
+      it 'Uses list-member names instead of the list name', ->
         rules = {Root:{t:'o',m:{Items:{t:'a',f:1,m:{n:'ListItem'}}}}}
         params = serialize({Root:{Items:['a', 'b', 'c']}}, rules)
         expect(params).toEqual([
@@ -127,22 +127,22 @@ describe 'AWS.QueryParamSerializer', ->
           ['Person.member.3', 'c'],
         ])
 
-      it 'replaces `.member` with the member name trait', ->
+      it 'ignores the list-member name', ->
         rules = {Person:{t:'a',m:{n:'Name'}}}
         params = serialize({Person:['a','b','c']}, rules)
         expect(params).toEqual([
-          ['Person.Name.1', 'a'],
-          ['Person.Name.2', 'b'],
-          ['Person.Name.3', 'c'],
+          ['Person.member.1', 'a'],
+          ['Person.member.2', 'b'],
+          ['Person.member.3', 'c'],
         ])
 
       it 'observes both list name and list member name', ->
         rules = {People:{t:'a',n:'Person',m:{n:'Name'}}}
         params = serialize({People:['a','b','c']}, rules)
         expect(params).toEqual([
-          ['Person.Name.1', 'a'],
-          ['Person.Name.2', 'b'],
-          ['Person.Name.3', 'c'],
+          ['Person.member.1', 'a'],
+          ['Person.member.2', 'b'],
+          ['Person.member.3', 'c'],
         ])
 
   describe 'maps', -> # maps are hashes with user defined keys
