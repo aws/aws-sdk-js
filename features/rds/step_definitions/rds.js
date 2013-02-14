@@ -25,6 +25,12 @@ module.exports = function() {
     this.request(null, 'createDBSecurityGroup', params, callback, false);
   });
 
+  this.Given(/^the RDS security group name is in the result$/, function(callback) {
+    var name = this.data.DBSecurityGroupName;
+    this.assert.equal(name, this.dbGroupName);
+    callback();
+  });
+
   this.Given(/^I describe the RDS security group$/, function(callback) {
     var params = {DBSecurityGroupName: this.dbGroupName};
     this.request(null, 'describeDBSecurityGroups', params, callback);

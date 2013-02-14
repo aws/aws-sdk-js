@@ -19,6 +19,7 @@ Feature: Amazon Relational Database Service
 
   Scenario: Creating and deleting security groups
     Given I create a RDS security group with prefix name "aws-js-sdk"
+    And the RDS security group name is in the result
     And I describe the RDS security group
     Then the RDS security group should be described
     And I delete the RDS security group
