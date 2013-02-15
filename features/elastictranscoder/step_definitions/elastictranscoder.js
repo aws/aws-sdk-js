@@ -20,6 +20,13 @@ module.exports = function() {
   });
 
   this.Given(/^I create a pipeline$/, function(callback) {
+
+    var config = JSON.parse(this.AWS.util.readFileSync('configuration'));
+
+    if (!config.elastictranscoderIntegrationRole) {
+      return callback.pending();
+    }
+
     var world = this;
     var timestamp = world.AWS.util.date.unixTimestamp() * 1000;
 
@@ -27,7 +34,6 @@ module.exports = function() {
     new this.AWS.S3.Client().createBucket({Bucket:this.bucket}, function(err, data) {
       if (err) callback.fail(err);
 
-      var config = JSON.parse(world.AWS.util.readFileSync('configuration'));
       var params = {
         Name: 'aws-sdk-js-integration-' + timestamp,
         InputBucket: world.bucket,
