@@ -75,7 +75,7 @@ describe 'AWS.ServiceInterface.RestXml', ->
         buildRequest ->
           operation.u = '/{Bucket}?next-marker={Marker}&limit={Limit}'
           operation.i =
-            n: 'ComplexRequest', # the root xml element name
+            n: 'Config', # the root xml element name
             m:
               Bucket: # uri path param
                 t: 's'
@@ -96,6 +96,7 @@ describe 'AWS.ServiceInterface.RestXml', ->
                 l: 'header'
                 n: 'x-amz-meta-'
               Config: # structure of mixed tpyes
+                l: 'body'
                 t: 'o'
                 r: 1
                 m:
@@ -115,13 +116,12 @@ describe 'AWS.ServiceInterface.RestXml', ->
 
           request.params =
             ACL: 'canned-acl'
-            Config:
-              Abc: 'abc'
-              Locations: ['a', 'b', 'c']
-              Data: [
-                { Foo:'foo1', Bar:'bar1' },
-                { Foo:'foo2', Bar:'bar2' },
-              ]
+            Abc: 'abc'
+            Locations: ['a', 'b', 'c']
+            Data: [
+              { Foo:'foo1', Bar:'bar1' },
+              { Foo:'foo2', Bar:'bar2' },
+            ]
             Bucket: 'bucket-name'
             Marker: 'marker'
             Limit: 123
@@ -161,7 +161,7 @@ describe 'AWS.ServiceInterface.RestXml', ->
       it 'omits the body xml when body params are not present', ->
         buildRequest ->
           operation.u = '/{Bucket}'
-          operation.i = {n:'CreateBucketConfig', m:{Bucket:{l:'uri',r:1},Config:{}}}
+          operation.i = {n:'Config', m:{Bucket:{l:'uri',r:1},Config:{}}}
           request.params = Bucket:'abc' # omitting Config purposefully
         expect(request.httpRequest.body).toEqual(null)
         expect(request.httpRequest.path).toEqual('/abc')
