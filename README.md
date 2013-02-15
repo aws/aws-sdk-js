@@ -83,6 +83,11 @@ The SDK currently supports the following services:
       <td>AWS.CloudFormation</td>
     </tr>
     <tr>
+      <td>Amazon CloudFront</td>
+      <td>2012-05-05</td>
+      <td>AWS.CloudFront</td>
+    </tr>
+    <tr>
       <td>Amazon CloudWatch</td>
       <td>2010-08-01</td>
       <td>AWS.CloudWatch</td>
