@@ -22,7 +22,7 @@ describe 'AWS.ServiceInterface.Json', ->
       targetPrefix: 'prefix'
       operations:
         operationName:
-          n: 'OperationName'
+          name: 'OperationName'
 
   AWS.Client.defineMethods(MockJSONClient)
 

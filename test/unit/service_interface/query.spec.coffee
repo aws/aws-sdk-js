@@ -26,9 +26,19 @@ describe 'AWS.ServiceInterface.Query', ->
       apiVersion: '2012-01-01'
       operations:
         operationName:
-          n: 'OperationName'
-          i: {m:{Input:{m:{}}}}
-          o: {Data:{t:'o',m:{Name:{t:'s'},Count:{t:'n'}}}}
+          name: 'OperationName'
+          input:
+            members:
+              Input:
+                members: {}
+          output:
+            Data:
+              type: 'structure'
+              members:
+                Name:
+                  type: 'string'
+                Count:
+                  type: 'float'
 
     client = new MockQueryClient({region:'region'})
     request = new AWS.Request(client, 'operationName')
@@ -148,7 +158,7 @@ describe 'AWS.ServiceInterface.Query', ->
       expect(response.data).toEqual({Data:{Name:'abc',Count:123}})
 
     it 'performs default xml parsing when output rule is missing', ->
-      delete client.api.operations.operationName.o
+      delete client.api.operations.operationName.output
       extractData """
       <xml>
         <Data>

@@ -201,18 +201,16 @@ describe 'AWS.XML.Builder', ->
 
     it 'serializes lists of structures', ->
       rules =
-        type: 'structure',
-        members:
-          Points:
-            type: 'list'
-            flattened: 1
+        Points:
+          type: 'list'
+          flattened: true
+          name: 'Point'
+          members:
+            type: 'structure'
             name: 'Point'
             members:
-              type: 'structure'
-              name: 'Point'
-              members:
-                X: {type:'float'}
-                Y: {type:'float'}
+              X: {type:'float'}
+              Y: {type:'float'}
       params = {Points:[{X:1.2,Y:2.1},{X:3.4,Y:4.3}]}
       xml = """
       <Data xmlns="#{xmlns}">
