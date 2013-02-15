@@ -23,9 +23,6 @@
       "xml2js": "latest",
       "xmlbuilder": "latest"
     },
-    "optionalDependencies": {
-      "libxmljs": "latest"
-    },
     "main": "lib/aws.js",
     "directories":  {
         "lib": "lib"
