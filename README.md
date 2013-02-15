@@ -133,6 +133,11 @@ The SDK currently supports the following services:
       <td>AWS.RDS</td>
     </tr>
     <tr>
+      <td>Amazon Redshift</td>
+      <td>2012-12-01</td>
+      <td>AWS.Redshift</td>
+    </tr>
+    <tr>
       <td>Amazon Simple Storage Solution</td>
       <td>2006-03-01</td>
       <td>AWS.S3</td>
