@@ -22,6 +22,9 @@ else
   AWS.config.update credentials:
     accessKeyId: 'akid'
     secretAccessKey: 'secret'
+# Disable validation
+AWS.EventListeners.Core.removeListener 'validate',
+  AWS.EventListeners.Core.VALIDATE_PARAMETERS
 
 integration = (reqBuilder, respCallback) ->
   req = reqBuilder()
