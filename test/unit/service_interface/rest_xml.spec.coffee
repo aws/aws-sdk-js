@@ -240,7 +240,14 @@ describe 'AWS.ServiceInterface.RestXml', ->
       svc.extractData(response)
 
     it 'parses the xml body', ->
-      operation.output = {Foo:{},Bar:{type:'list',members:{name:'Item'}}}
+      operation.output =
+        type: 'structure'
+        members:
+          Foo: {}
+          Bar:
+            type: 'list'
+            members:
+              name: 'Item'
       extractData """
       <xml>
         <Foo>foo</Foo>
@@ -255,14 +262,21 @@ describe 'AWS.ServiceInterface.RestXml', ->
 
     it 'sets payload element to a Buffer object when it streams', ->
       operation.output_payload = 'Body'
-      operation.output = {Body:{streaming:true}}
+      operation.output =
+        type: 'structure'
+        members:
+          Body:
+            streaming: true
       extractData 'Buffer data'
       expect(response.data.Body instanceof Buffer).toBeTruthy()
       expect(response.data.Body.toString()).toEqual('Buffer data')
 
     it 'sets payload element to String when it does not stream', ->
       operation.output_payload = 'Body'
-      operation.output = {Body:{}}
+      operation.output =
+        type: 'structure'
+        members:
+          Body: {}
       extractData 'Buffer data'
       expect(typeof response.data.Body).toEqual('string')
       expect(response.data.Body).toEqual('Buffer data')
@@ -271,13 +285,15 @@ describe 'AWS.ServiceInterface.RestXml', ->
       response.httpResponse.headers['x-amz-foo'] = 'foo'
       response.httpResponse.headers['x-amz-bar'] = 'bar'
       operation.output =
-        Foo:
-          location: 'header'
-          name: 'x-amz-foo'
-        Bar:
-          location: 'header'
-          name: 'x-amz-bar'
-        Baz: {}
+        type: 'structure'
+        members:
+          Foo:
+            location: 'header'
+            name: 'x-amz-foo'
+          Bar:
+            location: 'header'
+            name: 'x-amz-bar'
+          Baz: {}
       operation.output_payload = 'Baz'
       extractData 'Buffer data'
       expect(response.data.Foo).toEqual('foo')

@@ -156,40 +156,48 @@ describe 'AWS.ServiceInterface.Rest', ->
       it 'extracts header values', ->
         extractData ->
           operation.output =
-            ContentType:
-              type: 'string'
-              location: 'header'
-              name: 'content-type'
+            type: 'structure'
+            members:
+              ContentType:
+                type: 'string'
+                location: 'header'
+                name: 'content-type'
           response.httpResponse.headers['content-type'] = 'text/plain'
         expect(response.data.ContentType).toEqual('text/plain')
 
       it 'extracts headers when the rule name is camel-cased', ->
         extractData ->
           operation.output =
-            ContentType:
-              type: 'string'
-              location: 'header'
-              name: 'Content-Type'
+            type: 'structure'
+            members:
+              ContentType:
+                type: 'string'
+                location: 'header'
+                name: 'Content-Type'
           response.httpResponse.headers['content-type'] = 'text/plain'
         expect(response.data.ContentType).toEqual('text/plain')
 
       it 'extracts headers when the header name is camel-cased', ->
         extractData ->
           operation.output =
-            ContentType:
-              type: 'string'
-              location: 'header'
-              name: 'content-type'
+            type: 'structure'
+            members:
+              ContentType:
+                type: 'string'
+                location: 'header'
+                name: 'content-type'
           response.httpResponse.headers['Content-Type'] = 'text/plain'
         expect(response.data.ContentType).toEqual('text/plain')
 
       it 'extracts map types from header', ->
         extractData ->
           operation.output =
-            Metadata:
-              type: 'map'
-              location: 'header'
-              name: 'x-amz-meta-'
+            type: 'structure'
+            members:
+              Metadata:
+                type: 'map'
+                location: 'header'
+                name: 'x-amz-meta-'
           response.httpResponse.headers['X-AMZ-META-FOO'] = 'foo'
           response.httpResponse.headers['x-amz-meta-bar'] = 'bar'
         expect(response.data.Metadata.FOO).toEqual('foo')
@@ -198,27 +206,33 @@ describe 'AWS.ServiceInterface.Rest', ->
       it 'adds empty map if no matching headers are found', ->
         extractData ->
           operation.output =
-            Metadata:
-              type: 'map'
-              location: 'header'
-              name: 'x-amz-meta-'
+            type: 'structure'
+            members:
+              Metadata:
+                type: 'map'
+                location: 'header'
+                name: 'x-amz-meta-'
         expect(response.data.Metadata).toEqual({})
 
     describe 'status code', ->
       it 'extracts the http status when instructed to', ->
         extractData ->
           operation.output =
-            Result:
-              type: 'integer'
-              location: 'status'
+            type: 'structure'
+            members:
+              Result:
+                type: 'integer'
+                location: 'status'
           response.httpResponse.statusCode = 200
         expect(response.data.Result).toEqual(200)
 
       it 'casts string status codes to integers', ->
         extractData ->
           operation.output =
-            Result:
-              type: 'integer'
-              location: 'status'
+            type: 'structure'
+            members:
+              Result:
+                type: 'integer'
+                location: 'status'
           response.httpResponse.statusCode = '202'
         expect(response.data.Result).toEqual(202)

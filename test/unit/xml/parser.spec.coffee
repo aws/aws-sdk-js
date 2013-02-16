@@ -62,11 +62,13 @@ describe 'AWS.XML.Parser', ->
     it 'returns empty objects as {}', ->
       xml = '<xml><Item/></xml>'
       rules =
-        Item:
-          type: 'structure'
-          members:
-            Name:
-              type: 'string'
+        type: 'structure'
+        members:
+          Item:
+            type: 'structure'
+            members:
+              Name:
+                type: 'string'
       parse xml, rules, (data) ->
         expect(data).toEqual({Item:{}})
 
@@ -75,10 +77,12 @@ describe 'AWS.XML.Parser', ->
     it 'returns empty lists as []', ->
       xml = '<xml><items/></xml>'
       rules =
-        items:
-          type: 'list'
-          members:
-            type: 'string'
+        type: 'structure'
+        members:
+          items:
+            type: 'list'
+            members:
+              type: 'string'
       parse xml, rules, (data) ->
         expect(data).toEqual({items:[]})
 
@@ -92,9 +96,11 @@ describe 'AWS.XML.Parser', ->
       </xml>
       """
       rules =
-        items:
-          type: 'list'
-          members: {}
+        type: 'structure'
+        members:
+          items:
+            type: 'list'
+            members: {}
       parse xml, rules, (data) ->
         expect(data).toEqual({items:['abc','xyz']})
 
@@ -108,10 +114,12 @@ describe 'AWS.XML.Parser', ->
       </xml>
       """
       rules =
-        items:
-          type: 'list'
-          members:
-            name: 'item'
+        type: 'structure'
+        members:
+          items:
+            type: 'list'
+            members:
+              name: 'item'
       parse xml, rules, (data) ->
         expect(data).toEqual({items:['abc','xyz']})
 
@@ -125,13 +133,15 @@ describe 'AWS.XML.Parser', ->
       </xml>
       """
       rules =
-        People:
-          type: 'list'
-          members:
-            type: 'structure'
+        type: 'structure'
+        members:
+          People:
+            type: 'list'
             members:
-              Name:
-                type: 'string'
+              type: 'structure'
+              members:
+                Name:
+                  type: 'string'
       parse xml, rules, (data) ->
         expect(data).toEqual({People:[{Name:'abc'},{Name:'xyz'}]})
 
@@ -145,14 +155,16 @@ describe 'AWS.XML.Parser', ->
       </xml>
       """
       rules =
-        People:
-          type: 'list'
-          members:
-            type: 'structure'
-            name: 'Person'
+        type: 'structure'
+        members:
+          People:
+            type: 'list'
             members:
-              Name:
-                type: 'string'
+              type: 'structure'
+              name: 'Person'
+              members:
+                Name:
+                  type: 'string'
       parse xml, rules, (data) ->
         expect(data).toEqual({People:[{Name:'abc'},{Name:'xyz'}]})
 
@@ -174,13 +186,15 @@ describe 'AWS.XML.Parser', ->
 
     it 'collects sibling elements of the same name', ->
       rules =
-        person:
-          members:
-            alias:
-              name: 'aka'
-              type: 'list'
-              flattened: true
-              members: {}
+        type: 'structure'
+        members:
+          person:
+            members:
+              alias:
+                name: 'aka'
+                type: 'list'
+                flattened: true
+                members: {}
       parse xml, rules, (data) ->
         expect(data).toEqual({person:{name:'Unknown',aka:['John Doe', 'Jane Doe']}})
 
@@ -199,13 +213,15 @@ describe 'AWS.XML.Parser', ->
       </xml>
       """
       rules =
-        complexValue:
-          type: 'list'
-          flattened: true
-          name: 'values'
-          members:
-            type: 'structure'
-            members: {}
+        type: 'structure'
+        members:
+          complexValue:
+            type: 'list'
+            flattened: true
+            name: 'values'
+            members:
+              type: 'structure'
+              members: {}
       values = {name:'Name',values:[{a:'1',b:'2'},{a:'3',b:'4'}]}
       parse xml, rules, (data) ->
         expect(data).toEqual(values)
@@ -219,15 +235,17 @@ describe 'AWS.XML.Parser', ->
       </xml>
       """
       rules =
-        Count:
-          type: 'integer'
-        Person:
-          type: 'list'
-          flattened: true
-          name: 'People'
-          members:
-            type: 'structure'
-            name: 'Person'
+        type: 'structure'
+        members:
+          Count:
+            type: 'integer'
+          Person:
+            type: 'list'
+            flattened: true
+            name: 'People'
+            members:
+              type: 'structure'
+              name: 'Person'
       parse xml, rules, (data) ->
         expect(data).toEqual({Count:2,People:[{Name:'abc'},{Name:'xyz'}]})
 
@@ -255,10 +273,12 @@ describe 'AWS.XML.Parser', ->
         </xml>
         """
         rules =
-          SummaryMap:
-            type: 'map'
-            members:
-              type: 'integer'
+          type: 'structure'
+          members:
+            SummaryMap:
+              type: 'map'
+              members:
+                type: 'integer'
         parse xml, rules, (data) ->
           expect(data).toEqual(SummaryMap:{Groups:31,GroupsQuota:50,UsersQuota:150})
 
@@ -284,14 +304,16 @@ describe 'AWS.XML.Parser', ->
         </xml>
         """
         rules =
-          SummaryMap:
-            type: 'map'
-            name: 'Summary',
-            keys:
-              name: 'Property'
-            members:
-              type: 'integer'
-              name: 'Count'
+          type: 'structure'
+          members:
+            SummaryMap:
+              type: 'map'
+              name: 'Summary',
+              keys:
+                name: 'Property'
+              members:
+                type: 'integer'
+                name: 'Count'
         parse xml, rules, (data) ->
           expect(data).toEqual(Summary:{Groups:31,GroupsQuota:50,UsersQuota:150})
 
@@ -310,9 +332,11 @@ describe 'AWS.XML.Parser', ->
           </xml>
           """
           rules =
-            Attributes:
-              type: 'map'
-              flattened: true
+            type: 'strucure'
+            members:
+              Attributes:
+                type: 'map'
+                flattened: true
           parse xml, rules, (data) ->
             expect(data).toEqual({Attributes:{color:'red',size:'large'}})
 
@@ -332,23 +356,27 @@ describe 'AWS.XML.Parser', ->
           </xml>
           """
           rules =
-            Attribute:
-              name: 'Attributes'
-              type: 'map'
-              flattened: true
-              keys:
-                name: 'AttrName'
-              members:
-                name: 'AttrValue'
-                type: 'integer'
+            type: 'structure'
+            members:
+              Attribute:
+                name: 'Attributes'
+                type: 'map'
+                flattened: true
+                keys:
+                  name: 'AttrName'
+                members:
+                  name: 'AttrValue'
+                  type: 'integer'
           parse xml, rules, (data) ->
             expect(data).toEqual({Attributes:{age:35,height:72}})
 
   describe 'booleans', ->
 
     rules =
-      enabled:
-        type: 'boolean'
+      type: 'structure'
+      members:
+        enabled:
+          type: 'boolean'
 
     it 'converts the string "true" in to the boolean value true', ->
       xml = "<xml><enabled>true</enabled></xml>"
@@ -368,8 +396,10 @@ describe 'AWS.XML.Parser', ->
   describe 'timestamp', ->
 
     rules =
-      CreatedAt:
-        type: 'timestamp'
+      type: 'structure'
+      members:
+        CreatedAt:
+          type: 'timestamp'
 
     it 'returns an empty element as null', ->
       xml = "<xml><CreatedAt/></xml>"
@@ -418,8 +448,10 @@ describe 'AWS.XML.Parser', ->
   describe 'numbers', ->
 
     rules =
-      decimal:
-        type: 'float'
+      type: 'structure'
+      members:
+        decimal:
+          type: 'float'
 
     it 'float parses elements types as integer', ->
       xml = "<xml><decimal>123.456</decimal></xml>"
@@ -434,8 +466,10 @@ describe 'AWS.XML.Parser', ->
   describe 'integers', ->
 
     rules =
-      count:
-        type: 'integer'
+      type: 'structure'
+      members:
+        count:
+          type: 'integer'
 
     it 'integer parses elements types as integer', ->
       xml = "<xml><count>123</count></xml>"
@@ -451,18 +485,22 @@ describe 'AWS.XML.Parser', ->
 
     it 'can rename scalar elements', ->
       rules =
-        alias:
-          name: 'aka'
+        type: 'structure'
+        members:
+            alias:
+              name: 'aka'
       xml = "<xml><alias>John Doe</alias></xml>"
       parse xml, rules, (data) ->
         expect(data).toEqual({aka:'John Doe'})
 
     it 'can rename nested elements', ->
       rules =
-        person:
-          members:
-            alias:
-              name: 'aka'
+        type: 'structure'
+        members:
+          person:
+            members:
+              alias:
+                name: 'aka'
       xml = "<xml><person><name>Joe</name><alias>John Doe</alias></person></xml>"
       parse xml, rules, (data) ->
         expect(data).toEqual({person:{name:'Joe',aka:'John Doe'}})

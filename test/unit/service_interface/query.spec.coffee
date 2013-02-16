@@ -32,13 +32,15 @@ describe 'AWS.ServiceInterface.Query', ->
               Input:
                 members: {}
           output:
-            Data:
-              type: 'structure'
-              members:
-                Name:
-                  type: 'string'
-                Count:
-                  type: 'float'
+            type: 'structure'
+            members:
+              Data:
+                type: 'structure'
+                members:
+                  Name:
+                    type: 'string'
+                  Count:
+                    type: 'float'
 
     client = new MockQueryClient({region:'region'})
     request = new AWS.Request(client, 'operationName')
