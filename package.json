@@ -21,7 +21,8 @@
     },
     "dependencies": {
       "xml2js": "latest",
-      "xmlbuilder": "latest"
+      "xmlbuilder": "latest",
+      "underscore":"~1.4.4"
     },
     "main": "lib/aws.js",
     "directories":  {

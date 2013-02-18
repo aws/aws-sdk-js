@@ -73,9 +73,54 @@ describe 'AWS.Endpoint', ->
     expect(endpoint.hostname).toEqual('domain.com')
     expect(endpoint.port).toEqual(443)
 
-  it 'accepts a configuration object that specifies the mode', ->
+  it 'accepts a configuration object that specifies the mode as false', ->
     expect(AWS.config.sslEnabled).toEqual(true)
     endpoint = new AWS.Endpoint('domain.com', { sslEnabled: false })
+    expect(endpoint.href).toEqual('http://domain.com/')
+    expect(endpoint.protocol).toEqual('http:')
+    expect(endpoint.host).toEqual('domain.com')
+    expect(endpoint.hostname).toEqual('domain.com')
+    expect(endpoint.port).toEqual(80)
+
+  it 'accepts a configuration object that specifies the mode as true', ->
+    AWS.config.sslEnabled = false;
+    endpoint = new AWS.Endpoint('domain.com', { sslEnabled: true })
+    expect(endpoint.href).toEqual('https://domain.com/')
+    expect(endpoint.protocol).toEqual('https:')
+    expect(endpoint.host).toEqual('domain.com')
+    expect(endpoint.hostname).toEqual('domain.com')
+    expect(endpoint.port).toEqual(443)
+
+  it 'accepts a configuration object that specifies the mode as null, defaulting to AWS.config truthy', ->
+    AWS.config.sslEnabled = true;
+    endpoint = new AWS.Endpoint('domain.com', { sslEnabled: null })
+    expect(endpoint.href).toEqual('https://domain.com/')
+    expect(endpoint.protocol).toEqual('https:')
+    expect(endpoint.host).toEqual('domain.com')
+    expect(endpoint.hostname).toEqual('domain.com')
+    expect(endpoint.port).toEqual(443)
+
+  it 'accepts a configuration object that specifies the mode as null, defaulting to AWS.config falsey', ->
+    AWS.config.sslEnabled = false;
+    endpoint = new AWS.Endpoint('domain.com', { sslEnabled: null })
+    expect(endpoint.href).toEqual('http://domain.com/')
+    expect(endpoint.protocol).toEqual('http:')
+    expect(endpoint.host).toEqual('domain.com')
+    expect(endpoint.hostname).toEqual('domain.com')
+    expect(endpoint.port).toEqual(80)
+
+  it 'accepts a configuration object that specifies the mode as undefined, defaulting to AWS.config truthy', ->
+    AWS.config.sslEnabled = true;
+    endpoint = new AWS.Endpoint('domain.com', { sslEnabled: undefined })
+    expect(endpoint.href).toEqual('https://domain.com/')
+    expect(endpoint.protocol).toEqual('https:')
+    expect(endpoint.host).toEqual('domain.com')
+    expect(endpoint.hostname).toEqual('domain.com')
+    expect(endpoint.port).toEqual(443)
+
+  it 'accepts a configuration object that specifies the mode as undefined, defaulting to AWS.config falsey', ->
+    AWS.config.sslEnabled = false;
+    endpoint = new AWS.Endpoint('domain.com', { sslEnabled: undefined })
     expect(endpoint.href).toEqual('http://domain.com/')
     expect(endpoint.protocol).toEqual('http:')
     expect(endpoint.host).toEqual('domain.com')
