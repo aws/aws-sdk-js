@@ -19,13 +19,15 @@ Feature: Elastic Transcoder
 
   @pipelines
   Scenario: Pipeline CRUD
-    Given I create a pipeline
+    Given I create an IAM role with name prefix "aws-sdk-js"
+    And I create a pipeline
     And I list pipelines
     Then the list should contain the pipeline
     And I pause the pipeline
     And I read the pipeline
     Then the pipeline status should be "Paused"
     And I delete the pipeline
+    And I delete the IAM role
 
   @error
   Scenario: Error handling

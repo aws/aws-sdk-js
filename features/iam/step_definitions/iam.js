@@ -51,4 +51,31 @@ module.exports = function() {
   this.Then(/^I delete the IAM user$/, function(callback) {
     this.request('iam', 'deleteUser', {UserName: this.iamUser}, callback);
   });
+
+  this.Given(/^I create an IAM role with name prefix "([^"]*)"$/, function(name, callback) {
+    this.iamRoleName = this.uniqueName(name);
+
+    var world = this;
+    var assumeRolePolicyDocument = '{"Version":"2008-10-17","Statement":[' +
+      '{"Effect":"Allow","Principal":{"Service":["ec2.amazonaws.com"]},' +
+      '"Action":["sts:AssumeRole"]}]}';
+    var params = {RoleName: this.iamRoleName,
+      AssumeRolePolicyDocument: assumeRolePolicyDocument};
+    var next = function() {
+      world.iamRoleArn = world.data.Role.Arn;
+      callback();
+    }
+    next.fail = callback.fail;
+
+    this.request('iam', 'createRole', params, next);
+  });
+
+  this.Then(/^the IAM role should exist$/, function(callback) {
+    this.assert.compare(this.iamRoleArn.length, '>', 0);
+    callback();
+  });
+
+  this.Then(/^I delete the IAM role$/, function(callback) {
+    this.request('iam', 'deleteRole', {RoleName: this.iamRoleName}, callback);
+  });
 };

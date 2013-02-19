@@ -24,6 +24,11 @@ Feature: IAM
     Then the list should contain the user
     And I delete the IAM user
 
+  Scenario: Roles
+    Given I create an IAM role with name prefix "aws-sdk-js"
+    Then the IAM role should exist
+    And I delete the IAM role
+
   Scenario: Error handling
     Given I have an IAM username "js-test-dupe"
     And I create an IAM user with the username

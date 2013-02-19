@@ -15,18 +15,12 @@
 
 module.exports = function() {
   this.Before("@elastictranscoder", function (callback) {
+    this.iam = new this.AWS.IAM.Client();
     this.client = new this.AWS.ElasticTranscoder.Client();
     callback();
   });
 
   this.Given(/^I create a pipeline$/, function(callback) {
-
-    var config = JSON.parse(this.AWS.util.readFileSync('configuration'));
-
-    if (!config.elastictranscoderIntegrationRole) {
-      return callback.pending();
-    }
-
     var world = this;
     var timestamp = world.AWS.util.date.unixTimestamp() * 1000;
 
@@ -38,7 +32,7 @@ module.exports = function() {
         Name: 'aws-sdk-js-integration-' + timestamp,
         InputBucket: world.bucket,
         OutputBucket: world.bucket,
-        Role: config.elastictranscoderIntegrationRole,
+        Role: world.iamRoleArn,
         Notifications: {"Progressing":"","Completed":"","Warning":"","Error":""}
       };
 
