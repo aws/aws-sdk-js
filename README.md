@@ -126,6 +126,11 @@ The SDK currently supports the following services:
       <td>AWS.IAM</td>
     </tr>
     <tr>
+      <td>AWS OpsWorks</td>
+      <td>2013-02-18</td>
+      <td>AWS.OpsWorks</td>
+    </tr>
+    <tr>
       <td>Amazon Relational Database Service</td>
       <td>2012-07-31</td>
       <td>AWS.RDS</td>
