@@ -15,21 +15,29 @@
 
 module.exports = function() {
   this.Before("@iam", function (callback) {
-    this.client = new this.AWS.IAM.Client();
+    this.iam = new this.AWS.IAM.Client();
     callback();
   });
 
   this.Given(/^I have an IAM username "([^"]*)"$/, function(name, callback) {
-    this.iamUser = name + '-' + new Date().getTime();
+    this.iamUserArn = '';
+    this.iamUser = this.uniqueName(name);
     callback();
   });
 
   this.Given(/^I create an IAM user with the username$/, function(callback) {
-    this.request(null, 'createUser', {UserName: this.iamUser}, callback, false);
+    var world = this;
+    var next = function() {
+      if (world.data) this.iamUserArn = world.data.User.Arn;
+      else this.iamUserArn = null;
+      callback();
+    };
+    next.fail = callback.fail;
+    this.request('iam', 'createUser', {UserName: this.iamUser}, next, false);
   });
 
   this.Given(/^I list the IAM users$/, function(callback) {
-    this.request(null, 'listUsers', {}, callback);
+    this.request('iam', 'listUsers', {}, callback);
   });
 
   this.Then(/^the list should contain the user$/, function(callback) {
@@ -41,6 +49,6 @@ module.exports = function() {
   });
 
   this.Then(/^I delete the IAM user$/, function(callback) {
-    this.request(null, 'deleteUser', {UserName: this.iamUser}, callback);
+    this.request('iam', 'deleteUser', {UserName: this.iamUser}, callback);
   });
 };
