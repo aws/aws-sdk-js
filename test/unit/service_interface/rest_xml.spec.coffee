@@ -27,7 +27,7 @@ describe 'AWS.ServiceInterface.RestXml', ->
 
   beforeEach ->
     MockRESTXMLClient.prototype.api =
-      xmlNamespace: xmlns
+      xmlnamespace: xmlns
       operations:
         sampleOperation:
           http:

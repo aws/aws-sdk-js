@@ -21,7 +21,7 @@ describe 'AWS.XML.Builder', ->
 
   toXML = (rules, params, options) ->
     options = {} if (!options)
-    options.xmlNamespace = xmlns
+    options.xmlnamespace = xmlns
     builder = new AWS.XML.Builder('Data', rules, options)
     builder.toXML(params)
 
