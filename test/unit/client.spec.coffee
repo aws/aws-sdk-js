@@ -49,7 +49,7 @@ describe 'AWS.Client', ->
 
     beforeEach ->
       FooClient = AWS.util.inherit AWS.Client, api:
-        serviceName: 'fooservice'
+        endpointPrefix: 'fooservice'
 
     it 'uses specified endpoint if provided', ->
       client = new FooClient()

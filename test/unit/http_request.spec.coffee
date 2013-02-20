@@ -36,8 +36,8 @@ describe 'AWS.HttpRequest', ->
     it 'defaults endpoint to undefined', ->
       expect(request.endpoint).toEqual(undefined)
 
-    it 'defaults serviceName to undefined', ->
-      expect(request.serviceName).toEqual(undefined)
+    it 'defaults endpointPrefix to undefined', ->
+      expect(request.endpointPrefix).toEqual(undefined)
 
   describe 'pathname', ->
 

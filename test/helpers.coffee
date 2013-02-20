@@ -55,7 +55,7 @@ MockClient = AWS.util.inherit AWS.Client,
         code: resp.httpResponse.statusCode
         message: null
   api:
-    serviceName: 'mockservice'
+    endpointPrefix: 'mockservice'
     signatureVersion: 'v4'
 
 MockService = AWS.util.inherit AWS.Service,

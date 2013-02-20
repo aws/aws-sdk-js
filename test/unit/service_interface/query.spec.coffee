@@ -22,7 +22,7 @@ describe 'AWS.ServiceInterface.Query', ->
 
   beforeEach ->
     MockQueryClient = AWS.Client.defineClient
-      serviceName: 'mockservice'
+      endpointPrefix: 'mockservice'
       apiVersion: '2012-01-01'
       operations:
         operationName:

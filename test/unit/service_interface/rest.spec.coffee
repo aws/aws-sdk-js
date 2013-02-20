@@ -17,7 +17,7 @@ require('../../../lib/service_interface/rest')
 describe 'AWS.ServiceInterface.Rest', ->
 
   MockRESTClient = AWS.util.inherit AWS.Client,
-    serviceName: 'mockservice'
+    endpointPrefix: 'mockservice'
 
   operation = null
   request = null

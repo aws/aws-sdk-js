@@ -17,7 +17,7 @@ require('../../../lib/service_interface/rest_xml')
 describe 'AWS.ServiceInterface.RestXml', ->
 
   MockRESTXMLClient = AWS.util.inherit AWS.Client,
-    serviceName: 'mockservice'
+    endpointPrefix: 'mockservice'
 
   xmlns = 'http://mockservice.com/xmlns'
   operation = null

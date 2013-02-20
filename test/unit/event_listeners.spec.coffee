@@ -152,7 +152,7 @@ describe 'AWS.EventListeners', ->
       expect(response.error).toEqual('SIGNING_NAME')
       delete client.api.signingName
 
-    it 'uses the api.serviceName if signingName not provided', ->
+    it 'uses the api.endpointPrefix if signingName not provided', ->
       spyOn(AWS.RequestSigner, 'getVersion').andCallFake ->
         (req, signingName) -> throw signingName
       request = makeRequest()
