@@ -49,12 +49,14 @@ describe 'AWS.ServiceInterface.RestXml', ->
       svc.buildRequest(request)
 
     describe 'empty bodies', ->
-      it 'defaults body to null when there are no inputs', ->
+      it 'defaults body to empty string when there are no inputs', ->
         buildRequest ->
-          operation.input = null
-        expect(request.httpRequest.body).toEqual(null)
+          operation.input =
+            type: 'structure'
+            members: {}
+        expect(request.httpRequest.body).toEqual('')
 
-      it 'defaults body to null when all inputs are uri or header values', ->
+      it 'defaults body to empty string when no body params are present', ->
         buildRequest ->
           operation.http.uri = '/{Bucket}'
           operation.input =
@@ -66,7 +68,7 @@ describe 'AWS.ServiceInterface.RestXml', ->
                 name: 'x-amz-acl'
                 location: 'header'
           request.params = Bucket: 'abc', ACL: 'canned-acl'
-        expect(request.httpRequest.body).toEqual(null)
+        expect(request.httpRequest.body).toEqual('')
         expect(request.httpRequest.path).toEqual('/abc')
         expect(request.httpRequest.headers['x-amz-acl']).toEqual('canned-acl')
 
@@ -74,14 +76,14 @@ describe 'AWS.ServiceInterface.RestXml', ->
       it 'populates the body with string types directly', ->
         buildRequest ->
           operation.http.uri = '/{Bucket}'
-          operation.input = 
+          operation.input =
+            payload: 'Data'
             members:
               Bucket:
                 location: 'uri'
                 required: true
               Data:
                 type: 'string'
-                location: 'body'
           request.params = Bucket: 'bucket-name', Data: 'abc'
         expect(request.httpRequest.body).toEqual('abc')
 
@@ -90,7 +92,6 @@ describe 'AWS.ServiceInterface.RestXml', ->
         buildRequest ->
           operation.http.uri = '/{Bucket}?next-marker={Marker}&limit={Limit}'
           operation.input =
-            name: 'Config', # the root xml element name
             members:
               Bucket: # uri path param
                 type: 'string'
@@ -111,7 +112,6 @@ describe 'AWS.ServiceInterface.RestXml', ->
                 location: 'header'
                 name: 'x-amz-meta-'
               Config: # structure of mixed tpyes
-                location: 'body'
                 type: 'structure'
                 required: true
                 members:
@@ -174,14 +174,13 @@ describe 'AWS.ServiceInterface.RestXml', ->
         buildRequest ->
           operation.http.uri = '/{Bucket}'
           operation.input =
-            name: 'Config'
             members:
               Bucket:
                 location: 'uri'
                 required: true
               Config: {}
           request.params = Bucket:'abc' # omitting Config purposefully
-        expect(request.httpRequest.body).toEqual(null)
+        expect(request.httpRequest.body).toEqual('')
         expect(request.httpRequest.path).toEqual('/abc')
 
   describe 'extractError', ->
@@ -261,9 +260,9 @@ describe 'AWS.ServiceInterface.RestXml', ->
       expect(response.data).toEqual({Foo:'foo', Bar:['a', 'b', 'c']})
 
     it 'sets payload element to a Buffer object when it streams', ->
-      operation.output_payload = 'Body'
       operation.output =
         type: 'structure'
+        payload: 'Body'
         members:
           Body:
             streaming: true
@@ -272,9 +271,9 @@ describe 'AWS.ServiceInterface.RestXml', ->
       expect(response.data.Body.toString()).toEqual('Buffer data')
 
     it 'sets payload element to String when it does not stream', ->
-      operation.output_payload = 'Body'
       operation.output =
         type: 'structure'
+        payload: 'Body'
         members:
           Body: {}
       extractData 'Buffer data'
@@ -286,6 +285,7 @@ describe 'AWS.ServiceInterface.RestXml', ->
       response.httpResponse.headers['x-amz-bar'] = 'bar'
       operation.output =
         type: 'structure'
+        payload: 'Baz'
         members:
           Foo:
             location: 'header'
@@ -294,7 +294,6 @@ describe 'AWS.ServiceInterface.RestXml', ->
             location: 'header'
             name: 'x-amz-bar'
           Baz: {}
-      operation.output_payload = 'Baz'
       extractData 'Buffer data'
       expect(response.data.Foo).toEqual('foo')
       expect(response.data.Bar).toEqual('bar')

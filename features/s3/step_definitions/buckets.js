@@ -24,7 +24,7 @@ module.exports = function() {
   this.When(/^I create a bucket with the location constraint "([^"]*)"$/, function(loc, next) {
     this.bucket = 'aws-sdk-js-integration-' +
       this.AWS.util.date.unixTimestamp() * 1000;
-    var params = { Bucket: this.bucket, CreateBucketConfiguration: {LocationConstraint: loc} };
+    var params = { Bucket: this.bucket, LocationConstraint: loc };
     this.request('s3', 'createBucket', params, next);
   });
 
