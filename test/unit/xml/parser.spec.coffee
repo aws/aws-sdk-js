@@ -86,6 +86,18 @@ describe 'AWS.XML.Parser', ->
       parse xml, rules, (data) ->
         expect(data).toEqual({items:[]})
 
+    it 'returns missing lists as []', ->
+      xml = '<xml></xml>'
+      rules =
+        type: 'structure'
+        members:
+          items:
+            type: 'list'
+            members:
+              type: 'string'
+      parse xml, rules, (data) ->
+        expect(data).toEqual({items:[]})
+
     it 'Converts xml lists of strings into arrays of strings', ->
       xml = """
       <xml>
