@@ -17,7 +17,7 @@ require('../../../lib/service_interface/rest_json')
 describe 'AWS.ServiceInterface.RestJson', ->
 
   MockJSONRESTClient = AWS.util.inherit AWS.Client,
-    serviceName: 'mockservice'
+    endpointPrefix: 'mockservice'
 
   operation = null
   request = null
@@ -28,10 +28,11 @@ describe 'AWS.ServiceInterface.RestJson', ->
     MockJSONRESTClient.prototype.api =
       operations:
         sampleOperation:
-          m: 'POST' # http method
-          u: '/'    # uri
-          i: null   # no params
-          o: null   # no ouputs
+          http:
+            method: 'POST'
+            uri: '/'
+          input: null
+          output: null
 
     AWS.Client.defineMethods(MockJSONRESTClient)
 
@@ -49,72 +50,113 @@ describe 'AWS.ServiceInterface.RestJson', ->
     describe 'method', ->
       it 'populates method from the operation', ->
         buildRequest ->
-          operation.m = 'GET'
+          operation.http.method = 'GET'
         expect(request.httpRequest.method).toEqual('GET')
 
     describe 'uri', ->
       it 'populates uri from the operation', ->
         buildRequest ->
-          operation.u = '/path'
+          operation.http.uri = '/path'
         expect(request.httpRequest.path).toEqual('/path')
 
       it 'replaces param placeholders', ->
         buildRequest ->
-          operation.u = '/Owner/{Id}'
-          operation.i = {m:{Id:{l:'uri'}}}
+          operation.http.uri = '/Owner/{Id}'
+          operation.input =
+            members:
+              Id:
+                location: 'uri'
           request.params = Id: 'abc'
         expect(request.httpRequest.path).toEqual('/Owner/abc')
 
       it 'can replace multiple path placeholders', ->
         buildRequest ->
-          operation.u = '/{Id}/{Count}'
-          operation.i = {m:{Id:{l:'uri'},Count:{t:'i',l:'uri'}}}
+          operation.http.uri = '/{Id}/{Count}'
+          operation.input =
+            members:
+              Id:
+                location: 'uri'
+              Count:
+                type: 'integer'
+                location: 'uri'
           request.params = Id: 'abc', Count: 123
         expect(request.httpRequest.path).toEqual('/abc/123')
 
       it 'performs querystring param replacements', ->
         buildRequest ->
-          operation.u = '/path?id-param={Id}'
-          operation.i = {m:{Id:{l:'uri'}}}
+          operation.http.uri = '/path?id-param={Id}'
+          operation.input =
+            members:
+              Id:
+                location: 'uri'
           request.params = Id: 'abc'
         expect(request.httpRequest.path).toEqual('/path?id-param=abc')
 
       it 'omits querystring when param is not provided', ->
         buildRequest ->
-          operation.u = '/path?id-param={Id}'
-          operation.i = {m:{Id:{l:'uri'}}}
+          operation.http.uri = '/path?id-param={Id}'
+          operation.input =
+            members:
+              Id:
+                location: 'uri'
         expect(request.httpRequest.path).toEqual('/path')
 
       it 'accpets multiple query params with uri params', ->
         buildRequest ->
-          operation.u = '/{Abc}/{Xyz}?foo={Foo}&bar={Bar}'
-          operation.i = {m:{Abc:{l:'uri'},Xyz:{l:'uri'},Foo:{l:'uri'},Bar:{l:'uri'}}}
+          operation.http.uri = '/{Abc}/{Xyz}?foo={Foo}&bar={Bar}'
+          operation.input =
+            members:
+              Abc:
+                location: 'uri'
+              Xyz:
+                location: 'uri'
+              Foo:
+                location: 'uri'
+              Bar:
+                location: 'uri'
           request.params = { Abc:'abc', Xyz:'xyz', Bar:'bar' } # omitted Foo
         expect(request.httpRequest.path).toEqual('/abc/xyz?bar=bar')
 
       it 'uri escapes params in both path and querystring', ->
         buildRequest ->
-          operation.u = '/{Path}?query={Query}'
-          operation.i = {m:{Path:{l:'uri'},Query:{l:'uri'}}}
+          operation.http.uri = '/{Path}?query={Query}'
+          operation.input =
+            members:
+              Path:
+                location: 'uri'
+              Query:
+                location: 'uri'
           request.params = { Path:'a b', Query:'a/b' }
         expect(request.httpRequest.path).toEqual('/a%20b?query=a%2Fb')
 
     describe 'headers', ->
       it 'populates the headers with present params', ->
         buildRequest ->
-          operation.i = {m:{ACL:{l:'header',n:'x-amz-acl'}}}
+          operation.input =
+            members:
+              ACL:
+                location: 'header'
+                name: 'x-amz-acl'
           request.params = ACL: 'public-read'
         expect(request.httpRequest.headers['x-amz-acl']).toEqual('public-read')
 
       it 'uses default rule name if .n property is not present', ->
         buildRequest ->
-          operation.i = {m:{ACL:{l:'header'}}}
+          operation.input =
+            members:
+              ACL:
+                location: 'header'
           request.params = ACL: 'public-read'
         expect(request.httpRequest.headers['ACL']).toEqual('public-read')
 
       it 'works with map types', ->
         buildRequest ->
-          operation.i = {m:{Metadata:{t:'m',l:'header',n:'x-amz-meta-'}}}
+          operation.input =
+            members:
+              Metadata:
+                type: 'map'
+                location: 'header'
+                name: 'x-amz-meta-'
           request.params =
             Metadata:
               foo: 'bar'

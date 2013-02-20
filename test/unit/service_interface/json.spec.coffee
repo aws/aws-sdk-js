@@ -17,12 +17,12 @@ require('../../../lib/service_interface/json')
 describe 'AWS.ServiceInterface.Json', ->
 
   MockJSONClient = AWS.util.inherit AWS.Client,
-    serviceName: 'mockservice'
+    endpointPrefix: 'mockservice'
     api:
       targetPrefix: 'prefix'
       operations:
         operationName:
-          n: 'OperationName'
+          name: 'OperationName'
 
   AWS.Client.defineMethods(MockJSONClient)
 

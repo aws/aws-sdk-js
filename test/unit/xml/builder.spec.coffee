@@ -21,7 +21,7 @@ describe 'AWS.XML.Builder', ->
 
   toXML = (rules, params, options) ->
     options = {} if (!options)
-    options.xmlNamespace = xmlns
+    options.xmlnamespace = xmlns
     builder = new AWS.XML.Builder('Data', rules, options)
     builder.toXML(params)
 
@@ -42,7 +42,7 @@ describe 'AWS.XML.Builder', ->
       matchXML(toXML(rules, params), xml)
 
     it 'orders xml members by the order they appear in the rules', ->
-      rules = {Count:{t:'i'},State:{}}
+      rules = {Count:{type:'integer'},State:{}}
       params = { State: 'Disabled', Count: 123 }
       xml = """
       <Data xmlns="#{xmlns}">
@@ -56,8 +56,8 @@ describe 'AWS.XML.Builder', ->
       rules =
         Name: {}
         Details:
-          t: 'o'
-          m:
+          type: 'structure'
+          members:
             Abc: {}
             Xyz: {}
       params =
@@ -77,7 +77,7 @@ describe 'AWS.XML.Builder', ->
       matchXML(toXML(rules, params), xml)
 
     it 'serializes empty structures as empty element', ->
-      rules = {Config:{t:'o',m:{Foo:{},Bar:{}}}}
+      rules = {Config:{type:'structure',members:{Foo:{},Bar:{}}}}
       params = { Config: {} }
       xml = """
       <Data xmlns="#{xmlns}">
@@ -87,7 +87,7 @@ describe 'AWS.XML.Builder', ->
       matchXML(toXML(rules, params), xml)
 
     it 'does not serialize missing members', ->
-      rules = {Config:{t:'o',m:{Foo:{},Bar:{}}}}
+      rules = {Config:{type:'structure',members:{Foo:{},Bar:{}}}}
       params = { Config: { Foo: 'abc' } }
       xml = """
       <Data xmlns="#{xmlns}">
@@ -101,7 +101,7 @@ describe 'AWS.XML.Builder', ->
   describe 'lists', ->
 
     it 'serializes lists (default member names)', ->
-      rules = {Aliases:{t:'a',m:{}}}
+      rules = {Aliases:{type:'list',members:{}}}
       params = {Aliases:['abc','mno','xyz']}
       xml = """
       <Data xmlns="#{xmlns}">
@@ -115,7 +115,7 @@ describe 'AWS.XML.Builder', ->
       matchXML(toXML(rules, params), xml)
 
     it 'serializes lists (custom member names)', ->
-      rules = {Aliases:{t:'a',m:{n:'Alias'}}}
+      rules = {Aliases:{type:'list',members:{name:'Alias'}}}
       params = {Aliases:['abc','mno','xyz']}
       xml = """
       <Data xmlns="#{xmlns}">
@@ -129,7 +129,7 @@ describe 'AWS.XML.Builder', ->
       matchXML(toXML(rules, params), xml)
 
     it 'includes lists elements even if they have no members', ->
-      rules = {Aliases:{t:'a',m:{n:'Alias'}}}
+      rules = {Aliases:{type:'list',members:{name:'Alias'}}}
       params = {Aliases:[]}
       xml = """
       <Data xmlns="#{xmlns}">
@@ -141,13 +141,13 @@ describe 'AWS.XML.Builder', ->
     it 'serializes lists of structures', ->
       rules =
         Points:
-          t: 'a'
-          m:
-            t: 'o'
-            n: 'Point'
-            m:
-              X: {t:'n'}
-              Y: {t:'n'}
+          type: 'list'
+          members:
+            type: 'structure'
+            name: 'Point'
+            members:
+              X: {type:'float'}
+              Y: {type:'float'}
       params = {Points:[{X:1.2,Y:2.1},{X:3.4,Y:4.3}]}
       xml = """
       <Data xmlns="#{xmlns}">
@@ -168,7 +168,7 @@ describe 'AWS.XML.Builder', ->
   describe 'lists', ->
 
     it 'serializes lists without a base wrapper', ->
-      rules = {Aliases:{t:'a',f:1,m:{}}}
+      rules = {Aliases:{type:'list',flattened:true,members:{}}}
       params = {Aliases:['abc','mno','xyz']}
       xml = """
       <Data xmlns="#{xmlns}">
@@ -180,7 +180,7 @@ describe 'AWS.XML.Builder', ->
       matchXML(toXML(rules, params), xml)
 
     it 'serializes lists (custom member names)', ->
-      rules = {Aliases:{t:'a',f:1,n:'Alias',m:{}}}
+      rules = {Aliases:{type:'list',flattened:true,name:'Alias',members:{}}}
       params = {Aliases:['abc','mno','xyz']}
       xml = """
       <Data xmlns="#{xmlns}">
@@ -192,7 +192,7 @@ describe 'AWS.XML.Builder', ->
       matchXML(toXML(rules, params), xml)
 
     it 'omits lists elements when no members are given', ->
-      rules = {Aliases:{t:'a',f:1,m:{n:'Alias'}}}
+      rules = {Aliases:{type:'list',flattened:true,members:{name:'Alias'}}}
       params = {Aliases:[]}
       xml = """
       <Data xmlns="#{xmlns}"/>
@@ -202,15 +202,15 @@ describe 'AWS.XML.Builder', ->
     it 'serializes lists of structures', ->
       rules =
         Points:
-          t: 'a'
-          f: 1
-          n: 'Point'
-          m:
-            t: 'o'
-            n: 'Point'
-            m:
-              X: {t:'n'}
-              Y: {t:'n'}
+          type: 'list'
+          flattened: true
+          name: 'Point'
+          members:
+            type: 'structure'
+            name: 'Point'
+            members:
+              X: {type:'float'}
+              Y: {type:'float'}
       params = {Points:[{X:1.2,Y:2.1},{X:3.4,Y:4.3}]}
       xml = """
       <Data xmlns="#{xmlns}">
@@ -229,7 +229,7 @@ describe 'AWS.XML.Builder', ->
   describe 'numbers', ->
 
     it 'integers', ->
-      rules = {Count:{t:'i'}}
+      rules = {Count:{type:'integer'}}
       params = { Count: 123.0 }
       xml = """
       <Data xmlns="#{xmlns}">
@@ -239,7 +239,7 @@ describe 'AWS.XML.Builder', ->
       matchXML(toXML(rules, params), xml)
 
     it 'floats', ->
-      rules = {Count:{t:'n'}}
+      rules = {Count:{type:'float'}}
       params = { Count: 123.123 }
       xml = """
       <Data xmlns="#{xmlns}">
@@ -248,10 +248,10 @@ describe 'AWS.XML.Builder', ->
       """
       matchXML(toXML(rules, params), xml)
 
-  describe 'timestamps', ->
+  describe 'booleans', ->
 
     it 'true', ->
-      rules = {Enabled:{t:'b'}}
+      rules = {Enabled:{type:'boolean'}}
       params = { Enabled: true }
       xml = """
       <Data xmlns="#{xmlns}">
@@ -261,7 +261,7 @@ describe 'AWS.XML.Builder', ->
       matchXML(toXML(rules, params), xml)
 
     it 'false', ->
-      rules = {Enabled:{t:'b'}}
+      rules = {Enabled:{type:'booleans'}}
       params = { Enabled: false }
       xml = """
       <Data xmlns="#{xmlns}">
@@ -275,7 +275,7 @@ describe 'AWS.XML.Builder', ->
     time = new Date()
 
     it 'iso8601', ->
-      rules = {Expires:{t:'t'}}
+      rules = {Expires:{type:'timestamp'}}
       params = { Expires: time }
       xml = """
       <Data xmlns="#{xmlns}">
@@ -285,7 +285,7 @@ describe 'AWS.XML.Builder', ->
       matchXML(toXML(rules, params, {timestampFormat:'iso8601'}), xml)
 
     it 'rfc822', ->
-      rules = {Expires:{t:'t'}}
+      rules = {Expires:{type:'timestamp'}}
       params = { Expires: time }
       xml = """
       <Data xmlns="#{xmlns}">
@@ -295,7 +295,7 @@ describe 'AWS.XML.Builder', ->
       matchXML(toXML(rules, params, {timestampFormat:'rfc822'}), xml)
 
     it 'unix timestamp', ->
-      rules = {Expires:{t:'t'}}
+      rules = {Expires:{type:'timestamp'}}
       params = { Expires: time }
       xml = """
       <Data xmlns="#{xmlns}">
