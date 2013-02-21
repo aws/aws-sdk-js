@@ -543,6 +543,34 @@ describe 'AWS.XML.Parser', ->
       parse xml, rules, (data) ->
         expect(data).toEqual(Value:'foo')
 
+  describe 'elements with XML namespaces', ->
+    it 'strips the xmlns element', ->
+      rules =
+        type: 'structure'
+        members:
+          List:
+            type: 'list'
+            members:
+              type: 'structure'
+              members:
+                Attr1: {}
+                Attr2:
+                  type: 'structure'
+                  members:
+                    Foo: {}
+      xml = """
+      <xml xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+        <List>
+          <member>
+            <Attr1 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">abc</Attr1>
+            <Attr2 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser"><Foo>bar</Foo></Attr2>
+          </member>
+        </List>
+      </xml>
+      """
+      parse xml, rules, (data) ->
+        expect(data).toEqual({List:[{Attr1:'abc',Attr2:{Foo:'bar'}}]})
+
   describe 'parsing errors', ->
 
     it 'throws an error when unable to parse the xml', ->
