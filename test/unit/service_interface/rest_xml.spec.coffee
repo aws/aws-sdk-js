@@ -17,7 +17,7 @@ require('../../../lib/service_interface/rest_xml')
 describe 'AWS.ServiceInterface.RestXml', ->
 
   MockRESTXMLClient = AWS.util.inherit AWS.Client,
-    serviceName: 'mockservice'
+    endpointPrefix: 'mockservice'
 
   xmlns = 'http://mockservice.com/xmlns'
   operation = null
@@ -27,13 +27,14 @@ describe 'AWS.ServiceInterface.RestXml', ->
 
   beforeEach ->
     MockRESTXMLClient.prototype.api =
-      xmlNamespace: xmlns
+      xmlnamespace: xmlns
       operations:
         sampleOperation:
-          m: 'POST' # http method
-          u: '/'    # uri
-          i: null   # no params
-          o: null   # no ouputs
+          http:
+            method: 'POST' # http method
+            uri: '/'    # uri
+          input: null   # no params
+          output: null   # no ouputs
 
     AWS.Client.defineMethods(MockRESTXMLClient)
     operation = MockRESTXMLClient.prototype.api.operations.sampleOperation
@@ -48,72 +49,85 @@ describe 'AWS.ServiceInterface.RestXml', ->
       svc.buildRequest(request)
 
     describe 'empty bodies', ->
-      it 'defaults body to null when there are no inputs', ->
+      it 'defaults body to empty string when there are no inputs', ->
         buildRequest ->
-          operation.i = null
-        expect(request.httpRequest.body).toEqual(null)
+          operation.input =
+            type: 'structure'
+            members: {}
+        expect(request.httpRequest.body).toEqual('')
 
-      it 'defaults body to null when all inputs are uri or header values', ->
+      it 'defaults body to empty string when no body params are present', ->
         buildRequest ->
-          operation.u = '/{Bucket}'
-          operation.i = {m:{Bucket:{l:'uri',r:1},ACL:{n:'x-amz-acl',l:'header'}}}
+          operation.http.uri = '/{Bucket}'
+          operation.input =
+            members:
+              Bucket:
+                location: 'uri'
+                required: true
+              ACL:
+                name: 'x-amz-acl'
+                location: 'header'
           request.params = Bucket: 'abc', ACL: 'canned-acl'
-        expect(request.httpRequest.body).toEqual(null)
+        expect(request.httpRequest.body).toEqual('')
         expect(request.httpRequest.path).toEqual('/abc')
         expect(request.httpRequest.headers['x-amz-acl']).toEqual('canned-acl')
 
     describe 'string bodies', ->
       it 'populates the body with string types directly', ->
         buildRequest ->
-          operation.u = '/{Bucket}'
-          operation.i = {m:{Bucket:{l:'uri',r:1},Data:{t:'s',l:'body'}}}
+          operation.http.uri = '/{Bucket}'
+          operation.input =
+            payload: 'Data'
+            members:
+              Bucket:
+                location: 'uri'
+                required: true
+              Data:
+                type: 'string'
           request.params = Bucket: 'bucket-name', Data: 'abc'
         expect(request.httpRequest.body).toEqual('abc')
 
     describe 'xml bodies', ->
       it 'populates the body with XML from the params w/out a location', ->
         buildRequest ->
-          operation.u = '/{Bucket}?next-marker={Marker}&limit={Limit}'
-          operation.i =
-            n: 'Config', # the root xml element name
-            m:
+          operation.http.uri = '/{Bucket}?next-marker={Marker}&limit={Limit}'
+          operation.input =
+            members:
               Bucket: # uri path param
-                t: 's'
-                l: 'uri'
-                r: 1
+                type: 'string'
+                location: 'uri'
+                required: true
               Marker: # uri querystring param
-                t: 's'
-                l: 'uri'
+                type: 'string'
+                location: 'uri'
               Limit: # uri querystring integer param
-                t: 'i'
-                l: 'uri'
+                type: 'integer'
+                location: 'uri'
               ACL: # header string param
-                t: 's'
-                l: 'header'
-                n: 'x-amz-acl'
+                type: 'string'
+                location: 'header'
+                name: 'x-amz-acl'
               Metadata: # header map param
-                t: 'm'
-                l: 'header'
-                n: 'x-amz-meta-'
+                type: 'map'
+                location: 'header'
+                name: 'x-amz-meta-'
               Config: # structure of mixed tpyes
-                l: 'body'
-                t: 'o'
-                r: 1
-                m:
+                type: 'structure'
+                required: true
+                members:
                   Abc: {} # string
                   Locations: # array of strings
-                    t: 'a'
-                    m:
-                      t: 's'
-                      n: 'Location'
+                    type: 'list'
+                    members:
+                      type: 'string'
+                      name: 'Location'
                   Data: # array of structures
-                    t: 'a'
-                    m:
-                      t: 'o'
-                      m:
+                    type: 'list'
+                    members:
+                      type: 'structure'
+                      members:
                         Foo: {}
                         Bar: {}
-
           request.params =
             ACL: 'canned-acl'
             Abc: 'abc'
@@ -128,7 +142,6 @@ describe 'AWS.ServiceInterface.RestXml', ->
             Metadata:
               abc: 'xyz'
               mno: 'hjk'
-
         xml = """
         <Config xmlns="http://mockservice.com/xmlns">
           <Abc>abc</Abc>
@@ -149,7 +162,6 @@ describe 'AWS.ServiceInterface.RestXml', ->
           </Data>
         </Config>
         """
-
         expect(request.httpRequest.method).toEqual('POST')
         expect(request.httpRequest.path).
           toEqual('/bucket-name?next-marker=marker&limit=123')
@@ -160,10 +172,15 @@ describe 'AWS.ServiceInterface.RestXml', ->
 
       it 'omits the body xml when body params are not present', ->
         buildRequest ->
-          operation.u = '/{Bucket}'
-          operation.i = {n:'Config', m:{Bucket:{l:'uri',r:1},Config:{}}}
+          operation.http.uri = '/{Bucket}'
+          operation.input =
+            members:
+              Bucket:
+                location: 'uri'
+                required: true
+              Config: {}
           request.params = Bucket:'abc' # omitting Config purposefully
-        expect(request.httpRequest.body).toEqual(null)
+        expect(request.httpRequest.body).toEqual('')
         expect(request.httpRequest.path).toEqual('/abc')
 
   describe 'extractError', ->
@@ -222,7 +239,14 @@ describe 'AWS.ServiceInterface.RestXml', ->
       svc.extractData(response)
 
     it 'parses the xml body', ->
-      operation.o = {Foo:{},Bar:{t:'a',m:{n:'Item'}}}
+      operation.output =
+        type: 'structure'
+        members:
+          Foo: {}
+          Bar:
+            type: 'list'
+            members:
+              name: 'Item'
       extractData """
       <xml>
         <Foo>foo</Foo>
@@ -236,15 +260,22 @@ describe 'AWS.ServiceInterface.RestXml', ->
       expect(response.data).toEqual({Foo:'foo', Bar:['a', 'b', 'c']})
 
     it 'sets payload element to a Buffer object when it streams', ->
-      operation.op = 'Body'
-      operation.o = {Body:{s:1}}
+      operation.output =
+        type: 'structure'
+        payload: 'Body'
+        members:
+          Body:
+            streaming: true
       extractData 'Buffer data'
       expect(response.data.Body instanceof Buffer).toBeTruthy()
       expect(response.data.Body.toString()).toEqual('Buffer data')
 
     it 'sets payload element to String when it does not stream', ->
-      operation.op = 'Body'
-      operation.o = {Body:{}}
+      operation.output =
+        type: 'structure'
+        payload: 'Body'
+        members:
+          Body: {}
       extractData 'Buffer data'
       expect(typeof response.data.Body).toEqual('string')
       expect(response.data.Body).toEqual('Buffer data')
@@ -252,8 +283,17 @@ describe 'AWS.ServiceInterface.RestXml', ->
     it 'sets payload element along with other outputs', ->
       response.httpResponse.headers['x-amz-foo'] = 'foo'
       response.httpResponse.headers['x-amz-bar'] = 'bar'
-      operation.o = {Foo:{l:'header',n:'x-amz-foo'},Bar:{l:'header',n:'x-amz-bar'},Baz:{}}
-      operation.op = 'Baz'
+      operation.output =
+        type: 'structure'
+        payload: 'Baz'
+        members:
+          Foo:
+            location: 'header'
+            name: 'x-amz-foo'
+          Bar:
+            location: 'header'
+            name: 'x-amz-bar'
+          Baz: {}
       extractData 'Buffer data'
       expect(response.data.Foo).toEqual('foo')
       expect(response.data.Bar).toEqual('bar')
