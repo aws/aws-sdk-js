@@ -304,3 +304,80 @@ describe 'AWS.XML.Builder', ->
       """
       matchXML(toXML(rules, params, {timestampFormat:'unixTimestamp'}), xml)
 
+  describe 'xml attributes', ->
+    it 'can serialize xml attributes', ->
+      rules =
+        Config:
+          type: 'structure'
+          members:
+            Foo:
+              type: 'string'
+            Attr:
+              type: 'string'
+              attribute: true
+              name: 'attr:name'
+      params = { Config: { Foo: 'bar', Attr: 'abc' } }
+      xml = """
+      <Data xmlns="#{xmlns}">
+        <Config attr:name="abc"><Foo>bar</Foo></Config>
+      </Data>
+      """
+      matchXML(toXML(rules, params), xml)
+
+  describe 'xml namespaces', ->
+    it 'can apply xml namespaces on structures', ->
+      rules =
+        Config:
+          type: 'structure'
+          xmlns:
+            uri: 'URI'
+          members:
+            Foo:
+              type: 'string'
+      params = { Config: { Foo: 'bar' } }
+      xml = """
+      <Data xmlns="#{xmlns}">
+        <Config xmlns="URI"><Foo>bar</Foo></Config>
+      </Data>
+      """
+      matchXML(toXML(rules, params), xml)
+
+    it 'applies namespace prefixes to the xmlns attribute', ->
+      rules =
+        Config:
+          type: 'structure'
+          xmlns:
+            prefix: 'xsi'
+            uri: 'URI'
+          members:
+            Foo:
+              type: 'string'
+      params = { Config: { Foo: 'bar' } }
+      xml = """
+      <Data xmlns="#{xmlns}">
+        <Config xmlns:xsi="URI"><Foo>bar</Foo></Config>
+      </Data>
+      """
+      matchXML(toXML(rules, params), xml)
+
+    it 'can apply namespaces to elements that have other attributes', ->
+      rules =
+        Config:
+          type: 'structure'
+          xmlns:
+            prefix: 'xsi'
+            uri: 'URI'
+          members:
+            Foo:
+              type: 'string'
+            Bar:
+              type: 'string'
+              attribute: true
+              name: 'xsi:label'
+      params = { Config: { Foo: 'abc', Bar: 'xyz' } }
+      xml = """
+      <Data xmlns="#{xmlns}">
+        <Config xsi:label="xyz" xmlns:xsi="URI"><Foo>abc</Foo></Config>
+      </Data>
+      """
+      matchXML(toXML(rules, params), xml)
