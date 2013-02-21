@@ -517,6 +517,32 @@ describe 'AWS.XML.Parser', ->
       parse xml, rules, (data) ->
         expect(data).toEqual({person:{name:'Joe',aka:'John Doe'}})
 
+  describe 'base64 encoded strings', ->
+    it 'base64 decodes string elements with encoding="base64"', ->
+      rules =
+        type: 'structure'
+        members:
+          Value:
+            type: 'string'
+      xml = """
+      <xml>
+        <Value encoding="base64">Zm9v</Value>
+      </xml>
+      """
+      parse xml, rules, (data) ->
+        expect(data).toEqual(Value:'foo')
+      rules =
+        type: 'structure'
+        members:
+          Value: {}
+      xml = """
+      <xml>
+        <Value encoding="base64">Zm9v</Value>
+      </xml>
+      """
+      parse xml, rules, (data) ->
+        expect(data).toEqual(Value:'foo')
+
   describe 'parsing errors', ->
 
     it 'throws an error when unable to parse the xml', ->
