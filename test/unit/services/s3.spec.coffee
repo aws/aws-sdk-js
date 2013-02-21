@@ -216,6 +216,109 @@ describe 'AWS.S3.Client', ->
 
   # tests from this point on are "special cases" for specific aws operations
 
+  describe 'getBucketAcl', ->
+    it 'correctly parses the ACL XML document', ->
+      headers = { 'x-amz-request-id' : 'request-id' }
+      body =
+        """
+        <AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+          <AccessControlList>
+            <Grant>
+              <Grantee xsi:type="CanonicalUser" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <DisplayName>aws-ruby-sdk</DisplayName>
+                <ID>id</ID>
+              </Grantee>
+              <Permission>FULL_CONTROL</Permission>
+            </Grant>
+            <Grant>
+              <Grantee xsi:type="Group" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <URI>uri</URI>
+              </Grantee>
+              <Permission>READ</Permission>
+            </Grant>
+          </AccessControlList>
+          <Owner>
+            <DisplayName>aws-ruby-sdk</DisplayName>
+            <ID>id</ID>
+          </Owner>
+        </AccessControlPolicy>
+        """
+      helpers.mockHttpResponse 200, headers, body
+      s3.getBucketAcl (error, data) ->
+        expect(error).toBe(null)
+        expect(data).toEqual({
+          Owner:
+            DisplayName: 'aws-ruby-sdk',
+            ID: 'id'
+          Grants: [
+            {
+              Permission: 'FULL_CONTROL'
+              Grantee:
+                Type: 'CanonicalUser',
+                DisplayName: 'aws-ruby-sdk'
+                ID: 'id'
+            },
+            {
+              Permission : 'READ'
+              Grantee:
+                Type: 'Group',
+                URI: 'uri'
+            }
+          ],
+          RequestId : 'request-id'
+        })
+
+  describe 'putBucketAcl', ->
+    it 'correctly builds the ACL XML document', ->
+      xml =
+        """
+        <AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+          <AccessControlList>
+            <Grant>
+              <Grantee xsi:type="CanonicalUser" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <DisplayName>aws-ruby-sdk</DisplayName>
+                <ID>id</ID>
+              </Grantee>
+              <Permission>FULL_CONTROL</Permission>
+            </Grant>
+            <Grant>
+              <Grantee xsi:type="Group" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <URI>uri</URI>
+              </Grantee>
+              <Permission>READ</Permission>
+            </Grant>
+          </AccessControlList>
+          <Owner>
+            <DisplayName>aws-ruby-sdk</DisplayName>
+            <ID>id</ID>
+          </Owner>
+        </AccessControlPolicy>
+        """
+      helpers.mockHttpResponse 200, {}, ''
+      params = {
+        Owner:
+          DisplayName: 'aws-ruby-sdk',
+          ID: 'id'
+        Grants: [
+          {
+            Permission: 'FULL_CONTROL'
+            Grantee:
+              Type: 'CanonicalUser',
+              DisplayName: 'aws-ruby-sdk'
+              ID: 'id'
+          },
+          {
+            Permission : 'READ'
+            Grantee:
+              Type: 'Group',
+              URI: 'uri'
+          }
+        ]
+      }
+      s3.putBucketAcl params, (err, data) ->
+        #expect(this.request.httpRequest.body).toEqual(xml)
+        helpers.matchXML(this.request.httpRequest.body, xml)
+
   describe 'completeMultipartUpload', ->
 
     it 'returns data when the resp is 200 with valid response', ->
