@@ -316,7 +316,6 @@ describe 'AWS.S3.Client', ->
         ]
       }
       s3.putBucketAcl params, (err, data) ->
-        #expect(this.request.httpRequest.body).toEqual(xml)
         helpers.matchXML(this.request.httpRequest.body, xml)
 
   describe 'completeMultipartUpload', ->

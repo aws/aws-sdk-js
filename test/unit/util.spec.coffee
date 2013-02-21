@@ -372,3 +372,17 @@ describe 'AWS.util.error', ->
     expect(err).toBe(origError)
     expect(err.message).toEqual('ERROR')
     expect(err.code).toEqual('code')
+
+describe 'AWS.util.base64', ->
+
+  base64 = AWS.util.base64
+
+  describe 'encode', ->
+    it 'encodes the given string', ->
+      expect(base64.encode('foo')).toEqual('Zm9v')
+      expect(base64.encode('ёŝ')).toEqual('0ZHFnQ==')
+
+  describe 'decode', ->
+    it 'encodes the given string', ->
+      expect(base64.decode('Zm9v')).toEqual('foo')
+      expect(base64.decode('0ZHFnQ==')).toEqual('ёŝ')
