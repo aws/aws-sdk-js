@@ -13,20 +13,18 @@
 
 helpers = require('../helpers')
 AWS = helpers.AWS
-MockClient = helpers.MockClient
 
-describe 'AWS.NodeHttpClient', ->
-  http = new AWS.NodeHttpClient()
+require('../../lib/services/simpledb')
 
-  describe 'handleRequest', ->
-    it 'emits httpError in error event', ->
-      done = false
-      req = new AWS.Request(endpoint: 'invalid', config: region: 'empty')
-      resp = new AWS.Response(req)
-      req.on 'httpError', (cbErr, cbResp) ->
-        expect(cbErr instanceof Error).toBeTruthy()
-        expect(cbResp).toBe(resp)
-        done = true
+describe 'AWS.SimpleDB.Client', ->
+  describe 'setEndpoint', ->
+    it 'uses global endpoint if region is us-east-1', ->
+      client = new AWS.SimpleDB.Client(region: 'us-east-1')
+      client.setEndpoint()
+      expect(client.endpoint.host).toEqual('sdb.amazonaws.com')
 
-      runs -> http.handleRequest(req, resp)
-      waitsFor -> done
+    it 'uses normal setEndpoint functionality if region is not us-east-1', ->
+      setEndpoint = spyOn(AWS.Client.prototype, 'setEndpoint')
+      client = new AWS.SimpleDB.Client(region: 'us-west-2')
+      client.setEndpoint()
+      expect(setEndpoint).toHaveBeenCalled()

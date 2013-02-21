@@ -50,7 +50,7 @@
     ],
     "scripts" : {
         "test" : "npm -s run-script lint && npm -s run-script unit && ([ -f configuration ] && npm -s run-script integration) || true",
-        "unit" : "jasmine-node --noColor --coffee test/unit",
+        "unit" : "jasmine-node --noColor --coffee test",
         "integration": "cucumber.js",
         "lint" : "jshint lib",
         "console": "./scripts/console"

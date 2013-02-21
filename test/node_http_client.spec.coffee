@@ -11,14 +11,22 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-helpers = require('../helpers')
-
+helpers = require('./helpers')
 AWS = helpers.AWS
-MockService = helpers.MockService
+MockClient = helpers.MockClient
 
-describe 'AWS.Service', ->
+describe 'AWS.NodeHttpClient', ->
+  http = new AWS.NodeHttpClient()
 
-  describe 'constructor', ->
-    it 'constructs a client object', ->
-      svc = new MockService()
-      expect(svc.client.constructor).toEqual(MockService.Client)
+  describe 'handleRequest', ->
+    it 'emits httpError in error event', ->
+      done = false
+      req = new AWS.Request(endpoint: 'invalid', config: region: 'empty')
+      resp = new AWS.Response(req)
+      req.on 'httpError', (cbErr, cbResp) ->
+        expect(cbErr instanceof Error).toBeTruthy()
+        expect(cbResp).toBe(resp)
+        done = true
+
+      runs -> http.handleRequest(req, resp)
+      waitsFor -> done

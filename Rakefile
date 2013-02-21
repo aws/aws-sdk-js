@@ -20,29 +20,21 @@ task :build do
   system "npm #{LOGLEVEL} install"
 end
 
-[nil, 'unit', 'integration'].each do |type|
-  dir_suffix = type ? "/#{type}" : ""
-  name_suffix = type ? ":#{type}" : ""
+namespace :test do
 
-  desc "Run #{type || 'all'} tests"
-  task "test#{name_suffix}" => :build do
-    if type
-      # run only unit or integration
-      sh "npm #{LOGLEVEL} run-script #{name_suffix.gsub(':', '')}"
-    else
-      # runs both unit and integration
-      sh "npm #{LOGLEVEL} run-script test"
-    end
+  desc "Runs unit tests"
+  task :unit => :build do
+    sh "npm #{LOGLEVEL} run-script unit"
   end
 
-  desc "Run #{type || 'all'} tests with coverage"
-  task "cov#{name_suffix}" => :build do
-    sh "./scripts/coverage --coffee test#{dir_suffix}"
+  desc "Runs integration tests"
+  task :integration => :build do
+    sh "npm #{LOGLEVEL} run-script integration"
   end
 
 end
 
-desc 'Run JSHint'
+desc 'Runs JSHint'
 task :lint do
   sh "npm #{LOGLEVEL} run-script lint"
 end
@@ -57,4 +49,3 @@ root = File.dirname(__FILE__)
 Dir[File.join(root, 'vendor', '*', 'Rakefile')].each do |vendor_rakefile|
   load vendor_rakefile
 end
-

@@ -11,9 +11,9 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-AWS = require('../../lib/core')
-helpers = require('../helpers')
-require('../../lib/services/dynamodb')
+AWS = require('../lib/core')
+helpers = require('./helpers')
+require('../lib/services/dynamodb')
 
 beforeEach ->
   spyOn(AWS.util, 'userAgent').andReturn('aws-sdk-js/0.1')

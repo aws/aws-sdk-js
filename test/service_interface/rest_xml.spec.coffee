@@ -11,8 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-helpers = require('../../helpers'); AWS = helpers.AWS
-require('../../../lib/service_interface/rest_xml')
+helpers = require('../helpers'); AWS = helpers.AWS
+require('../../lib/service_interface/rest_xml')
 
 describe 'AWS.ServiceInterface.RestXml', ->
 
