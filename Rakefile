@@ -13,7 +13,7 @@
 
 LOGLEVEL = ($DEBUG || ENV['DEBUG']) ? '' : '-s'
 
-task :default => :test
+task :default => 'test:all'
 
 desc 'Build dependencies'
 task :build do
@@ -21,6 +21,10 @@ task :build do
 end
 
 namespace :test do
+  desc "Runs all tests"
+  task :all => :build do
+    sh "npm #{LOGLEVEL} test"
+  end
 
   desc "Runs unit tests"
   task :unit => :build do
