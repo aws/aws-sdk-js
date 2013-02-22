@@ -19,9 +19,9 @@ module.exports = function() {
     callback();
   });
 
-  this.Given(/^I run an EMR job flow$/, function(callback) {
+  this.Given(/^I run an EMR job flow with name prefix "([^"]*)"$/, function(prefix, callback) {
     var params = {
-      Name: 'aws-sdk-js-integration-' + new Date().getTime(),
+      Name: this.uniqueName(prefix),
       Instances: {
         MasterInstanceType: 'm1.small',
         SlaveInstanceType: 'm1.small',
@@ -53,7 +53,8 @@ module.exports = function() {
     this.request(null, 'terminateJobFlows', {JobFlowIds: [this.jobFlowId]}, callback);
   });
 
-  this.Given(/^I create an EMR job flow with no name$/, function(callback) {
-    this.request(null, 'runJobFlow', {}, callback, false);
+  this.Given(/^I run an EMR job flow with invalid parameters$/, function(callback) {
+    var params = {Name: '', Instances: {MasterInstanceType: 'invalid'}};
+    this.request(null, 'runJobFlow', params, callback, false);
   });
 };

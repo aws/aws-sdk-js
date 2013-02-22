@@ -56,6 +56,6 @@ module.exports = function() {
   });
 
   this.Given(/^I create a domain with no name$/, function(callback) {
-    this.request(null, 'createDomain', {}, callback, false);
+    this.request(null, 'createDomain', {DomainName: ''}, callback, false);
   });
 };

@@ -150,10 +150,11 @@ module.exports = function() {
   });
 
   this.Given(/^I try to delete an item with key "([^"]*)" from table "([^"]*)"$/, function(key, table, callback) {
-    this.request(null, 'deleteItem', {TableName: table, Key: key}, callback, false);
+    var params = {TableName: table, Key: {HashKeyElement: {S: key}}};
+    this.request(null, 'deleteItem', params, callback, false);
   });
 
-  this.Given(/^I try to delete an item with no table parameter$/, function(callback) {
-    this.request(null, 'deleteItem', {}, callback, false);
+  this.Given(/^I try to delete a table with an empty table parameter$/, function(callback) {
+    this.request(null, 'deleteTable', {TableName: ''}, callback, false);
   });
 };

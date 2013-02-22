@@ -16,14 +16,12 @@
 module.exports = function() {
 
   this.When(/^I create a bucket$/, function(next) {
-    this.bucket = 'aws-sdk-js-integration-' +
-      this.AWS.util.date.unixTimestamp() * 1000;
+    this.bucket = this.uniqueName('aws-sdk-js-integration');
     this.request('s3', 'createBucket', {Bucket:this.bucket}, next);
   });
 
   this.When(/^I create a bucket with the location constraint "([^"]*)"$/, function(loc, next) {
-    this.bucket = 'aws-sdk-js-integration-' +
-      this.AWS.util.date.unixTimestamp() * 1000;
+    this.bucket = this.uniqueName('aws-sdk-js-integration');
     var params = { Bucket: this.bucket, LocationConstraint: loc };
     this.request('s3', 'createBucket', params, next);
   });

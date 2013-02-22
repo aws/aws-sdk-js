@@ -42,7 +42,8 @@ module.exports = function() {
     this.request(null, 'deprecateDomain', {name: this.swfDomain}, callback);
   });
 
-  this.Given(/^I try to create a SimpleWorkFlowDomain with no name$/, function(callback) {
-    this.request(null, 'registerDomain', {}, callback, false);
+  this.Given(/^I try to create a SimpleWorkFlowDomain with an empty name$/, function(callback) {
+    var params = {name: '', workflowExecutionRetentionPeriodInDays:'7'};
+    this.request(null, 'registerDomain', params, callback, false);
   });
 };
