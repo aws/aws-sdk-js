@@ -104,6 +104,18 @@ describe 'AWS.Client', ->
       new MockClient().makeRequest('operation')
       expect(httpClient.handleRequest).not.toHaveBeenCalled()
 
+    it 'allows parameter validation to be disabled in config', ->
+      helpers.mockHttpResponse(200, {}, ['FOO', 'BAR'])
+      AWS.EventListeners.Core.on 'validate',
+        AWS.EventListeners.Core.VALIDATE_PARAMETERS
+      client = new MockClient(paramValidation: false)
+      req = client.makeRequest 'operation', {}, (err, data) ->
+        expect(err).toEqual(null)
+        expect(data).toEqual('FOOBAR')
+      AWS.EventListeners.Core.removeListener 'validate',
+        AWS.EventListeners.Core.VALIDATE_PARAMETERS
+
+
     describe 'global events', ->
       it 'adds AWS.events listeners to requests', ->
         helpers.mockHttpResponse(200, {}, ['FOO', 'BAR'])

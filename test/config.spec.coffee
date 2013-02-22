@@ -70,6 +70,10 @@ describe 'AWS.Config', ->
     it 'can be set to an integer', ->
       expect(configure(maxRetries: 2).maxRetries).toEqual(2)
 
+  describe 'paramValidation', ->
+    it 'defaults to true', ->
+      expect(configure().paramValidation).toEqual(true)
+
   describe 'sslEnabled', ->
     it 'defaults to true', ->
       expect(configure().sslEnabled).toEqual(true)
