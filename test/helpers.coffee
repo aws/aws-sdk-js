@@ -13,27 +13,16 @@
 
 AWS = require('../lib/aws')
 
-fs = require('fs')
-configFile = __dirname + '/../configuration'
+# Mock credentials
+AWS.config.update credentials:
+  accessKeyId: 'akid'
+  secretAccessKey: 'secret'
 
-if fs.existsSync(configFile)
-  AWS.config.loadFromPath(configFile)
-else
-  AWS.config.update credentials:
-    accessKeyId: 'akid'
-    secretAccessKey: 'secret'
 # Disable validation
 AWS.EventListeners.Core.removeListener 'validate',
   AWS.EventListeners.Core.VALIDATE_PARAMETERS
 
-integration = (reqBuilder, respCallback) ->
-  req = reqBuilder()
-  resp = null
-  runs ->
-    req.on('complete', (respObject) -> resp = respObject)
-    req.send()
-  waitsFor -> resp != null
-  runs -> respCallback(resp)
+AWS.HttpClient.getInstance = -> throw new Error('Unmocked HTTP request')
 
 flattenXML = (xml) ->
   if (!xml)
@@ -92,7 +81,6 @@ mockIntermittentFailureResponse = (numFailures, status, headers, data) ->
 
 module.exports =
   AWS: AWS
-  integration: integration
   matchXML: matchXML
   mockHttpResponse: mockHttpResponse
   mockIntermittentFailureResponse: mockIntermittentFailureResponse

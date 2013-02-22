@@ -98,6 +98,7 @@ describe 'AWS.Client', ->
         expect(data).toEqual(null)
 
     it 'does not send the request if a callback function is omitted', ->
+      helpers.mockHttpResponse(200, {}, ['FOO', 'BAR'])
       httpClient = AWS.HttpClient.getInstance()
       spyOn(httpClient, 'handleRequest')
       new MockClient().makeRequest('operation')
