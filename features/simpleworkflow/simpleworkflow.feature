@@ -24,5 +24,5 @@ Feature: Amazon Simple Workflow Service
     And I delete the SimpleWorkFlow domain
 
   Scenario: Error handling
-    Given I try to create a SimpleWorkFlowDomain with no name
+    Given I try to create a SimpleWorkFlowDomain with an empty name
     Then the error code should be "ValidationException"

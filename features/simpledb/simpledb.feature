@@ -39,4 +39,4 @@ Feature: Amazon SimpleDB
 
   Scenario: Error handling
     Given I create a domain with no name
-    Then the error code should be "MissingParameter"
+    Then the error code should be "InvalidParameterValue"

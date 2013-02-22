@@ -26,13 +26,13 @@ Feature: DynamoDB Tables
 
   Scenario: UTF-8 support
     Given I try to delete an item with key "føø" from table "table"
-    Then the error code should be "SerializationException"
+    Then the error code should be "ResourceNotFoundException"
 
   Scenario: Improper table deletion
-    Given I try to delete an item with no table parameter
+    Given I try to delete a table with an empty table parameter
     Then the error code should be "ValidationException"
     And the error message should be:
     """
-    The paramater 'tableName' is required but was not present in the request
+    The paramater 'tableName' must be at least 3 characters long and at most 255 characters long
     """
     And the status code should be 400

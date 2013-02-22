@@ -16,35 +16,28 @@
 module.exports = function() {
   this.Before("@elastictranscoder", function (callback) {
     this.iam = new this.AWS.IAM.Client();
+    this.s3 = new this.AWS.S3.Client();
     this.client = new this.AWS.ElasticTranscoder.Client();
     callback();
   });
 
-  this.Given(/^I create a pipeline$/, function(callback) {
+  this.Given(/^I create an Elastic Transcoder pipeline with name prefix "([^"]*)"$/, function(prefix, callback) {
+    this.pipelineName = this.uniqueName(prefix);
+    var params = {
+      Name: this.pipelineName,
+      InputBucket: this.bucket,
+      OutputBucket: this.bucket,
+      Role: this.iamRoleArn,
+      Notifications: {"Progressing":"","Completed":"","Warning":"","Error":""}
+    };
+
     var world = this;
-    var timestamp = world.AWS.util.date.unixTimestamp() * 1000;
+    var next = function() {
+      if (world.data) world.pipelineId = world.data.Pipeline.Id;
+      callback();
+    }
 
-    this.bucket = 'aws-sdk-js-integration-elastictranscoder-' + timestamp;
-    new this.AWS.S3.Client().createBucket({Bucket:this.bucket}, function(err, data) {
-      if (err) callback.fail(err);
-
-      var params = {
-        Name: 'aws-sdk-js-integration-' + timestamp,
-        InputBucket: world.bucket,
-        OutputBucket: world.bucket,
-        Role: world.iamRoleArn,
-        Notifications: {"Progressing":"","Completed":"","Warning":"","Error":""}
-      };
-
-      world.client.createPipeline(params, function(err, data) {
-        if (err) {
-          world.unexpectedError(resp, callback);
-          return;
-        }
-        world.pipelineId = data.Pipeline.Id;
-        callback();
-      });
-    });
+    this.request(null, 'createPipeline', params, next, false);
   });
 
   this.Given(/^I list pipelines$/, function(callback) {
@@ -73,12 +66,6 @@ module.exports = function() {
   });
 
   this.Then(/^I delete the pipeline$/, function(callback) {
-    this.request(null, 'deletePipeline', {Id: this.pipelineId}, function() {
-      this.request(new this.AWS.S3.Client(), 'deleteBucket', {Bucket: this.bucket}, callback);
-    });
-  });
-
-  this.Given(/^I create a pipeline with invalid parameters$/, function(callback) {
-    this.request(null, 'createPipeline', {}, callback, false);
+    this.request(null, 'deletePipeline', {Id: this.pipelineId}, callback);
   });
 };
