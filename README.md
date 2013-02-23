@@ -111,6 +111,11 @@ The SDK currently supports the following services:
       <td>AWS.EC2</td>
     </tr>
     <tr>
+      <td>Amazon ElastiCache</td>
+      <td>2012-11-15</td>
+      <td>AWS.ElastiCache</td>
+    </tr>
+    <tr>
       <td>AWS Elastic Beanstalk</td>
       <td>2010-12-01</td>
       <td>AWS.ElasticBeanstalk</td>
