@@ -91,6 +91,11 @@ The SDK currently supports the following services:
       <td>AWS.CloudWatch</td>
     </tr>
     <tr>
+      <td>Amazon CloudSearch</td>
+      <td>2011-02-01</td>
+      <td>AWS.CloudSearch</td>
+    </tr>
+    <tr>
       <td>AWS Data Pipeline</td>
       <td>2012-10-29</td>
       <td>AWS.DataPipeline</td>
