@@ -22,6 +22,7 @@ Here's the list of supported service objects:
 * [AWS.EMR.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/EMR/Client.html)
 * [AWS.ElasticTranscoder.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/ElasticTranscoder/Client.html)
 * [AWS.IAM.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/IAM/Client.html)
+* [AWS.ImportExport.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/ImportExport/Client.html)
 * [AWS.OpsWorks.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/OpsWorks/Client.html)
 * [AWS.RDS.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/RDS/Client.html)
 * [AWS.Redshift.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/Redshift/Client.html)

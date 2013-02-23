@@ -151,6 +151,11 @@ The SDK currently supports the following services:
       <td>AWS.IAM</td>
     </tr>
     <tr>
+      <td>AWS Import/Export</td>
+      <td>2010-06-03</td>
+      <td>AWS.ImportExport</td>
+    </tr>
+    <tr>
       <td>AWS OpsWorks</td>
       <td>2013-02-18</td>
       <td>AWS.OpsWorks</td>
