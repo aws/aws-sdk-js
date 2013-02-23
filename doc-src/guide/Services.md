@@ -29,6 +29,7 @@ Here's the list of supported service objects:
 * [AWS.SES.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/SES/Client.html)
 * [AWS.SNS.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/SNS/Client.html)
 * [AWS.SQS.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/SQS/Client.html)
+* [AWS.StorageGateway.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/StorageGateway/Client.html)
 * [AWS.STS.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/STS/Client.html)
 
 Each service object in the SDK currently provides low-level access to every

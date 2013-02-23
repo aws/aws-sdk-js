@@ -186,6 +186,11 @@ The SDK currently supports the following services:
       <td>AWS.SQS</td>
     </tr>
     <tr>
+      <td>AWS Storage Gateway</td>
+      <td>2012-06-30</td>
+      <td>AWS.StorageGateway</td>
+    </tr>
+    <tr>
       <td>AWS Security Token Service</td>
       <td>2011-06-15</td>
       <td>AWS.STS</td>
