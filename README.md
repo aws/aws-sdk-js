@@ -172,7 +172,7 @@ The SDK currently supports the following services:
     </tr>
     <tr>
       <td>Amazon Simple Queue Service</td>
-      <td>2011-10-01</td>
+      <td>2012-11-05</td>
       <td>AWS.SQS</td>
     </tr>
     <tr>
