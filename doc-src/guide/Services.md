@@ -10,6 +10,7 @@ Here's the list of supported service objects:
 * [AWS.CloudFormation.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/CloudFormation/Client.html)
 * [AWS.CloudFront.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/CloudFront/Client.html)
 * [AWS.CloudWatch.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/CloudWatch/Client.html)
+* [AWS.DataPipeline.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/DataPipeline/Client.html)
 * [AWS.DynamoDB.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/Client.html)
 * [AWS.EC2.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/EC2/Client.html)
 * [AWS.ElasticBeanstalk.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/ElasticBeanstalk/Client.html)
