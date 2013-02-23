@@ -75,8 +75,8 @@ module.exports = function() {
   });
 
   this.Then(/^the result should contain a property (\w+) with an? (\w+)$/, function(property, type, callback) {
-    if (type === 'array') {
-      this.assert.compare(this.data[property].length, '>=', 0);
+    if (type === 'Array' || type === 'Date') {
+      this.assert.equal(this.AWS.util.isType(this.data[property], type), true);
     } else {
       this.assert.equal(typeof this.data[property], type);
     }

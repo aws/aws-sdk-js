@@ -344,6 +344,13 @@ describe 'AWS.util.mixin', ->
     out = AWS.util.mixin(obj, prototype: bar: 2)
     expect(out).toBe(obj)
 
+describe 'AWS.util.isType', ->
+  it 'accepts function for type', ->
+    expect(AWS.util.isType([], Array)).toEqual(true)
+
+  it 'accepts string for type', ->
+    expect(AWS.util.isType([], 'Array')).toEqual(true)
+
 describe 'AWS.util.isEmpty', ->
 
   it 'returns true when passed an empty object literal', ->
