@@ -141,7 +141,7 @@ The SDK currently supports the following services:
       <td>AWS.Redshift</td>
     </tr>
     <tr>
-      <td>Amazon Simple Storage Solution</td>
+      <td>Amazon Simple Storage Service</td>
       <td>2006-03-01</td>
       <td>AWS.S3</td>
     </tr>
