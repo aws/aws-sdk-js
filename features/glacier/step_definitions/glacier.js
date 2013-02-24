@@ -19,8 +19,8 @@ module.exports = function() {
     callback();
   });
 
-  this.Given(/^I create a Glacier vault with name "([^"]*)"$/, function(name, callback) {
-    this.vaultName = name;
+  this.Given(/^I have a Glacier vault$/, function(callback) {
+    this.vaultName = 'aws-sdk-js-integration';
     var params = {vaultName: this.vaultName};
     this.request(null, 'createVault', params, callback, false);
   });
@@ -63,4 +63,47 @@ module.exports = function() {
       this.request(null, 'deleteVault', params, next);
     });
   });
+
+  this.When(/^I initiate a Glacier multi-part upload on a (\d+(?:\.\d+)?)MB archive in (\d+)MB chunks$/, function(totalSize, chunkSize, callback) {
+    // setup multi-part upload
+    this.uploadData = new Buffer(totalSize * 1024 * 1024);
+    this.uploadData.fill('0');
+    this.checksums = this.client.computeChecksums(this.uploadData);
+    this.partCounter = 0;
+    this.chunkSize = chunkSize * 1024 * 1024;
+
+    var params = {vaultName: this.vaultName, partSize: this.chunkSize.toString()};
+    this.request(null, 'initiateMultipartUpload', params, callback);
+  });
+
+  this.Then(/^the result should contain the Glacier multi-part upload ID$/, function(callback) {
+    this.uploadId = this.data.uploadId;
+    callback();
+  });
+
+  this.Then(/^I send the next part$/, function(callback) {
+    var start = this.partCounter;
+    var end = this.AWS.util.min(start + this.chunkSize, this.uploadData.length);
+    var buf = this.uploadData.slice(start, end);
+    var range = 'bytes ' + start + '-' + (end-1) + '/*';
+    var params = {
+      vaultName: this.vaultName,
+      uploadId: this.uploadId,
+      range: range,
+      body: buf
+    };
+    this.request(null, 'uploadMultipartPart', params, callback);
+    this.partCounter += this.chunkSize;
+  });
+
+  this.Then(/^I complete the Glacier multi-part upload$/, function(callback) {
+    var params = {
+      vaultName: this.vaultName,
+      uploadId: this.uploadId,
+      archiveSize: this.uploadData.length.toString(),
+      checksum: this.checksums.treeHash
+    }
+    this.request(null, 'completeMultipartUpload', params, callback);
+  });
+
 };
