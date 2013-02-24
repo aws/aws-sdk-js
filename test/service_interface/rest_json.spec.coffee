@@ -164,6 +164,36 @@ describe 'AWS.ServiceInterface.RestJson', ->
         expect(request.httpRequest.headers['x-amz-meta-foo']).toEqual('bar')
         expect(request.httpRequest.headers['x-amz-meta-abc']).toEqual('xyz')
 
+    describe 'body', ->
+      it 'builds root element if rules contains root', ->
+        buildRequest ->
+          operation.input =
+            root: 'Config'
+            members:
+              Config:
+                type: 'structure'
+                members:
+                  Name: type: 'string'
+                  Type: type: 'string'
+          request.params =
+            Config:
+              Name: 'foo'
+              Type: 'bar'
+        expect(request.httpRequest.body.toString()).toEqual(
+          '{"Name":"foo","Type":"bar"}')
+
+      it 'builds payload element as non JSON data if rules contains payload', ->
+        buildRequest ->
+          operation.input =
+            payload: 'Body'
+            members:
+              Body:
+                type: 'binary'
+                location: 'body'
+          request.params =
+            Body: 'foobar'
+        expect(request.httpRequest.body).toEqual('foobar')
+
   describe 'extractError', ->
     extractError = (body) ->
       response.httpResponse.statusCode = 500
@@ -224,6 +254,40 @@ describe 'AWS.ServiceInterface.RestJson', ->
       extractData '{"a":1, "b":"xyz"}'
       expect(response.error).toEqual(null)
       expect(response.data).toEqual({a:1, b:'xyz'})
+
+    it 'pulls header data out of response', ->
+      response.httpResponse.headers['x-title'] = 'The title'
+      operation.output =
+        type: 'structure'
+        members:
+          Title: location: 'header', name: 'x-title'
+
+      extractData '{}'
+      expect(response.error).toEqual(null)
+      expect(response.data.Title).toEqual('The title')
+
+    it 'pulls body out into data key if body is payload', ->
+      operation.output =
+        type: 'structure'
+        payload: 'Body'
+        members:
+          Body: location: 'body', type: 'binary'
+
+      extractData 'foobar'
+      expect(response.error).toEqual(null)
+      expect(response.data.Body).toEqual('foobar')
+
+    it 'pulls body out as Buffer if body is streaming payload', ->
+      operation.output =
+        type: 'structure'
+        payload: 'Body'
+        members:
+          Body: location: 'body', type: 'binary', streaming: true
+
+      extractData 'foobar'
+      expect(response.error).toEqual(null)
+      expect(response.data.Body instanceof Buffer).toEqual(true)
+      expect(response.data.Body.toString()).toEqual('foobar')
 
     it 'returns an empty object when the body is an empty string', ->
       extractData ''
