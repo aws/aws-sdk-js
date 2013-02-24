@@ -83,7 +83,7 @@ module.exports = function() {
 
   this.Then(/^I send the next part$/, function(callback) {
     var start = this.partCounter;
-    var end = this.AWS.util.min(start + this.chunkSize, this.uploadData.length);
+    var end = Math.min(start + this.partSize, this.uploadData.length);
     var buf = this.uploadData.slice(start, end);
     var range = 'bytes ' + start + '-' + (end-1) + '/*';
     var params = {
