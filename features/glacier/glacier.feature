@@ -36,9 +36,7 @@ Feature: Amazon Glacier
     Given I have a Glacier vault
     When I initiate a Glacier multi-part upload on a 2.5MB archive in 1MB chunks
     Then the result should contain the Glacier multi-part upload ID
-    And I send the next part
-    And I send the next part
-    And I send the next part
+    And I send the Glacier archive data in chunks
     And I complete the Glacier multi-part upload
     Then the result should contain the Glacier archive ID
     And the result should contain the same tree hash checksum

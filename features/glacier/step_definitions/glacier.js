@@ -64,15 +64,15 @@ module.exports = function() {
     });
   });
 
-  this.When(/^I initiate a Glacier multi-part upload on a (\d+(?:\.\d+)?)MB archive in (\d+)MB chunks$/, function(totalSize, chunkSize, callback) {
+  this.When(/^I initiate a Glacier multi-part upload on a (\d+(?:\.\d+)?)MB archive in (\d+)MB chunks$/, function(totalSize, partSize, callback) {
     // setup multi-part upload
     this.uploadData = new Buffer(totalSize * 1024 * 1024);
     this.uploadData.fill('0');
     this.checksums = this.client.computeChecksums(this.uploadData);
     this.partCounter = 0;
-    this.chunkSize = chunkSize * 1024 * 1024;
+    this.partSize = partSize * 1024 * 1024;
 
-    var params = {vaultName: this.vaultName, partSize: this.chunkSize.toString()};
+    var params = {vaultName: this.vaultName, partSize: this.partSize.toString()};
     this.request(null, 'initiateMultipartUpload', params, callback);
   });
 
@@ -93,7 +93,25 @@ module.exports = function() {
       body: buf
     };
     this.request(null, 'uploadMultipartPart', params, callback);
-    this.partCounter += this.chunkSize;
+    this.partCounter += this.partSize;
+  });
+
+  this.Then(/^I send the Glacier archive data in chunks$/, function(callback) {
+    var numPartsLeft = Math.ceil(this.uploadData.length / this.partSize);
+    for (var i = 0; i < this.uploadData.length; i += this.partSize) {
+      var end = Math.min(i + this.partSize, this.uploadData.length);
+      var buf = this.uploadData.slice(i, end);
+      var range = 'bytes ' + i + '-' + (end-1) + '/*';
+      var params = {
+        vaultName: this.vaultName,
+        uploadId: this.uploadId,
+        range: range,
+        body: buf
+      };
+      this.client.uploadMultipartPart(params, function() {
+        if (--numPartsLeft == 0) callback();
+      });
+    }
   });
 
   this.Then(/^I complete the Glacier multi-part upload$/, function(callback) {
