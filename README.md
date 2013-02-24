@@ -116,6 +116,11 @@ The SDK currently supports the following services:
       <td>AWS.ElastiCache</td>
     </tr>
     <tr>
+      <td>Amazon Route 53</td>
+      <td>2012-12-12</td>
+      <td>AWS.Route53</td>
+    </tr>
+    <tr>
       <td>AWS Elastic Beanstalk</td>
       <td>2010-12-01</td>
       <td>AWS.ElasticBeanstalk</td>
@@ -146,7 +151,7 @@ The SDK currently supports the following services:
       <td>AWS.OpsWorks</td>
     </tr>
     <tr>
-      <td>Amazon Relational Database Service</td>
+      <td>Amazon Relational Database Service (Beta)</td>
       <td>2012-07-31</td>
       <td>AWS.RDS</td>
     </tr>
