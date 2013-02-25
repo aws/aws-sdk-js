@@ -116,6 +116,11 @@ The SDK currently supports the following services:
       <td>AWS.ElastiCache</td>
     </tr>
     <tr>
+      <td>Amazon Glacier</td>
+      <td>2012-06-01</td>
+      <td>AWS.Glacier</td>
+    </tr>
+    <tr>
       <td>Amazon Route 53</td>
       <td>2012-12-12</td>
       <td>AWS.Route53</td>
