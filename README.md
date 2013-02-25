@@ -101,6 +101,11 @@ The SDK currently supports the following services:
       <td>AWS.DataPipeline</td>
     </tr>
     <tr>
+      <td>AWS Direct Connect</td>
+      <td>2012-10-25</td>
+      <td>AWS.DirectConnect</td>
+    </tr>
+    <tr>
       <td>Amazon DynamoDB</td>
       <td>2011-12-05</td>
       <td>AWS.DynamoDB</td>
@@ -152,7 +157,7 @@ The SDK currently supports the following services:
     </tr>
     <tr>
       <td>AWS Import/Export</td>
-      <td>2010-06-03</td>
+      <td>2010-06-01</td>
       <td>AWS.ImportExport</td>
     </tr>
     <tr>

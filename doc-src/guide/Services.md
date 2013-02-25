@@ -12,6 +12,7 @@ Here's the list of supported service objects:
 * [AWS.CloudWatch.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/CloudWatch/Client.html)
 * [AWS.CloudSearch.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/CloudSearch/Client.html)
 * [AWS.DataPipeline.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/DataPipeline/Client.html)
+* [AWS.DirectConnect.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/DirectConnect/Client.html)
 * [AWS.DynamoDB.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/Client.html)
 * [AWS.EC2.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/EC2/Client.html)
 * [AWS.ElastiCache.Client](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.amazonwebservices.com/AWSJavaScriptSDK/latest/AWS/ElastiCache/Client.html)
