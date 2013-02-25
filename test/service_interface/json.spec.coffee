@@ -124,6 +124,11 @@ describe 'AWS.ServiceInterface.Json', ->
       expect(response.error.message).toEqual('Request body must be less than 1 MB')
       expect(response.data).toEqual(null)
 
+    it 'extracts error type from "code" key (Glacier)', ->
+      extractError '{"code":"InvalidParameter"}'
+      expect(response.error instanceof Error).toBeTruthy()
+      expect(response.error.code).toEqual('InvalidParameter')
+
   describe 'extractData', ->
     extractData = (body) ->
       response.httpResponse.statusCode = 200
