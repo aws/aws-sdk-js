@@ -44,4 +44,10 @@ module.exports = function () {
     this.assert.equal(this.error.message, err.message);
     callback();
   });
+
+  this.Given(/^I have a "([^"]*)" client in the "([^"]*)" region$/, function(svc, region, callback) {
+    this.client = new this.AWS[svc]({ region: region }).client;
+    callback();
+  });
+
 };

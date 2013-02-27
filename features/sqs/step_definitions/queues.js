@@ -15,38 +15,12 @@
 
 module.exports = function () {
 
-  function createQueue(world, callback) {
-    var timestamp = world.AWS.util.date.unixTimestamp() * 1000;
-    var name = 'aws-sdk-js-integration-' + timestamp
-    world.client.createQueue({QueueName:name}, function(err, data) {
-      if (err) callback.fail(err);
-      world.createdQueues.push(data.QueueUrl);
-      world.queueUrl = data.QueueUrl;
+  this.Given(/^I create a queue with the prefix name "([^"]*)"$/, function(prefix, callback) {
+    var name = this.uniqueName(prefix);
+    this.request(null, 'createQueue', { QueueName: name }, callback, function() {
+      this.queueUrl = this.data.QueueUrl;
+      this.createdQueues.push(this.queueUrl);
     });
-  };
-
-  function deleteQueue(url, world, callback) {
-    world.client.deleteQueue({QueueUrl:url}, function(err, data) {
-      if (err) callback.fail(err);
-      world.deletedQueues.push(url);
-    });
-  };
-
-  this.Given(/^I create (a|\d+) queues?$/, function(count, callback) {
-    this.createdQueues = []
-
-    count = count == 'a' ? 1 : parseInt(count)
-    for (var i = 0; i < count; ++i) {
-      createQueue(this, callback);
-    }
-
-    this.eventually(callback, function (next) {
-      if (this.createdQueues.length == count) {
-        next();
-      } else {
-        next.fail();
-      }
-    }, { maxTime: 20 });
   });
 
   this.Then(/^list queues should eventually return the queue urls$/, function(callback) {
@@ -66,19 +40,9 @@ module.exports = function () {
     }, { maxTime: 60 });
   });
 
-  this.Then(/^I should delete the queues?$/, function(callback) {
-    this.deletedQueues = [];
-    for (var i = 0; i < this.createdQueues.length; ++i) {
-      deleteQueue(this.createdQueues[i], this, callback);
-    }
-
-    this.eventually(callback, function (next) {
-      if (this.deletedQueues.length == this.createdQueues.length) {
-        next();
-      } else {
-        next.fail();
-      }
-    }, { maxTime: 20 });
+  this.Then(/^I delete the SQS queue$/, function (callback) {
+    var url = this.createdQueues.pop();
+    this.request(null, 'deleteQueue', { QueueUrl: url }, callback);
   });
 
 };
