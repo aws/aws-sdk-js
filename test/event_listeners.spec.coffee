@@ -145,7 +145,7 @@ describe 'AWS.EventListeners', ->
 
     it 'uses the api.signingName if provided', ->
       client.api.signingName = 'SIGNING_NAME'
-      spyOn(AWS.RequestSigner, 'getVersion').andCallFake ->
+      spyOn(AWS.Signers.RequestSigner, 'getVersion').andCallFake ->
         (req, signingName) -> throw signingName
       request = makeRequest()
       response = request.send()
@@ -153,7 +153,7 @@ describe 'AWS.EventListeners', ->
       delete client.api.signingName
 
     it 'uses the api.endpointPrefix if signingName not provided', ->
-      spyOn(AWS.RequestSigner, 'getVersion').andCallFake ->
+      spyOn(AWS.Signers.RequestSigner, 'getVersion').andCallFake ->
         (req, signingName) -> throw signingName
       request = makeRequest()
       response = request.send()

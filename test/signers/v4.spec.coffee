@@ -11,9 +11,9 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-AWS = require('../lib/core')
-helpers = require('./helpers')
-require('../lib/services/dynamodb')
+AWS = require('../../lib/core')
+helpers = require('../helpers')
+require('../../lib/services/dynamodb')
 
 beforeEach ->
   spyOn(AWS.util, 'userAgent').andReturn('aws-sdk-js/0.1')
@@ -26,9 +26,9 @@ buildRequest = ->
   return req.httpRequest
 
 buildSigner = (request) ->
-  return new AWS.SigV4(request || buildRequest(), 'dynamodb')
+  return new AWS.Signers.V4(request || buildRequest(), 'dynamodb')
 
-describe 'AWS.SigV4', ->
+describe 'AWS.Signers.V4', ->
   date = new Date(1935346573456)
   datetime = AWS.util.date.iso8601(date).replace(/[:\-]|\.\d{3}/g, '')
   creds = {accessKeyId: 'akid', secretAccessKey: 'secret', sessionToken: 'session'}

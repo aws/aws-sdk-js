@@ -11,10 +11,10 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-AWS = require('../lib/core')
-require('../lib/sigvs3')
+AWS = require('../../lib/core')
+require('../../lib/signers/s3')
 
-describe 'AWS.SigVS3', ->
+describe 'AWS.Signers.S3', ->
 
   # these can be overriden in tests
   method = null
@@ -56,12 +56,12 @@ describe 'AWS.SigVS3', ->
     creds
 
   addAuth = (req) ->
-    signer = new AWS.SigVS3(req || buildRequest())
+    signer = new AWS.Signers.S3(req || buildRequest())
     signer.addAuthorization(credentials(), date)
     signer.request
 
   stringToSign = (req) ->
-    signer = new AWS.SigVS3(req || buildRequest())
+    signer = new AWS.Signers.S3(req || buildRequest())
     signer.stringToSign()
 
   describe 'addAuthorization', ->
@@ -92,7 +92,7 @@ describe 'AWS.SigVS3', ->
 
       req = buildRequest()
 
-      signer = new AWS.SigVS3(req)
+      signer = new AWS.Signers.S3(req)
 
       spyOn(signer, 'stringToSign')
       signer.stringToSign.andReturn('string-to-sign')

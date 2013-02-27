@@ -11,11 +11,11 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-AWS = require('../lib/core')
-require('../lib/service_interface/query')
-require('../lib/sigv2')
+AWS = require('../../lib/core')
+require('../../lib/service_interface/query')
+require('../../lib/signers/v2')
 
-describe 'AWS.SigV2', ->
+describe 'AWS.Signers.V2', ->
 
   credentials = null
   date = null
@@ -28,10 +28,10 @@ describe 'AWS.SigV2', ->
     request
 
   buildSigner = (request) ->
-    new AWS.SigV2(request)
+    new AWS.Signers.V2(request)
 
   signRequest = (request) ->
-    signer = new AWS.SigV2(request)
+    signer = new AWS.Signers.V2(request)
     signer.addAuthorization(credentials, date)
 
   beforeEach ->
