@@ -395,3 +395,30 @@ describe 'AWS.S3.Client', ->
         loc = params.LocationConstraint
       s3.createBucket(Bucket:'name')
       expect(loc).toEqual('eu-west-1')
+
+  describe 'deleteObjects', ->
+    it 'builds Content-MD5 header parameter', ->
+      helpers.mockHttpResponse 200, {}, ''
+      resp = s3.deleteObjects(Bucket: 'bucket', Objects: ['a', 'b']).send()
+      hash = AWS.util.crypto.md5(resp.request.httpRequest.body, 'base64')
+      expect(resp.request.httpRequest.headers['Content-MD5']).toEqual(hash)
+
+  describe 'putBucketLifecycle', ->
+    it 'adds Content-MD5 header parameter if not passed in parameters', ->
+      helpers.mockHttpResponse 200, {}, ''
+      rule =
+        Prefix: '/'
+        Status: 'Enabled'
+        Transition: Days: '0', StorageClass: 'GLACIER'
+      resp = s3.putBucketLifecycle(Rules: [rule]).send()
+      hash = AWS.util.crypto.md5(resp.request.httpRequest.body, 'base64')
+      expect(resp.request.httpRequest.headers['Content-MD5']).toEqual(hash)
+
+    it 'does not auto-build Content-MD5 if passed in parameters', ->
+      helpers.mockHttpResponse 200, {}, ''
+      rule =
+        Prefix: '/'
+        Status: 'Enabled'
+        Transition: Days: '0', StorageClass: 'GLACIER'
+      resp = s3.putBucketLifecycle(Rules: [rule], ContentMD5: '000').send()
+      expect(resp.request.httpRequest.headers['Content-MD5']).toEqual('000')

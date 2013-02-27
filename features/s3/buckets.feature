@@ -21,6 +21,16 @@ Feature: Working with Buckets
     When I delete the bucket
     Then the bucket should not exist
 
+  @lifecycle
+  Scenario: Bucket lifecycles
+    When I create a bucket
+    And I put a transition lifecycle configuration on the bucket with prefix "/"
+    And I get the transition lifecycle configuration on the bucket
+    Then the lifecycle configuration should have transition days of 0
+    And the lifecycle configuration should have transition storage class of "GLACIER"
+
+    And I delete the bucket
+
   # this test will exercise following 307 redirects
   Scenario: Creating a bucket with a location constraint
     When I create a bucket with the location constraint "EU"

@@ -58,4 +58,32 @@ module.exports = function() {
     this.request('s3', 'deleteBucket', {Bucket:this.bucket}, next);
   });
 
+  this.When(/^I put a transition lifecycle configuration on the bucket with prefix "([^"]*)"$/, function(prefix, callback) {
+    var params = {
+      Bucket: this.bucket,
+      Rules: [{
+        Prefix: prefix,
+        Status: 'Enabled',
+        Transition: {Days: 0, StorageClass: 'GLACIER'}
+      }]
+    };
+
+    this.request('s3', 'putBucketLifecycle', params, callback);
+  });
+
+  this.When(/^I get the transition lifecycle configuration on the bucket$/, function(callback) {
+    this.eventually(callback, function(next) {
+      this.request('s3', 'getBucketLifecycle', {Bucket: this.bucket}, next);
+    });
+  });
+
+  this.Then(/^the lifecycle configuration should have transition days of (\d+)$/, function(days, callback) {
+    this.assert.equal(this.data.Rules[0].Transition.Days, 0);
+    callback();
+  });
+
+  this.Then(/^the lifecycle configuration should have transition storage class of "([^"]*)"$/, function(arg1, callback) {
+    this.assert.equal(this.data.Rules[0].Transition.StorageClass, 'GLACIER');
+    callback();
+  });
 };
