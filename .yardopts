@@ -2,5 +2,6 @@
 --no-api private
 --no-highlight
 --title "AWS SDK for Node.js"
+--template-path doc-src/templates
 lib/**/*.js
 doc-src/*.js
