@@ -17,20 +17,22 @@
 AWS = {};
 
 /**
- * Constructs a service interface and a low-level {Client}.  Use the +client+
+ * Constructs a service interface and a low-level {Client}.  Use the `client`
  * property to make API calls.  Each API operation is exposed as a function on
- * the +client+.
+ * the `client`.
  *
- * === Sending a Request Using ImportExport
+ * ### Sending a Request Using ImportExport
  *
- *   svc = new AWS.ImportExport();
- *   svc.client.OPERATION_NAME(params, function (err, data) {
- *     if (err) {
- *       console.log(err); // an error occurred
- *     } else {
- *       console.log(data); // successful response
- *     }
- *   });
+ * ```js
+ * svc = new AWS.ImportExport();
+ * svc.client.OPERATION_NAME(params, function (err, data) {
+ *   if (err) {
+ *     console.log(err); // an error occurred
+ *   } else {
+ *     console.log(data); // successful response
+ *   }
+ * });
+ * ```
  *
  * @!method constructor(options)
  *   Constructs a service interface.  The returned service will have a {client}
@@ -53,118 +55,118 @@ AWS.ImportExport = inherit({})
  * @!method cancelJob(params, callback)
  *   Calls the CancelJob API operation.
  *   @param params [Object]
- *     * +JobId+ - (*required*, <tt>String</tt>)
+ *     * `JobId` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Success+ - (<tt>Boolean</tt>)
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Success` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createJob(params, callback)
  *   Calls the CreateJob API operation.
  *   @param params [Object]
- *     * +JobType+ - (*required*, <tt>String</tt>)
- *     * +Manifest+ - (*required*, <tt>String</tt>)
- *     * +ManifestAddendum+ - (<tt>String</tt>)
- *     * +ValidateOnly+ - (*required*, <tt>Boolean</tt>)
+ *     * `JobType` &mdash; **required** &mdash; (`String`)
+ *     * `Manifest` &mdash; **required** &mdash; (`String`)
+ *     * `ManifestAddendum` &mdash; (`String`)
+ *     * `ValidateOnly` &mdash; **required** &mdash; (`Boolean`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +JobId+ - (<tt>String</tt>)
- *       * +JobType+ - (<tt>String</tt>)
- *       * +AwsShippingAddress+ - (<tt>String</tt>)
- *       * +Signature+ - (<tt>String</tt>)
- *       * +SignatureFileContents+ - (<tt>String</tt>)
- *       * +WarningMessage+ - (<tt>String</tt>)
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `JobId` &mdash; (`String`)
+ *       * `JobType` &mdash; (`String`)
+ *       * `AwsShippingAddress` &mdash; (`String`)
+ *       * `Signature` &mdash; (`String`)
+ *       * `SignatureFileContents` &mdash; (`String`)
+ *       * `WarningMessage` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method getStatus(params, callback)
  *   Calls the GetStatus API operation.
  *   @param params [Object]
- *     * +JobId+ - (*required*, <tt>String</tt>)
+ *     * `JobId` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +JobId+ - (<tt>String</tt>)
- *       * +JobType+ - (<tt>String</tt>)
- *       * +AwsShippingAddress+ - (<tt>String</tt>)
- *       * +LocationCode+ - (<tt>String</tt>)
- *       * +LocationMessage+ - (<tt>String</tt>)
- *       * +ProgressCode+ - (<tt>String</tt>)
- *       * +ProgressMessage+ - (<tt>String</tt>)
- *       * +Carrier+ - (<tt>String</tt>)
- *       * +TrackingNumber+ - (<tt>String</tt>)
- *       * +LogBucket+ - (<tt>String</tt>)
- *       * +LogKey+ - (<tt>String</tt>)
- *       * +ErrorCount+ - (<tt>Integer</tt>)
- *       * +Signature+ - (<tt>String</tt>)
- *       * +SignatureFileContents+ - (<tt>String</tt>)
- *       * +CurrentManifest+ - (<tt>String</tt>)
- *       * +CreationDate+ - (<tt>Date</tt>)
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `JobId` &mdash; (`String`)
+ *       * `JobType` &mdash; (`String`)
+ *       * `AwsShippingAddress` &mdash; (`String`)
+ *       * `LocationCode` &mdash; (`String`)
+ *       * `LocationMessage` &mdash; (`String`)
+ *       * `ProgressCode` &mdash; (`String`)
+ *       * `ProgressMessage` &mdash; (`String`)
+ *       * `Carrier` &mdash; (`String`)
+ *       * `TrackingNumber` &mdash; (`String`)
+ *       * `LogBucket` &mdash; (`String`)
+ *       * `LogKey` &mdash; (`String`)
+ *       * `ErrorCount` &mdash; (`Integer`)
+ *       * `Signature` &mdash; (`String`)
+ *       * `SignatureFileContents` &mdash; (`String`)
+ *       * `CurrentManifest` &mdash; (`String`)
+ *       * `CreationDate` &mdash; (`Date`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method listJobs(params, callback)
  *   Calls the ListJobs API operation.
  *   @param params [Object]
- *     * +MaxJobs+ - (<tt>Integer</tt>)
- *     * +Marker+ - (<tt>String</tt>)
+ *     * `MaxJobs` &mdash; (`Integer`)
+ *     * `Marker` &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Jobs+ - (<tt>Array<Object></tt>)
- *         * +JobId+ - (<tt>String</tt>)
- *         * +CreationDate+ - (<tt>Date</tt>)
- *         * +IsCanceled+ - (<tt>Boolean</tt>)
- *         * +JobType+ - (<tt>String</tt>)
- *       * +IsTruncated+ - (<tt>Boolean</tt>)
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Jobs` &mdash; (`Array<Object>`)
+ *         * `JobId` &mdash; (`String`)
+ *         * `CreationDate` &mdash; (`Date`)
+ *         * `IsCanceled` &mdash; (`Boolean`)
+ *         * `JobType` &mdash; (`String`)
+ *       * `IsTruncated` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method updateJob(params, callback)
  *   Calls the UpdateJob API operation.
  *   @param params [Object]
- *     * +JobId+ - (*required*, <tt>String</tt>)
- *     * +Manifest+ - (*required*, <tt>String</tt>)
- *     * +JobType+ - (*required*, <tt>String</tt>)
- *     * +ValidateOnly+ - (*required*, <tt>Boolean</tt>)
+ *     * `JobId` &mdash; **required** &mdash; (`String`)
+ *     * `Manifest` &mdash; **required** &mdash; (`String`)
+ *     * `JobType` &mdash; **required** &mdash; (`String`)
+ *     * `ValidateOnly` &mdash; **required** &mdash; (`Boolean`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Success+ - (<tt>Boolean</tt>)
- *       * +WarningMessage+ - (<tt>String</tt>)
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Success` &mdash; (`Boolean`)
+ *       * `WarningMessage` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -173,8 +175,8 @@ AWS.ImportExport = inherit({})
  *   Constructs a service client object.  This client has one method for
  *   each API operation.
  *   @option options [String] endpoint The endpoint URI to send requests
- *     to.  The default endpoint is built from the configured +region+.
- *     The endpoint should be a string like <tt>'https://s3.amazonaws.com'</tt>.
+ *     to.  The default endpoint is built from the configured `region`.
+ *     The endpoint should be a string like `'https://s3.amazonaws.com'`.
  *   @option (see AWS.Config.constructor)
  *
  * @!attribute endpoint

@@ -17,20 +17,22 @@
 AWS = {};
 
 /**
- * Constructs a service interface and a low-level {Client}.  Use the +client+
+ * Constructs a service interface and a low-level {Client}.  Use the `client`
  * property to make API calls.  Each API operation is exposed as a function on
- * the +client+.
+ * the `client`.
  *
- * === Sending a Request Using Route53
+ * ### Sending a Request Using Route53
  *
- *   svc = new AWS.Route53();
- *   svc.client.OPERATION_NAME(params, function (err, data) {
- *     if (err) {
- *       console.log(err); // an error occurred
- *     } else {
- *       console.log(data); // successful response
- *     }
- *   });
+ * ```js
+ * svc = new AWS.Route53();
+ * svc.client.OPERATION_NAME(params, function (err, data) {
+ *   if (err) {
+ *     console.log(err); // an error occurred
+ *   } else {
+ *     console.log(data); // successful response
+ *   }
+ * });
+ * ```
  *
  * @!method constructor(options)
  *   Constructs a service interface.  The returned service will have a {client}
@@ -53,42 +55,42 @@ AWS.Route53 = inherit({})
  * @!method changeResourceRecordSets(params, callback)
  *   Calls the ChangeResourceRecordSets API operation.
  *   @param params [Object]
- *     * +HostedZoneId+ - (*required*, <tt>String</tt>) Alias resource
- *       record sets only: The value of the hosted zone ID for the AWS
- *       resource. For more information, an example, and several ways to
- *       get the hosted zone ID for the LoadBalancer, see Creating Alias
- *       Resource Record Sets for Elastic Load Balancing in the Amazon
- *       Route 53 Developer Guide.
- *     * +ChangeBatch+ - (*required*, <tt>Object</tt>) A complex type
- *       that contains an optional comment and the Changes element.
- *       * +Comment+ - (<tt>String</tt>) Optional: Any comments you want
+ *     * `HostedZoneId` &mdash; **required** &mdash; (`String`) Alias
+ *       resource record sets only: The value of the hosted zone ID for
+ *       the AWS resource. For more information, an example, and several
+ *       ways to get the hosted zone ID for the LoadBalancer, see
+ *       Creating Alias Resource Record Sets for Elastic Load Balancing
+ *       in the Amazon Route 53 Developer Guide.
+ *     * `ChangeBatch` &mdash; **required** &mdash; (`Object`) A complex
+ *       type that contains an optional comment and the Changes element.
+ *       * `Comment` &mdash; (`String`) Optional: Any comments you want
  *         to include about a change batch request.
- *       * +Changes+ - (*required*, <tt>Array<Object></tt>) A complex
- *         type that contains one Change element for each resource record
- *         set that you want to create or delete.
- *         * +Action+ - (*required*, <tt>String</tt>) The action to
- *           perform. Valid values: CREATE | DELETE
- *         * +ResourceRecordSet+ - (*required*, <tt>Object</tt>)
+ *       * `Changes` &mdash; **required** &mdash; (`Array<Object>`) A
+ *         complex type that contains one Change element for each
+ *         resource record set that you want to create or delete.
+ *         * `Action` &mdash; **required** &mdash; (`String`) The action
+ *           to perform. Valid values: CREATE | DELETE
+ *         * `ResourceRecordSet` &mdash; **required** &mdash; (`Object`)
  *           Information about the resource record set to create or
  *           delete.
- *           * +Name+ - (*required*, <tt>String</tt>) The domain name of
+ *           * `Name` &mdash; **required** &mdash; (`String`) The domain
+ *             name of the current resource record set.
+ *           * `Type` &mdash; **required** &mdash; (`String`) The type of
  *             the current resource record set.
- *           * +Type+ - (*required*, <tt>String</tt>) The type of the
- *             current resource record set.
- *           * +SetIdentifier+ - (<tt>String</tt>) Weighted, Regional,
- *             and Failover resource record sets only: An identifier that
+ *           * `SetIdentifier` &mdash; (`String`) Weighted, Regional, and
+ *             Failover resource record sets only: An identifier that
  *             differentiates among multiple resource record sets that
  *             have the same combination of DNS name and type.
- *           * +Weight+ - (<tt>Integer</tt>) Weighted resource record
- *             sets only: Among resource record sets that have the same
+ *           * `Weight` &mdash; (`Integer`) Weighted resource record sets
+ *             only: Among resource record sets that have the same
  *             combination of DNS name and type, a value that determines
  *             what portion of traffic for the current resource record
  *             set is routed to the associated location.
- *           * +Region+ - (<tt>String</tt>) Regional resource record sets
+ *           * `Region` &mdash; (`String`) Regional resource record sets
  *             only: Among resource record sets that have the same
  *             combination of DNS name and type, a value that specifies
  *             the AWS region for the current resource record set.
- *           * +Failover+ - (<tt>String</tt>) Failover resource record
+ *           * `Failover` &mdash; (`String`) Failover resource record
  *             sets only: Among resource record sets that have the same
  *             combination of DNS name and type, a value that indicates
  *             whether the current resource record set is a primary or
@@ -107,35 +109,36 @@ AWS.Route53 = inherit({})
  *             passing a health check or has no associated health check,
  *             or (2) there is no primary resource record set. Valid
  *             values: PRIMARY | SECONDARY
- *           * +TTL+ - (<tt>Integer</tt>) The cache time to live for the
+ *           * `TTL` &mdash; (`Integer`) The cache time to live for the
  *             current resource record set.
- *           * +ResourceRecords+ - (<tt>Array<Object></tt>) A complex
- *             type that contains the resource records for the current
+ *           * `ResourceRecords` &mdash; (`Array<Object>`) A complex type
+ *             that contains the resource records for the current
  *             resource record set.
- *             * +Value+ - (*required*, <tt>String</tt>) The value of the
- *               Value element for the current resource record set.
- *           * +AliasTarget+ - (<tt>Object</tt>) Alias resource record
+ *             * `Value` &mdash; **required** &mdash; (`String`) The
+ *               value of the Value element for the current resource
+ *               record set.
+ *           * `AliasTarget` &mdash; (`Object`) Alias resource record
  *             sets only: Information about the AWS resource to which you
  *             are redirecting traffic.
- *             * +HostedZoneId+ - (*required*, <tt>String</tt>) Alias
- *               resource record sets only: The value of the hosted zone
- *               ID for the AWS resource. For more information and an
- *               example, see Creating Alias Resource Record Sets in the
- *               Amazon Route 53 Developer Guide.
- *             * +DNSName+ - (*required*, <tt>String</tt>) Alias resource
- *               record sets only: The external DNS name associated with
- *               the AWS Resource. For more information and an example,
- *               see Creating Alias Resource Record Sets in the Amazon
- *               Route 53 Developer Guide.
- *             * +EvaluateTargetHealth+ - (*required*, <tt>Boolean</tt>)
- *               Alias resource record sets only: A boolean value that
- *               indicates whether this Resource Record Set should
- *               respect the health status of any health checks
+ *             * `HostedZoneId` &mdash; **required** &mdash; (`String`)
+ *               Alias resource record sets only: The value of the hosted
+ *               zone ID for the AWS resource. For more information and
+ *               an example, see Creating Alias Resource Record Sets in
+ *               the Amazon Route 53 Developer Guide.
+ *             * `DNSName` &mdash; **required** &mdash; (`String`) Alias
+ *               resource record sets only: The external DNS name
+ *               associated with the AWS Resource. For more information
+ *               and an example, see Creating Alias Resource Record Sets
+ *               in the Amazon Route 53 Developer Guide.
+ *             * `EvaluateTargetHealth` &mdash; **required** &mdash;
+ *               (`Boolean`) Alias resource record sets only: A boolean
+ *               value that indicates whether this Resource Record Set
+ *               should respect the health status of any health checks
  *               associated with the ALIAS target record which it is
  *               linked to. For more information and an example, see
  *               Creating Alias Resource Record Sets in the Amazon Route
  *               53 Developer Guide.
- *           * +HealthCheckId+ - (<tt>String</tt>) Health Check resource
+ *           * `HealthCheckId` &mdash; (`String`) Health Check resource
  *             record sets only, not required for alias resource record
  *             sets: An identifier that is used to identify health check
  *             associated with the resource record set.
@@ -144,28 +147,29 @@ AWS.Route53 = inherit({})
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +ChangeInfo+ - (<tt>Object</tt>) A complex type that
- *         contains information about changes made to your hosted zone.
- *         This element contains an ID that you use when performing a
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `ChangeInfo` &mdash; **required** &mdash; (`Object`) A complex
+ *         type that contains information about changes made to your hosted
+ *         zone. This element contains an ID that you use when performing a
  *         GetChange action to get detailed information about the change.
- *         * +Id+ - (<tt>String</tt>) The ID of the request.
- *           Use this ID to track when the change has completed across all
- *           Amazon Route 53 DNS servers.
- *         * +Status+ - (<tt>String</tt>) The current state of
- *           the request. PENDING indicates that this request has not yet
- *           been applied to all Amazon Route 53 DNS servers. Valid Values:
- *           PENDING | INSYNC
- *         * +SubmittedAt+ - (<tt>Date</tt>) The date and time
- *           the change was submitted, in the format YYYY-MM-DDThh:mm:ssZ,
- *           as specified in the ISO 8601 standard (for example,
- *           2009-11-19T19:37:58Z). The Z after the time indicates that the
- *           time is listed in Coordinated Universal Time (UTC), which is
- *           synonymous with Greenwich Mean Time in this context.
- *         * +Comment+ - (<tt>String</tt>) A complex type that describes
+ *         * `Id` &mdash; **required** &mdash; (`String`) The ID of the
+ *           request. Use this ID to track when the change has completed
+ *           across all Amazon Route 53 DNS servers.
+ *         * `Status` &mdash; **required** &mdash; (`String`) The current
+ *           state of the request. PENDING indicates that this request has
+ *           not yet been applied to all Amazon Route 53 DNS servers. Valid
+ *           Values: PENDING | INSYNC
+ *         * `SubmittedAt` &mdash; **required** &mdash; (`Date`) The date
+ *           and time the change was submitted, in the format
+ *           YYYY-MM-DDThh:mm:ssZ, as specified in the ISO 8601 standard
+ *           (for example, 2009-11-19T19:37:58Z). The Z after the time
+ *           indicates that the time is listed in Coordinated Universal
+ *           Time (UTC), which is synonymous with Greenwich Mean Time in
+ *           this context.
+ *         * `Comment` &mdash; (`String`) A complex type that describes
  *           change information about changes made to your hosted zone.
  *           This element contains an ID that you use when performing a
  *           GetChange action to get detailed information about the change.
@@ -175,8 +179,8 @@ AWS.Route53 = inherit({})
  * @!method createHealthCheck(params, callback)
  *   Calls the CreateHealthCheck API operation.
  *   @param params [Object]
- *     * +CallerReference+ - (*required*, <tt>String</tt>) A unique
- *       string that identifies the request and that allows failed
+ *     * `CallerReference` &mdash; **required** &mdash; (`String`) A
+ *       unique string that identifies the request and that allows failed
  *       CreateHealthCheck requests to be retried without the risk of
  *       executing the operation twice. You must use a unique
  *       CallerReference string every time you create a health check.
@@ -184,63 +188,65 @@ AWS.Route53 = inherit({})
  *       use a string that identifies your project. Valid characters are
  *       any Unicode code points that are legal in an XML 1.0 document.
  *       The UTF-8 encoding of the value must be less than 128 bytes.
- *     * +HealthCheckConfig+ - (*required*, <tt>Object</tt>) A complex
- *       type that contains health check configuration.
- *       * +IPAddress+ - (*required*, <tt>String</tt>) IP Address of the
- *         instance being checked.
- *       * +Port+ - (<tt>Integer</tt>) Port on which connection will be
+ *     * `HealthCheckConfig` &mdash; **required** &mdash; (`Object`) A
+ *       complex type that contains health check configuration.
+ *       * `IPAddress` &mdash; **required** &mdash; (`String`) IP Address
+ *         of the instance being checked.
+ *       * `Port` &mdash; (`Integer`) Port on which connection will be
  *         opened to the instance to health check. For HTTP this defaults
  *         to 80 if the port is not specified.
- *       * +Type+ - (*required*, <tt>String</tt>) The type of health
- *         check to be performed. Currently supported protocols are TCP
- *         and HTTP.
- *       * +ResourcePath+ - (<tt>String</tt>) Path to ping on the
- *         instance to check the health. Required only for HTTP health
- *         checks, HTTP request is issued to the instance on the given
- *         port and path.
- *       * +FullyQualifiedDomainName+ - (<tt>String</tt>) Fully qualified
+ *       * `Type` &mdash; **required** &mdash; (`String`) The type of
+ *         health check to be performed. Currently supported protocols
+ *         are TCP and HTTP.
+ *       * `ResourcePath` &mdash; (`String`) Path to ping on the instance
+ *         to check the health. Required only for HTTP health checks,
+ *         HTTP request is issued to the instance on the given port and
+ *         path.
+ *       * `FullyQualifiedDomainName` &mdash; (`String`) Fully qualified
  *         domain name of the instance to be health checked.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +HealthCheck+ - (<tt>Object</tt>) A complex type
- *         that contains identifying information about the health check.
- *         * +Id+ - (<tt>String</tt>) The ID of the specified
- *           health check.
- *         * +CallerReference+ - (<tt>String</tt>) A unique
- *           string that identifies the request to create the health check.
- *         * +HealthCheckConfig+ - (<tt>Object</tt>) A complex
- *           type that contains the health check configuration.
- *           * +IPAddress+ - (<tt>String</tt>) IP Address of
- *             the instance being checked.
- *           * +Port+ - (<tt>Integer</tt>) Port on which connection will be
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `HealthCheck` &mdash; **required** &mdash; (`Object`) A complex
+ *         type that contains identifying information about the health
+ *         check.
+ *         * `Id` &mdash; **required** &mdash; (`String`) The ID of the
+ *           specified health check.
+ *         * `CallerReference` &mdash; **required** &mdash; (`String`) A
+ *           unique string that identifies the request to create the health
+ *           check.
+ *         * `HealthCheckConfig` &mdash; **required** &mdash; (`Object`) A
+ *           complex type that contains the health check configuration.
+ *           * `IPAddress` &mdash; **required** &mdash; (`String`) IP
+ *             Address of the instance being checked.
+ *           * `Port` &mdash; (`Integer`) Port on which connection will be
  *             opened to the instance to health check. For HTTP this
  *             defaults to 80 if the port is not specified.
- *           * +Type+ - (<tt>String</tt>) The type of health
- *             check to be performed. Currently supported protocols are TCP
- *             and HTTP.
- *           * +ResourcePath+ - (<tt>String</tt>) Path to ping on the
+ *           * `Type` &mdash; **required** &mdash; (`String`) The type of
+ *             health check to be performed. Currently supported protocols
+ *             are TCP and HTTP.
+ *           * `ResourcePath` &mdash; (`String`) Path to ping on the
  *             instance to check the health. Required only for HTTP health
  *             checks, HTTP request is issued to the instance on the given
  *             port and path.
- *           * +FullyQualifiedDomainName+ - (<tt>String</tt>) Fully
+ *           * `FullyQualifiedDomainName` &mdash; (`String`) Fully
  *             qualified domain name of the instance to be health checked.
- *       * +Location+ - (<tt>String</tt>) The unique URL
- *         representing the new health check.
+ *       * `Location` &mdash; **required** &mdash; (`String`) The unique
+ *         URL representing the new health check.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createHostedZone(params, callback)
  *   Calls the CreateHostedZone API operation.
  *   @param params [Object]
- *     * +Name+ - (*required*, <tt>String</tt>) The name of the domain.
- *       This must be a fully-specified domain, for example,
+ *     * `Name` &mdash; **required** &mdash; (`String`) The name of the
+ *       domain. This must be a fully-specified domain, for example,
  *       www.example.com. The trailing dot is optional; Route 53 assumes
  *       that the domain name is fully qualified. This means that Route
  *       53 treats www.example.com (without a trailing dot) and
@@ -249,8 +255,8 @@ AWS.Route53 = inherit({})
  *       your registrar to change the authoritative name servers for your
  *       domain to the set of NameServers elements returned in
  *       DelegationSet.
- *     * +CallerReference+ - (*required*, <tt>String</tt>) A unique
- *       string that identifies the request and that allows failed
+ *     * `CallerReference` &mdash; **required** &mdash; (`String`) A
+ *       unique string that identifies the request and that allows failed
  *       CreateHostedZone requests to be retried without the risk of
  *       executing the operation twice. You must use a unique
  *       CallerReference string every time you create a hosted zone.
@@ -259,9 +265,9 @@ AWS.Route53 = inherit({})
  *       DNSMigration_01. Valid characters are any Unicode code points
  *       that are legal in an XML 1.0 document. The UTF-8 encoding of the
  *       value must be less than 128 bytes.
- *     * +HostedZoneConfig+ - (<tt>Object</tt>) A complex type that
+ *     * `HostedZoneConfig` &mdash; (`Object`) A complex type that
  *       contains an optional comment about your hosted zone.
- *       * +Comment+ - (<tt>String</tt>) An optional comment about your
+ *       * `Comment` &mdash; (`String`) An optional comment about your
  *         hosted zone. If you don't want to specify a comment, you can
  *         omit the HostedZoneConfig and Comment elements from the XML
  *         document.
@@ -270,16 +276,17 @@ AWS.Route53 = inherit({})
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +HostedZone+ - (<tt>Object</tt>) A complex type that
- *         contains identifying information about the hosted zone.
- *         * +Id+ - (<tt>String</tt>) The ID of the specified
- *           hosted zone.
- *         * +Name+ - (<tt>String</tt>) The name of the domain.
- *           This must be a fully-specified domain, for example,
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `HostedZone` &mdash; **required** &mdash; (`Object`) A complex
+ *         type that contains identifying information about the hosted
+ *         zone.
+ *         * `Id` &mdash; **required** &mdash; (`String`) The ID of the
+ *           specified hosted zone.
+ *         * `Name` &mdash; **required** &mdash; (`String`) The name of the
+ *           domain. This must be a fully-specified domain, for example,
  *           www.example.com. The trailing dot is optional; Route 53
  *           assumes that the domain name is fully qualified. This means
  *           that Route 53 treats www.example.com (without a trailing dot)
@@ -288,97 +295,101 @@ AWS.Route53 = inherit({})
  *           should ask your registrar to change the authoritative name
  *           servers for your domain to the set of NameServers elements
  *           returned in DelegationSet.
- *         * +CallerReference+ - (<tt>String</tt>) A unique
- *           string that identifies the request to create the hosted zone.
- *         * +Config+ - (<tt>Object</tt>) A complex type that contains the
+ *         * `CallerReference` &mdash; **required** &mdash; (`String`) A
+ *           unique string that identifies the request to create the hosted
+ *           zone.
+ *         * `Config` &mdash; (`Object`) A complex type that contains the
  *           Comment element.
- *           * +Comment+ - (<tt>String</tt>) An optional comment about your
+ *           * `Comment` &mdash; (`String`) An optional comment about your
  *             hosted zone. If you don't want to specify a comment, you can
  *             omit the HostedZoneConfig and Comment elements from the XML
  *             document.
- *         * +ResourceRecordSetCount+ - (<tt>Integer</tt>) Total number of
+ *         * `ResourceRecordSetCount` &mdash; (`Integer`) Total number of
  *           resource record sets in the hosted zone.
- *       * +ChangeInfo+ - (<tt>Object</tt>) A complex type that
- *         contains information about the request to create a hosted zone.
- *         This includes an ID that you use when you call the GetChange
- *         action to get the current status of the change request.
- *         * +Id+ - (<tt>String</tt>) The ID of the request.
- *           Use this ID to track when the change has completed across all
- *           Amazon Route 53 DNS servers.
- *         * +Status+ - (<tt>String</tt>) The current state of
- *           the request. PENDING indicates that this request has not yet
- *           been applied to all Amazon Route 53 DNS servers. Valid Values:
- *           PENDING | INSYNC
- *         * +SubmittedAt+ - (<tt>Date</tt>) The date and time
- *           the change was submitted, in the format YYYY-MM-DDThh:mm:ssZ,
- *           as specified in the ISO 8601 standard (for example,
- *           2009-11-19T19:37:58Z). The Z after the time indicates that the
- *           time is listed in Coordinated Universal Time (UTC), which is
- *           synonymous with Greenwich Mean Time in this context.
- *         * +Comment+ - (<tt>String</tt>) A complex type that describes
+ *       * `ChangeInfo` &mdash; **required** &mdash; (`Object`) A complex
+ *         type that contains information about the request to create a
+ *         hosted zone. This includes an ID that you use when you call the
+ *         GetChange action to get the current status of the change
+ *         request.
+ *         * `Id` &mdash; **required** &mdash; (`String`) The ID of the
+ *           request. Use this ID to track when the change has completed
+ *           across all Amazon Route 53 DNS servers.
+ *         * `Status` &mdash; **required** &mdash; (`String`) The current
+ *           state of the request. PENDING indicates that this request has
+ *           not yet been applied to all Amazon Route 53 DNS servers. Valid
+ *           Values: PENDING | INSYNC
+ *         * `SubmittedAt` &mdash; **required** &mdash; (`Date`) The date
+ *           and time the change was submitted, in the format
+ *           YYYY-MM-DDThh:mm:ssZ, as specified in the ISO 8601 standard
+ *           (for example, 2009-11-19T19:37:58Z). The Z after the time
+ *           indicates that the time is listed in Coordinated Universal
+ *           Time (UTC), which is synonymous with Greenwich Mean Time in
+ *           this context.
+ *         * `Comment` &mdash; (`String`) A complex type that describes
  *           change information about changes made to your hosted zone.
  *           This element contains an ID that you use when performing a
  *           GetChange action to get detailed information about the change.
- *       * +DelegationSet+ - (<tt>Object</tt>) A complex type
- *         that contains name server information.
- *         * +NameServers+ - (<tt>Array<String></tt>) A complex
- *           type that contains the authoritative name servers for the
- *           hosted zone. Use the method provided by your domain registrar
- *           to add an NS record to your domain for each NameServer that is
- *           assigned to your hosted zone.
- *       * +Location+ - (<tt>String</tt>) The unique URL
- *         representing the new hosted zone.
+ *       * `DelegationSet` &mdash; **required** &mdash; (`Object`) A
+ *         complex type that contains name server information.
+ *         * `NameServers` &mdash; **required** &mdash; (`Array<String>`) A
+ *           complex type that contains the authoritative name servers for
+ *           the hosted zone. Use the method provided by your domain
+ *           registrar to add an NS record to your domain for each
+ *           NameServer that is assigned to your hosted zone.
+ *       * `Location` &mdash; **required** &mdash; (`String`) The unique
+ *         URL representing the new hosted zone.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteHealthCheck(params, callback)
  *   Calls the DeleteHealthCheck API operation.
  *   @param params [Object]
- *     * +HealthCheckId+ - (*required*, <tt>String</tt>) The ID of the
- *       health check to delete.
+ *     * `HealthCheckId` &mdash; **required** &mdash; (`String`) The ID
+ *       of the health check to delete.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteHostedZone(params, callback)
  *   Calls the DeleteHostedZone API operation.
  *   @param params [Object]
- *     * +Id+ - (*required*, <tt>String</tt>) The ID of the request.
- *       Include this ID in a call to GetChange to track when the change
- *       has propagated to all Route 53 DNS servers.
+ *     * `Id` &mdash; **required** &mdash; (`String`) The ID of the
+ *       request. Include this ID in a call to GetChange to track when
+ *       the change has propagated to all Route 53 DNS servers.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +ChangeInfo+ - (<tt>Object</tt>) A complex type that
- *         contains the ID, the status, and the date and time of your
- *         delete request.
- *         * +Id+ - (<tt>String</tt>) The ID of the request.
- *           Use this ID to track when the change has completed across all
- *           Amazon Route 53 DNS servers.
- *         * +Status+ - (<tt>String</tt>) The current state of
- *           the request. PENDING indicates that this request has not yet
- *           been applied to all Amazon Route 53 DNS servers. Valid Values:
- *           PENDING | INSYNC
- *         * +SubmittedAt+ - (<tt>Date</tt>) The date and time
- *           the change was submitted, in the format YYYY-MM-DDThh:mm:ssZ,
- *           as specified in the ISO 8601 standard (for example,
- *           2009-11-19T19:37:58Z). The Z after the time indicates that the
- *           time is listed in Coordinated Universal Time (UTC), which is
- *           synonymous with Greenwich Mean Time in this context.
- *         * +Comment+ - (<tt>String</tt>) A complex type that describes
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `ChangeInfo` &mdash; **required** &mdash; (`Object`) A complex
+ *         type that contains the ID, the status, and the date and time of
+ *         your delete request.
+ *         * `Id` &mdash; **required** &mdash; (`String`) The ID of the
+ *           request. Use this ID to track when the change has completed
+ *           across all Amazon Route 53 DNS servers.
+ *         * `Status` &mdash; **required** &mdash; (`String`) The current
+ *           state of the request. PENDING indicates that this request has
+ *           not yet been applied to all Amazon Route 53 DNS servers. Valid
+ *           Values: PENDING | INSYNC
+ *         * `SubmittedAt` &mdash; **required** &mdash; (`Date`) The date
+ *           and time the change was submitted, in the format
+ *           YYYY-MM-DDThh:mm:ssZ, as specified in the ISO 8601 standard
+ *           (for example, 2009-11-19T19:37:58Z). The Z after the time
+ *           indicates that the time is listed in Coordinated Universal
+ *           Time (UTC), which is synonymous with Greenwich Mean Time in
+ *           this context.
+ *         * `Comment` &mdash; (`String`) A complex type that describes
  *           change information about changes made to your hosted zone.
  *           This element contains an ID that you use when performing a
  *           GetChange action to get detailed information about the change.
@@ -388,37 +399,38 @@ AWS.Route53 = inherit({})
  * @!method getChange(params, callback)
  *   Calls the GetChange API operation.
  *   @param params [Object]
- *     * +Id+ - (*required*, <tt>String</tt>) The ID of the change batch
- *       request. The value that you specify here is the value that
- *       ChangeResourceRecordSets returned in the Id element when you
- *       submitted the request.
+ *     * `Id` &mdash; **required** &mdash; (`String`) The ID of the
+ *       change batch request. The value that you specify here is the
+ *       value that ChangeResourceRecordSets returned in the Id element
+ *       when you submitted the request.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +ChangeInfo+ - (<tt>Object</tt>) A complex type that
- *         contains information about the specified change batch, including
- *         the change batch ID, the status of the change, and the date and
- *         time of the request.
- *         * +Id+ - (<tt>String</tt>) The ID of the request.
- *           Use this ID to track when the change has completed across all
- *           Amazon Route 53 DNS servers.
- *         * +Status+ - (<tt>String</tt>) The current state of
- *           the request. PENDING indicates that this request has not yet
- *           been applied to all Amazon Route 53 DNS servers. Valid Values:
- *           PENDING | INSYNC
- *         * +SubmittedAt+ - (<tt>Date</tt>) The date and time
- *           the change was submitted, in the format YYYY-MM-DDThh:mm:ssZ,
- *           as specified in the ISO 8601 standard (for example,
- *           2009-11-19T19:37:58Z). The Z after the time indicates that the
- *           time is listed in Coordinated Universal Time (UTC), which is
- *           synonymous with Greenwich Mean Time in this context.
- *         * +Comment+ - (<tt>String</tt>) A complex type that describes
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `ChangeInfo` &mdash; **required** &mdash; (`Object`) A complex
+ *         type that contains information about the specified change batch,
+ *         including the change batch ID, the status of the change, and the
+ *         date and time of the request.
+ *         * `Id` &mdash; **required** &mdash; (`String`) The ID of the
+ *           request. Use this ID to track when the change has completed
+ *           across all Amazon Route 53 DNS servers.
+ *         * `Status` &mdash; **required** &mdash; (`String`) The current
+ *           state of the request. PENDING indicates that this request has
+ *           not yet been applied to all Amazon Route 53 DNS servers. Valid
+ *           Values: PENDING | INSYNC
+ *         * `SubmittedAt` &mdash; **required** &mdash; (`Date`) The date
+ *           and time the change was submitted, in the format
+ *           YYYY-MM-DDThh:mm:ssZ, as specified in the ISO 8601 standard
+ *           (for example, 2009-11-19T19:37:58Z). The Z after the time
+ *           indicates that the time is listed in Coordinated Universal
+ *           Time (UTC), which is synonymous with Greenwich Mean Time in
+ *           this context.
+ *         * `Comment` &mdash; (`String`) A complex type that describes
  *           change information about changes made to your hosted zone.
  *           This element contains an ID that you use when performing a
  *           GetChange action to get detailed information about the change.
@@ -428,38 +440,40 @@ AWS.Route53 = inherit({})
  * @!method getHealthCheck(params, callback)
  *   Calls the GetHealthCheck API operation.
  *   @param params [Object]
- *     * +HealthCheckId+ - (*required*, <tt>String</tt>) The ID of the
- *       health check to retrieve.
+ *     * `HealthCheckId` &mdash; **required** &mdash; (`String`) The ID
+ *       of the health check to retrieve.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +HealthCheck+ - (<tt>Object</tt>) A complex type
- *         that contains the information about the specified health check.
- *         * +Id+ - (<tt>String</tt>) The ID of the specified
- *           health check.
- *         * +CallerReference+ - (<tt>String</tt>) A unique
- *           string that identifies the request to create the health check.
- *         * +HealthCheckConfig+ - (<tt>Object</tt>) A complex
- *           type that contains the health check configuration.
- *           * +IPAddress+ - (<tt>String</tt>) IP Address of
- *             the instance being checked.
- *           * +Port+ - (<tt>Integer</tt>) Port on which connection will be
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `HealthCheck` &mdash; **required** &mdash; (`Object`) A complex
+ *         type that contains the information about the specified health
+ *         check.
+ *         * `Id` &mdash; **required** &mdash; (`String`) The ID of the
+ *           specified health check.
+ *         * `CallerReference` &mdash; **required** &mdash; (`String`) A
+ *           unique string that identifies the request to create the health
+ *           check.
+ *         * `HealthCheckConfig` &mdash; **required** &mdash; (`Object`) A
+ *           complex type that contains the health check configuration.
+ *           * `IPAddress` &mdash; **required** &mdash; (`String`) IP
+ *             Address of the instance being checked.
+ *           * `Port` &mdash; (`Integer`) Port on which connection will be
  *             opened to the instance to health check. For HTTP this
  *             defaults to 80 if the port is not specified.
- *           * +Type+ - (<tt>String</tt>) The type of health
- *             check to be performed. Currently supported protocols are TCP
- *             and HTTP.
- *           * +ResourcePath+ - (<tt>String</tt>) Path to ping on the
+ *           * `Type` &mdash; **required** &mdash; (`String`) The type of
+ *             health check to be performed. Currently supported protocols
+ *             are TCP and HTTP.
+ *           * `ResourcePath` &mdash; (`String`) Path to ping on the
  *             instance to check the health. Required only for HTTP health
  *             checks, HTTP request is issued to the instance on the given
  *             port and path.
- *           * +FullyQualifiedDomainName+ - (<tt>String</tt>) Fully
+ *           * `FullyQualifiedDomainName` &mdash; (`String`) Fully
  *             qualified domain name of the instance to be health checked.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -467,24 +481,25 @@ AWS.Route53 = inherit({})
  * @!method getHostedZone(params, callback)
  *   Calls the GetHostedZone API operation.
  *   @param params [Object]
- *     * +Id+ - (*required*, <tt>String</tt>) The ID of the hosted zone
- *       for which you want to get a list of the name servers in the
- *       delegation set.
+ *     * `Id` &mdash; **required** &mdash; (`String`) The ID of the
+ *       hosted zone for which you want to get a list of the name servers
+ *       in the delegation set.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +HostedZone+ - (<tt>Object</tt>) A complex type that
- *         contains the information about the specified hosted zone.
- *         * +Id+ - (<tt>String</tt>) The ID of the specified
- *           hosted zone.
- *         * +Name+ - (<tt>String</tt>) The name of the domain.
- *           This must be a fully-specified domain, for example,
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `HostedZone` &mdash; **required** &mdash; (`Object`) A complex
+ *         type that contains the information about the specified hosted
+ *         zone.
+ *         * `Id` &mdash; **required** &mdash; (`String`) The ID of the
+ *           specified hosted zone.
+ *         * `Name` &mdash; **required** &mdash; (`String`) The name of the
+ *           domain. This must be a fully-specified domain, for example,
  *           www.example.com. The trailing dot is optional; Route 53
  *           assumes that the domain name is fully qualified. This means
  *           that Route 53 treats www.example.com (without a trailing dot)
@@ -493,88 +508,91 @@ AWS.Route53 = inherit({})
  *           should ask your registrar to change the authoritative name
  *           servers for your domain to the set of NameServers elements
  *           returned in DelegationSet.
- *         * +CallerReference+ - (<tt>String</tt>) A unique
- *           string that identifies the request to create the hosted zone.
- *         * +Config+ - (<tt>Object</tt>) A complex type that contains the
+ *         * `CallerReference` &mdash; **required** &mdash; (`String`) A
+ *           unique string that identifies the request to create the hosted
+ *           zone.
+ *         * `Config` &mdash; (`Object`) A complex type that contains the
  *           Comment element.
- *           * +Comment+ - (<tt>String</tt>) An optional comment about your
+ *           * `Comment` &mdash; (`String`) An optional comment about your
  *             hosted zone. If you don't want to specify a comment, you can
  *             omit the HostedZoneConfig and Comment elements from the XML
  *             document.
- *         * +ResourceRecordSetCount+ - (<tt>Integer</tt>) Total number of
+ *         * `ResourceRecordSetCount` &mdash; (`Integer`) Total number of
  *           resource record sets in the hosted zone.
- *       * +DelegationSet+ - (<tt>Object</tt>) A complex type
- *         that contains information about the name servers for the
- *         specified hosted zone.
- *         * +NameServers+ - (<tt>Array<String></tt>) A complex
- *           type that contains the authoritative name servers for the
- *           hosted zone. Use the method provided by your domain registrar
- *           to add an NS record to your domain for each NameServer that is
- *           assigned to your hosted zone.
+ *       * `DelegationSet` &mdash; **required** &mdash; (`Object`) A
+ *         complex type that contains information about the name servers
+ *         for the specified hosted zone.
+ *         * `NameServers` &mdash; **required** &mdash; (`Array<String>`) A
+ *           complex type that contains the authoritative name servers for
+ *           the hosted zone. Use the method provided by your domain
+ *           registrar to add an NS record to your domain for each
+ *           NameServer that is assigned to your hosted zone.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method listHealthChecks(params, callback)
  *   Calls the ListHealthChecks API operation.
  *   @param params [Object]
- *     * +Marker+ - (<tt>String</tt>) If the request returned more than
+ *     * `Marker` &mdash; (`String`) If the request returned more than
  *       one page of results, submit another request and specify the
  *       value of NextMarker from the last response in the marker
  *       parameter to get the next page of results.
- *     * +MaxItems+ - (<tt>String</tt>) Specify the maximum number of
+ *     * `MaxItems` &mdash; (`String`) Specify the maximum number of
  *       health checks to return per page of results.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +HealthChecks+ - (<tt>Array<Object></tt>) A complex
- *         type that contains information about the health checks
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `HealthChecks` &mdash; **required** &mdash; (`Array<Object>`) A
+ *         complex type that contains information about the health checks
  *         associated with the current AWS account.
- *         * +Id+ - (<tt>String</tt>) The ID of the specified
- *           health check.
- *         * +CallerReference+ - (<tt>String</tt>) A unique
- *           string that identifies the request to create the health check.
- *         * +HealthCheckConfig+ - (<tt>Object</tt>) A complex
- *           type that contains the health check configuration.
- *           * +IPAddress+ - (<tt>String</tt>) IP Address of
- *             the instance being checked.
- *           * +Port+ - (<tt>Integer</tt>) Port on which connection will be
+ *         * `Id` &mdash; **required** &mdash; (`String`) The ID of the
+ *           specified health check.
+ *         * `CallerReference` &mdash; **required** &mdash; (`String`) A
+ *           unique string that identifies the request to create the health
+ *           check.
+ *         * `HealthCheckConfig` &mdash; **required** &mdash; (`Object`) A
+ *           complex type that contains the health check configuration.
+ *           * `IPAddress` &mdash; **required** &mdash; (`String`) IP
+ *             Address of the instance being checked.
+ *           * `Port` &mdash; (`Integer`) Port on which connection will be
  *             opened to the instance to health check. For HTTP this
  *             defaults to 80 if the port is not specified.
- *           * +Type+ - (<tt>String</tt>) The type of health
- *             check to be performed. Currently supported protocols are TCP
- *             and HTTP.
- *           * +ResourcePath+ - (<tt>String</tt>) Path to ping on the
+ *           * `Type` &mdash; **required** &mdash; (`String`) The type of
+ *             health check to be performed. Currently supported protocols
+ *             are TCP and HTTP.
+ *           * `ResourcePath` &mdash; (`String`) Path to ping on the
  *             instance to check the health. Required only for HTTP health
  *             checks, HTTP request is issued to the instance on the given
  *             port and path.
- *           * +FullyQualifiedDomainName+ - (<tt>String</tt>) Fully
+ *           * `FullyQualifiedDomainName` &mdash; (`String`) Fully
  *             qualified domain name of the instance to be health checked.
- *       * +Marker+ - (<tt>String</tt>) If the request returned
- *         more than one page of results, submit another request and
- *         specify the value of NextMarker from the last response in the
- *         marker parameter to get the next page of results.
- *       * +IsTruncated+ - (<tt>Boolean</tt>) A flag indicating
- *         whether there are more health checks to be listed. If your
- *         results were truncated, you can make a follow-up request for the
- *         next page of results by using the Marker element. Valid Values:
- *         true | false
- *       * +NextMarker+ - (<tt>String</tt>) Indicates where to continue
+ *       * `Marker` &mdash; **required** &mdash; (`String`) If the request
+ *         returned more than one page of results, submit another request
+ *         and specify the value of NextMarker from the last response in
+ *         the marker parameter to get the next page of results.
+ *       * `IsTruncated` &mdash; **required** &mdash; (`Boolean`) A flag
+ *         indicating whether there are more health checks to be listed. If
+ *         your results were truncated, you can make a follow-up request
+ *         for the next page of results by using the Marker element. Valid
+ *         Values: true | false
+ *       * `NextMarker` &mdash; (`String`) Indicates where to continue
  *         listing health checks. If ListHealthChecksResponse$IsTruncated
  *         is true, make another request to ListHealthChecks and include
  *         the value of the NextMarker element in the Marker element to get
  *         the next page of results.
- *       * +MaxItems+ - (<tt>String</tt>) The maximum number of
- *         health checks to be included in the response body. If the number
- *         of health checks associated with this AWS account exceeds
- *         MaxItems, the value of ListHealthChecksResponse$IsTruncated in
- *         the response is true. Call ListHealthChecks again and specify
- *         the value of ListHealthChecksResponse$NextMarker in the
+ *       * `MaxItems` &mdash; **required** &mdash; (`String`) The maximum
+ *         number of health checks to be included in the response body. If
+ *         the number of health checks associated with this AWS account
+ *         exceeds MaxItems, the value of
+ *         ListHealthChecksResponse$IsTruncated in the response is true.
+ *         Call ListHealthChecks again and specify the value of
+ *         ListHealthChecksResponse$NextMarker in the
  *         ListHostedZonesRequest$Marker element to get the next page of
  *         results.
  *   @return [AWS.Request] a handle to the operation request for
@@ -583,28 +601,28 @@ AWS.Route53 = inherit({})
  * @!method listHostedZones(params, callback)
  *   Calls the ListHostedZones API operation.
  *   @param params [Object]
- *     * +Marker+ - (<tt>String</tt>) If the request returned more than
+ *     * `Marker` &mdash; (`String`) If the request returned more than
  *       one page of results, submit another request and specify the
  *       value of NextMarker from the last response in the marker
  *       parameter to get the next page of results.
- *     * +MaxItems+ - (<tt>String</tt>) Specify the maximum number of
+ *     * `MaxItems` &mdash; (`String`) Specify the maximum number of
  *       hosted zones to return per page of results.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +HostedZones+ - (<tt>Array<Object></tt>) A complex
- *         type that contains information about the hosted zones associated
- *         with the current AWS account.
- *         * +Id+ - (<tt>String</tt>) The ID of the specified
- *           hosted zone.
- *         * +Name+ - (<tt>String</tt>) The name of the domain.
- *           This must be a fully-specified domain, for example,
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `HostedZones` &mdash; **required** &mdash; (`Array<Object>`) A
+ *         complex type that contains information about the hosted zones
+ *         associated with the current AWS account.
+ *         * `Id` &mdash; **required** &mdash; (`String`) The ID of the
+ *           specified hosted zone.
+ *         * `Name` &mdash; **required** &mdash; (`String`) The name of the
+ *           domain. This must be a fully-specified domain, for example,
  *           www.example.com. The trailing dot is optional; Route 53
  *           assumes that the domain name is fully qualified. This means
  *           that Route 53 treats www.example.com (without a trailing dot)
@@ -613,36 +631,38 @@ AWS.Route53 = inherit({})
  *           should ask your registrar to change the authoritative name
  *           servers for your domain to the set of NameServers elements
  *           returned in DelegationSet.
- *         * +CallerReference+ - (<tt>String</tt>) A unique
- *           string that identifies the request to create the hosted zone.
- *         * +Config+ - (<tt>Object</tt>) A complex type that contains the
+ *         * `CallerReference` &mdash; **required** &mdash; (`String`) A
+ *           unique string that identifies the request to create the hosted
+ *           zone.
+ *         * `Config` &mdash; (`Object`) A complex type that contains the
  *           Comment element.
- *           * +Comment+ - (<tt>String</tt>) An optional comment about your
+ *           * `Comment` &mdash; (`String`) An optional comment about your
  *             hosted zone. If you don't want to specify a comment, you can
  *             omit the HostedZoneConfig and Comment elements from the XML
  *             document.
- *         * +ResourceRecordSetCount+ - (<tt>Integer</tt>) Total number of
+ *         * `ResourceRecordSetCount` &mdash; (`Integer`) Total number of
  *           resource record sets in the hosted zone.
- *       * +Marker+ - (<tt>String</tt>) If the request returned
- *         more than one page of results, submit another request and
- *         specify the value of NextMarker from the last response in the
- *         marker parameter to get the next page of results.
- *       * +IsTruncated+ - (<tt>Boolean</tt>) A flag indicating
- *         whether there are more hosted zones to be listed. If your
- *         results were truncated, you can make a follow-up request for the
- *         next page of results by using the Marker element. Valid Values:
- *         true | false
- *       * +NextMarker+ - (<tt>String</tt>) Indicates where to continue
+ *       * `Marker` &mdash; **required** &mdash; (`String`) If the request
+ *         returned more than one page of results, submit another request
+ *         and specify the value of NextMarker from the last response in
+ *         the marker parameter to get the next page of results.
+ *       * `IsTruncated` &mdash; **required** &mdash; (`Boolean`) A flag
+ *         indicating whether there are more hosted zones to be listed. If
+ *         your results were truncated, you can make a follow-up request
+ *         for the next page of results by using the Marker element. Valid
+ *         Values: true | false
+ *       * `NextMarker` &mdash; (`String`) Indicates where to continue
  *         listing hosted zones. If ListHostedZonesResponse$IsTruncated is
  *         true, make another request to ListHostedZones and include the
  *         value of the NextMarker element in the Marker element to get the
  *         next page of results.
- *       * +MaxItems+ - (<tt>String</tt>) The maximum number of
- *         hosted zones to be included in the response body. If the number
- *         of hosted zones associated with this AWS account exceeds
- *         MaxItems, the value of ListHostedZonesResponse$IsTruncated in
- *         the response is true. Call ListHostedZones again and specify the
- *         value of ListHostedZonesResponse$NextMarker in the
+ *       * `MaxItems` &mdash; **required** &mdash; (`String`) The maximum
+ *         number of hosted zones to be included in the response body. If
+ *         the number of hosted zones associated with this AWS account
+ *         exceeds MaxItems, the value of
+ *         ListHostedZonesResponse$IsTruncated in the response is true.
+ *         Call ListHostedZones again and specify the value of
+ *         ListHostedZonesResponse$NextMarker in the
  *         ListHostedZonesRequest$Marker element to get the next page of
  *         results.
  *   @return [AWS.Request] a handle to the operation request for
@@ -651,57 +671,57 @@ AWS.Route53 = inherit({})
  * @!method listResourceRecordSets(params, callback)
  *   Calls the ListResourceRecordSets API operation.
  *   @param params [Object]
- *     * +HostedZoneId+ - (*required*, <tt>String</tt>) The ID of the
- *       hosted zone that contains the resource record sets that you want
- *       to get.
- *     * +StartRecordName+ - (<tt>String</tt>) The first name in the
+ *     * `HostedZoneId` &mdash; **required** &mdash; (`String`) The ID of
+ *       the hosted zone that contains the resource record sets that you
+ *       want to get.
+ *     * `StartRecordName` &mdash; (`String`) The first name in the
  *       lexicographic ordering of domain names that you want the
  *       ListResourceRecordSets request to list.
- *     * +StartRecordType+ - (<tt>String</tt>) The DNS type at which to
+ *     * `StartRecordType` &mdash; (`String`) The DNS type at which to
  *       begin the listing of resource record sets. Valid values: A |
  *       AAAA | CNAME | MX | NS | PTR | SOA | SPF | SRV | TXT Values for
  *       Weighted Resource Record Sets: A | AAAA | CNAME | TXT Values for
  *       Regional Resource Record Sets: A | AAAA | CNAME | TXT Values for
  *       Alias Resource Record Sets: A | AAAA Constraint: Specifying type
  *       without specifying name returns an InvalidInput error.
- *     * +StartRecordIdentifier+ - (<tt>String</tt>) Weighted resource
+ *     * `StartRecordIdentifier` &mdash; (`String`) Weighted resource
  *       record sets only: If results were truncated for a given DNS name
  *       and type, specify the value of
  *       ListResourceRecordSetsResponse$NextRecordIdentifier from the
  *       previous response to get the next resource record set that has
  *       the current DNS name and type.
- *     * +MaxItems+ - (<tt>String</tt>) The maximum number of records you
+ *     * `MaxItems` &mdash; (`String`) The maximum number of records you
  *       want in the response body.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +ResourceRecordSets+ - (<tt>Array<Object></tt>) A
- *         complex type that contains information about the resource record
- *         sets that are returned by the request.
- *         * +Name+ - (<tt>String</tt>) The domain name of the
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `ResourceRecordSets` &mdash; **required** &mdash;
+ *         (`Array<Object>`) A complex type that contains information about
+ *         the resource record sets that are returned by the request.
+ *         * `Name` &mdash; **required** &mdash; (`String`) The domain name
+ *           of the current resource record set.
+ *         * `Type` &mdash; **required** &mdash; (`String`) The type of the
  *           current resource record set.
- *         * +Type+ - (<tt>String</tt>) The type of the current
- *           resource record set.
- *         * +SetIdentifier+ - (<tt>String</tt>) Weighted, Regional, and
+ *         * `SetIdentifier` &mdash; (`String`) Weighted, Regional, and
  *           Failover resource record sets only: An identifier that
  *           differentiates among multiple resource record sets that have
  *           the same combination of DNS name and type.
- *         * +Weight+ - (<tt>Integer</tt>) Weighted resource record sets
+ *         * `Weight` &mdash; (`Integer`) Weighted resource record sets
  *           only: Among resource record sets that have the same
  *           combination of DNS name and type, a value that determines what
  *           portion of traffic for the current resource record set is
  *           routed to the associated location.
- *         * +Region+ - (<tt>String</tt>) Regional resource record sets
+ *         * `Region` &mdash; (`String`) Regional resource record sets
  *           only: Among resource record sets that have the same
  *           combination of DNS name and type, a value that specifies the
  *           AWS region for the current resource record set.
- *         * +Failover+ - (<tt>String</tt>) Failover resource record sets
+ *         * `Failover` &mdash; (`String`) Failover resource record sets
  *           only: Among resource record sets that have the same
  *           combination of DNS name and type, a value that indicates
  *           whether the current resource record set is a primary or
@@ -719,57 +739,58 @@ AWS.Route53 = inherit({})
  *           secondary is passing a health check or has no associated
  *           health check, or (2) there is no primary resource record set.
  *           Valid values: PRIMARY | SECONDARY
- *         * +TTL+ - (<tt>Integer</tt>) The cache time to live for the
+ *         * `TTL` &mdash; (`Integer`) The cache time to live for the
  *           current resource record set.
- *         * +ResourceRecords+ - (<tt>Array<Object></tt>) A complex type
+ *         * `ResourceRecords` &mdash; (`Array<Object>`) A complex type
  *           that contains the resource records for the current resource
  *           record set.
- *           * +Value+ - (<tt>String</tt>) The value of the
- *             Value element for the current resource record set.
- *         * +AliasTarget+ - (<tt>Object</tt>) Alias resource record sets
+ *           * `Value` &mdash; **required** &mdash; (`String`) The value of
+ *             the Value element for the current resource record set.
+ *         * `AliasTarget` &mdash; (`Object`) Alias resource record sets
  *           only: Information about the AWS resource to which you are
  *           redirecting traffic.
- *           * +HostedZoneId+ - (<tt>String</tt>) Alias
+ *           * `HostedZoneId` &mdash; **required** &mdash; (`String`) Alias
  *             resource record sets only: The value of the hosted zone ID
  *             for the AWS resource. For more information and an example,
  *             see Creating Alias Resource Record Sets in the Amazon Route
  *             53 Developer Guide.
- *           * +DNSName+ - (<tt>String</tt>) Alias resource
- *             record sets only: The external DNS name associated with the
- *             AWS Resource. For more information and an example, see
- *             Creating Alias Resource Record Sets in the Amazon Route 53
- *             Developer Guide.
- *           * +EvaluateTargetHealth+ - (<tt>Boolean</tt>)
- *             Alias resource record sets only: A boolean value that
- *             indicates whether this Resource Record Set should respect
- *             the health status of any health checks associated with the
- *             ALIAS target record which it is linked to. For more
+ *           * `DNSName` &mdash; **required** &mdash; (`String`) Alias
+ *             resource record sets only: The external DNS name associated
+ *             with the AWS Resource. For more information and an example,
+ *             see Creating Alias Resource Record Sets in the Amazon Route
+ *             53 Developer Guide.
+ *           * `EvaluateTargetHealth` &mdash; **required** &mdash;
+ *             (`Boolean`) Alias resource record sets only: A boolean value
+ *             that indicates whether this Resource Record Set should
+ *             respect the health status of any health checks associated
+ *             with the ALIAS target record which it is linked to. For more
  *             information and an example, see Creating Alias Resource
  *             Record Sets in the Amazon Route 53 Developer Guide.
- *         * +HealthCheckId+ - (<tt>String</tt>) Health Check resource
+ *         * `HealthCheckId` &mdash; (`String`) Health Check resource
  *           record sets only, not required for alias resource record sets:
  *           An identifier that is used to identify health check associated
  *           with the resource record set.
- *       * +IsTruncated+ - (<tt>Boolean</tt>) A flag that
- *         indicates whether there are more resource record sets to be
+ *       * `IsTruncated` &mdash; **required** &mdash; (`Boolean`) A flag
+ *         that indicates whether there are more resource record sets to be
  *         listed. If your results were truncated, you can make a follow-up
  *         request for the next page of results by using the
  *         ListResourceRecordSetsResponse$NextRecordName element. Valid
  *         Values: true | false
- *       * +NextRecordName+ - (<tt>String</tt>) If the results were
+ *       * `NextRecordName` &mdash; (`String`) If the results were
  *         truncated, the name of the next record in the list. This element
  *         is present only if ListResourceRecordSetsResponse$IsTruncated is
  *         true.
- *       * +NextRecordType+ - (<tt>String</tt>) If the results were
+ *       * `NextRecordType` &mdash; (`String`) If the results were
  *         truncated, the type of the next record in the list. This element
  *         is present only if ListResourceRecordSetsResponse$IsTruncated is
  *         true.
- *       * +NextRecordIdentifier+ - (<tt>String</tt>) Weighted resource
+ *       * `NextRecordIdentifier` &mdash; (`String`) Weighted resource
  *         record sets only: If results were truncated for a given DNS name
  *         and type, the value of SetIdentifier for the next resource
  *         record set that has the current DNS name and type.
- *       * +MaxItems+ - (<tt>String</tt>) The maximum number of
- *         records you requested. The maximum value of MaxItems is 100.
+ *       * `MaxItems` &mdash; **required** &mdash; (`String`) The maximum
+ *         number of records you requested. The maximum value of MaxItems
+ *         is 100.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -778,8 +799,8 @@ AWS.Route53 = inherit({})
  *   Constructs a service client object.  This client has one method for
  *   each API operation.
  *   @option options [String] endpoint The endpoint URI to send requests
- *     to.  The default endpoint is built from the configured +region+.
- *     The endpoint should be a string like <tt>'https://s3.amazonaws.com'</tt>.
+ *     to.  The default endpoint is built from the configured `region`.
+ *     The endpoint should be a string like `'https://s3.amazonaws.com'`.
  *   @option (see AWS.Config.constructor)
  *
  * @!attribute endpoint

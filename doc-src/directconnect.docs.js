@@ -17,20 +17,22 @@
 AWS = {};
 
 /**
- * Constructs a service interface and a low-level {Client}.  Use the +client+
+ * Constructs a service interface and a low-level {Client}.  Use the `client`
  * property to make API calls.  Each API operation is exposed as a function on
- * the +client+.
+ * the `client`.
  *
- * === Sending a Request Using DirectConnect
+ * ### Sending a Request Using DirectConnect
  *
- *   svc = new AWS.DirectConnect();
- *   svc.client.OPERATION_NAME(params, function (err, data) {
- *     if (err) {
- *       console.log(err); // an error occurred
- *     } else {
- *       console.log(data); // successful response
- *     }
- *   });
+ * ```js
+ * svc = new AWS.DirectConnect();
+ * svc.client.OPERATION_NAME(params, function (err, data) {
+ *   if (err) {
+ *     console.log(err); // an error occurred
+ *   } else {
+ *     console.log(data); // successful response
+ *   }
+ * });
+ * ```
  *
  * @!method constructor(options)
  *   Constructs a service interface.  The returned service will have a {client}
@@ -53,65 +55,65 @@ AWS.DirectConnect = inherit({})
  * @!method createConnection(params, callback)
  *   Calls the CreateConnection API operation.
  *   @param params [Object]
- *     * +offeringId+ - (*required*, <tt>String</tt>)
- *     * +connectionName+ - (*required*, <tt>String</tt>)
+ *     * `offeringId` &mdash; **required** &mdash; (`String`)
+ *     * `connectionName` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +connectionId+ - (<tt>String</tt>)
- *       * +connectionName+ - (<tt>String</tt>)
- *       * +connectionState+ - (<tt>String</tt>)
- *       * +region+ - (<tt>String</tt>)
- *       * +location+ - (<tt>String</tt>)
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `connectionId` &mdash; (`String`)
+ *       * `connectionName` &mdash; (`String`)
+ *       * `connectionState` &mdash; (`String`)
+ *       * `region` &mdash; (`String`)
+ *       * `location` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method createPrivateVirtualInterface(params, callback)
  *   Calls the CreatePrivateVirtualInterface API operation.
  *   @param params [Object]
- *     * +connectionId+ - (<tt>String</tt>)
- *     * +newPrivateVirtualInterface+ - (<tt>Object</tt>) Detailed
+ *     * `connectionId` &mdash; (`String`)
+ *     * `newPrivateVirtualInterface` &mdash; (`Object`) Detailed
  *       information of the private virtual interface to be created.
  *       Default: None
- *       * +virtualInterfaceName+ - (<tt>String</tt>)
- *       * +vlan+ - (<tt>Integer</tt>)
- *       * +asn+ - (<tt>Integer</tt>)
- *       * +authKey+ - (<tt>String</tt>)
- *       * +amazonAddress+ - (<tt>String</tt>)
- *       * +customerAddress+ - (<tt>String</tt>)
- *       * +virtualGatewayId+ - (<tt>String</tt>)
+ *       * `virtualInterfaceName` &mdash; (`String`)
+ *       * `vlan` &mdash; (`Integer`)
+ *       * `asn` &mdash; (`Integer`)
+ *       * `authKey` &mdash; (`String`)
+ *       * `amazonAddress` &mdash; (`String`)
+ *       * `customerAddress` &mdash; (`String`)
+ *       * `virtualGatewayId` &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +virtualInterfaceId+ - (<tt>String</tt>)
- *       * +location+ - (<tt>String</tt>)
- *       * +connectionId+ - (<tt>String</tt>)
- *       * +virtualInterfaceType+ - (<tt>String</tt>)
- *       * +virtualInterfaceName+ - (<tt>String</tt>)
- *       * +vlan+ - (<tt>Integer</tt>)
- *       * +asn+ - (<tt>Integer</tt>)
- *       * +authKey+ - (<tt>String</tt>)
- *       * +amazonAddress+ - (<tt>String</tt>)
- *       * +customerAddress+ - (<tt>String</tt>) IP address assigned to the
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `virtualInterfaceId` &mdash; (`String`)
+ *       * `location` &mdash; (`String`)
+ *       * `connectionId` &mdash; (`String`)
+ *       * `virtualInterfaceType` &mdash; (`String`)
+ *       * `virtualInterfaceName` &mdash; (`String`)
+ *       * `vlan` &mdash; (`Integer`)
+ *       * `asn` &mdash; (`Integer`)
+ *       * `authKey` &mdash; (`String`)
+ *       * `amazonAddress` &mdash; (`String`)
+ *       * `customerAddress` &mdash; (`String`) IP address assigned to the
  *         customer interface. Example: 192.168.1.2
- *       * +virtualInterfaceState+ - (<tt>String</tt>)
- *       * +customerRouterConfig+ - (<tt>String</tt>) Information for
+ *       * `virtualInterfaceState` &mdash; (`String`)
+ *       * `customerRouterConfig` &mdash; (`String`) Information for
  *         generating the customer router configuration.
- *       * +virtualGatewayId+ - (<tt>String</tt>)
- *       * +routeFilterPrefixes+ - (<tt>Array<Object></tt>)
- *         * +cidr+ - (<tt>String</tt>) CIDR notation for the advertised
+ *       * `virtualGatewayId` &mdash; (`String`)
+ *       * `routeFilterPrefixes` &mdash; (`Array<Object>`)
+ *         * `cidr` &mdash; (`String`) CIDR notation for the advertised
  *           route. Multiple routes are separated by commas Example:
  *           10.10.10.0/24,10.10.11.0/24
  *   @return [AWS.Request] a handle to the operation request for
@@ -120,18 +122,18 @@ AWS.DirectConnect = inherit({})
  * @!method createPublicVirtualInterface(params, callback)
  *   Calls the CreatePublicVirtualInterface API operation.
  *   @param params [Object]
- *     * +connectionId+ - (<tt>String</tt>)
- *     * +newPublicVirtualInterface+ - (<tt>Object</tt>) Detailed
+ *     * `connectionId` &mdash; (`String`)
+ *     * `newPublicVirtualInterface` &mdash; (`Object`) Detailed
  *       information of the public virtual interface to be created.
  *       Default: None
- *       * +virtualInterfaceName+ - (<tt>String</tt>)
- *       * +vlan+ - (<tt>Integer</tt>)
- *       * +asn+ - (<tt>Integer</tt>)
- *       * +authKey+ - (<tt>String</tt>)
- *       * +amazonAddress+ - (<tt>String</tt>)
- *       * +customerAddress+ - (<tt>String</tt>)
- *       * +routeFilterPrefixes+ - (<tt>Array<Object></tt>)
- *         * +cidr+ - (<tt>String</tt>) CIDR notation for the advertised
+ *       * `virtualInterfaceName` &mdash; (`String`)
+ *       * `vlan` &mdash; (`Integer`)
+ *       * `asn` &mdash; (`Integer`)
+ *       * `authKey` &mdash; (`String`)
+ *       * `amazonAddress` &mdash; (`String`)
+ *       * `customerAddress` &mdash; (`String`)
+ *       * `routeFilterPrefixes` &mdash; (`Array<Object>`)
+ *         * `cidr` &mdash; (`String`) CIDR notation for the advertised
  *           route. Multiple routes are separated by commas Example:
  *           10.10.10.0/24,10.10.11.0/24
  *   @callback callback function(err, data)
@@ -139,27 +141,27 @@ AWS.DirectConnect = inherit({})
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +virtualInterfaceId+ - (<tt>String</tt>)
- *       * +location+ - (<tt>String</tt>)
- *       * +connectionId+ - (<tt>String</tt>)
- *       * +virtualInterfaceType+ - (<tt>String</tt>)
- *       * +virtualInterfaceName+ - (<tt>String</tt>)
- *       * +vlan+ - (<tt>Integer</tt>)
- *       * +asn+ - (<tt>Integer</tt>)
- *       * +authKey+ - (<tt>String</tt>)
- *       * +amazonAddress+ - (<tt>String</tt>)
- *       * +customerAddress+ - (<tt>String</tt>) IP address assigned to the
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `virtualInterfaceId` &mdash; (`String`)
+ *       * `location` &mdash; (`String`)
+ *       * `connectionId` &mdash; (`String`)
+ *       * `virtualInterfaceType` &mdash; (`String`)
+ *       * `virtualInterfaceName` &mdash; (`String`)
+ *       * `vlan` &mdash; (`Integer`)
+ *       * `asn` &mdash; (`Integer`)
+ *       * `authKey` &mdash; (`String`)
+ *       * `amazonAddress` &mdash; (`String`)
+ *       * `customerAddress` &mdash; (`String`) IP address assigned to the
  *         customer interface. Example: 192.168.1.2
- *       * +virtualInterfaceState+ - (<tt>String</tt>)
- *       * +customerRouterConfig+ - (<tt>String</tt>) Information for
+ *       * `virtualInterfaceState` &mdash; (`String`)
+ *       * `customerRouterConfig` &mdash; (`String`) Information for
  *         generating the customer router configuration.
- *       * +virtualGatewayId+ - (<tt>String</tt>)
- *       * +routeFilterPrefixes+ - (<tt>Array<Object></tt>)
- *         * +cidr+ - (<tt>String</tt>) CIDR notation for the advertised
+ *       * `virtualGatewayId` &mdash; (`String`)
+ *       * `routeFilterPrefixes` &mdash; (`Array<Object>`)
+ *         * `cidr` &mdash; (`String`) CIDR notation for the advertised
  *           route. Multiple routes are separated by commas Example:
  *           10.10.10.0/24,10.10.11.0/24
  *   @return [AWS.Request] a handle to the operation request for
@@ -168,83 +170,83 @@ AWS.DirectConnect = inherit({})
  * @!method deleteConnection(params, callback)
  *   Calls the DeleteConnection API operation.
  *   @param params [Object]
- *     * +connectionId+ - (*required*, <tt>String</tt>)
+ *     * `connectionId` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +connectionId+ - (<tt>String</tt>)
- *       * +connectionName+ - (<tt>String</tt>)
- *       * +connectionState+ - (<tt>String</tt>)
- *       * +region+ - (<tt>String</tt>)
- *       * +location+ - (<tt>String</tt>)
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `connectionId` &mdash; (`String`)
+ *       * `connectionName` &mdash; (`String`)
+ *       * `connectionState` &mdash; (`String`)
+ *       * `region` &mdash; (`String`)
+ *       * `location` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method deleteVirtualInterface(params, callback)
  *   Calls the DeleteVirtualInterface API operation.
  *   @param params [Object]
- *     * +virtualInterfaceId+ - (<tt>String</tt>)
+ *     * `virtualInterfaceId` &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +virtualInterfaceState+ - (<tt>String</tt>)
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `virtualInterfaceState` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeConnectionDetail(params, callback)
  *   Calls the DescribeConnectionDetail API operation.
  *   @param params [Object]
- *     * +connectionId+ - (*required*, <tt>String</tt>)
+ *     * `connectionId` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +connectionId+ - (<tt>String</tt>)
- *       * +connectionName+ - (<tt>String</tt>)
- *       * +connectionState+ - (<tt>String</tt>)
- *       * +region+ - (<tt>String</tt>)
- *       * +location+ - (<tt>String</tt>)
- *       * +bandwidth+ - (<tt>String</tt>)
- *       * +connectionCosts+ - (<tt>Array<Object></tt>)
- *         * +name+ - (<tt>String</tt>) The name of the cost item. Example:
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `connectionId` &mdash; (`String`)
+ *       * `connectionName` &mdash; (`String`)
+ *       * `connectionState` &mdash; (`String`)
+ *       * `region` &mdash; (`String`)
+ *       * `location` &mdash; (`String`)
+ *       * `bandwidth` &mdash; (`String`)
+ *       * `connectionCosts` &mdash; (`Array<Object>`)
+ *         * `name` &mdash; (`String`) The name of the cost item. Example:
  *           Inbound data transfer
- *         * +unit+ - (<tt>String</tt>) The unit used in cost calculation.
+ *         * `unit` &mdash; (`String`) The unit used in cost calculation.
  *           Example: "Gbps," if the price is calculated based on Gbps.
- *         * +currencyCode+ - (<tt>String</tt>) Currency code based on ISO
+ *         * `currencyCode` &mdash; (`String`) Currency code based on ISO
  *           4217. Example: "USD" for US dollar.
- *         * +amount+ - (<tt>String</tt>) The amount of charge per unit.
+ *         * `amount` &mdash; (`String`) The amount of charge per unit.
  *           Example: 0.01
- *       * +orderSteps+ - (<tt>Array<Object></tt>)
- *         * +number+ - (<tt>String</tt>) Number of an order step. Example:
+ *       * `orderSteps` &mdash; (`Array<Object>`)
+ *         * `number` &mdash; (`String`) Number of an order step. Example:
  *           1
- *         * +name+ - (<tt>String</tt>) Name of the order step. Example:
+ *         * `name` &mdash; (`String`) Name of the order step. Example:
  *           Authorize cross connect
- *         * +description+ - (<tt>String</tt>) More detailed description of
+ *         * `description` &mdash; (`String`) More detailed description of
  *           the order step. Example: "AWS will prepare your connection and
  *           send you an email with an LOA to provide to the colocation
  *           provider"
- *         * +owner+ - (<tt>String</tt>) The entity who owns the completion
+ *         * `owner` &mdash; (`String`) The entity who owns the completion
  *           of the order step. Example: AWS, Customer
- *         * +sla+ - (<tt>Integer</tt>) Time to complete the order step in
+ *         * `sla` &mdash; (`Integer`) Time to complete the order step in
  *           minutes. Example: 60
- *         * +stepState+ - (<tt>String</tt>) State of the connection step.
+ *         * `stepState` &mdash; (`String`) State of the connection step.
  *           Pending: This step is not yet completed. Completed: This step
  *           has been completed
  *   @return [AWS.Request] a handle to the operation request for
@@ -253,65 +255,65 @@ AWS.DirectConnect = inherit({})
  * @!method describeConnections(params, callback)
  *   Calls the DescribeConnections API operation.
  *   @param params [Object]
- *     * +connectionId+ - (<tt>String</tt>)
+ *     * `connectionId` &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +connections+ - (<tt>Array<Object></tt>) A list of connections.
- *         * +connectionId+ - (<tt>String</tt>)
- *         * +connectionName+ - (<tt>String</tt>)
- *         * +connectionState+ - (<tt>String</tt>)
- *         * +region+ - (<tt>String</tt>)
- *         * +location+ - (<tt>String</tt>)
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `connections` &mdash; (`Array<Object>`) A list of connections.
+ *         * `connectionId` &mdash; (`String`)
+ *         * `connectionName` &mdash; (`String`)
+ *         * `connectionState` &mdash; (`String`)
+ *         * `region` &mdash; (`String`)
+ *         * `location` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeOfferingDetail(params, callback)
  *   Calls the DescribeOfferingDetail API operation.
  *   @param params [Object]
- *     * +offeringId+ - (*required*, <tt>String</tt>)
+ *     * `offeringId` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +offeringId+ - (<tt>String</tt>)
- *       * +region+ - (<tt>String</tt>)
- *       * +location+ - (<tt>String</tt>)
- *       * +offeringName+ - (<tt>String</tt>)
- *       * +description+ - (<tt>String</tt>)
- *       * +bandwidth+ - (<tt>String</tt>)
- *       * +connectionCosts+ - (<tt>Array<Object></tt>)
- *         * +name+ - (<tt>String</tt>) The name of the cost item. Example:
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `offeringId` &mdash; (`String`)
+ *       * `region` &mdash; (`String`)
+ *       * `location` &mdash; (`String`)
+ *       * `offeringName` &mdash; (`String`)
+ *       * `description` &mdash; (`String`)
+ *       * `bandwidth` &mdash; (`String`)
+ *       * `connectionCosts` &mdash; (`Array<Object>`)
+ *         * `name` &mdash; (`String`) The name of the cost item. Example:
  *           Inbound data transfer
- *         * +unit+ - (<tt>String</tt>) The unit used in cost calculation.
+ *         * `unit` &mdash; (`String`) The unit used in cost calculation.
  *           Example: "Gbps," if the price is calculated based on Gbps.
- *         * +currencyCode+ - (<tt>String</tt>) Currency code based on ISO
+ *         * `currencyCode` &mdash; (`String`) Currency code based on ISO
  *           4217. Example: "USD" for US dollar.
- *         * +amount+ - (<tt>String</tt>) The amount of charge per unit.
+ *         * `amount` &mdash; (`String`) The amount of charge per unit.
  *           Example: 0.01
- *       * +orderSteps+ - (<tt>Array<Object></tt>)
- *         * +number+ - (<tt>String</tt>) Number of an order step. Example:
+ *       * `orderSteps` &mdash; (`Array<Object>`)
+ *         * `number` &mdash; (`String`) Number of an order step. Example:
  *           1
- *         * +name+ - (<tt>String</tt>) Name of the order step. Example:
+ *         * `name` &mdash; (`String`) Name of the order step. Example:
  *           Authorize cross connect
- *         * +description+ - (<tt>String</tt>) More detailed description of
+ *         * `description` &mdash; (`String`) More detailed description of
  *           the order step. Example: "AWS will prepare your connection and
  *           send you an email with an LOA to provide to the colocation
  *           provider"
- *         * +owner+ - (<tt>String</tt>) The entity who owns the completion
+ *         * `owner` &mdash; (`String`) The entity who owns the completion
  *           of the order step. Example: AWS
- *         * +sla+ - (<tt>Integer</tt>) Time to complete the order step in
+ *         * `sla` &mdash; (`Integer`) Time to complete the order step in
  *           minutes. Example: 60
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -324,28 +326,27 @@ AWS.DirectConnect = inherit({})
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +offerings+ - (<tt>Array<Object></tt>) A list of offerings.
- *         * +offeringId+ - (<tt>String</tt>)
- *         * +region+ - (<tt>String</tt>)
- *         * +location+ - (<tt>String</tt>)
- *         * +offeringName+ - (<tt>String</tt>) Name of the offering.
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `offerings` &mdash; (`Array<Object>`) A list of offerings.
+ *         * `offeringId` &mdash; (`String`)
+ *         * `region` &mdash; (`String`)
+ *         * `location` &mdash; (`String`)
+ *         * `offeringName` &mdash; (`String`) Name of the offering.
  *           Example: "1Gbps Cross Connect in us-east-1 via Equinix"
  *           Default: None
- *         * +description+ - (<tt>String</tt>)
- *         * +bandwidth+ - (<tt>String</tt>)
- *         * +connectionCosts+ - (<tt>Array<Object></tt>)
- *           * +name+ - (<tt>String</tt>) The name of the cost item.
+ *         * `description` &mdash; (`String`)
+ *         * `bandwidth` &mdash; (`String`)
+ *         * `connectionCosts` &mdash; (`Array<Object>`)
+ *           * `name` &mdash; (`String`) The name of the cost item.
  *             Example: Inbound data transfer
- *           * +unit+ - (<tt>String</tt>) The unit used in cost
- *             calculation. Example: "Gbps," if the price is calculated
- *             based on Gbps.
- *           * +currencyCode+ - (<tt>String</tt>) Currency code based on
- *             ISO 4217. Example: "USD" for US dollar.
- *           * +amount+ - (<tt>String</tt>) The amount of charge per unit.
+ *           * `unit` &mdash; (`String`) The unit used in cost calculation.
+ *             Example: "Gbps," if the price is calculated based on Gbps.
+ *           * `currencyCode` &mdash; (`String`) Currency code based on ISO
+ *             4217. Example: "USD" for US dollar.
+ *           * `amount` &mdash; (`String`) The amount of charge per unit.
  *             Example: 0.01
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -358,50 +359,50 @@ AWS.DirectConnect = inherit({})
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +virtualGateways+ - (<tt>Array<Object></tt>) A list of virtual
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `virtualGateways` &mdash; (`Array<Object>`) A list of virtual
  *         gateways.
- *         * +virtualGatewayId+ - (<tt>String</tt>)
- *         * +virtualGatewayState+ - (<tt>String</tt>)
+ *         * `virtualGatewayId` &mdash; (`String`)
+ *         * `virtualGatewayState` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
  * @!method describeVirtualInterfaces(params, callback)
  *   Calls the DescribeVirtualInterfaces API operation.
  *   @param params [Object]
- *     * +connectionId+ - (<tt>String</tt>)
- *     * +virtualInterfaceId+ - (<tt>String</tt>)
+ *     * `connectionId` &mdash; (`String`)
+ *     * `virtualInterfaceId` &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +virtualInterfaces+ - (<tt>Array<Object></tt>) A list of virtual
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `virtualInterfaces` &mdash; (`Array<Object>`) A list of virtual
  *         interfaces.
- *         * +virtualInterfaceId+ - (<tt>String</tt>)
- *         * +location+ - (<tt>String</tt>)
- *         * +connectionId+ - (<tt>String</tt>)
- *         * +virtualInterfaceType+ - (<tt>String</tt>)
- *         * +virtualInterfaceName+ - (<tt>String</tt>)
- *         * +vlan+ - (<tt>Integer</tt>)
- *         * +asn+ - (<tt>Integer</tt>)
- *         * +authKey+ - (<tt>String</tt>)
- *         * +amazonAddress+ - (<tt>String</tt>)
- *         * +customerAddress+ - (<tt>String</tt>) IP address assigned to
+ *         * `virtualInterfaceId` &mdash; (`String`)
+ *         * `location` &mdash; (`String`)
+ *         * `connectionId` &mdash; (`String`)
+ *         * `virtualInterfaceType` &mdash; (`String`)
+ *         * `virtualInterfaceName` &mdash; (`String`)
+ *         * `vlan` &mdash; (`Integer`)
+ *         * `asn` &mdash; (`Integer`)
+ *         * `authKey` &mdash; (`String`)
+ *         * `amazonAddress` &mdash; (`String`)
+ *         * `customerAddress` &mdash; (`String`) IP address assigned to
  *           the customer interface. Example: 192.168.1.2
- *         * +virtualInterfaceState+ - (<tt>String</tt>)
- *         * +customerRouterConfig+ - (<tt>String</tt>) Information for
+ *         * `virtualInterfaceState` &mdash; (`String`)
+ *         * `customerRouterConfig` &mdash; (`String`) Information for
  *           generating the customer router configuration.
- *         * +virtualGatewayId+ - (<tt>String</tt>)
- *         * +routeFilterPrefixes+ - (<tt>Array<Object></tt>)
- *           * +cidr+ - (<tt>String</tt>) CIDR notation for the advertised
+ *         * `virtualGatewayId` &mdash; (`String`)
+ *         * `routeFilterPrefixes` &mdash; (`Array<Object>`)
+ *           * `cidr` &mdash; (`String`) CIDR notation for the advertised
  *             route. Multiple routes are separated by commas Example:
  *             10.10.10.0/24,10.10.11.0/24
  *   @return [AWS.Request] a handle to the operation request for
@@ -412,8 +413,8 @@ AWS.DirectConnect = inherit({})
  *   Constructs a service client object.  This client has one method for
  *   each API operation.
  *   @option options [String] endpoint The endpoint URI to send requests
- *     to.  The default endpoint is built from the configured +region+.
- *     The endpoint should be a string like <tt>'https://s3.amazonaws.com'</tt>.
+ *     to.  The default endpoint is built from the configured `region`.
+ *     The endpoint should be a string like `'https://s3.amazonaws.com'`.
  *   @option (see AWS.Config.constructor)
  *
  * @!attribute endpoint

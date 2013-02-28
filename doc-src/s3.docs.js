@@ -17,20 +17,22 @@
 AWS = {};
 
 /**
- * Constructs a service interface and a low-level {Client}.  Use the +client+
+ * Constructs a service interface and a low-level {Client}.  Use the `client`
  * property to make API calls.  Each API operation is exposed as a function on
- * the +client+.
+ * the `client`.
  *
- * === Sending a Request Using S3
+ * ### Sending a Request Using S3
  *
- *   svc = new AWS.S3();
- *   svc.client.OPERATION_NAME(params, function (err, data) {
- *     if (err) {
- *       console.log(err); // an error occurred
- *     } else {
- *       console.log(data); // successful response
- *     }
- *   });
+ * ```js
+ * svc = new AWS.S3();
+ * svc.client.OPERATION_NAME(params, function (err, data) {
+ *   if (err) {
+ *     console.log(err); // an error occurred
+ *   } else {
+ *     console.log(data); // successful response
+ *   }
+ * });
+ * ```
  *
  * @!method constructor(options)
  *   Constructs a service interface.  The returned service will have a {client}
@@ -53,17 +55,17 @@ AWS.S3 = inherit({})
  * @!method abortMultipartUpload(params, callback)
  *   Calls the AbortMultipartUpload API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +UploadId+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `Key` &mdash; **required** &mdash; (`String`)
+ *     * `UploadId` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadAbort.html
@@ -72,34 +74,34 @@ AWS.S3 = inherit({})
  * @!method completeMultipartUpload(params, callback)
  *   Calls the CompleteMultipartUpload API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +MultipartUpload+ - (<tt>Object</tt>)
- *       * +Parts+ - (<tt>Array<Object></tt>)
- *         * +ETag+ - (<tt>String</tt>) Entity tag returned when the part
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `Key` &mdash; **required** &mdash; (`String`)
+ *     * `MultipartUpload` &mdash; (`Object`)
+ *       * `Parts` &mdash; (`Array<Object>`)
+ *         * `ETag` &mdash; (`String`) Entity tag returned when the part
  *           was uploaded.
- *         * +PartNumber+ - (<tt>Integer</tt>) Part number that
- *           identifies the part.
- *     * +UploadId+ - (*required*, <tt>String</tt>)
+ *         * `PartNumber` &mdash; (`Integer`) Part number that identifies
+ *           the part.
+ *     * `UploadId` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Location+ - (<tt>String</tt>)
- *       * +Bucket+ - (<tt>String</tt>)
- *       * +Key+ - (<tt>String</tt>)
- *       * +ETag+ - (<tt>String</tt>) Entity tag for the uploaded object.
- *       * +Expiration+ - (<tt>Date</tt>) If the object expiration is
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Location` &mdash; (`String`)
+ *       * `Bucket` &mdash; (`String`)
+ *       * `Key` &mdash; (`String`)
+ *       * `ETag` &mdash; (`String`) Entity tag for the uploaded object.
+ *       * `Expiration` &mdash; (`Date`) If the object expiration is
  *         configured, this will contain the expiration date (expiry-date)
  *         and rule ID (rule-id). The value of rule-id is URL encoded.
- *       * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
+ *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
- *       * +VersionId+ - (<tt>String</tt>) Version of the object.
+ *       * `VersionId` &mdash; (`String`) Version of the object.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadComplete.html
@@ -108,52 +110,52 @@ AWS.S3 = inherit({})
  * @!method copyObject(params, callback)
  *   Calls the CopyObject API operation.
  *   @param params [Object]
- *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the object.
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +CacheControl+ - (<tt>String</tt>) Specifies caching behavior
+ *     * `ACL` &mdash; (`String`) The canned ACL to apply to the object.
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `CacheControl` &mdash; (`String`) Specifies caching behavior
  *       along the request/reply chain.
- *     * +ContentDisposition+ - (<tt>String</tt>) Specifies
- *       presentational information for the object.
- *     * +ContentEncoding+ - (<tt>String</tt>) Specifies what content
+ *     * `ContentDisposition` &mdash; (`String`) Specifies presentational
+ *       information for the object.
+ *     * `ContentEncoding` &mdash; (`String`) Specifies what content
  *       encodings have been applied to the object and thus what decoding
  *       mechanisms must be applied to obtain the media-type referenced
  *       by the Content-Type header field.
- *     * +ContentLanguage+ - (<tt>String</tt>) The language the content
- *       is in.
- *     * +ContentType+ - (<tt>String</tt>) A standard MIME type
- *       describing the format of the object data.
- *     * +CopySource+ - (*required*, <tt>String</tt>) The name of the
- *       source bucket and key name of the source object, separated by a
- *       slash (/). Must be URL-encoded.
- *     * +CopySourceIfMatch+ - (<tt>Date</tt>) Copies the object if its
+ *     * `ContentLanguage` &mdash; (`String`) The language the content is
+ *       in.
+ *     * `ContentType` &mdash; (`String`) A standard MIME type describing
+ *       the format of the object data.
+ *     * `CopySource` &mdash; **required** &mdash; (`String`) The name of
+ *       the source bucket and key name of the source object, separated
+ *       by a slash (/). Must be URL-encoded.
+ *     * `CopySourceIfMatch` &mdash; (`Date`) Copies the object if its
  *       entity tag (ETag) matches the specified tag.
- *     * +CopySourceIfModifiedSince+ - (<tt>Date</tt>) Copies the object
+ *     * `CopySourceIfModifiedSince` &mdash; (`Date`) Copies the object
  *       if it has been modified since the specified time.
- *     * +CopySourceIfNoneMatch+ - (<tt>Date</tt>) Copies the object if
+ *     * `CopySourceIfNoneMatch` &mdash; (`Date`) Copies the object if
  *       its entity tag (ETag) is different than the specified ETag.
- *     * +CopySourceIfUnmodifiedSince+ - (<tt>Date</tt>) Copies the
- *       object if it hasn''t been modified since the specified time.
- *     * +Expires+ - (<tt>Date</tt>) The date and time at which the
- *       object is no longer cacheable.
- *     * +GrantFullControl+ - (<tt>String</tt>) Gives the grantee READ,
+ *     * `CopySourceIfUnmodifiedSince` &mdash; (`Date`) Copies the object
+ *       if it hasn''t been modified since the specified time.
+ *     * `Expires` &mdash; (`Date`) The date and time at which the object
+ *       is no longer cacheable.
+ *     * `GrantFullControl` &mdash; (`String`) Gives the grantee READ,
  *       READ_ACP, and WRITE_ACP permissions on the object.
- *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to read the
- *       object data and its metadata.
- *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
+ *     * `GrantRead` &mdash; (`String`) Allows grantee to read the object
+ *       data and its metadata.
+ *     * `GrantReadACP` &mdash; (`String`) Allows grantee to read the
  *       object ACL.
- *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
+ *     * `GrantWriteACP` &mdash; (`String`) Allows grantee to write the
  *       ACL for the applicable object.
- *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
- *       store with the object in S3.
- *     * +MetadataDirective+ - (<tt>String</tt>) Specifies whether the
+ *     * `Key` &mdash; **required** &mdash; (`String`)
+ *     * `Metadata` &mdash; (`Object<String>`) A map of metadata to store
+ *       with the object in S3.
+ *     * `MetadataDirective` &mdash; (`String`) Specifies whether the
  *       metadata is copied from the source object or replaced with
  *       metadata provided in the request.
- *     * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
+ *     * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *       encryption algorithm used when storing this object in S3.
- *     * +StorageClass+ - (<tt>String</tt>) The type of storage to use
- *       for the object. Defaults to 'STANDARD'.
- *     * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
+ *     * `StorageClass` &mdash; (`String`) The type of storage to use for
+ *       the object. Defaults to 'STANDARD'.
+ *     * `WebsiteRedirectLocation` &mdash; (`String`) If the bucket is
  *       configured as a website, redirects requests for this object to
  *       another object in the same bucket or to an external URL. Amazon
  *       S3 stores the value of this header in the object metadata.
@@ -162,17 +164,17 @@ AWS.S3 = inherit({})
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +CopyObjectResult+ - (<tt>Object</tt>)
- *         * +ETag+ - (<tt>String</tt>)
- *         * +LastModified+ - (<tt>String</tt>)
- *       * +Expiration+ - (<tt>String</tt>) If the object expiration is
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `CopyObjectResult` &mdash; (`Object`)
+ *         * `ETag` &mdash; (`String`)
+ *         * `LastModified` &mdash; (`String`)
+ *       * `Expiration` &mdash; (`String`) If the object expiration is
  *         configured, the response includes this header.
- *       * +CopySourceVersionId+ - (<tt>String</tt>)
- *       * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
+ *       * `CopySourceVersionId` &mdash; (`String`)
+ *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -182,31 +184,31 @@ AWS.S3 = inherit({})
  * @!method createBucket(params, callback)
  *   Calls the CreateBucket API operation.
  *   @param params [Object]
- *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the bucket.
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +CreateBucketConfiguration+ - (<tt>Object</tt>)
- *       * +LocationConstraint+ - (<tt>String</tt>) Specifies the region
+ *     * `ACL` &mdash; (`String`) The canned ACL to apply to the bucket.
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `CreateBucketConfiguration` &mdash; (`Object`)
+ *       * `LocationConstraint` &mdash; (`String`) Specifies the region
  *         where the bucket will be created.
- *     * +GrantFullControl+ - (<tt>String</tt>) Allows grantee the read,
+ *     * `GrantFullControl` &mdash; (`String`) Allows grantee the read,
  *       write, read ACP, and write ACP permissions on the bucket.
- *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to list the
+ *     * `GrantRead` &mdash; (`String`) Allows grantee to list the
  *       objects in the bucket.
- *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
+ *     * `GrantReadACP` &mdash; (`String`) Allows grantee to read the
  *       bucket ACL.
- *     * +GrantWrite+ - (<tt>String</tt>) Allows grantee to create,
+ *     * `GrantWrite` &mdash; (`String`) Allows grantee to create,
  *       overwrite, and delete any object in the bucket.
- *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
+ *     * `GrantWriteACP` &mdash; (`String`) Allows grantee to write the
  *       ACL for the applicable bucket.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Location+ - (<tt>String</tt>)
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Location` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUT.html
@@ -215,38 +217,38 @@ AWS.S3 = inherit({})
  * @!method createMultipartUpload(params, callback)
  *   Calls the CreateMultipartUpload API operation.
  *   @param params [Object]
- *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the object.
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +CacheControl+ - (<tt>String</tt>) Specifies caching behavior
+ *     * `ACL` &mdash; (`String`) The canned ACL to apply to the object.
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `CacheControl` &mdash; (`String`) Specifies caching behavior
  *       along the request/reply chain.
- *     * +ContentDisposition+ - (<tt>String</tt>) Specifies
- *       presentational information for the object.
- *     * +ContentEncoding+ - (<tt>String</tt>) Specifies what content
+ *     * `ContentDisposition` &mdash; (`String`) Specifies presentational
+ *       information for the object.
+ *     * `ContentEncoding` &mdash; (`String`) Specifies what content
  *       encodings have been applied to the object and thus what decoding
  *       mechanisms must be applied to obtain the media-type referenced
  *       by the Content-Type header field.
- *     * +ContentLanguage+ - (<tt>String</tt>) The language the content
- *       is in.
- *     * +ContentType+ - (<tt>String</tt>) A standard MIME type
- *       describing the format of the object data.
- *     * +Expires+ - (<tt>Date</tt>) The date and time at which the
- *       object is no longer cacheable.
- *     * +GrantFullControl+ - (<tt>String</tt>) Gives the grantee READ,
+ *     * `ContentLanguage` &mdash; (`String`) The language the content is
+ *       in.
+ *     * `ContentType` &mdash; (`String`) A standard MIME type describing
+ *       the format of the object data.
+ *     * `Expires` &mdash; (`Date`) The date and time at which the object
+ *       is no longer cacheable.
+ *     * `GrantFullControl` &mdash; (`String`) Gives the grantee READ,
  *       READ_ACP, and WRITE_ACP permissions on the object.
- *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to read the
- *       object data and its metadata.
- *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
+ *     * `GrantRead` &mdash; (`String`) Allows grantee to read the object
+ *       data and its metadata.
+ *     * `GrantReadACP` &mdash; (`String`) Allows grantee to read the
  *       object ACL.
- *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
+ *     * `GrantWriteACP` &mdash; (`String`) Allows grantee to write the
  *       ACL for the applicable object.
- *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
- *       store with the object in S3.
- *     * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
+ *     * `Key` &mdash; **required** &mdash; (`String`)
+ *     * `Metadata` &mdash; (`Object<String>`) A map of metadata to store
+ *       with the object in S3.
+ *     * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *       encryption algorithm used when storing this object in S3.
- *     * +StorageClass+ - (<tt>String</tt>) The type of storage to use
- *       for the object. Defaults to 'STANDARD'.
- *     * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
+ *     * `StorageClass` &mdash; (`String`) The type of storage to use for
+ *       the object. Defaults to 'STANDARD'.
+ *     * `WebsiteRedirectLocation` &mdash; (`String`) If the bucket is
  *       configured as a website, redirects requests for this object to
  *       another object in the same bucket or to an external URL. Amazon
  *       S3 stores the value of this header in the object metadata.
@@ -255,17 +257,17 @@ AWS.S3 = inherit({})
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Bucket+ - (<tt>String</tt>) Name of the bucket to which the
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Bucket` &mdash; (`String`) Name of the bucket to which the
  *         multipart upload was initiated.
- *       * +Key+ - (<tt>String</tt>) Object key for which the multipart
+ *       * `Key` &mdash; (`String`) Object key for which the multipart
  *         upload was initiated.
- *       * +UploadId+ - (<tt>String</tt>) ID for the initiated multipart
+ *       * `UploadId` &mdash; (`String`) ID for the initiated multipart
  *         upload.
- *       * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
+ *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -275,15 +277,15 @@ AWS.S3 = inherit({})
  * @!method deleteBucket(params, callback)
  *   Calls the DeleteBucket API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETE.html
@@ -292,15 +294,15 @@ AWS.S3 = inherit({})
  * @!method deleteBucketCors(params, callback)
  *   Calls the DeleteBucketCors API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEcors.html
@@ -309,15 +311,15 @@ AWS.S3 = inherit({})
  * @!method deleteBucketLifecycle(params, callback)
  *   Calls the DeleteBucketLifecycle API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html
@@ -326,15 +328,15 @@ AWS.S3 = inherit({})
  * @!method deleteBucketPolicy(params, callback)
  *   Calls the DeleteBucketPolicy API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEpolicy.html
@@ -343,15 +345,15 @@ AWS.S3 = inherit({})
  * @!method deleteBucketTagging(params, callback)
  *   Calls the DeleteBucketTagging API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEtagging.html
@@ -360,15 +362,15 @@ AWS.S3 = inherit({})
  * @!method deleteBucketWebsite(params, callback)
  *   Calls the DeleteBucketWebsite API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEwebsite.html
@@ -377,21 +379,21 @@ AWS.S3 = inherit({})
  * @!method deleteObject(params, callback)
  *   Calls the DeleteObject API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +Key+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `Key` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +DeleteMarker+ - (<tt>String</tt>) Specifies whether the
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `DeleteMarker` &mdash; (`String`) Specifies whether the
  *         versioned object that was permanently deleted was (true) or was
  *         not (false) a delete marker.
- *       * +VersionId+ - (<tt>String</tt>) Returns the version ID of the
+ *       * `VersionId` &mdash; (`String`) Returns the version ID of the
  *         delete marker created as a result of the DELETE operation.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -401,38 +403,38 @@ AWS.S3 = inherit({})
  * @!method deleteObjects(params, callback)
  *   Calls the DeleteObjects API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +Delete+ - (*required*, <tt>Object</tt>)
- *       * +Objects+ - (*required*, <tt>Array<Object></tt>)
- *         * +Key+ - (*required*, <tt>String</tt>) Key name of the object
- *           to delete.
- *         * +VersionId+ - (<tt>String</tt>) VersionId for the specific
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `Delete` &mdash; **required** &mdash; (`Object`)
+ *       * `Objects` &mdash; **required** &mdash; (`Array<Object>`)
+ *         * `Key` &mdash; **required** &mdash; (`String`) Key name of
+ *           the object to delete.
+ *         * `VersionId` &mdash; (`String`) VersionId for the specific
  *           version of the object to delete.
- *       * +Quiet+ - (<tt>Boolean</tt>) Element to enable quiet mode for
+ *       * `Quiet` &mdash; (`Boolean`) Element to enable quiet mode for
  *         the request. When you add this element, you must set its value
  *         to true.
- *     * +MFA+ - (<tt>String</tt>) The concatenation of the
- *       authentication device''s serial number, a space, and the value
- *       that is displayed on your authentication device.
+ *     * `MFA` &mdash; (`String`) The concatenation of the authentication
+ *       device''s serial number, a space, and the value that is
+ *       displayed on your authentication device.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Deleted+ - (<tt>Array<Object></tt>)
- *         * +Key+ - (<tt>String</tt>)
- *         * +VersionId+ - (<tt>String</tt>)
- *         * +DeleteMarker+ - (<tt>Boolean</tt>)
- *         * +DeleteMarkerVersionId+ - (<tt>String</tt>)
- *       * +Errors+ - (<tt>Array<Object></tt>)
- *         * +Key+ - (<tt>String</tt>)
- *         * +VersionId+ - (<tt>String</tt>)
- *         * +Code+ - (<tt>String</tt>)
- *         * +Message+ - (<tt>String</tt>)
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Deleted` &mdash; (`Array<Object>`)
+ *         * `Key` &mdash; (`String`)
+ *         * `VersionId` &mdash; (`String`)
+ *         * `DeleteMarker` &mdash; (`Boolean`)
+ *         * `DeleteMarkerVersionId` &mdash; (`String`)
+ *       * `Errors` &mdash; (`Array<Object>`)
+ *         * `Key` &mdash; (`String`)
+ *         * `VersionId` &mdash; (`String`)
+ *         * `Code` &mdash; (`String`)
+ *         * `Message` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/multiobjectdeleteapi.html
@@ -441,31 +443,30 @@ AWS.S3 = inherit({})
  * @!method getBucketAcl(params, callback)
  *   Calls the GetBucketAcl API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Owner+ - (<tt>Object</tt>)
- *         * +ID+ - (<tt>String</tt>)
- *         * +DisplayName+ - (<tt>String</tt>)
- *       * +Grants+ - (<tt>Array<Object></tt>) A list of grants.
- *         * +Grantee+ - (<tt>Object</tt>)
- *           * +Type+ - (<tt>String</tt>) Type of grantee
- *           * +ID+ - (<tt>String</tt>) The canonical user ID of the
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Owner` &mdash; (`Object`)
+ *         * `ID` &mdash; (`String`)
+ *         * `DisplayName` &mdash; (`String`)
+ *       * `Grants` &mdash; (`Array<Object>`) A list of grants.
+ *         * `Grantee` &mdash; (`Object`)
+ *           * `Type` &mdash; (`String`) Type of grantee
+ *           * `ID` &mdash; (`String`) The canonical user ID of the
  *             grantee.
- *           * +DisplayName+ - (<tt>String</tt>) Screen name of the
+ *           * `DisplayName` &mdash; (`String`) Screen name of the grantee.
+ *           * `EmailAddress` &mdash; (`String`) Email address of the
  *             grantee.
- *           * +EmailAddress+ - (<tt>String</tt>) Email address of the
- *             grantee.
- *           * +URI+ - (<tt>String</tt>) URI of the grantee group.
- *         * +Permission+ - (<tt>String</tt>) Specifies the permission
- *           given to the grantee.
+ *           * `URI` &mdash; (`String`) URI of the grantee group.
+ *         * `Permission` &mdash; (`String`) Specifies the permission given
+ *           to the grantee.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETacl.html
@@ -474,27 +475,26 @@ AWS.S3 = inherit({})
  * @!method getBucketCors(params, callback)
  *   Calls the GetBucketCors API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +CORSRules+ - (<tt>Array<Object></tt>)
- *         * +AllowedOrigins+ - (<tt>Array<String></tt>) One or more
- *           origins you want customers to be able to access the bucket
- *           from.
- *         * +AllowedMethods+ - (<tt>Array<String></tt>) Identifies HTTP
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `CORSRules` &mdash; (`Array<Object>`)
+ *         * `AllowedOrigins` &mdash; (`Array<String>`) One or more origins
+ *           you want customers to be able to access the bucket from.
+ *         * `AllowedMethods` &mdash; (`Array<String>`) Identifies HTTP
  *           methods that the domain/origin specified in the rule is
  *           allowed to execute.
- *         * +MaxAgeSeconds+ - (<tt>Integer</tt>) The time in seconds that
+ *         * `MaxAgeSeconds` &mdash; (`Integer`) The time in seconds that
  *           your browser is to cache the preflight response for the
  *           specified resource.
- *         * +ExposeHeaders+ - (<tt>Array<String></tt>) One or more headers
+ *         * `ExposeHeaders` &mdash; (`Array<String>`) One or more headers
  *           in the response that you want customers to be able to access
  *           from their applications (for example, from a JavaScript
  *           XMLHttpRequest object).
@@ -506,38 +506,38 @@ AWS.S3 = inherit({})
  * @!method getBucketLifecycle(params, callback)
  *   Calls the GetBucketLifecycle API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Rules+ - (<tt>Array<Object></tt>)
- *         * +ID+ - (<tt>String</tt>) Unique identifier for the rule. The
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Rules` &mdash; (`Array<Object>`)
+ *         * `ID` &mdash; (`String`) Unique identifier for the rule. The
  *           value cannot be longer than 255 characters.
- *         * +Prefix+ - (<tt>String</tt>) Prefix identifying one or more
+ *         * `Prefix` &mdash; (`String`) Prefix identifying one or more
  *           objects to which the rule applies.
- *         * +Status+ - (<tt>String</tt>) If 'Enabled', the rule is
+ *         * `Status` &mdash; (`String`) If 'Enabled', the rule is
  *           currently being applied. If 'Disabled', the rule is not
  *           currently being applied.
- *         * +Transition+ - (<tt>Object</tt>)
- *           * +Days+ - (<tt>Integer</tt>) Indicates the lifetime, in days,
+ *         * `Transition` &mdash; (`Object`)
+ *           * `Days` &mdash; (`Integer`) Indicates the lifetime, in days,
  *             of the objects that are subject to the rule. The value must
  *             be a non-zero positive integer.
- *           * +Date+ - (<tt>Date</tt>) Indicates at what date the object
- *             is to be moved or deleted. Should be in GMT ISO 8601 Format.
- *           * +StorageClass+ - (<tt>String</tt>) The class of storage used
+ *           * `Date` &mdash; (`Date`) Indicates at what date the object is
+ *             to be moved or deleted. Should be in GMT ISO 8601 Format.
+ *           * `StorageClass` &mdash; (`String`) The class of storage used
  *             to store the object.
- *         * +Expiration+ - (<tt>Object</tt>)
- *           * +Days+ - (<tt>Integer</tt>) Indicates the lifetime, in days,
+ *         * `Expiration` &mdash; (`Object`)
+ *           * `Days` &mdash; (`Integer`) Indicates the lifetime, in days,
  *             of the objects that are subject to the rule. The value must
  *             be a non-zero positive integer.
- *           * +Date+ - (<tt>Date</tt>) Indicates at what date the object
- *             is to be moved or deleted. Should be in GMT ISO 8601 Format.
+ *           * `Date` &mdash; (`Date`) Indicates at what date the object is
+ *             to be moved or deleted. Should be in GMT ISO 8601 Format.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html
@@ -546,17 +546,17 @@ AWS.S3 = inherit({})
  * @!method getBucketLocation(params, callback)
  *   Calls the GetBucketLocation API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +LocationConstraint+ - (<tt>String</tt>)
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `LocationConstraint` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlocation.html
@@ -565,18 +565,18 @@ AWS.S3 = inherit({})
  * @!method getBucketLogging(params, callback)
  *   Calls the GetBucketLogging API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +LoggingEnabled+ - (<tt>Object</tt>)
- *         * +TargetBucket+ - (<tt>String</tt>) Specifies the bucket where
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `LoggingEnabled` &mdash; (`Object`)
+ *         * `TargetBucket` &mdash; (`String`) Specifies the bucket where
  *           you want Amazon S3 to store server access logs. You can have
  *           your logs delivered to any bucket that you own, including the
  *           same bucket that is being logged. You can also configure
@@ -584,20 +584,20 @@ AWS.S3 = inherit({})
  *           bucket. In this case you should choose a different
  *           TargetPrefix for each source bucket so that the delivered log
  *           files can be distinguished by key.
- *         * +TargetPrefix+ - (<tt>String</tt>) This element lets you
+ *         * `TargetPrefix` &mdash; (`String`) This element lets you
  *           specify a prefix for the keys that the log files will be
  *           stored under.
- *         * +TargetGrants+ - (<tt>Array<Object></tt>)
- *           * +Grantee+ - (<tt>Object</tt>)
- *             * +Type+ - (<tt>String</tt>) Type of grantee
- *             * +ID+ - (<tt>String</tt>) The canonical user ID of the
+ *         * `TargetGrants` &mdash; (`Array<Object>`)
+ *           * `Grantee` &mdash; (`Object`)
+ *             * `Type` &mdash; (`String`) Type of grantee
+ *             * `ID` &mdash; (`String`) The canonical user ID of the
  *               grantee.
- *             * +DisplayName+ - (<tt>String</tt>) Screen name of the
+ *             * `DisplayName` &mdash; (`String`) Screen name of the
  *               grantee.
- *             * +EmailAddress+ - (<tt>String</tt>) Email address of the
+ *             * `EmailAddress` &mdash; (`String`) Email address of the
  *               grantee.
- *             * +URI+ - (<tt>String</tt>) URI of the grantee group.
- *           * +Permission+ - (<tt>String</tt>)
+ *             * `URI` &mdash; (`String`) URI of the grantee group.
+ *           * `Permission` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlogging.html
@@ -606,21 +606,21 @@ AWS.S3 = inherit({})
  * @!method getBucketNotification(params, callback)
  *   Calls the GetBucketNotification API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +TopicConfiguration+ - (<tt>Object</tt>)
- *         * +Topic+ - (<tt>String</tt>) Amazon SNS topic to which Amazon
- *           S3 will publish a message to report the specified events for
- *           the bucket.
- *         * +Event+ - (<tt>String</tt>) Bucket event for which to send
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `TopicConfiguration` &mdash; (`Object`)
+ *         * `Topic` &mdash; (`String`) Amazon SNS topic to which Amazon S3
+ *           will publish a message to report the specified events for the
+ *           bucket.
+ *         * `Event` &mdash; (`String`) Bucket event for which to send
  *           notifications.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -630,17 +630,17 @@ AWS.S3 = inherit({})
  * @!method getBucketPolicy(params, callback)
  *   Calls the GetBucketPolicy API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Policy+ - (<tt>String</tt>) The bucket policy as a JSON
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Policy` &mdash; (`String`) The bucket policy as a JSON
  *         document.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -650,17 +650,17 @@ AWS.S3 = inherit({})
  * @!method getBucketRequestPayment(params, callback)
  *   Calls the GetBucketRequestPayment API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Payer+ - (<tt>String</tt>) Specifies who pays for the download
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Payer` &mdash; (`String`) Specifies who pays for the download
  *         and request fees.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -670,19 +670,19 @@ AWS.S3 = inherit({})
  * @!method getBucketTagging(params, callback)
  *   Calls the GetBucketTagging API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +TagSet+ - (<tt>Array<Object></tt>)
- *         * +Key+ - (<tt>String</tt>) Name of the tag.
- *         * +Value+ - (<tt>String</tt>) Value of the tag.
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `TagSet` &mdash; (`Array<Object>`)
+ *         * `Key` &mdash; (`String`) Name of the tag.
+ *         * `Value` &mdash; (`String`) Value of the tag.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETtagging.html
@@ -691,18 +691,18 @@ AWS.S3 = inherit({})
  * @!method getBucketVersioning(params, callback)
  *   Calls the GetBucketVersioning API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Status+ - (<tt>String</tt>) The versioning state of the bucket.
- *       * +MFADelete+ - (<tt>String</tt>) Specifies whether MFA delete is
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Status` &mdash; (`String`) The versioning state of the bucket.
+ *       * `MFADelete` &mdash; (`String`) Specifies whether MFA delete is
  *         enabled in the bucket versioning configuration. This element is
  *         only returned if the bucket has been configured with MFA delete.
  *         If the bucket has never been so configured, this element is not
@@ -715,40 +715,40 @@ AWS.S3 = inherit({})
  * @!method getBucketWebsite(params, callback)
  *   Calls the GetBucketWebsite API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +RedirectAllRequestsTo+ - (<tt>Object</tt>)
- *         * +HostName+ - (<tt>String</tt>) Name of the host where requests
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `RedirectAllRequestsTo` &mdash; (`Object`)
+ *         * `HostName` &mdash; (`String`) Name of the host where requests
  *           will be redirected.
- *         * +Protocol+ - (<tt>String</tt>) Protocol to use (http, https)
+ *         * `Protocol` &mdash; (`String`) Protocol to use (http, https)
  *           when redirecting requests. The default is the protocol that is
  *           used in the original request.
- *       * +IndexDocument+ - (<tt>Object</tt>)
- *         * +Suffix+ - (<tt>String</tt>) A suffix that is appended to a
+ *       * `IndexDocument` &mdash; (`Object`)
+ *         * `Suffix` &mdash; (`String`) A suffix that is appended to a
  *           request that is for a directory on the website endpoint (e.g.
  *           if the suffix is index.html and you make a request to
  *           samplebucket/images/ the data that is returned will be for the
  *           object with the key name images/index.html) The suffix must
  *           not be empty and must not include a slash character.
- *       * +ErrorDocument+ - (<tt>Object</tt>)
- *         * +Key+ - (<tt>String</tt>) The object key name to use when a
- *           4XX class error occurs.
- *       * +RoutingRules+ - (<tt>Array<Object></tt>)
- *         * +Condition+ - (<tt>Object</tt>) A container for describing a
+ *       * `ErrorDocument` &mdash; (`Object`)
+ *         * `Key` &mdash; (`String`) The object key name to use when a 4XX
+ *           class error occurs.
+ *       * `RoutingRules` &mdash; (`Array<Object>`)
+ *         * `Condition` &mdash; (`Object`) A container for describing a
  *           condition that must be met for the specified redirect to
  *           apply. For example, 1. If request is for pages in the /docs
  *           folder, redirect to the /documents folder. 2. If request
  *           results in HTTP error 4xx, redirect request to another host
  *           where you might process the error.
- *           * +KeyPrefixEquals+ - (<tt>String</tt>) The object key name
+ *           * `KeyPrefixEquals` &mdash; (`String`) The object key name
  *             prefix when the redirect is applied. For example, to
  *             redirect requests for ExamplePage.html, the key prefix will
  *             be ExamplePage.html. To redirect request for all pages with
@@ -758,18 +758,18 @@ AWS.S3 = inherit({})
  *             HttpErrorCodeReturnedEquals is not specified. If both
  *             conditions are specified, both must be true for the redirect
  *             to be applied.
- *           * +HttpErrorCodeReturnedEquals+ - (<tt>String</tt>) The HTTP
+ *           * `HttpErrorCodeReturnedEquals` &mdash; (`String`) The HTTP
  *             error code when the redirect is applied. In the event of an
  *             error, if the error code equals this value, then the
  *             specified redirect is applied. Required when parent element
  *             Condition is specified and sibling KeyPrefixEquals is not
  *             specified. If both are specified, then both must be true for
  *             the redirect to be applied.
- *         * +Redirect+ - (<tt>Object</tt>) Container for redirect
+ *         * `Redirect` &mdash; (`Object`) Container for redirect
  *           information. You can redirect requests to another host, to
  *           another page, or with another protocol. In the event of an
  *           error, you can can specify a different error code to return.
- *           * +ReplaceKeyPrefixWith+ - (<tt>String</tt>) The object key
+ *           * `ReplaceKeyPrefixWith` &mdash; (`String`) The object key
  *             prefix to use in the redirect request. For example, to
  *             redirect requests for all pages with prefix docs/ (objects
  *             in the docs/ folder) to documents/, you can set a condition
@@ -777,17 +777,17 @@ AWS.S3 = inherit({})
  *             set ReplaceKeyPrefixWith to /documents. Not required if one
  *             of the siblings is present. Can be present only if
  *             ReplaceKeyWith is not provided.
- *           * +ReplaceKeyWith+ - (<tt>String</tt>) The specific object key
+ *           * `ReplaceKeyWith` &mdash; (`String`) The specific object key
  *             to use in the redirect request. For example, redirect
  *             request to error.html. Not required if one of the sibling is
  *             present. Can be present only if ReplaceKeyPrefixWith is not
  *             provided.
- *           * +HttpRedirectCode+ - (<tt>String</tt>) The HTTP redirect
- *             code to use on the response. Not required if one of the
- *             siblings is present.
- *           * +HostName+ - (<tt>String</tt>) Name of the host where
+ *           * `HttpRedirectCode` &mdash; (`String`) The HTTP redirect code
+ *             to use on the response. Not required if one of the siblings
+ *             is present.
+ *           * `HostName` &mdash; (`String`) Name of the host where
  *             requests will be redirected.
- *           * +Protocol+ - (<tt>String</tt>) Protocol to use (http, https)
+ *           * `Protocol` &mdash; (`String`) Protocol to use (http, https)
  *             when redirecting requests. The default is the protocol that
  *             is used in the original request.
  *   @return [AWS.Request] a handle to the operation request for
@@ -798,94 +798,93 @@ AWS.S3 = inherit({})
  * @!method getObject(params, callback)
  *   Calls the GetObject API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +IfMatch+ - (<tt>String</tt>) Return the object only if its
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `IfMatch` &mdash; (`String`) Return the object only if its
  *       entity tag (ETag) is the same as the one specified, otherwise
  *       return a 412 (precondition failed).
- *     * +IfModifiedSince+ - (<tt>Date</tt>) Return the object only if it
+ *     * `IfModifiedSince` &mdash; (`Date`) Return the object only if it
  *       has been modified since the specified time, otherwise return a
  *       304 (not modified).
- *     * +IfNoneMatch+ - (<tt>String</tt>) Return the object only if its
+ *     * `IfNoneMatch` &mdash; (`String`) Return the object only if its
  *       entity tag (ETag) is different from the one specified, otherwise
  *       return a 304 (not modified).
- *     * +IfUnmodifiedSince+ - (<tt>Date</tt>) Return the object only if
+ *     * `IfUnmodifiedSince` &mdash; (`Date`) Return the object only if
  *       it has not been modified since the specified time, otherwise
  *       return a 412 (precondition failed).
- *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +Range+ - (<tt>String</tt>) Downloads the specified range bytes
+ *     * `Key` &mdash; **required** &mdash; (`String`)
+ *     * `Range` &mdash; (`String`) Downloads the specified range bytes
  *       of an object. For more information about the HTTP Range header,
  *       go to
  *       http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.
- *     * +ResponseCacheControl+ - (<tt>String</tt>) Sets the
- *       Cache-Control header of the response.
- *     * +ResponseContentDisposition+ - (<tt>String</tt>) Sets the
- *       Content-Disposition header of the response
- *     * +ResponseContentEncoding+ - (<tt>String</tt>) Sets the
- *       Content-Encoding header of the response.
- *     * +ResponseContentLanguage+ - (<tt>String</tt>) Sets the
- *       Content-Language header of the response.
- *     * +ResponseContentType+ - (<tt>String</tt>) Sets the Content-Type
+ *     * `ResponseCacheControl` &mdash; (`String`) Sets the Cache-Control
  *       header of the response.
- *     * +ResponseExpires+ - (<tt>Date</tt>) Sets the Expires header of
+ *     * `ResponseContentDisposition` &mdash; (`String`) Sets the
+ *       Content-Disposition header of the response
+ *     * `ResponseContentEncoding` &mdash; (`String`) Sets the
+ *       Content-Encoding header of the response.
+ *     * `ResponseContentLanguage` &mdash; (`String`) Sets the
+ *       Content-Language header of the response.
+ *     * `ResponseContentType` &mdash; (`String`) Sets the Content-Type
+ *       header of the response.
+ *     * `ResponseExpires` &mdash; (`Date`) Sets the Expires header of
  *       the response.
- *     * +VersionId+ - (<tt>String</tt>) VersionId used to reference a
+ *     * `VersionId` &mdash; (`String`) VersionId used to reference a
  *       specific version of the object.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Body+ - (<tt>String</tt>) Object data.
- *       * +DeleteMarker+ - (<tt>String</tt>) Specifies whether the object
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Body` &mdash; (`String`) Object data.
+ *       * `DeleteMarker` &mdash; (`String`) Specifies whether the object
  *         retrieved was (true) or was not (false) a Delete Marker. If
  *         false, this response header does not appear in the response.
- *       * +Expiration+ - (<tt>String</tt>) If the object expiration is
+ *       * `Expiration` &mdash; (`String`) If the object expiration is
  *         configured (see PUT Bucket lifecycle), the response includes
  *         this header. It includes the expiry-date and rule-id key value
  *         pairs providing object expiration information. The value of the
  *         rule-id is URL encoded.
- *       * +Restore+ - (<tt>String</tt>) Provides information about object
+ *       * `Restore` &mdash; (`String`) Provides information about object
  *         restoration operation and expiration time of the restored object
  *         copy.
- *       * +LastModified+ - (<tt>Date</tt>) Last modified date of the
- *         object
- *       * +ContentLength+ - (<tt>Integer</tt>) Size of the body in bytes.
- *       * +ETag+ - (<tt>String</tt>) An ETag is an opaque identifier
+ *       * `LastModified` &mdash; (`Date`) Last modified date of the object
+ *       * `ContentLength` &mdash; (`Integer`) Size of the body in bytes.
+ *       * `ETag` &mdash; (`String`) An ETag is an opaque identifier
  *         assigned by a web server to a specific version of a resource
  *         found at a URL
- *       * +MissingMeta+ - (<tt>Integer</tt>) This is set to the number of
+ *       * `MissingMeta` &mdash; (`Integer`) This is set to the number of
  *         metadata entries not returned in x-amz-meta headers. This can
  *         happen if you create metadata using an API like SOAP that
  *         supports more flexible metadata than the REST API. For example,
  *         using SOAP, you can create metadata whose values are not legal
  *         HTTP headers.
- *       * +VersionId+ - (<tt>String</tt>) Version of the object.
- *       * +CacheControl+ - (<tt>String</tt>) Specifies caching behavior
+ *       * `VersionId` &mdash; (`String`) Version of the object.
+ *       * `CacheControl` &mdash; (`String`) Specifies caching behavior
  *         along the request/reply chain.
- *       * +ContentDisposition+ - (<tt>String</tt>) Specifies
- *         presentational information for the object.
- *       * +ContentEncoding+ - (<tt>String</tt>) Specifies what content
+ *       * `ContentDisposition` &mdash; (`String`) Specifies presentational
+ *         information for the object.
+ *       * `ContentEncoding` &mdash; (`String`) Specifies what content
  *         encodings have been applied to the object and thus what decoding
  *         mechanisms must be applied to obtain the media-type referenced
  *         by the Content-Type header field.
- *       * +ContentLanguage+ - (<tt>String</tt>) The language the content
- *         is in.
- *       * +ContentType+ - (<tt>String</tt>) A standard MIME type
- *         describing the format of the object data.
- *       * +Expires+ - (<tt>Date</tt>) The date and time at which the
- *         object is no longer cacheable.
- *       * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
+ *       * `ContentLanguage` &mdash; (`String`) The language the content is
+ *         in.
+ *       * `ContentType` &mdash; (`String`) A standard MIME type describing
+ *         the format of the object data.
+ *       * `Expires` &mdash; (`Date`) The date and time at which the object
+ *         is no longer cacheable.
+ *       * `WebsiteRedirectLocation` &mdash; (`String`) If the bucket is
  *         configured as a website, redirects requests for this object to
  *         another object in the same bucket or to an external URL. Amazon
  *         S3 stores the value of this header in the object metadata.
- *       * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
+ *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
- *       * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
- *         store with the object in S3.
+ *       * `Metadata` &mdash; (`Object<String>`) A map of metadata to store
+ *         with the object in S3.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGET.html
@@ -894,34 +893,33 @@ AWS.S3 = inherit({})
  * @!method getObjectAcl(params, callback)
  *   Calls the GetObjectAcl API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +VersionId+ - (<tt>String</tt>) VersionId used to reference a
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `Key` &mdash; **required** &mdash; (`String`)
+ *     * `VersionId` &mdash; (`String`) VersionId used to reference a
  *       specific version of the object.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Owner+ - (<tt>Object</tt>)
- *         * +ID+ - (<tt>String</tt>)
- *         * +DisplayName+ - (<tt>String</tt>)
- *       * +Grants+ - (<tt>Array<Object></tt>) A list of grants.
- *         * +Grantee+ - (<tt>Object</tt>)
- *           * +Type+ - (<tt>String</tt>) Type of grantee
- *           * +ID+ - (<tt>String</tt>) The canonical user ID of the
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Owner` &mdash; (`Object`)
+ *         * `ID` &mdash; (`String`)
+ *         * `DisplayName` &mdash; (`String`)
+ *       * `Grants` &mdash; (`Array<Object>`) A list of grants.
+ *         * `Grantee` &mdash; (`Object`)
+ *           * `Type` &mdash; (`String`) Type of grantee
+ *           * `ID` &mdash; (`String`) The canonical user ID of the
  *             grantee.
- *           * +DisplayName+ - (<tt>String</tt>) Screen name of the
+ *           * `DisplayName` &mdash; (`String`) Screen name of the grantee.
+ *           * `EmailAddress` &mdash; (`String`) Email address of the
  *             grantee.
- *           * +EmailAddress+ - (<tt>String</tt>) Email address of the
- *             grantee.
- *           * +URI+ - (<tt>String</tt>) URI of the grantee group.
- *         * +Permission+ - (<tt>String</tt>) Specifies the permission
- *           given to the grantee.
+ *           * `URI` &mdash; (`String`) URI of the grantee group.
+ *         * `Permission` &mdash; (`String`) Specifies the permission given
+ *           to the grantee.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETacl.html
@@ -930,18 +928,18 @@ AWS.S3 = inherit({})
  * @!method getObjectTorrent(params, callback)
  *   Calls the GetObjectTorrent API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +Key+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `Key` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Body+ - (<tt>String</tt>)
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Body` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETtorrent.html
@@ -950,15 +948,15 @@ AWS.S3 = inherit({})
  * @!method headBucket(params, callback)
  *   Calls the HeadBucket API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketHEAD.html
@@ -967,81 +965,80 @@ AWS.S3 = inherit({})
  * @!method headObject(params, callback)
  *   Calls the HeadObject API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +IfMatch+ - (<tt>String</tt>) Return the object only if its
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `IfMatch` &mdash; (`String`) Return the object only if its
  *       entity tag (ETag) is the same as the one specified, otherwise
  *       return a 412 (precondition failed).
- *     * +IfModifiedSince+ - (<tt>Date</tt>) Return the object only if it
+ *     * `IfModifiedSince` &mdash; (`Date`) Return the object only if it
  *       has been modified since the specified time, otherwise return a
  *       304 (not modified).
- *     * +IfNoneMatch+ - (<tt>String</tt>) Return the object only if its
+ *     * `IfNoneMatch` &mdash; (`String`) Return the object only if its
  *       entity tag (ETag) is different from the one specified, otherwise
  *       return a 304 (not modified).
- *     * +IfUnmodifiedSince+ - (<tt>Date</tt>) Return the object only if
+ *     * `IfUnmodifiedSince` &mdash; (`Date`) Return the object only if
  *       it has not been modified since the specified time, otherwise
  *       return a 412 (precondition failed).
- *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +Range+ - (<tt>String</tt>) Downloads the specified range bytes
+ *     * `Key` &mdash; **required** &mdash; (`String`)
+ *     * `Range` &mdash; (`String`) Downloads the specified range bytes
  *       of an object. For more information about the HTTP Range header,
  *       go to
  *       http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.
- *     * +VersionId+ - (<tt>String</tt>) VersionId used to reference a
+ *     * `VersionId` &mdash; (`String`) VersionId used to reference a
  *       specific version of the object.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +DeleteMarker+ - (<tt>String</tt>) Specifies whether the object
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `DeleteMarker` &mdash; (`String`) Specifies whether the object
  *         retrieved was (true) or was not (false) a Delete Marker. If
  *         false, this response header does not appear in the response.
- *       * +Expiration+ - (<tt>String</tt>) If the object expiration is
+ *       * `Expiration` &mdash; (`String`) If the object expiration is
  *         configured (see PUT Bucket lifecycle), the response includes
  *         this header. It includes the expiry-date and rule-id key value
  *         pairs providing object expiration information. The value of the
  *         rule-id is URL encoded.
- *       * +Restore+ - (<tt>String</tt>) Provides information about object
+ *       * `Restore` &mdash; (`String`) Provides information about object
  *         restoration operation and expiration time of the restored object
  *         copy.
- *       * +LastModified+ - (<tt>Date</tt>) Last modified date of the
- *         object
- *       * +ContentLength+ - (<tt>Integer</tt>) Size of the body in bytes.
- *       * +ETag+ - (<tt>String</tt>) An ETag is an opaque identifier
+ *       * `LastModified` &mdash; (`Date`) Last modified date of the object
+ *       * `ContentLength` &mdash; (`Integer`) Size of the body in bytes.
+ *       * `ETag` &mdash; (`String`) An ETag is an opaque identifier
  *         assigned by a web server to a specific version of a resource
  *         found at a URL
- *       * +MissingMeta+ - (<tt>Integer</tt>) This is set to the number of
+ *       * `MissingMeta` &mdash; (`Integer`) This is set to the number of
  *         metadata entries not returned in x-amz-meta headers. This can
  *         happen if you create metadata using an API like SOAP that
  *         supports more flexible metadata than the REST API. For example,
  *         using SOAP, you can create metadata whose values are not legal
  *         HTTP headers.
- *       * +VersionId+ - (<tt>String</tt>) Version of the object.
- *       * +CacheControl+ - (<tt>String</tt>) Specifies caching behavior
+ *       * `VersionId` &mdash; (`String`) Version of the object.
+ *       * `CacheControl` &mdash; (`String`) Specifies caching behavior
  *         along the request/reply chain.
- *       * +ContentDisposition+ - (<tt>String</tt>) Specifies
- *         presentational information for the object.
- *       * +ContentEncoding+ - (<tt>String</tt>) Specifies what content
+ *       * `ContentDisposition` &mdash; (`String`) Specifies presentational
+ *         information for the object.
+ *       * `ContentEncoding` &mdash; (`String`) Specifies what content
  *         encodings have been applied to the object and thus what decoding
  *         mechanisms must be applied to obtain the media-type referenced
  *         by the Content-Type header field.
- *       * +ContentLanguage+ - (<tt>String</tt>) The language the content
- *         is in.
- *       * +ContentType+ - (<tt>String</tt>) A standard MIME type
- *         describing the format of the object data.
- *       * +Expires+ - (<tt>Date</tt>) The date and time at which the
- *         object is no longer cacheable.
- *       * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
+ *       * `ContentLanguage` &mdash; (`String`) The language the content is
+ *         in.
+ *       * `ContentType` &mdash; (`String`) A standard MIME type describing
+ *         the format of the object data.
+ *       * `Expires` &mdash; (`Date`) The date and time at which the object
+ *         is no longer cacheable.
+ *       * `WebsiteRedirectLocation` &mdash; (`String`) If the bucket is
  *         configured as a website, redirects requests for this object to
  *         another object in the same bucket or to an external URL. Amazon
  *         S3 stores the value of this header in the object metadata.
- *       * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
+ *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
- *       * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
- *         store with the object in S3.
+ *       * `Metadata` &mdash; (`Object<String>`) A map of metadata to store
+ *         with the object in S3.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectHEAD.html
@@ -1055,16 +1052,16 @@ AWS.S3 = inherit({})
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Buckets+ - (<tt>Array<Object></tt>)
- *         * +Name+ - (<tt>String</tt>) The name of the bucket.
- *         * +CreationDate+ - (<tt>Date</tt>) Date the bucket was created.
- *       * +Owner+ - (<tt>Object</tt>)
- *         * +ID+ - (<tt>String</tt>)
- *         * +DisplayName+ - (<tt>String</tt>)
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Buckets` &mdash; (`Array<Object>`)
+ *         * `Name` &mdash; (`String`) The name of the bucket.
+ *         * `CreationDate` &mdash; (`Date`) Date the bucket was created.
+ *       * `Owner` &mdash; (`Object`)
+ *         * `ID` &mdash; (`String`)
+ *         * `DisplayName` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTServiceGET.html
@@ -1073,18 +1070,18 @@ AWS.S3 = inherit({})
  * @!method listMultipartUploads(params, callback)
  *   Calls the ListMultipartUploads API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +Delimiter+ - (<tt>String</tt>) Character you use to group keys.
- *     * +KeyMarker+ - (<tt>String</tt>) Together with upload-id-marker,
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `Delimiter` &mdash; (`String`) Character you use to group keys.
+ *     * `KeyMarker` &mdash; (`String`) Together with upload-id-marker,
  *       this parameter specifies the multipart upload after which
  *       listing should begin.
- *     * +MaxUploads+ - (<tt>Integer</tt>) Sets the maximum number of
+ *     * `MaxUploads` &mdash; (`Integer`) Sets the maximum number of
  *       multipart uploads, from 1 to 1,000, to return in the response
  *       body. 1,000 is the maximum number of uploads that can be
  *       returned in a response.
- *     * +Prefix+ - (<tt>String</tt>) Lists in-progress uploads only for
+ *     * `Prefix` &mdash; (`String`) Lists in-progress uploads only for
  *       those keys that begin with the specified prefix.
- *     * +UploadIdMarker+ - (<tt>String</tt>) Together with key-marker,
+ *     * `UploadIdMarker` &mdash; (`String`) Together with key-marker,
  *       specifies the multipart upload after which listing should begin.
  *       If key-marker is not specified, the upload-id-marker parameter
  *       is ignored.
@@ -1093,48 +1090,48 @@ AWS.S3 = inherit({})
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Bucket+ - (<tt>String</tt>) Name of the bucket to which the
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Bucket` &mdash; (`String`) Name of the bucket to which the
  *         multipart upload was initiated.
- *       * +KeyMarker+ - (<tt>String</tt>) The key at or after which the
+ *       * `KeyMarker` &mdash; (`String`) The key at or after which the
  *         listing began.
- *       * +UploadIdMarker+ - (<tt>String</tt>) Upload ID after which
+ *       * `UploadIdMarker` &mdash; (`String`) Upload ID after which
  *         listing began.
- *       * +NextKeyMarker+ - (<tt>String</tt>) When a list is truncated,
+ *       * `NextKeyMarker` &mdash; (`String`) When a list is truncated,
  *         this element specifies the value that should be used for the
  *         key-marker request parameter in a subsequent request.
- *       * +NextUploadIdMarker+ - (<tt>String</tt>) When a list is
+ *       * `NextUploadIdMarker` &mdash; (`String`) When a list is
  *         truncated, this element specifies the value that should be used
  *         for the upload-id-marker request parameter in a subsequent
  *         request.
- *       * +MaxUploads+ - (<tt>Integer</tt>) Maximum number of multipart
+ *       * `MaxUploads` &mdash; (`Integer`) Maximum number of multipart
  *         uploads that could have been included in the response.
- *       * +IsTruncated+ - (<tt>Boolean</tt>) Indicates whether the
- *         returned list of multipart uploads is truncated. A value of true
+ *       * `IsTruncated` &mdash; (`Boolean`) Indicates whether the returned
+ *         list of multipart uploads is truncated. A value of true
  *         indicates that the list was truncated. The list can be truncated
  *         if the number of multipart uploads exceeds the limit allowed or
  *         specified by max uploads.
- *       * +Uploads+ - (<tt>Array<Object></tt>)
- *         * +UploadId+ - (<tt>String</tt>) Upload ID that identifies the
+ *       * `Uploads` &mdash; (`Array<Object>`)
+ *         * `UploadId` &mdash; (`String`) Upload ID that identifies the
  *           multipart upload.
- *         * +Key+ - (<tt>String</tt>) Key of the object for which the
+ *         * `Key` &mdash; (`String`) Key of the object for which the
  *           multipart upload was initiated.
- *         * +Initiated+ - (<tt>Date</tt>) Date and time at which the
+ *         * `Initiated` &mdash; (`Date`) Date and time at which the
  *           multipart upload was initiated.
- *         * +StorageClass+ - (<tt>String</tt>) The class of storage used
- *           to store the object.
- *         * +Owner+ - (<tt>Object</tt>)
- *           * +ID+ - (<tt>String</tt>)
- *           * +DisplayName+ - (<tt>String</tt>)
- *         * +Initiator+ - (<tt>Object</tt>) Identifies who initiated the
+ *         * `StorageClass` &mdash; (`String`) The class of storage used to
+ *           store the object.
+ *         * `Owner` &mdash; (`Object`)
+ *           * `ID` &mdash; (`String`)
+ *           * `DisplayName` &mdash; (`String`)
+ *         * `Initiator` &mdash; (`Object`) Identifies who initiated the
  *           multipart upload.
- *           * +ID+ - (<tt>String</tt>) If the principal is an AWS account,
+ *           * `ID` &mdash; (`String`) If the principal is an AWS account,
  *             it provides the Canonical User ID. If the principal is an
  *             IAM User, it provides a user ARN value.
- *           * +DisplayName+ - (<tt>String</tt>) Name of the Principal.
+ *           * `DisplayName` &mdash; (`String`) Name of the Principal.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadListMPUpload.html
@@ -1143,69 +1140,69 @@ AWS.S3 = inherit({})
  * @!method listObjectVersions(params, callback)
  *   Calls the ListObjectVersions API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +Delimiter+ - (<tt>String</tt>) A delimiter is a character you
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `Delimiter` &mdash; (`String`) A delimiter is a character you
  *       use to group keys.
- *     * +KeyMarker+ - (<tt>String</tt>) Specifies the key to start with
+ *     * `KeyMarker` &mdash; (`String`) Specifies the key to start with
  *       when listing objects in a bucket.
- *     * +MaxKeys+ - (<tt>Integer</tt>) Sets the maximum number of keys
+ *     * `MaxKeys` &mdash; (`Integer`) Sets the maximum number of keys
  *       returned in the response. The response might contain fewer keys
  *       but will never contain more.
- *     * +Prefix+ - (<tt>String</tt>) Limits the response to keys that
+ *     * `Prefix` &mdash; (`String`) Limits the response to keys that
  *       begin with the specified prefix.
- *     * +VersionIdMarker+ - (<tt>String</tt>) Specifies the object
+ *     * `VersionIdMarker` &mdash; (`String`) Specifies the object
  *       version you want to start listing from.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +IsTruncated+ - (<tt>Boolean</tt>) A flag that indicates whether
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
  *         or not Amazon S3 returned all of the results that satisfied the
  *         search criteria. If your results were truncated, you can make a
  *         follow-up paginated request using the NextKeyMarker and
  *         NextVersionIdMarker response parameters as a starting place in
  *         another request to return the rest of the results.
- *       * +KeyMarker+ - (<tt>String</tt>) Marks the last Key returned in a
+ *       * `KeyMarker` &mdash; (`String`) Marks the last Key returned in a
  *         truncated response.
- *       * +VersionIdMarker+ - (<tt>String</tt>)
- *       * +NextKeyMarker+ - (<tt>String</tt>) Use this value for the key
+ *       * `VersionIdMarker` &mdash; (`String`)
+ *       * `NextKeyMarker` &mdash; (`String`) Use this value for the key
  *         marker request parameter in a subsequent request.
- *       * +NextVersionIdMarker+ - (<tt>String</tt>) Use this value for the
+ *       * `NextVersionIdMarker` &mdash; (`String`) Use this value for the
  *         next version id marker parameter in a subsequent request.
- *       * +Versions+ - (<tt>Array<Object></tt>)
- *         * +ETag+ - (<tt>String</tt>)
- *         * +Size+ - (<tt>String</tt>) Size in bytes of the object.
- *         * +StorageClass+ - (<tt>String</tt>) The class of storage used
- *           to store the object.
- *         * +Key+ - (<tt>String</tt>) The object key.
- *         * +VersionId+ - (<tt>String</tt>) Version ID of an object.
- *         * +IsLatest+ - (<tt>Boolean</tt>) Specifies whether the object
- *           is (true) or is not (false) the latest version of an object.
- *         * +LastModified+ - (<tt>Date</tt>) Date and time the object was
+ *       * `Versions` &mdash; (`Array<Object>`)
+ *         * `ETag` &mdash; (`String`)
+ *         * `Size` &mdash; (`String`) Size in bytes of the object.
+ *         * `StorageClass` &mdash; (`String`) The class of storage used to
+ *           store the object.
+ *         * `Key` &mdash; (`String`) The object key.
+ *         * `VersionId` &mdash; (`String`) Version ID of an object.
+ *         * `IsLatest` &mdash; (`Boolean`) Specifies whether the object is
+ *           (true) or is not (false) the latest version of an object.
+ *         * `LastModified` &mdash; (`Date`) Date and time the object was
  *           last modified.
- *         * +Owner+ - (<tt>Object</tt>)
- *           * +ID+ - (<tt>String</tt>)
- *           * +DisplayName+ - (<tt>String</tt>)
- *       * +DeleteMarkers+ - (<tt>Array<Object></tt>)
- *         * +Owner+ - (<tt>Object</tt>)
- *           * +ID+ - (<tt>String</tt>)
- *           * +DisplayName+ - (<tt>String</tt>)
- *         * +Key+ - (<tt>String</tt>) The object key.
- *         * +VersionId+ - (<tt>String</tt>) Version ID of an object.
- *         * +IsLatest+ - (<tt>Boolean</tt>) Specifies whether the object
- *           is (true) or is not (false) the latest version of an object.
- *         * +LastModified+ - (<tt>Date</tt>) Date and time the object was
+ *         * `Owner` &mdash; (`Object`)
+ *           * `ID` &mdash; (`String`)
+ *           * `DisplayName` &mdash; (`String`)
+ *       * `DeleteMarkers` &mdash; (`Array<Object>`)
+ *         * `Owner` &mdash; (`Object`)
+ *           * `ID` &mdash; (`String`)
+ *           * `DisplayName` &mdash; (`String`)
+ *         * `Key` &mdash; (`String`) The object key.
+ *         * `VersionId` &mdash; (`String`) Version ID of an object.
+ *         * `IsLatest` &mdash; (`Boolean`) Specifies whether the object is
+ *           (true) or is not (false) the latest version of an object.
+ *         * `LastModified` &mdash; (`Date`) Date and time the object was
  *           last modified.
- *       * +Name+ - (<tt>String</tt>)
- *       * +Prefix+ - (<tt>String</tt>)
- *       * +MaxKeys+ - (<tt>Integer</tt>)
- *       * +CommonPrefixes+ - (<tt>Array<Object></tt>)
- *         * +Prefix+ - (<tt>String</tt>)
+ *       * `Name` &mdash; (`String`)
+ *       * `Prefix` &mdash; (`String`)
+ *       * `MaxKeys` &mdash; (`Integer`)
+ *       * `CommonPrefixes` &mdash; (`Array<Object>`)
+ *         * `Prefix` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETVersion.html
@@ -1214,44 +1211,44 @@ AWS.S3 = inherit({})
  * @!method listObjects(params, callback)
  *   Calls the ListObjects API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +Delimiter+ - (<tt>String</tt>) A delimiter is a character you
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `Delimiter` &mdash; (`String`) A delimiter is a character you
  *       use to group keys.
- *     * +Marker+ - (<tt>String</tt>) Specifies the key to start with
- *       when listing objects in a bucket.
- *     * +MaxKeys+ - (<tt>Integer</tt>) Sets the maximum number of keys
+ *     * `Marker` &mdash; (`String`) Specifies the key to start with when
+ *       listing objects in a bucket.
+ *     * `MaxKeys` &mdash; (`Integer`) Sets the maximum number of keys
  *       returned in the response. The response might contain fewer keys
  *       but will never contain more.
- *     * +Prefix+ - (<tt>String</tt>) Limits the response to keys that
+ *     * `Prefix` &mdash; (`String`) Limits the response to keys that
  *       begin with the specified prefix.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +IsTruncated+ - (<tt>Boolean</tt>) A flag that indicates whether
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
  *         or not Amazon S3 returned all of the results that satisfied the
  *         search criteria.
- *       * +Marker+ - (<tt>String</tt>)
- *       * +Contents+ - (<tt>Array<Object></tt>)
- *         * +Key+ - (<tt>String</tt>)
- *         * +LastModified+ - (<tt>Date</tt>)
- *         * +ETag+ - (<tt>String</tt>)
- *         * +Size+ - (<tt>Integer</tt>)
- *         * +StorageClass+ - (<tt>String</tt>) The class of storage used
- *           to store the object.
- *         * +Owner+ - (<tt>Object</tt>)
- *           * +ID+ - (<tt>String</tt>)
- *           * +DisplayName+ - (<tt>String</tt>)
- *       * +Name+ - (<tt>String</tt>)
- *       * +Prefix+ - (<tt>String</tt>)
- *       * +MaxKeys+ - (<tt>Integer</tt>)
- *       * +CommonPrefixes+ - (<tt>Array<Object></tt>)
- *         * +Prefix+ - (<tt>String</tt>)
+ *       * `Marker` &mdash; (`String`)
+ *       * `Contents` &mdash; (`Array<Object>`)
+ *         * `Key` &mdash; (`String`)
+ *         * `LastModified` &mdash; (`Date`)
+ *         * `ETag` &mdash; (`String`)
+ *         * `Size` &mdash; (`Integer`)
+ *         * `StorageClass` &mdash; (`String`) The class of storage used to
+ *           store the object.
+ *         * `Owner` &mdash; (`Object`)
+ *           * `ID` &mdash; (`String`)
+ *           * `DisplayName` &mdash; (`String`)
+ *       * `Name` &mdash; (`String`)
+ *       * `Prefix` &mdash; (`String`)
+ *       * `MaxKeys` &mdash; (`Integer`)
+ *       * `CommonPrefixes` &mdash; (`Array<Object>`)
+ *         * `Prefix` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGET.html
@@ -1260,58 +1257,58 @@ AWS.S3 = inherit({})
  * @!method listParts(params, callback)
  *   Calls the ListParts API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +MaxParts+ - (<tt>Integer</tt>) Sets the maximum number of parts
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `Key` &mdash; **required** &mdash; (`String`)
+ *     * `MaxParts` &mdash; (`Integer`) Sets the maximum number of parts
  *       to return.
- *     * +PartNumberMarker+ - (<tt>String</tt>) Specifies the part after
+ *     * `PartNumberMarker` &mdash; (`String`) Specifies the part after
  *       which listing should begin. Only parts with higher part numbers
  *       will be listed.
- *     * +UploadId+ - (*required*, <tt>String</tt>) Upload ID identifying
- *       the multipart upload whose parts are being listed.
+ *     * `UploadId` &mdash; **required** &mdash; (`String`) Upload ID
+ *       identifying the multipart upload whose parts are being listed.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Bucket+ - (<tt>String</tt>) Name of the bucket to which the
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Bucket` &mdash; (`String`) Name of the bucket to which the
  *         multipart upload was initiated.
- *       * +Key+ - (<tt>String</tt>) Object key for which the multipart
+ *       * `Key` &mdash; (`String`) Object key for which the multipart
  *         upload was initiated.
- *       * +UploadId+ - (<tt>String</tt>) Upload ID identifying the
+ *       * `UploadId` &mdash; (`String`) Upload ID identifying the
  *         multipart upload whose parts are being listed.
- *       * +PartNumberMarker+ - (<tt>Integer</tt>) Part number after which
+ *       * `PartNumberMarker` &mdash; (`Integer`) Part number after which
  *         listing begins.
- *       * +NextPartNumberMarker+ - (<tt>Integer</tt>) When a list is
+ *       * `NextPartNumberMarker` &mdash; (`Integer`) When a list is
  *         truncated, this element specifies the last part in the list, as
  *         well as the value to use for the part-number-marker request
  *         parameter in a subsequent request.
- *       * +MaxParts+ - (<tt>Integer</tt>) Maximum number of parts that
- *         were allowed in the response.
- *       * +IsTruncated+ - (<tt>Boolean</tt>) Indicates whether the
- *         returned list of parts is truncated.
- *       * +Parts+ - (<tt>Array<Object></tt>)
- *         * +PartNumber+ - (<tt>Integer</tt>) Part number identifying the
+ *       * `MaxParts` &mdash; (`Integer`) Maximum number of parts that were
+ *         allowed in the response.
+ *       * `IsTruncated` &mdash; (`Boolean`) Indicates whether the returned
+ *         list of parts is truncated.
+ *       * `Parts` &mdash; (`Array<Object>`)
+ *         * `PartNumber` &mdash; (`Integer`) Part number identifying the
  *           part.
- *         * +LastModified+ - (<tt>Date</tt>) Date and time at which the
+ *         * `LastModified` &mdash; (`Date`) Date and time at which the
  *           part was uploaded.
- *         * +ETag+ - (<tt>String</tt>) Entity tag returned when the part
+ *         * `ETag` &mdash; (`String`) Entity tag returned when the part
  *           was uploaded.
- *         * +Size+ - (<tt>Integer</tt>) Size of the uploaded part data.
- *       * +Initiator+ - (<tt>Object</tt>) Identifies who initiated the
+ *         * `Size` &mdash; (`Integer`) Size of the uploaded part data.
+ *       * `Initiator` &mdash; (`Object`) Identifies who initiated the
  *         multipart upload.
- *         * +ID+ - (<tt>String</tt>) If the principal is an AWS account,
- *           it provides the Canonical User ID. If the principal is an IAM
+ *         * `ID` &mdash; (`String`) If the principal is an AWS account, it
+ *           provides the Canonical User ID. If the principal is an IAM
  *           User, it provides a user ARN value.
- *         * +DisplayName+ - (<tt>String</tt>) Name of the Principal.
- *       * +Owner+ - (<tt>Object</tt>)
- *         * +ID+ - (<tt>String</tt>)
- *         * +DisplayName+ - (<tt>String</tt>)
- *       * +StorageClass+ - (<tt>String</tt>) The class of storage used to
+ *         * `DisplayName` &mdash; (`String`) Name of the Principal.
+ *       * `Owner` &mdash; (`Object`)
+ *         * `ID` &mdash; (`String`)
+ *         * `DisplayName` &mdash; (`String`)
+ *       * `StorageClass` &mdash; (`String`) The class of storage used to
  *         store the object.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -1321,43 +1318,44 @@ AWS.S3 = inherit({})
  * @!method putBucketAcl(params, callback)
  *   Calls the PutBucketAcl API operation.
  *   @param params [Object]
- *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the bucket.
- *     * +AccessControlPolicy+ - (<tt>Object</tt>)
- *       * +Grants+ - (<tt>Array<Object></tt>) A list of grants.
- *         * +Grantee+ - (<tt>Object</tt>)
- *           * +DisplayName+ - (<tt>String</tt>) Screen name of the
+ *     * `ACL` &mdash; (`String`) The canned ACL to apply to the bucket.
+ *     * `AccessControlPolicy` &mdash; (`Object`)
+ *       * `Grants` &mdash; (`Array<Object>`) A list of grants.
+ *         * `Grantee` &mdash; (`Object`)
+ *           * `DisplayName` &mdash; (`String`) Screen name of the
  *             grantee.
- *           * +EmailAddress+ - (<tt>String</tt>) Email address of the
+ *           * `EmailAddress` &mdash; (`String`) Email address of the
  *             grantee.
- *           * +ID+ - (<tt>String</tt>) The canonical user ID of the
+ *           * `ID` &mdash; (`String`) The canonical user ID of the
  *             grantee.
- *           * +Type+ - (*required*, <tt>String</tt>) Type of grantee
- *           * +URI+ - (<tt>String</tt>) URI of the grantee group.
- *         * +Permission+ - (<tt>String</tt>) Specifies the permission
+ *           * `Type` &mdash; **required** &mdash; (`String`) Type of
+ *             grantee
+ *           * `URI` &mdash; (`String`) URI of the grantee group.
+ *         * `Permission` &mdash; (`String`) Specifies the permission
  *           given to the grantee.
- *       * +Owner+ - (<tt>Object</tt>)
- *         * +DisplayName+ - (<tt>String</tt>)
- *         * +ID+ - (<tt>String</tt>)
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +ContentMD5+ - (<tt>String</tt>)
- *     * +GrantFullControl+ - (<tt>String</tt>) Allows grantee the read,
+ *       * `Owner` &mdash; (`Object`)
+ *         * `DisplayName` &mdash; (`String`)
+ *         * `ID` &mdash; (`String`)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `ContentMD5` &mdash; (`String`)
+ *     * `GrantFullControl` &mdash; (`String`) Allows grantee the read,
  *       write, read ACP, and write ACP permissions on the bucket.
- *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to list the
+ *     * `GrantRead` &mdash; (`String`) Allows grantee to list the
  *       objects in the bucket.
- *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
+ *     * `GrantReadACP` &mdash; (`String`) Allows grantee to read the
  *       bucket ACL.
- *     * +GrantWrite+ - (<tt>String</tt>) Allows grantee to create,
+ *     * `GrantWrite` &mdash; (`String`) Allows grantee to create,
  *       overwrite, and delete any object in the bucket.
- *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
+ *     * `GrantWriteACP` &mdash; (`String`) Allows grantee to write the
  *       ACL for the applicable bucket.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTacl.html
@@ -1366,31 +1364,31 @@ AWS.S3 = inherit({})
  * @!method putBucketCors(params, callback)
  *   Calls the PutBucketCors API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +CORSConfiguration+ - (<tt>Object</tt>)
- *       * +CORSRules+ - (<tt>Array<Object></tt>)
- *         * +AllowedMethods+ - (<tt>Array<String></tt>) Identifies HTTP
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `CORSConfiguration` &mdash; (`Object`)
+ *       * `CORSRules` &mdash; (`Array<Object>`)
+ *         * `AllowedMethods` &mdash; (`Array<String>`) Identifies HTTP
  *           methods that the domain/origin specified in the rule is
  *           allowed to execute.
- *         * +AllowedOrigins+ - (<tt>Array<String></tt>) One or more
+ *         * `AllowedOrigins` &mdash; (`Array<String>`) One or more
  *           origins you want customers to be able to access the bucket
  *           from.
- *         * +ExposeHeaders+ - (<tt>Array<String></tt>) One or more
+ *         * `ExposeHeaders` &mdash; (`Array<String>`) One or more
  *           headers in the response that you want customers to be able
  *           to access from their applications (for example, from a
  *           JavaScript XMLHttpRequest object).
- *         * +MaxAgeSeconds+ - (<tt>Integer</tt>) The time in seconds
- *           that your browser is to cache the preflight response for the
+ *         * `MaxAgeSeconds` &mdash; (`Integer`) The time in seconds that
+ *           your browser is to cache the preflight response for the
  *           specified resource.
- *     * +ContentMD5+ - (<tt>String</tt>)
+ *     * `ContentMD5` &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTcors.html
@@ -1399,41 +1397,41 @@ AWS.S3 = inherit({})
  * @!method putBucketLifecycle(params, callback)
  *   Calls the PutBucketLifecycle API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +ContentMD5+ - (<tt>String</tt>)
- *     * +LifecycleConfiguration+ - (<tt>Object</tt>)
- *       * +Rules+ - (*required*, <tt>Array<Object></tt>)
- *         * +Expiration+ - (<tt>Object</tt>)
- *           * +Date+ - (<tt>Date</tt>) Indicates at what date the object
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `ContentMD5` &mdash; (`String`)
+ *     * `LifecycleConfiguration` &mdash; (`Object`)
+ *       * `Rules` &mdash; **required** &mdash; (`Array<Object>`)
+ *         * `Expiration` &mdash; (`Object`)
+ *           * `Date` &mdash; (`Date`) Indicates at what date the object
  *             is to be moved or deleted. Should be in GMT ISO 8601
  *             Format.
- *           * +Days+ - (*required*, <tt>Integer</tt>) Indicates the
- *             lifetime, in days, of the objects that are subject to the
- *             rule. The value must be a non-zero positive integer.
- *         * +ID+ - (<tt>String</tt>) Unique identifier for the rule. The
+ *           * `Days` &mdash; **required** &mdash; (`Integer`) Indicates
+ *             the lifetime, in days, of the objects that are subject to
+ *             the rule. The value must be a non-zero positive integer.
+ *         * `ID` &mdash; (`String`) Unique identifier for the rule. The
  *           value cannot be longer than 255 characters.
- *         * +Prefix+ - (*required*, <tt>String</tt>) Prefix identifying
- *           one or more objects to which the rule applies.
- *         * +Status+ - (*required*, <tt>String</tt>) If 'Enabled', the
- *           rule is currently being applied. If 'Disabled', the rule is
- *           not currently being applied.
- *         * +Transition+ - (<tt>Object</tt>)
- *           * +Date+ - (<tt>Date</tt>) Indicates at what date the object
+ *         * `Prefix` &mdash; **required** &mdash; (`String`) Prefix
+ *           identifying one or more objects to which the rule applies.
+ *         * `Status` &mdash; **required** &mdash; (`String`) If
+ *           'Enabled', the rule is currently being applied. If
+ *           'Disabled', the rule is not currently being applied.
+ *         * `Transition` &mdash; (`Object`)
+ *           * `Date` &mdash; (`Date`) Indicates at what date the object
  *             is to be moved or deleted. Should be in GMT ISO 8601
  *             Format.
- *           * +Days+ - (<tt>Integer</tt>) Indicates the lifetime, in
+ *           * `Days` &mdash; (`Integer`) Indicates the lifetime, in
  *             days, of the objects that are subject to the rule. The
  *             value must be a non-zero positive integer.
- *           * +StorageClass+ - (<tt>String</tt>) The class of storage
+ *           * `StorageClass` &mdash; (`String`) The class of storage
  *             used to store the object.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html
@@ -1442,40 +1440,41 @@ AWS.S3 = inherit({})
  * @!method putBucketLogging(params, callback)
  *   Calls the PutBucketLogging API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +BucketLoggingStatus+ - (*required*, <tt>Object</tt>)
- *       * +LoggingEnabled+ - (*required*, <tt>Object</tt>)
- *         * +TargetBucket+ - (<tt>String</tt>) Specifies the bucket
- *           where you want Amazon S3 to store server access logs. You
- *           can have your logs delivered to any bucket that you own,
- *           including the same bucket that is being logged. You can also
- *           configure multiple buckets to deliver their logs to the same
- *           target bucket. In this case you should choose a different
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `BucketLoggingStatus` &mdash; **required** &mdash; (`Object`)
+ *       * `LoggingEnabled` &mdash; **required** &mdash; (`Object`)
+ *         * `TargetBucket` &mdash; (`String`) Specifies the bucket where
+ *           you want Amazon S3 to store server access logs. You can have
+ *           your logs delivered to any bucket that you own, including
+ *           the same bucket that is being logged. You can also configure
+ *           multiple buckets to deliver their logs to the same target
+ *           bucket. In this case you should choose a different
  *           TargetPrefix for each source bucket so that the delivered
  *           log files can be distinguished by key.
- *         * +TargetGrants+ - (<tt>Array<Object></tt>)
- *           * +Grantee+ - (<tt>Object</tt>)
- *             * +DisplayName+ - (<tt>String</tt>) Screen name of the
+ *         * `TargetGrants` &mdash; (`Array<Object>`)
+ *           * `Grantee` &mdash; (`Object`)
+ *             * `DisplayName` &mdash; (`String`) Screen name of the
  *               grantee.
- *             * +EmailAddress+ - (<tt>String</tt>) Email address of the
+ *             * `EmailAddress` &mdash; (`String`) Email address of the
  *               grantee.
- *             * +ID+ - (<tt>String</tt>) The canonical user ID of the
+ *             * `ID` &mdash; (`String`) The canonical user ID of the
  *               grantee.
- *             * +Type+ - (*required*, <tt>String</tt>) Type of grantee
- *             * +URI+ - (<tt>String</tt>) URI of the grantee group.
- *           * +Permission+ - (<tt>String</tt>)
- *         * +TargetPrefix+ - (<tt>String</tt>) This element lets you
+ *             * `Type` &mdash; **required** &mdash; (`String`) Type of
+ *               grantee
+ *             * `URI` &mdash; (`String`) URI of the grantee group.
+ *           * `Permission` &mdash; (`String`)
+ *         * `TargetPrefix` &mdash; (`String`) This element lets you
  *           specify a prefix for the keys that the log files will be
  *           stored under.
- *     * +ContentMD5+ - (<tt>String</tt>)
+ *     * `ContentMD5` &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTlogging.html
@@ -1484,13 +1483,14 @@ AWS.S3 = inherit({})
  * @!method putBucketNotification(params, callback)
  *   Calls the PutBucketNotification API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +ContentMD5+ - (<tt>String</tt>)
- *     * +NotificationConfiguration+ - (*required*, <tt>Object</tt>)
- *       * +TopicConfiguration+ - (*required*, <tt>Object</tt>)
- *         * +Event+ - (<tt>String</tt>) Bucket event for which to send
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `ContentMD5` &mdash; (`String`)
+ *     * `NotificationConfiguration` &mdash; **required** &mdash;
+ *       (`Object`)
+ *       * `TopicConfiguration` &mdash; **required** &mdash; (`Object`)
+ *         * `Event` &mdash; (`String`) Bucket event for which to send
  *           notifications.
- *         * +Topic+ - (<tt>String</tt>) Amazon SNS topic to which Amazon
+ *         * `Topic` &mdash; (`String`) Amazon SNS topic to which Amazon
  *           S3 will publish a message to report the specified events for
  *           the bucket.
  *   @callback callback function(err, data)
@@ -1498,9 +1498,9 @@ AWS.S3 = inherit({})
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTnotification.html
@@ -1509,18 +1509,18 @@ AWS.S3 = inherit({})
  * @!method putBucketPolicy(params, callback)
  *   Calls the PutBucketPolicy API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +ContentMD5+ - (<tt>String</tt>)
- *     * +Policy+ - (*required*, <tt>String</tt>) The bucket policy as a
- *       JSON document.
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `ContentMD5` &mdash; (`String`)
+ *     * `Policy` &mdash; **required** &mdash; (`String`) The bucket
+ *       policy as a JSON document.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTpolicy.html
@@ -1529,19 +1529,20 @@ AWS.S3 = inherit({})
  * @!method putBucketRequestPayment(params, callback)
  *   Calls the PutBucketRequestPayment API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +ContentMD5+ - (<tt>String</tt>)
- *     * +RequestPaymentConfiguration+ - (*required*, <tt>Object</tt>)
- *       * +Payer+ - (*required*, <tt>String</tt>) Specifies who pays for
- *         the download and request fees.
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `ContentMD5` &mdash; (`String`)
+ *     * `RequestPaymentConfiguration` &mdash; **required** &mdash;
+ *       (`Object`)
+ *       * `Payer` &mdash; **required** &mdash; (`String`) Specifies who
+ *         pays for the download and request fees.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTrequestPaymentPUT.html
@@ -1550,20 +1551,22 @@ AWS.S3 = inherit({})
  * @!method putBucketTagging(params, callback)
  *   Calls the PutBucketTagging API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +ContentMD5+ - (<tt>String</tt>)
- *     * +Tagging+ - (*required*, <tt>Object</tt>)
- *       * +TagSet+ - (*required*, <tt>Array<Object></tt>)
- *         * +Key+ - (*required*, <tt>String</tt>) Name of the tag.
- *         * +Value+ - (*required*, <tt>String</tt>) Value of the tag.
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `ContentMD5` &mdash; (`String`)
+ *     * `Tagging` &mdash; **required** &mdash; (`Object`)
+ *       * `TagSet` &mdash; **required** &mdash; (`Array<Object>`)
+ *         * `Key` &mdash; **required** &mdash; (`String`) Name of the
+ *           tag.
+ *         * `Value` &mdash; **required** &mdash; (`String`) Value of the
+ *           tag.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTtagging.html
@@ -1572,27 +1575,28 @@ AWS.S3 = inherit({})
  * @!method putBucketVersioning(params, callback)
  *   Calls the PutBucketVersioning API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +ContentMD5+ - (<tt>String</tt>)
- *     * +MFA+ - (<tt>String</tt>) The value is the concatenation of the
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `ContentMD5` &mdash; (`String`)
+ *     * `MFA` &mdash; (`String`) The value is the concatenation of the
  *       authentication device''s serial number, a space, and the value
  *       displayed on your authentication device.
- *     * +VersioningConfiguration+ - (*required*, <tt>Object</tt>)
- *       * +MFADelete+ - (<tt>String</tt>) Specifies whether MFA delete
- *         is enabled in the bucket versioning configuration. This
- *         element is only returned if the bucket has been configured
- *         with MFA delete. If the bucket has never been so configured,
- *         this element is not returned.
- *       * +Status+ - (<tt>String</tt>) The versioning state of the
+ *     * `VersioningConfiguration` &mdash; **required** &mdash;
+ *       (`Object`)
+ *       * `MFADelete` &mdash; (`String`) Specifies whether MFA delete is
+ *         enabled in the bucket versioning configuration. This element
+ *         is only returned if the bucket has been configured with MFA
+ *         delete. If the bucket has never been so configured, this
+ *         element is not returned.
+ *       * `Status` &mdash; (`String`) The versioning state of the
  *         bucket.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html
@@ -1601,41 +1605,41 @@ AWS.S3 = inherit({})
  * @!method putBucketWebsite(params, callback)
  *   Calls the PutBucketWebsite API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +ContentMD5+ - (<tt>String</tt>)
- *     * +WebsiteConfiguration+ - (*required*, <tt>Object</tt>)
- *       * +ErrorDocument+ - (<tt>Object</tt>)
- *         * +Key+ - (*required*, <tt>String</tt>) The object key name to
- *           use when a 4XX class error occurs.
- *       * +IndexDocument+ - (<tt>Object</tt>)
- *         * +Suffix+ - (*required*, <tt>String</tt>) A suffix that is
- *           appended to a request that is for a directory on the website
- *           endpoint (e.g. if the suffix is index.html and you make a
- *           request to samplebucket/images/ the data that is returned
- *           will be for the object with the key name images/index.html)
- *           The suffix must not be empty and must not include a slash
- *           character.
- *       * +RedirectAllRequestsTo+ - (<tt>Object</tt>)
- *         * +HostName+ - (*required*, <tt>String</tt>) Name of the host
- *           where requests will be redirected.
- *         * +Protocol+ - (<tt>String</tt>) Protocol to use (http, https)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `ContentMD5` &mdash; (`String`)
+ *     * `WebsiteConfiguration` &mdash; **required** &mdash; (`Object`)
+ *       * `ErrorDocument` &mdash; (`Object`)
+ *         * `Key` &mdash; **required** &mdash; (`String`) The object key
+ *           name to use when a 4XX class error occurs.
+ *       * `IndexDocument` &mdash; (`Object`)
+ *         * `Suffix` &mdash; **required** &mdash; (`String`) A suffix
+ *           that is appended to a request that is for a directory on the
+ *           website endpoint (e.g. if the suffix is index.html and you
+ *           make a request to samplebucket/images/ the data that is
+ *           returned will be for the object with the key name
+ *           images/index.html) The suffix must not be empty and must not
+ *           include a slash character.
+ *       * `RedirectAllRequestsTo` &mdash; (`Object`)
+ *         * `HostName` &mdash; **required** &mdash; (`String`) Name of
+ *           the host where requests will be redirected.
+ *         * `Protocol` &mdash; (`String`) Protocol to use (http, https)
  *           when redirecting requests. The default is the protocol that
  *           is used in the original request.
- *       * +RoutingRules+ - (<tt>Array<Object></tt>)
- *         * +Condition+ - (<tt>Object</tt>) A container for describing a
+ *       * `RoutingRules` &mdash; (`Array<Object>`)
+ *         * `Condition` &mdash; (`Object`) A container for describing a
  *           condition that must be met for the specified redirect to
  *           apply. For example, 1. If request is for pages in the /docs
  *           folder, redirect to the /documents folder. 2. If request
  *           results in HTTP error 4xx, redirect request to another host
  *           where you might process the error.
- *           * +HttpErrorCodeReturnedEquals+ - (<tt>String</tt>) The HTTP
+ *           * `HttpErrorCodeReturnedEquals` &mdash; (`String`) The HTTP
  *             error code when the redirect is applied. In the event of
  *             an error, if the error code equals this value, then the
  *             specified redirect is applied. Required when parent
  *             element Condition is specified and sibling KeyPrefixEquals
  *             is not specified. If both are specified, then both must be
  *             true for the redirect to be applied.
- *           * +KeyPrefixEquals+ - (<tt>String</tt>) The object key name
+ *           * `KeyPrefixEquals` &mdash; (`String`) The object key name
  *             prefix when the redirect is applied. For example, to
  *             redirect requests for ExamplePage.html, the key prefix
  *             will be ExamplePage.html. To redirect request for all
@@ -1645,20 +1649,20 @@ AWS.S3 = inherit({})
  *             HttpErrorCodeReturnedEquals is not specified. If both
  *             conditions are specified, both must be true for the
  *             redirect to be applied.
- *         * +Redirect+ - (*required*, <tt>Object</tt>) Container for
- *           redirect information. You can redirect requests to another
- *           host, to another page, or with another protocol. In the
- *           event of an error, you can can specify a different error
+ *         * `Redirect` &mdash; **required** &mdash; (`Object`) Container
+ *           for redirect information. You can redirect requests to
+ *           another host, to another page, or with another protocol. In
+ *           the event of an error, you can can specify a different error
  *           code to return.
- *           * +HostName+ - (*required*, <tt>String</tt>) Name of the
- *             host where requests will be redirected.
- *           * +HttpRedirectCode+ - (<tt>String</tt>) The HTTP redirect
+ *           * `HostName` &mdash; **required** &mdash; (`String`) Name of
+ *             the host where requests will be redirected.
+ *           * `HttpRedirectCode` &mdash; (`String`) The HTTP redirect
  *             code to use on the response. Not required if one of the
  *             siblings is present.
- *           * +Protocol+ - (<tt>String</tt>) Protocol to use (http,
+ *           * `Protocol` &mdash; (`String`) Protocol to use (http,
  *             https) when redirecting requests. The default is the
  *             protocol that is used in the original request.
- *           * +ReplaceKeyPrefixWith+ - (<tt>String</tt>) The object key
+ *           * `ReplaceKeyPrefixWith` &mdash; (`String`) The object key
  *             prefix to use in the redirect request. For example, to
  *             redirect requests for all pages with prefix docs/ (objects
  *             in the docs/ folder) to documents/, you can set a
@@ -1666,7 +1670,7 @@ AWS.S3 = inherit({})
  *             the Redirect set ReplaceKeyPrefixWith to /documents. Not
  *             required if one of the siblings is present. Can be present
  *             only if ReplaceKeyWith is not provided.
- *           * +ReplaceKeyWith+ - (<tt>String</tt>) The specific object
+ *           * `ReplaceKeyWith` &mdash; (`String`) The specific object
  *             key to use in the redirect request. For example, redirect
  *             request to error.html. Not required if one of the sibling
  *             is present. Can be present only if ReplaceKeyPrefixWith is
@@ -1676,9 +1680,9 @@ AWS.S3 = inherit({})
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html
@@ -1687,39 +1691,39 @@ AWS.S3 = inherit({})
  * @!method putObject(params, callback)
  *   Calls the PutObject API operation.
  *   @param params [Object]
- *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the object.
- *     * +Body+ - (<tt>String</tt>)
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +CacheControl+ - (<tt>String</tt>) Specifies caching behavior
+ *     * `ACL` &mdash; (`String`) The canned ACL to apply to the object.
+ *     * `Body` &mdash; (`String`)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `CacheControl` &mdash; (`String`) Specifies caching behavior
  *       along the request/reply chain.
- *     * +ContentDisposition+ - (<tt>String</tt>) Specifies
- *       presentational information for the object.
- *     * +ContentEncoding+ - (<tt>String</tt>) Specifies what content
+ *     * `ContentDisposition` &mdash; (`String`) Specifies presentational
+ *       information for the object.
+ *     * `ContentEncoding` &mdash; (`String`) Specifies what content
  *       encodings have been applied to the object and thus what decoding
  *       mechanisms must be applied to obtain the media-type referenced
  *       by the Content-Type header field.
- *     * +ContentLanguage+ - (<tt>String</tt>) The language the content
- *       is in.
- *     * +ContentType+ - (<tt>String</tt>) A standard MIME type
- *       describing the format of the object data.
- *     * +Expires+ - (<tt>Date</tt>) The date and time at which the
- *       object is no longer cacheable.
- *     * +GrantFullControl+ - (<tt>String</tt>) Gives the grantee READ,
+ *     * `ContentLanguage` &mdash; (`String`) The language the content is
+ *       in.
+ *     * `ContentType` &mdash; (`String`) A standard MIME type describing
+ *       the format of the object data.
+ *     * `Expires` &mdash; (`Date`) The date and time at which the object
+ *       is no longer cacheable.
+ *     * `GrantFullControl` &mdash; (`String`) Gives the grantee READ,
  *       READ_ACP, and WRITE_ACP permissions on the object.
- *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to read the
- *       object data and its metadata.
- *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
+ *     * `GrantRead` &mdash; (`String`) Allows grantee to read the object
+ *       data and its metadata.
+ *     * `GrantReadACP` &mdash; (`String`) Allows grantee to read the
  *       object ACL.
- *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
+ *     * `GrantWriteACP` &mdash; (`String`) Allows grantee to write the
  *       ACL for the applicable object.
- *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +Metadata+ - (<tt>Object<String></tt>) A map of metadata to
- *       store with the object in S3.
- *     * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
+ *     * `Key` &mdash; **required** &mdash; (`String`)
+ *     * `Metadata` &mdash; (`Object<String>`) A map of metadata to store
+ *       with the object in S3.
+ *     * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *       encryption algorithm used when storing this object in S3.
- *     * +StorageClass+ - (<tt>String</tt>) The type of storage to use
- *       for the object. Defaults to 'STANDARD'.
- *     * +WebsiteRedirectLocation+ - (<tt>String</tt>) If the bucket is
+ *     * `StorageClass` &mdash; (`String`) The type of storage to use for
+ *       the object. Defaults to 'STANDARD'.
+ *     * `WebsiteRedirectLocation` &mdash; (`String`) If the bucket is
  *       configured as a website, redirects requests for this object to
  *       another object in the same bucket or to an external URL. Amazon
  *       S3 stores the value of this header in the object metadata.
@@ -1728,17 +1732,17 @@ AWS.S3 = inherit({})
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +Expiration+ - (<tt>Date</tt>) If the object expiration is
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `Expiration` &mdash; (`Date`) If the object expiration is
  *         configured, this will contain the expiration date (expiry-date)
  *         and rule ID (rule-id). The value of rule-id is URL encoded.
- *       * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
+ *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
- *       * +ETag+ - (<tt>String</tt>) Entity tag for the uploaded object.
- *       * +VersionId+ - (<tt>String</tt>) Version of the object.
+ *       * `ETag` &mdash; (`String`) Entity tag for the uploaded object.
+ *       * `VersionId` &mdash; (`String`) Version of the object.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectPUT.html
@@ -1747,44 +1751,45 @@ AWS.S3 = inherit({})
  * @!method putObjectAcl(params, callback)
  *   Calls the PutObjectAcl API operation.
  *   @param params [Object]
- *     * +ACL+ - (<tt>String</tt>) The canned ACL to apply to the bucket.
- *     * +AccessControlPolicy+ - (<tt>Object</tt>)
- *       * +Grants+ - (<tt>Array<Object></tt>) A list of grants.
- *         * +Grantee+ - (<tt>Object</tt>)
- *           * +DisplayName+ - (<tt>String</tt>) Screen name of the
+ *     * `ACL` &mdash; (`String`) The canned ACL to apply to the bucket.
+ *     * `AccessControlPolicy` &mdash; (`Object`)
+ *       * `Grants` &mdash; (`Array<Object>`) A list of grants.
+ *         * `Grantee` &mdash; (`Object`)
+ *           * `DisplayName` &mdash; (`String`) Screen name of the
  *             grantee.
- *           * +EmailAddress+ - (<tt>String</tt>) Email address of the
+ *           * `EmailAddress` &mdash; (`String`) Email address of the
  *             grantee.
- *           * +ID+ - (<tt>String</tt>) The canonical user ID of the
+ *           * `ID` &mdash; (`String`) The canonical user ID of the
  *             grantee.
- *           * +Type+ - (*required*, <tt>String</tt>) Type of grantee
- *           * +URI+ - (<tt>String</tt>) URI of the grantee group.
- *         * +Permission+ - (<tt>String</tt>) Specifies the permission
+ *           * `Type` &mdash; **required** &mdash; (`String`) Type of
+ *             grantee
+ *           * `URI` &mdash; (`String`) URI of the grantee group.
+ *         * `Permission` &mdash; (`String`) Specifies the permission
  *           given to the grantee.
- *       * +Owner+ - (<tt>Object</tt>)
- *         * +DisplayName+ - (<tt>String</tt>)
- *         * +ID+ - (<tt>String</tt>)
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +ContentMD5+ - (<tt>String</tt>)
- *     * +GrantFullControl+ - (<tt>String</tt>) Allows grantee the read,
+ *       * `Owner` &mdash; (`Object`)
+ *         * `DisplayName` &mdash; (`String`)
+ *         * `ID` &mdash; (`String`)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `ContentMD5` &mdash; (`String`)
+ *     * `GrantFullControl` &mdash; (`String`) Allows grantee the read,
  *       write, read ACP, and write ACP permissions on the bucket.
- *     * +GrantRead+ - (<tt>String</tt>) Allows grantee to list the
+ *     * `GrantRead` &mdash; (`String`) Allows grantee to list the
  *       objects in the bucket.
- *     * +GrantReadACP+ - (<tt>String</tt>) Allows grantee to read the
+ *     * `GrantReadACP` &mdash; (`String`) Allows grantee to read the
  *       bucket ACL.
- *     * +GrantWrite+ - (<tt>String</tt>) Allows grantee to create,
+ *     * `GrantWrite` &mdash; (`String`) Allows grantee to create,
  *       overwrite, and delete any object in the bucket.
- *     * +GrantWriteACP+ - (<tt>String</tt>) Allows grantee to write the
+ *     * `GrantWriteACP` &mdash; (`String`) Allows grantee to write the
  *       ACL for the applicable bucket.
- *     * +Key+ - (*required*, <tt>String</tt>)
+ *     * `Key` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectPUTacl.html
@@ -1793,19 +1798,19 @@ AWS.S3 = inherit({})
  * @!method restoreObject(params, callback)
  *   Calls the RestoreObject API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +RestoreRequest+ - (<tt>Object</tt>)
- *       * +Days+ - (*required*, <tt>Integer</tt>) Lifetime of the active
- *         copy in days
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `Key` &mdash; **required** &mdash; (`String`)
+ *     * `RestoreRequest` &mdash; (`Object`)
+ *       * `Days` &mdash; **required** &mdash; (`Integer`) Lifetime of
+ *         the active copy in days
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectRestore.html
@@ -1814,25 +1819,25 @@ AWS.S3 = inherit({})
  * @!method uploadPart(params, callback)
  *   Calls the UploadPart API operation.
  *   @param params [Object]
- *     * +Body+ - (<tt>String</tt>)
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +PartNumber+ - (*required*, <tt>String</tt>) Part number of part
- *       being uploaded.
- *     * +UploadId+ - (*required*, <tt>String</tt>) Upload ID identifying
- *       the multipart upload whose part is being uploaded.
+ *     * `Body` &mdash; (`String`)
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `Key` &mdash; **required** &mdash; (`String`)
+ *     * `PartNumber` &mdash; **required** &mdash; (`String`) Part number
+ *       of part being uploaded.
+ *     * `UploadId` &mdash; **required** &mdash; (`String`) Upload ID
+ *       identifying the multipart upload whose part is being uploaded.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
- *       * +ETag+ - (<tt>String</tt>) Entity tag for the uploaded object.
+ *       * `ETag` &mdash; (`String`) Entity tag for the uploaded object.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadUploadPart.html
@@ -1841,46 +1846,46 @@ AWS.S3 = inherit({})
  * @!method uploadPartCopy(params, callback)
  *   Calls the UploadPartCopy API operation.
  *   @param params [Object]
- *     * +Bucket+ - (*required*, <tt>String</tt>)
- *     * +CopySource+ - (*required*, <tt>String</tt>) The name of the
- *       source bucket and key name of the source object, separated by a
- *       slash (/). Must be URL-encoded.
- *     * +CopySourceIfMatch+ - (<tt>Date</tt>) Copies the object if its
+ *     * `Bucket` &mdash; **required** &mdash; (`String`)
+ *     * `CopySource` &mdash; **required** &mdash; (`String`) The name of
+ *       the source bucket and key name of the source object, separated
+ *       by a slash (/). Must be URL-encoded.
+ *     * `CopySourceIfMatch` &mdash; (`Date`) Copies the object if its
  *       entity tag (ETag) matches the specified tag.
- *     * +CopySourceIfModifiedSince+ - (<tt>Date</tt>) Copies the object
+ *     * `CopySourceIfModifiedSince` &mdash; (`Date`) Copies the object
  *       if it has been modified since the specified time.
- *     * +CopySourceIfNoneMatch+ - (<tt>Date</tt>) Copies the object if
+ *     * `CopySourceIfNoneMatch` &mdash; (`Date`) Copies the object if
  *       its entity tag (ETag) is different than the specified ETag.
- *     * +CopySourceIfUnmodifiedSince+ - (<tt>Date</tt>) Copies the
- *       object if it hasn''t been modified since the specified time.
- *     * +CopySourceRange+ - (<tt>String</tt>) The range of bytes to copy
+ *     * `CopySourceIfUnmodifiedSince` &mdash; (`Date`) Copies the object
+ *       if it hasn''t been modified since the specified time.
+ *     * `CopySourceRange` &mdash; (`String`) The range of bytes to copy
  *       from the source object. The range value must use the form
  *       bytes=first-last, where the first and last are the zero-based
  *       byte offsets to copy. For example, bytes=0-9 indicates that you
  *       want to copy the first ten bytes of the source. You can copy a
  *       range only if the source object is greater than 5 GB.
- *     * +Key+ - (*required*, <tt>String</tt>)
- *     * +PartNumber+ - (*required*, <tt>String</tt>) Part number of part
- *       being copied.
- *     * +UploadId+ - (*required*, <tt>String</tt>) Upload ID identifying
- *       the multipart upload whose part is being copied.
+ *     * `Key` &mdash; **required** &mdash; (`String`)
+ *     * `PartNumber` &mdash; **required** &mdash; (`String`) Part number
+ *       of part being copied.
+ *     * `UploadId` &mdash; **required** &mdash; (`String`) Upload ID
+ *       identifying the multipart upload whose part is being copied.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
  *     @param err [Object] the error object returned from the request.
- *       Set to +null+ if the request is successful.
+ *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
- *       the request. Set to +null+ if a request error occurs.
- *       The +data+ object has the following properties:
- *       * +CopySourceVersionId+ - (<tt>String</tt>) The version of the
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *       * `CopySourceVersionId` &mdash; (`String`) The version of the
  *         source object that was copied, if you have enabled versioning on
  *         the source bucket.
- *       * +CopyPartResult+ - (<tt>Object</tt>)
- *         * +ETag+ - (<tt>String</tt>) Entity tag of the object.
- *         * +LastModified+ - (<tt>Date</tt>) Date and time at which the
+ *       * `CopyPartResult` &mdash; (`Object`)
+ *         * `ETag` &mdash; (`String`) Entity tag of the object.
+ *         * `LastModified` &mdash; (`Date`) Date and time at which the
  *           object was uploaded.
- *       * +ServerSideEncryption+ - (<tt>String</tt>) The Server-side
+ *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -1892,8 +1897,8 @@ AWS.S3 = inherit({})
  *   Constructs a service client object.  This client has one method for
  *   each API operation.
  *   @option options [String] endpoint The endpoint URI to send requests
- *     to.  The default endpoint is built from the configured +region+.
- *     The endpoint should be a string like <tt>'https://s3.amazonaws.com'</tt>.
+ *     to.  The default endpoint is built from the configured `region`.
+ *     The endpoint should be a string like `'https://s3.amazonaws.com'`.
  *   @option (see AWS.Config.constructor)
  *
  * @!attribute endpoint
