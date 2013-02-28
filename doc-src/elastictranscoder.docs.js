@@ -55,7 +55,6 @@ AWS.ElasticTranscoder = inherit({})
  * @!method cancelJob(params, callback)
  *   Calls the CancelJob API operation.
  *   @param params [Object]
- *
  *     * `Id` &mdash; **required** &mdash; (`String`) The identifier of
  *       the job that you want to delete. To get a list of the jobs
  *       (including their jobId) that have a status of Submitted, use the
@@ -74,18 +73,15 @@ AWS.ElasticTranscoder = inherit({})
  * @!method createJob(params, callback)
  *   Calls the CreateJob API operation.
  *   @param params [Object]
- *
  *     * `PipelineId` &mdash; **required** &mdash; (`String`) The Id of
  *       the pipeline that you want Elastic Transcoder to use for
  *       transcoding. The pipeline determines several settings, including
  *       the Amazon S3 bucket from which Elastic Transcoder gets the
  *       files to transcode and the bucket into which Elastic Transcoder
  *       puts the transcoded files.
- *
  *     * `Input` &mdash; **required** &mdash; (`Object`) A section of the
  *       request body that provides information about the file that is
  *       being transcoded.
- *
  *       * `Key` &mdash; (`String`) The name of the file to transcode.
  *         Elsewhere in the body of the JSON block is the the ID of the
  *         pipeline to use for processing the job. The InputBucket object
@@ -94,7 +90,6 @@ AWS.ElasticTranscoder = inherit({})
  *         prefix, such as cooking/lasagna.mpg, include the prefix in the
  *         key. If the file isn't in the specified bucket, Elastic
  *         Transcoder returns an error.
- *
  *       * `FrameRate` &mdash; (`String`) The frame rate of the input
  *         file. If you want Elastic Transcoder to automatically detect
  *         the frame rate of the input file, specify auto. If you want to
@@ -102,7 +97,6 @@ AWS.ElasticTranscoder = inherit({})
  *         following values: 10, 15, 23.97, 24, 25, 29.97, 30, 60 If you
  *         specify a value other than auto, Elastic Transcoder disables
  *         automatic detection of the frame rate.
- *
  *       * `Resolution` &mdash; (`String`) The resolution, in pixels, of
  *         the input file. If you want Elastic Transcoder to
  *         automatically detect the resolution of the input file, specify
@@ -110,7 +104,6 @@ AWS.ElasticTranscoder = inherit({})
  *         file, enter values in the format width in pixels by height in
  *         pixels. If you specify a value other than auto, Elastic
  *         Transcoder disables automatic detection of the resolution.
- *
  *       * `AspectRatio` &mdash; (`String`) The aspect ratio of the input
  *         file. If you want Elastic Transcoder to automatically detect
  *         the aspect ratio of the input file, specify auto. If you want
@@ -118,7 +111,6 @@ AWS.ElasticTranscoder = inherit({})
  *         the following values: 1:1, 4:3, 3:2, 16:9 If you specify a
  *         value other than auto, Elastic Transcoder disables automatic
  *         detection of the aspect ratio.
- *
  *       * `Interlaced` &mdash; (`String`) Whether the input file is
  *         interlaced. If you want Elastic Transcoder to automatically
  *         detect whether the input file is interlaced, specify auto. If
@@ -126,7 +118,6 @@ AWS.ElasticTranscoder = inherit({})
  *         enter one of the following values: true, false If you specify
  *         a value other than auto, Elastic Transcoder disables automatic
  *         detection of interlacing.
- *
  *       * `Container` &mdash; (`String`) The container type for the
  *         input file. If you want Elastic Transcoder to automatically
  *         detect the container type of the input file, specify auto. If
@@ -134,18 +125,15 @@ AWS.ElasticTranscoder = inherit({})
  *         enter one of the following values: 3gp, asf, avi, divx, flv,
  *         mkv, mov, mp4, mpeg, mpeg-ps, mpeg-ts, mxf, ogg, vob, wav,
  *         webm
- *
  *     * `Output` &mdash; **required** &mdash; (`Object`) A section of
  *       the request body that provides information about the transcoded
  *       (target) file.
- *
  *       * `Key` &mdash; (`String`) The name to assign to the transcoded
  *         file. Elastic Transcoder saves the file in the Amazon S3
  *         bucket specified by the OutputBucket object in the pipeline
  *         that is specified by the pipeline ID. If a file with the
  *         specified name already exists in the output bucket, the job
  *         fails.
- *
  *       * `ThumbnailPattern` &mdash; (`String`) Whether you want Elastic
  *         Transcoder to create thumbnails for your videos and, if so,
  *         how you want Elastic Transcoder to name the files. If you
@@ -173,13 +161,11 @@ AWS.ElasticTranscoder = inherit({})
  *         that appears in the preset that you specified in the PresetID
  *         value of CreateJobOutput. Elastic Transcoder also appends the
  *         applicable file name extension.
- *
  *       * `Rotate` &mdash; (`String`) The number of degrees clockwise by
  *         which you want Elastic Transcoder to rotate the output
  *         relative to the input. Enter one of the following values:
  *         auto, 0, 90, 180, 270 The value auto generally works only if
  *         the file that you're transcoding contains rotation metadata.
- *
  *       * `PresetId` &mdash; (`String`) The Id of the preset to use for
  *         this job. The preset determines the audio, video, and
  *         thumbnail settings that Elastic Transcoder uses for
@@ -197,22 +183,18 @@ AWS.ElasticTranscoder = inherit({})
  *       * `Job` &mdash; **required** &mdash; (`Object`) A section of the
  *         response body that provides information about the job that is
  *         created.
- *
  *         * `Id` &mdash; (`String`) The identifier that Elastic Transcoder
  *           assigned to the job. You use this value to get settings for
  *           the job or to delete the job.
- *
  *         * `PipelineId` &mdash; (`String`) The Id of the pipeline that
  *           you want Elastic Transcoder to use for transcoding. The
  *           pipeline determines several settings, including the Amazon S3
  *           bucket from which Elastic Transcoder gets the files to
  *           transcode and the bucket into which Elastic Transcoder puts
  *           the transcoded files.
- *
  *         * `Input` &mdash; (`Object`) A section of the request or
  *           response body that provides information about the file that is
  *           being transcoded.
- *
  *           * `Key` &mdash; (`String`) The name of the file to transcode.
  *             Elsewhere in the body of the JSON block is the the ID of the
  *             pipeline to use for processing the job. The InputBucket
@@ -221,7 +203,6 @@ AWS.ElasticTranscoder = inherit({})
  *             includes a prefix, such as cooking/lasagna.mpg, include the
  *             prefix in the key. If the file isn't in the specified
  *             bucket, Elastic Transcoder returns an error.
- *
  *           * `FrameRate` &mdash; (`String`) The frame rate of the input
  *             file. If you want Elastic Transcoder to automatically detect
  *             the frame rate of the input file, specify auto. If you want
@@ -229,7 +210,6 @@ AWS.ElasticTranscoder = inherit({})
  *             the following values: 10, 15, 23.97, 24, 25, 29.97, 30, 60
  *             If you specify a value other than auto, Elastic Transcoder
  *             disables automatic detection of the frame rate.
- *
  *           * `Resolution` &mdash; (`String`) The resolution, in pixels,
  *             of the input file. If you want Elastic Transcoder to
  *             automatically detect the resolution of the input file,
@@ -238,7 +218,6 @@ AWS.ElasticTranscoder = inherit({})
  *             height in pixels. If you specify a value other than auto,
  *             Elastic Transcoder disables automatic detection of the
  *             resolution.
- *
  *           * `AspectRatio` &mdash; (`String`) The aspect ratio of the
  *             input file. If you want Elastic Transcoder to automatically
  *             detect the aspect ratio of the input file, specify auto. If
@@ -246,7 +225,6 @@ AWS.ElasticTranscoder = inherit({})
  *             enter one of the following values: 1:1, 4:3, 3:2, 16:9 If
  *             you specify a value other than auto, Elastic Transcoder
  *             disables automatic detection of the aspect ratio.
- *
  *           * `Interlaced` &mdash; (`String`) Whether the input file is
  *             interlaced. If you want Elastic Transcoder to automatically
  *             detect whether the input file is interlaced, specify auto.
@@ -254,7 +232,6 @@ AWS.ElasticTranscoder = inherit({})
  *             enter one of the following values: true, false If you
  *             specify a value other than auto, Elastic Transcoder disables
  *             automatic detection of interlacing.
- *
  *           * `Container` &mdash; (`String`) The container type for the
  *             input file. If you want Elastic Transcoder to automatically
  *             detect the container type of the input file, specify auto.
@@ -262,18 +239,15 @@ AWS.ElasticTranscoder = inherit({})
  *             file, enter one of the following values: 3gp, asf, avi,
  *             divx, flv, mkv, mov, mp4, mpeg, mpeg-ps, mpeg-ts, mxf, ogg,
  *             vob, wav, webm
- *
  *         * `Output` &mdash; (`Object`) A section of the request or
  *           response body that provides information about the transcoded
  *           (target) file.
- *
  *           * `Key` &mdash; (`String`) The name to assign to the
  *             transcoded file. Elastic Transcoder saves the file in the
  *             Amazon S3 bucket specified by the OutputBucket object in the
  *             pipeline that is specified by the pipeline ID. If a file
  *             with the specified name already exists in the output bucket,
  *             the job fails.
- *
  *           * `ThumbnailPattern` &mdash; (`String`) Whether you want
  *             Elastic Transcoder to create thumbnails for your videos and,
  *             if so, how you want Elastic Transcoder to name the files. If
@@ -301,22 +275,18 @@ AWS.ElasticTranscoder = inherit({})
  *             or .png) that appears in the preset that you specified in
  *             the PresetID value of CreateJobOutput. Elastic Transcoder
  *             also appends the applicable file name extension.
- *
  *           * `Rotate` &mdash; (`String`) The number of degrees clockwise
  *             by which you want Elastic Transcoder to rotate the output
  *             relative to the input. Enter one of the following values:
  *             auto, 0, 90, 180, 270 The value auto generally works only if
  *             the file that you're transcoding contains rotation metadata.
- *
  *           * `PresetId` &mdash; (`String`) The Id of the preset to use
  *             for this job. The preset determines the audio, video, and
  *             thumbnail settings that Elastic Transcoder uses for
  *             transcoding.
- *
  *           * `Status` &mdash; (`String`) Status of the job. The value of
  *             Status is one of the following: Submitted, Progressing,
  *             Completed, Canceled, or Error.
- *
  *           * `StatusDetail` &mdash; (`String`) Information that further
  *             explains Status.
  *   @return [AWS.Request] a handle to the operation request for
@@ -325,24 +295,19 @@ AWS.ElasticTranscoder = inherit({})
  * @!method createPipeline(params, callback)
  *   Calls the CreatePipeline API operation.
  *   @param params [Object]
- *
  *     * `Name` &mdash; **required** &mdash; (`String`) The name of the
  *       pipeline. We recommend that the name be unique within the AWS
  *       account, but uniqueness is not enforced. Constraints: Maximum 40
  *       characters.
- *
  *     * `InputBucket` &mdash; **required** &mdash; (`String`) The Amazon
  *       S3 bucket in which you saved the media files that you want to
  *       transcode.
- *
  *     * `OutputBucket` &mdash; **required** &mdash; (`String`) The
  *       Amazon S3 bucket in which you want Elastic Transcoder to save
  *       the transcoded files.
- *
  *     * `Role` &mdash; **required** &mdash; (`String`) The IAM Amazon
  *       Resource Name (ARN) for the role that you want Elastic
  *       Transcoder to use to create the pipeline.
- *
  *     * `Notifications` &mdash; **required** &mdash; (`Object`) The
  *       Amazon Simple Notification Service (Amazon SNS) topic that you
  *       want to notify to report job status. To receive notifications,
@@ -355,19 +320,15 @@ AWS.ElasticTranscoder = inherit({})
  *       you want to notify when Elastic Transcoder encounters a warning
  *       condition. Error: The Amazon SNS topic that you want to notify
  *       when Elastic Transcoder encounters an error condition.
- *
  *       * `Progressing` &mdash; (`String`) The Amazon Simple
  *         Notification Service (Amazon SNS) topic that you want to
  *         notify when Elastic Transcoder has started to process the job.
- *
  *       * `Completed` &mdash; (`String`) The Amazon SNS topic that you
  *         want to notify when Elastic Transcoder has finished processing
  *         the job.
- *
  *       * `Warning` &mdash; (`String`) The Amazon SNS topic that you
  *         want to notify when Elastic Transcoder encounters a warning
  *         condition.
- *
  *       * `Error` &mdash; (`String`) The Amazon SNS topic that you want
  *         to notify when Elastic Transcoder encounters an error
  *         condition.
@@ -384,31 +345,24 @@ AWS.ElasticTranscoder = inherit({})
  *       * `Pipeline` &mdash; **required** &mdash; (`Object`) A section of
  *         the response body that provides information about the pipeline
  *         that is created.
- *
  *         * `Id` &mdash; (`String`) The identifier for the pipeline. You
  *           use this value to identify the pipeline in which you want to
  *           perform a variety of operations, such as creating a job or a
  *           preset.
- *
  *         * `Name` &mdash; (`String`) The name of the pipeline. We
  *           recommend that the name be unique within the AWS account, but
  *           uniqueness is not enforced. Constraints: Maximum 40 characters
- *
  *         * `Status` &mdash; (`String`) The current status of the
  *           pipeline: active: The pipeline is processing jobs. paused: The
  *           pipeline is not currently processing jobs.
- *
  *         * `InputBucket` &mdash; (`String`) The Amazon S3 bucket in which
  *           you saved the media files that you want to transcode.
- *
  *         * `OutputBucket` &mdash; (`String`) The Amazon S3 bucket in
  *           which you want Elastic Transcoder to save the transcoded
  *           files.
- *
  *         * `Role` &mdash; (`String`) The IAM Amazon Resource Name (ARN)
  *           for the role that you want Elastic Transcoder to use to create
  *           the pipeline.
- *
  *         * `Notifications` &mdash; (`Object`) The Amazon Simple
  *           Notification Service (Amazon SNS) topic that you want to
  *           notify to report job status. To receive notifications, you
@@ -422,20 +376,16 @@ AWS.ElasticTranscoder = inherit({})
  *           Transcoder encounters a warning condition. Error: The Amazon
  *           SNS topic that you want to notify when Elastic Transcoder
  *           encounters an error condition.
- *
  *           * `Progressing` &mdash; (`String`) The Amazon Simple
  *             Notification Service (Amazon SNS) topic that you want to
  *             notify when Elastic Transcoder has started to process the
  *             job.
- *
  *           * `Completed` &mdash; (`String`) The Amazon SNS topic that you
  *             want to notify when Elastic Transcoder has finished
  *             processing the job.
- *
  *           * `Warning` &mdash; (`String`) The Amazon SNS topic that you
  *             want to notify when Elastic Transcoder encounters a warning
  *             condition.
- *
  *           * `Error` &mdash; (`String`) The Amazon SNS topic that you
  *             want to notify when Elastic Transcoder encounters an error
  *             condition.
@@ -445,22 +395,16 @@ AWS.ElasticTranscoder = inherit({})
  * @!method createPreset(params, callback)
  *   Calls the CreatePreset API operation.
  *   @param params [Object]
- *
  *     * `Name` &mdash; **required** &mdash; (`String`) The name of the
  *       preset. We recommend that the name be unique within the AWS
  *       account, but uniqueness is not enforced.
- *
  *     * `Description` &mdash; (`String`) A description of the preset.
- *
  *     * `Container` &mdash; **required** &mdash; (`String`) The
  *       container type for the output file. This value must be mp4.
- *
  *     * `Video` &mdash; **required** &mdash; (`Object`) A section of the
  *       request body that specifies the video parameters.
- *
  *       * `Codec` &mdash; (`String`) The video codec for the output
  *         file. This value must be H.264.
- *
  *       * `CodecOptions` &mdash; (`Object<String>`) Profile The H.264
  *         profile that you want to use for the output file. Elastic
  *         Transcoder supports the following profiles: baseline: The
@@ -489,7 +433,6 @@ AWS.ElasticTranscoder = inherit({})
  *         \- 396 1b - 396 1.1 - 900 1.2 - 2376 1.3 - 2376 2 - 2376 2.1 -
  *         4752 2.2 - 8100 3 - 8100 3.1 - 18000 3.2 - 20480 4 - 32768 4.1
  *         \- 32768
- *
  *       * `KeyframesMaxDist` &mdash; (`String`) The maximum number of
  *         frames between key frames. Key frames are fully encoded
  *         frames; the frames between key frames are encoded based, in
@@ -497,14 +440,12 @@ AWS.ElasticTranscoder = inherit({})
  *         integer formatted as a string; valid values are between 1 and
  *         100000, inclusive. A higher value results in higher
  *         compression but may also discernibly decrease video quality.
- *
  *       * `FixedGOP` &mdash; (`String`) Whether to use a fixed value for
  *         FixedGOP. Valid values are true and false: true: Elastic
  *         Transcoder uses the value of KeyframesMaxDist for the distance
  *         between key frames (the number of frames in a group of
  *         pictures, or GOP). false: The distance between key frames can
  *         vary.
- *
  *       * `BitRate` &mdash; (`String`) The bit rate of the video stream
  *         in the output file, in kilobits/second. Valid values depend on
  *         the values of Level and Profile. We recommend that you specify
@@ -516,7 +457,6 @@ AWS.ElasticTranscoder = inherit({})
  *         \- 384 : 480 1.3 - 768 : 960 2 - 2000 : 2500 3 - 10000 : 12500
  *         3.1 - 14000 : 17500 3.2 - 20000 : 25000 4 - 20000 : 25000 4.1
  *         \- 50000 : 62500
- *
  *       * `FrameRate` &mdash; (`String`) The frames per second for the
  *         video stream in the output file. Valid values include: auto,
  *         10, 15, 23.97, 24, 25, 29.97, 30, 60 If you specify auto,
@@ -535,7 +475,6 @@ AWS.ElasticTranscoder = inherit({})
  *         76800 1.2 - 1536000 1.3 - 3041280 2 - 3041280 2.1 - 5068800
  *         2.2 - 5184000 3 - 10368000 3.1 - 27648000 3.2 - 55296000 4 -
  *         62914560 4.1 - 62914560
- *
  *       * `Resolution` &mdash; (`String`) The width and height of the
  *         video in the output file, in pixels. Valid values are auto and
  *         width x height: auto: Elastic Transcoder attempts to preserve
@@ -556,7 +495,6 @@ AWS.ElasticTranscoder = inherit({})
  *         1.1 - 101376 1.2 - 101376 1.3 - 101376 2 - 101376 2.1 - 202752
  *         2.2 - 404720 3 - 404720 3.1 - 921600 3.2 - 1310720 4 - 2097152
  *         4.1 - 2097152
- *
  *       * `AspectRatio` &mdash; (`String`) The display aspect ratio of
  *         the video in the output file. Valid values include: auto, 1:1,
  *         4:3, 3:2, 16:9 If you specify auto, Elastic Transcoder tries
@@ -566,44 +504,34 @@ AWS.ElasticTranscoder = inherit({})
  *         (black bars on the sides) or letterboxing (black bars on the
  *         top and bottom) to maintain the aspect ratio of the active
  *         region of the video.
- *
  *     * `Audio` &mdash; **required** &mdash; (`Object`) A section of the
  *       request body that specifies the audio parameters
- *
  *       * `Codec` &mdash; (`String`) The audio codec for the output
  *         file. This value must be AAC.
- *
  *       * `SampleRate` &mdash; (`String`) The sample rate of the audio
  *         stream in the output file, in Hertz. Valid values include:
  *         auto, 22050, 32000, 44100, 48000, 96000 If you specify auto,
  *         Elastic Transcoder automatically detects the sample rate.
- *
  *       * `BitRate` &mdash; (`String`) The bit rate of the audio stream
  *         in the output file, in kilobits/second. Enter an integer
  *         between 64 and 320, inclusive.
- *
  *       * `Channels` &mdash; (`String`) The number of audio channels in
  *         the output file. Valid values include: auto, 0, 1, 2 If you
  *         specify auto, Elastic Transcoder automatically detects the
  *         number of channels in the input file.
- *
  *     * `Thumbnails` &mdash; **required** &mdash; (`Object`) A section
  *       of the request body that specifies the thumbnail parameters, if
  *       any.
- *
  *       * `Format` &mdash; (`String`) The format of thumbnails, if any.
  *         Valid values are jpg and png. You specify whether you want
  *         Elastic Transcoder to create thumbnails when you create a job.
- *
  *       * `Interval` &mdash; (`String`) The number of seconds between
  *         thumbnails. Specify an integer value.
- *
  *       * `Resolution` &mdash; (`String`) The width and height of
  *         thumbnail files in pixels. Specify a value in the format width
  *         x height where both values are even integers. The values
  *         cannot exceed the width and height that you specified in the
  *         Video:Resolution object.
- *
  *       * `AspectRatio` &mdash; (`String`) The aspect ratio of
  *         thumbnails. Valid values include: auto, 1:1, 4:3, 3:2, 16:9 If
  *         you specify auto, Elastic Transcoder tries to preserve the
@@ -621,43 +549,31 @@ AWS.ElasticTranscoder = inherit({})
  *       * `Preset` &mdash; **required** &mdash; (`Object`) A section of
  *         the response body that provides information about the preset
  *         that is created.
- *
  *         * `Id` &mdash; (`String`) Identifier for the new preset. You use
  *           this value to get settings for the preset or to delete it.
- *
  *         * `Name` &mdash; (`String`) The name of the preset.
- *
  *         * `Description` &mdash; (`String`) A description of the preset.
- *
  *         * `Container` &mdash; (`String`) The container type for the
  *           output file. This value must be mp4.
- *
  *         * `Audio` &mdash; (`Object`) A section of the response body that
  *           provides information about the audio preset values.
- *
  *           * `Codec` &mdash; (`String`) The audio codec for the output
  *             file. This value must be AAC.
- *
  *           * `SampleRate` &mdash; (`String`) The sample rate of the audio
  *             stream in the output file, in Hertz. Valid values include:
  *             auto, 22050, 32000, 44100, 48000, 96000 If you specify auto,
  *             Elastic Transcoder automatically detects the sample rate.
- *
  *           * `BitRate` &mdash; (`String`) The bit rate of the audio
  *             stream in the output file, in kilobits/second. Enter an
  *             integer between 64 and 320, inclusive.
- *
  *           * `Channels` &mdash; (`String`) The number of audio channels
  *             in the output file. Valid values include: auto, 0, 1, 2 If
  *             you specify auto, Elastic Transcoder automatically detects
  *             the number of channels in the input file.
- *
  *         * `Video` &mdash; (`Object`) A section of the response body that
  *           provides information about the video preset values.
- *
  *           * `Codec` &mdash; (`String`) The video codec for the output
  *             file. This value must be H.264.
- *
  *           * `CodecOptions` &mdash; (`Object<String>`) Profile The H.264
  *             profile that you want to use for the output file. Elastic
  *             Transcoder supports the following profiles: baseline: The
@@ -687,7 +603,6 @@ AWS.ElasticTranscoder = inherit({})
  *             396 1b - 396 1.1 - 900 1.2 - 2376 1.3 - 2376 2 - 2376 2.1 -
  *             4752 2.2 - 8100 3 - 8100 3.1 - 18000 3.2 - 20480 4 - 32768
  *             4.1 - 32768
- *
  *           * `KeyframesMaxDist` &mdash; (`String`) The maximum number of
  *             frames between key frames. Key frames are fully encoded
  *             frames; the frames between key frames are encoded based, in
@@ -695,14 +610,12 @@ AWS.ElasticTranscoder = inherit({})
  *             integer formatted as a string; valid values are between 1
  *             and 100000, inclusive. A higher value results in higher
  *             compression but may also discernibly decrease video quality.
- *
  *           * `FixedGOP` &mdash; (`String`) Whether to use a fixed value
  *             for FixedGOP. Valid values are true and false: true: Elastic
  *             Transcoder uses the value of KeyframesMaxDist for the
  *             distance between key frames (the number of frames in a group
  *             of pictures, or GOP). false: The distance between key frames
  *             can vary.
- *
  *           * `BitRate` &mdash; (`String`) The bit rate of the video
  *             stream in the output file, in kilobits/second. Valid values
  *             depend on the values of Level and Profile. We recommend that
@@ -714,7 +627,6 @@ AWS.ElasticTranscoder = inherit({})
  *             128 : 160 1.1 - 192 : 240 1.2 - 384 : 480 1.3 - 768 : 960 2
  *             \- 2000 : 2500 3 - 10000 : 12500 3.1 - 14000 : 17500 3.2 -
  *             20000 : 25000 4 - 20000 : 25000 4.1 - 50000 : 62500
- *
  *           * `FrameRate` &mdash; (`String`) The frames per second for the
  *             video stream in the output file. Valid values include: auto,
  *             10, 15, 23.97, 24, 25, 29.97, 30, 60 If you specify auto,
@@ -733,7 +645,6 @@ AWS.ElasticTranscoder = inherit({})
  *             380160 1.1 - 76800 1.2 - 1536000 1.3 - 3041280 2 - 3041280
  *             2.1 - 5068800 2.2 - 5184000 3 - 10368000 3.1 - 27648000 3.2
  *             \- 55296000 4 - 62914560 4.1 - 62914560
- *
  *           * `Resolution` &mdash; (`String`) The width and height of the
  *             video in the output file, in pixels. Valid values are auto
  *             and width x height: auto: Elastic Transcoder attempts to
@@ -754,7 +665,6 @@ AWS.ElasticTranscoder = inherit({})
  *             height value): 1 - 25344 1b - 25344 1.1 - 101376 1.2 -
  *             101376 1.3 - 101376 2 - 101376 2.1 - 202752 2.2 - 404720 3 -
  *             404720 3.1 - 921600 3.2 - 1310720 4 - 2097152 4.1 - 2097152
- *
  *           * `AspectRatio` &mdash; (`String`) The display aspect ratio of
  *             the video in the output file. Valid values include: auto,
  *             1:1, 4:3, 3:2, 16:9 If you specify auto, Elastic Transcoder
@@ -764,34 +674,27 @@ AWS.ElasticTranscoder = inherit({})
  *             pillarboxing (black bars on the sides) or letterboxing
  *             (black bars on the top and bottom) to maintain the aspect
  *             ratio of the active region of the video.
- *
  *         * `Thumbnails` &mdash; (`Object`) A section of the response body
  *           that provides information about the thumbnail preset values,
  *           if any.
- *
  *           * `Format` &mdash; (`String`) The format of thumbnails, if
  *             any. Valid values are jpg and png. You specify whether you
  *             want Elastic Transcoder to create thumbnails when you create
  *             a job.
- *
  *           * `Interval` &mdash; (`String`) The number of seconds between
  *             thumbnails. Specify an integer value.
- *
  *           * `Resolution` &mdash; (`String`) The width and height of
  *             thumbnail files in pixels. Specify a value in the format
  *             width x height where both values are even integers. The
  *             values cannot exceed the width and height that you specified
  *             in the Video:Resolution object.
- *
  *           * `AspectRatio` &mdash; (`String`) The aspect ratio of
  *             thumbnails. Valid values include: auto, 1:1, 4:3, 3:2, 16:9
  *             If you specify auto, Elastic Transcoder tries to preserve
  *             the aspect ratio of the video in the output file.
- *
  *         * `Type` &mdash; (`String`) Whether the preset is a default
  *           preset provided by Elastic Transcoder (System) or a preset
  *           that you have defined (Custom).
- *
  *       * `Warning` &mdash; (`String`) If the preset settings don't comply
  *         with the standards for the video codec but Elastic Transcoder
  *         created the preset, this message explains the reason the preset
@@ -803,7 +706,6 @@ AWS.ElasticTranscoder = inherit({})
  * @!method deletePipeline(params, callback)
  *   Calls the DeletePipeline API operation.
  *   @param params [Object]
- *
  *     * `Id` &mdash; **required** &mdash; (`String`) The identifier of
  *       the pipeline that you want to delete.
  *   @callback callback function(err, data)
@@ -820,7 +722,6 @@ AWS.ElasticTranscoder = inherit({})
  * @!method deletePreset(params, callback)
  *   Calls the DeletePreset API operation.
  *   @param params [Object]
- *
  *     * `Id` &mdash; **required** &mdash; (`String`) The identifier of
  *       the preset for which you want to get detailed information.
  *   @callback callback function(err, data)
@@ -837,14 +738,11 @@ AWS.ElasticTranscoder = inherit({})
  * @!method listJobsByPipeline(params, callback)
  *   Calls the ListJobsByPipeline API operation.
  *   @param params [Object]
- *
  *     * `PipelineId` &mdash; **required** &mdash; (`String`) The ID of
  *       the pipeline for which you want to get job information.
- *
  *     * `Ascending` &mdash; (`String`) To list jobs in chronological
  *       order by the date and time that they were submitted, enter true.
  *       To list jobs in reverse chronological order, enter false.
- *
  *     * `PageToken` &mdash; (`String`) When Elastic Transcoder returns
  *       more than one page of results, use pageToken in subsequent GET
  *       requests to get each successive page of results.
@@ -860,22 +758,18 @@ AWS.ElasticTranscoder = inherit({})
  *
  *       * `Jobs` &mdash; **required** &mdash; (`Array<Object>`) An array
  *         of Job objects that are in the specified pipeline.
- *
  *         * `Id` &mdash; (`String`) The identifier that Elastic Transcoder
  *           assigned to the job. You use this value to get settings for
  *           the job or to delete the job.
- *
  *         * `PipelineId` &mdash; (`String`) The Id of the pipeline that
  *           you want Elastic Transcoder to use for transcoding. The
  *           pipeline determines several settings, including the Amazon S3
  *           bucket from which Elastic Transcoder gets the files to
  *           transcode and the bucket into which Elastic Transcoder puts
  *           the transcoded files.
- *
  *         * `Input` &mdash; (`Object`) A section of the request or
  *           response body that provides information about the file that is
  *           being transcoded.
- *
  *           * `Key` &mdash; (`String`) The name of the file to transcode.
  *             Elsewhere in the body of the JSON block is the the ID of the
  *             pipeline to use for processing the job. The InputBucket
@@ -884,7 +778,6 @@ AWS.ElasticTranscoder = inherit({})
  *             includes a prefix, such as cooking/lasagna.mpg, include the
  *             prefix in the key. If the file isn't in the specified
  *             bucket, Elastic Transcoder returns an error.
- *
  *           * `FrameRate` &mdash; (`String`) The frame rate of the input
  *             file. If you want Elastic Transcoder to automatically detect
  *             the frame rate of the input file, specify auto. If you want
@@ -892,7 +785,6 @@ AWS.ElasticTranscoder = inherit({})
  *             the following values: 10, 15, 23.97, 24, 25, 29.97, 30, 60
  *             If you specify a value other than auto, Elastic Transcoder
  *             disables automatic detection of the frame rate.
- *
  *           * `Resolution` &mdash; (`String`) The resolution, in pixels,
  *             of the input file. If you want Elastic Transcoder to
  *             automatically detect the resolution of the input file,
@@ -901,7 +793,6 @@ AWS.ElasticTranscoder = inherit({})
  *             height in pixels. If you specify a value other than auto,
  *             Elastic Transcoder disables automatic detection of the
  *             resolution.
- *
  *           * `AspectRatio` &mdash; (`String`) The aspect ratio of the
  *             input file. If you want Elastic Transcoder to automatically
  *             detect the aspect ratio of the input file, specify auto. If
@@ -909,7 +800,6 @@ AWS.ElasticTranscoder = inherit({})
  *             enter one of the following values: 1:1, 4:3, 3:2, 16:9 If
  *             you specify a value other than auto, Elastic Transcoder
  *             disables automatic detection of the aspect ratio.
- *
  *           * `Interlaced` &mdash; (`String`) Whether the input file is
  *             interlaced. If you want Elastic Transcoder to automatically
  *             detect whether the input file is interlaced, specify auto.
@@ -917,7 +807,6 @@ AWS.ElasticTranscoder = inherit({})
  *             enter one of the following values: true, false If you
  *             specify a value other than auto, Elastic Transcoder disables
  *             automatic detection of interlacing.
- *
  *           * `Container` &mdash; (`String`) The container type for the
  *             input file. If you want Elastic Transcoder to automatically
  *             detect the container type of the input file, specify auto.
@@ -925,18 +814,15 @@ AWS.ElasticTranscoder = inherit({})
  *             file, enter one of the following values: 3gp, asf, avi,
  *             divx, flv, mkv, mov, mp4, mpeg, mpeg-ps, mpeg-ts, mxf, ogg,
  *             vob, wav, webm
- *
  *         * `Output` &mdash; (`Object`) A section of the request or
  *           response body that provides information about the transcoded
  *           (target) file.
- *
  *           * `Key` &mdash; (`String`) The name to assign to the
  *             transcoded file. Elastic Transcoder saves the file in the
  *             Amazon S3 bucket specified by the OutputBucket object in the
  *             pipeline that is specified by the pipeline ID. If a file
  *             with the specified name already exists in the output bucket,
  *             the job fails.
- *
  *           * `ThumbnailPattern` &mdash; (`String`) Whether you want
  *             Elastic Transcoder to create thumbnails for your videos and,
  *             if so, how you want Elastic Transcoder to name the files. If
@@ -964,25 +850,20 @@ AWS.ElasticTranscoder = inherit({})
  *             or .png) that appears in the preset that you specified in
  *             the PresetID value of CreateJobOutput. Elastic Transcoder
  *             also appends the applicable file name extension.
- *
  *           * `Rotate` &mdash; (`String`) The number of degrees clockwise
  *             by which you want Elastic Transcoder to rotate the output
  *             relative to the input. Enter one of the following values:
  *             auto, 0, 90, 180, 270 The value auto generally works only if
  *             the file that you're transcoding contains rotation metadata.
- *
  *           * `PresetId` &mdash; (`String`) The Id of the preset to use
  *             for this job. The preset determines the audio, video, and
  *             thumbnail settings that Elastic Transcoder uses for
  *             transcoding.
- *
  *           * `Status` &mdash; (`String`) Status of the job. The value of
  *             Status is one of the following: Submitted, Progressing,
  *             Completed, Canceled, or Error.
- *
  *           * `StatusDetail` &mdash; (`String`) Information that further
  *             explains Status.
- *
  *       * `NextPageToken` &mdash; (`String`) A value that you use to
  *         access the second and subsequent pages of results, if any. When
  *         the jobs in the specified pipeline fit on one page or when
@@ -994,16 +875,13 @@ AWS.ElasticTranscoder = inherit({})
  * @!method listJobsByStatus(params, callback)
  *   Calls the ListJobsByStatus API operation.
  *   @param params [Object]
- *
  *     * `Status` &mdash; **required** &mdash; (`String`) To get
  *       information about all of the jobs associated with the current
  *       AWS account that have a given status, specify the following
  *       status: Submitted, Progressing, Completed, Canceled, or Error.
- *
  *     * `Ascending` &mdash; (`String`) To list jobs in chronological
  *       order by the date and time that they were submitted, enter true.
  *       To list jobs in reverse chronological order, enter false.
- *
  *     * `PageToken` &mdash; (`String`) When Elastic Transcoder returns
  *       more than one page of results, use pageToken in subsequent GET
  *       requests to get each successive page of results.
@@ -1019,22 +897,18 @@ AWS.ElasticTranscoder = inherit({})
  *
  *       * `Jobs` &mdash; **required** &mdash; (`Array<Object>`) An array
  *         of Job objects that have the specified status.
- *
  *         * `Id` &mdash; (`String`) The identifier that Elastic Transcoder
  *           assigned to the job. You use this value to get settings for
  *           the job or to delete the job.
- *
  *         * `PipelineId` &mdash; (`String`) The Id of the pipeline that
  *           you want Elastic Transcoder to use for transcoding. The
  *           pipeline determines several settings, including the Amazon S3
  *           bucket from which Elastic Transcoder gets the files to
  *           transcode and the bucket into which Elastic Transcoder puts
  *           the transcoded files.
- *
  *         * `Input` &mdash; (`Object`) A section of the request or
  *           response body that provides information about the file that is
  *           being transcoded.
- *
  *           * `Key` &mdash; (`String`) The name of the file to transcode.
  *             Elsewhere in the body of the JSON block is the the ID of the
  *             pipeline to use for processing the job. The InputBucket
@@ -1043,7 +917,6 @@ AWS.ElasticTranscoder = inherit({})
  *             includes a prefix, such as cooking/lasagna.mpg, include the
  *             prefix in the key. If the file isn't in the specified
  *             bucket, Elastic Transcoder returns an error.
- *
  *           * `FrameRate` &mdash; (`String`) The frame rate of the input
  *             file. If you want Elastic Transcoder to automatically detect
  *             the frame rate of the input file, specify auto. If you want
@@ -1051,7 +924,6 @@ AWS.ElasticTranscoder = inherit({})
  *             the following values: 10, 15, 23.97, 24, 25, 29.97, 30, 60
  *             If you specify a value other than auto, Elastic Transcoder
  *             disables automatic detection of the frame rate.
- *
  *           * `Resolution` &mdash; (`String`) The resolution, in pixels,
  *             of the input file. If you want Elastic Transcoder to
  *             automatically detect the resolution of the input file,
@@ -1060,7 +932,6 @@ AWS.ElasticTranscoder = inherit({})
  *             height in pixels. If you specify a value other than auto,
  *             Elastic Transcoder disables automatic detection of the
  *             resolution.
- *
  *           * `AspectRatio` &mdash; (`String`) The aspect ratio of the
  *             input file. If you want Elastic Transcoder to automatically
  *             detect the aspect ratio of the input file, specify auto. If
@@ -1068,7 +939,6 @@ AWS.ElasticTranscoder = inherit({})
  *             enter one of the following values: 1:1, 4:3, 3:2, 16:9 If
  *             you specify a value other than auto, Elastic Transcoder
  *             disables automatic detection of the aspect ratio.
- *
  *           * `Interlaced` &mdash; (`String`) Whether the input file is
  *             interlaced. If you want Elastic Transcoder to automatically
  *             detect whether the input file is interlaced, specify auto.
@@ -1076,7 +946,6 @@ AWS.ElasticTranscoder = inherit({})
  *             enter one of the following values: true, false If you
  *             specify a value other than auto, Elastic Transcoder disables
  *             automatic detection of interlacing.
- *
  *           * `Container` &mdash; (`String`) The container type for the
  *             input file. If you want Elastic Transcoder to automatically
  *             detect the container type of the input file, specify auto.
@@ -1084,18 +953,15 @@ AWS.ElasticTranscoder = inherit({})
  *             file, enter one of the following values: 3gp, asf, avi,
  *             divx, flv, mkv, mov, mp4, mpeg, mpeg-ps, mpeg-ts, mxf, ogg,
  *             vob, wav, webm
- *
  *         * `Output` &mdash; (`Object`) A section of the request or
  *           response body that provides information about the transcoded
  *           (target) file.
- *
  *           * `Key` &mdash; (`String`) The name to assign to the
  *             transcoded file. Elastic Transcoder saves the file in the
  *             Amazon S3 bucket specified by the OutputBucket object in the
  *             pipeline that is specified by the pipeline ID. If a file
  *             with the specified name already exists in the output bucket,
  *             the job fails.
- *
  *           * `ThumbnailPattern` &mdash; (`String`) Whether you want
  *             Elastic Transcoder to create thumbnails for your videos and,
  *             if so, how you want Elastic Transcoder to name the files. If
@@ -1123,25 +989,20 @@ AWS.ElasticTranscoder = inherit({})
  *             or .png) that appears in the preset that you specified in
  *             the PresetID value of CreateJobOutput. Elastic Transcoder
  *             also appends the applicable file name extension.
- *
  *           * `Rotate` &mdash; (`String`) The number of degrees clockwise
  *             by which you want Elastic Transcoder to rotate the output
  *             relative to the input. Enter one of the following values:
  *             auto, 0, 90, 180, 270 The value auto generally works only if
  *             the file that you're transcoding contains rotation metadata.
- *
  *           * `PresetId` &mdash; (`String`) The Id of the preset to use
  *             for this job. The preset determines the audio, video, and
  *             thumbnail settings that Elastic Transcoder uses for
  *             transcoding.
- *
  *           * `Status` &mdash; (`String`) Status of the job. The value of
  *             Status is one of the following: Submitted, Progressing,
  *             Completed, Canceled, or Error.
- *
  *           * `StatusDetail` &mdash; (`String`) Information that further
  *             explains Status.
- *
  *       * `NextPageToken` &mdash; (`String`) A value that you use to
  *         access the second and subsequent pages of results, if any. When
  *         the jobs in the specified pipeline fit on one page or when
@@ -1165,31 +1026,24 @@ AWS.ElasticTranscoder = inherit({})
  *
  *       * `Pipelines` &mdash; **required** &mdash; (`Array<Object>`) An
  *         array of Pipeline objects.
- *
  *         * `Id` &mdash; (`String`) The identifier for the pipeline. You
  *           use this value to identify the pipeline in which you want to
  *           perform a variety of operations, such as creating a job or a
  *           preset.
- *
  *         * `Name` &mdash; (`String`) The name of the pipeline. We
  *           recommend that the name be unique within the AWS account, but
  *           uniqueness is not enforced. Constraints: Maximum 40 characters
- *
  *         * `Status` &mdash; (`String`) The current status of the
  *           pipeline: active: The pipeline is processing jobs. paused: The
  *           pipeline is not currently processing jobs.
- *
  *         * `InputBucket` &mdash; (`String`) The Amazon S3 bucket in which
  *           you saved the media files that you want to transcode.
- *
  *         * `OutputBucket` &mdash; (`String`) The Amazon S3 bucket in
  *           which you want Elastic Transcoder to save the transcoded
  *           files.
- *
  *         * `Role` &mdash; (`String`) The IAM Amazon Resource Name (ARN)
  *           for the role that you want Elastic Transcoder to use to create
  *           the pipeline.
- *
  *         * `Notifications` &mdash; (`Object`) The Amazon Simple
  *           Notification Service (Amazon SNS) topic that you want to
  *           notify to report job status. To receive notifications, you
@@ -1203,20 +1057,16 @@ AWS.ElasticTranscoder = inherit({})
  *           Transcoder encounters a warning condition. Error: The Amazon
  *           SNS topic that you want to notify when Elastic Transcoder
  *           encounters an error condition.
- *
  *           * `Progressing` &mdash; (`String`) The Amazon Simple
  *             Notification Service (Amazon SNS) topic that you want to
  *             notify when Elastic Transcoder has started to process the
  *             job.
- *
  *           * `Completed` &mdash; (`String`) The Amazon SNS topic that you
  *             want to notify when Elastic Transcoder has finished
  *             processing the job.
- *
  *           * `Warning` &mdash; (`String`) The Amazon SNS topic that you
  *             want to notify when Elastic Transcoder encounters a warning
  *             condition.
- *
  *           * `Error` &mdash; (`String`) The Amazon SNS topic that you
  *             want to notify when Elastic Transcoder encounters an error
  *             condition.
@@ -1238,43 +1088,31 @@ AWS.ElasticTranscoder = inherit({})
  *
  *       * `Presets` &mdash; **required** &mdash; (`Array<Object>`) An
  *         array of Preset objects.
- *
  *         * `Id` &mdash; (`String`) Identifier for the new preset. You use
  *           this value to get settings for the preset or to delete it.
- *
  *         * `Name` &mdash; (`String`) The name of the preset.
- *
  *         * `Description` &mdash; (`String`) A description of the preset.
- *
  *         * `Container` &mdash; (`String`) The container type for the
  *           output file. This value must be mp4.
- *
  *         * `Audio` &mdash; (`Object`) A section of the response body that
  *           provides information about the audio preset values.
- *
  *           * `Codec` &mdash; (`String`) The audio codec for the output
  *             file. This value must be AAC.
- *
  *           * `SampleRate` &mdash; (`String`) The sample rate of the audio
  *             stream in the output file, in Hertz. Valid values include:
  *             auto, 22050, 32000, 44100, 48000, 96000 If you specify auto,
  *             Elastic Transcoder automatically detects the sample rate.
- *
  *           * `BitRate` &mdash; (`String`) The bit rate of the audio
  *             stream in the output file, in kilobits/second. Enter an
  *             integer between 64 and 320, inclusive.
- *
  *           * `Channels` &mdash; (`String`) The number of audio channels
  *             in the output file. Valid values include: auto, 0, 1, 2 If
  *             you specify auto, Elastic Transcoder automatically detects
  *             the number of channels in the input file.
- *
  *         * `Video` &mdash; (`Object`) A section of the response body that
  *           provides information about the video preset values.
- *
  *           * `Codec` &mdash; (`String`) The video codec for the output
  *             file. This value must be H.264.
- *
  *           * `CodecOptions` &mdash; (`Object<String>`) Profile The H.264
  *             profile that you want to use for the output file. Elastic
  *             Transcoder supports the following profiles: baseline: The
@@ -1304,7 +1142,6 @@ AWS.ElasticTranscoder = inherit({})
  *             396 1b - 396 1.1 - 900 1.2 - 2376 1.3 - 2376 2 - 2376 2.1 -
  *             4752 2.2 - 8100 3 - 8100 3.1 - 18000 3.2 - 20480 4 - 32768
  *             4.1 - 32768
- *
  *           * `KeyframesMaxDist` &mdash; (`String`) The maximum number of
  *             frames between key frames. Key frames are fully encoded
  *             frames; the frames between key frames are encoded based, in
@@ -1312,14 +1149,12 @@ AWS.ElasticTranscoder = inherit({})
  *             integer formatted as a string; valid values are between 1
  *             and 100000, inclusive. A higher value results in higher
  *             compression but may also discernibly decrease video quality.
- *
  *           * `FixedGOP` &mdash; (`String`) Whether to use a fixed value
  *             for FixedGOP. Valid values are true and false: true: Elastic
  *             Transcoder uses the value of KeyframesMaxDist for the
  *             distance between key frames (the number of frames in a group
  *             of pictures, or GOP). false: The distance between key frames
  *             can vary.
- *
  *           * `BitRate` &mdash; (`String`) The bit rate of the video
  *             stream in the output file, in kilobits/second. Valid values
  *             depend on the values of Level and Profile. We recommend that
@@ -1331,7 +1166,6 @@ AWS.ElasticTranscoder = inherit({})
  *             128 : 160 1.1 - 192 : 240 1.2 - 384 : 480 1.3 - 768 : 960 2
  *             \- 2000 : 2500 3 - 10000 : 12500 3.1 - 14000 : 17500 3.2 -
  *             20000 : 25000 4 - 20000 : 25000 4.1 - 50000 : 62500
- *
  *           * `FrameRate` &mdash; (`String`) The frames per second for the
  *             video stream in the output file. Valid values include: auto,
  *             10, 15, 23.97, 24, 25, 29.97, 30, 60 If you specify auto,
@@ -1350,7 +1184,6 @@ AWS.ElasticTranscoder = inherit({})
  *             380160 1.1 - 76800 1.2 - 1536000 1.3 - 3041280 2 - 3041280
  *             2.1 - 5068800 2.2 - 5184000 3 - 10368000 3.1 - 27648000 3.2
  *             \- 55296000 4 - 62914560 4.1 - 62914560
- *
  *           * `Resolution` &mdash; (`String`) The width and height of the
  *             video in the output file, in pixels. Valid values are auto
  *             and width x height: auto: Elastic Transcoder attempts to
@@ -1371,7 +1204,6 @@ AWS.ElasticTranscoder = inherit({})
  *             height value): 1 - 25344 1b - 25344 1.1 - 101376 1.2 -
  *             101376 1.3 - 101376 2 - 101376 2.1 - 202752 2.2 - 404720 3 -
  *             404720 3.1 - 921600 3.2 - 1310720 4 - 2097152 4.1 - 2097152
- *
  *           * `AspectRatio` &mdash; (`String`) The display aspect ratio of
  *             the video in the output file. Valid values include: auto,
  *             1:1, 4:3, 3:2, 16:9 If you specify auto, Elastic Transcoder
@@ -1381,30 +1213,24 @@ AWS.ElasticTranscoder = inherit({})
  *             pillarboxing (black bars on the sides) or letterboxing
  *             (black bars on the top and bottom) to maintain the aspect
  *             ratio of the active region of the video.
- *
  *         * `Thumbnails` &mdash; (`Object`) A section of the response body
  *           that provides information about the thumbnail preset values,
  *           if any.
- *
  *           * `Format` &mdash; (`String`) The format of thumbnails, if
  *             any. Valid values are jpg and png. You specify whether you
  *             want Elastic Transcoder to create thumbnails when you create
  *             a job.
- *
  *           * `Interval` &mdash; (`String`) The number of seconds between
  *             thumbnails. Specify an integer value.
- *
  *           * `Resolution` &mdash; (`String`) The width and height of
  *             thumbnail files in pixels. Specify a value in the format
  *             width x height where both values are even integers. The
  *             values cannot exceed the width and height that you specified
  *             in the Video:Resolution object.
- *
  *           * `AspectRatio` &mdash; (`String`) The aspect ratio of
  *             thumbnails. Valid values include: auto, 1:1, 4:3, 3:2, 16:9
  *             If you specify auto, Elastic Transcoder tries to preserve
  *             the aspect ratio of the video in the output file.
- *
  *         * `Type` &mdash; (`String`) Whether the preset is a default
  *           preset provided by Elastic Transcoder (System) or a preset
  *           that you have defined (Custom).
@@ -1414,7 +1240,6 @@ AWS.ElasticTranscoder = inherit({})
  * @!method readJob(params, callback)
  *   Calls the ReadJob API operation.
  *   @param params [Object]
- *
  *     * `Id` &mdash; **required** &mdash; (`String`) The identifier of
  *       the job for which you want to get detailed information.
  *   @callback callback function(err, data)
@@ -1429,22 +1254,18 @@ AWS.ElasticTranscoder = inherit({})
  *
  *       * `Job` &mdash; **required** &mdash; (`Object`) A section of the
  *         response body that provides information about the job.
- *
  *         * `Id` &mdash; (`String`) The identifier that Elastic Transcoder
  *           assigned to the job. You use this value to get settings for
  *           the job or to delete the job.
- *
  *         * `PipelineId` &mdash; (`String`) The Id of the pipeline that
  *           you want Elastic Transcoder to use for transcoding. The
  *           pipeline determines several settings, including the Amazon S3
  *           bucket from which Elastic Transcoder gets the files to
  *           transcode and the bucket into which Elastic Transcoder puts
  *           the transcoded files.
- *
  *         * `Input` &mdash; (`Object`) A section of the request or
  *           response body that provides information about the file that is
  *           being transcoded.
- *
  *           * `Key` &mdash; (`String`) The name of the file to transcode.
  *             Elsewhere in the body of the JSON block is the the ID of the
  *             pipeline to use for processing the job. The InputBucket
@@ -1453,7 +1274,6 @@ AWS.ElasticTranscoder = inherit({})
  *             includes a prefix, such as cooking/lasagna.mpg, include the
  *             prefix in the key. If the file isn't in the specified
  *             bucket, Elastic Transcoder returns an error.
- *
  *           * `FrameRate` &mdash; (`String`) The frame rate of the input
  *             file. If you want Elastic Transcoder to automatically detect
  *             the frame rate of the input file, specify auto. If you want
@@ -1461,7 +1281,6 @@ AWS.ElasticTranscoder = inherit({})
  *             the following values: 10, 15, 23.97, 24, 25, 29.97, 30, 60
  *             If you specify a value other than auto, Elastic Transcoder
  *             disables automatic detection of the frame rate.
- *
  *           * `Resolution` &mdash; (`String`) The resolution, in pixels,
  *             of the input file. If you want Elastic Transcoder to
  *             automatically detect the resolution of the input file,
@@ -1470,7 +1289,6 @@ AWS.ElasticTranscoder = inherit({})
  *             height in pixels. If you specify a value other than auto,
  *             Elastic Transcoder disables automatic detection of the
  *             resolution.
- *
  *           * `AspectRatio` &mdash; (`String`) The aspect ratio of the
  *             input file. If you want Elastic Transcoder to automatically
  *             detect the aspect ratio of the input file, specify auto. If
@@ -1478,7 +1296,6 @@ AWS.ElasticTranscoder = inherit({})
  *             enter one of the following values: 1:1, 4:3, 3:2, 16:9 If
  *             you specify a value other than auto, Elastic Transcoder
  *             disables automatic detection of the aspect ratio.
- *
  *           * `Interlaced` &mdash; (`String`) Whether the input file is
  *             interlaced. If you want Elastic Transcoder to automatically
  *             detect whether the input file is interlaced, specify auto.
@@ -1486,7 +1303,6 @@ AWS.ElasticTranscoder = inherit({})
  *             enter one of the following values: true, false If you
  *             specify a value other than auto, Elastic Transcoder disables
  *             automatic detection of interlacing.
- *
  *           * `Container` &mdash; (`String`) The container type for the
  *             input file. If you want Elastic Transcoder to automatically
  *             detect the container type of the input file, specify auto.
@@ -1494,18 +1310,15 @@ AWS.ElasticTranscoder = inherit({})
  *             file, enter one of the following values: 3gp, asf, avi,
  *             divx, flv, mkv, mov, mp4, mpeg, mpeg-ps, mpeg-ts, mxf, ogg,
  *             vob, wav, webm
- *
  *         * `Output` &mdash; (`Object`) A section of the request or
  *           response body that provides information about the transcoded
  *           (target) file.
- *
  *           * `Key` &mdash; (`String`) The name to assign to the
  *             transcoded file. Elastic Transcoder saves the file in the
  *             Amazon S3 bucket specified by the OutputBucket object in the
  *             pipeline that is specified by the pipeline ID. If a file
  *             with the specified name already exists in the output bucket,
  *             the job fails.
- *
  *           * `ThumbnailPattern` &mdash; (`String`) Whether you want
  *             Elastic Transcoder to create thumbnails for your videos and,
  *             if so, how you want Elastic Transcoder to name the files. If
@@ -1533,22 +1346,18 @@ AWS.ElasticTranscoder = inherit({})
  *             or .png) that appears in the preset that you specified in
  *             the PresetID value of CreateJobOutput. Elastic Transcoder
  *             also appends the applicable file name extension.
- *
  *           * `Rotate` &mdash; (`String`) The number of degrees clockwise
  *             by which you want Elastic Transcoder to rotate the output
  *             relative to the input. Enter one of the following values:
  *             auto, 0, 90, 180, 270 The value auto generally works only if
  *             the file that you're transcoding contains rotation metadata.
- *
  *           * `PresetId` &mdash; (`String`) The Id of the preset to use
  *             for this job. The preset determines the audio, video, and
  *             thumbnail settings that Elastic Transcoder uses for
  *             transcoding.
- *
  *           * `Status` &mdash; (`String`) Status of the job. The value of
  *             Status is one of the following: Submitted, Progressing,
  *             Completed, Canceled, or Error.
- *
  *           * `StatusDetail` &mdash; (`String`) Information that further
  *             explains Status.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1557,7 +1366,6 @@ AWS.ElasticTranscoder = inherit({})
  * @!method readPipeline(params, callback)
  *   Calls the ReadPipeline API operation.
  *   @param params [Object]
- *
  *     * `Id` &mdash; **required** &mdash; (`String`) The identifier of
  *       the pipeline to read.
  *   @callback callback function(err, data)
@@ -1572,31 +1380,24 @@ AWS.ElasticTranscoder = inherit({})
  *
  *       * `Pipeline` &mdash; **required** &mdash; (`Object`) A section of
  *         the response body that provides information about the pipeline.
- *
  *         * `Id` &mdash; (`String`) The identifier for the pipeline. You
  *           use this value to identify the pipeline in which you want to
  *           perform a variety of operations, such as creating a job or a
  *           preset.
- *
  *         * `Name` &mdash; (`String`) The name of the pipeline. We
  *           recommend that the name be unique within the AWS account, but
  *           uniqueness is not enforced. Constraints: Maximum 40 characters
- *
  *         * `Status` &mdash; (`String`) The current status of the
  *           pipeline: active: The pipeline is processing jobs. paused: The
  *           pipeline is not currently processing jobs.
- *
  *         * `InputBucket` &mdash; (`String`) The Amazon S3 bucket in which
  *           you saved the media files that you want to transcode.
- *
  *         * `OutputBucket` &mdash; (`String`) The Amazon S3 bucket in
  *           which you want Elastic Transcoder to save the transcoded
  *           files.
- *
  *         * `Role` &mdash; (`String`) The IAM Amazon Resource Name (ARN)
  *           for the role that you want Elastic Transcoder to use to create
  *           the pipeline.
- *
  *         * `Notifications` &mdash; (`Object`) The Amazon Simple
  *           Notification Service (Amazon SNS) topic that you want to
  *           notify to report job status. To receive notifications, you
@@ -1610,20 +1411,16 @@ AWS.ElasticTranscoder = inherit({})
  *           Transcoder encounters a warning condition. Error: The Amazon
  *           SNS topic that you want to notify when Elastic Transcoder
  *           encounters an error condition.
- *
  *           * `Progressing` &mdash; (`String`) The Amazon Simple
  *             Notification Service (Amazon SNS) topic that you want to
  *             notify when Elastic Transcoder has started to process the
  *             job.
- *
  *           * `Completed` &mdash; (`String`) The Amazon SNS topic that you
  *             want to notify when Elastic Transcoder has finished
  *             processing the job.
- *
  *           * `Warning` &mdash; (`String`) The Amazon SNS topic that you
  *             want to notify when Elastic Transcoder encounters a warning
  *             condition.
- *
  *           * `Error` &mdash; (`String`) The Amazon SNS topic that you
  *             want to notify when Elastic Transcoder encounters an error
  *             condition.
@@ -1633,7 +1430,6 @@ AWS.ElasticTranscoder = inherit({})
  * @!method readPreset(params, callback)
  *   Calls the ReadPreset API operation.
  *   @param params [Object]
- *
  *     * `Id` &mdash; **required** &mdash; (`String`) The identifier of
  *       the preset for which you want to get detailed information.
  *   @callback callback function(err, data)
@@ -1648,43 +1444,31 @@ AWS.ElasticTranscoder = inherit({})
  *
  *       * `Preset` &mdash; **required** &mdash; (`Object`) A section of
  *         the response body that provides information about the preset.
- *
  *         * `Id` &mdash; (`String`) Identifier for the new preset. You use
  *           this value to get settings for the preset or to delete it.
- *
  *         * `Name` &mdash; (`String`) The name of the preset.
- *
  *         * `Description` &mdash; (`String`) A description of the preset.
- *
  *         * `Container` &mdash; (`String`) The container type for the
  *           output file. This value must be mp4.
- *
  *         * `Audio` &mdash; (`Object`) A section of the response body that
  *           provides information about the audio preset values.
- *
  *           * `Codec` &mdash; (`String`) The audio codec for the output
  *             file. This value must be AAC.
- *
  *           * `SampleRate` &mdash; (`String`) The sample rate of the audio
  *             stream in the output file, in Hertz. Valid values include:
  *             auto, 22050, 32000, 44100, 48000, 96000 If you specify auto,
  *             Elastic Transcoder automatically detects the sample rate.
- *
  *           * `BitRate` &mdash; (`String`) The bit rate of the audio
  *             stream in the output file, in kilobits/second. Enter an
  *             integer between 64 and 320, inclusive.
- *
  *           * `Channels` &mdash; (`String`) The number of audio channels
  *             in the output file. Valid values include: auto, 0, 1, 2 If
  *             you specify auto, Elastic Transcoder automatically detects
  *             the number of channels in the input file.
- *
  *         * `Video` &mdash; (`Object`) A section of the response body that
  *           provides information about the video preset values.
- *
  *           * `Codec` &mdash; (`String`) The video codec for the output
  *             file. This value must be H.264.
- *
  *           * `CodecOptions` &mdash; (`Object<String>`) Profile The H.264
  *             profile that you want to use for the output file. Elastic
  *             Transcoder supports the following profiles: baseline: The
@@ -1714,7 +1498,6 @@ AWS.ElasticTranscoder = inherit({})
  *             396 1b - 396 1.1 - 900 1.2 - 2376 1.3 - 2376 2 - 2376 2.1 -
  *             4752 2.2 - 8100 3 - 8100 3.1 - 18000 3.2 - 20480 4 - 32768
  *             4.1 - 32768
- *
  *           * `KeyframesMaxDist` &mdash; (`String`) The maximum number of
  *             frames between key frames. Key frames are fully encoded
  *             frames; the frames between key frames are encoded based, in
@@ -1722,14 +1505,12 @@ AWS.ElasticTranscoder = inherit({})
  *             integer formatted as a string; valid values are between 1
  *             and 100000, inclusive. A higher value results in higher
  *             compression but may also discernibly decrease video quality.
- *
  *           * `FixedGOP` &mdash; (`String`) Whether to use a fixed value
  *             for FixedGOP. Valid values are true and false: true: Elastic
  *             Transcoder uses the value of KeyframesMaxDist for the
  *             distance between key frames (the number of frames in a group
  *             of pictures, or GOP). false: The distance between key frames
  *             can vary.
- *
  *           * `BitRate` &mdash; (`String`) The bit rate of the video
  *             stream in the output file, in kilobits/second. Valid values
  *             depend on the values of Level and Profile. We recommend that
@@ -1741,7 +1522,6 @@ AWS.ElasticTranscoder = inherit({})
  *             128 : 160 1.1 - 192 : 240 1.2 - 384 : 480 1.3 - 768 : 960 2
  *             \- 2000 : 2500 3 - 10000 : 12500 3.1 - 14000 : 17500 3.2 -
  *             20000 : 25000 4 - 20000 : 25000 4.1 - 50000 : 62500
- *
  *           * `FrameRate` &mdash; (`String`) The frames per second for the
  *             video stream in the output file. Valid values include: auto,
  *             10, 15, 23.97, 24, 25, 29.97, 30, 60 If you specify auto,
@@ -1760,7 +1540,6 @@ AWS.ElasticTranscoder = inherit({})
  *             380160 1.1 - 76800 1.2 - 1536000 1.3 - 3041280 2 - 3041280
  *             2.1 - 5068800 2.2 - 5184000 3 - 10368000 3.1 - 27648000 3.2
  *             \- 55296000 4 - 62914560 4.1 - 62914560
- *
  *           * `Resolution` &mdash; (`String`) The width and height of the
  *             video in the output file, in pixels. Valid values are auto
  *             and width x height: auto: Elastic Transcoder attempts to
@@ -1781,7 +1560,6 @@ AWS.ElasticTranscoder = inherit({})
  *             height value): 1 - 25344 1b - 25344 1.1 - 101376 1.2 -
  *             101376 1.3 - 101376 2 - 101376 2.1 - 202752 2.2 - 404720 3 -
  *             404720 3.1 - 921600 3.2 - 1310720 4 - 2097152 4.1 - 2097152
- *
  *           * `AspectRatio` &mdash; (`String`) The display aspect ratio of
  *             the video in the output file. Valid values include: auto,
  *             1:1, 4:3, 3:2, 16:9 If you specify auto, Elastic Transcoder
@@ -1791,30 +1569,24 @@ AWS.ElasticTranscoder = inherit({})
  *             pillarboxing (black bars on the sides) or letterboxing
  *             (black bars on the top and bottom) to maintain the aspect
  *             ratio of the active region of the video.
- *
  *         * `Thumbnails` &mdash; (`Object`) A section of the response body
  *           that provides information about the thumbnail preset values,
  *           if any.
- *
  *           * `Format` &mdash; (`String`) The format of thumbnails, if
  *             any. Valid values are jpg and png. You specify whether you
  *             want Elastic Transcoder to create thumbnails when you create
  *             a job.
- *
  *           * `Interval` &mdash; (`String`) The number of seconds between
  *             thumbnails. Specify an integer value.
- *
  *           * `Resolution` &mdash; (`String`) The width and height of
  *             thumbnail files in pixels. Specify a value in the format
  *             width x height where both values are even integers. The
  *             values cannot exceed the width and height that you specified
  *             in the Video:Resolution object.
- *
  *           * `AspectRatio` &mdash; (`String`) The aspect ratio of
  *             thumbnails. Valid values include: auto, 1:1, 4:3, 3:2, 16:9
  *             If you specify auto, Elastic Transcoder tries to preserve
  *             the aspect ratio of the video in the output file.
- *
  *         * `Type` &mdash; (`String`) Whether the preset is a default
  *           preset provided by Elastic Transcoder (System) or a preset
  *           that you have defined (Custom).
@@ -1824,19 +1596,15 @@ AWS.ElasticTranscoder = inherit({})
  * @!method testRole(params, callback)
  *   Calls the TestRole API operation.
  *   @param params [Object]
- *
  *     * `Role` &mdash; **required** &mdash; (`String`) The IAM Amazon
  *       Resource Name (ARN) for the role that you want Elastic
  *       Transcoder to test.
- *
  *     * `InputBucket` &mdash; **required** &mdash; (`String`) The Amazon
  *       S3 bucket that contains media files to be transcoded. The action
  *       attempts to read from this bucket.
- *
  *     * `OutputBucket` &mdash; **required** &mdash; (`String`) The
  *       Amazon S3 bucket that Elastic Transcoder will write transcoded
  *       media files to. The action attempts to read from this bucket.
- *
  *     * `Topics` &mdash; **required** &mdash; (`Array<String>`) The ARNs
  *       of one or more Amazon Simple Notification Service (Amazon SNS)
  *       topics that you want the action to send a test notification to.
@@ -1853,7 +1621,6 @@ AWS.ElasticTranscoder = inherit({})
  *       * `Success` &mdash; **required** &mdash; (`String`) If the
  *         operation is successful, this value is true; otherwise, the
  *         value is false.
- *
  *       * `Messages` &mdash; (`Array<String>`) If the Success element
  *         contains false, this value is an array of one or more error
  *         messages that were generated during the test process.
@@ -1863,10 +1630,8 @@ AWS.ElasticTranscoder = inherit({})
  * @!method updatePipelineNotifications(params, callback)
  *   Calls the UpdatePipelineNotifications API operation.
  *   @param params [Object]
- *
  *     * `Id` &mdash; **required** &mdash; (`String`) The identifier of
  *       the pipeline for which you want to change notification settings.
- *
  *     * `Notifications` &mdash; **required** &mdash; (`Object`) The
  *       Amazon Simple Notification Service (Amazon SNS) topic that you
  *       want to notify to report job status. To receive notifications,
@@ -1879,19 +1644,15 @@ AWS.ElasticTranscoder = inherit({})
  *       you want to notify when Elastic Transcoder encounters a warning
  *       condition. Error: The Amazon SNS topic that you want to notify
  *       when Elastic Transcoder encounters an error condition.
- *
  *       * `Progressing` &mdash; (`String`) The Amazon Simple
  *         Notification Service (Amazon SNS) topic that you want to
  *         notify when Elastic Transcoder has started to process the job.
- *
  *       * `Completed` &mdash; (`String`) The Amazon SNS topic that you
  *         want to notify when Elastic Transcoder has finished processing
  *         the job.
- *
  *       * `Warning` &mdash; (`String`) The Amazon SNS topic that you
  *         want to notify when Elastic Transcoder encounters a warning
  *         condition.
- *
  *       * `Error` &mdash; (`String`) The Amazon SNS topic that you want
  *         to notify when Elastic Transcoder encounters an error
  *         condition.
@@ -1907,31 +1668,24 @@ AWS.ElasticTranscoder = inherit({})
  *
  *       * `Pipeline` &mdash; **required** &mdash; (`Object`) A section of
  *         the response body that provides information about the pipeline.
- *
  *         * `Id` &mdash; (`String`) The identifier for the pipeline. You
  *           use this value to identify the pipeline in which you want to
  *           perform a variety of operations, such as creating a job or a
  *           preset.
- *
  *         * `Name` &mdash; (`String`) The name of the pipeline. We
  *           recommend that the name be unique within the AWS account, but
  *           uniqueness is not enforced. Constraints: Maximum 40 characters
- *
  *         * `Status` &mdash; (`String`) The current status of the
  *           pipeline: active: The pipeline is processing jobs. paused: The
  *           pipeline is not currently processing jobs.
- *
  *         * `InputBucket` &mdash; (`String`) The Amazon S3 bucket in which
  *           you saved the media files that you want to transcode.
- *
  *         * `OutputBucket` &mdash; (`String`) The Amazon S3 bucket in
  *           which you want Elastic Transcoder to save the transcoded
  *           files.
- *
  *         * `Role` &mdash; (`String`) The IAM Amazon Resource Name (ARN)
  *           for the role that you want Elastic Transcoder to use to create
  *           the pipeline.
- *
  *         * `Notifications` &mdash; (`Object`) The Amazon Simple
  *           Notification Service (Amazon SNS) topic that you want to
  *           notify to report job status. To receive notifications, you
@@ -1945,20 +1699,16 @@ AWS.ElasticTranscoder = inherit({})
  *           Transcoder encounters a warning condition. Error: The Amazon
  *           SNS topic that you want to notify when Elastic Transcoder
  *           encounters an error condition.
- *
  *           * `Progressing` &mdash; (`String`) The Amazon Simple
  *             Notification Service (Amazon SNS) topic that you want to
  *             notify when Elastic Transcoder has started to process the
  *             job.
- *
  *           * `Completed` &mdash; (`String`) The Amazon SNS topic that you
  *             want to notify when Elastic Transcoder has finished
  *             processing the job.
- *
  *           * `Warning` &mdash; (`String`) The Amazon SNS topic that you
  *             want to notify when Elastic Transcoder encounters a warning
  *             condition.
- *
  *           * `Error` &mdash; (`String`) The Amazon SNS topic that you
  *             want to notify when Elastic Transcoder encounters an error
  *             condition.
@@ -1968,10 +1718,8 @@ AWS.ElasticTranscoder = inherit({})
  * @!method updatePipelineStatus(params, callback)
  *   Calls the UpdatePipelineStatus API operation.
  *   @param params [Object]
- *
  *     * `Id` &mdash; **required** &mdash; (`String`) The identifier of
  *       the pipeline to update.
- *
  *     * `Status` &mdash; **required** &mdash; (`String`) The new status
  *       of the pipeline: active: Enable the pipeline, so it starts
  *       processing jobs. paused: Disable the pipeline, so it stops
@@ -1988,31 +1736,24 @@ AWS.ElasticTranscoder = inherit({})
  *
  *       * `Pipeline` &mdash; **required** &mdash; (`Object`) A section of
  *         the response body that provides information about the pipeline.
- *
  *         * `Id` &mdash; (`String`) The identifier for the pipeline. You
  *           use this value to identify the pipeline in which you want to
  *           perform a variety of operations, such as creating a job or a
  *           preset.
- *
  *         * `Name` &mdash; (`String`) The name of the pipeline. We
  *           recommend that the name be unique within the AWS account, but
  *           uniqueness is not enforced. Constraints: Maximum 40 characters
- *
  *         * `Status` &mdash; (`String`) The current status of the
  *           pipeline: active: The pipeline is processing jobs. paused: The
  *           pipeline is not currently processing jobs.
- *
  *         * `InputBucket` &mdash; (`String`) The Amazon S3 bucket in which
  *           you saved the media files that you want to transcode.
- *
  *         * `OutputBucket` &mdash; (`String`) The Amazon S3 bucket in
  *           which you want Elastic Transcoder to save the transcoded
  *           files.
- *
  *         * `Role` &mdash; (`String`) The IAM Amazon Resource Name (ARN)
  *           for the role that you want Elastic Transcoder to use to create
  *           the pipeline.
- *
  *         * `Notifications` &mdash; (`Object`) The Amazon Simple
  *           Notification Service (Amazon SNS) topic that you want to
  *           notify to report job status. To receive notifications, you
@@ -2026,20 +1767,16 @@ AWS.ElasticTranscoder = inherit({})
  *           Transcoder encounters a warning condition. Error: The Amazon
  *           SNS topic that you want to notify when Elastic Transcoder
  *           encounters an error condition.
- *
  *           * `Progressing` &mdash; (`String`) The Amazon Simple
  *             Notification Service (Amazon SNS) topic that you want to
  *             notify when Elastic Transcoder has started to process the
  *             job.
- *
  *           * `Completed` &mdash; (`String`) The Amazon SNS topic that you
  *             want to notify when Elastic Transcoder has finished
  *             processing the job.
- *
  *           * `Warning` &mdash; (`String`) The Amazon SNS topic that you
  *             want to notify when Elastic Transcoder encounters a warning
  *             condition.
- *
  *           * `Error` &mdash; (`String`) The Amazon SNS topic that you
  *             want to notify when Elastic Transcoder encounters an error
  *             condition.
