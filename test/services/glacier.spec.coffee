@@ -17,9 +17,12 @@ AWS = helpers.AWS
 require('../../lib/services/glacier')
 
 describe 'AWS.Glacier.Client', ->
-  client = new AWS.Glacier.Client
+  client = new AWS.Glacier.Client()
 
   describe 'building requests', ->
+    beforeEach ->
+      helpers.mockHttpResponse 200, {}, 'response'
+
     it 'sets accountId to "-" if not set', ->
       resp = client.listVaults().send()
       expect(resp.request.httpRequest.path).toEqual('/-/vaults')

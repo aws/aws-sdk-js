@@ -396,29 +396,46 @@ describe 'AWS.S3.Client', ->
       s3.createBucket(Bucket:'name')
       expect(loc).toEqual('eu-west-1')
 
-  describe 'deleteObjects', ->
-    it 'builds Content-MD5 header parameter', ->
-      helpers.mockHttpResponse 200, {}, ''
-      resp = s3.deleteObjects(Bucket: 'bucket', Objects: ['a', 'b']).send()
-      hash = AWS.util.crypto.md5(resp.request.httpRequest.body, 'base64')
-      expect(resp.request.httpRequest.headers['Content-MD5']).toEqual(hash)
+  AWS.util.each AWS.S3.Client.prototype.computableChecksumOperations, (operation) ->
+    describe operation, ->
+      it 'forces Content-MD5 header parameter', ->
+        helpers.mockHttpResponse 200, {}, ''
+        resp = s3[operation](Bucket: 'bucket', ContentMD5: '000').send()
+        hash = AWS.util.crypto.md5(resp.request.httpRequest.body, 'base64')
+        expect(resp.request.httpRequest.headers['Content-MD5']).toEqual(hash)
 
-  describe 'putBucketLifecycle', ->
-    it 'adds Content-MD5 header parameter if not passed in parameters', ->
+  describe 'willComputeChecksums', ->
+    beforeEach ->
       helpers.mockHttpResponse 200, {}, ''
-      rule =
-        Prefix: '/'
-        Status: 'Enabled'
-        Transition: Days: '0', StorageClass: 'GLACIER'
-      resp = s3.putBucketLifecycle(Rules: [rule]).send()
-      hash = AWS.util.crypto.md5(resp.request.httpRequest.body, 'base64')
-      expect(resp.request.httpRequest.headers['Content-MD5']).toEqual(hash)
 
-    it 'does not auto-build Content-MD5 if passed in parameters', ->
-      helpers.mockHttpResponse 200, {}, ''
-      rule =
-        Prefix: '/'
-        Status: 'Enabled'
-        Transition: Days: '0', StorageClass: 'GLACIER'
-      resp = s3.putBucketLifecycle(Rules: [rule], ContentMD5: '000').send()
-      expect(resp.request.httpRequest.headers['Content-MD5']).toEqual('000')
+    willCompute = (operation, opts) ->
+      compute = opts.computeChecksums
+      s3 = new AWS.S3.Client(computeChecksums: compute)
+      resp = s3.makeRequest(operation, Bucket: 'example', ContentMD5: opts.hash).send()
+      checksum = resp.request.httpRequest.headers['Content-MD5']
+      if opts.hash != undefined
+        expect(checksum).toEqual(opts.hash)
+      else
+        realChecksum = AWS.util.crypto.md5(resp.request.httpRequest.body, 'base64')
+        expect(checksum).toEqual(realChecksum)
+
+    it 'computes checksums if the operation requires it', ->
+      willCompute 'deleteObjects', computeChecksums: true
+      willCompute 'putBucketCors', computeChecksums: true
+      willCompute 'putBucketLifecycle', computeChecksums: true
+      willCompute 'putBucketTagging', computeChecksums: true
+
+    it 'computes checksums if computeChecksums is off and operation requires it', ->
+      willCompute 'deleteObjects', computeChecksums: false
+      willCompute 'putBucketCors', computeChecksums: false
+      willCompute 'putBucketLifecycle', computeChecksums: false
+      willCompute 'putBucketTagging', computeChecksums: false
+
+    it 'does not compute checksums if computeChecksums is off', ->
+      willCompute 'putObject', computeChecksums: false, hash: null
+
+    it 'does not compute checksums if computeChecksums is on and ContentMD5 is provided', ->
+      willCompute 'putBucketAcl', computeChecksums: true, hash: '000'
+
+    it 'computes checksums if computeChecksums is on and ContentMD5 is not provided',->
+      willCompute 'putBucketAcl', computeChecksums: true
