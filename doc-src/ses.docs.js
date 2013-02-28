@@ -99,6 +99,7 @@ AWS.SES = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DkimAttributes` &mdash; **required** &mdash; (`Object<Object>`)
  *         The DKIM attributes for an email address or a domain.
  *         * `DkimEnabled` &mdash; **required** &mdash; (`Boolean`) True if
@@ -133,6 +134,7 @@ AWS.SES = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `NotificationAttributes` &mdash; **required** &mdash;
  *         (`Object<Object>`) A map of Identity to
  *         IdentityNotificationAttributes.
@@ -166,6 +168,7 @@ AWS.SES = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VerificationAttributes` &mdash; **required** &mdash;
  *         (`Object<Object>`) A map of Identities to
  *         IdentityVerificationAttributes objects.
@@ -189,6 +192,7 @@ AWS.SES = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Max24HourSend` &mdash; (`Float`) The maximum number of emails
  *         the user is allowed to send in a 24-hour interval.
  *       * `MaxSendRate` &mdash; (`Float`) The maximum number of emails the
@@ -210,6 +214,7 @@ AWS.SES = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SendDataPoints` &mdash; (`Array<Object>`) A list of data
  *         points, each of which represents 15 minutes of activity.
  *         * `Timestamp` &mdash; (`Date`) Time of the data point.
@@ -242,6 +247,7 @@ AWS.SES = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Identities` &mdash; **required** &mdash; (`Array<String>`) A
  *         list of identities.
  *       * `NextToken` &mdash; (`String`) The token used for pagination.
@@ -260,6 +266,7 @@ AWS.SES = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VerifiedEmailAddresses` &mdash; (`Array<String>`) A list of
  *         email addresses that have been verified.
  *   @return [AWS.Request] a handle to the operation request for
@@ -323,6 +330,7 @@ AWS.SES = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `MessageId` &mdash; **required** &mdash; (`String`) The unique
  *         message identifier returned from the SendEmail action.
  *   @return [AWS.Request] a handle to the operation request for
@@ -361,6 +369,7 @@ AWS.SES = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `MessageId` &mdash; **required** &mdash; (`String`) The unique
  *         message identifier returned from the SendRawEmail action.
  *   @return [AWS.Request] a handle to the operation request for
@@ -448,6 +457,7 @@ AWS.SES = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DkimTokens` &mdash; **required** &mdash; (`Array<String>`) A
  *         set of DNS records (tokens) that must be published in the domain
  *         name's DNS for DKIM verification to complete, and which must
@@ -471,6 +481,7 @@ AWS.SES = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VerificationToken` &mdash; **required** &mdash; (`String`) A
  *         TXT record that must be placed in the DNS settings for the
  *         domain, in order to complete domain verification.

@@ -105,6 +105,7 @@ AWS.SimpleWorkflow = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `count` &mdash; **required** &mdash; (`Integer`)
  *       * `truncated` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -145,6 +146,7 @@ AWS.SimpleWorkflow = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `count` &mdash; **required** &mdash; (`Integer`)
  *       * `truncated` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -167,6 +169,7 @@ AWS.SimpleWorkflow = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `count` &mdash; **required** &mdash; (`Integer`)
  *       * `truncated` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -189,6 +192,7 @@ AWS.SimpleWorkflow = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `count` &mdash; **required** &mdash; (`Integer`)
  *       * `truncated` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -268,6 +272,7 @@ AWS.SimpleWorkflow = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `typeInfo` &mdash; **required** &mdash; (`Object`)
  *         * `activityType` &mdash; **required** &mdash; (`Object`)
  *           * `name` &mdash; **required** &mdash; (`String`)
@@ -300,6 +305,7 @@ AWS.SimpleWorkflow = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `domainInfo` &mdash; **required** &mdash; (`Object`)
  *         * `name` &mdash; **required** &mdash; (`String`)
  *         * `status` &mdash; **required** &mdash; (`String`)
@@ -328,6 +334,7 @@ AWS.SimpleWorkflow = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `executionInfo` &mdash; **required** &mdash; (`Object`)
  *         * `execution` &mdash; **required** &mdash; (`Object`)
  *           * `workflowId` &mdash; **required** &mdash; (`String`)
@@ -381,6 +388,7 @@ AWS.SimpleWorkflow = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `typeInfo` &mdash; **required** &mdash; (`Object`)
  *         * `workflowType` &mdash; **required** &mdash; (`Object`)
  *           * `name` &mdash; **required** &mdash; (`String`)
@@ -432,6 +440,7 @@ AWS.SimpleWorkflow = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `events` &mdash; **required** &mdash; (`Array<Object>`)
  *         * `eventTimestamp` &mdash; **required** &mdash; (`Date`)
  *         * `eventType` &mdash; **required** &mdash; (`String`)
@@ -802,6 +811,7 @@ AWS.SimpleWorkflow = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `typeInfos` &mdash; **required** &mdash; (`Array<Object>`)
  *         * `activityType` &mdash; **required** &mdash; (`Object`)
  *           * `name` &mdash; **required** &mdash; (`String`)
@@ -886,6 +896,7 @@ AWS.SimpleWorkflow = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `executionInfos` &mdash; **required** &mdash; (`Array<Object>`)
  *         * `execution` &mdash; **required** &mdash; (`Object`)
  *           * `workflowId` &mdash; **required** &mdash; (`String`)
@@ -934,6 +945,7 @@ AWS.SimpleWorkflow = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `domainInfos` &mdash; **required** &mdash; (`Array<Object>`)
  *         * `name` &mdash; **required** &mdash; (`String`)
  *         * `status` &mdash; **required** &mdash; (`String`)
@@ -992,6 +1004,7 @@ AWS.SimpleWorkflow = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `executionInfos` &mdash; **required** &mdash; (`Array<Object>`)
  *         * `execution` &mdash; **required** &mdash; (`Object`)
  *           * `workflowId` &mdash; **required** &mdash; (`String`)
@@ -1044,6 +1057,7 @@ AWS.SimpleWorkflow = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `typeInfos` &mdash; **required** &mdash; (`Array<Object>`)
  *         * `workflowType` &mdash; **required** &mdash; (`Object`)
  *           * `name` &mdash; **required** &mdash; (`String`)
@@ -1062,7 +1076,11 @@ AWS.SimpleWorkflow = inherit({})
  *     * `domain` &mdash; **required** &mdash; (`String`) The name of the
  *       domain that contains the task lists being polled.
  *     * `taskList` &mdash; **required** &mdash; (`Object`) Specifies the
- *       task list to poll for activity tasks. &NameFormat;
+ *       task list to poll for activity tasks. The specified string must
+ *       not start or end with whitespace. It must not contain a :
+ *       (colon), / (slash), | (vertical bar), or any control characters
+ *       (\u0000-\u001f | \u007f - \u009f). Also, it must not contain the
+ *       literal string "arn".
  *       * `name` &mdash; **required** &mdash; (`String`)
  *     * `identity` &mdash; (`String`) Identity of the worker making the
  *       request, which is recorded in the ActivityTaskStarted event in
@@ -1077,6 +1095,7 @@ AWS.SimpleWorkflow = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `taskToken` &mdash; **required** &mdash; (`String`)
  *       * `activityId` &mdash; **required** &mdash; (`String`)
  *       * `startedEventId` &mdash; **required** &mdash; (`Integer`)
@@ -1096,7 +1115,11 @@ AWS.SimpleWorkflow = inherit({})
  *     * `domain` &mdash; **required** &mdash; (`String`) The name of the
  *       domain containing the task lists to poll.
  *     * `taskList` &mdash; **required** &mdash; (`Object`) Specifies the
- *       task list to poll for decision tasks. &NameFormat;
+ *       task list to poll for decision tasks. The specified string must
+ *       not start or end with whitespace. It must not contain a :
+ *       (colon), / (slash), | (vertical bar), or any control characters
+ *       (\u0000-\u001f | \u007f - \u009f). Also, it must not contain the
+ *       literal string "arn".
  *       * `name` &mdash; **required** &mdash; (`String`)
  *     * `identity` &mdash; (`String`) Identity of the decider making the
  *       request, which is recorded in the DecisionTaskStarted event in
@@ -1130,6 +1153,7 @@ AWS.SimpleWorkflow = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `taskToken` &mdash; **required** &mdash; (`String`)
  *       * `startedEventId` &mdash; **required** &mdash; (`Integer`)
  *       * `workflowExecution` &mdash; **required** &mdash; (`Object`)
@@ -1481,7 +1505,11 @@ AWS.SimpleWorkflow = inherit({})
  *   Calls the RecordActivityTaskHeartbeat API operation.
  *   @param params [Object]
  *     * `taskToken` &mdash; **required** &mdash; (`String`) The
- *       taskToken of the ActivityTask. &taskTokenOpaque;
+ *       taskToken of the ActivityTask. The taskToken is generated by the
+ *       service and should be treated as an opaque value. If the task is
+ *       passed to another process, its taskToken must also be passed.
+ *       This enables it to provide its progress and respond with
+ *       results.
  *     * `details` &mdash; (`String`) If specified, contains details
  *       about the progress of the task.
  *   @callback callback function(err, data)
@@ -1493,6 +1521,7 @@ AWS.SimpleWorkflow = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `cancelRequested` &mdash; **required** &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -1503,18 +1532,29 @@ AWS.SimpleWorkflow = inherit({})
  *     * `domain` &mdash; **required** &mdash; (`String`) The name of the
  *       domain in which this activity is to be registered.
  *     * `name` &mdash; **required** &mdash; (`String`) The name of the
- *       activity type within the domain. &NameFormat;
+ *       activity type within the domain. The specified string must not
+ *       start or end with whitespace. It must not contain a : (colon), /
+ *       (slash), | (vertical bar), or any control characters
+ *       (\u0000-\u001f | \u007f - \u009f). Also, it must not contain the
+ *       literal string "arn".
  *     * `version` &mdash; **required** &mdash; (`String`) The version of
  *       the activity type. The activity type consists of the name and
  *       version, the combination of which must be unique within the
- *       domain. &NameFormat;
+ *       domain. The specified string must not start or end with
+ *       whitespace. It must not contain a : (colon), / (slash), |
+ *       (vertical bar), or any control characters (\u0000-\u001f |
+ *       \u007f - \u009f). Also, it must not contain the literal string
+ *       "arn".
  *     * `description` &mdash; (`String`) A textual description of the
  *       activity type.
  *     * `defaultTaskStartToCloseTimeout` &mdash; (`String`) If set,
  *       specifies the default maximum duration that a worker can take to
  *       process tasks of this activity type. This default can be
  *       overridden when scheduling an activity task using the
- *       ScheduleActivityTask Decision. &durationWithNone;
+ *       ScheduleActivityTask Decision. The valid values are integers
+ *       greater than or equal to 0. An integer value can be used to
+ *       specify the duration in seconds while NONE can be used to
+ *       specify unlimited duration.
  *     * `defaultTaskHeartbeatTimeout` &mdash; (`String`) If set,
  *       specifies the default maximum time before which a worker
  *       processing a task of this type must report progress by calling
@@ -1526,7 +1566,9 @@ AWS.SimpleWorkflow = inherit({})
  *       the activity worker receives an UnknownResource fault. In this
  *       case, Amazon SWF no longer considers the activity task to be
  *       valid; the activity worker should clean up the activity task.
- *       &durationWithNone;
+ *       The valid values are integers greater than or equal to 0. An
+ *       integer value can be used to specify the duration in seconds
+ *       while NONE can be used to specify unlimited duration.
  *     * `defaultTaskList` &mdash; (`Object`) If set, specifies the
  *       default task list to use for scheduling tasks of this activity
  *       type. This default task list is used if a task list is not
@@ -1537,12 +1579,17 @@ AWS.SimpleWorkflow = inherit({})
  *       specifies the default maximum duration that a task of this
  *       activity type can wait before being assigned to a worker. This
  *       default can be overridden when scheduling an activity task using
- *       the ScheduleActivityTask Decision. &durationWithNone;
+ *       the ScheduleActivityTask Decision. The valid values are integers
+ *       greater than or equal to 0. An integer value can be used to
+ *       specify the duration in seconds while NONE can be used to
+ *       specify unlimited duration.
  *     * `defaultTaskScheduleToCloseTimeout` &mdash; (`String`) If set,
  *       specifies the default maximum duration for a task of this
  *       activity type. This default can be overridden when scheduling an
- *       activity task using the ScheduleActivityTask Decision.
- *       &durationWithNone;
+ *       activity task using the ScheduleActivityTask Decision. The valid
+ *       values are integers greater than or equal to 0. An integer value
+ *       can be used to specify the duration in seconds while NONE can be
+ *       used to specify unlimited duration.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1558,7 +1605,11 @@ AWS.SimpleWorkflow = inherit({})
  *   Calls the RegisterDomain API operation.
  *   @param params [Object]
  *     * `name` &mdash; **required** &mdash; (`String`) Name of the
- *       domain to register. The name must be unique. &NameFormat;
+ *       domain to register. The name must be unique. The specified
+ *       string must not start or end with whitespace. It must not
+ *       contain a : (colon), / (slash), | (vertical bar), or any control
+ *       characters (\u0000-\u001f | \u007f - \u009f). Also, it must not
+ *       contain the literal string "arn".
  *     * `description` &mdash; (`String`) Textual description of the
  *       domain.
  *     * `workflowExecutionRetentionPeriodInDays` &mdash; **required**
@@ -1586,26 +1637,38 @@ AWS.SimpleWorkflow = inherit({})
  *     * `domain` &mdash; **required** &mdash; (`String`) The name of the
  *       domain in which to register the workflow type.
  *     * `name` &mdash; **required** &mdash; (`String`) The name of the
- *       workflow type. &NameFormat;
+ *       workflow type. The specified string must not start or end with
+ *       whitespace. It must not contain a : (colon), / (slash), |
+ *       (vertical bar), or any control characters (\u0000-\u001f |
+ *       \u007f - \u009f). Also, it must not contain the literal string
+ *       "arn".
  *     * `version` &mdash; **required** &mdash; (`String`) The version of
  *       the workflow type. The workflow type consists of the name and
  *       version, the combination of which must be unique within the
  *       domain. To get a list of all currently registered workflow
- *       types, use the ListWorkflowTypes action. &NameFormat;
+ *       types, use the ListWorkflowTypes action. The specified string
+ *       must not start or end with whitespace. It must not contain a :
+ *       (colon), / (slash), | (vertical bar), or any control characters
+ *       (\u0000-\u001f | \u007f - \u009f). Also, it must not contain the
+ *       literal string "arn".
  *     * `description` &mdash; (`String`) Textual description of the
  *       workflow type.
  *     * `defaultTaskStartToCloseTimeout` &mdash; (`String`) If set,
  *       specifies the default maximum duration of decision tasks for
  *       this workflow type. This default can be overridden when starting
  *       a workflow execution using the StartWorkflowExecution action or
- *       the StartChildWorkflowExecution Decision. &durationWithNone;
+ *       the StartChildWorkflowExecution Decision. The valid values are
+ *       integers greater than or equal to 0. An integer value can be
+ *       used to specify the duration in seconds while NONE can be used
+ *       to specify unlimited duration.
  *     * `defaultExecutionStartToCloseTimeout` &mdash; (`String`) If set,
  *       specifies the default maximum duration for executions of this
  *       workflow type. You can override this default when starting an
  *       execution through the StartWorkflowExecution Action or
- *       StartChildWorkflowExecution Decision. &durationWithoutNone;
- *       Unlike some of the other timeout parameters in Amazon SWF, you
- *       cannot specify a value of "NONE" for
+ *       StartChildWorkflowExecution Decision. The duration is specified
+ *       in seconds. The valid values are integers greater than or equal
+ *       to 0. Unlike some of the other timeout parameters in Amazon SWF,
+ *       you cannot specify a value of "NONE" for
  *       defaultExecutionStartToCloseTimeout; there is a one-year max
  *       limit on the time that a workflow execution can run. Exceeding
  *       this limit will always cause the workflow execution to time out.
@@ -1665,7 +1728,11 @@ AWS.SimpleWorkflow = inherit({})
  *   Calls the RespondActivityTaskCanceled API operation.
  *   @param params [Object]
  *     * `taskToken` &mdash; **required** &mdash; (`String`) The
- *       taskToken of the ActivityTask. &taskTokenOpaque;
+ *       taskToken of the ActivityTask. The taskToken is generated by the
+ *       service and should be treated as an opaque value. If the task is
+ *       passed to another process, its taskToken must also be passed.
+ *       This enables it to provide its progress and respond with
+ *       results.
  *     * `details` &mdash; (`String`) Optional information about the
  *       cancellation.
  *   @callback callback function(err, data)
@@ -1683,7 +1750,11 @@ AWS.SimpleWorkflow = inherit({})
  *   Calls the RespondActivityTaskCompleted API operation.
  *   @param params [Object]
  *     * `taskToken` &mdash; **required** &mdash; (`String`) The
- *       taskToken of the ActivityTask. &taskTokenOpaque;
+ *       taskToken of the ActivityTask. The taskToken is generated by the
+ *       service and should be treated as an opaque value. If the task is
+ *       passed to another process, its taskToken must also be passed.
+ *       This enables it to provide its progress and respond with
+ *       results.
  *     * `result` &mdash; (`String`) The result of the activity task. It
  *       is a free form string that is implementation specific.
  *   @callback callback function(err, data)
@@ -1701,7 +1772,11 @@ AWS.SimpleWorkflow = inherit({})
  *   Calls the RespondActivityTaskFailed API operation.
  *   @param params [Object]
  *     * `taskToken` &mdash; **required** &mdash; (`String`) The
- *       taskToken of the ActivityTask. &taskTokenOpaque;
+ *       taskToken of the ActivityTask. The taskToken is generated by the
+ *       service and should be treated as an opaque value. If the task is
+ *       passed to another process, its taskToken must also be passed.
+ *       This enables it to provide its progress and respond with
+ *       results.
  *     * `reason` &mdash; (`String`) Description of the error that may
  *       assist in diagnostics.
  *     * `details` &mdash; (`String`) Optional detailed information about
@@ -1721,7 +1796,11 @@ AWS.SimpleWorkflow = inherit({})
  *   Calls the RespondDecisionTaskCompleted API operation.
  *   @param params [Object]
  *     * `taskToken` &mdash; **required** &mdash; (`String`) The
- *       taskToken from the DecisionTask. &taskTokenOpaque;
+ *       taskToken from the DecisionTask. The taskToken is generated by
+ *       the service and should be treated as an opaque value. If the
+ *       task is passed to another process, its taskToken must also be
+ *       passed. This enables it to provide its progress and respond with
+ *       results.
  *     * `decisions` &mdash; (`Array<Object>`) The list of decisions
  *       (possibly empty) made by the decider while processing this
  *       decision task. See the docs for the Decision structure for
@@ -1845,7 +1924,11 @@ AWS.SimpleWorkflow = inherit({})
  *       execution. You may specify the same identifier if a workflow
  *       execution is logically a restart of a previous execution. You
  *       cannot have two open workflow executions with the same
- *       workflowId at the same time. &NameFormat;
+ *       workflowId at the same time. The specified string must not start
+ *       or end with whitespace. It must not contain a : (colon), /
+ *       (slash), | (vertical bar), or any control characters
+ *       (\u0000-\u001f | \u007f - \u009f). Also, it must not contain the
+ *       literal string "arn".
  *     * `workflowType` &mdash; **required** &mdash; (`Object`) The type
  *       of the workflow to start.
  *       * `name` &mdash; **required** &mdash; (`String`)
@@ -1857,7 +1940,11 @@ AWS.SimpleWorkflow = inherit({})
  *       specified either as a default for the workflow type or through
  *       this parameter. If neither this parameter is set nor a default
  *       task list was specified at registration time then a fault will
- *       be returned. &NameFormat;
+ *       be returned. The specified string must not start or end with
+ *       whitespace. It must not contain a : (colon), / (slash), |
+ *       (vertical bar), or any control characters (\u0000-\u001f |
+ *       \u007f - \u009f). Also, it must not contain the literal string
+ *       "arn".
  *       * `name` &mdash; **required** &mdash; (`String`)
  *     * `input` &mdash; (`String`) The input for the workflow execution.
  *       This is a free form string which should be meaningful to the
@@ -1867,15 +1954,16 @@ AWS.SimpleWorkflow = inherit({})
  *     * `executionStartToCloseTimeout` &mdash; (`String`) The total
  *       duration for this workflow execution. This overrides the
  *       defaultExecutionStartToCloseTimeout specified when registering
- *       the workflow type. &durationWithoutNone; Exceeding this limit
- *       will cause the workflow execution to time out. Unlike some of
- *       the other timeout parameters in Amazon SWF, you cannot specify a
- *       value of "NONE" for this timeout; there is a one-year max limit
- *       on the time that a workflow execution can run. An execution
- *       start-to-close timeout must be specified either through this
- *       parameter or as a default when the workflow type is registered.
- *       If neither this parameter nor a default execution start-to-close
- *       timeout is specified, a fault is returned.
+ *       the workflow type. The duration is specified in seconds. The
+ *       valid values are integers greater than or equal to 0. Exceeding
+ *       this limit will cause the workflow execution to time out. Unlike
+ *       some of the other timeout parameters in Amazon SWF, you cannot
+ *       specify a value of "NONE" for this timeout; there is a one-year
+ *       max limit on the time that a workflow execution can run. An
+ *       execution start-to-close timeout must be specified either
+ *       through this parameter or as a default when the workflow type is
+ *       registered. If neither this parameter nor a default execution
+ *       start-to-close timeout is specified, a fault is returned.
  *     * `tagList` &mdash; (`Array<String>`) The list of tags to
  *       associate with the workflow execution. You can specify a maximum
  *       of 5 tags. You can list workflow executions with a specific tag
@@ -1885,12 +1973,14 @@ AWS.SimpleWorkflow = inherit({})
  *       maximum duration of decision tasks for this workflow execution.
  *       This parameter overrides the defaultTaskStartToCloseTimout
  *       specified when registering the workflow type using
- *       RegisterWorkflowType. &durationWithNone; A task start-to-close
- *       timeout for this workflow execution must be specified either as
- *       a default for the workflow type or through this parameter. If
- *       neither this parameter is set nor a default task start-to-close
- *       timeout was specified at registration time then a fault will be
- *       returned.
+ *       RegisterWorkflowType. The valid values are integers greater than
+ *       or equal to 0. An integer value can be used to specify the
+ *       duration in seconds while NONE can be used to specify unlimited
+ *       duration. A task start-to-close timeout for this workflow
+ *       execution must be specified either as a default for the workflow
+ *       type or through this parameter. If neither this parameter is set
+ *       nor a default task start-to-close timeout was specified at
+ *       registration time then a fault will be returned.
  *     * `childPolicy` &mdash; (`String`) If set, specifies the policy to
  *       use for the child workflow executions of this workflow execution
  *       if it is terminated, by calling the TerminateWorkflowExecution
@@ -1917,6 +2007,7 @@ AWS.SimpleWorkflow = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `runId` &mdash; (`String`) The runId of a workflow execution.
  *         This Id is generated by the service and can be used to uniquely
  *         identify the workflow execution within a domain.

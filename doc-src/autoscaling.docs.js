@@ -382,6 +382,7 @@ AWS.AutoScaling = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `AdjustmentTypes` &mdash; (`Array<Object>`) A list of specific
  *         policy adjustment types.
  *         * `AdjustmentType` &mdash; (`String`) A policy adjustment type.
@@ -408,6 +409,7 @@ AWS.AutoScaling = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `AutoScalingGroups` &mdash; **required** &mdash;
  *         (`Array<Object>`) A list of Auto Scaling groups.
  *         * `AutoScalingGroupName` &mdash; **required** &mdash; (`String`)
@@ -518,6 +520,7 @@ AWS.AutoScaling = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `AutoScalingInstances` &mdash; (`Array<Object>`) A list of Auto
  *         Scaling instances.
  *         * `InstanceId` &mdash; **required** &mdash; (`String`) The
@@ -554,6 +557,7 @@ AWS.AutoScaling = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `AutoScalingNotificationTypes` &mdash; (`Array<String>`)
  *         Notification types supported by Auto Scaling. They are:
  *         autoscaling:EC2_INSTANCE_LAUNCH,
@@ -582,6 +586,7 @@ AWS.AutoScaling = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `LaunchConfigurations` &mdash; **required** &mdash;
  *         (`Array<Object>`) A list of launch configurations.
  *         * `LaunchConfigurationName` &mdash; **required** &mdash;
@@ -647,6 +652,7 @@ AWS.AutoScaling = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Metrics` &mdash; (`Array<Object>`) The list of Metrics
  *         collected.The following metrics are supported: GroupMinSize
  *         GroupMaxSize GroupDesiredCapacity GroupInServiceInstances
@@ -677,6 +683,7 @@ AWS.AutoScaling = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `NotificationConfigurations` &mdash; **required** &mdash;
  *         (`Array<Object>`) The list of notification configurations.
  *         * `AutoScalingGroupName` &mdash; (`String`) Specifies the Auto
@@ -715,6 +722,7 @@ AWS.AutoScaling = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ScalingPolicies` &mdash; (`Array<Object>`) A list of scaling
  *         policies.
  *         * `AutoScalingGroupName` &mdash; (`String`) The name of the Auto
@@ -772,6 +780,7 @@ AWS.AutoScaling = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Activities` &mdash; **required** &mdash; (`Array<Object>`) A
  *         list of the requested scaling activities.
  *         * `ActivityId` &mdash; **required** &mdash; (`String`) Specifies
@@ -813,6 +822,7 @@ AWS.AutoScaling = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Processes` &mdash; (`Array<Object>`) A list of ProcessType
  *         names.
  *         * `ProcessName` &mdash; **required** &mdash; (`String`) The name
@@ -851,6 +861,7 @@ AWS.AutoScaling = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ScheduledUpdateGroupActions` &mdash; (`Array<Object>`) A list
  *         of scheduled actions designed to update an Auto Scaling group.
  *         * `AutoScalingGroupName` &mdash; (`String`) The name of the Auto
@@ -908,6 +919,7 @@ AWS.AutoScaling = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Tags` &mdash; (`Array<Object>`) The list of tags.
  *         * `ResourceId` &mdash; (`String`) The name of the Auto Scaling
  *           group.
@@ -938,6 +950,7 @@ AWS.AutoScaling = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `TerminationPolicyTypes` &mdash; (`Array<String>`) Termination
  *         policies supported by Auto Scaling. They are: OldestInstance,
  *         OldestLaunchConfiguration, NewestInstance,
@@ -1071,6 +1084,7 @@ AWS.AutoScaling = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `PolicyARN` &mdash; (`String`) A policy's Amazon Resource Name
  *         (ARN).
  *   @return [AWS.Request] a handle to the operation request for
@@ -1223,6 +1237,7 @@ AWS.AutoScaling = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Activity` &mdash; (`Object`) A scaling Activity.
  *         * `ActivityId` &mdash; **required** &mdash; (`String`) Specifies
  *           the ID of the activity.

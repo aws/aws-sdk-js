@@ -82,6 +82,7 @@ AWS.EMR = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `JobFlowId` &mdash; (`String`) The job flow ID in which the
  *         instance groups are added.
  *       * `InstanceGroupIds` &mdash; (`Array<String>`) Instance group IDs
@@ -151,6 +152,7 @@ AWS.EMR = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `JobFlows` &mdash; (`Array<Object>`) A list of job flows
  *         matching the parameters supplied.
  *         * `JobFlowId` &mdash; **required** &mdash; (`String`) The job
@@ -486,6 +488,7 @@ AWS.EMR = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `JobFlowId` &mdash; (`String`) An unique identifier for the job
  *         flow.
  *   @return [AWS.Request] a handle to the operation request for

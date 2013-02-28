@@ -83,6 +83,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `StackId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -117,6 +118,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `AppId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -141,6 +143,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DeploymentId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -165,6 +168,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `InstanceId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -202,6 +206,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `LayerId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -236,6 +241,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `StackId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -255,6 +261,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `IamUserArn` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -350,6 +357,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Apps` &mdash; (`Array<Object>`)
  *         * `AppId` &mdash; (`String`)
  *         * `StackId` &mdash; (`String`)
@@ -389,6 +397,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Commands` &mdash; (`Array<Object>`)
  *         * `CommandId` &mdash; (`String`)
  *         * `InstanceId` &mdash; (`String`)
@@ -418,6 +427,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Deployments` &mdash; (`Array<Object>`)
  *         * `DeploymentId` &mdash; (`String`)
  *         * `StackId` &mdash; (`String`)
@@ -450,6 +460,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ElasticIps` &mdash; (`Array<Object>`)
  *         * `Ip` &mdash; (`String`)
  *         * `Name` &mdash; (`String`)
@@ -473,6 +484,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Instances` &mdash; (`Array<Object>`)
  *         * `InstanceId` &mdash; (`String`)
  *         * `Ec2InstanceId` &mdash; (`String`)
@@ -513,6 +525,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Layers` &mdash; (`Array<Object>`)
  *         * `StackId` &mdash; (`String`)
  *         * `LayerId` &mdash; (`String`)
@@ -560,6 +573,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `LoadBasedAutoScalingConfigurations` &mdash; (`Array<Object>`)
  *         * `LayerId` &mdash; (`String`)
  *         * `Enable` &mdash; (`Boolean`)
@@ -594,6 +608,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Permissions` &mdash; (`Array<Object>`)
  *         * `StackId` &mdash; (`String`)
  *         * `IamUserArn` &mdash; (`String`)
@@ -617,6 +632,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `RaidArrays` &mdash; (`Array<Object>`)
  *         * `RaidArrayId` &mdash; (`String`)
  *         * `InstanceId` &mdash; (`String`)
@@ -646,6 +662,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ServiceErrors` &mdash; (`Array<Object>`)
  *         * `ServiceErrorId` &mdash; (`String`)
  *         * `StackId` &mdash; (`String`)
@@ -671,6 +688,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SshKeys` &mdash; (`Array<Object>`)
  *         * `SshKeyId` &mdash; (`String`)
  *         * `Region` &mdash; (`String`)
@@ -693,6 +711,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Stacks` &mdash; (`Array<Object>`)
  *         * `StackId` &mdash; (`String`)
  *         * `Name` &mdash; (`String`)
@@ -730,6 +749,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `TimeBasedAutoScalingConfigurations` &mdash; (`Array<Object>`)
  *         * `InstanceId` &mdash; (`String`)
  *         * `AutoScalingSchedule` &mdash; (`Object`)
@@ -756,6 +776,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `UserProfiles` &mdash; (`Array<Object>`)
  *         * `IamUserArn` &mdash; (`String`)
  *         * `Name` &mdash; (`String`)
@@ -780,6 +801,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Volumes` &mdash; (`Array<Object>`)
  *         * `VolumeId` &mdash; (`String`)
  *         * `Ec2VolumeId` &mdash; (`String`)
@@ -808,6 +830,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `LayerId` &mdash; (`String`)
  *       * `Hostname` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -842,6 +865,7 @@ AWS.OpsWorks = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Packages` &mdash; (`Object<String>`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.

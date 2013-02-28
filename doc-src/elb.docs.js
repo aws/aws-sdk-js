@@ -71,6 +71,7 @@ AWS.ELB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SecurityGroups` &mdash; (`Array<String>`) A list of security
  *         group IDs associated with your LoadBalancer.
  *   @return [AWS.Request] a handle to the operation request for
@@ -93,6 +94,7 @@ AWS.ELB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Subnets` &mdash; (`Array<String>`) A list of subnet IDs added
  *         for the LoadBalancer.
  *   @return [AWS.Request] a handle to the operation request for
@@ -146,6 +148,7 @@ AWS.ELB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `HealthCheck` &mdash; (`Object`) The updated healthcheck for the
  *         instances.
  *         * `Target` &mdash; **required** &mdash; (`String`) Specifies the
@@ -290,6 +293,7 @@ AWS.ELB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DNSName` &mdash; (`String`) The DNS name for the LoadBalancer.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -447,6 +451,7 @@ AWS.ELB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Instances` &mdash; (`Array<Object>`) An updated list of
  *         remaining instances registered with the LoadBalancer.
  *         * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
@@ -471,6 +476,7 @@ AWS.ELB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `InstanceStates` &mdash; (`Array<Object>`) A list containing
  *         health information for the specified instances.
  *         * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
@@ -505,6 +511,7 @@ AWS.ELB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `PolicyDescriptions` &mdash; (`Array<Object>`) A list of policy
  *         description structures.
  *         * `PolicyName` &mdash; (`String`) The name mof the policy
@@ -536,6 +543,7 @@ AWS.ELB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `PolicyTypeDescriptions` &mdash; (`Array<Object>`) List of
  *         policy type description structures of the specified policy type.
  *         If no policy type names are specified, returns the description
@@ -581,6 +589,7 @@ AWS.ELB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `LoadBalancerDescriptions` &mdash; (`Array<Object>`) A list of
  *         LoadBalancer description structures.
  *         * `LoadBalancerName` &mdash; (`String`) Specifies the name
@@ -614,7 +623,7 @@ AWS.ELB = inherit({})
  *               the LoadBalancer.
  *             * `InstanceProtocol` &mdash; (`String`) Specifies the
  *               protocol to use for routing traffic to back-end instances
- *               - HTTP, HTTPS, TCP, or SSL. This property cannot be
+ *               \- HTTP, HTTPS, TCP, or SSL. This property cannot be
  *               modified for the life of the LoadBalancer. If the
  *               front-end protocol is HTTP or HTTPS, InstanceProtocol has
  *               to be at the same protocol layer, i.e., HTTP or HTTPS.
@@ -758,6 +767,7 @@ AWS.ELB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Subnets` &mdash; (`Array<String>`) A list of subnet IDs removed
  *         from the configured set of subnets for the LoadBalancer.
  *   @return [AWS.Request] a handle to the operation request for
@@ -784,6 +794,7 @@ AWS.ELB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `AvailabilityZones` &mdash; (`Array<String>`) A list of updated
  *         Availability Zones for the LoadBalancer.
  *   @return [AWS.Request] a handle to the operation request for
@@ -808,6 +819,7 @@ AWS.ELB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `AvailabilityZones` &mdash; (`Array<String>`) An updated list of
  *         Availability Zones for the LoadBalancer.
  *   @return [AWS.Request] a handle to the operation request for
@@ -840,6 +852,7 @@ AWS.ELB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Instances` &mdash; (`Array<Object>`) An updated list of
  *         instances for the LoadBalancer.
  *         * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.

@@ -58,10 +58,10 @@ AWS.Redshift = inherit({})
  *     * `ClusterSecurityGroupName` &mdash; **required** &mdash;
  *       (`String`) The name of the security group to which the ingress
  *       rule is added.
- *     * `CIDRIP` &mdash; (`String`) The IP range to be added the
- *       &service; security group.
+ *     * `CIDRIP` &mdash; (`String`) The IP range to be added the Amazon
+ *       Redshift security group.
  *     * `EC2SecurityGroupName` &mdash; (`String`) The EC2 security group
- *       to be added the &service; security group.
+ *       to be added the Amazon Redshift security group.
  *     * `EC2SecurityGroupOwnerId` &mdash; (`String`) The AWS account
  *       number of the owner of the security group specified by the
  *       EC2SecurityGroupName parameter. The AWS Access Key ID is not an
@@ -75,6 +75,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ClusterSecurityGroup` &mdash; (`Object`) Describes a security
  *         group.
  *         * `ClusterSecurityGroupName` &mdash; (`String`) The name of the
@@ -124,14 +125,15 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Snapshot` &mdash; (`Object`) Describes a snapshot.
  *         * `SnapshotIdentifier` &mdash; (`String`) The snapshot
  *           identifier that is provided in the request.
  *         * `ClusterIdentifier` &mdash; (`String`) The identifier of the
  *           cluster for which the snapshot was taken.
  *         * `SnapshotCreateTime` &mdash; (`Date`) The time (UTC) when
- *           &service; began the snapshot. A snapshot contains a copy of
- *           the cluster data as of this exact time.
+ *           Amazon Redshift began the snapshot. A snapshot contains a copy
+ *           of the cluster data as of this exact time.
  *         * `Status` &mdash; (`String`) The snapshot status. The value of
  *           the status depends on the API operation used.
  *           CreateClusterSnapshot and CopyClusterSnapshot returns status
@@ -147,7 +149,7 @@ AWS.Redshift = inherit({})
  *         * `MasterUsername` &mdash; (`String`) The master user name for
  *           the cluster.
  *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           &service; engine that is running on the cluster.
+ *           Amazon Redshift engine that is running on the cluster.
  *         * `SnapshotType` &mdash; (`String`) The snapshot type. Snapshots
  *           created using CreateClusterSnapshot and CopyClusterSnapshot
  *           will be of type "manual".
@@ -169,18 +171,21 @@ AWS.Redshift = inherit({})
  *       created when the cluster is created. To create additional
  *       databases after the cluster is created, connect to the cluster
  *       with a SQL client and use SQL commands to create a database. For
- *       more information, go to Create a Database in the &service;
+ *       more information, go to Create a Database in the Amazon Redshift
  *       Developer Guide. Default: dev Constraints: Must contain 1 to 64
  *       alphanumeric characters. Must contain only lowercase letters.
  *       Cannot be a word that is reserved by the service. A list of
- *       reserved words can be found in Reserved Words in the &service;
- *       Developer Guide.
+ *       reserved words can be found in Reserved Words in the Amazon
+ *       Redshift Developer Guide.
  *     * `ClusterIdentifier` &mdash; **required** &mdash; (`String`) A
  *       unique identifier for the cluster. You use this identifier to
  *       refer to the cluster for any subsequent cluster operations such
  *       as deleting or modifying. The identifier also appears in the
- *       &service; console. &clusterIDConstraints; Example:
- *       myexamplecluster
+ *       Amazon Redshift console. Constraints: Must contain from 1 to 63
+ *       alphanumeric characters or hyphens. Alphabetic characters must
+ *       be lowercase. First character must be a letter. Cannot end with
+ *       a hyphen or contain two consecutive hyphens. Must be unique for
+ *       all clusters within an AWS account. Example: myexamplecluster
  *     * `ClusterType` &mdash; (`String`) The type of the cluster. When
  *       cluster type is specified as single-node, the NumberOfNodes
  *       parameter is not required. multi-node, the NumberOfNodes
@@ -195,7 +200,7 @@ AWS.Redshift = inherit({})
  *       cluster that is being created. Constraints: Must be 1 - 128
  *       alphanumeric characters. First character must be a letter.
  *       Cannot be a reserved word. A list of reserved words can be found
- *       in Reserved Words in the &service; Developer Guide.
+ *       in Reserved Words in the Amazon Redshift Developer Guide.
  *     * `MasterUserPassword` &mdash; **required** &mdash; (`String`) The
  *       password associated with the master user account for the cluster
  *       that is being created. Constraints: Must be between 8 and 64
@@ -204,7 +209,7 @@ AWS.Redshift = inherit({})
  *       number.
  *     * `ClusterSecurityGroups` &mdash; (`Array<String>`) A list of
  *       security groups to be associated with this cluster. Default: The
- *       default cluster security group for &service;.
+ *       default cluster security group for Amazon Redshift.
  *     * `VpcSecurityGroupIds` &mdash; (`Array<String>`) A list of
  *       Virtual Private Cloud (VPC) security groups to associate with
  *       the cluster. Default: The default VPC security group is
@@ -214,10 +219,10 @@ AWS.Redshift = inherit({})
  *       not provided the resulting cluster will be deployed outside
  *       virtual private cloud (VPC).
  *     * `AvailabilityZone` &mdash; (`String`) The EC2 Availability Zone
- *       (AZ) in which you want &service; to provision the cluster. For
- *       example, if you have several EC2 instances running in a specific
- *       Availability Zone, then you might want the cluster to be
- *       provisioned in the same zone in order to decrease network
+ *       (AZ) in which you want Amazon Redshift to provision the cluster.
+ *       For example, if you have several EC2 instances running in a
+ *       specific Availability Zone, then you might want the cluster to
+ *       be provisioned in the same zone in order to decrease network
  *       latency. Default: A random, system-chosen Availability Zone in
  *       the region that is specified by the endpoint. Example:
  *       us-east-1d Constraint: The specified Availability Zone must be
@@ -236,11 +241,12 @@ AWS.Redshift = inherit({})
  *       Thu | Fri | Sat | Sun Constraints: Minimum 30-minute window.
  *     * `ClusterParameterGroupName` &mdash; (`String`) The name of the
  *       parameter group to be associated with this cluster. Default: The
- *       default &service; cluster parameter group. For information about
- *       the default parameter group, go to Working with Amazon Redshift
- *       Parameter Groups Constraints: Must be 1 to 255 alphanumeric
- *       characters or hyphens. First character must be a letter. Cannot
- *       end with a hyphen or contain two consecutive hyphens.
+ *       default Amazon Redshift cluster parameter group. For information
+ *       about the default parameter group, go to Working with Amazon
+ *       Redshift Parameter Groups Constraints: Must be 1 to 255
+ *       alphanumeric characters or hyphens. First character must be a
+ *       letter. Cannot end with a hyphen or contain two consecutive
+ *       hyphens.
  *     * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
  *       number of days that automated snapshots are retained. If the
  *       value is 0, automated snapshots are disabled. Even if automated
@@ -252,18 +258,18 @@ AWS.Redshift = inherit({})
  *       the JDBC and ODBC connection strings. Part of the connection
  *       string requires the port on which the cluster will listen for
  *       incoming connections. Default: 5439 Valid Values: 1150-65535 ???
- *     * `ClusterVersion` &mdash; (`String`) The version of the &service;
- *       engine software that you want to deploy on the cluster. The
- *       version selected runs on all the nodes in the cluster.
+ *     * `ClusterVersion` &mdash; (`String`) The version of the Amazon
+ *       Redshift engine software that you want to deploy on the cluster.
+ *       The version selected runs on all the nodes in the cluster.
  *       Constraints: Only version 1.0 is currently available. Example:
  *       1.0
  *     * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, upgrades can
- *       be applied during the maintenance window to the &service; engine
- *       that is running on the cluster. When a new version of the
- *       &service; engine is released, you can request that the service
- *       automatically apply upgrades during the maintenance window to
- *       the &service; engine that is running on your cluster. Default:
- *       true
+ *       be applied during the maintenance window to the Amazon Redshift
+ *       engine that is running on the cluster. When a new version of the
+ *       Amazon Redshift engine is released, you can request that the
+ *       service automatically apply upgrades during the maintenance
+ *       window to the Amazon Redshift engine that is running on your
+ *       cluster. Default: true
  *     * `NumberOfNodes` &mdash; (`Integer`) The number of compute nodes
  *       in the cluster. This parameter is required when the ClusterType
  *       parameter is specified as multi-node. For information about
@@ -284,6 +290,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Cluster` &mdash; (`Object`) Describes a cluster.
  *         * `ClusterIdentifier` &mdash; (`String`) The unique identifier
  *           of the cluster.
@@ -360,7 +367,7 @@ AWS.Redshift = inherit({})
  *             pending or in-progress change of the automated snapshot
  *             retention period.
  *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           &service; engine that is running on the cluster.
+ *           Amazon Redshift engine that is running on the cluster.
  *         * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, version
  *           upgrades will be applied automatically to the cluster during
  *           the maintenance window.
@@ -381,16 +388,16 @@ AWS.Redshift = inherit({})
  *       hyphens. Must be unique withing your AWS account. This value is
  *       stored as a lower-case string.
  *     * `ParameterGroupFamily` &mdash; **required** &mdash; (`String`)
- *       The &service; engine version to which the cluster parameter
- *       group applies. The cluster engine version determines the set of
- *       parameters. To get a list of valid parameter group family names,
- *       you can call DescribeClusterParameterGroups. By default, Amazon
- *       Redshift returns a list of all the parameter groups that are
- *       owned by your AWS account, including the default parameter
- *       groups for each Amazon Redshift engine version. The parameter
- *       group family names associated with the default parameter groups
- *       provide you the valid values. For example, a valid family name
- *       is "redshift-1.0".
+ *       The Amazon Redshift engine version to which the cluster
+ *       parameter group applies. The cluster engine version determines
+ *       the set of parameters. To get a list of valid parameter group
+ *       family names, you can call DescribeClusterParameterGroups. By
+ *       default, Amazon Redshift returns a list of all the parameter
+ *       groups that are owned by your AWS account, including the default
+ *       parameter groups for each Amazon Redshift engine version. The
+ *       parameter group family names associated with the default
+ *       parameter groups provide you the valid values. For example, a
+ *       valid family name is "redshift-1.0".
  *     * `Description` &mdash; **required** &mdash; (`String`) A
  *       description of the parameter group.
  *   @callback callback function(err, data)
@@ -402,6 +409,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ClusterParameterGroup` &mdash; (`Object`) Describes a parameter
  *         group.
  *         * `ParameterGroupName` &mdash; (`String`) The name of the
@@ -418,11 +426,12 @@ AWS.Redshift = inherit({})
  *   Calls the CreateClusterSecurityGroup API operation.
  *   @param params [Object]
  *     * `ClusterSecurityGroupName` &mdash; **required** &mdash;
- *       (`String`) The name for the security group. &service; stores the
- *       value as a lowercase string. Constraints: Must contain no more
- *       than 255 alphanumeric characters or hyphens. Must not be
- *       "Default". Must be unique for all security groups that are
- *       created by your AWS account. Example: examplesecuritygroup
+ *       (`String`) The name for the security group. Amazon Redshift
+ *       stores the value as a lowercase string. Constraints: Must
+ *       contain no more than 255 alphanumeric characters or hyphens.
+ *       Must not be "Default". Must be unique for all security groups
+ *       that are created by your AWS account. Example:
+ *       examplesecuritygroup
  *     * `Description` &mdash; **required** &mdash; (`String`) A
  *       description for the security group.
  *   @callback callback function(err, data)
@@ -434,6 +443,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ClusterSecurityGroup` &mdash; (`Object`) Describes a security
  *         group.
  *         * `ClusterSecurityGroupName` &mdash; (`String`) The name of the
@@ -481,14 +491,15 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Snapshot` &mdash; (`Object`) Describes a snapshot.
  *         * `SnapshotIdentifier` &mdash; (`String`) The snapshot
  *           identifier that is provided in the request.
  *         * `ClusterIdentifier` &mdash; (`String`) The identifier of the
  *           cluster for which the snapshot was taken.
  *         * `SnapshotCreateTime` &mdash; (`Date`) The time (UTC) when
- *           &service; began the snapshot. A snapshot contains a copy of
- *           the cluster data as of this exact time.
+ *           Amazon Redshift began the snapshot. A snapshot contains a copy
+ *           of the cluster data as of this exact time.
  *         * `Status` &mdash; (`String`) The snapshot status. The value of
  *           the status depends on the API operation used.
  *           CreateClusterSnapshot and CopyClusterSnapshot returns status
@@ -504,7 +515,7 @@ AWS.Redshift = inherit({})
  *         * `MasterUsername` &mdash; (`String`) The master user name for
  *           the cluster.
  *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           &service; engine that is running on the cluster.
+ *           Amazon Redshift engine that is running on the cluster.
  *         * `SnapshotType` &mdash; (`String`) The snapshot type. Snapshots
  *           created using CreateClusterSnapshot and CopyClusterSnapshot
  *           will be of type "manual".
@@ -523,11 +534,11 @@ AWS.Redshift = inherit({})
  *   Calls the CreateClusterSubnetGroup API operation.
  *   @param params [Object]
  *     * `ClusterSubnetGroupName` &mdash; **required** &mdash; (`String`)
- *       The name for the subnet group. &service; stores the value as a
- *       lowercase string. Constraints: Must contain no more than 255
- *       alphanumeric characters or hyphens. Must not be "Default". Must
- *       be unique for all subnet groups that are created by your AWS
- *       account. Example: examplesubnetgroup
+ *       The name for the subnet group. Amazon Redshift stores the value
+ *       as a lowercase string. Constraints: Must contain no more than
+ *       255 alphanumeric characters or hyphens. Must not be "Default".
+ *       Must be unique for all subnet groups that are created by your
+ *       AWS account. Example: examplesubnetgroup
  *     * `Description` &mdash; **required** &mdash; (`String`) A
  *       description for the subnet group.
  *     * `SubnetIds` &mdash; **required** &mdash; (`Array<String>`) An
@@ -542,6 +553,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ClusterSubnetGroup` &mdash; (`Object`) Describes a subnet
  *         group.
  *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
@@ -574,8 +586,8 @@ AWS.Redshift = inherit({})
  *       letter. Cannot end with a hyphen or contain two consecutive
  *       hyphens.
  *     * `SkipFinalClusterSnapshot` &mdash; (`Boolean`) Determines
- *       whether a final snapshot of the cluster is created before
- *       &service; deletes the cluster. If true, a final cluster snapshot
+ *       whether a final snapshot of the cluster is created before Amazon
+ *       Redshift deletes the cluster. If true, a final cluster snapshot
  *       is not created. If false, a final cluster snapshot is created
  *       before the cluster is deleted. The
  *       FinalClusterSnapshotIdentifier parameter must be specified if
@@ -596,6 +608,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Cluster` &mdash; (`Object`) Describes a cluster.
  *         * `ClusterIdentifier` &mdash; (`String`) The unique identifier
  *           of the cluster.
@@ -672,7 +685,7 @@ AWS.Redshift = inherit({})
  *             pending or in-progress change of the automated snapshot
  *             retention period.
  *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           &service; engine that is running on the cluster.
+ *           Amazon Redshift engine that is running on the cluster.
  *         * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, version
  *           upgrades will be applied automatically to the cluster during
  *           the maintenance window.
@@ -733,14 +746,15 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Snapshot` &mdash; (`Object`) Describes a snapshot.
  *         * `SnapshotIdentifier` &mdash; (`String`) The snapshot
  *           identifier that is provided in the request.
  *         * `ClusterIdentifier` &mdash; (`String`) The identifier of the
  *           cluster for which the snapshot was taken.
  *         * `SnapshotCreateTime` &mdash; (`Date`) The time (UTC) when
- *           &service; began the snapshot. A snapshot contains a copy of
- *           the cluster data as of this exact time.
+ *           Amazon Redshift began the snapshot. A snapshot contains a copy
+ *           of the cluster data as of this exact time.
  *         * `Status` &mdash; (`String`) The snapshot status. The value of
  *           the status depends on the API operation used.
  *           CreateClusterSnapshot and CopyClusterSnapshot returns status
@@ -756,7 +770,7 @@ AWS.Redshift = inherit({})
  *         * `MasterUsername` &mdash; (`String`) The master user name for
  *           the cluster.
  *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           &service; engine that is running on the cluster.
+ *           Amazon Redshift engine that is running on the cluster.
  *         * `SnapshotType` &mdash; (`String`) The snapshot type. Snapshots
  *           created using CreateClusterSnapshot and CopyClusterSnapshot
  *           will be of type "manual".
@@ -813,6 +827,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) A marker at which to continue
  *         listing cluster parameter groups in a new request. The response
  *         returns a marker if there are more parameter groups to list than
@@ -859,6 +874,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Parameters` &mdash; (`Array<Object>`) A list of Parameter
  *         instances. Each instance lists the parameters of one cluster
  *         parameter group.
@@ -913,6 +929,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) A marker at which to continue
  *         listing cluster security groups in a new request. The response
  *         returns a marker if there are more security groups to list than
@@ -982,6 +999,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) A marker that indicates the first
  *         snapshot that a subsequent DescribeClusterSnapshots request will
  *         return. The response returns a marker only if there are more
@@ -993,8 +1011,8 @@ AWS.Redshift = inherit({})
  *         * `ClusterIdentifier` &mdash; (`String`) The identifier of the
  *           cluster for which the snapshot was taken.
  *         * `SnapshotCreateTime` &mdash; (`Date`) The time (UTC) when
- *           &service; began the snapshot. A snapshot contains a copy of
- *           the cluster data as of this exact time.
+ *           Amazon Redshift began the snapshot. A snapshot contains a copy
+ *           of the cluster data as of this exact time.
  *         * `Status` &mdash; (`String`) The snapshot status. The value of
  *           the status depends on the API operation used.
  *           CreateClusterSnapshot and CopyClusterSnapshot returns status
@@ -1010,7 +1028,7 @@ AWS.Redshift = inherit({})
  *         * `MasterUsername` &mdash; (`String`) The master user name for
  *           the cluster.
  *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           &service; engine that is running on the cluster.
+ *           Amazon Redshift engine that is running on the cluster.
  *         * `SnapshotType` &mdash; (`String`) The snapshot type. Snapshots
  *           created using CreateClusterSnapshot and CopyClusterSnapshot
  *           will be of type "manual".
@@ -1049,6 +1067,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) A marker at which to continue
  *         listing cluster subnet groups in a new request. The response
  *         returns a marker if there are more subnet groups to list than
@@ -1102,6 +1121,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) The identifier returned to allow
  *         retrieval of paginated results.
  *       * `ClusterVersions` &mdash; (`Array<Object>`) A list of Version
@@ -1142,6 +1162,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) A marker at which to continue
  *         listing clusters in a new request. A marker is returned if there
  *         are more clusters to list than were returned in the response.
@@ -1222,7 +1243,7 @@ AWS.Redshift = inherit({})
  *             pending or in-progress change of the automated snapshot
  *             retention period.
  *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           &service; engine that is running on the cluster.
+ *           Amazon Redshift engine that is running on the cluster.
  *         * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, version
  *           upgrades will be applied automatically to the cluster during
  *           the maintenance window.
@@ -1256,6 +1277,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DefaultClusterParameters` &mdash; (`Object`) Describes the
  *         default cluster parameters for a parameter group family.
  *         * `ParameterGroupFamily` &mdash; (`String`) The name of the
@@ -1339,6 +1361,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) A marker at which to continue
  *         listing events in a new request. The response returns a marker
  *         if there are more events to list than returned in the response.
@@ -1381,6 +1404,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `OrderableClusterOptions` &mdash; (`Array<Object>`) An
  *         OrderableClusterOption structure containing information about
  *         orderable options for the Cluster.
@@ -1404,7 +1428,8 @@ AWS.Redshift = inherit({})
  *     * `ReservedNodeOfferingId` &mdash; (`String`) The unique
  *       identifier for the offering.
  *     * `NodeType` &mdash; (`String`) The node type you can purchase.
- *       &nodeTypeInfo;
+ *       For more information about managing parameter groups, go to
+ *       Working with Clusters in the Amazon Redshift Management Guide.
  *     * `Duration` &mdash; (`String`) The duration, in seconds, for
  *       which the offering will reserve the node.
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
@@ -1426,6 +1451,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) An optional marker returned by a
  *         previous DescribeReservedNodeOfferings request to indicate the
  *         first reserved node offering that the request will return.
@@ -1485,6 +1511,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) A marker that can be used to
  *         retrieve paginated results.
  *       * `ReservedNodes` &mdash; (`Array<Object>`) The list of reserved
@@ -1543,6 +1570,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `TargetNodeType` &mdash; (`String`) The node type that the
  *         cluster will have after the resize completes.
  *       * `TargetNumberOfNodes` &mdash; (`Integer`) The number of nodes
@@ -1650,7 +1678,9 @@ AWS.Redshift = inherit({})
  *       in use, a new cluster parameter group in the cluster parameter
  *       group family for the new version must be specified. The new
  *       cluster parameter group can be the default for that cluster
- *       parameter group family. &parametersMoreInfo; Example: 1.0
+ *       parameter group family. For more information about managing
+ *       parameter groups, go to Working with Parameter Groups in the
+ *       Amazon Redshift Management Guide. Example: 1.0
  *     * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, upgrades will
  *       be applied automatically to the cluster during the maintenance
  *       window. Default: false
@@ -1663,6 +1693,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Cluster` &mdash; (`Object`) Describes a cluster.
  *         * `ClusterIdentifier` &mdash; (`String`) The unique identifier
  *           of the cluster.
@@ -1739,7 +1770,7 @@ AWS.Redshift = inherit({})
  *             pending or in-progress change of the automated snapshot
  *             retention period.
  *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           &service; engine that is running on the cluster.
+ *           Amazon Redshift engine that is running on the cluster.
  *         * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, version
  *           upgrades will be applied automatically to the cluster during
  *           the maintenance window.
@@ -1785,6 +1816,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ParameterGroupName` &mdash; (`String`) The name of the cluster
  *         parameter group.
  *       * `ParameterGroupStatus` &mdash; (`String`) The status of the
@@ -1813,6 +1845,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ClusterSubnetGroup` &mdash; (`Object`) Describes a subnet
  *         group.
  *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
@@ -1853,6 +1886,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ReservedNode` &mdash; (`Object`) Describes a reserved node.
  *         * `ReservedNodeId` &mdash; (`String`) The unique identifier for
  *           the reservation.
@@ -1906,6 +1940,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Cluster` &mdash; (`Object`) Describes a cluster.
  *         * `ClusterIdentifier` &mdash; (`String`) The unique identifier
  *           of the cluster.
@@ -1982,7 +2017,7 @@ AWS.Redshift = inherit({})
  *             pending or in-progress change of the automated snapshot
  *             retention period.
  *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           &service; engine that is running on the cluster.
+ *           Amazon Redshift engine that is running on the cluster.
  *         * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, version
  *           upgrades will be applied automatically to the cluster during
  *           the maintenance window.
@@ -2030,6 +2065,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ParameterGroupName` &mdash; (`String`) The name of the cluster
  *         parameter group.
  *       * `ParameterGroupStatus` &mdash; (`String`) The status of the
@@ -2044,7 +2080,11 @@ AWS.Redshift = inherit({})
  *   @param params [Object]
  *     * `ClusterIdentifier` &mdash; **required** &mdash; (`String`) The
  *       identifier of the cluster that will be created from restoring
- *       the snapshot. &clusterIDConstraints;
+ *       the snapshot. Constraints: Must contain from 1 to 63
+ *       alphanumeric characters or hyphens. Alphabetic characters must
+ *       be lowercase. First character must be a letter. Cannot end with
+ *       a hyphen or contain two consecutive hyphens. Must be unique for
+ *       all clusters within an AWS account.
  *     * `SnapshotIdentifier` &mdash; **required** &mdash; (`String`) The
  *       name of the snapshot from which to create the new cluster. This
  *       parameter isn't case sensitive. Example: my-snapshot-id
@@ -2055,8 +2095,8 @@ AWS.Redshift = inherit({})
  *       Availability Zone in which to restore the cluster. Default: A
  *       random, system-chosen Availability Zone. Example: us-east-1a
  *     * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, upgrades can
- *       be applied during the maintenance window to the &service; engine
- *       that is running on the cluster. Default: true
+ *       be applied during the maintenance window to the Amazon Redshift
+ *       engine that is running on the cluster. Default: true
  *     * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
  *       subnet group where you want to cluster restored. A snapshot of
  *       cluster in VPC can be restored only in VPC. Therefore, you must
@@ -2072,6 +2112,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Cluster` &mdash; (`Object`) Describes a cluster.
  *         * `ClusterIdentifier` &mdash; (`String`) The unique identifier
  *           of the cluster.
@@ -2148,7 +2189,7 @@ AWS.Redshift = inherit({})
  *             pending or in-progress change of the automated snapshot
  *             retention period.
  *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           &service; engine that is running on the cluster.
+ *           Amazon Redshift engine that is running on the cluster.
  *         * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, version
  *           upgrades will be applied automatically to the cluster during
  *           the maintenance window.
@@ -2189,6 +2230,7 @@ AWS.Redshift = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ClusterSecurityGroup` &mdash; (`Object`) Describes a security
  *         group.
  *         * `ClusterSecurityGroupName` &mdash; (`String`) The name of the

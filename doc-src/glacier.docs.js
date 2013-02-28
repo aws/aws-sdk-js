@@ -103,6 +103,7 @@ AWS.Glacier = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `location` &mdash; (`String`) The relative URI path of the newly
  *         added archive resource.
  *       * `checksum` &mdash; (`String`) The checksum of the archive
@@ -130,6 +131,7 @@ AWS.Glacier = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `location` &mdash; (`String`) The URI of the vault that was
  *         created.
  *   @return [AWS.Request] a handle to the operation request for
@@ -215,6 +217,7 @@ AWS.Glacier = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `JobId` &mdash; (`String`) An opaque string that identifies an
  *         Amazon Glacier job.
  *       * `JobDescription` &mdash; (`String`) The job description you
@@ -273,6 +276,7 @@ AWS.Glacier = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VaultARN` &mdash; (`String`) The Amazon Resource Name (ARN) of
  *         the vault.
  *       * `VaultName` &mdash; (`String`) The name of the vault.
@@ -317,6 +321,7 @@ AWS.Glacier = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `body` &mdash; (`String`) The job data, either archive data or
  *         inventory data.
  *       * `checksum` &mdash; (`String`) The checksum of the data in the
@@ -374,6 +379,7 @@ AWS.Glacier = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `vaultNotificationConfig` &mdash; (`Object`) Returns the
  *         notification configuration set on the vault.
  *         * `SNSTopic` &mdash; (`String`) The Amazon Simple Notification
@@ -427,6 +433,7 @@ AWS.Glacier = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `location` &mdash; (`String`) The relative URI path of the job.
  *       * `jobId` &mdash; (`String`) The ID of the job.
  *   @return [AWS.Request] a handle to the operation request for
@@ -459,6 +466,7 @@ AWS.Glacier = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `location` &mdash; (`String`) The relative URI path of the
  *         multipart upload ID Amazon Glacier created.
  *       * `uploadId` &mdash; (`String`) The ID of the multipart upload.
@@ -498,6 +506,7 @@ AWS.Glacier = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `JobList` &mdash; (`Array<Object>`) A list of job objects. Each
  *         job object contains metadata describing the job.
  *         * `JobId` &mdash; (`String`) An opaque string that identifies an
@@ -574,6 +583,7 @@ AWS.Glacier = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `UploadsList` &mdash; (`Array<Object>`) A list of in-progress
  *         multipart uploads.
  *         * `MultipartUploadId` &mdash; (`String`) The ID of a multipart
@@ -625,6 +635,7 @@ AWS.Glacier = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `MultipartUploadId` &mdash; (`String`) The ID of the upload to
  *         which the parts are associated.
  *       * `VaultARN` &mdash; (`String`) The Amazon Resource Name (ARN) of
@@ -672,6 +683,7 @@ AWS.Glacier = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VaultList` &mdash; (`Array<Object>`) List of vaults.
  *         * `VaultARN` &mdash; (`String`) The Amazon Resource Name (ARN)
  *           of the vault.
@@ -747,6 +759,7 @@ AWS.Glacier = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `location` &mdash; (`String`) The relative URI path of the newly
  *         added archive resource.
  *       * `checksum` &mdash; (`String`) The checksum of the archive
@@ -784,6 +797,7 @@ AWS.Glacier = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `checksum` &mdash; (`String`) The SHA256 tree hash that Amazon
  *         Glacier computed for the uploaded part.
  *   @return [AWS.Request] a handle to the operation request for

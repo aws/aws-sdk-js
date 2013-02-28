@@ -91,6 +91,7 @@ AWS.CloudWatch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `AlarmHistoryItems` &mdash; (`Array<Object>`) A list of alarm
  *         histories in JSON format.
  *         * `AlarmName` &mdash; (`String`) The descriptive name for the
@@ -131,6 +132,7 @@ AWS.CloudWatch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `MetricAlarms` &mdash; (`Array<Object>`) A list of information
  *         for the specified alarms.
  *         * `AlarmName` &mdash; (`String`) The name of the alarm.
@@ -222,6 +224,7 @@ AWS.CloudWatch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `MetricAlarms` &mdash; (`Array<Object>`) A list of information
  *         for each alarm with the specified metric.
  *         * `AlarmName` &mdash; (`String`) The name of the alarm.
@@ -358,6 +361,7 @@ AWS.CloudWatch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Label` &mdash; (`String`) A label describing the specified
  *         metric.
  *       * `Datapoints` &mdash; (`Array<Object>`) The datapoints for the
@@ -403,6 +407,7 @@ AWS.CloudWatch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Metrics` &mdash; (`Array<Object>`) A list of metrics used to
  *         generate statistics for an AWS account.
  *         * `Namespace` &mdash; (`String`) The namespace of the metric.
@@ -504,7 +509,7 @@ AWS.CloudWatch = inherit({})
  *         CloudWatch truncates values with very large exponents. Values
  *         with base-10 exponents greater than 126 (1 x 10^126) are
  *         truncated. Likewise, values with base-10 exponents less than
- *         -130 (1 x 10^-130) are also truncated.
+ *         \-130 (1 x 10^-130) are also truncated.
  *       * `StatisticValues` &mdash; (`Object`) A set of statistical
  *         values describing the metric.
  *         * `SampleCount` &mdash; **required** &mdash; (`Float`) The

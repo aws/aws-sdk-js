@@ -200,6 +200,7 @@ AWS.SimpleDB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ItemCount` &mdash; (`Integer`) The number of all items in the
  *         domain.
  *       * `ItemNamesSizeBytes` &mdash; (`Integer`) The total size of all
@@ -241,6 +242,7 @@ AWS.SimpleDB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Attributes` &mdash; (`Array<Object>`) The list of attributes
  *         returned by the operation.
  *         * `Name` &mdash; **required** &mdash; (`String`) The name of the
@@ -269,6 +271,7 @@ AWS.SimpleDB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DomainNames` &mdash; (`Array<String>`) A list of domain names
  *         that match the expression.
  *       * `NextToken` &mdash; (`String`) An opaque token indicating that
@@ -342,6 +345,7 @@ AWS.SimpleDB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Items` &mdash; (`Array<Object>`) A list of items that match the
  *         select expression.
  *         * `Name` &mdash; **required** &mdash; (`String`) The name of the

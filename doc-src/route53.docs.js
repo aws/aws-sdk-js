@@ -151,6 +151,7 @@ AWS.Route53 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ChangeInfo` &mdash; **required** &mdash; (`Object`) A complex
  *         type that contains information about changes made to your hosted
  *         zone. This element contains an ID that you use when performing a
@@ -213,6 +214,7 @@ AWS.Route53 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `HealthCheck` &mdash; **required** &mdash; (`Object`) A complex
  *         type that contains identifying information about the health
  *         check.
@@ -280,6 +282,7 @@ AWS.Route53 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `HostedZone` &mdash; **required** &mdash; (`Object`) A complex
  *         type that contains identifying information about the hosted
  *         zone.
@@ -372,6 +375,7 @@ AWS.Route53 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ChangeInfo` &mdash; **required** &mdash; (`Object`) A complex
  *         type that contains the ID, the status, and the date and time of
  *         your delete request.
@@ -412,6 +416,7 @@ AWS.Route53 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ChangeInfo` &mdash; **required** &mdash; (`Object`) A complex
  *         type that contains information about the specified change batch,
  *         including the change batch ID, the status of the change, and the
@@ -451,6 +456,7 @@ AWS.Route53 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `HealthCheck` &mdash; **required** &mdash; (`Object`) A complex
  *         type that contains the information about the specified health
  *         check.
@@ -493,6 +499,7 @@ AWS.Route53 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `HostedZone` &mdash; **required** &mdash; (`Object`) A complex
  *         type that contains the information about the specified hosted
  *         zone.
@@ -548,6 +555,7 @@ AWS.Route53 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `HealthChecks` &mdash; **required** &mdash; (`Array<Object>`) A
  *         complex type that contains information about the health checks
  *         associated with the current AWS account.
@@ -616,6 +624,7 @@ AWS.Route53 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `HostedZones` &mdash; **required** &mdash; (`Array<Object>`) A
  *         complex type that contains information about the hosted zones
  *         associated with the current AWS account.
@@ -701,6 +710,7 @@ AWS.Route53 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ResourceRecordSets` &mdash; **required** &mdash;
  *         (`Array<Object>`) A complex type that contains information about
  *         the resource record sets that are returned by the request.

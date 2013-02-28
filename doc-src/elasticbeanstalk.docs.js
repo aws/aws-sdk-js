@@ -66,6 +66,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Available` &mdash; (`Boolean`) Indicates if the specified CNAME
  *         is available: true : The CNAME is available. true : The CNAME is
  *         not available. true : The CNAME is available. false : The CNAME
@@ -93,6 +94,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Application` &mdash; (`Object`) The ApplicationDescription of
  *         the application.
  *         * `ApplicationName` &mdash; (`String`) The name of the
@@ -121,18 +123,19 @@ AWS.ElasticBeanstalk = inherit({})
  *     * `VersionLabel` &mdash; **required** &mdash; (`String`) A label
  *       identifying this version. Constraint: Must be unique per
  *       application. If an application version already exists with this
- *       label for the specified application, &service; returns an
- *       InvalidParameterValue error.
+ *       label for the specified application, AWS Elastic Beanstalk
+ *       returns an InvalidParameterValue error.
  *     * `Description` &mdash; (`String`) Describes this version.
  *     * `SourceBundle` &mdash; (`Object`) The Amazon S3 bucket and key
  *       that identify the location of the source bundle for this
  *       version. If data found at the Amazon S3 location exceeds the
- *       maximum allowed source bundle size, &service; returns an
- *       InvalidParameterValue error. Default: If not specified,
- *       &service; uses a sample application. If only partially specified
- *       (for example, a bucket is provided but not the key) or if no
- *       data is found at the Amazon S3 location, &service; returns an
- *       InvalidParameterCombination error.
+ *       maximum allowed source bundle size, AWS Elastic Beanstalk
+ *       returns an InvalidParameterValue error. Default: If not
+ *       specified, AWS Elastic Beanstalk uses a sample application. If
+ *       only partially specified (for example, a bucket is provided but
+ *       not the key) or if no data is found at the Amazon S3 location,
+ *       AWS Elastic Beanstalk returns an InvalidParameterCombination
+ *       error.
  *       * `S3Bucket` &mdash; (`String`) The Amazon S3 bucket where the
  *         data is located.
  *       * `S3Key` &mdash; (`String`) The Amazon S3 key where the data is
@@ -157,6 +160,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ApplicationVersion` &mdash; (`Object`) The
  *         ApplicationVersionDescription of the application version.
  *         * `ApplicationName` &mdash; (`String`) The name of the
@@ -183,12 +187,12 @@ AWS.ElasticBeanstalk = inherit({})
  *   @param params [Object]
  *     * `ApplicationName` &mdash; **required** &mdash; (`String`) The
  *       name of the application to associate with this configuration
- *       template. If no application is found with this name,
- *       &serviceshort; returns an InvalidParameterValue error.
+ *       template. If no application is found with this name, AWS Elastic
+ *       Beanstalk returns an InvalidParameterValue error.
  *     * `TemplateName` &mdash; **required** &mdash; (`String`) The name
  *       of the configuration template. Constraint: This name must be
  *       unique per application. Default: If a configuration template
- *       already exists with this name, &service; returns an
+ *       already exists with this name, AWS Elastic Beanstalk returns an
  *       InvalidParameterValue error.
  *     * `SolutionStackName` &mdash; (`String`) The name of the solution
  *       stack used by this configuration. The solution stack specifies
@@ -197,21 +201,23 @@ AWS.ElasticBeanstalk = inherit({})
  *       options as well as the possible and default values. Use
  *       ListAvailableSolutionStacks to obtain a list of available
  *       solution stacks. Default: If the SolutionStackName is not
- *       specified and the source configuration parameter is blank,
- *       &service; uses the default solution stack. If not specified and
- *       the source configuration parameter is specified, &service; uses
- *       the same solution stack as the source configuration template.
- *     * `SourceConfiguration` &mdash; (`Object`) If specified, &service;
- *       uses the configuration values from the specified configuration
- *       template to create a new configuration. Values specified in the
- *       OptionSettings parameter of this call overrides any values
- *       obtained from the SourceConfiguration. If no configuration
- *       template is found, returns an InvalidParameterValue error.
- *       Constraint: If both the solution stack name parameter and the
- *       source configuration parameters are specified, the solution
- *       stack of the source configuration template must match the
- *       specified solution stack name or else &service; returns an
- *       InvalidParameterCombination error.
+ *       specified and the source configuration parameter is blank, AWS
+ *       Elastic Beanstalk uses the default solution stack. If not
+ *       specified and the source configuration parameter is specified,
+ *       AWS Elastic Beanstalk uses the same solution stack as the source
+ *       configuration template.
+ *     * `SourceConfiguration` &mdash; (`Object`) If specified, AWS
+ *       Elastic Beanstalk uses the configuration values from the
+ *       specified configuration template to create a new configuration.
+ *       Values specified in the OptionSettings parameter of this call
+ *       overrides any values obtained from the SourceConfiguration. If
+ *       no configuration template is found, returns an
+ *       InvalidParameterValue error. Constraint: If both the solution
+ *       stack name parameter and the source configuration parameters are
+ *       specified, the solution stack of the source configuration
+ *       template must match the specified solution stack name or else
+ *       AWS Elastic Beanstalk returns an InvalidParameterCombination
+ *       error.
  *       * `ApplicationName` &mdash; (`String`) The name of the
  *         application associated with the configuration.
  *       * `TemplateName` &mdash; (`String`) The name of the
@@ -219,8 +225,8 @@ AWS.ElasticBeanstalk = inherit({})
  *     * `EnvironmentId` &mdash; (`String`) The ID of the environment
  *       used with this configuration template.
  *     * `Description` &mdash; (`String`) Describes this configuration.
- *     * `OptionSettings` &mdash; (`Array<Object>`) If specified,
- *       &service; sets the specified configuration option to the
+ *     * `OptionSettings` &mdash; (`Array<Object>`) If specified, AWS
+ *       Elastic Beanstalk sets the specified configuration option to the
  *       requested value. The new value overrides the value obtained from
  *       the solution stack or the source configuration template.
  *       * `Namespace` &mdash; (`String`) A unique namespace identifying
@@ -238,6 +244,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SolutionStackName` &mdash; (`String`) The name of the solution
  *         stack this configuration set uses.
  *       * `ApplicationName` &mdash; (`String`) The name of the application
@@ -288,43 +295,43 @@ AWS.ElasticBeanstalk = inherit({})
  *       CreateEnvironment returns an InvalidParameterValue error.
  *     * `VersionLabel` &mdash; (`String`) The name of the application
  *       version to deploy. If the specified application has no
- *       associated application versions, &service; UpdateEnvironment
- *       returns an InvalidParameterValue error. Default: If not
- *       specified, &service; attempts to launch the most recently
- *       created application version.
+ *       associated application versions, AWS Elastic Beanstalk
+ *       UpdateEnvironment returns an InvalidParameterValue error.
+ *       Default: If not specified, AWS Elastic Beanstalk attempts to
+ *       launch the most recently created application version.
  *     * `EnvironmentName` &mdash; **required** &mdash; (`String`) A
  *       unique name for the deployment environment. Used in the
  *       application URL. Constraint: Must be from 4 to 23 characters in
  *       length. The name can contain only letters, numbers, and hyphens.
  *       It cannot start or end with a hyphen. This name must be unique
- *       in your account. If the specified name already exists, &service;
- *       returns an InvalidParameterValue error. Default: If the CNAME
- *       parameter is not specified, the environment name becomes part of
- *       the CNAME, and therefore part of the visible URL for your
- *       application.
+ *       in your account. If the specified name already exists, AWS
+ *       Elastic Beanstalk returns an InvalidParameterValue error.
+ *       Default: If the CNAME parameter is not specified, the
+ *       environment name becomes part of the CNAME, and therefore part
+ *       of the visible URL for your application.
  *     * `TemplateName` &mdash; (`String`) The name of the configuration
  *       template to use in deployment. If no configuration template is
- *       found with this name, &service; returns an InvalidParameterValue
- *       error. Condition: You must specify either this parameter or a
- *       SolutionStackName, but not both. If you specify both, &service;
- *       returns an InvalidParameterCombination error. If you do not
- *       specify either, &service; returns a MissingRequiredParameter
- *       error.
+ *       found with this name, AWS Elastic Beanstalk returns an
+ *       InvalidParameterValue error. Condition: You must specify either
+ *       this parameter or a SolutionStackName, but not both. If you
+ *       specify both, AWS Elastic Beanstalk returns an
+ *       InvalidParameterCombination error. If you do not specify either,
+ *       AWS Elastic Beanstalk returns a MissingRequiredParameter error.
  *     * `SolutionStackName` &mdash; (`String`) This is an alternative to
- *       specifying a configuration name. If specified, &service; sets
- *       the configuration values to the default values associated with
- *       the specified solution stack. Condition: You must specify either
- *       this or a TemplateName, but not both. If you specify both,
- *       &service; returns an InvalidParameterCombination error. If you
- *       do not specify either, &service; returns a
- *       MissingRequiredParameter error.
+ *       specifying a configuration name. If specified, AWS Elastic
+ *       Beanstalk sets the configuration values to the default values
+ *       associated with the specified solution stack. Condition: You
+ *       must specify either this or a TemplateName, but not both. If you
+ *       specify both, AWS Elastic Beanstalk returns an
+ *       InvalidParameterCombination error. If you do not specify either,
+ *       AWS Elastic Beanstalk returns a MissingRequiredParameter error.
  *     * `CNAMEPrefix` &mdash; (`String`) If specified, the environment
  *       attempts to use this value as the prefix for the CNAME. If not
  *       specified, the environment uses the environment name.
  *     * `Description` &mdash; (`String`) Describes this environment.
- *     * `OptionSettings` &mdash; (`Array<Object>`) If specified,
- *       &service; sets the specified configuration options to the
- *       requested value in the configuration set for the new
+ *     * `OptionSettings` &mdash; (`Array<Object>`) If specified, AWS
+ *       Elastic Beanstalk sets the specified configuration options to
+ *       the requested value in the configuration set for the new
  *       environment. These override the values obtained from the
  *       solution stack or the configuration template.
  *       * `Namespace` &mdash; (`String`) A unique namespace identifying
@@ -349,6 +356,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `EnvironmentName` &mdash; (`String`) The name of this
  *         environment.
  *       * `EnvironmentId` &mdash; (`String`) The ID of this environment.
@@ -377,9 +385,9 @@ AWS.ElasticBeanstalk = inherit({})
  *         it, such as update or terminate. Terminating: Environment is in
  *         the shut-down process. Terminated: Environment is not running.
  *       * `Health` &mdash; (`String`) Describes the health status of the
- *         environment. &service; indicates the failure levels for a
- *         running environment: Red : Indicates the environment is not
- *         working. Yellow: Indicates that something is wrong, the
+ *         environment. AWS Elastic Beanstalk indicates the failure levels
+ *         for a running environment: Red : Indicates the environment is
+ *         not working. Yellow: Indicates that something is wrong, the
  *         application might not be available, but the instances appear
  *         running. Green: Indicates the environment is healthy and fully
  *         functional. Red: Indicates the environment is not responsive.
@@ -419,6 +427,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `S3Bucket` &mdash; (`String`) The name of the Amazon S3 bucket
  *         created.
  *   @return [AWS.Request] a handle to the operation request for
@@ -507,9 +516,9 @@ AWS.ElasticBeanstalk = inherit({})
  * @!method describeApplicationVersions(params, callback)
  *   Calls the DescribeApplicationVersions API operation.
  *   @param params [Object]
- *     * `ApplicationName` &mdash; (`String`) If specified, &service;
- *       restricts the returned descriptions to only include ones that
- *       are associated with the specified application.
+ *     * `ApplicationName` &mdash; (`String`) If specified, AWS Elastic
+ *       Beanstalk restricts the returned descriptions to only include
+ *       ones that are associated with the specified application.
  *     * `VersionLabels` &mdash; (`Array<String>`) If specified,
  *       restricts the returned descriptions to only include ones that
  *       have the specified version labels.
@@ -522,6 +531,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ApplicationVersions` &mdash; (`Array<Object>`) A list of
  *         ApplicationVersionDescription .
  *         * `ApplicationName` &mdash; (`String`) The name of the
@@ -546,9 +556,9 @@ AWS.ElasticBeanstalk = inherit({})
  * @!method describeApplications(params, callback)
  *   Calls the DescribeApplications API operation.
  *   @param params [Object]
- *     * `ApplicationNames` &mdash; (`Array<String>`) If specified,
- *       &service; restricts the returned descriptions to only include
- *       those with the specified names.
+ *     * `ApplicationNames` &mdash; (`Array<String>`) If specified, AWS
+ *       Elastic Beanstalk restricts the returned descriptions to only
+ *       include those with the specified names.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -558,6 +568,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Applications` &mdash; (`Array<Object>`) This parameter contains
  *         a list of ApplicationDescription.
  *         * `ApplicationName` &mdash; (`String`) The name of the
@@ -605,6 +616,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SolutionStackName` &mdash; (`String`) The name of the solution
  *         stack these configuration options belong to.
  *       * `Options` &mdash; (`Array<Object>`) A list of
@@ -703,6 +715,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ConfigurationSettings` &mdash; (`Array<Object>`) A list of
  *         ConfigurationSettingsDescription.
  *         * `SolutionStackName` &mdash; (`String`) The name of the
@@ -769,6 +782,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `EnvironmentResources` &mdash; (`Object`) A list of
  *         EnvironmentResourceDescription.
  *         * `EnvironmentName` &mdash; (`String`) The name of the
@@ -795,18 +809,18 @@ AWS.ElasticBeanstalk = inherit({})
  * @!method describeEnvironments(params, callback)
  *   Calls the DescribeEnvironments API operation.
  *   @param params [Object]
- *     * `ApplicationName` &mdash; (`String`) If specified, &service;
- *       restricts the returned descriptions to include only those that
- *       are associated with this application.
- *     * `VersionLabel` &mdash; (`String`) If specified, &service;
- *       restricts the returned descriptions to include only those that
- *       are associated with this application version.
- *     * `EnvironmentIds` &mdash; (`Array<String>`) If specified,
- *       &service; restricts the returned descriptions to include only
- *       those that have the specified IDs.
- *     * `EnvironmentNames` &mdash; (`Array<String>`) If specified,
- *       &service; restricts the returned descriptions to include only
- *       those that have the specified names.
+ *     * `ApplicationName` &mdash; (`String`) If specified, AWS Elastic
+ *       Beanstalk restricts the returned descriptions to include only
+ *       those that are associated with this application.
+ *     * `VersionLabel` &mdash; (`String`) If specified, AWS Elastic
+ *       Beanstalk restricts the returned descriptions to include only
+ *       those that are associated with this application version.
+ *     * `EnvironmentIds` &mdash; (`Array<String>`) If specified, AWS
+ *       Elastic Beanstalk restricts the returned descriptions to include
+ *       only those that have the specified IDs.
+ *     * `EnvironmentNames` &mdash; (`Array<String>`) If specified, AWS
+ *       Elastic Beanstalk restricts the returned descriptions to include
+ *       only those that have the specified names.
  *     * `IncludeDeleted` &mdash; (`Boolean`) Indicates whether to
  *       include deleted environments: true: Environments that have been
  *       deleted after IncludedDeletedBackTo are displayed. false: Do not
@@ -823,6 +837,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Environments` &mdash; (`Array<Object>`) Returns an
  *         EnvironmentDescription list.
  *         * `EnvironmentName` &mdash; (`String`) The name of this
@@ -855,20 +870,21 @@ AWS.ElasticBeanstalk = inherit({})
  *           in the shut-down process. Terminated: Environment is not
  *           running.
  *         * `Health` &mdash; (`String`) Describes the health status of the
- *           environment. &service; indicates the failure levels for a
- *           running environment: Red : Indicates the environment is not
- *           working. Yellow: Indicates that something is wrong, the
- *           application might not be available, but the instances appear
- *           running. Green: Indicates the environment is healthy and fully
- *           functional. Red: Indicates the environment is not responsive.
- *           Occurs when three or more consecutive failures occur for an
- *           environment. Yellow: Indicates that something is wrong. Occurs
- *           when two consecutive failures occur for an environment. Green:
- *           Indicates the environment is healthy and fully functional.
- *           Grey: Default health for a new environment. The environment is
- *           not fully launched and health checks have not started or
- *           health checks are suspended during an UpdateEnvironment or
- *           RestartEnvironement request. Default: Grey
+ *           environment. AWS Elastic Beanstalk indicates the failure
+ *           levels for a running environment: Red : Indicates the
+ *           environment is not working. Yellow: Indicates that something
+ *           is wrong, the application might not be available, but the
+ *           instances appear running. Green: Indicates the environment is
+ *           healthy and fully functional. Red: Indicates the environment
+ *           is not responsive. Occurs when three or more consecutive
+ *           failures occur for an environment. Yellow: Indicates that
+ *           something is wrong. Occurs when two consecutive failures occur
+ *           for an environment. Green: Indicates the environment is
+ *           healthy and fully functional. Grey: Default health for a new
+ *           environment. The environment is not fully launched and health
+ *           checks have not started or health checks are suspended during
+ *           an UpdateEnvironment or RestartEnvironement request. Default:
+ *           Grey
  *         * `Resources` &mdash; (`Object`) The description of the AWS
  *           resources used by this environment.
  *           * `LoadBalancer` &mdash; (`Object`) Describes the
@@ -889,33 +905,33 @@ AWS.ElasticBeanstalk = inherit({})
  * @!method describeEvents(params, callback)
  *   Calls the DescribeEvents API operation.
  *   @param params [Object]
- *     * `ApplicationName` &mdash; (`String`) If specified, &service;
- *       restricts the returned descriptions to include only those
- *       associated with this application.
- *     * `VersionLabel` &mdash; (`String`) If specified, &service;
- *       restricts the returned descriptions to those associated with
- *       this application version.
- *     * `TemplateName` &mdash; (`String`) If specified, &service;
- *       restricts the returned descriptions to those that are associated
- *       with this environment configuration.
- *     * `EnvironmentId` &mdash; (`String`) If specified, &service;
- *       restricts the returned descriptions to those associated with
- *       this environment.
- *     * `EnvironmentName` &mdash; (`String`) If specified, &service;
- *       restricts the returned descriptions to those associated with
- *       this environment.
- *     * `RequestId` &mdash; (`String`) If specified, &service; restricts
- *       the described events to include only those associated with this
- *       request ID.
+ *     * `ApplicationName` &mdash; (`String`) If specified, AWS Elastic
+ *       Beanstalk restricts the returned descriptions to include only
+ *       those associated with this application.
+ *     * `VersionLabel` &mdash; (`String`) If specified, AWS Elastic
+ *       Beanstalk restricts the returned descriptions to those
+ *       associated with this application version.
+ *     * `TemplateName` &mdash; (`String`) If specified, AWS Elastic
+ *       Beanstalk restricts the returned descriptions to those that are
+ *       associated with this environment configuration.
+ *     * `EnvironmentId` &mdash; (`String`) If specified, AWS Elastic
+ *       Beanstalk restricts the returned descriptions to those
+ *       associated with this environment.
+ *     * `EnvironmentName` &mdash; (`String`) If specified, AWS Elastic
+ *       Beanstalk restricts the returned descriptions to those
+ *       associated with this environment.
+ *     * `RequestId` &mdash; (`String`) If specified, AWS Elastic
+ *       Beanstalk restricts the described events to include only those
+ *       associated with this request ID.
  *     * `Severity` &mdash; (`String`) If specified, limits the events
  *       returned from this call to include only those with the specified
  *       severity or higher.
- *     * `StartTime` &mdash; (`Date`) If specified, &service; restricts
- *       the returned descriptions to those that occur on or after this
- *       time.
- *     * `EndTime` &mdash; (`Date`) If specified, &service; restricts the
- *       returned descriptions to those that occur up to, but not
- *       including, the EndTime.
+ *     * `StartTime` &mdash; (`Date`) If specified, AWS Elastic Beanstalk
+ *       restricts the returned descriptions to those that occur on or
+ *       after this time.
+ *     * `EndTime` &mdash; (`Date`) If specified, AWS Elastic Beanstalk
+ *       restricts the returned descriptions to those that occur up to,
+ *       but not including, the EndTime.
  *     * `MaxRecords` &mdash; (`Integer`) Specifies the maximum number of
  *       events that can be returned, beginning with the most recent
  *       event.
@@ -930,6 +946,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Events` &mdash; (`Array<Object>`) A list of EventDescription.
  *         * `EventDate` &mdash; (`Date`) The date when the event occurred.
  *         * `Message` &mdash; (`String`) The event message.
@@ -963,6 +980,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SolutionStacks` &mdash; (`Array<String>`) A list of available
  *         solution stacks.
  *       * `SolutionStackDetails` &mdash; (`Array<Object>`) A list of
@@ -1071,6 +1089,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `EnvironmentInfo` &mdash; (`Array<Object>`) The
  *         EnvironmentInfoDescription of the environment.
  *         * `InfoType` &mdash; (`String`) The type of information
@@ -1133,13 +1152,13 @@ AWS.ElasticBeanstalk = inherit({})
  *       is terminated: true: (default) The user AWS resources (for
  *       example, the Auto Scaling group, LoadBalancer, etc.) are
  *       terminated along with the environment. false: The environment is
- *       removed from the &service; but the AWS resources continue to
- *       operate. true: The specified environment as well as the
- *       associated AWS resources, such as Auto Scaling group and
- *       LoadBalancer, are terminated. false: &service; resource
- *       management is removed from the environment, but the AWS
- *       resources continue to operate. For more information, see the
- *       &servicelong; User Guide. Default: true Valid Values: true |
+ *       removed from the AWS Elastic Beanstalk but the AWS resources
+ *       continue to operate. true: The specified environment as well as
+ *       the associated AWS resources, such as Auto Scaling group and
+ *       LoadBalancer, are terminated. false: AWS Elastic Beanstalk
+ *       resource management is removed from the environment, but the AWS
+ *       resources continue to operate. For more information, see the AWS
+ *       Elastic Beanstalk User Guide. Default: true Valid Values: true |
  *       false
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -1150,6 +1169,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `EnvironmentName` &mdash; (`String`) The name of this
  *         environment.
  *       * `EnvironmentId` &mdash; (`String`) The ID of this environment.
@@ -1178,9 +1198,9 @@ AWS.ElasticBeanstalk = inherit({})
  *         it, such as update or terminate. Terminating: Environment is in
  *         the shut-down process. Terminated: Environment is not running.
  *       * `Health` &mdash; (`String`) Describes the health status of the
- *         environment. &service; indicates the failure levels for a
- *         running environment: Red : Indicates the environment is not
- *         working. Yellow: Indicates that something is wrong, the
+ *         environment. AWS Elastic Beanstalk indicates the failure levels
+ *         for a running environment: Red : Indicates the environment is
+ *         not working. Yellow: Indicates that something is wrong, the
  *         application might not be available, but the instances appear
  *         running. Green: Indicates the environment is healthy and fully
  *         functional. Red: Indicates the environment is not responsive.
@@ -1215,8 +1235,8 @@ AWS.ElasticBeanstalk = inherit({})
  *       name of the application to update. If no such application is
  *       found, UpdateApplication returns an InvalidParameterValue error.
  *     * `Description` &mdash; (`String`) A new description for the
- *       application. Default: If not specified, &service; does not
- *       update the description.
+ *       application. Default: If not specified, AWS Elastic Beanstalk
+ *       does not update the description.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1226,6 +1246,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Application` &mdash; (`Object`) The ApplicationDescription of
  *         the application.
  *         * `ApplicationName` &mdash; (`String`) The name of the
@@ -1266,6 +1287,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ApplicationVersion` &mdash; (`Object`) The
  *         ApplicationVersionDescription of the application version.
  *         * `ApplicationName` &mdash; (`String`) The name of the
@@ -1327,6 +1349,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SolutionStackName` &mdash; (`String`) The name of the solution
  *         stack this configuration set uses.
  *       * `ApplicationName` &mdash; (`String`) The name of the application
@@ -1372,31 +1395,33 @@ AWS.ElasticBeanstalk = inherit({})
  *   Calls the UpdateEnvironment API operation.
  *   @param params [Object]
  *     * `EnvironmentId` &mdash; (`String`) The ID of the environment to
- *       update. If no environment with this ID exists, &service; returns
- *       an InvalidParameterValue error. Condition: You must specify
- *       either this or an EnvironmentName, or both. If you do not
- *       specify either, AWS Elastic Beanstalk returns
+ *       update. If no environment with this ID exists, AWS Elastic
+ *       Beanstalk returns an InvalidParameterValue error. Condition: You
+ *       must specify either this or an EnvironmentName, or both. If you
+ *       do not specify either, AWS Elastic Beanstalk returns
  *       MissingRequiredParameter error.
  *     * `EnvironmentName` &mdash; (`String`) The name of the environment
- *       to update. If no environment with this name exists, &service;
- *       returns an InvalidParameterValue error. Condition: You must
- *       specify either this or an EnvironmentId, or both. If you do not
- *       specify either, AWS Elastic Beanstalk returns
+ *       to update. If no environment with this name exists, AWS Elastic
+ *       Beanstalk returns an InvalidParameterValue error. Condition: You
+ *       must specify either this or an EnvironmentId, or both. If you do
+ *       not specify either, AWS Elastic Beanstalk returns
  *       MissingRequiredParameter error.
  *     * `VersionLabel` &mdash; (`String`) If this parameter is
- *       specified, &service; deploys the named application version to
- *       the environment. If no such application version is found,
- *       returns an InvalidParameterValue error.
+ *       specified, AWS Elastic Beanstalk deploys the named application
+ *       version to the environment. If no such application version is
+ *       found, returns an InvalidParameterValue error.
  *     * `TemplateName` &mdash; (`String`) If this parameter is
- *       specified, &service; deploys this configuration template to the
- *       environment. If no such configuration template is found,
- *       &service; returns an InvalidParameterValue error.
+ *       specified, AWS Elastic Beanstalk deploys this configuration
+ *       template to the environment. If no such configuration template
+ *       is found, AWS Elastic Beanstalk returns an InvalidParameterValue
+ *       error.
  *     * `Description` &mdash; (`String`) If this parameter is specified,
- *       &service; updates the description of this environment.
- *     * `OptionSettings` &mdash; (`Array<Object>`) If specified,
- *       &service; updates the configuration set associated with the
- *       running environment and sets the specified configuration options
- *       to the requested value.
+ *       AWS Elastic Beanstalk updates the description of this
+ *       environment.
+ *     * `OptionSettings` &mdash; (`Array<Object>`) If specified, AWS
+ *       Elastic Beanstalk updates the configuration set associated with
+ *       the running environment and sets the specified configuration
+ *       options to the requested value.
  *       * `Namespace` &mdash; (`String`) A unique namespace identifying
  *         the option's associated AWS resource.
  *       * `OptionName` &mdash; (`String`) The name of the configuration
@@ -1419,6 +1444,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `EnvironmentName` &mdash; (`String`) The name of this
  *         environment.
  *       * `EnvironmentId` &mdash; (`String`) The ID of this environment.
@@ -1447,9 +1473,9 @@ AWS.ElasticBeanstalk = inherit({})
  *         it, such as update or terminate. Terminating: Environment is in
  *         the shut-down process. Terminated: Environment is not running.
  *       * `Health` &mdash; (`String`) Describes the health status of the
- *         environment. &service; indicates the failure levels for a
- *         running environment: Red : Indicates the environment is not
- *         working. Yellow: Indicates that something is wrong, the
+ *         environment. AWS Elastic Beanstalk indicates the failure levels
+ *         for a running environment: Red : Indicates the environment is
+ *         not working. Yellow: Indicates that something is wrong, the
  *         application might not be available, but the instances appear
  *         running. Green: Indicates the environment is healthy and fully
  *         functional. Red: Indicates the environment is not responsive.
@@ -1506,6 +1532,7 @@ AWS.ElasticBeanstalk = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Messages` &mdash; (`Array<Object>`) A list of
  *         ValidationMessage.
  *         * `Message` &mdash; (`String`) A message describing the error or

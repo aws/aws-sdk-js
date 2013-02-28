@@ -92,6 +92,7 @@ AWS.STS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Credentials` &mdash; (`Object`) The temporary security
  *         credentials, which includes an Access Key ID, a Secret Access
  *         Key, and a security token.
@@ -157,6 +158,7 @@ AWS.STS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Credentials` &mdash; (`Object`) Credentials for the service API
  *         authentication.
  *         * `AccessKeyId` &mdash; **required** &mdash; (`String`)
@@ -227,6 +229,7 @@ AWS.STS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Credentials` &mdash; (`Object`) The session credentials for API
  *         authentication.
  *         * `AccessKeyId` &mdash; **required** &mdash; (`String`)

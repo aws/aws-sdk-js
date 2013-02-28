@@ -101,6 +101,7 @@ AWS.DataPipeline = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `pipelineId` &mdash; **required** &mdash; (`String`) The ID that
  *         AWS Data Pipeline assigns the newly created pipeline. The ID is
  *         a string of the form: df-06372391ZG65EXAMPLE.
@@ -148,6 +149,7 @@ AWS.DataPipeline = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `pipelineObjects` &mdash; **required** &mdash; (`Array<Object>`)
  *         An array of object definitions that are returned by the call to
  *         DescribeObjects.
@@ -187,6 +189,7 @@ AWS.DataPipeline = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `pipelineDescriptionList` &mdash; **required** &mdash;
  *         (`Array<Object>`) An array of descriptions returned for the
  *         specified pipelines.
@@ -226,6 +229,7 @@ AWS.DataPipeline = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `evaluatedExpression` &mdash; **required** &mdash; (`String`)
  *         The evaluated expression.
  *   @return [AWS.Request] a handle to the operation request for
@@ -247,6 +251,7 @@ AWS.DataPipeline = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `pipelineObjects` &mdash; (`Array<Object>`) An array of objects
  *         defined in the pipeline.
  *         * `id` &mdash; **required** &mdash; (`String`) Identifier of the
@@ -282,6 +287,7 @@ AWS.DataPipeline = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `pipelineIdList` &mdash; **required** &mdash; (`Array<Object>`)
  *         A list of all the pipeline identifiers that your account has
  *         permission to access. If you require additional information
@@ -338,6 +344,7 @@ AWS.DataPipeline = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `taskObject` &mdash; (`Object`) An instance of
  *         PollForTaskResult, which contains an instance of TaskObject. The
  *         returned object contains all the information needed to complete
@@ -401,6 +408,7 @@ AWS.DataPipeline = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `validationErrors` &mdash; (`Array<Object>`) A list of the
  *         validation errors that are associated with the objects defined
  *         in pipelineObjects.
@@ -477,6 +485,7 @@ AWS.DataPipeline = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ids` &mdash; (`Array<String>`) A list of identifiers that match
  *         the query selectors.
  *       * `marker` &mdash; (`String`) The starting point for the results
@@ -505,6 +514,7 @@ AWS.DataPipeline = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `canceled` &mdash; **required** &mdash; (`Boolean`) If True, the
  *         calling task runner should cancel processing of the task. The
  *         task runner does not need to call SetTaskStatus for canceled
@@ -540,6 +550,7 @@ AWS.DataPipeline = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `terminate` &mdash; **required** &mdash; (`Boolean`) Indicates
  *         whether the calling task runner should terminate. If True, the
  *         task runner that called ReportTaskRunnerHeartbeat should
@@ -634,6 +645,7 @@ AWS.DataPipeline = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `validationErrors` &mdash; (`Array<Object>`) Lists the
  *         validation errors that were found by ValidatePipelineDefinition.
  *         * `id` &mdash; (`String`) The identifier of the object that

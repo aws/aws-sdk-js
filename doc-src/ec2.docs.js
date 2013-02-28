@@ -84,6 +84,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `PublicIp` &mdash; (`String`) IP address for use with your
  *         account.
  *       * `Domain` &mdash; (`String`)
@@ -131,6 +132,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `AssociationId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -170,6 +172,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `AssociationId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -207,6 +210,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `AttachmentId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -232,6 +236,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VolumeId` &mdash; (`String`)
  *       * `InstanceId` &mdash; (`String`)
  *       * `Device` &mdash; (`String`) How the device is exposed to the
@@ -261,6 +266,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VpcAttachement` &mdash; (`Object`)
  *         * `VpcId` &mdash; (`String`)
  *         * `State` &mdash; (`String`)
@@ -398,6 +404,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `BundleTask` &mdash; (`Object`)
  *         * `InstanceId` &mdash; (`String`) Instance associated with this
  *           bundle task.
@@ -446,6 +453,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `BundleTask` &mdash; (`Object`) The canceled bundle task.
  *         * `InstanceId` &mdash; (`String`) Instance associated with this
  *           bundle task.
@@ -525,6 +533,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ReservedInstancesListings` &mdash; (`Array<Object>`)
  *         * `ReservedInstancesListingId` &mdash; (`String`)
  *         * `ReservedInstancesId` &mdash; (`String`)
@@ -561,6 +570,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CancelledSpotInstanceRequests` &mdash; (`Array<Object>`)
  *         * `SpotInstanceRequestId` &mdash; (`String`)
  *         * `State` &mdash; (`String`)
@@ -583,6 +593,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `OwnerId` &mdash; (`String`) The instance owner's account ID.
  *         Only present if the product code is attached to the instance.
  *   @return [AWS.Request] a handle to the operation request for
@@ -603,6 +614,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SnapshotId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -627,6 +639,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CustomerGateway` &mdash; (`Object`) Information about the
  *         customer gateway.
  *         * `CustomerGatewayId` &mdash; (`String`) Specifies the ID of the
@@ -664,6 +677,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DhcpOptions` &mdash; (`Object`) A set of one or more DHCP
  *         options.
  *         * `DhcpOptionsId` &mdash; (`String`) Specifies the ID of the set
@@ -722,6 +736,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ImageId` &mdash; (`String`) The ID of the new AMI.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -746,6 +761,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ExportTask` &mdash; (`Object`)
  *         * `ExportTaskId` &mdash; (`String`)
  *         * `Description` &mdash; (`String`)
@@ -774,6 +790,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `InternetGateway` &mdash; (`Object`)
  *         * `InternetGatewayId` &mdash; (`String`)
  *         * `Attachments` &mdash; (`Array<Object>`)
@@ -799,6 +816,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `KeyPair` &mdash; (`Object`) The newly created EC2 key pair.
  *         * `KeyName` &mdash; (`String`) The name of the key pair.
  *         * `KeyFingerprint` &mdash; (`String`) The SHA-1 digest of the
@@ -822,6 +840,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `NetworkAcl` &mdash; (`Object`)
  *         * `NetworkAclId` &mdash; (`String`)
  *         * `VpcId` &mdash; (`String`)
@@ -915,6 +934,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `NetworkInterface` &mdash; (`Object`)
  *         * `NetworkInterfaceId` &mdash; (`String`)
  *         * `SubnetId` &mdash; (`String`)
@@ -996,6 +1016,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ReservedInstancesListings` &mdash; (`Array<Object>`)
  *         * `ReservedInstancesListingId` &mdash; (`String`)
  *         * `ReservedInstancesId` &mdash; (`String`)
@@ -1059,6 +1080,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `RouteTable` &mdash; (`Object`)
  *         * `RouteTableId` &mdash; (`String`)
  *         * `VpcId` &mdash; (`String`)
@@ -1104,6 +1126,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GroupId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -1124,6 +1147,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SnapshotId` &mdash; (`String`) The unique ID of this snapshot.
  *       * `VolumeId` &mdash; (`String`) The ID of the volume from which
  *         this snapshot was created.
@@ -1164,6 +1188,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SpotDatafeedSubscription` &mdash; (`Object`)
  *         * `OwnerId` &mdash; (`String`) Specifies the AWS account ID of
  *           the account.
@@ -1198,6 +1223,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Subnet` &mdash; (`Object`)
  *         * `SubnetId` &mdash; (`String`) Specifies the ID of the subnet.
  *         * `State` &mdash; (`String`) Describes the current state of the
@@ -1261,6 +1287,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VolumeId` &mdash; (`String`) The unique ID of this volume.
  *       * `Size` &mdash; (`Integer`) The size of this volume, in
  *         gigabytes.
@@ -1310,6 +1337,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Vpc` &mdash; (`Object`) Information about the VPC.
  *         * `VpcId` &mdash; (`String`) Specifies the ID of the VPC.
  *         * `State` &mdash; (`String`) Describes the current state of the
@@ -1348,6 +1376,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VpnConnection` &mdash; (`Object`)
  *         * `VpnConnectionId` &mdash; (`String`) Specifies the ID of the
  *           VPN gateway at the VPC end of the VPN connection.
@@ -1417,6 +1446,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VpnGateway` &mdash; (`Object`)
  *         * `VpnGatewayId` &mdash; (`String`) Specifies the ID of the VPN
  *           gateway.
@@ -1828,6 +1858,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Addresses` &mdash; (`Array<Object>`) The list of Elastic IPs.
  *         * `InstanceId` &mdash; (`String`)
  *         * `PublicIp` &mdash; (`String`)
@@ -1861,6 +1892,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `AvailabilityZones` &mdash; (`Array<Object>`) The list of
  *         described Amazon EC2 availability zones.
  *         * `ZoneName` &mdash; (`String`) Name of the Availability Zone.
@@ -1894,6 +1926,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `BundleTasks` &mdash; (`Array<Object>`) The list of described
  *         bundle tasks.
  *         * `InstanceId` &mdash; (`String`) Instance associated with this
@@ -1946,6 +1979,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ConversionTasks` &mdash; (`Array<Object>`)
  *         * `ConversionTaskId` &mdash; **required** &mdash; (`String`)
  *         * `ExpirationTime` &mdash; (`String`)
@@ -2010,6 +2044,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CustomerGateways` &mdash; (`Array<Object>`)
  *         * `CustomerGatewayId` &mdash; (`String`) Specifies the ID of the
  *           customer gateway.
@@ -2049,6 +2084,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DhcpOptions` &mdash; (`Array<Object>`)
  *         * `DhcpOptionsId` &mdash; (`String`) Specifies the ID of the set
  *           of DHCP options.
@@ -2077,6 +2113,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ExportTasks` &mdash; (`Array<Object>`)
  *         * `ExportTaskId` &mdash; (`String`)
  *         * `Description` &mdash; (`String`)
@@ -2111,6 +2148,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ImageId` &mdash; (`String`) The ID of the associated AMI.
  *       * `LaunchPermissions` &mdash; (`Array<Object>`) Launch permissions
  *         for the associated AMI.
@@ -2184,6 +2222,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Images` &mdash; (`Array<Object>`) The list of the described
  *         AMIs.
  *         * `ImageId` &mdash; (`String`) The unique ID of the AMI.
@@ -2277,6 +2316,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `InstanceId` &mdash; (`String`) The ID of the associated
  *         instance.
  *       * `InstanceType` &mdash; (`Object`) The instance type (e.g.,
@@ -2348,6 +2388,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `InstanceStatuses` &mdash; (`Array<Object>`) Collection of
  *         instance statuses describing the state of the requested
  *         instances.
@@ -2408,6 +2449,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Reservations` &mdash; (`Array<Object>`) The list of
  *         reservations containing the describes instances.
  *         * `ReservationId` &mdash; (`String`) The unique ID of this
@@ -2587,6 +2629,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `InternetGateways` &mdash; (`Array<Object>`)
  *         * `InternetGatewayId` &mdash; (`String`)
  *         * `Attachments` &mdash; (`Array<Object>`)
@@ -2619,6 +2662,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `KeyPairs` &mdash; (`Array<Object>`) The list of described key
  *         pairs.
  *         * `KeyName` &mdash; (`String`) The name of the key pair.
@@ -2648,6 +2692,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Licenses` &mdash; (`Array<Object>`) Specifies active licenses
  *         in use and attached to an Amazon EC2 instance.
  *         * `LicenseId` &mdash; (`String`) The unique ID identifying the
@@ -2700,6 +2745,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `NetworkAcls` &mdash; (`Array<Object>`)
  *         * `NetworkAclId` &mdash; (`String`)
  *         * `VpcId` &mdash; (`String`)
@@ -2749,6 +2795,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `NetworkInterfaceId` &mdash; (`String`)
  *       * `Description` &mdash; (`Object`)
  *         * `Value` &mdash; (`String`) String value
@@ -2785,6 +2832,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `NetworkInterfaces` &mdash; (`Array<Object>`)
  *         * `NetworkInterfaceId` &mdash; (`String`)
  *         * `SubnetId` &mdash; (`String`)
@@ -2850,6 +2898,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `PlacementGroups` &mdash; (`Array<Object>`) Contains information
  *         about the specified PlacementGroups.
  *         * `GroupName` &mdash; (`String`) The name of this
@@ -2881,6 +2930,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Regions` &mdash; (`Array<Object>`) The list of described Amazon
  *         EC2 regions.
  *         * `RegionName` &mdash; (`String`) Name of the region.
@@ -2911,6 +2961,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ReservedInstances` &mdash; (`Array<Object>`) The list of
  *         described Reserved Instances.
  *         * `ReservedInstancesId` &mdash; (`String`) The unique ID of the
@@ -2970,6 +3021,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ReservedInstancesListings` &mdash; (`Array<Object>`)
  *         * `ReservedInstancesListingId` &mdash; (`String`)
  *         * `ReservedInstancesId` &mdash; (`String`)
@@ -3028,6 +3080,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ReservedInstancesOfferings` &mdash; (`Array<Object>`) The list
  *         of described Reserved Instance offerings.
  *         * `ReservedInstancesOfferingId` &mdash; (`String`) The unique ID
@@ -3085,6 +3138,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `RouteTables` &mdash; (`Array<Object>`)
  *         * `RouteTableId` &mdash; (`String`)
  *         * `VpcId` &mdash; (`String`)
@@ -3135,6 +3189,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SecurityGroups` &mdash; (`Array<Object>`) The list of described
  *         Amazon EC2 security groups.
  *         * `OwnerId` &mdash; (`String`) The AWS Access Key ID of the
@@ -3213,6 +3268,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SnapshotId` &mdash; (`String`) The ID of the snapshot whose
  *         attribute is being described.
  *       * `CreateVolumePermissions` &mdash; (`Array<Object>`) The list of
@@ -3256,6 +3312,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Snapshots` &mdash; (`Array<Object>`) The list of described EBS
  *         snapshots.
  *         * `SnapshotId` &mdash; (`String`) The unique ID of this
@@ -3295,6 +3352,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SpotDatafeedSubscription` &mdash; (`Object`) The Spot Instance
  *         datafeed subscription.
  *         * `OwnerId` &mdash; (`String`) Specifies the AWS account ID of
@@ -3333,6 +3391,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SpotInstanceRequests` &mdash; (`Array<Object>`)
  *         * `SpotInstanceRequestId` &mdash; (`String`)
  *         * `SpotPrice` &mdash; (`String`)
@@ -3466,6 +3525,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SpotPriceHistory` &mdash; (`Array<Object>`)
  *         * `InstanceType` &mdash; (`String`)
  *         * `ProductDescription` &mdash; (`String`)
@@ -3499,6 +3559,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Subnets` &mdash; (`Array<Object>`) Contains a set of one or
  *         more Subnet instances.
  *         * `SubnetId` &mdash; (`String`) Specifies the ID of the subnet.
@@ -3538,6 +3599,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Tags` &mdash; (`Array<Object>`) A list of the tags for the
  *         specified resources.
  *         * `ResourceId` &mdash; (`String`) The resource ID for the tag.
@@ -3563,6 +3625,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VolumeId` &mdash; (`String`)
  *       * `AutoEnableIO` &mdash; (`Object`)
  *         * `Value` &mdash; (`Boolean`) Boolean value
@@ -3592,6 +3655,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VolumeStatuses` &mdash; (`Array<Object>`)
  *         * `VolumeId` &mdash; (`String`)
  *         * `AvailabilityZone` &mdash; (`String`)
@@ -3636,6 +3700,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Volumes` &mdash; (`Array<Object>`) The list of described EBS
  *         volumes.
  *         * `VolumeId` &mdash; (`String`) The unique ID of this volume.
@@ -3691,6 +3756,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Vpcs` &mdash; (`Array<Object>`)
  *         * `VpcId` &mdash; (`String`) Specifies the ID of the VPC.
  *         * `State` &mdash; (`String`) Describes the current state of the
@@ -3730,6 +3796,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VpnConnections` &mdash; (`Array<Object>`)
  *         * `VpnConnectionId` &mdash; (`String`) Specifies the ID of the
  *           VPN gateway at the VPC end of the VPN connection.
@@ -3790,6 +3857,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VpnGateways` &mdash; (`Array<Object>`)
  *         * `VpnGatewayId` &mdash; (`String`) Specifies the ID of the VPN
  *           gateway.
@@ -3872,6 +3940,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VolumeId` &mdash; (`String`)
  *       * `InstanceId` &mdash; (`String`)
  *       * `Device` &mdash; (`String`) How the device is exposed to the
@@ -3999,6 +4068,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `InstanceId` &mdash; (`String`) The ID of the instance whose
  *         console output was requested.
  *       * `Timestamp` &mdash; (`Date`) The time the output was last
@@ -4022,6 +4092,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `InstanceId` &mdash; (`String`) The ID of the instance whose
  *         Windows administrator password was requested.
  *       * `Timestamp` &mdash; (`Date`) The time the data was last updated.
@@ -4096,6 +4167,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ConversionTask` &mdash; (`Object`)
  *         * `ConversionTaskId` &mdash; **required** &mdash; (`String`)
  *         * `ExpirationTime` &mdash; (`String`)
@@ -4155,6 +4227,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `KeyName` &mdash; (`String`) The specified unique key pair name.
  *       * `KeyFingerprint` &mdash; (`String`) The MD5 public key
  *         fingerprint as specified in section 4 of RFC4716 .
@@ -4181,6 +4254,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ConversionTask` &mdash; (`Object`)
  *         * `ConversionTaskId` &mdash; **required** &mdash; (`String`)
  *         * `ExpirationTime` &mdash; (`String`)
@@ -4428,6 +4502,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `InstanceMonitorings` &mdash; (`Array<Object>`) A list of
  *         updated monitoring information for the instances specified in
  *         the request.
@@ -4459,6 +4534,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ReservedInstancesId` &mdash; (`String`) The unique ID of the
  *         Reserved Instances purchased for your account.
  *   @return [AWS.Request] a handle to the operation request for
@@ -4531,6 +4607,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ImageId` &mdash; (`String`) The ID of the new Amazon Machine
  *         Image (AMI).
  *   @return [AWS.Request] a handle to the operation request for
@@ -4571,6 +4648,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `NewAssociationId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -4657,6 +4735,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `NewAssociationId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -4788,6 +4867,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SpotInstanceRequests` &mdash; (`Array<Object>`) Contains a list
  *         of Spot Instance requests.
  *         * `SpotInstanceRequestId` &mdash; (`String`)
@@ -5179,6 +5259,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ReservationId` &mdash; (`String`) The unique ID of this
  *         reservation.
  *       * `OwnerId` &mdash; (`String`) The AWS Access Key ID of the user
@@ -5343,6 +5424,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `StartingInstances` &mdash; (`Array<Object>`) The list of the
  *         starting instances and details on how their state has changed.
  *         * `InstanceId` &mdash; (`String`) The ID of the instance whose
@@ -5381,6 +5463,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `StoppingInstances` &mdash; (`Array<Object>`) The list of the
  *         stopping instances and details on how their state has changed.
  *         * `InstanceId` &mdash; (`String`) The ID of the instance whose
@@ -5414,6 +5497,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `TerminatingInstances` &mdash; (`Array<Object>`) The list of the
  *         terminating instances and details on how their state has
  *         changed.
@@ -5465,6 +5549,7 @@ AWS.EC2 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `InstanceMonitorings` &mdash; (`Array<Object>`) A list of
  *         updated monitoring information for the instances specified in
  *         the request.

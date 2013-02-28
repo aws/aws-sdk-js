@@ -72,6 +72,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CacheSecurityGroup` &mdash; (`Object`) Defines a set of EC2
  *         Security groups that are allowed to access a Cache Cluster.
  *         * `OwnerId` &mdash; (`String`) Provides the AWS ID of the owner
@@ -97,12 +98,18 @@ AWS.ElastiCache = inherit({})
  *   @param params [Object]
  *     * `CacheClusterId` &mdash; **required** &mdash; (`String`) The
  *       Cache Cluster identifier. This parameter is stored as a
- *       lowercase string. &cacheclusterIDconstraints;
+ *       lowercase string. Constraints: Must contain from 1 to 20
+ *       alphanumeric characters or hyphens. First character must be a
+ *       letter. Cannot end with a hyphen or contain two consecutive
+ *       hyphens. Example: mycachecluster
  *     * `NumCacheNodes` &mdash; **required** &mdash; (`Integer`) The
  *       number of Cache Nodes the Cache Cluster should have.
  *     * `CacheNodeType` &mdash; **required** &mdash; (`String`) The
- *       compute and memory capacity of nodes in a Cache Cluster.
- *       &cachenodetypevalues;
+ *       compute and memory capacity of nodes in a Cache Cluster. Valid
+ *       values: cache.t1.micro | cache.m1.small | cache.m1.medium |
+ *       cache.m1.large | cache.m1.xlarge | cache.m3.xlarge |
+ *       cache.m3.2xlarge | cache.m2.xlarge | cache.m2.2xlarge |
+ *       cache.m2.4xlarge | cache.c1.xlarge
  *     * `Engine` &mdash; **required** &mdash; (`String`) The name of the
  *       cache engine to be used for this Cache Cluster. Currently,
  *       memcached is the only cache engine supported by the service.
@@ -150,6 +157,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CacheCluster` &mdash; (`Object`) Contains information about a
  *         Cache Cluster.
  *         * `CacheClusterId` &mdash; (`String`) Specifies a user-supplied
@@ -273,6 +281,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CacheParameterGroup` &mdash; (`Object`) Contains a set of
  *         parameters and their values which can be applied to a Cache
  *         Cluster.
@@ -305,6 +314,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CacheSecurityGroup` &mdash; (`Object`) Defines a set of EC2
  *         Security groups that are allowed to access a Cache Cluster.
  *         * `OwnerId` &mdash; (`String`) Provides the AWS ID of the owner
@@ -345,6 +355,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CacheSubnetGroup` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the following actions:
  *         CreateCacheSubnetGroup ModifyCacheSubnetGroup
@@ -383,6 +394,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CacheCluster` &mdash; (`Object`) Contains information about a
  *         Cache Cluster.
  *         * `CacheClusterId` &mdash; (`String`) Specifies a user-supplied
@@ -547,7 +559,8 @@ AWS.ElastiCache = inherit({})
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
  *       to include in the response. If more records exist than the
  *       specified MaxRecords value, a marker is included in the response
- *       so that the remaining results may be retrieved. &maxrecords;
+ *       so that the remaining results may be retrieved. Default: 100
+ *       Constraints: minimum 20, maximum 100
  *     * `Marker` &mdash; (`String`) An optional marker provided in the
  *       previous DescribeCacheClusters request. If this parameter is
  *       specified, the response includes only records beyond the marker,
@@ -564,6 +577,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
  *       * `CacheClusters` &mdash; (`Array<Object>`) A list of
@@ -699,6 +713,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) The identifier returned to allow
  *         retrieval of paginated results.
  *       * `CacheEngineVersions` &mdash; (`Array<Object>`) A list of
@@ -737,6 +752,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
  *       * `CacheParameterGroups` &mdash; (`Array<Object>`) A list of
@@ -776,6 +792,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
  *       * `Parameters` &mdash; (`Array<Object>`) A list of Parameter
@@ -834,7 +851,8 @@ AWS.ElastiCache = inherit({})
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
  *       to include in the response. If more records exist than the
  *       specified MaxRecords value, a marker is included in the response
- *       so that the remaining results may be retrieved. &maxrecords;
+ *       so that the remaining results may be retrieved. Default: 100
+ *       Constraints: minimum 20, maximum 100
  *     * `Marker` &mdash; (`String`) An optional marker provided in the
  *       previous DescribeCacheClusters request. If this parameter is
  *       specified, the response includes only records beyond the marker,
@@ -848,6 +866,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
  *       * `CacheSecurityGroups` &mdash; (`Array<Object>`) A list of
@@ -893,6 +912,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
  *       * `CacheSubnetGroups` &mdash; (`Array<Object>`) One or more Cache
@@ -938,6 +958,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `EngineDefaults` &mdash; (`Object`) The default Parameters and
  *         CacheNodeTypeSpecificParameters for a CacheParameterGroupFamily.
  *         * `CacheParameterGroupFamily` &mdash; (`String`) Specifies the
@@ -1024,6 +1045,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
  *       * `Events` &mdash; (`Array<Object>`) A list of Event instances.
@@ -1078,6 +1100,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) The marker provided for paginated
  *         results.
  *       * `ReservedCacheNodes` &mdash; (`Array<Object>`) A list of of
@@ -1150,6 +1173,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) A marker provided for paginated
  *         results.
  *       * `ReservedCacheNodesOfferings` &mdash; (`Array<Object>`) A list
@@ -1244,6 +1268,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CacheCluster` &mdash; (`Object`) Contains information about a
  *         Cache Cluster.
  *         * `CacheClusterId` &mdash; (`String`) Specifies a user-supplied
@@ -1369,6 +1394,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CacheParameterGroupName` &mdash; (`String`) The name of the
  *         Cache Parameter Group.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1394,6 +1420,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CacheSubnetGroup` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the following actions:
  *         CreateCacheSubnetGroup ModifyCacheSubnetGroup
@@ -1436,6 +1463,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ReservedCacheNode` &mdash; (`Object`) This data type is used as
  *         a response element in the DescribeReservedCacheNodes and
  *         PurchaseReservedCacheNodesOffering actions.
@@ -1488,6 +1516,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CacheCluster` &mdash; (`Object`) Contains information about a
  *         Cache Cluster.
  *         * `CacheClusterId` &mdash; (`String`) Specifies a user-supplied
@@ -1615,6 +1644,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CacheParameterGroupName` &mdash; (`String`) The name of the
  *         Cache Parameter Group.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1640,6 +1670,7 @@ AWS.ElastiCache = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CacheSecurityGroup` &mdash; (`Object`) Defines a set of EC2
  *         Security groups that are allowed to access a Cache Cluster.
  *         * `OwnerId` &mdash; (`String`) Provides the AWS ID of the owner

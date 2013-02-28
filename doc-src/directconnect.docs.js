@@ -66,6 +66,7 @@ AWS.DirectConnect = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `connectionId` &mdash; (`String`)
  *       * `connectionName` &mdash; (`String`)
  *       * `connectionState` &mdash; (`String`)
@@ -97,6 +98,7 @@ AWS.DirectConnect = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `virtualInterfaceId` &mdash; (`String`)
  *       * `location` &mdash; (`String`)
  *       * `connectionId` &mdash; (`String`)
@@ -145,6 +147,7 @@ AWS.DirectConnect = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `virtualInterfaceId` &mdash; (`String`)
  *       * `location` &mdash; (`String`)
  *       * `connectionId` &mdash; (`String`)
@@ -180,6 +183,7 @@ AWS.DirectConnect = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `connectionId` &mdash; (`String`)
  *       * `connectionName` &mdash; (`String`)
  *       * `connectionState` &mdash; (`String`)
@@ -201,6 +205,7 @@ AWS.DirectConnect = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `virtualInterfaceState` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -218,6 +223,7 @@ AWS.DirectConnect = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `connectionId` &mdash; (`String`)
  *       * `connectionName` &mdash; (`String`)
  *       * `connectionState` &mdash; (`String`)
@@ -265,6 +271,7 @@ AWS.DirectConnect = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `connections` &mdash; (`Array<Object>`) A list of connections.
  *         * `connectionId` &mdash; (`String`)
  *         * `connectionName` &mdash; (`String`)
@@ -287,6 +294,7 @@ AWS.DirectConnect = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `offeringId` &mdash; (`String`)
  *       * `region` &mdash; (`String`)
  *       * `location` &mdash; (`String`)
@@ -330,6 +338,7 @@ AWS.DirectConnect = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `offerings` &mdash; (`Array<Object>`) A list of offerings.
  *         * `offeringId` &mdash; (`String`)
  *         * `region` &mdash; (`String`)
@@ -363,6 +372,7 @@ AWS.DirectConnect = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `virtualGateways` &mdash; (`Array<Object>`) A list of virtual
  *         gateways.
  *         * `virtualGatewayId` &mdash; (`String`)
@@ -384,6 +394,7 @@ AWS.DirectConnect = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `virtualInterfaces` &mdash; (`Array<Object>`) A list of virtual
  *         interfaces.
  *         * `virtualInterfaceId` &mdash; (`String`)

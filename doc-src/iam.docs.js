@@ -118,6 +118,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `AccessKey` &mdash; **required** &mdash; (`Object`) Information
  *         about the access key.
  *         * `UserName` &mdash; **required** &mdash; (`String`) Name of the
@@ -168,6 +169,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Group` &mdash; **required** &mdash; (`Object`) Information
  *         about the group.
  *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
@@ -206,6 +208,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `InstanceProfile` &mdash; **required** &mdash; (`Object`)
  *         Information about the instance profile.
  *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
@@ -267,6 +270,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `LoginProfile` &mdash; **required** &mdash; (`Object`) The user
  *         name and password create date.
  *         * `UserName` &mdash; **required** &mdash; (`String`) The name of
@@ -298,6 +302,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Role` &mdash; **required** &mdash; (`Object`) Information about
  *         the role.
  *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
@@ -341,6 +346,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `User` &mdash; (`Object`) Information about the user.
  *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
  *           user. For more information about paths, see Identifiers for
@@ -380,6 +386,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VirtualMFADevice` &mdash; **required** &mdash; (`Object`) A
  *         newly created virtual MFA device.
  *         * `SerialNumber` &mdash; **required** &mdash; (`String`) The
@@ -703,6 +710,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `PasswordPolicy` &mdash; **required** &mdash; (`Object`)
  *         * `MinimumPasswordLength` &mdash; (`Integer`) Minimum length to
  *           require for IAM user passwords.
@@ -733,6 +741,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SummaryMap` &mdash; (`Object<Integer>`) A set of key value
  *         pairs containing account-level information. SummaryMap contains
  *         the following keys: AccessKeysPerUserQuota - Maximum number of
@@ -740,25 +749,26 @@ AWS.IAM = inherit({})
  *         if the root account has an MFA device assigned to it, 0
  *         otherwise AssumeRolePolicySizeQuota - Maximum allowed size for
  *         assume role policy documents (in kilobytes) GroupPolicySizeQuota
- *         - Maximum allowed size for Group policy documents (in kilobytes)
- *         Groups - Number of Groups for the AWS account GroupsPerUserQuota
- *         - Maximum number of groups a user can belong to GroupsQuota -
- *         Maximum groups allowed for the AWS account InstanceProfiles -
- *         Number of instance profiles for the AWS account
- *         InstanceProfilesQuota - Maximum instance profiles allowed for
- *         the AWS account MFADevices - Number of MFA devices, either
- *         assigned or unassigned MFADevicesInUse - Number of MFA devices
- *         that have been assigned to an IAM user or to the root account
- *         RolePolicySizeQuota - Maximum allowed size for role policy
- *         documents (in kilobytes) Roles - Number of roles for the AWS
- *         account RolesQuota - Maximum roles allowed for the AWS account
- *         ServerCertificates - Number of server certificates for the AWS
- *         account ServerCertificatesQuota - Maximum server certificates
- *         allowed for the AWS account SigningCertificatesPerUserQuota -
- *         Maximum number of X509 certificates allowed for a user
- *         UserPolicySizeQuota - Maximum allowed size for user policy
- *         documents (in kilobytes) Users - Number of users for the AWS
- *         account UsersQuota - Maximum users allowed for the AWS account
+ *         \- Maximum allowed size for Group policy documents (in
+ *         kilobytes) Groups - Number of Groups for the AWS account
+ *         GroupsPerUserQuota - Maximum number of groups a user can belong
+ *         to GroupsQuota - Maximum groups allowed for the AWS account
+ *         InstanceProfiles - Number of instance profiles for the AWS
+ *         account InstanceProfilesQuota - Maximum instance profiles
+ *         allowed for the AWS account MFADevices - Number of MFA devices,
+ *         either assigned or unassigned MFADevicesInUse - Number of MFA
+ *         devices that have been assigned to an IAM user or to the root
+ *         account RolePolicySizeQuota - Maximum allowed size for role
+ *         policy documents (in kilobytes) Roles - Number of roles for the
+ *         AWS account RolesQuota - Maximum roles allowed for the AWS
+ *         account ServerCertificates - Number of server certificates for
+ *         the AWS account ServerCertificatesQuota - Maximum server
+ *         certificates allowed for the AWS account
+ *         SigningCertificatesPerUserQuota - Maximum number of X509
+ *         certificates allowed for a user UserPolicySizeQuota - Maximum
+ *         allowed size for user policy documents (in kilobytes) Users -
+ *         Number of users for the AWS account UsersQuota - Maximum users
+ *         allowed for the AWS account
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -784,6 +794,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Group` &mdash; **required** &mdash; (`Object`) Information
  *         about the group.
  *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
@@ -845,6 +856,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GroupName` &mdash; **required** &mdash; (`String`) The group
  *         the policy is associated with.
  *       * `PolicyName` &mdash; **required** &mdash; (`String`) The name of
@@ -868,6 +880,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `InstanceProfile` &mdash; **required** &mdash; (`Object`)
  *         Information about the instance profile.
  *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
@@ -927,6 +940,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `LoginProfile` &mdash; **required** &mdash; (`Object`) User name
  *         and password create date for the user.
  *         * `UserName` &mdash; **required** &mdash; (`String`) The name of
@@ -951,6 +965,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Role` &mdash; **required** &mdash; (`Object`) Information about
  *         the role.
  *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
@@ -992,6 +1007,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `RoleName` &mdash; **required** &mdash; (`String`) The role the
  *         policy is associated with.
  *       * `PolicyName` &mdash; **required** &mdash; (`String`) The name of
@@ -1016,6 +1032,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ServerCertificate` &mdash; **required** &mdash; (`Object`)
  *         Information about the server certificate.
  *         * `ServerCertificateMetadata` &mdash; **required** &mdash;
@@ -1061,6 +1078,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `User` &mdash; **required** &mdash; (`Object`) Information about
  *         the user.
  *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
@@ -1097,6 +1115,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `UserName` &mdash; **required** &mdash; (`String`) The user the
  *         policy is associated with.
  *       * `PolicyName` &mdash; **required** &mdash; (`String`) The name of
@@ -1128,6 +1147,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `AccessKeyMetadata` &mdash; **required** &mdash;
  *         (`Array<Object>`) A list of access key metadata.
  *         * `UserName` &mdash; (`String`) Name of the user the key is
@@ -1169,6 +1189,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `AccountAliases` &mdash; **required** &mdash; (`Array<String>`)
  *         A list of aliases associated with the account.
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
@@ -1205,6 +1226,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `PolicyNames` &mdash; **required** &mdash; (`Array<String>`) A
  *         list of policy names.
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
@@ -1244,6 +1266,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Groups` &mdash; **required** &mdash; (`Array<Object>`) A list
  *         of groups.
  *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
@@ -1293,6 +1316,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Groups` &mdash; **required** &mdash; (`Array<Object>`) A list
  *         of groups.
  *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
@@ -1348,6 +1372,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `InstanceProfiles` &mdash; **required** &mdash;
  *         (`Array<Object>`) A list of instance profiles.
  *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
@@ -1425,6 +1450,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `InstanceProfiles` &mdash; **required** &mdash;
  *         (`Array<Object>`) A list of instance profiles.
  *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
@@ -1500,6 +1526,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `MFADevices` &mdash; **required** &mdash; (`Array<Object>`) A
  *         list of MFA devices.
  *         * `UserName` &mdash; **required** &mdash; (`String`) The user
@@ -1544,6 +1571,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `PolicyNames` &mdash; **required** &mdash; (`Array<String>`) A
  *         list of policy names.
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
@@ -1585,6 +1613,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Roles` &mdash; **required** &mdash; (`Array<Object>`) A list of
  *         roles.
  *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
@@ -1644,6 +1673,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ServerCertificateMetadataList` &mdash; **required** &mdash;
  *         (`Array<Object>`) A list of server certificates.
  *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
@@ -1696,6 +1726,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Certificates` &mdash; **required** &mdash; (`Array<Object>`) A
  *         list of the user's signing certificate information.
  *         * `UserName` &mdash; **required** &mdash; (`String`) Name of the
@@ -1742,6 +1773,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `PolicyNames` &mdash; **required** &mdash; (`Array<String>`) A
  *         list of policy names.
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
@@ -1783,6 +1815,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Users` &mdash; **required** &mdash; (`Array<Object>`) A list of
  *         users.
  *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
@@ -1836,6 +1869,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VirtualMFADevices` &mdash; **required** &mdash;
  *         (`Array<Object>`)
  *         * `SerialNumber` &mdash; **required** &mdash; (`String`) The
@@ -2187,6 +2221,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ServerCertificateMetadata` &mdash; (`Object`) The meta
  *         information of the uploaded server certificate without its
  *         certificate body, certificate chain, and private key.
@@ -2226,6 +2261,7 @@ AWS.IAM = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Certificate` &mdash; **required** &mdash; (`Object`)
  *         Information about the certificate.
  *         * `UserName` &mdash; **required** &mdash; (`String`) Name of the

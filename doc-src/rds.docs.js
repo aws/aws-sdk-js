@@ -83,6 +83,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DBSecurityGroup` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the following actions:
  *         DescribeDBSecurityGroups AuthorizeDBSecurityGroupIngress
@@ -138,6 +139,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DBSnapshot` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the following actions: CreateDBSnapshot
  *         DeleteDBSnapshot This data type is used as a response element in
@@ -310,6 +312,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DBInstance` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
@@ -476,6 +479,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DBInstance` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
@@ -629,6 +633,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DBParameterGroup` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the CreateDBParameterGroup action. This
  *         data type is used as a request parameter in the
@@ -667,6 +672,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DBSecurityGroup` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the following actions:
  *         DescribeDBSecurityGroups AuthorizeDBSecurityGroupIngress
@@ -724,6 +730,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DBSnapshot` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the following actions: CreateDBSnapshot
  *         DeleteDBSnapshot This data type is used as a response element in
@@ -782,6 +789,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DBSubnetGroup` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the following actions:
  *         CreateDBSubnetGroup ModifyDBSubnetGroup DescribeDBSubnetGroups
@@ -832,6 +840,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `OptionGroup` &mdash; (`Object`)
  *         * `OptionGroupName` &mdash; (`String`) Specifies the name of the
  *           option group.
@@ -885,6 +894,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DBInstance` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
@@ -1066,6 +1076,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DBSnapshot` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the following actions: CreateDBSnapshot
  *         DeleteDBSnapshot This data type is used as a response element in
@@ -1175,6 +1186,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) The identifier returned to allow
  *         retrieval of paginated results.
  *       * `DBEngineVersions` &mdash; (`Array<Object>`) A list of
@@ -1226,6 +1238,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
  *       * `DBInstances` &mdash; (`Array<Object>`) A list of DBInstance
@@ -1379,6 +1392,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
  *       * `DBParameterGroups` &mdash; (`Array<Object>`) A list of
@@ -1422,6 +1436,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Parameters` &mdash; (`Array<Object>`) A list of Parameter
  *         instances.
  *         * `ParameterName` &mdash; (`String`) Specifies the name of the
@@ -1474,6 +1489,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
  *       * `DBSecurityGroups` &mdash; (`Array<Object>`) A list of
@@ -1544,6 +1560,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
  *       * `DBSnapshots` &mdash; (`Array<Object>`) A list of DBSnapshot
@@ -1604,6 +1621,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
  *       * `DBSubnetGroups` &mdash; (`Array<Object>`) A list of
@@ -1651,6 +1669,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `EngineDefaults` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the DescribeEngineDefaultParameters
  *         action.
@@ -1730,6 +1749,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
  *       * `Events` &mdash; (`Array<Object>`) A list of Event instances.
@@ -1763,6 +1783,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `OptionGroupOptions` &mdash; (`Array<Object>`)
  *         * `Name` &mdash; (`String`) The name of the option.
  *         * `Description` &mdash; (`String`) The description of the
@@ -1807,6 +1828,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `OptionGroupsList` &mdash; (`Array<Object>`) List of option
  *         groups.
  *         * `OptionGroupName` &mdash; (`String`) Specifies the name of the
@@ -1863,6 +1885,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `OrderableDBInstanceOptions` &mdash; (`Array<Object>`) An
  *         OrderableDBInstanceOption structure containing information about
  *         orderable options for the DB Instance.
@@ -1936,6 +1959,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) The marker provided for paginated
  *         results.
  *       * `ReservedDBInstances` &mdash; (`Array<Object>`) A list of of
@@ -2015,6 +2039,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Marker` &mdash; (`String`) A marker provided for paginated
  *         results.
  *       * `ReservedDBInstancesOfferings` &mdash; (`Array<Object>`) A list
@@ -2163,6 +2188,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DBInstance` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
@@ -2340,6 +2366,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DBParameterGroupName` &mdash; (`String`) The name of the DB
  *         Parameter Group.
  *   @return [AWS.Request] a handle to the operation request for
@@ -2366,6 +2393,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DBSubnetGroup` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the following actions:
  *         CreateDBSubnetGroup ModifyDBSubnetGroup DescribeDBSubnetGroups
@@ -2418,6 +2446,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `OptionGroup` &mdash; (`Object`)
  *         * `OptionGroupName` &mdash; (`String`) Specifies the name of the
  *           option group.
@@ -2459,6 +2488,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ReservedDBInstance` &mdash; (`Object`) This data type is used
  *         as a response element in the DescribeReservedDBInstances and
  *         PurchaseReservedDBInstancesOffering actions.
@@ -2517,6 +2547,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DBInstance` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
@@ -2696,6 +2727,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DBParameterGroupName` &mdash; (`String`) The name of the DB
  *         Parameter Group.
  *   @return [AWS.Request] a handle to the operation request for
@@ -2755,6 +2787,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DBInstance` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
@@ -2947,6 +2980,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DBInstance` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
@@ -3109,6 +3143,7 @@ AWS.RDS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DBSecurityGroup` &mdash; (`Object`) Contains the result of a
  *         successful invocation of the following actions:
  *         DescribeDBSecurityGroups AuthorizeDBSecurityGroupIngress

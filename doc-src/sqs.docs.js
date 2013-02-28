@@ -125,6 +125,7 @@ AWS.SQS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Successful` &mdash; **required** &mdash; (`Array<Object>`) A
  *         list of ChangeMessageVisibilityBatchResultEntrys.
  *         * `Id` &mdash; **required** &mdash; (`String`) Represents a
@@ -159,6 +160,7 @@ AWS.SQS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `QueueUrl` &mdash; (`String`) The URL for the created SQS queue.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -203,6 +205,7 @@ AWS.SQS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Successful` &mdash; **required** &mdash; (`Array<Object>`) A
  *         list of DeleteMessageBatchResultEntrys.
  *         * `Id` &mdash; **required** &mdash; (`String`) Represents a
@@ -252,6 +255,7 @@ AWS.SQS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Attributes` &mdash; (`Object<String>`) A map of attributes to
  *         the respective values.
  *   @return [AWS.Request] a handle to the operation request for
@@ -273,6 +277,7 @@ AWS.SQS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `QueueUrl` &mdash; (`String`) The URL for the queue.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -292,6 +297,7 @@ AWS.SQS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `QueueUrls` &mdash; (`Array<String>`) A list of queue URLs, up
  *         to 1000 entries.
  *   @return [AWS.Request] a handle to the operation request for
@@ -328,6 +334,7 @@ AWS.SQS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Messages` &mdash; (`Array<Object>`) A list of messages.
  *         * `MessageId` &mdash; (`String`)
  *         * `ReceiptHandle` &mdash; (`String`)
@@ -374,6 +381,7 @@ AWS.SQS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `MD5OfMessageBody` &mdash; (`String`) An MD5 digest of the
  *         non-URL-encoded message body string. This can be used to verify
  *         that SQS received the message correctly. SQS first URL decodes
@@ -408,6 +416,7 @@ AWS.SQS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Successful` &mdash; **required** &mdash; (`Array<Object>`) A
  *         list of SendMessageBatchResultEntrys.
  *         * `Id` &mdash; **required** &mdash; (`String`) An identifier for

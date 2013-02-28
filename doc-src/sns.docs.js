@@ -99,6 +99,7 @@ AWS.SNS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SubscriptionArn` &mdash; (`String`) The ARN of the created
  *         subscription.
  *   @return [AWS.Request] a handle to the operation request for
@@ -120,6 +121,7 @@ AWS.SNS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `TopicArn` &mdash; (`String`) The Amazon Resource Name (ARN)
  *         assigned to the created topic.
  *   @return [AWS.Request] a handle to the operation request for
@@ -163,6 +165,7 @@ AWS.SNS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Attributes` &mdash; (`Object<String>`) A map of the
  *         subscription's attributes. Attributes in this map include the
  *         following: SubscriptionArn -- the subscription's ARN TopicArn --
@@ -191,6 +194,7 @@ AWS.SNS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Attributes` &mdash; (`Object<String>`) A map of the topic's
  *         attributes. Attributes in this map include the following:
  *         TopicArn -- the topic's ARN Owner -- the AWS account ID of the
@@ -223,6 +227,7 @@ AWS.SNS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Subscriptions` &mdash; (`Array<Object>`) A list of
  *         subscriptions.
  *         * `SubscriptionArn` &mdash; (`String`) The subscription's ARN.
@@ -254,6 +259,7 @@ AWS.SNS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Subscriptions` &mdash; (`Array<Object>`) A list of
  *         subscriptions.
  *         * `SubscriptionArn` &mdash; (`String`) The subscription's ARN.
@@ -283,6 +289,7 @@ AWS.SNS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Topics` &mdash; (`Array<Object>`) A list of topic ARNs.
  *         * `TopicArn` &mdash; (`String`) The topic's ARN.
  *       * `NextToken` &mdash; (`String`) Token to pass along to the next
@@ -339,6 +346,7 @@ AWS.SNS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `MessageId` &mdash; (`String`) Unique identifier assigned to the
  *         published message.
  *   @return [AWS.Request] a handle to the operation request for
@@ -433,6 +441,7 @@ AWS.SNS = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SubscriptionArn` &mdash; (`String`) The ARN of the
  *         subscription, if the service was able to create a subscription
  *         immediately (without requiring endpoint owner confirmation).

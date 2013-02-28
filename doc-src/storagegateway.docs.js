@@ -91,6 +91,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -116,6 +117,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -138,6 +140,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -156,6 +159,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -197,6 +201,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VolumeARN` &mdash; (`String`) The ARN of the configured volume.
  *       * `TargetARN` &mdash; (`String`) The ARN of the volume target that
  *         includes the iSCSI name that initiators can use to connect to
@@ -218,6 +223,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VolumeARN` &mdash; (`String`)
  *       * `SnapshotId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -244,6 +250,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `SnapshotId` &mdash; (`String`) The snapshot ID that is used to
  *         refer to the snapshot in future operations such as describing
  *         snapshots (Amazon Elastic Compute Cloud API DescribeSnapshots)
@@ -276,6 +283,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VolumeARN` &mdash; (`String`)
  *       * `VolumeSizeInBytes` &mdash; (`Integer`)
  *       * `TargetARN` &mdash; (`String`)
@@ -296,6 +304,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -314,6 +323,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `TargetARN` &mdash; (`String`)
  *       * `InitiatorName` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -332,6 +342,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -351,6 +362,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VolumeARN` &mdash; (`String`) The Amazon Resource Name (ARN) of
  *         the volume of which the snapshot was taken.
  *   @return [AWS.Request] a handle to the operation request for
@@ -369,6 +381,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VolumeARN` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -386,6 +399,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`)
  *       * `AverageUploadRateLimitInBitsPerSec` &mdash; (`Integer`)
  *       * `AverageDownloadRateLimitInBitsPerSec` &mdash; (`Integer`)
@@ -408,6 +422,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`) In response, AWS Storage Gateway
  *         returns the ARN of the activated gateway. If you don't remember
  *         the ARN of a gateway, you can use the List Gateways operations
@@ -454,6 +469,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CachediSCSIVolumes` &mdash; (`Array<Object>`) An array of
  *         CachediSCSIVolume objects where each object contains metadata
  *         about one cached volume.
@@ -499,6 +515,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ChapCredentials` &mdash; (`Array<Object>`)
  *         * `TargetARN` &mdash; (`String`)
  *         * `SecretToAuthenticateInitiator` &mdash; (`String`)
@@ -520,6 +537,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`)
  *       * `GatewayId` &mdash; (`String`) The gateway ID.
  *       * `GatewayTimezone` &mdash; (`String`) One of the GatewayTimezone
@@ -553,6 +571,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`)
  *       * `HourOfDay` &mdash; (`Integer`)
  *       * `MinuteOfHour` &mdash; (`Integer`)
@@ -574,6 +593,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VolumeARN` &mdash; (`String`)
  *       * `StartAt` &mdash; (`Integer`)
  *       * `RecurrenceInHours` &mdash; (`Integer`)
@@ -595,6 +615,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `StorediSCSIVolumes` &mdash; (`Array<Object>`)
  *         * `VolumeARN` &mdash; (`String`)
  *         * `VolumeId` &mdash; (`String`)
@@ -630,6 +651,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`) In response, AWS Storage Gateway
  *         returns the ARN of the activated gateway. If you don't remember
  *         the ARN of a gateway, you can use the ListGateways operations to
@@ -661,6 +683,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`)
  *       * `DiskIds` &mdash; (`Array<String>`)
  *       * `WorkingStorageUsedInBytes` &mdash; (`Integer`)
@@ -682,6 +705,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Gateways` &mdash; (`Array<Object>`)
  *         * `GatewayARN` &mdash; (`String`)
  *       * `Marker` &mdash; (`String`)
@@ -701,6 +725,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`)
  *       * `Disks` &mdash; (`Array<Object>`)
  *         * `DiskId` &mdash; (`String`)
@@ -728,6 +753,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`) The Amazon Resource Name (ARN)
  *         of the activated gateway whose local disk information is
  *         returned.
@@ -762,6 +788,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`)
  *       * `Marker` &mdash; (`String`)
  *       * `VolumeInfos` &mdash; (`Array<Object>`)
@@ -783,6 +810,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -800,6 +828,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -819,6 +848,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -840,6 +870,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `TargetARN` &mdash; (`String`)
  *       * `InitiatorName` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -860,6 +891,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -877,6 +909,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -897,6 +930,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `GatewayARN` &mdash; **required** &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -917,6 +951,7 @@ AWS.StorageGateway = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `VolumeARN` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.

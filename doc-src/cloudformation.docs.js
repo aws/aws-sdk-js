@@ -66,11 +66,11 @@ AWS.CloudFormation = inherit({})
  *       TemplateBody or TemplateURL. If both are passed, only
  *       TemplateBody is used.
  *     * `TemplateURL` &mdash; (`String`) Location of file containing the
- *       template body. The URL must point to a template located in an S3
- *       bucket in the same region as the stack. For more information, go
- *       to the AWS CloudFormation User Guide. Conditional: You must pass
- *       TemplateURL or TemplateBody. If both are passed, only
- *       TemplateBody is used.
+ *       template body. The URL must point to a template (max size:
+ *       307,200 bytes) located in an S3 bucket in the same region as the
+ *       stack. For more information, go to the AWS CloudFormation User
+ *       Guide. Conditional: You must pass TemplateURL or TemplateBody.
+ *       If both are passed, only TemplateBody is used.
  *     * `Parameters` &mdash; (`Array<Object>`) A list of Parameter
  *       structures that specify input parameters for the stack.
  *       * `ParameterKey` &mdash; (`String`) The key associated with the
@@ -122,6 +122,7 @@ AWS.CloudFormation = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `StackId` &mdash; (`String`) Unique identifier of the stack.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -159,6 +160,7 @@ AWS.CloudFormation = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `StackEvents` &mdash; (`Array<Object>`) A list of StackEvents
  *         structures.
  *         * `StackId` &mdash; **required** &mdash; (`String`) The unique
@@ -205,6 +207,7 @@ AWS.CloudFormation = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `StackResourceDetail` &mdash; (`Object`) A StackResourceDetail
  *         structure containing the description of the specified resource
  *         in the specified stack.
@@ -238,7 +241,9 @@ AWS.CloudFormation = inherit({})
  *   Calls the DescribeStackResources API operation.
  *   @param params [Object]
  *     * `StackName` &mdash; (`String`) The name or the unique identifier
- *       associated with the stack. Default: There is no default value.
+ *       associated with the stack. Required: Conditional. If you do not
+ *       specify StackName, you must specify PhysicalResourceId. Default:
+ *       There is no default value.
  *     * `LogicalResourceId` &mdash; (`String`) The logical name of the
  *       resource as specified in the template. Default: There is no
  *       default value.
@@ -249,7 +254,8 @@ AWS.CloudFormation = inherit({})
  *       corresponds to the InstanceId. You can pass the EC2 InstanceId
  *       to DescribeStackResources to find which stack the instance
  *       belongs to and what other resources are part of the stack.
- *       Default: There is no default value.
+ *       Required: Conditional. If you do not specify PhysicalResourceId,
+ *       you must specify StackName. Default: There is no default value.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -259,6 +265,7 @@ AWS.CloudFormation = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `StackResources` &mdash; (`Array<Object>`) A list of
  *         StackResource structures.
  *         * `StackName` &mdash; (`String`) The name associated with the
@@ -298,6 +305,7 @@ AWS.CloudFormation = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Stacks` &mdash; (`Array<Object>`) A list of stack structures.
  *         * `StackId` &mdash; (`String`) Unique identifier of the stack.
  *         * `StackName` &mdash; **required** &mdash; (`String`) The name
@@ -378,6 +386,7 @@ AWS.CloudFormation = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Url` &mdash; (`String`) An AWS Simple Monthly Calculator URL
  *         with a query string that describes the resources required to run
  *         the template.
@@ -398,6 +407,7 @@ AWS.CloudFormation = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `TemplateBody` &mdash; (`String`) Structure containing the
  *         template body. (For more information, go to the AWS
  *         CloudFormation User Guide.)
@@ -422,6 +432,7 @@ AWS.CloudFormation = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `StackResourceSummaries` &mdash; (`Array<Object>`) A list of
  *         StackResourceSummary structures.
  *         * `LogicalResourceId` &mdash; **required** &mdash; (`String`)
@@ -463,6 +474,7 @@ AWS.CloudFormation = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `StackSummaries` &mdash; (`Array<Object>`) A list of
  *         StackSummary structures containing information about the
  *         specified stacks.
@@ -527,6 +539,7 @@ AWS.CloudFormation = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `StackId` &mdash; (`String`) Unique identifier of the stack.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -539,11 +552,11 @@ AWS.CloudFormation = inherit({})
  *       Guide.) Conditional: You must pass TemplateURL or TemplateBody.
  *       If both are passed, only TemplateBody is used.
  *     * `TemplateURL` &mdash; (`String`) Location of file containing the
- *       template body. The URL must point to a template located in an S3
- *       bucket in the same region as the stack. For more information, go
- *       to the AWS CloudFormation User Guide. Conditional: You must pass
- *       TemplateURL or TemplateBody. If both are passed, only
- *       TemplateBody is used.
+ *       template body. The URL must point to a template (max size:
+ *       307,200 bytes) located in an S3 bucket in the same region as the
+ *       stack. For more information, go to the AWS CloudFormation User
+ *       Guide. Conditional: You must pass TemplateURL or TemplateBody.
+ *       If both are passed, only TemplateBody is used.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -553,6 +566,7 @@ AWS.CloudFormation = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Parameters` &mdash; (`Array<Object>`) A list of
  *         TemplateParameter structures.
  *         * `ParameterKey` &mdash; (`String`) The name associated with the

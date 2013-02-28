@@ -106,6 +106,7 @@ AWS.DynamoDB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Responses` &mdash; (`Object<Object>`)
  *         * `Items` &mdash; (`Array<Object<Object>>`)
  *         * `ConsumedCapacityUnits` &mdash; (`Float`)
@@ -236,6 +237,7 @@ AWS.DynamoDB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Responses` &mdash; (`Object<Object>`) The response object as a
  *         result of BatchWriteItem call. This is essentially a map of
  *         table name to ConsumedCapacityUnits.
@@ -352,6 +354,7 @@ AWS.DynamoDB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `TableDescription` &mdash; (`Object`)
  *         * `TableName` &mdash; (`String`) The name of the table being
  *           described.
@@ -461,6 +464,7 @@ AWS.DynamoDB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Attributes` &mdash; (`Object<Object>`) If the ReturnValues
  *         parameter is provided as ALL_OLD in the request, Amazon DynamoDB
  *         returns an array of attribute name-value pairs (essentially, the
@@ -497,6 +501,7 @@ AWS.DynamoDB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `TableDescription` &mdash; (`Object`)
  *         * `TableName` &mdash; (`String`) The name of the table being
  *           described.
@@ -548,6 +553,7 @@ AWS.DynamoDB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Table` &mdash; (`Object`)
  *         * `TableName` &mdash; (`String`) The name of the table being
  *           described.
@@ -638,6 +644,7 @@ AWS.DynamoDB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Item` &mdash; (`Object<Object>`) Contains the requested
  *         attributes.
  *         * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
@@ -674,6 +681,7 @@ AWS.DynamoDB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `TableNames` &mdash; (`Array<String>`)
  *       * `LastEvaluatedTableName` &mdash; (`String`) The name of the last
  *         table in the current list. Use this value as the
@@ -732,6 +740,7 @@ AWS.DynamoDB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Attributes` &mdash; (`Object<Object>`) Attribute values before
  *         the put operation, but only if the ReturnValues parameter is
  *         specified as ALL_OLD in the request.
@@ -861,6 +870,7 @@ AWS.DynamoDB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Items` &mdash; (`Array<Object<Object>>`)
  *       * `Count` &mdash; (`Integer`) Number of items in the response.
  *       * `LastEvaluatedKey` &mdash; (`Object`) Primary key of the item
@@ -998,6 +1008,7 @@ AWS.DynamoDB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Items` &mdash; (`Array<Object<Object>>`)
  *       * `Count` &mdash; (`Integer`) Number of items in the response.
  *       * `ScannedCount` &mdash; (`Integer`) Number of items in the
@@ -1139,6 +1150,7 @@ AWS.DynamoDB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Attributes` &mdash; (`Object<Object>`) A map of attribute
  *         name-value pairs, but only if the ReturnValues parameter is
  *         specified as something other than NONE in the request.
@@ -1184,6 +1196,7 @@ AWS.DynamoDB = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `TableDescription` &mdash; (`Object`)
  *         * `TableName` &mdash; (`String`) The name of the table being
  *           described.

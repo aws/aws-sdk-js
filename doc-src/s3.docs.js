@@ -92,6 +92,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Location` &mdash; (`String`)
  *       * `Bucket` &mdash; (`String`)
  *       * `Key` &mdash; (`String`)
@@ -168,6 +169,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CopyObjectResult` &mdash; (`Object`)
  *         * `ETag` &mdash; (`String`)
  *         * `LastModified` &mdash; (`String`)
@@ -208,6 +210,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Location` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -261,6 +264,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Bucket` &mdash; (`String`) Name of the bucket to which the
  *         multipart upload was initiated.
  *       * `Key` &mdash; (`String`) Object key for which the multipart
@@ -390,6 +394,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DeleteMarker` &mdash; (`String`) Specifies whether the
  *         versioned object that was permanently deleted was (true) or was
  *         not (false) a delete marker.
@@ -425,6 +430,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Deleted` &mdash; (`Array<Object>`)
  *         * `Key` &mdash; (`String`)
  *         * `VersionId` &mdash; (`String`)
@@ -453,6 +459,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Owner` &mdash; (`Object`)
  *         * `ID` &mdash; (`String`)
  *         * `DisplayName` &mdash; (`String`)
@@ -485,6 +492,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CORSRules` &mdash; (`Array<Object>`)
  *         * `AllowedOrigins` &mdash; (`Array<String>`) One or more origins
  *           you want customers to be able to access the bucket from.
@@ -516,6 +524,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Rules` &mdash; (`Array<Object>`)
  *         * `ID` &mdash; (`String`) Unique identifier for the rule. The
  *           value cannot be longer than 255 characters.
@@ -556,6 +565,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `LocationConstraint` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -575,6 +585,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `LoggingEnabled` &mdash; (`Object`)
  *         * `TargetBucket` &mdash; (`String`) Specifies the bucket where
  *           you want Amazon S3 to store server access logs. You can have
@@ -616,6 +627,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `TopicConfiguration` &mdash; (`Object`)
  *         * `Topic` &mdash; (`String`) Amazon SNS topic to which Amazon S3
  *           will publish a message to report the specified events for the
@@ -640,6 +652,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Policy` &mdash; (`String`) The bucket policy as a JSON
  *         document.
  *   @return [AWS.Request] a handle to the operation request for
@@ -660,6 +673,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Payer` &mdash; (`String`) Specifies who pays for the download
  *         and request fees.
  *   @return [AWS.Request] a handle to the operation request for
@@ -680,6 +694,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `TagSet` &mdash; (`Array<Object>`)
  *         * `Key` &mdash; (`String`) Name of the tag.
  *         * `Value` &mdash; (`String`) Value of the tag.
@@ -701,6 +716,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Status` &mdash; (`String`) The versioning state of the bucket.
  *       * `MFADelete` &mdash; (`String`) Specifies whether MFA delete is
  *         enabled in the bucket versioning configuration. This element is
@@ -725,6 +741,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `RedirectAllRequestsTo` &mdash; (`Object`)
  *         * `HostName` &mdash; (`String`) Name of the host where requests
  *           will be redirected.
@@ -839,6 +856,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Body` &mdash; (`String`) Object data.
  *       * `DeleteMarker` &mdash; (`String`) Specifies whether the object
  *         retrieved was (true) or was not (false) a Delete Marker. If
@@ -906,6 +924,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Owner` &mdash; (`Object`)
  *         * `ID` &mdash; (`String`)
  *         * `DisplayName` &mdash; (`String`)
@@ -939,6 +958,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Body` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -994,6 +1014,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DeleteMarker` &mdash; (`String`) Specifies whether the object
  *         retrieved was (true) or was not (false) a Delete Marker. If
  *         false, this response header does not appear in the response.
@@ -1056,6 +1077,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Buckets` &mdash; (`Array<Object>`)
  *         * `Name` &mdash; (`String`) The name of the bucket.
  *         * `CreationDate` &mdash; (`Date`) Date the bucket was created.
@@ -1094,6 +1116,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Bucket` &mdash; (`String`) Name of the bucket to which the
  *         multipart upload was initiated.
  *       * `KeyMarker` &mdash; (`String`) The key at or after which the
@@ -1161,6 +1184,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
  *         or not Amazon S3 returned all of the results that satisfied the
  *         search criteria. If your results were truncated, you can make a
@@ -1230,6 +1254,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
  *         or not Amazon S3 returned all of the results that satisfied the
  *         search criteria.
@@ -1275,6 +1300,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Bucket` &mdash; (`String`) Name of the bucket to which the
  *         multipart upload was initiated.
  *       * `Key` &mdash; (`String`) Object key for which the multipart
@@ -1736,6 +1762,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Expiration` &mdash; (`Date`) If the object expiration is
  *         configured, this will contain the expiration date (expiry-date)
  *         and rule ID (rule-id). The value of rule-id is URL encoded.
@@ -1835,6 +1862,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
  *       * `ETag` &mdash; (`String`) Entity tag for the uploaded object.
@@ -1878,6 +1906,7 @@ AWS.S3 = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CopySourceVersionId` &mdash; (`String`) The version of the
  *         source object that was copied, if you have enabled versioning on
  *         the source bucket.

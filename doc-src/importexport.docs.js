@@ -65,6 +65,7 @@ AWS.ImportExport = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Success` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -85,6 +86,7 @@ AWS.ImportExport = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `JobId` &mdash; (`String`)
  *       * `JobType` &mdash; (`String`)
  *       * `AwsShippingAddress` &mdash; (`String`)
@@ -107,6 +109,7 @@ AWS.ImportExport = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `JobId` &mdash; (`String`)
  *       * `JobType` &mdash; (`String`)
  *       * `AwsShippingAddress` &mdash; (`String`)
@@ -140,6 +143,7 @@ AWS.ImportExport = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Jobs` &mdash; (`Array<Object>`)
  *         * `JobId` &mdash; (`String`)
  *         * `CreationDate` &mdash; (`Date`)
@@ -165,6 +169,7 @@ AWS.ImportExport = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Success` &mdash; (`Boolean`)
  *       * `WarningMessage` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for

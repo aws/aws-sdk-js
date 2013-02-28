@@ -83,6 +83,7 @@ AWS.CloudFront = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CloudFrontOriginAccessIdentity` &mdash; (`Object`) The origin
  *         access identity's information.
  *         * `Id` &mdash; **required** &mdash; (`String`) The ID for the
@@ -361,6 +362,7 @@ AWS.CloudFront = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Distribution` &mdash; (`Object`) The distribution's
  *         information.
  *         * `Id` &mdash; **required** &mdash; (`String`) The identifier
@@ -703,6 +705,7 @@ AWS.CloudFront = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Location` &mdash; (`String`) The fully qualified URI of the
  *         distribution and invalidation batch request, including the
  *         Invalidation ID.
@@ -842,6 +845,7 @@ AWS.CloudFront = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `StreamingDistribution` &mdash; (`Object`) The streaming
  *         distribution's information.
  *         * `Id` &mdash; **required** &mdash; (`String`) The identifier
@@ -1053,6 +1057,7 @@ AWS.CloudFront = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CloudFrontOriginAccessIdentity` &mdash; (`Object`) The origin
  *         access identity's information.
  *         * `Id` &mdash; **required** &mdash; (`String`) The ID for the
@@ -1099,6 +1104,7 @@ AWS.CloudFront = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CloudFrontOriginAccessIdentityConfig` &mdash; (`Object`) The
  *         origin access identity's configuration information.
  *         * `CallerReference` &mdash; **required** &mdash; (`String`) A
@@ -1135,6 +1141,7 @@ AWS.CloudFront = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Distribution` &mdash; (`Object`) The distribution's
  *         information.
  *         * `Id` &mdash; **required** &mdash; (`String`) The identifier
@@ -1446,6 +1453,7 @@ AWS.CloudFront = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DistributionConfig` &mdash; (`Object`) The distribution's
  *         configuration information.
  *         * `CallerReference` &mdash; **required** &mdash; (`String`) A
@@ -1697,6 +1705,7 @@ AWS.CloudFront = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Invalidation` &mdash; (`Object`) The invalidation's
  *         information.
  *         * `Id` &mdash; **required** &mdash; (`String`) The identifier
@@ -1752,6 +1761,7 @@ AWS.CloudFront = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `StreamingDistribution` &mdash; (`Object`) The streaming
  *         distribution's information.
  *         * `Id` &mdash; **required** &mdash; (`String`) The identifier
@@ -1906,6 +1916,7 @@ AWS.CloudFront = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `StreamingDistributionConfig` &mdash; (`Object`) The streaming
  *         distribution's configuration information.
  *         * `CallerReference` &mdash; **required** &mdash; (`String`) A
@@ -2013,6 +2024,7 @@ AWS.CloudFront = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CloudFrontOriginAccessIdentityList` &mdash; (`Object`) The
  *         CloudFrontOriginAccessIdentityList type.
  *         * `Marker` &mdash; **required** &mdash; (`String`) The value you
@@ -2067,6 +2079,7 @@ AWS.CloudFront = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DistributionList` &mdash; (`Object`) The DistributionList type.
  *         * `Marker` &mdash; **required** &mdash; (`String`) The value you
  *           provided for the Marker request parameter.
@@ -2317,6 +2330,7 @@ AWS.CloudFront = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `InvalidationList` &mdash; (`Object`) Information about
  *         invalidation batches.
  *         * `Marker` &mdash; **required** &mdash; (`String`) The value you
@@ -2365,6 +2379,7 @@ AWS.CloudFront = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `StreamingDistributionList` &mdash; (`Object`) The
  *         StreamingDistributionList type.
  *         * `Marker` &mdash; **required** &mdash; (`String`) The value you
@@ -2481,6 +2496,7 @@ AWS.CloudFront = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `CloudFrontOriginAccessIdentity` &mdash; (`Object`) The origin
  *         access identity's information.
  *         * `Id` &mdash; **required** &mdash; (`String`) The ID for the
@@ -2760,6 +2776,7 @@ AWS.CloudFront = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Distribution` &mdash; (`Object`) The distribution's
  *         information.
  *         * `Id` &mdash; **required** &mdash; (`String`) The identifier
@@ -3156,6 +3173,7 @@ AWS.CloudFront = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `StreamingDistribution` &mdash; (`Object`) The streaming
  *         distribution's information.
  *         * `Id` &mdash; **required** &mdash; (`String`) The identifier

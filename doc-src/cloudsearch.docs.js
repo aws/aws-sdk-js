@@ -65,6 +65,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DomainStatus` &mdash; (`Object`)
  *         * `DomainId` &mdash; **required** &mdash; (`String`)
  *         * `DomainName` &mdash; **required** &mdash; (`String`)
@@ -200,6 +201,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `IndexField` &mdash; **required** &mdash; (`Object`)
  *         * `Options` &mdash; **required** &mdash; (`Object`)
  *           * `IndexFieldName` &mdash; **required** &mdash; (`String`) The
@@ -360,6 +362,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `RankExpression` &mdash; **required** &mdash; (`Object`)
  *         * `Options` &mdash; **required** &mdash; (`Object`) The
  *           expression that is evaluated for ranking or thresholding while
@@ -438,6 +441,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DomainStatus` &mdash; (`Object`)
  *         * `DomainId` &mdash; **required** &mdash; (`String`)
  *         * `DomainName` &mdash; **required** &mdash; (`String`)
@@ -491,6 +495,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `IndexField` &mdash; **required** &mdash; (`Object`)
  *         * `Options` &mdash; **required** &mdash; (`Object`)
  *           * `IndexFieldName` &mdash; **required** &mdash; (`String`) The
@@ -613,6 +618,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `RankExpression` &mdash; **required** &mdash; (`Object`)
  *         * `Options` &mdash; **required** &mdash; (`Object`) The
  *           expression that is evaluated for ranking or thresholding while
@@ -691,6 +697,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DefaultSearchField` &mdash; **required** &mdash; (`Object`) The
  *         name of the IndexField to use for search requests issued with
  *         the q parameter. The default is the empty string, which
@@ -734,6 +741,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DomainStatusList` &mdash; **required** &mdash;
  *         (`Array<Object>`)
  *         * `DomainId` &mdash; **required** &mdash; (`String`)
@@ -789,6 +797,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `IndexFields` &mdash; **required** &mdash; (`Array<Object>`) The
  *         index fields configured for the domain.
  *         * `Options` &mdash; **required** &mdash; (`Object`)
@@ -912,6 +921,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `RankExpressions` &mdash; **required** &mdash; (`Array<Object>`)
  *         The rank expressions configured for the domain.
  *         * `Options` &mdash; **required** &mdash; (`Object`) The
@@ -991,6 +1001,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `AccessPolicies` &mdash; **required** &mdash; (`Object`)
  *         * `Options` &mdash; **required** &mdash; (`String`)
  *         * `Status` &mdash; **required** &mdash; (`Object`)
@@ -1027,6 +1038,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Stems` &mdash; **required** &mdash; (`Object`)
  *         * `Options` &mdash; **required** &mdash; (`String`)
  *         * `Status` &mdash; **required** &mdash; (`Object`)
@@ -1063,6 +1075,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Stopwords` &mdash; **required** &mdash; (`Object`)
  *         * `Options` &mdash; **required** &mdash; (`String`)
  *         * `Status` &mdash; **required** &mdash; (`Object`)
@@ -1099,6 +1112,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Synonyms` &mdash; **required** &mdash; (`Object`)
  *         * `Options` &mdash; **required** &mdash; (`String`)
  *         * `Status` &mdash; **required** &mdash; (`Object`)
@@ -1135,6 +1149,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `FieldNames` &mdash; (`Array<String>`) The names of the fields
  *         that are currently being processed due to an IndexDocuments
  *         action.
@@ -1158,6 +1173,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `DefaultSearchField` &mdash; **required** &mdash; (`Object`)
  *         * `Options` &mdash; **required** &mdash; (`String`) The name of
  *           the IndexField to use as the default search field. The default
@@ -1198,6 +1214,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `AccessPolicies` &mdash; **required** &mdash; (`Object`)
  *         * `Options` &mdash; **required** &mdash; (`String`)
  *         * `Status` &mdash; **required** &mdash; (`Object`)
@@ -1235,6 +1252,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Stems` &mdash; **required** &mdash; (`Object`)
  *         * `Options` &mdash; **required** &mdash; (`String`)
  *         * `Status` &mdash; **required** &mdash; (`Object`)
@@ -1272,6 +1290,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Stopwords` &mdash; **required** &mdash; (`Object`)
  *         * `Options` &mdash; **required** &mdash; (`String`)
  *         * `Status` &mdash; **required** &mdash; (`Object`)
@@ -1309,6 +1328,7 @@ AWS.CloudSearch = inherit({})
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
+ *
  *       * `Synonyms` &mdash; **required** &mdash; (`Object`)
  *         * `Options` &mdash; **required** &mdash; (`String`)
  *         * `Status` &mdash; **required** &mdash; (`Object`)
