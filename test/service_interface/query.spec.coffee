@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 AWS = require('../../lib/core')
+Buffer = require('buffer').Buffer
 require('../../lib/service_interface/query')
 
 describe 'AWS.ServiceInterface.Query', ->

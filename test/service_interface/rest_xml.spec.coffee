@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 helpers = require('../helpers'); AWS = helpers.AWS
+Buffer = require('buffer').Buffer
 require('../../lib/service_interface/rest_xml')
 
 describe 'AWS.ServiceInterface.RestXml', ->

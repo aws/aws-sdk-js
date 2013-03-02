@@ -15,6 +15,7 @@ helpers = require('./helpers')
 EventEmitter = require('events').EventEmitter
 AWS = helpers.AWS
 MockClient = helpers.MockClient
+Buffer = require('buffer').Buffer
 
 describe 'AWS.Request', ->
   client = new MockClient

@@ -13,6 +13,7 @@
 
 AWS = require('../lib/aws')
 EventEmitter = require('events').EventEmitter
+Buffer = require('buffer').Buffer
 
 # Mock credentials
 AWS.config.update

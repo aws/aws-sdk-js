@@ -53,7 +53,7 @@ describe 'AWS.EventEmitter', ->
 
   describe 'addNamedListener', ->
     it 'defines a constant with the callback', ->
-      spy = createSpy()
+      spy = jasmine.createSpy()
       @emitter.addNamedListener('CONSTNAME', 'eventName', spy)
       expect(@emitter.CONSTNAME).toBe(spy)
 
@@ -71,7 +71,7 @@ describe 'AWS.EventEmitter', ->
       expect(r).toBe(@emitter)
 
     it 'provides an add function in callback to call addNamedListener', ->
-      spy1 = createSpy(); spy2 = createSpy()
+      spy1 = jasmine.createSpy(); spy2 = jasmine.createSpy()
       @emitter.addNamedListeners (add) ->
         add('CONST1', 'event1', spy1)
         add('CONST2', 'event2', spy2)

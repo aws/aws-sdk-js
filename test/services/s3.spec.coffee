@@ -14,6 +14,7 @@
 helpers = require('../helpers')
 AWS = helpers.AWS
 Stream = require('stream').Stream
+Buffer = require('buffer').Buffer
 
 require('../../lib/services/s3')
 

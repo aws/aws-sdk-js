@@ -13,6 +13,7 @@
 
 helpers = require('./helpers')
 AWS = helpers.AWS
+Buffer = require('buffer').Buffer
 
 describe 'AWS.ParamValidator', ->
   [members, rules] = [{}, {}]

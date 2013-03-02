@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 AWS = require('../lib/core')
+Buffer = require('buffer').Buffer
 
 describe 'uriEscape', ->
 
@@ -319,7 +320,7 @@ describe 'AWS.util.inherit', ->
 
   it 'should create pass-through constructor if not defined', ->
     Base = AWS.util.inherit
-      constructor: createSpy()
+      constructor: jasmine.createSpy()
 
     Derived = AWS.util.inherit Base,
       other: true

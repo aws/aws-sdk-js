@@ -14,6 +14,7 @@
 helpers = require('./helpers')
 AWS = helpers.AWS
 MockClient = helpers.MockClient
+Buffer = require('buffer').Buffer
 
 describe 'AWS.EventListeners', ->
 
@@ -36,10 +37,10 @@ describe 'AWS.EventListeners', ->
     client.config.credentials = AWS.util.copy(client.config.credentials)
 
     # Helpful handlers
-    successHandler = createSpy('success')
-    errorHandler = createSpy('error')
-    completeHandler = createSpy('complete')
-    retryHandler = createSpy('retry')
+    successHandler = jasmine.createSpy('success')
+    errorHandler = jasmine.createSpy('error')
+    completeHandler = jasmine.createSpy('complete')
+    retryHandler = jasmine.createSpy('retry')
 
   # Safely tear down setTimeout hack
   afterEach -> `setTimeout = oldSetTimeout`
@@ -67,7 +68,7 @@ describe 'AWS.EventListeners', ->
       expect(response.error).toEqual("ERROR")
 
     it 'sends error event if credentials are not set', ->
-      errorHandler = createSpy()
+      errorHandler = jasmine.createSpy()
       request = makeRequest()
       request.on('error', errorHandler)
 
@@ -182,7 +183,7 @@ describe 'AWS.EventListeners', ->
 
   describe 'retry', ->
     it 'retries a request with a set maximum retries', ->
-      sendHandler = createSpy('send')
+      sendHandler = jasmine.createSpy('send')
       client.config.maxRetries = 10
 
       # fail every request with a fake networking error
@@ -256,7 +257,7 @@ describe 'AWS.EventListeners', ->
 
     it 'emits error if an error is set in extractError', ->
       error = code: 'ParseError', message: 'error message'
-      extractDataHandler = createSpy('extractData')
+      extractDataHandler = jasmine.createSpy('extractData')
 
       helpers.mockHttpResponse 400, {}, ''
 
