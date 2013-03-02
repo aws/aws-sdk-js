@@ -20,16 +20,17 @@ describe 'AWS.Glacier.Client', ->
   client = new AWS.Glacier.Client()
 
   describe 'building requests', ->
-    beforeEach ->
-      helpers.mockHttpResponse 200, {}, 'response'
-
     it 'sets accountId to "-" if not set', ->
-      resp = client.listVaults().send()
-      expect(resp.request.httpRequest.path).toEqual('/-/vaults')
+      req = client.listVaults()
+      req.emit('validate', req)
+      req.emit('build', req)
+      expect(req.httpRequest.path).toEqual('/-/vaults')
 
     it 'will not override accountId if set', ->
-      resp = client.listVaults(accountId: 'ABC123').send()
-      expect(resp.request.httpRequest.path).toEqual('/ABC123/vaults')
+      req = client.listVaults(accountId: 'ABC123')
+      req.emit('validate', req)
+      req.emit('build', req)
+      expect(req.httpRequest.path).toEqual('/ABC123/vaults')
 
   describe 'computeChecksums', ->
     it 'returns correct linear and tree hash for buffer data', ->

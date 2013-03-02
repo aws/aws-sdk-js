@@ -31,9 +31,11 @@ describe 'AWS.Route53.Client', ->
     client = new AWS.Route53.Client
 
     it 'should fix hosted zone ID on input', ->
-      resp = client.getHostedZone(Id: '/hostedzone/ABCDEFG').send()
-      expect(resp.request.httpRequest.path).toMatch('/hostedzone/ABCDEFG$')
+      req = client.getHostedZone(Id: '/hostedzone/ABCDEFG')
+      req.emit('build', req)
+      expect(req.httpRequest.path).toMatch('/hostedzone/ABCDEFG$')
 
     it 'should fix health check ID on input', ->
-      resp = client.getHealthCheck(HealthCheckId: '/healthcheck/ABCDEFG').send()
-      expect(resp.request.httpRequest.path).toMatch('/healthcheck/ABCDEFG$')
+      req = client.getHealthCheck(HealthCheckId: '/healthcheck/ABCDEFG')
+      req.emit('build', req)
+      expect(req.httpRequest.path).toMatch('/healthcheck/ABCDEFG$')
