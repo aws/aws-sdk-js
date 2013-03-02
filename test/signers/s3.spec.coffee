@@ -68,13 +68,13 @@ describe 'AWS.Signers.S3', ->
     it 'sets the date header when not present', ->
       req = buildRequest()
       addAuth(req)
-      expect(req.headers['Date']).toEqual(AWS.util.date.rfc822(date))
+      expect(req.headers['X-Amz-Date']).toEqual(AWS.util.date.rfc822(date))
 
     it 'overwrites Date if present', ->
       req = buildRequest()
-      req.headers['Date'] = 'date-string'
+      req.headers['X-Amz-Date'] = 'date-string'
       addAuth(req)
-      expect(req.headers['Date']).toEqual(AWS.util.date.rfc822(date))
+      expect(req.headers['X-Amz-Date']).toEqual(AWS.util.date.rfc822(date))
 
     it 'omits the security token header when session token is blank', ->
       sessionToken = null
@@ -103,7 +103,7 @@ describe 'AWS.Signers.S3', ->
   describe 'stringToSign', ->
 
     beforeEach ->
-      headers['Date'] = 'DATE-STRING'
+      headers['X-Amz-Date'] = 'DATE-STRING'
 
     it 'builds a basic string to sign', ->
       expect(stringToSign()).toEqual("""
@@ -111,6 +111,7 @@ describe 'AWS.Signers.S3', ->
 
 
       DATE-STRING
+      x-amz-date:DATE-STRING
       /
       """)
 
@@ -122,6 +123,7 @@ describe 'AWS.Signers.S3', ->
       CONTENT-MD5
       CONTENT-TYPE
       DATE-STRING
+      x-amz-date:DATE-STRING
       /
       """)
 
@@ -132,6 +134,7 @@ describe 'AWS.Signers.S3', ->
 
 
       DATE-STRING
+      x-amz-date:DATE-STRING
       /
       """)
 
@@ -145,6 +148,7 @@ describe 'AWS.Signers.S3', ->
 
       DATE-STRING
       x-amz-abc:abc
+      x-amz-date:DATE-STRING
       x-amz-xyz:xyz
       /
       """)
@@ -159,6 +163,7 @@ describe 'AWS.Signers.S3', ->
 
       DATE-STRING
       x-amz-abc:abc
+      x-amz-date:DATE-STRING
       x-amz-xyz:xyz
       /
       """)
@@ -173,6 +178,7 @@ describe 'AWS.Signers.S3', ->
 
       DATE-STRING
       x-amz-abc:abc
+      x-amz-date:DATE-STRING
       x-amz-mno:mno
       x-amz-xyz:xyz
       /
@@ -185,6 +191,7 @@ describe 'AWS.Signers.S3', ->
 
 
       DATE-STRING
+      x-amz-date:DATE-STRING
       /bucket_name/key
       """)
 
@@ -196,6 +203,7 @@ describe 'AWS.Signers.S3', ->
 
 
       DATE-STRING
+      x-amz-date:DATE-STRING
       /bucket-name/
       """)
 
@@ -207,6 +215,7 @@ describe 'AWS.Signers.S3', ->
 
 
       DATE-STRING
+      x-amz-date:DATE-STRING
       /bucket-name/?acl
       """)
 
@@ -217,6 +226,7 @@ describe 'AWS.Signers.S3', ->
 
 
       DATE-STRING
+      x-amz-date:DATE-STRING
       /bucket_name/key?versionId=123
       """)
 
@@ -227,6 +237,7 @@ describe 'AWS.Signers.S3', ->
 
 
       DATE-STRING
+      x-amz-date:DATE-STRING
       /?versionId=abc
       """)
 
@@ -237,6 +248,7 @@ describe 'AWS.Signers.S3', ->
 
 
       DATE-STRING
+      x-amz-date:DATE-STRING
       /?acl&logging&torrent=123&website
       """)
 
@@ -247,6 +259,7 @@ describe 'AWS.Signers.S3', ->
 
 
       DATE-STRING
+      x-amz-date:DATE-STRING
       /?acl&logging&torrent=123&website
       """)
 
@@ -257,6 +270,7 @@ describe 'AWS.Signers.S3', ->
 
 
       DATE-STRING
+      x-amz-date:DATE-STRING
       /?versionId=a%2Bb
       """)
 
@@ -267,11 +281,12 @@ describe 'AWS.Signers.S3', ->
 
 
       DATE-STRING
+      x-amz-date:DATE-STRING
       /?response-content-type=a+b
       """)
 
     it 'omits the date header when not present', ->
-      delete headers['Date']
+      delete headers['X-Amz-Date']
       expect(stringToSign()).toEqual("""
       POST
 
