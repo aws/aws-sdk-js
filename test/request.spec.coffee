@@ -66,10 +66,10 @@ describe 'AWS.Request', ->
       data = ''; error = null; reqError = null; done = false
       spyOn(AWS.HttpClient, 'getInstance')
       AWS.HttpClient.getInstance.andReturn handleRequest: (req, resp) ->
-        req.emit('httpHeaders', 200, {}, resp)
+        req.emit('httpHeaders', [200, {}, resp])
         AWS.util.arrayEach ['FOO', 'BAR', 'BAZ'], (str) ->
-          req.emit('httpData', new Buffer(str), resp)
-        req.emit('httpError', new Error('fail'), resp)
+          req.emit('httpData', [new Buffer(str), resp])
+        req.emit('httpError', [new Error('fail'), resp])
 
       runs ->
         request = client.makeRequest('mockMethod')
@@ -89,18 +89,18 @@ describe 'AWS.Request', ->
       spyOn(AWS.HttpClient, 'getInstance')
       AWS.HttpClient.getInstance.andReturn handleRequest: (req, resp) ->
         process.nextTick ->
-            req.emit('httpHeaders', 200, {}, resp)
+            req.emit('httpHeaders', [200, {}, resp])
           AWS.util.arrayEach ['FOO', 'BAR', 'BAZ', 'QUX'], (str) ->
             if str == 'BAZ' and resp.retryCount < 1
               process.nextTick ->
-                req.emit('httpError', code: 'NetworkingError', message: 'FAIL!', retryable: true, resp)
+                req.emit('httpError', [{code: 'NetworkingError', message: 'FAIL!', retryable: true}, resp])
               return AWS.util.abort
             else
               process.nextTick ->
-                req.emit('httpData', new Buffer(str), resp)
+                req.emit('httpData', [new Buffer(str), resp])
           if resp.retryCount >= 1
             process.nextTick ->
-              req.emit('httpDone', resp)
+              req.emit('httpDone', [resp])
 
       runs ->
         request = client.makeRequest('mockMethod')
