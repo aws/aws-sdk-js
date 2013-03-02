@@ -14,9 +14,11 @@
 AWS = require('../lib/aws')
 
 # Mock credentials
-AWS.config.update credentials:
-  accessKeyId: 'akid'
-  secretAccessKey: 'secret'
+AWS.config.update
+  region: 'mock-region'
+  credentials:
+    accessKeyId: 'akid'
+    secretAccessKey: 'secret'
 
 # Disable validation
 AWS.EventListeners.Core.removeListener 'validate',
