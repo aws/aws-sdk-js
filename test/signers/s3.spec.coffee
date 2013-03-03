@@ -110,7 +110,7 @@ describe 'AWS.Signers.S3', ->
       POST
 
 
-      DATE-STRING
+
       x-amz-date:DATE-STRING
       /
       """)
@@ -122,7 +122,7 @@ describe 'AWS.Signers.S3', ->
       POST
       CONTENT-MD5
       CONTENT-TYPE
-      DATE-STRING
+
       x-amz-date:DATE-STRING
       /
       """)
@@ -133,7 +133,7 @@ describe 'AWS.Signers.S3', ->
       VERB
 
 
-      DATE-STRING
+
       x-amz-date:DATE-STRING
       /
       """)
@@ -146,7 +146,7 @@ describe 'AWS.Signers.S3', ->
       POST
 
 
-      DATE-STRING
+
       x-amz-abc:abc
       x-amz-date:DATE-STRING
       x-amz-xyz:xyz
@@ -161,7 +161,7 @@ describe 'AWS.Signers.S3', ->
       POST
 
 
-      DATE-STRING
+
       x-amz-abc:abc
       x-amz-date:DATE-STRING
       x-amz-xyz:xyz
@@ -176,7 +176,7 @@ describe 'AWS.Signers.S3', ->
       POST
 
 
-      DATE-STRING
+
       x-amz-abc:abc
       x-amz-date:DATE-STRING
       x-amz-mno:mno
@@ -190,7 +190,7 @@ describe 'AWS.Signers.S3', ->
       POST
 
 
-      DATE-STRING
+
       x-amz-date:DATE-STRING
       /bucket_name/key
       """)
@@ -202,7 +202,7 @@ describe 'AWS.Signers.S3', ->
       POST
 
 
-      DATE-STRING
+
       x-amz-date:DATE-STRING
       /bucket-name/
       """)
@@ -214,7 +214,7 @@ describe 'AWS.Signers.S3', ->
       POST
 
 
-      DATE-STRING
+
       x-amz-date:DATE-STRING
       /bucket-name/?acl
       """)
@@ -225,7 +225,7 @@ describe 'AWS.Signers.S3', ->
       POST
 
 
-      DATE-STRING
+
       x-amz-date:DATE-STRING
       /bucket_name/key?versionId=123
       """)
@@ -236,7 +236,7 @@ describe 'AWS.Signers.S3', ->
       POST
 
 
-      DATE-STRING
+
       x-amz-date:DATE-STRING
       /?versionId=abc
       """)
@@ -247,7 +247,7 @@ describe 'AWS.Signers.S3', ->
       POST
 
 
-      DATE-STRING
+
       x-amz-date:DATE-STRING
       /?acl&logging&torrent=123&website
       """)
@@ -258,7 +258,7 @@ describe 'AWS.Signers.S3', ->
       POST
 
 
-      DATE-STRING
+
       x-amz-date:DATE-STRING
       /?acl&logging&torrent=123&website
       """)
@@ -269,7 +269,7 @@ describe 'AWS.Signers.S3', ->
       POST
 
 
-      DATE-STRING
+
       x-amz-date:DATE-STRING
       /?versionId=a%2Bb
       """)
@@ -280,7 +280,7 @@ describe 'AWS.Signers.S3', ->
       POST
 
 
-      DATE-STRING
+
       x-amz-date:DATE-STRING
       /?response-content-type=a+b
       """)
