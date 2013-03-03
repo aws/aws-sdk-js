@@ -21,7 +21,8 @@ describe 'AWS.NodeHttpClient', ->
   describe 'handleRequest', ->
     it 'emits httpError in error event', ->
       done = false
-      req = new AWS.Request(endpoint: 'invalid', config: region: 'empty')
+      endpoint = new AWS.Endpoint('http://invalid')
+      req = new AWS.Request(endpoint: endpoint, config: region: 'empty')
       resp = new AWS.Response(req)
       req.on 'httpError', (cbErr, cbResp) ->
         expect(cbErr instanceof Error).toBeTruthy()
