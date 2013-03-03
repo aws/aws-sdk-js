@@ -135,7 +135,7 @@ describe 'AWS.util.crypto', ->
     it 'returns the correct CRC32 value for binary data', ->
       buffer = new Buffer(4433);
       for i in [0...buffer.length]
-        buffer[i] = i % 256;
+        buffer.writeUInt8 i % 256, i
       expect(util.crc32(buffer)).toEqual(899332870)
 
     it 'handles String values', ->
