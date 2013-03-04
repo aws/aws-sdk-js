@@ -13,6 +13,7 @@
 
 helpers = require('../helpers')
 AWS = helpers.AWS
+Stream = require('stream').Stream
 
 require('../../lib/services/s3')
 
@@ -441,6 +442,11 @@ describe 'AWS.S3.Client', ->
 
     it 'does not compute checksums if computeChecksums is on and ContentMD5 is provided', ->
       willCompute 'putBucketAcl', computeChecksums: true, hash: '000'
+
+    it 'does not compute checksums for Stream objects', ->
+      s3 = new AWS.S3.Client(computeChecksums: true)
+      resp = s3.putObject(Bucket: 'example', Key: 'foo', Body: new Stream).send()
+      expect(resp.request.httpRequest.headers['Content-MD5']).toEqual(undefined)
 
     it 'computes checksums if computeChecksums is on and ContentMD5 is not provided',->
       willCompute 'putBucketAcl', computeChecksums: true
