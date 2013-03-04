@@ -143,5 +143,7 @@ describe 'AWS.config', ->
     expect(AWS.config.maxRetries).toEqual(undefined)
 
   it 'can set default config to an object literal', ->
+    oldConfig = AWS.config
     AWS.config = {}
     expect(AWS.config).toEqual({})
+    AWS.config = oldConfig

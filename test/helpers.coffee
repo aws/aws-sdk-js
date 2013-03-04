@@ -24,6 +24,11 @@ AWS.config.update
 AWS.EventListeners.Core.removeListener 'validate',
   AWS.EventListeners.Core.VALIDATE_PARAMETERS
 
+# Disable setTimeout for tests
+# Warning: this might cause unpredictable results
+# TODO: refactor this out.
+`setTimeout = function(fn, delay) { fn(); }`
+
 AWS.HttpClient.getInstance = -> throw new Error('Unmocked HTTP request')
 
 flattenXML = (xml) ->
@@ -61,25 +66,25 @@ mockHttpResponse = (status, headers, data) ->
   spyOn(AWS.HttpClient, 'getInstance')
   AWS.HttpClient.getInstance.andReturn handleRequest: (req, resp) ->
     if typeof status == 'number'
-      req.emit('httpHeaders', status, headers, resp)
+      req.emit('httpHeaders', [status, headers, resp])
       str = str instanceof Array ? str : [str]
       AWS.util.arrayEach data, (str) ->
-        req.emit('httpData', new Buffer(str), resp)
-      req.emit('httpDone', resp)
+        req.emit('httpData', [new Buffer(str), resp])
+      req.emit('httpDone', [resp])
     else
-      req.emit('httpError', status, resp)
+      req.emit('httpError', [status, resp])
 
 mockIntermittentFailureResponse = (numFailures, status, headers, data) ->
   spyOn(AWS.HttpClient, 'getInstance')
   AWS.HttpClient.getInstance.andReturn handleRequest: (req, resp) ->
     if resp.retryCount < numFailures
-      req.emit('httpError', {code: 'NetworkingError', message: 'FAIL!'}, resp)
+      req.emit('httpError', [{code: 'NetworkingError', message: 'FAIL!'}, resp])
     else
-      req.emit('httpHeaders', (resp.retryCount < numFailures ? 500 : status), headers, resp)
+      req.emit('httpHeaders', [(resp.retryCount < numFailures ? 500 : status), headers, resp])
       str = str instanceof Array ? str : [str]
       AWS.util.arrayEach data, (str) ->
-        req.emit('httpData', new Buffer(str), resp)
-      req.emit('httpDone', resp)
+        req.emit('httpData', [new Buffer(str), resp])
+      req.emit('httpDone', [resp])
 
 module.exports =
   AWS: AWS

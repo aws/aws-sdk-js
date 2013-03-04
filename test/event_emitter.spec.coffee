@@ -58,7 +58,7 @@ describe 'AWS.EventEmitter', ->
       expect(@emitter.CONSTNAME).toBe(spy)
 
       # also verify that event is hooked up like normal
-      @emitter.emit('eventName', 'argument')
+      @emitter.emit('eventName', ['argument'])
       expect(spy).toHaveBeenCalledWith('argument')
 
     it 'is chainable', ->
@@ -79,8 +79,8 @@ describe 'AWS.EventEmitter', ->
       expect(@emitter.CONST1).toBe(spy1)
       expect(@emitter.CONST2).toBe(spy2)
 
-      @emitter.emit('event1', 'arg1')
-      @emitter.emit('event2', 'arg2')
+      @emitter.emit('event1', ['arg1'])
+      @emitter.emit('event2', ['arg2'])
 
       expect(spy1).toHaveBeenCalledWith('arg1')
       expect(spy2).toHaveBeenCalledWith('arg2')

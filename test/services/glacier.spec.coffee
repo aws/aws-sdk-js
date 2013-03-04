@@ -22,14 +22,14 @@ describe 'AWS.Glacier.Client', ->
   describe 'building requests', ->
     it 'sets accountId to "-" if not set', ->
       req = client.listVaults()
-      req.emit('validate', req)
-      req.emit('build', req)
+      req.emit('validate', [req])
+      req.emit('build', [req])
       expect(req.httpRequest.path).toEqual('/-/vaults')
 
     it 'will not override accountId if set', ->
       req = client.listVaults(accountId: 'ABC123')
-      req.emit('validate', req)
-      req.emit('build', req)
+      req.emit('validate', [req])
+      req.emit('build', [req])
       expect(req.httpRequest.path).toEqual('/ABC123/vaults')
 
   describe 'computeChecksums', ->

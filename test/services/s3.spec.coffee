@@ -19,13 +19,19 @@ require('../../lib/services/s3')
 describe 'AWS.S3.Client', ->
 
   s3 = null
+  oldRegion = null
   request = (operation, params) ->
     req = new AWS.Request(s3, operation, params || {})
     req.client.addAllRequestListeners(req)
     req
 
   beforeEach ->
+    oldRegion = AWS.config.region
+    AWS.config.update(region: undefined) # use global region
     s3 = new AWS.S3.Client()
+
+  afterEach ->
+    AWS.config.update(region: oldRegion)
 
   describe 'dnsCompatibleBucketName', ->
 
@@ -79,8 +85,7 @@ describe 'AWS.S3.Client', ->
   describe 'building a request', ->
     build = (operation, params) ->
       req = request(operation, params)
-      resp = new AWS.Response(req)
-      req.emitEvents(resp, 'build')
+      req.emit('build', [req])
       return req.httpRequest
 
     it 'obeys the configuration for s3ForcePathStyle', ->
@@ -112,12 +117,12 @@ describe 'AWS.S3.Client', ->
 
       it 'ensures a single forward slash exists when querystring is present'
 
-    describe 'vitual-hosted vs path-style bucket requests', ->
+    describe 'virtual-hosted vs path-style bucket requests', ->
 
       describe 'HTTPS', ->
 
         beforeEach ->
-          s3 = new AWS.S3.Client({ sslEnabled: true, region: 'us-east-1' })
+          s3 = new AWS.S3.Client({ sslEnabled: true })
 
         it 'puts dns-compat bucket names in the hostname', ->
           req = build('headObject', {Bucket:'bucket-name',Key:'abc'})
@@ -149,7 +154,7 @@ describe 'AWS.S3.Client', ->
       describe 'HTTP', ->
 
         beforeEach ->
-          s3 = new AWS.S3.Client({ sslEnabled: false, region: 'us-east-1' })
+          s3 = new AWS.S3.Client({ sslEnabled: false })
 
         it 'puts dns-compat bucket names in the hostname', ->
           req = build('listObjects', {Bucket:'bucket-name'})
@@ -175,7 +180,7 @@ describe 'AWS.S3.Client', ->
       resp = new AWS.Response(req)
       resp.httpResponse.body = new Buffer(body || '')
       resp.httpResponse.statusCode = statusCode
-      req.emit('extractError', resp, req)
+      req.emit('extractError', [resp])
       resp.error
 
     it 'handles 304 errors', ->
