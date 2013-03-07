@@ -3,14 +3,14 @@
 All of these examples assume that the AWS library is required,
 credentials are loaded via environment variables (`AWS_ACCESS_KEY_ID`
 and `AWS_SECRET_ACCESS_KEY`), and the region is set via 
-`AWS.config.update({region: 'us-east-1'});` or the `AWS_REGION` environment
+`AWS.config.update({region: 'us-west-2'});` or the `AWS_REGION` environment
 variable.
 
 The common preamble code can be summarized as follows:
 
 ```js
 var AWS = require('aws-sdk');
-AWS.config.update({region: 'us-east-1'});
+AWS.config.update({region: 'us-west-2'});
 ```
 
 ## Amazon Simple Storage Service (Amazon S3)
