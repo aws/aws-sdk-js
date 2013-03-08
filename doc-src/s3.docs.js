@@ -861,6 +861,7 @@ AWS.S3 = inherit({})
  *       * `DeleteMarker` &mdash; (`String`) Specifies whether the object
  *         retrieved was (true) or was not (false) a Delete Marker. If
  *         false, this response header does not appear in the response.
+ *       * `AcceptRanges` &mdash; (`String`)
  *       * `Expiration` &mdash; (`String`) If the object expiration is
  *         configured (see PUT Bucket lifecycle), the response includes
  *         this header. It includes the expiry-date and rule-id key value
@@ -1018,6 +1019,7 @@ AWS.S3 = inherit({})
  *       * `DeleteMarker` &mdash; (`String`) Specifies whether the object
  *         retrieved was (true) or was not (false) a Delete Marker. If
  *         false, this response header does not appear in the response.
+ *       * `AcceptRanges` &mdash; (`String`)
  *       * `Expiration` &mdash; (`String`) If the object expiration is
  *         configured (see PUT Bucket lifecycle), the response includes
  *         this header. It includes the expiry-date and rule-id key value
@@ -1730,6 +1732,7 @@ AWS.S3 = inherit({})
  *       by the Content-Type header field.
  *     * `ContentLanguage` &mdash; (`String`) The language the content is
  *       in.
+ *     * `ContentMD5` &mdash; (`String`)
  *     * `ContentType` &mdash; (`String`) A standard MIME type describing
  *       the format of the object data.
  *     * `Expires` &mdash; (`Date`) The date and time at which the object
