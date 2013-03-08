@@ -22,7 +22,7 @@ module.exports = function() {
 
   this.When(/^I create a bucket with the location constraint "([^"]*)"$/, function(loc, next) {
     this.bucket = this.uniqueName('aws-sdk-js-integration');
-    var params = { Bucket: this.bucket, LocationConstraint: loc };
+    var params = { Bucket: this.bucket, CreateBucketConfiguration: { LocationConstraint: loc }};
     this.request('s3', 'createBucket', params, next);
   });
 
@@ -61,11 +61,13 @@ module.exports = function() {
   this.When(/^I put a transition lifecycle configuration on the bucket with prefix "([^"]*)"$/, function(prefix, callback) {
     var params = {
       Bucket: this.bucket,
-      Rules: [{
-        Prefix: prefix,
-        Status: 'Enabled',
-        Transition: {Days: 0, StorageClass: 'GLACIER'}
-      }]
+      LifecycleConfiguration: {
+        Rules: [{
+          Prefix: prefix,
+          Status: 'Enabled',
+          Transition: {Days: 0, StorageClass: 'GLACIER'}
+        }]
+      }
     };
 
     this.request('s3', 'putBucketLifecycle', params, callback);

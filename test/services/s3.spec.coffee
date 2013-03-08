@@ -301,26 +301,26 @@ describe 'AWS.S3.Client', ->
         </AccessControlPolicy>
         """
       helpers.mockHttpResponse 200, {}, ''
-      params = {
-        Owner:
-          DisplayName: 'aws-ruby-sdk',
-          ID: 'id'
-        Grants: [
-          {
-            Permission: 'FULL_CONTROL'
-            Grantee:
-              Type: 'CanonicalUser',
-              DisplayName: 'aws-ruby-sdk'
-              ID: 'id'
-          },
-          {
-            Permission : 'READ'
-            Grantee:
-              Type: 'Group',
-              URI: 'uri'
-          }
-        ]
-      }
+      params =
+        AccessControlPolicy:
+          Owner:
+            DisplayName: 'aws-ruby-sdk',
+            ID: 'id'
+          Grants: [
+            {
+              Permission: 'FULL_CONTROL'
+              Grantee:
+                Type: 'CanonicalUser',
+                DisplayName: 'aws-ruby-sdk'
+                ID: 'id'
+            },
+            {
+              Permission : 'READ'
+              Grantee:
+                Type: 'Group',
+                URI: 'uri'
+            }
+          ]
       s3.putBucketAcl params, (err, data) ->
         helpers.matchXML(this.request.httpRequest.body, xml)
 
@@ -398,9 +398,11 @@ describe 'AWS.S3.Client', ->
       loc = null
       s3 = new AWS.S3.Client(region:'eu-west-1')
       s3.makeRequest = (op, params) ->
-        loc = params.LocationConstraint
+        loc = params.CreateBucketConfiguration.LocationConstraint
       s3.createBucket(Bucket:'name')
       expect(loc).toEqual('eu-west-1')
+
+    it 'correctly builds the xml', ->
 
   AWS.util.each AWS.S3.Client.prototype.computableChecksumOperations, (operation) ->
     describe operation, ->

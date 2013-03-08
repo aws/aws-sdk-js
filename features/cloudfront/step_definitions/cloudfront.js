@@ -67,7 +67,7 @@ module.exports = function() {
     this.cfName = this.uniqueName(prefix);
     createParams.CallerReference = this.cfName;
     createParams.Origins.Items[0].Id = (this.cfName === '' ? 'origin' : 'InvalidOrigin');
-    this.request(null, 'createDistribution', createParams, callback, false);
+    this.request(null, 'createDistribution', { DistributionConfig: createParams }, callback, false);
   });
 
   this.Given(/^I list CloudFront distributions$/, function(callback) {

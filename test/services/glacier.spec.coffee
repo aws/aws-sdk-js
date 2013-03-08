@@ -17,17 +17,20 @@ AWS = helpers.AWS
 require('../../lib/services/glacier')
 
 describe 'AWS.Glacier.Client', ->
-  client = new AWS.Glacier.Client()
+
+  glacier = null
+  beforeEach ->
+    glacier = new AWS.Glacier.Client()
 
   describe 'building requests', ->
     it 'sets accountId to "-" if not set', ->
-      req = client.listVaults()
+      req = glacier.listVaults()
       req.emit('validate', [req])
       req.emit('build', [req])
       expect(req.httpRequest.path).toEqual('/-/vaults')
 
     it 'will not override accountId if set', ->
-      req = client.listVaults(accountId: 'ABC123')
+      req = glacier.listVaults(accountId: 'ABC123')
       req.emit('validate', [req])
       req.emit('build', [req])
       expect(req.httpRequest.path).toEqual('/ABC123/vaults')
@@ -43,4 +46,29 @@ describe 'AWS.Glacier.Client', ->
         linearHash: '68aff0c5a91aa0491752bfb96e3fef33eb74953804f6a2f7b708d5bcefa8ff6b', 
         treeHash: '154e26c78fd74d0c2c9b3cc4644191619dc4f2cd539ae2a74d5fd07957a3ee6a'
 
-      expect(client.computeChecksums(data)).toEqual(expected)
+      expect(glacier.computeChecksums(data)).toEqual(expected)
+
+  describe 'initiateJob', ->
+    it 'correctly builds the request', ->
+      helpers.mockHttpResponse 200, {}, ''
+      params =
+        vaultName: 'vault-name'
+        jobParameters:
+          Format: 'foo'
+          Type: 'bar'
+      glacier.initiateJob params, (err, data) ->
+        req = this.request.httpRequest
+        expect(req.path).toEqual('/-/vaults/vault-name/jobs')
+        expect(req.body).toEqual('{"Format":"foo","Type":"bar"}')
+
+  describe 'uploadArchive', ->
+    it 'passes the body along', ->
+      helpers.mockHttpResponse 200, {}, ''
+      params =
+        vaultName: 'vault-name'
+        body: 'abc'
+      glacier.uploadArchive params, (err, data) ->
+        req = this.request.httpRequest
+        expect(req.method).toEqual('POST')
+        expect(req.path).toEqual('/-/vaults/vault-name/archives')
+        expect(req.body).toEqual('abc')
