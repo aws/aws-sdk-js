@@ -877,7 +877,7 @@ AWS.RDS = inherit({})
  *       If true is specified, no DBSnapshot is created. If false is
  *       specified, a DB Snapshot is created before the DB Instance is
  *       deleted. The FinalDBSnapshotIdentifier parameter must be
- *       specified if SkipFinalSnapshot is false. Default: false
+ *       specified if SkipFinalSnapshot is false.Default: false
  *     * `FinalDBSnapshotIdentifier` &mdash; (`String`) The
  *       DBSnapshotIdentifier of the new DBSnapshot created when
  *       SkipFinalSnapshot is set to false. Specifying this parameter and

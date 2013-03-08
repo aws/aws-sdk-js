@@ -70,11 +70,11 @@ AWS.DynamoDB = inherit({})
  *           * `N` &mdash; (`String`) Numbers are positive or negative
  *             exact-value decimals and integers. A number can have up to
  *             38 digits precision and can be between 10^-128 to 10^+126.
- *           * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
- *             sequences of unsigned bytes.
+ *           * `B` &mdash; (`Base64 Encoded String`) Binary attributes
+ *             are sequences of unsigned bytes.
  *           * `SS` &mdash; (`Array<String>`) A set of strings.
  *           * `NS` &mdash; (`Array<String>`) A set of numbers.
- *           * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of
+ *           * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *             binary attributes.
  *         * `RangeKeyElement` &mdash; (`Object`) A range key element is
  *           treated as a secondary key (used in conjunction with the
@@ -89,11 +89,11 @@ AWS.DynamoDB = inherit({})
  *           * `N` &mdash; (`String`) Numbers are positive or negative
  *             exact-value decimals and integers. A number can have up to
  *             38 digits precision and can be between 10^-128 to 10^+126.
- *           * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
- *             sequences of unsigned bytes.
+ *           * `B` &mdash; (`Base64 Encoded String`) Binary attributes
+ *             are sequences of unsigned bytes.
  *           * `SS` &mdash; (`Array<String>`) A set of strings.
  *           * `NS` &mdash; (`Array<String>`) A set of numbers.
- *           * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of
+ *           * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *             binary attributes.
  *       * `AttributesToGet` &mdash; (`Array<String>`)
  *       * `ConsistentRead` &mdash; (`Boolean`)
@@ -117,12 +117,11 @@ AWS.DynamoDB = inherit({})
  *         a RequestItems parameter (so the value can be provided directly
  *         to a subsequent BatchGetItem operation). For more information,
  *         see the above RequestItems parameter.
- *         * `Keys` &mdash; **required** &mdash; (`Array<Object>`)
- *           * `HashKeyElement` &mdash; **required** &mdash; (`Object`) A
- *             hash key element is treated as the primary key, and can be a
- *             string or a number. Single attribute primary keys have one
- *             index value. The value can be String, Number, StringSet,
- *             NumberSet.
+ *         * `Keys` &mdash; (`Array<Object>`)
+ *           * `HashKeyElement` &mdash; (`Object`) A hash key element is
+ *             treated as the primary key, and can be a string or a number.
+ *             Single attribute primary keys have one index value. The
+ *             value can be String, Number, StringSet, NumberSet.
  *             * `S` &mdash; (`String`) Strings are Unicode with UTF-8
  *               binary encoding. The maximum size is limited by the size
  *               of the primary key (1024 bytes as a range part of a key or
@@ -131,11 +130,11 @@ AWS.DynamoDB = inherit({})
  *             * `N` &mdash; (`String`) Numbers are positive or negative
  *               exact-value decimals and integers. A number can have up to
  *               38 digits precision and can be between 10^-128 to 10^+126.
- *             * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
- *               sequences of unsigned bytes.
+ *             * `B` &mdash; (`Base64 Encoded String`) Binary attributes
+ *               are sequences of unsigned bytes.
  *             * `SS` &mdash; (`Array<String>`) A set of strings.
  *             * `NS` &mdash; (`Array<String>`) A set of numbers.
- *             * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of
+ *             * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *               binary attributes.
  *           * `RangeKeyElement` &mdash; (`Object`) A range key element is
  *             treated as a secondary key (used in conjunction with the
@@ -150,11 +149,11 @@ AWS.DynamoDB = inherit({})
  *             * `N` &mdash; (`String`) Numbers are positive or negative
  *               exact-value decimals and integers. A number can have up to
  *               38 digits precision and can be between 10^-128 to 10^+126.
- *             * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
- *               sequences of unsigned bytes.
+ *             * `B` &mdash; (`Base64 Encoded String`) Binary attributes
+ *               are sequences of unsigned bytes.
  *             * `SS` &mdash; (`Array<String>`) A set of strings.
  *             * `NS` &mdash; (`Array<String>`) A set of numbers.
- *             * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of
+ *             * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *               binary attributes.
  *         * `AttributesToGet` &mdash; (`Array<String>`)
  *         * `ConsistentRead` &mdash; (`Boolean`)
@@ -179,11 +178,11 @@ AWS.DynamoDB = inherit({})
  *           * `N` &mdash; (`String`) Numbers are positive or negative
  *             exact-value decimals and integers. A number can have up to
  *             38 digits precision and can be between 10^-128 to 10^+126.
- *           * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
- *             sequences of unsigned bytes.
+ *           * `B` &mdash; (`Base64 Encoded String`) Binary attributes
+ *             are sequences of unsigned bytes.
  *           * `SS` &mdash; (`Array<String>`) A set of strings.
  *           * `NS` &mdash; (`Array<String>`) A set of numbers.
- *           * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of
+ *           * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *             binary attributes.
  *       * `DeleteRequest` &mdash; (`Object`)
  *         * `Key` &mdash; **required** &mdash; (`Object`) The item's key
@@ -202,11 +201,11 @@ AWS.DynamoDB = inherit({})
  *               exact-value decimals and integers. A number can have up
  *               to 38 digits precision and can be between 10^-128 to
  *               10^+126.
- *             * `B` &mdash; (`Base64 Encoded Data`) Binary attributes
+ *             * `B` &mdash; (`Base64 Encoded String`) Binary attributes
  *               are sequences of unsigned bytes.
  *             * `SS` &mdash; (`Array<String>`) A set of strings.
  *             * `NS` &mdash; (`Array<String>`) A set of numbers.
- *             * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of
+ *             * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *               binary attributes.
  *           * `RangeKeyElement` &mdash; (`Object`) A range key element
  *             is treated as a secondary key (used in conjunction with
@@ -222,11 +221,11 @@ AWS.DynamoDB = inherit({})
  *               exact-value decimals and integers. A number can have up
  *               to 38 digits precision and can be between 10^-128 to
  *               10^+126.
- *             * `B` &mdash; (`Base64 Encoded Data`) Binary attributes
+ *             * `B` &mdash; (`Base64 Encoded String`) Binary attributes
  *               are sequences of unsigned bytes.
  *             * `SS` &mdash; (`Array<String>`) A set of strings.
  *             * `NS` &mdash; (`Array<String>`) A set of numbers.
- *             * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of
+ *             * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *               binary attributes.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -246,8 +245,7 @@ AWS.DynamoDB = inherit({})
  *         which we could not successfully process in a BatchWriteItem call
  *         is returned as UnprocessedItems
  *         * `PutRequest` &mdash; (`Object`)
- *           * `Item` &mdash; **required** &mdash; (`Object<Object>`) The
- *             item to put
+ *           * `Item` &mdash; (`Object<Object>`) The item to put
  *             * `S` &mdash; (`String`) Strings are Unicode with UTF-8
  *               binary encoding. The maximum size is limited by the size
  *               of the primary key (1024 bytes as a range part of a key or
@@ -256,20 +254,19 @@ AWS.DynamoDB = inherit({})
  *             * `N` &mdash; (`String`) Numbers are positive or negative
  *               exact-value decimals and integers. A number can have up to
  *               38 digits precision and can be between 10^-128 to 10^+126.
- *             * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
- *               sequences of unsigned bytes.
+ *             * `B` &mdash; (`Base64 Encoded String`) Binary attributes
+ *               are sequences of unsigned bytes.
  *             * `SS` &mdash; (`Array<String>`) A set of strings.
  *             * `NS` &mdash; (`Array<String>`) A set of numbers.
- *             * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of
+ *             * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *               binary attributes.
  *         * `DeleteRequest` &mdash; (`Object`)
- *           * `Key` &mdash; **required** &mdash; (`Object`) The item's key
- *             to be delete
- *             * `HashKeyElement` &mdash; **required** &mdash; (`Object`) A
- *               hash key element is treated as the primary key, and can be
- *               a string or a number. Single attribute primary keys have
- *               one index value. The value can be String, Number,
- *               StringSet, NumberSet.
+ *           * `Key` &mdash; (`Object`) The item's key to be delete
+ *             * `HashKeyElement` &mdash; (`Object`) A hash key element is
+ *               treated as the primary key, and can be a string or a
+ *               number. Single attribute primary keys have one index
+ *               value. The value can be String, Number, StringSet,
+ *               NumberSet.
  *               * `S` &mdash; (`String`) Strings are Unicode with UTF-8
  *                 binary encoding. The maximum size is limited by the size
  *                 of the primary key (1024 bytes as a range part of a key
@@ -279,11 +276,11 @@ AWS.DynamoDB = inherit({})
  *                 exact-value decimals and integers. A number can have up
  *                 to 38 digits precision and can be between 10^-128 to
  *                 10^+126.
- *               * `B` &mdash; (`Base64 Encoded Data`) Binary attributes
+ *               * `B` &mdash; (`Base64 Encoded String`) Binary attributes
  *                 are sequences of unsigned bytes.
  *               * `SS` &mdash; (`Array<String>`) A set of strings.
  *               * `NS` &mdash; (`Array<String>`) A set of numbers.
- *               * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of
+ *               * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *                 binary attributes.
  *             * `RangeKeyElement` &mdash; (`Object`) A range key element
  *               is treated as a secondary key (used in conjunction with
@@ -299,11 +296,11 @@ AWS.DynamoDB = inherit({})
  *                 exact-value decimals and integers. A number can have up
  *                 to 38 digits precision and can be between 10^-128 to
  *                 10^+126.
- *               * `B` &mdash; (`Base64 Encoded Data`) Binary attributes
+ *               * `B` &mdash; (`Base64 Encoded String`) Binary attributes
  *                 are sequences of unsigned bytes.
  *               * `SS` &mdash; (`Array<String>`) A set of strings.
  *               * `NS` &mdash; (`Array<String>`) A set of numbers.
- *               * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of
+ *               * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *                 binary attributes.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -359,26 +356,23 @@ AWS.DynamoDB = inherit({})
  *         * `TableName` &mdash; (`String`) The name of the table being
  *           described.
  *         * `KeySchema` &mdash; (`Object`)
- *           * `HashKeyElement` &mdash; **required** &mdash; (`Object`) A
- *             hash key element is treated as the primary key, and can be a
- *             string or a number. Single attribute primary keys have one
- *             index value. The value can be String, Number, StringSet,
- *             NumberSet.
- *             * `AttributeName` &mdash; **required** &mdash; (`String`)
- *               The AttributeName of the KeySchemaElement.
- *             * `AttributeType` &mdash; **required** &mdash; (`String`)
- *               The AttributeType of the KeySchemaElement which can be a
- *               String or a Number.
+ *           * `HashKeyElement` &mdash; (`Object`) A hash key element is
+ *             treated as the primary key, and can be a string or a number.
+ *             Single attribute primary keys have one index value. The
+ *             value can be String, Number, StringSet, NumberSet.
+ *             * `AttributeName` &mdash; (`String`) The AttributeName of
+ *               the KeySchemaElement.
+ *             * `AttributeType` &mdash; (`String`) The AttributeType of
+ *               the KeySchemaElement which can be a String or a Number.
  *           * `RangeKeyElement` &mdash; (`Object`) A range key element is
  *             treated as a secondary key (used in conjunction with the
  *             primary key), and can be a string or a number, and is only
  *             used for hash-and-range primary keys. The value can be
  *             String, Number, StringSet, NumberSet.
- *             * `AttributeName` &mdash; **required** &mdash; (`String`)
- *               The AttributeName of the KeySchemaElement.
- *             * `AttributeType` &mdash; **required** &mdash; (`String`)
- *               The AttributeType of the KeySchemaElement which can be a
- *               String or a Number.
+ *             * `AttributeName` &mdash; (`String`) The AttributeName of
+ *               the KeySchemaElement.
+ *             * `AttributeType` &mdash; (`String`) The AttributeType of
+ *               the KeySchemaElement which can be a String or a Number.
  *         * `TableStatus` &mdash; (`String`)
  *         * `CreationDateTime` &mdash; (`Date`)
  *         * `ProvisionedThroughput` &mdash; (`Object`)
@@ -411,12 +405,12 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to
  *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *           attributes.
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *           binary attributes.
  *       * `RangeKeyElement` &mdash; (`Object`) A range key element is
  *         treated as a secondary key (used in conjunction with the
  *         primary key), and can be a string or a number, and is only
@@ -429,12 +423,12 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to
  *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *           attributes.
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *           binary attributes.
  *     * `Expected` &mdash; (`Object<Object>`)
  *       * `Value` &mdash; (`Object`) Specify whether or not a value
  *         already exists and has a specific content for the attribute
@@ -446,12 +440,12 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to
  *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *           attributes.
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *           binary attributes.
  *       * `Exists` &mdash; (`Boolean`) Specify whether or not a value
  *         already exists for the attribute name-value pair.
  *     * `ReturnValues` &mdash; (`String`)
@@ -476,11 +470,11 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to 38
  *           digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of binary
  *           attributes.
  *       * `ConsumedCapacityUnits` &mdash; (`Float`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -506,26 +500,23 @@ AWS.DynamoDB = inherit({})
  *         * `TableName` &mdash; (`String`) The name of the table being
  *           described.
  *         * `KeySchema` &mdash; (`Object`)
- *           * `HashKeyElement` &mdash; **required** &mdash; (`Object`) A
- *             hash key element is treated as the primary key, and can be a
- *             string or a number. Single attribute primary keys have one
- *             index value. The value can be String, Number, StringSet,
- *             NumberSet.
- *             * `AttributeName` &mdash; **required** &mdash; (`String`)
- *               The AttributeName of the KeySchemaElement.
- *             * `AttributeType` &mdash; **required** &mdash; (`String`)
- *               The AttributeType of the KeySchemaElement which can be a
- *               String or a Number.
+ *           * `HashKeyElement` &mdash; (`Object`) A hash key element is
+ *             treated as the primary key, and can be a string or a number.
+ *             Single attribute primary keys have one index value. The
+ *             value can be String, Number, StringSet, NumberSet.
+ *             * `AttributeName` &mdash; (`String`) The AttributeName of
+ *               the KeySchemaElement.
+ *             * `AttributeType` &mdash; (`String`) The AttributeType of
+ *               the KeySchemaElement which can be a String or a Number.
  *           * `RangeKeyElement` &mdash; (`Object`) A range key element is
  *             treated as a secondary key (used in conjunction with the
  *             primary key), and can be a string or a number, and is only
  *             used for hash-and-range primary keys. The value can be
  *             String, Number, StringSet, NumberSet.
- *             * `AttributeName` &mdash; **required** &mdash; (`String`)
- *               The AttributeName of the KeySchemaElement.
- *             * `AttributeType` &mdash; **required** &mdash; (`String`)
- *               The AttributeType of the KeySchemaElement which can be a
- *               String or a Number.
+ *             * `AttributeName` &mdash; (`String`) The AttributeName of
+ *               the KeySchemaElement.
+ *             * `AttributeType` &mdash; (`String`) The AttributeType of
+ *               the KeySchemaElement which can be a String or a Number.
  *         * `TableStatus` &mdash; (`String`)
  *         * `CreationDateTime` &mdash; (`Date`)
  *         * `ProvisionedThroughput` &mdash; (`Object`)
@@ -558,26 +549,23 @@ AWS.DynamoDB = inherit({})
  *         * `TableName` &mdash; (`String`) The name of the table being
  *           described.
  *         * `KeySchema` &mdash; (`Object`)
- *           * `HashKeyElement` &mdash; **required** &mdash; (`Object`) A
- *             hash key element is treated as the primary key, and can be a
- *             string or a number. Single attribute primary keys have one
- *             index value. The value can be String, Number, StringSet,
- *             NumberSet.
- *             * `AttributeName` &mdash; **required** &mdash; (`String`)
- *               The AttributeName of the KeySchemaElement.
- *             * `AttributeType` &mdash; **required** &mdash; (`String`)
- *               The AttributeType of the KeySchemaElement which can be a
- *               String or a Number.
+ *           * `HashKeyElement` &mdash; (`Object`) A hash key element is
+ *             treated as the primary key, and can be a string or a number.
+ *             Single attribute primary keys have one index value. The
+ *             value can be String, Number, StringSet, NumberSet.
+ *             * `AttributeName` &mdash; (`String`) The AttributeName of
+ *               the KeySchemaElement.
+ *             * `AttributeType` &mdash; (`String`) The AttributeType of
+ *               the KeySchemaElement which can be a String or a Number.
  *           * `RangeKeyElement` &mdash; (`Object`) A range key element is
  *             treated as a secondary key (used in conjunction with the
  *             primary key), and can be a string or a number, and is only
  *             used for hash-and-range primary keys. The value can be
  *             String, Number, StringSet, NumberSet.
- *             * `AttributeName` &mdash; **required** &mdash; (`String`)
- *               The AttributeName of the KeySchemaElement.
- *             * `AttributeType` &mdash; **required** &mdash; (`String`)
- *               The AttributeType of the KeySchemaElement which can be a
- *               String or a Number.
+ *             * `AttributeName` &mdash; (`String`) The AttributeName of
+ *               the KeySchemaElement.
+ *             * `AttributeType` &mdash; (`String`) The AttributeType of
+ *               the KeySchemaElement which can be a String or a Number.
  *         * `TableStatus` &mdash; (`String`)
  *         * `CreationDateTime` &mdash; (`Date`)
  *         * `ProvisionedThroughput` &mdash; (`Object`)
@@ -609,12 +597,12 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to
  *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *           attributes.
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *           binary attributes.
  *       * `RangeKeyElement` &mdash; (`Object`) A range key element is
  *         treated as a secondary key (used in conjunction with the
  *         primary key), and can be a string or a number, and is only
@@ -627,12 +615,12 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to
  *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *           attributes.
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *           binary attributes.
  *     * `AttributesToGet` &mdash; (`Array<String>`)
  *     * `ConsistentRead` &mdash; (`Boolean`)
  *   @callback callback function(err, data)
@@ -654,11 +642,11 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to 38
  *           digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of binary
  *           attributes.
  *       * `ConsumedCapacityUnits` &mdash; (`Float`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -705,11 +693,11 @@ AWS.DynamoDB = inherit({})
  *       * `N` &mdash; (`String`) Numbers are positive or negative
  *         exact-value decimals and integers. A number can have up to 38
  *         digits precision and can be between 10^-128 to 10^+126.
- *       * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *       * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *         sequences of unsigned bytes.
  *       * `SS` &mdash; (`Array<String>`) A set of strings.
  *       * `NS` &mdash; (`Array<String>`) A set of numbers.
- *       * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
+ *       * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of binary
  *         attributes.
  *     * `Expected` &mdash; (`Object<Object>`)
  *       * `Value` &mdash; (`Object`) Specify whether or not a value
@@ -722,12 +710,12 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to
  *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *           attributes.
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *           binary attributes.
  *       * `Exists` &mdash; (`Boolean`) Specify whether or not a value
  *         already exists for the attribute name-value pair.
  *     * `ReturnValues` &mdash; (`String`)
@@ -751,11 +739,11 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to 38
  *           digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of binary
  *           attributes.
  *       * `ConsumedCapacityUnits` &mdash; (`Float`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -791,11 +779,11 @@ AWS.DynamoDB = inherit({})
  *       * `N` &mdash; (`String`) Numbers are positive or negative
  *         exact-value decimals and integers. A number can have up to 38
  *         digits precision and can be between 10^-128 to 10^+126.
- *       * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *       * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *         sequences of unsigned bytes.
  *       * `SS` &mdash; (`Array<String>`) A set of strings.
  *       * `NS` &mdash; (`Array<String>`) A set of numbers.
- *       * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
+ *       * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of binary
  *         attributes.
  *     * `RangeKeyCondition` &mdash; (`Object`) A container for the
  *       attribute values and comparison operators to use for the query.
@@ -807,12 +795,12 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to
  *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *           attributes.
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *           binary attributes.
  *       * `ComparisonOperator` &mdash; **required** &mdash; (`String`)
  *     * `ScanIndexForward` &mdash; (`Boolean`) Specifies forward or
  *       backward traversal of the index. Amazon DynamoDB returns results
@@ -837,12 +825,12 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to
  *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *           attributes.
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *           binary attributes.
  *       * `RangeKeyElement` &mdash; (`Object`) A range key element is
  *         treated as a secondary key (used in conjunction with the
  *         primary key), and can be a string or a number, and is only
@@ -855,12 +843,12 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to
  *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *           attributes.
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *           binary attributes.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -879,11 +867,10 @@ AWS.DynamoDB = inherit({})
  *         this value in the new request. The LastEvaluatedKey is null when
  *         the entire query result set is complete (i.e. the operation
  *         processed the "last page").
- *         * `HashKeyElement` &mdash; **required** &mdash; (`Object`) A
- *           hash key element is treated as the primary key, and can be a
- *           string or a number. Single attribute primary keys have one
- *           index value. The value can be String, Number, StringSet,
- *           NumberSet.
+ *         * `HashKeyElement` &mdash; (`Object`) A hash key element is
+ *           treated as the primary key, and can be a string or a number.
+ *           Single attribute primary keys have one index value. The value
+ *           can be String, Number, StringSet, NumberSet.
  *           * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *             encoding. The maximum size is limited by the size of the
  *             primary key (1024 bytes as a range part of a key or 2048
@@ -891,12 +878,12 @@ AWS.DynamoDB = inherit({})
  *           * `N` &mdash; (`String`) Numbers are positive or negative
  *             exact-value decimals and integers. A number can have up to
  *             38 digits precision and can be between 10^-128 to 10^+126.
- *           * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *           * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *             sequences of unsigned bytes.
  *           * `SS` &mdash; (`Array<String>`) A set of strings.
  *           * `NS` &mdash; (`Array<String>`) A set of numbers.
- *           * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *             attributes.
+ *           * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *             binary attributes.
  *         * `RangeKeyElement` &mdash; (`Object`) A range key element is
  *           treated as a secondary key (used in conjunction with the
  *           primary key), and can be a string or a number, and is only
@@ -909,12 +896,12 @@ AWS.DynamoDB = inherit({})
  *           * `N` &mdash; (`String`) Numbers are positive or negative
  *             exact-value decimals and integers. A number can have up to
  *             38 digits precision and can be between 10^-128 to 10^+126.
- *           * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *           * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *             sequences of unsigned bytes.
  *           * `SS` &mdash; (`Array<String>`) A set of strings.
  *           * `NS` &mdash; (`Array<String>`) A set of numbers.
- *           * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *             attributes.
+ *           * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *             binary attributes.
  *       * `ConsumedCapacityUnits` &mdash; (`Float`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -950,12 +937,12 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to
  *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *           attributes.
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *           binary attributes.
  *       * `ComparisonOperator` &mdash; **required** &mdash; (`String`)
  *     * `ExclusiveStartKey` &mdash; (`Object`) Primary key of the item
  *       from which to continue an earlier scan. An earlier scan might
@@ -975,12 +962,12 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to
  *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *           attributes.
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *           binary attributes.
  *       * `RangeKeyElement` &mdash; (`Object`) A range key element is
  *         treated as a secondary key (used in conjunction with the
  *         primary key), and can be a string or a number, and is only
@@ -993,12 +980,12 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to
  *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *           attributes.
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *           binary attributes.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1020,11 +1007,10 @@ AWS.DynamoDB = inherit({})
  *         subsequent scan operation to continue the operation from that
  *         point. The LastEvaluatedKey is null when the entire scan result
  *         set is complete (i.e. the operation processed the "last page").
- *         * `HashKeyElement` &mdash; **required** &mdash; (`Object`) A
- *           hash key element is treated as the primary key, and can be a
- *           string or a number. Single attribute primary keys have one
- *           index value. The value can be String, Number, StringSet,
- *           NumberSet.
+ *         * `HashKeyElement` &mdash; (`Object`) A hash key element is
+ *           treated as the primary key, and can be a string or a number.
+ *           Single attribute primary keys have one index value. The value
+ *           can be String, Number, StringSet, NumberSet.
  *           * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *             encoding. The maximum size is limited by the size of the
  *             primary key (1024 bytes as a range part of a key or 2048
@@ -1032,12 +1018,12 @@ AWS.DynamoDB = inherit({})
  *           * `N` &mdash; (`String`) Numbers are positive or negative
  *             exact-value decimals and integers. A number can have up to
  *             38 digits precision and can be between 10^-128 to 10^+126.
- *           * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *           * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *             sequences of unsigned bytes.
  *           * `SS` &mdash; (`Array<String>`) A set of strings.
  *           * `NS` &mdash; (`Array<String>`) A set of numbers.
- *           * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *             attributes.
+ *           * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *             binary attributes.
  *         * `RangeKeyElement` &mdash; (`Object`) A range key element is
  *           treated as a secondary key (used in conjunction with the
  *           primary key), and can be a string or a number, and is only
@@ -1050,12 +1036,12 @@ AWS.DynamoDB = inherit({})
  *           * `N` &mdash; (`String`) Numbers are positive or negative
  *             exact-value decimals and integers. A number can have up to
  *             38 digits precision and can be between 10^-128 to 10^+126.
- *           * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *           * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *             sequences of unsigned bytes.
  *           * `SS` &mdash; (`Array<String>`) A set of strings.
  *           * `NS` &mdash; (`Array<String>`) A set of numbers.
- *           * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *             attributes.
+ *           * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *             binary attributes.
  *       * `ConsumedCapacityUnits` &mdash; (`Float`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -1080,12 +1066,12 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to
  *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *           attributes.
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *           binary attributes.
  *       * `RangeKeyElement` &mdash; (`Object`) A range key element is
  *         treated as a secondary key (used in conjunction with the
  *         primary key), and can be a string or a number, and is only
@@ -1098,12 +1084,12 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to
  *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *           attributes.
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *           binary attributes.
  *     * `AttributeUpdates` &mdash; **required** &mdash;
  *       (`Object<Object>`)
  *       * `Value` &mdash; (`Object`)
@@ -1114,12 +1100,12 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to
  *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *           attributes.
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *           binary attributes.
  *       * `Action` &mdash; (`String`)
  *     * `Expected` &mdash; (`Object<Object>`)
  *       * `Value` &mdash; (`Object`) Specify whether or not a value
@@ -1132,12 +1118,12 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to
  *           38 digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
- *           attributes.
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *           binary attributes.
  *       * `Exists` &mdash; (`Boolean`) Specify whether or not a value
  *         already exists for the attribute name-value pair.
  *     * `ReturnValues` &mdash; (`String`)
@@ -1161,11 +1147,11 @@ AWS.DynamoDB = inherit({})
  *         * `N` &mdash; (`String`) Numbers are positive or negative
  *           exact-value decimals and integers. A number can have up to 38
  *           digits precision and can be between 10^-128 to 10^+126.
- *         * `B` &mdash; (`Base64 Encoded Data`) Binary attributes are
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
  *           sequences of unsigned bytes.
  *         * `SS` &mdash; (`Array<String>`) A set of strings.
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
- *         * `BS` &mdash; (`Array<Base64 Encoded Data>`) A set of binary
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of binary
  *           attributes.
  *       * `ConsumedCapacityUnits` &mdash; (`Float`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -1201,26 +1187,23 @@ AWS.DynamoDB = inherit({})
  *         * `TableName` &mdash; (`String`) The name of the table being
  *           described.
  *         * `KeySchema` &mdash; (`Object`)
- *           * `HashKeyElement` &mdash; **required** &mdash; (`Object`) A
- *             hash key element is treated as the primary key, and can be a
- *             string or a number. Single attribute primary keys have one
- *             index value. The value can be String, Number, StringSet,
- *             NumberSet.
- *             * `AttributeName` &mdash; **required** &mdash; (`String`)
- *               The AttributeName of the KeySchemaElement.
- *             * `AttributeType` &mdash; **required** &mdash; (`String`)
- *               The AttributeType of the KeySchemaElement which can be a
- *               String or a Number.
+ *           * `HashKeyElement` &mdash; (`Object`) A hash key element is
+ *             treated as the primary key, and can be a string or a number.
+ *             Single attribute primary keys have one index value. The
+ *             value can be String, Number, StringSet, NumberSet.
+ *             * `AttributeName` &mdash; (`String`) The AttributeName of
+ *               the KeySchemaElement.
+ *             * `AttributeType` &mdash; (`String`) The AttributeType of
+ *               the KeySchemaElement which can be a String or a Number.
  *           * `RangeKeyElement` &mdash; (`Object`) A range key element is
  *             treated as a secondary key (used in conjunction with the
  *             primary key), and can be a string or a number, and is only
  *             used for hash-and-range primary keys. The value can be
  *             String, Number, StringSet, NumberSet.
- *             * `AttributeName` &mdash; **required** &mdash; (`String`)
- *               The AttributeName of the KeySchemaElement.
- *             * `AttributeType` &mdash; **required** &mdash; (`String`)
- *               The AttributeType of the KeySchemaElement which can be a
- *               String or a Number.
+ *             * `AttributeName` &mdash; (`String`) The AttributeName of
+ *               the KeySchemaElement.
+ *             * `AttributeType` &mdash; (`String`) The AttributeType of
+ *               the KeySchemaElement which can be a String or a Number.
  *         * `TableStatus` &mdash; (`String`)
  *         * `CreationDateTime` &mdash; (`Date`)
  *         * `ProvisionedThroughput` &mdash; (`Object`)

@@ -179,12 +179,11 @@ AWS.CloudFormation = inherit({})
  *
  *       * `StackEvents` &mdash; (`Array<Object>`) A list of StackEvents
  *         structures.
- *         * `StackId` &mdash; **required** &mdash; (`String`) The unique
- *           ID name of the instance of the stack.
- *         * `EventId` &mdash; **required** &mdash; (`String`) The unique
- *           ID of this event.
- *         * `StackName` &mdash; **required** &mdash; (`String`) The name
- *           associated with a stack.
+ *         * `StackId` &mdash; (`String`) The unique ID name of the
+ *           instance of the stack.
+ *         * `EventId` &mdash; (`String`) The unique ID of this event.
+ *         * `StackName` &mdash; (`String`) The name associated with a
+ *           stack.
  *         * `LogicalResourceId` &mdash; (`String`) The logical name of the
  *           resource specified in the template.
  *         * `PhysicalResourceId` &mdash; (`String`) The name or unique
@@ -192,8 +191,7 @@ AWS.CloudFormation = inherit({})
  *           resource.
  *         * `ResourceType` &mdash; (`String`) Type of the resource. (For
  *           more information, go to the AWS CloudFormation User Guide.)
- *         * `Timestamp` &mdash; **required** &mdash; (`Date`) Time the
- *           status was updated.
+ *         * `Timestamp` &mdash; (`Date`) Time the status was updated.
  *         * `ResourceStatus` &mdash; (`String`) Current status of the
  *           resource.
  *         * `ResourceStatusReason` &mdash; (`String`) Success/failure
@@ -230,18 +228,17 @@ AWS.CloudFormation = inherit({})
  *         * `StackName` &mdash; (`String`) The name associated with the
  *           stack.
  *         * `StackId` &mdash; (`String`) Unique identifier of the stack.
- *         * `LogicalResourceId` &mdash; **required** &mdash; (`String`)
- *           The logical name of the resource specified in the template.
+ *         * `LogicalResourceId` &mdash; (`String`) The logical name of the
+ *           resource specified in the template.
  *         * `PhysicalResourceId` &mdash; (`String`) The name or unique
  *           identifier that corresponds to a physical instance ID of a
  *           resource supported by AWS CloudFormation.
- *         * `ResourceType` &mdash; **required** &mdash; (`String`) Type of
- *           the resource. (For more information, go to the AWS
- *           CloudFormation User Guide.)
- *         * `LastUpdatedTimestamp` &mdash; **required** &mdash; (`Date`)
- *           Time the status was updated.
- *         * `ResourceStatus` &mdash; **required** &mdash; (`String`)
- *           Current status of the resource.
+ *         * `ResourceType` &mdash; (`String`) Type of the resource. (For
+ *           more information, go to the AWS CloudFormation User Guide.)
+ *         * `LastUpdatedTimestamp` &mdash; (`Date`) Time the status was
+ *           updated.
+ *         * `ResourceStatus` &mdash; (`String`) Current status of the
+ *           resource.
  *         * `ResourceStatusReason` &mdash; (`String`) Success/failure
  *           message associated with the resource.
  *         * `Description` &mdash; (`String`) User defined description
@@ -287,18 +284,16 @@ AWS.CloudFormation = inherit({})
  *         * `StackName` &mdash; (`String`) The name associated with the
  *           stack.
  *         * `StackId` &mdash; (`String`) Unique identifier of the stack.
- *         * `LogicalResourceId` &mdash; **required** &mdash; (`String`)
- *           The logical name of the resource specified in the template.
+ *         * `LogicalResourceId` &mdash; (`String`) The logical name of the
+ *           resource specified in the template.
  *         * `PhysicalResourceId` &mdash; (`String`) The name or unique
  *           identifier that corresponds to a physical instance ID of a
  *           resource supported by AWS CloudFormation.
- *         * `ResourceType` &mdash; **required** &mdash; (`String`) Type of
- *           the resource. (For more information, go to the AWS
- *           CloudFormation User Guide.)
- *         * `Timestamp` &mdash; **required** &mdash; (`Date`) Time the
- *           status was updated.
- *         * `ResourceStatus` &mdash; **required** &mdash; (`String`)
- *           Current status of the resource.
+ *         * `ResourceType` &mdash; (`String`) Type of the resource. (For
+ *           more information, go to the AWS CloudFormation User Guide.)
+ *         * `Timestamp` &mdash; (`Date`) Time the status was updated.
+ *         * `ResourceStatus` &mdash; (`String`) Current status of the
+ *           resource.
  *         * `ResourceStatusReason` &mdash; (`String`) Success/failure
  *           message associated with the resource.
  *         * `Description` &mdash; (`String`) User defined description
@@ -324,8 +319,8 @@ AWS.CloudFormation = inherit({})
  *
  *       * `Stacks` &mdash; (`Array<Object>`) A list of stack structures.
  *         * `StackId` &mdash; (`String`) Unique identifier of the stack.
- *         * `StackName` &mdash; **required** &mdash; (`String`) The name
- *           associated with the stack.
+ *         * `StackName` &mdash; (`String`) The name associated with the
+ *           stack.
  *         * `Description` &mdash; (`String`) User defined description
  *           associated with the stack.
  *         * `Parameters` &mdash; (`Array<Object>`) A list of Parameter
@@ -334,13 +329,12 @@ AWS.CloudFormation = inherit({})
  *             the parameter.
  *           * `ParameterValue` &mdash; (`String`) The value associated
  *             with the parameter.
- *         * `CreationTime` &mdash; **required** &mdash; (`Date`) Time at
- *           which the stack was created.
+ *         * `CreationTime` &mdash; (`Date`) Time at which the stack was
+ *           created.
  *         * `LastUpdatedTime` &mdash; (`Date`) The time the stack was last
  *           updated. This field will only be returned if the stack has
  *           been updated at least once.
- *         * `StackStatus` &mdash; **required** &mdash; (`String`) Current
- *           status of the stack.
+ *         * `StackStatus` &mdash; (`String`) Current status of the stack.
  *         * `StackStatusReason` &mdash; (`String`) Success/failure message
  *           associated with the stack status.
  *         * `DisableRollback` &mdash; (`Boolean`) Boolean to enable or
@@ -451,18 +445,17 @@ AWS.CloudFormation = inherit({})
  *
  *       * `StackResourceSummaries` &mdash; (`Array<Object>`) A list of
  *         StackResourceSummary structures.
- *         * `LogicalResourceId` &mdash; **required** &mdash; (`String`)
- *           The logical name of the resource specified in the template.
+ *         * `LogicalResourceId` &mdash; (`String`) The logical name of the
+ *           resource specified in the template.
  *         * `PhysicalResourceId` &mdash; (`String`) The name or unique
  *           identifier that corresponds to a physical instance ID of the
  *           resource.
- *         * `ResourceType` &mdash; **required** &mdash; (`String`) Type of
- *           the resource. (For more information, go to the AWS
- *           CloudFormation User Guide.)
- *         * `LastUpdatedTimestamp` &mdash; **required** &mdash; (`Date`)
- *           Time the status was updated.
- *         * `ResourceStatus` &mdash; **required** &mdash; (`String`)
- *           Current status of the resource.
+ *         * `ResourceType` &mdash; (`String`) Type of the resource. (For
+ *           more information, go to the AWS CloudFormation User Guide.)
+ *         * `LastUpdatedTimestamp` &mdash; (`Date`) Time the status was
+ *           updated.
+ *         * `ResourceStatus` &mdash; (`String`) Current status of the
+ *           resource.
  *         * `ResourceStatusReason` &mdash; (`String`) Success/failure
  *           message associated with the resource.
  *       * `NextToken` &mdash; (`String`) String that identifies the start
@@ -495,19 +488,19 @@ AWS.CloudFormation = inherit({})
  *         StackSummary structures containing information about the
  *         specified stacks.
  *         * `StackId` &mdash; (`String`) Unique stack identifier.
- *         * `StackName` &mdash; **required** &mdash; (`String`) The name
- *           associated with the stack.
+ *         * `StackName` &mdash; (`String`) The name associated with the
+ *           stack.
  *         * `TemplateDescription` &mdash; (`String`) The template
  *           description of the template used to create the stack.
- *         * `CreationTime` &mdash; **required** &mdash; (`Date`) The time
- *           the stack was created.
+ *         * `CreationTime` &mdash; (`Date`) The time the stack was
+ *           created.
  *         * `LastUpdatedTime` &mdash; (`Date`) The time the stack was last
  *           updated. This field will only be returned if the stack has
  *           been updated at least once.
  *         * `DeletionTime` &mdash; (`Date`) The time the stack was
  *           deleted.
- *         * `StackStatus` &mdash; **required** &mdash; (`String`) The
- *           current status of the stack.
+ *         * `StackStatus` &mdash; (`String`) The current status of the
+ *           stack.
  *         * `StackStatusReason` &mdash; (`String`) Success/Failure message
  *           associated with the stack status.
  *       * `NextToken` &mdash; (`String`) String that identifies the start

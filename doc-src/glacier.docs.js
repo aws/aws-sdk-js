@@ -322,7 +322,7 @@ AWS.Glacier = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `body` &mdash; (`String`) The job data, either archive data or
+ *       * `body` &mdash; (`Buffer`) The job data, either archive data or
  *         inventory data.
  *       * `checksum` &mdash; (`String`) The checksum of the data in the
  *         response. This header is returned only when retrieving the
@@ -380,13 +380,11 @@ AWS.Glacier = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `vaultNotificationConfig` &mdash; (`Object`) Returns the
- *         notification configuration set on the vault.
- *         * `SNSTopic` &mdash; (`String`) The Amazon Simple Notification
- *           Service (Amazon SNS) topic Amazon Resource Name (ARN).
- *         * `Events` &mdash; (`Array<String>`) A list of one or more
- *           events for which Amazon Glacier will send a notification to
- *           the specified Amazon SNS topic.
+ *       * `SNSTopic` &mdash; (`String`) The Amazon Simple Notification
+ *         Service (Amazon SNS) topic Amazon Resource Name (ARN).
+ *       * `Events` &mdash; (`Array<String>`) A list of one or more events
+ *         for which Amazon Glacier will send a notification to the
+ *         specified Amazon SNS topic.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -749,7 +747,7 @@ AWS.Glacier = inherit({})
  *       of the archive you are uploading.
  *     * `checksum` &mdash; (`String`) The SHA256 checksum (a linear
  *       hash) of the payload.
- *     * `body` &mdash; (`String`) The data to upload.
+ *     * `body` &mdash; (`Buffer`) The data to upload.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -787,7 +785,7 @@ AWS.Glacier = inherit({})
  *       Glacier uses this information to assemble the archive in the
  *       proper sequence. The format of this header follows RFC 2616. An
  *       example header is Content-Range:bytes 0-4194303/*.
- *     * `body` &mdash; (`String`) The data to upload.
+ *     * `body` &mdash; (`Buffer`) The data to upload.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}

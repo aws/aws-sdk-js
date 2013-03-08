@@ -170,14 +170,13 @@ AWS.S3 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `CopyObjectResult` &mdash; (`Object`)
- *         * `ETag` &mdash; (`String`)
- *         * `LastModified` &mdash; (`String`)
  *       * `Expiration` &mdash; (`String`) If the object expiration is
  *         configured, the response includes this header.
  *       * `CopySourceVersionId` &mdash; (`String`)
  *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
+ *       * `ETag` &mdash; (`String`)
+ *       * `LastModified` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectCOPY.html
@@ -857,7 +856,7 @@ AWS.S3 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Body` &mdash; (`String`) Object data.
+ *       * `Body` &mdash; (`Buffer`) Object data.
  *       * `DeleteMarker` &mdash; (`String`) Specifies whether the object
  *         retrieved was (true) or was not (false) a Delete Marker. If
  *         false, this response header does not appear in the response.
@@ -960,7 +959,7 @@ AWS.S3 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Body` &mdash; (`String`)
+ *       * `Body` &mdash; (`Buffer`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETtorrent.html
@@ -1720,7 +1719,7 @@ AWS.S3 = inherit({})
  *   Calls the PutObject API operation.
  *   @param params [Object]
  *     * `ACL` &mdash; (`String`) The canned ACL to apply to the object.
- *     * `Body` &mdash; (`String`)
+ *     * `Body` &mdash; (`Buffer`)
  *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *     * `CacheControl` &mdash; (`String`) Specifies caching behavior
  *       along the request/reply chain.
@@ -1849,7 +1848,7 @@ AWS.S3 = inherit({})
  * @!method uploadPart(params, callback)
  *   Calls the UploadPart API operation.
  *   @param params [Object]
- *     * `Body` &mdash; (`String`)
+ *     * `Body` &mdash; (`Buffer`)
  *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *     * `Key` &mdash; **required** &mdash; (`String`)
  *     * `PartNumber` &mdash; **required** &mdash; (`String`) Part number
@@ -1913,12 +1912,11 @@ AWS.S3 = inherit({})
  *       * `CopySourceVersionId` &mdash; (`String`) The version of the
  *         source object that was copied, if you have enabled versioning on
  *         the source bucket.
- *       * `CopyPartResult` &mdash; (`Object`)
- *         * `ETag` &mdash; (`String`) Entity tag of the object.
- *         * `LastModified` &mdash; (`Date`) Date and time at which the
- *           object was uploaded.
  *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
+ *       * `ETag` &mdash; (`String`) Entity tag of the object.
+ *       * `LastModified` &mdash; (`Date`) Date and time at which the
+ *         object was uploaded.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadUploadPartCopy.html

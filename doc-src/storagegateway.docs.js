@@ -931,7 +931,7 @@ AWS.StorageGateway = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `GatewayARN` &mdash; **required** &mdash; (`String`)
+ *       * `GatewayARN` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *

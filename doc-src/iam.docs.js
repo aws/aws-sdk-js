@@ -119,17 +119,15 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `AccessKey` &mdash; **required** &mdash; (`Object`) Information
- *         about the access key.
- *         * `UserName` &mdash; **required** &mdash; (`String`) Name of the
- *           user the key is associated with.
- *         * `AccessKeyId` &mdash; **required** &mdash; (`String`) The ID
- *           for this access key.
- *         * `Status` &mdash; **required** &mdash; (`String`) The status of
- *           the access key. Active means the key is valid for API calls,
- *           while Inactive means it is not.
- *         * `SecretAccessKey` &mdash; **required** &mdash; (`String`) The
- *           secret key used to sign requests.
+ *       * `AccessKey` &mdash; (`Object`) Information about the access key.
+ *         * `UserName` &mdash; (`String`) Name of the user the key is
+ *           associated with.
+ *         * `AccessKeyId` &mdash; (`String`) The ID for this access key.
+ *         * `Status` &mdash; (`String`) The status of the access key.
+ *           Active means the key is valid for API calls, while Inactive
+ *           means it is not.
+ *         * `SecretAccessKey` &mdash; (`String`) The secret key used to
+ *           sign requests.
  *         * `CreateDate` &mdash; (`Date`) The date when the access key was
  *           created.
  *   @return [AWS.Request] a handle to the operation request for
@@ -170,23 +168,22 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Group` &mdash; **required** &mdash; (`Object`) Information
- *         about the group.
- *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *           group. For more information about paths, see Identifiers for
- *           IAM Entities in Using AWS Identity and Access Management.
- *         * `GroupName` &mdash; **required** &mdash; (`String`) The name
- *           that identifies the group.
- *         * `GroupId` &mdash; **required** &mdash; (`String`) The stable
- *           and unique string identifying the group. For more information
- *           about IDs, see Identifiers for IAM Entities in Using AWS
- *           Identity and Access Management.
- *         * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *           Resource Name (ARN) specifying the group. For more information
- *           about ARNs and how to use them in policies, see Identifiers
- *           for IAM Entities in Using AWS Identity and Access Management.
- *         * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *           when the group was created.
+ *       * `Group` &mdash; (`Object`) Information about the group.
+ *         * `Path` &mdash; (`String`) Path to the group. For more
+ *           information about paths, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `GroupName` &mdash; (`String`) The name that identifies the
+ *           group.
+ *         * `GroupId` &mdash; (`String`) The stable and unique string
+ *           identifying the group. For more information about IDs, see
+ *           Identifiers for IAM Entities in Using AWS Identity and Access
+ *           Management.
+ *         * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *           specifying the group. For more information about ARNs and how
+ *           to use them in policies, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `CreateDate` &mdash; (`Date`) The date when the group was
+ *           created.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -209,43 +206,39 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `InstanceProfile` &mdash; **required** &mdash; (`Object`)
- *         Information about the instance profile.
- *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *           instance profile. For more information about paths, see
- *           Identifiers for IAM Entities in Using AWS Identity and Access
- *           Management.
- *         * `InstanceProfileName` &mdash; **required** &mdash; (`String`)
- *           The name identifying the instance profile.
- *         * `InstanceProfileId` &mdash; **required** &mdash; (`String`)
- *           The stable and unique string identifying the instance profile.
- *           For more information about IDs, see Identifiers for IAM
+ *       * `InstanceProfile` &mdash; (`Object`) Information about the
+ *         instance profile.
+ *         * `Path` &mdash; (`String`) Path to the instance profile. For
+ *           more information about paths, see Identifiers for IAM Entities
+ *           in Using AWS Identity and Access Management.
+ *         * `InstanceProfileName` &mdash; (`String`) The name identifying
+ *           the instance profile.
+ *         * `InstanceProfileId` &mdash; (`String`) The stable and unique
+ *           string identifying the instance profile. For more information
+ *           about IDs, see Identifiers for IAM Entities in Using AWS
+ *           Identity and Access Management.
+ *         * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *           specifying the instance profile. For more information about
+ *           ARNs and how to use them in policies, see Identifiers for IAM
  *           Entities in Using AWS Identity and Access Management.
- *         * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *           Resource Name (ARN) specifying the instance profile. For more
- *           information about ARNs and how to use them in policies, see
- *           Identifiers for IAM Entities in Using AWS Identity and Access
- *           Management.
- *         * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *           when the instance profile was created.
- *         * `Roles` &mdash; **required** &mdash; (`Array<Object>`) The
- *           role associated with the instance profile.
- *           * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *             role. For more information about paths, see Identifiers for
- *             IAM Entities in Using AWS Identity and Access Management.
- *           * `RoleName` &mdash; **required** &mdash; (`String`) The name
- *             identifying the role.
- *           * `RoleId` &mdash; **required** &mdash; (`String`) The stable
- *             and unique string identifying the role. For more information
- *             about IDs, see Identifiers for IAM Entities in Using AWS
- *             Identity and Access Management.
- *           * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *             Resource Name (ARN) specifying the role. For more
- *             information about ARNs and how to use them in policies, see
+ *         * `CreateDate` &mdash; (`Date`) The date when the instance
+ *           profile was created.
+ *         * `Roles` &mdash; (`Array<Object>`) The role associated with the
+ *           instance profile.
+ *           * `Path` &mdash; (`String`) Path to the role. For more
+ *             information about paths, see Identifiers for IAM Entities in
+ *             Using AWS Identity and Access Management.
+ *           * `RoleName` &mdash; (`String`) The name identifying the role.
+ *           * `RoleId` &mdash; (`String`) The stable and unique string
+ *             identifying the role. For more information about IDs, see
  *             Identifiers for IAM Entities in Using AWS Identity and
  *             Access Management.
- *           * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *             when the role was created.
+ *           * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *             specifying the role. For more information about ARNs and how
+ *             to use them in policies, see Identifiers for IAM Entities in
+ *             Using AWS Identity and Access Management.
+ *           * `CreateDate` &mdash; (`Date`) The date when the role was
+ *             created.
  *           * `AssumeRolePolicyDocument` &mdash; (`String`) The policy
  *             that grants an entity permission to assume the role. The
  *             returned policy is URL-encoded according to RFC 3986. For
@@ -271,13 +264,12 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `LoginProfile` &mdash; **required** &mdash; (`Object`) The user
- *         name and password create date.
- *         * `UserName` &mdash; **required** &mdash; (`String`) The name of
- *           the user, which can be used for signing into the AWS
- *           Management Console.
- *         * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *           when the password for the user was created.
+ *       * `LoginProfile` &mdash; (`Object`) The user name and password
+ *         create date.
+ *         * `UserName` &mdash; (`String`) The name of the user, which can
+ *           be used for signing into the AWS Management Console.
+ *         * `CreateDate` &mdash; (`Date`) The date when the password for
+ *           the user was created.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -303,23 +295,21 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Role` &mdash; **required** &mdash; (`Object`) Information about
- *         the role.
- *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *           role. For more information about paths, see Identifiers for
- *           IAM Entities in Using AWS Identity and Access Management.
- *         * `RoleName` &mdash; **required** &mdash; (`String`) The name
- *           identifying the role.
- *         * `RoleId` &mdash; **required** &mdash; (`String`) The stable
- *           and unique string identifying the role. For more information
- *           about IDs, see Identifiers for IAM Entities in Using AWS
- *           Identity and Access Management.
- *         * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *           Resource Name (ARN) specifying the role. For more information
- *           about ARNs and how to use them in policies, see Identifiers
- *           for IAM Entities in Using AWS Identity and Access Management.
- *         * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *           when the role was created.
+ *       * `Role` &mdash; (`Object`) Information about the role.
+ *         * `Path` &mdash; (`String`) Path to the role. For more
+ *           information about paths, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `RoleName` &mdash; (`String`) The name identifying the role.
+ *         * `RoleId` &mdash; (`String`) The stable and unique string
+ *           identifying the role. For more information about IDs, see
+ *           Identifiers for IAM Entities in Using AWS Identity and Access
+ *           Management.
+ *         * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *           specifying the role. For more information about ARNs and how
+ *           to use them in policies, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `CreateDate` &mdash; (`Date`) The date when the role was
+ *           created.
  *         * `AssumeRolePolicyDocument` &mdash; (`String`) The policy that
  *           grants an entity permission to assume the role. The returned
  *           policy is URL-encoded according to RFC 3986. For more
@@ -348,21 +338,20 @@ AWS.IAM = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `User` &mdash; (`Object`) Information about the user.
- *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *           user. For more information about paths, see Identifiers for
- *           IAM Entities in Using AWS Identity and Access Management.
- *         * `UserName` &mdash; **required** &mdash; (`String`) The name
- *           identifying the user.
- *         * `UserId` &mdash; **required** &mdash; (`String`) The stable
- *           and unique string identifying the user. For more information
- *           about IDs, see Identifiers for IAM Entities in Using AWS
- *           Identity and Access Management.
- *         * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *           Resource Name (ARN) specifying the user. For more information
- *           about ARNs and how to use them in policies, see Identifiers
- *           for IAM Entities in Using AWS Identity and Access Management.
- *         * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *           when the user was created.
+ *         * `Path` &mdash; (`String`) Path to the user. For more
+ *           information about paths, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `UserName` &mdash; (`String`) The name identifying the user.
+ *         * `UserId` &mdash; (`String`) The stable and unique string
+ *           identifying the user. For more information about IDs, see
+ *           Identifiers for IAM Entities in Using AWS Identity and Access
+ *           Management.
+ *         * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *           specifying the user. For more information about ARNs and how
+ *           to use them in policies, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `CreateDate` &mdash; (`Date`) The date when the user was
+ *           created.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -387,14 +376,14 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `VirtualMFADevice` &mdash; **required** &mdash; (`Object`) A
- *         newly created virtual MFA device.
- *         * `SerialNumber` &mdash; **required** &mdash; (`String`) The
- *           serial number associated with VirtualMFADevice.
- *         * `Base32StringSeed` &mdash; (`Base64 Encoded Data`) The Base32
- *           seed defined as specified in RFC3548. The Base32StringSeed is
- *           Base64-encoded.
- *         * `QRCodePNG` &mdash; (`Base64 Encoded Data`) A QR code PNG
+ *       * `VirtualMFADevice` &mdash; (`Object`) A newly created virtual
+ *         MFA device.
+ *         * `SerialNumber` &mdash; (`String`) The serial number associated
+ *           with VirtualMFADevice.
+ *         * `Base32StringSeed` &mdash; (`Base64 Encoded String`) The
+ *           Base32 seed defined as specified in RFC3548. The
+ *           Base32StringSeed is Base64-encoded.
+ *         * `QRCodePNG` &mdash; (`Base64 Encoded String`) A QR code PNG
  *           image that encodes
  *           otpauth://totp/$virtualMFADeviceName@$AccountName?
  *           secret=$Base32String where $virtualMFADeviceName is one of the
@@ -402,22 +391,20 @@ AWS.IAM = inherit({})
  *           (accountId otherwise), and Base32String is the seed in Base32
  *           format. The Base32String is Base64-encoded.
  *         * `User` &mdash; (`Object`)
- *           * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *             user. For more information about paths, see Identifiers for
- *             IAM Entities in Using AWS Identity and Access Management.
- *           * `UserName` &mdash; **required** &mdash; (`String`) The name
- *             identifying the user.
- *           * `UserId` &mdash; **required** &mdash; (`String`) The stable
- *             and unique string identifying the user. For more information
- *             about IDs, see Identifiers for IAM Entities in Using AWS
- *             Identity and Access Management.
- *           * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *             Resource Name (ARN) specifying the user. For more
- *             information about ARNs and how to use them in policies, see
+ *           * `Path` &mdash; (`String`) Path to the user. For more
+ *             information about paths, see Identifiers for IAM Entities in
+ *             Using AWS Identity and Access Management.
+ *           * `UserName` &mdash; (`String`) The name identifying the user.
+ *           * `UserId` &mdash; (`String`) The stable and unique string
+ *             identifying the user. For more information about IDs, see
  *             Identifiers for IAM Entities in Using AWS Identity and
  *             Access Management.
- *           * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *             when the user was created.
+ *           * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *             specifying the user. For more information about ARNs and how
+ *             to use them in policies, see Identifiers for IAM Entities in
+ *             Using AWS Identity and Access Management.
+ *           * `CreateDate` &mdash; (`Date`) The date when the user was
+ *             created.
  *         * `EnableDate` &mdash; (`Date`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -711,7 +698,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `PasswordPolicy` &mdash; **required** &mdash; (`Object`)
+ *       * `PasswordPolicy` &mdash; (`Object`)
  *         * `MinimumPasswordLength` &mdash; (`Integer`) Minimum length to
  *           require for IAM user passwords.
  *         * `RequireSymbols` &mdash; (`Boolean`) Specifies whether to
@@ -795,40 +782,37 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Group` &mdash; **required** &mdash; (`Object`) Information
- *         about the group.
- *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *           group. For more information about paths, see Identifiers for
- *           IAM Entities in Using AWS Identity and Access Management.
- *         * `GroupName` &mdash; **required** &mdash; (`String`) The name
- *           that identifies the group.
- *         * `GroupId` &mdash; **required** &mdash; (`String`) The stable
- *           and unique string identifying the group. For more information
- *           about IDs, see Identifiers for IAM Entities in Using AWS
- *           Identity and Access Management.
- *         * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *           Resource Name (ARN) specifying the group. For more information
- *           about ARNs and how to use them in policies, see Identifiers
- *           for IAM Entities in Using AWS Identity and Access Management.
- *         * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *           when the group was created.
- *       * `Users` &mdash; **required** &mdash; (`Array<Object>`) A list of
- *         users in the group.
- *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *           user. For more information about paths, see Identifiers for
- *           IAM Entities in Using AWS Identity and Access Management.
- *         * `UserName` &mdash; **required** &mdash; (`String`) The name
- *           identifying the user.
- *         * `UserId` &mdash; **required** &mdash; (`String`) The stable
- *           and unique string identifying the user. For more information
- *           about IDs, see Identifiers for IAM Entities in Using AWS
- *           Identity and Access Management.
- *         * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *           Resource Name (ARN) specifying the user. For more information
- *           about ARNs and how to use them in policies, see Identifiers
- *           for IAM Entities in Using AWS Identity and Access Management.
- *         * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *           when the user was created.
+ *       * `Group` &mdash; (`Object`) Information about the group.
+ *         * `Path` &mdash; (`String`) Path to the group. For more
+ *           information about paths, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `GroupName` &mdash; (`String`) The name that identifies the
+ *           group.
+ *         * `GroupId` &mdash; (`String`) The stable and unique string
+ *           identifying the group. For more information about IDs, see
+ *           Identifiers for IAM Entities in Using AWS Identity and Access
+ *           Management.
+ *         * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *           specifying the group. For more information about ARNs and how
+ *           to use them in policies, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `CreateDate` &mdash; (`Date`) The date when the group was
+ *           created.
+ *       * `Users` &mdash; (`Array<Object>`) A list of users in the group.
+ *         * `Path` &mdash; (`String`) Path to the user. For more
+ *           information about paths, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `UserName` &mdash; (`String`) The name identifying the user.
+ *         * `UserId` &mdash; (`String`) The stable and unique string
+ *           identifying the user. For more information about IDs, see
+ *           Identifiers for IAM Entities in Using AWS Identity and Access
+ *           Management.
+ *         * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *           specifying the user. For more information about ARNs and how
+ *           to use them in policies, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `CreateDate` &mdash; (`Date`) The date when the user was
+ *           created.
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
  *         there are more user names to list. If your results were
  *         truncated, you can make a subsequent pagination request using
@@ -857,12 +841,10 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `GroupName` &mdash; **required** &mdash; (`String`) The group
- *         the policy is associated with.
- *       * `PolicyName` &mdash; **required** &mdash; (`String`) The name of
- *         the policy.
- *       * `PolicyDocument` &mdash; **required** &mdash; (`String`) The
- *         policy document.
+ *       * `GroupName` &mdash; (`String`) The group the policy is
+ *         associated with.
+ *       * `PolicyName` &mdash; (`String`) The name of the policy.
+ *       * `PolicyDocument` &mdash; (`String`) The policy document.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -881,43 +863,39 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `InstanceProfile` &mdash; **required** &mdash; (`Object`)
- *         Information about the instance profile.
- *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *           instance profile. For more information about paths, see
- *           Identifiers for IAM Entities in Using AWS Identity and Access
- *           Management.
- *         * `InstanceProfileName` &mdash; **required** &mdash; (`String`)
- *           The name identifying the instance profile.
- *         * `InstanceProfileId` &mdash; **required** &mdash; (`String`)
- *           The stable and unique string identifying the instance profile.
- *           For more information about IDs, see Identifiers for IAM
+ *       * `InstanceProfile` &mdash; (`Object`) Information about the
+ *         instance profile.
+ *         * `Path` &mdash; (`String`) Path to the instance profile. For
+ *           more information about paths, see Identifiers for IAM Entities
+ *           in Using AWS Identity and Access Management.
+ *         * `InstanceProfileName` &mdash; (`String`) The name identifying
+ *           the instance profile.
+ *         * `InstanceProfileId` &mdash; (`String`) The stable and unique
+ *           string identifying the instance profile. For more information
+ *           about IDs, see Identifiers for IAM Entities in Using AWS
+ *           Identity and Access Management.
+ *         * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *           specifying the instance profile. For more information about
+ *           ARNs and how to use them in policies, see Identifiers for IAM
  *           Entities in Using AWS Identity and Access Management.
- *         * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *           Resource Name (ARN) specifying the instance profile. For more
- *           information about ARNs and how to use them in policies, see
- *           Identifiers for IAM Entities in Using AWS Identity and Access
- *           Management.
- *         * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *           when the instance profile was created.
- *         * `Roles` &mdash; **required** &mdash; (`Array<Object>`) The
- *           role associated with the instance profile.
- *           * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *             role. For more information about paths, see Identifiers for
- *             IAM Entities in Using AWS Identity and Access Management.
- *           * `RoleName` &mdash; **required** &mdash; (`String`) The name
- *             identifying the role.
- *           * `RoleId` &mdash; **required** &mdash; (`String`) The stable
- *             and unique string identifying the role. For more information
- *             about IDs, see Identifiers for IAM Entities in Using AWS
- *             Identity and Access Management.
- *           * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *             Resource Name (ARN) specifying the role. For more
- *             information about ARNs and how to use them in policies, see
+ *         * `CreateDate` &mdash; (`Date`) The date when the instance
+ *           profile was created.
+ *         * `Roles` &mdash; (`Array<Object>`) The role associated with the
+ *           instance profile.
+ *           * `Path` &mdash; (`String`) Path to the role. For more
+ *             information about paths, see Identifiers for IAM Entities in
+ *             Using AWS Identity and Access Management.
+ *           * `RoleName` &mdash; (`String`) The name identifying the role.
+ *           * `RoleId` &mdash; (`String`) The stable and unique string
+ *             identifying the role. For more information about IDs, see
  *             Identifiers for IAM Entities in Using AWS Identity and
  *             Access Management.
- *           * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *             when the role was created.
+ *           * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *             specifying the role. For more information about ARNs and how
+ *             to use them in policies, see Identifiers for IAM Entities in
+ *             Using AWS Identity and Access Management.
+ *           * `CreateDate` &mdash; (`Date`) The date when the role was
+ *             created.
  *           * `AssumeRolePolicyDocument` &mdash; (`String`) The policy
  *             that grants an entity permission to assume the role. The
  *             returned policy is URL-encoded according to RFC 3986. For
@@ -941,13 +919,12 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `LoginProfile` &mdash; **required** &mdash; (`Object`) User name
- *         and password create date for the user.
- *         * `UserName` &mdash; **required** &mdash; (`String`) The name of
- *           the user, which can be used for signing into the AWS
- *           Management Console.
- *         * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *           when the password for the user was created.
+ *       * `LoginProfile` &mdash; (`Object`) User name and password create
+ *         date for the user.
+ *         * `UserName` &mdash; (`String`) The name of the user, which can
+ *           be used for signing into the AWS Management Console.
+ *         * `CreateDate` &mdash; (`Date`) The date when the password for
+ *           the user was created.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -966,23 +943,21 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Role` &mdash; **required** &mdash; (`Object`) Information about
- *         the role.
- *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *           role. For more information about paths, see Identifiers for
- *           IAM Entities in Using AWS Identity and Access Management.
- *         * `RoleName` &mdash; **required** &mdash; (`String`) The name
- *           identifying the role.
- *         * `RoleId` &mdash; **required** &mdash; (`String`) The stable
- *           and unique string identifying the role. For more information
- *           about IDs, see Identifiers for IAM Entities in Using AWS
- *           Identity and Access Management.
- *         * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *           Resource Name (ARN) specifying the role. For more information
- *           about ARNs and how to use them in policies, see Identifiers
- *           for IAM Entities in Using AWS Identity and Access Management.
- *         * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *           when the role was created.
+ *       * `Role` &mdash; (`Object`) Information about the role.
+ *         * `Path` &mdash; (`String`) Path to the role. For more
+ *           information about paths, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `RoleName` &mdash; (`String`) The name identifying the role.
+ *         * `RoleId` &mdash; (`String`) The stable and unique string
+ *           identifying the role. For more information about IDs, see
+ *           Identifiers for IAM Entities in Using AWS Identity and Access
+ *           Management.
+ *         * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *           specifying the role. For more information about ARNs and how
+ *           to use them in policies, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `CreateDate` &mdash; (`Date`) The date when the role was
+ *           created.
  *         * `AssumeRolePolicyDocument` &mdash; (`String`) The policy that
  *           grants an entity permission to assume the role. The returned
  *           policy is URL-encoded according to RFC 3986. For more
@@ -1008,12 +983,10 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `RoleName` &mdash; **required** &mdash; (`String`) The role the
- *         policy is associated with.
- *       * `PolicyName` &mdash; **required** &mdash; (`String`) The name of
- *         the policy.
- *       * `PolicyDocument` &mdash; **required** &mdash; (`String`) The
- *         policy document.
+ *       * `RoleName` &mdash; (`String`) The role the policy is associated
+ *         with.
+ *       * `PolicyName` &mdash; (`String`) The name of the policy.
+ *       * `PolicyDocument` &mdash; (`String`) The policy document.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1033,31 +1006,29 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ServerCertificate` &mdash; **required** &mdash; (`Object`)
- *         Information about the server certificate.
- *         * `ServerCertificateMetadata` &mdash; **required** &mdash;
- *           (`Object`) The meta information of the server certificate,
- *           such as its name, path, ID, and ARN.
- *           * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *             server certificate. For more information about paths, see
- *             Identifiers for IAM Entities in Using AWS Identity and
- *             Access Management.
- *           * `ServerCertificateName` &mdash; **required** &mdash;
- *             (`String`) The name that identifies the server certificate.
- *           * `ServerCertificateId` &mdash; **required** &mdash;
- *             (`String`) The stable and unique string identifying the
- *             server certificate. For more information about IDs, see
- *             Identifiers for IAM Entities in Using AWS Identity and
- *             Access Management.
- *           * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *             Resource Name (ARN) specifying the server certificate. For
- *             more information about ARNs and how to use them in policies,
- *             see Identifiers for IAM Entities in Using AWS Identity and
- *             Access Management.
+ *       * `ServerCertificate` &mdash; (`Object`) Information about the
+ *         server certificate.
+ *         * `ServerCertificateMetadata` &mdash; (`Object`) The meta
+ *           information of the server certificate, such as its name, path,
+ *           ID, and ARN.
+ *           * `Path` &mdash; (`String`) Path to the server certificate.
+ *             For more information about paths, see Identifiers for IAM
+ *             Entities in Using AWS Identity and Access Management.
+ *           * `ServerCertificateName` &mdash; (`String`) The name that
+ *             identifies the server certificate.
+ *           * `ServerCertificateId` &mdash; (`String`) The stable and
+ *             unique string identifying the server certificate. For more
+ *             information about IDs, see Identifiers for IAM Entities in
+ *             Using AWS Identity and Access Management.
+ *           * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *             specifying the server certificate. For more information
+ *             about ARNs and how to use them in policies, see Identifiers
+ *             for IAM Entities in Using AWS Identity and Access
+ *             Management.
  *           * `UploadDate` &mdash; (`Date`) The date when the server
  *             certificate was uploaded.
- *         * `CertificateBody` &mdash; **required** &mdash; (`String`) The
- *           contents of the public key certificate.
+ *         * `CertificateBody` &mdash; (`String`) The contents of the
+ *           public key certificate.
  *         * `CertificateChain` &mdash; (`String`) The contents of the
  *           public key certificate chain.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1079,23 +1050,21 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `User` &mdash; **required** &mdash; (`Object`) Information about
- *         the user.
- *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *           user. For more information about paths, see Identifiers for
- *           IAM Entities in Using AWS Identity and Access Management.
- *         * `UserName` &mdash; **required** &mdash; (`String`) The name
- *           identifying the user.
- *         * `UserId` &mdash; **required** &mdash; (`String`) The stable
- *           and unique string identifying the user. For more information
- *           about IDs, see Identifiers for IAM Entities in Using AWS
- *           Identity and Access Management.
- *         * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *           Resource Name (ARN) specifying the user. For more information
- *           about ARNs and how to use them in policies, see Identifiers
- *           for IAM Entities in Using AWS Identity and Access Management.
- *         * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *           when the user was created.
+ *       * `User` &mdash; (`Object`) Information about the user.
+ *         * `Path` &mdash; (`String`) Path to the user. For more
+ *           information about paths, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `UserName` &mdash; (`String`) The name identifying the user.
+ *         * `UserId` &mdash; (`String`) The stable and unique string
+ *           identifying the user. For more information about IDs, see
+ *           Identifiers for IAM Entities in Using AWS Identity and Access
+ *           Management.
+ *         * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *           specifying the user. For more information about ARNs and how
+ *           to use them in policies, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `CreateDate` &mdash; (`Date`) The date when the user was
+ *           created.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1116,12 +1085,10 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `UserName` &mdash; **required** &mdash; (`String`) The user the
- *         policy is associated with.
- *       * `PolicyName` &mdash; **required** &mdash; (`String`) The name of
- *         the policy.
- *       * `PolicyDocument` &mdash; **required** &mdash; (`String`) The
- *         policy document.
+ *       * `UserName` &mdash; (`String`) The user the policy is associated
+ *         with.
+ *       * `PolicyName` &mdash; (`String`) The name of the policy.
+ *       * `PolicyDocument` &mdash; (`String`) The policy document.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1148,8 +1115,8 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `AccessKeyMetadata` &mdash; **required** &mdash;
- *         (`Array<Object>`) A list of access key metadata.
+ *       * `AccessKeyMetadata` &mdash; (`Array<Object>`) A list of access
+ *         key metadata.
  *         * `UserName` &mdash; (`String`) Name of the user the key is
  *           associated with.
  *         * `AccessKeyId` &mdash; (`String`) The ID for this access key.
@@ -1190,8 +1157,8 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `AccountAliases` &mdash; **required** &mdash; (`Array<String>`)
- *         A list of aliases associated with the account.
+ *       * `AccountAliases` &mdash; (`Array<String>`) A list of aliases
+ *         associated with the account.
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
  *         there are more account aliases to list. If your results were
  *         truncated, you can make a subsequent pagination request using
@@ -1227,8 +1194,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `PolicyNames` &mdash; **required** &mdash; (`Array<String>`) A
- *         list of policy names.
+ *       * `PolicyNames` &mdash; (`Array<String>`) A list of policy names.
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
  *         there are more policy names to list. If your results were
  *         truncated, you can make a subsequent pagination request using
@@ -1267,23 +1233,22 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Groups` &mdash; **required** &mdash; (`Array<Object>`) A list
- *         of groups.
- *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *           group. For more information about paths, see Identifiers for
- *           IAM Entities in Using AWS Identity and Access Management.
- *         * `GroupName` &mdash; **required** &mdash; (`String`) The name
- *           that identifies the group.
- *         * `GroupId` &mdash; **required** &mdash; (`String`) The stable
- *           and unique string identifying the group. For more information
- *           about IDs, see Identifiers for IAM Entities in Using AWS
- *           Identity and Access Management.
- *         * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *           Resource Name (ARN) specifying the group. For more information
- *           about ARNs and how to use them in policies, see Identifiers
- *           for IAM Entities in Using AWS Identity and Access Management.
- *         * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *           when the group was created.
+ *       * `Groups` &mdash; (`Array<Object>`) A list of groups.
+ *         * `Path` &mdash; (`String`) Path to the group. For more
+ *           information about paths, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `GroupName` &mdash; (`String`) The name that identifies the
+ *           group.
+ *         * `GroupId` &mdash; (`String`) The stable and unique string
+ *           identifying the group. For more information about IDs, see
+ *           Identifiers for IAM Entities in Using AWS Identity and Access
+ *           Management.
+ *         * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *           specifying the group. For more information about ARNs and how
+ *           to use them in policies, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `CreateDate` &mdash; (`Date`) The date when the group was
+ *           created.
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
  *         there are more groups to list. If your results were truncated,
  *         you can make a subsequent pagination request using the Marker
@@ -1317,23 +1282,22 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Groups` &mdash; **required** &mdash; (`Array<Object>`) A list
- *         of groups.
- *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *           group. For more information about paths, see Identifiers for
- *           IAM Entities in Using AWS Identity and Access Management.
- *         * `GroupName` &mdash; **required** &mdash; (`String`) The name
- *           that identifies the group.
- *         * `GroupId` &mdash; **required** &mdash; (`String`) The stable
- *           and unique string identifying the group. For more information
- *           about IDs, see Identifiers for IAM Entities in Using AWS
- *           Identity and Access Management.
- *         * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *           Resource Name (ARN) specifying the group. For more information
- *           about ARNs and how to use them in policies, see Identifiers
- *           for IAM Entities in Using AWS Identity and Access Management.
- *         * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *           when the group was created.
+ *       * `Groups` &mdash; (`Array<Object>`) A list of groups.
+ *         * `Path` &mdash; (`String`) Path to the group. For more
+ *           information about paths, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `GroupName` &mdash; (`String`) The name that identifies the
+ *           group.
+ *         * `GroupId` &mdash; (`String`) The stable and unique string
+ *           identifying the group. For more information about IDs, see
+ *           Identifiers for IAM Entities in Using AWS Identity and Access
+ *           Management.
+ *         * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *           specifying the group. For more information about ARNs and how
+ *           to use them in policies, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `CreateDate` &mdash; (`Date`) The date when the group was
+ *           created.
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
  *         there are more groups to list. If your results were truncated,
  *         you can make a subsequent pagination request using the Marker
@@ -1373,43 +1337,39 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `InstanceProfiles` &mdash; **required** &mdash;
- *         (`Array<Object>`) A list of instance profiles.
- *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *           instance profile. For more information about paths, see
- *           Identifiers for IAM Entities in Using AWS Identity and Access
- *           Management.
- *         * `InstanceProfileName` &mdash; **required** &mdash; (`String`)
- *           The name identifying the instance profile.
- *         * `InstanceProfileId` &mdash; **required** &mdash; (`String`)
- *           The stable and unique string identifying the instance profile.
- *           For more information about IDs, see Identifiers for IAM
+ *       * `InstanceProfiles` &mdash; (`Array<Object>`) A list of instance
+ *         profiles.
+ *         * `Path` &mdash; (`String`) Path to the instance profile. For
+ *           more information about paths, see Identifiers for IAM Entities
+ *           in Using AWS Identity and Access Management.
+ *         * `InstanceProfileName` &mdash; (`String`) The name identifying
+ *           the instance profile.
+ *         * `InstanceProfileId` &mdash; (`String`) The stable and unique
+ *           string identifying the instance profile. For more information
+ *           about IDs, see Identifiers for IAM Entities in Using AWS
+ *           Identity and Access Management.
+ *         * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *           specifying the instance profile. For more information about
+ *           ARNs and how to use them in policies, see Identifiers for IAM
  *           Entities in Using AWS Identity and Access Management.
- *         * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *           Resource Name (ARN) specifying the instance profile. For more
- *           information about ARNs and how to use them in policies, see
- *           Identifiers for IAM Entities in Using AWS Identity and Access
- *           Management.
- *         * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *           when the instance profile was created.
- *         * `Roles` &mdash; **required** &mdash; (`Array<Object>`) The
- *           role associated with the instance profile.
- *           * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *             role. For more information about paths, see Identifiers for
- *             IAM Entities in Using AWS Identity and Access Management.
- *           * `RoleName` &mdash; **required** &mdash; (`String`) The name
- *             identifying the role.
- *           * `RoleId` &mdash; **required** &mdash; (`String`) The stable
- *             and unique string identifying the role. For more information
- *             about IDs, see Identifiers for IAM Entities in Using AWS
- *             Identity and Access Management.
- *           * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *             Resource Name (ARN) specifying the role. For more
- *             information about ARNs and how to use them in policies, see
+ *         * `CreateDate` &mdash; (`Date`) The date when the instance
+ *           profile was created.
+ *         * `Roles` &mdash; (`Array<Object>`) The role associated with the
+ *           instance profile.
+ *           * `Path` &mdash; (`String`) Path to the role. For more
+ *             information about paths, see Identifiers for IAM Entities in
+ *             Using AWS Identity and Access Management.
+ *           * `RoleName` &mdash; (`String`) The name identifying the role.
+ *           * `RoleId` &mdash; (`String`) The stable and unique string
+ *             identifying the role. For more information about IDs, see
  *             Identifiers for IAM Entities in Using AWS Identity and
  *             Access Management.
- *           * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *             when the role was created.
+ *           * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *             specifying the role. For more information about ARNs and how
+ *             to use them in policies, see Identifiers for IAM Entities in
+ *             Using AWS Identity and Access Management.
+ *           * `CreateDate` &mdash; (`Date`) The date when the role was
+ *             created.
  *           * `AssumeRolePolicyDocument` &mdash; (`String`) The policy
  *             that grants an entity permission to assume the role. The
  *             returned policy is URL-encoded according to RFC 3986. For
@@ -1451,43 +1411,39 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `InstanceProfiles` &mdash; **required** &mdash;
- *         (`Array<Object>`) A list of instance profiles.
- *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *           instance profile. For more information about paths, see
- *           Identifiers for IAM Entities in Using AWS Identity and Access
- *           Management.
- *         * `InstanceProfileName` &mdash; **required** &mdash; (`String`)
- *           The name identifying the instance profile.
- *         * `InstanceProfileId` &mdash; **required** &mdash; (`String`)
- *           The stable and unique string identifying the instance profile.
- *           For more information about IDs, see Identifiers for IAM
+ *       * `InstanceProfiles` &mdash; (`Array<Object>`) A list of instance
+ *         profiles.
+ *         * `Path` &mdash; (`String`) Path to the instance profile. For
+ *           more information about paths, see Identifiers for IAM Entities
+ *           in Using AWS Identity and Access Management.
+ *         * `InstanceProfileName` &mdash; (`String`) The name identifying
+ *           the instance profile.
+ *         * `InstanceProfileId` &mdash; (`String`) The stable and unique
+ *           string identifying the instance profile. For more information
+ *           about IDs, see Identifiers for IAM Entities in Using AWS
+ *           Identity and Access Management.
+ *         * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *           specifying the instance profile. For more information about
+ *           ARNs and how to use them in policies, see Identifiers for IAM
  *           Entities in Using AWS Identity and Access Management.
- *         * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *           Resource Name (ARN) specifying the instance profile. For more
- *           information about ARNs and how to use them in policies, see
- *           Identifiers for IAM Entities in Using AWS Identity and Access
- *           Management.
- *         * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *           when the instance profile was created.
- *         * `Roles` &mdash; **required** &mdash; (`Array<Object>`) The
- *           role associated with the instance profile.
- *           * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *             role. For more information about paths, see Identifiers for
- *             IAM Entities in Using AWS Identity and Access Management.
- *           * `RoleName` &mdash; **required** &mdash; (`String`) The name
- *             identifying the role.
- *           * `RoleId` &mdash; **required** &mdash; (`String`) The stable
- *             and unique string identifying the role. For more information
- *             about IDs, see Identifiers for IAM Entities in Using AWS
- *             Identity and Access Management.
- *           * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *             Resource Name (ARN) specifying the role. For more
- *             information about ARNs and how to use them in policies, see
+ *         * `CreateDate` &mdash; (`Date`) The date when the instance
+ *           profile was created.
+ *         * `Roles` &mdash; (`Array<Object>`) The role associated with the
+ *           instance profile.
+ *           * `Path` &mdash; (`String`) Path to the role. For more
+ *             information about paths, see Identifiers for IAM Entities in
+ *             Using AWS Identity and Access Management.
+ *           * `RoleName` &mdash; (`String`) The name identifying the role.
+ *           * `RoleId` &mdash; (`String`) The stable and unique string
+ *             identifying the role. For more information about IDs, see
  *             Identifiers for IAM Entities in Using AWS Identity and
  *             Access Management.
- *           * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *             when the role was created.
+ *           * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *             specifying the role. For more information about ARNs and how
+ *             to use them in policies, see Identifiers for IAM Entities in
+ *             Using AWS Identity and Access Management.
+ *           * `CreateDate` &mdash; (`Date`) The date when the role was
+ *             created.
  *           * `AssumeRolePolicyDocument` &mdash; (`String`) The policy
  *             that grants an entity permission to assume the role. The
  *             returned policy is URL-encoded according to RFC 3986. For
@@ -1527,15 +1483,14 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `MFADevices` &mdash; **required** &mdash; (`Array<Object>`) A
- *         list of MFA devices.
- *         * `UserName` &mdash; **required** &mdash; (`String`) The user
- *           with whom the MFA device is associated.
- *         * `SerialNumber` &mdash; **required** &mdash; (`String`) The
- *           serial number that uniquely identifies the MFA device. For
- *           virtual MFA devices, the serial number is the device ARN.
- *         * `EnableDate` &mdash; **required** &mdash; (`Date`) The date
- *           when the MFA device was enabled for the user.
+ *       * `MFADevices` &mdash; (`Array<Object>`) A list of MFA devices.
+ *         * `UserName` &mdash; (`String`) The user with whom the MFA
+ *           device is associated.
+ *         * `SerialNumber` &mdash; (`String`) The serial number that
+ *           uniquely identifies the MFA device. For virtual MFA devices,
+ *           the serial number is the device ARN.
+ *         * `EnableDate` &mdash; (`Date`) The date when the MFA device was
+ *           enabled for the user.
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
  *         there are more MFA devices to list. If your results were
  *         truncated, you can make a subsequent pagination request using
@@ -1572,8 +1527,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `PolicyNames` &mdash; **required** &mdash; (`Array<String>`) A
- *         list of policy names.
+ *       * `PolicyNames` &mdash; (`Array<String>`) A list of policy names.
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
  *         there are more policy names to list. If your results were
  *         truncated, you can make a subsequent pagination request using
@@ -1614,23 +1568,21 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Roles` &mdash; **required** &mdash; (`Array<Object>`) A list of
- *         roles.
- *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *           role. For more information about paths, see Identifiers for
- *           IAM Entities in Using AWS Identity and Access Management.
- *         * `RoleName` &mdash; **required** &mdash; (`String`) The name
- *           identifying the role.
- *         * `RoleId` &mdash; **required** &mdash; (`String`) The stable
- *           and unique string identifying the role. For more information
- *           about IDs, see Identifiers for IAM Entities in Using AWS
- *           Identity and Access Management.
- *         * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *           Resource Name (ARN) specifying the role. For more information
- *           about ARNs and how to use them in policies, see Identifiers
- *           for IAM Entities in Using AWS Identity and Access Management.
- *         * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *           when the role was created.
+ *       * `Roles` &mdash; (`Array<Object>`) A list of roles.
+ *         * `Path` &mdash; (`String`) Path to the role. For more
+ *           information about paths, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `RoleName` &mdash; (`String`) The name identifying the role.
+ *         * `RoleId` &mdash; (`String`) The stable and unique string
+ *           identifying the role. For more information about IDs, see
+ *           Identifiers for IAM Entities in Using AWS Identity and Access
+ *           Management.
+ *         * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *           specifying the role. For more information about ARNs and how
+ *           to use them in policies, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `CreateDate` &mdash; (`Date`) The date when the role was
+ *           created.
  *         * `AssumeRolePolicyDocument` &mdash; (`String`) The policy that
  *           grants an entity permission to assume the role. The returned
  *           policy is URL-encoded according to RFC 3986. For more
@@ -1674,23 +1626,21 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ServerCertificateMetadataList` &mdash; **required** &mdash;
- *         (`Array<Object>`) A list of server certificates.
- *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *           server certificate. For more information about paths, see
- *           Identifiers for IAM Entities in Using AWS Identity and Access
- *           Management.
- *         * `ServerCertificateName` &mdash; **required** &mdash;
- *           (`String`) The name that identifies the server certificate.
- *         * `ServerCertificateId` &mdash; **required** &mdash; (`String`)
- *           The stable and unique string identifying the server
- *           certificate. For more information about IDs, see Identifiers
- *           for IAM Entities in Using AWS Identity and Access Management.
- *         * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *           Resource Name (ARN) specifying the server certificate. For
- *           more information about ARNs and how to use them in policies,
- *           see Identifiers for IAM Entities in Using AWS Identity and
- *           Access Management.
+ *       * `ServerCertificateMetadataList` &mdash; (`Array<Object>`) A list
+ *         of server certificates.
+ *         * `Path` &mdash; (`String`) Path to the server certificate. For
+ *           more information about paths, see Identifiers for IAM Entities
+ *           in Using AWS Identity and Access Management.
+ *         * `ServerCertificateName` &mdash; (`String`) The name that
+ *           identifies the server certificate.
+ *         * `ServerCertificateId` &mdash; (`String`) The stable and unique
+ *           string identifying the server certificate. For more
+ *           information about IDs, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *           specifying the server certificate. For more information about
+ *           ARNs and how to use them in policies, see Identifiers for IAM
+ *           Entities in Using AWS Identity and Access Management.
  *         * `UploadDate` &mdash; (`Date`) The date when the server
  *           certificate was uploaded.
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
@@ -1727,17 +1677,17 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Certificates` &mdash; **required** &mdash; (`Array<Object>`) A
- *         list of the user's signing certificate information.
- *         * `UserName` &mdash; **required** &mdash; (`String`) Name of the
- *           user the signing certificate is associated with.
- *         * `CertificateId` &mdash; **required** &mdash; (`String`) The ID
- *           for the signing certificate.
- *         * `CertificateBody` &mdash; **required** &mdash; (`String`) The
- *           contents of the signing certificate.
- *         * `Status` &mdash; **required** &mdash; (`String`) The status of
- *           the signing certificate. Active means the key is valid for API
- *           calls, while Inactive means it is not.
+ *       * `Certificates` &mdash; (`Array<Object>`) A list of the user's
+ *         signing certificate information.
+ *         * `UserName` &mdash; (`String`) Name of the user the signing
+ *           certificate is associated with.
+ *         * `CertificateId` &mdash; (`String`) The ID for the signing
+ *           certificate.
+ *         * `CertificateBody` &mdash; (`String`) The contents of the
+ *           signing certificate.
+ *         * `Status` &mdash; (`String`) The status of the signing
+ *           certificate. Active means the key is valid for API calls,
+ *           while Inactive means it is not.
  *         * `UploadDate` &mdash; (`Date`) The date when the signing
  *           certificate was uploaded.
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
@@ -1774,8 +1724,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `PolicyNames` &mdash; **required** &mdash; (`Array<String>`) A
- *         list of policy names.
+ *       * `PolicyNames` &mdash; (`Array<String>`) A list of policy names.
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
  *         there are more policy names to list. If your results were
  *         truncated, you can make a subsequent pagination request using
@@ -1816,23 +1765,21 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Users` &mdash; **required** &mdash; (`Array<Object>`) A list of
- *         users.
- *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *           user. For more information about paths, see Identifiers for
- *           IAM Entities in Using AWS Identity and Access Management.
- *         * `UserName` &mdash; **required** &mdash; (`String`) The name
- *           identifying the user.
- *         * `UserId` &mdash; **required** &mdash; (`String`) The stable
- *           and unique string identifying the user. For more information
- *           about IDs, see Identifiers for IAM Entities in Using AWS
- *           Identity and Access Management.
- *         * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *           Resource Name (ARN) specifying the user. For more information
- *           about ARNs and how to use them in policies, see Identifiers
- *           for IAM Entities in Using AWS Identity and Access Management.
- *         * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *           when the user was created.
+ *       * `Users` &mdash; (`Array<Object>`) A list of users.
+ *         * `Path` &mdash; (`String`) Path to the user. For more
+ *           information about paths, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `UserName` &mdash; (`String`) The name identifying the user.
+ *         * `UserId` &mdash; (`String`) The stable and unique string
+ *           identifying the user. For more information about IDs, see
+ *           Identifiers for IAM Entities in Using AWS Identity and Access
+ *           Management.
+ *         * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *           specifying the user. For more information about ARNs and how
+ *           to use them in policies, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `CreateDate` &mdash; (`Date`) The date when the user was
+ *           created.
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
  *         there are more user names to list. If your results were
  *         truncated, you can make a subsequent pagination request using
@@ -1870,14 +1817,13 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `VirtualMFADevices` &mdash; **required** &mdash;
- *         (`Array<Object>`)
- *         * `SerialNumber` &mdash; **required** &mdash; (`String`) The
- *           serial number associated with VirtualMFADevice.
- *         * `Base32StringSeed` &mdash; (`Base64 Encoded Data`) The Base32
- *           seed defined as specified in RFC3548. The Base32StringSeed is
- *           Base64-encoded.
- *         * `QRCodePNG` &mdash; (`Base64 Encoded Data`) A QR code PNG
+ *       * `VirtualMFADevices` &mdash; (`Array<Object>`)
+ *         * `SerialNumber` &mdash; (`String`) The serial number associated
+ *           with VirtualMFADevice.
+ *         * `Base32StringSeed` &mdash; (`Base64 Encoded String`) The
+ *           Base32 seed defined as specified in RFC3548. The
+ *           Base32StringSeed is Base64-encoded.
+ *         * `QRCodePNG` &mdash; (`Base64 Encoded String`) A QR code PNG
  *           image that encodes
  *           otpauth://totp/$virtualMFADeviceName@$AccountName?
  *           secret=$Base32String where $virtualMFADeviceName is one of the
@@ -1885,22 +1831,20 @@ AWS.IAM = inherit({})
  *           (accountId otherwise), and Base32String is the seed in Base32
  *           format. The Base32String is Base64-encoded.
  *         * `User` &mdash; (`Object`)
- *           * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *             user. For more information about paths, see Identifiers for
- *             IAM Entities in Using AWS Identity and Access Management.
- *           * `UserName` &mdash; **required** &mdash; (`String`) The name
- *             identifying the user.
- *           * `UserId` &mdash; **required** &mdash; (`String`) The stable
- *             and unique string identifying the user. For more information
- *             about IDs, see Identifiers for IAM Entities in Using AWS
- *             Identity and Access Management.
- *           * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *             Resource Name (ARN) specifying the user. For more
- *             information about ARNs and how to use them in policies, see
+ *           * `Path` &mdash; (`String`) Path to the user. For more
+ *             information about paths, see Identifiers for IAM Entities in
+ *             Using AWS Identity and Access Management.
+ *           * `UserName` &mdash; (`String`) The name identifying the user.
+ *           * `UserId` &mdash; (`String`) The stable and unique string
+ *             identifying the user. For more information about IDs, see
  *             Identifiers for IAM Entities in Using AWS Identity and
  *             Access Management.
- *           * `CreateDate` &mdash; **required** &mdash; (`Date`) The date
- *             when the user was created.
+ *           * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *             specifying the user. For more information about ARNs and how
+ *             to use them in policies, see Identifiers for IAM Entities in
+ *             Using AWS Identity and Access Management.
+ *           * `CreateDate` &mdash; (`Date`) The date when the user was
+ *             created.
  *         * `EnableDate` &mdash; (`Date`)
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
  *         there are more items to list. If your results were truncated,
@@ -2225,21 +2169,19 @@ AWS.IAM = inherit({})
  *       * `ServerCertificateMetadata` &mdash; (`Object`) The meta
  *         information of the uploaded server certificate without its
  *         certificate body, certificate chain, and private key.
- *         * `Path` &mdash; **required** &mdash; (`String`) Path to the
- *           server certificate. For more information about paths, see
- *           Identifiers for IAM Entities in Using AWS Identity and Access
- *           Management.
- *         * `ServerCertificateName` &mdash; **required** &mdash;
- *           (`String`) The name that identifies the server certificate.
- *         * `ServerCertificateId` &mdash; **required** &mdash; (`String`)
- *           The stable and unique string identifying the server
- *           certificate. For more information about IDs, see Identifiers
- *           for IAM Entities in Using AWS Identity and Access Management.
- *         * `Arn` &mdash; **required** &mdash; (`String`) The Amazon
- *           Resource Name (ARN) specifying the server certificate. For
- *           more information about ARNs and how to use them in policies,
- *           see Identifiers for IAM Entities in Using AWS Identity and
- *           Access Management.
+ *         * `Path` &mdash; (`String`) Path to the server certificate. For
+ *           more information about paths, see Identifiers for IAM Entities
+ *           in Using AWS Identity and Access Management.
+ *         * `ServerCertificateName` &mdash; (`String`) The name that
+ *           identifies the server certificate.
+ *         * `ServerCertificateId` &mdash; (`String`) The stable and unique
+ *           string identifying the server certificate. For more
+ *           information about IDs, see Identifiers for IAM Entities in
+ *           Using AWS Identity and Access Management.
+ *         * `Arn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *           specifying the server certificate. For more information about
+ *           ARNs and how to use them in policies, see Identifiers for IAM
+ *           Entities in Using AWS Identity and Access Management.
  *         * `UploadDate` &mdash; (`Date`) The date when the server
  *           certificate was uploaded.
  *   @return [AWS.Request] a handle to the operation request for
@@ -2262,17 +2204,17 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Certificate` &mdash; **required** &mdash; (`Object`)
- *         Information about the certificate.
- *         * `UserName` &mdash; **required** &mdash; (`String`) Name of the
- *           user the signing certificate is associated with.
- *         * `CertificateId` &mdash; **required** &mdash; (`String`) The ID
- *           for the signing certificate.
- *         * `CertificateBody` &mdash; **required** &mdash; (`String`) The
- *           contents of the signing certificate.
- *         * `Status` &mdash; **required** &mdash; (`String`) The status of
- *           the signing certificate. Active means the key is valid for API
- *           calls, while Inactive means it is not.
+ *       * `Certificate` &mdash; (`Object`) Information about the
+ *         certificate.
+ *         * `UserName` &mdash; (`String`) Name of the user the signing
+ *           certificate is associated with.
+ *         * `CertificateId` &mdash; (`String`) The ID for the signing
+ *           certificate.
+ *         * `CertificateBody` &mdash; (`String`) The contents of the
+ *           signing certificate.
+ *         * `Status` &mdash; (`String`) The status of the signing
+ *           certificate. Active means the key is valid for API calls,
+ *           while Inactive means it is not.
  *         * `UploadDate` &mdash; (`Date`) The date when the signing
  *           certificate was uploaded.
  *   @return [AWS.Request] a handle to the operation request for

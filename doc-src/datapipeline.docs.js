@@ -102,9 +102,9 @@ AWS.DataPipeline = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `pipelineId` &mdash; **required** &mdash; (`String`) The ID that
- *         AWS Data Pipeline assigns the newly created pipeline. The ID is
- *         a string of the form: df-06372391ZG65EXAMPLE.
+ *       * `pipelineId` &mdash; (`String`) The ID that AWS Data Pipeline
+ *         assigns the newly created pipeline. The ID is a string of the
+ *         form: df-06372391ZG65EXAMPLE.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -150,17 +150,13 @@ AWS.DataPipeline = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `pipelineObjects` &mdash; **required** &mdash; (`Array<Object>`)
- *         An array of object definitions that are returned by the call to
- *         DescribeObjects.
- *         * `id` &mdash; **required** &mdash; (`String`) Identifier of the
- *           object.
- *         * `name` &mdash; **required** &mdash; (`String`) Name of the
- *           object.
- *         * `fields` &mdash; **required** &mdash; (`Array<Object>`)
- *           Key-value pairs that define the properties of the object.
- *           * `key` &mdash; **required** &mdash; (`String`) The field
- *             identifier.
+ *       * `pipelineObjects` &mdash; (`Array<Object>`) An array of object
+ *         definitions that are returned by the call to DescribeObjects.
+ *         * `id` &mdash; (`String`) Identifier of the object.
+ *         * `name` &mdash; (`String`) Name of the object.
+ *         * `fields` &mdash; (`Array<Object>`) Key-value pairs that define
+ *           the properties of the object.
+ *           * `key` &mdash; (`String`) The field identifier.
  *           * `stringValue` &mdash; (`String`) The field value, expressed
  *             as a String.
  *           * `refValue` &mdash; (`String`) The field value, expressed as
@@ -190,19 +186,16 @@ AWS.DataPipeline = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `pipelineDescriptionList` &mdash; **required** &mdash;
- *         (`Array<Object>`) An array of descriptions returned for the
- *         specified pipelines.
- *         * `pipelineId` &mdash; **required** &mdash; (`String`) The
- *           pipeline identifier that was assigned by AWS Data Pipeline.
- *           This is a string of the form df-297EG78HU43EEXAMPLE.
- *         * `name` &mdash; **required** &mdash; (`String`) Name of the
- *           pipeline.
- *         * `fields` &mdash; **required** &mdash; (`Array<Object>`) A list
- *           of read-only fields that contain metadata about the pipeline:
- *           @userId, @accountId, and @pipelineState.
- *           * `key` &mdash; **required** &mdash; (`String`) The field
- *             identifier.
+ *       * `pipelineDescriptionList` &mdash; (`Array<Object>`) An array of
+ *         descriptions returned for the specified pipelines.
+ *         * `pipelineId` &mdash; (`String`) The pipeline identifier that
+ *           was assigned by AWS Data Pipeline. This is a string of the
+ *           form df-297EG78HU43EEXAMPLE.
+ *         * `name` &mdash; (`String`) Name of the pipeline.
+ *         * `fields` &mdash; (`Array<Object>`) A list of read-only fields
+ *           that contain metadata about the pipeline: @userId, @accountId,
+ *           and @pipelineState.
+ *           * `key` &mdash; (`String`) The field identifier.
  *           * `stringValue` &mdash; (`String`) The field value, expressed
  *             as a String.
  *           * `refValue` &mdash; (`String`) The field value, expressed as
@@ -230,8 +223,8 @@ AWS.DataPipeline = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `evaluatedExpression` &mdash; **required** &mdash; (`String`)
- *         The evaluated expression.
+ *       * `evaluatedExpression` &mdash; (`String`) The evaluated
+ *         expression.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -254,14 +247,11 @@ AWS.DataPipeline = inherit({})
  *
  *       * `pipelineObjects` &mdash; (`Array<Object>`) An array of objects
  *         defined in the pipeline.
- *         * `id` &mdash; **required** &mdash; (`String`) Identifier of the
- *           object.
- *         * `name` &mdash; **required** &mdash; (`String`) Name of the
- *           object.
- *         * `fields` &mdash; **required** &mdash; (`Array<Object>`)
- *           Key-value pairs that define the properties of the object.
- *           * `key` &mdash; **required** &mdash; (`String`) The field
- *             identifier.
+ *         * `id` &mdash; (`String`) Identifier of the object.
+ *         * `name` &mdash; (`String`) Name of the object.
+ *         * `fields` &mdash; (`Array<Object>`) Key-value pairs that define
+ *           the properties of the object.
+ *           * `key` &mdash; (`String`) The field identifier.
  *           * `stringValue` &mdash; (`String`) The field value, expressed
  *             as a String.
  *           * `refValue` &mdash; (`String`) The field value, expressed as
@@ -288,11 +278,11 @@ AWS.DataPipeline = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `pipelineIdList` &mdash; **required** &mdash; (`Array<Object>`)
- *         A list of all the pipeline identifiers that your account has
- *         permission to access. If you require additional information
- *         about the pipelines, you can use these identifiers to call
- *         DescribePipelines and GetPipelineDefinition.
+ *       * `pipelineIdList` &mdash; (`Array<Object>`) A list of all the
+ *         pipeline identifiers that your account has permission to access.
+ *         If you require additional information about the pipelines, you
+ *         can use these identifiers to call DescribePipelines and
+ *         GetPipelineDefinition.
  *         * `id` &mdash; (`String`) Identifier of the pipeline that was
  *           assigned by AWS Data Pipeline. This is a string of the form
  *           df-297EG78HU43EEXAMPLE.
@@ -364,14 +354,11 @@ AWS.DataPipeline = inherit({})
  *         * `objects` &mdash; (`Object<Object>`) Connection information
  *           for the location where the task runner will publish the output
  *           of the task.
- *           * `id` &mdash; **required** &mdash; (`String`) Identifier of
- *             the object.
- *           * `name` &mdash; **required** &mdash; (`String`) Name of the
- *             object.
- *           * `fields` &mdash; **required** &mdash; (`Array<Object>`)
- *             Key-value pairs that define the properties of the object.
- *             * `key` &mdash; **required** &mdash; (`String`) The field
- *               identifier.
+ *           * `id` &mdash; (`String`) Identifier of the object.
+ *           * `name` &mdash; (`String`) Name of the object.
+ *           * `fields` &mdash; (`Array<Object>`) Key-value pairs that
+ *             define the properties of the object.
+ *             * `key` &mdash; (`String`) The field identifier.
  *             * `stringValue` &mdash; (`String`) The field value,
  *               expressed as a String.
  *             * `refValue` &mdash; (`String`) The field value, expressed
@@ -416,11 +403,10 @@ AWS.DataPipeline = inherit({})
  *           contains the validation error.
  *         * `errors` &mdash; (`Array<String>`) A description of the
  *           validation error.
- *       * `errored` &mdash; **required** &mdash; (`Boolean`) If True,
- *         there were validation errors. If errored is True, the pipeline
- *         definition is stored but cannot be activated until you correct
- *         the pipeline and call PutPipelineDefinition to commit the
- *         corrected pipeline.
+ *       * `errored` &mdash; (`Boolean`) If True, there were validation
+ *         errors. If errored is True, the pipeline definition is stored
+ *         but cannot be activated until you correct the pipeline and call
+ *         PutPipelineDefinition to commit the corrected pipeline.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -515,10 +501,9 @@ AWS.DataPipeline = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `canceled` &mdash; **required** &mdash; (`Boolean`) If True, the
- *         calling task runner should cancel processing of the task. The
- *         task runner does not need to call SetTaskStatus for canceled
- *         tasks.
+ *       * `canceled` &mdash; (`Boolean`) If True, the calling task runner
+ *         should cancel processing of the task. The task runner does not
+ *         need to call SetTaskStatus for canceled tasks.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -551,10 +536,9 @@ AWS.DataPipeline = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `terminate` &mdash; **required** &mdash; (`Boolean`) Indicates
- *         whether the calling task runner should terminate. If True, the
- *         task runner that called ReportTaskRunnerHeartbeat should
- *         terminate.
+ *       * `terminate` &mdash; (`Boolean`) Indicates whether the calling
+ *         task runner should terminate. If True, the task runner that
+ *         called ReportTaskRunnerHeartbeat should terminate.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -652,8 +636,8 @@ AWS.DataPipeline = inherit({})
  *           contains the validation error.
  *         * `errors` &mdash; (`Array<String>`) A description of the
  *           validation error.
- *       * `errored` &mdash; **required** &mdash; (`Boolean`) If True,
- *         there were validation errors.
+ *       * `errored` &mdash; (`Boolean`) If True, there were validation
+ *         errors.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *

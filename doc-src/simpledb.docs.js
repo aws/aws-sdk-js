@@ -245,11 +245,9 @@ AWS.SimpleDB = inherit({})
  *
  *       * `Attributes` &mdash; (`Array<Object>`) The list of attributes
  *         returned by the operation.
- *         * `Name` &mdash; **required** &mdash; (`String`) The name of the
- *           attribute.
+ *         * `Name` &mdash; (`String`) The name of the attribute.
  *         * `AlternateNameEncoding` &mdash; (`String`)
- *         * `Value` &mdash; **required** &mdash; (`String`) The value of
- *           the attribute.
+ *         * `Value` &mdash; (`String`) The value of the attribute.
  *         * `AlternateValueEncoding` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -348,16 +346,12 @@ AWS.SimpleDB = inherit({})
  *
  *       * `Items` &mdash; (`Array<Object>`) A list of items that match the
  *         select expression.
- *         * `Name` &mdash; **required** &mdash; (`String`) The name of the
- *           item.
+ *         * `Name` &mdash; (`String`) The name of the item.
  *         * `AlternateNameEncoding` &mdash; (`String`)
- *         * `Attributes` &mdash; **required** &mdash; (`Array<Object>`) A
- *           list of attributes.
- *           * `Name` &mdash; **required** &mdash; (`String`) The name of
- *             the attribute.
+ *         * `Attributes` &mdash; (`Array<Object>`) A list of attributes.
+ *           * `Name` &mdash; (`String`) The name of the attribute.
  *           * `AlternateNameEncoding` &mdash; (`String`)
- *           * `Value` &mdash; **required** &mdash; (`String`) The value of
- *             the attribute.
+ *           * `Value` &mdash; (`String`) The value of the attribute.
  *           * `AlternateValueEncoding` &mdash; (`String`)
  *       * `NextToken` &mdash; (`String`) An opaque token indicating that
  *         more items than MaxNumberOfItems were matched, the response size

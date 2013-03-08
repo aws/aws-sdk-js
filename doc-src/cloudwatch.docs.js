@@ -177,10 +177,9 @@ AWS.CloudWatch = inherit({})
  *           alarm's associated metric.
  *         * `Dimensions` &mdash; (`Array<Object>`) The list of dimensions
  *           associated with the alarm's associated metric.
- *           * `Name` &mdash; **required** &mdash; (`String`) The name of
- *             the dimension.
- *           * `Value` &mdash; **required** &mdash; (`String`) The value
- *             representing the dimension measurement
+ *           * `Name` &mdash; (`String`) The name of the dimension.
+ *           * `Value` &mdash; (`String`) The value representing the
+ *             dimension measurement
  *         * `Period` &mdash; (`Integer`) The period in seconds over which
  *           the statistic is applied.
  *         * `Unit` &mdash; (`String`) The unit of the alarm's associated
@@ -269,10 +268,9 @@ AWS.CloudWatch = inherit({})
  *           alarm's associated metric.
  *         * `Dimensions` &mdash; (`Array<Object>`) The list of dimensions
  *           associated with the alarm's associated metric.
- *           * `Name` &mdash; **required** &mdash; (`String`) The name of
- *             the dimension.
- *           * `Value` &mdash; **required** &mdash; (`String`) The value
- *             representing the dimension measurement
+ *           * `Name` &mdash; (`String`) The name of the dimension.
+ *           * `Value` &mdash; (`String`) The value representing the
+ *             dimension measurement
  *         * `Period` &mdash; (`Integer`) The period in seconds over which
  *           the statistic is applied.
  *         * `Unit` &mdash; (`String`) The unit of the alarm's associated
@@ -414,10 +412,9 @@ AWS.CloudWatch = inherit({})
  *         * `MetricName` &mdash; (`String`) The name of the metric.
  *         * `Dimensions` &mdash; (`Array<Object>`) A list of dimensions
  *           associated with the metric.
- *           * `Name` &mdash; **required** &mdash; (`String`) The name of
- *             the dimension.
- *           * `Value` &mdash; **required** &mdash; (`String`) The value
- *             representing the dimension measurement
+ *           * `Name` &mdash; (`String`) The name of the dimension.
+ *           * `Value` &mdash; (`String`) The value representing the
+ *             dimension measurement
  *       * `NextToken` &mdash; (`String`) A string that marks the start of
  *         the next batch of returned results.
  *   @return [AWS.Request] a handle to the operation request for

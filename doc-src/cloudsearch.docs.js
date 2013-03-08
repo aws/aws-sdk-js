@@ -67,8 +67,8 @@ AWS.CloudSearch = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `DomainStatus` &mdash; (`Object`)
- *         * `DomainId` &mdash; **required** &mdash; (`String`)
- *         * `DomainName` &mdash; **required** &mdash; (`String`)
+ *         * `DomainId` &mdash; (`String`)
+ *         * `DomainName` &mdash; (`String`)
  *         * `Created` &mdash; (`Boolean`) True if the search domain is
  *           created. It can take several minutes to initialize a domain
  *           when CreateDomain is called. Newly created search domains are
@@ -90,9 +90,9 @@ AWS.CloudSearch = inherit({})
  *           requesting search results from a search domain.
  *           * `Arn` &mdash; (`String`)
  *           * `Endpoint` &mdash; (`String`)
- *         * `RequiresIndexDocuments` &mdash; **required** &mdash;
- *           (`Boolean`) True if IndexDocuments needs to be called to
- *           activate the current domain configuration.
+ *         * `RequiresIndexDocuments` &mdash; (`Boolean`) True if
+ *           IndexDocuments needs to be called to activate the current
+ *           domain configuration.
  *         * `Processing` &mdash; (`Boolean`) True if processing is being
  *           done to activate the current domain configuration.
  *         * `SearchInstanceType` &mdash; (`String`) The instance type
@@ -202,18 +202,18 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `IndexField` &mdash; **required** &mdash; (`Object`)
- *         * `Options` &mdash; **required** &mdash; (`Object`)
- *           * `IndexFieldName` &mdash; **required** &mdash; (`String`) The
- *             name of a field in the search index. Field names must begin
- *             with a letter and can contain the following characters: a-z
- *             (lowercase), 0-9, and _ (underscore). Uppercase letters and
- *             hyphens are not allowed. The names "body", "docid", and
- *             "text_relevance" are reserved and cannot be specified as
- *             field or rank expression names.
- *           * `IndexFieldType` &mdash; **required** &mdash; (`String`) The
- *             type of field. Based on this type, exactly one of the
- *             UIntOptions, LiteralOptions or TextOptions must be present.
+ *       * `IndexField` &mdash; (`Object`)
+ *         * `Options` &mdash; (`Object`)
+ *           * `IndexFieldName` &mdash; (`String`) The name of a field in
+ *             the search index. Field names must begin with a letter and
+ *             can contain the following characters: a-z (lowercase), 0-9,
+ *             and _ (underscore). Uppercase letters and hyphens are not
+ *             allowed. The names "body", "docid", and "text_relevance" are
+ *             reserved and cannot be specified as field or rank expression
+ *             names.
+ *           * `IndexFieldType` &mdash; (`String`) The type of field. Based
+ *             on this type, exactly one of the UIntOptions, LiteralOptions
+ *             or TextOptions must be present.
  *           * `UIntOptions` &mdash; (`Object`) Options for an unsigned
  *             integer field. Present if IndexFieldType specifies the field
  *             is of type unsigned integer.
@@ -253,14 +253,13 @@ AWS.CloudSearch = inherit({})
  *             transformation can be applied to the source data when
  *             populating the index field. You can configure a maximum of
  *             20 sources for an IndexField.
- *             * `SourceDataFunction` &mdash; **required** &mdash;
- *               (`String`) Identifies the transformation to apply when
- *               copying data from a source attribute.
+ *             * `SourceDataFunction` &mdash; (`String`) Identifies the
+ *               transformation to apply when copying data from a source
+ *               attribute.
  *             * `SourceDataCopy` &mdash; (`Object`) Copies data from a
  *               source document attribute to an IndexField.
- *               * `SourceName` &mdash; **required** &mdash; (`String`) The
- *                 name of the document source field to add to this
- *                 IndexField.
+ *               * `SourceName` &mdash; (`String`) The name of the document
+ *                 source field to add to this IndexField.
  *               * `DefaultValue` &mdash; (`String`) The default value to
  *                 use if the source attribute is not specified in a
  *                 document. Optional.
@@ -268,9 +267,8 @@ AWS.CloudSearch = inherit({})
  *               title words from a source document attribute when
  *               populating an IndexField. This can be used to create an
  *               IndexField you can use for sorting.
- *               * `SourceName` &mdash; **required** &mdash; (`String`) The
- *                 name of the document source field to add to this
- *                 IndexField.
+ *               * `SourceName` &mdash; (`String`) The name of the document
+ *                 source field to add to this IndexField.
  *               * `DefaultValue` &mdash; (`String`) The default value to
  *                 use if the source attribute is not specified in a
  *                 document. Optional.
@@ -280,30 +278,29 @@ AWS.CloudSearch = inherit({})
  *             * `SourceDataMap` &mdash; (`Object`) Maps source document
  *               attribute values to new values when populating the
  *               IndexField.
- *               * `SourceName` &mdash; **required** &mdash; (`String`) The
- *                 name of the document source field to add to this
- *                 IndexField.
+ *               * `SourceName` &mdash; (`String`) The name of the document
+ *                 source field to add to this IndexField.
  *               * `DefaultValue` &mdash; (`String`) The default value to
  *                 use if the source attribute is not specified in a
  *                 document. Optional.
  *               * `Cases` &mdash; (`Object<String>`) A map that translates
  *                 source field values to custom values.
- *         * `Status` &mdash; **required** &mdash; (`Object`)
- *           * `CreationDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was created.
- *           * `UpdateDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was last updated.
+ *         * `Status` &mdash; (`Object`)
+ *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
+ *             option was created.
+ *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
+ *             option was last updated.
  *           * `UpdateVersion` &mdash; (`Integer`) A unique integer that
  *             indicates when this option was last updated.
- *           * `State` &mdash; **required** &mdash; (`String`) The state of
- *             processing a change to an option. Possible values:
- *             RequiresIndexDocuments: the option's latest value will not
- *             be visible in searches until IndexDocuments has been called
- *             and indexing is complete. Processing: the option's latest
- *             value is not yet visible in all searches but is in the
- *             process of being activated. Active: the option's latest
- *             value is completely visible. Any warnings or messages
- *             generated during processing are provided in Diagnostics.
+ *           * `State` &mdash; (`String`) The state of processing a change
+ *             to an option. Possible values: RequiresIndexDocuments: the
+ *             option's latest value will not be visible in searches until
+ *             IndexDocuments has been called and indexing is complete.
+ *             Processing: the option's latest value is not yet visible in
+ *             all searches but is in the process of being activated.
+ *             Active: the option's latest value is completely visible. Any
+ *             warnings or messages generated during processing are
+ *             provided in Diagnostics.
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -363,66 +360,64 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `RankExpression` &mdash; **required** &mdash; (`Object`)
- *         * `Options` &mdash; **required** &mdash; (`Object`) The
- *           expression that is evaluated for ranking or thresholding while
- *           processing a search request.
- *           * `RankName` &mdash; **required** &mdash; (`String`) The name
- *             of a rank expression. Rank expression names must begin with
- *             a letter and can contain the following characters: a-z
- *             (lowercase), 0-9, and _ (underscore). Uppercase letters and
- *             hyphens are not allowed. The names "body", "docid", and
- *             "text_relevance" are reserved and cannot be specified as
- *             field or rank expression names.
- *           * `RankExpression` &mdash; **required** &mdash; (`String`) The
- *             expression to evaluate for ranking or thresholding while
- *             processing a search request. The RankExpression syntax is
- *             based on JavaScript expressions and supports: Integer,
- *             floating point, hex and octal literals Shortcut evaluation
- *             of logical operators such that an expression a || b
- *             evaluates to the value a if a is true without evaluting b at
- *             all JavaScript order of precendence for operators Arithmetic
- *             operators: + - * / % Boolean operators (including the
- *             ternary operator) Bitwise operators Comparison operators
- *             Common mathematic functions: abs ceil erf exp floor lgamma
- *             ln log2 log10 max min sqrt pow Trigonometric library
- *             functions: acosh acos asinh asin atanh atan cosh cos sinh
- *             sin tanh tan Random generation of a number between 0 and 1:
- *             rand Current time in epoch: time The min max functions that
- *             operate on a variable argument list Intermediate results are
- *             calculated as double precision floating point values. The
- *             final return value of a RankExpression is automatically
- *             converted from floating point to a 32-bit unsigned integer
- *             by rounding to the nearest integer, with a natural floor of
- *             0 and a ceiling of max(uint32_t), 4294967295. Mathematical
- *             errors such as dividing by 0 will fail during evaluation and
- *             return a value of 0. The source data for a RankExpression
- *             can be the name of an IndexField of type uint, another
- *             RankExpression or the reserved name text_relevance. The
- *             text_relevance source is defined to return an integer from 0
- *             to 1000 (inclusive) to indicate how relevant a document is
- *             to the search request, taking into account repetition of
- *             search terms in the document and proximity of search terms
- *             to each other in each matching IndexField in the document.
- *             For more information about using rank expressions to
- *             customize ranking, see the Amazon CloudSearch Developer
- *             Guide.
- *         * `Status` &mdash; **required** &mdash; (`Object`)
- *           * `CreationDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was created.
- *           * `UpdateDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was last updated.
+ *       * `RankExpression` &mdash; (`Object`)
+ *         * `Options` &mdash; (`Object`) The expression that is evaluated
+ *           for ranking or thresholding while processing a search request.
+ *           * `RankName` &mdash; (`String`) The name of a rank expression.
+ *             Rank expression names must begin with a letter and can
+ *             contain the following characters: a-z (lowercase), 0-9, and
+ *             _ (underscore). Uppercase letters and hyphens are not
+ *             allowed. The names "body", "docid", and "text_relevance" are
+ *             reserved and cannot be specified as field or rank expression
+ *             names.
+ *           * `RankExpression` &mdash; (`String`) The expression to
+ *             evaluate for ranking or thresholding while processing a
+ *             search request. The RankExpression syntax is based on
+ *             JavaScript expressions and supports: Integer, floating
+ *             point, hex and octal literals Shortcut evaluation of logical
+ *             operators such that an expression a || b evaluates to the
+ *             value a if a is true without evaluting b at all JavaScript
+ *             order of precendence for operators Arithmetic operators: + -
+ *             * / % Boolean operators (including the ternary operator)
+ *             Bitwise operators Comparison operators Common mathematic
+ *             functions: abs ceil erf exp floor lgamma ln log2 log10 max
+ *             min sqrt pow Trigonometric library functions: acosh acos
+ *             asinh asin atanh atan cosh cos sinh sin tanh tan Random
+ *             generation of a number between 0 and 1: rand Current time in
+ *             epoch: time The min max functions that operate on a variable
+ *             argument list Intermediate results are calculated as double
+ *             precision floating point values. The final return value of a
+ *             RankExpression is automatically converted from floating
+ *             point to a 32-bit unsigned integer by rounding to the
+ *             nearest integer, with a natural floor of 0 and a ceiling of
+ *             max(uint32_t), 4294967295. Mathematical errors such as
+ *             dividing by 0 will fail during evaluation and return a value
+ *             of 0. The source data for a RankExpression can be the name
+ *             of an IndexField of type uint, another RankExpression or the
+ *             reserved name text_relevance. The text_relevance source is
+ *             defined to return an integer from 0 to 1000 (inclusive) to
+ *             indicate how relevant a document is to the search request,
+ *             taking into account repetition of search terms in the
+ *             document and proximity of search terms to each other in each
+ *             matching IndexField in the document. For more information
+ *             about using rank expressions to customize ranking, see the
+ *             Amazon CloudSearch Developer Guide.
+ *         * `Status` &mdash; (`Object`)
+ *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
+ *             option was created.
+ *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
+ *             option was last updated.
  *           * `UpdateVersion` &mdash; (`Integer`) A unique integer that
  *             indicates when this option was last updated.
- *           * `State` &mdash; **required** &mdash; (`String`) The state of
- *             processing a change to an option. Possible values:
- *             RequiresIndexDocuments: the option's latest value will not
- *             be visible in searches until IndexDocuments has been called
- *             and indexing is complete. Processing: the option's latest
- *             value is not yet visible in all searches but is in the
- *             process of being activated. Active: the option's latest
- *             value is completely visible. Any warnings or messages
- *             generated during processing are provided in Diagnostics.
+ *           * `State` &mdash; (`String`) The state of processing a change
+ *             to an option. Possible values: RequiresIndexDocuments: the
+ *             option's latest value will not be visible in searches until
+ *             IndexDocuments has been called and indexing is complete.
+ *             Processing: the option's latest value is not yet visible in
+ *             all searches but is in the process of being activated.
+ *             Active: the option's latest value is completely visible. Any
+ *             warnings or messages generated during processing are
+ *             provided in Diagnostics.
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -443,8 +438,8 @@ AWS.CloudSearch = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `DomainStatus` &mdash; (`Object`)
- *         * `DomainId` &mdash; **required** &mdash; (`String`)
- *         * `DomainName` &mdash; **required** &mdash; (`String`)
+ *         * `DomainId` &mdash; (`String`)
+ *         * `DomainName` &mdash; (`String`)
  *         * `Created` &mdash; (`Boolean`) True if the search domain is
  *           created. It can take several minutes to initialize a domain
  *           when CreateDomain is called. Newly created search domains are
@@ -466,9 +461,9 @@ AWS.CloudSearch = inherit({})
  *           requesting search results from a search domain.
  *           * `Arn` &mdash; (`String`)
  *           * `Endpoint` &mdash; (`String`)
- *         * `RequiresIndexDocuments` &mdash; **required** &mdash;
- *           (`Boolean`) True if IndexDocuments needs to be called to
- *           activate the current domain configuration.
+ *         * `RequiresIndexDocuments` &mdash; (`Boolean`) True if
+ *           IndexDocuments needs to be called to activate the current
+ *           domain configuration.
  *         * `Processing` &mdash; (`Boolean`) True if processing is being
  *           done to activate the current domain configuration.
  *         * `SearchInstanceType` &mdash; (`String`) The instance type
@@ -496,18 +491,18 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `IndexField` &mdash; **required** &mdash; (`Object`)
- *         * `Options` &mdash; **required** &mdash; (`Object`)
- *           * `IndexFieldName` &mdash; **required** &mdash; (`String`) The
- *             name of a field in the search index. Field names must begin
- *             with a letter and can contain the following characters: a-z
- *             (lowercase), 0-9, and _ (underscore). Uppercase letters and
- *             hyphens are not allowed. The names "body", "docid", and
- *             "text_relevance" are reserved and cannot be specified as
- *             field or rank expression names.
- *           * `IndexFieldType` &mdash; **required** &mdash; (`String`) The
- *             type of field. Based on this type, exactly one of the
- *             UIntOptions, LiteralOptions or TextOptions must be present.
+ *       * `IndexField` &mdash; (`Object`)
+ *         * `Options` &mdash; (`Object`)
+ *           * `IndexFieldName` &mdash; (`String`) The name of a field in
+ *             the search index. Field names must begin with a letter and
+ *             can contain the following characters: a-z (lowercase), 0-9,
+ *             and _ (underscore). Uppercase letters and hyphens are not
+ *             allowed. The names "body", "docid", and "text_relevance" are
+ *             reserved and cannot be specified as field or rank expression
+ *             names.
+ *           * `IndexFieldType` &mdash; (`String`) The type of field. Based
+ *             on this type, exactly one of the UIntOptions, LiteralOptions
+ *             or TextOptions must be present.
  *           * `UIntOptions` &mdash; (`Object`) Options for an unsigned
  *             integer field. Present if IndexFieldType specifies the field
  *             is of type unsigned integer.
@@ -547,14 +542,13 @@ AWS.CloudSearch = inherit({})
  *             transformation can be applied to the source data when
  *             populating the index field. You can configure a maximum of
  *             20 sources for an IndexField.
- *             * `SourceDataFunction` &mdash; **required** &mdash;
- *               (`String`) Identifies the transformation to apply when
- *               copying data from a source attribute.
+ *             * `SourceDataFunction` &mdash; (`String`) Identifies the
+ *               transformation to apply when copying data from a source
+ *               attribute.
  *             * `SourceDataCopy` &mdash; (`Object`) Copies data from a
  *               source document attribute to an IndexField.
- *               * `SourceName` &mdash; **required** &mdash; (`String`) The
- *                 name of the document source field to add to this
- *                 IndexField.
+ *               * `SourceName` &mdash; (`String`) The name of the document
+ *                 source field to add to this IndexField.
  *               * `DefaultValue` &mdash; (`String`) The default value to
  *                 use if the source attribute is not specified in a
  *                 document. Optional.
@@ -562,9 +556,8 @@ AWS.CloudSearch = inherit({})
  *               title words from a source document attribute when
  *               populating an IndexField. This can be used to create an
  *               IndexField you can use for sorting.
- *               * `SourceName` &mdash; **required** &mdash; (`String`) The
- *                 name of the document source field to add to this
- *                 IndexField.
+ *               * `SourceName` &mdash; (`String`) The name of the document
+ *                 source field to add to this IndexField.
  *               * `DefaultValue` &mdash; (`String`) The default value to
  *                 use if the source attribute is not specified in a
  *                 document. Optional.
@@ -574,30 +567,29 @@ AWS.CloudSearch = inherit({})
  *             * `SourceDataMap` &mdash; (`Object`) Maps source document
  *               attribute values to new values when populating the
  *               IndexField.
- *               * `SourceName` &mdash; **required** &mdash; (`String`) The
- *                 name of the document source field to add to this
- *                 IndexField.
+ *               * `SourceName` &mdash; (`String`) The name of the document
+ *                 source field to add to this IndexField.
  *               * `DefaultValue` &mdash; (`String`) The default value to
  *                 use if the source attribute is not specified in a
  *                 document. Optional.
  *               * `Cases` &mdash; (`Object<String>`) A map that translates
  *                 source field values to custom values.
- *         * `Status` &mdash; **required** &mdash; (`Object`)
- *           * `CreationDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was created.
- *           * `UpdateDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was last updated.
+ *         * `Status` &mdash; (`Object`)
+ *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
+ *             option was created.
+ *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
+ *             option was last updated.
  *           * `UpdateVersion` &mdash; (`Integer`) A unique integer that
  *             indicates when this option was last updated.
- *           * `State` &mdash; **required** &mdash; (`String`) The state of
- *             processing a change to an option. Possible values:
- *             RequiresIndexDocuments: the option's latest value will not
- *             be visible in searches until IndexDocuments has been called
- *             and indexing is complete. Processing: the option's latest
- *             value is not yet visible in all searches but is in the
- *             process of being activated. Active: the option's latest
- *             value is completely visible. Any warnings or messages
- *             generated during processing are provided in Diagnostics.
+ *           * `State` &mdash; (`String`) The state of processing a change
+ *             to an option. Possible values: RequiresIndexDocuments: the
+ *             option's latest value will not be visible in searches until
+ *             IndexDocuments has been called and indexing is complete.
+ *             Processing: the option's latest value is not yet visible in
+ *             all searches but is in the process of being activated.
+ *             Active: the option's latest value is completely visible. Any
+ *             warnings or messages generated during processing are
+ *             provided in Diagnostics.
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -619,66 +611,64 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `RankExpression` &mdash; **required** &mdash; (`Object`)
- *         * `Options` &mdash; **required** &mdash; (`Object`) The
- *           expression that is evaluated for ranking or thresholding while
- *           processing a search request.
- *           * `RankName` &mdash; **required** &mdash; (`String`) The name
- *             of a rank expression. Rank expression names must begin with
- *             a letter and can contain the following characters: a-z
- *             (lowercase), 0-9, and _ (underscore). Uppercase letters and
- *             hyphens are not allowed. The names "body", "docid", and
- *             "text_relevance" are reserved and cannot be specified as
- *             field or rank expression names.
- *           * `RankExpression` &mdash; **required** &mdash; (`String`) The
- *             expression to evaluate for ranking or thresholding while
- *             processing a search request. The RankExpression syntax is
- *             based on JavaScript expressions and supports: Integer,
- *             floating point, hex and octal literals Shortcut evaluation
- *             of logical operators such that an expression a || b
- *             evaluates to the value a if a is true without evaluting b at
- *             all JavaScript order of precendence for operators Arithmetic
- *             operators: + - * / % Boolean operators (including the
- *             ternary operator) Bitwise operators Comparison operators
- *             Common mathematic functions: abs ceil erf exp floor lgamma
- *             ln log2 log10 max min sqrt pow Trigonometric library
- *             functions: acosh acos asinh asin atanh atan cosh cos sinh
- *             sin tanh tan Random generation of a number between 0 and 1:
- *             rand Current time in epoch: time The min max functions that
- *             operate on a variable argument list Intermediate results are
- *             calculated as double precision floating point values. The
- *             final return value of a RankExpression is automatically
- *             converted from floating point to a 32-bit unsigned integer
- *             by rounding to the nearest integer, with a natural floor of
- *             0 and a ceiling of max(uint32_t), 4294967295. Mathematical
- *             errors such as dividing by 0 will fail during evaluation and
- *             return a value of 0. The source data for a RankExpression
- *             can be the name of an IndexField of type uint, another
- *             RankExpression or the reserved name text_relevance. The
- *             text_relevance source is defined to return an integer from 0
- *             to 1000 (inclusive) to indicate how relevant a document is
- *             to the search request, taking into account repetition of
- *             search terms in the document and proximity of search terms
- *             to each other in each matching IndexField in the document.
- *             For more information about using rank expressions to
- *             customize ranking, see the Amazon CloudSearch Developer
- *             Guide.
- *         * `Status` &mdash; **required** &mdash; (`Object`)
- *           * `CreationDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was created.
- *           * `UpdateDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was last updated.
+ *       * `RankExpression` &mdash; (`Object`)
+ *         * `Options` &mdash; (`Object`) The expression that is evaluated
+ *           for ranking or thresholding while processing a search request.
+ *           * `RankName` &mdash; (`String`) The name of a rank expression.
+ *             Rank expression names must begin with a letter and can
+ *             contain the following characters: a-z (lowercase), 0-9, and
+ *             _ (underscore). Uppercase letters and hyphens are not
+ *             allowed. The names "body", "docid", and "text_relevance" are
+ *             reserved and cannot be specified as field or rank expression
+ *             names.
+ *           * `RankExpression` &mdash; (`String`) The expression to
+ *             evaluate for ranking or thresholding while processing a
+ *             search request. The RankExpression syntax is based on
+ *             JavaScript expressions and supports: Integer, floating
+ *             point, hex and octal literals Shortcut evaluation of logical
+ *             operators such that an expression a || b evaluates to the
+ *             value a if a is true without evaluting b at all JavaScript
+ *             order of precendence for operators Arithmetic operators: + -
+ *             * / % Boolean operators (including the ternary operator)
+ *             Bitwise operators Comparison operators Common mathematic
+ *             functions: abs ceil erf exp floor lgamma ln log2 log10 max
+ *             min sqrt pow Trigonometric library functions: acosh acos
+ *             asinh asin atanh atan cosh cos sinh sin tanh tan Random
+ *             generation of a number between 0 and 1: rand Current time in
+ *             epoch: time The min max functions that operate on a variable
+ *             argument list Intermediate results are calculated as double
+ *             precision floating point values. The final return value of a
+ *             RankExpression is automatically converted from floating
+ *             point to a 32-bit unsigned integer by rounding to the
+ *             nearest integer, with a natural floor of 0 and a ceiling of
+ *             max(uint32_t), 4294967295. Mathematical errors such as
+ *             dividing by 0 will fail during evaluation and return a value
+ *             of 0. The source data for a RankExpression can be the name
+ *             of an IndexField of type uint, another RankExpression or the
+ *             reserved name text_relevance. The text_relevance source is
+ *             defined to return an integer from 0 to 1000 (inclusive) to
+ *             indicate how relevant a document is to the search request,
+ *             taking into account repetition of search terms in the
+ *             document and proximity of search terms to each other in each
+ *             matching IndexField in the document. For more information
+ *             about using rank expressions to customize ranking, see the
+ *             Amazon CloudSearch Developer Guide.
+ *         * `Status` &mdash; (`Object`)
+ *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
+ *             option was created.
+ *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
+ *             option was last updated.
  *           * `UpdateVersion` &mdash; (`Integer`) A unique integer that
  *             indicates when this option was last updated.
- *           * `State` &mdash; **required** &mdash; (`String`) The state of
- *             processing a change to an option. Possible values:
- *             RequiresIndexDocuments: the option's latest value will not
- *             be visible in searches until IndexDocuments has been called
- *             and indexing is complete. Processing: the option's latest
- *             value is not yet visible in all searches but is in the
- *             process of being activated. Active: the option's latest
- *             value is completely visible. Any warnings or messages
- *             generated during processing are provided in Diagnostics.
+ *           * `State` &mdash; (`String`) The state of processing a change
+ *             to an option. Possible values: RequiresIndexDocuments: the
+ *             option's latest value will not be visible in searches until
+ *             IndexDocuments has been called and indexing is complete.
+ *             Processing: the option's latest value is not yet visible in
+ *             all searches but is in the process of being activated.
+ *             Active: the option's latest value is completely visible. Any
+ *             warnings or messages generated during processing are
+ *             provided in Diagnostics.
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -698,30 +688,29 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DefaultSearchField` &mdash; **required** &mdash; (`Object`) The
- *         name of the IndexField to use for search requests issued with
- *         the q parameter. The default is the empty string, which
- *         automatically searches all text fields.
- *         * `Options` &mdash; **required** &mdash; (`String`) The name of
- *           the IndexField to use as the default search field. The default
- *           is an empty string, which automatically searches all text
- *           fields.
- *         * `Status` &mdash; **required** &mdash; (`Object`)
- *           * `CreationDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was created.
- *           * `UpdateDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was last updated.
+ *       * `DefaultSearchField` &mdash; (`Object`) The name of the
+ *         IndexField to use for search requests issued with the q
+ *         parameter. The default is the empty string, which automatically
+ *         searches all text fields.
+ *         * `Options` &mdash; (`String`) The name of the IndexField to use
+ *           as the default search field. The default is an empty string,
+ *           which automatically searches all text fields.
+ *         * `Status` &mdash; (`Object`)
+ *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
+ *             option was created.
+ *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
+ *             option was last updated.
  *           * `UpdateVersion` &mdash; (`Integer`) A unique integer that
  *             indicates when this option was last updated.
- *           * `State` &mdash; **required** &mdash; (`String`) The state of
- *             processing a change to an option. Possible values:
- *             RequiresIndexDocuments: the option's latest value will not
- *             be visible in searches until IndexDocuments has been called
- *             and indexing is complete. Processing: the option's latest
- *             value is not yet visible in all searches but is in the
- *             process of being activated. Active: the option's latest
- *             value is completely visible. Any warnings or messages
- *             generated during processing are provided in Diagnostics.
+ *           * `State` &mdash; (`String`) The state of processing a change
+ *             to an option. Possible values: RequiresIndexDocuments: the
+ *             option's latest value will not be visible in searches until
+ *             IndexDocuments has been called and indexing is complete.
+ *             Processing: the option's latest value is not yet visible in
+ *             all searches but is in the process of being activated.
+ *             Active: the option's latest value is completely visible. Any
+ *             warnings or messages generated during processing are
+ *             provided in Diagnostics.
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -742,10 +731,9 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DomainStatusList` &mdash; **required** &mdash;
- *         (`Array<Object>`)
- *         * `DomainId` &mdash; **required** &mdash; (`String`)
- *         * `DomainName` &mdash; **required** &mdash; (`String`)
+ *       * `DomainStatusList` &mdash; (`Array<Object>`)
+ *         * `DomainId` &mdash; (`String`)
+ *         * `DomainName` &mdash; (`String`)
  *         * `Created` &mdash; (`Boolean`) True if the search domain is
  *           created. It can take several minutes to initialize a domain
  *           when CreateDomain is called. Newly created search domains are
@@ -767,9 +755,9 @@ AWS.CloudSearch = inherit({})
  *           requesting search results from a search domain.
  *           * `Arn` &mdash; (`String`)
  *           * `Endpoint` &mdash; (`String`)
- *         * `RequiresIndexDocuments` &mdash; **required** &mdash;
- *           (`Boolean`) True if IndexDocuments needs to be called to
- *           activate the current domain configuration.
+ *         * `RequiresIndexDocuments` &mdash; (`Boolean`) True if
+ *           IndexDocuments needs to be called to activate the current
+ *           domain configuration.
  *         * `Processing` &mdash; (`Boolean`) True if processing is being
  *           done to activate the current domain configuration.
  *         * `SearchInstanceType` &mdash; (`String`) The instance type
@@ -798,19 +786,19 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `IndexFields` &mdash; **required** &mdash; (`Array<Object>`) The
- *         index fields configured for the domain.
- *         * `Options` &mdash; **required** &mdash; (`Object`)
- *           * `IndexFieldName` &mdash; **required** &mdash; (`String`) The
- *             name of a field in the search index. Field names must begin
- *             with a letter and can contain the following characters: a-z
- *             (lowercase), 0-9, and _ (underscore). Uppercase letters and
- *             hyphens are not allowed. The names "body", "docid", and
- *             "text_relevance" are reserved and cannot be specified as
- *             field or rank expression names.
- *           * `IndexFieldType` &mdash; **required** &mdash; (`String`) The
- *             type of field. Based on this type, exactly one of the
- *             UIntOptions, LiteralOptions or TextOptions must be present.
+ *       * `IndexFields` &mdash; (`Array<Object>`) The index fields
+ *         configured for the domain.
+ *         * `Options` &mdash; (`Object`)
+ *           * `IndexFieldName` &mdash; (`String`) The name of a field in
+ *             the search index. Field names must begin with a letter and
+ *             can contain the following characters: a-z (lowercase), 0-9,
+ *             and _ (underscore). Uppercase letters and hyphens are not
+ *             allowed. The names "body", "docid", and "text_relevance" are
+ *             reserved and cannot be specified as field or rank expression
+ *             names.
+ *           * `IndexFieldType` &mdash; (`String`) The type of field. Based
+ *             on this type, exactly one of the UIntOptions, LiteralOptions
+ *             or TextOptions must be present.
  *           * `UIntOptions` &mdash; (`Object`) Options for an unsigned
  *             integer field. Present if IndexFieldType specifies the field
  *             is of type unsigned integer.
@@ -850,14 +838,13 @@ AWS.CloudSearch = inherit({})
  *             transformation can be applied to the source data when
  *             populating the index field. You can configure a maximum of
  *             20 sources for an IndexField.
- *             * `SourceDataFunction` &mdash; **required** &mdash;
- *               (`String`) Identifies the transformation to apply when
- *               copying data from a source attribute.
+ *             * `SourceDataFunction` &mdash; (`String`) Identifies the
+ *               transformation to apply when copying data from a source
+ *               attribute.
  *             * `SourceDataCopy` &mdash; (`Object`) Copies data from a
  *               source document attribute to an IndexField.
- *               * `SourceName` &mdash; **required** &mdash; (`String`) The
- *                 name of the document source field to add to this
- *                 IndexField.
+ *               * `SourceName` &mdash; (`String`) The name of the document
+ *                 source field to add to this IndexField.
  *               * `DefaultValue` &mdash; (`String`) The default value to
  *                 use if the source attribute is not specified in a
  *                 document. Optional.
@@ -865,9 +852,8 @@ AWS.CloudSearch = inherit({})
  *               title words from a source document attribute when
  *               populating an IndexField. This can be used to create an
  *               IndexField you can use for sorting.
- *               * `SourceName` &mdash; **required** &mdash; (`String`) The
- *                 name of the document source field to add to this
- *                 IndexField.
+ *               * `SourceName` &mdash; (`String`) The name of the document
+ *                 source field to add to this IndexField.
  *               * `DefaultValue` &mdash; (`String`) The default value to
  *                 use if the source attribute is not specified in a
  *                 document. Optional.
@@ -877,30 +863,29 @@ AWS.CloudSearch = inherit({})
  *             * `SourceDataMap` &mdash; (`Object`) Maps source document
  *               attribute values to new values when populating the
  *               IndexField.
- *               * `SourceName` &mdash; **required** &mdash; (`String`) The
- *                 name of the document source field to add to this
- *                 IndexField.
+ *               * `SourceName` &mdash; (`String`) The name of the document
+ *                 source field to add to this IndexField.
  *               * `DefaultValue` &mdash; (`String`) The default value to
  *                 use if the source attribute is not specified in a
  *                 document. Optional.
  *               * `Cases` &mdash; (`Object<String>`) A map that translates
  *                 source field values to custom values.
- *         * `Status` &mdash; **required** &mdash; (`Object`)
- *           * `CreationDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was created.
- *           * `UpdateDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was last updated.
+ *         * `Status` &mdash; (`Object`)
+ *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
+ *             option was created.
+ *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
+ *             option was last updated.
  *           * `UpdateVersion` &mdash; (`Integer`) A unique integer that
  *             indicates when this option was last updated.
- *           * `State` &mdash; **required** &mdash; (`String`) The state of
- *             processing a change to an option. Possible values:
- *             RequiresIndexDocuments: the option's latest value will not
- *             be visible in searches until IndexDocuments has been called
- *             and indexing is complete. Processing: the option's latest
- *             value is not yet visible in all searches but is in the
- *             process of being activated. Active: the option's latest
- *             value is completely visible. Any warnings or messages
- *             generated during processing are provided in Diagnostics.
+ *           * `State` &mdash; (`String`) The state of processing a change
+ *             to an option. Possible values: RequiresIndexDocuments: the
+ *             option's latest value will not be visible in searches until
+ *             IndexDocuments has been called and indexing is complete.
+ *             Processing: the option's latest value is not yet visible in
+ *             all searches but is in the process of being activated.
+ *             Active: the option's latest value is completely visible. Any
+ *             warnings or messages generated during processing are
+ *             provided in Diagnostics.
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -922,67 +907,65 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `RankExpressions` &mdash; **required** &mdash; (`Array<Object>`)
- *         The rank expressions configured for the domain.
- *         * `Options` &mdash; **required** &mdash; (`Object`) The
- *           expression that is evaluated for ranking or thresholding while
- *           processing a search request.
- *           * `RankName` &mdash; **required** &mdash; (`String`) The name
- *             of a rank expression. Rank expression names must begin with
- *             a letter and can contain the following characters: a-z
- *             (lowercase), 0-9, and _ (underscore). Uppercase letters and
- *             hyphens are not allowed. The names "body", "docid", and
- *             "text_relevance" are reserved and cannot be specified as
- *             field or rank expression names.
- *           * `RankExpression` &mdash; **required** &mdash; (`String`) The
- *             expression to evaluate for ranking or thresholding while
- *             processing a search request. The RankExpression syntax is
- *             based on JavaScript expressions and supports: Integer,
- *             floating point, hex and octal literals Shortcut evaluation
- *             of logical operators such that an expression a || b
- *             evaluates to the value a if a is true without evaluting b at
- *             all JavaScript order of precendence for operators Arithmetic
- *             operators: + - * / % Boolean operators (including the
- *             ternary operator) Bitwise operators Comparison operators
- *             Common mathematic functions: abs ceil erf exp floor lgamma
- *             ln log2 log10 max min sqrt pow Trigonometric library
- *             functions: acosh acos asinh asin atanh atan cosh cos sinh
- *             sin tanh tan Random generation of a number between 0 and 1:
- *             rand Current time in epoch: time The min max functions that
- *             operate on a variable argument list Intermediate results are
- *             calculated as double precision floating point values. The
- *             final return value of a RankExpression is automatically
- *             converted from floating point to a 32-bit unsigned integer
- *             by rounding to the nearest integer, with a natural floor of
- *             0 and a ceiling of max(uint32_t), 4294967295. Mathematical
- *             errors such as dividing by 0 will fail during evaluation and
- *             return a value of 0. The source data for a RankExpression
- *             can be the name of an IndexField of type uint, another
- *             RankExpression or the reserved name text_relevance. The
- *             text_relevance source is defined to return an integer from 0
- *             to 1000 (inclusive) to indicate how relevant a document is
- *             to the search request, taking into account repetition of
- *             search terms in the document and proximity of search terms
- *             to each other in each matching IndexField in the document.
- *             For more information about using rank expressions to
- *             customize ranking, see the Amazon CloudSearch Developer
- *             Guide.
- *         * `Status` &mdash; **required** &mdash; (`Object`)
- *           * `CreationDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was created.
- *           * `UpdateDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was last updated.
+ *       * `RankExpressions` &mdash; (`Array<Object>`) The rank expressions
+ *         configured for the domain.
+ *         * `Options` &mdash; (`Object`) The expression that is evaluated
+ *           for ranking or thresholding while processing a search request.
+ *           * `RankName` &mdash; (`String`) The name of a rank expression.
+ *             Rank expression names must begin with a letter and can
+ *             contain the following characters: a-z (lowercase), 0-9, and
+ *             _ (underscore). Uppercase letters and hyphens are not
+ *             allowed. The names "body", "docid", and "text_relevance" are
+ *             reserved and cannot be specified as field or rank expression
+ *             names.
+ *           * `RankExpression` &mdash; (`String`) The expression to
+ *             evaluate for ranking or thresholding while processing a
+ *             search request. The RankExpression syntax is based on
+ *             JavaScript expressions and supports: Integer, floating
+ *             point, hex and octal literals Shortcut evaluation of logical
+ *             operators such that an expression a || b evaluates to the
+ *             value a if a is true without evaluting b at all JavaScript
+ *             order of precendence for operators Arithmetic operators: + -
+ *             * / % Boolean operators (including the ternary operator)
+ *             Bitwise operators Comparison operators Common mathematic
+ *             functions: abs ceil erf exp floor lgamma ln log2 log10 max
+ *             min sqrt pow Trigonometric library functions: acosh acos
+ *             asinh asin atanh atan cosh cos sinh sin tanh tan Random
+ *             generation of a number between 0 and 1: rand Current time in
+ *             epoch: time The min max functions that operate on a variable
+ *             argument list Intermediate results are calculated as double
+ *             precision floating point values. The final return value of a
+ *             RankExpression is automatically converted from floating
+ *             point to a 32-bit unsigned integer by rounding to the
+ *             nearest integer, with a natural floor of 0 and a ceiling of
+ *             max(uint32_t), 4294967295. Mathematical errors such as
+ *             dividing by 0 will fail during evaluation and return a value
+ *             of 0. The source data for a RankExpression can be the name
+ *             of an IndexField of type uint, another RankExpression or the
+ *             reserved name text_relevance. The text_relevance source is
+ *             defined to return an integer from 0 to 1000 (inclusive) to
+ *             indicate how relevant a document is to the search request,
+ *             taking into account repetition of search terms in the
+ *             document and proximity of search terms to each other in each
+ *             matching IndexField in the document. For more information
+ *             about using rank expressions to customize ranking, see the
+ *             Amazon CloudSearch Developer Guide.
+ *         * `Status` &mdash; (`Object`)
+ *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
+ *             option was created.
+ *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
+ *             option was last updated.
  *           * `UpdateVersion` &mdash; (`Integer`) A unique integer that
  *             indicates when this option was last updated.
- *           * `State` &mdash; **required** &mdash; (`String`) The state of
- *             processing a change to an option. Possible values:
- *             RequiresIndexDocuments: the option's latest value will not
- *             be visible in searches until IndexDocuments has been called
- *             and indexing is complete. Processing: the option's latest
- *             value is not yet visible in all searches but is in the
- *             process of being activated. Active: the option's latest
- *             value is completely visible. Any warnings or messages
- *             generated during processing are provided in Diagnostics.
+ *           * `State` &mdash; (`String`) The state of processing a change
+ *             to an option. Possible values: RequiresIndexDocuments: the
+ *             option's latest value will not be visible in searches until
+ *             IndexDocuments has been called and indexing is complete.
+ *             Processing: the option's latest value is not yet visible in
+ *             all searches but is in the process of being activated.
+ *             Active: the option's latest value is completely visible. Any
+ *             warnings or messages generated during processing are
+ *             provided in Diagnostics.
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1002,24 +985,24 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `AccessPolicies` &mdash; **required** &mdash; (`Object`)
- *         * `Options` &mdash; **required** &mdash; (`String`)
- *         * `Status` &mdash; **required** &mdash; (`Object`)
- *           * `CreationDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was created.
- *           * `UpdateDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was last updated.
+ *       * `AccessPolicies` &mdash; (`Object`)
+ *         * `Options` &mdash; (`String`)
+ *         * `Status` &mdash; (`Object`)
+ *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
+ *             option was created.
+ *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
+ *             option was last updated.
  *           * `UpdateVersion` &mdash; (`Integer`) A unique integer that
  *             indicates when this option was last updated.
- *           * `State` &mdash; **required** &mdash; (`String`) The state of
- *             processing a change to an option. Possible values:
- *             RequiresIndexDocuments: the option's latest value will not
- *             be visible in searches until IndexDocuments has been called
- *             and indexing is complete. Processing: the option's latest
- *             value is not yet visible in all searches but is in the
- *             process of being activated. Active: the option's latest
- *             value is completely visible. Any warnings or messages
- *             generated during processing are provided in Diagnostics.
+ *           * `State` &mdash; (`String`) The state of processing a change
+ *             to an option. Possible values: RequiresIndexDocuments: the
+ *             option's latest value will not be visible in searches until
+ *             IndexDocuments has been called and indexing is complete.
+ *             Processing: the option's latest value is not yet visible in
+ *             all searches but is in the process of being activated.
+ *             Active: the option's latest value is completely visible. Any
+ *             warnings or messages generated during processing are
+ *             provided in Diagnostics.
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1039,24 +1022,24 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Stems` &mdash; **required** &mdash; (`Object`)
- *         * `Options` &mdash; **required** &mdash; (`String`)
- *         * `Status` &mdash; **required** &mdash; (`Object`)
- *           * `CreationDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was created.
- *           * `UpdateDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was last updated.
+ *       * `Stems` &mdash; (`Object`)
+ *         * `Options` &mdash; (`String`)
+ *         * `Status` &mdash; (`Object`)
+ *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
+ *             option was created.
+ *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
+ *             option was last updated.
  *           * `UpdateVersion` &mdash; (`Integer`) A unique integer that
  *             indicates when this option was last updated.
- *           * `State` &mdash; **required** &mdash; (`String`) The state of
- *             processing a change to an option. Possible values:
- *             RequiresIndexDocuments: the option's latest value will not
- *             be visible in searches until IndexDocuments has been called
- *             and indexing is complete. Processing: the option's latest
- *             value is not yet visible in all searches but is in the
- *             process of being activated. Active: the option's latest
- *             value is completely visible. Any warnings or messages
- *             generated during processing are provided in Diagnostics.
+ *           * `State` &mdash; (`String`) The state of processing a change
+ *             to an option. Possible values: RequiresIndexDocuments: the
+ *             option's latest value will not be visible in searches until
+ *             IndexDocuments has been called and indexing is complete.
+ *             Processing: the option's latest value is not yet visible in
+ *             all searches but is in the process of being activated.
+ *             Active: the option's latest value is completely visible. Any
+ *             warnings or messages generated during processing are
+ *             provided in Diagnostics.
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1076,24 +1059,24 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Stopwords` &mdash; **required** &mdash; (`Object`)
- *         * `Options` &mdash; **required** &mdash; (`String`)
- *         * `Status` &mdash; **required** &mdash; (`Object`)
- *           * `CreationDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was created.
- *           * `UpdateDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was last updated.
+ *       * `Stopwords` &mdash; (`Object`)
+ *         * `Options` &mdash; (`String`)
+ *         * `Status` &mdash; (`Object`)
+ *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
+ *             option was created.
+ *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
+ *             option was last updated.
  *           * `UpdateVersion` &mdash; (`Integer`) A unique integer that
  *             indicates when this option was last updated.
- *           * `State` &mdash; **required** &mdash; (`String`) The state of
- *             processing a change to an option. Possible values:
- *             RequiresIndexDocuments: the option's latest value will not
- *             be visible in searches until IndexDocuments has been called
- *             and indexing is complete. Processing: the option's latest
- *             value is not yet visible in all searches but is in the
- *             process of being activated. Active: the option's latest
- *             value is completely visible. Any warnings or messages
- *             generated during processing are provided in Diagnostics.
+ *           * `State` &mdash; (`String`) The state of processing a change
+ *             to an option. Possible values: RequiresIndexDocuments: the
+ *             option's latest value will not be visible in searches until
+ *             IndexDocuments has been called and indexing is complete.
+ *             Processing: the option's latest value is not yet visible in
+ *             all searches but is in the process of being activated.
+ *             Active: the option's latest value is completely visible. Any
+ *             warnings or messages generated during processing are
+ *             provided in Diagnostics.
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1113,24 +1096,24 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Synonyms` &mdash; **required** &mdash; (`Object`)
- *         * `Options` &mdash; **required** &mdash; (`String`)
- *         * `Status` &mdash; **required** &mdash; (`Object`)
- *           * `CreationDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was created.
- *           * `UpdateDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was last updated.
+ *       * `Synonyms` &mdash; (`Object`)
+ *         * `Options` &mdash; (`String`)
+ *         * `Status` &mdash; (`Object`)
+ *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
+ *             option was created.
+ *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
+ *             option was last updated.
  *           * `UpdateVersion` &mdash; (`Integer`) A unique integer that
  *             indicates when this option was last updated.
- *           * `State` &mdash; **required** &mdash; (`String`) The state of
- *             processing a change to an option. Possible values:
- *             RequiresIndexDocuments: the option's latest value will not
- *             be visible in searches until IndexDocuments has been called
- *             and indexing is complete. Processing: the option's latest
- *             value is not yet visible in all searches but is in the
- *             process of being activated. Active: the option's latest
- *             value is completely visible. Any warnings or messages
- *             generated during processing are provided in Diagnostics.
+ *           * `State` &mdash; (`String`) The state of processing a change
+ *             to an option. Possible values: RequiresIndexDocuments: the
+ *             option's latest value will not be visible in searches until
+ *             IndexDocuments has been called and indexing is complete.
+ *             Processing: the option's latest value is not yet visible in
+ *             all searches but is in the process of being activated.
+ *             Active: the option's latest value is completely visible. Any
+ *             warnings or messages generated during processing are
+ *             provided in Diagnostics.
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1174,27 +1157,26 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DefaultSearchField` &mdash; **required** &mdash; (`Object`)
- *         * `Options` &mdash; **required** &mdash; (`String`) The name of
- *           the IndexField to use as the default search field. The default
- *           is an empty string, which automatically searches all text
- *           fields.
- *         * `Status` &mdash; **required** &mdash; (`Object`)
- *           * `CreationDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was created.
- *           * `UpdateDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was last updated.
+ *       * `DefaultSearchField` &mdash; (`Object`)
+ *         * `Options` &mdash; (`String`) The name of the IndexField to use
+ *           as the default search field. The default is an empty string,
+ *           which automatically searches all text fields.
+ *         * `Status` &mdash; (`Object`)
+ *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
+ *             option was created.
+ *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
+ *             option was last updated.
  *           * `UpdateVersion` &mdash; (`Integer`) A unique integer that
  *             indicates when this option was last updated.
- *           * `State` &mdash; **required** &mdash; (`String`) The state of
- *             processing a change to an option. Possible values:
- *             RequiresIndexDocuments: the option's latest value will not
- *             be visible in searches until IndexDocuments has been called
- *             and indexing is complete. Processing: the option's latest
- *             value is not yet visible in all searches but is in the
- *             process of being activated. Active: the option's latest
- *             value is completely visible. Any warnings or messages
- *             generated during processing are provided in Diagnostics.
+ *           * `State` &mdash; (`String`) The state of processing a change
+ *             to an option. Possible values: RequiresIndexDocuments: the
+ *             option's latest value will not be visible in searches until
+ *             IndexDocuments has been called and indexing is complete.
+ *             Processing: the option's latest value is not yet visible in
+ *             all searches but is in the process of being activated.
+ *             Active: the option's latest value is completely visible. Any
+ *             warnings or messages generated during processing are
+ *             provided in Diagnostics.
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1215,24 +1197,24 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `AccessPolicies` &mdash; **required** &mdash; (`Object`)
- *         * `Options` &mdash; **required** &mdash; (`String`)
- *         * `Status` &mdash; **required** &mdash; (`Object`)
- *           * `CreationDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was created.
- *           * `UpdateDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was last updated.
+ *       * `AccessPolicies` &mdash; (`Object`)
+ *         * `Options` &mdash; (`String`)
+ *         * `Status` &mdash; (`Object`)
+ *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
+ *             option was created.
+ *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
+ *             option was last updated.
  *           * `UpdateVersion` &mdash; (`Integer`) A unique integer that
  *             indicates when this option was last updated.
- *           * `State` &mdash; **required** &mdash; (`String`) The state of
- *             processing a change to an option. Possible values:
- *             RequiresIndexDocuments: the option's latest value will not
- *             be visible in searches until IndexDocuments has been called
- *             and indexing is complete. Processing: the option's latest
- *             value is not yet visible in all searches but is in the
- *             process of being activated. Active: the option's latest
- *             value is completely visible. Any warnings or messages
- *             generated during processing are provided in Diagnostics.
+ *           * `State` &mdash; (`String`) The state of processing a change
+ *             to an option. Possible values: RequiresIndexDocuments: the
+ *             option's latest value will not be visible in searches until
+ *             IndexDocuments has been called and indexing is complete.
+ *             Processing: the option's latest value is not yet visible in
+ *             all searches but is in the process of being activated.
+ *             Active: the option's latest value is completely visible. Any
+ *             warnings or messages generated during processing are
+ *             provided in Diagnostics.
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1253,24 +1235,24 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Stems` &mdash; **required** &mdash; (`Object`)
- *         * `Options` &mdash; **required** &mdash; (`String`)
- *         * `Status` &mdash; **required** &mdash; (`Object`)
- *           * `CreationDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was created.
- *           * `UpdateDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was last updated.
+ *       * `Stems` &mdash; (`Object`)
+ *         * `Options` &mdash; (`String`)
+ *         * `Status` &mdash; (`Object`)
+ *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
+ *             option was created.
+ *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
+ *             option was last updated.
  *           * `UpdateVersion` &mdash; (`Integer`) A unique integer that
  *             indicates when this option was last updated.
- *           * `State` &mdash; **required** &mdash; (`String`) The state of
- *             processing a change to an option. Possible values:
- *             RequiresIndexDocuments: the option's latest value will not
- *             be visible in searches until IndexDocuments has been called
- *             and indexing is complete. Processing: the option's latest
- *             value is not yet visible in all searches but is in the
- *             process of being activated. Active: the option's latest
- *             value is completely visible. Any warnings or messages
- *             generated during processing are provided in Diagnostics.
+ *           * `State` &mdash; (`String`) The state of processing a change
+ *             to an option. Possible values: RequiresIndexDocuments: the
+ *             option's latest value will not be visible in searches until
+ *             IndexDocuments has been called and indexing is complete.
+ *             Processing: the option's latest value is not yet visible in
+ *             all searches but is in the process of being activated.
+ *             Active: the option's latest value is completely visible. Any
+ *             warnings or messages generated during processing are
+ *             provided in Diagnostics.
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1291,24 +1273,24 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Stopwords` &mdash; **required** &mdash; (`Object`)
- *         * `Options` &mdash; **required** &mdash; (`String`)
- *         * `Status` &mdash; **required** &mdash; (`Object`)
- *           * `CreationDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was created.
- *           * `UpdateDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was last updated.
+ *       * `Stopwords` &mdash; (`Object`)
+ *         * `Options` &mdash; (`String`)
+ *         * `Status` &mdash; (`Object`)
+ *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
+ *             option was created.
+ *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
+ *             option was last updated.
  *           * `UpdateVersion` &mdash; (`Integer`) A unique integer that
  *             indicates when this option was last updated.
- *           * `State` &mdash; **required** &mdash; (`String`) The state of
- *             processing a change to an option. Possible values:
- *             RequiresIndexDocuments: the option's latest value will not
- *             be visible in searches until IndexDocuments has been called
- *             and indexing is complete. Processing: the option's latest
- *             value is not yet visible in all searches but is in the
- *             process of being activated. Active: the option's latest
- *             value is completely visible. Any warnings or messages
- *             generated during processing are provided in Diagnostics.
+ *           * `State` &mdash; (`String`) The state of processing a change
+ *             to an option. Possible values: RequiresIndexDocuments: the
+ *             option's latest value will not be visible in searches until
+ *             IndexDocuments has been called and indexing is complete.
+ *             Processing: the option's latest value is not yet visible in
+ *             all searches but is in the process of being activated.
+ *             Active: the option's latest value is completely visible. Any
+ *             warnings or messages generated during processing are
+ *             provided in Diagnostics.
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1329,24 +1311,24 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Synonyms` &mdash; **required** &mdash; (`Object`)
- *         * `Options` &mdash; **required** &mdash; (`String`)
- *         * `Status` &mdash; **required** &mdash; (`Object`)
- *           * `CreationDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was created.
- *           * `UpdateDate` &mdash; **required** &mdash; (`Date`) A
- *             timestamp for when this option was last updated.
+ *       * `Synonyms` &mdash; (`Object`)
+ *         * `Options` &mdash; (`String`)
+ *         * `Status` &mdash; (`Object`)
+ *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
+ *             option was created.
+ *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
+ *             option was last updated.
  *           * `UpdateVersion` &mdash; (`Integer`) A unique integer that
  *             indicates when this option was last updated.
- *           * `State` &mdash; **required** &mdash; (`String`) The state of
- *             processing a change to an option. Possible values:
- *             RequiresIndexDocuments: the option's latest value will not
- *             be visible in searches until IndexDocuments has been called
- *             and indexing is complete. Processing: the option's latest
- *             value is not yet visible in all searches but is in the
- *             process of being activated. Active: the option's latest
- *             value is completely visible. Any warnings or messages
- *             generated during processing are provided in Diagnostics.
+ *           * `State` &mdash; (`String`) The state of processing a change
+ *             to an option. Possible values: RequiresIndexDocuments: the
+ *             option's latest value will not be visible in searches until
+ *             IndexDocuments has been called and indexing is complete.
+ *             Processing: the option's latest value is not yet visible in
+ *             all searches but is in the process of being activated.
+ *             Active: the option's latest value is completely visible. Any
+ *             warnings or messages generated during processing are
+ *             provided in Diagnostics.
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for

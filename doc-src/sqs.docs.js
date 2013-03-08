@@ -126,19 +126,17 @@ AWS.SQS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Successful` &mdash; **required** &mdash; (`Array<Object>`) A
- *         list of ChangeMessageVisibilityBatchResultEntrys.
- *         * `Id` &mdash; **required** &mdash; (`String`) Represents a
- *           message whose visibility timeout has been changed
- *           successfully.
- *       * `Failed` &mdash; **required** &mdash; (`Array<Object>`) A list
- *         of BatchResultErrorEntrys.
- *         * `Id` &mdash; **required** &mdash; (`String`) The id of an
- *           entry in a batch request.
- *         * `SenderFault` &mdash; **required** &mdash; (`Boolean`) Whether
- *           the error happened due to the sender's fault.
- *         * `Code` &mdash; **required** &mdash; (`String`) An error code
- *           representing why the operation failed on this entry.
+ *       * `Successful` &mdash; (`Array<Object>`) A list of
+ *         ChangeMessageVisibilityBatchResultEntrys.
+ *         * `Id` &mdash; (`String`) Represents a message whose visibility
+ *           timeout has been changed successfully.
+ *       * `Failed` &mdash; (`Array<Object>`) A list of
+ *         BatchResultErrorEntrys.
+ *         * `Id` &mdash; (`String`) The id of an entry in a batch request.
+ *         * `SenderFault` &mdash; (`Boolean`) Whether the error happened
+ *           due to the sender's fault.
+ *         * `Code` &mdash; (`String`) An error code representing why the
+ *           operation failed on this entry.
  *         * `Message` &mdash; (`String`) A message explaining why the
  *           operation failed on this entry.
  *   @return [AWS.Request] a handle to the operation request for
@@ -206,18 +204,17 @@ AWS.SQS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Successful` &mdash; **required** &mdash; (`Array<Object>`) A
- *         list of DeleteMessageBatchResultEntrys.
- *         * `Id` &mdash; **required** &mdash; (`String`) Represents a
- *           successfully deleted message.
- *       * `Failed` &mdash; **required** &mdash; (`Array<Object>`) A list
- *         of BatchResultErrorEntrys.
- *         * `Id` &mdash; **required** &mdash; (`String`) The id of an
- *           entry in a batch request.
- *         * `SenderFault` &mdash; **required** &mdash; (`Boolean`) Whether
- *           the error happened due to the sender's fault.
- *         * `Code` &mdash; **required** &mdash; (`String`) An error code
- *           representing why the operation failed on this entry.
+ *       * `Successful` &mdash; (`Array<Object>`) A list of
+ *         DeleteMessageBatchResultEntrys.
+ *         * `Id` &mdash; (`String`) Represents a successfully deleted
+ *           message.
+ *       * `Failed` &mdash; (`Array<Object>`) A list of
+ *         BatchResultErrorEntrys.
+ *         * `Id` &mdash; (`String`) The id of an entry in a batch request.
+ *         * `SenderFault` &mdash; (`Boolean`) Whether the error happened
+ *           due to the sender's fault.
+ *         * `Code` &mdash; (`String`) An error code representing why the
+ *           operation failed on this entry.
  *         * `Message` &mdash; (`String`) A message explaining why the
  *           operation failed on this entry.
  *   @return [AWS.Request] a handle to the operation request for
@@ -417,27 +414,25 @@ AWS.SQS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Successful` &mdash; **required** &mdash; (`Array<Object>`) A
- *         list of SendMessageBatchResultEntrys.
- *         * `Id` &mdash; **required** &mdash; (`String`) An identifier for
- *           the message in this batch.
- *         * `MessageId` &mdash; **required** &mdash; (`String`) An
- *           identifier for the message.
- *         * `MD5OfMessageBody` &mdash; **required** &mdash; (`String`) An
- *           MD5 digest of the non-URL-encoded message body string. This
- *           can be used to verify that SQS received the message correctly.
- *           SQS first URL decodes the message before creating the MD5
- *           digest. For information about MD5, go to
+ *       * `Successful` &mdash; (`Array<Object>`) A list of
+ *         SendMessageBatchResultEntrys.
+ *         * `Id` &mdash; (`String`) An identifier for the message in this
+ *           batch.
+ *         * `MessageId` &mdash; (`String`) An identifier for the message.
+ *         * `MD5OfMessageBody` &mdash; (`String`) An MD5 digest of the
+ *           non-URL-encoded message body string. This can be used to
+ *           verify that SQS received the message correctly. SQS first URL
+ *           decodes the message before creating the MD5 digest. For
+ *           information about MD5, go to
  *           http://faqs.org/rfcs/rfc1321.html.
- *       * `Failed` &mdash; **required** &mdash; (`Array<Object>`) A list
- *         of BatchResultErrorEntrys with the error detail about each
- *         message that could not be enqueued.
- *         * `Id` &mdash; **required** &mdash; (`String`) The id of an
- *           entry in a batch request.
- *         * `SenderFault` &mdash; **required** &mdash; (`Boolean`) Whether
- *           the error happened due to the sender's fault.
- *         * `Code` &mdash; **required** &mdash; (`String`) An error code
- *           representing why the operation failed on this entry.
+ *       * `Failed` &mdash; (`Array<Object>`) A list of
+ *         BatchResultErrorEntrys with the error detail about each message
+ *         that could not be enqueued.
+ *         * `Id` &mdash; (`String`) The id of an entry in a batch request.
+ *         * `SenderFault` &mdash; (`Boolean`) Whether the error happened
+ *           due to the sender's fault.
+ *         * `Code` &mdash; (`String`) An error code representing why the
+ *           operation failed on this entry.
  *         * `Message` &mdash; (`String`) A message explaining why the
  *           operation failed on this entry.
  *   @return [AWS.Request] a handle to the operation request for

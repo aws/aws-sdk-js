@@ -100,16 +100,14 @@ AWS.SES = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DkimAttributes` &mdash; **required** &mdash; (`Object<Object>`)
- *         The DKIM attributes for an email address or a domain.
- *         * `DkimEnabled` &mdash; **required** &mdash; (`Boolean`) True if
- *           DKIM signing is enabled for email sent from the identity;
- *           false otherwise.
- *         * `DkimVerificationStatus` &mdash; **required** &mdash;
- *           (`String`) Describes whether Amazon SES has successfully
- *           verified the DKIM DNS records (tokens) published in the domain
- *           name's DNS. (This only applies to domain identities, not email
- *           address identities.)
+ *       * `DkimAttributes` &mdash; (`Object<Object>`) The DKIM attributes
+ *         for an email address or a domain.
+ *         * `DkimEnabled` &mdash; (`Boolean`) True if DKIM signing is
+ *           enabled for email sent from the identity; false otherwise.
+ *         * `DkimVerificationStatus` &mdash; (`String`) Describes whether
+ *           Amazon SES has successfully verified the DKIM DNS records
+ *           (tokens) published in the domain name's DNS. (This only
+ *           applies to domain identities, not email address identities.)
  *         * `DkimTokens` &mdash; (`Array<String>`) A set of DNS records
  *           (tokens) that must be published in the domain name's DNS for
  *           DKIM verification to complete, and which must remain published
@@ -135,22 +133,19 @@ AWS.SES = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `NotificationAttributes` &mdash; **required** &mdash;
- *         (`Object<Object>`) A map of Identity to
- *         IdentityNotificationAttributes.
- *         * `BounceTopic` &mdash; **required** &mdash; (`String`) The
- *           Amazon Resource Name (ARN) of the Amazon Simple Notification
- *           Service (SNS) topic where Amazon SES will publish bounce
- *           notifications.
- *         * `ComplaintTopic` &mdash; **required** &mdash; (`String`) The
- *           Amazon Resource Name (ARN) of the Amazon Simple Notification
- *           Service (SNS) topic where Amazon SES will publish complaint
- *           notifications.
- *         * `ForwardingEnabled` &mdash; **required** &mdash; (`Boolean`)
- *           Describes whether Amazon SES will forward feedback as email.
- *           true indicates that Amazon SES will forward feedback as email,
- *           while false indicates that feedback will be published only to
- *           the specified Bounce and Complaint topics.
+ *       * `NotificationAttributes` &mdash; (`Object<Object>`) A map of
+ *         Identity to IdentityNotificationAttributes.
+ *         * `BounceTopic` &mdash; (`String`) The Amazon Resource Name
+ *           (ARN) of the Amazon Simple Notification Service (SNS) topic
+ *           where Amazon SES will publish bounce notifications.
+ *         * `ComplaintTopic` &mdash; (`String`) The Amazon Resource Name
+ *           (ARN) of the Amazon Simple Notification Service (SNS) topic
+ *           where Amazon SES will publish complaint notifications.
+ *         * `ForwardingEnabled` &mdash; (`Boolean`) Describes whether
+ *           Amazon SES will forward feedback as email. true indicates that
+ *           Amazon SES will forward feedback as email, while false
+ *           indicates that feedback will be published only to the
+ *           specified Bounce and Complaint topics.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -169,12 +164,11 @@ AWS.SES = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `VerificationAttributes` &mdash; **required** &mdash;
- *         (`Object<Object>`) A map of Identities to
- *         IdentityVerificationAttributes objects.
- *         * `VerificationStatus` &mdash; **required** &mdash; (`String`)
- *           The verification status of the identity: "Pending", "Success",
- *           "Failed", or "TemporaryFailure".
+ *       * `VerificationAttributes` &mdash; (`Object<Object>`) A map of
+ *         Identities to IdentityVerificationAttributes objects.
+ *         * `VerificationStatus` &mdash; (`String`) The verification
+ *           status of the identity: "Pending", "Success", "Failed", or
+ *           "TemporaryFailure".
  *         * `VerificationToken` &mdash; (`String`) The verification token
  *           for a domain identity. Null for email address identities.
  *   @return [AWS.Request] a handle to the operation request for
@@ -248,8 +242,7 @@ AWS.SES = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Identities` &mdash; **required** &mdash; (`Array<String>`) A
- *         list of identities.
+ *       * `Identities` &mdash; (`Array<String>`) A list of identities.
  *       * `NextToken` &mdash; (`String`) The token used for pagination.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -331,8 +324,8 @@ AWS.SES = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `MessageId` &mdash; **required** &mdash; (`String`) The unique
- *         message identifier returned from the SendEmail action.
+ *       * `MessageId` &mdash; (`String`) The unique message identifier
+ *         returned from the SendEmail action.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -354,7 +347,7 @@ AWS.SES = inherit({})
  *       properly. MIME content types must be among those supported by
  *       Amazon SES. Refer to the Amazon SES Developer Guide for more
  *       details. Content must be base64-encoded, if MIME requires it.
- *       * `Data` &mdash; **required** &mdash; (`Base64 Encoded Data`)
+ *       * `Data` &mdash; **required** &mdash; (`Base64 Encoded String`)
  *         The raw data of the message. The client must ensure that the
  *         message format complies with Internet email standards
  *         regarding email header fields, MIME types, MIME encoding, and
@@ -370,8 +363,8 @@ AWS.SES = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `MessageId` &mdash; **required** &mdash; (`String`) The unique
- *         message identifier returned from the SendRawEmail action.
+ *       * `MessageId` &mdash; (`String`) The unique message identifier
+ *         returned from the SendRawEmail action.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -458,12 +451,11 @@ AWS.SES = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DkimTokens` &mdash; **required** &mdash; (`Array<String>`) A
- *         set of DNS records (tokens) that must be published in the domain
- *         name's DNS for DKIM verification to complete, and which must
- *         remain published in order for DKIM signing to succeed. The
- *         tokens are CNAME DNS records pointing to DKIM public keys hosted
- *         by Amazon SES.
+ *       * `DkimTokens` &mdash; (`Array<String>`) A set of DNS records
+ *         (tokens) that must be published in the domain name's DNS for
+ *         DKIM verification to complete, and which must remain published
+ *         in order for DKIM signing to succeed. The tokens are CNAME DNS
+ *         records pointing to DKIM public keys hosted by Amazon SES.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -482,9 +474,9 @@ AWS.SES = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `VerificationToken` &mdash; **required** &mdash; (`String`) A
- *         TXT record that must be placed in the DNS settings for the
- *         domain, in order to complete domain verification.
+ *       * `VerificationToken` &mdash; (`String`) A TXT record that must be
+ *         placed in the DNS settings for the domain, in order to complete
+ *         domain verification.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *

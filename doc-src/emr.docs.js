@@ -155,10 +155,8 @@ AWS.EMR = inherit({})
  *
  *       * `JobFlows` &mdash; (`Array<Object>`) A list of job flows
  *         matching the parameters supplied.
- *         * `JobFlowId` &mdash; **required** &mdash; (`String`) The job
- *           flow identifier.
- *         * `Name` &mdash; **required** &mdash; (`String`) The name of the
- *           job flow.
+ *         * `JobFlowId` &mdash; (`String`) The job flow identifier.
+ *         * `Name` &mdash; (`String`) The name of the job flow.
  *         * `LogUri` &mdash; (`String`) The location in Amazon S3 where
  *           log files for the job are stored.
  *         * `AmiVersion` &mdash; (`String`) The version of the AMI used to
@@ -166,12 +164,11 @@ AWS.EMR = inherit({})
  *           AMI versions currently supported by Amazon ElasticMapReduce,
  *           go to AMI Versions Supported in Elastic MapReduce in the
  *           Amazon Elastic MapReduce Developer's Guide.
- *         * `ExecutionStatusDetail` &mdash; **required** &mdash;
- *           (`Object`) Describes the execution status of the job flow.
- *           * `State` &mdash; **required** &mdash; (`String`) The state of
- *             the job flow.
- *           * `CreationDateTime` &mdash; **required** &mdash; (`Date`) The
- *             creation date and time of the job flow.
+ *         * `ExecutionStatusDetail` &mdash; (`Object`) Describes the
+ *           execution status of the job flow.
+ *           * `State` &mdash; (`String`) The state of the job flow.
+ *           * `CreationDateTime` &mdash; (`Date`) The creation date and
+ *             time of the job flow.
  *           * `StartDateTime` &mdash; (`Date`) The start date and time of
  *             the job flow.
  *           * `ReadyDateTime` &mdash; (`Date`) The date and time when the
@@ -180,48 +177,46 @@ AWS.EMR = inherit({})
  *             of the job flow.
  *           * `LastStateChangeReason` &mdash; (`String`) Description of
  *             the job flow last changed state.
- *         * `Instances` &mdash; **required** &mdash; (`Object`) Describes
- *           the Amazon EC2 instances of the job flow.
- *           * `MasterInstanceType` &mdash; **required** &mdash; (`String`)
- *             The Amazon EC2 master node instance type.
+ *         * `Instances` &mdash; (`Object`) Describes the Amazon EC2
+ *           instances of the job flow.
+ *           * `MasterInstanceType` &mdash; (`String`) The Amazon EC2
+ *             master node instance type.
  *           * `MasterPublicDnsName` &mdash; (`String`) The DNS name of the
  *             master node.
  *           * `MasterInstanceId` &mdash; (`String`) The Amazon EC2
  *             instance identifier of the master node.
- *           * `SlaveInstanceType` &mdash; **required** &mdash; (`String`)
- *             The Amazon EC2 slave node instance type.
- *           * `InstanceCount` &mdash; **required** &mdash; (`Integer`) The
- *             number of Amazon EC2 instances in the cluster. If the value
- *             is 1, the same instance serves as both the master and slave
- *             node. If the value is greater than 1, one instance is the
- *             master node and all others are slave nodes.
+ *           * `SlaveInstanceType` &mdash; (`String`) The Amazon EC2 slave
+ *             node instance type.
+ *           * `InstanceCount` &mdash; (`Integer`) The number of Amazon EC2
+ *             instances in the cluster. If the value is 1, the same
+ *             instance serves as both the master and slave node. If the
+ *             value is greater than 1, one instance is the master node and
+ *             all others are slave nodes.
  *           * `InstanceGroups` &mdash; (`Array<Object>`) Details about the
  *             job flow's instance groups.
  *             * `InstanceGroupId` &mdash; (`String`) Unique identifier for
  *               the instance group.
  *             * `Name` &mdash; (`String`) Friendly name for the instance
  *               group.
- *             * `Market` &mdash; **required** &mdash; (`String`) Market
- *               type of the Amazon EC2 instances used to create a cluster
- *               node.
- *             * `InstanceRole` &mdash; **required** &mdash; (`String`)
- *               Instance group role in the cluster
+ *             * `Market` &mdash; (`String`) Market type of the Amazon EC2
+ *               instances used to create a cluster node.
+ *             * `InstanceRole` &mdash; (`String`) Instance group role in
+ *               the cluster
  *             * `BidPrice` &mdash; (`String`) Bid price for EC2 Instances
  *               when launching nodes as Spot Instances, expressed in USD.
- *             * `InstanceType` &mdash; **required** &mdash; (`String`)
- *               Amazon EC2 Instance type.
- *             * `InstanceRequestCount` &mdash; **required** &mdash;
- *               (`Integer`) Target number of instances to run in the
- *               instance group.
- *             * `InstanceRunningCount` &mdash; **required** &mdash;
- *               (`Integer`) Actual count of running instances.
- *             * `State` &mdash; **required** &mdash; (`String`) State of
- *               instance group. The following values are deprecated:
- *               STARTING, TERMINATED, and FAILED.
+ *             * `InstanceType` &mdash; (`String`) Amazon EC2 Instance
+ *               type.
+ *             * `InstanceRequestCount` &mdash; (`Integer`) Target number
+ *               of instances to run in the instance group.
+ *             * `InstanceRunningCount` &mdash; (`Integer`) Actual count of
+ *               running instances.
+ *             * `State` &mdash; (`String`) State of instance group. The
+ *               following values are deprecated: STARTING, TERMINATED, and
+ *               FAILED.
  *             * `LastStateChangeReason` &mdash; (`String`) Details
  *               regarding the state of the instance group.
- *             * `CreationDateTime` &mdash; **required** &mdash; (`Date`)
- *               The date/time the instance group was created.
+ *             * `CreationDateTime` &mdash; (`Date`) The date/time the
+ *               instance group was created.
  *             * `StartDateTime` &mdash; (`Date`) The date/time the
  *               instance group was started.
  *             * `ReadyDateTime` &mdash; (`Date`) The date/time the
@@ -245,8 +240,8 @@ AWS.EMR = inherit({})
  *             launched.
  *           * `Placement` &mdash; (`Object`) Specifies the Amazon EC2
  *             Availability Zone for the job flow.
- *             * `AvailabilityZone` &mdash; **required** &mdash; (`String`)
- *               The Amazon EC2 Availability Zone for the job flow.
+ *             * `AvailabilityZone` &mdash; (`String`) The Amazon EC2
+ *               Availability Zone for the job flow.
  *           * `KeepJobFlowAliveWhenNoSteps` &mdash; (`Boolean`) Specifies
  *             whether or not the job flow should terminate after
  *             completing all steps.
@@ -258,14 +253,12 @@ AWS.EMR = inherit({})
  *             version for the job flow.
  *         * `Steps` &mdash; (`Array<Object>`) A list of steps run by the
  *           job flow.
- *           * `StepConfig` &mdash; **required** &mdash; (`Object`) The
- *             step configuration.
- *             * `Name` &mdash; **required** &mdash; (`String`) The name of
- *               the job flow step.
+ *           * `StepConfig` &mdash; (`Object`) The step configuration.
+ *             * `Name` &mdash; (`String`) The name of the job flow step.
  *             * `ActionOnFailure` &mdash; (`String`) Specifies the action
  *               to take if the job flow step fails.
- *             * `HadoopJarStep` &mdash; **required** &mdash; (`Object`)
- *               Specifies the JAR file used for the job flow step.
+ *             * `HadoopJarStep` &mdash; (`Object`) Specifies the JAR file
+ *               used for the job flow step.
  *               * `Properties` &mdash; (`Array<Object>`) A list of Java
  *                 properties that are set when the step runs. You can use
  *                 these properties to pass key value pairs to your main
@@ -274,8 +267,8 @@ AWS.EMR = inherit({})
  *                   key value pair.
  *                 * `Value` &mdash; (`String`) The value part of the
  *                   identified key.
- *               * `Jar` &mdash; **required** &mdash; (`String`) A path to
- *                 a JAR file run during the step.
+ *               * `Jar` &mdash; (`String`) A path to a JAR file run during
+ *                 the step.
  *               * `MainClass` &mdash; (`String`) The name of the main
  *                 class in the specified Java file. If not specified, the
  *                 JAR file should specify a Main-Class in its manifest
@@ -283,12 +276,11 @@ AWS.EMR = inherit({})
  *               * `Args` &mdash; (`Array<String>`) A list of command line
  *                 arguments passed to the JAR file's main function when
  *                 executed.
- *           * `ExecutionStatusDetail` &mdash; **required** &mdash;
- *             (`Object`) The description of the step status.
- *             * `State` &mdash; **required** &mdash; (`String`) The state
- *               of the job flow step.
- *             * `CreationDateTime` &mdash; **required** &mdash; (`Date`)
- *               The creation date and time of the step.
+ *           * `ExecutionStatusDetail` &mdash; (`Object`) The description
+ *             of the step status.
+ *             * `State` &mdash; (`String`) The state of the job flow step.
+ *             * `CreationDateTime` &mdash; (`Date`) The creation date and
+ *               time of the step.
  *             * `StartDateTime` &mdash; (`Date`) The start date and time
  *               of the step.
  *             * `EndDateTime` &mdash; (`Date`) The completion date and
@@ -299,14 +291,13 @@ AWS.EMR = inherit({})
  *           bootstrap actions run by the job flow.
  *           * `BootstrapActionConfig` &mdash; (`Object`) A description of
  *             the bootstrap action.
- *             * `Name` &mdash; **required** &mdash; (`String`) The name of
- *               the bootstrap action.
- *             * `ScriptBootstrapAction` &mdash; **required** &mdash;
- *               (`Object`) The script run by the bootstrap action.
- *               * `Path` &mdash; **required** &mdash; (`String`) Location
- *                 of the script to run during a bootstrap action. Can be
- *                 either a location in Amazon S3 or on a local file
- *                 system.
+ *             * `Name` &mdash; (`String`) The name of the bootstrap
+ *               action.
+ *             * `ScriptBootstrapAction` &mdash; (`Object`) The script run
+ *               by the bootstrap action.
+ *               * `Path` &mdash; (`String`) Location of the script to run
+ *                 during a bootstrap action. Can be either a location in
+ *                 Amazon S3 or on a local file system.
  *               * `Args` &mdash; (`Array<String>`) A list of command line
  *                 arguments to pass to the bootstrap action script.
  *         * `SupportedProducts` &mdash; (`Array<String>`) A list of

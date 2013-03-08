@@ -180,9 +180,8 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Job` &mdash; **required** &mdash; (`Object`) A section of the
- *         response body that provides information about the job that is
- *         created.
+ *       * `Job` &mdash; (`Object`) A section of the response body that
+ *         provides information about the job that is created.
  *         * `Id` &mdash; (`String`) The identifier that Elastic Transcoder
  *           assigned to the job. You use this value to get settings for
  *           the job or to delete the job.
@@ -342,9 +341,8 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Pipeline` &mdash; **required** &mdash; (`Object`) A section of
- *         the response body that provides information about the pipeline
- *         that is created.
+ *       * `Pipeline` &mdash; (`Object`) A section of the response body
+ *         that provides information about the pipeline that is created.
  *         * `Id` &mdash; (`String`) The identifier for the pipeline. You
  *           use this value to identify the pipeline in which you want to
  *           perform a variety of operations, such as creating a job or a
@@ -546,9 +544,8 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Preset` &mdash; **required** &mdash; (`Object`) A section of
- *         the response body that provides information about the preset
- *         that is created.
+ *       * `Preset` &mdash; (`Object`) A section of the response body that
+ *         provides information about the preset that is created.
  *         * `Id` &mdash; (`String`) Identifier for the new preset. You use
  *           this value to get settings for the preset or to delete it.
  *         * `Name` &mdash; (`String`) The name of the preset.
@@ -756,8 +753,8 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Jobs` &mdash; **required** &mdash; (`Array<Object>`) An array
- *         of Job objects that are in the specified pipeline.
+ *       * `Jobs` &mdash; (`Array<Object>`) An array of Job objects that
+ *         are in the specified pipeline.
  *         * `Id` &mdash; (`String`) The identifier that Elastic Transcoder
  *           assigned to the job. You use this value to get settings for
  *           the job or to delete the job.
@@ -895,8 +892,8 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Jobs` &mdash; **required** &mdash; (`Array<Object>`) An array
- *         of Job objects that have the specified status.
+ *       * `Jobs` &mdash; (`Array<Object>`) An array of Job objects that
+ *         have the specified status.
  *         * `Id` &mdash; (`String`) The identifier that Elastic Transcoder
  *           assigned to the job. You use this value to get settings for
  *           the job or to delete the job.
@@ -1024,8 +1021,8 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Pipelines` &mdash; **required** &mdash; (`Array<Object>`) An
- *         array of Pipeline objects.
+ *       * `Pipelines` &mdash; (`Array<Object>`) An array of Pipeline
+ *         objects.
  *         * `Id` &mdash; (`String`) The identifier for the pipeline. You
  *           use this value to identify the pipeline in which you want to
  *           perform a variety of operations, such as creating a job or a
@@ -1086,8 +1083,7 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Presets` &mdash; **required** &mdash; (`Array<Object>`) An
- *         array of Preset objects.
+ *       * `Presets` &mdash; (`Array<Object>`) An array of Preset objects.
  *         * `Id` &mdash; (`String`) Identifier for the new preset. You use
  *           this value to get settings for the preset or to delete it.
  *         * `Name` &mdash; (`String`) The name of the preset.
@@ -1252,8 +1248,8 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Job` &mdash; **required** &mdash; (`Object`) A section of the
- *         response body that provides information about the job.
+ *       * `Job` &mdash; (`Object`) A section of the response body that
+ *         provides information about the job.
  *         * `Id` &mdash; (`String`) The identifier that Elastic Transcoder
  *           assigned to the job. You use this value to get settings for
  *           the job or to delete the job.
@@ -1378,8 +1374,8 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Pipeline` &mdash; **required** &mdash; (`Object`) A section of
- *         the response body that provides information about the pipeline.
+ *       * `Pipeline` &mdash; (`Object`) A section of the response body
+ *         that provides information about the pipeline.
  *         * `Id` &mdash; (`String`) The identifier for the pipeline. You
  *           use this value to identify the pipeline in which you want to
  *           perform a variety of operations, such as creating a job or a
@@ -1442,8 +1438,8 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Preset` &mdash; **required** &mdash; (`Object`) A section of
- *         the response body that provides information about the preset.
+ *       * `Preset` &mdash; (`Object`) A section of the response body that
+ *         provides information about the preset.
  *         * `Id` &mdash; (`String`) Identifier for the new preset. You use
  *           this value to get settings for the preset or to delete it.
  *         * `Name` &mdash; (`String`) The name of the preset.
@@ -1618,9 +1614,8 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Success` &mdash; **required** &mdash; (`String`) If the
- *         operation is successful, this value is true; otherwise, the
- *         value is false.
+ *       * `Success` &mdash; (`String`) If the operation is successful,
+ *         this value is true; otherwise, the value is false.
  *       * `Messages` &mdash; (`Array<String>`) If the Success element
  *         contains false, this value is an array of one or more error
  *         messages that were generated during the test process.
@@ -1666,8 +1661,8 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Pipeline` &mdash; **required** &mdash; (`Object`) A section of
- *         the response body that provides information about the pipeline.
+ *       * `Pipeline` &mdash; (`Object`) A section of the response body
+ *         that provides information about the pipeline.
  *         * `Id` &mdash; (`String`) The identifier for the pipeline. You
  *           use this value to identify the pipeline in which you want to
  *           perform a variety of operations, such as creating a job or a
@@ -1734,8 +1729,8 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Pipeline` &mdash; **required** &mdash; (`Object`) A section of
- *         the response body that provides information about the pipeline.
+ *       * `Pipeline` &mdash; (`Object`) A section of the response body
+ *         that provides information about the pipeline.
  *         * `Id` &mdash; (`String`) The identifier for the pipeline. You
  *           use this value to identify the pipeline in which you want to
  *           perform a variety of operations, such as creating a job or a

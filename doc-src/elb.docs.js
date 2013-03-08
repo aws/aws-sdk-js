@@ -151,36 +151,34 @@ AWS.ELB = inherit({})
  *
  *       * `HealthCheck` &mdash; (`Object`) The updated healthcheck for the
  *         instances.
- *         * `Target` &mdash; **required** &mdash; (`String`) Specifies the
- *           instance being checked. The protocol is either TCP, HTTP,
- *           HTTPS, or SSL. The range of valid ports is one (1) through
- *           65535. TCP is the default, specified as a TCP: port pair, for
- *           example "TCP:5000". In this case a healthcheck simply attempts
- *           to open a TCP connection to the instance on the specified
- *           port. Failure to connect within the configured timeout is
- *           considered unhealthy. SSL is also specified as SSL: port pair,
- *           for example, SSL:5000. For HTTP or HTTPS protocol, the
- *           situation is different. You have to include a ping path in the
- *           string. HTTP is specified as a HTTP:port;/;PathToPing;
- *           grouping, for example "HTTP:80/weather/us/wa/seattle". In this
- *           case, a HTTP GET request is issued to the instance on the
- *           given port and path. Any answer other than "200 OK" within the
- *           timeout period is considered unhealthy. The total length of
- *           the HTTP ping target needs to be 1024 16-bit Unicode
- *           characters or less.
- *         * `Interval` &mdash; **required** &mdash; (`Integer`) Specifies
- *           the approximate interval, in seconds, between health checks of
- *           an individual instance.
- *         * `Timeout` &mdash; **required** &mdash; (`Integer`) Specifies
- *           the amount of time, in seconds, during which no response means
- *           a failed health probe. This value must be less than the
- *           Interval value.
- *         * `UnhealthyThreshold` &mdash; **required** &mdash; (`Integer`)
- *           Specifies the number of consecutive health probe failures
- *           required before moving the instance to the Unhealthy state.
- *         * `HealthyThreshold` &mdash; **required** &mdash; (`Integer`)
- *           Specifies the number of consecutive health probe successes
- *           required before moving the instance to the Healthy state.
+ *         * `Target` &mdash; (`String`) Specifies the instance being
+ *           checked. The protocol is either TCP, HTTP, HTTPS, or SSL. The
+ *           range of valid ports is one (1) through 65535. TCP is the
+ *           default, specified as a TCP: port pair, for example
+ *           "TCP:5000". In this case a healthcheck simply attempts to open
+ *           a TCP connection to the instance on the specified port.
+ *           Failure to connect within the configured timeout is considered
+ *           unhealthy. SSL is also specified as SSL: port pair, for
+ *           example, SSL:5000. For HTTP or HTTPS protocol, the situation
+ *           is different. You have to include a ping path in the string.
+ *           HTTP is specified as a HTTP:port;/;PathToPing; grouping, for
+ *           example "HTTP:80/weather/us/wa/seattle". In this case, a HTTP
+ *           GET request is issued to the instance on the given port and
+ *           path. Any answer other than "200 OK" within the timeout period
+ *           is considered unhealthy. The total length of the HTTP ping
+ *           target needs to be 1024 16-bit Unicode characters or less.
+ *         * `Interval` &mdash; (`Integer`) Specifies the approximate
+ *           interval, in seconds, between health checks of an individual
+ *           instance.
+ *         * `Timeout` &mdash; (`Integer`) Specifies the amount of time, in
+ *           seconds, during which no response means a failed health probe.
+ *           This value must be less than the Interval value.
+ *         * `UnhealthyThreshold` &mdash; (`Integer`) Specifies the number
+ *           of consecutive health probe failures required before moving
+ *           the instance to the Unhealthy state.
+ *         * `HealthyThreshold` &mdash; (`Integer`) Specifies the number of
+ *           consecutive health probe successes required before moving the
+ *           instance to the Healthy state.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -613,14 +611,13 @@ AWS.ELB = inherit({})
  *           and PolicyNames are returned in a list of tuples in the
  *           ListenerDescriptions element.
  *           * `Listener` &mdash; (`Object`)
- *             * `Protocol` &mdash; **required** &mdash; (`String`)
- *               Specifies the LoadBalancer transport protocol to use for
- *               routing - HTTP, HTTPS, TCP or SSL. This property cannot be
- *               modified for the life of the LoadBalancer.
- *             * `LoadBalancerPort` &mdash; **required** &mdash;
- *               (`Integer`) Specifies the external LoadBalancer port
- *               number. This property cannot be modified for the life of
+ *             * `Protocol` &mdash; (`String`) Specifies the LoadBalancer
+ *               transport protocol to use for routing - HTTP, HTTPS, TCP
+ *               or SSL. This property cannot be modified for the life of
  *               the LoadBalancer.
+ *             * `LoadBalancerPort` &mdash; (`Integer`) Specifies the
+ *               external LoadBalancer port number. This property cannot be
+ *               modified for the life of the LoadBalancer.
  *             * `InstanceProtocol` &mdash; (`String`) Specifies the
  *               protocol to use for routing traffic to back-end instances
  *               \- HTTP, HTTPS, TCP, or SSL. This property cannot be
@@ -635,10 +632,9 @@ AWS.ELB = inherit({})
  *               there is another listener with the same InstancePort whose
  *               InstanceProtocol is HTTP or TCP, the listener's
  *               InstanceProtocol must be either HTTP or TCP.
- *             * `InstancePort` &mdash; **required** &mdash; (`Integer`)
- *               Specifies the TCP port on which the instance server is
- *               listening. This property cannot be modified for the life
- *               of the LoadBalancer.
+ *             * `InstancePort` &mdash; (`Integer`) Specifies the TCP port
+ *               on which the instance server is listening. This property
+ *               cannot be modified for the life of the LoadBalancer.
  *             * `SSLCertificateId` &mdash; (`String`) The ARN string of
  *               the server certificate. To get the ARN of the server
  *               certificate, call the AWS Identity and Access Management
@@ -687,38 +683,35 @@ AWS.ELB = inherit({})
  *         * `HealthCheck` &mdash; (`Object`) Specifies information
  *           regarding the various health probes conducted on the
  *           LoadBalancer.
- *           * `Target` &mdash; **required** &mdash; (`String`) Specifies
- *             the instance being checked. The protocol is either TCP,
- *             HTTP, HTTPS, or SSL. The range of valid ports is one (1)
- *             through 65535. TCP is the default, specified as a TCP: port
- *             pair, for example "TCP:5000". In this case a healthcheck
- *             simply attempts to open a TCP connection to the instance on
- *             the specified port. Failure to connect within the configured
- *             timeout is considered unhealthy. SSL is also specified as
- *             SSL: port pair, for example, SSL:5000. For HTTP or HTTPS
- *             protocol, the situation is different. You have to include a
- *             ping path in the string. HTTP is specified as a
- *             HTTP:port;/;PathToPing; grouping, for example
- *             "HTTP:80/weather/us/wa/seattle". In this case, a HTTP GET
- *             request is issued to the instance on the given port and
- *             path. Any answer other than "200 OK" within the timeout
- *             period is considered unhealthy. The total length of the HTTP
- *             ping target needs to be 1024 16-bit Unicode characters or
- *             less.
- *           * `Interval` &mdash; **required** &mdash; (`Integer`)
- *             Specifies the approximate interval, in seconds, between
- *             health checks of an individual instance.
- *           * `Timeout` &mdash; **required** &mdash; (`Integer`) Specifies
- *             the amount of time, in seconds, during which no response
- *             means a failed health probe. This value must be less than
- *             the Interval value.
- *           * `UnhealthyThreshold` &mdash; **required** &mdash;
- *             (`Integer`) Specifies the number of consecutive health probe
- *             failures required before moving the instance to the
- *             Unhealthy state.
- *           * `HealthyThreshold` &mdash; **required** &mdash; (`Integer`)
- *             Specifies the number of consecutive health probe successes
- *             required before moving the instance to the Healthy state.
+ *           * `Target` &mdash; (`String`) Specifies the instance being
+ *             checked. The protocol is either TCP, HTTP, HTTPS, or SSL.
+ *             The range of valid ports is one (1) through 65535. TCP is
+ *             the default, specified as a TCP: port pair, for example
+ *             "TCP:5000". In this case a healthcheck simply attempts to
+ *             open a TCP connection to the instance on the specified port.
+ *             Failure to connect within the configured timeout is
+ *             considered unhealthy. SSL is also specified as SSL: port
+ *             pair, for example, SSL:5000. For HTTP or HTTPS protocol, the
+ *             situation is different. You have to include a ping path in
+ *             the string. HTTP is specified as a HTTP:port;/;PathToPing;
+ *             grouping, for example "HTTP:80/weather/us/wa/seattle". In
+ *             this case, a HTTP GET request is issued to the instance on
+ *             the given port and path. Any answer other than "200 OK"
+ *             within the timeout period is considered unhealthy. The total
+ *             length of the HTTP ping target needs to be 1024 16-bit
+ *             Unicode characters or less.
+ *           * `Interval` &mdash; (`Integer`) Specifies the approximate
+ *             interval, in seconds, between health checks of an individual
+ *             instance.
+ *           * `Timeout` &mdash; (`Integer`) Specifies the amount of time,
+ *             in seconds, during which no response means a failed health
+ *             probe. This value must be less than the Interval value.
+ *           * `UnhealthyThreshold` &mdash; (`Integer`) Specifies the
+ *             number of consecutive health probe failures required before
+ *             moving the instance to the Unhealthy state.
+ *           * `HealthyThreshold` &mdash; (`Integer`) Specifies the number
+ *             of consecutive health probe successes required before moving
+ *             the instance to the Healthy state.
  *         * `SourceSecurityGroup` &mdash; (`Object`) The security group
  *           that you can use as part of your inbound rules for your
  *           LoadBalancer's back-end Amazon EC2 application instances. To
