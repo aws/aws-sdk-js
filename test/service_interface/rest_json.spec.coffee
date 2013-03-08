@@ -31,8 +31,12 @@ describe 'AWS.ServiceInterface.RestJson', ->
           http:
             method: 'POST'
             uri: '/'
-          input: null
-          output: null
+          input:
+            type: 'structure'
+            members: {}
+          output:
+            type: 'structure'
+            members: {}
 
     AWS.Client.defineMethods(MockJSONRESTClient)
 
@@ -168,7 +172,7 @@ describe 'AWS.ServiceInterface.RestJson', ->
       it 'builds root element if rules contains root', ->
         buildRequest ->
           operation.input =
-            root: 'Config'
+            payload: 'Config'
             members:
               Config:
                 type: 'structure'

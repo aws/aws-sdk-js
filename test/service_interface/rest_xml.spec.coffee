@@ -33,8 +33,12 @@ describe 'AWS.ServiceInterface.RestXml', ->
           http:
             method: 'POST' # http method
             uri: '/'    # uri
-          input: null   # no params
-          output: null   # no ouputs
+          input:
+            type: 'structure'
+            members: {}
+          output:
+            type: 'structure'
+            members: {}
 
     AWS.Client.defineMethods(MockRESTXMLClient)
     operation = MockRESTXMLClient.prototype.api.operations.sampleOperation
@@ -88,10 +92,11 @@ describe 'AWS.ServiceInterface.RestXml', ->
         expect(request.httpRequest.body).toEqual('abc')
 
     describe 'xml bodies', ->
-      it 'populates the body with XML from the params w/out a location', ->
+      it 'populates the body with XML from the params', ->
         buildRequest ->
           operation.http.uri = '/{Bucket}?next-marker={Marker}&limit={Limit}'
           operation.input =
+            payload: 'Config'
             members:
               Bucket: # uri path param
                 type: 'string'
@@ -130,12 +135,13 @@ describe 'AWS.ServiceInterface.RestXml', ->
                         Bar: {}
           request.params =
             ACL: 'canned-acl'
-            Abc: 'abc'
-            Locations: ['a', 'b', 'c']
-            Data: [
-              { Foo:'foo1', Bar:'bar1' },
-              { Foo:'foo2', Bar:'bar2' },
-            ]
+            Config:
+              Abc: 'abc'
+              Locations: ['a', 'b', 'c']
+              Data: [
+                { Foo:'foo1', Bar:'bar1' },
+                { Foo:'foo2', Bar:'bar2' },
+              ]
             Bucket: 'bucket-name'
             Marker: 'marker'
             Limit: 123
