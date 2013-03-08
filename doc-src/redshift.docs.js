@@ -160,7 +160,10 @@ AWS.Redshift = inherit({})
  *         * `DBName` &mdash; (`String`) The name of the database that was
  *           created when the cluster was created.
  *         * `VpcId` &mdash; (`String`) The VPC identifier of the cluster
- *           if the snapshot is from a cluster in a VPC.
+ *           if the snapshot is from a cluster in a VPC. Otherwise, this
+ *           field is not in the output.
+ *         * `Encrypted` &mdash; (`Boolean`) If true, the data in the
+ *           snapshot is encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -205,19 +208,19 @@ AWS.Redshift = inherit({})
  *       password associated with the master user account for the cluster
  *       that is being created. Constraints: Must be between 8 and 64
  *       characters in length. Must contain at least one uppercase
- *       letter. Must contain one lowercase letter. Must contain one
- *       number.
+ *       letter. Must contain at least one lowercase letter. Must contain
+ *       one number.
  *     * `ClusterSecurityGroups` &mdash; (`Array<String>`) A list of
  *       security groups to be associated with this cluster. Default: The
  *       default cluster security group for Amazon Redshift.
  *     * `VpcSecurityGroupIds` &mdash; (`Array<String>`) A list of
- *       Virtual Private Cloud (VPC) security groups to associate with
- *       the cluster. Default: The default VPC security group is
- *       associated. Type: String list
- *     * `ClusterSubnetGroupName` &mdash; (`String`) A cluster subnet
- *       group to be associated with this cluster. If this parameter is
- *       not provided the resulting cluster will be deployed outside
- *       virtual private cloud (VPC).
+ *       Virtual Private Cloud (VPC) security groups to be associated
+ *       with the cluster. Default: The default VPC security group is
+ *       associated with the cluster.
+ *     * `ClusterSubnetGroupName` &mdash; (`String`) The name of a
+ *       cluster subnet group to be associated with this cluster. If this
+ *       parameter is not provided the resulting cluster will be deployed
+ *       outside virtual private cloud (VPC).
  *     * `AvailabilityZone` &mdash; (`String`) The EC2 Availability Zone
  *       (AZ) in which you want Amazon Redshift to provision the cluster.
  *       For example, if you have several EC2 instances running in a
@@ -257,7 +260,7 @@ AWS.Redshift = inherit({})
  *       accepts incoming connections. The cluster is accessible only via
  *       the JDBC and ODBC connection strings. Part of the connection
  *       string requires the port on which the cluster will listen for
- *       incoming connections. Default: 5439 Valid Values: 1150-65535 ???
+ *       incoming connections. Default: 5439 Valid Values: 1150-65535
  *     * `ClusterVersion` &mdash; (`String`) The version of the Amazon
  *       Redshift engine software that you want to deploy on the cluster.
  *       The version selected runs on all the nodes in the cluster.
@@ -281,6 +284,8 @@ AWS.Redshift = inherit({})
  *       at least 1 and no more than 100.
  *     * `PubliclyAccessible` &mdash; (`Boolean`) If true, the cluster
  *       can be accessed from a public network.
+ *     * `Encrypted` &mdash; (`Boolean`) If true, the data in cluster is
+ *       encrypted at rest. Default: false
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -297,15 +302,15 @@ AWS.Redshift = inherit({})
  *         * `NodeType` &mdash; (`String`) The node type for the nodes in
  *           the cluster.
  *         * `ClusterStatus` &mdash; (`String`) The current state of this
- *           cluster. Possible values include "available", "creating",
- *           "deleting", "rebooting", and "resizing".
+ *           cluster. Possible values include available, creating,
+ *           deleting, rebooting, and resizing.
  *         * `ModifyStatus` &mdash; (`String`) The status of a modify
  *           operation, if any, initiated for the cluster.
  *         * `MasterUsername` &mdash; (`String`) The master user name for
- *           the cluster. This name is used to connect to the database
- *           specified in DBName.
+ *           the cluster. This name is used to connect to the database that
+ *           is specified in DBName.
  *         * `DBName` &mdash; (`String`) The name of the initial database
- *           that was provided when the cluster was created. This same name
+ *           that was created when the cluster was created. This same name
  *           is returned for the life of the cluster. If an initial
  *           database was not specified, a database named "dev" was created
  *           by default.
@@ -322,15 +327,17 @@ AWS.Redshift = inherit({})
  *           Each security group is represented by an element that contains
  *           ClusterSecurityGroup.Name and ClusterSecurityGroup.Status
  *           subelements. Cluster security groups are used when the cluster
- *           is not created in a VPC.
+ *           is not created in a VPC. Clusters that are created in a VPC
+ *           use VPC security groups, which are listed by the
+ *           VpcSecurityGroups parameter.
  *           * `ClusterSecurityGroupName` &mdash; (`String`) The name of
  *             the cluster security group.
  *           * `Status` &mdash; (`String`) The status of the cluster
  *             security group.
  *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) A list of
  *           Virtual Private Cloud (VPC) security groups that are
- *           associated with the cluster. This parameter is only valid when
- *           the cluster is in a VPC.
+ *           associated with the cluster. This parameter is returned only
+ *           if the cluster is in a VPC.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
  *         * `ClusterParameterGroups` &mdash; (`Array<Object>`) The list of
@@ -342,16 +349,16 @@ AWS.Redshift = inherit({})
  *             parameter updates.
  *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
  *           subnet group that is associated with the cluster. This
- *           parameter is only valid when the cluster is in a VPC.
- *         * `VpcId` &mdash; (`String`) The indentifier of the VPC the
+ *           parameter is valid only when the cluster is in a VPC.
+ *         * `VpcId` &mdash; (`String`) The identifier of the VPC the
  *           cluster is in, if the cluster is in a VPC.
  *         * `AvailabilityZone` &mdash; (`String`) The name of the
  *           Availability Zone in which the cluster is located.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
  *           time range (in UTC) during which system maintenance can occur.
  *         * `PendingModifiedValues` &mdash; (`Object`) If present, changes
- *           to the cluster are pending. Specific changes are identified by
- *           subelements.
+ *           to the cluster are pending. Specific pending changes are
+ *           identified by subelements.
  *           * `MasterUserPassword` &mdash; (`String`) The pending or
  *             in-progress change of the master credentials for the
  *             cluster.
@@ -375,6 +382,8 @@ AWS.Redshift = inherit({})
  *           nodes in the cluster.
  *         * `PubliclyAccessible` &mdash; (`Boolean`) If true, the cluster
  *           can be accessed from a public network.
+ *         * `Encrypted` &mdash; (`Boolean`) If true, data in cluster is
+ *           encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -526,7 +535,10 @@ AWS.Redshift = inherit({})
  *         * `DBName` &mdash; (`String`) The name of the database that was
  *           created when the cluster was created.
  *         * `VpcId` &mdash; (`String`) The VPC identifier of the cluster
- *           if the snapshot is from a cluster in a VPC.
+ *           if the snapshot is from a cluster in a VPC. Otherwise, this
+ *           field is not in the output.
+ *         * `Encrypted` &mdash; (`Boolean`) If true, the data in the
+ *           snapshot is encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -563,8 +575,8 @@ AWS.Redshift = inherit({})
  *         * `VpcId` &mdash; (`String`) The VPC ID of the cluster subnet
  *           group.
  *         * `SubnetGroupStatus` &mdash; (`String`) The status of the
- *           cluster subnet group. The valid values are "Complete",
- *           "Incomplete" and "Invalid".
+ *           cluster subnet group. Possible values are Complete, Incomplete
+ *           and Invalid.
  *         * `Subnets` &mdash; (`Array<Object>`) A list of the VPC Subnet
  *           elements.
  *           * `SubnetIdentifier` &mdash; (`String`) The identifier of the
@@ -591,7 +603,7 @@ AWS.Redshift = inherit({})
  *       is not created. If false, a final cluster snapshot is created
  *       before the cluster is deleted. The
  *       FinalClusterSnapshotIdentifier parameter must be specified if
- *       SkipFinalClusterSnapshot is false. Default: false
+ *       SkipFinalClusterSnapshot is false.Default: false
  *     * `FinalClusterSnapshotIdentifier` &mdash; (`String`) The
  *       identifier of the final snapshot that is to be created
  *       immediately before deleting the cluster. If this parameter is
@@ -615,15 +627,15 @@ AWS.Redshift = inherit({})
  *         * `NodeType` &mdash; (`String`) The node type for the nodes in
  *           the cluster.
  *         * `ClusterStatus` &mdash; (`String`) The current state of this
- *           cluster. Possible values include "available", "creating",
- *           "deleting", "rebooting", and "resizing".
+ *           cluster. Possible values include available, creating,
+ *           deleting, rebooting, and resizing.
  *         * `ModifyStatus` &mdash; (`String`) The status of a modify
  *           operation, if any, initiated for the cluster.
  *         * `MasterUsername` &mdash; (`String`) The master user name for
- *           the cluster. This name is used to connect to the database
- *           specified in DBName.
+ *           the cluster. This name is used to connect to the database that
+ *           is specified in DBName.
  *         * `DBName` &mdash; (`String`) The name of the initial database
- *           that was provided when the cluster was created. This same name
+ *           that was created when the cluster was created. This same name
  *           is returned for the life of the cluster. If an initial
  *           database was not specified, a database named "dev" was created
  *           by default.
@@ -640,15 +652,17 @@ AWS.Redshift = inherit({})
  *           Each security group is represented by an element that contains
  *           ClusterSecurityGroup.Name and ClusterSecurityGroup.Status
  *           subelements. Cluster security groups are used when the cluster
- *           is not created in a VPC.
+ *           is not created in a VPC. Clusters that are created in a VPC
+ *           use VPC security groups, which are listed by the
+ *           VpcSecurityGroups parameter.
  *           * `ClusterSecurityGroupName` &mdash; (`String`) The name of
  *             the cluster security group.
  *           * `Status` &mdash; (`String`) The status of the cluster
  *             security group.
  *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) A list of
  *           Virtual Private Cloud (VPC) security groups that are
- *           associated with the cluster. This parameter is only valid when
- *           the cluster is in a VPC.
+ *           associated with the cluster. This parameter is returned only
+ *           if the cluster is in a VPC.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
  *         * `ClusterParameterGroups` &mdash; (`Array<Object>`) The list of
@@ -660,16 +674,16 @@ AWS.Redshift = inherit({})
  *             parameter updates.
  *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
  *           subnet group that is associated with the cluster. This
- *           parameter is only valid when the cluster is in a VPC.
- *         * `VpcId` &mdash; (`String`) The indentifier of the VPC the
+ *           parameter is valid only when the cluster is in a VPC.
+ *         * `VpcId` &mdash; (`String`) The identifier of the VPC the
  *           cluster is in, if the cluster is in a VPC.
  *         * `AvailabilityZone` &mdash; (`String`) The name of the
  *           Availability Zone in which the cluster is located.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
  *           time range (in UTC) during which system maintenance can occur.
  *         * `PendingModifiedValues` &mdash; (`Object`) If present, changes
- *           to the cluster are pending. Specific changes are identified by
- *           subelements.
+ *           to the cluster are pending. Specific pending changes are
+ *           identified by subelements.
  *           * `MasterUserPassword` &mdash; (`String`) The pending or
  *             in-progress change of the master credentials for the
  *             cluster.
@@ -693,6 +707,8 @@ AWS.Redshift = inherit({})
  *           nodes in the cluster.
  *         * `PubliclyAccessible` &mdash; (`Boolean`) If true, the cluster
  *           can be accessed from a public network.
+ *         * `Encrypted` &mdash; (`Boolean`) If true, data in cluster is
+ *           encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -781,7 +797,10 @@ AWS.Redshift = inherit({})
  *         * `DBName` &mdash; (`String`) The name of the database that was
  *           created when the cluster was created.
  *         * `VpcId` &mdash; (`String`) The VPC identifier of the cluster
- *           if the snapshot is from a cluster in a VPC.
+ *           if the snapshot is from a cluster in a VPC. Otherwise, this
+ *           field is not in the output.
+ *         * `Encrypted` &mdash; (`Boolean`) If true, the data in the
+ *           snapshot is encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1039,7 +1058,10 @@ AWS.Redshift = inherit({})
  *         * `DBName` &mdash; (`String`) The name of the database that was
  *           created when the cluster was created.
  *         * `VpcId` &mdash; (`String`) The VPC identifier of the cluster
- *           if the snapshot is from a cluster in a VPC.
+ *           if the snapshot is from a cluster in a VPC. Otherwise, this
+ *           field is not in the output.
+ *         * `Encrypted` &mdash; (`Boolean`) If true, the data in the
+ *           snapshot is encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1057,7 +1079,7 @@ AWS.Redshift = inherit({})
  *       Constraints: Must be at least 20 and no more than 100.
  *     * `Marker` &mdash; (`String`) An optional marker returned by a
  *       previous DescribeClusterSubnetGroups request to indicate the
- *       first cluster subnet group that the request will return.
+ *       first cluster subnet group that the current request will return.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1069,9 +1091,9 @@ AWS.Redshift = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Marker` &mdash; (`String`) A marker at which to continue
- *         listing cluster subnet groups in a new request. The response
- *         returns a marker if there are more subnet groups to list than
- *         returned in the response.
+ *         listing cluster subnet groups in a new request. A marker is
+ *         returned if there are more cluster subnet groups to list than
+ *         were returned in the response.
  *       * `ClusterSubnetGroups` &mdash; (`Array<Object>`) A list of
  *         ClusterSubnetGroup instances.
  *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
@@ -1081,8 +1103,8 @@ AWS.Redshift = inherit({})
  *         * `VpcId` &mdash; (`String`) The VPC ID of the cluster subnet
  *           group.
  *         * `SubnetGroupStatus` &mdash; (`String`) The status of the
- *           cluster subnet group. The valid values are "Complete",
- *           "Incomplete" and "Invalid".
+ *           cluster subnet group. Possible values are Complete, Incomplete
+ *           and Invalid.
  *         * `Subnets` &mdash; (`Array<Object>`) A list of the VPC Subnet
  *           elements.
  *           * `SubnetIdentifier` &mdash; (`String`) The identifier of the
@@ -1127,7 +1149,7 @@ AWS.Redshift = inherit({})
  *       * `ClusterVersions` &mdash; (`Array<Object>`) A list of Version
  *         elements.
  *         * `ClusterVersion` &mdash; (`String`) The version number used by
- *           the the cluster.
+ *           the cluster.
  *         * `ClusterParameterGroupFamily` &mdash; (`String`) The name of
  *           the cluster parameter group family for the cluster.
  *         * `Description` &mdash; (`String`) The description of the
@@ -1173,15 +1195,15 @@ AWS.Redshift = inherit({})
  *         * `NodeType` &mdash; (`String`) The node type for the nodes in
  *           the cluster.
  *         * `ClusterStatus` &mdash; (`String`) The current state of this
- *           cluster. Possible values include "available", "creating",
- *           "deleting", "rebooting", and "resizing".
+ *           cluster. Possible values include available, creating,
+ *           deleting, rebooting, and resizing.
  *         * `ModifyStatus` &mdash; (`String`) The status of a modify
  *           operation, if any, initiated for the cluster.
  *         * `MasterUsername` &mdash; (`String`) The master user name for
- *           the cluster. This name is used to connect to the database
- *           specified in DBName.
+ *           the cluster. This name is used to connect to the database that
+ *           is specified in DBName.
  *         * `DBName` &mdash; (`String`) The name of the initial database
- *           that was provided when the cluster was created. This same name
+ *           that was created when the cluster was created. This same name
  *           is returned for the life of the cluster. If an initial
  *           database was not specified, a database named "dev" was created
  *           by default.
@@ -1198,15 +1220,17 @@ AWS.Redshift = inherit({})
  *           Each security group is represented by an element that contains
  *           ClusterSecurityGroup.Name and ClusterSecurityGroup.Status
  *           subelements. Cluster security groups are used when the cluster
- *           is not created in a VPC.
+ *           is not created in a VPC. Clusters that are created in a VPC
+ *           use VPC security groups, which are listed by the
+ *           VpcSecurityGroups parameter.
  *           * `ClusterSecurityGroupName` &mdash; (`String`) The name of
  *             the cluster security group.
  *           * `Status` &mdash; (`String`) The status of the cluster
  *             security group.
  *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) A list of
  *           Virtual Private Cloud (VPC) security groups that are
- *           associated with the cluster. This parameter is only valid when
- *           the cluster is in a VPC.
+ *           associated with the cluster. This parameter is returned only
+ *           if the cluster is in a VPC.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
  *         * `ClusterParameterGroups` &mdash; (`Array<Object>`) The list of
@@ -1218,16 +1242,16 @@ AWS.Redshift = inherit({})
  *             parameter updates.
  *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
  *           subnet group that is associated with the cluster. This
- *           parameter is only valid when the cluster is in a VPC.
- *         * `VpcId` &mdash; (`String`) The indentifier of the VPC the
+ *           parameter is valid only when the cluster is in a VPC.
+ *         * `VpcId` &mdash; (`String`) The identifier of the VPC the
  *           cluster is in, if the cluster is in a VPC.
  *         * `AvailabilityZone` &mdash; (`String`) The name of the
  *           Availability Zone in which the cluster is located.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
  *           time range (in UTC) during which system maintenance can occur.
  *         * `PendingModifiedValues` &mdash; (`Object`) If present, changes
- *           to the cluster are pending. Specific changes are identified by
- *           subelements.
+ *           to the cluster are pending. Specific pending changes are
+ *           identified by subelements.
  *           * `MasterUserPassword` &mdash; (`String`) The pending or
  *             in-progress change of the master credentials for the
  *             cluster.
@@ -1251,6 +1275,8 @@ AWS.Redshift = inherit({})
  *           nodes in the cluster.
  *         * `PubliclyAccessible` &mdash; (`Boolean`) If true, the cluster
  *           can be accessed from a public network.
+ *         * `Encrypted` &mdash; (`Boolean`) If true, data in cluster is
+ *           encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1341,8 +1367,8 @@ AWS.Redshift = inherit({})
  *     * `Duration` &mdash; (`Integer`) The number of minutes prior to
  *       the time of the request for which to retrieve events. For
  *       example, if the request is sent at 18:00 and you specify a
- *       druration of 60, then only events which have occurred after
- *       17:00 will be returned. Default: 60
+ *       duration of 60, then only events which have occurred after 17:00
+ *       will be returned. Default: 60
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
  *       to include in the response. If more records exist than the
  *       specified MaxRecords value, a marker is included in the response
@@ -1427,11 +1453,6 @@ AWS.Redshift = inherit({})
  *   @param params [Object]
  *     * `ReservedNodeOfferingId` &mdash; (`String`) The unique
  *       identifier for the offering.
- *     * `NodeType` &mdash; (`String`) The node type you can purchase.
- *       For more information about managing parameter groups, go to
- *       Working with Clusters in the Amazon Redshift Management Guide.
- *     * `Duration` &mdash; (`String`) The duration, in seconds, for
- *       which the offering will reserve the node.
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
  *       to include in the response. If more records exist than the
  *       specified MaxRecords value, a marker is included in the response
@@ -1487,13 +1508,8 @@ AWS.Redshift = inherit({})
  * @!method describeReservedNodes(params, callback)
  *   Calls the DescribeReservedNodes API operation.
  *   @param params [Object]
- *     * `ReservedNodeId` &mdash; (`String`) Customer specified
- *       identifier for the node reservation.
- *     * `ReservedNodeOfferingId` &mdash; (`String`) The reserved node
- *       offering identifier.
- *     * `NodeType` &mdash; (`String`) The node type reserved.
- *     * `Duration` &mdash; (`String`) Duration, in seconds, for which
- *       the node is reserved.
+ *     * `ReservedNodeId` &mdash; (`String`) Identifier for the node
+ *       reservation.
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
  *       to include in the response. If more records exist than the
  *       specified MaxRecords value, a marker is included in the response
@@ -1559,8 +1575,9 @@ AWS.Redshift = inherit({})
  *   @param params [Object]
  *     * `ClusterIdentifier` &mdash; **required** &mdash; (`String`) The
  *       unique identifier of a cluster whose resize progress you are
- *       requesting. This parameter isn't case sensitive. The default is
- *       that all clusters defined for an account are returned.
+ *       requesting. This parameter isn't case-sensitive. By default,
+ *       resize operations for all clusters defined for an AWS account
+ *       are returned.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1572,22 +1589,22 @@ AWS.Redshift = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `TargetNodeType` &mdash; (`String`) The node type that the
- *         cluster will have after the resize completes.
+ *         cluster will have after the resize is complete.
  *       * `TargetNumberOfNodes` &mdash; (`Integer`) The number of nodes
- *         that the cluster will have after the resize completes.
+ *         that the cluster will have after the resize is complete.
  *       * `TargetClusterType` &mdash; (`String`) The cluster type after
- *         the resize completed. Valid Values: multi-node | single-node
+ *         the resize is complete. Valid Values: multi-node | single-node
  *       * `Status` &mdash; (`String`) The status of the resize operation.
  *         Valid Values: NONE | IN_PROGRESS | FAILED | SUCCEEDED
- *       * `ImportTablesCompleted` &mdash; (`Array<String>`) The tables
- *         which have been imported completely. Valid Values: List of table
- *         names
- *       * `ImportTablesInProgress` &mdash; (`Array<String>`) The tables
- *         which are being imported currently. Valid Values: List of table
- *         names
- *       * `ImportTablesNotStarted` &mdash; (`Array<String>`) The tables
- *         which have not been imported yet. Valid Values: List of table
- *         names
+ *       * `ImportTablesCompleted` &mdash; (`Array<String>`) The names of
+ *         tables that have been completely imported . Valid Values: List
+ *         of table names.
+ *       * `ImportTablesInProgress` &mdash; (`Array<String>`) The names of
+ *         tables that are being currently imported. Valid Values: List of
+ *         table names.
+ *       * `ImportTablesNotStarted` &mdash; (`Array<String>`) The names of
+ *         tables that have not been yet imported. Valid Values: List of
+ *         table names
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1606,24 +1623,29 @@ AWS.Redshift = inherit({})
  *       DescribeResize to track the progress of the resize request.
  *       Valid Values: multi-node | single-node
  *     * `NodeType` &mdash; (`String`) The new node type of the cluster.
- *       If you specify a new node type you must also specify the number
- *       of nodes parameter also. When you submit your cluster resize
- *       request, your existing cluster goes into a read-only mode. After
- *       Amazon Redshift provisions a new cluster based on your resize
- *       requirements, there will be outage for a period while the old
- *       cluster is deleted and your connection is switched to the new
- *       cluster. You can use DescribeResize to track the progress of the
- *       resize request. Valid Values: dw.hs1.xlarge | dw.hs1.8xlarge
+ *       If you specify a new node type, you must also specify the number
+ *       of nodes parameter also. When you submit your request to resize
+ *       a cluster, Amazon Redshift sets access permissions for the
+ *       cluster to read-only. After Amazon Redshift provisions a new
+ *       cluster according to your resize requirements, there will be a
+ *       temporary outage while the old cluster is deleted and your
+ *       connection is switched to the new cluster. When the new
+ *       connection is complete, the original access permissions for the
+ *       cluster are restored. You can use the DescribeResize to track
+ *       the progress of the resize request. Valid Values: dw.hs1.xlarge
+ *       | dw.hs1.8xlarge
  *     * `NumberOfNodes` &mdash; (`Integer`) The new number of nodes of
  *       the cluster. If you specify a new number of nodes, you must also
  *       specify the node type parameter also. When you submit your
- *       cluster resize request, your existing cluster goes into a
- *       read-only mode. After Amazon Redshift provisions a new cluster
- *       based on your resize requirements, there will be outage for a
- *       period while the old cluster is deleted and your connection is
- *       switched to the new cluster. You can use DescribeResize to track
- *       the progress of the resize request. Valid Values: Integer
- *       greater than 0
+ *       request to resize a cluster, Amazon Redshift sets access
+ *       permissions for the cluster to read-only. After Amazon Redshift
+ *       provisions a new cluster according to your resize requirements,
+ *       there will be a temporary outage while the old cluster is
+ *       deleted and your connection is switched to the new cluster. When
+ *       the new connection is complete, the original access permissions
+ *       for the cluster are restored. You can use DescribeResize to
+ *       track the progress of the resize request. Valid Values: Integer
+ *       greater than 0.
  *     * `ClusterSecurityGroups` &mdash; (`Array<String>`) A list of
  *       cluster security groups to be authorized on this cluster. This
  *       change is asynchronously applied as soon as possible. Security
@@ -1633,8 +1655,8 @@ AWS.Redshift = inherit({})
  *       First character must be a letter Cannot end with a hyphen or
  *       contain two consecutive hyphens
  *     * `VpcSecurityGroupIds` &mdash; (`Array<String>`) A list of
- *       Virtual Private Cloud (VPC) security groups to associate with
- *       the cluster.
+ *       Virtual Private Cloud (VPC) security groups to be associated
+ *       with the cluster.
  *     * `MasterUserPassword` &mdash; (`String`) The new password for the
  *       cluster master user. This change is asynchronously applied as
  *       soon as possible. Between the time of the request and the
@@ -1644,7 +1666,7 @@ AWS.Redshift = inherit({})
  *       a way to regain access to the master user account for a cluster
  *       if the password is lost. Default: Uses existing setting.
  *       Constraints: Must be between 8 and 64 characters in length. Must
- *       contain at least one uppercase letter. Must contain one
+ *       contain at least one uppercase letter. Must contain at least one
  *       lowercase letter. Must contain one number.
  *     * `ClusterParameterGroupName` &mdash; (`String`) The name of the
  *       cluster parameter group to apply to this cluster. This change is
@@ -1679,7 +1701,7 @@ AWS.Redshift = inherit({})
  *       group family for the new version must be specified. The new
  *       cluster parameter group can be the default for that cluster
  *       parameter group family. For more information about managing
- *       parameter groups, go to Working with Parameter Groups in the
+ *       parameter groups, go to Amazon Redshift Parameter Groups in the
  *       Amazon Redshift Management Guide. Example: 1.0
  *     * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, upgrades will
  *       be applied automatically to the cluster during the maintenance
@@ -1700,15 +1722,15 @@ AWS.Redshift = inherit({})
  *         * `NodeType` &mdash; (`String`) The node type for the nodes in
  *           the cluster.
  *         * `ClusterStatus` &mdash; (`String`) The current state of this
- *           cluster. Possible values include "available", "creating",
- *           "deleting", "rebooting", and "resizing".
+ *           cluster. Possible values include available, creating,
+ *           deleting, rebooting, and resizing.
  *         * `ModifyStatus` &mdash; (`String`) The status of a modify
  *           operation, if any, initiated for the cluster.
  *         * `MasterUsername` &mdash; (`String`) The master user name for
- *           the cluster. This name is used to connect to the database
- *           specified in DBName.
+ *           the cluster. This name is used to connect to the database that
+ *           is specified in DBName.
  *         * `DBName` &mdash; (`String`) The name of the initial database
- *           that was provided when the cluster was created. This same name
+ *           that was created when the cluster was created. This same name
  *           is returned for the life of the cluster. If an initial
  *           database was not specified, a database named "dev" was created
  *           by default.
@@ -1725,15 +1747,17 @@ AWS.Redshift = inherit({})
  *           Each security group is represented by an element that contains
  *           ClusterSecurityGroup.Name and ClusterSecurityGroup.Status
  *           subelements. Cluster security groups are used when the cluster
- *           is not created in a VPC.
+ *           is not created in a VPC. Clusters that are created in a VPC
+ *           use VPC security groups, which are listed by the
+ *           VpcSecurityGroups parameter.
  *           * `ClusterSecurityGroupName` &mdash; (`String`) The name of
  *             the cluster security group.
  *           * `Status` &mdash; (`String`) The status of the cluster
  *             security group.
  *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) A list of
  *           Virtual Private Cloud (VPC) security groups that are
- *           associated with the cluster. This parameter is only valid when
- *           the cluster is in a VPC.
+ *           associated with the cluster. This parameter is returned only
+ *           if the cluster is in a VPC.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
  *         * `ClusterParameterGroups` &mdash; (`Array<Object>`) The list of
@@ -1745,16 +1769,16 @@ AWS.Redshift = inherit({})
  *             parameter updates.
  *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
  *           subnet group that is associated with the cluster. This
- *           parameter is only valid when the cluster is in a VPC.
- *         * `VpcId` &mdash; (`String`) The indentifier of the VPC the
+ *           parameter is valid only when the cluster is in a VPC.
+ *         * `VpcId` &mdash; (`String`) The identifier of the VPC the
  *           cluster is in, if the cluster is in a VPC.
  *         * `AvailabilityZone` &mdash; (`String`) The name of the
  *           Availability Zone in which the cluster is located.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
  *           time range (in UTC) during which system maintenance can occur.
  *         * `PendingModifiedValues` &mdash; (`Object`) If present, changes
- *           to the cluster are pending. Specific changes are identified by
- *           subelements.
+ *           to the cluster are pending. Specific pending changes are
+ *           identified by subelements.
  *           * `MasterUserPassword` &mdash; (`String`) The pending or
  *             in-progress change of the master credentials for the
  *             cluster.
@@ -1778,6 +1802,8 @@ AWS.Redshift = inherit({})
  *           nodes in the cluster.
  *         * `PubliclyAccessible` &mdash; (`Boolean`) If true, the cluster
  *           can be accessed from a public network.
+ *         * `Encrypted` &mdash; (`Boolean`) If true, data in cluster is
+ *           encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1830,9 +1856,9 @@ AWS.Redshift = inherit({})
  *   Calls the ModifyClusterSubnetGroup API operation.
  *   @param params [Object]
  *     * `ClusterSubnetGroupName` &mdash; **required** &mdash; (`String`)
- *       The name of the parameter group to be modified.
- *     * `Description` &mdash; (`String`) The name of the parameter group
- *       to be modified.
+ *       The name of the subnet group to be modified.
+ *     * `Description` &mdash; (`String`) A text description of the
+ *       subnet group to be modified.
  *     * `SubnetIds` &mdash; **required** &mdash; (`Array<String>`) An
  *       array of VPC subnet IDs. A maximum of 20 subnets can be modified
  *       in a single request.
@@ -1855,8 +1881,8 @@ AWS.Redshift = inherit({})
  *         * `VpcId` &mdash; (`String`) The VPC ID of the cluster subnet
  *           group.
  *         * `SubnetGroupStatus` &mdash; (`String`) The status of the
- *           cluster subnet group. The valid values are "Complete",
- *           "Incomplete" and "Invalid".
+ *           cluster subnet group. Possible values are Complete, Incomplete
+ *           and Invalid.
  *         * `Subnets` &mdash; (`Array<Object>`) A list of the VPC Subnet
  *           elements.
  *           * `SubnetIdentifier` &mdash; (`String`) The identifier of the
@@ -1874,7 +1900,6 @@ AWS.Redshift = inherit({})
  *     * `ReservedNodeOfferingId` &mdash; **required** &mdash; (`String`)
  *       The unique identifier of the reserved node offering you want to
  *       purchase.
- *     * `ReservedNodeId` &mdash; (`String`)
  *     * `NodeCount` &mdash; (`Integer`) The number of reserved nodes you
  *       want to purchase. Default: 1
  *   @callback callback function(err, data)
@@ -1947,15 +1972,15 @@ AWS.Redshift = inherit({})
  *         * `NodeType` &mdash; (`String`) The node type for the nodes in
  *           the cluster.
  *         * `ClusterStatus` &mdash; (`String`) The current state of this
- *           cluster. Possible values include "available", "creating",
- *           "deleting", "rebooting", and "resizing".
+ *           cluster. Possible values include available, creating,
+ *           deleting, rebooting, and resizing.
  *         * `ModifyStatus` &mdash; (`String`) The status of a modify
  *           operation, if any, initiated for the cluster.
  *         * `MasterUsername` &mdash; (`String`) The master user name for
- *           the cluster. This name is used to connect to the database
- *           specified in DBName.
+ *           the cluster. This name is used to connect to the database that
+ *           is specified in DBName.
  *         * `DBName` &mdash; (`String`) The name of the initial database
- *           that was provided when the cluster was created. This same name
+ *           that was created when the cluster was created. This same name
  *           is returned for the life of the cluster. If an initial
  *           database was not specified, a database named "dev" was created
  *           by default.
@@ -1972,15 +1997,17 @@ AWS.Redshift = inherit({})
  *           Each security group is represented by an element that contains
  *           ClusterSecurityGroup.Name and ClusterSecurityGroup.Status
  *           subelements. Cluster security groups are used when the cluster
- *           is not created in a VPC.
+ *           is not created in a VPC. Clusters that are created in a VPC
+ *           use VPC security groups, which are listed by the
+ *           VpcSecurityGroups parameter.
  *           * `ClusterSecurityGroupName` &mdash; (`String`) The name of
  *             the cluster security group.
  *           * `Status` &mdash; (`String`) The status of the cluster
  *             security group.
  *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) A list of
  *           Virtual Private Cloud (VPC) security groups that are
- *           associated with the cluster. This parameter is only valid when
- *           the cluster is in a VPC.
+ *           associated with the cluster. This parameter is returned only
+ *           if the cluster is in a VPC.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
  *         * `ClusterParameterGroups` &mdash; (`Array<Object>`) The list of
@@ -1992,16 +2019,16 @@ AWS.Redshift = inherit({})
  *             parameter updates.
  *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
  *           subnet group that is associated with the cluster. This
- *           parameter is only valid when the cluster is in a VPC.
- *         * `VpcId` &mdash; (`String`) The indentifier of the VPC the
+ *           parameter is valid only when the cluster is in a VPC.
+ *         * `VpcId` &mdash; (`String`) The identifier of the VPC the
  *           cluster is in, if the cluster is in a VPC.
  *         * `AvailabilityZone` &mdash; (`String`) The name of the
  *           Availability Zone in which the cluster is located.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
  *           time range (in UTC) during which system maintenance can occur.
  *         * `PendingModifiedValues` &mdash; (`Object`) If present, changes
- *           to the cluster are pending. Specific changes are identified by
- *           subelements.
+ *           to the cluster are pending. Specific pending changes are
+ *           identified by subelements.
  *           * `MasterUserPassword` &mdash; (`String`) The pending or
  *             in-progress change of the master credentials for the
  *             cluster.
@@ -2025,6 +2052,8 @@ AWS.Redshift = inherit({})
  *           nodes in the cluster.
  *         * `PubliclyAccessible` &mdash; (`Boolean`) If true, the cluster
  *           can be accessed from a public network.
+ *         * `Encrypted` &mdash; (`Boolean`) If true, data in cluster is
+ *           encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2119,15 +2148,15 @@ AWS.Redshift = inherit({})
  *         * `NodeType` &mdash; (`String`) The node type for the nodes in
  *           the cluster.
  *         * `ClusterStatus` &mdash; (`String`) The current state of this
- *           cluster. Possible values include "available", "creating",
- *           "deleting", "rebooting", and "resizing".
+ *           cluster. Possible values include available, creating,
+ *           deleting, rebooting, and resizing.
  *         * `ModifyStatus` &mdash; (`String`) The status of a modify
  *           operation, if any, initiated for the cluster.
  *         * `MasterUsername` &mdash; (`String`) The master user name for
- *           the cluster. This name is used to connect to the database
- *           specified in DBName.
+ *           the cluster. This name is used to connect to the database that
+ *           is specified in DBName.
  *         * `DBName` &mdash; (`String`) The name of the initial database
- *           that was provided when the cluster was created. This same name
+ *           that was created when the cluster was created. This same name
  *           is returned for the life of the cluster. If an initial
  *           database was not specified, a database named "dev" was created
  *           by default.
@@ -2144,15 +2173,17 @@ AWS.Redshift = inherit({})
  *           Each security group is represented by an element that contains
  *           ClusterSecurityGroup.Name and ClusterSecurityGroup.Status
  *           subelements. Cluster security groups are used when the cluster
- *           is not created in a VPC.
+ *           is not created in a VPC. Clusters that are created in a VPC
+ *           use VPC security groups, which are listed by the
+ *           VpcSecurityGroups parameter.
  *           * `ClusterSecurityGroupName` &mdash; (`String`) The name of
  *             the cluster security group.
  *           * `Status` &mdash; (`String`) The status of the cluster
  *             security group.
  *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) A list of
  *           Virtual Private Cloud (VPC) security groups that are
- *           associated with the cluster. This parameter is only valid when
- *           the cluster is in a VPC.
+ *           associated with the cluster. This parameter is returned only
+ *           if the cluster is in a VPC.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
  *         * `ClusterParameterGroups` &mdash; (`Array<Object>`) The list of
@@ -2164,16 +2195,16 @@ AWS.Redshift = inherit({})
  *             parameter updates.
  *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
  *           subnet group that is associated with the cluster. This
- *           parameter is only valid when the cluster is in a VPC.
- *         * `VpcId` &mdash; (`String`) The indentifier of the VPC the
+ *           parameter is valid only when the cluster is in a VPC.
+ *         * `VpcId` &mdash; (`String`) The identifier of the VPC the
  *           cluster is in, if the cluster is in a VPC.
  *         * `AvailabilityZone` &mdash; (`String`) The name of the
  *           Availability Zone in which the cluster is located.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
  *           time range (in UTC) during which system maintenance can occur.
  *         * `PendingModifiedValues` &mdash; (`Object`) If present, changes
- *           to the cluster are pending. Specific changes are identified by
- *           subelements.
+ *           to the cluster are pending. Specific pending changes are
+ *           identified by subelements.
  *           * `MasterUserPassword` &mdash; (`String`) The pending or
  *             in-progress change of the master credentials for the
  *             cluster.
@@ -2197,6 +2228,8 @@ AWS.Redshift = inherit({})
  *           nodes in the cluster.
  *         * `PubliclyAccessible` &mdash; (`Boolean`) If true, the cluster
  *           can be accessed from a public network.
+ *         * `Encrypted` &mdash; (`Boolean`) If true, data in cluster is
+ *           encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
