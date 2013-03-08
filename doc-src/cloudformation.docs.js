@@ -52,6 +52,22 @@ AWS.CloudFormation = inherit({})
  * The low-level CloudFormation client class.  This class provides one function
  * for each API operation on the service.
  *
+ * @!method cancelUpdateStack(params, callback)
+ *   Calls the CancelUpdateStack API operation.
+ *   @param params [Object]
+ *     * `StackName` &mdash; **required** &mdash; (`String`) The name or
+ *       the unique identifier associated with the stack.
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
  * @!method createStack(params, callback)
  *   Calls the CreateStack API operation.
  *   @param params [Object]
