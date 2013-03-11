@@ -599,6 +599,28 @@ AWS.EC2 = inherit({})
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
+ * @!method copyImage(params, callback)
+ *   Calls the CopyImage API operation.
+ *   @param params [Object]
+ *     * `SourceRegion` &mdash; **required** &mdash; (`String`)
+ *     * `SourceImageId` &mdash; **required** &mdash; (`String`)
+ *     * `Name` &mdash; **required** &mdash; (`String`)
+ *     * `Description` &mdash; (`String`)
+ *     * `ClientToken` &mdash; (`String`)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `ImageId` &mdash; (`String`)
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
  * @!method copySnapshot(params, callback)
  *   Calls the CopySnapshot API operation.
  *   @param params [Object]
@@ -970,6 +992,7 @@ AWS.EC2 = inherit({})
  *           * `Value` &mdash; (`String`) The tag's value.
  *         * `PrivateIpAddresses` &mdash; (`Array<Object>`)
  *           * `PrivateIpAddress` &mdash; (`String`)
+ *           * `PrivateDnsName` &mdash; (`String`)
  *           * `Primary` &mdash; (`Boolean`)
  *           * `Association` &mdash; (`Object`)
  *             * `PublicIp` &mdash; (`String`)
@@ -1101,11 +1124,6 @@ AWS.EC2 = inherit({})
  *           * `Value` &mdash; (`String`) The tag's value.
  *         * `PropagatingVgws` &mdash; (`Array<Object>`)
  *           * `GatewayId` &mdash; (`String`)
- *         * `PropagatedRoutes` &mdash; (`Array<Object>`)
- *           * `DestinationCidrBlock` &mdash; (`String`)
- *           * `GatewayId` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *           * `SourceId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1238,6 +1256,8 @@ AWS.EC2 = inherit({})
  *           for any stopped instances are considered unavailable.
  *         * `AvailabilityZone` &mdash; (`String`) Specifies the
  *           Availability Zone the subnet is in.
+ *         * `DefaultForAz` &mdash; (`Boolean`)
+ *         * `MapPublicIpOnLaunch` &mdash; (`Boolean`)
  *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the
  *           Subnet.
  *           * `Key` &mdash; (`String`) The tag's key.
@@ -1353,6 +1373,7 @@ AWS.EC2 = inherit({})
  *           * `Value` &mdash; (`String`) The tag's value.
  *         * `InstanceTenancy` &mdash; (`String`) The allowed tenancy of
  *           instances launched into the VPC.
+ *         * `IsDefault` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1833,6 +1854,27 @@ AWS.EC2 = inherit({})
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
+ * @!method describeAccountAttributes(params, callback)
+ *   Calls the DescribeAccountAttributes API operation.
+ *   @param params [Object]
+ *     * `AttributeNames` &mdash; (`Array<String>`)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `AccountAttributes` &mdash; (`Array<Object>`)
+ *         * `AttributeName` &mdash; (`String`)
+ *         * `AttributeValues` &mdash; (`Array<Object>`)
+ *           * `AttributeValue` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2598,7 +2640,16 @@ AWS.EC2 = inherit({})
  *               * `DeleteOnTermination` &mdash; (`Boolean`)
  *             * `Association` &mdash; (`Object`)
  *               * `PublicIp` &mdash; (`String`)
+ *               * `PublicDnsName` &mdash; (`String`)
  *               * `IpOwnerId` &mdash; (`String`)
+ *             * `PrivateIpAddresses` &mdash; (`Array<Object>`)
+ *               * `PrivateIpAddress` &mdash; (`String`)
+ *               * `PrivateDnsName` &mdash; (`String`)
+ *               * `Primary` &mdash; (`Boolean`)
+ *               * `Association` &mdash; (`Object`)
+ *                 * `PublicIp` &mdash; (`String`)
+ *                 * `PublicDnsName` &mdash; (`String`)
+ *                 * `IpOwnerId` &mdash; (`String`)
  *           * `IamInstanceProfile` &mdash; (`Object`)
  *             * `Arn` &mdash; (`String`)
  *             * `Id` &mdash; (`String`)
@@ -2866,6 +2917,7 @@ AWS.EC2 = inherit({})
  *           * `Value` &mdash; (`String`) The tag's value.
  *         * `PrivateIpAddresses` &mdash; (`Array<Object>`)
  *           * `PrivateIpAddress` &mdash; (`String`)
+ *           * `PrivateDnsName` &mdash; (`String`)
  *           * `Primary` &mdash; (`Boolean`)
  *           * `Association` &mdash; (`Object`)
  *             * `PublicIp` &mdash; (`String`)
@@ -3157,11 +3209,6 @@ AWS.EC2 = inherit({})
  *           * `Value` &mdash; (`String`) The tag's value.
  *         * `PropagatingVgws` &mdash; (`Array<Object>`)
  *           * `GatewayId` &mdash; (`String`)
- *         * `PropagatedRoutes` &mdash; (`Array<Object>`)
- *           * `DestinationCidrBlock` &mdash; (`String`)
- *           * `GatewayId` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *           * `SourceId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3572,6 +3619,8 @@ AWS.EC2 = inherit({})
  *           for any stopped instances are considered unavailable.
  *         * `AvailabilityZone` &mdash; (`String`) Specifies the
  *           Availability Zone the subnet is in.
+ *         * `DefaultForAz` &mdash; (`Boolean`)
+ *         * `MapPublicIpOnLaunch` &mdash; (`Boolean`)
  *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the
  *           Subnet.
  *           * `Key` &mdash; (`String`) The tag's key.
@@ -3732,6 +3781,30 @@ AWS.EC2 = inherit({})
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
+ * @!method describeVpcAttribute(params, callback)
+ *   Calls the DescribeVpcAttribute API operation.
+ *   @param params [Object]
+ *     * `VpcId` &mdash; **required** &mdash; (`String`)
+ *     * `EnableDnsSupport` &mdash; (`String`)
+ *     * `EnableDnsHostnames` &mdash; (`String`)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `VpcId` &mdash; (`String`)
+ *       * `EnableDnsSupport` &mdash; (`Object`)
+ *         * `Value` &mdash; (`Boolean`) Boolean value
+ *       * `EnableDnsHostnames` &mdash; (`Object`)
+ *         * `Value` &mdash; (`Boolean`) Boolean value
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
  * @!method describeVpcs(params, callback)
  *   Calls the DescribeVpcs API operation.
  *   @param params [Object]
@@ -3769,6 +3842,7 @@ AWS.EC2 = inherit({})
  *           * `Value` &mdash; (`String`) The tag's value.
  *         * `InstanceTenancy` &mdash; (`String`) The allowed tenancy of
  *           instances launched into the VPC.
+ *         * `IsDefault` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -4481,6 +4555,25 @@ AWS.EC2 = inherit({})
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
+ * @!method modifyVpcAttribute(params, callback)
+ *   Calls the ModifyVpcAttribute API operation.
+ *   @param params [Object]
+ *     * `VpcId` &mdash; (`String`)
+ *     * `EnableDnsSupport` &mdash; (`Object`)
+ *       * `Value` &mdash; (`Boolean`) Boolean value
+ *     * `EnableDnsHostnames` &mdash; (`Object`)
+ *       * `Value` &mdash; (`Boolean`) Boolean value
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
  * @!method monitorInstances(params, callback)
  *   Calls the MonitorInstances API operation.
  *   @param params [Object]
@@ -5154,7 +5247,6 @@ AWS.EC2 = inherit({})
  *     * `SecurityGroupIds` &mdash; (`Array<String>`)
  *     * `UserData` &mdash; (`String`) Specifies additional information
  *       to make available to the instance(s).
- *     * `AddressingType` &mdash; (`String`)
  *     * `InstanceType` &mdash; (`String`) Specifies the instance type
  *       for the launched instances.
  *     * `Placement` &mdash; (`Object`) Specifies the placement
@@ -5393,7 +5485,16 @@ AWS.EC2 = inherit({})
  *             * `DeleteOnTermination` &mdash; (`Boolean`)
  *           * `Association` &mdash; (`Object`)
  *             * `PublicIp` &mdash; (`String`)
+ *             * `PublicDnsName` &mdash; (`String`)
  *             * `IpOwnerId` &mdash; (`String`)
+ *           * `PrivateIpAddresses` &mdash; (`Array<Object>`)
+ *             * `PrivateIpAddress` &mdash; (`String`)
+ *             * `PrivateDnsName` &mdash; (`String`)
+ *             * `Primary` &mdash; (`Boolean`)
+ *             * `Association` &mdash; (`Object`)
+ *               * `PublicIp` &mdash; (`String`)
+ *               * `PublicDnsName` &mdash; (`String`)
+ *               * `IpOwnerId` &mdash; (`String`)
  *         * `IamInstanceProfile` &mdash; (`Object`)
  *           * `Arn` &mdash; (`String`)
  *           * `Id` &mdash; (`String`)
