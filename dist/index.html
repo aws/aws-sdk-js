@@ -1,0 +1,458 @@
+<!--
+Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License"). You
+may not use this file except in compliance with the License. A copy of
+the License is located at
+
+    http://aws.amazon.com/apache2.0/
+
+or in the "license" file accompanying this file. This file is
+distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ANY KIND, either express or implied. See the License for the specific
+language governing permissions and limitations under the License.
+-->
+<html>
+<head>
+  <script type="text/javascript">
+    // FILL THESE IN WITH YOUR AWS CREDENTIALS
+    accessKeyId = '...';
+    secretAccessKey = '...';
+  </script>
+  <title>AWS SDK for JavaScript - Console</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+  <style type="text/css">
+    body { font-family: Helvetica, Arial, sans-serif; font-size: 9pt; }
+    .padding { padding: 12px; }
+    #header { background: #eee; font-size: 1.2em; }
+    .selectorControl * { height: 200px; }
+    #operationSelector { border: 1px solid #ccc; }
+    #operationSelector h3 { padding: 0; margin-top: 0; }
+    #serviceSelector { width: 20%; }
+    #operationSelector { width: 20%; }
+    #operationData { width: 50%; position: relative; top: 7px; font-family: Monaco, fixed; }
+    .tableOutput { width: 100%; overflow: scroll; }
+    .history-entry { margin-bottom: 12px; }
+    .history-entry pre.output { background: #eee; border: 1px solid #ccc; overflow: scroll; height: 300px; }
+    .grid { clear: right; }
+    .halfwidth { float: left; width: 48%; margin-right: 6px; }
+    .halfwidth:last-child { margin-right: 0px; }
+    .break { clear: both; }
+    table, th, td { border: 1px solid #ccc; border-collapse: collapse; vertical-align: top; }
+
+    /* jquery-ui overrides */
+    :focus { outline-width: 0; }
+  </style>
+  <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+  <script type="text/javascript" src="js/jquery-ui-1.10.1.custom.min.js"></script>
+  <script type="text/javascript" src="aws-sdk.js"></script>
+  <script type="text/template" id="template-historyEntry">
+    <div id="history-{entry}" class="history-entry">
+      <ul>
+        <li>
+          <a href="#history-tab-{entry}">
+            <img src="img/loading.gif"/>
+            {service}.{operation}() &mdash; {date}
+          </a>
+        </li>
+        <li><a href="#history-details-tab-{entry}">Details</a></li>
+        <li><a href="#history-table-tab-{entry}">Tabular (Experimental)</a></li>
+      </ul>
+      <div id="history-tab-{entry}">
+        <div class="grid">
+          <div class="halfwidth">
+            <h3>Response</h3>
+            <pre class="padding output operationResponse"></pre>
+          </div>
+          <div class="halfwidth">
+            <h3>Request</h3>
+            <pre class="padding output operationRequest"></pre>
+          </div>
+        </div>
+        <div class="break"></div>
+      </div>
+      <div id="history-details-tab-{entry}">
+        <div class="grid">
+          <div class="halfwidth">
+            <h3>Request Details</h3>
+            <pre class="padding output operationRequestDetails"></pre>
+          </div>
+          <div class="halfwidth">
+            <h3>Response Details</h3>
+            <pre class="padding output operationResponseDetails"></pre>
+          </div>
+        </div>
+        <div class="break"></div>
+      </div>
+      <div id="history-table-tab-{entry}">
+        <div class="tableOutput"></div>
+      </div>
+    </div>
+  </script>
+  <script type="text/javascript">
+    services = {};
+    currentServiceVar = null;
+    currentService = null;
+    currentOperation = null;
+    data = null;
+    error = null;
+    response = null;
+    requestCount = 0;
+
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+                 .toString(16)
+                 .substring(1);
+    };
+
+    function guid() {
+      return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+             s4() + '-' + s4() + s4() + s4();
+    }
+
+    var iterators = {
+      operations: {
+        listTables: {
+          result_key: 'TableNames'
+        },
+        describeAddresses: {
+          result_key: 'Addresses',
+        },
+        describeAvailabilityZones: {
+          result_key: 'AvailabilityZones',
+        },
+        describeBundleTasks: {
+          result_key: 'BundleTasks',
+        },
+        describeConversionTasks: {
+          result_key: 'ConversionTasks',
+        },
+        describeCustomerGateways: {
+          result_key: 'CustomerGateways',
+        },
+        describeDhcpOptions: {
+          result_key: 'DhcpOptions',
+        },
+        describeExportTasks: {
+          result_key: 'ExportTasks',
+        },
+        describeImages: {
+          result_key: 'Images',
+        },
+        describeInstanceStatus: {
+          token_param: 'NextToken',
+          token_key: 'NextToken',
+          limit_key: 'MaxResults',
+          result_key: 'InstanceStatuses',
+        },
+        describeInstances: {
+          result_key: 'Reservations',
+        },
+        describeInternetGateways: {
+          result_key: 'InternetGateways',
+        },
+        describeKeyPairs: {
+          result_key: 'KeyPairs',
+        },
+        describeLicenses: {
+          result_key: 'Licenses',
+        },
+        describeNetworkAcls: {
+          result_key: 'NetworkAcls',
+        },
+        describeNetworkInterfaces: {
+          result_key: 'NetworkInterfaces',
+        },
+        describePlacementGroups: {
+          result_key: 'PlacementGroups',
+        },
+        describeRegions: {
+          result_key: 'Regions',
+        },
+        describeReservedInstances: {
+          result_key: 'ReservedInstances',
+        },
+        describeReservedInstancesListings: {
+          result_key: 'ReservedInstancesListings',
+        },
+        describeReservedInstancesOfferings: {
+          token_param: 'NextToken',
+          token_key: 'NextToken',
+          limit_key: 'MaxResults',
+          result_key: 'ReservedInstancesOfferings',
+        },
+        describeRouteTables: {
+          result_key: 'RouteTables',
+        },
+        describeSecurityGroups: {
+          result_key: 'SecurityGroups',
+        },
+        describeSnapshots: {
+          result_key: 'Snapshots',
+        },
+        describeSpotInstanceRequests: {
+          result_key: 'SpotInstanceRequests',
+        },
+        describeSpotPriceHistory: {
+          token_param: 'NextToken',
+          token_key: 'NextToken',
+          limit_key: 'MaxResults',
+          result_key: 'SpotPriceHistory',
+        },
+        describeSubnets: {
+          result_key: 'Subnets',
+        },
+        describeTags: {
+          result_key: 'Tags',
+        },
+        describeVolumeStatus: {
+          token_param: 'NextToken',
+          token_key: 'NextToken',
+          limit_key: 'MaxResults',
+          result_key: 'VolumeStatuses',
+        },
+        describeVolumes: {
+          result_key: 'Volumes',
+        },
+        describeVpcs: {
+          result_key: 'Vpcs',
+        },
+        describeVpnConnections: {
+          result_key: 'VpnConnections',
+        },
+        describeVpnGateways: {
+          result_key: 'VpnGateways',
+        },
+      }
+    };
+
+    /**
+     * Turns a JS object into a table representation using a set of hints
+     * to detect the key/value structure.
+     *
+     * Assume EC2 for now
+     */
+    function tableView(items, resultKey) {
+      var table = $('<table/>').attr('cellpadding', 5);
+
+      // transposed table for structures
+      if (!Array.isArray(items)) {
+        for (var key in items) {
+          var row = $('<tr/>');
+          $('<th/>').text(key).appendTo(row);
+          $('<td/>').text(items[key]).appendTo(row);
+          row.appendTo(table);
+        }
+        return table;
+      }
+
+      if (items.length === 0) return '';
+      var i;
+      // first build the headers
+      var row = $('<tr/>');
+      var keys = typeof items[0] === 'object' ? Object.keys(items[0]) : [resultKey];
+      for (i = 0; i < keys.length; i++) {
+        $('<th/>').text(keys[i]).appendTo(row);
+      }
+      row.appendTo(table);
+
+      for (i = 0; i < items.length; i++) {
+        row = $('<tr/>');
+        if (typeof items[i] === 'object') {
+          for (var key in items[i]) {
+            var value = items[i][key];
+            if (typeof value === 'object') { // complex type
+              value = tableView(value);
+            }
+            $('<td/>').html(value).appendTo(row);
+          }
+        } else {
+          $('<td/>').html(items[i]).appendTo(row);
+        }
+        row.appendTo(table);
+      }
+
+      return table;
+    }
+
+    function loadOperationsForService(svc) {
+      if (currentServiceVar === svc) return;
+      currentServiceVar = svc;
+      currentService = services[svc];
+
+      $('#operationSelector').empty();
+      for (var key in currentService.api.operations) {
+        var el = $('<option/>').attr('value', key).text(key);
+        $('#operationSelector').append(el).change(function() {
+          loadOperation($(this).val());
+        });
+      }
+    }
+
+    function loadOperation(operation) {
+      if (currentOperation === operation) return;
+      currentOperation = operation;
+
+      var input = currentService.api.operations[operation].input.members;
+      $('#operationData').val(JSON.stringify(input, null, 2));
+    }
+
+    function loadServices() {
+      $('#serviceSelector').empty();
+      for (var key in AWS) {
+        if (!AWS[key].prototype) continue;
+        if (AWS[key].prototype.constructor.__super__.name === 'Service') {
+          var svcVarName = key.toLowerCase();
+          var svc = services[svcVarName] = window[svcVarName] = new AWS[key].Client();
+          var fullName = svc.api.serviceAbbreviation || svc.api.serviceFullName;
+          var el = $('<option/>').attr('value', svcVarName).text(fullName);
+          $('#serviceSelector').append(el).change(function () {
+            loadOperationsForService($(this).val());
+          });
+        }
+      }
+    }
+
+    function executeOperation() {
+      var params = JSON.parse($('#operationData').val() || '{}');
+      currentService[currentOperation](params).send();
+    }
+
+    function loadConfig() {
+      AWS.config.update({
+        region: 'us-east-1',
+        accessKeyId: window.accessKeyId,
+        secretAccessKey: window.secretAccessKey
+      });
+    }
+
+    function template(name, options) {
+      var html = $('#template-' + name).html();
+      html = html.replace(/\{(.+?)\}/g, function(matches, key) {
+        return key in options ? options[key] : '';
+      });
+      return html;
+    }
+
+    function addHistoryEntry(req) {
+      req.id = guid();
+
+      // add entry to page
+      $('#history :first').tabs('option', 'active', false);
+      $('#history').prepend(template('historyEntry', {
+        operation: req.operation,
+        service: req.client.api.endpointPrefix,
+        entry: req.id,
+        date: new Date(),
+      }));
+
+      var reqHttpData = JSON.stringify(req.httpRequest, null, 2);
+      var entry = $('#history-' + req.id);
+      entry.tabs({collapsible: true});
+      entry.find('.operationRequestDetails').text(reqHttpData);
+    }
+
+    function updateHistoryEntry(resp) {
+      var req = resp.request;
+      var entry = $('#history-' + req.id);
+      var params = JSON.stringify(req.params);
+      var time = new Date().getTime();
+      var elapsed = (time - (resp.requestStarted || time)) / 1000;
+      var service = req.client.api.endpointPrefix;
+      var statusCode = resp.httpResponse.statusCode || 'ERR';
+      var retryCount = resp.retryCount || 0;
+      var operation = req.operation;
+      var info = statusCode + ' ' + elapsed + 's ' + retryCount + ' retries';
+
+      var data;
+      if (resp.error) {
+        data = resp.error.stack;
+      } else {
+        data = JSON.stringify(resp.data, null, 2);
+      }
+
+      var tableData = resp.data;
+      var resultKey = '';
+      if (iterators.operations[operation]) {
+        resultKey = iterators.operations[operation].result_key;
+        tableData = resp.data[resultKey];
+      }
+      entry.find('.tableOutput').html(tableView(tableData, resultKey));
+
+      // debug to console
+      var opInfo = service + '.' + operation + '(' + params + ')';
+      console.log('[AWS ' + info + ']', opInfo);
+
+      entry.find('.operationResponse').text(data);
+      entry.find('.operationRequest').text(params);
+      var link = entry.children('ul').find('a').first();
+      link.text('[' + info + '] ' + link.text());
+
+      var respHttpData = JSON.stringify(resp.httpResponse, null, 2);
+      entry.find('.operationResponseDetails').text(respHttpData);
+    }
+
+    function startRequest(resp) {
+      resp.requestStarted = new Date().getTime();
+    }
+
+    function endRequest(resp) {
+      // set window properties for console debugging
+      window.response = resp;
+      window.data = resp.data;
+      window.error = resp.error;
+      window.requestCount++;
+
+      // update history info
+      try {
+        updateHistoryEntry(resp);
+      } catch (err) {
+        console.log(err.stack);
+      }
+    }
+
+    function loadEvents() {
+      AWS.events.
+        on('validate', addHistoryEntry).
+        on('send', startRequest).
+        on('complete', endRequest);
+    }
+
+    function loaded() {
+      $('#selectOperation').tabs({collapsible: true});
+      $('#executeOperation').click(executeOperation);
+      $('#header').text('AWS SDK for JavaScript ' + AWS.VERSION);
+    }
+
+    function init() {
+      loadConfig();
+      loadEvents();
+      loadServices();
+      loaded();
+    }
+
+    $(init);
+  </script>
+</head>
+<body>
+  <div id="header" class="padding"></div>
+  <div id="selectOperation">
+    <ul>
+      <li><a href="#selectOperationTab">Select an operation</a></li>
+    </ul>
+    <div id="selectOperationTab">
+      <div class="selectorControl">
+        <select size="10" id="serviceSelector"></select>
+        <select size="10" id="operationSelector"></select>
+        <textarea id="operationData"></textarea>
+      </div>
+      <div class="runControl">
+        <button id="executeOperation">Run</button>
+      </div>
+    </div>
+  </div>
+  <h2>Requests</h2>
+  <div id="history">
+  </div>
+</body>
+</html>
