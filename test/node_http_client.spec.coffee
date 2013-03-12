@@ -13,21 +13,17 @@
 
 helpers = require('./helpers')
 AWS = helpers.AWS
-MockClient = helpers.MockClient
 
 describe 'AWS.NodeHttpClient', ->
   http = new AWS.NodeHttpClient()
 
   describe 'handleRequest', ->
-    it 'emits httpError in error event', ->
+    it 'emits error event', ->
       done = false
       endpoint = new AWS.Endpoint('http://invalid')
-      req = new AWS.Request(endpoint: endpoint, config: region: 'empty')
-      resp = new AWS.Response(req)
-      req.on 'httpError', (cbErr, cbResp) ->
-        expect(cbErr instanceof Error).toBeTruthy()
-        expect(cbResp).toBe(resp)
-        done = true
-
-      runs -> http.handleRequest(req, resp)
+      req = endpoint: endpoint
+      runs ->
+        stream = http.handleRequest req, null, (err) ->
+          expect(err.code).toEqual 'ENOTFOUND'
+          done = true
       waitsFor -> done

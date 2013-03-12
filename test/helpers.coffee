@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 AWS = require('../lib/aws')
+EventEmitter = require('events').EventEmitter
 
 # Mock credentials
 AWS.config.update
@@ -62,29 +63,41 @@ MockService = AWS.util.inherit AWS.Service,
 
 MockService.Client = MockClient
 
+mockHttpSuccessfulResponse = (status, headers, data, cb) ->
+  httpResp = new EventEmitter()
+  httpResp.statusCode = status
+  httpResp.headers = headers
+
+  cb(httpResp)
+
+  if !Array.isArray(data)
+    data = [data]
+  AWS.util.arrayEach data, (str) ->
+    httpResp.emit('data', new Buffer(str))
+
+  httpResp.emit('end')
+
 mockHttpResponse = (status, headers, data) ->
+  stream = new EventEmitter()
   spyOn(AWS.HttpClient, 'getInstance')
-  AWS.HttpClient.getInstance.andReturn handleRequest: (req, resp) ->
+  AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb, errCb) ->
     if typeof status == 'number'
-      req.emit('httpHeaders', [status, headers, resp])
-      str = str instanceof Array ? str : [str]
-      AWS.util.arrayEach data, (str) ->
-        req.emit('httpData', [new Buffer(str), resp])
-      req.emit('httpDone', [resp])
+      mockHttpSuccessfulResponse status, headers, data, cb
     else
-      req.emit('httpError', [status, resp])
+      errCb(status)
+
+  return stream
 
 mockIntermittentFailureResponse = (numFailures, status, headers, data) ->
+  retryCount = 0
   spyOn(AWS.HttpClient, 'getInstance')
-  AWS.HttpClient.getInstance.andReturn handleRequest: (req, resp) ->
-    if resp.retryCount < numFailures
-      req.emit('httpError', [{code: 'NetworkingError', message: 'FAIL!'}, resp])
+  AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb, errCb) ->
+    if retryCount < numFailures
+      retryCount += 1
+      errCb code: 'NetworkingError', message: 'FAIL!'
     else
-      req.emit('httpHeaders', [(resp.retryCount < numFailures ? 500 : status), headers, resp])
-      str = str instanceof Array ? str : [str]
-      AWS.util.arrayEach data, (str) ->
-        req.emit('httpData', [new Buffer(str), resp])
-      req.emit('httpDone', [resp])
+      statusCode = retryCount < numFailures ? 500 : status
+      mockHttpSuccessfulResponse statusCode, headers, data, cb
 
 module.exports =
   AWS: AWS

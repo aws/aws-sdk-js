@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 helpers = require('./helpers')
+EventEmitter = require('events').EventEmitter
 AWS = helpers.AWS
 MockClient = helpers.MockClient
 
@@ -65,11 +66,14 @@ describe 'AWS.Request', ->
     it 'streams partial data and raises an error', ->
       data = ''; error = null; reqError = null; done = false
       spyOn(AWS.HttpClient, 'getInstance')
-      AWS.HttpClient.getInstance.andReturn handleRequest: (req, resp) ->
-        req.emit('httpHeaders', [200, {}, resp])
+      AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb, errCb) ->
+        req = new EventEmitter()
+        req.statusCode = 200
+        req.headers = {}
+        cb(req)
         AWS.util.arrayEach ['FOO', 'BAR', 'BAZ'], (str) ->
-          req.emit('httpData', [new Buffer(str), resp])
-        req.emit('httpError', [new Error('fail'), resp])
+          req.emit 'data', new Buffer(str)
+        errCb new Error('fail')
 
       runs ->
         request = client.makeRequest('mockMethod')
@@ -86,21 +90,24 @@ describe 'AWS.Request', ->
 
     it 'fails if retry occurs in the middle of a failing stream', ->
       data = ''; error = null; reqError = null; resp = null
+      retryCount = 0
       spyOn(AWS.HttpClient, 'getInstance')
-      AWS.HttpClient.getInstance.andReturn handleRequest: (req, resp) ->
+      AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb, errCb) ->
+        req = new EventEmitter()
+        req.statusCode = 200
+        req.headers = {}
         process.nextTick ->
-            req.emit('httpHeaders', [200, {}, resp])
+          cb(req)
           AWS.util.arrayEach ['FOO', 'BAR', 'BAZ', 'QUX'], (str) ->
-            if str == 'BAZ' and resp.retryCount < 1
+            if str == 'BAZ' and retryCount < 1
               process.nextTick ->
-                req.emit('httpError', [{code: 'NetworkingError', message: 'FAIL!', retryable: true}, resp])
+                retryCount += 1
+                errCb code: 'NetworkingError', message: 'FAIL!', retryable: true
               return AWS.util.abort
             else
-              process.nextTick ->
-                req.emit('httpData', [new Buffer(str), resp])
-          if resp.retryCount >= 1
-            process.nextTick ->
-              req.emit('httpDone', [resp])
+              process.nextTick -> req.emit 'data', new Buffer(str)
+          if retryCount >= 1
+            process.nextTick -> req.emit('end')
 
       runs ->
         request = client.makeRequest('mockMethod')
