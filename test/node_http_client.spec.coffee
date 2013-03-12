@@ -18,12 +18,21 @@ describe 'AWS.NodeHttpClient', ->
   http = new AWS.NodeHttpClient()
 
   describe 'handleRequest', ->
+    it 'loads certificate bundle from disk in SSL request (once)', ->
+      readSpy = spyOn(AWS.util, 'readFileSync').andCallThrough()
+      done = false
+      req = new AWS.HttpRequest 'https://invalid'
+      runs -> http.handleRequest req, null, ->
+        done = true
+        expect(AWS.NodeHttpClient.sslAgent).not.toEqual(null)
+        expect(readSpy.callCount).toEqual(1)
+      waitsFor -> done
+
     it 'emits error event', ->
       done = false
-      endpoint = new AWS.Endpoint('http://invalid')
-      req = endpoint: endpoint
+      req = new AWS.HttpRequest 'http://invalid'
       runs ->
-        stream = http.handleRequest req, null, (err) ->
+        http.handleRequest req, null, (err) ->
           expect(err.code).toEqual 'ENOTFOUND'
           done = true
       waitsFor -> done
