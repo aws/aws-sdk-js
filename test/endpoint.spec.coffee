@@ -14,6 +14,12 @@
 AWS = require('../lib/core')
 
 describe 'AWS.Endpoint', ->
+  it 'copy constructs Endpoint', ->
+    origEndpoint = new AWS.Endpoint('http://domain.com')
+    endpoint = new AWS.Endpoint(origEndpoint)
+    expect(endpoint).not.toBe(origEndpoint)
+    expect(endpoint.host).toEqual('domain.com')
+
   it 'retains the entire endpoint as the endpoint href', ->
     href = 'http://domain.com/'
     endpoint = new AWS.Endpoint(href)
