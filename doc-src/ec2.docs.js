@@ -3785,8 +3785,7 @@ AWS.EC2 = inherit({})
  *   Calls the DescribeVpcAttribute API operation.
  *   @param params [Object]
  *     * `VpcId` &mdash; **required** &mdash; (`String`)
- *     * `EnableDnsSupport` &mdash; (`String`)
- *     * `EnableDnsHostnames` &mdash; (`String`)
+ *     * `Attribute` &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -4558,7 +4557,7 @@ AWS.EC2 = inherit({})
  * @!method modifyVpcAttribute(params, callback)
  *   Calls the ModifyVpcAttribute API operation.
  *   @param params [Object]
- *     * `VpcId` &mdash; (`String`)
+ *     * `VpcId` &mdash; **required** &mdash; (`String`)
  *     * `EnableDnsSupport` &mdash; (`Object`)
  *       * `Value` &mdash; (`Boolean`) Boolean value
  *     * `EnableDnsHostnames` &mdash; (`Object`)
