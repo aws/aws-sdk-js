@@ -84,6 +84,10 @@ describe 'AWS.Config', ->
     it 'can be set to false', ->
       expect(configure(sslEnabled: false).sslEnabled).toEqual(false)
 
+  describe 'httpOptions', ->
+    it 'defaults to {}', ->
+      expect(configure().httpOptions).toEqual({})
+
   describe 'set', ->
     it 'should set a default value for a key', ->
       config = new AWS.Config()

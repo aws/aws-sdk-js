@@ -159,6 +159,16 @@ describe 'AWS.EventListeners', ->
       response = request.send()
       expect(response.error).toEqual('mockservice')
 
+  describe 'send', ->
+    it 'passes httpOptions from config', ->
+      options = {}
+      spyOn(AWS.HttpClient, 'getInstance').andReturn handleRequest: (req, opts) ->
+        options = opts
+      client.config.httpOptions = timeout: 15
+      client.config.maxRetries = 0
+      makeRequest(->)
+      expect(options.timeout).toEqual(15)
+
   describe 'httpData', ->
     beforeEach ->
       helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']

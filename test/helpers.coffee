@@ -30,7 +30,7 @@ AWS.EventListeners.Core.removeListener 'validate',
 # TODO: refactor this out.
 `setTimeout = function(fn, delay) { fn(); }`
 
-AWS.HttpClient.getInstance = -> throw new Error('Unmocked HTTP request')
+#AWS.HttpClient.getInstance = -> throw new Error('Unmocked HTTP request')
 
 flattenXML = (xml) ->
   if (!xml)
@@ -80,7 +80,7 @@ mockHttpSuccessfulResponse = (status, headers, data, cb) ->
 mockHttpResponse = (status, headers, data) ->
   stream = new EventEmitter()
   spyOn(AWS.HttpClient, 'getInstance')
-  AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb, errCb) ->
+  AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
     if typeof status == 'number'
       mockHttpSuccessfulResponse status, headers, data, cb
     else
@@ -91,7 +91,7 @@ mockHttpResponse = (status, headers, data) ->
 mockIntermittentFailureResponse = (numFailures, status, headers, data) ->
   retryCount = 0
   spyOn(AWS.HttpClient, 'getInstance')
-  AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb, errCb) ->
+  AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
     if retryCount < numFailures
       retryCount += 1
       errCb code: 'NetworkingError', message: 'FAIL!'

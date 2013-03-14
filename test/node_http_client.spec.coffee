@@ -22,7 +22,7 @@ describe 'AWS.NodeHttpClient', ->
       readSpy = spyOn(AWS.util, 'readFileSync').andCallThrough()
       done = false
       req = new AWS.HttpRequest 'https://invalid'
-      runs -> http.handleRequest req, null, ->
+      runs -> http.handleRequest req, {}, null, ->
         done = true
         expect(AWS.NodeHttpClient.sslAgent).not.toEqual(null)
         expect(readSpy.callCount).toEqual(1)
@@ -32,7 +32,17 @@ describe 'AWS.NodeHttpClient', ->
       done = false
       req = new AWS.HttpRequest 'http://invalid'
       runs ->
-        http.handleRequest req, null, (err) ->
+        http.handleRequest req, {}, null, (err) ->
           expect(err.code).toEqual 'ENOTFOUND'
+          done = true
+      waitsFor -> done
+
+    it 'supports timeout in httpOptions', ->
+      done = false
+      req = new AWS.HttpRequest 'http://1.1.1.1'
+      runs ->
+        http.handleRequest req, {timeout: 12}, null, (err) ->
+          expect(err.code).toEqual 'TimeoutError'
+          expect(err.message).toEqual 'Connection timed out after 12ms'
           done = true
       waitsFor -> done
