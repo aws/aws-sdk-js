@@ -66,7 +66,7 @@ describe 'AWS.Request', ->
     it 'streams partial data and raises an error', ->
       data = ''; error = null; reqError = null; done = false
       spyOn(AWS.HttpClient, 'getInstance')
-      AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb, errCb) ->
+      AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
         req = new EventEmitter()
         req.statusCode = 200
         req.headers = {}
@@ -92,7 +92,7 @@ describe 'AWS.Request', ->
       data = ''; error = null; reqError = null; resp = null
       retryCount = 0
       spyOn(AWS.HttpClient, 'getInstance')
-      AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb, errCb) ->
+      AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
         req = new EventEmitter()
         req.statusCode = 200
         req.headers = {}
