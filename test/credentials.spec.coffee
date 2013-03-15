@@ -171,7 +171,15 @@ describe 'AWS.EC2MetadataCredentials', ->
       expect(creds.metadataService.host).toEqual('host')
 
   describe 'refresh', ->
-    it 'loads credentials from EC2 Metadata service'
+    it 'loads credentials from EC2 Metadata service', ->
+      creds = new AWS.EC2MetadataCredentials(host: 'host')
+      spy = spyOn(creds.metadataService, 'loadCredentials').andCallFake (cb) ->
+        cb(null, Code:"Success",AccessKeyId:"KEY",SecretAccessKey:"SECRET",Token:"TOKEN")
+      creds.refresh(->)
+      expect(creds.metadata.Code).toEqual('Success')
+      expect(creds.accessKeyId).toEqual('KEY')
+      expect(creds.secretAccessKey).toEqual('SECRET')
+      expect(creds.sessionToken).toEqual('TOKEN')
 
     it 'does not try to load creds second time if Metadata service failed', ->
       creds = new AWS.EC2MetadataCredentials(host: 'host')

@@ -55,7 +55,7 @@ describe 'AWS.MetadataService', ->
 
     it 'should fail if server is not up', ->
       server.close(); server = null
-      service = new AWS.MetadataService()
+      service = new AWS.MetadataService(host: '255.255.255.255')
       service.httpOptions.timeout = 10
       [err, data] = [null, null]
       runs ->

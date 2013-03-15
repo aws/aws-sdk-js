@@ -180,7 +180,7 @@ describe 'AWS.Config', ->
 
     it 'should error if credentials.get() cannot resolve', ->
       options = credentials:
-        name: 'CustomCredentials'
+        constructor: name: 'CustomCredentials'
         get: (cb) -> cb(new Error('Error!'), null)
       expectError options, 'Could not load credentials from CustomCredentials'
 
