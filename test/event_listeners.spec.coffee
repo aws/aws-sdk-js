@@ -67,10 +67,11 @@ describe 'AWS.EventListeners', ->
       expect(response.error).toEqual("ERROR")
 
     it 'sends error event if credentials are not set', ->
-      errorHandler = createSpy()
+      errorHandler = createSpy('errorHandler')
       request = makeRequest()
       request.on('error', errorHandler)
 
+      client.config.credentialProvider = null
       client.config.credentials.accessKeyId = null
       request.send()
 

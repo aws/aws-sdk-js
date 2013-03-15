@@ -29,20 +29,22 @@ describe 'AWS.NodeHttpClient', ->
       waitsFor -> done
 
     it 'emits error event', ->
-      done = false
+      error = null
       req = new AWS.HttpRequest 'http://invalid'
       runs ->
         http.handleRequest req, {}, null, (err) ->
-          expect(err.code).toEqual 'ENOTFOUND'
-          done = true
-      waitsFor -> done
+          error = err
+      waitsFor -> error
+      runs ->
+        expect(error.code).toEqual 'ENOTFOUND'
 
     it 'supports timeout in httpOptions', ->
-      done = false
+      error = null
       req = new AWS.HttpRequest 'http://1.1.1.1'
       runs ->
         http.handleRequest req, {timeout: 12}, null, (err) ->
-          expect(err.code).toEqual 'TimeoutError'
-          expect(err.message).toEqual 'Connection timed out after 12ms'
-          done = true
-      waitsFor -> done
+          error = err
+      waitsFor -> error
+      runs ->
+        expect(error.code).toEqual 'TimeoutError'
+        expect(error.message).toEqual 'Connection timed out after 12ms'
