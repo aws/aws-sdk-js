@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 # language: en
-@importexport
+@importexport @requiresakid
 Feature: AWS Import/Export
 
   I want to use AWS Import/Export
