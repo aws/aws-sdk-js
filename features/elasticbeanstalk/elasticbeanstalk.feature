@@ -17,6 +17,7 @@ Feature: AWS Elastic Beanstalk
 
   I want to use AWS Elastic Beanstalk
 
+  @requiresakid
   Scenario: Creating applications and application versions
     Given I create an Elastic Beanstalk application with name prefix "aws-js-sdk"
     And I create an Elastic Beanstalk application version with label "1.0.0"

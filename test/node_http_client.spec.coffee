@@ -13,21 +13,38 @@
 
 helpers = require('./helpers')
 AWS = helpers.AWS
-MockClient = helpers.MockClient
 
 describe 'AWS.NodeHttpClient', ->
   http = new AWS.NodeHttpClient()
 
   describe 'handleRequest', ->
-    it 'emits httpError in error event', ->
+    it 'loads certificate bundle from disk in SSL request (once)', ->
+      readSpy = spyOn(AWS.util, 'readFileSync').andCallThrough()
       done = false
-      endpoint = new AWS.Endpoint('http://invalid')
-      req = new AWS.Request(endpoint: endpoint, config: region: 'empty')
-      resp = new AWS.Response(req)
-      req.on 'httpError', (cbErr, cbResp) ->
-        expect(cbErr instanceof Error).toBeTruthy()
-        expect(cbResp).toBe(resp)
+      req = new AWS.HttpRequest 'https://invalid'
+      runs -> http.handleRequest req, {}, null, ->
         done = true
-
-      runs -> http.handleRequest(req, resp)
+        expect(AWS.NodeHttpClient.sslAgent).not.toEqual(null)
+        expect(readSpy.callCount).toEqual(1)
       waitsFor -> done
+
+    it 'emits error event', ->
+      error = null
+      req = new AWS.HttpRequest 'http://invalid'
+      runs ->
+        http.handleRequest req, {}, null, (err) ->
+          error = err
+      waitsFor -> error
+      runs ->
+        expect(error.code).toEqual 'ENOTFOUND'
+
+    it 'supports timeout in httpOptions', ->
+      error = null
+      req = new AWS.HttpRequest 'http://1.1.1.1'
+      runs ->
+        http.handleRequest req, {timeout: 12}, null, (err) ->
+          error = err
+      waitsFor -> error
+      runs ->
+        expect(error.code).toEqual 'TimeoutError'
+        expect(error.message).toEqual 'Connection timed out after 12ms'

@@ -40,7 +40,7 @@ describe 'AWS.Signers.S3', ->
     sessionToken = null
 
   buildRequest = () ->
-    req = new AWS.HttpRequest()
+    req = new AWS.HttpRequest('https://s3.amazonaws.com')
     req.method = method
     req.path = path
     req.headers = headers

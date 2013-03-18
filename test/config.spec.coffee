@@ -84,6 +84,10 @@ describe 'AWS.Config', ->
     it 'can be set to false', ->
       expect(configure(sslEnabled: false).sslEnabled).toEqual(false)
 
+  describe 'httpOptions', ->
+    it 'defaults to {}', ->
+      expect(configure().httpOptions).toEqual({})
+
   describe 'set', ->
     it 'should set a default value for a key', ->
       config = new AWS.Config()
@@ -104,7 +108,7 @@ describe 'AWS.Config', ->
 
   describe 'clear', ->
     it 'should be able to clear all key values from a config object', ->
-      config = new AWS.Config(maxRetries: 300, sslEnabled: 'foo')
+      config = new AWS.Config(credentials: {}, maxRetries: 300, sslEnabled: 'foo')
       expect(config.maxRetries).toEqual(300)
       expect(config.sslEnabled).toEqual('foo')
       expect(config.credentials).not.toEqual(undefined)
@@ -113,7 +117,8 @@ describe 'AWS.Config', ->
 
       expect(config.maxRetries).toEqual(undefined)
       expect(config.sslEnabled).toEqual(undefined)
-      expect(config.credentials).not.toEqual(undefined)
+      expect(config.credentials).not.toBe(undefined)
+      expect(config.credentialProvider).not.toEqual(undefined)
 
   describe 'update', ->
     it 'should be able to update keyed values', ->
@@ -136,6 +141,61 @@ describe 'AWS.Config', ->
       expect(config.credentials.accessKeyId).toEqual('akid')
       expect(config.credentials.secretAccessKey).toEqual('secret')
       expect(config.credentials.sessionToken).toEqual('session')
+
+  describe 'getCredentials', ->
+    spy = null
+    config = null
+    beforeEach ->
+      spy = jasmine.createSpy('getCredentials callback')
+
+    expectValid = (options, key) ->
+      if options instanceof AWS.Config
+        config = options
+      else
+        config = new AWS.Config(options)
+      config.getCredentials(spy)
+      expect(spy).toHaveBeenCalled()
+      expect(spy.argsForCall[0][0]).toEqual(null)
+      if key
+        expect(config.credentials.accessKeyId).toEqual(key)
+
+    expectError = (options, message) ->
+      if options instanceof AWS.Config
+        config = options
+      else
+        config = new AWS.Config(options)
+      config.getCredentials(spy)
+      expect(spy).toHaveBeenCalled()
+      expect(spy.argsForCall[0][0].code).toEqual('CredentialsError')
+      expect(spy.argsForCall[0][0].message).toEqual(message)
+
+    it 'should check credentials for static object first', ->
+      expectValid credentials: accessKeyId: '123', secretAccessKey: '456'
+
+    it 'should error if static credentials are not available', ->
+      expectError(credentials: {}, 'Missing credentials')
+
+    it 'should check credentials for async get() method', ->
+      expectValid credentials: get: (cb) -> cb()
+
+    it 'should error if credentials.get() cannot resolve', ->
+      options = credentials:
+        constructor: name: 'CustomCredentials'
+        get: (cb) -> cb(new Error('Error!'), null)
+      expectError options, 'Could not load credentials from CustomCredentials'
+
+    it 'should check credentialProvider if no credentials', ->
+      expectValid credentials: null, credentialProvider:
+        resolve: (cb) -> cb(null, accessKeyId: 'key', secretAccessKey: 'secret')
+
+    it 'should error if credentialProvider fails to resolve', ->
+      options = credentials: null, credentialProvider:
+        resolve: (cb) -> cb(new Error('Error!'), null)
+      expectError options, 'Could not load credentials from any providers'
+
+    it 'should error if no credentials or credentialProvider', ->
+      options = credentials: null, credentialProvider: null
+      expectError options, 'No credentials to load'
 
 describe 'AWS.config', ->
   it 'should be a default Config object', ->
