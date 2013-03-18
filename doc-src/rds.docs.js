@@ -52,6 +52,64 @@ AWS.RDS = inherit({})
  * The low-level RDS client class.  This class provides one function
  * for each API operation on the service.
  *
+ * @!method addSourceIdentifierToSubscription(params, callback)
+ *   Calls the AddSourceIdentifierToSubscription API operation.
+ *   @param params [Object]
+ *     * `SubscriptionName` &mdash; **required** &mdash; (`String`)
+ *     * `SourceIdentifier` &mdash; **required** &mdash; (`String`)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `EventSubscription` &mdash; (`Object`)
+ *         * `CustomerAwsId` &mdash; (`String`)
+ *         * `CustSubscriptionId` &mdash; (`String`)
+ *         * `SnsTopicArn` &mdash; (`String`)
+ *         * `Status` &mdash; (`String`)
+ *         * `SubscriptionCreationTime` &mdash; (`String`)
+ *         * `SourceType` &mdash; (`String`)
+ *         * `SourceIdsList` &mdash; (`Array<String>`)
+ *         * `EventCategoriesList` &mdash; (`Array<String>`)
+ *         * `Enabled` &mdash; (`Boolean`)
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
+ * @!method addTagsToResource(params, callback)
+ *   Calls the AddTagsToResource API operation.
+ *   @param params [Object]
+ *     * `ResourceName` &mdash; **required** &mdash; (`String`) The DB
+ *       Instance the tags will be added to.
+ *     * `Tags` &mdash; **required** &mdash; (`Array<Object>`) The tags
+ *       to be assigned to the DB Instance.
+ *       * `Key` &mdash; (`String`) A key is the required name of the
+ *         tag. The string value can be from 1 to 128 Unicode characters
+ *         in length and cannot be prefixed with "aws:". The string may
+ *         only contain only the set of Unicode letters, digits,
+ *         white-space, '_', '.', '/', '=', '+', '-' (Java regex:
+ *         "^([\\p`{L}\\p{Z}\\p{N}`_.:/=+\\-]*)$").
+ *       * `Value` &mdash; (`String`) A value is the optional value of
+ *         the tag. The string value can be from 1 to 256 Unicode
+ *         characters in length and cannot be prefixed with "aws:". The
+ *         string may only contain only the set of Unicode letters,
+ *         digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex:
+ *         "^([\\p`{L}\\p{Z}\\p{N}`_.:/=+\\-]*)$").
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
  * @!method authorizeDBSecurityGroupIngress(params, callback)
  *   Calls the AuthorizeDBSecurityGroupIngress API operation.
  *   @param params [Object]
@@ -101,7 +159,8 @@ AWS.RDS = inherit({})
  *         * `EC2SecurityGroups` &mdash; (`Array<Object>`) Contains a list
  *           of EC2SecurityGroup elements.
  *           * `Status` &mdash; (`String`) Provides the status of the EC2
- *             security group.
+ *             security group. Status can be "authorizing", "authorized",
+ *             "revoking", and "revoked".
  *           * `EC2SecurityGroupName` &mdash; (`String`) Specifies the name
  *             of the EC2 Security Group.
  *           * `EC2SecurityGroupId` &mdash; (`String`) Specifies the id of
@@ -112,7 +171,8 @@ AWS.RDS = inherit({})
  *         * `IPRanges` &mdash; (`Array<Object>`) Contains a list of
  *           IPRange elements.
  *           * `Status` &mdash; (`String`) Specifies the status of the IP
- *             range.
+ *             range. Status can be "authorizing", "authorized",
+ *             "revoking", and "revoked".
  *           * `CIDRIP` &mdash; (`String`) Specifies the IP range.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -167,13 +227,18 @@ AWS.RDS = inherit({})
  *         * `InstanceCreateTime` &mdash; (`Date`) Specifies the time (UTC)
  *           when the snapshot was taken.
  *         * `MasterUsername` &mdash; (`String`) Provides the master
- *           username for the DB Instance.
+ *           username for the DB Snapshot.
  *         * `EngineVersion` &mdash; (`String`) Specifies the version of
  *           the database engine.
  *         * `LicenseModel` &mdash; (`String`) License model information
  *           for the restored DB Instance.
  *         * `SnapshotType` &mdash; (`String`) Provides the type of the DB
  *           Snapshot.
+ *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
+ *           operations per second) value of the DB Instance at the time of
+ *           the snapshot.
+ *         * `OptionGroupName` &mdash; (`String`) Provides the option group
+ *           name for the DB Snapshot.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -203,12 +268,9 @@ AWS.RDS = inherit({})
  *       integer from 200 to 1024 (Standard Edition and Enterprise
  *       Edition) or from 30 to 1024 (Express Edition and Web Edition)
  *     * `DBInstanceClass` &mdash; **required** &mdash; (`String`) The
- *       compute and memory capacity of the DB Instance. To determine the
- *       instance classes that are available for a particular DB engine,
- *       use the DescribeOrderableDBInstanceOptions action. Valid Values:
- *       db.t1.micro | db.m1.small | db.m1.large | db.m1.xlarge |
- *       db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge Amazon RDS does not
- *       support db.t1.micro instances in a virtual private cloud (VPC).
+ *       compute and memory capacity of the DB Instance. Valid Values:
+ *       db.t1.micro | db.m1.small | db.m1.medium | db.m1.large |
+ *       db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge
  *     * `Engine` &mdash; **required** &mdash; (`String`) The name of the
  *       database engine to be used for this instance. Valid Values:
  *       MySQL | oracle-se1 | oracle-se | oracle-ee | sqlserver-ee |
@@ -224,14 +286,19 @@ AWS.RDS = inherit({})
  *       characters. First character must be a letter. Cannot be a
  *       reserved word for the chosen database engine.
  *     * `MasterUserPassword` &mdash; **required** &mdash; (`String`) The
- *       password for the master database user. MySQL Constraints: Must
- *       contain from 8 to 41 alphanumeric characters. Type: String
+ *       password for the master database user. Can be any printable
+ *       ASCII character except "/", "\", or "@". Type: String MySQL
+ *       Constraints: Must contain from 8 to 41 alphanumeric characters.
  *       Oracle Constraints: Must contain from 8 to 30 alphanumeric
  *       characters. SQL Server Constraints: Must contain from 8 to 128
  *       alphanumeric characters.
  *     * `DBSecurityGroups` &mdash; (`Array<String>`) A list of DB
  *       Security Groups to associate with this DB Instance. Default: The
  *       default DB Security Group for the database engine.
+ *     * `VpcSecurityGroupIds` &mdash; (`Array<String>`) A list of EC2
+ *       VPC Security Groups to associate with this DB Instance. Default:
+ *       The default EC2 VPC Security Group for the DB Subnet group's
+ *       VPC.
  *     * `AvailabilityZone` &mdash; (`String`) The EC2 Availability Zone
  *       that the database instance will be created in. Default: A
  *       random, system-chosen Availability Zone in the endpoint's
@@ -285,9 +352,8 @@ AWS.RDS = inherit({})
  *       1150-65535 SQL Server Default: 1433 Valid Values: 1150-65535
  *       except for 1434 and 3389.
  *     * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance is a
- *       Multi-AZ deployment. For Microsoft SQL Server, must be set to
- *       false. You cannot set the AvailabilityZone parameter if the
- *       MultiAZ parameter is set to true.
+ *       Multi-AZ deployment. You cannot set the AvailabilityZone
+ *       parameter if the MultiAZ parameter is set to true.
  *     * `EngineVersion` &mdash; (`String`) The version number of the
  *       database engine to use. MySQL Example: 5.1.42 Type: String
  *       Oracle Example: 11.2.0.2.v2 Type: String SQL Server Example:
@@ -298,11 +364,16 @@ AWS.RDS = inherit({})
  *     * `LicenseModel` &mdash; (`String`) License model information for
  *       this DB Instance. Valid values: license-included |
  *       bring-your-own-license | general-public-license
+ *     * `Iops` &mdash; (`Integer`) The amount of Provisioned IOPS
+ *       (input/output operations per second) to be initially allocated
+ *       for the DB Instance. Constraints: Must be an integer greater
+ *       than 1000.
  *     * `OptionGroupName` &mdash; (`String`) Indicates that the DB
  *       Instance should be associated with the specified option group.
  *     * `CharacterSetName` &mdash; (`String`) For supported engines,
  *       indicates that the DB Instance should be associated with the
  *       specified CharacterSet.
+ *     * `PubliclyAccessible` &mdash; (`Boolean`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -358,6 +429,10 @@ AWS.RDS = inherit({})
  *             Security Group.
  *           * `Status` &mdash; (`String`) The status of the DB Security
  *             Group.
+ *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *           VPC security group elements that the DB Instance belongs to.
+ *           * `VpcSecurityGroupId` &mdash; (`String`)
+ *           * `Status` &mdash; (`String`)
  *         * `DBParameterGroups` &mdash; (`Array<Object>`) Provides the
  *           list of DB Parameter Groups applied to this DB Instance.
  *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
@@ -378,12 +453,15 @@ AWS.RDS = inherit({})
  *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
  *             of the DB Subnet Group.
  *           * `Subnets` &mdash; (`Array<Object>`) Contains a list of
- *             Subnets elements.
+ *             Subnet elements.
  *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *               identifier of the subnet.
  *             * `SubnetAvailabilityZone` &mdash; (`Object`)
  *               * `Name` &mdash; (`String`) The name of the availability
  *                 zone.
+ *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
+ *                 indicates the availability zone is capable of
+ *                 provisioned IOPs.
  *             * `SubnetStatus` &mdash; (`String`) Specifies the status of
  *               the subnet.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
@@ -411,6 +489,12 @@ AWS.RDS = inherit({})
  *             DB Instance is to change to a Multi-AZ deployment.
  *           * `EngineVersion` &mdash; (`String`) Indicates the database
  *             engine version.
+ *           * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
+ *             IOPS value for the DB Instance that will be applied or is
+ *             being applied.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Contains the new
+ *             DBInstanceIdentifier for the DB Instance that will be
+ *             applied or is in progress.
  *         * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
  *           time to which a database can be restored with point-in-time
  *           restore.
@@ -428,8 +512,10 @@ AWS.RDS = inherit({})
  *           associated with this DB Instance.
  *         * `LicenseModel` &mdash; (`String`) License model information
  *           for this DB Instance.
- *         * `OptionGroupMembership` &mdash; (`Object`) Specifies the name
- *           and status of the option group that this instance belongs to.
+ *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
+ *           operations per second) value.
+ *         * `OptionGroupMemberships` &mdash; (`Array<Object>`) Provides
+ *           the list of option group memberships for this DB Instance.
  *           * `OptionGroupName` &mdash; (`String`) The name of the option
  *             group that the instance belongs to.
  *           * `Status` &mdash; (`String`) The status of the DB Instance's
@@ -438,6 +524,10 @@ AWS.RDS = inherit({})
  *         * `CharacterSetName` &mdash; (`String`) If present, specifies
  *           the name of the character set that this instance is associated
  *           with.
+ *         * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
+ *           specifies the name of the secondary Availability Zone for a DB
+ *           instance with multi-AZ support.
+ *         * `PubliclyAccessible` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -456,8 +546,9 @@ AWS.RDS = inherit({})
  *       Instance.
  *     * `DBInstanceClass` &mdash; (`String`) The compute and memory
  *       capacity of the Read Replica. Valid Values: db.m1.small |
- *       db.m1.large | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge |
- *       db.m2.4xlarge Default: Inherits from the source DB Instance.
+ *       db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge
+ *       |db.m2.2xlarge | db.m2.4xlarge Default: Inherits from the source
+ *       DB Instance.
  *     * `AvailabilityZone` &mdash; (`String`) The Amazon EC2
  *       Availability Zone that the Read Replica will be created in.
  *       Default: A random, system-chosen Availability Zone in the
@@ -469,7 +560,13 @@ AWS.RDS = inherit({})
  *       minor engine upgrades will be applied automatically to the Read
  *       Replica during the maintenance window. Default: Inherits from
  *       the source DB Instance
- *     * `OptionGroupName` &mdash; (`String`)
+ *     * `Iops` &mdash; (`Integer`) The amount of Provisioned IOPS
+ *       (input/output operations per second) to be initially allocated
+ *       for the DB Instance.
+ *     * `OptionGroupName` &mdash; (`String`) The option group the DB
+ *       instance will be associated with. If omitted, the default Option
+ *       Group for the engine specified will be used.
+ *     * `PubliclyAccessible` &mdash; (`Boolean`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -525,6 +622,10 @@ AWS.RDS = inherit({})
  *             Security Group.
  *           * `Status` &mdash; (`String`) The status of the DB Security
  *             Group.
+ *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *           VPC security group elements that the DB Instance belongs to.
+ *           * `VpcSecurityGroupId` &mdash; (`String`)
+ *           * `Status` &mdash; (`String`)
  *         * `DBParameterGroups` &mdash; (`Array<Object>`) Provides the
  *           list of DB Parameter Groups applied to this DB Instance.
  *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
@@ -545,12 +646,15 @@ AWS.RDS = inherit({})
  *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
  *             of the DB Subnet Group.
  *           * `Subnets` &mdash; (`Array<Object>`) Contains a list of
- *             Subnets elements.
+ *             Subnet elements.
  *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *               identifier of the subnet.
  *             * `SubnetAvailabilityZone` &mdash; (`Object`)
  *               * `Name` &mdash; (`String`) The name of the availability
  *                 zone.
+ *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
+ *                 indicates the availability zone is capable of
+ *                 provisioned IOPs.
  *             * `SubnetStatus` &mdash; (`String`) Specifies the status of
  *               the subnet.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
@@ -578,6 +682,12 @@ AWS.RDS = inherit({})
  *             DB Instance is to change to a Multi-AZ deployment.
  *           * `EngineVersion` &mdash; (`String`) Indicates the database
  *             engine version.
+ *           * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
+ *             IOPS value for the DB Instance that will be applied or is
+ *             being applied.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Contains the new
+ *             DBInstanceIdentifier for the DB Instance that will be
+ *             applied or is in progress.
  *         * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
  *           time to which a database can be restored with point-in-time
  *           restore.
@@ -595,8 +705,10 @@ AWS.RDS = inherit({})
  *           associated with this DB Instance.
  *         * `LicenseModel` &mdash; (`String`) License model information
  *           for this DB Instance.
- *         * `OptionGroupMembership` &mdash; (`Object`) Specifies the name
- *           and status of the option group that this instance belongs to.
+ *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
+ *           operations per second) value.
+ *         * `OptionGroupMemberships` &mdash; (`Array<Object>`) Provides
+ *           the list of option group memberships for this DB Instance.
  *           * `OptionGroupName` &mdash; (`String`) The name of the option
  *             group that the instance belongs to.
  *           * `Status` &mdash; (`String`) The status of the DB Instance's
@@ -605,6 +717,10 @@ AWS.RDS = inherit({})
  *         * `CharacterSetName` &mdash; (`String`) If present, specifies
  *           the name of the character set that this instance is associated
  *           with.
+ *         * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
+ *           specifies the name of the secondary Availability Zone for a DB
+ *           instance with multi-AZ support.
+ *         * `PubliclyAccessible` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -659,10 +775,6 @@ AWS.RDS = inherit({})
  *       Example: mysecuritygroup
  *     * `DBSecurityGroupDescription` &mdash; **required** &mdash;
  *       (`String`) The description for the DB Security Group.
- *     * `EC2VpcId` &mdash; (`String`) The Id of VPC. Indicates which VPC
- *       this DB Security Group should belong to. Must be specified to
- *       create a DB Security Group for a VPC; may not be specified
- *       otherwise.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -690,7 +802,8 @@ AWS.RDS = inherit({})
  *         * `EC2SecurityGroups` &mdash; (`Array<Object>`) Contains a list
  *           of EC2SecurityGroup elements.
  *           * `Status` &mdash; (`String`) Provides the status of the EC2
- *             security group.
+ *             security group. Status can be "authorizing", "authorized",
+ *             "revoking", and "revoked".
  *           * `EC2SecurityGroupName` &mdash; (`String`) Specifies the name
  *             of the EC2 Security Group.
  *           * `EC2SecurityGroupId` &mdash; (`String`) Specifies the id of
@@ -701,7 +814,8 @@ AWS.RDS = inherit({})
  *         * `IPRanges` &mdash; (`Array<Object>`) Contains a list of
  *           IPRange elements.
  *           * `Status` &mdash; (`String`) Specifies the status of the IP
- *             range.
+ *             range. Status can be "authorizing", "authorized",
+ *             "revoking", and "revoked".
  *           * `CIDRIP` &mdash; (`String`) Specifies the IP range.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -758,13 +872,18 @@ AWS.RDS = inherit({})
  *         * `InstanceCreateTime` &mdash; (`Date`) Specifies the time (UTC)
  *           when the snapshot was taken.
  *         * `MasterUsername` &mdash; (`String`) Provides the master
- *           username for the DB Instance.
+ *           username for the DB Snapshot.
  *         * `EngineVersion` &mdash; (`String`) Specifies the version of
  *           the database engine.
  *         * `LicenseModel` &mdash; (`String`) License model information
  *           for the restored DB Instance.
  *         * `SnapshotType` &mdash; (`String`) Provides the type of the DB
  *           Snapshot.
+ *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
+ *           operations per second) value of the DB Instance at the time of
+ *           the snapshot.
+ *         * `OptionGroupName` &mdash; (`String`) Provides the option group
+ *           name for the DB Snapshot.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -803,15 +922,50 @@ AWS.RDS = inherit({})
  *           Group.
  *         * `SubnetGroupStatus` &mdash; (`String`) Provides the status of
  *           the DB Subnet Group.
- *         * `Subnets` &mdash; (`Array<Object>`) Contains a list of Subnets
+ *         * `Subnets` &mdash; (`Array<Object>`) Contains a list of Subnet
  *           elements.
  *           * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *             identifier of the subnet.
  *           * `SubnetAvailabilityZone` &mdash; (`Object`)
  *             * `Name` &mdash; (`String`) The name of the availability
  *               zone.
+ *             * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
+ *               indicates the availability zone is capable of provisioned
+ *               IOPs.
  *           * `SubnetStatus` &mdash; (`String`) Specifies the status of
  *             the subnet.
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
+ * @!method createEventSubscription(params, callback)
+ *   Calls the CreateEventSubscription API operation.
+ *   @param params [Object]
+ *     * `SubscriptionName` &mdash; **required** &mdash; (`String`)
+ *     * `SnsTopicArn` &mdash; **required** &mdash; (`String`)
+ *     * `SourceType` &mdash; (`String`)
+ *     * `EventCategories` &mdash; (`Array<String>`)
+ *     * `SourceIds` &mdash; (`Array<String>`)
+ *     * `Enabled` &mdash; (`Boolean`)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `EventSubscription` &mdash; (`Object`)
+ *         * `CustomerAwsId` &mdash; (`String`)
+ *         * `CustSubscriptionId` &mdash; (`String`)
+ *         * `SnsTopicArn` &mdash; (`String`)
+ *         * `Status` &mdash; (`String`)
+ *         * `SubscriptionCreationTime` &mdash; (`String`)
+ *         * `SourceType` &mdash; (`String`)
+ *         * `SourceIdsList` &mdash; (`Array<String>`)
+ *         * `EventCategoriesList` &mdash; (`Array<String>`)
+ *         * `Enabled` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -844,22 +998,62 @@ AWS.RDS = inherit({})
  *       * `OptionGroup` &mdash; (`Object`)
  *         * `OptionGroupName` &mdash; (`String`) Specifies the name of the
  *           option group.
- *         * `OptionGroupDescription` &mdash; (`String`)
+ *         * `OptionGroupDescription` &mdash; (`String`) Provides the
+ *           description of the option group.
  *         * `EngineName` &mdash; (`String`) Engine name that this option
  *           group can be applied to.
  *         * `MajorEngineVersion` &mdash; (`String`) Indicates the major
  *           engine version associated with this option group.
- *         * `Options` &mdash; (`Array<Object>`)
+ *         * `Options` &mdash; (`Array<Object>`) Indicates what options are
+ *           available in the option group.
  *           * `OptionName` &mdash; (`String`) The name of the option.
  *           * `OptionDescription` &mdash; (`String`) The description of
  *             the option.
+ *           * `Persistent` &mdash; (`Boolean`) Indicate if this option is
+ *             persistent.
  *           * `Port` &mdash; (`Integer`) If required, the port configured
  *             for this option to use.
- *           * `DBSecurityGroupMemberships` &mdash; (`Array<Object>`)
+ *           * `OptionSettings` &mdash; (`Array<Object>`) The settings
+ *             belonging to this option.
+ *             * `Name` &mdash; (`String`) The name of the setting.
+ *             * `Value` &mdash; (`String`) The value of this setting.
+ *             * `DefaultValue` &mdash; (`String`) Default value for this
+ *               setting.
+ *             * `Description` &mdash; (`String`) The description of the
+ *               setting.
+ *             * `ApplyType` &mdash; (`String`) Specifies the apply type
+ *               for this setting.
+ *             * `DataType` &mdash; (`String`) Specifies the valid data
+ *               type of this setting
+ *             * `AllowedValues` &mdash; (`String`) Specifies a valid
+ *               list/range of values allowed for this setting.
+ *             * `IsModifiable` &mdash; (`Boolean`) Indicates if the
+ *               setting is modifiable or not.
+ *             * `IsCollection` &mdash; (`Boolean`) Indicates if the value
+ *               for the setting can be a list of values or a single value.
+ *           * `DBSecurityGroupMemberships` &mdash; (`Array<Object>`) If
+ *             the Option requires access to a port, then this DB Security
+ *             Group allows access to the port.
  *             * `DBSecurityGroupName` &mdash; (`String`) The name of the
  *               DB Security Group.
  *             * `Status` &mdash; (`String`) The status of the DB Security
  *               Group.
+ *           * `VpcSecurityGroupMemberships` &mdash; (`Array<Object>`) If
+ *             the Option requires access to a port, then this VPC Security
+ *             Group allows access to the port.
+ *             * `VpcSecurityGroupId` &mdash; (`String`)
+ *             * `Status` &mdash; (`String`)
+ *         * `AllowsVpcAndNonVpcInstanceMemberships` &mdash; (`Boolean`)
+ *           Indicates whether this option group can be applied to both VPC
+ *           and non-VPC instances. The value 'true' indicates the option
+ *           group can be applied to both VPC and non-VPC instances.
+ *         * `VpcId` &mdash; (`String`) If
+ *           AllowsVpcAndNonVpcInstanceMemberships is 'false', this field
+ *           is blank. If AllowsVpcAndNonVpcInstanceMemberships is 'true'
+ *           and this field is blank, then this option group can be applied
+ *           to both VPC and non-VPC instances. If this field contains a
+ *           value, then this option group can only be applied to instances
+ *           that are in the VPC indicated by this field.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -940,6 +1134,10 @@ AWS.RDS = inherit({})
  *             Security Group.
  *           * `Status` &mdash; (`String`) The status of the DB Security
  *             Group.
+ *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *           VPC security group elements that the DB Instance belongs to.
+ *           * `VpcSecurityGroupId` &mdash; (`String`)
+ *           * `Status` &mdash; (`String`)
  *         * `DBParameterGroups` &mdash; (`Array<Object>`) Provides the
  *           list of DB Parameter Groups applied to this DB Instance.
  *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
@@ -960,12 +1158,15 @@ AWS.RDS = inherit({})
  *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
  *             of the DB Subnet Group.
  *           * `Subnets` &mdash; (`Array<Object>`) Contains a list of
- *             Subnets elements.
+ *             Subnet elements.
  *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *               identifier of the subnet.
  *             * `SubnetAvailabilityZone` &mdash; (`Object`)
  *               * `Name` &mdash; (`String`) The name of the availability
  *                 zone.
+ *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
+ *                 indicates the availability zone is capable of
+ *                 provisioned IOPs.
  *             * `SubnetStatus` &mdash; (`String`) Specifies the status of
  *               the subnet.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
@@ -993,6 +1194,12 @@ AWS.RDS = inherit({})
  *             DB Instance is to change to a Multi-AZ deployment.
  *           * `EngineVersion` &mdash; (`String`) Indicates the database
  *             engine version.
+ *           * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
+ *             IOPS value for the DB Instance that will be applied or is
+ *             being applied.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Contains the new
+ *             DBInstanceIdentifier for the DB Instance that will be
+ *             applied or is in progress.
  *         * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
  *           time to which a database can be restored with point-in-time
  *           restore.
@@ -1010,8 +1217,10 @@ AWS.RDS = inherit({})
  *           associated with this DB Instance.
  *         * `LicenseModel` &mdash; (`String`) License model information
  *           for this DB Instance.
- *         * `OptionGroupMembership` &mdash; (`Object`) Specifies the name
- *           and status of the option group that this instance belongs to.
+ *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
+ *           operations per second) value.
+ *         * `OptionGroupMemberships` &mdash; (`Array<Object>`) Provides
+ *           the list of option group memberships for this DB Instance.
  *           * `OptionGroupName` &mdash; (`String`) The name of the option
  *             group that the instance belongs to.
  *           * `Status` &mdash; (`String`) The status of the DB Instance's
@@ -1020,6 +1229,10 @@ AWS.RDS = inherit({})
  *         * `CharacterSetName` &mdash; (`String`) If present, specifies
  *           the name of the character set that this instance is associated
  *           with.
+ *         * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
+ *           specifies the name of the secondary Availability Zone for a DB
+ *           instance with multi-AZ support.
+ *         * `PubliclyAccessible` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1104,13 +1317,18 @@ AWS.RDS = inherit({})
  *         * `InstanceCreateTime` &mdash; (`Date`) Specifies the time (UTC)
  *           when the snapshot was taken.
  *         * `MasterUsername` &mdash; (`String`) Provides the master
- *           username for the DB Instance.
+ *           username for the DB Snapshot.
  *         * `EngineVersion` &mdash; (`String`) Specifies the version of
  *           the database engine.
  *         * `LicenseModel` &mdash; (`String`) License model information
  *           for the restored DB Instance.
  *         * `SnapshotType` &mdash; (`String`) Provides the type of the DB
  *           Snapshot.
+ *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
+ *           operations per second) value of the DB Instance at the time of
+ *           the snapshot.
+ *         * `OptionGroupName` &mdash; (`String`) Provides the option group
+ *           name for the DB Snapshot.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1130,6 +1348,33 @@ AWS.RDS = inherit({})
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
+ * @!method deleteEventSubscription(params, callback)
+ *   Calls the DeleteEventSubscription API operation.
+ *   @param params [Object]
+ *     * `SubscriptionName` &mdash; **required** &mdash; (`String`)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `EventSubscription` &mdash; (`Object`)
+ *         * `CustomerAwsId` &mdash; (`String`)
+ *         * `CustSubscriptionId` &mdash; (`String`)
+ *         * `SnsTopicArn` &mdash; (`String`)
+ *         * `Status` &mdash; (`String`)
+ *         * `SubscriptionCreationTime` &mdash; (`String`)
+ *         * `SourceType` &mdash; (`String`)
+ *         * `SourceIdsList` &mdash; (`Array<String>`)
+ *         * `EventCategoriesList` &mdash; (`Array<String>`)
+ *         * `Enabled` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1163,12 +1408,13 @@ AWS.RDS = inherit({})
  *       two consecutive hyphens
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
  *       to include in the response. If more than the MaxRecords value is
- *       available, a marker is included in the response so that the
- *       following results can be retrieved. Default: 100 Constraints:
- *       minimum 20, maximum 100
- *     * `Marker` &mdash; (`String`) The marker provided in the previous
- *       request. If this parameter is specified, the response includes
- *       records beyond the marker only, up to MaxRecords.
+ *       available, a pagination token called a marker is included in the
+ *       response so that the following results can be retrieved.
+ *       Default: 100 Constraints: minimum 20, maximum 100
+ *     * `Marker` &mdash; (`String`) An optional pagination token
+ *       provided by a previous request. If this parameter is specified,
+ *       the response includes only records beyond the marker, up to the
+ *       value specified by MaxRecords.
  *     * `DefaultOnly` &mdash; (`Boolean`) Indicates that only the
  *       default version of the specified engine or engine and major
  *       version combination is returned.
@@ -1187,8 +1433,10 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Marker` &mdash; (`String`) The identifier returned to allow
- *         retrieval of paginated results.
+ *       * `Marker` &mdash; (`String`) An optional pagination token
+ *         provided by a previous request. If this parameter is specified,
+ *         the response includes only records beyond the marker, up to the
+ *         value specified by MaxRecords.
  *       * `DBEngineVersions` &mdash; (`Array<Object>`) A list of
  *         DBEngineVersion elements.
  *         * `Engine` &mdash; (`String`) The name of the database engine.
@@ -1200,6 +1448,14 @@ AWS.RDS = inherit({})
  *           the database engine.
  *         * `DBEngineVersionDescription` &mdash; (`String`) The
  *           description of the database engine version.
+ *         * `DefaultCharacterSet` &mdash; (`Object`) The default character
+ *           set for new instances of this engine version, if the
+ *           CharacterSetName parameter of the CreateDBInstance API is not
+ *           specified.
+ *           * `CharacterSetName` &mdash; (`String`) The name of the
+ *             character set.
+ *           * `CharacterSetDescription` &mdash; (`String`) The description
+ *             of the character set.
  *         * `SupportedCharacterSets` &mdash; (`Array<Object>`) A list of
  *           the character sets supported by this engine for the
  *           CharacterSetName parameter of the CreateDBInstance API.
@@ -1222,13 +1478,13 @@ AWS.RDS = inherit({})
  *       hyphens
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
  *       to include in the response. If more records exist than the
- *       specified MaxRecords value, a marker is included in the response
- *       so that the remaining results may be retrieved. Default: 100
- *       Constraints: minimum 20, maximum 100
- *     * `Marker` &mdash; (`String`) An optional marker provided in the
- *       previous DescribeDBInstances request. If this parameter is
- *       specified, the response includes only records beyond the marker,
- *       up to the value specified by MaxRecords .
+ *       specified MaxRecords value, a pagination token called a marker
+ *       is included in the response so that the remaining results may be
+ *       retrieved. Default: 100 Constraints: minimum 20, maximum 100
+ *     * `Marker` &mdash; (`String`) An optional pagination token
+ *       provided by a previous DescribeDBInstances request. If this
+ *       parameter is specified, the response includes only records
+ *       beyond the marker, up to the value specified by MaxRecords .
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1239,8 +1495,10 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Marker` &mdash; (`String`) The marker obtained from a previous
- *         operation response.
+ *       * `Marker` &mdash; (`String`) An optional pagination token
+ *         provided by a previous request. If this parameter is specified,
+ *         the response includes only records beyond the marker, up to the
+ *         value specified by MaxRecords .
  *       * `DBInstances` &mdash; (`Array<Object>`) A list of DBInstance
  *         instances.
  *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
@@ -1284,6 +1542,10 @@ AWS.RDS = inherit({})
  *             Security Group.
  *           * `Status` &mdash; (`String`) The status of the DB Security
  *             Group.
+ *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *           VPC security group elements that the DB Instance belongs to.
+ *           * `VpcSecurityGroupId` &mdash; (`String`)
+ *           * `Status` &mdash; (`String`)
  *         * `DBParameterGroups` &mdash; (`Array<Object>`) Provides the
  *           list of DB Parameter Groups applied to this DB Instance.
  *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
@@ -1304,12 +1566,15 @@ AWS.RDS = inherit({})
  *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
  *             of the DB Subnet Group.
  *           * `Subnets` &mdash; (`Array<Object>`) Contains a list of
- *             Subnets elements.
+ *             Subnet elements.
  *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *               identifier of the subnet.
  *             * `SubnetAvailabilityZone` &mdash; (`Object`)
  *               * `Name` &mdash; (`String`) The name of the availability
  *                 zone.
+ *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
+ *                 indicates the availability zone is capable of
+ *                 provisioned IOPs.
  *             * `SubnetStatus` &mdash; (`String`) Specifies the status of
  *               the subnet.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
@@ -1337,6 +1602,12 @@ AWS.RDS = inherit({})
  *             DB Instance is to change to a Multi-AZ deployment.
  *           * `EngineVersion` &mdash; (`String`) Indicates the database
  *             engine version.
+ *           * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
+ *             IOPS value for the DB Instance that will be applied or is
+ *             being applied.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Contains the new
+ *             DBInstanceIdentifier for the DB Instance that will be
+ *             applied or is in progress.
  *         * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
  *           time to which a database can be restored with point-in-time
  *           restore.
@@ -1354,8 +1625,10 @@ AWS.RDS = inherit({})
  *           associated with this DB Instance.
  *         * `LicenseModel` &mdash; (`String`) License model information
  *           for this DB Instance.
- *         * `OptionGroupMembership` &mdash; (`Object`) Specifies the name
- *           and status of the option group that this instance belongs to.
+ *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
+ *           operations per second) value.
+ *         * `OptionGroupMemberships` &mdash; (`Array<Object>`) Provides
+ *           the list of option group memberships for this DB Instance.
  *           * `OptionGroupName` &mdash; (`String`) The name of the option
  *             group that the instance belongs to.
  *           * `Status` &mdash; (`String`) The status of the DB Instance's
@@ -1364,6 +1637,53 @@ AWS.RDS = inherit({})
  *         * `CharacterSetName` &mdash; (`String`) If present, specifies
  *           the name of the character set that this instance is associated
  *           with.
+ *         * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
+ *           specifies the name of the secondary Availability Zone for a DB
+ *           instance with multi-AZ support.
+ *         * `PubliclyAccessible` &mdash; (`Boolean`)
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
+ * @!method describeDBLogFiles(params, callback)
+ *   Calls the DescribeDBLogFiles API operation.
+ *   @param params [Object]
+ *     * `DBInstanceIdentifier` &mdash; (`String`) The customer-assigned
+ *       name of the DB Instance that contains the log files you want to
+ *       list. Constraints: Must contain from 1 to 63 alphanumeric
+ *       characters or hyphens First character must be a letter Cannot
+ *       end with a hyphen or contain two consecutive hyphens
+ *     * `FilenameContains` &mdash; (`String`) Filters the available log
+ *       files for log file names that contain the specified string.
+ *     * `FileLastWritten` &mdash; (`Integer`) Filters the available log
+ *       files for files written since the specified date.
+ *     * `FileSize` &mdash; (`Integer`) Filters the available log files
+ *       for files larger than the specified size.
+ *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
+ *       to include in the response. If more records exist than the
+ *       specified MaxRecords value, a pagination token called a marker
+ *       is included in the response so that the remaining results can be
+ *       retrieved.
+ *     * `Marker` &mdash; (`String`) The pagination token provided in the
+ *       previous request. If this parameter is specified the response
+ *       includes only records beyond the marker, up to MaxRecords.
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `DescribeDBLogFiles` &mdash; (`Array<Object>`)
+ *         * `LogFileName` &mdash; (`String`) The name of the log file for
+ *           the specified DB instance.
+ *         * `LastWritten` &mdash; (`Integer`) The date and time that the
+ *           last log entry was written.
+ *         * `Size` &mdash; (`Integer`) The size, in bytes, of the log file
+ *           for the specified DB instance.
+ *       * `Marker` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1376,13 +1696,13 @@ AWS.RDS = inherit({})
  *       Cannot end with a hyphen or contain two consecutive hyphens
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
  *       to include in the response. If more records exist than the
- *       specified MaxRecords value, a marker is included in the response
- *       so that the remaining results may be retrieved. Default: 100
- *       Constraints: minimum 20, maximum 100
- *     * `Marker` &mdash; (`String`) An optional marker provided in the
- *       previous DescribeDBParameterGroups request. If this parameter is
- *       specified, the response includes only records beyond the marker,
- *       up to the value specified by MaxRecords.
+ *       specified MaxRecords value, a pagination token called a marker
+ *       is included in the response so that the remaining results may be
+ *       retrieved. Default: 100 Constraints: minimum 20, maximum 100
+ *     * `Marker` &mdash; (`String`) An optional pagination token
+ *       provided by a previous DescribeDBParameterGroups request. If
+ *       this parameter is specified, the response includes only records
+ *       beyond the marker, up to the value specified by MaxRecords.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1393,8 +1713,10 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Marker` &mdash; (`String`) The marker obtained from a previous
- *         operation response.
+ *       * `Marker` &mdash; (`String`) An optional pagination token
+ *         provided by a previous request. If this parameter is specified,
+ *         the response includes only records beyond the marker, up to the
+ *         value specified by MaxRecords.
  *       * `DBParameterGroups` &mdash; (`Array<Object>`) A list of
  *         DBParameterGroup instances.
  *         * `DBParameterGroupName` &mdash; (`String`) Provides the name of
@@ -1420,13 +1742,13 @@ AWS.RDS = inherit({})
  *       system | engine-default
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
  *       to include in the response. If more records exist than the
- *       specified MaxRecords value, a marker is included in the response
- *       so that the remaining results may be retrieved. Default: 100
- *       Constraints: minimum 20, maximum 100
- *     * `Marker` &mdash; (`String`) An optional marker provided in the
- *       previous DescribeDBParameters request. If this parameter is
- *       specified, the response includes only records beyond the marker,
- *       up to the value specified by MaxRecords.
+ *       specified MaxRecords value, a pagination token called a marker
+ *       is included in the response so that the remaining results may be
+ *       retrieved. Default: 100 Constraints: minimum 20, maximum 100
+ *     * `Marker` &mdash; (`String`) An optional pagination token
+ *       provided by a previous DescribeDBParameters request. If this
+ *       parameter is specified, the response includes only records
+ *       beyond the marker, up to the value specified by MaxRecords.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1461,8 +1783,10 @@ AWS.RDS = inherit({})
  *           version to which the parameter can apply.
  *         * `ApplyMethod` &mdash; (`String`) Indicates when to apply
  *           parameter updates.
- *       * `Marker` &mdash; (`String`) The marker obtained from a previous
- *         operation response.
+ *       * `Marker` &mdash; (`String`) An optional pagination token
+ *         provided by a previous request. If this parameter is specified,
+ *         the response includes only records beyond the marker, up to the
+ *         value specified by MaxRecords.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1473,13 +1797,13 @@ AWS.RDS = inherit({})
  *       Security Group to return details for.
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
  *       to include in the response. If more records exist than the
- *       specified MaxRecords value, a marker is included in the response
- *       so that the remaining results may be retrieved. Default: 100
- *       Constraints: minimum 20, maximum 100
- *     * `Marker` &mdash; (`String`) An optional marker provided in the
- *       previous DescribeDBSecurityGroups request. If this parameter is
- *       specified, the response includes only records beyond the marker,
- *       up to the value specified by MaxRecords.
+ *       specified MaxRecords value, a pagination token called a marker
+ *       is included in the response so that the remaining results may be
+ *       retrieved. Default: 100 Constraints: minimum 20, maximum 100
+ *     * `Marker` &mdash; (`String`) An optional pagination token
+ *       provided by a previous DescribeDBSecurityGroups request. If this
+ *       parameter is specified, the response includes only records
+ *       beyond the marker, up to the value specified by MaxRecords.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1490,8 +1814,10 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Marker` &mdash; (`String`) The marker obtained from a previous
- *         operation response.
+ *       * `Marker` &mdash; (`String`) An optional pagination token
+ *         provided by a previous request. If this parameter is specified,
+ *         the response includes only records beyond the marker, up to the
+ *         value specified by MaxRecords.
  *       * `DBSecurityGroups` &mdash; (`Array<Object>`) A list of
  *         DBSecurityGroup instances.
  *         * `OwnerId` &mdash; (`String`) Provides the AWS ID of the owner
@@ -1505,7 +1831,8 @@ AWS.RDS = inherit({})
  *         * `EC2SecurityGroups` &mdash; (`Array<Object>`) Contains a list
  *           of EC2SecurityGroup elements.
  *           * `Status` &mdash; (`String`) Provides the status of the EC2
- *             security group.
+ *             security group. Status can be "authorizing", "authorized",
+ *             "revoking", and "revoked".
  *           * `EC2SecurityGroupName` &mdash; (`String`) Specifies the name
  *             of the EC2 Security Group.
  *           * `EC2SecurityGroupId` &mdash; (`String`) Specifies the id of
@@ -1516,7 +1843,8 @@ AWS.RDS = inherit({})
  *         * `IPRanges` &mdash; (`Array<Object>`) Contains a list of
  *           IPRange elements.
  *           * `Status` &mdash; (`String`) Specifies the status of the IP
- *             range.
+ *             range. Status can be "authorizing", "authorized",
+ *             "revoking", and "revoked".
  *           * `CIDRIP` &mdash; (`String`) Specifies the IP range.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -1544,13 +1872,13 @@ AWS.RDS = inherit({})
  *       results will include snapshots of all types.
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
  *       to include in the response. If more records exist than the
- *       specified MaxRecords value, a marker is included in the response
- *       so that the remaining results may be retrieved. Default: 100
- *       Constraints: minimum 20, maximum 100
- *     * `Marker` &mdash; (`String`) An optional marker provided in the
- *       previous DescribeDBSnapshots request. If this parameter is
- *       specified, the response includes only records beyond the marker,
- *       up to the value specified by MaxRecords.
+ *       specified MaxRecords value, a pagination token called a marker
+ *       is included in the response so that the remaining results may be
+ *       retrieved. Default: 100 Constraints: minimum 20, maximum 100
+ *     * `Marker` &mdash; (`String`) An optional pagination token
+ *       provided by a previous DescribeDBSnapshots request. If this
+ *       parameter is specified, the response includes only records
+ *       beyond the marker, up to the value specified by MaxRecords.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1561,8 +1889,10 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Marker` &mdash; (`String`) The marker obtained from a previous
- *         operation response.
+ *       * `Marker` &mdash; (`String`) An optional pagination token
+ *         provided by a previous request. If this parameter is specified,
+ *         the response includes only records beyond the marker, up to the
+ *         value specified by MaxRecords.
  *       * `DBSnapshots` &mdash; (`Array<Object>`) A list of DBSnapshot
  *         instances.
  *         * `DBSnapshotIdentifier` &mdash; (`String`) Specifies the
@@ -1588,13 +1918,18 @@ AWS.RDS = inherit({})
  *         * `InstanceCreateTime` &mdash; (`Date`) Specifies the time (UTC)
  *           when the snapshot was taken.
  *         * `MasterUsername` &mdash; (`String`) Provides the master
- *           username for the DB Instance.
+ *           username for the DB Snapshot.
  *         * `EngineVersion` &mdash; (`String`) Specifies the version of
  *           the database engine.
  *         * `LicenseModel` &mdash; (`String`) License model information
  *           for the restored DB Instance.
  *         * `SnapshotType` &mdash; (`String`) Provides the type of the DB
  *           Snapshot.
+ *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
+ *           operations per second) value of the DB Instance at the time of
+ *           the snapshot.
+ *         * `OptionGroupName` &mdash; (`String`) Provides the option group
+ *           name for the DB Snapshot.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1605,13 +1940,13 @@ AWS.RDS = inherit({})
  *       Group to return details for.
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
  *       to include in the response. If more records exist than the
- *       specified MaxRecords value, a marker is included in the response
- *       so that the remaining results may be retrieved. Default: 100
- *       Constraints: minimum 20, maximum 100
- *     * `Marker` &mdash; (`String`) An optional marker provided in the
- *       previous DescribeDBSubnetGroups request. If this parameter is
- *       specified, the response includes only records beyond the marker,
- *       up to the value specified by MaxRecords.
+ *       specified MaxRecords value, a pagination token called a marker
+ *       is included in the response so that the remaining results may be
+ *       retrieved. Default: 100 Constraints: minimum 20, maximum 100
+ *     * `Marker` &mdash; (`String`) An optional pagination token
+ *       provided by a previous DescribeDBSubnetGroups request. If this
+ *       parameter is specified, the response includes only records
+ *       beyond the marker, up to the value specified by MaxRecords.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1622,8 +1957,10 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Marker` &mdash; (`String`) The marker obtained from a previous
- *         operation response.
+ *       * `Marker` &mdash; (`String`) An optional pagination token
+ *         provided by a previous request. If this parameter is specified,
+ *         the response includes only records beyond the marker, up to the
+ *         value specified by MaxRecords.
  *       * `DBSubnetGroups` &mdash; (`Array<Object>`) A list of
  *         DBSubnetGroup instances.
  *         * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
@@ -1634,13 +1971,16 @@ AWS.RDS = inherit({})
  *           Group.
  *         * `SubnetGroupStatus` &mdash; (`String`) Provides the status of
  *           the DB Subnet Group.
- *         * `Subnets` &mdash; (`Array<Object>`) Contains a list of Subnets
+ *         * `Subnets` &mdash; (`Array<Object>`) Contains a list of Subnet
  *           elements.
  *           * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *             identifier of the subnet.
  *           * `SubnetAvailabilityZone` &mdash; (`Object`)
  *             * `Name` &mdash; (`String`) The name of the availability
  *               zone.
+ *             * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
+ *               indicates the availability zone is capable of provisioned
+ *               IOPs.
  *           * `SubnetStatus` &mdash; (`String`) Specifies the status of
  *             the subnet.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1653,13 +1993,14 @@ AWS.RDS = inherit({})
  *       The name of the DB Parameter Group Family.
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
  *       to include in the response. If more records exist than the
- *       specified MaxRecords value, a marker is included in the response
- *       so that the remaining results may be retrieved. Default: 100
- *       Constraints: minimum 20, maximum 100
- *     * `Marker` &mdash; (`String`) An optional marker provided in the
- *       previous DescribeEngineDefaultParameters request. If this
- *       parameter is specified, the response includes only records
- *       beyond the marker, up to the value specified by MaxRecords.
+ *       specified MaxRecords value, a pagination token called a marker
+ *       is included in the response so that the remaining results may be
+ *       retrieved. Default: 100 Constraints: minimum 20, maximum 100
+ *     * `Marker` &mdash; (`String`) An optional pagination token
+ *       provided by a previous DescribeEngineDefaultParameters request.
+ *       If this parameter is specified, the response includes only
+ *       records beyond the marker, up to the value specified by
+ *       MaxRecords.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1676,8 +2017,10 @@ AWS.RDS = inherit({})
  *         * `DBParameterGroupFamily` &mdash; (`String`) Specifies the name
  *           of the DB Parameter Group Family which the engine default
  *           parameters apply to.
- *         * `Marker` &mdash; (`String`) Provides an identifier to allow
- *           retrieval of paginated results.
+ *         * `Marker` &mdash; (`String`) An optional pagination token
+ *           provided by a previous EngineDefaults request. If this
+ *           parameter is specified, the response includes only records
+ *           beyond the marker, up to the value specified by MaxRecords .
  *         * `Parameters` &mdash; (`Array<Object>`) Contains a list of
  *           engine default parameters.
  *           * `ParameterName` &mdash; (`String`) Specifies the name of the
@@ -1702,6 +2045,56 @@ AWS.RDS = inherit({})
  *             engine version to which the parameter can apply.
  *           * `ApplyMethod` &mdash; (`String`) Indicates when to apply
  *             parameter updates.
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
+ * @!method describeEventCategories(params, callback)
+ *   Calls the DescribeEventCategories API operation.
+ *   @param params [Object]
+ *     * `SourceType` &mdash; (`String`)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `EventCategoriesMapList` &mdash; (`Array<Object>`)
+ *         * `SourceType` &mdash; (`String`)
+ *         * `EventCategories` &mdash; (`Array<String>`)
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
+ * @!method describeEventSubscriptions(params, callback)
+ *   Calls the DescribeEventSubscriptions API operation.
+ *   @param params [Object]
+ *     * `SubscriptionName` &mdash; (`String`)
+ *     * `MaxRecords` &mdash; (`Integer`)
+ *     * `Marker` &mdash; (`String`)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `Marker` &mdash; (`String`)
+ *       * `EventSubscriptionsList` &mdash; (`Array<Object>`)
+ *         * `CustomerAwsId` &mdash; (`String`)
+ *         * `CustSubscriptionId` &mdash; (`String`)
+ *         * `SnsTopicArn` &mdash; (`String`)
+ *         * `Status` &mdash; (`String`)
+ *         * `SubscriptionCreationTime` &mdash; (`String`)
+ *         * `SourceType` &mdash; (`String`)
+ *         * `SourceIdsList` &mdash; (`Array<String>`)
+ *         * `EventCategoriesList` &mdash; (`Array<String>`)
+ *         * `Enabled` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1731,15 +2124,16 @@ AWS.RDS = inherit({})
  *       Example: 2009-07-08T18:00Z
  *     * `Duration` &mdash; (`Integer`) The number of minutes to retrieve
  *       events for. Default: 60
+ *     * `EventCategories` &mdash; (`Array<String>`)
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
  *       to include in the response. If more records exist than the
- *       specified MaxRecords value, a marker is included in the response
- *       so that the remaining results may be retrieved. Default: 100
- *       Constraints: minimum 20, maximum 100
- *     * `Marker` &mdash; (`String`) An optional marker provided in the
- *       previous DescribeEvents request. If this parameter is specified,
- *       the response includes only records beyond the marker, up to the
- *       value specified by MaxRecords.
+ *       specified MaxRecords value, a pagination token called a marker
+ *       is included in the response so that the remaining results may be
+ *       retrieved. Default: 100 Constraints: minimum 20, maximum 100
+ *     * `Marker` &mdash; (`String`) An optional pagination token
+ *       provided by a previous DescribeEvents request. If this parameter
+ *       is specified, the response includes only records beyond the
+ *       marker, up to the value specified by MaxRecords.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1750,14 +2144,18 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Marker` &mdash; (`String`) The marker obtained from a previous
- *         operation response.
+ *       * `Marker` &mdash; (`String`) An optional pagination token
+ *         provided by a previous Events request. If this parameter is
+ *         specified, the response includes only records beyond the marker,
+ *         up to the value specified by MaxRecords .
  *       * `Events` &mdash; (`Array<Object>`) A list of Event instances.
  *         * `SourceIdentifier` &mdash; (`String`) Provides the identifier
  *           for the source of the event.
  *         * `SourceType` &mdash; (`String`) Specifies the source type for
  *           this event.
  *         * `Message` &mdash; (`String`) Provides the text of this event.
+ *         * `EventCategories` &mdash; (`Array<String>`) Specifies the
+ *           category for the event.
  *         * `Date` &mdash; (`Date`) Specifies the date and time of the
  *           event.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1772,8 +2170,15 @@ AWS.RDS = inherit({})
  *     * `MajorEngineVersion` &mdash; (`String`) If specified, filters
  *       the results to include only options for the specified major
  *       engine version.
- *     * `MaxRecords` &mdash; (`Integer`)
- *     * `Marker` &mdash; (`String`)
+ *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
+ *       to include in the response. If more records exist than the
+ *       specified MaxRecords value, a pagination token called a marker
+ *       is included in the response so that the remaining results can be
+ *       retrieved. Default: 100 Constraints: minimum 20, maximum 100
+ *     * `Marker` &mdash; (`String`) An optional pagination token
+ *       provided by a previous request. If this parameter is specified,
+ *       the response includes only records beyond the marker, up to the
+ *       value specified by MaxRecords.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1800,7 +2205,19 @@ AWS.RDS = inherit({})
  *           port, specifies the default port for the option.
  *         * `OptionsDependedOn` &mdash; (`Array<String>`) List of all
  *           options that are prerequisites for this option.
- *       * `Marker` &mdash; (`String`)
+ *         * `Persistent` &mdash; (`Boolean`) Specifies whether the option
+ *           is persistent in an option group.
+ *         * `OptionGroupOptionSettings` &mdash; (`Array<Object>`)
+ *           * `SettingName` &mdash; (`String`)
+ *           * `SettingDescription` &mdash; (`String`)
+ *           * `DefaultValue` &mdash; (`String`)
+ *           * `ApplyType` &mdash; (`String`)
+ *           * `AllowedValues` &mdash; (`String`)
+ *           * `IsModifiable` &mdash; (`Boolean`)
+ *       * `Marker` &mdash; (`String`) An optional pagination token
+ *         provided by a previous request. If this parameter is specified,
+ *         the response includes only records beyond the marker, up to the
+ *         value specified by MaxRecords.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1810,8 +2227,15 @@ AWS.RDS = inherit({})
  *     * `OptionGroupName` &mdash; (`String`) The name of the option
  *       group to describe. Cannot be supplied together with EngineName
  *       or MajorEngineVersion.
- *     * `Marker` &mdash; (`String`)
- *     * `MaxRecords` &mdash; (`Integer`)
+ *     * `Marker` &mdash; (`String`) An optional pagination token
+ *       provided by a previous DescribeOptionGroups request. If this
+ *       parameter is specified, the response includes only records
+ *       beyond the marker, up to the value specified by MaxRecords.
+ *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
+ *       to include in the response. If more records exist than the
+ *       specified MaxRecords value, a pagination token called a marker
+ *       is included in the response so that the remaining results can be
+ *       retrieved. Default: 100 Constraints: minimum 20, maximum 100
  *     * `EngineName` &mdash; (`String`) Filters the list of option
  *       groups to only include groups associated with a specific
  *       database engine.
@@ -1833,22 +2257,62 @@ AWS.RDS = inherit({})
  *         groups.
  *         * `OptionGroupName` &mdash; (`String`) Specifies the name of the
  *           option group.
- *         * `OptionGroupDescription` &mdash; (`String`)
+ *         * `OptionGroupDescription` &mdash; (`String`) Provides the
+ *           description of the option group.
  *         * `EngineName` &mdash; (`String`) Engine name that this option
  *           group can be applied to.
  *         * `MajorEngineVersion` &mdash; (`String`) Indicates the major
  *           engine version associated with this option group.
- *         * `Options` &mdash; (`Array<Object>`)
+ *         * `Options` &mdash; (`Array<Object>`) Indicates what options are
+ *           available in the option group.
  *           * `OptionName` &mdash; (`String`) The name of the option.
  *           * `OptionDescription` &mdash; (`String`) The description of
  *             the option.
+ *           * `Persistent` &mdash; (`Boolean`) Indicate if this option is
+ *             persistent.
  *           * `Port` &mdash; (`Integer`) If required, the port configured
  *             for this option to use.
- *           * `DBSecurityGroupMemberships` &mdash; (`Array<Object>`)
+ *           * `OptionSettings` &mdash; (`Array<Object>`) The settings
+ *             belonging to this option.
+ *             * `Name` &mdash; (`String`) The name of the setting.
+ *             * `Value` &mdash; (`String`) The value of this setting.
+ *             * `DefaultValue` &mdash; (`String`) Default value for this
+ *               setting.
+ *             * `Description` &mdash; (`String`) The description of the
+ *               setting.
+ *             * `ApplyType` &mdash; (`String`) Specifies the apply type
+ *               for this setting.
+ *             * `DataType` &mdash; (`String`) Specifies the valid data
+ *               type of this setting
+ *             * `AllowedValues` &mdash; (`String`) Specifies a valid
+ *               list/range of values allowed for this setting.
+ *             * `IsModifiable` &mdash; (`Boolean`) Indicates if the
+ *               setting is modifiable or not.
+ *             * `IsCollection` &mdash; (`Boolean`) Indicates if the value
+ *               for the setting can be a list of values or a single value.
+ *           * `DBSecurityGroupMemberships` &mdash; (`Array<Object>`) If
+ *             the Option requires access to a port, then this DB Security
+ *             Group allows access to the port.
  *             * `DBSecurityGroupName` &mdash; (`String`) The name of the
  *               DB Security Group.
  *             * `Status` &mdash; (`String`) The status of the DB Security
  *               Group.
+ *           * `VpcSecurityGroupMemberships` &mdash; (`Array<Object>`) If
+ *             the Option requires access to a port, then this VPC Security
+ *             Group allows access to the port.
+ *             * `VpcSecurityGroupId` &mdash; (`String`)
+ *             * `Status` &mdash; (`String`)
+ *         * `AllowsVpcAndNonVpcInstanceMemberships` &mdash; (`Boolean`)
+ *           Indicates whether this option group can be applied to both VPC
+ *           and non-VPC instances. The value 'true' indicates the option
+ *           group can be applied to both VPC and non-VPC instances.
+ *         * `VpcId` &mdash; (`String`) If
+ *           AllowsVpcAndNonVpcInstanceMemberships is 'false', this field
+ *           is blank. If AllowsVpcAndNonVpcInstanceMemberships is 'true'
+ *           and this field is blank, then this option group can be applied
+ *           to both VPC and non-VPC instances. If this field contains a
+ *           value, then this option group can only be applied to instances
+ *           that are in the VPC indicated by this field.
  *       * `Marker` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -1867,15 +2331,18 @@ AWS.RDS = inherit({})
  *     * `LicenseModel` &mdash; (`String`) The license model filter
  *       value. Specify this parameter to show only the available
  *       offerings matching the specified license model.
+ *     * `Vpc` &mdash; (`Boolean`) The VPC filter value. Specify this
+ *       parameter to show only the available VPC or non-VPC offerings.
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
  *       to include in the response. If more records exist than the
- *       specified MaxRecords value, a marker is included in the response
- *       so that the remaining results may be retrieved. Default: 100
- *       Constraints: minimum 20, maximum 100
- *     * `Marker` &mdash; (`String`) An optional marker provided in the
- *       previous DescribeOrderableDBInstanceOptions request. If this
- *       parameter is specified, the response includes only records
- *       beyond the marker, up to the value specified by MaxRecords .
+ *       specified MaxRecords value, a pagination token called a marker
+ *       is included in the response so that the remaining results can be
+ *       retrieved. Default: 100 Constraints: minimum 20, maximum 100
+ *     * `Marker` &mdash; (`String`) An optional pagination token
+ *       provided by a previous DescribeOrderableDBInstanceOptions
+ *       request. If this parameter is specified, the response includes
+ *       only records beyond the marker, up to the value specified by
+ *       MaxRecords .
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1900,18 +2367,18 @@ AWS.RDS = inherit({})
  *         * `AvailabilityZones` &mdash; (`Array<Object>`) A list of
  *           availability zones for the orderable DB Instance.
  *           * `Name` &mdash; (`String`) The name of the availability zone.
+ *           * `ProvisionedIopsCapable` &mdash; (`Boolean`) True indicates
+ *             the availability zone is capable of provisioned IOPs.
  *         * `MultiAZCapable` &mdash; (`Boolean`) Indicates whether this
  *           orderable DB Instance is multi-AZ capable.
  *         * `ReadReplicaCapable` &mdash; (`Boolean`) Indicates whether
  *           this orderable DB Instance can have a read replica.
- *         * `VpcCapable` &mdash; (`Boolean`) Indicates whether this
- *           orderable DB Instance is VPC capable.
- *         * `VpcMultiAZCapable` &mdash; (`Boolean`) Indicates whether this
- *           orderable DB Instance is VPC multi-AZ capable.
- *         * `VpcReadReplicaCapable` &mdash; (`Boolean`) Indicates whether
- *           this orderable DB Instance can have a VPC read replica.
- *       * `Marker` &mdash; (`String`) A marker that can be used to
- *         retrieve paginated results.
+ *         * `Vpc` &mdash; (`Boolean`) Indicates whether this is a VPC
+ *           orderable DB Instance.
+ *       * `Marker` &mdash; (`String`) An optional pagination token
+ *         provided by a previous OrderableDBInstanceOptions request. If
+ *         this parameter is specified, the response includes only records
+ *         beyond the marker, up to the value specified by MaxRecords .
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1944,12 +2411,13 @@ AWS.RDS = inherit({})
  *       specified Multi-AZ parameter.
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
  *       to include in the response. If more than the MaxRecords value is
- *       available, a marker is included in the response so that the
- *       following results can be retrieved. Default: 100 Constraints:
- *       minimum 20, maximum 100
- *     * `Marker` &mdash; (`String`) The marker provided in the previous
- *       request. If this parameter is specified, the response includes
- *       records beyond the marker only, up to MaxRecords.
+ *       available, a pagination token called a marker is included in the
+ *       response so that the following results can be retrieved.
+ *       Default: 100 Constraints: minimum 20, maximum 100
+ *     * `Marker` &mdash; (`String`) An optional pagination token
+ *       provided by a previous request. If this parameter is specified,
+ *       the response includes only records beyond the marker, up to the
+ *       value specified by MaxRecords.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1960,8 +2428,10 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Marker` &mdash; (`String`) The marker provided for paginated
- *         results.
+ *       * `Marker` &mdash; (`String`) An optional pagination token
+ *         provided by a previous request. If this parameter is specified,
+ *         the response includes only records beyond the marker, up to the
+ *         value specified by MaxRecords.
  *       * `ReservedDBInstances` &mdash; (`Array<Object>`) A list of of
  *         reserved DB Instances.
  *         * `ReservedDBInstanceId` &mdash; (`String`) The unique
@@ -2024,12 +2494,13 @@ AWS.RDS = inherit({})
  *       specified Multi-AZ parameter.
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
  *       to include in the response. If more than the MaxRecords value is
- *       available, a marker is included in the response so that the
- *       following results can be retrieved. Default: 100 Constraints:
- *       minimum 20, maximum 100
- *     * `Marker` &mdash; (`String`) The marker provided in the previous
- *       request. If this parameter is specified, the response includes
- *       records beyond the marker only, up to MaxRecords.
+ *       available, a pagination token called a marker is included in the
+ *       response so that the following results can be retrieved.
+ *       Default: 100 Constraints: minimum 20, maximum 100
+ *     * `Marker` &mdash; (`String`) An optional pagination token
+ *       provided by a previous request. If this parameter is specified,
+ *       the response includes only records beyond the marker, up to the
+ *       value specified by MaxRecords.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -2040,8 +2511,10 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Marker` &mdash; (`String`) A marker provided for paginated
- *         results.
+ *       * `Marker` &mdash; (`String`) An optional pagination token
+ *         provided by a previous request. If this parameter is specified,
+ *         the response includes only records beyond the marker, up to the
+ *         value specified by MaxRecords.
  *       * `ReservedDBInstancesOfferings` &mdash; (`Array<Object>`) A list
  *         of reserved DB Instance offerings.
  *         * `ReservedDBInstancesOfferingId` &mdash; (`String`) The
@@ -2070,21 +2543,86 @@ AWS.RDS = inherit({})
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
+ * @!method downloadDBLogFilePortion(params, callback)
+ *   Calls the DownloadDBLogFilePortion API operation.
+ *   @param params [Object]
+ *     * `DBInstanceIdentifier` &mdash; (`String`) The customer-assigned
+ *       name of the DB Instance that contains the log files you want to
+ *       list. Constraints: Must contain from 1 to 63 alphanumeric
+ *       characters or hyphens First character must be a letter Cannot
+ *       end with a hyphen or contain two consecutive hyphens
+ *     * `LogFileName` &mdash; (`String`) The name of the log file to be
+ *       downloaded.
+ *     * `Marker` &mdash; (`String`) The pagination token provided in the
+ *       previous request. If this parameter is specified the response
+ *       includes only records beyond the marker, up to MaxRecords.
+ *     * `NumberOfLines` &mdash; (`Integer`) The number of lines
+ *       remaining to be downloaded.
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `LogFileData` &mdash; (`String`) Entries from the specified log
+ *         file.
+ *       * `Marker` &mdash; (`String`) An optional pagination token
+ *         provided by a previous DownloadDBLogFilePortion request.
+ *       * `AdditionalDataPending` &mdash; (`Boolean`) Boolean value that
+ *         if true, indicates there is more data to be downloaded.
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
+ * @!method listTagsForResource(params, callback)
+ *   Calls the ListTagsForResource API operation.
+ *   @param params [Object]
+ *     * `ResourceName` &mdash; **required** &mdash; (`String`) The DB
+ *       Instance with tags to be listed.
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `TagList` &mdash; (`Array<Object>`) List of tags returned by the
+ *         ListTagsForResource operation.
+ *         * `Key` &mdash; (`String`) A key is the required name of the
+ *           tag. The string value can be from 1 to 128 Unicode characters
+ *           in length and cannot be prefixed with "aws:". The string may
+ *           only contain only the set of Unicode letters, digits,
+ *           white-space, '_', '.', '/', '=', '+', '-' (Java regex:
+ *           "^([\\p`{L}\\p{Z}\\p{N}`_.:/=+\\-]*)$").
+ *         * `Value` &mdash; (`String`) A value is the optional value of
+ *           the tag. The string value can be from 1 to 256 Unicode
+ *           characters in length and cannot be prefixed with "aws:". The
+ *           string may only contain only the set of Unicode letters,
+ *           digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex:
+ *           "^([\\p`{L}\\p{Z}\\p{N}`_.:/=+\\-]*)$").
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
  * @!method modifyDBInstance(params, callback)
  *   Calls the ModifyDBInstance API operation.
  *   @param params [Object]
  *     * `DBInstanceIdentifier` &mdash; **required** &mdash; (`String`)
  *       The DB Instance identifier. This value is stored as a lowercase
- *       string. For a SQL Server DB Instance, this value cannot be
- *       changed. Constraints: Must be the identifier for an existing DB
+ *       string. Constraints: Must be the identifier for an existing DB
  *       Instance Must contain from 1 to 63 alphanumeric characters or
  *       hyphens First character must be a letter Cannot end with a
- *       hyphen or contain two consecutive hyphens Example: mydbinstance
+ *       hyphen or contain two consecutive hyphens
  *     * `AllocatedStorage` &mdash; (`Integer`) The new storage capacity
- *       of the RDS instance. This change does not result in an outage
- *       and is applied during the next maintenance window unless the
- *       ApplyImmediately parameter is specified as true for this
- *       request. MySQL Default: Uses existing setting Valid Values:
+ *       of the RDS instance. Changing this parameter does not result in
+ *       an outage and the change is applied during the next maintenance
+ *       window unless the ApplyImmediately parameter is set to true for
+ *       this request. MySQL Default: Uses existing setting Valid Values:
  *       5-1024 Constraints: Value supplied must be at least 10% greater
  *       than the current value. Values that are not at least 10% greater
  *       than the existing value are rounded up so that they are 10%
@@ -2102,15 +2640,21 @@ AWS.RDS = inherit({})
  *       during the next maintenance window, unless the ApplyImmediately
  *       parameter is specified as true for this request. Default: Uses
  *       existing setting Valid Values: db.t1.micro | db.m1.small |
- *       db.m1.large | db.m1.xlarge | db.m2.xlarge | db.m2.2xlarge |
- *       db.m2.4xlarge Amazon RDS does not support db.t1.micro instances
- *       in a virtual private cloud (VPC).
+ *       db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge |
+ *       db.m2.2xlarge | db.m2.4xlarge
  *     * `DBSecurityGroups` &mdash; (`Array<String>`) A list of DB
- *       Security Groups to authorize on this DB Instance. This change is
+ *       Security Groups to authorize on this DB Instance. Changing this
+ *       parameter does not result in an outage and the change is
  *       asynchronously applied as soon as possible. Constraints: Must be
  *       1 to 255 alphanumeric characters First character must be a
  *       letter Cannot end with a hyphen or contain two consecutive
  *       hyphens
+ *     * `VpcSecurityGroupIds` &mdash; (`Array<String>`) A list of EC2
+ *       VPC Security Groups to authorize on this DB Instance. This
+ *       change is asynchronously applied as soon as possible.
+ *       Constraints: Must be 1 to 255 alphanumeric characters First
+ *       character must be a letter Cannot end with a hyphen or contain
+ *       two consecutive hyphens
  *     * `ApplyImmediately` &mdash; (`Boolean`) Specifies whether or not
  *       the modifications in this request and any pending modifications
  *       are asynchronously applied as soon as possible, regardless of
@@ -2118,12 +2662,15 @@ AWS.RDS = inherit({})
  *       this parameter is passed as false, changes to the DB Instance
  *       are applied on the next call to RebootDBInstance, the next
  *       maintenance reboot, or the next failure reboot, whichever occurs
- *       first. Default: false
+ *       first. See each parameter to determine when a change is applied.
+ *       Default: false
  *     * `MasterUserPassword` &mdash; (`String`) The new password for the
- *       DB Instance master user. This change is asynchronously applied
- *       as soon as possible. Between the time of the request and the
- *       completion of the request, the MasterUserPassword element exists
- *       in the PendingModifiedValues element of the operation response.
+ *       DB Instance master user. Can be any printable ASCII character
+ *       except "/", "\", or "@". Changing this parameter does not result
+ *       in an outage and the change is asynchronously applied as soon as
+ *       possible. Between the time of the request and the completion of
+ *       the request, the MasterUserPassword element exists in the
+ *       PendingModifiedValues element of the operation response.
  *       Default: Uses existing setting Constraints: Must be 8 to 41
  *       alphanumeric characters (MySQL), 8 to 30 alphanumeric characters
  *       (Oracle), or 8 to 128 alphanumeric characters (SQL Server).
@@ -2131,54 +2678,101 @@ AWS.RDS = inherit({})
  *       provides a way to regain access to a master instance user if the
  *       password is lost.
  *     * `DBParameterGroupName` &mdash; (`String`) The name of the DB
- *       Parameter Group to apply to this DB Instance. This change is
- *       asynchronously applied as soon as possible for parameters when
- *       the ApplyImmediately parameter is specified as true for this
- *       request. Default: Uses existing setting Constraints: The DB
- *       Parameter Group must be in the same DB Parameter Group family as
- *       this DB Instance.
+ *       Parameter Group to apply to this DB Instance. Changing this
+ *       parameter does not result in an outage and the change is applied
+ *       during the next maintenance window unless the ApplyImmediately
+ *       parameter is set to true for this request. Default: Uses
+ *       existing setting Constraints: The DB Parameter Group must be in
+ *       the same DB Parameter Group family as this DB Instance.
  *     * `BackupRetentionPeriod` &mdash; (`Integer`) The number of days
  *       to retain automated backups. Setting this parameter to a
  *       positive number enables backups. Setting this parameter to 0
- *       disables automated backups. Default: Uses existing setting
- *       Constraints: Must be a value from 0 to 8 Cannot be set to 0 if
- *       the DB Instance is a master instance with read replicas or of
- *       the DB Instance is a read replica
+ *       disables automated backups. Changing this parameter can result
+ *       in an outage if you change from 0 to a non-zero value or from a
+ *       non-zero value to 0. These changes are applied during the next
+ *       maintenance window unless the ApplyImmediately parameter is set
+ *       to true for this request. If you change the parameter from one
+ *       non-zero value to another non-zero value, the change is
+ *       asynchronously applied as soon as possible. Default: Uses
+ *       existing setting Constraints: Must be a value from 0 to 8 Cannot
+ *       be set to 0 if the DB Instance is a master instance with read
+ *       replicas or if the DB Instance is a read replica
  *     * `PreferredBackupWindow` &mdash; (`String`) The daily time range
  *       during which automated backups are created if automated backups
  *       are enabled, as determined by the BackupRetentionPeriod.
+ *       Changing this parameter does not result in an outage and the
+ *       change is asynchronously applied as soon as possible.
  *       Constraints: Must be in the format hh24:mi-hh24:mi Times should
  *       be Universal Time Coordinated (UTC) Must not conflict with the
  *       preferred maintenance window Must be at least 30 minutes
  *     * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly time
  *       range (in UTC) during which system maintenance can occur, which
- *       may result in an outage. This change is made immediately. If
- *       moving this window to the current time, there must be at least
- *       120 minutes between the current time and end of the window to
- *       ensure pending changes are applied. Default: Uses existing
- *       setting Format: ddd:hh24:mi-ddd:hh24:mi Valid Days: Mon | Tue |
- *       Wed | Thu | Fri | Sat | Sun Constraints: Must be at least 30
- *       minutes
+ *       may result in an outage. Changing this parameter does not result
+ *       in an outage, except in the following situation, and the change
+ *       is asynchronously applied as soon as possible. If there are
+ *       pending actions that cause a reboot, and the maintenance window
+ *       is changed to include the current time, then changing this
+ *       parameter will cause a reboot of the DB Instance. If moving this
+ *       window to the current time, there must be at least 30 minutes
+ *       between the current time and end of the window to ensure pending
+ *       changes are applied. Default: Uses existing setting Format:
+ *       ddd:hh24:mi-ddd:hh24:mi Valid Days: Mon | Tue | Wed | Thu | Fri
+ *       | Sat | Sun Constraints: Must be at least 30 minutes
  *     * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance is a
- *       Multi-AZ deployment. Constraints: Cannot be specified if the DB
+ *       Multi-AZ deployment. Changing this parameter does not result in
+ *       an outage and the change is applied during the next maintenance
+ *       window unless the ApplyImmediately parameter is set to true for
+ *       this request. Constraints: Cannot be specified if the DB
  *       Instance is a read replica.
  *     * `EngineVersion` &mdash; (`String`) The version number of the
- *       database engine to upgrade to. For major version upgrades, if a
+ *       database engine to upgrade to. Changing this parameter results
+ *       in an outage and the change is applied during the next
+ *       maintenance window unless the ApplyImmediately parameter is set
+ *       to true for this request. For major version upgrades, if a
  *       nondefault DB Parameter Group is currently in use, a new DB
  *       Parameter Group in the DB Parameter Group Family for the new
  *       engine version must be specified. The new DB Parameter Group can
  *       be the default for that DB Parameter Group Family. Example:
  *       5.1.42
  *     * `AllowMajorVersionUpgrade` &mdash; (`Boolean`) Indicates that
- *       major version upgrades are allowed. Constraints: This parameter
- *       must be set to true when specifying a value for the
- *       EngineVersion parameter that is a different major version than
- *       the DB Instance's current version.
+ *       major version upgrades are allowed. Changing this parameter does
+ *       not result in an outage and the change is asynchronously applied
+ *       as soon as possible. Constraints: This parameter must be set to
+ *       true when specifying a value for the EngineVersion parameter
+ *       that is a different major version than the DB Instance's current
+ *       version.
  *     * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
  *       minor version upgrades will be applied automatically to the DB
- *       Instance during the maintenance window.
+ *       Instance during the maintenance window. Changing this parameter
+ *       does not result in an outage except in the following case and
+ *       the change is asynchronously applied as soon as possible. An
+ *       outage will result if this parameter is set to true during the
+ *       maintenance window, and a newer minor version is available, and
+ *       RDS has enabled auto patching for that engine version.
+ *     * `Iops` &mdash; (`Integer`) The new Provisioned IOPS (I/O
+ *       operations per second) value for the RDS instance. Changing this
+ *       parameter does not result in an outage and the change is applied
+ *       during the next maintenance window unless the ApplyImmediately
+ *       parameter is set to true for this request. Default: Uses
+ *       existing setting Constraints: Value supplied must be at least
+ *       10% greater than the current value. Values that are not at least
+ *       10% greater than the existing value are rounded up so that they
+ *       are 10% greater than the current value. Type: Integer
  *     * `OptionGroupName` &mdash; (`String`) Indicates that the DB
  *       Instance should be associated with the specified option group.
+ *       Changing this parameter does not result in an outage except in
+ *       the following case and the change is applied during the next
+ *       maintenance window unless the ApplyImmediately parameter is set
+ *       to true for this request. If the parameter change results in an
+ *       option group that enables OEM, this change can cause a brief
+ *       (sub-second) period during which new connections are rejected
+ *       but existing connections are not interrupted.
+ *     * `NewDBInstanceIdentifier` &mdash; (`String`) The new DB Instance
+ *       identifier for the DB Instance when renaming a DB Instance. This
+ *       value is stored as a lowercase string. Constraints: Must contain
+ *       from 1 to 63 alphanumeric characters or hyphens First character
+ *       must be a letter Cannot end with a hyphen or contain two
+ *       consecutive hyphens
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -2234,6 +2828,10 @@ AWS.RDS = inherit({})
  *             Security Group.
  *           * `Status` &mdash; (`String`) The status of the DB Security
  *             Group.
+ *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *           VPC security group elements that the DB Instance belongs to.
+ *           * `VpcSecurityGroupId` &mdash; (`String`)
+ *           * `Status` &mdash; (`String`)
  *         * `DBParameterGroups` &mdash; (`Array<Object>`) Provides the
  *           list of DB Parameter Groups applied to this DB Instance.
  *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
@@ -2254,12 +2852,15 @@ AWS.RDS = inherit({})
  *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
  *             of the DB Subnet Group.
  *           * `Subnets` &mdash; (`Array<Object>`) Contains a list of
- *             Subnets elements.
+ *             Subnet elements.
  *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *               identifier of the subnet.
  *             * `SubnetAvailabilityZone` &mdash; (`Object`)
  *               * `Name` &mdash; (`String`) The name of the availability
  *                 zone.
+ *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
+ *                 indicates the availability zone is capable of
+ *                 provisioned IOPs.
  *             * `SubnetStatus` &mdash; (`String`) Specifies the status of
  *               the subnet.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
@@ -2287,6 +2888,12 @@ AWS.RDS = inherit({})
  *             DB Instance is to change to a Multi-AZ deployment.
  *           * `EngineVersion` &mdash; (`String`) Indicates the database
  *             engine version.
+ *           * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
+ *             IOPS value for the DB Instance that will be applied or is
+ *             being applied.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Contains the new
+ *             DBInstanceIdentifier for the DB Instance that will be
+ *             applied or is in progress.
  *         * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
  *           time to which a database can be restored with point-in-time
  *           restore.
@@ -2304,8 +2911,10 @@ AWS.RDS = inherit({})
  *           associated with this DB Instance.
  *         * `LicenseModel` &mdash; (`String`) License model information
  *           for this DB Instance.
- *         * `OptionGroupMembership` &mdash; (`Object`) Specifies the name
- *           and status of the option group that this instance belongs to.
+ *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
+ *           operations per second) value.
+ *         * `OptionGroupMemberships` &mdash; (`Array<Object>`) Provides
+ *           the list of option group memberships for this DB Instance.
  *           * `OptionGroupName` &mdash; (`String`) The name of the option
  *             group that the instance belongs to.
  *           * `Status` &mdash; (`String`) The status of the DB Instance's
@@ -2314,6 +2923,10 @@ AWS.RDS = inherit({})
  *         * `CharacterSetName` &mdash; (`String`) If present, specifies
  *           the name of the character set that this instance is associated
  *           with.
+ *         * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
+ *           specifies the name of the secondary Availability Zone for a DB
+ *           instance with multi-AZ support.
+ *         * `PubliclyAccessible` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2407,15 +3020,49 @@ AWS.RDS = inherit({})
  *           Group.
  *         * `SubnetGroupStatus` &mdash; (`String`) Provides the status of
  *           the DB Subnet Group.
- *         * `Subnets` &mdash; (`Array<Object>`) Contains a list of Subnets
+ *         * `Subnets` &mdash; (`Array<Object>`) Contains a list of Subnet
  *           elements.
  *           * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *             identifier of the subnet.
  *           * `SubnetAvailabilityZone` &mdash; (`Object`)
  *             * `Name` &mdash; (`String`) The name of the availability
  *               zone.
+ *             * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
+ *               indicates the availability zone is capable of provisioned
+ *               IOPs.
  *           * `SubnetStatus` &mdash; (`String`) Specifies the status of
  *             the subnet.
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
+ * @!method modifyEventSubscription(params, callback)
+ *   Calls the ModifyEventSubscription API operation.
+ *   @param params [Object]
+ *     * `SubscriptionName` &mdash; **required** &mdash; (`String`)
+ *     * `SnsTopicArn` &mdash; (`String`)
+ *     * `SourceType` &mdash; (`String`)
+ *     * `EventCategories` &mdash; (`Array<String>`)
+ *     * `Enabled` &mdash; (`Boolean`)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `EventSubscription` &mdash; (`Object`)
+ *         * `CustomerAwsId` &mdash; (`String`)
+ *         * `CustSubscriptionId` &mdash; (`String`)
+ *         * `SnsTopicArn` &mdash; (`String`)
+ *         * `Status` &mdash; (`String`)
+ *         * `SubscriptionCreationTime` &mdash; (`String`)
+ *         * `SourceType` &mdash; (`String`)
+ *         * `SourceIdsList` &mdash; (`Array<String>`)
+ *         * `EventCategoriesList` &mdash; (`Array<String>`)
+ *         * `Enabled` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2428,9 +3075,33 @@ AWS.RDS = inherit({})
  *       list are added to the Option Group or, if already present, the
  *       specified configuration is used to update the existing
  *       configuration.
- *       * `OptionName` &mdash; **required** &mdash; (`String`)
- *       * `Port` &mdash; (`Integer`)
- *       * `DBSecurityGroupMemberships` &mdash; (`Array<String>`)
+ *       * `OptionName` &mdash; **required** &mdash; (`String`) The
+ *         configuration of options to include in a group.
+ *       * `Port` &mdash; (`Integer`) The optional port for the option.
+ *       * `DBSecurityGroupMemberships` &mdash; (`Array<String>`) A list
+ *         of DBSecurityGroupMemebrship name strings used for this
+ *         option.
+ *       * `VpcSecurityGroupMemberships` &mdash; (`Array<String>`) A list
+ *         of VpcSecurityGroupMemebrship name strings used for this
+ *         option.
+ *       * `OptionSettings` &mdash; (`Array<Object>`) A list of option
+ *         settings applied for this option.
+ *         * `Name` &mdash; (`String`) The name of the setting.
+ *         * `Value` &mdash; (`String`) The value of this setting.
+ *         * `DefaultValue` &mdash; (`String`) Default value for this
+ *           setting.
+ *         * `Description` &mdash; (`String`) The description of the
+ *           setting.
+ *         * `ApplyType` &mdash; (`String`) Specifies the apply type for
+ *           this setting.
+ *         * `DataType` &mdash; (`String`) Specifies the valid data type
+ *           of this setting
+ *         * `AllowedValues` &mdash; (`String`) Specifies a valid
+ *           list/range of values allowed for this setting.
+ *         * `IsModifiable` &mdash; (`Boolean`) Indicates if the setting
+ *           is modifiable or not.
+ *         * `IsCollection` &mdash; (`Boolean`) Indicates if the value
+ *           for the setting can be a list of values or a single value.
  *     * `OptionsToRemove` &mdash; (`Array<String>`) Options in this list
  *       are removed from the Option Group.
  *     * `ApplyImmediately` &mdash; (`Boolean`) Indicates whether the
@@ -2450,22 +3121,247 @@ AWS.RDS = inherit({})
  *       * `OptionGroup` &mdash; (`Object`)
  *         * `OptionGroupName` &mdash; (`String`) Specifies the name of the
  *           option group.
- *         * `OptionGroupDescription` &mdash; (`String`)
+ *         * `OptionGroupDescription` &mdash; (`String`) Provides the
+ *           description of the option group.
  *         * `EngineName` &mdash; (`String`) Engine name that this option
  *           group can be applied to.
  *         * `MajorEngineVersion` &mdash; (`String`) Indicates the major
  *           engine version associated with this option group.
- *         * `Options` &mdash; (`Array<Object>`)
+ *         * `Options` &mdash; (`Array<Object>`) Indicates what options are
+ *           available in the option group.
  *           * `OptionName` &mdash; (`String`) The name of the option.
  *           * `OptionDescription` &mdash; (`String`) The description of
  *             the option.
+ *           * `Persistent` &mdash; (`Boolean`) Indicate if this option is
+ *             persistent.
  *           * `Port` &mdash; (`Integer`) If required, the port configured
  *             for this option to use.
- *           * `DBSecurityGroupMemberships` &mdash; (`Array<Object>`)
+ *           * `OptionSettings` &mdash; (`Array<Object>`) The settings
+ *             belonging to this option.
+ *             * `Name` &mdash; (`String`) The name of the setting.
+ *             * `Value` &mdash; (`String`) The value of this setting.
+ *             * `DefaultValue` &mdash; (`String`) Default value for this
+ *               setting.
+ *             * `Description` &mdash; (`String`) The description of the
+ *               setting.
+ *             * `ApplyType` &mdash; (`String`) Specifies the apply type
+ *               for this setting.
+ *             * `DataType` &mdash; (`String`) Specifies the valid data
+ *               type of this setting
+ *             * `AllowedValues` &mdash; (`String`) Specifies a valid
+ *               list/range of values allowed for this setting.
+ *             * `IsModifiable` &mdash; (`Boolean`) Indicates if the
+ *               setting is modifiable or not.
+ *             * `IsCollection` &mdash; (`Boolean`) Indicates if the value
+ *               for the setting can be a list of values or a single value.
+ *           * `DBSecurityGroupMemberships` &mdash; (`Array<Object>`) If
+ *             the Option requires access to a port, then this DB Security
+ *             Group allows access to the port.
  *             * `DBSecurityGroupName` &mdash; (`String`) The name of the
  *               DB Security Group.
  *             * `Status` &mdash; (`String`) The status of the DB Security
  *               Group.
+ *           * `VpcSecurityGroupMemberships` &mdash; (`Array<Object>`) If
+ *             the Option requires access to a port, then this VPC Security
+ *             Group allows access to the port.
+ *             * `VpcSecurityGroupId` &mdash; (`String`)
+ *             * `Status` &mdash; (`String`)
+ *         * `AllowsVpcAndNonVpcInstanceMemberships` &mdash; (`Boolean`)
+ *           Indicates whether this option group can be applied to both VPC
+ *           and non-VPC instances. The value 'true' indicates the option
+ *           group can be applied to both VPC and non-VPC instances.
+ *         * `VpcId` &mdash; (`String`) If
+ *           AllowsVpcAndNonVpcInstanceMemberships is 'false', this field
+ *           is blank. If AllowsVpcAndNonVpcInstanceMemberships is 'true'
+ *           and this field is blank, then this option group can be applied
+ *           to both VPC and non-VPC instances. If this field contains a
+ *           value, then this option group can only be applied to instances
+ *           that are in the VPC indicated by this field.
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
+ * @!method promoteReadReplica(params, callback)
+ *   Calls the PromoteReadReplica API operation.
+ *   @param params [Object]
+ *     * `DBInstanceIdentifier` &mdash; **required** &mdash; (`String`)
+ *       The DB Instance identifier. This value is stored as a lowercase
+ *       string. Constraints: Must be the identifier for an existing Read
+ *       Replica DB Instance Must contain from 1 to 63 alphanumeric
+ *       characters or hyphens First character must be a letter Cannot
+ *       end with a hyphen or contain two consecutive hyphens Example:
+ *       mydbinstance
+ *     * `BackupRetentionPeriod` &mdash; (`Integer`) The number of days
+ *       to retain automated backups. Setting this parameter to a
+ *       positive number enables backups. Setting this parameter to 0
+ *       disables automated backups. Default: 1 Constraints: Must be a
+ *       value from 0 to 8
+ *     * `PreferredBackupWindow` &mdash; (`String`) The daily time range
+ *       during which automated backups are created if automated backups
+ *       are enabled, using the BackupRetentionPeriod parameter. Default:
+ *       A 30-minute window selected at random from an 8-hour block of
+ *       time per region. The following list shows the time blocks for
+ *       each region from which the default backup windows are assigned.
+ *       US-East (Northern Virginia) Region: 03:00-11:00 UTC US-West
+ *       (Northern California) Region: 06:00-14:00 UTC EU (Ireland)
+ *       Region: 22:00-06:00 UTC Asia Pacific (Singapore) Region:
+ *       14:00-22:00 UTC Asia Pacific (Tokyo) Region: 17:00-03:00 UTC
+ *       Constraints: Must be in the format hh24:mi-hh24:mi. Times should
+ *       be Universal Time Coordinated (UTC). Must not conflict with the
+ *       preferred maintenance window. Must be at least 30 minutes.
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `DBInstance` &mdash; (`Object`) Contains the result of a
+ *         successful invocation of the following actions: CreateDBInstance
+ *         DeleteDBInstance ModifyDBInstance This data type is used as a
+ *         response element in the DescribeDBInstances action.
+ *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
+ *           user-supplied database identifier. This is the unique key that
+ *           identifies a DB Instance.
+ *         * `DBInstanceClass` &mdash; (`String`) Contains the name of the
+ *           compute and memory capacity class of the DB Instance.
+ *         * `Engine` &mdash; (`String`) Provides the name of the database
+ *           engine to be used for this DB Instance.
+ *         * `DBInstanceStatus` &mdash; (`String`) Specifies the current
+ *           state of this database.
+ *         * `MasterUsername` &mdash; (`String`) Contains the master
+ *           username for the DB Instance.
+ *         * `DBName` &mdash; (`String`) The meaning of this parameter
+ *           differs according to the database engine you use. MySQL
+ *           Contains the name of the initial database of this instance
+ *           that was provided at create time, if one was specified when
+ *           the DB Instance was created. This same name is returned for
+ *           the life of the DB Instance. Type: String Oracle Contains the
+ *           Oracle System ID (SID) of the created DB Instance.
+ *         * `Endpoint` &mdash; (`Object`) Specifies the connection
+ *           endpoint.
+ *           * `Address` &mdash; (`String`) Specifies the DNS address of
+ *             the DB Instance.
+ *           * `Port` &mdash; (`Integer`) Specifies the port that the
+ *             database engine is listening on.
+ *         * `AllocatedStorage` &mdash; (`Integer`) Specifies the allocated
+ *           storage size specified in gigabytes.
+ *         * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
+ *           time the DB Instance was created.
+ *         * `PreferredBackupWindow` &mdash; (`String`) Specifies the daily
+ *           time range during which automated backups are created if
+ *           automated backups are enabled, as determined by the
+ *           BackupRetentionPeriod.
+ *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
+ *           number of days for which automatic DB Snapshots are retained.
+ *         * `DBSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *           DB Security Group elements containing only
+ *           DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
+ *             Security Group.
+ *           * `Status` &mdash; (`String`) The status of the DB Security
+ *             Group.
+ *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *           VPC security group elements that the DB Instance belongs to.
+ *           * `VpcSecurityGroupId` &mdash; (`String`)
+ *           * `Status` &mdash; (`String`)
+ *         * `DBParameterGroups` &mdash; (`Array<Object>`) Provides the
+ *           list of DB Parameter Groups applied to this DB Instance.
+ *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
+ *             Parameter Group.
+ *           * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *             parameter updates.
+ *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
+ *           the Availability Zone the DB Instance is located in.
+ *         * `DBSubnetGroup` &mdash; (`Object`) Provides the inforamtion of
+ *           the subnet group associated with the DB instance, including
+ *           the name, descrption and subnets in the subnet group.
+ *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
+ *             the DB Subnet Group.
+ *           * `DBSubnetGroupDescription` &mdash; (`String`) Provides the
+ *             description of the DB Subnet Group.
+ *           * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
+ *             Subnet Group.
+ *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
+ *             of the DB Subnet Group.
+ *           * `Subnets` &mdash; (`Array<Object>`) Contains a list of
+ *             Subnet elements.
+ *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
+ *               identifier of the subnet.
+ *             * `SubnetAvailabilityZone` &mdash; (`Object`)
+ *               * `Name` &mdash; (`String`) The name of the availability
+ *                 zone.
+ *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
+ *                 indicates the availability zone is capable of
+ *                 provisioned IOPs.
+ *             * `SubnetStatus` &mdash; (`String`) Specifies the status of
+ *               the subnet.
+ *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
+ *           weekly time range (in UTC) during which system maintenance can
+ *           occur.
+ *         * `PendingModifiedValues` &mdash; (`Object`) Specifies that
+ *           changes to the DB Instance are pending. This element is only
+ *           included when changes are pending. Specific changes are
+ *           identified by subelements.
+ *           * `DBInstanceClass` &mdash; (`String`) Contains the new
+ *             DBInstanceClass for the DB Instance that will be applied or
+ *             is in progress.
+ *           * `AllocatedStorage` &mdash; (`Integer`) Contains the new
+ *             AllocatedStorage size for the DB Instance that will be
+ *             applied or is in progress.
+ *           * `MasterUserPassword` &mdash; (`String`) Contains the pending
+ *             or in-progress change of the master credentials for the DB
+ *             Instance.
+ *           * `Port` &mdash; (`Integer`) Specifies the pending port for
+ *             the DB Instance.
+ *           * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
+ *             pending number of days for which automated backups are
+ *             retained.
+ *           * `MultiAZ` &mdash; (`Boolean`) Indicates that the Single-AZ
+ *             DB Instance is to change to a Multi-AZ deployment.
+ *           * `EngineVersion` &mdash; (`String`) Indicates the database
+ *             engine version.
+ *           * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
+ *             IOPS value for the DB Instance that will be applied or is
+ *             being applied.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Contains the new
+ *             DBInstanceIdentifier for the DB Instance that will be
+ *             applied or is in progress.
+ *         * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
+ *           time to which a database can be restored with point-in-time
+ *           restore.
+ *         * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance is
+ *           a Multi-AZ deployment.
+ *         * `EngineVersion` &mdash; (`String`) Indicates the database
+ *           engine version.
+ *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
+ *           minor version patches are applied automatically.
+ *         * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
+ *           Contains the identifier of the source DB Instance if this DB
+ *           Instance is a Read Replica.
+ *         * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
+ *           Contains one or more identifiers of the Read Replicas
+ *           associated with this DB Instance.
+ *         * `LicenseModel` &mdash; (`String`) License model information
+ *           for this DB Instance.
+ *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
+ *           operations per second) value.
+ *         * `OptionGroupMemberships` &mdash; (`Array<Object>`) Provides
+ *           the list of option group memberships for this DB Instance.
+ *           * `OptionGroupName` &mdash; (`String`) The name of the option
+ *             group that the instance belongs to.
+ *           * `Status` &mdash; (`String`) The status of the DB Instance's
+ *             option group membership (e.g. in-sync, pending,
+ *             pending-maintenance, applying).
+ *         * `CharacterSetName` &mdash; (`String`) If present, specifies
+ *           the name of the character set that this instance is associated
+ *           with.
+ *         * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
+ *           specifies the name of the secondary Availability Zone for a DB
+ *           instance with multi-AZ support.
+ *         * `PubliclyAccessible` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2593,6 +3489,10 @@ AWS.RDS = inherit({})
  *             Security Group.
  *           * `Status` &mdash; (`String`) The status of the DB Security
  *             Group.
+ *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *           VPC security group elements that the DB Instance belongs to.
+ *           * `VpcSecurityGroupId` &mdash; (`String`)
+ *           * `Status` &mdash; (`String`)
  *         * `DBParameterGroups` &mdash; (`Array<Object>`) Provides the
  *           list of DB Parameter Groups applied to this DB Instance.
  *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
@@ -2613,12 +3513,15 @@ AWS.RDS = inherit({})
  *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
  *             of the DB Subnet Group.
  *           * `Subnets` &mdash; (`Array<Object>`) Contains a list of
- *             Subnets elements.
+ *             Subnet elements.
  *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *               identifier of the subnet.
  *             * `SubnetAvailabilityZone` &mdash; (`Object`)
  *               * `Name` &mdash; (`String`) The name of the availability
  *                 zone.
+ *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
+ *                 indicates the availability zone is capable of
+ *                 provisioned IOPs.
  *             * `SubnetStatus` &mdash; (`String`) Specifies the status of
  *               the subnet.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
@@ -2646,6 +3549,12 @@ AWS.RDS = inherit({})
  *             DB Instance is to change to a Multi-AZ deployment.
  *           * `EngineVersion` &mdash; (`String`) Indicates the database
  *             engine version.
+ *           * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
+ *             IOPS value for the DB Instance that will be applied or is
+ *             being applied.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Contains the new
+ *             DBInstanceIdentifier for the DB Instance that will be
+ *             applied or is in progress.
  *         * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
  *           time to which a database can be restored with point-in-time
  *           restore.
@@ -2663,8 +3572,10 @@ AWS.RDS = inherit({})
  *           associated with this DB Instance.
  *         * `LicenseModel` &mdash; (`String`) License model information
  *           for this DB Instance.
- *         * `OptionGroupMembership` &mdash; (`Object`) Specifies the name
- *           and status of the option group that this instance belongs to.
+ *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
+ *           operations per second) value.
+ *         * `OptionGroupMemberships` &mdash; (`Array<Object>`) Provides
+ *           the list of option group memberships for this DB Instance.
  *           * `OptionGroupName` &mdash; (`String`) The name of the option
  *             group that the instance belongs to.
  *           * `Status` &mdash; (`String`) The status of the DB Instance's
@@ -2673,6 +3584,56 @@ AWS.RDS = inherit({})
  *         * `CharacterSetName` &mdash; (`String`) If present, specifies
  *           the name of the character set that this instance is associated
  *           with.
+ *         * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
+ *           specifies the name of the secondary Availability Zone for a DB
+ *           instance with multi-AZ support.
+ *         * `PubliclyAccessible` &mdash; (`Boolean`)
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
+ * @!method removeSourceIdentifierFromSubscription(params, callback)
+ *   Calls the RemoveSourceIdentifierFromSubscription API operation.
+ *   @param params [Object]
+ *     * `SubscriptionName` &mdash; **required** &mdash; (`String`)
+ *     * `SourceIdentifier` &mdash; **required** &mdash; (`String`)
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `EventSubscription` &mdash; (`Object`)
+ *         * `CustomerAwsId` &mdash; (`String`)
+ *         * `CustSubscriptionId` &mdash; (`String`)
+ *         * `SnsTopicArn` &mdash; (`String`)
+ *         * `Status` &mdash; (`String`)
+ *         * `SubscriptionCreationTime` &mdash; (`String`)
+ *         * `SourceType` &mdash; (`String`)
+ *         * `SourceIdsList` &mdash; (`Array<String>`)
+ *         * `EventCategoriesList` &mdash; (`Array<String>`)
+ *         * `Enabled` &mdash; (`Boolean`)
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
+ * @!method removeTagsFromResource(params, callback)
+ *   Calls the RemoveTagsFromResource API operation.
+ *   @param params [Object]
+ *     * `ResourceName` &mdash; **required** &mdash; (`String`) The DB
+ *       Instance the tags will be removed from.
+ *     * `TagKeys` &mdash; **required** &mdash; (`Array<String>`) The tag
+ *       key (name) of the tag to be removed.
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Object] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2749,8 +3710,8 @@ AWS.RDS = inherit({})
  *       hyphens Example: my-snapshot-id
  *     * `DBInstanceClass` &mdash; (`String`) The compute and memory
  *       capacity of the Amazon RDS DB instance. Valid Values:
- *       db.t1.micro | db.m1.small | db.m1.large | db.m1.xlarge |
- *       db.m2.2xlarge | db.m2.4xlarge
+ *       db.t1.micro | db.m1.small | db.m1.medium | db.m1.large |
+ *       db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge
  *     * `Port` &mdash; (`Integer`) The port number on which the database
  *       accepts connections. Default: The same port as the original DB
  *       Instance Constraints: Value must be 1150-65535
@@ -2765,6 +3726,7 @@ AWS.RDS = inherit({})
  *       Multi-AZ deployment. Constraint: You cannot specify the
  *       AvailabilityZone parameter if the MultiAZ parameter is set to
  *       true.
+ *     * `PubliclyAccessible` &mdash; (`Boolean`)
  *     * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
  *       minor version upgrades will be applied automatically to the DB
  *       Instance during the maintenance window.
@@ -2777,6 +3739,10 @@ AWS.RDS = inherit({})
  *     * `Engine` &mdash; (`String`) The database engine to use for the
  *       new instance. Default: The same as source Constraint: Must be
  *       compatible with the engine of the source Example: oracle-ee
+ *     * `Iops` &mdash; (`Integer`) The amount of Provisioned IOPS
+ *       (input/output operations per second) to be initially allocated
+ *       for the DB Instance. Constraints: Must be an integer greater
+ *       than 1000.
  *     * `OptionGroupName` &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -2833,6 +3799,10 @@ AWS.RDS = inherit({})
  *             Security Group.
  *           * `Status` &mdash; (`String`) The status of the DB Security
  *             Group.
+ *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *           VPC security group elements that the DB Instance belongs to.
+ *           * `VpcSecurityGroupId` &mdash; (`String`)
+ *           * `Status` &mdash; (`String`)
  *         * `DBParameterGroups` &mdash; (`Array<Object>`) Provides the
  *           list of DB Parameter Groups applied to this DB Instance.
  *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
@@ -2853,12 +3823,15 @@ AWS.RDS = inherit({})
  *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
  *             of the DB Subnet Group.
  *           * `Subnets` &mdash; (`Array<Object>`) Contains a list of
- *             Subnets elements.
+ *             Subnet elements.
  *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *               identifier of the subnet.
  *             * `SubnetAvailabilityZone` &mdash; (`Object`)
  *               * `Name` &mdash; (`String`) The name of the availability
  *                 zone.
+ *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
+ *                 indicates the availability zone is capable of
+ *                 provisioned IOPs.
  *             * `SubnetStatus` &mdash; (`String`) Specifies the status of
  *               the subnet.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
@@ -2886,6 +3859,12 @@ AWS.RDS = inherit({})
  *             DB Instance is to change to a Multi-AZ deployment.
  *           * `EngineVersion` &mdash; (`String`) Indicates the database
  *             engine version.
+ *           * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
+ *             IOPS value for the DB Instance that will be applied or is
+ *             being applied.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Contains the new
+ *             DBInstanceIdentifier for the DB Instance that will be
+ *             applied or is in progress.
  *         * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
  *           time to which a database can be restored with point-in-time
  *           restore.
@@ -2903,8 +3882,10 @@ AWS.RDS = inherit({})
  *           associated with this DB Instance.
  *         * `LicenseModel` &mdash; (`String`) License model information
  *           for this DB Instance.
- *         * `OptionGroupMembership` &mdash; (`Object`) Specifies the name
- *           and status of the option group that this instance belongs to.
+ *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
+ *           operations per second) value.
+ *         * `OptionGroupMemberships` &mdash; (`Array<Object>`) Provides
+ *           the list of option group memberships for this DB Instance.
  *           * `OptionGroupName` &mdash; (`String`) The name of the option
  *             group that the instance belongs to.
  *           * `Status` &mdash; (`String`) The status of the DB Instance's
@@ -2913,6 +3894,10 @@ AWS.RDS = inherit({})
  *         * `CharacterSetName` &mdash; (`String`) If present, specifies
  *           the name of the character set that this instance is associated
  *           with.
+ *         * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
+ *           specifies the name of the secondary Availability Zone for a DB
+ *           instance with multi-AZ support.
+ *         * `PubliclyAccessible` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2941,9 +3926,9 @@ AWS.RDS = inherit({})
  *       specified if RestoreTime parameter is provided.
  *     * `DBInstanceClass` &mdash; (`String`) The compute and memory
  *       capacity of the Amazon RDS DB instance. Valid Values:
- *       db.t1.micro | db.m1.small | db.m1.large | db.m1.xlarge |
- *       db.m2.2xlarge | db.m2.4xlarge Default: The same DBInstanceClass
- *       as the original DB Instance.
+ *       db.t1.micro | db.m1.small | db.m1.medium | db.m1.large |
+ *       db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge Default: The same
+ *       DBInstanceClass as the original DB Instance.
  *     * `Port` &mdash; (`Integer`) The port number on which the database
  *       accepts connections. Constraints: Value must be 1150-65535
  *       Default: The same port as the original DB Instance.
@@ -2958,6 +3943,7 @@ AWS.RDS = inherit({})
  *       Multi-AZ deployment. Constraint: You cannot specify the
  *       AvailabilityZone parameter if the MultiAZ parameter is set to
  *       true.
+ *     * `PubliclyAccessible` &mdash; (`Boolean`)
  *     * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
  *       minor version upgrades will be applied automatically to the DB
  *       Instance during the maintenance window.
@@ -2970,6 +3956,10 @@ AWS.RDS = inherit({})
  *     * `Engine` &mdash; (`String`) The database engine to use for the
  *       new instance. Default: The same as source Constraint: Must be
  *       compatible with the engine of the source Example: oracle-ee
+ *     * `Iops` &mdash; (`Integer`) The amount of Provisioned IOPS
+ *       (input/output operations per second) to be initially allocated
+ *       for the DB Instance. Constraints: Must be an integer greater
+ *       than 1000.
  *     * `OptionGroupName` &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -3026,6 +4016,10 @@ AWS.RDS = inherit({})
  *             Security Group.
  *           * `Status` &mdash; (`String`) The status of the DB Security
  *             Group.
+ *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *           VPC security group elements that the DB Instance belongs to.
+ *           * `VpcSecurityGroupId` &mdash; (`String`)
+ *           * `Status` &mdash; (`String`)
  *         * `DBParameterGroups` &mdash; (`Array<Object>`) Provides the
  *           list of DB Parameter Groups applied to this DB Instance.
  *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
@@ -3046,12 +4040,15 @@ AWS.RDS = inherit({})
  *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
  *             of the DB Subnet Group.
  *           * `Subnets` &mdash; (`Array<Object>`) Contains a list of
- *             Subnets elements.
+ *             Subnet elements.
  *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *               identifier of the subnet.
  *             * `SubnetAvailabilityZone` &mdash; (`Object`)
  *               * `Name` &mdash; (`String`) The name of the availability
  *                 zone.
+ *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
+ *                 indicates the availability zone is capable of
+ *                 provisioned IOPs.
  *             * `SubnetStatus` &mdash; (`String`) Specifies the status of
  *               the subnet.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
@@ -3079,6 +4076,12 @@ AWS.RDS = inherit({})
  *             DB Instance is to change to a Multi-AZ deployment.
  *           * `EngineVersion` &mdash; (`String`) Indicates the database
  *             engine version.
+ *           * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
+ *             IOPS value for the DB Instance that will be applied or is
+ *             being applied.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Contains the new
+ *             DBInstanceIdentifier for the DB Instance that will be
+ *             applied or is in progress.
  *         * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
  *           time to which a database can be restored with point-in-time
  *           restore.
@@ -3096,8 +4099,10 @@ AWS.RDS = inherit({})
  *           associated with this DB Instance.
  *         * `LicenseModel` &mdash; (`String`) License model information
  *           for this DB Instance.
- *         * `OptionGroupMembership` &mdash; (`Object`) Specifies the name
- *           and status of the option group that this instance belongs to.
+ *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
+ *           operations per second) value.
+ *         * `OptionGroupMemberships` &mdash; (`Array<Object>`) Provides
+ *           the list of option group memberships for this DB Instance.
  *           * `OptionGroupName` &mdash; (`String`) The name of the option
  *             group that the instance belongs to.
  *           * `Status` &mdash; (`String`) The status of the DB Instance's
@@ -3106,6 +4111,10 @@ AWS.RDS = inherit({})
  *         * `CharacterSetName` &mdash; (`String`) If present, specifies
  *           the name of the character set that this instance is associated
  *           with.
+ *         * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
+ *           specifies the name of the secondary Availability Zone for a DB
+ *           instance with multi-AZ support.
+ *         * `PubliclyAccessible` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3161,7 +4170,8 @@ AWS.RDS = inherit({})
  *         * `EC2SecurityGroups` &mdash; (`Array<Object>`) Contains a list
  *           of EC2SecurityGroup elements.
  *           * `Status` &mdash; (`String`) Provides the status of the EC2
- *             security group.
+ *             security group. Status can be "authorizing", "authorized",
+ *             "revoking", and "revoked".
  *           * `EC2SecurityGroupName` &mdash; (`String`) Specifies the name
  *             of the EC2 Security Group.
  *           * `EC2SecurityGroupId` &mdash; (`String`) Specifies the id of
@@ -3172,7 +4182,8 @@ AWS.RDS = inherit({})
  *         * `IPRanges` &mdash; (`Array<Object>`) Contains a list of
  *           IPRange elements.
  *           * `Status` &mdash; (`String`) Specifies the status of the IP
- *             range.
+ *             range. Status can be "authorizing", "authorized",
+ *             "revoking", and "revoked".
  *           * `CIDRIP` &mdash; (`String`) Specifies the IP range.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
