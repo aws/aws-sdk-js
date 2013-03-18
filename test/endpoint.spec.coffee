@@ -14,6 +14,16 @@
 AWS = require('../lib/core')
 
 describe 'AWS.Endpoint', ->
+  it 'throws error if parameter is null/undefined', ->
+    expect(-> new AWS.Endpoint(null)).toThrow('Invalid endpoint: null')
+    expect(-> new AWS.Endpoint(undefined)).toThrow('Invalid endpoint: undefined')
+
+  it 'copy constructs Endpoint', ->
+    origEndpoint = new AWS.Endpoint('http://domain.com')
+    endpoint = new AWS.Endpoint(origEndpoint)
+    expect(endpoint).not.toBe(origEndpoint)
+    expect(endpoint.host).toEqual('domain.com')
+
   it 'retains the entire endpoint as the endpoint href', ->
     href = 'http://domain.com/'
     endpoint = new AWS.Endpoint(href)

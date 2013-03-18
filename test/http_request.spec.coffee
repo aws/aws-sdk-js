@@ -17,7 +17,7 @@ describe 'AWS.HttpRequest', ->
 
   request = null
   beforeEach ->
-    request = new AWS.HttpRequest()
+    request = new AWS.HttpRequest('http://domain.com')
 
   describe 'constructor', ->
 
@@ -33,11 +33,12 @@ describe 'AWS.HttpRequest', ->
     it 'defaults body to empty string', ->
       expect(request.body).toEqual('')
 
-    it 'defaults endpoint to undefined', ->
-      expect(request.endpoint).toEqual(undefined)
-
     it 'defaults endpointPrefix to undefined', ->
       expect(request.endpointPrefix).toEqual(undefined)
+
+    it 'uses the path from the endpoint if provided', ->
+      request = new AWS.HttpRequest('http://domain.com/path')
+      expect(request.path).toEqual('/path')
 
   describe 'pathname', ->
 

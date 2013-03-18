@@ -67,10 +67,11 @@ describe 'AWS.EventListeners', ->
       expect(response.error).toEqual("ERROR")
 
     it 'sends error event if credentials are not set', ->
-      errorHandler = createSpy()
+      errorHandler = createSpy('errorHandler')
       request = makeRequest()
       request.on('error', errorHandler)
 
+      client.config.credentialProvider = null
       client.config.credentials.accessKeyId = null
       request.send()
 
@@ -158,6 +159,16 @@ describe 'AWS.EventListeners', ->
       request = makeRequest()
       response = request.send()
       expect(response.error).toEqual('mockservice')
+
+  describe 'send', ->
+    it 'passes httpOptions from config', ->
+      options = {}
+      spyOn(AWS.HttpClient, 'getInstance').andReturn handleRequest: (req, opts) ->
+        options = opts
+      client.config.httpOptions = timeout: 15
+      client.config.maxRetries = 0
+      makeRequest(->)
+      expect(options.timeout).toEqual(15)
 
   describe 'httpData', ->
     beforeEach ->

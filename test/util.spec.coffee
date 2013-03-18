@@ -257,6 +257,10 @@ describe 'AWS.util.arrayEach', ->
 
     expect(total).toEqual(1)
 
+describe 'AWS.util.values', ->
+  it 'returns values of a key-value map', ->
+    expect(AWS.util.values(a: 1, b: 2, c: 3)).toEqual([1, 2, 3])
+
 describe 'AWS.util.copy', ->
   it 'does not copy null or undefined', ->
     expect(AWS.util.copy(null)).toEqual(null)
