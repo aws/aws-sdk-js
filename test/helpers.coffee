@@ -52,7 +52,7 @@ MockClient = AWS.util.inherit AWS.Client,
       resp.data = resp.httpResponse.body.toString()
     request.on 'extractError', (resp) ->
       resp.error =
-        code: resp.httpResponse.statusCode
+        code: resp.httpResponse.body.toString() || resp.httpResponse.statusCode
         message: null
   api:
     endpointPrefix: 'mockservice'
@@ -104,5 +104,6 @@ module.exports =
   matchXML: matchXML
   mockHttpResponse: mockHttpResponse
   mockIntermittentFailureResponse: mockIntermittentFailureResponse
+  mockHttpSuccessfulResponse: mockHttpSuccessfulResponse
   MockClient: MockClient
   MockService: MockService

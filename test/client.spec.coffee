@@ -88,10 +88,10 @@ describe 'AWS.Client', ->
         expect(data).toEqual('FOOBAR')
 
     it 'yields service errors to the callback', ->
-      helpers.mockHttpResponse(500, {}, ['service error'])
+      helpers.mockHttpResponse(500, {}, ['ServiceError'])
       client = new MockClient(maxRetries: 0)
       req = client.makeRequest 'operation', {}, (err, data) ->
-        expect(err).toEqual({code:500, message:null, retryable:true, statusCode:500})
+        expect(err).toEqual({code:'ServiceError', message:null, retryable:true, statusCode:500})
         expect(data).toEqual(null)
 
     it 'yields network errors to the callback', ->
