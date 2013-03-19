@@ -47,6 +47,26 @@ describe 'uriEscapePath', ->
     s = '/ab cd/'
     expect(e(s)).toEqual('/ab%20cd/')
 
+describe 'AWS.util.queryParamsToString', ->
+  qpts = AWS.util.queryParamsToString
+
+  it 'sorts query parameters before stringifying', ->
+    expect(qpts(c: '1', b: '2', a: '3')).toEqual('a=3&b=2&c=1')
+
+  it 'handles empty values', ->
+    expect(qpts(a: '', b: '2')).toEqual('a=&b=2')
+
+  it 'handles null/undefined values', ->
+    expect(qpts(a: undefined, b: null)).toEqual('a&b')
+
+  it 'calls uriEscape on each name and value', ->
+    spy = spyOn(AWS.util, 'uriEscape').andCallThrough()
+    qpts(c: '1', b: '2', a: '3')
+    expect(spy.calls.length).toEqual(6)
+
+  it 'handles values as lists', ->
+    expect(qpts(a: ['1', '2', '3'], b: '4')).toEqual('a=1&a=2&a=3&b=4')
+
 describe 'AWS.util.date', ->
 
   util = AWS.util.date
@@ -256,10 +276,6 @@ describe 'AWS.util.arrayEach', ->
       total += item
 
     expect(total).toEqual(1)
-
-describe 'AWS.util.values', ->
-  it 'returns values of a key-value map', ->
-    expect(AWS.util.values(a: 1, b: 2, c: 3)).toEqual([1, 2, 3])
 
 describe 'AWS.util.copy', ->
   it 'does not copy null or undefined', ->

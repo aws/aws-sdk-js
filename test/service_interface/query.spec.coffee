@@ -47,6 +47,8 @@ describe 'AWS.ServiceInterface.Query', ->
     response = new AWS.Response(request)
 
   describe 'buildRequest', ->
+    stringify = (params) -> AWS.util.queryParamsToString(params)
+
     buildRequest = (input) ->
       if input == undefined
         input = 'foo+bar: yuck/baz=~'
@@ -68,22 +70,22 @@ describe 'AWS.ServiceInterface.Query', ->
 
     it 'should add the api version param', ->
       buildRequest()
-      expect(request.httpRequest.params.toString()).
+      expect(stringify(request.httpRequest.params)).
         toMatch(/Version=2012-01-01/)
 
     it 'should add the operation name as Action', ->
       buildRequest()
-      expect(request.httpRequest.params.toString()).
+      expect(stringify(request.httpRequest.params)).
         toMatch(/Action=OperationName/)
 
     it 'should uri encode params properly', ->
       buildRequest()
-      expect(request.httpRequest.params.toString()).
+      expect(stringify(request.httpRequest.params)).
         toMatch(/foo%2Bbar%3A%20yuck%2Fbaz%3D~/);
 
     it 'encodes empty string values properly', ->
       buildRequest('')
-      expect(request.httpRequest.params.toString()).
+      expect(stringify(request.httpRequest.params)).
         toMatch(/Input=($|&)/);
 
   describe 'extractError', ->
