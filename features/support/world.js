@@ -13,14 +13,12 @@
  * language governing permissions and limitations under the License.
  */
 
+var world = require('./helpers');
+world.AWS = require('../../lib/aws');
+world.AWS.config.loadFromPath(__dirname + '/../../configuration');
+
 var WorldConstructor = function WorldConstructor(callback) {
-
-  var world = require('./helpers');
-  world.AWS = require('../../lib/aws');
-  world.AWS.config.loadFromPath(__dirname + '/../../configuration');
-
   callback(world);
-
 };
 
 exports.World = WorldConstructor;
