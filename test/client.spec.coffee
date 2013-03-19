@@ -36,6 +36,11 @@ describe 'AWS.Client', ->
       expect(client.config.sslEnabled).toEqual(true)
       expect(client.config.maxRetries).toEqual(5)
 
+    it 'merges credential data into config', ->
+      client = new AWS.Client(accessKeyId: 'foo', secretAccessKey: 'bar')
+      expect(client.config.credentials.accessKeyId).toEqual('foo')
+      expect(client.config.credentials.secretAccessKey).toEqual('bar')
+
     it 'should allow AWS.config to be object literal', ->
       cfg = AWS.config
       AWS.config = maxRetries: 20
