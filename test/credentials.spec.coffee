@@ -120,20 +120,9 @@ describe 'AWS.FileSystemCredentials', ->
 
     it 'should accept filename and load credentials from credentials block', ->
       mock = '{"credentials":{"accessKeyId":"akid", "secretAccessKey":"secret","sessionToken":"session"}}'
-      spyOn(AWS.util, 'readFileSync').andReturn(mock)
+      spy = spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
       creds = new AWS.FileSystemCredentials('foo')
-      validateCredentials(creds)
-
-    it 'should accept filename and use initialCredentials', ->
-      mock = '{}'
-      spyOn(AWS.util, 'readFileSync').andReturn(mock)
-
-      values =
-        accessKeyId: "akid"
-        secretAccessKey: "secret"
-        sessionToken: "session"
-      creds = new AWS.FileSystemCredentials('foo', values)
       validateCredentials(creds)
 
   describe 'refresh', ->
@@ -141,28 +130,18 @@ describe 'AWS.FileSystemCredentials', ->
       mock = '{"credentials":{"accessKeyId":"RELOADED", "secretAccessKey":"RELOADED","sessionToken":"RELOADED"}}'
       spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
-      values =
-        accessKeyId: "akid"
-        secretAccessKey: "secret"
-        sessionToken: "session"
-      creds = new AWS.FileSystemCredentials('foo', values)
-      validateCredentials(creds)
-
-      creds.refresh()
-
+      creds = new AWS.FileSystemCredentials('foo')
       validateCredentials(creds, 'RELOADED', 'RELOADED', 'RELOADED')
 
     it 'fails if credentials are not in the file', ->
       mock = '{"credentials":{}}'
       spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
-      values =
-        accessKeyId: "akid"
-        secretAccessKey: "secret"
-        sessionToken: "session"
-      creds = new AWS.FileSystemCredentials('foo', values)
-      validateCredentials(creds)
-      expect(-> creds.refresh()).toThrow('Credentials not set in foo')
+      new AWS.FileSystemCredentials('foo').refresh (err) ->
+        expect(err.message).toEqual('Credentials not set in foo')
+
+      expect(-> new AWS.FileSystemCredentials('foo').refresh()).
+        toThrow('Credentials not set in foo')
 
 describe 'AWS.EC2MetadataCredentials', ->
   describe 'constructor', ->
