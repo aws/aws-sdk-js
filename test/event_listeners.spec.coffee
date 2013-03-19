@@ -239,6 +239,35 @@ describe 'AWS.EventListeners', ->
       expect(response.data).toEqual('foo')
       expect(errorHandler).not.toHaveBeenCalled()
 
+    ['ExpiredToken', 'ExpiredTokenException', 'RequestExpired'].forEach (name) ->
+      it 'invalidates expired credentials and retries', ->
+        spyOn(AWS.HttpClient, 'getInstance')
+        AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
+          if req.headers.Authorization.match('Credential=INVALIDKEY')
+            helpers.mockHttpSuccessfulResponse 403, {}, name, cb
+          else
+            helpers.mockHttpSuccessfulResponse 200, {}, 'DATA', cb
+
+        creds =
+          numCalls: 0
+          expired: false
+          accessKeyId: 'INVALIDKEY'
+          secretAccessKey: 'INVALIDSECRET'
+          get: (cb) ->
+            if @expired
+              @numCalls += 1
+              @expired = false
+              @accessKeyId = 'VALIDKEY' + @numCalls
+              @secretAccessKey = 'VALIDSECRET' + @numCalls
+            cb()
+
+        client.config.credentials = creds
+
+        response = makeRequest(->)
+        expect(response.retryCount).toEqual(1)
+        expect(creds.accessKeyId).toEqual('VALIDKEY1')
+        expect(creds.secretAccessKey).toEqual('VALIDSECRET1')
+
   describe 'success', ->
     it 'emits success on a successful response', ->
       # fail every request with a fake networking error
