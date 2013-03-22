@@ -72,7 +72,7 @@ AWS.SQS = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -93,7 +93,7 @@ AWS.SQS = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -120,7 +120,7 @@ AWS.SQS = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -153,7 +153,7 @@ AWS.SQS = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -174,7 +174,7 @@ AWS.SQS = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -198,7 +198,7 @@ AWS.SQS = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -229,7 +229,7 @@ AWS.SQS = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -247,7 +247,7 @@ AWS.SQS = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -269,7 +269,7 @@ AWS.SQS = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -289,7 +289,7 @@ AWS.SQS = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -326,7 +326,7 @@ AWS.SQS = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -353,7 +353,7 @@ AWS.SQS = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -373,7 +373,7 @@ AWS.SQS = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -408,7 +408,7 @@ AWS.SQS = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -449,7 +449,7 @@ AWS.SQS = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.

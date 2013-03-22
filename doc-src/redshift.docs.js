@@ -70,7 +70,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -120,7 +120,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -290,7 +290,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -413,7 +413,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -447,7 +447,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -495,7 +495,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -560,7 +560,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -603,7 +603,7 @@ AWS.Redshift = inherit({})
  *       is not created. If false, a final cluster snapshot is created
  *       before the cluster is deleted. The
  *       FinalClusterSnapshotIdentifier parameter must be specified if
- *       SkipFinalClusterSnapshot is false.Default: false
+ *       SkipFinalClusterSnapshot is false. Default: false
  *     * `FinalClusterSnapshotIdentifier` &mdash; (`String`) The
  *       identifier of the final snapshot that is to be created
  *       immediately before deleting the cluster. If this parameter is
@@ -615,7 +615,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -723,7 +723,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -739,7 +739,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -757,7 +757,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -813,7 +813,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -841,7 +841,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -888,7 +888,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -943,7 +943,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -1013,7 +1013,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -1084,7 +1084,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -1138,7 +1138,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -1179,7 +1179,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -1298,7 +1298,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -1382,7 +1382,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -1425,7 +1425,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -1467,7 +1467,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -1522,7 +1522,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -1582,7 +1582,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -1710,7 +1710,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -1837,7 +1837,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -1866,7 +1866,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -1906,7 +1906,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -1960,7 +1960,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -2089,7 +2089,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -2136,7 +2136,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
@@ -2258,7 +2258,7 @@ AWS.Redshift = inherit({})
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
  *     on the returned request object to initiate the request.
- *     @param err [Object] the error object returned from the request.
+ *     @param err [Error] the error object returned from the request.
  *       Set to `null` if the request is successful.
  *     @param data [Object] the de-serialized data returned from
  *       the request. Set to `null` if a request error occurs.
