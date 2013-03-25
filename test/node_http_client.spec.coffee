@@ -42,9 +42,10 @@ describe 'AWS.NodeHttpClient', ->
       error = null
       req = new AWS.HttpRequest 'http://1.1.1.1'
       runs ->
-        http.handleRequest req, {timeout: 12}, null, (err) ->
+        http.handleRequest req, {timeout: 1}, null, (err) ->
           error = err
-      waitsFor -> error
+
+      waitsFor((-> error), 'Timed out', 100)
       runs ->
         expect(error.code).toEqual 'TimeoutError'
-        expect(error.message).toEqual 'Connection timed out after 12ms'
+        expect(error.message).toEqual 'Connection timed out after 1ms'
