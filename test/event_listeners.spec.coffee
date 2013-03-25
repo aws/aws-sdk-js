@@ -316,6 +316,5 @@ describe 'AWS.EventListeners', ->
       request = makeRequest()
       request.on 'error', ->
         throw "ERROR"
-      response = request.send()
-      expect(completeHandler).toHaveBeenCalled()
-      expect(response.error).toBe("ERROR")
+      expect(-> request.send()).toThrow('ERROR')
+      expect(completeHandler).not.toHaveBeenCalled()
