@@ -11,7 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-AWS = require('../lib/core')
+helpers = require('./helpers')
+AWS = helpers.AWS
 
 describe 'AWS.SequentialExecutor', ->
   beforeEach -> @emitter = new AWS.SequentialExecutor()
@@ -84,3 +85,20 @@ describe 'AWS.SequentialExecutor', ->
 
       expect(spy1).toHaveBeenCalledWith('arg1')
       expect(spy2).toHaveBeenCalledWith('arg2')
+
+  describe 'domain support', ->
+    domain = null
+    beforeEach -> domain = require('domain').create()
+    afterEach -> domain.dispose()
+
+    it 'supports domains', ->
+      helpers.mockHttpResponse 200, {}, 'Success!'
+
+      thrown = null
+      domain.on 'error', (err) -> thrown = err
+      domain.run ->
+        client = new MockClient()
+        client.makeRequest 'operationName', ->
+          throw 'ERROR'
+
+      expect(thrown).toEqual('ERROR')
