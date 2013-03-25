@@ -13,8 +13,8 @@
 
 AWS = require('../lib/core')
 
-describe 'AWS.EventEmitter', ->
-  beforeEach -> @emitter = new AWS.EventEmitter()
+describe 'AWS.SequentialExecutor', ->
+  beforeEach -> @emitter = new AWS.SequentialExecutor()
 
   describe 'addListeners', ->
     it 'accepts a hash of events and functions', ->
@@ -35,9 +35,9 @@ describe 'AWS.EventEmitter', ->
       @emitter.emit('otherEventName')
       expect(triggers).toEqual([1, 1, 1])
 
-    it 'accepts an EventEmitter object', ->
+    it 'accepts a SequentialExecutor object', ->
       triggers = [0, 0, 0]
-      listeners = new AWS.EventEmitter()
+      listeners = new AWS.SequentialExecutor()
       listeners.on 'eventName', -> triggers[0] = 1
       listeners.on 'eventName', -> triggers[1] = 1
       listeners.on 'otherEventName', -> triggers[2] = 1
