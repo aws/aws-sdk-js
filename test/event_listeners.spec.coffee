@@ -268,6 +268,24 @@ describe 'AWS.EventListeners', ->
         expect(creds.accessKeyId).toEqual('VALIDKEY1')
         expect(creds.secretAccessKey).toEqual('VALIDSECRET1')
 
+    [301, 307].forEach (code) ->
+      it 'attempts to redirect on ' + code + ' responses', ->
+        helpers.mockHttpResponse code, {location: 'http://redirected'}, ''
+        client.config.maxRetries = 0
+        client.config.maxRedirects = 5
+        response = makeRequest(->)
+        expect(response.request.httpRequest.endpoint.host).toEqual('redirected')
+        expect(response.error.retryable).toEqual(true)
+        expect(response.redirectCount).toEqual(client.config.maxRedirects)
+        expect(delays).toEqual([0, 0, 0, 0, 0])
+
+    it 'does not redirect if 3xx is missing location header', ->
+      helpers.mockHttpResponse 304, {}, ''
+      client.config.maxRetries = 0
+      response = makeRequest(->)
+      expect(response.request.httpRequest.endpoint.host).not.toEqual('redirected')
+      expect(response.error.retryable).toEqual(false)
+
   describe 'success', ->
     it 'emits success on a successful response', ->
       # fail every request with a fake networking error
