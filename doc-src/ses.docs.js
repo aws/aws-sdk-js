@@ -100,14 +100,19 @@ AWS.SES = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DkimAttributes` &mdash; (`Object<Object>`) The DKIM attributes
- *         for an email address or a domain.
+ *       * `DkimAttributes` &mdash; (`Map<Map>`) The DKIM attributes for an
+ *         email address or a domain.
  *         * `DkimEnabled` &mdash; (`Boolean`) True if DKIM signing is
  *           enabled for email sent from the identity; false otherwise.
  *         * `DkimVerificationStatus` &mdash; (`String`) Describes whether
  *           Amazon SES has successfully verified the DKIM DNS records
  *           (tokens) published in the domain name's DNS. (This only
  *           applies to domain identities, not email address identities.)
+ *           Possible values include:
+ *           * `Pending`
+ *           * `Success`
+ *           * `Failed`
+ *           * `TemporaryFailure`
  *         * `DkimTokens` &mdash; (`Array<String>`) A set of DNS records
  *           (tokens) that must be published in the domain name's DNS for
  *           DKIM verification to complete, and which must remain published
@@ -133,8 +138,8 @@ AWS.SES = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `NotificationAttributes` &mdash; (`Object<Object>`) A map of
- *         Identity to IdentityNotificationAttributes.
+ *       * `NotificationAttributes` &mdash; (`Map<Map>`) A map of Identity
+ *         to IdentityNotificationAttributes.
  *         * `BounceTopic` &mdash; (`String`) The Amazon Resource Name
  *           (ARN) of the Amazon Simple Notification Service (SNS) topic
  *           where Amazon SES will publish bounce notifications.
@@ -164,11 +169,16 @@ AWS.SES = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `VerificationAttributes` &mdash; (`Object<Object>`) A map of
+ *       * `VerificationAttributes` &mdash; (`Map<Map>`) A map of
  *         Identities to IdentityVerificationAttributes objects.
  *         * `VerificationStatus` &mdash; (`String`) The verification
  *           status of the identity: "Pending", "Success", "Failed", or
  *           "TemporaryFailure".
+ *           Possible values include:
+ *           * `Pending`
+ *           * `Success`
+ *           * `Failed`
+ *           * `TemporaryFailure`
  *         * `VerificationToken` &mdash; (`String`) The verification token
  *           for a domain identity. Null for email address identities.
  *   @return [AWS.Request] a handle to the operation request for
@@ -209,17 +219,8 @@ AWS.SES = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `SendDataPoints` &mdash; (`Array<Object>`) A list of data
- *         points, each of which represents 15 minutes of activity.
- *         * `Timestamp` &mdash; (`Date`) Time of the data point.
- *         * `DeliveryAttempts` &mdash; (`Integer`) Number of emails that
- *           have been enqueued for sending.
- *         * `Bounces` &mdash; (`Integer`) Number of emails that have
- *           bounced.
- *         * `Complaints` &mdash; (`Integer`) Number of unwanted emails
- *           that were rejected by recipients.
- *         * `Rejects` &mdash; (`Integer`) Number of emails rejected by
- *           Amazon SES.
+ *       * `SendDataPoints` &mdash; (`Array<Map>`) A list of data points,
+ *         each of which represents 15 minutes of activity.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -229,6 +230,9 @@ AWS.SES = inherit({})
  *     * `IdentityType` &mdash; (`String`) The type of the identities to
  *       list. Possible values are "EmailAddress" and "Domain". If this
  *       parameter is omitted, then all identities will be listed.
+ *       Possible values include:
+ *       * `EmailAddress`
+ *       * `Domain`
  *     * `NextToken` &mdash; (`String`) The token to use for pagination.
  *     * `MaxItems` &mdash; (`Integer`) The maximum number of identities
  *       per page. Possible values are 1-100 inclusive.
@@ -270,7 +274,7 @@ AWS.SES = inherit({})
  *   @param params [Object]
  *     * `Source` &mdash; **required** &mdash; (`String`) The identity's
  *       email address.
- *     * `Destination` &mdash; **required** &mdash; (`Object`) The
+ *     * `Destination` &mdash; **required** &mdash; (`Map`) The
  *       destination for this email, composed of To:, CC:, and BCC:
  *       fields.
  *       * `ToAddresses` &mdash; (`Array<String>`) The To: field(s) of
@@ -279,28 +283,27 @@ AWS.SES = inherit({})
  *         the message.
  *       * `BccAddresses` &mdash; (`Array<String>`) The BCC: field(s) of
  *         the message.
- *     * `Message` &mdash; **required** &mdash; (`Object`) The message to
- *       be sent.
- *       * `Subject` &mdash; **required** &mdash; (`Object`) The subject
- *         of the message: A short summary of the content, which will
- *         appear in the recipient's inbox.
+ *     * `Message` &mdash; **required** &mdash; (`Map`) The message to be
+ *       sent.
+ *       * `Subject` &mdash; **required** &mdash; (`Map`) The subject of
+ *         the message: A short summary of the content, which will appear
+ *         in the recipient's inbox.
  *         * `Data` &mdash; **required** &mdash; (`String`) The textual
  *           data of the content.
  *         * `Charset` &mdash; (`String`) The character set of the
  *           content.
- *       * `Body` &mdash; **required** &mdash; (`Object`) The message
- *         body.
- *         * `Text` &mdash; (`Object`) The content of the message, in
- *           text format. Use this for text-based email clients, or
- *           clients on high-latency networks (such as mobile devices).
+ *       * `Body` &mdash; **required** &mdash; (`Map`) The message body.
+ *         * `Text` &mdash; (`Map`) The content of the message, in text
+ *           format. Use this for text-based email clients, or clients on
+ *           high-latency networks (such as mobile devices).
  *           * `Data` &mdash; **required** &mdash; (`String`) The textual
  *             data of the content.
  *           * `Charset` &mdash; (`String`) The character set of the
  *             content.
- *         * `Html` &mdash; (`Object`) The content of the message, in
- *           HTML format. Use this for email clients that can process
- *           HTML. You can include clickable links, formatted text, and
- *           much more in an HTML message.
+ *         * `Html` &mdash; (`Map`) The content of the message, in HTML
+ *           format. Use this for email clients that can process HTML.
+ *           You can include clickable links, formatted text, and much
+ *           more in an HTML message.
  *           * `Data` &mdash; **required** &mdash; (`String`) The textual
  *             data of the content.
  *           * `Charset` &mdash; (`String`) The character set of the
@@ -339,8 +342,8 @@ AWS.SES = inherit({})
  *       the raw text of the message.
  *     * `Destinations` &mdash; (`Array<String>`) A list of destinations
  *       for the message.
- *     * `RawMessage` &mdash; **required** &mdash; (`Object`) The raw
- *       text of the message. The client is responsible for ensuring the
+ *     * `RawMessage` &mdash; **required** &mdash; (`Map`) The raw text
+ *       of the message. The client is responsible for ensuring the
  *       following: Message must contain a header and a body, separated
  *       by a blank line. All required header fields must be present.
  *       Each part of a multipart MIME message must be formatted
@@ -421,6 +424,9 @@ AWS.SES = inherit({})
  *     * `NotificationType` &mdash; **required** &mdash; (`String`) The
  *       type of feedback notifications that will be published to the
  *       specified topic.
+ *       Possible values include:
+ *       * `Bounce`
+ *       * `Complaint`
  *     * `SnsTopic` &mdash; (`String`) The Amazon Resource Name (ARN) of
  *       the Amazon Simple Notification Service (Amazon SNS) topic. If
  *       the parameter is ommited from the request or a null value is
