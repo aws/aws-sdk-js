@@ -296,6 +296,20 @@ describe 'AWS.util.copy', ->
     expect(copied).not.toBe(obj)
     expect(copied).toEqual(a: 1, b: 2, c: 3, d: 4)
 
+describe 'AWS.util.deeperCopy', ->
+  it 'should perform deep copy of properties', ->
+    obj = child_0: str: 'words', array: [0, 1, 2], date: new Date() 
+    cpy = AWS.util.deeperCopy(obj); 
+
+    cpy.child_0.str = 'newString'
+    cpy.child_0.array.push(3) 
+    cpy.child_0.date = new Date() 
+
+    expect(obj.child_0.str).not.toBe('words')
+    expect(obj.child_0.array.length).not.toBe(4)
+    expect(obj.child_0.date).not.toBe(cpy.child_0.date)
+
+
 describe 'AWS.util.merge', ->
   it 'should merge an object into another and return new object', ->
     obj = a: 1, b: 2, c: 3
