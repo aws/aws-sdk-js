@@ -58,6 +58,9 @@ Feature: Working with Objects in S3
     When I stream key "hello"
     Then the streamed data should contain "CONTENTS OF FILE"
 
+    When I stream2 key "hello"
+    Then the streamed data should contain "CONTENTS OF FILE"
+
     And I delete the object with the key "hello"
 
     # final step here needs to happen to cleanup the shared bucket

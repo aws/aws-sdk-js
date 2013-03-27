@@ -85,9 +85,19 @@ module.exports = function () {
       on('data', function(d) { world.result += d.toString(); });
   });
 
+  this.When(/^I stream2 key "([^"]*)"$/, function(key, callback) {
+    if (!require('stream').Readable) return callback();
+    var params = {Bucket: this.sharedBucket, Key: key};
+    var world = this;
+    this.result = '';
+    var stream = this.client.getObject(params).createReadStream();
+    stream.on('end', function() { callback(); });
+    stream.on('readable', function() { world.result += stream.read(); });
+  });
+
   this.Then(/^the streamed data should contain "([^"]*)"$/, function(data, callback) {
-    if (data === this.result.replace("\n", "")) callback();
-    else callback.fail("Expected " + data + ", got " + this.result);
+    this.assert.equal(this.result.replace('\n', ''), data);
+    callback();
   });
 
   // this scenario is a work around for not having an after all hook
