@@ -190,3 +190,37 @@ glacier.client.initiateMultipartUpload(params, function (mpErr, multipart) {
   }
 });
 ```
+
+## Using Proxies
+
+### Setting a Global Proxy
+
+If you cannot connect to the internet directly, the SDK supports the use of
+HTTP or HTTPS proxies through global or per-service configuration options. To
+set a proxy, pass the `proxy` option to the `httpOptions` setting of your
+config object. This is how you could set a global proxy:
+
+```js
+AWS.config.update({
+  httpOptions: {
+    proxy: 'http://localhost:8080'
+  }
+});
+
+var s3 = new AWS.S3();
+s3.client.getObject({Bucket: 'bucket', Key: 'key'}, function (err, data) {
+  console.log(err, data);
+});
+```
+
+### Setting a Per-Service Proxy
+
+If you want to use a proxy on a per-service basis, you can also pass this
+same configuration option to the service constructor:
+
+```js
+var s3 = new AWS.S3({httpOptions: {proxy: 'http://localhost:8080'}});
+s3.client.getObject({Bucket: 'bucket', Key: 'key'}, function (err, data) {
+  console.log(err, data);
+});
+```

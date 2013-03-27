@@ -63,5 +63,14 @@ Feature: Working with Objects in S3
 
     And I delete the object with the key "hello"
 
+    @proxy
+    Scenario: Proxy support
+      When I write "world" to the key "hello"
+      Then the object with the key "hello" should exist
+      And the object with the key "hello" should contain "world"
+      And I delete the object with the key "hello"
+
+      And I teardown the local proxy server
+
     # final step here needs to happen to cleanup the shared bucket
     And I delete the shared bucket
