@@ -307,7 +307,7 @@ describe 'AWS.util.deeperCopy', ->
 
     expect(obj.child_0.str).not.toBe('words')
     expect(obj.child_0.array.length).not.toBe(4)
-    expect(obj.child_0.date).not.toBe(obj.child_0.date)
+    expect(obj.child_0.date).not.toBe(cpy.child_0.date)
 
 
 describe 'AWS.util.merge', ->
