@@ -84,6 +84,9 @@ for (var key in AWS) {
   if (AWS[key].Client) {
     var clientClass = AWS[key].Client;
     var client = new clientClass(defaultOptions);
+    client.with = function(config) {
+      return new this.constructor.__super__(AWS.util.merge(this.config, config));
+    };
     repl.context[clientClass.serviceIdentifier] = client;
   }
 }
