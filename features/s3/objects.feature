@@ -68,7 +68,9 @@ Feature: Working with Objects in S3
       When I write "world" to the key "hello"
       Then the object with the key "hello" should exist
       And the object with the key "hello" should contain "world"
-      And I delete the object with the key "hello"
+
+      When I delete the object with the key "hello"
+      Then the object with the key "hello" should not exist
 
       And I teardown the local proxy server
 
