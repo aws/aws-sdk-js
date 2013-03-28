@@ -49,6 +49,34 @@ describe 'AWS.Client', ->
       expect(client.config.sslEnabled).toEqual(true)
       AWS.config = cfg
 
+    it 'tries to construct client with latest API version', ->
+      CustomClient = AWS.Client.defineClient('custom', ['2001-01-01', '1999-05-05'])
+      errmsg = "Could not find API configuration custom-2001-01-01"
+      expect(-> new CustomClient()).toThrow(errmsg)
+
+    it 'tries to construct client with exact API version match', ->
+      CustomClient = AWS.Client.defineClient('custom', ['2001-01-01', '1999-05-05'])
+      errmsg = "Could not find API configuration custom-1999-05-05"
+      expect(-> new CustomClient(apiVersion: '1999-05-05')).toThrow(errmsg)
+
+    it 'tries to construct client with fuzzy API version match', ->
+      CustomClient = AWS.Client.defineClient('custom', ['2001-01-01', '1999-05-05'])
+      errmsg = "Could not find API configuration custom-1999-05-05"
+      expect(-> new CustomClient(apiVersion: '2000-01-01')).toThrow(errmsg)
+
+    it 'fails if apiVersion matches nothing', ->
+      CustomClient = AWS.Client.defineClient('custom', ['2001-01-01', '1999-05-05'])
+      errmsg = "Could not find custom API to satisfy version constraint `1998-01-01'"
+      expect(-> new CustomClient(apiVersion: '1998-01-01')).toThrow(errmsg)
+
+    it 'allows construction of clients from one-off apiConfig properties', ->
+      client = new AWS.Client apiConfig:
+        operations:
+          operationName: input: {}, output: {}
+
+      expect(typeof client.operationName).toEqual('function')
+      expect(client.operationName() instanceof AWS.Request).toEqual(true)
+
   describe 'setEndpoint', ->
     FooClient = null
 
