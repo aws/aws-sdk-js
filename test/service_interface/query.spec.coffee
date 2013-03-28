@@ -21,7 +21,7 @@ describe 'AWS.ServiceInterface.Query', ->
   svc = eval(@description)
 
   beforeEach ->
-    MockQueryClient = AWS.Client.defineClient
+    MockQueryClient = new AWS.Client apiConfig:
       endpointPrefix: 'mockservice'
       apiVersion: '2012-01-01'
       operations:
