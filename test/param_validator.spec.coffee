@@ -21,7 +21,7 @@ describe 'AWS.ParamValidator', ->
     r = rules
     if r && !r.xml && !r.payload
       r = type: 'structure', members: rules
-    new AWS.ParamValidator().validate(r, params)
+    new AWS.ParamValidator().validate(r, params { api { timestampFormat: 'unixTimestamp' }})
 
   expectValid = (params) ->
     expect(validate(params)).toEqual true
