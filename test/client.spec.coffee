@@ -64,6 +64,34 @@ describe 'AWS.Client', ->
       errmsg = "Could not find API configuration custom-1999-05-05"
       expect(-> new CustomClient(apiVersion: '2000-01-01')).toThrow(errmsg)
 
+    it 'uses global apiVersion value when constructing versioned clients', ->
+      AWS.config.apiVersion = '2002-03-04'
+      CustomClient = AWS.Client.defineClient('custom', ['2001-01-01', '1999-05-05'])
+      errmsg = "Could not find API configuration custom-2001-01-01"
+      expect(-> new CustomClient).toThrow(errmsg)
+      AWS.config.apiVersion = null
+
+    it 'uses global apiVersions value when constructing versioned clients', ->
+      AWS.config.apiVersions = {custom: '2002-03-04'}
+      CustomClient = AWS.Client.defineClient('custom', ['2001-01-01', '1999-05-05'])
+      errmsg = "Could not find API configuration custom-2001-01-01"
+      expect(-> new CustomClient).toThrow(errmsg)
+      AWS.config.apiVersions = {}
+
+    it 'uses service specific apiVersions before apiVersion', ->
+      AWS.config.apiVersions = {custom: '2000-01-01'}
+      AWS.config.apiVersion = '2002-03-04'
+      CustomClient = AWS.Client.defineClient('custom', ['2001-01-01', '1999-05-05'])
+      errmsg = "Could not find API configuration custom-1999-05-05"
+      expect(-> new CustomClient).toThrow(errmsg)
+      AWS.config.apiVersion = null
+      AWS.config.apiVersions = {}
+
+    it 'tries to construct client with fuzzy API version match', ->
+      CustomClient = AWS.Client.defineClient('custom', ['2001-01-01', '1999-05-05'])
+      errmsg = "Could not find API configuration custom-1999-05-05"
+      expect(-> new CustomClient(apiVersion: '2000-01-01')).toThrow(errmsg)
+
     it 'fails if apiVersion matches nothing', ->
       CustomClient = AWS.Client.defineClient('custom', ['2001-01-01', '1999-05-05'])
       errmsg = "Could not find custom API to satisfy version constraint `1998-01-01'"
