@@ -427,25 +427,14 @@ describe 'AWS.XML.Parser', ->
 
     it 'understands basic iso8601 strings', ->
       timestamp = '2012-10-10T15:47:10.001Z'
-      date = new Date(2012, 0, 1);
-      date.setUTCMonth(9)
-      date.setUTCDate(10)
-      date.setUTCHours(15)
-      date.setUTCMinutes(47)
-      date.setUTCSeconds(10)
-      date.setUTCMilliseconds(1)
+      date = new Date(timestamp)
       xml = "<xml><CreatedAt>#{timestamp}</CreatedAt></xml>"
       parse xml, rules, (data) ->
         expect(data).toEqual({CreatedAt:date})
 
     it 'understands basic rfc822 strings', ->
       timestamp = 'Wed, 10 Oct 2012 15:59:55 UTC'
-      date = new Date(2012, 0, 1);
-      date.setUTCMonth(9)
-      date.setUTCDate(10)
-      date.setUTCHours(15)
-      date.setUTCMinutes(59)
-      date.setUTCSeconds(55)
+      date = new Date(timestamp)
       xml = "<xml><CreatedAt>#{timestamp}</CreatedAt></xml>"
       parse xml, rules, (data) ->
         expect(data).toEqual({CreatedAt:date})
