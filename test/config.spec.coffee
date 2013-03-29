@@ -132,6 +132,11 @@ describe 'AWS.Config', ->
       config.update(foo: 10)
       expect(config.foo).toEqual(undefined)
 
+    it 'allows unknown keys if allowUnknownKeys is set', ->
+      config = new AWS.Config()
+      config.update(foo: 10, true)
+      expect(config.foo).toEqual(10)
+
     it 'should be able to update literal credentials', ->
       config = new AWS.Config()
       config.update(

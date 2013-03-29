@@ -43,8 +43,8 @@ matchXML = (xml1, xml2) ->
   expect(flattenXML(xml1)).toEqual(flattenXML(xml2))
 
 MockClient = AWS.util.inherit AWS.Client,
-  constructor: (config) ->
-    AWS.Client.call(this, config)
+  initialize: (config) ->
+    AWS.Client.prototype.initialize.call(this, config)
     @config.credentials = accessKeyId: 'akid', secretAccessKey: 'secret'
     @config.region = 'mock-region'
   setupRequestListeners: (request) ->
