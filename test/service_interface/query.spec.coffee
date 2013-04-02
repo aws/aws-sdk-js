@@ -21,7 +21,7 @@ describe 'AWS.ServiceInterface.Query', ->
   svc = eval(@description)
 
   beforeEach ->
-    MockQueryClient = AWS.Client.defineClient
+    client = new AWS.Client apiConfig:
       endpointPrefix: 'mockservice'
       apiVersion: '2012-01-01'
       operations:
@@ -42,7 +42,6 @@ describe 'AWS.ServiceInterface.Query', ->
                   Count:
                     type: 'float'
 
-    client = new MockQueryClient({region:'region'})
     request = new AWS.Request(client, 'operationName')
     response = new AWS.Response(request)
 

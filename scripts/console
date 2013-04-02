@@ -30,7 +30,7 @@ function customEval(cmd, context, filename, callback) {
     }
     
     // poor man's Request check
-    if (value && value.client && value.client.with && value.send) {
+    if (value && value.client && value.send) {
       if (!value.__hasBeenSent__) {
         value.__hasBeenSent__ = true;
         try {
@@ -53,8 +53,14 @@ function customEval(cmd, context, filename, callback) {
   });
 }
 
-repl.context.AWS = require('../lib/core');
+var AWS = repl.context.AWS = require('../lib/aws');
 repl.eval = customEval;
+
+// context variables
+repl.context.data = null;
+repl.context.error = null;
+repl.context.request = null;
+repl.context.response = null;
 
 // custom logger
 repl.context.AWS.events.on('send', function (resp) {
@@ -74,19 +80,13 @@ repl.context.AWS.events.on('send', function (resp) {
 replHistory(repl, process.env.HOME + '/.node_history');
 
 // load services as defined instances
-require('fs').readdirSync(__dirname + '/../lib/services').forEach(function(file) {
-  if (file.match(/\.api\./)) return;
-  if (!file.match(/\.js$/)) return;
-  var klass = require('../lib/services/' + file),
-      svc = file.replace(".js", ""),
-      client = new klass(defaultOptions).client;
-
-  // Creates new client instances with custom options
-  client.with = function(options) {
-    return new this.constructor(
-      repl.context.AWS.util.merge(this.config, options));
-  };
-
-  repl.context[svc] = client;
-});
-
+for (var key in AWS) {
+  if (AWS[key].Client) {
+    var clientClass = AWS[key].Client;
+    var client = new clientClass(defaultOptions);
+    client.with = function(config) {
+      return new this.constructor.__super__(AWS.util.merge(this.config, config));
+    };
+    repl.context[clientClass.serviceIdentifier] = client;
+  }
+}
