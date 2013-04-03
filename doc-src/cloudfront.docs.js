@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.CloudFront.Client
  *
  */
-AWS.CloudFront = inherit({})
+AWS.CloudFront = inherit(AWS.Service, {});
 
 /**
  * The low-level CloudFront client class.  This class provides one function
@@ -1128,4 +1128,4 @@ AWS.CloudFront = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.CloudFront.Client = inherit({});
+AWS.CloudFront.Client = inherit(AWS.Client, {});

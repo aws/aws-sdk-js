@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.AutoScaling.Client
  *
  */
-AWS.AutoScaling = inherit({})
+AWS.AutoScaling = inherit(AWS.Service, {});
 
 /**
  * The low-level AutoScaling client class.  This class provides one function
@@ -1349,4 +1349,4 @@ AWS.AutoScaling = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.AutoScaling.Client = inherit({});
+AWS.AutoScaling.Client = inherit(AWS.Client, {});

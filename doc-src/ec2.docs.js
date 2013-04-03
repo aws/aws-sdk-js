@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.EC2.Client
  *
  */
-AWS.EC2 = inherit({})
+AWS.EC2 = inherit(AWS.Service, {});
 
 /**
  * The low-level EC2 client class.  This class provides one function
@@ -6233,4 +6233,4 @@ AWS.EC2 = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.EC2.Client = inherit({});
+AWS.EC2.Client = inherit(AWS.Client, {});

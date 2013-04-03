@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.StorageGateway.Client
  *
  */
-AWS.StorageGateway = inherit({})
+AWS.StorageGateway = inherit(AWS.Service, {});
 
 /**
  * The low-level StorageGateway client class.  This class provides one function
@@ -1180,4 +1180,4 @@ AWS.StorageGateway = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.StorageGateway.Client = inherit({});
+AWS.StorageGateway.Client = inherit(AWS.Client, {});

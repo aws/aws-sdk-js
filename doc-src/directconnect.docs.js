@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.DirectConnect.Client
  *
  */
-AWS.DirectConnect = inherit({})
+AWS.DirectConnect = inherit(AWS.Service, {});
 
 /**
  * The low-level DirectConnect client class.  This class provides one function
@@ -480,4 +480,4 @@ AWS.DirectConnect = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.DirectConnect.Client = inherit({});
+AWS.DirectConnect.Client = inherit(AWS.Client, {});

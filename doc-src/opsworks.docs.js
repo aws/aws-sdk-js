@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.OpsWorks.Client
  *
  */
-AWS.OpsWorks = inherit({})
+AWS.OpsWorks = inherit(AWS.Service, {});
 
 /**
  * The low-level OpsWorks client class.  This class provides one function
@@ -1733,4 +1733,4 @@ AWS.OpsWorks = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.OpsWorks.Client = inherit({});
+AWS.OpsWorks.Client = inherit(AWS.Client, {});

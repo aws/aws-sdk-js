@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.SES.Client
  *
  */
-AWS.SES = inherit({})
+AWS.SES = inherit(AWS.Service, {});
 
 /**
  * The low-level SES client class.  This class provides one function
@@ -545,4 +545,4 @@ AWS.SES = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.SES.Client = inherit({});
+AWS.SES.Client = inherit(AWS.Client, {});

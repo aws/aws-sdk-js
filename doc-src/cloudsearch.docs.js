@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.CloudSearch.Client
  *
  */
-AWS.CloudSearch = inherit({})
+AWS.CloudSearch = inherit(AWS.Service, {});
 
 /**
  * The low-level CloudSearch client class.  This class provides one function
@@ -1484,4 +1484,4 @@ AWS.CloudSearch = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.CloudSearch.Client = inherit({});
+AWS.CloudSearch.Client = inherit(AWS.Client, {});

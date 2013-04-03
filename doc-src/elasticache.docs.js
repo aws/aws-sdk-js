@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.ElastiCache.Client
  *
  */
-AWS.ElastiCache = inherit({})
+AWS.ElastiCache = inherit(AWS.Service, {});
 
 /**
  * The low-level ElastiCache client class.  This class provides one function
@@ -1744,4 +1744,4 @@ AWS.ElastiCache = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.ElastiCache.Client = inherit({});
+AWS.ElastiCache.Client = inherit(AWS.Client, {});

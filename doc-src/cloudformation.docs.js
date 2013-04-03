@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.CloudFormation.Client
  *
  */
-AWS.CloudFormation = inherit({})
+AWS.CloudFormation = inherit(AWS.Service, {});
 
 /**
  * The low-level CloudFormation client class.  This class provides one function
@@ -692,4 +692,4 @@ AWS.CloudFormation = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.CloudFormation.Client = inherit({});
+AWS.CloudFormation.Client = inherit(AWS.Client, {});

@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.Route53.Client
  *
  */
-AWS.Route53 = inherit({})
+AWS.Route53 = inherit(AWS.Service, {});
 
 /**
  * The low-level Route53 client class.  This class provides one function
@@ -911,4 +911,4 @@ AWS.Route53 = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.Route53.Client = inherit({});
+AWS.Route53.Client = inherit(AWS.Client, {});

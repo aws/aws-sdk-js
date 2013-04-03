@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.CloudWatch.Client
  *
  */
-AWS.CloudWatch = inherit({})
+AWS.CloudWatch = inherit(AWS.Service, {});
 
 /**
  * The low-level CloudWatch client class.  This class provides one function
@@ -832,4 +832,4 @@ AWS.CloudWatch = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.CloudWatch.Client = inherit({});
+AWS.CloudWatch.Client = inherit(AWS.Client, {});

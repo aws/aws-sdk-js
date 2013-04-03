@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.SimpleDB.Client
  *
  */
-AWS.SimpleDB = inherit({})
+AWS.SimpleDB = inherit(AWS.Service, {});
 
 /**
  * The low-level SimpleDB client class.  This class provides one function
@@ -375,4 +375,4 @@ AWS.SimpleDB = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.SimpleDB.Client = inherit({});
+AWS.SimpleDB.Client = inherit(AWS.Client, {});

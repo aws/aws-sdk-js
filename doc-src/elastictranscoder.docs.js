@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.ElasticTranscoder.Client
  *
  */
-AWS.ElasticTranscoder = inherit({})
+AWS.ElasticTranscoder = inherit(AWS.Service, {});
 
 /**
  * The low-level ElasticTranscoder client class.  This class provides one function
@@ -1862,4 +1862,4 @@ AWS.ElasticTranscoder = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.ElasticTranscoder.Client = inherit({});
+AWS.ElasticTranscoder.Client = inherit(AWS.Client, {});

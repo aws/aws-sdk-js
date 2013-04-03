@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.DataPipeline.Client
  *
  */
-AWS.DataPipeline = inherit({})
+AWS.DataPipeline = inherit(AWS.Service, {});
 
 /**
  * The low-level DataPipeline client class.  This class provides one function
@@ -669,4 +669,4 @@ AWS.DataPipeline = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.DataPipeline.Client = inherit({});
+AWS.DataPipeline.Client = inherit(AWS.Client, {});

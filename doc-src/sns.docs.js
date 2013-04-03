@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.SNS.Client
  *
  */
-AWS.SNS = inherit({})
+AWS.SNS = inherit(AWS.Service, {});
 
 /**
  * The low-level SNS client class.  This class provides one function
@@ -476,4 +476,4 @@ AWS.SNS = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.SNS.Client = inherit({});
+AWS.SNS.Client = inherit(AWS.Client, {});

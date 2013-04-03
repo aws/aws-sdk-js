@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.IAM.Client
  *
  */
-AWS.IAM = inherit({})
+AWS.IAM = inherit(AWS.Service, {});
 
 /**
  * The low-level IAM client class.  This class provides one function
@@ -2264,4 +2264,4 @@ AWS.IAM = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.IAM.Client = inherit({});
+AWS.IAM.Client = inherit(AWS.Client, {});

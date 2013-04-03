@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.ImportExport.Client
  *
  */
-AWS.ImportExport = inherit({})
+AWS.ImportExport = inherit(AWS.Service, {});
 
 /**
  * The low-level ImportExport client class.  This class provides one function
@@ -204,4 +204,4 @@ AWS.ImportExport = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.ImportExport.Client = inherit({});
+AWS.ImportExport.Client = inherit(AWS.Client, {});

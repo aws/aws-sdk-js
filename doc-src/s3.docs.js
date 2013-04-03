@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.S3.Client
  *
  */
-AWS.S3 = inherit({})
+AWS.S3 = inherit(AWS.Service, {});
 
 /**
  * The low-level S3 client class.  This class provides one function
@@ -2151,4 +2151,4 @@ AWS.S3 = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.S3.Client = inherit({});
+AWS.S3.Client = inherit(AWS.Client, {});

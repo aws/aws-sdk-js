@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.ELB.Client
  *
  */
-AWS.ELB = inherit({})
+AWS.ELB = inherit(AWS.Service, {});
 
 /**
  * The low-level ELB client class.  This class provides one function
@@ -946,4 +946,4 @@ AWS.ELB = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.ELB.Client = inherit({});
+AWS.ELB.Client = inherit(AWS.Client, {});

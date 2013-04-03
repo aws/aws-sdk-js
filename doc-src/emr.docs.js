@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.EMR.Client
  *
  */
-AWS.EMR = inherit({})
+AWS.EMR = inherit(AWS.Service, {});
 
 /**
  * The low-level EMR client class.  This class provides one function
@@ -634,4 +634,4 @@ AWS.EMR = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.EMR.Client = inherit({});
+AWS.EMR.Client = inherit(AWS.Client, {});

@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.DynamoDB.Client
  *
  */
-AWS.DynamoDB = inherit({})
+AWS.DynamoDB = inherit(AWS.Service, {});
 
 /**
  * The low-level DynamoDB client class.  This class provides one function
@@ -1443,4 +1443,4 @@ AWS.DynamoDB = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.DynamoDB.Client = inherit({});
+AWS.DynamoDB.Client = inherit(AWS.Client, {});

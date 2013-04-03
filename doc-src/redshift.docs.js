@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.Redshift.Client
  *
  */
-AWS.Redshift = inherit({})
+AWS.Redshift = inherit(AWS.Service, {});
 
 /**
  * The low-level Redshift client class.  This class provides one function
@@ -2349,4 +2349,4 @@ AWS.Redshift = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.Redshift.Client = inherit({});
+AWS.Redshift.Client = inherit(AWS.Client, {});

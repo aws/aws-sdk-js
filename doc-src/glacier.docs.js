@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.Glacier.Client
  *
  */
-AWS.Glacier = inherit({})
+AWS.Glacier = inherit(AWS.Service, {});
 
 /**
  * The low-level Glacier client class.  This class provides one function
@@ -832,4 +832,4 @@ AWS.Glacier = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.Glacier.Client = inherit({});
+AWS.Glacier.Client = inherit(AWS.Client, {});

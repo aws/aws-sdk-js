@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.RDS.Client
  *
  */
-AWS.RDS = inherit({})
+AWS.RDS = inherit(AWS.Service, {});
 
 /**
  * The low-level RDS client class.  This class provides one function
@@ -4261,4 +4261,4 @@ AWS.RDS = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.RDS.Client = inherit({});
+AWS.RDS.Client = inherit(AWS.Client, {});

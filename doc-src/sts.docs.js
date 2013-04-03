@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.STS.Client
  *
  */
-AWS.STS = inherit({})
+AWS.STS = inherit(AWS.Service, {});
 
 /**
  * The low-level STS client class.  This class provides one function
@@ -257,4 +257,4 @@ AWS.STS = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.STS.Client = inherit({});
+AWS.STS.Client = inherit(AWS.Client, {});

@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.ElasticBeanstalk.Client
  *
  */
-AWS.ElasticBeanstalk = inherit({})
+AWS.ElasticBeanstalk = inherit(AWS.Service, {});
 
 /**
  * The low-level ElasticBeanstalk client class.  This class provides one function
@@ -1651,4 +1651,4 @@ AWS.ElasticBeanstalk = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.ElasticBeanstalk.Client = inherit({});
+AWS.ElasticBeanstalk.Client = inherit(AWS.Client, {});

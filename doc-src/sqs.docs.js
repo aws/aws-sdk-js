@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.SQS.Client
  *
  */
-AWS.SQS = inherit({})
+AWS.SQS = inherit(AWS.Service, {});
 
 /**
  * The low-level SQS client class.  This class provides one function
@@ -474,4 +474,4 @@ AWS.SQS = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.SQS.Client = inherit({});
+AWS.SQS.Client = inherit(AWS.Client, {});

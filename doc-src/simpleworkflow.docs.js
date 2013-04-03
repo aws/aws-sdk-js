@@ -46,7 +46,7 @@ AWS = {};
  * @see AWS.SimpleWorkflow.Client
  *
  */
-AWS.SimpleWorkflow = inherit({})
+AWS.SimpleWorkflow = inherit(AWS.Service, {});
 
 /**
  * The low-level SimpleWorkflow client class.  This class provides one function
@@ -2419,4 +2419,4 @@ AWS.SimpleWorkflow = inherit({})
  *     the endpoint URL for service requests.'
  *
  */
-AWS.SimpleWorkflow.Client = inherit({});
+AWS.SimpleWorkflow.Client = inherit(AWS.Client, {});
