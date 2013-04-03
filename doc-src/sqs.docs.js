@@ -108,14 +108,14 @@ AWS.SQS = inherit({})
  *     * `Entries` &mdash; **required** &mdash; (`Array<map>`) A list of
  *       receipt handles of the messages for which the visibility timeout
  *       must be changed.
- *       * `Id` &mdash; **required** &mdash; (`String`) An identifier for
- *         this particular receipt handle. This is used to communicate
- *         the result. Note that the Ids of a batch request need to be
- *         unique within the request.
- *       * `ReceiptHandle` &mdash; **required** &mdash; (`String`) A
- *         receipt handle.
- *       * `VisibilityTimeout` &mdash; (`Integer`) The new value (in
- *         seconds) for the message's visibility timeout.
+ *         * `Id` &mdash; **required** &mdash; (`String`) An identifier
+ *           for this particular receipt handle. This is used to
+ *           communicate the result. Note that the Ids of a batch request
+ *           need to be unique within the request.
+ *         * `ReceiptHandle` &mdash; **required** &mdash; (`String`) A
+ *           receipt handle.
+ *         * `VisibilityTimeout` &mdash; (`Integer`) The new value (in
+ *           seconds) for the message's visibility timeout.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -128,17 +128,18 @@ AWS.SQS = inherit({})
  *
  *       * `Successful` &mdash; (`Array<map>`) A list of
  *         ChangeMessageVisibilityBatchResultEntrys.
- *         * `Id` &mdash; (`String`) Represents a message whose visibility
- *           timeout has been changed successfully.
+ *           * `Id` &mdash; (`String`) Represents a message whose
+ *             visibility timeout has been changed successfully.
  *       * `Failed` &mdash; (`Array<map>`) A list of
  *         BatchResultErrorEntrys.
- *         * `Id` &mdash; (`String`) The id of an entry in a batch request.
- *         * `SenderFault` &mdash; (`Boolean`) Whether the error happened
- *           due to the sender's fault.
- *         * `Code` &mdash; (`String`) An error code representing why the
- *           operation failed on this entry.
- *         * `Message` &mdash; (`String`) A message explaining why the
- *           operation failed on this entry.
+ *           * `Id` &mdash; (`String`) The id of an entry in a batch
+ *             request.
+ *           * `SenderFault` &mdash; (`Boolean`) Whether the error happened
+ *             due to the sender's fault.
+ *           * `Code` &mdash; (`String`) An error code representing why the
+ *             operation failed on this entry.
+ *           * `Message` &mdash; (`String`) A message explaining why the
+ *             operation failed on this entry.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -188,12 +189,12 @@ AWS.SQS = inherit({})
  *       the SQS queue to take action on.
  *     * `Entries` &mdash; **required** &mdash; (`Array<map>`) A list of
  *       receipt handles for the messages to be deleted.
- *       * `Id` &mdash; **required** &mdash; (`String`) An identifier for
- *         this particular receipt handle. This is used to communicate
- *         the result. Note that the Ids of a batch request need to be
- *         unique within the request.
- *       * `ReceiptHandle` &mdash; **required** &mdash; (`String`) A
- *         receipt handle.
+ *         * `Id` &mdash; **required** &mdash; (`String`) An identifier
+ *           for this particular receipt handle. This is used to
+ *           communicate the result. Note that the Ids of a batch request
+ *           need to be unique within the request.
+ *         * `ReceiptHandle` &mdash; **required** &mdash; (`String`) A
+ *           receipt handle.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -206,17 +207,18 @@ AWS.SQS = inherit({})
  *
  *       * `Successful` &mdash; (`Array<map>`) A list of
  *         DeleteMessageBatchResultEntrys.
- *         * `Id` &mdash; (`String`) Represents a successfully deleted
- *           message.
+ *           * `Id` &mdash; (`String`) Represents a successfully deleted
+ *             message.
  *       * `Failed` &mdash; (`Array<map>`) A list of
  *         BatchResultErrorEntrys.
- *         * `Id` &mdash; (`String`) The id of an entry in a batch request.
- *         * `SenderFault` &mdash; (`Boolean`) Whether the error happened
- *           due to the sender's fault.
- *         * `Code` &mdash; (`String`) An error code representing why the
- *           operation failed on this entry.
- *         * `Message` &mdash; (`String`) A message explaining why the
- *           operation failed on this entry.
+ *           * `Id` &mdash; (`String`) The id of an entry in a batch
+ *             request.
+ *           * `SenderFault` &mdash; (`Boolean`) Whether the error happened
+ *             due to the sender's fault.
+ *           * `Code` &mdash; (`String`) An error code representing why the
+ *             operation failed on this entry.
+ *           * `Message` &mdash; (`String`) A message explaining why the
+ *             operation failed on this entry.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -333,11 +335,11 @@ AWS.SQS = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Messages` &mdash; (`Array<map>`) A list of messages.
- *         * `MessageId` &mdash; (`String`)
- *         * `ReceiptHandle` &mdash; (`String`)
- *         * `MD5OfBody` &mdash; (`String`)
- *         * `Body` &mdash; (`String`)
- *         * `Attributes` &mdash; (`map<String>`)
+ *           * `MessageId` &mdash; (`String`)
+ *           * `ReceiptHandle` &mdash; (`String`)
+ *           * `MD5OfBody` &mdash; (`String`)
+ *           * `Body` &mdash; (`String`)
+ *           * `Attributes` &mdash; (`map<String>`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -396,14 +398,14 @@ AWS.SQS = inherit({})
  *       the SQS queue to take action on.
  *     * `Entries` &mdash; **required** &mdash; (`Array<map>`) A list of
  *       SendMessageBatchRequestEntrys.
- *       * `Id` &mdash; **required** &mdash; (`String`) An identifier for
- *         the message in this batch. This is used to communicate the
- *         result. Note that the the Ids of a batch request need to be
- *         unique within the request.
- *       * `MessageBody` &mdash; **required** &mdash; (`String`) Body of
- *         the message.
- *       * `DelaySeconds` &mdash; (`Integer`) The number of seconds for
- *         which the message has to be delayed.
+ *         * `Id` &mdash; **required** &mdash; (`String`) An identifier
+ *           for the message in this batch. This is used to communicate
+ *           the result. Note that the the Ids of a batch request need to
+ *           be unique within the request.
+ *         * `MessageBody` &mdash; **required** &mdash; (`String`) Body
+ *           of the message.
+ *         * `DelaySeconds` &mdash; (`Integer`) The number of seconds for
+ *           which the message has to be delayed.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -416,25 +418,27 @@ AWS.SQS = inherit({})
  *
  *       * `Successful` &mdash; (`Array<map>`) A list of
  *         SendMessageBatchResultEntrys.
- *         * `Id` &mdash; (`String`) An identifier for the message in this
- *           batch.
- *         * `MessageId` &mdash; (`String`) An identifier for the message.
- *         * `MD5OfMessageBody` &mdash; (`String`) An MD5 digest of the
- *           non-URL-encoded message body string. This can be used to
- *           verify that SQS received the message correctly. SQS first URL
- *           decodes the message before creating the MD5 digest. For
- *           information about MD5, go to
- *           http://faqs.org/rfcs/rfc1321.html.
+ *           * `Id` &mdash; (`String`) An identifier for the message in
+ *             this batch.
+ *           * `MessageId` &mdash; (`String`) An identifier for the
+ *             message.
+ *           * `MD5OfMessageBody` &mdash; (`String`) An MD5 digest of the
+ *             non-URL-encoded message body string. This can be used to
+ *             verify that SQS received the message correctly. SQS first
+ *             URL decodes the message before creating the MD5 digest. For
+ *             information about MD5, go to
+ *             http://faqs.org/rfcs/rfc1321.html.
  *       * `Failed` &mdash; (`Array<map>`) A list of BatchResultErrorEntrys
  *         with the error detail about each message that could not be
  *         enqueued.
- *         * `Id` &mdash; (`String`) The id of an entry in a batch request.
- *         * `SenderFault` &mdash; (`Boolean`) Whether the error happened
- *           due to the sender's fault.
- *         * `Code` &mdash; (`String`) An error code representing why the
- *           operation failed on this entry.
- *         * `Message` &mdash; (`String`) A message explaining why the
- *           operation failed on this entry.
+ *           * `Id` &mdash; (`String`) The id of an entry in a batch
+ *             request.
+ *           * `SenderFault` &mdash; (`Boolean`) Whether the error happened
+ *             due to the sender's fault.
+ *           * `Code` &mdash; (`String`) An error code representing why the
+ *             operation failed on this entry.
+ *           * `Message` &mdash; (`String`) A message explaining why the
+ *             operation failed on this entry.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *

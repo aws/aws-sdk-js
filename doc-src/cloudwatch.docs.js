@@ -98,20 +98,20 @@ AWS.CloudWatch = inherit({})
  *
  *       * `AlarmHistoryItems` &mdash; (`Array<map>`) A list of alarm
  *         histories in JSON format.
- *         * `AlarmName` &mdash; (`String`) The descriptive name for the
- *           alarm.
- *         * `Timestamp` &mdash; (`Date`) The time stamp for the alarm
- *           history item.
- *         * `HistoryItemType` &mdash; (`String`) The type of alarm history
- *           item.
- *           Possible values include:
- *           * `ConfigurationUpdate`
- *           * `StateUpdate`
- *           * `Action`
- *         * `HistorySummary` &mdash; (`String`) A human-readable summary
- *           of the alarm history.
- *         * `HistoryData` &mdash; (`String`) Machine-readable data about
- *           the alarm in JSON format.
+ *           * `AlarmName` &mdash; (`String`) The descriptive name for the
+ *             alarm.
+ *           * `Timestamp` &mdash; (`Date`) The time stamp for the alarm
+ *             history item.
+ *           * `HistoryItemType` &mdash; (`String`) The type of alarm
+ *             history item.
+ *             Possible values include:
+ *             * `ConfigurationUpdate`
+ *             * `StateUpdate`
+ *             * `Action`
+ *           * `HistorySummary` &mdash; (`String`) A human-readable summary
+ *             of the alarm history.
+ *           * `HistoryData` &mdash; (`String`) Machine-readable data about
+ *             the alarm in JSON format.
  *       * `NextToken` &mdash; (`String`) A string that marks the start of
  *         the next batch of returned results.
  *   @return [AWS.Request] a handle to the operation request for
@@ -147,106 +147,109 @@ AWS.CloudWatch = inherit({})
  *
  *       * `MetricAlarms` &mdash; (`Array<map>`) A list of information for
  *         the specified alarms.
- *         * `AlarmName` &mdash; (`String`) The name of the alarm.
- *         * `AlarmArn` &mdash; (`String`) The Amazon Resource Name (ARN)
- *           of the alarm.
- *         * `AlarmDescription` &mdash; (`String`) The description for the
- *           alarm.
- *         * `AlarmConfigurationUpdatedTimestamp` &mdash; (`Date`) The time
- *           stamp of the last update to the alarm configuration.
- *         * `ActionsEnabled` &mdash; (`Boolean`) Indicates whether actions
- *           should be executed during any changes to the alarm's state.
- *         * `OKActions` &mdash; (`Array<String>`) The list of actions to
- *           execute when this alarm transitions into an OK state from any
- *           other state. Each action is specified as an Amazon Resource
- *           Number (ARN). Currently the only actions supported are
- *           publishing to an Amazon SNS topic and triggering an Auto
- *           Scaling policy.
- *         * `AlarmActions` &mdash; (`Array<String>`) The list of actions
- *           to execute when this alarm transitions into an ALARM state
- *           from any other state. Each action is specified as an Amazon
- *           Resource Number (ARN). Currently the only actions supported
- *           are publishing to an Amazon SNS topic and triggering an Auto
- *           Scaling policy.
- *         * `InsufficientDataActions` &mdash; (`Array<String>`) The list
- *           of actions to execute when this alarm transitions into an
- *           INSUFFICIENT_DATA state from any other state. Each action is
- *           specified as an Amazon Resource Number (ARN). Currently the
- *           only actions supported are publishing to an Amazon SNS topic
- *           or triggering an Auto Scaling policy.
- *         * `StateValue` &mdash; (`String`) The state value for the alarm.
- *           Possible values include:
- *           * `OK`
- *           * `ALARM`
- *           * `INSUFFICIENT_DATA`
- *         * `StateReason` &mdash; (`String`) A human-readable explanation
- *           for the alarm's state.
- *         * `StateReasonData` &mdash; (`String`) An explanation for the
- *           alarm's state in machine-readable JSON format
- *         * `StateUpdatedTimestamp` &mdash; (`Date`) The time stamp of the
- *           last update to the alarm's state.
- *         * `MetricName` &mdash; (`String`) The name of the alarm's
- *           metric.
- *         * `Namespace` &mdash; (`String`) The namespace of alarm's
- *           associated metric.
- *         * `Statistic` &mdash; (`String`) The statistic to apply to the
- *           alarm's associated metric.
- *           Possible values include:
- *           * `SampleCount`
- *           * `Average`
- *           * `Sum`
- *           * `Minimum`
- *           * `Maximum`
- *         * `Dimensions` &mdash; (`Array<map>`) The list of dimensions
- *           associated with the alarm's associated metric.
- *           * `Name` &mdash; (`String`) The name of the dimension.
- *           * `Value` &mdash; (`String`) The value representing the
- *             dimension measurement
- *         * `Period` &mdash; (`Integer`) The period in seconds over which
- *           the statistic is applied.
- *         * `Unit` &mdash; (`String`) The unit of the alarm's associated
- *           metric.
- *           Possible values include:
- *           * `Seconds`
- *           * `Microseconds`
- *           * `Milliseconds`
- *           * `Bytes`
- *           * `Kilobytes`
- *           * `Megabytes`
- *           * `Gigabytes`
- *           * `Terabytes`
- *           * `Bits`
- *           * `Kilobits`
- *           * `Megabits`
- *           * `Gigabits`
- *           * `Terabits`
- *           * `Percent`
- *           * `Count`
- *           * `Bytes/Second`
- *           * `Kilobytes/Second`
- *           * `Megabytes/Second`
- *           * `Gigabytes/Second`
- *           * `Terabytes/Second`
- *           * `Bits/Second`
- *           * `Kilobits/Second`
- *           * `Megabits/Second`
- *           * `Gigabits/Second`
- *           * `Terabits/Second`
- *           * `Count/Second`
- *           * `None`
- *         * `EvaluationPeriods` &mdash; (`Integer`) The number of periods
- *           over which data is compared to the specified threshold.
- *         * `Threshold` &mdash; (`Float`) The value against which the
- *           specified statistic is compared.
- *         * `ComparisonOperator` &mdash; (`String`) The arithmetic
- *           operation to use when comparing the specified Statistic and
- *           Threshold. The specified Statistic value is used as the first
- *           operand.
- *           Possible values include:
- *           * `GreaterThanOrEqualToThreshold`
- *           * `GreaterThanThreshold`
- *           * `LessThanThreshold`
- *           * `LessThanOrEqualToThreshold`
+ *           * `AlarmName` &mdash; (`String`) The name of the alarm.
+ *           * `AlarmArn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *             of the alarm.
+ *           * `AlarmDescription` &mdash; (`String`) The description for
+ *             the alarm.
+ *           * `AlarmConfigurationUpdatedTimestamp` &mdash; (`Date`) The
+ *             time stamp of the last update to the alarm configuration.
+ *           * `ActionsEnabled` &mdash; (`Boolean`) Indicates whether
+ *             actions should be executed during any changes to the alarm's
+ *             state.
+ *           * `OKActions` &mdash; (`Array<String>`) The list of actions to
+ *             execute when this alarm transitions into an OK state from
+ *             any other state. Each action is specified as an Amazon
+ *             Resource Number (ARN). Currently the only actions supported
+ *             are publishing to an Amazon SNS topic and triggering an Auto
+ *             Scaling policy.
+ *           * `AlarmActions` &mdash; (`Array<String>`) The list of actions
+ *             to execute when this alarm transitions into an ALARM state
+ *             from any other state. Each action is specified as an Amazon
+ *             Resource Number (ARN). Currently the only actions supported
+ *             are publishing to an Amazon SNS topic and triggering an Auto
+ *             Scaling policy.
+ *           * `InsufficientDataActions` &mdash; (`Array<String>`) The list
+ *             of actions to execute when this alarm transitions into an
+ *             INSUFFICIENT_DATA state from any other state. Each action is
+ *             specified as an Amazon Resource Number (ARN). Currently the
+ *             only actions supported are publishing to an Amazon SNS topic
+ *             or triggering an Auto Scaling policy.
+ *           * `StateValue` &mdash; (`String`) The state value for the
+ *             alarm.
+ *             Possible values include:
+ *             * `OK`
+ *             * `ALARM`
+ *             * `INSUFFICIENT_DATA`
+ *           * `StateReason` &mdash; (`String`) A human-readable
+ *             explanation for the alarm's state.
+ *           * `StateReasonData` &mdash; (`String`) An explanation for the
+ *             alarm's state in machine-readable JSON format
+ *           * `StateUpdatedTimestamp` &mdash; (`Date`) The time stamp of
+ *             the last update to the alarm's state.
+ *           * `MetricName` &mdash; (`String`) The name of the alarm's
+ *             metric.
+ *           * `Namespace` &mdash; (`String`) The namespace of alarm's
+ *             associated metric.
+ *           * `Statistic` &mdash; (`String`) The statistic to apply to the
+ *             alarm's associated metric.
+ *             Possible values include:
+ *             * `SampleCount`
+ *             * `Average`
+ *             * `Sum`
+ *             * `Minimum`
+ *             * `Maximum`
+ *           * `Dimensions` &mdash; (`Array<map>`) The list of dimensions
+ *             associated with the alarm's associated metric.
+ *               * `Name` &mdash; (`String`) The name of the dimension.
+ *               * `Value` &mdash; (`String`) The value representing the
+ *                 dimension measurement
+ *           * `Period` &mdash; (`Integer`) The period in seconds over
+ *             which the statistic is applied.
+ *           * `Unit` &mdash; (`String`) The unit of the alarm's associated
+ *             metric.
+ *             Possible values include:
+ *             * `Seconds`
+ *             * `Microseconds`
+ *             * `Milliseconds`
+ *             * `Bytes`
+ *             * `Kilobytes`
+ *             * `Megabytes`
+ *             * `Gigabytes`
+ *             * `Terabytes`
+ *             * `Bits`
+ *             * `Kilobits`
+ *             * `Megabits`
+ *             * `Gigabits`
+ *             * `Terabits`
+ *             * `Percent`
+ *             * `Count`
+ *             * `Bytes/Second`
+ *             * `Kilobytes/Second`
+ *             * `Megabytes/Second`
+ *             * `Gigabytes/Second`
+ *             * `Terabytes/Second`
+ *             * `Bits/Second`
+ *             * `Kilobits/Second`
+ *             * `Megabits/Second`
+ *             * `Gigabits/Second`
+ *             * `Terabits/Second`
+ *             * `Count/Second`
+ *             * `None`
+ *           * `EvaluationPeriods` &mdash; (`Integer`) The number of
+ *             periods over which data is compared to the specified
+ *             threshold.
+ *           * `Threshold` &mdash; (`Float`) The value against which the
+ *             specified statistic is compared.
+ *           * `ComparisonOperator` &mdash; (`String`) The arithmetic
+ *             operation to use when comparing the specified Statistic and
+ *             Threshold. The specified Statistic value is used as the
+ *             first operand.
+ *             Possible values include:
+ *             * `GreaterThanOrEqualToThreshold`
+ *             * `GreaterThanThreshold`
+ *             * `LessThanThreshold`
+ *             * `LessThanOrEqualToThreshold`
  *       * `NextToken` &mdash; (`String`) A string that marks the start of
  *         the next batch of returned results.
  *   @return [AWS.Request] a handle to the operation request for
@@ -268,10 +271,10 @@ AWS.CloudWatch = inherit({})
  *       * `Maximum`
  *     * `Dimensions` &mdash; (`Array<map>`) The list of dimensions
  *       associated with the metric.
- *       * `Name` &mdash; **required** &mdash; (`String`) The name of the
- *         dimension.
- *       * `Value` &mdash; **required** &mdash; (`String`) The value
- *         representing the dimension measurement
+ *         * `Name` &mdash; **required** &mdash; (`String`) The name of
+ *           the dimension.
+ *         * `Value` &mdash; **required** &mdash; (`String`) The value
+ *           representing the dimension measurement
  *     * `Period` &mdash; (`Integer`) The period in seconds over which
  *       the statistic is applied.
  *     * `Unit` &mdash; (`String`) The unit for the metric.
@@ -315,106 +318,109 @@ AWS.CloudWatch = inherit({})
  *
  *       * `MetricAlarms` &mdash; (`Array<map>`) A list of information for
  *         each alarm with the specified metric.
- *         * `AlarmName` &mdash; (`String`) The name of the alarm.
- *         * `AlarmArn` &mdash; (`String`) The Amazon Resource Name (ARN)
- *           of the alarm.
- *         * `AlarmDescription` &mdash; (`String`) The description for the
- *           alarm.
- *         * `AlarmConfigurationUpdatedTimestamp` &mdash; (`Date`) The time
- *           stamp of the last update to the alarm configuration.
- *         * `ActionsEnabled` &mdash; (`Boolean`) Indicates whether actions
- *           should be executed during any changes to the alarm's state.
- *         * `OKActions` &mdash; (`Array<String>`) The list of actions to
- *           execute when this alarm transitions into an OK state from any
- *           other state. Each action is specified as an Amazon Resource
- *           Number (ARN). Currently the only actions supported are
- *           publishing to an Amazon SNS topic and triggering an Auto
- *           Scaling policy.
- *         * `AlarmActions` &mdash; (`Array<String>`) The list of actions
- *           to execute when this alarm transitions into an ALARM state
- *           from any other state. Each action is specified as an Amazon
- *           Resource Number (ARN). Currently the only actions supported
- *           are publishing to an Amazon SNS topic and triggering an Auto
- *           Scaling policy.
- *         * `InsufficientDataActions` &mdash; (`Array<String>`) The list
- *           of actions to execute when this alarm transitions into an
- *           INSUFFICIENT_DATA state from any other state. Each action is
- *           specified as an Amazon Resource Number (ARN). Currently the
- *           only actions supported are publishing to an Amazon SNS topic
- *           or triggering an Auto Scaling policy.
- *         * `StateValue` &mdash; (`String`) The state value for the alarm.
- *           Possible values include:
- *           * `OK`
- *           * `ALARM`
- *           * `INSUFFICIENT_DATA`
- *         * `StateReason` &mdash; (`String`) A human-readable explanation
- *           for the alarm's state.
- *         * `StateReasonData` &mdash; (`String`) An explanation for the
- *           alarm's state in machine-readable JSON format
- *         * `StateUpdatedTimestamp` &mdash; (`Date`) The time stamp of the
- *           last update to the alarm's state.
- *         * `MetricName` &mdash; (`String`) The name of the alarm's
- *           metric.
- *         * `Namespace` &mdash; (`String`) The namespace of alarm's
- *           associated metric.
- *         * `Statistic` &mdash; (`String`) The statistic to apply to the
- *           alarm's associated metric.
- *           Possible values include:
- *           * `SampleCount`
- *           * `Average`
- *           * `Sum`
- *           * `Minimum`
- *           * `Maximum`
- *         * `Dimensions` &mdash; (`Array<map>`) The list of dimensions
- *           associated with the alarm's associated metric.
- *           * `Name` &mdash; (`String`) The name of the dimension.
- *           * `Value` &mdash; (`String`) The value representing the
- *             dimension measurement
- *         * `Period` &mdash; (`Integer`) The period in seconds over which
- *           the statistic is applied.
- *         * `Unit` &mdash; (`String`) The unit of the alarm's associated
- *           metric.
- *           Possible values include:
- *           * `Seconds`
- *           * `Microseconds`
- *           * `Milliseconds`
- *           * `Bytes`
- *           * `Kilobytes`
- *           * `Megabytes`
- *           * `Gigabytes`
- *           * `Terabytes`
- *           * `Bits`
- *           * `Kilobits`
- *           * `Megabits`
- *           * `Gigabits`
- *           * `Terabits`
- *           * `Percent`
- *           * `Count`
- *           * `Bytes/Second`
- *           * `Kilobytes/Second`
- *           * `Megabytes/Second`
- *           * `Gigabytes/Second`
- *           * `Terabytes/Second`
- *           * `Bits/Second`
- *           * `Kilobits/Second`
- *           * `Megabits/Second`
- *           * `Gigabits/Second`
- *           * `Terabits/Second`
- *           * `Count/Second`
- *           * `None`
- *         * `EvaluationPeriods` &mdash; (`Integer`) The number of periods
- *           over which data is compared to the specified threshold.
- *         * `Threshold` &mdash; (`Float`) The value against which the
- *           specified statistic is compared.
- *         * `ComparisonOperator` &mdash; (`String`) The arithmetic
- *           operation to use when comparing the specified Statistic and
- *           Threshold. The specified Statistic value is used as the first
- *           operand.
- *           Possible values include:
- *           * `GreaterThanOrEqualToThreshold`
- *           * `GreaterThanThreshold`
- *           * `LessThanThreshold`
- *           * `LessThanOrEqualToThreshold`
+ *           * `AlarmName` &mdash; (`String`) The name of the alarm.
+ *           * `AlarmArn` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *             of the alarm.
+ *           * `AlarmDescription` &mdash; (`String`) The description for
+ *             the alarm.
+ *           * `AlarmConfigurationUpdatedTimestamp` &mdash; (`Date`) The
+ *             time stamp of the last update to the alarm configuration.
+ *           * `ActionsEnabled` &mdash; (`Boolean`) Indicates whether
+ *             actions should be executed during any changes to the alarm's
+ *             state.
+ *           * `OKActions` &mdash; (`Array<String>`) The list of actions to
+ *             execute when this alarm transitions into an OK state from
+ *             any other state. Each action is specified as an Amazon
+ *             Resource Number (ARN). Currently the only actions supported
+ *             are publishing to an Amazon SNS topic and triggering an Auto
+ *             Scaling policy.
+ *           * `AlarmActions` &mdash; (`Array<String>`) The list of actions
+ *             to execute when this alarm transitions into an ALARM state
+ *             from any other state. Each action is specified as an Amazon
+ *             Resource Number (ARN). Currently the only actions supported
+ *             are publishing to an Amazon SNS topic and triggering an Auto
+ *             Scaling policy.
+ *           * `InsufficientDataActions` &mdash; (`Array<String>`) The list
+ *             of actions to execute when this alarm transitions into an
+ *             INSUFFICIENT_DATA state from any other state. Each action is
+ *             specified as an Amazon Resource Number (ARN). Currently the
+ *             only actions supported are publishing to an Amazon SNS topic
+ *             or triggering an Auto Scaling policy.
+ *           * `StateValue` &mdash; (`String`) The state value for the
+ *             alarm.
+ *             Possible values include:
+ *             * `OK`
+ *             * `ALARM`
+ *             * `INSUFFICIENT_DATA`
+ *           * `StateReason` &mdash; (`String`) A human-readable
+ *             explanation for the alarm's state.
+ *           * `StateReasonData` &mdash; (`String`) An explanation for the
+ *             alarm's state in machine-readable JSON format
+ *           * `StateUpdatedTimestamp` &mdash; (`Date`) The time stamp of
+ *             the last update to the alarm's state.
+ *           * `MetricName` &mdash; (`String`) The name of the alarm's
+ *             metric.
+ *           * `Namespace` &mdash; (`String`) The namespace of alarm's
+ *             associated metric.
+ *           * `Statistic` &mdash; (`String`) The statistic to apply to the
+ *             alarm's associated metric.
+ *             Possible values include:
+ *             * `SampleCount`
+ *             * `Average`
+ *             * `Sum`
+ *             * `Minimum`
+ *             * `Maximum`
+ *           * `Dimensions` &mdash; (`Array<map>`) The list of dimensions
+ *             associated with the alarm's associated metric.
+ *               * `Name` &mdash; (`String`) The name of the dimension.
+ *               * `Value` &mdash; (`String`) The value representing the
+ *                 dimension measurement
+ *           * `Period` &mdash; (`Integer`) The period in seconds over
+ *             which the statistic is applied.
+ *           * `Unit` &mdash; (`String`) The unit of the alarm's associated
+ *             metric.
+ *             Possible values include:
+ *             * `Seconds`
+ *             * `Microseconds`
+ *             * `Milliseconds`
+ *             * `Bytes`
+ *             * `Kilobytes`
+ *             * `Megabytes`
+ *             * `Gigabytes`
+ *             * `Terabytes`
+ *             * `Bits`
+ *             * `Kilobits`
+ *             * `Megabits`
+ *             * `Gigabits`
+ *             * `Terabits`
+ *             * `Percent`
+ *             * `Count`
+ *             * `Bytes/Second`
+ *             * `Kilobytes/Second`
+ *             * `Megabytes/Second`
+ *             * `Gigabytes/Second`
+ *             * `Terabytes/Second`
+ *             * `Bits/Second`
+ *             * `Kilobits/Second`
+ *             * `Megabits/Second`
+ *             * `Gigabits/Second`
+ *             * `Terabits/Second`
+ *             * `Count/Second`
+ *             * `None`
+ *           * `EvaluationPeriods` &mdash; (`Integer`) The number of
+ *             periods over which data is compared to the specified
+ *             threshold.
+ *           * `Threshold` &mdash; (`Float`) The value against which the
+ *             specified statistic is compared.
+ *           * `ComparisonOperator` &mdash; (`String`) The arithmetic
+ *             operation to use when comparing the specified Statistic and
+ *             Threshold. The specified Statistic value is used as the
+ *             first operand.
+ *             Possible values include:
+ *             * `GreaterThanOrEqualToThreshold`
+ *             * `GreaterThanThreshold`
+ *             * `LessThanThreshold`
+ *             * `LessThanOrEqualToThreshold`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -459,10 +465,10 @@ AWS.CloudWatch = inherit({})
  *       the metric.
  *     * `Dimensions` &mdash; (`Array<map>`) A list of dimensions
  *       describing qualities of the metric.
- *       * `Name` &mdash; **required** &mdash; (`String`) The name of the
- *         dimension.
- *       * `Value` &mdash; **required** &mdash; (`String`) The value
- *         representing the dimension measurement
+ *         * `Name` &mdash; **required** &mdash; (`String`) The name of
+ *           the dimension.
+ *         * `Value` &mdash; **required** &mdash; (`String`) The value
+ *           representing the dimension measurement
  *     * `StartTime` &mdash; **required** &mdash; (`Date`) The time stamp
  *       to use for determining the first datapoint to return. The value
  *       specified is inclusive; results include datapoints with the time
@@ -524,48 +530,48 @@ AWS.CloudWatch = inherit({})
  *         metric.
  *       * `Datapoints` &mdash; (`Array<map>`) The datapoints for the
  *         specified metric.
- *         * `Timestamp` &mdash; (`Date`) The time stamp used for the
- *           datapoint.
- *         * `SampleCount` &mdash; (`Float`) The number of metric values
- *           that contributed to the aggregate value of this datapoint.
- *         * `Average` &mdash; (`Float`) The average of metric values that
- *           correspond to the datapoint.
- *         * `Sum` &mdash; (`Float`) The sum of metric values used for the
- *           datapoint.
- *         * `Minimum` &mdash; (`Float`) The minimum metric value used for
- *           the datapoint.
- *         * `Maximum` &mdash; (`Float`) The maximum of the metric value
- *           used for the datapoint.
- *         * `Unit` &mdash; (`String`) The standard unit used for the
- *           datapoint.
- *           Possible values include:
- *           * `Seconds`
- *           * `Microseconds`
- *           * `Milliseconds`
- *           * `Bytes`
- *           * `Kilobytes`
- *           * `Megabytes`
- *           * `Gigabytes`
- *           * `Terabytes`
- *           * `Bits`
- *           * `Kilobits`
- *           * `Megabits`
- *           * `Gigabits`
- *           * `Terabits`
- *           * `Percent`
- *           * `Count`
- *           * `Bytes/Second`
- *           * `Kilobytes/Second`
- *           * `Megabytes/Second`
- *           * `Gigabytes/Second`
- *           * `Terabytes/Second`
- *           * `Bits/Second`
- *           * `Kilobits/Second`
- *           * `Megabits/Second`
- *           * `Gigabits/Second`
- *           * `Terabits/Second`
- *           * `Count/Second`
- *           * `None`
+ *           * `Timestamp` &mdash; (`Date`) The time stamp used for the
+ *             datapoint.
+ *           * `SampleCount` &mdash; (`Float`) The number of metric values
+ *             that contributed to the aggregate value of this datapoint.
+ *           * `Average` &mdash; (`Float`) The average of metric values
+ *             that correspond to the datapoint.
+ *           * `Sum` &mdash; (`Float`) The sum of metric values used for
+ *             the datapoint.
+ *           * `Minimum` &mdash; (`Float`) The minimum metric value used
+ *             for the datapoint.
+ *           * `Maximum` &mdash; (`Float`) The maximum of the metric value
+ *             used for the datapoint.
+ *           * `Unit` &mdash; (`String`) The standard unit used for the
+ *             datapoint.
+ *             Possible values include:
+ *             * `Seconds`
+ *             * `Microseconds`
+ *             * `Milliseconds`
+ *             * `Bytes`
+ *             * `Kilobytes`
+ *             * `Megabytes`
+ *             * `Gigabytes`
+ *             * `Terabytes`
+ *             * `Bits`
+ *             * `Kilobits`
+ *             * `Megabits`
+ *             * `Gigabits`
+ *             * `Terabits`
+ *             * `Percent`
+ *             * `Count`
+ *             * `Bytes/Second`
+ *             * `Kilobytes/Second`
+ *             * `Megabytes/Second`
+ *             * `Gigabytes/Second`
+ *             * `Terabytes/Second`
+ *             * `Bits/Second`
+ *             * `Kilobits/Second`
+ *             * `Megabits/Second`
+ *             * `Gigabits/Second`
+ *             * `Terabits/Second`
+ *             * `Count/Second`
+ *             * `None`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -577,11 +583,11 @@ AWS.CloudWatch = inherit({})
  *       against.
  *     * `Dimensions` &mdash; (`Array<map>`) A list of dimensions to
  *       filter against.
- *       * `Name` &mdash; **required** &mdash; (`String`) The dimension
- *         name to be matched.
- *       * `Value` &mdash; (`String`) The value of the dimension to be
- *         matched. Specifying a Name without specifying a Value returns
- *         all values associated with that Name.
+ *         * `Name` &mdash; **required** &mdash; (`String`) The dimension
+ *           name to be matched.
+ *         * `Value` &mdash; (`String`) The value of the dimension to be
+ *           matched. Specifying a Name without specifying a Value
+ *           returns all values associated with that Name.
  *     * `NextToken` &mdash; (`String`) The token returned by a previous
  *       call to indicate that there is more data available.
  *   @callback callback function(err, data)
@@ -596,13 +602,13 @@ AWS.CloudWatch = inherit({})
  *
  *       * `Metrics` &mdash; (`Array<map>`) A list of metrics used to
  *         generate statistics for an AWS account.
- *         * `Namespace` &mdash; (`String`) The namespace of the metric.
- *         * `MetricName` &mdash; (`String`) The name of the metric.
- *         * `Dimensions` &mdash; (`Array<map>`) A list of dimensions
- *           associated with the metric.
- *           * `Name` &mdash; (`String`) The name of the dimension.
- *           * `Value` &mdash; (`String`) The value representing the
- *             dimension measurement
+ *           * `Namespace` &mdash; (`String`) The namespace of the metric.
+ *           * `MetricName` &mdash; (`String`) The name of the metric.
+ *           * `Dimensions` &mdash; (`Array<map>`) A list of dimensions
+ *             associated with the metric.
+ *               * `Name` &mdash; (`String`) The name of the dimension.
+ *               * `Value` &mdash; (`String`) The value representing the
+ *                 dimension measurement
  *       * `NextToken` &mdash; (`String`) A string that marks the start of
  *         the next batch of returned results.
  *   @return [AWS.Request] a handle to the operation request for
@@ -649,10 +655,10 @@ AWS.CloudWatch = inherit({})
  *       * `Maximum`
  *     * `Dimensions` &mdash; (`Array<map>`) The dimensions for the
  *       alarm's associated metric.
- *       * `Name` &mdash; **required** &mdash; (`String`) The name of the
- *         dimension.
- *       * `Value` &mdash; **required** &mdash; (`String`) The value
- *         representing the dimension measurement
+ *         * `Name` &mdash; **required** &mdash; (`String`) The name of
+ *           the dimension.
+ *         * `Value` &mdash; **required** &mdash; (`String`) The value
+ *           representing the dimension measurement
  *     * `Period` &mdash; **required** &mdash; (`Integer`) The period in
  *       seconds over which the specified statistic is applied.
  *     * `Unit` &mdash; (`String`) The unit for the alarm's associated
@@ -717,62 +723,62 @@ AWS.CloudWatch = inherit({})
  *       namespace for the metric data.
  *     * `MetricData` &mdash; **required** &mdash; (`Array<map>`) A list
  *       of data describing the metric.
- *       * `MetricName` &mdash; **required** &mdash; (`String`) The name
- *         of the metric.
- *       * `Dimensions` &mdash; (`Array<map>`) A list of dimensions
- *         associated with the metric.
- *         * `Name` &mdash; **required** &mdash; (`String`) The name of
- *           the dimension.
- *         * `Value` &mdash; **required** &mdash; (`String`) The value
- *           representing the dimension measurement
- *       * `Timestamp` &mdash; (`Date`) The time stamp used for the
- *         metric. If not specified, the default value is set to the time
- *         the metric data was received.
- *       * `Value` &mdash; (`Float`) The value for the metric. Although
- *         the Value parameter accepts numbers of type Double, Amazon
- *         CloudWatch truncates values with very large exponents. Values
- *         with base-10 exponents greater than 126 (1 x 10^126) are
- *         truncated. Likewise, values with base-10 exponents less than
- *         \-130 (1 x 10^-130) are also truncated.
- *       * `StatisticValues` &mdash; (`map`) A set of statistical values
- *         describing the metric.
- *         * `SampleCount` &mdash; **required** &mdash; (`Float`) The
- *           number of samples used for the statistic set.
- *         * `Sum` &mdash; **required** &mdash; (`Float`) The sum of
- *           values for the sample set.
- *         * `Minimum` &mdash; **required** &mdash; (`Float`) The minimum
- *           value of the sample set.
- *         * `Maximum` &mdash; **required** &mdash; (`Float`) The maximum
- *           value of the sample set.
- *       * `Unit` &mdash; (`String`) The unit of the metric.
- *         Possible values include:
- *         * `Seconds`
- *         * `Microseconds`
- *         * `Milliseconds`
- *         * `Bytes`
- *         * `Kilobytes`
- *         * `Megabytes`
- *         * `Gigabytes`
- *         * `Terabytes`
- *         * `Bits`
- *         * `Kilobits`
- *         * `Megabits`
- *         * `Gigabits`
- *         * `Terabits`
- *         * `Percent`
- *         * `Count`
- *         * `Bytes/Second`
- *         * `Kilobytes/Second`
- *         * `Megabytes/Second`
- *         * `Gigabytes/Second`
- *         * `Terabytes/Second`
- *         * `Bits/Second`
- *         * `Kilobits/Second`
- *         * `Megabits/Second`
- *         * `Gigabits/Second`
- *         * `Terabits/Second`
- *         * `Count/Second`
- *         * `None`
+ *         * `MetricName` &mdash; **required** &mdash; (`String`) The
+ *           name of the metric.
+ *         * `Dimensions` &mdash; (`Array<map>`) A list of dimensions
+ *           associated with the metric.
+ *             * `Name` &mdash; **required** &mdash; (`String`) The name
+ *               of the dimension.
+ *             * `Value` &mdash; **required** &mdash; (`String`) The
+ *               value representing the dimension measurement
+ *         * `Timestamp` &mdash; (`Date`) The time stamp used for the
+ *           metric. If not specified, the default value is set to the
+ *           time the metric data was received.
+ *         * `Value` &mdash; (`Float`) The value for the metric. Although
+ *           the Value parameter accepts numbers of type Double, Amazon
+ *           CloudWatch truncates values with very large exponents.
+ *           Values with base-10 exponents greater than 126 (1 x 10^126)
+ *           are truncated. Likewise, values with base-10 exponents less
+ *           than -130 (1 x 10^-130) are also truncated.
+ *         * `StatisticValues` &mdash; (`map`) A set of statistical
+ *           values describing the metric.
+ *             * `SampleCount` &mdash; **required** &mdash; (`Float`) The
+ *               number of samples used for the statistic set.
+ *             * `Sum` &mdash; **required** &mdash; (`Float`) The sum of
+ *               values for the sample set.
+ *             * `Minimum` &mdash; **required** &mdash; (`Float`) The
+ *               minimum value of the sample set.
+ *             * `Maximum` &mdash; **required** &mdash; (`Float`) The
+ *               maximum value of the sample set.
+ *         * `Unit` &mdash; (`String`) The unit of the metric.
+ *           Possible values include:
+ *           * `Seconds`
+ *           * `Microseconds`
+ *           * `Milliseconds`
+ *           * `Bytes`
+ *           * `Kilobytes`
+ *           * `Megabytes`
+ *           * `Gigabytes`
+ *           * `Terabytes`
+ *           * `Bits`
+ *           * `Kilobits`
+ *           * `Megabits`
+ *           * `Gigabits`
+ *           * `Terabits`
+ *           * `Percent`
+ *           * `Count`
+ *           * `Bytes/Second`
+ *           * `Kilobytes/Second`
+ *           * `Megabytes/Second`
+ *           * `Gigabytes/Second`
+ *           * `Terabytes/Second`
+ *           * `Bits/Second`
+ *           * `Kilobits/Second`
+ *           * `Megabits/Second`
+ *           * `Gigabits/Second`
+ *           * `Terabits/Second`
+ *           * `Count/Second`
+ *           * `None`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}

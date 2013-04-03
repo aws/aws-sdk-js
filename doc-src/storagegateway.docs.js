@@ -512,46 +512,46 @@ AWS.StorageGateway = inherit({})
  *       * `CachediSCSIVolumes` &mdash; (`Array<map>`) An array of
  *         CachediSCSIVolume objects where each object contains metadata
  *         about one cached volume.
- *         * `VolumeARN` &mdash; (`String`) The Amazon Resource Name (ARN)
- *           of the storage volume.
- *         * `VolumeId` &mdash; (`String`) The unique identifier of the
- *           storage volume, e.g. vol-1122AABB.
- *         * `VolumeType` &mdash; (`String`) A value describing the type of
- *           volume.
- *           Possible values include:
- *           * `STORED iSCSI`
- *           * `CACHED iSCSI`
- *         * `VolumeStatus` &mdash; (`String`) A value that indicates the
- *           state of the volume.
- *           Possible values include:
- *           * `CREATING`
- *           * `AVAILABLE`
- *           * `RESTORING`
- *           * `BOOTSTRAPPING`
- *           * `IRRECOVERABLE`
- *           * `PASS THROUGH`
- *           * `RESTORE AND PASS THROUGH`
- *           * `DELETED`
- *           * `WORKING STORAGE NOT CONFIGURED`
- *           * `UPLOAD BUFFER NOT CONFIGURED`
- *         * `VolumeSizeInBytes` &mdash; (`Integer`) The size of the volume
- *           in bytes that was specified in the API_CreateCachediSCSIVolume
- *           operation.
- *         * `VolumeProgress` &mdash; (`Float`) The percentage complete if
- *           the volume is restoring or bootstrapping that represents the
- *           percent of data transferred. This field does not appear in the
- *           response if the stored volume is not restoring or
- *           bootstrapping.
- *         * `SourceSnapshotId` &mdash; (`String`) If the cached volume was
- *           created from a snapshot, this field contains the snapshot ID
- *           used, e.g. snap-1122aabb. Otherwise, this field is not
- *           included.
- *         * `VolumeiSCSIAttributes` &mdash; (`map`)
- *           * `TargetARN` &mdash; (`String`)
- *           * `NetworkInterfaceId` &mdash; (`String`)
- *           * `NetworkInterfacePort` &mdash; (`Integer`)
- *           * `LunNumber` &mdash; (`Integer`)
- *           * `ChapEnabled` &mdash; (`Boolean`)
+ *           * `VolumeARN` &mdash; (`String`) The Amazon Resource Name
+ *             (ARN) of the storage volume.
+ *           * `VolumeId` &mdash; (`String`) The unique identifier of the
+ *             storage volume, e.g. vol-1122AABB.
+ *           * `VolumeType` &mdash; (`String`) A value describing the type
+ *             of volume.
+ *             Possible values include:
+ *             * `STORED iSCSI`
+ *             * `CACHED iSCSI`
+ *           * `VolumeStatus` &mdash; (`String`) A value that indicates the
+ *             state of the volume.
+ *             Possible values include:
+ *             * `CREATING`
+ *             * `AVAILABLE`
+ *             * `RESTORING`
+ *             * `BOOTSTRAPPING`
+ *             * `IRRECOVERABLE`
+ *             * `PASS THROUGH`
+ *             * `RESTORE AND PASS THROUGH`
+ *             * `DELETED`
+ *             * `WORKING STORAGE NOT CONFIGURED`
+ *             * `UPLOAD BUFFER NOT CONFIGURED`
+ *           * `VolumeSizeInBytes` &mdash; (`Integer`) The size of the
+ *             volume in bytes that was specified in the
+ *             API_CreateCachediSCSIVolume operation.
+ *           * `VolumeProgress` &mdash; (`Float`) The percentage complete
+ *             if the volume is restoring or bootstrapping that represents
+ *             the percent of data transferred. This field does not appear
+ *             in the response if the stored volume is not restoring or
+ *             bootstrapping.
+ *           * `SourceSnapshotId` &mdash; (`String`) If the cached volume
+ *             was created from a snapshot, this field contains the
+ *             snapshot ID used, e.g. snap-1122aabb. Otherwise, this field
+ *             is not included.
+ *           * `VolumeiSCSIAttributes` &mdash; (`map`)
+ *               * `TargetARN` &mdash; (`String`)
+ *               * `NetworkInterfaceId` &mdash; (`String`)
+ *               * `NetworkInterfacePort` &mdash; (`Integer`)
+ *               * `LunNumber` &mdash; (`Integer`)
+ *               * `ChapEnabled` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -570,10 +570,10 @@ AWS.StorageGateway = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `ChapCredentials` &mdash; (`Array<map>`)
- *         * `TargetARN` &mdash; (`String`)
- *         * `SecretToAuthenticateInitiator` &mdash; (`String`)
- *         * `InitiatorName` &mdash; (`String`)
- *         * `SecretToAuthenticateTarget` &mdash; (`String`)
+ *           * `TargetARN` &mdash; (`String`)
+ *           * `SecretToAuthenticateInitiator` &mdash; (`String`)
+ *           * `InitiatorName` &mdash; (`String`)
+ *           * `SecretToAuthenticateTarget` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -635,9 +635,9 @@ AWS.StorageGateway = inherit({})
  *       * `GatewayNetworkInterfaces` &mdash; (`Array<map>`) A
  *         NetworkInterface array that contains descriptions of the gateway
  *         network interfaces.
- *         * `Ipv4Address` &mdash; (`String`)
- *         * `MacAddress` &mdash; (`String`)
- *         * `Ipv6Address` &mdash; (`String`)
+ *           * `Ipv4Address` &mdash; (`String`)
+ *           * `MacAddress` &mdash; (`String`)
+ *           * `Ipv6Address` &mdash; (`String`)
  *       * `GatewayType` &mdash; (`String`) TBD
  *         Possible values include:
  *         * `STORED`
@@ -772,35 +772,35 @@ AWS.StorageGateway = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `StorediSCSIVolumes` &mdash; (`Array<map>`)
- *         * `VolumeARN` &mdash; (`String`)
- *         * `VolumeId` &mdash; (`String`)
- *         * `VolumeType` &mdash; (`String`)
- *           Possible values include:
- *           * `STORED iSCSI`
- *           * `CACHED iSCSI`
- *         * `VolumeStatus` &mdash; (`String`)
- *           Possible values include:
- *           * `CREATING`
- *           * `AVAILABLE`
- *           * `RESTORING`
- *           * `BOOTSTRAPPING`
- *           * `IRRECOVERABLE`
- *           * `PASS THROUGH`
- *           * `RESTORE AND PASS THROUGH`
- *           * `DELETED`
- *           * `WORKING STORAGE NOT CONFIGURED`
- *           * `UPLOAD BUFFER NOT CONFIGURED`
- *         * `VolumeSizeInBytes` &mdash; (`Integer`)
- *         * `VolumeProgress` &mdash; (`Float`)
- *         * `VolumeDiskId` &mdash; (`String`)
- *         * `SourceSnapshotId` &mdash; (`String`)
- *         * `PreservedExistingData` &mdash; (`Boolean`)
- *         * `VolumeiSCSIAttributes` &mdash; (`map`)
- *           * `TargetARN` &mdash; (`String`)
- *           * `NetworkInterfaceId` &mdash; (`String`)
- *           * `NetworkInterfacePort` &mdash; (`Integer`)
- *           * `LunNumber` &mdash; (`Integer`)
- *           * `ChapEnabled` &mdash; (`Boolean`)
+ *           * `VolumeARN` &mdash; (`String`)
+ *           * `VolumeId` &mdash; (`String`)
+ *           * `VolumeType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `STORED iSCSI`
+ *             * `CACHED iSCSI`
+ *           * `VolumeStatus` &mdash; (`String`)
+ *             Possible values include:
+ *             * `CREATING`
+ *             * `AVAILABLE`
+ *             * `RESTORING`
+ *             * `BOOTSTRAPPING`
+ *             * `IRRECOVERABLE`
+ *             * `PASS THROUGH`
+ *             * `RESTORE AND PASS THROUGH`
+ *             * `DELETED`
+ *             * `WORKING STORAGE NOT CONFIGURED`
+ *             * `UPLOAD BUFFER NOT CONFIGURED`
+ *           * `VolumeSizeInBytes` &mdash; (`Integer`)
+ *           * `VolumeProgress` &mdash; (`Float`)
+ *           * `VolumeDiskId` &mdash; (`String`)
+ *           * `SourceSnapshotId` &mdash; (`String`)
+ *           * `PreservedExistingData` &mdash; (`Boolean`)
+ *           * `VolumeiSCSIAttributes` &mdash; (`map`)
+ *               * `TargetARN` &mdash; (`String`)
+ *               * `NetworkInterfaceId` &mdash; (`String`)
+ *               * `NetworkInterfacePort` &mdash; (`Integer`)
+ *               * `LunNumber` &mdash; (`Integer`)
+ *               * `ChapEnabled` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -876,7 +876,7 @@ AWS.StorageGateway = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Gateways` &mdash; (`Array<map>`)
- *         * `GatewayARN` &mdash; (`String`)
+ *           * `GatewayARN` &mdash; (`String`)
  *       * `Marker` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -897,18 +897,18 @@ AWS.StorageGateway = inherit({})
  *
  *       * `GatewayARN` &mdash; (`String`)
  *       * `Disks` &mdash; (`Array<map>`)
- *         * `DiskId` &mdash; (`String`)
- *         * `DiskPath` &mdash; (`String`)
- *         * `DiskNode` &mdash; (`String`)
- *         * `DiskSizeInBytes` &mdash; (`Integer`)
- *         * `DiskAllocationType` &mdash; (`String`)
- *           Possible values include:
- *           * `AVAILABLE`
- *           * `CACHE STORAGE`
- *           * `STORED iSCSI VOLUME`
- *           * `UPLOAD BUFFER`
- *           * `WORKING STORAGE`
- *         * `DiskAllocationResource` &mdash; (`String`)
+ *           * `DiskId` &mdash; (`String`)
+ *           * `DiskPath` &mdash; (`String`)
+ *           * `DiskNode` &mdash; (`String`)
+ *           * `DiskSizeInBytes` &mdash; (`Integer`)
+ *           * `DiskAllocationType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `AVAILABLE`
+ *             * `CACHE STORAGE`
+ *             * `STORED iSCSI VOLUME`
+ *             * `UPLOAD BUFFER`
+ *             * `WORKING STORAGE`
+ *           * `DiskAllocationResource` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -936,15 +936,15 @@ AWS.StorageGateway = inherit({})
  *         VolumeRecoveryPointInfo objects, where each object describes a
  *         recovery point. If no recovery points are defined for the
  *         volume, then VolumeRecoveryPointInfos is an empty array "[]"
- *         * `VolumeARN` &mdash; (`String`) The Amazon Resource Name (ARN)
- *           of the volume associated with the recovery point.
- *         * `VolumeSizeInBytes` &mdash; (`Integer`) The size, in bytes, of
- *           the volume to which the recovery point is associated.
- *         * `VolumeUsageInBytes` &mdash; (`Integer`) The size, in bytes,
- *           of the volume in use at the time of the recovery point.
- *         * `VolumeRecoveryPointTime` &mdash; (`String`) The time of the
- *           recovery point. The format of the time is in the ISO8601
- *           extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
+ *           * `VolumeARN` &mdash; (`String`) The Amazon Resource Name
+ *             (ARN) of the volume associated with the recovery point.
+ *           * `VolumeSizeInBytes` &mdash; (`Integer`) The size, in bytes,
+ *             of the volume to which the recovery point is associated.
+ *           * `VolumeUsageInBytes` &mdash; (`Integer`) The size, in bytes,
+ *             of the volume in use at the time of the recovery point.
+ *           * `VolumeRecoveryPointTime` &mdash; (`String`) The time of the
+ *             recovery point. The format of the time is in the ISO8601
+ *             extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -967,11 +967,11 @@ AWS.StorageGateway = inherit({})
  *       * `GatewayARN` &mdash; (`String`)
  *       * `Marker` &mdash; (`String`)
  *       * `VolumeInfos` &mdash; (`Array<map>`)
- *         * `VolumeARN` &mdash; (`String`)
- *         * `VolumeType` &mdash; (`String`)
- *           Possible values include:
- *           * `STORED iSCSI`
- *           * `CACHED iSCSI`
+ *           * `VolumeARN` &mdash; (`String`)
+ *           * `VolumeType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `STORED iSCSI`
+ *             * `CACHED iSCSI`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *

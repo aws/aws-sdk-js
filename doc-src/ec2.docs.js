@@ -279,8 +279,8 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `VpcAttachement` &mdash; (`map`)
- *         * `VpcId` &mdash; (`String`)
- *         * `State` &mdash; (`String`)
+ *           * `VpcId` &mdash; (`String`)
+ *           * `State` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -300,26 +300,28 @@ AWS.EC2 = inherit({})
  *       permissions through IP permissions is the preferred way of
  *       authorizing permissions since it offers more flexibility and
  *       control.
- *       * `IpProtocol` &mdash; (`String`) The IP protocol of this
- *         permission. Valid protocol values: tcp, udp, icmp
- *       * `FromPort` &mdash; (`Integer`) Start of port range for the TCP
- *         and UDP protocols, or an ICMP type number. An ICMP type number
- *         of -1 indicates a wildcard (i.e., any ICMP type number).
- *       * `ToPort` &mdash; (`Integer`) End of port range for the TCP and
- *         UDP protocols, or an ICMP code. An ICMP code of -1 indicates a
- *         wildcard (i.e., any ICMP code).
- *       * `UserIdGroupPairs` &mdash; (`Array<map>`) The list of AWS user
- *         IDs and groups included in this permission.
- *         * `UserId` &mdash; (`String`) The AWS user ID of an account.
- *         * `GroupName` &mdash; (`String`) Name of the security group in
- *           the specified AWS account. Cannot be used when specifying a
- *           CIDR IP address range.
- *         * `GroupId` &mdash; (`String`) ID of the security group in the
- *           specified AWS account. Cannot be used when specifying a CIDR
- *           IP address range.
- *       * `IpRanges` &mdash; (`Array<map>`) The list of CIDR IP ranges
- *         included in this permission.
- *         * `CidrIp` &mdash; (`String`) The list of CIDR IP ranges.
+ *         * `IpProtocol` &mdash; (`String`) The IP protocol of this
+ *           permission. Valid protocol values: tcp, udp, icmp
+ *         * `FromPort` &mdash; (`Integer`) Start of port range for the
+ *           TCP and UDP protocols, or an ICMP type number. An ICMP type
+ *           number of -1 indicates a wildcard (i.e., any ICMP type
+ *           number).
+ *         * `ToPort` &mdash; (`Integer`) End of port range for the TCP
+ *           and UDP protocols, or an ICMP code. An ICMP code of -1
+ *           indicates a wildcard (i.e., any ICMP code).
+ *         * `UserIdGroupPairs` &mdash; (`Array<map>`) The list of AWS
+ *           user IDs and groups included in this permission.
+ *             * `UserId` &mdash; (`String`) The AWS user ID of an
+ *               account.
+ *             * `GroupName` &mdash; (`String`) Name of the security
+ *               group in the specified AWS account. Cannot be used when
+ *               specifying a CIDR IP address range.
+ *             * `GroupId` &mdash; (`String`) ID of the security group in
+ *               the specified AWS account. Cannot be used when
+ *               specifying a CIDR IP address range.
+ *         * `IpRanges` &mdash; (`Array<map>`) The list of CIDR IP ranges
+ *           included in this permission.
+ *             * `CidrIp` &mdash; (`String`) The list of CIDR IP ranges.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -353,26 +355,28 @@ AWS.EC2 = inherit({})
  *       permissions through IP permissions is the preferred way of
  *       authorizing permissions since it offers more flexibility and
  *       control.
- *       * `IpProtocol` &mdash; (`String`) The IP protocol of this
- *         permission. Valid protocol values: tcp, udp, icmp
- *       * `FromPort` &mdash; (`Integer`) Start of port range for the TCP
- *         and UDP protocols, or an ICMP type number. An ICMP type number
- *         of -1 indicates a wildcard (i.e., any ICMP type number).
- *       * `ToPort` &mdash; (`Integer`) End of port range for the TCP and
- *         UDP protocols, or an ICMP code. An ICMP code of -1 indicates a
- *         wildcard (i.e., any ICMP code).
- *       * `UserIdGroupPairs` &mdash; (`Array<map>`) The list of AWS user
- *         IDs and groups included in this permission.
- *         * `UserId` &mdash; (`String`) The AWS user ID of an account.
- *         * `GroupName` &mdash; (`String`) Name of the security group in
- *           the specified AWS account. Cannot be used when specifying a
- *           CIDR IP address range.
- *         * `GroupId` &mdash; (`String`) ID of the security group in the
- *           specified AWS account. Cannot be used when specifying a CIDR
- *           IP address range.
- *       * `IpRanges` &mdash; (`Array<map>`) The list of CIDR IP ranges
- *         included in this permission.
- *         * `CidrIp` &mdash; (`String`) The list of CIDR IP ranges.
+ *         * `IpProtocol` &mdash; (`String`) The IP protocol of this
+ *           permission. Valid protocol values: tcp, udp, icmp
+ *         * `FromPort` &mdash; (`Integer`) Start of port range for the
+ *           TCP and UDP protocols, or an ICMP type number. An ICMP type
+ *           number of -1 indicates a wildcard (i.e., any ICMP type
+ *           number).
+ *         * `ToPort` &mdash; (`Integer`) End of port range for the TCP
+ *           and UDP protocols, or an ICMP code. An ICMP code of -1
+ *           indicates a wildcard (i.e., any ICMP code).
+ *         * `UserIdGroupPairs` &mdash; (`Array<map>`) The list of AWS
+ *           user IDs and groups included in this permission.
+ *             * `UserId` &mdash; (`String`) The AWS user ID of an
+ *               account.
+ *             * `GroupName` &mdash; (`String`) Name of the security
+ *               group in the specified AWS account. Cannot be used when
+ *               specifying a CIDR IP address range.
+ *             * `GroupId` &mdash; (`String`) ID of the security group in
+ *               the specified AWS account. Cannot be used when
+ *               specifying a CIDR IP address range.
+ *         * `IpRanges` &mdash; (`Array<map>`) The list of CIDR IP ranges
+ *           included in this permission.
+ *             * `CidrIp` &mdash; (`String`) The list of CIDR IP ranges.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -390,22 +394,22 @@ AWS.EC2 = inherit({})
  *     * `InstanceId` &mdash; **required** &mdash; (`String`) The ID of
  *       the instance to bundle.
  *     * `Storage` &mdash; **required** &mdash; (`map`)
- *       * `S3` &mdash; (`map`) The details of S3 storage for bundling a
- *         Windows instance.
- *         * `Bucket` &mdash; (`String`) The bucket in which to store the
- *           AMI. You can specify a bucket that you already own or a new
- *           bucket that Amazon EC2 creates on your behalf. If you
- *           specify a bucket that belongs to someone else, Amazon EC2
- *           returns an error.
- *         * `Prefix` &mdash; (`String`) The prefix to use when storing
- *           the AMI in S3.
- *         * `AWSAccessKeyId` &mdash; (`String`) The Access Key ID of the
- *           owner of the Amazon S3 bucket.
- *         * `UploadPolicy` &mdash; (`String`) A Base64-encoded Amazon S3
- *           upload policy that gives Amazon EC2 permission to upload
- *           items into Amazon S3 on the user's behalf.
- *         * `UploadPolicySignature` &mdash; (`String`) The signature of
- *           the Base64 encoded JSON document.
+ *         * `S3` &mdash; (`map`) The details of S3 storage for bundling
+ *           a Windows instance.
+ *             * `Bucket` &mdash; (`String`) The bucket in which to store
+ *               the AMI. You can specify a bucket that you already own
+ *               or a new bucket that Amazon EC2 creates on your behalf.
+ *               If you specify a bucket that belongs to someone else,
+ *               Amazon EC2 returns an error.
+ *             * `Prefix` &mdash; (`String`) The prefix to use when
+ *               storing the AMI in S3.
+ *             * `AWSAccessKeyId` &mdash; (`String`) The Access Key ID of
+ *               the owner of the Amazon S3 bucket.
+ *             * `UploadPolicy` &mdash; (`String`) A Base64-encoded
+ *               Amazon S3 upload policy that gives Amazon EC2 permission
+ *               to upload items into Amazon S3 on the user's behalf.
+ *             * `UploadPolicySignature` &mdash; (`String`) The signature
+ *               of the Base64 encoded JSON document.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -417,36 +421,38 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `BundleTask` &mdash; (`map`)
- *         * `InstanceId` &mdash; (`String`) Instance associated with this
- *           bundle task.
- *         * `BundleId` &mdash; (`String`) Unique identifier for this task.
- *         * `State` &mdash; (`String`) The state of this task.
- *         * `StartTime` &mdash; (`Date`) The time this task started.
- *         * `UpdateTime` &mdash; (`Date`) The time of the most recent
- *           update for the task.
- *         * `Storage` &mdash; (`map`) Amazon S3 storage locations.
- *           * `S3` &mdash; (`map`) The details of S3 storage for bundling
- *             a Windows instance.
- *             * `Bucket` &mdash; (`String`) The bucket in which to store
- *               the AMI. You can specify a bucket that you already own or
- *               a new bucket that Amazon EC2 creates on your behalf. If
- *               you specify a bucket that belongs to someone else, Amazon
- *               EC2 returns an error.
- *             * `Prefix` &mdash; (`String`) The prefix to use when storing
- *               the AMI in S3.
- *             * `AWSAccessKeyId` &mdash; (`String`) The Access Key ID of
- *               the owner of the Amazon S3 bucket.
- *             * `UploadPolicy` &mdash; (`String`) A Base64-encoded Amazon
- *               S3 upload policy that gives Amazon EC2 permission to
- *               upload items into Amazon S3 on the user's behalf.
- *             * `UploadPolicySignature` &mdash; (`String`) The signature
- *               of the Base64 encoded JSON document.
- *         * `Progress` &mdash; (`String`) The level of task completion, in
- *           percent (e.g., 20%).
- *         * `BundleTaskError` &mdash; (`map`) If the task fails, a
- *           description of the error.
- *           * `Code` &mdash; (`String`) Error code.
- *           * `Message` &mdash; (`String`) Error message.
+ *           * `InstanceId` &mdash; (`String`) Instance associated with
+ *             this bundle task.
+ *           * `BundleId` &mdash; (`String`) Unique identifier for this
+ *             task.
+ *           * `State` &mdash; (`String`) The state of this task.
+ *           * `StartTime` &mdash; (`Date`) The time this task started.
+ *           * `UpdateTime` &mdash; (`Date`) The time of the most recent
+ *             update for the task.
+ *           * `Storage` &mdash; (`map`) Amazon S3 storage locations.
+ *               * `S3` &mdash; (`map`) The details of S3 storage for
+ *                 bundling a Windows instance.
+ *                   * `Bucket` &mdash; (`String`) The bucket in which to
+ *                     store the AMI. You can specify a bucket that you
+ *                     already own or a new bucket that Amazon EC2 creates
+ *                     on your behalf. If you specify a bucket that belongs
+ *                     to someone else, Amazon EC2 returns an error.
+ *                   * `Prefix` &mdash; (`String`) The prefix to use when
+ *                     storing the AMI in S3.
+ *                   * `AWSAccessKeyId` &mdash; (`String`) The Access Key
+ *                     ID of the owner of the Amazon S3 bucket.
+ *                   * `UploadPolicy` &mdash; (`String`) A Base64-encoded
+ *                     Amazon S3 upload policy that gives Amazon EC2
+ *                     permission to upload items into Amazon S3 on the
+ *                     user's behalf.
+ *                   * `UploadPolicySignature` &mdash; (`String`) The
+ *                     signature of the Base64 encoded JSON document.
+ *           * `Progress` &mdash; (`String`) The level of task completion,
+ *             in percent (e.g., 20%).
+ *           * `BundleTaskError` &mdash; (`map`) If the task fails, a
+ *             description of the error.
+ *               * `Code` &mdash; (`String`) Error code.
+ *               * `Message` &mdash; (`String`) Error message.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -466,36 +472,38 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `BundleTask` &mdash; (`map`) The canceled bundle task.
- *         * `InstanceId` &mdash; (`String`) Instance associated with this
- *           bundle task.
- *         * `BundleId` &mdash; (`String`) Unique identifier for this task.
- *         * `State` &mdash; (`String`) The state of this task.
- *         * `StartTime` &mdash; (`Date`) The time this task started.
- *         * `UpdateTime` &mdash; (`Date`) The time of the most recent
- *           update for the task.
- *         * `Storage` &mdash; (`map`) Amazon S3 storage locations.
- *           * `S3` &mdash; (`map`) The details of S3 storage for bundling
- *             a Windows instance.
- *             * `Bucket` &mdash; (`String`) The bucket in which to store
- *               the AMI. You can specify a bucket that you already own or
- *               a new bucket that Amazon EC2 creates on your behalf. If
- *               you specify a bucket that belongs to someone else, Amazon
- *               EC2 returns an error.
- *             * `Prefix` &mdash; (`String`) The prefix to use when storing
- *               the AMI in S3.
- *             * `AWSAccessKeyId` &mdash; (`String`) The Access Key ID of
- *               the owner of the Amazon S3 bucket.
- *             * `UploadPolicy` &mdash; (`String`) A Base64-encoded Amazon
- *               S3 upload policy that gives Amazon EC2 permission to
- *               upload items into Amazon S3 on the user's behalf.
- *             * `UploadPolicySignature` &mdash; (`String`) The signature
- *               of the Base64 encoded JSON document.
- *         * `Progress` &mdash; (`String`) The level of task completion, in
- *           percent (e.g., 20%).
- *         * `BundleTaskError` &mdash; (`map`) If the task fails, a
- *           description of the error.
- *           * `Code` &mdash; (`String`) Error code.
- *           * `Message` &mdash; (`String`) Error message.
+ *           * `InstanceId` &mdash; (`String`) Instance associated with
+ *             this bundle task.
+ *           * `BundleId` &mdash; (`String`) Unique identifier for this
+ *             task.
+ *           * `State` &mdash; (`String`) The state of this task.
+ *           * `StartTime` &mdash; (`Date`) The time this task started.
+ *           * `UpdateTime` &mdash; (`Date`) The time of the most recent
+ *             update for the task.
+ *           * `Storage` &mdash; (`map`) Amazon S3 storage locations.
+ *               * `S3` &mdash; (`map`) The details of S3 storage for
+ *                 bundling a Windows instance.
+ *                   * `Bucket` &mdash; (`String`) The bucket in which to
+ *                     store the AMI. You can specify a bucket that you
+ *                     already own or a new bucket that Amazon EC2 creates
+ *                     on your behalf. If you specify a bucket that belongs
+ *                     to someone else, Amazon EC2 returns an error.
+ *                   * `Prefix` &mdash; (`String`) The prefix to use when
+ *                     storing the AMI in S3.
+ *                   * `AWSAccessKeyId` &mdash; (`String`) The Access Key
+ *                     ID of the owner of the Amazon S3 bucket.
+ *                   * `UploadPolicy` &mdash; (`String`) A Base64-encoded
+ *                     Amazon S3 upload policy that gives Amazon EC2
+ *                     permission to upload items into Amazon S3 on the
+ *                     user's behalf.
+ *                   * `UploadPolicySignature` &mdash; (`String`) The
+ *                     signature of the Base64 encoded JSON document.
+ *           * `Progress` &mdash; (`String`) The level of task completion,
+ *             in percent (e.g., 20%).
+ *           * `BundleTaskError` &mdash; (`map`) If the task fails, a
+ *             description of the error.
+ *               * `Code` &mdash; (`String`) Error code.
+ *               * `Message` &mdash; (`String`) Error message.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -546,24 +554,24 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `ReservedInstancesListings` &mdash; (`Array<map>`)
- *         * `ReservedInstancesListingId` &mdash; (`String`)
- *         * `ReservedInstancesId` &mdash; (`String`)
- *         * `CreateDate` &mdash; (`Date`)
- *         * `UpdateDate` &mdash; (`Date`)
- *         * `Status` &mdash; (`String`)
- *         * `StatusMessage` &mdash; (`String`)
- *         * `InstanceCounts` &mdash; (`Array<map>`)
- *           * `State` &mdash; (`String`)
- *           * `InstanceCount` &mdash; (`Integer`)
- *         * `PriceSchedules` &mdash; (`Array<map>`)
- *           * `Term` &mdash; (`Integer`)
- *           * `Price` &mdash; (`Float`)
- *           * `CurrencyCode` &mdash; (`String`)
- *           * `Active` &mdash; (`Boolean`)
- *         * `Tags` &mdash; (`Array<map>`)
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *         * `ClientToken` &mdash; (`String`)
+ *           * `ReservedInstancesListingId` &mdash; (`String`)
+ *           * `ReservedInstancesId` &mdash; (`String`)
+ *           * `CreateDate` &mdash; (`Date`)
+ *           * `UpdateDate` &mdash; (`Date`)
+ *           * `Status` &mdash; (`String`)
+ *           * `StatusMessage` &mdash; (`String`)
+ *           * `InstanceCounts` &mdash; (`Array<map>`)
+ *               * `State` &mdash; (`String`)
+ *               * `InstanceCount` &mdash; (`Integer`)
+ *           * `PriceSchedules` &mdash; (`Array<map>`)
+ *               * `Term` &mdash; (`Integer`)
+ *               * `Price` &mdash; (`Float`)
+ *               * `CurrencyCode` &mdash; (`String`)
+ *               * `Active` &mdash; (`Boolean`)
+ *           * `Tags` &mdash; (`Array<map>`)
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
+ *           * `ClientToken` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -583,8 +591,8 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `CancelledSpotInstanceRequests` &mdash; (`Array<map>`)
- *         * `SpotInstanceRequestId` &mdash; (`String`)
- *         * `State` &mdash; (`String`)
+ *           * `SpotInstanceRequestId` &mdash; (`String`)
+ *           * `State` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -675,21 +683,23 @@ AWS.EC2 = inherit({})
  *
  *       * `CustomerGateway` &mdash; (`map`) Information about the customer
  *         gateway.
- *         * `CustomerGatewayId` &mdash; (`String`) Specifies the ID of the
- *           customer gateway.
- *         * `State` &mdash; (`String`) Describes the current state of the
- *           customer gateway. Valid values are pending, available,
- *           deleting, and deleted.
- *         * `Type` &mdash; (`String`) Specifies the type of VPN connection
- *           the customer gateway supports.
- *         * `IpAddress` &mdash; (`String`) Contains the Internet-routable
- *           IP address of the customer gateway's outside interface.
- *         * `BgpAsn` &mdash; (`String`) Specifies the customer gateway's
- *           Border Gateway Protocol (BGP) Autonomous System Number (ASN).
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the
- *           CustomerGateway.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
+ *           * `CustomerGatewayId` &mdash; (`String`) Specifies the ID of
+ *             the customer gateway.
+ *           * `State` &mdash; (`String`) Describes the current state of
+ *             the customer gateway. Valid values are pending, available,
+ *             deleting, and deleted.
+ *           * `Type` &mdash; (`String`) Specifies the type of VPN
+ *             connection the customer gateway supports.
+ *           * `IpAddress` &mdash; (`String`) Contains the
+ *             Internet-routable IP address of the customer gateway's
+ *             outside interface.
+ *           * `BgpAsn` &mdash; (`String`) Specifies the customer gateway's
+ *             Border Gateway Protocol (BGP) Autonomous System Number
+ *             (ASN).
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the
+ *             CustomerGateway.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -698,9 +708,9 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `DhcpConfigurations` &mdash; **required** &mdash; (`Array<map>`)
  *       A set of one or more DHCP configurations.
- *       * `Key` &mdash; (`String`) Contains the name of a DHCP option.
- *       * `Values` &mdash; (`Array<String>`) Contains a set of values
- *         for a DHCP option.
+ *         * `Key` &mdash; (`String`) Contains the name of a DHCP option.
+ *         * `Values` &mdash; (`Array<String>`) Contains a set of values
+ *           for a DHCP option.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -712,17 +722,18 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `DhcpOptions` &mdash; (`map`) A set of one or more DHCP options.
- *         * `DhcpOptionsId` &mdash; (`String`) Specifies the ID of the set
- *           of DHCP options.
- *         * `DhcpConfigurations` &mdash; (`Array<map>`) Contains
- *           information about the set of DHCP options.
- *           * `Key` &mdash; (`String`) Contains the name of a DHCP option.
- *           * `Values` &mdash; (`Array<String>`) Contains a set of values
- *             for a DHCP option.
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the
- *           DhcpOptions.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
+ *           * `DhcpOptionsId` &mdash; (`String`) Specifies the ID of the
+ *             set of DHCP options.
+ *           * `DhcpConfigurations` &mdash; (`Array<map>`) Contains
+ *             information about the set of DHCP options.
+ *               * `Key` &mdash; (`String`) Contains the name of a DHCP
+ *                 option.
+ *               * `Values` &mdash; (`Array<String>`) Contains a set of
+ *                 values for a DHCP option.
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the
+ *             DhcpOptions.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -742,26 +753,27 @@ AWS.EC2 = inherit({})
  *       instance before creating the image. When this option is used,
  *       file system integrity on the created image cannot be guaranteed.
  *     * `BlockDeviceMappings` &mdash; (`Array<map>`)
- *       * `VirtualName` &mdash; (`String`) Specifies the virtual device
- *         name.
- *       * `DeviceName` &mdash; (`String`) Specifies the device name
- *         (e.g., /dev/sdh).
- *       * `Ebs` &mdash; (`map`) Specifies parameters used to
- *         automatically setup Amazon EBS volumes when the instance is
- *         launched.
- *         * `SnapshotId` &mdash; (`String`) The ID of the snapshot from
- *           which the volume will be created.
- *         * `VolumeSize` &mdash; (`Integer`) The size of the volume, in
- *           gigabytes.
- *         * `DeleteOnTermination` &mdash; (`Boolean`) Specifies whether
- *           the Amazon EBS volume is deleted on instance termination.
- *         * `VolumeType` &mdash; (`String`)
- *           Possible values include:
- *           * `standard`
- *           * `io1`
- *         * `Iops` &mdash; (`Integer`)
- *       * `NoDevice` &mdash; (`String`) Specifies the device name to
- *         suppress during instance launch.
+ *         * `VirtualName` &mdash; (`String`) Specifies the virtual
+ *           device name.
+ *         * `DeviceName` &mdash; (`String`) Specifies the device name
+ *           (e.g., /dev/sdh).
+ *         * `Ebs` &mdash; (`map`) Specifies parameters used to
+ *           automatically setup Amazon EBS volumes when the instance is
+ *           launched.
+ *             * `SnapshotId` &mdash; (`String`) The ID of the snapshot
+ *               from which the volume will be created.
+ *             * `VolumeSize` &mdash; (`Integer`) The size of the volume,
+ *               in gigabytes.
+ *             * `DeleteOnTermination` &mdash; (`Boolean`) Specifies
+ *               whether the Amazon EBS volume is deleted on instance
+ *               termination.
+ *             * `VolumeType` &mdash; (`String`)
+ *               Possible values include:
+ *               * `standard`
+ *               * `io1`
+ *             * `Iops` &mdash; (`Integer`)
+ *         * `NoDevice` &mdash; (`String`) Specifies the device name to
+ *           suppress during instance launch.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -786,15 +798,15 @@ AWS.EC2 = inherit({})
  *       * `citrix`
  *       * `vmware`
  *     * `ExportToS3Task` &mdash; (`map`)
- *       * `DiskImageFormat` &mdash; (`String`)
- *         Possible values include:
- *         * `vmdk`
- *         * `vhd`
- *       * `ContainerFormat` &mdash; (`String`)
- *         Possible values include:
- *         * `ova`
- *       * `S3Bucket` &mdash; (`String`)
- *       * `S3Prefix` &mdash; (`String`)
+ *         * `DiskImageFormat` &mdash; (`String`)
+ *           Possible values include:
+ *           * `vmdk`
+ *           * `vhd`
+ *         * `ContainerFormat` &mdash; (`String`)
+ *           Possible values include:
+ *           * `ova`
+ *         * `S3Bucket` &mdash; (`String`)
+ *         * `S3Prefix` &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -806,26 +818,26 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `ExportTask` &mdash; (`map`)
- *         * `ExportTaskId` &mdash; (`String`)
- *         * `Description` &mdash; (`String`)
- *         * `State` &mdash; (`String`)
- *         * `StatusMessage` &mdash; (`String`)
- *         * `InstanceExportDetails` &mdash; (`map`)
- *           * `InstanceId` &mdash; (`String`)
- *           * `TargetEnvironment` &mdash; (`String`)
- *             Possible values include:
- *             * `citrix`
- *             * `vmware`
- *         * `ExportToS3Task` &mdash; (`map`)
- *           * `DiskImageFormat` &mdash; (`String`)
- *             Possible values include:
- *             * `vmdk`
- *             * `vhd`
- *           * `ContainerFormat` &mdash; (`String`)
- *             Possible values include:
- *             * `ova`
- *           * `S3Bucket` &mdash; (`String`)
- *           * `S3Key` &mdash; (`String`)
+ *           * `ExportTaskId` &mdash; (`String`)
+ *           * `Description` &mdash; (`String`)
+ *           * `State` &mdash; (`String`)
+ *           * `StatusMessage` &mdash; (`String`)
+ *           * `InstanceExportDetails` &mdash; (`map`)
+ *               * `InstanceId` &mdash; (`String`)
+ *               * `TargetEnvironment` &mdash; (`String`)
+ *                 Possible values include:
+ *                 * `citrix`
+ *                 * `vmware`
+ *           * `ExportToS3Task` &mdash; (`map`)
+ *               * `DiskImageFormat` &mdash; (`String`)
+ *                 Possible values include:
+ *                 * `vmdk`
+ *                 * `vhd`
+ *               * `ContainerFormat` &mdash; (`String`)
+ *                 Possible values include:
+ *                 * `ova`
+ *               * `S3Bucket` &mdash; (`String`)
+ *               * `S3Key` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -843,13 +855,13 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `InternetGateway` &mdash; (`map`)
- *         * `InternetGatewayId` &mdash; (`String`)
- *         * `Attachments` &mdash; (`Array<map>`)
- *           * `VpcId` &mdash; (`String`)
- *           * `State` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<map>`)
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
+ *           * `InternetGatewayId` &mdash; (`String`)
+ *           * `Attachments` &mdash; (`Array<map>`)
+ *               * `VpcId` &mdash; (`String`)
+ *               * `State` &mdash; (`String`)
+ *           * `Tags` &mdash; (`Array<map>`)
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -869,11 +881,11 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `KeyPair` &mdash; (`map`) The newly created EC2 key pair.
- *         * `KeyName` &mdash; (`String`) The name of the key pair.
- *         * `KeyFingerprint` &mdash; (`String`) The SHA-1 digest of the
- *           DER encoded private key.
- *         * `KeyMaterial` &mdash; (`String`) The unencrypted PEM encoded
- *           RSA private key.
+ *           * `KeyName` &mdash; (`String`) The name of the key pair.
+ *           * `KeyFingerprint` &mdash; (`String`) The SHA-1 digest of the
+ *             DER encoded private key.
+ *           * `KeyMaterial` &mdash; (`String`) The unencrypted PEM encoded
+ *             RSA private key.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -893,37 +905,40 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `NetworkAcl` &mdash; (`map`)
- *         * `NetworkAclId` &mdash; (`String`)
- *         * `VpcId` &mdash; (`String`)
- *         * `IsDefault` &mdash; (`Boolean`)
- *         * `Entries` &mdash; (`Array<map>`)
- *           * `RuleNumber` &mdash; (`Integer`)
- *           * `Protocol` &mdash; (`String`)
- *           * `RuleAction` &mdash; (`String`)
- *             Possible values include:
- *             * `allow`
- *             * `deny`
- *           * `Egress` &mdash; (`Boolean`)
- *           * `CidrBlock` &mdash; (`String`)
- *           * `IcmpTypeCode` &mdash; (`map`)
- *             * `Type` &mdash; (`Integer`) For the ICMP protocol, the ICMP
- *               type. A value of -1 is a wildcard meaning all types.
- *               Required if specifying icmp for the protocol.
- *             * `Code` &mdash; (`Integer`) For the ICMP protocol, the ICMP
- *               code. A value of -1 is a wildcard meaning all codes.
- *               Required if specifying icmp for the protocol.
- *           * `PortRange` &mdash; (`map`)
- *             * `From` &mdash; (`Integer`) The first port in the range.
- *               Required if specifying tcp or udp for the protocol.
- *             * `To` &mdash; (`Integer`) The last port in the range.
- *               Required if specifying tcp or udp for the protocol.
- *         * `Associations` &mdash; (`Array<map>`)
- *           * `NetworkAclAssociationId` &mdash; (`String`)
  *           * `NetworkAclId` &mdash; (`String`)
- *           * `SubnetId` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<map>`)
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
+ *           * `VpcId` &mdash; (`String`)
+ *           * `IsDefault` &mdash; (`Boolean`)
+ *           * `Entries` &mdash; (`Array<map>`)
+ *               * `RuleNumber` &mdash; (`Integer`)
+ *               * `Protocol` &mdash; (`String`)
+ *               * `RuleAction` &mdash; (`String`)
+ *                 Possible values include:
+ *                 * `allow`
+ *                 * `deny`
+ *               * `Egress` &mdash; (`Boolean`)
+ *               * `CidrBlock` &mdash; (`String`)
+ *               * `IcmpTypeCode` &mdash; (`map`)
+ *                   * `Type` &mdash; (`Integer`) For the ICMP protocol,
+ *                     the ICMP type. A value of -1 is a wildcard meaning
+ *                     all types. Required if specifying icmp for the
+ *                     protocol.
+ *                   * `Code` &mdash; (`Integer`) For the ICMP protocol,
+ *                     the ICMP code. A value of -1 is a wildcard meaning
+ *                     all codes. Required if specifying icmp for the
+ *                     protocol.
+ *               * `PortRange` &mdash; (`map`)
+ *                   * `From` &mdash; (`Integer`) The first port in the
+ *                     range. Required if specifying tcp or udp for the
+ *                     protocol.
+ *                   * `To` &mdash; (`Integer`) The last port in the range.
+ *                     Required if specifying tcp or udp for the protocol.
+ *           * `Associations` &mdash; (`Array<map>`)
+ *               * `NetworkAclAssociationId` &mdash; (`String`)
+ *               * `NetworkAclId` &mdash; (`String`)
+ *               * `SubnetId` &mdash; (`String`)
+ *           * `Tags` &mdash; (`Array<map>`)
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -949,17 +964,17 @@ AWS.EC2 = inherit({})
  *     * `CidrBlock` &mdash; **required** &mdash; (`String`) The CIDR
  *       range to allow or deny, in CIDR notation (e.g., 172.16.0.0/24).
  *     * `IcmpTypeCode` &mdash; (`map`) ICMP values.
- *       * `Type` &mdash; (`Integer`) For the ICMP protocol, the ICMP
- *         type. A value of -1 is a wildcard meaning all types. Required
- *         if specifying icmp for the protocol.
- *       * `Code` &mdash; (`Integer`) For the ICMP protocol, the ICMP
- *         code. A value of -1 is a wildcard meaning all codes. Required
- *         if specifying icmp for the protocol.
+ *         * `Type` &mdash; (`Integer`) For the ICMP protocol, the ICMP
+ *           type. A value of -1 is a wildcard meaning all types.
+ *           Required if specifying icmp for the protocol.
+ *         * `Code` &mdash; (`Integer`) For the ICMP protocol, the ICMP
+ *           code. A value of -1 is a wildcard meaning all codes.
+ *           Required if specifying icmp for the protocol.
  *     * `PortRange` &mdash; (`map`) Port ranges.
- *       * `From` &mdash; (`Integer`) The first port in the range.
- *         Required if specifying tcp or udp for the protocol.
- *       * `To` &mdash; (`Integer`) The last port in the range. Required
- *         if specifying tcp or udp for the protocol.
+ *         * `From` &mdash; (`Integer`) The first port in the range.
+ *           Required if specifying tcp or udp for the protocol.
+ *         * `To` &mdash; (`Integer`) The last port in the range.
+ *           Required if specifying tcp or udp for the protocol.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -979,8 +994,8 @@ AWS.EC2 = inherit({})
  *     * `PrivateIpAddress` &mdash; (`String`)
  *     * `Groups` &mdash; (`Array<String>`)
  *     * `PrivateIpAddresses` &mdash; (`Array<map>`)
- *       * `PrivateIpAddress` &mdash; **required** &mdash; (`String`)
- *       * `Primary` &mdash; (`Boolean`)
+ *         * `PrivateIpAddress` &mdash; **required** &mdash; (`String`)
+ *         * `Primary` &mdash; (`Boolean`)
  *     * `SecondaryPrivateIpAddressCount` &mdash; (`Integer`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -993,47 +1008,47 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `NetworkInterface` &mdash; (`map`)
- *         * `NetworkInterfaceId` &mdash; (`String`)
- *         * `SubnetId` &mdash; (`String`)
- *         * `VpcId` &mdash; (`String`)
- *         * `AvailabilityZone` &mdash; (`String`)
- *         * `Description` &mdash; (`String`)
- *         * `OwnerId` &mdash; (`String`)
- *         * `RequesterId` &mdash; (`String`)
- *         * `RequesterManaged` &mdash; (`Boolean`)
- *         * `Status` &mdash; (`String`)
- *         * `MacAddress` &mdash; (`String`)
- *         * `PrivateIpAddress` &mdash; (`String`)
- *         * `PrivateDnsName` &mdash; (`String`)
- *         * `SourceDestCheck` &mdash; (`Boolean`)
- *         * `Groups` &mdash; (`Array<map>`)
- *           * `GroupName` &mdash; (`String`)
- *           * `GroupId` &mdash; (`String`)
- *         * `Attachment` &mdash; (`map`)
- *           * `AttachmentId` &mdash; (`String`)
- *           * `InstanceId` &mdash; (`String`)
- *           * `InstanceOwnerId` &mdash; (`String`)
- *           * `DeviceIndex` &mdash; (`Integer`)
+ *           * `NetworkInterfaceId` &mdash; (`String`)
+ *           * `SubnetId` &mdash; (`String`)
+ *           * `VpcId` &mdash; (`String`)
+ *           * `AvailabilityZone` &mdash; (`String`)
+ *           * `Description` &mdash; (`String`)
+ *           * `OwnerId` &mdash; (`String`)
+ *           * `RequesterId` &mdash; (`String`)
+ *           * `RequesterManaged` &mdash; (`Boolean`)
  *           * `Status` &mdash; (`String`)
- *           * `AttachTime` &mdash; (`Date`)
- *           * `DeleteOnTermination` &mdash; (`Boolean`)
- *         * `Association` &mdash; (`map`)
- *           * `PublicIp` &mdash; (`String`)
- *           * `IpOwnerId` &mdash; (`String`)
- *           * `AllocationId` &mdash; (`String`)
- *           * `AssociationId` &mdash; (`String`)
- *         * `TagSet` &mdash; (`Array<map>`)
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *         * `PrivateIpAddresses` &mdash; (`Array<map>`)
+ *           * `MacAddress` &mdash; (`String`)
  *           * `PrivateIpAddress` &mdash; (`String`)
  *           * `PrivateDnsName` &mdash; (`String`)
- *           * `Primary` &mdash; (`Boolean`)
+ *           * `SourceDestCheck` &mdash; (`Boolean`)
+ *           * `Groups` &mdash; (`Array<map>`)
+ *               * `GroupName` &mdash; (`String`)
+ *               * `GroupId` &mdash; (`String`)
+ *           * `Attachment` &mdash; (`map`)
+ *               * `AttachmentId` &mdash; (`String`)
+ *               * `InstanceId` &mdash; (`String`)
+ *               * `InstanceOwnerId` &mdash; (`String`)
+ *               * `DeviceIndex` &mdash; (`Integer`)
+ *               * `Status` &mdash; (`String`)
+ *               * `AttachTime` &mdash; (`Date`)
+ *               * `DeleteOnTermination` &mdash; (`Boolean`)
  *           * `Association` &mdash; (`map`)
- *             * `PublicIp` &mdash; (`String`)
- *             * `IpOwnerId` &mdash; (`String`)
- *             * `AllocationId` &mdash; (`String`)
- *             * `AssociationId` &mdash; (`String`)
+ *               * `PublicIp` &mdash; (`String`)
+ *               * `IpOwnerId` &mdash; (`String`)
+ *               * `AllocationId` &mdash; (`String`)
+ *               * `AssociationId` &mdash; (`String`)
+ *           * `TagSet` &mdash; (`Array<map>`)
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
+ *           * `PrivateIpAddresses` &mdash; (`Array<map>`)
+ *               * `PrivateIpAddress` &mdash; (`String`)
+ *               * `PrivateDnsName` &mdash; (`String`)
+ *               * `Primary` &mdash; (`Boolean`)
+ *               * `Association` &mdash; (`map`)
+ *                   * `PublicIp` &mdash; (`String`)
+ *                   * `IpOwnerId` &mdash; (`String`)
+ *                   * `AllocationId` &mdash; (`String`)
+ *                   * `AssociationId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1063,9 +1078,9 @@ AWS.EC2 = inherit({})
  *     * `ReservedInstancesId` &mdash; **required** &mdash; (`String`)
  *     * `InstanceCount` &mdash; **required** &mdash; (`Integer`)
  *     * `PriceSchedules` &mdash; **required** &mdash; (`Array<map>`)
- *       * `Term` &mdash; (`Integer`)
- *       * `Price` &mdash; (`Float`)
- *       * `CurrencyCode` &mdash; (`String`)
+ *         * `Term` &mdash; (`Integer`)
+ *         * `Price` &mdash; (`Float`)
+ *         * `CurrencyCode` &mdash; (`String`)
  *     * `ClientToken` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -1078,24 +1093,24 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `ReservedInstancesListings` &mdash; (`Array<map>`)
- *         * `ReservedInstancesListingId` &mdash; (`String`)
- *         * `ReservedInstancesId` &mdash; (`String`)
- *         * `CreateDate` &mdash; (`Date`)
- *         * `UpdateDate` &mdash; (`Date`)
- *         * `Status` &mdash; (`String`)
- *         * `StatusMessage` &mdash; (`String`)
- *         * `InstanceCounts` &mdash; (`Array<map>`)
- *           * `State` &mdash; (`String`)
- *           * `InstanceCount` &mdash; (`Integer`)
- *         * `PriceSchedules` &mdash; (`Array<map>`)
- *           * `Term` &mdash; (`Integer`)
- *           * `Price` &mdash; (`Float`)
- *           * `CurrencyCode` &mdash; (`String`)
- *           * `Active` &mdash; (`Boolean`)
- *         * `Tags` &mdash; (`Array<map>`)
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *         * `ClientToken` &mdash; (`String`)
+ *           * `ReservedInstancesListingId` &mdash; (`String`)
+ *           * `ReservedInstancesId` &mdash; (`String`)
+ *           * `CreateDate` &mdash; (`Date`)
+ *           * `UpdateDate` &mdash; (`Date`)
+ *           * `Status` &mdash; (`String`)
+ *           * `StatusMessage` &mdash; (`String`)
+ *           * `InstanceCounts` &mdash; (`Array<map>`)
+ *               * `State` &mdash; (`String`)
+ *               * `InstanceCount` &mdash; (`Integer`)
+ *           * `PriceSchedules` &mdash; (`Array<map>`)
+ *               * `Term` &mdash; (`Integer`)
+ *               * `Price` &mdash; (`Float`)
+ *               * `CurrencyCode` &mdash; (`String`)
+ *               * `Active` &mdash; (`Boolean`)
+ *           * `Tags` &mdash; (`Array<map>`)
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
+ *           * `ClientToken` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1142,25 +1157,25 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `RouteTable` &mdash; (`map`)
- *         * `RouteTableId` &mdash; (`String`)
- *         * `VpcId` &mdash; (`String`)
- *         * `Routes` &mdash; (`Array<map>`)
- *           * `DestinationCidrBlock` &mdash; (`String`)
- *           * `GatewayId` &mdash; (`String`)
- *           * `InstanceId` &mdash; (`String`)
- *           * `InstanceOwnerId` &mdash; (`String`)
- *           * `NetworkInterfaceId` &mdash; (`String`)
- *           * `State` &mdash; (`String`)
- *         * `Associations` &mdash; (`Array<map>`)
- *           * `RouteTableAssociationId` &mdash; (`String`)
  *           * `RouteTableId` &mdash; (`String`)
- *           * `SubnetId` &mdash; (`String`)
- *           * `Main` &mdash; (`Boolean`)
- *         * `Tags` &mdash; (`Array<map>`)
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *         * `PropagatingVgws` &mdash; (`Array<map>`)
- *           * `GatewayId` &mdash; (`String`)
+ *           * `VpcId` &mdash; (`String`)
+ *           * `Routes` &mdash; (`Array<map>`)
+ *               * `DestinationCidrBlock` &mdash; (`String`)
+ *               * `GatewayId` &mdash; (`String`)
+ *               * `InstanceId` &mdash; (`String`)
+ *               * `InstanceOwnerId` &mdash; (`String`)
+ *               * `NetworkInterfaceId` &mdash; (`String`)
+ *               * `State` &mdash; (`String`)
+ *           * `Associations` &mdash; (`Array<map>`)
+ *               * `RouteTableAssociationId` &mdash; (`String`)
+ *               * `RouteTableId` &mdash; (`String`)
+ *               * `SubnetId` &mdash; (`String`)
+ *               * `Main` &mdash; (`Boolean`)
+ *           * `Tags` &mdash; (`Array<map>`)
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
+ *           * `PropagatingVgws` &mdash; (`Array<map>`)
+ *               * `GatewayId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1225,8 +1240,8 @@ AWS.EC2 = inherit({})
  *         "amazon", "redhat", "self", etc.) or AWS account ID that owns
  *         the AMI.
  *       * `Tags` &mdash; (`Array<map>`) A list of tags for the Snapshot.
- *         * `Key` &mdash; (`String`) The tag's key.
- *         * `Value` &mdash; (`String`) The tag's value.
+ *           * `Key` &mdash; (`String`) The tag's key.
+ *           * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1248,18 +1263,18 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `SpotDatafeedSubscription` &mdash; (`map`)
- *         * `OwnerId` &mdash; (`String`) Specifies the AWS account ID of
- *           the account.
- *         * `Bucket` &mdash; (`String`) Specifies the Amazon S3 bucket
- *           where the Spot Instance data feed is located.
- *         * `Prefix` &mdash; (`String`) Contains the prefix that is
- *           prepended to data feed files.
- *         * `State` &mdash; (`String`) Specifies the state of the Spot
- *           Instance request.
- *         * `Fault` &mdash; (`map`) Specifies a fault code for the Spot
- *           Instance request, if present.
- *           * `Code` &mdash; (`String`)
- *           * `Message` &mdash; (`String`)
+ *           * `OwnerId` &mdash; (`String`) Specifies the AWS account ID of
+ *             the account.
+ *           * `Bucket` &mdash; (`String`) Specifies the Amazon S3 bucket
+ *             where the Spot Instance data feed is located.
+ *           * `Prefix` &mdash; (`String`) Contains the prefix that is
+ *             prepended to data feed files.
+ *           * `State` &mdash; (`String`) Specifies the state of the Spot
+ *             Instance request.
+ *           * `Fault` &mdash; (`map`) Specifies a fault code for the Spot
+ *             Instance request, if present.
+ *               * `Code` &mdash; (`String`)
+ *               * `Message` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1283,24 +1298,26 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Subnet` &mdash; (`map`)
- *         * `SubnetId` &mdash; (`String`) Specifies the ID of the subnet.
- *         * `State` &mdash; (`String`) Describes the current state of the
- *           subnet. The state of the subnet may be either pending or
- *           available.
- *         * `VpcId` &mdash; (`String`) Contains the ID of the VPC the
- *           subnet is in.
- *         * `CidrBlock` &mdash; (`String`) Specifies the CIDR block
- *           assigned to the subnet.
- *         * `AvailableIpAddressCount` &mdash; (`Integer`) Specifies the
- *           number of unused IP addresses in the subnet. The IP addresses
- *           for any stopped instances are considered unavailable.
- *         * `AvailabilityZone` &mdash; (`String`) Specifies the
- *           Availability Zone the subnet is in.
- *         * `DefaultForAz` &mdash; (`Boolean`)
- *         * `MapPublicIpOnLaunch` &mdash; (`Boolean`)
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the Subnet.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
+ *           * `SubnetId` &mdash; (`String`) Specifies the ID of the
+ *             subnet.
+ *           * `State` &mdash; (`String`) Describes the current state of
+ *             the subnet. The state of the subnet may be either pending or
+ *             available.
+ *           * `VpcId` &mdash; (`String`) Contains the ID of the VPC the
+ *             subnet is in.
+ *           * `CidrBlock` &mdash; (`String`) Specifies the CIDR block
+ *             assigned to the subnet.
+ *           * `AvailableIpAddressCount` &mdash; (`Integer`) Specifies the
+ *             number of unused IP addresses in the subnet. The IP
+ *             addresses for any stopped instances are considered
+ *             unavailable.
+ *           * `AvailabilityZone` &mdash; (`String`) Specifies the
+ *             Availability Zone the subnet is in.
+ *           * `DefaultForAz` &mdash; (`Boolean`)
+ *           * `MapPublicIpOnLaunch` &mdash; (`Boolean`)
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the Subnet.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1313,8 +1330,8 @@ AWS.EC2 = inherit({})
  *     * `Tags` &mdash; **required** &mdash; (`Array<map>`) The tags to
  *       add or overwrite for the specified resources. Each tag item
  *       consists of a key-value pair.
- *       * `Key` &mdash; (`String`) The tag's key.
- *       * `Value` &mdash; (`String`) The tag's value.
+ *         * `Key` &mdash; (`String`) The tag's key.
+ *         * `Value` &mdash; (`String`) The tag's value.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1369,24 +1386,24 @@ AWS.EC2 = inherit({})
  *         initiated.
  *       * `Attachments` &mdash; (`Array<map>`) Information on what this
  *         volume is attached to.
- *         * `VolumeId` &mdash; (`String`)
- *         * `InstanceId` &mdash; (`String`)
- *         * `Device` &mdash; (`String`) How the device is exposed to the
- *           instance (e.g., /dev/sdh).
- *         * `State` &mdash; (`String`)
- *           Possible values include:
- *           * `attaching`
- *           * `attached`
- *           * `detaching`
- *           * `detached`
- *         * `AttachTime` &mdash; (`Date`) Timestamp when this attachment
- *           initiated.
- *         * `DeleteOnTermination` &mdash; (`Boolean`) ` Whether this
- *           volume will be deleted or not when the associated instance is
- *           terminated.
+ *           * `VolumeId` &mdash; (`String`)
+ *           * `InstanceId` &mdash; (`String`)
+ *           * `Device` &mdash; (`String`) How the device is exposed to the
+ *             instance (e.g., /dev/sdh).
+ *           * `State` &mdash; (`String`)
+ *             Possible values include:
+ *             * `attaching`
+ *             * `attached`
+ *             * `detaching`
+ *             * `detached`
+ *           * `AttachTime` &mdash; (`Date`) Timestamp when this attachment
+ *             initiated.
+ *           * `DeleteOnTermination` &mdash; (`Boolean`) ` Whether this
+ *             volume will be deleted or not when the associated instance
+ *             is terminated.
  *       * `Tags` &mdash; (`Array<map>`) A list of tags for the Volume.
- *         * `Key` &mdash; (`String`) The tag's key.
- *         * `Value` &mdash; (`String`) The tag's value.
+ *           * `Key` &mdash; (`String`) The tag's key.
+ *           * `Value` &mdash; (`String`) The tag's value.
  *       * `VolumeType` &mdash; (`String`)
  *         Possible values include:
  *         * `standard`
@@ -1415,21 +1432,22 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Vpc` &mdash; (`map`) Information about the VPC.
- *         * `VpcId` &mdash; (`String`) Specifies the ID of the VPC.
- *         * `State` &mdash; (`String`) Describes the current state of the
- *           VPC. The state of the subnet may be either pending or
- *           available.
- *         * `CidrBlock` &mdash; (`String`) Specifies the CIDR block the
- *           VPC covers.
- *         * `DhcpOptionsId` &mdash; (`String`) Specifies the ID of the set
- *           of DHCP options associated with the VPC. Contains a value of
- *           default if the default options are associated with the VPC.
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the VPC.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *         * `InstanceTenancy` &mdash; (`String`) The allowed tenancy of
- *           instances launched into the VPC.
- *         * `IsDefault` &mdash; (`Boolean`)
+ *           * `VpcId` &mdash; (`String`) Specifies the ID of the VPC.
+ *           * `State` &mdash; (`String`) Describes the current state of
+ *             the VPC. The state of the subnet may be either pending or
+ *             available.
+ *           * `CidrBlock` &mdash; (`String`) Specifies the CIDR block the
+ *             VPC covers.
+ *           * `DhcpOptionsId` &mdash; (`String`) Specifies the ID of the
+ *             set of DHCP options associated with the VPC. Contains a
+ *             value of default if the default options are associated with
+ *             the VPC.
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the VPC.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
+ *           * `InstanceTenancy` &mdash; (`String`) The allowed tenancy of
+ *             instances launched into the VPC.
+ *           * `IsDefault` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1443,7 +1461,7 @@ AWS.EC2 = inherit({})
  *     * `VpnGatewayId` &mdash; **required** &mdash; (`String`) The ID of
  *       the VPN gateway.
  *     * `Options` &mdash; (`map`)
- *       * `StaticRoutesOnly` &mdash; (`Boolean`)
+ *         * `StaticRoutesOnly` &mdash; (`Boolean`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1455,39 +1473,39 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `VpnConnection` &mdash; (`map`)
- *         * `VpnConnectionId` &mdash; (`String`) Specifies the ID of the
- *           VPN gateway at the VPC end of the VPN connection.
- *         * `State` &mdash; (`String`) Describes the current state of the
- *           VPN connection. Valid values are pending, available, deleting,
- *           and deleted.
- *         * `CustomerGatewayConfiguration` &mdash; (`String`) Contains
- *           configuration information in the native XML format for the VPN
- *           connection's customer gateway. This element is always present
- *           in the CreateVpnConnection response; however, it's present in
- *           the DescribeVpnConnections response only if the VPN connection
- *           is in the pending or available state.
- *         * `Type` &mdash; (`String`) Specifies the type of VPN
- *           connection.
- *         * `CustomerGatewayId` &mdash; (`String`) Specifies ID of the
- *           customer gateway at the end of the VPN connection.
- *         * `VpnGatewayId` &mdash; (`String`) Specfies the ID of the VPN
- *           gateway at the VPC end of the VPN connection.
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the
- *           VpnConnection.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *         * `VgwTelemetry` &mdash; (`Array<map>`)
- *           * `OutsideIpAddress` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *           * `LastStatusChange` &mdash; (`Date`)
- *           * `StatusMessage` &mdash; (`String`)
- *           * `AcceptedRouteCount` &mdash; (`Integer`)
- *         * `Options` &mdash; (`map`)
- *           * `StaticRoutesOnly` &mdash; (`Boolean`)
- *         * `Routes` &mdash; (`Array<map>`)
- *           * `DestinationCidrBlock` &mdash; (`String`)
- *           * `Source` &mdash; (`String`)
- *           * `State` &mdash; (`String`)
+ *           * `VpnConnectionId` &mdash; (`String`) Specifies the ID of the
+ *             VPN gateway at the VPC end of the VPN connection.
+ *           * `State` &mdash; (`String`) Describes the current state of
+ *             the VPN connection. Valid values are pending, available,
+ *             deleting, and deleted.
+ *           * `CustomerGatewayConfiguration` &mdash; (`String`) Contains
+ *             configuration information in the native XML format for the
+ *             VPN connection's customer gateway. This element is always
+ *             present in the CreateVpnConnection response; however, it's
+ *             present in the DescribeVpnConnections response only if the
+ *             VPN connection is in the pending or available state.
+ *           * `Type` &mdash; (`String`) Specifies the type of VPN
+ *             connection.
+ *           * `CustomerGatewayId` &mdash; (`String`) Specifies ID of the
+ *             customer gateway at the end of the VPN connection.
+ *           * `VpnGatewayId` &mdash; (`String`) Specfies the ID of the VPN
+ *             gateway at the VPC end of the VPN connection.
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the
+ *             VpnConnection.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
+ *           * `VgwTelemetry` &mdash; (`Array<map>`)
+ *               * `OutsideIpAddress` &mdash; (`String`)
+ *               * `Status` &mdash; (`String`)
+ *               * `LastStatusChange` &mdash; (`Date`)
+ *               * `StatusMessage` &mdash; (`String`)
+ *               * `AcceptedRouteCount` &mdash; (`Integer`)
+ *           * `Options` &mdash; (`map`)
+ *               * `StaticRoutesOnly` &mdash; (`Boolean`)
+ *           * `Routes` &mdash; (`Array<map>`)
+ *               * `DestinationCidrBlock` &mdash; (`String`)
+ *               * `Source` &mdash; (`String`)
+ *               * `State` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1525,23 +1543,23 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `VpnGateway` &mdash; (`map`)
- *         * `VpnGatewayId` &mdash; (`String`) Specifies the ID of the VPN
- *           gateway.
- *         * `State` &mdash; (`String`) Describes the current state of the
- *           VPN gateway. Valid values are pending, available, deleting,
- *           and deleted.
- *         * `Type` &mdash; (`String`) Specifies the type of VPN connection
- *           the VPN gateway supports.
- *         * `AvailabilityZone` &mdash; (`String`) Specifies the
- *           Availability Zone where the VPN gateway was created.
- *         * `VpcAttachments` &mdash; (`Array<map>`) Contains information
- *           about the VPCs attached to the VPN gateway.
- *           * `VpcId` &mdash; (`String`)
- *           * `State` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the
- *           VpnGateway.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
+ *           * `VpnGatewayId` &mdash; (`String`) Specifies the ID of the
+ *             VPN gateway.
+ *           * `State` &mdash; (`String`) Describes the current state of
+ *             the VPN gateway. Valid values are pending, available,
+ *             deleting, and deleted.
+ *           * `Type` &mdash; (`String`) Specifies the type of VPN
+ *             connection the VPN gateway supports.
+ *           * `AvailabilityZone` &mdash; (`String`) Specifies the
+ *             Availability Zone where the VPN gateway was created.
+ *           * `VpcAttachments` &mdash; (`Array<map>`) Contains information
+ *             about the VPCs attached to the VPN gateway.
+ *               * `VpcId` &mdash; (`String`)
+ *               * `State` &mdash; (`String`)
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the
+ *             VpnGateway.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1804,8 +1822,8 @@ AWS.EC2 = inherit({})
  *       specified resources. Each tag item consists of a key-value pair.
  *       If a tag is specified without a value, the tag and all of its
  *       values are deleted.
- *       * `Key` &mdash; (`String`) The tag's key.
- *       * `Value` &mdash; (`String`) The tag's value.
+ *         * `Key` &mdash; (`String`) The tag's key.
+ *         * `Value` &mdash; (`String`) The tag's value.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1928,9 +1946,9 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `AccountAttributes` &mdash; (`Array<map>`)
- *         * `AttributeName` &mdash; (`String`)
- *         * `AttributeValues` &mdash; (`Array<map>`)
- *           * `AttributeValue` &mdash; (`String`)
+ *           * `AttributeName` &mdash; (`String`)
+ *           * `AttributeValues` &mdash; (`Array<map>`)
+ *               * `AttributeValue` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1943,9 +1961,9 @@ AWS.EC2 = inherit({})
  *       properties for Addresses. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *     * `AllocationIds` &mdash; (`Array<String>`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -1958,17 +1976,17 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Addresses` &mdash; (`Array<map>`) The list of Elastic IPs.
- *         * `InstanceId` &mdash; (`String`)
- *         * `PublicIp` &mdash; (`String`)
- *         * `AllocationId` &mdash; (`String`)
- *         * `AssociationId` &mdash; (`String`)
- *         * `Domain` &mdash; (`String`)
- *           Possible values include:
- *           * `vpc`
- *           * `standard`
- *         * `NetworkInterfaceId` &mdash; (`String`)
- *         * `NetworkInterfaceOwnerId` &mdash; (`String`)
- *         * `PrivateIpAddress` &mdash; (`String`)
+ *           * `InstanceId` &mdash; (`String`)
+ *           * `PublicIp` &mdash; (`String`)
+ *           * `AllocationId` &mdash; (`String`)
+ *           * `AssociationId` &mdash; (`String`)
+ *           * `Domain` &mdash; (`String`)
+ *             Possible values include:
+ *             * `vpc`
+ *             * `standard`
+ *           * `NetworkInterfaceId` &mdash; (`String`)
+ *           * `NetworkInterfaceOwnerId` &mdash; (`String`)
+ *           * `PrivateIpAddress` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1981,9 +1999,9 @@ AWS.EC2 = inherit({})
  *       properties for AvailabilityZones. For a complete reference to
  *       the available filter keys for this operation, see the Amazon EC2
  *       API reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1996,13 +2014,13 @@ AWS.EC2 = inherit({})
  *
  *       * `AvailabilityZones` &mdash; (`Array<map>`) The list of described
  *         Amazon EC2 availability zones.
- *         * `ZoneName` &mdash; (`String`) Name of the Availability Zone.
- *         * `State` &mdash; (`String`) State of the Availability Zone.
- *         * `RegionName` &mdash; (`String`) Name of the region in which
- *           this zone resides.
- *         * `Messages` &mdash; (`Array<map>`) A list of messages about the
- *           Availability Zone.
- *           * `Message` &mdash; (`String`)
+ *           * `ZoneName` &mdash; (`String`) Name of the Availability Zone.
+ *           * `State` &mdash; (`String`) State of the Availability Zone.
+ *           * `RegionName` &mdash; (`String`) Name of the region in which
+ *             this zone resides.
+ *           * `Messages` &mdash; (`Array<map>`) A list of messages about
+ *             the Availability Zone.
+ *               * `Message` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2015,9 +2033,9 @@ AWS.EC2 = inherit({})
  *       properties for BundleTasks. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -2030,36 +2048,38 @@ AWS.EC2 = inherit({})
  *
  *       * `BundleTasks` &mdash; (`Array<map>`) The list of described
  *         bundle tasks.
- *         * `InstanceId` &mdash; (`String`) Instance associated with this
- *           bundle task.
- *         * `BundleId` &mdash; (`String`) Unique identifier for this task.
- *         * `State` &mdash; (`String`) The state of this task.
- *         * `StartTime` &mdash; (`Date`) The time this task started.
- *         * `UpdateTime` &mdash; (`Date`) The time of the most recent
- *           update for the task.
- *         * `Storage` &mdash; (`map`) Amazon S3 storage locations.
- *           * `S3` &mdash; (`map`) The details of S3 storage for bundling
- *             a Windows instance.
- *             * `Bucket` &mdash; (`String`) The bucket in which to store
- *               the AMI. You can specify a bucket that you already own or
- *               a new bucket that Amazon EC2 creates on your behalf. If
- *               you specify a bucket that belongs to someone else, Amazon
- *               EC2 returns an error.
- *             * `Prefix` &mdash; (`String`) The prefix to use when storing
- *               the AMI in S3.
- *             * `AWSAccessKeyId` &mdash; (`String`) The Access Key ID of
- *               the owner of the Amazon S3 bucket.
- *             * `UploadPolicy` &mdash; (`String`) A Base64-encoded Amazon
- *               S3 upload policy that gives Amazon EC2 permission to
- *               upload items into Amazon S3 on the user's behalf.
- *             * `UploadPolicySignature` &mdash; (`String`) The signature
- *               of the Base64 encoded JSON document.
- *         * `Progress` &mdash; (`String`) The level of task completion, in
- *           percent (e.g., 20%).
- *         * `BundleTaskError` &mdash; (`map`) If the task fails, a
- *           description of the error.
- *           * `Code` &mdash; (`String`) Error code.
- *           * `Message` &mdash; (`String`) Error message.
+ *           * `InstanceId` &mdash; (`String`) Instance associated with
+ *             this bundle task.
+ *           * `BundleId` &mdash; (`String`) Unique identifier for this
+ *             task.
+ *           * `State` &mdash; (`String`) The state of this task.
+ *           * `StartTime` &mdash; (`Date`) The time this task started.
+ *           * `UpdateTime` &mdash; (`Date`) The time of the most recent
+ *             update for the task.
+ *           * `Storage` &mdash; (`map`) Amazon S3 storage locations.
+ *               * `S3` &mdash; (`map`) The details of S3 storage for
+ *                 bundling a Windows instance.
+ *                   * `Bucket` &mdash; (`String`) The bucket in which to
+ *                     store the AMI. You can specify a bucket that you
+ *                     already own or a new bucket that Amazon EC2 creates
+ *                     on your behalf. If you specify a bucket that belongs
+ *                     to someone else, Amazon EC2 returns an error.
+ *                   * `Prefix` &mdash; (`String`) The prefix to use when
+ *                     storing the AMI in S3.
+ *                   * `AWSAccessKeyId` &mdash; (`String`) The Access Key
+ *                     ID of the owner of the Amazon S3 bucket.
+ *                   * `UploadPolicy` &mdash; (`String`) A Base64-encoded
+ *                     Amazon S3 upload policy that gives Amazon EC2
+ *                     permission to upload items into Amazon S3 on the
+ *                     user's behalf.
+ *                   * `UploadPolicySignature` &mdash; (`String`) The
+ *                     signature of the Base64 encoded JSON document.
+ *           * `Progress` &mdash; (`String`) The level of task completion,
+ *             in percent (e.g., 20%).
+ *           * `BundleTaskError` &mdash; (`map`) If the task fails, a
+ *             description of the error.
+ *               * `Code` &mdash; (`String`) Error code.
+ *               * `Message` &mdash; (`String`) Error message.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2067,9 +2087,9 @@ AWS.EC2 = inherit({})
  *   Calls the DescribeConversionTasks API operation.
  *   @param params [Object]
  *     * `Filters` &mdash; (`Array<map>`)
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *     * `ConversionTaskIds` &mdash; (`Array<String>`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -2082,43 +2102,43 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `ConversionTasks` &mdash; (`Array<map>`)
- *         * `ConversionTaskId` &mdash; (`String`)
- *         * `ExpirationTime` &mdash; (`String`)
- *         * `ImportInstance` &mdash; (`map`)
- *           * `Volumes` &mdash; (`Array<map>`)
- *             * `BytesConverted` &mdash; (`Integer`)
- *             * `AvailabilityZone` &mdash; (`String`)
- *             * `Image` &mdash; (`map`)
- *               * `Format` &mdash; (`String`)
- *               * `Size` &mdash; (`Integer`)
- *               * `ImportManifestUrl` &mdash; (`String`)
- *               * `Checksum` &mdash; (`String`)
- *             * `Volume` &mdash; (`map`)
- *               * `Size` &mdash; (`Integer`)
- *               * `Id` &mdash; (`String`)
- *             * `Status` &mdash; (`String`)
- *             * `StatusMessage` &mdash; (`String`)
- *             * `Description` &mdash; (`String`)
- *           * `InstanceId` &mdash; (`String`)
- *           * `Platform` &mdash; (`String`)
- *           * `Description` &mdash; (`String`)
- *         * `ImportVolume` &mdash; (`map`)
- *           * `BytesConverted` &mdash; (`Integer`)
- *           * `AvailabilityZone` &mdash; (`String`)
- *           * `Description` &mdash; (`String`)
- *           * `Image` &mdash; (`map`)
- *             * `Format` &mdash; (`String`)
- *             * `Size` &mdash; (`Integer`)
- *             * `ImportManifestUrl` &mdash; (`String`)
- *             * `Checksum` &mdash; (`String`)
- *           * `Volume` &mdash; (`map`)
- *             * `Size` &mdash; (`Integer`)
- *             * `Id` &mdash; (`String`)
- *         * `State` &mdash; (`String`)
- *         * `StatusMessage` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<map>`)
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
+ *           * `ConversionTaskId` &mdash; (`String`)
+ *           * `ExpirationTime` &mdash; (`String`)
+ *           * `ImportInstance` &mdash; (`map`)
+ *               * `Volumes` &mdash; (`Array<map>`)
+ *                   * `BytesConverted` &mdash; (`Integer`)
+ *                   * `AvailabilityZone` &mdash; (`String`)
+ *                   * `Image` &mdash; (`map`)
+ *                       * `Format` &mdash; (`String`)
+ *                       * `Size` &mdash; (`Integer`)
+ *                       * `ImportManifestUrl` &mdash; (`String`)
+ *                       * `Checksum` &mdash; (`String`)
+ *                   * `Volume` &mdash; (`map`)
+ *                       * `Size` &mdash; (`Integer`)
+ *                       * `Id` &mdash; (`String`)
+ *                   * `Status` &mdash; (`String`)
+ *                   * `StatusMessage` &mdash; (`String`)
+ *                   * `Description` &mdash; (`String`)
+ *               * `InstanceId` &mdash; (`String`)
+ *               * `Platform` &mdash; (`String`)
+ *               * `Description` &mdash; (`String`)
+ *           * `ImportVolume` &mdash; (`map`)
+ *               * `BytesConverted` &mdash; (`Integer`)
+ *               * `AvailabilityZone` &mdash; (`String`)
+ *               * `Description` &mdash; (`String`)
+ *               * `Image` &mdash; (`map`)
+ *                   * `Format` &mdash; (`String`)
+ *                   * `Size` &mdash; (`Integer`)
+ *                   * `ImportManifestUrl` &mdash; (`String`)
+ *                   * `Checksum` &mdash; (`String`)
+ *               * `Volume` &mdash; (`map`)
+ *                   * `Size` &mdash; (`Integer`)
+ *                   * `Id` &mdash; (`String`)
+ *           * `State` &mdash; (`String`)
+ *           * `StatusMessage` &mdash; (`String`)
+ *           * `Tags` &mdash; (`Array<map>`)
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2131,9 +2151,9 @@ AWS.EC2 = inherit({})
  *       properties for Customer Gateways. For a complete reference to
  *       the available filter keys for this operation, see the Amazon EC2
  *       API reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -2145,21 +2165,23 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `CustomerGateways` &mdash; (`Array<map>`)
- *         * `CustomerGatewayId` &mdash; (`String`) Specifies the ID of the
- *           customer gateway.
- *         * `State` &mdash; (`String`) Describes the current state of the
- *           customer gateway. Valid values are pending, available,
- *           deleting, and deleted.
- *         * `Type` &mdash; (`String`) Specifies the type of VPN connection
- *           the customer gateway supports.
- *         * `IpAddress` &mdash; (`String`) Contains the Internet-routable
- *           IP address of the customer gateway's outside interface.
- *         * `BgpAsn` &mdash; (`String`) Specifies the customer gateway's
- *           Border Gateway Protocol (BGP) Autonomous System Number (ASN).
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the
- *           CustomerGateway.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
+ *           * `CustomerGatewayId` &mdash; (`String`) Specifies the ID of
+ *             the customer gateway.
+ *           * `State` &mdash; (`String`) Describes the current state of
+ *             the customer gateway. Valid values are pending, available,
+ *             deleting, and deleted.
+ *           * `Type` &mdash; (`String`) Specifies the type of VPN
+ *             connection the customer gateway supports.
+ *           * `IpAddress` &mdash; (`String`) Contains the
+ *             Internet-routable IP address of the customer gateway's
+ *             outside interface.
+ *           * `BgpAsn` &mdash; (`String`) Specifies the customer gateway's
+ *             Border Gateway Protocol (BGP) Autonomous System Number
+ *             (ASN).
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the
+ *             CustomerGateway.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2171,9 +2193,9 @@ AWS.EC2 = inherit({})
  *       properties for DhcpOptions. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -2185,17 +2207,18 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `DhcpOptions` &mdash; (`Array<map>`)
- *         * `DhcpOptionsId` &mdash; (`String`) Specifies the ID of the set
- *           of DHCP options.
- *         * `DhcpConfigurations` &mdash; (`Array<map>`) Contains
- *           information about the set of DHCP options.
- *           * `Key` &mdash; (`String`) Contains the name of a DHCP option.
- *           * `Values` &mdash; (`Array<String>`) Contains a set of values
- *             for a DHCP option.
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the
- *           DhcpOptions.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
+ *           * `DhcpOptionsId` &mdash; (`String`) Specifies the ID of the
+ *             set of DHCP options.
+ *           * `DhcpConfigurations` &mdash; (`Array<map>`) Contains
+ *             information about the set of DHCP options.
+ *               * `Key` &mdash; (`String`) Contains the name of a DHCP
+ *                 option.
+ *               * `Values` &mdash; (`Array<String>`) Contains a set of
+ *                 values for a DHCP option.
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the
+ *             DhcpOptions.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2214,26 +2237,26 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `ExportTasks` &mdash; (`Array<map>`)
- *         * `ExportTaskId` &mdash; (`String`)
- *         * `Description` &mdash; (`String`)
- *         * `State` &mdash; (`String`)
- *         * `StatusMessage` &mdash; (`String`)
- *         * `InstanceExportDetails` &mdash; (`map`)
- *           * `InstanceId` &mdash; (`String`)
- *           * `TargetEnvironment` &mdash; (`String`)
- *             Possible values include:
- *             * `citrix`
- *             * `vmware`
- *         * `ExportToS3Task` &mdash; (`map`)
- *           * `DiskImageFormat` &mdash; (`String`)
- *             Possible values include:
- *             * `vmdk`
- *             * `vhd`
- *           * `ContainerFormat` &mdash; (`String`)
- *             Possible values include:
- *             * `ova`
- *           * `S3Bucket` &mdash; (`String`)
- *           * `S3Key` &mdash; (`String`)
+ *           * `ExportTaskId` &mdash; (`String`)
+ *           * `Description` &mdash; (`String`)
+ *           * `State` &mdash; (`String`)
+ *           * `StatusMessage` &mdash; (`String`)
+ *           * `InstanceExportDetails` &mdash; (`map`)
+ *               * `InstanceId` &mdash; (`String`)
+ *               * `TargetEnvironment` &mdash; (`String`)
+ *                 Possible values include:
+ *                 * `citrix`
+ *                 * `vmware`
+ *           * `ExportToS3Task` &mdash; (`map`)
+ *               * `DiskImageFormat` &mdash; (`String`)
+ *                 Possible values include:
+ *                 * `vmdk`
+ *                 * `vhd`
+ *               * `ContainerFormat` &mdash; (`String`)
+ *                 Possible values include:
+ *                 * `ova`
+ *               * `S3Bucket` &mdash; (`String`)
+ *               * `S3Key` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2259,44 +2282,45 @@ AWS.EC2 = inherit({})
  *       * `ImageId` &mdash; (`String`) The ID of the associated AMI.
  *       * `LaunchPermissions` &mdash; (`Array<map>`) Launch permissions
  *         for the associated AMI.
- *         * `UserId` &mdash; (`String`) The AWS user ID of the user
- *           involved in this launch permission.
- *         * `Group` &mdash; (`String`) The AWS group of the user involved
- *           in this launch permission. Available groups: all
+ *           * `UserId` &mdash; (`String`) The AWS user ID of the user
+ *             involved in this launch permission.
+ *           * `Group` &mdash; (`String`) The AWS group of the user
+ *             involved in this launch permission. Available groups: all
  *       * `ProductCodes` &mdash; (`Array<map>`) Product codes for the
  *         associated AMI.
- *         * `ProductCodeId` &mdash; (`String`) The unique ID of an AWS
- *           DevPay product code.
- *         * `ProductCodeType` &mdash; (`String`)
+ *           * `ProductCodeId` &mdash; (`String`) The unique ID of an AWS
+ *             DevPay product code.
+ *           * `ProductCodeType` &mdash; (`String`)
  *       * `KernelId` &mdash; (`map`) Kernel ID of the associated AMI.
- *         * `Value` &mdash; (`String`) String value
+ *           * `Value` &mdash; (`String`) String value
  *       * `RamdiskId` &mdash; (`map`) Ramdisk ID of the associated AMI.
- *         * `Value` &mdash; (`String`) String value
+ *           * `Value` &mdash; (`String`) String value
  *       * `Description` &mdash; (`map`) User-created description of the
  *         associated AMI.
- *         * `Value` &mdash; (`String`) String value
+ *           * `Value` &mdash; (`String`) String value
  *       * `BlockDeviceMappings` &mdash; (`Array<map>`) Block device
  *         mappings for the associated AMI.
- *         * `VirtualName` &mdash; (`String`) Specifies the virtual device
- *           name.
- *         * `DeviceName` &mdash; (`String`) Specifies the device name
- *           (e.g., /dev/sdh).
- *         * `Ebs` &mdash; (`map`) Specifies parameters used to
- *           automatically setup Amazon EBS volumes when the instance is
- *           launched.
- *           * `SnapshotId` &mdash; (`String`) The ID of the snapshot from
- *             which the volume will be created.
- *           * `VolumeSize` &mdash; (`Integer`) The size of the volume, in
- *             gigabytes.
- *           * `DeleteOnTermination` &mdash; (`Boolean`) Specifies whether
- *             the Amazon EBS volume is deleted on instance termination.
- *           * `VolumeType` &mdash; (`String`)
- *             Possible values include:
- *             * `standard`
- *             * `io1`
- *           * `Iops` &mdash; (`Integer`)
- *         * `NoDevice` &mdash; (`String`) Specifies the device name to
- *           suppress during instance launch.
+ *           * `VirtualName` &mdash; (`String`) Specifies the virtual
+ *             device name.
+ *           * `DeviceName` &mdash; (`String`) Specifies the device name
+ *             (e.g., /dev/sdh).
+ *           * `Ebs` &mdash; (`map`) Specifies parameters used to
+ *             automatically setup Amazon EBS volumes when the instance is
+ *             launched.
+ *               * `SnapshotId` &mdash; (`String`) The ID of the snapshot
+ *                 from which the volume will be created.
+ *               * `VolumeSize` &mdash; (`Integer`) The size of the volume,
+ *                 in gigabytes.
+ *               * `DeleteOnTermination` &mdash; (`Boolean`) Specifies
+ *                 whether the Amazon EBS volume is deleted on instance
+ *                 termination.
+ *               * `VolumeType` &mdash; (`String`)
+ *                 Possible values include:
+ *                 * `standard`
+ *                 * `io1`
+ *               * `Iops` &mdash; (`Integer`)
+ *           * `NoDevice` &mdash; (`String`) Specifies the device name to
+ *             suppress during instance launch.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2320,9 +2344,9 @@ AWS.EC2 = inherit({})
  *       properties for Images. For a complete reference to the available
  *       filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -2334,86 +2358,88 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Images` &mdash; (`Array<map>`) The list of the described AMIs.
- *         * `ImageId` &mdash; (`String`) The unique ID of the AMI.
- *         * `ImageLocation` &mdash; (`String`) The location of the AMI.
- *         * `State` &mdash; (`String`) Current state of the AMI. If the
- *           operation returns available, the image is successfully
- *           registered and available for launching. If the operation
- *           returns deregistered, the image is deregistered and no longer
- *           available for launching.
- *           Possible values include:
- *           * `available`
- *           * `deregistered`
- *         * `OwnerId` &mdash; (`String`) AWS Access Key ID of the image
- *           owner.
- *         * `Public` &mdash; (`Boolean`) True if this image has public
- *           launch permissions. False if it only has implicit and explicit
- *           launch permissions.
- *         * `ProductCodes` &mdash; (`Array<map>`) Product codes of the
- *           AMI.
- *           * `ProductCodeId` &mdash; (`String`) The unique ID of an AWS
- *             DevPay product code.
- *           * `ProductCodeType` &mdash; (`String`)
- *         * `Architecture` &mdash; (`String`) The architecture of the
- *           image.
- *         * `ImageType` &mdash; (`String`) The type of image (machine,
- *           kernel, or ramdisk).
- *         * `KernelId` &mdash; (`String`) The kernel associated with the
- *           image, if any. Only applicable for machine images.
- *         * `RamdiskId` &mdash; (`String`) The RAM disk associated with
- *           the image, if any. Only applicable for machine images.
- *         * `Platform` &mdash; (`String`) The operating platform of the
- *           AMI.
- *         * `StateReason` &mdash; (`map`) The reason for the state change.
- *           * `Code` &mdash; (`String`) Reason code for the state change.
- *           * `Message` &mdash; (`String`) Descriptive message for the
- *             state change.
- *         * `ImageOwnerAlias` &mdash; (`String`) The AWS account alias
- *           (e.g., "amazon", "redhat", "self", etc.) or AWS account ID
- *           that owns the AMI.
- *         * `Name` &mdash; (`String`) The name of the AMI that was
- *           provided during image creation.
- *         * `Description` &mdash; (`String`) The description of the AMI
- *           that was provided during image creation.
- *         * `RootDeviceType` &mdash; (`String`) The root device type used
- *           by the AMI. The AMI can use an Amazon EBS or instance store
- *           root device.
- *         * `RootDeviceName` &mdash; (`String`) The root device name
- *           (e.g., /dev/sda1).
- *         * `BlockDeviceMappings` &mdash; (`Array<map>`) Specifies how
- *           block devices are exposed to the instance.
- *           * `VirtualName` &mdash; (`String`) Specifies the virtual
- *             device name.
- *           * `DeviceName` &mdash; (`String`) Specifies the device name
- *             (e.g., /dev/sdh).
- *           * `Ebs` &mdash; (`map`) Specifies parameters used to
- *             automatically setup Amazon EBS volumes when the instance is
- *             launched.
- *             * `SnapshotId` &mdash; (`String`) The ID of the snapshot
- *               from which the volume will be created.
- *             * `VolumeSize` &mdash; (`Integer`) The size of the volume,
- *               in gigabytes.
- *             * `DeleteOnTermination` &mdash; (`Boolean`) Specifies
- *               whether the Amazon EBS volume is deleted on instance
- *               termination.
- *             * `VolumeType` &mdash; (`String`)
- *               Possible values include:
- *               * `standard`
- *               * `io1`
- *             * `Iops` &mdash; (`Integer`)
- *           * `NoDevice` &mdash; (`String`) Specifies the device name to
- *             suppress during instance launch.
- *         * `VirtualizationType` &mdash; (`String`)
- *           Possible values include:
- *           * `hvm`
- *           * `paravirtual`
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the Image.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *         * `Hypervisor` &mdash; (`String`)
- *           Possible values include:
- *           * `ovm`
- *           * `xen`
+ *           * `ImageId` &mdash; (`String`) The unique ID of the AMI.
+ *           * `ImageLocation` &mdash; (`String`) The location of the AMI.
+ *           * `State` &mdash; (`String`) Current state of the AMI. If the
+ *             operation returns available, the image is successfully
+ *             registered and available for launching. If the operation
+ *             returns deregistered, the image is deregistered and no
+ *             longer available for launching.
+ *             Possible values include:
+ *             * `available`
+ *             * `deregistered`
+ *           * `OwnerId` &mdash; (`String`) AWS Access Key ID of the image
+ *             owner.
+ *           * `Public` &mdash; (`Boolean`) True if this image has public
+ *             launch permissions. False if it only has implicit and
+ *             explicit launch permissions.
+ *           * `ProductCodes` &mdash; (`Array<map>`) Product codes of the
+ *             AMI.
+ *               * `ProductCodeId` &mdash; (`String`) The unique ID of an
+ *                 AWS DevPay product code.
+ *               * `ProductCodeType` &mdash; (`String`)
+ *           * `Architecture` &mdash; (`String`) The architecture of the
+ *             image.
+ *           * `ImageType` &mdash; (`String`) The type of image (machine,
+ *             kernel, or ramdisk).
+ *           * `KernelId` &mdash; (`String`) The kernel associated with the
+ *             image, if any. Only applicable for machine images.
+ *           * `RamdiskId` &mdash; (`String`) The RAM disk associated with
+ *             the image, if any. Only applicable for machine images.
+ *           * `Platform` &mdash; (`String`) The operating platform of the
+ *             AMI.
+ *           * `StateReason` &mdash; (`map`) The reason for the state
+ *             change.
+ *               * `Code` &mdash; (`String`) Reason code for the state
+ *                 change.
+ *               * `Message` &mdash; (`String`) Descriptive message for the
+ *                 state change.
+ *           * `ImageOwnerAlias` &mdash; (`String`) The AWS account alias
+ *             (e.g., "amazon", "redhat", "self", etc.) or AWS account ID
+ *             that owns the AMI.
+ *           * `Name` &mdash; (`String`) The name of the AMI that was
+ *             provided during image creation.
+ *           * `Description` &mdash; (`String`) The description of the AMI
+ *             that was provided during image creation.
+ *           * `RootDeviceType` &mdash; (`String`) The root device type
+ *             used by the AMI. The AMI can use an Amazon EBS or instance
+ *             store root device.
+ *           * `RootDeviceName` &mdash; (`String`) The root device name
+ *             (e.g., /dev/sda1).
+ *           * `BlockDeviceMappings` &mdash; (`Array<map>`) Specifies how
+ *             block devices are exposed to the instance.
+ *               * `VirtualName` &mdash; (`String`) Specifies the virtual
+ *                 device name.
+ *               * `DeviceName` &mdash; (`String`) Specifies the device
+ *                 name (e.g., /dev/sdh).
+ *               * `Ebs` &mdash; (`map`) Specifies parameters used to
+ *                 automatically setup Amazon EBS volumes when the instance
+ *                 is launched.
+ *                   * `SnapshotId` &mdash; (`String`) The ID of the
+ *                     snapshot from which the volume will be created.
+ *                   * `VolumeSize` &mdash; (`Integer`) The size of the
+ *                     volume, in gigabytes.
+ *                   * `DeleteOnTermination` &mdash; (`Boolean`) Specifies
+ *                     whether the Amazon EBS volume is deleted on instance
+ *                     termination.
+ *                   * `VolumeType` &mdash; (`String`)
+ *                     Possible values include:
+ *                     * `standard`
+ *                     * `io1`
+ *                   * `Iops` &mdash; (`Integer`)
+ *               * `NoDevice` &mdash; (`String`) Specifies the device name
+ *                 to suppress during instance launch.
+ *           * `VirtualizationType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `hvm`
+ *             * `paravirtual`
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the Image.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
+ *           * `Hypervisor` &mdash; (`String`)
+ *             Possible values include:
+ *             * `ovm`
+ *             * `xen`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2454,46 +2480,48 @@ AWS.EC2 = inherit({})
  *         instance.
  *       * `InstanceType` &mdash; (`map`) The instance type (e.g.,
  *         m1.small, c1.medium, m2.2xlarge, and so on).
- *         * `Value` &mdash; (`String`) String value
+ *           * `Value` &mdash; (`String`) String value
  *       * `KernelId` &mdash; (`map`) The kernel ID of the associated
  *         instance.
- *         * `Value` &mdash; (`String`) String value
+ *           * `Value` &mdash; (`String`) String value
  *       * `RamdiskId` &mdash; (`map`) The ramdisk ID of the associated
  *         instance.
- *         * `Value` &mdash; (`String`) String value
+ *           * `Value` &mdash; (`String`) String value
  *       * `UserData` &mdash; (`map`) MIME, Base64-encoded user data.
- *         * `Value` &mdash; (`String`) String value
+ *           * `Value` &mdash; (`String`) String value
  *       * `DisableApiTermination` &mdash; (`map`) Whether this instance
  *         can be terminated. You must modify this attribute before you can
  *         terminate any "locked" instances.
- *         * `Value` &mdash; (`Boolean`) Boolean value
+ *           * `Value` &mdash; (`Boolean`) Boolean value
  *       * `InstanceInitiatedShutdownBehavior` &mdash; (`map`) Whether this
  *         instance's Amazon EBS volumes are deleted when the instance is
  *         shut down.
- *         * `Value` &mdash; (`String`) String value
+ *           * `Value` &mdash; (`String`) String value
  *       * `RootDeviceName` &mdash; (`map`) The root device name (e.g.,
  *         /dev/sda1).
- *         * `Value` &mdash; (`String`) String value
+ *           * `Value` &mdash; (`String`) String value
  *       * `BlockDeviceMappings` &mdash; (`Array<map>`) How block devices
  *         are exposed to this instance. Each mapping is made up of a
  *         virtualName and a deviceName.
- *         * `DeviceName` &mdash; (`String`) The device name (e.g.,
- *           /dev/sdh) at which the block device is exposed on the
- *           instance.
- *         * `Ebs` &mdash; (`map`) The optional EBS device mapped to the
- *           specified device name.
- *           * `VolumeId` &mdash; (`String`) The ID of the EBS volume.
- *           * `Status` &mdash; (`String`) The status of the EBS volume.
- *           * `AttachTime` &mdash; (`Date`) The time at which the EBS
- *             volume was attached to the associated instance.
- *           * `DeleteOnTermination` &mdash; (`Boolean`) Specifies whether
- *             the Amazon EBS volume is deleted on instance termination.
+ *           * `DeviceName` &mdash; (`String`) The device name (e.g.,
+ *             /dev/sdh) at which the block device is exposed on the
+ *             instance.
+ *           * `Ebs` &mdash; (`map`) The optional EBS device mapped to the
+ *             specified device name.
+ *               * `VolumeId` &mdash; (`String`) The ID of the EBS volume.
+ *               * `Status` &mdash; (`String`) The status of the EBS
+ *                 volume.
+ *               * `AttachTime` &mdash; (`Date`) The time at which the EBS
+ *                 volume was attached to the associated instance.
+ *               * `DeleteOnTermination` &mdash; (`Boolean`) Specifies
+ *                 whether the Amazon EBS volume is deleted on instance
+ *                 termination.
  *       * `ProductCodes` &mdash; (`Array<map>`)
- *         * `ProductCodeId` &mdash; (`String`) The unique ID of an AWS
- *           DevPay product code.
- *         * `ProductCodeType` &mdash; (`String`)
+ *           * `ProductCodeId` &mdash; (`String`) The unique ID of an AWS
+ *             DevPay product code.
+ *           * `ProductCodeType` &mdash; (`String`)
  *       * `EbsOptimized` &mdash; (`map`)
- *         * `Value` &mdash; (`Boolean`) Boolean value
+ *           * `Value` &mdash; (`Boolean`) Boolean value
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2504,9 +2532,9 @@ AWS.EC2 = inherit({})
  *       IDs. If not specified, all instances are described.
  *     * `Filters` &mdash; (`Array<map>`) The list of filters to limit
  *       returned results.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *     * `NextToken` &mdash; (`String`) A string specifying the next
  *       paginated set of results to return.
  *     * `MaxResults` &mdash; (`Integer`) The maximum number of paginated
@@ -2524,44 +2552,47 @@ AWS.EC2 = inherit({})
  *
  *       * `InstanceStatuses` &mdash; (`Array<map>`) Collection of instance
  *         statuses describing the state of the requested instances.
- *         * `InstanceId` &mdash; (`String`) The ID of the Amazon EC2
- *           instance.
- *         * `AvailabilityZone` &mdash; (`String`) The Amazon EC2
- *           instance's availability zone.
- *         * `Events` &mdash; (`Array<map>`) Events that affect the status
- *           of the associated Amazon EC2 instance.
- *           * `Code` &mdash; (`String`) The associated code of the event.
- *             Valid values: instance-reboot, system-reboot,
- *             instance-retirement
- *           * `Description` &mdash; (`String`) A description of the event.
- *           * `NotBefore` &mdash; (`Date`) The earliest scheduled start
- *             time for the event.
- *           * `NotAfter` &mdash; (`Date`) The latest scheduled end time
- *             for the event.
- *         * `InstanceState` &mdash; (`map`)
- *           * `Code` &mdash; (`Integer`) A 16-bit unsigned integer. The
- *             high byte is an opaque internal value and should be ignored.
- *             The low byte is set based on the state represented.
- *           * `Name` &mdash; (`String`) The current state of the instance.
- *             Possible values include:
- *             * `pending`
- *             * `running`
- *             * `shutting-down`
- *             * `terminated`
- *             * `stopping`
- *             * `stopped`
- *         * `SystemStatus` &mdash; (`map`)
- *           * `Status` &mdash; (`String`)
- *           * `Details` &mdash; (`Array<map>`)
- *             * `Name` &mdash; (`String`)
- *             * `Status` &mdash; (`String`)
- *             * `ImpairedSince` &mdash; (`Date`)
- *         * `InstanceStatus` &mdash; (`map`)
- *           * `Status` &mdash; (`String`)
- *           * `Details` &mdash; (`Array<map>`)
- *             * `Name` &mdash; (`String`)
- *             * `Status` &mdash; (`String`)
- *             * `ImpairedSince` &mdash; (`Date`)
+ *           * `InstanceId` &mdash; (`String`) The ID of the Amazon EC2
+ *             instance.
+ *           * `AvailabilityZone` &mdash; (`String`) The Amazon EC2
+ *             instance's availability zone.
+ *           * `Events` &mdash; (`Array<map>`) Events that affect the
+ *             status of the associated Amazon EC2 instance.
+ *               * `Code` &mdash; (`String`) The associated code of the
+ *                 event. Valid values: instance-reboot, system-reboot,
+ *                 instance-retirement
+ *               * `Description` &mdash; (`String`) A description of the
+ *                 event.
+ *               * `NotBefore` &mdash; (`Date`) The earliest scheduled
+ *                 start time for the event.
+ *               * `NotAfter` &mdash; (`Date`) The latest scheduled end
+ *                 time for the event.
+ *           * `InstanceState` &mdash; (`map`)
+ *               * `Code` &mdash; (`Integer`) A 16-bit unsigned integer.
+ *                 The high byte is an opaque internal value and should be
+ *                 ignored. The low byte is set based on the state
+ *                 represented.
+ *               * `Name` &mdash; (`String`) The current state of the
+ *                 instance.
+ *                 Possible values include:
+ *                 * `pending`
+ *                 * `running`
+ *                 * `shutting-down`
+ *                 * `terminated`
+ *                 * `stopping`
+ *                 * `stopped`
+ *           * `SystemStatus` &mdash; (`map`)
+ *               * `Status` &mdash; (`String`)
+ *               * `Details` &mdash; (`Array<map>`)
+ *                   * `Name` &mdash; (`String`)
+ *                   * `Status` &mdash; (`String`)
+ *                   * `ImpairedSince` &mdash; (`Date`)
+ *           * `InstanceStatus` &mdash; (`map`)
+ *               * `Status` &mdash; (`String`)
+ *               * `Details` &mdash; (`Array<map>`)
+ *                   * `Name` &mdash; (`String`)
+ *                   * `Status` &mdash; (`String`)
+ *                   * `ImpairedSince` &mdash; (`Date`)
  *       * `NextToken` &mdash; (`String`) A string specifying the next
  *         paginated set of results to return.
  *   @return [AWS.Request] a handle to the operation request for
@@ -2576,9 +2607,9 @@ AWS.EC2 = inherit({})
  *       properties for Instances. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -2591,198 +2622,205 @@ AWS.EC2 = inherit({})
  *
  *       * `Reservations` &mdash; (`Array<map>`) The list of reservations
  *         containing the describes instances.
- *         * `ReservationId` &mdash; (`String`) The unique ID of this
- *           reservation.
- *         * `OwnerId` &mdash; (`String`) The AWS Access Key ID of the user
- *           who owns the reservation.
- *         * `RequesterId` &mdash; (`String`) The unique ID of the user who
- *           requested the instances in this reservation.
- *         * `Groups` &mdash; (`Array<map>`) The list of security groups
- *           requested for the instances in this reservation.
- *           * `GroupName` &mdash; (`String`)
- *           * `GroupId` &mdash; (`String`)
- *         * `Instances` &mdash; (`Array<map>`) The list of Amazon EC2
- *           instances included in this reservation.
- *           * `InstanceId` &mdash; (`String`) Unique ID of the instance
- *             launched.
- *           * `ImageId` &mdash; (`String`) Image ID of the AMI used to
- *             launch the instance.
- *           * `State` &mdash; (`map`) The current state of the instance.
- *             * `Code` &mdash; (`Integer`) A 16-bit unsigned integer. The
- *               high byte is an opaque internal value and should be
- *               ignored. The low byte is set based on the state
- *               represented.
- *             * `Name` &mdash; (`String`) The current state of the
- *               instance.
- *               Possible values include:
- *               * `pending`
- *               * `running`
- *               * `shutting-down`
- *               * `terminated`
- *               * `stopping`
- *               * `stopped`
- *           * `PrivateDnsName` &mdash; (`String`) The private DNS name
- *             assigned to the instance. This DNS name can only be used
- *             inside the Amazon EC2 network. This element remains empty
- *             until the instance enters a running state.
- *           * `PublicDnsName` &mdash; (`String`) The public DNS name
- *             assigned to the instance. This DNS name is contactable from
- *             outside the Amazon EC2 network. This element remains empty
- *             until the instance enters a running state.
- *           * `StateTransitionReason` &mdash; (`String`) Reason for the
- *             most recent state transition. This might be an empty string.
- *           * `KeyName` &mdash; (`String`) If this instance was launched
- *             with an associated key pair, this displays the key pair
- *             name.
- *           * `AmiLaunchIndex` &mdash; (`Integer`) The AMI launch index,
- *             which can be used to find this instance within the launch
- *             group.
- *           * `ProductCodes` &mdash; (`Array<map>`) Product codes attached
- *             to this instance.
- *             * `ProductCodeId` &mdash; (`String`) The unique ID of an AWS
- *               DevPay product code.
- *             * `ProductCodeType` &mdash; (`String`)
- *           * `InstanceType` &mdash; (`String`) The instance type. For
- *             more information on instance types, please see the Amazon
- *             Elastic Compute Cloud Developer Guide.
- *             Possible values include:
- *             * `t1.micro`
- *             * `m1.small`
- *             * `m1.medium`
- *             * `m1.large`
- *             * `m1.xlarge`
- *             * `m2.xlarge`
- *             * `m2.2xlarge`
- *             * `m2.4xlarge`
- *             * `m3.xlarge`
- *             * `m3.2xlarge`
- *             * `c1.medium`
- *             * `c1.xlarge`
- *             * `hi1.4xlarge`
- *             * `hs1.8xlarge`
- *             * `cc1.4xlarge`
- *             * `cc2.8xlarge`
- *             * `cg1.4xlarge`
- *           * `LaunchTime` &mdash; (`Date`) The time this instance
- *             launched.
- *           * `Placement` &mdash; (`map`) The location where this instance
- *             launched.
- *             * `AvailabilityZone` &mdash; (`String`) The availability
- *               zone in which an Amazon EC2 instance runs.
- *             * `GroupName` &mdash; (`String`) The name of the
- *               PlacementGroup in which an Amazon EC2 instance runs.
- *               Placement groups are primarily used for launching High
- *               Performance Computing instances in the same group to
- *               ensure fast connection speeds.
- *             * `Tenancy` &mdash; (`String`) The allowed tenancy of
- *               instances launched into the VPC. A value of default means
- *               instances can be launched with any tenancy; a value of
- *               dedicated means all instances launched into the VPC will
- *               be launched as dedicated tenancy regardless of the tenancy
- *               assigned to the instance at launch.
- *           * `KernelId` &mdash; (`String`) Kernel associated with this
- *             instance.
- *           * `RamdiskId` &mdash; (`String`) RAM disk associated with this
- *             instance.
- *           * `Platform` &mdash; (`String`) Platform of the instance
- *             (e.g., Windows).
- *           * `Monitoring` &mdash; (`map`) Monitoring status for this
- *             instance.
- *             * `State` &mdash; (`String`) The state of monitoring on an
- *               Amazon EC2 instance (ex: enabled, disabled).
- *           * `SubnetId` &mdash; (`String`) Specifies the Amazon VPC
- *             subnet ID in which the instance is running.
- *           * `VpcId` &mdash; (`String`) Specifies the Amazon VPC in which
- *             the instance is running.
- *           * `PrivateIpAddress` &mdash; (`String`) Specifies the private
- *             IP address that is assigned to the instance (Amazon VPC).
- *           * `PublicIpAddress` &mdash; (`String`) Specifies the IP
- *             address of the instance.
- *           * `StateReason` &mdash; (`map`) The reason for the state
- *             change.
- *             * `Code` &mdash; (`String`) Reason code for the state
- *               change.
- *             * `Message` &mdash; (`String`) Descriptive message for the
- *               state change.
- *           * `Architecture` &mdash; (`String`) The architecture of this
- *             instance.
- *           * `RootDeviceType` &mdash; (`String`) The root device type
- *             used by the AMI. The AMI can use an Amazon EBS or instance
- *             store root device.
- *           * `RootDeviceName` &mdash; (`String`) The root device name
- *             (e.g., /dev/sda1).
- *           * `BlockDeviceMappings` &mdash; (`Array<map>`) Block device
- *             mapping set.
- *             * `DeviceName` &mdash; (`String`) The device name (e.g.,
- *               /dev/sdh) at which the block device is exposed on the
- *               instance.
- *             * `Ebs` &mdash; (`map`) The optional EBS device mapped to
- *               the specified device name.
- *               * `VolumeId` &mdash; (`String`) The ID of the EBS volume.
- *               * `Status` &mdash; (`String`) The status of the EBS
- *                 volume.
- *               * `AttachTime` &mdash; (`Date`) The time at which the EBS
- *                 volume was attached to the associated instance.
- *               * `DeleteOnTermination` &mdash; (`Boolean`) Specifies
- *                 whether the Amazon EBS volume is deleted on instance
- *                 termination.
- *           * `VirtualizationType` &mdash; (`String`)
- *             Possible values include:
- *             * `hvm`
- *             * `paravirtual`
- *           * `InstanceLifecycle` &mdash; (`String`)
- *           * `SpotInstanceRequestId` &mdash; (`String`)
- *           * `License` &mdash; (`map`)
- *             * `Pool` &mdash; (`String`) The license pool from which this
- *               license was used (ex: 'windows').
- *           * `ClientToken` &mdash; (`String`)
- *           * `Tags` &mdash; (`Array<map>`) A list of tags for the
- *             Instance.
- *             * `Key` &mdash; (`String`) The tag's key.
- *             * `Value` &mdash; (`String`) The tag's value.
- *           * `SecurityGroups` &mdash; (`Array<map>`)
- *             * `GroupName` &mdash; (`String`)
- *             * `GroupId` &mdash; (`String`)
- *           * `SourceDestCheck` &mdash; (`Boolean`)
- *           * `Hypervisor` &mdash; (`String`)
- *             Possible values include:
- *             * `ovm`
- *             * `xen`
- *           * `NetworkInterfaces` &mdash; (`Array<map>`)
- *             * `NetworkInterfaceId` &mdash; (`String`)
- *             * `SubnetId` &mdash; (`String`)
- *             * `VpcId` &mdash; (`String`)
- *             * `Description` &mdash; (`String`)
- *             * `OwnerId` &mdash; (`String`)
- *             * `Status` &mdash; (`String`)
- *             * `PrivateIpAddress` &mdash; (`String`)
- *             * `PrivateDnsName` &mdash; (`String`)
- *             * `SourceDestCheck` &mdash; (`Boolean`)
- *             * `Groups` &mdash; (`Array<map>`)
+ *           * `ReservationId` &mdash; (`String`) The unique ID of this
+ *             reservation.
+ *           * `OwnerId` &mdash; (`String`) The AWS Access Key ID of the
+ *             user who owns the reservation.
+ *           * `RequesterId` &mdash; (`String`) The unique ID of the user
+ *             who requested the instances in this reservation.
+ *           * `Groups` &mdash; (`Array<map>`) The list of security groups
+ *             requested for the instances in this reservation.
  *               * `GroupName` &mdash; (`String`)
  *               * `GroupId` &mdash; (`String`)
- *             * `Attachment` &mdash; (`map`)
- *               * `AttachmentId` &mdash; (`String`)
- *               * `DeviceIndex` &mdash; (`Integer`)
- *               * `Status` &mdash; (`String`)
- *               * `AttachTime` &mdash; (`Date`)
- *               * `DeleteOnTermination` &mdash; (`Boolean`)
- *             * `Association` &mdash; (`map`)
- *               * `PublicIp` &mdash; (`String`)
- *               * `PublicDnsName` &mdash; (`String`)
- *               * `IpOwnerId` &mdash; (`String`)
- *             * `PrivateIpAddresses` &mdash; (`Array<map>`)
- *               * `PrivateIpAddress` &mdash; (`String`)
- *               * `PrivateDnsName` &mdash; (`String`)
- *               * `Primary` &mdash; (`Boolean`)
- *               * `Association` &mdash; (`map`)
- *                 * `PublicIp` &mdash; (`String`)
- *                 * `PublicDnsName` &mdash; (`String`)
- *                 * `IpOwnerId` &mdash; (`String`)
- *           * `IamInstanceProfile` &mdash; (`map`)
- *             * `Arn` &mdash; (`String`)
- *             * `Id` &mdash; (`String`)
- *           * `EbsOptimized` &mdash; (`Boolean`)
+ *           * `Instances` &mdash; (`Array<map>`) The list of Amazon EC2
+ *             instances included in this reservation.
+ *               * `InstanceId` &mdash; (`String`) Unique ID of the
+ *                 instance launched.
+ *               * `ImageId` &mdash; (`String`) Image ID of the AMI used to
+ *                 launch the instance.
+ *               * `State` &mdash; (`map`) The current state of the
+ *                 instance.
+ *                   * `Code` &mdash; (`Integer`) A 16-bit unsigned
+ *                     integer. The high byte is an opaque internal value
+ *                     and should be ignored. The low byte is set based on
+ *                     the state represented.
+ *                   * `Name` &mdash; (`String`) The current state of the
+ *                     instance.
+ *                     Possible values include:
+ *                     * `pending`
+ *                     * `running`
+ *                     * `shutting-down`
+ *                     * `terminated`
+ *                     * `stopping`
+ *                     * `stopped`
+ *               * `PrivateDnsName` &mdash; (`String`) The private DNS name
+ *                 assigned to the instance. This DNS name can only be used
+ *                 inside the Amazon EC2 network. This element remains
+ *                 empty until the instance enters a running state.
+ *               * `PublicDnsName` &mdash; (`String`) The public DNS name
+ *                 assigned to the instance. This DNS name is contactable
+ *                 from outside the Amazon EC2 network. This element
+ *                 remains empty until the instance enters a running state.
+ *               * `StateTransitionReason` &mdash; (`String`) Reason for
+ *                 the most recent state transition. This might be an empty
+ *                 string.
+ *               * `KeyName` &mdash; (`String`) If this instance was
+ *                 launched with an associated key pair, this displays the
+ *                 key pair name.
+ *               * `AmiLaunchIndex` &mdash; (`Integer`) The AMI launch
+ *                 index, which can be used to find this instance within
+ *                 the launch group.
+ *               * `ProductCodes` &mdash; (`Array<map>`) Product codes
+ *                 attached to this instance.
+ *                   * `ProductCodeId` &mdash; (`String`) The unique ID of
+ *                     an AWS DevPay product code.
+ *                   * `ProductCodeType` &mdash; (`String`)
+ *               * `InstanceType` &mdash; (`String`) The instance type. For
+ *                 more information on instance types, please see the
+ *                 Amazon Elastic Compute Cloud Developer Guide.
+ *                 Possible values include:
+ *                 * `t1.micro`
+ *                 * `m1.small`
+ *                 * `m1.medium`
+ *                 * `m1.large`
+ *                 * `m1.xlarge`
+ *                 * `m2.xlarge`
+ *                 * `m2.2xlarge`
+ *                 * `m2.4xlarge`
+ *                 * `m3.xlarge`
+ *                 * `m3.2xlarge`
+ *                 * `c1.medium`
+ *                 * `c1.xlarge`
+ *                 * `hi1.4xlarge`
+ *                 * `hs1.8xlarge`
+ *                 * `cc1.4xlarge`
+ *                 * `cc2.8xlarge`
+ *                 * `cg1.4xlarge`
+ *               * `LaunchTime` &mdash; (`Date`) The time this instance
+ *                 launched.
+ *               * `Placement` &mdash; (`map`) The location where this
+ *                 instance launched.
+ *                   * `AvailabilityZone` &mdash; (`String`) The
+ *                     availability zone in which an Amazon EC2 instance
+ *                     runs.
+ *                   * `GroupName` &mdash; (`String`) The name of the
+ *                     PlacementGroup in which an Amazon EC2 instance runs.
+ *                     Placement groups are primarily used for launching
+ *                     High Performance Computing instances in the same
+ *                     group to ensure fast connection speeds.
+ *                   * `Tenancy` &mdash; (`String`) The allowed tenancy of
+ *                     instances launched into the VPC. A value of default
+ *                     means instances can be launched with any tenancy; a
+ *                     value of dedicated means all instances launched into
+ *                     the VPC will be launched as dedicated tenancy
+ *                     regardless of the tenancy assigned to the instance
+ *                     at launch.
+ *               * `KernelId` &mdash; (`String`) Kernel associated with
+ *                 this instance.
+ *               * `RamdiskId` &mdash; (`String`) RAM disk associated with
+ *                 this instance.
+ *               * `Platform` &mdash; (`String`) Platform of the instance
+ *                 (e.g., Windows).
+ *               * `Monitoring` &mdash; (`map`) Monitoring status for this
+ *                 instance.
+ *                   * `State` &mdash; (`String`) The state of monitoring
+ *                     on an Amazon EC2 instance (ex: enabled, disabled).
+ *               * `SubnetId` &mdash; (`String`) Specifies the Amazon VPC
+ *                 subnet ID in which the instance is running.
+ *               * `VpcId` &mdash; (`String`) Specifies the Amazon VPC in
+ *                 which the instance is running.
+ *               * `PrivateIpAddress` &mdash; (`String`) Specifies the
+ *                 private IP address that is assigned to the instance
+ *                 (Amazon VPC).
+ *               * `PublicIpAddress` &mdash; (`String`) Specifies the IP
+ *                 address of the instance.
+ *               * `StateReason` &mdash; (`map`) The reason for the state
+ *                 change.
+ *                   * `Code` &mdash; (`String`) Reason code for the state
+ *                     change.
+ *                   * `Message` &mdash; (`String`) Descriptive message for
+ *                     the state change.
+ *               * `Architecture` &mdash; (`String`) The architecture of
+ *                 this instance.
+ *               * `RootDeviceType` &mdash; (`String`) The root device type
+ *                 used by the AMI. The AMI can use an Amazon EBS or
+ *                 instance store root device.
+ *               * `RootDeviceName` &mdash; (`String`) The root device name
+ *                 (e.g., /dev/sda1).
+ *               * `BlockDeviceMappings` &mdash; (`Array<map>`) Block
+ *                 device mapping set.
+ *                   * `DeviceName` &mdash; (`String`) The device name
+ *                     (e.g., /dev/sdh) at which the block device is
+ *                     exposed on the instance.
+ *                   * `Ebs` &mdash; (`map`) The optional EBS device mapped
+ *                     to the specified device name.
+ *                       * `VolumeId` &mdash; (`String`) The ID of the EBS
+ *                         volume.
+ *                       * `Status` &mdash; (`String`) The status of the
+ *                         EBS volume.
+ *                       * `AttachTime` &mdash; (`Date`) The time at which
+ *                         the EBS volume was attached to the associated
+ *                         instance.
+ *                       * `DeleteOnTermination` &mdash; (`Boolean`)
+ *                         Specifies whether the Amazon EBS volume is
+ *                         deleted on instance termination.
+ *               * `VirtualizationType` &mdash; (`String`)
+ *                 Possible values include:
+ *                 * `hvm`
+ *                 * `paravirtual`
+ *               * `InstanceLifecycle` &mdash; (`String`)
+ *               * `SpotInstanceRequestId` &mdash; (`String`)
+ *               * `License` &mdash; (`map`)
+ *                   * `Pool` &mdash; (`String`) The license pool from
+ *                     which this license was used (ex: 'windows').
+ *               * `ClientToken` &mdash; (`String`)
+ *               * `Tags` &mdash; (`Array<map>`) A list of tags for the
+ *                 Instance.
+ *                   * `Key` &mdash; (`String`) The tag's key.
+ *                   * `Value` &mdash; (`String`) The tag's value.
+ *               * `SecurityGroups` &mdash; (`Array<map>`)
+ *                   * `GroupName` &mdash; (`String`)
+ *                   * `GroupId` &mdash; (`String`)
+ *               * `SourceDestCheck` &mdash; (`Boolean`)
+ *               * `Hypervisor` &mdash; (`String`)
+ *                 Possible values include:
+ *                 * `ovm`
+ *                 * `xen`
+ *               * `NetworkInterfaces` &mdash; (`Array<map>`)
+ *                   * `NetworkInterfaceId` &mdash; (`String`)
+ *                   * `SubnetId` &mdash; (`String`)
+ *                   * `VpcId` &mdash; (`String`)
+ *                   * `Description` &mdash; (`String`)
+ *                   * `OwnerId` &mdash; (`String`)
+ *                   * `Status` &mdash; (`String`)
+ *                   * `PrivateIpAddress` &mdash; (`String`)
+ *                   * `PrivateDnsName` &mdash; (`String`)
+ *                   * `SourceDestCheck` &mdash; (`Boolean`)
+ *                   * `Groups` &mdash; (`Array<map>`)
+ *                       * `GroupName` &mdash; (`String`)
+ *                       * `GroupId` &mdash; (`String`)
+ *                   * `Attachment` &mdash; (`map`)
+ *                       * `AttachmentId` &mdash; (`String`)
+ *                       * `DeviceIndex` &mdash; (`Integer`)
+ *                       * `Status` &mdash; (`String`)
+ *                       * `AttachTime` &mdash; (`Date`)
+ *                       * `DeleteOnTermination` &mdash; (`Boolean`)
+ *                   * `Association` &mdash; (`map`)
+ *                       * `PublicIp` &mdash; (`String`)
+ *                       * `PublicDnsName` &mdash; (`String`)
+ *                       * `IpOwnerId` &mdash; (`String`)
+ *                   * `PrivateIpAddresses` &mdash; (`Array<map>`)
+ *                       * `PrivateIpAddress` &mdash; (`String`)
+ *                       * `PrivateDnsName` &mdash; (`String`)
+ *                       * `Primary` &mdash; (`Boolean`)
+ *                       * `Association` &mdash; (`map`)
+ *                           * `PublicIp` &mdash; (`String`)
+ *                           * `PublicDnsName` &mdash; (`String`)
+ *                           * `IpOwnerId` &mdash; (`String`)
+ *               * `IamInstanceProfile` &mdash; (`map`)
+ *                   * `Arn` &mdash; (`String`)
+ *                   * `Id` &mdash; (`String`)
+ *               * `EbsOptimized` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2795,9 +2833,9 @@ AWS.EC2 = inherit({})
  *       properties for Internet Gateways. For a complete reference to
  *       the available filter keys for this operation, see the Amazon EC2
  *       API reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -2809,13 +2847,13 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `InternetGateways` &mdash; (`Array<map>`)
- *         * `InternetGatewayId` &mdash; (`String`)
- *         * `Attachments` &mdash; (`Array<map>`)
- *           * `VpcId` &mdash; (`String`)
- *           * `State` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<map>`)
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
+ *           * `InternetGatewayId` &mdash; (`String`)
+ *           * `Attachments` &mdash; (`Array<map>`)
+ *               * `VpcId` &mdash; (`String`)
+ *               * `State` &mdash; (`String`)
+ *           * `Tags` &mdash; (`Array<map>`)
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2828,9 +2866,9 @@ AWS.EC2 = inherit({})
  *       properties for KeyPairs. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -2843,9 +2881,9 @@ AWS.EC2 = inherit({})
  *
  *       * `KeyPairs` &mdash; (`Array<map>`) The list of described key
  *         pairs.
- *         * `KeyName` &mdash; (`String`) The name of the key pair.
- *         * `KeyFingerprint` &mdash; (`String`) The SHA-1 digest of the
- *           DER encoded private key.
+ *           * `KeyName` &mdash; (`String`) The name of the key pair.
+ *           * `KeyFingerprint` &mdash; (`String`) The SHA-1 digest of the
+ *             DER encoded private key.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2858,9 +2896,9 @@ AWS.EC2 = inherit({})
  *       properties for Licenses. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -2873,31 +2911,32 @@ AWS.EC2 = inherit({})
  *
  *       * `Licenses` &mdash; (`Array<map>`) Specifies active licenses in
  *         use and attached to an Amazon EC2 instance.
- *         * `LicenseId` &mdash; (`String`) The unique ID identifying the
- *           license.
- *         * `Type` &mdash; (`String`) The license type (ex.
- *           "Microsoft/Windows/Standard").
- *         * `Pool` &mdash; (`String`) The name of the pool in which the
- *           license is kept.
- *         * `Capacities` &mdash; (`Array<map>`) The capacities available
- *           for this license, indicating how many licenses are in use, how
- *           many are available, how many Amazon EC2 instances can be
- *           supported, etc.
- *           * `Capacity` &mdash; (`Integer`) The number of licenses
- *             available.
- *           * `InstanceCapacity` &mdash; (`Integer`) The number of Amazon
- *             EC2 instances that can be supported with the license's
- *             capacity.
- *           * `State` &mdash; (`String`) The state of this license
- *             capacity, indicating whether the license is actively being
- *             used or not.
- *           * `EarliestAllowedDeactivationTime` &mdash; (`Date`) The
- *             earliest allowed time at which a license can be deactivated.
- *             Some licenses have time restrictions on when they can be
- *             activated and reactivated.
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the License.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
+ *           * `LicenseId` &mdash; (`String`) The unique ID identifying the
+ *             license.
+ *           * `Type` &mdash; (`String`) The license type (ex.
+ *             "Microsoft/Windows/Standard").
+ *           * `Pool` &mdash; (`String`) The name of the pool in which the
+ *             license is kept.
+ *           * `Capacities` &mdash; (`Array<map>`) The capacities available
+ *             for this license, indicating how many licenses are in use,
+ *             how many are available, how many Amazon EC2 instances can be
+ *             supported, etc.
+ *               * `Capacity` &mdash; (`Integer`) The number of licenses
+ *                 available.
+ *               * `InstanceCapacity` &mdash; (`Integer`) The number of
+ *                 Amazon EC2 instances that can be supported with the
+ *                 license's capacity.
+ *               * `State` &mdash; (`String`) The state of this license
+ *                 capacity, indicating whether the license is actively
+ *                 being used or not.
+ *               * `EarliestAllowedDeactivationTime` &mdash; (`Date`) The
+ *                 earliest allowed time at which a license can be
+ *                 deactivated. Some licenses have time restrictions on
+ *                 when they can be activated and reactivated.
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the
+ *             License.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2910,9 +2949,9 @@ AWS.EC2 = inherit({})
  *       properties for Network ACLs. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -2924,37 +2963,40 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `NetworkAcls` &mdash; (`Array<map>`)
- *         * `NetworkAclId` &mdash; (`String`)
- *         * `VpcId` &mdash; (`String`)
- *         * `IsDefault` &mdash; (`Boolean`)
- *         * `Entries` &mdash; (`Array<map>`)
- *           * `RuleNumber` &mdash; (`Integer`)
- *           * `Protocol` &mdash; (`String`)
- *           * `RuleAction` &mdash; (`String`)
- *             Possible values include:
- *             * `allow`
- *             * `deny`
- *           * `Egress` &mdash; (`Boolean`)
- *           * `CidrBlock` &mdash; (`String`)
- *           * `IcmpTypeCode` &mdash; (`map`)
- *             * `Type` &mdash; (`Integer`) For the ICMP protocol, the ICMP
- *               type. A value of -1 is a wildcard meaning all types.
- *               Required if specifying icmp for the protocol.
- *             * `Code` &mdash; (`Integer`) For the ICMP protocol, the ICMP
- *               code. A value of -1 is a wildcard meaning all codes.
- *               Required if specifying icmp for the protocol.
- *           * `PortRange` &mdash; (`map`)
- *             * `From` &mdash; (`Integer`) The first port in the range.
- *               Required if specifying tcp or udp for the protocol.
- *             * `To` &mdash; (`Integer`) The last port in the range.
- *               Required if specifying tcp or udp for the protocol.
- *         * `Associations` &mdash; (`Array<map>`)
- *           * `NetworkAclAssociationId` &mdash; (`String`)
  *           * `NetworkAclId` &mdash; (`String`)
- *           * `SubnetId` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<map>`)
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
+ *           * `VpcId` &mdash; (`String`)
+ *           * `IsDefault` &mdash; (`Boolean`)
+ *           * `Entries` &mdash; (`Array<map>`)
+ *               * `RuleNumber` &mdash; (`Integer`)
+ *               * `Protocol` &mdash; (`String`)
+ *               * `RuleAction` &mdash; (`String`)
+ *                 Possible values include:
+ *                 * `allow`
+ *                 * `deny`
+ *               * `Egress` &mdash; (`Boolean`)
+ *               * `CidrBlock` &mdash; (`String`)
+ *               * `IcmpTypeCode` &mdash; (`map`)
+ *                   * `Type` &mdash; (`Integer`) For the ICMP protocol,
+ *                     the ICMP type. A value of -1 is a wildcard meaning
+ *                     all types. Required if specifying icmp for the
+ *                     protocol.
+ *                   * `Code` &mdash; (`Integer`) For the ICMP protocol,
+ *                     the ICMP code. A value of -1 is a wildcard meaning
+ *                     all codes. Required if specifying icmp for the
+ *                     protocol.
+ *               * `PortRange` &mdash; (`map`)
+ *                   * `From` &mdash; (`Integer`) The first port in the
+ *                     range. Required if specifying tcp or udp for the
+ *                     protocol.
+ *                   * `To` &mdash; (`Integer`) The last port in the range.
+ *                     Required if specifying tcp or udp for the protocol.
+ *           * `Associations` &mdash; (`Array<map>`)
+ *               * `NetworkAclAssociationId` &mdash; (`String`)
+ *               * `NetworkAclId` &mdash; (`String`)
+ *               * `SubnetId` &mdash; (`String`)
+ *           * `Tags` &mdash; (`Array<map>`)
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2978,20 +3020,20 @@ AWS.EC2 = inherit({})
  *
  *       * `NetworkInterfaceId` &mdash; (`String`)
  *       * `Description` &mdash; (`map`)
- *         * `Value` &mdash; (`String`) String value
+ *           * `Value` &mdash; (`String`) String value
  *       * `SourceDestCheck` &mdash; (`map`)
- *         * `Value` &mdash; (`Boolean`) Boolean value
+ *           * `Value` &mdash; (`Boolean`) Boolean value
  *       * `Groups` &mdash; (`Array<map>`)
- *         * `GroupName` &mdash; (`String`)
- *         * `GroupId` &mdash; (`String`)
+ *           * `GroupName` &mdash; (`String`)
+ *           * `GroupId` &mdash; (`String`)
  *       * `Attachment` &mdash; (`map`)
- *         * `AttachmentId` &mdash; (`String`)
- *         * `InstanceId` &mdash; (`String`)
- *         * `InstanceOwnerId` &mdash; (`String`)
- *         * `DeviceIndex` &mdash; (`Integer`)
- *         * `Status` &mdash; (`String`)
- *         * `AttachTime` &mdash; (`Date`)
- *         * `DeleteOnTermination` &mdash; (`Boolean`)
+ *           * `AttachmentId` &mdash; (`String`)
+ *           * `InstanceId` &mdash; (`String`)
+ *           * `InstanceOwnerId` &mdash; (`String`)
+ *           * `DeviceIndex` &mdash; (`Integer`)
+ *           * `Status` &mdash; (`String`)
+ *           * `AttachTime` &mdash; (`Date`)
+ *           * `DeleteOnTermination` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3000,9 +3042,9 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `NetworkInterfaceIds` &mdash; (`Array<String>`)
  *     * `Filters` &mdash; (`Array<map>`)
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3014,47 +3056,47 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `NetworkInterfaces` &mdash; (`Array<map>`)
- *         * `NetworkInterfaceId` &mdash; (`String`)
- *         * `SubnetId` &mdash; (`String`)
- *         * `VpcId` &mdash; (`String`)
- *         * `AvailabilityZone` &mdash; (`String`)
- *         * `Description` &mdash; (`String`)
- *         * `OwnerId` &mdash; (`String`)
- *         * `RequesterId` &mdash; (`String`)
- *         * `RequesterManaged` &mdash; (`Boolean`)
- *         * `Status` &mdash; (`String`)
- *         * `MacAddress` &mdash; (`String`)
- *         * `PrivateIpAddress` &mdash; (`String`)
- *         * `PrivateDnsName` &mdash; (`String`)
- *         * `SourceDestCheck` &mdash; (`Boolean`)
- *         * `Groups` &mdash; (`Array<map>`)
- *           * `GroupName` &mdash; (`String`)
- *           * `GroupId` &mdash; (`String`)
- *         * `Attachment` &mdash; (`map`)
- *           * `AttachmentId` &mdash; (`String`)
- *           * `InstanceId` &mdash; (`String`)
- *           * `InstanceOwnerId` &mdash; (`String`)
- *           * `DeviceIndex` &mdash; (`Integer`)
+ *           * `NetworkInterfaceId` &mdash; (`String`)
+ *           * `SubnetId` &mdash; (`String`)
+ *           * `VpcId` &mdash; (`String`)
+ *           * `AvailabilityZone` &mdash; (`String`)
+ *           * `Description` &mdash; (`String`)
+ *           * `OwnerId` &mdash; (`String`)
+ *           * `RequesterId` &mdash; (`String`)
+ *           * `RequesterManaged` &mdash; (`Boolean`)
  *           * `Status` &mdash; (`String`)
- *           * `AttachTime` &mdash; (`Date`)
- *           * `DeleteOnTermination` &mdash; (`Boolean`)
- *         * `Association` &mdash; (`map`)
- *           * `PublicIp` &mdash; (`String`)
- *           * `IpOwnerId` &mdash; (`String`)
- *           * `AllocationId` &mdash; (`String`)
- *           * `AssociationId` &mdash; (`String`)
- *         * `TagSet` &mdash; (`Array<map>`)
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *         * `PrivateIpAddresses` &mdash; (`Array<map>`)
+ *           * `MacAddress` &mdash; (`String`)
  *           * `PrivateIpAddress` &mdash; (`String`)
  *           * `PrivateDnsName` &mdash; (`String`)
- *           * `Primary` &mdash; (`Boolean`)
+ *           * `SourceDestCheck` &mdash; (`Boolean`)
+ *           * `Groups` &mdash; (`Array<map>`)
+ *               * `GroupName` &mdash; (`String`)
+ *               * `GroupId` &mdash; (`String`)
+ *           * `Attachment` &mdash; (`map`)
+ *               * `AttachmentId` &mdash; (`String`)
+ *               * `InstanceId` &mdash; (`String`)
+ *               * `InstanceOwnerId` &mdash; (`String`)
+ *               * `DeviceIndex` &mdash; (`Integer`)
+ *               * `Status` &mdash; (`String`)
+ *               * `AttachTime` &mdash; (`Date`)
+ *               * `DeleteOnTermination` &mdash; (`Boolean`)
  *           * `Association` &mdash; (`map`)
- *             * `PublicIp` &mdash; (`String`)
- *             * `IpOwnerId` &mdash; (`String`)
- *             * `AllocationId` &mdash; (`String`)
- *             * `AssociationId` &mdash; (`String`)
+ *               * `PublicIp` &mdash; (`String`)
+ *               * `IpOwnerId` &mdash; (`String`)
+ *               * `AllocationId` &mdash; (`String`)
+ *               * `AssociationId` &mdash; (`String`)
+ *           * `TagSet` &mdash; (`Array<map>`)
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
+ *           * `PrivateIpAddresses` &mdash; (`Array<map>`)
+ *               * `PrivateIpAddress` &mdash; (`String`)
+ *               * `PrivateDnsName` &mdash; (`String`)
+ *               * `Primary` &mdash; (`Boolean`)
+ *               * `Association` &mdash; (`map`)
+ *                   * `PublicIp` &mdash; (`String`)
+ *                   * `IpOwnerId` &mdash; (`String`)
+ *                   * `AllocationId` &mdash; (`String`)
+ *                   * `AssociationId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3067,9 +3109,9 @@ AWS.EC2 = inherit({})
  *       properties for Placement Groups. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3082,18 +3124,18 @@ AWS.EC2 = inherit({})
  *
  *       * `PlacementGroups` &mdash; (`Array<map>`) Contains information
  *         about the specified PlacementGroups.
- *         * `GroupName` &mdash; (`String`) The name of this
- *           PlacementGroup.
- *         * `Strategy` &mdash; (`String`) The strategy to use when
- *           allocating Amazon EC2 instances for the PlacementGroup.
- *           Possible values include:
- *           * `cluster`
- *         * `State` &mdash; (`String`) The state of this PlacementGroup.
- *           Possible values include:
- *           * `pending`
- *           * `available`
- *           * `deleting`
- *           * `deleted`
+ *           * `GroupName` &mdash; (`String`) The name of this
+ *             PlacementGroup.
+ *           * `Strategy` &mdash; (`String`) The strategy to use when
+ *             allocating Amazon EC2 instances for the PlacementGroup.
+ *             Possible values include:
+ *             * `cluster`
+ *           * `State` &mdash; (`String`) The state of this PlacementGroup.
+ *             Possible values include:
+ *             * `pending`
+ *             * `available`
+ *             * `deleting`
+ *             * `deleted`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3106,9 +3148,9 @@ AWS.EC2 = inherit({})
  *       properties for Regions. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3121,8 +3163,8 @@ AWS.EC2 = inherit({})
  *
  *       * `Regions` &mdash; (`Array<map>`) The list of described Amazon
  *         EC2 regions.
- *         * `RegionName` &mdash; (`String`) Name of the region.
- *         * `Endpoint` &mdash; (`String`) Region service endpoint.
+ *           * `RegionName` &mdash; (`String`) Name of the region.
+ *           * `Endpoint` &mdash; (`String`) Region service endpoint.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3135,9 +3177,9 @@ AWS.EC2 = inherit({})
  *       properties for ReservedInstances. For a complete reference to
  *       the available filter keys for this operation, see the Amazon EC2
  *       API reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *     * `OfferingType` &mdash; (`String`) The Reserved Instance offering
  *       type.
  *   @callback callback function(err, data)
@@ -3152,60 +3194,61 @@ AWS.EC2 = inherit({})
  *
  *       * `ReservedInstances` &mdash; (`Array<map>`) The list of described
  *         Reserved Instances.
- *         * `ReservedInstancesId` &mdash; (`String`) The unique ID of the
- *           Reserved Instances purchase.
- *         * `InstanceType` &mdash; (`String`) The instance type on which
- *           the Reserved Instances can be used.
- *           Possible values include:
- *           * `t1.micro`
- *           * `m1.small`
- *           * `m1.medium`
- *           * `m1.large`
- *           * `m1.xlarge`
- *           * `m2.xlarge`
- *           * `m2.2xlarge`
- *           * `m2.4xlarge`
- *           * `m3.xlarge`
- *           * `m3.2xlarge`
- *           * `c1.medium`
- *           * `c1.xlarge`
- *           * `hi1.4xlarge`
- *           * `hs1.8xlarge`
- *           * `cc1.4xlarge`
- *           * `cc2.8xlarge`
- *           * `cg1.4xlarge`
- *         * `AvailabilityZone` &mdash; (`String`) The Availability Zone in
- *           which the Reserved Instances can be used.
- *         * `Start` &mdash; (`Date`) The date and time the Reserved
- *           Instances started.
- *         * `Duration` &mdash; (`Integer`) The duration of the Reserved
- *           Instances, in seconds.
- *         * `UsagePrice` &mdash; (`Float`) The usage price of the Reserved
- *           Instances, per hour.
- *         * `FixedPrice` &mdash; (`Float`) The purchase price of the
- *           Reserved Instances.
- *         * `InstanceCount` &mdash; (`Integer`) The number of Reserved
- *           Instances purchased.
- *         * `ProductDescription` &mdash; (`String`) The Reserved Instances
- *           product description (ex: Windows or Unix/Linux).
- *         * `State` &mdash; (`String`) The state of the Reserved Instances
- *           purchase.
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the
- *           ReservedInstances.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *         * `InstanceTenancy` &mdash; (`String`) The tenancy of the
- *           reserved instance (ex: default or dedicated).
- *         * `CurrencyCode` &mdash; (`String`) The currency of the reserved
- *           instance. Specified using ISO 4217 standard (e.g., USD, JPY).
- *         * `OfferingType` &mdash; (`String`) The Reserved Instance
- *           offering type.
- *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring charge
- *           tag assigned to the resource.
- *           * `Frequency` &mdash; (`String`) The frequency of the
- *             recurring charge.
- *           * `Amount` &mdash; (`Float`) The amount of the recurring
- *             charge.
+ *           * `ReservedInstancesId` &mdash; (`String`) The unique ID of
+ *             the Reserved Instances purchase.
+ *           * `InstanceType` &mdash; (`String`) The instance type on which
+ *             the Reserved Instances can be used.
+ *             Possible values include:
+ *             * `t1.micro`
+ *             * `m1.small`
+ *             * `m1.medium`
+ *             * `m1.large`
+ *             * `m1.xlarge`
+ *             * `m2.xlarge`
+ *             * `m2.2xlarge`
+ *             * `m2.4xlarge`
+ *             * `m3.xlarge`
+ *             * `m3.2xlarge`
+ *             * `c1.medium`
+ *             * `c1.xlarge`
+ *             * `hi1.4xlarge`
+ *             * `hs1.8xlarge`
+ *             * `cc1.4xlarge`
+ *             * `cc2.8xlarge`
+ *             * `cg1.4xlarge`
+ *           * `AvailabilityZone` &mdash; (`String`) The Availability Zone
+ *             in which the Reserved Instances can be used.
+ *           * `Start` &mdash; (`Date`) The date and time the Reserved
+ *             Instances started.
+ *           * `Duration` &mdash; (`Integer`) The duration of the Reserved
+ *             Instances, in seconds.
+ *           * `UsagePrice` &mdash; (`Float`) The usage price of the
+ *             Reserved Instances, per hour.
+ *           * `FixedPrice` &mdash; (`Float`) The purchase price of the
+ *             Reserved Instances.
+ *           * `InstanceCount` &mdash; (`Integer`) The number of Reserved
+ *             Instances purchased.
+ *           * `ProductDescription` &mdash; (`String`) The Reserved
+ *             Instances product description (ex: Windows or Unix/Linux).
+ *           * `State` &mdash; (`String`) The state of the Reserved
+ *             Instances purchase.
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the
+ *             ReservedInstances.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
+ *           * `InstanceTenancy` &mdash; (`String`) The tenancy of the
+ *             reserved instance (ex: default or dedicated).
+ *           * `CurrencyCode` &mdash; (`String`) The currency of the
+ *             reserved instance. Specified using ISO 4217 standard (e.g.,
+ *             USD, JPY).
+ *           * `OfferingType` &mdash; (`String`) The Reserved Instance
+ *             offering type.
+ *           * `RecurringCharges` &mdash; (`Array<map>`) The recurring
+ *             charge tag assigned to the resource.
+ *               * `Frequency` &mdash; (`String`) The frequency of the
+ *                 recurring charge.
+ *               * `Amount` &mdash; (`Float`) The amount of the recurring
+ *                 charge.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3215,9 +3258,9 @@ AWS.EC2 = inherit({})
  *     * `ReservedInstancesId` &mdash; (`String`)
  *     * `ReservedInstancesListingId` &mdash; (`String`)
  *     * `Filters` &mdash; (`Array<map>`)
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3229,24 +3272,24 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `ReservedInstancesListings` &mdash; (`Array<map>`)
- *         * `ReservedInstancesListingId` &mdash; (`String`)
- *         * `ReservedInstancesId` &mdash; (`String`)
- *         * `CreateDate` &mdash; (`Date`)
- *         * `UpdateDate` &mdash; (`Date`)
- *         * `Status` &mdash; (`String`)
- *         * `StatusMessage` &mdash; (`String`)
- *         * `InstanceCounts` &mdash; (`Array<map>`)
- *           * `State` &mdash; (`String`)
- *           * `InstanceCount` &mdash; (`Integer`)
- *         * `PriceSchedules` &mdash; (`Array<map>`)
- *           * `Term` &mdash; (`Integer`)
- *           * `Price` &mdash; (`Float`)
- *           * `CurrencyCode` &mdash; (`String`)
- *           * `Active` &mdash; (`Boolean`)
- *         * `Tags` &mdash; (`Array<map>`)
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *         * `ClientToken` &mdash; (`String`)
+ *           * `ReservedInstancesListingId` &mdash; (`String`)
+ *           * `ReservedInstancesId` &mdash; (`String`)
+ *           * `CreateDate` &mdash; (`Date`)
+ *           * `UpdateDate` &mdash; (`Date`)
+ *           * `Status` &mdash; (`String`)
+ *           * `StatusMessage` &mdash; (`String`)
+ *           * `InstanceCounts` &mdash; (`Array<map>`)
+ *               * `State` &mdash; (`String`)
+ *               * `InstanceCount` &mdash; (`Integer`)
+ *           * `PriceSchedules` &mdash; (`Array<map>`)
+ *               * `Term` &mdash; (`Integer`)
+ *               * `Price` &mdash; (`Float`)
+ *               * `CurrencyCode` &mdash; (`String`)
+ *               * `Active` &mdash; (`Boolean`)
+ *           * `Tags` &mdash; (`Array<map>`)
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
+ *           * `ClientToken` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3284,9 +3327,9 @@ AWS.EC2 = inherit({})
  *       properties for ReservedInstancesOfferings. For a complete
  *       reference to the available filter keys for this operation, see
  *       the Amazon EC2 API reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *     * `InstanceTenancy` &mdash; (`String`) The tenancy of the Reserved
  *       Instance offering. A Reserved Instance with tenancy of dedicated
  *       will run on single-tenant hardware and can only be launched
@@ -3307,54 +3350,55 @@ AWS.EC2 = inherit({})
  *
  *       * `ReservedInstancesOfferings` &mdash; (`Array<map>`) The list of
  *         described Reserved Instance offerings.
- *         * `ReservedInstancesOfferingId` &mdash; (`String`) The unique ID
- *           of this Reserved Instances offering.
- *         * `InstanceType` &mdash; (`String`) The instance type on which
- *           the Reserved Instances can be used.
- *           Possible values include:
- *           * `t1.micro`
- *           * `m1.small`
- *           * `m1.medium`
- *           * `m1.large`
- *           * `m1.xlarge`
- *           * `m2.xlarge`
- *           * `m2.2xlarge`
- *           * `m2.4xlarge`
- *           * `m3.xlarge`
- *           * `m3.2xlarge`
- *           * `c1.medium`
- *           * `c1.xlarge`
- *           * `hi1.4xlarge`
- *           * `hs1.8xlarge`
- *           * `cc1.4xlarge`
- *           * `cc2.8xlarge`
- *           * `cg1.4xlarge`
- *         * `AvailabilityZone` &mdash; (`String`) The Availability Zone in
- *           which the Reserved Instances can be used.
- *         * `Duration` &mdash; (`Integer`) The duration of the Reserved
- *           Instance, in seconds.
- *         * `UsagePrice` &mdash; (`Float`) The usage price of the Reserved
- *           Instance, per hour.
- *         * `FixedPrice` &mdash; (`Float`) The purchase price of the
- *           Reserved Instance.
- *         * `ProductDescription` &mdash; (`String`) The Reserved Instances
- *           description (ex: Windows or Unix/Linux).
- *         * `InstanceTenancy` &mdash; (`String`) The tenancy of the
- *           reserved instance (ex: default or dedicated).
- *         * `CurrencyCode` &mdash; (`String`) The currency of the reserved
- *           instance. Specified using ISO 4217 standard (e.g., USD, JPY).
- *         * `OfferingType` &mdash; (`String`) The Reserved Instance
- *           offering type.
- *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring charge
- *           tag assigned to the resource.
- *           * `Frequency` &mdash; (`String`) The frequency of the
- *             recurring charge.
- *           * `Amount` &mdash; (`Float`) The amount of the recurring
- *             charge.
- *         * `Marketplace` &mdash; (`Boolean`)
- *         * `PricingDetails` &mdash; (`Array<map>`)
- *           * `Price` &mdash; (`Float`)
- *           * `Count` &mdash; (`Integer`)
+ *           * `ReservedInstancesOfferingId` &mdash; (`String`) The unique
+ *             ID of this Reserved Instances offering.
+ *           * `InstanceType` &mdash; (`String`) The instance type on which
+ *             the Reserved Instances can be used.
+ *             Possible values include:
+ *             * `t1.micro`
+ *             * `m1.small`
+ *             * `m1.medium`
+ *             * `m1.large`
+ *             * `m1.xlarge`
+ *             * `m2.xlarge`
+ *             * `m2.2xlarge`
+ *             * `m2.4xlarge`
+ *             * `m3.xlarge`
+ *             * `m3.2xlarge`
+ *             * `c1.medium`
+ *             * `c1.xlarge`
+ *             * `hi1.4xlarge`
+ *             * `hs1.8xlarge`
+ *             * `cc1.4xlarge`
+ *             * `cc2.8xlarge`
+ *             * `cg1.4xlarge`
+ *           * `AvailabilityZone` &mdash; (`String`) The Availability Zone
+ *             in which the Reserved Instances can be used.
+ *           * `Duration` &mdash; (`Integer`) The duration of the Reserved
+ *             Instance, in seconds.
+ *           * `UsagePrice` &mdash; (`Float`) The usage price of the
+ *             Reserved Instance, per hour.
+ *           * `FixedPrice` &mdash; (`Float`) The purchase price of the
+ *             Reserved Instance.
+ *           * `ProductDescription` &mdash; (`String`) The Reserved
+ *             Instances description (ex: Windows or Unix/Linux).
+ *           * `InstanceTenancy` &mdash; (`String`) The tenancy of the
+ *             reserved instance (ex: default or dedicated).
+ *           * `CurrencyCode` &mdash; (`String`) The currency of the
+ *             reserved instance. Specified using ISO 4217 standard (e.g.,
+ *             USD, JPY).
+ *           * `OfferingType` &mdash; (`String`) The Reserved Instance
+ *             offering type.
+ *           * `RecurringCharges` &mdash; (`Array<map>`) The recurring
+ *             charge tag assigned to the resource.
+ *               * `Frequency` &mdash; (`String`) The frequency of the
+ *                 recurring charge.
+ *               * `Amount` &mdash; (`Float`) The amount of the recurring
+ *                 charge.
+ *           * `Marketplace` &mdash; (`Boolean`)
+ *           * `PricingDetails` &mdash; (`Array<map>`)
+ *               * `Price` &mdash; (`Float`)
+ *               * `Count` &mdash; (`Integer`)
  *       * `NextToken` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -3368,9 +3412,9 @@ AWS.EC2 = inherit({})
  *       properties for Route Tables. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3382,25 +3426,25 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `RouteTables` &mdash; (`Array<map>`)
- *         * `RouteTableId` &mdash; (`String`)
- *         * `VpcId` &mdash; (`String`)
- *         * `Routes` &mdash; (`Array<map>`)
- *           * `DestinationCidrBlock` &mdash; (`String`)
- *           * `GatewayId` &mdash; (`String`)
- *           * `InstanceId` &mdash; (`String`)
- *           * `InstanceOwnerId` &mdash; (`String`)
- *           * `NetworkInterfaceId` &mdash; (`String`)
- *           * `State` &mdash; (`String`)
- *         * `Associations` &mdash; (`Array<map>`)
- *           * `RouteTableAssociationId` &mdash; (`String`)
  *           * `RouteTableId` &mdash; (`String`)
- *           * `SubnetId` &mdash; (`String`)
- *           * `Main` &mdash; (`Boolean`)
- *         * `Tags` &mdash; (`Array<map>`)
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *         * `PropagatingVgws` &mdash; (`Array<map>`)
- *           * `GatewayId` &mdash; (`String`)
+ *           * `VpcId` &mdash; (`String`)
+ *           * `Routes` &mdash; (`Array<map>`)
+ *               * `DestinationCidrBlock` &mdash; (`String`)
+ *               * `GatewayId` &mdash; (`String`)
+ *               * `InstanceId` &mdash; (`String`)
+ *               * `InstanceOwnerId` &mdash; (`String`)
+ *               * `NetworkInterfaceId` &mdash; (`String`)
+ *               * `State` &mdash; (`String`)
+ *           * `Associations` &mdash; (`Array<map>`)
+ *               * `RouteTableAssociationId` &mdash; (`String`)
+ *               * `RouteTableId` &mdash; (`String`)
+ *               * `SubnetId` &mdash; (`String`)
+ *               * `Main` &mdash; (`Boolean`)
+ *           * `Tags` &mdash; (`Array<map>`)
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
+ *           * `PropagatingVgws` &mdash; (`Array<map>`)
+ *               * `GatewayId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3414,9 +3458,9 @@ AWS.EC2 = inherit({})
  *       properties for SecurityGroups. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3429,62 +3473,66 @@ AWS.EC2 = inherit({})
  *
  *       * `SecurityGroups` &mdash; (`Array<map>`) The list of described
  *         Amazon EC2 security groups.
- *         * `OwnerId` &mdash; (`String`) The AWS Access Key ID of the
- *           owner of the security group.
- *         * `GroupName` &mdash; (`String`) The name of this security
- *           group.
- *         * `GroupId` &mdash; (`String`)
- *         * `Description` &mdash; (`String`) The description of this
- *           security group.
- *         * `IpPermissions` &mdash; (`Array<map>`) The permissions enabled
- *           for this security group.
- *           * `IpProtocol` &mdash; (`String`) The IP protocol of this
- *             permission. Valid protocol values: tcp, udp, icmp
- *           * `FromPort` &mdash; (`Integer`) Start of port range for the
- *             TCP and UDP protocols, or an ICMP type number. An ICMP type
- *             number of -1 indicates a wildcard (i.e., any ICMP type
- *             number).
- *           * `ToPort` &mdash; (`Integer`) End of port range for the TCP
- *             and UDP protocols, or an ICMP code. An ICMP code of -1
- *             indicates a wildcard (i.e., any ICMP code).
- *           * `UserIdGroupPairs` &mdash; (`Array<map>`) The list of AWS
- *             user IDs and groups included in this permission.
- *             * `UserId` &mdash; (`String`) The AWS user ID of an account.
- *             * `GroupName` &mdash; (`String`) Name of the security group
- *               in the specified AWS account. Cannot be used when
- *               specifying a CIDR IP address range.
- *             * `GroupId` &mdash; (`String`) ID of the security group in
- *               the specified AWS account. Cannot be used when specifying
- *               a CIDR IP address range.
- *           * `IpRanges` &mdash; (`Array<map>`) The list of CIDR IP ranges
- *             included in this permission.
- *             * `CidrIp` &mdash; (`String`) The list of CIDR IP ranges.
- *         * `IpPermissionsEgress` &mdash; (`Array<map>`)
- *           * `IpProtocol` &mdash; (`String`) The IP protocol of this
- *             permission. Valid protocol values: tcp, udp, icmp
- *           * `FromPort` &mdash; (`Integer`) Start of port range for the
- *             TCP and UDP protocols, or an ICMP type number. An ICMP type
- *             number of -1 indicates a wildcard (i.e., any ICMP type
- *             number).
- *           * `ToPort` &mdash; (`Integer`) End of port range for the TCP
- *             and UDP protocols, or an ICMP code. An ICMP code of -1
- *             indicates a wildcard (i.e., any ICMP code).
- *           * `UserIdGroupPairs` &mdash; (`Array<map>`) The list of AWS
- *             user IDs and groups included in this permission.
- *             * `UserId` &mdash; (`String`) The AWS user ID of an account.
- *             * `GroupName` &mdash; (`String`) Name of the security group
- *               in the specified AWS account. Cannot be used when
- *               specifying a CIDR IP address range.
- *             * `GroupId` &mdash; (`String`) ID of the security group in
- *               the specified AWS account. Cannot be used when specifying
- *               a CIDR IP address range.
- *           * `IpRanges` &mdash; (`Array<map>`) The list of CIDR IP ranges
- *             included in this permission.
- *             * `CidrIp` &mdash; (`String`) The list of CIDR IP ranges.
- *         * `VpcId` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<map>`)
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
+ *           * `OwnerId` &mdash; (`String`) The AWS Access Key ID of the
+ *             owner of the security group.
+ *           * `GroupName` &mdash; (`String`) The name of this security
+ *             group.
+ *           * `GroupId` &mdash; (`String`)
+ *           * `Description` &mdash; (`String`) The description of this
+ *             security group.
+ *           * `IpPermissions` &mdash; (`Array<map>`) The permissions
+ *             enabled for this security group.
+ *               * `IpProtocol` &mdash; (`String`) The IP protocol of this
+ *                 permission. Valid protocol values: tcp, udp, icmp
+ *               * `FromPort` &mdash; (`Integer`) Start of port range for
+ *                 the TCP and UDP protocols, or an ICMP type number. An
+ *                 ICMP type number of -1 indicates a wildcard (i.e., any
+ *                 ICMP type number).
+ *               * `ToPort` &mdash; (`Integer`) End of port range for the
+ *                 TCP and UDP protocols, or an ICMP code. An ICMP code of
+ *                 \-1 indicates a wildcard (i.e., any ICMP code).
+ *               * `UserIdGroupPairs` &mdash; (`Array<map>`) The list of
+ *                 AWS user IDs and groups included in this permission.
+ *                   * `UserId` &mdash; (`String`) The AWS user ID of an
+ *                     account.
+ *                   * `GroupName` &mdash; (`String`) Name of the security
+ *                     group in the specified AWS account. Cannot be used
+ *                     when specifying a CIDR IP address range.
+ *                   * `GroupId` &mdash; (`String`) ID of the security
+ *                     group in the specified AWS account. Cannot be used
+ *                     when specifying a CIDR IP address range.
+ *               * `IpRanges` &mdash; (`Array<map>`) The list of CIDR IP
+ *                 ranges included in this permission.
+ *                   * `CidrIp` &mdash; (`String`) The list of CIDR IP
+ *                     ranges.
+ *           * `IpPermissionsEgress` &mdash; (`Array<map>`)
+ *               * `IpProtocol` &mdash; (`String`) The IP protocol of this
+ *                 permission. Valid protocol values: tcp, udp, icmp
+ *               * `FromPort` &mdash; (`Integer`) Start of port range for
+ *                 the TCP and UDP protocols, or an ICMP type number. An
+ *                 ICMP type number of -1 indicates a wildcard (i.e., any
+ *                 ICMP type number).
+ *               * `ToPort` &mdash; (`Integer`) End of port range for the
+ *                 TCP and UDP protocols, or an ICMP code. An ICMP code of
+ *                 \-1 indicates a wildcard (i.e., any ICMP code).
+ *               * `UserIdGroupPairs` &mdash; (`Array<map>`) The list of
+ *                 AWS user IDs and groups included in this permission.
+ *                   * `UserId` &mdash; (`String`) The AWS user ID of an
+ *                     account.
+ *                   * `GroupName` &mdash; (`String`) Name of the security
+ *                     group in the specified AWS account. Cannot be used
+ *                     when specifying a CIDR IP address range.
+ *                   * `GroupId` &mdash; (`String`) ID of the security
+ *                     group in the specified AWS account. Cannot be used
+ *                     when specifying a CIDR IP address range.
+ *               * `IpRanges` &mdash; (`Array<map>`) The list of CIDR IP
+ *                 ranges included in this permission.
+ *                   * `CidrIp` &mdash; (`String`) The list of CIDR IP
+ *                     ranges.
+ *           * `VpcId` &mdash; (`String`)
+ *           * `Tags` &mdash; (`Array<map>`)
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3515,14 +3563,14 @@ AWS.EC2 = inherit({})
  *         permissions describing who can create a volume from the
  *         associated EBS snapshot. Only available if the
  *         createVolumePermission attribute is requested.
- *         * `UserId` &mdash; (`String`) The user ID of the user that can
- *           create volumes from the snapshot.
- *         * `Group` &mdash; (`String`) The group that is allowed to create
- *           volumes from the snapshot (currently supports "all").
+ *           * `UserId` &mdash; (`String`) The user ID of the user that can
+ *             create volumes from the snapshot.
+ *           * `Group` &mdash; (`String`) The group that is allowed to
+ *             create volumes from the snapshot (currently supports "all").
  *       * `ProductCodes` &mdash; (`Array<map>`)
- *         * `ProductCodeId` &mdash; (`String`) The unique ID of an AWS
- *           DevPay product code.
- *         * `ProductCodeType` &mdash; (`String`)
+ *           * `ProductCodeId` &mdash; (`String`) The unique ID of an AWS
+ *             DevPay product code.
+ *           * `ProductCodeType` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3540,9 +3588,9 @@ AWS.EC2 = inherit({})
  *       properties for Snapshots. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3555,31 +3603,33 @@ AWS.EC2 = inherit({})
  *
  *       * `Snapshots` &mdash; (`Array<map>`) The list of described EBS
  *         snapshots.
- *         * `SnapshotId` &mdash; (`String`) The unique ID of this
- *           snapshot.
- *         * `VolumeId` &mdash; (`String`) The ID of the volume from which
- *           this snapshot was created.
- *         * `State` &mdash; (`String`) Snapshot state (e.g., pending,
- *           completed, or error).
- *           Possible values include:
- *           * `pending`
- *           * `completed`
- *           * `error`
- *         * `StartTime` &mdash; (`Date`) Time stamp when the snapshot was
- *           initiated.
- *         * `Progress` &mdash; (`String`) The progress of the snapshot, in
- *           percentage.
- *         * `OwnerId` &mdash; (`String`) AWS Access Key ID of the user who
- *           owns the snapshot.
- *         * `Description` &mdash; (`String`) Description of the snapshot.
- *         * `VolumeSize` &mdash; (`Integer`) The size of the volume, in
- *           gigabytes.
- *         * `OwnerAlias` &mdash; (`String`) The AWS account alias (e.g.,
- *           "amazon", "redhat", "self", etc.) or AWS account ID that owns
- *           the AMI.
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the Snapshot.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
+ *           * `SnapshotId` &mdash; (`String`) The unique ID of this
+ *             snapshot.
+ *           * `VolumeId` &mdash; (`String`) The ID of the volume from
+ *             which this snapshot was created.
+ *           * `State` &mdash; (`String`) Snapshot state (e.g., pending,
+ *             completed, or error).
+ *             Possible values include:
+ *             * `pending`
+ *             * `completed`
+ *             * `error`
+ *           * `StartTime` &mdash; (`Date`) Time stamp when the snapshot
+ *             was initiated.
+ *           * `Progress` &mdash; (`String`) The progress of the snapshot,
+ *             in percentage.
+ *           * `OwnerId` &mdash; (`String`) AWS Access Key ID of the user
+ *             who owns the snapshot.
+ *           * `Description` &mdash; (`String`) Description of the
+ *             snapshot.
+ *           * `VolumeSize` &mdash; (`Integer`) The size of the volume, in
+ *             gigabytes.
+ *           * `OwnerAlias` &mdash; (`String`) The AWS account alias (e.g.,
+ *             "amazon", "redhat", "self", etc.) or AWS account ID that
+ *             owns the AMI.
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the
+ *             Snapshot.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3598,18 +3648,18 @@ AWS.EC2 = inherit({})
  *
  *       * `SpotDatafeedSubscription` &mdash; (`map`) The Spot Instance
  *         datafeed subscription.
- *         * `OwnerId` &mdash; (`String`) Specifies the AWS account ID of
- *           the account.
- *         * `Bucket` &mdash; (`String`) Specifies the Amazon S3 bucket
- *           where the Spot Instance data feed is located.
- *         * `Prefix` &mdash; (`String`) Contains the prefix that is
- *           prepended to data feed files.
- *         * `State` &mdash; (`String`) Specifies the state of the Spot
- *           Instance request.
- *         * `Fault` &mdash; (`map`) Specifies a fault code for the Spot
- *           Instance request, if present.
- *           * `Code` &mdash; (`String`)
- *           * `Message` &mdash; (`String`)
+ *           * `OwnerId` &mdash; (`String`) Specifies the AWS account ID of
+ *             the account.
+ *           * `Bucket` &mdash; (`String`) Specifies the Amazon S3 bucket
+ *             where the Spot Instance data feed is located.
+ *           * `Prefix` &mdash; (`String`) Contains the prefix that is
+ *             prepended to data feed files.
+ *           * `State` &mdash; (`String`) Specifies the state of the Spot
+ *             Instance request.
+ *           * `Fault` &mdash; (`map`) Specifies a fault code for the Spot
+ *             Instance request, if present.
+ *               * `Code` &mdash; (`String`)
+ *               * `Message` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3622,9 +3672,9 @@ AWS.EC2 = inherit({})
  *       properties for SpotInstances. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3636,125 +3686,126 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `SpotInstanceRequests` &mdash; (`Array<map>`)
- *         * `SpotInstanceRequestId` &mdash; (`String`)
- *         * `SpotPrice` &mdash; (`String`)
- *         * `Type` &mdash; (`String`)
- *           Possible values include:
- *           * `one-time`
- *           * `persistent`
- *         * `State` &mdash; (`String`)
- *         * `Fault` &mdash; (`map`)
- *           * `Code` &mdash; (`String`)
- *           * `Message` &mdash; (`String`)
- *         * `Status` &mdash; (`map`)
- *           * `Code` &mdash; (`String`)
- *           * `UpdateTime` &mdash; (`Date`)
- *           * `Message` &mdash; (`String`)
- *         * `ValidFrom` &mdash; (`Date`)
- *         * `ValidUntil` &mdash; (`Date`)
- *         * `LaunchGroup` &mdash; (`String`)
- *         * `AvailabilityZoneGroup` &mdash; (`String`)
- *         * `LaunchSpecification` &mdash; (`map`)
- *           * `ImageId` &mdash; (`String`) The AMI ID.
- *           * `KeyName` &mdash; (`String`) The name of the key pair.
- *           * `SecurityGroups` &mdash; (`Array<map>`)
- *             * `GroupName` &mdash; (`String`)
- *             * `GroupId` &mdash; (`String`)
- *           * `UserData` &mdash; (`String`) Optional data, specific to a
- *             user's application, to provide in the launch request. All
- *             instances that collectively comprise the launch request have
- *             access to this data. User data is never returned through API
- *             responses.
- *           * `AddressingType` &mdash; (`String`) Deprecated.
- *           * `InstanceType` &mdash; (`String`) Specifies the instance
- *             type.
+ *           * `SpotInstanceRequestId` &mdash; (`String`)
+ *           * `SpotPrice` &mdash; (`String`)
+ *           * `Type` &mdash; (`String`)
  *             Possible values include:
- *             * `t1.micro`
- *             * `m1.small`
- *             * `m1.medium`
- *             * `m1.large`
- *             * `m1.xlarge`
- *             * `m2.xlarge`
- *             * `m2.2xlarge`
- *             * `m2.4xlarge`
- *             * `m3.xlarge`
- *             * `m3.2xlarge`
- *             * `c1.medium`
- *             * `c1.xlarge`
- *             * `hi1.4xlarge`
- *             * `hs1.8xlarge`
- *             * `cc1.4xlarge`
- *             * `cc2.8xlarge`
- *             * `cg1.4xlarge`
- *           * `Placement` &mdash; (`map`) Defines a placement item.
- *             * `AvailabilityZone` &mdash; (`String`) The availability
- *               zone in which an Amazon EC2 instance runs.
- *             * `GroupName` &mdash; (`String`) The name of the
- *               PlacementGroup in which an Amazon EC2 instance runs.
- *               Placement groups are primarily used for launching High
- *               Performance Computing instances in the same group to
- *               ensure fast connection speeds.
- *           * `KernelId` &mdash; (`String`) Specifies the ID of the kernel
- *             to select.
- *           * `RamdiskId` &mdash; (`String`) Specifies the ID of the RAM
- *             disk to select. Some kernels require additional drivers at
- *             launch. Check the kernel requirements for information on
- *             whether or not you need to specify a RAM disk and search for
- *             the kernel ID.
- *           * `BlockDeviceMappings` &mdash; (`Array<map>`) Specifies how
- *             block devices are exposed to the instance. Each mapping is
- *             made up of a virtualName and a deviceName.
- *             * `VirtualName` &mdash; (`String`) Specifies the virtual
- *               device name.
- *             * `DeviceName` &mdash; (`String`) Specifies the device name
- *               (e.g., /dev/sdh).
- *             * `Ebs` &mdash; (`map`) Specifies parameters used to
- *               automatically setup Amazon EBS volumes when the instance
- *               is launched.
- *               * `SnapshotId` &mdash; (`String`) The ID of the snapshot
- *                 from which the volume will be created.
- *               * `VolumeSize` &mdash; (`Integer`) The size of the volume,
- *                 in gigabytes.
- *               * `DeleteOnTermination` &mdash; (`Boolean`) Specifies
- *                 whether the Amazon EBS volume is deleted on instance
- *                 termination.
- *               * `VolumeType` &mdash; (`String`)
+ *             * `one-time`
+ *             * `persistent`
+ *           * `State` &mdash; (`String`)
+ *           * `Fault` &mdash; (`map`)
+ *               * `Code` &mdash; (`String`)
+ *               * `Message` &mdash; (`String`)
+ *           * `Status` &mdash; (`map`)
+ *               * `Code` &mdash; (`String`)
+ *               * `UpdateTime` &mdash; (`Date`)
+ *               * `Message` &mdash; (`String`)
+ *           * `ValidFrom` &mdash; (`Date`)
+ *           * `ValidUntil` &mdash; (`Date`)
+ *           * `LaunchGroup` &mdash; (`String`)
+ *           * `AvailabilityZoneGroup` &mdash; (`String`)
+ *           * `LaunchSpecification` &mdash; (`map`)
+ *               * `ImageId` &mdash; (`String`) The AMI ID.
+ *               * `KeyName` &mdash; (`String`) The name of the key pair.
+ *               * `SecurityGroups` &mdash; (`Array<map>`)
+ *                   * `GroupName` &mdash; (`String`)
+ *                   * `GroupId` &mdash; (`String`)
+ *               * `UserData` &mdash; (`String`) Optional data, specific to
+ *                 a user's application, to provide in the launch request.
+ *                 All instances that collectively comprise the launch
+ *                 request have access to this data. User data is never
+ *                 returned through API responses.
+ *               * `AddressingType` &mdash; (`String`) Deprecated.
+ *               * `InstanceType` &mdash; (`String`) Specifies the instance
+ *                 type.
  *                 Possible values include:
- *                 * `standard`
- *                 * `io1`
- *               * `Iops` &mdash; (`Integer`)
- *             * `NoDevice` &mdash; (`String`) Specifies the device name to
- *               suppress during instance launch.
- *           * `MonitoringEnabled` &mdash; (`Boolean`) Enables monitoring
- *             for the instance.
- *           * `SubnetId` &mdash; (`String`) Specifies the Amazon VPC
- *             subnet ID within which to launch the instance(s) for Amazon
- *             Virtual Private Cloud.
- *           * `NetworkInterfaces` &mdash; (`Array<map>`)
- *             * `NetworkInterfaceId` &mdash; (`String`)
- *             * `DeviceIndex` &mdash; (`Integer`)
- *             * `SubnetId` &mdash; (`String`)
- *             * `Description` &mdash; (`String`)
- *             * `PrivateIpAddress` &mdash; (`String`)
- *             * `Groups` &mdash; (`Array<String>`)
- *             * `DeleteOnTermination` &mdash; (`Boolean`)
- *             * `PrivateIpAddresses` &mdash; (`Array<map>`)
- *               * `PrivateIpAddress` &mdash; (`String`)
- *               * `Primary` &mdash; (`Boolean`)
- *             * `SecondaryPrivateIpAddressCount` &mdash; (`Integer`)
- *           * `IamInstanceProfile` &mdash; (`map`)
- *             * `Arn` &mdash; (`String`)
- *             * `Name` &mdash; (`String`)
- *           * `EbsOptimized` &mdash; (`Boolean`)
- *         * `InstanceId` &mdash; (`String`)
- *         * `CreateTime` &mdash; (`Date`)
- *         * `ProductDescription` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for this spot
- *           instance request.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *         * `LaunchedAvailabilityZone` &mdash; (`String`) The Availability
- *           Zone in which the bid is launched.
+ *                 * `t1.micro`
+ *                 * `m1.small`
+ *                 * `m1.medium`
+ *                 * `m1.large`
+ *                 * `m1.xlarge`
+ *                 * `m2.xlarge`
+ *                 * `m2.2xlarge`
+ *                 * `m2.4xlarge`
+ *                 * `m3.xlarge`
+ *                 * `m3.2xlarge`
+ *                 * `c1.medium`
+ *                 * `c1.xlarge`
+ *                 * `hi1.4xlarge`
+ *                 * `hs1.8xlarge`
+ *                 * `cc1.4xlarge`
+ *                 * `cc2.8xlarge`
+ *                 * `cg1.4xlarge`
+ *               * `Placement` &mdash; (`map`) Defines a placement item.
+ *                   * `AvailabilityZone` &mdash; (`String`) The
+ *                     availability zone in which an Amazon EC2 instance
+ *                     runs.
+ *                   * `GroupName` &mdash; (`String`) The name of the
+ *                     PlacementGroup in which an Amazon EC2 instance runs.
+ *                     Placement groups are primarily used for launching
+ *                     High Performance Computing instances in the same
+ *                     group to ensure fast connection speeds.
+ *               * `KernelId` &mdash; (`String`) Specifies the ID of the
+ *                 kernel to select.
+ *               * `RamdiskId` &mdash; (`String`) Specifies the ID of the
+ *                 RAM disk to select. Some kernels require additional
+ *                 drivers at launch. Check the kernel requirements for
+ *                 information on whether or not you need to specify a RAM
+ *                 disk and search for the kernel ID.
+ *               * `BlockDeviceMappings` &mdash; (`Array<map>`) Specifies
+ *                 how block devices are exposed to the instance. Each
+ *                 mapping is made up of a virtualName and a deviceName.
+ *                   * `VirtualName` &mdash; (`String`) Specifies the
+ *                     virtual device name.
+ *                   * `DeviceName` &mdash; (`String`) Specifies the device
+ *                     name (e.g., /dev/sdh).
+ *                   * `Ebs` &mdash; (`map`) Specifies parameters used to
+ *                     automatically setup Amazon EBS volumes when the
+ *                     instance is launched.
+ *                       * `SnapshotId` &mdash; (`String`) The ID of the
+ *                         snapshot from which the volume will be created.
+ *                       * `VolumeSize` &mdash; (`Integer`) The size of the
+ *                         volume, in gigabytes.
+ *                       * `DeleteOnTermination` &mdash; (`Boolean`)
+ *                         Specifies whether the Amazon EBS volume is
+ *                         deleted on instance termination.
+ *                       * `VolumeType` &mdash; (`String`)
+ *                         Possible values include:
+ *                         * `standard`
+ *                         * `io1`
+ *                       * `Iops` &mdash; (`Integer`)
+ *                   * `NoDevice` &mdash; (`String`) Specifies the device
+ *                     name to suppress during instance launch.
+ *               * `MonitoringEnabled` &mdash; (`Boolean`) Enables
+ *                 monitoring for the instance.
+ *               * `SubnetId` &mdash; (`String`) Specifies the Amazon VPC
+ *                 subnet ID within which to launch the instance(s) for
+ *                 Amazon Virtual Private Cloud.
+ *               * `NetworkInterfaces` &mdash; (`Array<map>`)
+ *                   * `NetworkInterfaceId` &mdash; (`String`)
+ *                   * `DeviceIndex` &mdash; (`Integer`)
+ *                   * `SubnetId` &mdash; (`String`)
+ *                   * `Description` &mdash; (`String`)
+ *                   * `PrivateIpAddress` &mdash; (`String`)
+ *                   * `Groups` &mdash; (`Array<String>`)
+ *                   * `DeleteOnTermination` &mdash; (`Boolean`)
+ *                   * `PrivateIpAddresses` &mdash; (`Array<map>`)
+ *                       * `PrivateIpAddress` &mdash; (`String`)
+ *                       * `Primary` &mdash; (`Boolean`)
+ *                   * `SecondaryPrivateIpAddressCount` &mdash; (`Integer`)
+ *               * `IamInstanceProfile` &mdash; (`map`)
+ *                   * `Arn` &mdash; (`String`)
+ *                   * `Name` &mdash; (`String`)
+ *               * `EbsOptimized` &mdash; (`Boolean`)
+ *           * `InstanceId` &mdash; (`String`)
+ *           * `CreateTime` &mdash; (`Date`)
+ *           * `ProductDescription` &mdash; (`String`)
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for this spot
+ *             instance request.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
+ *           * `LaunchedAvailabilityZone` &mdash; (`String`) The
+ *             Availability Zone in which the bid is launched.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3773,9 +3824,9 @@ AWS.EC2 = inherit({})
  *       properties for SpotPriceHistory. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *     * `AvailabilityZone` &mdash; (`String`) Filters the results by
  *       availability zone (ex: 'us-east-1a').
  *     * `MaxResults` &mdash; (`Integer`) Specifies the number of rows to
@@ -3793,29 +3844,29 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `SpotPriceHistory` &mdash; (`Array<map>`)
- *         * `InstanceType` &mdash; (`String`)
- *           Possible values include:
- *           * `t1.micro`
- *           * `m1.small`
- *           * `m1.medium`
- *           * `m1.large`
- *           * `m1.xlarge`
- *           * `m2.xlarge`
- *           * `m2.2xlarge`
- *           * `m2.4xlarge`
- *           * `m3.xlarge`
- *           * `m3.2xlarge`
- *           * `c1.medium`
- *           * `c1.xlarge`
- *           * `hi1.4xlarge`
- *           * `hs1.8xlarge`
- *           * `cc1.4xlarge`
- *           * `cc2.8xlarge`
- *           * `cg1.4xlarge`
- *         * `ProductDescription` &mdash; (`String`)
- *         * `SpotPrice` &mdash; (`String`)
- *         * `Timestamp` &mdash; (`Date`)
- *         * `AvailabilityZone` &mdash; (`String`)
+ *           * `InstanceType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `t1.micro`
+ *             * `m1.small`
+ *             * `m1.medium`
+ *             * `m1.large`
+ *             * `m1.xlarge`
+ *             * `m2.xlarge`
+ *             * `m2.2xlarge`
+ *             * `m2.4xlarge`
+ *             * `m3.xlarge`
+ *             * `m3.2xlarge`
+ *             * `c1.medium`
+ *             * `c1.xlarge`
+ *             * `hi1.4xlarge`
+ *             * `hs1.8xlarge`
+ *             * `cc1.4xlarge`
+ *             * `cc2.8xlarge`
+ *             * `cg1.4xlarge`
+ *           * `ProductDescription` &mdash; (`String`)
+ *           * `SpotPrice` &mdash; (`String`)
+ *           * `Timestamp` &mdash; (`Date`)
+ *           * `AvailabilityZone` &mdash; (`String`)
  *       * `NextToken` &mdash; (`String`) The string marking the next set
  *         of results returned. Displays empty if there are no more results
  *         to be returned.
@@ -3831,9 +3882,9 @@ AWS.EC2 = inherit({})
  *       properties for Subnets. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3846,24 +3897,26 @@ AWS.EC2 = inherit({})
  *
  *       * `Subnets` &mdash; (`Array<map>`) Contains a set of one or more
  *         Subnet instances.
- *         * `SubnetId` &mdash; (`String`) Specifies the ID of the subnet.
- *         * `State` &mdash; (`String`) Describes the current state of the
- *           subnet. The state of the subnet may be either pending or
- *           available.
- *         * `VpcId` &mdash; (`String`) Contains the ID of the VPC the
- *           subnet is in.
- *         * `CidrBlock` &mdash; (`String`) Specifies the CIDR block
- *           assigned to the subnet.
- *         * `AvailableIpAddressCount` &mdash; (`Integer`) Specifies the
- *           number of unused IP addresses in the subnet. The IP addresses
- *           for any stopped instances are considered unavailable.
- *         * `AvailabilityZone` &mdash; (`String`) Specifies the
- *           Availability Zone the subnet is in.
- *         * `DefaultForAz` &mdash; (`Boolean`)
- *         * `MapPublicIpOnLaunch` &mdash; (`Boolean`)
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the Subnet.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
+ *           * `SubnetId` &mdash; (`String`) Specifies the ID of the
+ *             subnet.
+ *           * `State` &mdash; (`String`) Describes the current state of
+ *             the subnet. The state of the subnet may be either pending or
+ *             available.
+ *           * `VpcId` &mdash; (`String`) Contains the ID of the VPC the
+ *             subnet is in.
+ *           * `CidrBlock` &mdash; (`String`) Specifies the CIDR block
+ *             assigned to the subnet.
+ *           * `AvailableIpAddressCount` &mdash; (`Integer`) Specifies the
+ *             number of unused IP addresses in the subnet. The IP
+ *             addresses for any stopped instances are considered
+ *             unavailable.
+ *           * `AvailabilityZone` &mdash; (`String`) Specifies the
+ *             Availability Zone the subnet is in.
+ *           * `DefaultForAz` &mdash; (`Boolean`)
+ *           * `MapPublicIpOnLaunch` &mdash; (`Boolean`)
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the Subnet.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3872,9 +3925,9 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
  *       properties for tags.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3887,24 +3940,24 @@ AWS.EC2 = inherit({})
  *
  *       * `Tags` &mdash; (`Array<map>`) A list of the tags for the
  *         specified resources.
- *         * `ResourceId` &mdash; (`String`) The resource ID for the tag.
- *         * `ResourceType` &mdash; (`String`) The type of resource
- *           identified by the associated resource ID (ex: instance, AMI,
- *           EBS volume, etc).
- *           Possible values include:
- *           * `customer-gateway`
- *           * `dhcp-options`
- *           * `image`
- *           * `instance`
- *           * `snapshot`
- *           * `spot-instances-request`
- *           * `subnet`
- *           * `volume`
- *           * `vpc`
- *           * `vpn-connection`
- *           * `vpn-gateway`
- *         * `Key` &mdash; (`String`) The tag's key.
- *         * `Value` &mdash; (`String`) The tag's value.
+ *           * `ResourceId` &mdash; (`String`) The resource ID for the tag.
+ *           * `ResourceType` &mdash; (`String`) The type of resource
+ *             identified by the associated resource ID (ex: instance, AMI,
+ *             EBS volume, etc).
+ *             Possible values include:
+ *             * `customer-gateway`
+ *             * `dhcp-options`
+ *             * `image`
+ *             * `instance`
+ *             * `snapshot`
+ *             * `spot-instances-request`
+ *             * `subnet`
+ *             * `volume`
+ *             * `vpc`
+ *             * `vpn-connection`
+ *             * `vpn-gateway`
+ *           * `Key` &mdash; (`String`) The tag's key.
+ *           * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3928,11 +3981,11 @@ AWS.EC2 = inherit({})
  *
  *       * `VolumeId` &mdash; (`String`)
  *       * `AutoEnableIO` &mdash; (`map`)
- *         * `Value` &mdash; (`Boolean`) Boolean value
+ *           * `Value` &mdash; (`Boolean`) Boolean value
  *       * `ProductCodes` &mdash; (`Array<map>`)
- *         * `ProductCodeId` &mdash; (`String`) The unique ID of an AWS
- *           DevPay product code.
- *         * `ProductCodeType` &mdash; (`String`)
+ *           * `ProductCodeId` &mdash; (`String`) The unique ID of an AWS
+ *             DevPay product code.
+ *           * `ProductCodeType` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3941,9 +3994,9 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `VolumeIds` &mdash; (`Array<String>`)
  *     * `Filters` &mdash; (`Array<map>`)
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *     * `NextToken` &mdash; (`String`)
  *     * `MaxResults` &mdash; (`Integer`)
  *   @callback callback function(err, data)
@@ -3957,24 +4010,24 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `VolumeStatuses` &mdash; (`Array<map>`)
- *         * `VolumeId` &mdash; (`String`)
- *         * `AvailabilityZone` &mdash; (`String`)
- *         * `VolumeStatus` &mdash; (`map`)
- *           * `Status` &mdash; (`String`)
- *           * `Details` &mdash; (`Array<map>`)
- *             * `Name` &mdash; (`String`)
- *             * `Status` &mdash; (`String`)
- *         * `Events` &mdash; (`Array<map>`)
- *           * `EventType` &mdash; (`String`)
- *           * `Description` &mdash; (`String`)
- *           * `NotBefore` &mdash; (`Date`)
- *           * `NotAfter` &mdash; (`Date`)
- *           * `EventId` &mdash; (`String`)
- *         * `Actions` &mdash; (`Array<map>`)
- *           * `Code` &mdash; (`String`)
- *           * `Description` &mdash; (`String`)
- *           * `EventType` &mdash; (`String`)
- *           * `EventId` &mdash; (`String`)
+ *           * `VolumeId` &mdash; (`String`)
+ *           * `AvailabilityZone` &mdash; (`String`)
+ *           * `VolumeStatus` &mdash; (`map`)
+ *               * `Status` &mdash; (`String`)
+ *               * `Details` &mdash; (`Array<map>`)
+ *                   * `Name` &mdash; (`String`)
+ *                   * `Status` &mdash; (`String`)
+ *           * `Events` &mdash; (`Array<map>`)
+ *               * `EventType` &mdash; (`String`)
+ *               * `Description` &mdash; (`String`)
+ *               * `NotBefore` &mdash; (`Date`)
+ *               * `NotAfter` &mdash; (`Date`)
+ *               * `EventId` &mdash; (`String`)
+ *           * `Actions` &mdash; (`Array<map>`)
+ *               * `Code` &mdash; (`String`)
+ *               * `Description` &mdash; (`String`)
+ *               * `EventType` &mdash; (`String`)
+ *               * `EventId` &mdash; (`String`)
  *       * `NextToken` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -3988,9 +4041,9 @@ AWS.EC2 = inherit({})
  *       properties for Volumes. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -4003,48 +4056,48 @@ AWS.EC2 = inherit({})
  *
  *       * `Volumes` &mdash; (`Array<map>`) The list of described EBS
  *         volumes.
- *         * `VolumeId` &mdash; (`String`) The unique ID of this volume.
- *         * `Size` &mdash; (`Integer`) The size of this volume, in
- *           gigabytes.
- *         * `SnapshotId` &mdash; (`String`) Optional snapshot from which
- *           this volume was created.
- *         * `AvailabilityZone` &mdash; (`String`) Availability zone in
- *           which this volume was created.
- *         * `State` &mdash; (`String`) State of this volume (e.g.,
- *           creating, available).
- *           Possible values include:
- *           * `creating`
- *           * `available`
- *           * `in-use`
- *           * `deleting`
- *           * `error`
- *         * `CreateTime` &mdash; (`Date`) Timestamp when volume creation
- *           was initiated.
- *         * `Attachments` &mdash; (`Array<map>`) Information on what this
- *           volume is attached to.
- *           * `VolumeId` &mdash; (`String`)
- *           * `InstanceId` &mdash; (`String`)
- *           * `Device` &mdash; (`String`) How the device is exposed to the
- *             instance (e.g., /dev/sdh).
- *           * `State` &mdash; (`String`)
+ *           * `VolumeId` &mdash; (`String`) The unique ID of this volume.
+ *           * `Size` &mdash; (`Integer`) The size of this volume, in
+ *             gigabytes.
+ *           * `SnapshotId` &mdash; (`String`) Optional snapshot from which
+ *             this volume was created.
+ *           * `AvailabilityZone` &mdash; (`String`) Availability zone in
+ *             which this volume was created.
+ *           * `State` &mdash; (`String`) State of this volume (e.g.,
+ *             creating, available).
  *             Possible values include:
- *             * `attaching`
- *             * `attached`
- *             * `detaching`
- *             * `detached`
- *           * `AttachTime` &mdash; (`Date`) Timestamp when this attachment
- *             initiated.
- *           * `DeleteOnTermination` &mdash; (`Boolean`) ` Whether this
- *             volume will be deleted or not when the associated instance
- *             is terminated.
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the Volume.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *         * `VolumeType` &mdash; (`String`)
- *           Possible values include:
- *           * `standard`
- *           * `io1`
- *         * `Iops` &mdash; (`Integer`)
+ *             * `creating`
+ *             * `available`
+ *             * `in-use`
+ *             * `deleting`
+ *             * `error`
+ *           * `CreateTime` &mdash; (`Date`) Timestamp when volume creation
+ *             was initiated.
+ *           * `Attachments` &mdash; (`Array<map>`) Information on what
+ *             this volume is attached to.
+ *               * `VolumeId` &mdash; (`String`)
+ *               * `InstanceId` &mdash; (`String`)
+ *               * `Device` &mdash; (`String`) How the device is exposed to
+ *                 the instance (e.g., /dev/sdh).
+ *               * `State` &mdash; (`String`)
+ *                 Possible values include:
+ *                 * `attaching`
+ *                 * `attached`
+ *                 * `detaching`
+ *                 * `detached`
+ *               * `AttachTime` &mdash; (`Date`) Timestamp when this
+ *                 attachment initiated.
+ *               * `DeleteOnTermination` &mdash; (`Boolean`) ` Whether this
+ *                 volume will be deleted or not when the associated
+ *                 instance is terminated.
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the Volume.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
+ *           * `VolumeType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `standard`
+ *             * `io1`
+ *           * `Iops` &mdash; (`Integer`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -4068,9 +4121,9 @@ AWS.EC2 = inherit({})
  *
  *       * `VpcId` &mdash; (`String`)
  *       * `EnableDnsSupport` &mdash; (`map`)
- *         * `Value` &mdash; (`Boolean`) Boolean value
+ *           * `Value` &mdash; (`Boolean`) Boolean value
  *       * `EnableDnsHostnames` &mdash; (`map`)
- *         * `Value` &mdash; (`Boolean`) Boolean value
+ *           * `Value` &mdash; (`Boolean`) Boolean value
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -4083,9 +4136,9 @@ AWS.EC2 = inherit({})
  *       properties for VPCs. For a complete reference to the available
  *       filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -4097,21 +4150,22 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Vpcs` &mdash; (`Array<map>`)
- *         * `VpcId` &mdash; (`String`) Specifies the ID of the VPC.
- *         * `State` &mdash; (`String`) Describes the current state of the
- *           VPC. The state of the subnet may be either pending or
- *           available.
- *         * `CidrBlock` &mdash; (`String`) Specifies the CIDR block the
- *           VPC covers.
- *         * `DhcpOptionsId` &mdash; (`String`) Specifies the ID of the set
- *           of DHCP options associated with the VPC. Contains a value of
- *           default if the default options are associated with the VPC.
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the VPC.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *         * `InstanceTenancy` &mdash; (`String`) The allowed tenancy of
- *           instances launched into the VPC.
- *         * `IsDefault` &mdash; (`Boolean`)
+ *           * `VpcId` &mdash; (`String`) Specifies the ID of the VPC.
+ *           * `State` &mdash; (`String`) Describes the current state of
+ *             the VPC. The state of the subnet may be either pending or
+ *             available.
+ *           * `CidrBlock` &mdash; (`String`) Specifies the CIDR block the
+ *             VPC covers.
+ *           * `DhcpOptionsId` &mdash; (`String`) Specifies the ID of the
+ *             set of DHCP options associated with the VPC. Contains a
+ *             value of default if the default options are associated with
+ *             the VPC.
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the VPC.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
+ *           * `InstanceTenancy` &mdash; (`String`) The allowed tenancy of
+ *             instances launched into the VPC.
+ *           * `IsDefault` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -4124,9 +4178,9 @@ AWS.EC2 = inherit({})
  *       properties for VPN Connections. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -4138,39 +4192,39 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `VpnConnections` &mdash; (`Array<map>`)
- *         * `VpnConnectionId` &mdash; (`String`) Specifies the ID of the
- *           VPN gateway at the VPC end of the VPN connection.
- *         * `State` &mdash; (`String`) Describes the current state of the
- *           VPN connection. Valid values are pending, available, deleting,
- *           and deleted.
- *         * `CustomerGatewayConfiguration` &mdash; (`String`) Contains
- *           configuration information in the native XML format for the VPN
- *           connection's customer gateway. This element is always present
- *           in the CreateVpnConnection response; however, it's present in
- *           the DescribeVpnConnections response only if the VPN connection
- *           is in the pending or available state.
- *         * `Type` &mdash; (`String`) Specifies the type of VPN
- *           connection.
- *         * `CustomerGatewayId` &mdash; (`String`) Specifies ID of the
- *           customer gateway at the end of the VPN connection.
- *         * `VpnGatewayId` &mdash; (`String`) Specfies the ID of the VPN
- *           gateway at the VPC end of the VPN connection.
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the
- *           VpnConnection.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *         * `VgwTelemetry` &mdash; (`Array<map>`)
- *           * `OutsideIpAddress` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *           * `LastStatusChange` &mdash; (`Date`)
- *           * `StatusMessage` &mdash; (`String`)
- *           * `AcceptedRouteCount` &mdash; (`Integer`)
- *         * `Options` &mdash; (`map`)
- *           * `StaticRoutesOnly` &mdash; (`Boolean`)
- *         * `Routes` &mdash; (`Array<map>`)
- *           * `DestinationCidrBlock` &mdash; (`String`)
- *           * `Source` &mdash; (`String`)
- *           * `State` &mdash; (`String`)
+ *           * `VpnConnectionId` &mdash; (`String`) Specifies the ID of the
+ *             VPN gateway at the VPC end of the VPN connection.
+ *           * `State` &mdash; (`String`) Describes the current state of
+ *             the VPN connection. Valid values are pending, available,
+ *             deleting, and deleted.
+ *           * `CustomerGatewayConfiguration` &mdash; (`String`) Contains
+ *             configuration information in the native XML format for the
+ *             VPN connection's customer gateway. This element is always
+ *             present in the CreateVpnConnection response; however, it's
+ *             present in the DescribeVpnConnections response only if the
+ *             VPN connection is in the pending or available state.
+ *           * `Type` &mdash; (`String`) Specifies the type of VPN
+ *             connection.
+ *           * `CustomerGatewayId` &mdash; (`String`) Specifies ID of the
+ *             customer gateway at the end of the VPN connection.
+ *           * `VpnGatewayId` &mdash; (`String`) Specfies the ID of the VPN
+ *             gateway at the VPC end of the VPN connection.
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the
+ *             VpnConnection.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
+ *           * `VgwTelemetry` &mdash; (`Array<map>`)
+ *               * `OutsideIpAddress` &mdash; (`String`)
+ *               * `Status` &mdash; (`String`)
+ *               * `LastStatusChange` &mdash; (`Date`)
+ *               * `StatusMessage` &mdash; (`String`)
+ *               * `AcceptedRouteCount` &mdash; (`Integer`)
+ *           * `Options` &mdash; (`map`)
+ *               * `StaticRoutesOnly` &mdash; (`Boolean`)
+ *           * `Routes` &mdash; (`Array<map>`)
+ *               * `DestinationCidrBlock` &mdash; (`String`)
+ *               * `Source` &mdash; (`String`)
+ *               * `State` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -4185,9 +4239,9 @@ AWS.EC2 = inherit({})
  *       properties for VPN Gateways. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
+ *         * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *         * `Values` &mdash; (`Array<String>`) Contains one or more
+ *           values for the filter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -4199,23 +4253,23 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `VpnGateways` &mdash; (`Array<map>`)
- *         * `VpnGatewayId` &mdash; (`String`) Specifies the ID of the VPN
- *           gateway.
- *         * `State` &mdash; (`String`) Describes the current state of the
- *           VPN gateway. Valid values are pending, available, deleting,
- *           and deleted.
- *         * `Type` &mdash; (`String`) Specifies the type of VPN connection
- *           the VPN gateway supports.
- *         * `AvailabilityZone` &mdash; (`String`) Specifies the
- *           Availability Zone where the VPN gateway was created.
- *         * `VpcAttachments` &mdash; (`Array<map>`) Contains information
- *           about the VPCs attached to the VPN gateway.
- *           * `VpcId` &mdash; (`String`)
- *           * `State` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the
- *           VpnGateway.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
+ *           * `VpnGatewayId` &mdash; (`String`) Specifies the ID of the
+ *             VPN gateway.
+ *           * `State` &mdash; (`String`) Describes the current state of
+ *             the VPN gateway. Valid values are pending, available,
+ *             deleting, and deleted.
+ *           * `Type` &mdash; (`String`) Specifies the type of VPN
+ *             connection the VPN gateway supports.
+ *           * `AvailabilityZone` &mdash; (`String`) Specifies the
+ *             Availability Zone where the VPN gateway was created.
+ *           * `VpcAttachments` &mdash; (`Array<map>`) Contains information
+ *             about the VPCs attached to the VPN gateway.
+ *               * `VpcId` &mdash; (`String`)
+ *               * `State` &mdash; (`String`)
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the
+ *             VpnGateway.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -4451,78 +4505,79 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `Description` &mdash; (`String`)
  *     * `LaunchSpecification` &mdash; (`map`)
- *       * `Architecture` &mdash; (`String`)
- *       * `SecurityGroups` &mdash; (`Array<String>`)
- *       * `AdditionalInfo` &mdash; (`String`)
- *       * `UserData` &mdash; (`String`)
- *       * `InstanceType` &mdash; (`String`)
- *         Possible values include:
- *         * `t1.micro`
- *         * `m1.small`
- *         * `m1.medium`
- *         * `m1.large`
- *         * `m1.xlarge`
- *         * `m2.xlarge`
- *         * `m2.2xlarge`
- *         * `m2.4xlarge`
- *         * `m3.xlarge`
- *         * `m3.2xlarge`
- *         * `c1.medium`
- *         * `c1.xlarge`
- *         * `hi1.4xlarge`
- *         * `hs1.8xlarge`
- *         * `cc1.4xlarge`
- *         * `cc2.8xlarge`
- *         * `cg1.4xlarge`
- *       * `Placement` &mdash; (`map`)
- *         * `AvailabilityZone` &mdash; (`String`) The availability zone
- *           in which an Amazon EC2 instance runs.
- *         * `GroupName` &mdash; (`String`) The name of the
- *           PlacementGroup in which an Amazon EC2 instance runs.
- *           Placement groups are primarily used for launching High
- *           Performance Computing instances in the same group to ensure
- *           fast connection speeds.
- *         * `Tenancy` &mdash; (`String`) The allowed tenancy of
- *           instances launched into the VPC. A value of default means
- *           instances can be launched with any tenancy; a value of
- *           dedicated means all instances launched into the VPC will be
- *           launched as dedicated tenancy regardless of the tenancy
- *           assigned to the instance at launch.
- *       * `BlockDeviceMappings` &mdash; (`Array<map>`)
- *         * `VirtualName` &mdash; (`String`) Specifies the virtual
- *           device name.
- *         * `DeviceName` &mdash; (`String`) Specifies the device name
- *           (e.g., /dev/sdh).
- *         * `Ebs` &mdash; (`map`) Specifies parameters used to
- *           automatically setup Amazon EBS volumes when the instance is
- *           launched.
- *           * `SnapshotId` &mdash; (`String`) The ID of the snapshot
- *             from which the volume will be created.
- *           * `VolumeSize` &mdash; (`Integer`) The size of the volume,
- *             in gigabytes.
- *           * `DeleteOnTermination` &mdash; (`Boolean`) Specifies
- *             whether the Amazon EBS volume is deleted on instance
- *             termination.
- *           * `VolumeType` &mdash; (`String`)
- *             Possible values include:
- *             * `standard`
- *             * `io1`
- *           * `Iops` &mdash; (`Integer`)
- *         * `NoDevice` &mdash; (`String`) Specifies the device name to
- *           suppress during instance launch.
- *       * `Monitoring` &mdash; (`Boolean`)
- *       * `SubnetId` &mdash; (`String`)
- *       * `DisableApiTermination` &mdash; (`Boolean`)
- *       * `InstanceInitiatedShutdownBehavior` &mdash; (`String`)
- *       * `PrivateIpAddress` &mdash; (`String`)
+ *         * `Architecture` &mdash; (`String`)
+ *         * `SecurityGroups` &mdash; (`Array<String>`)
+ *         * `AdditionalInfo` &mdash; (`String`)
+ *         * `UserData` &mdash; (`String`)
+ *         * `InstanceType` &mdash; (`String`)
+ *           Possible values include:
+ *           * `t1.micro`
+ *           * `m1.small`
+ *           * `m1.medium`
+ *           * `m1.large`
+ *           * `m1.xlarge`
+ *           * `m2.xlarge`
+ *           * `m2.2xlarge`
+ *           * `m2.4xlarge`
+ *           * `m3.xlarge`
+ *           * `m3.2xlarge`
+ *           * `c1.medium`
+ *           * `c1.xlarge`
+ *           * `hi1.4xlarge`
+ *           * `hs1.8xlarge`
+ *           * `cc1.4xlarge`
+ *           * `cc2.8xlarge`
+ *           * `cg1.4xlarge`
+ *         * `Placement` &mdash; (`map`)
+ *             * `AvailabilityZone` &mdash; (`String`) The availability
+ *               zone in which an Amazon EC2 instance runs.
+ *             * `GroupName` &mdash; (`String`) The name of the
+ *               PlacementGroup in which an Amazon EC2 instance runs.
+ *               Placement groups are primarily used for launching High
+ *               Performance Computing instances in the same group to
+ *               ensure fast connection speeds.
+ *             * `Tenancy` &mdash; (`String`) The allowed tenancy of
+ *               instances launched into the VPC. A value of default
+ *               means instances can be launched with any tenancy; a
+ *               value of dedicated means all instances launched into the
+ *               VPC will be launched as dedicated tenancy regardless of
+ *               the tenancy assigned to the instance at launch.
+ *         * `BlockDeviceMappings` &mdash; (`Array<map>`)
+ *             * `VirtualName` &mdash; (`String`) Specifies the virtual
+ *               device name.
+ *             * `DeviceName` &mdash; (`String`) Specifies the device
+ *               name (e.g., /dev/sdh).
+ *             * `Ebs` &mdash; (`map`) Specifies parameters used to
+ *               automatically setup Amazon EBS volumes when the instance
+ *               is launched.
+ *                 * `SnapshotId` &mdash; (`String`) The ID of the
+ *                   snapshot from which the volume will be created.
+ *                 * `VolumeSize` &mdash; (`Integer`) The size of the
+ *                   volume, in gigabytes.
+ *                 * `DeleteOnTermination` &mdash; (`Boolean`) Specifies
+ *                   whether the Amazon EBS volume is deleted on instance
+ *                   termination.
+ *                 * `VolumeType` &mdash; (`String`)
+ *                   Possible values include:
+ *                   * `standard`
+ *                   * `io1`
+ *                 * `Iops` &mdash; (`Integer`)
+ *             * `NoDevice` &mdash; (`String`) Specifies the device name
+ *               to suppress during instance launch.
+ *         * `Monitoring` &mdash; (`Boolean`)
+ *         * `SubnetId` &mdash; (`String`)
+ *         * `DisableApiTermination` &mdash; (`Boolean`)
+ *         * `InstanceInitiatedShutdownBehavior` &mdash; (`String`)
+ *         * `PrivateIpAddress` &mdash; (`String`)
  *     * `DiskImages` &mdash; (`Array<map>`)
- *       * `Image` &mdash; (`map`)
- *         * `Format` &mdash; **required** &mdash; (`String`)
- *         * `Bytes` &mdash; **required** &mdash; (`Integer`)
- *         * `ImportManifestUrl` &mdash; **required** &mdash; (`String`)
- *       * `Description` &mdash; (`String`)
- *       * `Volume` &mdash; (`map`)
- *         * `Size` &mdash; **required** &mdash; (`Integer`)
+ *         * `Image` &mdash; (`map`)
+ *             * `Format` &mdash; **required** &mdash; (`String`)
+ *             * `Bytes` &mdash; **required** &mdash; (`Integer`)
+ *             * `ImportManifestUrl` &mdash; **required** &mdash;
+ *               (`String`)
+ *         * `Description` &mdash; (`String`)
+ *         * `Volume` &mdash; (`map`)
+ *             * `Size` &mdash; **required** &mdash; (`Integer`)
  *     * `Platform` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -4535,43 +4590,43 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `ConversionTask` &mdash; (`map`)
- *         * `ConversionTaskId` &mdash; (`String`)
- *         * `ExpirationTime` &mdash; (`String`)
- *         * `ImportInstance` &mdash; (`map`)
- *           * `Volumes` &mdash; (`Array<map>`)
- *             * `BytesConverted` &mdash; (`Integer`)
- *             * `AvailabilityZone` &mdash; (`String`)
- *             * `Image` &mdash; (`map`)
- *               * `Format` &mdash; (`String`)
- *               * `Size` &mdash; (`Integer`)
- *               * `ImportManifestUrl` &mdash; (`String`)
- *               * `Checksum` &mdash; (`String`)
- *             * `Volume` &mdash; (`map`)
- *               * `Size` &mdash; (`Integer`)
- *               * `Id` &mdash; (`String`)
- *             * `Status` &mdash; (`String`)
- *             * `StatusMessage` &mdash; (`String`)
- *             * `Description` &mdash; (`String`)
- *           * `InstanceId` &mdash; (`String`)
- *           * `Platform` &mdash; (`String`)
- *           * `Description` &mdash; (`String`)
- *         * `ImportVolume` &mdash; (`map`)
- *           * `BytesConverted` &mdash; (`Integer`)
- *           * `AvailabilityZone` &mdash; (`String`)
- *           * `Description` &mdash; (`String`)
- *           * `Image` &mdash; (`map`)
- *             * `Format` &mdash; (`String`)
- *             * `Size` &mdash; (`Integer`)
- *             * `ImportManifestUrl` &mdash; (`String`)
- *             * `Checksum` &mdash; (`String`)
- *           * `Volume` &mdash; (`map`)
- *             * `Size` &mdash; (`Integer`)
- *             * `Id` &mdash; (`String`)
- *         * `State` &mdash; (`String`)
- *         * `StatusMessage` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<map>`)
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
+ *           * `ConversionTaskId` &mdash; (`String`)
+ *           * `ExpirationTime` &mdash; (`String`)
+ *           * `ImportInstance` &mdash; (`map`)
+ *               * `Volumes` &mdash; (`Array<map>`)
+ *                   * `BytesConverted` &mdash; (`Integer`)
+ *                   * `AvailabilityZone` &mdash; (`String`)
+ *                   * `Image` &mdash; (`map`)
+ *                       * `Format` &mdash; (`String`)
+ *                       * `Size` &mdash; (`Integer`)
+ *                       * `ImportManifestUrl` &mdash; (`String`)
+ *                       * `Checksum` &mdash; (`String`)
+ *                   * `Volume` &mdash; (`map`)
+ *                       * `Size` &mdash; (`Integer`)
+ *                       * `Id` &mdash; (`String`)
+ *                   * `Status` &mdash; (`String`)
+ *                   * `StatusMessage` &mdash; (`String`)
+ *                   * `Description` &mdash; (`String`)
+ *               * `InstanceId` &mdash; (`String`)
+ *               * `Platform` &mdash; (`String`)
+ *               * `Description` &mdash; (`String`)
+ *           * `ImportVolume` &mdash; (`map`)
+ *               * `BytesConverted` &mdash; (`Integer`)
+ *               * `AvailabilityZone` &mdash; (`String`)
+ *               * `Description` &mdash; (`String`)
+ *               * `Image` &mdash; (`map`)
+ *                   * `Format` &mdash; (`String`)
+ *                   * `Size` &mdash; (`Integer`)
+ *                   * `ImportManifestUrl` &mdash; (`String`)
+ *                   * `Checksum` &mdash; (`String`)
+ *               * `Volume` &mdash; (`map`)
+ *                   * `Size` &mdash; (`Integer`)
+ *                   * `Id` &mdash; (`String`)
+ *           * `State` &mdash; (`String`)
+ *           * `StatusMessage` &mdash; (`String`)
+ *           * `Tags` &mdash; (`Array<map>`)
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -4603,12 +4658,12 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `AvailabilityZone` &mdash; (`String`)
  *     * `Image` &mdash; (`map`)
- *       * `Format` &mdash; **required** &mdash; (`String`)
- *       * `Bytes` &mdash; **required** &mdash; (`Integer`)
- *       * `ImportManifestUrl` &mdash; **required** &mdash; (`String`)
+ *         * `Format` &mdash; **required** &mdash; (`String`)
+ *         * `Bytes` &mdash; **required** &mdash; (`Integer`)
+ *         * `ImportManifestUrl` &mdash; **required** &mdash; (`String`)
  *     * `Description` &mdash; (`String`)
  *     * `Volume` &mdash; (`map`)
- *       * `Size` &mdash; **required** &mdash; (`Integer`)
+ *         * `Size` &mdash; **required** &mdash; (`Integer`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -4620,43 +4675,43 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `ConversionTask` &mdash; (`map`)
- *         * `ConversionTaskId` &mdash; (`String`)
- *         * `ExpirationTime` &mdash; (`String`)
- *         * `ImportInstance` &mdash; (`map`)
- *           * `Volumes` &mdash; (`Array<map>`)
- *             * `BytesConverted` &mdash; (`Integer`)
- *             * `AvailabilityZone` &mdash; (`String`)
- *             * `Image` &mdash; (`map`)
- *               * `Format` &mdash; (`String`)
- *               * `Size` &mdash; (`Integer`)
- *               * `ImportManifestUrl` &mdash; (`String`)
- *               * `Checksum` &mdash; (`String`)
- *             * `Volume` &mdash; (`map`)
- *               * `Size` &mdash; (`Integer`)
- *               * `Id` &mdash; (`String`)
- *             * `Status` &mdash; (`String`)
- *             * `StatusMessage` &mdash; (`String`)
- *             * `Description` &mdash; (`String`)
- *           * `InstanceId` &mdash; (`String`)
- *           * `Platform` &mdash; (`String`)
- *           * `Description` &mdash; (`String`)
- *         * `ImportVolume` &mdash; (`map`)
- *           * `BytesConverted` &mdash; (`Integer`)
- *           * `AvailabilityZone` &mdash; (`String`)
- *           * `Description` &mdash; (`String`)
- *           * `Image` &mdash; (`map`)
- *             * `Format` &mdash; (`String`)
- *             * `Size` &mdash; (`Integer`)
- *             * `ImportManifestUrl` &mdash; (`String`)
- *             * `Checksum` &mdash; (`String`)
- *           * `Volume` &mdash; (`map`)
- *             * `Size` &mdash; (`Integer`)
- *             * `Id` &mdash; (`String`)
- *         * `State` &mdash; (`String`)
- *         * `StatusMessage` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<map>`)
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
+ *           * `ConversionTaskId` &mdash; (`String`)
+ *           * `ExpirationTime` &mdash; (`String`)
+ *           * `ImportInstance` &mdash; (`map`)
+ *               * `Volumes` &mdash; (`Array<map>`)
+ *                   * `BytesConverted` &mdash; (`Integer`)
+ *                   * `AvailabilityZone` &mdash; (`String`)
+ *                   * `Image` &mdash; (`map`)
+ *                       * `Format` &mdash; (`String`)
+ *                       * `Size` &mdash; (`Integer`)
+ *                       * `ImportManifestUrl` &mdash; (`String`)
+ *                       * `Checksum` &mdash; (`String`)
+ *                   * `Volume` &mdash; (`map`)
+ *                       * `Size` &mdash; (`Integer`)
+ *                       * `Id` &mdash; (`String`)
+ *                   * `Status` &mdash; (`String`)
+ *                   * `StatusMessage` &mdash; (`String`)
+ *                   * `Description` &mdash; (`String`)
+ *               * `InstanceId` &mdash; (`String`)
+ *               * `Platform` &mdash; (`String`)
+ *               * `Description` &mdash; (`String`)
+ *           * `ImportVolume` &mdash; (`map`)
+ *               * `BytesConverted` &mdash; (`Integer`)
+ *               * `AvailabilityZone` &mdash; (`String`)
+ *               * `Description` &mdash; (`String`)
+ *               * `Image` &mdash; (`map`)
+ *                   * `Format` &mdash; (`String`)
+ *                   * `Size` &mdash; (`Integer`)
+ *                   * `ImportManifestUrl` &mdash; (`String`)
+ *                   * `Checksum` &mdash; (`String`)
+ *               * `Volume` &mdash; (`map`)
+ *                   * `Size` &mdash; (`Integer`)
+ *                   * `Id` &mdash; (`String`)
+ *           * `State` &mdash; (`String`)
+ *           * `StatusMessage` &mdash; (`String`)
+ *           * `Tags` &mdash; (`Array<map>`)
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -4685,18 +4740,20 @@ AWS.EC2 = inherit({})
  *       modified. Only valid when the description attribute is being
  *       modified.
  *     * `LaunchPermission` &mdash; (`map`)
- *       * `Add` &mdash; (`Array<map>`)
- *         * `UserId` &mdash; (`String`) The AWS user ID of the user
- *           involved in this launch permission.
- *         * `Group` &mdash; (`String`) The AWS group of the user
- *           involved in this launch permission. Available groups: all
- *       * `Remove` &mdash; (`Array<map>`)
- *         * `UserId` &mdash; (`String`) The AWS user ID of the user
- *           involved in this launch permission.
- *         * `Group` &mdash; (`String`) The AWS group of the user
- *           involved in this launch permission. Available groups: all
+ *         * `Add` &mdash; (`Array<map>`)
+ *             * `UserId` &mdash; (`String`) The AWS user ID of the user
+ *               involved in this launch permission.
+ *             * `Group` &mdash; (`String`) The AWS group of the user
+ *               involved in this launch permission. Available groups:
+ *               all
+ *         * `Remove` &mdash; (`Array<map>`)
+ *             * `UserId` &mdash; (`String`) The AWS user ID of the user
+ *               involved in this launch permission.
+ *             * `Group` &mdash; (`String`) The AWS group of the user
+ *               involved in this launch permission. Available groups:
+ *               all
  *     * `Description` &mdash; (`map`)
- *       * `Value` &mdash; (`String`) String value
+ *         * `Value` &mdash; (`String`) String value
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -4740,38 +4797,39 @@ AWS.EC2 = inherit({})
  *       device mappings for the instance whose attributes are being
  *       modified. Only valid when blockDeviceMapping is specified as the
  *       attribute being modified.
- *       * `DeviceName` &mdash; (`String`) The device name (e.g.,
- *         /dev/sdh) at which the block device is exposed on the
- *         instance.
- *       * `Ebs` &mdash; (`map`) The EBS instance block device
- *         specification describing the EBS block device to map to the
- *         specified device name on a running instance.
- *         * `VolumeId` &mdash; (`String`) The ID of the EBS volume that
- *           should be mounted as a block device on an Amazon EC2
+ *         * `DeviceName` &mdash; (`String`) The device name (e.g.,
+ *           /dev/sdh) at which the block device is exposed on the
  *           instance.
- *         * `DeleteOnTermination` &mdash; (`Boolean`) Specifies whether
- *           the Amazon EBS volume is deleted on instance termination.
- *       * `VirtualName` &mdash; (`String`) The virtual device name.
- *       * `NoDevice` &mdash; (`String`) When set to the empty string,
- *         specifies that the device name in this object should not be
- *         mapped to any real device.
+ *         * `Ebs` &mdash; (`map`) The EBS instance block device
+ *           specification describing the EBS block device to map to the
+ *           specified device name on a running instance.
+ *             * `VolumeId` &mdash; (`String`) The ID of the EBS volume
+ *               that should be mounted as a block device on an Amazon
+ *               EC2 instance.
+ *             * `DeleteOnTermination` &mdash; (`Boolean`) Specifies
+ *               whether the Amazon EBS volume is deleted on instance
+ *               termination.
+ *         * `VirtualName` &mdash; (`String`) The virtual device name.
+ *         * `NoDevice` &mdash; (`String`) When set to the empty string,
+ *           specifies that the device name in this object should not be
+ *           mapped to any real device.
  *     * `SourceDestCheck` &mdash; (`map`)
- *       * `Value` &mdash; (`Boolean`) Boolean value
+ *         * `Value` &mdash; (`Boolean`) Boolean value
  *     * `DisableApiTermination` &mdash; (`map`)
- *       * `Value` &mdash; (`Boolean`) Boolean value
+ *         * `Value` &mdash; (`Boolean`) Boolean value
  *     * `InstanceType` &mdash; (`map`)
- *       * `Value` &mdash; (`String`) String value
+ *         * `Value` &mdash; (`String`) String value
  *     * `Kernel` &mdash; (`map`)
- *       * `Value` &mdash; (`String`) String value
+ *         * `Value` &mdash; (`String`) String value
  *     * `Ramdisk` &mdash; (`map`)
- *       * `Value` &mdash; (`String`) String value
+ *         * `Value` &mdash; (`String`) String value
  *     * `UserData` &mdash; (`map`)
- *       * `Value` &mdash; (`String`) String value
+ *         * `Value` &mdash; (`String`) String value
  *     * `InstanceInitiatedShutdownBehavior` &mdash; (`map`)
- *       * `Value` &mdash; (`String`) String value
+ *         * `Value` &mdash; (`String`) String value
  *     * `Groups` &mdash; (`Array<String>`)
  *     * `EbsOptimized` &mdash; (`map`)
- *       * `Value` &mdash; (`Boolean`) Boolean value
+ *         * `Value` &mdash; (`Boolean`) Boolean value
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -4788,13 +4846,13 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `NetworkInterfaceId` &mdash; **required** &mdash; (`String`)
  *     * `Description` &mdash; (`map`)
- *       * `Value` &mdash; (`String`) String value
+ *         * `Value` &mdash; (`String`) String value
  *     * `SourceDestCheck` &mdash; (`map`)
- *       * `Value` &mdash; (`Boolean`) Boolean value
+ *         * `Value` &mdash; (`Boolean`) Boolean value
  *     * `Groups` &mdash; (`Array<String>`)
  *     * `Attachment` &mdash; (`map`)
- *       * `AttachmentId` &mdash; (`String`)
- *       * `DeleteOnTermination` &mdash; (`Boolean`)
+ *         * `AttachmentId` &mdash; (`String`)
+ *         * `DeleteOnTermination` &mdash; (`Boolean`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -4829,16 +4887,18 @@ AWS.EC2 = inherit({})
  *       supports "all". Only valid when the createVolumePermission
  *       attribute is being modified.
  *     * `CreateVolumePermission` &mdash; (`map`)
- *       * `Add` &mdash; (`Array<map>`)
- *         * `UserId` &mdash; (`String`) The user ID of the user that can
- *           create volumes from the snapshot.
- *         * `Group` &mdash; (`String`) The group that is allowed to
- *           create volumes from the snapshot (currently supports "all").
- *       * `Remove` &mdash; (`Array<map>`)
- *         * `UserId` &mdash; (`String`) The user ID of the user that can
- *           create volumes from the snapshot.
- *         * `Group` &mdash; (`String`) The group that is allowed to
- *           create volumes from the snapshot (currently supports "all").
+ *         * `Add` &mdash; (`Array<map>`)
+ *             * `UserId` &mdash; (`String`) The user ID of the user that
+ *               can create volumes from the snapshot.
+ *             * `Group` &mdash; (`String`) The group that is allowed to
+ *               create volumes from the snapshot (currently supports
+ *               "all").
+ *         * `Remove` &mdash; (`Array<map>`)
+ *             * `UserId` &mdash; (`String`) The user ID of the user that
+ *               can create volumes from the snapshot.
+ *             * `Group` &mdash; (`String`) The group that is allowed to
+ *               create volumes from the snapshot (currently supports
+ *               "all").
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -4871,9 +4931,9 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `VpcId` &mdash; **required** &mdash; (`String`)
  *     * `EnableDnsSupport` &mdash; (`map`)
- *       * `Value` &mdash; (`Boolean`) Boolean value
+ *         * `Value` &mdash; (`Boolean`) Boolean value
  *     * `EnableDnsHostnames` &mdash; (`map`)
- *       * `Value` &mdash; (`Boolean`) Boolean value
+ *         * `Value` &mdash; (`Boolean`) Boolean value
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -4903,11 +4963,11 @@ AWS.EC2 = inherit({})
  *       * `InstanceMonitorings` &mdash; (`Array<map>`) A list of updated
  *         monitoring information for the instances specified in the
  *         request.
- *         * `InstanceId` &mdash; (`String`) Instance ID.
- *         * `Monitoring` &mdash; (`map`) Monitoring state for the
- *           associated instance.
- *           * `State` &mdash; (`String`) The state of monitoring on an
- *             Amazon EC2 instance (ex: enabled, disabled).
+ *           * `InstanceId` &mdash; (`String`) Instance ID.
+ *           * `Monitoring` &mdash; (`map`) Monitoring state for the
+ *             associated instance.
+ *               * `State` &mdash; (`String`) The state of monitoring on an
+ *                 Amazon EC2 instance (ex: enabled, disabled).
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -4920,8 +4980,8 @@ AWS.EC2 = inherit({})
  *     * `InstanceCount` &mdash; **required** &mdash; (`Integer`) The
  *       number of Reserved Instances to purchase.
  *     * `LimitPrice` &mdash; (`map`)
- *       * `Amount` &mdash; (`Float`)
- *       * `CurrencyCode` &mdash; (`String`)
+ *         * `Amount` &mdash; (`Float`)
+ *         * `CurrencyCode` &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -4978,26 +5038,27 @@ AWS.EC2 = inherit({})
  *       mappings for the new AMI, which specify how different block
  *       devices (ex: EBS volumes and ephemeral drives) will be exposed
  *       on instances launched from the new image.
- *       * `VirtualName` &mdash; (`String`) Specifies the virtual device
- *         name.
- *       * `DeviceName` &mdash; (`String`) Specifies the device name
- *         (e.g., /dev/sdh).
- *       * `Ebs` &mdash; (`map`) Specifies parameters used to
- *         automatically setup Amazon EBS volumes when the instance is
- *         launched.
- *         * `SnapshotId` &mdash; (`String`) The ID of the snapshot from
- *           which the volume will be created.
- *         * `VolumeSize` &mdash; (`Integer`) The size of the volume, in
- *           gigabytes.
- *         * `DeleteOnTermination` &mdash; (`Boolean`) Specifies whether
- *           the Amazon EBS volume is deleted on instance termination.
- *         * `VolumeType` &mdash; (`String`)
- *           Possible values include:
- *           * `standard`
- *           * `io1`
- *         * `Iops` &mdash; (`Integer`)
- *       * `NoDevice` &mdash; (`String`) Specifies the device name to
- *         suppress during instance launch.
+ *         * `VirtualName` &mdash; (`String`) Specifies the virtual
+ *           device name.
+ *         * `DeviceName` &mdash; (`String`) Specifies the device name
+ *           (e.g., /dev/sdh).
+ *         * `Ebs` &mdash; (`map`) Specifies parameters used to
+ *           automatically setup Amazon EBS volumes when the instance is
+ *           launched.
+ *             * `SnapshotId` &mdash; (`String`) The ID of the snapshot
+ *               from which the volume will be created.
+ *             * `VolumeSize` &mdash; (`Integer`) The size of the volume,
+ *               in gigabytes.
+ *             * `DeleteOnTermination` &mdash; (`Boolean`) Specifies
+ *               whether the Amazon EBS volume is deleted on instance
+ *               termination.
+ *             * `VolumeType` &mdash; (`String`)
+ *               Possible values include:
+ *               * `standard`
+ *               * `io1`
+ *             * `Iops` &mdash; (`Integer`)
+ *         * `NoDevice` &mdash; (`String`) Specifies the device name to
+ *           suppress during instance launch.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -5074,17 +5135,17 @@ AWS.EC2 = inherit({})
  *     * `CidrBlock` &mdash; **required** &mdash; (`String`) The CIDR
  *       range to allow or deny, in CIDR notation (e.g., 172.16.0.0/24).
  *     * `IcmpTypeCode` &mdash; (`map`) ICMP values.
- *       * `Type` &mdash; (`Integer`) For the ICMP protocol, the ICMP
- *         type. A value of -1 is a wildcard meaning all types. Required
- *         if specifying icmp for the protocol.
- *       * `Code` &mdash; (`Integer`) For the ICMP protocol, the ICMP
- *         code. A value of -1 is a wildcard meaning all codes. Required
- *         if specifying icmp for the protocol.
+ *         * `Type` &mdash; (`Integer`) For the ICMP protocol, the ICMP
+ *           type. A value of -1 is a wildcard meaning all types.
+ *           Required if specifying icmp for the protocol.
+ *         * `Code` &mdash; (`Integer`) For the ICMP protocol, the ICMP
+ *           code. A value of -1 is a wildcard meaning all codes.
+ *           Required if specifying icmp for the protocol.
  *     * `PortRange` &mdash; (`map`) Port ranges.
- *       * `From` &mdash; (`Integer`) The first port in the range.
- *         Required if specifying tcp or udp for the protocol.
- *       * `To` &mdash; (`Integer`) The last port in the range. Required
- *         if specifying tcp or udp for the protocol.
+ *         * `From` &mdash; (`Integer`) The first port in the range.
+ *           Required if specifying tcp or udp for the protocol.
+ *         * `To` &mdash; (`Integer`) The last port in the range.
+ *           Required if specifying tcp or udp for the protocol.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -5196,95 +5257,97 @@ AWS.EC2 = inherit({})
  *       are launched in the same Availability Zone.
  *     * `LaunchSpecification` &mdash; (`map`) Specifies additional
  *       launch instance information.
- *       * `ImageId` &mdash; (`String`) The AMI ID.
- *       * `KeyName` &mdash; (`String`) The name of the key pair.
- *       * `UserData` &mdash; (`String`) Optional data, specific to a
- *         user's application, to provide in the launch request. All
- *         instances that collectively comprise the launch request have
- *         access to this data. User data is never returned through API
- *         responses.
- *       * `AddressingType` &mdash; (`String`) Deprecated.
- *       * `InstanceType` &mdash; (`String`) Specifies the instance type.
- *         Possible values include:
- *         * `t1.micro`
- *         * `m1.small`
- *         * `m1.medium`
- *         * `m1.large`
- *         * `m1.xlarge`
- *         * `m2.xlarge`
- *         * `m2.2xlarge`
- *         * `m2.4xlarge`
- *         * `m3.xlarge`
- *         * `m3.2xlarge`
- *         * `c1.medium`
- *         * `c1.xlarge`
- *         * `hi1.4xlarge`
- *         * `hs1.8xlarge`
- *         * `cc1.4xlarge`
- *         * `cc2.8xlarge`
- *         * `cg1.4xlarge`
- *       * `Placement` &mdash; (`map`) Defines a placement item.
- *         * `AvailabilityZone` &mdash; (`String`) The availability zone
- *           in which an Amazon EC2 instance runs.
- *         * `GroupName` &mdash; (`String`) The name of the
- *           PlacementGroup in which an Amazon EC2 instance runs.
- *           Placement groups are primarily used for launching High
- *           Performance Computing instances in the same group to ensure
- *           fast connection speeds.
- *       * `KernelId` &mdash; (`String`) Specifies the ID of the kernel
- *         to select.
- *       * `RamdiskId` &mdash; (`String`) Specifies the ID of the RAM
- *         disk to select. Some kernels require additional drivers at
- *         launch. Check the kernel requirements for information on
- *         whether or not you need to specify a RAM disk and search for
- *         the kernel ID.
- *       * `BlockDeviceMappings` &mdash; (`Array<map>`) Specifies how
- *         block devices are exposed to the instance. Each mapping is
- *         made up of a virtualName and a deviceName.
- *         * `VirtualName` &mdash; (`String`) Specifies the virtual
- *           device name.
- *         * `DeviceName` &mdash; (`String`) Specifies the device name
- *           (e.g., /dev/sdh).
- *         * `Ebs` &mdash; (`map`) Specifies parameters used to
- *           automatically setup Amazon EBS volumes when the instance is
- *           launched.
- *           * `SnapshotId` &mdash; (`String`) The ID of the snapshot
- *             from which the volume will be created.
- *           * `VolumeSize` &mdash; (`Integer`) The size of the volume,
- *             in gigabytes.
- *           * `DeleteOnTermination` &mdash; (`Boolean`) Specifies
- *             whether the Amazon EBS volume is deleted on instance
- *             termination.
- *           * `VolumeType` &mdash; (`String`)
- *             Possible values include:
- *             * `standard`
- *             * `io1`
- *           * `Iops` &mdash; (`Integer`)
- *         * `NoDevice` &mdash; (`String`) Specifies the device name to
- *           suppress during instance launch.
- *       * `MonitoringEnabled` &mdash; (`Boolean`) Enables monitoring for
- *         the instance.
- *       * `SubnetId` &mdash; (`String`) Specifies the Amazon VPC subnet
- *         ID within which to launch the instance(s) for Amazon Virtual
- *         Private Cloud.
- *       * `NetworkInterfaces` &mdash; (`Array<map>`)
- *         * `NetworkInterfaceId` &mdash; (`String`)
- *         * `DeviceIndex` &mdash; (`Integer`)
- *         * `SubnetId` &mdash; (`String`)
- *         * `Description` &mdash; (`String`)
- *         * `PrivateIpAddress` &mdash; (`String`)
- *         * `Groups` &mdash; (`Array<String>`)
- *         * `DeleteOnTermination` &mdash; (`Boolean`)
- *         * `PrivateIpAddresses` &mdash; (`Array<map>`)
- *           * `PrivateIpAddress` &mdash; **required** &mdash; (`String`)
- *           * `Primary` &mdash; (`Boolean`)
- *         * `SecondaryPrivateIpAddressCount` &mdash; (`Integer`)
- *       * `IamInstanceProfile` &mdash; (`map`)
- *         * `Arn` &mdash; (`String`)
- *         * `Name` &mdash; (`String`)
- *       * `EbsOptimized` &mdash; (`Boolean`)
- *       * `SecurityGroupIds` &mdash; (`Array<String>`)
- *       * `SecurityGroups` &mdash; (`Array<String>`)
+ *         * `ImageId` &mdash; (`String`) The AMI ID.
+ *         * `KeyName` &mdash; (`String`) The name of the key pair.
+ *         * `UserData` &mdash; (`String`) Optional data, specific to a
+ *           user's application, to provide in the launch request. All
+ *           instances that collectively comprise the launch request have
+ *           access to this data. User data is never returned through API
+ *           responses.
+ *         * `AddressingType` &mdash; (`String`) Deprecated.
+ *         * `InstanceType` &mdash; (`String`) Specifies the instance
+ *           type.
+ *           Possible values include:
+ *           * `t1.micro`
+ *           * `m1.small`
+ *           * `m1.medium`
+ *           * `m1.large`
+ *           * `m1.xlarge`
+ *           * `m2.xlarge`
+ *           * `m2.2xlarge`
+ *           * `m2.4xlarge`
+ *           * `m3.xlarge`
+ *           * `m3.2xlarge`
+ *           * `c1.medium`
+ *           * `c1.xlarge`
+ *           * `hi1.4xlarge`
+ *           * `hs1.8xlarge`
+ *           * `cc1.4xlarge`
+ *           * `cc2.8xlarge`
+ *           * `cg1.4xlarge`
+ *         * `Placement` &mdash; (`map`) Defines a placement item.
+ *             * `AvailabilityZone` &mdash; (`String`) The availability
+ *               zone in which an Amazon EC2 instance runs.
+ *             * `GroupName` &mdash; (`String`) The name of the
+ *               PlacementGroup in which an Amazon EC2 instance runs.
+ *               Placement groups are primarily used for launching High
+ *               Performance Computing instances in the same group to
+ *               ensure fast connection speeds.
+ *         * `KernelId` &mdash; (`String`) Specifies the ID of the kernel
+ *           to select.
+ *         * `RamdiskId` &mdash; (`String`) Specifies the ID of the RAM
+ *           disk to select. Some kernels require additional drivers at
+ *           launch. Check the kernel requirements for information on
+ *           whether or not you need to specify a RAM disk and search for
+ *           the kernel ID.
+ *         * `BlockDeviceMappings` &mdash; (`Array<map>`) Specifies how
+ *           block devices are exposed to the instance. Each mapping is
+ *           made up of a virtualName and a deviceName.
+ *             * `VirtualName` &mdash; (`String`) Specifies the virtual
+ *               device name.
+ *             * `DeviceName` &mdash; (`String`) Specifies the device
+ *               name (e.g., /dev/sdh).
+ *             * `Ebs` &mdash; (`map`) Specifies parameters used to
+ *               automatically setup Amazon EBS volumes when the instance
+ *               is launched.
+ *                 * `SnapshotId` &mdash; (`String`) The ID of the
+ *                   snapshot from which the volume will be created.
+ *                 * `VolumeSize` &mdash; (`Integer`) The size of the
+ *                   volume, in gigabytes.
+ *                 * `DeleteOnTermination` &mdash; (`Boolean`) Specifies
+ *                   whether the Amazon EBS volume is deleted on instance
+ *                   termination.
+ *                 * `VolumeType` &mdash; (`String`)
+ *                   Possible values include:
+ *                   * `standard`
+ *                   * `io1`
+ *                 * `Iops` &mdash; (`Integer`)
+ *             * `NoDevice` &mdash; (`String`) Specifies the device name
+ *               to suppress during instance launch.
+ *         * `MonitoringEnabled` &mdash; (`Boolean`) Enables monitoring
+ *           for the instance.
+ *         * `SubnetId` &mdash; (`String`) Specifies the Amazon VPC
+ *           subnet ID within which to launch the instance(s) for Amazon
+ *           Virtual Private Cloud.
+ *         * `NetworkInterfaces` &mdash; (`Array<map>`)
+ *             * `NetworkInterfaceId` &mdash; (`String`)
+ *             * `DeviceIndex` &mdash; (`Integer`)
+ *             * `SubnetId` &mdash; (`String`)
+ *             * `Description` &mdash; (`String`)
+ *             * `PrivateIpAddress` &mdash; (`String`)
+ *             * `Groups` &mdash; (`Array<String>`)
+ *             * `DeleteOnTermination` &mdash; (`Boolean`)
+ *             * `PrivateIpAddresses` &mdash; (`Array<map>`)
+ *                 * `PrivateIpAddress` &mdash; **required** &mdash;
+ *                   (`String`)
+ *                 * `Primary` &mdash; (`Boolean`)
+ *             * `SecondaryPrivateIpAddressCount` &mdash; (`Integer`)
+ *         * `IamInstanceProfile` &mdash; (`map`)
+ *             * `Arn` &mdash; (`String`)
+ *             * `Name` &mdash; (`String`)
+ *         * `EbsOptimized` &mdash; (`Boolean`)
+ *         * `SecurityGroupIds` &mdash; (`Array<String>`)
+ *         * `SecurityGroups` &mdash; (`Array<String>`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -5297,125 +5360,126 @@ AWS.EC2 = inherit({})
  *
  *       * `SpotInstanceRequests` &mdash; (`Array<map>`) Contains a list of
  *         Spot Instance requests.
- *         * `SpotInstanceRequestId` &mdash; (`String`)
- *         * `SpotPrice` &mdash; (`String`)
- *         * `Type` &mdash; (`String`)
- *           Possible values include:
- *           * `one-time`
- *           * `persistent`
- *         * `State` &mdash; (`String`)
- *         * `Fault` &mdash; (`map`)
- *           * `Code` &mdash; (`String`)
- *           * `Message` &mdash; (`String`)
- *         * `Status` &mdash; (`map`)
- *           * `Code` &mdash; (`String`)
- *           * `UpdateTime` &mdash; (`Date`)
- *           * `Message` &mdash; (`String`)
- *         * `ValidFrom` &mdash; (`Date`)
- *         * `ValidUntil` &mdash; (`Date`)
- *         * `LaunchGroup` &mdash; (`String`)
- *         * `AvailabilityZoneGroup` &mdash; (`String`)
- *         * `LaunchSpecification` &mdash; (`map`)
- *           * `ImageId` &mdash; (`String`) The AMI ID.
- *           * `KeyName` &mdash; (`String`) The name of the key pair.
- *           * `SecurityGroups` &mdash; (`Array<map>`)
- *             * `GroupName` &mdash; (`String`)
- *             * `GroupId` &mdash; (`String`)
- *           * `UserData` &mdash; (`String`) Optional data, specific to a
- *             user's application, to provide in the launch request. All
- *             instances that collectively comprise the launch request have
- *             access to this data. User data is never returned through API
- *             responses.
- *           * `AddressingType` &mdash; (`String`) Deprecated.
- *           * `InstanceType` &mdash; (`String`) Specifies the instance
- *             type.
+ *           * `SpotInstanceRequestId` &mdash; (`String`)
+ *           * `SpotPrice` &mdash; (`String`)
+ *           * `Type` &mdash; (`String`)
  *             Possible values include:
- *             * `t1.micro`
- *             * `m1.small`
- *             * `m1.medium`
- *             * `m1.large`
- *             * `m1.xlarge`
- *             * `m2.xlarge`
- *             * `m2.2xlarge`
- *             * `m2.4xlarge`
- *             * `m3.xlarge`
- *             * `m3.2xlarge`
- *             * `c1.medium`
- *             * `c1.xlarge`
- *             * `hi1.4xlarge`
- *             * `hs1.8xlarge`
- *             * `cc1.4xlarge`
- *             * `cc2.8xlarge`
- *             * `cg1.4xlarge`
- *           * `Placement` &mdash; (`map`) Defines a placement item.
- *             * `AvailabilityZone` &mdash; (`String`) The availability
- *               zone in which an Amazon EC2 instance runs.
- *             * `GroupName` &mdash; (`String`) The name of the
- *               PlacementGroup in which an Amazon EC2 instance runs.
- *               Placement groups are primarily used for launching High
- *               Performance Computing instances in the same group to
- *               ensure fast connection speeds.
- *           * `KernelId` &mdash; (`String`) Specifies the ID of the kernel
- *             to select.
- *           * `RamdiskId` &mdash; (`String`) Specifies the ID of the RAM
- *             disk to select. Some kernels require additional drivers at
- *             launch. Check the kernel requirements for information on
- *             whether or not you need to specify a RAM disk and search for
- *             the kernel ID.
- *           * `BlockDeviceMappings` &mdash; (`Array<map>`) Specifies how
- *             block devices are exposed to the instance. Each mapping is
- *             made up of a virtualName and a deviceName.
- *             * `VirtualName` &mdash; (`String`) Specifies the virtual
- *               device name.
- *             * `DeviceName` &mdash; (`String`) Specifies the device name
- *               (e.g., /dev/sdh).
- *             * `Ebs` &mdash; (`map`) Specifies parameters used to
- *               automatically setup Amazon EBS volumes when the instance
- *               is launched.
- *               * `SnapshotId` &mdash; (`String`) The ID of the snapshot
- *                 from which the volume will be created.
- *               * `VolumeSize` &mdash; (`Integer`) The size of the volume,
- *                 in gigabytes.
- *               * `DeleteOnTermination` &mdash; (`Boolean`) Specifies
- *                 whether the Amazon EBS volume is deleted on instance
- *                 termination.
- *               * `VolumeType` &mdash; (`String`)
+ *             * `one-time`
+ *             * `persistent`
+ *           * `State` &mdash; (`String`)
+ *           * `Fault` &mdash; (`map`)
+ *               * `Code` &mdash; (`String`)
+ *               * `Message` &mdash; (`String`)
+ *           * `Status` &mdash; (`map`)
+ *               * `Code` &mdash; (`String`)
+ *               * `UpdateTime` &mdash; (`Date`)
+ *               * `Message` &mdash; (`String`)
+ *           * `ValidFrom` &mdash; (`Date`)
+ *           * `ValidUntil` &mdash; (`Date`)
+ *           * `LaunchGroup` &mdash; (`String`)
+ *           * `AvailabilityZoneGroup` &mdash; (`String`)
+ *           * `LaunchSpecification` &mdash; (`map`)
+ *               * `ImageId` &mdash; (`String`) The AMI ID.
+ *               * `KeyName` &mdash; (`String`) The name of the key pair.
+ *               * `SecurityGroups` &mdash; (`Array<map>`)
+ *                   * `GroupName` &mdash; (`String`)
+ *                   * `GroupId` &mdash; (`String`)
+ *               * `UserData` &mdash; (`String`) Optional data, specific to
+ *                 a user's application, to provide in the launch request.
+ *                 All instances that collectively comprise the launch
+ *                 request have access to this data. User data is never
+ *                 returned through API responses.
+ *               * `AddressingType` &mdash; (`String`) Deprecated.
+ *               * `InstanceType` &mdash; (`String`) Specifies the instance
+ *                 type.
  *                 Possible values include:
- *                 * `standard`
- *                 * `io1`
- *               * `Iops` &mdash; (`Integer`)
- *             * `NoDevice` &mdash; (`String`) Specifies the device name to
- *               suppress during instance launch.
- *           * `MonitoringEnabled` &mdash; (`Boolean`) Enables monitoring
- *             for the instance.
- *           * `SubnetId` &mdash; (`String`) Specifies the Amazon VPC
- *             subnet ID within which to launch the instance(s) for Amazon
- *             Virtual Private Cloud.
- *           * `NetworkInterfaces` &mdash; (`Array<map>`)
- *             * `NetworkInterfaceId` &mdash; (`String`)
- *             * `DeviceIndex` &mdash; (`Integer`)
- *             * `SubnetId` &mdash; (`String`)
- *             * `Description` &mdash; (`String`)
- *             * `PrivateIpAddress` &mdash; (`String`)
- *             * `Groups` &mdash; (`Array<String>`)
- *             * `DeleteOnTermination` &mdash; (`Boolean`)
- *             * `PrivateIpAddresses` &mdash; (`Array<map>`)
- *               * `PrivateIpAddress` &mdash; (`String`)
- *               * `Primary` &mdash; (`Boolean`)
- *             * `SecondaryPrivateIpAddressCount` &mdash; (`Integer`)
- *           * `IamInstanceProfile` &mdash; (`map`)
- *             * `Arn` &mdash; (`String`)
- *             * `Name` &mdash; (`String`)
- *           * `EbsOptimized` &mdash; (`Boolean`)
- *         * `InstanceId` &mdash; (`String`)
- *         * `CreateTime` &mdash; (`Date`)
- *         * `ProductDescription` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for this spot
- *           instance request.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *         * `LaunchedAvailabilityZone` &mdash; (`String`) The Availability
- *           Zone in which the bid is launched.
+ *                 * `t1.micro`
+ *                 * `m1.small`
+ *                 * `m1.medium`
+ *                 * `m1.large`
+ *                 * `m1.xlarge`
+ *                 * `m2.xlarge`
+ *                 * `m2.2xlarge`
+ *                 * `m2.4xlarge`
+ *                 * `m3.xlarge`
+ *                 * `m3.2xlarge`
+ *                 * `c1.medium`
+ *                 * `c1.xlarge`
+ *                 * `hi1.4xlarge`
+ *                 * `hs1.8xlarge`
+ *                 * `cc1.4xlarge`
+ *                 * `cc2.8xlarge`
+ *                 * `cg1.4xlarge`
+ *               * `Placement` &mdash; (`map`) Defines a placement item.
+ *                   * `AvailabilityZone` &mdash; (`String`) The
+ *                     availability zone in which an Amazon EC2 instance
+ *                     runs.
+ *                   * `GroupName` &mdash; (`String`) The name of the
+ *                     PlacementGroup in which an Amazon EC2 instance runs.
+ *                     Placement groups are primarily used for launching
+ *                     High Performance Computing instances in the same
+ *                     group to ensure fast connection speeds.
+ *               * `KernelId` &mdash; (`String`) Specifies the ID of the
+ *                 kernel to select.
+ *               * `RamdiskId` &mdash; (`String`) Specifies the ID of the
+ *                 RAM disk to select. Some kernels require additional
+ *                 drivers at launch. Check the kernel requirements for
+ *                 information on whether or not you need to specify a RAM
+ *                 disk and search for the kernel ID.
+ *               * `BlockDeviceMappings` &mdash; (`Array<map>`) Specifies
+ *                 how block devices are exposed to the instance. Each
+ *                 mapping is made up of a virtualName and a deviceName.
+ *                   * `VirtualName` &mdash; (`String`) Specifies the
+ *                     virtual device name.
+ *                   * `DeviceName` &mdash; (`String`) Specifies the device
+ *                     name (e.g., /dev/sdh).
+ *                   * `Ebs` &mdash; (`map`) Specifies parameters used to
+ *                     automatically setup Amazon EBS volumes when the
+ *                     instance is launched.
+ *                       * `SnapshotId` &mdash; (`String`) The ID of the
+ *                         snapshot from which the volume will be created.
+ *                       * `VolumeSize` &mdash; (`Integer`) The size of the
+ *                         volume, in gigabytes.
+ *                       * `DeleteOnTermination` &mdash; (`Boolean`)
+ *                         Specifies whether the Amazon EBS volume is
+ *                         deleted on instance termination.
+ *                       * `VolumeType` &mdash; (`String`)
+ *                         Possible values include:
+ *                         * `standard`
+ *                         * `io1`
+ *                       * `Iops` &mdash; (`Integer`)
+ *                   * `NoDevice` &mdash; (`String`) Specifies the device
+ *                     name to suppress during instance launch.
+ *               * `MonitoringEnabled` &mdash; (`Boolean`) Enables
+ *                 monitoring for the instance.
+ *               * `SubnetId` &mdash; (`String`) Specifies the Amazon VPC
+ *                 subnet ID within which to launch the instance(s) for
+ *                 Amazon Virtual Private Cloud.
+ *               * `NetworkInterfaces` &mdash; (`Array<map>`)
+ *                   * `NetworkInterfaceId` &mdash; (`String`)
+ *                   * `DeviceIndex` &mdash; (`Integer`)
+ *                   * `SubnetId` &mdash; (`String`)
+ *                   * `Description` &mdash; (`String`)
+ *                   * `PrivateIpAddress` &mdash; (`String`)
+ *                   * `Groups` &mdash; (`Array<String>`)
+ *                   * `DeleteOnTermination` &mdash; (`Boolean`)
+ *                   * `PrivateIpAddresses` &mdash; (`Array<map>`)
+ *                       * `PrivateIpAddress` &mdash; (`String`)
+ *                       * `Primary` &mdash; (`Boolean`)
+ *                   * `SecondaryPrivateIpAddressCount` &mdash; (`Integer`)
+ *               * `IamInstanceProfile` &mdash; (`map`)
+ *                   * `Arn` &mdash; (`String`)
+ *                   * `Name` &mdash; (`String`)
+ *               * `EbsOptimized` &mdash; (`Boolean`)
+ *           * `InstanceId` &mdash; (`String`)
+ *           * `CreateTime` &mdash; (`Date`)
+ *           * `ProductDescription` &mdash; (`String`)
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for this spot
+ *             instance request.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
+ *           * `LaunchedAvailabilityZone` &mdash; (`String`) The
+ *             Availability Zone in which the bid is launched.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -5524,26 +5588,28 @@ AWS.EC2 = inherit({})
  *       permissions through IP permissions is the preferred way of
  *       authorizing permissions since it offers more flexibility and
  *       control.
- *       * `IpProtocol` &mdash; (`String`) The IP protocol of this
- *         permission. Valid protocol values: tcp, udp, icmp
- *       * `FromPort` &mdash; (`Integer`) Start of port range for the TCP
- *         and UDP protocols, or an ICMP type number. An ICMP type number
- *         of -1 indicates a wildcard (i.e., any ICMP type number).
- *       * `ToPort` &mdash; (`Integer`) End of port range for the TCP and
- *         UDP protocols, or an ICMP code. An ICMP code of -1 indicates a
- *         wildcard (i.e., any ICMP code).
- *       * `UserIdGroupPairs` &mdash; (`Array<map>`) The list of AWS user
- *         IDs and groups included in this permission.
- *         * `UserId` &mdash; (`String`) The AWS user ID of an account.
- *         * `GroupName` &mdash; (`String`) Name of the security group in
- *           the specified AWS account. Cannot be used when specifying a
- *           CIDR IP address range.
- *         * `GroupId` &mdash; (`String`) ID of the security group in the
- *           specified AWS account. Cannot be used when specifying a CIDR
- *           IP address range.
- *       * `IpRanges` &mdash; (`Array<map>`) The list of CIDR IP ranges
- *         included in this permission.
- *         * `CidrIp` &mdash; (`String`) The list of CIDR IP ranges.
+ *         * `IpProtocol` &mdash; (`String`) The IP protocol of this
+ *           permission. Valid protocol values: tcp, udp, icmp
+ *         * `FromPort` &mdash; (`Integer`) Start of port range for the
+ *           TCP and UDP protocols, or an ICMP type number. An ICMP type
+ *           number of -1 indicates a wildcard (i.e., any ICMP type
+ *           number).
+ *         * `ToPort` &mdash; (`Integer`) End of port range for the TCP
+ *           and UDP protocols, or an ICMP code. An ICMP code of -1
+ *           indicates a wildcard (i.e., any ICMP code).
+ *         * `UserIdGroupPairs` &mdash; (`Array<map>`) The list of AWS
+ *           user IDs and groups included in this permission.
+ *             * `UserId` &mdash; (`String`) The AWS user ID of an
+ *               account.
+ *             * `GroupName` &mdash; (`String`) Name of the security
+ *               group in the specified AWS account. Cannot be used when
+ *               specifying a CIDR IP address range.
+ *             * `GroupId` &mdash; (`String`) ID of the security group in
+ *               the specified AWS account. Cannot be used when
+ *               specifying a CIDR IP address range.
+ *         * `IpRanges` &mdash; (`Array<map>`) The list of CIDR IP ranges
+ *           included in this permission.
+ *             * `CidrIp` &mdash; (`String`) The list of CIDR IP ranges.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -5578,26 +5644,28 @@ AWS.EC2 = inherit({})
  *       specify in this list. Specifying permissions through IP
  *       permissions is the preferred way of revoking permissions since
  *       it offers more flexibility and control.
- *       * `IpProtocol` &mdash; (`String`) The IP protocol of this
- *         permission. Valid protocol values: tcp, udp, icmp
- *       * `FromPort` &mdash; (`Integer`) Start of port range for the TCP
- *         and UDP protocols, or an ICMP type number. An ICMP type number
- *         of -1 indicates a wildcard (i.e., any ICMP type number).
- *       * `ToPort` &mdash; (`Integer`) End of port range for the TCP and
- *         UDP protocols, or an ICMP code. An ICMP code of -1 indicates a
- *         wildcard (i.e., any ICMP code).
- *       * `UserIdGroupPairs` &mdash; (`Array<map>`) The list of AWS user
- *         IDs and groups included in this permission.
- *         * `UserId` &mdash; (`String`) The AWS user ID of an account.
- *         * `GroupName` &mdash; (`String`) Name of the security group in
- *           the specified AWS account. Cannot be used when specifying a
- *           CIDR IP address range.
- *         * `GroupId` &mdash; (`String`) ID of the security group in the
- *           specified AWS account. Cannot be used when specifying a CIDR
- *           IP address range.
- *       * `IpRanges` &mdash; (`Array<map>`) The list of CIDR IP ranges
- *         included in this permission.
- *         * `CidrIp` &mdash; (`String`) The list of CIDR IP ranges.
+ *         * `IpProtocol` &mdash; (`String`) The IP protocol of this
+ *           permission. Valid protocol values: tcp, udp, icmp
+ *         * `FromPort` &mdash; (`Integer`) Start of port range for the
+ *           TCP and UDP protocols, or an ICMP type number. An ICMP type
+ *           number of -1 indicates a wildcard (i.e., any ICMP type
+ *           number).
+ *         * `ToPort` &mdash; (`Integer`) End of port range for the TCP
+ *           and UDP protocols, or an ICMP code. An ICMP code of -1
+ *           indicates a wildcard (i.e., any ICMP code).
+ *         * `UserIdGroupPairs` &mdash; (`Array<map>`) The list of AWS
+ *           user IDs and groups included in this permission.
+ *             * `UserId` &mdash; (`String`) The AWS user ID of an
+ *               account.
+ *             * `GroupName` &mdash; (`String`) Name of the security
+ *               group in the specified AWS account. Cannot be used when
+ *               specifying a CIDR IP address range.
+ *             * `GroupId` &mdash; (`String`) ID of the security group in
+ *               the specified AWS account. Cannot be used when
+ *               specifying a CIDR IP address range.
+ *         * `IpRanges` &mdash; (`Array<map>`) The list of CIDR IP ranges
+ *           included in this permission.
+ *             * `CidrIp` &mdash; (`String`) The list of CIDR IP ranges.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -5650,18 +5718,19 @@ AWS.EC2 = inherit({})
  *       * `cg1.4xlarge`
  *     * `Placement` &mdash; (`map`) Specifies the placement constraints
  *       (Availability Zones) for launching the instances.
- *       * `AvailabilityZone` &mdash; (`String`) The availability zone in
- *         which an Amazon EC2 instance runs.
- *       * `GroupName` &mdash; (`String`) The name of the PlacementGroup
- *         in which an Amazon EC2 instance runs. Placement groups are
- *         primarily used for launching High Performance Computing
- *         instances in the same group to ensure fast connection speeds.
- *       * `Tenancy` &mdash; (`String`) The allowed tenancy of instances
- *         launched into the VPC. A value of default means instances can
- *         be launched with any tenancy; a value of dedicated means all
- *         instances launched into the VPC will be launched as dedicated
- *         tenancy regardless of the tenancy assigned to the instance at
- *         launch.
+ *         * `AvailabilityZone` &mdash; (`String`) The availability zone
+ *           in which an Amazon EC2 instance runs.
+ *         * `GroupName` &mdash; (`String`) The name of the
+ *           PlacementGroup in which an Amazon EC2 instance runs.
+ *           Placement groups are primarily used for launching High
+ *           Performance Computing instances in the same group to ensure
+ *           fast connection speeds.
+ *         * `Tenancy` &mdash; (`String`) The allowed tenancy of
+ *           instances launched into the VPC. A value of default means
+ *           instances can be launched with any tenancy; a value of
+ *           dedicated means all instances launched into the VPC will be
+ *           launched as dedicated tenancy regardless of the tenancy
+ *           assigned to the instance at launch.
  *     * `KernelId` &mdash; (`String`) The ID of the kernel with which to
  *       launch the instance.
  *     * `RamdiskId` &mdash; (`String`) The ID of the RAM disk with which
@@ -5673,29 +5742,30 @@ AWS.EC2 = inherit({})
  *     * `BlockDeviceMappings` &mdash; (`Array<map>`) Specifies how block
  *       devices are exposed to the instance. Each mapping is made up of
  *       a virtualName and a deviceName.
- *       * `VirtualName` &mdash; (`String`) Specifies the virtual device
- *         name.
- *       * `DeviceName` &mdash; (`String`) Specifies the device name
- *         (e.g., /dev/sdh).
- *       * `Ebs` &mdash; (`map`) Specifies parameters used to
- *         automatically setup Amazon EBS volumes when the instance is
- *         launched.
- *         * `SnapshotId` &mdash; (`String`) The ID of the snapshot from
- *           which the volume will be created.
- *         * `VolumeSize` &mdash; (`Integer`) The size of the volume, in
- *           gigabytes.
- *         * `DeleteOnTermination` &mdash; (`Boolean`) Specifies whether
- *           the Amazon EBS volume is deleted on instance termination.
- *         * `VolumeType` &mdash; (`String`)
- *           Possible values include:
- *           * `standard`
- *           * `io1`
- *         * `Iops` &mdash; (`Integer`)
- *       * `NoDevice` &mdash; (`String`) Specifies the device name to
- *         suppress during instance launch.
+ *         * `VirtualName` &mdash; (`String`) Specifies the virtual
+ *           device name.
+ *         * `DeviceName` &mdash; (`String`) Specifies the device name
+ *           (e.g., /dev/sdh).
+ *         * `Ebs` &mdash; (`map`) Specifies parameters used to
+ *           automatically setup Amazon EBS volumes when the instance is
+ *           launched.
+ *             * `SnapshotId` &mdash; (`String`) The ID of the snapshot
+ *               from which the volume will be created.
+ *             * `VolumeSize` &mdash; (`Integer`) The size of the volume,
+ *               in gigabytes.
+ *             * `DeleteOnTermination` &mdash; (`Boolean`) Specifies
+ *               whether the Amazon EBS volume is deleted on instance
+ *               termination.
+ *             * `VolumeType` &mdash; (`String`)
+ *               Possible values include:
+ *               * `standard`
+ *               * `io1`
+ *             * `Iops` &mdash; (`Integer`)
+ *         * `NoDevice` &mdash; (`String`) Specifies the device name to
+ *           suppress during instance launch.
  *     * `Monitoring` &mdash; (`map`) Enables monitoring for the
  *       instance.
- *       * `Enabled` &mdash; **required** &mdash; (`Boolean`)
+ *         * `Enabled` &mdash; **required** &mdash; (`Boolean`)
  *     * `SubnetId` &mdash; (`String`) Specifies the subnet ID within
  *       which to launch the instance(s) for Amazon Virtual Private
  *       Cloud.
@@ -5708,9 +5778,9 @@ AWS.EC2 = inherit({})
  *       terminated when the instance is shut down.
  *     * `License` &mdash; (`map`) Specifies active licenses in use and
  *       attached to an Amazon EC2 instance.
- *       * `Pool` &mdash; (`String`) The license pool from which to take
- *         a license when starting Amazon EC2 instances in the associated
- *         RunInstances request.
+ *         * `Pool` &mdash; (`String`) The license pool from which to
+ *           take a license when starting Amazon EC2 instances in the
+ *           associated RunInstances request.
  *     * `PrivateIpAddress` &mdash; (`String`) If you're using Amazon
  *       Virtual Private Cloud, you can optionally use this parameter to
  *       assign the instance a specific available IP address from the
@@ -5721,20 +5791,21 @@ AWS.EC2 = inherit({})
  *       Elastic Compute Cloud User Guide.
  *     * `AdditionalInfo` &mdash; (`String`)
  *     * `NetworkInterfaces` &mdash; (`Array<map>`)
- *       * `NetworkInterfaceId` &mdash; (`String`)
- *       * `DeviceIndex` &mdash; (`Integer`)
- *       * `SubnetId` &mdash; (`String`)
- *       * `Description` &mdash; (`String`)
- *       * `PrivateIpAddress` &mdash; (`String`)
- *       * `Groups` &mdash; (`Array<String>`)
- *       * `DeleteOnTermination` &mdash; (`Boolean`)
- *       * `PrivateIpAddresses` &mdash; (`Array<map>`)
- *         * `PrivateIpAddress` &mdash; **required** &mdash; (`String`)
- *         * `Primary` &mdash; (`Boolean`)
- *       * `SecondaryPrivateIpAddressCount` &mdash; (`Integer`)
+ *         * `NetworkInterfaceId` &mdash; (`String`)
+ *         * `DeviceIndex` &mdash; (`Integer`)
+ *         * `SubnetId` &mdash; (`String`)
+ *         * `Description` &mdash; (`String`)
+ *         * `PrivateIpAddress` &mdash; (`String`)
+ *         * `Groups` &mdash; (`Array<String>`)
+ *         * `DeleteOnTermination` &mdash; (`Boolean`)
+ *         * `PrivateIpAddresses` &mdash; (`Array<map>`)
+ *             * `PrivateIpAddress` &mdash; **required** &mdash;
+ *               (`String`)
+ *             * `Primary` &mdash; (`Boolean`)
+ *         * `SecondaryPrivateIpAddressCount` &mdash; (`Integer`)
  *     * `IamInstanceProfile` &mdash; (`map`)
- *       * `Arn` &mdash; (`String`)
- *       * `Name` &mdash; (`String`)
+ *         * `Arn` &mdash; (`String`)
+ *         * `Name` &mdash; (`String`)
  *     * `EbsOptimized` &mdash; (`Boolean`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -5754,182 +5825,191 @@ AWS.EC2 = inherit({})
  *         requested the instances in this reservation.
  *       * `Groups` &mdash; (`Array<map>`) The list of security groups
  *         requested for the instances in this reservation.
- *         * `GroupName` &mdash; (`String`)
- *         * `GroupId` &mdash; (`String`)
- *       * `Instances` &mdash; (`Array<map>`) The list of Amazon EC2
- *         instances included in this reservation.
- *         * `InstanceId` &mdash; (`String`) Unique ID of the instance
- *           launched.
- *         * `ImageId` &mdash; (`String`) Image ID of the AMI used to
- *           launch the instance.
- *         * `State` &mdash; (`map`) The current state of the instance.
- *           * `Code` &mdash; (`Integer`) A 16-bit unsigned integer. The
- *             high byte is an opaque internal value and should be ignored.
- *             The low byte is set based on the state represented.
- *           * `Name` &mdash; (`String`) The current state of the instance.
- *             Possible values include:
- *             * `pending`
- *             * `running`
- *             * `shutting-down`
- *             * `terminated`
- *             * `stopping`
- *             * `stopped`
- *         * `PrivateDnsName` &mdash; (`String`) The private DNS name
- *           assigned to the instance. This DNS name can only be used
- *           inside the Amazon EC2 network. This element remains empty
- *           until the instance enters a running state.
- *         * `PublicDnsName` &mdash; (`String`) The public DNS name
- *           assigned to the instance. This DNS name is contactable from
- *           outside the Amazon EC2 network. This element remains empty
- *           until the instance enters a running state.
- *         * `StateTransitionReason` &mdash; (`String`) Reason for the most
- *           recent state transition. This might be an empty string.
- *         * `KeyName` &mdash; (`String`) If this instance was launched
- *           with an associated key pair, this displays the key pair name.
- *         * `AmiLaunchIndex` &mdash; (`Integer`) The AMI launch index,
- *           which can be used to find this instance within the launch
- *           group.
- *         * `ProductCodes` &mdash; (`Array<map>`) Product codes attached
- *           to this instance.
- *           * `ProductCodeId` &mdash; (`String`) The unique ID of an AWS
- *             DevPay product code.
- *           * `ProductCodeType` &mdash; (`String`)
- *         * `InstanceType` &mdash; (`String`) The instance type. For more
- *           information on instance types, please see the Amazon Elastic
- *           Compute Cloud Developer Guide.
- *           Possible values include:
- *           * `t1.micro`
- *           * `m1.small`
- *           * `m1.medium`
- *           * `m1.large`
- *           * `m1.xlarge`
- *           * `m2.xlarge`
- *           * `m2.2xlarge`
- *           * `m2.4xlarge`
- *           * `m3.xlarge`
- *           * `m3.2xlarge`
- *           * `c1.medium`
- *           * `c1.xlarge`
- *           * `hi1.4xlarge`
- *           * `hs1.8xlarge`
- *           * `cc1.4xlarge`
- *           * `cc2.8xlarge`
- *           * `cg1.4xlarge`
- *         * `LaunchTime` &mdash; (`Date`) The time this instance launched.
- *         * `Placement` &mdash; (`map`) The location where this instance
- *           launched.
- *           * `AvailabilityZone` &mdash; (`String`) The availability zone
- *             in which an Amazon EC2 instance runs.
- *           * `GroupName` &mdash; (`String`) The name of the
- *             PlacementGroup in which an Amazon EC2 instance runs.
- *             Placement groups are primarily used for launching High
- *             Performance Computing instances in the same group to ensure
- *             fast connection speeds.
- *           * `Tenancy` &mdash; (`String`) The allowed tenancy of
- *             instances launched into the VPC. A value of default means
- *             instances can be launched with any tenancy; a value of
- *             dedicated means all instances launched into the VPC will be
- *             launched as dedicated tenancy regardless of the tenancy
- *             assigned to the instance at launch.
- *         * `KernelId` &mdash; (`String`) Kernel associated with this
- *           instance.
- *         * `RamdiskId` &mdash; (`String`) RAM disk associated with this
- *           instance.
- *         * `Platform` &mdash; (`String`) Platform of the instance (e.g.,
- *           Windows).
- *         * `Monitoring` &mdash; (`map`) Monitoring status for this
- *           instance.
- *           * `State` &mdash; (`String`) The state of monitoring on an
- *             Amazon EC2 instance (ex: enabled, disabled).
- *         * `SubnetId` &mdash; (`String`) Specifies the Amazon VPC subnet
- *           ID in which the instance is running.
- *         * `VpcId` &mdash; (`String`) Specifies the Amazon VPC in which
- *           the instance is running.
- *         * `PrivateIpAddress` &mdash; (`String`) Specifies the private IP
- *           address that is assigned to the instance (Amazon VPC).
- *         * `PublicIpAddress` &mdash; (`String`) Specifies the IP address
- *           of the instance.
- *         * `StateReason` &mdash; (`map`) The reason for the state change.
- *           * `Code` &mdash; (`String`) Reason code for the state change.
- *           * `Message` &mdash; (`String`) Descriptive message for the
- *             state change.
- *         * `Architecture` &mdash; (`String`) The architecture of this
- *           instance.
- *         * `RootDeviceType` &mdash; (`String`) The root device type used
- *           by the AMI. The AMI can use an Amazon EBS or instance store
- *           root device.
- *         * `RootDeviceName` &mdash; (`String`) The root device name
- *           (e.g., /dev/sda1).
- *         * `BlockDeviceMappings` &mdash; (`Array<map>`) Block device
- *           mapping set.
- *           * `DeviceName` &mdash; (`String`) The device name (e.g.,
- *             /dev/sdh) at which the block device is exposed on the
- *             instance.
- *           * `Ebs` &mdash; (`map`) The optional EBS device mapped to the
- *             specified device name.
- *             * `VolumeId` &mdash; (`String`) The ID of the EBS volume.
- *             * `Status` &mdash; (`String`) The status of the EBS volume.
- *             * `AttachTime` &mdash; (`Date`) The time at which the EBS
- *               volume was attached to the associated instance.
- *             * `DeleteOnTermination` &mdash; (`Boolean`) Specifies
- *               whether the Amazon EBS volume is deleted on instance
- *               termination.
- *         * `VirtualizationType` &mdash; (`String`)
- *           Possible values include:
- *           * `hvm`
- *           * `paravirtual`
- *         * `InstanceLifecycle` &mdash; (`String`)
- *         * `SpotInstanceRequestId` &mdash; (`String`)
- *         * `License` &mdash; (`map`)
- *           * `Pool` &mdash; (`String`) The license pool from which this
- *             license was used (ex: 'windows').
- *         * `ClientToken` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the Instance.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *         * `SecurityGroups` &mdash; (`Array<map>`)
  *           * `GroupName` &mdash; (`String`)
  *           * `GroupId` &mdash; (`String`)
- *         * `SourceDestCheck` &mdash; (`Boolean`)
- *         * `Hypervisor` &mdash; (`String`)
- *           Possible values include:
- *           * `ovm`
- *           * `xen`
- *         * `NetworkInterfaces` &mdash; (`Array<map>`)
- *           * `NetworkInterfaceId` &mdash; (`String`)
- *           * `SubnetId` &mdash; (`String`)
- *           * `VpcId` &mdash; (`String`)
- *           * `Description` &mdash; (`String`)
- *           * `OwnerId` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *           * `PrivateIpAddress` &mdash; (`String`)
- *           * `PrivateDnsName` &mdash; (`String`)
+ *       * `Instances` &mdash; (`Array<map>`) The list of Amazon EC2
+ *         instances included in this reservation.
+ *           * `InstanceId` &mdash; (`String`) Unique ID of the instance
+ *             launched.
+ *           * `ImageId` &mdash; (`String`) Image ID of the AMI used to
+ *             launch the instance.
+ *           * `State` &mdash; (`map`) The current state of the instance.
+ *               * `Code` &mdash; (`Integer`) A 16-bit unsigned integer.
+ *                 The high byte is an opaque internal value and should be
+ *                 ignored. The low byte is set based on the state
+ *                 represented.
+ *               * `Name` &mdash; (`String`) The current state of the
+ *                 instance.
+ *                 Possible values include:
+ *                 * `pending`
+ *                 * `running`
+ *                 * `shutting-down`
+ *                 * `terminated`
+ *                 * `stopping`
+ *                 * `stopped`
+ *           * `PrivateDnsName` &mdash; (`String`) The private DNS name
+ *             assigned to the instance. This DNS name can only be used
+ *             inside the Amazon EC2 network. This element remains empty
+ *             until the instance enters a running state.
+ *           * `PublicDnsName` &mdash; (`String`) The public DNS name
+ *             assigned to the instance. This DNS name is contactable from
+ *             outside the Amazon EC2 network. This element remains empty
+ *             until the instance enters a running state.
+ *           * `StateTransitionReason` &mdash; (`String`) Reason for the
+ *             most recent state transition. This might be an empty string.
+ *           * `KeyName` &mdash; (`String`) If this instance was launched
+ *             with an associated key pair, this displays the key pair
+ *             name.
+ *           * `AmiLaunchIndex` &mdash; (`Integer`) The AMI launch index,
+ *             which can be used to find this instance within the launch
+ *             group.
+ *           * `ProductCodes` &mdash; (`Array<map>`) Product codes attached
+ *             to this instance.
+ *               * `ProductCodeId` &mdash; (`String`) The unique ID of an
+ *                 AWS DevPay product code.
+ *               * `ProductCodeType` &mdash; (`String`)
+ *           * `InstanceType` &mdash; (`String`) The instance type. For
+ *             more information on instance types, please see the Amazon
+ *             Elastic Compute Cloud Developer Guide.
+ *             Possible values include:
+ *             * `t1.micro`
+ *             * `m1.small`
+ *             * `m1.medium`
+ *             * `m1.large`
+ *             * `m1.xlarge`
+ *             * `m2.xlarge`
+ *             * `m2.2xlarge`
+ *             * `m2.4xlarge`
+ *             * `m3.xlarge`
+ *             * `m3.2xlarge`
+ *             * `c1.medium`
+ *             * `c1.xlarge`
+ *             * `hi1.4xlarge`
+ *             * `hs1.8xlarge`
+ *             * `cc1.4xlarge`
+ *             * `cc2.8xlarge`
+ *             * `cg1.4xlarge`
+ *           * `LaunchTime` &mdash; (`Date`) The time this instance
+ *             launched.
+ *           * `Placement` &mdash; (`map`) The location where this instance
+ *             launched.
+ *               * `AvailabilityZone` &mdash; (`String`) The availability
+ *                 zone in which an Amazon EC2 instance runs.
+ *               * `GroupName` &mdash; (`String`) The name of the
+ *                 PlacementGroup in which an Amazon EC2 instance runs.
+ *                 Placement groups are primarily used for launching High
+ *                 Performance Computing instances in the same group to
+ *                 ensure fast connection speeds.
+ *               * `Tenancy` &mdash; (`String`) The allowed tenancy of
+ *                 instances launched into the VPC. A value of default
+ *                 means instances can be launched with any tenancy; a
+ *                 value of dedicated means all instances launched into the
+ *                 VPC will be launched as dedicated tenancy regardless of
+ *                 the tenancy assigned to the instance at launch.
+ *           * `KernelId` &mdash; (`String`) Kernel associated with this
+ *             instance.
+ *           * `RamdiskId` &mdash; (`String`) RAM disk associated with this
+ *             instance.
+ *           * `Platform` &mdash; (`String`) Platform of the instance
+ *             (e.g., Windows).
+ *           * `Monitoring` &mdash; (`map`) Monitoring status for this
+ *             instance.
+ *               * `State` &mdash; (`String`) The state of monitoring on an
+ *                 Amazon EC2 instance (ex: enabled, disabled).
+ *           * `SubnetId` &mdash; (`String`) Specifies the Amazon VPC
+ *             subnet ID in which the instance is running.
+ *           * `VpcId` &mdash; (`String`) Specifies the Amazon VPC in which
+ *             the instance is running.
+ *           * `PrivateIpAddress` &mdash; (`String`) Specifies the private
+ *             IP address that is assigned to the instance (Amazon VPC).
+ *           * `PublicIpAddress` &mdash; (`String`) Specifies the IP
+ *             address of the instance.
+ *           * `StateReason` &mdash; (`map`) The reason for the state
+ *             change.
+ *               * `Code` &mdash; (`String`) Reason code for the state
+ *                 change.
+ *               * `Message` &mdash; (`String`) Descriptive message for the
+ *                 state change.
+ *           * `Architecture` &mdash; (`String`) The architecture of this
+ *             instance.
+ *           * `RootDeviceType` &mdash; (`String`) The root device type
+ *             used by the AMI. The AMI can use an Amazon EBS or instance
+ *             store root device.
+ *           * `RootDeviceName` &mdash; (`String`) The root device name
+ *             (e.g., /dev/sda1).
+ *           * `BlockDeviceMappings` &mdash; (`Array<map>`) Block device
+ *             mapping set.
+ *               * `DeviceName` &mdash; (`String`) The device name (e.g.,
+ *                 /dev/sdh) at which the block device is exposed on the
+ *                 instance.
+ *               * `Ebs` &mdash; (`map`) The optional EBS device mapped to
+ *                 the specified device name.
+ *                   * `VolumeId` &mdash; (`String`) The ID of the EBS
+ *                     volume.
+ *                   * `Status` &mdash; (`String`) The status of the EBS
+ *                     volume.
+ *                   * `AttachTime` &mdash; (`Date`) The time at which the
+ *                     EBS volume was attached to the associated instance.
+ *                   * `DeleteOnTermination` &mdash; (`Boolean`) Specifies
+ *                     whether the Amazon EBS volume is deleted on instance
+ *                     termination.
+ *           * `VirtualizationType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `hvm`
+ *             * `paravirtual`
+ *           * `InstanceLifecycle` &mdash; (`String`)
+ *           * `SpotInstanceRequestId` &mdash; (`String`)
+ *           * `License` &mdash; (`map`)
+ *               * `Pool` &mdash; (`String`) The license pool from which
+ *                 this license was used (ex: 'windows').
+ *           * `ClientToken` &mdash; (`String`)
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the
+ *             Instance.
+ *               * `Key` &mdash; (`String`) The tag's key.
+ *               * `Value` &mdash; (`String`) The tag's value.
+ *           * `SecurityGroups` &mdash; (`Array<map>`)
+ *               * `GroupName` &mdash; (`String`)
+ *               * `GroupId` &mdash; (`String`)
  *           * `SourceDestCheck` &mdash; (`Boolean`)
- *           * `Groups` &mdash; (`Array<map>`)
- *             * `GroupName` &mdash; (`String`)
- *             * `GroupId` &mdash; (`String`)
- *           * `Attachment` &mdash; (`map`)
- *             * `AttachmentId` &mdash; (`String`)
- *             * `DeviceIndex` &mdash; (`Integer`)
- *             * `Status` &mdash; (`String`)
- *             * `AttachTime` &mdash; (`Date`)
- *             * `DeleteOnTermination` &mdash; (`Boolean`)
- *           * `Association` &mdash; (`map`)
- *             * `PublicIp` &mdash; (`String`)
- *             * `PublicDnsName` &mdash; (`String`)
- *             * `IpOwnerId` &mdash; (`String`)
- *           * `PrivateIpAddresses` &mdash; (`Array<map>`)
- *             * `PrivateIpAddress` &mdash; (`String`)
- *             * `PrivateDnsName` &mdash; (`String`)
- *             * `Primary` &mdash; (`Boolean`)
- *             * `Association` &mdash; (`map`)
- *               * `PublicIp` &mdash; (`String`)
- *               * `PublicDnsName` &mdash; (`String`)
- *               * `IpOwnerId` &mdash; (`String`)
- *         * `IamInstanceProfile` &mdash; (`map`)
- *           * `Arn` &mdash; (`String`)
- *           * `Id` &mdash; (`String`)
- *         * `EbsOptimized` &mdash; (`Boolean`)
+ *           * `Hypervisor` &mdash; (`String`)
+ *             Possible values include:
+ *             * `ovm`
+ *             * `xen`
+ *           * `NetworkInterfaces` &mdash; (`Array<map>`)
+ *               * `NetworkInterfaceId` &mdash; (`String`)
+ *               * `SubnetId` &mdash; (`String`)
+ *               * `VpcId` &mdash; (`String`)
+ *               * `Description` &mdash; (`String`)
+ *               * `OwnerId` &mdash; (`String`)
+ *               * `Status` &mdash; (`String`)
+ *               * `PrivateIpAddress` &mdash; (`String`)
+ *               * `PrivateDnsName` &mdash; (`String`)
+ *               * `SourceDestCheck` &mdash; (`Boolean`)
+ *               * `Groups` &mdash; (`Array<map>`)
+ *                   * `GroupName` &mdash; (`String`)
+ *                   * `GroupId` &mdash; (`String`)
+ *               * `Attachment` &mdash; (`map`)
+ *                   * `AttachmentId` &mdash; (`String`)
+ *                   * `DeviceIndex` &mdash; (`Integer`)
+ *                   * `Status` &mdash; (`String`)
+ *                   * `AttachTime` &mdash; (`Date`)
+ *                   * `DeleteOnTermination` &mdash; (`Boolean`)
+ *               * `Association` &mdash; (`map`)
+ *                   * `PublicIp` &mdash; (`String`)
+ *                   * `PublicDnsName` &mdash; (`String`)
+ *                   * `IpOwnerId` &mdash; (`String`)
+ *               * `PrivateIpAddresses` &mdash; (`Array<map>`)
+ *                   * `PrivateIpAddress` &mdash; (`String`)
+ *                   * `PrivateDnsName` &mdash; (`String`)
+ *                   * `Primary` &mdash; (`Boolean`)
+ *                   * `Association` &mdash; (`map`)
+ *                       * `PublicIp` &mdash; (`String`)
+ *                       * `PublicDnsName` &mdash; (`String`)
+ *                       * `IpOwnerId` &mdash; (`String`)
+ *           * `IamInstanceProfile` &mdash; (`map`)
+ *               * `Arn` &mdash; (`String`)
+ *               * `Id` &mdash; (`String`)
+ *           * `EbsOptimized` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -5951,34 +6031,38 @@ AWS.EC2 = inherit({})
  *
  *       * `StartingInstances` &mdash; (`Array<map>`) The list of the
  *         starting instances and details on how their state has changed.
- *         * `InstanceId` &mdash; (`String`) The ID of the instance whose
- *           state changed.
- *         * `CurrentState` &mdash; (`map`) The current state of the
- *           specified instance.
- *           * `Code` &mdash; (`Integer`) A 16-bit unsigned integer. The
- *             high byte is an opaque internal value and should be ignored.
- *             The low byte is set based on the state represented.
- *           * `Name` &mdash; (`String`) The current state of the instance.
- *             Possible values include:
- *             * `pending`
- *             * `running`
- *             * `shutting-down`
- *             * `terminated`
- *             * `stopping`
- *             * `stopped`
- *         * `PreviousState` &mdash; (`map`) The previous state of the
- *           specified instance.
- *           * `Code` &mdash; (`Integer`) A 16-bit unsigned integer. The
- *             high byte is an opaque internal value and should be ignored.
- *             The low byte is set based on the state represented.
- *           * `Name` &mdash; (`String`) The current state of the instance.
- *             Possible values include:
- *             * `pending`
- *             * `running`
- *             * `shutting-down`
- *             * `terminated`
- *             * `stopping`
- *             * `stopped`
+ *           * `InstanceId` &mdash; (`String`) The ID of the instance whose
+ *             state changed.
+ *           * `CurrentState` &mdash; (`map`) The current state of the
+ *             specified instance.
+ *               * `Code` &mdash; (`Integer`) A 16-bit unsigned integer.
+ *                 The high byte is an opaque internal value and should be
+ *                 ignored. The low byte is set based on the state
+ *                 represented.
+ *               * `Name` &mdash; (`String`) The current state of the
+ *                 instance.
+ *                 Possible values include:
+ *                 * `pending`
+ *                 * `running`
+ *                 * `shutting-down`
+ *                 * `terminated`
+ *                 * `stopping`
+ *                 * `stopped`
+ *           * `PreviousState` &mdash; (`map`) The previous state of the
+ *             specified instance.
+ *               * `Code` &mdash; (`Integer`) A 16-bit unsigned integer.
+ *                 The high byte is an opaque internal value and should be
+ *                 ignored. The low byte is set based on the state
+ *                 represented.
+ *               * `Name` &mdash; (`String`) The current state of the
+ *                 instance.
+ *                 Possible values include:
+ *                 * `pending`
+ *                 * `running`
+ *                 * `shutting-down`
+ *                 * `terminated`
+ *                 * `stopping`
+ *                 * `stopped`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -6004,34 +6088,38 @@ AWS.EC2 = inherit({})
  *
  *       * `StoppingInstances` &mdash; (`Array<map>`) The list of the
  *         stopping instances and details on how their state has changed.
- *         * `InstanceId` &mdash; (`String`) The ID of the instance whose
- *           state changed.
- *         * `CurrentState` &mdash; (`map`) The current state of the
- *           specified instance.
- *           * `Code` &mdash; (`Integer`) A 16-bit unsigned integer. The
- *             high byte is an opaque internal value and should be ignored.
- *             The low byte is set based on the state represented.
- *           * `Name` &mdash; (`String`) The current state of the instance.
- *             Possible values include:
- *             * `pending`
- *             * `running`
- *             * `shutting-down`
- *             * `terminated`
- *             * `stopping`
- *             * `stopped`
- *         * `PreviousState` &mdash; (`map`) The previous state of the
- *           specified instance.
- *           * `Code` &mdash; (`Integer`) A 16-bit unsigned integer. The
- *             high byte is an opaque internal value and should be ignored.
- *             The low byte is set based on the state represented.
- *           * `Name` &mdash; (`String`) The current state of the instance.
- *             Possible values include:
- *             * `pending`
- *             * `running`
- *             * `shutting-down`
- *             * `terminated`
- *             * `stopping`
- *             * `stopped`
+ *           * `InstanceId` &mdash; (`String`) The ID of the instance whose
+ *             state changed.
+ *           * `CurrentState` &mdash; (`map`) The current state of the
+ *             specified instance.
+ *               * `Code` &mdash; (`Integer`) A 16-bit unsigned integer.
+ *                 The high byte is an opaque internal value and should be
+ *                 ignored. The low byte is set based on the state
+ *                 represented.
+ *               * `Name` &mdash; (`String`) The current state of the
+ *                 instance.
+ *                 Possible values include:
+ *                 * `pending`
+ *                 * `running`
+ *                 * `shutting-down`
+ *                 * `terminated`
+ *                 * `stopping`
+ *                 * `stopped`
+ *           * `PreviousState` &mdash; (`map`) The previous state of the
+ *             specified instance.
+ *               * `Code` &mdash; (`Integer`) A 16-bit unsigned integer.
+ *                 The high byte is an opaque internal value and should be
+ *                 ignored. The low byte is set based on the state
+ *                 represented.
+ *               * `Name` &mdash; (`String`) The current state of the
+ *                 instance.
+ *                 Possible values include:
+ *                 * `pending`
+ *                 * `running`
+ *                 * `shutting-down`
+ *                 * `terminated`
+ *                 * `stopping`
+ *                 * `stopped`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -6053,34 +6141,38 @@ AWS.EC2 = inherit({})
  *       * `TerminatingInstances` &mdash; (`Array<map>`) The list of the
  *         terminating instances and details on how their state has
  *         changed.
- *         * `InstanceId` &mdash; (`String`) The ID of the instance whose
- *           state changed.
- *         * `CurrentState` &mdash; (`map`) The current state of the
- *           specified instance.
- *           * `Code` &mdash; (`Integer`) A 16-bit unsigned integer. The
- *             high byte is an opaque internal value and should be ignored.
- *             The low byte is set based on the state represented.
- *           * `Name` &mdash; (`String`) The current state of the instance.
- *             Possible values include:
- *             * `pending`
- *             * `running`
- *             * `shutting-down`
- *             * `terminated`
- *             * `stopping`
- *             * `stopped`
- *         * `PreviousState` &mdash; (`map`) The previous state of the
- *           specified instance.
- *           * `Code` &mdash; (`Integer`) A 16-bit unsigned integer. The
- *             high byte is an opaque internal value and should be ignored.
- *             The low byte is set based on the state represented.
- *           * `Name` &mdash; (`String`) The current state of the instance.
- *             Possible values include:
- *             * `pending`
- *             * `running`
- *             * `shutting-down`
- *             * `terminated`
- *             * `stopping`
- *             * `stopped`
+ *           * `InstanceId` &mdash; (`String`) The ID of the instance whose
+ *             state changed.
+ *           * `CurrentState` &mdash; (`map`) The current state of the
+ *             specified instance.
+ *               * `Code` &mdash; (`Integer`) A 16-bit unsigned integer.
+ *                 The high byte is an opaque internal value and should be
+ *                 ignored. The low byte is set based on the state
+ *                 represented.
+ *               * `Name` &mdash; (`String`) The current state of the
+ *                 instance.
+ *                 Possible values include:
+ *                 * `pending`
+ *                 * `running`
+ *                 * `shutting-down`
+ *                 * `terminated`
+ *                 * `stopping`
+ *                 * `stopped`
+ *           * `PreviousState` &mdash; (`map`) The previous state of the
+ *             specified instance.
+ *               * `Code` &mdash; (`Integer`) A 16-bit unsigned integer.
+ *                 The high byte is an opaque internal value and should be
+ *                 ignored. The low byte is set based on the state
+ *                 represented.
+ *               * `Name` &mdash; (`String`) The current state of the
+ *                 instance.
+ *                 Possible values include:
+ *                 * `pending`
+ *                 * `running`
+ *                 * `shutting-down`
+ *                 * `terminated`
+ *                 * `stopping`
+ *                 * `stopped`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -6119,11 +6211,11 @@ AWS.EC2 = inherit({})
  *       * `InstanceMonitorings` &mdash; (`Array<map>`) A list of updated
  *         monitoring information for the instances specified in the
  *         request.
- *         * `InstanceId` &mdash; (`String`) Instance ID.
- *         * `Monitoring` &mdash; (`map`) Monitoring state for the
- *           associated instance.
- *           * `State` &mdash; (`String`) The state of monitoring on an
- *             Amazon EC2 instance (ex: enabled, disabled).
+ *           * `InstanceId` &mdash; (`String`) Instance ID.
+ *           * `Monitoring` &mdash; (`map`) Monitoring state for the
+ *             associated instance.
+ *               * `State` &mdash; (`String`) The state of monitoring on an
+ *                 Amazon EC2 instance (ex: enabled, disabled).
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *

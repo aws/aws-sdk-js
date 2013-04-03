@@ -59,14 +59,14 @@ AWS.SimpleDB = inherit({})
  *       the domain in which the attributes are being deleted.
  *     * `Items` &mdash; **required** &mdash; (`Array<map>`) A list of
  *       items on which to perform the operation.
- *       * `Name` &mdash; **required** &mdash; (`String`)
- *       * `Attributes` &mdash; (`Array<map>`)
- *         * `Name` &mdash; **required** &mdash; (`String`) The name of
- *           the attribute.
- *         * `AlternateNameEncoding` &mdash; (`String`)
- *         * `Value` &mdash; **required** &mdash; (`String`) The value of
- *           the attribute.
- *         * `AlternateValueEncoding` &mdash; (`String`)
+ *         * `Name` &mdash; **required** &mdash; (`String`)
+ *         * `Attributes` &mdash; (`Array<map>`)
+ *             * `Name` &mdash; **required** &mdash; (`String`) The name
+ *               of the attribute.
+ *             * `AlternateNameEncoding` &mdash; (`String`)
+ *             * `Value` &mdash; **required** &mdash; (`String`) The
+ *               value of the attribute.
+ *             * `AlternateValueEncoding` &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -85,17 +85,17 @@ AWS.SimpleDB = inherit({})
  *       the domain in which the attributes are being stored.
  *     * `Items` &mdash; **required** &mdash; (`Array<map>`) A list of
  *       items on which to perform the operation.
- *       * `Name` &mdash; **required** &mdash; (`String`) The name of the
- *         replaceable item.
- *       * `Attributes` &mdash; **required** &mdash; (`Array<map>`) The
- *         list of attributes for a replaceable item.
  *         * `Name` &mdash; **required** &mdash; (`String`) The name of
- *           the replaceable attribute.
- *         * `Value` &mdash; **required** &mdash; (`String`) The value of
- *           the replaceable attribute.
- *         * `Replace` &mdash; (`Boolean`) A flag specifying whether or
- *           not to replace the attribute/value pair or to add a new
- *           attribute/value pair. The default setting is false.
+ *           the replaceable item.
+ *         * `Attributes` &mdash; **required** &mdash; (`Array<map>`) The
+ *           list of attributes for a replaceable item.
+ *             * `Name` &mdash; **required** &mdash; (`String`) The name
+ *               of the replaceable attribute.
+ *             * `Value` &mdash; **required** &mdash; (`String`) The
+ *               value of the replaceable attribute.
+ *             * `Replace` &mdash; (`Boolean`) A flag specifying whether
+ *               or not to replace the attribute/value pair or to add a
+ *               new attribute/value pair. The default setting is false.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -137,28 +137,29 @@ AWS.SimpleDB = inherit({})
  *     * `Attributes` &mdash; (`Array<map>`) A list of Attributes.
  *       Similar to columns on a spreadsheet, attributes represent
  *       categories of data that can be assigned to items.
- *       * `Name` &mdash; **required** &mdash; (`String`) The name of the
- *         attribute.
- *       * `AlternateNameEncoding` &mdash; (`String`)
- *       * `Value` &mdash; **required** &mdash; (`String`) The value of
- *         the attribute.
- *       * `AlternateValueEncoding` &mdash; (`String`)
+ *         * `Name` &mdash; **required** &mdash; (`String`) The name of
+ *           the attribute.
+ *         * `AlternateNameEncoding` &mdash; (`String`)
+ *         * `Value` &mdash; **required** &mdash; (`String`) The value of
+ *           the attribute.
+ *         * `AlternateValueEncoding` &mdash; (`String`)
  *     * `Expected` &mdash; (`map`) The update condition which, if
  *       specified, determines whether the specified attributes will be
  *       deleted or not. The update condition must be satisfied in order
  *       for this request to be processed and the attributes to be
  *       deleted.
- *       * `Name` &mdash; (`String`) The name of the attribute involved
- *         in the condition.
- *       * `Value` &mdash; (`String`) The value of an attribute. This
- *         value can only be specified when the Exists parameter is equal
- *         to true.
- *       * `Exists` &mdash; (`Boolean`) A value specifying whether or not
- *         the specified attribute must exist with the specified value in
- *         order for the update condition to be satisfied. Specify true
- *         if the attribute must exist for the update condition to be
- *         satisfied. Specify false if the attribute should not exist in
- *         order for the update condition to be satisfied.
+ *         * `Name` &mdash; (`String`) The name of the attribute involved
+ *           in the condition.
+ *         * `Value` &mdash; (`String`) The value of an attribute. This
+ *           value can only be specified when the Exists parameter is
+ *           equal to true.
+ *         * `Exists` &mdash; (`Boolean`) A value specifying whether or
+ *           not the specified attribute must exist with the specified
+ *           value in order for the update condition to be satisfied.
+ *           Specify true if the attribute must exist for the update
+ *           condition to be satisfied. Specify false if the attribute
+ *           should not exist in order for the update condition to be
+ *           satisfied.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -245,10 +246,10 @@ AWS.SimpleDB = inherit({})
  *
  *       * `Attributes` &mdash; (`Array<map>`) The list of attributes
  *         returned by the operation.
- *         * `Name` &mdash; (`String`) The name of the attribute.
- *         * `AlternateNameEncoding` &mdash; (`String`)
- *         * `Value` &mdash; (`String`) The value of the attribute.
- *         * `AlternateValueEncoding` &mdash; (`String`)
+ *           * `Name` &mdash; (`String`) The name of the attribute.
+ *           * `AlternateNameEncoding` &mdash; (`String`)
+ *           * `Value` &mdash; (`String`) The value of the attribute.
+ *           * `AlternateValueEncoding` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -287,29 +288,30 @@ AWS.SimpleDB = inherit({})
  *       the item.
  *     * `Attributes` &mdash; **required** &mdash; (`Array<map>`) The
  *       list of attributes.
- *       * `Name` &mdash; **required** &mdash; (`String`) The name of the
- *         replaceable attribute.
- *       * `Value` &mdash; **required** &mdash; (`String`) The value of
- *         the replaceable attribute.
- *       * `Replace` &mdash; (`Boolean`) A flag specifying whether or not
- *         to replace the attribute/value pair or to add a new
- *         attribute/value pair. The default setting is false.
+ *         * `Name` &mdash; **required** &mdash; (`String`) The name of
+ *           the replaceable attribute.
+ *         * `Value` &mdash; **required** &mdash; (`String`) The value of
+ *           the replaceable attribute.
+ *         * `Replace` &mdash; (`Boolean`) A flag specifying whether or
+ *           not to replace the attribute/value pair or to add a new
+ *           attribute/value pair. The default setting is false.
  *     * `Expected` &mdash; (`map`) The update condition which, if
  *       specified, determines whether the specified attributes will be
  *       updated or not. The update condition must be satisfied in order
  *       for this request to be processed and the attributes to be
  *       updated.
- *       * `Name` &mdash; (`String`) The name of the attribute involved
- *         in the condition.
- *       * `Value` &mdash; (`String`) The value of an attribute. This
- *         value can only be specified when the Exists parameter is equal
- *         to true.
- *       * `Exists` &mdash; (`Boolean`) A value specifying whether or not
- *         the specified attribute must exist with the specified value in
- *         order for the update condition to be satisfied. Specify true
- *         if the attribute must exist for the update condition to be
- *         satisfied. Specify false if the attribute should not exist in
- *         order for the update condition to be satisfied.
+ *         * `Name` &mdash; (`String`) The name of the attribute involved
+ *           in the condition.
+ *         * `Value` &mdash; (`String`) The value of an attribute. This
+ *           value can only be specified when the Exists parameter is
+ *           equal to true.
+ *         * `Exists` &mdash; (`Boolean`) A value specifying whether or
+ *           not the specified attribute must exist with the specified
+ *           value in order for the update condition to be satisfied.
+ *           Specify true if the attribute must exist for the update
+ *           condition to be satisfied. Specify false if the attribute
+ *           should not exist in order for the update condition to be
+ *           satisfied.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -346,13 +348,13 @@ AWS.SimpleDB = inherit({})
  *
  *       * `Items` &mdash; (`Array<map>`) A list of items that match the
  *         select expression.
- *         * `Name` &mdash; (`String`) The name of the item.
- *         * `AlternateNameEncoding` &mdash; (`String`)
- *         * `Attributes` &mdash; (`Array<map>`) A list of attributes.
- *           * `Name` &mdash; (`String`) The name of the attribute.
+ *           * `Name` &mdash; (`String`) The name of the item.
  *           * `AlternateNameEncoding` &mdash; (`String`)
- *           * `Value` &mdash; (`String`) The value of the attribute.
- *           * `AlternateValueEncoding` &mdash; (`String`)
+ *           * `Attributes` &mdash; (`Array<map>`) A list of attributes.
+ *               * `Name` &mdash; (`String`) The name of the attribute.
+ *               * `AlternateNameEncoding` &mdash; (`String`)
+ *               * `Value` &mdash; (`String`) The value of the attribute.
+ *               * `AlternateValueEncoding` &mdash; (`String`)
  *       * `NextToken` &mdash; (`String`) An opaque token indicating that
  *         more items than MaxNumberOfItems were matched, the response size
  *         exceeded 1 megabyte, or the execution time exceeded 5 seconds.

@@ -406,29 +406,32 @@ AWS.Glacier = inherit({})
  *     * `vaultName` &mdash; (`String`) The name of the vault.
  *     * `jobParameters` &mdash; (`map`) Provides options for specifying
  *       job information.
- *       * `Format` &mdash; (`String`) When initiating a job to retrieve
- *         a vault inventory, you can optionally add this parameter to
- *         your request to specify the output format. If you are
- *         initiating an inventory job and do not specify a Format field,
- *         JSON is the default format. Valid Values are "CSV" and "JSON".
- *       * `Type` &mdash; (`String`) The job type. You can initiate a job
- *         to retrieve an archive or get an inventory of a vault. Valid
- *         Values are "archive-retrieval" and "inventory-retrieval".
- *       * `ArchiveId` &mdash; (`String`) The ID of the archive that you
- *         want to retrieve. This field is required only if Type is set
- *         to archive-retrieval. An error occurs if you specify this
- *         request parameter for an inventory retrieval job request.
- *       * `Description` &mdash; (`String`) The optional description for
- *         the job. The description must be less than or equal to 1,024
- *         bytes. The allowable characters are 7-bit ASCII without
- *         control codes—specifically, ASCII values 32—126 decimal or
- *         0x20—0x7E hexadecimal.
- *       * `SNSTopic` &mdash; (`String`) The Amazon SNS topic ARN to
- *         which Amazon Glacier sends a notification when the job is
- *         completed and the output is ready for you to download. The
- *         specified topic publishes the notification to its subscribers.
- *         The SNS topic must exist.
- *       * `RetrievalByteRange` &mdash; (`String`)
+ *         * `Format` &mdash; (`String`) When initiating a job to
+ *           retrieve a vault inventory, you can optionally add this
+ *           parameter to your request to specify the output format. If
+ *           you are initiating an inventory job and do not specify a
+ *           Format field, JSON is the default format. Valid Values are
+ *           "CSV" and "JSON".
+ *         * `Type` &mdash; (`String`) The job type. You can initiate a
+ *           job to retrieve an archive or get an inventory of a vault.
+ *           Valid Values are "archive-retrieval" and
+ *           "inventory-retrieval".
+ *         * `ArchiveId` &mdash; (`String`) The ID of the archive that
+ *           you want to retrieve. This field is required only if Type is
+ *           set to archive-retrieval. An error occurs if you specify
+ *           this request parameter for an inventory retrieval job
+ *           request.
+ *         * `Description` &mdash; (`String`) The optional description
+ *           for the job. The description must be less than or equal to
+ *           1,024 bytes. The allowable characters are 7-bit ASCII
+ *           without control codes—specifically, ASCII values 32—126
+ *           decimal or 0x20—0x7E hexadecimal.
+ *         * `SNSTopic` &mdash; (`String`) The Amazon SNS topic ARN to
+ *           which Amazon Glacier sends a notification when the job is
+ *           completed and the output is ready for you to download. The
+ *           specified topic publishes the notification to its
+ *           subscribers. The SNS topic must exist.
+ *         * `RetrievalByteRange` &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -514,52 +517,52 @@ AWS.Glacier = inherit({})
  *
  *       * `JobList` &mdash; (`Array<map>`) A list of job objects. Each job
  *         object contains metadata describing the job.
- *         * `JobId` &mdash; (`String`) An opaque string that identifies an
- *           Amazon Glacier job.
- *         * `JobDescription` &mdash; (`String`) The job description you
- *           provided when you initiated the job.
- *         * `Action` &mdash; (`String`) The job type. It is either
- *           ArchiveRetrieval or InventoryRetrieval.
- *           Possible values include:
- *           * `ArchiveRetrieval`
- *           * `InventoryRetrieval`
- *         * `ArchiveId` &mdash; (`String`) For an ArchiveRetrieval job,
- *           this is the archive ID requested for download. Otherwise, this
- *           field is null.
- *         * `VaultARN` &mdash; (`String`) The Amazon Resource Name (ARN)
- *           of the vault from which the archive retrieval was requested.
- *         * `CreationDate` &mdash; (`String`) The UTC date when the job
- *           was created. A string representation of ISO 8601 date format,
- *           for example, "2012-03-20T17:03:43.221Z".
- *         * `Completed` &mdash; (`Boolean`) The job status. When a job is
- *           completed, you get the job's output.
- *         * `StatusCode` &mdash; (`String`) The status code can be
- *           InProgress, Succeeded, or Failed, and indicates the status of
- *           the job.
- *           Possible values include:
- *           * `InProgress`
- *           * `Succeeded`
- *           * `Failed`
- *         * `StatusMessage` &mdash; (`String`) A friendly message that
- *           describes the job status.
- *         * `ArchiveSizeInBytes` &mdash; (`Integer`) For an
- *           ArchiveRetrieval job, this is the size in bytes of the archive
- *           being requested for download. For the InventoryRetrieval job,
- *           the value is null.
- *         * `InventorySizeInBytes` &mdash; (`Integer`) For an
- *           InventoryRetrieval job, this is the size in bytes of the
- *           inventory requested for download. For the ArchiveRetrieval
- *           job, the value is null.
- *         * `SNSTopic` &mdash; (`String`) An Amazon Simple Notification
- *           Service (Amazon SNS) topic that receives notification.
- *         * `CompletionDate` &mdash; (`String`) The UTC time that the
- *           archive retrieval request completed. While the job is in
- *           progress, the value will be null.
- *         * `SHA256TreeHash` &mdash; (`String`) For an ArchiveRetrieval
- *           job, it is the checksum of the archive. Otherwise, the value
- *           is null.
- *         * `ArchiveSHA256TreeHash` &mdash; (`String`)
- *         * `RetrievalByteRange` &mdash; (`String`)
+ *           * `JobId` &mdash; (`String`) An opaque string that identifies
+ *             an Amazon Glacier job.
+ *           * `JobDescription` &mdash; (`String`) The job description you
+ *             provided when you initiated the job.
+ *           * `Action` &mdash; (`String`) The job type. It is either
+ *             ArchiveRetrieval or InventoryRetrieval.
+ *             Possible values include:
+ *             * `ArchiveRetrieval`
+ *             * `InventoryRetrieval`
+ *           * `ArchiveId` &mdash; (`String`) For an ArchiveRetrieval job,
+ *             this is the archive ID requested for download. Otherwise,
+ *             this field is null.
+ *           * `VaultARN` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *             of the vault from which the archive retrieval was requested.
+ *           * `CreationDate` &mdash; (`String`) The UTC date when the job
+ *             was created. A string representation of ISO 8601 date
+ *             format, for example, "2012-03-20T17:03:43.221Z".
+ *           * `Completed` &mdash; (`Boolean`) The job status. When a job
+ *             is completed, you get the job's output.
+ *           * `StatusCode` &mdash; (`String`) The status code can be
+ *             InProgress, Succeeded, or Failed, and indicates the status
+ *             of the job.
+ *             Possible values include:
+ *             * `InProgress`
+ *             * `Succeeded`
+ *             * `Failed`
+ *           * `StatusMessage` &mdash; (`String`) A friendly message that
+ *             describes the job status.
+ *           * `ArchiveSizeInBytes` &mdash; (`Integer`) For an
+ *             ArchiveRetrieval job, this is the size in bytes of the
+ *             archive being requested for download. For the
+ *             InventoryRetrieval job, the value is null.
+ *           * `InventorySizeInBytes` &mdash; (`Integer`) For an
+ *             InventoryRetrieval job, this is the size in bytes of the
+ *             inventory requested for download. For the ArchiveRetrieval
+ *             job, the value is null.
+ *           * `SNSTopic` &mdash; (`String`) An Amazon Simple Notification
+ *             Service (Amazon SNS) topic that receives notification.
+ *           * `CompletionDate` &mdash; (`String`) The UTC time that the
+ *             archive retrieval request completed. While the job is in
+ *             progress, the value will be null.
+ *           * `SHA256TreeHash` &mdash; (`String`) For an ArchiveRetrieval
+ *             job, it is the checksum of the archive. Otherwise, the value
+ *             is null.
+ *           * `ArchiveSHA256TreeHash` &mdash; (`String`)
+ *           * `RetrievalByteRange` &mdash; (`String`)
  *       * `Marker` &mdash; (`String`) An opaque string that represents
  *         where to continue pagination of the results. You use this value
  *         in a new List Jobs request to obtain more jobs in the list. If
@@ -598,19 +601,19 @@ AWS.Glacier = inherit({})
  *
  *       * `UploadsList` &mdash; (`Array<map>`) A list of in-progress
  *         multipart uploads.
- *         * `MultipartUploadId` &mdash; (`String`) The ID of a multipart
- *           upload.
- *         * `VaultARN` &mdash; (`String`) The Amazon Resource Name (ARN)
- *           of the vault that contains the archive.
- *         * `ArchiveDescription` &mdash; (`String`) The description of the
- *           archive that was specified in the Initiate Multipart Upload
- *           request.
- *         * `PartSizeInBytes` &mdash; (`Integer`) The part size, in bytes,
- *           specified in the Initiate Multipart Upload request. This is
- *           the size of all the parts in the upload except the last part,
- *           which may be smaller than this size.
- *         * `CreationDate` &mdash; (`String`) The UTC time at which the
- *           multipart upload was initiated.
+ *           * `MultipartUploadId` &mdash; (`String`) The ID of a multipart
+ *             upload.
+ *           * `VaultARN` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *             of the vault that contains the archive.
+ *           * `ArchiveDescription` &mdash; (`String`) The description of
+ *             the archive that was specified in the Initiate Multipart
+ *             Upload request.
+ *           * `PartSizeInBytes` &mdash; (`Integer`) The part size, in
+ *             bytes, specified in the Initiate Multipart Upload request.
+ *             This is the size of all the parts in the upload except the
+ *             last part, which may be smaller than this size.
+ *           * `CreationDate` &mdash; (`String`) The UTC time at which the
+ *             multipart upload was initiated.
  *       * `Marker` &mdash; (`String`) An opaque string that represents
  *         where to continue pagination of the results. You use the marker
  *         in a new List Multipart Uploads request to obtain more uploads
@@ -660,11 +663,11 @@ AWS.Glacier = inherit({})
  *         multipart upload was initiated.
  *       * `Parts` &mdash; (`Array<map>`) A list of the part sizes of the
  *         multipart upload.
- *         * `RangeInBytes` &mdash; (`String`) The byte range of a part,
- *           inclusive of the upper value of the range.
- *         * `SHA256TreeHash` &mdash; (`String`) The SHA256 tree hash value
- *           that Amazon Glacier calculated for the part. This field is
- *           never null.
+ *           * `RangeInBytes` &mdash; (`String`) The byte range of a part,
+ *             inclusive of the upper value of the range.
+ *           * `SHA256TreeHash` &mdash; (`String`) The SHA256 tree hash
+ *             value that Amazon Glacier calculated for the part. This
+ *             field is never null.
  *       * `Marker` &mdash; (`String`) An opaque string that represents
  *         where to continue pagination of the results. You use the marker
  *         in a new List Parts request to obtain more jobs in the list. If
@@ -697,24 +700,24 @@ AWS.Glacier = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `VaultList` &mdash; (`Array<map>`) List of vaults.
- *         * `VaultARN` &mdash; (`String`) The Amazon Resource Name (ARN)
- *           of the vault.
- *         * `VaultName` &mdash; (`String`) The name of the vault.
- *         * `CreationDate` &mdash; (`String`) The UTC date when the vault
- *           was created. A string representation of ISO 8601 date format,
- *           for example, "2012-03-20T17:03:43.221Z".
- *         * `LastInventoryDate` &mdash; (`String`) The UTC date when
- *           Amazon Glacier completed the last vault inventory. A string
- *           representation of ISO 8601 date format, for example,
- *           "2012-03-20T17:03:43.221Z".
- *         * `NumberOfArchives` &mdash; (`Integer`) The number of archives
- *           in the vault as of the last inventory date. This field will
- *           return null if an inventory has not yet run on the vault, for
- *           example, if you just created the vault.
- *         * `SizeInBytes` &mdash; (`Integer`) Total size, in bytes, of the
- *           archives in the vault as of the last inventory date. This
- *           field will return null if an inventory has not yet run on the
- *           vault, for example, if you just created the vault.
+ *           * `VaultARN` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *             of the vault.
+ *           * `VaultName` &mdash; (`String`) The name of the vault.
+ *           * `CreationDate` &mdash; (`String`) The UTC date when the
+ *             vault was created. A string representation of ISO 8601 date
+ *             format, for example, "2012-03-20T17:03:43.221Z".
+ *           * `LastInventoryDate` &mdash; (`String`) The UTC date when
+ *             Amazon Glacier completed the last vault inventory. A string
+ *             representation of ISO 8601 date format, for example,
+ *             "2012-03-20T17:03:43.221Z".
+ *           * `NumberOfArchives` &mdash; (`Integer`) The number of
+ *             archives in the vault as of the last inventory date. This
+ *             field will return null if an inventory has not yet run on
+ *             the vault, for example, if you just created the vault.
+ *           * `SizeInBytes` &mdash; (`Integer`) Total size, in bytes, of
+ *             the archives in the vault as of the last inventory date.
+ *             This field will return null if an inventory has not yet run
+ *             on the vault, for example, if you just created the vault.
  *       * `Marker` &mdash; (`String`) The vault ARN at which to continue
  *         pagination of the results. You use the marker in another List
  *         Vaults request to obtain more vaults in the list.
@@ -732,11 +735,11 @@ AWS.Glacier = inherit({})
  *     * `vaultName` &mdash; (`String`) The name of the vault.
  *     * `vaultNotificationConfig` &mdash; (`map`) Provides options for
  *       specifying notification configuration.
- *       * `SNSTopic` &mdash; (`String`) The Amazon Simple Notification
- *         Service (Amazon SNS) topic Amazon Resource Name (ARN).
- *       * `Events` &mdash; (`Array<String>`) A list of one or more
- *         events for which Amazon Glacier will send a notification to
- *         the specified Amazon SNS topic.
+ *         * `SNSTopic` &mdash; (`String`) The Amazon Simple Notification
+ *           Service (Amazon SNS) topic Amazon Resource Name (ARN).
+ *         * `Events` &mdash; (`Array<String>`) A list of one or more
+ *           events for which Amazon Glacier will send a notification to
+ *           the specified Amazon SNS topic.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}

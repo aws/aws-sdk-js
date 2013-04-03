@@ -97,19 +97,19 @@ AWS.ElasticBeanstalk = inherit({})
  *
  *       * `Application` &mdash; (`map`) The ApplicationDescription of the
  *         application.
- *         * `ApplicationName` &mdash; (`String`) The name of the
- *           application.
- *         * `Description` &mdash; (`String`) User-defined description of
- *           the application.
- *         * `DateCreated` &mdash; (`Date`) The date when the application
- *           was created.
- *         * `DateUpdated` &mdash; (`Date`) The date when the application
- *           was last modified.
- *         * `Versions` &mdash; (`Array<String>`) The names of the versions
- *           for this application.
- *         * `ConfigurationTemplates` &mdash; (`Array<String>`) The names
- *           of the configuration templates associated with this
- *           application.
+ *           * `ApplicationName` &mdash; (`String`) The name of the
+ *             application.
+ *           * `Description` &mdash; (`String`) User-defined description of
+ *             the application.
+ *           * `DateCreated` &mdash; (`Date`) The date when the application
+ *             was created.
+ *           * `DateUpdated` &mdash; (`Date`) The date when the application
+ *             was last modified.
+ *           * `Versions` &mdash; (`Array<String>`) The names of the
+ *             versions for this application.
+ *           * `ConfigurationTemplates` &mdash; (`Array<String>`) The names
+ *             of the configuration templates associated with this
+ *             application.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -135,10 +135,10 @@ AWS.ElasticBeanstalk = inherit({})
  *       specified (for example, a bucket is provided but not the key) or
  *       if no data is found at the Amazon S3 location, AWS Elastic
  *       Beanstalk returns an InvalidParameterCombination error.
- *       * `S3Bucket` &mdash; (`String`) The Amazon S3 bucket where the
- *         data is located.
- *       * `S3Key` &mdash; (`String`) The Amazon S3 key where the data is
- *         located.
+ *         * `S3Bucket` &mdash; (`String`) The Amazon S3 bucket where the
+ *           data is located.
+ *         * `S3Key` &mdash; (`String`) The Amazon S3 key where the data
+ *           is located.
  *     * `AutoCreateApplication` &mdash; (`Boolean`) Determines how the
  *       system behaves if the specified application for this version
  *       does not already exist: true: Automatically creates the
@@ -162,22 +162,22 @@ AWS.ElasticBeanstalk = inherit({})
  *
  *       * `ApplicationVersion` &mdash; (`map`) The
  *         ApplicationVersionDescription of the application version.
- *         * `ApplicationName` &mdash; (`String`) The name of the
- *           application associated with this release.
- *         * `Description` &mdash; (`String`) The description of this
- *           application version.
- *         * `VersionLabel` &mdash; (`String`) A label uniquely identifying
- *           the version for the associated application.
- *         * `SourceBundle` &mdash; (`map`) The location where the source
- *           bundle is located for this version.
- *           * `S3Bucket` &mdash; (`String`) The Amazon S3 bucket where the
- *             data is located.
- *           * `S3Key` &mdash; (`String`) The Amazon S3 key where the data
- *             is located.
- *         * `DateCreated` &mdash; (`Date`) The creation date of the
- *           application version.
- *         * `DateUpdated` &mdash; (`Date`) The last modified date of the
- *           application version.
+ *           * `ApplicationName` &mdash; (`String`) The name of the
+ *             application associated with this release.
+ *           * `Description` &mdash; (`String`) The description of this
+ *             application version.
+ *           * `VersionLabel` &mdash; (`String`) A label uniquely
+ *             identifying the version for the associated application.
+ *           * `SourceBundle` &mdash; (`map`) The location where the source
+ *             bundle is located for this version.
+ *               * `S3Bucket` &mdash; (`String`) The Amazon S3 bucket where
+ *                 the data is located.
+ *               * `S3Key` &mdash; (`String`) The Amazon S3 key where the
+ *                 data is located.
+ *           * `DateCreated` &mdash; (`Date`) The creation date of the
+ *             application version.
+ *           * `DateUpdated` &mdash; (`Date`) The last modified date of the
+ *             application version.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -217,10 +217,10 @@ AWS.ElasticBeanstalk = inherit({})
  *       template must match the specified solution stack name or else
  *       AWS Elastic Beanstalk returns an InvalidParameterCombination
  *       error.
- *       * `ApplicationName` &mdash; (`String`) The name of the
- *         application associated with the configuration.
- *       * `TemplateName` &mdash; (`String`) The name of the
- *         configuration template.
+ *         * `ApplicationName` &mdash; (`String`) The name of the
+ *           application associated with the configuration.
+ *         * `TemplateName` &mdash; (`String`) The name of the
+ *           configuration template.
  *     * `EnvironmentId` &mdash; (`String`) The ID of the environment
  *       used with this configuration template.
  *     * `Description` &mdash; (`String`) Describes this configuration.
@@ -228,12 +228,12 @@ AWS.ElasticBeanstalk = inherit({})
  *       Elastic Beanstalk sets the specified configuration option to the
  *       requested value. The new value overrides the value obtained from
  *       the solution stack or the source configuration template.
- *       * `Namespace` &mdash; (`String`) A unique namespace identifying
- *         the option's associated AWS resource.
- *       * `OptionName` &mdash; (`String`) The name of the configuration
- *         option.
- *       * `Value` &mdash; (`String`) The current value for the
- *         configuration option.
+ *         * `Namespace` &mdash; (`String`) A unique namespace
+ *           identifying the option's associated AWS resource.
+ *         * `OptionName` &mdash; (`String`) The name of the
+ *           configuration option.
+ *         * `Value` &mdash; (`String`) The current value for the
+ *           configuration option.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -280,12 +280,12 @@ AWS.ElasticBeanstalk = inherit({})
  *       * `OptionSettings` &mdash; (`Array<map>`) A list of the
  *         configuration options and their values in this configuration
  *         set.
- *         * `Namespace` &mdash; (`String`) A unique namespace identifying
- *           the option's associated AWS resource.
- *         * `OptionName` &mdash; (`String`) The name of the configuration
- *           option.
- *         * `Value` &mdash; (`String`) The current value for the
- *           configuration option.
+ *           * `Namespace` &mdash; (`String`) A unique namespace
+ *             identifying the option's associated AWS resource.
+ *           * `OptionName` &mdash; (`String`) The name of the
+ *             configuration option.
+ *           * `Value` &mdash; (`String`) The current value for the
+ *             configuration option.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -337,19 +337,19 @@ AWS.ElasticBeanstalk = inherit({})
  *       the requested value in the configuration set for the new
  *       environment. These override the values obtained from the
  *       solution stack or the configuration template.
- *       * `Namespace` &mdash; (`String`) A unique namespace identifying
- *         the option's associated AWS resource.
- *       * `OptionName` &mdash; (`String`) The name of the configuration
- *         option.
- *       * `Value` &mdash; (`String`) The current value for the
- *         configuration option.
+ *         * `Namespace` &mdash; (`String`) A unique namespace
+ *           identifying the option's associated AWS resource.
+ *         * `OptionName` &mdash; (`String`) The name of the
+ *           configuration option.
+ *         * `Value` &mdash; (`String`) The current value for the
+ *           configuration option.
  *     * `OptionsToRemove` &mdash; (`Array<map>`) A list of custom
  *       user-defined configuration options to remove from the
  *       configuration set for this new environment.
- *       * `Namespace` &mdash; (`String`) A unique namespace identifying
- *         the option's associated AWS resource.
- *       * `OptionName` &mdash; (`String`) The name of the configuration
- *         option.
+ *         * `Namespace` &mdash; (`String`) A unique namespace
+ *           identifying the option's associated AWS resource.
+ *         * `OptionName` &mdash; (`String`) The name of the
+ *           configuration option.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -415,17 +415,17 @@ AWS.ElasticBeanstalk = inherit({})
  *         * `Grey`
  *       * `Resources` &mdash; (`map`) The description of the AWS resources
  *         used by this environment.
- *         * `LoadBalancer` &mdash; (`map`) Describes the LoadBalancer.
- *           * `LoadBalancerName` &mdash; (`String`) The name of the
- *             LoadBalancer.
- *           * `Domain` &mdash; (`String`) The domain name of the
- *             LoadBalancer.
- *           * `Listeners` &mdash; (`Array<map>`) A list of Listeners used
- *             by the LoadBalancer.
- *             * `Protocol` &mdash; (`String`) The protocol that is used by
- *               the Listener.
- *             * `Port` &mdash; (`Integer`) The port that is used by the
- *               Listener.
+ *           * `LoadBalancer` &mdash; (`map`) Describes the LoadBalancer.
+ *               * `LoadBalancerName` &mdash; (`String`) The name of the
+ *                 LoadBalancer.
+ *               * `Domain` &mdash; (`String`) The domain name of the
+ *                 LoadBalancer.
+ *               * `Listeners` &mdash; (`Array<map>`) A list of Listeners
+ *                 used by the LoadBalancer.
+ *                   * `Protocol` &mdash; (`String`) The protocol that is
+ *                     used by the Listener.
+ *                   * `Port` &mdash; (`Integer`) The port that is used by
+ *                     the Listener.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -548,22 +548,22 @@ AWS.ElasticBeanstalk = inherit({})
  *
  *       * `ApplicationVersions` &mdash; (`Array<map>`) A list of
  *         ApplicationVersionDescription .
- *         * `ApplicationName` &mdash; (`String`) The name of the
- *           application associated with this release.
- *         * `Description` &mdash; (`String`) The description of this
- *           application version.
- *         * `VersionLabel` &mdash; (`String`) A label uniquely identifying
- *           the version for the associated application.
- *         * `SourceBundle` &mdash; (`map`) The location where the source
- *           bundle is located for this version.
- *           * `S3Bucket` &mdash; (`String`) The Amazon S3 bucket where the
- *             data is located.
- *           * `S3Key` &mdash; (`String`) The Amazon S3 key where the data
- *             is located.
- *         * `DateCreated` &mdash; (`Date`) The creation date of the
- *           application version.
- *         * `DateUpdated` &mdash; (`Date`) The last modified date of the
- *           application version.
+ *           * `ApplicationName` &mdash; (`String`) The name of the
+ *             application associated with this release.
+ *           * `Description` &mdash; (`String`) The description of this
+ *             application version.
+ *           * `VersionLabel` &mdash; (`String`) A label uniquely
+ *             identifying the version for the associated application.
+ *           * `SourceBundle` &mdash; (`map`) The location where the source
+ *             bundle is located for this version.
+ *               * `S3Bucket` &mdash; (`String`) The Amazon S3 bucket where
+ *                 the data is located.
+ *               * `S3Key` &mdash; (`String`) The Amazon S3 key where the
+ *                 data is located.
+ *           * `DateCreated` &mdash; (`Date`) The creation date of the
+ *             application version.
+ *           * `DateUpdated` &mdash; (`Date`) The last modified date of the
+ *             application version.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -585,19 +585,19 @@ AWS.ElasticBeanstalk = inherit({})
  *
  *       * `Applications` &mdash; (`Array<map>`) This parameter contains a
  *         list of ApplicationDescription.
- *         * `ApplicationName` &mdash; (`String`) The name of the
- *           application.
- *         * `Description` &mdash; (`String`) User-defined description of
- *           the application.
- *         * `DateCreated` &mdash; (`Date`) The date when the application
- *           was created.
- *         * `DateUpdated` &mdash; (`Date`) The date when the application
- *           was last modified.
- *         * `Versions` &mdash; (`Array<String>`) The names of the versions
- *           for this application.
- *         * `ConfigurationTemplates` &mdash; (`Array<String>`) The names
- *           of the configuration templates associated with this
- *           application.
+ *           * `ApplicationName` &mdash; (`String`) The name of the
+ *             application.
+ *           * `Description` &mdash; (`String`) User-defined description of
+ *             the application.
+ *           * `DateCreated` &mdash; (`Date`) The date when the application
+ *             was created.
+ *           * `DateUpdated` &mdash; (`Date`) The date when the application
+ *             was last modified.
+ *           * `Versions` &mdash; (`Array<String>`) The names of the
+ *             versions for this application.
+ *           * `ConfigurationTemplates` &mdash; (`Array<String>`) The names
+ *             of the configuration templates associated with this
+ *             application.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -617,10 +617,10 @@ AWS.ElasticBeanstalk = inherit({})
  *       stack whose configuration options you want to describe.
  *     * `Options` &mdash; (`Array<map>`) If specified, restricts the
  *       descriptions to only the specified options.
- *       * `Namespace` &mdash; (`String`) A unique namespace identifying
- *         the option's associated AWS resource.
- *       * `OptionName` &mdash; (`String`) The name of the configuration
- *         option.
+ *         * `Namespace` &mdash; (`String`) A unique namespace
+ *           identifying the option's associated AWS resource.
+ *         * `OptionName` &mdash; (`String`) The name of the
+ *           configuration option.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -635,73 +635,79 @@ AWS.ElasticBeanstalk = inherit({})
  *         stack these configuration options belong to.
  *       * `Options` &mdash; (`Array<map>`) A list of
  *         ConfigurationOptionDescription.
- *         * `Namespace` &mdash; (`String`) A unique namespace identifying
- *           the option's associated AWS resource.
- *         * `Name` &mdash; (`String`) The name of the configuration
- *           option.
- *         * `DefaultValue` &mdash; (`String`) The default value for this
- *           configuration option.
- *         * `ChangeSeverity` &mdash; (`String`) An indication of which
- *           action is required if the value for this configuration option
- *           changes: NoInterruption - There is no interruption to the
- *           environment or application availability. RestartEnvironment -
- *           The environment is restarted, all AWS resources are deleted
- *           and recreated, and the environment is unavailable during the
- *           process. RestartApplicationServer - The environment is
- *           available the entire time. However, a short application outage
- *           occurs when the application servers on the running Amazon EC2
- *           instances are restarted. NoInterruption : There is no
- *           interruption to the environment or application availability.
- *           RestartEnvironment : The environment is entirely restarted,
- *           all AWS resources are deleted and recreated, and the
- *           environment is unavailable during the process.
- *           RestartApplicationServer : The environment is available the
- *           entire time. However, a short application outage occurs when
- *           the application servers on the running Amazon EC2 instances
- *           are restarted.
- *         * `UserDefined` &mdash; (`Boolean`) An indication of whether the
- *           user defined this configuration option: true : This
- *           configuration option was defined by the user. It is a valid
- *           choice for specifying this as an Option to Remove when
- *           updating configuration settings. false : This configuration
- *           was not defined by the user. true : This configuration option
- *           was defined by the user. It is a valid choice for specifying
- *           if this as an Option to Remove when updating configuration
- *           settings. false : This configuration was not defined by the
- *           user. Constraint: You can remove only UserDefined options from
- *           a configuration. Valid Values: true | false
- *         * `ValueType` &mdash; (`String`) An indication of which type of
- *           values this option has and whether it is allowable to select
- *           one or more than one of the possible values: Scalar : Values
- *           for this option are a single selection from the possible
- *           values, or a unformatted string or numeric value governed by
- *           the MIN/MAX/Regex constraints: List : Values for this option
- *           are multiple selections of the possible values. Boolean :
- *           Values for this option are either true or false . Scalar :
- *           Values for this option are a single selection from the
- *           possible values, or an unformatted string, or numeric value
- *           governed by the MIN/MAX/Regex constraints. List : Values for
- *           this option are multiple selections from the possible values.
- *           Boolean : Values for this option are either true or false .
- *           Possible values include:
- *           * `Scalar`
- *           * `List`
- *         * `ValueOptions` &mdash; (`Array<String>`) If specified, values
- *           for the configuration option are selected from this list.
- *         * `MinValue` &mdash; (`Integer`) If specified, the configuration
- *           option must be a numeric value greater than this value.
- *         * `MaxValue` &mdash; (`Integer`) If specified, the configuration
- *           option must be a numeric value less than this value.
- *         * `MaxLength` &mdash; (`Integer`) If specified, the
- *           configuration option must be a string value no longer than
- *           this value.
- *         * `Regex` &mdash; (`map`) If specified, the configuration option
- *           must be a string value that satisfies this regular expression.
- *           * `Pattern` &mdash; (`String`) The regular expression pattern
- *             that a string configuration option value with this
- *             restriction must match.
- *           * `Label` &mdash; (`String`) A unique name representing this
- *             regular expression.
+ *           * `Namespace` &mdash; (`String`) A unique namespace
+ *             identifying the option's associated AWS resource.
+ *           * `Name` &mdash; (`String`) The name of the configuration
+ *             option.
+ *           * `DefaultValue` &mdash; (`String`) The default value for this
+ *             configuration option.
+ *           * `ChangeSeverity` &mdash; (`String`) An indication of which
+ *             action is required if the value for this configuration
+ *             option changes: NoInterruption - There is no interruption to
+ *             the environment or application availability.
+ *             RestartEnvironment - The environment is restarted, all AWS
+ *             resources are deleted and recreated, and the environment is
+ *             unavailable during the process. RestartApplicationServer -
+ *             The environment is available the entire time. However, a
+ *             short application outage occurs when the application servers
+ *             on the running Amazon EC2 instances are restarted.
+ *             NoInterruption : There is no interruption to the environment
+ *             or application availability. RestartEnvironment : The
+ *             environment is entirely restarted, all AWS resources are
+ *             deleted and recreated, and the environment is unavailable
+ *             during the process. RestartApplicationServer : The
+ *             environment is available the entire time. However, a short
+ *             application outage occurs when the application servers on
+ *             the running Amazon EC2 instances are restarted.
+ *           * `UserDefined` &mdash; (`Boolean`) An indication of whether
+ *             the user defined this configuration option: true : This
+ *             configuration option was defined by the user. It is a valid
+ *             choice for specifying this as an Option to Remove when
+ *             updating configuration settings. false : This configuration
+ *             was not defined by the user. true : This configuration
+ *             option was defined by the user. It is a valid choice for
+ *             specifying if this as an Option to Remove when updating
+ *             configuration settings. false : This configuration was not
+ *             defined by the user. Constraint: You can remove only
+ *             UserDefined options from a configuration. Valid Values: true
+ *             | false
+ *           * `ValueType` &mdash; (`String`) An indication of which type
+ *             of values this option has and whether it is allowable to
+ *             select one or more than one of the possible values: Scalar :
+ *             Values for this option are a single selection from the
+ *             possible values, or a unformatted string or numeric value
+ *             governed by the MIN/MAX/Regex constraints: List : Values for
+ *             this option are multiple selections of the possible values.
+ *             Boolean : Values for this option are either true or false .
+ *             Scalar : Values for this option are a single selection from
+ *             the possible values, or an unformatted string, or numeric
+ *             value governed by the MIN/MAX/Regex constraints. List :
+ *             Values for this option are multiple selections from the
+ *             possible values. Boolean : Values for this option are either
+ *             true or false .
+ *             Possible values include:
+ *             * `Scalar`
+ *             * `List`
+ *           * `ValueOptions` &mdash; (`Array<String>`) If specified,
+ *             values for the configuration option are selected from this
+ *             list.
+ *           * `MinValue` &mdash; (`Integer`) If specified, the
+ *             configuration option must be a numeric value greater than
+ *             this value.
+ *           * `MaxValue` &mdash; (`Integer`) If specified, the
+ *             configuration option must be a numeric value less than this
+ *             value.
+ *           * `MaxLength` &mdash; (`Integer`) If specified, the
+ *             configuration option must be a string value no longer than
+ *             this value.
+ *           * `Regex` &mdash; (`map`) If specified, the configuration
+ *             option must be a string value that satisfies this regular
+ *             expression.
+ *               * `Pattern` &mdash; (`String`) The regular expression
+ *                 pattern that a string configuration option value with
+ *                 this restriction must match.
+ *               * `Label` &mdash; (`String`) A unique name representing
+ *                 this regular expression.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -734,49 +740,50 @@ AWS.ElasticBeanstalk = inherit({})
  *
  *       * `ConfigurationSettings` &mdash; (`Array<map>`) A list of
  *         ConfigurationSettingsDescription.
- *         * `SolutionStackName` &mdash; (`String`) The name of the
- *           solution stack this configuration set uses.
- *         * `ApplicationName` &mdash; (`String`) The name of the
- *           application associated with this configuration set.
- *         * `TemplateName` &mdash; (`String`) If not null, the name of the
- *           configuration template for this configuration set.
- *         * `Description` &mdash; (`String`) Describes this configuration
- *           set.
- *         * `EnvironmentName` &mdash; (`String`) If not null, the name of
- *           the environment for this configuration set.
- *         * `DeploymentStatus` &mdash; (`String`) If this configuration
- *           set is associated with an environment, the DeploymentStatus
- *           parameter indicates the deployment status of this
- *           configuration set: null: This configuration is not associated
- *           with a running environment. pending: This is a draft
- *           configuration that is not deployed to the associated
- *           environment but is in the process of deploying. deployed: This
- *           is the configuration that is currently deployed to the
- *           associated running environment. failed: This is a draft
- *           configuration, that failed to successfully deploy. null: This
- *           configuration is not associated with a running environment.
- *           pending: This is a draft configuration that is not deployed to
- *           the associated environment but is in the process of deploying.
- *           deployed: This is the configuration that is currently deployed
- *           to the associated running environment. failed: This is a draft
- *           configuration that failed to successfully deploy.
- *           Possible values include:
- *           * `deployed`
- *           * `pending`
- *           * `failed`
- *         * `DateCreated` &mdash; (`Date`) The date (in UTC time) when
- *           this configuration set was created.
- *         * `DateUpdated` &mdash; (`Date`) The date (in UTC time) when
- *           this configuration set was last modified.
- *         * `OptionSettings` &mdash; (`Array<map>`) A list of the
- *           configuration options and their values in this configuration
- *           set.
- *           * `Namespace` &mdash; (`String`) A unique namespace
- *             identifying the option's associated AWS resource.
- *           * `OptionName` &mdash; (`String`) The name of the
- *             configuration option.
- *           * `Value` &mdash; (`String`) The current value for the
- *             configuration option.
+ *           * `SolutionStackName` &mdash; (`String`) The name of the
+ *             solution stack this configuration set uses.
+ *           * `ApplicationName` &mdash; (`String`) The name of the
+ *             application associated with this configuration set.
+ *           * `TemplateName` &mdash; (`String`) If not null, the name of
+ *             the configuration template for this configuration set.
+ *           * `Description` &mdash; (`String`) Describes this
+ *             configuration set.
+ *           * `EnvironmentName` &mdash; (`String`) If not null, the name
+ *             of the environment for this configuration set.
+ *           * `DeploymentStatus` &mdash; (`String`) If this configuration
+ *             set is associated with an environment, the DeploymentStatus
+ *             parameter indicates the deployment status of this
+ *             configuration set: null: This configuration is not
+ *             associated with a running environment. pending: This is a
+ *             draft configuration that is not deployed to the associated
+ *             environment but is in the process of deploying. deployed:
+ *             This is the configuration that is currently deployed to the
+ *             associated running environment. failed: This is a draft
+ *             configuration, that failed to successfully deploy. null:
+ *             This configuration is not associated with a running
+ *             environment. pending: This is a draft configuration that is
+ *             not deployed to the associated environment but is in the
+ *             process of deploying. deployed: This is the configuration
+ *             that is currently deployed to the associated running
+ *             environment. failed: This is a draft configuration that
+ *             failed to successfully deploy.
+ *             Possible values include:
+ *             * `deployed`
+ *             * `pending`
+ *             * `failed`
+ *           * `DateCreated` &mdash; (`Date`) The date (in UTC time) when
+ *             this configuration set was created.
+ *           * `DateUpdated` &mdash; (`Date`) The date (in UTC time) when
+ *             this configuration set was last modified.
+ *           * `OptionSettings` &mdash; (`Array<map>`) A list of the
+ *             configuration options and their values in this configuration
+ *             set.
+ *               * `Namespace` &mdash; (`String`) A unique namespace
+ *                 identifying the option's associated AWS resource.
+ *               * `OptionName` &mdash; (`String`) The name of the
+ *                 configuration option.
+ *               * `Value` &mdash; (`String`) The current value for the
+ *                 configuration option.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -805,24 +812,26 @@ AWS.ElasticBeanstalk = inherit({})
  *
  *       * `EnvironmentResources` &mdash; (`map`) A list of
  *         EnvironmentResourceDescription.
- *         * `EnvironmentName` &mdash; (`String`) The name of the
- *           environment.
- *         * `AutoScalingGroups` &mdash; (`Array<map>`) The
- *           AutoScalingGroups used by this environment.
- *           * `Name` &mdash; (`String`) The name of the AutoScalingGroup .
- *         * `Instances` &mdash; (`Array<map>`) The Amazon EC2 instances
- *           used by this environment.
- *           * `Id` &mdash; (`String`) The ID of the Amazon EC2 instance.
- *         * `LaunchConfigurations` &mdash; (`Array<map>`) The Auto Scaling
- *           launch configurations in use by this environment.
- *           * `Name` &mdash; (`String`) The name of the launch
- *             configuration.
- *         * `LoadBalancers` &mdash; (`Array<map>`) The LoadBalancers in
- *           use by this environment.
- *           * `Name` &mdash; (`String`) The name of the LoadBalancer.
- *         * `Triggers` &mdash; (`Array<map>`) The AutoScaling triggers in
- *           use by this environment.
- *           * `Name` &mdash; (`String`) The name of the trigger.
+ *           * `EnvironmentName` &mdash; (`String`) The name of the
+ *             environment.
+ *           * `AutoScalingGroups` &mdash; (`Array<map>`) The
+ *             AutoScalingGroups used by this environment.
+ *               * `Name` &mdash; (`String`) The name of the
+ *                 AutoScalingGroup .
+ *           * `Instances` &mdash; (`Array<map>`) The Amazon EC2 instances
+ *             used by this environment.
+ *               * `Id` &mdash; (`String`) The ID of the Amazon EC2
+ *                 instance.
+ *           * `LaunchConfigurations` &mdash; (`Array<map>`) The Auto
+ *             Scaling launch configurations in use by this environment.
+ *               * `Name` &mdash; (`String`) The name of the launch
+ *                 configuration.
+ *           * `LoadBalancers` &mdash; (`Array<map>`) The LoadBalancers in
+ *             use by this environment.
+ *               * `Name` &mdash; (`String`) The name of the LoadBalancer.
+ *           * `Triggers` &mdash; (`Array<map>`) The AutoScaling triggers
+ *             in use by this environment.
+ *               * `Name` &mdash; (`String`) The name of the trigger.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -860,75 +869,77 @@ AWS.ElasticBeanstalk = inherit({})
  *
  *       * `Environments` &mdash; (`Array<map>`) Returns an
  *         EnvironmentDescription list.
- *         * `EnvironmentName` &mdash; (`String`) The name of this
- *           environment.
- *         * `EnvironmentId` &mdash; (`String`) The ID of this environment.
- *         * `ApplicationName` &mdash; (`String`) The name of the
- *           application associated with this environment.
- *         * `VersionLabel` &mdash; (`String`) The application version
- *           deployed in this environment.
- *         * `SolutionStackName` &mdash; (`String`) The name of the
- *           SolutionStack deployed with this environment.
- *         * `TemplateName` &mdash; (`String`) The name of the
- *           configuration template used to originally launch this
- *           environment.
- *         * `Description` &mdash; (`String`) Describes this environment.
- *         * `EndpointURL` &mdash; (`String`) The URL to the LoadBalancer
- *           for this environment.
- *         * `CNAME` &mdash; (`String`) The URL to the CNAME for this
- *           environment.
- *         * `DateCreated` &mdash; (`Date`) The creation date for this
- *           environment.
- *         * `DateUpdated` &mdash; (`Date`) The last modified date for this
- *           environment.
- *         * `Status` &mdash; (`String`) The current operational status of
- *           the environment: Launching: Environment is in the process of
- *           initial deployment. Updating: Environment is in the process of
- *           updating its configuration settings or application version.
- *           Ready: Environment is available to have an action performed on
- *           it, such as update or terminate. Terminating: Environment is
- *           in the shut-down process. Terminated: Environment is not
- *           running.
- *           Possible values include:
- *           * `Launching`
- *           * `Updating`
- *           * `Ready`
- *           * `Terminating`
- *           * `Terminated`
- *         * `Health` &mdash; (`String`) Describes the health status of the
- *           environment. AWS Elastic Beanstalk indicates the failure
- *           levels for a running environment: Red : Indicates the
- *           environment is not working. Yellow: Indicates that something
- *           is wrong, the application might not be available, but the
- *           instances appear running. Green: Indicates the environment is
- *           healthy and fully functional. Red: Indicates the environment
- *           is not responsive. Occurs when three or more consecutive
- *           failures occur for an environment. Yellow: Indicates that
- *           something is wrong. Occurs when two consecutive failures occur
- *           for an environment. Green: Indicates the environment is
- *           healthy and fully functional. Grey: Default health for a new
- *           environment. The environment is not fully launched and health
- *           checks have not started or health checks are suspended during
- *           an UpdateEnvironment or RestartEnvironement request. Default:
- *           Grey
- *           Possible values include:
- *           * `Green`
- *           * `Yellow`
- *           * `Red`
- *           * `Grey`
- *         * `Resources` &mdash; (`map`) The description of the AWS
- *           resources used by this environment.
- *           * `LoadBalancer` &mdash; (`map`) Describes the LoadBalancer.
- *             * `LoadBalancerName` &mdash; (`String`) The name of the
- *               LoadBalancer.
- *             * `Domain` &mdash; (`String`) The domain name of the
- *               LoadBalancer.
- *             * `Listeners` &mdash; (`Array<map>`) A list of Listeners
- *               used by the LoadBalancer.
- *               * `Protocol` &mdash; (`String`) The protocol that is used
- *                 by the Listener.
- *               * `Port` &mdash; (`Integer`) The port that is used by the
- *                 Listener.
+ *           * `EnvironmentName` &mdash; (`String`) The name of this
+ *             environment.
+ *           * `EnvironmentId` &mdash; (`String`) The ID of this
+ *             environment.
+ *           * `ApplicationName` &mdash; (`String`) The name of the
+ *             application associated with this environment.
+ *           * `VersionLabel` &mdash; (`String`) The application version
+ *             deployed in this environment.
+ *           * `SolutionStackName` &mdash; (`String`) The name of the
+ *             SolutionStack deployed with this environment.
+ *           * `TemplateName` &mdash; (`String`) The name of the
+ *             configuration template used to originally launch this
+ *             environment.
+ *           * `Description` &mdash; (`String`) Describes this environment.
+ *           * `EndpointURL` &mdash; (`String`) The URL to the LoadBalancer
+ *             for this environment.
+ *           * `CNAME` &mdash; (`String`) The URL to the CNAME for this
+ *             environment.
+ *           * `DateCreated` &mdash; (`Date`) The creation date for this
+ *             environment.
+ *           * `DateUpdated` &mdash; (`Date`) The last modified date for
+ *             this environment.
+ *           * `Status` &mdash; (`String`) The current operational status
+ *             of the environment: Launching: Environment is in the process
+ *             of initial deployment. Updating: Environment is in the
+ *             process of updating its configuration settings or
+ *             application version. Ready: Environment is available to have
+ *             an action performed on it, such as update or terminate.
+ *             Terminating: Environment is in the shut-down process.
+ *             Terminated: Environment is not running.
+ *             Possible values include:
+ *             * `Launching`
+ *             * `Updating`
+ *             * `Ready`
+ *             * `Terminating`
+ *             * `Terminated`
+ *           * `Health` &mdash; (`String`) Describes the health status of
+ *             the environment. AWS Elastic Beanstalk indicates the failure
+ *             levels for a running environment: Red : Indicates the
+ *             environment is not working. Yellow: Indicates that something
+ *             is wrong, the application might not be available, but the
+ *             instances appear running. Green: Indicates the environment
+ *             is healthy and fully functional. Red: Indicates the
+ *             environment is not responsive. Occurs when three or more
+ *             consecutive failures occur for an environment. Yellow:
+ *             Indicates that something is wrong. Occurs when two
+ *             consecutive failures occur for an environment. Green:
+ *             Indicates the environment is healthy and fully functional.
+ *             Grey: Default health for a new environment. The environment
+ *             is not fully launched and health checks have not started or
+ *             health checks are suspended during an UpdateEnvironment or
+ *             RestartEnvironement request. Default: Grey
+ *             Possible values include:
+ *             * `Green`
+ *             * `Yellow`
+ *             * `Red`
+ *             * `Grey`
+ *           * `Resources` &mdash; (`map`) The description of the AWS
+ *             resources used by this environment.
+ *               * `LoadBalancer` &mdash; (`map`) Describes the
+ *                 LoadBalancer.
+ *                   * `LoadBalancerName` &mdash; (`String`) The name of
+ *                     the LoadBalancer.
+ *                   * `Domain` &mdash; (`String`) The domain name of the
+ *                     LoadBalancer.
+ *                   * `Listeners` &mdash; (`Array<map>`) A list of
+ *                     Listeners used by the LoadBalancer.
+ *                       * `Protocol` &mdash; (`String`) The protocol that
+ *                         is used by the Listener.
+ *                       * `Port` &mdash; (`Integer`) The port that is used
+ *                         by the Listener.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -985,27 +996,28 @@ AWS.ElasticBeanstalk = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Events` &mdash; (`Array<map>`) A list of EventDescription.
- *         * `EventDate` &mdash; (`Date`) The date when the event occurred.
- *         * `Message` &mdash; (`String`) The event message.
- *         * `ApplicationName` &mdash; (`String`) The application
- *           associated with the event.
- *         * `VersionLabel` &mdash; (`String`) The release label for the
- *           application version associated with this event.
- *         * `TemplateName` &mdash; (`String`) The name of the
- *           configuration associated with this event.
- *         * `EnvironmentName` &mdash; (`String`) The name of the
- *           environment associated with this event.
- *         * `RequestId` &mdash; (`String`) The web service request ID for
- *           the activity of this event.
- *         * `Severity` &mdash; (`String`) The severity level of this
- *           event.
- *           Possible values include:
- *           * `TRACE`
- *           * `DEBUG`
- *           * `INFO`
- *           * `WARN`
- *           * `ERROR`
- *           * `FATAL`
+ *           * `EventDate` &mdash; (`Date`) The date when the event
+ *             occurred.
+ *           * `Message` &mdash; (`String`) The event message.
+ *           * `ApplicationName` &mdash; (`String`) The application
+ *             associated with the event.
+ *           * `VersionLabel` &mdash; (`String`) The release label for the
+ *             application version associated with this event.
+ *           * `TemplateName` &mdash; (`String`) The name of the
+ *             configuration associated with this event.
+ *           * `EnvironmentName` &mdash; (`String`) The name of the
+ *             environment associated with this event.
+ *           * `RequestId` &mdash; (`String`) The web service request ID
+ *             for the activity of this event.
+ *           * `Severity` &mdash; (`String`) The severity level of this
+ *             event.
+ *             Possible values include:
+ *             * `TRACE`
+ *             * `DEBUG`
+ *             * `INFO`
+ *             * `WARN`
+ *             * `ERROR`
+ *             * `FATAL`
  *       * `NextToken` &mdash; (`String`) If returned, this indicates that
  *         there are more results to obtain. Use this token in the next
  *         DescribeEvents call to get the next batch of events.
@@ -1029,10 +1041,10 @@ AWS.ElasticBeanstalk = inherit({})
  *         solution stacks.
  *       * `SolutionStackDetails` &mdash; (`Array<map>`) A list of
  *         available solution stacks and their SolutionStackDescription.
- *         * `SolutionStackName` &mdash; (`String`) The name of the
- *           solution stack.
- *         * `PermittedFileTypes` &mdash; (`Array<String>`) The permitted
- *           file types allowed for a solution stack.
+ *           * `SolutionStackName` &mdash; (`String`) The name of the
+ *             solution stack.
+ *           * `PermittedFileTypes` &mdash; (`Array<String>`) The permitted
+ *             file types allowed for a solution stack.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1140,15 +1152,15 @@ AWS.ElasticBeanstalk = inherit({})
  *
  *       * `EnvironmentInfo` &mdash; (`Array<map>`) The
  *         EnvironmentInfoDescription of the environment.
- *         * `InfoType` &mdash; (`String`) The type of information
- *           retrieved.
- *           Possible values include:
- *           * `tail`
- *         * `Ec2InstanceId` &mdash; (`String`) The Amazon EC2 Instance ID
- *           for this information.
- *         * `SampleTimestamp` &mdash; (`Date`) The time stamp when this
- *           information was retrieved.
- *         * `Message` &mdash; (`String`) The retrieved information.
+ *           * `InfoType` &mdash; (`String`) The type of information
+ *             retrieved.
+ *             Possible values include:
+ *             * `tail`
+ *           * `Ec2InstanceId` &mdash; (`String`) The Amazon EC2 Instance
+ *             ID for this information.
+ *           * `SampleTimestamp` &mdash; (`Date`) The time stamp when this
+ *             information was retrieved.
+ *           * `Message` &mdash; (`String`) The retrieved information.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1275,17 +1287,17 @@ AWS.ElasticBeanstalk = inherit({})
  *         * `Grey`
  *       * `Resources` &mdash; (`map`) The description of the AWS resources
  *         used by this environment.
- *         * `LoadBalancer` &mdash; (`map`) Describes the LoadBalancer.
- *           * `LoadBalancerName` &mdash; (`String`) The name of the
- *             LoadBalancer.
- *           * `Domain` &mdash; (`String`) The domain name of the
- *             LoadBalancer.
- *           * `Listeners` &mdash; (`Array<map>`) A list of Listeners used
- *             by the LoadBalancer.
- *             * `Protocol` &mdash; (`String`) The protocol that is used by
- *               the Listener.
- *             * `Port` &mdash; (`Integer`) The port that is used by the
- *               Listener.
+ *           * `LoadBalancer` &mdash; (`map`) Describes the LoadBalancer.
+ *               * `LoadBalancerName` &mdash; (`String`) The name of the
+ *                 LoadBalancer.
+ *               * `Domain` &mdash; (`String`) The domain name of the
+ *                 LoadBalancer.
+ *               * `Listeners` &mdash; (`Array<map>`) A list of Listeners
+ *                 used by the LoadBalancer.
+ *                   * `Protocol` &mdash; (`String`) The protocol that is
+ *                     used by the Listener.
+ *                   * `Port` &mdash; (`Integer`) The port that is used by
+ *                     the Listener.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1310,19 +1322,19 @@ AWS.ElasticBeanstalk = inherit({})
  *
  *       * `Application` &mdash; (`map`) The ApplicationDescription of the
  *         application.
- *         * `ApplicationName` &mdash; (`String`) The name of the
- *           application.
- *         * `Description` &mdash; (`String`) User-defined description of
- *           the application.
- *         * `DateCreated` &mdash; (`Date`) The date when the application
- *           was created.
- *         * `DateUpdated` &mdash; (`Date`) The date when the application
- *           was last modified.
- *         * `Versions` &mdash; (`Array<String>`) The names of the versions
- *           for this application.
- *         * `ConfigurationTemplates` &mdash; (`Array<String>`) The names
- *           of the configuration templates associated with this
- *           application.
+ *           * `ApplicationName` &mdash; (`String`) The name of the
+ *             application.
+ *           * `Description` &mdash; (`String`) User-defined description of
+ *             the application.
+ *           * `DateCreated` &mdash; (`Date`) The date when the application
+ *             was created.
+ *           * `DateUpdated` &mdash; (`Date`) The date when the application
+ *             was last modified.
+ *           * `Versions` &mdash; (`Array<String>`) The names of the
+ *             versions for this application.
+ *           * `ConfigurationTemplates` &mdash; (`Array<String>`) The names
+ *             of the configuration templates associated with this
+ *             application.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1351,22 +1363,22 @@ AWS.ElasticBeanstalk = inherit({})
  *
  *       * `ApplicationVersion` &mdash; (`map`) The
  *         ApplicationVersionDescription of the application version.
- *         * `ApplicationName` &mdash; (`String`) The name of the
- *           application associated with this release.
- *         * `Description` &mdash; (`String`) The description of this
- *           application version.
- *         * `VersionLabel` &mdash; (`String`) A label uniquely identifying
- *           the version for the associated application.
- *         * `SourceBundle` &mdash; (`map`) The location where the source
- *           bundle is located for this version.
- *           * `S3Bucket` &mdash; (`String`) The Amazon S3 bucket where the
- *             data is located.
- *           * `S3Key` &mdash; (`String`) The Amazon S3 key where the data
- *             is located.
- *         * `DateCreated` &mdash; (`Date`) The creation date of the
- *           application version.
- *         * `DateUpdated` &mdash; (`Date`) The last modified date of the
- *           application version.
+ *           * `ApplicationName` &mdash; (`String`) The name of the
+ *             application associated with this release.
+ *           * `Description` &mdash; (`String`) The description of this
+ *             application version.
+ *           * `VersionLabel` &mdash; (`String`) A label uniquely
+ *             identifying the version for the associated application.
+ *           * `SourceBundle` &mdash; (`map`) The location where the source
+ *             bundle is located for this version.
+ *               * `S3Bucket` &mdash; (`String`) The Amazon S3 bucket where
+ *                 the data is located.
+ *               * `S3Key` &mdash; (`String`) The Amazon S3 key where the
+ *                 data is located.
+ *           * `DateCreated` &mdash; (`Date`) The creation date of the
+ *             application version.
+ *           * `DateUpdated` &mdash; (`Date`) The last modified date of the
+ *             application version.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1386,19 +1398,19 @@ AWS.ElasticBeanstalk = inherit({})
  *       configuration.
  *     * `OptionSettings` &mdash; (`Array<map>`) A list of configuration
  *       option settings to update with the new specified option value.
- *       * `Namespace` &mdash; (`String`) A unique namespace identifying
- *         the option's associated AWS resource.
- *       * `OptionName` &mdash; (`String`) The name of the configuration
- *         option.
- *       * `Value` &mdash; (`String`) The current value for the
- *         configuration option.
+ *         * `Namespace` &mdash; (`String`) A unique namespace
+ *           identifying the option's associated AWS resource.
+ *         * `OptionName` &mdash; (`String`) The name of the
+ *           configuration option.
+ *         * `Value` &mdash; (`String`) The current value for the
+ *           configuration option.
  *     * `OptionsToRemove` &mdash; (`Array<map>`) A list of configuration
  *       options to remove from the configuration set. Constraint: You
  *       can remove only UserDefined configuration options.
- *       * `Namespace` &mdash; (`String`) A unique namespace identifying
- *         the option's associated AWS resource.
- *       * `OptionName` &mdash; (`String`) The name of the configuration
- *         option.
+ *         * `Namespace` &mdash; (`String`) A unique namespace
+ *           identifying the option's associated AWS resource.
+ *         * `OptionName` &mdash; (`String`) The name of the
+ *           configuration option.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1445,12 +1457,12 @@ AWS.ElasticBeanstalk = inherit({})
  *       * `OptionSettings` &mdash; (`Array<map>`) A list of the
  *         configuration options and their values in this configuration
  *         set.
- *         * `Namespace` &mdash; (`String`) A unique namespace identifying
- *           the option's associated AWS resource.
- *         * `OptionName` &mdash; (`String`) The name of the configuration
- *           option.
- *         * `Value` &mdash; (`String`) The current value for the
- *           configuration option.
+ *           * `Namespace` &mdash; (`String`) A unique namespace
+ *             identifying the option's associated AWS resource.
+ *           * `OptionName` &mdash; (`String`) The name of the
+ *             configuration option.
+ *           * `Value` &mdash; (`String`) The current value for the
+ *             configuration option.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1485,19 +1497,19 @@ AWS.ElasticBeanstalk = inherit({})
  *       Elastic Beanstalk updates the configuration set associated with
  *       the running environment and sets the specified configuration
  *       options to the requested value.
- *       * `Namespace` &mdash; (`String`) A unique namespace identifying
- *         the option's associated AWS resource.
- *       * `OptionName` &mdash; (`String`) The name of the configuration
- *         option.
- *       * `Value` &mdash; (`String`) The current value for the
- *         configuration option.
+ *         * `Namespace` &mdash; (`String`) A unique namespace
+ *           identifying the option's associated AWS resource.
+ *         * `OptionName` &mdash; (`String`) The name of the
+ *           configuration option.
+ *         * `Value` &mdash; (`String`) The current value for the
+ *           configuration option.
  *     * `OptionsToRemove` &mdash; (`Array<map>`) A list of custom
  *       user-defined configuration options to remove from the
  *       configuration set for this environment.
- *       * `Namespace` &mdash; (`String`) A unique namespace identifying
- *         the option's associated AWS resource.
- *       * `OptionName` &mdash; (`String`) The name of the configuration
- *         option.
+ *         * `Namespace` &mdash; (`String`) A unique namespace
+ *           identifying the option's associated AWS resource.
+ *         * `OptionName` &mdash; (`String`) The name of the
+ *           configuration option.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1563,17 +1575,17 @@ AWS.ElasticBeanstalk = inherit({})
  *         * `Grey`
  *       * `Resources` &mdash; (`map`) The description of the AWS resources
  *         used by this environment.
- *         * `LoadBalancer` &mdash; (`map`) Describes the LoadBalancer.
- *           * `LoadBalancerName` &mdash; (`String`) The name of the
- *             LoadBalancer.
- *           * `Domain` &mdash; (`String`) The domain name of the
- *             LoadBalancer.
- *           * `Listeners` &mdash; (`Array<map>`) A list of Listeners used
- *             by the LoadBalancer.
- *             * `Protocol` &mdash; (`String`) The protocol that is used by
- *               the Listener.
- *             * `Port` &mdash; (`Integer`) The port that is used by the
- *               Listener.
+ *           * `LoadBalancer` &mdash; (`map`) Describes the LoadBalancer.
+ *               * `LoadBalancerName` &mdash; (`String`) The name of the
+ *                 LoadBalancer.
+ *               * `Domain` &mdash; (`String`) The domain name of the
+ *                 LoadBalancer.
+ *               * `Listeners` &mdash; (`Array<map>`) A list of Listeners
+ *                 used by the LoadBalancer.
+ *                   * `Protocol` &mdash; (`String`) The protocol that is
+ *                     used by the Listener.
+ *                   * `Port` &mdash; (`Integer`) The port that is used by
+ *                     the Listener.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1591,12 +1603,12 @@ AWS.ElasticBeanstalk = inherit({})
  *       both this and a configuration template name.
  *     * `OptionSettings` &mdash; **required** &mdash; (`Array<map>`) A
  *       list of the options and desired values to evaluate.
- *       * `Namespace` &mdash; (`String`) A unique namespace identifying
- *         the option's associated AWS resource.
- *       * `OptionName` &mdash; (`String`) The name of the configuration
- *         option.
- *       * `Value` &mdash; (`String`) The current value for the
- *         configuration option.
+ *         * `Namespace` &mdash; (`String`) A unique namespace
+ *           identifying the option's associated AWS resource.
+ *         * `OptionName` &mdash; (`String`) The name of the
+ *           configuration option.
+ *         * `Value` &mdash; (`String`) The current value for the
+ *           configuration option.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1608,20 +1620,20 @@ AWS.ElasticBeanstalk = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Messages` &mdash; (`Array<map>`) A list of ValidationMessage.
- *         * `Message` &mdash; (`String`) A message describing the error or
- *           warning.
- *         * `Severity` &mdash; (`String`) An indication of the severity of
- *           this message: error: This message indicates that this is not a
- *           valid setting for an option. warning: This message is
- *           providing information you should take into account. error:
- *           This message indicates that this is not a valid setting for an
- *           option. warning: This message is providing information you
- *           should take into account.
- *           Possible values include:
- *           * `error`
- *           * `warning`
- *         * `Namespace` &mdash; (`String`)
- *         * `OptionName` &mdash; (`String`)
+ *           * `Message` &mdash; (`String`) A message describing the error
+ *             or warning.
+ *           * `Severity` &mdash; (`String`) An indication of the severity
+ *             of this message: error: This message indicates that this is
+ *             not a valid setting for an option. warning: This message is
+ *             providing information you should take into account. error:
+ *             This message indicates that this is not a valid setting for
+ *             an option. warning: This message is providing information
+ *             you should take into account.
+ *             Possible values include:
+ *             * `error`
+ *             * `warning`
+ *           * `Namespace` &mdash; (`String`)
+ *           * `OptionName` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *

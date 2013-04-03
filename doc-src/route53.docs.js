@@ -63,111 +63,120 @@ AWS.Route53 = inherit({})
  *       in the Amazon Route 53 Developer Guide.
  *     * `ChangeBatch` &mdash; **required** &mdash; (`map`) A complex
  *       type that contains an optional comment and the Changes element.
- *       * `Comment` &mdash; (`String`) Optional: Any comments you want
- *         to include about a change batch request.
- *       * `Changes` &mdash; **required** &mdash; (`Array<map>`) A
- *         complex type that contains one Change element for each
- *         resource record set that you want to create or delete.
- *         * `Action` &mdash; **required** &mdash; (`String`) The action
- *           to perform. Valid values: CREATE | DELETE
- *           Possible values include:
- *           * `CREATE`
- *           * `DELETE`
- *         * `ResourceRecordSet` &mdash; **required** &mdash; (`map`)
- *           Information about the resource record set to create or
- *           delete.
- *           * `Name` &mdash; **required** &mdash; (`String`) The domain
- *             name of the current resource record set.
- *           * `Type` &mdash; **required** &mdash; (`String`) The type of
- *             the current resource record set.
- *             Possible values include:
- *             * `SOA`
- *             * `A`
- *             * `TXT`
- *             * `NS`
- *             * `CNAME`
- *             * `MX`
- *             * `PTR`
- *             * `SRV`
- *             * `SPF`
- *             * `AAAA`
- *           * `SetIdentifier` &mdash; (`String`) Weighted, Regional, and
- *             Failover resource record sets only: An identifier that
- *             differentiates among multiple resource record sets that
- *             have the same combination of DNS name and type.
- *           * `Weight` &mdash; (`Integer`) Weighted resource record sets
- *             only: Among resource record sets that have the same
- *             combination of DNS name and type, a value that determines
- *             what portion of traffic for the current resource record
- *             set is routed to the associated location.
- *           * `Region` &mdash; (`String`) Regional resource record sets
- *             only: Among resource record sets that have the same
- *             combination of DNS name and type, a value that specifies
- *             the AWS region for the current resource record set.
- *             Possible values include:
- *             * `us-east-1`
- *             * `us-west-1`
- *             * `us-west-2`
- *             * `eu-west-1`
- *             * `ap-southeast-1`
- *             * `ap-southeast-2`
- *             * `ap-northeast-1`
- *             * `sa-east-1`
- *           * `Failover` &mdash; (`String`) Failover resource record
- *             sets only: Among resource record sets that have the same
- *             combination of DNS name and type, a value that indicates
- *             whether the current resource record set is a primary or
- *             secondary resource record set. A failover set may contain
- *             at most one resource record set marked as primary and one
- *             resource record set marked as secondary. A resource record
- *             set marked as primary will be returned if any of the
- *             following are true: (1) an associated health check is
- *             passing, (2) if the resource record set is an alias with
- *             the evaluate target health and at least one target
- *             resource record set is healthy, (3) both the primary and
- *             secondary resource record set are failing health checks or
- *             (4) there is no secondary resource record set. A secondary
- *             resource record set will be returned if: (1) the primary
- *             is failing a health check and either the secondary is
- *             passing a health check or has no associated health check,
- *             or (2) there is no primary resource record set. Valid
- *             values: PRIMARY | SECONDARY
- *             Possible values include:
- *             * `PRIMARY`
- *             * `SECONDARY`
- *           * `TTL` &mdash; (`Integer`) The cache time to live for the
- *             current resource record set.
- *           * `ResourceRecords` &mdash; (`Array<map>`) A complex type
- *             that contains the resource records for the current
- *             resource record set.
- *             * `Value` &mdash; **required** &mdash; (`String`) The
- *               value of the Value element for the current resource
- *               record set.
- *           * `AliasTarget` &mdash; (`map`) Alias resource record sets
- *             only: Information about the AWS resource to which you are
- *             redirecting traffic.
- *             * `HostedZoneId` &mdash; **required** &mdash; (`String`)
- *               Alias resource record sets only: The value of the hosted
- *               zone ID for the AWS resource. For more information and
- *               an example, see Creating Alias Resource Record Sets in
- *               the Amazon Route 53 Developer Guide.
- *             * `DNSName` &mdash; **required** &mdash; (`String`) Alias
- *               resource record sets only: The external DNS name
- *               associated with the AWS Resource. For more information
- *               and an example, see Creating Alias Resource Record Sets
- *               in the Amazon Route 53 Developer Guide.
- *             * `EvaluateTargetHealth` &mdash; **required** &mdash;
- *               (`Boolean`) Alias resource record sets only: A boolean
- *               value that indicates whether this Resource Record Set
- *               should respect the health status of any health checks
- *               associated with the ALIAS target record which it is
- *               linked to. For more information and an example, see
- *               Creating Alias Resource Record Sets in the Amazon Route
- *               53 Developer Guide.
- *           * `HealthCheckId` &mdash; (`String`) Health Check resource
- *             record sets only, not required for alias resource record
- *             sets: An identifier that is used to identify health check
- *             associated with the resource record set.
+ *         * `Comment` &mdash; (`String`) Optional: Any comments you want
+ *           to include about a change batch request.
+ *         * `Changes` &mdash; **required** &mdash; (`Array<map>`) A
+ *           complex type that contains one Change element for each
+ *           resource record set that you want to create or delete.
+ *             * `Action` &mdash; **required** &mdash; (`String`) The
+ *               action to perform. Valid values: CREATE | DELETE
+ *               Possible values include:
+ *               * `CREATE`
+ *               * `DELETE`
+ *             * `ResourceRecordSet` &mdash; **required** &mdash; (`map`)
+ *               Information about the resource record set to create or
+ *               delete.
+ *                 * `Name` &mdash; **required** &mdash; (`String`) The
+ *                   domain name of the current resource record set.
+ *                 * `Type` &mdash; **required** &mdash; (`String`) The
+ *                   type of the current resource record set.
+ *                   Possible values include:
+ *                   * `SOA`
+ *                   * `A`
+ *                   * `TXT`
+ *                   * `NS`
+ *                   * `CNAME`
+ *                   * `MX`
+ *                   * `PTR`
+ *                   * `SRV`
+ *                   * `SPF`
+ *                   * `AAAA`
+ *                 * `SetIdentifier` &mdash; (`String`) Weighted,
+ *                   Regional, and Failover resource record sets only: An
+ *                   identifier that differentiates among multiple
+ *                   resource record sets that have the same combination
+ *                   of DNS name and type.
+ *                 * `Weight` &mdash; (`Integer`) Weighted resource
+ *                   record sets only: Among resource record sets that
+ *                   have the same combination of DNS name and type, a
+ *                   value that determines what portion of traffic for
+ *                   the current resource record set is routed to the
+ *                   associated location.
+ *                 * `Region` &mdash; (`String`) Regional resource record
+ *                   sets only: Among resource record sets that have the
+ *                   same combination of DNS name and type, a value that
+ *                   specifies the AWS region for the current resource
+ *                   record set.
+ *                   Possible values include:
+ *                   * `us-east-1`
+ *                   * `us-west-1`
+ *                   * `us-west-2`
+ *                   * `eu-west-1`
+ *                   * `ap-southeast-1`
+ *                   * `ap-southeast-2`
+ *                   * `ap-northeast-1`
+ *                   * `sa-east-1`
+ *                 * `Failover` &mdash; (`String`) Failover resource
+ *                   record sets only: Among resource record sets that
+ *                   have the same combination of DNS name and type, a
+ *                   value that indicates whether the current resource
+ *                   record set is a primary or secondary resource record
+ *                   set. A failover set may contain at most one resource
+ *                   record set marked as primary and one resource record
+ *                   set marked as secondary. A resource record set
+ *                   marked as primary will be returned if any of the
+ *                   following are true: (1) an associated health check
+ *                   is passing, (2) if the resource record set is an
+ *                   alias with the evaluate target health and at least
+ *                   one target resource record set is healthy, (3) both
+ *                   the primary and secondary resource record set are
+ *                   failing health checks or (4) there is no secondary
+ *                   resource record set. A secondary resource record set
+ *                   will be returned if: (1) the primary is failing a
+ *                   health check and either the secondary is passing a
+ *                   health check or has no associated health check, or
+ *                   (2) there is no primary resource record set. Valid
+ *                   values: PRIMARY | SECONDARY
+ *                   Possible values include:
+ *                   * `PRIMARY`
+ *                   * `SECONDARY`
+ *                 * `TTL` &mdash; (`Integer`) The cache time to live for
+ *                   the current resource record set.
+ *                 * `ResourceRecords` &mdash; (`Array<map>`) A complex
+ *                   type that contains the resource records for the
+ *                   current resource record set.
+ *                     * `Value` &mdash; **required** &mdash; (`String`)
+ *                       The value of the Value element for the current
+ *                       resource record set.
+ *                 * `AliasTarget` &mdash; (`map`) Alias resource record
+ *                   sets only: Information about the AWS resource to
+ *                   which you are redirecting traffic.
+ *                     * `HostedZoneId` &mdash; **required** &mdash;
+ *                       (`String`) Alias resource record sets only: The
+ *                       value of the hosted zone ID for the AWS
+ *                       resource. For more information and an example,
+ *                       see Creating Alias Resource Record Sets in the
+ *                       Amazon Route 53 Developer Guide.
+ *                     * `DNSName` &mdash; **required** &mdash;
+ *                       (`String`) Alias resource record sets only: The
+ *                       external DNS name associated with the AWS
+ *                       Resource. For more information and an example,
+ *                       see Creating Alias Resource Record Sets in the
+ *                       Amazon Route 53 Developer Guide.
+ *                     * `EvaluateTargetHealth` &mdash; **required**
+ *                       &mdash; (`Boolean`) Alias resource record sets
+ *                       only: A boolean value that indicates whether
+ *                       this Resource Record Set should respect the
+ *                       health status of any health checks associated
+ *                       with the ALIAS target record which it is linked
+ *                       to. For more information and an example, see
+ *                       Creating Alias Resource Record Sets in the
+ *                       Amazon Route 53 Developer Guide.
+ *                 * `HealthCheckId` &mdash; (`String`) Health Check
+ *                   resource record sets only, not required for alias
+ *                   resource record sets: An identifier that is used to
+ *                   identify health check associated with the resource
+ *                   record set.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -182,26 +191,28 @@ AWS.Route53 = inherit({})
  *         information about changes made to your hosted zone. This element
  *         contains an ID that you use when performing a GetChange action
  *         to get detailed information about the change.
- *         * `Id` &mdash; (`String`) The ID of the request. Use this ID to
- *           track when the change has completed across all Amazon Route 53
- *           DNS servers.
- *         * `Status` &mdash; (`String`) The current state of the request.
- *           PENDING indicates that this request has not yet been applied
- *           to all Amazon Route 53 DNS servers. Valid Values: PENDING |
- *           INSYNC
- *           Possible values include:
- *           * `PENDING`
- *           * `INSYNC`
- *         * `SubmittedAt` &mdash; (`Date`) The date and time the change
- *           was submitted, in the format YYYY-MM-DDThh:mm:ssZ, as
- *           specified in the ISO 8601 standard (for example,
- *           2009-11-19T19:37:58Z). The Z after the time indicates that the
- *           time is listed in Coordinated Universal Time (UTC), which is
- *           synonymous with Greenwich Mean Time in this context.
- *         * `Comment` &mdash; (`String`) A complex type that describes
- *           change information about changes made to your hosted zone.
- *           This element contains an ID that you use when performing a
- *           GetChange action to get detailed information about the change.
+ *           * `Id` &mdash; (`String`) The ID of the request. Use this ID
+ *             to track when the change has completed across all Amazon
+ *             Route 53 DNS servers.
+ *           * `Status` &mdash; (`String`) The current state of the
+ *             request. PENDING indicates that this request has not yet
+ *             been applied to all Amazon Route 53 DNS servers. Valid
+ *             Values: PENDING | INSYNC
+ *             Possible values include:
+ *             * `PENDING`
+ *             * `INSYNC`
+ *           * `SubmittedAt` &mdash; (`Date`) The date and time the change
+ *             was submitted, in the format YYYY-MM-DDThh:mm:ssZ, as
+ *             specified in the ISO 8601 standard (for example,
+ *             2009-11-19T19:37:58Z). The Z after the time indicates that
+ *             the time is listed in Coordinated Universal Time (UTC),
+ *             which is synonymous with Greenwich Mean Time in this
+ *             context.
+ *           * `Comment` &mdash; (`String`) A complex type that describes
+ *             change information about changes made to your hosted zone.
+ *             This element contains an ID that you use when performing a
+ *             GetChange action to get detailed information about the
+ *             change.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -219,23 +230,23 @@ AWS.Route53 = inherit({})
  *       The UTF-8 encoding of the value must be less than 128 bytes.
  *     * `HealthCheckConfig` &mdash; **required** &mdash; (`map`) A
  *       complex type that contains health check configuration.
- *       * `IPAddress` &mdash; **required** &mdash; (`String`) IP Address
- *         of the instance being checked.
- *       * `Port` &mdash; (`Integer`) Port on which connection will be
- *         opened to the instance to health check. For HTTP this defaults
- *         to 80 if the port is not specified.
- *       * `Type` &mdash; **required** &mdash; (`String`) The type of
- *         health check to be performed. Currently supported protocols
- *         are TCP and HTTP.
- *         Possible values include:
- *         * `HTTP`
- *         * `TCP`
- *       * `ResourcePath` &mdash; (`String`) Path to ping on the instance
- *         to check the health. Required only for HTTP health checks,
- *         HTTP request is issued to the instance on the given port and
- *         path.
- *       * `FullyQualifiedDomainName` &mdash; (`String`) Fully qualified
- *         domain name of the instance to be health checked.
+ *         * `IPAddress` &mdash; **required** &mdash; (`String`) IP
+ *           Address of the instance being checked.
+ *         * `Port` &mdash; (`Integer`) Port on which connection will be
+ *           opened to the instance to health check. For HTTP this
+ *           defaults to 80 if the port is not specified.
+ *         * `Type` &mdash; **required** &mdash; (`String`) The type of
+ *           health check to be performed. Currently supported protocols
+ *           are TCP and HTTP.
+ *           Possible values include:
+ *           * `HTTP`
+ *           * `TCP`
+ *         * `ResourcePath` &mdash; (`String`) Path to ping on the
+ *           instance to check the health. Required only for HTTP health
+ *           checks, HTTP request is issued to the instance on the given
+ *           port and path.
+ *         * `FullyQualifiedDomainName` &mdash; (`String`) Fully
+ *           qualified domain name of the instance to be health checked.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -248,27 +259,30 @@ AWS.Route53 = inherit({})
  *
  *       * `HealthCheck` &mdash; (`map`) A complex type that contains
  *         identifying information about the health check.
- *         * `Id` &mdash; (`String`) The ID of the specified health check.
- *         * `CallerReference` &mdash; (`String`) A unique string that
- *           identifies the request to create the health check.
- *         * `HealthCheckConfig` &mdash; (`map`) A complex type that
- *           contains the health check configuration.
- *           * `IPAddress` &mdash; (`String`) IP Address of the instance
- *             being checked.
- *           * `Port` &mdash; (`Integer`) Port on which connection will be
- *             opened to the instance to health check. For HTTP this
- *             defaults to 80 if the port is not specified.
- *           * `Type` &mdash; (`String`) The type of health check to be
- *             performed. Currently supported protocols are TCP and HTTP.
- *             Possible values include:
- *             * `HTTP`
- *             * `TCP`
- *           * `ResourcePath` &mdash; (`String`) Path to ping on the
- *             instance to check the health. Required only for HTTP health
- *             checks, HTTP request is issued to the instance on the given
- *             port and path.
- *           * `FullyQualifiedDomainName` &mdash; (`String`) Fully
- *             qualified domain name of the instance to be health checked.
+ *           * `Id` &mdash; (`String`) The ID of the specified health
+ *             check.
+ *           * `CallerReference` &mdash; (`String`) A unique string that
+ *             identifies the request to create the health check.
+ *           * `HealthCheckConfig` &mdash; (`map`) A complex type that
+ *             contains the health check configuration.
+ *               * `IPAddress` &mdash; (`String`) IP Address of the
+ *                 instance being checked.
+ *               * `Port` &mdash; (`Integer`) Port on which connection will
+ *                 be opened to the instance to health check. For HTTP this
+ *                 defaults to 80 if the port is not specified.
+ *               * `Type` &mdash; (`String`) The type of health check to be
+ *                 performed. Currently supported protocols are TCP and
+ *                 HTTP.
+ *                 Possible values include:
+ *                 * `HTTP`
+ *                 * `TCP`
+ *               * `ResourcePath` &mdash; (`String`) Path to ping on the
+ *                 instance to check the health. Required only for HTTP
+ *                 health checks, HTTP request is issued to the instance on
+ *                 the given port and path.
+ *               * `FullyQualifiedDomainName` &mdash; (`String`) Fully
+ *                 qualified domain name of the instance to be health
+ *                 checked.
  *       * `Location` &mdash; (`String`) The unique URL representing the
  *         new health check.
  *   @return [AWS.Request] a handle to the operation request for
@@ -299,10 +313,10 @@ AWS.Route53 = inherit({})
  *       value must be less than 128 bytes.
  *     * `HostedZoneConfig` &mdash; (`map`) A complex type that contains
  *       an optional comment about your hosted zone.
- *       * `Comment` &mdash; (`String`) An optional comment about your
- *         hosted zone. If you don't want to specify a comment, you can
- *         omit the HostedZoneConfig and Comment elements from the XML
- *         document.
+ *         * `Comment` &mdash; (`String`) An optional comment about your
+ *           hosted zone. If you don't want to specify a comment, you can
+ *           omit the HostedZoneConfig and Comment elements from the XML
+ *           document.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -315,58 +329,60 @@ AWS.Route53 = inherit({})
  *
  *       * `HostedZone` &mdash; (`map`) A complex type that contains
  *         identifying information about the hosted zone.
- *         * `Id` &mdash; (`String`) The ID of the specified hosted zone.
- *         * `Name` &mdash; (`String`) The name of the domain. This must be
- *           a fully-specified domain, for example, www.example.com. The
- *           trailing dot is optional; Route 53 assumes that the domain
- *           name is fully qualified. This means that Route 53 treats
- *           www.example.com (without a trailing dot) and www.example.com.
- *           (with a trailing dot) as identical. This is the name you have
- *           registered with your DNS registrar. You should ask your
- *           registrar to change the authoritative name servers for your
- *           domain to the set of NameServers elements returned in
- *           DelegationSet.
- *         * `CallerReference` &mdash; (`String`) A unique string that
- *           identifies the request to create the hosted zone.
- *         * `Config` &mdash; (`map`) A complex type that contains the
- *           Comment element.
- *           * `Comment` &mdash; (`String`) An optional comment about your
- *             hosted zone. If you don't want to specify a comment, you can
- *             omit the HostedZoneConfig and Comment elements from the XML
- *             document.
- *         * `ResourceRecordSetCount` &mdash; (`Integer`) Total number of
- *           resource record sets in the hosted zone.
+ *           * `Id` &mdash; (`String`) The ID of the specified hosted zone.
+ *           * `Name` &mdash; (`String`) The name of the domain. This must
+ *             be a fully-specified domain, for example, www.example.com.
+ *             The trailing dot is optional; Route 53 assumes that the
+ *             domain name is fully qualified. This means that Route 53
+ *             treats www.example.com (without a trailing dot) and
+ *             www.example.com. (with a trailing dot) as identical. This is
+ *             the name you have registered with your DNS registrar. You
+ *             should ask your registrar to change the authoritative name
+ *             servers for your domain to the set of NameServers elements
+ *             returned in DelegationSet.
+ *           * `CallerReference` &mdash; (`String`) A unique string that
+ *             identifies the request to create the hosted zone.
+ *           * `Config` &mdash; (`map`) A complex type that contains the
+ *             Comment element.
+ *               * `Comment` &mdash; (`String`) An optional comment about
+ *                 your hosted zone. If you don't want to specify a
+ *                 comment, you can omit the HostedZoneConfig and Comment
+ *                 elements from the XML document.
+ *           * `ResourceRecordSetCount` &mdash; (`Integer`) Total number of
+ *             resource record sets in the hosted zone.
  *       * `ChangeInfo` &mdash; (`map`) A complex type that contains
  *         information about the request to create a hosted zone. This
  *         includes an ID that you use when you call the GetChange action
  *         to get the current status of the change request.
- *         * `Id` &mdash; (`String`) The ID of the request. Use this ID to
- *           track when the change has completed across all Amazon Route 53
- *           DNS servers.
- *         * `Status` &mdash; (`String`) The current state of the request.
- *           PENDING indicates that this request has not yet been applied
- *           to all Amazon Route 53 DNS servers. Valid Values: PENDING |
- *           INSYNC
- *           Possible values include:
- *           * `PENDING`
- *           * `INSYNC`
- *         * `SubmittedAt` &mdash; (`Date`) The date and time the change
- *           was submitted, in the format YYYY-MM-DDThh:mm:ssZ, as
- *           specified in the ISO 8601 standard (for example,
- *           2009-11-19T19:37:58Z). The Z after the time indicates that the
- *           time is listed in Coordinated Universal Time (UTC), which is
- *           synonymous with Greenwich Mean Time in this context.
- *         * `Comment` &mdash; (`String`) A complex type that describes
- *           change information about changes made to your hosted zone.
- *           This element contains an ID that you use when performing a
- *           GetChange action to get detailed information about the change.
+ *           * `Id` &mdash; (`String`) The ID of the request. Use this ID
+ *             to track when the change has completed across all Amazon
+ *             Route 53 DNS servers.
+ *           * `Status` &mdash; (`String`) The current state of the
+ *             request. PENDING indicates that this request has not yet
+ *             been applied to all Amazon Route 53 DNS servers. Valid
+ *             Values: PENDING | INSYNC
+ *             Possible values include:
+ *             * `PENDING`
+ *             * `INSYNC`
+ *           * `SubmittedAt` &mdash; (`Date`) The date and time the change
+ *             was submitted, in the format YYYY-MM-DDThh:mm:ssZ, as
+ *             specified in the ISO 8601 standard (for example,
+ *             2009-11-19T19:37:58Z). The Z after the time indicates that
+ *             the time is listed in Coordinated Universal Time (UTC),
+ *             which is synonymous with Greenwich Mean Time in this
+ *             context.
+ *           * `Comment` &mdash; (`String`) A complex type that describes
+ *             change information about changes made to your hosted zone.
+ *             This element contains an ID that you use when performing a
+ *             GetChange action to get detailed information about the
+ *             change.
  *       * `DelegationSet` &mdash; (`map`) A complex type that contains
  *         name server information.
- *         * `NameServers` &mdash; (`Array<String>`) A complex type that
- *           contains the authoritative name servers for the hosted zone.
- *           Use the method provided by your domain registrar to add an NS
- *           record to your domain for each NameServer that is assigned to
- *           your hosted zone.
+ *           * `NameServers` &mdash; (`Array<String>`) A complex type that
+ *             contains the authoritative name servers for the hosted zone.
+ *             Use the method provided by your domain registrar to add an
+ *             NS record to your domain for each NameServer that is
+ *             assigned to your hosted zone.
  *       * `Location` &mdash; (`String`) The unique URL representing the
  *         new hosted zone.
  *   @return [AWS.Request] a handle to the operation request for
@@ -406,26 +422,28 @@ AWS.Route53 = inherit({})
  *
  *       * `ChangeInfo` &mdash; (`map`) A complex type that contains the
  *         ID, the status, and the date and time of your delete request.
- *         * `Id` &mdash; (`String`) The ID of the request. Use this ID to
- *           track when the change has completed across all Amazon Route 53
- *           DNS servers.
- *         * `Status` &mdash; (`String`) The current state of the request.
- *           PENDING indicates that this request has not yet been applied
- *           to all Amazon Route 53 DNS servers. Valid Values: PENDING |
- *           INSYNC
- *           Possible values include:
- *           * `PENDING`
- *           * `INSYNC`
- *         * `SubmittedAt` &mdash; (`Date`) The date and time the change
- *           was submitted, in the format YYYY-MM-DDThh:mm:ssZ, as
- *           specified in the ISO 8601 standard (for example,
- *           2009-11-19T19:37:58Z). The Z after the time indicates that the
- *           time is listed in Coordinated Universal Time (UTC), which is
- *           synonymous with Greenwich Mean Time in this context.
- *         * `Comment` &mdash; (`String`) A complex type that describes
- *           change information about changes made to your hosted zone.
- *           This element contains an ID that you use when performing a
- *           GetChange action to get detailed information about the change.
+ *           * `Id` &mdash; (`String`) The ID of the request. Use this ID
+ *             to track when the change has completed across all Amazon
+ *             Route 53 DNS servers.
+ *           * `Status` &mdash; (`String`) The current state of the
+ *             request. PENDING indicates that this request has not yet
+ *             been applied to all Amazon Route 53 DNS servers. Valid
+ *             Values: PENDING | INSYNC
+ *             Possible values include:
+ *             * `PENDING`
+ *             * `INSYNC`
+ *           * `SubmittedAt` &mdash; (`Date`) The date and time the change
+ *             was submitted, in the format YYYY-MM-DDThh:mm:ssZ, as
+ *             specified in the ISO 8601 standard (for example,
+ *             2009-11-19T19:37:58Z). The Z after the time indicates that
+ *             the time is listed in Coordinated Universal Time (UTC),
+ *             which is synonymous with Greenwich Mean Time in this
+ *             context.
+ *           * `Comment` &mdash; (`String`) A complex type that describes
+ *             change information about changes made to your hosted zone.
+ *             This element contains an ID that you use when performing a
+ *             GetChange action to get detailed information about the
+ *             change.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -450,26 +468,28 @@ AWS.Route53 = inherit({})
  *         information about the specified change batch, including the
  *         change batch ID, the status of the change, and the date and time
  *         of the request.
- *         * `Id` &mdash; (`String`) The ID of the request. Use this ID to
- *           track when the change has completed across all Amazon Route 53
- *           DNS servers.
- *         * `Status` &mdash; (`String`) The current state of the request.
- *           PENDING indicates that this request has not yet been applied
- *           to all Amazon Route 53 DNS servers. Valid Values: PENDING |
- *           INSYNC
- *           Possible values include:
- *           * `PENDING`
- *           * `INSYNC`
- *         * `SubmittedAt` &mdash; (`Date`) The date and time the change
- *           was submitted, in the format YYYY-MM-DDThh:mm:ssZ, as
- *           specified in the ISO 8601 standard (for example,
- *           2009-11-19T19:37:58Z). The Z after the time indicates that the
- *           time is listed in Coordinated Universal Time (UTC), which is
- *           synonymous with Greenwich Mean Time in this context.
- *         * `Comment` &mdash; (`String`) A complex type that describes
- *           change information about changes made to your hosted zone.
- *           This element contains an ID that you use when performing a
- *           GetChange action to get detailed information about the change.
+ *           * `Id` &mdash; (`String`) The ID of the request. Use this ID
+ *             to track when the change has completed across all Amazon
+ *             Route 53 DNS servers.
+ *           * `Status` &mdash; (`String`) The current state of the
+ *             request. PENDING indicates that this request has not yet
+ *             been applied to all Amazon Route 53 DNS servers. Valid
+ *             Values: PENDING | INSYNC
+ *             Possible values include:
+ *             * `PENDING`
+ *             * `INSYNC`
+ *           * `SubmittedAt` &mdash; (`Date`) The date and time the change
+ *             was submitted, in the format YYYY-MM-DDThh:mm:ssZ, as
+ *             specified in the ISO 8601 standard (for example,
+ *             2009-11-19T19:37:58Z). The Z after the time indicates that
+ *             the time is listed in Coordinated Universal Time (UTC),
+ *             which is synonymous with Greenwich Mean Time in this
+ *             context.
+ *           * `Comment` &mdash; (`String`) A complex type that describes
+ *             change information about changes made to your hosted zone.
+ *             This element contains an ID that you use when performing a
+ *             GetChange action to get detailed information about the
+ *             change.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -490,27 +510,30 @@ AWS.Route53 = inherit({})
  *
  *       * `HealthCheck` &mdash; (`map`) A complex type that contains the
  *         information about the specified health check.
- *         * `Id` &mdash; (`String`) The ID of the specified health check.
- *         * `CallerReference` &mdash; (`String`) A unique string that
- *           identifies the request to create the health check.
- *         * `HealthCheckConfig` &mdash; (`map`) A complex type that
- *           contains the health check configuration.
- *           * `IPAddress` &mdash; (`String`) IP Address of the instance
- *             being checked.
- *           * `Port` &mdash; (`Integer`) Port on which connection will be
- *             opened to the instance to health check. For HTTP this
- *             defaults to 80 if the port is not specified.
- *           * `Type` &mdash; (`String`) The type of health check to be
- *             performed. Currently supported protocols are TCP and HTTP.
- *             Possible values include:
- *             * `HTTP`
- *             * `TCP`
- *           * `ResourcePath` &mdash; (`String`) Path to ping on the
- *             instance to check the health. Required only for HTTP health
- *             checks, HTTP request is issued to the instance on the given
- *             port and path.
- *           * `FullyQualifiedDomainName` &mdash; (`String`) Fully
- *             qualified domain name of the instance to be health checked.
+ *           * `Id` &mdash; (`String`) The ID of the specified health
+ *             check.
+ *           * `CallerReference` &mdash; (`String`) A unique string that
+ *             identifies the request to create the health check.
+ *           * `HealthCheckConfig` &mdash; (`map`) A complex type that
+ *             contains the health check configuration.
+ *               * `IPAddress` &mdash; (`String`) IP Address of the
+ *                 instance being checked.
+ *               * `Port` &mdash; (`Integer`) Port on which connection will
+ *                 be opened to the instance to health check. For HTTP this
+ *                 defaults to 80 if the port is not specified.
+ *               * `Type` &mdash; (`String`) The type of health check to be
+ *                 performed. Currently supported protocols are TCP and
+ *                 HTTP.
+ *                 Possible values include:
+ *                 * `HTTP`
+ *                 * `TCP`
+ *               * `ResourcePath` &mdash; (`String`) Path to ping on the
+ *                 instance to check the health. Required only for HTTP
+ *                 health checks, HTTP request is issued to the instance on
+ *                 the given port and path.
+ *               * `FullyQualifiedDomainName` &mdash; (`String`) Fully
+ *                 qualified domain name of the instance to be health
+ *                 checked.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -532,35 +555,35 @@ AWS.Route53 = inherit({})
  *
  *       * `HostedZone` &mdash; (`map`) A complex type that contains the
  *         information about the specified hosted zone.
- *         * `Id` &mdash; (`String`) The ID of the specified hosted zone.
- *         * `Name` &mdash; (`String`) The name of the domain. This must be
- *           a fully-specified domain, for example, www.example.com. The
- *           trailing dot is optional; Route 53 assumes that the domain
- *           name is fully qualified. This means that Route 53 treats
- *           www.example.com (without a trailing dot) and www.example.com.
- *           (with a trailing dot) as identical. This is the name you have
- *           registered with your DNS registrar. You should ask your
- *           registrar to change the authoritative name servers for your
- *           domain to the set of NameServers elements returned in
- *           DelegationSet.
- *         * `CallerReference` &mdash; (`String`) A unique string that
- *           identifies the request to create the hosted zone.
- *         * `Config` &mdash; (`map`) A complex type that contains the
- *           Comment element.
- *           * `Comment` &mdash; (`String`) An optional comment about your
- *             hosted zone. If you don't want to specify a comment, you can
- *             omit the HostedZoneConfig and Comment elements from the XML
- *             document.
- *         * `ResourceRecordSetCount` &mdash; (`Integer`) Total number of
- *           resource record sets in the hosted zone.
+ *           * `Id` &mdash; (`String`) The ID of the specified hosted zone.
+ *           * `Name` &mdash; (`String`) The name of the domain. This must
+ *             be a fully-specified domain, for example, www.example.com.
+ *             The trailing dot is optional; Route 53 assumes that the
+ *             domain name is fully qualified. This means that Route 53
+ *             treats www.example.com (without a trailing dot) and
+ *             www.example.com. (with a trailing dot) as identical. This is
+ *             the name you have registered with your DNS registrar. You
+ *             should ask your registrar to change the authoritative name
+ *             servers for your domain to the set of NameServers elements
+ *             returned in DelegationSet.
+ *           * `CallerReference` &mdash; (`String`) A unique string that
+ *             identifies the request to create the hosted zone.
+ *           * `Config` &mdash; (`map`) A complex type that contains the
+ *             Comment element.
+ *               * `Comment` &mdash; (`String`) An optional comment about
+ *                 your hosted zone. If you don't want to specify a
+ *                 comment, you can omit the HostedZoneConfig and Comment
+ *                 elements from the XML document.
+ *           * `ResourceRecordSetCount` &mdash; (`Integer`) Total number of
+ *             resource record sets in the hosted zone.
  *       * `DelegationSet` &mdash; (`map`) A complex type that contains
  *         information about the name servers for the specified hosted
  *         zone.
- *         * `NameServers` &mdash; (`Array<String>`) A complex type that
- *           contains the authoritative name servers for the hosted zone.
- *           Use the method provided by your domain registrar to add an NS
- *           record to your domain for each NameServer that is assigned to
- *           your hosted zone.
+ *           * `NameServers` &mdash; (`Array<String>`) A complex type that
+ *             contains the authoritative name servers for the hosted zone.
+ *             Use the method provided by your domain registrar to add an
+ *             NS record to your domain for each NameServer that is
+ *             assigned to your hosted zone.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -586,27 +609,30 @@ AWS.Route53 = inherit({})
  *       * `HealthChecks` &mdash; (`Array<map>`) A complex type that
  *         contains information about the health checks associated with the
  *         current AWS account.
- *         * `Id` &mdash; (`String`) The ID of the specified health check.
- *         * `CallerReference` &mdash; (`String`) A unique string that
- *           identifies the request to create the health check.
- *         * `HealthCheckConfig` &mdash; (`map`) A complex type that
- *           contains the health check configuration.
- *           * `IPAddress` &mdash; (`String`) IP Address of the instance
- *             being checked.
- *           * `Port` &mdash; (`Integer`) Port on which connection will be
- *             opened to the instance to health check. For HTTP this
- *             defaults to 80 if the port is not specified.
- *           * `Type` &mdash; (`String`) The type of health check to be
- *             performed. Currently supported protocols are TCP and HTTP.
- *             Possible values include:
- *             * `HTTP`
- *             * `TCP`
- *           * `ResourcePath` &mdash; (`String`) Path to ping on the
- *             instance to check the health. Required only for HTTP health
- *             checks, HTTP request is issued to the instance on the given
- *             port and path.
- *           * `FullyQualifiedDomainName` &mdash; (`String`) Fully
- *             qualified domain name of the instance to be health checked.
+ *           * `Id` &mdash; (`String`) The ID of the specified health
+ *             check.
+ *           * `CallerReference` &mdash; (`String`) A unique string that
+ *             identifies the request to create the health check.
+ *           * `HealthCheckConfig` &mdash; (`map`) A complex type that
+ *             contains the health check configuration.
+ *               * `IPAddress` &mdash; (`String`) IP Address of the
+ *                 instance being checked.
+ *               * `Port` &mdash; (`Integer`) Port on which connection will
+ *                 be opened to the instance to health check. For HTTP this
+ *                 defaults to 80 if the port is not specified.
+ *               * `Type` &mdash; (`String`) The type of health check to be
+ *                 performed. Currently supported protocols are TCP and
+ *                 HTTP.
+ *                 Possible values include:
+ *                 * `HTTP`
+ *                 * `TCP`
+ *               * `ResourcePath` &mdash; (`String`) Path to ping on the
+ *                 instance to check the health. Required only for HTTP
+ *                 health checks, HTTP request is issued to the instance on
+ *                 the given port and path.
+ *               * `FullyQualifiedDomainName` &mdash; (`String`) Fully
+ *                 qualified domain name of the instance to be health
+ *                 checked.
  *       * `Marker` &mdash; (`String`) If the request returned more than
  *         one page of results, submit another request and specify the
  *         value of NextMarker from the last response in the marker
@@ -653,27 +679,27 @@ AWS.Route53 = inherit({})
  *       * `HostedZones` &mdash; (`Array<map>`) A complex type that
  *         contains information about the hosted zones associated with the
  *         current AWS account.
- *         * `Id` &mdash; (`String`) The ID of the specified hosted zone.
- *         * `Name` &mdash; (`String`) The name of the domain. This must be
- *           a fully-specified domain, for example, www.example.com. The
- *           trailing dot is optional; Route 53 assumes that the domain
- *           name is fully qualified. This means that Route 53 treats
- *           www.example.com (without a trailing dot) and www.example.com.
- *           (with a trailing dot) as identical. This is the name you have
- *           registered with your DNS registrar. You should ask your
- *           registrar to change the authoritative name servers for your
- *           domain to the set of NameServers elements returned in
- *           DelegationSet.
- *         * `CallerReference` &mdash; (`String`) A unique string that
- *           identifies the request to create the hosted zone.
- *         * `Config` &mdash; (`map`) A complex type that contains the
- *           Comment element.
- *           * `Comment` &mdash; (`String`) An optional comment about your
- *             hosted zone. If you don't want to specify a comment, you can
- *             omit the HostedZoneConfig and Comment elements from the XML
- *             document.
- *         * `ResourceRecordSetCount` &mdash; (`Integer`) Total number of
- *           resource record sets in the hosted zone.
+ *           * `Id` &mdash; (`String`) The ID of the specified hosted zone.
+ *           * `Name` &mdash; (`String`) The name of the domain. This must
+ *             be a fully-specified domain, for example, www.example.com.
+ *             The trailing dot is optional; Route 53 assumes that the
+ *             domain name is fully qualified. This means that Route 53
+ *             treats www.example.com (without a trailing dot) and
+ *             www.example.com. (with a trailing dot) as identical. This is
+ *             the name you have registered with your DNS registrar. You
+ *             should ask your registrar to change the authoritative name
+ *             servers for your domain to the set of NameServers elements
+ *             returned in DelegationSet.
+ *           * `CallerReference` &mdash; (`String`) A unique string that
+ *             identifies the request to create the hosted zone.
+ *           * `Config` &mdash; (`map`) A complex type that contains the
+ *             Comment element.
+ *               * `Comment` &mdash; (`String`) An optional comment about
+ *                 your hosted zone. If you don't want to specify a
+ *                 comment, you can omit the HostedZoneConfig and Comment
+ *                 elements from the XML document.
+ *           * `ResourceRecordSetCount` &mdash; (`Integer`) Total number of
+ *             resource record sets in the hosted zone.
  *       * `Marker` &mdash; (`String`) If the request returned more than
  *         one page of results, submit another request and specify the
  *         value of NextMarker from the last response in the marker
@@ -746,94 +772,97 @@ AWS.Route53 = inherit({})
  *       * `ResourceRecordSets` &mdash; (`Array<map>`) A complex type that
  *         contains information about the resource record sets that are
  *         returned by the request.
- *         * `Name` &mdash; (`String`) The domain name of the current
- *           resource record set.
- *         * `Type` &mdash; (`String`) The type of the current resource
- *           record set.
- *           Possible values include:
- *           * `SOA`
- *           * `A`
- *           * `TXT`
- *           * `NS`
- *           * `CNAME`
- *           * `MX`
- *           * `PTR`
- *           * `SRV`
- *           * `SPF`
- *           * `AAAA`
- *         * `SetIdentifier` &mdash; (`String`) Weighted, Regional, and
- *           Failover resource record sets only: An identifier that
- *           differentiates among multiple resource record sets that have
- *           the same combination of DNS name and type.
- *         * `Weight` &mdash; (`Integer`) Weighted resource record sets
- *           only: Among resource record sets that have the same
- *           combination of DNS name and type, a value that determines what
- *           portion of traffic for the current resource record set is
- *           routed to the associated location.
- *         * `Region` &mdash; (`String`) Regional resource record sets
- *           only: Among resource record sets that have the same
- *           combination of DNS name and type, a value that specifies the
- *           AWS region for the current resource record set.
- *           Possible values include:
- *           * `us-east-1`
- *           * `us-west-1`
- *           * `us-west-2`
- *           * `eu-west-1`
- *           * `ap-southeast-1`
- *           * `ap-southeast-2`
- *           * `ap-northeast-1`
- *           * `sa-east-1`
- *         * `Failover` &mdash; (`String`) Failover resource record sets
- *           only: Among resource record sets that have the same
- *           combination of DNS name and type, a value that indicates
- *           whether the current resource record set is a primary or
- *           secondary resource record set. A failover set may contain at
- *           most one resource record set marked as primary and one
- *           resource record set marked as secondary. A resource record set
- *           marked as primary will be returned if any of the following are
- *           true: (1) an associated health check is passing, (2) if the
- *           resource record set is an alias with the evaluate target
- *           health and at least one target resource record set is healthy,
- *           (3) both the primary and secondary resource record set are
- *           failing health checks or (4) there is no secondary resource
- *           record set. A secondary resource record set will be returned
- *           if: (1) the primary is failing a health check and either the
- *           secondary is passing a health check or has no associated
- *           health check, or (2) there is no primary resource record set.
- *           Valid values: PRIMARY | SECONDARY
- *           Possible values include:
- *           * `PRIMARY`
- *           * `SECONDARY`
- *         * `TTL` &mdash; (`Integer`) The cache time to live for the
- *           current resource record set.
- *         * `ResourceRecords` &mdash; (`Array<map>`) A complex type that
- *           contains the resource records for the current resource record
- *           set.
- *           * `Value` &mdash; (`String`) The value of the Value element
- *             for the current resource record set.
- *         * `AliasTarget` &mdash; (`map`) Alias resource record sets only:
- *           Information about the AWS resource to which you are
- *           redirecting traffic.
- *           * `HostedZoneId` &mdash; (`String`) Alias resource record sets
- *             only: The value of the hosted zone ID for the AWS resource.
- *             For more information and an example, see Creating Alias
- *             Resource Record Sets in the Amazon Route 53 Developer Guide.
- *           * `DNSName` &mdash; (`String`) Alias resource record sets
- *             only: The external DNS name associated with the AWS
- *             Resource. For more information and an example, see Creating
- *             Alias Resource Record Sets in the Amazon Route 53 Developer
- *             Guide.
- *           * `EvaluateTargetHealth` &mdash; (`Boolean`) Alias resource
- *             record sets only: A boolean value that indicates whether
- *             this Resource Record Set should respect the health status of
- *             any health checks associated with the ALIAS target record
- *             which it is linked to. For more information and an example,
- *             see Creating Alias Resource Record Sets in the Amazon Route
- *             53 Developer Guide.
- *         * `HealthCheckId` &mdash; (`String`) Health Check resource
- *           record sets only, not required for alias resource record sets:
- *           An identifier that is used to identify health check associated
- *           with the resource record set.
+ *           * `Name` &mdash; (`String`) The domain name of the current
+ *             resource record set.
+ *           * `Type` &mdash; (`String`) The type of the current resource
+ *             record set.
+ *             Possible values include:
+ *             * `SOA`
+ *             * `A`
+ *             * `TXT`
+ *             * `NS`
+ *             * `CNAME`
+ *             * `MX`
+ *             * `PTR`
+ *             * `SRV`
+ *             * `SPF`
+ *             * `AAAA`
+ *           * `SetIdentifier` &mdash; (`String`) Weighted, Regional, and
+ *             Failover resource record sets only: An identifier that
+ *             differentiates among multiple resource record sets that have
+ *             the same combination of DNS name and type.
+ *           * `Weight` &mdash; (`Integer`) Weighted resource record sets
+ *             only: Among resource record sets that have the same
+ *             combination of DNS name and type, a value that determines
+ *             what portion of traffic for the current resource record set
+ *             is routed to the associated location.
+ *           * `Region` &mdash; (`String`) Regional resource record sets
+ *             only: Among resource record sets that have the same
+ *             combination of DNS name and type, a value that specifies the
+ *             AWS region for the current resource record set.
+ *             Possible values include:
+ *             * `us-east-1`
+ *             * `us-west-1`
+ *             * `us-west-2`
+ *             * `eu-west-1`
+ *             * `ap-southeast-1`
+ *             * `ap-southeast-2`
+ *             * `ap-northeast-1`
+ *             * `sa-east-1`
+ *           * `Failover` &mdash; (`String`) Failover resource record sets
+ *             only: Among resource record sets that have the same
+ *             combination of DNS name and type, a value that indicates
+ *             whether the current resource record set is a primary or
+ *             secondary resource record set. A failover set may contain at
+ *             most one resource record set marked as primary and one
+ *             resource record set marked as secondary. A resource record
+ *             set marked as primary will be returned if any of the
+ *             following are true: (1) an associated health check is
+ *             passing, (2) if the resource record set is an alias with the
+ *             evaluate target health and at least one target resource
+ *             record set is healthy, (3) both the primary and secondary
+ *             resource record set are failing health checks or (4) there
+ *             is no secondary resource record set. A secondary resource
+ *             record set will be returned if: (1) the primary is failing a
+ *             health check and either the secondary is passing a health
+ *             check or has no associated health check, or (2) there is no
+ *             primary resource record set. Valid values: PRIMARY |
+ *             SECONDARY
+ *             Possible values include:
+ *             * `PRIMARY`
+ *             * `SECONDARY`
+ *           * `TTL` &mdash; (`Integer`) The cache time to live for the
+ *             current resource record set.
+ *           * `ResourceRecords` &mdash; (`Array<map>`) A complex type that
+ *             contains the resource records for the current resource
+ *             record set.
+ *               * `Value` &mdash; (`String`) The value of the Value
+ *                 element for the current resource record set.
+ *           * `AliasTarget` &mdash; (`map`) Alias resource record sets
+ *             only: Information about the AWS resource to which you are
+ *             redirecting traffic.
+ *               * `HostedZoneId` &mdash; (`String`) Alias resource record
+ *                 sets only: The value of the hosted zone ID for the AWS
+ *                 resource. For more information and an example, see
+ *                 Creating Alias Resource Record Sets in the Amazon Route
+ *                 53 Developer Guide.
+ *               * `DNSName` &mdash; (`String`) Alias resource record sets
+ *                 only: The external DNS name associated with the AWS
+ *                 Resource. For more information and an example, see
+ *                 Creating Alias Resource Record Sets in the Amazon Route
+ *                 53 Developer Guide.
+ *               * `EvaluateTargetHealth` &mdash; (`Boolean`) Alias
+ *                 resource record sets only: A boolean value that
+ *                 indicates whether this Resource Record Set should
+ *                 respect the health status of any health checks
+ *                 associated with the ALIAS target record which it is
+ *                 linked to. For more information and an example, see
+ *                 Creating Alias Resource Record Sets in the Amazon Route
+ *                 53 Developer Guide.
+ *           * `HealthCheckId` &mdash; (`String`) Health Check resource
+ *             record sets only, not required for alias resource record
+ *             sets: An identifier that is used to identify health check
+ *             associated with the resource record set.
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
  *         there are more resource record sets to be listed. If your
  *         results were truncated, you can make a follow-up request for the

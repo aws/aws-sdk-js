@@ -154,13 +154,13 @@ AWS.ImportExport = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Jobs` &mdash; (`Array<map>`)
- *         * `JobId` &mdash; (`String`)
- *         * `CreationDate` &mdash; (`Date`)
- *         * `IsCanceled` &mdash; (`Boolean`)
- *         * `JobType` &mdash; (`String`)
- *           Possible values include:
- *           * `Import`
- *           * `Export`
+ *           * `JobId` &mdash; (`String`)
+ *           * `CreationDate` &mdash; (`Date`)
+ *           * `IsCanceled` &mdash; (`Boolean`)
+ *           * `JobType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `Import`
+ *             * `Export`
  *       * `IsTruncated` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.

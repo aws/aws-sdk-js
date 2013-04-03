@@ -68,15 +68,15 @@ AWS.RDS = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `EventSubscription` &mdash; (`map`)
- *         * `CustomerAwsId` &mdash; (`String`)
- *         * `CustSubscriptionId` &mdash; (`String`)
- *         * `SnsTopicArn` &mdash; (`String`)
- *         * `Status` &mdash; (`String`)
- *         * `SubscriptionCreationTime` &mdash; (`String`)
- *         * `SourceType` &mdash; (`String`)
- *         * `SourceIdsList` &mdash; (`Array<String>`)
- *         * `EventCategoriesList` &mdash; (`Array<String>`)
- *         * `Enabled` &mdash; (`Boolean`)
+ *           * `CustomerAwsId` &mdash; (`String`)
+ *           * `CustSubscriptionId` &mdash; (`String`)
+ *           * `SnsTopicArn` &mdash; (`String`)
+ *           * `Status` &mdash; (`String`)
+ *           * `SubscriptionCreationTime` &mdash; (`String`)
+ *           * `SourceType` &mdash; (`String`)
+ *           * `SourceIdsList` &mdash; (`Array<String>`)
+ *           * `EventCategoriesList` &mdash; (`Array<String>`)
+ *           * `Enabled` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -87,18 +87,18 @@ AWS.RDS = inherit({})
  *       Instance the tags will be added to.
  *     * `Tags` &mdash; **required** &mdash; (`Array<map>`) The tags to
  *       be assigned to the DB Instance.
- *       * `Key` &mdash; (`String`) A key is the required name of the
- *         tag. The string value can be from 1 to 128 Unicode characters
- *         in length and cannot be prefixed with "aws:". The string may
- *         only contain only the set of Unicode letters, digits,
- *         white-space, '_', '.', '/', '=', '+', '-' (Java regex:
- *         "^([\\p`{L}\\p{Z}\\p{N}`_.:/=+\\-]*)$").
- *       * `Value` &mdash; (`String`) A value is the optional value of
- *         the tag. The string value can be from 1 to 256 Unicode
- *         characters in length and cannot be prefixed with "aws:". The
- *         string may only contain only the set of Unicode letters,
- *         digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex:
- *         "^([\\p`{L}\\p{Z}\\p{N}`_.:/=+\\-]*)$").
+ *         * `Key` &mdash; (`String`) A key is the required name of the
+ *           tag. The string value can be from 1 to 128 Unicode
+ *           characters in length and cannot be prefixed with "aws:". The
+ *           string may only contain only the set of Unicode letters,
+ *           digits, white-space, '_', '.', '/', '=', '+', '-' (Java
+ *           regex: "^([\\p`{L}\\p{Z}\\p{N}`_.:/=+\\-]*)$").
+ *         * `Value` &mdash; (`String`) A value is the optional value of
+ *           the tag. The string value can be from 1 to 256 Unicode
+ *           characters in length and cannot be prefixed with "aws:". The
+ *           string may only contain only the set of Unicode letters,
+ *           digits, white-space, '_', '.', '/', '=', '+', '-' (Java
+ *           regex: "^([\\p`{L}\\p{Z}\\p{N}`_.:/=+\\-]*)$").
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -148,32 +148,32 @@ AWS.RDS = inherit({})
  *         CreateDBSecurityGroup RevokeDBSecurityGroupIngress This data
  *         type is used as a response element in the
  *         DescribeDBSecurityGroups action.
- *         * `OwnerId` &mdash; (`String`) Provides the AWS ID of the owner
- *           of a specific DB Security Group.
- *         * `DBSecurityGroupName` &mdash; (`String`) Specifies the name of
- *           the DB Security Group.
- *         * `DBSecurityGroupDescription` &mdash; (`String`) Provides the
- *           description of the DB Security Group.
- *         * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
- *           Security Group.
- *         * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list of
- *           EC2SecurityGroup elements.
- *           * `Status` &mdash; (`String`) Provides the status of the EC2
- *             security group. Status can be "authorizing", "authorized",
- *             "revoking", and "revoked".
- *           * `EC2SecurityGroupName` &mdash; (`String`) Specifies the name
- *             of the EC2 Security Group.
- *           * `EC2SecurityGroupId` &mdash; (`String`) Specifies the id of
- *             the EC2 Security Group.
- *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies the
- *             AWS ID of the owner of the EC2 security group specified in
- *             the EC2SecurityGroupName field.
- *         * `IPRanges` &mdash; (`Array<map>`) Contains a list of IPRange
- *           elements.
- *           * `Status` &mdash; (`String`) Specifies the status of the IP
- *             range. Status can be "authorizing", "authorized",
- *             "revoking", and "revoked".
- *           * `CIDRIP` &mdash; (`String`) Specifies the IP range.
+ *           * `OwnerId` &mdash; (`String`) Provides the AWS ID of the
+ *             owner of a specific DB Security Group.
+ *           * `DBSecurityGroupName` &mdash; (`String`) Specifies the name
+ *             of the DB Security Group.
+ *           * `DBSecurityGroupDescription` &mdash; (`String`) Provides the
+ *             description of the DB Security Group.
+ *           * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
+ *             Security Group.
+ *           * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list
+ *             of EC2SecurityGroup elements.
+ *               * `Status` &mdash; (`String`) Provides the status of the
+ *                 EC2 security group. Status can be "authorizing",
+ *                 "authorized", "revoking", and "revoked".
+ *               * `EC2SecurityGroupName` &mdash; (`String`) Specifies the
+ *                 name of the EC2 Security Group.
+ *               * `EC2SecurityGroupId` &mdash; (`String`) Specifies the id
+ *                 of the EC2 Security Group.
+ *               * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies
+ *                 the AWS ID of the owner of the EC2 security group
+ *                 specified in the EC2SecurityGroupName field.
+ *           * `IPRanges` &mdash; (`Array<map>`) Contains a list of IPRange
+ *             elements.
+ *               * `Status` &mdash; (`String`) Specifies the status of the
+ *                 IP range. Status can be "authorizing", "authorized",
+ *                 "revoking", and "revoked".
+ *               * `CIDRIP` &mdash; (`String`) Specifies the IP range.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -204,41 +204,42 @@ AWS.RDS = inherit({})
  *         invocation of the following actions: CreateDBSnapshot
  *         DeleteDBSnapshot This data type is used as a response element in
  *         the DescribeDBSnapshots action.
- *         * `DBSnapshotIdentifier` &mdash; (`String`) Specifies the
- *           identifier for the DB Snapshot.
- *         * `DBInstanceIdentifier` &mdash; (`String`) Specifies the the
- *           DBInstanceIdentifier of the DB Instance this DB Snapshot was
- *           created from.
- *         * `SnapshotCreateTime` &mdash; (`Date`) Provides the time (UTC)
- *           when the snapshot was taken.
- *         * `Engine` &mdash; (`String`) Specifies the name of the database
- *           engine.
- *         * `AllocatedStorage` &mdash; (`Integer`) Specifies the allocated
- *           storage size in gigabytes (GB).
- *         * `Status` &mdash; (`String`) Specifies the status of this DB
- *           Snapshot.
- *         * `Port` &mdash; (`Integer`) Specifies the port that the
- *           database engine was listening on at the time of the snapshot.
- *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
- *           the Availability Zone the DB Instance was located in at the
- *           time of the DB Snapshot.
- *         * `VpcId` &mdash; (`String`) Provides the Vpc Id associated with
- *           the DB Snapshot.
- *         * `InstanceCreateTime` &mdash; (`Date`) Specifies the time (UTC)
- *           when the snapshot was taken.
- *         * `MasterUsername` &mdash; (`String`) Provides the master
- *           username for the DB Snapshot.
- *         * `EngineVersion` &mdash; (`String`) Specifies the version of
- *           the database engine.
- *         * `LicenseModel` &mdash; (`String`) License model information
- *           for the restored DB Instance.
- *         * `SnapshotType` &mdash; (`String`) Provides the type of the DB
- *           Snapshot.
- *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
- *           operations per second) value of the DB Instance at the time of
- *           the snapshot.
- *         * `OptionGroupName` &mdash; (`String`) Provides the option group
- *           name for the DB Snapshot.
+ *           * `DBSnapshotIdentifier` &mdash; (`String`) Specifies the
+ *             identifier for the DB Snapshot.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Specifies the the
+ *             DBInstanceIdentifier of the DB Instance this DB Snapshot was
+ *             created from.
+ *           * `SnapshotCreateTime` &mdash; (`Date`) Provides the time
+ *             (UTC) when the snapshot was taken.
+ *           * `Engine` &mdash; (`String`) Specifies the name of the
+ *             database engine.
+ *           * `AllocatedStorage` &mdash; (`Integer`) Specifies the
+ *             allocated storage size in gigabytes (GB).
+ *           * `Status` &mdash; (`String`) Specifies the status of this DB
+ *             Snapshot.
+ *           * `Port` &mdash; (`Integer`) Specifies the port that the
+ *             database engine was listening on at the time of the
+ *             snapshot.
+ *           * `AvailabilityZone` &mdash; (`String`) Specifies the name of
+ *             the Availability Zone the DB Instance was located in at the
+ *             time of the DB Snapshot.
+ *           * `VpcId` &mdash; (`String`) Provides the Vpc Id associated
+ *             with the DB Snapshot.
+ *           * `InstanceCreateTime` &mdash; (`Date`) Specifies the time
+ *             (UTC) when the snapshot was taken.
+ *           * `MasterUsername` &mdash; (`String`) Provides the master
+ *             username for the DB Snapshot.
+ *           * `EngineVersion` &mdash; (`String`) Specifies the version of
+ *             the database engine.
+ *           * `LicenseModel` &mdash; (`String`) License model information
+ *             for the restored DB Instance.
+ *           * `SnapshotType` &mdash; (`String`) Provides the type of the
+ *             DB Snapshot.
+ *           * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS
+ *             (I/O operations per second) value of the DB Instance at the
+ *             time of the snapshot.
+ *           * `OptionGroupName` &mdash; (`String`) Provides the option
+ *             group name for the DB Snapshot.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -388,145 +389,148 @@ AWS.RDS = inherit({})
  *         invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
  *         response element in the DescribeDBInstances action.
- *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
- *           user-supplied database identifier. This is the unique key that
- *           identifies a DB Instance.
- *         * `DBInstanceClass` &mdash; (`String`) Contains the name of the
- *           compute and memory capacity class of the DB Instance.
- *         * `Engine` &mdash; (`String`) Provides the name of the database
- *           engine to be used for this DB Instance.
- *         * `DBInstanceStatus` &mdash; (`String`) Specifies the current
- *           state of this database.
- *         * `MasterUsername` &mdash; (`String`) Contains the master
- *           username for the DB Instance.
- *         * `DBName` &mdash; (`String`) The meaning of this parameter
- *           differs according to the database engine you use. MySQL
- *           Contains the name of the initial database of this instance
- *           that was provided at create time, if one was specified when
- *           the DB Instance was created. This same name is returned for
- *           the life of the DB Instance. Type: String Oracle Contains the
- *           Oracle System ID (SID) of the created DB Instance.
- *         * `Endpoint` &mdash; (`map`) Specifies the connection endpoint.
- *           * `Address` &mdash; (`String`) Specifies the DNS address of
- *             the DB Instance.
- *           * `Port` &mdash; (`Integer`) Specifies the port that the
- *             database engine is listening on.
- *         * `AllocatedStorage` &mdash; (`Integer`) Specifies the allocated
- *           storage size specified in gigabytes.
- *         * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
- *           time the DB Instance was created.
- *         * `PreferredBackupWindow` &mdash; (`String`) Specifies the daily
- *           time range during which automated backups are created if
- *           automated backups are enabled, as determined by the
- *           BackupRetentionPeriod.
- *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
- *           number of days for which automatic DB Snapshots are retained.
- *         * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of DB
- *           Security Group elements containing only DBSecurityGroup.Name
- *           and DBSecurityGroup.Status subelements.
- *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
- *             Security Group.
- *           * `Status` &mdash; (`String`) The status of the DB Security
- *             Group.
- *         * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
- *           VPC security group elements that the DB Instance belongs to.
- *           * `VpcSecurityGroupId` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *         * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
- *           of DB Parameter Groups applied to this DB Instance.
- *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
- *             Parameter Group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
- *           the Availability Zone the DB Instance is located in.
- *         * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
- *           the subnet group associated with the DB instance, including
- *           the name, descrption and subnets in the subnet group.
- *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
- *             the DB Subnet Group.
- *           * `DBSubnetGroupDescription` &mdash; (`String`) Provides the
- *             description of the DB Subnet Group.
- *           * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
- *             Subnet Group.
- *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
- *             of the DB Subnet Group.
- *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
- *             elements.
- *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
- *               identifier of the subnet.
- *             * `SubnetAvailabilityZone` &mdash; (`map`)
- *               * `Name` &mdash; (`String`) The name of the availability
- *                 zone.
- *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
- *                 indicates the availability zone is capable of
- *                 provisioned IOPs.
- *             * `SubnetStatus` &mdash; (`String`) Specifies the status of
- *               the subnet.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
- *           weekly time range (in UTC) during which system maintenance can
- *           occur.
- *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
- *           to the DB Instance are pending. This element is only included
- *           when changes are pending. Specific changes are identified by
- *           subelements.
- *           * `DBInstanceClass` &mdash; (`String`) Contains the new
- *             DBInstanceClass for the DB Instance that will be applied or
- *             is in progress.
- *           * `AllocatedStorage` &mdash; (`Integer`) Contains the new
- *             AllocatedStorage size for the DB Instance that will be
- *             applied or is in progress.
- *           * `MasterUserPassword` &mdash; (`String`) Contains the pending
- *             or in-progress change of the master credentials for the DB
- *             Instance.
- *           * `Port` &mdash; (`Integer`) Specifies the pending port for
- *             the DB Instance.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Contains a
+ *             user-supplied database identifier. This is the unique key
+ *             that identifies a DB Instance.
+ *           * `DBInstanceClass` &mdash; (`String`) Contains the name of
+ *             the compute and memory capacity class of the DB Instance.
+ *           * `Engine` &mdash; (`String`) Provides the name of the
+ *             database engine to be used for this DB Instance.
+ *           * `DBInstanceStatus` &mdash; (`String`) Specifies the current
+ *             state of this database.
+ *           * `MasterUsername` &mdash; (`String`) Contains the master
+ *             username for the DB Instance.
+ *           * `DBName` &mdash; (`String`) The meaning of this parameter
+ *             differs according to the database engine you use. MySQL
+ *             Contains the name of the initial database of this instance
+ *             that was provided at create time, if one was specified when
+ *             the DB Instance was created. This same name is returned for
+ *             the life of the DB Instance. Type: String Oracle Contains
+ *             the Oracle System ID (SID) of the created DB Instance.
+ *           * `Endpoint` &mdash; (`map`) Specifies the connection
+ *             endpoint.
+ *               * `Address` &mdash; (`String`) Specifies the DNS address
+ *                 of the DB Instance.
+ *               * `Port` &mdash; (`Integer`) Specifies the port that the
+ *                 database engine is listening on.
+ *           * `AllocatedStorage` &mdash; (`Integer`) Specifies the
+ *             allocated storage size specified in gigabytes.
+ *           * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
+ *             time the DB Instance was created.
+ *           * `PreferredBackupWindow` &mdash; (`String`) Specifies the
+ *             daily time range during which automated backups are created
+ *             if automated backups are enabled, as determined by the
+ *             BackupRetentionPeriod.
  *           * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
- *             pending number of days for which automated backups are
+ *             number of days for which automatic DB Snapshots are
  *             retained.
- *           * `MultiAZ` &mdash; (`Boolean`) Indicates that the Single-AZ
- *             DB Instance is to change to a Multi-AZ deployment.
+ *           * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of
+ *             DB Security Group elements containing only
+ *             DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *               * `DBSecurityGroupName` &mdash; (`String`) The name of the
+ *                 DB Security Group.
+ *               * `Status` &mdash; (`String`) The status of the DB
+ *                 Security Group.
+ *           * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
+ *             VPC security group elements that the DB Instance belongs to.
+ *               * `VpcSecurityGroupId` &mdash; (`String`)
+ *               * `Status` &mdash; (`String`)
+ *           * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
+ *             of DB Parameter Groups applied to this DB Instance.
+ *               * `DBParameterGroupName` &mdash; (`String`) The name of
+ *                 the DP Parameter Group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *           * `AvailabilityZone` &mdash; (`String`) Specifies the name of
+ *             the Availability Zone the DB Instance is located in.
+ *           * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
+ *             the subnet group associated with the DB instance, including
+ *             the name, descrption and subnets in the subnet group.
+ *               * `DBSubnetGroupName` &mdash; (`String`) Specifies the
+ *                 name of the DB Subnet Group.
+ *               * `DBSubnetGroupDescription` &mdash; (`String`) Provides
+ *                 the description of the DB Subnet Group.
+ *               * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
+ *                 Subnet Group.
+ *               * `SubnetGroupStatus` &mdash; (`String`) Provides the
+ *                 status of the DB Subnet Group.
+ *               * `Subnets` &mdash; (`Array<map>`) Contains a list of
+ *                 Subnet elements.
+ *                   * `SubnetIdentifier` &mdash; (`String`) Specifies the
+ *                     identifier of the subnet.
+ *                   * `SubnetAvailabilityZone` &mdash; (`map`)
+ *                       * `Name` &mdash; (`String`) The name of the
+ *                         availability zone.
+ *                       * `ProvisionedIopsCapable` &mdash; (`Boolean`)
+ *                         True indicates the availability zone is capable
+ *                         of provisioned IOPs.
+ *                   * `SubnetStatus` &mdash; (`String`) Specifies the
+ *                     status of the subnet.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies
+ *             the weekly time range (in UTC) during which system
+ *             maintenance can occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) Specifies that
+ *             changes to the DB Instance are pending. This element is only
+ *             included when changes are pending. Specific changes are
+ *             identified by subelements.
+ *               * `DBInstanceClass` &mdash; (`String`) Contains the new
+ *                 DBInstanceClass for the DB Instance that will be applied
+ *                 or is in progress.
+ *               * `AllocatedStorage` &mdash; (`Integer`) Contains the new
+ *                 AllocatedStorage size for the DB Instance that will be
+ *                 applied or is in progress.
+ *               * `MasterUserPassword` &mdash; (`String`) Contains the
+ *                 pending or in-progress change of the master credentials
+ *                 for the DB Instance.
+ *               * `Port` &mdash; (`Integer`) Specifies the pending port
+ *                 for the DB Instance.
+ *               * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies
+ *                 the pending number of days for which automated backups
+ *                 are retained.
+ *               * `MultiAZ` &mdash; (`Boolean`) Indicates that the
+ *                 Single-AZ DB Instance is to change to a Multi-AZ
+ *                 deployment.
+ *               * `EngineVersion` &mdash; (`String`) Indicates the
+ *                 database engine version.
+ *               * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
+ *                 IOPS value for the DB Instance that will be applied or
+ *                 is being applied.
+ *               * `DBInstanceIdentifier` &mdash; (`String`) Contains the
+ *                 new DBInstanceIdentifier for the DB Instance that will
+ *                 be applied or is in progress.
+ *           * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
+ *             time to which a database can be restored with point-in-time
+ *             restore.
+ *           * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance
+ *             is a Multi-AZ deployment.
  *           * `EngineVersion` &mdash; (`String`) Indicates the database
  *             engine version.
- *           * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
- *             IOPS value for the DB Instance that will be applied or is
- *             being applied.
- *           * `DBInstanceIdentifier` &mdash; (`String`) Contains the new
- *             DBInstanceIdentifier for the DB Instance that will be
- *             applied or is in progress.
- *         * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
- *           time to which a database can be restored with point-in-time
- *           restore.
- *         * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance is
- *           a Multi-AZ deployment.
- *         * `EngineVersion` &mdash; (`String`) Indicates the database
- *           engine version.
- *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
- *           minor version patches are applied automatically.
- *         * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
- *           Contains the identifier of the source DB Instance if this DB
- *           Instance is a Read Replica.
- *         * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
- *           Contains one or more identifiers of the Read Replicas
- *           associated with this DB Instance.
- *         * `LicenseModel` &mdash; (`String`) License model information
- *           for this DB Instance.
- *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
- *           operations per second) value.
- *         * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
- *           list of option group memberships for this DB Instance.
- *           * `OptionGroupName` &mdash; (`String`) The name of the option
- *             group that the instance belongs to.
- *           * `Status` &mdash; (`String`) The status of the DB Instance's
- *             option group membership (e.g. in-sync, pending,
- *             pending-maintenance, applying).
- *         * `CharacterSetName` &mdash; (`String`) If present, specifies
- *           the name of the character set that this instance is associated
- *           with.
- *         * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
- *           specifies the name of the secondary Availability Zone for a DB
- *           instance with multi-AZ support.
- *         * `PubliclyAccessible` &mdash; (`Boolean`)
+ *           * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
+ *             minor version patches are applied automatically.
+ *           * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
+ *             Contains the identifier of the source DB Instance if this DB
+ *             Instance is a Read Replica.
+ *           * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
+ *             Contains one or more identifiers of the Read Replicas
+ *             associated with this DB Instance.
+ *           * `LicenseModel` &mdash; (`String`) License model information
+ *             for this DB Instance.
+ *           * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS
+ *             (I/O operations per second) value.
+ *           * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
+ *             list of option group memberships for this DB Instance.
+ *               * `OptionGroupName` &mdash; (`String`) The name of the
+ *                 option group that the instance belongs to.
+ *               * `Status` &mdash; (`String`) The status of the DB
+ *                 Instance's option group membership (e.g. in-sync,
+ *                 pending, pending-maintenance, applying).
+ *           * `CharacterSetName` &mdash; (`String`) If present, specifies
+ *             the name of the character set that this instance is
+ *             associated with.
+ *           * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
+ *             specifies the name of the secondary Availability Zone for a
+ *             DB instance with multi-AZ support.
+ *           * `PubliclyAccessible` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -580,145 +584,148 @@ AWS.RDS = inherit({})
  *         invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
  *         response element in the DescribeDBInstances action.
- *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
- *           user-supplied database identifier. This is the unique key that
- *           identifies a DB Instance.
- *         * `DBInstanceClass` &mdash; (`String`) Contains the name of the
- *           compute and memory capacity class of the DB Instance.
- *         * `Engine` &mdash; (`String`) Provides the name of the database
- *           engine to be used for this DB Instance.
- *         * `DBInstanceStatus` &mdash; (`String`) Specifies the current
- *           state of this database.
- *         * `MasterUsername` &mdash; (`String`) Contains the master
- *           username for the DB Instance.
- *         * `DBName` &mdash; (`String`) The meaning of this parameter
- *           differs according to the database engine you use. MySQL
- *           Contains the name of the initial database of this instance
- *           that was provided at create time, if one was specified when
- *           the DB Instance was created. This same name is returned for
- *           the life of the DB Instance. Type: String Oracle Contains the
- *           Oracle System ID (SID) of the created DB Instance.
- *         * `Endpoint` &mdash; (`map`) Specifies the connection endpoint.
- *           * `Address` &mdash; (`String`) Specifies the DNS address of
- *             the DB Instance.
- *           * `Port` &mdash; (`Integer`) Specifies the port that the
- *             database engine is listening on.
- *         * `AllocatedStorage` &mdash; (`Integer`) Specifies the allocated
- *           storage size specified in gigabytes.
- *         * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
- *           time the DB Instance was created.
- *         * `PreferredBackupWindow` &mdash; (`String`) Specifies the daily
- *           time range during which automated backups are created if
- *           automated backups are enabled, as determined by the
- *           BackupRetentionPeriod.
- *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
- *           number of days for which automatic DB Snapshots are retained.
- *         * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of DB
- *           Security Group elements containing only DBSecurityGroup.Name
- *           and DBSecurityGroup.Status subelements.
- *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
- *             Security Group.
- *           * `Status` &mdash; (`String`) The status of the DB Security
- *             Group.
- *         * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
- *           VPC security group elements that the DB Instance belongs to.
- *           * `VpcSecurityGroupId` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *         * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
- *           of DB Parameter Groups applied to this DB Instance.
- *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
- *             Parameter Group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
- *           the Availability Zone the DB Instance is located in.
- *         * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
- *           the subnet group associated with the DB instance, including
- *           the name, descrption and subnets in the subnet group.
- *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
- *             the DB Subnet Group.
- *           * `DBSubnetGroupDescription` &mdash; (`String`) Provides the
- *             description of the DB Subnet Group.
- *           * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
- *             Subnet Group.
- *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
- *             of the DB Subnet Group.
- *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
- *             elements.
- *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
- *               identifier of the subnet.
- *             * `SubnetAvailabilityZone` &mdash; (`map`)
- *               * `Name` &mdash; (`String`) The name of the availability
- *                 zone.
- *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
- *                 indicates the availability zone is capable of
- *                 provisioned IOPs.
- *             * `SubnetStatus` &mdash; (`String`) Specifies the status of
- *               the subnet.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
- *           weekly time range (in UTC) during which system maintenance can
- *           occur.
- *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
- *           to the DB Instance are pending. This element is only included
- *           when changes are pending. Specific changes are identified by
- *           subelements.
- *           * `DBInstanceClass` &mdash; (`String`) Contains the new
- *             DBInstanceClass for the DB Instance that will be applied or
- *             is in progress.
- *           * `AllocatedStorage` &mdash; (`Integer`) Contains the new
- *             AllocatedStorage size for the DB Instance that will be
- *             applied or is in progress.
- *           * `MasterUserPassword` &mdash; (`String`) Contains the pending
- *             or in-progress change of the master credentials for the DB
- *             Instance.
- *           * `Port` &mdash; (`Integer`) Specifies the pending port for
- *             the DB Instance.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Contains a
+ *             user-supplied database identifier. This is the unique key
+ *             that identifies a DB Instance.
+ *           * `DBInstanceClass` &mdash; (`String`) Contains the name of
+ *             the compute and memory capacity class of the DB Instance.
+ *           * `Engine` &mdash; (`String`) Provides the name of the
+ *             database engine to be used for this DB Instance.
+ *           * `DBInstanceStatus` &mdash; (`String`) Specifies the current
+ *             state of this database.
+ *           * `MasterUsername` &mdash; (`String`) Contains the master
+ *             username for the DB Instance.
+ *           * `DBName` &mdash; (`String`) The meaning of this parameter
+ *             differs according to the database engine you use. MySQL
+ *             Contains the name of the initial database of this instance
+ *             that was provided at create time, if one was specified when
+ *             the DB Instance was created. This same name is returned for
+ *             the life of the DB Instance. Type: String Oracle Contains
+ *             the Oracle System ID (SID) of the created DB Instance.
+ *           * `Endpoint` &mdash; (`map`) Specifies the connection
+ *             endpoint.
+ *               * `Address` &mdash; (`String`) Specifies the DNS address
+ *                 of the DB Instance.
+ *               * `Port` &mdash; (`Integer`) Specifies the port that the
+ *                 database engine is listening on.
+ *           * `AllocatedStorage` &mdash; (`Integer`) Specifies the
+ *             allocated storage size specified in gigabytes.
+ *           * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
+ *             time the DB Instance was created.
+ *           * `PreferredBackupWindow` &mdash; (`String`) Specifies the
+ *             daily time range during which automated backups are created
+ *             if automated backups are enabled, as determined by the
+ *             BackupRetentionPeriod.
  *           * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
- *             pending number of days for which automated backups are
+ *             number of days for which automatic DB Snapshots are
  *             retained.
- *           * `MultiAZ` &mdash; (`Boolean`) Indicates that the Single-AZ
- *             DB Instance is to change to a Multi-AZ deployment.
+ *           * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of
+ *             DB Security Group elements containing only
+ *             DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *               * `DBSecurityGroupName` &mdash; (`String`) The name of the
+ *                 DB Security Group.
+ *               * `Status` &mdash; (`String`) The status of the DB
+ *                 Security Group.
+ *           * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
+ *             VPC security group elements that the DB Instance belongs to.
+ *               * `VpcSecurityGroupId` &mdash; (`String`)
+ *               * `Status` &mdash; (`String`)
+ *           * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
+ *             of DB Parameter Groups applied to this DB Instance.
+ *               * `DBParameterGroupName` &mdash; (`String`) The name of
+ *                 the DP Parameter Group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *           * `AvailabilityZone` &mdash; (`String`) Specifies the name of
+ *             the Availability Zone the DB Instance is located in.
+ *           * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
+ *             the subnet group associated with the DB instance, including
+ *             the name, descrption and subnets in the subnet group.
+ *               * `DBSubnetGroupName` &mdash; (`String`) Specifies the
+ *                 name of the DB Subnet Group.
+ *               * `DBSubnetGroupDescription` &mdash; (`String`) Provides
+ *                 the description of the DB Subnet Group.
+ *               * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
+ *                 Subnet Group.
+ *               * `SubnetGroupStatus` &mdash; (`String`) Provides the
+ *                 status of the DB Subnet Group.
+ *               * `Subnets` &mdash; (`Array<map>`) Contains a list of
+ *                 Subnet elements.
+ *                   * `SubnetIdentifier` &mdash; (`String`) Specifies the
+ *                     identifier of the subnet.
+ *                   * `SubnetAvailabilityZone` &mdash; (`map`)
+ *                       * `Name` &mdash; (`String`) The name of the
+ *                         availability zone.
+ *                       * `ProvisionedIopsCapable` &mdash; (`Boolean`)
+ *                         True indicates the availability zone is capable
+ *                         of provisioned IOPs.
+ *                   * `SubnetStatus` &mdash; (`String`) Specifies the
+ *                     status of the subnet.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies
+ *             the weekly time range (in UTC) during which system
+ *             maintenance can occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) Specifies that
+ *             changes to the DB Instance are pending. This element is only
+ *             included when changes are pending. Specific changes are
+ *             identified by subelements.
+ *               * `DBInstanceClass` &mdash; (`String`) Contains the new
+ *                 DBInstanceClass for the DB Instance that will be applied
+ *                 or is in progress.
+ *               * `AllocatedStorage` &mdash; (`Integer`) Contains the new
+ *                 AllocatedStorage size for the DB Instance that will be
+ *                 applied or is in progress.
+ *               * `MasterUserPassword` &mdash; (`String`) Contains the
+ *                 pending or in-progress change of the master credentials
+ *                 for the DB Instance.
+ *               * `Port` &mdash; (`Integer`) Specifies the pending port
+ *                 for the DB Instance.
+ *               * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies
+ *                 the pending number of days for which automated backups
+ *                 are retained.
+ *               * `MultiAZ` &mdash; (`Boolean`) Indicates that the
+ *                 Single-AZ DB Instance is to change to a Multi-AZ
+ *                 deployment.
+ *               * `EngineVersion` &mdash; (`String`) Indicates the
+ *                 database engine version.
+ *               * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
+ *                 IOPS value for the DB Instance that will be applied or
+ *                 is being applied.
+ *               * `DBInstanceIdentifier` &mdash; (`String`) Contains the
+ *                 new DBInstanceIdentifier for the DB Instance that will
+ *                 be applied or is in progress.
+ *           * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
+ *             time to which a database can be restored with point-in-time
+ *             restore.
+ *           * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance
+ *             is a Multi-AZ deployment.
  *           * `EngineVersion` &mdash; (`String`) Indicates the database
  *             engine version.
- *           * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
- *             IOPS value for the DB Instance that will be applied or is
- *             being applied.
- *           * `DBInstanceIdentifier` &mdash; (`String`) Contains the new
- *             DBInstanceIdentifier for the DB Instance that will be
- *             applied or is in progress.
- *         * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
- *           time to which a database can be restored with point-in-time
- *           restore.
- *         * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance is
- *           a Multi-AZ deployment.
- *         * `EngineVersion` &mdash; (`String`) Indicates the database
- *           engine version.
- *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
- *           minor version patches are applied automatically.
- *         * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
- *           Contains the identifier of the source DB Instance if this DB
- *           Instance is a Read Replica.
- *         * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
- *           Contains one or more identifiers of the Read Replicas
- *           associated with this DB Instance.
- *         * `LicenseModel` &mdash; (`String`) License model information
- *           for this DB Instance.
- *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
- *           operations per second) value.
- *         * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
- *           list of option group memberships for this DB Instance.
- *           * `OptionGroupName` &mdash; (`String`) The name of the option
- *             group that the instance belongs to.
- *           * `Status` &mdash; (`String`) The status of the DB Instance's
- *             option group membership (e.g. in-sync, pending,
- *             pending-maintenance, applying).
- *         * `CharacterSetName` &mdash; (`String`) If present, specifies
- *           the name of the character set that this instance is associated
- *           with.
- *         * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
- *           specifies the name of the secondary Availability Zone for a DB
- *           instance with multi-AZ support.
- *         * `PubliclyAccessible` &mdash; (`Boolean`)
+ *           * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
+ *             minor version patches are applied automatically.
+ *           * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
+ *             Contains the identifier of the source DB Instance if this DB
+ *             Instance is a Read Replica.
+ *           * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
+ *             Contains one or more identifiers of the Read Replicas
+ *             associated with this DB Instance.
+ *           * `LicenseModel` &mdash; (`String`) License model information
+ *             for this DB Instance.
+ *           * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS
+ *             (I/O operations per second) value.
+ *           * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
+ *             list of option group memberships for this DB Instance.
+ *               * `OptionGroupName` &mdash; (`String`) The name of the
+ *                 option group that the instance belongs to.
+ *               * `Status` &mdash; (`String`) The status of the DB
+ *                 Instance's option group membership (e.g. in-sync,
+ *                 pending, pending-maintenance, applying).
+ *           * `CharacterSetName` &mdash; (`String`) If present, specifies
+ *             the name of the character set that this instance is
+ *             associated with.
+ *           * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
+ *             specifies the name of the secondary Availability Zone for a
+ *             DB instance with multi-AZ support.
+ *           * `PubliclyAccessible` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -753,13 +760,13 @@ AWS.RDS = inherit({})
  *         data type is used as a request parameter in the
  *         DeleteDBParameterGroup action, and as a response element in the
  *         DescribeDBParameterGroups action.
- *         * `DBParameterGroupName` &mdash; (`String`) Provides the name of
- *           the DB Parameter Group.
- *         * `DBParameterGroupFamily` &mdash; (`String`) Provides the name
- *           of the DB Parameter Group Family that this DB Parameter Group
- *           is compatible with.
- *         * `Description` &mdash; (`String`) Provides the
- *           customer-specified description for this DB Parameter Group.
+ *           * `DBParameterGroupName` &mdash; (`String`) Provides the name
+ *             of the DB Parameter Group.
+ *           * `DBParameterGroupFamily` &mdash; (`String`) Provides the
+ *             name of the DB Parameter Group Family that this DB Parameter
+ *             Group is compatible with.
+ *           * `Description` &mdash; (`String`) Provides the
+ *             customer-specified description for this DB Parameter Group.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -789,32 +796,32 @@ AWS.RDS = inherit({})
  *         CreateDBSecurityGroup RevokeDBSecurityGroupIngress This data
  *         type is used as a response element in the
  *         DescribeDBSecurityGroups action.
- *         * `OwnerId` &mdash; (`String`) Provides the AWS ID of the owner
- *           of a specific DB Security Group.
- *         * `DBSecurityGroupName` &mdash; (`String`) Specifies the name of
- *           the DB Security Group.
- *         * `DBSecurityGroupDescription` &mdash; (`String`) Provides the
- *           description of the DB Security Group.
- *         * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
- *           Security Group.
- *         * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list of
- *           EC2SecurityGroup elements.
- *           * `Status` &mdash; (`String`) Provides the status of the EC2
- *             security group. Status can be "authorizing", "authorized",
- *             "revoking", and "revoked".
- *           * `EC2SecurityGroupName` &mdash; (`String`) Specifies the name
- *             of the EC2 Security Group.
- *           * `EC2SecurityGroupId` &mdash; (`String`) Specifies the id of
- *             the EC2 Security Group.
- *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies the
- *             AWS ID of the owner of the EC2 security group specified in
- *             the EC2SecurityGroupName field.
- *         * `IPRanges` &mdash; (`Array<map>`) Contains a list of IPRange
- *           elements.
- *           * `Status` &mdash; (`String`) Specifies the status of the IP
- *             range. Status can be "authorizing", "authorized",
- *             "revoking", and "revoked".
- *           * `CIDRIP` &mdash; (`String`) Specifies the IP range.
+ *           * `OwnerId` &mdash; (`String`) Provides the AWS ID of the
+ *             owner of a specific DB Security Group.
+ *           * `DBSecurityGroupName` &mdash; (`String`) Specifies the name
+ *             of the DB Security Group.
+ *           * `DBSecurityGroupDescription` &mdash; (`String`) Provides the
+ *             description of the DB Security Group.
+ *           * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
+ *             Security Group.
+ *           * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list
+ *             of EC2SecurityGroup elements.
+ *               * `Status` &mdash; (`String`) Provides the status of the
+ *                 EC2 security group. Status can be "authorizing",
+ *                 "authorized", "revoking", and "revoked".
+ *               * `EC2SecurityGroupName` &mdash; (`String`) Specifies the
+ *                 name of the EC2 Security Group.
+ *               * `EC2SecurityGroupId` &mdash; (`String`) Specifies the id
+ *                 of the EC2 Security Group.
+ *               * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies
+ *                 the AWS ID of the owner of the EC2 security group
+ *                 specified in the EC2SecurityGroupName field.
+ *           * `IPRanges` &mdash; (`Array<map>`) Contains a list of IPRange
+ *             elements.
+ *               * `Status` &mdash; (`String`) Specifies the status of the
+ *                 IP range. Status can be "authorizing", "authorized",
+ *                 "revoking", and "revoked".
+ *               * `CIDRIP` &mdash; (`String`) Specifies the IP range.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -847,41 +854,42 @@ AWS.RDS = inherit({})
  *         invocation of the following actions: CreateDBSnapshot
  *         DeleteDBSnapshot This data type is used as a response element in
  *         the DescribeDBSnapshots action.
- *         * `DBSnapshotIdentifier` &mdash; (`String`) Specifies the
- *           identifier for the DB Snapshot.
- *         * `DBInstanceIdentifier` &mdash; (`String`) Specifies the the
- *           DBInstanceIdentifier of the DB Instance this DB Snapshot was
- *           created from.
- *         * `SnapshotCreateTime` &mdash; (`Date`) Provides the time (UTC)
- *           when the snapshot was taken.
- *         * `Engine` &mdash; (`String`) Specifies the name of the database
- *           engine.
- *         * `AllocatedStorage` &mdash; (`Integer`) Specifies the allocated
- *           storage size in gigabytes (GB).
- *         * `Status` &mdash; (`String`) Specifies the status of this DB
- *           Snapshot.
- *         * `Port` &mdash; (`Integer`) Specifies the port that the
- *           database engine was listening on at the time of the snapshot.
- *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
- *           the Availability Zone the DB Instance was located in at the
- *           time of the DB Snapshot.
- *         * `VpcId` &mdash; (`String`) Provides the Vpc Id associated with
- *           the DB Snapshot.
- *         * `InstanceCreateTime` &mdash; (`Date`) Specifies the time (UTC)
- *           when the snapshot was taken.
- *         * `MasterUsername` &mdash; (`String`) Provides the master
- *           username for the DB Snapshot.
- *         * `EngineVersion` &mdash; (`String`) Specifies the version of
- *           the database engine.
- *         * `LicenseModel` &mdash; (`String`) License model information
- *           for the restored DB Instance.
- *         * `SnapshotType` &mdash; (`String`) Provides the type of the DB
- *           Snapshot.
- *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
- *           operations per second) value of the DB Instance at the time of
- *           the snapshot.
- *         * `OptionGroupName` &mdash; (`String`) Provides the option group
- *           name for the DB Snapshot.
+ *           * `DBSnapshotIdentifier` &mdash; (`String`) Specifies the
+ *             identifier for the DB Snapshot.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Specifies the the
+ *             DBInstanceIdentifier of the DB Instance this DB Snapshot was
+ *             created from.
+ *           * `SnapshotCreateTime` &mdash; (`Date`) Provides the time
+ *             (UTC) when the snapshot was taken.
+ *           * `Engine` &mdash; (`String`) Specifies the name of the
+ *             database engine.
+ *           * `AllocatedStorage` &mdash; (`Integer`) Specifies the
+ *             allocated storage size in gigabytes (GB).
+ *           * `Status` &mdash; (`String`) Specifies the status of this DB
+ *             Snapshot.
+ *           * `Port` &mdash; (`Integer`) Specifies the port that the
+ *             database engine was listening on at the time of the
+ *             snapshot.
+ *           * `AvailabilityZone` &mdash; (`String`) Specifies the name of
+ *             the Availability Zone the DB Instance was located in at the
+ *             time of the DB Snapshot.
+ *           * `VpcId` &mdash; (`String`) Provides the Vpc Id associated
+ *             with the DB Snapshot.
+ *           * `InstanceCreateTime` &mdash; (`Date`) Specifies the time
+ *             (UTC) when the snapshot was taken.
+ *           * `MasterUsername` &mdash; (`String`) Provides the master
+ *             username for the DB Snapshot.
+ *           * `EngineVersion` &mdash; (`String`) Specifies the version of
+ *             the database engine.
+ *           * `LicenseModel` &mdash; (`String`) License model information
+ *             for the restored DB Instance.
+ *           * `SnapshotType` &mdash; (`String`) Provides the type of the
+ *             DB Snapshot.
+ *           * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS
+ *             (I/O operations per second) value of the DB Instance at the
+ *             time of the snapshot.
+ *           * `OptionGroupName` &mdash; (`String`) Provides the option
+ *             group name for the DB Snapshot.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -912,26 +920,26 @@ AWS.RDS = inherit({})
  *         CreateDBSubnetGroup ModifyDBSubnetGroup DescribeDBSubnetGroups
  *         DeleteDBSubnetGroup This data type is used as a response element
  *         in the DescribeDBSubnetGroups action.
- *         * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
- *           the DB Subnet Group.
- *         * `DBSubnetGroupDescription` &mdash; (`String`) Provides the
- *           description of the DB Subnet Group.
- *         * `VpcId` &mdash; (`String`) Provides the VpcId of the DB Subnet
- *           Group.
- *         * `SubnetGroupStatus` &mdash; (`String`) Provides the status of
- *           the DB Subnet Group.
- *         * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
- *           elements.
- *           * `SubnetIdentifier` &mdash; (`String`) Specifies the
- *             identifier of the subnet.
- *           * `SubnetAvailabilityZone` &mdash; (`map`)
- *             * `Name` &mdash; (`String`) The name of the availability
- *               zone.
- *             * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
- *               indicates the availability zone is capable of provisioned
- *               IOPs.
- *           * `SubnetStatus` &mdash; (`String`) Specifies the status of
- *             the subnet.
+ *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
+ *             the DB Subnet Group.
+ *           * `DBSubnetGroupDescription` &mdash; (`String`) Provides the
+ *             description of the DB Subnet Group.
+ *           * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
+ *             Subnet Group.
+ *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
+ *             of the DB Subnet Group.
+ *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
+ *             elements.
+ *               * `SubnetIdentifier` &mdash; (`String`) Specifies the
+ *                 identifier of the subnet.
+ *               * `SubnetAvailabilityZone` &mdash; (`map`)
+ *                   * `Name` &mdash; (`String`) The name of the
+ *                     availability zone.
+ *                   * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
+ *                     indicates the availability zone is capable of
+ *                     provisioned IOPs.
+ *               * `SubnetStatus` &mdash; (`String`) Specifies the status
+ *                 of the subnet.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -955,15 +963,15 @@ AWS.RDS = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `EventSubscription` &mdash; (`map`)
- *         * `CustomerAwsId` &mdash; (`String`)
- *         * `CustSubscriptionId` &mdash; (`String`)
- *         * `SnsTopicArn` &mdash; (`String`)
- *         * `Status` &mdash; (`String`)
- *         * `SubscriptionCreationTime` &mdash; (`String`)
- *         * `SourceType` &mdash; (`String`)
- *         * `SourceIdsList` &mdash; (`Array<String>`)
- *         * `EventCategoriesList` &mdash; (`Array<String>`)
- *         * `Enabled` &mdash; (`Boolean`)
+ *           * `CustomerAwsId` &mdash; (`String`)
+ *           * `CustSubscriptionId` &mdash; (`String`)
+ *           * `SnsTopicArn` &mdash; (`String`)
+ *           * `Status` &mdash; (`String`)
+ *           * `SubscriptionCreationTime` &mdash; (`String`)
+ *           * `SourceType` &mdash; (`String`)
+ *           * `SourceIdsList` &mdash; (`Array<String>`)
+ *           * `EventCategoriesList` &mdash; (`Array<String>`)
+ *           * `Enabled` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -994,64 +1002,67 @@ AWS.RDS = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `OptionGroup` &mdash; (`map`)
- *         * `OptionGroupName` &mdash; (`String`) Specifies the name of the
- *           option group.
- *         * `OptionGroupDescription` &mdash; (`String`) Provides the
- *           description of the option group.
- *         * `EngineName` &mdash; (`String`) Engine name that this option
- *           group can be applied to.
- *         * `MajorEngineVersion` &mdash; (`String`) Indicates the major
- *           engine version associated with this option group.
- *         * `Options` &mdash; (`Array<map>`) Indicates what options are
- *           available in the option group.
- *           * `OptionName` &mdash; (`String`) The name of the option.
- *           * `OptionDescription` &mdash; (`String`) The description of
- *             the option.
- *           * `Persistent` &mdash; (`Boolean`) Indicate if this option is
- *             persistent.
- *           * `Port` &mdash; (`Integer`) If required, the port configured
- *             for this option to use.
- *           * `OptionSettings` &mdash; (`Array<map>`) The settings
- *             belonging to this option.
- *             * `Name` &mdash; (`String`) The name of the setting.
- *             * `Value` &mdash; (`String`) The value of this setting.
- *             * `DefaultValue` &mdash; (`String`) Default value for this
- *               setting.
- *             * `Description` &mdash; (`String`) The description of the
- *               setting.
- *             * `ApplyType` &mdash; (`String`) Specifies the apply type
- *               for this setting.
- *             * `DataType` &mdash; (`String`) Specifies the valid data
- *               type of this setting
- *             * `AllowedValues` &mdash; (`String`) Specifies a valid
- *               list/range of values allowed for this setting.
- *             * `IsModifiable` &mdash; (`Boolean`) Indicates if the
- *               setting is modifiable or not.
- *             * `IsCollection` &mdash; (`Boolean`) Indicates if the value
- *               for the setting can be a list of values or a single value.
- *           * `DBSecurityGroupMemberships` &mdash; (`Array<map>`) If the
- *             Option requires access to a port, then this DB Security
- *             Group allows access to the port.
- *             * `DBSecurityGroupName` &mdash; (`String`) The name of the
- *               DB Security Group.
- *             * `Status` &mdash; (`String`) The status of the DB Security
- *               Group.
- *           * `VpcSecurityGroupMemberships` &mdash; (`Array<map>`) If the
- *             Option requires access to a port, then this VPC Security
- *             Group allows access to the port.
- *             * `VpcSecurityGroupId` &mdash; (`String`)
- *             * `Status` &mdash; (`String`)
- *         * `AllowsVpcAndNonVpcInstanceMemberships` &mdash; (`Boolean`)
- *           Indicates whether this option group can be applied to both VPC
- *           and non-VPC instances. The value 'true' indicates the option
- *           group can be applied to both VPC and non-VPC instances.
- *         * `VpcId` &mdash; (`String`) If
- *           AllowsVpcAndNonVpcInstanceMemberships is 'false', this field
- *           is blank. If AllowsVpcAndNonVpcInstanceMemberships is 'true'
- *           and this field is blank, then this option group can be applied
- *           to both VPC and non-VPC instances. If this field contains a
- *           value, then this option group can only be applied to instances
- *           that are in the VPC indicated by this field.
+ *           * `OptionGroupName` &mdash; (`String`) Specifies the name of
+ *             the option group.
+ *           * `OptionGroupDescription` &mdash; (`String`) Provides the
+ *             description of the option group.
+ *           * `EngineName` &mdash; (`String`) Engine name that this option
+ *             group can be applied to.
+ *           * `MajorEngineVersion` &mdash; (`String`) Indicates the major
+ *             engine version associated with this option group.
+ *           * `Options` &mdash; (`Array<map>`) Indicates what options are
+ *             available in the option group.
+ *               * `OptionName` &mdash; (`String`) The name of the option.
+ *               * `OptionDescription` &mdash; (`String`) The description
+ *                 of the option.
+ *               * `Persistent` &mdash; (`Boolean`) Indicate if this option
+ *                 is persistent.
+ *               * `Port` &mdash; (`Integer`) If required, the port
+ *                 configured for this option to use.
+ *               * `OptionSettings` &mdash; (`Array<map>`) The settings
+ *                 belonging to this option.
+ *                   * `Name` &mdash; (`String`) The name of the setting.
+ *                   * `Value` &mdash; (`String`) The value of this
+ *                     setting.
+ *                   * `DefaultValue` &mdash; (`String`) Default value for
+ *                     this setting.
+ *                   * `Description` &mdash; (`String`) The description of
+ *                     the setting.
+ *                   * `ApplyType` &mdash; (`String`) Specifies the apply
+ *                     type for this setting.
+ *                   * `DataType` &mdash; (`String`) Specifies the valid
+ *                     data type of this setting
+ *                   * `AllowedValues` &mdash; (`String`) Specifies a valid
+ *                     list/range of values allowed for this setting.
+ *                   * `IsModifiable` &mdash; (`Boolean`) Indicates if the
+ *                     setting is modifiable or not.
+ *                   * `IsCollection` &mdash; (`Boolean`) Indicates if the
+ *                     value for the setting can be a list of values or a
+ *                     single value.
+ *               * `DBSecurityGroupMemberships` &mdash; (`Array<map>`) If
+ *                 the Option requires access to a port, then this DB
+ *                 Security Group allows access to the port.
+ *                   * `DBSecurityGroupName` &mdash; (`String`) The name of
+ *                     the DB Security Group.
+ *                   * `Status` &mdash; (`String`) The status of the DB
+ *                     Security Group.
+ *               * `VpcSecurityGroupMemberships` &mdash; (`Array<map>`) If
+ *                 the Option requires access to a port, then this VPC
+ *                 Security Group allows access to the port.
+ *                   * `VpcSecurityGroupId` &mdash; (`String`)
+ *                   * `Status` &mdash; (`String`)
+ *           * `AllowsVpcAndNonVpcInstanceMemberships` &mdash; (`Boolean`)
+ *             Indicates whether this option group can be applied to both
+ *             VPC and non-VPC instances. The value 'true' indicates the
+ *             option group can be applied to both VPC and non-VPC
+ *             instances.
+ *           * `VpcId` &mdash; (`String`) If
+ *             AllowsVpcAndNonVpcInstanceMemberships is 'false', this field
+ *             is blank. If AllowsVpcAndNonVpcInstanceMemberships is 'true'
+ *             and this field is blank, then this option group can be
+ *             applied to both VPC and non-VPC instances. If this field
+ *             contains a value, then this option group can only be applied
+ *             to instances that are in the VPC indicated by this field.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1091,145 +1102,148 @@ AWS.RDS = inherit({})
  *         invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
  *         response element in the DescribeDBInstances action.
- *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
- *           user-supplied database identifier. This is the unique key that
- *           identifies a DB Instance.
- *         * `DBInstanceClass` &mdash; (`String`) Contains the name of the
- *           compute and memory capacity class of the DB Instance.
- *         * `Engine` &mdash; (`String`) Provides the name of the database
- *           engine to be used for this DB Instance.
- *         * `DBInstanceStatus` &mdash; (`String`) Specifies the current
- *           state of this database.
- *         * `MasterUsername` &mdash; (`String`) Contains the master
- *           username for the DB Instance.
- *         * `DBName` &mdash; (`String`) The meaning of this parameter
- *           differs according to the database engine you use. MySQL
- *           Contains the name of the initial database of this instance
- *           that was provided at create time, if one was specified when
- *           the DB Instance was created. This same name is returned for
- *           the life of the DB Instance. Type: String Oracle Contains the
- *           Oracle System ID (SID) of the created DB Instance.
- *         * `Endpoint` &mdash; (`map`) Specifies the connection endpoint.
- *           * `Address` &mdash; (`String`) Specifies the DNS address of
- *             the DB Instance.
- *           * `Port` &mdash; (`Integer`) Specifies the port that the
- *             database engine is listening on.
- *         * `AllocatedStorage` &mdash; (`Integer`) Specifies the allocated
- *           storage size specified in gigabytes.
- *         * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
- *           time the DB Instance was created.
- *         * `PreferredBackupWindow` &mdash; (`String`) Specifies the daily
- *           time range during which automated backups are created if
- *           automated backups are enabled, as determined by the
- *           BackupRetentionPeriod.
- *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
- *           number of days for which automatic DB Snapshots are retained.
- *         * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of DB
- *           Security Group elements containing only DBSecurityGroup.Name
- *           and DBSecurityGroup.Status subelements.
- *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
- *             Security Group.
- *           * `Status` &mdash; (`String`) The status of the DB Security
- *             Group.
- *         * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
- *           VPC security group elements that the DB Instance belongs to.
- *           * `VpcSecurityGroupId` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *         * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
- *           of DB Parameter Groups applied to this DB Instance.
- *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
- *             Parameter Group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
- *           the Availability Zone the DB Instance is located in.
- *         * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
- *           the subnet group associated with the DB instance, including
- *           the name, descrption and subnets in the subnet group.
- *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
- *             the DB Subnet Group.
- *           * `DBSubnetGroupDescription` &mdash; (`String`) Provides the
- *             description of the DB Subnet Group.
- *           * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
- *             Subnet Group.
- *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
- *             of the DB Subnet Group.
- *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
- *             elements.
- *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
- *               identifier of the subnet.
- *             * `SubnetAvailabilityZone` &mdash; (`map`)
- *               * `Name` &mdash; (`String`) The name of the availability
- *                 zone.
- *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
- *                 indicates the availability zone is capable of
- *                 provisioned IOPs.
- *             * `SubnetStatus` &mdash; (`String`) Specifies the status of
- *               the subnet.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
- *           weekly time range (in UTC) during which system maintenance can
- *           occur.
- *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
- *           to the DB Instance are pending. This element is only included
- *           when changes are pending. Specific changes are identified by
- *           subelements.
- *           * `DBInstanceClass` &mdash; (`String`) Contains the new
- *             DBInstanceClass for the DB Instance that will be applied or
- *             is in progress.
- *           * `AllocatedStorage` &mdash; (`Integer`) Contains the new
- *             AllocatedStorage size for the DB Instance that will be
- *             applied or is in progress.
- *           * `MasterUserPassword` &mdash; (`String`) Contains the pending
- *             or in-progress change of the master credentials for the DB
- *             Instance.
- *           * `Port` &mdash; (`Integer`) Specifies the pending port for
- *             the DB Instance.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Contains a
+ *             user-supplied database identifier. This is the unique key
+ *             that identifies a DB Instance.
+ *           * `DBInstanceClass` &mdash; (`String`) Contains the name of
+ *             the compute and memory capacity class of the DB Instance.
+ *           * `Engine` &mdash; (`String`) Provides the name of the
+ *             database engine to be used for this DB Instance.
+ *           * `DBInstanceStatus` &mdash; (`String`) Specifies the current
+ *             state of this database.
+ *           * `MasterUsername` &mdash; (`String`) Contains the master
+ *             username for the DB Instance.
+ *           * `DBName` &mdash; (`String`) The meaning of this parameter
+ *             differs according to the database engine you use. MySQL
+ *             Contains the name of the initial database of this instance
+ *             that was provided at create time, if one was specified when
+ *             the DB Instance was created. This same name is returned for
+ *             the life of the DB Instance. Type: String Oracle Contains
+ *             the Oracle System ID (SID) of the created DB Instance.
+ *           * `Endpoint` &mdash; (`map`) Specifies the connection
+ *             endpoint.
+ *               * `Address` &mdash; (`String`) Specifies the DNS address
+ *                 of the DB Instance.
+ *               * `Port` &mdash; (`Integer`) Specifies the port that the
+ *                 database engine is listening on.
+ *           * `AllocatedStorage` &mdash; (`Integer`) Specifies the
+ *             allocated storage size specified in gigabytes.
+ *           * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
+ *             time the DB Instance was created.
+ *           * `PreferredBackupWindow` &mdash; (`String`) Specifies the
+ *             daily time range during which automated backups are created
+ *             if automated backups are enabled, as determined by the
+ *             BackupRetentionPeriod.
  *           * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
- *             pending number of days for which automated backups are
+ *             number of days for which automatic DB Snapshots are
  *             retained.
- *           * `MultiAZ` &mdash; (`Boolean`) Indicates that the Single-AZ
- *             DB Instance is to change to a Multi-AZ deployment.
+ *           * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of
+ *             DB Security Group elements containing only
+ *             DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *               * `DBSecurityGroupName` &mdash; (`String`) The name of the
+ *                 DB Security Group.
+ *               * `Status` &mdash; (`String`) The status of the DB
+ *                 Security Group.
+ *           * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
+ *             VPC security group elements that the DB Instance belongs to.
+ *               * `VpcSecurityGroupId` &mdash; (`String`)
+ *               * `Status` &mdash; (`String`)
+ *           * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
+ *             of DB Parameter Groups applied to this DB Instance.
+ *               * `DBParameterGroupName` &mdash; (`String`) The name of
+ *                 the DP Parameter Group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *           * `AvailabilityZone` &mdash; (`String`) Specifies the name of
+ *             the Availability Zone the DB Instance is located in.
+ *           * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
+ *             the subnet group associated with the DB instance, including
+ *             the name, descrption and subnets in the subnet group.
+ *               * `DBSubnetGroupName` &mdash; (`String`) Specifies the
+ *                 name of the DB Subnet Group.
+ *               * `DBSubnetGroupDescription` &mdash; (`String`) Provides
+ *                 the description of the DB Subnet Group.
+ *               * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
+ *                 Subnet Group.
+ *               * `SubnetGroupStatus` &mdash; (`String`) Provides the
+ *                 status of the DB Subnet Group.
+ *               * `Subnets` &mdash; (`Array<map>`) Contains a list of
+ *                 Subnet elements.
+ *                   * `SubnetIdentifier` &mdash; (`String`) Specifies the
+ *                     identifier of the subnet.
+ *                   * `SubnetAvailabilityZone` &mdash; (`map`)
+ *                       * `Name` &mdash; (`String`) The name of the
+ *                         availability zone.
+ *                       * `ProvisionedIopsCapable` &mdash; (`Boolean`)
+ *                         True indicates the availability zone is capable
+ *                         of provisioned IOPs.
+ *                   * `SubnetStatus` &mdash; (`String`) Specifies the
+ *                     status of the subnet.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies
+ *             the weekly time range (in UTC) during which system
+ *             maintenance can occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) Specifies that
+ *             changes to the DB Instance are pending. This element is only
+ *             included when changes are pending. Specific changes are
+ *             identified by subelements.
+ *               * `DBInstanceClass` &mdash; (`String`) Contains the new
+ *                 DBInstanceClass for the DB Instance that will be applied
+ *                 or is in progress.
+ *               * `AllocatedStorage` &mdash; (`Integer`) Contains the new
+ *                 AllocatedStorage size for the DB Instance that will be
+ *                 applied or is in progress.
+ *               * `MasterUserPassword` &mdash; (`String`) Contains the
+ *                 pending or in-progress change of the master credentials
+ *                 for the DB Instance.
+ *               * `Port` &mdash; (`Integer`) Specifies the pending port
+ *                 for the DB Instance.
+ *               * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies
+ *                 the pending number of days for which automated backups
+ *                 are retained.
+ *               * `MultiAZ` &mdash; (`Boolean`) Indicates that the
+ *                 Single-AZ DB Instance is to change to a Multi-AZ
+ *                 deployment.
+ *               * `EngineVersion` &mdash; (`String`) Indicates the
+ *                 database engine version.
+ *               * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
+ *                 IOPS value for the DB Instance that will be applied or
+ *                 is being applied.
+ *               * `DBInstanceIdentifier` &mdash; (`String`) Contains the
+ *                 new DBInstanceIdentifier for the DB Instance that will
+ *                 be applied or is in progress.
+ *           * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
+ *             time to which a database can be restored with point-in-time
+ *             restore.
+ *           * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance
+ *             is a Multi-AZ deployment.
  *           * `EngineVersion` &mdash; (`String`) Indicates the database
  *             engine version.
- *           * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
- *             IOPS value for the DB Instance that will be applied or is
- *             being applied.
- *           * `DBInstanceIdentifier` &mdash; (`String`) Contains the new
- *             DBInstanceIdentifier for the DB Instance that will be
- *             applied or is in progress.
- *         * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
- *           time to which a database can be restored with point-in-time
- *           restore.
- *         * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance is
- *           a Multi-AZ deployment.
- *         * `EngineVersion` &mdash; (`String`) Indicates the database
- *           engine version.
- *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
- *           minor version patches are applied automatically.
- *         * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
- *           Contains the identifier of the source DB Instance if this DB
- *           Instance is a Read Replica.
- *         * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
- *           Contains one or more identifiers of the Read Replicas
- *           associated with this DB Instance.
- *         * `LicenseModel` &mdash; (`String`) License model information
- *           for this DB Instance.
- *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
- *           operations per second) value.
- *         * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
- *           list of option group memberships for this DB Instance.
- *           * `OptionGroupName` &mdash; (`String`) The name of the option
- *             group that the instance belongs to.
- *           * `Status` &mdash; (`String`) The status of the DB Instance's
- *             option group membership (e.g. in-sync, pending,
- *             pending-maintenance, applying).
- *         * `CharacterSetName` &mdash; (`String`) If present, specifies
- *           the name of the character set that this instance is associated
- *           with.
- *         * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
- *           specifies the name of the secondary Availability Zone for a DB
- *           instance with multi-AZ support.
- *         * `PubliclyAccessible` &mdash; (`Boolean`)
+ *           * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
+ *             minor version patches are applied automatically.
+ *           * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
+ *             Contains the identifier of the source DB Instance if this DB
+ *             Instance is a Read Replica.
+ *           * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
+ *             Contains one or more identifiers of the Read Replicas
+ *             associated with this DB Instance.
+ *           * `LicenseModel` &mdash; (`String`) License model information
+ *             for this DB Instance.
+ *           * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS
+ *             (I/O operations per second) value.
+ *           * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
+ *             list of option group memberships for this DB Instance.
+ *               * `OptionGroupName` &mdash; (`String`) The name of the
+ *                 option group that the instance belongs to.
+ *               * `Status` &mdash; (`String`) The status of the DB
+ *                 Instance's option group membership (e.g. in-sync,
+ *                 pending, pending-maintenance, applying).
+ *           * `CharacterSetName` &mdash; (`String`) If present, specifies
+ *             the name of the character set that this instance is
+ *             associated with.
+ *           * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
+ *             specifies the name of the secondary Availability Zone for a
+ *             DB instance with multi-AZ support.
+ *           * `PubliclyAccessible` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1291,41 +1305,42 @@ AWS.RDS = inherit({})
  *         invocation of the following actions: CreateDBSnapshot
  *         DeleteDBSnapshot This data type is used as a response element in
  *         the DescribeDBSnapshots action.
- *         * `DBSnapshotIdentifier` &mdash; (`String`) Specifies the
- *           identifier for the DB Snapshot.
- *         * `DBInstanceIdentifier` &mdash; (`String`) Specifies the the
- *           DBInstanceIdentifier of the DB Instance this DB Snapshot was
- *           created from.
- *         * `SnapshotCreateTime` &mdash; (`Date`) Provides the time (UTC)
- *           when the snapshot was taken.
- *         * `Engine` &mdash; (`String`) Specifies the name of the database
- *           engine.
- *         * `AllocatedStorage` &mdash; (`Integer`) Specifies the allocated
- *           storage size in gigabytes (GB).
- *         * `Status` &mdash; (`String`) Specifies the status of this DB
- *           Snapshot.
- *         * `Port` &mdash; (`Integer`) Specifies the port that the
- *           database engine was listening on at the time of the snapshot.
- *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
- *           the Availability Zone the DB Instance was located in at the
- *           time of the DB Snapshot.
- *         * `VpcId` &mdash; (`String`) Provides the Vpc Id associated with
- *           the DB Snapshot.
- *         * `InstanceCreateTime` &mdash; (`Date`) Specifies the time (UTC)
- *           when the snapshot was taken.
- *         * `MasterUsername` &mdash; (`String`) Provides the master
- *           username for the DB Snapshot.
- *         * `EngineVersion` &mdash; (`String`) Specifies the version of
- *           the database engine.
- *         * `LicenseModel` &mdash; (`String`) License model information
- *           for the restored DB Instance.
- *         * `SnapshotType` &mdash; (`String`) Provides the type of the DB
- *           Snapshot.
- *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
- *           operations per second) value of the DB Instance at the time of
- *           the snapshot.
- *         * `OptionGroupName` &mdash; (`String`) Provides the option group
- *           name for the DB Snapshot.
+ *           * `DBSnapshotIdentifier` &mdash; (`String`) Specifies the
+ *             identifier for the DB Snapshot.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Specifies the the
+ *             DBInstanceIdentifier of the DB Instance this DB Snapshot was
+ *             created from.
+ *           * `SnapshotCreateTime` &mdash; (`Date`) Provides the time
+ *             (UTC) when the snapshot was taken.
+ *           * `Engine` &mdash; (`String`) Specifies the name of the
+ *             database engine.
+ *           * `AllocatedStorage` &mdash; (`Integer`) Specifies the
+ *             allocated storage size in gigabytes (GB).
+ *           * `Status` &mdash; (`String`) Specifies the status of this DB
+ *             Snapshot.
+ *           * `Port` &mdash; (`Integer`) Specifies the port that the
+ *             database engine was listening on at the time of the
+ *             snapshot.
+ *           * `AvailabilityZone` &mdash; (`String`) Specifies the name of
+ *             the Availability Zone the DB Instance was located in at the
+ *             time of the DB Snapshot.
+ *           * `VpcId` &mdash; (`String`) Provides the Vpc Id associated
+ *             with the DB Snapshot.
+ *           * `InstanceCreateTime` &mdash; (`Date`) Specifies the time
+ *             (UTC) when the snapshot was taken.
+ *           * `MasterUsername` &mdash; (`String`) Provides the master
+ *             username for the DB Snapshot.
+ *           * `EngineVersion` &mdash; (`String`) Specifies the version of
+ *             the database engine.
+ *           * `LicenseModel` &mdash; (`String`) License model information
+ *             for the restored DB Instance.
+ *           * `SnapshotType` &mdash; (`String`) Provides the type of the
+ *             DB Snapshot.
+ *           * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS
+ *             (I/O operations per second) value of the DB Instance at the
+ *             time of the snapshot.
+ *           * `OptionGroupName` &mdash; (`String`) Provides the option
+ *             group name for the DB Snapshot.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1363,15 +1378,15 @@ AWS.RDS = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `EventSubscription` &mdash; (`map`)
- *         * `CustomerAwsId` &mdash; (`String`)
- *         * `CustSubscriptionId` &mdash; (`String`)
- *         * `SnsTopicArn` &mdash; (`String`)
- *         * `Status` &mdash; (`String`)
- *         * `SubscriptionCreationTime` &mdash; (`String`)
- *         * `SourceType` &mdash; (`String`)
- *         * `SourceIdsList` &mdash; (`Array<String>`)
- *         * `EventCategoriesList` &mdash; (`Array<String>`)
- *         * `Enabled` &mdash; (`Boolean`)
+ *           * `CustomerAwsId` &mdash; (`String`)
+ *           * `CustSubscriptionId` &mdash; (`String`)
+ *           * `SnsTopicArn` &mdash; (`String`)
+ *           * `Status` &mdash; (`String`)
+ *           * `SubscriptionCreationTime` &mdash; (`String`)
+ *           * `SourceType` &mdash; (`String`)
+ *           * `SourceIdsList` &mdash; (`Array<String>`)
+ *           * `EventCategoriesList` &mdash; (`Array<String>`)
+ *           * `Enabled` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1436,30 +1451,30 @@ AWS.RDS = inherit({})
  *         value specified by MaxRecords.
  *       * `DBEngineVersions` &mdash; (`Array<map>`) A list of
  *         DBEngineVersion elements.
- *         * `Engine` &mdash; (`String`) The name of the database engine.
- *         * `EngineVersion` &mdash; (`String`) The version number of the
- *           database engine.
- *         * `DBParameterGroupFamily` &mdash; (`String`) The name of the
- *           DBParameterGroupFamily for the database engine.
- *         * `DBEngineDescription` &mdash; (`String`) The description of
- *           the database engine.
- *         * `DBEngineVersionDescription` &mdash; (`String`) The
- *           description of the database engine version.
- *         * `DefaultCharacterSet` &mdash; (`map`) The default character
- *           set for new instances of this engine version, if the
- *           CharacterSetName parameter of the CreateDBInstance API is not
- *           specified.
- *           * `CharacterSetName` &mdash; (`String`) The name of the
- *             character set.
- *           * `CharacterSetDescription` &mdash; (`String`) The description
- *             of the character set.
- *         * `SupportedCharacterSets` &mdash; (`Array<map>`) A list of the
- *           character sets supported by this engine for the
- *           CharacterSetName parameter of the CreateDBInstance API.
- *           * `CharacterSetName` &mdash; (`String`) The name of the
- *             character set.
- *           * `CharacterSetDescription` &mdash; (`String`) The description
- *             of the character set.
+ *           * `Engine` &mdash; (`String`) The name of the database engine.
+ *           * `EngineVersion` &mdash; (`String`) The version number of the
+ *             database engine.
+ *           * `DBParameterGroupFamily` &mdash; (`String`) The name of the
+ *             DBParameterGroupFamily for the database engine.
+ *           * `DBEngineDescription` &mdash; (`String`) The description of
+ *             the database engine.
+ *           * `DBEngineVersionDescription` &mdash; (`String`) The
+ *             description of the database engine version.
+ *           * `DefaultCharacterSet` &mdash; (`map`) The default character
+ *             set for new instances of this engine version, if the
+ *             CharacterSetName parameter of the CreateDBInstance API is
+ *             not specified.
+ *               * `CharacterSetName` &mdash; (`String`) The name of the
+ *                 character set.
+ *               * `CharacterSetDescription` &mdash; (`String`) The
+ *                 description of the character set.
+ *           * `SupportedCharacterSets` &mdash; (`Array<map>`) A list of
+ *             the character sets supported by this engine for the
+ *             CharacterSetName parameter of the CreateDBInstance API.
+ *               * `CharacterSetName` &mdash; (`String`) The name of the
+ *                 character set.
+ *               * `CharacterSetDescription` &mdash; (`String`) The
+ *                 description of the character set.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1498,145 +1513,148 @@ AWS.RDS = inherit({})
  *         value specified by MaxRecords .
  *       * `DBInstances` &mdash; (`Array<map>`) A list of DBInstance
  *         instances.
- *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
- *           user-supplied database identifier. This is the unique key that
- *           identifies a DB Instance.
- *         * `DBInstanceClass` &mdash; (`String`) Contains the name of the
- *           compute and memory capacity class of the DB Instance.
- *         * `Engine` &mdash; (`String`) Provides the name of the database
- *           engine to be used for this DB Instance.
- *         * `DBInstanceStatus` &mdash; (`String`) Specifies the current
- *           state of this database.
- *         * `MasterUsername` &mdash; (`String`) Contains the master
- *           username for the DB Instance.
- *         * `DBName` &mdash; (`String`) The meaning of this parameter
- *           differs according to the database engine you use. MySQL
- *           Contains the name of the initial database of this instance
- *           that was provided at create time, if one was specified when
- *           the DB Instance was created. This same name is returned for
- *           the life of the DB Instance. Type: String Oracle Contains the
- *           Oracle System ID (SID) of the created DB Instance.
- *         * `Endpoint` &mdash; (`map`) Specifies the connection endpoint.
- *           * `Address` &mdash; (`String`) Specifies the DNS address of
- *             the DB Instance.
- *           * `Port` &mdash; (`Integer`) Specifies the port that the
- *             database engine is listening on.
- *         * `AllocatedStorage` &mdash; (`Integer`) Specifies the allocated
- *           storage size specified in gigabytes.
- *         * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
- *           time the DB Instance was created.
- *         * `PreferredBackupWindow` &mdash; (`String`) Specifies the daily
- *           time range during which automated backups are created if
- *           automated backups are enabled, as determined by the
- *           BackupRetentionPeriod.
- *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
- *           number of days for which automatic DB Snapshots are retained.
- *         * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of DB
- *           Security Group elements containing only DBSecurityGroup.Name
- *           and DBSecurityGroup.Status subelements.
- *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
- *             Security Group.
- *           * `Status` &mdash; (`String`) The status of the DB Security
- *             Group.
- *         * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
- *           VPC security group elements that the DB Instance belongs to.
- *           * `VpcSecurityGroupId` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *         * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
- *           of DB Parameter Groups applied to this DB Instance.
- *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
- *             Parameter Group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
- *           the Availability Zone the DB Instance is located in.
- *         * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
- *           the subnet group associated with the DB instance, including
- *           the name, descrption and subnets in the subnet group.
- *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
- *             the DB Subnet Group.
- *           * `DBSubnetGroupDescription` &mdash; (`String`) Provides the
- *             description of the DB Subnet Group.
- *           * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
- *             Subnet Group.
- *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
- *             of the DB Subnet Group.
- *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
- *             elements.
- *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
- *               identifier of the subnet.
- *             * `SubnetAvailabilityZone` &mdash; (`map`)
- *               * `Name` &mdash; (`String`) The name of the availability
- *                 zone.
- *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
- *                 indicates the availability zone is capable of
- *                 provisioned IOPs.
- *             * `SubnetStatus` &mdash; (`String`) Specifies the status of
- *               the subnet.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
- *           weekly time range (in UTC) during which system maintenance can
- *           occur.
- *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
- *           to the DB Instance are pending. This element is only included
- *           when changes are pending. Specific changes are identified by
- *           subelements.
- *           * `DBInstanceClass` &mdash; (`String`) Contains the new
- *             DBInstanceClass for the DB Instance that will be applied or
- *             is in progress.
- *           * `AllocatedStorage` &mdash; (`Integer`) Contains the new
- *             AllocatedStorage size for the DB Instance that will be
- *             applied or is in progress.
- *           * `MasterUserPassword` &mdash; (`String`) Contains the pending
- *             or in-progress change of the master credentials for the DB
- *             Instance.
- *           * `Port` &mdash; (`Integer`) Specifies the pending port for
- *             the DB Instance.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Contains a
+ *             user-supplied database identifier. This is the unique key
+ *             that identifies a DB Instance.
+ *           * `DBInstanceClass` &mdash; (`String`) Contains the name of
+ *             the compute and memory capacity class of the DB Instance.
+ *           * `Engine` &mdash; (`String`) Provides the name of the
+ *             database engine to be used for this DB Instance.
+ *           * `DBInstanceStatus` &mdash; (`String`) Specifies the current
+ *             state of this database.
+ *           * `MasterUsername` &mdash; (`String`) Contains the master
+ *             username for the DB Instance.
+ *           * `DBName` &mdash; (`String`) The meaning of this parameter
+ *             differs according to the database engine you use. MySQL
+ *             Contains the name of the initial database of this instance
+ *             that was provided at create time, if one was specified when
+ *             the DB Instance was created. This same name is returned for
+ *             the life of the DB Instance. Type: String Oracle Contains
+ *             the Oracle System ID (SID) of the created DB Instance.
+ *           * `Endpoint` &mdash; (`map`) Specifies the connection
+ *             endpoint.
+ *               * `Address` &mdash; (`String`) Specifies the DNS address
+ *                 of the DB Instance.
+ *               * `Port` &mdash; (`Integer`) Specifies the port that the
+ *                 database engine is listening on.
+ *           * `AllocatedStorage` &mdash; (`Integer`) Specifies the
+ *             allocated storage size specified in gigabytes.
+ *           * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
+ *             time the DB Instance was created.
+ *           * `PreferredBackupWindow` &mdash; (`String`) Specifies the
+ *             daily time range during which automated backups are created
+ *             if automated backups are enabled, as determined by the
+ *             BackupRetentionPeriod.
  *           * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
- *             pending number of days for which automated backups are
+ *             number of days for which automatic DB Snapshots are
  *             retained.
- *           * `MultiAZ` &mdash; (`Boolean`) Indicates that the Single-AZ
- *             DB Instance is to change to a Multi-AZ deployment.
+ *           * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of
+ *             DB Security Group elements containing only
+ *             DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *               * `DBSecurityGroupName` &mdash; (`String`) The name of the
+ *                 DB Security Group.
+ *               * `Status` &mdash; (`String`) The status of the DB
+ *                 Security Group.
+ *           * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
+ *             VPC security group elements that the DB Instance belongs to.
+ *               * `VpcSecurityGroupId` &mdash; (`String`)
+ *               * `Status` &mdash; (`String`)
+ *           * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
+ *             of DB Parameter Groups applied to this DB Instance.
+ *               * `DBParameterGroupName` &mdash; (`String`) The name of
+ *                 the DP Parameter Group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *           * `AvailabilityZone` &mdash; (`String`) Specifies the name of
+ *             the Availability Zone the DB Instance is located in.
+ *           * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
+ *             the subnet group associated with the DB instance, including
+ *             the name, descrption and subnets in the subnet group.
+ *               * `DBSubnetGroupName` &mdash; (`String`) Specifies the
+ *                 name of the DB Subnet Group.
+ *               * `DBSubnetGroupDescription` &mdash; (`String`) Provides
+ *                 the description of the DB Subnet Group.
+ *               * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
+ *                 Subnet Group.
+ *               * `SubnetGroupStatus` &mdash; (`String`) Provides the
+ *                 status of the DB Subnet Group.
+ *               * `Subnets` &mdash; (`Array<map>`) Contains a list of
+ *                 Subnet elements.
+ *                   * `SubnetIdentifier` &mdash; (`String`) Specifies the
+ *                     identifier of the subnet.
+ *                   * `SubnetAvailabilityZone` &mdash; (`map`)
+ *                       * `Name` &mdash; (`String`) The name of the
+ *                         availability zone.
+ *                       * `ProvisionedIopsCapable` &mdash; (`Boolean`)
+ *                         True indicates the availability zone is capable
+ *                         of provisioned IOPs.
+ *                   * `SubnetStatus` &mdash; (`String`) Specifies the
+ *                     status of the subnet.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies
+ *             the weekly time range (in UTC) during which system
+ *             maintenance can occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) Specifies that
+ *             changes to the DB Instance are pending. This element is only
+ *             included when changes are pending. Specific changes are
+ *             identified by subelements.
+ *               * `DBInstanceClass` &mdash; (`String`) Contains the new
+ *                 DBInstanceClass for the DB Instance that will be applied
+ *                 or is in progress.
+ *               * `AllocatedStorage` &mdash; (`Integer`) Contains the new
+ *                 AllocatedStorage size for the DB Instance that will be
+ *                 applied or is in progress.
+ *               * `MasterUserPassword` &mdash; (`String`) Contains the
+ *                 pending or in-progress change of the master credentials
+ *                 for the DB Instance.
+ *               * `Port` &mdash; (`Integer`) Specifies the pending port
+ *                 for the DB Instance.
+ *               * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies
+ *                 the pending number of days for which automated backups
+ *                 are retained.
+ *               * `MultiAZ` &mdash; (`Boolean`) Indicates that the
+ *                 Single-AZ DB Instance is to change to a Multi-AZ
+ *                 deployment.
+ *               * `EngineVersion` &mdash; (`String`) Indicates the
+ *                 database engine version.
+ *               * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
+ *                 IOPS value for the DB Instance that will be applied or
+ *                 is being applied.
+ *               * `DBInstanceIdentifier` &mdash; (`String`) Contains the
+ *                 new DBInstanceIdentifier for the DB Instance that will
+ *                 be applied or is in progress.
+ *           * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
+ *             time to which a database can be restored with point-in-time
+ *             restore.
+ *           * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance
+ *             is a Multi-AZ deployment.
  *           * `EngineVersion` &mdash; (`String`) Indicates the database
  *             engine version.
- *           * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
- *             IOPS value for the DB Instance that will be applied or is
- *             being applied.
- *           * `DBInstanceIdentifier` &mdash; (`String`) Contains the new
- *             DBInstanceIdentifier for the DB Instance that will be
- *             applied or is in progress.
- *         * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
- *           time to which a database can be restored with point-in-time
- *           restore.
- *         * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance is
- *           a Multi-AZ deployment.
- *         * `EngineVersion` &mdash; (`String`) Indicates the database
- *           engine version.
- *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
- *           minor version patches are applied automatically.
- *         * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
- *           Contains the identifier of the source DB Instance if this DB
- *           Instance is a Read Replica.
- *         * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
- *           Contains one or more identifiers of the Read Replicas
- *           associated with this DB Instance.
- *         * `LicenseModel` &mdash; (`String`) License model information
- *           for this DB Instance.
- *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
- *           operations per second) value.
- *         * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
- *           list of option group memberships for this DB Instance.
- *           * `OptionGroupName` &mdash; (`String`) The name of the option
- *             group that the instance belongs to.
- *           * `Status` &mdash; (`String`) The status of the DB Instance's
- *             option group membership (e.g. in-sync, pending,
- *             pending-maintenance, applying).
- *         * `CharacterSetName` &mdash; (`String`) If present, specifies
- *           the name of the character set that this instance is associated
- *           with.
- *         * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
- *           specifies the name of the secondary Availability Zone for a DB
- *           instance with multi-AZ support.
- *         * `PubliclyAccessible` &mdash; (`Boolean`)
+ *           * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
+ *             minor version patches are applied automatically.
+ *           * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
+ *             Contains the identifier of the source DB Instance if this DB
+ *             Instance is a Read Replica.
+ *           * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
+ *             Contains one or more identifiers of the Read Replicas
+ *             associated with this DB Instance.
+ *           * `LicenseModel` &mdash; (`String`) License model information
+ *             for this DB Instance.
+ *           * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS
+ *             (I/O operations per second) value.
+ *           * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
+ *             list of option group memberships for this DB Instance.
+ *               * `OptionGroupName` &mdash; (`String`) The name of the
+ *                 option group that the instance belongs to.
+ *               * `Status` &mdash; (`String`) The status of the DB
+ *                 Instance's option group membership (e.g. in-sync,
+ *                 pending, pending-maintenance, applying).
+ *           * `CharacterSetName` &mdash; (`String`) If present, specifies
+ *             the name of the character set that this instance is
+ *             associated with.
+ *           * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
+ *             specifies the name of the secondary Availability Zone for a
+ *             DB instance with multi-AZ support.
+ *           * `PubliclyAccessible` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1673,12 +1691,12 @@ AWS.RDS = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `DescribeDBLogFiles` &mdash; (`Array<map>`)
- *         * `LogFileName` &mdash; (`String`) The name of the log file for
- *           the specified DB instance.
- *         * `LastWritten` &mdash; (`Integer`) The date and time that the
- *           last log entry was written.
- *         * `Size` &mdash; (`Integer`) The size, in bytes, of the log file
- *           for the specified DB instance.
+ *           * `LogFileName` &mdash; (`String`) The name of the log file
+ *             for the specified DB instance.
+ *           * `LastWritten` &mdash; (`Integer`) The date and time that the
+ *             last log entry was written.
+ *           * `Size` &mdash; (`Integer`) The size, in bytes, of the log
+ *             file for the specified DB instance.
  *       * `Marker` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -1715,13 +1733,13 @@ AWS.RDS = inherit({})
  *         value specified by MaxRecords.
  *       * `DBParameterGroups` &mdash; (`Array<map>`) A list of
  *         DBParameterGroup instances.
- *         * `DBParameterGroupName` &mdash; (`String`) Provides the name of
- *           the DB Parameter Group.
- *         * `DBParameterGroupFamily` &mdash; (`String`) Provides the name
- *           of the DB Parameter Group Family that this DB Parameter Group
- *           is compatible with.
- *         * `Description` &mdash; (`String`) Provides the
- *           customer-specified description for this DB Parameter Group.
+ *           * `DBParameterGroupName` &mdash; (`String`) Provides the name
+ *             of the DB Parameter Group.
+ *           * `DBParameterGroupFamily` &mdash; (`String`) Provides the
+ *             name of the DB Parameter Group Family that this DB Parameter
+ *             Group is compatible with.
+ *           * `Description` &mdash; (`String`) Provides the
+ *             customer-specified description for this DB Parameter Group.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1757,31 +1775,31 @@ AWS.RDS = inherit({})
  *
  *       * `Parameters` &mdash; (`Array<map>`) A list of Parameter
  *         instances.
- *         * `ParameterName` &mdash; (`String`) Specifies the name of the
- *           parameter.
- *         * `ParameterValue` &mdash; (`String`) Specifies the value of the
- *           parameter.
- *         * `Description` &mdash; (`String`) Provides a description of the
- *           parameter.
- *         * `Source` &mdash; (`String`) Indicates the source of the
- *           parameter value.
- *         * `ApplyType` &mdash; (`String`) Specifies the engine specific
- *           parameters type.
- *         * `DataType` &mdash; (`String`) Specifies the valid data type
- *           for the parameter.
- *         * `AllowedValues` &mdash; (`String`) Specifies the valid range
- *           of values for the parameter.
- *         * `IsModifiable` &mdash; (`Boolean`) Indicates whether (true) or
- *           not (false) the parameter can be modified. Some parameters
- *           have security or operational implications that prevent them
- *           from being changed.
- *         * `MinimumEngineVersion` &mdash; (`String`) The earliest engine
- *           version to which the parameter can apply.
- *         * `ApplyMethod` &mdash; (`String`) Indicates when to apply
- *           parameter updates.
- *           Possible values include:
- *           * `immediate`
- *           * `pending-reboot`
+ *           * `ParameterName` &mdash; (`String`) Specifies the name of the
+ *             parameter.
+ *           * `ParameterValue` &mdash; (`String`) Specifies the value of
+ *             the parameter.
+ *           * `Description` &mdash; (`String`) Provides a description of
+ *             the parameter.
+ *           * `Source` &mdash; (`String`) Indicates the source of the
+ *             parameter value.
+ *           * `ApplyType` &mdash; (`String`) Specifies the engine specific
+ *             parameters type.
+ *           * `DataType` &mdash; (`String`) Specifies the valid data type
+ *             for the parameter.
+ *           * `AllowedValues` &mdash; (`String`) Specifies the valid range
+ *             of values for the parameter.
+ *           * `IsModifiable` &mdash; (`Boolean`) Indicates whether (true)
+ *             or not (false) the parameter can be modified. Some
+ *             parameters have security or operational implications that
+ *             prevent them from being changed.
+ *           * `MinimumEngineVersion` &mdash; (`String`) The earliest
+ *             engine version to which the parameter can apply.
+ *           * `ApplyMethod` &mdash; (`String`) Indicates when to apply
+ *             parameter updates.
+ *             Possible values include:
+ *             * `immediate`
+ *             * `pending-reboot`
  *       * `Marker` &mdash; (`String`) An optional pagination token
  *         provided by a previous request. If this parameter is specified,
  *         the response includes only records beyond the marker, up to the
@@ -1819,32 +1837,32 @@ AWS.RDS = inherit({})
  *         value specified by MaxRecords.
  *       * `DBSecurityGroups` &mdash; (`Array<map>`) A list of
  *         DBSecurityGroup instances.
- *         * `OwnerId` &mdash; (`String`) Provides the AWS ID of the owner
- *           of a specific DB Security Group.
- *         * `DBSecurityGroupName` &mdash; (`String`) Specifies the name of
- *           the DB Security Group.
- *         * `DBSecurityGroupDescription` &mdash; (`String`) Provides the
- *           description of the DB Security Group.
- *         * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
- *           Security Group.
- *         * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list of
- *           EC2SecurityGroup elements.
- *           * `Status` &mdash; (`String`) Provides the status of the EC2
- *             security group. Status can be "authorizing", "authorized",
- *             "revoking", and "revoked".
- *           * `EC2SecurityGroupName` &mdash; (`String`) Specifies the name
- *             of the EC2 Security Group.
- *           * `EC2SecurityGroupId` &mdash; (`String`) Specifies the id of
- *             the EC2 Security Group.
- *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies the
- *             AWS ID of the owner of the EC2 security group specified in
- *             the EC2SecurityGroupName field.
- *         * `IPRanges` &mdash; (`Array<map>`) Contains a list of IPRange
- *           elements.
- *           * `Status` &mdash; (`String`) Specifies the status of the IP
- *             range. Status can be "authorizing", "authorized",
- *             "revoking", and "revoked".
- *           * `CIDRIP` &mdash; (`String`) Specifies the IP range.
+ *           * `OwnerId` &mdash; (`String`) Provides the AWS ID of the
+ *             owner of a specific DB Security Group.
+ *           * `DBSecurityGroupName` &mdash; (`String`) Specifies the name
+ *             of the DB Security Group.
+ *           * `DBSecurityGroupDescription` &mdash; (`String`) Provides the
+ *             description of the DB Security Group.
+ *           * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
+ *             Security Group.
+ *           * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list
+ *             of EC2SecurityGroup elements.
+ *               * `Status` &mdash; (`String`) Provides the status of the
+ *                 EC2 security group. Status can be "authorizing",
+ *                 "authorized", "revoking", and "revoked".
+ *               * `EC2SecurityGroupName` &mdash; (`String`) Specifies the
+ *                 name of the EC2 Security Group.
+ *               * `EC2SecurityGroupId` &mdash; (`String`) Specifies the id
+ *                 of the EC2 Security Group.
+ *               * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies
+ *                 the AWS ID of the owner of the EC2 security group
+ *                 specified in the EC2SecurityGroupName field.
+ *           * `IPRanges` &mdash; (`Array<map>`) Contains a list of IPRange
+ *             elements.
+ *               * `Status` &mdash; (`String`) Specifies the status of the
+ *                 IP range. Status can be "authorizing", "authorized",
+ *                 "revoking", and "revoked".
+ *               * `CIDRIP` &mdash; (`String`) Specifies the IP range.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1894,41 +1912,42 @@ AWS.RDS = inherit({})
  *         value specified by MaxRecords.
  *       * `DBSnapshots` &mdash; (`Array<map>`) A list of DBSnapshot
  *         instances.
- *         * `DBSnapshotIdentifier` &mdash; (`String`) Specifies the
- *           identifier for the DB Snapshot.
- *         * `DBInstanceIdentifier` &mdash; (`String`) Specifies the the
- *           DBInstanceIdentifier of the DB Instance this DB Snapshot was
- *           created from.
- *         * `SnapshotCreateTime` &mdash; (`Date`) Provides the time (UTC)
- *           when the snapshot was taken.
- *         * `Engine` &mdash; (`String`) Specifies the name of the database
- *           engine.
- *         * `AllocatedStorage` &mdash; (`Integer`) Specifies the allocated
- *           storage size in gigabytes (GB).
- *         * `Status` &mdash; (`String`) Specifies the status of this DB
- *           Snapshot.
- *         * `Port` &mdash; (`Integer`) Specifies the port that the
- *           database engine was listening on at the time of the snapshot.
- *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
- *           the Availability Zone the DB Instance was located in at the
- *           time of the DB Snapshot.
- *         * `VpcId` &mdash; (`String`) Provides the Vpc Id associated with
- *           the DB Snapshot.
- *         * `InstanceCreateTime` &mdash; (`Date`) Specifies the time (UTC)
- *           when the snapshot was taken.
- *         * `MasterUsername` &mdash; (`String`) Provides the master
- *           username for the DB Snapshot.
- *         * `EngineVersion` &mdash; (`String`) Specifies the version of
- *           the database engine.
- *         * `LicenseModel` &mdash; (`String`) License model information
- *           for the restored DB Instance.
- *         * `SnapshotType` &mdash; (`String`) Provides the type of the DB
- *           Snapshot.
- *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
- *           operations per second) value of the DB Instance at the time of
- *           the snapshot.
- *         * `OptionGroupName` &mdash; (`String`) Provides the option group
- *           name for the DB Snapshot.
+ *           * `DBSnapshotIdentifier` &mdash; (`String`) Specifies the
+ *             identifier for the DB Snapshot.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Specifies the the
+ *             DBInstanceIdentifier of the DB Instance this DB Snapshot was
+ *             created from.
+ *           * `SnapshotCreateTime` &mdash; (`Date`) Provides the time
+ *             (UTC) when the snapshot was taken.
+ *           * `Engine` &mdash; (`String`) Specifies the name of the
+ *             database engine.
+ *           * `AllocatedStorage` &mdash; (`Integer`) Specifies the
+ *             allocated storage size in gigabytes (GB).
+ *           * `Status` &mdash; (`String`) Specifies the status of this DB
+ *             Snapshot.
+ *           * `Port` &mdash; (`Integer`) Specifies the port that the
+ *             database engine was listening on at the time of the
+ *             snapshot.
+ *           * `AvailabilityZone` &mdash; (`String`) Specifies the name of
+ *             the Availability Zone the DB Instance was located in at the
+ *             time of the DB Snapshot.
+ *           * `VpcId` &mdash; (`String`) Provides the Vpc Id associated
+ *             with the DB Snapshot.
+ *           * `InstanceCreateTime` &mdash; (`Date`) Specifies the time
+ *             (UTC) when the snapshot was taken.
+ *           * `MasterUsername` &mdash; (`String`) Provides the master
+ *             username for the DB Snapshot.
+ *           * `EngineVersion` &mdash; (`String`) Specifies the version of
+ *             the database engine.
+ *           * `LicenseModel` &mdash; (`String`) License model information
+ *             for the restored DB Instance.
+ *           * `SnapshotType` &mdash; (`String`) Provides the type of the
+ *             DB Snapshot.
+ *           * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS
+ *             (I/O operations per second) value of the DB Instance at the
+ *             time of the snapshot.
+ *           * `OptionGroupName` &mdash; (`String`) Provides the option
+ *             group name for the DB Snapshot.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1962,26 +1981,26 @@ AWS.RDS = inherit({})
  *         value specified by MaxRecords.
  *       * `DBSubnetGroups` &mdash; (`Array<map>`) A list of DBSubnetGroup
  *         instances.
- *         * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
- *           the DB Subnet Group.
- *         * `DBSubnetGroupDescription` &mdash; (`String`) Provides the
- *           description of the DB Subnet Group.
- *         * `VpcId` &mdash; (`String`) Provides the VpcId of the DB Subnet
- *           Group.
- *         * `SubnetGroupStatus` &mdash; (`String`) Provides the status of
- *           the DB Subnet Group.
- *         * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
- *           elements.
- *           * `SubnetIdentifier` &mdash; (`String`) Specifies the
- *             identifier of the subnet.
- *           * `SubnetAvailabilityZone` &mdash; (`map`)
- *             * `Name` &mdash; (`String`) The name of the availability
- *               zone.
- *             * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
- *               indicates the availability zone is capable of provisioned
- *               IOPs.
- *           * `SubnetStatus` &mdash; (`String`) Specifies the status of
- *             the subnet.
+ *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
+ *             the DB Subnet Group.
+ *           * `DBSubnetGroupDescription` &mdash; (`String`) Provides the
+ *             description of the DB Subnet Group.
+ *           * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
+ *             Subnet Group.
+ *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
+ *             of the DB Subnet Group.
+ *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
+ *             elements.
+ *               * `SubnetIdentifier` &mdash; (`String`) Specifies the
+ *                 identifier of the subnet.
+ *               * `SubnetAvailabilityZone` &mdash; (`map`)
+ *                   * `Name` &mdash; (`String`) The name of the
+ *                     availability zone.
+ *                   * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
+ *                     indicates the availability zone is capable of
+ *                     provisioned IOPs.
+ *               * `SubnetStatus` &mdash; (`String`) Specifies the status
+ *                 of the subnet.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2013,40 +2032,40 @@ AWS.RDS = inherit({})
  *       * `EngineDefaults` &mdash; (`map`) Contains the result of a
  *         successful invocation of the DescribeEngineDefaultParameters
  *         action.
- *         * `DBParameterGroupFamily` &mdash; (`String`) Specifies the name
- *           of the DB Parameter Group Family which the engine default
- *           parameters apply to.
- *         * `Marker` &mdash; (`String`) An optional pagination token
- *           provided by a previous EngineDefaults request. If this
- *           parameter is specified, the response includes only records
- *           beyond the marker, up to the value specified by MaxRecords .
- *         * `Parameters` &mdash; (`Array<map>`) Contains a list of engine
- *           default parameters.
- *           * `ParameterName` &mdash; (`String`) Specifies the name of the
- *             parameter.
- *           * `ParameterValue` &mdash; (`String`) Specifies the value of
- *             the parameter.
- *           * `Description` &mdash; (`String`) Provides a description of
- *             the parameter.
- *           * `Source` &mdash; (`String`) Indicates the source of the
- *             parameter value.
- *           * `ApplyType` &mdash; (`String`) Specifies the engine specific
- *             parameters type.
- *           * `DataType` &mdash; (`String`) Specifies the valid data type
- *             for the parameter.
- *           * `AllowedValues` &mdash; (`String`) Specifies the valid range
- *             of values for the parameter.
- *           * `IsModifiable` &mdash; (`Boolean`) Indicates whether (true)
- *             or not (false) the parameter can be modified. Some
- *             parameters have security or operational implications that
- *             prevent them from being changed.
- *           * `MinimumEngineVersion` &mdash; (`String`) The earliest
- *             engine version to which the parameter can apply.
- *           * `ApplyMethod` &mdash; (`String`) Indicates when to apply
- *             parameter updates.
- *             Possible values include:
- *             * `immediate`
- *             * `pending-reboot`
+ *           * `DBParameterGroupFamily` &mdash; (`String`) Specifies the
+ *             name of the DB Parameter Group Family which the engine
+ *             default parameters apply to.
+ *           * `Marker` &mdash; (`String`) An optional pagination token
+ *             provided by a previous EngineDefaults request. If this
+ *             parameter is specified, the response includes only records
+ *             beyond the marker, up to the value specified by MaxRecords .
+ *           * `Parameters` &mdash; (`Array<map>`) Contains a list of
+ *             engine default parameters.
+ *               * `ParameterName` &mdash; (`String`) Specifies the name of
+ *                 the parameter.
+ *               * `ParameterValue` &mdash; (`String`) Specifies the value
+ *                 of the parameter.
+ *               * `Description` &mdash; (`String`) Provides a description
+ *                 of the parameter.
+ *               * `Source` &mdash; (`String`) Indicates the source of the
+ *                 parameter value.
+ *               * `ApplyType` &mdash; (`String`) Specifies the engine
+ *                 specific parameters type.
+ *               * `DataType` &mdash; (`String`) Specifies the valid data
+ *                 type for the parameter.
+ *               * `AllowedValues` &mdash; (`String`) Specifies the valid
+ *                 range of values for the parameter.
+ *               * `IsModifiable` &mdash; (`Boolean`) Indicates whether
+ *                 (true) or not (false) the parameter can be modified.
+ *                 Some parameters have security or operational
+ *                 implications that prevent them from being changed.
+ *               * `MinimumEngineVersion` &mdash; (`String`) The earliest
+ *                 engine version to which the parameter can apply.
+ *               * `ApplyMethod` &mdash; (`String`) Indicates when to apply
+ *                 parameter updates.
+ *                 Possible values include:
+ *                 * `immediate`
+ *                 * `pending-reboot`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2065,8 +2084,8 @@ AWS.RDS = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `EventCategoriesMapList` &mdash; (`Array<map>`)
- *         * `SourceType` &mdash; (`String`)
- *         * `EventCategories` &mdash; (`Array<String>`)
+ *           * `SourceType` &mdash; (`String`)
+ *           * `EventCategories` &mdash; (`Array<String>`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2088,15 +2107,15 @@ AWS.RDS = inherit({})
  *
  *       * `Marker` &mdash; (`String`)
  *       * `EventSubscriptionsList` &mdash; (`Array<map>`)
- *         * `CustomerAwsId` &mdash; (`String`)
- *         * `CustSubscriptionId` &mdash; (`String`)
- *         * `SnsTopicArn` &mdash; (`String`)
- *         * `Status` &mdash; (`String`)
- *         * `SubscriptionCreationTime` &mdash; (`String`)
- *         * `SourceType` &mdash; (`String`)
- *         * `SourceIdsList` &mdash; (`Array<String>`)
- *         * `EventCategoriesList` &mdash; (`Array<String>`)
- *         * `Enabled` &mdash; (`Boolean`)
+ *           * `CustomerAwsId` &mdash; (`String`)
+ *           * `CustSubscriptionId` &mdash; (`String`)
+ *           * `SnsTopicArn` &mdash; (`String`)
+ *           * `Status` &mdash; (`String`)
+ *           * `SubscriptionCreationTime` &mdash; (`String`)
+ *           * `SourceType` &mdash; (`String`)
+ *           * `SourceIdsList` &mdash; (`Array<String>`)
+ *           * `EventCategoriesList` &mdash; (`Array<String>`)
+ *           * `Enabled` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2156,20 +2175,21 @@ AWS.RDS = inherit({})
  *         specified, the response includes only records beyond the marker,
  *         up to the value specified by MaxRecords .
  *       * `Events` &mdash; (`Array<map>`) A list of Event instances.
- *         * `SourceIdentifier` &mdash; (`String`) Provides the identifier
- *           for the source of the event.
- *         * `SourceType` &mdash; (`String`) Specifies the source type for
- *           this event.
- *           Possible values include:
- *           * `db-instance`
- *           * `db-parameter-group`
- *           * `db-security-group`
- *           * `db-snapshot`
- *         * `Message` &mdash; (`String`) Provides the text of this event.
- *         * `EventCategories` &mdash; (`Array<String>`) Specifies the
- *           category for the event.
- *         * `Date` &mdash; (`Date`) Specifies the date and time of the
- *           event.
+ *           * `SourceIdentifier` &mdash; (`String`) Provides the
+ *             identifier for the source of the event.
+ *           * `SourceType` &mdash; (`String`) Specifies the source type
+ *             for this event.
+ *             Possible values include:
+ *             * `db-instance`
+ *             * `db-parameter-group`
+ *             * `db-security-group`
+ *             * `db-snapshot`
+ *           * `Message` &mdash; (`String`) Provides the text of this
+ *             event.
+ *           * `EventCategories` &mdash; (`Array<String>`) Specifies the
+ *             category for the event.
+ *           * `Date` &mdash; (`Date`) Specifies the date and time of the
+ *             event.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2202,30 +2222,31 @@ AWS.RDS = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `OptionGroupOptions` &mdash; (`Array<map>`)
- *         * `Name` &mdash; (`String`) The name of the option.
- *         * `Description` &mdash; (`String`) The description of the
- *           option.
- *         * `EngineName` &mdash; (`String`) Engine name that this option
- *           can be applied to.
- *         * `MajorEngineVersion` &mdash; (`String`) Indicates the major
- *           engine version that the option is available for.
- *         * `MinimumRequiredMinorEngineVersion` &mdash; (`String`) The
- *           minimum required engine version for the option to be applied.
- *         * `PortRequired` &mdash; (`Boolean`) Specifies whether the
- *           option requires a port.
- *         * `DefaultPort` &mdash; (`Integer`) If the option requires a
- *           port, specifies the default port for the option.
- *         * `OptionsDependedOn` &mdash; (`Array<String>`) List of all
- *           options that are prerequisites for this option.
- *         * `Persistent` &mdash; (`Boolean`) Specifies whether the option
- *           is persistent in an option group.
- *         * `OptionGroupOptionSettings` &mdash; (`Array<map>`)
- *           * `SettingName` &mdash; (`String`)
- *           * `SettingDescription` &mdash; (`String`)
- *           * `DefaultValue` &mdash; (`String`)
- *           * `ApplyType` &mdash; (`String`)
- *           * `AllowedValues` &mdash; (`String`)
- *           * `IsModifiable` &mdash; (`Boolean`)
+ *           * `Name` &mdash; (`String`) The name of the option.
+ *           * `Description` &mdash; (`String`) The description of the
+ *             option.
+ *           * `EngineName` &mdash; (`String`) Engine name that this option
+ *             can be applied to.
+ *           * `MajorEngineVersion` &mdash; (`String`) Indicates the major
+ *             engine version that the option is available for.
+ *           * `MinimumRequiredMinorEngineVersion` &mdash; (`String`) The
+ *             minimum required engine version for the option to be
+ *             applied.
+ *           * `PortRequired` &mdash; (`Boolean`) Specifies whether the
+ *             option requires a port.
+ *           * `DefaultPort` &mdash; (`Integer`) If the option requires a
+ *             port, specifies the default port for the option.
+ *           * `OptionsDependedOn` &mdash; (`Array<String>`) List of all
+ *             options that are prerequisites for this option.
+ *           * `Persistent` &mdash; (`Boolean`) Specifies whether the
+ *             option is persistent in an option group.
+ *           * `OptionGroupOptionSettings` &mdash; (`Array<map>`)
+ *               * `SettingName` &mdash; (`String`)
+ *               * `SettingDescription` &mdash; (`String`)
+ *               * `DefaultValue` &mdash; (`String`)
+ *               * `ApplyType` &mdash; (`String`)
+ *               * `AllowedValues` &mdash; (`String`)
+ *               * `IsModifiable` &mdash; (`Boolean`)
  *       * `Marker` &mdash; (`String`) An optional pagination token
  *         provided by a previous request. If this parameter is specified,
  *         the response includes only records beyond the marker, up to the
@@ -2266,64 +2287,67 @@ AWS.RDS = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `OptionGroupsList` &mdash; (`Array<map>`) List of option groups.
- *         * `OptionGroupName` &mdash; (`String`) Specifies the name of the
- *           option group.
- *         * `OptionGroupDescription` &mdash; (`String`) Provides the
- *           description of the option group.
- *         * `EngineName` &mdash; (`String`) Engine name that this option
- *           group can be applied to.
- *         * `MajorEngineVersion` &mdash; (`String`) Indicates the major
- *           engine version associated with this option group.
- *         * `Options` &mdash; (`Array<map>`) Indicates what options are
- *           available in the option group.
- *           * `OptionName` &mdash; (`String`) The name of the option.
- *           * `OptionDescription` &mdash; (`String`) The description of
- *             the option.
- *           * `Persistent` &mdash; (`Boolean`) Indicate if this option is
- *             persistent.
- *           * `Port` &mdash; (`Integer`) If required, the port configured
- *             for this option to use.
- *           * `OptionSettings` &mdash; (`Array<map>`) The settings
- *             belonging to this option.
- *             * `Name` &mdash; (`String`) The name of the setting.
- *             * `Value` &mdash; (`String`) The value of this setting.
- *             * `DefaultValue` &mdash; (`String`) Default value for this
- *               setting.
- *             * `Description` &mdash; (`String`) The description of the
- *               setting.
- *             * `ApplyType` &mdash; (`String`) Specifies the apply type
- *               for this setting.
- *             * `DataType` &mdash; (`String`) Specifies the valid data
- *               type of this setting
- *             * `AllowedValues` &mdash; (`String`) Specifies a valid
- *               list/range of values allowed for this setting.
- *             * `IsModifiable` &mdash; (`Boolean`) Indicates if the
- *               setting is modifiable or not.
- *             * `IsCollection` &mdash; (`Boolean`) Indicates if the value
- *               for the setting can be a list of values or a single value.
- *           * `DBSecurityGroupMemberships` &mdash; (`Array<map>`) If the
- *             Option requires access to a port, then this DB Security
- *             Group allows access to the port.
- *             * `DBSecurityGroupName` &mdash; (`String`) The name of the
- *               DB Security Group.
- *             * `Status` &mdash; (`String`) The status of the DB Security
- *               Group.
- *           * `VpcSecurityGroupMemberships` &mdash; (`Array<map>`) If the
- *             Option requires access to a port, then this VPC Security
- *             Group allows access to the port.
- *             * `VpcSecurityGroupId` &mdash; (`String`)
- *             * `Status` &mdash; (`String`)
- *         * `AllowsVpcAndNonVpcInstanceMemberships` &mdash; (`Boolean`)
- *           Indicates whether this option group can be applied to both VPC
- *           and non-VPC instances. The value 'true' indicates the option
- *           group can be applied to both VPC and non-VPC instances.
- *         * `VpcId` &mdash; (`String`) If
- *           AllowsVpcAndNonVpcInstanceMemberships is 'false', this field
- *           is blank. If AllowsVpcAndNonVpcInstanceMemberships is 'true'
- *           and this field is blank, then this option group can be applied
- *           to both VPC and non-VPC instances. If this field contains a
- *           value, then this option group can only be applied to instances
- *           that are in the VPC indicated by this field.
+ *           * `OptionGroupName` &mdash; (`String`) Specifies the name of
+ *             the option group.
+ *           * `OptionGroupDescription` &mdash; (`String`) Provides the
+ *             description of the option group.
+ *           * `EngineName` &mdash; (`String`) Engine name that this option
+ *             group can be applied to.
+ *           * `MajorEngineVersion` &mdash; (`String`) Indicates the major
+ *             engine version associated with this option group.
+ *           * `Options` &mdash; (`Array<map>`) Indicates what options are
+ *             available in the option group.
+ *               * `OptionName` &mdash; (`String`) The name of the option.
+ *               * `OptionDescription` &mdash; (`String`) The description
+ *                 of the option.
+ *               * `Persistent` &mdash; (`Boolean`) Indicate if this option
+ *                 is persistent.
+ *               * `Port` &mdash; (`Integer`) If required, the port
+ *                 configured for this option to use.
+ *               * `OptionSettings` &mdash; (`Array<map>`) The settings
+ *                 belonging to this option.
+ *                   * `Name` &mdash; (`String`) The name of the setting.
+ *                   * `Value` &mdash; (`String`) The value of this
+ *                     setting.
+ *                   * `DefaultValue` &mdash; (`String`) Default value for
+ *                     this setting.
+ *                   * `Description` &mdash; (`String`) The description of
+ *                     the setting.
+ *                   * `ApplyType` &mdash; (`String`) Specifies the apply
+ *                     type for this setting.
+ *                   * `DataType` &mdash; (`String`) Specifies the valid
+ *                     data type of this setting
+ *                   * `AllowedValues` &mdash; (`String`) Specifies a valid
+ *                     list/range of values allowed for this setting.
+ *                   * `IsModifiable` &mdash; (`Boolean`) Indicates if the
+ *                     setting is modifiable or not.
+ *                   * `IsCollection` &mdash; (`Boolean`) Indicates if the
+ *                     value for the setting can be a list of values or a
+ *                     single value.
+ *               * `DBSecurityGroupMemberships` &mdash; (`Array<map>`) If
+ *                 the Option requires access to a port, then this DB
+ *                 Security Group allows access to the port.
+ *                   * `DBSecurityGroupName` &mdash; (`String`) The name of
+ *                     the DB Security Group.
+ *                   * `Status` &mdash; (`String`) The status of the DB
+ *                     Security Group.
+ *               * `VpcSecurityGroupMemberships` &mdash; (`Array<map>`) If
+ *                 the Option requires access to a port, then this VPC
+ *                 Security Group allows access to the port.
+ *                   * `VpcSecurityGroupId` &mdash; (`String`)
+ *                   * `Status` &mdash; (`String`)
+ *           * `AllowsVpcAndNonVpcInstanceMemberships` &mdash; (`Boolean`)
+ *             Indicates whether this option group can be applied to both
+ *             VPC and non-VPC instances. The value 'true' indicates the
+ *             option group can be applied to both VPC and non-VPC
+ *             instances.
+ *           * `VpcId` &mdash; (`String`) If
+ *             AllowsVpcAndNonVpcInstanceMemberships is 'false', this field
+ *             is blank. If AllowsVpcAndNonVpcInstanceMemberships is 'true'
+ *             and this field is blank, then this option group can be
+ *             applied to both VPC and non-VPC instances. If this field
+ *             contains a value, then this option group can only be applied
+ *             to instances that are in the VPC indicated by this field.
  *       * `Marker` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -2367,25 +2391,27 @@ AWS.RDS = inherit({})
  *       * `OrderableDBInstanceOptions` &mdash; (`Array<map>`) An
  *         OrderableDBInstanceOption structure containing information about
  *         orderable options for the DB Instance.
- *         * `Engine` &mdash; (`String`) The engine type of the orderable
- *           DB Instance.
- *         * `EngineVersion` &mdash; (`String`) The engine version of the
- *           orderable DB Instance.
- *         * `DBInstanceClass` &mdash; (`String`) The DB Instance Class for
- *           the orderable DB Instance
- *         * `LicenseModel` &mdash; (`String`) The license model for the
- *           orderable DB Instance.
- *         * `AvailabilityZones` &mdash; (`Array<map>`) A list of
- *           availability zones for the orderable DB Instance.
- *           * `Name` &mdash; (`String`) The name of the availability zone.
- *           * `ProvisionedIopsCapable` &mdash; (`Boolean`) True indicates
- *             the availability zone is capable of provisioned IOPs.
- *         * `MultiAZCapable` &mdash; (`Boolean`) Indicates whether this
- *           orderable DB Instance is multi-AZ capable.
- *         * `ReadReplicaCapable` &mdash; (`Boolean`) Indicates whether
- *           this orderable DB Instance can have a read replica.
- *         * `Vpc` &mdash; (`Boolean`) Indicates whether this is a VPC
- *           orderable DB Instance.
+ *           * `Engine` &mdash; (`String`) The engine type of the orderable
+ *             DB Instance.
+ *           * `EngineVersion` &mdash; (`String`) The engine version of the
+ *             orderable DB Instance.
+ *           * `DBInstanceClass` &mdash; (`String`) The DB Instance Class
+ *             for the orderable DB Instance
+ *           * `LicenseModel` &mdash; (`String`) The license model for the
+ *             orderable DB Instance.
+ *           * `AvailabilityZones` &mdash; (`Array<map>`) A list of
+ *             availability zones for the orderable DB Instance.
+ *               * `Name` &mdash; (`String`) The name of the availability
+ *                 zone.
+ *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
+ *                 indicates the availability zone is capable of
+ *                 provisioned IOPs.
+ *           * `MultiAZCapable` &mdash; (`Boolean`) Indicates whether this
+ *             orderable DB Instance is multi-AZ capable.
+ *           * `ReadReplicaCapable` &mdash; (`Boolean`) Indicates whether
+ *             this orderable DB Instance can have a read replica.
+ *           * `Vpc` &mdash; (`Boolean`) Indicates whether this is a VPC
+ *             orderable DB Instance.
  *       * `Marker` &mdash; (`String`) An optional pagination token
  *         provided by a previous OrderableDBInstanceOptions request. If
  *         this parameter is specified, the response includes only records
@@ -2445,37 +2471,38 @@ AWS.RDS = inherit({})
  *         value specified by MaxRecords.
  *       * `ReservedDBInstances` &mdash; (`Array<map>`) A list of of
  *         reserved DB Instances.
- *         * `ReservedDBInstanceId` &mdash; (`String`) The unique
- *           identifier for the reservation.
- *         * `ReservedDBInstancesOfferingId` &mdash; (`String`) The
- *           offering identifier.
- *         * `DBInstanceClass` &mdash; (`String`) The DB instance class for
- *           the reserved DB Instance.
- *         * `StartTime` &mdash; (`Date`) The time the reservation started.
- *         * `Duration` &mdash; (`Integer`) The duration of the reservation
- *           in seconds.
- *         * `FixedPrice` &mdash; (`Float`) The fixed price charged for
- *           this reserved DB Instance.
- *         * `UsagePrice` &mdash; (`Float`) The hourly price charged for
- *           this reserved DB Instance.
- *         * `CurrencyCode` &mdash; (`String`) The currency code for the
- *           reserved DB Instance.
- *         * `DBInstanceCount` &mdash; (`Integer`) The number of reserved
- *           DB Instances.
- *         * `ProductDescription` &mdash; (`String`) The description of the
- *           reserved DB Instance.
- *         * `OfferingType` &mdash; (`String`) The offering type of this
- *           reserved DB Instance.
- *         * `MultiAZ` &mdash; (`Boolean`) Indicates if the reservation
- *           applies to Multi-AZ deployments.
- *         * `State` &mdash; (`String`) The state of the reserved DB
- *           Instance.
- *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring price
- *           charged to run this reserved DB Instance.
- *           * `RecurringChargeAmount` &mdash; (`Float`) The amount of the
- *             recurring charge.
- *           * `RecurringChargeFrequency` &mdash; (`String`) The frequency
- *             of the recurring charge.
+ *           * `ReservedDBInstanceId` &mdash; (`String`) The unique
+ *             identifier for the reservation.
+ *           * `ReservedDBInstancesOfferingId` &mdash; (`String`) The
+ *             offering identifier.
+ *           * `DBInstanceClass` &mdash; (`String`) The DB instance class
+ *             for the reserved DB Instance.
+ *           * `StartTime` &mdash; (`Date`) The time the reservation
+ *             started.
+ *           * `Duration` &mdash; (`Integer`) The duration of the
+ *             reservation in seconds.
+ *           * `FixedPrice` &mdash; (`Float`) The fixed price charged for
+ *             this reserved DB Instance.
+ *           * `UsagePrice` &mdash; (`Float`) The hourly price charged for
+ *             this reserved DB Instance.
+ *           * `CurrencyCode` &mdash; (`String`) The currency code for the
+ *             reserved DB Instance.
+ *           * `DBInstanceCount` &mdash; (`Integer`) The number of reserved
+ *             DB Instances.
+ *           * `ProductDescription` &mdash; (`String`) The description of
+ *             the reserved DB Instance.
+ *           * `OfferingType` &mdash; (`String`) The offering type of this
+ *             reserved DB Instance.
+ *           * `MultiAZ` &mdash; (`Boolean`) Indicates if the reservation
+ *             applies to Multi-AZ deployments.
+ *           * `State` &mdash; (`String`) The state of the reserved DB
+ *             Instance.
+ *           * `RecurringCharges` &mdash; (`Array<map>`) The recurring
+ *             price charged to run this reserved DB Instance.
+ *               * `RecurringChargeAmount` &mdash; (`Float`) The amount of
+ *                 the recurring charge.
+ *               * `RecurringChargeFrequency` &mdash; (`String`) The
+ *                 frequency of the recurring charge.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2528,29 +2555,29 @@ AWS.RDS = inherit({})
  *         value specified by MaxRecords.
  *       * `ReservedDBInstancesOfferings` &mdash; (`Array<map>`) A list of
  *         reserved DB Instance offerings.
- *         * `ReservedDBInstancesOfferingId` &mdash; (`String`) The
- *           offering identifier.
- *         * `DBInstanceClass` &mdash; (`String`) The DB instance class for
- *           the reserved DB Instance.
- *         * `Duration` &mdash; (`Integer`) The duration of the offering in
- *           seconds.
- *         * `FixedPrice` &mdash; (`Float`) The fixed price charged for
- *           this offering.
- *         * `UsagePrice` &mdash; (`Float`) The hourly price charged for
- *           this offering.
- *         * `CurrencyCode` &mdash; (`String`) The currency code for the
- *           reserved DB Instance offering.
- *         * `ProductDescription` &mdash; (`String`) The database engine
- *           used by the offering.
- *         * `OfferingType` &mdash; (`String`) The offering type.
- *         * `MultiAZ` &mdash; (`Boolean`) Indicates if the offering
- *           applies to Multi-AZ deployments.
- *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring price
- *           charged to run this reserved DB Instance.
- *           * `RecurringChargeAmount` &mdash; (`Float`) The amount of the
- *             recurring charge.
- *           * `RecurringChargeFrequency` &mdash; (`String`) The frequency
- *             of the recurring charge.
+ *           * `ReservedDBInstancesOfferingId` &mdash; (`String`) The
+ *             offering identifier.
+ *           * `DBInstanceClass` &mdash; (`String`) The DB instance class
+ *             for the reserved DB Instance.
+ *           * `Duration` &mdash; (`Integer`) The duration of the offering
+ *             in seconds.
+ *           * `FixedPrice` &mdash; (`Float`) The fixed price charged for
+ *             this offering.
+ *           * `UsagePrice` &mdash; (`Float`) The hourly price charged for
+ *             this offering.
+ *           * `CurrencyCode` &mdash; (`String`) The currency code for the
+ *             reserved DB Instance offering.
+ *           * `ProductDescription` &mdash; (`String`) The database engine
+ *             used by the offering.
+ *           * `OfferingType` &mdash; (`String`) The offering type.
+ *           * `MultiAZ` &mdash; (`Boolean`) Indicates if the offering
+ *             applies to Multi-AZ deployments.
+ *           * `RecurringCharges` &mdash; (`Array<map>`) The recurring
+ *             price charged to run this reserved DB Instance.
+ *               * `RecurringChargeAmount` &mdash; (`Float`) The amount of
+ *                 the recurring charge.
+ *               * `RecurringChargeFrequency` &mdash; (`String`) The
+ *                 frequency of the recurring charge.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2605,18 +2632,18 @@ AWS.RDS = inherit({})
  *
  *       * `TagList` &mdash; (`Array<map>`) List of tags returned by the
  *         ListTagsForResource operation.
- *         * `Key` &mdash; (`String`) A key is the required name of the
- *           tag. The string value can be from 1 to 128 Unicode characters
- *           in length and cannot be prefixed with "aws:". The string may
- *           only contain only the set of Unicode letters, digits,
- *           white-space, '_', '.', '/', '=', '+', '-' (Java regex:
- *           "^([\\p`{L}\\p{Z}\\p{N}`_.:/=+\\-]*)$").
- *         * `Value` &mdash; (`String`) A value is the optional value of
- *           the tag. The string value can be from 1 to 256 Unicode
- *           characters in length and cannot be prefixed with "aws:". The
- *           string may only contain only the set of Unicode letters,
- *           digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex:
- *           "^([\\p`{L}\\p{Z}\\p{N}`_.:/=+\\-]*)$").
+ *           * `Key` &mdash; (`String`) A key is the required name of the
+ *             tag. The string value can be from 1 to 128 Unicode
+ *             characters in length and cannot be prefixed with "aws:". The
+ *             string may only contain only the set of Unicode letters,
+ *             digits, white-space, '_', '.', '/', '=', '+', '-' (Java
+ *             regex: "^([\\p`{L}\\p{Z}\\p{N}`_.:/=+\\-]*)$").
+ *           * `Value` &mdash; (`String`) A value is the optional value of
+ *             the tag. The string value can be from 1 to 256 Unicode
+ *             characters in length and cannot be prefixed with "aws:". The
+ *             string may only contain only the set of Unicode letters,
+ *             digits, white-space, '_', '.', '/', '=', '+', '-' (Java
+ *             regex: "^([\\p`{L}\\p{Z}\\p{N}`_.:/=+\\-]*)$").
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2798,145 +2825,148 @@ AWS.RDS = inherit({})
  *         invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
  *         response element in the DescribeDBInstances action.
- *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
- *           user-supplied database identifier. This is the unique key that
- *           identifies a DB Instance.
- *         * `DBInstanceClass` &mdash; (`String`) Contains the name of the
- *           compute and memory capacity class of the DB Instance.
- *         * `Engine` &mdash; (`String`) Provides the name of the database
- *           engine to be used for this DB Instance.
- *         * `DBInstanceStatus` &mdash; (`String`) Specifies the current
- *           state of this database.
- *         * `MasterUsername` &mdash; (`String`) Contains the master
- *           username for the DB Instance.
- *         * `DBName` &mdash; (`String`) The meaning of this parameter
- *           differs according to the database engine you use. MySQL
- *           Contains the name of the initial database of this instance
- *           that was provided at create time, if one was specified when
- *           the DB Instance was created. This same name is returned for
- *           the life of the DB Instance. Type: String Oracle Contains the
- *           Oracle System ID (SID) of the created DB Instance.
- *         * `Endpoint` &mdash; (`map`) Specifies the connection endpoint.
- *           * `Address` &mdash; (`String`) Specifies the DNS address of
- *             the DB Instance.
- *           * `Port` &mdash; (`Integer`) Specifies the port that the
- *             database engine is listening on.
- *         * `AllocatedStorage` &mdash; (`Integer`) Specifies the allocated
- *           storage size specified in gigabytes.
- *         * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
- *           time the DB Instance was created.
- *         * `PreferredBackupWindow` &mdash; (`String`) Specifies the daily
- *           time range during which automated backups are created if
- *           automated backups are enabled, as determined by the
- *           BackupRetentionPeriod.
- *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
- *           number of days for which automatic DB Snapshots are retained.
- *         * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of DB
- *           Security Group elements containing only DBSecurityGroup.Name
- *           and DBSecurityGroup.Status subelements.
- *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
- *             Security Group.
- *           * `Status` &mdash; (`String`) The status of the DB Security
- *             Group.
- *         * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
- *           VPC security group elements that the DB Instance belongs to.
- *           * `VpcSecurityGroupId` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *         * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
- *           of DB Parameter Groups applied to this DB Instance.
- *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
- *             Parameter Group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
- *           the Availability Zone the DB Instance is located in.
- *         * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
- *           the subnet group associated with the DB instance, including
- *           the name, descrption and subnets in the subnet group.
- *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
- *             the DB Subnet Group.
- *           * `DBSubnetGroupDescription` &mdash; (`String`) Provides the
- *             description of the DB Subnet Group.
- *           * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
- *             Subnet Group.
- *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
- *             of the DB Subnet Group.
- *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
- *             elements.
- *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
- *               identifier of the subnet.
- *             * `SubnetAvailabilityZone` &mdash; (`map`)
- *               * `Name` &mdash; (`String`) The name of the availability
- *                 zone.
- *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
- *                 indicates the availability zone is capable of
- *                 provisioned IOPs.
- *             * `SubnetStatus` &mdash; (`String`) Specifies the status of
- *               the subnet.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
- *           weekly time range (in UTC) during which system maintenance can
- *           occur.
- *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
- *           to the DB Instance are pending. This element is only included
- *           when changes are pending. Specific changes are identified by
- *           subelements.
- *           * `DBInstanceClass` &mdash; (`String`) Contains the new
- *             DBInstanceClass for the DB Instance that will be applied or
- *             is in progress.
- *           * `AllocatedStorage` &mdash; (`Integer`) Contains the new
- *             AllocatedStorage size for the DB Instance that will be
- *             applied or is in progress.
- *           * `MasterUserPassword` &mdash; (`String`) Contains the pending
- *             or in-progress change of the master credentials for the DB
- *             Instance.
- *           * `Port` &mdash; (`Integer`) Specifies the pending port for
- *             the DB Instance.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Contains a
+ *             user-supplied database identifier. This is the unique key
+ *             that identifies a DB Instance.
+ *           * `DBInstanceClass` &mdash; (`String`) Contains the name of
+ *             the compute and memory capacity class of the DB Instance.
+ *           * `Engine` &mdash; (`String`) Provides the name of the
+ *             database engine to be used for this DB Instance.
+ *           * `DBInstanceStatus` &mdash; (`String`) Specifies the current
+ *             state of this database.
+ *           * `MasterUsername` &mdash; (`String`) Contains the master
+ *             username for the DB Instance.
+ *           * `DBName` &mdash; (`String`) The meaning of this parameter
+ *             differs according to the database engine you use. MySQL
+ *             Contains the name of the initial database of this instance
+ *             that was provided at create time, if one was specified when
+ *             the DB Instance was created. This same name is returned for
+ *             the life of the DB Instance. Type: String Oracle Contains
+ *             the Oracle System ID (SID) of the created DB Instance.
+ *           * `Endpoint` &mdash; (`map`) Specifies the connection
+ *             endpoint.
+ *               * `Address` &mdash; (`String`) Specifies the DNS address
+ *                 of the DB Instance.
+ *               * `Port` &mdash; (`Integer`) Specifies the port that the
+ *                 database engine is listening on.
+ *           * `AllocatedStorage` &mdash; (`Integer`) Specifies the
+ *             allocated storage size specified in gigabytes.
+ *           * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
+ *             time the DB Instance was created.
+ *           * `PreferredBackupWindow` &mdash; (`String`) Specifies the
+ *             daily time range during which automated backups are created
+ *             if automated backups are enabled, as determined by the
+ *             BackupRetentionPeriod.
  *           * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
- *             pending number of days for which automated backups are
+ *             number of days for which automatic DB Snapshots are
  *             retained.
- *           * `MultiAZ` &mdash; (`Boolean`) Indicates that the Single-AZ
- *             DB Instance is to change to a Multi-AZ deployment.
+ *           * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of
+ *             DB Security Group elements containing only
+ *             DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *               * `DBSecurityGroupName` &mdash; (`String`) The name of the
+ *                 DB Security Group.
+ *               * `Status` &mdash; (`String`) The status of the DB
+ *                 Security Group.
+ *           * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
+ *             VPC security group elements that the DB Instance belongs to.
+ *               * `VpcSecurityGroupId` &mdash; (`String`)
+ *               * `Status` &mdash; (`String`)
+ *           * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
+ *             of DB Parameter Groups applied to this DB Instance.
+ *               * `DBParameterGroupName` &mdash; (`String`) The name of
+ *                 the DP Parameter Group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *           * `AvailabilityZone` &mdash; (`String`) Specifies the name of
+ *             the Availability Zone the DB Instance is located in.
+ *           * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
+ *             the subnet group associated with the DB instance, including
+ *             the name, descrption and subnets in the subnet group.
+ *               * `DBSubnetGroupName` &mdash; (`String`) Specifies the
+ *                 name of the DB Subnet Group.
+ *               * `DBSubnetGroupDescription` &mdash; (`String`) Provides
+ *                 the description of the DB Subnet Group.
+ *               * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
+ *                 Subnet Group.
+ *               * `SubnetGroupStatus` &mdash; (`String`) Provides the
+ *                 status of the DB Subnet Group.
+ *               * `Subnets` &mdash; (`Array<map>`) Contains a list of
+ *                 Subnet elements.
+ *                   * `SubnetIdentifier` &mdash; (`String`) Specifies the
+ *                     identifier of the subnet.
+ *                   * `SubnetAvailabilityZone` &mdash; (`map`)
+ *                       * `Name` &mdash; (`String`) The name of the
+ *                         availability zone.
+ *                       * `ProvisionedIopsCapable` &mdash; (`Boolean`)
+ *                         True indicates the availability zone is capable
+ *                         of provisioned IOPs.
+ *                   * `SubnetStatus` &mdash; (`String`) Specifies the
+ *                     status of the subnet.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies
+ *             the weekly time range (in UTC) during which system
+ *             maintenance can occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) Specifies that
+ *             changes to the DB Instance are pending. This element is only
+ *             included when changes are pending. Specific changes are
+ *             identified by subelements.
+ *               * `DBInstanceClass` &mdash; (`String`) Contains the new
+ *                 DBInstanceClass for the DB Instance that will be applied
+ *                 or is in progress.
+ *               * `AllocatedStorage` &mdash; (`Integer`) Contains the new
+ *                 AllocatedStorage size for the DB Instance that will be
+ *                 applied or is in progress.
+ *               * `MasterUserPassword` &mdash; (`String`) Contains the
+ *                 pending or in-progress change of the master credentials
+ *                 for the DB Instance.
+ *               * `Port` &mdash; (`Integer`) Specifies the pending port
+ *                 for the DB Instance.
+ *               * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies
+ *                 the pending number of days for which automated backups
+ *                 are retained.
+ *               * `MultiAZ` &mdash; (`Boolean`) Indicates that the
+ *                 Single-AZ DB Instance is to change to a Multi-AZ
+ *                 deployment.
+ *               * `EngineVersion` &mdash; (`String`) Indicates the
+ *                 database engine version.
+ *               * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
+ *                 IOPS value for the DB Instance that will be applied or
+ *                 is being applied.
+ *               * `DBInstanceIdentifier` &mdash; (`String`) Contains the
+ *                 new DBInstanceIdentifier for the DB Instance that will
+ *                 be applied or is in progress.
+ *           * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
+ *             time to which a database can be restored with point-in-time
+ *             restore.
+ *           * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance
+ *             is a Multi-AZ deployment.
  *           * `EngineVersion` &mdash; (`String`) Indicates the database
  *             engine version.
- *           * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
- *             IOPS value for the DB Instance that will be applied or is
- *             being applied.
- *           * `DBInstanceIdentifier` &mdash; (`String`) Contains the new
- *             DBInstanceIdentifier for the DB Instance that will be
- *             applied or is in progress.
- *         * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
- *           time to which a database can be restored with point-in-time
- *           restore.
- *         * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance is
- *           a Multi-AZ deployment.
- *         * `EngineVersion` &mdash; (`String`) Indicates the database
- *           engine version.
- *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
- *           minor version patches are applied automatically.
- *         * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
- *           Contains the identifier of the source DB Instance if this DB
- *           Instance is a Read Replica.
- *         * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
- *           Contains one or more identifiers of the Read Replicas
- *           associated with this DB Instance.
- *         * `LicenseModel` &mdash; (`String`) License model information
- *           for this DB Instance.
- *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
- *           operations per second) value.
- *         * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
- *           list of option group memberships for this DB Instance.
- *           * `OptionGroupName` &mdash; (`String`) The name of the option
- *             group that the instance belongs to.
- *           * `Status` &mdash; (`String`) The status of the DB Instance's
- *             option group membership (e.g. in-sync, pending,
- *             pending-maintenance, applying).
- *         * `CharacterSetName` &mdash; (`String`) If present, specifies
- *           the name of the character set that this instance is associated
- *           with.
- *         * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
- *           specifies the name of the secondary Availability Zone for a DB
- *           instance with multi-AZ support.
- *         * `PubliclyAccessible` &mdash; (`Boolean`)
+ *           * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
+ *             minor version patches are applied automatically.
+ *           * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
+ *             Contains the identifier of the source DB Instance if this DB
+ *             Instance is a Read Replica.
+ *           * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
+ *             Contains one or more identifiers of the Read Replicas
+ *             associated with this DB Instance.
+ *           * `LicenseModel` &mdash; (`String`) License model information
+ *             for this DB Instance.
+ *           * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS
+ *             (I/O operations per second) value.
+ *           * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
+ *             list of option group memberships for this DB Instance.
+ *               * `OptionGroupName` &mdash; (`String`) The name of the
+ *                 option group that the instance belongs to.
+ *               * `Status` &mdash; (`String`) The status of the DB
+ *                 Instance's option group membership (e.g. in-sync,
+ *                 pending, pending-maintenance, applying).
+ *           * `CharacterSetName` &mdash; (`String`) If present, specifies
+ *             the name of the character set that this instance is
+ *             associated with.
+ *           * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
+ *             specifies the name of the secondary Availability Zone for a
+ *             DB instance with multi-AZ support.
+ *           * `PubliclyAccessible` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2958,31 +2988,31 @@ AWS.RDS = inherit({})
  *       parameters only. You can use the pending-reboot value for both
  *       dynamic and static parameters, and changes are applied when DB
  *       Instance reboots.
- *       * `ParameterName` &mdash; (`String`) Specifies the name of the
- *         parameter.
- *       * `ParameterValue` &mdash; (`String`) Specifies the value of the
- *         parameter.
- *       * `Description` &mdash; (`String`) Provides a description of the
- *         parameter.
- *       * `Source` &mdash; (`String`) Indicates the source of the
- *         parameter value.
- *       * `ApplyType` &mdash; (`String`) Specifies the engine specific
- *         parameters type.
- *       * `DataType` &mdash; (`String`) Specifies the valid data type
- *         for the parameter.
- *       * `AllowedValues` &mdash; (`String`) Specifies the valid range
- *         of values for the parameter.
- *       * `IsModifiable` &mdash; (`Boolean`) Indicates whether (true) or
- *         not (false) the parameter can be modified. Some parameters
- *         have security or operational implications that prevent them
- *         from being changed.
- *       * `MinimumEngineVersion` &mdash; (`String`) The earliest engine
- *         version to which the parameter can apply.
- *       * `ApplyMethod` &mdash; (`String`) Indicates when to apply
- *         parameter updates.
- *         Possible values include:
- *         * `immediate`
- *         * `pending-reboot`
+ *         * `ParameterName` &mdash; (`String`) Specifies the name of the
+ *           parameter.
+ *         * `ParameterValue` &mdash; (`String`) Specifies the value of
+ *           the parameter.
+ *         * `Description` &mdash; (`String`) Provides a description of
+ *           the parameter.
+ *         * `Source` &mdash; (`String`) Indicates the source of the
+ *           parameter value.
+ *         * `ApplyType` &mdash; (`String`) Specifies the engine specific
+ *           parameters type.
+ *         * `DataType` &mdash; (`String`) Specifies the valid data type
+ *           for the parameter.
+ *         * `AllowedValues` &mdash; (`String`) Specifies the valid range
+ *           of values for the parameter.
+ *         * `IsModifiable` &mdash; (`Boolean`) Indicates whether (true)
+ *           or not (false) the parameter can be modified. Some
+ *           parameters have security or operational implications that
+ *           prevent them from being changed.
+ *         * `MinimumEngineVersion` &mdash; (`String`) The earliest
+ *           engine version to which the parameter can apply.
+ *         * `ApplyMethod` &mdash; (`String`) Indicates when to apply
+ *           parameter updates.
+ *           Possible values include:
+ *           * `immediate`
+ *           * `pending-reboot`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3025,26 +3055,26 @@ AWS.RDS = inherit({})
  *         CreateDBSubnetGroup ModifyDBSubnetGroup DescribeDBSubnetGroups
  *         DeleteDBSubnetGroup This data type is used as a response element
  *         in the DescribeDBSubnetGroups action.
- *         * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
- *           the DB Subnet Group.
- *         * `DBSubnetGroupDescription` &mdash; (`String`) Provides the
- *           description of the DB Subnet Group.
- *         * `VpcId` &mdash; (`String`) Provides the VpcId of the DB Subnet
- *           Group.
- *         * `SubnetGroupStatus` &mdash; (`String`) Provides the status of
- *           the DB Subnet Group.
- *         * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
- *           elements.
- *           * `SubnetIdentifier` &mdash; (`String`) Specifies the
- *             identifier of the subnet.
- *           * `SubnetAvailabilityZone` &mdash; (`map`)
- *             * `Name` &mdash; (`String`) The name of the availability
- *               zone.
- *             * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
- *               indicates the availability zone is capable of provisioned
- *               IOPs.
- *           * `SubnetStatus` &mdash; (`String`) Specifies the status of
- *             the subnet.
+ *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
+ *             the DB Subnet Group.
+ *           * `DBSubnetGroupDescription` &mdash; (`String`) Provides the
+ *             description of the DB Subnet Group.
+ *           * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
+ *             Subnet Group.
+ *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
+ *             of the DB Subnet Group.
+ *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
+ *             elements.
+ *               * `SubnetIdentifier` &mdash; (`String`) Specifies the
+ *                 identifier of the subnet.
+ *               * `SubnetAvailabilityZone` &mdash; (`map`)
+ *                   * `Name` &mdash; (`String`) The name of the
+ *                     availability zone.
+ *                   * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
+ *                     indicates the availability zone is capable of
+ *                     provisioned IOPs.
+ *               * `SubnetStatus` &mdash; (`String`) Specifies the status
+ *                 of the subnet.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3067,15 +3097,15 @@ AWS.RDS = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `EventSubscription` &mdash; (`map`)
- *         * `CustomerAwsId` &mdash; (`String`)
- *         * `CustSubscriptionId` &mdash; (`String`)
- *         * `SnsTopicArn` &mdash; (`String`)
- *         * `Status` &mdash; (`String`)
- *         * `SubscriptionCreationTime` &mdash; (`String`)
- *         * `SourceType` &mdash; (`String`)
- *         * `SourceIdsList` &mdash; (`Array<String>`)
- *         * `EventCategoriesList` &mdash; (`Array<String>`)
- *         * `Enabled` &mdash; (`Boolean`)
+ *           * `CustomerAwsId` &mdash; (`String`)
+ *           * `CustSubscriptionId` &mdash; (`String`)
+ *           * `SnsTopicArn` &mdash; (`String`)
+ *           * `Status` &mdash; (`String`)
+ *           * `SubscriptionCreationTime` &mdash; (`String`)
+ *           * `SourceType` &mdash; (`String`)
+ *           * `SourceIdsList` &mdash; (`Array<String>`)
+ *           * `EventCategoriesList` &mdash; (`Array<String>`)
+ *           * `Enabled` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3088,33 +3118,34 @@ AWS.RDS = inherit({})
  *       are added to the Option Group or, if already present, the
  *       specified configuration is used to update the existing
  *       configuration.
- *       * `OptionName` &mdash; **required** &mdash; (`String`) The
- *         configuration of options to include in a group.
- *       * `Port` &mdash; (`Integer`) The optional port for the option.
- *       * `DBSecurityGroupMemberships` &mdash; (`Array<String>`) A list
- *         of DBSecurityGroupMemebrship name strings used for this
- *         option.
- *       * `VpcSecurityGroupMemberships` &mdash; (`Array<String>`) A list
- *         of VpcSecurityGroupMemebrship name strings used for this
- *         option.
- *       * `OptionSettings` &mdash; (`Array<map>`) A list of option
- *         settings applied for this option.
- *         * `Name` &mdash; (`String`) The name of the setting.
- *         * `Value` &mdash; (`String`) The value of this setting.
- *         * `DefaultValue` &mdash; (`String`) Default value for this
- *           setting.
- *         * `Description` &mdash; (`String`) The description of the
- *           setting.
- *         * `ApplyType` &mdash; (`String`) Specifies the apply type for
- *           this setting.
- *         * `DataType` &mdash; (`String`) Specifies the valid data type
- *           of this setting
- *         * `AllowedValues` &mdash; (`String`) Specifies a valid
- *           list/range of values allowed for this setting.
- *         * `IsModifiable` &mdash; (`Boolean`) Indicates if the setting
- *           is modifiable or not.
- *         * `IsCollection` &mdash; (`Boolean`) Indicates if the value
- *           for the setting can be a list of values or a single value.
+ *         * `OptionName` &mdash; **required** &mdash; (`String`) The
+ *           configuration of options to include in a group.
+ *         * `Port` &mdash; (`Integer`) The optional port for the option.
+ *         * `DBSecurityGroupMemberships` &mdash; (`Array<String>`) A
+ *           list of DBSecurityGroupMemebrship name strings used for this
+ *           option.
+ *         * `VpcSecurityGroupMemberships` &mdash; (`Array<String>`) A
+ *           list of VpcSecurityGroupMemebrship name strings used for
+ *           this option.
+ *         * `OptionSettings` &mdash; (`Array<map>`) A list of option
+ *           settings applied for this option.
+ *             * `Name` &mdash; (`String`) The name of the setting.
+ *             * `Value` &mdash; (`String`) The value of this setting.
+ *             * `DefaultValue` &mdash; (`String`) Default value for this
+ *               setting.
+ *             * `Description` &mdash; (`String`) The description of the
+ *               setting.
+ *             * `ApplyType` &mdash; (`String`) Specifies the apply type
+ *               for this setting.
+ *             * `DataType` &mdash; (`String`) Specifies the valid data
+ *               type of this setting
+ *             * `AllowedValues` &mdash; (`String`) Specifies a valid
+ *               list/range of values allowed for this setting.
+ *             * `IsModifiable` &mdash; (`Boolean`) Indicates if the
+ *               setting is modifiable or not.
+ *             * `IsCollection` &mdash; (`Boolean`) Indicates if the
+ *               value for the setting can be a list of values or a
+ *               single value.
  *     * `OptionsToRemove` &mdash; (`Array<String>`) Options in this list
  *       are removed from the Option Group.
  *     * `ApplyImmediately` &mdash; (`Boolean`) Indicates whether the
@@ -3132,64 +3163,67 @@ AWS.RDS = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `OptionGroup` &mdash; (`map`)
- *         * `OptionGroupName` &mdash; (`String`) Specifies the name of the
- *           option group.
- *         * `OptionGroupDescription` &mdash; (`String`) Provides the
- *           description of the option group.
- *         * `EngineName` &mdash; (`String`) Engine name that this option
- *           group can be applied to.
- *         * `MajorEngineVersion` &mdash; (`String`) Indicates the major
- *           engine version associated with this option group.
- *         * `Options` &mdash; (`Array<map>`) Indicates what options are
- *           available in the option group.
- *           * `OptionName` &mdash; (`String`) The name of the option.
- *           * `OptionDescription` &mdash; (`String`) The description of
- *             the option.
- *           * `Persistent` &mdash; (`Boolean`) Indicate if this option is
- *             persistent.
- *           * `Port` &mdash; (`Integer`) If required, the port configured
- *             for this option to use.
- *           * `OptionSettings` &mdash; (`Array<map>`) The settings
- *             belonging to this option.
- *             * `Name` &mdash; (`String`) The name of the setting.
- *             * `Value` &mdash; (`String`) The value of this setting.
- *             * `DefaultValue` &mdash; (`String`) Default value for this
- *               setting.
- *             * `Description` &mdash; (`String`) The description of the
- *               setting.
- *             * `ApplyType` &mdash; (`String`) Specifies the apply type
- *               for this setting.
- *             * `DataType` &mdash; (`String`) Specifies the valid data
- *               type of this setting
- *             * `AllowedValues` &mdash; (`String`) Specifies a valid
- *               list/range of values allowed for this setting.
- *             * `IsModifiable` &mdash; (`Boolean`) Indicates if the
- *               setting is modifiable or not.
- *             * `IsCollection` &mdash; (`Boolean`) Indicates if the value
- *               for the setting can be a list of values or a single value.
- *           * `DBSecurityGroupMemberships` &mdash; (`Array<map>`) If the
- *             Option requires access to a port, then this DB Security
- *             Group allows access to the port.
- *             * `DBSecurityGroupName` &mdash; (`String`) The name of the
- *               DB Security Group.
- *             * `Status` &mdash; (`String`) The status of the DB Security
- *               Group.
- *           * `VpcSecurityGroupMemberships` &mdash; (`Array<map>`) If the
- *             Option requires access to a port, then this VPC Security
- *             Group allows access to the port.
- *             * `VpcSecurityGroupId` &mdash; (`String`)
- *             * `Status` &mdash; (`String`)
- *         * `AllowsVpcAndNonVpcInstanceMemberships` &mdash; (`Boolean`)
- *           Indicates whether this option group can be applied to both VPC
- *           and non-VPC instances. The value 'true' indicates the option
- *           group can be applied to both VPC and non-VPC instances.
- *         * `VpcId` &mdash; (`String`) If
- *           AllowsVpcAndNonVpcInstanceMemberships is 'false', this field
- *           is blank. If AllowsVpcAndNonVpcInstanceMemberships is 'true'
- *           and this field is blank, then this option group can be applied
- *           to both VPC and non-VPC instances. If this field contains a
- *           value, then this option group can only be applied to instances
- *           that are in the VPC indicated by this field.
+ *           * `OptionGroupName` &mdash; (`String`) Specifies the name of
+ *             the option group.
+ *           * `OptionGroupDescription` &mdash; (`String`) Provides the
+ *             description of the option group.
+ *           * `EngineName` &mdash; (`String`) Engine name that this option
+ *             group can be applied to.
+ *           * `MajorEngineVersion` &mdash; (`String`) Indicates the major
+ *             engine version associated with this option group.
+ *           * `Options` &mdash; (`Array<map>`) Indicates what options are
+ *             available in the option group.
+ *               * `OptionName` &mdash; (`String`) The name of the option.
+ *               * `OptionDescription` &mdash; (`String`) The description
+ *                 of the option.
+ *               * `Persistent` &mdash; (`Boolean`) Indicate if this option
+ *                 is persistent.
+ *               * `Port` &mdash; (`Integer`) If required, the port
+ *                 configured for this option to use.
+ *               * `OptionSettings` &mdash; (`Array<map>`) The settings
+ *                 belonging to this option.
+ *                   * `Name` &mdash; (`String`) The name of the setting.
+ *                   * `Value` &mdash; (`String`) The value of this
+ *                     setting.
+ *                   * `DefaultValue` &mdash; (`String`) Default value for
+ *                     this setting.
+ *                   * `Description` &mdash; (`String`) The description of
+ *                     the setting.
+ *                   * `ApplyType` &mdash; (`String`) Specifies the apply
+ *                     type for this setting.
+ *                   * `DataType` &mdash; (`String`) Specifies the valid
+ *                     data type of this setting
+ *                   * `AllowedValues` &mdash; (`String`) Specifies a valid
+ *                     list/range of values allowed for this setting.
+ *                   * `IsModifiable` &mdash; (`Boolean`) Indicates if the
+ *                     setting is modifiable or not.
+ *                   * `IsCollection` &mdash; (`Boolean`) Indicates if the
+ *                     value for the setting can be a list of values or a
+ *                     single value.
+ *               * `DBSecurityGroupMemberships` &mdash; (`Array<map>`) If
+ *                 the Option requires access to a port, then this DB
+ *                 Security Group allows access to the port.
+ *                   * `DBSecurityGroupName` &mdash; (`String`) The name of
+ *                     the DB Security Group.
+ *                   * `Status` &mdash; (`String`) The status of the DB
+ *                     Security Group.
+ *               * `VpcSecurityGroupMemberships` &mdash; (`Array<map>`) If
+ *                 the Option requires access to a port, then this VPC
+ *                 Security Group allows access to the port.
+ *                   * `VpcSecurityGroupId` &mdash; (`String`)
+ *                   * `Status` &mdash; (`String`)
+ *           * `AllowsVpcAndNonVpcInstanceMemberships` &mdash; (`Boolean`)
+ *             Indicates whether this option group can be applied to both
+ *             VPC and non-VPC instances. The value 'true' indicates the
+ *             option group can be applied to both VPC and non-VPC
+ *             instances.
+ *           * `VpcId` &mdash; (`String`) If
+ *             AllowsVpcAndNonVpcInstanceMemberships is 'false', this field
+ *             is blank. If AllowsVpcAndNonVpcInstanceMemberships is 'true'
+ *             and this field is blank, then this option group can be
+ *             applied to both VPC and non-VPC instances. If this field
+ *             contains a value, then this option group can only be applied
+ *             to instances that are in the VPC indicated by this field.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3235,145 +3269,148 @@ AWS.RDS = inherit({})
  *         invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
  *         response element in the DescribeDBInstances action.
- *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
- *           user-supplied database identifier. This is the unique key that
- *           identifies a DB Instance.
- *         * `DBInstanceClass` &mdash; (`String`) Contains the name of the
- *           compute and memory capacity class of the DB Instance.
- *         * `Engine` &mdash; (`String`) Provides the name of the database
- *           engine to be used for this DB Instance.
- *         * `DBInstanceStatus` &mdash; (`String`) Specifies the current
- *           state of this database.
- *         * `MasterUsername` &mdash; (`String`) Contains the master
- *           username for the DB Instance.
- *         * `DBName` &mdash; (`String`) The meaning of this parameter
- *           differs according to the database engine you use. MySQL
- *           Contains the name of the initial database of this instance
- *           that was provided at create time, if one was specified when
- *           the DB Instance was created. This same name is returned for
- *           the life of the DB Instance. Type: String Oracle Contains the
- *           Oracle System ID (SID) of the created DB Instance.
- *         * `Endpoint` &mdash; (`map`) Specifies the connection endpoint.
- *           * `Address` &mdash; (`String`) Specifies the DNS address of
- *             the DB Instance.
- *           * `Port` &mdash; (`Integer`) Specifies the port that the
- *             database engine is listening on.
- *         * `AllocatedStorage` &mdash; (`Integer`) Specifies the allocated
- *           storage size specified in gigabytes.
- *         * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
- *           time the DB Instance was created.
- *         * `PreferredBackupWindow` &mdash; (`String`) Specifies the daily
- *           time range during which automated backups are created if
- *           automated backups are enabled, as determined by the
- *           BackupRetentionPeriod.
- *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
- *           number of days for which automatic DB Snapshots are retained.
- *         * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of DB
- *           Security Group elements containing only DBSecurityGroup.Name
- *           and DBSecurityGroup.Status subelements.
- *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
- *             Security Group.
- *           * `Status` &mdash; (`String`) The status of the DB Security
- *             Group.
- *         * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
- *           VPC security group elements that the DB Instance belongs to.
- *           * `VpcSecurityGroupId` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *         * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
- *           of DB Parameter Groups applied to this DB Instance.
- *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
- *             Parameter Group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
- *           the Availability Zone the DB Instance is located in.
- *         * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
- *           the subnet group associated with the DB instance, including
- *           the name, descrption and subnets in the subnet group.
- *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
- *             the DB Subnet Group.
- *           * `DBSubnetGroupDescription` &mdash; (`String`) Provides the
- *             description of the DB Subnet Group.
- *           * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
- *             Subnet Group.
- *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
- *             of the DB Subnet Group.
- *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
- *             elements.
- *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
- *               identifier of the subnet.
- *             * `SubnetAvailabilityZone` &mdash; (`map`)
- *               * `Name` &mdash; (`String`) The name of the availability
- *                 zone.
- *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
- *                 indicates the availability zone is capable of
- *                 provisioned IOPs.
- *             * `SubnetStatus` &mdash; (`String`) Specifies the status of
- *               the subnet.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
- *           weekly time range (in UTC) during which system maintenance can
- *           occur.
- *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
- *           to the DB Instance are pending. This element is only included
- *           when changes are pending. Specific changes are identified by
- *           subelements.
- *           * `DBInstanceClass` &mdash; (`String`) Contains the new
- *             DBInstanceClass for the DB Instance that will be applied or
- *             is in progress.
- *           * `AllocatedStorage` &mdash; (`Integer`) Contains the new
- *             AllocatedStorage size for the DB Instance that will be
- *             applied or is in progress.
- *           * `MasterUserPassword` &mdash; (`String`) Contains the pending
- *             or in-progress change of the master credentials for the DB
- *             Instance.
- *           * `Port` &mdash; (`Integer`) Specifies the pending port for
- *             the DB Instance.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Contains a
+ *             user-supplied database identifier. This is the unique key
+ *             that identifies a DB Instance.
+ *           * `DBInstanceClass` &mdash; (`String`) Contains the name of
+ *             the compute and memory capacity class of the DB Instance.
+ *           * `Engine` &mdash; (`String`) Provides the name of the
+ *             database engine to be used for this DB Instance.
+ *           * `DBInstanceStatus` &mdash; (`String`) Specifies the current
+ *             state of this database.
+ *           * `MasterUsername` &mdash; (`String`) Contains the master
+ *             username for the DB Instance.
+ *           * `DBName` &mdash; (`String`) The meaning of this parameter
+ *             differs according to the database engine you use. MySQL
+ *             Contains the name of the initial database of this instance
+ *             that was provided at create time, if one was specified when
+ *             the DB Instance was created. This same name is returned for
+ *             the life of the DB Instance. Type: String Oracle Contains
+ *             the Oracle System ID (SID) of the created DB Instance.
+ *           * `Endpoint` &mdash; (`map`) Specifies the connection
+ *             endpoint.
+ *               * `Address` &mdash; (`String`) Specifies the DNS address
+ *                 of the DB Instance.
+ *               * `Port` &mdash; (`Integer`) Specifies the port that the
+ *                 database engine is listening on.
+ *           * `AllocatedStorage` &mdash; (`Integer`) Specifies the
+ *             allocated storage size specified in gigabytes.
+ *           * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
+ *             time the DB Instance was created.
+ *           * `PreferredBackupWindow` &mdash; (`String`) Specifies the
+ *             daily time range during which automated backups are created
+ *             if automated backups are enabled, as determined by the
+ *             BackupRetentionPeriod.
  *           * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
- *             pending number of days for which automated backups are
+ *             number of days for which automatic DB Snapshots are
  *             retained.
- *           * `MultiAZ` &mdash; (`Boolean`) Indicates that the Single-AZ
- *             DB Instance is to change to a Multi-AZ deployment.
+ *           * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of
+ *             DB Security Group elements containing only
+ *             DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *               * `DBSecurityGroupName` &mdash; (`String`) The name of the
+ *                 DB Security Group.
+ *               * `Status` &mdash; (`String`) The status of the DB
+ *                 Security Group.
+ *           * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
+ *             VPC security group elements that the DB Instance belongs to.
+ *               * `VpcSecurityGroupId` &mdash; (`String`)
+ *               * `Status` &mdash; (`String`)
+ *           * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
+ *             of DB Parameter Groups applied to this DB Instance.
+ *               * `DBParameterGroupName` &mdash; (`String`) The name of
+ *                 the DP Parameter Group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *           * `AvailabilityZone` &mdash; (`String`) Specifies the name of
+ *             the Availability Zone the DB Instance is located in.
+ *           * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
+ *             the subnet group associated with the DB instance, including
+ *             the name, descrption and subnets in the subnet group.
+ *               * `DBSubnetGroupName` &mdash; (`String`) Specifies the
+ *                 name of the DB Subnet Group.
+ *               * `DBSubnetGroupDescription` &mdash; (`String`) Provides
+ *                 the description of the DB Subnet Group.
+ *               * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
+ *                 Subnet Group.
+ *               * `SubnetGroupStatus` &mdash; (`String`) Provides the
+ *                 status of the DB Subnet Group.
+ *               * `Subnets` &mdash; (`Array<map>`) Contains a list of
+ *                 Subnet elements.
+ *                   * `SubnetIdentifier` &mdash; (`String`) Specifies the
+ *                     identifier of the subnet.
+ *                   * `SubnetAvailabilityZone` &mdash; (`map`)
+ *                       * `Name` &mdash; (`String`) The name of the
+ *                         availability zone.
+ *                       * `ProvisionedIopsCapable` &mdash; (`Boolean`)
+ *                         True indicates the availability zone is capable
+ *                         of provisioned IOPs.
+ *                   * `SubnetStatus` &mdash; (`String`) Specifies the
+ *                     status of the subnet.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies
+ *             the weekly time range (in UTC) during which system
+ *             maintenance can occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) Specifies that
+ *             changes to the DB Instance are pending. This element is only
+ *             included when changes are pending. Specific changes are
+ *             identified by subelements.
+ *               * `DBInstanceClass` &mdash; (`String`) Contains the new
+ *                 DBInstanceClass for the DB Instance that will be applied
+ *                 or is in progress.
+ *               * `AllocatedStorage` &mdash; (`Integer`) Contains the new
+ *                 AllocatedStorage size for the DB Instance that will be
+ *                 applied or is in progress.
+ *               * `MasterUserPassword` &mdash; (`String`) Contains the
+ *                 pending or in-progress change of the master credentials
+ *                 for the DB Instance.
+ *               * `Port` &mdash; (`Integer`) Specifies the pending port
+ *                 for the DB Instance.
+ *               * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies
+ *                 the pending number of days for which automated backups
+ *                 are retained.
+ *               * `MultiAZ` &mdash; (`Boolean`) Indicates that the
+ *                 Single-AZ DB Instance is to change to a Multi-AZ
+ *                 deployment.
+ *               * `EngineVersion` &mdash; (`String`) Indicates the
+ *                 database engine version.
+ *               * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
+ *                 IOPS value for the DB Instance that will be applied or
+ *                 is being applied.
+ *               * `DBInstanceIdentifier` &mdash; (`String`) Contains the
+ *                 new DBInstanceIdentifier for the DB Instance that will
+ *                 be applied or is in progress.
+ *           * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
+ *             time to which a database can be restored with point-in-time
+ *             restore.
+ *           * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance
+ *             is a Multi-AZ deployment.
  *           * `EngineVersion` &mdash; (`String`) Indicates the database
  *             engine version.
- *           * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
- *             IOPS value for the DB Instance that will be applied or is
- *             being applied.
- *           * `DBInstanceIdentifier` &mdash; (`String`) Contains the new
- *             DBInstanceIdentifier for the DB Instance that will be
- *             applied or is in progress.
- *         * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
- *           time to which a database can be restored with point-in-time
- *           restore.
- *         * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance is
- *           a Multi-AZ deployment.
- *         * `EngineVersion` &mdash; (`String`) Indicates the database
- *           engine version.
- *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
- *           minor version patches are applied automatically.
- *         * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
- *           Contains the identifier of the source DB Instance if this DB
- *           Instance is a Read Replica.
- *         * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
- *           Contains one or more identifiers of the Read Replicas
- *           associated with this DB Instance.
- *         * `LicenseModel` &mdash; (`String`) License model information
- *           for this DB Instance.
- *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
- *           operations per second) value.
- *         * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
- *           list of option group memberships for this DB Instance.
- *           * `OptionGroupName` &mdash; (`String`) The name of the option
- *             group that the instance belongs to.
- *           * `Status` &mdash; (`String`) The status of the DB Instance's
- *             option group membership (e.g. in-sync, pending,
- *             pending-maintenance, applying).
- *         * `CharacterSetName` &mdash; (`String`) If present, specifies
- *           the name of the character set that this instance is associated
- *           with.
- *         * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
- *           specifies the name of the secondary Availability Zone for a DB
- *           instance with multi-AZ support.
- *         * `PubliclyAccessible` &mdash; (`Boolean`)
+ *           * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
+ *             minor version patches are applied automatically.
+ *           * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
+ *             Contains the identifier of the source DB Instance if this DB
+ *             Instance is a Read Replica.
+ *           * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
+ *             Contains one or more identifiers of the Read Replicas
+ *             associated with this DB Instance.
+ *           * `LicenseModel` &mdash; (`String`) License model information
+ *             for this DB Instance.
+ *           * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS
+ *             (I/O operations per second) value.
+ *           * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
+ *             list of option group memberships for this DB Instance.
+ *               * `OptionGroupName` &mdash; (`String`) The name of the
+ *                 option group that the instance belongs to.
+ *               * `Status` &mdash; (`String`) The status of the DB
+ *                 Instance's option group membership (e.g. in-sync,
+ *                 pending, pending-maintenance, applying).
+ *           * `CharacterSetName` &mdash; (`String`) If present, specifies
+ *             the name of the character set that this instance is
+ *             associated with.
+ *           * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
+ *             specifies the name of the secondary Availability Zone for a
+ *             DB instance with multi-AZ support.
+ *           * `PubliclyAccessible` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3400,37 +3437,38 @@ AWS.RDS = inherit({})
  *       * `ReservedDBInstance` &mdash; (`map`) This data type is used as a
  *         response element in the DescribeReservedDBInstances and
  *         PurchaseReservedDBInstancesOffering actions.
- *         * `ReservedDBInstanceId` &mdash; (`String`) The unique
- *           identifier for the reservation.
- *         * `ReservedDBInstancesOfferingId` &mdash; (`String`) The
- *           offering identifier.
- *         * `DBInstanceClass` &mdash; (`String`) The DB instance class for
- *           the reserved DB Instance.
- *         * `StartTime` &mdash; (`Date`) The time the reservation started.
- *         * `Duration` &mdash; (`Integer`) The duration of the reservation
- *           in seconds.
- *         * `FixedPrice` &mdash; (`Float`) The fixed price charged for
- *           this reserved DB Instance.
- *         * `UsagePrice` &mdash; (`Float`) The hourly price charged for
- *           this reserved DB Instance.
- *         * `CurrencyCode` &mdash; (`String`) The currency code for the
- *           reserved DB Instance.
- *         * `DBInstanceCount` &mdash; (`Integer`) The number of reserved
- *           DB Instances.
- *         * `ProductDescription` &mdash; (`String`) The description of the
- *           reserved DB Instance.
- *         * `OfferingType` &mdash; (`String`) The offering type of this
- *           reserved DB Instance.
- *         * `MultiAZ` &mdash; (`Boolean`) Indicates if the reservation
- *           applies to Multi-AZ deployments.
- *         * `State` &mdash; (`String`) The state of the reserved DB
- *           Instance.
- *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring price
- *           charged to run this reserved DB Instance.
- *           * `RecurringChargeAmount` &mdash; (`Float`) The amount of the
- *             recurring charge.
- *           * `RecurringChargeFrequency` &mdash; (`String`) The frequency
- *             of the recurring charge.
+ *           * `ReservedDBInstanceId` &mdash; (`String`) The unique
+ *             identifier for the reservation.
+ *           * `ReservedDBInstancesOfferingId` &mdash; (`String`) The
+ *             offering identifier.
+ *           * `DBInstanceClass` &mdash; (`String`) The DB instance class
+ *             for the reserved DB Instance.
+ *           * `StartTime` &mdash; (`Date`) The time the reservation
+ *             started.
+ *           * `Duration` &mdash; (`Integer`) The duration of the
+ *             reservation in seconds.
+ *           * `FixedPrice` &mdash; (`Float`) The fixed price charged for
+ *             this reserved DB Instance.
+ *           * `UsagePrice` &mdash; (`Float`) The hourly price charged for
+ *             this reserved DB Instance.
+ *           * `CurrencyCode` &mdash; (`String`) The currency code for the
+ *             reserved DB Instance.
+ *           * `DBInstanceCount` &mdash; (`Integer`) The number of reserved
+ *             DB Instances.
+ *           * `ProductDescription` &mdash; (`String`) The description of
+ *             the reserved DB Instance.
+ *           * `OfferingType` &mdash; (`String`) The offering type of this
+ *             reserved DB Instance.
+ *           * `MultiAZ` &mdash; (`Boolean`) Indicates if the reservation
+ *             applies to Multi-AZ deployments.
+ *           * `State` &mdash; (`String`) The state of the reserved DB
+ *             Instance.
+ *           * `RecurringCharges` &mdash; (`Array<map>`) The recurring
+ *             price charged to run this reserved DB Instance.
+ *               * `RecurringChargeAmount` &mdash; (`Float`) The amount of
+ *                 the recurring charge.
+ *               * `RecurringChargeFrequency` &mdash; (`String`) The
+ *                 frequency of the recurring charge.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3460,145 +3498,148 @@ AWS.RDS = inherit({})
  *         invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
  *         response element in the DescribeDBInstances action.
- *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
- *           user-supplied database identifier. This is the unique key that
- *           identifies a DB Instance.
- *         * `DBInstanceClass` &mdash; (`String`) Contains the name of the
- *           compute and memory capacity class of the DB Instance.
- *         * `Engine` &mdash; (`String`) Provides the name of the database
- *           engine to be used for this DB Instance.
- *         * `DBInstanceStatus` &mdash; (`String`) Specifies the current
- *           state of this database.
- *         * `MasterUsername` &mdash; (`String`) Contains the master
- *           username for the DB Instance.
- *         * `DBName` &mdash; (`String`) The meaning of this parameter
- *           differs according to the database engine you use. MySQL
- *           Contains the name of the initial database of this instance
- *           that was provided at create time, if one was specified when
- *           the DB Instance was created. This same name is returned for
- *           the life of the DB Instance. Type: String Oracle Contains the
- *           Oracle System ID (SID) of the created DB Instance.
- *         * `Endpoint` &mdash; (`map`) Specifies the connection endpoint.
- *           * `Address` &mdash; (`String`) Specifies the DNS address of
- *             the DB Instance.
- *           * `Port` &mdash; (`Integer`) Specifies the port that the
- *             database engine is listening on.
- *         * `AllocatedStorage` &mdash; (`Integer`) Specifies the allocated
- *           storage size specified in gigabytes.
- *         * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
- *           time the DB Instance was created.
- *         * `PreferredBackupWindow` &mdash; (`String`) Specifies the daily
- *           time range during which automated backups are created if
- *           automated backups are enabled, as determined by the
- *           BackupRetentionPeriod.
- *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
- *           number of days for which automatic DB Snapshots are retained.
- *         * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of DB
- *           Security Group elements containing only DBSecurityGroup.Name
- *           and DBSecurityGroup.Status subelements.
- *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
- *             Security Group.
- *           * `Status` &mdash; (`String`) The status of the DB Security
- *             Group.
- *         * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
- *           VPC security group elements that the DB Instance belongs to.
- *           * `VpcSecurityGroupId` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *         * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
- *           of DB Parameter Groups applied to this DB Instance.
- *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
- *             Parameter Group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
- *           the Availability Zone the DB Instance is located in.
- *         * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
- *           the subnet group associated with the DB instance, including
- *           the name, descrption and subnets in the subnet group.
- *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
- *             the DB Subnet Group.
- *           * `DBSubnetGroupDescription` &mdash; (`String`) Provides the
- *             description of the DB Subnet Group.
- *           * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
- *             Subnet Group.
- *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
- *             of the DB Subnet Group.
- *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
- *             elements.
- *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
- *               identifier of the subnet.
- *             * `SubnetAvailabilityZone` &mdash; (`map`)
- *               * `Name` &mdash; (`String`) The name of the availability
- *                 zone.
- *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
- *                 indicates the availability zone is capable of
- *                 provisioned IOPs.
- *             * `SubnetStatus` &mdash; (`String`) Specifies the status of
- *               the subnet.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
- *           weekly time range (in UTC) during which system maintenance can
- *           occur.
- *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
- *           to the DB Instance are pending. This element is only included
- *           when changes are pending. Specific changes are identified by
- *           subelements.
- *           * `DBInstanceClass` &mdash; (`String`) Contains the new
- *             DBInstanceClass for the DB Instance that will be applied or
- *             is in progress.
- *           * `AllocatedStorage` &mdash; (`Integer`) Contains the new
- *             AllocatedStorage size for the DB Instance that will be
- *             applied or is in progress.
- *           * `MasterUserPassword` &mdash; (`String`) Contains the pending
- *             or in-progress change of the master credentials for the DB
- *             Instance.
- *           * `Port` &mdash; (`Integer`) Specifies the pending port for
- *             the DB Instance.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Contains a
+ *             user-supplied database identifier. This is the unique key
+ *             that identifies a DB Instance.
+ *           * `DBInstanceClass` &mdash; (`String`) Contains the name of
+ *             the compute and memory capacity class of the DB Instance.
+ *           * `Engine` &mdash; (`String`) Provides the name of the
+ *             database engine to be used for this DB Instance.
+ *           * `DBInstanceStatus` &mdash; (`String`) Specifies the current
+ *             state of this database.
+ *           * `MasterUsername` &mdash; (`String`) Contains the master
+ *             username for the DB Instance.
+ *           * `DBName` &mdash; (`String`) The meaning of this parameter
+ *             differs according to the database engine you use. MySQL
+ *             Contains the name of the initial database of this instance
+ *             that was provided at create time, if one was specified when
+ *             the DB Instance was created. This same name is returned for
+ *             the life of the DB Instance. Type: String Oracle Contains
+ *             the Oracle System ID (SID) of the created DB Instance.
+ *           * `Endpoint` &mdash; (`map`) Specifies the connection
+ *             endpoint.
+ *               * `Address` &mdash; (`String`) Specifies the DNS address
+ *                 of the DB Instance.
+ *               * `Port` &mdash; (`Integer`) Specifies the port that the
+ *                 database engine is listening on.
+ *           * `AllocatedStorage` &mdash; (`Integer`) Specifies the
+ *             allocated storage size specified in gigabytes.
+ *           * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
+ *             time the DB Instance was created.
+ *           * `PreferredBackupWindow` &mdash; (`String`) Specifies the
+ *             daily time range during which automated backups are created
+ *             if automated backups are enabled, as determined by the
+ *             BackupRetentionPeriod.
  *           * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
- *             pending number of days for which automated backups are
+ *             number of days for which automatic DB Snapshots are
  *             retained.
- *           * `MultiAZ` &mdash; (`Boolean`) Indicates that the Single-AZ
- *             DB Instance is to change to a Multi-AZ deployment.
+ *           * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of
+ *             DB Security Group elements containing only
+ *             DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *               * `DBSecurityGroupName` &mdash; (`String`) The name of the
+ *                 DB Security Group.
+ *               * `Status` &mdash; (`String`) The status of the DB
+ *                 Security Group.
+ *           * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
+ *             VPC security group elements that the DB Instance belongs to.
+ *               * `VpcSecurityGroupId` &mdash; (`String`)
+ *               * `Status` &mdash; (`String`)
+ *           * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
+ *             of DB Parameter Groups applied to this DB Instance.
+ *               * `DBParameterGroupName` &mdash; (`String`) The name of
+ *                 the DP Parameter Group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *           * `AvailabilityZone` &mdash; (`String`) Specifies the name of
+ *             the Availability Zone the DB Instance is located in.
+ *           * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
+ *             the subnet group associated with the DB instance, including
+ *             the name, descrption and subnets in the subnet group.
+ *               * `DBSubnetGroupName` &mdash; (`String`) Specifies the
+ *                 name of the DB Subnet Group.
+ *               * `DBSubnetGroupDescription` &mdash; (`String`) Provides
+ *                 the description of the DB Subnet Group.
+ *               * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
+ *                 Subnet Group.
+ *               * `SubnetGroupStatus` &mdash; (`String`) Provides the
+ *                 status of the DB Subnet Group.
+ *               * `Subnets` &mdash; (`Array<map>`) Contains a list of
+ *                 Subnet elements.
+ *                   * `SubnetIdentifier` &mdash; (`String`) Specifies the
+ *                     identifier of the subnet.
+ *                   * `SubnetAvailabilityZone` &mdash; (`map`)
+ *                       * `Name` &mdash; (`String`) The name of the
+ *                         availability zone.
+ *                       * `ProvisionedIopsCapable` &mdash; (`Boolean`)
+ *                         True indicates the availability zone is capable
+ *                         of provisioned IOPs.
+ *                   * `SubnetStatus` &mdash; (`String`) Specifies the
+ *                     status of the subnet.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies
+ *             the weekly time range (in UTC) during which system
+ *             maintenance can occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) Specifies that
+ *             changes to the DB Instance are pending. This element is only
+ *             included when changes are pending. Specific changes are
+ *             identified by subelements.
+ *               * `DBInstanceClass` &mdash; (`String`) Contains the new
+ *                 DBInstanceClass for the DB Instance that will be applied
+ *                 or is in progress.
+ *               * `AllocatedStorage` &mdash; (`Integer`) Contains the new
+ *                 AllocatedStorage size for the DB Instance that will be
+ *                 applied or is in progress.
+ *               * `MasterUserPassword` &mdash; (`String`) Contains the
+ *                 pending or in-progress change of the master credentials
+ *                 for the DB Instance.
+ *               * `Port` &mdash; (`Integer`) Specifies the pending port
+ *                 for the DB Instance.
+ *               * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies
+ *                 the pending number of days for which automated backups
+ *                 are retained.
+ *               * `MultiAZ` &mdash; (`Boolean`) Indicates that the
+ *                 Single-AZ DB Instance is to change to a Multi-AZ
+ *                 deployment.
+ *               * `EngineVersion` &mdash; (`String`) Indicates the
+ *                 database engine version.
+ *               * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
+ *                 IOPS value for the DB Instance that will be applied or
+ *                 is being applied.
+ *               * `DBInstanceIdentifier` &mdash; (`String`) Contains the
+ *                 new DBInstanceIdentifier for the DB Instance that will
+ *                 be applied or is in progress.
+ *           * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
+ *             time to which a database can be restored with point-in-time
+ *             restore.
+ *           * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance
+ *             is a Multi-AZ deployment.
  *           * `EngineVersion` &mdash; (`String`) Indicates the database
  *             engine version.
- *           * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
- *             IOPS value for the DB Instance that will be applied or is
- *             being applied.
- *           * `DBInstanceIdentifier` &mdash; (`String`) Contains the new
- *             DBInstanceIdentifier for the DB Instance that will be
- *             applied or is in progress.
- *         * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
- *           time to which a database can be restored with point-in-time
- *           restore.
- *         * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance is
- *           a Multi-AZ deployment.
- *         * `EngineVersion` &mdash; (`String`) Indicates the database
- *           engine version.
- *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
- *           minor version patches are applied automatically.
- *         * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
- *           Contains the identifier of the source DB Instance if this DB
- *           Instance is a Read Replica.
- *         * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
- *           Contains one or more identifiers of the Read Replicas
- *           associated with this DB Instance.
- *         * `LicenseModel` &mdash; (`String`) License model information
- *           for this DB Instance.
- *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
- *           operations per second) value.
- *         * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
- *           list of option group memberships for this DB Instance.
- *           * `OptionGroupName` &mdash; (`String`) The name of the option
- *             group that the instance belongs to.
- *           * `Status` &mdash; (`String`) The status of the DB Instance's
- *             option group membership (e.g. in-sync, pending,
- *             pending-maintenance, applying).
- *         * `CharacterSetName` &mdash; (`String`) If present, specifies
- *           the name of the character set that this instance is associated
- *           with.
- *         * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
- *           specifies the name of the secondary Availability Zone for a DB
- *           instance with multi-AZ support.
- *         * `PubliclyAccessible` &mdash; (`Boolean`)
+ *           * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
+ *             minor version patches are applied automatically.
+ *           * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
+ *             Contains the identifier of the source DB Instance if this DB
+ *             Instance is a Read Replica.
+ *           * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
+ *             Contains one or more identifiers of the Read Replicas
+ *             associated with this DB Instance.
+ *           * `LicenseModel` &mdash; (`String`) License model information
+ *             for this DB Instance.
+ *           * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS
+ *             (I/O operations per second) value.
+ *           * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
+ *             list of option group memberships for this DB Instance.
+ *               * `OptionGroupName` &mdash; (`String`) The name of the
+ *                 option group that the instance belongs to.
+ *               * `Status` &mdash; (`String`) The status of the DB
+ *                 Instance's option group membership (e.g. in-sync,
+ *                 pending, pending-maintenance, applying).
+ *           * `CharacterSetName` &mdash; (`String`) If present, specifies
+ *             the name of the character set that this instance is
+ *             associated with.
+ *           * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
+ *             specifies the name of the secondary Availability Zone for a
+ *             DB instance with multi-AZ support.
+ *           * `PubliclyAccessible` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3618,15 +3659,15 @@ AWS.RDS = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `EventSubscription` &mdash; (`map`)
- *         * `CustomerAwsId` &mdash; (`String`)
- *         * `CustSubscriptionId` &mdash; (`String`)
- *         * `SnsTopicArn` &mdash; (`String`)
- *         * `Status` &mdash; (`String`)
- *         * `SubscriptionCreationTime` &mdash; (`String`)
- *         * `SourceType` &mdash; (`String`)
- *         * `SourceIdsList` &mdash; (`Array<String>`)
- *         * `EventCategoriesList` &mdash; (`Array<String>`)
- *         * `Enabled` &mdash; (`Boolean`)
+ *           * `CustomerAwsId` &mdash; (`String`)
+ *           * `CustSubscriptionId` &mdash; (`String`)
+ *           * `SnsTopicArn` &mdash; (`String`)
+ *           * `Status` &mdash; (`String`)
+ *           * `SubscriptionCreationTime` &mdash; (`String`)
+ *           * `SourceType` &mdash; (`String`)
+ *           * `SourceIdsList` &mdash; (`Array<String>`)
+ *           * `EventCategoriesList` &mdash; (`Array<String>`)
+ *           * `Enabled` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3668,31 +3709,31 @@ AWS.RDS = inherit({})
  *       pending-reboot value for both dynamic and static parameters, and
  *       changes are applied when DB Instance reboots. Oracle Valid
  *       Values (for Apply method): pending-reboot
- *       * `ParameterName` &mdash; (`String`) Specifies the name of the
- *         parameter.
- *       * `ParameterValue` &mdash; (`String`) Specifies the value of the
- *         parameter.
- *       * `Description` &mdash; (`String`) Provides a description of the
- *         parameter.
- *       * `Source` &mdash; (`String`) Indicates the source of the
- *         parameter value.
- *       * `ApplyType` &mdash; (`String`) Specifies the engine specific
- *         parameters type.
- *       * `DataType` &mdash; (`String`) Specifies the valid data type
- *         for the parameter.
- *       * `AllowedValues` &mdash; (`String`) Specifies the valid range
- *         of values for the parameter.
- *       * `IsModifiable` &mdash; (`Boolean`) Indicates whether (true) or
- *         not (false) the parameter can be modified. Some parameters
- *         have security or operational implications that prevent them
- *         from being changed.
- *       * `MinimumEngineVersion` &mdash; (`String`) The earliest engine
- *         version to which the parameter can apply.
- *       * `ApplyMethod` &mdash; (`String`) Indicates when to apply
- *         parameter updates.
- *         Possible values include:
- *         * `immediate`
- *         * `pending-reboot`
+ *         * `ParameterName` &mdash; (`String`) Specifies the name of the
+ *           parameter.
+ *         * `ParameterValue` &mdash; (`String`) Specifies the value of
+ *           the parameter.
+ *         * `Description` &mdash; (`String`) Provides a description of
+ *           the parameter.
+ *         * `Source` &mdash; (`String`) Indicates the source of the
+ *           parameter value.
+ *         * `ApplyType` &mdash; (`String`) Specifies the engine specific
+ *           parameters type.
+ *         * `DataType` &mdash; (`String`) Specifies the valid data type
+ *           for the parameter.
+ *         * `AllowedValues` &mdash; (`String`) Specifies the valid range
+ *           of values for the parameter.
+ *         * `IsModifiable` &mdash; (`Boolean`) Indicates whether (true)
+ *           or not (false) the parameter can be modified. Some
+ *           parameters have security or operational implications that
+ *           prevent them from being changed.
+ *         * `MinimumEngineVersion` &mdash; (`String`) The earliest
+ *           engine version to which the parameter can apply.
+ *         * `ApplyMethod` &mdash; (`String`) Indicates when to apply
+ *           parameter updates.
+ *           Possible values include:
+ *           * `immediate`
+ *           * `pending-reboot`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3772,145 +3813,148 @@ AWS.RDS = inherit({})
  *         invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
  *         response element in the DescribeDBInstances action.
- *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
- *           user-supplied database identifier. This is the unique key that
- *           identifies a DB Instance.
- *         * `DBInstanceClass` &mdash; (`String`) Contains the name of the
- *           compute and memory capacity class of the DB Instance.
- *         * `Engine` &mdash; (`String`) Provides the name of the database
- *           engine to be used for this DB Instance.
- *         * `DBInstanceStatus` &mdash; (`String`) Specifies the current
- *           state of this database.
- *         * `MasterUsername` &mdash; (`String`) Contains the master
- *           username for the DB Instance.
- *         * `DBName` &mdash; (`String`) The meaning of this parameter
- *           differs according to the database engine you use. MySQL
- *           Contains the name of the initial database of this instance
- *           that was provided at create time, if one was specified when
- *           the DB Instance was created. This same name is returned for
- *           the life of the DB Instance. Type: String Oracle Contains the
- *           Oracle System ID (SID) of the created DB Instance.
- *         * `Endpoint` &mdash; (`map`) Specifies the connection endpoint.
- *           * `Address` &mdash; (`String`) Specifies the DNS address of
- *             the DB Instance.
- *           * `Port` &mdash; (`Integer`) Specifies the port that the
- *             database engine is listening on.
- *         * `AllocatedStorage` &mdash; (`Integer`) Specifies the allocated
- *           storage size specified in gigabytes.
- *         * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
- *           time the DB Instance was created.
- *         * `PreferredBackupWindow` &mdash; (`String`) Specifies the daily
- *           time range during which automated backups are created if
- *           automated backups are enabled, as determined by the
- *           BackupRetentionPeriod.
- *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
- *           number of days for which automatic DB Snapshots are retained.
- *         * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of DB
- *           Security Group elements containing only DBSecurityGroup.Name
- *           and DBSecurityGroup.Status subelements.
- *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
- *             Security Group.
- *           * `Status` &mdash; (`String`) The status of the DB Security
- *             Group.
- *         * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
- *           VPC security group elements that the DB Instance belongs to.
- *           * `VpcSecurityGroupId` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *         * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
- *           of DB Parameter Groups applied to this DB Instance.
- *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
- *             Parameter Group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
- *           the Availability Zone the DB Instance is located in.
- *         * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
- *           the subnet group associated with the DB instance, including
- *           the name, descrption and subnets in the subnet group.
- *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
- *             the DB Subnet Group.
- *           * `DBSubnetGroupDescription` &mdash; (`String`) Provides the
- *             description of the DB Subnet Group.
- *           * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
- *             Subnet Group.
- *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
- *             of the DB Subnet Group.
- *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
- *             elements.
- *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
- *               identifier of the subnet.
- *             * `SubnetAvailabilityZone` &mdash; (`map`)
- *               * `Name` &mdash; (`String`) The name of the availability
- *                 zone.
- *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
- *                 indicates the availability zone is capable of
- *                 provisioned IOPs.
- *             * `SubnetStatus` &mdash; (`String`) Specifies the status of
- *               the subnet.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
- *           weekly time range (in UTC) during which system maintenance can
- *           occur.
- *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
- *           to the DB Instance are pending. This element is only included
- *           when changes are pending. Specific changes are identified by
- *           subelements.
- *           * `DBInstanceClass` &mdash; (`String`) Contains the new
- *             DBInstanceClass for the DB Instance that will be applied or
- *             is in progress.
- *           * `AllocatedStorage` &mdash; (`Integer`) Contains the new
- *             AllocatedStorage size for the DB Instance that will be
- *             applied or is in progress.
- *           * `MasterUserPassword` &mdash; (`String`) Contains the pending
- *             or in-progress change of the master credentials for the DB
- *             Instance.
- *           * `Port` &mdash; (`Integer`) Specifies the pending port for
- *             the DB Instance.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Contains a
+ *             user-supplied database identifier. This is the unique key
+ *             that identifies a DB Instance.
+ *           * `DBInstanceClass` &mdash; (`String`) Contains the name of
+ *             the compute and memory capacity class of the DB Instance.
+ *           * `Engine` &mdash; (`String`) Provides the name of the
+ *             database engine to be used for this DB Instance.
+ *           * `DBInstanceStatus` &mdash; (`String`) Specifies the current
+ *             state of this database.
+ *           * `MasterUsername` &mdash; (`String`) Contains the master
+ *             username for the DB Instance.
+ *           * `DBName` &mdash; (`String`) The meaning of this parameter
+ *             differs according to the database engine you use. MySQL
+ *             Contains the name of the initial database of this instance
+ *             that was provided at create time, if one was specified when
+ *             the DB Instance was created. This same name is returned for
+ *             the life of the DB Instance. Type: String Oracle Contains
+ *             the Oracle System ID (SID) of the created DB Instance.
+ *           * `Endpoint` &mdash; (`map`) Specifies the connection
+ *             endpoint.
+ *               * `Address` &mdash; (`String`) Specifies the DNS address
+ *                 of the DB Instance.
+ *               * `Port` &mdash; (`Integer`) Specifies the port that the
+ *                 database engine is listening on.
+ *           * `AllocatedStorage` &mdash; (`Integer`) Specifies the
+ *             allocated storage size specified in gigabytes.
+ *           * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
+ *             time the DB Instance was created.
+ *           * `PreferredBackupWindow` &mdash; (`String`) Specifies the
+ *             daily time range during which automated backups are created
+ *             if automated backups are enabled, as determined by the
+ *             BackupRetentionPeriod.
  *           * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
- *             pending number of days for which automated backups are
+ *             number of days for which automatic DB Snapshots are
  *             retained.
- *           * `MultiAZ` &mdash; (`Boolean`) Indicates that the Single-AZ
- *             DB Instance is to change to a Multi-AZ deployment.
+ *           * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of
+ *             DB Security Group elements containing only
+ *             DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *               * `DBSecurityGroupName` &mdash; (`String`) The name of the
+ *                 DB Security Group.
+ *               * `Status` &mdash; (`String`) The status of the DB
+ *                 Security Group.
+ *           * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
+ *             VPC security group elements that the DB Instance belongs to.
+ *               * `VpcSecurityGroupId` &mdash; (`String`)
+ *               * `Status` &mdash; (`String`)
+ *           * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
+ *             of DB Parameter Groups applied to this DB Instance.
+ *               * `DBParameterGroupName` &mdash; (`String`) The name of
+ *                 the DP Parameter Group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *           * `AvailabilityZone` &mdash; (`String`) Specifies the name of
+ *             the Availability Zone the DB Instance is located in.
+ *           * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
+ *             the subnet group associated with the DB instance, including
+ *             the name, descrption and subnets in the subnet group.
+ *               * `DBSubnetGroupName` &mdash; (`String`) Specifies the
+ *                 name of the DB Subnet Group.
+ *               * `DBSubnetGroupDescription` &mdash; (`String`) Provides
+ *                 the description of the DB Subnet Group.
+ *               * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
+ *                 Subnet Group.
+ *               * `SubnetGroupStatus` &mdash; (`String`) Provides the
+ *                 status of the DB Subnet Group.
+ *               * `Subnets` &mdash; (`Array<map>`) Contains a list of
+ *                 Subnet elements.
+ *                   * `SubnetIdentifier` &mdash; (`String`) Specifies the
+ *                     identifier of the subnet.
+ *                   * `SubnetAvailabilityZone` &mdash; (`map`)
+ *                       * `Name` &mdash; (`String`) The name of the
+ *                         availability zone.
+ *                       * `ProvisionedIopsCapable` &mdash; (`Boolean`)
+ *                         True indicates the availability zone is capable
+ *                         of provisioned IOPs.
+ *                   * `SubnetStatus` &mdash; (`String`) Specifies the
+ *                     status of the subnet.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies
+ *             the weekly time range (in UTC) during which system
+ *             maintenance can occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) Specifies that
+ *             changes to the DB Instance are pending. This element is only
+ *             included when changes are pending. Specific changes are
+ *             identified by subelements.
+ *               * `DBInstanceClass` &mdash; (`String`) Contains the new
+ *                 DBInstanceClass for the DB Instance that will be applied
+ *                 or is in progress.
+ *               * `AllocatedStorage` &mdash; (`Integer`) Contains the new
+ *                 AllocatedStorage size for the DB Instance that will be
+ *                 applied or is in progress.
+ *               * `MasterUserPassword` &mdash; (`String`) Contains the
+ *                 pending or in-progress change of the master credentials
+ *                 for the DB Instance.
+ *               * `Port` &mdash; (`Integer`) Specifies the pending port
+ *                 for the DB Instance.
+ *               * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies
+ *                 the pending number of days for which automated backups
+ *                 are retained.
+ *               * `MultiAZ` &mdash; (`Boolean`) Indicates that the
+ *                 Single-AZ DB Instance is to change to a Multi-AZ
+ *                 deployment.
+ *               * `EngineVersion` &mdash; (`String`) Indicates the
+ *                 database engine version.
+ *               * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
+ *                 IOPS value for the DB Instance that will be applied or
+ *                 is being applied.
+ *               * `DBInstanceIdentifier` &mdash; (`String`) Contains the
+ *                 new DBInstanceIdentifier for the DB Instance that will
+ *                 be applied or is in progress.
+ *           * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
+ *             time to which a database can be restored with point-in-time
+ *             restore.
+ *           * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance
+ *             is a Multi-AZ deployment.
  *           * `EngineVersion` &mdash; (`String`) Indicates the database
  *             engine version.
- *           * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
- *             IOPS value for the DB Instance that will be applied or is
- *             being applied.
- *           * `DBInstanceIdentifier` &mdash; (`String`) Contains the new
- *             DBInstanceIdentifier for the DB Instance that will be
- *             applied or is in progress.
- *         * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
- *           time to which a database can be restored with point-in-time
- *           restore.
- *         * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance is
- *           a Multi-AZ deployment.
- *         * `EngineVersion` &mdash; (`String`) Indicates the database
- *           engine version.
- *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
- *           minor version patches are applied automatically.
- *         * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
- *           Contains the identifier of the source DB Instance if this DB
- *           Instance is a Read Replica.
- *         * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
- *           Contains one or more identifiers of the Read Replicas
- *           associated with this DB Instance.
- *         * `LicenseModel` &mdash; (`String`) License model information
- *           for this DB Instance.
- *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
- *           operations per second) value.
- *         * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
- *           list of option group memberships for this DB Instance.
- *           * `OptionGroupName` &mdash; (`String`) The name of the option
- *             group that the instance belongs to.
- *           * `Status` &mdash; (`String`) The status of the DB Instance's
- *             option group membership (e.g. in-sync, pending,
- *             pending-maintenance, applying).
- *         * `CharacterSetName` &mdash; (`String`) If present, specifies
- *           the name of the character set that this instance is associated
- *           with.
- *         * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
- *           specifies the name of the secondary Availability Zone for a DB
- *           instance with multi-AZ support.
- *         * `PubliclyAccessible` &mdash; (`Boolean`)
+ *           * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
+ *             minor version patches are applied automatically.
+ *           * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
+ *             Contains the identifier of the source DB Instance if this DB
+ *             Instance is a Read Replica.
+ *           * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
+ *             Contains one or more identifiers of the Read Replicas
+ *             associated with this DB Instance.
+ *           * `LicenseModel` &mdash; (`String`) License model information
+ *             for this DB Instance.
+ *           * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS
+ *             (I/O operations per second) value.
+ *           * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
+ *             list of option group memberships for this DB Instance.
+ *               * `OptionGroupName` &mdash; (`String`) The name of the
+ *                 option group that the instance belongs to.
+ *               * `Status` &mdash; (`String`) The status of the DB
+ *                 Instance's option group membership (e.g. in-sync,
+ *                 pending, pending-maintenance, applying).
+ *           * `CharacterSetName` &mdash; (`String`) If present, specifies
+ *             the name of the character set that this instance is
+ *             associated with.
+ *           * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
+ *             specifies the name of the secondary Availability Zone for a
+ *             DB instance with multi-AZ support.
+ *           * `PubliclyAccessible` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -3988,145 +4032,148 @@ AWS.RDS = inherit({})
  *         invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
  *         response element in the DescribeDBInstances action.
- *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
- *           user-supplied database identifier. This is the unique key that
- *           identifies a DB Instance.
- *         * `DBInstanceClass` &mdash; (`String`) Contains the name of the
- *           compute and memory capacity class of the DB Instance.
- *         * `Engine` &mdash; (`String`) Provides the name of the database
- *           engine to be used for this DB Instance.
- *         * `DBInstanceStatus` &mdash; (`String`) Specifies the current
- *           state of this database.
- *         * `MasterUsername` &mdash; (`String`) Contains the master
- *           username for the DB Instance.
- *         * `DBName` &mdash; (`String`) The meaning of this parameter
- *           differs according to the database engine you use. MySQL
- *           Contains the name of the initial database of this instance
- *           that was provided at create time, if one was specified when
- *           the DB Instance was created. This same name is returned for
- *           the life of the DB Instance. Type: String Oracle Contains the
- *           Oracle System ID (SID) of the created DB Instance.
- *         * `Endpoint` &mdash; (`map`) Specifies the connection endpoint.
- *           * `Address` &mdash; (`String`) Specifies the DNS address of
- *             the DB Instance.
- *           * `Port` &mdash; (`Integer`) Specifies the port that the
- *             database engine is listening on.
- *         * `AllocatedStorage` &mdash; (`Integer`) Specifies the allocated
- *           storage size specified in gigabytes.
- *         * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
- *           time the DB Instance was created.
- *         * `PreferredBackupWindow` &mdash; (`String`) Specifies the daily
- *           time range during which automated backups are created if
- *           automated backups are enabled, as determined by the
- *           BackupRetentionPeriod.
- *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
- *           number of days for which automatic DB Snapshots are retained.
- *         * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of DB
- *           Security Group elements containing only DBSecurityGroup.Name
- *           and DBSecurityGroup.Status subelements.
- *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
- *             Security Group.
- *           * `Status` &mdash; (`String`) The status of the DB Security
- *             Group.
- *         * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
- *           VPC security group elements that the DB Instance belongs to.
- *           * `VpcSecurityGroupId` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *         * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
- *           of DB Parameter Groups applied to this DB Instance.
- *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
- *             Parameter Group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
- *           the Availability Zone the DB Instance is located in.
- *         * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
- *           the subnet group associated with the DB instance, including
- *           the name, descrption and subnets in the subnet group.
- *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
- *             the DB Subnet Group.
- *           * `DBSubnetGroupDescription` &mdash; (`String`) Provides the
- *             description of the DB Subnet Group.
- *           * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
- *             Subnet Group.
- *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
- *             of the DB Subnet Group.
- *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
- *             elements.
- *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
- *               identifier of the subnet.
- *             * `SubnetAvailabilityZone` &mdash; (`map`)
- *               * `Name` &mdash; (`String`) The name of the availability
- *                 zone.
- *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
- *                 indicates the availability zone is capable of
- *                 provisioned IOPs.
- *             * `SubnetStatus` &mdash; (`String`) Specifies the status of
- *               the subnet.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
- *           weekly time range (in UTC) during which system maintenance can
- *           occur.
- *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
- *           to the DB Instance are pending. This element is only included
- *           when changes are pending. Specific changes are identified by
- *           subelements.
- *           * `DBInstanceClass` &mdash; (`String`) Contains the new
- *             DBInstanceClass for the DB Instance that will be applied or
- *             is in progress.
- *           * `AllocatedStorage` &mdash; (`Integer`) Contains the new
- *             AllocatedStorage size for the DB Instance that will be
- *             applied or is in progress.
- *           * `MasterUserPassword` &mdash; (`String`) Contains the pending
- *             or in-progress change of the master credentials for the DB
- *             Instance.
- *           * `Port` &mdash; (`Integer`) Specifies the pending port for
- *             the DB Instance.
+ *           * `DBInstanceIdentifier` &mdash; (`String`) Contains a
+ *             user-supplied database identifier. This is the unique key
+ *             that identifies a DB Instance.
+ *           * `DBInstanceClass` &mdash; (`String`) Contains the name of
+ *             the compute and memory capacity class of the DB Instance.
+ *           * `Engine` &mdash; (`String`) Provides the name of the
+ *             database engine to be used for this DB Instance.
+ *           * `DBInstanceStatus` &mdash; (`String`) Specifies the current
+ *             state of this database.
+ *           * `MasterUsername` &mdash; (`String`) Contains the master
+ *             username for the DB Instance.
+ *           * `DBName` &mdash; (`String`) The meaning of this parameter
+ *             differs according to the database engine you use. MySQL
+ *             Contains the name of the initial database of this instance
+ *             that was provided at create time, if one was specified when
+ *             the DB Instance was created. This same name is returned for
+ *             the life of the DB Instance. Type: String Oracle Contains
+ *             the Oracle System ID (SID) of the created DB Instance.
+ *           * `Endpoint` &mdash; (`map`) Specifies the connection
+ *             endpoint.
+ *               * `Address` &mdash; (`String`) Specifies the DNS address
+ *                 of the DB Instance.
+ *               * `Port` &mdash; (`Integer`) Specifies the port that the
+ *                 database engine is listening on.
+ *           * `AllocatedStorage` &mdash; (`Integer`) Specifies the
+ *             allocated storage size specified in gigabytes.
+ *           * `InstanceCreateTime` &mdash; (`Date`) Provides the date and
+ *             time the DB Instance was created.
+ *           * `PreferredBackupWindow` &mdash; (`String`) Specifies the
+ *             daily time range during which automated backups are created
+ *             if automated backups are enabled, as determined by the
+ *             BackupRetentionPeriod.
  *           * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
- *             pending number of days for which automated backups are
+ *             number of days for which automatic DB Snapshots are
  *             retained.
- *           * `MultiAZ` &mdash; (`Boolean`) Indicates that the Single-AZ
- *             DB Instance is to change to a Multi-AZ deployment.
+ *           * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of
+ *             DB Security Group elements containing only
+ *             DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *               * `DBSecurityGroupName` &mdash; (`String`) The name of the
+ *                 DB Security Group.
+ *               * `Status` &mdash; (`String`) The status of the DB
+ *                 Security Group.
+ *           * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
+ *             VPC security group elements that the DB Instance belongs to.
+ *               * `VpcSecurityGroupId` &mdash; (`String`)
+ *               * `Status` &mdash; (`String`)
+ *           * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
+ *             of DB Parameter Groups applied to this DB Instance.
+ *               * `DBParameterGroupName` &mdash; (`String`) The name of
+ *                 the DP Parameter Group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *           * `AvailabilityZone` &mdash; (`String`) Specifies the name of
+ *             the Availability Zone the DB Instance is located in.
+ *           * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
+ *             the subnet group associated with the DB instance, including
+ *             the name, descrption and subnets in the subnet group.
+ *               * `DBSubnetGroupName` &mdash; (`String`) Specifies the
+ *                 name of the DB Subnet Group.
+ *               * `DBSubnetGroupDescription` &mdash; (`String`) Provides
+ *                 the description of the DB Subnet Group.
+ *               * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
+ *                 Subnet Group.
+ *               * `SubnetGroupStatus` &mdash; (`String`) Provides the
+ *                 status of the DB Subnet Group.
+ *               * `Subnets` &mdash; (`Array<map>`) Contains a list of
+ *                 Subnet elements.
+ *                   * `SubnetIdentifier` &mdash; (`String`) Specifies the
+ *                     identifier of the subnet.
+ *                   * `SubnetAvailabilityZone` &mdash; (`map`)
+ *                       * `Name` &mdash; (`String`) The name of the
+ *                         availability zone.
+ *                       * `ProvisionedIopsCapable` &mdash; (`Boolean`)
+ *                         True indicates the availability zone is capable
+ *                         of provisioned IOPs.
+ *                   * `SubnetStatus` &mdash; (`String`) Specifies the
+ *                     status of the subnet.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies
+ *             the weekly time range (in UTC) during which system
+ *             maintenance can occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) Specifies that
+ *             changes to the DB Instance are pending. This element is only
+ *             included when changes are pending. Specific changes are
+ *             identified by subelements.
+ *               * `DBInstanceClass` &mdash; (`String`) Contains the new
+ *                 DBInstanceClass for the DB Instance that will be applied
+ *                 or is in progress.
+ *               * `AllocatedStorage` &mdash; (`Integer`) Contains the new
+ *                 AllocatedStorage size for the DB Instance that will be
+ *                 applied or is in progress.
+ *               * `MasterUserPassword` &mdash; (`String`) Contains the
+ *                 pending or in-progress change of the master credentials
+ *                 for the DB Instance.
+ *               * `Port` &mdash; (`Integer`) Specifies the pending port
+ *                 for the DB Instance.
+ *               * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies
+ *                 the pending number of days for which automated backups
+ *                 are retained.
+ *               * `MultiAZ` &mdash; (`Boolean`) Indicates that the
+ *                 Single-AZ DB Instance is to change to a Multi-AZ
+ *                 deployment.
+ *               * `EngineVersion` &mdash; (`String`) Indicates the
+ *                 database engine version.
+ *               * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
+ *                 IOPS value for the DB Instance that will be applied or
+ *                 is being applied.
+ *               * `DBInstanceIdentifier` &mdash; (`String`) Contains the
+ *                 new DBInstanceIdentifier for the DB Instance that will
+ *                 be applied or is in progress.
+ *           * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
+ *             time to which a database can be restored with point-in-time
+ *             restore.
+ *           * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance
+ *             is a Multi-AZ deployment.
  *           * `EngineVersion` &mdash; (`String`) Indicates the database
  *             engine version.
- *           * `Iops` &mdash; (`Integer`) Specifies the new Provisioned
- *             IOPS value for the DB Instance that will be applied or is
- *             being applied.
- *           * `DBInstanceIdentifier` &mdash; (`String`) Contains the new
- *             DBInstanceIdentifier for the DB Instance that will be
- *             applied or is in progress.
- *         * `LatestRestorableTime` &mdash; (`Date`) Specifies the latest
- *           time to which a database can be restored with point-in-time
- *           restore.
- *         * `MultiAZ` &mdash; (`Boolean`) Specifies if the DB Instance is
- *           a Multi-AZ deployment.
- *         * `EngineVersion` &mdash; (`String`) Indicates the database
- *           engine version.
- *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
- *           minor version patches are applied automatically.
- *         * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
- *           Contains the identifier of the source DB Instance if this DB
- *           Instance is a Read Replica.
- *         * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
- *           Contains one or more identifiers of the Read Replicas
- *           associated with this DB Instance.
- *         * `LicenseModel` &mdash; (`String`) License model information
- *           for this DB Instance.
- *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
- *           operations per second) value.
- *         * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
- *           list of option group memberships for this DB Instance.
- *           * `OptionGroupName` &mdash; (`String`) The name of the option
- *             group that the instance belongs to.
- *           * `Status` &mdash; (`String`) The status of the DB Instance's
- *             option group membership (e.g. in-sync, pending,
- *             pending-maintenance, applying).
- *         * `CharacterSetName` &mdash; (`String`) If present, specifies
- *           the name of the character set that this instance is associated
- *           with.
- *         * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
- *           specifies the name of the secondary Availability Zone for a DB
- *           instance with multi-AZ support.
- *         * `PubliclyAccessible` &mdash; (`Boolean`)
+ *           * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
+ *             minor version patches are applied automatically.
+ *           * `ReadReplicaSourceDBInstanceIdentifier` &mdash; (`String`)
+ *             Contains the identifier of the source DB Instance if this DB
+ *             Instance is a Read Replica.
+ *           * `ReadReplicaDBInstanceIdentifiers` &mdash; (`Array<String>`)
+ *             Contains one or more identifiers of the Read Replicas
+ *             associated with this DB Instance.
+ *           * `LicenseModel` &mdash; (`String`) License model information
+ *             for this DB Instance.
+ *           * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS
+ *             (I/O operations per second) value.
+ *           * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
+ *             list of option group memberships for this DB Instance.
+ *               * `OptionGroupName` &mdash; (`String`) The name of the
+ *                 option group that the instance belongs to.
+ *               * `Status` &mdash; (`String`) The status of the DB
+ *                 Instance's option group membership (e.g. in-sync,
+ *                 pending, pending-maintenance, applying).
+ *           * `CharacterSetName` &mdash; (`String`) If present, specifies
+ *             the name of the character set that this instance is
+ *             associated with.
+ *           * `SecondaryAvailabilityZone` &mdash; (`String`) If present,
+ *             specifies the name of the secondary Availability Zone for a
+ *             DB instance with multi-AZ support.
+ *           * `PubliclyAccessible` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -4171,32 +4218,32 @@ AWS.RDS = inherit({})
  *         CreateDBSecurityGroup RevokeDBSecurityGroupIngress This data
  *         type is used as a response element in the
  *         DescribeDBSecurityGroups action.
- *         * `OwnerId` &mdash; (`String`) Provides the AWS ID of the owner
- *           of a specific DB Security Group.
- *         * `DBSecurityGroupName` &mdash; (`String`) Specifies the name of
- *           the DB Security Group.
- *         * `DBSecurityGroupDescription` &mdash; (`String`) Provides the
- *           description of the DB Security Group.
- *         * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
- *           Security Group.
- *         * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list of
- *           EC2SecurityGroup elements.
- *           * `Status` &mdash; (`String`) Provides the status of the EC2
- *             security group. Status can be "authorizing", "authorized",
- *             "revoking", and "revoked".
- *           * `EC2SecurityGroupName` &mdash; (`String`) Specifies the name
- *             of the EC2 Security Group.
- *           * `EC2SecurityGroupId` &mdash; (`String`) Specifies the id of
- *             the EC2 Security Group.
- *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies the
- *             AWS ID of the owner of the EC2 security group specified in
- *             the EC2SecurityGroupName field.
- *         * `IPRanges` &mdash; (`Array<map>`) Contains a list of IPRange
- *           elements.
- *           * `Status` &mdash; (`String`) Specifies the status of the IP
- *             range. Status can be "authorizing", "authorized",
- *             "revoking", and "revoked".
- *           * `CIDRIP` &mdash; (`String`) Specifies the IP range.
+ *           * `OwnerId` &mdash; (`String`) Provides the AWS ID of the
+ *             owner of a specific DB Security Group.
+ *           * `DBSecurityGroupName` &mdash; (`String`) Specifies the name
+ *             of the DB Security Group.
+ *           * `DBSecurityGroupDescription` &mdash; (`String`) Provides the
+ *             description of the DB Security Group.
+ *           * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
+ *             Security Group.
+ *           * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list
+ *             of EC2SecurityGroup elements.
+ *               * `Status` &mdash; (`String`) Provides the status of the
+ *                 EC2 security group. Status can be "authorizing",
+ *                 "authorized", "revoking", and "revoked".
+ *               * `EC2SecurityGroupName` &mdash; (`String`) Specifies the
+ *                 name of the EC2 Security Group.
+ *               * `EC2SecurityGroupId` &mdash; (`String`) Specifies the id
+ *                 of the EC2 Security Group.
+ *               * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies
+ *                 the AWS ID of the owner of the EC2 security group
+ *                 specified in the EC2SecurityGroupName field.
+ *           * `IPRanges` &mdash; (`Array<map>`) Contains a list of IPRange
+ *             elements.
+ *               * `Status` &mdash; (`String`) Specifies the status of the
+ *                 IP range. Status can be "authorizing", "authorized",
+ *                 "revoking", and "revoked".
+ *               * `CIDRIP` &mdash; (`String`) Specifies the IP range.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *

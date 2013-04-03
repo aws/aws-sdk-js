@@ -78,27 +78,28 @@ AWS.Redshift = inherit({})
  *
  *       * `ClusterSecurityGroup` &mdash; (`map`) Describes a security
  *         group.
- *         * `ClusterSecurityGroupName` &mdash; (`String`) The name of the
- *           cluster security group to which the operation was applied.
- *         * `Description` &mdash; (`String`) A description of the security
- *           group.
- *         * `EC2SecurityGroups` &mdash; (`Array<map>`) A list of EC2
- *           security groups that are permitted to access clusters
- *           associated with this cluster security group.
- *           * `Status` &mdash; (`String`) The status of the EC2 security
- *             group.
- *           * `EC2SecurityGroupName` &mdash; (`String`) The name of the
- *             EC2 Security Group.
- *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) The AWS ID of
- *             the owner of the EC2 security group specified in the
- *             EC2SecurityGroupName field.
- *         * `IPRanges` &mdash; (`Array<map>`) A list of IP ranges (CIDR
- *           blocks) that are permitted to access clusters associated with
- *           this cluster security group.
- *           * `Status` &mdash; (`String`) The status of the IP range, for
- *             example, "authorized".
- *           * `CIDRIP` &mdash; (`String`) The IP range in Classless
- *             Inter-Domain Routing (CIDR) notation.
+ *           * `ClusterSecurityGroupName` &mdash; (`String`) The name of
+ *             the cluster security group to which the operation was
+ *             applied.
+ *           * `Description` &mdash; (`String`) A description of the
+ *             security group.
+ *           * `EC2SecurityGroups` &mdash; (`Array<map>`) A list of EC2
+ *             security groups that are permitted to access clusters
+ *             associated with this cluster security group.
+ *               * `Status` &mdash; (`String`) The status of the EC2
+ *                 security group.
+ *               * `EC2SecurityGroupName` &mdash; (`String`) The name of
+ *                 the EC2 Security Group.
+ *               * `EC2SecurityGroupOwnerId` &mdash; (`String`) The AWS ID
+ *                 of the owner of the EC2 security group specified in the
+ *                 EC2SecurityGroupName field.
+ *           * `IPRanges` &mdash; (`Array<map>`) A list of IP ranges (CIDR
+ *             blocks) that are permitted to access clusters associated
+ *             with this cluster security group.
+ *               * `Status` &mdash; (`String`) The status of the IP range,
+ *                 for example, "authorized".
+ *               * `CIDRIP` &mdash; (`String`) The IP range in Classless
+ *                 Inter-Domain Routing (CIDR) notation.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -127,43 +128,43 @@ AWS.Redshift = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Snapshot` &mdash; (`map`) Describes a snapshot.
- *         * `SnapshotIdentifier` &mdash; (`String`) The snapshot
- *           identifier that is provided in the request.
- *         * `ClusterIdentifier` &mdash; (`String`) The identifier of the
- *           cluster for which the snapshot was taken.
- *         * `SnapshotCreateTime` &mdash; (`Date`) The time (UTC) when
- *           Amazon Redshift began the snapshot. A snapshot contains a copy
- *           of the cluster data as of this exact time.
- *         * `Status` &mdash; (`String`) The snapshot status. The value of
- *           the status depends on the API operation used.
- *           CreateClusterSnapshot and CopyClusterSnapshot returns status
- *           as "creating". DescribeClusterSnapshots returns status as
- *           "creating", "available", or "failed". DeleteClusterSnapshot
- *           returns status as "deleted".
- *         * `Port` &mdash; (`Integer`) The port that the cluster is
- *           listening on.
- *         * `AvailabilityZone` &mdash; (`String`) The Availability Zone in
- *           which the cluster was created.
- *         * `ClusterCreateTime` &mdash; (`Date`) The time (UTC) when the
- *           cluster was originally created.
- *         * `MasterUsername` &mdash; (`String`) The master user name for
- *           the cluster.
- *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           Amazon Redshift engine that is running on the cluster.
- *         * `SnapshotType` &mdash; (`String`) The snapshot type. Snapshots
- *           created using CreateClusterSnapshot and CopyClusterSnapshot
- *           will be of type "manual".
- *         * `NodeType` &mdash; (`String`) The node type of the nodes in
- *           the cluster.
- *         * `NumberOfNodes` &mdash; (`Integer`) The number of nodes in the
- *           cluster.
- *         * `DBName` &mdash; (`String`) The name of the database that was
- *           created when the cluster was created.
- *         * `VpcId` &mdash; (`String`) The VPC identifier of the cluster
- *           if the snapshot is from a cluster in a VPC. Otherwise, this
- *           field is not in the output.
- *         * `Encrypted` &mdash; (`Boolean`) If true, the data in the
- *           snapshot is encrypted at rest.
+ *           * `SnapshotIdentifier` &mdash; (`String`) The snapshot
+ *             identifier that is provided in the request.
+ *           * `ClusterIdentifier` &mdash; (`String`) The identifier of the
+ *             cluster for which the snapshot was taken.
+ *           * `SnapshotCreateTime` &mdash; (`Date`) The time (UTC) when
+ *             Amazon Redshift began the snapshot. A snapshot contains a
+ *             copy of the cluster data as of this exact time.
+ *           * `Status` &mdash; (`String`) The snapshot status. The value
+ *             of the status depends on the API operation used.
+ *             CreateClusterSnapshot and CopyClusterSnapshot returns status
+ *             as "creating". DescribeClusterSnapshots returns status as
+ *             "creating", "available", or "failed". DeleteClusterSnapshot
+ *             returns status as "deleted".
+ *           * `Port` &mdash; (`Integer`) The port that the cluster is
+ *             listening on.
+ *           * `AvailabilityZone` &mdash; (`String`) The Availability Zone
+ *             in which the cluster was created.
+ *           * `ClusterCreateTime` &mdash; (`Date`) The time (UTC) when the
+ *             cluster was originally created.
+ *           * `MasterUsername` &mdash; (`String`) The master user name for
+ *             the cluster.
+ *           * `ClusterVersion` &mdash; (`String`) The version ID of the
+ *             Amazon Redshift engine that is running on the cluster.
+ *           * `SnapshotType` &mdash; (`String`) The snapshot type.
+ *             Snapshots created using CreateClusterSnapshot and
+ *             CopyClusterSnapshot will be of type "manual".
+ *           * `NodeType` &mdash; (`String`) The node type of the nodes in
+ *             the cluster.
+ *           * `NumberOfNodes` &mdash; (`Integer`) The number of nodes in
+ *             the cluster.
+ *           * `DBName` &mdash; (`String`) The name of the database that
+ *             was created when the cluster was created.
+ *           * `VpcId` &mdash; (`String`) The VPC identifier of the cluster
+ *             if the snapshot is from a cluster in a VPC. Otherwise, this
+ *             field is not in the output.
+ *           * `Encrypted` &mdash; (`Boolean`) If true, the data in the
+ *             snapshot is encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -297,93 +298,96 @@ AWS.Redshift = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Cluster` &mdash; (`map`) Describes a cluster.
- *         * `ClusterIdentifier` &mdash; (`String`) The unique identifier
- *           of the cluster.
- *         * `NodeType` &mdash; (`String`) The node type for the nodes in
- *           the cluster.
- *         * `ClusterStatus` &mdash; (`String`) The current state of this
- *           cluster. Possible values include available, creating,
- *           deleting, rebooting, and resizing.
- *         * `ModifyStatus` &mdash; (`String`) The status of a modify
- *           operation, if any, initiated for the cluster.
- *         * `MasterUsername` &mdash; (`String`) The master user name for
- *           the cluster. This name is used to connect to the database that
- *           is specified in DBName.
- *         * `DBName` &mdash; (`String`) The name of the initial database
- *           that was created when the cluster was created. This same name
- *           is returned for the life of the cluster. If an initial
- *           database was not specified, a database named "dev" was created
- *           by default.
- *         * `Endpoint` &mdash; (`map`) The connection endpoint.
- *           * `Address` &mdash; (`String`) The DNS address of the Cluster.
- *           * `Port` &mdash; (`Integer`) The port that the database engine
- *             is listening on.
- *         * `ClusterCreateTime` &mdash; (`Date`) The date and time that
- *           the cluster was created.
- *         * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
- *           number of days that automatic cluster snapshots are retained.
- *         * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
- *           cluster security group that are associated with the cluster.
- *           Each security group is represented by an element that contains
- *           ClusterSecurityGroup.Name and ClusterSecurityGroup.Status
- *           subelements. Cluster security groups are used when the cluster
- *           is not created in a VPC. Clusters that are created in a VPC
- *           use VPC security groups, which are listed by the
- *           VpcSecurityGroups parameter.
- *           * `ClusterSecurityGroupName` &mdash; (`String`) The name of
- *             the cluster security group.
- *           * `Status` &mdash; (`String`) The status of the cluster
- *             security group.
- *         * `VpcSecurityGroups` &mdash; (`Array<map>`) A list of Virtual
- *           Private Cloud (VPC) security groups that are associated with
- *           the cluster. This parameter is returned only if the cluster is
- *           in a VPC.
- *           * `VpcSecurityGroupId` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *         * `ClusterParameterGroups` &mdash; (`Array<map>`) The list of
- *           cluster parameter groups that are associated with this
- *           cluster.
- *           * `ParameterGroupName` &mdash; (`String`) The name of the
- *             cluster parameter group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
- *           subnet group that is associated with the cluster. This
- *           parameter is valid only when the cluster is in a VPC.
- *         * `VpcId` &mdash; (`String`) The identifier of the VPC the
- *           cluster is in, if the cluster is in a VPC.
- *         * `AvailabilityZone` &mdash; (`String`) The name of the
- *           Availability Zone in which the cluster is located.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
- *           time range (in UTC) during which system maintenance can occur.
- *         * `PendingModifiedValues` &mdash; (`map`) If present, changes to
- *           the cluster are pending. Specific pending changes are
- *           identified by subelements.
- *           * `MasterUserPassword` &mdash; (`String`) The pending or
- *             in-progress change of the master credentials for the
- *             cluster.
- *           * `NodeType` &mdash; (`String`) The pending or in-progress
- *             change of the cluster's node type.
- *           * `NumberOfNodes` &mdash; (`Integer`) The pending or
- *             in-progress change of the number nodes in the cluster.
- *           * `ClusterType` &mdash; (`String`) The pending or in-progress
- *             change of the cluster type.
- *           * `ClusterVersion` &mdash; (`String`) The pending or
- *             in-progress change of the service version.
+ *           * `ClusterIdentifier` &mdash; (`String`) The unique identifier
+ *             of the cluster.
+ *           * `NodeType` &mdash; (`String`) The node type for the nodes in
+ *             the cluster.
+ *           * `ClusterStatus` &mdash; (`String`) The current state of this
+ *             cluster. Possible values include available, creating,
+ *             deleting, rebooting, and resizing.
+ *           * `ModifyStatus` &mdash; (`String`) The status of a modify
+ *             operation, if any, initiated for the cluster.
+ *           * `MasterUsername` &mdash; (`String`) The master user name for
+ *             the cluster. This name is used to connect to the database
+ *             that is specified in DBName.
+ *           * `DBName` &mdash; (`String`) The name of the initial database
+ *             that was created when the cluster was created. This same
+ *             name is returned for the life of the cluster. If an initial
+ *             database was not specified, a database named "dev" was
+ *             created by default.
+ *           * `Endpoint` &mdash; (`map`) The connection endpoint.
+ *               * `Address` &mdash; (`String`) The DNS address of the
+ *                 Cluster.
+ *               * `Port` &mdash; (`Integer`) The port that the database
+ *                 engine is listening on.
+ *           * `ClusterCreateTime` &mdash; (`Date`) The date and time that
+ *             the cluster was created.
  *           * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
- *             pending or in-progress change of the automated snapshot
- *             retention period.
- *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           Amazon Redshift engine that is running on the cluster.
- *         * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, version
- *           upgrades will be applied automatically to the cluster during
- *           the maintenance window.
- *         * `NumberOfNodes` &mdash; (`Integer`) The number of compute
- *           nodes in the cluster.
- *         * `PubliclyAccessible` &mdash; (`Boolean`) If true, the cluster
- *           can be accessed from a public network.
- *         * `Encrypted` &mdash; (`Boolean`) If true, data in cluster is
- *           encrypted at rest.
+ *             number of days that automatic cluster snapshots are
+ *             retained.
+ *           * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
+ *             cluster security group that are associated with the cluster.
+ *             Each security group is represented by an element that
+ *             contains ClusterSecurityGroup.Name and
+ *             ClusterSecurityGroup.Status subelements. Cluster security
+ *             groups are used when the cluster is not created in a VPC.
+ *             Clusters that are created in a VPC use VPC security groups,
+ *             which are listed by the VpcSecurityGroups parameter.
+ *               * `ClusterSecurityGroupName` &mdash; (`String`) The name
+ *                 of the cluster security group.
+ *               * `Status` &mdash; (`String`) The status of the cluster
+ *                 security group.
+ *           * `VpcSecurityGroups` &mdash; (`Array<map>`) A list of Virtual
+ *             Private Cloud (VPC) security groups that are associated with
+ *             the cluster. This parameter is returned only if the cluster
+ *             is in a VPC.
+ *               * `VpcSecurityGroupId` &mdash; (`String`)
+ *               * `Status` &mdash; (`String`)
+ *           * `ClusterParameterGroups` &mdash; (`Array<map>`) The list of
+ *             cluster parameter groups that are associated with this
+ *             cluster.
+ *               * `ParameterGroupName` &mdash; (`String`) The name of the
+ *                 cluster parameter group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *           * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
+ *             subnet group that is associated with the cluster. This
+ *             parameter is valid only when the cluster is in a VPC.
+ *           * `VpcId` &mdash; (`String`) The identifier of the VPC the
+ *             cluster is in, if the cluster is in a VPC.
+ *           * `AvailabilityZone` &mdash; (`String`) The name of the
+ *             Availability Zone in which the cluster is located.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
+ *             time range (in UTC) during which system maintenance can
+ *             occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) If present, changes
+ *             to the cluster are pending. Specific pending changes are
+ *             identified by subelements.
+ *               * `MasterUserPassword` &mdash; (`String`) The pending or
+ *                 in-progress change of the master credentials for the
+ *                 cluster.
+ *               * `NodeType` &mdash; (`String`) The pending or in-progress
+ *                 change of the cluster's node type.
+ *               * `NumberOfNodes` &mdash; (`Integer`) The pending or
+ *                 in-progress change of the number nodes in the cluster.
+ *               * `ClusterType` &mdash; (`String`) The pending or
+ *                 in-progress change of the cluster type.
+ *               * `ClusterVersion` &mdash; (`String`) The pending or
+ *                 in-progress change of the service version.
+ *               * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`)
+ *                 The pending or in-progress change of the automated
+ *                 snapshot retention period.
+ *           * `ClusterVersion` &mdash; (`String`) The version ID of the
+ *             Amazon Redshift engine that is running on the cluster.
+ *           * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, version
+ *             upgrades will be applied automatically to the cluster during
+ *             the maintenance window.
+ *           * `NumberOfNodes` &mdash; (`Integer`) The number of compute
+ *             nodes in the cluster.
+ *           * `PubliclyAccessible` &mdash; (`Boolean`) If true, the
+ *             cluster can be accessed from a public network.
+ *           * `Encrypted` &mdash; (`Boolean`) If true, data in cluster is
+ *             encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -421,13 +425,13 @@ AWS.Redshift = inherit({})
  *
  *       * `ClusterParameterGroup` &mdash; (`map`) Describes a parameter
  *         group.
- *         * `ParameterGroupName` &mdash; (`String`) The name of the
- *           cluster parameter group.
- *         * `ParameterGroupFamily` &mdash; (`String`) The name of the
- *           cluster parameter group family that this cluster parameter
- *           group is compatible with.
- *         * `Description` &mdash; (`String`) The description of the
- *           parameter group.
+ *           * `ParameterGroupName` &mdash; (`String`) The name of the
+ *             cluster parameter group.
+ *           * `ParameterGroupFamily` &mdash; (`String`) The name of the
+ *             cluster parameter group family that this cluster parameter
+ *             group is compatible with.
+ *           * `Description` &mdash; (`String`) The description of the
+ *             parameter group.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -455,27 +459,28 @@ AWS.Redshift = inherit({})
  *
  *       * `ClusterSecurityGroup` &mdash; (`map`) Describes a security
  *         group.
- *         * `ClusterSecurityGroupName` &mdash; (`String`) The name of the
- *           cluster security group to which the operation was applied.
- *         * `Description` &mdash; (`String`) A description of the security
- *           group.
- *         * `EC2SecurityGroups` &mdash; (`Array<map>`) A list of EC2
- *           security groups that are permitted to access clusters
- *           associated with this cluster security group.
- *           * `Status` &mdash; (`String`) The status of the EC2 security
- *             group.
- *           * `EC2SecurityGroupName` &mdash; (`String`) The name of the
- *             EC2 Security Group.
- *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) The AWS ID of
- *             the owner of the EC2 security group specified in the
- *             EC2SecurityGroupName field.
- *         * `IPRanges` &mdash; (`Array<map>`) A list of IP ranges (CIDR
- *           blocks) that are permitted to access clusters associated with
- *           this cluster security group.
- *           * `Status` &mdash; (`String`) The status of the IP range, for
- *             example, "authorized".
- *           * `CIDRIP` &mdash; (`String`) The IP range in Classless
- *             Inter-Domain Routing (CIDR) notation.
+ *           * `ClusterSecurityGroupName` &mdash; (`String`) The name of
+ *             the cluster security group to which the operation was
+ *             applied.
+ *           * `Description` &mdash; (`String`) A description of the
+ *             security group.
+ *           * `EC2SecurityGroups` &mdash; (`Array<map>`) A list of EC2
+ *             security groups that are permitted to access clusters
+ *             associated with this cluster security group.
+ *               * `Status` &mdash; (`String`) The status of the EC2
+ *                 security group.
+ *               * `EC2SecurityGroupName` &mdash; (`String`) The name of
+ *                 the EC2 Security Group.
+ *               * `EC2SecurityGroupOwnerId` &mdash; (`String`) The AWS ID
+ *                 of the owner of the EC2 security group specified in the
+ *                 EC2SecurityGroupName field.
+ *           * `IPRanges` &mdash; (`Array<map>`) A list of IP ranges (CIDR
+ *             blocks) that are permitted to access clusters associated
+ *             with this cluster security group.
+ *               * `Status` &mdash; (`String`) The status of the IP range,
+ *                 for example, "authorized".
+ *               * `CIDRIP` &mdash; (`String`) The IP range in Classless
+ *                 Inter-Domain Routing (CIDR) notation.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -502,43 +507,43 @@ AWS.Redshift = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Snapshot` &mdash; (`map`) Describes a snapshot.
- *         * `SnapshotIdentifier` &mdash; (`String`) The snapshot
- *           identifier that is provided in the request.
- *         * `ClusterIdentifier` &mdash; (`String`) The identifier of the
- *           cluster for which the snapshot was taken.
- *         * `SnapshotCreateTime` &mdash; (`Date`) The time (UTC) when
- *           Amazon Redshift began the snapshot. A snapshot contains a copy
- *           of the cluster data as of this exact time.
- *         * `Status` &mdash; (`String`) The snapshot status. The value of
- *           the status depends on the API operation used.
- *           CreateClusterSnapshot and CopyClusterSnapshot returns status
- *           as "creating". DescribeClusterSnapshots returns status as
- *           "creating", "available", or "failed". DeleteClusterSnapshot
- *           returns status as "deleted".
- *         * `Port` &mdash; (`Integer`) The port that the cluster is
- *           listening on.
- *         * `AvailabilityZone` &mdash; (`String`) The Availability Zone in
- *           which the cluster was created.
- *         * `ClusterCreateTime` &mdash; (`Date`) The time (UTC) when the
- *           cluster was originally created.
- *         * `MasterUsername` &mdash; (`String`) The master user name for
- *           the cluster.
- *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           Amazon Redshift engine that is running on the cluster.
- *         * `SnapshotType` &mdash; (`String`) The snapshot type. Snapshots
- *           created using CreateClusterSnapshot and CopyClusterSnapshot
- *           will be of type "manual".
- *         * `NodeType` &mdash; (`String`) The node type of the nodes in
- *           the cluster.
- *         * `NumberOfNodes` &mdash; (`Integer`) The number of nodes in the
- *           cluster.
- *         * `DBName` &mdash; (`String`) The name of the database that was
- *           created when the cluster was created.
- *         * `VpcId` &mdash; (`String`) The VPC identifier of the cluster
- *           if the snapshot is from a cluster in a VPC. Otherwise, this
- *           field is not in the output.
- *         * `Encrypted` &mdash; (`Boolean`) If true, the data in the
- *           snapshot is encrypted at rest.
+ *           * `SnapshotIdentifier` &mdash; (`String`) The snapshot
+ *             identifier that is provided in the request.
+ *           * `ClusterIdentifier` &mdash; (`String`) The identifier of the
+ *             cluster for which the snapshot was taken.
+ *           * `SnapshotCreateTime` &mdash; (`Date`) The time (UTC) when
+ *             Amazon Redshift began the snapshot. A snapshot contains a
+ *             copy of the cluster data as of this exact time.
+ *           * `Status` &mdash; (`String`) The snapshot status. The value
+ *             of the status depends on the API operation used.
+ *             CreateClusterSnapshot and CopyClusterSnapshot returns status
+ *             as "creating". DescribeClusterSnapshots returns status as
+ *             "creating", "available", or "failed". DeleteClusterSnapshot
+ *             returns status as "deleted".
+ *           * `Port` &mdash; (`Integer`) The port that the cluster is
+ *             listening on.
+ *           * `AvailabilityZone` &mdash; (`String`) The Availability Zone
+ *             in which the cluster was created.
+ *           * `ClusterCreateTime` &mdash; (`Date`) The time (UTC) when the
+ *             cluster was originally created.
+ *           * `MasterUsername` &mdash; (`String`) The master user name for
+ *             the cluster.
+ *           * `ClusterVersion` &mdash; (`String`) The version ID of the
+ *             Amazon Redshift engine that is running on the cluster.
+ *           * `SnapshotType` &mdash; (`String`) The snapshot type.
+ *             Snapshots created using CreateClusterSnapshot and
+ *             CopyClusterSnapshot will be of type "manual".
+ *           * `NodeType` &mdash; (`String`) The node type of the nodes in
+ *             the cluster.
+ *           * `NumberOfNodes` &mdash; (`Integer`) The number of nodes in
+ *             the cluster.
+ *           * `DBName` &mdash; (`String`) The name of the database that
+ *             was created when the cluster was created.
+ *           * `VpcId` &mdash; (`String`) The VPC identifier of the cluster
+ *             if the snapshot is from a cluster in a VPC. Otherwise, this
+ *             field is not in the output.
+ *           * `Encrypted` &mdash; (`Boolean`) If true, the data in the
+ *             snapshot is encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -567,23 +572,24 @@ AWS.Redshift = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `ClusterSubnetGroup` &mdash; (`map`) Describes a subnet group.
- *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
- *           cluster subnet group.
- *         * `Description` &mdash; (`String`) The description of the
- *           cluster subnet group.
- *         * `VpcId` &mdash; (`String`) The VPC ID of the cluster subnet
- *           group.
- *         * `SubnetGroupStatus` &mdash; (`String`) The status of the
- *           cluster subnet group. Possible values are Complete, Incomplete
- *           and Invalid.
- *         * `Subnets` &mdash; (`Array<map>`) A list of the VPC Subnet
- *           elements.
- *           * `SubnetIdentifier` &mdash; (`String`) The identifier of the
- *             subnet.
- *           * `SubnetAvailabilityZone` &mdash; (`map`)
- *             * `Name` &mdash; (`String`) The name of the availability
- *               zone.
- *           * `SubnetStatus` &mdash; (`String`) The status of the subnet.
+ *           * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
+ *             cluster subnet group.
+ *           * `Description` &mdash; (`String`) The description of the
+ *             cluster subnet group.
+ *           * `VpcId` &mdash; (`String`) The VPC ID of the cluster subnet
+ *             group.
+ *           * `SubnetGroupStatus` &mdash; (`String`) The status of the
+ *             cluster subnet group. Possible values are Complete,
+ *             Incomplete and Invalid.
+ *           * `Subnets` &mdash; (`Array<map>`) A list of the VPC Subnet
+ *             elements.
+ *               * `SubnetIdentifier` &mdash; (`String`) The identifier of
+ *                 the subnet.
+ *               * `SubnetAvailabilityZone` &mdash; (`map`)
+ *                   * `Name` &mdash; (`String`) The name of the
+ *                     availability zone.
+ *               * `SubnetStatus` &mdash; (`String`) The status of the
+ *                 subnet.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -621,93 +627,96 @@ AWS.Redshift = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Cluster` &mdash; (`map`) Describes a cluster.
- *         * `ClusterIdentifier` &mdash; (`String`) The unique identifier
- *           of the cluster.
- *         * `NodeType` &mdash; (`String`) The node type for the nodes in
- *           the cluster.
- *         * `ClusterStatus` &mdash; (`String`) The current state of this
- *           cluster. Possible values include available, creating,
- *           deleting, rebooting, and resizing.
- *         * `ModifyStatus` &mdash; (`String`) The status of a modify
- *           operation, if any, initiated for the cluster.
- *         * `MasterUsername` &mdash; (`String`) The master user name for
- *           the cluster. This name is used to connect to the database that
- *           is specified in DBName.
- *         * `DBName` &mdash; (`String`) The name of the initial database
- *           that was created when the cluster was created. This same name
- *           is returned for the life of the cluster. If an initial
- *           database was not specified, a database named "dev" was created
- *           by default.
- *         * `Endpoint` &mdash; (`map`) The connection endpoint.
- *           * `Address` &mdash; (`String`) The DNS address of the Cluster.
- *           * `Port` &mdash; (`Integer`) The port that the database engine
- *             is listening on.
- *         * `ClusterCreateTime` &mdash; (`Date`) The date and time that
- *           the cluster was created.
- *         * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
- *           number of days that automatic cluster snapshots are retained.
- *         * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
- *           cluster security group that are associated with the cluster.
- *           Each security group is represented by an element that contains
- *           ClusterSecurityGroup.Name and ClusterSecurityGroup.Status
- *           subelements. Cluster security groups are used when the cluster
- *           is not created in a VPC. Clusters that are created in a VPC
- *           use VPC security groups, which are listed by the
- *           VpcSecurityGroups parameter.
- *           * `ClusterSecurityGroupName` &mdash; (`String`) The name of
- *             the cluster security group.
- *           * `Status` &mdash; (`String`) The status of the cluster
- *             security group.
- *         * `VpcSecurityGroups` &mdash; (`Array<map>`) A list of Virtual
- *           Private Cloud (VPC) security groups that are associated with
- *           the cluster. This parameter is returned only if the cluster is
- *           in a VPC.
- *           * `VpcSecurityGroupId` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *         * `ClusterParameterGroups` &mdash; (`Array<map>`) The list of
- *           cluster parameter groups that are associated with this
- *           cluster.
- *           * `ParameterGroupName` &mdash; (`String`) The name of the
- *             cluster parameter group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
- *           subnet group that is associated with the cluster. This
- *           parameter is valid only when the cluster is in a VPC.
- *         * `VpcId` &mdash; (`String`) The identifier of the VPC the
- *           cluster is in, if the cluster is in a VPC.
- *         * `AvailabilityZone` &mdash; (`String`) The name of the
- *           Availability Zone in which the cluster is located.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
- *           time range (in UTC) during which system maintenance can occur.
- *         * `PendingModifiedValues` &mdash; (`map`) If present, changes to
- *           the cluster are pending. Specific pending changes are
- *           identified by subelements.
- *           * `MasterUserPassword` &mdash; (`String`) The pending or
- *             in-progress change of the master credentials for the
- *             cluster.
- *           * `NodeType` &mdash; (`String`) The pending or in-progress
- *             change of the cluster's node type.
- *           * `NumberOfNodes` &mdash; (`Integer`) The pending or
- *             in-progress change of the number nodes in the cluster.
- *           * `ClusterType` &mdash; (`String`) The pending or in-progress
- *             change of the cluster type.
- *           * `ClusterVersion` &mdash; (`String`) The pending or
- *             in-progress change of the service version.
+ *           * `ClusterIdentifier` &mdash; (`String`) The unique identifier
+ *             of the cluster.
+ *           * `NodeType` &mdash; (`String`) The node type for the nodes in
+ *             the cluster.
+ *           * `ClusterStatus` &mdash; (`String`) The current state of this
+ *             cluster. Possible values include available, creating,
+ *             deleting, rebooting, and resizing.
+ *           * `ModifyStatus` &mdash; (`String`) The status of a modify
+ *             operation, if any, initiated for the cluster.
+ *           * `MasterUsername` &mdash; (`String`) The master user name for
+ *             the cluster. This name is used to connect to the database
+ *             that is specified in DBName.
+ *           * `DBName` &mdash; (`String`) The name of the initial database
+ *             that was created when the cluster was created. This same
+ *             name is returned for the life of the cluster. If an initial
+ *             database was not specified, a database named "dev" was
+ *             created by default.
+ *           * `Endpoint` &mdash; (`map`) The connection endpoint.
+ *               * `Address` &mdash; (`String`) The DNS address of the
+ *                 Cluster.
+ *               * `Port` &mdash; (`Integer`) The port that the database
+ *                 engine is listening on.
+ *           * `ClusterCreateTime` &mdash; (`Date`) The date and time that
+ *             the cluster was created.
  *           * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
- *             pending or in-progress change of the automated snapshot
- *             retention period.
- *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           Amazon Redshift engine that is running on the cluster.
- *         * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, version
- *           upgrades will be applied automatically to the cluster during
- *           the maintenance window.
- *         * `NumberOfNodes` &mdash; (`Integer`) The number of compute
- *           nodes in the cluster.
- *         * `PubliclyAccessible` &mdash; (`Boolean`) If true, the cluster
- *           can be accessed from a public network.
- *         * `Encrypted` &mdash; (`Boolean`) If true, data in cluster is
- *           encrypted at rest.
+ *             number of days that automatic cluster snapshots are
+ *             retained.
+ *           * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
+ *             cluster security group that are associated with the cluster.
+ *             Each security group is represented by an element that
+ *             contains ClusterSecurityGroup.Name and
+ *             ClusterSecurityGroup.Status subelements. Cluster security
+ *             groups are used when the cluster is not created in a VPC.
+ *             Clusters that are created in a VPC use VPC security groups,
+ *             which are listed by the VpcSecurityGroups parameter.
+ *               * `ClusterSecurityGroupName` &mdash; (`String`) The name
+ *                 of the cluster security group.
+ *               * `Status` &mdash; (`String`) The status of the cluster
+ *                 security group.
+ *           * `VpcSecurityGroups` &mdash; (`Array<map>`) A list of Virtual
+ *             Private Cloud (VPC) security groups that are associated with
+ *             the cluster. This parameter is returned only if the cluster
+ *             is in a VPC.
+ *               * `VpcSecurityGroupId` &mdash; (`String`)
+ *               * `Status` &mdash; (`String`)
+ *           * `ClusterParameterGroups` &mdash; (`Array<map>`) The list of
+ *             cluster parameter groups that are associated with this
+ *             cluster.
+ *               * `ParameterGroupName` &mdash; (`String`) The name of the
+ *                 cluster parameter group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *           * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
+ *             subnet group that is associated with the cluster. This
+ *             parameter is valid only when the cluster is in a VPC.
+ *           * `VpcId` &mdash; (`String`) The identifier of the VPC the
+ *             cluster is in, if the cluster is in a VPC.
+ *           * `AvailabilityZone` &mdash; (`String`) The name of the
+ *             Availability Zone in which the cluster is located.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
+ *             time range (in UTC) during which system maintenance can
+ *             occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) If present, changes
+ *             to the cluster are pending. Specific pending changes are
+ *             identified by subelements.
+ *               * `MasterUserPassword` &mdash; (`String`) The pending or
+ *                 in-progress change of the master credentials for the
+ *                 cluster.
+ *               * `NodeType` &mdash; (`String`) The pending or in-progress
+ *                 change of the cluster's node type.
+ *               * `NumberOfNodes` &mdash; (`Integer`) The pending or
+ *                 in-progress change of the number nodes in the cluster.
+ *               * `ClusterType` &mdash; (`String`) The pending or
+ *                 in-progress change of the cluster type.
+ *               * `ClusterVersion` &mdash; (`String`) The pending or
+ *                 in-progress change of the service version.
+ *               * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`)
+ *                 The pending or in-progress change of the automated
+ *                 snapshot retention period.
+ *           * `ClusterVersion` &mdash; (`String`) The version ID of the
+ *             Amazon Redshift engine that is running on the cluster.
+ *           * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, version
+ *             upgrades will be applied automatically to the cluster during
+ *             the maintenance window.
+ *           * `NumberOfNodes` &mdash; (`Integer`) The number of compute
+ *             nodes in the cluster.
+ *           * `PubliclyAccessible` &mdash; (`Boolean`) If true, the
+ *             cluster can be accessed from a public network.
+ *           * `Encrypted` &mdash; (`Boolean`) If true, data in cluster is
+ *             encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -763,43 +772,43 @@ AWS.Redshift = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Snapshot` &mdash; (`map`) Describes a snapshot.
- *         * `SnapshotIdentifier` &mdash; (`String`) The snapshot
- *           identifier that is provided in the request.
- *         * `ClusterIdentifier` &mdash; (`String`) The identifier of the
- *           cluster for which the snapshot was taken.
- *         * `SnapshotCreateTime` &mdash; (`Date`) The time (UTC) when
- *           Amazon Redshift began the snapshot. A snapshot contains a copy
- *           of the cluster data as of this exact time.
- *         * `Status` &mdash; (`String`) The snapshot status. The value of
- *           the status depends on the API operation used.
- *           CreateClusterSnapshot and CopyClusterSnapshot returns status
- *           as "creating". DescribeClusterSnapshots returns status as
- *           "creating", "available", or "failed". DeleteClusterSnapshot
- *           returns status as "deleted".
- *         * `Port` &mdash; (`Integer`) The port that the cluster is
- *           listening on.
- *         * `AvailabilityZone` &mdash; (`String`) The Availability Zone in
- *           which the cluster was created.
- *         * `ClusterCreateTime` &mdash; (`Date`) The time (UTC) when the
- *           cluster was originally created.
- *         * `MasterUsername` &mdash; (`String`) The master user name for
- *           the cluster.
- *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           Amazon Redshift engine that is running on the cluster.
- *         * `SnapshotType` &mdash; (`String`) The snapshot type. Snapshots
- *           created using CreateClusterSnapshot and CopyClusterSnapshot
- *           will be of type "manual".
- *         * `NodeType` &mdash; (`String`) The node type of the nodes in
- *           the cluster.
- *         * `NumberOfNodes` &mdash; (`Integer`) The number of nodes in the
- *           cluster.
- *         * `DBName` &mdash; (`String`) The name of the database that was
- *           created when the cluster was created.
- *         * `VpcId` &mdash; (`String`) The VPC identifier of the cluster
- *           if the snapshot is from a cluster in a VPC. Otherwise, this
- *           field is not in the output.
- *         * `Encrypted` &mdash; (`Boolean`) If true, the data in the
- *           snapshot is encrypted at rest.
+ *           * `SnapshotIdentifier` &mdash; (`String`) The snapshot
+ *             identifier that is provided in the request.
+ *           * `ClusterIdentifier` &mdash; (`String`) The identifier of the
+ *             cluster for which the snapshot was taken.
+ *           * `SnapshotCreateTime` &mdash; (`Date`) The time (UTC) when
+ *             Amazon Redshift began the snapshot. A snapshot contains a
+ *             copy of the cluster data as of this exact time.
+ *           * `Status` &mdash; (`String`) The snapshot status. The value
+ *             of the status depends on the API operation used.
+ *             CreateClusterSnapshot and CopyClusterSnapshot returns status
+ *             as "creating". DescribeClusterSnapshots returns status as
+ *             "creating", "available", or "failed". DeleteClusterSnapshot
+ *             returns status as "deleted".
+ *           * `Port` &mdash; (`Integer`) The port that the cluster is
+ *             listening on.
+ *           * `AvailabilityZone` &mdash; (`String`) The Availability Zone
+ *             in which the cluster was created.
+ *           * `ClusterCreateTime` &mdash; (`Date`) The time (UTC) when the
+ *             cluster was originally created.
+ *           * `MasterUsername` &mdash; (`String`) The master user name for
+ *             the cluster.
+ *           * `ClusterVersion` &mdash; (`String`) The version ID of the
+ *             Amazon Redshift engine that is running on the cluster.
+ *           * `SnapshotType` &mdash; (`String`) The snapshot type.
+ *             Snapshots created using CreateClusterSnapshot and
+ *             CopyClusterSnapshot will be of type "manual".
+ *           * `NodeType` &mdash; (`String`) The node type of the nodes in
+ *             the cluster.
+ *           * `NumberOfNodes` &mdash; (`Integer`) The number of nodes in
+ *             the cluster.
+ *           * `DBName` &mdash; (`String`) The name of the database that
+ *             was created when the cluster was created.
+ *           * `VpcId` &mdash; (`String`) The VPC identifier of the cluster
+ *             if the snapshot is from a cluster in a VPC. Otherwise, this
+ *             field is not in the output.
+ *           * `Encrypted` &mdash; (`Boolean`) If true, the data in the
+ *             snapshot is encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -853,13 +862,13 @@ AWS.Redshift = inherit({})
  *       * `ParameterGroups` &mdash; (`Array<map>`) A list of
  *         ClusterParameterGroup instances. Each instance describes one
  *         cluster parameter group.
- *         * `ParameterGroupName` &mdash; (`String`) The name of the
- *           cluster parameter group.
- *         * `ParameterGroupFamily` &mdash; (`String`) The name of the
- *           cluster parameter group family that this cluster parameter
- *           group is compatible with.
- *         * `Description` &mdash; (`String`) The description of the
- *           parameter group.
+ *           * `ParameterGroupName` &mdash; (`String`) The name of the
+ *             cluster parameter group.
+ *           * `ParameterGroupFamily` &mdash; (`String`) The name of the
+ *             cluster parameter group family that this cluster parameter
+ *             group is compatible with.
+ *           * `Description` &mdash; (`String`) The description of the
+ *             parameter group.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -896,21 +905,24 @@ AWS.Redshift = inherit({})
  *       * `Parameters` &mdash; (`Array<map>`) A list of Parameter
  *         instances. Each instance lists the parameters of one cluster
  *         parameter group.
- *         * `ParameterName` &mdash; (`String`) The name of the parameter.
- *         * `ParameterValue` &mdash; (`String`) The value of the
- *           parameter.
- *         * `Description` &mdash; (`String`) A description of the
- *           parameter.
- *         * `Source` &mdash; (`String`) The source of the parameter value,
- *           such as "engine-default" or "user".
- *         * `DataType` &mdash; (`String`) The data type of the parameter.
- *         * `AllowedValues` &mdash; (`String`) The valid range of values
- *           for the parameter.
- *         * `IsModifiable` &mdash; (`Boolean`) If true, the parameter can
- *           be modified. Some parameters have security or operational
- *           implications that prevent them from being changed.
- *         * `MinimumEngineVersion` &mdash; (`String`) The earliest engine
- *           version to which the parameter can apply.
+ *           * `ParameterName` &mdash; (`String`) The name of the
+ *             parameter.
+ *           * `ParameterValue` &mdash; (`String`) The value of the
+ *             parameter.
+ *           * `Description` &mdash; (`String`) A description of the
+ *             parameter.
+ *           * `Source` &mdash; (`String`) The source of the parameter
+ *             value, such as "engine-default" or "user".
+ *           * `DataType` &mdash; (`String`) The data type of the
+ *             parameter.
+ *           * `AllowedValues` &mdash; (`String`) The valid range of values
+ *             for the parameter.
+ *           * `IsModifiable` &mdash; (`Boolean`) If true, the parameter
+ *             can be modified. Some parameters have security or
+ *             operational implications that prevent them from being
+ *             changed.
+ *           * `MinimumEngineVersion` &mdash; (`String`) The earliest
+ *             engine version to which the parameter can apply.
  *       * `Marker` &mdash; (`String`) A marker that indicates the first
  *         parameter group that a subsequent DescribeClusterParameterGroups
  *         request will return. The response returns a marker only if there
@@ -954,27 +966,28 @@ AWS.Redshift = inherit({})
  *         could be returned in the response.
  *       * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
  *         ClusterSecurityGroup instances.
- *         * `ClusterSecurityGroupName` &mdash; (`String`) The name of the
- *           cluster security group to which the operation was applied.
- *         * `Description` &mdash; (`String`) A description of the security
- *           group.
- *         * `EC2SecurityGroups` &mdash; (`Array<map>`) A list of EC2
- *           security groups that are permitted to access clusters
- *           associated with this cluster security group.
- *           * `Status` &mdash; (`String`) The status of the EC2 security
- *             group.
- *           * `EC2SecurityGroupName` &mdash; (`String`) The name of the
- *             EC2 Security Group.
- *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) The AWS ID of
- *             the owner of the EC2 security group specified in the
- *             EC2SecurityGroupName field.
- *         * `IPRanges` &mdash; (`Array<map>`) A list of IP ranges (CIDR
- *           blocks) that are permitted to access clusters associated with
- *           this cluster security group.
- *           * `Status` &mdash; (`String`) The status of the IP range, for
- *             example, "authorized".
- *           * `CIDRIP` &mdash; (`String`) The IP range in Classless
- *             Inter-Domain Routing (CIDR) notation.
+ *           * `ClusterSecurityGroupName` &mdash; (`String`) The name of
+ *             the cluster security group to which the operation was
+ *             applied.
+ *           * `Description` &mdash; (`String`) A description of the
+ *             security group.
+ *           * `EC2SecurityGroups` &mdash; (`Array<map>`) A list of EC2
+ *             security groups that are permitted to access clusters
+ *             associated with this cluster security group.
+ *               * `Status` &mdash; (`String`) The status of the EC2
+ *                 security group.
+ *               * `EC2SecurityGroupName` &mdash; (`String`) The name of
+ *                 the EC2 Security Group.
+ *               * `EC2SecurityGroupOwnerId` &mdash; (`String`) The AWS ID
+ *                 of the owner of the EC2 security group specified in the
+ *                 EC2SecurityGroupName field.
+ *           * `IPRanges` &mdash; (`Array<map>`) A list of IP ranges (CIDR
+ *             blocks) that are permitted to access clusters associated
+ *             with this cluster security group.
+ *               * `Status` &mdash; (`String`) The status of the IP range,
+ *                 for example, "authorized".
+ *               * `CIDRIP` &mdash; (`String`) The IP range in Classless
+ *                 Inter-Domain Routing (CIDR) notation.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1023,43 +1036,43 @@ AWS.Redshift = inherit({})
  *         return. The response returns a marker only if there are more
  *         snapshots to list than the current response can return.
  *       * `Snapshots` &mdash; (`Array<map>`) A list of Snapshot instances.
- *         * `SnapshotIdentifier` &mdash; (`String`) The snapshot
- *           identifier that is provided in the request.
- *         * `ClusterIdentifier` &mdash; (`String`) The identifier of the
- *           cluster for which the snapshot was taken.
- *         * `SnapshotCreateTime` &mdash; (`Date`) The time (UTC) when
- *           Amazon Redshift began the snapshot. A snapshot contains a copy
- *           of the cluster data as of this exact time.
- *         * `Status` &mdash; (`String`) The snapshot status. The value of
- *           the status depends on the API operation used.
- *           CreateClusterSnapshot and CopyClusterSnapshot returns status
- *           as "creating". DescribeClusterSnapshots returns status as
- *           "creating", "available", or "failed". DeleteClusterSnapshot
- *           returns status as "deleted".
- *         * `Port` &mdash; (`Integer`) The port that the cluster is
- *           listening on.
- *         * `AvailabilityZone` &mdash; (`String`) The Availability Zone in
- *           which the cluster was created.
- *         * `ClusterCreateTime` &mdash; (`Date`) The time (UTC) when the
- *           cluster was originally created.
- *         * `MasterUsername` &mdash; (`String`) The master user name for
- *           the cluster.
- *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           Amazon Redshift engine that is running on the cluster.
- *         * `SnapshotType` &mdash; (`String`) The snapshot type. Snapshots
- *           created using CreateClusterSnapshot and CopyClusterSnapshot
- *           will be of type "manual".
- *         * `NodeType` &mdash; (`String`) The node type of the nodes in
- *           the cluster.
- *         * `NumberOfNodes` &mdash; (`Integer`) The number of nodes in the
- *           cluster.
- *         * `DBName` &mdash; (`String`) The name of the database that was
- *           created when the cluster was created.
- *         * `VpcId` &mdash; (`String`) The VPC identifier of the cluster
- *           if the snapshot is from a cluster in a VPC. Otherwise, this
- *           field is not in the output.
- *         * `Encrypted` &mdash; (`Boolean`) If true, the data in the
- *           snapshot is encrypted at rest.
+ *           * `SnapshotIdentifier` &mdash; (`String`) The snapshot
+ *             identifier that is provided in the request.
+ *           * `ClusterIdentifier` &mdash; (`String`) The identifier of the
+ *             cluster for which the snapshot was taken.
+ *           * `SnapshotCreateTime` &mdash; (`Date`) The time (UTC) when
+ *             Amazon Redshift began the snapshot. A snapshot contains a
+ *             copy of the cluster data as of this exact time.
+ *           * `Status` &mdash; (`String`) The snapshot status. The value
+ *             of the status depends on the API operation used.
+ *             CreateClusterSnapshot and CopyClusterSnapshot returns status
+ *             as "creating". DescribeClusterSnapshots returns status as
+ *             "creating", "available", or "failed". DeleteClusterSnapshot
+ *             returns status as "deleted".
+ *           * `Port` &mdash; (`Integer`) The port that the cluster is
+ *             listening on.
+ *           * `AvailabilityZone` &mdash; (`String`) The Availability Zone
+ *             in which the cluster was created.
+ *           * `ClusterCreateTime` &mdash; (`Date`) The time (UTC) when the
+ *             cluster was originally created.
+ *           * `MasterUsername` &mdash; (`String`) The master user name for
+ *             the cluster.
+ *           * `ClusterVersion` &mdash; (`String`) The version ID of the
+ *             Amazon Redshift engine that is running on the cluster.
+ *           * `SnapshotType` &mdash; (`String`) The snapshot type.
+ *             Snapshots created using CreateClusterSnapshot and
+ *             CopyClusterSnapshot will be of type "manual".
+ *           * `NodeType` &mdash; (`String`) The node type of the nodes in
+ *             the cluster.
+ *           * `NumberOfNodes` &mdash; (`Integer`) The number of nodes in
+ *             the cluster.
+ *           * `DBName` &mdash; (`String`) The name of the database that
+ *             was created when the cluster was created.
+ *           * `VpcId` &mdash; (`String`) The VPC identifier of the cluster
+ *             if the snapshot is from a cluster in a VPC. Otherwise, this
+ *             field is not in the output.
+ *           * `Encrypted` &mdash; (`Boolean`) If true, the data in the
+ *             snapshot is encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1094,23 +1107,24 @@ AWS.Redshift = inherit({})
  *         were returned in the response.
  *       * `ClusterSubnetGroups` &mdash; (`Array<map>`) A list of
  *         ClusterSubnetGroup instances.
- *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
- *           cluster subnet group.
- *         * `Description` &mdash; (`String`) The description of the
- *           cluster subnet group.
- *         * `VpcId` &mdash; (`String`) The VPC ID of the cluster subnet
- *           group.
- *         * `SubnetGroupStatus` &mdash; (`String`) The status of the
- *           cluster subnet group. Possible values are Complete, Incomplete
- *           and Invalid.
- *         * `Subnets` &mdash; (`Array<map>`) A list of the VPC Subnet
- *           elements.
- *           * `SubnetIdentifier` &mdash; (`String`) The identifier of the
- *             subnet.
- *           * `SubnetAvailabilityZone` &mdash; (`map`)
- *             * `Name` &mdash; (`String`) The name of the availability
- *               zone.
- *           * `SubnetStatus` &mdash; (`String`) The status of the subnet.
+ *           * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
+ *             cluster subnet group.
+ *           * `Description` &mdash; (`String`) The description of the
+ *             cluster subnet group.
+ *           * `VpcId` &mdash; (`String`) The VPC ID of the cluster subnet
+ *             group.
+ *           * `SubnetGroupStatus` &mdash; (`String`) The status of the
+ *             cluster subnet group. Possible values are Complete,
+ *             Incomplete and Invalid.
+ *           * `Subnets` &mdash; (`Array<map>`) A list of the VPC Subnet
+ *             elements.
+ *               * `SubnetIdentifier` &mdash; (`String`) The identifier of
+ *                 the subnet.
+ *               * `SubnetAvailabilityZone` &mdash; (`map`)
+ *                   * `Name` &mdash; (`String`) The name of the
+ *                     availability zone.
+ *               * `SubnetStatus` &mdash; (`String`) The status of the
+ *                 subnet.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1146,12 +1160,12 @@ AWS.Redshift = inherit({})
  *         retrieval of paginated results.
  *       * `ClusterVersions` &mdash; (`Array<map>`) A list of Version
  *         elements.
- *         * `ClusterVersion` &mdash; (`String`) The version number used by
- *           the cluster.
- *         * `ClusterParameterGroupFamily` &mdash; (`String`) The name of
- *           the cluster parameter group family for the cluster.
- *         * `Description` &mdash; (`String`) The description of the
- *           cluster version.
+ *           * `ClusterVersion` &mdash; (`String`) The version number used
+ *             by the cluster.
+ *           * `ClusterParameterGroupFamily` &mdash; (`String`) The name of
+ *             the cluster parameter group family for the cluster.
+ *           * `Description` &mdash; (`String`) The description of the
+ *             cluster version.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1188,93 +1202,96 @@ AWS.Redshift = inherit({})
  *         are more clusters to list than were returned in the response.
  *       * `Clusters` &mdash; (`Array<map>`) A list of Cluster objects,
  *         where each object describes one cluster.
- *         * `ClusterIdentifier` &mdash; (`String`) The unique identifier
- *           of the cluster.
- *         * `NodeType` &mdash; (`String`) The node type for the nodes in
- *           the cluster.
- *         * `ClusterStatus` &mdash; (`String`) The current state of this
- *           cluster. Possible values include available, creating,
- *           deleting, rebooting, and resizing.
- *         * `ModifyStatus` &mdash; (`String`) The status of a modify
- *           operation, if any, initiated for the cluster.
- *         * `MasterUsername` &mdash; (`String`) The master user name for
- *           the cluster. This name is used to connect to the database that
- *           is specified in DBName.
- *         * `DBName` &mdash; (`String`) The name of the initial database
- *           that was created when the cluster was created. This same name
- *           is returned for the life of the cluster. If an initial
- *           database was not specified, a database named "dev" was created
- *           by default.
- *         * `Endpoint` &mdash; (`map`) The connection endpoint.
- *           * `Address` &mdash; (`String`) The DNS address of the Cluster.
- *           * `Port` &mdash; (`Integer`) The port that the database engine
- *             is listening on.
- *         * `ClusterCreateTime` &mdash; (`Date`) The date and time that
- *           the cluster was created.
- *         * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
- *           number of days that automatic cluster snapshots are retained.
- *         * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
- *           cluster security group that are associated with the cluster.
- *           Each security group is represented by an element that contains
- *           ClusterSecurityGroup.Name and ClusterSecurityGroup.Status
- *           subelements. Cluster security groups are used when the cluster
- *           is not created in a VPC. Clusters that are created in a VPC
- *           use VPC security groups, which are listed by the
- *           VpcSecurityGroups parameter.
- *           * `ClusterSecurityGroupName` &mdash; (`String`) The name of
- *             the cluster security group.
- *           * `Status` &mdash; (`String`) The status of the cluster
- *             security group.
- *         * `VpcSecurityGroups` &mdash; (`Array<map>`) A list of Virtual
- *           Private Cloud (VPC) security groups that are associated with
- *           the cluster. This parameter is returned only if the cluster is
- *           in a VPC.
- *           * `VpcSecurityGroupId` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *         * `ClusterParameterGroups` &mdash; (`Array<map>`) The list of
- *           cluster parameter groups that are associated with this
- *           cluster.
- *           * `ParameterGroupName` &mdash; (`String`) The name of the
- *             cluster parameter group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
- *           subnet group that is associated with the cluster. This
- *           parameter is valid only when the cluster is in a VPC.
- *         * `VpcId` &mdash; (`String`) The identifier of the VPC the
- *           cluster is in, if the cluster is in a VPC.
- *         * `AvailabilityZone` &mdash; (`String`) The name of the
- *           Availability Zone in which the cluster is located.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
- *           time range (in UTC) during which system maintenance can occur.
- *         * `PendingModifiedValues` &mdash; (`map`) If present, changes to
- *           the cluster are pending. Specific pending changes are
- *           identified by subelements.
- *           * `MasterUserPassword` &mdash; (`String`) The pending or
- *             in-progress change of the master credentials for the
- *             cluster.
- *           * `NodeType` &mdash; (`String`) The pending or in-progress
- *             change of the cluster's node type.
- *           * `NumberOfNodes` &mdash; (`Integer`) The pending or
- *             in-progress change of the number nodes in the cluster.
- *           * `ClusterType` &mdash; (`String`) The pending or in-progress
- *             change of the cluster type.
- *           * `ClusterVersion` &mdash; (`String`) The pending or
- *             in-progress change of the service version.
+ *           * `ClusterIdentifier` &mdash; (`String`) The unique identifier
+ *             of the cluster.
+ *           * `NodeType` &mdash; (`String`) The node type for the nodes in
+ *             the cluster.
+ *           * `ClusterStatus` &mdash; (`String`) The current state of this
+ *             cluster. Possible values include available, creating,
+ *             deleting, rebooting, and resizing.
+ *           * `ModifyStatus` &mdash; (`String`) The status of a modify
+ *             operation, if any, initiated for the cluster.
+ *           * `MasterUsername` &mdash; (`String`) The master user name for
+ *             the cluster. This name is used to connect to the database
+ *             that is specified in DBName.
+ *           * `DBName` &mdash; (`String`) The name of the initial database
+ *             that was created when the cluster was created. This same
+ *             name is returned for the life of the cluster. If an initial
+ *             database was not specified, a database named "dev" was
+ *             created by default.
+ *           * `Endpoint` &mdash; (`map`) The connection endpoint.
+ *               * `Address` &mdash; (`String`) The DNS address of the
+ *                 Cluster.
+ *               * `Port` &mdash; (`Integer`) The port that the database
+ *                 engine is listening on.
+ *           * `ClusterCreateTime` &mdash; (`Date`) The date and time that
+ *             the cluster was created.
  *           * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
- *             pending or in-progress change of the automated snapshot
- *             retention period.
- *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           Amazon Redshift engine that is running on the cluster.
- *         * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, version
- *           upgrades will be applied automatically to the cluster during
- *           the maintenance window.
- *         * `NumberOfNodes` &mdash; (`Integer`) The number of compute
- *           nodes in the cluster.
- *         * `PubliclyAccessible` &mdash; (`Boolean`) If true, the cluster
- *           can be accessed from a public network.
- *         * `Encrypted` &mdash; (`Boolean`) If true, data in cluster is
- *           encrypted at rest.
+ *             number of days that automatic cluster snapshots are
+ *             retained.
+ *           * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
+ *             cluster security group that are associated with the cluster.
+ *             Each security group is represented by an element that
+ *             contains ClusterSecurityGroup.Name and
+ *             ClusterSecurityGroup.Status subelements. Cluster security
+ *             groups are used when the cluster is not created in a VPC.
+ *             Clusters that are created in a VPC use VPC security groups,
+ *             which are listed by the VpcSecurityGroups parameter.
+ *               * `ClusterSecurityGroupName` &mdash; (`String`) The name
+ *                 of the cluster security group.
+ *               * `Status` &mdash; (`String`) The status of the cluster
+ *                 security group.
+ *           * `VpcSecurityGroups` &mdash; (`Array<map>`) A list of Virtual
+ *             Private Cloud (VPC) security groups that are associated with
+ *             the cluster. This parameter is returned only if the cluster
+ *             is in a VPC.
+ *               * `VpcSecurityGroupId` &mdash; (`String`)
+ *               * `Status` &mdash; (`String`)
+ *           * `ClusterParameterGroups` &mdash; (`Array<map>`) The list of
+ *             cluster parameter groups that are associated with this
+ *             cluster.
+ *               * `ParameterGroupName` &mdash; (`String`) The name of the
+ *                 cluster parameter group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *           * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
+ *             subnet group that is associated with the cluster. This
+ *             parameter is valid only when the cluster is in a VPC.
+ *           * `VpcId` &mdash; (`String`) The identifier of the VPC the
+ *             cluster is in, if the cluster is in a VPC.
+ *           * `AvailabilityZone` &mdash; (`String`) The name of the
+ *             Availability Zone in which the cluster is located.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
+ *             time range (in UTC) during which system maintenance can
+ *             occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) If present, changes
+ *             to the cluster are pending. Specific pending changes are
+ *             identified by subelements.
+ *               * `MasterUserPassword` &mdash; (`String`) The pending or
+ *                 in-progress change of the master credentials for the
+ *                 cluster.
+ *               * `NodeType` &mdash; (`String`) The pending or in-progress
+ *                 change of the cluster's node type.
+ *               * `NumberOfNodes` &mdash; (`Integer`) The pending or
+ *                 in-progress change of the number nodes in the cluster.
+ *               * `ClusterType` &mdash; (`String`) The pending or
+ *                 in-progress change of the cluster type.
+ *               * `ClusterVersion` &mdash; (`String`) The pending or
+ *                 in-progress change of the service version.
+ *               * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`)
+ *                 The pending or in-progress change of the automated
+ *                 snapshot retention period.
+ *           * `ClusterVersion` &mdash; (`String`) The version ID of the
+ *             Amazon Redshift engine that is running on the cluster.
+ *           * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, version
+ *             upgrades will be applied automatically to the cluster during
+ *             the maintenance window.
+ *           * `NumberOfNodes` &mdash; (`Integer`) The number of compute
+ *             nodes in the cluster.
+ *           * `PubliclyAccessible` &mdash; (`Boolean`) If true, the
+ *             cluster can be accessed from a public network.
+ *           * `Encrypted` &mdash; (`Boolean`) If true, data in cluster is
+ *             encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1304,31 +1321,31 @@ AWS.Redshift = inherit({})
  *
  *       * `DefaultClusterParameters` &mdash; (`map`) Describes the default
  *         cluster parameters for a parameter group family.
- *         * `ParameterGroupFamily` &mdash; (`String`) The name of the
- *           cluster parameter group family to which the engine default
- *           parameters apply.
- *         * `Marker` &mdash; (`String`) An identifier to allow retrieval
- *           of paginated results.
- *         * `Parameters` &mdash; (`Array<map>`) The list of cluster
- *           default parameters.
- *           * `ParameterName` &mdash; (`String`) The name of the
- *             parameter.
- *           * `ParameterValue` &mdash; (`String`) The value of the
- *             parameter.
- *           * `Description` &mdash; (`String`) A description of the
- *             parameter.
- *           * `Source` &mdash; (`String`) The source of the parameter
- *             value, such as "engine-default" or "user".
- *           * `DataType` &mdash; (`String`) The data type of the
- *             parameter.
- *           * `AllowedValues` &mdash; (`String`) The valid range of values
- *             for the parameter.
- *           * `IsModifiable` &mdash; (`Boolean`) If true, the parameter
- *             can be modified. Some parameters have security or
- *             operational implications that prevent them from being
- *             changed.
- *           * `MinimumEngineVersion` &mdash; (`String`) The earliest
- *             engine version to which the parameter can apply.
+ *           * `ParameterGroupFamily` &mdash; (`String`) The name of the
+ *             cluster parameter group family to which the engine default
+ *             parameters apply.
+ *           * `Marker` &mdash; (`String`) An identifier to allow retrieval
+ *             of paginated results.
+ *           * `Parameters` &mdash; (`Array<map>`) The list of cluster
+ *             default parameters.
+ *               * `ParameterName` &mdash; (`String`) The name of the
+ *                 parameter.
+ *               * `ParameterValue` &mdash; (`String`) The value of the
+ *                 parameter.
+ *               * `Description` &mdash; (`String`) A description of the
+ *                 parameter.
+ *               * `Source` &mdash; (`String`) The source of the parameter
+ *                 value, such as "engine-default" or "user".
+ *               * `DataType` &mdash; (`String`) The data type of the
+ *                 parameter.
+ *               * `AllowedValues` &mdash; (`String`) The valid range of
+ *                 values for the parameter.
+ *               * `IsModifiable` &mdash; (`Boolean`) If true, the
+ *                 parameter can be modified. Some parameters have security
+ *                 or operational implications that prevent them from being
+ *                 changed.
+ *               * `MinimumEngineVersion` &mdash; (`String`) The earliest
+ *                 engine version to which the parameter can apply.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1395,17 +1412,17 @@ AWS.Redshift = inherit({})
  *         listing events in a new request. The response returns a marker
  *         if there are more events to list than returned in the response.
  *       * `Events` &mdash; (`Array<map>`) A list of Event instances.
- *         * `SourceIdentifier` &mdash; (`String`) The identifier for the
- *           source of the event.
- *         * `SourceType` &mdash; (`String`) The source type for this
- *           event.
- *           Possible values include:
- *           * `cluster`
- *           * `cluster-parameter-group`
- *           * `cluster-security-group`
- *           * `cluster-snapshot`
- *         * `Message` &mdash; (`String`) The text of this event.
- *         * `Date` &mdash; (`Date`) The date and time of the event.
+ *           * `SourceIdentifier` &mdash; (`String`) The identifier for the
+ *             source of the event.
+ *           * `SourceType` &mdash; (`String`) The source type for this
+ *             event.
+ *             Possible values include:
+ *             * `cluster`
+ *             * `cluster-parameter-group`
+ *             * `cluster-security-group`
+ *             * `cluster-snapshot`
+ *           * `Message` &mdash; (`String`) The text of this event.
+ *           * `Date` &mdash; (`Date`) The date and time of the event.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1442,15 +1459,16 @@ AWS.Redshift = inherit({})
  *       * `OrderableClusterOptions` &mdash; (`Array<map>`) An
  *         OrderableClusterOption structure containing information about
  *         orderable options for the Cluster.
- *         * `ClusterVersion` &mdash; (`String`) The version of the
- *           orderable cluster.
- *         * `ClusterType` &mdash; (`String`) The cluster type, for example
- *           multi-node.
- *         * `NodeType` &mdash; (`String`) The node type for the orderable
- *           cluster.
- *         * `AvailabilityZones` &mdash; (`Array<map>`) A list of
- *           availability zones for the orderable cluster.
- *           * `Name` &mdash; (`String`) The name of the availability zone.
+ *           * `ClusterVersion` &mdash; (`String`) The version of the
+ *             orderable cluster.
+ *           * `ClusterType` &mdash; (`String`) The cluster type, for
+ *             example multi-node.
+ *           * `NodeType` &mdash; (`String`) The node type for the
+ *             orderable cluster.
+ *           * `AvailabilityZones` &mdash; (`Array<map>`) A list of
+ *             availability zones for the orderable cluster.
+ *               * `Name` &mdash; (`String`) The name of the availability
+ *                 zone.
  *       * `Marker` &mdash; (`String`) A marker that can be used to
  *         retrieve paginated results.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1486,30 +1504,31 @@ AWS.Redshift = inherit({})
  *         first reserved node offering that the request will return.
  *       * `ReservedNodeOfferings` &mdash; (`Array<map>`) A list of
  *         reserved node offerings.
- *         * `ReservedNodeOfferingId` &mdash; (`String`) The offering
- *           identifier.
- *         * `NodeType` &mdash; (`String`) The node type offered by the
- *           reserved node offering.
- *         * `Duration` &mdash; (`Integer`) The duration, in seconds, for
- *           which the offering will reserve the node.
- *         * `FixedPrice` &mdash; (`Float`) The upfront fixed charge you
- *           will pay to purchase the specific reserved node offering.
- *         * `UsagePrice` &mdash; (`Float`) The rate you are charged for
- *           each hour the cluster that is using the offering is running.
- *         * `CurrencyCode` &mdash; (`String`) The currency code for the
- *           compute nodes offering.
- *         * `OfferingType` &mdash; (`String`) The anticipated utilization
- *           of the reserved node, as defined in the reserved node
- *           offering.
- *         * `RecurringCharges` &mdash; (`Array<map>`) The charge to your
- *           account regardless of whether you are creating any clusters
- *           using the node offering. Recurring charges are only in effect
- *           for heavy-utilization reserved nodes.
- *           * `RecurringChargeAmount` &mdash; (`Float`) The amount charged
- *             per the period of time specified by the recurring charge
- *             frequency.
- *           * `RecurringChargeFrequency` &mdash; (`String`) The frequency
- *             at which the recurring charge amount is applied.
+ *           * `ReservedNodeOfferingId` &mdash; (`String`) The offering
+ *             identifier.
+ *           * `NodeType` &mdash; (`String`) The node type offered by the
+ *             reserved node offering.
+ *           * `Duration` &mdash; (`Integer`) The duration, in seconds, for
+ *             which the offering will reserve the node.
+ *           * `FixedPrice` &mdash; (`Float`) The upfront fixed charge you
+ *             will pay to purchase the specific reserved node offering.
+ *           * `UsagePrice` &mdash; (`Float`) The rate you are charged for
+ *             each hour the cluster that is using the offering is running.
+ *           * `CurrencyCode` &mdash; (`String`) The currency code for the
+ *             compute nodes offering.
+ *           * `OfferingType` &mdash; (`String`) The anticipated
+ *             utilization of the reserved node, as defined in the reserved
+ *             node offering.
+ *           * `RecurringCharges` &mdash; (`Array<map>`) The charge to your
+ *             account regardless of whether you are creating any clusters
+ *             using the node offering. Recurring charges are only in
+ *             effect for heavy-utilization reserved nodes.
+ *               * `RecurringChargeAmount` &mdash; (`Float`) The amount
+ *                 charged per the period of time specified by the
+ *                 recurring charge frequency.
+ *               * `RecurringChargeFrequency` &mdash; (`String`) The
+ *                 frequency at which the recurring charge amount is
+ *                 applied.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1540,41 +1559,42 @@ AWS.Redshift = inherit({})
  *         retrieve paginated results.
  *       * `ReservedNodes` &mdash; (`Array<map>`) The list of reserved
  *         nodes.
- *         * `ReservedNodeId` &mdash; (`String`) The unique identifier for
- *           the reservation.
- *         * `ReservedNodeOfferingId` &mdash; (`String`) The identifier for
- *           the reserved node offering.
- *         * `NodeType` &mdash; (`String`) The node type of the reserved
- *           node.
- *         * `StartTime` &mdash; (`Date`) The time the reservation started.
- *           You purchase a reserved node offering for a duration. This is
- *           the start time of that duration.
- *         * `Duration` &mdash; (`Integer`) The duration of the node
- *           reservation in seconds.
- *         * `FixedPrice` &mdash; (`Float`) The fixed cost Amazon Redshift
- *           charged you for this reserved node.
- *         * `UsagePrice` &mdash; (`Float`) The hourly rate Amazon Redshift
- *           charge you for this reserved node.
- *         * `CurrencyCode` &mdash; (`String`) The currency code for the
- *           reserved cluster.
- *         * `NodeCount` &mdash; (`Integer`) The number of reserved compute
- *           nodes.
- *         * `State` &mdash; (`String`) The state of the reserved Compute
- *           Node. Possible Values: pending-payment-This reserved node has
- *           recently been purchased, and the sale has been approved, but
- *           payment has not yet been confirmed. active-This reserved node
- *           is owned by the caller and is available for use.
- *           payment-failed-Payment failed for the purchase attempt.
- *         * `OfferingType` &mdash; (`String`) The anticipated utilization
- *           of the reserved node, as defined in the reserved node
- *           offering.
- *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring
- *           charges for the reserved node.
- *           * `RecurringChargeAmount` &mdash; (`Float`) The amount charged
- *             per the period of time specified by the recurring charge
- *             frequency.
- *           * `RecurringChargeFrequency` &mdash; (`String`) The frequency
- *             at which the recurring charge amount is applied.
+ *           * `ReservedNodeId` &mdash; (`String`) The unique identifier
+ *             for the reservation.
+ *           * `ReservedNodeOfferingId` &mdash; (`String`) The identifier
+ *             for the reserved node offering.
+ *           * `NodeType` &mdash; (`String`) The node type of the reserved
+ *             node.
+ *           * `StartTime` &mdash; (`Date`) The time the reservation
+ *             started. You purchase a reserved node offering for a
+ *             duration. This is the start time of that duration.
+ *           * `Duration` &mdash; (`Integer`) The duration of the node
+ *             reservation in seconds.
+ *           * `FixedPrice` &mdash; (`Float`) The fixed cost Amazon
+ *             Redshift charged you for this reserved node.
+ *           * `UsagePrice` &mdash; (`Float`) The hourly rate Amazon
+ *             Redshift charge you for this reserved node.
+ *           * `CurrencyCode` &mdash; (`String`) The currency code for the
+ *             reserved cluster.
+ *           * `NodeCount` &mdash; (`Integer`) The number of reserved
+ *             compute nodes.
+ *           * `State` &mdash; (`String`) The state of the reserved Compute
+ *             Node. Possible Values: pending-payment-This reserved node
+ *             has recently been purchased, and the sale has been approved,
+ *             but payment has not yet been confirmed. active-This reserved
+ *             node is owned by the caller and is available for use.
+ *             payment-failed-Payment failed for the purchase attempt.
+ *           * `OfferingType` &mdash; (`String`) The anticipated
+ *             utilization of the reserved node, as defined in the reserved
+ *             node offering.
+ *           * `RecurringCharges` &mdash; (`Array<map>`) The recurring
+ *             charges for the reserved node.
+ *               * `RecurringChargeAmount` &mdash; (`Float`) The amount
+ *                 charged per the period of time specified by the
+ *                 recurring charge frequency.
+ *               * `RecurringChargeFrequency` &mdash; (`String`) The
+ *                 frequency at which the recurring charge amount is
+ *                 applied.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1725,93 +1745,96 @@ AWS.Redshift = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Cluster` &mdash; (`map`) Describes a cluster.
- *         * `ClusterIdentifier` &mdash; (`String`) The unique identifier
- *           of the cluster.
- *         * `NodeType` &mdash; (`String`) The node type for the nodes in
- *           the cluster.
- *         * `ClusterStatus` &mdash; (`String`) The current state of this
- *           cluster. Possible values include available, creating,
- *           deleting, rebooting, and resizing.
- *         * `ModifyStatus` &mdash; (`String`) The status of a modify
- *           operation, if any, initiated for the cluster.
- *         * `MasterUsername` &mdash; (`String`) The master user name for
- *           the cluster. This name is used to connect to the database that
- *           is specified in DBName.
- *         * `DBName` &mdash; (`String`) The name of the initial database
- *           that was created when the cluster was created. This same name
- *           is returned for the life of the cluster. If an initial
- *           database was not specified, a database named "dev" was created
- *           by default.
- *         * `Endpoint` &mdash; (`map`) The connection endpoint.
- *           * `Address` &mdash; (`String`) The DNS address of the Cluster.
- *           * `Port` &mdash; (`Integer`) The port that the database engine
- *             is listening on.
- *         * `ClusterCreateTime` &mdash; (`Date`) The date and time that
- *           the cluster was created.
- *         * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
- *           number of days that automatic cluster snapshots are retained.
- *         * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
- *           cluster security group that are associated with the cluster.
- *           Each security group is represented by an element that contains
- *           ClusterSecurityGroup.Name and ClusterSecurityGroup.Status
- *           subelements. Cluster security groups are used when the cluster
- *           is not created in a VPC. Clusters that are created in a VPC
- *           use VPC security groups, which are listed by the
- *           VpcSecurityGroups parameter.
- *           * `ClusterSecurityGroupName` &mdash; (`String`) The name of
- *             the cluster security group.
- *           * `Status` &mdash; (`String`) The status of the cluster
- *             security group.
- *         * `VpcSecurityGroups` &mdash; (`Array<map>`) A list of Virtual
- *           Private Cloud (VPC) security groups that are associated with
- *           the cluster. This parameter is returned only if the cluster is
- *           in a VPC.
- *           * `VpcSecurityGroupId` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *         * `ClusterParameterGroups` &mdash; (`Array<map>`) The list of
- *           cluster parameter groups that are associated with this
- *           cluster.
- *           * `ParameterGroupName` &mdash; (`String`) The name of the
- *             cluster parameter group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
- *           subnet group that is associated with the cluster. This
- *           parameter is valid only when the cluster is in a VPC.
- *         * `VpcId` &mdash; (`String`) The identifier of the VPC the
- *           cluster is in, if the cluster is in a VPC.
- *         * `AvailabilityZone` &mdash; (`String`) The name of the
- *           Availability Zone in which the cluster is located.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
- *           time range (in UTC) during which system maintenance can occur.
- *         * `PendingModifiedValues` &mdash; (`map`) If present, changes to
- *           the cluster are pending. Specific pending changes are
- *           identified by subelements.
- *           * `MasterUserPassword` &mdash; (`String`) The pending or
- *             in-progress change of the master credentials for the
- *             cluster.
- *           * `NodeType` &mdash; (`String`) The pending or in-progress
- *             change of the cluster's node type.
- *           * `NumberOfNodes` &mdash; (`Integer`) The pending or
- *             in-progress change of the number nodes in the cluster.
- *           * `ClusterType` &mdash; (`String`) The pending or in-progress
- *             change of the cluster type.
- *           * `ClusterVersion` &mdash; (`String`) The pending or
- *             in-progress change of the service version.
+ *           * `ClusterIdentifier` &mdash; (`String`) The unique identifier
+ *             of the cluster.
+ *           * `NodeType` &mdash; (`String`) The node type for the nodes in
+ *             the cluster.
+ *           * `ClusterStatus` &mdash; (`String`) The current state of this
+ *             cluster. Possible values include available, creating,
+ *             deleting, rebooting, and resizing.
+ *           * `ModifyStatus` &mdash; (`String`) The status of a modify
+ *             operation, if any, initiated for the cluster.
+ *           * `MasterUsername` &mdash; (`String`) The master user name for
+ *             the cluster. This name is used to connect to the database
+ *             that is specified in DBName.
+ *           * `DBName` &mdash; (`String`) The name of the initial database
+ *             that was created when the cluster was created. This same
+ *             name is returned for the life of the cluster. If an initial
+ *             database was not specified, a database named "dev" was
+ *             created by default.
+ *           * `Endpoint` &mdash; (`map`) The connection endpoint.
+ *               * `Address` &mdash; (`String`) The DNS address of the
+ *                 Cluster.
+ *               * `Port` &mdash; (`Integer`) The port that the database
+ *                 engine is listening on.
+ *           * `ClusterCreateTime` &mdash; (`Date`) The date and time that
+ *             the cluster was created.
  *           * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
- *             pending or in-progress change of the automated snapshot
- *             retention period.
- *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           Amazon Redshift engine that is running on the cluster.
- *         * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, version
- *           upgrades will be applied automatically to the cluster during
- *           the maintenance window.
- *         * `NumberOfNodes` &mdash; (`Integer`) The number of compute
- *           nodes in the cluster.
- *         * `PubliclyAccessible` &mdash; (`Boolean`) If true, the cluster
- *           can be accessed from a public network.
- *         * `Encrypted` &mdash; (`Boolean`) If true, data in cluster is
- *           encrypted at rest.
+ *             number of days that automatic cluster snapshots are
+ *             retained.
+ *           * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
+ *             cluster security group that are associated with the cluster.
+ *             Each security group is represented by an element that
+ *             contains ClusterSecurityGroup.Name and
+ *             ClusterSecurityGroup.Status subelements. Cluster security
+ *             groups are used when the cluster is not created in a VPC.
+ *             Clusters that are created in a VPC use VPC security groups,
+ *             which are listed by the VpcSecurityGroups parameter.
+ *               * `ClusterSecurityGroupName` &mdash; (`String`) The name
+ *                 of the cluster security group.
+ *               * `Status` &mdash; (`String`) The status of the cluster
+ *                 security group.
+ *           * `VpcSecurityGroups` &mdash; (`Array<map>`) A list of Virtual
+ *             Private Cloud (VPC) security groups that are associated with
+ *             the cluster. This parameter is returned only if the cluster
+ *             is in a VPC.
+ *               * `VpcSecurityGroupId` &mdash; (`String`)
+ *               * `Status` &mdash; (`String`)
+ *           * `ClusterParameterGroups` &mdash; (`Array<map>`) The list of
+ *             cluster parameter groups that are associated with this
+ *             cluster.
+ *               * `ParameterGroupName` &mdash; (`String`) The name of the
+ *                 cluster parameter group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *           * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
+ *             subnet group that is associated with the cluster. This
+ *             parameter is valid only when the cluster is in a VPC.
+ *           * `VpcId` &mdash; (`String`) The identifier of the VPC the
+ *             cluster is in, if the cluster is in a VPC.
+ *           * `AvailabilityZone` &mdash; (`String`) The name of the
+ *             Availability Zone in which the cluster is located.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
+ *             time range (in UTC) during which system maintenance can
+ *             occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) If present, changes
+ *             to the cluster are pending. Specific pending changes are
+ *             identified by subelements.
+ *               * `MasterUserPassword` &mdash; (`String`) The pending or
+ *                 in-progress change of the master credentials for the
+ *                 cluster.
+ *               * `NodeType` &mdash; (`String`) The pending or in-progress
+ *                 change of the cluster's node type.
+ *               * `NumberOfNodes` &mdash; (`Integer`) The pending or
+ *                 in-progress change of the number nodes in the cluster.
+ *               * `ClusterType` &mdash; (`String`) The pending or
+ *                 in-progress change of the cluster type.
+ *               * `ClusterVersion` &mdash; (`String`) The pending or
+ *                 in-progress change of the service version.
+ *               * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`)
+ *                 The pending or in-progress change of the automated
+ *                 snapshot retention period.
+ *           * `ClusterVersion` &mdash; (`String`) The version ID of the
+ *             Amazon Redshift engine that is running on the cluster.
+ *           * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, version
+ *             upgrades will be applied automatically to the cluster during
+ *             the maintenance window.
+ *           * `NumberOfNodes` &mdash; (`Integer`) The number of compute
+ *             nodes in the cluster.
+ *           * `PubliclyAccessible` &mdash; (`Boolean`) If true, the
+ *             cluster can be accessed from a public network.
+ *           * `Encrypted` &mdash; (`Boolean`) If true, data in cluster is
+ *             encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1826,21 +1849,24 @@ AWS.Redshift = inherit({})
  *       modified, you must supply at least the parameter name and
  *       parameter value; other name-value pairs of the parameter are
  *       optional.
- *       * `ParameterName` &mdash; (`String`) The name of the parameter.
- *       * `ParameterValue` &mdash; (`String`) The value of the
- *         parameter.
- *       * `Description` &mdash; (`String`) A description of the
- *         parameter.
- *       * `Source` &mdash; (`String`) The source of the parameter value,
- *         such as "engine-default" or "user".
- *       * `DataType` &mdash; (`String`) The data type of the parameter.
- *       * `AllowedValues` &mdash; (`String`) The valid range of values
- *         for the parameter.
- *       * `IsModifiable` &mdash; (`Boolean`) If true, the parameter can
- *         be modified. Some parameters have security or operational
- *         implications that prevent them from being changed.
- *       * `MinimumEngineVersion` &mdash; (`String`) The earliest engine
- *         version to which the parameter can apply.
+ *         * `ParameterName` &mdash; (`String`) The name of the
+ *           parameter.
+ *         * `ParameterValue` &mdash; (`String`) The value of the
+ *           parameter.
+ *         * `Description` &mdash; (`String`) A description of the
+ *           parameter.
+ *         * `Source` &mdash; (`String`) The source of the parameter
+ *           value, such as "engine-default" or "user".
+ *         * `DataType` &mdash; (`String`) The data type of the
+ *           parameter.
+ *         * `AllowedValues` &mdash; (`String`) The valid range of values
+ *           for the parameter.
+ *         * `IsModifiable` &mdash; (`Boolean`) If true, the parameter
+ *           can be modified. Some parameters have security or
+ *           operational implications that prevent them from being
+ *           changed.
+ *         * `MinimumEngineVersion` &mdash; (`String`) The earliest
+ *           engine version to which the parameter can apply.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1881,23 +1907,24 @@ AWS.Redshift = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `ClusterSubnetGroup` &mdash; (`map`) Describes a subnet group.
- *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
- *           cluster subnet group.
- *         * `Description` &mdash; (`String`) The description of the
- *           cluster subnet group.
- *         * `VpcId` &mdash; (`String`) The VPC ID of the cluster subnet
- *           group.
- *         * `SubnetGroupStatus` &mdash; (`String`) The status of the
- *           cluster subnet group. Possible values are Complete, Incomplete
- *           and Invalid.
- *         * `Subnets` &mdash; (`Array<map>`) A list of the VPC Subnet
- *           elements.
- *           * `SubnetIdentifier` &mdash; (`String`) The identifier of the
- *             subnet.
- *           * `SubnetAvailabilityZone` &mdash; (`map`)
- *             * `Name` &mdash; (`String`) The name of the availability
- *               zone.
- *           * `SubnetStatus` &mdash; (`String`) The status of the subnet.
+ *           * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
+ *             cluster subnet group.
+ *           * `Description` &mdash; (`String`) The description of the
+ *             cluster subnet group.
+ *           * `VpcId` &mdash; (`String`) The VPC ID of the cluster subnet
+ *             group.
+ *           * `SubnetGroupStatus` &mdash; (`String`) The status of the
+ *             cluster subnet group. Possible values are Complete,
+ *             Incomplete and Invalid.
+ *           * `Subnets` &mdash; (`Array<map>`) A list of the VPC Subnet
+ *             elements.
+ *               * `SubnetIdentifier` &mdash; (`String`) The identifier of
+ *                 the subnet.
+ *               * `SubnetAvailabilityZone` &mdash; (`map`)
+ *                   * `Name` &mdash; (`String`) The name of the
+ *                     availability zone.
+ *               * `SubnetStatus` &mdash; (`String`) The status of the
+ *                 subnet.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1920,41 +1947,42 @@ AWS.Redshift = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `ReservedNode` &mdash; (`map`) Describes a reserved node.
- *         * `ReservedNodeId` &mdash; (`String`) The unique identifier for
- *           the reservation.
- *         * `ReservedNodeOfferingId` &mdash; (`String`) The identifier for
- *           the reserved node offering.
- *         * `NodeType` &mdash; (`String`) The node type of the reserved
- *           node.
- *         * `StartTime` &mdash; (`Date`) The time the reservation started.
- *           You purchase a reserved node offering for a duration. This is
- *           the start time of that duration.
- *         * `Duration` &mdash; (`Integer`) The duration of the node
- *           reservation in seconds.
- *         * `FixedPrice` &mdash; (`Float`) The fixed cost Amazon Redshift
- *           charged you for this reserved node.
- *         * `UsagePrice` &mdash; (`Float`) The hourly rate Amazon Redshift
- *           charge you for this reserved node.
- *         * `CurrencyCode` &mdash; (`String`) The currency code for the
- *           reserved cluster.
- *         * `NodeCount` &mdash; (`Integer`) The number of reserved compute
- *           nodes.
- *         * `State` &mdash; (`String`) The state of the reserved Compute
- *           Node. Possible Values: pending-payment-This reserved node has
- *           recently been purchased, and the sale has been approved, but
- *           payment has not yet been confirmed. active-This reserved node
- *           is owned by the caller and is available for use.
- *           payment-failed-Payment failed for the purchase attempt.
- *         * `OfferingType` &mdash; (`String`) The anticipated utilization
- *           of the reserved node, as defined in the reserved node
- *           offering.
- *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring
- *           charges for the reserved node.
- *           * `RecurringChargeAmount` &mdash; (`Float`) The amount charged
- *             per the period of time specified by the recurring charge
- *             frequency.
- *           * `RecurringChargeFrequency` &mdash; (`String`) The frequency
- *             at which the recurring charge amount is applied.
+ *           * `ReservedNodeId` &mdash; (`String`) The unique identifier
+ *             for the reservation.
+ *           * `ReservedNodeOfferingId` &mdash; (`String`) The identifier
+ *             for the reserved node offering.
+ *           * `NodeType` &mdash; (`String`) The node type of the reserved
+ *             node.
+ *           * `StartTime` &mdash; (`Date`) The time the reservation
+ *             started. You purchase a reserved node offering for a
+ *             duration. This is the start time of that duration.
+ *           * `Duration` &mdash; (`Integer`) The duration of the node
+ *             reservation in seconds.
+ *           * `FixedPrice` &mdash; (`Float`) The fixed cost Amazon
+ *             Redshift charged you for this reserved node.
+ *           * `UsagePrice` &mdash; (`Float`) The hourly rate Amazon
+ *             Redshift charge you for this reserved node.
+ *           * `CurrencyCode` &mdash; (`String`) The currency code for the
+ *             reserved cluster.
+ *           * `NodeCount` &mdash; (`Integer`) The number of reserved
+ *             compute nodes.
+ *           * `State` &mdash; (`String`) The state of the reserved Compute
+ *             Node. Possible Values: pending-payment-This reserved node
+ *             has recently been purchased, and the sale has been approved,
+ *             but payment has not yet been confirmed. active-This reserved
+ *             node is owned by the caller and is available for use.
+ *             payment-failed-Payment failed for the purchase attempt.
+ *           * `OfferingType` &mdash; (`String`) The anticipated
+ *             utilization of the reserved node, as defined in the reserved
+ *             node offering.
+ *           * `RecurringCharges` &mdash; (`Array<map>`) The recurring
+ *             charges for the reserved node.
+ *               * `RecurringChargeAmount` &mdash; (`Float`) The amount
+ *                 charged per the period of time specified by the
+ *                 recurring charge frequency.
+ *               * `RecurringChargeFrequency` &mdash; (`String`) The
+ *                 frequency at which the recurring charge amount is
+ *                 applied.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1974,93 +2002,96 @@ AWS.Redshift = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Cluster` &mdash; (`map`) Describes a cluster.
- *         * `ClusterIdentifier` &mdash; (`String`) The unique identifier
- *           of the cluster.
- *         * `NodeType` &mdash; (`String`) The node type for the nodes in
- *           the cluster.
- *         * `ClusterStatus` &mdash; (`String`) The current state of this
- *           cluster. Possible values include available, creating,
- *           deleting, rebooting, and resizing.
- *         * `ModifyStatus` &mdash; (`String`) The status of a modify
- *           operation, if any, initiated for the cluster.
- *         * `MasterUsername` &mdash; (`String`) The master user name for
- *           the cluster. This name is used to connect to the database that
- *           is specified in DBName.
- *         * `DBName` &mdash; (`String`) The name of the initial database
- *           that was created when the cluster was created. This same name
- *           is returned for the life of the cluster. If an initial
- *           database was not specified, a database named "dev" was created
- *           by default.
- *         * `Endpoint` &mdash; (`map`) The connection endpoint.
- *           * `Address` &mdash; (`String`) The DNS address of the Cluster.
- *           * `Port` &mdash; (`Integer`) The port that the database engine
- *             is listening on.
- *         * `ClusterCreateTime` &mdash; (`Date`) The date and time that
- *           the cluster was created.
- *         * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
- *           number of days that automatic cluster snapshots are retained.
- *         * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
- *           cluster security group that are associated with the cluster.
- *           Each security group is represented by an element that contains
- *           ClusterSecurityGroup.Name and ClusterSecurityGroup.Status
- *           subelements. Cluster security groups are used when the cluster
- *           is not created in a VPC. Clusters that are created in a VPC
- *           use VPC security groups, which are listed by the
- *           VpcSecurityGroups parameter.
- *           * `ClusterSecurityGroupName` &mdash; (`String`) The name of
- *             the cluster security group.
- *           * `Status` &mdash; (`String`) The status of the cluster
- *             security group.
- *         * `VpcSecurityGroups` &mdash; (`Array<map>`) A list of Virtual
- *           Private Cloud (VPC) security groups that are associated with
- *           the cluster. This parameter is returned only if the cluster is
- *           in a VPC.
- *           * `VpcSecurityGroupId` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *         * `ClusterParameterGroups` &mdash; (`Array<map>`) The list of
- *           cluster parameter groups that are associated with this
- *           cluster.
- *           * `ParameterGroupName` &mdash; (`String`) The name of the
- *             cluster parameter group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
- *           subnet group that is associated with the cluster. This
- *           parameter is valid only when the cluster is in a VPC.
- *         * `VpcId` &mdash; (`String`) The identifier of the VPC the
- *           cluster is in, if the cluster is in a VPC.
- *         * `AvailabilityZone` &mdash; (`String`) The name of the
- *           Availability Zone in which the cluster is located.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
- *           time range (in UTC) during which system maintenance can occur.
- *         * `PendingModifiedValues` &mdash; (`map`) If present, changes to
- *           the cluster are pending. Specific pending changes are
- *           identified by subelements.
- *           * `MasterUserPassword` &mdash; (`String`) The pending or
- *             in-progress change of the master credentials for the
- *             cluster.
- *           * `NodeType` &mdash; (`String`) The pending or in-progress
- *             change of the cluster's node type.
- *           * `NumberOfNodes` &mdash; (`Integer`) The pending or
- *             in-progress change of the number nodes in the cluster.
- *           * `ClusterType` &mdash; (`String`) The pending or in-progress
- *             change of the cluster type.
- *           * `ClusterVersion` &mdash; (`String`) The pending or
- *             in-progress change of the service version.
+ *           * `ClusterIdentifier` &mdash; (`String`) The unique identifier
+ *             of the cluster.
+ *           * `NodeType` &mdash; (`String`) The node type for the nodes in
+ *             the cluster.
+ *           * `ClusterStatus` &mdash; (`String`) The current state of this
+ *             cluster. Possible values include available, creating,
+ *             deleting, rebooting, and resizing.
+ *           * `ModifyStatus` &mdash; (`String`) The status of a modify
+ *             operation, if any, initiated for the cluster.
+ *           * `MasterUsername` &mdash; (`String`) The master user name for
+ *             the cluster. This name is used to connect to the database
+ *             that is specified in DBName.
+ *           * `DBName` &mdash; (`String`) The name of the initial database
+ *             that was created when the cluster was created. This same
+ *             name is returned for the life of the cluster. If an initial
+ *             database was not specified, a database named "dev" was
+ *             created by default.
+ *           * `Endpoint` &mdash; (`map`) The connection endpoint.
+ *               * `Address` &mdash; (`String`) The DNS address of the
+ *                 Cluster.
+ *               * `Port` &mdash; (`Integer`) The port that the database
+ *                 engine is listening on.
+ *           * `ClusterCreateTime` &mdash; (`Date`) The date and time that
+ *             the cluster was created.
  *           * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
- *             pending or in-progress change of the automated snapshot
- *             retention period.
- *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           Amazon Redshift engine that is running on the cluster.
- *         * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, version
- *           upgrades will be applied automatically to the cluster during
- *           the maintenance window.
- *         * `NumberOfNodes` &mdash; (`Integer`) The number of compute
- *           nodes in the cluster.
- *         * `PubliclyAccessible` &mdash; (`Boolean`) If true, the cluster
- *           can be accessed from a public network.
- *         * `Encrypted` &mdash; (`Boolean`) If true, data in cluster is
- *           encrypted at rest.
+ *             number of days that automatic cluster snapshots are
+ *             retained.
+ *           * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
+ *             cluster security group that are associated with the cluster.
+ *             Each security group is represented by an element that
+ *             contains ClusterSecurityGroup.Name and
+ *             ClusterSecurityGroup.Status subelements. Cluster security
+ *             groups are used when the cluster is not created in a VPC.
+ *             Clusters that are created in a VPC use VPC security groups,
+ *             which are listed by the VpcSecurityGroups parameter.
+ *               * `ClusterSecurityGroupName` &mdash; (`String`) The name
+ *                 of the cluster security group.
+ *               * `Status` &mdash; (`String`) The status of the cluster
+ *                 security group.
+ *           * `VpcSecurityGroups` &mdash; (`Array<map>`) A list of Virtual
+ *             Private Cloud (VPC) security groups that are associated with
+ *             the cluster. This parameter is returned only if the cluster
+ *             is in a VPC.
+ *               * `VpcSecurityGroupId` &mdash; (`String`)
+ *               * `Status` &mdash; (`String`)
+ *           * `ClusterParameterGroups` &mdash; (`Array<map>`) The list of
+ *             cluster parameter groups that are associated with this
+ *             cluster.
+ *               * `ParameterGroupName` &mdash; (`String`) The name of the
+ *                 cluster parameter group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *           * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
+ *             subnet group that is associated with the cluster. This
+ *             parameter is valid only when the cluster is in a VPC.
+ *           * `VpcId` &mdash; (`String`) The identifier of the VPC the
+ *             cluster is in, if the cluster is in a VPC.
+ *           * `AvailabilityZone` &mdash; (`String`) The name of the
+ *             Availability Zone in which the cluster is located.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
+ *             time range (in UTC) during which system maintenance can
+ *             occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) If present, changes
+ *             to the cluster are pending. Specific pending changes are
+ *             identified by subelements.
+ *               * `MasterUserPassword` &mdash; (`String`) The pending or
+ *                 in-progress change of the master credentials for the
+ *                 cluster.
+ *               * `NodeType` &mdash; (`String`) The pending or in-progress
+ *                 change of the cluster's node type.
+ *               * `NumberOfNodes` &mdash; (`Integer`) The pending or
+ *                 in-progress change of the number nodes in the cluster.
+ *               * `ClusterType` &mdash; (`String`) The pending or
+ *                 in-progress change of the cluster type.
+ *               * `ClusterVersion` &mdash; (`String`) The pending or
+ *                 in-progress change of the service version.
+ *               * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`)
+ *                 The pending or in-progress change of the automated
+ *                 snapshot retention period.
+ *           * `ClusterVersion` &mdash; (`String`) The version ID of the
+ *             Amazon Redshift engine that is running on the cluster.
+ *           * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, version
+ *             upgrades will be applied automatically to the cluster during
+ *             the maintenance window.
+ *           * `NumberOfNodes` &mdash; (`Integer`) The number of compute
+ *             nodes in the cluster.
+ *           * `PubliclyAccessible` &mdash; (`Boolean`) If true, the
+ *             cluster can be accessed from a public network.
+ *           * `Encrypted` &mdash; (`Boolean`) If true, data in cluster is
+ *             encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2077,21 +2108,24 @@ AWS.Redshift = inherit({})
  *       used, then at least one parameter name must be supplied.
  *       Constraints: A maximum of 20 parameters can be reset in a single
  *       request.
- *       * `ParameterName` &mdash; (`String`) The name of the parameter.
- *       * `ParameterValue` &mdash; (`String`) The value of the
- *         parameter.
- *       * `Description` &mdash; (`String`) A description of the
- *         parameter.
- *       * `Source` &mdash; (`String`) The source of the parameter value,
- *         such as "engine-default" or "user".
- *       * `DataType` &mdash; (`String`) The data type of the parameter.
- *       * `AllowedValues` &mdash; (`String`) The valid range of values
- *         for the parameter.
- *       * `IsModifiable` &mdash; (`Boolean`) If true, the parameter can
- *         be modified. Some parameters have security or operational
- *         implications that prevent them from being changed.
- *       * `MinimumEngineVersion` &mdash; (`String`) The earliest engine
- *         version to which the parameter can apply.
+ *         * `ParameterName` &mdash; (`String`) The name of the
+ *           parameter.
+ *         * `ParameterValue` &mdash; (`String`) The value of the
+ *           parameter.
+ *         * `Description` &mdash; (`String`) A description of the
+ *           parameter.
+ *         * `Source` &mdash; (`String`) The source of the parameter
+ *           value, such as "engine-default" or "user".
+ *         * `DataType` &mdash; (`String`) The data type of the
+ *           parameter.
+ *         * `AllowedValues` &mdash; (`String`) The valid range of values
+ *           for the parameter.
+ *         * `IsModifiable` &mdash; (`Boolean`) If true, the parameter
+ *           can be modified. Some parameters have security or
+ *           operational implications that prevent them from being
+ *           changed.
+ *         * `MinimumEngineVersion` &mdash; (`String`) The earliest
+ *           engine version to which the parameter can apply.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -2150,93 +2184,96 @@ AWS.Redshift = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Cluster` &mdash; (`map`) Describes a cluster.
- *         * `ClusterIdentifier` &mdash; (`String`) The unique identifier
- *           of the cluster.
- *         * `NodeType` &mdash; (`String`) The node type for the nodes in
- *           the cluster.
- *         * `ClusterStatus` &mdash; (`String`) The current state of this
- *           cluster. Possible values include available, creating,
- *           deleting, rebooting, and resizing.
- *         * `ModifyStatus` &mdash; (`String`) The status of a modify
- *           operation, if any, initiated for the cluster.
- *         * `MasterUsername` &mdash; (`String`) The master user name for
- *           the cluster. This name is used to connect to the database that
- *           is specified in DBName.
- *         * `DBName` &mdash; (`String`) The name of the initial database
- *           that was created when the cluster was created. This same name
- *           is returned for the life of the cluster. If an initial
- *           database was not specified, a database named "dev" was created
- *           by default.
- *         * `Endpoint` &mdash; (`map`) The connection endpoint.
- *           * `Address` &mdash; (`String`) The DNS address of the Cluster.
- *           * `Port` &mdash; (`Integer`) The port that the database engine
- *             is listening on.
- *         * `ClusterCreateTime` &mdash; (`Date`) The date and time that
- *           the cluster was created.
- *         * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
- *           number of days that automatic cluster snapshots are retained.
- *         * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
- *           cluster security group that are associated with the cluster.
- *           Each security group is represented by an element that contains
- *           ClusterSecurityGroup.Name and ClusterSecurityGroup.Status
- *           subelements. Cluster security groups are used when the cluster
- *           is not created in a VPC. Clusters that are created in a VPC
- *           use VPC security groups, which are listed by the
- *           VpcSecurityGroups parameter.
- *           * `ClusterSecurityGroupName` &mdash; (`String`) The name of
- *             the cluster security group.
- *           * `Status` &mdash; (`String`) The status of the cluster
- *             security group.
- *         * `VpcSecurityGroups` &mdash; (`Array<map>`) A list of Virtual
- *           Private Cloud (VPC) security groups that are associated with
- *           the cluster. This parameter is returned only if the cluster is
- *           in a VPC.
- *           * `VpcSecurityGroupId` &mdash; (`String`)
- *           * `Status` &mdash; (`String`)
- *         * `ClusterParameterGroups` &mdash; (`Array<map>`) The list of
- *           cluster parameter groups that are associated with this
- *           cluster.
- *           * `ParameterGroupName` &mdash; (`String`) The name of the
- *             cluster parameter group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
- *           subnet group that is associated with the cluster. This
- *           parameter is valid only when the cluster is in a VPC.
- *         * `VpcId` &mdash; (`String`) The identifier of the VPC the
- *           cluster is in, if the cluster is in a VPC.
- *         * `AvailabilityZone` &mdash; (`String`) The name of the
- *           Availability Zone in which the cluster is located.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
- *           time range (in UTC) during which system maintenance can occur.
- *         * `PendingModifiedValues` &mdash; (`map`) If present, changes to
- *           the cluster are pending. Specific pending changes are
- *           identified by subelements.
- *           * `MasterUserPassword` &mdash; (`String`) The pending or
- *             in-progress change of the master credentials for the
- *             cluster.
- *           * `NodeType` &mdash; (`String`) The pending or in-progress
- *             change of the cluster's node type.
- *           * `NumberOfNodes` &mdash; (`Integer`) The pending or
- *             in-progress change of the number nodes in the cluster.
- *           * `ClusterType` &mdash; (`String`) The pending or in-progress
- *             change of the cluster type.
- *           * `ClusterVersion` &mdash; (`String`) The pending or
- *             in-progress change of the service version.
+ *           * `ClusterIdentifier` &mdash; (`String`) The unique identifier
+ *             of the cluster.
+ *           * `NodeType` &mdash; (`String`) The node type for the nodes in
+ *             the cluster.
+ *           * `ClusterStatus` &mdash; (`String`) The current state of this
+ *             cluster. Possible values include available, creating,
+ *             deleting, rebooting, and resizing.
+ *           * `ModifyStatus` &mdash; (`String`) The status of a modify
+ *             operation, if any, initiated for the cluster.
+ *           * `MasterUsername` &mdash; (`String`) The master user name for
+ *             the cluster. This name is used to connect to the database
+ *             that is specified in DBName.
+ *           * `DBName` &mdash; (`String`) The name of the initial database
+ *             that was created when the cluster was created. This same
+ *             name is returned for the life of the cluster. If an initial
+ *             database was not specified, a database named "dev" was
+ *             created by default.
+ *           * `Endpoint` &mdash; (`map`) The connection endpoint.
+ *               * `Address` &mdash; (`String`) The DNS address of the
+ *                 Cluster.
+ *               * `Port` &mdash; (`Integer`) The port that the database
+ *                 engine is listening on.
+ *           * `ClusterCreateTime` &mdash; (`Date`) The date and time that
+ *             the cluster was created.
  *           * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
- *             pending or in-progress change of the automated snapshot
- *             retention period.
- *         * `ClusterVersion` &mdash; (`String`) The version ID of the
- *           Amazon Redshift engine that is running on the cluster.
- *         * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, version
- *           upgrades will be applied automatically to the cluster during
- *           the maintenance window.
- *         * `NumberOfNodes` &mdash; (`Integer`) The number of compute
- *           nodes in the cluster.
- *         * `PubliclyAccessible` &mdash; (`Boolean`) If true, the cluster
- *           can be accessed from a public network.
- *         * `Encrypted` &mdash; (`Boolean`) If true, data in cluster is
- *           encrypted at rest.
+ *             number of days that automatic cluster snapshots are
+ *             retained.
+ *           * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
+ *             cluster security group that are associated with the cluster.
+ *             Each security group is represented by an element that
+ *             contains ClusterSecurityGroup.Name and
+ *             ClusterSecurityGroup.Status subelements. Cluster security
+ *             groups are used when the cluster is not created in a VPC.
+ *             Clusters that are created in a VPC use VPC security groups,
+ *             which are listed by the VpcSecurityGroups parameter.
+ *               * `ClusterSecurityGroupName` &mdash; (`String`) The name
+ *                 of the cluster security group.
+ *               * `Status` &mdash; (`String`) The status of the cluster
+ *                 security group.
+ *           * `VpcSecurityGroups` &mdash; (`Array<map>`) A list of Virtual
+ *             Private Cloud (VPC) security groups that are associated with
+ *             the cluster. This parameter is returned only if the cluster
+ *             is in a VPC.
+ *               * `VpcSecurityGroupId` &mdash; (`String`)
+ *               * `Status` &mdash; (`String`)
+ *           * `ClusterParameterGroups` &mdash; (`Array<map>`) The list of
+ *             cluster parameter groups that are associated with this
+ *             cluster.
+ *               * `ParameterGroupName` &mdash; (`String`) The name of the
+ *                 cluster parameter group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *           * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
+ *             subnet group that is associated with the cluster. This
+ *             parameter is valid only when the cluster is in a VPC.
+ *           * `VpcId` &mdash; (`String`) The identifier of the VPC the
+ *             cluster is in, if the cluster is in a VPC.
+ *           * `AvailabilityZone` &mdash; (`String`) The name of the
+ *             Availability Zone in which the cluster is located.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
+ *             time range (in UTC) during which system maintenance can
+ *             occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) If present, changes
+ *             to the cluster are pending. Specific pending changes are
+ *             identified by subelements.
+ *               * `MasterUserPassword` &mdash; (`String`) The pending or
+ *                 in-progress change of the master credentials for the
+ *                 cluster.
+ *               * `NodeType` &mdash; (`String`) The pending or in-progress
+ *                 change of the cluster's node type.
+ *               * `NumberOfNodes` &mdash; (`Integer`) The pending or
+ *                 in-progress change of the number nodes in the cluster.
+ *               * `ClusterType` &mdash; (`String`) The pending or
+ *                 in-progress change of the cluster type.
+ *               * `ClusterVersion` &mdash; (`String`) The pending or
+ *                 in-progress change of the service version.
+ *               * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`)
+ *                 The pending or in-progress change of the automated
+ *                 snapshot retention period.
+ *           * `ClusterVersion` &mdash; (`String`) The version ID of the
+ *             Amazon Redshift engine that is running on the cluster.
+ *           * `AllowVersionUpgrade` &mdash; (`Boolean`) If true, version
+ *             upgrades will be applied automatically to the cluster during
+ *             the maintenance window.
+ *           * `NumberOfNodes` &mdash; (`Integer`) The number of compute
+ *             nodes in the cluster.
+ *           * `PubliclyAccessible` &mdash; (`Boolean`) If true, the
+ *             cluster can be accessed from a public network.
+ *           * `Encrypted` &mdash; (`Boolean`) If true, data in cluster is
+ *             encrypted at rest.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2273,27 +2310,28 @@ AWS.Redshift = inherit({})
  *
  *       * `ClusterSecurityGroup` &mdash; (`map`) Describes a security
  *         group.
- *         * `ClusterSecurityGroupName` &mdash; (`String`) The name of the
- *           cluster security group to which the operation was applied.
- *         * `Description` &mdash; (`String`) A description of the security
- *           group.
- *         * `EC2SecurityGroups` &mdash; (`Array<map>`) A list of EC2
- *           security groups that are permitted to access clusters
- *           associated with this cluster security group.
- *           * `Status` &mdash; (`String`) The status of the EC2 security
- *             group.
- *           * `EC2SecurityGroupName` &mdash; (`String`) The name of the
- *             EC2 Security Group.
- *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) The AWS ID of
- *             the owner of the EC2 security group specified in the
- *             EC2SecurityGroupName field.
- *         * `IPRanges` &mdash; (`Array<map>`) A list of IP ranges (CIDR
- *           blocks) that are permitted to access clusters associated with
- *           this cluster security group.
- *           * `Status` &mdash; (`String`) The status of the IP range, for
- *             example, "authorized".
- *           * `CIDRIP` &mdash; (`String`) The IP range in Classless
- *             Inter-Domain Routing (CIDR) notation.
+ *           * `ClusterSecurityGroupName` &mdash; (`String`) The name of
+ *             the cluster security group to which the operation was
+ *             applied.
+ *           * `Description` &mdash; (`String`) A description of the
+ *             security group.
+ *           * `EC2SecurityGroups` &mdash; (`Array<map>`) A list of EC2
+ *             security groups that are permitted to access clusters
+ *             associated with this cluster security group.
+ *               * `Status` &mdash; (`String`) The status of the EC2
+ *                 security group.
+ *               * `EC2SecurityGroupName` &mdash; (`String`) The name of
+ *                 the EC2 Security Group.
+ *               * `EC2SecurityGroupOwnerId` &mdash; (`String`) The AWS ID
+ *                 of the owner of the EC2 security group specified in the
+ *                 EC2SecurityGroupName field.
+ *           * `IPRanges` &mdash; (`Array<map>`) A list of IP ranges (CIDR
+ *             blocks) that are permitted to access clusters associated
+ *             with this cluster security group.
+ *               * `Status` &mdash; (`String`) The status of the IP range,
+ *                 for example, "authorized".
+ *               * `CIDRIP` &mdash; (`String`) The IP range in Classless
+ *                 Inter-Domain Routing (CIDR) notation.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *

@@ -229,13 +229,13 @@ AWS.SNS = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Subscriptions` &mdash; (`Array<map>`) A list of subscriptions.
- *         * `SubscriptionArn` &mdash; (`String`) The subscription's ARN.
- *         * `Owner` &mdash; (`String`) The subscription's owner.
- *         * `Protocol` &mdash; (`String`) The subscription's protocol.
- *         * `Endpoint` &mdash; (`String`) The subscription's endpoint
- *           (format depends on the protocol).
- *         * `TopicArn` &mdash; (`String`) The ARN of the subscription's
- *           topic.
+ *           * `SubscriptionArn` &mdash; (`String`) The subscription's ARN.
+ *           * `Owner` &mdash; (`String`) The subscription's owner.
+ *           * `Protocol` &mdash; (`String`) The subscription's protocol.
+ *           * `Endpoint` &mdash; (`String`) The subscription's endpoint
+ *             (format depends on the protocol).
+ *           * `TopicArn` &mdash; (`String`) The ARN of the subscription's
+ *             topic.
  *       * `NextToken` &mdash; (`String`) Token to pass along to the next
  *         ListSubscriptions request. This element is returned if there are
  *         more subscriptions to retrieve.
@@ -260,13 +260,13 @@ AWS.SNS = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Subscriptions` &mdash; (`Array<map>`) A list of subscriptions.
- *         * `SubscriptionArn` &mdash; (`String`) The subscription's ARN.
- *         * `Owner` &mdash; (`String`) The subscription's owner.
- *         * `Protocol` &mdash; (`String`) The subscription's protocol.
- *         * `Endpoint` &mdash; (`String`) The subscription's endpoint
- *           (format depends on the protocol).
- *         * `TopicArn` &mdash; (`String`) The ARN of the subscription's
- *           topic.
+ *           * `SubscriptionArn` &mdash; (`String`) The subscription's ARN.
+ *           * `Owner` &mdash; (`String`) The subscription's owner.
+ *           * `Protocol` &mdash; (`String`) The subscription's protocol.
+ *           * `Endpoint` &mdash; (`String`) The subscription's endpoint
+ *             (format depends on the protocol).
+ *           * `TopicArn` &mdash; (`String`) The ARN of the subscription's
+ *             topic.
  *       * `NextToken` &mdash; (`String`) Token to pass along to the next
  *         ListSubscriptionsByTopic request. This element is returned if
  *         there are more subscriptions to retrieve.
@@ -289,7 +289,7 @@ AWS.SNS = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Topics` &mdash; (`Array<map>`) A list of topic ARNs.
- *         * `TopicArn` &mdash; (`String`) The topic's ARN.
+ *           * `TopicArn` &mdash; (`String`) The topic's ARN.
  *       * `NextToken` &mdash; (`String`) Token to pass along to the next
  *         ListTopics request. This element is returned if there are
  *         additional topics to retrieve.

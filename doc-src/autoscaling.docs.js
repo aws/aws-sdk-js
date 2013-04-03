@@ -100,19 +100,19 @@ AWS.AutoScaling = inherit({})
  *       key, value, and a propagate flag. Valid values: key=value,
  *       value=value, propagate=true or false. Value and propagate are
  *       optional parameters.
- *       * `ResourceId` &mdash; (`String`) The name of the Auto Scaling
- *         group.
- *       * `ResourceType` &mdash; (`String`) The kind of resource to
- *         which the tag is applied. Currently, Auto Scaling supports the
- *         auto-scaling-group resource type.
- *       * `Key` &mdash; **required** &mdash; (`String`) The key of the
- *         tag.
- *       * `Value` &mdash; (`String`) The value of the tag.
- *       * `PropagateAtLaunch` &mdash; (`Boolean`) Specifies whether the
- *         new tag will be applied to instances launched after the tag is
- *         created. The same behavior applies to updates: If you change a
- *         tag, the changed tag will be applied to all instances launched
- *         after you made the change.
+ *         * `ResourceId` &mdash; (`String`) The name of the Auto Scaling
+ *           group.
+ *         * `ResourceType` &mdash; (`String`) The kind of resource to
+ *           which the tag is applied. Currently, Auto Scaling supports
+ *           the auto-scaling-group resource type.
+ *         * `Key` &mdash; **required** &mdash; (`String`) The key of the
+ *           tag.
+ *         * `Value` &mdash; (`String`) The value of the tag.
+ *         * `PropagateAtLaunch` &mdash; (`Boolean`) Specifies whether
+ *           the new tag will be applied to instances launched after the
+ *           tag is created. The same behavior applies to updates: If you
+ *           change a tag, the changed tag will be applied to all
+ *           instances launched after you made the change.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -162,15 +162,15 @@ AWS.AutoScaling = inherit({})
  *       Elastic Block Storage volume. For more information about Amazon
  *       EC2 BlockDeviceMappings, go to Block Device Mapping in the
  *       Amazon EC2 product documentation.
- *       * `VirtualName` &mdash; (`String`) The virtual name associated
- *         with the device.
- *       * `DeviceName` &mdash; **required** &mdash; (`String`) The name
- *         of the device within Amazon EC2.
- *       * `Ebs` &mdash; (`map`) The Elastic Block Storage volume
- *         information.
- *         * `SnapshotId` &mdash; (`String`) The snapshot ID.
- *         * `VolumeSize` &mdash; (`Integer`) The volume size, in
- *           gigabytes.
+ *         * `VirtualName` &mdash; (`String`) The virtual name associated
+ *           with the device.
+ *         * `DeviceName` &mdash; **required** &mdash; (`String`) The
+ *           name of the device within Amazon EC2.
+ *         * `Ebs` &mdash; (`map`) The Elastic Block Storage volume
+ *           information.
+ *             * `SnapshotId` &mdash; (`String`) The snapshot ID.
+ *             * `VolumeSize` &mdash; (`Integer`) The volume size, in
+ *               gigabytes.
  *     * `InstanceMonitoring` &mdash; (`map`) Enables detailed
  *       monitoring, which is enabled by default. When detailed
  *       monitoring is enabled, CloudWatch will generate metrics every
@@ -178,8 +178,8 @@ AWS.AutoScaling = inherit({})
  *       detailed monitoring, by specifying False, Cloudwatch will
  *       generate metrics every 5 minutes. For information about
  *       monitoring, see the Amazon CloudWatch product page.
- *       * `Enabled` &mdash; (`Boolean`) If True, instance monitoring is
- *         enabled.
+ *         * `Enabled` &mdash; (`Boolean`) If True, instance monitoring
+ *           is enabled.
  *     * `SpotPrice` &mdash; (`String`) The maximum hourly price to be
  *       paid for any Spot Instance launched to fulfill the request. Spot
  *       Instances are launched when the price you specify exceeds the
@@ -223,19 +223,19 @@ AWS.AutoScaling = inherit({})
  *       continue to have the older tag. When you create a tag and a tag
  *       of the same name already exists, the operation overwrites the
  *       previous tag definition, but you will not get an error message.
- *       * `ResourceId` &mdash; (`String`) The name of the Auto Scaling
- *         group.
- *       * `ResourceType` &mdash; (`String`) The kind of resource to
- *         which the tag is applied. Currently, Auto Scaling supports the
- *         auto-scaling-group resource type.
- *       * `Key` &mdash; **required** &mdash; (`String`) The key of the
- *         tag.
- *       * `Value` &mdash; (`String`) The value of the tag.
- *       * `PropagateAtLaunch` &mdash; (`Boolean`) Specifies whether the
- *         new tag will be applied to instances launched after the tag is
- *         created. The same behavior applies to updates: If you change a
- *         tag, the changed tag will be applied to all instances launched
- *         after you made the change.
+ *         * `ResourceId` &mdash; (`String`) The name of the Auto Scaling
+ *           group.
+ *         * `ResourceType` &mdash; (`String`) The kind of resource to
+ *           which the tag is applied. Currently, Auto Scaling supports
+ *           the auto-scaling-group resource type.
+ *         * `Key` &mdash; **required** &mdash; (`String`) The key of the
+ *           tag.
+ *         * `Value` &mdash; (`String`) The value of the tag.
+ *         * `PropagateAtLaunch` &mdash; (`Boolean`) Specifies whether
+ *           the new tag will be applied to instances launched after the
+ *           tag is created. The same behavior applies to updates: If you
+ *           change a tag, the changed tag will be applied to all
+ *           instances launched after you made the change.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -346,19 +346,19 @@ AWS.AutoScaling = inherit({})
  *       and a propagate flag. Valid values are: Resource type =
  *       auto-scaling-group, Resource ID = AutoScalingGroupName,
  *       key=value, value=value, propagate=true or false.
- *       * `ResourceId` &mdash; (`String`) The name of the Auto Scaling
- *         group.
- *       * `ResourceType` &mdash; (`String`) The kind of resource to
- *         which the tag is applied. Currently, Auto Scaling supports the
- *         auto-scaling-group resource type.
- *       * `Key` &mdash; **required** &mdash; (`String`) The key of the
- *         tag.
- *       * `Value` &mdash; (`String`) The value of the tag.
- *       * `PropagateAtLaunch` &mdash; (`Boolean`) Specifies whether the
- *         new tag will be applied to instances launched after the tag is
- *         created. The same behavior applies to updates: If you change a
- *         tag, the changed tag will be applied to all instances launched
- *         after you made the change.
+ *         * `ResourceId` &mdash; (`String`) The name of the Auto Scaling
+ *           group.
+ *         * `ResourceType` &mdash; (`String`) The kind of resource to
+ *           which the tag is applied. Currently, Auto Scaling supports
+ *           the auto-scaling-group resource type.
+ *         * `Key` &mdash; **required** &mdash; (`String`) The key of the
+ *           tag.
+ *         * `Value` &mdash; (`String`) The value of the tag.
+ *         * `PropagateAtLaunch` &mdash; (`Boolean`) Specifies whether
+ *           the new tag will be applied to instances launched after the
+ *           tag is created. The same behavior applies to updates: If you
+ *           change a tag, the changed tag will be applied to all
+ *           instances launched after you made the change.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -385,9 +385,9 @@ AWS.AutoScaling = inherit({})
  *
  *       * `AdjustmentTypes` &mdash; (`Array<map>`) A list of specific
  *         policy adjustment types.
- *         * `AdjustmentType` &mdash; (`String`) A policy adjustment type.
- *           Valid values are ChangeInCapacity, ExactCapacity, and
- *           PercentChangeInCapacity.
+ *           * `AdjustmentType` &mdash; (`String`) A policy adjustment
+ *             type. Valid values are ChangeInCapacity, ExactCapacity, and
+ *             PercentChangeInCapacity.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -412,91 +412,93 @@ AWS.AutoScaling = inherit({})
  *
  *       * `AutoScalingGroups` &mdash; (`Array<map>`) A list of Auto
  *         Scaling groups.
- *         * `AutoScalingGroupName` &mdash; (`String`) Specifies the name
- *           of the group.
- *         * `AutoScalingGroupARN` &mdash; (`String`) The Amazon Resource
- *           Name (ARN) of the Auto Scaling group.
- *         * `LaunchConfigurationName` &mdash; (`String`) Specifies the
- *           name of the associated LaunchConfiguration.
- *         * `MinSize` &mdash; (`Integer`) Contains the minimum size of the
- *           Auto Scaling group.
- *         * `MaxSize` &mdash; (`Integer`) Contains the maximum size of the
- *           Auto Scaling group.
- *         * `DesiredCapacity` &mdash; (`Integer`) Specifies the desired
- *           capacity for the Auto Scaling group.
- *         * `DefaultCooldown` &mdash; (`Integer`) The number of seconds
- *           after a scaling activity completes before any further scaling
- *           activities can start.
- *         * `AvailabilityZones` &mdash; (`Array<String>`) Contains a list
- *           of Availability Zones for the group.
- *         * `LoadBalancerNames` &mdash; (`Array<String>`) A list of load
- *           balancers associated with this Auto Scaling group.
- *         * `HealthCheckType` &mdash; (`String`) The service of interest
- *           for the health status check, either "EC2" for Amazon EC2 or
- *           "ELB" for Elastic Load Balancing.
- *         * `HealthCheckGracePeriod` &mdash; (`Integer`) The length of
- *           time that Auto Scaling waits before checking an instance's
- *           health status. The grace period begins when an instance comes
- *           into service.
- *         * `Instances` &mdash; (`Array<map>`) Provides a summary list of
- *           Amazon EC2 instances.
- *           * `InstanceId` &mdash; (`String`) Specifies the ID of the
- *             Amazon EC2 instance.
- *           * `AvailabilityZone` &mdash; (`String`) Availability Zones
- *             associated with this instance.
- *           * `LifecycleState` &mdash; (`String`) Contains a description
- *             of the current lifecycle state.
- *             Possible values include:
- *             * `Pending`
- *             * `Quarantined`
- *             * `InService`
- *             * `Terminating`
- *             * `Terminated`
- *           * `HealthStatus` &mdash; (`String`) The instance's health
- *             status.
- *           * `LaunchConfigurationName` &mdash; (`String`) The launch
- *             configuration associated with this instance.
- *         * `CreatedTime` &mdash; (`Date`) Specifies the date and time the
- *           Auto Scaling group was created.
- *         * `SuspendedProcesses` &mdash; (`Array<map>`) Suspended
- *           processes associated with this Auto Scaling group.
- *           * `ProcessName` &mdash; (`String`) The name of the suspended
- *             process.
- *           * `SuspensionReason` &mdash; (`String`) The reason that the
- *             process was suspended.
- *         * `PlacementGroup` &mdash; (`String`) The name of the cluster
- *           placement group, if applicable. For more information, go to
- *           Using Cluster Instances in the Amazon EC2 User Guide.
- *         * `VPCZoneIdentifier` &mdash; (`String`) The subnet identifier
- *           for the Amazon VPC connection, if applicable. You can specify
- *           several subnets in a comma-separated list. When you specify
- *           VPCZoneIdentifier with AvailabilityZones, ensure that the
- *           subnets' Availability Zones match the values you specify for
- *           AvailabilityZones.
- *         * `EnabledMetrics` &mdash; (`Array<map>`) A list of metrics
- *           enabled for this Auto Scaling group.
- *           * `Metric` &mdash; (`String`) The name of the enabled metric.
- *           * `Granularity` &mdash; (`String`) The granularity of the
- *             enabled metric.
- *         * `Status` &mdash; (`String`) A list of status conditions for
- *           the Auto Scaling group.
- *         * `Tags` &mdash; (`Array<map>`) A list of tags for the Auto
- *           Scaling group.
- *           * `ResourceId` &mdash; (`String`) The name of the Auto Scaling
- *             group.
- *           * `ResourceType` &mdash; (`String`) The kind of resource to
- *             which the tag is applied. Currently, Auto Scaling supports
- *             the auto-scaling-group resource type.
- *           * `Key` &mdash; (`String`) The key of the tag.
- *           * `Value` &mdash; (`String`) The value of the tag.
- *           * `PropagateAtLaunch` &mdash; (`Boolean`) Specifies whether
- *             the new tag will be applied to instances launched after the
- *             tag is created. The same behavior applies to updates: If you
- *             change a tag, the changed tag will be applied to all
- *             instances launched after you made the change.
- *         * `TerminationPolicies` &mdash; (`Array<String>`) A standalone
- *           termination policy or a list of termination policies for this
- *           Auto Scaling group.
+ *           * `AutoScalingGroupName` &mdash; (`String`) Specifies the name
+ *             of the group.
+ *           * `AutoScalingGroupARN` &mdash; (`String`) The Amazon Resource
+ *             Name (ARN) of the Auto Scaling group.
+ *           * `LaunchConfigurationName` &mdash; (`String`) Specifies the
+ *             name of the associated LaunchConfiguration.
+ *           * `MinSize` &mdash; (`Integer`) Contains the minimum size of
+ *             the Auto Scaling group.
+ *           * `MaxSize` &mdash; (`Integer`) Contains the maximum size of
+ *             the Auto Scaling group.
+ *           * `DesiredCapacity` &mdash; (`Integer`) Specifies the desired
+ *             capacity for the Auto Scaling group.
+ *           * `DefaultCooldown` &mdash; (`Integer`) The number of seconds
+ *             after a scaling activity completes before any further
+ *             scaling activities can start.
+ *           * `AvailabilityZones` &mdash; (`Array<String>`) Contains a
+ *             list of Availability Zones for the group.
+ *           * `LoadBalancerNames` &mdash; (`Array<String>`) A list of load
+ *             balancers associated with this Auto Scaling group.
+ *           * `HealthCheckType` &mdash; (`String`) The service of interest
+ *             for the health status check, either "EC2" for Amazon EC2 or
+ *             "ELB" for Elastic Load Balancing.
+ *           * `HealthCheckGracePeriod` &mdash; (`Integer`) The length of
+ *             time that Auto Scaling waits before checking an instance's
+ *             health status. The grace period begins when an instance
+ *             comes into service.
+ *           * `Instances` &mdash; (`Array<map>`) Provides a summary list
+ *             of Amazon EC2 instances.
+ *               * `InstanceId` &mdash; (`String`) Specifies the ID of the
+ *                 Amazon EC2 instance.
+ *               * `AvailabilityZone` &mdash; (`String`) Availability Zones
+ *                 associated with this instance.
+ *               * `LifecycleState` &mdash; (`String`) Contains a
+ *                 description of the current lifecycle state.
+ *                 Possible values include:
+ *                 * `Pending`
+ *                 * `Quarantined`
+ *                 * `InService`
+ *                 * `Terminating`
+ *                 * `Terminated`
+ *               * `HealthStatus` &mdash; (`String`) The instance's health
+ *                 status.
+ *               * `LaunchConfigurationName` &mdash; (`String`) The launch
+ *                 configuration associated with this instance.
+ *           * `CreatedTime` &mdash; (`Date`) Specifies the date and time
+ *             the Auto Scaling group was created.
+ *           * `SuspendedProcesses` &mdash; (`Array<map>`) Suspended
+ *             processes associated with this Auto Scaling group.
+ *               * `ProcessName` &mdash; (`String`) The name of the
+ *                 suspended process.
+ *               * `SuspensionReason` &mdash; (`String`) The reason that
+ *                 the process was suspended.
+ *           * `PlacementGroup` &mdash; (`String`) The name of the cluster
+ *             placement group, if applicable. For more information, go to
+ *             Using Cluster Instances in the Amazon EC2 User Guide.
+ *           * `VPCZoneIdentifier` &mdash; (`String`) The subnet identifier
+ *             for the Amazon VPC connection, if applicable. You can
+ *             specify several subnets in a comma-separated list. When you
+ *             specify VPCZoneIdentifier with AvailabilityZones, ensure
+ *             that the subnets' Availability Zones match the values you
+ *             specify for AvailabilityZones.
+ *           * `EnabledMetrics` &mdash; (`Array<map>`) A list of metrics
+ *             enabled for this Auto Scaling group.
+ *               * `Metric` &mdash; (`String`) The name of the enabled
+ *                 metric.
+ *               * `Granularity` &mdash; (`String`) The granularity of the
+ *                 enabled metric.
+ *           * `Status` &mdash; (`String`) A list of status conditions for
+ *             the Auto Scaling group.
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the Auto
+ *             Scaling group.
+ *               * `ResourceId` &mdash; (`String`) The name of the Auto
+ *                 Scaling group.
+ *               * `ResourceType` &mdash; (`String`) The kind of resource
+ *                 to which the tag is applied. Currently, Auto Scaling
+ *                 supports the auto-scaling-group resource type.
+ *               * `Key` &mdash; (`String`) The key of the tag.
+ *               * `Value` &mdash; (`String`) The value of the tag.
+ *               * `PropagateAtLaunch` &mdash; (`Boolean`) Specifies
+ *                 whether the new tag will be applied to instances
+ *                 launched after the tag is created. The same behavior
+ *                 applies to updates: If you change a tag, the changed tag
+ *                 will be applied to all instances launched after you made
+ *                 the change.
+ *           * `TerminationPolicies` &mdash; (`Array<String>`) A standalone
+ *             termination policy or a list of termination policies for
+ *             this Auto Scaling group.
  *       * `NextToken` &mdash; (`String`) A string that marks the start of
  *         the next batch of returned results.
  *   @return [AWS.Request] a handle to the operation request for
@@ -526,20 +528,21 @@ AWS.AutoScaling = inherit({})
  *
  *       * `AutoScalingInstances` &mdash; (`Array<map>`) A list of Auto
  *         Scaling instances.
- *         * `InstanceId` &mdash; (`String`) The instance ID of the Amazon
- *           EC2 instance.
- *         * `AutoScalingGroupName` &mdash; (`String`) The name of the Auto
- *           Scaling group associated with this instance.
- *         * `AvailabilityZone` &mdash; (`String`) The Availability Zone in
- *           which this instance resides.
- *         * `LifecycleState` &mdash; (`String`) The life cycle state of
- *           this instance.
- *         * `HealthStatus` &mdash; (`String`) The health status of this
- *           instance. "Healthy" means that the instance is healthy and
- *           should remain in service. "Unhealthy" means that the instance
- *           is unhealthy. Auto Scaling should terminate and replace it.
- *         * `LaunchConfigurationName` &mdash; (`String`) The launch
- *           configuration associated with this instance.
+ *           * `InstanceId` &mdash; (`String`) The instance ID of the
+ *             Amazon EC2 instance.
+ *           * `AutoScalingGroupName` &mdash; (`String`) The name of the
+ *             Auto Scaling group associated with this instance.
+ *           * `AvailabilityZone` &mdash; (`String`) The Availability Zone
+ *             in which this instance resides.
+ *           * `LifecycleState` &mdash; (`String`) The life cycle state of
+ *             this instance.
+ *           * `HealthStatus` &mdash; (`String`) The health status of this
+ *             instance. "Healthy" means that the instance is healthy and
+ *             should remain in service. "Unhealthy" means that the
+ *             instance is unhealthy. Auto Scaling should terminate and
+ *             replace it.
+ *           * `LaunchConfigurationName` &mdash; (`String`) The launch
+ *             configuration associated with this instance.
  *       * `NextToken` &mdash; (`String`) A string that marks the start of
  *         the next batch of returned results.
  *   @return [AWS.Request] a handle to the operation request for
@@ -589,52 +592,52 @@ AWS.AutoScaling = inherit({})
  *
  *       * `LaunchConfigurations` &mdash; (`Array<map>`) A list of launch
  *         configurations.
- *         * `LaunchConfigurationName` &mdash; (`String`) Specifies the
- *           name of the launch configuration.
- *         * `LaunchConfigurationARN` &mdash; (`String`) The launch
- *           configuration's Amazon Resource Name (ARN).
- *         * `ImageId` &mdash; (`String`) Provides the unique ID of the
- *           Amazon Machine Image (AMI) that was assigned during
- *           registration.
- *         * `KeyName` &mdash; (`String`) Provides the name of the Amazon
- *           EC2 key pair.
- *         * `SecurityGroups` &mdash; (`Array<String>`) A description of
- *           the security groups to associate with the Amazon EC2
- *           instances.
- *         * `UserData` &mdash; (`String`) The user data available to the
- *           launched Amazon EC2 instances.
- *         * `InstanceType` &mdash; (`String`) Specifies the instance type
- *           of the Amazon EC2 instance.
- *         * `KernelId` &mdash; (`String`) Provides the ID of the kernel
- *           associated with the Amazon EC2 AMI.
- *         * `RamdiskId` &mdash; (`String`) Provides ID of the RAM disk
- *           associated with the Amazon EC2 AMI.
- *         * `BlockDeviceMappings` &mdash; (`Array<map>`) Specifies how
- *           block devices are exposed to the instance. Each mapping is
- *           made up of a virtualName and a deviceName.
- *           * `VirtualName` &mdash; (`String`) The virtual name associated
- *             with the device.
- *           * `DeviceName` &mdash; (`String`) The name of the device
- *             within Amazon EC2.
- *           * `Ebs` &mdash; (`map`) The Elastic Block Storage volume
- *             information.
- *             * `SnapshotId` &mdash; (`String`) The snapshot ID.
- *             * `VolumeSize` &mdash; (`Integer`) The volume size, in
- *               gigabytes.
- *         * `InstanceMonitoring` &mdash; (`map`) Controls whether
- *           instances in this group are launched with detailed monitoring
- *           or not.
- *           * `Enabled` &mdash; (`Boolean`) If True, instance monitoring
- *             is enabled.
- *         * `SpotPrice` &mdash; (`String`) Specifies the price to bid when
- *           launching Spot Instances.
- *         * `IamInstanceProfile` &mdash; (`String`) Provides the name or
- *           the Amazon Resource Name (ARN) of the instance profile
- *           associated with the IAM role for the instance. The instance
- *           profile contains the IAM role.
- *         * `CreatedTime` &mdash; (`Date`) Provides the creation date and
- *           time for this launch configuration.
- *         * `EbsOptimized` &mdash; (`Boolean`)
+ *           * `LaunchConfigurationName` &mdash; (`String`) Specifies the
+ *             name of the launch configuration.
+ *           * `LaunchConfigurationARN` &mdash; (`String`) The launch
+ *             configuration's Amazon Resource Name (ARN).
+ *           * `ImageId` &mdash; (`String`) Provides the unique ID of the
+ *             Amazon Machine Image (AMI) that was assigned during
+ *             registration.
+ *           * `KeyName` &mdash; (`String`) Provides the name of the Amazon
+ *             EC2 key pair.
+ *           * `SecurityGroups` &mdash; (`Array<String>`) A description of
+ *             the security groups to associate with the Amazon EC2
+ *             instances.
+ *           * `UserData` &mdash; (`String`) The user data available to the
+ *             launched Amazon EC2 instances.
+ *           * `InstanceType` &mdash; (`String`) Specifies the instance
+ *             type of the Amazon EC2 instance.
+ *           * `KernelId` &mdash; (`String`) Provides the ID of the kernel
+ *             associated with the Amazon EC2 AMI.
+ *           * `RamdiskId` &mdash; (`String`) Provides ID of the RAM disk
+ *             associated with the Amazon EC2 AMI.
+ *           * `BlockDeviceMappings` &mdash; (`Array<map>`) Specifies how
+ *             block devices are exposed to the instance. Each mapping is
+ *             made up of a virtualName and a deviceName.
+ *               * `VirtualName` &mdash; (`String`) The virtual name
+ *                 associated with the device.
+ *               * `DeviceName` &mdash; (`String`) The name of the device
+ *                 within Amazon EC2.
+ *               * `Ebs` &mdash; (`map`) The Elastic Block Storage volume
+ *                 information.
+ *                   * `SnapshotId` &mdash; (`String`) The snapshot ID.
+ *                   * `VolumeSize` &mdash; (`Integer`) The volume size, in
+ *                     gigabytes.
+ *           * `InstanceMonitoring` &mdash; (`map`) Controls whether
+ *             instances in this group are launched with detailed
+ *             monitoring or not.
+ *               * `Enabled` &mdash; (`Boolean`) If True, instance
+ *                 monitoring is enabled.
+ *           * `SpotPrice` &mdash; (`String`) Specifies the price to bid
+ *             when launching Spot Instances.
+ *           * `IamInstanceProfile` &mdash; (`String`) Provides the name or
+ *             the Amazon Resource Name (ARN) of the instance profile
+ *             associated with the IAM role for the instance. The instance
+ *             profile contains the IAM role.
+ *           * `CreatedTime` &mdash; (`Date`) Provides the creation date
+ *             and time for this launch configuration.
+ *           * `EbsOptimized` &mdash; (`Boolean`)
  *       * `NextToken` &mdash; (`String`) A string that marks the start of
  *         the next batch of returned results.
  *   @return [AWS.Request] a handle to the operation request for
@@ -658,10 +661,11 @@ AWS.AutoScaling = inherit({})
  *         GroupMaxSize GroupDesiredCapacity GroupInServiceInstances
  *         GroupPendingInstances GroupTerminatingInstances
  *         GroupTotalInstances
- *         * `Metric` &mdash; (`String`)
+ *           * `Metric` &mdash; (`String`)
  *       * `Granularities` &mdash; (`Array<map>`) A list of granularities
  *         for the listed Metrics.
- *         * `Granularity` &mdash; (`String`) The granularity of a Metric.
+ *           * `Granularity` &mdash; (`String`) The granularity of a
+ *             Metric.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -686,12 +690,12 @@ AWS.AutoScaling = inherit({})
  *
  *       * `NotificationConfigurations` &mdash; (`Array<map>`) The list of
  *         notification configurations.
- *         * `AutoScalingGroupName` &mdash; (`String`) Specifies the Auto
- *           Scaling group name.
- *         * `TopicARN` &mdash; (`String`) The Amazon Resource Name (ARN)
- *           of the Amazon Simple Notification Service (SNS) topic.
- *         * `NotificationType` &mdash; (`String`) The types of events for
- *           an action to start.
+ *           * `AutoScalingGroupName` &mdash; (`String`) Specifies the Auto
+ *             Scaling group name.
+ *           * `TopicARN` &mdash; (`String`) The Amazon Resource Name (ARN)
+ *             of the Amazon Simple Notification Service (SNS) topic.
+ *           * `NotificationType` &mdash; (`String`) The types of events
+ *             for an action to start.
  *       * `NextToken` &mdash; (`String`) A string that is used to mark the
  *         start of the next batch of returned results for pagination.
  *   @return [AWS.Request] a handle to the operation request for
@@ -725,31 +729,31 @@ AWS.AutoScaling = inherit({})
  *
  *       * `ScalingPolicies` &mdash; (`Array<map>`) A list of scaling
  *         policies.
- *         * `AutoScalingGroupName` &mdash; (`String`) The name of the Auto
- *           Scaling group associated with this scaling policy.
- *         * `PolicyName` &mdash; (`String`) The name of the scaling
- *           policy.
- *         * `ScalingAdjustment` &mdash; (`Integer`) The number associated
- *           with the specified adjustment type. A positive value adds to
- *           the current capacity and a negative value removes from the
- *           current capacity.
- *         * `AdjustmentType` &mdash; (`String`) Specifies whether the
- *           ScalingAdjustment is an absolute number or a percentage of the
- *           current capacity. Valid values are ChangeInCapacity,
- *           ExactCapacity, and PercentChangeInCapacity.
- *         * `Cooldown` &mdash; (`Integer`) The amount of time, in seconds,
- *           after a scaling activity completes before any further
- *           trigger-related scaling activities can start.
- *         * `PolicyARN` &mdash; (`String`) The Amazon Resource Name (ARN)
- *           of the policy.
- *         * `Alarms` &mdash; (`Array<map>`) A list of CloudWatch Alarms
- *           related to the policy.
- *           * `AlarmName` &mdash; (`String`) The name of the alarm.
- *           * `AlarmARN` &mdash; (`String`) The Amazon Resource Name (ARN)
- *             of the alarm.
- *         * `MinAdjustmentStep` &mdash; (`Integer`) Changes the
- *           DesiredCapacity of the Auto Scaling group by at least the
- *           specified number of instances.
+ *           * `AutoScalingGroupName` &mdash; (`String`) The name of the
+ *             Auto Scaling group associated with this scaling policy.
+ *           * `PolicyName` &mdash; (`String`) The name of the scaling
+ *             policy.
+ *           * `ScalingAdjustment` &mdash; (`Integer`) The number
+ *             associated with the specified adjustment type. A positive
+ *             value adds to the current capacity and a negative value
+ *             removes from the current capacity.
+ *           * `AdjustmentType` &mdash; (`String`) Specifies whether the
+ *             ScalingAdjustment is an absolute number or a percentage of
+ *             the current capacity. Valid values are ChangeInCapacity,
+ *             ExactCapacity, and PercentChangeInCapacity.
+ *           * `Cooldown` &mdash; (`Integer`) The amount of time, in
+ *             seconds, after a scaling activity completes before any
+ *             further trigger-related scaling activities can start.
+ *           * `PolicyARN` &mdash; (`String`) The Amazon Resource Name
+ *             (ARN) of the policy.
+ *           * `Alarms` &mdash; (`Array<map>`) A list of CloudWatch Alarms
+ *             related to the policy.
+ *               * `AlarmName` &mdash; (`String`) The name of the alarm.
+ *               * `AlarmARN` &mdash; (`String`) The Amazon Resource Name
+ *                 (ARN) of the alarm.
+ *           * `MinAdjustmentStep` &mdash; (`Integer`) Changes the
+ *             DesiredCapacity of the Auto Scaling group by at least the
+ *             specified number of instances.
  *       * `NextToken` &mdash; (`String`) A string that marks the start of
  *         the next batch of returned results.
  *   @return [AWS.Request] a handle to the operation request for
@@ -783,35 +787,35 @@ AWS.AutoScaling = inherit({})
  *
  *       * `Activities` &mdash; (`Array<map>`) A list of the requested
  *         scaling activities.
- *         * `ActivityId` &mdash; (`String`) Specifies the ID of the
- *           activity.
- *         * `AutoScalingGroupName` &mdash; (`String`) The name of the Auto
- *           Scaling group.
- *         * `Description` &mdash; (`String`) Contains a friendly, more
- *           verbose description of the scaling activity.
- *         * `Cause` &mdash; (`String`) Contains the reason the activity
- *           was begun.
- *         * `StartTime` &mdash; (`Date`) Provides the start time of this
- *           activity.
- *         * `EndTime` &mdash; (`Date`) Provides the end time of this
- *           activity.
- *         * `StatusCode` &mdash; (`String`) Contains the current status of
- *           the activity.
- *           Possible values include:
- *           * `WaitingForSpotInstanceRequestId`
- *           * `WaitingForSpotInstanceId`
- *           * `WaitingForInstanceId`
- *           * `PreInService`
- *           * `InProgress`
- *           * `Successful`
- *           * `Failed`
- *           * `Cancelled`
- *         * `StatusMessage` &mdash; (`String`) Contains a friendly, more
- *           verbose description of the activity status.
- *         * `Progress` &mdash; (`Integer`) Specifies a value between 0 and
- *           100 that indicates the progress of the activity.
- *         * `Details` &mdash; (`String`) Contains details of the scaling
- *           activity.
+ *           * `ActivityId` &mdash; (`String`) Specifies the ID of the
+ *             activity.
+ *           * `AutoScalingGroupName` &mdash; (`String`) The name of the
+ *             Auto Scaling group.
+ *           * `Description` &mdash; (`String`) Contains a friendly, more
+ *             verbose description of the scaling activity.
+ *           * `Cause` &mdash; (`String`) Contains the reason the activity
+ *             was begun.
+ *           * `StartTime` &mdash; (`Date`) Provides the start time of this
+ *             activity.
+ *           * `EndTime` &mdash; (`Date`) Provides the end time of this
+ *             activity.
+ *           * `StatusCode` &mdash; (`String`) Contains the current status
+ *             of the activity.
+ *             Possible values include:
+ *             * `WaitingForSpotInstanceRequestId`
+ *             * `WaitingForSpotInstanceId`
+ *             * `WaitingForInstanceId`
+ *             * `PreInService`
+ *             * `InProgress`
+ *             * `Successful`
+ *             * `Failed`
+ *             * `Cancelled`
+ *           * `StatusMessage` &mdash; (`String`) Contains a friendly, more
+ *             verbose description of the activity status.
+ *           * `Progress` &mdash; (`Integer`) Specifies a value between 0
+ *             and 100 that indicates the progress of the activity.
+ *           * `Details` &mdash; (`String`) Contains details of the scaling
+ *             activity.
  *       * `NextToken` &mdash; (`String`) Acts as a paging mechanism for
  *         large result sets. Set to a non-empty string if there are
  *         additional results waiting to be returned. Pass this in to
@@ -833,7 +837,7 @@ AWS.AutoScaling = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Processes` &mdash; (`Array<map>`) A list of ProcessType names.
- *         * `ProcessName` &mdash; (`String`) The name of a process.
+ *           * `ProcessName` &mdash; (`String`) The name of a process.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -871,30 +875,31 @@ AWS.AutoScaling = inherit({})
  *
  *       * `ScheduledUpdateGroupActions` &mdash; (`Array<map>`) A list of
  *         scheduled actions designed to update an Auto Scaling group.
- *         * `AutoScalingGroupName` &mdash; (`String`) The name of the Auto
- *           Scaling group to be updated.
- *         * `ScheduledActionName` &mdash; (`String`) The name of this
- *           scheduled action.
- *         * `ScheduledActionARN` &mdash; (`String`) The Amazon Resource
- *           Name (ARN) of this scheduled action.
- *         * `Time` &mdash; (`Date`) Time is deprecated. The time that the
- *           action is scheduled to begin. Time is an alias for StartTime.
- *         * `StartTime` &mdash; (`Date`) The time that the action is
- *           scheduled to begin. This value can be up to one month in the
- *           future. When StartTime and EndTime are specified with
- *           Recurrence, they form the boundaries of when the recurring
- *           action will start and stop.
- *         * `EndTime` &mdash; (`Date`) The time that the action is
- *           scheduled to end. This value can be up to one month in the
- *           future.
- *         * `Recurrence` &mdash; (`String`) The regular schedule that an
- *           action occurs.
- *         * `MinSize` &mdash; (`Integer`) The minimum size of the Auto
- *           Scaling group.
- *         * `MaxSize` &mdash; (`Integer`) The maximum size of the Auto
- *           Scaling group.
- *         * `DesiredCapacity` &mdash; (`Integer`) The number of instances
- *           you prefer to maintain in your Auto Scaling group.
+ *           * `AutoScalingGroupName` &mdash; (`String`) The name of the
+ *             Auto Scaling group to be updated.
+ *           * `ScheduledActionName` &mdash; (`String`) The name of this
+ *             scheduled action.
+ *           * `ScheduledActionARN` &mdash; (`String`) The Amazon Resource
+ *             Name (ARN) of this scheduled action.
+ *           * `Time` &mdash; (`Date`) Time is deprecated. The time that
+ *             the action is scheduled to begin. Time is an alias for
+ *             StartTime.
+ *           * `StartTime` &mdash; (`Date`) The time that the action is
+ *             scheduled to begin. This value can be up to one month in the
+ *             future. When StartTime and EndTime are specified with
+ *             Recurrence, they form the boundaries of when the recurring
+ *             action will start and stop.
+ *           * `EndTime` &mdash; (`Date`) The time that the action is
+ *             scheduled to end. This value can be up to one month in the
+ *             future.
+ *           * `Recurrence` &mdash; (`String`) The regular schedule that an
+ *             action occurs.
+ *           * `MinSize` &mdash; (`Integer`) The minimum size of the Auto
+ *             Scaling group.
+ *           * `MaxSize` &mdash; (`Integer`) The maximum size of the Auto
+ *             Scaling group.
+ *           * `DesiredCapacity` &mdash; (`Integer`) The number of
+ *             instances you prefer to maintain in your Auto Scaling group.
  *       * `NextToken` &mdash; (`String`) A string that marks the start of
  *         the next batch of returned results.
  *   @return [AWS.Request] a handle to the operation request for
@@ -909,10 +914,10 @@ AWS.AutoScaling = inherit({})
  *       group, the key and value, or whether the new tag will be applied
  *       to instances launched after the tag is created
  *       (PropagateAtLaunch).
- *       * `Name` &mdash; (`String`) The name of the filter. Valid Name
- *         values are: "auto-scaling-group", "key", "value", and
- *         "propagate-at-launch".
- *       * `Values` &mdash; (`Array<String>`) The value of the filter.
+ *         * `Name` &mdash; (`String`) The name of the filter. Valid Name
+ *           values are: "auto-scaling-group", "key", "value", and
+ *           "propagate-at-launch".
+ *         * `Values` &mdash; (`Array<String>`) The value of the filter.
  *     * `NextToken` &mdash; (`String`) A string that marks the start of
  *       the next batch of returned results.
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of records
@@ -928,18 +933,18 @@ AWS.AutoScaling = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Tags` &mdash; (`Array<map>`) The list of tags.
- *         * `ResourceId` &mdash; (`String`) The name of the Auto Scaling
- *           group.
- *         * `ResourceType` &mdash; (`String`) The kind of resource to
- *           which the tag is applied. Currently, Auto Scaling supports the
- *           auto-scaling-group resource type.
- *         * `Key` &mdash; (`String`) The key of the tag.
- *         * `Value` &mdash; (`String`) The value of the tag.
- *         * `PropagateAtLaunch` &mdash; (`Boolean`) Specifies whether the
- *           new tag will be applied to instances launched after the tag is
- *           created. The same behavior applies to updates: If you change a
- *           tag, the changed tag will be applied to all instances launched
- *           after you made the change.
+ *           * `ResourceId` &mdash; (`String`) The name of the Auto Scaling
+ *             group.
+ *           * `ResourceType` &mdash; (`String`) The kind of resource to
+ *             which the tag is applied. Currently, Auto Scaling supports
+ *             the auto-scaling-group resource type.
+ *           * `Key` &mdash; (`String`) The key of the tag.
+ *           * `Value` &mdash; (`String`) The value of the tag.
+ *           * `PropagateAtLaunch` &mdash; (`Boolean`) Specifies whether
+ *             the new tag will be applied to instances launched after the
+ *             tag is created. The same behavior applies to updates: If you
+ *             change a tag, the changed tag will be applied to all
+ *             instances launched after you made the change.
  *       * `NextToken` &mdash; (`String`) A string used to mark the start
  *         of the next batch of returned results.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1246,35 +1251,35 @@ AWS.AutoScaling = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Activity` &mdash; (`map`) A scaling Activity.
- *         * `ActivityId` &mdash; (`String`) Specifies the ID of the
- *           activity.
- *         * `AutoScalingGroupName` &mdash; (`String`) The name of the Auto
- *           Scaling group.
- *         * `Description` &mdash; (`String`) Contains a friendly, more
- *           verbose description of the scaling activity.
- *         * `Cause` &mdash; (`String`) Contains the reason the activity
- *           was begun.
- *         * `StartTime` &mdash; (`Date`) Provides the start time of this
- *           activity.
- *         * `EndTime` &mdash; (`Date`) Provides the end time of this
- *           activity.
- *         * `StatusCode` &mdash; (`String`) Contains the current status of
- *           the activity.
- *           Possible values include:
- *           * `WaitingForSpotInstanceRequestId`
- *           * `WaitingForSpotInstanceId`
- *           * `WaitingForInstanceId`
- *           * `PreInService`
- *           * `InProgress`
- *           * `Successful`
- *           * `Failed`
- *           * `Cancelled`
- *         * `StatusMessage` &mdash; (`String`) Contains a friendly, more
- *           verbose description of the activity status.
- *         * `Progress` &mdash; (`Integer`) Specifies a value between 0 and
- *           100 that indicates the progress of the activity.
- *         * `Details` &mdash; (`String`) Contains details of the scaling
- *           activity.
+ *           * `ActivityId` &mdash; (`String`) Specifies the ID of the
+ *             activity.
+ *           * `AutoScalingGroupName` &mdash; (`String`) The name of the
+ *             Auto Scaling group.
+ *           * `Description` &mdash; (`String`) Contains a friendly, more
+ *             verbose description of the scaling activity.
+ *           * `Cause` &mdash; (`String`) Contains the reason the activity
+ *             was begun.
+ *           * `StartTime` &mdash; (`Date`) Provides the start time of this
+ *             activity.
+ *           * `EndTime` &mdash; (`Date`) Provides the end time of this
+ *             activity.
+ *           * `StatusCode` &mdash; (`String`) Contains the current status
+ *             of the activity.
+ *             Possible values include:
+ *             * `WaitingForSpotInstanceRequestId`
+ *             * `WaitingForSpotInstanceId`
+ *             * `WaitingForInstanceId`
+ *             * `PreInService`
+ *             * `InProgress`
+ *             * `Successful`
+ *             * `Failed`
+ *             * `Cancelled`
+ *           * `StatusMessage` &mdash; (`String`) Contains a friendly, more
+ *             verbose description of the activity status.
+ *           * `Progress` &mdash; (`Integer`) Specifies a value between 0
+ *             and 100 that indicates the progress of the activity.
+ *           * `Details` &mdash; (`String`) Contains details of the scaling
+ *             activity.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *

@@ -75,21 +75,21 @@ AWS.ElastiCache = inherit({})
  *
  *       * `CacheSecurityGroup` &mdash; (`map`) Defines a set of EC2
  *         Security groups that are allowed to access a Cache Cluster.
- *         * `OwnerId` &mdash; (`String`) Provides the AWS ID of the owner
- *           of a specific Cache Security Group.
- *         * `CacheSecurityGroupName` &mdash; (`String`) Specifies the name
- *           of the Cache Security Group.
- *         * `Description` &mdash; (`String`) Provides the description of
- *           the Cache Security Group.
- *         * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list of
- *           EC2SecurityGroup elements.
- *           * `Status` &mdash; (`String`) Provides the status of the EC2
- *             Security Group.
- *           * `EC2SecurityGroupName` &mdash; (`String`) Specifies the name
- *             of the EC2 Security Group.
- *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies the
- *             AWS ID of the owner of the EC2 Security Group specified in
- *             the EC2SecurityGroupName field.
+ *           * `OwnerId` &mdash; (`String`) Provides the AWS ID of the
+ *             owner of a specific Cache Security Group.
+ *           * `CacheSecurityGroupName` &mdash; (`String`) Specifies the
+ *             name of the Cache Security Group.
+ *           * `Description` &mdash; (`String`) Provides the description of
+ *             the Cache Security Group.
+ *           * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list
+ *             of EC2SecurityGroup elements.
+ *               * `Status` &mdash; (`String`) Provides the status of the
+ *                 EC2 Security Group.
+ *               * `EC2SecurityGroupName` &mdash; (`String`) Specifies the
+ *                 name of the EC2 Security Group.
+ *               * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies
+ *                 the AWS ID of the owner of the EC2 Security Group
+ *                 specified in the EC2SecurityGroupName field.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -160,103 +160,108 @@ AWS.ElastiCache = inherit({})
  *
  *       * `CacheCluster` &mdash; (`map`) Contains information about a
  *         Cache Cluster.
- *         * `CacheClusterId` &mdash; (`String`) Specifies a user-supplied
- *           identifier. This is the unique key that identifies a Cache
- *           Cluster.
- *         * `ConfigurationEndpoint` &mdash; (`map`) Specifies a
- *           user-supplied identifier. This is the unique key that
- *           identifies a Cache Cluster.
- *           * `Address` &mdash; (`String`) Specifies the DNS address of
- *             the Cache Node.
- *           * `Port` &mdash; (`Integer`) Specifies the port that the cache
- *             engine is listening on.
- *         * `ClientDownloadLandingPage` &mdash; (`String`) Provides the
- *           landing page to download the latest ElastiCache client
- *           library.
- *         * `CacheNodeType` &mdash; (`String`) Specifies the name of the
- *           compute and memory capacity node type for the Cache Cluster.
- *         * `Engine` &mdash; (`String`) Provides the name of the cache
- *           engine to be used for this Cache Cluster.
- *         * `EngineVersion` &mdash; (`String`) Provides the cache engine
- *           version of the cache engine to be used for this Cache Cluster.
- *         * `CacheClusterStatus` &mdash; (`String`) Specifies the current
- *           state of this Cache Cluster.
- *         * `NumCacheNodes` &mdash; (`Integer`) Specifies the number of
- *           Cache Nodes the Cache Cluster contains.
- *         * `PreferredAvailabilityZone` &mdash; (`String`) Specifies the
- *           name of the Availability Zone the Cache Cluster is located in.
- *         * `CacheClusterCreateTime` &mdash; (`Date`) Provides the date
- *           and time the Cache Cluster was created.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
- *           weekly time range (in UTC) during which system maintenance can
- *           occur.
- *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
- *           to the Cache Cluster are pending. This element is only
- *           included when changes are pending. Specific changes are
- *           identified by sub-elements.
- *           * `NumCacheNodes` &mdash; (`Integer`) Contains the new
- *             NumCacheNodes for the Cache Cluster that will be applied or
- *             is in progress.
- *           * `CacheNodeIdsToRemove` &mdash; (`Array<String>`) Contains
- *             the list of node Ids to remove from the Cache Cluster that
- *             will be applied or is in progress.
- *           * `EngineVersion` &mdash; (`String`) Contains the new version
- *             of the Cache Engine the Cache Cluster will be upgraded to.
- *         * `NotificationConfiguration` &mdash; (`map`) Specifies the
- *           notification details the Cache Cluster contains.
- *           * `TopicArn` &mdash; (`String`) Specifies the topic Amazon
- *             Resource Name (ARN), identifying this resource.
- *           * `TopicStatus` &mdash; (`String`) Specifies the current state
- *             of this topic.
- *         * `CacheSecurityGroups` &mdash; (`Array<map>`) Provides the list
- *           of Cache Security Group elements containing
- *           CacheSecurityGroup.Name and CacheSecurityGroup.Status
- *           sub-elements.
- *           * `CacheSecurityGroupName` &mdash; (`String`) The name of the
- *             Cache Security Group.
- *           * `Status` &mdash; (`String`) The status of the
- *             CacheSecurityGroupMembership, the status changes either when
- *             a CacheSecurityGroup is modified, or when the
- *             CacheSecurityGroups assigned to a Cache Cluster are
- *             modified.
- *         * `CacheParameterGroup` &mdash; (`map`) Provides the status of
- *           the Cache Parameter Group assigned to the Cache Cluster.
- *           * `CacheParameterGroupName` &mdash; (`String`) The name of the
- *             Cache Parameter Group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *           * `CacheNodeIdsToReboot` &mdash; (`Array<String>`) A list of
- *             the Cache Node Ids which need to be rebooted for parameter
- *             changes to be applied.
- *         * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
- *           of the Cache Subnet Group associated with the Cache Cluster.
- *         * `CacheNodes` &mdash; (`Array<map>`) Specifies the list of
- *           Cache Nodes the Cache Cluster contains.
- *           * `CacheNodeId` &mdash; (`String`) Specifies a Cache Node
- *             identifier. This is the unique key that identifies a Cache
- *             Node per Customer (AWS account).
- *           * `CacheNodeStatus` &mdash; (`String`) Specifies the current
- *             state of this Cache Node.
- *           * `CacheNodeCreateTime` &mdash; (`Date`) Provides the date and
- *             time the Cache Node was created.
- *           * `Endpoint` &mdash; (`map`) Specifies the endpoint details
- *             for a Cache Node.
- *             * `Address` &mdash; (`String`) Specifies the DNS address of
- *               the Cache Node.
- *             * `Port` &mdash; (`Integer`) Specifies the port that the
- *               cache engine is listening on.
- *           * `ParameterGroupStatus` &mdash; (`String`) Specifies the
- *             status of the parameter group applied to this Cache Node.
- *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
- *           minor version patches are applied automatically.
- *         * `SecurityGroups` &mdash; (`Array<map>`) Specifies the VPC
- *           Security Groups associated with the Cache Cluster.
- *           * `SecurityGroupId` &mdash; (`String`) The identifier of the
- *             Cache Security Group.
- *           * `Status` &mdash; (`String`) The status of the Cache Security
- *             Group membership. The status changes whenever a Cache
- *             Security Group is modified, or when the Cache Security
- *             Groups assigned to a Cache Cluster are modified.
+ *           * `CacheClusterId` &mdash; (`String`) Specifies a
+ *             user-supplied identifier. This is the unique key that
+ *             identifies a Cache Cluster.
+ *           * `ConfigurationEndpoint` &mdash; (`map`) Specifies a
+ *             user-supplied identifier. This is the unique key that
+ *             identifies a Cache Cluster.
+ *               * `Address` &mdash; (`String`) Specifies the DNS address
+ *                 of the Cache Node.
+ *               * `Port` &mdash; (`Integer`) Specifies the port that the
+ *                 cache engine is listening on.
+ *           * `ClientDownloadLandingPage` &mdash; (`String`) Provides the
+ *             landing page to download the latest ElastiCache client
+ *             library.
+ *           * `CacheNodeType` &mdash; (`String`) Specifies the name of the
+ *             compute and memory capacity node type for the Cache Cluster.
+ *           * `Engine` &mdash; (`String`) Provides the name of the cache
+ *             engine to be used for this Cache Cluster.
+ *           * `EngineVersion` &mdash; (`String`) Provides the cache engine
+ *             version of the cache engine to be used for this Cache
+ *             Cluster.
+ *           * `CacheClusterStatus` &mdash; (`String`) Specifies the
+ *             current state of this Cache Cluster.
+ *           * `NumCacheNodes` &mdash; (`Integer`) Specifies the number of
+ *             Cache Nodes the Cache Cluster contains.
+ *           * `PreferredAvailabilityZone` &mdash; (`String`) Specifies the
+ *             name of the Availability Zone the Cache Cluster is located
+ *             in.
+ *           * `CacheClusterCreateTime` &mdash; (`Date`) Provides the date
+ *             and time the Cache Cluster was created.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies
+ *             the weekly time range (in UTC) during which system
+ *             maintenance can occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) Specifies that
+ *             changes to the Cache Cluster are pending. This element is
+ *             only included when changes are pending. Specific changes are
+ *             identified by sub-elements.
+ *               * `NumCacheNodes` &mdash; (`Integer`) Contains the new
+ *                 NumCacheNodes for the Cache Cluster that will be applied
+ *                 or is in progress.
+ *               * `CacheNodeIdsToRemove` &mdash; (`Array<String>`)
+ *                 Contains the list of node Ids to remove from the Cache
+ *                 Cluster that will be applied or is in progress.
+ *               * `EngineVersion` &mdash; (`String`) Contains the new
+ *                 version of the Cache Engine the Cache Cluster will be
+ *                 upgraded to.
+ *           * `NotificationConfiguration` &mdash; (`map`) Specifies the
+ *             notification details the Cache Cluster contains.
+ *               * `TopicArn` &mdash; (`String`) Specifies the topic Amazon
+ *                 Resource Name (ARN), identifying this resource.
+ *               * `TopicStatus` &mdash; (`String`) Specifies the current
+ *                 state of this topic.
+ *           * `CacheSecurityGroups` &mdash; (`Array<map>`) Provides the
+ *             list of Cache Security Group elements containing
+ *             CacheSecurityGroup.Name and CacheSecurityGroup.Status
+ *             sub-elements.
+ *               * `CacheSecurityGroupName` &mdash; (`String`) The name of
+ *                 the Cache Security Group.
+ *               * `Status` &mdash; (`String`) The status of the
+ *                 CacheSecurityGroupMembership, the status changes either
+ *                 when a CacheSecurityGroup is modified, or when the
+ *                 CacheSecurityGroups assigned to a Cache Cluster are
+ *                 modified.
+ *           * `CacheParameterGroup` &mdash; (`map`) Provides the status of
+ *             the Cache Parameter Group assigned to the Cache Cluster.
+ *               * `CacheParameterGroupName` &mdash; (`String`) The name of
+ *                 the Cache Parameter Group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *               * `CacheNodeIdsToReboot` &mdash; (`Array<String>`) A list
+ *                 of the Cache Node Ids which need to be rebooted for
+ *                 parameter changes to be applied.
+ *           * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
+ *             of the Cache Subnet Group associated with the Cache Cluster.
+ *           * `CacheNodes` &mdash; (`Array<map>`) Specifies the list of
+ *             Cache Nodes the Cache Cluster contains.
+ *               * `CacheNodeId` &mdash; (`String`) Specifies a Cache Node
+ *                 identifier. This is the unique key that identifies a
+ *                 Cache Node per Customer (AWS account).
+ *               * `CacheNodeStatus` &mdash; (`String`) Specifies the
+ *                 current state of this Cache Node.
+ *               * `CacheNodeCreateTime` &mdash; (`Date`) Provides the date
+ *                 and time the Cache Node was created.
+ *               * `Endpoint` &mdash; (`map`) Specifies the endpoint
+ *                 details for a Cache Node.
+ *                   * `Address` &mdash; (`String`) Specifies the DNS
+ *                     address of the Cache Node.
+ *                   * `Port` &mdash; (`Integer`) Specifies the port that
+ *                     the cache engine is listening on.
+ *               * `ParameterGroupStatus` &mdash; (`String`) Specifies the
+ *                 status of the parameter group applied to this Cache
+ *                 Node.
+ *           * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
+ *             minor version patches are applied automatically.
+ *           * `SecurityGroups` &mdash; (`Array<map>`) Specifies the VPC
+ *             Security Groups associated with the Cache Cluster.
+ *               * `SecurityGroupId` &mdash; (`String`) The identifier of
+ *                 the Cache Security Group.
+ *               * `Status` &mdash; (`String`) The status of the Cache
+ *                 Security Group membership. The status changes whenever a
+ *                 Cache Security Group is modified, or when the Cache
+ *                 Security Groups assigned to a Cache Cluster are
+ *                 modified.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -285,13 +290,14 @@ AWS.ElastiCache = inherit({})
  *       * `CacheParameterGroup` &mdash; (`map`) Contains a set of
  *         parameters and their values which can be applied to a Cache
  *         Cluster.
- *         * `CacheParameterGroupName` &mdash; (`String`) Provides the name
- *           of the Cache Parameter Group.
- *         * `CacheParameterGroupFamily` &mdash; (`String`) Provides the
- *           name of the Cache Parameter Group Family that this Cache
- *           Parameter Group is compatible with.
- *         * `Description` &mdash; (`String`) Provides the
- *           customer-specified description for this Cache Parameter Group.
+ *           * `CacheParameterGroupName` &mdash; (`String`) Provides the
+ *             name of the Cache Parameter Group.
+ *           * `CacheParameterGroupFamily` &mdash; (`String`) Provides the
+ *             name of the Cache Parameter Group Family that this Cache
+ *             Parameter Group is compatible with.
+ *           * `Description` &mdash; (`String`) Provides the
+ *             customer-specified description for this Cache Parameter
+ *             Group.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -317,21 +323,21 @@ AWS.ElastiCache = inherit({})
  *
  *       * `CacheSecurityGroup` &mdash; (`map`) Defines a set of EC2
  *         Security groups that are allowed to access a Cache Cluster.
- *         * `OwnerId` &mdash; (`String`) Provides the AWS ID of the owner
- *           of a specific Cache Security Group.
- *         * `CacheSecurityGroupName` &mdash; (`String`) Specifies the name
- *           of the Cache Security Group.
- *         * `Description` &mdash; (`String`) Provides the description of
- *           the Cache Security Group.
- *         * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list of
- *           EC2SecurityGroup elements.
- *           * `Status` &mdash; (`String`) Provides the status of the EC2
- *             Security Group.
- *           * `EC2SecurityGroupName` &mdash; (`String`) Specifies the name
- *             of the EC2 Security Group.
- *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies the
- *             AWS ID of the owner of the EC2 Security Group specified in
- *             the EC2SecurityGroupName field.
+ *           * `OwnerId` &mdash; (`String`) Provides the AWS ID of the
+ *             owner of a specific Cache Security Group.
+ *           * `CacheSecurityGroupName` &mdash; (`String`) Specifies the
+ *             name of the Cache Security Group.
+ *           * `Description` &mdash; (`String`) Provides the description of
+ *             the Cache Security Group.
+ *           * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list
+ *             of EC2SecurityGroup elements.
+ *               * `Status` &mdash; (`String`) Provides the status of the
+ *                 EC2 Security Group.
+ *               * `EC2SecurityGroupName` &mdash; (`String`) Specifies the
+ *                 name of the EC2 Security Group.
+ *               * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies
+ *                 the AWS ID of the owner of the EC2 Security Group
+ *                 specified in the EC2SecurityGroupName field.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -362,20 +368,20 @@ AWS.ElastiCache = inherit({})
  *         DescribeCacheSubnetGroups DeleteCacheSubnetGroup This data type
  *         is used as a response element in the DescribeCacheSubnetGroups
  *         action.
- *         * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
- *           of the Cache Subnet Group.
- *         * `CacheSubnetGroupDescription` &mdash; (`String`) Provides the
- *           description of the Cache Subnet Group.
- *         * `VpcId` &mdash; (`String`) Provides the VPC ID of the Cache
- *           Subnet Group.
- *         * `Subnets` &mdash; (`Array<map>`) Contains a list of subnets
- *           for this group.
- *           * `SubnetIdentifier` &mdash; (`String`) Specifies the unique
- *             identifier for the Subnet
- *           * `SubnetAvailabilityZone` &mdash; (`map`) Specifies the
- *             Availability Zone associated with the Subnet
- *             * `Name` &mdash; (`String`) Specifies the name of the
- *               Availability Zone
+ *           * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
+ *             of the Cache Subnet Group.
+ *           * `CacheSubnetGroupDescription` &mdash; (`String`) Provides
+ *             the description of the Cache Subnet Group.
+ *           * `VpcId` &mdash; (`String`) Provides the VPC ID of the Cache
+ *             Subnet Group.
+ *           * `Subnets` &mdash; (`Array<map>`) Contains a list of subnets
+ *             for this group.
+ *               * `SubnetIdentifier` &mdash; (`String`) Specifies the
+ *                 unique identifier for the Subnet
+ *               * `SubnetAvailabilityZone` &mdash; (`map`) Specifies the
+ *                 Availability Zone associated with the Subnet
+ *                   * `Name` &mdash; (`String`) Specifies the name of the
+ *                     Availability Zone
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -397,103 +403,108 @@ AWS.ElastiCache = inherit({})
  *
  *       * `CacheCluster` &mdash; (`map`) Contains information about a
  *         Cache Cluster.
- *         * `CacheClusterId` &mdash; (`String`) Specifies a user-supplied
- *           identifier. This is the unique key that identifies a Cache
- *           Cluster.
- *         * `ConfigurationEndpoint` &mdash; (`map`) Specifies a
- *           user-supplied identifier. This is the unique key that
- *           identifies a Cache Cluster.
- *           * `Address` &mdash; (`String`) Specifies the DNS address of
- *             the Cache Node.
- *           * `Port` &mdash; (`Integer`) Specifies the port that the cache
- *             engine is listening on.
- *         * `ClientDownloadLandingPage` &mdash; (`String`) Provides the
- *           landing page to download the latest ElastiCache client
- *           library.
- *         * `CacheNodeType` &mdash; (`String`) Specifies the name of the
- *           compute and memory capacity node type for the Cache Cluster.
- *         * `Engine` &mdash; (`String`) Provides the name of the cache
- *           engine to be used for this Cache Cluster.
- *         * `EngineVersion` &mdash; (`String`) Provides the cache engine
- *           version of the cache engine to be used for this Cache Cluster.
- *         * `CacheClusterStatus` &mdash; (`String`) Specifies the current
- *           state of this Cache Cluster.
- *         * `NumCacheNodes` &mdash; (`Integer`) Specifies the number of
- *           Cache Nodes the Cache Cluster contains.
- *         * `PreferredAvailabilityZone` &mdash; (`String`) Specifies the
- *           name of the Availability Zone the Cache Cluster is located in.
- *         * `CacheClusterCreateTime` &mdash; (`Date`) Provides the date
- *           and time the Cache Cluster was created.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
- *           weekly time range (in UTC) during which system maintenance can
- *           occur.
- *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
- *           to the Cache Cluster are pending. This element is only
- *           included when changes are pending. Specific changes are
- *           identified by sub-elements.
- *           * `NumCacheNodes` &mdash; (`Integer`) Contains the new
- *             NumCacheNodes for the Cache Cluster that will be applied or
- *             is in progress.
- *           * `CacheNodeIdsToRemove` &mdash; (`Array<String>`) Contains
- *             the list of node Ids to remove from the Cache Cluster that
- *             will be applied or is in progress.
- *           * `EngineVersion` &mdash; (`String`) Contains the new version
- *             of the Cache Engine the Cache Cluster will be upgraded to.
- *         * `NotificationConfiguration` &mdash; (`map`) Specifies the
- *           notification details the Cache Cluster contains.
- *           * `TopicArn` &mdash; (`String`) Specifies the topic Amazon
- *             Resource Name (ARN), identifying this resource.
- *           * `TopicStatus` &mdash; (`String`) Specifies the current state
- *             of this topic.
- *         * `CacheSecurityGroups` &mdash; (`Array<map>`) Provides the list
- *           of Cache Security Group elements containing
- *           CacheSecurityGroup.Name and CacheSecurityGroup.Status
- *           sub-elements.
- *           * `CacheSecurityGroupName` &mdash; (`String`) The name of the
- *             Cache Security Group.
- *           * `Status` &mdash; (`String`) The status of the
- *             CacheSecurityGroupMembership, the status changes either when
- *             a CacheSecurityGroup is modified, or when the
- *             CacheSecurityGroups assigned to a Cache Cluster are
- *             modified.
- *         * `CacheParameterGroup` &mdash; (`map`) Provides the status of
- *           the Cache Parameter Group assigned to the Cache Cluster.
- *           * `CacheParameterGroupName` &mdash; (`String`) The name of the
- *             Cache Parameter Group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *           * `CacheNodeIdsToReboot` &mdash; (`Array<String>`) A list of
- *             the Cache Node Ids which need to be rebooted for parameter
- *             changes to be applied.
- *         * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
- *           of the Cache Subnet Group associated with the Cache Cluster.
- *         * `CacheNodes` &mdash; (`Array<map>`) Specifies the list of
- *           Cache Nodes the Cache Cluster contains.
- *           * `CacheNodeId` &mdash; (`String`) Specifies a Cache Node
- *             identifier. This is the unique key that identifies a Cache
- *             Node per Customer (AWS account).
- *           * `CacheNodeStatus` &mdash; (`String`) Specifies the current
- *             state of this Cache Node.
- *           * `CacheNodeCreateTime` &mdash; (`Date`) Provides the date and
- *             time the Cache Node was created.
- *           * `Endpoint` &mdash; (`map`) Specifies the endpoint details
- *             for a Cache Node.
- *             * `Address` &mdash; (`String`) Specifies the DNS address of
- *               the Cache Node.
- *             * `Port` &mdash; (`Integer`) Specifies the port that the
- *               cache engine is listening on.
- *           * `ParameterGroupStatus` &mdash; (`String`) Specifies the
- *             status of the parameter group applied to this Cache Node.
- *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
- *           minor version patches are applied automatically.
- *         * `SecurityGroups` &mdash; (`Array<map>`) Specifies the VPC
- *           Security Groups associated with the Cache Cluster.
- *           * `SecurityGroupId` &mdash; (`String`) The identifier of the
- *             Cache Security Group.
- *           * `Status` &mdash; (`String`) The status of the Cache Security
- *             Group membership. The status changes whenever a Cache
- *             Security Group is modified, or when the Cache Security
- *             Groups assigned to a Cache Cluster are modified.
+ *           * `CacheClusterId` &mdash; (`String`) Specifies a
+ *             user-supplied identifier. This is the unique key that
+ *             identifies a Cache Cluster.
+ *           * `ConfigurationEndpoint` &mdash; (`map`) Specifies a
+ *             user-supplied identifier. This is the unique key that
+ *             identifies a Cache Cluster.
+ *               * `Address` &mdash; (`String`) Specifies the DNS address
+ *                 of the Cache Node.
+ *               * `Port` &mdash; (`Integer`) Specifies the port that the
+ *                 cache engine is listening on.
+ *           * `ClientDownloadLandingPage` &mdash; (`String`) Provides the
+ *             landing page to download the latest ElastiCache client
+ *             library.
+ *           * `CacheNodeType` &mdash; (`String`) Specifies the name of the
+ *             compute and memory capacity node type for the Cache Cluster.
+ *           * `Engine` &mdash; (`String`) Provides the name of the cache
+ *             engine to be used for this Cache Cluster.
+ *           * `EngineVersion` &mdash; (`String`) Provides the cache engine
+ *             version of the cache engine to be used for this Cache
+ *             Cluster.
+ *           * `CacheClusterStatus` &mdash; (`String`) Specifies the
+ *             current state of this Cache Cluster.
+ *           * `NumCacheNodes` &mdash; (`Integer`) Specifies the number of
+ *             Cache Nodes the Cache Cluster contains.
+ *           * `PreferredAvailabilityZone` &mdash; (`String`) Specifies the
+ *             name of the Availability Zone the Cache Cluster is located
+ *             in.
+ *           * `CacheClusterCreateTime` &mdash; (`Date`) Provides the date
+ *             and time the Cache Cluster was created.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies
+ *             the weekly time range (in UTC) during which system
+ *             maintenance can occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) Specifies that
+ *             changes to the Cache Cluster are pending. This element is
+ *             only included when changes are pending. Specific changes are
+ *             identified by sub-elements.
+ *               * `NumCacheNodes` &mdash; (`Integer`) Contains the new
+ *                 NumCacheNodes for the Cache Cluster that will be applied
+ *                 or is in progress.
+ *               * `CacheNodeIdsToRemove` &mdash; (`Array<String>`)
+ *                 Contains the list of node Ids to remove from the Cache
+ *                 Cluster that will be applied or is in progress.
+ *               * `EngineVersion` &mdash; (`String`) Contains the new
+ *                 version of the Cache Engine the Cache Cluster will be
+ *                 upgraded to.
+ *           * `NotificationConfiguration` &mdash; (`map`) Specifies the
+ *             notification details the Cache Cluster contains.
+ *               * `TopicArn` &mdash; (`String`) Specifies the topic Amazon
+ *                 Resource Name (ARN), identifying this resource.
+ *               * `TopicStatus` &mdash; (`String`) Specifies the current
+ *                 state of this topic.
+ *           * `CacheSecurityGroups` &mdash; (`Array<map>`) Provides the
+ *             list of Cache Security Group elements containing
+ *             CacheSecurityGroup.Name and CacheSecurityGroup.Status
+ *             sub-elements.
+ *               * `CacheSecurityGroupName` &mdash; (`String`) The name of
+ *                 the Cache Security Group.
+ *               * `Status` &mdash; (`String`) The status of the
+ *                 CacheSecurityGroupMembership, the status changes either
+ *                 when a CacheSecurityGroup is modified, or when the
+ *                 CacheSecurityGroups assigned to a Cache Cluster are
+ *                 modified.
+ *           * `CacheParameterGroup` &mdash; (`map`) Provides the status of
+ *             the Cache Parameter Group assigned to the Cache Cluster.
+ *               * `CacheParameterGroupName` &mdash; (`String`) The name of
+ *                 the Cache Parameter Group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *               * `CacheNodeIdsToReboot` &mdash; (`Array<String>`) A list
+ *                 of the Cache Node Ids which need to be rebooted for
+ *                 parameter changes to be applied.
+ *           * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
+ *             of the Cache Subnet Group associated with the Cache Cluster.
+ *           * `CacheNodes` &mdash; (`Array<map>`) Specifies the list of
+ *             Cache Nodes the Cache Cluster contains.
+ *               * `CacheNodeId` &mdash; (`String`) Specifies a Cache Node
+ *                 identifier. This is the unique key that identifies a
+ *                 Cache Node per Customer (AWS account).
+ *               * `CacheNodeStatus` &mdash; (`String`) Specifies the
+ *                 current state of this Cache Node.
+ *               * `CacheNodeCreateTime` &mdash; (`Date`) Provides the date
+ *                 and time the Cache Node was created.
+ *               * `Endpoint` &mdash; (`map`) Specifies the endpoint
+ *                 details for a Cache Node.
+ *                   * `Address` &mdash; (`String`) Specifies the DNS
+ *                     address of the Cache Node.
+ *                   * `Port` &mdash; (`Integer`) Specifies the port that
+ *                     the cache engine is listening on.
+ *               * `ParameterGroupStatus` &mdash; (`String`) Specifies the
+ *                 status of the parameter group applied to this Cache
+ *                 Node.
+ *           * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
+ *             minor version patches are applied automatically.
+ *           * `SecurityGroups` &mdash; (`Array<map>`) Specifies the VPC
+ *             Security Groups associated with the Cache Cluster.
+ *               * `SecurityGroupId` &mdash; (`String`) The identifier of
+ *                 the Cache Security Group.
+ *               * `Status` &mdash; (`String`) The status of the Cache
+ *                 Security Group membership. The status changes whenever a
+ *                 Cache Security Group is modified, or when the Cache
+ *                 Security Groups assigned to a Cache Cluster are
+ *                 modified.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -581,103 +592,108 @@ AWS.ElastiCache = inherit({})
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
  *       * `CacheClusters` &mdash; (`Array<map>`) A list of CacheClusters.
- *         * `CacheClusterId` &mdash; (`String`) Specifies a user-supplied
- *           identifier. This is the unique key that identifies a Cache
- *           Cluster.
- *         * `ConfigurationEndpoint` &mdash; (`map`) Specifies a
- *           user-supplied identifier. This is the unique key that
- *           identifies a Cache Cluster.
- *           * `Address` &mdash; (`String`) Specifies the DNS address of
- *             the Cache Node.
- *           * `Port` &mdash; (`Integer`) Specifies the port that the cache
- *             engine is listening on.
- *         * `ClientDownloadLandingPage` &mdash; (`String`) Provides the
- *           landing page to download the latest ElastiCache client
- *           library.
- *         * `CacheNodeType` &mdash; (`String`) Specifies the name of the
- *           compute and memory capacity node type for the Cache Cluster.
- *         * `Engine` &mdash; (`String`) Provides the name of the cache
- *           engine to be used for this Cache Cluster.
- *         * `EngineVersion` &mdash; (`String`) Provides the cache engine
- *           version of the cache engine to be used for this Cache Cluster.
- *         * `CacheClusterStatus` &mdash; (`String`) Specifies the current
- *           state of this Cache Cluster.
- *         * `NumCacheNodes` &mdash; (`Integer`) Specifies the number of
- *           Cache Nodes the Cache Cluster contains.
- *         * `PreferredAvailabilityZone` &mdash; (`String`) Specifies the
- *           name of the Availability Zone the Cache Cluster is located in.
- *         * `CacheClusterCreateTime` &mdash; (`Date`) Provides the date
- *           and time the Cache Cluster was created.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
- *           weekly time range (in UTC) during which system maintenance can
- *           occur.
- *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
- *           to the Cache Cluster are pending. This element is only
- *           included when changes are pending. Specific changes are
- *           identified by sub-elements.
- *           * `NumCacheNodes` &mdash; (`Integer`) Contains the new
- *             NumCacheNodes for the Cache Cluster that will be applied or
- *             is in progress.
- *           * `CacheNodeIdsToRemove` &mdash; (`Array<String>`) Contains
- *             the list of node Ids to remove from the Cache Cluster that
- *             will be applied or is in progress.
- *           * `EngineVersion` &mdash; (`String`) Contains the new version
- *             of the Cache Engine the Cache Cluster will be upgraded to.
- *         * `NotificationConfiguration` &mdash; (`map`) Specifies the
- *           notification details the Cache Cluster contains.
- *           * `TopicArn` &mdash; (`String`) Specifies the topic Amazon
- *             Resource Name (ARN), identifying this resource.
- *           * `TopicStatus` &mdash; (`String`) Specifies the current state
- *             of this topic.
- *         * `CacheSecurityGroups` &mdash; (`Array<map>`) Provides the list
- *           of Cache Security Group elements containing
- *           CacheSecurityGroup.Name and CacheSecurityGroup.Status
- *           sub-elements.
- *           * `CacheSecurityGroupName` &mdash; (`String`) The name of the
- *             Cache Security Group.
- *           * `Status` &mdash; (`String`) The status of the
- *             CacheSecurityGroupMembership, the status changes either when
- *             a CacheSecurityGroup is modified, or when the
- *             CacheSecurityGroups assigned to a Cache Cluster are
- *             modified.
- *         * `CacheParameterGroup` &mdash; (`map`) Provides the status of
- *           the Cache Parameter Group assigned to the Cache Cluster.
- *           * `CacheParameterGroupName` &mdash; (`String`) The name of the
- *             Cache Parameter Group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *           * `CacheNodeIdsToReboot` &mdash; (`Array<String>`) A list of
- *             the Cache Node Ids which need to be rebooted for parameter
- *             changes to be applied.
- *         * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
- *           of the Cache Subnet Group associated with the Cache Cluster.
- *         * `CacheNodes` &mdash; (`Array<map>`) Specifies the list of
- *           Cache Nodes the Cache Cluster contains.
- *           * `CacheNodeId` &mdash; (`String`) Specifies a Cache Node
- *             identifier. This is the unique key that identifies a Cache
- *             Node per Customer (AWS account).
- *           * `CacheNodeStatus` &mdash; (`String`) Specifies the current
- *             state of this Cache Node.
- *           * `CacheNodeCreateTime` &mdash; (`Date`) Provides the date and
- *             time the Cache Node was created.
- *           * `Endpoint` &mdash; (`map`) Specifies the endpoint details
- *             for a Cache Node.
- *             * `Address` &mdash; (`String`) Specifies the DNS address of
- *               the Cache Node.
- *             * `Port` &mdash; (`Integer`) Specifies the port that the
- *               cache engine is listening on.
- *           * `ParameterGroupStatus` &mdash; (`String`) Specifies the
- *             status of the parameter group applied to this Cache Node.
- *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
- *           minor version patches are applied automatically.
- *         * `SecurityGroups` &mdash; (`Array<map>`) Specifies the VPC
- *           Security Groups associated with the Cache Cluster.
- *           * `SecurityGroupId` &mdash; (`String`) The identifier of the
- *             Cache Security Group.
- *           * `Status` &mdash; (`String`) The status of the Cache Security
- *             Group membership. The status changes whenever a Cache
- *             Security Group is modified, or when the Cache Security
- *             Groups assigned to a Cache Cluster are modified.
+ *           * `CacheClusterId` &mdash; (`String`) Specifies a
+ *             user-supplied identifier. This is the unique key that
+ *             identifies a Cache Cluster.
+ *           * `ConfigurationEndpoint` &mdash; (`map`) Specifies a
+ *             user-supplied identifier. This is the unique key that
+ *             identifies a Cache Cluster.
+ *               * `Address` &mdash; (`String`) Specifies the DNS address
+ *                 of the Cache Node.
+ *               * `Port` &mdash; (`Integer`) Specifies the port that the
+ *                 cache engine is listening on.
+ *           * `ClientDownloadLandingPage` &mdash; (`String`) Provides the
+ *             landing page to download the latest ElastiCache client
+ *             library.
+ *           * `CacheNodeType` &mdash; (`String`) Specifies the name of the
+ *             compute and memory capacity node type for the Cache Cluster.
+ *           * `Engine` &mdash; (`String`) Provides the name of the cache
+ *             engine to be used for this Cache Cluster.
+ *           * `EngineVersion` &mdash; (`String`) Provides the cache engine
+ *             version of the cache engine to be used for this Cache
+ *             Cluster.
+ *           * `CacheClusterStatus` &mdash; (`String`) Specifies the
+ *             current state of this Cache Cluster.
+ *           * `NumCacheNodes` &mdash; (`Integer`) Specifies the number of
+ *             Cache Nodes the Cache Cluster contains.
+ *           * `PreferredAvailabilityZone` &mdash; (`String`) Specifies the
+ *             name of the Availability Zone the Cache Cluster is located
+ *             in.
+ *           * `CacheClusterCreateTime` &mdash; (`Date`) Provides the date
+ *             and time the Cache Cluster was created.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies
+ *             the weekly time range (in UTC) during which system
+ *             maintenance can occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) Specifies that
+ *             changes to the Cache Cluster are pending. This element is
+ *             only included when changes are pending. Specific changes are
+ *             identified by sub-elements.
+ *               * `NumCacheNodes` &mdash; (`Integer`) Contains the new
+ *                 NumCacheNodes for the Cache Cluster that will be applied
+ *                 or is in progress.
+ *               * `CacheNodeIdsToRemove` &mdash; (`Array<String>`)
+ *                 Contains the list of node Ids to remove from the Cache
+ *                 Cluster that will be applied or is in progress.
+ *               * `EngineVersion` &mdash; (`String`) Contains the new
+ *                 version of the Cache Engine the Cache Cluster will be
+ *                 upgraded to.
+ *           * `NotificationConfiguration` &mdash; (`map`) Specifies the
+ *             notification details the Cache Cluster contains.
+ *               * `TopicArn` &mdash; (`String`) Specifies the topic Amazon
+ *                 Resource Name (ARN), identifying this resource.
+ *               * `TopicStatus` &mdash; (`String`) Specifies the current
+ *                 state of this topic.
+ *           * `CacheSecurityGroups` &mdash; (`Array<map>`) Provides the
+ *             list of Cache Security Group elements containing
+ *             CacheSecurityGroup.Name and CacheSecurityGroup.Status
+ *             sub-elements.
+ *               * `CacheSecurityGroupName` &mdash; (`String`) The name of
+ *                 the Cache Security Group.
+ *               * `Status` &mdash; (`String`) The status of the
+ *                 CacheSecurityGroupMembership, the status changes either
+ *                 when a CacheSecurityGroup is modified, or when the
+ *                 CacheSecurityGroups assigned to a Cache Cluster are
+ *                 modified.
+ *           * `CacheParameterGroup` &mdash; (`map`) Provides the status of
+ *             the Cache Parameter Group assigned to the Cache Cluster.
+ *               * `CacheParameterGroupName` &mdash; (`String`) The name of
+ *                 the Cache Parameter Group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *               * `CacheNodeIdsToReboot` &mdash; (`Array<String>`) A list
+ *                 of the Cache Node Ids which need to be rebooted for
+ *                 parameter changes to be applied.
+ *           * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
+ *             of the Cache Subnet Group associated with the Cache Cluster.
+ *           * `CacheNodes` &mdash; (`Array<map>`) Specifies the list of
+ *             Cache Nodes the Cache Cluster contains.
+ *               * `CacheNodeId` &mdash; (`String`) Specifies a Cache Node
+ *                 identifier. This is the unique key that identifies a
+ *                 Cache Node per Customer (AWS account).
+ *               * `CacheNodeStatus` &mdash; (`String`) Specifies the
+ *                 current state of this Cache Node.
+ *               * `CacheNodeCreateTime` &mdash; (`Date`) Provides the date
+ *                 and time the Cache Node was created.
+ *               * `Endpoint` &mdash; (`map`) Specifies the endpoint
+ *                 details for a Cache Node.
+ *                   * `Address` &mdash; (`String`) Specifies the DNS
+ *                     address of the Cache Node.
+ *                   * `Port` &mdash; (`Integer`) Specifies the port that
+ *                     the cache engine is listening on.
+ *               * `ParameterGroupStatus` &mdash; (`String`) Specifies the
+ *                 status of the parameter group applied to this Cache
+ *                 Node.
+ *           * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
+ *             minor version patches are applied automatically.
+ *           * `SecurityGroups` &mdash; (`Array<map>`) Specifies the VPC
+ *             Security Groups associated with the Cache Cluster.
+ *               * `SecurityGroupId` &mdash; (`String`) The identifier of
+ *                 the Cache Security Group.
+ *               * `Status` &mdash; (`String`) The status of the Cache
+ *                 Security Group membership. The status changes whenever a
+ *                 Cache Security Group is modified, or when the Cache
+ *                 Security Groups assigned to a Cache Cluster are
+ *                 modified.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -717,15 +733,15 @@ AWS.ElastiCache = inherit({})
  *         retrieval of paginated results.
  *       * `CacheEngineVersions` &mdash; (`Array<map>`) A list of
  *         CacheEngineVersion elements.
- *         * `Engine` &mdash; (`String`) The name of the cache engine.
- *         * `EngineVersion` &mdash; (`String`) The version number of the
- *           cache engine.
- *         * `CacheParameterGroupFamily` &mdash; (`String`) The name of the
- *           CacheParameterGroupFamily for the cache engine.
- *         * `CacheEngineDescription` &mdash; (`String`) The description of
- *           the cache engine.
- *         * `CacheEngineVersionDescription` &mdash; (`String`) The
- *           description of the cache engine version.
+ *           * `Engine` &mdash; (`String`) The name of the cache engine.
+ *           * `EngineVersion` &mdash; (`String`) The version number of the
+ *             cache engine.
+ *           * `CacheParameterGroupFamily` &mdash; (`String`) The name of
+ *             the CacheParameterGroupFamily for the cache engine.
+ *           * `CacheEngineDescription` &mdash; (`String`) The description
+ *             of the cache engine.
+ *           * `CacheEngineVersionDescription` &mdash; (`String`) The
+ *             description of the cache engine version.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -756,13 +772,14 @@ AWS.ElastiCache = inherit({})
  *         operation response.
  *       * `CacheParameterGroups` &mdash; (`Array<map>`) A list of
  *         CacheParameterGroup instances.
- *         * `CacheParameterGroupName` &mdash; (`String`) Provides the name
- *           of the Cache Parameter Group.
- *         * `CacheParameterGroupFamily` &mdash; (`String`) Provides the
- *           name of the Cache Parameter Group Family that this Cache
- *           Parameter Group is compatible with.
- *         * `Description` &mdash; (`String`) Provides the
- *           customer-specified description for this Cache Parameter Group.
+ *           * `CacheParameterGroupName` &mdash; (`String`) Provides the
+ *             name of the Cache Parameter Group.
+ *           * `CacheParameterGroupFamily` &mdash; (`String`) Provides the
+ *             name of the Cache Parameter Group Family that this Cache
+ *             Parameter Group is compatible with.
+ *           * `Description` &mdash; (`String`) Provides the
+ *             customer-specified description for this Cache Parameter
+ *             Group.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -796,49 +813,49 @@ AWS.ElastiCache = inherit({})
  *         operation response.
  *       * `Parameters` &mdash; (`Array<map>`) A list of Parameter
  *         instances.
- *         * `ParameterName` &mdash; (`String`) Specifies the name of the
- *           parameter.
- *         * `ParameterValue` &mdash; (`String`) Specifies the value of the
- *           parameter.
- *         * `Description` &mdash; (`String`) Provides a description of the
- *           parameter.
- *         * `Source` &mdash; (`String`) Indicates the source of the
- *           parameter value.
- *         * `DataType` &mdash; (`String`) Specifies the valid data type
- *           for the parameter.
- *         * `AllowedValues` &mdash; (`String`) Specifies the valid range
- *           of values for the parameter.
- *         * `IsModifiable` &mdash; (`Boolean`) Indicates whether (true) or
- *           not (false) the parameter can be modified. Some parameters
- *           have security or operational implications that prevent them
- *           from being changed.
- *         * `MinimumEngineVersion` &mdash; (`String`) The earliest engine
- *           version to which the parameter can apply.
+ *           * `ParameterName` &mdash; (`String`) Specifies the name of the
+ *             parameter.
+ *           * `ParameterValue` &mdash; (`String`) Specifies the value of
+ *             the parameter.
+ *           * `Description` &mdash; (`String`) Provides a description of
+ *             the parameter.
+ *           * `Source` &mdash; (`String`) Indicates the source of the
+ *             parameter value.
+ *           * `DataType` &mdash; (`String`) Specifies the valid data type
+ *             for the parameter.
+ *           * `AllowedValues` &mdash; (`String`) Specifies the valid range
+ *             of values for the parameter.
+ *           * `IsModifiable` &mdash; (`Boolean`) Indicates whether (true)
+ *             or not (false) the parameter can be modified. Some
+ *             parameters have security or operational implications that
+ *             prevent them from being changed.
+ *           * `MinimumEngineVersion` &mdash; (`String`) The earliest
+ *             engine version to which the parameter can apply.
  *       * `CacheNodeTypeSpecificParameters` &mdash; (`Array<map>`) A list
  *         of CacheNodeTypeSpecificParameter instances.
- *         * `ParameterName` &mdash; (`String`) Specifies the name of the
- *           parameter.
- *         * `Description` &mdash; (`String`) Provides a description of the
- *           parameter.
- *         * `Source` &mdash; (`String`) Indicates the source of the
- *           parameter value.
- *         * `DataType` &mdash; (`String`) Specifies the valid data type
- *           for the parameter.
- *         * `AllowedValues` &mdash; (`String`) Specifies the valid range
- *           of values for the parameter.
- *         * `IsModifiable` &mdash; (`Boolean`) Indicates whether (true) or
- *           not (false) the parameter can be modified. Some parameters
- *           have security or operational implications that prevent them
- *           from being changed.
- *         * `MinimumEngineVersion` &mdash; (`String`) The earliest engine
- *           version to which the parameter can apply.
- *         * `CacheNodeTypeSpecificValues` &mdash; (`Array<map>`) A list of
- *           Cache Node types and their corresponding values for this
- *           parameter.
- *           * `CacheNodeType` &mdash; (`String`) Specifies the Cache Node
- *             type for which this value applies.
- *           * `Value` &mdash; (`String`) Specifies the value for the Cache
- *             Node type.
+ *           * `ParameterName` &mdash; (`String`) Specifies the name of the
+ *             parameter.
+ *           * `Description` &mdash; (`String`) Provides a description of
+ *             the parameter.
+ *           * `Source` &mdash; (`String`) Indicates the source of the
+ *             parameter value.
+ *           * `DataType` &mdash; (`String`) Specifies the valid data type
+ *             for the parameter.
+ *           * `AllowedValues` &mdash; (`String`) Specifies the valid range
+ *             of values for the parameter.
+ *           * `IsModifiable` &mdash; (`Boolean`) Indicates whether (true)
+ *             or not (false) the parameter can be modified. Some
+ *             parameters have security or operational implications that
+ *             prevent them from being changed.
+ *           * `MinimumEngineVersion` &mdash; (`String`) The earliest
+ *             engine version to which the parameter can apply.
+ *           * `CacheNodeTypeSpecificValues` &mdash; (`Array<map>`) A list
+ *             of Cache Node types and their corresponding values for this
+ *             parameter.
+ *               * `CacheNodeType` &mdash; (`String`) Specifies the Cache
+ *                 Node type for which this value applies.
+ *               * `Value` &mdash; (`String`) Specifies the value for the
+ *                 Cache Node type.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -870,21 +887,21 @@ AWS.ElastiCache = inherit({})
  *         operation response.
  *       * `CacheSecurityGroups` &mdash; (`Array<map>`) A list of
  *         CacheSecurityGroup instances.
- *         * `OwnerId` &mdash; (`String`) Provides the AWS ID of the owner
- *           of a specific Cache Security Group.
- *         * `CacheSecurityGroupName` &mdash; (`String`) Specifies the name
- *           of the Cache Security Group.
- *         * `Description` &mdash; (`String`) Provides the description of
- *           the Cache Security Group.
- *         * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list of
- *           EC2SecurityGroup elements.
- *           * `Status` &mdash; (`String`) Provides the status of the EC2
- *             Security Group.
- *           * `EC2SecurityGroupName` &mdash; (`String`) Specifies the name
- *             of the EC2 Security Group.
- *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies the
- *             AWS ID of the owner of the EC2 Security Group specified in
- *             the EC2SecurityGroupName field.
+ *           * `OwnerId` &mdash; (`String`) Provides the AWS ID of the
+ *             owner of a specific Cache Security Group.
+ *           * `CacheSecurityGroupName` &mdash; (`String`) Specifies the
+ *             name of the Cache Security Group.
+ *           * `Description` &mdash; (`String`) Provides the description of
+ *             the Cache Security Group.
+ *           * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list
+ *             of EC2SecurityGroup elements.
+ *               * `Status` &mdash; (`String`) Provides the status of the
+ *                 EC2 Security Group.
+ *               * `EC2SecurityGroupName` &mdash; (`String`) Specifies the
+ *                 name of the EC2 Security Group.
+ *               * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies
+ *                 the AWS ID of the owner of the EC2 Security Group
+ *                 specified in the EC2SecurityGroupName field.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -916,20 +933,20 @@ AWS.ElastiCache = inherit({})
  *         operation response.
  *       * `CacheSubnetGroups` &mdash; (`Array<map>`) One or more Cache
  *         Subnet Groups.
- *         * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
- *           of the Cache Subnet Group.
- *         * `CacheSubnetGroupDescription` &mdash; (`String`) Provides the
- *           description of the Cache Subnet Group.
- *         * `VpcId` &mdash; (`String`) Provides the VPC ID of the Cache
- *           Subnet Group.
- *         * `Subnets` &mdash; (`Array<map>`) Contains a list of subnets
- *           for this group.
- *           * `SubnetIdentifier` &mdash; (`String`) Specifies the unique
- *             identifier for the Subnet
- *           * `SubnetAvailabilityZone` &mdash; (`map`) Specifies the
- *             Availability Zone associated with the Subnet
- *             * `Name` &mdash; (`String`) Specifies the name of the
- *               Availability Zone
+ *           * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
+ *             of the Cache Subnet Group.
+ *           * `CacheSubnetGroupDescription` &mdash; (`String`) Provides
+ *             the description of the Cache Subnet Group.
+ *           * `VpcId` &mdash; (`String`) Provides the VPC ID of the Cache
+ *             Subnet Group.
+ *           * `Subnets` &mdash; (`Array<map>`) Contains a list of subnets
+ *             for this group.
+ *               * `SubnetIdentifier` &mdash; (`String`) Specifies the
+ *                 unique identifier for the Subnet
+ *               * `SubnetAvailabilityZone` &mdash; (`map`) Specifies the
+ *                 Availability Zone associated with the Subnet
+ *                   * `Name` &mdash; (`String`) Specifies the name of the
+ *                     Availability Zone
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -960,56 +977,56 @@ AWS.ElastiCache = inherit({})
  *
  *       * `EngineDefaults` &mdash; (`map`) The default Parameters and
  *         CacheNodeTypeSpecificParameters for a CacheParameterGroupFamily.
- *         * `CacheParameterGroupFamily` &mdash; (`String`) Specifies the
- *           name of the Cache Parameter Group Family which the engine
- *           default parameters apply to.
- *         * `Marker` &mdash; (`String`) Provides an identifier to allow
- *           retrieval of paginated results.
- *         * `Parameters` &mdash; (`Array<map>`) Contains a list of engine
- *           default parameters.
- *           * `ParameterName` &mdash; (`String`) Specifies the name of the
- *             parameter.
- *           * `ParameterValue` &mdash; (`String`) Specifies the value of
- *             the parameter.
- *           * `Description` &mdash; (`String`) Provides a description of
- *             the parameter.
- *           * `Source` &mdash; (`String`) Indicates the source of the
- *             parameter value.
- *           * `DataType` &mdash; (`String`) Specifies the valid data type
- *             for the parameter.
- *           * `AllowedValues` &mdash; (`String`) Specifies the valid range
- *             of values for the parameter.
- *           * `IsModifiable` &mdash; (`Boolean`) Indicates whether (true)
- *             or not (false) the parameter can be modified. Some
- *             parameters have security or operational implications that
- *             prevent them from being changed.
- *           * `MinimumEngineVersion` &mdash; (`String`) The earliest
- *             engine version to which the parameter can apply.
- *         * `CacheNodeTypeSpecificParameters` &mdash; (`Array<map>`) A
- *           list of CacheNodeTypeSpecificParameter instances.
- *           * `ParameterName` &mdash; (`String`) Specifies the name of the
- *             parameter.
- *           * `Description` &mdash; (`String`) Provides a description of
- *             the parameter.
- *           * `Source` &mdash; (`String`) Indicates the source of the
- *             parameter value.
- *           * `DataType` &mdash; (`String`) Specifies the valid data type
- *             for the parameter.
- *           * `AllowedValues` &mdash; (`String`) Specifies the valid range
- *             of values for the parameter.
- *           * `IsModifiable` &mdash; (`Boolean`) Indicates whether (true)
- *             or not (false) the parameter can be modified. Some
- *             parameters have security or operational implications that
- *             prevent them from being changed.
- *           * `MinimumEngineVersion` &mdash; (`String`) The earliest
- *             engine version to which the parameter can apply.
- *           * `CacheNodeTypeSpecificValues` &mdash; (`Array<map>`) A list
- *             of Cache Node types and their corresponding values for this
- *             parameter.
- *             * `CacheNodeType` &mdash; (`String`) Specifies the Cache
- *               Node type for which this value applies.
- *             * `Value` &mdash; (`String`) Specifies the value for the
- *               Cache Node type.
+ *           * `CacheParameterGroupFamily` &mdash; (`String`) Specifies the
+ *             name of the Cache Parameter Group Family which the engine
+ *             default parameters apply to.
+ *           * `Marker` &mdash; (`String`) Provides an identifier to allow
+ *             retrieval of paginated results.
+ *           * `Parameters` &mdash; (`Array<map>`) Contains a list of
+ *             engine default parameters.
+ *               * `ParameterName` &mdash; (`String`) Specifies the name of
+ *                 the parameter.
+ *               * `ParameterValue` &mdash; (`String`) Specifies the value
+ *                 of the parameter.
+ *               * `Description` &mdash; (`String`) Provides a description
+ *                 of the parameter.
+ *               * `Source` &mdash; (`String`) Indicates the source of the
+ *                 parameter value.
+ *               * `DataType` &mdash; (`String`) Specifies the valid data
+ *                 type for the parameter.
+ *               * `AllowedValues` &mdash; (`String`) Specifies the valid
+ *                 range of values for the parameter.
+ *               * `IsModifiable` &mdash; (`Boolean`) Indicates whether
+ *                 (true) or not (false) the parameter can be modified.
+ *                 Some parameters have security or operational
+ *                 implications that prevent them from being changed.
+ *               * `MinimumEngineVersion` &mdash; (`String`) The earliest
+ *                 engine version to which the parameter can apply.
+ *           * `CacheNodeTypeSpecificParameters` &mdash; (`Array<map>`) A
+ *             list of CacheNodeTypeSpecificParameter instances.
+ *               * `ParameterName` &mdash; (`String`) Specifies the name of
+ *                 the parameter.
+ *               * `Description` &mdash; (`String`) Provides a description
+ *                 of the parameter.
+ *               * `Source` &mdash; (`String`) Indicates the source of the
+ *                 parameter value.
+ *               * `DataType` &mdash; (`String`) Specifies the valid data
+ *                 type for the parameter.
+ *               * `AllowedValues` &mdash; (`String`) Specifies the valid
+ *                 range of values for the parameter.
+ *               * `IsModifiable` &mdash; (`Boolean`) Indicates whether
+ *                 (true) or not (false) the parameter can be modified.
+ *                 Some parameters have security or operational
+ *                 implications that prevent them from being changed.
+ *               * `MinimumEngineVersion` &mdash; (`String`) The earliest
+ *                 engine version to which the parameter can apply.
+ *               * `CacheNodeTypeSpecificValues` &mdash; (`Array<map>`) A
+ *                 list of Cache Node types and their corresponding values
+ *                 for this parameter.
+ *                   * `CacheNodeType` &mdash; (`String`) Specifies the
+ *                     Cache Node type for which this value applies.
+ *                   * `Value` &mdash; (`String`) Specifies the value for
+ *                     the Cache Node type.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1053,18 +1070,19 @@ AWS.ElastiCache = inherit({})
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
  *       * `Events` &mdash; (`Array<map>`) A list of Event instances.
- *         * `SourceIdentifier` &mdash; (`String`) Provides the identifier
- *           for the source of the event.
- *         * `SourceType` &mdash; (`String`) Specifies the source type for
- *           this event.
- *           Possible values include:
- *           * `cache-cluster`
- *           * `cache-parameter-group`
- *           * `cache-security-group`
- *           * `cache-subnet-group`
- *         * `Message` &mdash; (`String`) Provides the text of this event.
- *         * `Date` &mdash; (`Date`) Specifies the date and time of the
- *           event.
+ *           * `SourceIdentifier` &mdash; (`String`) Provides the
+ *             identifier for the source of the event.
+ *           * `SourceType` &mdash; (`String`) Specifies the source type
+ *             for this event.
+ *             Possible values include:
+ *             * `cache-cluster`
+ *             * `cache-parameter-group`
+ *             * `cache-security-group`
+ *             * `cache-subnet-group`
+ *           * `Message` &mdash; (`String`) Provides the text of this
+ *             event.
+ *           * `Date` &mdash; (`Date`) Specifies the date and time of the
+ *             event.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1114,33 +1132,34 @@ AWS.ElastiCache = inherit({})
  *         results.
  *       * `ReservedCacheNodes` &mdash; (`Array<map>`) A list of of
  *         reserved Cache Nodes.
- *         * `ReservedCacheNodeId` &mdash; (`String`) The unique identifier
- *           for the reservation.
- *         * `ReservedCacheNodesOfferingId` &mdash; (`String`) The offering
- *           identifier.
- *         * `CacheNodeType` &mdash; (`String`) The cache node type for the
- *           reserved Cache Node.
- *         * `StartTime` &mdash; (`Date`) The time the reservation started.
- *         * `Duration` &mdash; (`Integer`) The duration of the reservation
- *           in seconds.
- *         * `FixedPrice` &mdash; (`Float`) The fixed price charged for
- *           this reserved Cache Node.
- *         * `UsagePrice` &mdash; (`Float`) The hourly price charged for
- *           this reserved Cache Node.
- *         * `CacheNodeCount` &mdash; (`Integer`) The number of reserved
- *           Cache Nodes.
- *         * `ProductDescription` &mdash; (`String`) The description of the
- *           reserved Cache Node.
- *         * `OfferingType` &mdash; (`String`) The offering type of this
- *           reserved Cache Node.
- *         * `State` &mdash; (`String`) The state of the reserved Cache
- *           Node.
- *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring price
- *           charged to run this reserved Cache Node.
- *           * `RecurringChargeAmount` &mdash; (`Float`) The amount of the
- *             recurring charge.
- *           * `RecurringChargeFrequency` &mdash; (`String`) The frequency
- *             of the recurring charge.
+ *           * `ReservedCacheNodeId` &mdash; (`String`) The unique
+ *             identifier for the reservation.
+ *           * `ReservedCacheNodesOfferingId` &mdash; (`String`) The
+ *             offering identifier.
+ *           * `CacheNodeType` &mdash; (`String`) The cache node type for
+ *             the reserved Cache Node.
+ *           * `StartTime` &mdash; (`Date`) The time the reservation
+ *             started.
+ *           * `Duration` &mdash; (`Integer`) The duration of the
+ *             reservation in seconds.
+ *           * `FixedPrice` &mdash; (`Float`) The fixed price charged for
+ *             this reserved Cache Node.
+ *           * `UsagePrice` &mdash; (`Float`) The hourly price charged for
+ *             this reserved Cache Node.
+ *           * `CacheNodeCount` &mdash; (`Integer`) The number of reserved
+ *             Cache Nodes.
+ *           * `ProductDescription` &mdash; (`String`) The description of
+ *             the reserved Cache Node.
+ *           * `OfferingType` &mdash; (`String`) The offering type of this
+ *             reserved Cache Node.
+ *           * `State` &mdash; (`String`) The state of the reserved Cache
+ *             Node.
+ *           * `RecurringCharges` &mdash; (`Array<map>`) The recurring
+ *             price charged to run this reserved Cache Node.
+ *               * `RecurringChargeAmount` &mdash; (`Float`) The amount of
+ *                 the recurring charge.
+ *               * `RecurringChargeFrequency` &mdash; (`String`) The
+ *                 frequency of the recurring charge.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1187,25 +1206,25 @@ AWS.ElastiCache = inherit({})
  *         results.
  *       * `ReservedCacheNodesOfferings` &mdash; (`Array<map>`) A list of
  *         reserved Cache Node offerings.
- *         * `ReservedCacheNodesOfferingId` &mdash; (`String`) The offering
- *           identifier.
- *         * `CacheNodeType` &mdash; (`String`) The Cache Node type for the
- *           reserved Cache Node.
- *         * `Duration` &mdash; (`Integer`) The duration of the offering in
- *           seconds.
- *         * `FixedPrice` &mdash; (`Float`) The fixed price charged for
- *           this offering.
- *         * `UsagePrice` &mdash; (`Float`) The hourly price charged for
- *           this offering.
- *         * `ProductDescription` &mdash; (`String`) The cache engine used
- *           by the offering.
- *         * `OfferingType` &mdash; (`String`) The offering type.
- *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring price
- *           charged to run this reserved Cache Node.
- *           * `RecurringChargeAmount` &mdash; (`Float`) The amount of the
- *             recurring charge.
- *           * `RecurringChargeFrequency` &mdash; (`String`) The frequency
- *             of the recurring charge.
+ *           * `ReservedCacheNodesOfferingId` &mdash; (`String`) The
+ *             offering identifier.
+ *           * `CacheNodeType` &mdash; (`String`) The Cache Node type for
+ *             the reserved Cache Node.
+ *           * `Duration` &mdash; (`Integer`) The duration of the offering
+ *             in seconds.
+ *           * `FixedPrice` &mdash; (`Float`) The fixed price charged for
+ *             this offering.
+ *           * `UsagePrice` &mdash; (`Float`) The hourly price charged for
+ *             this offering.
+ *           * `ProductDescription` &mdash; (`String`) The cache engine
+ *             used by the offering.
+ *           * `OfferingType` &mdash; (`String`) The offering type.
+ *           * `RecurringCharges` &mdash; (`Array<map>`) The recurring
+ *             price charged to run this reserved Cache Node.
+ *               * `RecurringChargeAmount` &mdash; (`Float`) The amount of
+ *                 the recurring charge.
+ *               * `RecurringChargeFrequency` &mdash; (`String`) The
+ *                 frequency of the recurring charge.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1280,103 +1299,108 @@ AWS.ElastiCache = inherit({})
  *
  *       * `CacheCluster` &mdash; (`map`) Contains information about a
  *         Cache Cluster.
- *         * `CacheClusterId` &mdash; (`String`) Specifies a user-supplied
- *           identifier. This is the unique key that identifies a Cache
- *           Cluster.
- *         * `ConfigurationEndpoint` &mdash; (`map`) Specifies a
- *           user-supplied identifier. This is the unique key that
- *           identifies a Cache Cluster.
- *           * `Address` &mdash; (`String`) Specifies the DNS address of
- *             the Cache Node.
- *           * `Port` &mdash; (`Integer`) Specifies the port that the cache
- *             engine is listening on.
- *         * `ClientDownloadLandingPage` &mdash; (`String`) Provides the
- *           landing page to download the latest ElastiCache client
- *           library.
- *         * `CacheNodeType` &mdash; (`String`) Specifies the name of the
- *           compute and memory capacity node type for the Cache Cluster.
- *         * `Engine` &mdash; (`String`) Provides the name of the cache
- *           engine to be used for this Cache Cluster.
- *         * `EngineVersion` &mdash; (`String`) Provides the cache engine
- *           version of the cache engine to be used for this Cache Cluster.
- *         * `CacheClusterStatus` &mdash; (`String`) Specifies the current
- *           state of this Cache Cluster.
- *         * `NumCacheNodes` &mdash; (`Integer`) Specifies the number of
- *           Cache Nodes the Cache Cluster contains.
- *         * `PreferredAvailabilityZone` &mdash; (`String`) Specifies the
- *           name of the Availability Zone the Cache Cluster is located in.
- *         * `CacheClusterCreateTime` &mdash; (`Date`) Provides the date
- *           and time the Cache Cluster was created.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
- *           weekly time range (in UTC) during which system maintenance can
- *           occur.
- *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
- *           to the Cache Cluster are pending. This element is only
- *           included when changes are pending. Specific changes are
- *           identified by sub-elements.
- *           * `NumCacheNodes` &mdash; (`Integer`) Contains the new
- *             NumCacheNodes for the Cache Cluster that will be applied or
- *             is in progress.
- *           * `CacheNodeIdsToRemove` &mdash; (`Array<String>`) Contains
- *             the list of node Ids to remove from the Cache Cluster that
- *             will be applied or is in progress.
- *           * `EngineVersion` &mdash; (`String`) Contains the new version
- *             of the Cache Engine the Cache Cluster will be upgraded to.
- *         * `NotificationConfiguration` &mdash; (`map`) Specifies the
- *           notification details the Cache Cluster contains.
- *           * `TopicArn` &mdash; (`String`) Specifies the topic Amazon
- *             Resource Name (ARN), identifying this resource.
- *           * `TopicStatus` &mdash; (`String`) Specifies the current state
- *             of this topic.
- *         * `CacheSecurityGroups` &mdash; (`Array<map>`) Provides the list
- *           of Cache Security Group elements containing
- *           CacheSecurityGroup.Name and CacheSecurityGroup.Status
- *           sub-elements.
- *           * `CacheSecurityGroupName` &mdash; (`String`) The name of the
- *             Cache Security Group.
- *           * `Status` &mdash; (`String`) The status of the
- *             CacheSecurityGroupMembership, the status changes either when
- *             a CacheSecurityGroup is modified, or when the
- *             CacheSecurityGroups assigned to a Cache Cluster are
- *             modified.
- *         * `CacheParameterGroup` &mdash; (`map`) Provides the status of
- *           the Cache Parameter Group assigned to the Cache Cluster.
- *           * `CacheParameterGroupName` &mdash; (`String`) The name of the
- *             Cache Parameter Group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *           * `CacheNodeIdsToReboot` &mdash; (`Array<String>`) A list of
- *             the Cache Node Ids which need to be rebooted for parameter
- *             changes to be applied.
- *         * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
- *           of the Cache Subnet Group associated with the Cache Cluster.
- *         * `CacheNodes` &mdash; (`Array<map>`) Specifies the list of
- *           Cache Nodes the Cache Cluster contains.
- *           * `CacheNodeId` &mdash; (`String`) Specifies a Cache Node
- *             identifier. This is the unique key that identifies a Cache
- *             Node per Customer (AWS account).
- *           * `CacheNodeStatus` &mdash; (`String`) Specifies the current
- *             state of this Cache Node.
- *           * `CacheNodeCreateTime` &mdash; (`Date`) Provides the date and
- *             time the Cache Node was created.
- *           * `Endpoint` &mdash; (`map`) Specifies the endpoint details
- *             for a Cache Node.
- *             * `Address` &mdash; (`String`) Specifies the DNS address of
- *               the Cache Node.
- *             * `Port` &mdash; (`Integer`) Specifies the port that the
- *               cache engine is listening on.
- *           * `ParameterGroupStatus` &mdash; (`String`) Specifies the
- *             status of the parameter group applied to this Cache Node.
- *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
- *           minor version patches are applied automatically.
- *         * `SecurityGroups` &mdash; (`Array<map>`) Specifies the VPC
- *           Security Groups associated with the Cache Cluster.
- *           * `SecurityGroupId` &mdash; (`String`) The identifier of the
- *             Cache Security Group.
- *           * `Status` &mdash; (`String`) The status of the Cache Security
- *             Group membership. The status changes whenever a Cache
- *             Security Group is modified, or when the Cache Security
- *             Groups assigned to a Cache Cluster are modified.
+ *           * `CacheClusterId` &mdash; (`String`) Specifies a
+ *             user-supplied identifier. This is the unique key that
+ *             identifies a Cache Cluster.
+ *           * `ConfigurationEndpoint` &mdash; (`map`) Specifies a
+ *             user-supplied identifier. This is the unique key that
+ *             identifies a Cache Cluster.
+ *               * `Address` &mdash; (`String`) Specifies the DNS address
+ *                 of the Cache Node.
+ *               * `Port` &mdash; (`Integer`) Specifies the port that the
+ *                 cache engine is listening on.
+ *           * `ClientDownloadLandingPage` &mdash; (`String`) Provides the
+ *             landing page to download the latest ElastiCache client
+ *             library.
+ *           * `CacheNodeType` &mdash; (`String`) Specifies the name of the
+ *             compute and memory capacity node type for the Cache Cluster.
+ *           * `Engine` &mdash; (`String`) Provides the name of the cache
+ *             engine to be used for this Cache Cluster.
+ *           * `EngineVersion` &mdash; (`String`) Provides the cache engine
+ *             version of the cache engine to be used for this Cache
+ *             Cluster.
+ *           * `CacheClusterStatus` &mdash; (`String`) Specifies the
+ *             current state of this Cache Cluster.
+ *           * `NumCacheNodes` &mdash; (`Integer`) Specifies the number of
+ *             Cache Nodes the Cache Cluster contains.
+ *           * `PreferredAvailabilityZone` &mdash; (`String`) Specifies the
+ *             name of the Availability Zone the Cache Cluster is located
+ *             in.
+ *           * `CacheClusterCreateTime` &mdash; (`Date`) Provides the date
+ *             and time the Cache Cluster was created.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies
+ *             the weekly time range (in UTC) during which system
+ *             maintenance can occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) Specifies that
+ *             changes to the Cache Cluster are pending. This element is
+ *             only included when changes are pending. Specific changes are
+ *             identified by sub-elements.
+ *               * `NumCacheNodes` &mdash; (`Integer`) Contains the new
+ *                 NumCacheNodes for the Cache Cluster that will be applied
+ *                 or is in progress.
+ *               * `CacheNodeIdsToRemove` &mdash; (`Array<String>`)
+ *                 Contains the list of node Ids to remove from the Cache
+ *                 Cluster that will be applied or is in progress.
+ *               * `EngineVersion` &mdash; (`String`) Contains the new
+ *                 version of the Cache Engine the Cache Cluster will be
+ *                 upgraded to.
+ *           * `NotificationConfiguration` &mdash; (`map`) Specifies the
+ *             notification details the Cache Cluster contains.
+ *               * `TopicArn` &mdash; (`String`) Specifies the topic Amazon
+ *                 Resource Name (ARN), identifying this resource.
+ *               * `TopicStatus` &mdash; (`String`) Specifies the current
+ *                 state of this topic.
+ *           * `CacheSecurityGroups` &mdash; (`Array<map>`) Provides the
+ *             list of Cache Security Group elements containing
+ *             CacheSecurityGroup.Name and CacheSecurityGroup.Status
+ *             sub-elements.
+ *               * `CacheSecurityGroupName` &mdash; (`String`) The name of
+ *                 the Cache Security Group.
+ *               * `Status` &mdash; (`String`) The status of the
+ *                 CacheSecurityGroupMembership, the status changes either
+ *                 when a CacheSecurityGroup is modified, or when the
+ *                 CacheSecurityGroups assigned to a Cache Cluster are
+ *                 modified.
+ *           * `CacheParameterGroup` &mdash; (`map`) Provides the status of
+ *             the Cache Parameter Group assigned to the Cache Cluster.
+ *               * `CacheParameterGroupName` &mdash; (`String`) The name of
+ *                 the Cache Parameter Group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *               * `CacheNodeIdsToReboot` &mdash; (`Array<String>`) A list
+ *                 of the Cache Node Ids which need to be rebooted for
+ *                 parameter changes to be applied.
+ *           * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
+ *             of the Cache Subnet Group associated with the Cache Cluster.
+ *           * `CacheNodes` &mdash; (`Array<map>`) Specifies the list of
+ *             Cache Nodes the Cache Cluster contains.
+ *               * `CacheNodeId` &mdash; (`String`) Specifies a Cache Node
+ *                 identifier. This is the unique key that identifies a
+ *                 Cache Node per Customer (AWS account).
+ *               * `CacheNodeStatus` &mdash; (`String`) Specifies the
+ *                 current state of this Cache Node.
+ *               * `CacheNodeCreateTime` &mdash; (`Date`) Provides the date
+ *                 and time the Cache Node was created.
+ *               * `Endpoint` &mdash; (`map`) Specifies the endpoint
+ *                 details for a Cache Node.
+ *                   * `Address` &mdash; (`String`) Specifies the DNS
+ *                     address of the Cache Node.
+ *                   * `Port` &mdash; (`Integer`) Specifies the port that
+ *                     the cache engine is listening on.
+ *               * `ParameterGroupStatus` &mdash; (`String`) Specifies the
+ *                 status of the parameter group applied to this Cache
+ *                 Node.
+ *           * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
+ *             minor version patches are applied automatically.
+ *           * `SecurityGroups` &mdash; (`Array<map>`) Specifies the VPC
+ *             Security Groups associated with the Cache Cluster.
+ *               * `SecurityGroupId` &mdash; (`String`) The identifier of
+ *                 the Cache Security Group.
+ *               * `Status` &mdash; (`String`) The status of the Cache
+ *                 Security Group membership. The status changes whenever a
+ *                 Cache Security Group is modified, or when the Cache
+ *                 Security Groups assigned to a Cache Cluster are
+ *                 modified.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1390,10 +1414,10 @@ AWS.ElastiCache = inherit({})
  *       parameter update. At least one parameter name and value must be
  *       supplied; subsequent arguments are optional. A maximum of 20
  *       parameters may be modified in a single request.
- *       * `ParameterName` &mdash; (`String`) Specifies the name of the
- *         parameter.
- *       * `ParameterValue` &mdash; (`String`) Specifies the value of the
- *         parameter.
+ *         * `ParameterName` &mdash; (`String`) Specifies the name of the
+ *           parameter.
+ *         * `ParameterValue` &mdash; (`String`) Specifies the value of
+ *           the parameter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1436,20 +1460,20 @@ AWS.ElastiCache = inherit({})
  *         DescribeCacheSubnetGroups DeleteCacheSubnetGroup This data type
  *         is used as a response element in the DescribeCacheSubnetGroups
  *         action.
- *         * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
- *           of the Cache Subnet Group.
- *         * `CacheSubnetGroupDescription` &mdash; (`String`) Provides the
- *           description of the Cache Subnet Group.
- *         * `VpcId` &mdash; (`String`) Provides the VPC ID of the Cache
- *           Subnet Group.
- *         * `Subnets` &mdash; (`Array<map>`) Contains a list of subnets
- *           for this group.
- *           * `SubnetIdentifier` &mdash; (`String`) Specifies the unique
- *             identifier for the Subnet
- *           * `SubnetAvailabilityZone` &mdash; (`map`) Specifies the
- *             Availability Zone associated with the Subnet
- *             * `Name` &mdash; (`String`) Specifies the name of the
- *               Availability Zone
+ *           * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
+ *             of the Cache Subnet Group.
+ *           * `CacheSubnetGroupDescription` &mdash; (`String`) Provides
+ *             the description of the Cache Subnet Group.
+ *           * `VpcId` &mdash; (`String`) Provides the VPC ID of the Cache
+ *             Subnet Group.
+ *           * `Subnets` &mdash; (`Array<map>`) Contains a list of subnets
+ *             for this group.
+ *               * `SubnetIdentifier` &mdash; (`String`) Specifies the
+ *                 unique identifier for the Subnet
+ *               * `SubnetAvailabilityZone` &mdash; (`map`) Specifies the
+ *                 Availability Zone associated with the Subnet
+ *                   * `Name` &mdash; (`String`) Specifies the name of the
+ *                     Availability Zone
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1476,33 +1500,34 @@ AWS.ElastiCache = inherit({})
  *       * `ReservedCacheNode` &mdash; (`map`) This data type is used as a
  *         response element in the DescribeReservedCacheNodes and
  *         PurchaseReservedCacheNodesOffering actions.
- *         * `ReservedCacheNodeId` &mdash; (`String`) The unique identifier
- *           for the reservation.
- *         * `ReservedCacheNodesOfferingId` &mdash; (`String`) The offering
- *           identifier.
- *         * `CacheNodeType` &mdash; (`String`) The cache node type for the
- *           reserved Cache Node.
- *         * `StartTime` &mdash; (`Date`) The time the reservation started.
- *         * `Duration` &mdash; (`Integer`) The duration of the reservation
- *           in seconds.
- *         * `FixedPrice` &mdash; (`Float`) The fixed price charged for
- *           this reserved Cache Node.
- *         * `UsagePrice` &mdash; (`Float`) The hourly price charged for
- *           this reserved Cache Node.
- *         * `CacheNodeCount` &mdash; (`Integer`) The number of reserved
- *           Cache Nodes.
- *         * `ProductDescription` &mdash; (`String`) The description of the
- *           reserved Cache Node.
- *         * `OfferingType` &mdash; (`String`) The offering type of this
- *           reserved Cache Node.
- *         * `State` &mdash; (`String`) The state of the reserved Cache
- *           Node.
- *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring price
- *           charged to run this reserved Cache Node.
- *           * `RecurringChargeAmount` &mdash; (`Float`) The amount of the
- *             recurring charge.
- *           * `RecurringChargeFrequency` &mdash; (`String`) The frequency
- *             of the recurring charge.
+ *           * `ReservedCacheNodeId` &mdash; (`String`) The unique
+ *             identifier for the reservation.
+ *           * `ReservedCacheNodesOfferingId` &mdash; (`String`) The
+ *             offering identifier.
+ *           * `CacheNodeType` &mdash; (`String`) The cache node type for
+ *             the reserved Cache Node.
+ *           * `StartTime` &mdash; (`Date`) The time the reservation
+ *             started.
+ *           * `Duration` &mdash; (`Integer`) The duration of the
+ *             reservation in seconds.
+ *           * `FixedPrice` &mdash; (`Float`) The fixed price charged for
+ *             this reserved Cache Node.
+ *           * `UsagePrice` &mdash; (`Float`) The hourly price charged for
+ *             this reserved Cache Node.
+ *           * `CacheNodeCount` &mdash; (`Integer`) The number of reserved
+ *             Cache Nodes.
+ *           * `ProductDescription` &mdash; (`String`) The description of
+ *             the reserved Cache Node.
+ *           * `OfferingType` &mdash; (`String`) The offering type of this
+ *             reserved Cache Node.
+ *           * `State` &mdash; (`String`) The state of the reserved Cache
+ *             Node.
+ *           * `RecurringCharges` &mdash; (`Array<map>`) The recurring
+ *             price charged to run this reserved Cache Node.
+ *               * `RecurringChargeAmount` &mdash; (`Float`) The amount of
+ *                 the recurring charge.
+ *               * `RecurringChargeFrequency` &mdash; (`String`) The
+ *                 frequency of the recurring charge.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1528,103 +1553,108 @@ AWS.ElastiCache = inherit({})
  *
  *       * `CacheCluster` &mdash; (`map`) Contains information about a
  *         Cache Cluster.
- *         * `CacheClusterId` &mdash; (`String`) Specifies a user-supplied
- *           identifier. This is the unique key that identifies a Cache
- *           Cluster.
- *         * `ConfigurationEndpoint` &mdash; (`map`) Specifies a
- *           user-supplied identifier. This is the unique key that
- *           identifies a Cache Cluster.
- *           * `Address` &mdash; (`String`) Specifies the DNS address of
- *             the Cache Node.
- *           * `Port` &mdash; (`Integer`) Specifies the port that the cache
- *             engine is listening on.
- *         * `ClientDownloadLandingPage` &mdash; (`String`) Provides the
- *           landing page to download the latest ElastiCache client
- *           library.
- *         * `CacheNodeType` &mdash; (`String`) Specifies the name of the
- *           compute and memory capacity node type for the Cache Cluster.
- *         * `Engine` &mdash; (`String`) Provides the name of the cache
- *           engine to be used for this Cache Cluster.
- *         * `EngineVersion` &mdash; (`String`) Provides the cache engine
- *           version of the cache engine to be used for this Cache Cluster.
- *         * `CacheClusterStatus` &mdash; (`String`) Specifies the current
- *           state of this Cache Cluster.
- *         * `NumCacheNodes` &mdash; (`Integer`) Specifies the number of
- *           Cache Nodes the Cache Cluster contains.
- *         * `PreferredAvailabilityZone` &mdash; (`String`) Specifies the
- *           name of the Availability Zone the Cache Cluster is located in.
- *         * `CacheClusterCreateTime` &mdash; (`Date`) Provides the date
- *           and time the Cache Cluster was created.
- *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
- *           weekly time range (in UTC) during which system maintenance can
- *           occur.
- *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
- *           to the Cache Cluster are pending. This element is only
- *           included when changes are pending. Specific changes are
- *           identified by sub-elements.
- *           * `NumCacheNodes` &mdash; (`Integer`) Contains the new
- *             NumCacheNodes for the Cache Cluster that will be applied or
- *             is in progress.
- *           * `CacheNodeIdsToRemove` &mdash; (`Array<String>`) Contains
- *             the list of node Ids to remove from the Cache Cluster that
- *             will be applied or is in progress.
- *           * `EngineVersion` &mdash; (`String`) Contains the new version
- *             of the Cache Engine the Cache Cluster will be upgraded to.
- *         * `NotificationConfiguration` &mdash; (`map`) Specifies the
- *           notification details the Cache Cluster contains.
- *           * `TopicArn` &mdash; (`String`) Specifies the topic Amazon
- *             Resource Name (ARN), identifying this resource.
- *           * `TopicStatus` &mdash; (`String`) Specifies the current state
- *             of this topic.
- *         * `CacheSecurityGroups` &mdash; (`Array<map>`) Provides the list
- *           of Cache Security Group elements containing
- *           CacheSecurityGroup.Name and CacheSecurityGroup.Status
- *           sub-elements.
- *           * `CacheSecurityGroupName` &mdash; (`String`) The name of the
- *             Cache Security Group.
- *           * `Status` &mdash; (`String`) The status of the
- *             CacheSecurityGroupMembership, the status changes either when
- *             a CacheSecurityGroup is modified, or when the
- *             CacheSecurityGroups assigned to a Cache Cluster are
- *             modified.
- *         * `CacheParameterGroup` &mdash; (`map`) Provides the status of
- *           the Cache Parameter Group assigned to the Cache Cluster.
- *           * `CacheParameterGroupName` &mdash; (`String`) The name of the
- *             Cache Parameter Group.
- *           * `ParameterApplyStatus` &mdash; (`String`) The status of
- *             parameter updates.
- *           * `CacheNodeIdsToReboot` &mdash; (`Array<String>`) A list of
- *             the Cache Node Ids which need to be rebooted for parameter
- *             changes to be applied.
- *         * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
- *           of the Cache Subnet Group associated with the Cache Cluster.
- *         * `CacheNodes` &mdash; (`Array<map>`) Specifies the list of
- *           Cache Nodes the Cache Cluster contains.
- *           * `CacheNodeId` &mdash; (`String`) Specifies a Cache Node
- *             identifier. This is the unique key that identifies a Cache
- *             Node per Customer (AWS account).
- *           * `CacheNodeStatus` &mdash; (`String`) Specifies the current
- *             state of this Cache Node.
- *           * `CacheNodeCreateTime` &mdash; (`Date`) Provides the date and
- *             time the Cache Node was created.
- *           * `Endpoint` &mdash; (`map`) Specifies the endpoint details
- *             for a Cache Node.
- *             * `Address` &mdash; (`String`) Specifies the DNS address of
- *               the Cache Node.
- *             * `Port` &mdash; (`Integer`) Specifies the port that the
- *               cache engine is listening on.
- *           * `ParameterGroupStatus` &mdash; (`String`) Specifies the
- *             status of the parameter group applied to this Cache Node.
- *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
- *           minor version patches are applied automatically.
- *         * `SecurityGroups` &mdash; (`Array<map>`) Specifies the VPC
- *           Security Groups associated with the Cache Cluster.
- *           * `SecurityGroupId` &mdash; (`String`) The identifier of the
- *             Cache Security Group.
- *           * `Status` &mdash; (`String`) The status of the Cache Security
- *             Group membership. The status changes whenever a Cache
- *             Security Group is modified, or when the Cache Security
- *             Groups assigned to a Cache Cluster are modified.
+ *           * `CacheClusterId` &mdash; (`String`) Specifies a
+ *             user-supplied identifier. This is the unique key that
+ *             identifies a Cache Cluster.
+ *           * `ConfigurationEndpoint` &mdash; (`map`) Specifies a
+ *             user-supplied identifier. This is the unique key that
+ *             identifies a Cache Cluster.
+ *               * `Address` &mdash; (`String`) Specifies the DNS address
+ *                 of the Cache Node.
+ *               * `Port` &mdash; (`Integer`) Specifies the port that the
+ *                 cache engine is listening on.
+ *           * `ClientDownloadLandingPage` &mdash; (`String`) Provides the
+ *             landing page to download the latest ElastiCache client
+ *             library.
+ *           * `CacheNodeType` &mdash; (`String`) Specifies the name of the
+ *             compute and memory capacity node type for the Cache Cluster.
+ *           * `Engine` &mdash; (`String`) Provides the name of the cache
+ *             engine to be used for this Cache Cluster.
+ *           * `EngineVersion` &mdash; (`String`) Provides the cache engine
+ *             version of the cache engine to be used for this Cache
+ *             Cluster.
+ *           * `CacheClusterStatus` &mdash; (`String`) Specifies the
+ *             current state of this Cache Cluster.
+ *           * `NumCacheNodes` &mdash; (`Integer`) Specifies the number of
+ *             Cache Nodes the Cache Cluster contains.
+ *           * `PreferredAvailabilityZone` &mdash; (`String`) Specifies the
+ *             name of the Availability Zone the Cache Cluster is located
+ *             in.
+ *           * `CacheClusterCreateTime` &mdash; (`Date`) Provides the date
+ *             and time the Cache Cluster was created.
+ *           * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies
+ *             the weekly time range (in UTC) during which system
+ *             maintenance can occur.
+ *           * `PendingModifiedValues` &mdash; (`map`) Specifies that
+ *             changes to the Cache Cluster are pending. This element is
+ *             only included when changes are pending. Specific changes are
+ *             identified by sub-elements.
+ *               * `NumCacheNodes` &mdash; (`Integer`) Contains the new
+ *                 NumCacheNodes for the Cache Cluster that will be applied
+ *                 or is in progress.
+ *               * `CacheNodeIdsToRemove` &mdash; (`Array<String>`)
+ *                 Contains the list of node Ids to remove from the Cache
+ *                 Cluster that will be applied or is in progress.
+ *               * `EngineVersion` &mdash; (`String`) Contains the new
+ *                 version of the Cache Engine the Cache Cluster will be
+ *                 upgraded to.
+ *           * `NotificationConfiguration` &mdash; (`map`) Specifies the
+ *             notification details the Cache Cluster contains.
+ *               * `TopicArn` &mdash; (`String`) Specifies the topic Amazon
+ *                 Resource Name (ARN), identifying this resource.
+ *               * `TopicStatus` &mdash; (`String`) Specifies the current
+ *                 state of this topic.
+ *           * `CacheSecurityGroups` &mdash; (`Array<map>`) Provides the
+ *             list of Cache Security Group elements containing
+ *             CacheSecurityGroup.Name and CacheSecurityGroup.Status
+ *             sub-elements.
+ *               * `CacheSecurityGroupName` &mdash; (`String`) The name of
+ *                 the Cache Security Group.
+ *               * `Status` &mdash; (`String`) The status of the
+ *                 CacheSecurityGroupMembership, the status changes either
+ *                 when a CacheSecurityGroup is modified, or when the
+ *                 CacheSecurityGroups assigned to a Cache Cluster are
+ *                 modified.
+ *           * `CacheParameterGroup` &mdash; (`map`) Provides the status of
+ *             the Cache Parameter Group assigned to the Cache Cluster.
+ *               * `CacheParameterGroupName` &mdash; (`String`) The name of
+ *                 the Cache Parameter Group.
+ *               * `ParameterApplyStatus` &mdash; (`String`) The status of
+ *                 parameter updates.
+ *               * `CacheNodeIdsToReboot` &mdash; (`Array<String>`) A list
+ *                 of the Cache Node Ids which need to be rebooted for
+ *                 parameter changes to be applied.
+ *           * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
+ *             of the Cache Subnet Group associated with the Cache Cluster.
+ *           * `CacheNodes` &mdash; (`Array<map>`) Specifies the list of
+ *             Cache Nodes the Cache Cluster contains.
+ *               * `CacheNodeId` &mdash; (`String`) Specifies a Cache Node
+ *                 identifier. This is the unique key that identifies a
+ *                 Cache Node per Customer (AWS account).
+ *               * `CacheNodeStatus` &mdash; (`String`) Specifies the
+ *                 current state of this Cache Node.
+ *               * `CacheNodeCreateTime` &mdash; (`Date`) Provides the date
+ *                 and time the Cache Node was created.
+ *               * `Endpoint` &mdash; (`map`) Specifies the endpoint
+ *                 details for a Cache Node.
+ *                   * `Address` &mdash; (`String`) Specifies the DNS
+ *                     address of the Cache Node.
+ *                   * `Port` &mdash; (`Integer`) Specifies the port that
+ *                     the cache engine is listening on.
+ *               * `ParameterGroupStatus` &mdash; (`String`) Specifies the
+ *                 status of the parameter group applied to this Cache
+ *                 Node.
+ *           * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
+ *             minor version patches are applied automatically.
+ *           * `SecurityGroups` &mdash; (`Array<map>`) Specifies the VPC
+ *             Security Groups associated with the Cache Cluster.
+ *               * `SecurityGroupId` &mdash; (`String`) The identifier of
+ *                 the Cache Security Group.
+ *               * `Status` &mdash; (`String`) The status of the Cache
+ *                 Security Group membership. The status changes whenever a
+ *                 Cache Security Group is modified, or when the Cache
+ *                 Security Groups assigned to a Cache Cluster are
+ *                 modified.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1640,10 +1670,10 @@ AWS.ElastiCache = inherit({})
  *       (`Array<map>`) An array of parameter names which should be
  *       reset. If not resetting the entire CacheParameterGroup, at least
  *       one parameter name must be supplied.
- *       * `ParameterName` &mdash; (`String`) Specifies the name of the
- *         parameter.
- *       * `ParameterValue` &mdash; (`String`) Specifies the value of the
- *         parameter.
+ *         * `ParameterName` &mdash; (`String`) Specifies the name of the
+ *           parameter.
+ *         * `ParameterValue` &mdash; (`String`) Specifies the value of
+ *           the parameter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1682,21 +1712,21 @@ AWS.ElastiCache = inherit({})
  *
  *       * `CacheSecurityGroup` &mdash; (`map`) Defines a set of EC2
  *         Security groups that are allowed to access a Cache Cluster.
- *         * `OwnerId` &mdash; (`String`) Provides the AWS ID of the owner
- *           of a specific Cache Security Group.
- *         * `CacheSecurityGroupName` &mdash; (`String`) Specifies the name
- *           of the Cache Security Group.
- *         * `Description` &mdash; (`String`) Provides the description of
- *           the Cache Security Group.
- *         * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list of
- *           EC2SecurityGroup elements.
- *           * `Status` &mdash; (`String`) Provides the status of the EC2
- *             Security Group.
- *           * `EC2SecurityGroupName` &mdash; (`String`) Specifies the name
- *             of the EC2 Security Group.
- *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies the
- *             AWS ID of the owner of the EC2 Security Group specified in
- *             the EC2SecurityGroupName field.
+ *           * `OwnerId` &mdash; (`String`) Provides the AWS ID of the
+ *             owner of a specific Cache Security Group.
+ *           * `CacheSecurityGroupName` &mdash; (`String`) Specifies the
+ *             name of the Cache Security Group.
+ *           * `Description` &mdash; (`String`) Provides the description of
+ *             the Cache Security Group.
+ *           * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list
+ *             of EC2SecurityGroup elements.
+ *               * `Status` &mdash; (`String`) Provides the status of the
+ *                 EC2 Security Group.
+ *               * `EC2SecurityGroupName` &mdash; (`String`) Specifies the
+ *                 name of the EC2 Security Group.
+ *               * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies
+ *                 the AWS ID of the owner of the EC2 Security Group
+ *                 specified in the EC2SecurityGroupName field.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *

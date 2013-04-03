@@ -89,10 +89,10 @@ AWS.CloudFormation = inherit({})
  *       If both are passed, only TemplateBody is used.
  *     * `Parameters` &mdash; (`Array<map>`) A list of Parameter
  *       structures that specify input parameters for the stack.
- *       * `ParameterKey` &mdash; (`String`) The key associated with the
- *         parameter.
- *       * `ParameterValue` &mdash; (`String`) The value associated with
- *         the parameter.
+ *         * `ParameterKey` &mdash; (`String`) The key associated with
+ *           the parameter.
+ *         * `ParameterValue` &mdash; (`String`) The value associated
+ *           with the parameter.
  *     * `DisableRollback` &mdash; (`Boolean`) Set to true to disable
  *       rollback of the stack if stack creation failed. You can specify
  *       either DisableRollback or OnFailure, but not both. Default:
@@ -126,13 +126,13 @@ AWS.CloudFormation = inherit({})
  *       defined for the stack are propogated to EC2 resources that are
  *       created as part of the stack. A maximum number of 10 tags can be
  *       specified.
- *       * `Key` &mdash; (`String`) Required. A string used to identify
- *         this tag. You can specify a maximum of 128 characters for a
- *         tag key. Tags owned by Amazon Web Services (AWS) have the
- *         reserved prefix: aws:.
- *       * `Value` &mdash; (`String`) Required. A string containing the
- *         value for this tag. You can specify a maximum of 256
- *         characters for a tag value.
+ *         * `Key` &mdash; (`String`) Required. A string used to identify
+ *           this tag. You can specify a maximum of 128 characters for a
+ *           tag key. Tags owned by Amazon Web Services (AWS) have the
+ *           reserved prefix: aws:.
+ *         * `Value` &mdash; (`String`) Required. A string containing the
+ *           value for this tag. You can specify a maximum of 256
+ *           characters for a tag value.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -183,35 +183,35 @@ AWS.CloudFormation = inherit({})
  *
  *       * `StackEvents` &mdash; (`Array<map>`) A list of StackEvents
  *         structures.
- *         * `StackId` &mdash; (`String`) The unique ID name of the
- *           instance of the stack.
- *         * `EventId` &mdash; (`String`) The unique ID of this event.
- *         * `StackName` &mdash; (`String`) The name associated with a
- *           stack.
- *         * `LogicalResourceId` &mdash; (`String`) The logical name of the
- *           resource specified in the template.
- *         * `PhysicalResourceId` &mdash; (`String`) The name or unique
- *           identifier associated with the physical instance of the
- *           resource.
- *         * `ResourceType` &mdash; (`String`) Type of the resource. (For
- *           more information, go to the AWS CloudFormation User Guide.)
- *         * `Timestamp` &mdash; (`Date`) Time the status was updated.
- *         * `ResourceStatus` &mdash; (`String`) Current status of the
- *           resource.
- *           Possible values include:
- *           * `CREATE_IN_PROGRESS`
- *           * `CREATE_FAILED`
- *           * `CREATE_COMPLETE`
- *           * `DELETE_IN_PROGRESS`
- *           * `DELETE_FAILED`
- *           * `DELETE_COMPLETE`
- *           * `UPDATE_IN_PROGRESS`
- *           * `UPDATE_FAILED`
- *           * `UPDATE_COMPLETE`
- *         * `ResourceStatusReason` &mdash; (`String`) Success/failure
- *           message associated with the resource.
- *         * `ResourceProperties` &mdash; (`String`) BLOB of the properties
- *           used to create the resource.
+ *           * `StackId` &mdash; (`String`) The unique ID name of the
+ *             instance of the stack.
+ *           * `EventId` &mdash; (`String`) The unique ID of this event.
+ *           * `StackName` &mdash; (`String`) The name associated with a
+ *             stack.
+ *           * `LogicalResourceId` &mdash; (`String`) The logical name of
+ *             the resource specified in the template.
+ *           * `PhysicalResourceId` &mdash; (`String`) The name or unique
+ *             identifier associated with the physical instance of the
+ *             resource.
+ *           * `ResourceType` &mdash; (`String`) Type of the resource. (For
+ *             more information, go to the AWS CloudFormation User Guide.)
+ *           * `Timestamp` &mdash; (`Date`) Time the status was updated.
+ *           * `ResourceStatus` &mdash; (`String`) Current status of the
+ *             resource.
+ *             Possible values include:
+ *             * `CREATE_IN_PROGRESS`
+ *             * `CREATE_FAILED`
+ *             * `CREATE_COMPLETE`
+ *             * `DELETE_IN_PROGRESS`
+ *             * `DELETE_FAILED`
+ *             * `DELETE_COMPLETE`
+ *             * `UPDATE_IN_PROGRESS`
+ *             * `UPDATE_FAILED`
+ *             * `UPDATE_COMPLETE`
+ *           * `ResourceStatusReason` &mdash; (`String`) Success/failure
+ *             message associated with the resource.
+ *           * `ResourceProperties` &mdash; (`String`) BLOB of the
+ *             properties used to create the resource.
  *       * `NextToken` &mdash; (`String`) String that identifies the start
  *         of the next list of events, if there is one.
  *   @return [AWS.Request] a handle to the operation request for
@@ -239,38 +239,38 @@ AWS.CloudFormation = inherit({})
  *       * `StackResourceDetail` &mdash; (`map`) A StackResourceDetail
  *         structure containing the description of the specified resource
  *         in the specified stack.
- *         * `StackName` &mdash; (`String`) The name associated with the
- *           stack.
- *         * `StackId` &mdash; (`String`) Unique identifier of the stack.
- *         * `LogicalResourceId` &mdash; (`String`) The logical name of the
- *           resource specified in the template.
- *         * `PhysicalResourceId` &mdash; (`String`) The name or unique
- *           identifier that corresponds to a physical instance ID of a
- *           resource supported by AWS CloudFormation.
- *         * `ResourceType` &mdash; (`String`) Type of the resource. (For
- *           more information, go to the AWS CloudFormation User Guide.)
- *         * `LastUpdatedTimestamp` &mdash; (`Date`) Time the status was
- *           updated.
- *         * `ResourceStatus` &mdash; (`String`) Current status of the
- *           resource.
- *           Possible values include:
- *           * `CREATE_IN_PROGRESS`
- *           * `CREATE_FAILED`
- *           * `CREATE_COMPLETE`
- *           * `DELETE_IN_PROGRESS`
- *           * `DELETE_FAILED`
- *           * `DELETE_COMPLETE`
- *           * `UPDATE_IN_PROGRESS`
- *           * `UPDATE_FAILED`
- *           * `UPDATE_COMPLETE`
- *         * `ResourceStatusReason` &mdash; (`String`) Success/failure
- *           message associated with the resource.
- *         * `Description` &mdash; (`String`) User defined description
- *           associated with the resource.
- *         * `Metadata` &mdash; (`String`) The JSON format content of the
- *           Metadata attribute declared for the resource. For more
- *           information, see Metadata Attribute in the AWS CloudFormation
- *           User Guide.
+ *           * `StackName` &mdash; (`String`) The name associated with the
+ *             stack.
+ *           * `StackId` &mdash; (`String`) Unique identifier of the stack.
+ *           * `LogicalResourceId` &mdash; (`String`) The logical name of
+ *             the resource specified in the template.
+ *           * `PhysicalResourceId` &mdash; (`String`) The name or unique
+ *             identifier that corresponds to a physical instance ID of a
+ *             resource supported by AWS CloudFormation.
+ *           * `ResourceType` &mdash; (`String`) Type of the resource. (For
+ *             more information, go to the AWS CloudFormation User Guide.)
+ *           * `LastUpdatedTimestamp` &mdash; (`Date`) Time the status was
+ *             updated.
+ *           * `ResourceStatus` &mdash; (`String`) Current status of the
+ *             resource.
+ *             Possible values include:
+ *             * `CREATE_IN_PROGRESS`
+ *             * `CREATE_FAILED`
+ *             * `CREATE_COMPLETE`
+ *             * `DELETE_IN_PROGRESS`
+ *             * `DELETE_FAILED`
+ *             * `DELETE_COMPLETE`
+ *             * `UPDATE_IN_PROGRESS`
+ *             * `UPDATE_FAILED`
+ *             * `UPDATE_COMPLETE`
+ *           * `ResourceStatusReason` &mdash; (`String`) Success/failure
+ *             message associated with the resource.
+ *           * `Description` &mdash; (`String`) User defined description
+ *             associated with the resource.
+ *           * `Metadata` &mdash; (`String`) The JSON format content of the
+ *             Metadata attribute declared for the resource. For more
+ *             information, see Metadata Attribute in the AWS
+ *             CloudFormation User Guide.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -305,33 +305,33 @@ AWS.CloudFormation = inherit({})
  *
  *       * `StackResources` &mdash; (`Array<map>`) A list of StackResource
  *         structures.
- *         * `StackName` &mdash; (`String`) The name associated with the
- *           stack.
- *         * `StackId` &mdash; (`String`) Unique identifier of the stack.
- *         * `LogicalResourceId` &mdash; (`String`) The logical name of the
- *           resource specified in the template.
- *         * `PhysicalResourceId` &mdash; (`String`) The name or unique
- *           identifier that corresponds to a physical instance ID of a
- *           resource supported by AWS CloudFormation.
- *         * `ResourceType` &mdash; (`String`) Type of the resource. (For
- *           more information, go to the AWS CloudFormation User Guide.)
- *         * `Timestamp` &mdash; (`Date`) Time the status was updated.
- *         * `ResourceStatus` &mdash; (`String`) Current status of the
- *           resource.
- *           Possible values include:
- *           * `CREATE_IN_PROGRESS`
- *           * `CREATE_FAILED`
- *           * `CREATE_COMPLETE`
- *           * `DELETE_IN_PROGRESS`
- *           * `DELETE_FAILED`
- *           * `DELETE_COMPLETE`
- *           * `UPDATE_IN_PROGRESS`
- *           * `UPDATE_FAILED`
- *           * `UPDATE_COMPLETE`
- *         * `ResourceStatusReason` &mdash; (`String`) Success/failure
- *           message associated with the resource.
- *         * `Description` &mdash; (`String`) User defined description
- *           associated with the resource.
+ *           * `StackName` &mdash; (`String`) The name associated with the
+ *             stack.
+ *           * `StackId` &mdash; (`String`) Unique identifier of the stack.
+ *           * `LogicalResourceId` &mdash; (`String`) The logical name of
+ *             the resource specified in the template.
+ *           * `PhysicalResourceId` &mdash; (`String`) The name or unique
+ *             identifier that corresponds to a physical instance ID of a
+ *             resource supported by AWS CloudFormation.
+ *           * `ResourceType` &mdash; (`String`) Type of the resource. (For
+ *             more information, go to the AWS CloudFormation User Guide.)
+ *           * `Timestamp` &mdash; (`Date`) Time the status was updated.
+ *           * `ResourceStatus` &mdash; (`String`) Current status of the
+ *             resource.
+ *             Possible values include:
+ *             * `CREATE_IN_PROGRESS`
+ *             * `CREATE_FAILED`
+ *             * `CREATE_COMPLETE`
+ *             * `DELETE_IN_PROGRESS`
+ *             * `DELETE_FAILED`
+ *             * `DELETE_COMPLETE`
+ *             * `UPDATE_IN_PROGRESS`
+ *             * `UPDATE_FAILED`
+ *             * `UPDATE_COMPLETE`
+ *           * `ResourceStatusReason` &mdash; (`String`) Success/failure
+ *             message associated with the resource.
+ *           * `Description` &mdash; (`String`) User defined description
+ *             associated with the resource.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -352,67 +352,69 @@ AWS.CloudFormation = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Stacks` &mdash; (`Array<map>`) A list of stack structures.
- *         * `StackId` &mdash; (`String`) Unique identifier of the stack.
- *         * `StackName` &mdash; (`String`) The name associated with the
- *           stack.
- *         * `Description` &mdash; (`String`) User defined description
- *           associated with the stack.
- *         * `Parameters` &mdash; (`Array<map>`) A list of Parameter
- *           structures.
- *           * `ParameterKey` &mdash; (`String`) The key associated with
- *             the parameter.
- *           * `ParameterValue` &mdash; (`String`) The value associated
- *             with the parameter.
- *         * `CreationTime` &mdash; (`Date`) Time at which the stack was
- *           created.
- *         * `LastUpdatedTime` &mdash; (`Date`) The time the stack was last
- *           updated. This field will only be returned if the stack has
- *           been updated at least once.
- *         * `StackStatus` &mdash; (`String`) Current status of the stack.
- *           Possible values include:
- *           * `CREATE_IN_PROGRESS`
- *           * `CREATE_FAILED`
- *           * `CREATE_COMPLETE`
- *           * `ROLLBACK_IN_PROGRESS`
- *           * `ROLLBACK_FAILED`
- *           * `ROLLBACK_COMPLETE`
- *           * `DELETE_IN_PROGRESS`
- *           * `DELETE_FAILED`
- *           * `DELETE_COMPLETE`
- *           * `UPDATE_IN_PROGRESS`
- *           * `UPDATE_COMPLETE_CLEANUP_IN_PROGRESS`
- *           * `UPDATE_COMPLETE`
- *           * `UPDATE_ROLLBACK_IN_PROGRESS`
- *           * `UPDATE_ROLLBACK_FAILED`
- *           * `UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS`
- *           * `UPDATE_ROLLBACK_COMPLETE`
- *         * `StackStatusReason` &mdash; (`String`) Success/failure message
- *           associated with the stack status.
- *         * `DisableRollback` &mdash; (`Boolean`) Boolean to enable or
- *           disable rollback on stack creation failures: true: disable
- *           rollback false: enable rollback
- *         * `NotificationARNs` &mdash; (`Array<String>`) SNS topic ARNs to
- *           which stack related events are published.
- *         * `TimeoutInMinutes` &mdash; (`Integer`) The amount of time
- *           within which stack creation should complete.
- *         * `Capabilities` &mdash; (`Array<String>`) The capabilities
- *           allowed in the stack.
- *         * `Outputs` &mdash; (`Array<map>`) A list of output structures.
- *           * `OutputKey` &mdash; (`String`) The key associated with the
- *             output.
- *           * `OutputValue` &mdash; (`String`) The value associated with
- *             the output.
+ *           * `StackId` &mdash; (`String`) Unique identifier of the stack.
+ *           * `StackName` &mdash; (`String`) The name associated with the
+ *             stack.
  *           * `Description` &mdash; (`String`) User defined description
- *             associated with the output.
- *         * `Tags` &mdash; (`Array<map>`) A list of Tags that specify cost
- *           allocation information for the stack.
- *           * `Key` &mdash; (`String`) Required. A string used to identify
- *             this tag. You can specify a maximum of 128 characters for a
- *             tag key. Tags owned by Amazon Web Services (AWS) have the
- *             reserved prefix: aws:.
- *           * `Value` &mdash; (`String`) Required. A string containing the
- *             value for this tag. You can specify a maximum of 256
- *             characters for a tag value.
+ *             associated with the stack.
+ *           * `Parameters` &mdash; (`Array<map>`) A list of Parameter
+ *             structures.
+ *               * `ParameterKey` &mdash; (`String`) The key associated
+ *                 with the parameter.
+ *               * `ParameterValue` &mdash; (`String`) The value associated
+ *                 with the parameter.
+ *           * `CreationTime` &mdash; (`Date`) Time at which the stack was
+ *             created.
+ *           * `LastUpdatedTime` &mdash; (`Date`) The time the stack was
+ *             last updated. This field will only be returned if the stack
+ *             has been updated at least once.
+ *           * `StackStatus` &mdash; (`String`) Current status of the
+ *             stack.
+ *             Possible values include:
+ *             * `CREATE_IN_PROGRESS`
+ *             * `CREATE_FAILED`
+ *             * `CREATE_COMPLETE`
+ *             * `ROLLBACK_IN_PROGRESS`
+ *             * `ROLLBACK_FAILED`
+ *             * `ROLLBACK_COMPLETE`
+ *             * `DELETE_IN_PROGRESS`
+ *             * `DELETE_FAILED`
+ *             * `DELETE_COMPLETE`
+ *             * `UPDATE_IN_PROGRESS`
+ *             * `UPDATE_COMPLETE_CLEANUP_IN_PROGRESS`
+ *             * `UPDATE_COMPLETE`
+ *             * `UPDATE_ROLLBACK_IN_PROGRESS`
+ *             * `UPDATE_ROLLBACK_FAILED`
+ *             * `UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS`
+ *             * `UPDATE_ROLLBACK_COMPLETE`
+ *           * `StackStatusReason` &mdash; (`String`) Success/failure
+ *             message associated with the stack status.
+ *           * `DisableRollback` &mdash; (`Boolean`) Boolean to enable or
+ *             disable rollback on stack creation failures: true: disable
+ *             rollback false: enable rollback
+ *           * `NotificationARNs` &mdash; (`Array<String>`) SNS topic ARNs
+ *             to which stack related events are published.
+ *           * `TimeoutInMinutes` &mdash; (`Integer`) The amount of time
+ *             within which stack creation should complete.
+ *           * `Capabilities` &mdash; (`Array<String>`) The capabilities
+ *             allowed in the stack.
+ *           * `Outputs` &mdash; (`Array<map>`) A list of output
+ *             structures.
+ *               * `OutputKey` &mdash; (`String`) The key associated with
+ *                 the output.
+ *               * `OutputValue` &mdash; (`String`) The value associated
+ *                 with the output.
+ *               * `Description` &mdash; (`String`) User defined
+ *                 description associated with the output.
+ *           * `Tags` &mdash; (`Array<map>`) A list of Tags that specify
+ *             cost allocation information for the stack.
+ *               * `Key` &mdash; (`String`) Required. A string used to
+ *                 identify this tag. You can specify a maximum of 128
+ *                 characters for a tag key. Tags owned by Amazon Web
+ *                 Services (AWS) have the reserved prefix: aws:.
+ *               * `Value` &mdash; (`String`) Required. A string containing
+ *                 the value for this tag. You can specify a maximum of 256
+ *                 characters for a tag value.
  *       * `NextToken` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -433,10 +435,10 @@ AWS.CloudFormation = inherit({})
  *       TemplateBody is used.
  *     * `Parameters` &mdash; (`Array<map>`) A list of Parameter
  *       structures that specify input parameters.
- *       * `ParameterKey` &mdash; (`String`) The key associated with the
- *         parameter.
- *       * `ParameterValue` &mdash; (`String`) The value associated with
- *         the parameter.
+ *         * `ParameterKey` &mdash; (`String`) The key associated with
+ *           the parameter.
+ *         * `ParameterValue` &mdash; (`String`) The value associated
+ *           with the parameter.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -495,29 +497,29 @@ AWS.CloudFormation = inherit({})
  *
  *       * `StackResourceSummaries` &mdash; (`Array<map>`) A list of
  *         StackResourceSummary structures.
- *         * `LogicalResourceId` &mdash; (`String`) The logical name of the
- *           resource specified in the template.
- *         * `PhysicalResourceId` &mdash; (`String`) The name or unique
- *           identifier that corresponds to a physical instance ID of the
- *           resource.
- *         * `ResourceType` &mdash; (`String`) Type of the resource. (For
- *           more information, go to the AWS CloudFormation User Guide.)
- *         * `LastUpdatedTimestamp` &mdash; (`Date`) Time the status was
- *           updated.
- *         * `ResourceStatus` &mdash; (`String`) Current status of the
- *           resource.
- *           Possible values include:
- *           * `CREATE_IN_PROGRESS`
- *           * `CREATE_FAILED`
- *           * `CREATE_COMPLETE`
- *           * `DELETE_IN_PROGRESS`
- *           * `DELETE_FAILED`
- *           * `DELETE_COMPLETE`
- *           * `UPDATE_IN_PROGRESS`
- *           * `UPDATE_FAILED`
- *           * `UPDATE_COMPLETE`
- *         * `ResourceStatusReason` &mdash; (`String`) Success/failure
- *           message associated with the resource.
+ *           * `LogicalResourceId` &mdash; (`String`) The logical name of
+ *             the resource specified in the template.
+ *           * `PhysicalResourceId` &mdash; (`String`) The name or unique
+ *             identifier that corresponds to a physical instance ID of the
+ *             resource.
+ *           * `ResourceType` &mdash; (`String`) Type of the resource. (For
+ *             more information, go to the AWS CloudFormation User Guide.)
+ *           * `LastUpdatedTimestamp` &mdash; (`Date`) Time the status was
+ *             updated.
+ *           * `ResourceStatus` &mdash; (`String`) Current status of the
+ *             resource.
+ *             Possible values include:
+ *             * `CREATE_IN_PROGRESS`
+ *             * `CREATE_FAILED`
+ *             * `CREATE_COMPLETE`
+ *             * `DELETE_IN_PROGRESS`
+ *             * `DELETE_FAILED`
+ *             * `DELETE_COMPLETE`
+ *             * `UPDATE_IN_PROGRESS`
+ *             * `UPDATE_FAILED`
+ *             * `UPDATE_COMPLETE`
+ *           * `ResourceStatusReason` &mdash; (`String`) Success/failure
+ *             message associated with the resource.
  *       * `NextToken` &mdash; (`String`) String that identifies the start
  *         of the next list of events, if there is one.
  *   @return [AWS.Request] a handle to the operation request for
@@ -546,39 +548,39 @@ AWS.CloudFormation = inherit({})
  *
  *       * `StackSummaries` &mdash; (`Array<map>`) A list of StackSummary
  *         structures containing information about the specified stacks.
- *         * `StackId` &mdash; (`String`) Unique stack identifier.
- *         * `StackName` &mdash; (`String`) The name associated with the
- *           stack.
- *         * `TemplateDescription` &mdash; (`String`) The template
- *           description of the template used to create the stack.
- *         * `CreationTime` &mdash; (`Date`) The time the stack was
- *           created.
- *         * `LastUpdatedTime` &mdash; (`Date`) The time the stack was last
- *           updated. This field will only be returned if the stack has
- *           been updated at least once.
- *         * `DeletionTime` &mdash; (`Date`) The time the stack was
- *           deleted.
- *         * `StackStatus` &mdash; (`String`) The current status of the
- *           stack.
- *           Possible values include:
- *           * `CREATE_IN_PROGRESS`
- *           * `CREATE_FAILED`
- *           * `CREATE_COMPLETE`
- *           * `ROLLBACK_IN_PROGRESS`
- *           * `ROLLBACK_FAILED`
- *           * `ROLLBACK_COMPLETE`
- *           * `DELETE_IN_PROGRESS`
- *           * `DELETE_FAILED`
- *           * `DELETE_COMPLETE`
- *           * `UPDATE_IN_PROGRESS`
- *           * `UPDATE_COMPLETE_CLEANUP_IN_PROGRESS`
- *           * `UPDATE_COMPLETE`
- *           * `UPDATE_ROLLBACK_IN_PROGRESS`
- *           * `UPDATE_ROLLBACK_FAILED`
- *           * `UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS`
- *           * `UPDATE_ROLLBACK_COMPLETE`
- *         * `StackStatusReason` &mdash; (`String`) Success/Failure message
- *           associated with the stack status.
+ *           * `StackId` &mdash; (`String`) Unique stack identifier.
+ *           * `StackName` &mdash; (`String`) The name associated with the
+ *             stack.
+ *           * `TemplateDescription` &mdash; (`String`) The template
+ *             description of the template used to create the stack.
+ *           * `CreationTime` &mdash; (`Date`) The time the stack was
+ *             created.
+ *           * `LastUpdatedTime` &mdash; (`Date`) The time the stack was
+ *             last updated. This field will only be returned if the stack
+ *             has been updated at least once.
+ *           * `DeletionTime` &mdash; (`Date`) The time the stack was
+ *             deleted.
+ *           * `StackStatus` &mdash; (`String`) The current status of the
+ *             stack.
+ *             Possible values include:
+ *             * `CREATE_IN_PROGRESS`
+ *             * `CREATE_FAILED`
+ *             * `CREATE_COMPLETE`
+ *             * `ROLLBACK_IN_PROGRESS`
+ *             * `ROLLBACK_FAILED`
+ *             * `ROLLBACK_COMPLETE`
+ *             * `DELETE_IN_PROGRESS`
+ *             * `DELETE_FAILED`
+ *             * `DELETE_COMPLETE`
+ *             * `UPDATE_IN_PROGRESS`
+ *             * `UPDATE_COMPLETE_CLEANUP_IN_PROGRESS`
+ *             * `UPDATE_COMPLETE`
+ *             * `UPDATE_ROLLBACK_IN_PROGRESS`
+ *             * `UPDATE_ROLLBACK_FAILED`
+ *             * `UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS`
+ *             * `UPDATE_ROLLBACK_COMPLETE`
+ *           * `StackStatusReason` &mdash; (`String`) Success/Failure
+ *             message associated with the stack status.
  *       * `NextToken` &mdash; (`String`) String that identifies the start
  *         of the next list of stacks, if there is one.
  *   @return [AWS.Request] a handle to the operation request for
@@ -604,10 +606,10 @@ AWS.CloudFormation = inherit({})
  *       TemplateBody is used.
  *     * `Parameters` &mdash; (`Array<map>`) A list of Parameter
  *       structures that specify input parameters for the stack.
- *       * `ParameterKey` &mdash; (`String`) The key associated with the
- *         parameter.
- *       * `ParameterValue` &mdash; (`String`) The value associated with
- *         the parameter.
+ *         * `ParameterKey` &mdash; (`String`) The key associated with
+ *           the parameter.
+ *         * `ParameterValue` &mdash; (`String`) The value associated
+ *           with the parameter.
  *     * `Capabilities` &mdash; (`Array<String>`) The list of
  *       capabilities that you want to allow in the stack. If your stack
  *       contains IAM resources, you must specify the CAPABILITY_IAM
@@ -654,14 +656,14 @@ AWS.CloudFormation = inherit({})
  *
  *       * `Parameters` &mdash; (`Array<map>`) A list of TemplateParameter
  *         structures.
- *         * `ParameterKey` &mdash; (`String`) The name associated with the
- *           parameter.
- *         * `DefaultValue` &mdash; (`String`) The default value associated
- *           with the parameter.
- *         * `NoEcho` &mdash; (`Boolean`) Flag indicating whether the
- *           parameter should be displayed as plain text in logs and UIs.
- *         * `Description` &mdash; (`String`) User defined description
- *           associated with the parameter.
+ *           * `ParameterKey` &mdash; (`String`) The name associated with
+ *             the parameter.
+ *           * `DefaultValue` &mdash; (`String`) The default value
+ *             associated with the parameter.
+ *           * `NoEcho` &mdash; (`Boolean`) Flag indicating whether the
+ *             parameter should be displayed as plain text in logs and UIs.
+ *           * `Description` &mdash; (`String`) User defined description
+ *             associated with the parameter.
  *       * `Description` &mdash; (`String`) The description found within
  *         the template.
  *       * `Capabilities` &mdash; (`Array<String>`) The capabitilites found

@@ -109,36 +109,38 @@ AWS.ELB = inherit({})
  *     * `HealthCheck` &mdash; **required** &mdash; (`map`) A structure
  *       containing the configuration information for the new
  *       healthcheck.
- *       * `Target` &mdash; **required** &mdash; (`String`) Specifies the
- *         instance being checked. The protocol is either TCP, HTTP,
- *         HTTPS, or SSL. The range of valid ports is one (1) through
- *         65535. TCP is the default, specified as a TCP: port pair, for
- *         example "TCP:5000". In this case a healthcheck simply attempts
- *         to open a TCP connection to the instance on the specified
- *         port. Failure to connect within the configured timeout is
- *         considered unhealthy. SSL is also specified as SSL: port pair,
- *         for example, SSL:5000. For HTTP or HTTPS protocol, the
- *         situation is different. You have to include a ping path in the
- *         string. HTTP is specified as a HTTP:port;/;PathToPing;
- *         grouping, for example "HTTP:80/weather/us/wa/seattle". In this
- *         case, a HTTP GET request is issued to the instance on the
- *         given port and path. Any answer other than "200 OK" within the
- *         timeout period is considered unhealthy. The total length of
- *         the HTTP ping target needs to be 1024 16-bit Unicode
- *         characters or less.
- *       * `Interval` &mdash; **required** &mdash; (`Integer`) Specifies
- *         the approximate interval, in seconds, between health checks of
- *         an individual instance.
- *       * `Timeout` &mdash; **required** &mdash; (`Integer`) Specifies
- *         the amount of time, in seconds, during which no response means
- *         a failed health probe. This value must be less than the
- *         Interval value.
- *       * `UnhealthyThreshold` &mdash; **required** &mdash; (`Integer`)
- *         Specifies the number of consecutive health probe failures
- *         required before moving the instance to the Unhealthy state.
- *       * `HealthyThreshold` &mdash; **required** &mdash; (`Integer`)
- *         Specifies the number of consecutive health probe successes
- *         required before moving the instance to the Healthy state.
+ *         * `Target` &mdash; **required** &mdash; (`String`) Specifies
+ *           the instance being checked. The protocol is either TCP,
+ *           HTTP, HTTPS, or SSL. The range of valid ports is one (1)
+ *           through 65535. TCP is the default, specified as a TCP: port
+ *           pair, for example "TCP:5000". In this case a healthcheck
+ *           simply attempts to open a TCP connection to the instance on
+ *           the specified port. Failure to connect within the configured
+ *           timeout is considered unhealthy. SSL is also specified as
+ *           SSL: port pair, for example, SSL:5000. For HTTP or HTTPS
+ *           protocol, the situation is different. You have to include a
+ *           ping path in the string. HTTP is specified as a
+ *           HTTP:port;/;PathToPing; grouping, for example
+ *           "HTTP:80/weather/us/wa/seattle". In this case, a HTTP GET
+ *           request is issued to the instance on the given port and
+ *           path. Any answer other than "200 OK" within the timeout
+ *           period is considered unhealthy. The total length of the HTTP
+ *           ping target needs to be 1024 16-bit Unicode characters or
+ *           less.
+ *         * `Interval` &mdash; **required** &mdash; (`Integer`)
+ *           Specifies the approximate interval, in seconds, between
+ *           health checks of an individual instance.
+ *         * `Timeout` &mdash; **required** &mdash; (`Integer`) Specifies
+ *           the amount of time, in seconds, during which no response
+ *           means a failed health probe. This value must be less than
+ *           the Interval value.
+ *         * `UnhealthyThreshold` &mdash; **required** &mdash;
+ *           (`Integer`) Specifies the number of consecutive health probe
+ *           failures required before moving the instance to the
+ *           Unhealthy state.
+ *         * `HealthyThreshold` &mdash; **required** &mdash; (`Integer`)
+ *           Specifies the number of consecutive health probe successes
+ *           required before moving the instance to the Healthy state.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -151,34 +153,35 @@ AWS.ELB = inherit({})
  *
  *       * `HealthCheck` &mdash; (`map`) The updated healthcheck for the
  *         instances.
- *         * `Target` &mdash; (`String`) Specifies the instance being
- *           checked. The protocol is either TCP, HTTP, HTTPS, or SSL. The
- *           range of valid ports is one (1) through 65535. TCP is the
- *           default, specified as a TCP: port pair, for example
- *           "TCP:5000". In this case a healthcheck simply attempts to open
- *           a TCP connection to the instance on the specified port.
- *           Failure to connect within the configured timeout is considered
- *           unhealthy. SSL is also specified as SSL: port pair, for
- *           example, SSL:5000. For HTTP or HTTPS protocol, the situation
- *           is different. You have to include a ping path in the string.
- *           HTTP is specified as a HTTP:port;/;PathToPing; grouping, for
- *           example "HTTP:80/weather/us/wa/seattle". In this case, a HTTP
- *           GET request is issued to the instance on the given port and
- *           path. Any answer other than "200 OK" within the timeout period
- *           is considered unhealthy. The total length of the HTTP ping
- *           target needs to be 1024 16-bit Unicode characters or less.
- *         * `Interval` &mdash; (`Integer`) Specifies the approximate
- *           interval, in seconds, between health checks of an individual
- *           instance.
- *         * `Timeout` &mdash; (`Integer`) Specifies the amount of time, in
- *           seconds, during which no response means a failed health probe.
- *           This value must be less than the Interval value.
- *         * `UnhealthyThreshold` &mdash; (`Integer`) Specifies the number
- *           of consecutive health probe failures required before moving
- *           the instance to the Unhealthy state.
- *         * `HealthyThreshold` &mdash; (`Integer`) Specifies the number of
- *           consecutive health probe successes required before moving the
- *           instance to the Healthy state.
+ *           * `Target` &mdash; (`String`) Specifies the instance being
+ *             checked. The protocol is either TCP, HTTP, HTTPS, or SSL.
+ *             The range of valid ports is one (1) through 65535. TCP is
+ *             the default, specified as a TCP: port pair, for example
+ *             "TCP:5000". In this case a healthcheck simply attempts to
+ *             open a TCP connection to the instance on the specified port.
+ *             Failure to connect within the configured timeout is
+ *             considered unhealthy. SSL is also specified as SSL: port
+ *             pair, for example, SSL:5000. For HTTP or HTTPS protocol, the
+ *             situation is different. You have to include a ping path in
+ *             the string. HTTP is specified as a HTTP:port;/;PathToPing;
+ *             grouping, for example "HTTP:80/weather/us/wa/seattle". In
+ *             this case, a HTTP GET request is issued to the instance on
+ *             the given port and path. Any answer other than "200 OK"
+ *             within the timeout period is considered unhealthy. The total
+ *             length of the HTTP ping target needs to be 1024 16-bit
+ *             Unicode characters or less.
+ *           * `Interval` &mdash; (`Integer`) Specifies the approximate
+ *             interval, in seconds, between health checks of an individual
+ *             instance.
+ *           * `Timeout` &mdash; (`Integer`) Specifies the amount of time,
+ *             in seconds, during which no response means a failed health
+ *             probe. This value must be less than the Interval value.
+ *           * `UnhealthyThreshold` &mdash; (`Integer`) Specifies the
+ *             number of consecutive health probe failures required before
+ *             moving the instance to the Unhealthy state.
+ *           * `HealthyThreshold` &mdash; (`Integer`) Specifies the number
+ *             of consecutive health probe successes required before moving
+ *             the instance to the Healthy state.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -237,34 +240,35 @@ AWS.ELB = inherit({})
  *     * `Listeners` &mdash; **required** &mdash; (`Array<map>`) A list
  *       of the following tuples: LoadBalancerPort, InstancePort, and
  *       Protocol.
- *       * `Protocol` &mdash; **required** &mdash; (`String`) Specifies
- *         the LoadBalancer transport protocol to use for routing - HTTP,
- *         HTTPS, TCP or SSL. This property cannot be modified for the
- *         life of the LoadBalancer.
- *       * `LoadBalancerPort` &mdash; **required** &mdash; (`Integer`)
- *         Specifies the external LoadBalancer port number. This property
- *         cannot be modified for the life of the LoadBalancer.
- *       * `InstanceProtocol` &mdash; (`String`) Specifies the protocol
- *         to use for routing traffic to back-end instances - HTTP,
- *         HTTPS, TCP, or SSL. This property cannot be modified for the
- *         life of the LoadBalancer. If the front-end protocol is HTTP or
- *         HTTPS, InstanceProtocol has to be at the same protocol layer,
- *         i.e., HTTP or HTTPS. Likewise, if the front-end protocol is
- *         TCP or SSL, InstanceProtocol has to be TCP or SSL. If there is
- *         another listener with the same InstancePort whose
- *         InstanceProtocol is secure, i.e., HTTPS or SSL, the listener's
- *         InstanceProtocol has to be secure, i.e., HTTPS or SSL. If
- *         there is another listener with the same InstancePort whose
- *         InstanceProtocol is HTTP or TCP, the listener's
- *         InstanceProtocol must be either HTTP or TCP.
- *       * `InstancePort` &mdash; **required** &mdash; (`Integer`)
- *         Specifies the TCP port on which the instance server is
- *         listening. This property cannot be modified for the life of
- *         the LoadBalancer.
- *       * `SSLCertificateId` &mdash; (`String`) The ARN string of the
- *         server certificate. To get the ARN of the server certificate,
- *         call the AWS Identity and Access Management
- *         UploadServerCertificate API.
+ *         * `Protocol` &mdash; **required** &mdash; (`String`) Specifies
+ *           the LoadBalancer transport protocol to use for routing -
+ *           HTTP, HTTPS, TCP or SSL. This property cannot be modified
+ *           for the life of the LoadBalancer.
+ *         * `LoadBalancerPort` &mdash; **required** &mdash; (`Integer`)
+ *           Specifies the external LoadBalancer port number. This
+ *           property cannot be modified for the life of the
+ *           LoadBalancer.
+ *         * `InstanceProtocol` &mdash; (`String`) Specifies the protocol
+ *           to use for routing traffic to back-end instances - HTTP,
+ *           HTTPS, TCP, or SSL. This property cannot be modified for the
+ *           life of the LoadBalancer. If the front-end protocol is HTTP
+ *           or HTTPS, InstanceProtocol has to be at the same protocol
+ *           layer, i.e., HTTP or HTTPS. Likewise, if the front-end
+ *           protocol is TCP or SSL, InstanceProtocol has to be TCP or
+ *           SSL. If there is another listener with the same InstancePort
+ *           whose InstanceProtocol is secure, i.e., HTTPS or SSL, the
+ *           listener's InstanceProtocol has to be secure, i.e., HTTPS or
+ *           SSL. If there is another listener with the same InstancePort
+ *           whose InstanceProtocol is HTTP or TCP, the listener's
+ *           InstanceProtocol must be either HTTP or TCP.
+ *         * `InstancePort` &mdash; **required** &mdash; (`Integer`)
+ *           Specifies the TCP port on which the instance server is
+ *           listening. This property cannot be modified for the life of
+ *           the LoadBalancer.
+ *         * `SSLCertificateId` &mdash; (`String`) The ARN string of the
+ *           server certificate. To get the ARN of the server
+ *           certificate, call the AWS Identity and Access Management
+ *           UploadServerCertificate API.
  *     * `AvailabilityZones` &mdash; (`Array<String>`) A list of
  *       Availability Zones. At least one Availability Zone must be
  *       specified. Specified Availability Zones must be in the same EC2
@@ -305,34 +309,35 @@ AWS.ELB = inherit({})
  *     * `Listeners` &mdash; **required** &mdash; (`Array<map>`) A list
  *       of LoadBalancerPort, InstancePort, Protocol, and
  *       SSLCertificateId items.
- *       * `Protocol` &mdash; **required** &mdash; (`String`) Specifies
- *         the LoadBalancer transport protocol to use for routing - HTTP,
- *         HTTPS, TCP or SSL. This property cannot be modified for the
- *         life of the LoadBalancer.
- *       * `LoadBalancerPort` &mdash; **required** &mdash; (`Integer`)
- *         Specifies the external LoadBalancer port number. This property
- *         cannot be modified for the life of the LoadBalancer.
- *       * `InstanceProtocol` &mdash; (`String`) Specifies the protocol
- *         to use for routing traffic to back-end instances - HTTP,
- *         HTTPS, TCP, or SSL. This property cannot be modified for the
- *         life of the LoadBalancer. If the front-end protocol is HTTP or
- *         HTTPS, InstanceProtocol has to be at the same protocol layer,
- *         i.e., HTTP or HTTPS. Likewise, if the front-end protocol is
- *         TCP or SSL, InstanceProtocol has to be TCP or SSL. If there is
- *         another listener with the same InstancePort whose
- *         InstanceProtocol is secure, i.e., HTTPS or SSL, the listener's
- *         InstanceProtocol has to be secure, i.e., HTTPS or SSL. If
- *         there is another listener with the same InstancePort whose
- *         InstanceProtocol is HTTP or TCP, the listener's
- *         InstanceProtocol must be either HTTP or TCP.
- *       * `InstancePort` &mdash; **required** &mdash; (`Integer`)
- *         Specifies the TCP port on which the instance server is
- *         listening. This property cannot be modified for the life of
- *         the LoadBalancer.
- *       * `SSLCertificateId` &mdash; (`String`) The ARN string of the
- *         server certificate. To get the ARN of the server certificate,
- *         call the AWS Identity and Access Management
- *         UploadServerCertificate API.
+ *         * `Protocol` &mdash; **required** &mdash; (`String`) Specifies
+ *           the LoadBalancer transport protocol to use for routing -
+ *           HTTP, HTTPS, TCP or SSL. This property cannot be modified
+ *           for the life of the LoadBalancer.
+ *         * `LoadBalancerPort` &mdash; **required** &mdash; (`Integer`)
+ *           Specifies the external LoadBalancer port number. This
+ *           property cannot be modified for the life of the
+ *           LoadBalancer.
+ *         * `InstanceProtocol` &mdash; (`String`) Specifies the protocol
+ *           to use for routing traffic to back-end instances - HTTP,
+ *           HTTPS, TCP, or SSL. This property cannot be modified for the
+ *           life of the LoadBalancer. If the front-end protocol is HTTP
+ *           or HTTPS, InstanceProtocol has to be at the same protocol
+ *           layer, i.e., HTTP or HTTPS. Likewise, if the front-end
+ *           protocol is TCP or SSL, InstanceProtocol has to be TCP or
+ *           SSL. If there is another listener with the same InstancePort
+ *           whose InstanceProtocol is secure, i.e., HTTPS or SSL, the
+ *           listener's InstanceProtocol has to be secure, i.e., HTTPS or
+ *           SSL. If there is another listener with the same InstancePort
+ *           whose InstanceProtocol is HTTP or TCP, the listener's
+ *           InstanceProtocol must be either HTTP or TCP.
+ *         * `InstancePort` &mdash; **required** &mdash; (`Integer`)
+ *           Specifies the TCP port on which the instance server is
+ *           listening. This property cannot be modified for the life of
+ *           the LoadBalancer.
+ *         * `SSLCertificateId` &mdash; (`String`) The ARN string of the
+ *           server certificate. To get the ARN of the server
+ *           certificate, call the AWS Identity and Access Management
+ *           UploadServerCertificate API.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -360,10 +365,10 @@ AWS.ELB = inherit({})
  *       DescribeLoadBalancerPolicyTypes action.
  *     * `PolicyAttributes` &mdash; (`Array<map>`) A list of attributes
  *       associated with the policy being created.
- *       * `AttributeName` &mdash; (`String`) The name of the attribute
- *         associated with the policy.
- *       * `AttributeValue` &mdash; (`String`) The value of the attribute
- *         associated with the policy.
+ *         * `AttributeName` &mdash; (`String`) The name of the attribute
+ *           associated with the policy.
+ *         * `AttributeValue` &mdash; (`String`) The value of the
+ *           attribute associated with the policy.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -439,7 +444,7 @@ AWS.ELB = inherit({})
  *     * `Instances` &mdash; **required** &mdash; (`Array<map>`) A list
  *       of EC2 instance IDs consisting of all instances to be
  *       deregistered.
- *       * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
+ *         * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -452,7 +457,7 @@ AWS.ELB = inherit({})
  *
  *       * `Instances` &mdash; (`Array<map>`) An updated list of remaining
  *         instances registered with the LoadBalancer.
- *         * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
+ *           * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -464,7 +469,7 @@ AWS.ELB = inherit({})
  *       within the client AWS account.
  *     * `Instances` &mdash; (`Array<map>`) A list of instance IDs whose
  *       states are being queried.
- *       * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
+ *         * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -477,15 +482,15 @@ AWS.ELB = inherit({})
  *
  *       * `InstanceStates` &mdash; (`Array<map>`) A list containing health
  *         information for the specified instances.
- *         * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
- *         * `State` &mdash; (`String`) Specifies the current status of the
- *           instance.
- *         * `ReasonCode` &mdash; (`String`) Provides information about the
- *           cause of OutOfService instances. Specifically, it indicates
- *           whether the cause is Elastic Load Balancing or the instance
- *           behind the LoadBalancer.
- *         * `Description` &mdash; (`String`) Provides a description of the
- *           instance.
+ *           * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
+ *           * `State` &mdash; (`String`) Specifies the current status of
+ *             the instance.
+ *           * `ReasonCode` &mdash; (`String`) Provides information about
+ *             the cause of OutOfService instances. Specifically, it
+ *             indicates whether the cause is Elastic Load Balancing or the
+ *             instance behind the LoadBalancer.
+ *           * `Description` &mdash; (`String`) Provides a description of
+ *             the instance.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -512,16 +517,16 @@ AWS.ELB = inherit({})
  *
  *       * `PolicyDescriptions` &mdash; (`Array<map>`) A list of policy
  *         description structures.
- *         * `PolicyName` &mdash; (`String`) The name mof the policy
- *           associated with the LoadBalancer.
- *         * `PolicyTypeName` &mdash; (`String`) The name of the policy
- *           type associated with the LoadBalancer.
- *         * `PolicyAttributeDescriptions` &mdash; (`Array<map>`) A list of
- *           policy attribute description structures.
- *           * `AttributeName` &mdash; (`String`) The name of the attribute
- *             associated with the policy.
- *           * `AttributeValue` &mdash; (`String`) The value of the
- *             attribute associated with the policy.
+ *           * `PolicyName` &mdash; (`String`) The name mof the policy
+ *             associated with the LoadBalancer.
+ *           * `PolicyTypeName` &mdash; (`String`) The name of the policy
+ *             type associated with the LoadBalancer.
+ *           * `PolicyAttributeDescriptions` &mdash; (`Array<map>`) A list
+ *             of policy attribute description structures.
+ *               * `AttributeName` &mdash; (`String`) The name of the
+ *                 attribute associated with the policy.
+ *               * `AttributeValue` &mdash; (`String`) The value of the
+ *                 attribute associated with the policy.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -546,27 +551,28 @@ AWS.ELB = inherit({})
  *         type description structures of the specified policy type. If no
  *         policy type names are specified, returns the description of all
  *         the policy types defined by Elastic Load Balancing service.
- *         * `PolicyTypeName` &mdash; (`String`) The name of the policy
- *           type.
- *         * `Description` &mdash; (`String`) A human-readable description
- *           of the policy type.
- *         * `PolicyAttributeTypeDescriptions` &mdash; (`Array<map>`) The
- *           description of the policy attributes associated with the
- *           LoadBalancer policies defined by the Elastic Load Balancing
- *           service.
- *           * `AttributeName` &mdash; (`String`) The name of the attribute
- *             associated with the policy type.
- *           * `AttributeType` &mdash; (`String`) The type of attribute.
- *             For example, Boolean, Integer, etc.
+ *           * `PolicyTypeName` &mdash; (`String`) The name of the policy
+ *             type.
  *           * `Description` &mdash; (`String`) A human-readable
- *             description of the attribute.
- *           * `DefaultValue` &mdash; (`String`) The default value of the
- *             attribute, if applicable.
- *           * `Cardinality` &mdash; (`String`) The cardinality of the
- *             attribute. Valid Values: ONE(1) : Single value required
- *             ZERO_OR_ONE(0..1) : Up to one value can be supplied
- *             ZERO_OR_MORE(0..*) : Optional. Multiple values are allowed
- *             ONE_OR_MORE(1..*0) : Required. Multiple values are allowed
+ *             description of the policy type.
+ *           * `PolicyAttributeTypeDescriptions` &mdash; (`Array<map>`) The
+ *             description of the policy attributes associated with the
+ *             LoadBalancer policies defined by the Elastic Load Balancing
+ *             service.
+ *               * `AttributeName` &mdash; (`String`) The name of the
+ *                 attribute associated with the policy type.
+ *               * `AttributeType` &mdash; (`String`) The type of
+ *                 attribute. For example, Boolean, Integer, etc.
+ *               * `Description` &mdash; (`String`) A human-readable
+ *                 description of the attribute.
+ *               * `DefaultValue` &mdash; (`String`) The default value of
+ *                 the attribute, if applicable.
+ *               * `Cardinality` &mdash; (`String`) The cardinality of the
+ *                 attribute. Valid Values: ONE(1) : Single value required
+ *                 ZERO_OR_ONE(0..1) : Up to one value can be supplied
+ *                 ZERO_OR_MORE(0..*) : Optional. Multiple values are
+ *                 allowed ONE_OR_MORE(1..*0) : Required. Multiple values
+ *                 are allowed
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -589,152 +595,160 @@ AWS.ELB = inherit({})
  *
  *       * `LoadBalancerDescriptions` &mdash; (`Array<map>`) A list of
  *         LoadBalancer description structures.
- *         * `LoadBalancerName` &mdash; (`String`) Specifies the name
- *           associated with the LoadBalancer.
- *         * `DNSName` &mdash; (`String`) Specifies the external DNS name
- *           associated with the LoadBalancer.
- *         * `CanonicalHostedZoneName` &mdash; (`String`) Provides the name
- *           of the Amazon Route 53 hosted zone that is associated with the
- *           LoadBalancer. For information on how to associate your load
- *           balancer with a hosted zone, go to Using Domain Names With
- *           Elastic Load Balancing in the Elastic Load Balancing Developer
- *           Guide.
- *         * `CanonicalHostedZoneNameID` &mdash; (`String`) Provides the ID
- *           of the Amazon Route 53 hosted zone name that is associated
- *           with the LoadBalancer. For information on how to associate or
- *           disassociate your load balancer with a hosted zone, go to
- *           Using Domain Names With Elastic Load Balancing in the Elastic
- *           Load Balancing Developer Guide.
- *         * `ListenerDescriptions` &mdash; (`Array<map>`)
- *           LoadBalancerPort, InstancePort, Protocol, InstanceProtocol,
- *           and PolicyNames are returned in a list of tuples in the
- *           ListenerDescriptions element.
- *           * `Listener` &mdash; (`map`)
- *             * `Protocol` &mdash; (`String`) Specifies the LoadBalancer
- *               transport protocol to use for routing - HTTP, HTTPS, TCP
- *               or SSL. This property cannot be modified for the life of
- *               the LoadBalancer.
- *             * `LoadBalancerPort` &mdash; (`Integer`) Specifies the
- *               external LoadBalancer port number. This property cannot be
- *               modified for the life of the LoadBalancer.
- *             * `InstanceProtocol` &mdash; (`String`) Specifies the
- *               protocol to use for routing traffic to back-end instances
- *               \- HTTP, HTTPS, TCP, or SSL. This property cannot be
- *               modified for the life of the LoadBalancer. If the
- *               front-end protocol is HTTP or HTTPS, InstanceProtocol has
- *               to be at the same protocol layer, i.e., HTTP or HTTPS.
- *               Likewise, if the front-end protocol is TCP or SSL,
- *               InstanceProtocol has to be TCP or SSL. If there is another
- *               listener with the same InstancePort whose InstanceProtocol
- *               is secure, i.e., HTTPS or SSL, the listener's
- *               InstanceProtocol has to be secure, i.e., HTTPS or SSL. If
- *               there is another listener with the same InstancePort whose
- *               InstanceProtocol is HTTP or TCP, the listener's
- *               InstanceProtocol must be either HTTP or TCP.
- *             * `InstancePort` &mdash; (`Integer`) Specifies the TCP port
- *               on which the instance server is listening. This property
- *               cannot be modified for the life of the LoadBalancer.
- *             * `SSLCertificateId` &mdash; (`String`) The ARN string of
- *               the server certificate. To get the ARN of the server
- *               certificate, call the AWS Identity and Access Management
- *               UploadServerCertificate API.
- *           * `PolicyNames` &mdash; (`Array<String>`) A list of policies
- *             enabled for this listener. An empty list indicates that no
- *             policies are enabled.
- *         * `Policies` &mdash; (`map`) Provides a list of policies defined
- *           for the LoadBalancer.
- *           * `AppCookieStickinessPolicies` &mdash; (`Array<map>`) A list
- *             of the AppCookieStickinessPolicy objects created with
- *             CreateAppCookieStickinessPolicy.
- *             * `PolicyName` &mdash; (`String`) The mnemonic name for the
- *               policy being created. The name must be unique within a set
- *               of policies for this LoadBalancer.
- *             * `CookieName` &mdash; (`String`) The name of the
- *               application cookie used for stickiness.
- *           * `LBCookieStickinessPolicies` &mdash; (`Array<map>`) A list
- *             of LBCookieStickinessPolicy objects created with
- *             CreateAppCookieStickinessPolicy.
- *             * `PolicyName` &mdash; (`String`) The name for the policy
- *               being created. The name must be unique within the set of
- *               policies for this LoadBalancer.
- *             * `CookieExpirationPeriod` &mdash; (`Integer`) The time
- *               period in seconds after which the cookie should be
- *               considered stale. Not specifying this parameter indicates
- *               that the stickiness session will last for the duration of
- *               the browser session.
- *           * `OtherPolicies` &mdash; (`Array<String>`) A list of policy
- *             names other than the stickiness policies.
- *         * `BackendServerDescriptions` &mdash; (`Array<map>`) Contains a
- *           list of back-end server descriptions.
- *           * `InstancePort` &mdash; (`Integer`) Provides the port on
- *             which the back-end server is listening.
- *           * `PolicyNames` &mdash; (`Array<String>`) Provides a list of
- *             policy names enabled for the back-end server.
- *         * `AvailabilityZones` &mdash; (`Array<String>`) Specifies a list
- *           of Availability Zones.
- *         * `Subnets` &mdash; (`Array<String>`) Provides a list of VPC
- *           subnet IDs for the LoadBalancer.
- *         * `VPCId` &mdash; (`String`) Provides the ID of the VPC attached
- *           to the LoadBalancer.
- *         * `Instances` &mdash; (`Array<map>`) Provides a list of EC2
- *           instance IDs for the LoadBalancer.
- *           * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
- *         * `HealthCheck` &mdash; (`map`) Specifies information regarding
- *           the various health probes conducted on the LoadBalancer.
- *           * `Target` &mdash; (`String`) Specifies the instance being
- *             checked. The protocol is either TCP, HTTP, HTTPS, or SSL.
- *             The range of valid ports is one (1) through 65535. TCP is
- *             the default, specified as a TCP: port pair, for example
- *             "TCP:5000". In this case a healthcheck simply attempts to
- *             open a TCP connection to the instance on the specified port.
- *             Failure to connect within the configured timeout is
- *             considered unhealthy. SSL is also specified as SSL: port
- *             pair, for example, SSL:5000. For HTTP or HTTPS protocol, the
- *             situation is different. You have to include a ping path in
- *             the string. HTTP is specified as a HTTP:port;/;PathToPing;
- *             grouping, for example "HTTP:80/weather/us/wa/seattle". In
- *             this case, a HTTP GET request is issued to the instance on
- *             the given port and path. Any answer other than "200 OK"
- *             within the timeout period is considered unhealthy. The total
- *             length of the HTTP ping target needs to be 1024 16-bit
- *             Unicode characters or less.
- *           * `Interval` &mdash; (`Integer`) Specifies the approximate
- *             interval, in seconds, between health checks of an individual
- *             instance.
- *           * `Timeout` &mdash; (`Integer`) Specifies the amount of time,
- *             in seconds, during which no response means a failed health
- *             probe. This value must be less than the Interval value.
- *           * `UnhealthyThreshold` &mdash; (`Integer`) Specifies the
- *             number of consecutive health probe failures required before
- *             moving the instance to the Unhealthy state.
- *           * `HealthyThreshold` &mdash; (`Integer`) Specifies the number
- *             of consecutive health probe successes required before moving
- *             the instance to the Healthy state.
- *         * `SourceSecurityGroup` &mdash; (`map`) The security group that
- *           you can use as part of your inbound rules for your
- *           LoadBalancer's back-end Amazon EC2 application instances. To
- *           only allow traffic from LoadBalancers, add a security group
- *           rule to your back end instance that specifies this source
- *           security group as the inbound source.
- *           * `OwnerAlias` &mdash; (`String`) Owner of the source security
- *             group. Use this value for the --source-group-user parameter
- *             of the ec2-authorize command in the Amazon EC2 command line
- *             tool.
- *           * `GroupName` &mdash; (`String`) Name of the source security
- *             group. Use this value for the --source-group parameter of
- *             the ec2-authorize command in the Amazon EC2 command line
- *             tool.
- *         * `SecurityGroups` &mdash; (`Array<String>`) The security groups
- *           the LoadBalancer is a member of (VPC only).
- *         * `CreatedTime` &mdash; (`Date`) Provides the date and time the
- *           LoadBalancer was created.
- *         * `Scheme` &mdash; (`String`) Specifies the type of a load
- *           balancer. If it is internet-facing, the load balancer has a
- *           publicly resolvable DNS name that resolves to public IP
- *           addresses. If it is internal, the load balancer has a publicly
- *           resolvable DNS name that resolves to private IP addresses.
- *           This option is only available for load balancers attached to a
- *           VPC.
+ *           * `LoadBalancerName` &mdash; (`String`) Specifies the name
+ *             associated with the LoadBalancer.
+ *           * `DNSName` &mdash; (`String`) Specifies the external DNS name
+ *             associated with the LoadBalancer.
+ *           * `CanonicalHostedZoneName` &mdash; (`String`) Provides the
+ *             name of the Amazon Route 53 hosted zone that is associated
+ *             with the LoadBalancer. For information on how to associate
+ *             your load balancer with a hosted zone, go to Using Domain
+ *             Names With Elastic Load Balancing in the Elastic Load
+ *             Balancing Developer Guide.
+ *           * `CanonicalHostedZoneNameID` &mdash; (`String`) Provides the
+ *             ID of the Amazon Route 53 hosted zone name that is
+ *             associated with the LoadBalancer. For information on how to
+ *             associate or disassociate your load balancer with a hosted
+ *             zone, go to Using Domain Names With Elastic Load Balancing
+ *             in the Elastic Load Balancing Developer Guide.
+ *           * `ListenerDescriptions` &mdash; (`Array<map>`)
+ *             LoadBalancerPort, InstancePort, Protocol, InstanceProtocol,
+ *             and PolicyNames are returned in a list of tuples in the
+ *             ListenerDescriptions element.
+ *               * `Listener` &mdash; (`map`)
+ *                   * `Protocol` &mdash; (`String`) Specifies the
+ *                     LoadBalancer transport protocol to use for routing -
+ *                     HTTP, HTTPS, TCP or SSL. This property cannot be
+ *                     modified for the life of the LoadBalancer.
+ *                   * `LoadBalancerPort` &mdash; (`Integer`) Specifies the
+ *                     external LoadBalancer port number. This property
+ *                     cannot be modified for the life of the LoadBalancer.
+ *                   * `InstanceProtocol` &mdash; (`String`) Specifies the
+ *                     protocol to use for routing traffic to back-end
+ *                     instances - HTTP, HTTPS, TCP, or SSL. This property
+ *                     cannot be modified for the life of the LoadBalancer.
+ *                     If the front-end protocol is HTTP or HTTPS,
+ *                     InstanceProtocol has to be at the same protocol
+ *                     layer, i.e., HTTP or HTTPS. Likewise, if the
+ *                     front-end protocol is TCP or SSL, InstanceProtocol
+ *                     has to be TCP or SSL. If there is another listener
+ *                     with the same InstancePort whose InstanceProtocol is
+ *                     secure, i.e., HTTPS or SSL, the listener's
+ *                     InstanceProtocol has to be secure, i.e., HTTPS or
+ *                     SSL. If there is another listener with the same
+ *                     InstancePort whose InstanceProtocol is HTTP or TCP,
+ *                     the listener's InstanceProtocol must be either HTTP
+ *                     or TCP.
+ *                   * `InstancePort` &mdash; (`Integer`) Specifies the TCP
+ *                     port on which the instance server is listening. This
+ *                     property cannot be modified for the life of the
+ *                     LoadBalancer.
+ *                   * `SSLCertificateId` &mdash; (`String`) The ARN string
+ *                     of the server certificate. To get the ARN of the
+ *                     server certificate, call the AWS Identity and Access
+ *                     Management UploadServerCertificate API.
+ *               * `PolicyNames` &mdash; (`Array<String>`) A list of
+ *                 policies enabled for this listener. An empty list
+ *                 indicates that no policies are enabled.
+ *           * `Policies` &mdash; (`map`) Provides a list of policies
+ *             defined for the LoadBalancer.
+ *               * `AppCookieStickinessPolicies` &mdash; (`Array<map>`) A
+ *                 list of the AppCookieStickinessPolicy objects created
+ *                 with CreateAppCookieStickinessPolicy.
+ *                   * `PolicyName` &mdash; (`String`) The mnemonic name
+ *                     for the policy being created. The name must be
+ *                     unique within a set of policies for this
+ *                     LoadBalancer.
+ *                   * `CookieName` &mdash; (`String`) The name of the
+ *                     application cookie used for stickiness.
+ *               * `LBCookieStickinessPolicies` &mdash; (`Array<map>`) A
+ *                 list of LBCookieStickinessPolicy objects created with
+ *                 CreateAppCookieStickinessPolicy.
+ *                   * `PolicyName` &mdash; (`String`) The name for the
+ *                     policy being created. The name must be unique within
+ *                     the set of policies for this LoadBalancer.
+ *                   * `CookieExpirationPeriod` &mdash; (`Integer`) The
+ *                     time period in seconds after which the cookie should
+ *                     be considered stale. Not specifying this parameter
+ *                     indicates that the stickiness session will last for
+ *                     the duration of the browser session.
+ *               * `OtherPolicies` &mdash; (`Array<String>`) A list of
+ *                 policy names other than the stickiness policies.
+ *           * `BackendServerDescriptions` &mdash; (`Array<map>`) Contains
+ *             a list of back-end server descriptions.
+ *               * `InstancePort` &mdash; (`Integer`) Provides the port on
+ *                 which the back-end server is listening.
+ *               * `PolicyNames` &mdash; (`Array<String>`) Provides a list
+ *                 of policy names enabled for the back-end server.
+ *           * `AvailabilityZones` &mdash; (`Array<String>`) Specifies a
+ *             list of Availability Zones.
+ *           * `Subnets` &mdash; (`Array<String>`) Provides a list of VPC
+ *             subnet IDs for the LoadBalancer.
+ *           * `VPCId` &mdash; (`String`) Provides the ID of the VPC
+ *             attached to the LoadBalancer.
+ *           * `Instances` &mdash; (`Array<map>`) Provides a list of EC2
+ *             instance IDs for the LoadBalancer.
+ *               * `InstanceId` &mdash; (`String`) Provides an EC2 instance
+ *                 ID.
+ *           * `HealthCheck` &mdash; (`map`) Specifies information
+ *             regarding the various health probes conducted on the
+ *             LoadBalancer.
+ *               * `Target` &mdash; (`String`) Specifies the instance being
+ *                 checked. The protocol is either TCP, HTTP, HTTPS, or
+ *                 SSL. The range of valid ports is one (1) through 65535.
+ *                 TCP is the default, specified as a TCP: port pair, for
+ *                 example "TCP:5000". In this case a healthcheck simply
+ *                 attempts to open a TCP connection to the instance on the
+ *                 specified port. Failure to connect within the configured
+ *                 timeout is considered unhealthy. SSL is also specified
+ *                 as SSL: port pair, for example, SSL:5000. For HTTP or
+ *                 HTTPS protocol, the situation is different. You have to
+ *                 include a ping path in the string. HTTP is specified as
+ *                 a HTTP:port;/;PathToPing; grouping, for example
+ *                 "HTTP:80/weather/us/wa/seattle". In this case, a HTTP
+ *                 GET request is issued to the instance on the given port
+ *                 and path. Any answer other than "200 OK" within the
+ *                 timeout period is considered unhealthy. The total length
+ *                 of the HTTP ping target needs to be 1024 16-bit Unicode
+ *                 characters or less.
+ *               * `Interval` &mdash; (`Integer`) Specifies the approximate
+ *                 interval, in seconds, between health checks of an
+ *                 individual instance.
+ *               * `Timeout` &mdash; (`Integer`) Specifies the amount of
+ *                 time, in seconds, during which no response means a
+ *                 failed health probe. This value must be less than the
+ *                 Interval value.
+ *               * `UnhealthyThreshold` &mdash; (`Integer`) Specifies the
+ *                 number of consecutive health probe failures required
+ *                 before moving the instance to the Unhealthy state.
+ *               * `HealthyThreshold` &mdash; (`Integer`) Specifies the
+ *                 number of consecutive health probe successes required
+ *                 before moving the instance to the Healthy state.
+ *           * `SourceSecurityGroup` &mdash; (`map`) The security group
+ *             that you can use as part of your inbound rules for your
+ *             LoadBalancer's back-end Amazon EC2 application instances. To
+ *             only allow traffic from LoadBalancers, add a security group
+ *             rule to your back end instance that specifies this source
+ *             security group as the inbound source.
+ *               * `OwnerAlias` &mdash; (`String`) Owner of the source
+ *                 security group. Use this value for the
+ *                 \--source-group-user parameter of the ec2-authorize
+ *                 command in the Amazon EC2 command line tool.
+ *               * `GroupName` &mdash; (`String`) Name of the source
+ *                 security group. Use this value for the --source-group
+ *                 parameter of the ec2-authorize command in the Amazon EC2
+ *                 command line tool.
+ *           * `SecurityGroups` &mdash; (`Array<String>`) The security
+ *             groups the LoadBalancer is a member of (VPC only).
+ *           * `CreatedTime` &mdash; (`Date`) Provides the date and time
+ *             the LoadBalancer was created.
+ *           * `Scheme` &mdash; (`String`) Specifies the type of a load
+ *             balancer. If it is internet-facing, the load balancer has a
+ *             publicly resolvable DNS name that resolves to public IP
+ *             addresses. If it is internal, the load balancer has a
+ *             publicly resolvable DNS name that resolves to private IP
+ *             addresses. This option is only available for load balancers
+ *             attached to a VPC.
  *       * `NextMarker` &mdash; (`String`) An optional parameter reserved
  *         for future use.
  *   @return [AWS.Request] a handle to the operation request for
@@ -833,7 +847,7 @@ AWS.ELB = inherit({})
  *       balancer with your instance after you've restarted. To
  *       de-register your instances from load balancer, use
  *       DeregisterInstancesFromLoadBalancer action.
- *       * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
+ *         * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -846,7 +860,7 @@ AWS.ELB = inherit({})
  *
  *       * `Instances` &mdash; (`Array<map>`) An updated list of instances
  *         for the LoadBalancer.
- *         * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
+ *           * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
