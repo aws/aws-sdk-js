@@ -66,7 +66,7 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DomainStatus` &mdash; (`Object`)
+ *       * `DomainStatus` &mdash; (`map`)
  *         * `DomainId` &mdash; (`String`)
  *         * `DomainName` &mdash; (`String`)
  *         * `Created` &mdash; (`Boolean`) True if the search domain is
@@ -82,11 +82,11 @@ AWS.CloudSearch = inherit({})
  *           is complete.
  *         * `NumSearchableDocs` &mdash; (`Integer`) The number of
  *           documents that have been submitted to the domain and indexed.
- *         * `DocService` &mdash; (`Object`) The service endpoint for
- *           updating documents in a search domain.
+ *         * `DocService` &mdash; (`map`) The service endpoint for updating
+ *           documents in a search domain.
  *           * `Arn` &mdash; (`String`)
  *           * `Endpoint` &mdash; (`String`)
- *         * `SearchService` &mdash; (`Object`) The service endpoint for
+ *         * `SearchService` &mdash; (`map`) The service endpoint for
  *           requesting search results from a search domain.
  *           * `Arn` &mdash; (`String`)
  *           * `Endpoint` &mdash; (`String`)
@@ -109,7 +109,7 @@ AWS.CloudSearch = inherit({})
  *   Calls the DefineIndexField API operation.
  *   @param params [Object]
  *     * `DomainName` &mdash; **required** &mdash; (`String`)
- *     * `IndexField` &mdash; **required** &mdash; (`Object`)
+ *     * `IndexField` &mdash; **required** &mdash; (`map`)
  *       * `IndexFieldName` &mdash; **required** &mdash; (`String`) The
  *         name of a field in the search index. Field names must begin
  *         with a letter and can contain the following characters: a-z
@@ -120,12 +120,16 @@ AWS.CloudSearch = inherit({})
  *       * `IndexFieldType` &mdash; **required** &mdash; (`String`) The
  *         type of field. Based on this type, exactly one of the
  *         UIntOptions, LiteralOptions or TextOptions must be present.
- *       * `UIntOptions` &mdash; (`Object`) Options for an unsigned
- *         integer field. Present if IndexFieldType specifies the field
- *         is of type unsigned integer.
+ *         Possible values include:
+ *         * `uint`
+ *         * `literal`
+ *         * `text`
+ *       * `UIntOptions` &mdash; (`map`) Options for an unsigned integer
+ *         field. Present if IndexFieldType specifies the field is of
+ *         type unsigned integer.
  *         * `DefaultValue` &mdash; (`Integer`) The default value for an
  *           unsigned integer field. Optional.
- *       * `LiteralOptions` &mdash; (`Object`) Options for literal field.
+ *       * `LiteralOptions` &mdash; (`map`) Options for literal field.
  *         Present if IndexFieldType specifies the field is of type
  *         literal.
  *         * `DefaultValue` &mdash; (`String`) The default value for a
@@ -137,8 +141,8 @@ AWS.CloudSearch = inherit({})
  *         * `ResultEnabled` &mdash; (`Boolean`) Specifies whether values
  *           of this field can be returned in search results and used for
  *           ranking. Default: False.
- *       * `TextOptions` &mdash; (`Object`) Options for text field.
- *         Present if IndexFieldType specifies the field is of type text.
+ *       * `TextOptions` &mdash; (`map`) Options for text field. Present
+ *         if IndexFieldType specifies the field is of type text.
  *         * `DefaultValue` &mdash; (`String`) The default value for a
  *           text field. Optional.
  *         * `FacetEnabled` &mdash; (`Boolean`) Specifies whether facets
@@ -150,25 +154,29 @@ AWS.CloudSearch = inherit({})
  *           apply to this field. Optional. Possible values:
  *           cs_text_no_stemming: turns off stemming for the field.
  *           Default: none
- *       * `SourceAttributes` &mdash; (`Array<Object>`) An optional list
- *         of source attributes that provide data for this index field.
- *         If not specified, the data is pulled from a source attribute
- *         with the same name as this IndexField. When one or more source
+ *       * `SourceAttributes` &mdash; (`Array<map>`) An optional list of
+ *         source attributes that provide data for this index field. If
+ *         not specified, the data is pulled from a source attribute with
+ *         the same name as this IndexField. When one or more source
  *         attributes are specified, an optional data transformation can
  *         be applied to the source data when populating the index field.
  *         You can configure a maximum of 20 sources for an IndexField.
  *         * `SourceDataFunction` &mdash; **required** &mdash; (`String`)
  *           Identifies the transformation to apply when copying data
  *           from a source attribute.
- *         * `SourceDataCopy` &mdash; (`Object`) Copies data from a
- *           source document attribute to an IndexField.
+ *           Possible values include:
+ *           * `Copy`
+ *           * `TrimTitle`
+ *           * `Map`
+ *         * `SourceDataCopy` &mdash; (`map`) Copies data from a source
+ *           document attribute to an IndexField.
  *           * `SourceName` &mdash; **required** &mdash; (`String`) The
  *             name of the document source field to add to this
  *             IndexField.
  *           * `DefaultValue` &mdash; (`String`) The default value to use
  *             if the source attribute is not specified in a document.
  *             Optional.
- *         * `SourceDataTrimTitle` &mdash; (`Object`) Trims common title
+ *         * `SourceDataTrimTitle` &mdash; (`map`) Trims common title
  *           words from a source document attribute when populating an
  *           IndexField. This can be used to create an IndexField you can
  *           use for sorting.
@@ -181,7 +189,7 @@ AWS.CloudSearch = inherit({})
  *           * `Separator` &mdash; (`String`) The separator that follows
  *             the text to trim.
  *           * `Language` &mdash; (`String`)
- *         * `SourceDataMap` &mdash; (`Object`) Maps source document
+ *         * `SourceDataMap` &mdash; (`map`) Maps source document
  *           attribute values to new values when populating the
  *           IndexField.
  *           * `SourceName` &mdash; **required** &mdash; (`String`) The
@@ -190,7 +198,7 @@ AWS.CloudSearch = inherit({})
  *           * `DefaultValue` &mdash; (`String`) The default value to use
  *             if the source attribute is not specified in a document.
  *             Optional.
- *           * `Cases` &mdash; (`Object<String>`) A map that translates
+ *           * `Cases` &mdash; (`map<String>`) A map that translates
  *             source field values to custom values.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -202,8 +210,8 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `IndexField` &mdash; (`Object`)
- *         * `Options` &mdash; (`Object`)
+ *       * `IndexField` &mdash; (`map`)
+ *         * `Options` &mdash; (`map`)
  *           * `IndexFieldName` &mdash; (`String`) The name of a field in
  *             the search index. Field names must begin with a letter and
  *             can contain the following characters: a-z (lowercase), 0-9,
@@ -214,14 +222,18 @@ AWS.CloudSearch = inherit({})
  *           * `IndexFieldType` &mdash; (`String`) The type of field. Based
  *             on this type, exactly one of the UIntOptions, LiteralOptions
  *             or TextOptions must be present.
- *           * `UIntOptions` &mdash; (`Object`) Options for an unsigned
+ *             Possible values include:
+ *             * `uint`
+ *             * `literal`
+ *             * `text`
+ *           * `UIntOptions` &mdash; (`map`) Options for an unsigned
  *             integer field. Present if IndexFieldType specifies the field
  *             is of type unsigned integer.
  *             * `DefaultValue` &mdash; (`Integer`) The default value for
  *               an unsigned integer field. Optional.
- *           * `LiteralOptions` &mdash; (`Object`) Options for literal
- *             field. Present if IndexFieldType specifies the field is of
- *             type literal.
+ *           * `LiteralOptions` &mdash; (`map`) Options for literal field.
+ *             Present if IndexFieldType specifies the field is of type
+ *             literal.
  *             * `DefaultValue` &mdash; (`String`) The default value for a
  *               literal field. Optional.
  *             * `SearchEnabled` &mdash; (`Boolean`) Specifies whether
@@ -231,7 +243,7 @@ AWS.CloudSearch = inherit({})
  *             * `ResultEnabled` &mdash; (`Boolean`) Specifies whether
  *               values of this field can be returned in search results and
  *               used for ranking. Default: False.
- *           * `TextOptions` &mdash; (`Object`) Options for text field.
+ *           * `TextOptions` &mdash; (`map`) Options for text field.
  *             Present if IndexFieldType specifies the field is of type
  *             text.
  *             * `DefaultValue` &mdash; (`String`) The default value for a
@@ -245,28 +257,32 @@ AWS.CloudSearch = inherit({})
  *               apply to this field. Optional. Possible values:
  *               cs_text_no_stemming: turns off stemming for the field.
  *               Default: none
- *           * `SourceAttributes` &mdash; (`Array<Object>`) An optional
- *             list of source attributes that provide data for this index
- *             field. If not specified, the data is pulled from a source
- *             attribute with the same name as this IndexField. When one or
- *             more source attributes are specified, an optional data
+ *           * `SourceAttributes` &mdash; (`Array<map>`) An optional list
+ *             of source attributes that provide data for this index field.
+ *             If not specified, the data is pulled from a source attribute
+ *             with the same name as this IndexField. When one or more
+ *             source attributes are specified, an optional data
  *             transformation can be applied to the source data when
  *             populating the index field. You can configure a maximum of
  *             20 sources for an IndexField.
  *             * `SourceDataFunction` &mdash; (`String`) Identifies the
  *               transformation to apply when copying data from a source
  *               attribute.
- *             * `SourceDataCopy` &mdash; (`Object`) Copies data from a
- *               source document attribute to an IndexField.
+ *               Possible values include:
+ *               * `Copy`
+ *               * `TrimTitle`
+ *               * `Map`
+ *             * `SourceDataCopy` &mdash; (`map`) Copies data from a source
+ *               document attribute to an IndexField.
  *               * `SourceName` &mdash; (`String`) The name of the document
  *                 source field to add to this IndexField.
  *               * `DefaultValue` &mdash; (`String`) The default value to
  *                 use if the source attribute is not specified in a
  *                 document. Optional.
- *             * `SourceDataTrimTitle` &mdash; (`Object`) Trims common
- *               title words from a source document attribute when
- *               populating an IndexField. This can be used to create an
- *               IndexField you can use for sorting.
+ *             * `SourceDataTrimTitle` &mdash; (`map`) Trims common title
+ *               words from a source document attribute when populating an
+ *               IndexField. This can be used to create an IndexField you
+ *               can use for sorting.
  *               * `SourceName` &mdash; (`String`) The name of the document
  *                 source field to add to this IndexField.
  *               * `DefaultValue` &mdash; (`String`) The default value to
@@ -275,7 +291,7 @@ AWS.CloudSearch = inherit({})
  *               * `Separator` &mdash; (`String`) The separator that
  *                 follows the text to trim.
  *               * `Language` &mdash; (`String`)
- *             * `SourceDataMap` &mdash; (`Object`) Maps source document
+ *             * `SourceDataMap` &mdash; (`map`) Maps source document
  *               attribute values to new values when populating the
  *               IndexField.
  *               * `SourceName` &mdash; (`String`) The name of the document
@@ -283,9 +299,9 @@ AWS.CloudSearch = inherit({})
  *               * `DefaultValue` &mdash; (`String`) The default value to
  *                 use if the source attribute is not specified in a
  *                 document. Optional.
- *               * `Cases` &mdash; (`Object<String>`) A map that translates
+ *               * `Cases` &mdash; (`map<String>`) A map that translates
  *                 source field values to custom values.
- *         * `Status` &mdash; (`Object`)
+ *         * `Status` &mdash; (`map`)
  *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
  *             option was created.
  *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
@@ -301,6 +317,10 @@ AWS.CloudSearch = inherit({})
  *             Active: the option's latest value is completely visible. Any
  *             warnings or messages generated during processing are
  *             provided in Diagnostics.
+ *             Possible values include:
+ *             * `RequiresIndexDocuments`
+ *             * `Processing`
+ *             * `Active`
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -310,7 +330,7 @@ AWS.CloudSearch = inherit({})
  *   Calls the DefineRankExpression API operation.
  *   @param params [Object]
  *     * `DomainName` &mdash; **required** &mdash; (`String`)
- *     * `RankExpression` &mdash; **required** &mdash; (`Object`)
+ *     * `RankExpression` &mdash; **required** &mdash; (`map`)
  *       * `RankName` &mdash; **required** &mdash; (`String`) The name of
  *         a rank expression. Rank expression names must begin with a
  *         letter and can contain the following characters: a-z
@@ -360,9 +380,9 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `RankExpression` &mdash; (`Object`)
- *         * `Options` &mdash; (`Object`) The expression that is evaluated
- *           for ranking or thresholding while processing a search request.
+ *       * `RankExpression` &mdash; (`map`)
+ *         * `Options` &mdash; (`map`) The expression that is evaluated for
+ *           ranking or thresholding while processing a search request.
  *           * `RankName` &mdash; (`String`) The name of a rank expression.
  *             Rank expression names must begin with a letter and can
  *             contain the following characters: a-z (lowercase), 0-9, and
@@ -402,7 +422,7 @@ AWS.CloudSearch = inherit({})
  *             matching IndexField in the document. For more information
  *             about using rank expressions to customize ranking, see the
  *             Amazon CloudSearch Developer Guide.
- *         * `Status` &mdash; (`Object`)
+ *         * `Status` &mdash; (`map`)
  *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
  *             option was created.
  *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
@@ -418,6 +438,10 @@ AWS.CloudSearch = inherit({})
  *             Active: the option's latest value is completely visible. Any
  *             warnings or messages generated during processing are
  *             provided in Diagnostics.
+ *             Possible values include:
+ *             * `RequiresIndexDocuments`
+ *             * `Processing`
+ *             * `Active`
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -437,7 +461,7 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DomainStatus` &mdash; (`Object`)
+ *       * `DomainStatus` &mdash; (`map`)
  *         * `DomainId` &mdash; (`String`)
  *         * `DomainName` &mdash; (`String`)
  *         * `Created` &mdash; (`Boolean`) True if the search domain is
@@ -453,11 +477,11 @@ AWS.CloudSearch = inherit({})
  *           is complete.
  *         * `NumSearchableDocs` &mdash; (`Integer`) The number of
  *           documents that have been submitted to the domain and indexed.
- *         * `DocService` &mdash; (`Object`) The service endpoint for
- *           updating documents in a search domain.
+ *         * `DocService` &mdash; (`map`) The service endpoint for updating
+ *           documents in a search domain.
  *           * `Arn` &mdash; (`String`)
  *           * `Endpoint` &mdash; (`String`)
- *         * `SearchService` &mdash; (`Object`) The service endpoint for
+ *         * `SearchService` &mdash; (`map`) The service endpoint for
  *           requesting search results from a search domain.
  *           * `Arn` &mdash; (`String`)
  *           * `Endpoint` &mdash; (`String`)
@@ -491,8 +515,8 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `IndexField` &mdash; (`Object`)
- *         * `Options` &mdash; (`Object`)
+ *       * `IndexField` &mdash; (`map`)
+ *         * `Options` &mdash; (`map`)
  *           * `IndexFieldName` &mdash; (`String`) The name of a field in
  *             the search index. Field names must begin with a letter and
  *             can contain the following characters: a-z (lowercase), 0-9,
@@ -503,14 +527,18 @@ AWS.CloudSearch = inherit({})
  *           * `IndexFieldType` &mdash; (`String`) The type of field. Based
  *             on this type, exactly one of the UIntOptions, LiteralOptions
  *             or TextOptions must be present.
- *           * `UIntOptions` &mdash; (`Object`) Options for an unsigned
+ *             Possible values include:
+ *             * `uint`
+ *             * `literal`
+ *             * `text`
+ *           * `UIntOptions` &mdash; (`map`) Options for an unsigned
  *             integer field. Present if IndexFieldType specifies the field
  *             is of type unsigned integer.
  *             * `DefaultValue` &mdash; (`Integer`) The default value for
  *               an unsigned integer field. Optional.
- *           * `LiteralOptions` &mdash; (`Object`) Options for literal
- *             field. Present if IndexFieldType specifies the field is of
- *             type literal.
+ *           * `LiteralOptions` &mdash; (`map`) Options for literal field.
+ *             Present if IndexFieldType specifies the field is of type
+ *             literal.
  *             * `DefaultValue` &mdash; (`String`) The default value for a
  *               literal field. Optional.
  *             * `SearchEnabled` &mdash; (`Boolean`) Specifies whether
@@ -520,7 +548,7 @@ AWS.CloudSearch = inherit({})
  *             * `ResultEnabled` &mdash; (`Boolean`) Specifies whether
  *               values of this field can be returned in search results and
  *               used for ranking. Default: False.
- *           * `TextOptions` &mdash; (`Object`) Options for text field.
+ *           * `TextOptions` &mdash; (`map`) Options for text field.
  *             Present if IndexFieldType specifies the field is of type
  *             text.
  *             * `DefaultValue` &mdash; (`String`) The default value for a
@@ -534,28 +562,32 @@ AWS.CloudSearch = inherit({})
  *               apply to this field. Optional. Possible values:
  *               cs_text_no_stemming: turns off stemming for the field.
  *               Default: none
- *           * `SourceAttributes` &mdash; (`Array<Object>`) An optional
- *             list of source attributes that provide data for this index
- *             field. If not specified, the data is pulled from a source
- *             attribute with the same name as this IndexField. When one or
- *             more source attributes are specified, an optional data
+ *           * `SourceAttributes` &mdash; (`Array<map>`) An optional list
+ *             of source attributes that provide data for this index field.
+ *             If not specified, the data is pulled from a source attribute
+ *             with the same name as this IndexField. When one or more
+ *             source attributes are specified, an optional data
  *             transformation can be applied to the source data when
  *             populating the index field. You can configure a maximum of
  *             20 sources for an IndexField.
  *             * `SourceDataFunction` &mdash; (`String`) Identifies the
  *               transformation to apply when copying data from a source
  *               attribute.
- *             * `SourceDataCopy` &mdash; (`Object`) Copies data from a
- *               source document attribute to an IndexField.
+ *               Possible values include:
+ *               * `Copy`
+ *               * `TrimTitle`
+ *               * `Map`
+ *             * `SourceDataCopy` &mdash; (`map`) Copies data from a source
+ *               document attribute to an IndexField.
  *               * `SourceName` &mdash; (`String`) The name of the document
  *                 source field to add to this IndexField.
  *               * `DefaultValue` &mdash; (`String`) The default value to
  *                 use if the source attribute is not specified in a
  *                 document. Optional.
- *             * `SourceDataTrimTitle` &mdash; (`Object`) Trims common
- *               title words from a source document attribute when
- *               populating an IndexField. This can be used to create an
- *               IndexField you can use for sorting.
+ *             * `SourceDataTrimTitle` &mdash; (`map`) Trims common title
+ *               words from a source document attribute when populating an
+ *               IndexField. This can be used to create an IndexField you
+ *               can use for sorting.
  *               * `SourceName` &mdash; (`String`) The name of the document
  *                 source field to add to this IndexField.
  *               * `DefaultValue` &mdash; (`String`) The default value to
@@ -564,7 +596,7 @@ AWS.CloudSearch = inherit({})
  *               * `Separator` &mdash; (`String`) The separator that
  *                 follows the text to trim.
  *               * `Language` &mdash; (`String`)
- *             * `SourceDataMap` &mdash; (`Object`) Maps source document
+ *             * `SourceDataMap` &mdash; (`map`) Maps source document
  *               attribute values to new values when populating the
  *               IndexField.
  *               * `SourceName` &mdash; (`String`) The name of the document
@@ -572,9 +604,9 @@ AWS.CloudSearch = inherit({})
  *               * `DefaultValue` &mdash; (`String`) The default value to
  *                 use if the source attribute is not specified in a
  *                 document. Optional.
- *               * `Cases` &mdash; (`Object<String>`) A map that translates
+ *               * `Cases` &mdash; (`map<String>`) A map that translates
  *                 source field values to custom values.
- *         * `Status` &mdash; (`Object`)
+ *         * `Status` &mdash; (`map`)
  *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
  *             option was created.
  *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
@@ -590,6 +622,10 @@ AWS.CloudSearch = inherit({})
  *             Active: the option's latest value is completely visible. Any
  *             warnings or messages generated during processing are
  *             provided in Diagnostics.
+ *             Possible values include:
+ *             * `RequiresIndexDocuments`
+ *             * `Processing`
+ *             * `Active`
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -611,9 +647,9 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `RankExpression` &mdash; (`Object`)
- *         * `Options` &mdash; (`Object`) The expression that is evaluated
- *           for ranking or thresholding while processing a search request.
+ *       * `RankExpression` &mdash; (`map`)
+ *         * `Options` &mdash; (`map`) The expression that is evaluated for
+ *           ranking or thresholding while processing a search request.
  *           * `RankName` &mdash; (`String`) The name of a rank expression.
  *             Rank expression names must begin with a letter and can
  *             contain the following characters: a-z (lowercase), 0-9, and
@@ -653,7 +689,7 @@ AWS.CloudSearch = inherit({})
  *             matching IndexField in the document. For more information
  *             about using rank expressions to customize ranking, see the
  *             Amazon CloudSearch Developer Guide.
- *         * `Status` &mdash; (`Object`)
+ *         * `Status` &mdash; (`map`)
  *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
  *             option was created.
  *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
@@ -669,6 +705,10 @@ AWS.CloudSearch = inherit({})
  *             Active: the option's latest value is completely visible. Any
  *             warnings or messages generated during processing are
  *             provided in Diagnostics.
+ *             Possible values include:
+ *             * `RequiresIndexDocuments`
+ *             * `Processing`
+ *             * `Active`
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -688,14 +728,14 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DefaultSearchField` &mdash; (`Object`) The name of the
- *         IndexField to use for search requests issued with the q
- *         parameter. The default is the empty string, which automatically
- *         searches all text fields.
+ *       * `DefaultSearchField` &mdash; (`map`) The name of the IndexField
+ *         to use for search requests issued with the q parameter. The
+ *         default is the empty string, which automatically searches all
+ *         text fields.
  *         * `Options` &mdash; (`String`) The name of the IndexField to use
  *           as the default search field. The default is an empty string,
  *           which automatically searches all text fields.
- *         * `Status` &mdash; (`Object`)
+ *         * `Status` &mdash; (`map`)
  *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
  *             option was created.
  *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
@@ -711,6 +751,10 @@ AWS.CloudSearch = inherit({})
  *             Active: the option's latest value is completely visible. Any
  *             warnings or messages generated during processing are
  *             provided in Diagnostics.
+ *             Possible values include:
+ *             * `RequiresIndexDocuments`
+ *             * `Processing`
+ *             * `Active`
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -731,7 +775,7 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DomainStatusList` &mdash; (`Array<Object>`)
+ *       * `DomainStatusList` &mdash; (`Array<map>`)
  *         * `DomainId` &mdash; (`String`)
  *         * `DomainName` &mdash; (`String`)
  *         * `Created` &mdash; (`Boolean`) True if the search domain is
@@ -747,11 +791,11 @@ AWS.CloudSearch = inherit({})
  *           is complete.
  *         * `NumSearchableDocs` &mdash; (`Integer`) The number of
  *           documents that have been submitted to the domain and indexed.
- *         * `DocService` &mdash; (`Object`) The service endpoint for
- *           updating documents in a search domain.
+ *         * `DocService` &mdash; (`map`) The service endpoint for updating
+ *           documents in a search domain.
  *           * `Arn` &mdash; (`String`)
  *           * `Endpoint` &mdash; (`String`)
- *         * `SearchService` &mdash; (`Object`) The service endpoint for
+ *         * `SearchService` &mdash; (`map`) The service endpoint for
  *           requesting search results from a search domain.
  *           * `Arn` &mdash; (`String`)
  *           * `Endpoint` &mdash; (`String`)
@@ -786,9 +830,9 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `IndexFields` &mdash; (`Array<Object>`) The index fields
- *         configured for the domain.
- *         * `Options` &mdash; (`Object`)
+ *       * `IndexFields` &mdash; (`Array<map>`) The index fields configured
+ *         for the domain.
+ *         * `Options` &mdash; (`map`)
  *           * `IndexFieldName` &mdash; (`String`) The name of a field in
  *             the search index. Field names must begin with a letter and
  *             can contain the following characters: a-z (lowercase), 0-9,
@@ -799,14 +843,18 @@ AWS.CloudSearch = inherit({})
  *           * `IndexFieldType` &mdash; (`String`) The type of field. Based
  *             on this type, exactly one of the UIntOptions, LiteralOptions
  *             or TextOptions must be present.
- *           * `UIntOptions` &mdash; (`Object`) Options for an unsigned
+ *             Possible values include:
+ *             * `uint`
+ *             * `literal`
+ *             * `text`
+ *           * `UIntOptions` &mdash; (`map`) Options for an unsigned
  *             integer field. Present if IndexFieldType specifies the field
  *             is of type unsigned integer.
  *             * `DefaultValue` &mdash; (`Integer`) The default value for
  *               an unsigned integer field. Optional.
- *           * `LiteralOptions` &mdash; (`Object`) Options for literal
- *             field. Present if IndexFieldType specifies the field is of
- *             type literal.
+ *           * `LiteralOptions` &mdash; (`map`) Options for literal field.
+ *             Present if IndexFieldType specifies the field is of type
+ *             literal.
  *             * `DefaultValue` &mdash; (`String`) The default value for a
  *               literal field. Optional.
  *             * `SearchEnabled` &mdash; (`Boolean`) Specifies whether
@@ -816,7 +864,7 @@ AWS.CloudSearch = inherit({})
  *             * `ResultEnabled` &mdash; (`Boolean`) Specifies whether
  *               values of this field can be returned in search results and
  *               used for ranking. Default: False.
- *           * `TextOptions` &mdash; (`Object`) Options for text field.
+ *           * `TextOptions` &mdash; (`map`) Options for text field.
  *             Present if IndexFieldType specifies the field is of type
  *             text.
  *             * `DefaultValue` &mdash; (`String`) The default value for a
@@ -830,28 +878,32 @@ AWS.CloudSearch = inherit({})
  *               apply to this field. Optional. Possible values:
  *               cs_text_no_stemming: turns off stemming for the field.
  *               Default: none
- *           * `SourceAttributes` &mdash; (`Array<Object>`) An optional
- *             list of source attributes that provide data for this index
- *             field. If not specified, the data is pulled from a source
- *             attribute with the same name as this IndexField. When one or
- *             more source attributes are specified, an optional data
+ *           * `SourceAttributes` &mdash; (`Array<map>`) An optional list
+ *             of source attributes that provide data for this index field.
+ *             If not specified, the data is pulled from a source attribute
+ *             with the same name as this IndexField. When one or more
+ *             source attributes are specified, an optional data
  *             transformation can be applied to the source data when
  *             populating the index field. You can configure a maximum of
  *             20 sources for an IndexField.
  *             * `SourceDataFunction` &mdash; (`String`) Identifies the
  *               transformation to apply when copying data from a source
  *               attribute.
- *             * `SourceDataCopy` &mdash; (`Object`) Copies data from a
- *               source document attribute to an IndexField.
+ *               Possible values include:
+ *               * `Copy`
+ *               * `TrimTitle`
+ *               * `Map`
+ *             * `SourceDataCopy` &mdash; (`map`) Copies data from a source
+ *               document attribute to an IndexField.
  *               * `SourceName` &mdash; (`String`) The name of the document
  *                 source field to add to this IndexField.
  *               * `DefaultValue` &mdash; (`String`) The default value to
  *                 use if the source attribute is not specified in a
  *                 document. Optional.
- *             * `SourceDataTrimTitle` &mdash; (`Object`) Trims common
- *               title words from a source document attribute when
- *               populating an IndexField. This can be used to create an
- *               IndexField you can use for sorting.
+ *             * `SourceDataTrimTitle` &mdash; (`map`) Trims common title
+ *               words from a source document attribute when populating an
+ *               IndexField. This can be used to create an IndexField you
+ *               can use for sorting.
  *               * `SourceName` &mdash; (`String`) The name of the document
  *                 source field to add to this IndexField.
  *               * `DefaultValue` &mdash; (`String`) The default value to
@@ -860,7 +912,7 @@ AWS.CloudSearch = inherit({})
  *               * `Separator` &mdash; (`String`) The separator that
  *                 follows the text to trim.
  *               * `Language` &mdash; (`String`)
- *             * `SourceDataMap` &mdash; (`Object`) Maps source document
+ *             * `SourceDataMap` &mdash; (`map`) Maps source document
  *               attribute values to new values when populating the
  *               IndexField.
  *               * `SourceName` &mdash; (`String`) The name of the document
@@ -868,9 +920,9 @@ AWS.CloudSearch = inherit({})
  *               * `DefaultValue` &mdash; (`String`) The default value to
  *                 use if the source attribute is not specified in a
  *                 document. Optional.
- *               * `Cases` &mdash; (`Object<String>`) A map that translates
+ *               * `Cases` &mdash; (`map<String>`) A map that translates
  *                 source field values to custom values.
- *         * `Status` &mdash; (`Object`)
+ *         * `Status` &mdash; (`map`)
  *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
  *             option was created.
  *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
@@ -886,6 +938,10 @@ AWS.CloudSearch = inherit({})
  *             Active: the option's latest value is completely visible. Any
  *             warnings or messages generated during processing are
  *             provided in Diagnostics.
+ *             Possible values include:
+ *             * `RequiresIndexDocuments`
+ *             * `Processing`
+ *             * `Active`
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -907,10 +963,10 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `RankExpressions` &mdash; (`Array<Object>`) The rank expressions
+ *       * `RankExpressions` &mdash; (`Array<map>`) The rank expressions
  *         configured for the domain.
- *         * `Options` &mdash; (`Object`) The expression that is evaluated
- *           for ranking or thresholding while processing a search request.
+ *         * `Options` &mdash; (`map`) The expression that is evaluated for
+ *           ranking or thresholding while processing a search request.
  *           * `RankName` &mdash; (`String`) The name of a rank expression.
  *             Rank expression names must begin with a letter and can
  *             contain the following characters: a-z (lowercase), 0-9, and
@@ -950,7 +1006,7 @@ AWS.CloudSearch = inherit({})
  *             matching IndexField in the document. For more information
  *             about using rank expressions to customize ranking, see the
  *             Amazon CloudSearch Developer Guide.
- *         * `Status` &mdash; (`Object`)
+ *         * `Status` &mdash; (`map`)
  *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
  *             option was created.
  *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
@@ -966,6 +1022,10 @@ AWS.CloudSearch = inherit({})
  *             Active: the option's latest value is completely visible. Any
  *             warnings or messages generated during processing are
  *             provided in Diagnostics.
+ *             Possible values include:
+ *             * `RequiresIndexDocuments`
+ *             * `Processing`
+ *             * `Active`
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -985,9 +1045,9 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `AccessPolicies` &mdash; (`Object`)
+ *       * `AccessPolicies` &mdash; (`map`)
  *         * `Options` &mdash; (`String`)
- *         * `Status` &mdash; (`Object`)
+ *         * `Status` &mdash; (`map`)
  *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
  *             option was created.
  *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
@@ -1003,6 +1063,10 @@ AWS.CloudSearch = inherit({})
  *             Active: the option's latest value is completely visible. Any
  *             warnings or messages generated during processing are
  *             provided in Diagnostics.
+ *             Possible values include:
+ *             * `RequiresIndexDocuments`
+ *             * `Processing`
+ *             * `Active`
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1022,9 +1086,9 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Stems` &mdash; (`Object`)
+ *       * `Stems` &mdash; (`map`)
  *         * `Options` &mdash; (`String`)
- *         * `Status` &mdash; (`Object`)
+ *         * `Status` &mdash; (`map`)
  *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
  *             option was created.
  *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
@@ -1040,6 +1104,10 @@ AWS.CloudSearch = inherit({})
  *             Active: the option's latest value is completely visible. Any
  *             warnings or messages generated during processing are
  *             provided in Diagnostics.
+ *             Possible values include:
+ *             * `RequiresIndexDocuments`
+ *             * `Processing`
+ *             * `Active`
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1059,9 +1127,9 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Stopwords` &mdash; (`Object`)
+ *       * `Stopwords` &mdash; (`map`)
  *         * `Options` &mdash; (`String`)
- *         * `Status` &mdash; (`Object`)
+ *         * `Status` &mdash; (`map`)
  *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
  *             option was created.
  *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
@@ -1077,6 +1145,10 @@ AWS.CloudSearch = inherit({})
  *             Active: the option's latest value is completely visible. Any
  *             warnings or messages generated during processing are
  *             provided in Diagnostics.
+ *             Possible values include:
+ *             * `RequiresIndexDocuments`
+ *             * `Processing`
+ *             * `Active`
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1096,9 +1168,9 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Synonyms` &mdash; (`Object`)
+ *       * `Synonyms` &mdash; (`map`)
  *         * `Options` &mdash; (`String`)
- *         * `Status` &mdash; (`Object`)
+ *         * `Status` &mdash; (`map`)
  *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
  *             option was created.
  *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
@@ -1114,6 +1186,10 @@ AWS.CloudSearch = inherit({})
  *             Active: the option's latest value is completely visible. Any
  *             warnings or messages generated during processing are
  *             provided in Diagnostics.
+ *             Possible values include:
+ *             * `RequiresIndexDocuments`
+ *             * `Processing`
+ *             * `Active`
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1157,11 +1233,11 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DefaultSearchField` &mdash; (`Object`)
+ *       * `DefaultSearchField` &mdash; (`map`)
  *         * `Options` &mdash; (`String`) The name of the IndexField to use
  *           as the default search field. The default is an empty string,
  *           which automatically searches all text fields.
- *         * `Status` &mdash; (`Object`)
+ *         * `Status` &mdash; (`map`)
  *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
  *             option was created.
  *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
@@ -1177,6 +1253,10 @@ AWS.CloudSearch = inherit({})
  *             Active: the option's latest value is completely visible. Any
  *             warnings or messages generated during processing are
  *             provided in Diagnostics.
+ *             Possible values include:
+ *             * `RequiresIndexDocuments`
+ *             * `Processing`
+ *             * `Active`
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1197,9 +1277,9 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `AccessPolicies` &mdash; (`Object`)
+ *       * `AccessPolicies` &mdash; (`map`)
  *         * `Options` &mdash; (`String`)
- *         * `Status` &mdash; (`Object`)
+ *         * `Status` &mdash; (`map`)
  *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
  *             option was created.
  *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
@@ -1215,6 +1295,10 @@ AWS.CloudSearch = inherit({})
  *             Active: the option's latest value is completely visible. Any
  *             warnings or messages generated during processing are
  *             provided in Diagnostics.
+ *             Possible values include:
+ *             * `RequiresIndexDocuments`
+ *             * `Processing`
+ *             * `Active`
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1235,9 +1319,9 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Stems` &mdash; (`Object`)
+ *       * `Stems` &mdash; (`map`)
  *         * `Options` &mdash; (`String`)
- *         * `Status` &mdash; (`Object`)
+ *         * `Status` &mdash; (`map`)
  *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
  *             option was created.
  *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
@@ -1253,6 +1337,10 @@ AWS.CloudSearch = inherit({})
  *             Active: the option's latest value is completely visible. Any
  *             warnings or messages generated during processing are
  *             provided in Diagnostics.
+ *             Possible values include:
+ *             * `RequiresIndexDocuments`
+ *             * `Processing`
+ *             * `Active`
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1273,9 +1361,9 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Stopwords` &mdash; (`Object`)
+ *       * `Stopwords` &mdash; (`map`)
  *         * `Options` &mdash; (`String`)
- *         * `Status` &mdash; (`Object`)
+ *         * `Status` &mdash; (`map`)
  *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
  *             option was created.
  *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
@@ -1291,6 +1379,10 @@ AWS.CloudSearch = inherit({})
  *             Active: the option's latest value is completely visible. Any
  *             warnings or messages generated during processing are
  *             provided in Diagnostics.
+ *             Possible values include:
+ *             * `RequiresIndexDocuments`
+ *             * `Processing`
+ *             * `Active`
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1311,9 +1403,9 @@ AWS.CloudSearch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Synonyms` &mdash; (`Object`)
+ *       * `Synonyms` &mdash; (`map`)
  *         * `Options` &mdash; (`String`)
- *         * `Status` &mdash; (`Object`)
+ *         * `Status` &mdash; (`map`)
  *           * `CreationDate` &mdash; (`Date`) A timestamp for when this
  *             option was created.
  *           * `UpdateDate` &mdash; (`Date`) A timestamp for when this
@@ -1329,6 +1421,10 @@ AWS.CloudSearch = inherit({})
  *             Active: the option's latest value is completely visible. Any
  *             warnings or messages generated during processing are
  *             provided in Diagnostics.
+ *             Possible values include:
+ *             * `RequiresIndexDocuments`
+ *             * `Processing`
+ *             * `Active`
  *           * `PendingDeletion` &mdash; (`Boolean`) Indicates that the
  *             option will be deleted once processing is complete.
  *   @return [AWS.Request] a handle to the operation request for

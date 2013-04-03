@@ -150,11 +150,11 @@ AWS.DataPipeline = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `pipelineObjects` &mdash; (`Array<Object>`) An array of object
+ *       * `pipelineObjects` &mdash; (`Array<map>`) An array of object
  *         definitions that are returned by the call to DescribeObjects.
  *         * `id` &mdash; (`String`) Identifier of the object.
  *         * `name` &mdash; (`String`) Name of the object.
- *         * `fields` &mdash; (`Array<Object>`) Key-value pairs that define
+ *         * `fields` &mdash; (`Array<map>`) Key-value pairs that define
  *           the properties of the object.
  *           * `key` &mdash; (`String`) The field identifier.
  *           * `stringValue` &mdash; (`String`) The field value, expressed
@@ -186,13 +186,13 @@ AWS.DataPipeline = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `pipelineDescriptionList` &mdash; (`Array<Object>`) An array of
+ *       * `pipelineDescriptionList` &mdash; (`Array<map>`) An array of
  *         descriptions returned for the specified pipelines.
  *         * `pipelineId` &mdash; (`String`) The pipeline identifier that
  *           was assigned by AWS Data Pipeline. This is a string of the
  *           form df-297EG78HU43EEXAMPLE.
  *         * `name` &mdash; (`String`) Name of the pipeline.
- *         * `fields` &mdash; (`Array<Object>`) A list of read-only fields
+ *         * `fields` &mdash; (`Array<map>`) A list of read-only fields
  *           that contain metadata about the pipeline: @userId, @accountId,
  *           and @pipelineState.
  *           * `key` &mdash; (`String`) The field identifier.
@@ -245,11 +245,11 @@ AWS.DataPipeline = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `pipelineObjects` &mdash; (`Array<Object>`) An array of objects
+ *       * `pipelineObjects` &mdash; (`Array<map>`) An array of objects
  *         defined in the pipeline.
  *         * `id` &mdash; (`String`) Identifier of the object.
  *         * `name` &mdash; (`String`) Name of the object.
- *         * `fields` &mdash; (`Array<Object>`) Key-value pairs that define
+ *         * `fields` &mdash; (`Array<map>`) Key-value pairs that define
  *           the properties of the object.
  *           * `key` &mdash; (`String`) The field identifier.
  *           * `stringValue` &mdash; (`String`) The field value, expressed
@@ -278,7 +278,7 @@ AWS.DataPipeline = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `pipelineIdList` &mdash; (`Array<Object>`) A list of all the
+ *       * `pipelineIdList` &mdash; (`Array<map>`) A list of all the
  *         pipeline identifiers that your account has permission to access.
  *         If you require additional information about the pipelines, you
  *         can use these identifiers to call DescribePipelines and
@@ -309,9 +309,9 @@ AWS.DataPipeline = inherit({})
  *       exact, case-sensitive, match.
  *     * `hostname` &mdash; (`String`) The public DNS name of the calling
  *       task runner.
- *     * `instanceIdentity` &mdash; (`Object`) Identity information for
- *       the Amazon EC2 instance that is hosting the task runner. You can
- *       get this value by calling the URI,
+ *     * `instanceIdentity` &mdash; (`map`) Identity information for the
+ *       Amazon EC2 instance that is hosting the task runner. You can get
+ *       this value by calling the URI,
  *       http://169.254.169.254/latest/meta-data/instance-id, from the
  *       EC2 instance. For more information, go to Instance Metadata in
  *       the Amazon Elastic Compute Cloud User Guide. Passing in this
@@ -335,14 +335,13 @@ AWS.DataPipeline = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `taskObject` &mdash; (`Object`) An instance of
- *         PollForTaskResult, which contains an instance of TaskObject. The
- *         returned object contains all the information needed to complete
- *         the task that is being assigned to the task runner. One of the
- *         fields returned in this object is taskId, which contains an
- *         identifier for the task being assigned. The calling task runner
- *         uses taskId in subsequent calls to ReportTaskProgress and
- *         SetTaskStatus.
+ *       * `taskObject` &mdash; (`map`) An instance of PollForTaskResult,
+ *         which contains an instance of TaskObject. The returned object
+ *         contains all the information needed to complete the task that is
+ *         being assigned to the task runner. One of the fields returned in
+ *         this object is taskId, which contains an identifier for the task
+ *         being assigned. The calling task runner uses taskId in
+ *         subsequent calls to ReportTaskProgress and SetTaskStatus.
  *         * `taskId` &mdash; (`String`) An internal identifier for the
  *           task. This ID is passed to the SetTaskStatus and
  *           ReportTaskProgress actions.
@@ -351,13 +350,13 @@ AWS.DataPipeline = inherit({})
  *         * `attemptId` &mdash; (`String`) Identifier of the pipeline task
  *           attempt object. AWS Data Pipeline uses this value to track how
  *           many times a task is attempted.
- *         * `objects` &mdash; (`Object<Object>`) Connection information
- *           for the location where the task runner will publish the output
- *           of the task.
+ *         * `objects` &mdash; (`map<map>`) Connection information for the
+ *           location where the task runner will publish the output of the
+ *           task.
  *           * `id` &mdash; (`String`) Identifier of the object.
  *           * `name` &mdash; (`String`) Name of the object.
- *           * `fields` &mdash; (`Array<Object>`) Key-value pairs that
- *             define the properties of the object.
+ *           * `fields` &mdash; (`Array<map>`) Key-value pairs that define
+ *             the properties of the object.
  *             * `key` &mdash; (`String`) The field identifier.
  *             * `stringValue` &mdash; (`String`) The field value,
  *               expressed as a String.
@@ -371,15 +370,15 @@ AWS.DataPipeline = inherit({})
  *   @param params [Object]
  *     * `pipelineId` &mdash; **required** &mdash; (`String`) The
  *       identifier of the pipeline to be configured.
- *     * `pipelineObjects` &mdash; **required** &mdash; (`Array<Object>`)
+ *     * `pipelineObjects` &mdash; **required** &mdash; (`Array<map>`)
  *       The objects that define the pipeline. These will overwrite the
  *       existing pipeline definition.
  *       * `id` &mdash; **required** &mdash; (`String`) Identifier of the
  *         object.
  *       * `name` &mdash; **required** &mdash; (`String`) Name of the
  *         object.
- *       * `fields` &mdash; **required** &mdash; (`Array<Object>`)
- *         Key-value pairs that define the properties of the object.
+ *       * `fields` &mdash; **required** &mdash; (`Array<map>`) Key-value
+ *         pairs that define the properties of the object.
  *         * `key` &mdash; **required** &mdash; (`String`) The field
  *           identifier.
  *         * `stringValue` &mdash; (`String`) The field value, expressed
@@ -396,7 +395,7 @@ AWS.DataPipeline = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `validationErrors` &mdash; (`Array<Object>`) A list of the
+ *       * `validationErrors` &mdash; (`Array<map>`) A list of the
  *         validation errors that are associated with the objects defined
  *         in pipelineObjects.
  *         * `id` &mdash; (`String`) The identifier of the object that
@@ -415,12 +414,12 @@ AWS.DataPipeline = inherit({})
  *   @param params [Object]
  *     * `pipelineId` &mdash; **required** &mdash; (`String`) Identifier
  *       of the pipeline to be queried for object names.
- *     * `query` &mdash; (`Object`) Query that defines the objects to be
+ *     * `query` &mdash; (`map`) Query that defines the objects to be
  *       returned. The Query object can contain a maximum of ten
  *       selectors. The conditions in the query are limited to top-level
  *       String fields in the object. These filters can be applied to
  *       components, instances, and attempts.
- *       * `selectors` &mdash; (`Array<Object>`) List of selectors that
+ *       * `selectors` &mdash; (`Array<map>`) List of selectors that
  *         define the query. An object must satisfy all of the selectors
  *         to match the query.
  *         * `fieldName` &mdash; (`String`) The name of the field that
@@ -428,7 +427,7 @@ AWS.DataPipeline = inherit({})
  *           portion of the field definition in the pipeline definition
  *           syntax that is used by the AWS Data Pipeline API. If the
  *           field is not set on the object, the condition fails.
- *         * `operator` &mdash; (`Object`)
+ *         * `operator` &mdash; (`map`)
  *           * `type` &mdash; (`String`) The logical operation to be
  *             performed: equal (EQ), equal reference (REF_EQ), less than
  *             or equal (LE), greater than or equal (GE), or between
@@ -449,6 +448,12 @@ AWS.DataPipeline = inherit({})
  *             reserved by AWS Data Pipeline. A best practice for
  *             user-defined fields that you add to a pipeline is to
  *             prefix their name with the string "my".
+ *             Possible values include:
+ *             * `EQ`
+ *             * `REF_EQ`
+ *             * `LE`
+ *             * `GE`
+ *             * `BETWEEN`
  *           * `values` &mdash; (`Array<String>`) The value that the
  *             actual field value will be compared with.
  *     * `sphere` &mdash; **required** &mdash; (`String`) Specifies
@@ -574,6 +579,10 @@ AWS.DataPipeline = inherit({})
  *     * `taskStatus` &mdash; **required** &mdash; (`String`) If
  *       FINISHED, the task successfully completed. If FAILED the task
  *       ended unsuccessfully. The FALSE value is used by preconditions.
+ *       Possible values include:
+ *       * `FINISHED`
+ *       * `FAILED`
+ *       * `FALSE`
  *     * `errorCode` &mdash; (`Integer`) If an error occurred during the
  *       task, specifies a numerical value that represents the error.
  *       This value is set on the physical attempt object. It is used to
@@ -605,15 +614,15 @@ AWS.DataPipeline = inherit({})
  *   @param params [Object]
  *     * `pipelineId` &mdash; **required** &mdash; (`String`) Identifies
  *       the pipeline whose definition is to be validated.
- *     * `pipelineObjects` &mdash; **required** &mdash; (`Array<Object>`)
- *       A list of objects that define the pipeline changes to validate
+ *     * `pipelineObjects` &mdash; **required** &mdash; (`Array<map>`) A
+ *       list of objects that define the pipeline changes to validate
  *       against the pipeline.
  *       * `id` &mdash; **required** &mdash; (`String`) Identifier of the
  *         object.
  *       * `name` &mdash; **required** &mdash; (`String`) Name of the
  *         object.
- *       * `fields` &mdash; **required** &mdash; (`Array<Object>`)
- *         Key-value pairs that define the properties of the object.
+ *       * `fields` &mdash; **required** &mdash; (`Array<map>`) Key-value
+ *         pairs that define the properties of the object.
  *         * `key` &mdash; **required** &mdash; (`String`) The field
  *           identifier.
  *         * `stringValue` &mdash; (`String`) The field value, expressed
@@ -630,8 +639,8 @@ AWS.DataPipeline = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `validationErrors` &mdash; (`Array<Object>`) Lists the
- *         validation errors that were found by ValidatePipelineDefinition.
+ *       * `validationErrors` &mdash; (`Array<map>`) Lists the validation
+ *         errors that were found by ValidatePipelineDefinition.
  *         * `id` &mdash; (`String`) The identifier of the object that
  *           contains the validation error.
  *         * `errors` &mdash; (`Array<String>`) A description of the

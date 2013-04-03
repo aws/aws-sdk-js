@@ -55,10 +55,10 @@ AWS.DynamoDB = inherit({})
  * @!method batchGetItem(params, callback)
  *   Calls the BatchGetItem API operation.
  *   @param params [Object]
- *     * `RequestItems` &mdash; **required** &mdash; (`Object<Object>`)
- *       * `Keys` &mdash; **required** &mdash; (`Array<Object>`)
- *         * `HashKeyElement` &mdash; **required** &mdash; (`Object`) A
- *           hash key element is treated as the primary key, and can be a
+ *     * `RequestItems` &mdash; **required** &mdash; (`map<map>`)
+ *       * `Keys` &mdash; **required** &mdash; (`Array<map>`)
+ *         * `HashKeyElement` &mdash; **required** &mdash; (`map`) A hash
+ *           key element is treated as the primary key, and can be a
  *           string or a number. Single attribute primary keys have one
  *           index value. The value can be String, Number, StringSet,
  *           NumberSet.
@@ -76,7 +76,7 @@ AWS.DynamoDB = inherit({})
  *           * `NS` &mdash; (`Array<String>`) A set of numbers.
  *           * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *             binary attributes.
- *         * `RangeKeyElement` &mdash; (`Object`) A range key element is
+ *         * `RangeKeyElement` &mdash; (`map`) A range key element is
  *           treated as a secondary key (used in conjunction with the
  *           primary key), and can be a string or a number, and is only
  *           used for hash-and-range primary keys. The value can be
@@ -107,18 +107,31 @@ AWS.DynamoDB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Responses` &mdash; (`Object<Object>`)
- *         * `Items` &mdash; (`Array<Object<Object>>`)
+ *       * `Responses` &mdash; (`map<map>`)
+ *         * `Items` &mdash; (`Array<map<map>>`)
+ *           * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
+ *             encoding. The maximum size is limited by the size of the
+ *             primary key (1024 bytes as a range part of a key or 2048
+ *             bytes as a single part hash key) or the item size (64k).
+ *           * `N` &mdash; (`String`) Numbers are positive or negative
+ *             exact-value decimals and integers. A number can have up to
+ *             38 digits precision and can be between 10^-128 to 10^+126.
+ *           * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
+ *             sequences of unsigned bytes.
+ *           * `SS` &mdash; (`Array<String>`) A set of strings.
+ *           * `NS` &mdash; (`Array<String>`) A set of numbers.
+ *           * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
+ *             binary attributes.
  *         * `ConsumedCapacityUnits` &mdash; (`Float`)
- *       * `UnprocessedKeys` &mdash; (`Object<Object>`) Contains a map of
- *         tables and their respective keys that were not processed with
- *         the current response, possibly due to reaching a limit on the
+ *       * `UnprocessedKeys` &mdash; (`map<map>`) Contains a map of tables
+ *         and their respective keys that were not processed with the
+ *         current response, possibly due to reaching a limit on the
  *         response size. The UnprocessedKeys value is in the same form as
  *         a RequestItems parameter (so the value can be provided directly
  *         to a subsequent BatchGetItem operation). For more information,
  *         see the above RequestItems parameter.
- *         * `Keys` &mdash; (`Array<Object>`)
- *           * `HashKeyElement` &mdash; (`Object`) A hash key element is
+ *         * `Keys` &mdash; (`Array<map>`)
+ *           * `HashKeyElement` &mdash; (`map`) A hash key element is
  *             treated as the primary key, and can be a string or a number.
  *             Single attribute primary keys have one index value. The
  *             value can be String, Number, StringSet, NumberSet.
@@ -136,7 +149,7 @@ AWS.DynamoDB = inherit({})
  *             * `NS` &mdash; (`Array<String>`) A set of numbers.
  *             * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *               binary attributes.
- *           * `RangeKeyElement` &mdash; (`Object`) A range key element is
+ *           * `RangeKeyElement` &mdash; (`map`) A range key element is
  *             treated as a secondary key (used in conjunction with the
  *             primary key), and can be a string or a number, and is only
  *             used for hash-and-range primary keys. The value can be
@@ -163,13 +176,12 @@ AWS.DynamoDB = inherit({})
  * @!method batchWriteItem(params, callback)
  *   Calls the BatchWriteItem API operation.
  *   @param params [Object]
- *     * `RequestItems` &mdash; **required** &mdash;
- *       (`Object<Array<Object>>`) A map of table name to
- *       list-of-write-requests. Used as input to the BatchWriteItem API
- *       call
- *       * `PutRequest` &mdash; (`Object`)
- *         * `Item` &mdash; **required** &mdash; (`Object<Object>`) The
- *           item to put
+ *     * `RequestItems` &mdash; **required** &mdash; (`map<Array<map>>`)
+ *       A map of table name to list-of-write-requests. Used as input to
+ *       the BatchWriteItem API call
+ *       * `PutRequest` &mdash; (`map`)
+ *         * `Item` &mdash; **required** &mdash; (`map<map>`) The item to
+ *           put
  *           * `S` &mdash; (`String`) Strings are Unicode with UTF-8
  *             binary encoding. The maximum size is limited by the size
  *             of the primary key (1024 bytes as a range part of a key or
@@ -184,10 +196,10 @@ AWS.DynamoDB = inherit({})
  *           * `NS` &mdash; (`Array<String>`) A set of numbers.
  *           * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *             binary attributes.
- *       * `DeleteRequest` &mdash; (`Object`)
- *         * `Key` &mdash; **required** &mdash; (`Object`) The item's key
- *           to be delete
- *           * `HashKeyElement` &mdash; **required** &mdash; (`Object`) A
+ *       * `DeleteRequest` &mdash; (`map`)
+ *         * `Key` &mdash; **required** &mdash; (`map`) The item's key to
+ *           be delete
+ *           * `HashKeyElement` &mdash; **required** &mdash; (`map`) A
  *             hash key element is treated as the primary key, and can be
  *             a string or a number. Single attribute primary keys have
  *             one index value. The value can be String, Number,
@@ -207,11 +219,11 @@ AWS.DynamoDB = inherit({})
  *             * `NS` &mdash; (`Array<String>`) A set of numbers.
  *             * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *               binary attributes.
- *           * `RangeKeyElement` &mdash; (`Object`) A range key element
- *             is treated as a secondary key (used in conjunction with
- *             the primary key), and can be a string or a number, and is
- *             only used for hash-and-range primary keys. The value can
- *             be String, Number, StringSet, NumberSet.
+ *           * `RangeKeyElement` &mdash; (`map`) A range key element is
+ *             treated as a secondary key (used in conjunction with the
+ *             primary key), and can be a string or a number, and is only
+ *             used for hash-and-range primary keys. The value can be
+ *             String, Number, StringSet, NumberSet.
  *             * `S` &mdash; (`String`) Strings are Unicode with UTF-8
  *               binary encoding. The maximum size is limited by the size
  *               of the primary key (1024 bytes as a range part of a key
@@ -237,15 +249,15 @@ AWS.DynamoDB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Responses` &mdash; (`Object<Object>`) The response object as a
- *         result of BatchWriteItem call. This is essentially a map of
- *         table name to ConsumedCapacityUnits.
+ *       * `Responses` &mdash; (`map<map>`) The response object as a result
+ *         of BatchWriteItem call. This is essentially a map of table name
+ *         to ConsumedCapacityUnits.
  *         * `ConsumedCapacityUnits` &mdash; (`Float`)
- *       * `UnprocessedItems` &mdash; (`Object<Array<Object>>`) The Items
- *         which we could not successfully process in a BatchWriteItem call
- *         is returned as UnprocessedItems
- *         * `PutRequest` &mdash; (`Object`)
- *           * `Item` &mdash; (`Object<Object>`) The item to put
+ *       * `UnprocessedItems` &mdash; (`map<Array<map>>`) The Items which
+ *         we could not successfully process in a BatchWriteItem call is
+ *         returned as UnprocessedItems
+ *         * `PutRequest` &mdash; (`map`)
+ *           * `Item` &mdash; (`map<map>`) The item to put
  *             * `S` &mdash; (`String`) Strings are Unicode with UTF-8
  *               binary encoding. The maximum size is limited by the size
  *               of the primary key (1024 bytes as a range part of a key or
@@ -260,9 +272,9 @@ AWS.DynamoDB = inherit({})
  *             * `NS` &mdash; (`Array<String>`) A set of numbers.
  *             * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *               binary attributes.
- *         * `DeleteRequest` &mdash; (`Object`)
- *           * `Key` &mdash; (`Object`) The item's key to be delete
- *             * `HashKeyElement` &mdash; (`Object`) A hash key element is
+ *         * `DeleteRequest` &mdash; (`map`)
+ *           * `Key` &mdash; (`map`) The item's key to be delete
+ *             * `HashKeyElement` &mdash; (`map`) A hash key element is
  *               treated as the primary key, and can be a string or a
  *               number. Single attribute primary keys have one index
  *               value. The value can be String, Number, StringSet,
@@ -282,11 +294,11 @@ AWS.DynamoDB = inherit({})
  *               * `NS` &mdash; (`Array<String>`) A set of numbers.
  *               * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *                 binary attributes.
- *             * `RangeKeyElement` &mdash; (`Object`) A range key element
- *               is treated as a secondary key (used in conjunction with
- *               the primary key), and can be a string or a number, and is
- *               only used for hash-and-range primary keys. The value can
- *               be String, Number, StringSet, NumberSet.
+ *             * `RangeKeyElement` &mdash; (`map`) A range key element is
+ *               treated as a secondary key (used in conjunction with the
+ *               primary key), and can be a string or a number, and is only
+ *               used for hash-and-range primary keys. The value can be
+ *               String, Number, StringSet, NumberSet.
  *               * `S` &mdash; (`String`) Strings are Unicode with UTF-8
  *                 binary encoding. The maximum size is limited by the size
  *                 of the primary key (1024 bytes as a range part of a key
@@ -311,18 +323,21 @@ AWS.DynamoDB = inherit({})
  *     * `TableName` &mdash; **required** &mdash; (`String`) The name of
  *       the table you want to create. Allowed characters are a-z, A-Z,
  *       0-9, _ (underscore), - (hyphen) and . (period).
- *     * `KeySchema` &mdash; **required** &mdash; (`Object`)
- *       * `HashKeyElement` &mdash; **required** &mdash; (`Object`) A
- *         hash key element is treated as the primary key, and can be a
- *         string or a number. Single attribute primary keys have one
- *         index value. The value can be String, Number, StringSet,
- *         NumberSet.
+ *     * `KeySchema` &mdash; **required** &mdash; (`map`)
+ *       * `HashKeyElement` &mdash; **required** &mdash; (`map`) A hash
+ *         key element is treated as the primary key, and can be a string
+ *         or a number. Single attribute primary keys have one index
+ *         value. The value can be String, Number, StringSet, NumberSet.
  *         * `AttributeName` &mdash; **required** &mdash; (`String`) The
  *           AttributeName of the KeySchemaElement.
  *         * `AttributeType` &mdash; **required** &mdash; (`String`) The
  *           AttributeType of the KeySchemaElement which can be a String
  *           or a Number.
- *       * `RangeKeyElement` &mdash; (`Object`) A range key element is
+ *           Possible values include:
+ *           * `S`
+ *           * `N`
+ *           * `B`
+ *       * `RangeKeyElement` &mdash; (`map`) A range key element is
  *         treated as a secondary key (used in conjunction with the
  *         primary key), and can be a string or a number, and is only
  *         used for hash-and-range primary keys. The value can be String,
@@ -332,7 +347,11 @@ AWS.DynamoDB = inherit({})
  *         * `AttributeType` &mdash; **required** &mdash; (`String`) The
  *           AttributeType of the KeySchemaElement which can be a String
  *           or a Number.
- *     * `ProvisionedThroughput` &mdash; **required** &mdash; (`Object`)
+ *           Possible values include:
+ *           * `S`
+ *           * `N`
+ *           * `B`
+ *     * `ProvisionedThroughput` &mdash; **required** &mdash; (`map`)
  *       * `ReadCapacityUnits` &mdash; **required** &mdash; (`Integer`)
  *         ReadCapacityUnits are in terms of strictly consistent reads,
  *         assuming items of 1k. 2k items require twice the
@@ -352,11 +371,11 @@ AWS.DynamoDB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `TableDescription` &mdash; (`Object`)
+ *       * `TableDescription` &mdash; (`map`)
  *         * `TableName` &mdash; (`String`) The name of the table being
  *           described.
- *         * `KeySchema` &mdash; (`Object`)
- *           * `HashKeyElement` &mdash; (`Object`) A hash key element is
+ *         * `KeySchema` &mdash; (`map`)
+ *           * `HashKeyElement` &mdash; (`map`) A hash key element is
  *             treated as the primary key, and can be a string or a number.
  *             Single attribute primary keys have one index value. The
  *             value can be String, Number, StringSet, NumberSet.
@@ -364,7 +383,11 @@ AWS.DynamoDB = inherit({})
  *               the KeySchemaElement.
  *             * `AttributeType` &mdash; (`String`) The AttributeType of
  *               the KeySchemaElement which can be a String or a Number.
- *           * `RangeKeyElement` &mdash; (`Object`) A range key element is
+ *               Possible values include:
+ *               * `S`
+ *               * `N`
+ *               * `B`
+ *           * `RangeKeyElement` &mdash; (`map`) A range key element is
  *             treated as a secondary key (used in conjunction with the
  *             primary key), and can be a string or a number, and is only
  *             used for hash-and-range primary keys. The value can be
@@ -373,11 +396,21 @@ AWS.DynamoDB = inherit({})
  *               the KeySchemaElement.
  *             * `AttributeType` &mdash; (`String`) The AttributeType of
  *               the KeySchemaElement which can be a String or a Number.
+ *               Possible values include:
+ *               * `S`
+ *               * `N`
+ *               * `B`
  *         * `TableStatus` &mdash; (`String`)
+ *           Possible values include:
+ *           * `CREATING`
+ *           * `UPDATING`
+ *           * `DELETING`
+ *           * `ACTIVE`
  *         * `CreationDateTime` &mdash; (`Date`)
- *         * `ProvisionedThroughput` &mdash; (`Object`)
+ *         * `ProvisionedThroughput` &mdash; (`map`)
  *           * `LastIncreaseDateTime` &mdash; (`Date`)
  *           * `LastDecreaseDateTime` &mdash; (`Date`)
+ *           * `NumberOfDecreasesToday` &mdash; (`Integer`)
  *           * `ReadCapacityUnits` &mdash; (`Integer`)
  *           * `WriteCapacityUnits` &mdash; (`Integer`)
  *         * `TableSizeBytes` &mdash; (`Integer`)
@@ -392,12 +425,11 @@ AWS.DynamoDB = inherit({})
  *       the table in which you want to delete an item. Allowed
  *       characters are a-z, A-Z, 0-9, _ (underscore), - (hyphen) and .
  *       (period).
- *     * `Key` &mdash; **required** &mdash; (`Object`)
- *       * `HashKeyElement` &mdash; **required** &mdash; (`Object`) A
- *         hash key element is treated as the primary key, and can be a
- *         string or a number. Single attribute primary keys have one
- *         index value. The value can be String, Number, StringSet,
- *         NumberSet.
+ *     * `Key` &mdash; **required** &mdash; (`map`)
+ *       * `HashKeyElement` &mdash; **required** &mdash; (`map`) A hash
+ *         key element is treated as the primary key, and can be a string
+ *         or a number. Single attribute primary keys have one index
+ *         value. The value can be String, Number, StringSet, NumberSet.
  *         * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *           encoding. The maximum size is limited by the size of the
  *           primary key (1024 bytes as a range part of a key or 2048
@@ -411,7 +443,7 @@ AWS.DynamoDB = inherit({})
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
  *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *           binary attributes.
- *       * `RangeKeyElement` &mdash; (`Object`) A range key element is
+ *       * `RangeKeyElement` &mdash; (`map`) A range key element is
  *         treated as a secondary key (used in conjunction with the
  *         primary key), and can be a string or a number, and is only
  *         used for hash-and-range primary keys. The value can be String,
@@ -429,10 +461,10 @@ AWS.DynamoDB = inherit({})
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
  *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *           binary attributes.
- *     * `Expected` &mdash; (`Object<Object>`)
- *       * `Value` &mdash; (`Object`) Specify whether or not a value
- *         already exists and has a specific content for the attribute
- *         name-value pair.
+ *     * `Expected` &mdash; (`map<map>`)
+ *       * `Value` &mdash; (`map`) Specify whether or not a value already
+ *         exists and has a specific content for the attribute name-value
+ *         pair.
  *         * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *           encoding. The maximum size is limited by the size of the
  *           primary key (1024 bytes as a range part of a key or 2048
@@ -449,6 +481,12 @@ AWS.DynamoDB = inherit({})
  *       * `Exists` &mdash; (`Boolean`) Specify whether or not a value
  *         already exists for the attribute name-value pair.
  *     * `ReturnValues` &mdash; (`String`)
+ *       Possible values include:
+ *       * `NONE`
+ *       * `ALL_OLD`
+ *       * `UPDATED_OLD`
+ *       * `ALL_NEW`
+ *       * `UPDATED_NEW`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -459,10 +497,10 @@ AWS.DynamoDB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Attributes` &mdash; (`Object<Object>`) If the ReturnValues
- *         parameter is provided as ALL_OLD in the request, Amazon DynamoDB
- *         returns an array of attribute name-value pairs (essentially, the
- *         deleted item). Otherwise, the response contains an empty set.
+ *       * `Attributes` &mdash; (`map<map>`) If the ReturnValues parameter
+ *         is provided as ALL_OLD in the request, Amazon DynamoDB returns
+ *         an array of attribute name-value pairs (essentially, the deleted
+ *         item). Otherwise, the response contains an empty set.
  *         * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *           encoding. The maximum size is limited by the size of the
  *           primary key (1024 bytes as a range part of a key or 2048 bytes
@@ -496,11 +534,11 @@ AWS.DynamoDB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `TableDescription` &mdash; (`Object`)
+ *       * `TableDescription` &mdash; (`map`)
  *         * `TableName` &mdash; (`String`) The name of the table being
  *           described.
- *         * `KeySchema` &mdash; (`Object`)
- *           * `HashKeyElement` &mdash; (`Object`) A hash key element is
+ *         * `KeySchema` &mdash; (`map`)
+ *           * `HashKeyElement` &mdash; (`map`) A hash key element is
  *             treated as the primary key, and can be a string or a number.
  *             Single attribute primary keys have one index value. The
  *             value can be String, Number, StringSet, NumberSet.
@@ -508,7 +546,11 @@ AWS.DynamoDB = inherit({})
  *               the KeySchemaElement.
  *             * `AttributeType` &mdash; (`String`) The AttributeType of
  *               the KeySchemaElement which can be a String or a Number.
- *           * `RangeKeyElement` &mdash; (`Object`) A range key element is
+ *               Possible values include:
+ *               * `S`
+ *               * `N`
+ *               * `B`
+ *           * `RangeKeyElement` &mdash; (`map`) A range key element is
  *             treated as a secondary key (used in conjunction with the
  *             primary key), and can be a string or a number, and is only
  *             used for hash-and-range primary keys. The value can be
@@ -517,11 +559,21 @@ AWS.DynamoDB = inherit({})
  *               the KeySchemaElement.
  *             * `AttributeType` &mdash; (`String`) The AttributeType of
  *               the KeySchemaElement which can be a String or a Number.
+ *               Possible values include:
+ *               * `S`
+ *               * `N`
+ *               * `B`
  *         * `TableStatus` &mdash; (`String`)
+ *           Possible values include:
+ *           * `CREATING`
+ *           * `UPDATING`
+ *           * `DELETING`
+ *           * `ACTIVE`
  *         * `CreationDateTime` &mdash; (`Date`)
- *         * `ProvisionedThroughput` &mdash; (`Object`)
+ *         * `ProvisionedThroughput` &mdash; (`map`)
  *           * `LastIncreaseDateTime` &mdash; (`Date`)
  *           * `LastDecreaseDateTime` &mdash; (`Date`)
+ *           * `NumberOfDecreasesToday` &mdash; (`Integer`)
  *           * `ReadCapacityUnits` &mdash; (`Integer`)
  *           * `WriteCapacityUnits` &mdash; (`Integer`)
  *         * `TableSizeBytes` &mdash; (`Integer`)
@@ -545,11 +597,11 @@ AWS.DynamoDB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Table` &mdash; (`Object`)
+ *       * `Table` &mdash; (`map`)
  *         * `TableName` &mdash; (`String`) The name of the table being
  *           described.
- *         * `KeySchema` &mdash; (`Object`)
- *           * `HashKeyElement` &mdash; (`Object`) A hash key element is
+ *         * `KeySchema` &mdash; (`map`)
+ *           * `HashKeyElement` &mdash; (`map`) A hash key element is
  *             treated as the primary key, and can be a string or a number.
  *             Single attribute primary keys have one index value. The
  *             value can be String, Number, StringSet, NumberSet.
@@ -557,7 +609,11 @@ AWS.DynamoDB = inherit({})
  *               the KeySchemaElement.
  *             * `AttributeType` &mdash; (`String`) The AttributeType of
  *               the KeySchemaElement which can be a String or a Number.
- *           * `RangeKeyElement` &mdash; (`Object`) A range key element is
+ *               Possible values include:
+ *               * `S`
+ *               * `N`
+ *               * `B`
+ *           * `RangeKeyElement` &mdash; (`map`) A range key element is
  *             treated as a secondary key (used in conjunction with the
  *             primary key), and can be a string or a number, and is only
  *             used for hash-and-range primary keys. The value can be
@@ -566,11 +622,21 @@ AWS.DynamoDB = inherit({})
  *               the KeySchemaElement.
  *             * `AttributeType` &mdash; (`String`) The AttributeType of
  *               the KeySchemaElement which can be a String or a Number.
+ *               Possible values include:
+ *               * `S`
+ *               * `N`
+ *               * `B`
  *         * `TableStatus` &mdash; (`String`)
+ *           Possible values include:
+ *           * `CREATING`
+ *           * `UPDATING`
+ *           * `DELETING`
+ *           * `ACTIVE`
  *         * `CreationDateTime` &mdash; (`Date`)
- *         * `ProvisionedThroughput` &mdash; (`Object`)
+ *         * `ProvisionedThroughput` &mdash; (`map`)
  *           * `LastIncreaseDateTime` &mdash; (`Date`)
  *           * `LastDecreaseDateTime` &mdash; (`Date`)
+ *           * `NumberOfDecreasesToday` &mdash; (`Integer`)
  *           * `ReadCapacityUnits` &mdash; (`Integer`)
  *           * `WriteCapacityUnits` &mdash; (`Integer`)
  *         * `TableSizeBytes` &mdash; (`Integer`)
@@ -584,12 +650,11 @@ AWS.DynamoDB = inherit({})
  *     * `TableName` &mdash; **required** &mdash; (`String`) The name of
  *       the table in which you want to get an item. Allowed characters
  *       are a-z, A-Z, 0-9, _ (underscore), - (hyphen) and . (period).
- *     * `Key` &mdash; **required** &mdash; (`Object`)
- *       * `HashKeyElement` &mdash; **required** &mdash; (`Object`) A
- *         hash key element is treated as the primary key, and can be a
- *         string or a number. Single attribute primary keys have one
- *         index value. The value can be String, Number, StringSet,
- *         NumberSet.
+ *     * `Key` &mdash; **required** &mdash; (`map`)
+ *       * `HashKeyElement` &mdash; **required** &mdash; (`map`) A hash
+ *         key element is treated as the primary key, and can be a string
+ *         or a number. Single attribute primary keys have one index
+ *         value. The value can be String, Number, StringSet, NumberSet.
  *         * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *           encoding. The maximum size is limited by the size of the
  *           primary key (1024 bytes as a range part of a key or 2048
@@ -603,7 +668,7 @@ AWS.DynamoDB = inherit({})
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
  *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *           binary attributes.
- *       * `RangeKeyElement` &mdash; (`Object`) A range key element is
+ *       * `RangeKeyElement` &mdash; (`map`) A range key element is
  *         treated as a secondary key (used in conjunction with the
  *         primary key), and can be a string or a number, and is only
  *         used for hash-and-range primary keys. The value can be String,
@@ -633,8 +698,7 @@ AWS.DynamoDB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Item` &mdash; (`Object<Object>`) Contains the requested
- *         attributes.
+ *       * `Item` &mdash; (`map<map>`) Contains the requested attributes.
  *         * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *           encoding. The maximum size is limited by the size of the
  *           primary key (1024 bytes as a range part of a key or 2048 bytes
@@ -685,7 +749,7 @@ AWS.DynamoDB = inherit({})
  *     * `TableName` &mdash; **required** &mdash; (`String`) The name of
  *       the table in which you want to put an item. Allowed characters
  *       are a-z, A-Z, 0-9, _ (underscore), - (hyphen) and . (period).
- *     * `Item` &mdash; **required** &mdash; (`Object<Object>`)
+ *     * `Item` &mdash; **required** &mdash; (`map<map>`)
  *       * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *         encoding. The maximum size is limited by the size of the
  *         primary key (1024 bytes as a range part of a key or 2048 bytes
@@ -699,10 +763,10 @@ AWS.DynamoDB = inherit({})
  *       * `NS` &mdash; (`Array<String>`) A set of numbers.
  *       * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of binary
  *         attributes.
- *     * `Expected` &mdash; (`Object<Object>`)
- *       * `Value` &mdash; (`Object`) Specify whether or not a value
- *         already exists and has a specific content for the attribute
- *         name-value pair.
+ *     * `Expected` &mdash; (`map<map>`)
+ *       * `Value` &mdash; (`map`) Specify whether or not a value already
+ *         exists and has a specific content for the attribute name-value
+ *         pair.
  *         * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *           encoding. The maximum size is limited by the size of the
  *           primary key (1024 bytes as a range part of a key or 2048
@@ -719,6 +783,12 @@ AWS.DynamoDB = inherit({})
  *       * `Exists` &mdash; (`Boolean`) Specify whether or not a value
  *         already exists for the attribute name-value pair.
  *     * `ReturnValues` &mdash; (`String`)
+ *       Possible values include:
+ *       * `NONE`
+ *       * `ALL_OLD`
+ *       * `UPDATED_OLD`
+ *       * `ALL_NEW`
+ *       * `UPDATED_NEW`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -729,8 +799,8 @@ AWS.DynamoDB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Attributes` &mdash; (`Object<Object>`) Attribute values before
- *         the put operation, but only if the ReturnValues parameter is
+ *       * `Attributes` &mdash; (`map<map>`) Attribute values before the
+ *         put operation, but only if the ReturnValues parameter is
  *         specified as ALL_OLD in the request.
  *         * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *           encoding. The maximum size is limited by the size of the
@@ -770,7 +840,7 @@ AWS.DynamoDB = inherit({})
  *       instead of a list of the matching items and their attributes. Do
  *       not set Count to true while providing a list of AttributesToGet,
  *       otherwise Amazon DynamoDB returns a validation error.
- *     * `HashKeyValue` &mdash; **required** &mdash; (`Object`) Attribute
+ *     * `HashKeyValue` &mdash; **required** &mdash; (`map`) Attribute
  *       value of the hash component of the composite primary key.
  *       * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *         encoding. The maximum size is limited by the size of the
@@ -785,9 +855,9 @@ AWS.DynamoDB = inherit({})
  *       * `NS` &mdash; (`Array<String>`) A set of numbers.
  *       * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of binary
  *         attributes.
- *     * `RangeKeyCondition` &mdash; (`Object`) A container for the
+ *     * `RangeKeyCondition` &mdash; (`map`) A container for the
  *       attribute values and comparison operators to use for the query.
- *       * `AttributeValueList` &mdash; (`Array<Object>`)
+ *       * `AttributeValueList` &mdash; (`Array<map>`)
  *         * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *           encoding. The maximum size is limited by the size of the
  *           primary key (1024 bytes as a range part of a key or 2048
@@ -802,22 +872,35 @@ AWS.DynamoDB = inherit({})
  *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *           binary attributes.
  *       * `ComparisonOperator` &mdash; **required** &mdash; (`String`)
+ *         Possible values include:
+ *         * `EQ`
+ *         * `NE`
+ *         * `IN`
+ *         * `LE`
+ *         * `LT`
+ *         * `GE`
+ *         * `GT`
+ *         * `BETWEEN`
+ *         * `NOT_NULL`
+ *         * `NULL`
+ *         * `CONTAINS`
+ *         * `NOT_CONTAINS`
+ *         * `BEGINS_WITH`
  *     * `ScanIndexForward` &mdash; (`Boolean`) Specifies forward or
  *       backward traversal of the index. Amazon DynamoDB returns results
  *       reflecting the requested order, determined by the range key. The
  *       default value is true (forward).
- *     * `ExclusiveStartKey` &mdash; (`Object`) Primary key of the item
- *       from which to continue an earlier query. An earlier query might
+ *     * `ExclusiveStartKey` &mdash; (`map`) Primary key of the item from
+ *       which to continue an earlier query. An earlier query might
  *       provide this value as the LastEvaluatedKey if that query
  *       operation was interrupted before completing the query; either
  *       because of the result set size or the Limit parameter. The
  *       LastEvaluatedKey can be passed back in a new query request to
  *       continue the operation from that point.
- *       * `HashKeyElement` &mdash; **required** &mdash; (`Object`) A
- *         hash key element is treated as the primary key, and can be a
- *         string or a number. Single attribute primary keys have one
- *         index value. The value can be String, Number, StringSet,
- *         NumberSet.
+ *       * `HashKeyElement` &mdash; **required** &mdash; (`map`) A hash
+ *         key element is treated as the primary key, and can be a string
+ *         or a number. Single attribute primary keys have one index
+ *         value. The value can be String, Number, StringSet, NumberSet.
  *         * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *           encoding. The maximum size is limited by the size of the
  *           primary key (1024 bytes as a range part of a key or 2048
@@ -831,7 +914,7 @@ AWS.DynamoDB = inherit({})
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
  *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *           binary attributes.
- *       * `RangeKeyElement` &mdash; (`Object`) A range key element is
+ *       * `RangeKeyElement` &mdash; (`map`) A range key element is
  *         treated as a secondary key (used in conjunction with the
  *         primary key), and can be a string or a number, and is only
  *         used for hash-and-range primary keys. The value can be String,
@@ -859,18 +942,31 @@ AWS.DynamoDB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Items` &mdash; (`Array<Object<Object>>`)
+ *       * `Items` &mdash; (`Array<map<map>>`)
+ *         * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
+ *           encoding. The maximum size is limited by the size of the
+ *           primary key (1024 bytes as a range part of a key or 2048 bytes
+ *           as a single part hash key) or the item size (64k).
+ *         * `N` &mdash; (`String`) Numbers are positive or negative
+ *           exact-value decimals and integers. A number can have up to 38
+ *           digits precision and can be between 10^-128 to 10^+126.
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
+ *           sequences of unsigned bytes.
+ *         * `SS` &mdash; (`Array<String>`) A set of strings.
+ *         * `NS` &mdash; (`Array<String>`) A set of numbers.
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of binary
+ *           attributes.
  *       * `Count` &mdash; (`Integer`) Number of items in the response.
- *       * `LastEvaluatedKey` &mdash; (`Object`) Primary key of the item
- *         where the query operation stopped, inclusive of the previous
- *         result set. Use this value to start a new operation excluding
- *         this value in the new request. The LastEvaluatedKey is null when
- *         the entire query result set is complete (i.e. the operation
+ *       * `LastEvaluatedKey` &mdash; (`map`) Primary key of the item where
+ *         the query operation stopped, inclusive of the previous result
+ *         set. Use this value to start a new operation excluding this
+ *         value in the new request. The LastEvaluatedKey is null when the
+ *         entire query result set is complete (i.e. the operation
  *         processed the "last page").
- *         * `HashKeyElement` &mdash; (`Object`) A hash key element is
- *           treated as the primary key, and can be a string or a number.
- *           Single attribute primary keys have one index value. The value
- *           can be String, Number, StringSet, NumberSet.
+ *         * `HashKeyElement` &mdash; (`map`) A hash key element is treated
+ *           as the primary key, and can be a string or a number. Single
+ *           attribute primary keys have one index value. The value can be
+ *           String, Number, StringSet, NumberSet.
  *           * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *             encoding. The maximum size is limited by the size of the
  *             primary key (1024 bytes as a range part of a key or 2048
@@ -884,7 +980,7 @@ AWS.DynamoDB = inherit({})
  *           * `NS` &mdash; (`Array<String>`) A set of numbers.
  *           * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *             binary attributes.
- *         * `RangeKeyElement` &mdash; (`Object`) A range key element is
+ *         * `RangeKeyElement` &mdash; (`map`) A range key element is
  *           treated as a secondary key (used in conjunction with the
  *           primary key), and can be a string or a number, and is only
  *           used for hash-and-range primary keys. The value can be String,
@@ -927,9 +1023,9 @@ AWS.DynamoDB = inherit({})
  *       the operation has no matching items for the assigned filter. Do
  *       not set Count to true while providing a list of AttributesToGet,
  *       otherwise Amazon DynamoDB returns a validation error.
- *     * `ScanFilter` &mdash; (`Object<Object>`) Evaluates the scan
- *       results and returns only the desired values.
- *       * `AttributeValueList` &mdash; (`Array<Object>`)
+ *     * `ScanFilter` &mdash; (`map<map>`) Evaluates the scan results and
+ *       returns only the desired values.
+ *       * `AttributeValueList` &mdash; (`Array<map>`)
  *         * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *           encoding. The maximum size is limited by the size of the
  *           primary key (1024 bytes as a range part of a key or 2048
@@ -944,17 +1040,30 @@ AWS.DynamoDB = inherit({})
  *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *           binary attributes.
  *       * `ComparisonOperator` &mdash; **required** &mdash; (`String`)
- *     * `ExclusiveStartKey` &mdash; (`Object`) Primary key of the item
- *       from which to continue an earlier scan. An earlier scan might
- *       provide this value if that scan operation was interrupted before
+ *         Possible values include:
+ *         * `EQ`
+ *         * `NE`
+ *         * `IN`
+ *         * `LE`
+ *         * `LT`
+ *         * `GE`
+ *         * `GT`
+ *         * `BETWEEN`
+ *         * `NOT_NULL`
+ *         * `NULL`
+ *         * `CONTAINS`
+ *         * `NOT_CONTAINS`
+ *         * `BEGINS_WITH`
+ *     * `ExclusiveStartKey` &mdash; (`map`) Primary key of the item from
+ *       which to continue an earlier scan. An earlier scan might provide
+ *       this value if that scan operation was interrupted before
  *       scanning the entire table; either because of the result set size
  *       or the Limit parameter. The LastEvaluatedKey can be passed back
  *       in a new scan request to continue the operation from that point.
- *       * `HashKeyElement` &mdash; **required** &mdash; (`Object`) A
- *         hash key element is treated as the primary key, and can be a
- *         string or a number. Single attribute primary keys have one
- *         index value. The value can be String, Number, StringSet,
- *         NumberSet.
+ *       * `HashKeyElement` &mdash; **required** &mdash; (`map`) A hash
+ *         key element is treated as the primary key, and can be a string
+ *         or a number. Single attribute primary keys have one index
+ *         value. The value can be String, Number, StringSet, NumberSet.
  *         * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *           encoding. The maximum size is limited by the size of the
  *           primary key (1024 bytes as a range part of a key or 2048
@@ -968,7 +1077,7 @@ AWS.DynamoDB = inherit({})
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
  *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *           binary attributes.
- *       * `RangeKeyElement` &mdash; (`Object`) A range key element is
+ *       * `RangeKeyElement` &mdash; (`map`) A range key element is
  *         treated as a secondary key (used in conjunction with the
  *         primary key), and can be a string or a number, and is only
  *         used for hash-and-range primary keys. The value can be String,
@@ -996,21 +1105,34 @@ AWS.DynamoDB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Items` &mdash; (`Array<Object<Object>>`)
+ *       * `Items` &mdash; (`Array<map<map>>`)
+ *         * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
+ *           encoding. The maximum size is limited by the size of the
+ *           primary key (1024 bytes as a range part of a key or 2048 bytes
+ *           as a single part hash key) or the item size (64k).
+ *         * `N` &mdash; (`String`) Numbers are positive or negative
+ *           exact-value decimals and integers. A number can have up to 38
+ *           digits precision and can be between 10^-128 to 10^+126.
+ *         * `B` &mdash; (`Base64 Encoded String`) Binary attributes are
+ *           sequences of unsigned bytes.
+ *         * `SS` &mdash; (`Array<String>`) A set of strings.
+ *         * `NS` &mdash; (`Array<String>`) A set of numbers.
+ *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of binary
+ *           attributes.
  *       * `Count` &mdash; (`Integer`) Number of items in the response.
  *       * `ScannedCount` &mdash; (`Integer`) Number of items in the
  *         complete scan before any filters are applied. A high
  *         ScannedCount value with few, or no, Count results indicates an
  *         inefficient Scan operation.
- *       * `LastEvaluatedKey` &mdash; (`Object`) Primary key of the item
- *         where the scan operation stopped. Provide this value in a
- *         subsequent scan operation to continue the operation from that
- *         point. The LastEvaluatedKey is null when the entire scan result
- *         set is complete (i.e. the operation processed the "last page").
- *         * `HashKeyElement` &mdash; (`Object`) A hash key element is
- *           treated as the primary key, and can be a string or a number.
- *           Single attribute primary keys have one index value. The value
- *           can be String, Number, StringSet, NumberSet.
+ *       * `LastEvaluatedKey` &mdash; (`map`) Primary key of the item where
+ *         the scan operation stopped. Provide this value in a subsequent
+ *         scan operation to continue the operation from that point. The
+ *         LastEvaluatedKey is null when the entire scan result set is
+ *         complete (i.e. the operation processed the "last page").
+ *         * `HashKeyElement` &mdash; (`map`) A hash key element is treated
+ *           as the primary key, and can be a string or a number. Single
+ *           attribute primary keys have one index value. The value can be
+ *           String, Number, StringSet, NumberSet.
  *           * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *             encoding. The maximum size is limited by the size of the
  *             primary key (1024 bytes as a range part of a key or 2048
@@ -1024,7 +1146,7 @@ AWS.DynamoDB = inherit({})
  *           * `NS` &mdash; (`Array<String>`) A set of numbers.
  *           * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *             binary attributes.
- *         * `RangeKeyElement` &mdash; (`Object`) A range key element is
+ *         * `RangeKeyElement` &mdash; (`map`) A range key element is
  *           treated as a secondary key (used in conjunction with the
  *           primary key), and can be a string or a number, and is only
  *           used for hash-and-range primary keys. The value can be String,
@@ -1053,12 +1175,11 @@ AWS.DynamoDB = inherit({})
  *       the table in which you want to update an item. Allowed
  *       characters are a-z, A-Z, 0-9, _ (underscore), - (hyphen) and .
  *       (period).
- *     * `Key` &mdash; **required** &mdash; (`Object`)
- *       * `HashKeyElement` &mdash; **required** &mdash; (`Object`) A
- *         hash key element is treated as the primary key, and can be a
- *         string or a number. Single attribute primary keys have one
- *         index value. The value can be String, Number, StringSet,
- *         NumberSet.
+ *     * `Key` &mdash; **required** &mdash; (`map`)
+ *       * `HashKeyElement` &mdash; **required** &mdash; (`map`) A hash
+ *         key element is treated as the primary key, and can be a string
+ *         or a number. Single attribute primary keys have one index
+ *         value. The value can be String, Number, StringSet, NumberSet.
  *         * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *           encoding. The maximum size is limited by the size of the
  *           primary key (1024 bytes as a range part of a key or 2048
@@ -1072,7 +1193,7 @@ AWS.DynamoDB = inherit({})
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
  *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *           binary attributes.
- *       * `RangeKeyElement` &mdash; (`Object`) A range key element is
+ *       * `RangeKeyElement` &mdash; (`map`) A range key element is
  *         treated as a secondary key (used in conjunction with the
  *         primary key), and can be a string or a number, and is only
  *         used for hash-and-range primary keys. The value can be String,
@@ -1090,9 +1211,8 @@ AWS.DynamoDB = inherit({})
  *         * `NS` &mdash; (`Array<String>`) A set of numbers.
  *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *           binary attributes.
- *     * `AttributeUpdates` &mdash; **required** &mdash;
- *       (`Object<Object>`)
- *       * `Value` &mdash; (`Object`)
+ *     * `AttributeUpdates` &mdash; **required** &mdash; (`map<map>`)
+ *       * `Value` &mdash; (`map`)
  *         * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *           encoding. The maximum size is limited by the size of the
  *           primary key (1024 bytes as a range part of a key or 2048
@@ -1107,10 +1227,14 @@ AWS.DynamoDB = inherit({})
  *         * `BS` &mdash; (`Array<Base64 Encoded String>`) A set of
  *           binary attributes.
  *       * `Action` &mdash; (`String`)
- *     * `Expected` &mdash; (`Object<Object>`)
- *       * `Value` &mdash; (`Object`) Specify whether or not a value
- *         already exists and has a specific content for the attribute
- *         name-value pair.
+ *         Possible values include:
+ *         * `ADD`
+ *         * `PUT`
+ *         * `DELETE`
+ *     * `Expected` &mdash; (`map<map>`)
+ *       * `Value` &mdash; (`map`) Specify whether or not a value already
+ *         exists and has a specific content for the attribute name-value
+ *         pair.
  *         * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *           encoding. The maximum size is limited by the size of the
  *           primary key (1024 bytes as a range part of a key or 2048
@@ -1127,6 +1251,12 @@ AWS.DynamoDB = inherit({})
  *       * `Exists` &mdash; (`Boolean`) Specify whether or not a value
  *         already exists for the attribute name-value pair.
  *     * `ReturnValues` &mdash; (`String`)
+ *       Possible values include:
+ *       * `NONE`
+ *       * `ALL_OLD`
+ *       * `UPDATED_OLD`
+ *       * `ALL_NEW`
+ *       * `UPDATED_NEW`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1137,9 +1267,9 @@ AWS.DynamoDB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Attributes` &mdash; (`Object<Object>`) A map of attribute
- *         name-value pairs, but only if the ReturnValues parameter is
- *         specified as something other than NONE in the request.
+ *       * `Attributes` &mdash; (`map<map>`) A map of attribute name-value
+ *         pairs, but only if the ReturnValues parameter is specified as
+ *         something other than NONE in the request.
  *         * `S` &mdash; (`String`) Strings are Unicode with UTF-8 binary
  *           encoding. The maximum size is limited by the size of the
  *           primary key (1024 bytes as a range part of a key or 2048 bytes
@@ -1163,7 +1293,7 @@ AWS.DynamoDB = inherit({})
  *     * `TableName` &mdash; **required** &mdash; (`String`) The name of
  *       the table you want to update. Allowed characters are a-z, A-Z,
  *       0-9, _ (underscore), - (hyphen) and . (period).
- *     * `ProvisionedThroughput` &mdash; **required** &mdash; (`Object`)
+ *     * `ProvisionedThroughput` &mdash; **required** &mdash; (`map`)
  *       * `ReadCapacityUnits` &mdash; **required** &mdash; (`Integer`)
  *         ReadCapacityUnits are in terms of strictly consistent reads,
  *         assuming items of 1k. 2k items require twice the
@@ -1183,11 +1313,11 @@ AWS.DynamoDB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `TableDescription` &mdash; (`Object`)
+ *       * `TableDescription` &mdash; (`map`)
  *         * `TableName` &mdash; (`String`) The name of the table being
  *           described.
- *         * `KeySchema` &mdash; (`Object`)
- *           * `HashKeyElement` &mdash; (`Object`) A hash key element is
+ *         * `KeySchema` &mdash; (`map`)
+ *           * `HashKeyElement` &mdash; (`map`) A hash key element is
  *             treated as the primary key, and can be a string or a number.
  *             Single attribute primary keys have one index value. The
  *             value can be String, Number, StringSet, NumberSet.
@@ -1195,7 +1325,11 @@ AWS.DynamoDB = inherit({})
  *               the KeySchemaElement.
  *             * `AttributeType` &mdash; (`String`) The AttributeType of
  *               the KeySchemaElement which can be a String or a Number.
- *           * `RangeKeyElement` &mdash; (`Object`) A range key element is
+ *               Possible values include:
+ *               * `S`
+ *               * `N`
+ *               * `B`
+ *           * `RangeKeyElement` &mdash; (`map`) A range key element is
  *             treated as a secondary key (used in conjunction with the
  *             primary key), and can be a string or a number, and is only
  *             used for hash-and-range primary keys. The value can be
@@ -1204,11 +1338,21 @@ AWS.DynamoDB = inherit({})
  *               the KeySchemaElement.
  *             * `AttributeType` &mdash; (`String`) The AttributeType of
  *               the KeySchemaElement which can be a String or a Number.
+ *               Possible values include:
+ *               * `S`
+ *               * `N`
+ *               * `B`
  *         * `TableStatus` &mdash; (`String`)
+ *           Possible values include:
+ *           * `CREATING`
+ *           * `UPDATING`
+ *           * `DELETING`
+ *           * `ACTIVE`
  *         * `CreationDateTime` &mdash; (`Date`)
- *         * `ProvisionedThroughput` &mdash; (`Object`)
+ *         * `ProvisionedThroughput` &mdash; (`map`)
  *           * `LastIncreaseDateTime` &mdash; (`Date`)
  *           * `LastDecreaseDateTime` &mdash; (`Date`)
+ *           * `NumberOfDecreasesToday` &mdash; (`Integer`)
  *           * `ReadCapacityUnits` &mdash; (`Integer`)
  *           * `WriteCapacityUnits` &mdash; (`Integer`)
  *         * `TableSizeBytes` &mdash; (`Integer`)

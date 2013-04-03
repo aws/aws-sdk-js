@@ -76,8 +76,8 @@ AWS.S3 = inherit({})
  *   @param params [Object]
  *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *     * `Key` &mdash; **required** &mdash; (`String`)
- *     * `MultipartUpload` &mdash; (`Object`)
- *       * `Parts` &mdash; (`Array<Object>`)
+ *     * `MultipartUpload` &mdash; (`map`)
+ *       * `Parts` &mdash; (`Array<map>`)
  *         * `ETag` &mdash; (`String`) Entity tag returned when the part
  *           was uploaded.
  *         * `PartNumber` &mdash; (`Integer`) Part number that identifies
@@ -102,6 +102,8 @@ AWS.S3 = inherit({})
  *         and rule ID (rule-id). The value of rule-id is URL encoded.
  *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
+ *         Possible values include:
+ *         * `AES256`
  *       * `VersionId` &mdash; (`String`) Version of the object.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -112,6 +114,13 @@ AWS.S3 = inherit({})
  *   Calls the CopyObject API operation.
  *   @param params [Object]
  *     * `ACL` &mdash; (`String`) The canned ACL to apply to the object.
+ *       Possible values include:
+ *       * `private`
+ *       * `public-read`
+ *       * `public-read-write`
+ *       * `authenticated-read`
+ *       * `bucket-owner-read`
+ *       * `bucket-owner-full-control`
  *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *     * `CacheControl` &mdash; (`String`) Specifies caching behavior
  *       along the request/reply chain.
@@ -147,15 +156,23 @@ AWS.S3 = inherit({})
  *     * `GrantWriteACP` &mdash; (`String`) Allows grantee to write the
  *       ACL for the applicable object.
  *     * `Key` &mdash; **required** &mdash; (`String`)
- *     * `Metadata` &mdash; (`Object<String>`) A map of metadata to store
+ *     * `Metadata` &mdash; (`map<String>`) A map of metadata to store
  *       with the object in S3.
  *     * `MetadataDirective` &mdash; (`String`) Specifies whether the
  *       metadata is copied from the source object or replaced with
  *       metadata provided in the request.
+ *       Possible values include:
+ *       * `COPY`
+ *       * `REPLACE`
  *     * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *       encryption algorithm used when storing this object in S3.
+ *       Possible values include:
+ *       * `AES256`
  *     * `StorageClass` &mdash; (`String`) The type of storage to use for
  *       the object. Defaults to 'STANDARD'.
+ *       Possible values include:
+ *       * `STANDARD`
+ *       * `REDUCED_REDUNDANCY`
  *     * `WebsiteRedirectLocation` &mdash; (`String`) If the bucket is
  *       configured as a website, redirects requests for this object to
  *       another object in the same bucket or to an external URL. Amazon
@@ -175,6 +192,8 @@ AWS.S3 = inherit({})
  *       * `CopySourceVersionId` &mdash; (`String`)
  *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
+ *         Possible values include:
+ *         * `AES256`
  *       * `ETag` &mdash; (`String`)
  *       * `LastModified` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -186,10 +205,26 @@ AWS.S3 = inherit({})
  *   Calls the CreateBucket API operation.
  *   @param params [Object]
  *     * `ACL` &mdash; (`String`) The canned ACL to apply to the bucket.
+ *       Possible values include:
+ *       * `private`
+ *       * `public-read`
+ *       * `public-read-write`
+ *       * `authenticated-read`
+ *       * `bucket-owner-read`
+ *       * `bucket-owner-full-control`
  *     * `Bucket` &mdash; **required** &mdash; (`String`)
- *     * `CreateBucketConfiguration` &mdash; (`Object`)
+ *     * `CreateBucketConfiguration` &mdash; (`map`)
  *       * `LocationConstraint` &mdash; (`String`) Specifies the region
  *         where the bucket will be created.
+ *         Possible values include:
+ *         * `EU`
+ *         * `eu-west-1`
+ *         * `us-west-1`
+ *         * `us-west-2`
+ *         * `ap-southeast-1`
+ *         * `ap-northeast-1`
+ *         * `sa-east-1`
+ *         * ``
  *     * `GrantFullControl` &mdash; (`String`) Allows grantee the read,
  *       write, read ACP, and write ACP permissions on the bucket.
  *     * `GrantRead` &mdash; (`String`) Allows grantee to list the
@@ -220,6 +255,13 @@ AWS.S3 = inherit({})
  *   Calls the CreateMultipartUpload API operation.
  *   @param params [Object]
  *     * `ACL` &mdash; (`String`) The canned ACL to apply to the object.
+ *       Possible values include:
+ *       * `private`
+ *       * `public-read`
+ *       * `public-read-write`
+ *       * `authenticated-read`
+ *       * `bucket-owner-read`
+ *       * `bucket-owner-full-control`
  *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *     * `CacheControl` &mdash; (`String`) Specifies caching behavior
  *       along the request/reply chain.
@@ -244,12 +286,17 @@ AWS.S3 = inherit({})
  *     * `GrantWriteACP` &mdash; (`String`) Allows grantee to write the
  *       ACL for the applicable object.
  *     * `Key` &mdash; **required** &mdash; (`String`)
- *     * `Metadata` &mdash; (`Object<String>`) A map of metadata to store
+ *     * `Metadata` &mdash; (`map<String>`) A map of metadata to store
  *       with the object in S3.
  *     * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *       encryption algorithm used when storing this object in S3.
+ *       Possible values include:
+ *       * `AES256`
  *     * `StorageClass` &mdash; (`String`) The type of storage to use for
  *       the object. Defaults to 'STANDARD'.
+ *       Possible values include:
+ *       * `STANDARD`
+ *       * `REDUCED_REDUNDANCY`
  *     * `WebsiteRedirectLocation` &mdash; (`String`) If the bucket is
  *       configured as a website, redirects requests for this object to
  *       another object in the same bucket or to an external URL. Amazon
@@ -272,6 +319,8 @@ AWS.S3 = inherit({})
  *         upload.
  *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
+ *         Possible values include:
+ *         * `AES256`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadInitiate.html
@@ -408,8 +457,8 @@ AWS.S3 = inherit({})
  *   Calls the DeleteObjects API operation.
  *   @param params [Object]
  *     * `Bucket` &mdash; **required** &mdash; (`String`)
- *     * `Delete` &mdash; **required** &mdash; (`Object`)
- *       * `Objects` &mdash; **required** &mdash; (`Array<Object>`)
+ *     * `Delete` &mdash; **required** &mdash; (`map`)
+ *       * `Objects` &mdash; **required** &mdash; (`Array<map>`)
  *         * `Key` &mdash; **required** &mdash; (`String`) Key name of
  *           the object to delete.
  *         * `VersionId` &mdash; (`String`) VersionId for the specific
@@ -430,12 +479,12 @@ AWS.S3 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Deleted` &mdash; (`Array<Object>`)
+ *       * `Deleted` &mdash; (`Array<map>`)
  *         * `Key` &mdash; (`String`)
  *         * `VersionId` &mdash; (`String`)
  *         * `DeleteMarker` &mdash; (`Boolean`)
  *         * `DeleteMarkerVersionId` &mdash; (`String`)
- *       * `Errors` &mdash; (`Array<Object>`)
+ *       * `Errors` &mdash; (`Array<map>`)
  *         * `Key` &mdash; (`String`)
  *         * `VersionId` &mdash; (`String`)
  *         * `Code` &mdash; (`String`)
@@ -459,12 +508,16 @@ AWS.S3 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Owner` &mdash; (`Object`)
+ *       * `Owner` &mdash; (`map`)
  *         * `ID` &mdash; (`String`)
  *         * `DisplayName` &mdash; (`String`)
- *       * `Grants` &mdash; (`Array<Object>`) A list of grants.
- *         * `Grantee` &mdash; (`Object`)
+ *       * `Grants` &mdash; (`Array<map>`) A list of grants.
+ *         * `Grantee` &mdash; (`map`)
  *           * `Type` &mdash; (`String`) Type of grantee
+ *             Possible values include:
+ *             * `CanonicalUser`
+ *             * `AmazonCustomerByEmail`
+ *             * `Group`
  *           * `ID` &mdash; (`String`) The canonical user ID of the
  *             grantee.
  *           * `DisplayName` &mdash; (`String`) Screen name of the grantee.
@@ -473,6 +526,12 @@ AWS.S3 = inherit({})
  *           * `URI` &mdash; (`String`) URI of the grantee group.
  *         * `Permission` &mdash; (`String`) Specifies the permission given
  *           to the grantee.
+ *           Possible values include:
+ *           * `FULL_CONTROL`
+ *           * `WRITE`
+ *           * `WRITE_ACP`
+ *           * `READ`
+ *           * `READ_ACP`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETacl.html
@@ -492,7 +551,7 @@ AWS.S3 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `CORSRules` &mdash; (`Array<Object>`)
+ *       * `CORSRules` &mdash; (`Array<map>`)
  *         * `AllowedOrigins` &mdash; (`Array<String>`) One or more origins
  *           you want customers to be able to access the bucket from.
  *         * `AllowedMethods` &mdash; (`Array<String>`) Identifies HTTP
@@ -524,7 +583,7 @@ AWS.S3 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Rules` &mdash; (`Array<Object>`)
+ *       * `Rules` &mdash; (`Array<map>`)
  *         * `ID` &mdash; (`String`) Unique identifier for the rule. The
  *           value cannot be longer than 255 characters.
  *         * `Prefix` &mdash; (`String`) Prefix identifying one or more
@@ -532,7 +591,10 @@ AWS.S3 = inherit({})
  *         * `Status` &mdash; (`String`) If 'Enabled', the rule is
  *           currently being applied. If 'Disabled', the rule is not
  *           currently being applied.
- *         * `Transition` &mdash; (`Object`)
+ *           Possible values include:
+ *           * `Enabled`
+ *           * `Disabled`
+ *         * `Transition` &mdash; (`map`)
  *           * `Days` &mdash; (`Integer`) Indicates the lifetime, in days,
  *             of the objects that are subject to the rule. The value must
  *             be a non-zero positive integer.
@@ -540,7 +602,11 @@ AWS.S3 = inherit({})
  *             to be moved or deleted. Should be in GMT ISO 8601 Format.
  *           * `StorageClass` &mdash; (`String`) The class of storage used
  *             to store the object.
- *         * `Expiration` &mdash; (`Object`)
+ *             Possible values include:
+ *             * `STANDARD`
+ *             * `REDUCED_REDUDANCY`
+ *             * `GLACIER`
+ *         * `Expiration` &mdash; (`map`)
  *           * `Days` &mdash; (`Integer`) Indicates the lifetime, in days,
  *             of the objects that are subject to the rule. The value must
  *             be a non-zero positive integer.
@@ -585,7 +651,7 @@ AWS.S3 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `LoggingEnabled` &mdash; (`Object`)
+ *       * `LoggingEnabled` &mdash; (`map`)
  *         * `TargetBucket` &mdash; (`String`) Specifies the bucket where
  *           you want Amazon S3 to store server access logs. You can have
  *           your logs delivered to any bucket that you own, including the
@@ -597,9 +663,13 @@ AWS.S3 = inherit({})
  *         * `TargetPrefix` &mdash; (`String`) This element lets you
  *           specify a prefix for the keys that the log files will be
  *           stored under.
- *         * `TargetGrants` &mdash; (`Array<Object>`)
- *           * `Grantee` &mdash; (`Object`)
+ *         * `TargetGrants` &mdash; (`Array<map>`)
+ *           * `Grantee` &mdash; (`map`)
  *             * `Type` &mdash; (`String`) Type of grantee
+ *               Possible values include:
+ *               * `CanonicalUser`
+ *               * `AmazonCustomerByEmail`
+ *               * `Group`
  *             * `ID` &mdash; (`String`) The canonical user ID of the
  *               grantee.
  *             * `DisplayName` &mdash; (`String`) Screen name of the
@@ -627,12 +697,14 @@ AWS.S3 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `TopicConfiguration` &mdash; (`Object`)
+ *       * `TopicConfiguration` &mdash; (`map`)
  *         * `Topic` &mdash; (`String`) Amazon SNS topic to which Amazon S3
  *           will publish a message to report the specified events for the
  *           bucket.
  *         * `Event` &mdash; (`String`) Bucket event for which to send
  *           notifications.
+ *           Possible values include:
+ *           * `s3:ReducedRedundancyLostObject`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETnotification.html
@@ -675,6 +747,9 @@ AWS.S3 = inherit({})
  *
  *       * `Payer` &mdash; (`String`) Specifies who pays for the download
  *         and request fees.
+ *         Possible values include:
+ *         * `Requester`
+ *         * `BucketOwner`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTrequestPaymentGET.html
@@ -694,7 +769,7 @@ AWS.S3 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `TagSet` &mdash; (`Array<Object>`)
+ *       * `TagSet` &mdash; (`Array<map>`)
  *         * `Key` &mdash; (`String`) Name of the tag.
  *         * `Value` &mdash; (`String`) Value of the tag.
  *   @return [AWS.Request] a handle to the operation request for
@@ -717,11 +792,17 @@ AWS.S3 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Status` &mdash; (`String`) The versioning state of the bucket.
+ *         Possible values include:
+ *         * `Enabled`
+ *         * `Disabled`
  *       * `MFADelete` &mdash; (`String`) Specifies whether MFA delete is
  *         enabled in the bucket versioning configuration. This element is
  *         only returned if the bucket has been configured with MFA delete.
  *         If the bucket has never been so configured, this element is not
  *         returned.
+ *         Possible values include:
+ *         * `Enabled`
+ *         * `Disabled`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETversioningStatus.html
@@ -741,24 +822,27 @@ AWS.S3 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `RedirectAllRequestsTo` &mdash; (`Object`)
+ *       * `RedirectAllRequestsTo` &mdash; (`map`)
  *         * `HostName` &mdash; (`String`) Name of the host where requests
  *           will be redirected.
  *         * `Protocol` &mdash; (`String`) Protocol to use (http, https)
  *           when redirecting requests. The default is the protocol that is
  *           used in the original request.
- *       * `IndexDocument` &mdash; (`Object`)
+ *           Possible values include:
+ *           * `http`
+ *           * `https`
+ *       * `IndexDocument` &mdash; (`map`)
  *         * `Suffix` &mdash; (`String`) A suffix that is appended to a
  *           request that is for a directory on the website endpoint (e.g.
  *           if the suffix is index.html and you make a request to
  *           samplebucket/images/ the data that is returned will be for the
  *           object with the key name images/index.html) The suffix must
  *           not be empty and must not include a slash character.
- *       * `ErrorDocument` &mdash; (`Object`)
+ *       * `ErrorDocument` &mdash; (`map`)
  *         * `Key` &mdash; (`String`) The object key name to use when a 4XX
  *           class error occurs.
- *       * `RoutingRules` &mdash; (`Array<Object>`)
- *         * `Condition` &mdash; (`Object`) A container for describing a
+ *       * `RoutingRules` &mdash; (`Array<map>`)
+ *         * `Condition` &mdash; (`map`) A container for describing a
  *           condition that must be met for the specified redirect to
  *           apply. For example, 1. If request is for pages in the /docs
  *           folder, redirect to the /documents folder. 2. If request
@@ -781,10 +865,10 @@ AWS.S3 = inherit({})
  *             Condition is specified and sibling KeyPrefixEquals is not
  *             specified. If both are specified, then both must be true for
  *             the redirect to be applied.
- *         * `Redirect` &mdash; (`Object`) Container for redirect
- *           information. You can redirect requests to another host, to
- *           another page, or with another protocol. In the event of an
- *           error, you can can specify a different error code to return.
+ *         * `Redirect` &mdash; (`map`) Container for redirect information.
+ *           You can redirect requests to another host, to another page, or
+ *           with another protocol. In the event of an error, you can can
+ *           specify a different error code to return.
  *           * `ReplaceKeyPrefixWith` &mdash; (`String`) The object key
  *             prefix to use in the redirect request. For example, to
  *             redirect requests for all pages with prefix docs/ (objects
@@ -806,6 +890,9 @@ AWS.S3 = inherit({})
  *           * `Protocol` &mdash; (`String`) Protocol to use (http, https)
  *             when redirecting requests. The default is the protocol that
  *             is used in the original request.
+ *             Possible values include:
+ *             * `http`
+ *             * `https`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETwebsite.html
@@ -860,6 +947,9 @@ AWS.S3 = inherit({})
  *       * `DeleteMarker` &mdash; (`String`) Specifies whether the object
  *         retrieved was (true) or was not (false) a Delete Marker. If
  *         false, this response header does not appear in the response.
+ *         Possible values include:
+ *         * `true`
+ *         * `false`
  *       * `AcceptRanges` &mdash; (`String`)
  *       * `Expiration` &mdash; (`String`) If the object expiration is
  *         configured (see PUT Bucket lifecycle), the response includes
@@ -901,7 +991,9 @@ AWS.S3 = inherit({})
  *         S3 stores the value of this header in the object metadata.
  *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
- *       * `Metadata` &mdash; (`Object<String>`) A map of metadata to store
+ *         Possible values include:
+ *         * `AES256`
+ *       * `Metadata` &mdash; (`map<String>`) A map of metadata to store
  *         with the object in S3.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -925,12 +1017,16 @@ AWS.S3 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Owner` &mdash; (`Object`)
+ *       * `Owner` &mdash; (`map`)
  *         * `ID` &mdash; (`String`)
  *         * `DisplayName` &mdash; (`String`)
- *       * `Grants` &mdash; (`Array<Object>`) A list of grants.
- *         * `Grantee` &mdash; (`Object`)
+ *       * `Grants` &mdash; (`Array<map>`) A list of grants.
+ *         * `Grantee` &mdash; (`map`)
  *           * `Type` &mdash; (`String`) Type of grantee
+ *             Possible values include:
+ *             * `CanonicalUser`
+ *             * `AmazonCustomerByEmail`
+ *             * `Group`
  *           * `ID` &mdash; (`String`) The canonical user ID of the
  *             grantee.
  *           * `DisplayName` &mdash; (`String`) Screen name of the grantee.
@@ -939,6 +1035,12 @@ AWS.S3 = inherit({})
  *           * `URI` &mdash; (`String`) URI of the grantee group.
  *         * `Permission` &mdash; (`String`) Specifies the permission given
  *           to the grantee.
+ *           Possible values include:
+ *           * `FULL_CONTROL`
+ *           * `WRITE`
+ *           * `WRITE_ACP`
+ *           * `READ`
+ *           * `READ_ACP`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETacl.html
@@ -1018,6 +1120,9 @@ AWS.S3 = inherit({})
  *       * `DeleteMarker` &mdash; (`String`) Specifies whether the object
  *         retrieved was (true) or was not (false) a Delete Marker. If
  *         false, this response header does not appear in the response.
+ *         Possible values include:
+ *         * `true`
+ *         * `false`
  *       * `AcceptRanges` &mdash; (`String`)
  *       * `Expiration` &mdash; (`String`) If the object expiration is
  *         configured (see PUT Bucket lifecycle), the response includes
@@ -1059,7 +1164,9 @@ AWS.S3 = inherit({})
  *         S3 stores the value of this header in the object metadata.
  *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
- *       * `Metadata` &mdash; (`Object<String>`) A map of metadata to store
+ *         Possible values include:
+ *         * `AES256`
+ *       * `Metadata` &mdash; (`map<String>`) A map of metadata to store
  *         with the object in S3.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -1079,10 +1186,10 @@ AWS.S3 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Buckets` &mdash; (`Array<Object>`)
+ *       * `Buckets` &mdash; (`Array<map>`)
  *         * `Name` &mdash; (`String`) The name of the bucket.
  *         * `CreationDate` &mdash; (`Date`) Date the bucket was created.
- *       * `Owner` &mdash; (`Object`)
+ *       * `Owner` &mdash; (`map`)
  *         * `ID` &mdash; (`String`)
  *         * `DisplayName` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -1138,7 +1245,7 @@ AWS.S3 = inherit({})
  *         indicates that the list was truncated. The list can be truncated
  *         if the number of multipart uploads exceeds the limit allowed or
  *         specified by max uploads.
- *       * `Uploads` &mdash; (`Array<Object>`)
+ *       * `Uploads` &mdash; (`Array<map>`)
  *         * `UploadId` &mdash; (`String`) Upload ID that identifies the
  *           multipart upload.
  *         * `Key` &mdash; (`String`) Key of the object for which the
@@ -1147,10 +1254,14 @@ AWS.S3 = inherit({})
  *           multipart upload was initiated.
  *         * `StorageClass` &mdash; (`String`) The class of storage used to
  *           store the object.
- *         * `Owner` &mdash; (`Object`)
+ *           Possible values include:
+ *           * `STANDARD`
+ *           * `REDUCED_REDUDANCY`
+ *           * `GLACIER`
+ *         * `Owner` &mdash; (`map`)
  *           * `ID` &mdash; (`String`)
  *           * `DisplayName` &mdash; (`String`)
- *         * `Initiator` &mdash; (`Object`) Identifies who initiated the
+ *         * `Initiator` &mdash; (`map`) Identifies who initiated the
  *           multipart upload.
  *           * `ID` &mdash; (`String`) If the principal is an AWS account,
  *             it provides the Canonical User ID. If the principal is an
@@ -1199,22 +1310,26 @@ AWS.S3 = inherit({})
  *         marker request parameter in a subsequent request.
  *       * `NextVersionIdMarker` &mdash; (`String`) Use this value for the
  *         next version id marker parameter in a subsequent request.
- *       * `Versions` &mdash; (`Array<Object>`)
+ *       * `Versions` &mdash; (`Array<map>`)
  *         * `ETag` &mdash; (`String`)
  *         * `Size` &mdash; (`String`) Size in bytes of the object.
  *         * `StorageClass` &mdash; (`String`) The class of storage used to
  *           store the object.
+ *           Possible values include:
+ *           * `STANDARD`
+ *           * `REDUCED_REDUDANCY`
+ *           * `GLACIER`
  *         * `Key` &mdash; (`String`) The object key.
  *         * `VersionId` &mdash; (`String`) Version ID of an object.
  *         * `IsLatest` &mdash; (`Boolean`) Specifies whether the object is
  *           (true) or is not (false) the latest version of an object.
  *         * `LastModified` &mdash; (`Date`) Date and time the object was
  *           last modified.
- *         * `Owner` &mdash; (`Object`)
+ *         * `Owner` &mdash; (`map`)
  *           * `ID` &mdash; (`String`)
  *           * `DisplayName` &mdash; (`String`)
- *       * `DeleteMarkers` &mdash; (`Array<Object>`)
- *         * `Owner` &mdash; (`Object`)
+ *       * `DeleteMarkers` &mdash; (`Array<map>`)
+ *         * `Owner` &mdash; (`map`)
  *           * `ID` &mdash; (`String`)
  *           * `DisplayName` &mdash; (`String`)
  *         * `Key` &mdash; (`String`) The object key.
@@ -1226,7 +1341,7 @@ AWS.S3 = inherit({})
  *       * `Name` &mdash; (`String`)
  *       * `Prefix` &mdash; (`String`)
  *       * `MaxKeys` &mdash; (`Integer`)
- *       * `CommonPrefixes` &mdash; (`Array<Object>`)
+ *       * `CommonPrefixes` &mdash; (`Array<map>`)
  *         * `Prefix` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -1260,20 +1375,24 @@ AWS.S3 = inherit({})
  *         or not Amazon S3 returned all of the results that satisfied the
  *         search criteria.
  *       * `Marker` &mdash; (`String`)
- *       * `Contents` &mdash; (`Array<Object>`)
+ *       * `Contents` &mdash; (`Array<map>`)
  *         * `Key` &mdash; (`String`)
  *         * `LastModified` &mdash; (`Date`)
  *         * `ETag` &mdash; (`String`)
  *         * `Size` &mdash; (`Integer`)
  *         * `StorageClass` &mdash; (`String`) The class of storage used to
  *           store the object.
- *         * `Owner` &mdash; (`Object`)
+ *           Possible values include:
+ *           * `STANDARD`
+ *           * `REDUCED_REDUDANCY`
+ *           * `GLACIER`
+ *         * `Owner` &mdash; (`map`)
  *           * `ID` &mdash; (`String`)
  *           * `DisplayName` &mdash; (`String`)
  *       * `Name` &mdash; (`String`)
  *       * `Prefix` &mdash; (`String`)
  *       * `MaxKeys` &mdash; (`Integer`)
- *       * `CommonPrefixes` &mdash; (`Array<Object>`)
+ *       * `CommonPrefixes` &mdash; (`Array<map>`)
  *         * `Prefix` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -1318,7 +1437,7 @@ AWS.S3 = inherit({})
  *         allowed in the response.
  *       * `IsTruncated` &mdash; (`Boolean`) Indicates whether the returned
  *         list of parts is truncated.
- *       * `Parts` &mdash; (`Array<Object>`)
+ *       * `Parts` &mdash; (`Array<map>`)
  *         * `PartNumber` &mdash; (`Integer`) Part number identifying the
  *           part.
  *         * `LastModified` &mdash; (`Date`) Date and time at which the
@@ -1326,17 +1445,21 @@ AWS.S3 = inherit({})
  *         * `ETag` &mdash; (`String`) Entity tag returned when the part
  *           was uploaded.
  *         * `Size` &mdash; (`Integer`) Size of the uploaded part data.
- *       * `Initiator` &mdash; (`Object`) Identifies who initiated the
+ *       * `Initiator` &mdash; (`map`) Identifies who initiated the
  *         multipart upload.
  *         * `ID` &mdash; (`String`) If the principal is an AWS account, it
  *           provides the Canonical User ID. If the principal is an IAM
  *           User, it provides a user ARN value.
  *         * `DisplayName` &mdash; (`String`) Name of the Principal.
- *       * `Owner` &mdash; (`Object`)
+ *       * `Owner` &mdash; (`map`)
  *         * `ID` &mdash; (`String`)
  *         * `DisplayName` &mdash; (`String`)
  *       * `StorageClass` &mdash; (`String`) The class of storage used to
  *         store the object.
+ *         Possible values include:
+ *         * `STANDARD`
+ *         * `REDUCED_REDUDANCY`
+ *         * `GLACIER`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *   @see http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadListParts.html
@@ -1346,9 +1469,16 @@ AWS.S3 = inherit({})
  *   Calls the PutBucketAcl API operation.
  *   @param params [Object]
  *     * `ACL` &mdash; (`String`) The canned ACL to apply to the bucket.
- *     * `AccessControlPolicy` &mdash; (`Object`)
- *       * `Grants` &mdash; (`Array<Object>`) A list of grants.
- *         * `Grantee` &mdash; (`Object`)
+ *       Possible values include:
+ *       * `private`
+ *       * `public-read`
+ *       * `public-read-write`
+ *       * `authenticated-read`
+ *       * `bucket-owner-read`
+ *       * `bucket-owner-full-control`
+ *     * `AccessControlPolicy` &mdash; (`map`)
+ *       * `Grants` &mdash; (`Array<map>`) A list of grants.
+ *         * `Grantee` &mdash; (`map`)
  *           * `DisplayName` &mdash; (`String`) Screen name of the
  *             grantee.
  *           * `EmailAddress` &mdash; (`String`) Email address of the
@@ -1357,10 +1487,20 @@ AWS.S3 = inherit({})
  *             grantee.
  *           * `Type` &mdash; **required** &mdash; (`String`) Type of
  *             grantee
+ *             Possible values include:
+ *             * `CanonicalUser`
+ *             * `AmazonCustomerByEmail`
+ *             * `Group`
  *           * `URI` &mdash; (`String`) URI of the grantee group.
  *         * `Permission` &mdash; (`String`) Specifies the permission
  *           given to the grantee.
- *       * `Owner` &mdash; (`Object`)
+ *           Possible values include:
+ *           * `FULL_CONTROL`
+ *           * `WRITE`
+ *           * `WRITE_ACP`
+ *           * `READ`
+ *           * `READ_ACP`
+ *       * `Owner` &mdash; (`map`)
  *         * `DisplayName` &mdash; (`String`)
  *         * `ID` &mdash; (`String`)
  *     * `Bucket` &mdash; **required** &mdash; (`String`)
@@ -1392,8 +1532,8 @@ AWS.S3 = inherit({})
  *   Calls the PutBucketCors API operation.
  *   @param params [Object]
  *     * `Bucket` &mdash; **required** &mdash; (`String`)
- *     * `CORSConfiguration` &mdash; (`Object`)
- *       * `CORSRules` &mdash; (`Array<Object>`)
+ *     * `CORSConfiguration` &mdash; (`map`)
+ *       * `CORSRules` &mdash; (`Array<map>`)
  *         * `AllowedMethods` &mdash; (`Array<String>`) Identifies HTTP
  *           methods that the domain/origin specified in the rule is
  *           allowed to execute.
@@ -1426,9 +1566,9 @@ AWS.S3 = inherit({})
  *   @param params [Object]
  *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *     * `ContentMD5` &mdash; (`String`)
- *     * `LifecycleConfiguration` &mdash; (`Object`)
- *       * `Rules` &mdash; **required** &mdash; (`Array<Object>`)
- *         * `Expiration` &mdash; (`Object`)
+ *     * `LifecycleConfiguration` &mdash; (`map`)
+ *       * `Rules` &mdash; **required** &mdash; (`Array<map>`)
+ *         * `Expiration` &mdash; (`map`)
  *           * `Date` &mdash; (`Date`) Indicates at what date the object
  *             is to be moved or deleted. Should be in GMT ISO 8601
  *             Format.
@@ -1442,7 +1582,10 @@ AWS.S3 = inherit({})
  *         * `Status` &mdash; **required** &mdash; (`String`) If
  *           'Enabled', the rule is currently being applied. If
  *           'Disabled', the rule is not currently being applied.
- *         * `Transition` &mdash; (`Object`)
+ *           Possible values include:
+ *           * `Enabled`
+ *           * `Disabled`
+ *         * `Transition` &mdash; (`map`)
  *           * `Date` &mdash; (`Date`) Indicates at what date the object
  *             is to be moved or deleted. Should be in GMT ISO 8601
  *             Format.
@@ -1451,6 +1594,10 @@ AWS.S3 = inherit({})
  *             value must be a non-zero positive integer.
  *           * `StorageClass` &mdash; (`String`) The class of storage
  *             used to store the object.
+ *             Possible values include:
+ *             * `STANDARD`
+ *             * `REDUCED_REDUDANCY`
+ *             * `GLACIER`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1468,8 +1615,8 @@ AWS.S3 = inherit({})
  *   Calls the PutBucketLogging API operation.
  *   @param params [Object]
  *     * `Bucket` &mdash; **required** &mdash; (`String`)
- *     * `BucketLoggingStatus` &mdash; **required** &mdash; (`Object`)
- *       * `LoggingEnabled` &mdash; **required** &mdash; (`Object`)
+ *     * `BucketLoggingStatus` &mdash; **required** &mdash; (`map`)
+ *       * `LoggingEnabled` &mdash; **required** &mdash; (`map`)
  *         * `TargetBucket` &mdash; (`String`) Specifies the bucket where
  *           you want Amazon S3 to store server access logs. You can have
  *           your logs delivered to any bucket that you own, including
@@ -1478,8 +1625,8 @@ AWS.S3 = inherit({})
  *           bucket. In this case you should choose a different
  *           TargetPrefix for each source bucket so that the delivered
  *           log files can be distinguished by key.
- *         * `TargetGrants` &mdash; (`Array<Object>`)
- *           * `Grantee` &mdash; (`Object`)
+ *         * `TargetGrants` &mdash; (`Array<map>`)
+ *           * `Grantee` &mdash; (`map`)
  *             * `DisplayName` &mdash; (`String`) Screen name of the
  *               grantee.
  *             * `EmailAddress` &mdash; (`String`) Email address of the
@@ -1488,6 +1635,10 @@ AWS.S3 = inherit({})
  *               grantee.
  *             * `Type` &mdash; **required** &mdash; (`String`) Type of
  *               grantee
+ *               Possible values include:
+ *               * `CanonicalUser`
+ *               * `AmazonCustomerByEmail`
+ *               * `Group`
  *             * `URI` &mdash; (`String`) URI of the grantee group.
  *           * `Permission` &mdash; (`String`)
  *         * `TargetPrefix` &mdash; (`String`) This element lets you
@@ -1512,11 +1663,12 @@ AWS.S3 = inherit({})
  *   @param params [Object]
  *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *     * `ContentMD5` &mdash; (`String`)
- *     * `NotificationConfiguration` &mdash; **required** &mdash;
- *       (`Object`)
- *       * `TopicConfiguration` &mdash; **required** &mdash; (`Object`)
+ *     * `NotificationConfiguration` &mdash; **required** &mdash; (`map`)
+ *       * `TopicConfiguration` &mdash; **required** &mdash; (`map`)
  *         * `Event` &mdash; (`String`) Bucket event for which to send
  *           notifications.
+ *           Possible values include:
+ *           * `s3:ReducedRedundancyLostObject`
  *         * `Topic` &mdash; (`String`) Amazon SNS topic to which Amazon
  *           S3 will publish a message to report the specified events for
  *           the bucket.
@@ -1559,9 +1711,12 @@ AWS.S3 = inherit({})
  *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *     * `ContentMD5` &mdash; (`String`)
  *     * `RequestPaymentConfiguration` &mdash; **required** &mdash;
- *       (`Object`)
+ *       (`map`)
  *       * `Payer` &mdash; **required** &mdash; (`String`) Specifies who
  *         pays for the download and request fees.
+ *         Possible values include:
+ *         * `Requester`
+ *         * `BucketOwner`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1580,8 +1735,8 @@ AWS.S3 = inherit({})
  *   @param params [Object]
  *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *     * `ContentMD5` &mdash; (`String`)
- *     * `Tagging` &mdash; **required** &mdash; (`Object`)
- *       * `TagSet` &mdash; **required** &mdash; (`Array<Object>`)
+ *     * `Tagging` &mdash; **required** &mdash; (`map`)
+ *       * `TagSet` &mdash; **required** &mdash; (`Array<map>`)
  *         * `Key` &mdash; **required** &mdash; (`String`) Name of the
  *           tag.
  *         * `Value` &mdash; **required** &mdash; (`String`) Value of the
@@ -1607,15 +1762,20 @@ AWS.S3 = inherit({})
  *     * `MFA` &mdash; (`String`) The value is the concatenation of the
  *       authentication device''s serial number, a space, and the value
  *       displayed on your authentication device.
- *     * `VersioningConfiguration` &mdash; **required** &mdash;
- *       (`Object`)
+ *     * `VersioningConfiguration` &mdash; **required** &mdash; (`map`)
  *       * `MFADelete` &mdash; (`String`) Specifies whether MFA delete is
  *         enabled in the bucket versioning configuration. This element
  *         is only returned if the bucket has been configured with MFA
  *         delete. If the bucket has never been so configured, this
  *         element is not returned.
+ *         Possible values include:
+ *         * `Enabled`
+ *         * `Disabled`
  *       * `Status` &mdash; (`String`) The versioning state of the
  *         bucket.
+ *         Possible values include:
+ *         * `Enabled`
+ *         * `Disabled`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1634,11 +1794,11 @@ AWS.S3 = inherit({})
  *   @param params [Object]
  *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *     * `ContentMD5` &mdash; (`String`)
- *     * `WebsiteConfiguration` &mdash; **required** &mdash; (`Object`)
- *       * `ErrorDocument` &mdash; (`Object`)
+ *     * `WebsiteConfiguration` &mdash; **required** &mdash; (`map`)
+ *       * `ErrorDocument` &mdash; (`map`)
  *         * `Key` &mdash; **required** &mdash; (`String`) The object key
  *           name to use when a 4XX class error occurs.
- *       * `IndexDocument` &mdash; (`Object`)
+ *       * `IndexDocument` &mdash; (`map`)
  *         * `Suffix` &mdash; **required** &mdash; (`String`) A suffix
  *           that is appended to a request that is for a directory on the
  *           website endpoint (e.g. if the suffix is index.html and you
@@ -1646,14 +1806,17 @@ AWS.S3 = inherit({})
  *           returned will be for the object with the key name
  *           images/index.html) The suffix must not be empty and must not
  *           include a slash character.
- *       * `RedirectAllRequestsTo` &mdash; (`Object`)
+ *       * `RedirectAllRequestsTo` &mdash; (`map`)
  *         * `HostName` &mdash; **required** &mdash; (`String`) Name of
  *           the host where requests will be redirected.
  *         * `Protocol` &mdash; (`String`) Protocol to use (http, https)
  *           when redirecting requests. The default is the protocol that
  *           is used in the original request.
- *       * `RoutingRules` &mdash; (`Array<Object>`)
- *         * `Condition` &mdash; (`Object`) A container for describing a
+ *           Possible values include:
+ *           * `http`
+ *           * `https`
+ *       * `RoutingRules` &mdash; (`Array<map>`)
+ *         * `Condition` &mdash; (`map`) A container for describing a
  *           condition that must be met for the specified redirect to
  *           apply. For example, 1. If request is for pages in the /docs
  *           folder, redirect to the /documents folder. 2. If request
@@ -1676,7 +1839,7 @@ AWS.S3 = inherit({})
  *             HttpErrorCodeReturnedEquals is not specified. If both
  *             conditions are specified, both must be true for the
  *             redirect to be applied.
- *         * `Redirect` &mdash; **required** &mdash; (`Object`) Container
+ *         * `Redirect` &mdash; **required** &mdash; (`map`) Container
  *           for redirect information. You can redirect requests to
  *           another host, to another page, or with another protocol. In
  *           the event of an error, you can can specify a different error
@@ -1689,6 +1852,9 @@ AWS.S3 = inherit({})
  *           * `Protocol` &mdash; (`String`) Protocol to use (http,
  *             https) when redirecting requests. The default is the
  *             protocol that is used in the original request.
+ *             Possible values include:
+ *             * `http`
+ *             * `https`
  *           * `ReplaceKeyPrefixWith` &mdash; (`String`) The object key
  *             prefix to use in the redirect request. For example, to
  *             redirect requests for all pages with prefix docs/ (objects
@@ -1719,6 +1885,13 @@ AWS.S3 = inherit({})
  *   Calls the PutObject API operation.
  *   @param params [Object]
  *     * `ACL` &mdash; (`String`) The canned ACL to apply to the object.
+ *       Possible values include:
+ *       * `private`
+ *       * `public-read`
+ *       * `public-read-write`
+ *       * `authenticated-read`
+ *       * `bucket-owner-read`
+ *       * `bucket-owner-full-control`
  *     * `Body` &mdash; (`Buffer`)
  *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *     * `CacheControl` &mdash; (`String`) Specifies caching behavior
@@ -1745,12 +1918,17 @@ AWS.S3 = inherit({})
  *     * `GrantWriteACP` &mdash; (`String`) Allows grantee to write the
  *       ACL for the applicable object.
  *     * `Key` &mdash; **required** &mdash; (`String`)
- *     * `Metadata` &mdash; (`Object<String>`) A map of metadata to store
+ *     * `Metadata` &mdash; (`map<String>`) A map of metadata to store
  *       with the object in S3.
  *     * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *       encryption algorithm used when storing this object in S3.
+ *       Possible values include:
+ *       * `AES256`
  *     * `StorageClass` &mdash; (`String`) The type of storage to use for
  *       the object. Defaults to 'STANDARD'.
+ *       Possible values include:
+ *       * `STANDARD`
+ *       * `REDUCED_REDUNDANCY`
  *     * `WebsiteRedirectLocation` &mdash; (`String`) If the bucket is
  *       configured as a website, redirects requests for this object to
  *       another object in the same bucket or to an external URL. Amazon
@@ -1770,6 +1948,8 @@ AWS.S3 = inherit({})
  *         and rule ID (rule-id). The value of rule-id is URL encoded.
  *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
+ *         Possible values include:
+ *         * `AES256`
  *       * `ETag` &mdash; (`String`) Entity tag for the uploaded object.
  *       * `VersionId` &mdash; (`String`) Version of the object.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1781,9 +1961,16 @@ AWS.S3 = inherit({})
  *   Calls the PutObjectAcl API operation.
  *   @param params [Object]
  *     * `ACL` &mdash; (`String`) The canned ACL to apply to the bucket.
- *     * `AccessControlPolicy` &mdash; (`Object`)
- *       * `Grants` &mdash; (`Array<Object>`) A list of grants.
- *         * `Grantee` &mdash; (`Object`)
+ *       Possible values include:
+ *       * `private`
+ *       * `public-read`
+ *       * `public-read-write`
+ *       * `authenticated-read`
+ *       * `bucket-owner-read`
+ *       * `bucket-owner-full-control`
+ *     * `AccessControlPolicy` &mdash; (`map`)
+ *       * `Grants` &mdash; (`Array<map>`) A list of grants.
+ *         * `Grantee` &mdash; (`map`)
  *           * `DisplayName` &mdash; (`String`) Screen name of the
  *             grantee.
  *           * `EmailAddress` &mdash; (`String`) Email address of the
@@ -1792,10 +1979,20 @@ AWS.S3 = inherit({})
  *             grantee.
  *           * `Type` &mdash; **required** &mdash; (`String`) Type of
  *             grantee
+ *             Possible values include:
+ *             * `CanonicalUser`
+ *             * `AmazonCustomerByEmail`
+ *             * `Group`
  *           * `URI` &mdash; (`String`) URI of the grantee group.
  *         * `Permission` &mdash; (`String`) Specifies the permission
  *           given to the grantee.
- *       * `Owner` &mdash; (`Object`)
+ *           Possible values include:
+ *           * `FULL_CONTROL`
+ *           * `WRITE`
+ *           * `WRITE_ACP`
+ *           * `READ`
+ *           * `READ_ACP`
+ *       * `Owner` &mdash; (`map`)
  *         * `DisplayName` &mdash; (`String`)
  *         * `ID` &mdash; (`String`)
  *     * `Bucket` &mdash; **required** &mdash; (`String`)
@@ -1829,7 +2026,7 @@ AWS.S3 = inherit({})
  *   @param params [Object]
  *     * `Bucket` &mdash; **required** &mdash; (`String`)
  *     * `Key` &mdash; **required** &mdash; (`String`)
- *     * `RestoreRequest` &mdash; (`Object`)
+ *     * `RestoreRequest` &mdash; (`map`)
  *       * `Days` &mdash; **required** &mdash; (`Integer`) Lifetime of
  *         the active copy in days
  *   @callback callback function(err, data)
@@ -1867,6 +2064,8 @@ AWS.S3 = inherit({})
  *
  *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
+ *         Possible values include:
+ *         * `AES256`
  *       * `ETag` &mdash; (`String`) Entity tag for the uploaded object.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -1914,6 +2113,8 @@ AWS.S3 = inherit({})
  *         the source bucket.
  *       * `ServerSideEncryption` &mdash; (`String`) The Server-side
  *         encryption algorithm used when storing this object in S3.
+ *         Possible values include:
+ *         * `AES256`
  *       * `ETag` &mdash; (`String`) Entity tag of the object.
  *       * `LastModified` &mdash; (`Date`) Date and time at which the
  *         object was uploaded.

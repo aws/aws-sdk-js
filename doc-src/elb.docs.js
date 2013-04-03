@@ -106,8 +106,8 @@ AWS.ELB = inherit({})
  *     * `LoadBalancerName` &mdash; **required** &mdash; (`String`) The
  *       mnemonic name associated with the LoadBalancer. This name must
  *       be unique within the client AWS account.
- *     * `HealthCheck` &mdash; **required** &mdash; (`Object`) A
- *       structure containing the configuration information for the new
+ *     * `HealthCheck` &mdash; **required** &mdash; (`map`) A structure
+ *       containing the configuration information for the new
  *       healthcheck.
  *       * `Target` &mdash; **required** &mdash; (`String`) Specifies the
  *         instance being checked. The protocol is either TCP, HTTP,
@@ -149,7 +149,7 @@ AWS.ELB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `HealthCheck` &mdash; (`Object`) The updated healthcheck for the
+ *       * `HealthCheck` &mdash; (`map`) The updated healthcheck for the
  *         instances.
  *         * `Target` &mdash; (`String`) Specifies the instance being
  *           checked. The protocol is either TCP, HTTP, HTTPS, or SSL. The
@@ -234,9 +234,9 @@ AWS.ELB = inherit({})
  *     * `LoadBalancerName` &mdash; **required** &mdash; (`String`) The
  *       name associated with the LoadBalancer. The name must be unique
  *       within your set of LoadBalancers.
- *     * `Listeners` &mdash; **required** &mdash; (`Array<Object>`) A
- *       list of the following tuples: LoadBalancerPort, InstancePort,
- *       and Protocol.
+ *     * `Listeners` &mdash; **required** &mdash; (`Array<map>`) A list
+ *       of the following tuples: LoadBalancerPort, InstancePort, and
+ *       Protocol.
  *       * `Protocol` &mdash; **required** &mdash; (`String`) Specifies
  *         the LoadBalancer transport protocol to use for routing - HTTP,
  *         HTTPS, TCP or SSL. This property cannot be modified for the
@@ -302,8 +302,8 @@ AWS.ELB = inherit({})
  *     * `LoadBalancerName` &mdash; **required** &mdash; (`String`) The
  *       name of the new LoadBalancer. The name must be unique within
  *       your AWS account.
- *     * `Listeners` &mdash; **required** &mdash; (`Array<Object>`) A
- *       list of LoadBalancerPort, InstancePort, Protocol, and
+ *     * `Listeners` &mdash; **required** &mdash; (`Array<map>`) A list
+ *       of LoadBalancerPort, InstancePort, Protocol, and
  *       SSLCertificateId items.
  *       * `Protocol` &mdash; **required** &mdash; (`String`) Specifies
  *         the LoadBalancer transport protocol to use for routing - HTTP,
@@ -358,8 +358,8 @@ AWS.ELB = inherit({})
  *       name of the base policy type being used to create this policy.
  *       To get the list of policy types, use the
  *       DescribeLoadBalancerPolicyTypes action.
- *     * `PolicyAttributes` &mdash; (`Array<Object>`) A list of
- *       attributes associated with the policy being created.
+ *     * `PolicyAttributes` &mdash; (`Array<map>`) A list of attributes
+ *       associated with the policy being created.
  *       * `AttributeName` &mdash; (`String`) The name of the attribute
  *         associated with the policy.
  *       * `AttributeValue` &mdash; (`String`) The value of the attribute
@@ -436,8 +436,8 @@ AWS.ELB = inherit({})
  *     * `LoadBalancerName` &mdash; **required** &mdash; (`String`) The
  *       name associated with the LoadBalancer. The name must be unique
  *       within the client AWS account.
- *     * `Instances` &mdash; **required** &mdash; (`Array<Object>`) A
- *       list of EC2 instance IDs consisting of all instances to be
+ *     * `Instances` &mdash; **required** &mdash; (`Array<map>`) A list
+ *       of EC2 instance IDs consisting of all instances to be
  *       deregistered.
  *       * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
  *   @callback callback function(err, data)
@@ -450,8 +450,8 @@ AWS.ELB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Instances` &mdash; (`Array<Object>`) An updated list of
- *         remaining instances registered with the LoadBalancer.
+ *       * `Instances` &mdash; (`Array<map>`) An updated list of remaining
+ *         instances registered with the LoadBalancer.
  *         * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -462,8 +462,8 @@ AWS.ELB = inherit({})
  *     * `LoadBalancerName` &mdash; **required** &mdash; (`String`) The
  *       name associated with the LoadBalancer. The name must be unique
  *       within the client AWS account.
- *     * `Instances` &mdash; (`Array<Object>`) A list of instance IDs
- *       whose states are being queried.
+ *     * `Instances` &mdash; (`Array<map>`) A list of instance IDs whose
+ *       states are being queried.
  *       * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -475,8 +475,8 @@ AWS.ELB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `InstanceStates` &mdash; (`Array<Object>`) A list containing
- *         health information for the specified instances.
+ *       * `InstanceStates` &mdash; (`Array<map>`) A list containing health
+ *         information for the specified instances.
  *         * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
  *         * `State` &mdash; (`String`) Specifies the current status of the
  *           instance.
@@ -510,14 +510,14 @@ AWS.ELB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `PolicyDescriptions` &mdash; (`Array<Object>`) A list of policy
+ *       * `PolicyDescriptions` &mdash; (`Array<map>`) A list of policy
  *         description structures.
  *         * `PolicyName` &mdash; (`String`) The name mof the policy
  *           associated with the LoadBalancer.
  *         * `PolicyTypeName` &mdash; (`String`) The name of the policy
  *           type associated with the LoadBalancer.
- *         * `PolicyAttributeDescriptions` &mdash; (`Array<Object>`) A list
- *           of policy attribute description structures.
+ *         * `PolicyAttributeDescriptions` &mdash; (`Array<map>`) A list of
+ *           policy attribute description structures.
  *           * `AttributeName` &mdash; (`String`) The name of the attribute
  *             associated with the policy.
  *           * `AttributeValue` &mdash; (`String`) The value of the
@@ -542,17 +542,16 @@ AWS.ELB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `PolicyTypeDescriptions` &mdash; (`Array<Object>`) List of
- *         policy type description structures of the specified policy type.
- *         If no policy type names are specified, returns the description
- *         of all the policy types defined by Elastic Load Balancing
- *         service.
+ *       * `PolicyTypeDescriptions` &mdash; (`Array<map>`) List of policy
+ *         type description structures of the specified policy type. If no
+ *         policy type names are specified, returns the description of all
+ *         the policy types defined by Elastic Load Balancing service.
  *         * `PolicyTypeName` &mdash; (`String`) The name of the policy
  *           type.
  *         * `Description` &mdash; (`String`) A human-readable description
  *           of the policy type.
- *         * `PolicyAttributeTypeDescriptions` &mdash; (`Array<Object>`)
- *           The description of the policy attributes associated with the
+ *         * `PolicyAttributeTypeDescriptions` &mdash; (`Array<map>`) The
+ *           description of the policy attributes associated with the
  *           LoadBalancer policies defined by the Elastic Load Balancing
  *           service.
  *           * `AttributeName` &mdash; (`String`) The name of the attribute
@@ -588,7 +587,7 @@ AWS.ELB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `LoadBalancerDescriptions` &mdash; (`Array<Object>`) A list of
+ *       * `LoadBalancerDescriptions` &mdash; (`Array<map>`) A list of
  *         LoadBalancer description structures.
  *         * `LoadBalancerName` &mdash; (`String`) Specifies the name
  *           associated with the LoadBalancer.
@@ -606,11 +605,11 @@ AWS.ELB = inherit({})
  *           disassociate your load balancer with a hosted zone, go to
  *           Using Domain Names With Elastic Load Balancing in the Elastic
  *           Load Balancing Developer Guide.
- *         * `ListenerDescriptions` &mdash; (`Array<Object>`)
+ *         * `ListenerDescriptions` &mdash; (`Array<map>`)
  *           LoadBalancerPort, InstancePort, Protocol, InstanceProtocol,
  *           and PolicyNames are returned in a list of tuples in the
  *           ListenerDescriptions element.
- *           * `Listener` &mdash; (`Object`)
+ *           * `Listener` &mdash; (`map`)
  *             * `Protocol` &mdash; (`String`) Specifies the LoadBalancer
  *               transport protocol to use for routing - HTTP, HTTPS, TCP
  *               or SSL. This property cannot be modified for the life of
@@ -642,18 +641,18 @@ AWS.ELB = inherit({})
  *           * `PolicyNames` &mdash; (`Array<String>`) A list of policies
  *             enabled for this listener. An empty list indicates that no
  *             policies are enabled.
- *         * `Policies` &mdash; (`Object`) Provides a list of policies
- *           defined for the LoadBalancer.
- *           * `AppCookieStickinessPolicies` &mdash; (`Array<Object>`) A
- *             list of the AppCookieStickinessPolicy objects created with
+ *         * `Policies` &mdash; (`map`) Provides a list of policies defined
+ *           for the LoadBalancer.
+ *           * `AppCookieStickinessPolicies` &mdash; (`Array<map>`) A list
+ *             of the AppCookieStickinessPolicy objects created with
  *             CreateAppCookieStickinessPolicy.
  *             * `PolicyName` &mdash; (`String`) The mnemonic name for the
  *               policy being created. The name must be unique within a set
  *               of policies for this LoadBalancer.
  *             * `CookieName` &mdash; (`String`) The name of the
  *               application cookie used for stickiness.
- *           * `LBCookieStickinessPolicies` &mdash; (`Array<Object>`) A
- *             list of LBCookieStickinessPolicy objects created with
+ *           * `LBCookieStickinessPolicies` &mdash; (`Array<map>`) A list
+ *             of LBCookieStickinessPolicy objects created with
  *             CreateAppCookieStickinessPolicy.
  *             * `PolicyName` &mdash; (`String`) The name for the policy
  *               being created. The name must be unique within the set of
@@ -665,8 +664,8 @@ AWS.ELB = inherit({})
  *               the browser session.
  *           * `OtherPolicies` &mdash; (`Array<String>`) A list of policy
  *             names other than the stickiness policies.
- *         * `BackendServerDescriptions` &mdash; (`Array<Object>`) Contains
- *           a list of back-end server descriptions.
+ *         * `BackendServerDescriptions` &mdash; (`Array<map>`) Contains a
+ *           list of back-end server descriptions.
  *           * `InstancePort` &mdash; (`Integer`) Provides the port on
  *             which the back-end server is listening.
  *           * `PolicyNames` &mdash; (`Array<String>`) Provides a list of
@@ -677,12 +676,11 @@ AWS.ELB = inherit({})
  *           subnet IDs for the LoadBalancer.
  *         * `VPCId` &mdash; (`String`) Provides the ID of the VPC attached
  *           to the LoadBalancer.
- *         * `Instances` &mdash; (`Array<Object>`) Provides a list of EC2
+ *         * `Instances` &mdash; (`Array<map>`) Provides a list of EC2
  *           instance IDs for the LoadBalancer.
  *           * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
- *         * `HealthCheck` &mdash; (`Object`) Specifies information
- *           regarding the various health probes conducted on the
- *           LoadBalancer.
+ *         * `HealthCheck` &mdash; (`map`) Specifies information regarding
+ *           the various health probes conducted on the LoadBalancer.
  *           * `Target` &mdash; (`String`) Specifies the instance being
  *             checked. The protocol is either TCP, HTTP, HTTPS, or SSL.
  *             The range of valid ports is one (1) through 65535. TCP is
@@ -712,8 +710,8 @@ AWS.ELB = inherit({})
  *           * `HealthyThreshold` &mdash; (`Integer`) Specifies the number
  *             of consecutive health probe successes required before moving
  *             the instance to the Healthy state.
- *         * `SourceSecurityGroup` &mdash; (`Object`) The security group
- *           that you can use as part of your inbound rules for your
+ *         * `SourceSecurityGroup` &mdash; (`map`) The security group that
+ *           you can use as part of your inbound rules for your
  *           LoadBalancer's back-end Amazon EC2 application instances. To
  *           only allow traffic from LoadBalancers, add a security group
  *           rule to your back end instance that specifies this source
@@ -824,15 +822,15 @@ AWS.ELB = inherit({})
  *     * `LoadBalancerName` &mdash; **required** &mdash; (`String`) The
  *       name associated with the LoadBalancer. The name must be unique
  *       within the client AWS account.
- *     * `Instances` &mdash; **required** &mdash; (`Array<Object>`) A
- *       list of instance IDs that should be registered with the
- *       LoadBalancer. When the instance is stopped and then restarted,
- *       the IP addresses associated with your instance changes. Elastic
- *       Load Balancing cannot recognize the new IP address, which
- *       prevents it from routing traffic to your instances. We recommend
- *       that you de-register your Amazon EC2 instances from your load
- *       balancer after you stop your instance, and then register the
- *       load balancer with your instance after you've restarted. To
+ *     * `Instances` &mdash; **required** &mdash; (`Array<map>`) A list
+ *       of instance IDs that should be registered with the LoadBalancer.
+ *       When the instance is stopped and then restarted, the IP
+ *       addresses associated with your instance changes. Elastic Load
+ *       Balancing cannot recognize the new IP address, which prevents it
+ *       from routing traffic to your instances. We recommend that you
+ *       de-register your Amazon EC2 instances from your load balancer
+ *       after you stop your instance, and then register the load
+ *       balancer with your instance after you've restarted. To
  *       de-register your instances from load balancer, use
  *       DeregisterInstancesFromLoadBalancer action.
  *       * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
@@ -846,8 +844,8 @@ AWS.ELB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Instances` &mdash; (`Array<Object>`) An updated list of
- *         instances for the LoadBalancer.
+ *       * `Instances` &mdash; (`Array<map>`) An updated list of instances
+ *         for the LoadBalancer.
  *         * `InstanceId` &mdash; (`String`) Provides an EC2 instance ID.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.

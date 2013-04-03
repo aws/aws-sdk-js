@@ -73,7 +73,7 @@ AWS.ElastiCache = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `CacheSecurityGroup` &mdash; (`Object`) Defines a set of EC2
+ *       * `CacheSecurityGroup` &mdash; (`map`) Defines a set of EC2
  *         Security groups that are allowed to access a Cache Cluster.
  *         * `OwnerId` &mdash; (`String`) Provides the AWS ID of the owner
  *           of a specific Cache Security Group.
@@ -81,8 +81,8 @@ AWS.ElastiCache = inherit({})
  *           of the Cache Security Group.
  *         * `Description` &mdash; (`String`) Provides the description of
  *           the Cache Security Group.
- *         * `EC2SecurityGroups` &mdash; (`Array<Object>`) Contains a list
- *           of EC2SecurityGroup elements.
+ *         * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list of
+ *           EC2SecurityGroup elements.
  *           * `Status` &mdash; (`String`) Provides the status of the EC2
  *             Security Group.
  *           * `EC2SecurityGroupName` &mdash; (`String`) Specifies the name
@@ -158,12 +158,12 @@ AWS.ElastiCache = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `CacheCluster` &mdash; (`Object`) Contains information about a
+ *       * `CacheCluster` &mdash; (`map`) Contains information about a
  *         Cache Cluster.
  *         * `CacheClusterId` &mdash; (`String`) Specifies a user-supplied
  *           identifier. This is the unique key that identifies a Cache
  *           Cluster.
- *         * `ConfigurationEndpoint` &mdash; (`Object`) Specifies a
+ *         * `ConfigurationEndpoint` &mdash; (`map`) Specifies a
  *           user-supplied identifier. This is the unique key that
  *           identifies a Cache Cluster.
  *           * `Address` &mdash; (`String`) Specifies the DNS address of
@@ -190,8 +190,8 @@ AWS.ElastiCache = inherit({})
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
  *           weekly time range (in UTC) during which system maintenance can
  *           occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) Specifies that
- *           changes to the Cache Cluster are pending. This element is only
+ *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
+ *           to the Cache Cluster are pending. This element is only
  *           included when changes are pending. Specific changes are
  *           identified by sub-elements.
  *           * `NumCacheNodes` &mdash; (`Integer`) Contains the new
@@ -202,14 +202,14 @@ AWS.ElastiCache = inherit({})
  *             will be applied or is in progress.
  *           * `EngineVersion` &mdash; (`String`) Contains the new version
  *             of the Cache Engine the Cache Cluster will be upgraded to.
- *         * `NotificationConfiguration` &mdash; (`Object`) Specifies the
+ *         * `NotificationConfiguration` &mdash; (`map`) Specifies the
  *           notification details the Cache Cluster contains.
  *           * `TopicArn` &mdash; (`String`) Specifies the topic Amazon
  *             Resource Name (ARN), identifying this resource.
  *           * `TopicStatus` &mdash; (`String`) Specifies the current state
  *             of this topic.
- *         * `CacheSecurityGroups` &mdash; (`Array<Object>`) Provides the
- *           list of Cache Security Group elements containing
+ *         * `CacheSecurityGroups` &mdash; (`Array<map>`) Provides the list
+ *           of Cache Security Group elements containing
  *           CacheSecurityGroup.Name and CacheSecurityGroup.Status
  *           sub-elements.
  *           * `CacheSecurityGroupName` &mdash; (`String`) The name of the
@@ -219,8 +219,8 @@ AWS.ElastiCache = inherit({})
  *             a CacheSecurityGroup is modified, or when the
  *             CacheSecurityGroups assigned to a Cache Cluster are
  *             modified.
- *         * `CacheParameterGroup` &mdash; (`Object`) Provides the status
- *           of the Cache Parameter Group assigned to the Cache Cluster.
+ *         * `CacheParameterGroup` &mdash; (`map`) Provides the status of
+ *           the Cache Parameter Group assigned to the Cache Cluster.
  *           * `CacheParameterGroupName` &mdash; (`String`) The name of the
  *             Cache Parameter Group.
  *           * `ParameterApplyStatus` &mdash; (`String`) The status of
@@ -230,7 +230,7 @@ AWS.ElastiCache = inherit({})
  *             changes to be applied.
  *         * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
  *           of the Cache Subnet Group associated with the Cache Cluster.
- *         * `CacheNodes` &mdash; (`Array<Object>`) Specifies the list of
+ *         * `CacheNodes` &mdash; (`Array<map>`) Specifies the list of
  *           Cache Nodes the Cache Cluster contains.
  *           * `CacheNodeId` &mdash; (`String`) Specifies a Cache Node
  *             identifier. This is the unique key that identifies a Cache
@@ -239,7 +239,7 @@ AWS.ElastiCache = inherit({})
  *             state of this Cache Node.
  *           * `CacheNodeCreateTime` &mdash; (`Date`) Provides the date and
  *             time the Cache Node was created.
- *           * `Endpoint` &mdash; (`Object`) Specifies the endpoint details
+ *           * `Endpoint` &mdash; (`map`) Specifies the endpoint details
  *             for a Cache Node.
  *             * `Address` &mdash; (`String`) Specifies the DNS address of
  *               the Cache Node.
@@ -249,7 +249,7 @@ AWS.ElastiCache = inherit({})
  *             status of the parameter group applied to this Cache Node.
  *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
  *           minor version patches are applied automatically.
- *         * `SecurityGroups` &mdash; (`Array<Object>`) Specifies the VPC
+ *         * `SecurityGroups` &mdash; (`Array<map>`) Specifies the VPC
  *           Security Groups associated with the Cache Cluster.
  *           * `SecurityGroupId` &mdash; (`String`) The identifier of the
  *             Cache Security Group.
@@ -282,7 +282,7 @@ AWS.ElastiCache = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `CacheParameterGroup` &mdash; (`Object`) Contains a set of
+ *       * `CacheParameterGroup` &mdash; (`map`) Contains a set of
  *         parameters and their values which can be applied to a Cache
  *         Cluster.
  *         * `CacheParameterGroupName` &mdash; (`String`) Provides the name
@@ -315,7 +315,7 @@ AWS.ElastiCache = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `CacheSecurityGroup` &mdash; (`Object`) Defines a set of EC2
+ *       * `CacheSecurityGroup` &mdash; (`map`) Defines a set of EC2
  *         Security groups that are allowed to access a Cache Cluster.
  *         * `OwnerId` &mdash; (`String`) Provides the AWS ID of the owner
  *           of a specific Cache Security Group.
@@ -323,8 +323,8 @@ AWS.ElastiCache = inherit({})
  *           of the Cache Security Group.
  *         * `Description` &mdash; (`String`) Provides the description of
  *           the Cache Security Group.
- *         * `EC2SecurityGroups` &mdash; (`Array<Object>`) Contains a list
- *           of EC2SecurityGroup elements.
+ *         * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list of
+ *           EC2SecurityGroup elements.
  *           * `Status` &mdash; (`String`) Provides the status of the EC2
  *             Security Group.
  *           * `EC2SecurityGroupName` &mdash; (`String`) Specifies the name
@@ -356,7 +356,7 @@ AWS.ElastiCache = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `CacheSubnetGroup` &mdash; (`Object`) Contains the result of a
+ *       * `CacheSubnetGroup` &mdash; (`map`) Contains the result of a
  *         successful invocation of the following actions:
  *         CreateCacheSubnetGroup ModifyCacheSubnetGroup
  *         DescribeCacheSubnetGroups DeleteCacheSubnetGroup This data type
@@ -368,11 +368,11 @@ AWS.ElastiCache = inherit({})
  *           description of the Cache Subnet Group.
  *         * `VpcId` &mdash; (`String`) Provides the VPC ID of the Cache
  *           Subnet Group.
- *         * `Subnets` &mdash; (`Array<Object>`) Contains a list of subnets
+ *         * `Subnets` &mdash; (`Array<map>`) Contains a list of subnets
  *           for this group.
  *           * `SubnetIdentifier` &mdash; (`String`) Specifies the unique
  *             identifier for the Subnet
- *           * `SubnetAvailabilityZone` &mdash; (`Object`) Specifies the
+ *           * `SubnetAvailabilityZone` &mdash; (`map`) Specifies the
  *             Availability Zone associated with the Subnet
  *             * `Name` &mdash; (`String`) Specifies the name of the
  *               Availability Zone
@@ -395,12 +395,12 @@ AWS.ElastiCache = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `CacheCluster` &mdash; (`Object`) Contains information about a
+ *       * `CacheCluster` &mdash; (`map`) Contains information about a
  *         Cache Cluster.
  *         * `CacheClusterId` &mdash; (`String`) Specifies a user-supplied
  *           identifier. This is the unique key that identifies a Cache
  *           Cluster.
- *         * `ConfigurationEndpoint` &mdash; (`Object`) Specifies a
+ *         * `ConfigurationEndpoint` &mdash; (`map`) Specifies a
  *           user-supplied identifier. This is the unique key that
  *           identifies a Cache Cluster.
  *           * `Address` &mdash; (`String`) Specifies the DNS address of
@@ -427,8 +427,8 @@ AWS.ElastiCache = inherit({})
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
  *           weekly time range (in UTC) during which system maintenance can
  *           occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) Specifies that
- *           changes to the Cache Cluster are pending. This element is only
+ *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
+ *           to the Cache Cluster are pending. This element is only
  *           included when changes are pending. Specific changes are
  *           identified by sub-elements.
  *           * `NumCacheNodes` &mdash; (`Integer`) Contains the new
@@ -439,14 +439,14 @@ AWS.ElastiCache = inherit({})
  *             will be applied or is in progress.
  *           * `EngineVersion` &mdash; (`String`) Contains the new version
  *             of the Cache Engine the Cache Cluster will be upgraded to.
- *         * `NotificationConfiguration` &mdash; (`Object`) Specifies the
+ *         * `NotificationConfiguration` &mdash; (`map`) Specifies the
  *           notification details the Cache Cluster contains.
  *           * `TopicArn` &mdash; (`String`) Specifies the topic Amazon
  *             Resource Name (ARN), identifying this resource.
  *           * `TopicStatus` &mdash; (`String`) Specifies the current state
  *             of this topic.
- *         * `CacheSecurityGroups` &mdash; (`Array<Object>`) Provides the
- *           list of Cache Security Group elements containing
+ *         * `CacheSecurityGroups` &mdash; (`Array<map>`) Provides the list
+ *           of Cache Security Group elements containing
  *           CacheSecurityGroup.Name and CacheSecurityGroup.Status
  *           sub-elements.
  *           * `CacheSecurityGroupName` &mdash; (`String`) The name of the
@@ -456,8 +456,8 @@ AWS.ElastiCache = inherit({})
  *             a CacheSecurityGroup is modified, or when the
  *             CacheSecurityGroups assigned to a Cache Cluster are
  *             modified.
- *         * `CacheParameterGroup` &mdash; (`Object`) Provides the status
- *           of the Cache Parameter Group assigned to the Cache Cluster.
+ *         * `CacheParameterGroup` &mdash; (`map`) Provides the status of
+ *           the Cache Parameter Group assigned to the Cache Cluster.
  *           * `CacheParameterGroupName` &mdash; (`String`) The name of the
  *             Cache Parameter Group.
  *           * `ParameterApplyStatus` &mdash; (`String`) The status of
@@ -467,7 +467,7 @@ AWS.ElastiCache = inherit({})
  *             changes to be applied.
  *         * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
  *           of the Cache Subnet Group associated with the Cache Cluster.
- *         * `CacheNodes` &mdash; (`Array<Object>`) Specifies the list of
+ *         * `CacheNodes` &mdash; (`Array<map>`) Specifies the list of
  *           Cache Nodes the Cache Cluster contains.
  *           * `CacheNodeId` &mdash; (`String`) Specifies a Cache Node
  *             identifier. This is the unique key that identifies a Cache
@@ -476,7 +476,7 @@ AWS.ElastiCache = inherit({})
  *             state of this Cache Node.
  *           * `CacheNodeCreateTime` &mdash; (`Date`) Provides the date and
  *             time the Cache Node was created.
- *           * `Endpoint` &mdash; (`Object`) Specifies the endpoint details
+ *           * `Endpoint` &mdash; (`map`) Specifies the endpoint details
  *             for a Cache Node.
  *             * `Address` &mdash; (`String`) Specifies the DNS address of
  *               the Cache Node.
@@ -486,7 +486,7 @@ AWS.ElastiCache = inherit({})
  *             status of the parameter group applied to this Cache Node.
  *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
  *           minor version patches are applied automatically.
- *         * `SecurityGroups` &mdash; (`Array<Object>`) Specifies the VPC
+ *         * `SecurityGroups` &mdash; (`Array<map>`) Specifies the VPC
  *           Security Groups associated with the Cache Cluster.
  *           * `SecurityGroupId` &mdash; (`String`) The identifier of the
  *             Cache Security Group.
@@ -580,12 +580,11 @@ AWS.ElastiCache = inherit({})
  *
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
- *       * `CacheClusters` &mdash; (`Array<Object>`) A list of
- *         CacheClusters.
+ *       * `CacheClusters` &mdash; (`Array<map>`) A list of CacheClusters.
  *         * `CacheClusterId` &mdash; (`String`) Specifies a user-supplied
  *           identifier. This is the unique key that identifies a Cache
  *           Cluster.
- *         * `ConfigurationEndpoint` &mdash; (`Object`) Specifies a
+ *         * `ConfigurationEndpoint` &mdash; (`map`) Specifies a
  *           user-supplied identifier. This is the unique key that
  *           identifies a Cache Cluster.
  *           * `Address` &mdash; (`String`) Specifies the DNS address of
@@ -612,8 +611,8 @@ AWS.ElastiCache = inherit({})
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
  *           weekly time range (in UTC) during which system maintenance can
  *           occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) Specifies that
- *           changes to the Cache Cluster are pending. This element is only
+ *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
+ *           to the Cache Cluster are pending. This element is only
  *           included when changes are pending. Specific changes are
  *           identified by sub-elements.
  *           * `NumCacheNodes` &mdash; (`Integer`) Contains the new
@@ -624,14 +623,14 @@ AWS.ElastiCache = inherit({})
  *             will be applied or is in progress.
  *           * `EngineVersion` &mdash; (`String`) Contains the new version
  *             of the Cache Engine the Cache Cluster will be upgraded to.
- *         * `NotificationConfiguration` &mdash; (`Object`) Specifies the
+ *         * `NotificationConfiguration` &mdash; (`map`) Specifies the
  *           notification details the Cache Cluster contains.
  *           * `TopicArn` &mdash; (`String`) Specifies the topic Amazon
  *             Resource Name (ARN), identifying this resource.
  *           * `TopicStatus` &mdash; (`String`) Specifies the current state
  *             of this topic.
- *         * `CacheSecurityGroups` &mdash; (`Array<Object>`) Provides the
- *           list of Cache Security Group elements containing
+ *         * `CacheSecurityGroups` &mdash; (`Array<map>`) Provides the list
+ *           of Cache Security Group elements containing
  *           CacheSecurityGroup.Name and CacheSecurityGroup.Status
  *           sub-elements.
  *           * `CacheSecurityGroupName` &mdash; (`String`) The name of the
@@ -641,8 +640,8 @@ AWS.ElastiCache = inherit({})
  *             a CacheSecurityGroup is modified, or when the
  *             CacheSecurityGroups assigned to a Cache Cluster are
  *             modified.
- *         * `CacheParameterGroup` &mdash; (`Object`) Provides the status
- *           of the Cache Parameter Group assigned to the Cache Cluster.
+ *         * `CacheParameterGroup` &mdash; (`map`) Provides the status of
+ *           the Cache Parameter Group assigned to the Cache Cluster.
  *           * `CacheParameterGroupName` &mdash; (`String`) The name of the
  *             Cache Parameter Group.
  *           * `ParameterApplyStatus` &mdash; (`String`) The status of
@@ -652,7 +651,7 @@ AWS.ElastiCache = inherit({})
  *             changes to be applied.
  *         * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
  *           of the Cache Subnet Group associated with the Cache Cluster.
- *         * `CacheNodes` &mdash; (`Array<Object>`) Specifies the list of
+ *         * `CacheNodes` &mdash; (`Array<map>`) Specifies the list of
  *           Cache Nodes the Cache Cluster contains.
  *           * `CacheNodeId` &mdash; (`String`) Specifies a Cache Node
  *             identifier. This is the unique key that identifies a Cache
@@ -661,7 +660,7 @@ AWS.ElastiCache = inherit({})
  *             state of this Cache Node.
  *           * `CacheNodeCreateTime` &mdash; (`Date`) Provides the date and
  *             time the Cache Node was created.
- *           * `Endpoint` &mdash; (`Object`) Specifies the endpoint details
+ *           * `Endpoint` &mdash; (`map`) Specifies the endpoint details
  *             for a Cache Node.
  *             * `Address` &mdash; (`String`) Specifies the DNS address of
  *               the Cache Node.
@@ -671,7 +670,7 @@ AWS.ElastiCache = inherit({})
  *             status of the parameter group applied to this Cache Node.
  *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
  *           minor version patches are applied automatically.
- *         * `SecurityGroups` &mdash; (`Array<Object>`) Specifies the VPC
+ *         * `SecurityGroups` &mdash; (`Array<map>`) Specifies the VPC
  *           Security Groups associated with the Cache Cluster.
  *           * `SecurityGroupId` &mdash; (`String`) The identifier of the
  *             Cache Security Group.
@@ -716,7 +715,7 @@ AWS.ElastiCache = inherit({})
  *
  *       * `Marker` &mdash; (`String`) The identifier returned to allow
  *         retrieval of paginated results.
- *       * `CacheEngineVersions` &mdash; (`Array<Object>`) A list of
+ *       * `CacheEngineVersions` &mdash; (`Array<map>`) A list of
  *         CacheEngineVersion elements.
  *         * `Engine` &mdash; (`String`) The name of the cache engine.
  *         * `EngineVersion` &mdash; (`String`) The version number of the
@@ -755,7 +754,7 @@ AWS.ElastiCache = inherit({})
  *
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
- *       * `CacheParameterGroups` &mdash; (`Array<Object>`) A list of
+ *       * `CacheParameterGroups` &mdash; (`Array<map>`) A list of
  *         CacheParameterGroup instances.
  *         * `CacheParameterGroupName` &mdash; (`String`) Provides the name
  *           of the Cache Parameter Group.
@@ -795,7 +794,7 @@ AWS.ElastiCache = inherit({})
  *
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
- *       * `Parameters` &mdash; (`Array<Object>`) A list of Parameter
+ *       * `Parameters` &mdash; (`Array<map>`) A list of Parameter
  *         instances.
  *         * `ParameterName` &mdash; (`String`) Specifies the name of the
  *           parameter.
@@ -815,8 +814,8 @@ AWS.ElastiCache = inherit({})
  *           from being changed.
  *         * `MinimumEngineVersion` &mdash; (`String`) The earliest engine
  *           version to which the parameter can apply.
- *       * `CacheNodeTypeSpecificParameters` &mdash; (`Array<Object>`) A
- *         list of CacheNodeTypeSpecificParameter instances.
+ *       * `CacheNodeTypeSpecificParameters` &mdash; (`Array<map>`) A list
+ *         of CacheNodeTypeSpecificParameter instances.
  *         * `ParameterName` &mdash; (`String`) Specifies the name of the
  *           parameter.
  *         * `Description` &mdash; (`String`) Provides a description of the
@@ -833,8 +832,8 @@ AWS.ElastiCache = inherit({})
  *           from being changed.
  *         * `MinimumEngineVersion` &mdash; (`String`) The earliest engine
  *           version to which the parameter can apply.
- *         * `CacheNodeTypeSpecificValues` &mdash; (`Array<Object>`) A list
- *           of Cache Node types and their corresponding values for this
+ *         * `CacheNodeTypeSpecificValues` &mdash; (`Array<map>`) A list of
+ *           Cache Node types and their corresponding values for this
  *           parameter.
  *           * `CacheNodeType` &mdash; (`String`) Specifies the Cache Node
  *             type for which this value applies.
@@ -869,7 +868,7 @@ AWS.ElastiCache = inherit({})
  *
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
- *       * `CacheSecurityGroups` &mdash; (`Array<Object>`) A list of
+ *       * `CacheSecurityGroups` &mdash; (`Array<map>`) A list of
  *         CacheSecurityGroup instances.
  *         * `OwnerId` &mdash; (`String`) Provides the AWS ID of the owner
  *           of a specific Cache Security Group.
@@ -877,8 +876,8 @@ AWS.ElastiCache = inherit({})
  *           of the Cache Security Group.
  *         * `Description` &mdash; (`String`) Provides the description of
  *           the Cache Security Group.
- *         * `EC2SecurityGroups` &mdash; (`Array<Object>`) Contains a list
- *           of EC2SecurityGroup elements.
+ *         * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list of
+ *           EC2SecurityGroup elements.
  *           * `Status` &mdash; (`String`) Provides the status of the EC2
  *             Security Group.
  *           * `EC2SecurityGroupName` &mdash; (`String`) Specifies the name
@@ -915,7 +914,7 @@ AWS.ElastiCache = inherit({})
  *
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
- *       * `CacheSubnetGroups` &mdash; (`Array<Object>`) One or more Cache
+ *       * `CacheSubnetGroups` &mdash; (`Array<map>`) One or more Cache
  *         Subnet Groups.
  *         * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
  *           of the Cache Subnet Group.
@@ -923,11 +922,11 @@ AWS.ElastiCache = inherit({})
  *           description of the Cache Subnet Group.
  *         * `VpcId` &mdash; (`String`) Provides the VPC ID of the Cache
  *           Subnet Group.
- *         * `Subnets` &mdash; (`Array<Object>`) Contains a list of subnets
+ *         * `Subnets` &mdash; (`Array<map>`) Contains a list of subnets
  *           for this group.
  *           * `SubnetIdentifier` &mdash; (`String`) Specifies the unique
  *             identifier for the Subnet
- *           * `SubnetAvailabilityZone` &mdash; (`Object`) Specifies the
+ *           * `SubnetAvailabilityZone` &mdash; (`map`) Specifies the
  *             Availability Zone associated with the Subnet
  *             * `Name` &mdash; (`String`) Specifies the name of the
  *               Availability Zone
@@ -959,15 +958,15 @@ AWS.ElastiCache = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `EngineDefaults` &mdash; (`Object`) The default Parameters and
+ *       * `EngineDefaults` &mdash; (`map`) The default Parameters and
  *         CacheNodeTypeSpecificParameters for a CacheParameterGroupFamily.
  *         * `CacheParameterGroupFamily` &mdash; (`String`) Specifies the
  *           name of the Cache Parameter Group Family which the engine
  *           default parameters apply to.
  *         * `Marker` &mdash; (`String`) Provides an identifier to allow
  *           retrieval of paginated results.
- *         * `Parameters` &mdash; (`Array<Object>`) Contains a list of
- *           engine default parameters.
+ *         * `Parameters` &mdash; (`Array<map>`) Contains a list of engine
+ *           default parameters.
  *           * `ParameterName` &mdash; (`String`) Specifies the name of the
  *             parameter.
  *           * `ParameterValue` &mdash; (`String`) Specifies the value of
@@ -986,7 +985,7 @@ AWS.ElastiCache = inherit({})
  *             prevent them from being changed.
  *           * `MinimumEngineVersion` &mdash; (`String`) The earliest
  *             engine version to which the parameter can apply.
- *         * `CacheNodeTypeSpecificParameters` &mdash; (`Array<Object>`) A
+ *         * `CacheNodeTypeSpecificParameters` &mdash; (`Array<map>`) A
  *           list of CacheNodeTypeSpecificParameter instances.
  *           * `ParameterName` &mdash; (`String`) Specifies the name of the
  *             parameter.
@@ -1004,9 +1003,9 @@ AWS.ElastiCache = inherit({})
  *             prevent them from being changed.
  *           * `MinimumEngineVersion` &mdash; (`String`) The earliest
  *             engine version to which the parameter can apply.
- *           * `CacheNodeTypeSpecificValues` &mdash; (`Array<Object>`) A
- *             list of Cache Node types and their corresponding values for
- *             this parameter.
+ *           * `CacheNodeTypeSpecificValues` &mdash; (`Array<map>`) A list
+ *             of Cache Node types and their corresponding values for this
+ *             parameter.
  *             * `CacheNodeType` &mdash; (`String`) Specifies the Cache
  *               Node type for which this value applies.
  *             * `Value` &mdash; (`String`) Specifies the value for the
@@ -1022,6 +1021,11 @@ AWS.ElastiCache = inherit({})
  *       specified, then all sources are included in the response.
  *     * `SourceType` &mdash; (`String`) The event source to retrieve
  *       events for. If no value is specified, all events are returned.
+ *       Possible values include:
+ *       * `cache-cluster`
+ *       * `cache-parameter-group`
+ *       * `cache-security-group`
+ *       * `cache-subnet-group`
  *     * `StartTime` &mdash; (`Date`) The beginning of the time interval
  *       to retrieve events for, specified in ISO 8601 format.
  *     * `EndTime` &mdash; (`Date`) The end of the time interval for
@@ -1048,11 +1052,16 @@ AWS.ElastiCache = inherit({})
  *
  *       * `Marker` &mdash; (`String`) The marker obtained from a previous
  *         operation response.
- *       * `Events` &mdash; (`Array<Object>`) A list of Event instances.
+ *       * `Events` &mdash; (`Array<map>`) A list of Event instances.
  *         * `SourceIdentifier` &mdash; (`String`) Provides the identifier
  *           for the source of the event.
  *         * `SourceType` &mdash; (`String`) Specifies the source type for
  *           this event.
+ *           Possible values include:
+ *           * `cache-cluster`
+ *           * `cache-parameter-group`
+ *           * `cache-security-group`
+ *           * `cache-subnet-group`
  *         * `Message` &mdash; (`String`) Provides the text of this event.
  *         * `Date` &mdash; (`Date`) Specifies the date and time of the
  *           event.
@@ -1103,7 +1112,7 @@ AWS.ElastiCache = inherit({})
  *
  *       * `Marker` &mdash; (`String`) The marker provided for paginated
  *         results.
- *       * `ReservedCacheNodes` &mdash; (`Array<Object>`) A list of of
+ *       * `ReservedCacheNodes` &mdash; (`Array<map>`) A list of of
  *         reserved Cache Nodes.
  *         * `ReservedCacheNodeId` &mdash; (`String`) The unique identifier
  *           for the reservation.
@@ -1126,8 +1135,8 @@ AWS.ElastiCache = inherit({})
  *           reserved Cache Node.
  *         * `State` &mdash; (`String`) The state of the reserved Cache
  *           Node.
- *         * `RecurringCharges` &mdash; (`Array<Object>`) The recurring
- *           price charged to run this reserved Cache Node.
+ *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring price
+ *           charged to run this reserved Cache Node.
  *           * `RecurringChargeAmount` &mdash; (`Float`) The amount of the
  *             recurring charge.
  *           * `RecurringChargeFrequency` &mdash; (`String`) The frequency
@@ -1176,8 +1185,8 @@ AWS.ElastiCache = inherit({})
  *
  *       * `Marker` &mdash; (`String`) A marker provided for paginated
  *         results.
- *       * `ReservedCacheNodesOfferings` &mdash; (`Array<Object>`) A list
- *         of reserved Cache Node offerings.
+ *       * `ReservedCacheNodesOfferings` &mdash; (`Array<map>`) A list of
+ *         reserved Cache Node offerings.
  *         * `ReservedCacheNodesOfferingId` &mdash; (`String`) The offering
  *           identifier.
  *         * `CacheNodeType` &mdash; (`String`) The Cache Node type for the
@@ -1191,8 +1200,8 @@ AWS.ElastiCache = inherit({})
  *         * `ProductDescription` &mdash; (`String`) The cache engine used
  *           by the offering.
  *         * `OfferingType` &mdash; (`String`) The offering type.
- *         * `RecurringCharges` &mdash; (`Array<Object>`) The recurring
- *           price charged to run this reserved Cache Node.
+ *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring price
+ *           charged to run this reserved Cache Node.
  *           * `RecurringChargeAmount` &mdash; (`Float`) The amount of the
  *             recurring charge.
  *           * `RecurringChargeFrequency` &mdash; (`String`) The frequency
@@ -1269,12 +1278,12 @@ AWS.ElastiCache = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `CacheCluster` &mdash; (`Object`) Contains information about a
+ *       * `CacheCluster` &mdash; (`map`) Contains information about a
  *         Cache Cluster.
  *         * `CacheClusterId` &mdash; (`String`) Specifies a user-supplied
  *           identifier. This is the unique key that identifies a Cache
  *           Cluster.
- *         * `ConfigurationEndpoint` &mdash; (`Object`) Specifies a
+ *         * `ConfigurationEndpoint` &mdash; (`map`) Specifies a
  *           user-supplied identifier. This is the unique key that
  *           identifies a Cache Cluster.
  *           * `Address` &mdash; (`String`) Specifies the DNS address of
@@ -1301,8 +1310,8 @@ AWS.ElastiCache = inherit({})
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
  *           weekly time range (in UTC) during which system maintenance can
  *           occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) Specifies that
- *           changes to the Cache Cluster are pending. This element is only
+ *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
+ *           to the Cache Cluster are pending. This element is only
  *           included when changes are pending. Specific changes are
  *           identified by sub-elements.
  *           * `NumCacheNodes` &mdash; (`Integer`) Contains the new
@@ -1313,14 +1322,14 @@ AWS.ElastiCache = inherit({})
  *             will be applied or is in progress.
  *           * `EngineVersion` &mdash; (`String`) Contains the new version
  *             of the Cache Engine the Cache Cluster will be upgraded to.
- *         * `NotificationConfiguration` &mdash; (`Object`) Specifies the
+ *         * `NotificationConfiguration` &mdash; (`map`) Specifies the
  *           notification details the Cache Cluster contains.
  *           * `TopicArn` &mdash; (`String`) Specifies the topic Amazon
  *             Resource Name (ARN), identifying this resource.
  *           * `TopicStatus` &mdash; (`String`) Specifies the current state
  *             of this topic.
- *         * `CacheSecurityGroups` &mdash; (`Array<Object>`) Provides the
- *           list of Cache Security Group elements containing
+ *         * `CacheSecurityGroups` &mdash; (`Array<map>`) Provides the list
+ *           of Cache Security Group elements containing
  *           CacheSecurityGroup.Name and CacheSecurityGroup.Status
  *           sub-elements.
  *           * `CacheSecurityGroupName` &mdash; (`String`) The name of the
@@ -1330,8 +1339,8 @@ AWS.ElastiCache = inherit({})
  *             a CacheSecurityGroup is modified, or when the
  *             CacheSecurityGroups assigned to a Cache Cluster are
  *             modified.
- *         * `CacheParameterGroup` &mdash; (`Object`) Provides the status
- *           of the Cache Parameter Group assigned to the Cache Cluster.
+ *         * `CacheParameterGroup` &mdash; (`map`) Provides the status of
+ *           the Cache Parameter Group assigned to the Cache Cluster.
  *           * `CacheParameterGroupName` &mdash; (`String`) The name of the
  *             Cache Parameter Group.
  *           * `ParameterApplyStatus` &mdash; (`String`) The status of
@@ -1341,7 +1350,7 @@ AWS.ElastiCache = inherit({})
  *             changes to be applied.
  *         * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
  *           of the Cache Subnet Group associated with the Cache Cluster.
- *         * `CacheNodes` &mdash; (`Array<Object>`) Specifies the list of
+ *         * `CacheNodes` &mdash; (`Array<map>`) Specifies the list of
  *           Cache Nodes the Cache Cluster contains.
  *           * `CacheNodeId` &mdash; (`String`) Specifies a Cache Node
  *             identifier. This is the unique key that identifies a Cache
@@ -1350,7 +1359,7 @@ AWS.ElastiCache = inherit({})
  *             state of this Cache Node.
  *           * `CacheNodeCreateTime` &mdash; (`Date`) Provides the date and
  *             time the Cache Node was created.
- *           * `Endpoint` &mdash; (`Object`) Specifies the endpoint details
+ *           * `Endpoint` &mdash; (`map`) Specifies the endpoint details
  *             for a Cache Node.
  *             * `Address` &mdash; (`String`) Specifies the DNS address of
  *               the Cache Node.
@@ -1360,7 +1369,7 @@ AWS.ElastiCache = inherit({})
  *             status of the parameter group applied to this Cache Node.
  *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
  *           minor version patches are applied automatically.
- *         * `SecurityGroups` &mdash; (`Array<Object>`) Specifies the VPC
+ *         * `SecurityGroups` &mdash; (`Array<map>`) Specifies the VPC
  *           Security Groups associated with the Cache Cluster.
  *           * `SecurityGroupId` &mdash; (`String`) The identifier of the
  *             Cache Security Group.
@@ -1377,7 +1386,7 @@ AWS.ElastiCache = inherit({})
  *     * `CacheParameterGroupName` &mdash; **required** &mdash;
  *       (`String`) The name of the cache parameter group to modify.
  *     * `ParameterNameValues` &mdash; **required** &mdash;
- *       (`Array<Object>`) An array of parameter names and values for the
+ *       (`Array<map>`) An array of parameter names and values for the
  *       parameter update. At least one parameter name and value must be
  *       supplied; subsequent arguments are optional. A maximum of 20
  *       parameters may be modified in a single request.
@@ -1421,7 +1430,7 @@ AWS.ElastiCache = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `CacheSubnetGroup` &mdash; (`Object`) Contains the result of a
+ *       * `CacheSubnetGroup` &mdash; (`map`) Contains the result of a
  *         successful invocation of the following actions:
  *         CreateCacheSubnetGroup ModifyCacheSubnetGroup
  *         DescribeCacheSubnetGroups DeleteCacheSubnetGroup This data type
@@ -1433,11 +1442,11 @@ AWS.ElastiCache = inherit({})
  *           description of the Cache Subnet Group.
  *         * `VpcId` &mdash; (`String`) Provides the VPC ID of the Cache
  *           Subnet Group.
- *         * `Subnets` &mdash; (`Array<Object>`) Contains a list of subnets
+ *         * `Subnets` &mdash; (`Array<map>`) Contains a list of subnets
  *           for this group.
  *           * `SubnetIdentifier` &mdash; (`String`) Specifies the unique
  *             identifier for the Subnet
- *           * `SubnetAvailabilityZone` &mdash; (`Object`) Specifies the
+ *           * `SubnetAvailabilityZone` &mdash; (`map`) Specifies the
  *             Availability Zone associated with the Subnet
  *             * `Name` &mdash; (`String`) Specifies the name of the
  *               Availability Zone
@@ -1464,8 +1473,8 @@ AWS.ElastiCache = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ReservedCacheNode` &mdash; (`Object`) This data type is used as
- *         a response element in the DescribeReservedCacheNodes and
+ *       * `ReservedCacheNode` &mdash; (`map`) This data type is used as a
+ *         response element in the DescribeReservedCacheNodes and
  *         PurchaseReservedCacheNodesOffering actions.
  *         * `ReservedCacheNodeId` &mdash; (`String`) The unique identifier
  *           for the reservation.
@@ -1488,8 +1497,8 @@ AWS.ElastiCache = inherit({})
  *           reserved Cache Node.
  *         * `State` &mdash; (`String`) The state of the reserved Cache
  *           Node.
- *         * `RecurringCharges` &mdash; (`Array<Object>`) The recurring
- *           price charged to run this reserved Cache Node.
+ *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring price
+ *           charged to run this reserved Cache Node.
  *           * `RecurringChargeAmount` &mdash; (`Float`) The amount of the
  *             recurring charge.
  *           * `RecurringChargeFrequency` &mdash; (`String`) The frequency
@@ -1517,12 +1526,12 @@ AWS.ElastiCache = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `CacheCluster` &mdash; (`Object`) Contains information about a
+ *       * `CacheCluster` &mdash; (`map`) Contains information about a
  *         Cache Cluster.
  *         * `CacheClusterId` &mdash; (`String`) Specifies a user-supplied
  *           identifier. This is the unique key that identifies a Cache
  *           Cluster.
- *         * `ConfigurationEndpoint` &mdash; (`Object`) Specifies a
+ *         * `ConfigurationEndpoint` &mdash; (`map`) Specifies a
  *           user-supplied identifier. This is the unique key that
  *           identifies a Cache Cluster.
  *           * `Address` &mdash; (`String`) Specifies the DNS address of
@@ -1549,8 +1558,8 @@ AWS.ElastiCache = inherit({})
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
  *           weekly time range (in UTC) during which system maintenance can
  *           occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) Specifies that
- *           changes to the Cache Cluster are pending. This element is only
+ *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
+ *           to the Cache Cluster are pending. This element is only
  *           included when changes are pending. Specific changes are
  *           identified by sub-elements.
  *           * `NumCacheNodes` &mdash; (`Integer`) Contains the new
@@ -1561,14 +1570,14 @@ AWS.ElastiCache = inherit({})
  *             will be applied or is in progress.
  *           * `EngineVersion` &mdash; (`String`) Contains the new version
  *             of the Cache Engine the Cache Cluster will be upgraded to.
- *         * `NotificationConfiguration` &mdash; (`Object`) Specifies the
+ *         * `NotificationConfiguration` &mdash; (`map`) Specifies the
  *           notification details the Cache Cluster contains.
  *           * `TopicArn` &mdash; (`String`) Specifies the topic Amazon
  *             Resource Name (ARN), identifying this resource.
  *           * `TopicStatus` &mdash; (`String`) Specifies the current state
  *             of this topic.
- *         * `CacheSecurityGroups` &mdash; (`Array<Object>`) Provides the
- *           list of Cache Security Group elements containing
+ *         * `CacheSecurityGroups` &mdash; (`Array<map>`) Provides the list
+ *           of Cache Security Group elements containing
  *           CacheSecurityGroup.Name and CacheSecurityGroup.Status
  *           sub-elements.
  *           * `CacheSecurityGroupName` &mdash; (`String`) The name of the
@@ -1578,8 +1587,8 @@ AWS.ElastiCache = inherit({})
  *             a CacheSecurityGroup is modified, or when the
  *             CacheSecurityGroups assigned to a Cache Cluster are
  *             modified.
- *         * `CacheParameterGroup` &mdash; (`Object`) Provides the status
- *           of the Cache Parameter Group assigned to the Cache Cluster.
+ *         * `CacheParameterGroup` &mdash; (`map`) Provides the status of
+ *           the Cache Parameter Group assigned to the Cache Cluster.
  *           * `CacheParameterGroupName` &mdash; (`String`) The name of the
  *             Cache Parameter Group.
  *           * `ParameterApplyStatus` &mdash; (`String`) The status of
@@ -1589,7 +1598,7 @@ AWS.ElastiCache = inherit({})
  *             changes to be applied.
  *         * `CacheSubnetGroupName` &mdash; (`String`) Specifies the name
  *           of the Cache Subnet Group associated with the Cache Cluster.
- *         * `CacheNodes` &mdash; (`Array<Object>`) Specifies the list of
+ *         * `CacheNodes` &mdash; (`Array<map>`) Specifies the list of
  *           Cache Nodes the Cache Cluster contains.
  *           * `CacheNodeId` &mdash; (`String`) Specifies a Cache Node
  *             identifier. This is the unique key that identifies a Cache
@@ -1598,7 +1607,7 @@ AWS.ElastiCache = inherit({})
  *             state of this Cache Node.
  *           * `CacheNodeCreateTime` &mdash; (`Date`) Provides the date and
  *             time the Cache Node was created.
- *           * `Endpoint` &mdash; (`Object`) Specifies the endpoint details
+ *           * `Endpoint` &mdash; (`map`) Specifies the endpoint details
  *             for a Cache Node.
  *             * `Address` &mdash; (`String`) Specifies the DNS address of
  *               the Cache Node.
@@ -1608,7 +1617,7 @@ AWS.ElastiCache = inherit({})
  *             status of the parameter group applied to this Cache Node.
  *         * `AutoMinorVersionUpgrade` &mdash; (`Boolean`) Indicates that
  *           minor version patches are applied automatically.
- *         * `SecurityGroups` &mdash; (`Array<Object>`) Specifies the VPC
+ *         * `SecurityGroups` &mdash; (`Array<map>`) Specifies the VPC
  *           Security Groups associated with the Cache Cluster.
  *           * `SecurityGroupId` &mdash; (`String`) The identifier of the
  *             Cache Security Group.
@@ -1628,7 +1637,7 @@ AWS.ElastiCache = inherit({})
  *       (true) or not (false) to reset all parameters in the Cache
  *       Parameter Group to default values.
  *     * `ParameterNameValues` &mdash; **required** &mdash;
- *       (`Array<Object>`) An array of parameter names which should be
+ *       (`Array<map>`) An array of parameter names which should be
  *       reset. If not resetting the entire CacheParameterGroup, at least
  *       one parameter name must be supplied.
  *       * `ParameterName` &mdash; (`String`) Specifies the name of the
@@ -1671,7 +1680,7 @@ AWS.ElastiCache = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `CacheSecurityGroup` &mdash; (`Object`) Defines a set of EC2
+ *       * `CacheSecurityGroup` &mdash; (`map`) Defines a set of EC2
  *         Security groups that are allowed to access a Cache Cluster.
  *         * `OwnerId` &mdash; (`String`) Provides the AWS ID of the owner
  *           of a specific Cache Security Group.
@@ -1679,8 +1688,8 @@ AWS.ElastiCache = inherit({})
  *           of the Cache Security Group.
  *         * `Description` &mdash; (`String`) Provides the description of
  *           the Cache Security Group.
- *         * `EC2SecurityGroups` &mdash; (`Array<Object>`) Contains a list
- *           of EC2SecurityGroup elements.
+ *         * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list of
+ *           EC2SecurityGroup elements.
  *           * `Status` &mdash; (`String`) Provides the status of the EC2
  *             Security Group.
  *           * `EC2SecurityGroupName` &mdash; (`String`) Specifies the name

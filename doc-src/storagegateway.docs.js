@@ -69,6 +69,38 @@ AWS.StorageGateway = inherit({})
  *       the values that indicates the time zone you want to set for the
  *       gateway. The time zone is used, for example, for scheduling
  *       snapshots and your gateway's maintenance schedule.
+ *       Possible values include:
+ *       * `GMT-12:00`
+ *       * `GMT-11:00`
+ *       * `GMT-10:00`
+ *       * `GMT-9:00`
+ *       * `GMT-8:00`
+ *       * `GMT-7:00`
+ *       * `GMT-6:00`
+ *       * `GMT-5:00`
+ *       * `GMT-4:00`
+ *       * `GMT-3:30`
+ *       * `GMT-3:00`
+ *       * `GMT-2:00`
+ *       * `GMT-1:00`
+ *       * `GMT`
+ *       * `GMT+1:00`
+ *       * `GMT+2:00`
+ *       * `GMT+3:00`
+ *       * `GMT+3:30`
+ *       * `GMT+4:00`
+ *       * `GMT+4:30`
+ *       * `GMT+5:00`
+ *       * `GMT+5:30`
+ *       * `GMT+5:45`
+ *       * `GMT+6:00`
+ *       * `GMT+7:00`
+ *       * `GMT+8:00`
+ *       * `GMT+9:00`
+ *       * `GMT+9:30`
+ *       * `GMT+10:00`
+ *       * `GMT+11:00`
+ *       * `GMT+12:00`
  *     * `GatewayRegion` &mdash; **required** &mdash; (`String`) One of
  *       the values that indicates the region where you want to store the
  *       snapshot backups. The gateway region specified must be the same
@@ -82,6 +114,9 @@ AWS.StorageGateway = inherit({})
  *       the type of gateway to activate. The type specified is critical
  *       to all later functions of the gateway and cannot be changed
  *       after activation. The default value is STORED.
+ *       Possible values include:
+ *       * `STORED`
+ *       * `CACHED`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -295,6 +330,10 @@ AWS.StorageGateway = inherit({})
  *   @param params [Object]
  *     * `GatewayARN` &mdash; **required** &mdash; (`String`)
  *     * `BandwidthType` &mdash; **required** &mdash; (`String`)
+ *       Possible values include:
+ *       * `UPLOAD`
+ *       * `DOWNLOAD`
+ *       * `ALL`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -470,7 +509,7 @@ AWS.StorageGateway = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `CachediSCSIVolumes` &mdash; (`Array<Object>`) An array of
+ *       * `CachediSCSIVolumes` &mdash; (`Array<map>`) An array of
  *         CachediSCSIVolume objects where each object contains metadata
  *         about one cached volume.
  *         * `VolumeARN` &mdash; (`String`) The Amazon Resource Name (ARN)
@@ -479,8 +518,22 @@ AWS.StorageGateway = inherit({})
  *           storage volume, e.g. vol-1122AABB.
  *         * `VolumeType` &mdash; (`String`) A value describing the type of
  *           volume.
+ *           Possible values include:
+ *           * `STORED iSCSI`
+ *           * `CACHED iSCSI`
  *         * `VolumeStatus` &mdash; (`String`) A value that indicates the
  *           state of the volume.
+ *           Possible values include:
+ *           * `CREATING`
+ *           * `AVAILABLE`
+ *           * `RESTORING`
+ *           * `BOOTSTRAPPING`
+ *           * `IRRECOVERABLE`
+ *           * `PASS THROUGH`
+ *           * `RESTORE AND PASS THROUGH`
+ *           * `DELETED`
+ *           * `WORKING STORAGE NOT CONFIGURED`
+ *           * `UPLOAD BUFFER NOT CONFIGURED`
  *         * `VolumeSizeInBytes` &mdash; (`Integer`) The size of the volume
  *           in bytes that was specified in the API_CreateCachediSCSIVolume
  *           operation.
@@ -493,7 +546,7 @@ AWS.StorageGateway = inherit({})
  *           created from a snapshot, this field contains the snapshot ID
  *           used, e.g. snap-1122aabb. Otherwise, this field is not
  *           included.
- *         * `VolumeiSCSIAttributes` &mdash; (`Object`)
+ *         * `VolumeiSCSIAttributes` &mdash; (`map`)
  *           * `TargetARN` &mdash; (`String`)
  *           * `NetworkInterfaceId` &mdash; (`String`)
  *           * `NetworkInterfacePort` &mdash; (`Integer`)
@@ -516,7 +569,7 @@ AWS.StorageGateway = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ChapCredentials` &mdash; (`Array<Object>`)
+ *       * `ChapCredentials` &mdash; (`Array<map>`)
  *         * `TargetARN` &mdash; (`String`)
  *         * `SecretToAuthenticateInitiator` &mdash; (`String`)
  *         * `InitiatorName` &mdash; (`String`)
@@ -542,15 +595,53 @@ AWS.StorageGateway = inherit({})
  *       * `GatewayId` &mdash; (`String`) The gateway ID.
  *       * `GatewayTimezone` &mdash; (`String`) One of the GatewayTimezone
  *         values that indicates the time zone configured for the gateway.
+ *         Possible values include:
+ *         * `GMT-12:00`
+ *         * `GMT-11:00`
+ *         * `GMT-10:00`
+ *         * `GMT-9:00`
+ *         * `GMT-8:00`
+ *         * `GMT-7:00`
+ *         * `GMT-6:00`
+ *         * `GMT-5:00`
+ *         * `GMT-4:00`
+ *         * `GMT-3:30`
+ *         * `GMT-3:00`
+ *         * `GMT-2:00`
+ *         * `GMT-1:00`
+ *         * `GMT`
+ *         * `GMT+1:00`
+ *         * `GMT+2:00`
+ *         * `GMT+3:00`
+ *         * `GMT+3:30`
+ *         * `GMT+4:00`
+ *         * `GMT+4:30`
+ *         * `GMT+5:00`
+ *         * `GMT+5:30`
+ *         * `GMT+5:45`
+ *         * `GMT+6:00`
+ *         * `GMT+7:00`
+ *         * `GMT+8:00`
+ *         * `GMT+9:00`
+ *         * `GMT+9:30`
+ *         * `GMT+10:00`
+ *         * `GMT+11:00`
+ *         * `GMT+12:00`
  *       * `GatewayState` &mdash; (`String`) One of the GatewayState values
  *         that indicates the operating state of the gateway.
- *       * `GatewayNetworkInterfaces` &mdash; (`Array<Object>`) A
+ *         Possible values include:
+ *         * `RUNNING`
+ *         * `SHUTDOWN`
+ *       * `GatewayNetworkInterfaces` &mdash; (`Array<map>`) A
  *         NetworkInterface array that contains descriptions of the gateway
  *         network interfaces.
  *         * `Ipv4Address` &mdash; (`String`)
  *         * `MacAddress` &mdash; (`String`)
  *         * `Ipv6Address` &mdash; (`String`)
  *       * `GatewayType` &mdash; (`String`) TBD
+ *         Possible values include:
+ *         * `STORED`
+ *         * `CACHED`
  *       * `NextUpdateAvailabilityDate` &mdash; (`String`) The date at
  *         which an update to the gateway is available. This date is in the
  *         time zone of the gateway. If the gateway is not available for an
@@ -577,6 +668,38 @@ AWS.StorageGateway = inherit({})
  *       * `MinuteOfHour` &mdash; (`Integer`)
  *       * `DayOfWeek` &mdash; (`Integer`)
  *       * `Timezone` &mdash; (`String`)
+ *         Possible values include:
+ *         * `GMT-12:00`
+ *         * `GMT-11:00`
+ *         * `GMT-10:00`
+ *         * `GMT-9:00`
+ *         * `GMT-8:00`
+ *         * `GMT-7:00`
+ *         * `GMT-6:00`
+ *         * `GMT-5:00`
+ *         * `GMT-4:00`
+ *         * `GMT-3:30`
+ *         * `GMT-3:00`
+ *         * `GMT-2:00`
+ *         * `GMT-1:00`
+ *         * `GMT`
+ *         * `GMT+1:00`
+ *         * `GMT+2:00`
+ *         * `GMT+3:00`
+ *         * `GMT+3:30`
+ *         * `GMT+4:00`
+ *         * `GMT+4:30`
+ *         * `GMT+5:00`
+ *         * `GMT+5:30`
+ *         * `GMT+5:45`
+ *         * `GMT+6:00`
+ *         * `GMT+7:00`
+ *         * `GMT+8:00`
+ *         * `GMT+9:00`
+ *         * `GMT+9:30`
+ *         * `GMT+10:00`
+ *         * `GMT+11:00`
+ *         * `GMT+12:00`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -599,6 +722,38 @@ AWS.StorageGateway = inherit({})
  *       * `RecurrenceInHours` &mdash; (`Integer`)
  *       * `Description` &mdash; (`String`)
  *       * `Timezone` &mdash; (`String`)
+ *         Possible values include:
+ *         * `GMT-12:00`
+ *         * `GMT-11:00`
+ *         * `GMT-10:00`
+ *         * `GMT-9:00`
+ *         * `GMT-8:00`
+ *         * `GMT-7:00`
+ *         * `GMT-6:00`
+ *         * `GMT-5:00`
+ *         * `GMT-4:00`
+ *         * `GMT-3:30`
+ *         * `GMT-3:00`
+ *         * `GMT-2:00`
+ *         * `GMT-1:00`
+ *         * `GMT`
+ *         * `GMT+1:00`
+ *         * `GMT+2:00`
+ *         * `GMT+3:00`
+ *         * `GMT+3:30`
+ *         * `GMT+4:00`
+ *         * `GMT+4:30`
+ *         * `GMT+5:00`
+ *         * `GMT+5:30`
+ *         * `GMT+5:45`
+ *         * `GMT+6:00`
+ *         * `GMT+7:00`
+ *         * `GMT+8:00`
+ *         * `GMT+9:00`
+ *         * `GMT+9:30`
+ *         * `GMT+10:00`
+ *         * `GMT+11:00`
+ *         * `GMT+12:00`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -616,17 +771,31 @@ AWS.StorageGateway = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `StorediSCSIVolumes` &mdash; (`Array<Object>`)
+ *       * `StorediSCSIVolumes` &mdash; (`Array<map>`)
  *         * `VolumeARN` &mdash; (`String`)
  *         * `VolumeId` &mdash; (`String`)
  *         * `VolumeType` &mdash; (`String`)
+ *           Possible values include:
+ *           * `STORED iSCSI`
+ *           * `CACHED iSCSI`
  *         * `VolumeStatus` &mdash; (`String`)
+ *           Possible values include:
+ *           * `CREATING`
+ *           * `AVAILABLE`
+ *           * `RESTORING`
+ *           * `BOOTSTRAPPING`
+ *           * `IRRECOVERABLE`
+ *           * `PASS THROUGH`
+ *           * `RESTORE AND PASS THROUGH`
+ *           * `DELETED`
+ *           * `WORKING STORAGE NOT CONFIGURED`
+ *           * `UPLOAD BUFFER NOT CONFIGURED`
  *         * `VolumeSizeInBytes` &mdash; (`Integer`)
  *         * `VolumeProgress` &mdash; (`Float`)
  *         * `VolumeDiskId` &mdash; (`String`)
  *         * `SourceSnapshotId` &mdash; (`String`)
  *         * `PreservedExistingData` &mdash; (`Boolean`)
- *         * `VolumeiSCSIAttributes` &mdash; (`Object`)
+ *         * `VolumeiSCSIAttributes` &mdash; (`map`)
  *           * `TargetARN` &mdash; (`String`)
  *           * `NetworkInterfaceId` &mdash; (`String`)
  *           * `NetworkInterfacePort` &mdash; (`Integer`)
@@ -706,7 +875,7 @@ AWS.StorageGateway = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Gateways` &mdash; (`Array<Object>`)
+ *       * `Gateways` &mdash; (`Array<map>`)
  *         * `GatewayARN` &mdash; (`String`)
  *       * `Marker` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -727,12 +896,18 @@ AWS.StorageGateway = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `GatewayARN` &mdash; (`String`)
- *       * `Disks` &mdash; (`Array<Object>`)
+ *       * `Disks` &mdash; (`Array<map>`)
  *         * `DiskId` &mdash; (`String`)
  *         * `DiskPath` &mdash; (`String`)
  *         * `DiskNode` &mdash; (`String`)
  *         * `DiskSizeInBytes` &mdash; (`Integer`)
  *         * `DiskAllocationType` &mdash; (`String`)
+ *           Possible values include:
+ *           * `AVAILABLE`
+ *           * `CACHE STORAGE`
+ *           * `STORED iSCSI VOLUME`
+ *           * `UPLOAD BUFFER`
+ *           * `WORKING STORAGE`
  *         * `DiskAllocationResource` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -757,7 +932,7 @@ AWS.StorageGateway = inherit({})
  *       * `GatewayARN` &mdash; (`String`) The Amazon Resource Name (ARN)
  *         of the activated gateway whose local disk information is
  *         returned.
- *       * `VolumeRecoveryPointInfos` &mdash; (`Array<Object>`) An array of
+ *       * `VolumeRecoveryPointInfos` &mdash; (`Array<map>`) An array of
  *         VolumeRecoveryPointInfo objects, where each object describes a
  *         recovery point. If no recovery points are defined for the
  *         volume, then VolumeRecoveryPointInfos is an empty array "[]"
@@ -791,9 +966,12 @@ AWS.StorageGateway = inherit({})
  *
  *       * `GatewayARN` &mdash; (`String`)
  *       * `Marker` &mdash; (`String`)
- *       * `VolumeInfos` &mdash; (`Array<Object>`)
+ *       * `VolumeInfos` &mdash; (`Array<map>`)
  *         * `VolumeARN` &mdash; (`String`)
  *         * `VolumeType` &mdash; (`String`)
+ *           Possible values include:
+ *           * `STORED iSCSI`
+ *           * `CACHED iSCSI`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -882,6 +1060,38 @@ AWS.StorageGateway = inherit({})
  *     * `GatewayARN` &mdash; **required** &mdash; (`String`)
  *     * `GatewayName` &mdash; (`String`)
  *     * `GatewayTimezone` &mdash; (`String`)
+ *       Possible values include:
+ *       * `GMT-12:00`
+ *       * `GMT-11:00`
+ *       * `GMT-10:00`
+ *       * `GMT-9:00`
+ *       * `GMT-8:00`
+ *       * `GMT-7:00`
+ *       * `GMT-6:00`
+ *       * `GMT-5:00`
+ *       * `GMT-4:00`
+ *       * `GMT-3:30`
+ *       * `GMT-3:00`
+ *       * `GMT-2:00`
+ *       * `GMT-1:00`
+ *       * `GMT`
+ *       * `GMT+1:00`
+ *       * `GMT+2:00`
+ *       * `GMT+3:00`
+ *       * `GMT+3:30`
+ *       * `GMT+4:00`
+ *       * `GMT+4:30`
+ *       * `GMT+5:00`
+ *       * `GMT+5:30`
+ *       * `GMT+5:45`
+ *       * `GMT+6:00`
+ *       * `GMT+7:00`
+ *       * `GMT+8:00`
+ *       * `GMT+9:00`
+ *       * `GMT+9:30`
+ *       * `GMT+10:00`
+ *       * `GMT+11:00`
+ *       * `GMT+12:00`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}

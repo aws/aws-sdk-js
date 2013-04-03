@@ -76,13 +76,13 @@ AWS.Redshift = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ClusterSecurityGroup` &mdash; (`Object`) Describes a security
+ *       * `ClusterSecurityGroup` &mdash; (`map`) Describes a security
  *         group.
  *         * `ClusterSecurityGroupName` &mdash; (`String`) The name of the
  *           cluster security group to which the operation was applied.
  *         * `Description` &mdash; (`String`) A description of the security
  *           group.
- *         * `EC2SecurityGroups` &mdash; (`Array<Object>`) A list of EC2
+ *         * `EC2SecurityGroups` &mdash; (`Array<map>`) A list of EC2
  *           security groups that are permitted to access clusters
  *           associated with this cluster security group.
  *           * `Status` &mdash; (`String`) The status of the EC2 security
@@ -92,7 +92,7 @@ AWS.Redshift = inherit({})
  *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) The AWS ID of
  *             the owner of the EC2 security group specified in the
  *             EC2SecurityGroupName field.
- *         * `IPRanges` &mdash; (`Array<Object>`) A list of IP ranges (CIDR
+ *         * `IPRanges` &mdash; (`Array<map>`) A list of IP ranges (CIDR
  *           blocks) that are permitted to access clusters associated with
  *           this cluster security group.
  *           * `Status` &mdash; (`String`) The status of the IP range, for
@@ -126,7 +126,7 @@ AWS.Redshift = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Snapshot` &mdash; (`Object`) Describes a snapshot.
+ *       * `Snapshot` &mdash; (`map`) Describes a snapshot.
  *         * `SnapshotIdentifier` &mdash; (`String`) The snapshot
  *           identifier that is provided in the request.
  *         * `ClusterIdentifier` &mdash; (`String`) The identifier of the
@@ -296,7 +296,7 @@ AWS.Redshift = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Cluster` &mdash; (`Object`) Describes a cluster.
+ *       * `Cluster` &mdash; (`map`) Describes a cluster.
  *         * `ClusterIdentifier` &mdash; (`String`) The unique identifier
  *           of the cluster.
  *         * `NodeType` &mdash; (`String`) The node type for the nodes in
@@ -314,7 +314,7 @@ AWS.Redshift = inherit({})
  *           is returned for the life of the cluster. If an initial
  *           database was not specified, a database named "dev" was created
  *           by default.
- *         * `Endpoint` &mdash; (`Object`) The connection endpoint.
+ *         * `Endpoint` &mdash; (`map`) The connection endpoint.
  *           * `Address` &mdash; (`String`) The DNS address of the Cluster.
  *           * `Port` &mdash; (`Integer`) The port that the database engine
  *             is listening on.
@@ -322,7 +322,7 @@ AWS.Redshift = inherit({})
  *           the cluster was created.
  *         * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
  *           number of days that automatic cluster snapshots are retained.
- *         * `ClusterSecurityGroups` &mdash; (`Array<Object>`) A list of
+ *         * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
  *           cluster security group that are associated with the cluster.
  *           Each security group is represented by an element that contains
  *           ClusterSecurityGroup.Name and ClusterSecurityGroup.Status
@@ -334,13 +334,13 @@ AWS.Redshift = inherit({})
  *             the cluster security group.
  *           * `Status` &mdash; (`String`) The status of the cluster
  *             security group.
- *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) A list of
- *           Virtual Private Cloud (VPC) security groups that are
- *           associated with the cluster. This parameter is returned only
- *           if the cluster is in a VPC.
+ *         * `VpcSecurityGroups` &mdash; (`Array<map>`) A list of Virtual
+ *           Private Cloud (VPC) security groups that are associated with
+ *           the cluster. This parameter is returned only if the cluster is
+ *           in a VPC.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
- *         * `ClusterParameterGroups` &mdash; (`Array<Object>`) The list of
+ *         * `ClusterParameterGroups` &mdash; (`Array<map>`) The list of
  *           cluster parameter groups that are associated with this
  *           cluster.
  *           * `ParameterGroupName` &mdash; (`String`) The name of the
@@ -356,8 +356,8 @@ AWS.Redshift = inherit({})
  *           Availability Zone in which the cluster is located.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
  *           time range (in UTC) during which system maintenance can occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) If present, changes
- *           to the cluster are pending. Specific pending changes are
+ *         * `PendingModifiedValues` &mdash; (`map`) If present, changes to
+ *           the cluster are pending. Specific pending changes are
  *           identified by subelements.
  *           * `MasterUserPassword` &mdash; (`String`) The pending or
  *             in-progress change of the master credentials for the
@@ -419,7 +419,7 @@ AWS.Redshift = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ClusterParameterGroup` &mdash; (`Object`) Describes a parameter
+ *       * `ClusterParameterGroup` &mdash; (`map`) Describes a parameter
  *         group.
  *         * `ParameterGroupName` &mdash; (`String`) The name of the
  *           cluster parameter group.
@@ -453,13 +453,13 @@ AWS.Redshift = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ClusterSecurityGroup` &mdash; (`Object`) Describes a security
+ *       * `ClusterSecurityGroup` &mdash; (`map`) Describes a security
  *         group.
  *         * `ClusterSecurityGroupName` &mdash; (`String`) The name of the
  *           cluster security group to which the operation was applied.
  *         * `Description` &mdash; (`String`) A description of the security
  *           group.
- *         * `EC2SecurityGroups` &mdash; (`Array<Object>`) A list of EC2
+ *         * `EC2SecurityGroups` &mdash; (`Array<map>`) A list of EC2
  *           security groups that are permitted to access clusters
  *           associated with this cluster security group.
  *           * `Status` &mdash; (`String`) The status of the EC2 security
@@ -469,7 +469,7 @@ AWS.Redshift = inherit({})
  *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) The AWS ID of
  *             the owner of the EC2 security group specified in the
  *             EC2SecurityGroupName field.
- *         * `IPRanges` &mdash; (`Array<Object>`) A list of IP ranges (CIDR
+ *         * `IPRanges` &mdash; (`Array<map>`) A list of IP ranges (CIDR
  *           blocks) that are permitted to access clusters associated with
  *           this cluster security group.
  *           * `Status` &mdash; (`String`) The status of the IP range, for
@@ -501,7 +501,7 @@ AWS.Redshift = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Snapshot` &mdash; (`Object`) Describes a snapshot.
+ *       * `Snapshot` &mdash; (`map`) Describes a snapshot.
  *         * `SnapshotIdentifier` &mdash; (`String`) The snapshot
  *           identifier that is provided in the request.
  *         * `ClusterIdentifier` &mdash; (`String`) The identifier of the
@@ -566,8 +566,7 @@ AWS.Redshift = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ClusterSubnetGroup` &mdash; (`Object`) Describes a subnet
- *         group.
+ *       * `ClusterSubnetGroup` &mdash; (`map`) Describes a subnet group.
  *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
  *           cluster subnet group.
  *         * `Description` &mdash; (`String`) The description of the
@@ -577,11 +576,11 @@ AWS.Redshift = inherit({})
  *         * `SubnetGroupStatus` &mdash; (`String`) The status of the
  *           cluster subnet group. Possible values are Complete, Incomplete
  *           and Invalid.
- *         * `Subnets` &mdash; (`Array<Object>`) A list of the VPC Subnet
+ *         * `Subnets` &mdash; (`Array<map>`) A list of the VPC Subnet
  *           elements.
  *           * `SubnetIdentifier` &mdash; (`String`) The identifier of the
  *             subnet.
- *           * `SubnetAvailabilityZone` &mdash; (`Object`)
+ *           * `SubnetAvailabilityZone` &mdash; (`map`)
  *             * `Name` &mdash; (`String`) The name of the availability
  *               zone.
  *           * `SubnetStatus` &mdash; (`String`) The status of the subnet.
@@ -621,7 +620,7 @@ AWS.Redshift = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Cluster` &mdash; (`Object`) Describes a cluster.
+ *       * `Cluster` &mdash; (`map`) Describes a cluster.
  *         * `ClusterIdentifier` &mdash; (`String`) The unique identifier
  *           of the cluster.
  *         * `NodeType` &mdash; (`String`) The node type for the nodes in
@@ -639,7 +638,7 @@ AWS.Redshift = inherit({})
  *           is returned for the life of the cluster. If an initial
  *           database was not specified, a database named "dev" was created
  *           by default.
- *         * `Endpoint` &mdash; (`Object`) The connection endpoint.
+ *         * `Endpoint` &mdash; (`map`) The connection endpoint.
  *           * `Address` &mdash; (`String`) The DNS address of the Cluster.
  *           * `Port` &mdash; (`Integer`) The port that the database engine
  *             is listening on.
@@ -647,7 +646,7 @@ AWS.Redshift = inherit({})
  *           the cluster was created.
  *         * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
  *           number of days that automatic cluster snapshots are retained.
- *         * `ClusterSecurityGroups` &mdash; (`Array<Object>`) A list of
+ *         * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
  *           cluster security group that are associated with the cluster.
  *           Each security group is represented by an element that contains
  *           ClusterSecurityGroup.Name and ClusterSecurityGroup.Status
@@ -659,13 +658,13 @@ AWS.Redshift = inherit({})
  *             the cluster security group.
  *           * `Status` &mdash; (`String`) The status of the cluster
  *             security group.
- *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) A list of
- *           Virtual Private Cloud (VPC) security groups that are
- *           associated with the cluster. This parameter is returned only
- *           if the cluster is in a VPC.
+ *         * `VpcSecurityGroups` &mdash; (`Array<map>`) A list of Virtual
+ *           Private Cloud (VPC) security groups that are associated with
+ *           the cluster. This parameter is returned only if the cluster is
+ *           in a VPC.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
- *         * `ClusterParameterGroups` &mdash; (`Array<Object>`) The list of
+ *         * `ClusterParameterGroups` &mdash; (`Array<map>`) The list of
  *           cluster parameter groups that are associated with this
  *           cluster.
  *           * `ParameterGroupName` &mdash; (`String`) The name of the
@@ -681,8 +680,8 @@ AWS.Redshift = inherit({})
  *           Availability Zone in which the cluster is located.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
  *           time range (in UTC) during which system maintenance can occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) If present, changes
- *           to the cluster are pending. Specific pending changes are
+ *         * `PendingModifiedValues` &mdash; (`map`) If present, changes to
+ *           the cluster are pending. Specific pending changes are
  *           identified by subelements.
  *           * `MasterUserPassword` &mdash; (`String`) The pending or
  *             in-progress change of the master credentials for the
@@ -763,7 +762,7 @@ AWS.Redshift = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Snapshot` &mdash; (`Object`) Describes a snapshot.
+ *       * `Snapshot` &mdash; (`map`) Describes a snapshot.
  *         * `SnapshotIdentifier` &mdash; (`String`) The snapshot
  *           identifier that is provided in the request.
  *         * `ClusterIdentifier` &mdash; (`String`) The identifier of the
@@ -851,7 +850,7 @@ AWS.Redshift = inherit({})
  *         listing cluster parameter groups in a new request. The response
  *         returns a marker if there are more parameter groups to list than
  *         returned in the response.
- *       * `ParameterGroups` &mdash; (`Array<Object>`) A list of
+ *       * `ParameterGroups` &mdash; (`Array<map>`) A list of
  *         ClusterParameterGroup instances. Each instance describes one
  *         cluster parameter group.
  *         * `ParameterGroupName` &mdash; (`String`) The name of the
@@ -894,7 +893,7 @@ AWS.Redshift = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Parameters` &mdash; (`Array<Object>`) A list of Parameter
+ *       * `Parameters` &mdash; (`Array<map>`) A list of Parameter
  *         instances. Each instance lists the parameters of one cluster
  *         parameter group.
  *         * `ParameterName` &mdash; (`String`) The name of the parameter.
@@ -953,13 +952,13 @@ AWS.Redshift = inherit({})
  *         listing cluster security groups in a new request. The response
  *         returns a marker if there are more security groups to list than
  *         could be returned in the response.
- *       * `ClusterSecurityGroups` &mdash; (`Array<Object>`) A list of
+ *       * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
  *         ClusterSecurityGroup instances.
  *         * `ClusterSecurityGroupName` &mdash; (`String`) The name of the
  *           cluster security group to which the operation was applied.
  *         * `Description` &mdash; (`String`) A description of the security
  *           group.
- *         * `EC2SecurityGroups` &mdash; (`Array<Object>`) A list of EC2
+ *         * `EC2SecurityGroups` &mdash; (`Array<map>`) A list of EC2
  *           security groups that are permitted to access clusters
  *           associated with this cluster security group.
  *           * `Status` &mdash; (`String`) The status of the EC2 security
@@ -969,7 +968,7 @@ AWS.Redshift = inherit({})
  *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) The AWS ID of
  *             the owner of the EC2 security group specified in the
  *             EC2SecurityGroupName field.
- *         * `IPRanges` &mdash; (`Array<Object>`) A list of IP ranges (CIDR
+ *         * `IPRanges` &mdash; (`Array<map>`) A list of IP ranges (CIDR
  *           blocks) that are permitted to access clusters associated with
  *           this cluster security group.
  *           * `Status` &mdash; (`String`) The status of the IP range, for
@@ -1023,8 +1022,7 @@ AWS.Redshift = inherit({})
  *         snapshot that a subsequent DescribeClusterSnapshots request will
  *         return. The response returns a marker only if there are more
  *         snapshots to list than the current response can return.
- *       * `Snapshots` &mdash; (`Array<Object>`) A list of Snapshot
- *         instances.
+ *       * `Snapshots` &mdash; (`Array<map>`) A list of Snapshot instances.
  *         * `SnapshotIdentifier` &mdash; (`String`) The snapshot
  *           identifier that is provided in the request.
  *         * `ClusterIdentifier` &mdash; (`String`) The identifier of the
@@ -1094,7 +1092,7 @@ AWS.Redshift = inherit({})
  *         listing cluster subnet groups in a new request. A marker is
  *         returned if there are more cluster subnet groups to list than
  *         were returned in the response.
- *       * `ClusterSubnetGroups` &mdash; (`Array<Object>`) A list of
+ *       * `ClusterSubnetGroups` &mdash; (`Array<map>`) A list of
  *         ClusterSubnetGroup instances.
  *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
  *           cluster subnet group.
@@ -1105,11 +1103,11 @@ AWS.Redshift = inherit({})
  *         * `SubnetGroupStatus` &mdash; (`String`) The status of the
  *           cluster subnet group. Possible values are Complete, Incomplete
  *           and Invalid.
- *         * `Subnets` &mdash; (`Array<Object>`) A list of the VPC Subnet
+ *         * `Subnets` &mdash; (`Array<map>`) A list of the VPC Subnet
  *           elements.
  *           * `SubnetIdentifier` &mdash; (`String`) The identifier of the
  *             subnet.
- *           * `SubnetAvailabilityZone` &mdash; (`Object`)
+ *           * `SubnetAvailabilityZone` &mdash; (`map`)
  *             * `Name` &mdash; (`String`) The name of the availability
  *               zone.
  *           * `SubnetStatus` &mdash; (`String`) The status of the subnet.
@@ -1146,7 +1144,7 @@ AWS.Redshift = inherit({})
  *
  *       * `Marker` &mdash; (`String`) The identifier returned to allow
  *         retrieval of paginated results.
- *       * `ClusterVersions` &mdash; (`Array<Object>`) A list of Version
+ *       * `ClusterVersions` &mdash; (`Array<map>`) A list of Version
  *         elements.
  *         * `ClusterVersion` &mdash; (`String`) The version number used by
  *           the cluster.
@@ -1188,7 +1186,7 @@ AWS.Redshift = inherit({})
  *       * `Marker` &mdash; (`String`) A marker at which to continue
  *         listing clusters in a new request. A marker is returned if there
  *         are more clusters to list than were returned in the response.
- *       * `Clusters` &mdash; (`Array<Object>`) A list of Cluster objects,
+ *       * `Clusters` &mdash; (`Array<map>`) A list of Cluster objects,
  *         where each object describes one cluster.
  *         * `ClusterIdentifier` &mdash; (`String`) The unique identifier
  *           of the cluster.
@@ -1207,7 +1205,7 @@ AWS.Redshift = inherit({})
  *           is returned for the life of the cluster. If an initial
  *           database was not specified, a database named "dev" was created
  *           by default.
- *         * `Endpoint` &mdash; (`Object`) The connection endpoint.
+ *         * `Endpoint` &mdash; (`map`) The connection endpoint.
  *           * `Address` &mdash; (`String`) The DNS address of the Cluster.
  *           * `Port` &mdash; (`Integer`) The port that the database engine
  *             is listening on.
@@ -1215,7 +1213,7 @@ AWS.Redshift = inherit({})
  *           the cluster was created.
  *         * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
  *           number of days that automatic cluster snapshots are retained.
- *         * `ClusterSecurityGroups` &mdash; (`Array<Object>`) A list of
+ *         * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
  *           cluster security group that are associated with the cluster.
  *           Each security group is represented by an element that contains
  *           ClusterSecurityGroup.Name and ClusterSecurityGroup.Status
@@ -1227,13 +1225,13 @@ AWS.Redshift = inherit({})
  *             the cluster security group.
  *           * `Status` &mdash; (`String`) The status of the cluster
  *             security group.
- *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) A list of
- *           Virtual Private Cloud (VPC) security groups that are
- *           associated with the cluster. This parameter is returned only
- *           if the cluster is in a VPC.
+ *         * `VpcSecurityGroups` &mdash; (`Array<map>`) A list of Virtual
+ *           Private Cloud (VPC) security groups that are associated with
+ *           the cluster. This parameter is returned only if the cluster is
+ *           in a VPC.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
- *         * `ClusterParameterGroups` &mdash; (`Array<Object>`) The list of
+ *         * `ClusterParameterGroups` &mdash; (`Array<map>`) The list of
  *           cluster parameter groups that are associated with this
  *           cluster.
  *           * `ParameterGroupName` &mdash; (`String`) The name of the
@@ -1249,8 +1247,8 @@ AWS.Redshift = inherit({})
  *           Availability Zone in which the cluster is located.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
  *           time range (in UTC) during which system maintenance can occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) If present, changes
- *           to the cluster are pending. Specific pending changes are
+ *         * `PendingModifiedValues` &mdash; (`map`) If present, changes to
+ *           the cluster are pending. Specific pending changes are
  *           identified by subelements.
  *           * `MasterUserPassword` &mdash; (`String`) The pending or
  *             in-progress change of the master credentials for the
@@ -1304,14 +1302,14 @@ AWS.Redshift = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DefaultClusterParameters` &mdash; (`Object`) Describes the
- *         default cluster parameters for a parameter group family.
+ *       * `DefaultClusterParameters` &mdash; (`map`) Describes the default
+ *         cluster parameters for a parameter group family.
  *         * `ParameterGroupFamily` &mdash; (`String`) The name of the
  *           cluster parameter group family to which the engine default
  *           parameters apply.
  *         * `Marker` &mdash; (`String`) An identifier to allow retrieval
  *           of paginated results.
- *         * `Parameters` &mdash; (`Array<Object>`) The list of cluster
+ *         * `Parameters` &mdash; (`Array<map>`) The list of cluster
  *           default parameters.
  *           * `ParameterName` &mdash; (`String`) The name of the
  *             parameter.
@@ -1356,6 +1354,11 @@ AWS.Redshift = inherit({})
  *       cluster-parameter-group when SourceIdentifier is a cluster
  *       parameter group name. Specify cluster-snapshot when
  *       SourceIdentifier is a cluster snapshot identifier.
+ *       Possible values include:
+ *       * `cluster`
+ *       * `cluster-parameter-group`
+ *       * `cluster-security-group`
+ *       * `cluster-snapshot`
  *     * `StartTime` &mdash; (`Date`) The beginning of the time interval
  *       to retrieve events for, specified in ISO 8601 format. For more
  *       information about ISO 8601, go to the ISO8601 Wikipedia page.
@@ -1391,11 +1394,16 @@ AWS.Redshift = inherit({})
  *       * `Marker` &mdash; (`String`) A marker at which to continue
  *         listing events in a new request. The response returns a marker
  *         if there are more events to list than returned in the response.
- *       * `Events` &mdash; (`Array<Object>`) A list of Event instances.
+ *       * `Events` &mdash; (`Array<map>`) A list of Event instances.
  *         * `SourceIdentifier` &mdash; (`String`) The identifier for the
  *           source of the event.
  *         * `SourceType` &mdash; (`String`) The source type for this
  *           event.
+ *           Possible values include:
+ *           * `cluster`
+ *           * `cluster-parameter-group`
+ *           * `cluster-security-group`
+ *           * `cluster-snapshot`
  *         * `Message` &mdash; (`String`) The text of this event.
  *         * `Date` &mdash; (`Date`) The date and time of the event.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1431,7 +1439,7 @@ AWS.Redshift = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `OrderableClusterOptions` &mdash; (`Array<Object>`) An
+ *       * `OrderableClusterOptions` &mdash; (`Array<map>`) An
  *         OrderableClusterOption structure containing information about
  *         orderable options for the Cluster.
  *         * `ClusterVersion` &mdash; (`String`) The version of the
@@ -1440,7 +1448,7 @@ AWS.Redshift = inherit({})
  *           multi-node.
  *         * `NodeType` &mdash; (`String`) The node type for the orderable
  *           cluster.
- *         * `AvailabilityZones` &mdash; (`Array<Object>`) A list of
+ *         * `AvailabilityZones` &mdash; (`Array<map>`) A list of
  *           availability zones for the orderable cluster.
  *           * `Name` &mdash; (`String`) The name of the availability zone.
  *       * `Marker` &mdash; (`String`) A marker that can be used to
@@ -1476,7 +1484,7 @@ AWS.Redshift = inherit({})
  *       * `Marker` &mdash; (`String`) An optional marker returned by a
  *         previous DescribeReservedNodeOfferings request to indicate the
  *         first reserved node offering that the request will return.
- *       * `ReservedNodeOfferings` &mdash; (`Array<Object>`) A list of
+ *       * `ReservedNodeOfferings` &mdash; (`Array<map>`) A list of
  *         reserved node offerings.
  *         * `ReservedNodeOfferingId` &mdash; (`String`) The offering
  *           identifier.
@@ -1493,10 +1501,10 @@ AWS.Redshift = inherit({})
  *         * `OfferingType` &mdash; (`String`) The anticipated utilization
  *           of the reserved node, as defined in the reserved node
  *           offering.
- *         * `RecurringCharges` &mdash; (`Array<Object>`) The charge to
- *           your account regardless of whether you are creating any
- *           clusters using the node offering. Recurring charges are only
- *           in effect for heavy-utilization reserved nodes.
+ *         * `RecurringCharges` &mdash; (`Array<map>`) The charge to your
+ *           account regardless of whether you are creating any clusters
+ *           using the node offering. Recurring charges are only in effect
+ *           for heavy-utilization reserved nodes.
  *           * `RecurringChargeAmount` &mdash; (`Float`) The amount charged
  *             per the period of time specified by the recurring charge
  *             frequency.
@@ -1530,7 +1538,7 @@ AWS.Redshift = inherit({})
  *
  *       * `Marker` &mdash; (`String`) A marker that can be used to
  *         retrieve paginated results.
- *       * `ReservedNodes` &mdash; (`Array<Object>`) The list of reserved
+ *       * `ReservedNodes` &mdash; (`Array<map>`) The list of reserved
  *         nodes.
  *         * `ReservedNodeId` &mdash; (`String`) The unique identifier for
  *           the reservation.
@@ -1560,7 +1568,7 @@ AWS.Redshift = inherit({})
  *         * `OfferingType` &mdash; (`String`) The anticipated utilization
  *           of the reserved node, as defined in the reserved node
  *           offering.
- *         * `RecurringCharges` &mdash; (`Array<Object>`) The recurring
+ *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring
  *           charges for the reserved node.
  *           * `RecurringChargeAmount` &mdash; (`Float`) The amount charged
  *             per the period of time specified by the recurring charge
@@ -1716,7 +1724,7 @@ AWS.Redshift = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Cluster` &mdash; (`Object`) Describes a cluster.
+ *       * `Cluster` &mdash; (`map`) Describes a cluster.
  *         * `ClusterIdentifier` &mdash; (`String`) The unique identifier
  *           of the cluster.
  *         * `NodeType` &mdash; (`String`) The node type for the nodes in
@@ -1734,7 +1742,7 @@ AWS.Redshift = inherit({})
  *           is returned for the life of the cluster. If an initial
  *           database was not specified, a database named "dev" was created
  *           by default.
- *         * `Endpoint` &mdash; (`Object`) The connection endpoint.
+ *         * `Endpoint` &mdash; (`map`) The connection endpoint.
  *           * `Address` &mdash; (`String`) The DNS address of the Cluster.
  *           * `Port` &mdash; (`Integer`) The port that the database engine
  *             is listening on.
@@ -1742,7 +1750,7 @@ AWS.Redshift = inherit({})
  *           the cluster was created.
  *         * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
  *           number of days that automatic cluster snapshots are retained.
- *         * `ClusterSecurityGroups` &mdash; (`Array<Object>`) A list of
+ *         * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
  *           cluster security group that are associated with the cluster.
  *           Each security group is represented by an element that contains
  *           ClusterSecurityGroup.Name and ClusterSecurityGroup.Status
@@ -1754,13 +1762,13 @@ AWS.Redshift = inherit({})
  *             the cluster security group.
  *           * `Status` &mdash; (`String`) The status of the cluster
  *             security group.
- *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) A list of
- *           Virtual Private Cloud (VPC) security groups that are
- *           associated with the cluster. This parameter is returned only
- *           if the cluster is in a VPC.
+ *         * `VpcSecurityGroups` &mdash; (`Array<map>`) A list of Virtual
+ *           Private Cloud (VPC) security groups that are associated with
+ *           the cluster. This parameter is returned only if the cluster is
+ *           in a VPC.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
- *         * `ClusterParameterGroups` &mdash; (`Array<Object>`) The list of
+ *         * `ClusterParameterGroups` &mdash; (`Array<map>`) The list of
  *           cluster parameter groups that are associated with this
  *           cluster.
  *           * `ParameterGroupName` &mdash; (`String`) The name of the
@@ -1776,8 +1784,8 @@ AWS.Redshift = inherit({})
  *           Availability Zone in which the cluster is located.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
  *           time range (in UTC) during which system maintenance can occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) If present, changes
- *           to the cluster are pending. Specific pending changes are
+ *         * `PendingModifiedValues` &mdash; (`map`) If present, changes to
+ *           the cluster are pending. Specific pending changes are
  *           identified by subelements.
  *           * `MasterUserPassword` &mdash; (`String`) The pending or
  *             in-progress change of the master credentials for the
@@ -1812,7 +1820,7 @@ AWS.Redshift = inherit({})
  *   @param params [Object]
  *     * `ParameterGroupName` &mdash; **required** &mdash; (`String`) The
  *       name of the parameter group to be modified.
- *     * `Parameters` &mdash; **required** &mdash; (`Array<Object>`) An
+ *     * `Parameters` &mdash; **required** &mdash; (`Array<map>`) An
  *       array of parameters to be modified. A maximum of 20 parameters
  *       can be modified in a single request. For each parameter to be
  *       modified, you must supply at least the parameter name and
@@ -1872,8 +1880,7 @@ AWS.Redshift = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ClusterSubnetGroup` &mdash; (`Object`) Describes a subnet
- *         group.
+ *       * `ClusterSubnetGroup` &mdash; (`map`) Describes a subnet group.
  *         * `ClusterSubnetGroupName` &mdash; (`String`) The name of the
  *           cluster subnet group.
  *         * `Description` &mdash; (`String`) The description of the
@@ -1883,11 +1890,11 @@ AWS.Redshift = inherit({})
  *         * `SubnetGroupStatus` &mdash; (`String`) The status of the
  *           cluster subnet group. Possible values are Complete, Incomplete
  *           and Invalid.
- *         * `Subnets` &mdash; (`Array<Object>`) A list of the VPC Subnet
+ *         * `Subnets` &mdash; (`Array<map>`) A list of the VPC Subnet
  *           elements.
  *           * `SubnetIdentifier` &mdash; (`String`) The identifier of the
  *             subnet.
- *           * `SubnetAvailabilityZone` &mdash; (`Object`)
+ *           * `SubnetAvailabilityZone` &mdash; (`map`)
  *             * `Name` &mdash; (`String`) The name of the availability
  *               zone.
  *           * `SubnetStatus` &mdash; (`String`) The status of the subnet.
@@ -1912,7 +1919,7 @@ AWS.Redshift = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ReservedNode` &mdash; (`Object`) Describes a reserved node.
+ *       * `ReservedNode` &mdash; (`map`) Describes a reserved node.
  *         * `ReservedNodeId` &mdash; (`String`) The unique identifier for
  *           the reservation.
  *         * `ReservedNodeOfferingId` &mdash; (`String`) The identifier for
@@ -1941,7 +1948,7 @@ AWS.Redshift = inherit({})
  *         * `OfferingType` &mdash; (`String`) The anticipated utilization
  *           of the reserved node, as defined in the reserved node
  *           offering.
- *         * `RecurringCharges` &mdash; (`Array<Object>`) The recurring
+ *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring
  *           charges for the reserved node.
  *           * `RecurringChargeAmount` &mdash; (`Float`) The amount charged
  *             per the period of time specified by the recurring charge
@@ -1966,7 +1973,7 @@ AWS.Redshift = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Cluster` &mdash; (`Object`) Describes a cluster.
+ *       * `Cluster` &mdash; (`map`) Describes a cluster.
  *         * `ClusterIdentifier` &mdash; (`String`) The unique identifier
  *           of the cluster.
  *         * `NodeType` &mdash; (`String`) The node type for the nodes in
@@ -1984,7 +1991,7 @@ AWS.Redshift = inherit({})
  *           is returned for the life of the cluster. If an initial
  *           database was not specified, a database named "dev" was created
  *           by default.
- *         * `Endpoint` &mdash; (`Object`) The connection endpoint.
+ *         * `Endpoint` &mdash; (`map`) The connection endpoint.
  *           * `Address` &mdash; (`String`) The DNS address of the Cluster.
  *           * `Port` &mdash; (`Integer`) The port that the database engine
  *             is listening on.
@@ -1992,7 +1999,7 @@ AWS.Redshift = inherit({})
  *           the cluster was created.
  *         * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
  *           number of days that automatic cluster snapshots are retained.
- *         * `ClusterSecurityGroups` &mdash; (`Array<Object>`) A list of
+ *         * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
  *           cluster security group that are associated with the cluster.
  *           Each security group is represented by an element that contains
  *           ClusterSecurityGroup.Name and ClusterSecurityGroup.Status
@@ -2004,13 +2011,13 @@ AWS.Redshift = inherit({})
  *             the cluster security group.
  *           * `Status` &mdash; (`String`) The status of the cluster
  *             security group.
- *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) A list of
- *           Virtual Private Cloud (VPC) security groups that are
- *           associated with the cluster. This parameter is returned only
- *           if the cluster is in a VPC.
+ *         * `VpcSecurityGroups` &mdash; (`Array<map>`) A list of Virtual
+ *           Private Cloud (VPC) security groups that are associated with
+ *           the cluster. This parameter is returned only if the cluster is
+ *           in a VPC.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
- *         * `ClusterParameterGroups` &mdash; (`Array<Object>`) The list of
+ *         * `ClusterParameterGroups` &mdash; (`Array<map>`) The list of
  *           cluster parameter groups that are associated with this
  *           cluster.
  *           * `ParameterGroupName` &mdash; (`String`) The name of the
@@ -2026,8 +2033,8 @@ AWS.Redshift = inherit({})
  *           Availability Zone in which the cluster is located.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
  *           time range (in UTC) during which system maintenance can occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) If present, changes
- *           to the cluster are pending. Specific pending changes are
+ *         * `PendingModifiedValues` &mdash; (`map`) If present, changes to
+ *           the cluster are pending. Specific pending changes are
  *           identified by subelements.
  *           * `MasterUserPassword` &mdash; (`String`) The pending or
  *             in-progress change of the master credentials for the
@@ -2065,7 +2072,7 @@ AWS.Redshift = inherit({})
  *     * `ResetAllParameters` &mdash; (`Boolean`) If true, all parameters
  *       in the specified parameter group will be reset to their default
  *       values. Default: true
- *     * `Parameters` &mdash; (`Array<Object>`) An array of names of
+ *     * `Parameters` &mdash; (`Array<map>`) An array of names of
  *       parameters to be reset. If ResetAllParameters option is not
  *       used, then at least one parameter name must be supplied.
  *       Constraints: A maximum of 20 parameters can be reset in a single
@@ -2142,7 +2149,7 @@ AWS.Redshift = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Cluster` &mdash; (`Object`) Describes a cluster.
+ *       * `Cluster` &mdash; (`map`) Describes a cluster.
  *         * `ClusterIdentifier` &mdash; (`String`) The unique identifier
  *           of the cluster.
  *         * `NodeType` &mdash; (`String`) The node type for the nodes in
@@ -2160,7 +2167,7 @@ AWS.Redshift = inherit({})
  *           is returned for the life of the cluster. If an initial
  *           database was not specified, a database named "dev" was created
  *           by default.
- *         * `Endpoint` &mdash; (`Object`) The connection endpoint.
+ *         * `Endpoint` &mdash; (`map`) The connection endpoint.
  *           * `Address` &mdash; (`String`) The DNS address of the Cluster.
  *           * `Port` &mdash; (`Integer`) The port that the database engine
  *             is listening on.
@@ -2168,7 +2175,7 @@ AWS.Redshift = inherit({})
  *           the cluster was created.
  *         * `AutomatedSnapshotRetentionPeriod` &mdash; (`Integer`) The
  *           number of days that automatic cluster snapshots are retained.
- *         * `ClusterSecurityGroups` &mdash; (`Array<Object>`) A list of
+ *         * `ClusterSecurityGroups` &mdash; (`Array<map>`) A list of
  *           cluster security group that are associated with the cluster.
  *           Each security group is represented by an element that contains
  *           ClusterSecurityGroup.Name and ClusterSecurityGroup.Status
@@ -2180,13 +2187,13 @@ AWS.Redshift = inherit({})
  *             the cluster security group.
  *           * `Status` &mdash; (`String`) The status of the cluster
  *             security group.
- *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) A list of
- *           Virtual Private Cloud (VPC) security groups that are
- *           associated with the cluster. This parameter is returned only
- *           if the cluster is in a VPC.
+ *         * `VpcSecurityGroups` &mdash; (`Array<map>`) A list of Virtual
+ *           Private Cloud (VPC) security groups that are associated with
+ *           the cluster. This parameter is returned only if the cluster is
+ *           in a VPC.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
- *         * `ClusterParameterGroups` &mdash; (`Array<Object>`) The list of
+ *         * `ClusterParameterGroups` &mdash; (`Array<map>`) The list of
  *           cluster parameter groups that are associated with this
  *           cluster.
  *           * `ParameterGroupName` &mdash; (`String`) The name of the
@@ -2202,8 +2209,8 @@ AWS.Redshift = inherit({})
  *           Availability Zone in which the cluster is located.
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) The weekly
  *           time range (in UTC) during which system maintenance can occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) If present, changes
- *           to the cluster are pending. Specific pending changes are
+ *         * `PendingModifiedValues` &mdash; (`map`) If present, changes to
+ *           the cluster are pending. Specific pending changes are
  *           identified by subelements.
  *           * `MasterUserPassword` &mdash; (`String`) The pending or
  *             in-progress change of the master credentials for the
@@ -2264,13 +2271,13 @@ AWS.Redshift = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ClusterSecurityGroup` &mdash; (`Object`) Describes a security
+ *       * `ClusterSecurityGroup` &mdash; (`map`) Describes a security
  *         group.
  *         * `ClusterSecurityGroupName` &mdash; (`String`) The name of the
  *           cluster security group to which the operation was applied.
  *         * `Description` &mdash; (`String`) A description of the security
  *           group.
- *         * `EC2SecurityGroups` &mdash; (`Array<Object>`) A list of EC2
+ *         * `EC2SecurityGroups` &mdash; (`Array<map>`) A list of EC2
  *           security groups that are permitted to access clusters
  *           associated with this cluster security group.
  *           * `Status` &mdash; (`String`) The status of the EC2 security
@@ -2280,7 +2287,7 @@ AWS.Redshift = inherit({})
  *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) The AWS ID of
  *             the owner of the EC2 security group specified in the
  *             EC2SecurityGroupName field.
- *         * `IPRanges` &mdash; (`Array<Object>`) A list of IP ranges (CIDR
+ *         * `IPRanges` &mdash; (`Array<map>`) A list of IP ranges (CIDR
  *           blocks) that are permitted to access clusters associated with
  *           this cluster security group.
  *           * `Status` &mdash; (`String`) The status of the IP range, for

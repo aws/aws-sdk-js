@@ -55,10 +55,10 @@ AWS.ElasticTranscoder = inherit({})
  * @!method cancelJob(params, callback)
  *   Calls the CancelJob API operation.
  *   @param params [Object]
- *     * `Id` &mdash; **required** &mdash; (`String`) The identifier of
- *       the job that you want to delete. To get a list of the jobs
- *       (including their jobId) that have a status of Submitted, use the
- *       ListJobsByStatus API action.
+ *     * `Id` &mdash; (`String`) The identifier of the job that you want
+ *       to delete. To get a list of the jobs (including their jobId)
+ *       that have a status of Submitted, use the ListJobsByStatus API
+ *       action.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -73,15 +73,13 @@ AWS.ElasticTranscoder = inherit({})
  * @!method createJob(params, callback)
  *   Calls the CreateJob API operation.
  *   @param params [Object]
- *     * `PipelineId` &mdash; **required** &mdash; (`String`) The Id of
- *       the pipeline that you want Elastic Transcoder to use for
- *       transcoding. The pipeline determines several settings, including
- *       the Amazon S3 bucket from which Elastic Transcoder gets the
- *       files to transcode and the bucket into which Elastic Transcoder
- *       puts the transcoded files.
- *     * `Input` &mdash; **required** &mdash; (`Object`) A section of the
- *       request body that provides information about the file that is
- *       being transcoded.
+ *     * `PipelineId` &mdash; (`String`) The Id of the pipeline that you
+ *       want Elastic Transcoder to use for transcoding. The pipeline
+ *       determines several settings, including the Amazon S3 bucket from
+ *       which Elastic Transcoder gets the files to transcode and the
+ *       bucket into which Elastic Transcoder puts the transcoded files.
+ *     * `Input` &mdash; (`map`) A section of the request body that
+ *       provides information about the file that is being transcoded.
  *       * `Key` &mdash; (`String`) The name of the file to transcode.
  *         Elsewhere in the body of the JSON block is the the ID of the
  *         pipeline to use for processing the job. The InputBucket object
@@ -125,9 +123,8 @@ AWS.ElasticTranscoder = inherit({})
  *         enter one of the following values: 3gp, asf, avi, divx, flv,
  *         mkv, mov, mp4, mpeg, mpeg-ps, mpeg-ts, mxf, ogg, vob, wav,
  *         webm
- *     * `Output` &mdash; **required** &mdash; (`Object`) A section of
- *       the request body that provides information about the transcoded
- *       (target) file.
+ *     * `Output` &mdash; (`map`) A section of the request body that
+ *       provides information about the transcoded (target) file.
  *       * `Key` &mdash; (`String`) The name to assign to the transcoded
  *         file. Elastic Transcoder saves the file in the Amazon S3
  *         bucket specified by the OutputBucket object in the pipeline
@@ -180,7 +177,7 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Job` &mdash; (`Object`) A section of the response body that
+ *       * `Job` &mdash; (`map`) A section of the response body that
  *         provides information about the job that is created.
  *         * `Id` &mdash; (`String`) The identifier that Elastic Transcoder
  *           assigned to the job. You use this value to get settings for
@@ -191,9 +188,9 @@ AWS.ElasticTranscoder = inherit({})
  *           bucket from which Elastic Transcoder gets the files to
  *           transcode and the bucket into which Elastic Transcoder puts
  *           the transcoded files.
- *         * `Input` &mdash; (`Object`) A section of the request or
- *           response body that provides information about the file that is
- *           being transcoded.
+ *         * `Input` &mdash; (`map`) A section of the request or response
+ *           body that provides information about the file that is being
+ *           transcoded.
  *           * `Key` &mdash; (`String`) The name of the file to transcode.
  *             Elsewhere in the body of the JSON block is the the ID of the
  *             pipeline to use for processing the job. The InputBucket
@@ -238,9 +235,9 @@ AWS.ElasticTranscoder = inherit({})
  *             file, enter one of the following values: 3gp, asf, avi,
  *             divx, flv, mkv, mov, mp4, mpeg, mpeg-ps, mpeg-ts, mxf, ogg,
  *             vob, wav, webm
- *         * `Output` &mdash; (`Object`) A section of the request or
- *           response body that provides information about the transcoded
- *           (target) file.
+ *         * `Output` &mdash; (`map`) A section of the request or response
+ *           body that provides information about the transcoded (target)
+ *           file.
  *           * `Key` &mdash; (`String`) The name to assign to the
  *             transcoded file. Elastic Transcoder saves the file in the
  *             Amazon S3 bucket specified by the OutputBucket object in the
@@ -294,31 +291,28 @@ AWS.ElasticTranscoder = inherit({})
  * @!method createPipeline(params, callback)
  *   Calls the CreatePipeline API operation.
  *   @param params [Object]
- *     * `Name` &mdash; **required** &mdash; (`String`) The name of the
- *       pipeline. We recommend that the name be unique within the AWS
- *       account, but uniqueness is not enforced. Constraints: Maximum 40
- *       characters.
- *     * `InputBucket` &mdash; **required** &mdash; (`String`) The Amazon
- *       S3 bucket in which you saved the media files that you want to
- *       transcode.
- *     * `OutputBucket` &mdash; **required** &mdash; (`String`) The
- *       Amazon S3 bucket in which you want Elastic Transcoder to save
- *       the transcoded files.
- *     * `Role` &mdash; **required** &mdash; (`String`) The IAM Amazon
- *       Resource Name (ARN) for the role that you want Elastic
- *       Transcoder to use to create the pipeline.
- *     * `Notifications` &mdash; **required** &mdash; (`Object`) The
- *       Amazon Simple Notification Service (Amazon SNS) topic that you
- *       want to notify to report job status. To receive notifications,
- *       you must also subscribe to the new topic in the Amazon SNS
- *       console. Progressing: The Amazon Simple Notification Service
- *       (Amazon SNS) topic that you want to notify when Elastic
- *       Transcoder has started to process the job. Completed: The Amazon
- *       SNS topic that you want to notify when Elastic Transcoder has
- *       finished processing the job. Warning: The Amazon SNS topic that
- *       you want to notify when Elastic Transcoder encounters a warning
- *       condition. Error: The Amazon SNS topic that you want to notify
- *       when Elastic Transcoder encounters an error condition.
+ *     * `Name` &mdash; (`String`) The name of the pipeline. We recommend
+ *       that the name be unique within the AWS account, but uniqueness
+ *       is not enforced. Constraints: Maximum 40 characters.
+ *     * `InputBucket` &mdash; (`String`) The Amazon S3 bucket in which
+ *       you saved the media files that you want to transcode.
+ *     * `OutputBucket` &mdash; (`String`) The Amazon S3 bucket in which
+ *       you want Elastic Transcoder to save the transcoded files.
+ *     * `Role` &mdash; (`String`) The IAM Amazon Resource Name (ARN) for
+ *       the role that you want Elastic Transcoder to use to create the
+ *       pipeline.
+ *     * `Notifications` &mdash; (`map`) The Amazon Simple Notification
+ *       Service (Amazon SNS) topic that you want to notify to report job
+ *       status. To receive notifications, you must also subscribe to the
+ *       new topic in the Amazon SNS console. Progressing: The Amazon
+ *       Simple Notification Service (Amazon SNS) topic that you want to
+ *       notify when Elastic Transcoder has started to process the job.
+ *       Completed: The Amazon SNS topic that you want to notify when
+ *       Elastic Transcoder has finished processing the job. Warning: The
+ *       Amazon SNS topic that you want to notify when Elastic Transcoder
+ *       encounters a warning condition. Error: The Amazon SNS topic that
+ *       you want to notify when Elastic Transcoder encounters an error
+ *       condition.
  *       * `Progressing` &mdash; (`String`) The Amazon Simple
  *         Notification Service (Amazon SNS) topic that you want to
  *         notify when Elastic Transcoder has started to process the job.
@@ -341,8 +335,8 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Pipeline` &mdash; (`Object`) A section of the response body
- *         that provides information about the pipeline that is created.
+ *       * `Pipeline` &mdash; (`map`) A section of the response body that
+ *         provides information about the pipeline that is created.
  *         * `Id` &mdash; (`String`) The identifier for the pipeline. You
  *           use this value to identify the pipeline in which you want to
  *           perform a variety of operations, such as creating a job or a
@@ -361,19 +355,18 @@ AWS.ElasticTranscoder = inherit({})
  *         * `Role` &mdash; (`String`) The IAM Amazon Resource Name (ARN)
  *           for the role that you want Elastic Transcoder to use to create
  *           the pipeline.
- *         * `Notifications` &mdash; (`Object`) The Amazon Simple
- *           Notification Service (Amazon SNS) topic that you want to
- *           notify to report job status. To receive notifications, you
- *           must also subscribe to the new topic in the Amazon SNS
- *           console. Progressing: The Amazon Simple Notification Service
- *           (Amazon SNS) topic that you want to notify when Elastic
- *           Transcoder has started to process the job. Completed: The
- *           Amazon SNS topic that you want to notify when Elastic
- *           Transcoder has finished processing the job. Warning: The
- *           Amazon SNS topic that you want to notify when Elastic
- *           Transcoder encounters a warning condition. Error: The Amazon
- *           SNS topic that you want to notify when Elastic Transcoder
- *           encounters an error condition.
+ *         * `Notifications` &mdash; (`map`) The Amazon Simple Notification
+ *           Service (Amazon SNS) topic that you want to notify to report
+ *           job status. To receive notifications, you must also subscribe
+ *           to the new topic in the Amazon SNS console. Progressing: The
+ *           Amazon Simple Notification Service (Amazon SNS) topic that you
+ *           want to notify when Elastic Transcoder has started to process
+ *           the job. Completed: The Amazon SNS topic that you want to
+ *           notify when Elastic Transcoder has finished processing the
+ *           job. Warning: The Amazon SNS topic that you want to notify
+ *           when Elastic Transcoder encounters a warning condition. Error:
+ *           The Amazon SNS topic that you want to notify when Elastic
+ *           Transcoder encounters an error condition.
  *           * `Progressing` &mdash; (`String`) The Amazon Simple
  *             Notification Service (Amazon SNS) topic that you want to
  *             notify when Elastic Transcoder has started to process the
@@ -393,17 +386,17 @@ AWS.ElasticTranscoder = inherit({})
  * @!method createPreset(params, callback)
  *   Calls the CreatePreset API operation.
  *   @param params [Object]
- *     * `Name` &mdash; **required** &mdash; (`String`) The name of the
- *       preset. We recommend that the name be unique within the AWS
- *       account, but uniqueness is not enforced.
+ *     * `Name` &mdash; (`String`) The name of the preset. We recommend
+ *       that the name be unique within the AWS account, but uniqueness
+ *       is not enforced.
  *     * `Description` &mdash; (`String`) A description of the preset.
- *     * `Container` &mdash; **required** &mdash; (`String`) The
- *       container type for the output file. This value must be mp4.
- *     * `Video` &mdash; **required** &mdash; (`Object`) A section of the
- *       request body that specifies the video parameters.
+ *     * `Container` &mdash; (`String`) The container type for the output
+ *       file. This value must be mp4.
+ *     * `Video` &mdash; (`map`) A section of the request body that
+ *       specifies the video parameters.
  *       * `Codec` &mdash; (`String`) The video codec for the output
  *         file. This value must be H.264.
- *       * `CodecOptions` &mdash; (`Object<String>`) Profile The H.264
+ *       * `CodecOptions` &mdash; (`map<String>`) Profile The H.264
  *         profile that you want to use for the output file. Elastic
  *         Transcoder supports the following profiles: baseline: The
  *         profile most commonly used for videoconferencing and for
@@ -502,8 +495,8 @@ AWS.ElasticTranscoder = inherit({})
  *         (black bars on the sides) or letterboxing (black bars on the
  *         top and bottom) to maintain the aspect ratio of the active
  *         region of the video.
- *     * `Audio` &mdash; **required** &mdash; (`Object`) A section of the
- *       request body that specifies the audio parameters
+ *     * `Audio` &mdash; (`map`) A section of the request body that
+ *       specifies the audio parameters
  *       * `Codec` &mdash; (`String`) The audio codec for the output
  *         file. This value must be AAC.
  *       * `SampleRate` &mdash; (`String`) The sample rate of the audio
@@ -517,9 +510,8 @@ AWS.ElasticTranscoder = inherit({})
  *         the output file. Valid values include: auto, 0, 1, 2 If you
  *         specify auto, Elastic Transcoder automatically detects the
  *         number of channels in the input file.
- *     * `Thumbnails` &mdash; **required** &mdash; (`Object`) A section
- *       of the request body that specifies the thumbnail parameters, if
- *       any.
+ *     * `Thumbnails` &mdash; (`map`) A section of the request body that
+ *       specifies the thumbnail parameters, if any.
  *       * `Format` &mdash; (`String`) The format of thumbnails, if any.
  *         Valid values are jpg and png. You specify whether you want
  *         Elastic Transcoder to create thumbnails when you create a job.
@@ -544,7 +536,7 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Preset` &mdash; (`Object`) A section of the response body that
+ *       * `Preset` &mdash; (`map`) A section of the response body that
  *         provides information about the preset that is created.
  *         * `Id` &mdash; (`String`) Identifier for the new preset. You use
  *           this value to get settings for the preset or to delete it.
@@ -552,7 +544,7 @@ AWS.ElasticTranscoder = inherit({})
  *         * `Description` &mdash; (`String`) A description of the preset.
  *         * `Container` &mdash; (`String`) The container type for the
  *           output file. This value must be mp4.
- *         * `Audio` &mdash; (`Object`) A section of the response body that
+ *         * `Audio` &mdash; (`map`) A section of the response body that
  *           provides information about the audio preset values.
  *           * `Codec` &mdash; (`String`) The audio codec for the output
  *             file. This value must be AAC.
@@ -567,11 +559,11 @@ AWS.ElasticTranscoder = inherit({})
  *             in the output file. Valid values include: auto, 0, 1, 2 If
  *             you specify auto, Elastic Transcoder automatically detects
  *             the number of channels in the input file.
- *         * `Video` &mdash; (`Object`) A section of the response body that
+ *         * `Video` &mdash; (`map`) A section of the response body that
  *           provides information about the video preset values.
  *           * `Codec` &mdash; (`String`) The video codec for the output
  *             file. This value must be H.264.
- *           * `CodecOptions` &mdash; (`Object<String>`) Profile The H.264
+ *           * `CodecOptions` &mdash; (`map<String>`) Profile The H.264
  *             profile that you want to use for the output file. Elastic
  *             Transcoder supports the following profiles: baseline: The
  *             profile most commonly used for videoconferencing and for
@@ -671,7 +663,7 @@ AWS.ElasticTranscoder = inherit({})
  *             pillarboxing (black bars on the sides) or letterboxing
  *             (black bars on the top and bottom) to maintain the aspect
  *             ratio of the active region of the video.
- *         * `Thumbnails` &mdash; (`Object`) A section of the response body
+ *         * `Thumbnails` &mdash; (`map`) A section of the response body
  *           that provides information about the thumbnail preset values,
  *           if any.
  *           * `Format` &mdash; (`String`) The format of thumbnails, if
@@ -703,8 +695,8 @@ AWS.ElasticTranscoder = inherit({})
  * @!method deletePipeline(params, callback)
  *   Calls the DeletePipeline API operation.
  *   @param params [Object]
- *     * `Id` &mdash; **required** &mdash; (`String`) The identifier of
- *       the pipeline that you want to delete.
+ *     * `Id` &mdash; (`String`) The identifier of the pipeline that you
+ *       want to delete.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -719,8 +711,8 @@ AWS.ElasticTranscoder = inherit({})
  * @!method deletePreset(params, callback)
  *   Calls the DeletePreset API operation.
  *   @param params [Object]
- *     * `Id` &mdash; **required** &mdash; (`String`) The identifier of
- *       the preset for which you want to get detailed information.
+ *     * `Id` &mdash; (`String`) The identifier of the preset for which
+ *       you want to get detailed information.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -735,8 +727,8 @@ AWS.ElasticTranscoder = inherit({})
  * @!method listJobsByPipeline(params, callback)
  *   Calls the ListJobsByPipeline API operation.
  *   @param params [Object]
- *     * `PipelineId` &mdash; **required** &mdash; (`String`) The ID of
- *       the pipeline for which you want to get job information.
+ *     * `PipelineId` &mdash; (`String`) The ID of the pipeline for which
+ *       you want to get job information.
  *     * `Ascending` &mdash; (`String`) To list jobs in chronological
  *       order by the date and time that they were submitted, enter true.
  *       To list jobs in reverse chronological order, enter false.
@@ -753,8 +745,8 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Jobs` &mdash; (`Array<Object>`) An array of Job objects that
- *         are in the specified pipeline.
+ *       * `Jobs` &mdash; (`Array<map>`) An array of Job objects that are
+ *         in the specified pipeline.
  *         * `Id` &mdash; (`String`) The identifier that Elastic Transcoder
  *           assigned to the job. You use this value to get settings for
  *           the job or to delete the job.
@@ -764,9 +756,9 @@ AWS.ElasticTranscoder = inherit({})
  *           bucket from which Elastic Transcoder gets the files to
  *           transcode and the bucket into which Elastic Transcoder puts
  *           the transcoded files.
- *         * `Input` &mdash; (`Object`) A section of the request or
- *           response body that provides information about the file that is
- *           being transcoded.
+ *         * `Input` &mdash; (`map`) A section of the request or response
+ *           body that provides information about the file that is being
+ *           transcoded.
  *           * `Key` &mdash; (`String`) The name of the file to transcode.
  *             Elsewhere in the body of the JSON block is the the ID of the
  *             pipeline to use for processing the job. The InputBucket
@@ -811,9 +803,9 @@ AWS.ElasticTranscoder = inherit({})
  *             file, enter one of the following values: 3gp, asf, avi,
  *             divx, flv, mkv, mov, mp4, mpeg, mpeg-ps, mpeg-ts, mxf, ogg,
  *             vob, wav, webm
- *         * `Output` &mdash; (`Object`) A section of the request or
- *           response body that provides information about the transcoded
- *           (target) file.
+ *         * `Output` &mdash; (`map`) A section of the request or response
+ *           body that provides information about the transcoded (target)
+ *           file.
  *           * `Key` &mdash; (`String`) The name to assign to the
  *             transcoded file. Elastic Transcoder saves the file in the
  *             Amazon S3 bucket specified by the OutputBucket object in the
@@ -872,10 +864,10 @@ AWS.ElasticTranscoder = inherit({})
  * @!method listJobsByStatus(params, callback)
  *   Calls the ListJobsByStatus API operation.
  *   @param params [Object]
- *     * `Status` &mdash; **required** &mdash; (`String`) To get
- *       information about all of the jobs associated with the current
- *       AWS account that have a given status, specify the following
- *       status: Submitted, Progressing, Completed, Canceled, or Error.
+ *     * `Status` &mdash; (`String`) To get information about all of the
+ *       jobs associated with the current AWS account that have a given
+ *       status, specify the following status: Submitted, Progressing,
+ *       Completed, Canceled, or Error.
  *     * `Ascending` &mdash; (`String`) To list jobs in chronological
  *       order by the date and time that they were submitted, enter true.
  *       To list jobs in reverse chronological order, enter false.
@@ -892,8 +884,8 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Jobs` &mdash; (`Array<Object>`) An array of Job objects that
- *         have the specified status.
+ *       * `Jobs` &mdash; (`Array<map>`) An array of Job objects that have
+ *         the specified status.
  *         * `Id` &mdash; (`String`) The identifier that Elastic Transcoder
  *           assigned to the job. You use this value to get settings for
  *           the job or to delete the job.
@@ -903,9 +895,9 @@ AWS.ElasticTranscoder = inherit({})
  *           bucket from which Elastic Transcoder gets the files to
  *           transcode and the bucket into which Elastic Transcoder puts
  *           the transcoded files.
- *         * `Input` &mdash; (`Object`) A section of the request or
- *           response body that provides information about the file that is
- *           being transcoded.
+ *         * `Input` &mdash; (`map`) A section of the request or response
+ *           body that provides information about the file that is being
+ *           transcoded.
  *           * `Key` &mdash; (`String`) The name of the file to transcode.
  *             Elsewhere in the body of the JSON block is the the ID of the
  *             pipeline to use for processing the job. The InputBucket
@@ -950,9 +942,9 @@ AWS.ElasticTranscoder = inherit({})
  *             file, enter one of the following values: 3gp, asf, avi,
  *             divx, flv, mkv, mov, mp4, mpeg, mpeg-ps, mpeg-ts, mxf, ogg,
  *             vob, wav, webm
- *         * `Output` &mdash; (`Object`) A section of the request or
- *           response body that provides information about the transcoded
- *           (target) file.
+ *         * `Output` &mdash; (`map`) A section of the request or response
+ *           body that provides information about the transcoded (target)
+ *           file.
  *           * `Key` &mdash; (`String`) The name to assign to the
  *             transcoded file. Elastic Transcoder saves the file in the
  *             Amazon S3 bucket specified by the OutputBucket object in the
@@ -1021,8 +1013,7 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Pipelines` &mdash; (`Array<Object>`) An array of Pipeline
- *         objects.
+ *       * `Pipelines` &mdash; (`Array<map>`) An array of Pipeline objects.
  *         * `Id` &mdash; (`String`) The identifier for the pipeline. You
  *           use this value to identify the pipeline in which you want to
  *           perform a variety of operations, such as creating a job or a
@@ -1041,19 +1032,18 @@ AWS.ElasticTranscoder = inherit({})
  *         * `Role` &mdash; (`String`) The IAM Amazon Resource Name (ARN)
  *           for the role that you want Elastic Transcoder to use to create
  *           the pipeline.
- *         * `Notifications` &mdash; (`Object`) The Amazon Simple
- *           Notification Service (Amazon SNS) topic that you want to
- *           notify to report job status. To receive notifications, you
- *           must also subscribe to the new topic in the Amazon SNS
- *           console. Progressing: The Amazon Simple Notification Service
- *           (Amazon SNS) topic that you want to notify when Elastic
- *           Transcoder has started to process the job. Completed: The
- *           Amazon SNS topic that you want to notify when Elastic
- *           Transcoder has finished processing the job. Warning: The
- *           Amazon SNS topic that you want to notify when Elastic
- *           Transcoder encounters a warning condition. Error: The Amazon
- *           SNS topic that you want to notify when Elastic Transcoder
- *           encounters an error condition.
+ *         * `Notifications` &mdash; (`map`) The Amazon Simple Notification
+ *           Service (Amazon SNS) topic that you want to notify to report
+ *           job status. To receive notifications, you must also subscribe
+ *           to the new topic in the Amazon SNS console. Progressing: The
+ *           Amazon Simple Notification Service (Amazon SNS) topic that you
+ *           want to notify when Elastic Transcoder has started to process
+ *           the job. Completed: The Amazon SNS topic that you want to
+ *           notify when Elastic Transcoder has finished processing the
+ *           job. Warning: The Amazon SNS topic that you want to notify
+ *           when Elastic Transcoder encounters a warning condition. Error:
+ *           The Amazon SNS topic that you want to notify when Elastic
+ *           Transcoder encounters an error condition.
  *           * `Progressing` &mdash; (`String`) The Amazon Simple
  *             Notification Service (Amazon SNS) topic that you want to
  *             notify when Elastic Transcoder has started to process the
@@ -1083,14 +1073,14 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Presets` &mdash; (`Array<Object>`) An array of Preset objects.
+ *       * `Presets` &mdash; (`Array<map>`) An array of Preset objects.
  *         * `Id` &mdash; (`String`) Identifier for the new preset. You use
  *           this value to get settings for the preset or to delete it.
  *         * `Name` &mdash; (`String`) The name of the preset.
  *         * `Description` &mdash; (`String`) A description of the preset.
  *         * `Container` &mdash; (`String`) The container type for the
  *           output file. This value must be mp4.
- *         * `Audio` &mdash; (`Object`) A section of the response body that
+ *         * `Audio` &mdash; (`map`) A section of the response body that
  *           provides information about the audio preset values.
  *           * `Codec` &mdash; (`String`) The audio codec for the output
  *             file. This value must be AAC.
@@ -1105,11 +1095,11 @@ AWS.ElasticTranscoder = inherit({})
  *             in the output file. Valid values include: auto, 0, 1, 2 If
  *             you specify auto, Elastic Transcoder automatically detects
  *             the number of channels in the input file.
- *         * `Video` &mdash; (`Object`) A section of the response body that
+ *         * `Video` &mdash; (`map`) A section of the response body that
  *           provides information about the video preset values.
  *           * `Codec` &mdash; (`String`) The video codec for the output
  *             file. This value must be H.264.
- *           * `CodecOptions` &mdash; (`Object<String>`) Profile The H.264
+ *           * `CodecOptions` &mdash; (`map<String>`) Profile The H.264
  *             profile that you want to use for the output file. Elastic
  *             Transcoder supports the following profiles: baseline: The
  *             profile most commonly used for videoconferencing and for
@@ -1209,7 +1199,7 @@ AWS.ElasticTranscoder = inherit({})
  *             pillarboxing (black bars on the sides) or letterboxing
  *             (black bars on the top and bottom) to maintain the aspect
  *             ratio of the active region of the video.
- *         * `Thumbnails` &mdash; (`Object`) A section of the response body
+ *         * `Thumbnails` &mdash; (`map`) A section of the response body
  *           that provides information about the thumbnail preset values,
  *           if any.
  *           * `Format` &mdash; (`String`) The format of thumbnails, if
@@ -1236,8 +1226,8 @@ AWS.ElasticTranscoder = inherit({})
  * @!method readJob(params, callback)
  *   Calls the ReadJob API operation.
  *   @param params [Object]
- *     * `Id` &mdash; **required** &mdash; (`String`) The identifier of
- *       the job for which you want to get detailed information.
+ *     * `Id` &mdash; (`String`) The identifier of the job for which you
+ *       want to get detailed information.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1248,7 +1238,7 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Job` &mdash; (`Object`) A section of the response body that
+ *       * `Job` &mdash; (`map`) A section of the response body that
  *         provides information about the job.
  *         * `Id` &mdash; (`String`) The identifier that Elastic Transcoder
  *           assigned to the job. You use this value to get settings for
@@ -1259,9 +1249,9 @@ AWS.ElasticTranscoder = inherit({})
  *           bucket from which Elastic Transcoder gets the files to
  *           transcode and the bucket into which Elastic Transcoder puts
  *           the transcoded files.
- *         * `Input` &mdash; (`Object`) A section of the request or
- *           response body that provides information about the file that is
- *           being transcoded.
+ *         * `Input` &mdash; (`map`) A section of the request or response
+ *           body that provides information about the file that is being
+ *           transcoded.
  *           * `Key` &mdash; (`String`) The name of the file to transcode.
  *             Elsewhere in the body of the JSON block is the the ID of the
  *             pipeline to use for processing the job. The InputBucket
@@ -1306,9 +1296,9 @@ AWS.ElasticTranscoder = inherit({})
  *             file, enter one of the following values: 3gp, asf, avi,
  *             divx, flv, mkv, mov, mp4, mpeg, mpeg-ps, mpeg-ts, mxf, ogg,
  *             vob, wav, webm
- *         * `Output` &mdash; (`Object`) A section of the request or
- *           response body that provides information about the transcoded
- *           (target) file.
+ *         * `Output` &mdash; (`map`) A section of the request or response
+ *           body that provides information about the transcoded (target)
+ *           file.
  *           * `Key` &mdash; (`String`) The name to assign to the
  *             transcoded file. Elastic Transcoder saves the file in the
  *             Amazon S3 bucket specified by the OutputBucket object in the
@@ -1362,8 +1352,7 @@ AWS.ElasticTranscoder = inherit({})
  * @!method readPipeline(params, callback)
  *   Calls the ReadPipeline API operation.
  *   @param params [Object]
- *     * `Id` &mdash; **required** &mdash; (`String`) The identifier of
- *       the pipeline to read.
+ *     * `Id` &mdash; (`String`) The identifier of the pipeline to read.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1374,8 +1363,8 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Pipeline` &mdash; (`Object`) A section of the response body
- *         that provides information about the pipeline.
+ *       * `Pipeline` &mdash; (`map`) A section of the response body that
+ *         provides information about the pipeline.
  *         * `Id` &mdash; (`String`) The identifier for the pipeline. You
  *           use this value to identify the pipeline in which you want to
  *           perform a variety of operations, such as creating a job or a
@@ -1394,19 +1383,18 @@ AWS.ElasticTranscoder = inherit({})
  *         * `Role` &mdash; (`String`) The IAM Amazon Resource Name (ARN)
  *           for the role that you want Elastic Transcoder to use to create
  *           the pipeline.
- *         * `Notifications` &mdash; (`Object`) The Amazon Simple
- *           Notification Service (Amazon SNS) topic that you want to
- *           notify to report job status. To receive notifications, you
- *           must also subscribe to the new topic in the Amazon SNS
- *           console. Progressing: The Amazon Simple Notification Service
- *           (Amazon SNS) topic that you want to notify when Elastic
- *           Transcoder has started to process the job. Completed: The
- *           Amazon SNS topic that you want to notify when Elastic
- *           Transcoder has finished processing the job. Warning: The
- *           Amazon SNS topic that you want to notify when Elastic
- *           Transcoder encounters a warning condition. Error: The Amazon
- *           SNS topic that you want to notify when Elastic Transcoder
- *           encounters an error condition.
+ *         * `Notifications` &mdash; (`map`) The Amazon Simple Notification
+ *           Service (Amazon SNS) topic that you want to notify to report
+ *           job status. To receive notifications, you must also subscribe
+ *           to the new topic in the Amazon SNS console. Progressing: The
+ *           Amazon Simple Notification Service (Amazon SNS) topic that you
+ *           want to notify when Elastic Transcoder has started to process
+ *           the job. Completed: The Amazon SNS topic that you want to
+ *           notify when Elastic Transcoder has finished processing the
+ *           job. Warning: The Amazon SNS topic that you want to notify
+ *           when Elastic Transcoder encounters a warning condition. Error:
+ *           The Amazon SNS topic that you want to notify when Elastic
+ *           Transcoder encounters an error condition.
  *           * `Progressing` &mdash; (`String`) The Amazon Simple
  *             Notification Service (Amazon SNS) topic that you want to
  *             notify when Elastic Transcoder has started to process the
@@ -1426,8 +1414,8 @@ AWS.ElasticTranscoder = inherit({})
  * @!method readPreset(params, callback)
  *   Calls the ReadPreset API operation.
  *   @param params [Object]
- *     * `Id` &mdash; **required** &mdash; (`String`) The identifier of
- *       the preset for which you want to get detailed information.
+ *     * `Id` &mdash; (`String`) The identifier of the preset for which
+ *       you want to get detailed information.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1438,7 +1426,7 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Preset` &mdash; (`Object`) A section of the response body that
+ *       * `Preset` &mdash; (`map`) A section of the response body that
  *         provides information about the preset.
  *         * `Id` &mdash; (`String`) Identifier for the new preset. You use
  *           this value to get settings for the preset or to delete it.
@@ -1446,7 +1434,7 @@ AWS.ElasticTranscoder = inherit({})
  *         * `Description` &mdash; (`String`) A description of the preset.
  *         * `Container` &mdash; (`String`) The container type for the
  *           output file. This value must be mp4.
- *         * `Audio` &mdash; (`Object`) A section of the response body that
+ *         * `Audio` &mdash; (`map`) A section of the response body that
  *           provides information about the audio preset values.
  *           * `Codec` &mdash; (`String`) The audio codec for the output
  *             file. This value must be AAC.
@@ -1461,11 +1449,11 @@ AWS.ElasticTranscoder = inherit({})
  *             in the output file. Valid values include: auto, 0, 1, 2 If
  *             you specify auto, Elastic Transcoder automatically detects
  *             the number of channels in the input file.
- *         * `Video` &mdash; (`Object`) A section of the response body that
+ *         * `Video` &mdash; (`map`) A section of the response body that
  *           provides information about the video preset values.
  *           * `Codec` &mdash; (`String`) The video codec for the output
  *             file. This value must be H.264.
- *           * `CodecOptions` &mdash; (`Object<String>`) Profile The H.264
+ *           * `CodecOptions` &mdash; (`map<String>`) Profile The H.264
  *             profile that you want to use for the output file. Elastic
  *             Transcoder supports the following profiles: baseline: The
  *             profile most commonly used for videoconferencing and for
@@ -1565,7 +1553,7 @@ AWS.ElasticTranscoder = inherit({})
  *             pillarboxing (black bars on the sides) or letterboxing
  *             (black bars on the top and bottom) to maintain the aspect
  *             ratio of the active region of the video.
- *         * `Thumbnails` &mdash; (`Object`) A section of the response body
+ *         * `Thumbnails` &mdash; (`map`) A section of the response body
  *           that provides information about the thumbnail preset values,
  *           if any.
  *           * `Format` &mdash; (`String`) The format of thumbnails, if
@@ -1592,18 +1580,17 @@ AWS.ElasticTranscoder = inherit({})
  * @!method testRole(params, callback)
  *   Calls the TestRole API operation.
  *   @param params [Object]
- *     * `Role` &mdash; **required** &mdash; (`String`) The IAM Amazon
- *       Resource Name (ARN) for the role that you want Elastic
- *       Transcoder to test.
- *     * `InputBucket` &mdash; **required** &mdash; (`String`) The Amazon
- *       S3 bucket that contains media files to be transcoded. The action
- *       attempts to read from this bucket.
- *     * `OutputBucket` &mdash; **required** &mdash; (`String`) The
- *       Amazon S3 bucket that Elastic Transcoder will write transcoded
- *       media files to. The action attempts to read from this bucket.
- *     * `Topics` &mdash; **required** &mdash; (`Array<String>`) The ARNs
- *       of one or more Amazon Simple Notification Service (Amazon SNS)
- *       topics that you want the action to send a test notification to.
+ *     * `Role` &mdash; (`String`) The IAM Amazon Resource Name (ARN) for
+ *       the role that you want Elastic Transcoder to test.
+ *     * `InputBucket` &mdash; (`String`) The Amazon S3 bucket that
+ *       contains media files to be transcoded. The action attempts to
+ *       read from this bucket.
+ *     * `OutputBucket` &mdash; (`String`) The Amazon S3 bucket that
+ *       Elastic Transcoder will write transcoded media files to. The
+ *       action attempts to read from this bucket.
+ *     * `Topics` &mdash; (`Array<String>`) The ARNs of one or more
+ *       Amazon Simple Notification Service (Amazon SNS) topics that you
+ *       want the action to send a test notification to.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1625,20 +1612,20 @@ AWS.ElasticTranscoder = inherit({})
  * @!method updatePipelineNotifications(params, callback)
  *   Calls the UpdatePipelineNotifications API operation.
  *   @param params [Object]
- *     * `Id` &mdash; **required** &mdash; (`String`) The identifier of
- *       the pipeline for which you want to change notification settings.
- *     * `Notifications` &mdash; **required** &mdash; (`Object`) The
- *       Amazon Simple Notification Service (Amazon SNS) topic that you
- *       want to notify to report job status. To receive notifications,
- *       you must also subscribe to the new topic in the Amazon SNS
- *       console. Progressing: The Amazon Simple Notification Service
- *       (Amazon SNS) topic that you want to notify when Elastic
- *       Transcoder has started to process the job. Completed: The Amazon
- *       SNS topic that you want to notify when Elastic Transcoder has
- *       finished processing the job. Warning: The Amazon SNS topic that
- *       you want to notify when Elastic Transcoder encounters a warning
- *       condition. Error: The Amazon SNS topic that you want to notify
- *       when Elastic Transcoder encounters an error condition.
+ *     * `Id` &mdash; (`String`) The identifier of the pipeline for which
+ *       you want to change notification settings.
+ *     * `Notifications` &mdash; (`map`) The Amazon Simple Notification
+ *       Service (Amazon SNS) topic that you want to notify to report job
+ *       status. To receive notifications, you must also subscribe to the
+ *       new topic in the Amazon SNS console. Progressing: The Amazon
+ *       Simple Notification Service (Amazon SNS) topic that you want to
+ *       notify when Elastic Transcoder has started to process the job.
+ *       Completed: The Amazon SNS topic that you want to notify when
+ *       Elastic Transcoder has finished processing the job. Warning: The
+ *       Amazon SNS topic that you want to notify when Elastic Transcoder
+ *       encounters a warning condition. Error: The Amazon SNS topic that
+ *       you want to notify when Elastic Transcoder encounters an error
+ *       condition.
  *       * `Progressing` &mdash; (`String`) The Amazon Simple
  *         Notification Service (Amazon SNS) topic that you want to
  *         notify when Elastic Transcoder has started to process the job.
@@ -1661,8 +1648,8 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Pipeline` &mdash; (`Object`) A section of the response body
- *         that provides information about the pipeline.
+ *       * `Pipeline` &mdash; (`map`) A section of the response body that
+ *         provides information about the pipeline.
  *         * `Id` &mdash; (`String`) The identifier for the pipeline. You
  *           use this value to identify the pipeline in which you want to
  *           perform a variety of operations, such as creating a job or a
@@ -1681,19 +1668,18 @@ AWS.ElasticTranscoder = inherit({})
  *         * `Role` &mdash; (`String`) The IAM Amazon Resource Name (ARN)
  *           for the role that you want Elastic Transcoder to use to create
  *           the pipeline.
- *         * `Notifications` &mdash; (`Object`) The Amazon Simple
- *           Notification Service (Amazon SNS) topic that you want to
- *           notify to report job status. To receive notifications, you
- *           must also subscribe to the new topic in the Amazon SNS
- *           console. Progressing: The Amazon Simple Notification Service
- *           (Amazon SNS) topic that you want to notify when Elastic
- *           Transcoder has started to process the job. Completed: The
- *           Amazon SNS topic that you want to notify when Elastic
- *           Transcoder has finished processing the job. Warning: The
- *           Amazon SNS topic that you want to notify when Elastic
- *           Transcoder encounters a warning condition. Error: The Amazon
- *           SNS topic that you want to notify when Elastic Transcoder
- *           encounters an error condition.
+ *         * `Notifications` &mdash; (`map`) The Amazon Simple Notification
+ *           Service (Amazon SNS) topic that you want to notify to report
+ *           job status. To receive notifications, you must also subscribe
+ *           to the new topic in the Amazon SNS console. Progressing: The
+ *           Amazon Simple Notification Service (Amazon SNS) topic that you
+ *           want to notify when Elastic Transcoder has started to process
+ *           the job. Completed: The Amazon SNS topic that you want to
+ *           notify when Elastic Transcoder has finished processing the
+ *           job. Warning: The Amazon SNS topic that you want to notify
+ *           when Elastic Transcoder encounters a warning condition. Error:
+ *           The Amazon SNS topic that you want to notify when Elastic
+ *           Transcoder encounters an error condition.
  *           * `Progressing` &mdash; (`String`) The Amazon Simple
  *             Notification Service (Amazon SNS) topic that you want to
  *             notify when Elastic Transcoder has started to process the
@@ -1713,12 +1699,11 @@ AWS.ElasticTranscoder = inherit({})
  * @!method updatePipelineStatus(params, callback)
  *   Calls the UpdatePipelineStatus API operation.
  *   @param params [Object]
- *     * `Id` &mdash; **required** &mdash; (`String`) The identifier of
- *       the pipeline to update.
- *     * `Status` &mdash; **required** &mdash; (`String`) The new status
- *       of the pipeline: active: Enable the pipeline, so it starts
- *       processing jobs. paused: Disable the pipeline, so it stops
- *       processing jobs.
+ *     * `Id` &mdash; (`String`) The identifier of the pipeline to
+ *       update.
+ *     * `Status` &mdash; (`String`) The new status of the pipeline:
+ *       active: Enable the pipeline, so it starts processing jobs.
+ *       paused: Disable the pipeline, so it stops processing jobs.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1729,8 +1714,8 @@ AWS.ElasticTranscoder = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Pipeline` &mdash; (`Object`) A section of the response body
- *         that provides information about the pipeline.
+ *       * `Pipeline` &mdash; (`map`) A section of the response body that
+ *         provides information about the pipeline.
  *         * `Id` &mdash; (`String`) The identifier for the pipeline. You
  *           use this value to identify the pipeline in which you want to
  *           perform a variety of operations, such as creating a job or a
@@ -1749,19 +1734,18 @@ AWS.ElasticTranscoder = inherit({})
  *         * `Role` &mdash; (`String`) The IAM Amazon Resource Name (ARN)
  *           for the role that you want Elastic Transcoder to use to create
  *           the pipeline.
- *         * `Notifications` &mdash; (`Object`) The Amazon Simple
- *           Notification Service (Amazon SNS) topic that you want to
- *           notify to report job status. To receive notifications, you
- *           must also subscribe to the new topic in the Amazon SNS
- *           console. Progressing: The Amazon Simple Notification Service
- *           (Amazon SNS) topic that you want to notify when Elastic
- *           Transcoder has started to process the job. Completed: The
- *           Amazon SNS topic that you want to notify when Elastic
- *           Transcoder has finished processing the job. Warning: The
- *           Amazon SNS topic that you want to notify when Elastic
- *           Transcoder encounters a warning condition. Error: The Amazon
- *           SNS topic that you want to notify when Elastic Transcoder
- *           encounters an error condition.
+ *         * `Notifications` &mdash; (`map`) The Amazon Simple Notification
+ *           Service (Amazon SNS) topic that you want to notify to report
+ *           job status. To receive notifications, you must also subscribe
+ *           to the new topic in the Amazon SNS console. Progressing: The
+ *           Amazon Simple Notification Service (Amazon SNS) topic that you
+ *           want to notify when Elastic Transcoder has started to process
+ *           the job. Completed: The Amazon SNS topic that you want to
+ *           notify when Elastic Transcoder has finished processing the
+ *           job. Warning: The Amazon SNS topic that you want to notify
+ *           when Elastic Transcoder encounters a warning condition. Error:
+ *           The Amazon SNS topic that you want to notify when Elastic
+ *           Transcoder encounters an error condition.
  *           * `Progressing` &mdash; (`String`) The Amazon Simple
  *             Notification Service (Amazon SNS) topic that you want to
  *             notify when Elastic Transcoder has started to process the

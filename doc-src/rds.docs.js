@@ -67,7 +67,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `EventSubscription` &mdash; (`Object`)
+ *       * `EventSubscription` &mdash; (`map`)
  *         * `CustomerAwsId` &mdash; (`String`)
  *         * `CustSubscriptionId` &mdash; (`String`)
  *         * `SnsTopicArn` &mdash; (`String`)
@@ -85,8 +85,8 @@ AWS.RDS = inherit({})
  *   @param params [Object]
  *     * `ResourceName` &mdash; **required** &mdash; (`String`) The DB
  *       Instance the tags will be added to.
- *     * `Tags` &mdash; **required** &mdash; (`Array<Object>`) The tags
- *       to be assigned to the DB Instance.
+ *     * `Tags` &mdash; **required** &mdash; (`Array<map>`) The tags to
+ *       be assigned to the DB Instance.
  *       * `Key` &mdash; (`String`) A key is the required name of the
  *         tag. The string value can be from 1 to 128 Unicode characters
  *         in length and cannot be prefixed with "aws:". The string may
@@ -142,7 +142,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DBSecurityGroup` &mdash; (`Object`) Contains the result of a
+ *       * `DBSecurityGroup` &mdash; (`map`) Contains the result of a
  *         successful invocation of the following actions:
  *         DescribeDBSecurityGroups AuthorizeDBSecurityGroupIngress
  *         CreateDBSecurityGroup RevokeDBSecurityGroupIngress This data
@@ -156,8 +156,8 @@ AWS.RDS = inherit({})
  *           description of the DB Security Group.
  *         * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
  *           Security Group.
- *         * `EC2SecurityGroups` &mdash; (`Array<Object>`) Contains a list
- *           of EC2SecurityGroup elements.
+ *         * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list of
+ *           EC2SecurityGroup elements.
  *           * `Status` &mdash; (`String`) Provides the status of the EC2
  *             security group. Status can be "authorizing", "authorized",
  *             "revoking", and "revoked".
@@ -168,8 +168,8 @@ AWS.RDS = inherit({})
  *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies the
  *             AWS ID of the owner of the EC2 security group specified in
  *             the EC2SecurityGroupName field.
- *         * `IPRanges` &mdash; (`Array<Object>`) Contains a list of
- *           IPRange elements.
+ *         * `IPRanges` &mdash; (`Array<map>`) Contains a list of IPRange
+ *           elements.
  *           * `Status` &mdash; (`String`) Specifies the status of the IP
  *             range. Status can be "authorizing", "authorized",
  *             "revoking", and "revoked".
@@ -200,8 +200,8 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DBSnapshot` &mdash; (`Object`) Contains the result of a
- *         successful invocation of the following actions: CreateDBSnapshot
+ *       * `DBSnapshot` &mdash; (`map`) Contains the result of a successful
+ *         invocation of the following actions: CreateDBSnapshot
  *         DeleteDBSnapshot This data type is used as a response element in
  *         the DescribeDBSnapshots action.
  *         * `DBSnapshotIdentifier` &mdash; (`String`) Specifies the
@@ -384,8 +384,8 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DBInstance` &mdash; (`Object`) Contains the result of a
- *         successful invocation of the following actions: CreateDBInstance
+ *       * `DBInstance` &mdash; (`map`) Contains the result of a successful
+ *         invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
  *         response element in the DescribeDBInstances action.
  *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
@@ -406,8 +406,7 @@ AWS.RDS = inherit({})
  *           the DB Instance was created. This same name is returned for
  *           the life of the DB Instance. Type: String Oracle Contains the
  *           Oracle System ID (SID) of the created DB Instance.
- *         * `Endpoint` &mdash; (`Object`) Specifies the connection
- *           endpoint.
+ *         * `Endpoint` &mdash; (`map`) Specifies the connection endpoint.
  *           * `Address` &mdash; (`String`) Specifies the DNS address of
  *             the DB Instance.
  *           * `Port` &mdash; (`Integer`) Specifies the port that the
@@ -422,26 +421,26 @@ AWS.RDS = inherit({})
  *           BackupRetentionPeriod.
  *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
  *           number of days for which automatic DB Snapshots are retained.
- *         * `DBSecurityGroups` &mdash; (`Array<Object>`) Provides List of
- *           DB Security Group elements containing only
- *           DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *         * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of DB
+ *           Security Group elements containing only DBSecurityGroup.Name
+ *           and DBSecurityGroup.Status subelements.
  *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
  *             Security Group.
  *           * `Status` &mdash; (`String`) The status of the DB Security
  *             Group.
- *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *         * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
  *           VPC security group elements that the DB Instance belongs to.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
- *         * `DBParameterGroups` &mdash; (`Array<Object>`) Provides the
- *           list of DB Parameter Groups applied to this DB Instance.
+ *         * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
+ *           of DB Parameter Groups applied to this DB Instance.
  *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
  *             Parameter Group.
  *           * `ParameterApplyStatus` &mdash; (`String`) The status of
  *             parameter updates.
  *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
  *           the Availability Zone the DB Instance is located in.
- *         * `DBSubnetGroup` &mdash; (`Object`) Provides the inforamtion of
+ *         * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
  *           the subnet group associated with the DB instance, including
  *           the name, descrption and subnets in the subnet group.
  *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
@@ -452,11 +451,11 @@ AWS.RDS = inherit({})
  *             Subnet Group.
  *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
  *             of the DB Subnet Group.
- *           * `Subnets` &mdash; (`Array<Object>`) Contains a list of
- *             Subnet elements.
+ *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
+ *             elements.
  *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *               identifier of the subnet.
- *             * `SubnetAvailabilityZone` &mdash; (`Object`)
+ *             * `SubnetAvailabilityZone` &mdash; (`map`)
  *               * `Name` &mdash; (`String`) The name of the availability
  *                 zone.
  *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
@@ -467,10 +466,10 @@ AWS.RDS = inherit({})
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
  *           weekly time range (in UTC) during which system maintenance can
  *           occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) Specifies that
- *           changes to the DB Instance are pending. This element is only
- *           included when changes are pending. Specific changes are
- *           identified by subelements.
+ *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
+ *           to the DB Instance are pending. This element is only included
+ *           when changes are pending. Specific changes are identified by
+ *           subelements.
  *           * `DBInstanceClass` &mdash; (`String`) Contains the new
  *             DBInstanceClass for the DB Instance that will be applied or
  *             is in progress.
@@ -514,8 +513,8 @@ AWS.RDS = inherit({})
  *           for this DB Instance.
  *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
  *           operations per second) value.
- *         * `OptionGroupMemberships` &mdash; (`Array<Object>`) Provides
- *           the list of option group memberships for this DB Instance.
+ *         * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
+ *           list of option group memberships for this DB Instance.
  *           * `OptionGroupName` &mdash; (`String`) The name of the option
  *             group that the instance belongs to.
  *           * `Status` &mdash; (`String`) The status of the DB Instance's
@@ -577,8 +576,8 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DBInstance` &mdash; (`Object`) Contains the result of a
- *         successful invocation of the following actions: CreateDBInstance
+ *       * `DBInstance` &mdash; (`map`) Contains the result of a successful
+ *         invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
  *         response element in the DescribeDBInstances action.
  *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
@@ -599,8 +598,7 @@ AWS.RDS = inherit({})
  *           the DB Instance was created. This same name is returned for
  *           the life of the DB Instance. Type: String Oracle Contains the
  *           Oracle System ID (SID) of the created DB Instance.
- *         * `Endpoint` &mdash; (`Object`) Specifies the connection
- *           endpoint.
+ *         * `Endpoint` &mdash; (`map`) Specifies the connection endpoint.
  *           * `Address` &mdash; (`String`) Specifies the DNS address of
  *             the DB Instance.
  *           * `Port` &mdash; (`Integer`) Specifies the port that the
@@ -615,26 +613,26 @@ AWS.RDS = inherit({})
  *           BackupRetentionPeriod.
  *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
  *           number of days for which automatic DB Snapshots are retained.
- *         * `DBSecurityGroups` &mdash; (`Array<Object>`) Provides List of
- *           DB Security Group elements containing only
- *           DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *         * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of DB
+ *           Security Group elements containing only DBSecurityGroup.Name
+ *           and DBSecurityGroup.Status subelements.
  *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
  *             Security Group.
  *           * `Status` &mdash; (`String`) The status of the DB Security
  *             Group.
- *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *         * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
  *           VPC security group elements that the DB Instance belongs to.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
- *         * `DBParameterGroups` &mdash; (`Array<Object>`) Provides the
- *           list of DB Parameter Groups applied to this DB Instance.
+ *         * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
+ *           of DB Parameter Groups applied to this DB Instance.
  *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
  *             Parameter Group.
  *           * `ParameterApplyStatus` &mdash; (`String`) The status of
  *             parameter updates.
  *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
  *           the Availability Zone the DB Instance is located in.
- *         * `DBSubnetGroup` &mdash; (`Object`) Provides the inforamtion of
+ *         * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
  *           the subnet group associated with the DB instance, including
  *           the name, descrption and subnets in the subnet group.
  *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
@@ -645,11 +643,11 @@ AWS.RDS = inherit({})
  *             Subnet Group.
  *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
  *             of the DB Subnet Group.
- *           * `Subnets` &mdash; (`Array<Object>`) Contains a list of
- *             Subnet elements.
+ *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
+ *             elements.
  *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *               identifier of the subnet.
- *             * `SubnetAvailabilityZone` &mdash; (`Object`)
+ *             * `SubnetAvailabilityZone` &mdash; (`map`)
  *               * `Name` &mdash; (`String`) The name of the availability
  *                 zone.
  *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
@@ -660,10 +658,10 @@ AWS.RDS = inherit({})
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
  *           weekly time range (in UTC) during which system maintenance can
  *           occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) Specifies that
- *           changes to the DB Instance are pending. This element is only
- *           included when changes are pending. Specific changes are
- *           identified by subelements.
+ *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
+ *           to the DB Instance are pending. This element is only included
+ *           when changes are pending. Specific changes are identified by
+ *           subelements.
  *           * `DBInstanceClass` &mdash; (`String`) Contains the new
  *             DBInstanceClass for the DB Instance that will be applied or
  *             is in progress.
@@ -707,8 +705,8 @@ AWS.RDS = inherit({})
  *           for this DB Instance.
  *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
  *           operations per second) value.
- *         * `OptionGroupMemberships` &mdash; (`Array<Object>`) Provides
- *           the list of option group memberships for this DB Instance.
+ *         * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
+ *           list of option group memberships for this DB Instance.
  *           * `OptionGroupName` &mdash; (`String`) The name of the option
  *             group that the instance belongs to.
  *           * `Status` &mdash; (`String`) The status of the DB Instance's
@@ -750,7 +748,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DBParameterGroup` &mdash; (`Object`) Contains the result of a
+ *       * `DBParameterGroup` &mdash; (`map`) Contains the result of a
  *         successful invocation of the CreateDBParameterGroup action. This
  *         data type is used as a request parameter in the
  *         DeleteDBParameterGroup action, and as a response element in the
@@ -785,7 +783,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DBSecurityGroup` &mdash; (`Object`) Contains the result of a
+ *       * `DBSecurityGroup` &mdash; (`map`) Contains the result of a
  *         successful invocation of the following actions:
  *         DescribeDBSecurityGroups AuthorizeDBSecurityGroupIngress
  *         CreateDBSecurityGroup RevokeDBSecurityGroupIngress This data
@@ -799,8 +797,8 @@ AWS.RDS = inherit({})
  *           description of the DB Security Group.
  *         * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
  *           Security Group.
- *         * `EC2SecurityGroups` &mdash; (`Array<Object>`) Contains a list
- *           of EC2SecurityGroup elements.
+ *         * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list of
+ *           EC2SecurityGroup elements.
  *           * `Status` &mdash; (`String`) Provides the status of the EC2
  *             security group. Status can be "authorizing", "authorized",
  *             "revoking", and "revoked".
@@ -811,8 +809,8 @@ AWS.RDS = inherit({})
  *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies the
  *             AWS ID of the owner of the EC2 security group specified in
  *             the EC2SecurityGroupName field.
- *         * `IPRanges` &mdash; (`Array<Object>`) Contains a list of
- *           IPRange elements.
+ *         * `IPRanges` &mdash; (`Array<map>`) Contains a list of IPRange
+ *           elements.
  *           * `Status` &mdash; (`String`) Specifies the status of the IP
  *             range. Status can be "authorizing", "authorized",
  *             "revoking", and "revoked".
@@ -845,8 +843,8 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DBSnapshot` &mdash; (`Object`) Contains the result of a
- *         successful invocation of the following actions: CreateDBSnapshot
+ *       * `DBSnapshot` &mdash; (`map`) Contains the result of a successful
+ *         invocation of the following actions: CreateDBSnapshot
  *         DeleteDBSnapshot This data type is used as a response element in
  *         the DescribeDBSnapshots action.
  *         * `DBSnapshotIdentifier` &mdash; (`String`) Specifies the
@@ -909,7 +907,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DBSubnetGroup` &mdash; (`Object`) Contains the result of a
+ *       * `DBSubnetGroup` &mdash; (`map`) Contains the result of a
  *         successful invocation of the following actions:
  *         CreateDBSubnetGroup ModifyDBSubnetGroup DescribeDBSubnetGroups
  *         DeleteDBSubnetGroup This data type is used as a response element
@@ -922,11 +920,11 @@ AWS.RDS = inherit({})
  *           Group.
  *         * `SubnetGroupStatus` &mdash; (`String`) Provides the status of
  *           the DB Subnet Group.
- *         * `Subnets` &mdash; (`Array<Object>`) Contains a list of Subnet
+ *         * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
  *           elements.
  *           * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *             identifier of the subnet.
- *           * `SubnetAvailabilityZone` &mdash; (`Object`)
+ *           * `SubnetAvailabilityZone` &mdash; (`map`)
  *             * `Name` &mdash; (`String`) The name of the availability
  *               zone.
  *             * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
@@ -956,7 +954,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `EventSubscription` &mdash; (`Object`)
+ *       * `EventSubscription` &mdash; (`map`)
  *         * `CustomerAwsId` &mdash; (`String`)
  *         * `CustSubscriptionId` &mdash; (`String`)
  *         * `SnsTopicArn` &mdash; (`String`)
@@ -995,7 +993,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `OptionGroup` &mdash; (`Object`)
+ *       * `OptionGroup` &mdash; (`map`)
  *         * `OptionGroupName` &mdash; (`String`) Specifies the name of the
  *           option group.
  *         * `OptionGroupDescription` &mdash; (`String`) Provides the
@@ -1004,7 +1002,7 @@ AWS.RDS = inherit({})
  *           group can be applied to.
  *         * `MajorEngineVersion` &mdash; (`String`) Indicates the major
  *           engine version associated with this option group.
- *         * `Options` &mdash; (`Array<Object>`) Indicates what options are
+ *         * `Options` &mdash; (`Array<map>`) Indicates what options are
  *           available in the option group.
  *           * `OptionName` &mdash; (`String`) The name of the option.
  *           * `OptionDescription` &mdash; (`String`) The description of
@@ -1013,7 +1011,7 @@ AWS.RDS = inherit({})
  *             persistent.
  *           * `Port` &mdash; (`Integer`) If required, the port configured
  *             for this option to use.
- *           * `OptionSettings` &mdash; (`Array<Object>`) The settings
+ *           * `OptionSettings` &mdash; (`Array<map>`) The settings
  *             belonging to this option.
  *             * `Name` &mdash; (`String`) The name of the setting.
  *             * `Value` &mdash; (`String`) The value of this setting.
@@ -1031,15 +1029,15 @@ AWS.RDS = inherit({})
  *               setting is modifiable or not.
  *             * `IsCollection` &mdash; (`Boolean`) Indicates if the value
  *               for the setting can be a list of values or a single value.
- *           * `DBSecurityGroupMemberships` &mdash; (`Array<Object>`) If
- *             the Option requires access to a port, then this DB Security
+ *           * `DBSecurityGroupMemberships` &mdash; (`Array<map>`) If the
+ *             Option requires access to a port, then this DB Security
  *             Group allows access to the port.
  *             * `DBSecurityGroupName` &mdash; (`String`) The name of the
  *               DB Security Group.
  *             * `Status` &mdash; (`String`) The status of the DB Security
  *               Group.
- *           * `VpcSecurityGroupMemberships` &mdash; (`Array<Object>`) If
- *             the Option requires access to a port, then this VPC Security
+ *           * `VpcSecurityGroupMemberships` &mdash; (`Array<map>`) If the
+ *             Option requires access to a port, then this VPC Security
  *             Group allows access to the port.
  *             * `VpcSecurityGroupId` &mdash; (`String`)
  *             * `Status` &mdash; (`String`)
@@ -1089,8 +1087,8 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DBInstance` &mdash; (`Object`) Contains the result of a
- *         successful invocation of the following actions: CreateDBInstance
+ *       * `DBInstance` &mdash; (`map`) Contains the result of a successful
+ *         invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
  *         response element in the DescribeDBInstances action.
  *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
@@ -1111,8 +1109,7 @@ AWS.RDS = inherit({})
  *           the DB Instance was created. This same name is returned for
  *           the life of the DB Instance. Type: String Oracle Contains the
  *           Oracle System ID (SID) of the created DB Instance.
- *         * `Endpoint` &mdash; (`Object`) Specifies the connection
- *           endpoint.
+ *         * `Endpoint` &mdash; (`map`) Specifies the connection endpoint.
  *           * `Address` &mdash; (`String`) Specifies the DNS address of
  *             the DB Instance.
  *           * `Port` &mdash; (`Integer`) Specifies the port that the
@@ -1127,26 +1124,26 @@ AWS.RDS = inherit({})
  *           BackupRetentionPeriod.
  *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
  *           number of days for which automatic DB Snapshots are retained.
- *         * `DBSecurityGroups` &mdash; (`Array<Object>`) Provides List of
- *           DB Security Group elements containing only
- *           DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *         * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of DB
+ *           Security Group elements containing only DBSecurityGroup.Name
+ *           and DBSecurityGroup.Status subelements.
  *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
  *             Security Group.
  *           * `Status` &mdash; (`String`) The status of the DB Security
  *             Group.
- *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *         * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
  *           VPC security group elements that the DB Instance belongs to.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
- *         * `DBParameterGroups` &mdash; (`Array<Object>`) Provides the
- *           list of DB Parameter Groups applied to this DB Instance.
+ *         * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
+ *           of DB Parameter Groups applied to this DB Instance.
  *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
  *             Parameter Group.
  *           * `ParameterApplyStatus` &mdash; (`String`) The status of
  *             parameter updates.
  *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
  *           the Availability Zone the DB Instance is located in.
- *         * `DBSubnetGroup` &mdash; (`Object`) Provides the inforamtion of
+ *         * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
  *           the subnet group associated with the DB instance, including
  *           the name, descrption and subnets in the subnet group.
  *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
@@ -1157,11 +1154,11 @@ AWS.RDS = inherit({})
  *             Subnet Group.
  *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
  *             of the DB Subnet Group.
- *           * `Subnets` &mdash; (`Array<Object>`) Contains a list of
- *             Subnet elements.
+ *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
+ *             elements.
  *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *               identifier of the subnet.
- *             * `SubnetAvailabilityZone` &mdash; (`Object`)
+ *             * `SubnetAvailabilityZone` &mdash; (`map`)
  *               * `Name` &mdash; (`String`) The name of the availability
  *                 zone.
  *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
@@ -1172,10 +1169,10 @@ AWS.RDS = inherit({})
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
  *           weekly time range (in UTC) during which system maintenance can
  *           occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) Specifies that
- *           changes to the DB Instance are pending. This element is only
- *           included when changes are pending. Specific changes are
- *           identified by subelements.
+ *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
+ *           to the DB Instance are pending. This element is only included
+ *           when changes are pending. Specific changes are identified by
+ *           subelements.
  *           * `DBInstanceClass` &mdash; (`String`) Contains the new
  *             DBInstanceClass for the DB Instance that will be applied or
  *             is in progress.
@@ -1219,8 +1216,8 @@ AWS.RDS = inherit({})
  *           for this DB Instance.
  *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
  *           operations per second) value.
- *         * `OptionGroupMemberships` &mdash; (`Array<Object>`) Provides
- *           the list of option group memberships for this DB Instance.
+ *         * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
+ *           list of option group memberships for this DB Instance.
  *           * `OptionGroupName` &mdash; (`String`) The name of the option
  *             group that the instance belongs to.
  *           * `Status` &mdash; (`String`) The status of the DB Instance's
@@ -1290,8 +1287,8 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DBSnapshot` &mdash; (`Object`) Contains the result of a
- *         successful invocation of the following actions: CreateDBSnapshot
+ *       * `DBSnapshot` &mdash; (`map`) Contains the result of a successful
+ *         invocation of the following actions: CreateDBSnapshot
  *         DeleteDBSnapshot This data type is used as a response element in
  *         the DescribeDBSnapshots action.
  *         * `DBSnapshotIdentifier` &mdash; (`String`) Specifies the
@@ -1365,7 +1362,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `EventSubscription` &mdash; (`Object`)
+ *       * `EventSubscription` &mdash; (`map`)
  *         * `CustomerAwsId` &mdash; (`String`)
  *         * `CustSubscriptionId` &mdash; (`String`)
  *         * `SnsTopicArn` &mdash; (`String`)
@@ -1437,7 +1434,7 @@ AWS.RDS = inherit({})
  *         provided by a previous request. If this parameter is specified,
  *         the response includes only records beyond the marker, up to the
  *         value specified by MaxRecords.
- *       * `DBEngineVersions` &mdash; (`Array<Object>`) A list of
+ *       * `DBEngineVersions` &mdash; (`Array<map>`) A list of
  *         DBEngineVersion elements.
  *         * `Engine` &mdash; (`String`) The name of the database engine.
  *         * `EngineVersion` &mdash; (`String`) The version number of the
@@ -1448,7 +1445,7 @@ AWS.RDS = inherit({})
  *           the database engine.
  *         * `DBEngineVersionDescription` &mdash; (`String`) The
  *           description of the database engine version.
- *         * `DefaultCharacterSet` &mdash; (`Object`) The default character
+ *         * `DefaultCharacterSet` &mdash; (`map`) The default character
  *           set for new instances of this engine version, if the
  *           CharacterSetName parameter of the CreateDBInstance API is not
  *           specified.
@@ -1456,8 +1453,8 @@ AWS.RDS = inherit({})
  *             character set.
  *           * `CharacterSetDescription` &mdash; (`String`) The description
  *             of the character set.
- *         * `SupportedCharacterSets` &mdash; (`Array<Object>`) A list of
- *           the character sets supported by this engine for the
+ *         * `SupportedCharacterSets` &mdash; (`Array<map>`) A list of the
+ *           character sets supported by this engine for the
  *           CharacterSetName parameter of the CreateDBInstance API.
  *           * `CharacterSetName` &mdash; (`String`) The name of the
  *             character set.
@@ -1499,7 +1496,7 @@ AWS.RDS = inherit({})
  *         provided by a previous request. If this parameter is specified,
  *         the response includes only records beyond the marker, up to the
  *         value specified by MaxRecords .
- *       * `DBInstances` &mdash; (`Array<Object>`) A list of DBInstance
+ *       * `DBInstances` &mdash; (`Array<map>`) A list of DBInstance
  *         instances.
  *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
  *           user-supplied database identifier. This is the unique key that
@@ -1519,8 +1516,7 @@ AWS.RDS = inherit({})
  *           the DB Instance was created. This same name is returned for
  *           the life of the DB Instance. Type: String Oracle Contains the
  *           Oracle System ID (SID) of the created DB Instance.
- *         * `Endpoint` &mdash; (`Object`) Specifies the connection
- *           endpoint.
+ *         * `Endpoint` &mdash; (`map`) Specifies the connection endpoint.
  *           * `Address` &mdash; (`String`) Specifies the DNS address of
  *             the DB Instance.
  *           * `Port` &mdash; (`Integer`) Specifies the port that the
@@ -1535,26 +1531,26 @@ AWS.RDS = inherit({})
  *           BackupRetentionPeriod.
  *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
  *           number of days for which automatic DB Snapshots are retained.
- *         * `DBSecurityGroups` &mdash; (`Array<Object>`) Provides List of
- *           DB Security Group elements containing only
- *           DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *         * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of DB
+ *           Security Group elements containing only DBSecurityGroup.Name
+ *           and DBSecurityGroup.Status subelements.
  *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
  *             Security Group.
  *           * `Status` &mdash; (`String`) The status of the DB Security
  *             Group.
- *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *         * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
  *           VPC security group elements that the DB Instance belongs to.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
- *         * `DBParameterGroups` &mdash; (`Array<Object>`) Provides the
- *           list of DB Parameter Groups applied to this DB Instance.
+ *         * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
+ *           of DB Parameter Groups applied to this DB Instance.
  *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
  *             Parameter Group.
  *           * `ParameterApplyStatus` &mdash; (`String`) The status of
  *             parameter updates.
  *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
  *           the Availability Zone the DB Instance is located in.
- *         * `DBSubnetGroup` &mdash; (`Object`) Provides the inforamtion of
+ *         * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
  *           the subnet group associated with the DB instance, including
  *           the name, descrption and subnets in the subnet group.
  *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
@@ -1565,11 +1561,11 @@ AWS.RDS = inherit({})
  *             Subnet Group.
  *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
  *             of the DB Subnet Group.
- *           * `Subnets` &mdash; (`Array<Object>`) Contains a list of
- *             Subnet elements.
+ *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
+ *             elements.
  *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *               identifier of the subnet.
- *             * `SubnetAvailabilityZone` &mdash; (`Object`)
+ *             * `SubnetAvailabilityZone` &mdash; (`map`)
  *               * `Name` &mdash; (`String`) The name of the availability
  *                 zone.
  *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
@@ -1580,10 +1576,10 @@ AWS.RDS = inherit({})
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
  *           weekly time range (in UTC) during which system maintenance can
  *           occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) Specifies that
- *           changes to the DB Instance are pending. This element is only
- *           included when changes are pending. Specific changes are
- *           identified by subelements.
+ *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
+ *           to the DB Instance are pending. This element is only included
+ *           when changes are pending. Specific changes are identified by
+ *           subelements.
  *           * `DBInstanceClass` &mdash; (`String`) Contains the new
  *             DBInstanceClass for the DB Instance that will be applied or
  *             is in progress.
@@ -1627,8 +1623,8 @@ AWS.RDS = inherit({})
  *           for this DB Instance.
  *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
  *           operations per second) value.
- *         * `OptionGroupMemberships` &mdash; (`Array<Object>`) Provides
- *           the list of option group memberships for this DB Instance.
+ *         * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
+ *           list of option group memberships for this DB Instance.
  *           * `OptionGroupName` &mdash; (`String`) The name of the option
  *             group that the instance belongs to.
  *           * `Status` &mdash; (`String`) The status of the DB Instance's
@@ -1676,7 +1672,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DescribeDBLogFiles` &mdash; (`Array<Object>`)
+ *       * `DescribeDBLogFiles` &mdash; (`Array<map>`)
  *         * `LogFileName` &mdash; (`String`) The name of the log file for
  *           the specified DB instance.
  *         * `LastWritten` &mdash; (`Integer`) The date and time that the
@@ -1717,7 +1713,7 @@ AWS.RDS = inherit({})
  *         provided by a previous request. If this parameter is specified,
  *         the response includes only records beyond the marker, up to the
  *         value specified by MaxRecords.
- *       * `DBParameterGroups` &mdash; (`Array<Object>`) A list of
+ *       * `DBParameterGroups` &mdash; (`Array<map>`) A list of
  *         DBParameterGroup instances.
  *         * `DBParameterGroupName` &mdash; (`String`) Provides the name of
  *           the DB Parameter Group.
@@ -1759,7 +1755,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Parameters` &mdash; (`Array<Object>`) A list of Parameter
+ *       * `Parameters` &mdash; (`Array<map>`) A list of Parameter
  *         instances.
  *         * `ParameterName` &mdash; (`String`) Specifies the name of the
  *           parameter.
@@ -1783,6 +1779,9 @@ AWS.RDS = inherit({})
  *           version to which the parameter can apply.
  *         * `ApplyMethod` &mdash; (`String`) Indicates when to apply
  *           parameter updates.
+ *           Possible values include:
+ *           * `immediate`
+ *           * `pending-reboot`
  *       * `Marker` &mdash; (`String`) An optional pagination token
  *         provided by a previous request. If this parameter is specified,
  *         the response includes only records beyond the marker, up to the
@@ -1818,7 +1817,7 @@ AWS.RDS = inherit({})
  *         provided by a previous request. If this parameter is specified,
  *         the response includes only records beyond the marker, up to the
  *         value specified by MaxRecords.
- *       * `DBSecurityGroups` &mdash; (`Array<Object>`) A list of
+ *       * `DBSecurityGroups` &mdash; (`Array<map>`) A list of
  *         DBSecurityGroup instances.
  *         * `OwnerId` &mdash; (`String`) Provides the AWS ID of the owner
  *           of a specific DB Security Group.
@@ -1828,8 +1827,8 @@ AWS.RDS = inherit({})
  *           description of the DB Security Group.
  *         * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
  *           Security Group.
- *         * `EC2SecurityGroups` &mdash; (`Array<Object>`) Contains a list
- *           of EC2SecurityGroup elements.
+ *         * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list of
+ *           EC2SecurityGroup elements.
  *           * `Status` &mdash; (`String`) Provides the status of the EC2
  *             security group. Status can be "authorizing", "authorized",
  *             "revoking", and "revoked".
@@ -1840,8 +1839,8 @@ AWS.RDS = inherit({})
  *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies the
  *             AWS ID of the owner of the EC2 security group specified in
  *             the EC2SecurityGroupName field.
- *         * `IPRanges` &mdash; (`Array<Object>`) Contains a list of
- *           IPRange elements.
+ *         * `IPRanges` &mdash; (`Array<map>`) Contains a list of IPRange
+ *           elements.
  *           * `Status` &mdash; (`String`) Specifies the status of the IP
  *             range. Status can be "authorizing", "authorized",
  *             "revoking", and "revoked".
@@ -1893,7 +1892,7 @@ AWS.RDS = inherit({})
  *         provided by a previous request. If this parameter is specified,
  *         the response includes only records beyond the marker, up to the
  *         value specified by MaxRecords.
- *       * `DBSnapshots` &mdash; (`Array<Object>`) A list of DBSnapshot
+ *       * `DBSnapshots` &mdash; (`Array<map>`) A list of DBSnapshot
  *         instances.
  *         * `DBSnapshotIdentifier` &mdash; (`String`) Specifies the
  *           identifier for the DB Snapshot.
@@ -1961,8 +1960,8 @@ AWS.RDS = inherit({})
  *         provided by a previous request. If this parameter is specified,
  *         the response includes only records beyond the marker, up to the
  *         value specified by MaxRecords.
- *       * `DBSubnetGroups` &mdash; (`Array<Object>`) A list of
- *         DBSubnetGroup instances.
+ *       * `DBSubnetGroups` &mdash; (`Array<map>`) A list of DBSubnetGroup
+ *         instances.
  *         * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
  *           the DB Subnet Group.
  *         * `DBSubnetGroupDescription` &mdash; (`String`) Provides the
@@ -1971,11 +1970,11 @@ AWS.RDS = inherit({})
  *           Group.
  *         * `SubnetGroupStatus` &mdash; (`String`) Provides the status of
  *           the DB Subnet Group.
- *         * `Subnets` &mdash; (`Array<Object>`) Contains a list of Subnet
+ *         * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
  *           elements.
  *           * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *             identifier of the subnet.
- *           * `SubnetAvailabilityZone` &mdash; (`Object`)
+ *           * `SubnetAvailabilityZone` &mdash; (`map`)
  *             * `Name` &mdash; (`String`) The name of the availability
  *               zone.
  *             * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
@@ -2011,7 +2010,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `EngineDefaults` &mdash; (`Object`) Contains the result of a
+ *       * `EngineDefaults` &mdash; (`map`) Contains the result of a
  *         successful invocation of the DescribeEngineDefaultParameters
  *         action.
  *         * `DBParameterGroupFamily` &mdash; (`String`) Specifies the name
@@ -2021,8 +2020,8 @@ AWS.RDS = inherit({})
  *           provided by a previous EngineDefaults request. If this
  *           parameter is specified, the response includes only records
  *           beyond the marker, up to the value specified by MaxRecords .
- *         * `Parameters` &mdash; (`Array<Object>`) Contains a list of
- *           engine default parameters.
+ *         * `Parameters` &mdash; (`Array<map>`) Contains a list of engine
+ *           default parameters.
  *           * `ParameterName` &mdash; (`String`) Specifies the name of the
  *             parameter.
  *           * `ParameterValue` &mdash; (`String`) Specifies the value of
@@ -2045,6 +2044,9 @@ AWS.RDS = inherit({})
  *             engine version to which the parameter can apply.
  *           * `ApplyMethod` &mdash; (`String`) Indicates when to apply
  *             parameter updates.
+ *             Possible values include:
+ *             * `immediate`
+ *             * `pending-reboot`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2062,7 +2064,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `EventCategoriesMapList` &mdash; (`Array<Object>`)
+ *       * `EventCategoriesMapList` &mdash; (`Array<map>`)
  *         * `SourceType` &mdash; (`String`)
  *         * `EventCategories` &mdash; (`Array<String>`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -2085,7 +2087,7 @@ AWS.RDS = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `Marker` &mdash; (`String`)
- *       * `EventSubscriptionsList` &mdash; (`Array<Object>`)
+ *       * `EventSubscriptionsList` &mdash; (`Array<map>`)
  *         * `CustomerAwsId` &mdash; (`String`)
  *         * `CustSubscriptionId` &mdash; (`String`)
  *         * `SnsTopicArn` &mdash; (`String`)
@@ -2114,6 +2116,11 @@ AWS.RDS = inherit({})
  *       or contain two consecutive hyphens.
  *     * `SourceType` &mdash; (`String`) The event source to retrieve
  *       events for. If no value is specified, all events are returned.
+ *       Possible values include:
+ *       * `db-instance`
+ *       * `db-parameter-group`
+ *       * `db-security-group`
+ *       * `db-snapshot`
  *     * `StartTime` &mdash; (`Date`) The beginning of the time interval
  *       to retrieve events for, specified in ISO 8601 format. For more
  *       information about ISO 8601, go to the ISO8601 Wikipedia page.
@@ -2148,11 +2155,16 @@ AWS.RDS = inherit({})
  *         provided by a previous Events request. If this parameter is
  *         specified, the response includes only records beyond the marker,
  *         up to the value specified by MaxRecords .
- *       * `Events` &mdash; (`Array<Object>`) A list of Event instances.
+ *       * `Events` &mdash; (`Array<map>`) A list of Event instances.
  *         * `SourceIdentifier` &mdash; (`String`) Provides the identifier
  *           for the source of the event.
  *         * `SourceType` &mdash; (`String`) Specifies the source type for
  *           this event.
+ *           Possible values include:
+ *           * `db-instance`
+ *           * `db-parameter-group`
+ *           * `db-security-group`
+ *           * `db-snapshot`
  *         * `Message` &mdash; (`String`) Provides the text of this event.
  *         * `EventCategories` &mdash; (`Array<String>`) Specifies the
  *           category for the event.
@@ -2189,7 +2201,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `OptionGroupOptions` &mdash; (`Array<Object>`)
+ *       * `OptionGroupOptions` &mdash; (`Array<map>`)
  *         * `Name` &mdash; (`String`) The name of the option.
  *         * `Description` &mdash; (`String`) The description of the
  *           option.
@@ -2207,7 +2219,7 @@ AWS.RDS = inherit({})
  *           options that are prerequisites for this option.
  *         * `Persistent` &mdash; (`Boolean`) Specifies whether the option
  *           is persistent in an option group.
- *         * `OptionGroupOptionSettings` &mdash; (`Array<Object>`)
+ *         * `OptionGroupOptionSettings` &mdash; (`Array<map>`)
  *           * `SettingName` &mdash; (`String`)
  *           * `SettingDescription` &mdash; (`String`)
  *           * `DefaultValue` &mdash; (`String`)
@@ -2253,8 +2265,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `OptionGroupsList` &mdash; (`Array<Object>`) List of option
- *         groups.
+ *       * `OptionGroupsList` &mdash; (`Array<map>`) List of option groups.
  *         * `OptionGroupName` &mdash; (`String`) Specifies the name of the
  *           option group.
  *         * `OptionGroupDescription` &mdash; (`String`) Provides the
@@ -2263,7 +2274,7 @@ AWS.RDS = inherit({})
  *           group can be applied to.
  *         * `MajorEngineVersion` &mdash; (`String`) Indicates the major
  *           engine version associated with this option group.
- *         * `Options` &mdash; (`Array<Object>`) Indicates what options are
+ *         * `Options` &mdash; (`Array<map>`) Indicates what options are
  *           available in the option group.
  *           * `OptionName` &mdash; (`String`) The name of the option.
  *           * `OptionDescription` &mdash; (`String`) The description of
@@ -2272,7 +2283,7 @@ AWS.RDS = inherit({})
  *             persistent.
  *           * `Port` &mdash; (`Integer`) If required, the port configured
  *             for this option to use.
- *           * `OptionSettings` &mdash; (`Array<Object>`) The settings
+ *           * `OptionSettings` &mdash; (`Array<map>`) The settings
  *             belonging to this option.
  *             * `Name` &mdash; (`String`) The name of the setting.
  *             * `Value` &mdash; (`String`) The value of this setting.
@@ -2290,15 +2301,15 @@ AWS.RDS = inherit({})
  *               setting is modifiable or not.
  *             * `IsCollection` &mdash; (`Boolean`) Indicates if the value
  *               for the setting can be a list of values or a single value.
- *           * `DBSecurityGroupMemberships` &mdash; (`Array<Object>`) If
- *             the Option requires access to a port, then this DB Security
+ *           * `DBSecurityGroupMemberships` &mdash; (`Array<map>`) If the
+ *             Option requires access to a port, then this DB Security
  *             Group allows access to the port.
  *             * `DBSecurityGroupName` &mdash; (`String`) The name of the
  *               DB Security Group.
  *             * `Status` &mdash; (`String`) The status of the DB Security
  *               Group.
- *           * `VpcSecurityGroupMemberships` &mdash; (`Array<Object>`) If
- *             the Option requires access to a port, then this VPC Security
+ *           * `VpcSecurityGroupMemberships` &mdash; (`Array<map>`) If the
+ *             Option requires access to a port, then this VPC Security
  *             Group allows access to the port.
  *             * `VpcSecurityGroupId` &mdash; (`String`)
  *             * `Status` &mdash; (`String`)
@@ -2353,7 +2364,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `OrderableDBInstanceOptions` &mdash; (`Array<Object>`) An
+ *       * `OrderableDBInstanceOptions` &mdash; (`Array<map>`) An
  *         OrderableDBInstanceOption structure containing information about
  *         orderable options for the DB Instance.
  *         * `Engine` &mdash; (`String`) The engine type of the orderable
@@ -2364,7 +2375,7 @@ AWS.RDS = inherit({})
  *           the orderable DB Instance
  *         * `LicenseModel` &mdash; (`String`) The license model for the
  *           orderable DB Instance.
- *         * `AvailabilityZones` &mdash; (`Array<Object>`) A list of
+ *         * `AvailabilityZones` &mdash; (`Array<map>`) A list of
  *           availability zones for the orderable DB Instance.
  *           * `Name` &mdash; (`String`) The name of the availability zone.
  *           * `ProvisionedIopsCapable` &mdash; (`Boolean`) True indicates
@@ -2432,7 +2443,7 @@ AWS.RDS = inherit({})
  *         provided by a previous request. If this parameter is specified,
  *         the response includes only records beyond the marker, up to the
  *         value specified by MaxRecords.
- *       * `ReservedDBInstances` &mdash; (`Array<Object>`) A list of of
+ *       * `ReservedDBInstances` &mdash; (`Array<map>`) A list of of
  *         reserved DB Instances.
  *         * `ReservedDBInstanceId` &mdash; (`String`) The unique
  *           identifier for the reservation.
@@ -2459,8 +2470,8 @@ AWS.RDS = inherit({})
  *           applies to Multi-AZ deployments.
  *         * `State` &mdash; (`String`) The state of the reserved DB
  *           Instance.
- *         * `RecurringCharges` &mdash; (`Array<Object>`) The recurring
- *           price charged to run this reserved DB Instance.
+ *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring price
+ *           charged to run this reserved DB Instance.
  *           * `RecurringChargeAmount` &mdash; (`Float`) The amount of the
  *             recurring charge.
  *           * `RecurringChargeFrequency` &mdash; (`String`) The frequency
@@ -2515,8 +2526,8 @@ AWS.RDS = inherit({})
  *         provided by a previous request. If this parameter is specified,
  *         the response includes only records beyond the marker, up to the
  *         value specified by MaxRecords.
- *       * `ReservedDBInstancesOfferings` &mdash; (`Array<Object>`) A list
- *         of reserved DB Instance offerings.
+ *       * `ReservedDBInstancesOfferings` &mdash; (`Array<map>`) A list of
+ *         reserved DB Instance offerings.
  *         * `ReservedDBInstancesOfferingId` &mdash; (`String`) The
  *           offering identifier.
  *         * `DBInstanceClass` &mdash; (`String`) The DB instance class for
@@ -2534,8 +2545,8 @@ AWS.RDS = inherit({})
  *         * `OfferingType` &mdash; (`String`) The offering type.
  *         * `MultiAZ` &mdash; (`Boolean`) Indicates if the offering
  *           applies to Multi-AZ deployments.
- *         * `RecurringCharges` &mdash; (`Array<Object>`) The recurring
- *           price charged to run this reserved DB Instance.
+ *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring price
+ *           charged to run this reserved DB Instance.
  *           * `RecurringChargeAmount` &mdash; (`Float`) The amount of the
  *             recurring charge.
  *           * `RecurringChargeFrequency` &mdash; (`String`) The frequency
@@ -2592,7 +2603,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `TagList` &mdash; (`Array<Object>`) List of tags returned by the
+ *       * `TagList` &mdash; (`Array<map>`) List of tags returned by the
  *         ListTagsForResource operation.
  *         * `Key` &mdash; (`String`) A key is the required name of the
  *           tag. The string value can be from 1 to 128 Unicode characters
@@ -2783,8 +2794,8 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DBInstance` &mdash; (`Object`) Contains the result of a
- *         successful invocation of the following actions: CreateDBInstance
+ *       * `DBInstance` &mdash; (`map`) Contains the result of a successful
+ *         invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
  *         response element in the DescribeDBInstances action.
  *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
@@ -2805,8 +2816,7 @@ AWS.RDS = inherit({})
  *           the DB Instance was created. This same name is returned for
  *           the life of the DB Instance. Type: String Oracle Contains the
  *           Oracle System ID (SID) of the created DB Instance.
- *         * `Endpoint` &mdash; (`Object`) Specifies the connection
- *           endpoint.
+ *         * `Endpoint` &mdash; (`map`) Specifies the connection endpoint.
  *           * `Address` &mdash; (`String`) Specifies the DNS address of
  *             the DB Instance.
  *           * `Port` &mdash; (`Integer`) Specifies the port that the
@@ -2821,26 +2831,26 @@ AWS.RDS = inherit({})
  *           BackupRetentionPeriod.
  *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
  *           number of days for which automatic DB Snapshots are retained.
- *         * `DBSecurityGroups` &mdash; (`Array<Object>`) Provides List of
- *           DB Security Group elements containing only
- *           DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *         * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of DB
+ *           Security Group elements containing only DBSecurityGroup.Name
+ *           and DBSecurityGroup.Status subelements.
  *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
  *             Security Group.
  *           * `Status` &mdash; (`String`) The status of the DB Security
  *             Group.
- *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *         * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
  *           VPC security group elements that the DB Instance belongs to.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
- *         * `DBParameterGroups` &mdash; (`Array<Object>`) Provides the
- *           list of DB Parameter Groups applied to this DB Instance.
+ *         * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
+ *           of DB Parameter Groups applied to this DB Instance.
  *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
  *             Parameter Group.
  *           * `ParameterApplyStatus` &mdash; (`String`) The status of
  *             parameter updates.
  *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
  *           the Availability Zone the DB Instance is located in.
- *         * `DBSubnetGroup` &mdash; (`Object`) Provides the inforamtion of
+ *         * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
  *           the subnet group associated with the DB instance, including
  *           the name, descrption and subnets in the subnet group.
  *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
@@ -2851,11 +2861,11 @@ AWS.RDS = inherit({})
  *             Subnet Group.
  *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
  *             of the DB Subnet Group.
- *           * `Subnets` &mdash; (`Array<Object>`) Contains a list of
- *             Subnet elements.
+ *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
+ *             elements.
  *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *               identifier of the subnet.
- *             * `SubnetAvailabilityZone` &mdash; (`Object`)
+ *             * `SubnetAvailabilityZone` &mdash; (`map`)
  *               * `Name` &mdash; (`String`) The name of the availability
  *                 zone.
  *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
@@ -2866,10 +2876,10 @@ AWS.RDS = inherit({})
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
  *           weekly time range (in UTC) during which system maintenance can
  *           occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) Specifies that
- *           changes to the DB Instance are pending. This element is only
- *           included when changes are pending. Specific changes are
- *           identified by subelements.
+ *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
+ *           to the DB Instance are pending. This element is only included
+ *           when changes are pending. Specific changes are identified by
+ *           subelements.
  *           * `DBInstanceClass` &mdash; (`String`) Contains the new
  *             DBInstanceClass for the DB Instance that will be applied or
  *             is in progress.
@@ -2913,8 +2923,8 @@ AWS.RDS = inherit({})
  *           for this DB Instance.
  *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
  *           operations per second) value.
- *         * `OptionGroupMemberships` &mdash; (`Array<Object>`) Provides
- *           the list of option group memberships for this DB Instance.
+ *         * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
+ *           list of option group memberships for this DB Instance.
  *           * `OptionGroupName` &mdash; (`String`) The name of the option
  *             group that the instance belongs to.
  *           * `Status` &mdash; (`String`) The status of the DB Instance's
@@ -2938,7 +2948,7 @@ AWS.RDS = inherit({})
  *       name of an existing DB Parameter Group Must be 1 to 255
  *       alphanumeric characters First character must be a letter Cannot
  *       end with a hyphen or contain two consecutive hyphens
- *     * `Parameters` &mdash; **required** &mdash; (`Array<Object>`) An
+ *     * `Parameters` &mdash; **required** &mdash; (`Array<map>`) An
  *       array of parameter names, values, and the apply method for the
  *       parameter update. At least one parameter name, value, and apply
  *       method must be supplied; subsequent arguments are optional. A
@@ -2970,6 +2980,9 @@ AWS.RDS = inherit({})
  *         version to which the parameter can apply.
  *       * `ApplyMethod` &mdash; (`String`) Indicates when to apply
  *         parameter updates.
+ *         Possible values include:
+ *         * `immediate`
+ *         * `pending-reboot`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3007,7 +3020,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DBSubnetGroup` &mdash; (`Object`) Contains the result of a
+ *       * `DBSubnetGroup` &mdash; (`map`) Contains the result of a
  *         successful invocation of the following actions:
  *         CreateDBSubnetGroup ModifyDBSubnetGroup DescribeDBSubnetGroups
  *         DeleteDBSubnetGroup This data type is used as a response element
@@ -3020,11 +3033,11 @@ AWS.RDS = inherit({})
  *           Group.
  *         * `SubnetGroupStatus` &mdash; (`String`) Provides the status of
  *           the DB Subnet Group.
- *         * `Subnets` &mdash; (`Array<Object>`) Contains a list of Subnet
+ *         * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
  *           elements.
  *           * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *             identifier of the subnet.
- *           * `SubnetAvailabilityZone` &mdash; (`Object`)
+ *           * `SubnetAvailabilityZone` &mdash; (`map`)
  *             * `Name` &mdash; (`String`) The name of the availability
  *               zone.
  *             * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
@@ -3053,7 +3066,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `EventSubscription` &mdash; (`Object`)
+ *       * `EventSubscription` &mdash; (`map`)
  *         * `CustomerAwsId` &mdash; (`String`)
  *         * `CustSubscriptionId` &mdash; (`String`)
  *         * `SnsTopicArn` &mdash; (`String`)
@@ -3071,8 +3084,8 @@ AWS.RDS = inherit({})
  *   @param params [Object]
  *     * `OptionGroupName` &mdash; **required** &mdash; (`String`) The
  *       name of the option group to be modified.
- *     * `OptionsToInclude` &mdash; (`Array<Object>`) Options in this
- *       list are added to the Option Group or, if already present, the
+ *     * `OptionsToInclude` &mdash; (`Array<map>`) Options in this list
+ *       are added to the Option Group or, if already present, the
  *       specified configuration is used to update the existing
  *       configuration.
  *       * `OptionName` &mdash; **required** &mdash; (`String`) The
@@ -3084,7 +3097,7 @@ AWS.RDS = inherit({})
  *       * `VpcSecurityGroupMemberships` &mdash; (`Array<String>`) A list
  *         of VpcSecurityGroupMemebrship name strings used for this
  *         option.
- *       * `OptionSettings` &mdash; (`Array<Object>`) A list of option
+ *       * `OptionSettings` &mdash; (`Array<map>`) A list of option
  *         settings applied for this option.
  *         * `Name` &mdash; (`String`) The name of the setting.
  *         * `Value` &mdash; (`String`) The value of this setting.
@@ -3118,7 +3131,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `OptionGroup` &mdash; (`Object`)
+ *       * `OptionGroup` &mdash; (`map`)
  *         * `OptionGroupName` &mdash; (`String`) Specifies the name of the
  *           option group.
  *         * `OptionGroupDescription` &mdash; (`String`) Provides the
@@ -3127,7 +3140,7 @@ AWS.RDS = inherit({})
  *           group can be applied to.
  *         * `MajorEngineVersion` &mdash; (`String`) Indicates the major
  *           engine version associated with this option group.
- *         * `Options` &mdash; (`Array<Object>`) Indicates what options are
+ *         * `Options` &mdash; (`Array<map>`) Indicates what options are
  *           available in the option group.
  *           * `OptionName` &mdash; (`String`) The name of the option.
  *           * `OptionDescription` &mdash; (`String`) The description of
@@ -3136,7 +3149,7 @@ AWS.RDS = inherit({})
  *             persistent.
  *           * `Port` &mdash; (`Integer`) If required, the port configured
  *             for this option to use.
- *           * `OptionSettings` &mdash; (`Array<Object>`) The settings
+ *           * `OptionSettings` &mdash; (`Array<map>`) The settings
  *             belonging to this option.
  *             * `Name` &mdash; (`String`) The name of the setting.
  *             * `Value` &mdash; (`String`) The value of this setting.
@@ -3154,15 +3167,15 @@ AWS.RDS = inherit({})
  *               setting is modifiable or not.
  *             * `IsCollection` &mdash; (`Boolean`) Indicates if the value
  *               for the setting can be a list of values or a single value.
- *           * `DBSecurityGroupMemberships` &mdash; (`Array<Object>`) If
- *             the Option requires access to a port, then this DB Security
+ *           * `DBSecurityGroupMemberships` &mdash; (`Array<map>`) If the
+ *             Option requires access to a port, then this DB Security
  *             Group allows access to the port.
  *             * `DBSecurityGroupName` &mdash; (`String`) The name of the
  *               DB Security Group.
  *             * `Status` &mdash; (`String`) The status of the DB Security
  *               Group.
- *           * `VpcSecurityGroupMemberships` &mdash; (`Array<Object>`) If
- *             the Option requires access to a port, then this VPC Security
+ *           * `VpcSecurityGroupMemberships` &mdash; (`Array<map>`) If the
+ *             Option requires access to a port, then this VPC Security
  *             Group allows access to the port.
  *             * `VpcSecurityGroupId` &mdash; (`String`)
  *             * `Status` &mdash; (`String`)
@@ -3218,8 +3231,8 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DBInstance` &mdash; (`Object`) Contains the result of a
- *         successful invocation of the following actions: CreateDBInstance
+ *       * `DBInstance` &mdash; (`map`) Contains the result of a successful
+ *         invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
  *         response element in the DescribeDBInstances action.
  *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
@@ -3240,8 +3253,7 @@ AWS.RDS = inherit({})
  *           the DB Instance was created. This same name is returned for
  *           the life of the DB Instance. Type: String Oracle Contains the
  *           Oracle System ID (SID) of the created DB Instance.
- *         * `Endpoint` &mdash; (`Object`) Specifies the connection
- *           endpoint.
+ *         * `Endpoint` &mdash; (`map`) Specifies the connection endpoint.
  *           * `Address` &mdash; (`String`) Specifies the DNS address of
  *             the DB Instance.
  *           * `Port` &mdash; (`Integer`) Specifies the port that the
@@ -3256,26 +3268,26 @@ AWS.RDS = inherit({})
  *           BackupRetentionPeriod.
  *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
  *           number of days for which automatic DB Snapshots are retained.
- *         * `DBSecurityGroups` &mdash; (`Array<Object>`) Provides List of
- *           DB Security Group elements containing only
- *           DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *         * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of DB
+ *           Security Group elements containing only DBSecurityGroup.Name
+ *           and DBSecurityGroup.Status subelements.
  *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
  *             Security Group.
  *           * `Status` &mdash; (`String`) The status of the DB Security
  *             Group.
- *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *         * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
  *           VPC security group elements that the DB Instance belongs to.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
- *         * `DBParameterGroups` &mdash; (`Array<Object>`) Provides the
- *           list of DB Parameter Groups applied to this DB Instance.
+ *         * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
+ *           of DB Parameter Groups applied to this DB Instance.
  *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
  *             Parameter Group.
  *           * `ParameterApplyStatus` &mdash; (`String`) The status of
  *             parameter updates.
  *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
  *           the Availability Zone the DB Instance is located in.
- *         * `DBSubnetGroup` &mdash; (`Object`) Provides the inforamtion of
+ *         * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
  *           the subnet group associated with the DB instance, including
  *           the name, descrption and subnets in the subnet group.
  *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
@@ -3286,11 +3298,11 @@ AWS.RDS = inherit({})
  *             Subnet Group.
  *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
  *             of the DB Subnet Group.
- *           * `Subnets` &mdash; (`Array<Object>`) Contains a list of
- *             Subnet elements.
+ *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
+ *             elements.
  *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *               identifier of the subnet.
- *             * `SubnetAvailabilityZone` &mdash; (`Object`)
+ *             * `SubnetAvailabilityZone` &mdash; (`map`)
  *               * `Name` &mdash; (`String`) The name of the availability
  *                 zone.
  *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
@@ -3301,10 +3313,10 @@ AWS.RDS = inherit({})
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
  *           weekly time range (in UTC) during which system maintenance can
  *           occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) Specifies that
- *           changes to the DB Instance are pending. This element is only
- *           included when changes are pending. Specific changes are
- *           identified by subelements.
+ *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
+ *           to the DB Instance are pending. This element is only included
+ *           when changes are pending. Specific changes are identified by
+ *           subelements.
  *           * `DBInstanceClass` &mdash; (`String`) Contains the new
  *             DBInstanceClass for the DB Instance that will be applied or
  *             is in progress.
@@ -3348,8 +3360,8 @@ AWS.RDS = inherit({})
  *           for this DB Instance.
  *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
  *           operations per second) value.
- *         * `OptionGroupMemberships` &mdash; (`Array<Object>`) Provides
- *           the list of option group memberships for this DB Instance.
+ *         * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
+ *           list of option group memberships for this DB Instance.
  *           * `OptionGroupName` &mdash; (`String`) The name of the option
  *             group that the instance belongs to.
  *           * `Status` &mdash; (`String`) The status of the DB Instance's
@@ -3385,8 +3397,8 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ReservedDBInstance` &mdash; (`Object`) This data type is used
- *         as a response element in the DescribeReservedDBInstances and
+ *       * `ReservedDBInstance` &mdash; (`map`) This data type is used as a
+ *         response element in the DescribeReservedDBInstances and
  *         PurchaseReservedDBInstancesOffering actions.
  *         * `ReservedDBInstanceId` &mdash; (`String`) The unique
  *           identifier for the reservation.
@@ -3413,8 +3425,8 @@ AWS.RDS = inherit({})
  *           applies to Multi-AZ deployments.
  *         * `State` &mdash; (`String`) The state of the reserved DB
  *           Instance.
- *         * `RecurringCharges` &mdash; (`Array<Object>`) The recurring
- *           price charged to run this reserved DB Instance.
+ *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring price
+ *           charged to run this reserved DB Instance.
  *           * `RecurringChargeAmount` &mdash; (`Float`) The amount of the
  *             recurring charge.
  *           * `RecurringChargeFrequency` &mdash; (`String`) The frequency
@@ -3444,8 +3456,8 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DBInstance` &mdash; (`Object`) Contains the result of a
- *         successful invocation of the following actions: CreateDBInstance
+ *       * `DBInstance` &mdash; (`map`) Contains the result of a successful
+ *         invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
  *         response element in the DescribeDBInstances action.
  *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
@@ -3466,8 +3478,7 @@ AWS.RDS = inherit({})
  *           the DB Instance was created. This same name is returned for
  *           the life of the DB Instance. Type: String Oracle Contains the
  *           Oracle System ID (SID) of the created DB Instance.
- *         * `Endpoint` &mdash; (`Object`) Specifies the connection
- *           endpoint.
+ *         * `Endpoint` &mdash; (`map`) Specifies the connection endpoint.
  *           * `Address` &mdash; (`String`) Specifies the DNS address of
  *             the DB Instance.
  *           * `Port` &mdash; (`Integer`) Specifies the port that the
@@ -3482,26 +3493,26 @@ AWS.RDS = inherit({})
  *           BackupRetentionPeriod.
  *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
  *           number of days for which automatic DB Snapshots are retained.
- *         * `DBSecurityGroups` &mdash; (`Array<Object>`) Provides List of
- *           DB Security Group elements containing only
- *           DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *         * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of DB
+ *           Security Group elements containing only DBSecurityGroup.Name
+ *           and DBSecurityGroup.Status subelements.
  *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
  *             Security Group.
  *           * `Status` &mdash; (`String`) The status of the DB Security
  *             Group.
- *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *         * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
  *           VPC security group elements that the DB Instance belongs to.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
- *         * `DBParameterGroups` &mdash; (`Array<Object>`) Provides the
- *           list of DB Parameter Groups applied to this DB Instance.
+ *         * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
+ *           of DB Parameter Groups applied to this DB Instance.
  *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
  *             Parameter Group.
  *           * `ParameterApplyStatus` &mdash; (`String`) The status of
  *             parameter updates.
  *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
  *           the Availability Zone the DB Instance is located in.
- *         * `DBSubnetGroup` &mdash; (`Object`) Provides the inforamtion of
+ *         * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
  *           the subnet group associated with the DB instance, including
  *           the name, descrption and subnets in the subnet group.
  *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
@@ -3512,11 +3523,11 @@ AWS.RDS = inherit({})
  *             Subnet Group.
  *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
  *             of the DB Subnet Group.
- *           * `Subnets` &mdash; (`Array<Object>`) Contains a list of
- *             Subnet elements.
+ *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
+ *             elements.
  *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *               identifier of the subnet.
- *             * `SubnetAvailabilityZone` &mdash; (`Object`)
+ *             * `SubnetAvailabilityZone` &mdash; (`map`)
  *               * `Name` &mdash; (`String`) The name of the availability
  *                 zone.
  *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
@@ -3527,10 +3538,10 @@ AWS.RDS = inherit({})
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
  *           weekly time range (in UTC) during which system maintenance can
  *           occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) Specifies that
- *           changes to the DB Instance are pending. This element is only
- *           included when changes are pending. Specific changes are
- *           identified by subelements.
+ *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
+ *           to the DB Instance are pending. This element is only included
+ *           when changes are pending. Specific changes are identified by
+ *           subelements.
  *           * `DBInstanceClass` &mdash; (`String`) Contains the new
  *             DBInstanceClass for the DB Instance that will be applied or
  *             is in progress.
@@ -3574,8 +3585,8 @@ AWS.RDS = inherit({})
  *           for this DB Instance.
  *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
  *           operations per second) value.
- *         * `OptionGroupMemberships` &mdash; (`Array<Object>`) Provides
- *           the list of option group memberships for this DB Instance.
+ *         * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
+ *           list of option group memberships for this DB Instance.
  *           * `OptionGroupName` &mdash; (`String`) The name of the option
  *             group that the instance belongs to.
  *           * `Status` &mdash; (`String`) The status of the DB Instance's
@@ -3606,7 +3617,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `EventSubscription` &mdash; (`Object`)
+ *       * `EventSubscription` &mdash; (`map`)
  *         * `CustomerAwsId` &mdash; (`String`)
  *         * `CustSubscriptionId` &mdash; (`String`)
  *         * `SnsTopicArn` &mdash; (`String`)
@@ -3647,16 +3658,16 @@ AWS.RDS = inherit({})
  *     * `ResetAllParameters` &mdash; (`Boolean`) Specifies whether
  *       (true) or not (false) to reset all parameters in the DB
  *       Parameter Group to default values. Default: true
- *     * `Parameters` &mdash; (`Array<Object>`) An array of parameter
- *       names, values, and the apply method for the parameter update. At
- *       least one parameter name, value, and apply method must be
- *       supplied; subsequent arguments are optional. A maximum of 20
- *       parameters may be modified in a single request. MySQL Valid
- *       Values (for Apply method): immediate | pending-reboot You can
- *       use the immediate value with dynamic parameters only. You can
- *       use the pending-reboot value for both dynamic and static
- *       parameters, and changes are applied when DB Instance reboots.
- *       Oracle Valid Values (for Apply method): pending-reboot
+ *     * `Parameters` &mdash; (`Array<map>`) An array of parameter names,
+ *       values, and the apply method for the parameter update. At least
+ *       one parameter name, value, and apply method must be supplied;
+ *       subsequent arguments are optional. A maximum of 20 parameters
+ *       may be modified in a single request. MySQL Valid Values (for
+ *       Apply method): immediate | pending-reboot You can use the
+ *       immediate value with dynamic parameters only. You can use the
+ *       pending-reboot value for both dynamic and static parameters, and
+ *       changes are applied when DB Instance reboots. Oracle Valid
+ *       Values (for Apply method): pending-reboot
  *       * `ParameterName` &mdash; (`String`) Specifies the name of the
  *         parameter.
  *       * `ParameterValue` &mdash; (`String`) Specifies the value of the
@@ -3679,6 +3690,9 @@ AWS.RDS = inherit({})
  *         version to which the parameter can apply.
  *       * `ApplyMethod` &mdash; (`String`) Indicates when to apply
  *         parameter updates.
+ *         Possible values include:
+ *         * `immediate`
+ *         * `pending-reboot`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3754,8 +3768,8 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DBInstance` &mdash; (`Object`) Contains the result of a
- *         successful invocation of the following actions: CreateDBInstance
+ *       * `DBInstance` &mdash; (`map`) Contains the result of a successful
+ *         invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
  *         response element in the DescribeDBInstances action.
  *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
@@ -3776,8 +3790,7 @@ AWS.RDS = inherit({})
  *           the DB Instance was created. This same name is returned for
  *           the life of the DB Instance. Type: String Oracle Contains the
  *           Oracle System ID (SID) of the created DB Instance.
- *         * `Endpoint` &mdash; (`Object`) Specifies the connection
- *           endpoint.
+ *         * `Endpoint` &mdash; (`map`) Specifies the connection endpoint.
  *           * `Address` &mdash; (`String`) Specifies the DNS address of
  *             the DB Instance.
  *           * `Port` &mdash; (`Integer`) Specifies the port that the
@@ -3792,26 +3805,26 @@ AWS.RDS = inherit({})
  *           BackupRetentionPeriod.
  *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
  *           number of days for which automatic DB Snapshots are retained.
- *         * `DBSecurityGroups` &mdash; (`Array<Object>`) Provides List of
- *           DB Security Group elements containing only
- *           DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *         * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of DB
+ *           Security Group elements containing only DBSecurityGroup.Name
+ *           and DBSecurityGroup.Status subelements.
  *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
  *             Security Group.
  *           * `Status` &mdash; (`String`) The status of the DB Security
  *             Group.
- *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *         * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
  *           VPC security group elements that the DB Instance belongs to.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
- *         * `DBParameterGroups` &mdash; (`Array<Object>`) Provides the
- *           list of DB Parameter Groups applied to this DB Instance.
+ *         * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
+ *           of DB Parameter Groups applied to this DB Instance.
  *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
  *             Parameter Group.
  *           * `ParameterApplyStatus` &mdash; (`String`) The status of
  *             parameter updates.
  *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
  *           the Availability Zone the DB Instance is located in.
- *         * `DBSubnetGroup` &mdash; (`Object`) Provides the inforamtion of
+ *         * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
  *           the subnet group associated with the DB instance, including
  *           the name, descrption and subnets in the subnet group.
  *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
@@ -3822,11 +3835,11 @@ AWS.RDS = inherit({})
  *             Subnet Group.
  *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
  *             of the DB Subnet Group.
- *           * `Subnets` &mdash; (`Array<Object>`) Contains a list of
- *             Subnet elements.
+ *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
+ *             elements.
  *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *               identifier of the subnet.
- *             * `SubnetAvailabilityZone` &mdash; (`Object`)
+ *             * `SubnetAvailabilityZone` &mdash; (`map`)
  *               * `Name` &mdash; (`String`) The name of the availability
  *                 zone.
  *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
@@ -3837,10 +3850,10 @@ AWS.RDS = inherit({})
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
  *           weekly time range (in UTC) during which system maintenance can
  *           occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) Specifies that
- *           changes to the DB Instance are pending. This element is only
- *           included when changes are pending. Specific changes are
- *           identified by subelements.
+ *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
+ *           to the DB Instance are pending. This element is only included
+ *           when changes are pending. Specific changes are identified by
+ *           subelements.
  *           * `DBInstanceClass` &mdash; (`String`) Contains the new
  *             DBInstanceClass for the DB Instance that will be applied or
  *             is in progress.
@@ -3884,8 +3897,8 @@ AWS.RDS = inherit({})
  *           for this DB Instance.
  *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
  *           operations per second) value.
- *         * `OptionGroupMemberships` &mdash; (`Array<Object>`) Provides
- *           the list of option group memberships for this DB Instance.
+ *         * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
+ *           list of option group memberships for this DB Instance.
  *           * `OptionGroupName` &mdash; (`String`) The name of the option
  *             group that the instance belongs to.
  *           * `Status` &mdash; (`String`) The status of the DB Instance's
@@ -3971,8 +3984,8 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DBInstance` &mdash; (`Object`) Contains the result of a
- *         successful invocation of the following actions: CreateDBInstance
+ *       * `DBInstance` &mdash; (`map`) Contains the result of a successful
+ *         invocation of the following actions: CreateDBInstance
  *         DeleteDBInstance ModifyDBInstance This data type is used as a
  *         response element in the DescribeDBInstances action.
  *         * `DBInstanceIdentifier` &mdash; (`String`) Contains a
@@ -3993,8 +4006,7 @@ AWS.RDS = inherit({})
  *           the DB Instance was created. This same name is returned for
  *           the life of the DB Instance. Type: String Oracle Contains the
  *           Oracle System ID (SID) of the created DB Instance.
- *         * `Endpoint` &mdash; (`Object`) Specifies the connection
- *           endpoint.
+ *         * `Endpoint` &mdash; (`map`) Specifies the connection endpoint.
  *           * `Address` &mdash; (`String`) Specifies the DNS address of
  *             the DB Instance.
  *           * `Port` &mdash; (`Integer`) Specifies the port that the
@@ -4009,26 +4021,26 @@ AWS.RDS = inherit({})
  *           BackupRetentionPeriod.
  *         * `BackupRetentionPeriod` &mdash; (`Integer`) Specifies the
  *           number of days for which automatic DB Snapshots are retained.
- *         * `DBSecurityGroups` &mdash; (`Array<Object>`) Provides List of
- *           DB Security Group elements containing only
- *           DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
+ *         * `DBSecurityGroups` &mdash; (`Array<map>`) Provides List of DB
+ *           Security Group elements containing only DBSecurityGroup.Name
+ *           and DBSecurityGroup.Status subelements.
  *           * `DBSecurityGroupName` &mdash; (`String`) The name of the DB
  *             Security Group.
  *           * `Status` &mdash; (`String`) The status of the DB Security
  *             Group.
- *         * `VpcSecurityGroups` &mdash; (`Array<Object>`) Provides List of
+ *         * `VpcSecurityGroups` &mdash; (`Array<map>`) Provides List of
  *           VPC security group elements that the DB Instance belongs to.
  *           * `VpcSecurityGroupId` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
- *         * `DBParameterGroups` &mdash; (`Array<Object>`) Provides the
- *           list of DB Parameter Groups applied to this DB Instance.
+ *         * `DBParameterGroups` &mdash; (`Array<map>`) Provides the list
+ *           of DB Parameter Groups applied to this DB Instance.
  *           * `DBParameterGroupName` &mdash; (`String`) The name of the DP
  *             Parameter Group.
  *           * `ParameterApplyStatus` &mdash; (`String`) The status of
  *             parameter updates.
  *         * `AvailabilityZone` &mdash; (`String`) Specifies the name of
  *           the Availability Zone the DB Instance is located in.
- *         * `DBSubnetGroup` &mdash; (`Object`) Provides the inforamtion of
+ *         * `DBSubnetGroup` &mdash; (`map`) Provides the inforamtion of
  *           the subnet group associated with the DB instance, including
  *           the name, descrption and subnets in the subnet group.
  *           * `DBSubnetGroupName` &mdash; (`String`) Specifies the name of
@@ -4039,11 +4051,11 @@ AWS.RDS = inherit({})
  *             Subnet Group.
  *           * `SubnetGroupStatus` &mdash; (`String`) Provides the status
  *             of the DB Subnet Group.
- *           * `Subnets` &mdash; (`Array<Object>`) Contains a list of
- *             Subnet elements.
+ *           * `Subnets` &mdash; (`Array<map>`) Contains a list of Subnet
+ *             elements.
  *             * `SubnetIdentifier` &mdash; (`String`) Specifies the
  *               identifier of the subnet.
- *             * `SubnetAvailabilityZone` &mdash; (`Object`)
+ *             * `SubnetAvailabilityZone` &mdash; (`map`)
  *               * `Name` &mdash; (`String`) The name of the availability
  *                 zone.
  *               * `ProvisionedIopsCapable` &mdash; (`Boolean`) True
@@ -4054,10 +4066,10 @@ AWS.RDS = inherit({})
  *         * `PreferredMaintenanceWindow` &mdash; (`String`) Specifies the
  *           weekly time range (in UTC) during which system maintenance can
  *           occur.
- *         * `PendingModifiedValues` &mdash; (`Object`) Specifies that
- *           changes to the DB Instance are pending. This element is only
- *           included when changes are pending. Specific changes are
- *           identified by subelements.
+ *         * `PendingModifiedValues` &mdash; (`map`) Specifies that changes
+ *           to the DB Instance are pending. This element is only included
+ *           when changes are pending. Specific changes are identified by
+ *           subelements.
  *           * `DBInstanceClass` &mdash; (`String`) Contains the new
  *             DBInstanceClass for the DB Instance that will be applied or
  *             is in progress.
@@ -4101,8 +4113,8 @@ AWS.RDS = inherit({})
  *           for this DB Instance.
  *         * `Iops` &mdash; (`Integer`) Specifies the Provisioned IOPS (I/O
  *           operations per second) value.
- *         * `OptionGroupMemberships` &mdash; (`Array<Object>`) Provides
- *           the list of option group memberships for this DB Instance.
+ *         * `OptionGroupMemberships` &mdash; (`Array<map>`) Provides the
+ *           list of option group memberships for this DB Instance.
  *           * `OptionGroupName` &mdash; (`String`) The name of the option
  *             group that the instance belongs to.
  *           * `Status` &mdash; (`String`) The status of the DB Instance's
@@ -4153,7 +4165,7 @@ AWS.RDS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DBSecurityGroup` &mdash; (`Object`) Contains the result of a
+ *       * `DBSecurityGroup` &mdash; (`map`) Contains the result of a
  *         successful invocation of the following actions:
  *         DescribeDBSecurityGroups AuthorizeDBSecurityGroupIngress
  *         CreateDBSecurityGroup RevokeDBSecurityGroupIngress This data
@@ -4167,8 +4179,8 @@ AWS.RDS = inherit({})
  *           description of the DB Security Group.
  *         * `VpcId` &mdash; (`String`) Provides the VpcId of the DB
  *           Security Group.
- *         * `EC2SecurityGroups` &mdash; (`Array<Object>`) Contains a list
- *           of EC2SecurityGroup elements.
+ *         * `EC2SecurityGroups` &mdash; (`Array<map>`) Contains a list of
+ *           EC2SecurityGroup elements.
  *           * `Status` &mdash; (`String`) Provides the status of the EC2
  *             security group. Status can be "authorizing", "authorized",
  *             "revoking", and "revoked".
@@ -4179,8 +4191,8 @@ AWS.RDS = inherit({})
  *           * `EC2SecurityGroupOwnerId` &mdash; (`String`) Specifies the
  *             AWS ID of the owner of the EC2 security group specified in
  *             the EC2SecurityGroupName field.
- *         * `IPRanges` &mdash; (`Array<Object>`) Contains a list of
- *           IPRange elements.
+ *         * `IPRanges` &mdash; (`Array<map>`) Contains a list of IPRange
+ *           elements.
  *           * `Status` &mdash; (`String`) Specifies the status of the IP
  *             range. Status can be "authorizing", "authorized",
  *             "revoking", and "revoked".

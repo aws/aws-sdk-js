@@ -75,6 +75,9 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `Domain` &mdash; (`String`) Set to vpc to allocate the address
  *       to your VPC. By default, will allocate to EC2.
+ *       Possible values include:
+ *       * `vpc`
+ *       * `standard`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -88,6 +91,9 @@ AWS.EC2 = inherit({})
  *       * `PublicIp` &mdash; (`String`) IP address for use with your
  *         account.
  *       * `Domain` &mdash; (`String`)
+ *         Possible values include:
+ *         * `vpc`
+ *         * `standard`
  *       * `AllocationId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -242,6 +248,11 @@ AWS.EC2 = inherit({})
  *       * `Device` &mdash; (`String`) How the device is exposed to the
  *         instance (e.g., /dev/sdh).
  *       * `State` &mdash; (`String`)
+ *         Possible values include:
+ *         * `attaching`
+ *         * `attached`
+ *         * `detaching`
+ *         * `detached`
  *       * `AttachTime` &mdash; (`Date`) Timestamp when this attachment
  *         initiated.
  *       * `DeleteOnTermination` &mdash; (`Boolean`) ` Whether this volume
@@ -267,7 +278,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `VpcAttachement` &mdash; (`Object`)
+ *       * `VpcAttachement` &mdash; (`map`)
  *         * `VpcId` &mdash; (`String`)
  *         * `State` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -284,8 +295,8 @@ AWS.EC2 = inherit({})
  *     * `FromPort` &mdash; (`Integer`) Deprecated.
  *     * `ToPort` &mdash; (`Integer`) Deprecated.
  *     * `CidrIp` &mdash; (`String`) Deprecated.
- *     * `IpPermissions` &mdash; (`Array<Object>`) List of IP permissions
- *       to authorize on the specified security group. Specifying
+ *     * `IpPermissions` &mdash; (`Array<map>`) List of IP permissions to
+ *       authorize on the specified security group. Specifying
  *       permissions through IP permissions is the preferred way of
  *       authorizing permissions since it offers more flexibility and
  *       control.
@@ -297,8 +308,8 @@ AWS.EC2 = inherit({})
  *       * `ToPort` &mdash; (`Integer`) End of port range for the TCP and
  *         UDP protocols, or an ICMP code. An ICMP code of -1 indicates a
  *         wildcard (i.e., any ICMP code).
- *       * `UserIdGroupPairs` &mdash; (`Array<Object>`) The list of AWS
- *         user IDs and groups included in this permission.
+ *       * `UserIdGroupPairs` &mdash; (`Array<map>`) The list of AWS user
+ *         IDs and groups included in this permission.
  *         * `UserId` &mdash; (`String`) The AWS user ID of an account.
  *         * `GroupName` &mdash; (`String`) Name of the security group in
  *           the specified AWS account. Cannot be used when specifying a
@@ -306,8 +317,8 @@ AWS.EC2 = inherit({})
  *         * `GroupId` &mdash; (`String`) ID of the security group in the
  *           specified AWS account. Cannot be used when specifying a CIDR
  *           IP address range.
- *       * `IpRanges` &mdash; (`Array<Object>`) The list of CIDR IP
- *         ranges included in this permission.
+ *       * `IpRanges` &mdash; (`Array<map>`) The list of CIDR IP ranges
+ *         included in this permission.
  *         * `CidrIp` &mdash; (`String`) The list of CIDR IP ranges.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -337,8 +348,8 @@ AWS.EC2 = inherit({})
  *     * `FromPort` &mdash; (`Integer`) Deprecated
  *     * `ToPort` &mdash; (`Integer`) Deprecated
  *     * `CidrIp` &mdash; (`String`) Deprecated
- *     * `IpPermissions` &mdash; (`Array<Object>`) List of IP permissions
- *       to authorize on the specified security group. Specifying
+ *     * `IpPermissions` &mdash; (`Array<map>`) List of IP permissions to
+ *       authorize on the specified security group. Specifying
  *       permissions through IP permissions is the preferred way of
  *       authorizing permissions since it offers more flexibility and
  *       control.
@@ -350,8 +361,8 @@ AWS.EC2 = inherit({})
  *       * `ToPort` &mdash; (`Integer`) End of port range for the TCP and
  *         UDP protocols, or an ICMP code. An ICMP code of -1 indicates a
  *         wildcard (i.e., any ICMP code).
- *       * `UserIdGroupPairs` &mdash; (`Array<Object>`) The list of AWS
- *         user IDs and groups included in this permission.
+ *       * `UserIdGroupPairs` &mdash; (`Array<map>`) The list of AWS user
+ *         IDs and groups included in this permission.
  *         * `UserId` &mdash; (`String`) The AWS user ID of an account.
  *         * `GroupName` &mdash; (`String`) Name of the security group in
  *           the specified AWS account. Cannot be used when specifying a
@@ -359,8 +370,8 @@ AWS.EC2 = inherit({})
  *         * `GroupId` &mdash; (`String`) ID of the security group in the
  *           specified AWS account. Cannot be used when specifying a CIDR
  *           IP address range.
- *       * `IpRanges` &mdash; (`Array<Object>`) The list of CIDR IP
- *         ranges included in this permission.
+ *       * `IpRanges` &mdash; (`Array<map>`) The list of CIDR IP ranges
+ *         included in this permission.
  *         * `CidrIp` &mdash; (`String`) The list of CIDR IP ranges.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -378,9 +389,9 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `InstanceId` &mdash; **required** &mdash; (`String`) The ID of
  *       the instance to bundle.
- *     * `Storage` &mdash; **required** &mdash; (`Object`)
- *       * `S3` &mdash; (`Object`) The details of S3 storage for bundling
- *         a Windows instance.
+ *     * `Storage` &mdash; **required** &mdash; (`map`)
+ *       * `S3` &mdash; (`map`) The details of S3 storage for bundling a
+ *         Windows instance.
  *         * `Bucket` &mdash; (`String`) The bucket in which to store the
  *           AMI. You can specify a bucket that you already own or a new
  *           bucket that Amazon EC2 creates on your behalf. If you
@@ -405,7 +416,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `BundleTask` &mdash; (`Object`)
+ *       * `BundleTask` &mdash; (`map`)
  *         * `InstanceId` &mdash; (`String`) Instance associated with this
  *           bundle task.
  *         * `BundleId` &mdash; (`String`) Unique identifier for this task.
@@ -413,9 +424,9 @@ AWS.EC2 = inherit({})
  *         * `StartTime` &mdash; (`Date`) The time this task started.
  *         * `UpdateTime` &mdash; (`Date`) The time of the most recent
  *           update for the task.
- *         * `Storage` &mdash; (`Object`) Amazon S3 storage locations.
- *           * `S3` &mdash; (`Object`) The details of S3 storage for
- *             bundling a Windows instance.
+ *         * `Storage` &mdash; (`map`) Amazon S3 storage locations.
+ *           * `S3` &mdash; (`map`) The details of S3 storage for bundling
+ *             a Windows instance.
  *             * `Bucket` &mdash; (`String`) The bucket in which to store
  *               the AMI. You can specify a bucket that you already own or
  *               a new bucket that Amazon EC2 creates on your behalf. If
@@ -432,7 +443,7 @@ AWS.EC2 = inherit({})
  *               of the Base64 encoded JSON document.
  *         * `Progress` &mdash; (`String`) The level of task completion, in
  *           percent (e.g., 20%).
- *         * `BundleTaskError` &mdash; (`Object`) If the task fails, a
+ *         * `BundleTaskError` &mdash; (`map`) If the task fails, a
  *           description of the error.
  *           * `Code` &mdash; (`String`) Error code.
  *           * `Message` &mdash; (`String`) Error message.
@@ -454,7 +465,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `BundleTask` &mdash; (`Object`) The canceled bundle task.
+ *       * `BundleTask` &mdash; (`map`) The canceled bundle task.
  *         * `InstanceId` &mdash; (`String`) Instance associated with this
  *           bundle task.
  *         * `BundleId` &mdash; (`String`) Unique identifier for this task.
@@ -462,9 +473,9 @@ AWS.EC2 = inherit({})
  *         * `StartTime` &mdash; (`Date`) The time this task started.
  *         * `UpdateTime` &mdash; (`Date`) The time of the most recent
  *           update for the task.
- *         * `Storage` &mdash; (`Object`) Amazon S3 storage locations.
- *           * `S3` &mdash; (`Object`) The details of S3 storage for
- *             bundling a Windows instance.
+ *         * `Storage` &mdash; (`map`) Amazon S3 storage locations.
+ *           * `S3` &mdash; (`map`) The details of S3 storage for bundling
+ *             a Windows instance.
  *             * `Bucket` &mdash; (`String`) The bucket in which to store
  *               the AMI. You can specify a bucket that you already own or
  *               a new bucket that Amazon EC2 creates on your behalf. If
@@ -481,7 +492,7 @@ AWS.EC2 = inherit({})
  *               of the Base64 encoded JSON document.
  *         * `Progress` &mdash; (`String`) The level of task completion, in
  *           percent (e.g., 20%).
- *         * `BundleTaskError` &mdash; (`Object`) If the task fails, a
+ *         * `BundleTaskError` &mdash; (`map`) If the task fails, a
  *           description of the error.
  *           * `Code` &mdash; (`String`) Error code.
  *           * `Message` &mdash; (`String`) Error message.
@@ -534,22 +545,22 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ReservedInstancesListings` &mdash; (`Array<Object>`)
+ *       * `ReservedInstancesListings` &mdash; (`Array<map>`)
  *         * `ReservedInstancesListingId` &mdash; (`String`)
  *         * `ReservedInstancesId` &mdash; (`String`)
  *         * `CreateDate` &mdash; (`Date`)
  *         * `UpdateDate` &mdash; (`Date`)
  *         * `Status` &mdash; (`String`)
  *         * `StatusMessage` &mdash; (`String`)
- *         * `InstanceCounts` &mdash; (`Array<Object>`)
+ *         * `InstanceCounts` &mdash; (`Array<map>`)
  *           * `State` &mdash; (`String`)
  *           * `InstanceCount` &mdash; (`Integer`)
- *         * `PriceSchedules` &mdash; (`Array<Object>`)
+ *         * `PriceSchedules` &mdash; (`Array<map>`)
  *           * `Term` &mdash; (`Integer`)
  *           * `Price` &mdash; (`Float`)
  *           * `CurrencyCode` &mdash; (`String`)
  *           * `Active` &mdash; (`Boolean`)
- *         * `Tags` &mdash; (`Array<Object>`)
+ *         * `Tags` &mdash; (`Array<map>`)
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
  *         * `ClientToken` &mdash; (`String`)
@@ -571,7 +582,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `CancelledSpotInstanceRequests` &mdash; (`Array<Object>`)
+ *       * `CancelledSpotInstanceRequests` &mdash; (`Array<map>`)
  *         * `SpotInstanceRequestId` &mdash; (`String`)
  *         * `State` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -662,8 +673,8 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `CustomerGateway` &mdash; (`Object`) Information about the
- *         customer gateway.
+ *       * `CustomerGateway` &mdash; (`map`) Information about the customer
+ *         gateway.
  *         * `CustomerGatewayId` &mdash; (`String`) Specifies the ID of the
  *           customer gateway.
  *         * `State` &mdash; (`String`) Describes the current state of the
@@ -675,7 +686,7 @@ AWS.EC2 = inherit({})
  *           IP address of the customer gateway's outside interface.
  *         * `BgpAsn` &mdash; (`String`) Specifies the customer gateway's
  *           Border Gateway Protocol (BGP) Autonomous System Number (ASN).
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the
  *           CustomerGateway.
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
@@ -685,8 +696,8 @@ AWS.EC2 = inherit({})
  * @!method createDhcpOptions(params, callback)
  *   Calls the CreateDhcpOptions API operation.
  *   @param params [Object]
- *     * `DhcpConfigurations` &mdash; **required** &mdash;
- *       (`Array<Object>`) A set of one or more DHCP configurations.
+ *     * `DhcpConfigurations` &mdash; **required** &mdash; (`Array<map>`)
+ *       A set of one or more DHCP configurations.
  *       * `Key` &mdash; (`String`) Contains the name of a DHCP option.
  *       * `Values` &mdash; (`Array<String>`) Contains a set of values
  *         for a DHCP option.
@@ -700,16 +711,15 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DhcpOptions` &mdash; (`Object`) A set of one or more DHCP
- *         options.
+ *       * `DhcpOptions` &mdash; (`map`) A set of one or more DHCP options.
  *         * `DhcpOptionsId` &mdash; (`String`) Specifies the ID of the set
  *           of DHCP options.
- *         * `DhcpConfigurations` &mdash; (`Array<Object>`) Contains
+ *         * `DhcpConfigurations` &mdash; (`Array<map>`) Contains
  *           information about the set of DHCP options.
  *           * `Key` &mdash; (`String`) Contains the name of a DHCP option.
  *           * `Values` &mdash; (`Array<String>`) Contains a set of values
  *             for a DHCP option.
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the
  *           DhcpOptions.
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
@@ -731,12 +741,12 @@ AWS.EC2 = inherit({})
  *       afterwards. When set to true, Amazon EC2 will not shut down the
  *       instance before creating the image. When this option is used,
  *       file system integrity on the created image cannot be guaranteed.
- *     * `BlockDeviceMappings` &mdash; (`Array<Object>`)
+ *     * `BlockDeviceMappings` &mdash; (`Array<map>`)
  *       * `VirtualName` &mdash; (`String`) Specifies the virtual device
  *         name.
  *       * `DeviceName` &mdash; (`String`) Specifies the device name
  *         (e.g., /dev/sdh).
- *       * `Ebs` &mdash; (`Object`) Specifies parameters used to
+ *       * `Ebs` &mdash; (`map`) Specifies parameters used to
  *         automatically setup Amazon EBS volumes when the instance is
  *         launched.
  *         * `SnapshotId` &mdash; (`String`) The ID of the snapshot from
@@ -746,6 +756,9 @@ AWS.EC2 = inherit({})
  *         * `DeleteOnTermination` &mdash; (`Boolean`) Specifies whether
  *           the Amazon EBS volume is deleted on instance termination.
  *         * `VolumeType` &mdash; (`String`)
+ *           Possible values include:
+ *           * `standard`
+ *           * `io1`
  *         * `Iops` &mdash; (`Integer`)
  *       * `NoDevice` &mdash; (`String`) Specifies the device name to
  *         suppress during instance launch.
@@ -769,9 +782,17 @@ AWS.EC2 = inherit({})
  *     * `Description` &mdash; (`String`)
  *     * `InstanceId` &mdash; **required** &mdash; (`String`)
  *     * `TargetEnvironment` &mdash; (`String`)
- *     * `ExportToS3Task` &mdash; (`Object`)
+ *       Possible values include:
+ *       * `citrix`
+ *       * `vmware`
+ *     * `ExportToS3Task` &mdash; (`map`)
  *       * `DiskImageFormat` &mdash; (`String`)
+ *         Possible values include:
+ *         * `vmdk`
+ *         * `vhd`
  *       * `ContainerFormat` &mdash; (`String`)
+ *         Possible values include:
+ *         * `ova`
  *       * `S3Bucket` &mdash; (`String`)
  *       * `S3Prefix` &mdash; (`String`)
  *   @callback callback function(err, data)
@@ -784,17 +805,25 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ExportTask` &mdash; (`Object`)
+ *       * `ExportTask` &mdash; (`map`)
  *         * `ExportTaskId` &mdash; (`String`)
  *         * `Description` &mdash; (`String`)
  *         * `State` &mdash; (`String`)
  *         * `StatusMessage` &mdash; (`String`)
- *         * `InstanceExportDetails` &mdash; (`Object`)
+ *         * `InstanceExportDetails` &mdash; (`map`)
  *           * `InstanceId` &mdash; (`String`)
  *           * `TargetEnvironment` &mdash; (`String`)
- *         * `ExportToS3Task` &mdash; (`Object`)
+ *             Possible values include:
+ *             * `citrix`
+ *             * `vmware`
+ *         * `ExportToS3Task` &mdash; (`map`)
  *           * `DiskImageFormat` &mdash; (`String`)
+ *             Possible values include:
+ *             * `vmdk`
+ *             * `vhd`
  *           * `ContainerFormat` &mdash; (`String`)
+ *             Possible values include:
+ *             * `ova`
  *           * `S3Bucket` &mdash; (`String`)
  *           * `S3Key` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -813,12 +842,12 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `InternetGateway` &mdash; (`Object`)
+ *       * `InternetGateway` &mdash; (`map`)
  *         * `InternetGatewayId` &mdash; (`String`)
- *         * `Attachments` &mdash; (`Array<Object>`)
+ *         * `Attachments` &mdash; (`Array<map>`)
  *           * `VpcId` &mdash; (`String`)
  *           * `State` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<Object>`)
+ *         * `Tags` &mdash; (`Array<map>`)
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
@@ -839,7 +868,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `KeyPair` &mdash; (`Object`) The newly created EC2 key pair.
+ *       * `KeyPair` &mdash; (`map`) The newly created EC2 key pair.
  *         * `KeyName` &mdash; (`String`) The name of the key pair.
  *         * `KeyFingerprint` &mdash; (`String`) The SHA-1 digest of the
  *           DER encoded private key.
@@ -863,33 +892,36 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `NetworkAcl` &mdash; (`Object`)
+ *       * `NetworkAcl` &mdash; (`map`)
  *         * `NetworkAclId` &mdash; (`String`)
  *         * `VpcId` &mdash; (`String`)
  *         * `IsDefault` &mdash; (`Boolean`)
- *         * `Entries` &mdash; (`Array<Object>`)
+ *         * `Entries` &mdash; (`Array<map>`)
  *           * `RuleNumber` &mdash; (`Integer`)
  *           * `Protocol` &mdash; (`String`)
  *           * `RuleAction` &mdash; (`String`)
+ *             Possible values include:
+ *             * `allow`
+ *             * `deny`
  *           * `Egress` &mdash; (`Boolean`)
  *           * `CidrBlock` &mdash; (`String`)
- *           * `IcmpTypeCode` &mdash; (`Object`)
+ *           * `IcmpTypeCode` &mdash; (`map`)
  *             * `Type` &mdash; (`Integer`) For the ICMP protocol, the ICMP
  *               type. A value of -1 is a wildcard meaning all types.
  *               Required if specifying icmp for the protocol.
  *             * `Code` &mdash; (`Integer`) For the ICMP protocol, the ICMP
  *               code. A value of -1 is a wildcard meaning all codes.
  *               Required if specifying icmp for the protocol.
- *           * `PortRange` &mdash; (`Object`)
+ *           * `PortRange` &mdash; (`map`)
  *             * `From` &mdash; (`Integer`) The first port in the range.
  *               Required if specifying tcp or udp for the protocol.
  *             * `To` &mdash; (`Integer`) The last port in the range.
  *               Required if specifying tcp or udp for the protocol.
- *         * `Associations` &mdash; (`Array<Object>`)
+ *         * `Associations` &mdash; (`Array<map>`)
  *           * `NetworkAclAssociationId` &mdash; (`String`)
  *           * `NetworkAclId` &mdash; (`String`)
  *           * `SubnetId` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<Object>`)
+ *         * `Tags` &mdash; (`Array<map>`)
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
@@ -908,19 +940,22 @@ AWS.EC2 = inherit({})
  *       protocol number.
  *     * `RuleAction` &mdash; **required** &mdash; (`String`) Whether to
  *       allow or deny traffic that matches the rule.
+ *       Possible values include:
+ *       * `allow`
+ *       * `deny`
  *     * `Egress` &mdash; **required** &mdash; (`Boolean`) Whether this
  *       rule applies to egress traffic from the subnet (true) or ingress
  *       traffic to the subnet (false).
  *     * `CidrBlock` &mdash; **required** &mdash; (`String`) The CIDR
  *       range to allow or deny, in CIDR notation (e.g., 172.16.0.0/24).
- *     * `IcmpTypeCode` &mdash; (`Object`) ICMP values.
+ *     * `IcmpTypeCode` &mdash; (`map`) ICMP values.
  *       * `Type` &mdash; (`Integer`) For the ICMP protocol, the ICMP
  *         type. A value of -1 is a wildcard meaning all types. Required
  *         if specifying icmp for the protocol.
  *       * `Code` &mdash; (`Integer`) For the ICMP protocol, the ICMP
  *         code. A value of -1 is a wildcard meaning all codes. Required
  *         if specifying icmp for the protocol.
- *     * `PortRange` &mdash; (`Object`) Port ranges.
+ *     * `PortRange` &mdash; (`map`) Port ranges.
  *       * `From` &mdash; (`Integer`) The first port in the range.
  *         Required if specifying tcp or udp for the protocol.
  *       * `To` &mdash; (`Integer`) The last port in the range. Required
@@ -943,7 +978,7 @@ AWS.EC2 = inherit({})
  *     * `Description` &mdash; (`String`)
  *     * `PrivateIpAddress` &mdash; (`String`)
  *     * `Groups` &mdash; (`Array<String>`)
- *     * `PrivateIpAddresses` &mdash; (`Array<Object>`)
+ *     * `PrivateIpAddresses` &mdash; (`Array<map>`)
  *       * `PrivateIpAddress` &mdash; **required** &mdash; (`String`)
  *       * `Primary` &mdash; (`Boolean`)
  *     * `SecondaryPrivateIpAddressCount` &mdash; (`Integer`)
@@ -957,7 +992,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `NetworkInterface` &mdash; (`Object`)
+ *       * `NetworkInterface` &mdash; (`map`)
  *         * `NetworkInterfaceId` &mdash; (`String`)
  *         * `SubnetId` &mdash; (`String`)
  *         * `VpcId` &mdash; (`String`)
@@ -971,10 +1006,10 @@ AWS.EC2 = inherit({})
  *         * `PrivateIpAddress` &mdash; (`String`)
  *         * `PrivateDnsName` &mdash; (`String`)
  *         * `SourceDestCheck` &mdash; (`Boolean`)
- *         * `Groups` &mdash; (`Array<Object>`)
+ *         * `Groups` &mdash; (`Array<map>`)
  *           * `GroupName` &mdash; (`String`)
  *           * `GroupId` &mdash; (`String`)
- *         * `Attachment` &mdash; (`Object`)
+ *         * `Attachment` &mdash; (`map`)
  *           * `AttachmentId` &mdash; (`String`)
  *           * `InstanceId` &mdash; (`String`)
  *           * `InstanceOwnerId` &mdash; (`String`)
@@ -982,19 +1017,19 @@ AWS.EC2 = inherit({})
  *           * `Status` &mdash; (`String`)
  *           * `AttachTime` &mdash; (`Date`)
  *           * `DeleteOnTermination` &mdash; (`Boolean`)
- *         * `Association` &mdash; (`Object`)
+ *         * `Association` &mdash; (`map`)
  *           * `PublicIp` &mdash; (`String`)
  *           * `IpOwnerId` &mdash; (`String`)
  *           * `AllocationId` &mdash; (`String`)
  *           * `AssociationId` &mdash; (`String`)
- *         * `TagSet` &mdash; (`Array<Object>`)
+ *         * `TagSet` &mdash; (`Array<map>`)
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
- *         * `PrivateIpAddresses` &mdash; (`Array<Object>`)
+ *         * `PrivateIpAddresses` &mdash; (`Array<map>`)
  *           * `PrivateIpAddress` &mdash; (`String`)
  *           * `PrivateDnsName` &mdash; (`String`)
  *           * `Primary` &mdash; (`Boolean`)
- *           * `Association` &mdash; (`Object`)
+ *           * `Association` &mdash; (`map`)
  *             * `PublicIp` &mdash; (`String`)
  *             * `IpOwnerId` &mdash; (`String`)
  *             * `AllocationId` &mdash; (`String`)
@@ -1009,6 +1044,8 @@ AWS.EC2 = inherit({})
  *       the PlacementGroup.
  *     * `Strategy` &mdash; **required** &mdash; (`String`) The
  *       PlacementGroup strategy.
+ *       Possible values include:
+ *       * `cluster`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1025,7 +1062,7 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `ReservedInstancesId` &mdash; **required** &mdash; (`String`)
  *     * `InstanceCount` &mdash; **required** &mdash; (`Integer`)
- *     * `PriceSchedules` &mdash; **required** &mdash; (`Array<Object>`)
+ *     * `PriceSchedules` &mdash; **required** &mdash; (`Array<map>`)
  *       * `Term` &mdash; (`Integer`)
  *       * `Price` &mdash; (`Float`)
  *       * `CurrencyCode` &mdash; (`String`)
@@ -1040,22 +1077,22 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ReservedInstancesListings` &mdash; (`Array<Object>`)
+ *       * `ReservedInstancesListings` &mdash; (`Array<map>`)
  *         * `ReservedInstancesListingId` &mdash; (`String`)
  *         * `ReservedInstancesId` &mdash; (`String`)
  *         * `CreateDate` &mdash; (`Date`)
  *         * `UpdateDate` &mdash; (`Date`)
  *         * `Status` &mdash; (`String`)
  *         * `StatusMessage` &mdash; (`String`)
- *         * `InstanceCounts` &mdash; (`Array<Object>`)
+ *         * `InstanceCounts` &mdash; (`Array<map>`)
  *           * `State` &mdash; (`String`)
  *           * `InstanceCount` &mdash; (`Integer`)
- *         * `PriceSchedules` &mdash; (`Array<Object>`)
+ *         * `PriceSchedules` &mdash; (`Array<map>`)
  *           * `Term` &mdash; (`Integer`)
  *           * `Price` &mdash; (`Float`)
  *           * `CurrencyCode` &mdash; (`String`)
  *           * `Active` &mdash; (`Boolean`)
- *         * `Tags` &mdash; (`Array<Object>`)
+ *         * `Tags` &mdash; (`Array<map>`)
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
  *         * `ClientToken` &mdash; (`String`)
@@ -1104,25 +1141,25 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `RouteTable` &mdash; (`Object`)
+ *       * `RouteTable` &mdash; (`map`)
  *         * `RouteTableId` &mdash; (`String`)
  *         * `VpcId` &mdash; (`String`)
- *         * `Routes` &mdash; (`Array<Object>`)
+ *         * `Routes` &mdash; (`Array<map>`)
  *           * `DestinationCidrBlock` &mdash; (`String`)
  *           * `GatewayId` &mdash; (`String`)
  *           * `InstanceId` &mdash; (`String`)
  *           * `InstanceOwnerId` &mdash; (`String`)
  *           * `NetworkInterfaceId` &mdash; (`String`)
  *           * `State` &mdash; (`String`)
- *         * `Associations` &mdash; (`Array<Object>`)
+ *         * `Associations` &mdash; (`Array<map>`)
  *           * `RouteTableAssociationId` &mdash; (`String`)
  *           * `RouteTableId` &mdash; (`String`)
  *           * `SubnetId` &mdash; (`String`)
  *           * `Main` &mdash; (`Boolean`)
- *         * `Tags` &mdash; (`Array<Object>`)
+ *         * `Tags` &mdash; (`Array<map>`)
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
- *         * `PropagatingVgws` &mdash; (`Array<Object>`)
+ *         * `PropagatingVgws` &mdash; (`Array<map>`)
  *           * `GatewayId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -1171,6 +1208,10 @@ AWS.EC2 = inherit({})
  *         this snapshot was created.
  *       * `State` &mdash; (`String`) Snapshot state (e.g., pending,
  *         completed, or error).
+ *         Possible values include:
+ *         * `pending`
+ *         * `completed`
+ *         * `error`
  *       * `StartTime` &mdash; (`Date`) Time stamp when the snapshot was
  *         initiated.
  *       * `Progress` &mdash; (`String`) The progress of the snapshot, in
@@ -1183,8 +1224,7 @@ AWS.EC2 = inherit({})
  *       * `OwnerAlias` &mdash; (`String`) The AWS account alias (e.g.,
  *         "amazon", "redhat", "self", etc.) or AWS account ID that owns
  *         the AMI.
- *       * `Tags` &mdash; (`Array<Object>`) A list of tags for the
- *         Snapshot.
+ *       * `Tags` &mdash; (`Array<map>`) A list of tags for the Snapshot.
  *         * `Key` &mdash; (`String`) The tag's key.
  *         * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1207,7 +1247,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `SpotDatafeedSubscription` &mdash; (`Object`)
+ *       * `SpotDatafeedSubscription` &mdash; (`map`)
  *         * `OwnerId` &mdash; (`String`) Specifies the AWS account ID of
  *           the account.
  *         * `Bucket` &mdash; (`String`) Specifies the Amazon S3 bucket
@@ -1216,7 +1256,7 @@ AWS.EC2 = inherit({})
  *           prepended to data feed files.
  *         * `State` &mdash; (`String`) Specifies the state of the Spot
  *           Instance request.
- *         * `Fault` &mdash; (`Object`) Specifies a fault code for the Spot
+ *         * `Fault` &mdash; (`map`) Specifies a fault code for the Spot
  *           Instance request, if present.
  *           * `Code` &mdash; (`String`)
  *           * `Message` &mdash; (`String`)
@@ -1242,7 +1282,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Subnet` &mdash; (`Object`)
+ *       * `Subnet` &mdash; (`map`)
  *         * `SubnetId` &mdash; (`String`) Specifies the ID of the subnet.
  *         * `State` &mdash; (`String`) Describes the current state of the
  *           subnet. The state of the subnet may be either pending or
@@ -1258,8 +1298,7 @@ AWS.EC2 = inherit({})
  *           Availability Zone the subnet is in.
  *         * `DefaultForAz` &mdash; (`Boolean`)
  *         * `MapPublicIpOnLaunch` &mdash; (`Boolean`)
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the
- *           Subnet.
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the Subnet.
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
@@ -1271,8 +1310,8 @@ AWS.EC2 = inherit({})
  *     * `Resources` &mdash; **required** &mdash; (`Array<String>`) One
  *       or more IDs of resources to tag. This could be the ID of an AMI,
  *       an instance, an EBS volume, or snapshot, etc.
- *     * `Tags` &mdash; **required** &mdash; (`Array<Object>`) The tags
- *       to add or overwrite for the specified resources. Each tag item
+ *     * `Tags` &mdash; **required** &mdash; (`Array<map>`) The tags to
+ *       add or overwrite for the specified resources. Each tag item
  *       consists of a key-value pair.
  *       * `Key` &mdash; (`String`) The tag's key.
  *       * `Value` &mdash; (`String`) The tag's value.
@@ -1297,6 +1336,9 @@ AWS.EC2 = inherit({})
  *     * `AvailabilityZone` &mdash; **required** &mdash; (`String`) The
  *       Availability Zone in which to create the new volume.
  *     * `VolumeType` &mdash; (`String`)
+ *       Possible values include:
+ *       * `standard`
+ *       * `io1`
  *     * `Iops` &mdash; (`Integer`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -1317,24 +1359,38 @@ AWS.EC2 = inherit({})
  *         this volume was created.
  *       * `State` &mdash; (`String`) State of this volume (e.g., creating,
  *         available).
+ *         Possible values include:
+ *         * `creating`
+ *         * `available`
+ *         * `in-use`
+ *         * `deleting`
+ *         * `error`
  *       * `CreateTime` &mdash; (`Date`) Timestamp when volume creation was
  *         initiated.
- *       * `Attachments` &mdash; (`Array<Object>`) Information on what this
+ *       * `Attachments` &mdash; (`Array<map>`) Information on what this
  *         volume is attached to.
  *         * `VolumeId` &mdash; (`String`)
  *         * `InstanceId` &mdash; (`String`)
  *         * `Device` &mdash; (`String`) How the device is exposed to the
  *           instance (e.g., /dev/sdh).
  *         * `State` &mdash; (`String`)
+ *           Possible values include:
+ *           * `attaching`
+ *           * `attached`
+ *           * `detaching`
+ *           * `detached`
  *         * `AttachTime` &mdash; (`Date`) Timestamp when this attachment
  *           initiated.
  *         * `DeleteOnTermination` &mdash; (`Boolean`) ` Whether this
  *           volume will be deleted or not when the associated instance is
  *           terminated.
- *       * `Tags` &mdash; (`Array<Object>`) A list of tags for the Volume.
+ *       * `Tags` &mdash; (`Array<map>`) A list of tags for the Volume.
  *         * `Key` &mdash; (`String`) The tag's key.
  *         * `Value` &mdash; (`String`) The tag's value.
  *       * `VolumeType` &mdash; (`String`)
+ *         Possible values include:
+ *         * `standard`
+ *         * `io1`
  *       * `Iops` &mdash; (`Integer`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -1358,7 +1414,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Vpc` &mdash; (`Object`) Information about the VPC.
+ *       * `Vpc` &mdash; (`map`) Information about the VPC.
  *         * `VpcId` &mdash; (`String`) Specifies the ID of the VPC.
  *         * `State` &mdash; (`String`) Describes the current state of the
  *           VPC. The state of the subnet may be either pending or
@@ -1368,7 +1424,7 @@ AWS.EC2 = inherit({})
  *         * `DhcpOptionsId` &mdash; (`String`) Specifies the ID of the set
  *           of DHCP options associated with the VPC. Contains a value of
  *           default if the default options are associated with the VPC.
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the VPC.
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the VPC.
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
  *         * `InstanceTenancy` &mdash; (`String`) The allowed tenancy of
@@ -1386,7 +1442,7 @@ AWS.EC2 = inherit({})
  *       ID of the customer gateway.
  *     * `VpnGatewayId` &mdash; **required** &mdash; (`String`) The ID of
  *       the VPN gateway.
- *     * `Options` &mdash; (`Object`)
+ *     * `Options` &mdash; (`map`)
  *       * `StaticRoutesOnly` &mdash; (`Boolean`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -1398,7 +1454,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `VpnConnection` &mdash; (`Object`)
+ *       * `VpnConnection` &mdash; (`map`)
  *         * `VpnConnectionId` &mdash; (`String`) Specifies the ID of the
  *           VPN gateway at the VPC end of the VPN connection.
  *         * `State` &mdash; (`String`) Describes the current state of the
@@ -1416,19 +1472,19 @@ AWS.EC2 = inherit({})
  *           customer gateway at the end of the VPN connection.
  *         * `VpnGatewayId` &mdash; (`String`) Specfies the ID of the VPN
  *           gateway at the VPC end of the VPN connection.
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the
  *           VpnConnection.
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
- *         * `VgwTelemetry` &mdash; (`Array<Object>`)
+ *         * `VgwTelemetry` &mdash; (`Array<map>`)
  *           * `OutsideIpAddress` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
  *           * `LastStatusChange` &mdash; (`Date`)
  *           * `StatusMessage` &mdash; (`String`)
  *           * `AcceptedRouteCount` &mdash; (`Integer`)
- *         * `Options` &mdash; (`Object`)
+ *         * `Options` &mdash; (`map`)
  *           * `StaticRoutesOnly` &mdash; (`Boolean`)
- *         * `Routes` &mdash; (`Array<Object>`)
+ *         * `Routes` &mdash; (`Array<map>`)
  *           * `DestinationCidrBlock` &mdash; (`String`)
  *           * `Source` &mdash; (`String`)
  *           * `State` &mdash; (`String`)
@@ -1468,7 +1524,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `VpnGateway` &mdash; (`Object`)
+ *       * `VpnGateway` &mdash; (`map`)
  *         * `VpnGatewayId` &mdash; (`String`) Specifies the ID of the VPN
  *           gateway.
  *         * `State` &mdash; (`String`) Describes the current state of the
@@ -1478,11 +1534,11 @@ AWS.EC2 = inherit({})
  *           the VPN gateway supports.
  *         * `AvailabilityZone` &mdash; (`String`) Specifies the
  *           Availability Zone where the VPN gateway was created.
- *         * `VpcAttachments` &mdash; (`Array<Object>`) Contains
- *           information about the VPCs attached to the VPN gateway.
+ *         * `VpcAttachments` &mdash; (`Array<map>`) Contains information
+ *           about the VPCs attached to the VPN gateway.
  *           * `VpcId` &mdash; (`String`)
  *           * `State` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the
  *           VpnGateway.
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
@@ -1744,7 +1800,7 @@ AWS.EC2 = inherit({})
  *     * `Resources` &mdash; **required** &mdash; (`Array<String>`) A
  *       list of one or more resource IDs. This could be the ID of an
  *       AMI, an instance, an EBS volume, or snapshot, etc.
- *     * `Tags` &mdash; (`Array<Object>`) The tags to delete from the
+ *     * `Tags` &mdash; (`Array<map>`) The tags to delete from the
  *       specified resources. Each tag item consists of a key-value pair.
  *       If a tag is specified without a value, the tag and all of its
  *       values are deleted.
@@ -1871,9 +1927,9 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `AccountAttributes` &mdash; (`Array<Object>`)
+ *       * `AccountAttributes` &mdash; (`Array<map>`)
  *         * `AttributeName` &mdash; (`String`)
- *         * `AttributeValues` &mdash; (`Array<Object>`)
+ *         * `AttributeValues` &mdash; (`Array<map>`)
  *           * `AttributeValue` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -1883,8 +1939,8 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `PublicIps` &mdash; (`Array<String>`) The optional list of
  *       Elastic IP addresses to describe.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for Addresses. For a complete reference to the
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for Addresses. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
@@ -1901,12 +1957,15 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Addresses` &mdash; (`Array<Object>`) The list of Elastic IPs.
+ *       * `Addresses` &mdash; (`Array<map>`) The list of Elastic IPs.
  *         * `InstanceId` &mdash; (`String`)
  *         * `PublicIp` &mdash; (`String`)
  *         * `AllocationId` &mdash; (`String`)
  *         * `AssociationId` &mdash; (`String`)
  *         * `Domain` &mdash; (`String`)
+ *           Possible values include:
+ *           * `vpc`
+ *           * `standard`
  *         * `NetworkInterfaceId` &mdash; (`String`)
  *         * `NetworkInterfaceOwnerId` &mdash; (`String`)
  *         * `PrivateIpAddress` &mdash; (`String`)
@@ -1918,42 +1977,8 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `ZoneNames` &mdash; (`Array<String>`) A list of the availability
  *       zone names to describe.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for AvailabilityZones. For a complete reference
- *       to the available filter keys for this operation, see the Amazon
- *       EC2 API reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
- *   @callback callback function(err, data)
- *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.Request.send}
- *     on the returned request object to initiate the request.
- *     @param err [Error] the error object returned from the request.
- *       Set to `null` if the request is successful.
- *     @param data [Object] the de-serialized data returned from
- *       the request. Set to `null` if a request error occurs.
- *       The `data` object has the following properties:
- *
- *       * `AvailabilityZones` &mdash; (`Array<Object>`) The list of
- *         described Amazon EC2 availability zones.
- *         * `ZoneName` &mdash; (`String`) Name of the Availability Zone.
- *         * `State` &mdash; (`String`) State of the Availability Zone.
- *         * `RegionName` &mdash; (`String`) Name of the region in which
- *           this zone resides.
- *         * `Messages` &mdash; (`Array<Object>`) A list of messages about
- *           the Availability Zone.
- *           * `Message` &mdash; (`String`)
- *   @return [AWS.Request] a handle to the operation request for
- *     subsequent event callback registration.
- *
- * @!method describeBundleTasks(params, callback)
- *   Calls the DescribeBundleTasks API operation.
- *   @param params [Object]
- *     * `BundleIds` &mdash; (`Array<String>`) The list of bundle task
- *       IDs to describe.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for BundleTasks. For a complete reference to
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for AvailabilityZones. For a complete reference to
  *       the available filter keys for this operation, see the Amazon EC2
  *       API reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
@@ -1969,7 +1994,41 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `BundleTasks` &mdash; (`Array<Object>`) The list of described
+ *       * `AvailabilityZones` &mdash; (`Array<map>`) The list of described
+ *         Amazon EC2 availability zones.
+ *         * `ZoneName` &mdash; (`String`) Name of the Availability Zone.
+ *         * `State` &mdash; (`String`) State of the Availability Zone.
+ *         * `RegionName` &mdash; (`String`) Name of the region in which
+ *           this zone resides.
+ *         * `Messages` &mdash; (`Array<map>`) A list of messages about the
+ *           Availability Zone.
+ *           * `Message` &mdash; (`String`)
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
+ * @!method describeBundleTasks(params, callback)
+ *   Calls the DescribeBundleTasks API operation.
+ *   @param params [Object]
+ *     * `BundleIds` &mdash; (`Array<String>`) The list of bundle task
+ *       IDs to describe.
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for BundleTasks. For a complete reference to the
+ *       available filter keys for this operation, see the Amazon EC2 API
+ *       reference.
+ *       * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *       * `Values` &mdash; (`Array<String>`) Contains one or more values
+ *         for the filter.
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Error] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `BundleTasks` &mdash; (`Array<map>`) The list of described
  *         bundle tasks.
  *         * `InstanceId` &mdash; (`String`) Instance associated with this
  *           bundle task.
@@ -1978,9 +2037,9 @@ AWS.EC2 = inherit({})
  *         * `StartTime` &mdash; (`Date`) The time this task started.
  *         * `UpdateTime` &mdash; (`Date`) The time of the most recent
  *           update for the task.
- *         * `Storage` &mdash; (`Object`) Amazon S3 storage locations.
- *           * `S3` &mdash; (`Object`) The details of S3 storage for
- *             bundling a Windows instance.
+ *         * `Storage` &mdash; (`map`) Amazon S3 storage locations.
+ *           * `S3` &mdash; (`map`) The details of S3 storage for bundling
+ *             a Windows instance.
  *             * `Bucket` &mdash; (`String`) The bucket in which to store
  *               the AMI. You can specify a bucket that you already own or
  *               a new bucket that Amazon EC2 creates on your behalf. If
@@ -1997,7 +2056,7 @@ AWS.EC2 = inherit({})
  *               of the Base64 encoded JSON document.
  *         * `Progress` &mdash; (`String`) The level of task completion, in
  *           percent (e.g., 20%).
- *         * `BundleTaskError` &mdash; (`Object`) If the task fails, a
+ *         * `BundleTaskError` &mdash; (`map`) If the task fails, a
  *           description of the error.
  *           * `Code` &mdash; (`String`) Error code.
  *           * `Message` &mdash; (`String`) Error message.
@@ -2007,7 +2066,7 @@ AWS.EC2 = inherit({})
  * @!method describeConversionTasks(params, callback)
  *   Calls the DescribeConversionTasks API operation.
  *   @param params [Object]
- *     * `Filters` &mdash; (`Array<Object>`)
+ *     * `Filters` &mdash; (`Array<map>`)
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
  *       * `Values` &mdash; (`Array<String>`) Contains one or more values
  *         for the filter.
@@ -2022,19 +2081,19 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ConversionTasks` &mdash; (`Array<Object>`)
+ *       * `ConversionTasks` &mdash; (`Array<map>`)
  *         * `ConversionTaskId` &mdash; (`String`)
  *         * `ExpirationTime` &mdash; (`String`)
- *         * `ImportInstance` &mdash; (`Object`)
- *           * `Volumes` &mdash; (`Array<Object>`)
+ *         * `ImportInstance` &mdash; (`map`)
+ *           * `Volumes` &mdash; (`Array<map>`)
  *             * `BytesConverted` &mdash; (`Integer`)
  *             * `AvailabilityZone` &mdash; (`String`)
- *             * `Image` &mdash; (`Object`)
+ *             * `Image` &mdash; (`map`)
  *               * `Format` &mdash; (`String`)
  *               * `Size` &mdash; (`Integer`)
  *               * `ImportManifestUrl` &mdash; (`String`)
  *               * `Checksum` &mdash; (`String`)
- *             * `Volume` &mdash; (`Object`)
+ *             * `Volume` &mdash; (`map`)
  *               * `Size` &mdash; (`Integer`)
  *               * `Id` &mdash; (`String`)
  *             * `Status` &mdash; (`String`)
@@ -2043,21 +2102,21 @@ AWS.EC2 = inherit({})
  *           * `InstanceId` &mdash; (`String`)
  *           * `Platform` &mdash; (`String`)
  *           * `Description` &mdash; (`String`)
- *         * `ImportVolume` &mdash; (`Object`)
+ *         * `ImportVolume` &mdash; (`map`)
  *           * `BytesConverted` &mdash; (`Integer`)
  *           * `AvailabilityZone` &mdash; (`String`)
  *           * `Description` &mdash; (`String`)
- *           * `Image` &mdash; (`Object`)
+ *           * `Image` &mdash; (`map`)
  *             * `Format` &mdash; (`String`)
  *             * `Size` &mdash; (`Integer`)
  *             * `ImportManifestUrl` &mdash; (`String`)
  *             * `Checksum` &mdash; (`String`)
- *           * `Volume` &mdash; (`Object`)
+ *           * `Volume` &mdash; (`map`)
  *             * `Size` &mdash; (`Integer`)
  *             * `Id` &mdash; (`String`)
  *         * `State` &mdash; (`String`)
  *         * `StatusMessage` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<Object>`)
+ *         * `Tags` &mdash; (`Array<map>`)
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
@@ -2068,48 +2127,8 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `CustomerGatewayIds` &mdash; (`Array<String>`) A set of one or
  *       more customer gateway IDs.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for Customer Gateways. For a complete reference
- *       to the available filter keys for this operation, see the Amazon
- *       EC2 API reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
- *   @callback callback function(err, data)
- *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.Request.send}
- *     on the returned request object to initiate the request.
- *     @param err [Error] the error object returned from the request.
- *       Set to `null` if the request is successful.
- *     @param data [Object] the de-serialized data returned from
- *       the request. Set to `null` if a request error occurs.
- *       The `data` object has the following properties:
- *
- *       * `CustomerGateways` &mdash; (`Array<Object>`)
- *         * `CustomerGatewayId` &mdash; (`String`) Specifies the ID of the
- *           customer gateway.
- *         * `State` &mdash; (`String`) Describes the current state of the
- *           customer gateway. Valid values are pending, available,
- *           deleting, and deleted.
- *         * `Type` &mdash; (`String`) Specifies the type of VPN connection
- *           the customer gateway supports.
- *         * `IpAddress` &mdash; (`String`) Contains the Internet-routable
- *           IP address of the customer gateway's outside interface.
- *         * `BgpAsn` &mdash; (`String`) Specifies the customer gateway's
- *           Border Gateway Protocol (BGP) Autonomous System Number (ASN).
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the
- *           CustomerGateway.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *   @return [AWS.Request] a handle to the operation request for
- *     subsequent event callback registration.
- *
- * @!method describeDhcpOptions(params, callback)
- *   Calls the DescribeDhcpOptions API operation.
- *   @param params [Object]
- *     * `DhcpOptionsIds` &mdash; (`Array<String>`)
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for DhcpOptions. For a complete reference to
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for Customer Gateways. For a complete reference to
  *       the available filter keys for this operation, see the Amazon EC2
  *       API reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
@@ -2125,15 +2144,55 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `DhcpOptions` &mdash; (`Array<Object>`)
+ *       * `CustomerGateways` &mdash; (`Array<map>`)
+ *         * `CustomerGatewayId` &mdash; (`String`) Specifies the ID of the
+ *           customer gateway.
+ *         * `State` &mdash; (`String`) Describes the current state of the
+ *           customer gateway. Valid values are pending, available,
+ *           deleting, and deleted.
+ *         * `Type` &mdash; (`String`) Specifies the type of VPN connection
+ *           the customer gateway supports.
+ *         * `IpAddress` &mdash; (`String`) Contains the Internet-routable
+ *           IP address of the customer gateway's outside interface.
+ *         * `BgpAsn` &mdash; (`String`) Specifies the customer gateway's
+ *           Border Gateway Protocol (BGP) Autonomous System Number (ASN).
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the
+ *           CustomerGateway.
+ *           * `Key` &mdash; (`String`) The tag's key.
+ *           * `Value` &mdash; (`String`) The tag's value.
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
+ * @!method describeDhcpOptions(params, callback)
+ *   Calls the DescribeDhcpOptions API operation.
+ *   @param params [Object]
+ *     * `DhcpOptionsIds` &mdash; (`Array<String>`)
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for DhcpOptions. For a complete reference to the
+ *       available filter keys for this operation, see the Amazon EC2 API
+ *       reference.
+ *       * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *       * `Values` &mdash; (`Array<String>`) Contains one or more values
+ *         for the filter.
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Error] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `DhcpOptions` &mdash; (`Array<map>`)
  *         * `DhcpOptionsId` &mdash; (`String`) Specifies the ID of the set
  *           of DHCP options.
- *         * `DhcpConfigurations` &mdash; (`Array<Object>`) Contains
+ *         * `DhcpConfigurations` &mdash; (`Array<map>`) Contains
  *           information about the set of DHCP options.
  *           * `Key` &mdash; (`String`) Contains the name of a DHCP option.
  *           * `Values` &mdash; (`Array<String>`) Contains a set of values
  *             for a DHCP option.
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the
  *           DhcpOptions.
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
@@ -2154,17 +2213,25 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ExportTasks` &mdash; (`Array<Object>`)
+ *       * `ExportTasks` &mdash; (`Array<map>`)
  *         * `ExportTaskId` &mdash; (`String`)
  *         * `Description` &mdash; (`String`)
  *         * `State` &mdash; (`String`)
  *         * `StatusMessage` &mdash; (`String`)
- *         * `InstanceExportDetails` &mdash; (`Object`)
+ *         * `InstanceExportDetails` &mdash; (`map`)
  *           * `InstanceId` &mdash; (`String`)
  *           * `TargetEnvironment` &mdash; (`String`)
- *         * `ExportToS3Task` &mdash; (`Object`)
+ *             Possible values include:
+ *             * `citrix`
+ *             * `vmware`
+ *         * `ExportToS3Task` &mdash; (`map`)
  *           * `DiskImageFormat` &mdash; (`String`)
+ *             Possible values include:
+ *             * `vmdk`
+ *             * `vhd`
  *           * `ContainerFormat` &mdash; (`String`)
+ *             Possible values include:
+ *             * `ova`
  *           * `S3Bucket` &mdash; (`String`)
  *           * `S3Key` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -2190,31 +2257,31 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `ImageId` &mdash; (`String`) The ID of the associated AMI.
- *       * `LaunchPermissions` &mdash; (`Array<Object>`) Launch permissions
+ *       * `LaunchPermissions` &mdash; (`Array<map>`) Launch permissions
  *         for the associated AMI.
  *         * `UserId` &mdash; (`String`) The AWS user ID of the user
  *           involved in this launch permission.
  *         * `Group` &mdash; (`String`) The AWS group of the user involved
  *           in this launch permission. Available groups: all
- *       * `ProductCodes` &mdash; (`Array<Object>`) Product codes for the
+ *       * `ProductCodes` &mdash; (`Array<map>`) Product codes for the
  *         associated AMI.
  *         * `ProductCodeId` &mdash; (`String`) The unique ID of an AWS
  *           DevPay product code.
  *         * `ProductCodeType` &mdash; (`String`)
- *       * `KernelId` &mdash; (`Object`) Kernel ID of the associated AMI.
+ *       * `KernelId` &mdash; (`map`) Kernel ID of the associated AMI.
  *         * `Value` &mdash; (`String`) String value
- *       * `RamdiskId` &mdash; (`Object`) Ramdisk ID of the associated AMI.
+ *       * `RamdiskId` &mdash; (`map`) Ramdisk ID of the associated AMI.
  *         * `Value` &mdash; (`String`) String value
- *       * `Description` &mdash; (`Object`) User-created description of the
+ *       * `Description` &mdash; (`map`) User-created description of the
  *         associated AMI.
  *         * `Value` &mdash; (`String`) String value
- *       * `BlockDeviceMappings` &mdash; (`Array<Object>`) Block device
+ *       * `BlockDeviceMappings` &mdash; (`Array<map>`) Block device
  *         mappings for the associated AMI.
  *         * `VirtualName` &mdash; (`String`) Specifies the virtual device
  *           name.
  *         * `DeviceName` &mdash; (`String`) Specifies the device name
  *           (e.g., /dev/sdh).
- *         * `Ebs` &mdash; (`Object`) Specifies parameters used to
+ *         * `Ebs` &mdash; (`map`) Specifies parameters used to
  *           automatically setup Amazon EBS volumes when the instance is
  *           launched.
  *           * `SnapshotId` &mdash; (`String`) The ID of the snapshot from
@@ -2224,6 +2291,9 @@ AWS.EC2 = inherit({})
  *           * `DeleteOnTermination` &mdash; (`Boolean`) Specifies whether
  *             the Amazon EBS volume is deleted on instance termination.
  *           * `VolumeType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `standard`
+ *             * `io1`
  *           * `Iops` &mdash; (`Integer`)
  *         * `NoDevice` &mdash; (`String`) Specifies the device name to
  *           suppress during instance launch.
@@ -2246,9 +2316,9 @@ AWS.EC2 = inherit({})
  *       for which the sender of the request has explicit launch
  *       permissions, or 'all' to return AMIs with public launch
  *       permissions.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for Images. For a complete reference to the
- *       available filter keys for this operation, see the Amazon EC2 API
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for Images. For a complete reference to the available
+ *       filter keys for this operation, see the Amazon EC2 API
  *       reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
  *       * `Values` &mdash; (`Array<String>`) Contains one or more values
@@ -2263,8 +2333,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Images` &mdash; (`Array<Object>`) The list of the described
- *         AMIs.
+ *       * `Images` &mdash; (`Array<map>`) The list of the described AMIs.
  *         * `ImageId` &mdash; (`String`) The unique ID of the AMI.
  *         * `ImageLocation` &mdash; (`String`) The location of the AMI.
  *         * `State` &mdash; (`String`) Current state of the AMI. If the
@@ -2272,12 +2341,15 @@ AWS.EC2 = inherit({})
  *           registered and available for launching. If the operation
  *           returns deregistered, the image is deregistered and no longer
  *           available for launching.
+ *           Possible values include:
+ *           * `available`
+ *           * `deregistered`
  *         * `OwnerId` &mdash; (`String`) AWS Access Key ID of the image
  *           owner.
  *         * `Public` &mdash; (`Boolean`) True if this image has public
  *           launch permissions. False if it only has implicit and explicit
  *           launch permissions.
- *         * `ProductCodes` &mdash; (`Array<Object>`) Product codes of the
+ *         * `ProductCodes` &mdash; (`Array<map>`) Product codes of the
  *           AMI.
  *           * `ProductCodeId` &mdash; (`String`) The unique ID of an AWS
  *             DevPay product code.
@@ -2292,8 +2364,7 @@ AWS.EC2 = inherit({})
  *           the image, if any. Only applicable for machine images.
  *         * `Platform` &mdash; (`String`) The operating platform of the
  *           AMI.
- *         * `StateReason` &mdash; (`Object`) The reason for the state
- *           change.
+ *         * `StateReason` &mdash; (`map`) The reason for the state change.
  *           * `Code` &mdash; (`String`) Reason code for the state change.
  *           * `Message` &mdash; (`String`) Descriptive message for the
  *             state change.
@@ -2309,13 +2380,13 @@ AWS.EC2 = inherit({})
  *           root device.
  *         * `RootDeviceName` &mdash; (`String`) The root device name
  *           (e.g., /dev/sda1).
- *         * `BlockDeviceMappings` &mdash; (`Array<Object>`) Specifies how
+ *         * `BlockDeviceMappings` &mdash; (`Array<map>`) Specifies how
  *           block devices are exposed to the instance.
  *           * `VirtualName` &mdash; (`String`) Specifies the virtual
  *             device name.
  *           * `DeviceName` &mdash; (`String`) Specifies the device name
  *             (e.g., /dev/sdh).
- *           * `Ebs` &mdash; (`Object`) Specifies parameters used to
+ *           * `Ebs` &mdash; (`map`) Specifies parameters used to
  *             automatically setup Amazon EBS volumes when the instance is
  *             launched.
  *             * `SnapshotId` &mdash; (`String`) The ID of the snapshot
@@ -2326,14 +2397,23 @@ AWS.EC2 = inherit({})
  *               whether the Amazon EBS volume is deleted on instance
  *               termination.
  *             * `VolumeType` &mdash; (`String`)
+ *               Possible values include:
+ *               * `standard`
+ *               * `io1`
  *             * `Iops` &mdash; (`Integer`)
  *           * `NoDevice` &mdash; (`String`) Specifies the device name to
  *             suppress during instance launch.
  *         * `VirtualizationType` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the Image.
+ *           Possible values include:
+ *           * `hvm`
+ *           * `paravirtual`
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the Image.
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
  *         * `Hypervisor` &mdash; (`String`)
+ *           Possible values include:
+ *           * `ovm`
+ *           * `xen`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -2347,6 +2427,19 @@ AWS.EC2 = inherit({})
  *       instanceType, kernel, ramdisk, userData, disableApiTermination,
  *       instanceInitiatedShutdownBehavior, rootDeviceName,
  *       blockDeviceMapping
+ *       Possible values include:
+ *       * `instanceType`
+ *       * `kernel`
+ *       * `ramdisk`
+ *       * `userData`
+ *       * `disableApiTermination`
+ *       * `instanceInitiatedShutdownBehavior`
+ *       * `rootDeviceName`
+ *       * `blockDeviceMapping`
+ *       * `productCodes`
+ *       * `sourceDestCheck`
+ *       * `groupSet`
+ *       * `ebsOptimized`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -2359,35 +2452,35 @@ AWS.EC2 = inherit({})
  *
  *       * `InstanceId` &mdash; (`String`) The ID of the associated
  *         instance.
- *       * `InstanceType` &mdash; (`Object`) The instance type (e.g.,
+ *       * `InstanceType` &mdash; (`map`) The instance type (e.g.,
  *         m1.small, c1.medium, m2.2xlarge, and so on).
  *         * `Value` &mdash; (`String`) String value
- *       * `KernelId` &mdash; (`Object`) The kernel ID of the associated
+ *       * `KernelId` &mdash; (`map`) The kernel ID of the associated
  *         instance.
  *         * `Value` &mdash; (`String`) String value
- *       * `RamdiskId` &mdash; (`Object`) The ramdisk ID of the associated
+ *       * `RamdiskId` &mdash; (`map`) The ramdisk ID of the associated
  *         instance.
  *         * `Value` &mdash; (`String`) String value
- *       * `UserData` &mdash; (`Object`) MIME, Base64-encoded user data.
+ *       * `UserData` &mdash; (`map`) MIME, Base64-encoded user data.
  *         * `Value` &mdash; (`String`) String value
- *       * `DisableApiTermination` &mdash; (`Object`) Whether this instance
+ *       * `DisableApiTermination` &mdash; (`map`) Whether this instance
  *         can be terminated. You must modify this attribute before you can
  *         terminate any "locked" instances.
  *         * `Value` &mdash; (`Boolean`) Boolean value
- *       * `InstanceInitiatedShutdownBehavior` &mdash; (`Object`) Whether
- *         this instance's Amazon EBS volumes are deleted when the instance
- *         is shut down.
+ *       * `InstanceInitiatedShutdownBehavior` &mdash; (`map`) Whether this
+ *         instance's Amazon EBS volumes are deleted when the instance is
+ *         shut down.
  *         * `Value` &mdash; (`String`) String value
- *       * `RootDeviceName` &mdash; (`Object`) The root device name (e.g.,
+ *       * `RootDeviceName` &mdash; (`map`) The root device name (e.g.,
  *         /dev/sda1).
  *         * `Value` &mdash; (`String`) String value
- *       * `BlockDeviceMappings` &mdash; (`Array<Object>`) How block
- *         devices are exposed to this instance. Each mapping is made up of
- *         a virtualName and a deviceName.
+ *       * `BlockDeviceMappings` &mdash; (`Array<map>`) How block devices
+ *         are exposed to this instance. Each mapping is made up of a
+ *         virtualName and a deviceName.
  *         * `DeviceName` &mdash; (`String`) The device name (e.g.,
  *           /dev/sdh) at which the block device is exposed on the
  *           instance.
- *         * `Ebs` &mdash; (`Object`) The optional EBS device mapped to the
+ *         * `Ebs` &mdash; (`map`) The optional EBS device mapped to the
  *           specified device name.
  *           * `VolumeId` &mdash; (`String`) The ID of the EBS volume.
  *           * `Status` &mdash; (`String`) The status of the EBS volume.
@@ -2395,11 +2488,11 @@ AWS.EC2 = inherit({})
  *             volume was attached to the associated instance.
  *           * `DeleteOnTermination` &mdash; (`Boolean`) Specifies whether
  *             the Amazon EBS volume is deleted on instance termination.
- *       * `ProductCodes` &mdash; (`Array<Object>`)
+ *       * `ProductCodes` &mdash; (`Array<map>`)
  *         * `ProductCodeId` &mdash; (`String`) The unique ID of an AWS
  *           DevPay product code.
  *         * `ProductCodeType` &mdash; (`String`)
- *       * `EbsOptimized` &mdash; (`Object`)
+ *       * `EbsOptimized` &mdash; (`map`)
  *         * `Value` &mdash; (`Boolean`) Boolean value
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -2409,7 +2502,7 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `InstanceIds` &mdash; (`Array<String>`) The list of instance
  *       IDs. If not specified, all instances are described.
- *     * `Filters` &mdash; (`Array<Object>`) The list of filters to limit
+ *     * `Filters` &mdash; (`Array<map>`) The list of filters to limit
  *       returned results.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
  *       * `Values` &mdash; (`Array<String>`) Contains one or more values
@@ -2429,15 +2522,14 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `InstanceStatuses` &mdash; (`Array<Object>`) Collection of
- *         instance statuses describing the state of the requested
- *         instances.
+ *       * `InstanceStatuses` &mdash; (`Array<map>`) Collection of instance
+ *         statuses describing the state of the requested instances.
  *         * `InstanceId` &mdash; (`String`) The ID of the Amazon EC2
  *           instance.
  *         * `AvailabilityZone` &mdash; (`String`) The Amazon EC2
  *           instance's availability zone.
- *         * `Events` &mdash; (`Array<Object>`) Events that affect the
- *           status of the associated Amazon EC2 instance.
+ *         * `Events` &mdash; (`Array<map>`) Events that affect the status
+ *           of the associated Amazon EC2 instance.
  *           * `Code` &mdash; (`String`) The associated code of the event.
  *             Valid values: instance-reboot, system-reboot,
  *             instance-retirement
@@ -2446,20 +2538,27 @@ AWS.EC2 = inherit({})
  *             time for the event.
  *           * `NotAfter` &mdash; (`Date`) The latest scheduled end time
  *             for the event.
- *         * `InstanceState` &mdash; (`Object`)
+ *         * `InstanceState` &mdash; (`map`)
  *           * `Code` &mdash; (`Integer`) A 16-bit unsigned integer. The
  *             high byte is an opaque internal value and should be ignored.
  *             The low byte is set based on the state represented.
  *           * `Name` &mdash; (`String`) The current state of the instance.
- *         * `SystemStatus` &mdash; (`Object`)
+ *             Possible values include:
+ *             * `pending`
+ *             * `running`
+ *             * `shutting-down`
+ *             * `terminated`
+ *             * `stopping`
+ *             * `stopped`
+ *         * `SystemStatus` &mdash; (`map`)
  *           * `Status` &mdash; (`String`)
- *           * `Details` &mdash; (`Array<Object>`)
+ *           * `Details` &mdash; (`Array<map>`)
  *             * `Name` &mdash; (`String`)
  *             * `Status` &mdash; (`String`)
  *             * `ImpairedSince` &mdash; (`Date`)
- *         * `InstanceStatus` &mdash; (`Object`)
+ *         * `InstanceStatus` &mdash; (`map`)
  *           * `Status` &mdash; (`String`)
- *           * `Details` &mdash; (`Array<Object>`)
+ *           * `Details` &mdash; (`Array<map>`)
  *             * `Name` &mdash; (`String`)
  *             * `Status` &mdash; (`String`)
  *             * `ImpairedSince` &mdash; (`Date`)
@@ -2473,8 +2572,8 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `InstanceIds` &mdash; (`Array<String>`) An optional list of the
  *       instances to describe.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for Instances. For a complete reference to the
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for Instances. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
@@ -2490,32 +2589,38 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Reservations` &mdash; (`Array<Object>`) The list of
- *         reservations containing the describes instances.
+ *       * `Reservations` &mdash; (`Array<map>`) The list of reservations
+ *         containing the describes instances.
  *         * `ReservationId` &mdash; (`String`) The unique ID of this
  *           reservation.
  *         * `OwnerId` &mdash; (`String`) The AWS Access Key ID of the user
  *           who owns the reservation.
  *         * `RequesterId` &mdash; (`String`) The unique ID of the user who
  *           requested the instances in this reservation.
- *         * `Groups` &mdash; (`Array<Object>`) The list of security groups
+ *         * `Groups` &mdash; (`Array<map>`) The list of security groups
  *           requested for the instances in this reservation.
  *           * `GroupName` &mdash; (`String`)
  *           * `GroupId` &mdash; (`String`)
- *         * `Instances` &mdash; (`Array<Object>`) The list of Amazon EC2
+ *         * `Instances` &mdash; (`Array<map>`) The list of Amazon EC2
  *           instances included in this reservation.
  *           * `InstanceId` &mdash; (`String`) Unique ID of the instance
  *             launched.
  *           * `ImageId` &mdash; (`String`) Image ID of the AMI used to
  *             launch the instance.
- *           * `State` &mdash; (`Object`) The current state of the
- *             instance.
+ *           * `State` &mdash; (`map`) The current state of the instance.
  *             * `Code` &mdash; (`Integer`) A 16-bit unsigned integer. The
  *               high byte is an opaque internal value and should be
  *               ignored. The low byte is set based on the state
  *               represented.
  *             * `Name` &mdash; (`String`) The current state of the
  *               instance.
+ *               Possible values include:
+ *               * `pending`
+ *               * `running`
+ *               * `shutting-down`
+ *               * `terminated`
+ *               * `stopping`
+ *               * `stopped`
  *           * `PrivateDnsName` &mdash; (`String`) The private DNS name
  *             assigned to the instance. This DNS name can only be used
  *             inside the Amazon EC2 network. This element remains empty
@@ -2532,18 +2637,36 @@ AWS.EC2 = inherit({})
  *           * `AmiLaunchIndex` &mdash; (`Integer`) The AMI launch index,
  *             which can be used to find this instance within the launch
  *             group.
- *           * `ProductCodes` &mdash; (`Array<Object>`) Product codes
- *             attached to this instance.
+ *           * `ProductCodes` &mdash; (`Array<map>`) Product codes attached
+ *             to this instance.
  *             * `ProductCodeId` &mdash; (`String`) The unique ID of an AWS
  *               DevPay product code.
  *             * `ProductCodeType` &mdash; (`String`)
  *           * `InstanceType` &mdash; (`String`) The instance type. For
  *             more information on instance types, please see the Amazon
  *             Elastic Compute Cloud Developer Guide.
+ *             Possible values include:
+ *             * `t1.micro`
+ *             * `m1.small`
+ *             * `m1.medium`
+ *             * `m1.large`
+ *             * `m1.xlarge`
+ *             * `m2.xlarge`
+ *             * `m2.2xlarge`
+ *             * `m2.4xlarge`
+ *             * `m3.xlarge`
+ *             * `m3.2xlarge`
+ *             * `c1.medium`
+ *             * `c1.xlarge`
+ *             * `hi1.4xlarge`
+ *             * `hs1.8xlarge`
+ *             * `cc1.4xlarge`
+ *             * `cc2.8xlarge`
+ *             * `cg1.4xlarge`
  *           * `LaunchTime` &mdash; (`Date`) The time this instance
  *             launched.
- *           * `Placement` &mdash; (`Object`) The location where this
- *             instance launched.
+ *           * `Placement` &mdash; (`map`) The location where this instance
+ *             launched.
  *             * `AvailabilityZone` &mdash; (`String`) The availability
  *               zone in which an Amazon EC2 instance runs.
  *             * `GroupName` &mdash; (`String`) The name of the
@@ -2563,7 +2686,7 @@ AWS.EC2 = inherit({})
  *             instance.
  *           * `Platform` &mdash; (`String`) Platform of the instance
  *             (e.g., Windows).
- *           * `Monitoring` &mdash; (`Object`) Monitoring status for this
+ *           * `Monitoring` &mdash; (`map`) Monitoring status for this
  *             instance.
  *             * `State` &mdash; (`String`) The state of monitoring on an
  *               Amazon EC2 instance (ex: enabled, disabled).
@@ -2575,7 +2698,7 @@ AWS.EC2 = inherit({})
  *             IP address that is assigned to the instance (Amazon VPC).
  *           * `PublicIpAddress` &mdash; (`String`) Specifies the IP
  *             address of the instance.
- *           * `StateReason` &mdash; (`Object`) The reason for the state
+ *           * `StateReason` &mdash; (`map`) The reason for the state
  *             change.
  *             * `Code` &mdash; (`String`) Reason code for the state
  *               change.
@@ -2588,12 +2711,12 @@ AWS.EC2 = inherit({})
  *             store root device.
  *           * `RootDeviceName` &mdash; (`String`) The root device name
  *             (e.g., /dev/sda1).
- *           * `BlockDeviceMappings` &mdash; (`Array<Object>`) Block device
+ *           * `BlockDeviceMappings` &mdash; (`Array<map>`) Block device
  *             mapping set.
  *             * `DeviceName` &mdash; (`String`) The device name (e.g.,
  *               /dev/sdh) at which the block device is exposed on the
  *               instance.
- *             * `Ebs` &mdash; (`Object`) The optional EBS device mapped to
+ *             * `Ebs` &mdash; (`map`) The optional EBS device mapped to
  *               the specified device name.
  *               * `VolumeId` &mdash; (`String`) The ID of the EBS volume.
  *               * `Status` &mdash; (`String`) The status of the EBS
@@ -2604,22 +2727,28 @@ AWS.EC2 = inherit({})
  *                 whether the Amazon EBS volume is deleted on instance
  *                 termination.
  *           * `VirtualizationType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `hvm`
+ *             * `paravirtual`
  *           * `InstanceLifecycle` &mdash; (`String`)
  *           * `SpotInstanceRequestId` &mdash; (`String`)
- *           * `License` &mdash; (`Object`)
+ *           * `License` &mdash; (`map`)
  *             * `Pool` &mdash; (`String`) The license pool from which this
  *               license was used (ex: 'windows').
  *           * `ClientToken` &mdash; (`String`)
- *           * `Tags` &mdash; (`Array<Object>`) A list of tags for the
+ *           * `Tags` &mdash; (`Array<map>`) A list of tags for the
  *             Instance.
  *             * `Key` &mdash; (`String`) The tag's key.
  *             * `Value` &mdash; (`String`) The tag's value.
- *           * `SecurityGroups` &mdash; (`Array<Object>`)
+ *           * `SecurityGroups` &mdash; (`Array<map>`)
  *             * `GroupName` &mdash; (`String`)
  *             * `GroupId` &mdash; (`String`)
  *           * `SourceDestCheck` &mdash; (`Boolean`)
  *           * `Hypervisor` &mdash; (`String`)
- *           * `NetworkInterfaces` &mdash; (`Array<Object>`)
+ *             Possible values include:
+ *             * `ovm`
+ *             * `xen`
+ *           * `NetworkInterfaces` &mdash; (`Array<map>`)
  *             * `NetworkInterfaceId` &mdash; (`String`)
  *             * `SubnetId` &mdash; (`String`)
  *             * `VpcId` &mdash; (`String`)
@@ -2629,28 +2758,28 @@ AWS.EC2 = inherit({})
  *             * `PrivateIpAddress` &mdash; (`String`)
  *             * `PrivateDnsName` &mdash; (`String`)
  *             * `SourceDestCheck` &mdash; (`Boolean`)
- *             * `Groups` &mdash; (`Array<Object>`)
+ *             * `Groups` &mdash; (`Array<map>`)
  *               * `GroupName` &mdash; (`String`)
  *               * `GroupId` &mdash; (`String`)
- *             * `Attachment` &mdash; (`Object`)
+ *             * `Attachment` &mdash; (`map`)
  *               * `AttachmentId` &mdash; (`String`)
  *               * `DeviceIndex` &mdash; (`Integer`)
  *               * `Status` &mdash; (`String`)
  *               * `AttachTime` &mdash; (`Date`)
  *               * `DeleteOnTermination` &mdash; (`Boolean`)
- *             * `Association` &mdash; (`Object`)
+ *             * `Association` &mdash; (`map`)
  *               * `PublicIp` &mdash; (`String`)
  *               * `PublicDnsName` &mdash; (`String`)
  *               * `IpOwnerId` &mdash; (`String`)
- *             * `PrivateIpAddresses` &mdash; (`Array<Object>`)
+ *             * `PrivateIpAddresses` &mdash; (`Array<map>`)
  *               * `PrivateIpAddress` &mdash; (`String`)
  *               * `PrivateDnsName` &mdash; (`String`)
  *               * `Primary` &mdash; (`Boolean`)
- *               * `Association` &mdash; (`Object`)
+ *               * `Association` &mdash; (`map`)
  *                 * `PublicIp` &mdash; (`String`)
  *                 * `PublicDnsName` &mdash; (`String`)
  *                 * `IpOwnerId` &mdash; (`String`)
- *           * `IamInstanceProfile` &mdash; (`Object`)
+ *           * `IamInstanceProfile` &mdash; (`map`)
  *             * `Arn` &mdash; (`String`)
  *             * `Id` &mdash; (`String`)
  *           * `EbsOptimized` &mdash; (`Boolean`)
@@ -2662,124 +2791,8 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `InternetGatewayIds` &mdash; (`Array<String>`) One or more
  *       Internet gateway IDs.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for Internet Gateways. For a complete reference
- *       to the available filter keys for this operation, see the Amazon
- *       EC2 API reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
- *   @callback callback function(err, data)
- *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.Request.send}
- *     on the returned request object to initiate the request.
- *     @param err [Error] the error object returned from the request.
- *       Set to `null` if the request is successful.
- *     @param data [Object] the de-serialized data returned from
- *       the request. Set to `null` if a request error occurs.
- *       The `data` object has the following properties:
- *
- *       * `InternetGateways` &mdash; (`Array<Object>`)
- *         * `InternetGatewayId` &mdash; (`String`)
- *         * `Attachments` &mdash; (`Array<Object>`)
- *           * `VpcId` &mdash; (`String`)
- *           * `State` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<Object>`)
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *   @return [AWS.Request] a handle to the operation request for
- *     subsequent event callback registration.
- *
- * @!method describeKeyPairs(params, callback)
- *   Calls the DescribeKeyPairs API operation.
- *   @param params [Object]
- *     * `KeyNames` &mdash; (`Array<String>`) The optional list of key
- *       pair names to describe.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for KeyPairs. For a complete reference to the
- *       available filter keys for this operation, see the Amazon EC2 API
- *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
- *   @callback callback function(err, data)
- *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.Request.send}
- *     on the returned request object to initiate the request.
- *     @param err [Error] the error object returned from the request.
- *       Set to `null` if the request is successful.
- *     @param data [Object] the de-serialized data returned from
- *       the request. Set to `null` if a request error occurs.
- *       The `data` object has the following properties:
- *
- *       * `KeyPairs` &mdash; (`Array<Object>`) The list of described key
- *         pairs.
- *         * `KeyName` &mdash; (`String`) The name of the key pair.
- *         * `KeyFingerprint` &mdash; (`String`) The SHA-1 digest of the
- *           DER encoded private key.
- *   @return [AWS.Request] a handle to the operation request for
- *     subsequent event callback registration.
- *
- * @!method describeLicenses(params, callback)
- *   Calls the DescribeLicenses API operation.
- *   @param params [Object]
- *     * `LicenseIds` &mdash; (`Array<String>`) Specifies the license
- *       registration for which details are to be returned.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for Licenses. For a complete reference to the
- *       available filter keys for this operation, see the Amazon EC2 API
- *       reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
- *   @callback callback function(err, data)
- *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.Request.send}
- *     on the returned request object to initiate the request.
- *     @param err [Error] the error object returned from the request.
- *       Set to `null` if the request is successful.
- *     @param data [Object] the de-serialized data returned from
- *       the request. Set to `null` if a request error occurs.
- *       The `data` object has the following properties:
- *
- *       * `Licenses` &mdash; (`Array<Object>`) Specifies active licenses
- *         in use and attached to an Amazon EC2 instance.
- *         * `LicenseId` &mdash; (`String`) The unique ID identifying the
- *           license.
- *         * `Type` &mdash; (`String`) The license type (ex.
- *           "Microsoft/Windows/Standard").
- *         * `Pool` &mdash; (`String`) The name of the pool in which the
- *           license is kept.
- *         * `Capacities` &mdash; (`Array<Object>`) The capacities
- *           available for this license, indicating how many licenses are
- *           in use, how many are available, how many Amazon EC2 instances
- *           can be supported, etc.
- *           * `Capacity` &mdash; (`Integer`) The number of licenses
- *             available.
- *           * `InstanceCapacity` &mdash; (`Integer`) The number of Amazon
- *             EC2 instances that can be supported with the license's
- *             capacity.
- *           * `State` &mdash; (`String`) The state of this license
- *             capacity, indicating whether the license is actively being
- *             used or not.
- *           * `EarliestAllowedDeactivationTime` &mdash; (`Date`) The
- *             earliest allowed time at which a license can be deactivated.
- *             Some licenses have time restrictions on when they can be
- *             activated and reactivated.
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the
- *           License.
- *           * `Key` &mdash; (`String`) The tag's key.
- *           * `Value` &mdash; (`String`) The tag's value.
- *   @return [AWS.Request] a handle to the operation request for
- *     subsequent event callback registration.
- *
- * @!method describeNetworkAcls(params, callback)
- *   Calls the DescribeNetworkAcls API operation.
- *   @param params [Object]
- *     * `NetworkAclIds` &mdash; (`Array<String>`) One or more network
- *       ACL IDs.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for Network ACLs. For a complete reference to
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for Internet Gateways. For a complete reference to
  *       the available filter keys for this operation, see the Amazon EC2
  *       API reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
@@ -2795,33 +2808,151 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `NetworkAcls` &mdash; (`Array<Object>`)
+ *       * `InternetGateways` &mdash; (`Array<map>`)
+ *         * `InternetGatewayId` &mdash; (`String`)
+ *         * `Attachments` &mdash; (`Array<map>`)
+ *           * `VpcId` &mdash; (`String`)
+ *           * `State` &mdash; (`String`)
+ *         * `Tags` &mdash; (`Array<map>`)
+ *           * `Key` &mdash; (`String`) The tag's key.
+ *           * `Value` &mdash; (`String`) The tag's value.
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
+ * @!method describeKeyPairs(params, callback)
+ *   Calls the DescribeKeyPairs API operation.
+ *   @param params [Object]
+ *     * `KeyNames` &mdash; (`Array<String>`) The optional list of key
+ *       pair names to describe.
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for KeyPairs. For a complete reference to the
+ *       available filter keys for this operation, see the Amazon EC2 API
+ *       reference.
+ *       * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *       * `Values` &mdash; (`Array<String>`) Contains one or more values
+ *         for the filter.
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Error] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `KeyPairs` &mdash; (`Array<map>`) The list of described key
+ *         pairs.
+ *         * `KeyName` &mdash; (`String`) The name of the key pair.
+ *         * `KeyFingerprint` &mdash; (`String`) The SHA-1 digest of the
+ *           DER encoded private key.
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
+ * @!method describeLicenses(params, callback)
+ *   Calls the DescribeLicenses API operation.
+ *   @param params [Object]
+ *     * `LicenseIds` &mdash; (`Array<String>`) Specifies the license
+ *       registration for which details are to be returned.
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for Licenses. For a complete reference to the
+ *       available filter keys for this operation, see the Amazon EC2 API
+ *       reference.
+ *       * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *       * `Values` &mdash; (`Array<String>`) Contains one or more values
+ *         for the filter.
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Error] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `Licenses` &mdash; (`Array<map>`) Specifies active licenses in
+ *         use and attached to an Amazon EC2 instance.
+ *         * `LicenseId` &mdash; (`String`) The unique ID identifying the
+ *           license.
+ *         * `Type` &mdash; (`String`) The license type (ex.
+ *           "Microsoft/Windows/Standard").
+ *         * `Pool` &mdash; (`String`) The name of the pool in which the
+ *           license is kept.
+ *         * `Capacities` &mdash; (`Array<map>`) The capacities available
+ *           for this license, indicating how many licenses are in use, how
+ *           many are available, how many Amazon EC2 instances can be
+ *           supported, etc.
+ *           * `Capacity` &mdash; (`Integer`) The number of licenses
+ *             available.
+ *           * `InstanceCapacity` &mdash; (`Integer`) The number of Amazon
+ *             EC2 instances that can be supported with the license's
+ *             capacity.
+ *           * `State` &mdash; (`String`) The state of this license
+ *             capacity, indicating whether the license is actively being
+ *             used or not.
+ *           * `EarliestAllowedDeactivationTime` &mdash; (`Date`) The
+ *             earliest allowed time at which a license can be deactivated.
+ *             Some licenses have time restrictions on when they can be
+ *             activated and reactivated.
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the License.
+ *           * `Key` &mdash; (`String`) The tag's key.
+ *           * `Value` &mdash; (`String`) The tag's value.
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
+ * @!method describeNetworkAcls(params, callback)
+ *   Calls the DescribeNetworkAcls API operation.
+ *   @param params [Object]
+ *     * `NetworkAclIds` &mdash; (`Array<String>`) One or more network
+ *       ACL IDs.
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for Network ACLs. For a complete reference to the
+ *       available filter keys for this operation, see the Amazon EC2 API
+ *       reference.
+ *       * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *       * `Values` &mdash; (`Array<String>`) Contains one or more values
+ *         for the filter.
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Error] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `NetworkAcls` &mdash; (`Array<map>`)
  *         * `NetworkAclId` &mdash; (`String`)
  *         * `VpcId` &mdash; (`String`)
  *         * `IsDefault` &mdash; (`Boolean`)
- *         * `Entries` &mdash; (`Array<Object>`)
+ *         * `Entries` &mdash; (`Array<map>`)
  *           * `RuleNumber` &mdash; (`Integer`)
  *           * `Protocol` &mdash; (`String`)
  *           * `RuleAction` &mdash; (`String`)
+ *             Possible values include:
+ *             * `allow`
+ *             * `deny`
  *           * `Egress` &mdash; (`Boolean`)
  *           * `CidrBlock` &mdash; (`String`)
- *           * `IcmpTypeCode` &mdash; (`Object`)
+ *           * `IcmpTypeCode` &mdash; (`map`)
  *             * `Type` &mdash; (`Integer`) For the ICMP protocol, the ICMP
  *               type. A value of -1 is a wildcard meaning all types.
  *               Required if specifying icmp for the protocol.
  *             * `Code` &mdash; (`Integer`) For the ICMP protocol, the ICMP
  *               code. A value of -1 is a wildcard meaning all codes.
  *               Required if specifying icmp for the protocol.
- *           * `PortRange` &mdash; (`Object`)
+ *           * `PortRange` &mdash; (`map`)
  *             * `From` &mdash; (`Integer`) The first port in the range.
  *               Required if specifying tcp or udp for the protocol.
  *             * `To` &mdash; (`Integer`) The last port in the range.
  *               Required if specifying tcp or udp for the protocol.
- *         * `Associations` &mdash; (`Array<Object>`)
+ *         * `Associations` &mdash; (`Array<map>`)
  *           * `NetworkAclAssociationId` &mdash; (`String`)
  *           * `NetworkAclId` &mdash; (`String`)
  *           * `SubnetId` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<Object>`)
+ *         * `Tags` &mdash; (`Array<map>`)
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
@@ -2846,14 +2977,14 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `NetworkInterfaceId` &mdash; (`String`)
- *       * `Description` &mdash; (`Object`)
+ *       * `Description` &mdash; (`map`)
  *         * `Value` &mdash; (`String`) String value
- *       * `SourceDestCheck` &mdash; (`Object`)
+ *       * `SourceDestCheck` &mdash; (`map`)
  *         * `Value` &mdash; (`Boolean`) Boolean value
- *       * `Groups` &mdash; (`Array<Object>`)
+ *       * `Groups` &mdash; (`Array<map>`)
  *         * `GroupName` &mdash; (`String`)
  *         * `GroupId` &mdash; (`String`)
- *       * `Attachment` &mdash; (`Object`)
+ *       * `Attachment` &mdash; (`map`)
  *         * `AttachmentId` &mdash; (`String`)
  *         * `InstanceId` &mdash; (`String`)
  *         * `InstanceOwnerId` &mdash; (`String`)
@@ -2868,7 +2999,7 @@ AWS.EC2 = inherit({})
  *   Calls the DescribeNetworkInterfaces API operation.
  *   @param params [Object]
  *     * `NetworkInterfaceIds` &mdash; (`Array<String>`)
- *     * `Filters` &mdash; (`Array<Object>`)
+ *     * `Filters` &mdash; (`Array<map>`)
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
  *       * `Values` &mdash; (`Array<String>`) Contains one or more values
  *         for the filter.
@@ -2882,7 +3013,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `NetworkInterfaces` &mdash; (`Array<Object>`)
+ *       * `NetworkInterfaces` &mdash; (`Array<map>`)
  *         * `NetworkInterfaceId` &mdash; (`String`)
  *         * `SubnetId` &mdash; (`String`)
  *         * `VpcId` &mdash; (`String`)
@@ -2896,10 +3027,10 @@ AWS.EC2 = inherit({})
  *         * `PrivateIpAddress` &mdash; (`String`)
  *         * `PrivateDnsName` &mdash; (`String`)
  *         * `SourceDestCheck` &mdash; (`Boolean`)
- *         * `Groups` &mdash; (`Array<Object>`)
+ *         * `Groups` &mdash; (`Array<map>`)
  *           * `GroupName` &mdash; (`String`)
  *           * `GroupId` &mdash; (`String`)
- *         * `Attachment` &mdash; (`Object`)
+ *         * `Attachment` &mdash; (`map`)
  *           * `AttachmentId` &mdash; (`String`)
  *           * `InstanceId` &mdash; (`String`)
  *           * `InstanceOwnerId` &mdash; (`String`)
@@ -2907,19 +3038,19 @@ AWS.EC2 = inherit({})
  *           * `Status` &mdash; (`String`)
  *           * `AttachTime` &mdash; (`Date`)
  *           * `DeleteOnTermination` &mdash; (`Boolean`)
- *         * `Association` &mdash; (`Object`)
+ *         * `Association` &mdash; (`map`)
  *           * `PublicIp` &mdash; (`String`)
  *           * `IpOwnerId` &mdash; (`String`)
  *           * `AllocationId` &mdash; (`String`)
  *           * `AssociationId` &mdash; (`String`)
- *         * `TagSet` &mdash; (`Array<Object>`)
+ *         * `TagSet` &mdash; (`Array<map>`)
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
- *         * `PrivateIpAddresses` &mdash; (`Array<Object>`)
+ *         * `PrivateIpAddresses` &mdash; (`Array<map>`)
  *           * `PrivateIpAddress` &mdash; (`String`)
  *           * `PrivateDnsName` &mdash; (`String`)
  *           * `Primary` &mdash; (`Boolean`)
- *           * `Association` &mdash; (`Object`)
+ *           * `Association` &mdash; (`map`)
  *             * `PublicIp` &mdash; (`String`)
  *             * `IpOwnerId` &mdash; (`String`)
  *             * `AllocationId` &mdash; (`String`)
@@ -2932,40 +3063,8 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `GroupNames` &mdash; (`Array<String>`) The name of the
  *       PlacementGroup.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for Placement Groups. For a complete reference
- *       to the available filter keys for this operation, see the Amazon
- *       EC2 API reference.
- *       * `Name` &mdash; (`String`) Specifies the name of the filter.
- *       * `Values` &mdash; (`Array<String>`) Contains one or more values
- *         for the filter.
- *   @callback callback function(err, data)
- *     Called when a response from the service is returned. If a
- *     callback is not supplied, you must call {AWS.Request.send}
- *     on the returned request object to initiate the request.
- *     @param err [Error] the error object returned from the request.
- *       Set to `null` if the request is successful.
- *     @param data [Object] the de-serialized data returned from
- *       the request. Set to `null` if a request error occurs.
- *       The `data` object has the following properties:
- *
- *       * `PlacementGroups` &mdash; (`Array<Object>`) Contains information
- *         about the specified PlacementGroups.
- *         * `GroupName` &mdash; (`String`) The name of this
- *           PlacementGroup.
- *         * `Strategy` &mdash; (`String`) The strategy to use when
- *           allocating Amazon EC2 instances for the PlacementGroup.
- *         * `State` &mdash; (`String`) The state of this PlacementGroup.
- *   @return [AWS.Request] a handle to the operation request for
- *     subsequent event callback registration.
- *
- * @!method describeRegions(params, callback)
- *   Calls the DescribeRegions API operation.
- *   @param params [Object]
- *     * `RegionNames` &mdash; (`Array<String>`) The optional list of
- *       regions to describe.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for Regions. For a complete reference to the
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for Placement Groups. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
@@ -2981,7 +3080,46 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Regions` &mdash; (`Array<Object>`) The list of described Amazon
+ *       * `PlacementGroups` &mdash; (`Array<map>`) Contains information
+ *         about the specified PlacementGroups.
+ *         * `GroupName` &mdash; (`String`) The name of this
+ *           PlacementGroup.
+ *         * `Strategy` &mdash; (`String`) The strategy to use when
+ *           allocating Amazon EC2 instances for the PlacementGroup.
+ *           Possible values include:
+ *           * `cluster`
+ *         * `State` &mdash; (`String`) The state of this PlacementGroup.
+ *           Possible values include:
+ *           * `pending`
+ *           * `available`
+ *           * `deleting`
+ *           * `deleted`
+ *   @return [AWS.Request] a handle to the operation request for
+ *     subsequent event callback registration.
+ *
+ * @!method describeRegions(params, callback)
+ *   Calls the DescribeRegions API operation.
+ *   @param params [Object]
+ *     * `RegionNames` &mdash; (`Array<String>`) The optional list of
+ *       regions to describe.
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for Regions. For a complete reference to the
+ *       available filter keys for this operation, see the Amazon EC2 API
+ *       reference.
+ *       * `Name` &mdash; (`String`) Specifies the name of the filter.
+ *       * `Values` &mdash; (`Array<String>`) Contains one or more values
+ *         for the filter.
+ *   @callback callback function(err, data)
+ *     Called when a response from the service is returned. If a
+ *     callback is not supplied, you must call {AWS.Request.send}
+ *     on the returned request object to initiate the request.
+ *     @param err [Error] the error object returned from the request.
+ *       Set to `null` if the request is successful.
+ *     @param data [Object] the de-serialized data returned from
+ *       the request. Set to `null` if a request error occurs.
+ *       The `data` object has the following properties:
+ *
+ *       * `Regions` &mdash; (`Array<map>`) The list of described Amazon
  *         EC2 regions.
  *         * `RegionName` &mdash; (`String`) Name of the region.
  *         * `Endpoint` &mdash; (`String`) Region service endpoint.
@@ -2993,10 +3131,10 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `ReservedInstancesIds` &mdash; (`Array<String>`) The optional
  *       list of Reserved Instance IDs to describe.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for ReservedInstances. For a complete reference
- *       to the available filter keys for this operation, see the Amazon
- *       EC2 API reference.
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for ReservedInstances. For a complete reference to
+ *       the available filter keys for this operation, see the Amazon EC2
+ *       API reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
  *       * `Values` &mdash; (`Array<String>`) Contains one or more values
  *         for the filter.
@@ -3012,12 +3150,30 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ReservedInstances` &mdash; (`Array<Object>`) The list of
- *         described Reserved Instances.
+ *       * `ReservedInstances` &mdash; (`Array<map>`) The list of described
+ *         Reserved Instances.
  *         * `ReservedInstancesId` &mdash; (`String`) The unique ID of the
  *           Reserved Instances purchase.
  *         * `InstanceType` &mdash; (`String`) The instance type on which
  *           the Reserved Instances can be used.
+ *           Possible values include:
+ *           * `t1.micro`
+ *           * `m1.small`
+ *           * `m1.medium`
+ *           * `m1.large`
+ *           * `m1.xlarge`
+ *           * `m2.xlarge`
+ *           * `m2.2xlarge`
+ *           * `m2.4xlarge`
+ *           * `m3.xlarge`
+ *           * `m3.2xlarge`
+ *           * `c1.medium`
+ *           * `c1.xlarge`
+ *           * `hi1.4xlarge`
+ *           * `hs1.8xlarge`
+ *           * `cc1.4xlarge`
+ *           * `cc2.8xlarge`
+ *           * `cg1.4xlarge`
  *         * `AvailabilityZone` &mdash; (`String`) The Availability Zone in
  *           which the Reserved Instances can be used.
  *         * `Start` &mdash; (`Date`) The date and time the Reserved
@@ -3034,7 +3190,7 @@ AWS.EC2 = inherit({})
  *           product description (ex: Windows or Unix/Linux).
  *         * `State` &mdash; (`String`) The state of the Reserved Instances
  *           purchase.
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the
  *           ReservedInstances.
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
@@ -3044,8 +3200,8 @@ AWS.EC2 = inherit({})
  *           instance. Specified using ISO 4217 standard (e.g., USD, JPY).
  *         * `OfferingType` &mdash; (`String`) The Reserved Instance
  *           offering type.
- *         * `RecurringCharges` &mdash; (`Array<Object>`) The recurring
- *           charge tag assigned to the resource.
+ *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring charge
+ *           tag assigned to the resource.
  *           * `Frequency` &mdash; (`String`) The frequency of the
  *             recurring charge.
  *           * `Amount` &mdash; (`Float`) The amount of the recurring
@@ -3058,7 +3214,7 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `ReservedInstancesId` &mdash; (`String`)
  *     * `ReservedInstancesListingId` &mdash; (`String`)
- *     * `Filters` &mdash; (`Array<Object>`)
+ *     * `Filters` &mdash; (`Array<map>`)
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
  *       * `Values` &mdash; (`Array<String>`) Contains one or more values
  *         for the filter.
@@ -3072,22 +3228,22 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ReservedInstancesListings` &mdash; (`Array<Object>`)
+ *       * `ReservedInstancesListings` &mdash; (`Array<map>`)
  *         * `ReservedInstancesListingId` &mdash; (`String`)
  *         * `ReservedInstancesId` &mdash; (`String`)
  *         * `CreateDate` &mdash; (`Date`)
  *         * `UpdateDate` &mdash; (`Date`)
  *         * `Status` &mdash; (`String`)
  *         * `StatusMessage` &mdash; (`String`)
- *         * `InstanceCounts` &mdash; (`Array<Object>`)
+ *         * `InstanceCounts` &mdash; (`Array<map>`)
  *           * `State` &mdash; (`String`)
  *           * `InstanceCount` &mdash; (`Integer`)
- *         * `PriceSchedules` &mdash; (`Array<Object>`)
+ *         * `PriceSchedules` &mdash; (`Array<map>`)
  *           * `Term` &mdash; (`Integer`)
  *           * `Price` &mdash; (`Float`)
  *           * `CurrencyCode` &mdash; (`String`)
  *           * `Active` &mdash; (`Boolean`)
- *         * `Tags` &mdash; (`Array<Object>`)
+ *         * `Tags` &mdash; (`Array<map>`)
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
  *         * `ClientToken` &mdash; (`String`)
@@ -3102,12 +3258,30 @@ AWS.EC2 = inherit({})
  *       offerings to describe.
  *     * `InstanceType` &mdash; (`String`) The instance type on which the
  *       Reserved Instance can be used.
+ *       Possible values include:
+ *       * `t1.micro`
+ *       * `m1.small`
+ *       * `m1.medium`
+ *       * `m1.large`
+ *       * `m1.xlarge`
+ *       * `m2.xlarge`
+ *       * `m2.2xlarge`
+ *       * `m2.4xlarge`
+ *       * `m3.xlarge`
+ *       * `m3.2xlarge`
+ *       * `c1.medium`
+ *       * `c1.xlarge`
+ *       * `hi1.4xlarge`
+ *       * `hs1.8xlarge`
+ *       * `cc1.4xlarge`
+ *       * `cc2.8xlarge`
+ *       * `cg1.4xlarge`
  *     * `AvailabilityZone` &mdash; (`String`) The Availability Zone in
  *       which the Reserved Instance can be used.
  *     * `ProductDescription` &mdash; (`String`) The Reserved Instance
  *       product description.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for ReservedInstancesOfferings. For a complete
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for ReservedInstancesOfferings. For a complete
  *       reference to the available filter keys for this operation, see
  *       the Amazon EC2 API reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
@@ -3131,12 +3305,30 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ReservedInstancesOfferings` &mdash; (`Array<Object>`) The list
- *         of described Reserved Instance offerings.
+ *       * `ReservedInstancesOfferings` &mdash; (`Array<map>`) The list of
+ *         described Reserved Instance offerings.
  *         * `ReservedInstancesOfferingId` &mdash; (`String`) The unique ID
  *           of this Reserved Instances offering.
  *         * `InstanceType` &mdash; (`String`) The instance type on which
  *           the Reserved Instances can be used.
+ *           Possible values include:
+ *           * `t1.micro`
+ *           * `m1.small`
+ *           * `m1.medium`
+ *           * `m1.large`
+ *           * `m1.xlarge`
+ *           * `m2.xlarge`
+ *           * `m2.2xlarge`
+ *           * `m2.4xlarge`
+ *           * `m3.xlarge`
+ *           * `m3.2xlarge`
+ *           * `c1.medium`
+ *           * `c1.xlarge`
+ *           * `hi1.4xlarge`
+ *           * `hs1.8xlarge`
+ *           * `cc1.4xlarge`
+ *           * `cc2.8xlarge`
+ *           * `cg1.4xlarge`
  *         * `AvailabilityZone` &mdash; (`String`) The Availability Zone in
  *           which the Reserved Instances can be used.
  *         * `Duration` &mdash; (`Integer`) The duration of the Reserved
@@ -3153,14 +3345,14 @@ AWS.EC2 = inherit({})
  *           instance. Specified using ISO 4217 standard (e.g., USD, JPY).
  *         * `OfferingType` &mdash; (`String`) The Reserved Instance
  *           offering type.
- *         * `RecurringCharges` &mdash; (`Array<Object>`) The recurring
- *           charge tag assigned to the resource.
+ *         * `RecurringCharges` &mdash; (`Array<map>`) The recurring charge
+ *           tag assigned to the resource.
  *           * `Frequency` &mdash; (`String`) The frequency of the
  *             recurring charge.
  *           * `Amount` &mdash; (`Float`) The amount of the recurring
  *             charge.
  *         * `Marketplace` &mdash; (`Boolean`)
- *         * `PricingDetails` &mdash; (`Array<Object>`)
+ *         * `PricingDetails` &mdash; (`Array<map>`)
  *           * `Price` &mdash; (`Float`)
  *           * `Count` &mdash; (`Integer`)
  *       * `NextToken` &mdash; (`String`)
@@ -3172,10 +3364,10 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `RouteTableIds` &mdash; (`Array<String>`) One or more route
  *       table IDs.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for Route Tables. For a complete reference to
- *       the available filter keys for this operation, see the Amazon EC2
- *       API reference.
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for Route Tables. For a complete reference to the
+ *       available filter keys for this operation, see the Amazon EC2 API
+ *       reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
  *       * `Values` &mdash; (`Array<String>`) Contains one or more values
  *         for the filter.
@@ -3189,25 +3381,25 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `RouteTables` &mdash; (`Array<Object>`)
+ *       * `RouteTables` &mdash; (`Array<map>`)
  *         * `RouteTableId` &mdash; (`String`)
  *         * `VpcId` &mdash; (`String`)
- *         * `Routes` &mdash; (`Array<Object>`)
+ *         * `Routes` &mdash; (`Array<map>`)
  *           * `DestinationCidrBlock` &mdash; (`String`)
  *           * `GatewayId` &mdash; (`String`)
  *           * `InstanceId` &mdash; (`String`)
  *           * `InstanceOwnerId` &mdash; (`String`)
  *           * `NetworkInterfaceId` &mdash; (`String`)
  *           * `State` &mdash; (`String`)
- *         * `Associations` &mdash; (`Array<Object>`)
+ *         * `Associations` &mdash; (`Array<map>`)
  *           * `RouteTableAssociationId` &mdash; (`String`)
  *           * `RouteTableId` &mdash; (`String`)
  *           * `SubnetId` &mdash; (`String`)
  *           * `Main` &mdash; (`Boolean`)
- *         * `Tags` &mdash; (`Array<Object>`)
+ *         * `Tags` &mdash; (`Array<map>`)
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
- *         * `PropagatingVgws` &mdash; (`Array<Object>`)
+ *         * `PropagatingVgws` &mdash; (`Array<map>`)
  *           * `GatewayId` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -3218,10 +3410,10 @@ AWS.EC2 = inherit({})
  *     * `GroupNames` &mdash; (`Array<String>`) The optional list of
  *       Amazon EC2 security groups to describe.
  *     * `GroupIds` &mdash; (`Array<String>`)
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for SecurityGroups. For a complete reference to
- *       the available filter keys for this operation, see the Amazon EC2
- *       API reference.
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for SecurityGroups. For a complete reference to the
+ *       available filter keys for this operation, see the Amazon EC2 API
+ *       reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
  *       * `Values` &mdash; (`Array<String>`) Contains one or more values
  *         for the filter.
@@ -3235,7 +3427,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `SecurityGroups` &mdash; (`Array<Object>`) The list of described
+ *       * `SecurityGroups` &mdash; (`Array<map>`) The list of described
  *         Amazon EC2 security groups.
  *         * `OwnerId` &mdash; (`String`) The AWS Access Key ID of the
  *           owner of the security group.
@@ -3244,8 +3436,8 @@ AWS.EC2 = inherit({})
  *         * `GroupId` &mdash; (`String`)
  *         * `Description` &mdash; (`String`) The description of this
  *           security group.
- *         * `IpPermissions` &mdash; (`Array<Object>`) The permissions
- *           enabled for this security group.
+ *         * `IpPermissions` &mdash; (`Array<map>`) The permissions enabled
+ *           for this security group.
  *           * `IpProtocol` &mdash; (`String`) The IP protocol of this
  *             permission. Valid protocol values: tcp, udp, icmp
  *           * `FromPort` &mdash; (`Integer`) Start of port range for the
@@ -3255,7 +3447,7 @@ AWS.EC2 = inherit({})
  *           * `ToPort` &mdash; (`Integer`) End of port range for the TCP
  *             and UDP protocols, or an ICMP code. An ICMP code of -1
  *             indicates a wildcard (i.e., any ICMP code).
- *           * `UserIdGroupPairs` &mdash; (`Array<Object>`) The list of AWS
+ *           * `UserIdGroupPairs` &mdash; (`Array<map>`) The list of AWS
  *             user IDs and groups included in this permission.
  *             * `UserId` &mdash; (`String`) The AWS user ID of an account.
  *             * `GroupName` &mdash; (`String`) Name of the security group
@@ -3264,10 +3456,10 @@ AWS.EC2 = inherit({})
  *             * `GroupId` &mdash; (`String`) ID of the security group in
  *               the specified AWS account. Cannot be used when specifying
  *               a CIDR IP address range.
- *           * `IpRanges` &mdash; (`Array<Object>`) The list of CIDR IP
- *             ranges included in this permission.
+ *           * `IpRanges` &mdash; (`Array<map>`) The list of CIDR IP ranges
+ *             included in this permission.
  *             * `CidrIp` &mdash; (`String`) The list of CIDR IP ranges.
- *         * `IpPermissionsEgress` &mdash; (`Array<Object>`)
+ *         * `IpPermissionsEgress` &mdash; (`Array<map>`)
  *           * `IpProtocol` &mdash; (`String`) The IP protocol of this
  *             permission. Valid protocol values: tcp, udp, icmp
  *           * `FromPort` &mdash; (`Integer`) Start of port range for the
@@ -3277,7 +3469,7 @@ AWS.EC2 = inherit({})
  *           * `ToPort` &mdash; (`Integer`) End of port range for the TCP
  *             and UDP protocols, or an ICMP code. An ICMP code of -1
  *             indicates a wildcard (i.e., any ICMP code).
- *           * `UserIdGroupPairs` &mdash; (`Array<Object>`) The list of AWS
+ *           * `UserIdGroupPairs` &mdash; (`Array<map>`) The list of AWS
  *             user IDs and groups included in this permission.
  *             * `UserId` &mdash; (`String`) The AWS user ID of an account.
  *             * `GroupName` &mdash; (`String`) Name of the security group
@@ -3286,11 +3478,11 @@ AWS.EC2 = inherit({})
  *             * `GroupId` &mdash; (`String`) ID of the security group in
  *               the specified AWS account. Cannot be used when specifying
  *               a CIDR IP address range.
- *           * `IpRanges` &mdash; (`Array<Object>`) The list of CIDR IP
- *             ranges included in this permission.
+ *           * `IpRanges` &mdash; (`Array<map>`) The list of CIDR IP ranges
+ *             included in this permission.
  *             * `CidrIp` &mdash; (`String`) The list of CIDR IP ranges.
  *         * `VpcId` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<Object>`)
+ *         * `Tags` &mdash; (`Array<map>`)
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
@@ -3304,6 +3496,9 @@ AWS.EC2 = inherit({})
  *     * `Attribute` &mdash; **required** &mdash; (`String`) The name of
  *       the EBS attribute to describe. Available attribute names:
  *       createVolumePermission
+ *       Possible values include:
+ *       * `productCodes`
+ *       * `createVolumePermission`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3316,7 +3511,7 @@ AWS.EC2 = inherit({})
  *
  *       * `SnapshotId` &mdash; (`String`) The ID of the snapshot whose
  *         attribute is being described.
- *       * `CreateVolumePermissions` &mdash; (`Array<Object>`) The list of
+ *       * `CreateVolumePermissions` &mdash; (`Array<map>`) The list of
  *         permissions describing who can create a volume from the
  *         associated EBS snapshot. Only available if the
  *         createVolumePermission attribute is requested.
@@ -3324,7 +3519,7 @@ AWS.EC2 = inherit({})
  *           create volumes from the snapshot.
  *         * `Group` &mdash; (`String`) The group that is allowed to create
  *           volumes from the snapshot (currently supports "all").
- *       * `ProductCodes` &mdash; (`Array<Object>`)
+ *       * `ProductCodes` &mdash; (`Array<map>`)
  *         * `ProductCodeId` &mdash; (`String`) The unique ID of an AWS
  *           DevPay product code.
  *         * `ProductCodeType` &mdash; (`String`)
@@ -3341,8 +3536,8 @@ AWS.EC2 = inherit({})
  *     * `RestorableByUserIds` &mdash; (`Array<String>`) The optional
  *       list of users who have permission to create volumes from the
  *       described EBS snapshots.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for Snapshots. For a complete reference to the
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for Snapshots. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
@@ -3358,7 +3553,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Snapshots` &mdash; (`Array<Object>`) The list of described EBS
+ *       * `Snapshots` &mdash; (`Array<map>`) The list of described EBS
  *         snapshots.
  *         * `SnapshotId` &mdash; (`String`) The unique ID of this
  *           snapshot.
@@ -3366,6 +3561,10 @@ AWS.EC2 = inherit({})
  *           this snapshot was created.
  *         * `State` &mdash; (`String`) Snapshot state (e.g., pending,
  *           completed, or error).
+ *           Possible values include:
+ *           * `pending`
+ *           * `completed`
+ *           * `error`
  *         * `StartTime` &mdash; (`Date`) Time stamp when the snapshot was
  *           initiated.
  *         * `Progress` &mdash; (`String`) The progress of the snapshot, in
@@ -3378,8 +3577,7 @@ AWS.EC2 = inherit({})
  *         * `OwnerAlias` &mdash; (`String`) The AWS account alias (e.g.,
  *           "amazon", "redhat", "self", etc.) or AWS account ID that owns
  *           the AMI.
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the
- *           Snapshot.
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the Snapshot.
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
@@ -3398,7 +3596,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `SpotDatafeedSubscription` &mdash; (`Object`) The Spot Instance
+ *       * `SpotDatafeedSubscription` &mdash; (`map`) The Spot Instance
  *         datafeed subscription.
  *         * `OwnerId` &mdash; (`String`) Specifies the AWS account ID of
  *           the account.
@@ -3408,7 +3606,7 @@ AWS.EC2 = inherit({})
  *           prepended to data feed files.
  *         * `State` &mdash; (`String`) Specifies the state of the Spot
  *           Instance request.
- *         * `Fault` &mdash; (`Object`) Specifies a fault code for the Spot
+ *         * `Fault` &mdash; (`map`) Specifies a fault code for the Spot
  *           Instance request, if present.
  *           * `Code` &mdash; (`String`)
  *           * `Message` &mdash; (`String`)
@@ -3420,10 +3618,10 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `SpotInstanceRequestIds` &mdash; (`Array<String>`) The ID of the
  *       request.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for SpotInstances. For a complete reference to
- *       the available filter keys for this operation, see the Amazon EC2
- *       API reference.
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for SpotInstances. For a complete reference to the
+ *       available filter keys for this operation, see the Amazon EC2 API
+ *       reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
  *       * `Values` &mdash; (`Array<String>`) Contains one or more values
  *         for the filter.
@@ -3437,15 +3635,18 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `SpotInstanceRequests` &mdash; (`Array<Object>`)
+ *       * `SpotInstanceRequests` &mdash; (`Array<map>`)
  *         * `SpotInstanceRequestId` &mdash; (`String`)
  *         * `SpotPrice` &mdash; (`String`)
  *         * `Type` &mdash; (`String`)
+ *           Possible values include:
+ *           * `one-time`
+ *           * `persistent`
  *         * `State` &mdash; (`String`)
- *         * `Fault` &mdash; (`Object`)
+ *         * `Fault` &mdash; (`map`)
  *           * `Code` &mdash; (`String`)
  *           * `Message` &mdash; (`String`)
- *         * `Status` &mdash; (`Object`)
+ *         * `Status` &mdash; (`map`)
  *           * `Code` &mdash; (`String`)
  *           * `UpdateTime` &mdash; (`Date`)
  *           * `Message` &mdash; (`String`)
@@ -3453,10 +3654,10 @@ AWS.EC2 = inherit({})
  *         * `ValidUntil` &mdash; (`Date`)
  *         * `LaunchGroup` &mdash; (`String`)
  *         * `AvailabilityZoneGroup` &mdash; (`String`)
- *         * `LaunchSpecification` &mdash; (`Object`)
+ *         * `LaunchSpecification` &mdash; (`map`)
  *           * `ImageId` &mdash; (`String`) The AMI ID.
  *           * `KeyName` &mdash; (`String`) The name of the key pair.
- *           * `SecurityGroups` &mdash; (`Array<Object>`)
+ *           * `SecurityGroups` &mdash; (`Array<map>`)
  *             * `GroupName` &mdash; (`String`)
  *             * `GroupId` &mdash; (`String`)
  *           * `UserData` &mdash; (`String`) Optional data, specific to a
@@ -3467,7 +3668,25 @@ AWS.EC2 = inherit({})
  *           * `AddressingType` &mdash; (`String`) Deprecated.
  *           * `InstanceType` &mdash; (`String`) Specifies the instance
  *             type.
- *           * `Placement` &mdash; (`Object`) Defines a placement item.
+ *             Possible values include:
+ *             * `t1.micro`
+ *             * `m1.small`
+ *             * `m1.medium`
+ *             * `m1.large`
+ *             * `m1.xlarge`
+ *             * `m2.xlarge`
+ *             * `m2.2xlarge`
+ *             * `m2.4xlarge`
+ *             * `m3.xlarge`
+ *             * `m3.2xlarge`
+ *             * `c1.medium`
+ *             * `c1.xlarge`
+ *             * `hi1.4xlarge`
+ *             * `hs1.8xlarge`
+ *             * `cc1.4xlarge`
+ *             * `cc2.8xlarge`
+ *             * `cg1.4xlarge`
+ *           * `Placement` &mdash; (`map`) Defines a placement item.
  *             * `AvailabilityZone` &mdash; (`String`) The availability
  *               zone in which an Amazon EC2 instance runs.
  *             * `GroupName` &mdash; (`String`) The name of the
@@ -3482,14 +3701,14 @@ AWS.EC2 = inherit({})
  *             launch. Check the kernel requirements for information on
  *             whether or not you need to specify a RAM disk and search for
  *             the kernel ID.
- *           * `BlockDeviceMappings` &mdash; (`Array<Object>`) Specifies
- *             how block devices are exposed to the instance. Each mapping
- *             is made up of a virtualName and a deviceName.
+ *           * `BlockDeviceMappings` &mdash; (`Array<map>`) Specifies how
+ *             block devices are exposed to the instance. Each mapping is
+ *             made up of a virtualName and a deviceName.
  *             * `VirtualName` &mdash; (`String`) Specifies the virtual
  *               device name.
  *             * `DeviceName` &mdash; (`String`) Specifies the device name
  *               (e.g., /dev/sdh).
- *             * `Ebs` &mdash; (`Object`) Specifies parameters used to
+ *             * `Ebs` &mdash; (`map`) Specifies parameters used to
  *               automatically setup Amazon EBS volumes when the instance
  *               is launched.
  *               * `SnapshotId` &mdash; (`String`) The ID of the snapshot
@@ -3500,6 +3719,9 @@ AWS.EC2 = inherit({})
  *                 whether the Amazon EBS volume is deleted on instance
  *                 termination.
  *               * `VolumeType` &mdash; (`String`)
+ *                 Possible values include:
+ *                 * `standard`
+ *                 * `io1`
  *               * `Iops` &mdash; (`Integer`)
  *             * `NoDevice` &mdash; (`String`) Specifies the device name to
  *               suppress during instance launch.
@@ -3508,7 +3730,7 @@ AWS.EC2 = inherit({})
  *           * `SubnetId` &mdash; (`String`) Specifies the Amazon VPC
  *             subnet ID within which to launch the instance(s) for Amazon
  *             Virtual Private Cloud.
- *           * `NetworkInterfaces` &mdash; (`Array<Object>`)
+ *           * `NetworkInterfaces` &mdash; (`Array<map>`)
  *             * `NetworkInterfaceId` &mdash; (`String`)
  *             * `DeviceIndex` &mdash; (`Integer`)
  *             * `SubnetId` &mdash; (`String`)
@@ -3516,18 +3738,18 @@ AWS.EC2 = inherit({})
  *             * `PrivateIpAddress` &mdash; (`String`)
  *             * `Groups` &mdash; (`Array<String>`)
  *             * `DeleteOnTermination` &mdash; (`Boolean`)
- *             * `PrivateIpAddresses` &mdash; (`Array<Object>`)
+ *             * `PrivateIpAddresses` &mdash; (`Array<map>`)
  *               * `PrivateIpAddress` &mdash; (`String`)
  *               * `Primary` &mdash; (`Boolean`)
  *             * `SecondaryPrivateIpAddressCount` &mdash; (`Integer`)
- *           * `IamInstanceProfile` &mdash; (`Object`)
+ *           * `IamInstanceProfile` &mdash; (`map`)
  *             * `Arn` &mdash; (`String`)
  *             * `Name` &mdash; (`String`)
  *           * `EbsOptimized` &mdash; (`Boolean`)
  *         * `InstanceId` &mdash; (`String`)
  *         * `CreateTime` &mdash; (`Date`)
  *         * `ProductDescription` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for this spot
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for this spot
  *           instance request.
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
@@ -3547,10 +3769,10 @@ AWS.EC2 = inherit({})
  *       type to return.
  *     * `ProductDescriptions` &mdash; (`Array<String>`) The description
  *       of the AMI.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for SpotPriceHistory. For a complete reference
- *       to the available filter keys for this operation, see the Amazon
- *       EC2 API reference.
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for SpotPriceHistory. For a complete reference to the
+ *       available filter keys for this operation, see the Amazon EC2 API
+ *       reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
  *       * `Values` &mdash; (`Array<String>`) Contains one or more values
  *         for the filter.
@@ -3570,8 +3792,26 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `SpotPriceHistory` &mdash; (`Array<Object>`)
+ *       * `SpotPriceHistory` &mdash; (`Array<map>`)
  *         * `InstanceType` &mdash; (`String`)
+ *           Possible values include:
+ *           * `t1.micro`
+ *           * `m1.small`
+ *           * `m1.medium`
+ *           * `m1.large`
+ *           * `m1.xlarge`
+ *           * `m2.xlarge`
+ *           * `m2.2xlarge`
+ *           * `m2.4xlarge`
+ *           * `m3.xlarge`
+ *           * `m3.2xlarge`
+ *           * `c1.medium`
+ *           * `c1.xlarge`
+ *           * `hi1.4xlarge`
+ *           * `hs1.8xlarge`
+ *           * `cc1.4xlarge`
+ *           * `cc2.8xlarge`
+ *           * `cg1.4xlarge`
  *         * `ProductDescription` &mdash; (`String`)
  *         * `SpotPrice` &mdash; (`String`)
  *         * `Timestamp` &mdash; (`Date`)
@@ -3587,8 +3827,8 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `SubnetIds` &mdash; (`Array<String>`) A set of one or more
  *       subnet IDs.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for Subnets. For a complete reference to the
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for Subnets. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
@@ -3604,8 +3844,8 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Subnets` &mdash; (`Array<Object>`) Contains a set of one or
- *         more Subnet instances.
+ *       * `Subnets` &mdash; (`Array<map>`) Contains a set of one or more
+ *         Subnet instances.
  *         * `SubnetId` &mdash; (`String`) Specifies the ID of the subnet.
  *         * `State` &mdash; (`String`) Describes the current state of the
  *           subnet. The state of the subnet may be either pending or
@@ -3621,8 +3861,7 @@ AWS.EC2 = inherit({})
  *           Availability Zone the subnet is in.
  *         * `DefaultForAz` &mdash; (`Boolean`)
  *         * `MapPublicIpOnLaunch` &mdash; (`Boolean`)
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the
- *           Subnet.
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the Subnet.
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
@@ -3631,8 +3870,8 @@ AWS.EC2 = inherit({})
  * @!method describeTags(params, callback)
  *   Calls the DescribeTags API operation.
  *   @param params [Object]
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for tags.
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for tags.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
  *       * `Values` &mdash; (`Array<String>`) Contains one or more values
  *         for the filter.
@@ -3646,12 +3885,24 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Tags` &mdash; (`Array<Object>`) A list of the tags for the
+ *       * `Tags` &mdash; (`Array<map>`) A list of the tags for the
  *         specified resources.
  *         * `ResourceId` &mdash; (`String`) The resource ID for the tag.
  *         * `ResourceType` &mdash; (`String`) The type of resource
  *           identified by the associated resource ID (ex: instance, AMI,
  *           EBS volume, etc).
+ *           Possible values include:
+ *           * `customer-gateway`
+ *           * `dhcp-options`
+ *           * `image`
+ *           * `instance`
+ *           * `snapshot`
+ *           * `spot-instances-request`
+ *           * `subnet`
+ *           * `volume`
+ *           * `vpc`
+ *           * `vpn-connection`
+ *           * `vpn-gateway`
  *         * `Key` &mdash; (`String`) The tag's key.
  *         * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
@@ -3662,6 +3913,9 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `VolumeId` &mdash; **required** &mdash; (`String`)
  *     * `Attribute` &mdash; (`String`)
+ *       Possible values include:
+ *       * `autoEnableIO`
+ *       * `productCodes`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3673,9 +3927,9 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `VolumeId` &mdash; (`String`)
- *       * `AutoEnableIO` &mdash; (`Object`)
+ *       * `AutoEnableIO` &mdash; (`map`)
  *         * `Value` &mdash; (`Boolean`) Boolean value
- *       * `ProductCodes` &mdash; (`Array<Object>`)
+ *       * `ProductCodes` &mdash; (`Array<map>`)
  *         * `ProductCodeId` &mdash; (`String`) The unique ID of an AWS
  *           DevPay product code.
  *         * `ProductCodeType` &mdash; (`String`)
@@ -3686,7 +3940,7 @@ AWS.EC2 = inherit({})
  *   Calls the DescribeVolumeStatus API operation.
  *   @param params [Object]
  *     * `VolumeIds` &mdash; (`Array<String>`)
- *     * `Filters` &mdash; (`Array<Object>`)
+ *     * `Filters` &mdash; (`Array<map>`)
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
  *       * `Values` &mdash; (`Array<String>`) Contains one or more values
  *         for the filter.
@@ -3702,21 +3956,21 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `VolumeStatuses` &mdash; (`Array<Object>`)
+ *       * `VolumeStatuses` &mdash; (`Array<map>`)
  *         * `VolumeId` &mdash; (`String`)
  *         * `AvailabilityZone` &mdash; (`String`)
- *         * `VolumeStatus` &mdash; (`Object`)
+ *         * `VolumeStatus` &mdash; (`map`)
  *           * `Status` &mdash; (`String`)
- *           * `Details` &mdash; (`Array<Object>`)
+ *           * `Details` &mdash; (`Array<map>`)
  *             * `Name` &mdash; (`String`)
  *             * `Status` &mdash; (`String`)
- *         * `Events` &mdash; (`Array<Object>`)
+ *         * `Events` &mdash; (`Array<map>`)
  *           * `EventType` &mdash; (`String`)
  *           * `Description` &mdash; (`String`)
  *           * `NotBefore` &mdash; (`Date`)
  *           * `NotAfter` &mdash; (`Date`)
  *           * `EventId` &mdash; (`String`)
- *         * `Actions` &mdash; (`Array<Object>`)
+ *         * `Actions` &mdash; (`Array<map>`)
  *           * `Code` &mdash; (`String`)
  *           * `Description` &mdash; (`String`)
  *           * `EventType` &mdash; (`String`)
@@ -3730,8 +3984,8 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `VolumeIds` &mdash; (`Array<String>`) The optional list of EBS
  *       volumes to describe.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for Volumes. For a complete reference to the
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for Volumes. For a complete reference to the
  *       available filter keys for this operation, see the Amazon EC2 API
  *       reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
@@ -3747,7 +4001,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Volumes` &mdash; (`Array<Object>`) The list of described EBS
+ *       * `Volumes` &mdash; (`Array<map>`) The list of described EBS
  *         volumes.
  *         * `VolumeId` &mdash; (`String`) The unique ID of this volume.
  *         * `Size` &mdash; (`Integer`) The size of this volume, in
@@ -3758,25 +4012,38 @@ AWS.EC2 = inherit({})
  *           which this volume was created.
  *         * `State` &mdash; (`String`) State of this volume (e.g.,
  *           creating, available).
+ *           Possible values include:
+ *           * `creating`
+ *           * `available`
+ *           * `in-use`
+ *           * `deleting`
+ *           * `error`
  *         * `CreateTime` &mdash; (`Date`) Timestamp when volume creation
  *           was initiated.
- *         * `Attachments` &mdash; (`Array<Object>`) Information on what
- *           this volume is attached to.
+ *         * `Attachments` &mdash; (`Array<map>`) Information on what this
+ *           volume is attached to.
  *           * `VolumeId` &mdash; (`String`)
  *           * `InstanceId` &mdash; (`String`)
  *           * `Device` &mdash; (`String`) How the device is exposed to the
  *             instance (e.g., /dev/sdh).
  *           * `State` &mdash; (`String`)
+ *             Possible values include:
+ *             * `attaching`
+ *             * `attached`
+ *             * `detaching`
+ *             * `detached`
  *           * `AttachTime` &mdash; (`Date`) Timestamp when this attachment
  *             initiated.
  *           * `DeleteOnTermination` &mdash; (`Boolean`) ` Whether this
  *             volume will be deleted or not when the associated instance
  *             is terminated.
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the
- *           Volume.
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the Volume.
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
  *         * `VolumeType` &mdash; (`String`)
+ *           Possible values include:
+ *           * `standard`
+ *           * `io1`
  *         * `Iops` &mdash; (`Integer`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -3786,6 +4053,9 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `VpcId` &mdash; **required** &mdash; (`String`)
  *     * `Attribute` &mdash; (`String`)
+ *       Possible values include:
+ *       * `enableDnsSupport`
+ *       * `enableDnsHostnames`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -3797,9 +4067,9 @@ AWS.EC2 = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `VpcId` &mdash; (`String`)
- *       * `EnableDnsSupport` &mdash; (`Object`)
+ *       * `EnableDnsSupport` &mdash; (`map`)
  *         * `Value` &mdash; (`Boolean`) Boolean value
- *       * `EnableDnsHostnames` &mdash; (`Object`)
+ *       * `EnableDnsHostnames` &mdash; (`map`)
  *         * `Value` &mdash; (`Boolean`) Boolean value
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -3809,9 +4079,9 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `VpcIds` &mdash; (`Array<String>`) The ID of a VPC you want
  *       information about.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for VPCs. For a complete reference to the
- *       available filter keys for this operation, see the Amazon EC2 API
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for VPCs. For a complete reference to the available
+ *       filter keys for this operation, see the Amazon EC2 API
  *       reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
  *       * `Values` &mdash; (`Array<String>`) Contains one or more values
@@ -3826,7 +4096,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Vpcs` &mdash; (`Array<Object>`)
+ *       * `Vpcs` &mdash; (`Array<map>`)
  *         * `VpcId` &mdash; (`String`) Specifies the ID of the VPC.
  *         * `State` &mdash; (`String`) Describes the current state of the
  *           VPC. The state of the subnet may be either pending or
@@ -3836,7 +4106,7 @@ AWS.EC2 = inherit({})
  *         * `DhcpOptionsId` &mdash; (`String`) Specifies the ID of the set
  *           of DHCP options associated with the VPC. Contains a value of
  *           default if the default options are associated with the VPC.
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the VPC.
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the VPC.
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
  *         * `InstanceTenancy` &mdash; (`String`) The allowed tenancy of
@@ -3850,10 +4120,10 @@ AWS.EC2 = inherit({})
  *   @param params [Object]
  *     * `VpnConnectionIds` &mdash; (`Array<String>`) A VPN connection
  *       ID. More than one may be specified per request.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for VPN Connections. For a complete reference
- *       to the available filter keys for this operation, see the Amazon
- *       EC2 API reference.
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for VPN Connections. For a complete reference to the
+ *       available filter keys for this operation, see the Amazon EC2 API
+ *       reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
  *       * `Values` &mdash; (`Array<String>`) Contains one or more values
  *         for the filter.
@@ -3867,7 +4137,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `VpnConnections` &mdash; (`Array<Object>`)
+ *       * `VpnConnections` &mdash; (`Array<map>`)
  *         * `VpnConnectionId` &mdash; (`String`) Specifies the ID of the
  *           VPN gateway at the VPC end of the VPN connection.
  *         * `State` &mdash; (`String`) Describes the current state of the
@@ -3885,19 +4155,19 @@ AWS.EC2 = inherit({})
  *           customer gateway at the end of the VPN connection.
  *         * `VpnGatewayId` &mdash; (`String`) Specfies the ID of the VPN
  *           gateway at the VPC end of the VPN connection.
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the
  *           VpnConnection.
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
- *         * `VgwTelemetry` &mdash; (`Array<Object>`)
+ *         * `VgwTelemetry` &mdash; (`Array<map>`)
  *           * `OutsideIpAddress` &mdash; (`String`)
  *           * `Status` &mdash; (`String`)
  *           * `LastStatusChange` &mdash; (`Date`)
  *           * `StatusMessage` &mdash; (`String`)
  *           * `AcceptedRouteCount` &mdash; (`Integer`)
- *         * `Options` &mdash; (`Object`)
+ *         * `Options` &mdash; (`map`)
  *           * `StaticRoutesOnly` &mdash; (`Boolean`)
- *         * `Routes` &mdash; (`Array<Object>`)
+ *         * `Routes` &mdash; (`Array<map>`)
  *           * `DestinationCidrBlock` &mdash; (`String`)
  *           * `Source` &mdash; (`String`)
  *           * `State` &mdash; (`String`)
@@ -3911,10 +4181,10 @@ AWS.EC2 = inherit({})
  *       to match properties for VPN Gateways. For a complete reference
  *       to the available filter keys for this operation, see the Amazon
  *       EC2 API reference.
- *     * `Filters` &mdash; (`Array<Object>`) A list of filters used to
- *       match properties for VPN Gateways. For a complete reference to
- *       the available filter keys for this operation, see the Amazon EC2
- *       API reference.
+ *     * `Filters` &mdash; (`Array<map>`) A list of filters used to match
+ *       properties for VPN Gateways. For a complete reference to the
+ *       available filter keys for this operation, see the Amazon EC2 API
+ *       reference.
  *       * `Name` &mdash; (`String`) Specifies the name of the filter.
  *       * `Values` &mdash; (`Array<String>`) Contains one or more values
  *         for the filter.
@@ -3928,7 +4198,7 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `VpnGateways` &mdash; (`Array<Object>`)
+ *       * `VpnGateways` &mdash; (`Array<map>`)
  *         * `VpnGatewayId` &mdash; (`String`) Specifies the ID of the VPN
  *           gateway.
  *         * `State` &mdash; (`String`) Describes the current state of the
@@ -3938,11 +4208,11 @@ AWS.EC2 = inherit({})
  *           the VPN gateway supports.
  *         * `AvailabilityZone` &mdash; (`String`) Specifies the
  *           Availability Zone where the VPN gateway was created.
- *         * `VpcAttachments` &mdash; (`Array<Object>`) Contains
- *           information about the VPCs attached to the VPN gateway.
+ *         * `VpcAttachments` &mdash; (`Array<map>`) Contains information
+ *           about the VPCs attached to the VPN gateway.
  *           * `VpcId` &mdash; (`String`)
  *           * `State` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the
  *           VpnGateway.
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
@@ -4016,6 +4286,11 @@ AWS.EC2 = inherit({})
  *       * `Device` &mdash; (`String`) How the device is exposed to the
  *         instance (e.g., /dev/sdh).
  *       * `State` &mdash; (`String`)
+ *         Possible values include:
+ *         * `attaching`
+ *         * `attached`
+ *         * `detaching`
+ *         * `detached`
  *       * `AttachTime` &mdash; (`Date`) Timestamp when this attachment
  *         initiated.
  *       * `DeleteOnTermination` &mdash; (`Boolean`) ` Whether this volume
@@ -4175,13 +4450,31 @@ AWS.EC2 = inherit({})
  *   Calls the ImportInstance API operation.
  *   @param params [Object]
  *     * `Description` &mdash; (`String`)
- *     * `LaunchSpecification` &mdash; (`Object`)
+ *     * `LaunchSpecification` &mdash; (`map`)
  *       * `Architecture` &mdash; (`String`)
  *       * `SecurityGroups` &mdash; (`Array<String>`)
  *       * `AdditionalInfo` &mdash; (`String`)
  *       * `UserData` &mdash; (`String`)
  *       * `InstanceType` &mdash; (`String`)
- *       * `Placement` &mdash; (`Object`)
+ *         Possible values include:
+ *         * `t1.micro`
+ *         * `m1.small`
+ *         * `m1.medium`
+ *         * `m1.large`
+ *         * `m1.xlarge`
+ *         * `m2.xlarge`
+ *         * `m2.2xlarge`
+ *         * `m2.4xlarge`
+ *         * `m3.xlarge`
+ *         * `m3.2xlarge`
+ *         * `c1.medium`
+ *         * `c1.xlarge`
+ *         * `hi1.4xlarge`
+ *         * `hs1.8xlarge`
+ *         * `cc1.4xlarge`
+ *         * `cc2.8xlarge`
+ *         * `cg1.4xlarge`
+ *       * `Placement` &mdash; (`map`)
  *         * `AvailabilityZone` &mdash; (`String`) The availability zone
  *           in which an Amazon EC2 instance runs.
  *         * `GroupName` &mdash; (`String`) The name of the
@@ -4195,12 +4488,12 @@ AWS.EC2 = inherit({})
  *           dedicated means all instances launched into the VPC will be
  *           launched as dedicated tenancy regardless of the tenancy
  *           assigned to the instance at launch.
- *       * `BlockDeviceMappings` &mdash; (`Array<Object>`)
+ *       * `BlockDeviceMappings` &mdash; (`Array<map>`)
  *         * `VirtualName` &mdash; (`String`) Specifies the virtual
  *           device name.
  *         * `DeviceName` &mdash; (`String`) Specifies the device name
  *           (e.g., /dev/sdh).
- *         * `Ebs` &mdash; (`Object`) Specifies parameters used to
+ *         * `Ebs` &mdash; (`map`) Specifies parameters used to
  *           automatically setup Amazon EBS volumes when the instance is
  *           launched.
  *           * `SnapshotId` &mdash; (`String`) The ID of the snapshot
@@ -4211,6 +4504,9 @@ AWS.EC2 = inherit({})
  *             whether the Amazon EBS volume is deleted on instance
  *             termination.
  *           * `VolumeType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `standard`
+ *             * `io1`
  *           * `Iops` &mdash; (`Integer`)
  *         * `NoDevice` &mdash; (`String`) Specifies the device name to
  *           suppress during instance launch.
@@ -4219,13 +4515,13 @@ AWS.EC2 = inherit({})
  *       * `DisableApiTermination` &mdash; (`Boolean`)
  *       * `InstanceInitiatedShutdownBehavior` &mdash; (`String`)
  *       * `PrivateIpAddress` &mdash; (`String`)
- *     * `DiskImages` &mdash; (`Array<Object>`)
- *       * `Image` &mdash; (`Object`)
+ *     * `DiskImages` &mdash; (`Array<map>`)
+ *       * `Image` &mdash; (`map`)
  *         * `Format` &mdash; **required** &mdash; (`String`)
  *         * `Bytes` &mdash; **required** &mdash; (`Integer`)
  *         * `ImportManifestUrl` &mdash; **required** &mdash; (`String`)
  *       * `Description` &mdash; (`String`)
- *       * `Volume` &mdash; (`Object`)
+ *       * `Volume` &mdash; (`map`)
  *         * `Size` &mdash; **required** &mdash; (`Integer`)
  *     * `Platform` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
@@ -4238,19 +4534,19 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ConversionTask` &mdash; (`Object`)
+ *       * `ConversionTask` &mdash; (`map`)
  *         * `ConversionTaskId` &mdash; (`String`)
  *         * `ExpirationTime` &mdash; (`String`)
- *         * `ImportInstance` &mdash; (`Object`)
- *           * `Volumes` &mdash; (`Array<Object>`)
+ *         * `ImportInstance` &mdash; (`map`)
+ *           * `Volumes` &mdash; (`Array<map>`)
  *             * `BytesConverted` &mdash; (`Integer`)
  *             * `AvailabilityZone` &mdash; (`String`)
- *             * `Image` &mdash; (`Object`)
+ *             * `Image` &mdash; (`map`)
  *               * `Format` &mdash; (`String`)
  *               * `Size` &mdash; (`Integer`)
  *               * `ImportManifestUrl` &mdash; (`String`)
  *               * `Checksum` &mdash; (`String`)
- *             * `Volume` &mdash; (`Object`)
+ *             * `Volume` &mdash; (`map`)
  *               * `Size` &mdash; (`Integer`)
  *               * `Id` &mdash; (`String`)
  *             * `Status` &mdash; (`String`)
@@ -4259,21 +4555,21 @@ AWS.EC2 = inherit({})
  *           * `InstanceId` &mdash; (`String`)
  *           * `Platform` &mdash; (`String`)
  *           * `Description` &mdash; (`String`)
- *         * `ImportVolume` &mdash; (`Object`)
+ *         * `ImportVolume` &mdash; (`map`)
  *           * `BytesConverted` &mdash; (`Integer`)
  *           * `AvailabilityZone` &mdash; (`String`)
  *           * `Description` &mdash; (`String`)
- *           * `Image` &mdash; (`Object`)
+ *           * `Image` &mdash; (`map`)
  *             * `Format` &mdash; (`String`)
  *             * `Size` &mdash; (`Integer`)
  *             * `ImportManifestUrl` &mdash; (`String`)
  *             * `Checksum` &mdash; (`String`)
- *           * `Volume` &mdash; (`Object`)
+ *           * `Volume` &mdash; (`map`)
  *             * `Size` &mdash; (`Integer`)
  *             * `Id` &mdash; (`String`)
  *         * `State` &mdash; (`String`)
  *         * `StatusMessage` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<Object>`)
+ *         * `Tags` &mdash; (`Array<map>`)
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
@@ -4306,12 +4602,12 @@ AWS.EC2 = inherit({})
  *   Calls the ImportVolume API operation.
  *   @param params [Object]
  *     * `AvailabilityZone` &mdash; (`String`)
- *     * `Image` &mdash; (`Object`)
+ *     * `Image` &mdash; (`map`)
  *       * `Format` &mdash; **required** &mdash; (`String`)
  *       * `Bytes` &mdash; **required** &mdash; (`Integer`)
  *       * `ImportManifestUrl` &mdash; **required** &mdash; (`String`)
  *     * `Description` &mdash; (`String`)
- *     * `Volume` &mdash; (`Object`)
+ *     * `Volume` &mdash; (`map`)
  *       * `Size` &mdash; **required** &mdash; (`Integer`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -4323,19 +4619,19 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ConversionTask` &mdash; (`Object`)
+ *       * `ConversionTask` &mdash; (`map`)
  *         * `ConversionTaskId` &mdash; (`String`)
  *         * `ExpirationTime` &mdash; (`String`)
- *         * `ImportInstance` &mdash; (`Object`)
- *           * `Volumes` &mdash; (`Array<Object>`)
+ *         * `ImportInstance` &mdash; (`map`)
+ *           * `Volumes` &mdash; (`Array<map>`)
  *             * `BytesConverted` &mdash; (`Integer`)
  *             * `AvailabilityZone` &mdash; (`String`)
- *             * `Image` &mdash; (`Object`)
+ *             * `Image` &mdash; (`map`)
  *               * `Format` &mdash; (`String`)
  *               * `Size` &mdash; (`Integer`)
  *               * `ImportManifestUrl` &mdash; (`String`)
  *               * `Checksum` &mdash; (`String`)
- *             * `Volume` &mdash; (`Object`)
+ *             * `Volume` &mdash; (`map`)
  *               * `Size` &mdash; (`Integer`)
  *               * `Id` &mdash; (`String`)
  *             * `Status` &mdash; (`String`)
@@ -4344,21 +4640,21 @@ AWS.EC2 = inherit({})
  *           * `InstanceId` &mdash; (`String`)
  *           * `Platform` &mdash; (`String`)
  *           * `Description` &mdash; (`String`)
- *         * `ImportVolume` &mdash; (`Object`)
+ *         * `ImportVolume` &mdash; (`map`)
  *           * `BytesConverted` &mdash; (`Integer`)
  *           * `AvailabilityZone` &mdash; (`String`)
  *           * `Description` &mdash; (`String`)
- *           * `Image` &mdash; (`Object`)
+ *           * `Image` &mdash; (`map`)
  *             * `Format` &mdash; (`String`)
  *             * `Size` &mdash; (`Integer`)
  *             * `ImportManifestUrl` &mdash; (`String`)
  *             * `Checksum` &mdash; (`String`)
- *           * `Volume` &mdash; (`Object`)
+ *           * `Volume` &mdash; (`map`)
  *             * `Size` &mdash; (`Integer`)
  *             * `Id` &mdash; (`String`)
  *         * `State` &mdash; (`String`)
  *         * `StatusMessage` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<Object>`)
+ *         * `Tags` &mdash; (`Array<map>`)
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
  *   @return [AWS.Request] a handle to the operation request for
@@ -4388,18 +4684,18 @@ AWS.EC2 = inherit({})
  *     * `Value` &mdash; (`String`) The value of the attribute being
  *       modified. Only valid when the description attribute is being
  *       modified.
- *     * `LaunchPermission` &mdash; (`Object`)
- *       * `Add` &mdash; (`Array<Object>`)
+ *     * `LaunchPermission` &mdash; (`map`)
+ *       * `Add` &mdash; (`Array<map>`)
  *         * `UserId` &mdash; (`String`) The AWS user ID of the user
  *           involved in this launch permission.
  *         * `Group` &mdash; (`String`) The AWS group of the user
  *           involved in this launch permission. Available groups: all
- *       * `Remove` &mdash; (`Array<Object>`)
+ *       * `Remove` &mdash; (`Array<map>`)
  *         * `UserId` &mdash; (`String`) The AWS user ID of the user
  *           involved in this launch permission.
  *         * `Group` &mdash; (`String`) The AWS group of the user
  *           involved in this launch permission. Available groups: all
- *     * `Description` &mdash; (`Object`)
+ *     * `Description` &mdash; (`map`)
  *       * `Value` &mdash; (`String`) String value
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -4422,19 +4718,32 @@ AWS.EC2 = inherit({})
  *       ramdisk, userData, disableApiTermination,
  *       instanceInitiatedShutdownBehavior, rootDevice,
  *       blockDeviceMapping
+ *       Possible values include:
+ *       * `instanceType`
+ *       * `kernel`
+ *       * `ramdisk`
+ *       * `userData`
+ *       * `disableApiTermination`
+ *       * `instanceInitiatedShutdownBehavior`
+ *       * `rootDeviceName`
+ *       * `blockDeviceMapping`
+ *       * `productCodes`
+ *       * `sourceDestCheck`
+ *       * `groupSet`
+ *       * `ebsOptimized`
  *     * `Value` &mdash; (`String`) The new value of the instance
  *       attribute being modified. Only valid when kernel, ramdisk,
  *       userData, disableApiTermination or
  *       instanceInitiateShutdownBehavior is specified as the attribute
  *       being modified.
- *     * `BlockDeviceMappings` &mdash; (`Array<Object>`) The new block
+ *     * `BlockDeviceMappings` &mdash; (`Array<map>`) The new block
  *       device mappings for the instance whose attributes are being
  *       modified. Only valid when blockDeviceMapping is specified as the
  *       attribute being modified.
  *       * `DeviceName` &mdash; (`String`) The device name (e.g.,
  *         /dev/sdh) at which the block device is exposed on the
  *         instance.
- *       * `Ebs` &mdash; (`Object`) The EBS instance block device
+ *       * `Ebs` &mdash; (`map`) The EBS instance block device
  *         specification describing the EBS block device to map to the
  *         specified device name on a running instance.
  *         * `VolumeId` &mdash; (`String`) The ID of the EBS volume that
@@ -4446,22 +4755,22 @@ AWS.EC2 = inherit({})
  *       * `NoDevice` &mdash; (`String`) When set to the empty string,
  *         specifies that the device name in this object should not be
  *         mapped to any real device.
- *     * `SourceDestCheck` &mdash; (`Object`)
+ *     * `SourceDestCheck` &mdash; (`map`)
  *       * `Value` &mdash; (`Boolean`) Boolean value
- *     * `DisableApiTermination` &mdash; (`Object`)
+ *     * `DisableApiTermination` &mdash; (`map`)
  *       * `Value` &mdash; (`Boolean`) Boolean value
- *     * `InstanceType` &mdash; (`Object`)
+ *     * `InstanceType` &mdash; (`map`)
  *       * `Value` &mdash; (`String`) String value
- *     * `Kernel` &mdash; (`Object`)
+ *     * `Kernel` &mdash; (`map`)
  *       * `Value` &mdash; (`String`) String value
- *     * `Ramdisk` &mdash; (`Object`)
+ *     * `Ramdisk` &mdash; (`map`)
  *       * `Value` &mdash; (`String`) String value
- *     * `UserData` &mdash; (`Object`)
+ *     * `UserData` &mdash; (`map`)
  *       * `Value` &mdash; (`String`) String value
- *     * `InstanceInitiatedShutdownBehavior` &mdash; (`Object`)
+ *     * `InstanceInitiatedShutdownBehavior` &mdash; (`map`)
  *       * `Value` &mdash; (`String`) String value
  *     * `Groups` &mdash; (`Array<String>`)
- *     * `EbsOptimized` &mdash; (`Object`)
+ *     * `EbsOptimized` &mdash; (`map`)
  *       * `Value` &mdash; (`Boolean`) Boolean value
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -4478,12 +4787,12 @@ AWS.EC2 = inherit({})
  *   Calls the ModifyNetworkInterfaceAttribute API operation.
  *   @param params [Object]
  *     * `NetworkInterfaceId` &mdash; **required** &mdash; (`String`)
- *     * `Description` &mdash; (`Object`)
+ *     * `Description` &mdash; (`map`)
  *       * `Value` &mdash; (`String`) String value
- *     * `SourceDestCheck` &mdash; (`Object`)
+ *     * `SourceDestCheck` &mdash; (`map`)
  *       * `Value` &mdash; (`Boolean`) Boolean value
  *     * `Groups` &mdash; (`Array<String>`)
- *     * `Attachment` &mdash; (`Object`)
+ *     * `Attachment` &mdash; (`map`)
  *       * `AttachmentId` &mdash; (`String`)
  *       * `DeleteOnTermination` &mdash; (`Boolean`)
  *   @callback callback function(err, data)
@@ -4504,6 +4813,9 @@ AWS.EC2 = inherit({})
  *       the EBS snapshot whose attributes are being modified.
  *     * `Attribute` &mdash; (`String`) The name of the attribute being
  *       modified. Available attribute names: createVolumePermission
+ *       Possible values include:
+ *       * `productCodes`
+ *       * `createVolumePermission`
  *     * `OperationType` &mdash; (`String`) The operation to perform on
  *       the attribute. Available operation names: add, remove
  *     * `UserIds` &mdash; (`Array<String>`) The AWS user IDs to add to
@@ -4516,13 +4828,13 @@ AWS.EC2 = inherit({})
  *       create EBS volumes from the specified snapshot. Currently
  *       supports "all". Only valid when the createVolumePermission
  *       attribute is being modified.
- *     * `CreateVolumePermission` &mdash; (`Object`)
- *       * `Add` &mdash; (`Array<Object>`)
+ *     * `CreateVolumePermission` &mdash; (`map`)
+ *       * `Add` &mdash; (`Array<map>`)
  *         * `UserId` &mdash; (`String`) The user ID of the user that can
  *           create volumes from the snapshot.
  *         * `Group` &mdash; (`String`) The group that is allowed to
  *           create volumes from the snapshot (currently supports "all").
- *       * `Remove` &mdash; (`Array<Object>`)
+ *       * `Remove` &mdash; (`Array<map>`)
  *         * `UserId` &mdash; (`String`) The user ID of the user that can
  *           create volumes from the snapshot.
  *         * `Group` &mdash; (`String`) The group that is allowed to
@@ -4558,9 +4870,9 @@ AWS.EC2 = inherit({})
  *   Calls the ModifyVpcAttribute API operation.
  *   @param params [Object]
  *     * `VpcId` &mdash; **required** &mdash; (`String`)
- *     * `EnableDnsSupport` &mdash; (`Object`)
+ *     * `EnableDnsSupport` &mdash; (`map`)
  *       * `Value` &mdash; (`Boolean`) Boolean value
- *     * `EnableDnsHostnames` &mdash; (`Object`)
+ *     * `EnableDnsHostnames` &mdash; (`map`)
  *       * `Value` &mdash; (`Boolean`) Boolean value
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -4588,11 +4900,11 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `InstanceMonitorings` &mdash; (`Array<Object>`) A list of
- *         updated monitoring information for the instances specified in
- *         the request.
+ *       * `InstanceMonitorings` &mdash; (`Array<map>`) A list of updated
+ *         monitoring information for the instances specified in the
+ *         request.
  *         * `InstanceId` &mdash; (`String`) Instance ID.
- *         * `Monitoring` &mdash; (`Object`) Monitoring state for the
+ *         * `Monitoring` &mdash; (`map`) Monitoring state for the
  *           associated instance.
  *           * `State` &mdash; (`String`) The state of monitoring on an
  *             Amazon EC2 instance (ex: enabled, disabled).
@@ -4607,7 +4919,7 @@ AWS.EC2 = inherit({})
  *       being purchased.
  *     * `InstanceCount` &mdash; **required** &mdash; (`Integer`) The
  *       number of Reserved Instances to purchase.
- *     * `LimitPrice` &mdash; (`Object`)
+ *     * `LimitPrice` &mdash; (`map`)
  *       * `Amount` &mdash; (`Float`)
  *       * `CurrencyCode` &mdash; (`String`)
  *   @callback callback function(err, data)
@@ -4662,7 +4974,7 @@ AWS.EC2 = inherit({})
  *       information on whether you need to specify a RAM disk.
  *     * `RootDeviceName` &mdash; (`String`) The root device name (e.g.,
  *       /dev/sda1).
- *     * `BlockDeviceMappings` &mdash; (`Array<Object>`) The block device
+ *     * `BlockDeviceMappings` &mdash; (`Array<map>`) The block device
  *       mappings for the new AMI, which specify how different block
  *       devices (ex: EBS volumes and ephemeral drives) will be exposed
  *       on instances launched from the new image.
@@ -4670,7 +4982,7 @@ AWS.EC2 = inherit({})
  *         name.
  *       * `DeviceName` &mdash; (`String`) Specifies the device name
  *         (e.g., /dev/sdh).
- *       * `Ebs` &mdash; (`Object`) Specifies parameters used to
+ *       * `Ebs` &mdash; (`map`) Specifies parameters used to
  *         automatically setup Amazon EBS volumes when the instance is
  *         launched.
  *         * `SnapshotId` &mdash; (`String`) The ID of the snapshot from
@@ -4680,6 +4992,9 @@ AWS.EC2 = inherit({})
  *         * `DeleteOnTermination` &mdash; (`Boolean`) Specifies whether
  *           the Amazon EBS volume is deleted on instance termination.
  *         * `VolumeType` &mdash; (`String`)
+ *           Possible values include:
+ *           * `standard`
+ *           * `io1`
  *         * `Iops` &mdash; (`Integer`)
  *       * `NoDevice` &mdash; (`String`) Specifies the device name to
  *         suppress during instance launch.
@@ -4750,19 +5065,22 @@ AWS.EC2 = inherit({})
  *       protocol number.
  *     * `RuleAction` &mdash; **required** &mdash; (`String`) Whether to
  *       allow or deny traffic that matches the rule.
+ *       Possible values include:
+ *       * `allow`
+ *       * `deny`
  *     * `Egress` &mdash; **required** &mdash; (`Boolean`) Whether this
  *       rule applies to egress traffic from the subnet (true) or ingress
  *       traffic (false).
  *     * `CidrBlock` &mdash; **required** &mdash; (`String`) The CIDR
  *       range to allow or deny, in CIDR notation (e.g., 172.16.0.0/24).
- *     * `IcmpTypeCode` &mdash; (`Object`) ICMP values.
+ *     * `IcmpTypeCode` &mdash; (`map`) ICMP values.
  *       * `Type` &mdash; (`Integer`) For the ICMP protocol, the ICMP
  *         type. A value of -1 is a wildcard meaning all types. Required
  *         if specifying icmp for the protocol.
  *       * `Code` &mdash; (`Integer`) For the ICMP protocol, the ICMP
  *         code. A value of -1 is a wildcard meaning all codes. Required
  *         if specifying icmp for the protocol.
- *     * `PortRange` &mdash; (`Object`) Port ranges.
+ *     * `PortRange` &mdash; (`map`) Port ranges.
  *       * `From` &mdash; (`Integer`) The first port in the range.
  *         Required if specifying tcp or udp for the protocol.
  *       * `To` &mdash; (`Integer`) The last port in the range. Required
@@ -4854,6 +5172,9 @@ AWS.EC2 = inherit({})
  *     * `InstanceCount` &mdash; (`Integer`) Specifies the maximum number
  *       of Spot Instances to launch.
  *     * `Type` &mdash; (`String`) Specifies the Spot Instance type.
+ *       Possible values include:
+ *       * `one-time`
+ *       * `persistent`
  *     * `ValidFrom` &mdash; (`Date`) Defines the start date of the
  *       request. If this is a one-time request, the request becomes
  *       active at this date and time and remains active until all
@@ -4873,7 +5194,7 @@ AWS.EC2 = inherit({})
  *       Availability Zone group. When specifying the same Availability
  *       Zone group for all Spot Instance requests, all Spot Instances
  *       are launched in the same Availability Zone.
- *     * `LaunchSpecification` &mdash; (`Object`) Specifies additional
+ *     * `LaunchSpecification` &mdash; (`map`) Specifies additional
  *       launch instance information.
  *       * `ImageId` &mdash; (`String`) The AMI ID.
  *       * `KeyName` &mdash; (`String`) The name of the key pair.
@@ -4884,7 +5205,25 @@ AWS.EC2 = inherit({})
  *         responses.
  *       * `AddressingType` &mdash; (`String`) Deprecated.
  *       * `InstanceType` &mdash; (`String`) Specifies the instance type.
- *       * `Placement` &mdash; (`Object`) Defines a placement item.
+ *         Possible values include:
+ *         * `t1.micro`
+ *         * `m1.small`
+ *         * `m1.medium`
+ *         * `m1.large`
+ *         * `m1.xlarge`
+ *         * `m2.xlarge`
+ *         * `m2.2xlarge`
+ *         * `m2.4xlarge`
+ *         * `m3.xlarge`
+ *         * `m3.2xlarge`
+ *         * `c1.medium`
+ *         * `c1.xlarge`
+ *         * `hi1.4xlarge`
+ *         * `hs1.8xlarge`
+ *         * `cc1.4xlarge`
+ *         * `cc2.8xlarge`
+ *         * `cg1.4xlarge`
+ *       * `Placement` &mdash; (`map`) Defines a placement item.
  *         * `AvailabilityZone` &mdash; (`String`) The availability zone
  *           in which an Amazon EC2 instance runs.
  *         * `GroupName` &mdash; (`String`) The name of the
@@ -4899,14 +5238,14 @@ AWS.EC2 = inherit({})
  *         launch. Check the kernel requirements for information on
  *         whether or not you need to specify a RAM disk and search for
  *         the kernel ID.
- *       * `BlockDeviceMappings` &mdash; (`Array<Object>`) Specifies how
+ *       * `BlockDeviceMappings` &mdash; (`Array<map>`) Specifies how
  *         block devices are exposed to the instance. Each mapping is
  *         made up of a virtualName and a deviceName.
  *         * `VirtualName` &mdash; (`String`) Specifies the virtual
  *           device name.
  *         * `DeviceName` &mdash; (`String`) Specifies the device name
  *           (e.g., /dev/sdh).
- *         * `Ebs` &mdash; (`Object`) Specifies parameters used to
+ *         * `Ebs` &mdash; (`map`) Specifies parameters used to
  *           automatically setup Amazon EBS volumes when the instance is
  *           launched.
  *           * `SnapshotId` &mdash; (`String`) The ID of the snapshot
@@ -4917,6 +5256,9 @@ AWS.EC2 = inherit({})
  *             whether the Amazon EBS volume is deleted on instance
  *             termination.
  *           * `VolumeType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `standard`
+ *             * `io1`
  *           * `Iops` &mdash; (`Integer`)
  *         * `NoDevice` &mdash; (`String`) Specifies the device name to
  *           suppress during instance launch.
@@ -4925,7 +5267,7 @@ AWS.EC2 = inherit({})
  *       * `SubnetId` &mdash; (`String`) Specifies the Amazon VPC subnet
  *         ID within which to launch the instance(s) for Amazon Virtual
  *         Private Cloud.
- *       * `NetworkInterfaces` &mdash; (`Array<Object>`)
+ *       * `NetworkInterfaces` &mdash; (`Array<map>`)
  *         * `NetworkInterfaceId` &mdash; (`String`)
  *         * `DeviceIndex` &mdash; (`Integer`)
  *         * `SubnetId` &mdash; (`String`)
@@ -4933,11 +5275,11 @@ AWS.EC2 = inherit({})
  *         * `PrivateIpAddress` &mdash; (`String`)
  *         * `Groups` &mdash; (`Array<String>`)
  *         * `DeleteOnTermination` &mdash; (`Boolean`)
- *         * `PrivateIpAddresses` &mdash; (`Array<Object>`)
+ *         * `PrivateIpAddresses` &mdash; (`Array<map>`)
  *           * `PrivateIpAddress` &mdash; **required** &mdash; (`String`)
  *           * `Primary` &mdash; (`Boolean`)
  *         * `SecondaryPrivateIpAddressCount` &mdash; (`Integer`)
- *       * `IamInstanceProfile` &mdash; (`Object`)
+ *       * `IamInstanceProfile` &mdash; (`map`)
  *         * `Arn` &mdash; (`String`)
  *         * `Name` &mdash; (`String`)
  *       * `EbsOptimized` &mdash; (`Boolean`)
@@ -4953,16 +5295,19 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `SpotInstanceRequests` &mdash; (`Array<Object>`) Contains a list
- *         of Spot Instance requests.
+ *       * `SpotInstanceRequests` &mdash; (`Array<map>`) Contains a list of
+ *         Spot Instance requests.
  *         * `SpotInstanceRequestId` &mdash; (`String`)
  *         * `SpotPrice` &mdash; (`String`)
  *         * `Type` &mdash; (`String`)
+ *           Possible values include:
+ *           * `one-time`
+ *           * `persistent`
  *         * `State` &mdash; (`String`)
- *         * `Fault` &mdash; (`Object`)
+ *         * `Fault` &mdash; (`map`)
  *           * `Code` &mdash; (`String`)
  *           * `Message` &mdash; (`String`)
- *         * `Status` &mdash; (`Object`)
+ *         * `Status` &mdash; (`map`)
  *           * `Code` &mdash; (`String`)
  *           * `UpdateTime` &mdash; (`Date`)
  *           * `Message` &mdash; (`String`)
@@ -4970,10 +5315,10 @@ AWS.EC2 = inherit({})
  *         * `ValidUntil` &mdash; (`Date`)
  *         * `LaunchGroup` &mdash; (`String`)
  *         * `AvailabilityZoneGroup` &mdash; (`String`)
- *         * `LaunchSpecification` &mdash; (`Object`)
+ *         * `LaunchSpecification` &mdash; (`map`)
  *           * `ImageId` &mdash; (`String`) The AMI ID.
  *           * `KeyName` &mdash; (`String`) The name of the key pair.
- *           * `SecurityGroups` &mdash; (`Array<Object>`)
+ *           * `SecurityGroups` &mdash; (`Array<map>`)
  *             * `GroupName` &mdash; (`String`)
  *             * `GroupId` &mdash; (`String`)
  *           * `UserData` &mdash; (`String`) Optional data, specific to a
@@ -4984,7 +5329,25 @@ AWS.EC2 = inherit({})
  *           * `AddressingType` &mdash; (`String`) Deprecated.
  *           * `InstanceType` &mdash; (`String`) Specifies the instance
  *             type.
- *           * `Placement` &mdash; (`Object`) Defines a placement item.
+ *             Possible values include:
+ *             * `t1.micro`
+ *             * `m1.small`
+ *             * `m1.medium`
+ *             * `m1.large`
+ *             * `m1.xlarge`
+ *             * `m2.xlarge`
+ *             * `m2.2xlarge`
+ *             * `m2.4xlarge`
+ *             * `m3.xlarge`
+ *             * `m3.2xlarge`
+ *             * `c1.medium`
+ *             * `c1.xlarge`
+ *             * `hi1.4xlarge`
+ *             * `hs1.8xlarge`
+ *             * `cc1.4xlarge`
+ *             * `cc2.8xlarge`
+ *             * `cg1.4xlarge`
+ *           * `Placement` &mdash; (`map`) Defines a placement item.
  *             * `AvailabilityZone` &mdash; (`String`) The availability
  *               zone in which an Amazon EC2 instance runs.
  *             * `GroupName` &mdash; (`String`) The name of the
@@ -4999,14 +5362,14 @@ AWS.EC2 = inherit({})
  *             launch. Check the kernel requirements for information on
  *             whether or not you need to specify a RAM disk and search for
  *             the kernel ID.
- *           * `BlockDeviceMappings` &mdash; (`Array<Object>`) Specifies
- *             how block devices are exposed to the instance. Each mapping
- *             is made up of a virtualName and a deviceName.
+ *           * `BlockDeviceMappings` &mdash; (`Array<map>`) Specifies how
+ *             block devices are exposed to the instance. Each mapping is
+ *             made up of a virtualName and a deviceName.
  *             * `VirtualName` &mdash; (`String`) Specifies the virtual
  *               device name.
  *             * `DeviceName` &mdash; (`String`) Specifies the device name
  *               (e.g., /dev/sdh).
- *             * `Ebs` &mdash; (`Object`) Specifies parameters used to
+ *             * `Ebs` &mdash; (`map`) Specifies parameters used to
  *               automatically setup Amazon EBS volumes when the instance
  *               is launched.
  *               * `SnapshotId` &mdash; (`String`) The ID of the snapshot
@@ -5017,6 +5380,9 @@ AWS.EC2 = inherit({})
  *                 whether the Amazon EBS volume is deleted on instance
  *                 termination.
  *               * `VolumeType` &mdash; (`String`)
+ *                 Possible values include:
+ *                 * `standard`
+ *                 * `io1`
  *               * `Iops` &mdash; (`Integer`)
  *             * `NoDevice` &mdash; (`String`) Specifies the device name to
  *               suppress during instance launch.
@@ -5025,7 +5391,7 @@ AWS.EC2 = inherit({})
  *           * `SubnetId` &mdash; (`String`) Specifies the Amazon VPC
  *             subnet ID within which to launch the instance(s) for Amazon
  *             Virtual Private Cloud.
- *           * `NetworkInterfaces` &mdash; (`Array<Object>`)
+ *           * `NetworkInterfaces` &mdash; (`Array<map>`)
  *             * `NetworkInterfaceId` &mdash; (`String`)
  *             * `DeviceIndex` &mdash; (`Integer`)
  *             * `SubnetId` &mdash; (`String`)
@@ -5033,18 +5399,18 @@ AWS.EC2 = inherit({})
  *             * `PrivateIpAddress` &mdash; (`String`)
  *             * `Groups` &mdash; (`Array<String>`)
  *             * `DeleteOnTermination` &mdash; (`Boolean`)
- *             * `PrivateIpAddresses` &mdash; (`Array<Object>`)
+ *             * `PrivateIpAddresses` &mdash; (`Array<map>`)
  *               * `PrivateIpAddress` &mdash; (`String`)
  *               * `Primary` &mdash; (`Boolean`)
  *             * `SecondaryPrivateIpAddressCount` &mdash; (`Integer`)
- *           * `IamInstanceProfile` &mdash; (`Object`)
+ *           * `IamInstanceProfile` &mdash; (`map`)
  *             * `Arn` &mdash; (`String`)
  *             * `Name` &mdash; (`String`)
  *           * `EbsOptimized` &mdash; (`Boolean`)
  *         * `InstanceId` &mdash; (`String`)
  *         * `CreateTime` &mdash; (`Date`)
  *         * `ProductDescription` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for this spot
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for this spot
  *           instance request.
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
@@ -5080,6 +5446,19 @@ AWS.EC2 = inherit({})
  *     * `Attribute` &mdash; **required** &mdash; (`String`) The name of
  *       the attribute being reset. Available attribute names: kernel,
  *       ramdisk
+ *       Possible values include:
+ *       * `instanceType`
+ *       * `kernel`
+ *       * `ramdisk`
+ *       * `userData`
+ *       * `disableApiTermination`
+ *       * `instanceInitiatedShutdownBehavior`
+ *       * `rootDeviceName`
+ *       * `blockDeviceMapping`
+ *       * `productCodes`
+ *       * `sourceDestCheck`
+ *       * `groupSet`
+ *       * `ebsOptimized`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -5115,6 +5494,9 @@ AWS.EC2 = inherit({})
  *     * `Attribute` &mdash; **required** &mdash; (`String`) The name of
  *       the attribute being reset. Available attribute names:
  *       createVolumePermission
+ *       Possible values include:
+ *       * `productCodes`
+ *       * `createVolumePermission`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -5137,8 +5519,8 @@ AWS.EC2 = inherit({})
  *     * `FromPort` &mdash; (`Integer`) Deprecated.
  *     * `ToPort` &mdash; (`Integer`) Deprecated.
  *     * `CidrIp` &mdash; (`String`) Deprecated.
- *     * `IpPermissions` &mdash; (`Array<Object>`) List of IP permissions
- *       to authorize on the specified security group. Specifying
+ *     * `IpPermissions` &mdash; (`Array<map>`) List of IP permissions to
+ *       authorize on the specified security group. Specifying
  *       permissions through IP permissions is the preferred way of
  *       authorizing permissions since it offers more flexibility and
  *       control.
@@ -5150,8 +5532,8 @@ AWS.EC2 = inherit({})
  *       * `ToPort` &mdash; (`Integer`) End of port range for the TCP and
  *         UDP protocols, or an ICMP code. An ICMP code of -1 indicates a
  *         wildcard (i.e., any ICMP code).
- *       * `UserIdGroupPairs` &mdash; (`Array<Object>`) The list of AWS
- *         user IDs and groups included in this permission.
+ *       * `UserIdGroupPairs` &mdash; (`Array<map>`) The list of AWS user
+ *         IDs and groups included in this permission.
  *         * `UserId` &mdash; (`String`) The AWS user ID of an account.
  *         * `GroupName` &mdash; (`String`) Name of the security group in
  *           the specified AWS account. Cannot be used when specifying a
@@ -5159,8 +5541,8 @@ AWS.EC2 = inherit({})
  *         * `GroupId` &mdash; (`String`) ID of the security group in the
  *           specified AWS account. Cannot be used when specifying a CIDR
  *           IP address range.
- *       * `IpRanges` &mdash; (`Array<Object>`) The list of CIDR IP
- *         ranges included in this permission.
+ *       * `IpRanges` &mdash; (`Array<map>`) The list of CIDR IP ranges
+ *         included in this permission.
  *         * `CidrIp` &mdash; (`String`) The list of CIDR IP ranges.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -5190,10 +5572,10 @@ AWS.EC2 = inherit({})
  *     * `FromPort` &mdash; (`Integer`) Deprecated
  *     * `ToPort` &mdash; (`Integer`) Deprecated
  *     * `CidrIp` &mdash; (`String`) Deprecated
- *     * `IpPermissions` &mdash; (`Array<Object>`) List of IP permissions
- *       to revoke on the specified security group. For an IP permission
- *       to be removed, it must exactly match one of the IP permissions
- *       you specify in this list. Specifying permissions through IP
+ *     * `IpPermissions` &mdash; (`Array<map>`) List of IP permissions to
+ *       revoke on the specified security group. For an IP permission to
+ *       be removed, it must exactly match one of the IP permissions you
+ *       specify in this list. Specifying permissions through IP
  *       permissions is the preferred way of revoking permissions since
  *       it offers more flexibility and control.
  *       * `IpProtocol` &mdash; (`String`) The IP protocol of this
@@ -5204,8 +5586,8 @@ AWS.EC2 = inherit({})
  *       * `ToPort` &mdash; (`Integer`) End of port range for the TCP and
  *         UDP protocols, or an ICMP code. An ICMP code of -1 indicates a
  *         wildcard (i.e., any ICMP code).
- *       * `UserIdGroupPairs` &mdash; (`Array<Object>`) The list of AWS
- *         user IDs and groups included in this permission.
+ *       * `UserIdGroupPairs` &mdash; (`Array<map>`) The list of AWS user
+ *         IDs and groups included in this permission.
  *         * `UserId` &mdash; (`String`) The AWS user ID of an account.
  *         * `GroupName` &mdash; (`String`) Name of the security group in
  *           the specified AWS account. Cannot be used when specifying a
@@ -5213,8 +5595,8 @@ AWS.EC2 = inherit({})
  *         * `GroupId` &mdash; (`String`) ID of the security group in the
  *           specified AWS account. Cannot be used when specifying a CIDR
  *           IP address range.
- *       * `IpRanges` &mdash; (`Array<Object>`) The list of CIDR IP
- *         ranges included in this permission.
+ *       * `IpRanges` &mdash; (`Array<map>`) The list of CIDR IP ranges
+ *         included in this permission.
  *         * `CidrIp` &mdash; (`String`) The list of CIDR IP ranges.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -5248,8 +5630,26 @@ AWS.EC2 = inherit({})
  *       to make available to the instance(s).
  *     * `InstanceType` &mdash; (`String`) Specifies the instance type
  *       for the launched instances.
- *     * `Placement` &mdash; (`Object`) Specifies the placement
- *       constraints (Availability Zones) for launching the instances.
+ *       Possible values include:
+ *       * `t1.micro`
+ *       * `m1.small`
+ *       * `m1.medium`
+ *       * `m1.large`
+ *       * `m1.xlarge`
+ *       * `m2.xlarge`
+ *       * `m2.2xlarge`
+ *       * `m2.4xlarge`
+ *       * `m3.xlarge`
+ *       * `m3.2xlarge`
+ *       * `c1.medium`
+ *       * `c1.xlarge`
+ *       * `hi1.4xlarge`
+ *       * `hs1.8xlarge`
+ *       * `cc1.4xlarge`
+ *       * `cc2.8xlarge`
+ *       * `cg1.4xlarge`
+ *     * `Placement` &mdash; (`map`) Specifies the placement constraints
+ *       (Availability Zones) for launching the instances.
  *       * `AvailabilityZone` &mdash; (`String`) The availability zone in
  *         which an Amazon EC2 instance runs.
  *       * `GroupName` &mdash; (`String`) The name of the PlacementGroup
@@ -5270,14 +5670,14 @@ AWS.EC2 = inherit({})
  *       whether you need to specify a RAM disk. To find kernel
  *       requirements, go to the Resource Center and search for the
  *       kernel ID.
- *     * `BlockDeviceMappings` &mdash; (`Array<Object>`) Specifies how
- *       block devices are exposed to the instance. Each mapping is made
- *       up of a virtualName and a deviceName.
+ *     * `BlockDeviceMappings` &mdash; (`Array<map>`) Specifies how block
+ *       devices are exposed to the instance. Each mapping is made up of
+ *       a virtualName and a deviceName.
  *       * `VirtualName` &mdash; (`String`) Specifies the virtual device
  *         name.
  *       * `DeviceName` &mdash; (`String`) Specifies the device name
  *         (e.g., /dev/sdh).
- *       * `Ebs` &mdash; (`Object`) Specifies parameters used to
+ *       * `Ebs` &mdash; (`map`) Specifies parameters used to
  *         automatically setup Amazon EBS volumes when the instance is
  *         launched.
  *         * `SnapshotId` &mdash; (`String`) The ID of the snapshot from
@@ -5287,10 +5687,13 @@ AWS.EC2 = inherit({})
  *         * `DeleteOnTermination` &mdash; (`Boolean`) Specifies whether
  *           the Amazon EBS volume is deleted on instance termination.
  *         * `VolumeType` &mdash; (`String`)
+ *           Possible values include:
+ *           * `standard`
+ *           * `io1`
  *         * `Iops` &mdash; (`Integer`)
  *       * `NoDevice` &mdash; (`String`) Specifies the device name to
  *         suppress during instance launch.
- *     * `Monitoring` &mdash; (`Object`) Enables monitoring for the
+ *     * `Monitoring` &mdash; (`map`) Enables monitoring for the
  *       instance.
  *       * `Enabled` &mdash; **required** &mdash; (`Boolean`)
  *     * `SubnetId` &mdash; (`String`) Specifies the subnet ID within
@@ -5303,8 +5706,8 @@ AWS.EC2 = inherit({})
  *     * `InstanceInitiatedShutdownBehavior` &mdash; (`String`) Specifies
  *       whether the instance's Amazon EBS volumes are stopped or
  *       terminated when the instance is shut down.
- *     * `License` &mdash; (`Object`) Specifies active licenses in use
- *       and attached to an Amazon EC2 instance.
+ *     * `License` &mdash; (`map`) Specifies active licenses in use and
+ *       attached to an Amazon EC2 instance.
  *       * `Pool` &mdash; (`String`) The license pool from which to take
  *         a license when starting Amazon EC2 instances in the associated
  *         RunInstances request.
@@ -5317,7 +5720,7 @@ AWS.EC2 = inherit({})
  *       more information, go to How to Ensure Idempotency in the Amazon
  *       Elastic Compute Cloud User Guide.
  *     * `AdditionalInfo` &mdash; (`String`)
- *     * `NetworkInterfaces` &mdash; (`Array<Object>`)
+ *     * `NetworkInterfaces` &mdash; (`Array<map>`)
  *       * `NetworkInterfaceId` &mdash; (`String`)
  *       * `DeviceIndex` &mdash; (`Integer`)
  *       * `SubnetId` &mdash; (`String`)
@@ -5325,11 +5728,11 @@ AWS.EC2 = inherit({})
  *       * `PrivateIpAddress` &mdash; (`String`)
  *       * `Groups` &mdash; (`Array<String>`)
  *       * `DeleteOnTermination` &mdash; (`Boolean`)
- *       * `PrivateIpAddresses` &mdash; (`Array<Object>`)
+ *       * `PrivateIpAddresses` &mdash; (`Array<map>`)
  *         * `PrivateIpAddress` &mdash; **required** &mdash; (`String`)
  *         * `Primary` &mdash; (`Boolean`)
  *       * `SecondaryPrivateIpAddressCount` &mdash; (`Integer`)
- *     * `IamInstanceProfile` &mdash; (`Object`)
+ *     * `IamInstanceProfile` &mdash; (`map`)
  *       * `Arn` &mdash; (`String`)
  *       * `Name` &mdash; (`String`)
  *     * `EbsOptimized` &mdash; (`Boolean`)
@@ -5349,21 +5752,28 @@ AWS.EC2 = inherit({})
  *         who owns the reservation.
  *       * `RequesterId` &mdash; (`String`) The unique ID of the user who
  *         requested the instances in this reservation.
- *       * `Groups` &mdash; (`Array<Object>`) The list of security groups
+ *       * `Groups` &mdash; (`Array<map>`) The list of security groups
  *         requested for the instances in this reservation.
  *         * `GroupName` &mdash; (`String`)
  *         * `GroupId` &mdash; (`String`)
- *       * `Instances` &mdash; (`Array<Object>`) The list of Amazon EC2
+ *       * `Instances` &mdash; (`Array<map>`) The list of Amazon EC2
  *         instances included in this reservation.
  *         * `InstanceId` &mdash; (`String`) Unique ID of the instance
  *           launched.
  *         * `ImageId` &mdash; (`String`) Image ID of the AMI used to
  *           launch the instance.
- *         * `State` &mdash; (`Object`) The current state of the instance.
+ *         * `State` &mdash; (`map`) The current state of the instance.
  *           * `Code` &mdash; (`Integer`) A 16-bit unsigned integer. The
  *             high byte is an opaque internal value and should be ignored.
  *             The low byte is set based on the state represented.
  *           * `Name` &mdash; (`String`) The current state of the instance.
+ *             Possible values include:
+ *             * `pending`
+ *             * `running`
+ *             * `shutting-down`
+ *             * `terminated`
+ *             * `stopping`
+ *             * `stopped`
  *         * `PrivateDnsName` &mdash; (`String`) The private DNS name
  *           assigned to the instance. This DNS name can only be used
  *           inside the Amazon EC2 network. This element remains empty
@@ -5379,17 +5789,35 @@ AWS.EC2 = inherit({})
  *         * `AmiLaunchIndex` &mdash; (`Integer`) The AMI launch index,
  *           which can be used to find this instance within the launch
  *           group.
- *         * `ProductCodes` &mdash; (`Array<Object>`) Product codes
- *           attached to this instance.
+ *         * `ProductCodes` &mdash; (`Array<map>`) Product codes attached
+ *           to this instance.
  *           * `ProductCodeId` &mdash; (`String`) The unique ID of an AWS
  *             DevPay product code.
  *           * `ProductCodeType` &mdash; (`String`)
  *         * `InstanceType` &mdash; (`String`) The instance type. For more
  *           information on instance types, please see the Amazon Elastic
  *           Compute Cloud Developer Guide.
+ *           Possible values include:
+ *           * `t1.micro`
+ *           * `m1.small`
+ *           * `m1.medium`
+ *           * `m1.large`
+ *           * `m1.xlarge`
+ *           * `m2.xlarge`
+ *           * `m2.2xlarge`
+ *           * `m2.4xlarge`
+ *           * `m3.xlarge`
+ *           * `m3.2xlarge`
+ *           * `c1.medium`
+ *           * `c1.xlarge`
+ *           * `hi1.4xlarge`
+ *           * `hs1.8xlarge`
+ *           * `cc1.4xlarge`
+ *           * `cc2.8xlarge`
+ *           * `cg1.4xlarge`
  *         * `LaunchTime` &mdash; (`Date`) The time this instance launched.
- *         * `Placement` &mdash; (`Object`) The location where this
- *           instance launched.
+ *         * `Placement` &mdash; (`map`) The location where this instance
+ *           launched.
  *           * `AvailabilityZone` &mdash; (`String`) The availability zone
  *             in which an Amazon EC2 instance runs.
  *           * `GroupName` &mdash; (`String`) The name of the
@@ -5409,7 +5837,7 @@ AWS.EC2 = inherit({})
  *           instance.
  *         * `Platform` &mdash; (`String`) Platform of the instance (e.g.,
  *           Windows).
- *         * `Monitoring` &mdash; (`Object`) Monitoring status for this
+ *         * `Monitoring` &mdash; (`map`) Monitoring status for this
  *           instance.
  *           * `State` &mdash; (`String`) The state of monitoring on an
  *             Amazon EC2 instance (ex: enabled, disabled).
@@ -5421,8 +5849,7 @@ AWS.EC2 = inherit({})
  *           address that is assigned to the instance (Amazon VPC).
  *         * `PublicIpAddress` &mdash; (`String`) Specifies the IP address
  *           of the instance.
- *         * `StateReason` &mdash; (`Object`) The reason for the state
- *           change.
+ *         * `StateReason` &mdash; (`map`) The reason for the state change.
  *           * `Code` &mdash; (`String`) Reason code for the state change.
  *           * `Message` &mdash; (`String`) Descriptive message for the
  *             state change.
@@ -5433,13 +5860,13 @@ AWS.EC2 = inherit({})
  *           root device.
  *         * `RootDeviceName` &mdash; (`String`) The root device name
  *           (e.g., /dev/sda1).
- *         * `BlockDeviceMappings` &mdash; (`Array<Object>`) Block device
+ *         * `BlockDeviceMappings` &mdash; (`Array<map>`) Block device
  *           mapping set.
  *           * `DeviceName` &mdash; (`String`) The device name (e.g.,
  *             /dev/sdh) at which the block device is exposed on the
  *             instance.
- *           * `Ebs` &mdash; (`Object`) The optional EBS device mapped to
- *             the specified device name.
+ *           * `Ebs` &mdash; (`map`) The optional EBS device mapped to the
+ *             specified device name.
  *             * `VolumeId` &mdash; (`String`) The ID of the EBS volume.
  *             * `Status` &mdash; (`String`) The status of the EBS volume.
  *             * `AttachTime` &mdash; (`Date`) The time at which the EBS
@@ -5448,22 +5875,27 @@ AWS.EC2 = inherit({})
  *               whether the Amazon EBS volume is deleted on instance
  *               termination.
  *         * `VirtualizationType` &mdash; (`String`)
+ *           Possible values include:
+ *           * `hvm`
+ *           * `paravirtual`
  *         * `InstanceLifecycle` &mdash; (`String`)
  *         * `SpotInstanceRequestId` &mdash; (`String`)
- *         * `License` &mdash; (`Object`)
+ *         * `License` &mdash; (`map`)
  *           * `Pool` &mdash; (`String`) The license pool from which this
  *             license was used (ex: 'windows').
  *         * `ClientToken` &mdash; (`String`)
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the
- *           Instance.
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the Instance.
  *           * `Key` &mdash; (`String`) The tag's key.
  *           * `Value` &mdash; (`String`) The tag's value.
- *         * `SecurityGroups` &mdash; (`Array<Object>`)
+ *         * `SecurityGroups` &mdash; (`Array<map>`)
  *           * `GroupName` &mdash; (`String`)
  *           * `GroupId` &mdash; (`String`)
  *         * `SourceDestCheck` &mdash; (`Boolean`)
  *         * `Hypervisor` &mdash; (`String`)
- *         * `NetworkInterfaces` &mdash; (`Array<Object>`)
+ *           Possible values include:
+ *           * `ovm`
+ *           * `xen`
+ *         * `NetworkInterfaces` &mdash; (`Array<map>`)
  *           * `NetworkInterfaceId` &mdash; (`String`)
  *           * `SubnetId` &mdash; (`String`)
  *           * `VpcId` &mdash; (`String`)
@@ -5473,28 +5905,28 @@ AWS.EC2 = inherit({})
  *           * `PrivateIpAddress` &mdash; (`String`)
  *           * `PrivateDnsName` &mdash; (`String`)
  *           * `SourceDestCheck` &mdash; (`Boolean`)
- *           * `Groups` &mdash; (`Array<Object>`)
+ *           * `Groups` &mdash; (`Array<map>`)
  *             * `GroupName` &mdash; (`String`)
  *             * `GroupId` &mdash; (`String`)
- *           * `Attachment` &mdash; (`Object`)
+ *           * `Attachment` &mdash; (`map`)
  *             * `AttachmentId` &mdash; (`String`)
  *             * `DeviceIndex` &mdash; (`Integer`)
  *             * `Status` &mdash; (`String`)
  *             * `AttachTime` &mdash; (`Date`)
  *             * `DeleteOnTermination` &mdash; (`Boolean`)
- *           * `Association` &mdash; (`Object`)
+ *           * `Association` &mdash; (`map`)
  *             * `PublicIp` &mdash; (`String`)
  *             * `PublicDnsName` &mdash; (`String`)
  *             * `IpOwnerId` &mdash; (`String`)
- *           * `PrivateIpAddresses` &mdash; (`Array<Object>`)
+ *           * `PrivateIpAddresses` &mdash; (`Array<map>`)
  *             * `PrivateIpAddress` &mdash; (`String`)
  *             * `PrivateDnsName` &mdash; (`String`)
  *             * `Primary` &mdash; (`Boolean`)
- *             * `Association` &mdash; (`Object`)
+ *             * `Association` &mdash; (`map`)
  *               * `PublicIp` &mdash; (`String`)
  *               * `PublicDnsName` &mdash; (`String`)
  *               * `IpOwnerId` &mdash; (`String`)
- *         * `IamInstanceProfile` &mdash; (`Object`)
+ *         * `IamInstanceProfile` &mdash; (`map`)
  *           * `Arn` &mdash; (`String`)
  *           * `Id` &mdash; (`String`)
  *         * `EbsOptimized` &mdash; (`Boolean`)
@@ -5517,22 +5949,36 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `StartingInstances` &mdash; (`Array<Object>`) The list of the
+ *       * `StartingInstances` &mdash; (`Array<map>`) The list of the
  *         starting instances and details on how their state has changed.
  *         * `InstanceId` &mdash; (`String`) The ID of the instance whose
  *           state changed.
- *         * `CurrentState` &mdash; (`Object`) The current state of the
+ *         * `CurrentState` &mdash; (`map`) The current state of the
  *           specified instance.
  *           * `Code` &mdash; (`Integer`) A 16-bit unsigned integer. The
  *             high byte is an opaque internal value and should be ignored.
  *             The low byte is set based on the state represented.
  *           * `Name` &mdash; (`String`) The current state of the instance.
- *         * `PreviousState` &mdash; (`Object`) The previous state of the
+ *             Possible values include:
+ *             * `pending`
+ *             * `running`
+ *             * `shutting-down`
+ *             * `terminated`
+ *             * `stopping`
+ *             * `stopped`
+ *         * `PreviousState` &mdash; (`map`) The previous state of the
  *           specified instance.
  *           * `Code` &mdash; (`Integer`) A 16-bit unsigned integer. The
  *             high byte is an opaque internal value and should be ignored.
  *             The low byte is set based on the state represented.
  *           * `Name` &mdash; (`String`) The current state of the instance.
+ *             Possible values include:
+ *             * `pending`
+ *             * `running`
+ *             * `shutting-down`
+ *             * `terminated`
+ *             * `stopping`
+ *             * `stopped`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -5556,22 +6002,36 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `StoppingInstances` &mdash; (`Array<Object>`) The list of the
+ *       * `StoppingInstances` &mdash; (`Array<map>`) The list of the
  *         stopping instances and details on how their state has changed.
  *         * `InstanceId` &mdash; (`String`) The ID of the instance whose
  *           state changed.
- *         * `CurrentState` &mdash; (`Object`) The current state of the
+ *         * `CurrentState` &mdash; (`map`) The current state of the
  *           specified instance.
  *           * `Code` &mdash; (`Integer`) A 16-bit unsigned integer. The
  *             high byte is an opaque internal value and should be ignored.
  *             The low byte is set based on the state represented.
  *           * `Name` &mdash; (`String`) The current state of the instance.
- *         * `PreviousState` &mdash; (`Object`) The previous state of the
+ *             Possible values include:
+ *             * `pending`
+ *             * `running`
+ *             * `shutting-down`
+ *             * `terminated`
+ *             * `stopping`
+ *             * `stopped`
+ *         * `PreviousState` &mdash; (`map`) The previous state of the
  *           specified instance.
  *           * `Code` &mdash; (`Integer`) A 16-bit unsigned integer. The
  *             high byte is an opaque internal value and should be ignored.
  *             The low byte is set based on the state represented.
  *           * `Name` &mdash; (`String`) The current state of the instance.
+ *             Possible values include:
+ *             * `pending`
+ *             * `running`
+ *             * `shutting-down`
+ *             * `terminated`
+ *             * `stopping`
+ *             * `stopped`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -5590,23 +6050,37 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `TerminatingInstances` &mdash; (`Array<Object>`) The list of the
+ *       * `TerminatingInstances` &mdash; (`Array<map>`) The list of the
  *         terminating instances and details on how their state has
  *         changed.
  *         * `InstanceId` &mdash; (`String`) The ID of the instance whose
  *           state changed.
- *         * `CurrentState` &mdash; (`Object`) The current state of the
+ *         * `CurrentState` &mdash; (`map`) The current state of the
  *           specified instance.
  *           * `Code` &mdash; (`Integer`) A 16-bit unsigned integer. The
  *             high byte is an opaque internal value and should be ignored.
  *             The low byte is set based on the state represented.
  *           * `Name` &mdash; (`String`) The current state of the instance.
- *         * `PreviousState` &mdash; (`Object`) The previous state of the
+ *             Possible values include:
+ *             * `pending`
+ *             * `running`
+ *             * `shutting-down`
+ *             * `terminated`
+ *             * `stopping`
+ *             * `stopped`
+ *         * `PreviousState` &mdash; (`map`) The previous state of the
  *           specified instance.
  *           * `Code` &mdash; (`Integer`) A 16-bit unsigned integer. The
  *             high byte is an opaque internal value and should be ignored.
  *             The low byte is set based on the state represented.
  *           * `Name` &mdash; (`String`) The current state of the instance.
+ *             Possible values include:
+ *             * `pending`
+ *             * `running`
+ *             * `shutting-down`
+ *             * `terminated`
+ *             * `stopping`
+ *             * `stopped`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -5642,11 +6116,11 @@ AWS.EC2 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `InstanceMonitorings` &mdash; (`Array<Object>`) A list of
- *         updated monitoring information for the instances specified in
- *         the request.
+ *       * `InstanceMonitorings` &mdash; (`Array<map>`) A list of updated
+ *         monitoring information for the instances specified in the
+ *         request.
  *         * `InstanceId` &mdash; (`String`) Instance ID.
- *         * `Monitoring` &mdash; (`Object`) Monitoring state for the
+ *         * `Monitoring` &mdash; (`map`) Monitoring state for the
  *           associated instance.
  *           * `State` &mdash; (`String`) The state of monitoring on an
  *             Amazon EC2 instance (ex: enabled, disabled).

@@ -74,6 +74,9 @@ AWS.ImportExport = inherit({})
  *   Calls the CreateJob API operation.
  *   @param params [Object]
  *     * `JobType` &mdash; **required** &mdash; (`String`)
+ *       Possible values include:
+ *       * `Import`
+ *       * `Export`
  *     * `Manifest` &mdash; **required** &mdash; (`String`)
  *     * `ManifestAddendum` &mdash; (`String`)
  *     * `ValidateOnly` &mdash; **required** &mdash; (`Boolean`)
@@ -89,6 +92,9 @@ AWS.ImportExport = inherit({})
  *
  *       * `JobId` &mdash; (`String`)
  *       * `JobType` &mdash; (`String`)
+ *         Possible values include:
+ *         * `Import`
+ *         * `Export`
  *       * `AwsShippingAddress` &mdash; (`String`)
  *       * `Signature` &mdash; (`String`)
  *       * `SignatureFileContents` &mdash; (`String`)
@@ -112,6 +118,9 @@ AWS.ImportExport = inherit({})
  *
  *       * `JobId` &mdash; (`String`)
  *       * `JobType` &mdash; (`String`)
+ *         Possible values include:
+ *         * `Import`
+ *         * `Export`
  *       * `AwsShippingAddress` &mdash; (`String`)
  *       * `LocationCode` &mdash; (`String`)
  *       * `LocationMessage` &mdash; (`String`)
@@ -144,11 +153,14 @@ AWS.ImportExport = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Jobs` &mdash; (`Array<Object>`)
+ *       * `Jobs` &mdash; (`Array<map>`)
  *         * `JobId` &mdash; (`String`)
  *         * `CreationDate` &mdash; (`Date`)
  *         * `IsCanceled` &mdash; (`Boolean`)
  *         * `JobType` &mdash; (`String`)
+ *           Possible values include:
+ *           * `Import`
+ *           * `Export`
  *       * `IsTruncated` &mdash; (`Boolean`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -159,6 +171,9 @@ AWS.ImportExport = inherit({})
  *     * `JobId` &mdash; **required** &mdash; (`String`)
  *     * `Manifest` &mdash; **required** &mdash; (`String`)
  *     * `JobType` &mdash; **required** &mdash; (`String`)
+ *       Possible values include:
+ *       * `Import`
+ *       * `Export`
  *     * `ValidateOnly` &mdash; **required** &mdash; (`Boolean`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a

@@ -87,7 +87,7 @@ AWS.CloudFormation = inherit({})
  *       stack. For more information, go to the AWS CloudFormation User
  *       Guide. Conditional: You must pass TemplateURL or TemplateBody.
  *       If both are passed, only TemplateBody is used.
- *     * `Parameters` &mdash; (`Array<Object>`) A list of Parameter
+ *     * `Parameters` &mdash; (`Array<map>`) A list of Parameter
  *       structures that specify input parameters for the stack.
  *       * `ParameterKey` &mdash; (`String`) The key associated with the
  *         parameter.
@@ -117,7 +117,11 @@ AWS.CloudFormation = inherit({})
  *       taken if stack creation fails. This must be one of: DO_NOTHING,
  *       ROLLBACK, or DELETE. You can specify either OnFailure or
  *       DisableRollback, but not both. Default: ROLLBACK
- *     * `Tags` &mdash; (`Array<Object>`) A set of user-defined Tags to
+ *       Possible values include:
+ *       * `DO_NOTHING`
+ *       * `ROLLBACK`
+ *       * `DELETE`
+ *     * `Tags` &mdash; (`Array<map>`) A set of user-defined Tags to
  *       associate with this stack, represented by key/value pairs. Tags
  *       defined for the stack are propogated to EC2 resources that are
  *       created as part of the stack. A maximum number of 10 tags can be
@@ -177,7 +181,7 @@ AWS.CloudFormation = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `StackEvents` &mdash; (`Array<Object>`) A list of StackEvents
+ *       * `StackEvents` &mdash; (`Array<map>`) A list of StackEvents
  *         structures.
  *         * `StackId` &mdash; (`String`) The unique ID name of the
  *           instance of the stack.
@@ -194,6 +198,16 @@ AWS.CloudFormation = inherit({})
  *         * `Timestamp` &mdash; (`Date`) Time the status was updated.
  *         * `ResourceStatus` &mdash; (`String`) Current status of the
  *           resource.
+ *           Possible values include:
+ *           * `CREATE_IN_PROGRESS`
+ *           * `CREATE_FAILED`
+ *           * `CREATE_COMPLETE`
+ *           * `DELETE_IN_PROGRESS`
+ *           * `DELETE_FAILED`
+ *           * `DELETE_COMPLETE`
+ *           * `UPDATE_IN_PROGRESS`
+ *           * `UPDATE_FAILED`
+ *           * `UPDATE_COMPLETE`
  *         * `ResourceStatusReason` &mdash; (`String`) Success/failure
  *           message associated with the resource.
  *         * `ResourceProperties` &mdash; (`String`) BLOB of the properties
@@ -222,7 +236,7 @@ AWS.CloudFormation = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `StackResourceDetail` &mdash; (`Object`) A StackResourceDetail
+ *       * `StackResourceDetail` &mdash; (`map`) A StackResourceDetail
  *         structure containing the description of the specified resource
  *         in the specified stack.
  *         * `StackName` &mdash; (`String`) The name associated with the
@@ -239,6 +253,16 @@ AWS.CloudFormation = inherit({})
  *           updated.
  *         * `ResourceStatus` &mdash; (`String`) Current status of the
  *           resource.
+ *           Possible values include:
+ *           * `CREATE_IN_PROGRESS`
+ *           * `CREATE_FAILED`
+ *           * `CREATE_COMPLETE`
+ *           * `DELETE_IN_PROGRESS`
+ *           * `DELETE_FAILED`
+ *           * `DELETE_COMPLETE`
+ *           * `UPDATE_IN_PROGRESS`
+ *           * `UPDATE_FAILED`
+ *           * `UPDATE_COMPLETE`
  *         * `ResourceStatusReason` &mdash; (`String`) Success/failure
  *           message associated with the resource.
  *         * `Description` &mdash; (`String`) User defined description
@@ -279,8 +303,8 @@ AWS.CloudFormation = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `StackResources` &mdash; (`Array<Object>`) A list of
- *         StackResource structures.
+ *       * `StackResources` &mdash; (`Array<map>`) A list of StackResource
+ *         structures.
  *         * `StackName` &mdash; (`String`) The name associated with the
  *           stack.
  *         * `StackId` &mdash; (`String`) Unique identifier of the stack.
@@ -294,6 +318,16 @@ AWS.CloudFormation = inherit({})
  *         * `Timestamp` &mdash; (`Date`) Time the status was updated.
  *         * `ResourceStatus` &mdash; (`String`) Current status of the
  *           resource.
+ *           Possible values include:
+ *           * `CREATE_IN_PROGRESS`
+ *           * `CREATE_FAILED`
+ *           * `CREATE_COMPLETE`
+ *           * `DELETE_IN_PROGRESS`
+ *           * `DELETE_FAILED`
+ *           * `DELETE_COMPLETE`
+ *           * `UPDATE_IN_PROGRESS`
+ *           * `UPDATE_FAILED`
+ *           * `UPDATE_COMPLETE`
  *         * `ResourceStatusReason` &mdash; (`String`) Success/failure
  *           message associated with the resource.
  *         * `Description` &mdash; (`String`) User defined description
@@ -317,13 +351,13 @@ AWS.CloudFormation = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Stacks` &mdash; (`Array<Object>`) A list of stack structures.
+ *       * `Stacks` &mdash; (`Array<map>`) A list of stack structures.
  *         * `StackId` &mdash; (`String`) Unique identifier of the stack.
  *         * `StackName` &mdash; (`String`) The name associated with the
  *           stack.
  *         * `Description` &mdash; (`String`) User defined description
  *           associated with the stack.
- *         * `Parameters` &mdash; (`Array<Object>`) A list of Parameter
+ *         * `Parameters` &mdash; (`Array<map>`) A list of Parameter
  *           structures.
  *           * `ParameterKey` &mdash; (`String`) The key associated with
  *             the parameter.
@@ -335,6 +369,23 @@ AWS.CloudFormation = inherit({})
  *           updated. This field will only be returned if the stack has
  *           been updated at least once.
  *         * `StackStatus` &mdash; (`String`) Current status of the stack.
+ *           Possible values include:
+ *           * `CREATE_IN_PROGRESS`
+ *           * `CREATE_FAILED`
+ *           * `CREATE_COMPLETE`
+ *           * `ROLLBACK_IN_PROGRESS`
+ *           * `ROLLBACK_FAILED`
+ *           * `ROLLBACK_COMPLETE`
+ *           * `DELETE_IN_PROGRESS`
+ *           * `DELETE_FAILED`
+ *           * `DELETE_COMPLETE`
+ *           * `UPDATE_IN_PROGRESS`
+ *           * `UPDATE_COMPLETE_CLEANUP_IN_PROGRESS`
+ *           * `UPDATE_COMPLETE`
+ *           * `UPDATE_ROLLBACK_IN_PROGRESS`
+ *           * `UPDATE_ROLLBACK_FAILED`
+ *           * `UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS`
+ *           * `UPDATE_ROLLBACK_COMPLETE`
  *         * `StackStatusReason` &mdash; (`String`) Success/failure message
  *           associated with the stack status.
  *         * `DisableRollback` &mdash; (`Boolean`) Boolean to enable or
@@ -346,16 +397,15 @@ AWS.CloudFormation = inherit({})
  *           within which stack creation should complete.
  *         * `Capabilities` &mdash; (`Array<String>`) The capabilities
  *           allowed in the stack.
- *         * `Outputs` &mdash; (`Array<Object>`) A list of output
- *           structures.
+ *         * `Outputs` &mdash; (`Array<map>`) A list of output structures.
  *           * `OutputKey` &mdash; (`String`) The key associated with the
  *             output.
  *           * `OutputValue` &mdash; (`String`) The value associated with
  *             the output.
  *           * `Description` &mdash; (`String`) User defined description
  *             associated with the output.
- *         * `Tags` &mdash; (`Array<Object>`) A list of Tags that specify
- *           cost allocation information for the stack.
+ *         * `Tags` &mdash; (`Array<map>`) A list of Tags that specify cost
+ *           allocation information for the stack.
  *           * `Key` &mdash; (`String`) Required. A string used to identify
  *             this tag. You can specify a maximum of 128 characters for a
  *             tag key. Tags owned by Amazon Web Services (AWS) have the
@@ -381,7 +431,7 @@ AWS.CloudFormation = inherit({})
  *       to the AWS CloudFormation User Guide. Conditional: You must pass
  *       TemplateURL or TemplateBody. If both are passed, only
  *       TemplateBody is used.
- *     * `Parameters` &mdash; (`Array<Object>`) A list of Parameter
+ *     * `Parameters` &mdash; (`Array<map>`) A list of Parameter
  *       structures that specify input parameters.
  *       * `ParameterKey` &mdash; (`String`) The key associated with the
  *         parameter.
@@ -443,7 +493,7 @@ AWS.CloudFormation = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `StackResourceSummaries` &mdash; (`Array<Object>`) A list of
+ *       * `StackResourceSummaries` &mdash; (`Array<map>`) A list of
  *         StackResourceSummary structures.
  *         * `LogicalResourceId` &mdash; (`String`) The logical name of the
  *           resource specified in the template.
@@ -456,6 +506,16 @@ AWS.CloudFormation = inherit({})
  *           updated.
  *         * `ResourceStatus` &mdash; (`String`) Current status of the
  *           resource.
+ *           Possible values include:
+ *           * `CREATE_IN_PROGRESS`
+ *           * `CREATE_FAILED`
+ *           * `CREATE_COMPLETE`
+ *           * `DELETE_IN_PROGRESS`
+ *           * `DELETE_FAILED`
+ *           * `DELETE_COMPLETE`
+ *           * `UPDATE_IN_PROGRESS`
+ *           * `UPDATE_FAILED`
+ *           * `UPDATE_COMPLETE`
  *         * `ResourceStatusReason` &mdash; (`String`) Success/failure
  *           message associated with the resource.
  *       * `NextToken` &mdash; (`String`) String that identifies the start
@@ -484,9 +544,8 @@ AWS.CloudFormation = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `StackSummaries` &mdash; (`Array<Object>`) A list of
- *         StackSummary structures containing information about the
- *         specified stacks.
+ *       * `StackSummaries` &mdash; (`Array<map>`) A list of StackSummary
+ *         structures containing information about the specified stacks.
  *         * `StackId` &mdash; (`String`) Unique stack identifier.
  *         * `StackName` &mdash; (`String`) The name associated with the
  *           stack.
@@ -501,6 +560,23 @@ AWS.CloudFormation = inherit({})
  *           deleted.
  *         * `StackStatus` &mdash; (`String`) The current status of the
  *           stack.
+ *           Possible values include:
+ *           * `CREATE_IN_PROGRESS`
+ *           * `CREATE_FAILED`
+ *           * `CREATE_COMPLETE`
+ *           * `ROLLBACK_IN_PROGRESS`
+ *           * `ROLLBACK_FAILED`
+ *           * `ROLLBACK_COMPLETE`
+ *           * `DELETE_IN_PROGRESS`
+ *           * `DELETE_FAILED`
+ *           * `DELETE_COMPLETE`
+ *           * `UPDATE_IN_PROGRESS`
+ *           * `UPDATE_COMPLETE_CLEANUP_IN_PROGRESS`
+ *           * `UPDATE_COMPLETE`
+ *           * `UPDATE_ROLLBACK_IN_PROGRESS`
+ *           * `UPDATE_ROLLBACK_FAILED`
+ *           * `UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS`
+ *           * `UPDATE_ROLLBACK_COMPLETE`
  *         * `StackStatusReason` &mdash; (`String`) Success/Failure message
  *           associated with the stack status.
  *       * `NextToken` &mdash; (`String`) String that identifies the start
@@ -526,7 +602,7 @@ AWS.CloudFormation = inherit({})
  *       to the AWS CloudFormation User Guide. Conditional: You must pass
  *       TemplateURL or TemplateBody. If both are passed, only
  *       TemplateBody is used.
- *     * `Parameters` &mdash; (`Array<Object>`) A list of Parameter
+ *     * `Parameters` &mdash; (`Array<map>`) A list of Parameter
  *       structures that specify input parameters for the stack.
  *       * `ParameterKey` &mdash; (`String`) The key associated with the
  *         parameter.
@@ -576,8 +652,8 @@ AWS.CloudFormation = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Parameters` &mdash; (`Array<Object>`) A list of
- *         TemplateParameter structures.
+ *       * `Parameters` &mdash; (`Array<map>`) A list of TemplateParameter
+ *         structures.
  *         * `ParameterKey` &mdash; (`String`) The name associated with the
  *           parameter.
  *         * `DefaultValue` &mdash; (`String`) The default value associated

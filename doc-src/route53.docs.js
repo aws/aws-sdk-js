@@ -61,22 +61,36 @@ AWS.Route53 = inherit({})
  *       ways to get the hosted zone ID for the LoadBalancer, see
  *       Creating Alias Resource Record Sets for Elastic Load Balancing
  *       in the Amazon Route 53 Developer Guide.
- *     * `ChangeBatch` &mdash; **required** &mdash; (`Object`) A complex
+ *     * `ChangeBatch` &mdash; **required** &mdash; (`map`) A complex
  *       type that contains an optional comment and the Changes element.
  *       * `Comment` &mdash; (`String`) Optional: Any comments you want
  *         to include about a change batch request.
- *       * `Changes` &mdash; **required** &mdash; (`Array<Object>`) A
+ *       * `Changes` &mdash; **required** &mdash; (`Array<map>`) A
  *         complex type that contains one Change element for each
  *         resource record set that you want to create or delete.
  *         * `Action` &mdash; **required** &mdash; (`String`) The action
  *           to perform. Valid values: CREATE | DELETE
- *         * `ResourceRecordSet` &mdash; **required** &mdash; (`Object`)
+ *           Possible values include:
+ *           * `CREATE`
+ *           * `DELETE`
+ *         * `ResourceRecordSet` &mdash; **required** &mdash; (`map`)
  *           Information about the resource record set to create or
  *           delete.
  *           * `Name` &mdash; **required** &mdash; (`String`) The domain
  *             name of the current resource record set.
  *           * `Type` &mdash; **required** &mdash; (`String`) The type of
  *             the current resource record set.
+ *             Possible values include:
+ *             * `SOA`
+ *             * `A`
+ *             * `TXT`
+ *             * `NS`
+ *             * `CNAME`
+ *             * `MX`
+ *             * `PTR`
+ *             * `SRV`
+ *             * `SPF`
+ *             * `AAAA`
  *           * `SetIdentifier` &mdash; (`String`) Weighted, Regional, and
  *             Failover resource record sets only: An identifier that
  *             differentiates among multiple resource record sets that
@@ -90,6 +104,15 @@ AWS.Route53 = inherit({})
  *             only: Among resource record sets that have the same
  *             combination of DNS name and type, a value that specifies
  *             the AWS region for the current resource record set.
+ *             Possible values include:
+ *             * `us-east-1`
+ *             * `us-west-1`
+ *             * `us-west-2`
+ *             * `eu-west-1`
+ *             * `ap-southeast-1`
+ *             * `ap-southeast-2`
+ *             * `ap-northeast-1`
+ *             * `sa-east-1`
  *           * `Failover` &mdash; (`String`) Failover resource record
  *             sets only: Among resource record sets that have the same
  *             combination of DNS name and type, a value that indicates
@@ -109,17 +132,20 @@ AWS.Route53 = inherit({})
  *             passing a health check or has no associated health check,
  *             or (2) there is no primary resource record set. Valid
  *             values: PRIMARY | SECONDARY
+ *             Possible values include:
+ *             * `PRIMARY`
+ *             * `SECONDARY`
  *           * `TTL` &mdash; (`Integer`) The cache time to live for the
  *             current resource record set.
- *           * `ResourceRecords` &mdash; (`Array<Object>`) A complex type
+ *           * `ResourceRecords` &mdash; (`Array<map>`) A complex type
  *             that contains the resource records for the current
  *             resource record set.
  *             * `Value` &mdash; **required** &mdash; (`String`) The
  *               value of the Value element for the current resource
  *               record set.
- *           * `AliasTarget` &mdash; (`Object`) Alias resource record
- *             sets only: Information about the AWS resource to which you
- *             are redirecting traffic.
+ *           * `AliasTarget` &mdash; (`map`) Alias resource record sets
+ *             only: Information about the AWS resource to which you are
+ *             redirecting traffic.
  *             * `HostedZoneId` &mdash; **required** &mdash; (`String`)
  *               Alias resource record sets only: The value of the hosted
  *               zone ID for the AWS resource. For more information and
@@ -152,7 +178,7 @@ AWS.Route53 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ChangeInfo` &mdash; (`Object`) A complex type that contains
+ *       * `ChangeInfo` &mdash; (`map`) A complex type that contains
  *         information about changes made to your hosted zone. This element
  *         contains an ID that you use when performing a GetChange action
  *         to get detailed information about the change.
@@ -163,6 +189,9 @@ AWS.Route53 = inherit({})
  *           PENDING indicates that this request has not yet been applied
  *           to all Amazon Route 53 DNS servers. Valid Values: PENDING |
  *           INSYNC
+ *           Possible values include:
+ *           * `PENDING`
+ *           * `INSYNC`
  *         * `SubmittedAt` &mdash; (`Date`) The date and time the change
  *           was submitted, in the format YYYY-MM-DDThh:mm:ssZ, as
  *           specified in the ISO 8601 standard (for example,
@@ -188,7 +217,7 @@ AWS.Route53 = inherit({})
  *       use a string that identifies your project. Valid characters are
  *       any Unicode code points that are legal in an XML 1.0 document.
  *       The UTF-8 encoding of the value must be less than 128 bytes.
- *     * `HealthCheckConfig` &mdash; **required** &mdash; (`Object`) A
+ *     * `HealthCheckConfig` &mdash; **required** &mdash; (`map`) A
  *       complex type that contains health check configuration.
  *       * `IPAddress` &mdash; **required** &mdash; (`String`) IP Address
  *         of the instance being checked.
@@ -198,6 +227,9 @@ AWS.Route53 = inherit({})
  *       * `Type` &mdash; **required** &mdash; (`String`) The type of
  *         health check to be performed. Currently supported protocols
  *         are TCP and HTTP.
+ *         Possible values include:
+ *         * `HTTP`
+ *         * `TCP`
  *       * `ResourcePath` &mdash; (`String`) Path to ping on the instance
  *         to check the health. Required only for HTTP health checks,
  *         HTTP request is issued to the instance on the given port and
@@ -214,12 +246,12 @@ AWS.Route53 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `HealthCheck` &mdash; (`Object`) A complex type that contains
+ *       * `HealthCheck` &mdash; (`map`) A complex type that contains
  *         identifying information about the health check.
  *         * `Id` &mdash; (`String`) The ID of the specified health check.
  *         * `CallerReference` &mdash; (`String`) A unique string that
  *           identifies the request to create the health check.
- *         * `HealthCheckConfig` &mdash; (`Object`) A complex type that
+ *         * `HealthCheckConfig` &mdash; (`map`) A complex type that
  *           contains the health check configuration.
  *           * `IPAddress` &mdash; (`String`) IP Address of the instance
  *             being checked.
@@ -228,6 +260,9 @@ AWS.Route53 = inherit({})
  *             defaults to 80 if the port is not specified.
  *           * `Type` &mdash; (`String`) The type of health check to be
  *             performed. Currently supported protocols are TCP and HTTP.
+ *             Possible values include:
+ *             * `HTTP`
+ *             * `TCP`
  *           * `ResourcePath` &mdash; (`String`) Path to ping on the
  *             instance to check the health. Required only for HTTP health
  *             checks, HTTP request is issued to the instance on the given
@@ -262,8 +297,8 @@ AWS.Route53 = inherit({})
  *       DNSMigration_01. Valid characters are any Unicode code points
  *       that are legal in an XML 1.0 document. The UTF-8 encoding of the
  *       value must be less than 128 bytes.
- *     * `HostedZoneConfig` &mdash; (`Object`) A complex type that
- *       contains an optional comment about your hosted zone.
+ *     * `HostedZoneConfig` &mdash; (`map`) A complex type that contains
+ *       an optional comment about your hosted zone.
  *       * `Comment` &mdash; (`String`) An optional comment about your
  *         hosted zone. If you don't want to specify a comment, you can
  *         omit the HostedZoneConfig and Comment elements from the XML
@@ -278,7 +313,7 @@ AWS.Route53 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `HostedZone` &mdash; (`Object`) A complex type that contains
+ *       * `HostedZone` &mdash; (`map`) A complex type that contains
  *         identifying information about the hosted zone.
  *         * `Id` &mdash; (`String`) The ID of the specified hosted zone.
  *         * `Name` &mdash; (`String`) The name of the domain. This must be
@@ -293,7 +328,7 @@ AWS.Route53 = inherit({})
  *           DelegationSet.
  *         * `CallerReference` &mdash; (`String`) A unique string that
  *           identifies the request to create the hosted zone.
- *         * `Config` &mdash; (`Object`) A complex type that contains the
+ *         * `Config` &mdash; (`map`) A complex type that contains the
  *           Comment element.
  *           * `Comment` &mdash; (`String`) An optional comment about your
  *             hosted zone. If you don't want to specify a comment, you can
@@ -301,7 +336,7 @@ AWS.Route53 = inherit({})
  *             document.
  *         * `ResourceRecordSetCount` &mdash; (`Integer`) Total number of
  *           resource record sets in the hosted zone.
- *       * `ChangeInfo` &mdash; (`Object`) A complex type that contains
+ *       * `ChangeInfo` &mdash; (`map`) A complex type that contains
  *         information about the request to create a hosted zone. This
  *         includes an ID that you use when you call the GetChange action
  *         to get the current status of the change request.
@@ -312,6 +347,9 @@ AWS.Route53 = inherit({})
  *           PENDING indicates that this request has not yet been applied
  *           to all Amazon Route 53 DNS servers. Valid Values: PENDING |
  *           INSYNC
+ *           Possible values include:
+ *           * `PENDING`
+ *           * `INSYNC`
  *         * `SubmittedAt` &mdash; (`Date`) The date and time the change
  *           was submitted, in the format YYYY-MM-DDThh:mm:ssZ, as
  *           specified in the ISO 8601 standard (for example,
@@ -322,7 +360,7 @@ AWS.Route53 = inherit({})
  *           change information about changes made to your hosted zone.
  *           This element contains an ID that you use when performing a
  *           GetChange action to get detailed information about the change.
- *       * `DelegationSet` &mdash; (`Object`) A complex type that contains
+ *       * `DelegationSet` &mdash; (`map`) A complex type that contains
  *         name server information.
  *         * `NameServers` &mdash; (`Array<String>`) A complex type that
  *           contains the authoritative name servers for the hosted zone.
@@ -366,7 +404,7 @@ AWS.Route53 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ChangeInfo` &mdash; (`Object`) A complex type that contains the
+ *       * `ChangeInfo` &mdash; (`map`) A complex type that contains the
  *         ID, the status, and the date and time of your delete request.
  *         * `Id` &mdash; (`String`) The ID of the request. Use this ID to
  *           track when the change has completed across all Amazon Route 53
@@ -375,6 +413,9 @@ AWS.Route53 = inherit({})
  *           PENDING indicates that this request has not yet been applied
  *           to all Amazon Route 53 DNS servers. Valid Values: PENDING |
  *           INSYNC
+ *           Possible values include:
+ *           * `PENDING`
+ *           * `INSYNC`
  *         * `SubmittedAt` &mdash; (`Date`) The date and time the change
  *           was submitted, in the format YYYY-MM-DDThh:mm:ssZ, as
  *           specified in the ISO 8601 standard (for example,
@@ -405,7 +446,7 @@ AWS.Route53 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ChangeInfo` &mdash; (`Object`) A complex type that contains
+ *       * `ChangeInfo` &mdash; (`map`) A complex type that contains
  *         information about the specified change batch, including the
  *         change batch ID, the status of the change, and the date and time
  *         of the request.
@@ -416,6 +457,9 @@ AWS.Route53 = inherit({})
  *           PENDING indicates that this request has not yet been applied
  *           to all Amazon Route 53 DNS servers. Valid Values: PENDING |
  *           INSYNC
+ *           Possible values include:
+ *           * `PENDING`
+ *           * `INSYNC`
  *         * `SubmittedAt` &mdash; (`Date`) The date and time the change
  *           was submitted, in the format YYYY-MM-DDThh:mm:ssZ, as
  *           specified in the ISO 8601 standard (for example,
@@ -444,12 +488,12 @@ AWS.Route53 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `HealthCheck` &mdash; (`Object`) A complex type that contains
- *         the information about the specified health check.
+ *       * `HealthCheck` &mdash; (`map`) A complex type that contains the
+ *         information about the specified health check.
  *         * `Id` &mdash; (`String`) The ID of the specified health check.
  *         * `CallerReference` &mdash; (`String`) A unique string that
  *           identifies the request to create the health check.
- *         * `HealthCheckConfig` &mdash; (`Object`) A complex type that
+ *         * `HealthCheckConfig` &mdash; (`map`) A complex type that
  *           contains the health check configuration.
  *           * `IPAddress` &mdash; (`String`) IP Address of the instance
  *             being checked.
@@ -458,6 +502,9 @@ AWS.Route53 = inherit({})
  *             defaults to 80 if the port is not specified.
  *           * `Type` &mdash; (`String`) The type of health check to be
  *             performed. Currently supported protocols are TCP and HTTP.
+ *             Possible values include:
+ *             * `HTTP`
+ *             * `TCP`
  *           * `ResourcePath` &mdash; (`String`) Path to ping on the
  *             instance to check the health. Required only for HTTP health
  *             checks, HTTP request is issued to the instance on the given
@@ -483,7 +530,7 @@ AWS.Route53 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `HostedZone` &mdash; (`Object`) A complex type that contains the
+ *       * `HostedZone` &mdash; (`map`) A complex type that contains the
  *         information about the specified hosted zone.
  *         * `Id` &mdash; (`String`) The ID of the specified hosted zone.
  *         * `Name` &mdash; (`String`) The name of the domain. This must be
@@ -498,7 +545,7 @@ AWS.Route53 = inherit({})
  *           DelegationSet.
  *         * `CallerReference` &mdash; (`String`) A unique string that
  *           identifies the request to create the hosted zone.
- *         * `Config` &mdash; (`Object`) A complex type that contains the
+ *         * `Config` &mdash; (`map`) A complex type that contains the
  *           Comment element.
  *           * `Comment` &mdash; (`String`) An optional comment about your
  *             hosted zone. If you don't want to specify a comment, you can
@@ -506,7 +553,7 @@ AWS.Route53 = inherit({})
  *             document.
  *         * `ResourceRecordSetCount` &mdash; (`Integer`) Total number of
  *           resource record sets in the hosted zone.
- *       * `DelegationSet` &mdash; (`Object`) A complex type that contains
+ *       * `DelegationSet` &mdash; (`map`) A complex type that contains
  *         information about the name servers for the specified hosted
  *         zone.
  *         * `NameServers` &mdash; (`Array<String>`) A complex type that
@@ -536,13 +583,13 @@ AWS.Route53 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `HealthChecks` &mdash; (`Array<Object>`) A complex type that
+ *       * `HealthChecks` &mdash; (`Array<map>`) A complex type that
  *         contains information about the health checks associated with the
  *         current AWS account.
  *         * `Id` &mdash; (`String`) The ID of the specified health check.
  *         * `CallerReference` &mdash; (`String`) A unique string that
  *           identifies the request to create the health check.
- *         * `HealthCheckConfig` &mdash; (`Object`) A complex type that
+ *         * `HealthCheckConfig` &mdash; (`map`) A complex type that
  *           contains the health check configuration.
  *           * `IPAddress` &mdash; (`String`) IP Address of the instance
  *             being checked.
@@ -551,6 +598,9 @@ AWS.Route53 = inherit({})
  *             defaults to 80 if the port is not specified.
  *           * `Type` &mdash; (`String`) The type of health check to be
  *             performed. Currently supported protocols are TCP and HTTP.
+ *             Possible values include:
+ *             * `HTTP`
+ *             * `TCP`
  *           * `ResourcePath` &mdash; (`String`) Path to ping on the
  *             instance to check the health. Required only for HTTP health
  *             checks, HTTP request is issued to the instance on the given
@@ -600,7 +650,7 @@ AWS.Route53 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `HostedZones` &mdash; (`Array<Object>`) A complex type that
+ *       * `HostedZones` &mdash; (`Array<map>`) A complex type that
  *         contains information about the hosted zones associated with the
  *         current AWS account.
  *         * `Id` &mdash; (`String`) The ID of the specified hosted zone.
@@ -616,7 +666,7 @@ AWS.Route53 = inherit({})
  *           DelegationSet.
  *         * `CallerReference` &mdash; (`String`) A unique string that
  *           identifies the request to create the hosted zone.
- *         * `Config` &mdash; (`Object`) A complex type that contains the
+ *         * `Config` &mdash; (`map`) A complex type that contains the
  *           Comment element.
  *           * `Comment` &mdash; (`String`) An optional comment about your
  *             hosted zone. If you don't want to specify a comment, you can
@@ -664,6 +714,17 @@ AWS.Route53 = inherit({})
  *       Regional Resource Record Sets: A | AAAA | CNAME | TXT Values for
  *       Alias Resource Record Sets: A | AAAA Constraint: Specifying type
  *       without specifying name returns an InvalidInput error.
+ *       Possible values include:
+ *       * `SOA`
+ *       * `A`
+ *       * `TXT`
+ *       * `NS`
+ *       * `CNAME`
+ *       * `MX`
+ *       * `PTR`
+ *       * `SRV`
+ *       * `SPF`
+ *       * `AAAA`
  *     * `StartRecordIdentifier` &mdash; (`String`) Weighted resource
  *       record sets only: If results were truncated for a given DNS name
  *       and type, specify the value of
@@ -682,13 +743,24 @@ AWS.Route53 = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ResourceRecordSets` &mdash; (`Array<Object>`) A complex type
- *         that contains information about the resource record sets that
- *         are returned by the request.
+ *       * `ResourceRecordSets` &mdash; (`Array<map>`) A complex type that
+ *         contains information about the resource record sets that are
+ *         returned by the request.
  *         * `Name` &mdash; (`String`) The domain name of the current
  *           resource record set.
  *         * `Type` &mdash; (`String`) The type of the current resource
  *           record set.
+ *           Possible values include:
+ *           * `SOA`
+ *           * `A`
+ *           * `TXT`
+ *           * `NS`
+ *           * `CNAME`
+ *           * `MX`
+ *           * `PTR`
+ *           * `SRV`
+ *           * `SPF`
+ *           * `AAAA`
  *         * `SetIdentifier` &mdash; (`String`) Weighted, Regional, and
  *           Failover resource record sets only: An identifier that
  *           differentiates among multiple resource record sets that have
@@ -702,6 +774,15 @@ AWS.Route53 = inherit({})
  *           only: Among resource record sets that have the same
  *           combination of DNS name and type, a value that specifies the
  *           AWS region for the current resource record set.
+ *           Possible values include:
+ *           * `us-east-1`
+ *           * `us-west-1`
+ *           * `us-west-2`
+ *           * `eu-west-1`
+ *           * `ap-southeast-1`
+ *           * `ap-southeast-2`
+ *           * `ap-northeast-1`
+ *           * `sa-east-1`
  *         * `Failover` &mdash; (`String`) Failover resource record sets
  *           only: Among resource record sets that have the same
  *           combination of DNS name and type, a value that indicates
@@ -720,15 +801,18 @@ AWS.Route53 = inherit({})
  *           secondary is passing a health check or has no associated
  *           health check, or (2) there is no primary resource record set.
  *           Valid values: PRIMARY | SECONDARY
+ *           Possible values include:
+ *           * `PRIMARY`
+ *           * `SECONDARY`
  *         * `TTL` &mdash; (`Integer`) The cache time to live for the
  *           current resource record set.
- *         * `ResourceRecords` &mdash; (`Array<Object>`) A complex type
- *           that contains the resource records for the current resource
- *           record set.
+ *         * `ResourceRecords` &mdash; (`Array<map>`) A complex type that
+ *           contains the resource records for the current resource record
+ *           set.
  *           * `Value` &mdash; (`String`) The value of the Value element
  *             for the current resource record set.
- *         * `AliasTarget` &mdash; (`Object`) Alias resource record sets
- *           only: Information about the AWS resource to which you are
+ *         * `AliasTarget` &mdash; (`map`) Alias resource record sets only:
+ *           Information about the AWS resource to which you are
  *           redirecting traffic.
  *           * `HostedZoneId` &mdash; (`String`) Alias resource record sets
  *             only: The value of the hosted zone ID for the AWS resource.
@@ -764,6 +848,17 @@ AWS.Route53 = inherit({})
  *         truncated, the type of the next record in the list. This element
  *         is present only if ListResourceRecordSetsResponse$IsTruncated is
  *         true.
+ *         Possible values include:
+ *         * `SOA`
+ *         * `A`
+ *         * `TXT`
+ *         * `NS`
+ *         * `CNAME`
+ *         * `MX`
+ *         * `PTR`
+ *         * `SRV`
+ *         * `SPF`
+ *         * `AAAA`
  *       * `NextRecordIdentifier` &mdash; (`String`) Weighted resource
  *         record sets only: If results were truncated for a given DNS name
  *         and type, the value of SetIdentifier for the next resource

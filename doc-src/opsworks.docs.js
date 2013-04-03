@@ -61,9 +61,8 @@ AWS.OpsWorks = inherit({})
  *     * `Region` &mdash; (`String`) The cloned stack AWS region, such as
  *       "us-east-1". For more information about AWS regions, see Regions
  *       and Endpoints
- *     * `Attributes` &mdash; (`Object<String>`) A list of stack
- *       attributes and values as key/value pairs to be added to the
- *       cloned stack.
+ *     * `Attributes` &mdash; (`map<String>`) A list of stack attributes
+ *       and values as key/value pairs to be added to the cloned stack.
  *     * `ServiceRoleArn` &mdash; **required** &mdash; (`String`) The
  *       stack AWS Identity and Access Management (IAM) role, which
  *       allows OpsWorks to work with AWS resources on your behalf. You
@@ -100,8 +99,13 @@ AWS.OpsWorks = inherit({})
  *       \"value2\",...}"
  *     * `UseCustomCookbooks` &mdash; (`Boolean`) Whether to use custom
  *       cookbooks.
- *     * `CustomCookbooksSource` &mdash; (`Object`)
+ *     * `CustomCookbooksSource` &mdash; (`map`)
  *       * `Type` &mdash; (`String`) The repository type.
+ *         Possible values include:
+ *         * `git`
+ *         * `svn`
+ *         * `archive`
+ *         * `s3`
  *       * `Url` &mdash; (`String`) The source URL.
  *       * `Username` &mdash; (`String`) The user name.
  *       * `Password` &mdash; (`String`) The repository's password.
@@ -143,9 +147,20 @@ AWS.OpsWorks = inherit({})
  *       example, PHP applications are associated with a PHP layer.
  *       OpsWorks deploys an application to those instances that are
  *       members of the corresponding layer.
- *     * `AppSource` &mdash; (`Object`) A Source object that specifies
- *       the app repository.
+ *       Possible values include:
+ *       * `rails`
+ *       * `php`
+ *       * `nodejs`
+ *       * `static`
+ *       * `other`
+ *     * `AppSource` &mdash; (`map`) A Source object that specifies the
+ *       app repository.
  *       * `Type` &mdash; (`String`) The repository type.
+ *         Possible values include:
+ *         * `git`
+ *         * `svn`
+ *         * `archive`
+ *         * `s3`
  *       * `Url` &mdash; (`String`) The source URL.
  *       * `Username` &mdash; (`String`) The user name.
  *       * `Password` &mdash; (`String`) The repository's password.
@@ -160,7 +175,7 @@ AWS.OpsWorks = inherit({})
  *       example: 'www.mysite.com, mysite.com'
  *     * `EnableSsl` &mdash; (`Boolean`) Whether to enable SSL for the
  *       app.
- *     * `SslConfiguration` &mdash; (`Object`) An SslConfiguration object
+ *     * `SslConfiguration` &mdash; (`map`) An SslConfiguration object
  *       with the SSL configuration.
  *       * `Certificate` &mdash; **required** &mdash; (`String`) The
  *         contents of the certificate's domain.crt file.
@@ -170,7 +185,7 @@ AWS.OpsWorks = inherit({})
  *       * `Chain` &mdash; (`String`) Optional. Can be used to specify an
  *         intermediate certificate authority key or client
  *         authentication.
- *     * `Attributes` &mdash; (`Object<String>`) One or more user-defined
+ *     * `Attributes` &mdash; (`map<String>`) One or more user-defined
  *       key/value pairs to be added to the stack attributes bag.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -193,7 +208,7 @@ AWS.OpsWorks = inherit({})
  *     * `AppId` &mdash; (`String`) The app ID, for app deployments.
  *     * `InstanceIds` &mdash; (`Array<String>`) The instance IDs for the
  *       deployment targets.
- *     * `Command` &mdash; **required** &mdash; (`Object`) A
+ *     * `Command` &mdash; **required** &mdash; (`map`) A
  *       DeploymentCommand object that describes details of the
  *       operation.
  *       * `Name` &mdash; **required** &mdash; (`String`) Specifies the
@@ -213,7 +228,18 @@ AWS.OpsWorks = inherit({})
  *         server. stop: Stop the app's web or application server.
  *         restart: Restart the app's web or application server.
  *         undeploy: Undeploy the app.
- *       * `Args` &mdash; (`Object<Array<String>>`) An array of command
+ *         Possible values include:
+ *         * `install_dependencies`
+ *         * `update_dependencies`
+ *         * `update_custom_cookbooks`
+ *         * `execute_recipes`
+ *         * `deploy`
+ *         * `rollback`
+ *         * `start`
+ *         * `stop`
+ *         * `restart`
+ *         * `undeploy`
+ *       * `Args` &mdash; (`map<Array<String>>`) An array of command
  *         arguments. This parameter is currently used only to specify
  *         the list of recipes to be executed by the ExecuteRecipes
  *         command.
@@ -259,6 +285,10 @@ AWS.OpsWorks = inherit({})
  *       is started and stopped based on load metrics. To use load-based
  *       auto scaling, you must enable it for the instance layer and
  *       configure the thresholds by calling SetLoadBasedAutoScaling.
+ *       Possible values include:
+ *       * `AlwaysRunning`
+ *       * `TimeBasedAutoScaling`
+ *       * `LoadBasedAutoScaling`
  *     * `Hostname` &mdash; (`String`) The instance host name.
  *     * `Os` &mdash; (`String`) The instance operating system.
  *     * `SshKeyName` &mdash; (`String`) The instance SSH key name.
@@ -293,7 +323,7 @@ AWS.OpsWorks = inherit({})
  *       directory where your app files are installed. It can have a
  *       maximum of 200 characters, which are limited to the alphanumeric
  *       characters, '-', '_', and '.'.
- *     * `Attributes` &mdash; (`Object<String>`) One or more user-defined
+ *     * `Attributes` &mdash; (`map<String>`) One or more user-defined
  *       key/value pairs to be added to the stack attributes bag.
  *     * `CustomInstanceProfileArn` &mdash; (`String`) The ARN of an IAM
  *       profile that to be used for the layer's EC2 instances. For more
@@ -302,7 +332,7 @@ AWS.OpsWorks = inherit({})
  *       containing the layer custom security group IDs.
  *     * `Packages` &mdash; (`Array<String>`) An array of Package objects
  *       that describe the layer packages.
- *     * `VolumeConfigurations` &mdash; (`Array<Object>`) A
+ *     * `VolumeConfigurations` &mdash; (`Array<map>`) A
  *       VolumeConfigurations object that describes the layer Amazon EBS
  *       volumes.
  *       * `MountPoint` &mdash; **required** &mdash; (`String`) The
@@ -316,8 +346,8 @@ AWS.OpsWorks = inherit({})
  *       healing for the layer.
  *     * `AutoAssignElasticIps` &mdash; (`Boolean`) Whether to
  *       automatically assign an Elastic IP address to the layer.
- *     * `CustomRecipes` &mdash; (`Object`) A LayerCustomRecipes object
- *       that specifies the layer custom recipes.
+ *     * `CustomRecipes` &mdash; (`map`) A LayerCustomRecipes object that
+ *       specifies the layer custom recipes.
  *       * `Setup` &mdash; (`Array<String>`) An array of custom recipe
  *         names to be run following a setup event.
  *       * `Configure` &mdash; (`Array<String>`) An array of custom
@@ -349,7 +379,7 @@ AWS.OpsWorks = inherit({})
  *     * `Region` &mdash; **required** &mdash; (`String`) The stack AWS
  *       region, such as "us-east-1". For more information about Amazon
  *       regions, see Regions and Endpoints.
- *     * `Attributes` &mdash; (`Object<String>`) One or more user-defined
+ *     * `Attributes` &mdash; (`map<String>`) One or more user-defined
  *       key/value pairs to be added to the stack attributes bag.
  *     * `ServiceRoleArn` &mdash; **required** &mdash; (`String`) The
  *       stack AWS Identity and Access Management (IAM) role, which
@@ -385,8 +415,13 @@ AWS.OpsWorks = inherit({})
  *       \"value2\",...}"
  *     * `UseCustomCookbooks` &mdash; (`Boolean`) Whether the stack uses
  *       custom cookbooks.
- *     * `CustomCookbooksSource` &mdash; (`Object`)
+ *     * `CustomCookbooksSource` &mdash; (`map`)
  *       * `Type` &mdash; (`String`) The repository type.
+ *         Possible values include:
+ *         * `git`
+ *         * `svn`
+ *         * `archive`
+ *         * `s3`
  *       * `Url` &mdash; (`String`) The source URL.
  *       * `Username` &mdash; (`String`) The user name.
  *       * `Password` &mdash; (`String`) The repository's password.
@@ -533,16 +568,27 @@ AWS.OpsWorks = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Apps` &mdash; (`Array<Object>`) An array of App objects that
+ *       * `Apps` &mdash; (`Array<map>`) An array of App objects that
  *         describe the specified apps.
  *         * `AppId` &mdash; (`String`) The app ID.
  *         * `StackId` &mdash; (`String`) The app stack ID.
  *         * `Name` &mdash; (`String`) The app name.
  *         * `Description` &mdash; (`String`) A description of the app.
  *         * `Type` &mdash; (`String`) The app type.
- *         * `AppSource` &mdash; (`Object`) A Source object that describes
- *           the app repository.
+ *           Possible values include:
+ *           * `rails`
+ *           * `php`
+ *           * `nodejs`
+ *           * `static`
+ *           * `other`
+ *         * `AppSource` &mdash; (`map`) A Source object that describes the
+ *           app repository.
  *           * `Type` &mdash; (`String`) The repository type.
+ *             Possible values include:
+ *             * `git`
+ *             * `svn`
+ *             * `archive`
+ *             * `s3`
  *           * `Url` &mdash; (`String`) The source URL.
  *           * `Username` &mdash; (`String`) The user name.
  *           * `Password` &mdash; (`String`) The repository's password.
@@ -557,8 +603,8 @@ AWS.OpsWorks = inherit({})
  *           'www.mysite.com, mysite.com'
  *         * `EnableSsl` &mdash; (`Boolean`) Whether to enable SSL for the
  *           app.
- *         * `SslConfiguration` &mdash; (`Object`) An SslConfiguration
- *           object with the SSL configuration.
+ *         * `SslConfiguration` &mdash; (`map`) An SslConfiguration object
+ *           with the SSL configuration.
  *           * `Certificate` &mdash; (`String`) The contents of the
  *             certificate's domain.crt file.
  *           * `PrivateKey` &mdash; (`String`) The private key; the
@@ -566,8 +612,8 @@ AWS.OpsWorks = inherit({})
  *           * `Chain` &mdash; (`String`) Optional. Can be used to specify
  *             an intermediate certificate authority key or client
  *             authentication.
- *         * `Attributes` &mdash; (`Object<String>`) The contents of the
- *           stack attributes bag.
+ *         * `Attributes` &mdash; (`map<String>`) The contents of the stack
+ *           attributes bag.
  *         * `CreatedAt` &mdash; (`String`) When the app was created.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -589,7 +635,7 @@ AWS.OpsWorks = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Commands` &mdash; (`Array<Object>`) An array of InstanceCommand
+ *       * `Commands` &mdash; (`Array<map>`) An array of InstanceCommand
  *         objects that describe each of the specified commands.
  *         * `CommandId` &mdash; (`String`) The command ID.
  *         * `InstanceId` &mdash; (`String`) The ID of the instance where
@@ -629,7 +675,7 @@ AWS.OpsWorks = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Deployments` &mdash; (`Array<Object>`) An array of Deployment
+ *       * `Deployments` &mdash; (`Array<map>`) An array of Deployment
  *         objects that describe the deployments.
  *         * `DeploymentId` &mdash; (`String`) The deployment ID.
  *         * `StackId` &mdash; (`String`) The stack ID.
@@ -641,7 +687,7 @@ AWS.OpsWorks = inherit({})
  *         * `Duration` &mdash; (`Integer`) The deployment duration.
  *         * `IamUserArn` &mdash; (`String`) The user's IAM ARN.
  *         * `Comment` &mdash; (`String`) A user-defined comment.
- *         * `Command` &mdash; (`Object`)
+ *         * `Command` &mdash; (`map`)
  *           * `Name` &mdash; (`String`) Specifies the deployment
  *             operation. You can specify only one command. For stacks, the
  *             available commands are: execute_recipes: Execute the recipes
@@ -659,7 +705,18 @@ AWS.OpsWorks = inherit({})
  *             web or application server. stop: Stop the app's web or
  *             application server. restart: Restart the app's web or
  *             application server. undeploy: Undeploy the app.
- *           * `Args` &mdash; (`Object<Array<String>>`) An array of command
+ *             Possible values include:
+ *             * `install_dependencies`
+ *             * `update_dependencies`
+ *             * `update_custom_cookbooks`
+ *             * `execute_recipes`
+ *             * `deploy`
+ *             * `rollback`
+ *             * `start`
+ *             * `stop`
+ *             * `restart`
+ *             * `undeploy`
+ *           * `Args` &mdash; (`map<Array<String>>`) An array of command
  *             arguments. This parameter is currently used only to specify
  *             the list of recipes to be executed by the ExecuteRecipes
  *             command.
@@ -692,7 +749,7 @@ AWS.OpsWorks = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ElasticIps` &mdash; (`Array<Object>`) An ElasticIps object that
+ *       * `ElasticIps` &mdash; (`Array<map>`) An ElasticIps object that
  *         describes the specified Elastic IP addresses.
  *         * `Ip` &mdash; (`String`) The Elastic IP address
  *         * `Name` &mdash; (`String`) The Elastic IP address name.
@@ -719,8 +776,8 @@ AWS.OpsWorks = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Instances` &mdash; (`Array<Object>`) An array of Instance
- *         objects that describe the instances.
+ *       * `Instances` &mdash; (`Array<map>`) An array of Instance objects
+ *         that describe the instances.
  *         * `InstanceId` &mdash; (`String`) The instance ID.
  *         * `Ec2InstanceId` &mdash; (`String`) The ID of the associated
  *           Amazon EC2 instance.
@@ -757,6 +814,10 @@ AWS.OpsWorks = inherit({})
  *           which is started and stopped based on a specified schedule.
  *           LoadBasedAutoScaling: A load-based auto scaling instance,
  *           which is started and stopped based on load metrics.
+ *           Possible values include:
+ *           * `AlwaysRunning`
+ *           * `TimeBasedAutoScaling`
+ *           * `LoadBasedAutoScaling`
  *         * `SshKeyName` &mdash; (`String`) The instance SSH key name.
  *         * `SshHostRsaKeyFingerprint` &mdash; (`String`) The SSH key's
  *           RSA fingerprint.
@@ -785,8 +846,8 @@ AWS.OpsWorks = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Layers` &mdash; (`Array<Object>`) An array of Layer objects
- *         that describe the layers.
+ *       * `Layers` &mdash; (`Array<map>`) An array of Layer objects that
+ *         describe the layers.
  *         * `StackId` &mdash; (`String`) The layer stack ID.
  *         * `LayerId` &mdash; (`String`) The layer ID.
  *         * `Type` &mdash; (`String`) The layer type, which must be one of
@@ -795,7 +856,7 @@ AWS.OpsWorks = inherit({})
  *           RailsAppServer WebServer
  *         * `Name` &mdash; (`String`) The layer name.
  *         * `Shortname` &mdash; (`String`) The layer short name.
- *         * `Attributes` &mdash; (`Object<String>`) The layer attributes.
+ *         * `Attributes` &mdash; (`map<String>`) The layer attributes.
  *         * `CustomInstanceProfileArn` &mdash; (`String`) The ARN of the
  *           default IAM profile to be used for the layer's EC2 instances.
  *           For more information about IAM ARNs, see Using Identifiers.
@@ -805,7 +866,7 @@ AWS.OpsWorks = inherit({})
  *           containing the layer's security group names.
  *         * `Packages` &mdash; (`Array<String>`) An array of Package
  *           objects that describe the layer's packages.
- *         * `VolumeConfigurations` &mdash; (`Array<Object>`) A
+ *         * `VolumeConfigurations` &mdash; (`Array<map>`) A
  *           VolumeConfigurations object that describes the layer's Amazon
  *           EBS volumes.
  *           * `MountPoint` &mdash; (`String`) The volume mount point. For
@@ -818,7 +879,7 @@ AWS.OpsWorks = inherit({})
  *           is disabled for the layer.
  *         * `AutoAssignElasticIps` &mdash; (`Boolean`) Whether the layer
  *           has an automatically assigned Elastic IP address.
- *         * `DefaultRecipes` &mdash; (`Object`)
+ *         * `DefaultRecipes` &mdash; (`map`)
  *           * `Setup` &mdash; (`Array<String>`) An array of custom recipe
  *             names to be run following a setup event.
  *           * `Configure` &mdash; (`Array<String>`) An array of custom
@@ -829,7 +890,7 @@ AWS.OpsWorks = inherit({})
  *             recipe names to be run following a undeploy event.
  *           * `Shutdown` &mdash; (`Array<String>`) An array of custom
  *             recipe names to be run following a shutdown event.
- *         * `CustomRecipes` &mdash; (`Object`) A LayerCustomRecipes object
+ *         * `CustomRecipes` &mdash; (`map`) A LayerCustomRecipes object
  *           that specifies the layer's custom recipes.
  *           * `Setup` &mdash; (`Array<String>`) An array of custom recipe
  *             names to be run following a setup event.
@@ -861,16 +922,16 @@ AWS.OpsWorks = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `LoadBasedAutoScalingConfigurations` &mdash; (`Array<Object>`)
- *         An array of LoadBasedAutoScalingConfiguration objects that
- *         describe each layer's configuration.
+ *       * `LoadBasedAutoScalingConfigurations` &mdash; (`Array<map>`) An
+ *         array of LoadBasedAutoScalingConfiguration objects that describe
+ *         each layer's configuration.
  *         * `LayerId` &mdash; (`String`) The layer ID.
  *         * `Enable` &mdash; (`Boolean`) Whether load-based auto scaling
  *           is enabled for the layer.
- *         * `UpScaling` &mdash; (`Object`) A
- *           LoadBasedAutoscalingInstruction object that describes the
- *           upscaling configuration, which defines how and when OpsWorks
- *           increases the number of instances.
+ *         * `UpScaling` &mdash; (`map`) A LoadBasedAutoscalingInstruction
+ *           object that describes the upscaling configuration, which
+ *           defines how and when OpsWorks increases the number of
+ *           instances.
  *           * `InstanceCount` &mdash; (`Integer`) The number of instances
  *             to add or remove when the load exceeds a threshold.
  *           * `ThresholdsWaitTime` &mdash; (`Integer`) The amount of time,
@@ -894,7 +955,7 @@ AWS.OpsWorks = inherit({})
  *           * `LoadThreshold` &mdash; (`Float`) The load threshold. For
  *             more information about how load is computed, see Load
  *             (computing).
- *         * `DownScaling` &mdash; (`Object`) A
+ *         * `DownScaling` &mdash; (`map`) A
  *           LoadBasedAutoscalingInstruction object that describes the
  *           downscaling configuration, which defines how and when OpsWorks
  *           reduces the number of instances.
@@ -941,7 +1002,7 @@ AWS.OpsWorks = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Permissions` &mdash; (`Array<Object>`) An array of Permission
+ *       * `Permissions` &mdash; (`Array<map>`) An array of Permission
  *         objects that describe the stack permissions. If the request
  *         object contains only a stack ID, the array contains a Permission
  *         object with permissions for each of the stack IAM ARNs. If the
@@ -975,7 +1036,7 @@ AWS.OpsWorks = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `RaidArrays` &mdash; (`Array<Object>`) A RaidArrays object that
+ *       * `RaidArrays` &mdash; (`Array<map>`) A RaidArrays object that
  *         describes the specified RAID arrays.
  *         * `RaidArrayId` &mdash; (`String`) The array ID.
  *         * `InstanceId` &mdash; (`String`) The instance ID.
@@ -1012,8 +1073,8 @@ AWS.OpsWorks = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ServiceErrors` &mdash; (`Array<Object>`) An array of
- *         ServiceError objects that describe the specified service errors.
+ *       * `ServiceErrors` &mdash; (`Array<map>`) An array of ServiceError
+ *         objects that describe the specified service errors.
  *         * `ServiceErrorId` &mdash; (`String`) The error ID.
  *         * `StackId` &mdash; (`String`) The stack ID.
  *         * `InstanceId` &mdash; (`String`) The instance ID.
@@ -1039,14 +1100,14 @@ AWS.OpsWorks = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Stacks` &mdash; (`Array<Object>`) An array of Stack objects
- *         that describe the stacks.
+ *       * `Stacks` &mdash; (`Array<map>`) An array of Stack objects that
+ *         describe the stacks.
  *         * `StackId` &mdash; (`String`) The stack ID.
  *         * `Name` &mdash; (`String`) The stack name.
  *         * `Region` &mdash; (`String`) The stack AWS region, such as
  *           "us-east-1". For more information about AWS regions, see
  *           Regions and Endpoints.
- *         * `Attributes` &mdash; (`Object<String>`) The contents of the
+ *         * `Attributes` &mdash; (`map<String>`) The contents of the
  *           stack's attributes bag.
  *         * `ServiceRoleArn` &mdash; (`String`) The stack AWS Identity and
  *           Access Management (IAM) role.
@@ -1070,8 +1131,13 @@ AWS.OpsWorks = inherit({})
  *           \"value2\",...}"
  *         * `UseCustomCookbooks` &mdash; (`Boolean`) Whether the stack
  *           uses custom cookbooks.
- *         * `CustomCookbooksSource` &mdash; (`Object`)
+ *         * `CustomCookbooksSource` &mdash; (`map`)
  *           * `Type` &mdash; (`String`) The repository type.
+ *             Possible values include:
+ *             * `git`
+ *             * `svn`
+ *             * `archive`
+ *             * `s3`
  *           * `Url` &mdash; (`String`) The source URL.
  *           * `Username` &mdash; (`String`) The user name.
  *           * `Password` &mdash; (`String`) The repository's password.
@@ -1104,23 +1170,22 @@ AWS.OpsWorks = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `TimeBasedAutoScalingConfigurations` &mdash; (`Array<Object>`)
- *         An array of TimeBasedAutoScalingConfiguration objects that
- *         describe the configuration for the specified instances.
+ *       * `TimeBasedAutoScalingConfigurations` &mdash; (`Array<map>`) An
+ *         array of TimeBasedAutoScalingConfiguration objects that describe
+ *         the configuration for the specified instances.
  *         * `InstanceId` &mdash; (`String`) The instance ID.
- *         * `AutoScalingSchedule` &mdash; (`Object`) A
+ *         * `AutoScalingSchedule` &mdash; (`map`) A
  *           WeeklyAutoScalingSchedule object with the instance schedule.
- *           * `Monday` &mdash; (`Object<String>`) The schedule for Monday.
- *           * `Tuesday` &mdash; (`Object<String>`) The schedule for
- *             Tuesday.
- *           * `Wednesday` &mdash; (`Object<String>`) The schedule for
+ *           * `Monday` &mdash; (`map<String>`) The schedule for Monday.
+ *           * `Tuesday` &mdash; (`map<String>`) The schedule for Tuesday.
+ *           * `Wednesday` &mdash; (`map<String>`) The schedule for
  *             Wednesday.
- *           * `Thursday` &mdash; (`Object<String>`) The schedule for
+ *           * `Thursday` &mdash; (`map<String>`) The schedule for
  *             Thursday.
- *           * `Friday` &mdash; (`Object<String>`) The schedule for Friday.
- *           * `Saturday` &mdash; (`Object<String>`) The schedule for
+ *           * `Friday` &mdash; (`map<String>`) The schedule for Friday.
+ *           * `Saturday` &mdash; (`map<String>`) The schedule for
  *             Saturday.
- *           * `Sunday` &mdash; (`Object<String>`) The schedule for Sunday.
+ *           * `Sunday` &mdash; (`map<String>`) The schedule for Sunday.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -1139,7 +1204,7 @@ AWS.OpsWorks = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `UserProfiles` &mdash; (`Array<Object>`) A Users object that
+ *       * `UserProfiles` &mdash; (`Array<map>`) A Users object that
  *         describes the specified users.
  *         * `IamUserArn` &mdash; (`String`) The user IAM ARN.
  *         * `Name` &mdash; (`String`) The user name.
@@ -1165,7 +1230,7 @@ AWS.OpsWorks = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Volumes` &mdash; (`Array<Object>`) An array of volume IDs.
+ *       * `Volumes` &mdash; (`Array<map>`) An array of volume IDs.
  *         * `VolumeId` &mdash; (`String`) The volume ID.
  *         * `Ec2VolumeId` &mdash; (`String`) The Amazon EC2 volume ID.
  *         * `Name` &mdash; (`String`) The volume name.
@@ -1225,10 +1290,10 @@ AWS.OpsWorks = inherit({})
  *     * `LayerId` &mdash; **required** &mdash; (`String`) The layer ID.
  *     * `Enable` &mdash; (`Boolean`) Enables load-based auto scaling for
  *       the layer.
- *     * `UpScaling` &mdash; (`Object`) An AutoScalingThresholds object
- *       with the upscaling threshold configuration. If the load exceeds
- *       these thresholds for a specified amount of time, OpsWorks starts
- *       a specified number of instances.
+ *     * `UpScaling` &mdash; (`map`) An AutoScalingThresholds object with
+ *       the upscaling threshold configuration. If the load exceeds these
+ *       thresholds for a specified amount of time, OpsWorks starts a
+ *       specified number of instances.
  *       * `InstanceCount` &mdash; (`Integer`) The number of instances to
  *         add or remove when the load exceeds a threshold.
  *       * `ThresholdsWaitTime` &mdash; (`Integer`) The amount of time,
@@ -1251,7 +1316,7 @@ AWS.OpsWorks = inherit({})
  *         threshold, as a percent of the available memory.
  *       * `LoadThreshold` &mdash; (`Float`) The load threshold. For more
  *         information about how load is computed, see Load (computing).
- *     * `DownScaling` &mdash; (`Object`) An AutoScalingThresholds object
+ *     * `DownScaling` &mdash; (`map`) An AutoScalingThresholds object
  *       with the downscaling threshold configuration. If the load falls
  *       below these thresholds for a specified amount of time, OpsWorks
  *       stops a specified number of instances.
@@ -1314,18 +1379,16 @@ AWS.OpsWorks = inherit({})
  *   @param params [Object]
  *     * `InstanceId` &mdash; **required** &mdash; (`String`) The
  *       instance ID.
- *     * `AutoScalingSchedule` &mdash; (`Object`) An AutoScalingSchedule
+ *     * `AutoScalingSchedule` &mdash; (`map`) An AutoScalingSchedule
  *       with the instance schedule.
- *       * `Monday` &mdash; (`Object<String>`) The schedule for Monday.
- *       * `Tuesday` &mdash; (`Object<String>`) The schedule for Tuesday.
- *       * `Wednesday` &mdash; (`Object<String>`) The schedule for
+ *       * `Monday` &mdash; (`map<String>`) The schedule for Monday.
+ *       * `Tuesday` &mdash; (`map<String>`) The schedule for Tuesday.
+ *       * `Wednesday` &mdash; (`map<String>`) The schedule for
  *         Wednesday.
- *       * `Thursday` &mdash; (`Object<String>`) The schedule for
- *         Thursday.
- *       * `Friday` &mdash; (`Object<String>`) The schedule for Friday.
- *       * `Saturday` &mdash; (`Object<String>`) The schedule for
- *         Saturday.
- *       * `Sunday` &mdash; (`Object<String>`) The schedule for Sunday.
+ *       * `Thursday` &mdash; (`map<String>`) The schedule for Thursday.
+ *       * `Friday` &mdash; (`map<String>`) The schedule for Friday.
+ *       * `Saturday` &mdash; (`map<String>`) The schedule for Saturday.
+ *       * `Sunday` &mdash; (`map<String>`) The schedule for Sunday.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1406,9 +1469,20 @@ AWS.OpsWorks = inherit({})
  *     * `Name` &mdash; (`String`) The app name.
  *     * `Description` &mdash; (`String`) A description of the app.
  *     * `Type` &mdash; (`String`) The app type.
- *     * `AppSource` &mdash; (`Object`) A Source object that specifies
- *       the app repository.
+ *       Possible values include:
+ *       * `rails`
+ *       * `php`
+ *       * `nodejs`
+ *       * `static`
+ *       * `other`
+ *     * `AppSource` &mdash; (`map`) A Source object that specifies the
+ *       app repository.
  *       * `Type` &mdash; (`String`) The repository type.
+ *         Possible values include:
+ *         * `git`
+ *         * `svn`
+ *         * `archive`
+ *         * `s3`
  *       * `Url` &mdash; (`String`) The source URL.
  *       * `Username` &mdash; (`String`) The user name.
  *       * `Password` &mdash; (`String`) The repository's password.
@@ -1423,7 +1497,7 @@ AWS.OpsWorks = inherit({})
  *       example: 'www.mysite.com, mysite.com'
  *     * `EnableSsl` &mdash; (`Boolean`) Whether SSL is enabled for the
  *       app.
- *     * `SslConfiguration` &mdash; (`Object`) An SslConfiguration object
+ *     * `SslConfiguration` &mdash; (`map`) An SslConfiguration object
  *       with the SSL configuration.
  *       * `Certificate` &mdash; **required** &mdash; (`String`) The
  *         contents of the certificate's domain.crt file.
@@ -1433,7 +1507,7 @@ AWS.OpsWorks = inherit({})
  *       * `Chain` &mdash; (`String`) Optional. Can be used to specify an
  *         intermediate certificate authority key or client
  *         authentication.
- *     * `Attributes` &mdash; (`Object<String>`) One or more user-defined
+ *     * `Attributes` &mdash; (`map<String>`) One or more user-defined
  *       key/value pairs to be added to the stack attributes bag.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -1462,6 +1536,10 @@ AWS.OpsWorks = inherit({})
  *       is started and stopped based on a specified schedule.
  *       LoadBasedAutoScaling: A load-based auto scaling instance, which
  *       is started and stopped based on load metrics.
+ *       Possible values include:
+ *       * `AlwaysRunning`
+ *       * `TimeBasedAutoScaling`
+ *       * `LoadBasedAutoScaling`
  *     * `Hostname` &mdash; (`String`) The instance host name.
  *     * `Os` &mdash; (`String`) The instance operating system.
  *     * `SshKeyName` &mdash; (`String`) The instance SSH key name.
@@ -1487,7 +1565,7 @@ AWS.OpsWorks = inherit({})
  *       as the name for the directory where your app files are
  *       installed. It can have a maximum of 200 characters and must be
  *       in the following format: /\A[a-z0-9\-\_\.]+\Z/.
- *     * `Attributes` &mdash; (`Object<String>`) One or more user-defined
+ *     * `Attributes` &mdash; (`map<String>`) One or more user-defined
  *       key/value pairs to be added to the stack attributes bag.
  *     * `CustomInstanceProfileArn` &mdash; (`String`) The ARN of an IAM
  *       profile to be used for all of the layer's EC2 instances. For
@@ -1496,7 +1574,7 @@ AWS.OpsWorks = inherit({})
  *       containing the layer's custom security group IDs.
  *     * `Packages` &mdash; (`Array<String>`) An array of Package objects
  *       that describe the layer's packages.
- *     * `VolumeConfigurations` &mdash; (`Array<Object>`) A
+ *     * `VolumeConfigurations` &mdash; (`Array<map>`) A
  *       VolumeConfigurations object that describes the layer's Amazon
  *       EBS volumes.
  *       * `MountPoint` &mdash; **required** &mdash; (`String`) The
@@ -1510,8 +1588,8 @@ AWS.OpsWorks = inherit({})
  *       healing for the layer.
  *     * `AutoAssignElasticIps` &mdash; (`Boolean`) Whether to
  *       automatically assign an Elastic IP address to the layer.
- *     * `CustomRecipes` &mdash; (`Object`) A LayerCustomRecipes object
- *       that specifies the layer's custom recipes.
+ *     * `CustomRecipes` &mdash; (`map`) A LayerCustomRecipes object that
+ *       specifies the layer's custom recipes.
  *       * `Setup` &mdash; (`Array<String>`) An array of custom recipe
  *         names to be run following a setup event.
  *       * `Configure` &mdash; (`Array<String>`) An array of custom
@@ -1538,7 +1616,7 @@ AWS.OpsWorks = inherit({})
  *   @param params [Object]
  *     * `StackId` &mdash; **required** &mdash; (`String`) The stack ID.
  *     * `Name` &mdash; (`String`) The stack's new name.
- *     * `Attributes` &mdash; (`Object<String>`) One or more user-defined
+ *     * `Attributes` &mdash; (`map<String>`) One or more user-defined
  *       key/value pairs to be added to the stack attributes bag.
  *     * `ServiceRoleArn` &mdash; (`String`) The stack AWS Identity and
  *       Access Management (IAM) role, which allows OpsWorks to work with
@@ -1573,8 +1651,13 @@ AWS.OpsWorks = inherit({})
  *       \"value2\",...}"
  *     * `UseCustomCookbooks` &mdash; (`Boolean`) Whether the stack uses
  *       custom cookbooks.
- *     * `CustomCookbooksSource` &mdash; (`Object`)
+ *     * `CustomCookbooksSource` &mdash; (`map`)
  *       * `Type` &mdash; (`String`) The repository type.
+ *         Possible values include:
+ *         * `git`
+ *         * `svn`
+ *         * `archive`
+ *         * `s3`
  *       * `Url` &mdash; (`String`) The source URL.
  *       * `Username` &mdash; (`String`) The user name.
  *       * `Password` &mdash; (`String`) The repository's password.

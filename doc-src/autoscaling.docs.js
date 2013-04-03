@@ -95,11 +95,11 @@ AWS.AutoScaling = inherit({})
  *       configuring a termination policy for your Auto Scaling group, go
  *       to Instance Termination Policy for Your Auto Scaling Group in
  *       the the Auto Scaling Developer Guide.
- *     * `Tags` &mdash; (`Array<Object>`) The tag to be created or
- *       updated. Each tag should be defined by its resource type,
- *       resource ID, key, value, and a propagate flag. Valid values:
- *       key=value, value=value, propagate=true or false. Value and
- *       propagate are optional parameters.
+ *     * `Tags` &mdash; (`Array<map>`) The tag to be created or updated.
+ *       Each tag should be defined by its resource type, resource ID,
+ *       key, value, and a propagate flag. Valid values: key=value,
+ *       value=value, propagate=true or false. Value and propagate are
+ *       optional parameters.
  *       * `ResourceId` &mdash; (`String`) The name of the Auto Scaling
  *         group.
  *       * `ResourceType` &mdash; (`String`) The kind of resource to
@@ -155,23 +155,23 @@ AWS.AutoScaling = inherit({})
  *       with the Amazon EC2 AMI.
  *     * `RamdiskId` &mdash; (`String`) The ID of the RAM disk associated
  *       with the Amazon EC2 AMI.
- *     * `BlockDeviceMappings` &mdash; (`Array<Object>`) A list of
- *       mappings that specify how block devices are exposed to the
- *       instance. Each mapping is made up of a VirtualName, a
- *       DeviceName, and an ebs data structure that contains information
- *       about the associated Elastic Block Storage volume. For more
- *       information about Amazon EC2 BlockDeviceMappings, go to Block
- *       Device Mapping in the Amazon EC2 product documentation.
+ *     * `BlockDeviceMappings` &mdash; (`Array<map>`) A list of mappings
+ *       that specify how block devices are exposed to the instance. Each
+ *       mapping is made up of a VirtualName, a DeviceName, and an ebs
+ *       data structure that contains information about the associated
+ *       Elastic Block Storage volume. For more information about Amazon
+ *       EC2 BlockDeviceMappings, go to Block Device Mapping in the
+ *       Amazon EC2 product documentation.
  *       * `VirtualName` &mdash; (`String`) The virtual name associated
  *         with the device.
  *       * `DeviceName` &mdash; **required** &mdash; (`String`) The name
  *         of the device within Amazon EC2.
- *       * `Ebs` &mdash; (`Object`) The Elastic Block Storage volume
+ *       * `Ebs` &mdash; (`map`) The Elastic Block Storage volume
  *         information.
  *         * `SnapshotId` &mdash; (`String`) The snapshot ID.
  *         * `VolumeSize` &mdash; (`Integer`) The volume size, in
  *           gigabytes.
- *     * `InstanceMonitoring` &mdash; (`Object`) Enables detailed
+ *     * `InstanceMonitoring` &mdash; (`map`) Enables detailed
  *       monitoring, which is enabled by default. When detailed
  *       monitoring is enabled, CloudWatch will generate metrics every
  *       minute and your account will be charged a fee. When you disable
@@ -206,10 +206,10 @@ AWS.AutoScaling = inherit({})
  * @!method createOrUpdateTags(params, callback)
  *   Calls the CreateOrUpdateTags API operation.
  *   @param params [Object]
- *     * `Tags` &mdash; **required** &mdash; (`Array<Object>`) The tag to
- *       be created or updated. Each tag should be defined by its
- *       resource type, resource ID, key, value, and a propagate flag.
- *       The resource type and resource ID identify the type and name of
+ *     * `Tags` &mdash; **required** &mdash; (`Array<map>`) The tag to be
+ *       created or updated. Each tag should be defined by its resource
+ *       type, resource ID, key, value, and a propagate flag. The
+ *       resource type and resource ID identify the type and name of
  *       resource for which the tag is created. Currently,
  *       auto-scaling-group is the only supported resource type. The
  *       valid value for the resource ID is groupname. The
@@ -341,7 +341,7 @@ AWS.AutoScaling = inherit({})
  * @!method deleteTags(params, callback)
  *   Calls the DeleteTags API operation.
  *   @param params [Object]
- *     * `Tags` &mdash; **required** &mdash; (`Array<Object>`) Each tag
+ *     * `Tags` &mdash; **required** &mdash; (`Array<map>`) Each tag
  *       should be defined by its resource type, resource ID, key, value,
  *       and a propagate flag. Valid values are: Resource type =
  *       auto-scaling-group, Resource ID = AutoScalingGroupName,
@@ -383,7 +383,7 @@ AWS.AutoScaling = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `AdjustmentTypes` &mdash; (`Array<Object>`) A list of specific
+ *       * `AdjustmentTypes` &mdash; (`Array<map>`) A list of specific
  *         policy adjustment types.
  *         * `AdjustmentType` &mdash; (`String`) A policy adjustment type.
  *           Valid values are ChangeInCapacity, ExactCapacity, and
@@ -410,7 +410,7 @@ AWS.AutoScaling = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `AutoScalingGroups` &mdash; (`Array<Object>`) A list of Auto
+ *       * `AutoScalingGroups` &mdash; (`Array<map>`) A list of Auto
  *         Scaling groups.
  *         * `AutoScalingGroupName` &mdash; (`String`) Specifies the name
  *           of the group.
@@ -438,21 +438,27 @@ AWS.AutoScaling = inherit({})
  *           time that Auto Scaling waits before checking an instance's
  *           health status. The grace period begins when an instance comes
  *           into service.
- *         * `Instances` &mdash; (`Array<Object>`) Provides a summary list
- *           of Amazon EC2 instances.
+ *         * `Instances` &mdash; (`Array<map>`) Provides a summary list of
+ *           Amazon EC2 instances.
  *           * `InstanceId` &mdash; (`String`) Specifies the ID of the
  *             Amazon EC2 instance.
  *           * `AvailabilityZone` &mdash; (`String`) Availability Zones
  *             associated with this instance.
  *           * `LifecycleState` &mdash; (`String`) Contains a description
  *             of the current lifecycle state.
+ *             Possible values include:
+ *             * `Pending`
+ *             * `Quarantined`
+ *             * `InService`
+ *             * `Terminating`
+ *             * `Terminated`
  *           * `HealthStatus` &mdash; (`String`) The instance's health
  *             status.
  *           * `LaunchConfigurationName` &mdash; (`String`) The launch
  *             configuration associated with this instance.
  *         * `CreatedTime` &mdash; (`Date`) Specifies the date and time the
  *           Auto Scaling group was created.
- *         * `SuspendedProcesses` &mdash; (`Array<Object>`) Suspended
+ *         * `SuspendedProcesses` &mdash; (`Array<map>`) Suspended
  *           processes associated with this Auto Scaling group.
  *           * `ProcessName` &mdash; (`String`) The name of the suspended
  *             process.
@@ -467,14 +473,14 @@ AWS.AutoScaling = inherit({})
  *           VPCZoneIdentifier with AvailabilityZones, ensure that the
  *           subnets' Availability Zones match the values you specify for
  *           AvailabilityZones.
- *         * `EnabledMetrics` &mdash; (`Array<Object>`) A list of metrics
+ *         * `EnabledMetrics` &mdash; (`Array<map>`) A list of metrics
  *           enabled for this Auto Scaling group.
  *           * `Metric` &mdash; (`String`) The name of the enabled metric.
  *           * `Granularity` &mdash; (`String`) The granularity of the
  *             enabled metric.
  *         * `Status` &mdash; (`String`) A list of status conditions for
  *           the Auto Scaling group.
- *         * `Tags` &mdash; (`Array<Object>`) A list of tags for the Auto
+ *         * `Tags` &mdash; (`Array<map>`) A list of tags for the Auto
  *           Scaling group.
  *           * `ResourceId` &mdash; (`String`) The name of the Auto Scaling
  *             group.
@@ -518,7 +524,7 @@ AWS.AutoScaling = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `AutoScalingInstances` &mdash; (`Array<Object>`) A list of Auto
+ *       * `AutoScalingInstances` &mdash; (`Array<map>`) A list of Auto
  *         Scaling instances.
  *         * `InstanceId` &mdash; (`String`) The instance ID of the Amazon
  *           EC2 instance.
@@ -581,8 +587,8 @@ AWS.AutoScaling = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `LaunchConfigurations` &mdash; (`Array<Object>`) A list of
- *         launch configurations.
+ *       * `LaunchConfigurations` &mdash; (`Array<map>`) A list of launch
+ *         configurations.
  *         * `LaunchConfigurationName` &mdash; (`String`) Specifies the
  *           name of the launch configuration.
  *         * `LaunchConfigurationARN` &mdash; (`String`) The launch
@@ -603,19 +609,19 @@ AWS.AutoScaling = inherit({})
  *           associated with the Amazon EC2 AMI.
  *         * `RamdiskId` &mdash; (`String`) Provides ID of the RAM disk
  *           associated with the Amazon EC2 AMI.
- *         * `BlockDeviceMappings` &mdash; (`Array<Object>`) Specifies how
+ *         * `BlockDeviceMappings` &mdash; (`Array<map>`) Specifies how
  *           block devices are exposed to the instance. Each mapping is
  *           made up of a virtualName and a deviceName.
  *           * `VirtualName` &mdash; (`String`) The virtual name associated
  *             with the device.
  *           * `DeviceName` &mdash; (`String`) The name of the device
  *             within Amazon EC2.
- *           * `Ebs` &mdash; (`Object`) The Elastic Block Storage volume
+ *           * `Ebs` &mdash; (`map`) The Elastic Block Storage volume
  *             information.
  *             * `SnapshotId` &mdash; (`String`) The snapshot ID.
  *             * `VolumeSize` &mdash; (`Integer`) The volume size, in
  *               gigabytes.
- *         * `InstanceMonitoring` &mdash; (`Object`) Controls whether
+ *         * `InstanceMonitoring` &mdash; (`map`) Controls whether
  *           instances in this group are launched with detailed monitoring
  *           or not.
  *           * `Enabled` &mdash; (`Boolean`) If True, instance monitoring
@@ -647,14 +653,14 @@ AWS.AutoScaling = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Metrics` &mdash; (`Array<Object>`) The list of Metrics
+ *       * `Metrics` &mdash; (`Array<map>`) The list of Metrics
  *         collected.The following metrics are supported: GroupMinSize
  *         GroupMaxSize GroupDesiredCapacity GroupInServiceInstances
  *         GroupPendingInstances GroupTerminatingInstances
  *         GroupTotalInstances
  *         * `Metric` &mdash; (`String`)
- *       * `Granularities` &mdash; (`Array<Object>`) A list of
- *         granularities for the listed Metrics.
+ *       * `Granularities` &mdash; (`Array<map>`) A list of granularities
+ *         for the listed Metrics.
  *         * `Granularity` &mdash; (`String`) The granularity of a Metric.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -678,8 +684,8 @@ AWS.AutoScaling = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `NotificationConfigurations` &mdash; (`Array<Object>`) The list
- *         of notification configurations.
+ *       * `NotificationConfigurations` &mdash; (`Array<map>`) The list of
+ *         notification configurations.
  *         * `AutoScalingGroupName` &mdash; (`String`) Specifies the Auto
  *           Scaling group name.
  *         * `TopicARN` &mdash; (`String`) The Amazon Resource Name (ARN)
@@ -717,7 +723,7 @@ AWS.AutoScaling = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ScalingPolicies` &mdash; (`Array<Object>`) A list of scaling
+ *       * `ScalingPolicies` &mdash; (`Array<map>`) A list of scaling
  *         policies.
  *         * `AutoScalingGroupName` &mdash; (`String`) The name of the Auto
  *           Scaling group associated with this scaling policy.
@@ -736,7 +742,7 @@ AWS.AutoScaling = inherit({})
  *           trigger-related scaling activities can start.
  *         * `PolicyARN` &mdash; (`String`) The Amazon Resource Name (ARN)
  *           of the policy.
- *         * `Alarms` &mdash; (`Array<Object>`) A list of CloudWatch Alarms
+ *         * `Alarms` &mdash; (`Array<map>`) A list of CloudWatch Alarms
  *           related to the policy.
  *           * `AlarmName` &mdash; (`String`) The name of the alarm.
  *           * `AlarmARN` &mdash; (`String`) The Amazon Resource Name (ARN)
@@ -775,7 +781,7 @@ AWS.AutoScaling = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Activities` &mdash; (`Array<Object>`) A list of the requested
+ *       * `Activities` &mdash; (`Array<map>`) A list of the requested
  *         scaling activities.
  *         * `ActivityId` &mdash; (`String`) Specifies the ID of the
  *           activity.
@@ -791,6 +797,15 @@ AWS.AutoScaling = inherit({})
  *           activity.
  *         * `StatusCode` &mdash; (`String`) Contains the current status of
  *           the activity.
+ *           Possible values include:
+ *           * `WaitingForSpotInstanceRequestId`
+ *           * `WaitingForSpotInstanceId`
+ *           * `WaitingForInstanceId`
+ *           * `PreInService`
+ *           * `InProgress`
+ *           * `Successful`
+ *           * `Failed`
+ *           * `Cancelled`
  *         * `StatusMessage` &mdash; (`String`) Contains a friendly, more
  *           verbose description of the activity status.
  *         * `Progress` &mdash; (`Integer`) Specifies a value between 0 and
@@ -817,8 +832,7 @@ AWS.AutoScaling = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Processes` &mdash; (`Array<Object>`) A list of ProcessType
- *         names.
+ *       * `Processes` &mdash; (`Array<map>`) A list of ProcessType names.
  *         * `ProcessName` &mdash; (`String`) The name of a process.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -855,8 +869,8 @@ AWS.AutoScaling = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ScheduledUpdateGroupActions` &mdash; (`Array<Object>`) A list
- *         of scheduled actions designed to update an Auto Scaling group.
+ *       * `ScheduledUpdateGroupActions` &mdash; (`Array<map>`) A list of
+ *         scheduled actions designed to update an Auto Scaling group.
  *         * `AutoScalingGroupName` &mdash; (`String`) The name of the Auto
  *           Scaling group to be updated.
  *         * `ScheduledActionName` &mdash; (`String`) The name of this
@@ -889,7 +903,7 @@ AWS.AutoScaling = inherit({})
  * @!method describeTags(params, callback)
  *   Calls the DescribeTags API operation.
  *   @param params [Object]
- *     * `Filters` &mdash; (`Array<Object>`) The value of the filter type
+ *     * `Filters` &mdash; (`Array<map>`) The value of the filter type
  *       used to identify the tags to be returned. For example, you can
  *       filter so that tags are returned according to Auto Scaling
  *       group, the key and value, or whether the new tag will be applied
@@ -913,7 +927,7 @@ AWS.AutoScaling = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Tags` &mdash; (`Array<Object>`) The list of tags.
+ *       * `Tags` &mdash; (`Array<map>`) The list of tags.
  *         * `ResourceId` &mdash; (`String`) The name of the Auto Scaling
  *           group.
  *         * `ResourceType` &mdash; (`String`) The kind of resource to
@@ -1231,7 +1245,7 @@ AWS.AutoScaling = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Activity` &mdash; (`Object`) A scaling Activity.
+ *       * `Activity` &mdash; (`map`) A scaling Activity.
  *         * `ActivityId` &mdash; (`String`) Specifies the ID of the
  *           activity.
  *         * `AutoScalingGroupName` &mdash; (`String`) The name of the Auto
@@ -1246,6 +1260,15 @@ AWS.AutoScaling = inherit({})
  *           activity.
  *         * `StatusCode` &mdash; (`String`) Contains the current status of
  *           the activity.
+ *           Possible values include:
+ *           * `WaitingForSpotInstanceRequestId`
+ *           * `WaitingForSpotInstanceId`
+ *           * `WaitingForInstanceId`
+ *           * `PreInService`
+ *           * `InProgress`
+ *           * `Successful`
+ *           * `Failed`
+ *           * `Cancelled`
  *         * `StatusMessage` &mdash; (`String`) Contains a friendly, more
  *           verbose description of the activity status.
  *         * `Progress` &mdash; (`Integer`) Specifies a value between 0 and

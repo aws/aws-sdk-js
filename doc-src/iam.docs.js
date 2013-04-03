@@ -119,13 +119,16 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `AccessKey` &mdash; (`Object`) Information about the access key.
+ *       * `AccessKey` &mdash; (`map`) Information about the access key.
  *         * `UserName` &mdash; (`String`) Name of the user the key is
  *           associated with.
  *         * `AccessKeyId` &mdash; (`String`) The ID for this access key.
  *         * `Status` &mdash; (`String`) The status of the access key.
  *           Active means the key is valid for API calls, while Inactive
  *           means it is not.
+ *           Possible values include:
+ *           * `Active`
+ *           * `Inactive`
  *         * `SecretAccessKey` &mdash; (`String`) The secret key used to
  *           sign requests.
  *         * `CreateDate` &mdash; (`Date`) The date when the access key was
@@ -168,7 +171,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Group` &mdash; (`Object`) Information about the group.
+ *       * `Group` &mdash; (`map`) Information about the group.
  *         * `Path` &mdash; (`String`) Path to the group. For more
  *           information about paths, see Identifiers for IAM Entities in
  *           Using AWS Identity and Access Management.
@@ -206,8 +209,8 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `InstanceProfile` &mdash; (`Object`) Information about the
- *         instance profile.
+ *       * `InstanceProfile` &mdash; (`map`) Information about the instance
+ *         profile.
  *         * `Path` &mdash; (`String`) Path to the instance profile. For
  *           more information about paths, see Identifiers for IAM Entities
  *           in Using AWS Identity and Access Management.
@@ -223,7 +226,7 @@ AWS.IAM = inherit({})
  *           Entities in Using AWS Identity and Access Management.
  *         * `CreateDate` &mdash; (`Date`) The date when the instance
  *           profile was created.
- *         * `Roles` &mdash; (`Array<Object>`) The role associated with the
+ *         * `Roles` &mdash; (`Array<map>`) The role associated with the
  *           instance profile.
  *           * `Path` &mdash; (`String`) Path to the role. For more
  *             information about paths, see Identifiers for IAM Entities in
@@ -264,8 +267,8 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `LoginProfile` &mdash; (`Object`) The user name and password
- *         create date.
+ *       * `LoginProfile` &mdash; (`map`) The user name and password create
+ *         date.
  *         * `UserName` &mdash; (`String`) The name of the user, which can
  *           be used for signing into the AWS Management Console.
  *         * `CreateDate` &mdash; (`Date`) The date when the password for
@@ -295,7 +298,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Role` &mdash; (`Object`) Information about the role.
+ *       * `Role` &mdash; (`map`) Information about the role.
  *         * `Path` &mdash; (`String`) Path to the role. For more
  *           information about paths, see Identifiers for IAM Entities in
  *           Using AWS Identity and Access Management.
@@ -337,7 +340,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `User` &mdash; (`Object`) Information about the user.
+ *       * `User` &mdash; (`map`) Information about the user.
  *         * `Path` &mdash; (`String`) Path to the user. For more
  *           information about paths, see Identifiers for IAM Entities in
  *           Using AWS Identity and Access Management.
@@ -376,8 +379,8 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `VirtualMFADevice` &mdash; (`Object`) A newly created virtual
- *         MFA device.
+ *       * `VirtualMFADevice` &mdash; (`map`) A newly created virtual MFA
+ *         device.
  *         * `SerialNumber` &mdash; (`String`) The serial number associated
  *           with VirtualMFADevice.
  *         * `Base32StringSeed` &mdash; (`Base64 Encoded String`) The
@@ -390,7 +393,7 @@ AWS.IAM = inherit({})
  *           create call arguments, AccountName is the user name if set
  *           (accountId otherwise), and Base32String is the seed in Base32
  *           format. The Base32String is Base64-encoded.
- *         * `User` &mdash; (`Object`)
+ *         * `User` &mdash; (`map`)
  *           * `Path` &mdash; (`String`) Path to the user. For more
  *             information about paths, see Identifiers for IAM Entities in
  *             Using AWS Identity and Access Management.
@@ -698,7 +701,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `PasswordPolicy` &mdash; (`Object`)
+ *       * `PasswordPolicy` &mdash; (`map`)
  *         * `MinimumPasswordLength` &mdash; (`Integer`) Minimum length to
  *           require for IAM user passwords.
  *         * `RequireSymbols` &mdash; (`Boolean`) Specifies whether to
@@ -729,9 +732,9 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `SummaryMap` &mdash; (`Object<Integer>`) A set of key value
- *         pairs containing account-level information. SummaryMap contains
- *         the following keys: AccessKeysPerUserQuota - Maximum number of
+ *       * `SummaryMap` &mdash; (`map<Integer>`) A set of key value pairs
+ *         containing account-level information. SummaryMap contains the
+ *         following keys: AccessKeysPerUserQuota - Maximum number of
  *         access keys that can be created per user AccountMFAEnabled - 1
  *         if the root account has an MFA device assigned to it, 0
  *         otherwise AssumeRolePolicySizeQuota - Maximum allowed size for
@@ -782,7 +785,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Group` &mdash; (`Object`) Information about the group.
+ *       * `Group` &mdash; (`map`) Information about the group.
  *         * `Path` &mdash; (`String`) Path to the group. For more
  *           information about paths, see Identifiers for IAM Entities in
  *           Using AWS Identity and Access Management.
@@ -798,7 +801,7 @@ AWS.IAM = inherit({})
  *           Using AWS Identity and Access Management.
  *         * `CreateDate` &mdash; (`Date`) The date when the group was
  *           created.
- *       * `Users` &mdash; (`Array<Object>`) A list of users in the group.
+ *       * `Users` &mdash; (`Array<map>`) A list of users in the group.
  *         * `Path` &mdash; (`String`) Path to the user. For more
  *           information about paths, see Identifiers for IAM Entities in
  *           Using AWS Identity and Access Management.
@@ -863,8 +866,8 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `InstanceProfile` &mdash; (`Object`) Information about the
- *         instance profile.
+ *       * `InstanceProfile` &mdash; (`map`) Information about the instance
+ *         profile.
  *         * `Path` &mdash; (`String`) Path to the instance profile. For
  *           more information about paths, see Identifiers for IAM Entities
  *           in Using AWS Identity and Access Management.
@@ -880,7 +883,7 @@ AWS.IAM = inherit({})
  *           Entities in Using AWS Identity and Access Management.
  *         * `CreateDate` &mdash; (`Date`) The date when the instance
  *           profile was created.
- *         * `Roles` &mdash; (`Array<Object>`) The role associated with the
+ *         * `Roles` &mdash; (`Array<map>`) The role associated with the
  *           instance profile.
  *           * `Path` &mdash; (`String`) Path to the role. For more
  *             information about paths, see Identifiers for IAM Entities in
@@ -919,7 +922,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `LoginProfile` &mdash; (`Object`) User name and password create
+ *       * `LoginProfile` &mdash; (`map`) User name and password create
  *         date for the user.
  *         * `UserName` &mdash; (`String`) The name of the user, which can
  *           be used for signing into the AWS Management Console.
@@ -943,7 +946,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Role` &mdash; (`Object`) Information about the role.
+ *       * `Role` &mdash; (`map`) Information about the role.
  *         * `Path` &mdash; (`String`) Path to the role. For more
  *           information about paths, see Identifiers for IAM Entities in
  *           Using AWS Identity and Access Management.
@@ -1006,9 +1009,9 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ServerCertificate` &mdash; (`Object`) Information about the
- *         server certificate.
- *         * `ServerCertificateMetadata` &mdash; (`Object`) The meta
+ *       * `ServerCertificate` &mdash; (`map`) Information about the server
+ *         certificate.
+ *         * `ServerCertificateMetadata` &mdash; (`map`) The meta
  *           information of the server certificate, such as its name, path,
  *           ID, and ARN.
  *           * `Path` &mdash; (`String`) Path to the server certificate.
@@ -1050,7 +1053,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `User` &mdash; (`Object`) Information about the user.
+ *       * `User` &mdash; (`map`) Information about the user.
  *         * `Path` &mdash; (`String`) Path to the user. For more
  *           information about paths, see Identifiers for IAM Entities in
  *           Using AWS Identity and Access Management.
@@ -1115,14 +1118,17 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `AccessKeyMetadata` &mdash; (`Array<Object>`) A list of access
- *         key metadata.
+ *       * `AccessKeyMetadata` &mdash; (`Array<map>`) A list of access key
+ *         metadata.
  *         * `UserName` &mdash; (`String`) Name of the user the key is
  *           associated with.
  *         * `AccessKeyId` &mdash; (`String`) The ID for this access key.
  *         * `Status` &mdash; (`String`) The status of the access key.
  *           Active means the key is valid for API calls, while Inactive
  *           means it is not.
+ *           Possible values include:
+ *           * `Active`
+ *           * `Inactive`
  *         * `CreateDate` &mdash; (`Date`) The date when the access key was
  *           created.
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
@@ -1233,7 +1239,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Groups` &mdash; (`Array<Object>`) A list of groups.
+ *       * `Groups` &mdash; (`Array<map>`) A list of groups.
  *         * `Path` &mdash; (`String`) Path to the group. For more
  *           information about paths, see Identifiers for IAM Entities in
  *           Using AWS Identity and Access Management.
@@ -1282,7 +1288,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Groups` &mdash; (`Array<Object>`) A list of groups.
+ *       * `Groups` &mdash; (`Array<map>`) A list of groups.
  *         * `Path` &mdash; (`String`) Path to the group. For more
  *           information about paths, see Identifiers for IAM Entities in
  *           Using AWS Identity and Access Management.
@@ -1337,7 +1343,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `InstanceProfiles` &mdash; (`Array<Object>`) A list of instance
+ *       * `InstanceProfiles` &mdash; (`Array<map>`) A list of instance
  *         profiles.
  *         * `Path` &mdash; (`String`) Path to the instance profile. For
  *           more information about paths, see Identifiers for IAM Entities
@@ -1354,7 +1360,7 @@ AWS.IAM = inherit({})
  *           Entities in Using AWS Identity and Access Management.
  *         * `CreateDate` &mdash; (`Date`) The date when the instance
  *           profile was created.
- *         * `Roles` &mdash; (`Array<Object>`) The role associated with the
+ *         * `Roles` &mdash; (`Array<map>`) The role associated with the
  *           instance profile.
  *           * `Path` &mdash; (`String`) Path to the role. For more
  *             information about paths, see Identifiers for IAM Entities in
@@ -1411,7 +1417,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `InstanceProfiles` &mdash; (`Array<Object>`) A list of instance
+ *       * `InstanceProfiles` &mdash; (`Array<map>`) A list of instance
  *         profiles.
  *         * `Path` &mdash; (`String`) Path to the instance profile. For
  *           more information about paths, see Identifiers for IAM Entities
@@ -1428,7 +1434,7 @@ AWS.IAM = inherit({})
  *           Entities in Using AWS Identity and Access Management.
  *         * `CreateDate` &mdash; (`Date`) The date when the instance
  *           profile was created.
- *         * `Roles` &mdash; (`Array<Object>`) The role associated with the
+ *         * `Roles` &mdash; (`Array<map>`) The role associated with the
  *           instance profile.
  *           * `Path` &mdash; (`String`) Path to the role. For more
  *             information about paths, see Identifiers for IAM Entities in
@@ -1483,7 +1489,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `MFADevices` &mdash; (`Array<Object>`) A list of MFA devices.
+ *       * `MFADevices` &mdash; (`Array<map>`) A list of MFA devices.
  *         * `UserName` &mdash; (`String`) The user with whom the MFA
  *           device is associated.
  *         * `SerialNumber` &mdash; (`String`) The serial number that
@@ -1568,7 +1574,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Roles` &mdash; (`Array<Object>`) A list of roles.
+ *       * `Roles` &mdash; (`Array<map>`) A list of roles.
  *         * `Path` &mdash; (`String`) Path to the role. For more
  *           information about paths, see Identifiers for IAM Entities in
  *           Using AWS Identity and Access Management.
@@ -1626,8 +1632,8 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ServerCertificateMetadataList` &mdash; (`Array<Object>`) A list
- *         of server certificates.
+ *       * `ServerCertificateMetadataList` &mdash; (`Array<map>`) A list of
+ *         server certificates.
  *         * `Path` &mdash; (`String`) Path to the server certificate. For
  *           more information about paths, see Identifiers for IAM Entities
  *           in Using AWS Identity and Access Management.
@@ -1677,7 +1683,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Certificates` &mdash; (`Array<Object>`) A list of the user's
+ *       * `Certificates` &mdash; (`Array<map>`) A list of the user's
  *         signing certificate information.
  *         * `UserName` &mdash; (`String`) Name of the user the signing
  *           certificate is associated with.
@@ -1688,6 +1694,9 @@ AWS.IAM = inherit({})
  *         * `Status` &mdash; (`String`) The status of the signing
  *           certificate. Active means the key is valid for API calls,
  *           while Inactive means it is not.
+ *           Possible values include:
+ *           * `Active`
+ *           * `Inactive`
  *         * `UploadDate` &mdash; (`Date`) The date when the signing
  *           certificate was uploaded.
  *       * `IsTruncated` &mdash; (`Boolean`) A flag that indicates whether
@@ -1765,7 +1774,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Users` &mdash; (`Array<Object>`) A list of users.
+ *       * `Users` &mdash; (`Array<map>`) A list of users.
  *         * `Path` &mdash; (`String`) Path to the user. For more
  *           information about paths, see Identifiers for IAM Entities in
  *           Using AWS Identity and Access Management.
@@ -1797,6 +1806,10 @@ AWS.IAM = inherit({})
  *       assigned) of the devices to list. If you do not specify an
  *       AssignmentStatus, the action defaults to Any which lists both
  *       assigned and unassigned virtual MFA devices.
+ *       Possible values include:
+ *       * `Assigned`
+ *       * `Unassigned`
+ *       * `Any`
  *     * `Marker` &mdash; (`String`) Use this parameter only when
  *       paginating results, and only in a subsequent request after
  *       you've received a response where the results are truncated. Set
@@ -1817,7 +1830,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `VirtualMFADevices` &mdash; (`Array<Object>`)
+ *       * `VirtualMFADevices` &mdash; (`Array<map>`)
  *         * `SerialNumber` &mdash; (`String`) The serial number associated
  *           with VirtualMFADevice.
  *         * `Base32StringSeed` &mdash; (`Base64 Encoded String`) The
@@ -1830,7 +1843,7 @@ AWS.IAM = inherit({})
  *           create call arguments, AccountName is the user name if set
  *           (accountId otherwise), and Base32String is the seed in Base32
  *           format. The Base32String is Base64-encoded.
- *         * `User` &mdash; (`Object`)
+ *         * `User` &mdash; (`map`)
  *           * `Path` &mdash; (`String`) Path to the user. For more
  *             information about paths, see Identifiers for IAM Entities in
  *             Using AWS Identity and Access Management.
@@ -1985,6 +1998,9 @@ AWS.IAM = inherit({})
  *       want to assign to the Secret Access Key. Active means the key
  *       can be used for API calls to AWS, while Inactive means the key
  *       cannot be used.
+ *       Possible values include:
+ *       * `Active`
+ *       * `Inactive`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -2106,6 +2122,9 @@ AWS.IAM = inherit({})
  *       want to assign to the certificate. Active means the certificate
  *       can be used for API calls to AWS, while Inactive means the
  *       certificate cannot be used.
+ *       Possible values include:
+ *       * `Active`
+ *       * `Inactive`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -2166,9 +2185,9 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `ServerCertificateMetadata` &mdash; (`Object`) The meta
- *         information of the uploaded server certificate without its
- *         certificate body, certificate chain, and private key.
+ *       * `ServerCertificateMetadata` &mdash; (`map`) The meta information
+ *         of the uploaded server certificate without its certificate body,
+ *         certificate chain, and private key.
  *         * `Path` &mdash; (`String`) Path to the server certificate. For
  *           more information about paths, see Identifiers for IAM Entities
  *           in Using AWS Identity and Access Management.
@@ -2204,8 +2223,7 @@ AWS.IAM = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Certificate` &mdash; (`Object`) Information about the
- *         certificate.
+ *       * `Certificate` &mdash; (`map`) Information about the certificate.
  *         * `UserName` &mdash; (`String`) Name of the user the signing
  *           certificate is associated with.
  *         * `CertificateId` &mdash; (`String`) The ID for the signing
@@ -2215,6 +2233,9 @@ AWS.IAM = inherit({})
  *         * `Status` &mdash; (`String`) The status of the signing
  *           certificate. Active means the key is valid for API calls,
  *           while Inactive means it is not.
+ *           Possible values include:
+ *           * `Active`
+ *           * `Inactive`
  *         * `UploadDate` &mdash; (`Date`) The date when the signing
  *           certificate was uploaded.
  *   @return [AWS.Request] a handle to the operation request for

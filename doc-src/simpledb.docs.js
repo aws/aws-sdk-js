@@ -57,10 +57,10 @@ AWS.SimpleDB = inherit({})
  *   @param params [Object]
  *     * `DomainName` &mdash; **required** &mdash; (`String`) The name of
  *       the domain in which the attributes are being deleted.
- *     * `Items` &mdash; **required** &mdash; (`Array<Object>`) A list of
+ *     * `Items` &mdash; **required** &mdash; (`Array<map>`) A list of
  *       items on which to perform the operation.
  *       * `Name` &mdash; **required** &mdash; (`String`)
- *       * `Attributes` &mdash; (`Array<Object>`)
+ *       * `Attributes` &mdash; (`Array<map>`)
  *         * `Name` &mdash; **required** &mdash; (`String`) The name of
  *           the attribute.
  *         * `AlternateNameEncoding` &mdash; (`String`)
@@ -83,12 +83,12 @@ AWS.SimpleDB = inherit({})
  *   @param params [Object]
  *     * `DomainName` &mdash; **required** &mdash; (`String`) The name of
  *       the domain in which the attributes are being stored.
- *     * `Items` &mdash; **required** &mdash; (`Array<Object>`) A list of
+ *     * `Items` &mdash; **required** &mdash; (`Array<map>`) A list of
  *       items on which to perform the operation.
  *       * `Name` &mdash; **required** &mdash; (`String`) The name of the
  *         replaceable item.
- *       * `Attributes` &mdash; **required** &mdash; (`Array<Object>`)
- *         The list of attributes for a replaceable item.
+ *       * `Attributes` &mdash; **required** &mdash; (`Array<map>`) The
+ *         list of attributes for a replaceable item.
  *         * `Name` &mdash; **required** &mdash; (`String`) The name of
  *           the replaceable attribute.
  *         * `Value` &mdash; **required** &mdash; (`String`) The value of
@@ -134,7 +134,7 @@ AWS.SimpleDB = inherit({})
  *       the item. Similar to rows on a spreadsheet, items represent
  *       individual objects that contain one or more value-attribute
  *       pairs.
- *     * `Attributes` &mdash; (`Array<Object>`) A list of Attributes.
+ *     * `Attributes` &mdash; (`Array<map>`) A list of Attributes.
  *       Similar to columns on a spreadsheet, attributes represent
  *       categories of data that can be assigned to items.
  *       * `Name` &mdash; **required** &mdash; (`String`) The name of the
@@ -143,7 +143,7 @@ AWS.SimpleDB = inherit({})
  *       * `Value` &mdash; **required** &mdash; (`String`) The value of
  *         the attribute.
  *       * `AlternateValueEncoding` &mdash; (`String`)
- *     * `Expected` &mdash; (`Object`) The update condition which, if
+ *     * `Expected` &mdash; (`map`) The update condition which, if
  *       specified, determines whether the specified attributes will be
  *       deleted or not. The update condition must be satisfied in order
  *       for this request to be processed and the attributes to be
@@ -243,7 +243,7 @@ AWS.SimpleDB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Attributes` &mdash; (`Array<Object>`) The list of attributes
+ *       * `Attributes` &mdash; (`Array<map>`) The list of attributes
  *         returned by the operation.
  *         * `Name` &mdash; (`String`) The name of the attribute.
  *         * `AlternateNameEncoding` &mdash; (`String`)
@@ -285,7 +285,7 @@ AWS.SimpleDB = inherit({})
  *       the domain in which to perform the operation.
  *     * `ItemName` &mdash; **required** &mdash; (`String`) The name of
  *       the item.
- *     * `Attributes` &mdash; **required** &mdash; (`Array<Object>`) The
+ *     * `Attributes` &mdash; **required** &mdash; (`Array<map>`) The
  *       list of attributes.
  *       * `Name` &mdash; **required** &mdash; (`String`) The name of the
  *         replaceable attribute.
@@ -294,7 +294,7 @@ AWS.SimpleDB = inherit({})
  *       * `Replace` &mdash; (`Boolean`) A flag specifying whether or not
  *         to replace the attribute/value pair or to add a new
  *         attribute/value pair. The default setting is false.
- *     * `Expected` &mdash; (`Object`) The update condition which, if
+ *     * `Expected` &mdash; (`map`) The update condition which, if
  *       specified, determines whether the specified attributes will be
  *       updated or not. The update condition must be satisfied in order
  *       for this request to be processed and the attributes to be
@@ -344,11 +344,11 @@ AWS.SimpleDB = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Items` &mdash; (`Array<Object>`) A list of items that match the
+ *       * `Items` &mdash; (`Array<map>`) A list of items that match the
  *         select expression.
  *         * `Name` &mdash; (`String`) The name of the item.
  *         * `AlternateNameEncoding` &mdash; (`String`)
- *         * `Attributes` &mdash; (`Array<Object>`) A list of attributes.
+ *         * `Attributes` &mdash; (`Array<map>`) A list of attributes.
  *           * `Name` &mdash; (`String`) The name of the attribute.
  *           * `AlternateNameEncoding` &mdash; (`String`)
  *           * `Value` &mdash; (`String`) The value of the attribute.

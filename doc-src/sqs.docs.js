@@ -105,9 +105,9 @@ AWS.SQS = inherit({})
  *   @param params [Object]
  *     * `QueueUrl` &mdash; **required** &mdash; (`String`) The URL of
  *       the SQS queue to take action on.
- *     * `Entries` &mdash; **required** &mdash; (`Array<Object>`) A list
- *       of receipt handles of the messages for which the visibility
- *       timeout must be changed.
+ *     * `Entries` &mdash; **required** &mdash; (`Array<map>`) A list of
+ *       receipt handles of the messages for which the visibility timeout
+ *       must be changed.
  *       * `Id` &mdash; **required** &mdash; (`String`) An identifier for
  *         this particular receipt handle. This is used to communicate
  *         the result. Note that the Ids of a batch request need to be
@@ -126,11 +126,11 @@ AWS.SQS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Successful` &mdash; (`Array<Object>`) A list of
+ *       * `Successful` &mdash; (`Array<map>`) A list of
  *         ChangeMessageVisibilityBatchResultEntrys.
  *         * `Id` &mdash; (`String`) Represents a message whose visibility
  *           timeout has been changed successfully.
- *       * `Failed` &mdash; (`Array<Object>`) A list of
+ *       * `Failed` &mdash; (`Array<map>`) A list of
  *         BatchResultErrorEntrys.
  *         * `Id` &mdash; (`String`) The id of an entry in a batch request.
  *         * `SenderFault` &mdash; (`Boolean`) Whether the error happened
@@ -147,7 +147,7 @@ AWS.SQS = inherit({})
  *   @param params [Object]
  *     * `QueueName` &mdash; **required** &mdash; (`String`) The name for
  *       the queue to be created.
- *     * `Attributes` &mdash; (`Object<String>`) A map of attributes with
+ *     * `Attributes` &mdash; (`map<String>`) A map of attributes with
  *       their corresponding values.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -186,8 +186,8 @@ AWS.SQS = inherit({})
  *   @param params [Object]
  *     * `QueueUrl` &mdash; **required** &mdash; (`String`) The URL of
  *       the SQS queue to take action on.
- *     * `Entries` &mdash; **required** &mdash; (`Array<Object>`) A list
- *       of receipt handles for the messages to be deleted.
+ *     * `Entries` &mdash; **required** &mdash; (`Array<map>`) A list of
+ *       receipt handles for the messages to be deleted.
  *       * `Id` &mdash; **required** &mdash; (`String`) An identifier for
  *         this particular receipt handle. This is used to communicate
  *         the result. Note that the Ids of a batch request need to be
@@ -204,11 +204,11 @@ AWS.SQS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Successful` &mdash; (`Array<Object>`) A list of
+ *       * `Successful` &mdash; (`Array<map>`) A list of
  *         DeleteMessageBatchResultEntrys.
  *         * `Id` &mdash; (`String`) Represents a successfully deleted
  *           message.
- *       * `Failed` &mdash; (`Array<Object>`) A list of
+ *       * `Failed` &mdash; (`Array<map>`) A list of
  *         BatchResultErrorEntrys.
  *         * `Id` &mdash; (`String`) The id of an entry in a batch request.
  *         * `SenderFault` &mdash; (`Boolean`) Whether the error happened
@@ -253,8 +253,8 @@ AWS.SQS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Attributes` &mdash; (`Object<String>`) A map of attributes to
- *         the respective values.
+ *       * `Attributes` &mdash; (`map<String>`) A map of attributes to the
+ *         respective values.
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -332,12 +332,12 @@ AWS.SQS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Messages` &mdash; (`Array<Object>`) A list of messages.
+ *       * `Messages` &mdash; (`Array<map>`) A list of messages.
  *         * `MessageId` &mdash; (`String`)
  *         * `ReceiptHandle` &mdash; (`String`)
  *         * `MD5OfBody` &mdash; (`String`)
  *         * `Body` &mdash; (`String`)
- *         * `Attributes` &mdash; (`Object<String>`)
+ *         * `Attributes` &mdash; (`map<String>`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -394,8 +394,8 @@ AWS.SQS = inherit({})
  *   @param params [Object]
  *     * `QueueUrl` &mdash; **required** &mdash; (`String`) The URL of
  *       the SQS queue to take action on.
- *     * `Entries` &mdash; **required** &mdash; (`Array<Object>`) A list
- *       of SendMessageBatchRequestEntrys.
+ *     * `Entries` &mdash; **required** &mdash; (`Array<map>`) A list of
+ *       SendMessageBatchRequestEntrys.
  *       * `Id` &mdash; **required** &mdash; (`String`) An identifier for
  *         the message in this batch. This is used to communicate the
  *         result. Note that the the Ids of a batch request need to be
@@ -414,7 +414,7 @@ AWS.SQS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Successful` &mdash; (`Array<Object>`) A list of
+ *       * `Successful` &mdash; (`Array<map>`) A list of
  *         SendMessageBatchResultEntrys.
  *         * `Id` &mdash; (`String`) An identifier for the message in this
  *           batch.
@@ -425,9 +425,9 @@ AWS.SQS = inherit({})
  *           decodes the message before creating the MD5 digest. For
  *           information about MD5, go to
  *           http://faqs.org/rfcs/rfc1321.html.
- *       * `Failed` &mdash; (`Array<Object>`) A list of
- *         BatchResultErrorEntrys with the error detail about each message
- *         that could not be enqueued.
+ *       * `Failed` &mdash; (`Array<map>`) A list of BatchResultErrorEntrys
+ *         with the error detail about each message that could not be
+ *         enqueued.
  *         * `Id` &mdash; (`String`) The id of an entry in a batch request.
  *         * `SenderFault` &mdash; (`Boolean`) Whether the error happened
  *           due to the sender's fault.
@@ -443,8 +443,8 @@ AWS.SQS = inherit({})
  *   @param params [Object]
  *     * `QueueUrl` &mdash; **required** &mdash; (`String`) The URL of
  *       the SQS queue to take action on.
- *     * `Attributes` &mdash; **required** &mdash; (`Object<String>`) A
- *       map of attributes to set.
+ *     * `Attributes` &mdash; **required** &mdash; (`map<String>`) A map
+ *       of attributes to set.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}

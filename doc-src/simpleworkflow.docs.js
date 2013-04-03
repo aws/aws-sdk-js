@@ -57,45 +57,52 @@ AWS.SimpleWorkflow = inherit({})
  *   @param params [Object]
  *     * `domain` &mdash; **required** &mdash; (`String`) The name of the
  *       domain containing the workflow executions to count.
- *     * `startTimeFilter` &mdash; (`Object`) If specified, only workflow
+ *     * `startTimeFilter` &mdash; (`map`) If specified, only workflow
  *       executions that meet the start time criteria of the filter are
  *       counted. startTimeFilter and closeTimeFilter are mutually
  *       exclusive. You must specify one of these in a request but not
  *       both.
  *       * `oldestDate` &mdash; **required** &mdash; (`Date`)
  *       * `latestDate` &mdash; (`Date`)
- *     * `closeTimeFilter` &mdash; (`Object`) If specified, only workflow
+ *     * `closeTimeFilter` &mdash; (`map`) If specified, only workflow
  *       executions that meet the close time criteria of the filter are
  *       counted. startTimeFilter and closeTimeFilter are mutually
  *       exclusive. You must specify one of these in a request but not
  *       both.
  *       * `oldestDate` &mdash; **required** &mdash; (`Date`)
  *       * `latestDate` &mdash; (`Date`)
- *     * `executionFilter` &mdash; (`Object`) If specified, only workflow
+ *     * `executionFilter` &mdash; (`map`) If specified, only workflow
  *       executions matching the WorkflowId in the filter are counted.
  *       closeStatusFilter, executionFilter, typeFilter and tagFilter are
  *       mutually exclusive. You can specify at most one of these in a
  *       request.
  *       * `workflowId` &mdash; **required** &mdash; (`String`)
- *     * `typeFilter` &mdash; (`Object`) If specified, indicates the type
- *       of the workflow executions to be counted. closeStatusFilter,
+ *     * `typeFilter` &mdash; (`map`) If specified, indicates the type of
+ *       the workflow executions to be counted. closeStatusFilter,
  *       executionFilter, typeFilter and tagFilter are mutually
  *       exclusive. You can specify at most one of these in a request.
  *       * `name` &mdash; **required** &mdash; (`String`)
  *       * `version` &mdash; (`String`)
- *     * `tagFilter` &mdash; (`Object`) If specified, only executions
- *       that have a tag that matches the filter are counted.
+ *     * `tagFilter` &mdash; (`map`) If specified, only executions that
+ *       have a tag that matches the filter are counted.
  *       closeStatusFilter, executionFilter, typeFilter and tagFilter are
  *       mutually exclusive. You can specify at most one of these in a
  *       request.
  *       * `tag` &mdash; **required** &mdash; (`String`)
- *     * `closeStatusFilter` &mdash; (`Object`) If specified, only
- *       workflow executions that match this close status are counted.
- *       This filter has an affect only if executionStatus is specified
- *       as CLOSED. closeStatusFilter, executionFilter, typeFilter and
- *       tagFilter are mutually exclusive. You can specify at most one of
- *       these in a request.
+ *     * `closeStatusFilter` &mdash; (`map`) If specified, only workflow
+ *       executions that match this close status are counted. This filter
+ *       has an affect only if executionStatus is specified as CLOSED.
+ *       closeStatusFilter, executionFilter, typeFilter and tagFilter are
+ *       mutually exclusive. You can specify at most one of these in a
+ *       request.
  *       * `status` &mdash; **required** &mdash; (`String`)
+ *         Possible values include:
+ *         * `COMPLETED`
+ *         * `FAILED`
+ *         * `CANCELED`
+ *         * `TERMINATED`
+ *         * `CONTINUED_AS_NEW`
+ *         * `TIMED_OUT`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -116,23 +123,23 @@ AWS.SimpleWorkflow = inherit({})
  *   @param params [Object]
  *     * `domain` &mdash; **required** &mdash; (`String`) The name of the
  *       domain containing the workflow executions to count.
- *     * `startTimeFilter` &mdash; **required** &mdash; (`Object`)
- *       Specifies the start time criteria that workflow executions must
- *       meet in order to be counted.
+ *     * `startTimeFilter` &mdash; **required** &mdash; (`map`) Specifies
+ *       the start time criteria that workflow executions must meet in
+ *       order to be counted.
  *       * `oldestDate` &mdash; **required** &mdash; (`Date`)
  *       * `latestDate` &mdash; (`Date`)
- *     * `typeFilter` &mdash; (`Object`) Specifies the type of the
- *       workflow executions to be counted. executionFilter, typeFilter
- *       and tagFilter are mutually exclusive. You can specify at most
- *       one of these in a request.
+ *     * `typeFilter` &mdash; (`map`) Specifies the type of the workflow
+ *       executions to be counted. executionFilter, typeFilter and
+ *       tagFilter are mutually exclusive. You can specify at most one of
+ *       these in a request.
  *       * `name` &mdash; **required** &mdash; (`String`)
  *       * `version` &mdash; (`String`)
- *     * `tagFilter` &mdash; (`Object`) If specified, only executions
- *       that have a tag that matches the filter are counted.
- *       executionFilter, typeFilter and tagFilter are mutually
- *       exclusive. You can specify at most one of these in a request.
+ *     * `tagFilter` &mdash; (`map`) If specified, only executions that
+ *       have a tag that matches the filter are counted. executionFilter,
+ *       typeFilter and tagFilter are mutually exclusive. You can specify
+ *       at most one of these in a request.
  *       * `tag` &mdash; **required** &mdash; (`String`)
- *     * `executionFilter` &mdash; (`Object`) If specified, only workflow
+ *     * `executionFilter` &mdash; (`map`) If specified, only workflow
  *       executions matching the WorkflowId in the filter are counted.
  *       executionFilter, typeFilter and tagFilter are mutually
  *       exclusive. You can specify at most one of these in a request.
@@ -157,8 +164,8 @@ AWS.SimpleWorkflow = inherit({})
  *   @param params [Object]
  *     * `domain` &mdash; **required** &mdash; (`String`) The name of the
  *       domain that contains the task list.
- *     * `taskList` &mdash; **required** &mdash; (`Object`) The name of
- *       the task list.
+ *     * `taskList` &mdash; **required** &mdash; (`map`) The name of the
+ *       task list.
  *       * `name` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -180,8 +187,8 @@ AWS.SimpleWorkflow = inherit({})
  *   @param params [Object]
  *     * `domain` &mdash; **required** &mdash; (`String`) The name of the
  *       domain that contains the task list.
- *     * `taskList` &mdash; **required** &mdash; (`Object`) The name of
- *       the task list.
+ *     * `taskList` &mdash; **required** &mdash; (`map`) The name of the
+ *       task list.
  *       * `name` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
@@ -203,8 +210,8 @@ AWS.SimpleWorkflow = inherit({})
  *   @param params [Object]
  *     * `domain` &mdash; **required** &mdash; (`String`) The name of the
  *       domain in which the activity type is registered.
- *     * `activityType` &mdash; **required** &mdash; (`Object`) The
- *       activity type to deprecate.
+ *     * `activityType` &mdash; **required** &mdash; (`map`) The activity
+ *       type to deprecate.
  *       * `name` &mdash; **required** &mdash; (`String`)
  *       * `version` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
@@ -239,8 +246,8 @@ AWS.SimpleWorkflow = inherit({})
  *   @param params [Object]
  *     * `domain` &mdash; **required** &mdash; (`String`) The name of the
  *       domain in which the workflow type is registered.
- *     * `workflowType` &mdash; **required** &mdash; (`Object`) The
- *       workflow type to deprecate.
+ *     * `workflowType` &mdash; **required** &mdash; (`map`) The workflow
+ *       type to deprecate.
  *       * `name` &mdash; **required** &mdash; (`String`)
  *       * `version` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
@@ -259,8 +266,8 @@ AWS.SimpleWorkflow = inherit({})
  *   @param params [Object]
  *     * `domain` &mdash; **required** &mdash; (`String`) The name of the
  *       domain in which the activity type is registered.
- *     * `activityType` &mdash; **required** &mdash; (`Object`) The
- *       activity type to describe.
+ *     * `activityType` &mdash; **required** &mdash; (`map`) The activity
+ *       type to describe.
  *       * `name` &mdash; **required** &mdash; (`String`)
  *       * `version` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
@@ -273,18 +280,21 @@ AWS.SimpleWorkflow = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `typeInfo` &mdash; (`Object`)
- *         * `activityType` &mdash; (`Object`)
+ *       * `typeInfo` &mdash; (`map`)
+ *         * `activityType` &mdash; (`map`)
  *           * `name` &mdash; (`String`)
  *           * `version` &mdash; (`String`)
  *         * `status` &mdash; (`String`)
+ *           Possible values include:
+ *           * `REGISTERED`
+ *           * `DEPRECATED`
  *         * `description` &mdash; (`String`)
  *         * `creationDate` &mdash; (`Date`)
  *         * `deprecationDate` &mdash; (`Date`)
- *       * `configuration` &mdash; (`Object`)
+ *       * `configuration` &mdash; (`map`)
  *         * `defaultTaskStartToCloseTimeout` &mdash; (`String`)
  *         * `defaultTaskHeartbeatTimeout` &mdash; (`String`)
- *         * `defaultTaskList` &mdash; (`Object`)
+ *         * `defaultTaskList` &mdash; (`map`)
  *           * `name` &mdash; (`String`)
  *         * `defaultTaskScheduleToStartTimeout` &mdash; (`String`)
  *         * `defaultTaskScheduleToCloseTimeout` &mdash; (`String`)
@@ -306,11 +316,14 @@ AWS.SimpleWorkflow = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `domainInfo` &mdash; (`Object`)
+ *       * `domainInfo` &mdash; (`map`)
  *         * `name` &mdash; (`String`)
  *         * `status` &mdash; (`String`)
+ *           Possible values include:
+ *           * `REGISTERED`
+ *           * `DEPRECATED`
  *         * `description` &mdash; (`String`)
- *       * `configuration` &mdash; (`Object`)
+ *       * `configuration` &mdash; (`map`)
  *         * `workflowExecutionRetentionPeriodInDays` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
@@ -320,7 +333,7 @@ AWS.SimpleWorkflow = inherit({})
  *   @param params [Object]
  *     * `domain` &mdash; **required** &mdash; (`String`) The name of the
  *       domain containing the workflow execution.
- *     * `execution` &mdash; **required** &mdash; (`Object`) The workflow
+ *     * `execution` &mdash; **required** &mdash; (`map`) The workflow
  *       execution to describe.
  *       * `workflowId` &mdash; **required** &mdash; (`String`)
  *       * `runId` &mdash; **required** &mdash; (`String`)
@@ -334,29 +347,43 @@ AWS.SimpleWorkflow = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `executionInfo` &mdash; (`Object`)
- *         * `execution` &mdash; (`Object`)
+ *       * `executionInfo` &mdash; (`map`)
+ *         * `execution` &mdash; (`map`)
  *           * `workflowId` &mdash; (`String`)
  *           * `runId` &mdash; (`String`)
- *         * `workflowType` &mdash; (`Object`)
+ *         * `workflowType` &mdash; (`map`)
  *           * `name` &mdash; (`String`)
  *           * `version` &mdash; (`String`)
  *         * `startTimestamp` &mdash; (`Date`)
  *         * `closeTimestamp` &mdash; (`Date`)
  *         * `executionStatus` &mdash; (`String`)
+ *           Possible values include:
+ *           * `OPEN`
+ *           * `CLOSED`
  *         * `closeStatus` &mdash; (`String`)
- *         * `parent` &mdash; (`Object`)
+ *           Possible values include:
+ *           * `COMPLETED`
+ *           * `FAILED`
+ *           * `CANCELED`
+ *           * `TERMINATED`
+ *           * `CONTINUED_AS_NEW`
+ *           * `TIMED_OUT`
+ *         * `parent` &mdash; (`map`)
  *           * `workflowId` &mdash; (`String`)
  *           * `runId` &mdash; (`String`)
  *         * `tagList` &mdash; (`Array<String>`)
  *         * `cancelRequested` &mdash; (`Boolean`)
- *       * `executionConfiguration` &mdash; (`Object`)
+ *       * `executionConfiguration` &mdash; (`map`)
  *         * `taskStartToCloseTimeout` &mdash; (`String`)
  *         * `executionStartToCloseTimeout` &mdash; (`String`)
- *         * `taskList` &mdash; (`Object`)
+ *         * `taskList` &mdash; (`map`)
  *           * `name` &mdash; (`String`)
  *         * `childPolicy` &mdash; (`String`)
- *       * `openCounts` &mdash; (`Object`)
+ *           Possible values include:
+ *           * `TERMINATE`
+ *           * `REQUEST_CANCEL`
+ *           * `ABANDON`
+ *       * `openCounts` &mdash; (`map`)
  *         * `openActivityTasks` &mdash; (`Integer`)
  *         * `openDecisionTasks` &mdash; (`Integer`)
  *         * `openTimers` &mdash; (`Integer`)
@@ -371,8 +398,8 @@ AWS.SimpleWorkflow = inherit({})
  *   @param params [Object]
  *     * `domain` &mdash; **required** &mdash; (`String`) The name of the
  *       domain in which this workflow type is registered.
- *     * `workflowType` &mdash; **required** &mdash; (`Object`) The
- *       workflow type to describe.
+ *     * `workflowType` &mdash; **required** &mdash; (`map`) The workflow
+ *       type to describe.
  *       * `name` &mdash; **required** &mdash; (`String`)
  *       * `version` &mdash; **required** &mdash; (`String`)
  *   @callback callback function(err, data)
@@ -385,20 +412,27 @@ AWS.SimpleWorkflow = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `typeInfo` &mdash; (`Object`)
- *         * `workflowType` &mdash; (`Object`)
+ *       * `typeInfo` &mdash; (`map`)
+ *         * `workflowType` &mdash; (`map`)
  *           * `name` &mdash; (`String`)
  *           * `version` &mdash; (`String`)
  *         * `status` &mdash; (`String`)
+ *           Possible values include:
+ *           * `REGISTERED`
+ *           * `DEPRECATED`
  *         * `description` &mdash; (`String`)
  *         * `creationDate` &mdash; (`Date`)
  *         * `deprecationDate` &mdash; (`Date`)
- *       * `configuration` &mdash; (`Object`)
+ *       * `configuration` &mdash; (`map`)
  *         * `defaultTaskStartToCloseTimeout` &mdash; (`String`)
  *         * `defaultExecutionStartToCloseTimeout` &mdash; (`String`)
- *         * `defaultTaskList` &mdash; (`Object`)
+ *         * `defaultTaskList` &mdash; (`map`)
  *           * `name` &mdash; (`String`)
  *         * `defaultChildPolicy` &mdash; (`String`)
+ *           Possible values include:
+ *           * `TERMINATE`
+ *           * `REQUEST_CANCEL`
+ *           * `ABANDON`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -407,8 +441,8 @@ AWS.SimpleWorkflow = inherit({})
  *   @param params [Object]
  *     * `domain` &mdash; **required** &mdash; (`String`) The name of the
  *       domain containing the workflow execution.
- *     * `execution` &mdash; **required** &mdash; (`Object`) Specifies
- *       the workflow execution for which to return the history.
+ *     * `execution` &mdash; **required** &mdash; (`map`) Specifies the
+ *       workflow execution for which to return the history.
  *       * `workflowId` &mdash; **required** &mdash; (`String`)
  *       * `runId` &mdash; **required** &mdash; (`String`)
  *     * `nextPageToken` &mdash; (`String`) If a NextPageToken is
@@ -437,99 +471,188 @@ AWS.SimpleWorkflow = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `events` &mdash; (`Array<Object>`)
+ *       * `events` &mdash; (`Array<map>`)
  *         * `eventTimestamp` &mdash; (`Date`)
  *         * `eventType` &mdash; (`String`)
+ *           Possible values include:
+ *           * `WorkflowExecutionStarted`
+ *           * `WorkflowExecutionCancelRequested`
+ *           * `WorkflowExecutionCompleted`
+ *           * `CompleteWorkflowExecutionFailed`
+ *           * `WorkflowExecutionFailed`
+ *           * `FailWorkflowExecutionFailed`
+ *           * `WorkflowExecutionTimedOut`
+ *           * `WorkflowExecutionCanceled`
+ *           * `CancelWorkflowExecutionFailed`
+ *           * `WorkflowExecutionContinuedAsNew`
+ *           * `ContinueAsNewWorkflowExecutionFailed`
+ *           * `WorkflowExecutionTerminated`
+ *           * `DecisionTaskScheduled`
+ *           * `DecisionTaskStarted`
+ *           * `DecisionTaskCompleted`
+ *           * `DecisionTaskTimedOut`
+ *           * `ActivityTaskScheduled`
+ *           * `ScheduleActivityTaskFailed`
+ *           * `ActivityTaskStarted`
+ *           * `ActivityTaskCompleted`
+ *           * `ActivityTaskFailed`
+ *           * `ActivityTaskTimedOut`
+ *           * `ActivityTaskCanceled`
+ *           * `ActivityTaskCancelRequested`
+ *           * `RequestCancelActivityTaskFailed`
+ *           * `WorkflowExecutionSignaled`
+ *           * `MarkerRecorded`
+ *           * `RecordMarkerFailed`
+ *           * `TimerStarted`
+ *           * `StartTimerFailed`
+ *           * `TimerFired`
+ *           * `TimerCanceled`
+ *           * `CancelTimerFailed`
+ *           * `StartChildWorkflowExecutionInitiated`
+ *           * `StartChildWorkflowExecutionFailed`
+ *           * `ChildWorkflowExecutionStarted`
+ *           * `ChildWorkflowExecutionCompleted`
+ *           * `ChildWorkflowExecutionFailed`
+ *           * `ChildWorkflowExecutionTimedOut`
+ *           * `ChildWorkflowExecutionCanceled`
+ *           * `ChildWorkflowExecutionTerminated`
+ *           * `SignalExternalWorkflowExecutionInitiated`
+ *           * `SignalExternalWorkflowExecutionFailed`
+ *           * `ExternalWorkflowExecutionSignaled`
+ *           * `RequestCancelExternalWorkflowExecutionInitiated`
+ *           * `RequestCancelExternalWorkflowExecutionFailed`
+ *           * `ExternalWorkflowExecutionCancelRequested`
  *         * `eventId` &mdash; (`Integer`)
- *         * `workflowExecutionStartedEventAttributes` &mdash; (`Object`)
+ *         * `workflowExecutionStartedEventAttributes` &mdash; (`map`)
  *           * `input` &mdash; (`String`)
  *           * `executionStartToCloseTimeout` &mdash; (`String`)
  *           * `taskStartToCloseTimeout` &mdash; (`String`)
  *           * `childPolicy` &mdash; (`String`)
- *           * `taskList` &mdash; (`Object`)
+ *             Possible values include:
+ *             * `TERMINATE`
+ *             * `REQUEST_CANCEL`
+ *             * `ABANDON`
+ *           * `taskList` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
- *           * `workflowType` &mdash; (`Object`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `tagList` &mdash; (`Array<String>`)
  *           * `continuedExecutionRunId` &mdash; (`String`)
- *           * `parentWorkflowExecution` &mdash; (`Object`)
+ *           * `parentWorkflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
  *           * `parentInitiatedEventId` &mdash; (`Integer`)
- *         * `workflowExecutionCompletedEventAttributes` &mdash; (`Object`)
+ *         * `workflowExecutionCompletedEventAttributes` &mdash; (`map`)
  *           * `result` &mdash; (`String`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *         * `completeWorkflowExecutionFailedEventAttributes` &mdash;
- *           (`Object`)
+ *           (`map`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `UNHANDLED_DECISION`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `workflowExecutionFailedEventAttributes` &mdash; (`Object`)
+ *         * `workflowExecutionFailedEventAttributes` &mdash; (`map`)
  *           * `reason` &mdash; (`String`)
  *           * `details` &mdash; (`String`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `failWorkflowExecutionFailedEventAttributes` &mdash;
- *           (`Object`)
+ *         * `failWorkflowExecutionFailedEventAttributes` &mdash; (`map`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `UNHANDLED_DECISION`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `workflowExecutionTimedOutEventAttributes` &mdash; (`Object`)
+ *         * `workflowExecutionTimedOutEventAttributes` &mdash; (`map`)
  *           * `timeoutType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `START_TO_CLOSE`
  *           * `childPolicy` &mdash; (`String`)
- *         * `workflowExecutionCanceledEventAttributes` &mdash; (`Object`)
+ *             Possible values include:
+ *             * `TERMINATE`
+ *             * `REQUEST_CANCEL`
+ *             * `ABANDON`
+ *         * `workflowExecutionCanceledEventAttributes` &mdash; (`map`)
  *           * `details` &mdash; (`String`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `cancelWorkflowExecutionFailedEventAttributes` &mdash;
- *           (`Object`)
+ *         * `cancelWorkflowExecutionFailedEventAttributes` &mdash; (`map`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `UNHANDLED_DECISION`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *         * `workflowExecutionContinuedAsNewEventAttributes` &mdash;
- *           (`Object`)
+ *           (`map`)
  *           * `input` &mdash; (`String`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *           * `newExecutionRunId` &mdash; (`String`)
  *           * `executionStartToCloseTimeout` &mdash; (`String`)
- *           * `taskList` &mdash; (`Object`)
+ *           * `taskList` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *           * `taskStartToCloseTimeout` &mdash; (`String`)
  *           * `childPolicy` &mdash; (`String`)
+ *             Possible values include:
+ *             * `TERMINATE`
+ *             * `REQUEST_CANCEL`
+ *             * `ABANDON`
  *           * `tagList` &mdash; (`Array<String>`)
- *           * `workflowType` &mdash; (`Object`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *         * `continueAsNewWorkflowExecutionFailedEventAttributes` &mdash;
- *           (`Object`)
+ *           (`map`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `UNHANDLED_DECISION`
+ *             * `WORKFLOW_TYPE_DEPRECATED`
+ *             * `WORKFLOW_TYPE_DOES_NOT_EXIST`
+ *             * `DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED`
+ *             * `DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED`
+ *             * `DEFAULT_TASK_LIST_UNDEFINED`
+ *             * `DEFAULT_CHILD_POLICY_UNDEFINED`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `workflowExecutionTerminatedEventAttributes` &mdash;
- *           (`Object`)
+ *         * `workflowExecutionTerminatedEventAttributes` &mdash; (`map`)
  *           * `reason` &mdash; (`String`)
  *           * `details` &mdash; (`String`)
  *           * `childPolicy` &mdash; (`String`)
+ *             Possible values include:
+ *             * `TERMINATE`
+ *             * `REQUEST_CANCEL`
+ *             * `ABANDON`
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `CHILD_POLICY_APPLIED`
+ *             * `EVENT_LIMIT_EXCEEDED`
+ *             * `OPERATOR_INITIATED`
  *         * `workflowExecutionCancelRequestedEventAttributes` &mdash;
- *           (`Object`)
- *           * `externalWorkflowExecution` &mdash; (`Object`)
+ *           (`map`)
+ *           * `externalWorkflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
  *           * `externalInitiatedEventId` &mdash; (`Integer`)
  *           * `cause` &mdash; (`String`)
- *         * `decisionTaskScheduledEventAttributes` &mdash; (`Object`)
- *           * `taskList` &mdash; (`Object`)
+ *             Possible values include:
+ *             * `CHILD_POLICY_APPLIED`
+ *         * `decisionTaskScheduledEventAttributes` &mdash; (`map`)
+ *           * `taskList` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *           * `startToCloseTimeout` &mdash; (`String`)
- *         * `decisionTaskStartedEventAttributes` &mdash; (`Object`)
+ *         * `decisionTaskStartedEventAttributes` &mdash; (`map`)
  *           * `identity` &mdash; (`String`)
  *           * `scheduledEventId` &mdash; (`Integer`)
- *         * `decisionTaskCompletedEventAttributes` &mdash; (`Object`)
+ *         * `decisionTaskCompletedEventAttributes` &mdash; (`map`)
  *           * `executionContext` &mdash; (`String`)
  *           * `scheduledEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
- *         * `decisionTaskTimedOutEventAttributes` &mdash; (`Object`)
+ *         * `decisionTaskTimedOutEventAttributes` &mdash; (`map`)
  *           * `timeoutType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `START_TO_CLOSE`
  *           * `scheduledEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
- *         * `activityTaskScheduledEventAttributes` &mdash; (`Object`)
- *           * `activityType` &mdash; (`Object`)
+ *         * `activityTaskScheduledEventAttributes` &mdash; (`map`)
+ *           * `activityType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `activityId` &mdash; (`String`)
@@ -538,104 +661,112 @@ AWS.SimpleWorkflow = inherit({})
  *           * `scheduleToStartTimeout` &mdash; (`String`)
  *           * `scheduleToCloseTimeout` &mdash; (`String`)
  *           * `startToCloseTimeout` &mdash; (`String`)
- *           * `taskList` &mdash; (`Object`)
+ *           * `taskList` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *           * `heartbeatTimeout` &mdash; (`String`)
- *         * `activityTaskStartedEventAttributes` &mdash; (`Object`)
+ *         * `activityTaskStartedEventAttributes` &mdash; (`map`)
  *           * `identity` &mdash; (`String`)
  *           * `scheduledEventId` &mdash; (`Integer`)
- *         * `activityTaskCompletedEventAttributes` &mdash; (`Object`)
+ *         * `activityTaskCompletedEventAttributes` &mdash; (`map`)
  *           * `result` &mdash; (`String`)
  *           * `scheduledEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
- *         * `activityTaskFailedEventAttributes` &mdash; (`Object`)
+ *         * `activityTaskFailedEventAttributes` &mdash; (`map`)
  *           * `reason` &mdash; (`String`)
  *           * `details` &mdash; (`String`)
  *           * `scheduledEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
- *         * `activityTaskTimedOutEventAttributes` &mdash; (`Object`)
+ *         * `activityTaskTimedOutEventAttributes` &mdash; (`map`)
  *           * `timeoutType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `START_TO_CLOSE`
+ *             * `SCHEDULE_TO_START`
+ *             * `SCHEDULE_TO_CLOSE`
+ *             * `HEARTBEAT`
  *           * `scheduledEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
  *           * `details` &mdash; (`String`)
- *         * `activityTaskCanceledEventAttributes` &mdash; (`Object`)
+ *         * `activityTaskCanceledEventAttributes` &mdash; (`map`)
  *           * `details` &mdash; (`String`)
  *           * `scheduledEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
  *           * `latestCancelRequestedEventId` &mdash; (`Integer`)
- *         * `activityTaskCancelRequestedEventAttributes` &mdash;
- *           (`Object`)
+ *         * `activityTaskCancelRequestedEventAttributes` &mdash; (`map`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *           * `activityId` &mdash; (`String`)
- *         * `workflowExecutionSignaledEventAttributes` &mdash; (`Object`)
+ *         * `workflowExecutionSignaledEventAttributes` &mdash; (`map`)
  *           * `signalName` &mdash; (`String`)
  *           * `input` &mdash; (`String`)
- *           * `externalWorkflowExecution` &mdash; (`Object`)
+ *           * `externalWorkflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
  *           * `externalInitiatedEventId` &mdash; (`Integer`)
- *         * `markerRecordedEventAttributes` &mdash; (`Object`)
+ *         * `markerRecordedEventAttributes` &mdash; (`map`)
  *           * `markerName` &mdash; (`String`)
  *           * `details` &mdash; (`String`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `recordMarkerFailedEventAttributes` &mdash; (`Object`)
+ *         * `recordMarkerFailedEventAttributes` &mdash; (`map`)
  *           * `markerName` &mdash; (`String`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `timerStartedEventAttributes` &mdash; (`Object`)
+ *         * `timerStartedEventAttributes` &mdash; (`map`)
  *           * `timerId` &mdash; (`String`)
  *           * `control` &mdash; (`String`)
  *           * `startToFireTimeout` &mdash; (`String`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `timerFiredEventAttributes` &mdash; (`Object`)
+ *         * `timerFiredEventAttributes` &mdash; (`map`)
  *           * `timerId` &mdash; (`String`)
  *           * `startedEventId` &mdash; (`Integer`)
- *         * `timerCanceledEventAttributes` &mdash; (`Object`)
+ *         * `timerCanceledEventAttributes` &mdash; (`map`)
  *           * `timerId` &mdash; (`String`)
  *           * `startedEventId` &mdash; (`Integer`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *         * `startChildWorkflowExecutionInitiatedEventAttributes` &mdash;
- *           (`Object`)
+ *           (`map`)
  *           * `workflowId` &mdash; (`String`)
- *           * `workflowType` &mdash; (`Object`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `control` &mdash; (`String`)
  *           * `input` &mdash; (`String`)
  *           * `executionStartToCloseTimeout` &mdash; (`String`)
- *           * `taskList` &mdash; (`Object`)
+ *           * `taskList` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *           * `childPolicy` &mdash; (`String`)
+ *             Possible values include:
+ *             * `TERMINATE`
+ *             * `REQUEST_CANCEL`
+ *             * `ABANDON`
  *           * `taskStartToCloseTimeout` &mdash; (`String`)
  *           * `tagList` &mdash; (`Array<String>`)
- *         * `childWorkflowExecutionStartedEventAttributes` &mdash;
- *           (`Object`)
- *           * `workflowExecution` &mdash; (`Object`)
+ *         * `childWorkflowExecutionStartedEventAttributes` &mdash; (`map`)
+ *           * `workflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
- *           * `workflowType` &mdash; (`Object`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `initiatedEventId` &mdash; (`Integer`)
  *         * `childWorkflowExecutionCompletedEventAttributes` &mdash;
- *           (`Object`)
- *           * `workflowExecution` &mdash; (`Object`)
+ *           (`map`)
+ *           * `workflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
- *           * `workflowType` &mdash; (`Object`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `result` &mdash; (`String`)
  *           * `initiatedEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
- *         * `childWorkflowExecutionFailedEventAttributes` &mdash;
- *           (`Object`)
- *           * `workflowExecution` &mdash; (`Object`)
+ *         * `childWorkflowExecutionFailedEventAttributes` &mdash; (`map`)
+ *           * `workflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
- *           * `workflowType` &mdash; (`Object`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `reason` &mdash; (`String`)
@@ -643,39 +774,41 @@ AWS.SimpleWorkflow = inherit({})
  *           * `initiatedEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
  *         * `childWorkflowExecutionTimedOutEventAttributes` &mdash;
- *           (`Object`)
- *           * `workflowExecution` &mdash; (`Object`)
+ *           (`map`)
+ *           * `workflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
- *           * `workflowType` &mdash; (`Object`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `timeoutType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `START_TO_CLOSE`
  *           * `initiatedEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
  *         * `childWorkflowExecutionCanceledEventAttributes` &mdash;
- *           (`Object`)
- *           * `workflowExecution` &mdash; (`Object`)
+ *           (`map`)
+ *           * `workflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
- *           * `workflowType` &mdash; (`Object`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `details` &mdash; (`String`)
  *           * `initiatedEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
  *         * `childWorkflowExecutionTerminatedEventAttributes` &mdash;
- *           (`Object`)
- *           * `workflowExecution` &mdash; (`Object`)
+ *           (`map`)
+ *           * `workflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
- *           * `workflowType` &mdash; (`Object`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `initiatedEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
  *         * `signalExternalWorkflowExecutionInitiatedEventAttributes`
- *           &mdash; (`Object`)
+ *           &mdash; (`map`)
  *           * `workflowId` &mdash; (`String`)
  *           * `runId` &mdash; (`String`)
  *           * `signalName` &mdash; (`String`)
@@ -683,66 +816,109 @@ AWS.SimpleWorkflow = inherit({})
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *           * `control` &mdash; (`String`)
  *         * `externalWorkflowExecutionSignaledEventAttributes` &mdash;
- *           (`Object`)
- *           * `workflowExecution` &mdash; (`Object`)
+ *           (`map`)
+ *           * `workflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
  *           * `initiatedEventId` &mdash; (`Integer`)
  *         * `signalExternalWorkflowExecutionFailedEventAttributes` &mdash;
- *           (`Object`)
+ *           (`map`)
  *           * `workflowId` &mdash; (`String`)
  *           * `runId` &mdash; (`String`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION`
+ *             * `SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `initiatedEventId` &mdash; (`Integer`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *           * `control` &mdash; (`String`)
  *         * `externalWorkflowExecutionCancelRequestedEventAttributes`
- *           &mdash; (`Object`)
- *           * `workflowExecution` &mdash; (`Object`)
+ *           &mdash; (`map`)
+ *           * `workflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
  *           * `initiatedEventId` &mdash; (`Integer`)
  *         *
  *           `requestCancelExternalWorkflowExecutionInitiatedEventAttributes`
- *           &mdash; (`Object`)
+ *           &mdash; (`map`)
  *           * `workflowId` &mdash; (`String`)
  *           * `runId` &mdash; (`String`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *           * `control` &mdash; (`String`)
  *         * `requestCancelExternalWorkflowExecutionFailedEventAttributes`
- *           &mdash; (`Object`)
+ *           &mdash; (`map`)
  *           * `workflowId` &mdash; (`String`)
  *           * `runId` &mdash; (`String`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION`
+ *             * `REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `initiatedEventId` &mdash; (`Integer`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *           * `control` &mdash; (`String`)
- *         * `scheduleActivityTaskFailedEventAttributes` &mdash; (`Object`)
- *           * `activityType` &mdash; (`Object`)
+ *         * `scheduleActivityTaskFailedEventAttributes` &mdash; (`map`)
+ *           * `activityType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `activityId` &mdash; (`String`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `ACTIVITY_TYPE_DEPRECATED`
+ *             * `ACTIVITY_TYPE_DOES_NOT_EXIST`
+ *             * `ACTIVITY_ID_ALREADY_IN_USE`
+ *             * `OPEN_ACTIVITIES_LIMIT_EXCEEDED`
+ *             * `ACTIVITY_CREATION_RATE_EXCEEDED`
+ *             * `DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED`
+ *             * `DEFAULT_TASK_LIST_UNDEFINED`
+ *             * `DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED`
+ *             * `DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED`
+ *             * `DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *         * `requestCancelActivityTaskFailedEventAttributes` &mdash;
- *           (`Object`)
+ *           (`map`)
  *           * `activityId` &mdash; (`String`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `ACTIVITY_ID_UNKNOWN`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `startTimerFailedEventAttributes` &mdash; (`Object`)
+ *         * `startTimerFailedEventAttributes` &mdash; (`map`)
  *           * `timerId` &mdash; (`String`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `TIMER_ID_ALREADY_IN_USE`
+ *             * `OPEN_TIMERS_LIMIT_EXCEEDED`
+ *             * `TIMER_CREATION_RATE_EXCEEDED`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `cancelTimerFailedEventAttributes` &mdash; (`Object`)
+ *         * `cancelTimerFailedEventAttributes` &mdash; (`map`)
  *           * `timerId` &mdash; (`String`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `TIMER_ID_UNKNOWN`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *         * `startChildWorkflowExecutionFailedEventAttributes` &mdash;
- *           (`Object`)
- *           * `workflowType` &mdash; (`Object`)
+ *           (`map`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `WORKFLOW_TYPE_DOES_NOT_EXIST`
+ *             * `WORKFLOW_TYPE_DEPRECATED`
+ *             * `OPEN_CHILDREN_LIMIT_EXCEEDED`
+ *             * `OPEN_WORKFLOWS_LIMIT_EXCEEDED`
+ *             * `CHILD_CREATION_RATE_EXCEEDED`
+ *             * `WORKFLOW_ALREADY_RUNNING`
+ *             * `DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED`
+ *             * `DEFAULT_TASK_LIST_UNDEFINED`
+ *             * `DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED`
+ *             * `DEFAULT_CHILD_POLICY_UNDEFINED`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `workflowId` &mdash; (`String`)
  *           * `initiatedEventId` &mdash; (`Integer`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
@@ -760,6 +936,9 @@ AWS.SimpleWorkflow = inherit({})
  *       types that have this name.
  *     * `registrationStatus` &mdash; **required** &mdash; (`String`)
  *       Specifies the registration status of the activity types to list.
+ *       Possible values include:
+ *       * `REGISTERED`
+ *       * `DEPRECATED`
  *     * `nextPageToken` &mdash; (`String`) If on a previous call to this
  *       method a NextResultToken was returned, the results have more
  *       than one page. To get the next page of results, repeat the call
@@ -784,11 +963,14 @@ AWS.SimpleWorkflow = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `typeInfos` &mdash; (`Array<Object>`)
- *         * `activityType` &mdash; (`Object`)
+ *       * `typeInfos` &mdash; (`Array<map>`)
+ *         * `activityType` &mdash; (`map`)
  *           * `name` &mdash; (`String`)
  *           * `version` &mdash; (`String`)
  *         * `status` &mdash; (`String`)
+ *           Possible values include:
+ *           * `REGISTERED`
+ *           * `DEPRECATED`
  *         * `description` &mdash; (`String`)
  *         * `creationDate` &mdash; (`Date`)
  *         * `deprecationDate` &mdash; (`Date`)
@@ -801,7 +983,7 @@ AWS.SimpleWorkflow = inherit({})
  *   @param params [Object]
  *     * `domain` &mdash; **required** &mdash; (`String`) The name of the
  *       domain that contains the workflow executions to list.
- *     * `startTimeFilter` &mdash; (`Object`) If specified, the workflow
+ *     * `startTimeFilter` &mdash; (`map`) If specified, the workflow
  *       executions are included in the returned results based on whether
  *       their start times are within the range specified by this filter.
  *       Also, if this parameter is specified, the returned results are
@@ -810,7 +992,7 @@ AWS.SimpleWorkflow = inherit({})
  *       these in a request but not both.
  *       * `oldestDate` &mdash; **required** &mdash; (`Date`)
  *       * `latestDate` &mdash; (`Date`)
- *     * `closeTimeFilter` &mdash; (`Object`) If specified, the workflow
+ *     * `closeTimeFilter` &mdash; (`map`) If specified, the workflow
  *       executions are included in the returned results based on whether
  *       their close times are within the range specified by this filter.
  *       Also, if this parameter is specified, the returned results are
@@ -819,28 +1001,35 @@ AWS.SimpleWorkflow = inherit({})
  *       these in a request but not both.
  *       * `oldestDate` &mdash; **required** &mdash; (`Date`)
  *       * `latestDate` &mdash; (`Date`)
- *     * `executionFilter` &mdash; (`Object`) If specified, only workflow
+ *     * `executionFilter` &mdash; (`map`) If specified, only workflow
  *       executions matching the workflow id specified in the filter are
  *       returned. closeStatusFilter, executionFilter, typeFilter and
  *       tagFilter are mutually exclusive. You can specify at most one of
  *       these in a request.
  *       * `workflowId` &mdash; **required** &mdash; (`String`)
- *     * `closeStatusFilter` &mdash; (`Object`) If specified, only
- *       workflow executions that match this close status are listed. For
- *       example, if TERMINATED is specified, then only TERMINATED
- *       workflow executions are listed. closeStatusFilter,
- *       executionFilter, typeFilter and tagFilter are mutually
- *       exclusive. You can specify at most one of these in a request.
+ *     * `closeStatusFilter` &mdash; (`map`) If specified, only workflow
+ *       executions that match this close status are listed. For example,
+ *       if TERMINATED is specified, then only TERMINATED workflow
+ *       executions are listed. closeStatusFilter, executionFilter,
+ *       typeFilter and tagFilter are mutually exclusive. You can specify
+ *       at most one of these in a request.
  *       * `status` &mdash; **required** &mdash; (`String`)
- *     * `typeFilter` &mdash; (`Object`) If specified, only executions of
+ *         Possible values include:
+ *         * `COMPLETED`
+ *         * `FAILED`
+ *         * `CANCELED`
+ *         * `TERMINATED`
+ *         * `CONTINUED_AS_NEW`
+ *         * `TIMED_OUT`
+ *     * `typeFilter` &mdash; (`map`) If specified, only executions of
  *       the type specified in the filter are returned.
  *       closeStatusFilter, executionFilter, typeFilter and tagFilter are
  *       mutually exclusive. You can specify at most one of these in a
  *       request.
  *       * `name` &mdash; **required** &mdash; (`String`)
  *       * `version` &mdash; (`String`)
- *     * `tagFilter` &mdash; (`Object`) If specified, only executions
- *       that have the matching tag are listed. closeStatusFilter,
+ *     * `tagFilter` &mdash; (`map`) If specified, only executions that
+ *       have the matching tag are listed. closeStatusFilter,
  *       executionFilter, typeFilter and tagFilter are mutually
  *       exclusive. You can specify at most one of these in a request.
  *       * `tag` &mdash; **required** &mdash; (`String`)
@@ -869,18 +1058,28 @@ AWS.SimpleWorkflow = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `executionInfos` &mdash; (`Array<Object>`)
- *         * `execution` &mdash; (`Object`)
+ *       * `executionInfos` &mdash; (`Array<map>`)
+ *         * `execution` &mdash; (`map`)
  *           * `workflowId` &mdash; (`String`)
  *           * `runId` &mdash; (`String`)
- *         * `workflowType` &mdash; (`Object`)
+ *         * `workflowType` &mdash; (`map`)
  *           * `name` &mdash; (`String`)
  *           * `version` &mdash; (`String`)
  *         * `startTimestamp` &mdash; (`Date`)
  *         * `closeTimestamp` &mdash; (`Date`)
  *         * `executionStatus` &mdash; (`String`)
+ *           Possible values include:
+ *           * `OPEN`
+ *           * `CLOSED`
  *         * `closeStatus` &mdash; (`String`)
- *         * `parent` &mdash; (`Object`)
+ *           Possible values include:
+ *           * `COMPLETED`
+ *           * `FAILED`
+ *           * `CANCELED`
+ *           * `TERMINATED`
+ *           * `CONTINUED_AS_NEW`
+ *           * `TIMED_OUT`
+ *         * `parent` &mdash; (`map`)
  *           * `workflowId` &mdash; (`String`)
  *           * `runId` &mdash; (`String`)
  *         * `tagList` &mdash; (`Array<String>`)
@@ -898,6 +1097,9 @@ AWS.SimpleWorkflow = inherit({})
  *       the returned token and all other arguments unchanged.
  *     * `registrationStatus` &mdash; **required** &mdash; (`String`)
  *       Specifies the registration status of the domains to list.
+ *       Possible values include:
+ *       * `REGISTERED`
+ *       * `DEPRECATED`
  *     * `maximumPageSize` &mdash; (`Integer`) The maximum number of
  *       results returned in each page. The default is 100, but the
  *       caller can override this value to a page size smaller than the
@@ -918,9 +1120,12 @@ AWS.SimpleWorkflow = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `domainInfos` &mdash; (`Array<Object>`)
+ *       * `domainInfos` &mdash; (`Array<map>`)
  *         * `name` &mdash; (`String`)
  *         * `status` &mdash; (`String`)
+ *           Possible values include:
+ *           * `REGISTERED`
+ *           * `DEPRECATED`
  *         * `description` &mdash; (`String`)
  *       * `nextPageToken` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -931,22 +1136,21 @@ AWS.SimpleWorkflow = inherit({})
  *   @param params [Object]
  *     * `domain` &mdash; **required** &mdash; (`String`) The name of the
  *       domain that contains the workflow executions to list.
- *     * `startTimeFilter` &mdash; **required** &mdash; (`Object`)
- *       Workflow executions are included in the returned results based
- *       on whether their start times are within the range specified by
- *       this filter.
+ *     * `startTimeFilter` &mdash; **required** &mdash; (`map`) Workflow
+ *       executions are included in the returned results based on whether
+ *       their start times are within the range specified by this filter.
  *       * `oldestDate` &mdash; **required** &mdash; (`Date`)
  *       * `latestDate` &mdash; (`Date`)
- *     * `typeFilter` &mdash; (`Object`) If specified, only executions of
+ *     * `typeFilter` &mdash; (`map`) If specified, only executions of
  *       the type specified in the filter are returned. executionFilter,
  *       typeFilter and tagFilter are mutually exclusive. You can specify
  *       at most one of these in a request.
  *       * `name` &mdash; **required** &mdash; (`String`)
  *       * `version` &mdash; (`String`)
- *     * `tagFilter` &mdash; (`Object`) If specified, only executions
- *       that have the matching tag are listed. executionFilter,
- *       typeFilter and tagFilter are mutually exclusive. You can specify
- *       at most one of these in a request.
+ *     * `tagFilter` &mdash; (`map`) If specified, only executions that
+ *       have the matching tag are listed. executionFilter, typeFilter
+ *       and tagFilter are mutually exclusive. You can specify at most
+ *       one of these in a request.
  *       * `tag` &mdash; **required** &mdash; (`String`)
  *     * `nextPageToken` &mdash; (`String`) If on a previous call to this
  *       method a NextPageToken was returned, the results are being
@@ -962,7 +1166,7 @@ AWS.SimpleWorkflow = inherit({})
  *     * `reverseOrder` &mdash; (`Boolean`) When set to true, returns the
  *       results in reverse order. By default the results are returned in
  *       descending order of the start time of the executions.
- *     * `executionFilter` &mdash; (`Object`) If specified, only workflow
+ *     * `executionFilter` &mdash; (`map`) If specified, only workflow
  *       executions matching the workflow id specified in the filter are
  *       returned. executionFilter, typeFilter and tagFilter are mutually
  *       exclusive. You can specify at most one of these in a request.
@@ -977,18 +1181,28 @@ AWS.SimpleWorkflow = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `executionInfos` &mdash; (`Array<Object>`)
- *         * `execution` &mdash; (`Object`)
+ *       * `executionInfos` &mdash; (`Array<map>`)
+ *         * `execution` &mdash; (`map`)
  *           * `workflowId` &mdash; (`String`)
  *           * `runId` &mdash; (`String`)
- *         * `workflowType` &mdash; (`Object`)
+ *         * `workflowType` &mdash; (`map`)
  *           * `name` &mdash; (`String`)
  *           * `version` &mdash; (`String`)
  *         * `startTimestamp` &mdash; (`Date`)
  *         * `closeTimestamp` &mdash; (`Date`)
  *         * `executionStatus` &mdash; (`String`)
+ *           Possible values include:
+ *           * `OPEN`
+ *           * `CLOSED`
  *         * `closeStatus` &mdash; (`String`)
- *         * `parent` &mdash; (`Object`)
+ *           Possible values include:
+ *           * `COMPLETED`
+ *           * `FAILED`
+ *           * `CANCELED`
+ *           * `TERMINATED`
+ *           * `CONTINUED_AS_NEW`
+ *           * `TIMED_OUT`
+ *         * `parent` &mdash; (`map`)
  *           * `workflowId` &mdash; (`String`)
  *           * `runId` &mdash; (`String`)
  *         * `tagList` &mdash; (`Array<String>`)
@@ -1006,6 +1220,9 @@ AWS.SimpleWorkflow = inherit({})
  *       with this name.
  *     * `registrationStatus` &mdash; **required** &mdash; (`String`)
  *       Specifies the registration status of the workflow types to list.
+ *       Possible values include:
+ *       * `REGISTERED`
+ *       * `DEPRECATED`
  *     * `nextPageToken` &mdash; (`String`) If on a previous call to this
  *       method a NextPageToken was returned, the results are being
  *       paginated. To get the next page of results, repeat the call with
@@ -1030,11 +1247,14 @@ AWS.SimpleWorkflow = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `typeInfos` &mdash; (`Array<Object>`)
- *         * `workflowType` &mdash; (`Object`)
+ *       * `typeInfos` &mdash; (`Array<map>`)
+ *         * `workflowType` &mdash; (`map`)
  *           * `name` &mdash; (`String`)
  *           * `version` &mdash; (`String`)
  *         * `status` &mdash; (`String`)
+ *           Possible values include:
+ *           * `REGISTERED`
+ *           * `DEPRECATED`
  *         * `description` &mdash; (`String`)
  *         * `creationDate` &mdash; (`Date`)
  *         * `deprecationDate` &mdash; (`Date`)
@@ -1047,7 +1267,7 @@ AWS.SimpleWorkflow = inherit({})
  *   @param params [Object]
  *     * `domain` &mdash; **required** &mdash; (`String`) The name of the
  *       domain that contains the task lists being polled.
- *     * `taskList` &mdash; **required** &mdash; (`Object`) Specifies the
+ *     * `taskList` &mdash; **required** &mdash; (`map`) Specifies the
  *       task list to poll for activity tasks. The specified string must
  *       not start or end with whitespace. It must not contain a :
  *       (colon), / (slash), | (vertical bar), or any control characters
@@ -1071,10 +1291,10 @@ AWS.SimpleWorkflow = inherit({})
  *       * `taskToken` &mdash; (`String`)
  *       * `activityId` &mdash; (`String`)
  *       * `startedEventId` &mdash; (`Integer`)
- *       * `workflowExecution` &mdash; (`Object`)
+ *       * `workflowExecution` &mdash; (`map`)
  *         * `workflowId` &mdash; (`String`)
  *         * `runId` &mdash; (`String`)
- *       * `activityType` &mdash; (`Object`)
+ *       * `activityType` &mdash; (`map`)
  *         * `name` &mdash; (`String`)
  *         * `version` &mdash; (`String`)
  *       * `input` &mdash; (`String`)
@@ -1086,7 +1306,7 @@ AWS.SimpleWorkflow = inherit({})
  *   @param params [Object]
  *     * `domain` &mdash; **required** &mdash; (`String`) The name of the
  *       domain containing the task lists to poll.
- *     * `taskList` &mdash; **required** &mdash; (`Object`) Specifies the
+ *     * `taskList` &mdash; **required** &mdash; (`map`) Specifies the
  *       task list to poll for decision tasks. The specified string must
  *       not start or end with whitespace. It must not contain a :
  *       (colon), / (slash), | (vertical bar), or any control characters
@@ -1128,105 +1348,194 @@ AWS.SimpleWorkflow = inherit({})
  *
  *       * `taskToken` &mdash; (`String`)
  *       * `startedEventId` &mdash; (`Integer`)
- *       * `workflowExecution` &mdash; (`Object`)
+ *       * `workflowExecution` &mdash; (`map`)
  *         * `workflowId` &mdash; (`String`)
  *         * `runId` &mdash; (`String`)
- *       * `workflowType` &mdash; (`Object`)
+ *       * `workflowType` &mdash; (`map`)
  *         * `name` &mdash; (`String`)
  *         * `version` &mdash; (`String`)
- *       * `events` &mdash; (`Array<Object>`)
+ *       * `events` &mdash; (`Array<map>`)
  *         * `eventTimestamp` &mdash; (`Date`)
  *         * `eventType` &mdash; (`String`)
+ *           Possible values include:
+ *           * `WorkflowExecutionStarted`
+ *           * `WorkflowExecutionCancelRequested`
+ *           * `WorkflowExecutionCompleted`
+ *           * `CompleteWorkflowExecutionFailed`
+ *           * `WorkflowExecutionFailed`
+ *           * `FailWorkflowExecutionFailed`
+ *           * `WorkflowExecutionTimedOut`
+ *           * `WorkflowExecutionCanceled`
+ *           * `CancelWorkflowExecutionFailed`
+ *           * `WorkflowExecutionContinuedAsNew`
+ *           * `ContinueAsNewWorkflowExecutionFailed`
+ *           * `WorkflowExecutionTerminated`
+ *           * `DecisionTaskScheduled`
+ *           * `DecisionTaskStarted`
+ *           * `DecisionTaskCompleted`
+ *           * `DecisionTaskTimedOut`
+ *           * `ActivityTaskScheduled`
+ *           * `ScheduleActivityTaskFailed`
+ *           * `ActivityTaskStarted`
+ *           * `ActivityTaskCompleted`
+ *           * `ActivityTaskFailed`
+ *           * `ActivityTaskTimedOut`
+ *           * `ActivityTaskCanceled`
+ *           * `ActivityTaskCancelRequested`
+ *           * `RequestCancelActivityTaskFailed`
+ *           * `WorkflowExecutionSignaled`
+ *           * `MarkerRecorded`
+ *           * `RecordMarkerFailed`
+ *           * `TimerStarted`
+ *           * `StartTimerFailed`
+ *           * `TimerFired`
+ *           * `TimerCanceled`
+ *           * `CancelTimerFailed`
+ *           * `StartChildWorkflowExecutionInitiated`
+ *           * `StartChildWorkflowExecutionFailed`
+ *           * `ChildWorkflowExecutionStarted`
+ *           * `ChildWorkflowExecutionCompleted`
+ *           * `ChildWorkflowExecutionFailed`
+ *           * `ChildWorkflowExecutionTimedOut`
+ *           * `ChildWorkflowExecutionCanceled`
+ *           * `ChildWorkflowExecutionTerminated`
+ *           * `SignalExternalWorkflowExecutionInitiated`
+ *           * `SignalExternalWorkflowExecutionFailed`
+ *           * `ExternalWorkflowExecutionSignaled`
+ *           * `RequestCancelExternalWorkflowExecutionInitiated`
+ *           * `RequestCancelExternalWorkflowExecutionFailed`
+ *           * `ExternalWorkflowExecutionCancelRequested`
  *         * `eventId` &mdash; (`Integer`)
- *         * `workflowExecutionStartedEventAttributes` &mdash; (`Object`)
+ *         * `workflowExecutionStartedEventAttributes` &mdash; (`map`)
  *           * `input` &mdash; (`String`)
  *           * `executionStartToCloseTimeout` &mdash; (`String`)
  *           * `taskStartToCloseTimeout` &mdash; (`String`)
  *           * `childPolicy` &mdash; (`String`)
- *           * `taskList` &mdash; (`Object`)
+ *             Possible values include:
+ *             * `TERMINATE`
+ *             * `REQUEST_CANCEL`
+ *             * `ABANDON`
+ *           * `taskList` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
- *           * `workflowType` &mdash; (`Object`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `tagList` &mdash; (`Array<String>`)
  *           * `continuedExecutionRunId` &mdash; (`String`)
- *           * `parentWorkflowExecution` &mdash; (`Object`)
+ *           * `parentWorkflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
  *           * `parentInitiatedEventId` &mdash; (`Integer`)
- *         * `workflowExecutionCompletedEventAttributes` &mdash; (`Object`)
+ *         * `workflowExecutionCompletedEventAttributes` &mdash; (`map`)
  *           * `result` &mdash; (`String`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *         * `completeWorkflowExecutionFailedEventAttributes` &mdash;
- *           (`Object`)
+ *           (`map`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `UNHANDLED_DECISION`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `workflowExecutionFailedEventAttributes` &mdash; (`Object`)
+ *         * `workflowExecutionFailedEventAttributes` &mdash; (`map`)
  *           * `reason` &mdash; (`String`)
  *           * `details` &mdash; (`String`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `failWorkflowExecutionFailedEventAttributes` &mdash;
- *           (`Object`)
+ *         * `failWorkflowExecutionFailedEventAttributes` &mdash; (`map`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `UNHANDLED_DECISION`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `workflowExecutionTimedOutEventAttributes` &mdash; (`Object`)
+ *         * `workflowExecutionTimedOutEventAttributes` &mdash; (`map`)
  *           * `timeoutType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `START_TO_CLOSE`
  *           * `childPolicy` &mdash; (`String`)
- *         * `workflowExecutionCanceledEventAttributes` &mdash; (`Object`)
+ *             Possible values include:
+ *             * `TERMINATE`
+ *             * `REQUEST_CANCEL`
+ *             * `ABANDON`
+ *         * `workflowExecutionCanceledEventAttributes` &mdash; (`map`)
  *           * `details` &mdash; (`String`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `cancelWorkflowExecutionFailedEventAttributes` &mdash;
- *           (`Object`)
+ *         * `cancelWorkflowExecutionFailedEventAttributes` &mdash; (`map`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `UNHANDLED_DECISION`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *         * `workflowExecutionContinuedAsNewEventAttributes` &mdash;
- *           (`Object`)
+ *           (`map`)
  *           * `input` &mdash; (`String`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *           * `newExecutionRunId` &mdash; (`String`)
  *           * `executionStartToCloseTimeout` &mdash; (`String`)
- *           * `taskList` &mdash; (`Object`)
+ *           * `taskList` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *           * `taskStartToCloseTimeout` &mdash; (`String`)
  *           * `childPolicy` &mdash; (`String`)
+ *             Possible values include:
+ *             * `TERMINATE`
+ *             * `REQUEST_CANCEL`
+ *             * `ABANDON`
  *           * `tagList` &mdash; (`Array<String>`)
- *           * `workflowType` &mdash; (`Object`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *         * `continueAsNewWorkflowExecutionFailedEventAttributes` &mdash;
- *           (`Object`)
+ *           (`map`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `UNHANDLED_DECISION`
+ *             * `WORKFLOW_TYPE_DEPRECATED`
+ *             * `WORKFLOW_TYPE_DOES_NOT_EXIST`
+ *             * `DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED`
+ *             * `DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED`
+ *             * `DEFAULT_TASK_LIST_UNDEFINED`
+ *             * `DEFAULT_CHILD_POLICY_UNDEFINED`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `workflowExecutionTerminatedEventAttributes` &mdash;
- *           (`Object`)
+ *         * `workflowExecutionTerminatedEventAttributes` &mdash; (`map`)
  *           * `reason` &mdash; (`String`)
  *           * `details` &mdash; (`String`)
  *           * `childPolicy` &mdash; (`String`)
+ *             Possible values include:
+ *             * `TERMINATE`
+ *             * `REQUEST_CANCEL`
+ *             * `ABANDON`
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `CHILD_POLICY_APPLIED`
+ *             * `EVENT_LIMIT_EXCEEDED`
+ *             * `OPERATOR_INITIATED`
  *         * `workflowExecutionCancelRequestedEventAttributes` &mdash;
- *           (`Object`)
- *           * `externalWorkflowExecution` &mdash; (`Object`)
+ *           (`map`)
+ *           * `externalWorkflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
  *           * `externalInitiatedEventId` &mdash; (`Integer`)
  *           * `cause` &mdash; (`String`)
- *         * `decisionTaskScheduledEventAttributes` &mdash; (`Object`)
- *           * `taskList` &mdash; (`Object`)
+ *             Possible values include:
+ *             * `CHILD_POLICY_APPLIED`
+ *         * `decisionTaskScheduledEventAttributes` &mdash; (`map`)
+ *           * `taskList` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *           * `startToCloseTimeout` &mdash; (`String`)
- *         * `decisionTaskStartedEventAttributes` &mdash; (`Object`)
+ *         * `decisionTaskStartedEventAttributes` &mdash; (`map`)
  *           * `identity` &mdash; (`String`)
  *           * `scheduledEventId` &mdash; (`Integer`)
- *         * `decisionTaskCompletedEventAttributes` &mdash; (`Object`)
+ *         * `decisionTaskCompletedEventAttributes` &mdash; (`map`)
  *           * `executionContext` &mdash; (`String`)
  *           * `scheduledEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
- *         * `decisionTaskTimedOutEventAttributes` &mdash; (`Object`)
+ *         * `decisionTaskTimedOutEventAttributes` &mdash; (`map`)
  *           * `timeoutType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `START_TO_CLOSE`
  *           * `scheduledEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
- *         * `activityTaskScheduledEventAttributes` &mdash; (`Object`)
- *           * `activityType` &mdash; (`Object`)
+ *         * `activityTaskScheduledEventAttributes` &mdash; (`map`)
+ *           * `activityType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `activityId` &mdash; (`String`)
@@ -1235,104 +1544,112 @@ AWS.SimpleWorkflow = inherit({})
  *           * `scheduleToStartTimeout` &mdash; (`String`)
  *           * `scheduleToCloseTimeout` &mdash; (`String`)
  *           * `startToCloseTimeout` &mdash; (`String`)
- *           * `taskList` &mdash; (`Object`)
+ *           * `taskList` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *           * `heartbeatTimeout` &mdash; (`String`)
- *         * `activityTaskStartedEventAttributes` &mdash; (`Object`)
+ *         * `activityTaskStartedEventAttributes` &mdash; (`map`)
  *           * `identity` &mdash; (`String`)
  *           * `scheduledEventId` &mdash; (`Integer`)
- *         * `activityTaskCompletedEventAttributes` &mdash; (`Object`)
+ *         * `activityTaskCompletedEventAttributes` &mdash; (`map`)
  *           * `result` &mdash; (`String`)
  *           * `scheduledEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
- *         * `activityTaskFailedEventAttributes` &mdash; (`Object`)
+ *         * `activityTaskFailedEventAttributes` &mdash; (`map`)
  *           * `reason` &mdash; (`String`)
  *           * `details` &mdash; (`String`)
  *           * `scheduledEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
- *         * `activityTaskTimedOutEventAttributes` &mdash; (`Object`)
+ *         * `activityTaskTimedOutEventAttributes` &mdash; (`map`)
  *           * `timeoutType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `START_TO_CLOSE`
+ *             * `SCHEDULE_TO_START`
+ *             * `SCHEDULE_TO_CLOSE`
+ *             * `HEARTBEAT`
  *           * `scheduledEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
  *           * `details` &mdash; (`String`)
- *         * `activityTaskCanceledEventAttributes` &mdash; (`Object`)
+ *         * `activityTaskCanceledEventAttributes` &mdash; (`map`)
  *           * `details` &mdash; (`String`)
  *           * `scheduledEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
  *           * `latestCancelRequestedEventId` &mdash; (`Integer`)
- *         * `activityTaskCancelRequestedEventAttributes` &mdash;
- *           (`Object`)
+ *         * `activityTaskCancelRequestedEventAttributes` &mdash; (`map`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *           * `activityId` &mdash; (`String`)
- *         * `workflowExecutionSignaledEventAttributes` &mdash; (`Object`)
+ *         * `workflowExecutionSignaledEventAttributes` &mdash; (`map`)
  *           * `signalName` &mdash; (`String`)
  *           * `input` &mdash; (`String`)
- *           * `externalWorkflowExecution` &mdash; (`Object`)
+ *           * `externalWorkflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
  *           * `externalInitiatedEventId` &mdash; (`Integer`)
- *         * `markerRecordedEventAttributes` &mdash; (`Object`)
+ *         * `markerRecordedEventAttributes` &mdash; (`map`)
  *           * `markerName` &mdash; (`String`)
  *           * `details` &mdash; (`String`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `recordMarkerFailedEventAttributes` &mdash; (`Object`)
+ *         * `recordMarkerFailedEventAttributes` &mdash; (`map`)
  *           * `markerName` &mdash; (`String`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `timerStartedEventAttributes` &mdash; (`Object`)
+ *         * `timerStartedEventAttributes` &mdash; (`map`)
  *           * `timerId` &mdash; (`String`)
  *           * `control` &mdash; (`String`)
  *           * `startToFireTimeout` &mdash; (`String`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `timerFiredEventAttributes` &mdash; (`Object`)
+ *         * `timerFiredEventAttributes` &mdash; (`map`)
  *           * `timerId` &mdash; (`String`)
  *           * `startedEventId` &mdash; (`Integer`)
- *         * `timerCanceledEventAttributes` &mdash; (`Object`)
+ *         * `timerCanceledEventAttributes` &mdash; (`map`)
  *           * `timerId` &mdash; (`String`)
  *           * `startedEventId` &mdash; (`Integer`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *         * `startChildWorkflowExecutionInitiatedEventAttributes` &mdash;
- *           (`Object`)
+ *           (`map`)
  *           * `workflowId` &mdash; (`String`)
- *           * `workflowType` &mdash; (`Object`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `control` &mdash; (`String`)
  *           * `input` &mdash; (`String`)
  *           * `executionStartToCloseTimeout` &mdash; (`String`)
- *           * `taskList` &mdash; (`Object`)
+ *           * `taskList` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *           * `childPolicy` &mdash; (`String`)
+ *             Possible values include:
+ *             * `TERMINATE`
+ *             * `REQUEST_CANCEL`
+ *             * `ABANDON`
  *           * `taskStartToCloseTimeout` &mdash; (`String`)
  *           * `tagList` &mdash; (`Array<String>`)
- *         * `childWorkflowExecutionStartedEventAttributes` &mdash;
- *           (`Object`)
- *           * `workflowExecution` &mdash; (`Object`)
+ *         * `childWorkflowExecutionStartedEventAttributes` &mdash; (`map`)
+ *           * `workflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
- *           * `workflowType` &mdash; (`Object`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `initiatedEventId` &mdash; (`Integer`)
  *         * `childWorkflowExecutionCompletedEventAttributes` &mdash;
- *           (`Object`)
- *           * `workflowExecution` &mdash; (`Object`)
+ *           (`map`)
+ *           * `workflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
- *           * `workflowType` &mdash; (`Object`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `result` &mdash; (`String`)
  *           * `initiatedEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
- *         * `childWorkflowExecutionFailedEventAttributes` &mdash;
- *           (`Object`)
- *           * `workflowExecution` &mdash; (`Object`)
+ *         * `childWorkflowExecutionFailedEventAttributes` &mdash; (`map`)
+ *           * `workflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
- *           * `workflowType` &mdash; (`Object`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `reason` &mdash; (`String`)
@@ -1340,39 +1657,41 @@ AWS.SimpleWorkflow = inherit({})
  *           * `initiatedEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
  *         * `childWorkflowExecutionTimedOutEventAttributes` &mdash;
- *           (`Object`)
- *           * `workflowExecution` &mdash; (`Object`)
+ *           (`map`)
+ *           * `workflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
- *           * `workflowType` &mdash; (`Object`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `timeoutType` &mdash; (`String`)
+ *             Possible values include:
+ *             * `START_TO_CLOSE`
  *           * `initiatedEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
  *         * `childWorkflowExecutionCanceledEventAttributes` &mdash;
- *           (`Object`)
- *           * `workflowExecution` &mdash; (`Object`)
+ *           (`map`)
+ *           * `workflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
- *           * `workflowType` &mdash; (`Object`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `details` &mdash; (`String`)
  *           * `initiatedEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
  *         * `childWorkflowExecutionTerminatedEventAttributes` &mdash;
- *           (`Object`)
- *           * `workflowExecution` &mdash; (`Object`)
+ *           (`map`)
+ *           * `workflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
- *           * `workflowType` &mdash; (`Object`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `initiatedEventId` &mdash; (`Integer`)
  *           * `startedEventId` &mdash; (`Integer`)
  *         * `signalExternalWorkflowExecutionInitiatedEventAttributes`
- *           &mdash; (`Object`)
+ *           &mdash; (`map`)
  *           * `workflowId` &mdash; (`String`)
  *           * `runId` &mdash; (`String`)
  *           * `signalName` &mdash; (`String`)
@@ -1380,66 +1699,109 @@ AWS.SimpleWorkflow = inherit({})
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *           * `control` &mdash; (`String`)
  *         * `externalWorkflowExecutionSignaledEventAttributes` &mdash;
- *           (`Object`)
- *           * `workflowExecution` &mdash; (`Object`)
+ *           (`map`)
+ *           * `workflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
  *           * `initiatedEventId` &mdash; (`Integer`)
  *         * `signalExternalWorkflowExecutionFailedEventAttributes` &mdash;
- *           (`Object`)
+ *           (`map`)
  *           * `workflowId` &mdash; (`String`)
  *           * `runId` &mdash; (`String`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION`
+ *             * `SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `initiatedEventId` &mdash; (`Integer`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *           * `control` &mdash; (`String`)
  *         * `externalWorkflowExecutionCancelRequestedEventAttributes`
- *           &mdash; (`Object`)
- *           * `workflowExecution` &mdash; (`Object`)
+ *           &mdash; (`map`)
+ *           * `workflowExecution` &mdash; (`map`)
  *             * `workflowId` &mdash; (`String`)
  *             * `runId` &mdash; (`String`)
  *           * `initiatedEventId` &mdash; (`Integer`)
  *         *
  *           `requestCancelExternalWorkflowExecutionInitiatedEventAttributes`
- *           &mdash; (`Object`)
+ *           &mdash; (`map`)
  *           * `workflowId` &mdash; (`String`)
  *           * `runId` &mdash; (`String`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *           * `control` &mdash; (`String`)
  *         * `requestCancelExternalWorkflowExecutionFailedEventAttributes`
- *           &mdash; (`Object`)
+ *           &mdash; (`map`)
  *           * `workflowId` &mdash; (`String`)
  *           * `runId` &mdash; (`String`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION`
+ *             * `REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `initiatedEventId` &mdash; (`Integer`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *           * `control` &mdash; (`String`)
- *         * `scheduleActivityTaskFailedEventAttributes` &mdash; (`Object`)
- *           * `activityType` &mdash; (`Object`)
+ *         * `scheduleActivityTaskFailedEventAttributes` &mdash; (`map`)
+ *           * `activityType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `activityId` &mdash; (`String`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `ACTIVITY_TYPE_DEPRECATED`
+ *             * `ACTIVITY_TYPE_DOES_NOT_EXIST`
+ *             * `ACTIVITY_ID_ALREADY_IN_USE`
+ *             * `OPEN_ACTIVITIES_LIMIT_EXCEEDED`
+ *             * `ACTIVITY_CREATION_RATE_EXCEEDED`
+ *             * `DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED`
+ *             * `DEFAULT_TASK_LIST_UNDEFINED`
+ *             * `DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED`
+ *             * `DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED`
+ *             * `DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *         * `requestCancelActivityTaskFailedEventAttributes` &mdash;
- *           (`Object`)
+ *           (`map`)
  *           * `activityId` &mdash; (`String`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `ACTIVITY_ID_UNKNOWN`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `startTimerFailedEventAttributes` &mdash; (`Object`)
+ *         * `startTimerFailedEventAttributes` &mdash; (`map`)
  *           * `timerId` &mdash; (`String`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `TIMER_ID_ALREADY_IN_USE`
+ *             * `OPEN_TIMERS_LIMIT_EXCEEDED`
+ *             * `TIMER_CREATION_RATE_EXCEEDED`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
- *         * `cancelTimerFailedEventAttributes` &mdash; (`Object`)
+ *         * `cancelTimerFailedEventAttributes` &mdash; (`map`)
  *           * `timerId` &mdash; (`String`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `TIMER_ID_UNKNOWN`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
  *         * `startChildWorkflowExecutionFailedEventAttributes` &mdash;
- *           (`Object`)
- *           * `workflowType` &mdash; (`Object`)
+ *           (`map`)
+ *           * `workflowType` &mdash; (`map`)
  *             * `name` &mdash; (`String`)
  *             * `version` &mdash; (`String`)
  *           * `cause` &mdash; (`String`)
+ *             Possible values include:
+ *             * `WORKFLOW_TYPE_DOES_NOT_EXIST`
+ *             * `WORKFLOW_TYPE_DEPRECATED`
+ *             * `OPEN_CHILDREN_LIMIT_EXCEEDED`
+ *             * `OPEN_WORKFLOWS_LIMIT_EXCEEDED`
+ *             * `CHILD_CREATION_RATE_EXCEEDED`
+ *             * `WORKFLOW_ALREADY_RUNNING`
+ *             * `DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED`
+ *             * `DEFAULT_TASK_LIST_UNDEFINED`
+ *             * `DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED`
+ *             * `DEFAULT_CHILD_POLICY_UNDEFINED`
+ *             * `OPERATION_NOT_PERMITTED`
  *           * `workflowId` &mdash; (`String`)
  *           * `initiatedEventId` &mdash; (`Integer`)
  *           * `decisionTaskCompletedEventId` &mdash; (`Integer`)
@@ -1517,11 +1879,11 @@ AWS.SimpleWorkflow = inherit({})
  *       The valid values are integers greater than or equal to 0. An
  *       integer value can be used to specify the duration in seconds
  *       while NONE can be used to specify unlimited duration.
- *     * `defaultTaskList` &mdash; (`Object`) If set, specifies the
- *       default task list to use for scheduling tasks of this activity
- *       type. This default task list is used if a task list is not
- *       provided when a task is scheduled through the
- *       ScheduleActivityTask Decision.
+ *     * `defaultTaskList` &mdash; (`map`) If set, specifies the default
+ *       task list to use for scheduling tasks of this activity type.
+ *       This default task list is used if a task list is not provided
+ *       when a task is scheduled through the ScheduleActivityTask
+ *       Decision.
  *       * `name` &mdash; **required** &mdash; (`String`)
  *     * `defaultTaskScheduleToStartTimeout` &mdash; (`String`) If set,
  *       specifies the default maximum duration that a task of this
@@ -1620,11 +1982,11 @@ AWS.SimpleWorkflow = inherit({})
  *       defaultExecutionStartToCloseTimeout; there is a one-year max
  *       limit on the time that a workflow execution can run. Exceeding
  *       this limit will always cause the workflow execution to time out.
- *     * `defaultTaskList` &mdash; (`Object`) If set, specifies the
- *       default task list to use for scheduling decision tasks for
- *       executions of this workflow type. This default is used only if a
- *       task list is not provided when starting the execution through
- *       the StartWorkflowExecution Action or StartChildWorkflowExecution
+ *     * `defaultTaskList` &mdash; (`map`) If set, specifies the default
+ *       task list to use for scheduling decision tasks for executions of
+ *       this workflow type. This default is used only if a task list is
+ *       not provided when starting the execution through the
+ *       StartWorkflowExecution Action or StartChildWorkflowExecution
  *       Decision.
  *       * `name` &mdash; **required** &mdash; (`String`)
  *     * `defaultChildPolicy` &mdash; (`String`) If set, specifies the
@@ -1641,6 +2003,10 @@ AWS.SimpleWorkflow = inherit({})
  *       to the decider to take appropriate actions when it receives an
  *       execution history with this event. ABANDON: no action will be
  *       taken. The child executions will continue to run.
+ *       Possible values include:
+ *       * `TERMINATE`
+ *       * `REQUEST_CANCEL`
+ *       * `ABANDON`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1749,79 +2115,98 @@ AWS.SimpleWorkflow = inherit({})
  *       task is passed to another process, its taskToken must also be
  *       passed. This enables it to provide its progress and respond with
  *       results.
- *     * `decisions` &mdash; (`Array<Object>`) The list of decisions
+ *     * `decisions` &mdash; (`Array<map>`) The list of decisions
  *       (possibly empty) made by the decider while processing this
  *       decision task. See the docs for the Decision structure for
  *       details.
  *       * `decisionType` &mdash; **required** &mdash; (`String`)
- *       * `scheduleActivityTaskDecisionAttributes` &mdash; (`Object`)
- *         * `activityType` &mdash; **required** &mdash; (`Object`)
+ *         Possible values include:
+ *         * `ScheduleActivityTask`
+ *         * `RequestCancelActivityTask`
+ *         * `CompleteWorkflowExecution`
+ *         * `FailWorkflowExecution`
+ *         * `CancelWorkflowExecution`
+ *         * `ContinueAsNewWorkflowExecution`
+ *         * `RecordMarker`
+ *         * `StartTimer`
+ *         * `CancelTimer`
+ *         * `SignalExternalWorkflowExecution`
+ *         * `RequestCancelExternalWorkflowExecution`
+ *         * `StartChildWorkflowExecution`
+ *       * `scheduleActivityTaskDecisionAttributes` &mdash; (`map`)
+ *         * `activityType` &mdash; **required** &mdash; (`map`)
  *           * `name` &mdash; **required** &mdash; (`String`)
  *           * `version` &mdash; **required** &mdash; (`String`)
  *         * `activityId` &mdash; **required** &mdash; (`String`)
  *         * `control` &mdash; (`String`)
  *         * `input` &mdash; (`String`)
  *         * `scheduleToCloseTimeout` &mdash; (`String`)
- *         * `taskList` &mdash; (`Object`)
+ *         * `taskList` &mdash; (`map`)
  *           * `name` &mdash; **required** &mdash; (`String`)
  *         * `scheduleToStartTimeout` &mdash; (`String`)
  *         * `startToCloseTimeout` &mdash; (`String`)
  *         * `heartbeatTimeout` &mdash; (`String`)
- *       * `requestCancelActivityTaskDecisionAttributes` &mdash;
- *         (`Object`)
+ *       * `requestCancelActivityTaskDecisionAttributes` &mdash; (`map`)
  *         * `activityId` &mdash; **required** &mdash; (`String`)
- *       * `completeWorkflowExecutionDecisionAttributes` &mdash;
- *         (`Object`)
+ *       * `completeWorkflowExecutionDecisionAttributes` &mdash; (`map`)
  *         * `result` &mdash; (`String`)
- *       * `failWorkflowExecutionDecisionAttributes` &mdash; (`Object`)
+ *       * `failWorkflowExecutionDecisionAttributes` &mdash; (`map`)
  *         * `reason` &mdash; (`String`)
  *         * `details` &mdash; (`String`)
- *       * `cancelWorkflowExecutionDecisionAttributes` &mdash; (`Object`)
+ *       * `cancelWorkflowExecutionDecisionAttributes` &mdash; (`map`)
  *         * `details` &mdash; (`String`)
  *       * `continueAsNewWorkflowExecutionDecisionAttributes` &mdash;
- *         (`Object`)
+ *         (`map`)
  *         * `input` &mdash; (`String`)
  *         * `executionStartToCloseTimeout` &mdash; (`String`)
- *         * `taskList` &mdash; (`Object`)
+ *         * `taskList` &mdash; (`map`)
  *           * `name` &mdash; **required** &mdash; (`String`)
  *         * `taskStartToCloseTimeout` &mdash; (`String`)
  *         * `childPolicy` &mdash; (`String`)
+ *           Possible values include:
+ *           * `TERMINATE`
+ *           * `REQUEST_CANCEL`
+ *           * `ABANDON`
  *         * `tagList` &mdash; (`Array<String>`)
  *         * `workflowTypeVersion` &mdash; (`String`)
- *       * `recordMarkerDecisionAttributes` &mdash; (`Object`)
+ *       * `recordMarkerDecisionAttributes` &mdash; (`map`)
  *         * `markerName` &mdash; **required** &mdash; (`String`)
  *         * `details` &mdash; (`String`)
- *       * `startTimerDecisionAttributes` &mdash; (`Object`)
+ *       * `startTimerDecisionAttributes` &mdash; (`map`)
  *         * `timerId` &mdash; **required** &mdash; (`String`)
  *         * `control` &mdash; (`String`)
  *         * `startToFireTimeout` &mdash; **required** &mdash; (`String`)
- *       * `cancelTimerDecisionAttributes` &mdash; (`Object`)
+ *       * `cancelTimerDecisionAttributes` &mdash; (`map`)
  *         * `timerId` &mdash; **required** &mdash; (`String`)
  *       * `signalExternalWorkflowExecutionDecisionAttributes` &mdash;
- *         (`Object`)
+ *         (`map`)
  *         * `workflowId` &mdash; **required** &mdash; (`String`)
  *         * `runId` &mdash; (`String`)
  *         * `signalName` &mdash; **required** &mdash; (`String`)
  *         * `input` &mdash; (`String`)
  *         * `control` &mdash; (`String`)
  *       * `requestCancelExternalWorkflowExecutionDecisionAttributes`
- *         &mdash; (`Object`)
+ *         &mdash; (`map`)
  *         * `workflowId` &mdash; **required** &mdash; (`String`)
  *         * `runId` &mdash; (`String`)
  *         * `control` &mdash; (`String`)
  *       * `startChildWorkflowExecutionDecisionAttributes` &mdash;
- *         (`Object`)
- *         * `workflowType` &mdash; **required** &mdash; (`Object`)
+ *         (`map`)
+ *         * `workflowType` &mdash; **required** &mdash; (`map`)
  *           * `name` &mdash; **required** &mdash; (`String`)
  *           * `version` &mdash; **required** &mdash; (`String`)
  *         * `workflowId` &mdash; **required** &mdash; (`String`)
  *         * `control` &mdash; (`String`)
  *         * `input` &mdash; (`String`)
  *         * `executionStartToCloseTimeout` &mdash; (`String`)
- *         * `taskList` &mdash; (`Object`)
+ *         * `taskList` &mdash; (`map`)
  *           * `name` &mdash; **required** &mdash; (`String`)
  *         * `taskStartToCloseTimeout` &mdash; (`String`)
  *         * `childPolicy` &mdash; (`String`)
+ *           Possible values include:
+ *           * `TERMINATE`
+ *           * `REQUEST_CANCEL`
+ *           * `ABANDON`
  *         * `tagList` &mdash; (`Array<String>`)
  *     * `executionContext` &mdash; (`String`) User defined context to
  *       add to workflow execution.
@@ -1877,22 +2262,21 @@ AWS.SimpleWorkflow = inherit({})
  *       (slash), | (vertical bar), or any control characters
  *       (\u0000-\u001f | \u007f - \u009f). Also, it must not contain the
  *       literal string "arn".
- *     * `workflowType` &mdash; **required** &mdash; (`Object`) The type
- *       of the workflow to start.
+ *     * `workflowType` &mdash; **required** &mdash; (`map`) The type of
+ *       the workflow to start.
  *       * `name` &mdash; **required** &mdash; (`String`)
  *       * `version` &mdash; **required** &mdash; (`String`)
- *     * `taskList` &mdash; (`Object`) The task list to use for the
- *       decision tasks generated for this workflow execution. This
- *       overrides the defaultTaskList specified when registering the
- *       workflow type. A task list for this workflow execution must be
- *       specified either as a default for the workflow type or through
- *       this parameter. If neither this parameter is set nor a default
- *       task list was specified at registration time then a fault will
- *       be returned. The specified string must not start or end with
- *       whitespace. It must not contain a : (colon), / (slash), |
- *       (vertical bar), or any control characters (\u0000-\u001f |
- *       \u007f - \u009f). Also, it must not contain the literal string
- *       "arn".
+ *     * `taskList` &mdash; (`map`) The task list to use for the decision
+ *       tasks generated for this workflow execution. This overrides the
+ *       defaultTaskList specified when registering the workflow type. A
+ *       task list for this workflow execution must be specified either
+ *       as a default for the workflow type or through this parameter. If
+ *       neither this parameter is set nor a default task list was
+ *       specified at registration time then a fault will be returned.
+ *       The specified string must not start or end with whitespace. It
+ *       must not contain a : (colon), / (slash), | (vertical bar), or
+ *       any control characters (\u0000-\u001f | \u007f - \u009f). Also,
+ *       it must not contain the literal string "arn".
  *       * `name` &mdash; **required** &mdash; (`String`)
  *     * `input` &mdash; (`String`) The input for the workflow execution.
  *       This is a free form string which should be meaningful to the
@@ -1946,6 +2330,10 @@ AWS.SimpleWorkflow = inherit({})
  *       default for the workflow type or through this parameter. If
  *       neither this parameter is set nor a default child policy was
  *       specified at registration time then a fault will be returned.
+ *       Possible values include:
+ *       * `TERMINATE`
+ *       * `REQUEST_CANCEL`
+ *       * `ABANDON`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -1991,6 +2379,10 @@ AWS.SimpleWorkflow = inherit({})
  *       workflow type or through this parameter. If neither this
  *       parameter is set nor a default child policy was specified at
  *       registration time, a fault will be returned.
+ *       Possible values include:
+ *       * `TERMINATE`
+ *       * `REQUEST_CANCEL`
+ *       * `ABANDON`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}

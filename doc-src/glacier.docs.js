@@ -224,6 +224,9 @@ AWS.Glacier = inherit({})
  *         provided when you initiated the job.
  *       * `Action` &mdash; (`String`) The job type. It is either
  *         ArchiveRetrieval or InventoryRetrieval.
+ *         Possible values include:
+ *         * `ArchiveRetrieval`
+ *         * `InventoryRetrieval`
  *       * `ArchiveId` &mdash; (`String`) For an ArchiveRetrieval job, this
  *         is the archive ID requested for download. Otherwise, this field
  *         is null.
@@ -237,6 +240,10 @@ AWS.Glacier = inherit({})
  *       * `StatusCode` &mdash; (`String`) The status code can be
  *         InProgress, Succeeded, or Failed, and indicates the status of
  *         the job.
+ *         Possible values include:
+ *         * `InProgress`
+ *         * `Succeeded`
+ *         * `Failed`
  *       * `StatusMessage` &mdash; (`String`) A friendly message that
  *         describes the job status.
  *       * `ArchiveSizeInBytes` &mdash; (`Integer`) For an ArchiveRetrieval
@@ -397,8 +404,8 @@ AWS.Glacier = inherit({})
  *       associated with the credentials used to sign the request. If you
  *       specify your Account ID, do not include hyphens in it.
  *     * `vaultName` &mdash; (`String`) The name of the vault.
- *     * `jobParameters` &mdash; (`Object`) Provides options for
- *       specifying job information.
+ *     * `jobParameters` &mdash; (`map`) Provides options for specifying
+ *       job information.
  *       * `Format` &mdash; (`String`) When initiating a job to retrieve
  *         a vault inventory, you can optionally add this parameter to
  *         your request to specify the output format. If you are
@@ -505,14 +512,17 @@ AWS.Glacier = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `JobList` &mdash; (`Array<Object>`) A list of job objects. Each
- *         job object contains metadata describing the job.
+ *       * `JobList` &mdash; (`Array<map>`) A list of job objects. Each job
+ *         object contains metadata describing the job.
  *         * `JobId` &mdash; (`String`) An opaque string that identifies an
  *           Amazon Glacier job.
  *         * `JobDescription` &mdash; (`String`) The job description you
  *           provided when you initiated the job.
  *         * `Action` &mdash; (`String`) The job type. It is either
  *           ArchiveRetrieval or InventoryRetrieval.
+ *           Possible values include:
+ *           * `ArchiveRetrieval`
+ *           * `InventoryRetrieval`
  *         * `ArchiveId` &mdash; (`String`) For an ArchiveRetrieval job,
  *           this is the archive ID requested for download. Otherwise, this
  *           field is null.
@@ -526,6 +536,10 @@ AWS.Glacier = inherit({})
  *         * `StatusCode` &mdash; (`String`) The status code can be
  *           InProgress, Succeeded, or Failed, and indicates the status of
  *           the job.
+ *           Possible values include:
+ *           * `InProgress`
+ *           * `Succeeded`
+ *           * `Failed`
  *         * `StatusMessage` &mdash; (`String`) A friendly message that
  *           describes the job status.
  *         * `ArchiveSizeInBytes` &mdash; (`Integer`) For an
@@ -582,7 +596,7 @@ AWS.Glacier = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `UploadsList` &mdash; (`Array<Object>`) A list of in-progress
+ *       * `UploadsList` &mdash; (`Array<map>`) A list of in-progress
  *         multipart uploads.
  *         * `MultipartUploadId` &mdash; (`String`) The ID of a multipart
  *           upload.
@@ -644,8 +658,8 @@ AWS.Glacier = inherit({})
  *       * `PartSizeInBytes` &mdash; (`Integer`) The part size in bytes.
  *       * `CreationDate` &mdash; (`String`) The UTC time at which the
  *         multipart upload was initiated.
- *       * `Parts` &mdash; (`Array<Object>`) A list of the part sizes of
- *         the multipart upload.
+ *       * `Parts` &mdash; (`Array<map>`) A list of the part sizes of the
+ *         multipart upload.
  *         * `RangeInBytes` &mdash; (`String`) The byte range of a part,
  *           inclusive of the upper value of the range.
  *         * `SHA256TreeHash` &mdash; (`String`) The SHA256 tree hash value
@@ -682,7 +696,7 @@ AWS.Glacier = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `VaultList` &mdash; (`Array<Object>`) List of vaults.
+ *       * `VaultList` &mdash; (`Array<map>`) List of vaults.
  *         * `VaultARN` &mdash; (`String`) The Amazon Resource Name (ARN)
  *           of the vault.
  *         * `VaultName` &mdash; (`String`) The name of the vault.
@@ -716,8 +730,8 @@ AWS.Glacier = inherit({})
  *       associated with the credentials used to sign the request. If you
  *       specify your Account ID, do not include hyphens in it.
  *     * `vaultName` &mdash; (`String`) The name of the vault.
- *     * `vaultNotificationConfig` &mdash; (`Object`) Provides options
- *       for specifying notification configuration.
+ *     * `vaultNotificationConfig` &mdash; (`map`) Provides options for
+ *       specifying notification configuration.
  *       * `SNSTopic` &mdash; (`String`) The Amazon Simple Notification
  *         Service (Amazon SNS) topic Amazon Resource Name (ARN).
  *       * `Events` &mdash; (`Array<String>`) A list of one or more

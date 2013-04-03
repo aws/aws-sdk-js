@@ -166,11 +166,11 @@ AWS.SNS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Attributes` &mdash; (`Object<String>`) A map of the
- *         subscription's attributes. Attributes in this map include the
- *         following: SubscriptionArn -- the subscription's ARN TopicArn --
- *         the topic ARN which the subscription is associated with Owner --
- *         the AWS account ID of the subscription's owner
+ *       * `Attributes` &mdash; (`map<String>`) A map of the subscription's
+ *         attributes. Attributes in this map include the following:
+ *         SubscriptionArn -- the subscription's ARN TopicArn -- the topic
+ *         ARN which the subscription is associated with Owner -- the AWS
+ *         account ID of the subscription's owner
  *         ConfirmationWasAuthenticated -- True if the subscription
  *         confirmation request was authenticated DeliveryPolicy -- the
  *         JSON serialization of the subscription's delivery policy
@@ -195,7 +195,7 @@ AWS.SNS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Attributes` &mdash; (`Object<String>`) A map of the topic's
+ *       * `Attributes` &mdash; (`map<String>`) A map of the topic's
  *         attributes. Attributes in this map include the following:
  *         TopicArn -- the topic's ARN Owner -- the AWS account ID of the
  *         topic's owner Policy -- the JSON serialization of the topic's
@@ -228,8 +228,7 @@ AWS.SNS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Subscriptions` &mdash; (`Array<Object>`) A list of
- *         subscriptions.
+ *       * `Subscriptions` &mdash; (`Array<map>`) A list of subscriptions.
  *         * `SubscriptionArn` &mdash; (`String`) The subscription's ARN.
  *         * `Owner` &mdash; (`String`) The subscription's owner.
  *         * `Protocol` &mdash; (`String`) The subscription's protocol.
@@ -260,8 +259,7 @@ AWS.SNS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Subscriptions` &mdash; (`Array<Object>`) A list of
- *         subscriptions.
+ *       * `Subscriptions` &mdash; (`Array<map>`) A list of subscriptions.
  *         * `SubscriptionArn` &mdash; (`String`) The subscription's ARN.
  *         * `Owner` &mdash; (`String`) The subscription's owner.
  *         * `Protocol` &mdash; (`String`) The subscription's protocol.
@@ -290,7 +288,7 @@ AWS.SNS = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Topics` &mdash; (`Array<Object>`) A list of topic ARNs.
+ *       * `Topics` &mdash; (`Array<map>`) A list of topic ARNs.
  *         * `TopicArn` &mdash; (`String`) The topic's ARN.
  *       * `NextToken` &mdash; (`String`) Token to pass along to the next
  *         ListTopics request. This element is returned if there are

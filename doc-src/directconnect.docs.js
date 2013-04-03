@@ -70,6 +70,11 @@ AWS.DirectConnect = inherit({})
  *       * `connectionId` &mdash; (`String`)
  *       * `connectionName` &mdash; (`String`)
  *       * `connectionState` &mdash; (`String`)
+ *         Possible values include:
+ *         * `requested`
+ *         * `pending`
+ *         * `available`
+ *         * `deleted`
  *       * `region` &mdash; (`String`)
  *       * `location` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -79,7 +84,7 @@ AWS.DirectConnect = inherit({})
  *   Calls the CreatePrivateVirtualInterface API operation.
  *   @param params [Object]
  *     * `connectionId` &mdash; (`String`)
- *     * `newPrivateVirtualInterface` &mdash; (`Object`) Detailed
+ *     * `newPrivateVirtualInterface` &mdash; (`map`) Detailed
  *       information of the private virtual interface to be created.
  *       Default: None
  *       * `virtualInterfaceName` &mdash; (`String`)
@@ -111,10 +116,16 @@ AWS.DirectConnect = inherit({})
  *       * `customerAddress` &mdash; (`String`) IP address assigned to the
  *         customer interface. Example: 192.168.1.2
  *       * `virtualInterfaceState` &mdash; (`String`)
+ *         Possible values include:
+ *         * `verifying`
+ *         * `pending`
+ *         * `available`
+ *         * `deleting`
+ *         * `deleted`
  *       * `customerRouterConfig` &mdash; (`String`) Information for
  *         generating the customer router configuration.
  *       * `virtualGatewayId` &mdash; (`String`)
- *       * `routeFilterPrefixes` &mdash; (`Array<Object>`)
+ *       * `routeFilterPrefixes` &mdash; (`Array<map>`)
  *         * `cidr` &mdash; (`String`) CIDR notation for the advertised
  *           route. Multiple routes are separated by commas Example:
  *           10.10.10.0/24,10.10.11.0/24
@@ -125,16 +136,15 @@ AWS.DirectConnect = inherit({})
  *   Calls the CreatePublicVirtualInterface API operation.
  *   @param params [Object]
  *     * `connectionId` &mdash; (`String`)
- *     * `newPublicVirtualInterface` &mdash; (`Object`) Detailed
- *       information of the public virtual interface to be created.
- *       Default: None
+ *     * `newPublicVirtualInterface` &mdash; (`map`) Detailed information
+ *       of the public virtual interface to be created. Default: None
  *       * `virtualInterfaceName` &mdash; (`String`)
  *       * `vlan` &mdash; (`Integer`)
  *       * `asn` &mdash; (`Integer`)
  *       * `authKey` &mdash; (`String`)
  *       * `amazonAddress` &mdash; (`String`)
  *       * `customerAddress` &mdash; (`String`)
- *       * `routeFilterPrefixes` &mdash; (`Array<Object>`)
+ *       * `routeFilterPrefixes` &mdash; (`Array<map>`)
  *         * `cidr` &mdash; (`String`) CIDR notation for the advertised
  *           route. Multiple routes are separated by commas Example:
  *           10.10.10.0/24,10.10.11.0/24
@@ -160,10 +170,16 @@ AWS.DirectConnect = inherit({})
  *       * `customerAddress` &mdash; (`String`) IP address assigned to the
  *         customer interface. Example: 192.168.1.2
  *       * `virtualInterfaceState` &mdash; (`String`)
+ *         Possible values include:
+ *         * `verifying`
+ *         * `pending`
+ *         * `available`
+ *         * `deleting`
+ *         * `deleted`
  *       * `customerRouterConfig` &mdash; (`String`) Information for
  *         generating the customer router configuration.
  *       * `virtualGatewayId` &mdash; (`String`)
- *       * `routeFilterPrefixes` &mdash; (`Array<Object>`)
+ *       * `routeFilterPrefixes` &mdash; (`Array<map>`)
  *         * `cidr` &mdash; (`String`) CIDR notation for the advertised
  *           route. Multiple routes are separated by commas Example:
  *           10.10.10.0/24,10.10.11.0/24
@@ -187,6 +203,11 @@ AWS.DirectConnect = inherit({})
  *       * `connectionId` &mdash; (`String`)
  *       * `connectionName` &mdash; (`String`)
  *       * `connectionState` &mdash; (`String`)
+ *         Possible values include:
+ *         * `requested`
+ *         * `pending`
+ *         * `available`
+ *         * `deleted`
  *       * `region` &mdash; (`String`)
  *       * `location` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -207,6 +228,12 @@ AWS.DirectConnect = inherit({})
  *       The `data` object has the following properties:
  *
  *       * `virtualInterfaceState` &mdash; (`String`)
+ *         Possible values include:
+ *         * `verifying`
+ *         * `pending`
+ *         * `available`
+ *         * `deleting`
+ *         * `deleted`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -227,10 +254,15 @@ AWS.DirectConnect = inherit({})
  *       * `connectionId` &mdash; (`String`)
  *       * `connectionName` &mdash; (`String`)
  *       * `connectionState` &mdash; (`String`)
+ *         Possible values include:
+ *         * `requested`
+ *         * `pending`
+ *         * `available`
+ *         * `deleted`
  *       * `region` &mdash; (`String`)
  *       * `location` &mdash; (`String`)
  *       * `bandwidth` &mdash; (`String`)
- *       * `connectionCosts` &mdash; (`Array<Object>`)
+ *       * `connectionCosts` &mdash; (`Array<map>`)
  *         * `name` &mdash; (`String`) The name of the cost item. Example:
  *           Inbound data transfer
  *         * `unit` &mdash; (`String`) The unit used in cost calculation.
@@ -239,7 +271,7 @@ AWS.DirectConnect = inherit({})
  *           4217. Example: "USD" for US dollar.
  *         * `amount` &mdash; (`String`) The amount of charge per unit.
  *           Example: 0.01
- *       * `orderSteps` &mdash; (`Array<Object>`)
+ *       * `orderSteps` &mdash; (`Array<map>`)
  *         * `number` &mdash; (`String`) Number of an order step. Example:
  *           1
  *         * `name` &mdash; (`String`) Name of the order step. Example:
@@ -255,6 +287,9 @@ AWS.DirectConnect = inherit({})
  *         * `stepState` &mdash; (`String`) State of the connection step.
  *           Pending: This step is not yet completed. Completed: This step
  *           has been completed
+ *           Possible values include:
+ *           * `pending`
+ *           * `completed`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -272,10 +307,15 @@ AWS.DirectConnect = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `connections` &mdash; (`Array<Object>`) A list of connections.
+ *       * `connections` &mdash; (`Array<map>`) A list of connections.
  *         * `connectionId` &mdash; (`String`)
  *         * `connectionName` &mdash; (`String`)
  *         * `connectionState` &mdash; (`String`)
+ *           Possible values include:
+ *           * `requested`
+ *           * `pending`
+ *           * `available`
+ *           * `deleted`
  *         * `region` &mdash; (`String`)
  *         * `location` &mdash; (`String`)
  *   @return [AWS.Request] a handle to the operation request for
@@ -301,7 +341,7 @@ AWS.DirectConnect = inherit({})
  *       * `offeringName` &mdash; (`String`)
  *       * `description` &mdash; (`String`)
  *       * `bandwidth` &mdash; (`String`)
- *       * `connectionCosts` &mdash; (`Array<Object>`)
+ *       * `connectionCosts` &mdash; (`Array<map>`)
  *         * `name` &mdash; (`String`) The name of the cost item. Example:
  *           Inbound data transfer
  *         * `unit` &mdash; (`String`) The unit used in cost calculation.
@@ -310,7 +350,7 @@ AWS.DirectConnect = inherit({})
  *           4217. Example: "USD" for US dollar.
  *         * `amount` &mdash; (`String`) The amount of charge per unit.
  *           Example: 0.01
- *       * `orderSteps` &mdash; (`Array<Object>`)
+ *       * `orderSteps` &mdash; (`Array<map>`)
  *         * `number` &mdash; (`String`) Number of an order step. Example:
  *           1
  *         * `name` &mdash; (`String`) Name of the order step. Example:
@@ -339,7 +379,7 @@ AWS.DirectConnect = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `offerings` &mdash; (`Array<Object>`) A list of offerings.
+ *       * `offerings` &mdash; (`Array<map>`) A list of offerings.
  *         * `offeringId` &mdash; (`String`)
  *         * `region` &mdash; (`String`)
  *         * `location` &mdash; (`String`)
@@ -348,7 +388,7 @@ AWS.DirectConnect = inherit({})
  *           Default: None
  *         * `description` &mdash; (`String`)
  *         * `bandwidth` &mdash; (`String`)
- *         * `connectionCosts` &mdash; (`Array<Object>`)
+ *         * `connectionCosts` &mdash; (`Array<map>`)
  *           * `name` &mdash; (`String`) The name of the cost item.
  *             Example: Inbound data transfer
  *           * `unit` &mdash; (`String`) The unit used in cost calculation.
@@ -373,7 +413,7 @@ AWS.DirectConnect = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `virtualGateways` &mdash; (`Array<Object>`) A list of virtual
+ *       * `virtualGateways` &mdash; (`Array<map>`) A list of virtual
  *         gateways.
  *         * `virtualGatewayId` &mdash; (`String`)
  *         * `virtualGatewayState` &mdash; (`String`)
@@ -395,7 +435,7 @@ AWS.DirectConnect = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `virtualInterfaces` &mdash; (`Array<Object>`) A list of virtual
+ *       * `virtualInterfaces` &mdash; (`Array<map>`) A list of virtual
  *         interfaces.
  *         * `virtualInterfaceId` &mdash; (`String`)
  *         * `location` &mdash; (`String`)
@@ -409,10 +449,16 @@ AWS.DirectConnect = inherit({})
  *         * `customerAddress` &mdash; (`String`) IP address assigned to
  *           the customer interface. Example: 192.168.1.2
  *         * `virtualInterfaceState` &mdash; (`String`)
+ *           Possible values include:
+ *           * `verifying`
+ *           * `pending`
+ *           * `available`
+ *           * `deleting`
+ *           * `deleted`
  *         * `customerRouterConfig` &mdash; (`String`) Information for
  *           generating the customer router configuration.
  *         * `virtualGatewayId` &mdash; (`String`)
- *         * `routeFilterPrefixes` &mdash; (`Array<Object>`)
+ *         * `routeFilterPrefixes` &mdash; (`Array<map>`)
  *           * `cidr` &mdash; (`String`) CIDR notation for the advertised
  *             route. Multiple routes are separated by commas Example:
  *             10.10.10.0/24,10.10.11.0/24

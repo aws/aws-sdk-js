@@ -74,6 +74,10 @@ AWS.CloudWatch = inherit({})
  *     * `AlarmName` &mdash; (`String`) The name of the alarm.
  *     * `HistoryItemType` &mdash; (`String`) The type of alarm histories
  *       to retrieve.
+ *       Possible values include:
+ *       * `ConfigurationUpdate`
+ *       * `StateUpdate`
+ *       * `Action`
  *     * `StartDate` &mdash; (`Date`) The starting date to retrieve alarm
  *       history.
  *     * `EndDate` &mdash; (`Date`) The ending date to retrieve alarm
@@ -92,7 +96,7 @@ AWS.CloudWatch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `AlarmHistoryItems` &mdash; (`Array<Object>`) A list of alarm
+ *       * `AlarmHistoryItems` &mdash; (`Array<map>`) A list of alarm
  *         histories in JSON format.
  *         * `AlarmName` &mdash; (`String`) The descriptive name for the
  *           alarm.
@@ -100,6 +104,10 @@ AWS.CloudWatch = inherit({})
  *           history item.
  *         * `HistoryItemType` &mdash; (`String`) The type of alarm history
  *           item.
+ *           Possible values include:
+ *           * `ConfigurationUpdate`
+ *           * `StateUpdate`
+ *           * `Action`
  *         * `HistorySummary` &mdash; (`String`) A human-readable summary
  *           of the alarm history.
  *         * `HistoryData` &mdash; (`String`) Machine-readable data about
@@ -118,6 +126,10 @@ AWS.CloudWatch = inherit({})
  *       AlarmNames cannot be specified if this parameter is specified.
  *     * `StateValue` &mdash; (`String`) The state value to be used in
  *       matching alarms.
+ *       Possible values include:
+ *       * `OK`
+ *       * `ALARM`
+ *       * `INSUFFICIENT_DATA`
  *     * `ActionPrefix` &mdash; (`String`) The action name prefix.
  *     * `MaxRecords` &mdash; (`Integer`) The maximum number of alarm
  *       descriptions to retrieve.
@@ -133,8 +145,8 @@ AWS.CloudWatch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `MetricAlarms` &mdash; (`Array<Object>`) A list of information
- *         for the specified alarms.
+ *       * `MetricAlarms` &mdash; (`Array<map>`) A list of information for
+ *         the specified alarms.
  *         * `AlarmName` &mdash; (`String`) The name of the alarm.
  *         * `AlarmArn` &mdash; (`String`) The Amazon Resource Name (ARN)
  *           of the alarm.
@@ -163,6 +175,10 @@ AWS.CloudWatch = inherit({})
  *           only actions supported are publishing to an Amazon SNS topic
  *           or triggering an Auto Scaling policy.
  *         * `StateValue` &mdash; (`String`) The state value for the alarm.
+ *           Possible values include:
+ *           * `OK`
+ *           * `ALARM`
+ *           * `INSUFFICIENT_DATA`
  *         * `StateReason` &mdash; (`String`) A human-readable explanation
  *           for the alarm's state.
  *         * `StateReasonData` &mdash; (`String`) An explanation for the
@@ -175,7 +191,13 @@ AWS.CloudWatch = inherit({})
  *           associated metric.
  *         * `Statistic` &mdash; (`String`) The statistic to apply to the
  *           alarm's associated metric.
- *         * `Dimensions` &mdash; (`Array<Object>`) The list of dimensions
+ *           Possible values include:
+ *           * `SampleCount`
+ *           * `Average`
+ *           * `Sum`
+ *           * `Minimum`
+ *           * `Maximum`
+ *         * `Dimensions` &mdash; (`Array<map>`) The list of dimensions
  *           associated with the alarm's associated metric.
  *           * `Name` &mdash; (`String`) The name of the dimension.
  *           * `Value` &mdash; (`String`) The value representing the
@@ -184,6 +206,34 @@ AWS.CloudWatch = inherit({})
  *           the statistic is applied.
  *         * `Unit` &mdash; (`String`) The unit of the alarm's associated
  *           metric.
+ *           Possible values include:
+ *           * `Seconds`
+ *           * `Microseconds`
+ *           * `Milliseconds`
+ *           * `Bytes`
+ *           * `Kilobytes`
+ *           * `Megabytes`
+ *           * `Gigabytes`
+ *           * `Terabytes`
+ *           * `Bits`
+ *           * `Kilobits`
+ *           * `Megabits`
+ *           * `Gigabits`
+ *           * `Terabits`
+ *           * `Percent`
+ *           * `Count`
+ *           * `Bytes/Second`
+ *           * `Kilobytes/Second`
+ *           * `Megabytes/Second`
+ *           * `Gigabytes/Second`
+ *           * `Terabytes/Second`
+ *           * `Bits/Second`
+ *           * `Kilobits/Second`
+ *           * `Megabits/Second`
+ *           * `Gigabits/Second`
+ *           * `Terabits/Second`
+ *           * `Count/Second`
+ *           * `None`
  *         * `EvaluationPeriods` &mdash; (`Integer`) The number of periods
  *           over which data is compared to the specified threshold.
  *         * `Threshold` &mdash; (`Float`) The value against which the
@@ -192,6 +242,11 @@ AWS.CloudWatch = inherit({})
  *           operation to use when comparing the specified Statistic and
  *           Threshold. The specified Statistic value is used as the first
  *           operand.
+ *           Possible values include:
+ *           * `GreaterThanOrEqualToThreshold`
+ *           * `GreaterThanThreshold`
+ *           * `LessThanThreshold`
+ *           * `LessThanOrEqualToThreshold`
  *       * `NextToken` &mdash; (`String`) A string that marks the start of
  *         the next batch of returned results.
  *   @return [AWS.Request] a handle to the operation request for
@@ -205,7 +260,13 @@ AWS.CloudWatch = inherit({})
  *     * `Namespace` &mdash; **required** &mdash; (`String`) The
  *       namespace of the metric.
  *     * `Statistic` &mdash; (`String`) The statistic for the metric.
- *     * `Dimensions` &mdash; (`Array<Object>`) The list of dimensions
+ *       Possible values include:
+ *       * `SampleCount`
+ *       * `Average`
+ *       * `Sum`
+ *       * `Minimum`
+ *       * `Maximum`
+ *     * `Dimensions` &mdash; (`Array<map>`) The list of dimensions
  *       associated with the metric.
  *       * `Name` &mdash; **required** &mdash; (`String`) The name of the
  *         dimension.
@@ -214,6 +275,34 @@ AWS.CloudWatch = inherit({})
  *     * `Period` &mdash; (`Integer`) The period in seconds over which
  *       the statistic is applied.
  *     * `Unit` &mdash; (`String`) The unit for the metric.
+ *       Possible values include:
+ *       * `Seconds`
+ *       * `Microseconds`
+ *       * `Milliseconds`
+ *       * `Bytes`
+ *       * `Kilobytes`
+ *       * `Megabytes`
+ *       * `Gigabytes`
+ *       * `Terabytes`
+ *       * `Bits`
+ *       * `Kilobits`
+ *       * `Megabits`
+ *       * `Gigabits`
+ *       * `Terabits`
+ *       * `Percent`
+ *       * `Count`
+ *       * `Bytes/Second`
+ *       * `Kilobytes/Second`
+ *       * `Megabytes/Second`
+ *       * `Gigabytes/Second`
+ *       * `Terabytes/Second`
+ *       * `Bits/Second`
+ *       * `Kilobits/Second`
+ *       * `Megabits/Second`
+ *       * `Gigabits/Second`
+ *       * `Terabits/Second`
+ *       * `Count/Second`
+ *       * `None`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -224,8 +313,8 @@ AWS.CloudWatch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `MetricAlarms` &mdash; (`Array<Object>`) A list of information
- *         for each alarm with the specified metric.
+ *       * `MetricAlarms` &mdash; (`Array<map>`) A list of information for
+ *         each alarm with the specified metric.
  *         * `AlarmName` &mdash; (`String`) The name of the alarm.
  *         * `AlarmArn` &mdash; (`String`) The Amazon Resource Name (ARN)
  *           of the alarm.
@@ -254,6 +343,10 @@ AWS.CloudWatch = inherit({})
  *           only actions supported are publishing to an Amazon SNS topic
  *           or triggering an Auto Scaling policy.
  *         * `StateValue` &mdash; (`String`) The state value for the alarm.
+ *           Possible values include:
+ *           * `OK`
+ *           * `ALARM`
+ *           * `INSUFFICIENT_DATA`
  *         * `StateReason` &mdash; (`String`) A human-readable explanation
  *           for the alarm's state.
  *         * `StateReasonData` &mdash; (`String`) An explanation for the
@@ -266,7 +359,13 @@ AWS.CloudWatch = inherit({})
  *           associated metric.
  *         * `Statistic` &mdash; (`String`) The statistic to apply to the
  *           alarm's associated metric.
- *         * `Dimensions` &mdash; (`Array<Object>`) The list of dimensions
+ *           Possible values include:
+ *           * `SampleCount`
+ *           * `Average`
+ *           * `Sum`
+ *           * `Minimum`
+ *           * `Maximum`
+ *         * `Dimensions` &mdash; (`Array<map>`) The list of dimensions
  *           associated with the alarm's associated metric.
  *           * `Name` &mdash; (`String`) The name of the dimension.
  *           * `Value` &mdash; (`String`) The value representing the
@@ -275,6 +374,34 @@ AWS.CloudWatch = inherit({})
  *           the statistic is applied.
  *         * `Unit` &mdash; (`String`) The unit of the alarm's associated
  *           metric.
+ *           Possible values include:
+ *           * `Seconds`
+ *           * `Microseconds`
+ *           * `Milliseconds`
+ *           * `Bytes`
+ *           * `Kilobytes`
+ *           * `Megabytes`
+ *           * `Gigabytes`
+ *           * `Terabytes`
+ *           * `Bits`
+ *           * `Kilobits`
+ *           * `Megabits`
+ *           * `Gigabits`
+ *           * `Terabits`
+ *           * `Percent`
+ *           * `Count`
+ *           * `Bytes/Second`
+ *           * `Kilobytes/Second`
+ *           * `Megabytes/Second`
+ *           * `Gigabytes/Second`
+ *           * `Terabytes/Second`
+ *           * `Bits/Second`
+ *           * `Kilobits/Second`
+ *           * `Megabits/Second`
+ *           * `Gigabits/Second`
+ *           * `Terabits/Second`
+ *           * `Count/Second`
+ *           * `None`
  *         * `EvaluationPeriods` &mdash; (`Integer`) The number of periods
  *           over which data is compared to the specified threshold.
  *         * `Threshold` &mdash; (`Float`) The value against which the
@@ -283,6 +410,11 @@ AWS.CloudWatch = inherit({})
  *           operation to use when comparing the specified Statistic and
  *           Threshold. The specified Statistic value is used as the first
  *           operand.
+ *           Possible values include:
+ *           * `GreaterThanOrEqualToThreshold`
+ *           * `GreaterThanThreshold`
+ *           * `LessThanThreshold`
+ *           * `LessThanOrEqualToThreshold`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -325,7 +457,7 @@ AWS.CloudWatch = inherit({})
  *       namespace of the metric.
  *     * `MetricName` &mdash; **required** &mdash; (`String`) The name of
  *       the metric.
- *     * `Dimensions` &mdash; (`Array<Object>`) A list of dimensions
+ *     * `Dimensions` &mdash; (`Array<map>`) A list of dimensions
  *       describing qualities of the metric.
  *       * `Name` &mdash; **required** &mdash; (`String`) The name of the
  *         dimension.
@@ -350,6 +482,34 @@ AWS.CloudWatch = inherit({})
  *     * `Statistics` &mdash; **required** &mdash; (`Array<String>`) The
  *       metric statistics to return.
  *     * `Unit` &mdash; (`String`) The unit for the metric.
+ *       Possible values include:
+ *       * `Seconds`
+ *       * `Microseconds`
+ *       * `Milliseconds`
+ *       * `Bytes`
+ *       * `Kilobytes`
+ *       * `Megabytes`
+ *       * `Gigabytes`
+ *       * `Terabytes`
+ *       * `Bits`
+ *       * `Kilobits`
+ *       * `Megabits`
+ *       * `Gigabits`
+ *       * `Terabits`
+ *       * `Percent`
+ *       * `Count`
+ *       * `Bytes/Second`
+ *       * `Kilobytes/Second`
+ *       * `Megabytes/Second`
+ *       * `Gigabytes/Second`
+ *       * `Terabytes/Second`
+ *       * `Bits/Second`
+ *       * `Kilobits/Second`
+ *       * `Megabits/Second`
+ *       * `Gigabits/Second`
+ *       * `Terabits/Second`
+ *       * `Count/Second`
+ *       * `None`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -362,7 +522,7 @@ AWS.CloudWatch = inherit({})
  *
  *       * `Label` &mdash; (`String`) A label describing the specified
  *         metric.
- *       * `Datapoints` &mdash; (`Array<Object>`) The datapoints for the
+ *       * `Datapoints` &mdash; (`Array<map>`) The datapoints for the
  *         specified metric.
  *         * `Timestamp` &mdash; (`Date`) The time stamp used for the
  *           datapoint.
@@ -378,6 +538,34 @@ AWS.CloudWatch = inherit({})
  *           used for the datapoint.
  *         * `Unit` &mdash; (`String`) The standard unit used for the
  *           datapoint.
+ *           Possible values include:
+ *           * `Seconds`
+ *           * `Microseconds`
+ *           * `Milliseconds`
+ *           * `Bytes`
+ *           * `Kilobytes`
+ *           * `Megabytes`
+ *           * `Gigabytes`
+ *           * `Terabytes`
+ *           * `Bits`
+ *           * `Kilobits`
+ *           * `Megabits`
+ *           * `Gigabits`
+ *           * `Terabits`
+ *           * `Percent`
+ *           * `Count`
+ *           * `Bytes/Second`
+ *           * `Kilobytes/Second`
+ *           * `Megabytes/Second`
+ *           * `Gigabytes/Second`
+ *           * `Terabytes/Second`
+ *           * `Bits/Second`
+ *           * `Kilobits/Second`
+ *           * `Megabits/Second`
+ *           * `Gigabits/Second`
+ *           * `Terabits/Second`
+ *           * `Count/Second`
+ *           * `None`
  *   @return [AWS.Request] a handle to the operation request for
  *     subsequent event callback registration.
  *
@@ -387,7 +575,7 @@ AWS.CloudWatch = inherit({})
  *     * `Namespace` &mdash; (`String`) The namespace to filter against.
  *     * `MetricName` &mdash; (`String`) The name of the metric to filter
  *       against.
- *     * `Dimensions` &mdash; (`Array<Object>`) A list of dimensions to
+ *     * `Dimensions` &mdash; (`Array<map>`) A list of dimensions to
  *       filter against.
  *       * `Name` &mdash; **required** &mdash; (`String`) The dimension
  *         name to be matched.
@@ -406,11 +594,11 @@ AWS.CloudWatch = inherit({})
  *       the request. Set to `null` if a request error occurs.
  *       The `data` object has the following properties:
  *
- *       * `Metrics` &mdash; (`Array<Object>`) A list of metrics used to
+ *       * `Metrics` &mdash; (`Array<map>`) A list of metrics used to
  *         generate statistics for an AWS account.
  *         * `Namespace` &mdash; (`String`) The namespace of the metric.
  *         * `MetricName` &mdash; (`String`) The name of the metric.
- *         * `Dimensions` &mdash; (`Array<Object>`) A list of dimensions
+ *         * `Dimensions` &mdash; (`Array<map>`) A list of dimensions
  *           associated with the metric.
  *           * `Name` &mdash; (`String`) The name of the dimension.
  *           * `Value` &mdash; (`String`) The value representing the
@@ -453,7 +641,13 @@ AWS.CloudWatch = inherit({})
  *       namespace for the alarm's associated metric.
  *     * `Statistic` &mdash; **required** &mdash; (`String`) The
  *       statistic to apply to the alarm's associated metric.
- *     * `Dimensions` &mdash; (`Array<Object>`) The dimensions for the
+ *       Possible values include:
+ *       * `SampleCount`
+ *       * `Average`
+ *       * `Sum`
+ *       * `Minimum`
+ *       * `Maximum`
+ *     * `Dimensions` &mdash; (`Array<map>`) The dimensions for the
  *       alarm's associated metric.
  *       * `Name` &mdash; **required** &mdash; (`String`) The name of the
  *         dimension.
@@ -463,6 +657,34 @@ AWS.CloudWatch = inherit({})
  *       seconds over which the specified statistic is applied.
  *     * `Unit` &mdash; (`String`) The unit for the alarm's associated
  *       metric.
+ *       Possible values include:
+ *       * `Seconds`
+ *       * `Microseconds`
+ *       * `Milliseconds`
+ *       * `Bytes`
+ *       * `Kilobytes`
+ *       * `Megabytes`
+ *       * `Gigabytes`
+ *       * `Terabytes`
+ *       * `Bits`
+ *       * `Kilobits`
+ *       * `Megabits`
+ *       * `Gigabits`
+ *       * `Terabits`
+ *       * `Percent`
+ *       * `Count`
+ *       * `Bytes/Second`
+ *       * `Kilobytes/Second`
+ *       * `Megabytes/Second`
+ *       * `Gigabytes/Second`
+ *       * `Terabytes/Second`
+ *       * `Bits/Second`
+ *       * `Kilobits/Second`
+ *       * `Megabits/Second`
+ *       * `Gigabits/Second`
+ *       * `Terabits/Second`
+ *       * `Count/Second`
+ *       * `None`
  *     * `EvaluationPeriods` &mdash; **required** &mdash; (`Integer`) The
  *       number of periods over which data is compared to the specified
  *       threshold.
@@ -472,6 +694,11 @@ AWS.CloudWatch = inherit({})
  *       arithmetic operation to use when comparing the specified
  *       Statistic and Threshold. The specified Statistic value is used
  *       as the first operand.
+ *       Possible values include:
+ *       * `GreaterThanOrEqualToThreshold`
+ *       * `GreaterThanThreshold`
+ *       * `LessThanThreshold`
+ *       * `LessThanOrEqualToThreshold`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -488,11 +715,11 @@ AWS.CloudWatch = inherit({})
  *   @param params [Object]
  *     * `Namespace` &mdash; **required** &mdash; (`String`) The
  *       namespace for the metric data.
- *     * `MetricData` &mdash; **required** &mdash; (`Array<Object>`) A
- *       list of data describing the metric.
+ *     * `MetricData` &mdash; **required** &mdash; (`Array<map>`) A list
+ *       of data describing the metric.
  *       * `MetricName` &mdash; **required** &mdash; (`String`) The name
  *         of the metric.
- *       * `Dimensions` &mdash; (`Array<Object>`) A list of dimensions
+ *       * `Dimensions` &mdash; (`Array<map>`) A list of dimensions
  *         associated with the metric.
  *         * `Name` &mdash; **required** &mdash; (`String`) The name of
  *           the dimension.
@@ -507,8 +734,8 @@ AWS.CloudWatch = inherit({})
  *         with base-10 exponents greater than 126 (1 x 10^126) are
  *         truncated. Likewise, values with base-10 exponents less than
  *         \-130 (1 x 10^-130) are also truncated.
- *       * `StatisticValues` &mdash; (`Object`) A set of statistical
- *         values describing the metric.
+ *       * `StatisticValues` &mdash; (`map`) A set of statistical values
+ *         describing the metric.
  *         * `SampleCount` &mdash; **required** &mdash; (`Float`) The
  *           number of samples used for the statistic set.
  *         * `Sum` &mdash; **required** &mdash; (`Float`) The sum of
@@ -518,6 +745,34 @@ AWS.CloudWatch = inherit({})
  *         * `Maximum` &mdash; **required** &mdash; (`Float`) The maximum
  *           value of the sample set.
  *       * `Unit` &mdash; (`String`) The unit of the metric.
+ *         Possible values include:
+ *         * `Seconds`
+ *         * `Microseconds`
+ *         * `Milliseconds`
+ *         * `Bytes`
+ *         * `Kilobytes`
+ *         * `Megabytes`
+ *         * `Gigabytes`
+ *         * `Terabytes`
+ *         * `Bits`
+ *         * `Kilobits`
+ *         * `Megabits`
+ *         * `Gigabits`
+ *         * `Terabits`
+ *         * `Percent`
+ *         * `Count`
+ *         * `Bytes/Second`
+ *         * `Kilobytes/Second`
+ *         * `Megabytes/Second`
+ *         * `Gigabytes/Second`
+ *         * `Terabytes/Second`
+ *         * `Bits/Second`
+ *         * `Kilobits/Second`
+ *         * `Megabits/Second`
+ *         * `Gigabits/Second`
+ *         * `Terabits/Second`
+ *         * `Count/Second`
+ *         * `None`
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -537,6 +792,10 @@ AWS.CloudWatch = inherit({})
  *       the user's AWS account. The maximum length is 255 characters.
  *     * `StateValue` &mdash; **required** &mdash; (`String`) The value
  *       of the state.
+ *       Possible values include:
+ *       * `OK`
+ *       * `ALARM`
+ *       * `INSUFFICIENT_DATA`
  *     * `StateReason` &mdash; **required** &mdash; (`String`) The reason
  *       that this alarm is set to this specific state (in human-readable
  *       text format)
