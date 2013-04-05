@@ -405,9 +405,10 @@ AWS.EC2 = inherit(AWS.Service, {});
  *               storing the AMI in S3.
  *             * `AWSAccessKeyId` &mdash; (`String`) The Access Key ID of
  *               the owner of the Amazon S3 bucket.
- *             * `UploadPolicy` &mdash; (`String`) A Base64-encoded
- *               Amazon S3 upload policy that gives Amazon EC2 permission
- *               to upload items into Amazon S3 on the user's behalf.
+ *             * `UploadPolicy` &mdash; (`Base64 Encoded String`) A
+ *               Base64-encoded Amazon S3 upload policy that gives Amazon
+ *               EC2 permission to upload items into Amazon S3 on the
+ *               user's behalf.
  *             * `UploadPolicySignature` &mdash; (`String`) The signature
  *               of the Base64 encoded JSON document.
  *   @callback callback function(err, data)
@@ -4635,8 +4636,9 @@ AWS.EC2 = inherit(AWS.Service, {});
  *   @param params [Object]
  *     * `KeyName` &mdash; **required** &mdash; (`String`) The unique
  *       name for the key pair.
- *     * `PublicKeyMaterial` &mdash; **required** &mdash; (`String`) The
- *       public key portion of the key pair being imported.
+ *     * `PublicKeyMaterial` &mdash; **required** &mdash; (`Base64
+ *       Encoded String`) The public key portion of the key pair being
+ *       imported.
  *   @callback callback function(err, data)
  *     Called when a response from the service is returned. If a
  *     callback is not supplied, you must call {AWS.Request.send}
@@ -4823,8 +4825,7 @@ AWS.EC2 = inherit(AWS.Service, {});
  *         * `Value` &mdash; (`String`) String value
  *     * `Ramdisk` &mdash; (`map`)
  *         * `Value` &mdash; (`String`) String value
- *     * `UserData` &mdash; (`map`)
- *         * `Value` &mdash; (`String`) String value
+ *     * `UserData` &mdash; (`Base64 Encoded String`)
  *     * `InstanceInitiatedShutdownBehavior` &mdash; (`map`)
  *         * `Value` &mdash; (`String`) String value
  *     * `Groups` &mdash; (`Array<String>`)
