@@ -1,8 +1,8 @@
 -m markdown
---exclude api.js
+--exclude /api/
 --no-api private
 --no-highlight
 --title "AWS SDK for Node.js"
 --template-path doc-src/templates
+doc-src/*.docs.js
 lib/**/*.js
-doc-src/*.js
