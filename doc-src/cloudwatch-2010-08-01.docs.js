@@ -832,4 +832,4 @@ AWS.CloudWatch = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.CloudWatch.Client = inherit(AWS.Client, {});
+AWS.CloudWatch.Client_20100801 = inherit(AWS.Client, {});

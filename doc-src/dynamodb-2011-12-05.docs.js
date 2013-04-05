@@ -1443,4 +1443,4 @@ AWS.DynamoDB = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.DynamoDB.Client = inherit(AWS.Client, {});
+AWS.DynamoDB.Client_20111205 = inherit(AWS.Client, {});

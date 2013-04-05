@@ -204,4 +204,4 @@ AWS.ImportExport = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.ImportExport.Client = inherit(AWS.Client, {});
+AWS.ImportExport.Client_20100601 = inherit(AWS.Client, {});

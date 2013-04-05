@@ -832,4 +832,4 @@ AWS.Glacier = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.Glacier.Client = inherit(AWS.Client, {});
+AWS.Glacier.Client_20120601 = inherit(AWS.Client, {});

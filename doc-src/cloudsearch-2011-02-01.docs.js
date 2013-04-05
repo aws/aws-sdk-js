@@ -1484,4 +1484,4 @@ AWS.CloudSearch = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.CloudSearch.Client = inherit(AWS.Client, {});
+AWS.CloudSearch.Client_20110201 = inherit(AWS.Client, {});

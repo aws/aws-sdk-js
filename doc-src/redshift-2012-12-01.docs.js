@@ -2349,4 +2349,4 @@ AWS.Redshift = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.Redshift.Client = inherit(AWS.Client, {});
+AWS.Redshift.Client_20121201 = inherit(AWS.Client, {});

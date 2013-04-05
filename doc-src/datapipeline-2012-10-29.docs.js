@@ -669,4 +669,4 @@ AWS.DataPipeline = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.DataPipeline.Client = inherit(AWS.Client, {});
+AWS.DataPipeline.Client_20121029 = inherit(AWS.Client, {});

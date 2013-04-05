@@ -257,4 +257,4 @@ AWS.STS = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.STS.Client = inherit(AWS.Client, {});
+AWS.STS.Client_20110615 = inherit(AWS.Client, {});

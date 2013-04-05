@@ -4261,4 +4261,4 @@ AWS.RDS = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.RDS.Client = inherit(AWS.Client, {});
+AWS.RDS.Client_20130212 = inherit(AWS.Client, {});

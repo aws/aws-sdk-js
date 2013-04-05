@@ -480,4 +480,4 @@ AWS.DirectConnect = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.DirectConnect.Client = inherit(AWS.Client, {});
+AWS.DirectConnect.Client_20121025 = inherit(AWS.Client, {});

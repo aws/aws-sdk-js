@@ -375,4 +375,4 @@ AWS.SimpleDB = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.SimpleDB.Client = inherit(AWS.Client, {});
+AWS.SimpleDB.Client_20090415 = inherit(AWS.Client, {});

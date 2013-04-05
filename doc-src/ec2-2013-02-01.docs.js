@@ -6233,4 +6233,4 @@ AWS.EC2 = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.EC2.Client = inherit(AWS.Client, {});
+AWS.EC2.Client_20130201 = inherit(AWS.Client, {});

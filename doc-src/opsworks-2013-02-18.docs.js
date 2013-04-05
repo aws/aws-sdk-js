@@ -1733,4 +1733,4 @@ AWS.OpsWorks = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.OpsWorks.Client = inherit(AWS.Client, {});
+AWS.OpsWorks.Client_20130218 = inherit(AWS.Client, {});

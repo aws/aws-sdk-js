@@ -1128,4 +1128,4 @@ AWS.CloudFront = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.CloudFront.Client = inherit(AWS.Client, {});
+AWS.CloudFront.Client_20120505 = inherit(AWS.Client, {});

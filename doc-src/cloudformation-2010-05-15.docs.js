@@ -692,4 +692,4 @@ AWS.CloudFormation = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.CloudFormation.Client = inherit(AWS.Client, {});
+AWS.CloudFormation.Client_20100515 = inherit(AWS.Client, {});

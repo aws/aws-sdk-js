@@ -474,4 +474,4 @@ AWS.SQS = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.SQS.Client = inherit(AWS.Client, {});
+AWS.SQS.Client_20121105 = inherit(AWS.Client, {});

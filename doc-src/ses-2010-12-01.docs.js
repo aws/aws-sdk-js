@@ -545,4 +545,4 @@ AWS.SES = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.SES.Client = inherit(AWS.Client, {});
+AWS.SES.Client_20101201 = inherit(AWS.Client, {});

@@ -1744,4 +1744,4 @@ AWS.ElastiCache = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.ElastiCache.Client = inherit(AWS.Client, {});
+AWS.ElastiCache.Client_20121115 = inherit(AWS.Client, {});

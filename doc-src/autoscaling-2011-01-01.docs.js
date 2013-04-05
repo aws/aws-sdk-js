@@ -1349,4 +1349,4 @@ AWS.AutoScaling = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.AutoScaling.Client = inherit(AWS.Client, {});
+AWS.AutoScaling.Client_20110101 = inherit(AWS.Client, {});

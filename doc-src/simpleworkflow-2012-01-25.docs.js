@@ -2419,4 +2419,4 @@ AWS.SimpleWorkflow = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.SimpleWorkflow.Client = inherit(AWS.Client, {});
+AWS.SimpleWorkflow.Client_20120125 = inherit(AWS.Client, {});

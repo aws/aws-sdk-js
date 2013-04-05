@@ -946,4 +946,4 @@ AWS.ELB = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.ELB.Client = inherit(AWS.Client, {});
+AWS.ELB.Client_20120601 = inherit(AWS.Client, {});

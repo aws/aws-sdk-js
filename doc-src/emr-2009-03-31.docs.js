@@ -634,4 +634,4 @@ AWS.EMR = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.EMR.Client = inherit(AWS.Client, {});
+AWS.EMR.Client_20090331 = inherit(AWS.Client, {});

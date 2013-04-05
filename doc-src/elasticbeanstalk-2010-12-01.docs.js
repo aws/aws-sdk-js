@@ -1651,4 +1651,4 @@ AWS.ElasticBeanstalk = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.ElasticBeanstalk.Client = inherit(AWS.Client, {});
+AWS.ElasticBeanstalk.Client_20101201 = inherit(AWS.Client, {});

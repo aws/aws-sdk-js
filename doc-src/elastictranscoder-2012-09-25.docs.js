@@ -1862,4 +1862,4 @@ AWS.ElasticTranscoder = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.ElasticTranscoder.Client = inherit(AWS.Client, {});
+AWS.ElasticTranscoder.Client_20120925 = inherit(AWS.Client, {});

@@ -1180,4 +1180,4 @@ AWS.StorageGateway = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.StorageGateway.Client = inherit(AWS.Client, {});
+AWS.StorageGateway.Client_20120630 = inherit(AWS.Client, {});

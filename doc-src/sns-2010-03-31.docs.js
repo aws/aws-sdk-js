@@ -476,4 +476,4 @@ AWS.SNS = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.SNS.Client = inherit(AWS.Client, {});
+AWS.SNS.Client_20100331 = inherit(AWS.Client, {});

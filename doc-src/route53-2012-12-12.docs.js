@@ -911,4 +911,4 @@ AWS.Route53 = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.Route53.Client = inherit(AWS.Client, {});
+AWS.Route53.Client_20121212 = inherit(AWS.Client, {});

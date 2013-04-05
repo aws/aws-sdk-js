@@ -2264,4 +2264,4 @@ AWS.IAM = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.IAM.Client = inherit(AWS.Client, {});
+AWS.IAM.Client_20100508 = inherit(AWS.Client, {});
