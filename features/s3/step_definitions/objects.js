@@ -80,7 +80,7 @@ module.exports = function () {
     var params = {Bucket: this.sharedBucket, Key: key};
     var world = this;
     this.result = '';
-    this.client.getObject(params).createReadStream().
+    this.service.getObject(params).createReadStream().
       on('end', function() { callback(); }).
       on('data', function(d) { world.result += d.toString(); });
   });
@@ -90,7 +90,7 @@ module.exports = function () {
     var params = {Bucket: this.sharedBucket, Key: key};
     var world = this;
     this.result = '';
-    var stream = this.client.getObject(params).createReadStream();
+    var stream = this.service.getObject(params).createReadStream();
     stream.on('end', function() { callback(); });
     stream.on('readable', function() { world.result += stream.read(); });
   });

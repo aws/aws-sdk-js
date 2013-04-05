@@ -21,7 +21,7 @@ The following example lists all buckets associated with your AWS account:
 
 ```js
 var s3 = new AWS.S3();
-s3.client.listBuckets(function(err, data) {
+s3.listBuckets(function(err, data) {
   for (var index in data.Buckets) {
     var bucket = data.Buckets[index];
     console.log("Bucket: ", bucket.Name, ' : ', bucket.CreationDate);
@@ -36,9 +36,9 @@ object 'myKey' of bucket 'myBucket':
 
 ```js
 var s3 = new AWS.S3();
-s3.client.createBucket({Bucket: 'myBucket'}, function() {
+s3.createBucket({Bucket: 'myBucket'}, function() {
   var data = {Bucket: 'myBucket', Key: 'myKey', Body: 'Hello!'};
-  s3.client.putObject(data, function() {
+  s3.putObject(data, function() {
     console.log("Successfully uploaded data to myBucket/myKey");
   });
 });
@@ -57,7 +57,7 @@ on disk:
 var s3 = new AWS.S3();
 var params = {Bucket: 'myBucket', Key: 'myImageFile.jpg'};
 var file = require('fs').createWriteStream('/path/to/file.jpg');
-s3.client.getObject(params).createReadStream().pipe(file);
+s3.getObject(params).createReadStream().pipe(file);
 ```
 
 Alternatively, you can register an 'httpData' event listener on
@@ -69,7 +69,7 @@ var s3 = new AWS.S3();
 var params = {Bucket: 'myBucket', Key: 'myImageFile.jpg'};
 var file = require('fs').createWriteStream('/path/to/file.jpg');
 
-s3.client.getObject(params).
+s3.getObject(params).
 on('httpData', function(chunk) { file.write(chunk); }).
 on('httpDone', function() { file.end(); }).
 send();
@@ -83,7 +83,7 @@ The following example will list all tables in a DynamoDB instance:
 
 ```js
 var db = new AWS.DynamoDB();
-db.client.listTables(function(err, data) {
+db.listTables(function(err, data) {
   console.log(data.TableNames);
 });
 ```
@@ -96,7 +96,7 @@ The following example creates a vault named "YOUR_VAULT_NAME":
 
 ```js
 var glacier = new AWS.Glacier();
-glacier.client.createVault({vaultName: 'YOUR_VAULT_NAME'}, function(err) {
+glacier.createVault({vaultName: 'YOUR_VAULT_NAME'}, function(err) {
   if (!err) console.log("Created vault!")
 });
 ```
@@ -116,7 +116,7 @@ var glacier = new AWS.Glacier(),
     buffer = new Buffer(2.5 * 1024 * 1024); // 2.5MB buffer
 
 var params = {vaultName: vaultName, body: buffer};
-glacier.client.uploadArchive(params, function(err, data) {
+glacier.uploadArchive(params, function(err, data) {
   if (err) console.log("Error uploading archive!", err);
   else console.log("Archive ID", data.archiveId);
 });
@@ -142,11 +142,11 @@ var glacier = new AWS.Glacier(),
 
 // Compute the complete SHA-256 tree hash so we can pass it
 // to completeMultipartUpload request at the end
-var treeHash = glacier.client.computeChecksums(buffer).treeHash;
+var treeHash = glacier.computeChecksums(buffer).treeHash;
 
 // Initiate the multi-part upload
 console.log('Initiating upload to', vaultName);
-glacier.client.initiateMultipartUpload(params, function (mpErr, multipart) {
+glacier.initiateMultipartUpload(params, function (mpErr, multipart) {
   if (mpErr) { console.log('Error!', mpErr.stack); return; }
   console.log("Got upload ID", multipart.uploadId);
 
@@ -162,7 +162,7 @@ glacier.client.initiateMultipartUpload(params, function (mpErr, multipart) {
 
     // Send a single part
     console.log('Uploading part', i, '=', partParams.range);
-    glacier.client.uploadMultipartPart(partParams, function(multiErr, mData) {
+    glacier.uploadMultipartPart(partParams, function(multiErr, mData) {
       if (multiErr) return;
       console.log("Completed part", this.request.params.range);
       if (--numPartsLeft > 0) return; // complete only when all parts uploaded
@@ -175,7 +175,7 @@ glacier.client.initiateMultipartUpload(params, function (mpErr, multipart) {
       };
 
       console.log("Completing upload...");
-      glacier.client.completeMultipartUpload(doneParams, function(err, data) {
+      glacier.completeMultipartUpload(doneParams, function(err, data) {
         if (err) {
           console.log("An error occurred while uploading the archive");
           console.log(err);
@@ -208,7 +208,7 @@ AWS.config.update({
 });
 
 var s3 = new AWS.S3();
-s3.client.getObject({Bucket: 'bucket', Key: 'key'}, function (err, data) {
+s3.getObject({Bucket: 'bucket', Key: 'key'}, function (err, data) {
   console.log(err, data);
 });
 ```
@@ -220,7 +220,7 @@ same configuration option to the service constructor:
 
 ```js
 var s3 = new AWS.S3({httpOptions: {proxy: 'http://localhost:8080'}});
-s3.client.getObject({Bucket: 'bucket', Key: 'key'}, function (err, data) {
+s3.getObject({Bucket: 'bucket', Key: 'key'}, function (err, data) {
   console.log(err, data);
 });
 ```

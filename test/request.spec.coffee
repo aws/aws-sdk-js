@@ -14,10 +14,10 @@
 helpers = require('./helpers')
 EventEmitter = require('events').EventEmitter
 AWS = helpers.AWS
-MockClient = helpers.MockClient
+MockService = helpers.MockService
 
 describe 'AWS.Request', ->
-  client = new MockClient
+  service = new MockService
 
   describe 'createReadStream', ->
     it 'streams data', ->
@@ -25,7 +25,7 @@ describe 'AWS.Request', ->
       helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
 
       runs ->
-        request = client.makeRequest('mockMethod')
+        request = service.makeRequest('mockMethod')
         s = request.createReadStream()
         s.on 'end', -> done = true
         s.on 'data', (c) -> data += c.toString()
@@ -38,7 +38,7 @@ describe 'AWS.Request', ->
       helpers.mockHttpResponse 404, {}, ['No such file']
 
       runs ->
-        request = client.makeRequest('mockMethod')
+        request = service.makeRequest('mockMethod')
         s = request.createReadStream()
         s.on 'end', -> done = true
         s.on 'error', (e) -> error = e; done = true
@@ -53,7 +53,7 @@ describe 'AWS.Request', ->
       helpers.mockIntermittentFailureResponse 2, 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
 
       runs ->
-        request = client.makeRequest('mockMethod')
+        request = service.makeRequest('mockMethod')
         s = request.createReadStream()
         s.on 'end', -> done = true
         s.on 'error', (e) -> error = e; done = true
@@ -76,7 +76,7 @@ describe 'AWS.Request', ->
         errCb new Error('fail')
 
       runs ->
-        request = client.makeRequest('mockMethod')
+        request = service.makeRequest('mockMethod')
         request.on 'error', (e) -> reqError = e
         request.on 'complete', -> done = true
         s = request.createReadStream()
@@ -110,7 +110,7 @@ describe 'AWS.Request', ->
             process.nextTick -> req.emit('end')
 
       runs ->
-        request = client.makeRequest('mockMethod')
+        request = service.makeRequest('mockMethod')
         request.on 'error', (e) -> reqError = e
         request.on 'complete', (r) -> resp = r
         s = request.createReadStream()

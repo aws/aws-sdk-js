@@ -16,31 +16,31 @@ AWS = helpers.AWS
 
 require('../../lib/services/route53')
 
-describe 'AWS.Route53.Client', ->
+describe 'AWS.Route53', ->
 
   r53 = null
   beforeEach ->
-    r53 = new AWS.Route53.Client()
+    r53 = new AWS.Route53()
 
   describe 'setEndpoint', ->
     it 'always enables SSL if no endpoint is set', ->
-      client = new AWS.Route53.Client(sslEnabled: false)
-      expect(client.endpoint.protocol).toEqual('https:')
+      service = new AWS.Route53(sslEnabled: false)
+      expect(service.endpoint.protocol).toEqual('https:')
 
     it 'allows overriding SSL if custom endpoint is set', ->
-      client = new AWS.Route53.Client(endpoint: 'http://example.com')
-      expect(client.endpoint.protocol).toEqual('http:')
+      service = new AWS.Route53(endpoint: 'http://example.com')
+      expect(service.endpoint.protocol).toEqual('http:')
 
   describe 'building requests', ->
-    client = new AWS.Route53.Client
+    service = new AWS.Route53
 
     it 'should fix hosted zone ID on input', ->
-      req = client.getHostedZone(Id: '/hostedzone/ABCDEFG')
+      req = service.getHostedZone(Id: '/hostedzone/ABCDEFG')
       req.emit('build', [req])
       expect(req.httpRequest.path).toMatch('/hostedzone/ABCDEFG$')
 
     it 'should fix health check ID on input', ->
-      req = client.getHealthCheck(HealthCheckId: '/healthcheck/ABCDEFG')
+      req = service.getHealthCheck(HealthCheckId: '/healthcheck/ABCDEFG')
       req.emit('build', [req])
       expect(req.httpRequest.path).toMatch('/healthcheck/ABCDEFG$')
 

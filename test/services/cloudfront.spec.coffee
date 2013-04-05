@@ -16,11 +16,11 @@ AWS = helpers.AWS
 
 require('../../lib/services/route53')
 
-describe 'AWS.Route53.Client', ->
+describe 'AWS.Route53', ->
 
   cf = null
   beforeEach ->
-    cf = new AWS.CloudFront.Client()
+    cf = new AWS.CloudFront()
 
   describe 'createInvalidation', ->
     it 'correctly builds the request', ->

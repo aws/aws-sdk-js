@@ -97,8 +97,8 @@ describe 'AWS.SequentialExecutor', ->
       thrown = null
       domain.on 'error', (err) -> thrown = err
       domain.run ->
-        client = new MockClient()
-        client.makeRequest 'operationName', ->
+        service = new MockService()
+        service.makeRequest 'operationName', ->
           throw 'ERROR'
 
       expect(thrown).toEqual('ERROR')

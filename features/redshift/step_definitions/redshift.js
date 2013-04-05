@@ -15,7 +15,7 @@
 
 module.exports = function() {
   this.Before("@redshift", function (callback) {
-    this.client = new this.AWS.Redshift.Client();
+    this.service = new this.AWS.Redshift.Client();
     callback();
   });
 

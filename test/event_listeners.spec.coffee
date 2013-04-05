@@ -13,12 +13,12 @@
 
 helpers = require('./helpers')
 AWS = helpers.AWS
-MockClient = helpers.MockClient
+MockService = helpers.MockService
 
 describe 'AWS.EventListeners', ->
 
   oldSetTimeout = setTimeout
-  config = null; client = null; totalWaited = null; delays = []
+  config = null; service = null; totalWaited = null; delays = []
   successHandler = null; errorHandler = null; completeHandler = null
   retryHandler = null
 
@@ -32,8 +32,8 @@ describe 'AWS.EventListeners', ->
 
     totalWaited = 0
     delays = []
-    client = new MockClient(maxRetries: 3)
-    client.config.credentials = AWS.util.copy(client.config.credentials)
+    service = new MockService(maxRetries: 3)
+    service.config.credentials = AWS.util.copy(service.config.credentials)
 
     # Helpful handlers
     successHandler = createSpy('success')
@@ -45,7 +45,7 @@ describe 'AWS.EventListeners', ->
   afterEach -> `setTimeout = oldSetTimeout`
 
   makeRequest = (callback) ->
-    request = client.makeRequest('mockMethod', foo: 'bar')
+    request = service.makeRequest('mockMethod', foo: 'bar')
     request.on('retry', retryHandler)
     request.on('error', errorHandler)
     request.on('success', successHandler)
@@ -71,12 +71,12 @@ describe 'AWS.EventListeners', ->
       request = makeRequest()
       request.on('error', errorHandler)
 
-      client.config.credentialProvider = null
-      client.config.credentials.accessKeyId = null
+      service.config.credentialProvider = null
+      service.config.credentials.accessKeyId = null
       request.send()
 
-      client.config.credentials.accessKeyId = 'akid'
-      client.config.credentials.secretAccessKey = null
+      service.config.credentials.accessKeyId = 'akid'
+      service.config.credentials.secretAccessKey = null
       request.send()
 
       expect(errorHandler).toHaveBeenCalled()
@@ -86,7 +86,7 @@ describe 'AWS.EventListeners', ->
         expect(call.args[0].message).toMatch(/Missing credentials in config/)
 
     it 'sends error event if region is not set', ->
-      client.config.region = null
+      service.config.region = null
       request = makeRequest(->)
 
       call = errorHandler.calls[0]
@@ -145,13 +145,13 @@ describe 'AWS.EventListeners', ->
       expect(response.error).toEqual("ERROR")
 
     it 'uses the api.signingName if provided', ->
-      client.api.signingName = 'SIGNING_NAME'
+      service.api.signingName = 'SIGNING_NAME'
       spyOn(AWS.Signers.RequestSigner, 'getVersion').andCallFake ->
         (req, signingName) -> throw signingName
       request = makeRequest()
       response = request.send()
       expect(response.error).toEqual('SIGNING_NAME')
-      delete client.api.signingName
+      delete service.api.signingName
 
     it 'uses the api.endpointPrefix if signingName not provided', ->
       spyOn(AWS.Signers.RequestSigner, 'getVersion').andCallFake ->
@@ -165,8 +165,8 @@ describe 'AWS.EventListeners', ->
       options = {}
       spyOn(AWS.HttpClient, 'getInstance').andReturn handleRequest: (req, opts) ->
         options = opts
-      client.config.httpOptions = timeout: 15
-      client.config.maxRetries = 0
+      service.config.httpOptions = timeout: 15
+      service.config.maxRetries = 0
       makeRequest(->)
       expect(options.timeout).toEqual(15)
 
@@ -194,7 +194,7 @@ describe 'AWS.EventListeners', ->
   describe 'retry', ->
     it 'retries a request with a set maximum retries', ->
       sendHandler = createSpy('send')
-      client.config.maxRetries = 10
+      service.config.maxRetries = 10
 
       # fail every request with a fake networking error
       helpers.mockHttpResponse
@@ -208,8 +208,8 @@ describe 'AWS.EventListeners', ->
       expect(errorHandler).toHaveBeenCalled()
       expect(completeHandler).toHaveBeenCalled()
       expect(successHandler).not.toHaveBeenCalled()
-      expect(response.retryCount).toEqual(client.config.maxRetries);
-      expect(sendHandler.calls.length).toEqual(client.config.maxRetries + 1)
+      expect(response.retryCount).toEqual(service.config.maxRetries);
+      expect(sendHandler.calls.length).toEqual(service.config.maxRetries + 1)
 
     it 'retries with falloff', ->
       helpers.mockHttpResponse
@@ -227,7 +227,7 @@ describe 'AWS.EventListeners', ->
           statusCode: 500
           retryable: true
         expect(@retryCount).
-          toEqual(client.config.maxRetries)
+          toEqual(service.config.maxRetries)
 
     it 'should not emit error if retried fewer than maxRetries', ->
       helpers.mockIntermittentFailureResponse 2, 200, {}, 'foo'
@@ -235,7 +235,7 @@ describe 'AWS.EventListeners', ->
       response = makeRequest(->)
 
       expect(totalWaited).toEqual(90)
-      expect(response.retryCount).toBeLessThan(client.config.maxRetries)
+      expect(response.retryCount).toBeLessThan(service.config.maxRetries)
       expect(response.data).toEqual('foo')
       expect(errorHandler).not.toHaveBeenCalled()
 
@@ -261,7 +261,7 @@ describe 'AWS.EventListeners', ->
               @secretAccessKey = 'VALIDSECRET' + @numCalls
             cb()
 
-        client.config.credentials = creds
+        service.config.credentials = creds
 
         response = makeRequest(->)
         expect(response.retryCount).toEqual(1)
@@ -271,17 +271,17 @@ describe 'AWS.EventListeners', ->
     [301, 307].forEach (code) ->
       it 'attempts to redirect on ' + code + ' responses', ->
         helpers.mockHttpResponse code, {location: 'http://redirected'}, ''
-        client.config.maxRetries = 0
-        client.config.maxRedirects = 5
+        service.config.maxRetries = 0
+        service.config.maxRedirects = 5
         response = makeRequest(->)
         expect(response.request.httpRequest.endpoint.host).toEqual('redirected')
         expect(response.error.retryable).toEqual(true)
-        expect(response.redirectCount).toEqual(client.config.maxRedirects)
+        expect(response.redirectCount).toEqual(service.config.maxRedirects)
         expect(delays).toEqual([0, 0, 0, 0, 0])
 
     it 'does not redirect if 3xx is missing location header', ->
       helpers.mockHttpResponse 304, {}, ''
-      client.config.maxRetries = 0
+      service.config.maxRetries = 0
       response = makeRequest(->)
       expect(response.request.httpRequest.endpoint.host).not.toEqual('redirected')
       expect(response.error.retryable).toEqual(false)

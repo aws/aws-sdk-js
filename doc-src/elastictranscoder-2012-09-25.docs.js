@@ -17,15 +17,14 @@
 AWS = {};
 
 /**
- * Constructs a service interface and a low-level {Client}.  Use the `client`
- * property to make API calls.  Each API operation is exposed as a function on
- * the `client`.
+ * Constructs a service interface object. Each API operation is exposed as a
+ * function on service.
  *
  * ### Sending a Request Using ElasticTranscoder
  *
  * ```js
- * svc = new AWS.ElasticTranscoder();
- * svc.client.OPERATION_NAME(params, function (err, data) {
+ * var elastictranscoder = new AWS.ElasticTranscoder();
+ * elastictranscoder.listJobsByPipeline(params, function (err, data) {
  *   if (err) {
  *     console.log(err); // an error occurred
  *   } else {
@@ -33,25 +32,6 @@ AWS = {};
  *   }
  * });
  * ```
- *
- * @!method constructor(options)
- *   Constructs a service interface.  The returned service will have a {client}
- *   property that provides access to the API operations.
- *   @option (see AWS.ElasticTranscoder.Client.constructor)
- *
- * @!attribute client
- *   @return [AWS.ElasticTranscoder.Client] A client that provides one method for each
- *     API operation.
- *
- * @see AWS.ElasticTranscoder.Client
- *
- */
-AWS.ElasticTranscoder = inherit(AWS.Service, {});
-
-/**
- * The low-level ElasticTranscoder client class.  This class provides one function
- * for each API operation on the service.
- *
  * @!method cancelJob(params, callback)
  *   Calls the CancelJob API operation.
  *   @param params [Object]
@@ -1850,8 +1830,8 @@ AWS.ElasticTranscoder = inherit(AWS.Service, {});
  *
  *
  * @!method constructor(options)
- *   Constructs a service client object.  This client has one method for
- *   each API operation.
+ *   Constructs a service object. This object has one method for each
+ *   API operation.
  *   @option options [String] endpoint The endpoint URI to send requests
  *     to.  The default endpoint is built from the configured `region`.
  *     The endpoint should be a string like `'https://s3.amazonaws.com'`.
@@ -1862,4 +1842,4 @@ AWS.ElasticTranscoder = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.ElasticTranscoder.Client_20120925 = inherit(AWS.Client, {});
+AWS.ElasticTranscoder_20120925 = inherit(AWS.Service, {});

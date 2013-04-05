@@ -14,7 +14,7 @@ For example, the following service method can be called with
 a standard callback to retrieve the response data or error:
 
 ```js
-new AWS.EC2().client.describeInstances(function(error, data) {
+new AWS.EC2().describeInstances(function(error, data) {
   if (error) {
     console.log(error); // an error occurred
   } else {
@@ -32,7 +32,7 @@ the `send()` method:
 
 ```js
 // create the AWS.Request object
-var request = new AWS.EC2().client.describeInstances();
+var request = new AWS.EC2().describeInstances();
 
 // register a callback to report on the data
 request.on('success', function(resp) {
@@ -99,13 +99,13 @@ s3.getObject({Bucket: 'bucket', Key: 'key'}).on('success', function(response) {
 ### Simplified Callback Method
 
 Each operation supports a simplified callback that can be passed as the last
-parameter to any low-level client operation. The callback function should
+parameter to any service operation. The callback function should
 accept an `error` parameter, followed by the `data` from the response.
 
 For example:
 
 ```js
-s3.client.listBuckets(function(error, data) {
+s3.listBuckets(function(error, data) {
   if (err) {
     console.log(error); // error is Response.error
   } else {
@@ -132,7 +132,7 @@ If you are passing parameters to the operation, the callback should be placed
 after the parameters:
 
 ```
-s3.client.getObject({Bucket: 'bucket', Key: 'key'}, function(err, data) {
+s3.getObject({Bucket: 'bucket', Key: 'key'}, function(err, data) {
   // ...
 });
 ```
@@ -140,7 +140,7 @@ s3.client.getObject({Bucket: 'bucket', Key: 'key'}, function(err, data) {
 ### AWS.Request Events
 
 You can alternatively register callbacks on events provided by the
-`AWS.Request` object returned by each low-level client operation method.
+`AWS.Request` object returned by each service operation method.
 This request object exposes the `success`, `error`, `complete`, and `httpData`
 events, each taking a callback that accepts the response object.
 
@@ -157,7 +157,7 @@ with the serialized response data from the service.
 For example:
 
 ```js
-s3.client.listBuckets().done(function(response) {
+s3.listBuckets().done(function(response) {
   console.log(response.data);
 }).send();
 ```
@@ -182,7 +182,7 @@ as the first parameter to the event:
 
 ```js
 s3.config.credentials.accessKeyId = 'invalid';
-s3.client.listBuckets().fail(function(error, response) {
+s3.listBuckets().fail(function(error, response) {
   console.log(error);
   // or:
   console.log(response.error);

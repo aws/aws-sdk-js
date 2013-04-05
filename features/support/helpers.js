@@ -79,7 +79,7 @@ module.exports = {
   request: function request(svc, operation, params, next, extra) {
     var world = this;
 
-    if (!svc) svc = this.client;
+    if (!svc) svc = this.service;
     if (typeof svc == 'string') svc = this[svc];
 
     svc[operation](params, function(err, data) {
@@ -117,7 +117,7 @@ module.exports = {
    * operation failed.
    */
   unexpectedError: function unexpectedError(resp, next) {
-    var svc = resp.request.client.api.serviceName;
+    var svc = resp.request.service.api.serviceName;
     var op = resp.request.operation;
     var code = resp.error.code;
     var msg = resp.error.message;

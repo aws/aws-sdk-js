@@ -16,7 +16,7 @@ require('../../lib/service_interface/rest_xml')
 
 describe 'AWS.ServiceInterface.RestXml', ->
 
-  MockRESTXMLClient = AWS.util.inherit AWS.Client,
+  MockRESTXMLService = AWS.util.inherit AWS.Service,
     endpointPrefix: 'mockservice'
 
   xmlns = 'http://mockservice.com/xmlns'
@@ -26,7 +26,7 @@ describe 'AWS.ServiceInterface.RestXml', ->
   svc = eval(@description)
 
   beforeEach ->
-    MockRESTXMLClient.prototype.api =
+    MockRESTXMLService.prototype.api =
       xmlnamespace: xmlns
       operations:
         sampleOperation:
@@ -40,10 +40,10 @@ describe 'AWS.ServiceInterface.RestXml', ->
             type: 'structure'
             members: {}
 
-    AWS.Client.defineMethods(MockRESTXMLClient)
-    operation = MockRESTXMLClient.prototype.api.operations.sampleOperation
-    client = new MockRESTXMLClient(region: 'region')
-    request = new AWS.Request(client, 'sampleOperation')
+    AWS.Service.defineMethods(MockRESTXMLService)
+    operation = MockRESTXMLService.prototype.api.operations.sampleOperation
+    service = new MockRESTXMLService(region: 'region')
+    request = new AWS.Request(service, 'sampleOperation')
     response = new AWS.Response(request)
 
   describe 'buildRequest', ->

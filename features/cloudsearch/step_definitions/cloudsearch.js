@@ -15,7 +15,7 @@
 
 module.exports = function() {
   this.Before("@cloudsearch", function (callback) {
-    this.client = new this.AWS.CloudSearch.Client();
+    this.service = new this.AWS.CloudSearch.Client();
     callback();
   });
 

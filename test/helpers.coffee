@@ -42,9 +42,9 @@ flattenXML = (xml) ->
 matchXML = (xml1, xml2) ->
   expect(flattenXML(xml1)).toEqual(flattenXML(xml2))
 
-MockClient = AWS.util.inherit AWS.Client,
+MockService = AWS.Service.defineService 'mockService',
   initialize: (config) ->
-    AWS.Client.prototype.initialize.call(this, config)
+    AWS.Service.prototype.initialize.call(this, config)
     @config.credentials = accessKeyId: 'akid', secretAccessKey: 'secret'
     @config.region = 'mock-region'
   setupRequestListeners: (request) ->
@@ -57,11 +57,6 @@ MockClient = AWS.util.inherit AWS.Client,
   api:
     endpointPrefix: 'mockservice'
     signatureVersion: 'v4'
-
-MockService = AWS.util.inherit AWS.Service,
-  constructor: (config) -> AWS.Service.call(this, config)
-
-MockService.Client = MockClient
 
 mockHttpSuccessfulResponse = (status, headers, data, cb) ->
   httpResp = new EventEmitter()
@@ -105,5 +100,4 @@ module.exports =
   mockHttpResponse: mockHttpResponse
   mockIntermittentFailureResponse: mockIntermittentFailureResponse
   mockHttpSuccessfulResponse: mockHttpSuccessfulResponse
-  MockClient: MockClient
   MockService: MockService

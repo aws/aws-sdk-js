@@ -15,9 +15,9 @@ AWS = require('../../lib/core')
 helpers = require('../helpers')
 require('../../lib/services/ec2')
 
-describe 'AWS.EC2.Client', ->
+describe 'AWS.EC2', ->
 
-  ec2 = new AWS.EC2.Client({region: 'us-east-1'})
+  ec2 = new AWS.EC2({region: 'us-east-1'})
 
   describe 'parseResponse', ->
     body = ''

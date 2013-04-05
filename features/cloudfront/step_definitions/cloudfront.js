@@ -59,7 +59,7 @@ module.exports = function() {
   };
 
   this.Before("@cloudfront", function (callback) {
-    this.client = new this.AWS.CloudFront.Client();
+    this.service = new this.AWS.CloudFront.Client();
     callback();
   });
 

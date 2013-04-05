@@ -17,15 +17,14 @@
 AWS = {};
 
 /**
- * Constructs a service interface and a low-level {Client}.  Use the `client`
- * property to make API calls.  Each API operation is exposed as a function on
- * the `client`.
+ * Constructs a service interface object. Each API operation is exposed as a
+ * function on service.
  *
  * ### Sending a Request Using Route53
  *
  * ```js
- * svc = new AWS.Route53();
- * svc.client.OPERATION_NAME(params, function (err, data) {
+ * var route53 = new AWS.Route53();
+ * route53.getChange(params, function (err, data) {
  *   if (err) {
  *     console.log(err); // an error occurred
  *   } else {
@@ -33,25 +32,6 @@ AWS = {};
  *   }
  * });
  * ```
- *
- * @!method constructor(options)
- *   Constructs a service interface.  The returned service will have a {client}
- *   property that provides access to the API operations.
- *   @option (see AWS.Route53.Client.constructor)
- *
- * @!attribute client
- *   @return [AWS.Route53.Client] A client that provides one method for each
- *     API operation.
- *
- * @see AWS.Route53.Client
- *
- */
-AWS.Route53 = inherit(AWS.Service, {});
-
-/**
- * The low-level Route53 client class.  This class provides one function
- * for each API operation on the service.
- *
  * @!method changeResourceRecordSets(params, callback)
  *   Calls the ChangeResourceRecordSets API operation.
  *   @param params [Object]
@@ -899,8 +879,8 @@ AWS.Route53 = inherit(AWS.Service, {});
  *
  *
  * @!method constructor(options)
- *   Constructs a service client object.  This client has one method for
- *   each API operation.
+ *   Constructs a service object. This object has one method for each
+ *   API operation.
  *   @option options [String] endpoint The endpoint URI to send requests
  *     to.  The default endpoint is built from the configured `region`.
  *     The endpoint should be a string like `'https://s3.amazonaws.com'`.
@@ -911,4 +891,4 @@ AWS.Route53 = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.Route53.Client_20121212 = inherit(AWS.Client, {});
+AWS.Route53_20121212 = inherit(AWS.Service, {});

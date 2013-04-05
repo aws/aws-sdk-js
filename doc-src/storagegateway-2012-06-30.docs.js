@@ -17,15 +17,14 @@
 AWS = {};
 
 /**
- * Constructs a service interface and a low-level {Client}.  Use the `client`
- * property to make API calls.  Each API operation is exposed as a function on
- * the `client`.
+ * Constructs a service interface object. Each API operation is exposed as a
+ * function on service.
  *
  * ### Sending a Request Using StorageGateway
  *
  * ```js
- * svc = new AWS.StorageGateway();
- * svc.client.OPERATION_NAME(params, function (err, data) {
+ * var storagegateway = new AWS.StorageGateway();
+ * storagegateway.describeBandwidthRateLimit(params, function (err, data) {
  *   if (err) {
  *     console.log(err); // an error occurred
  *   } else {
@@ -33,25 +32,6 @@ AWS = {};
  *   }
  * });
  * ```
- *
- * @!method constructor(options)
- *   Constructs a service interface.  The returned service will have a {client}
- *   property that provides access to the API operations.
- *   @option (see AWS.StorageGateway.Client.constructor)
- *
- * @!attribute client
- *   @return [AWS.StorageGateway.Client] A client that provides one method for each
- *     API operation.
- *
- * @see AWS.StorageGateway.Client
- *
- */
-AWS.StorageGateway = inherit(AWS.Service, {});
-
-/**
- * The low-level StorageGateway client class.  This class provides one function
- * for each API operation on the service.
- *
  * @!method activateGateway(params, callback)
  *   Calls the ActivateGateway API operation.
  *   @param params [Object]
@@ -1168,8 +1148,8 @@ AWS.StorageGateway = inherit(AWS.Service, {});
  *
  *
  * @!method constructor(options)
- *   Constructs a service client object.  This client has one method for
- *   each API operation.
+ *   Constructs a service object. This object has one method for each
+ *   API operation.
  *   @option options [String] endpoint The endpoint URI to send requests
  *     to.  The default endpoint is built from the configured `region`.
  *     The endpoint should be a string like `'https://s3.amazonaws.com'`.
@@ -1180,4 +1160,4 @@ AWS.StorageGateway = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.StorageGateway.Client_20120630 = inherit(AWS.Client, {});
+AWS.StorageGateway_20120630 = inherit(AWS.Service, {});

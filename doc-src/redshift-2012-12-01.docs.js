@@ -17,15 +17,14 @@
 AWS = {};
 
 /**
- * Constructs a service interface and a low-level {Client}.  Use the `client`
- * property to make API calls.  Each API operation is exposed as a function on
- * the `client`.
+ * Constructs a service interface object. Each API operation is exposed as a
+ * function on service.
  *
  * ### Sending a Request Using Redshift
  *
  * ```js
- * svc = new AWS.Redshift();
- * svc.client.OPERATION_NAME(params, function (err, data) {
+ * var redshift = new AWS.Redshift();
+ * redshift.describeClusterParameterGroups(params, function (err, data) {
  *   if (err) {
  *     console.log(err); // an error occurred
  *   } else {
@@ -33,25 +32,6 @@ AWS = {};
  *   }
  * });
  * ```
- *
- * @!method constructor(options)
- *   Constructs a service interface.  The returned service will have a {client}
- *   property that provides access to the API operations.
- *   @option (see AWS.Redshift.Client.constructor)
- *
- * @!attribute client
- *   @return [AWS.Redshift.Client] A client that provides one method for each
- *     API operation.
- *
- * @see AWS.Redshift.Client
- *
- */
-AWS.Redshift = inherit(AWS.Service, {});
-
-/**
- * The low-level Redshift client class.  This class provides one function
- * for each API operation on the service.
- *
  * @!method authorizeClusterSecurityGroupIngress(params, callback)
  *   Calls the AuthorizeClusterSecurityGroupIngress API operation.
  *   @param params [Object]
@@ -2337,8 +2317,8 @@ AWS.Redshift = inherit(AWS.Service, {});
  *
  *
  * @!method constructor(options)
- *   Constructs a service client object.  This client has one method for
- *   each API operation.
+ *   Constructs a service object. This object has one method for each
+ *   API operation.
  *   @option options [String] endpoint The endpoint URI to send requests
  *     to.  The default endpoint is built from the configured `region`.
  *     The endpoint should be a string like `'https://s3.amazonaws.com'`.
@@ -2349,4 +2329,4 @@ AWS.Redshift = inherit(AWS.Service, {});
  *     the endpoint URL for service requests.'
  *
  */
-AWS.Redshift.Client_20121201 = inherit(AWS.Client, {});
+AWS.Redshift_20121201 = inherit(AWS.Service, {});

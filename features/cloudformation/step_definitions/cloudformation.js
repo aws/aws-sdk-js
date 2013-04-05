@@ -15,7 +15,7 @@
 
 module.exports = function() {
   this.Before("@cloudformation", function (callback) {
-    this.client = new this.AWS.CloudFormation.Client();
+    this.service = new this.AWS.CloudFormation.Client();
     callback();
   });
 

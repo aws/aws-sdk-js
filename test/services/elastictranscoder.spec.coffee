@@ -16,11 +16,11 @@ AWS = helpers.AWS
 
 require('../../lib/services/route53')
 
-describe 'AWS.Route53.Client', ->
+describe 'AWS.Route53', ->
 
   et = null
   beforeEach ->
-    et = new AWS.ElasticTranscoder.Client()
+    et = new AWS.ElasticTranscoder()
 
   describe 'cancelJob', ->
     it 'omits the body', ->

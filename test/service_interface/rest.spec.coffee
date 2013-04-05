@@ -16,7 +16,7 @@ require('../../lib/service_interface/rest')
 
 describe 'AWS.ServiceInterface.Rest', ->
 
-  MockRESTClient = AWS.util.inherit AWS.Client,
+  MockRESTService = AWS.util.inherit AWS.Service,
     endpointPrefix: 'mockservice'
 
   operation = null
@@ -25,7 +25,7 @@ describe 'AWS.ServiceInterface.Rest', ->
   svc = eval(@description)
 
   beforeEach ->
-    MockRESTClient.prototype.api =
+    MockRESTService.prototype.api =
       operations:
         sampleOperation:
           http:
@@ -34,11 +34,11 @@ describe 'AWS.ServiceInterface.Rest', ->
           input: null
           output: null
 
-    AWS.Client.defineMethods(MockRESTClient)
+    AWS.Service.defineMethods(MockRESTService)
 
-    operation = MockRESTClient.prototype.api.operations.sampleOperation
-    client = new MockRESTClient(region: 'region')
-    request = new AWS.Request(client, 'sampleOperation')
+    operation = MockRESTService.prototype.api.operations.sampleOperation
+    service = new MockRESTService(region: 'region')
+    request = new AWS.Request(service, 'sampleOperation')
     response = new AWS.Response(request)
 
   describe 'buildRequest', ->

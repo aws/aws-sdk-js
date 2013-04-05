@@ -15,7 +15,7 @@
 
 module.exports = function() {
   this.Before("@datapipeline", function (callback) {
-    this.client = new this.AWS.DataPipeline.Client();
+    this.service = new this.AWS.DataPipeline.Client();
     callback();
   });
 

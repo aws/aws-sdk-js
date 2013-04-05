@@ -15,7 +15,7 @@
 
 module.exports = function() {
   this.Before("@sts", function (callback) {
-    this.client = new this.AWS.STS.Client();
+    this.service = new this.AWS.STS.Client();
     callback();
   });
 

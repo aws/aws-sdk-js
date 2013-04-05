@@ -15,13 +15,13 @@ AWS = require('../../lib/core')
 require('../../lib/service_interface/query')
 
 describe 'AWS.ServiceInterface.Query', ->
-  client = null
+  service = null
   request = null
   response = null
   svc = eval(@description)
 
   beforeEach ->
-    client = new AWS.Client apiConfig:
+    service = new AWS.Service apiConfig:
       endpointPrefix: 'mockservice'
       apiVersion: '2012-01-01'
       operations:
@@ -42,7 +42,7 @@ describe 'AWS.ServiceInterface.Query', ->
                   Count:
                     type: 'float'
 
-    request = new AWS.Request(client, 'operationName')
+    request = new AWS.Request(service, 'operationName')
     response = new AWS.Response(request)
 
   describe 'buildRequest', ->
@@ -161,7 +161,7 @@ describe 'AWS.ServiceInterface.Query', ->
       expect(response.data).toEqual({Data:{Name:'abc',Count:123}})
 
     it 'performs default xml parsing when output rule is missing', ->
-      delete client.api.operations.operationName.output
+      delete service.api.operations.operationName.output
       extractData """
       <xml>
         <Data>
@@ -174,7 +174,7 @@ describe 'AWS.ServiceInterface.Query', ->
       expect(response.data).toEqual({Data:{Name:'abc',Count:'123'}})
 
     it 'removes wrapping result element if resultWrapped is set', ->
-      client.api.resultWrapped = true
+      service.api.resultWrapped = true
       extractData """
       <xml>
         <OperationNameResult>
@@ -189,7 +189,7 @@ describe 'AWS.ServiceInterface.Query', ->
       expect(response.data).toEqual({Data:{Name:'abc',Count:12345.5}})
 
     it 'does not fail if wrapping element is not present (resultWrapped=true)', ->
-      client.api.resultWrapped = true
+      service.api.resultWrapped = true
       extractData """
       <xml>
         <NotWrapped><Data>abc</Data></NotWrapped>

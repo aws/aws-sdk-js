@@ -45,8 +45,8 @@ module.exports = function () {
     callback();
   });
 
-  this.Given(/^I have a "([^"]*)" client in the "([^"]*)" region$/, function(svc, region, callback) {
-    this.client = new this.AWS[svc]({ region: region }).client;
+  this.Given(/^I have a "([^"]*)" service in the "([^"]*)" region$/, function(svc, region, callback) {
+    this.service = new this.AWS[svc]({ region: region });
     callback();
   });
 

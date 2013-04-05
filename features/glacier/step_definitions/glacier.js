@@ -15,7 +15,7 @@
 
 module.exports = function() {
   this.Before("@glacier", function (callback) {
-    this.client = new this.AWS.Glacier.Client();
+    this.service = new this.AWS.Glacier.Client();
     callback();
   });
 
@@ -68,7 +68,7 @@ module.exports = function() {
     // setup multi-part upload
     this.uploadData = new Buffer(totalSize * 1024 * 1024);
     this.uploadData.fill('0');
-    this.checksums = this.client.computeChecksums(this.uploadData);
+    this.checksums = this.service.computeChecksums(this.uploadData);
     this.partCounter = 0;
     this.partSize = partSize * 1024 * 1024;
 
@@ -108,7 +108,7 @@ module.exports = function() {
         range: range,
         body: buf
       };
-      this.client.uploadMultipartPart(params, function() {
+      this.service.uploadMultipartPart(params, function() {
         if (--numPartsLeft == 0) callback();
       });
     }

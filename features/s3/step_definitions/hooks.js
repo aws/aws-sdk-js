@@ -16,7 +16,7 @@
 module.exports = function () {
 
   this.Before("@s3", function (callback) {
-    this.client = this.s3 = new this.AWS.S3.Client();
+    this.service = this.s3 = new this.AWS.S3.Client();
     callback();
   });
 

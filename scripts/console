@@ -30,7 +30,7 @@ function customEval(cmd, context, filename, callback) {
     }
     
     // poor man's Request check
-    if (value && value.client && value.send) {
+    if (value && value.service && value.send) {
       if (!value.__hasBeenSent__) {
         value.__hasBeenSent__ = true;
         try {
@@ -70,7 +70,7 @@ repl.context.AWS.events.on('send', function (resp) {
       status = resp.httpResponse.statusCode,
       params = require('util').inspect(this.params, true, true);
 
-  console.log('\n\x1B[33m[AWS', this.client.api.serviceName, status,
+  console.log('\n\x1B[33m[AWS', this.service.api.serviceName, status,
     (time-resp.requestStarted)/1000, resp.retryCount + ' retries]\x1B[0;1m',
     this.operation + '(' + params + ')\x1B[0m');
   process.stdout.write(repl.prompt);
@@ -81,12 +81,12 @@ replHistory(repl, process.env.HOME + '/.node_history');
 
 // load services as defined instances
 for (var key in AWS) {
-  if (AWS[key].Client) {
-    var clientClass = AWS[key].Client;
-    var client = new clientClass(defaultOptions);
-    client.with = function(config) {
+  if (AWS[key].serviceIdentifier) {
+    var svcClass = AWS[key];
+    var svc = new svcClass(defaultOptions);
+    svc.with = function(config) {
       return new this.constructor.__super__(AWS.util.merge(this.config, config));
     };
-    repl.context[clientClass.serviceIdentifier] = client;
+    repl.context[svcClass.serviceIdentifier] = svc;
   }
 }
