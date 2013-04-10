@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <% {:top => @topfile, :prev => @prevfile, :next => @nextfile}.each do |name, file| %>
+      <% if file %>
+        <link rel="<%= name %>" title="<%= file.title %>" href="<%= url_for(file) %>" />
+      <% end %>
+    <% end %>
+
+    <%= erb(:headers) %>
+    <script type="text/javascript" charset="utf-8">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+
+      $(function() {
+        $('.object_link').each(function() {
+          $(this).html($(this).find('a').html())
+        });
+      });
+
+      $(generateTOC);
+      hljs.initHighlightingOnLoad();
+    </script>
+  </head>
+  <body>
+    <div id="indexwrapper">
+      <div class="related"></div>
+      <div class="document">
+        <div class="documentwrapper">
+          <div class="bodywrapper">
+            <div class="body">
+              <div class="section">
+                <%= yieldall %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clearer"></div>
+      </div>
+      <div class="related"></div>
+      <div class="footer">
+        <%= erb(:footer) %>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,6 +1,8 @@
--t guide
+-t flasky_sphinx_guide
+-p doc-src/templates
 --title "AWS SDK for Node.js"
 --no-highlight
+-o doc-guide
 -
 README.md
 doc-src/guide/Installing.md
