@@ -35,10 +35,9 @@ The following example puts the string 'Hello!' inside the
 object 'myKey' of bucket 'myBucket':
 
 ```js
-var s3 = new AWS.S3();
-s3.createBucket({Bucket: 'myBucket'}, function() {
-  var data = {Bucket: 'myBucket', Key: 'myKey', Body: 'Hello!'};
-  s3.putObject(data, function() {
+var s3 = new AWS.S3({params: {Bucket: 'myBucket', Key: 'myKey'}});
+s3.createBucket(function() {
+  s3.putObject({Body: 'Hello!'}, function() {
     console.log("Successfully uploaded data to myBucket/myKey");
   });
 });

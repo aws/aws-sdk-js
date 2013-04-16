@@ -39,11 +39,11 @@ AWS.config.loadFromPath('./path/to/credentials.json');
 // Set your region for future requests.
 AWS.config.update({region: 'us-east-1'});
 
-// Create a bucket and put something in it.
-var s3 = new AWS.S3();
-s3.createBucket({Bucket: 'myBucket'}, function() {
-  var data = {Bucket: 'myBucket', Key: 'myKey', Body: 'Hello!'};
-  s3.putObject(data, function(err, data) {
+// Create a bucket using bound parameters and put something in it.
+var s3bucket = new AWS.S3({params: {Bucket: 'myBucket'}});
+s3bucket.createBucket(function() {
+  var data = {Key: 'myKey', Body: 'Hello!'};
+  s3bucket.putObject(data, function(err, data) {
     if (err) {
       console.log("Error uploading data: ", err);
     } else {
