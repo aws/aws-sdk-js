@@ -14,12 +14,30 @@
  */
 
 module.exports = function() {
-  this.Before("@dynamodb", function (next) {
-    this.service = new this.AWS.DynamoDB.Client({region: 'us-west-2', maxRetries: 2});
+  this.Before("@dynamodb-2011-12-05", function (next) {
+    this.service = new this.AWS.DynamoDB.Client({
+      apiVersion: '2011-12-05',
+      region: 'us-west-2',
+      maxRetries: 2
+    });
+    next();
+  });
+
+  this.Before("@dynamodb-2012-08-10", function (next) {
+    this.service = new this.AWS.DynamoDB.Client({
+      apiVersion: '2012-08-10',
+      region: 'us-west-2',
+      maxRetries: 2
+    });
     next();
   });
 
   function createTable(world, callback) {
+    var db = new world.AWS.DynamoDB({
+      apiVersion: '2011-12-05',
+      region: 'us-west-2'
+    });
+
     var params = {
       TableName: world.tableName,
       KeySchema: {
@@ -31,7 +49,7 @@ module.exports = function() {
       }
     };
 
-    world.service.createTable(params, function(err, data) {
+    db.createTable(params, function(err, data) {
       if (err) {
         callback.fail(err);
         return;
@@ -44,7 +62,7 @@ module.exports = function() {
         world.request(null, 'describeTable', params, next);
       }, {maxTime: 500, delay: 10, backoff: 0});
     });
-  };
+  }
 
   this.Given(/^I have a table$/, function(callback) {
     var world = this;
@@ -67,7 +85,12 @@ module.exports = function() {
 
   this.Then(/^the item with id "([^"]*)" should exist$/, function(key, next) {
     var world = this;
-    var params = {TableName: this.tableName, Key: {HashKeyElement: {S: key}}};
+    var params;
+    if (this.service.config.apiVersion === '2011-12-05') {
+      params = {TableName: this.tableName, Key: {HashKeyElement: {S: key}}};
+    } else if (this.service.config.apiVersion === '2012-08-10') {
+      params = {TableName: this.tableName, Key: {id: {S: key}}};
+    }
     this.request(null, 'getItem', params, next);
   });
 
