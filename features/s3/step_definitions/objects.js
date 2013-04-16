@@ -92,7 +92,9 @@ module.exports = function () {
     this.result = '';
     var stream = this.service.getObject(params).createReadStream();
     stream.on('end', function() { callback(); });
-    stream.on('readable', function() { world.result += stream.read(); });
+    stream.on('readable', function() {
+      var v = stream.read(); if (v) world.result += v;
+    });
   });
 
   this.Then(/^the streamed data should contain "([^"]*)"$/, function(data, callback) {

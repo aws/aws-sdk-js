@@ -33,6 +33,29 @@ describe 'AWS.Request', ->
       runs ->
         expect(data).toEqual('FOOBARBAZQUX')
 
+    it 'streams2 data (readable event)', ->
+      if AWS.HttpClient.streamsApiVersion < 2
+        return
+
+      data = ''; done = false
+      helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
+
+      runs ->
+        request = service.makeRequest('mockMethod')
+        s = request.createReadStream()
+        s.on 'end', -> done = true
+        s.on 'readable', ->
+          try
+            chunk = s.read()
+            if chunk
+              data += chunk
+          catch e
+            console.log(e.stack)
+
+      waitsFor -> done == true
+      runs ->
+        expect(data).toEqual('FOOBARBAZQUX')
+
     it 'does not stream data on failures', ->
       data = ''; error = null; done = false
       helpers.mockHttpResponse 404, {}, ['No such file']

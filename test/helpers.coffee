@@ -59,16 +59,25 @@ MockService = AWS.Service.defineService 'mockService',
     signatureVersion: 'v4'
 
 mockHttpSuccessfulResponse = (status, headers, data, cb) ->
+  if !Array.isArray(data)
+    data = [data]
+
   httpResp = new EventEmitter()
   httpResp.statusCode = status
   httpResp.headers = headers
+  httpResp.read = ->
+    if data.length > 0
+      new Buffer(data.shift())
+    else
+      null
 
   cb(httpResp)
 
-  if !Array.isArray(data)
-    data = [data]
-  AWS.util.arrayEach data, (str) ->
-    httpResp.emit('data', new Buffer(str))
+  AWS.util.arrayEach data.slice(), (str) ->
+    if httpResp._events.readable
+      httpResp.emit('readable')
+    else
+      httpResp.emit('data', new Buffer(str))
 
   httpResp.emit('end')
 
