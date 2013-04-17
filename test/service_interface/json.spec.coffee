@@ -23,6 +23,9 @@ describe 'AWS.ServiceInterface.Json', ->
       operations:
         operationName:
           name: 'OperationName'
+          input:
+            type: 'structure'
+            members: {}
 
   AWS.Service.defineMethods(MockJSONClient)
 
