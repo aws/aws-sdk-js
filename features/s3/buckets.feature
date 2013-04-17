@@ -21,6 +21,19 @@ Feature: Working with Buckets
     When I delete the bucket
     Then the bucket should not exist
 
+  @cors
+  Scenario: Bucket CORS
+    When I create a bucket
+    And I put a bucket CORS configuration
+    And I get the bucket CORS configuration
+    Then the AllowedMethods list should inclue "DELETE POST PUT"
+    Then the AllowedOrigin value should equal "http://example.com"
+    Then the AllowedHeader value should equal "*"
+    Then the ExposeHeader value should equal "x-amz-server-side-encryption"
+    Then the MaxAgeSeconds value should equal 5000
+
+    And I delete the bucket
+
   @lifecycle
   Scenario: Bucket lifecycles
     When I create a bucket
