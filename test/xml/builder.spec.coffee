@@ -304,6 +304,18 @@ describe 'AWS.XML.Builder', ->
       """
       matchXML(toXML(rules, params, {timestampFormat:'unixTimestamp'}), xml)
 
+    it 'follows the forat given on the shape', ->
+      rules = {Expires:{type:'timestamp',format:'rfc822'}}
+      params = { Expires: time }
+      # despite the api configuration will specify unixTimesmap, we expect
+      # an rfc822 formatted date based on the format attribute
+      xml = """
+      <Data xmlns="#{xmlns}">
+        <Expires>#{AWS.util.date.rfc822(time)}</Expires>
+      </Data>
+      """
+      matchXML(toXML(rules, params, {timestampFormat:'unixTimestamp'}), xml)
+
   describe 'xml attributes', ->
     it 'can serialize xml attributes', ->
       rules =
