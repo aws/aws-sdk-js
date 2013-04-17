@@ -250,3 +250,21 @@ describe 'AWS.QueryParamSerializer', ->
         ['Attributes.3.Name', 'Value'],
         ['Attributes.3.Value', 'low'],
       ])
+
+  describe 'timestamps', ->
+
+    it 'serializes timestamp to iso8601 strings by default', ->
+      date = new Date()
+      rules = { Date: { type: 'timestamp' } }
+      params = serialize({ Date: date }, rules)
+      expect(params).toEqual([
+        ['Date', AWS.util.date.iso8601(date)],
+      ])
+
+    it 'obeys format options in the rules', ->
+      date = new Date()
+      rules = { Date: { type: 'timestamp', format: 'rfc822' } }
+      params = serialize({ Date: date }, rules)
+      expect(params).toEqual([
+        ['Date', AWS.util.date.rfc822(date)],
+      ])
