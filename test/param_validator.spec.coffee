@@ -216,6 +216,9 @@ describe 'AWS.ParamValidator', ->
       expectValid param: '2012-01-02T10:11:12Z'
       expectValid param: '2012-01-02T10:11:12.0001Z'
 
+    it 'accepts UNIX timestamps as number values', ->
+      expectValid param: 12345
+
     it 'rejects other param values', ->
       expectError param: 'abc'
 
@@ -378,7 +381,7 @@ describe 'AWS.ParamValidator', ->
 
     it 'throws helpful messages for invalid timestamps', ->
       msg = "Expected params.config.settings.when to be a " +
-            "Date object or ISO-8601 string"
+            "Date object, ISO-8601 string, or a UNIX timestamp"
       rules['config']['members']['settings']['members']['when'] =
         type: 'timestamp'
 
