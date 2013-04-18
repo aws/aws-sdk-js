@@ -107,7 +107,7 @@ The SDK currently supports the following services:
     </tr>
     <tr>
       <td>Amazon DynamoDB</td>
-      <td>2011-12-05</td>
+      <td>2012-08-10, 2011-12-05</td>
       <td>AWS.DynamoDB</td>
     </tr>
     <tr>
