@@ -19,7 +19,7 @@ beforeEach ->
   spyOn(AWS.util, 'userAgent').andReturn('aws-sdk-js/0.1')
 
 buildRequest = ->
-  ddb = new AWS.DynamoDB.Client({region: 'region', endpoint: 'localhost'})
+  ddb = new AWS.DynamoDB.Client({region: 'region', endpoint: 'localhost', apiVersion: '2011-12-05'})
   req = ddb.makeRequest('listTables', {foo: 'bår'})
   resp = new AWS.Response(req)
   req.emitEvents(['validate', 'build', 'afterBuild'], resp)
