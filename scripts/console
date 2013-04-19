@@ -70,7 +70,7 @@ repl.context.AWS.events.on('send', function (resp) {
       status = resp.httpResponse.statusCode,
       params = require('util').inspect(this.params, true, true);
 
-  console.log('\n\x1B[33m[AWS', this.service.api.serviceName, status,
+  console.log('\n\x1B[33m[AWS', this.service.serviceIdentifier, status,
     (time-resp.requestStarted)/1000, resp.retryCount + ' retries]\x1B[0;1m',
     this.operation + '(' + params + ')\x1B[0m');
   process.stdout.write(repl.prompt);
