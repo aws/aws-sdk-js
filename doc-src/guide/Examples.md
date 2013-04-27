@@ -82,7 +82,7 @@ The following example will list all tables in a DynamoDB instance:
 
 ```js
 var db = new AWS.DynamoDB();
-db.listTables(function(err, data) {
+db.client.listTables(function(err, data) {
   console.log(data.TableNames);
 });
 ```
