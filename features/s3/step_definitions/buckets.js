@@ -133,4 +133,27 @@ module.exports = function() {
     this.assert.equal(this.data.CORSRules[0].MaxAgeSeconds, parseInt(value));
     callback();
   });
+
+  this.When(/^I put a bucket tag with key "([^"]*)" and value "([^"]*)"$/, function(key, value, callback) {
+    var params = {
+      Bucket: this.bucket,
+      Tagging: {
+        TagSet: [
+          {Key: key, Value: value}
+        ]
+      }
+    };
+
+    this.request('s3', 'putBucketTagging', params, callback);
+  });
+
+  this.When(/^I get the bucket tagging$/, function(callback) {
+    this.request('s3', 'getBucketTagging', {Bucket: this.bucket}, callback);
+  });
+
+  this.Then(/^the first tag in the tag set should have key and value "([^"]*)", "([^"]*)"$/, function(key, value, callback) {
+    this.assert.equal(this.data.TagSet[0].Key, key);
+    this.assert.equal(this.data.TagSet[0].Value, value);
+    callback();
+  });
 };

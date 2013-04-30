@@ -44,6 +44,15 @@ Feature: Working with Buckets
 
     And I delete the bucket
 
+  @tagging
+  Scenario: Bucket Tagging
+    When I create a bucket
+    And I put a bucket tag with key "KEY" and value "VALUE"
+    And I get the bucket tagging
+    Then the first tag in the tag set should have key and value "KEY", "VALUE"
+
+    And I delete the bucket
+
   # this test will exercise following 307 redirects
   Scenario: Creating a bucket with a location constraint
     When I create a bucket with the location constraint "EU"
