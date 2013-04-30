@@ -72,7 +72,7 @@ module.exports = function () {
   this.When(/^I write file "([^"]*)" to the key "([^"]*)"$/, function(filename, key, next) {
     var fs = require('fs');
     var params = {Bucket: this.sharedBucket, Key: key, Body:
-      fs.createReadStream(__dirname + '/../../support/fixtures/' + filename)};
+      fs.createReadStream(__dirname + '/../../extra/fixtures/' + filename)};
     this.request('s3', 'putObject', params, next);
   });
 
