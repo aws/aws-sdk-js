@@ -35,6 +35,7 @@ Here's the list of supported service objects:
 * [AWS.SQS](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SQS_20121105.html)
 * [AWS.StorageGateway](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/StorageGateway_20120630.html)
 * [AWS.STS](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/STS_20110615.html)
+* [AWS.Support](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Support_20130415.html)
 
 Each service object in the SDK currently provides low-level access to every
 API call in the respective AWS service. The full list of methods and their
