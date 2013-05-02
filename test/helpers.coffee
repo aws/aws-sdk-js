@@ -67,7 +67,11 @@ mockHttpSuccessfulResponse = (status, headers, data, cb) ->
   httpResp.headers = headers
   httpResp.read = ->
     if data.length > 0
-      new Buffer(data.shift())
+      chunk = data.shift()
+      if chunk is null
+        null
+      else
+        new Buffer(chunk)
     else
       null
 
