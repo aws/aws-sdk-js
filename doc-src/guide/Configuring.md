@@ -18,10 +18,13 @@ over your requests. Both of these configuration mechanisms are discussed.
 By default, you can set global configuration by updating the `AWS.config` object with
 new settings. The most common settings are:
 
-* `accessKeyId`, `secretAccessKey`, `sessionToken` &mdash; for credential management
-* `region` &mdash; to set the region for requests
-* `sslEnabled` &mdash; whether SSL is enabled or not
-* `maxRetries` &mdash; to control the number of retries for a request
+1. `accessKeyId`, `secretAccessKey`, `sessionToken` &mdash; for credential management
+2. `region` &mdash; to set the region for requests
+3. `sslEnabled` &mdash; whether SSL is enabled or not
+4. `maxRetries` &mdash; to control the number of retries for a request
+
+More configuration settings can be found in the
+[API reference documentation](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html).
 
 The only things you *need* to set in order to use the SDK are credentials and
 the region value. Let's discuss how to do that.
