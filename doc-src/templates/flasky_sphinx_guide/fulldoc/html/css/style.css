@@ -1118,6 +1118,21 @@ table th { background: #fff; }
 #toc.one-file { margin-bottom: 2em; border-bottom: 1px #ccc solid; }
 #toc.one-file ul { margin-top: 0; }
 
+div.body ul {
+    list-style: none; padding: 0; margin: 0; font-size: 1.1em; clear: both;
+    margin-bottom: 12px;
+}
+div.body ul li {
+    border-bottom: 1px solid #ccc; padding-bottom: 5px;
+    margin-bottom: 7px; width: 47%; float: left; margin-right: 7px;
+}
+div.body ul li em { font-size: 0.9em; }
+
+div.body .clear { clear: both; }
+
+div.body p.note { background: #f5f5f5; padding: 14px; }
+div.body p.note:before { content: "Note: "; font-weight: bold; }
+
 @media print {
   #menu,
   #footer-links {
