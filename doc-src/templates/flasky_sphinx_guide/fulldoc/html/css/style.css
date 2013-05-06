@@ -1115,9 +1115,6 @@ table th { background: #fff; }
 
 #search-results .search li { display: block; }
 
-#toc.one-file { margin-bottom: 2em; border-bottom: 1px #ccc solid; }
-#toc.one-file ul { margin-top: 0; }
-
 div.body ul {
     list-style: none; padding: 0; margin: 0; font-size: 1.1em; clear: both;
     margin-bottom: 12px;
@@ -1132,6 +1129,17 @@ div.body .clear { clear: both; }
 
 div.body p.note { background: #f5f5f5; padding: 14px; }
 div.body p.note:before { content: "Note: "; font-weight: bold; }
+
+#toc.one-file { margin-bottom: 2em; border-bottom: 1px #ccc solid; }
+div.body #toc.one-file ul {
+    padding-left: 12px;
+    margin-left: 12px;
+    margin-top: 0; list-style: disc; font-size: 1em;
+}
+div.body #toc.one-file ul li {
+    padding-bottom: 0; border: 0; float: none; width: inherit;
+    margin-bottom: 4px;
+}
 
 @media print {
   #menu,
