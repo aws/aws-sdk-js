@@ -1,6 +1,6 @@
-# @title Installing
+# @title Installing the SDK
 
-# Installing
+# Installing the SDK
 
 ## NPM Installation
 

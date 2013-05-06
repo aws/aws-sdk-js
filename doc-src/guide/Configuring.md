@@ -1,6 +1,6 @@
-# @title Configuring
+# @title Configuring the SDK
 
-# Configuration Guide
+# Configuring the SDK
 
 ## The Configuration Object
 
