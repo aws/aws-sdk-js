@@ -51,12 +51,78 @@ re-specify any global settings. For example, an EC2 object can be created
 for a specific region:
 
 ```js
-var ec2 = new EC2({region: 'us-west-2'});
+var ec2 = new AWS.EC2({region: 'us-west-2'});
 ```
 
 This object will continue to use the globally provided credentials.
 
-## Passing Arguments to a Service Method
+## Locking API Versions
+
+Services released by AWS use API versions to keep track of API compatibility.
+API versions in AWS services can be identified by a `YYYY-mm-dd` formatted
+date string, i.e., 2006-03-01 for Amazon S3. It is recommended to lock into
+an API version for a service if you are relying on it for production code.
+This way, you can isolate yourself from service changes in updates of the
+SDK.
+
+In order to lock into an API version of a given service, simply pass the
+`apiVersion` parameter when constructing the object, for example:
+
+```js
+var dynamodb = new AWS.DynamoDB({apiVersion: '2011-12-05'});
+```
+
+Note that versions can also be locked globally by specifying the `apiVersion`
+or `apiVersions` global configuration parameters. This is documented with
+more detail in the {file:Configuring.md} file.
+
+### Using the Latest Version
+
+By default, the SDK will select the **latest** available service API version
+when constructing a service object (unless overridden globally). You can
+also force the latest API version to be used by passing the "latest" value
+as the `apiVersion` parameter like so:
+
+```js
+var ec2 = new AWS.EC2({apiVersion: 'latest'});
+```
+
+### Fuzzy Versions and Date Locking
+
+Since AWS has many services with many different API versions, the SDK allows
+for the specification of "fuzzy versions" instead of exact API version
+matches. This allows you to specify any date after the API version date,
+and the SDK will look for the *last* available matching API version when
+loading the service object. For instance, you can also load the 2011-12-05
+DynamoDB API by using the following code:
+
+```js
+var dynamodb = new AWS.DynamoDB({apiVersion: '2012-04-04'});
+```
+
+Note that 2012-04-04 is later than the first API release (2011-12-05)
+but earlier than the next revision of the API (2012-08-10), so the *first*
+revision will be used.
+
+You can also use this strategy to globally lock your application to a point
+in time. For instance, if you begin developing your application on 2012-07-05,
+you can add the following global `apiVersion` lock value:
+
+```js
+AWS.config.apiVersion = '2012-07-05';
+```
+
+This will allow *all* created service objects to use the latest available
+API versions at the specified lock time. You can override any API versions
+if you need a newer version, or if the service had not yet been released,
+by adding the `apiVersion` parameter to the constructor call as normal:
+
+```js
+// Amazon Redshift was not yet released in 2012-07-05
+var redshift = new AWS.Redshift({apiVersion: '2012-12-01'});
+```
+
+## Passing Parameters to a Service Operation
 
 When calling a method to a service, you should pass parameters in as
 option values, similar to the way configuration is passed.
