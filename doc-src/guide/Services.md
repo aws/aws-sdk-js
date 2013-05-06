@@ -135,3 +135,21 @@ s3.getObject({Bucket: 'bucketName', Key: 'keyName'});
 
 Note that the full parameter documentation for each method is found
 in each service page in the complete API reference documentation.
+
+## Bound Parameters
+
+Parameters can be automatically passed to service operations by binding them
+directly when constructing the service object. To do this, pass the `params`
+parameter to your constructed service with the map of default parameter
+values like so:
+
+```js
+var s3bucket = new AWS.S3({ params: {Bucket: 'myBucket'} });
+```
+
+The `s3bucket` object will now represent an S3 service object bound to a bucket
+named 'myBucket'. Any operation that takes the `Bucket` parameter will now
+have it auto-filled with this value. This value can be overridden by passing
+a new value in the service operation. Additionally, operations that do not
+require a `Bucket` parameter will automatically ignore this bound parameter,
+so the `s3bucket` object can still be used to call `listBuckets`, for instance.
