@@ -2,6 +2,13 @@
 
 # Making Requests
 
+A "request" to an AWS service includes the full request and response lifecycle
+of a call to an operation on a service object, including any retries that are
+transparently attempted on your behalf. A request is encapsulated in the SDK by
+the `AWS.Request` object. The semantics of a request are described below,
+specifically, the support for callbacks, events, and streaming of raw HTTP
+response data.
+
 ## Asynchronous Callbacks
 
 All requests made through the SDK are asynchronous and use a
