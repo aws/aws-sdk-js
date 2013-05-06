@@ -277,3 +277,33 @@ request.
 
 The above example will print either "Success! Always!", or "Error! Always!",
 depending on whether the request succeeded or not.
+
+## Streaming Requests
+
+It is possible to stream a request directly to a Node.js Stream object by
+calling the `createReadStream()` method on a request. This returns a wrapper
+to the raw HTTP stream used to manage the request, and this data can be piped
+into any other Node.js stream. This is mostly useful for service operations
+that return raw data in the payload, like Amazon S3's `getObject` operation,
+which can be used to stream data directly into a file with this functionality:
+
+```js
+var s3 = new AWS.S3();
+var params = {Bucket: 'myBucket', Key: 'myImageFile.jpg'};
+var file = require('fs').createWriteStream('/path/to/file.jpg');
+s3.getObject(params).createReadStream().pipe(file);
+```
+
+The stream object can be used interchangeably as any other Node.js readable
+Stream object.
+
+### Limitations of Streaming
+
+When streaming data from a request using `createReadStream()`, only the raw
+HTTP data will be returned (the SDK will not do any post-processing on the
+data). Additionally, if the request initially succeeds, retry logic will be
+disabled for the rest of the response due to Node.js inability to rewind most
+streams. This means that in the event of a socket failure in the middle of a
+connection, the SDK will not attempt to retry and send more data to the stream.
+It will be your responsibility to manage this logic in your library or
+application.
