@@ -4,7 +4,13 @@
 
 ## Supported Services
 
-Here's the list of supported service objects:
+The SDK currently supports all available AWS services. Each service object
+in the SDK currently provides low-level access to every API call in the
+respective AWS service. The full list of methods and their parameters are
+documented in the complete API reference documentation (linked from each
+service name in the list below).
+
+The supported services are:
 
 * [AWS.AutoScaling](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/AutoScaling_20110101.html)
 * [AWS.CloudFormation](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CloudFormation_20100515.html)
@@ -37,10 +43,7 @@ Here's the list of supported service objects:
 * [AWS.STS](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/STS_20110615.html)
 * [AWS.Support](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html#!http%3A//docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Support_20130415.html)
 
-Each service object in the SDK currently provides low-level access to every
-API call in the respective AWS service. The full list of methods and their
-parameters are documented in the complete API reference (linked from each
-service name in the above list).
+<div class="clear"></div>
 
 ## Constructing a Service
 
