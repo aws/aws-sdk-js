@@ -1,5 +1,7 @@
 # AWS SDK for Node.js
 
+## Developer Guide
+
 The **AWS SDK for Node.js** allows JavaScript developers to build libraries or
 applications that make use of AWS services using a simple and easy-to-use
 API. The SDK is available as the [aws-sdk](http://npmjs.org/package/aws-sdk)
