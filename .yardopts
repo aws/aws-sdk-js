@@ -6,3 +6,6 @@
 --template-path doc-src/templates
 doc-src/*.docs.js
 lib/**/*.js
+-
+README.md
+UPGRADING.md
