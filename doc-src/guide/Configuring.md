@@ -189,7 +189,7 @@ the global configuration data at the time of creation. This means that any
 future updates to the global `AWS.config` object will *not* apply to existing
 service objects. These services would have to be manually updated with the new
 configuration data, or recreated using the following command (assuming an
-existing s3 service object):
+existing `s3` service object):
 
 ```js
 s3 = new AWS.S3(s3.config);

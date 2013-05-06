@@ -5,8 +5,8 @@
 ## NPM Installation
 
 The preferred way to install the AWS SDK for Node.js is to use the
-[npm](http://npmjs.org) package manager for Node.js. Simply type the following
-into a terminal window:
+[npm](http://npmjs.org) package manager for Node.js. To install the SDK,
+simply type the following into a terminal window:
 
 ```sh
 npm install aws-sdk

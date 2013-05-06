@@ -103,7 +103,8 @@ glacier.createVault({vaultName: 'YOUR_VAULT_NAME'}, function(err) {
 ### Amazon Glacier: Uploading an Archive
 
 <p class="note"><em>Note: this example assumes you have already created a vault
-named "YOUR_VAULT_NAME".</em></p>
+named "YOUR_VAULT_NAME".</em>
+</p>
 
 The following example will upload a single Buffer object as an entire archive.
 The SDK will automatically compute the tree hash checksum for the data being
@@ -123,8 +124,10 @@ glacier.uploadArchive(params, function(err, data) {
 
 ### Amazon Glacier: Multi-part Upload
 
-<p class="note"><em>Note: this example assumes you have already created a vault
-named "YOUR_VAULT_NAME".</em></p>
+<p class="note">
+  <em>Note: this example assumes you have already created a vault
+named "YOUR_VAULT_NAME".</em>
+</p>
 
 The following example will create a multi-part upload out of 1MB chunks of a
 Buffer object. Note that a complete SHA-256 tree hash is manually computed
