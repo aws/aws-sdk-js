@@ -1131,12 +1131,14 @@ div.body p.note { background: #f5f5f5; padding: 14px; }
 div.body p.note:before { content: "Note: "; font-weight: bold; }
 
 #toc.one-file { margin-bottom: 2em; border-bottom: 1px #ccc solid; }
-div.body #toc.one-file ul {
+div.body #toc.one-file ul,
+div.body ul.search {
     padding-left: 12px;
     margin-left: 12px;
     margin-top: 0; list-style: disc; font-size: 1em;
 }
-div.body #toc.one-file ul li {
+div.body #toc.one-file ul li,
+div.body ul.search li {
     padding-bottom: 0; border: 0; float: none; width: inherit;
     margin-bottom: 4px;
 }
