@@ -155,7 +155,11 @@ Note that if you omit the simplified callback parameter on the operation
 method, you must call `send()` on the returned request object in order to
 kick off the request to the remote server.
 
-#### `on('success', function(response) { ... })`
+#### Event: 'success'
+
+```js
+req.on('success', function(response) { ... });
+```
 
 This event triggers when a successful response
 from the server is returned. The response contains a `.data` field
@@ -179,7 +183,11 @@ Prints:
   RequestId: '...' }
 ```
 
-#### `on('error', function(error, response) { ... })`
+#### Event: 'error'
+
+```js
+req.on('error', function(error, response) { ... });
+```
 
 The `error` event works similarly to the `success` event, except that it
 triggers in the case of a request failure. In this case, `response.data`
@@ -202,7 +210,11 @@ Prints:
 { code: 'Forbidden', message: null }
 ```
 
-#### `on('complete', function(response) { ... })`
+#### Event: 'complete'
+
+```js
+req.on('complete', function(response) { ... });
+```
 
 The `complete` event triggers a callback in any final state of a request, i.e.,
 both `success` and `error`. Use this callback to handle any request cleanup
@@ -221,7 +233,11 @@ request.on('complete', function(response) {
 }).send();
 ```
 
-#### `on('httpData', function(chunk, response) { ... })`
+#### Event: 'httpData'
+
+```js
+req.on('httpData', function(chunk, response) { ... });
+```
 
 <p class="note">If you register a <code>httpData</code> callback,
   <code>response.data</code> will still contain serialized output
