@@ -40,7 +40,7 @@
     },
     "licenses": [{
         "type": "Apache 2.0",
-        "url": "http://github.com/aws/aws-sdk-js/raw/master/LICENSE"
+        "url": "http://github.com/aws/aws-sdk-js/raw/master/LICENSE.txt"
     }],
     "keywords": [
         "api", "amazon","aws","ec2","simpledb","s3","sqs","ses","sns","route53","rds","elasticache","cloudfront","fps",
