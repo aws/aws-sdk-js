@@ -24,6 +24,27 @@ module.exports = function() {
     this.request(null, 'createDomain', {DomainName: this.domainName}, callback, false);
   });
 
+  this.Given(/^I define a CloudSearch index field with source attributes$/, function(callback) {
+    var params = {
+      DomainName: this.domainName,
+      IndexField: {
+        IndexFieldName: 'fieldname',
+        IndexFieldType: 'text',
+        SourceAttributes: [{
+          SourceDataFunction: 'Map',
+          SourceDataMap: {
+            SourceName: 'sourcedata',
+            Cases: {
+              case1: 'value1',
+              case2: 'value2'
+            }
+          }
+        }]
+      }
+    };
+    this.request(null, 'defineIndexField', params, callback);
+  });
+
   this.Then(/^DomainStatus should show that Created is true$/, function(callback) {
     this.assert.equal(this.data.DomainStatus.Created, true);
     callback();
