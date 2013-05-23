@@ -217,6 +217,7 @@ describe 'AWS.QueryParamSerializer', ->
       rules =
         Attributes:
           type: 'map'
+          flattened: true
           keys: {}
           members: {}
       data = {Attributes:{Color:'red',Size:'large',Value:'low'}}
@@ -230,12 +231,31 @@ describe 'AWS.QueryParamSerializer', ->
         ['Attributes.3.value', 'low'],
       ])
 
+    describe 'non-flat', ->
+      it 'adds .entry. to name', ->
+        rules =
+          Attributes:
+            type: 'map'
+            keys: {}
+            members: {}
+        data = Attributes: Color: 'red', Size: 'large', Value: 'low'
+        params = serialize(data, rules)
+        expect(params).toEqual([
+          ['Attributes.entry.1.key', 'Color'],
+          ['Attributes.entry.1.value', 'red'],
+          ['Attributes.entry.2.key', 'Size'],
+          ['Attributes.entry.2.value', 'large'],
+          ['Attributes.entry.3.key', 'Value'],
+          ['Attributes.entry.3.value', 'low'],
+        ])
+
   describe 'maps with member names', ->
 
     it 'applies member name traits', ->
       rules =
         Attributes:
           type: 'map'
+          flattened: true
           keys:
             name: 'Name'
           members:
