@@ -38,6 +38,12 @@ module.exports = function () {
     this.request('s3', 'putObject', params, next);
   });
 
+  this.When(/^I write "([^"]*)" to the key "([^"]*)" with ContentLength (\d+)$/, function(contents, key, contentLength, next) {
+    var params = {Bucket: this.sharedBucket, Key: key, Body: contents, ContentLength: parseInt(contentLength)};
+    this.s3nochecksums = new this.AWS.S3({computeChecksums: false});
+    this.request('s3nochecksums', 'putObject', params, next);
+  });
+
   this.Then(/^the object with the key "([^"]*)" should contain "([^"]*)"$/, function(key, contents, next) {
     this.assert.equal(this.data.Body.toString().replace("\n", ""), contents);
     next();
