@@ -49,6 +49,20 @@ Feature: Working with Objects in S3
     When I delete the object with the key "hello"
     Then the object with the key "hello" should not exist
 
+  @presigned
+  Scenario: Pre-signed URLs
+    Given I get a pre-signed URL to PUT the key "hello"
+    And I access the URL via HTTP PUT with data "PRESIGNED BODY CONTENTS"
+    When I get a pre-signed URL to GET the key "hello"
+    And I access the URL via HTTP GET
+    Then the HTTP response should equal "PRESIGNED BODY CONTENTS"
+
+  @presigned @checksum
+  Scenario: Pre-signed URLs with checksum
+    Given I get a pre-signed URL to PUT the key "hello" with data "CHECKSUMMED"
+    And I access the URL via HTTP PUT with data "NOT CHECKSUMMED"
+    Then the HTTP response should contain "SignatureDoesNotMatch"
+
   @buffer
   Scenario: Buffers and streams
     When I write buffer "world" to the key "hello"
