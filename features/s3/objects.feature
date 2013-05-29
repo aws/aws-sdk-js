@@ -54,7 +54,6 @@ Feature: Working with Objects in S3
     When I write buffer "world" to the key "hello"
     Then the object with the key "hello" should exist
     And the object with the key "hello" should contain "world"
-    And I delete the object with the key "hello"
 
     When I write file "testfile.txt" to the key "hello"
     Then the object with the key "hello" should exist
@@ -66,8 +65,6 @@ Feature: Working with Objects in S3
     When I stream2 key "hello"
     Then the streamed data should contain "CONTENTS OF FILE"
 
-    And I delete the object with the key "hello"
-
     @proxy
     Scenario: Proxy support
       When I write "world" to the key "hello"
@@ -78,6 +75,3 @@ Feature: Working with Objects in S3
       Then the object with the key "hello" should not exist
 
       And I teardown the local proxy server
-
-    # final step here needs to happen to cleanup the shared bucket
-    And I delete the shared bucket

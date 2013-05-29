@@ -13,9 +13,22 @@
  * language governing permissions and limitations under the License.
  */
 
-module.exports = function () {
+var realExit = process.exit;
 
+module.exports = function () {
+  var world = require("./world.js").WorldInstance;
   this.World = require("./world.js").World;
+
+  world.cleanupTasks = new world.AWS.SequentialExecutor();
+
+  process.exit = function(code) {
+    var finalCallback = function() { realExit(code); };
+    world.cleanupTasks.emit('cleanup', [], finalCallback);
+  };
+
+  this.AfterAll = function(callback) {
+    world.cleanupTasks.onAsync('cleanup', callback.bind(world));
+  }
 
   /* Global error code steps */
 

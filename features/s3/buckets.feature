@@ -32,8 +32,6 @@ Feature: Working with Buckets
     Then the ExposeHeader value should equal "x-amz-server-side-encryption"
     Then the MaxAgeSeconds value should equal 5000
 
-    And I delete the bucket
-
   @lifecycle
   Scenario: Bucket lifecycles
     When I create a bucket
@@ -42,8 +40,6 @@ Feature: Working with Buckets
     Then the lifecycle configuration should have transition days of 0
     And the lifecycle configuration should have transition storage class of "GLACIER"
 
-    And I delete the bucket
-
   @tagging
   Scenario: Bucket Tagging
     When I create a bucket
@@ -51,10 +47,7 @@ Feature: Working with Buckets
     And I get the bucket tagging
     Then the first tag in the tag set should have key and value "KEY", "VALUE"
 
-    And I delete the bucket
-
   # this test will exercise following 307 redirects
   Scenario: Creating a bucket with a location constraint
     When I create a bucket with the location constraint "EU"
     Then the bucket should have a location constraint of "EU"
-    And I delete the bucket
