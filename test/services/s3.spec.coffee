@@ -452,3 +452,39 @@ describe 'AWS.S3', ->
 
     it 'computes checksums if computeChecksums is on and ContentMD5 is not provided',->
       willCompute 'putBucketAcl', computeChecksums: true
+
+  describe 'getSignedUrl', ->
+    date = null
+    beforeEach ->
+      date = AWS.util.date.getDate
+      AWS.util.date.getDate = -> new Date(0)
+    afterEach ->
+      AWS.util.date.getDate = date
+
+    it 'gets a signed URL for getObject', ->
+      url = s3.getSignedUrl('getObject', Bucket: 'bucket', Key: 'key')
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=uefzBaGpqvO9QhGtT%2BbYda0pgQY%3D')
+
+    it 'gets a signed URL with Expires time', ->
+      url = s3.getSignedUrl('getObject', Bucket: 'bucket', Key: 'key', Expires: 60)
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=60&Signature=ZJKBOuhI99B2OZdkGSOmfG86BOI%3D')
+
+    it 'gets a signed URL with callback', ->
+      url = null
+      runs ->
+        s3.getSignedUrl 'getObject', Bucket: 'bucket', Key: 'key', (err, value) -> url = value
+      waitsFor -> url
+      runs ->
+        expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=uefzBaGpqvO9QhGtT%2BbYda0pgQY%3D')
+
+    it 'gets a signed URL for putObject with no body', ->
+      url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key')
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=h%2FphNvPoGxx9qq2U7Zhbfqgi0Xs%3D')
+
+    it 'gets a signed URL for putObject with a body (and checksum)', ->
+      url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', Body: 'body')
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Content-MD5=hBotaJrYa9FhFEdFPCLG%2FA%3D%3D&Expires=900&Signature=7%2BXiHEwB%2B3nSg2rhTyatSigkGPI%3D')
+
+    it 'gets a signed URL and appends to existing query parameters', ->
+      url = s3.getSignedUrl('listObjects', Bucket: 'bucket', Prefix: 'prefix')
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/?prefix=prefix&AWSAccessKeyId=akid&Expires=900&Signature=fWeCHJBop4LyDXm2%2F%2BvR%2BqzH5zk%3D')
