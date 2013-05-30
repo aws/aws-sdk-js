@@ -108,6 +108,54 @@ module.exports = function () {
     callback();
   });
 
+  this.When(/^I get a pre\-signed URL to GET the key "([^"]*)"$/, function(key, callback) {
+    this.signedUrl = this.s3.getSignedUrl('getObject', {Bucket: this.sharedBucket, Key: key});
+    callback();
+  });
+
+  this.When(/^I access the URL via HTTP GET$/, function(callback, verb) {
+    var world = this;
+    this.data = '';
+    require('https').get(this.signedUrl, function (res) {
+      res.on('data', function (chunk) {
+        world.data += chunk.toString();
+      }).on('end', callback);
+    }).on('error', callback.fail);
+  });
+
+  this.Given(/^I get a pre\-signed URL to PUT the key "([^"]*)"(?: with data "([^"]*)")?$/, function(key, body, callback) {
+    var params = {Bucket: this.sharedBucket, Key: key};
+    if (body) params.Body = body;
+    this.signedUrl = this.s3.getSignedUrl('putObject', params);
+    callback();
+  });
+
+  this.Given(/^I access the URL via HTTP PUT with data "([^"]*)"$/, function(body, callback) {
+    var world = this;
+    this.data = '';
+
+    var data = body;
+    var options = require('url').parse(this.signedUrl);
+    options.method = 'PUT';
+    options.headers = {'Content-Length': data.length};
+
+    var req = require('https').request(options, function (res) {
+      res.on('data', function (chunk) {
+        world.data += chunk.toString();
+      }).on('end', callback);
+    }).on('error', callback.fail).end(data);
+  });
+
+  this.Then(/^the HTTP response should equal "([^"]*)"$/, function(data, callback) {
+    this.assert.equal(this.data, data);
+    callback();
+  });
+
+  this.Then(/^the HTTP response should contain "([^"]*)"$/, function(data, callback) {
+    this.assert.match(this.data, data);
+    callback();
+  });
+
   // this scenario is a work around for not having an after all hook
   this.Then(/^I delete the shared bucket$/, function(next) {
     this.request('s3', 'deleteBucket', {Bucket:this.sharedBucket}, next);
