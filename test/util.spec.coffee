@@ -129,6 +129,7 @@ describe 'AWS.util.string', ->
       file = fs.createReadStream(__filename)
       fileLen = fs.lstatSync(file.path).size
       expect(len(file)).toEqual(fileLen)
+      expect(len(path: __filename)).toEqual(fileLen)
 
     it 'fails if input is not a string, buffer, or file', ->
       err = null
@@ -139,6 +140,17 @@ describe 'AWS.util.string', ->
 
       expect(err.message).toEqual('Cannot determine length of 3.14')
       expect(err.object).toBe(3.14)
+
+    it 'ignores path property unless it is a string', ->
+      object = {}
+      err = null
+      try
+        len(object)
+      catch e
+        err = e
+
+      expect(err.message).toMatch(/Cannot determine length of /)
+      expect(err.object).toBe(object)
 
 describe 'AWS.util.buffer', ->
   describe 'concat', ->
