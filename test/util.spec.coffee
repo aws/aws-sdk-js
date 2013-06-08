@@ -425,6 +425,6 @@ describe 'AWS.util.base64', ->
       expect(base64.encode('ёŝ')).toEqual('0ZHFnQ==')
 
   describe 'decode', ->
-    it 'encodes the given string', ->
+    it 'decodes the given string', ->
       expect(base64.decode('Zm9v')).toEqual('foo')
       expect(base64.decode('0ZHFnQ==')).toEqual('ёŝ')
