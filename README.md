@@ -82,7 +82,7 @@ The SDK currently supports the following services:
     </tr>
     <tr>
       <td>Amazon CloudFront</td>
-      <td>2012-05-05</td>
+      <td>2013-05-12, 2012-05-05</td>
       <td>AWS.CloudFront</td>
     </tr>
     <tr>
