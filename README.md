@@ -82,7 +82,7 @@ The SDK currently supports the following services:
     </tr>
     <tr>
       <td>Amazon CloudFront</td>
-      <td>2013-05-12, 2012-05-05</td>
+      <td>2013-05-12<br>2012-05-05</td>
       <td>AWS.CloudFront</td>
     </tr>
     <tr>
@@ -107,7 +107,7 @@ The SDK currently supports the following services:
     </tr>
     <tr>
       <td>Amazon DynamoDB</td>
-      <td>2012-08-10, 2011-12-05</td>
+      <td>2012-08-10<br>2011-12-05</td>
       <td>AWS.DynamoDB</td>
     </tr>
     <tr>
@@ -167,7 +167,7 @@ The SDK currently supports the following services:
     </tr>
     <tr>
       <td>Amazon Relational Database Service</td>
-      <td>2013-05-15, 2013-02-12, 2013-01-10</td>
+      <td>2013-05-15<br>2013-02-12<br>2013-01-10</td>
       <td>AWS.RDS</td>
     </tr>
     <tr>
