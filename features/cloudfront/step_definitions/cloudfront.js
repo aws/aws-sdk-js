@@ -14,60 +14,11 @@
  */
 
 module.exports = function() {
-  var createParams = {
-    CallerReference: '',
-    Aliases: {
-      Quantity: 0
-    },
-    DefaultRootObject: '',
-    Origins: {
-      Items: [{
-        Id: 'origin',
-        DomainName: 'example.com',
-        CustomOriginConfig: {
-          HTTPPort: 80,
-          HTTPSPort: 443,
-          OriginProtocolPolicy: 'match-viewer'
-        }
-      }],
-      Quantity: 1,
-    },
-    DefaultCacheBehavior: {
-      TargetOriginId: 'origin',
-      ForwardedValues: {
-        QueryString: false
-      },
-      TrustedSigners: {
-        Items: [],
-        Enabled: false,
-        Quantity: 0
-      },
-      ViewerProtocolPolicy: 'allow-all',
-      MinTTL: 0
-    },
-    CacheBehaviors: {
-      Items: [],
-      Quantity: 0
-    },
-    Comment: '',
-    Logging: {
-      Enabled: false,
-      Bucket: 'invalidbucket.s3.amazonaws.com',
-      Prefix: 'prefix'
-    },
-    Enabled: false
-  };
-
-  this.Before("@cloudfront", function (callback) {
-    this.service = new this.AWS.CloudFront.Client();
-    callback();
-  });
-
   this.Given(/^I create a CloudFront distribution with name prefix "([^"]*)"$/, function(prefix, callback) {
     this.cfName = this.uniqueName(prefix);
-    createParams.CallerReference = this.cfName;
-    createParams.Origins.Items[0].Id = (this.cfName === '' ? 'origin' : 'InvalidOrigin');
-    this.request(null, 'createDistribution', { DistributionConfig: createParams }, callback, false);
+    this.cfCreateParams.CallerReference = this.cfName;
+    this.cfCreateParams.Origins.Items[0].Id = (this.cfName === '' ? 'origin' : 'InvalidOrigin');
+    this.request(null, 'createDistribution', { DistributionConfig: this.cfCreateParams }, callback, false);
   });
 
   this.Given(/^I list CloudFront distributions$/, function(callback) {

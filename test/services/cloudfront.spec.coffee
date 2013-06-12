@@ -25,9 +25,10 @@ describe 'AWS.Route53', ->
   describe 'createInvalidation', ->
     it 'correctly builds the request', ->
       helpers.mockHttpResponse 200, {}, ''
+      api = cf.api.apiVersion
       xml =
         """
-        <InvalidationBatch xmlns="http://cloudfront.amazonaws.com/doc/2012-05-05/">
+        <InvalidationBatch xmlns="http://cloudfront.amazonaws.com/doc/#{api}/">
           <Paths>
             <Quantity>2</Quantity>
             <Items>
@@ -47,5 +48,5 @@ describe 'AWS.Route53', ->
           CallerReference: 'abc'
       cf.createInvalidation params, (err, data) ->
         req = this.request.httpRequest
-        expect(req.path).toEqual('/2012-05-05/distribution/ID/invalidation')
+        expect(req.path).toEqual("/#{api}/distribution/ID/invalidation")
         helpers.matchXML(req.body, xml)
