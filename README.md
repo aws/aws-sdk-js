@@ -166,8 +166,8 @@ The SDK currently supports the following services:
       <td>AWS.OpsWorks</td>
     </tr>
     <tr>
-      <td>Amazon Relational Database Service (Beta)</td>
-      <td>2012-07-31</td>
+      <td>Amazon Relational Database Service</td>
+      <td>2013-05-15, 2013-02-12, 2013-01-10</td>
       <td>AWS.RDS</td>
     </tr>
     <tr>
