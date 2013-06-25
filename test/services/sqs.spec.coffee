@@ -112,6 +112,7 @@ describe 'AWS.SQS', ->
       output = payload('000', md5bar, '000')
       checksumValidate 'sendMessageBatch', input, output, false, (err, data) ->
         expect(err.message).toMatch('Invalid messages: a, c')
+        expect(err.messageIds).toEqual(['MSGID1', 'MSGID3'])
 
     it 'ignores checksum errors if computeChecksums is false', ->
       output = payload(md5foo, '000', md5bar)
@@ -138,6 +139,7 @@ describe 'AWS.SQS', ->
       output = payload('foo', '000', 'MSGID')
       checksumValidate 'receiveMessage', {}, output, false, (err, data) ->
         expect(err.message).toMatch('Invalid messages: MSGID')
+        expect(err.messageIds).toEqual(['MSGID'])
 
     it 'ignores checksum errors if computeChecksums is false', ->
       output = payload('foo', '000', 'MSGID')
