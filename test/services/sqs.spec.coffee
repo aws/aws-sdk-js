@@ -41,6 +41,7 @@ describe 'AWS.SQS', ->
       """
       <SendMessageResponse><SendMessageResult>
         <MD5OfMessageBody>#{md5}</MD5OfMessageBody>
+        <MessageId>MSGID</MessageId>
       </SendMessageResult></SendMessageResponse>
       """
 
@@ -51,6 +52,7 @@ describe 'AWS.SQS', ->
     it 'raises InvalidChecksum if MD5 does not match message input', ->
       checksumValidate 'sendMessage', input, payload('000'), false, (err) ->
         expect(err.message).toMatch('Got "000", expecting "acbd18db4cc2f85cedef654fccc4a4d8"')
+        expect(err.messageIds).toEqual(['MSGID'])
 
     it 'ignores checksum errors if computeChecksums is false', ->
       sqs.config.computeChecksums = false
