@@ -20,12 +20,9 @@ describe 'AWS.SQS', ->
   sqs = null
   beforeEach -> sqs = new AWS.SQS params: QueueUrl: 'http://url'
 
-  respondWith = (response) ->
-    helpers.mockHttpResponse 200, {}, response
-
   checksumValidate = (operation, input, response, shouldPass, cb) ->
     output = null
-    respondWith(response)
+    helpers.mockHttpResponse 200, {}, response
     runs ->
       sqs[operation](input, (e, d) -> output = error: e, data: d)
     waitsFor -> output
@@ -38,39 +35,29 @@ describe 'AWS.SQS', ->
         cb(output.error, output.data)
 
   describe 'sendMessage', ->
+    payload = (md5) ->
+      """
+      <SendMessageResponse><SendMessageResult>
+        <MD5OfMessageBody>#{md5}</MD5OfMessageBody>
+      </SendMessageResult></SendMessageResponse>
+      """
+
     it 'correctly validates MD5 of message input', ->
       input = MessageBody: 'foo'
       md5 = 'acbd18db4cc2f85cedef654fccc4a4d8'
-      output = """
-        <SendMessageResponse><SendMessageResult>
-          <MD5OfMessageBody>#{md5}</MD5OfMessageBody>
-        </SendMessageResult></SendMessageResponse>
-      """
 
-      checksumValidate 'sendMessage', input, output, true, (err, data) ->
+      checksumValidate 'sendMessage', input, payload(md5), true, (err, data) ->
         expect(data.MD5OfMessageBody).toEqual(md5)
 
     it 'raises InvalidChecksum if MD5 does not match message input', ->
       input = MessageBody: 'foo'
-      output = """
-        <SendMessageResponse><SendMessageResult>
-          <MD5OfMessageBody>000</MD5OfMessageBody>
-        </SendMessageResult></SendMessageResponse>
-      """
-
-      checksumValidate 'sendMessage', input, output, false, (err) ->
+      checksumValidate 'sendMessage', input, payload('000'), false, (err) ->
         expect(err.message).toMatch('Got "000", expecting "acbd18db4cc2f85cedef654fccc4a4d8"')
 
     it 'ignores checksum errors if computeChecksums is false', ->
       input = MessageBody: 'foo'
-      output = """
-        <SendMessageResponse><SendMessageResult>
-          <MD5OfMessageBody>000</MD5OfMessageBody>
-        </SendMessageResult></SendMessageResponse>
-      """
-
       sqs.config.computeChecksums = false
-      checksumValidate 'sendMessage', input, output, true
+      checksumValidate 'sendMessage', input, payload('000'), true
 
   describe 'sendMessageBatch', ->
     input = Entries: [
