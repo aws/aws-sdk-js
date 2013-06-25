@@ -35,6 +35,8 @@ describe 'AWS.SQS', ->
         cb(output.error, output.data)
 
   describe 'sendMessage', ->
+    input = MessageBody: 'foo'
+    md5 = 'acbd18db4cc2f85cedef654fccc4a4d8'
     payload = (md5) ->
       """
       <SendMessageResponse><SendMessageResult>
@@ -43,19 +45,14 @@ describe 'AWS.SQS', ->
       """
 
     it 'correctly validates MD5 of message input', ->
-      input = MessageBody: 'foo'
-      md5 = 'acbd18db4cc2f85cedef654fccc4a4d8'
-
       checksumValidate 'sendMessage', input, payload(md5), true, (err, data) ->
         expect(data.MD5OfMessageBody).toEqual(md5)
 
     it 'raises InvalidChecksum if MD5 does not match message input', ->
-      input = MessageBody: 'foo'
       checksumValidate 'sendMessage', input, payload('000'), false, (err) ->
         expect(err.message).toMatch('Got "000", expecting "acbd18db4cc2f85cedef654fccc4a4d8"')
 
     it 'ignores checksum errors if computeChecksums is false', ->
-      input = MessageBody: 'foo'
       sqs.config.computeChecksums = false
       checksumValidate 'sendMessage', input, payload('000'), true
 
