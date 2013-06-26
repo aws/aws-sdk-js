@@ -156,6 +156,11 @@ module.exports = function () {
     callback();
   });
 
+  this.Given(/^I setup the listObjects request for the bucket$/, function(callback) {
+    this.params = { Bucket: this.sharedBucket };
+    callback();
+  });
+
   // this scenario is a work around for not having an after all hook
   this.Then(/^I delete the shared bucket$/, function(next) {
     this.request('s3', 'deleteBucket', {Bucket:this.sharedBucket}, next);

@@ -56,13 +56,13 @@ module.exports = function() {
     this.numMarkers = 0
     this.operation = operation;
     this.paginationConfig = this.service.paginationConfig(operation);
+    this.params = this.params || {};
 
     var marker = this.paginationConfig.outputToken;
-    var params = {};
     if (this.paginationConfig.limitKey) {
-      params[this.paginationConfig.limitKey] = limit;
+      this.params[this.paginationConfig.limitKey] = limit;
     }
-    this.service[operation](params).eachPage(function (err, data) {
+    this.service[operation](this.params).eachPage(function (err, data) {
       if (err) callback.fail(err);
       else if (data === null) callback();
       else if (maxPages && world.numPages === maxPages) {
@@ -83,7 +83,7 @@ module.exports = function() {
   });
 
   this.Then(/^I should get (\d+) pages$/, function(numPages, callback) {
-    this.assert.equal(this.numPages, numPages);
+    this.assert.equal(this.numPages, parseInt(numPages));
     callback();
   });
 
