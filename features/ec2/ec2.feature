@@ -30,3 +30,8 @@ Feature: Amazon Elastic Compute Cloud
     The request must contain the parameter InstanceId
     """
     And the status code should be 400
+
+  @pagination
+  Scenario: Paginating responses
+    Given I paginate the "describeReservedInstancesOfferings" operation with limit 20 and max pages 3
+    Then I should get 3 pages
