@@ -428,3 +428,26 @@ describe 'AWS.util.base64', ->
     it 'decodes the given string', ->
       expect(base64.decode('Zm9v')).toEqual('foo')
       expect(base64.decode('0ZHFnQ==')).toEqual('ёŝ')
+
+describe 'AWS.util.jamespath', ->
+  query = AWS.util.jamespath.query
+
+  describe 'query', ->
+    it 'can find a toplevel element of a data structure', ->
+      expect(query('foo', foo: 'value')).toEqual('value')
+
+    it 'can find a nested element of a data structure', ->
+      expect(query('foo.bar.baz', foo: bar: baz: 'value')).toEqual('value')
+
+    it 'can index an element (positive and negative indexes)', ->
+      data = foo: bar: [{baz: 'wrong'}, {baz: 'right'}, {baz: 'wrong'}]
+      expect(query('foo.bar[1].baz', data)).toEqual('right')
+      expect(query('foo.bar[-2].baz', data)).toEqual('right')
+
+    it 'returns null if element is not found', ->
+      data = foo: notBar: baz: 'value'
+      expect(query('foo.bar.baz', data)).toEqual(null)
+
+    it 'allows multiple expressions to be ORed', ->
+      data = foo: {key: null}, bar: {key: 'value'}
+      expect(query('foo.key or bar.key', data)).toEqual('value')
