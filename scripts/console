@@ -29,7 +29,7 @@ function customEval(cmd, context, filename, callback) {
       return;
     }
     
-    if (value.constructor === AWS.Request) {
+    if (value && value.constructor === AWS.Request) {
       if (!value.__hasBeenSent__) {
         value.__hasBeenSent__ = true;
         try {
