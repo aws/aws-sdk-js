@@ -35,9 +35,9 @@ describe 'AWS.Response', ->
     response.data = data
 
   describe 'hasNextPage', ->
-    it 'returns false if the request is not pageable', ->
+    it 'returns undefined if the request is not pageable', ->
       fill(null, Marker: 'next_page')
-      expect(response.hasNextPage()).toEqual(false)
+      expect(response.hasNextPage()).toEqual(undefined)
 
     it 'returns false if there is no marker in the response', ->
       fill(null, {}, true)
