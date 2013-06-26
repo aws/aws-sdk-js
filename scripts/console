@@ -29,14 +29,14 @@ function customEval(cmd, context, filename, callback) {
       return;
     }
     
-    // poor man's Request check
-    if (value && value.service && value.send) {
+    if (value.constructor === AWS.Request) {
       if (!value.__hasBeenSent__) {
         value.__hasBeenSent__ = true;
         try {
           value.on('complete', function consoleDataExtraction(resp) {
             context.data = resp.data;
             context.error = resp.error;
+            callback(resp.error, resp.data);
           });
           context.request = value;
           context.data = null;
@@ -47,9 +47,9 @@ function customEval(cmd, context, filename, callback) {
           return;
         }
       }
+    } else {
+      callback(null, value);
     }
-
-    callback(null, value);
   });
 }
 
@@ -70,10 +70,9 @@ repl.context.AWS.events.on('send', function (resp) {
       status = resp.httpResponse.statusCode,
       params = require('util').inspect(this.params, true, true);
 
-  console.log('\n\x1B[33m[AWS', this.service.serviceIdentifier, status,
+  console.log('\x1B[33m[AWS', this.service.serviceIdentifier, status,
     (time-resp.requestStarted)/1000, resp.retryCount + ' retries]\x1B[0;1m',
     this.operation + '(' + params + ')\x1B[0m');
-  process.stdout.write(repl.prompt);
 });
 
 // setup REPL history
