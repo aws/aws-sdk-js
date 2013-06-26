@@ -17,7 +17,28 @@ AWS = helpers.AWS
 MockService = helpers.MockService
 
 describe 'AWS.Request', ->
-  service = new MockService
+  service = null
+
+  describe 'isPageable', ->
+    beforeEach ->
+      service = new AWS.Service apiConfig:
+        operations: mockMethod: input: {}, output: {}
+
+    it 'is pageable if it has a pagination config for the operation', ->
+      service.api.pagination =
+          mockMethod:
+            limitKey: 'Marker'
+
+      request = service.makeRequest('mockMethod')
+      expect(request.isPageable()).toEqual(true)
+
+    it 'is not pageable if the pagination config does not exist for the operation', ->
+      service.api.pagination = {}
+      expect(service.makeRequest('mockMethod').isPageable()).toEqual(false)
+
+    it 'is not pageable if the config does not exist for the service', ->
+      delete service.api.pagination
+      expect(service.makeRequest('mockMethod').isPageable()).toEqual(false)
 
   describe 'send', ->
     it 'accepts an optional callback', ->
@@ -30,6 +51,9 @@ describe 'AWS.Request', ->
         expect(data).toEqual('FOOBARBAZQUX')
 
   describe 'createReadStream', ->
+    beforeEach ->
+      service = new MockService
+
     it 'streams data', ->
       data = ''; done = false
       helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
