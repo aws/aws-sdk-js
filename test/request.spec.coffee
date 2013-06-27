@@ -19,6 +19,16 @@ MockService = helpers.MockService
 describe 'AWS.Request', ->
   service = new MockService
 
+  describe 'send', ->
+    it 'accepts an optional callback', ->
+      error = null; data = null
+      helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
+      runs ->
+        service.makeRequest('mockMethod').send (e, d) -> data = d
+      waitsFor -> data
+      runs ->
+        expect(data).toEqual('FOOBARBAZQUX')
+
   describe 'createReadStream', ->
     it 'streams data', ->
       data = ''; done = false
