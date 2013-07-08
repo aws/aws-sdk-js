@@ -1,4 +1,5 @@
 -m markdown
+--markup-provider rdiscount
 --exclude /api/
 --no-api private
 --no-highlight
