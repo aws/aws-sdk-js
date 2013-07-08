@@ -329,10 +329,42 @@ describe 'AWS.EventListeners', ->
       expect(errorHandler).toHaveBeenCalled()
       expect(completeHandler).toHaveBeenCalled()
 
-    it 'catches exceptions raised from error event', ->
-      helpers.mockHttpResponse 500, {}, []
-      request = makeRequest()
-      request.on 'error', ->
-        throw "ERROR"
-      expect(-> request.send()).toThrow('ERROR')
-      expect(completeHandler).not.toHaveBeenCalled()
+  describe 'terminal callback error handling', ->
+    describe 'without domains', ->
+      it 'ignores exceptions raised from success event', ->
+        helpers.mockHttpResponse 200, {}, []
+        request = makeRequest()
+        request.on 'success', -> throw "ERROR"
+        expect(-> request.send()).not.toThrow('ERROR')
+        expect(completeHandler).toHaveBeenCalled()
+        expect(retryHandler).not.toHaveBeenCalled()
+
+      it 'ignores exceptions raised from complete event', ->
+        helpers.mockHttpResponse 200, {}, []
+        request = makeRequest()
+        request.on 'complete', -> throw "ERROR"
+        expect(-> request.send()).not.toThrow('ERROR')
+        expect(completeHandler).toHaveBeenCalled()
+        expect(retryHandler).not.toHaveBeenCalled()
+
+      it 'ignores exceptions raised from error event', ->
+        helpers.mockHttpResponse 500, {}, []
+        request = makeRequest()
+        request.on 'error', -> throw "ERROR"
+        expect(-> request.send()).not.toThrow('ERROR')
+        expect(completeHandler).toHaveBeenCalled()
+
+    describe 'with domains', ->
+      it 'sends error raised from complete event to a domain', ->
+        result = false
+        d = require('domain').create()
+        if d.run
+          d.on('error', (e) -> result = e)
+          d.run ->
+            helpers.mockHttpResponse 200, {}, []
+            request = makeRequest()
+            request.on 'complete', -> throw "ERROR"
+            expect(-> request.send()).not.toThrow('ERROR')
+            expect(completeHandler).toHaveBeenCalled()
+            expect(retryHandler).not.toHaveBeenCalled()
+            expect(result).toEqual("ERROR")
