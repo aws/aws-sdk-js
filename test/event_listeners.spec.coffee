@@ -368,3 +368,31 @@ describe 'AWS.EventListeners', ->
             expect(completeHandler).toHaveBeenCalled()
             expect(retryHandler).not.toHaveBeenCalled()
             expect(result).toEqual("ERROR")
+
+      it 'supports inner domains', ->
+        helpers.mockHttpResponse 200, {}, []
+
+        done = false
+        err = new Error()
+        gotOuterError = false
+        gotInnerError = false
+        Domain = require("domain")
+        outerDomain = Domain.create()
+        outerDomain.on 'error', (err) -> gotOuterError = true
+
+        if outerDomain.run
+          outerDomain.run ->
+            request = makeRequest()
+            innerDomain = Domain.create()
+            innerDomain.add(request)
+            innerDomain.on 'error', -> gotInnerError = true
+
+            runs ->
+              request.send ->
+                innerDomain.run -> done = true; throw err
+            waitsFor -> done
+            runs ->
+              expect(gotOuterError).toEqual(false)
+              expect(gotInnerError).toEqual(true)
+              expect(err.domainThrown).toEqual(false)
+              expect(err.domain).toEqual(innerDomain)
