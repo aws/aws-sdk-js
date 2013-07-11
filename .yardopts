@@ -2,6 +2,7 @@
 --markup-provider rdiscount
 --exclude /api/
 --no-api private
+--api experimental
 --no-highlight
 --title "AWS SDK for Node.js"
 --template-path doc-src/templates

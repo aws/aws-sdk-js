@@ -428,3 +428,52 @@ describe 'AWS.util.base64', ->
     it 'decodes the given string', ->
       expect(base64.decode('Zm9v')).toEqual('foo')
       expect(base64.decode('0ZHFnQ==')).toEqual('ёŝ')
+
+describe 'AWS.util.jamespath', ->
+  query = AWS.util.jamespath.query
+  find = AWS.util.jamespath.find
+
+  describe 'query', ->
+    it 'can find a toplevel element of a data structure', ->
+      expect(query('foo', foo: 'value')).toEqual(['value'])
+
+    it 'can find a nested element of a data structure', ->
+      expect(query('foo.bar.baz', foo: bar: baz: 'value')).toEqual(['value'])
+
+    it 'can index an element (positive and negative indexes)', ->
+      data = foo: bar: [{baz: 'wrong'}, {baz: 'right'}, {baz: 'wrong'}]
+      expect(query('foo.bar[1].baz', data)).toEqual(['right'])
+      expect(query('foo.bar[-2].baz', data)).toEqual(['right'])
+
+    it 'can index an element with wildcard', ->
+      data = foo: bar: [{baz: 'wrong'}, {baz: 'right'}, {baz: 'wrong'}]
+      expect(query('foo.bar[*].baz', data)).toEqual(['wrong', 'right', 'wrong'])
+
+    it 'returns empty array if element is not found', ->
+      data = foo: notBar: baz: 'value'
+      expect(query('foo.bar.baz', data)).toEqual([])
+
+    it 'allows multiple expressions to be ORed', ->
+      data = foo: {key1: 'wrong'}, bar: {key2: 'right'}
+      expect(query('foo.key2 or bar.key2', data)).toEqual(['right'])
+
+    it 'returns multiple matches if a wildcard is used', ->
+      data = foo:
+        child1: bar: 'value1'
+        child2: bar: 'value2'
+        child3: bar: 'value3'
+      expect(query('foo.*.bar', data)).toEqual(['value1', 'value2', 'value3'])
+
+    it 'can support wildcard on both token and index', ->
+      data = foo:
+        child1: ['value1', 'value2']
+        child2: ['value3']
+        child4: 'notarray'
+      expect(query('foo.*[*]', data)).toEqual(['value1', 'value2', 'value3'])
+
+  describe 'find', ->
+    it 'returns the first match of query', ->
+      expect(find('foo.*', foo: bar: 1, baz: 2)).toEqual(1)
+
+    it 'returns null if no match is found', ->
+      expect(find('invalid.*', foo: bar: 1, baz: 2)).toEqual(null)
