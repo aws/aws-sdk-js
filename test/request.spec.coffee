@@ -41,6 +41,9 @@ describe 'AWS.Request', ->
       expect(service.makeRequest('mockMethod').isPageable()).toEqual(false)
 
   describe 'send', ->
+    beforeEach ->
+      service = new MockService
+
     it 'accepts an optional callback', ->
       error = null; data = null
       helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
