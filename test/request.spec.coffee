@@ -18,6 +18,8 @@ MockService = helpers.MockService
 
 describe 'AWS.Request', ->
   service = null
+  beforeEach ->
+    service = new MockService
 
   describe 'isPageable', ->
     beforeEach ->
@@ -41,9 +43,6 @@ describe 'AWS.Request', ->
       expect(service.makeRequest('mockMethod').isPageable()).toEqual(false)
 
   describe 'send', ->
-    beforeEach ->
-      service = new MockService
-
     it 'accepts an optional callback', ->
       error = null; data = null
       helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
@@ -53,10 +52,21 @@ describe 'AWS.Request', ->
       runs ->
         expect(data).toEqual('FOOBARBAZQUX')
 
-  describe 'createReadStream', ->
-    beforeEach ->
-      service = new MockService
+  describe 'abort', ->
+    it 'allows aborting requests', ->
+      error = null; data = null
+      helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
+      runs ->
+        req = service.makeRequest('mockMethod')
+        req.send (e, d) -> error = e; data = d
+        req.abort()
+      waitsFor -> error || data
+      runs ->
+        expect(data).toEqual(null)
+        expect(error.code).toEqual('RequestAbortedError')
+        expect(error.message).toMatch(/aborted by user/)
 
+  describe 'createReadStream', ->
     it 'streams data', ->
       data = ''; done = false
       helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
