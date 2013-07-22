@@ -56,7 +56,7 @@ describe 'AWS.Signers.V4', ->
       'Host': 'localhost',
       'Date': datetime,
       'X-Amz-Date': datetime,
-      'X-Amz-Security-Token' : 'session',
+      'x-amz-security-token' : 'session',
       'Authorization' : authorization
     }
 
