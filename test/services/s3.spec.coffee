@@ -469,6 +469,11 @@ describe 'AWS.S3', ->
       url = s3.getSignedUrl('getObject', Bucket: 'bucket', Key: 'key', Expires: 60)
       expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=60&Signature=ZJKBOuhI99B2OZdkGSOmfG86BOI%3D')
 
+    it 'gets a signed URL with expiration and bound bucket parameters', ->
+      s3 = new AWS.S3(paramValidation: true, params: Bucket: 'bucket')
+      url = s3.getSignedUrl('getObject', Key: 'key', Expires: 60)
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=60&Signature=ZJKBOuhI99B2OZdkGSOmfG86BOI%3D')
+
     it 'gets a signed URL with callback', ->
       url = null
       runs ->
