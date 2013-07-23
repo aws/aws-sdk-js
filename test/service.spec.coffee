@@ -167,14 +167,10 @@ describe 'AWS.Service', ->
 
     it 'allows parameter validation to be disabled in config', ->
       helpers.mockHttpResponse(200, {}, ['FOO', 'BAR'])
-      AWS.EventListeners.Core.on 'validate',
-        AWS.EventListeners.Core.VALIDATE_PARAMETERS
       service = new MockService(paramValidation: false)
       req = service.makeRequest 'operation', {}, (err, data) ->
         expect(err).toEqual(null)
         expect(data).toEqual('FOOBAR')
-      AWS.EventListeners.Core.removeListener 'validate',
-        AWS.EventListeners.Core.VALIDATE_PARAMETERS
 
       describe 'bound parameters', ->
         it 'accepts toplevel bound parameters on the service', ->

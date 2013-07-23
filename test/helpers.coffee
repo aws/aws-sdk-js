@@ -16,14 +16,11 @@ EventEmitter = require('events').EventEmitter
 
 # Mock credentials
 AWS.config.update
+  paramValidation: false
   region: 'mock-region'
   credentials:
     accessKeyId: 'akid'
     secretAccessKey: 'secret'
-
-# Disable validation
-AWS.EventListeners.Core.removeListener 'validate',
-  AWS.EventListeners.Core.VALIDATE_PARAMETERS
 
 # Disable setTimeout for tests
 # Warning: this might cause unpredictable results
