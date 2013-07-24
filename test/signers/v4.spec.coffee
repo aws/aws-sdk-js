@@ -77,7 +77,15 @@ describe 'AWS.Signers.V4', ->
 
   describe 'stringToSign', ->
     it 'should sign correctly generated input string', ->
-      expect(signer.stringToSign(datetime)).toEqual 'AWS4-HMAC-SHA256\n' +
+      expect(signer.stringToSign(creds, datetime)).toEqual 'AWS4-HMAC-SHA256\n' +
+        datetime + '\n' +
+        '20310430/region/dynamodb/aws4_request\n' +
+        signer.hexEncodedHash(signer.canonicalString())
+
+  describe 'stringToSign with specific authentication scheme', ->
+    it 'should sign correctly generated input string', ->
+      creds.authScheme = 'AWS4-HMAC-SHA1'
+      expect(signer.stringToSign(creds, datetime)).toEqual 'AWS4-HMAC-SHA1\n' +
         datetime + '\n' +
         '20310430/region/dynamodb/aws4_request\n' +
         signer.hexEncodedHash(signer.canonicalString())
