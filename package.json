@@ -16,7 +16,7 @@
       "repl.history": "latest",
       "jasmine-node": "latest",
       "coffee-script": "latest",
-      "jshint": "2.1.x",
+      "jshint": "2.1.0",
       "cucumber": "latest"
     },
     "dependencies": {
