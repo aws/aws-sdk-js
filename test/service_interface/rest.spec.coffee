@@ -22,6 +22,7 @@ describe 'AWS.ServiceInterface.Rest', ->
   operation = null
   request = null
   response = null
+  service = null
   svc = eval(@description)
 
   beforeEach ->
@@ -33,6 +34,7 @@ describe 'AWS.ServiceInterface.Rest', ->
             uri: '/'
           input: null
           output: null
+ 
 
     AWS.Service.defineMethods(MockRESTService)
 
@@ -145,6 +147,63 @@ describe 'AWS.ServiceInterface.Rest', ->
               abc: 'xyz'
         expect(request.httpRequest.headers['x-amz-meta-foo']).toEqual('bar')
         expect(request.httpRequest.headers['x-amz-meta-abc']).toEqual('xyz')
+
+    describe 'timestamp header with format', ->
+      it 'populates the header with correct timestamp formatting', ->
+        date = new Date(Date.now());
+        buildRequest ->
+          operation.input =
+            members:
+              IfModifiedSince:
+                location: 'header'
+                name: 'If-Modified-Since'
+                type: 'timestamp'
+                format: 'rfc822'
+          request.params = IfModifiedSince: date
+        expect(request.httpRequest.headers['If-Modified-Since']).toEqual(date.toUTCString())
+
+    describe 'timestamp header without format', ->
+      it 'populates the header using the api formatting', ->
+        date = new Date(Date.now());
+        buildRequest ->
+          service.api.timestampFormat = 'rfc822'
+          operation.input =
+            members:
+              IfModifiedSince:
+                location: 'header'
+                name: 'If-Modified-Since'
+                type: 'timestamp'
+          request.params = IfModifiedSince: date
+        expect(request.httpRequest.headers['If-Modified-Since']).toEqual(date.toUTCString())
+
+    describe 'timestamp header with api formatting and parameter formatting', ->
+      it 'populates the header using the parameter formatting', ->
+        date = new Date(Date.now());
+        buildRequest ->
+          service.api.timestampFormat = 'invalid'
+          operation.input =
+            members:
+              IfModifiedSince:
+                location: 'header'
+                name: 'If-Modified-Since'
+                type: 'timestamp'
+                format: 'rfc822'
+          request.params = IfModifiedSince: date
+        expect(request.httpRequest.headers['If-Modified-Since']).toEqual(date.toUTCString())
+
+    describe 'timestamp header with iso formatting', ->
+      it 'populates the header using the parameter formatting', ->
+        date = new Date(Date.now());
+        buildRequest ->
+          operation.input =
+            members:
+              IfModifiedSince:
+                location: 'header'
+                name: 'If-Modified-Since'
+                type: 'timestamp'
+                format: 'iso8601'
+          request.params = IfModifiedSince: date
+        expect(request.httpRequest.headers['If-Modified-Since']).toEqual(date.toISOString())
 
   describe 'extractData', ->
     extractData = (callback) ->
