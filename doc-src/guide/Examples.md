@@ -13,6 +13,45 @@ var AWS = require('aws-sdk');
 AWS.config.update({region: 'us-west-2'});
 ```
 
+## Amazon Elastic Compute Cloud (Amazon EC2)
+
+### Amazon EC2: Creating an Instance with Tags (`runInstances`, `createTags`)
+
+The Amazon EC2 API has two distinct operations for creating instances and
+attaching tags to instances. In order to create an instance with tags, you can
+call both of these operations in series. The following example adds a "Name"
+tag to a new instance, which the Amazon EC2 console recognizes and displays
+in the Name field of the instance list.
+
+```js
+var ec2 = new AWS.EC2();
+
+var params = {
+  ImageId: 'ami-1624987f', // Amazon Linux AMI x86_64 EBS
+  InstanceType: 't1.micro',
+  MinCount: 1, MaxCount: 1
+};
+
+// Create the instance
+ec2.runInstances(params, function(err, data) {
+  if (err) { console.log("Could not create instance", err); return; }
+
+  var instanceId = data.Instances[0].InstanceId;
+  console.log("Created instance", instanceId);
+
+  // Add tags to the instance
+  params = {Resources: [instanceId], Tags: [
+    {Key: 'Name', Value: instanceName}
+  ]};
+  ec2.createTags(params, function(err) {
+    console.log("Tagging instance", err ? "failure" : "success");
+  });
+});
+```
+
+Note that you can add up to 10 tags to an instance, and they can be all added
+in a single call to `createTags`.
+
 ## Amazon Simple Storage Service (Amazon S3)
 
 ### Amazon S3: List All of Your Buckets (listBuckets)
