@@ -330,29 +330,40 @@ describe 'AWS.EventListeners', ->
       expect(completeHandler).toHaveBeenCalled()
 
   describe 'terminal callback error handling', ->
+    beforeEach ->
+      spyOn(process, 'exit')
+      spyOn(console, 'error')
+
+    didError = ->
+      expect(console.error).toHaveBeenCalledWith('ERROR')
+      expect(process.exit).toHaveBeenCalledWith(1)
+
     describe 'without domains', ->
-      it 'ignores exceptions raised from success event', ->
+      it 'logs exceptions raised from success event and exits process', ->
         helpers.mockHttpResponse 200, {}, []
         request = makeRequest()
         request.on 'success', -> throw "ERROR"
         expect(-> request.send()).not.toThrow('ERROR')
         expect(completeHandler).toHaveBeenCalled()
         expect(retryHandler).not.toHaveBeenCalled()
+        didError()
 
-      it 'ignores exceptions raised from complete event', ->
+      it 'logs exceptions raised from complete event and exits process', ->
         helpers.mockHttpResponse 200, {}, []
         request = makeRequest()
         request.on 'complete', -> throw "ERROR"
         expect(-> request.send()).not.toThrow('ERROR')
         expect(completeHandler).toHaveBeenCalled()
         expect(retryHandler).not.toHaveBeenCalled()
+        didError()
 
-      it 'ignores exceptions raised from error event', ->
+      it 'logs exceptions raised from error event and exits process', ->
         helpers.mockHttpResponse 500, {}, []
         request = makeRequest()
         request.on 'error', -> throw "ERROR"
         expect(-> request.send()).not.toThrow('ERROR')
         expect(completeHandler).toHaveBeenCalled()
+        didError()
 
     describe 'with domains', ->
       it 'sends error raised from complete event to a domain', ->
