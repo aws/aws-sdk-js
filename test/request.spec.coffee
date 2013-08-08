@@ -214,4 +214,6 @@ describe 'AWS.Request', ->
         expect(data).toEqual('FOOBAR')
         expect(error.code).toEqual('NetworkingError')
         expect(reqError.code).toEqual('NetworkingError')
+        expect(reqError.hostname).toEqual('mockservice.mock-region.amazonaws.com')
+        expect(reqError.region).toEqual('mock-region')
         expect(resp.retryCount).toEqual(0)
