@@ -100,6 +100,20 @@ describe 'AWS.Signers.S3', ->
 
       expect(req.headers['Authorization']).toEqual('AWS AKID:Gg5WLabTOvH0WMd15wv7lWe4zK0=')
 
+    it 'adds an Authorization header which contains akid, signature and authentication scheme', ->
+
+      creds = { accessKeyId: 'AKID', secretAccessKey: 'secret', authScheme: 'AMAZON' }
+
+      req = buildRequest()
+
+      signer = new AWS.Signers.S3(req)
+
+      spyOn(signer, 'stringToSign')
+      signer.stringToSign.andReturn('string-to-sign')
+      signer.addAuthorization(creds, date)
+
+      expect(req.headers['Authorization']).toEqual('AMAZON AKID:Gg5WLabTOvH0WMd15wv7lWe4zK0=')
+
   describe 'stringToSign', ->
 
     beforeEach ->
