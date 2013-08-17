@@ -303,7 +303,7 @@ language governing permissions and limitations under the License.
         if (!AWS[key].prototype) continue;
         if (AWS[key].prototype.constructor.__super__.name === 'Service') {
           var svcVarName = key.toLowerCase();
-          var svc = services[svcVarName] = window[svcVarName] = new AWS[key].Client();
+          var svc = services[svcVarName] = window[svcVarName] = new AWS[key]();
           var fullName = svc.api.serviceAbbreviation || svc.api.serviceFullName;
           var el = $('<option/>').attr('value', svcVarName).text(fullName);
           $('#serviceSelector').append(el).change(function () {
@@ -341,7 +341,7 @@ language governing permissions and limitations under the License.
       $('#history :first').tabs('option', 'active', false);
       $('#history').prepend(template('historyEntry', {
         operation: req.operation,
-        service: req.client.api.endpointPrefix,
+        service: req.service.api.endpointPrefix,
         entry: req.id,
         date: new Date(),
       }));
@@ -358,7 +358,7 @@ language governing permissions and limitations under the License.
       var params = JSON.stringify(req.params);
       var time = new Date().getTime();
       var elapsed = (time - (resp.requestStarted || time)) / 1000;
-      var service = req.client.api.endpointPrefix;
+      var service = req.service.api.endpointPrefix;
       var statusCode = resp.httpResponse.statusCode || 'ERR';
       var retryCount = resp.retryCount || 0;
       var operation = req.operation;
@@ -368,16 +368,17 @@ language governing permissions and limitations under the License.
       if (resp.error) {
         data = resp.error.stack;
       } else {
+        if (resp.data.Body) delete resp.data.Body.parent; // remove circular ref
         data = JSON.stringify(resp.data, null, 2);
-      }
 
-      var tableData = resp.data;
-      var resultKey = '';
-      if (iterators.operations[operation]) {
-        resultKey = iterators.operations[operation].result_key;
-        tableData = resp.data[resultKey];
+        var tableData = resp.data;
+        var resultKey = '';
+        if (iterators.operations[operation]) {
+          resultKey = iterators.operations[operation].result_key;
+          tableData = resp.data[resultKey];
+        }
+        entry.find('.tableOutput').html(tableView(tableData, resultKey));
       }
-      entry.find('.tableOutput').html(tableView(tableData, resultKey));
 
       // debug to console
       var opInfo = service + '.' + operation + '(' + params + ')';
@@ -388,6 +389,7 @@ language governing permissions and limitations under the License.
       var link = entry.children('ul').find('a').first();
       link.text('[' + info + '] ' + link.text());
 
+      delete resp.httpResponse.body.parent; // remove circular reference
       var respHttpData = JSON.stringify(resp.httpResponse, null, 2);
       entry.find('.operationResponseDetails').text(respHttpData);
     }
