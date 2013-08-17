@@ -1,7 +1,7 @@
 {
     "name": "aws-sdk",
     "description": "AWS SDK for JavaScript",
-    "version": "v0.9.6-pre.7",
+    "version": "v1.5.0",
     "author": {
         "name":"Amazon Web Services",
         "email":"",
@@ -16,7 +16,7 @@
       "repl.history": "latest",
       "jasmine-node": "latest",
       "coffee-script": "latest",
-      "jshint": "0.9.0",
+      "jshint": "2.1.0",
       "cucumber": "latest"
     },
     "dependencies": {
@@ -40,7 +40,7 @@
     },
     "licenses": [{
         "type": "Apache 2.0",
-        "url": "http://github.com/aws/aws-sdk-js/raw/master/LICENSE"
+        "url": "http://github.com/aws/aws-sdk-js/raw/master/LICENSE.txt"
     }],
     "keywords": [
         "api", "amazon","aws","ec2","simpledb","s3","sqs","ses","sns","route53","rds","elasticache","cloudfront","fps",

@@ -25,7 +25,7 @@ Feature: SQS Queues
     Then I delete the SQS queue
 
   Scenario: Making a queue request across regions
-    Given I have a "SQS" client in the "us-west-1" region
+    Given I have a "SQS" service in the "us-west-1" region
     And I create a queue with the prefix name "aws-js-sdk"
-    When I have a "SQS" client in the "us-east-1" region
+    When I have a "SQS" service in the "us-east-1" region
     Then I delete the SQS queue

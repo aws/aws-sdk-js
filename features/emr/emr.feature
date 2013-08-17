@@ -26,4 +26,4 @@ Feature: Amazon Elastic MapReduce
 
   Scenario: Error handling
     Given I run an EMR job flow with invalid parameters
-    Then the error code should be "ValidationError"
+    Then the error code should be "ValidationException"

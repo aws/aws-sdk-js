@@ -2,6 +2,13 @@
 
 # Making Requests
 
+A "request" to an AWS service includes the full request and response lifecycle
+of a call to an operation on a service object, including any retries that are
+transparently attempted on your behalf. A request is encapsulated in the SDK by
+the `AWS.Request` object. The semantics of a request are described below,
+specifically, the support for callbacks, events, and streaming of raw HTTP
+response data.
+
 ## Asynchronous Callbacks
 
 All requests made through the SDK are asynchronous and use a
@@ -14,7 +21,7 @@ For example, the following service method can be called with
 a standard callback to retrieve the response data or error:
 
 ```js
-new AWS.EC2().client.describeInstances(function(error, data) {
+new AWS.EC2().describeInstances(function(error, data) {
   if (error) {
     console.log(error); // an error occurred
   } else {
@@ -32,7 +39,7 @@ the `send()` method:
 
 ```js
 // create the AWS.Request object
-var request = new AWS.EC2().client.describeInstances();
+var request = new AWS.EC2().describeInstances();
 
 // register a callback to report on the data
 request.on('success', function(resp) {
@@ -99,13 +106,13 @@ s3.getObject({Bucket: 'bucket', Key: 'key'}).on('success', function(response) {
 ### Simplified Callback Method
 
 Each operation supports a simplified callback that can be passed as the last
-parameter to any low-level client operation. The callback function should
+parameter to any service operation. The callback function should
 accept an `error` parameter, followed by the `data` from the response.
 
 For example:
 
 ```js
-s3.client.listBuckets(function(error, data) {
+s3.listBuckets(function(error, data) {
   if (err) {
     console.log(error); // error is Response.error
   } else {
@@ -132,7 +139,7 @@ If you are passing parameters to the operation, the callback should be placed
 after the parameters:
 
 ```
-s3.client.getObject({Bucket: 'bucket', Key: 'key'}, function(err, data) {
+s3.getObject({Bucket: 'bucket', Key: 'key'}, function(err, data) {
   // ...
 });
 ```
@@ -140,7 +147,7 @@ s3.client.getObject({Bucket: 'bucket', Key: 'key'}, function(err, data) {
 ### AWS.Request Events
 
 You can alternatively register callbacks on events provided by the
-`AWS.Request` object returned by each low-level client operation method.
+`AWS.Request` object returned by each service operation method.
 This request object exposes the `success`, `error`, `complete`, and `httpData`
 events, each taking a callback that accepts the response object.
 
@@ -148,7 +155,11 @@ Note that if you omit the simplified callback parameter on the operation
 method, you must call `send()` on the returned request object in order to
 kick off the request to the remote server.
 
-#### `on('success', function(response) { ... })`
+#### Event: 'success'
+
+```js
+req.on('success', function(response) { ... });
+```
 
 This event triggers when a successful response
 from the server is returned. The response contains a `.data` field
@@ -157,7 +168,7 @@ with the serialized response data from the service.
 For example:
 
 ```js
-s3.client.listBuckets().done(function(response) {
+s3.listBuckets().done(function(response) {
   console.log(response.data);
 }).send();
 ```
@@ -172,7 +183,11 @@ Prints:
   RequestId: '...' }
 ```
 
-#### `on('error', function(error, response) { ... })`
+#### Event: 'error'
+
+```js
+req.on('error', function(error, response) { ... });
+```
 
 The `error` event works similarly to the `success` event, except that it
 triggers in the case of a request failure. In this case, `response.data`
@@ -182,7 +197,7 @@ as the first parameter to the event:
 
 ```js
 s3.config.credentials.accessKeyId = 'invalid';
-s3.client.listBuckets().fail(function(error, response) {
+s3.listBuckets().fail(function(error, response) {
   console.log(error);
   // or:
   console.log(response.error);
@@ -195,7 +210,11 @@ Prints:
 { code: 'Forbidden', message: null }
 ```
 
-#### `on('complete', function(response) { ... })`
+#### Event: 'complete'
+
+```js
+req.on('complete', function(response) { ... });
+```
 
 The `complete` event triggers a callback in any final state of a request, i.e.,
 both `success` and `error`. Use this callback to handle any request cleanup
@@ -214,7 +233,11 @@ request.on('complete', function(response) {
 }).send();
 ```
 
-#### `on('httpData', function(chunk, response) { ... })`
+#### Event: 'httpData'
+
+```js
+req.on('httpData', function(chunk, response) { ... });
+```
 
 <p class="note">If you register a <code>httpData</code> callback,
   <code>response.data</code> will still contain serialized output
@@ -254,3 +277,33 @@ request.
 
 The above example will print either "Success! Always!", or "Error! Always!",
 depending on whether the request succeeded or not.
+
+## Streaming Requests
+
+It is possible to stream a request directly to a Node.js Stream object by
+calling the `createReadStream()` method on a request. This returns a wrapper
+to the raw HTTP stream used to manage the request, and this data can be piped
+into any other Node.js stream. This is mostly useful for service operations
+that return raw data in the payload, like Amazon S3's `getObject` operation,
+which can be used to stream data directly into a file with this functionality:
+
+```js
+var s3 = new AWS.S3();
+var params = {Bucket: 'myBucket', Key: 'myImageFile.jpg'};
+var file = require('fs').createWriteStream('/path/to/file.jpg');
+s3.getObject(params).createReadStream().pipe(file);
+```
+
+The stream object can be used interchangeably as any other Node.js readable
+Stream object.
+
+### Limitations of Streaming
+
+When streaming data from a request using `createReadStream()`, only the raw
+HTTP data will be returned (the SDK will not do any post-processing on the
+data). Additionally, if the request initially succeeds, retry logic will be
+disabled for the rest of the response due to Node.js inability to rewind most
+streams. This means that in the event of a socket failure in the middle of a
+connection, the SDK will not attempt to retry and send more data to the stream.
+It will be your responsibility to manage this logic in your library or
+application.

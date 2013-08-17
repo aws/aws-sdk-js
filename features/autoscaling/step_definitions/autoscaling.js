@@ -15,7 +15,7 @@
 
 module.exports = function() {
   this.Before("@autoscaling", function (callback) {
-    this.client = new this.AWS.AutoScaling.Client();
+    this.service = new this.AWS.AutoScaling.Client();
     callback();
   });
 

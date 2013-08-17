@@ -29,14 +29,14 @@ function customEval(cmd, context, filename, callback) {
       return;
     }
     
-    // poor man's Request check
-    if (value && value.client && value.client.with && value.send) {
+    if (value && value.constructor === AWS.Request) {
       if (!value.__hasBeenSent__) {
         value.__hasBeenSent__ = true;
         try {
           value.on('complete', function consoleDataExtraction(resp) {
             context.data = resp.data;
             context.error = resp.error;
+            callback(resp.error, resp.data);
           });
           context.request = value;
           context.data = null;
@@ -47,14 +47,20 @@ function customEval(cmd, context, filename, callback) {
           return;
         }
       }
+    } else {
+      callback(null, value);
     }
-
-    callback(null, value);
   });
 }
 
-repl.context.AWS = require('../lib/core');
+var AWS = repl.context.AWS = require('../lib/aws');
 repl.eval = customEval;
+
+// context variables
+repl.context.data = null;
+repl.context.error = null;
+repl.context.request = null;
+repl.context.response = null;
 
 // custom logger
 repl.context.AWS.events.on('send', function (resp) {
@@ -64,29 +70,22 @@ repl.context.AWS.events.on('send', function (resp) {
       status = resp.httpResponse.statusCode,
       params = require('util').inspect(this.params, true, true);
 
-  console.log('\n\x1B[33m[AWS', this.client.api.serviceName, status,
+  console.log('\x1B[33m[AWS', this.service.serviceIdentifier, status,
     (time-resp.requestStarted)/1000, resp.retryCount + ' retries]\x1B[0;1m',
     this.operation + '(' + params + ')\x1B[0m');
-  process.stdout.write(repl.prompt);
 });
 
 // setup REPL history
 replHistory(repl, process.env.HOME + '/.node_history');
 
 // load services as defined instances
-require('fs').readdirSync(__dirname + '/../lib/services').forEach(function(file) {
-  if (file.match(/\.api\./)) return;
-  if (!file.match(/\.js$/)) return;
-  var klass = require('../lib/services/' + file),
-      svc = file.replace(".js", ""),
-      client = new klass(defaultOptions).client;
-
-  // Creates new client instances with custom options
-  client.with = function(options) {
-    return new this.constructor(
-      repl.context.AWS.util.merge(this.config, options));
-  };
-
-  repl.context[svc] = client;
-});
-
+for (var key in AWS) {
+  if (AWS[key].serviceIdentifier) {
+    var svcClass = AWS[key];
+    var svc = new svcClass(defaultOptions);
+    svc.with = function(config) {
+      return new this.constructor.__super__(AWS.util.merge(this.config, config));
+    };
+    repl.context[svcClass.serviceIdentifier] = svc;
+  }
+}

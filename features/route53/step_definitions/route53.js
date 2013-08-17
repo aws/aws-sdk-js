@@ -15,7 +15,7 @@
 
 module.exports = function() {
   this.Before("@route53", function (callback) {
-    this.client = new this.AWS.Route53.Client();
+    this.service = new this.AWS.Route53.Client();
     callback();
   });
 

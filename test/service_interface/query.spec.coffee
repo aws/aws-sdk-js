@@ -16,13 +16,13 @@ Buffer = require('buffer').Buffer
 require('../../lib/service_interface/query')
 
 describe 'AWS.ServiceInterface.Query', ->
-  client = null
+  service = null
   request = null
   response = null
   svc = eval(@description)
 
   beforeEach ->
-    MockQueryClient = AWS.Client.defineClient
+    service = new AWS.Service apiConfig:
       endpointPrefix: 'mockservice'
       apiVersion: '2012-01-01'
       operations:
@@ -43,11 +43,12 @@ describe 'AWS.ServiceInterface.Query', ->
                   Count:
                     type: 'float'
 
-    client = new MockQueryClient({region:'region'})
-    request = new AWS.Request(client, 'operationName')
+    request = new AWS.Request(service, 'operationName')
     response = new AWS.Response(request)
 
   describe 'buildRequest', ->
+    stringify = (params) -> AWS.util.queryParamsToString(params)
+
     buildRequest = (input) ->
       if input == undefined
         input = 'foo+bar: yuck/baz=~'
@@ -69,22 +70,22 @@ describe 'AWS.ServiceInterface.Query', ->
 
     it 'should add the api version param', ->
       buildRequest()
-      expect(request.httpRequest.params.toString()).
+      expect(stringify(request.httpRequest.params)).
         toMatch(/Version=2012-01-01/)
 
     it 'should add the operation name as Action', ->
       buildRequest()
-      expect(request.httpRequest.params.toString()).
+      expect(stringify(request.httpRequest.params)).
         toMatch(/Action=OperationName/)
 
     it 'should uri encode params properly', ->
       buildRequest()
-      expect(request.httpRequest.params.toString()).
+      expect(stringify(request.httpRequest.params)).
         toMatch(/foo%2Bbar%3A%20yuck%2Fbaz%3D~/);
 
     it 'encodes empty string values properly', ->
       buildRequest('')
-      expect(request.httpRequest.params.toString()).
+      expect(stringify(request.httpRequest.params)).
         toMatch(/Input=($|&)/);
 
   describe 'extractError', ->
@@ -161,7 +162,7 @@ describe 'AWS.ServiceInterface.Query', ->
       expect(response.data).toEqual({Data:{Name:'abc',Count:123}})
 
     it 'performs default xml parsing when output rule is missing', ->
-      delete client.api.operations.operationName.output
+      delete service.api.operations.operationName.output
       extractData """
       <xml>
         <Data>
@@ -174,7 +175,7 @@ describe 'AWS.ServiceInterface.Query', ->
       expect(response.data).toEqual({Data:{Name:'abc',Count:'123'}})
 
     it 'removes wrapping result element if resultWrapped is set', ->
-      client.api.resultWrapped = true
+      service.api.resultWrapped = true
       extractData """
       <xml>
         <OperationNameResult>
@@ -189,7 +190,7 @@ describe 'AWS.ServiceInterface.Query', ->
       expect(response.data).toEqual({Data:{Name:'abc',Count:12345.5}})
 
     it 'does not fail if wrapping element is not present (resultWrapped=true)', ->
-      client.api.resultWrapped = true
+      service.api.resultWrapped = true
       extractData """
       <xml>
         <NotWrapped><Data>abc</Data></NotWrapped>

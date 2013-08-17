@@ -48,6 +48,29 @@ describe 'uriEscapePath', ->
     s = '/ab cd/'
     expect(e(s)).toEqual('/ab%20cd/')
 
+describe 'AWS.util.queryParamsToString', ->
+  qpts = AWS.util.queryParamsToString
+
+  it 'sorts query parameters before stringifying', ->
+    expect(qpts(c: '1', b: '2', a: '3')).toEqual('a=3&b=2&c=1')
+
+  it 'handles empty values', ->
+    expect(qpts(a: '', b: '2')).toEqual('a=&b=2')
+
+  it 'handles null/undefined values', ->
+    expect(qpts(a: undefined, b: null)).toEqual('a&b')
+
+  it 'calls uriEscape on each name and value', ->
+    spy = spyOn(AWS.util, 'uriEscape').andCallThrough()
+    qpts(c: '1', b: '2', a: '3')
+    expect(spy.calls.length).toEqual(6)
+
+  it 'handles values as lists', ->
+    expect(qpts(a: ['1', '2', '3'], b: '4')).toEqual('a=1&a=2&a=3&b=4')
+
+  it 'escapes list values', ->
+    expect(qpts(a: ['+', '&', '*'], b: '4')).toEqual('a=%26&a=%2A&a=%2B&b=4')
+
 describe 'AWS.util.date', ->
 
   util = AWS.util.date
@@ -107,6 +130,7 @@ describe 'AWS.util.string', ->
       file = fs.createReadStream(__filename)
       fileLen = fs.lstatSync(file.path).size
       expect(len(file)).toEqual(fileLen)
+      expect(len(path: __filename)).toEqual(fileLen)
 
     it 'fails if input is not a string, buffer, or file', ->
       err = null
@@ -117,6 +141,17 @@ describe 'AWS.util.string', ->
 
       expect(err.message).toEqual('Cannot determine length of 3.14')
       expect(err.object).toBe(3.14)
+
+    it 'ignores path property unless it is a string', ->
+      object = {}
+      err = null
+      try
+        len(object)
+      catch e
+        err = e
+
+      expect(err.message).toMatch(/Cannot determine length of /)
+      expect(err.object).toBe(object)
 
 describe 'AWS.util.buffer', ->
   describe 'concat', ->
@@ -391,6 +426,55 @@ describe 'AWS.util.base64', ->
       expect(base64.encode('ёŝ')).toEqual('0ZHFnQ==')
 
   describe 'decode', ->
-    it 'encodes the given string', ->
+    it 'decodes the given string', ->
       expect(base64.decode('Zm9v')).toEqual('foo')
       expect(base64.decode('0ZHFnQ==')).toEqual('ёŝ')
+
+describe 'AWS.util.jamespath', ->
+  query = AWS.util.jamespath.query
+  find = AWS.util.jamespath.find
+
+  describe 'query', ->
+    it 'can find a toplevel element of a data structure', ->
+      expect(query('foo', foo: 'value')).toEqual(['value'])
+
+    it 'can find a nested element of a data structure', ->
+      expect(query('foo.bar.baz', foo: bar: baz: 'value')).toEqual(['value'])
+
+    it 'can index an element (positive and negative indexes)', ->
+      data = foo: bar: [{baz: 'wrong'}, {baz: 'right'}, {baz: 'wrong'}]
+      expect(query('foo.bar[1].baz', data)).toEqual(['right'])
+      expect(query('foo.bar[-2].baz', data)).toEqual(['right'])
+
+    it 'can index an element with wildcard', ->
+      data = foo: bar: [{baz: 'wrong'}, {baz: 'right'}, {baz: 'wrong'}]
+      expect(query('foo.bar[*].baz', data)).toEqual(['wrong', 'right', 'wrong'])
+
+    it 'returns empty array if element is not found', ->
+      data = foo: notBar: baz: 'value'
+      expect(query('foo.bar.baz', data)).toEqual([])
+
+    it 'allows multiple expressions to be ORed', ->
+      data = foo: {key1: 'wrong'}, bar: {key2: 'right'}
+      expect(query('foo.key2 or bar.key2', data)).toEqual(['right'])
+
+    it 'returns multiple matches if a wildcard is used', ->
+      data = foo:
+        child1: bar: 'value1'
+        child2: bar: 'value2'
+        child3: bar: 'value3'
+      expect(query('foo.*.bar', data)).toEqual(['value1', 'value2', 'value3'])
+
+    it 'can support wildcard on both token and index', ->
+      data = foo:
+        child1: ['value1', 'value2']
+        child2: ['value3']
+        child4: 'notarray'
+      expect(query('foo.*[*]', data)).toEqual(['value1', 'value2', 'value3'])
+
+  describe 'find', ->
+    it 'returns the first match of query', ->
+      expect(find('foo.*', foo: bar: 1, baz: 2)).toEqual(1)
+
+    it 'returns null if no match is found', ->
+      expect(find('invalid.*', foo: bar: 1, baz: 2)).toEqual(null)

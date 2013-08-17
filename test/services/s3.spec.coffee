@@ -18,19 +18,19 @@ Buffer = require('buffer').Buffer
 
 require('../../lib/services/s3')
 
-describe 'AWS.S3.Client', ->
+describe 'AWS.S3', ->
 
   s3 = null
   oldRegion = null
   request = (operation, params) ->
     req = new AWS.Request(s3, operation, params || {})
-    req.client.addAllRequestListeners(req)
+    req.service.addAllRequestListeners(req)
     req
 
   beforeEach ->
     oldRegion = AWS.config.region
     AWS.config.update(region: undefined) # use global region
-    s3 = new AWS.S3.Client()
+    s3 = new AWS.S3()
 
   afterEach ->
     AWS.config.update(region: oldRegion)
@@ -69,19 +69,19 @@ describe 'AWS.S3.Client', ->
   describe 'endpoint', ->
 
     it 'sets hostname to s3.amazonaws.com when region is un-specified', ->
-      s3 = new AWS.S3.Client()
+      s3 = new AWS.S3()
       expect(s3.endpoint.hostname).toEqual('s3.amazonaws.com')
 
     it 'sets hostname to s3.amazonaws.com when region is us-east-1', ->
-      s3 = new AWS.S3.Client({ region: 'us-east-1' })
+      s3 = new AWS.S3({ region: 'us-east-1' })
       expect(s3.endpoint.hostname).toEqual('s3.amazonaws.com')
 
     it 'sets region to us-east-1 when unspecified', ->
-      s3 = new AWS.S3.Client({ region: 'us-east-1' })
+      s3 = new AWS.S3({ region: 'us-east-1' })
       expect(s3.config.region).toEqual('us-east-1')
 
     it 'combines the region with s3 in the endpoint using a - instead of .', ->
-      s3 = new AWS.S3.Client({ region: 'us-west-1' })
+      s3 = new AWS.S3({ region: 'us-west-1' })
       expect(s3.endpoint.hostname).toEqual('s3-us-west-1.amazonaws.com')
 
   describe 'building a request', ->
@@ -92,7 +92,7 @@ describe 'AWS.S3.Client', ->
 
     it 'obeys the configuration for s3ForcePathStyle', ->
       config = new AWS.Config({s3ForcePathStyle: true })
-      s3 = new AWS.S3.Client(config)
+      s3 = new AWS.S3(config)
       expect(s3.config.s3ForcePathStyle).toEqual(true)
       req = build('headObject', {Bucket:'bucket', Key:'key'})
       expect(req.endpoint.hostname).toEqual('s3.amazonaws.com')
@@ -124,7 +124,7 @@ describe 'AWS.S3.Client', ->
       describe 'HTTPS', ->
 
         beforeEach ->
-          s3 = new AWS.S3.Client({ sslEnabled: true })
+          s3 = new AWS.S3({ sslEnabled: true })
 
         it 'puts dns-compat bucket names in the hostname', ->
           req = build('headObject', {Bucket:'bucket-name',Key:'abc'})
@@ -143,7 +143,7 @@ describe 'AWS.S3.Client', ->
           expect(req.path).toEqual('/bucket.name')
 
         it 'puts dns-compat bucket names in path if configured to do so', ->
-          s3 = new AWS.S3.Client({ sslEnabled: true, s3ForcePathStyle: true })
+          s3 = new AWS.S3({ sslEnabled: true, s3ForcePathStyle: true })
           req = build('listObjects', {Bucket:'bucket-name'})
           expect(req.endpoint.hostname).toEqual('s3.amazonaws.com')
           expect(req.path).toEqual('/bucket-name')
@@ -156,7 +156,7 @@ describe 'AWS.S3.Client', ->
       describe 'HTTP', ->
 
         beforeEach ->
-          s3 = new AWS.S3.Client({ sslEnabled: false })
+          s3 = new AWS.S3({ sslEnabled: false })
 
         it 'puts dns-compat bucket names in the hostname', ->
           req = build('listObjects', {Bucket:'bucket-name'})
@@ -173,7 +173,7 @@ describe 'AWS.S3.Client', ->
           expect(req.endpoint.hostname).toEqual('s3.amazonaws.com')
           expect(req.path).toEqual('/bucket_name')
 
-  # S3.Client returns a handful of errors without xml bodies (to match the
+  # S3 returns a handful of errors without xml bodies (to match the
   # http spec) these tests ensure we give meaningful codes/messages for these.
   describe 'errors with no XML body', ->
 
@@ -397,7 +397,7 @@ describe 'AWS.S3.Client', ->
   describe 'createBucket', ->
     it 'auto-populates the LocationConstraint based on the region', ->
       loc = null
-      s3 = new AWS.S3.Client(region:'eu-west-1')
+      s3 = new AWS.S3(region:'eu-west-1')
       s3.makeRequest = (op, params) ->
         loc = params.CreateBucketConfiguration.LocationConstraint
       s3.createBucket(Bucket:'name')
@@ -405,7 +405,7 @@ describe 'AWS.S3.Client', ->
 
     it 'correctly builds the xml', ->
 
-  AWS.util.each AWS.S3.Client.prototype.computableChecksumOperations, (operation) ->
+  AWS.util.each AWS.S3.prototype.computableChecksumOperations, (operation) ->
     describe operation, ->
       it 'forces Content-MD5 header parameter', ->
         helpers.mockHttpResponse 200, {}, ''
@@ -419,7 +419,7 @@ describe 'AWS.S3.Client', ->
 
     willCompute = (operation, opts) ->
       compute = opts.computeChecksums
-      s3 = new AWS.S3.Client(computeChecksums: compute)
+      s3 = new AWS.S3(computeChecksums: compute)
       resp = s3.makeRequest(operation, Bucket: 'example', ContentMD5: opts.hash).send()
       checksum = resp.request.httpRequest.headers['Content-MD5']
       if opts.hash != undefined
@@ -447,9 +447,50 @@ describe 'AWS.S3.Client', ->
       willCompute 'putBucketAcl', computeChecksums: true, hash: '000'
 
     it 'does not compute checksums for Stream objects', ->
-      s3 = new AWS.S3.Client(computeChecksums: true)
+      s3 = new AWS.S3(computeChecksums: true)
       resp = s3.putObject(Bucket: 'example', Key: 'foo', Body: new Stream).send()
       expect(resp.request.httpRequest.headers['Content-MD5']).toEqual(undefined)
 
     it 'computes checksums if computeChecksums is on and ContentMD5 is not provided',->
       willCompute 'putBucketAcl', computeChecksums: true
+
+  describe 'getSignedUrl', ->
+    date = null
+    beforeEach ->
+      date = AWS.util.date.getDate
+      AWS.util.date.getDate = -> new Date(0)
+    afterEach ->
+      AWS.util.date.getDate = date
+
+    it 'gets a signed URL for getObject', ->
+      url = s3.getSignedUrl('getObject', Bucket: 'bucket', Key: 'key')
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=uefzBaGpqvO9QhGtT%2BbYda0pgQY%3D')
+
+    it 'gets a signed URL with Expires time', ->
+      url = s3.getSignedUrl('getObject', Bucket: 'bucket', Key: 'key', Expires: 60)
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=60&Signature=ZJKBOuhI99B2OZdkGSOmfG86BOI%3D')
+
+    it 'gets a signed URL with expiration and bound bucket parameters', ->
+      s3 = new AWS.S3(paramValidation: true, params: Bucket: 'bucket')
+      url = s3.getSignedUrl('getObject', Key: 'key', Expires: 60)
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=60&Signature=ZJKBOuhI99B2OZdkGSOmfG86BOI%3D')
+
+    it 'gets a signed URL with callback', ->
+      url = null
+      runs ->
+        s3.getSignedUrl 'getObject', Bucket: 'bucket', Key: 'key', (err, value) -> url = value
+      waitsFor -> url
+      runs ->
+        expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=uefzBaGpqvO9QhGtT%2BbYda0pgQY%3D')
+
+    it 'gets a signed URL for putObject with no body', ->
+      url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key')
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=h%2FphNvPoGxx9qq2U7Zhbfqgi0Xs%3D')
+
+    it 'gets a signed URL for putObject with a body (and checksum)', ->
+      url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', Body: 'body')
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Content-MD5=hBotaJrYa9FhFEdFPCLG%2FA%3D%3D&Expires=900&Signature=7%2BXiHEwB%2B3nSg2rhTyatSigkGPI%3D')
+
+    it 'gets a signed URL and appends to existing query parameters', ->
+      url = s3.getSignedUrl('listObjects', Bucket: 'bucket', Prefix: 'prefix')
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/?prefix=prefix&AWSAccessKeyId=akid&Expires=900&Signature=fWeCHJBop4LyDXm2%2F%2BvR%2BqzH5zk%3D')

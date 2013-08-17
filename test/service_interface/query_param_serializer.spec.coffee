@@ -217,6 +217,7 @@ describe 'AWS.QueryParamSerializer', ->
       rules =
         Attributes:
           type: 'map'
+          flattened: true
           keys: {}
           members: {}
       data = {Attributes:{Color:'red',Size:'large',Value:'low'}}
@@ -230,12 +231,31 @@ describe 'AWS.QueryParamSerializer', ->
         ['Attributes.3.value', 'low'],
       ])
 
+    describe 'non-flat', ->
+      it 'adds .entry. to name', ->
+        rules =
+          Attributes:
+            type: 'map'
+            keys: {}
+            members: {}
+        data = Attributes: Color: 'red', Size: 'large', Value: 'low'
+        params = serialize(data, rules)
+        expect(params).toEqual([
+          ['Attributes.entry.1.key', 'Color'],
+          ['Attributes.entry.1.value', 'red'],
+          ['Attributes.entry.2.key', 'Size'],
+          ['Attributes.entry.2.value', 'large'],
+          ['Attributes.entry.3.key', 'Value'],
+          ['Attributes.entry.3.value', 'low'],
+        ])
+
   describe 'maps with member names', ->
 
     it 'applies member name traits', ->
       rules =
         Attributes:
           type: 'map'
+          flattened: true
           keys:
             name: 'Name'
           members:
@@ -249,4 +269,22 @@ describe 'AWS.QueryParamSerializer', ->
         ['Attributes.2.Value', 'large'],
         ['Attributes.3.Name', 'Value'],
         ['Attributes.3.Value', 'low'],
+      ])
+
+  describe 'timestamps', ->
+
+    it 'serializes timestamp to iso8601 strings by default', ->
+      date = new Date()
+      rules = { Date: { type: 'timestamp' } }
+      params = serialize({ Date: date }, rules)
+      expect(params).toEqual([
+        ['Date', AWS.util.date.iso8601(date)],
+      ])
+
+    it 'obeys format options in the rules', ->
+      date = new Date()
+      rules = { Date: { type: 'timestamp', format: 'rfc822' } }
+      params = serialize({ Date: date }, rules)
+      expect(params).toEqual([
+        ['Date', AWS.util.date.rfc822(date)],
       ])

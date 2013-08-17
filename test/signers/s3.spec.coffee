@@ -40,7 +40,7 @@ describe 'AWS.Signers.S3', ->
     sessionToken = null
 
   buildRequest = () ->
-    req = new AWS.HttpRequest()
+    req = new AWS.HttpRequest('https://s3.amazonaws.com')
     req.method = method
     req.path = path
     req.headers = headers
@@ -79,12 +79,12 @@ describe 'AWS.Signers.S3', ->
     it 'omits the security token header when session token is blank', ->
       sessionToken = null
       req = addAuth()
-      expect(req.headers['X-Amz-Security-Token']).toEqual(undefined)
+      expect(req.headers['x-amz-security-token']).toEqual(undefined)
 
     it 'adds a security token header when session token available', ->
       sessionToken = 'session'
       req = addAuth()
-      expect(req.headers['X-Amz-Security-Token']).toEqual('session')
+      expect(req.headers['x-amz-security-token']).toEqual('session')
 
     it 'adds an Authorization header which contains akid and signature', ->
 

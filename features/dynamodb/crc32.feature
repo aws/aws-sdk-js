@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 # language: en
-@dynamodb @crc32
+@dynamodb @dynamodb-2011-12-05 @crc32
 Feature: CRC32 response validation
 
   Scenario: Retry on corrupted request

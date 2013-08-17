@@ -84,8 +84,76 @@ module.exports = function() {
     callback();
   });
 
-  this.Then(/^the lifecycle configuration should have transition storage class of "([^"]*)"$/, function(arg1, callback) {
-    this.assert.equal(this.data.Rules[0].Transition.StorageClass, 'GLACIER');
+  this.Then(/^the lifecycle configuration should have transition storage class of "([^"]*)"$/, function(value, callback) {
+    this.assert.equal(this.data.Rules[0].Transition.StorageClass, value);
+    callback();
+  });
+
+  this.When(/^I put a bucket CORS configuration$/, function(callback) {
+    var params = {
+      Bucket: this.bucket,
+      CORSConfiguration: {
+        CORSRules: [{
+          AllowedMethods: ['DELETE', 'POST', 'PUT'],
+          AllowedOrigins: ['http://example.com'],
+          AllowedHeaders: ['*'],
+          ExposeHeaders: ['x-amz-server-side-encryption'],
+          MaxAgeSeconds: 5000
+        }]
+      }
+    }
+    this.request('s3', 'putBucketCors', params, callback);
+  });
+
+  this.When(/^I get the bucket CORS configuration$/, function(callback) {
+    this.request('s3', 'getBucketCors', {Bucket: this.bucket}, callback);
+  });
+
+  this.Then(/^the AllowedMethods list should inclue "([^"]*)"$/, function(value, callback) {
+    this.assert.equal(this.data.CORSRules[0].AllowedMethods.sort().join(" "), "DELETE POST PUT");
+    callback();
+  });
+
+  this.Then(/^the AllowedOrigin value should equal "([^"]*)"$/, function(value, callback) {
+    this.assert.equal(this.data.CORSRules[0].AllowedOrigins[0], value);
+    callback();
+  });
+
+  this.Then(/^the AllowedHeader value should equal "([^"]*)"$/, function(value, callback) {
+    this.assert.equal(this.data.CORSRules[0].AllowedHeaders[0], value);
+    callback();
+  });
+
+  this.Then(/^the ExposeHeader value should equal "([^"]*)"$/, function(value, callback) {
+    this.assert.equal(this.data.CORSRules[0].ExposeHeaders[0], value);
+    callback();
+  });
+
+  this.Then(/^the MaxAgeSeconds value should equal (\d+)$/, function(value, callback) {
+    this.assert.equal(this.data.CORSRules[0].MaxAgeSeconds, parseInt(value));
+    callback();
+  });
+
+  this.When(/^I put a bucket tag with key "([^"]*)" and value "([^"]*)"$/, function(key, value, callback) {
+    var params = {
+      Bucket: this.bucket,
+      Tagging: {
+        TagSet: [
+          {Key: key, Value: value}
+        ]
+      }
+    };
+
+    this.request('s3', 'putBucketTagging', params, callback);
+  });
+
+  this.When(/^I get the bucket tagging$/, function(callback) {
+    this.request('s3', 'getBucketTagging', {Bucket: this.bucket}, callback);
+  });
+
+  this.Then(/^the first tag in the tag set should have key and value "([^"]*)", "([^"]*)"$/, function(key, value, callback) {
+    this.assert.equal(this.data.TagSet[0].Key, key);
+    this.assert.equal(this.data.TagSet[0].Value, value);
     callback();
   });
 };

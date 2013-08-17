@@ -17,23 +17,26 @@ require('../../lib/service_interface/json')
 
 describe 'AWS.ServiceInterface.Json', ->
 
-  MockJSONClient = AWS.util.inherit AWS.Client,
+  MockJSONClient = AWS.util.inherit AWS.Service,
     endpointPrefix: 'mockservice'
     api:
       targetPrefix: 'prefix'
       operations:
         operationName:
           name: 'OperationName'
+          input:
+            type: 'structure'
+            members: {}
 
-  AWS.Client.defineMethods(MockJSONClient)
+  AWS.Service.defineMethods(MockJSONClient)
 
   request = null
   response = null
   svc = eval(@description)
 
   beforeEach ->
-    client = new MockJSONClient(region: 'region')
-    request = new AWS.Request(client, 'operationName')
+    service = new MockJSONClient(region: 'region')
+    request = new AWS.Request(service, 'operationName')
     response = new AWS.Response(request)
 
   describe 'buildRequest', ->

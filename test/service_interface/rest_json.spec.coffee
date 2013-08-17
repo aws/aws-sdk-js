@@ -17,7 +17,7 @@ require('../../lib/service_interface/rest_json')
 
 describe 'AWS.ServiceInterface.RestJson', ->
 
-  MockJSONRESTClient = AWS.util.inherit AWS.Client,
+  MockJSONRESTService = AWS.util.inherit AWS.Service,
     endpointPrefix: 'mockservice'
 
   operation = null
@@ -26,7 +26,7 @@ describe 'AWS.ServiceInterface.RestJson', ->
   svc = eval(@description)
 
   beforeEach ->
-    MockJSONRESTClient.prototype.api =
+    MockJSONRESTService.prototype.api =
       operations:
         sampleOperation:
           http:
@@ -39,11 +39,11 @@ describe 'AWS.ServiceInterface.RestJson', ->
             type: 'structure'
             members: {}
 
-    AWS.Client.defineMethods(MockJSONRESTClient)
+    AWS.Service.defineMethods(MockJSONRESTService)
 
-    operation = MockJSONRESTClient.prototype.api.operations.sampleOperation
-    client = new MockJSONRESTClient(region: 'region')
-    request = new AWS.Request(client, 'sampleOperation')
+    operation = MockJSONRESTService.prototype.api.operations.sampleOperation
+    service = new MockJSONRESTService(region: 'region')
+    request = new AWS.Request(service, 'sampleOperation')
     response = new AWS.Response(request)
 
   describe 'buildRequest', ->

@@ -16,12 +16,12 @@
 module.exports = function() {
   this.Before("@importexport", function (callback) {
     this.s3 = new this.AWS.S3.Client();
-    this.client = new this.AWS.ImportExport.Client();
+    this.service = new this.AWS.ImportExport.Client();
     callback();
   });
 
   this.When(/^I create an (Import|Export) job with manifest:$/, function(type, manifest, callback) {
-    manifest = manifest.replace('{ACCESS_KEY_ID}', this.client.config.credentials.accessKeyId);
+    manifest = manifest.replace('{ACCESS_KEY_ID}', this.service.config.credentials.accessKeyId);
     manifest = manifest.replace('{BUCKET}', this.bucket);
     var params = {JobType: type, Manifest: manifest, ValidateOnly: false};
     this.request(null, 'createJob', params, callback, false);

@@ -23,10 +23,15 @@ Feature: Amazon Elastic Compute Cloud
     And the EC2 endpoint for "us-west-1" should be "ec2.us-west-1.amazonaws.com"
 
   Scenario: Error handling
-    Given I describe the EC2 instance "i-12345678"
-    Then the error code should be "InvalidInstanceID.NotFound"
+    Given I describe the EC2 instance ""
+    Then the error code should be "MissingParameter"
     And the error message should be:
     """
-    The instance ID 'i-12345678' does not exist
+    The request must contain the parameter InstanceId
     """
     And the status code should be 400
+
+  @pagination
+  Scenario: Paginating responses
+    Given I paginate the "describeReservedInstancesOfferings" operation with limit 20 and max pages 3
+    Then I should get 3 pages

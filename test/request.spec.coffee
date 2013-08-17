@@ -14,11 +14,58 @@
 helpers = require('./helpers')
 EventEmitter = require('events').EventEmitter
 AWS = helpers.AWS
-MockClient = helpers.MockClient
+MockService = helpers.MockService
 Buffer = require('buffer').Buffer
 
 describe 'AWS.Request', ->
-  client = new MockClient
+  service = null
+  beforeEach ->
+    service = new MockService
+
+  describe 'isPageable', ->
+    beforeEach ->
+      service = new AWS.Service apiConfig:
+        operations: mockMethod: input: {}, output: {}
+
+    it 'is pageable if it has a pagination config for the operation', ->
+      service.api.pagination =
+          mockMethod:
+            limitKey: 'Marker'
+
+      request = service.makeRequest('mockMethod')
+      expect(request.isPageable()).toEqual(true)
+
+    it 'is not pageable if the pagination config does not exist for the operation', ->
+      service.api.pagination = {}
+      expect(service.makeRequest('mockMethod').isPageable()).toEqual(false)
+
+    it 'is not pageable if the config does not exist for the service', ->
+      delete service.api.pagination
+      expect(service.makeRequest('mockMethod').isPageable()).toEqual(false)
+
+  describe 'send', ->
+    it 'accepts an optional callback', ->
+      error = null; data = null
+      helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
+      runs ->
+        service.makeRequest('mockMethod').send (e, d) -> data = d
+      waitsFor -> data
+      runs ->
+        expect(data).toEqual('FOOBARBAZQUX')
+
+  describe 'abort', ->
+    it 'allows aborting requests', ->
+      error = null; data = null
+      helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
+      runs ->
+        req = service.makeRequest('mockMethod')
+        req.send (e, d) -> error = e; data = d
+        req.abort()
+      waitsFor -> error || data
+      runs ->
+        expect(data).toEqual(null)
+        expect(error.code).toEqual('RequestAbortedError')
+        expect(error.message).toMatch(/aborted by user/)
 
   describe 'createReadStream', ->
     it 'streams data', ->
@@ -26,10 +73,56 @@ describe 'AWS.Request', ->
       helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
 
       runs ->
-        request = client.makeRequest('mockMethod')
+        request = service.makeRequest('mockMethod')
         s = request.createReadStream()
         s.on 'end', -> done = true
         s.on 'data', (c) -> data += c.toString()
+      waitsFor -> done == true
+      runs ->
+        expect(data).toEqual('FOOBARBAZQUX')
+
+    it 'streams2 data (readable event)', ->
+      if AWS.HttpClient.streamsApiVersion < 2
+        return
+
+      data = ''; done = false
+      helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
+
+      runs ->
+        request = service.makeRequest('mockMethod')
+        s = request.createReadStream()
+        s.on 'end', -> done = true
+        s.on 'readable', ->
+          try
+            chunk = s.read()
+            if chunk
+              data += chunk
+          catch e
+            console.log(e.stack)
+
+      waitsFor -> done == true
+      runs ->
+        expect(data).toEqual('FOOBARBAZQUX')
+
+    it 'streams2 data does not hang out while waiting response', ->
+      if AWS.HttpClient.streamsApiVersion < 2
+        return
+
+      data = ''; done = false
+      helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', null, null, 'BAZ', 'QUX']
+
+      runs ->
+        request = service.makeRequest('mockMethod')
+        s = request.createReadStream()
+        s.on 'end', -> done = true
+        s.on 'readable', ->
+          try
+            chunk = s.read()
+            if chunk
+              data += chunk
+          catch e
+            console.log(e.stack)
+
       waitsFor -> done == true
       runs ->
         expect(data).toEqual('FOOBARBAZQUX')
@@ -39,7 +132,7 @@ describe 'AWS.Request', ->
       helpers.mockHttpResponse 404, {}, ['No such file']
 
       runs ->
-        request = client.makeRequest('mockMethod')
+        request = service.makeRequest('mockMethod')
         s = request.createReadStream()
         s.on 'end', -> done = true
         s.on 'error', (e) -> error = e; done = true
@@ -54,7 +147,7 @@ describe 'AWS.Request', ->
       helpers.mockIntermittentFailureResponse 2, 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
 
       runs ->
-        request = client.makeRequest('mockMethod')
+        request = service.makeRequest('mockMethod')
         s = request.createReadStream()
         s.on 'end', -> done = true
         s.on 'error', (e) -> error = e; done = true
@@ -67,7 +160,7 @@ describe 'AWS.Request', ->
     it 'streams partial data and raises an error', ->
       data = ''; error = null; reqError = null; done = false
       spyOn(AWS.HttpClient, 'getInstance')
-      AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb, errCb) ->
+      AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
         req = new EventEmitter()
         req.statusCode = 200
         req.headers = {}
@@ -77,7 +170,7 @@ describe 'AWS.Request', ->
         errCb new Error('fail')
 
       runs ->
-        request = client.makeRequest('mockMethod')
+        request = service.makeRequest('mockMethod')
         request.on 'error', (e) -> reqError = e
         request.on 'complete', -> done = true
         s = request.createReadStream()
@@ -93,7 +186,7 @@ describe 'AWS.Request', ->
       data = ''; error = null; reqError = null; resp = null
       retryCount = 0
       spyOn(AWS.HttpClient, 'getInstance')
-      AWS.HttpClient.getInstance.andReturn handleRequest: (req, cb, errCb) ->
+      AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
         req = new EventEmitter()
         req.statusCode = 200
         req.headers = {}
@@ -111,7 +204,7 @@ describe 'AWS.Request', ->
             process.nextTick -> req.emit('end')
 
       runs ->
-        request = client.makeRequest('mockMethod')
+        request = service.makeRequest('mockMethod')
         request.on 'error', (e) -> reqError = e
         request.on 'complete', (r) -> resp = r
         s = request.createReadStream()
@@ -122,4 +215,6 @@ describe 'AWS.Request', ->
         expect(data).toEqual('FOOBAR')
         expect(error.code).toEqual('NetworkingError')
         expect(reqError.code).toEqual('NetworkingError')
+        expect(reqError.hostname).toEqual('mockservice.mock-region.amazonaws.com')
+        expect(reqError.region).toEqual('mock-region')
         expect(resp.retryCount).toEqual(0)

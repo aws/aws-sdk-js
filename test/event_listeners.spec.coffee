@@ -13,13 +13,13 @@
 
 helpers = require('./helpers')
 AWS = helpers.AWS
-MockClient = helpers.MockClient
+MockService = helpers.MockService
 Buffer = require('buffer').Buffer
 
 describe 'AWS.EventListeners', ->
 
   oldSetTimeout = setTimeout
-  config = null; client = null; totalWaited = null; delays = []
+  config = null; service = null; totalWaited = null; delays = []
   successHandler = null; errorHandler = null; completeHandler = null
   retryHandler = null
 
@@ -33,8 +33,8 @@ describe 'AWS.EventListeners', ->
 
     totalWaited = 0
     delays = []
-    client = new MockClient(maxRetries: 3)
-    client.config.credentials = AWS.util.copy(client.config.credentials)
+    service = new MockService(maxRetries: 3)
+    service.config.credentials = AWS.util.copy(service.config.credentials)
 
     # Helpful handlers
     successHandler = jasmine.createSpy('success')
@@ -46,7 +46,7 @@ describe 'AWS.EventListeners', ->
   afterEach -> `setTimeout = oldSetTimeout`
 
   makeRequest = (callback) ->
-    request = client.makeRequest('mockMethod', foo: 'bar')
+    request = service.makeRequest('mockMethod', foo: 'bar')
     request.on('retry', retryHandler)
     request.on('error', errorHandler)
     request.on('success', successHandler)
@@ -68,15 +68,16 @@ describe 'AWS.EventListeners', ->
       expect(response.error).toEqual("ERROR")
 
     it 'sends error event if credentials are not set', ->
-      errorHandler = jasmine.createSpy()
+      errorHandler = jasmine.createSpy('errorHandler')
       request = makeRequest()
       request.on('error', errorHandler)
 
-      client.config.credentials.accessKeyId = null
+      service.config.credentialProvider = null
+      service.config.credentials.accessKeyId = null
       request.send()
 
-      client.config.credentials.accessKeyId = 'akid'
-      client.config.credentials.secretAccessKey = null
+      service.config.credentials.accessKeyId = 'akid'
+      service.config.credentials.secretAccessKey = null
       request.send()
 
       expect(errorHandler).toHaveBeenCalled()
@@ -86,7 +87,7 @@ describe 'AWS.EventListeners', ->
         expect(call.args[0].message).toMatch(/Missing credentials in config/)
 
     it 'sends error event if region is not set', ->
-      client.config.region = null
+      service.config.region = null
       request = makeRequest(->)
 
       call = errorHandler.calls[0]
@@ -145,13 +146,13 @@ describe 'AWS.EventListeners', ->
       expect(response.error).toEqual("ERROR")
 
     it 'uses the api.signingName if provided', ->
-      client.api.signingName = 'SIGNING_NAME'
+      service.api.signingName = 'SIGNING_NAME'
       spyOn(AWS.Signers.RequestSigner, 'getVersion').andCallFake ->
         (req, signingName) -> throw signingName
       request = makeRequest()
       response = request.send()
       expect(response.error).toEqual('SIGNING_NAME')
-      delete client.api.signingName
+      delete service.api.signingName
 
     it 'uses the api.endpointPrefix if signingName not provided', ->
       spyOn(AWS.Signers.RequestSigner, 'getVersion').andCallFake ->
@@ -159,6 +160,16 @@ describe 'AWS.EventListeners', ->
       request = makeRequest()
       response = request.send()
       expect(response.error).toEqual('mockservice')
+
+  describe 'send', ->
+    it 'passes httpOptions from config', ->
+      options = {}
+      spyOn(AWS.HttpClient, 'getInstance').andReturn handleRequest: (req, opts) ->
+        options = opts
+      service.config.httpOptions = timeout: 15
+      service.config.maxRetries = 0
+      makeRequest(->)
+      expect(options.timeout).toEqual(15)
 
   describe 'httpData', ->
     beforeEach ->
@@ -184,7 +195,7 @@ describe 'AWS.EventListeners', ->
   describe 'retry', ->
     it 'retries a request with a set maximum retries', ->
       sendHandler = jasmine.createSpy('send')
-      client.config.maxRetries = 10
+      service.config.maxRetries = 10
 
       # fail every request with a fake networking error
       helpers.mockHttpResponse
@@ -198,8 +209,8 @@ describe 'AWS.EventListeners', ->
       expect(errorHandler).toHaveBeenCalled()
       expect(completeHandler).toHaveBeenCalled()
       expect(successHandler).not.toHaveBeenCalled()
-      expect(response.retryCount).toEqual(client.config.maxRetries);
-      expect(sendHandler.calls.length).toEqual(client.config.maxRetries + 1)
+      expect(response.retryCount).toEqual(service.config.maxRetries);
+      expect(sendHandler.calls.length).toEqual(service.config.maxRetries + 1)
 
     it 'retries with falloff', ->
       helpers.mockHttpResponse
@@ -217,7 +228,7 @@ describe 'AWS.EventListeners', ->
           statusCode: 500
           retryable: true
         expect(@retryCount).
-          toEqual(client.config.maxRetries)
+          toEqual(service.config.maxRetries)
 
     it 'should not emit error if retried fewer than maxRetries', ->
       helpers.mockIntermittentFailureResponse 2, 200, {}, 'foo'
@@ -225,9 +236,56 @@ describe 'AWS.EventListeners', ->
       response = makeRequest(->)
 
       expect(totalWaited).toEqual(90)
-      expect(response.retryCount).toBeLessThan(client.config.maxRetries)
+      expect(response.retryCount).toBeLessThan(service.config.maxRetries)
       expect(response.data).toEqual('foo')
       expect(errorHandler).not.toHaveBeenCalled()
+
+    ['ExpiredToken', 'ExpiredTokenException', 'RequestExpired'].forEach (name) ->
+      it 'invalidates expired credentials and retries', ->
+        spyOn(AWS.HttpClient, 'getInstance')
+        AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
+          if req.headers.Authorization.match('Credential=INVALIDKEY')
+            helpers.mockHttpSuccessfulResponse 403, {}, name, cb
+          else
+            helpers.mockHttpSuccessfulResponse 200, {}, 'DATA', cb
+
+        creds =
+          numCalls: 0
+          expired: false
+          accessKeyId: 'INVALIDKEY'
+          secretAccessKey: 'INVALIDSECRET'
+          get: (cb) ->
+            if @expired
+              @numCalls += 1
+              @expired = false
+              @accessKeyId = 'VALIDKEY' + @numCalls
+              @secretAccessKey = 'VALIDSECRET' + @numCalls
+            cb()
+
+        service.config.credentials = creds
+
+        response = makeRequest(->)
+        expect(response.retryCount).toEqual(1)
+        expect(creds.accessKeyId).toEqual('VALIDKEY1')
+        expect(creds.secretAccessKey).toEqual('VALIDSECRET1')
+
+    [301, 307].forEach (code) ->
+      it 'attempts to redirect on ' + code + ' responses', ->
+        helpers.mockHttpResponse code, {location: 'http://redirected'}, ''
+        service.config.maxRetries = 0
+        service.config.maxRedirects = 5
+        response = makeRequest(->)
+        expect(response.request.httpRequest.endpoint.host).toEqual('redirected')
+        expect(response.error.retryable).toEqual(true)
+        expect(response.redirectCount).toEqual(service.config.maxRedirects)
+        expect(delays).toEqual([0, 0, 0, 0, 0])
+
+    it 'does not redirect if 3xx is missing location header', ->
+      helpers.mockHttpResponse 304, {}, ''
+      service.config.maxRetries = 0
+      response = makeRequest(->)
+      expect(response.request.httpRequest.endpoint.host).not.toEqual('redirected')
+      expect(response.error.retryable).toEqual(false)
 
   describe 'success', ->
     it 'emits success on a successful response', ->
@@ -272,11 +330,81 @@ describe 'AWS.EventListeners', ->
       expect(errorHandler).toHaveBeenCalled()
       expect(completeHandler).toHaveBeenCalled()
 
-    it 'catches exceptions raised from error event', ->
-      helpers.mockHttpResponse 500, {}, []
-      request = makeRequest()
-      request.on 'error', ->
-        throw "ERROR"
-      response = request.send()
-      expect(completeHandler).toHaveBeenCalled()
-      expect(response.error).toBe("ERROR")
+  describe 'terminal callback error handling', ->
+    beforeEach ->
+      spyOn(process, 'exit')
+      spyOn(console, 'error')
+
+    didError = ->
+      expect(console.error).toHaveBeenCalledWith('ERROR')
+      expect(process.exit).toHaveBeenCalledWith(1)
+
+    describe 'without domains', ->
+      it 'logs exceptions raised from success event and exits process', ->
+        helpers.mockHttpResponse 200, {}, []
+        request = makeRequest()
+        request.on 'success', -> throw "ERROR"
+        expect(-> request.send()).not.toThrow('ERROR')
+        expect(completeHandler).toHaveBeenCalled()
+        expect(retryHandler).not.toHaveBeenCalled()
+        didError()
+
+      it 'logs exceptions raised from complete event and exits process', ->
+        helpers.mockHttpResponse 200, {}, []
+        request = makeRequest()
+        request.on 'complete', -> throw "ERROR"
+        expect(-> request.send()).not.toThrow('ERROR')
+        expect(completeHandler).toHaveBeenCalled()
+        expect(retryHandler).not.toHaveBeenCalled()
+        didError()
+
+      it 'logs exceptions raised from error event and exits process', ->
+        helpers.mockHttpResponse 500, {}, []
+        request = makeRequest()
+        request.on 'error', -> throw "ERROR"
+        expect(-> request.send()).not.toThrow('ERROR')
+        expect(completeHandler).toHaveBeenCalled()
+        didError()
+
+    describe 'with domains', ->
+      it 'sends error raised from complete event to a domain', ->
+        result = false
+        d = require('domain').create()
+        if d.run
+          d.on('error', (e) -> result = e)
+          d.run ->
+            helpers.mockHttpResponse 200, {}, []
+            request = makeRequest()
+            request.on 'complete', -> throw "ERROR"
+            expect(-> request.send()).not.toThrow('ERROR')
+            expect(completeHandler).toHaveBeenCalled()
+            expect(retryHandler).not.toHaveBeenCalled()
+            expect(result).toEqual("ERROR")
+
+      it 'supports inner domains', ->
+        helpers.mockHttpResponse 200, {}, []
+
+        done = false
+        err = new Error()
+        gotOuterError = false
+        gotInnerError = false
+        Domain = require("domain")
+        outerDomain = Domain.create()
+        outerDomain.on 'error', (err) -> gotOuterError = true
+
+        if outerDomain.run
+          outerDomain.run ->
+            request = makeRequest()
+            innerDomain = Domain.create()
+            innerDomain.add(request)
+            innerDomain.on 'error', -> gotInnerError = true
+
+            runs ->
+              request.send ->
+                innerDomain.run -> done = true; throw err
+            waitsFor -> done
+            runs ->
+              expect(gotOuterError).toEqual(false)
+              expect(gotInnerError).toEqual(true)
+              expect(err.domainThrown).toEqual(false)
+              expect(err.domain).toEqual(innerDomain)

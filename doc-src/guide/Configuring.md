@@ -1,6 +1,6 @@
-# @title Configuring
+# @title Configuring the SDK
 
-# Configuration Guide
+# Configuring the SDK
 
 ## The Configuration Object
 
@@ -18,10 +18,13 @@ over your requests. Both of these configuration mechanisms are discussed.
 By default, you can set global configuration by updating the `AWS.config` object with
 new settings. The most common settings are:
 
-* `accessKeyId`, `secretAccessKey`, `sessionToken` &mdash; for credential management
-* `region` &mdash; to set the region for requests
-* `sslEnabled` &mdash; whether SSL is enabled or not
-* `maxRetries` &mdash; to control the number of retries for a request
+1. `accessKeyId`, `secretAccessKey`, `sessionToken` &mdash; for credential management
+2. `region` &mdash; to set the region for requests
+3. `sslEnabled` &mdash; whether SSL is enabled or not
+4. `maxRetries` &mdash; to control the number of retries for a request
+
+More configuration settings can be found in the
+[API reference documentation](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html).
 
 The only things you *need* to set in order to use the SDK are credentials and
 the region value. Let's discuss how to do that.
@@ -114,6 +117,56 @@ using `AWS.config.update()`:
 AWS.config.update({region: 'us-west-1'});
 ```
 
+### Locking API Versions
+
+<p class="note">For more information on API version locking in the SDK, see the
+{file:Services.md} section
+</p>
+
+You can globally configure a set of API versions to use for each service by
+specifying the `apiVersions` parameter in `AWS.config`. For example,
+you can choose to set specific versions of the DynamoDB and EC2 services,
+while selecting the "latest" version of Redshift:
+
+```js
+AWS.config.apiVersions = {
+  dynamodb: '2011-12-05',
+  ec2: '2013-02-01',
+  redshift: 'latest'
+}
+```
+
+Note that by default, the SDK will use the "latest" available API version
+when constructing a service.
+
+You can also lock all services at a specific point in time by using a "fuzzy
+version":
+
+```js
+// Try to use latest available APIs before this date
+AWS.config.apiVersion = '2012-05-04';
+```
+
+### Configuring a Proxy
+
+If you cannot connect to the internet directly, the SDK supports the use of
+HTTP or HTTPS proxies through global or per-service configuration options. To
+set a proxy, pass the `proxy` option to the `httpOptions` setting of your
+config object. This is how you could set a global proxy:
+
+```js
+AWS.config.update({
+  httpOptions: {
+    proxy: 'http://localhost:8080'
+  }
+});
+
+var s3 = new AWS.S3();
+s3.getObject({Bucket: 'bucket', Key: 'key'}, function (err, data) {
+  console.log(err, data);
+});
+```
+
 ## Service-Specific Configuration
 
 Occasionally, you might want to apply configuration only to one service.
@@ -136,7 +189,7 @@ the global configuration data at the time of creation. This means that any
 future updates to the global `AWS.config` object will *not* apply to existing
 service objects. These services would have to be manually updated with the new
 configuration data, or recreated using the following command (assuming an
-existing s3 service object):
+existing `s3` service object):
 
 ```js
 s3 = new AWS.S3(s3.config);

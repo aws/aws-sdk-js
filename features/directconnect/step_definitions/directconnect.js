@@ -15,7 +15,7 @@
 
 module.exports = function() {
   this.Before("@directconnect", function (callback) {
-    this.client = new this.AWS.DirectConnect.Client();
+    this.service = new this.AWS.DirectConnect.Client();
     callback();
   });
 
@@ -25,7 +25,7 @@ module.exports = function() {
 
   this.Given(/^I take the first offering ID$/, function(callback) {
     this.AWS.util.arrayEach.call(this, this.data.offerings, function(item) {
-      if (item.region === this.client.config.region) {
+      if (item.region === this.service.config.region) {
         this.offering = item;
         return this.AWS.util.abort;
       }

@@ -17,11 +17,11 @@ Buffer = require('buffer').Buffer
 
 require('../../lib/services/glacier')
 
-describe 'AWS.Glacier.Client', ->
+describe 'AWS.Glacier', ->
 
   glacier = null
   beforeEach ->
-    glacier = new AWS.Glacier.Client()
+    glacier = new AWS.Glacier()
 
   describe 'building requests', ->
     it 'sets accountId to "-" if not set', ->

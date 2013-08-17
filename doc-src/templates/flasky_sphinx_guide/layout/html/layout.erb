@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <% {:top => @topfile, :prev => @prevfile, :next => @nextfile}.each do |name, file| %>
+      <% if file %>
+        <link rel="<%= name %>" title="<%= file.title %>" href="<%= url_for(file) %>" />
+      <% end %>
+    <% end %>
+
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <%= erb(:headers) %>
+    <script type="text/javascript" charset="utf-8">
+      $(function() {
+        $('.object_link').each(function() {
+          $(this).html($(this).find('a').html())
+        });
+      });
+      $(function() {
+        generateTOC();
+        if ($('#toc li').size() == 0) {
+          $('#sidebar h2.toc').hide();
+        }
+      })
+    </script>
+    <script type="text/javascript" charset="utf-8">
+      hljs.initHighlightingOnLoad();
+    </script>
+  </head>
+  <body>
+    <div id="menu">
+      <div class="width-wrapper">
+          <div id="left-logo"><a href="<%= url_for(@topfile) %>">AWS SDK for Node.js</a></div>
+          <ul id="main-menu">
+              <li><a href="http://aws.amazon.com/sdkfornodejs">Homepage</a></li>
+              <li><a href="http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html">API Docs</a></li>
+              <li><a href="https://forums.aws.amazon.com/forum.jspa?forumID=148">Forum</a></li>
+              <li><a href="https://github.com/aws/aws-sdk-js/issues">Issues</a></li>
+              <li><a href="aws-sdk-javascript-dg.pdf">PDF</a></li>
+          </ul>
+          <div id="github-stars">
+              <iframe src="http://ghbtns.com/github-btn.html?user=aws&repo=aws-sdk-js&type=watch&count=true&size=small"
+                      allowtransparency="true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
+          </div>
+      </div>
+    </div>
+
+    <div id="indexwrapper">
+      <div class="related"></div>
+
+      <div class="document">
+        <div class="documentwrapper">
+          <div class="bodywrapper">
+            <div class="body">
+              <div class="section">
+                <%= yieldall %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sphinxsidebar">
+          <%= erb(:sidebar) %>
+        </div>
+
+        <div class="clearer"></div>
+      </div>
+
+      <% if options.files %>
+      <div id="footer-links" class="width-wrapper">
+        <%= link_file(@nextfile, "Next: #{@nextfile.title}") if @nextfile %>
+        <%= link_file(@prevfile, "Prev: #{@prevfile.title}") if @prevfile %>
+      </div>
+      <% end %>
+
+      <div class="related"></div>
+
+      <div class="footer">
+        <%= erb(:footer) %>
+      </div>
+    </div>
+  </body>
+</html>

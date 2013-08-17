@@ -15,9 +15,16 @@ AWS = require('../../lib/core')
 helpers = require('../helpers')
 require('../../lib/services/ec2')
 
-describe 'AWS.EC2.Client', ->
+describe 'AWS.EC2', ->
 
-  ec2 = new AWS.EC2.Client({region: 'us-east-1'})
+  ec2 = new AWS.EC2()
+
+  describe 'proxy support', ->
+    it 'always sets Host header to correct endpoint', ->
+      ec2 = new AWS.EC2(httpOptions: proxy: 'http://__INVALID_HOSTNAME__:9999')
+      ec2.makeRequest 'describeInstances', ->
+        expect(@request.httpRequest.headers.Host).
+          toEqual('ec2.mock-region.amazonaws.com')
 
   describe 'parseResponse', ->
     body = ''

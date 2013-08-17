@@ -39,11 +39,11 @@ AWS.config.loadFromPath('./path/to/credentials.json');
 // Set your region for future requests.
 AWS.config.update({region: 'us-east-1'});
 
-// Create a bucket and put something in it.
-var s3 = new AWS.S3();
-s3.client.createBucket({Bucket: 'myBucket'}, function() {
-  var data = {Bucket: 'myBucket', Key: 'myKey', Body: 'Hello!'};
-  s3.client.putObject(data, function(err, data) {
+// Create a bucket using bound parameters and put something in it.
+var s3bucket = new AWS.S3({params: {Bucket: 'myBucket'}});
+s3bucket.createBucket(function() {
+  var data = {Key: 'myKey', Body: 'Hello!'};
+  s3bucket.putObject(data, function(err, data) {
     if (err) {
       console.log("Error uploading data: ", err);
     } else {
@@ -82,7 +82,7 @@ The SDK currently supports the following services:
     </tr>
     <tr>
       <td>Amazon CloudFront</td>
-      <td>2012-05-05</td>
+      <td>2013-05-12<br>2012-05-05</td>
       <td>AWS.CloudFront</td>
     </tr>
     <tr>
@@ -107,7 +107,7 @@ The SDK currently supports the following services:
     </tr>
     <tr>
       <td>Amazon DynamoDB</td>
-      <td>2011-12-05</td>
+      <td>2012-08-10<br>2011-12-05</td>
       <td>AWS.DynamoDB</td>
     </tr>
     <tr>
@@ -166,8 +166,8 @@ The SDK currently supports the following services:
       <td>AWS.OpsWorks</td>
     </tr>
     <tr>
-      <td>Amazon Relational Database Service (Beta)</td>
-      <td>2012-07-31</td>
+      <td>Amazon Relational Database Service</td>
+      <td>2013-05-15<br>2013-02-12<br>2013-01-10</td>
       <td>AWS.RDS</td>
     </tr>
     <tr>
@@ -214,6 +214,11 @@ The SDK currently supports the following services:
       <td>AWS Security Token Service</td>
       <td>2011-06-15</td>
       <td>AWS.STS</td>
+    </tr>
+    <tr>
+      <td>AWS Support</td>
+      <td>2013-04-15</td>
+      <td>AWS.Support</td>
     </tr>
   </tbody>
 </table>

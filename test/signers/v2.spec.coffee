@@ -24,7 +24,7 @@ describe 'AWS.Signers.V2', ->
 
   buildRequest = ->
     request = new AWS.HttpRequest(new AWS.Endpoint('localhost'))
-    request.params = new AWS.QueryParamList()
+    request.params = {}
     request
 
   buildSigner = (request) ->
@@ -39,6 +39,8 @@ describe 'AWS.Signers.V2', ->
     date = new Date(1935346573456)
     signRequest(buildRequest())
 
+  stringify = AWS.util.queryParamsToString
+
   describe 'constructor', ->
 
     it 'builds a signer for a request object', ->
@@ -47,24 +49,24 @@ describe 'AWS.Signers.V2', ->
   describe 'addAuthorization', ->
 
     it 'adds a url encoded iso8601 timestamp param', ->
-      expect(request.params.toString()).toMatch(/Timestamp=2031-04-30T20%3A16%3A13.456Z/)
+      expect(stringify(request.params)).toMatch(/Timestamp=2031-04-30T20%3A16%3A13.456Z/)
 
     it 'adds a SignatureVersion param', ->
-      expect(request.params.toString()).toMatch(/SignatureVersion=2/)
+      expect(stringify(request.params)).toMatch(/SignatureVersion=2/)
 
     it 'adds a SignatureMethod param', ->
-      expect(request.params.toString()).toMatch(/SignatureMethod=HmacSHA256/)
+      expect(stringify(request.params)).toMatch(/SignatureMethod=HmacSHA256/)
 
     it 'adds an AWSAccessKeyId param', ->
-      expect(request.params.toString()).toMatch(/AWSAccessKeyId=akid/)
+      expect(stringify(request.params)).toMatch(/AWSAccessKeyId=akid/)
 
     it 'omits SecurityToken when sessionToken has been omitted', ->
-      expect(request.params.toString()).not.toMatch(/SecurityToken/)
+      expect(stringify(request.params)).not.toMatch(/SecurityToken/)
 
     it 'adds the SecurityToken when sessionToken is provided', ->
       credentials.sessionToken = 'session'
       signRequest(buildRequest())
-      expect(request.params.toString()).toMatch(/SecurityToken=session/)
+      expect(stringify(request.params)).toMatch(/SecurityToken=session/)
 
     it 'populates the body', ->
       expect(request.body).toEqual('AWSAccessKeyId=akid&Signature=%2FrumhWptMPvyb4aaeOv5iGpl6%2FLfs5uVHu8k1d3NNfc%3D&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2031-04-30T20%3A16%3A13.456Z')
@@ -74,8 +76,8 @@ describe 'AWS.Signers.V2', ->
 
     it 'signs additional body params', ->
       request = buildRequest()
-      request.params.add('Param.1', 'abc')
-      request.params.add('Param.2', 'xyz')
+      request.params['Param.1'] = 'abc'
+      request.params['Param.2'] = 'xyz'
       signRequest(request)
       expect(request.body).toEqual('AWSAccessKeyId=akid&Param.1=abc&Param.2=xyz&Signature=3pcXIWw0eVd4wFmp%2Blo24L93UTMGcYSNE%2BFYNNqzDts%3D&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2031-04-30T20%3A16%3A13.456Z')
 

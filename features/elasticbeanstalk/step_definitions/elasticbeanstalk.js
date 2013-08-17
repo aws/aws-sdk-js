@@ -15,7 +15,7 @@
 
 module.exports = function() {
   this.Before("@elasticbeanstalk", function (callback) {
-    this.client = new this.AWS.ElasticBeanstalk.Client();
+    this.service = new this.AWS.ElasticBeanstalk.Client();
     callback();
   });
 

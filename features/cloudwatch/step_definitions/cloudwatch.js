@@ -15,7 +15,7 @@
 
 module.exports = function() {
   this.Before("@cloudwatch", function (callback) {
-    this.client = new this.AWS.CloudWatch.Client();
+    this.service = new this.AWS.CloudWatch.Client();
     callback();
   });
 

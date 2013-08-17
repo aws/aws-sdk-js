@@ -1,0 +1,45 @@
+<p class="logo">
+  <a href="<%= url_for(@topfile) %>">
+    <img class="logo" src="img/logo.png" alt="Logo" height="63" />
+  </a>
+</p>
+
+<h3 class="toc-title">Table of Contents</h3>
+
+<div id="toc"></div>
+
+<h3>Related Topics</h3>
+
+<ul>
+<% if @topfile %>
+  <li><%= link_file(@topfile, "Documentation Overview") %></li>
+<% end %>
+  <ul>
+  <% if @prevfile %>
+    <li>Previous: <%= link_file(@prevfile) %></li>
+  <% end %>
+  <% if @nextfile %>
+    <li>Next: <%= link_file(@nextfile) %></li>
+  <% end %>
+  </ul>
+</ul>
+
+<% if @file %>
+<h3>Feedback</h3>
+<p class="feedback">Did you find this page useful? Do you have a suggestion? <a href="https://aws-portal.amazon.com/gp/aws/html-forms-controller/documentation/aws_doc_feedback_02?service_name=AWSSDKforJavaScript&guide_name=Guide&file_name=<%= @file.name %>">Give us feedback</a> or
+send us a <a href="https://github.com/aws/aws-sdk-js">pull request</a> on GitHub.</p>
+<% end %>
+
+<h3>Quick Search</h3>
+
+<form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
