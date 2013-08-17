@@ -14,6 +14,9 @@
  * language governing permissions and limitations under the License.
  */
 
+// find test -name "*.coffee" | xargs browserify --ignore domain --transform coffeeify > dist/tests.js
+// browserify --ignore domain lib/core.js lib/services/dynamodb.js lib/services/s3.js > dist/aws-sdk.js
+
 var browserify = require('browserify');
 var coffee = require('coffee-script');
 var through = require('through');
@@ -30,14 +33,20 @@ function addPaths(accumulator, paths, pwd) {
     if (fs.statSync(fullPath).isDirectory()) {
       addPaths(accumulator, fs.readdirSync(fullPath), fullPath);
     } else if (path.match(extMatch)) {
-      accumulator.push("require './" + fullPath.replace(extMatch, '') + "'");
+      accumulator.push('require "./' + fullPath + '"');
     }
   });
 }
 
 var files = [];
 var suiteFile = '_browserify_suite.coffee';
-var sdkFile = 'lib/aws.js';
+var sdkFiles = ['./lib/core'];
+var servicesFile = 'lib/service.js';
+var servicesFileData = fs.readFileSync(servicesFile);
+var services = {
+  dynamodb: ['2012-08-10'],
+  s3: ['2006-03-01']
+}
 var sdkDistFile = 'dist/aws-sdk.js';
 var testFile = 'dist/tests.js';
 var args = process.argv.slice(2);
@@ -46,25 +55,59 @@ if (args.length === 0) args = ['test'];
 addPaths(files, args);
 fs.writeFileSync(suiteFile, files.join('\n'));
 
-var b = browserify(['./' + suiteFile]);
+function buildTests() {
+  var b = browserify(['./' + suiteFile]);
+  b.ignore('domain');
+  b.transform(function (file) {
+    var data = '';
+    var compile = function(data) { return data; }
+    var write = function(buf) { data += buf; };
+    var end = function() { this.queue(compile(data)); this.queue(null); };
 
-b.transform(function (file) {
-  var data = '';
-  var compile = function(data) { return data; }
-  var write = function(buf) { data += buf; };
-  var end = function() { this.queue(compile(data)); this.queue(null); };
+    if (file.match(/\.coffee$/)) {
+      compile = function(data) { return coffee.compile(data); };
+    }
 
-  if (file.match(/\.coffee$/)) {
-    compile = function(data) { return coffee.compile(data); };
+    return through(write, end);
+  });
+
+  console.log("Building test package (lib/tests.js)...")
+  b.bundle().on('end', cleanupBuildTests).pipe(fs.createWriteStream(testFile));
+}
+
+function cleanupBuildTests() {
+  if (fs.existsSync(suiteFile)) {
+    fs.unlinkSync(suiteFile);
+  }
+}
+
+function buildSDK() {
+  var extraData = [servicesFileData.toString(), ''];
+
+  for (var service in services) {
+    sdkFiles.push('./lib/services/' + service);
+    services[service].forEach(function (version) {
+      extraData.push('require("./services/api/' + service + '-' + version + '");');
+    });
+    fs.writeFileSync(servicesFile, extraData.join('\n'));
+    console.log(extraData.join('\n'));
   }
 
-  return through(write, end);
+  console.log("Building SDK distributable (lib/aws-sdk.js)...")
+  browserify(sdkFiles).ignore('domain').bundle().
+    on('end', cleanupBuildSDK).
+    pipe(fs.createWriteStream(sdkDistFile));
+}
+
+function cleanupBuildSDK() {
+  fs.writeFileSync(servicesFile, servicesFileData);
+}
+
+require('domain').create().on('error', function (err) {
+  cleanupBuildTests();
+  cleanupBuildSDK();
+  throw err;
+}).run(function() {
+  buildTests();
+  buildSDK();
 });
-
-console.log("Building test package (lib/tests.js)...")
-b.bundle().on('end', function() {
-  fs.unlinkSync(suiteFile);
-}).pipe(fs.createWriteStream(testFile));
-
-console.log("Building SDK distributable (lib/aws-sdk.js)...")
-browserify(['./' + sdkFile]).bundle().pipe(fs.createWriteStream(sdkDistFile));
