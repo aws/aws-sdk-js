@@ -1,0 +1,13 @@
+{
+  "name": "aws-sdk-browser-builder",
+  "description": "AWS SDK for JavaScript browser building tools",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "browserify": "2.x",
+    "through": "2.x",
+    "uglify-js": "2.x",
+    "underscore": "1.x",
+    "express": "3.x"
+  }
+}
