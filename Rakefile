@@ -15,9 +15,38 @@ LOGLEVEL = ($DEBUG || ENV['DEBUG']) ? '' : '-s'
 
 task :default => 'test:all'
 
-desc 'Build dependencies'
-task :build do
+desc 'Install dependencies'
+task :setup do
   system "npm #{LOGLEVEL} install"
+end
+
+namespace :browser do
+  $BUILDER = "./dist-tools/browser-builder.js"
+  $BROWSERIFY_ARGS = "-i domain -t ./dist-tools/bundle-transform lib/aws.js"
+  $BROWSERIFY_DIST = "dist/aws-sdk.js"
+  $BROWSERIFY_TEST = "dist/tests.js"
+
+  task :all => [:build, :test]
+
+  desc 'Builds browser distributable (SERVICES=s3,dynamodb,...)'
+  task :build => :build_complete do
+    sh "uglifyjs #{$BROWSERIFY_DIST} > #{$BROWSERIFY_DIST.sub('.js', '.min.js')}"
+  end
+
+  task :build_complete => :dist_path do
+    sh "MINIFY='' #{$BUILDER} > #{$BROWSERIFY_DIST}"
+  end
+
+  desc 'Builds browser test harness and runner'
+  task :test => :dist_path do
+    sh "find test -name '*.coffee' | SERVICES=all xargs browserify " +
+       "-t coffeeify #{$BROWSERIFY_ARGS} > #{$BROWSERIFY_TEST}"
+    puts "Now run `testem`"
+  end
+
+  task :dist_path do
+    mkdir_p 'dist'
+  end
 end
 
 namespace :test do
