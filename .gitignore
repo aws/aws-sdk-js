@@ -6,3 +6,4 @@ vendor
 .yardoc
 doc
 doc-guide
+dist/credentials.js
