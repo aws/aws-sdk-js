@@ -30,7 +30,7 @@ namespace :browser do
 
   desc 'Builds browser distributable (SERVICES=s3,dynamodb,...)'
   task :build => :build_complete do
-    sh "MINIFY='1' #{$BUILDER} > #{$BROWSERIFY_DIST}"
+    sh "MINIFY=1 #{$BUILDER} > #{$BROWSERIFY_DIST.sub('.js', '.min.js')}"
   end
 
   task :build_complete => :dist_path do
