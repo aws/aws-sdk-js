@@ -1,5 +1,6 @@
 {
   "node": true,
+  "browser": true,
   "bitwise": true,
   "camelcase": true,
   "curly": false,
