@@ -9,5 +9,11 @@
     "uglify-js": "2.x",
     "underscore": "1.x",
     "express": "3.x"
+  },
+  "devDependencies": {
+    "jasmine-node": "latest",
+    "coffee-script": "latest",
+    "jshint": "latest",
+    "supertest": "latest"
   }
 }
