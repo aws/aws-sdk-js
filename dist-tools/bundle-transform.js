@@ -15,41 +15,33 @@
 
 var fs = require('fs');
 var util = require('util');
-var browserify = require('browserify');
 var path = require('path');
 var through = require('through');
 var _ = require('underscore');
 
 var root = path.normalize(path.join(__dirname, '..', 'lib'));
-var sanitizeRegex = /[^a-zA-Z0-9-]/g;
+var sanitizeRegex = /[^a-zA-Z0-9,-]/g;
 var defaultServices = 'dynamodb,s3,sts';
 
-function generateBundleFile(services, callback) {
-  var serviceMap = parseServiceMap(services, function (err, serviceMap) {
-    if (err) return callback(err);
-
-    var contents = ['var AWS = require("./core"); module.exports = AWS;'];
-
-    _.each(serviceMap, function (versions, service) {
-      _.each(versions, function (version) {
-        var line = util.format(
-          '%s(require("./services/%s"), "%s", require("./services/api/%s-%s"));',
-          'AWS.Service.defineServiceApi', service, version, service, version);
-        contents.push(line);
-      });
-    });
-
-    callback(null, contents.join('\n'));
+function mapFromNames(names) {
+  var map = {};
+  _.each(names, function (name) {
+    var match = name.match(/^(.+?)(?:-(.+?)(?:\.js)?)?$/);
+    var service = match[1], version = match[2];
+    if (!map[service]) map[service] = [];
+    if (version) map[service].push(version);
   });
+  return map;
 }
 
 function parseServiceMap(services, callback) {
   if (!services) services = defaultServices;
-  services = services.split(',').map(function (s) {
-    return s.replace(sanitizeRegex, '');
-  });
+  if (services.match(sanitizeRegex)) {
+    return callback(new Error('Incorrectly formatted service names'));
+  }
+  services = services.split(',');
 
-  var dir = path.join(root, 'services', 'api');  
+  var dir = path.join(root, 'services', 'api');
   fs.readdir(dir, function (err, files) {
     var diskMap = mapFromNames(files);
     if (services.length === 1 && services[0] === 'all') {
@@ -81,42 +73,67 @@ function parseServiceMap(services, callback) {
   });
 }
 
-function mapFromNames(names) {
-  var map = {};
-  _.each(names, function (name) {
-    var match = name.match(/^(.+?)(?:-(.+?)(?:\.js)?)?$/);
-    var service = match[1], version = match[2];
-    if (!map[service]) map[service] = [];
-    if (version) map[service].push(version);
+function generateBundleFile(services, callback) {
+  parseServiceMap(services, function (err, serviceMap) {
+    if (err) return callback(err);
+
+    var contents = ['var AWS = require("./core"); module.exports = AWS;'];
+
+    _.each(serviceMap, function (versions, service) {
+      _.each(versions, function (version) {
+        var line = util.format(
+          '%s(require("./services/%s"), "%s", require("./services/api/%s-%s"));',
+          'AWS.Service.defineServiceApi', service, version, service, version);
+        contents.push(line);
+      });
+    });
+
+    callback(null, contents.join('\n'));
   });
-  return map;
 }
 
-module.exports = function(file, servicesPassed) {
+module.exports = function(file, servicesPassed, callback) {
+  var bundleData = null;
   var services = servicesPassed ? file :
-    (process.env.hasOwnProperty('SERVICES') ? process.env.SERVICES : null);
+    ('SERVICES' in process.env ? process.env.SERVICES : null);
+
+  function makeBundle(callback) {
+    if (bundleData) return callback();
+    generateBundleFile(services, function (err, bundle) {
+      if (err) {
+        if (callback) callback(err);
+        else throw err;
+      }
+      else {
+        bundleData = bundle;
+        if (callback) callback();
+      }
+    });
+  }
 
   function transform(file) {
-    if (!file.match(/\/lib\/aws\.js$/)) return through();
+    if (!file.match(/(\/|^)lib\/aws\.js$/)) return through();
 
     function write() { }
     function end() {
       var self = this;
-      generateBundleFile(services, function (err, bundle) {
+      makeBundle(function (err) {
         if (err) self.emit('error', err);
         else {
-          self.queue(bundle);
+          self.queue(bundleData);
           self.queue(null);
         }
       });
     }
 
     return through(write, end);
-  };
+  }
 
   if (!servicesPassed) {
     return transform(file);
+  } else if (callback) {
+    makeBundle(function (err) { callback(err, transform); });
   } else {
     return transform;
   }
-}
+};
