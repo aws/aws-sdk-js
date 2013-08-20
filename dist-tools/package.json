@@ -8,7 +8,9 @@
     "through": "2.x",
     "uglify-js": "2.x",
     "underscore": "1.x",
-    "express": "3.x"
+    "express": "3.x",
+    "xml2js": "0.2.4",
+    "xmlbuilder": "latest"
   },
   "devDependencies": {
     "jasmine-node": "latest",

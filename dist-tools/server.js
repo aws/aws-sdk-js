@@ -48,14 +48,19 @@ function buildSDK(request, response, options) {
   });
 }
 
+function buildUnminifiedSDK(req, res) {
+  buildSDK(req, res, { minify: false });
+}
+
 var app = express();
 app.use(express.compress());
 app.use(express.favicon());
 if (require.main === module) {
   app.use(express.logger()); // enable logging only for executable
 }
-app.get('/aws-sdk.min.js', function (req, res) { buildSDK(req, res); });
-app.get('/aws-sdk.js', function (req, res) { buildSDK(req, res, { minify: false }); });
+app.get('/', buildSDK);
+app.get('/aws-sdk.min.js', buildSDK);
+app.get('/aws-sdk.js', buildUnminifiedSDK);
 
 module.exports = app;
 
