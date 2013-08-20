@@ -47,11 +47,14 @@ namespace :browser do
       f.puts(JSON.pretty_generate(json, indent: '  '))
     end
 
+    rm_f "#{json['name']}.tar.gz"
+    rm_f "#{json['name']}.zip"
     cp_r 'dist-tools', 'server'
     cp_r 'lib', 'server/aws-sdk'
     Dir.chdir('server') do
       sh "npm install"
-      sh "tar cfz ../browser-builder.tar.gz *"
+      sh "zip -rq ../#{json['name']}.zip *"
+      sh "tar cfz ../#{json['name']}.tgz *"
     end
     rm_rf 'server'
   end
