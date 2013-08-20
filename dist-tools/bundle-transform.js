@@ -18,10 +18,9 @@ var util = require('util');
 var path = require('path');
 var through = require('through');
 var _ = require('underscore');
+var bundleHelpers = require('./bundle-helpers');
 
-var root = path.normalize(path.join(__dirname, '..', 'lib'));
 var sanitizeRegex = /[^a-zA-Z0-9,-]/g;
-var defaultServices = 'dynamodb,s3,sts';
 
 function mapFromNames(names) {
   var map = {};
@@ -35,13 +34,13 @@ function mapFromNames(names) {
 }
 
 function parseServiceMap(services, callback) {
-  if (!services) services = defaultServices;
+  if (!services) services = bundleHelpers.defaultServices;
   if (services.match(sanitizeRegex)) {
     return callback(new Error('Incorrectly formatted service names'));
   }
   services = services.split(',');
 
-  var dir = path.join(root, 'services', 'api');
+  var dir = path.join(bundleHelpers.root, 'services', 'api');
   fs.readdir(dir, function (err, files) {
     var diskMap = mapFromNames(files);
     if (services.length === 1 && services[0] === 'all') {
@@ -112,7 +111,7 @@ module.exports = function(file, servicesPassed, callback) {
   }
 
   function transform(file) {
-    if (!file.match(/(\/|^)lib\/aws\.js$/)) return through();
+    if (file !== bundleHelpers.mainFile) return through();
 
     function write() { }
     function end() {

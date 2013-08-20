@@ -21,10 +21,9 @@ var through = require('through');
 var _ = require('underscore');
 var uglify = require('uglify-js');
 var bundleTransform = require('./bundle-transform');
+var bundleHelpers = require('./bundle-helpers');
 
-var root = path.normalize(path.join(__dirname, '..', 'lib'));
-var mainFile = path.join(root, 'aws.js');
-var licenseHeader = fs.readFileSync(mainFile).
+var licenseHeader = fs.readFileSync(bundleHelpers.mainFile).
   toString().match(/\/\*\*[\s\S]+?Copyright.+?Amazon[\s\S]+?\*\//)[0] + '\n';
 var uglifyOptions = { compress: false, fromString: true };
 
@@ -62,7 +61,7 @@ function build(services, options, callback) {
       else throw err;
     }
 
-    var stream = browserify(mainFile).
+    var stream = browserify(bundleHelpers.mainFile).
                  transform(transform).
                  ignore('domain').
                  bundle();

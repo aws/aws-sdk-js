@@ -13,6 +13,7 @@
 
 helpers = require('./helpers')
 transform = require('../bundle-transform')
+bundleHelpers = require('../bundle-helpers')
 
 # Stream and transform helpers
 
@@ -27,7 +28,7 @@ runTransform = (tr, data, cb) ->
 
 # Bundle helpers
 
-bundleFile = 'lib/aws.js'
+bundleFile = bundleHelpers.mainFile
 header = 'var AWS = require("./core"); module.exports = AWS;'
 buildBundle = (services) ->
   data = [header]
@@ -69,11 +70,8 @@ describe 'bundle transformer', ->
       expect(e).toEqual(null)
       expect(data).toEqual 'foo'
 
-  it 'returns bundle if file is lib/aws.js', ->
+  it 'returns bundle if file is aws.js', ->
     runTransform transform(bundleFile), 'data', (e, data) ->
-      expect(e).toEqual(null)
-      expect(data).toEqual(defaultBundle)
-    runTransform transform('/path/to/' + bundleFile), 'data', (e, data) ->
       expect(e).toEqual(null)
       expect(data).toEqual(defaultBundle)
 
