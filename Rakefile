@@ -37,6 +37,25 @@ namespace :browser do
     sh "MINIFY='' #{$BUILDER} > #{$BROWSERIFY_DIST}"
   end
 
+  task :build_server do
+    require 'json'
+    pkg_file = File.dirname(__FILE__) + '/dist-tools/package.json'
+    json = JSON.parse(File.read(pkg_file))
+    local_json = JSON.parse(File.read(File.dirname(__FILE__) + '/package.json'))
+    json['dependencies'].update(local_json['dependencies'])
+    File.open(pkg_file, 'w') do |f|
+      f.puts(JSON.pretty_generate(json, indent: '  '))
+    end
+
+    cp_r 'dist-tools', 'server'
+    cp_r 'lib', 'server/aws-sdk'
+    Dir.chdir('server') do
+      sh "npm install"
+      sh "tar cfz ../browser-builder.tar.gz *"
+    end
+    rm_rf 'server'
+  end
+
   desc 'Builds browser test harness and runner'
   task :test => :dist_path do
     sh "find test -name '*.coffee' | SERVICES=all xargs browserify " +
