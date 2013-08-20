@@ -78,9 +78,8 @@ function build(services, options, callback) {
       stream = stream.pipe(options.stream);
     }
 
-    process.nextTick(function() { b.write(licenseHeader); });
-
     if (callback) callback(err, stream);
+    b.write(licenseHeader);
   });
 }
 
