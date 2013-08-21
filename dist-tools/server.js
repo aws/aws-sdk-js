@@ -20,7 +20,7 @@ var builder = require('./browser-builder');
 var _ = require('underscore');
 var express = require('express');
 
-var port = process.argv[2] || 8080;
+var port = process.argv[2] || process.env.PORT || 8080;
 
 function domainHandler(request, response, callback) {
   var dom = domain.create();
