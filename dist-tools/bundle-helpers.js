@@ -16,7 +16,7 @@
 var fs = require('fs');
 var path = require('path');
 
-var root = path.join(__dirname, 'lib');
+var root = path.join(__dirname, 'aws-sdk');
 if (!fs.existsSync(root)) {
   root = path.join(__dirname, '..', 'lib');
 }
