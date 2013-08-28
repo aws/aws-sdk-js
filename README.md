@@ -1,4 +1,4 @@
-# AWS SDK for Node.js [![Build Status](https://travis-ci.org/aws/aws-sdk-js.png?branch=master)](https://travis-ci.org/aws/aws-sdk-js)
+# AWS SDK for Node.js [![NPM version](https://badge.fury.io/js/aws-sdk.png)](http://badge.fury.io/js/aws-sdk) [![Build Status](https://travis-ci.org/aws/aws-sdk-js.png?branch=master)](https://travis-ci.org/aws/aws-sdk-js)
 
 The official JavaScript implementation of the AWS SDK for Node.js.
 
