@@ -30,6 +30,11 @@ module.exports = function () {
     world.cleanupTasks.onAsync('cleanup', callback.bind(world));
   }
 
+  this.Before(function(callback) {
+    this.params = {};
+    callback();
+  });
+
   /* Global error code steps */
 
   this.Then(/^the error code should be "([^"]*)"$/, function(code, callback) {
@@ -60,6 +65,57 @@ module.exports = function () {
 
   this.Given(/^I have a "([^"]*)" service in the "([^"]*)" region$/, function(svc, region, callback) {
     this.service = new this.AWS[svc]({ region: region });
+    callback();
+  });
+
+  this.Given(/^I paginate the "([^"]*)" operation with limit (\d+)(?: and max pages (\d+))?$/, function(operation, limit, maxPages, callback) {
+    limit = parseInt(limit);
+    if (maxPages) maxPages = parseInt(maxPages);
+
+    var world = this;
+    this.numPages = 0;
+    this.numMarkers = 0
+    this.operation = operation;
+    this.paginationConfig = this.service.paginationConfig(operation);
+    this.params = this.params || {};
+
+    var marker = this.paginationConfig.outputToken;
+    if (this.paginationConfig.limitKey) {
+      this.params[this.paginationConfig.limitKey] = limit;
+    }
+    this.service[operation](this.params).eachPage(function (err, data) {
+      if (err) callback.fail(err);
+      else if (data === null) callback();
+      else if (maxPages && world.numPages === maxPages) {
+        callback();
+        return false;
+      }
+      else {
+        if (data[marker]) world.numMarkers++;
+        world.numPages++;
+        world.data = data;
+      }
+    });
+  });
+
+  this.Then(/^I should get more than one page$/, function(callback) {
+    this.assert.compare(this.numPages, '>', 1);
+    callback();
+  });
+
+  this.Then(/^I should get (\d+) pages$/, function(numPages, callback) {
+    this.assert.equal(this.numPages, parseInt(numPages));
+    callback();
+  });
+
+  this.Then(/^I should get numPages - 1 markers$/, function(callback) {
+    this.assert.equal(this.numMarkers, this.numPages - 1);
+    callback();
+  });
+
+  this.Then(/^the last page should not contain a marker$/, function(callback) {
+    var marker = this.paginationConfig.outputToken;
+    this.assert.equal(this.data[marker], null);
     callback();
   });
 
