@@ -59,6 +59,17 @@ describe 'AWS.Service', ->
       errmsg = "Could not find API configuration custom-1999-05-05"
       expect(-> new CustomService(apiVersion: '1999-05-05')).toThrow(errmsg)
 
+
+    it 'skips any API versions with a * and uses next (future) service', ->
+      CustomService = AWS.Service.defineService('custom', ['1998-01-01', '1999-05-05*', '2001-01-01'])
+      errmsg = "Could not find API configuration custom-2001-01-01"
+      expect(-> new CustomService(apiVersion: '2000-01-01')).toThrow(errmsg)
+
+    it 'skips multiple API versions with a * and uses next (future) service', ->
+      CustomService = AWS.Service.defineService('custom', ['1998-01-01', '1999-05-05*', '1999-07-07*', '2001-01-01'])
+      errmsg = "Could not find API configuration custom-2001-01-01"
+      expect(-> new CustomService(apiVersion: '1999-05-05')).toThrow(errmsg)
+
     it 'tries to construct service with fuzzy API version match', ->
       CustomService = AWS.Service.defineService('custom', ['2001-01-01', '1999-05-05'])
       errmsg = "Could not find API configuration custom-1999-05-05"
