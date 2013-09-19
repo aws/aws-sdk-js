@@ -1,3 +1,4 @@
+--plugin sitemap
 -t flasky_sphinx_guide
 -p doc-src/templates
 --title "AWS SDK for Node.js"

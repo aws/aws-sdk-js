@@ -100,6 +100,21 @@ describe 'AWS.Signers.S3', ->
 
       expect(req.headers['Authorization']).toEqual('AWS AKID:Gg5WLabTOvH0WMd15wv7lWe4zK0=')
 
+    it 'properly signs special characters', ->
+
+      creds = { accessKeyId: 'AKID', secretAccessKey: 'secret' }
+
+      req = buildRequest()
+
+      signer = new AWS.Signers.S3(req)
+
+      spyOn(signer, 'stringToSign')
+      signer.stringToSign.andReturn('!@#$%^&*();\':"{}[],./?`~')
+      signer.addAuthorization(creds, date)
+
+      expect(req.headers['Authorization']).toEqual('AWS AKID:2E04i7QCa0uZTYtxue9dEqto3dg=')
+
+
   describe 'stringToSign', ->
 
     beforeEach ->

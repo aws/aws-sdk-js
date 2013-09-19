@@ -6,6 +6,7 @@
 --no-highlight
 --title "AWS SDK for Node.js"
 --template-path doc-src/templates
+--plugin sitemap
 doc-src/*.docs.js
 lib/**/*.js
 -

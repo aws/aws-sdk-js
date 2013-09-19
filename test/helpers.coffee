@@ -15,6 +15,9 @@ AWS = require('../lib/aws')
 EventEmitter = require('events').EventEmitter
 Buffer = require('buffer').Buffer
 
+require('util').print = (data) ->
+  process.stdout.write(data)
+
 # Mock credentials
 AWS.config.update
   paramValidation: false
@@ -76,7 +79,7 @@ mockHttpSuccessfulResponse = (status, headers, data, cb) ->
   cb(httpResp)
 
   AWS.util.arrayEach data.slice(), (str) ->
-    if httpResp._events.readable
+    if httpResp._events.readable || process.version > 'v0.11.3'
       httpResp.emit('readable')
     else
       httpResp.emit('data', new Buffer(str))

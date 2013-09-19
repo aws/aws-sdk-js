@@ -40,6 +40,7 @@ AWS.config.loadFromPath('./path/to/credentials.json');
 AWS.config.update({region: 'us-east-1'});
 
 // Create a bucket using bound parameters and put something in it.
+// Make sure to change the bucket name from "myBucket" to something unique.
 var s3bucket = new AWS.S3({params: {Bucket: 'myBucket'}});
 s3bucket.createBucket(function() {
   var data = {Key: 'myKey', Body: 'Hello!'};

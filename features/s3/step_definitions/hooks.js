@@ -28,7 +28,7 @@ module.exports = function () {
       if (err) { deleteBucket(); return; }
       if (data.Contents.length > 0) {
         params.Delete = { Objects: [] };
-        AWS.util.arrayEach(data.Contents, function (item) {
+        world.AWS.util.arrayEach(data.Contents, function (item) {
           params.Delete.Objects.push({Key: item.Key});
         });
         world.request('s3', 'deleteObjects', params, deleteBucket);
