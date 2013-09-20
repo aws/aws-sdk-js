@@ -14,13 +14,20 @@
 helpers = require('../helpers')
 AWS = helpers.AWS
 
-require('../../lib/services/route53')
+require('../../lib/services/cloudfront')
 
-describe 'AWS.Route53', ->
+describe 'AWS.CloudFront', ->
 
   cf = null
   beforeEach ->
     cf = new AWS.CloudFront()
+
+  describe 'signing', ->
+    it 'signs with us-east-1 region', ->
+      helpers.mockHttpResponse 200, {}, ''
+      cf.listDistributions ->
+        auth = @request.httpRequest.headers['Authorization']
+        expect(auth).toMatch(/\/us-east-1\/cloudfront\/aws4_request/)
 
   describe 'createInvalidation', ->
     it 'correctly builds the request', ->
