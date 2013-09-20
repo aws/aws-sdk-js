@@ -40,8 +40,8 @@ language governing permissions and limitations under the License.
   </style>
   <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
   <script type="text/javascript" src="js/jquery-ui-1.10.1.custom.min.js"></script>
-  <script type="text/javascript" src="credentials.js"></script>
   <script type="text/javascript" src="aws-sdk.js"></script>
+  <script type="text/javascript" src="appinfo.js"></script>
   <script type="text/template" id="template-historyEntry">
     <div id="history-{entry}" class="history-entry">
       <ul>
@@ -314,11 +314,11 @@ language governing permissions and limitations under the License.
       currentService[currentOperation](params).send();
     }
 
-    function loadConfig() {
+    function loadConfig(akid, secret, session) {
       AWS.config.update({
-        region: 'us-east-1',
-        accessKeyId: window.accessKeyId,
-        secretAccessKey: window.secretAccessKey
+        accessKeyId: akid,
+        secretAccessKey: secret,
+        sessionToken: session
       });
     }
 
@@ -423,16 +423,89 @@ language governing permissions and limitations under the License.
     }
 
     function init() {
-      loadConfig();
+      AWS.config.update({region: 'us-east-1'});
       loadEvents();
-      loadServices();
       loaded();
+    }
+
+    function loadSTSCredentials(provider, accessToken) {
+      var params = {
+        ProviderId: provider,
+        RoleArn: window.roleArn,
+        RoleSessionName: 'web-identity-session',
+        WebIdentityToken: accessToken
+      };
+
+      var sts = new AWS.STS();
+      sts.assumeRoleWithWebIdentity(params, function (err, data) {
+        if (data) {
+          loadConfig(
+            data.Credentials.AccessKeyId,
+            data.Credentials.SecretAccessKey,
+            data.Credentials.SessionToken);
+          loadServices();
+        } else {
+          console.log(err.stack);
+        }
+      });
     }
 
     $(init);
   </script>
 </head>
 <body>
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function() {
+      // init the FB JS SDK
+      FB.init({
+        appId      : window.appId, // App ID from the app dashboard
+        //channelUrl : '///channel.html', // Channel file for x-domain comms
+        status     : true, // Check Facebook Login status
+        xfbml      : true // Look for social plugins on the page
+      });
+
+      // Additional initialization code such as adding Event Listeners goes here
+      FB.login(function(response) {
+        if (response.authResponse) {
+          loadSTSCredentials('graph.facebook.com', response.authResponse.accessToken);
+        } else {
+          console.log('User cancelled login or did not fully authorize.');
+        }
+      });
+    };
+
+    // Load the SDK asynchronously
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/all.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+<!--
+  <div id="amazon-root"></div>
+  <script type="text/javascript">
+    window.onAmazonLoginReady = function() {
+      amazon.Login.setClientId('amzn1.application-oa2-client.f94aea5a9ca940d685c4f31268317417');
+      amazon.Login.authorize({scope: 'profile'}, function(response) {
+        if (!response.error) {
+          loadSTSCredentials('www.amazon.com', response.access_token);
+        }
+      });
+    };
+
+    (function(d) {
+      var a = d.createElement('script'); a.type = 'text/javascript'; 
+      a.async = true; a.id = 'amazon-login-sdk'; 
+      a.src = 'https://api-cdn.amazon.com/sdk/login1.js';
+      d.getElementById('amazon-root').appendChild(a);
+    })(document);
+  </script>
+-->
+
   <div id="header" class="padding"></div>
   <div id="selectOperation">
     <ul>

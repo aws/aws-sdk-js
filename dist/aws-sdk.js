@@ -13,8 +13,11090 @@
  * language governing permissions and limitations under the License.
  */
 ;(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var AWS = require("./core"); module.exports = AWS;
+AWS.Service.defineServiceApi(require("./services/dynamodb"), "2012-08-10", require("./services/api/dynamodb-2012-08-10"));
+AWS.Service.defineServiceApi(require("./services/s3"), "2006-03-01", require("./services/api/s3-2006-03-01"));
+AWS.Service.defineServiceApi(require("./services/sts"), "2011-06-15", require("./services/api/sts-2011-06-15"));
+},{"./core":3,"./services/api/dynamodb-2012-08-10":17,"./services/api/s3-2006-03-01":18,"./services/api/sts-2011-06-15":19,"./services/dynamodb":20,"./services/s3":21,"./services/sts":22}],2:[function(require,module,exports){
+var process=require("__browserify_process");/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
 
-},{}],2:[function(require,module,exports){
+var AWS = require('./core');
+require('./event_listeners');
+require('./sequential_executor');
+require('./metadata_service');
+var inherit = AWS.util.inherit;
+
+/**
+ * The main configuration class used by all service objects to set
+ * the region, credentials, and other options for requests.
+ *
+ * By default, credentials and region settings are left unconfigured.
+ * This should be configured by the application before using any
+ * AWS service APIs.
+ *
+ * In order to set global configuration options, properties should
+ * be assigned to the global {AWS.config} object.
+ *
+ * @see AWS.config
+ *
+ * @!attribute credentials
+ *   @return [AWS.Credentials] the AWS credentials to sign requests with.
+ *
+ * @!attribute region
+ *   @example Set the global region setting to us-west-2
+ *     AWS.config.update({region: 'us-west-2'});
+ *   @return [AWS.Credentials] The region to send service requests to.
+ *   @see http://docs.amazonwebservices.com/general/latest/gr/rande.html
+ *     A list of available endpoints for each AWS service
+ *
+ * @!attribute maxRetries
+ *   @return [Integer] the maximum amount of retries to perform for a
+ *     service request. By default this value is calculated by the specific
+ *     service object that the request is being made to.
+ *
+ * @!attribute maxRedirects
+ *   @return [Integer] the maximum amount of redirects to follow for a
+ *     service request. Defaults to 10.
+ *
+ * @!attribute paramValidation
+ *   @return [Boolean] whether input parameters should be validated against
+ *     the operation description before sending the request. Defaults to true.
+ *
+ * @!attribute computeChecksums
+ *   @return [Boolean] whether to compute checksums for payload bodies when
+ *     the service accepts it (currently supported in S3 only).
+ *
+ * @!attribute sslEnabled
+ *   @return [Boolean] whether SSL is enabled for requests
+ *
+ * @!attribute s3ForcePathStyle
+ *   @return [Boolean] whether to force path style URLs for S3 objects
+ */
+AWS.Config = inherit({
+
+  /**
+   * Creates a new configuration object. This is the object that passes
+   * option data along to service requests, including credentials, security,
+   * region information, and some service specific settings.
+   *
+   * @example Creating a new configuration object with credentials and region
+   *   var config = new AWS.Config({
+   *     accessKeyId: 'AKID', secretAccessKey: 'SECRET', region: 'us-west-2'
+   *   });
+   * @option options accessKeyId [String] your AWS access key ID.
+   * @option options secretAccessKey [String] your AWS secret access key.
+   * @option options sessionToken [AWS.Credentials] the optional AWS
+   *   session token to sign requests with.
+   * @option options credentials [AWS.Credentials] the AWS credentials
+   *   to sign requests with. You can either specify this object, or
+   *   specify the accessKeyId and secretAccessKey options directly.
+   * @option options credentialProvider [AWS.CredentialProviderChain] the
+   *   provider chain used to resolve credentials if no static `credentials`
+   *   property is set.
+   * @option options region [String] the region to send service requests to.
+   *   See {region} for more information.
+   * @option options maxRetries [Integer] the maximum amount of retries to
+   *   attempt with a request. See {maxRetries} for more information.
+   * @option options maxRedirects [Integer] the maximum amount of redirects to
+   *   follow with a request. See {maxRedirects} for more information.
+   * @option options sslEnabled [Boolean] whether to enable SSL for
+   *   requests.
+   * @option options paramValidation [Boolean] whether parameter validation
+   *   is on.
+   * @option options computeChecksums [Boolean] whether to compute checksums
+   *   for payload bodies when the service accepts it (currently supported
+   *   in S3 only)
+   * @option options s3ForcePathStyle [Boolean] whether to force path
+   *   style URLs for S3 objects.
+   * @option options httpOptions [map] A set of options to pass to the low-level
+   *   HTTP request. Currently supported options are:
+   *
+   *   * **proxy** [String] &mdash; the URL to proxy requests through
+   *   * **agent** [http.Agent, https.Agent] &mdash; the Agent object to perform
+   *     HTTP requests with. Used for connection pooling. Defaults to the global
+   *     agent (`http.globalAgent`) for non-SSL connections. Note that for
+   *     SSL connections, a special Agent object is used in order to enable
+   *     peer certificate verification.
+   *   * **timeout** [Integer] &mdash; The number of milliseconds to wait before
+   *     giving up on a connection attempt. Defaults to no timeout.
+   * @option options apiVersion [String, Date] a String in YYYY-MM-DD format
+   *   (or a date) that represents the latest possible API version that can be
+   *   used in all services (unless overridden by `apiVersions`). Specify
+   *   'latest' to use the latest possible version.
+   * @option options apiVersions [map<String, String|Date>] a map of service
+   *   identifiers (the lowercase service class name) with the API version to
+   *   use when instantiating a service. Specify 'latest' for each individual
+   *   that can use the latest available version.
+   */
+  constructor: function Config(options) {
+    if (options === undefined) options = {};
+    options = this.extractCredentials(options);
+
+    AWS.util.each.call(this, this.keys, function (key, value) {
+      this.set(key, options[key], value);
+    });
+  },
+
+  /**
+   * @overload update(options, allowUnknownKeys = false)
+   *   Updates the current configuration object with new options.
+   *
+   *   @example Update maxRetries property of a configuration object
+   *     config.update({maxRetries: 10});
+   *   @param [Object] options a map of option keys and values.
+   *   @param [Boolean] allowUnknownKeys whether unknown keys can be set on
+   *     the configuration object. Defaults to `false`.
+   *   @see constructor
+   */
+  update: function update(options, allowUnknownKeys) {
+    allowUnknownKeys = allowUnknownKeys || false;
+    options = this.extractCredentials(options);
+    AWS.util.each.call(this, options, function (key, value) {
+      if (allowUnknownKeys || this.keys.hasOwnProperty(key)) this[key] = value;
+    });
+  },
+
+  /**
+   * @api private
+   */
+  getCredentials: function getCredentials(callback) {
+    var self = this;
+
+    function finish(err) {
+      callback(err, err ? null : self.credentials);
+    }
+
+    function credError(msg, err) {
+      return new AWS.util.error(err || new Error(), {
+        code: 'CredentialsError', message: msg
+      });
+    }
+
+    function getAsyncCredentials() {
+      self.credentials.get(function(err) {
+        if (err) {
+          var msg = 'Could not load credentials from ' +
+            self.credentials.constructor.name;
+          err = credError(msg, err);
+        }
+        finish(err);
+      });
+    }
+
+    function getStaticCredentials() {
+      var err = null;
+      if (!self.credentials.accessKeyId || !self.credentials.secretAccessKey) {
+        err = credError('Missing credentials');
+      }
+      finish(err);
+    }
+
+    if (self.credentials) {
+      if (typeof self.credentials.get === 'function') {
+        getAsyncCredentials();
+      } else { // static credentials
+        getStaticCredentials();
+      }
+    } else if (self.credentialProvider) {
+      self.credentialProvider.resolve(function(err, creds) {
+        if (err) {
+          err = credError('Could not load credentials from any providers', err);
+        }
+        self.credentials = creds;
+        finish(err);
+      });
+    } else {
+      finish(credError('No credentials to load'));
+    }
+  },
+
+  /**
+   * Loads configuration data from a JSON file into this config object.
+   * @note Loading configuration will reset all existing configuration
+   *   on the object.
+   * @param path [String] the path to load configuration from
+   * @return [AWS.Config] the same configuration object
+   */
+  loadFromPath: function loadFromPath(path) {
+    this.clear();
+
+    var options = JSON.parse(AWS.util.readFileSync(path));
+    var fileSystemCreds = new AWS.FileSystemCredentials(path);
+    var chain = new AWS.CredentialProviderChain();
+    chain.providers.unshift(fileSystemCreds);
+    chain.resolve(function (err, creds) {
+      if (err) throw err;
+      else options.credentials = creds;
+    });
+
+    this.constructor(options);
+
+    return this;
+  },
+
+  /**
+   * Clears configuration data on this object
+   *
+   * @api private
+   */
+  clear: function clear() {
+    /*jshint forin:false */
+    AWS.util.each.call(this, this.keys, function (key) {
+      delete this[key];
+    });
+
+    // reset credential provider
+    this.set('credentials', undefined);
+    this.set('credentialProvider', undefined);
+  },
+
+  /**
+   * Sets a property on the configuration object, allowing for a
+   * default value
+   * @api private
+   */
+  set: function set(property, value, defaultValue) {
+    if (value === undefined) {
+      if (defaultValue === undefined) {
+        defaultValue = this.keys[property];
+      }
+      if (typeof defaultValue === 'function') {
+        this[property] = defaultValue.call(this);
+      } else {
+        this[property] = defaultValue;
+      }
+    } else {
+      this[property] = value;
+    }
+  },
+
+  /**
+   * All of the keys with their default values.
+   *
+   * @constant
+   * @api private
+   */
+  keys: {
+    credentials: function () {
+      var credentials = null;
+      new AWS.CredentialProviderChain([
+        function () { return new AWS.EnvironmentCredentials('AWS'); },
+        function () { return new AWS.EnvironmentCredentials('AMAZON'); }
+      ]).resolve(function(err, creds) {
+        if (!err) credentials = creds;
+      });
+      return credentials;
+    },
+    credentialProvider: function() {
+      return new AWS.CredentialProviderChain([
+        function() { return new AWS.EC2MetadataCredentials(); }
+      ]);
+    },
+    region: function() {
+      return process.env.AWS_REGION || process.env.AMAZON_REGION;
+    },
+    apiVersions: {},
+    apiVersion: null,
+    endpoint: undefined,
+    httpOptions: {},
+    maxRetries: undefined,
+    maxRedirects: 10,
+    paramValidation: true,
+    sslEnabled: true,
+    s3ForcePathStyle: false,
+    computeChecksums: true,
+    dynamoDbCrc32: true
+  },
+
+  /**
+   * Extracts accessKeyId, secretAccessKey and sessionToken
+   * from a configuration hash.
+   *
+   * @api private
+   */
+  extractCredentials: function extractCredentials(options) {
+    if (options.accessKeyId && options.secretAccessKey) {
+      options = AWS.util.copy(options);
+      options.credentials = new AWS.Credentials(options);
+    }
+    return options;
+  }
+});
+
+/**
+ * Represents your AWS security credentials, specifically the
+ * {accessKeyId}, {secretAccessKey}, and optional {sessionToken}.
+ * Creating a `Credentials` object allows you to pass around your
+ * security information to configuration and service objects.
+ *
+ * Note that this class typically does not need to be constructed manually,
+ * as the {AWS.Config} and {AWS.Service} classes both accept simple
+ * options hashes with the three keys. These structures will be converted
+ * into Credentials objects automatically.
+ *
+ * ## Expiring and Refreshing Credentials
+ *
+ * Occasionally credentials can expire in the middle of a long-running
+ * application. In this case, the SDK will automatically attempt to
+ * refresh the credentials from the storage location if the Credentials
+ * class implements the {refresh} method.
+ *
+ * If you are implementing a credential storage location, you
+ * will want to create a subclass of the `Credentials` class and
+ * override the {refresh} method. This method allows credentials to be
+ * retrieved from the backing store, be it a file system, database, or
+ * some network storage. The method should reset the credential attributes
+ * on the object.
+ *
+ * @!attribute expired
+ *   @return [Boolean] whether the credentials have been expired and
+ *     require a refresh
+ * @!attribute accessKeyId
+ *   @return [String] the AWS access key ID
+ * @!attribute secretAccessKey
+ *   @return [String] the AWS secret access key
+ * @!attribute sessionToken
+ *   @return [String] an optional AWS session token
+ */
+AWS.Credentials = inherit({
+  /**
+   * A credentials object can be created using positional arguments or an options
+   * hash.
+   *
+   * @overload AWS.Credentials(accessKeyId, secretAccessKey, sessionToken=null)
+   *   Creates a Credentials object with a given set of credential information
+   *   as positional arguments.
+   *   @param accessKeyId [String] the AWS access key ID
+   *   @param secretAccessKey [String] the AWS secret access key
+   *   @param sessionToken [String] the optional AWS session token
+   *   @example Create a credentials object with AWS credentials
+   *     var creds = new AWS.Credentials('akid', 'secret', 'session');
+   * @overload AWS.Credentials(options)
+   *   Creates a Credentials object with a given set of credential information
+   *   as an options hash.
+   *   @option options accessKeyId [String] the AWS access key ID
+   *   @option options secretAccessKey [String] the AWS secret access key
+   *   @option options sessionToken [String] the optional AWS session token
+   *   @example Create a credentials object with AWS credentials
+   *     var creds = new AWS.Credentials({
+   *       accessKeyId: 'akid', secretAccessKey: 'secret', sessionToken: 'session'
+   *     });
+   */
+  constructor: function Credentials() {
+    this.expired = false;
+    if (arguments.length == 1 && typeof arguments[0] === 'object') {
+      var creds = arguments[0].credentials || arguments[0];
+      this.accessKeyId = creds.accessKeyId;
+      this.secretAccessKey = creds.secretAccessKey;
+      this.sessionToken = creds.sessionToken;
+    } else {
+      this.accessKeyId = arguments[0];
+      this.secretAccessKey = arguments[1];
+      this.sessionToken = arguments[2];
+    }
+  },
+
+  /**
+   * @return [Boolean] whether the credentials object should call {refresh}
+   * @note Subclasses should override this method to provide custom refresh
+   *   logic.
+   */
+  needsRefresh: function needsRefresh() {
+    return this.expired || !this.accessKeyId || !this.secretAccessKey;
+  },
+
+  /**
+   * Gets the existing credentials, refreshing them if they are not yet loaded
+   * or have expired. Users should call this method before using {refresh},
+   * as this will not attempt to reload credentials when they are already
+   * loaded into the object.
+   *
+   * @callback callback function(err)
+   *   Called when the instance metadata service responds (or fails). When
+   *   this callback is called with no error, it means that the credentials
+   *   information has been loaded into the object (as the `accessKeyId`,
+   *   `secretAccessKey`, and `sessionToken` properties).
+   *   @param err [Error] if an error occurred, this value will be filled
+   */
+  get: function get(callback) {
+    var self = this;
+    if (this.needsRefresh()) {
+      this.refresh(function(err) {
+        if (!err) self.expired = false; // reset expired flag
+        callback(err);
+      });
+    } else {
+      callback();
+    }
+  },
+
+  /**
+   * Refreshes the credentials. Users should call {get} before attempting
+   * to forcibly refresh credentials.
+   *
+   * @callback callback function(err)
+   *   Called when the instance metadata service responds (or fails). When
+   *   this callback is called with no error, it means that the credentials
+   *   information has been loaded into the object (as the `accessKeyId`,
+   *   `secretAccessKey`, and `sessionToken` properties).
+   *   @param err [Error] if an error occurred, this value will be filled
+   * @note Subclasses should override this class to reset the
+   *   {accessKeyId}, {secretAccessKey} and optional {sessionToken}
+   *   on the credentials object and then call the callback with
+   *   any error information.
+   * @see get
+   */
+  refresh: function refresh(callback) {
+    this.expired = false;
+    callback();
+  }
+});
+
+/**
+ * Represents credentials from a JSON file on disk.
+ * If the credentials expire, the SDK can {refresh} the credentials
+ * from the file.
+ *
+ * The format of the file should be similar to the options passed to
+ * {AWS.Config}:
+ *
+ * ```js
+ * {accessKeyId: 'akid', secretAccessKey: 'secret', sessionToken: 'optional'}
+ * ```
+ *
+ * @example Loading credentials from disk
+ *   var creds = new AWS.FileSystemCredentials('./configuration.json');
+ *   creds.accessKeyId == 'AKID'
+ *
+ * @!attribute filename
+ *   @readonly
+ *   @return [String] the path to the JSON file on disk containing the
+ *     credentials.
+ */
+AWS.FileSystemCredentials = inherit(AWS.Credentials, {
+
+  /**
+   * @overload AWS.FileSystemCredentials(filename)
+   *   Creates a new FileSystemCredentials object from a filename
+   *
+   *   @param filename [String] the path on disk to the JSON file to load.
+   */
+  constructor: function FileSystemCredentials(filename) {
+    AWS.Credentials.call(this);
+    this.filename = filename;
+    this.get(function() {});
+  },
+
+  /**
+   * Loads the credentials from the {filename} on disk.
+   *
+   * @callback callback function(err)
+   *   Called when the instance metadata service responds (or fails). When
+   *   this callback is called with no error, it means that the credentials
+   *   information has been loaded into the object (as the `accessKeyId`,
+   *   `secretAccessKey`, and `sessionToken` properties).
+   *   @param err [Error] if an error occurred, this value will be filled
+   * @see get
+   */
+  refresh: function refresh(callback) {
+    if (!callback) callback = function(err) { if (err) throw err; };
+    try {
+      var creds = JSON.parse(AWS.util.readFileSync(this.filename));
+      AWS.Credentials.call(this, creds);
+      if (!this.accessKeyId || !this.secretAccessKey) {
+        throw new Error('Credentials not set in ' + this.filename);
+      }
+      this.expired = false;
+      callback();
+    } catch (err) {
+      callback(err);
+    }
+  }
+
+});
+
+/**
+ * Represents credentials from the environment.
+ *
+ * By default, this class will look for the matching environment variables
+ * prefixed by a given {envPrefix}. The un-prefixed environment variable names
+ * for each credential value is listed below:
+ *
+ * ```js
+ * accessKeyId: ACCESS_KEY_ID
+ * secretAccessKey: SECRET_ACCESS_KEY
+ * sessionToken: SESSION_TOKEN
+ * ```
+ *
+ * With the default prefix of 'AWS', the environment variables would be:
+ *
+ *     AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN
+ *
+ * @!attribute envPrefix
+ *   @readonly
+ *   @return [String] the prefix for the environment variable names excluding
+ *     the separating underscore ('_').
+ */
+AWS.EnvironmentCredentials = inherit(AWS.Credentials, {
+
+  /**
+   * Creates a new EnvironmentCredentials class with a given variable
+   * prefix {envPrefix}. For example, to load credentials using the 'AWS'
+   * prefix:
+   *
+   * ```js
+   * var creds = new AWS.EnvironmentCredentials('AWS');
+   * creds.accessKeyId == 'AKID' // from AWS_ACCESS_KEY_ID env var
+   * ```
+   *
+   * @param envPrefix [String] the prefix to use (e.g., 'AWS') for environment
+   *   variables. Do not include the separating underscore.
+   */
+  constructor: function EnvironmentCredentials(envPrefix) {
+    this.envPrefix = envPrefix;
+    this.get(function() {});
+  },
+
+  /**
+   * Loads credentials from the environment using the prefixed
+   * environment variables.
+   *
+   * @callback callback function(err)
+   *   Called when the instance metadata service responds (or fails). When
+   *   this callback is called with no error, it means that the credentials
+   *   information has been loaded into the object (as the `accessKeyId`,
+   *   `secretAccessKey`, and `sessionToken` properties).
+   *   @param err [Error] if an error occurred, this value will be filled
+   * @see get
+   */
+  refresh: function refresh(callback) {
+    /*jshint maxcomplexity:10*/
+    if (!callback) callback = function(err) { if (err) throw err; };
+
+    if (process === undefined) {
+      callback(new Error('No process info available'));
+      return;
+    }
+
+    var keys = ['ACCESS_KEY_ID', 'SECRET_ACCESS_KEY', 'SESSION_TOKEN'];
+    var values = [];
+
+    for (var i = 0; i < keys.length; i++) {
+      var prefix = '';
+      if (this.envPrefix) prefix = this.envPrefix + '_';
+      values[i] = process.env[prefix + keys[i]];
+      if (!values[i] && keys[i] !== 'SESSION_TOKEN') {
+        callback(new Error('Variable ' + prefix + keys[i] + ' not set.'));
+        return;
+      }
+    }
+
+    this.expired = false;
+    AWS.Credentials.apply(this, values);
+    callback();
+  }
+
+});
+
+/**
+ * Represents credentials recieved from the metadata service on an EC2 instance.
+ *
+ * By default, this class will connect to the metadata service using
+ * {AWS.MetadataService} and attempt to load any available credentials. If it
+ * can connect, and credentials are available, these will be used with zero
+ * configuration.
+ */
+AWS.EC2MetadataCredentials = inherit(AWS.Credentials, {
+  constructor: function EC2MetadataCredentials(options) {
+    this.serviceError = null;
+    this.metadataService = new AWS.MetadataService(options);
+    this.metadata = {};
+  },
+
+  /**
+   * Loads the credentials from the instance metadata service
+   *
+   * @callback callback function(err)
+   *   Called when the instance metadata service responds (or fails). When
+   *   this callback is called with no error, it means that the credentials
+   *   information has been loaded into the object (as the `accessKeyId`,
+   *   `secretAccessKey`, and `sessionToken` properties).
+   *   @param err [Error] if an error occurred, this value will be filled
+   * @see get
+   */
+  refresh: function refresh(callback) {
+    var self = this;
+    if (!callback) callback = function(err) { if (err) throw err; };
+    if (self.serviceError) {
+      callback(self.serviceError);
+      return;
+    }
+
+    self.metadataService.loadCredentials(function (err, creds) {
+      if (err) {
+        self.serviceError = err;
+      } else {
+        self.expired = false;
+        self.metadata = creds;
+        self.accessKeyId = creds.AccessKeyId;
+        self.secretAccessKey = creds.SecretAccessKey;
+        self.sessionToken = creds.Token;
+      }
+      callback(err);
+    });
+  }
+});
+
+/**
+ * Creates a credential provider chain that searches for AWS credentials
+ * in a list of credential providers specified by the {providers} property.
+ *
+ * By default, the chain will use the {defaultProviders} to resolve credentials.
+ * These providers will look in the environment using the
+ * {AWS.EnvironmentCredentials} class with the 'AWS' and 'AMAZON' prefixes.
+ *
+ * ## Setting Providers
+ *
+ * Each provider in the {providers} list should be a function that returns
+ * a {AWS.Credentials} object, or a hardcoded credentials object. The function
+ * form allows for delayed execution of the credential construction.
+ *
+ * ## Resolving Credentials from a Chain
+ *
+ * Call {resolve} to return the first valid credential object that can be
+ * loaded by the provider chain.
+ *
+ * For example, to resolve a chain with a custom provider that checks a file
+ * on disk after the set of {defaultProviders}:
+ *
+ * ```js
+ * var diskProvider = new AWS.FileSystemCredentials('./creds.json');
+ * var chain = new AWS.CredentialProviderChain();
+ * chain.providers.push(diskProvider);
+ * chain.resolve();
+ * ```
+ *
+ * The above code will return the `diskProvider` object if the
+ * file contains credentials and the `defaultProviders` do not contain
+ * any credential settings.
+ *
+ * @!attribute providers
+ *   @return [Array<AWS.Credentials, Function>]
+ *     a list of credentials objects or functions that return credentials
+ *     objects. If the provider is a function, the function will be
+ *     executed lazily when the provider needs to be checked for valid
+ *     credentials. By default, this object will be set to the
+ *     {defaultProviders}.
+ *   @see defaultProviders
+ */
+AWS.CredentialProviderChain = inherit(AWS.Credentials, {
+
+  /**
+   * Creates a new CredentialProviderChain with a default set of providers
+   * specified by {defaultProviders}.
+   */
+  constructor: function CredentialProviderChain(providers) {
+    if (providers) {
+      this.providers = providers;
+    } else {
+      this.providers = AWS.CredentialProviderChain.defaultProviders.slice(0);
+    }
+  },
+
+  /**
+   * Resolves the provider chain by searching for the first set of
+   * credentials in {providers}.
+   *
+   * @callback callback function(err, credentials)
+   *   Called when the provider resolves the chain to a credentials object
+   *   or null if no credentials can be found.
+   *
+   *   @param err [Error] the error object returned if no credentials are
+   *     found.
+   *   @param credentials [AWS.Credentials] the credentials object resolved
+   *     by the provider chain.
+   * @return [AWS.CredentialProviderChain] the provider, for chaining.
+   */
+  resolve: function resolve(callback) {
+    if (this.providers.length === 0) {
+      callback(new Error('No providers'));
+      return;
+    }
+
+    var index = 0;
+    var providers = this.providers.slice(0);
+
+    function resolveNext(err, creds) {
+      if ((!err && creds) || index === providers.length) {
+        callback(err, creds);
+        return;
+      }
+
+      var provider = providers[index++];
+      if (typeof provider === 'function') {
+        creds = provider.call();
+      } else {
+        creds = provider;
+      }
+
+      if (creds.get) {
+        creds.get(function(err) {
+          resolveNext(err, err ? null : creds);
+        });
+      } else {
+        resolveNext(null, creds);
+      }
+    }
+
+    resolveNext();
+    return this;
+  }
+
+});
+
+/**
+ * The default set of providers used by a vanilla CredentialProviderChain.
+ */
+AWS.CredentialProviderChain.defaultProviders = [
+  function () { return new AWS.EnvironmentCredentials('AWS'); },
+  function () { return new AWS.EnvironmentCredentials('AMAZON'); },
+  function () { return new AWS.EC2MetadataCredentials(); }
+];
+
+/**
+ * @return [AWS.Config] The global configuration object singleton instance
+ * @readonly
+ * @see AWS.Config
+ */
+AWS.config = new AWS.Config();
+
+},{"./core":3,"./event_listeners":4,"./metadata_service":7,"./sequential_executor":10,"__browserify_process":55}],3:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+/**
+ * The main AWS namespace
+ */
+var AWS = {};
+module.exports = AWS;
+require('./util');
+
+AWS.util.update(AWS, {
+
+  /**
+   * @constant
+   */
+  VERSION: '1.6.0',
+
+  /**
+   * @api private
+   */
+  ServiceInterface: {},
+
+  /**
+   * @api private
+   */
+  Signers: {},
+
+  /**
+   * @api private
+   */
+  XML: {}
+
+});
+
+require('./config');
+require('./http');
+require('./sequential_executor');
+require('./event_listeners');
+require('./request');
+require('./service');
+require('./signers/request_signer');
+require('./param_validator');
+require('./metadata_service');
+
+/**
+ * @readonly
+ * @return [AWS.SequentialExecutor] a collection of global event listeners that
+ *   are attached to every sent request.
+ * @see AWS.Request AWS.Request for a list of events to listen for
+ * @example Logging the time taken to send a request
+ *   AWS.events.on('send', function startSend(resp) {
+ *     resp.startTime = new Date().getTime();
+ *   }).on('complete', function calculateTime(resp) {
+ *     var time = (new Date().getTime() - resp.startTime) / 1000;
+ *     console.log('Request took ' + time + ' seconds');
+ *   });
+ *
+ *   new AWS.S3().listBuckets(); // prints 'Request took 0.285 seconds'
+ */
+AWS.events = new AWS.SequentialExecutor();
+
+if (typeof window !== 'undefined') window.AWS = AWS;
+
+},{"./config":2,"./event_listeners":4,"./http":5,"./metadata_service":7,"./param_validator":8,"./request":9,"./sequential_executor":10,"./service":11,"./signers/request_signer":24,"./util":30}],4:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('./core');
+var Buffer = require('buffer').Buffer;
+require('./sequential_executor');
+require('./service_interface/json');
+require('./service_interface/query');
+require('./service_interface/rest');
+require('./service_interface/rest_json');
+require('./service_interface/rest_xml');
+
+/**
+ * The namespace used to register global event listeners for request building
+ * and sending.
+ */
+AWS.EventListeners = {
+  /**
+   * @!attribute VALIDATE_CREDENTIALS
+   *   A request listener that validates whether the request is being
+   *   sent with credentials.
+   *   Handles the {AWS.Request~validate 'validate' Request event}
+   *   @example Sending a request without validating credentials
+   *     var listener = AWS.EventListeners.Core.VALIDATE_CREDENTIALS;
+   *     request.removeListener('validate', listener);
+   *   @readonly
+   *   @return [Function]
+   * @!attribute VALIDATE_REGION
+   *   A request listener that validates whether the region is set
+   *   for a request.
+   *   Handles the {AWS.Request~validate 'validate' Request event}
+   *   @example Sending a request without validating region configuration
+   *     var listener = AWS.EventListeners.Core.VALIDATE_REGION;
+   *     request.removeListener('validate', listener);
+   *   @readonly
+   *   @return [Function]
+   * @!attribute VALIDATE_PARAMETERS
+   *   A request listener that validates input parameters in a request.
+   *   Handles the {AWS.Request~validate 'validate' Request event}
+   *   @example Sending a request without validating parameters
+   *     var listener = AWS.EventListeners.Core.VALIDATE_PARAMETERS;
+   *     request.removeListener('validate', listener);
+   *   @example Disable parameter validation globally
+   *     AWS.EventListeners.Core.removeListener('validate',
+   *       AWS.EventListeners.Core.VALIDATE_REGION);
+   *   @readonly
+   *   @return [Function]
+   * @!attribute SEND
+   *   A request listener that initiates the HTTP connection for a
+   *   request being sent. Handles the {AWS.Request~send 'send' Request event}
+   *   @example Replacing the HTTP handler
+   *     var listener = AWS.EventListeners.Core.SEND;
+   *     request.removeListener('send', listener);
+   *     request.on('send', function(response) {
+   *       customHandler.send(response);
+   *     });
+   *   @return [Function]
+   *   @readonly
+   * @!attribute HTTP_DATA
+   *   A request listener that reads data from the HTTP connection in order
+   *   to build the response data.
+   *   Handles the {AWS.Request~httpData 'httpData' Request event}.
+   *   Remove this handler if you are overriding the 'httpData' event and
+   *   do not want extra data processing and buffering overhead.
+   *   @example Disabling default data processing
+   *     var listener = AWS.EventListeners.Core.HTTP_DATA;
+   *     request.removeListener('httpData', listener);
+   *   @return [Function]
+   *   @readonly
+   */
+  Core: {} /* doc hack */
+};
+
+AWS.EventListeners = {
+  Core: new AWS.SequentialExecutor().addNamedListeners(function(add, addAsync) {
+    addAsync('VALIDATE_CREDENTIALS', 'validate',
+        function VALIDATE_CREDENTIALS(req, doneCallback) {
+      req.service.config.getCredentials(function(err) {
+        if (err) {
+          err = AWS.util.error(err,
+            {code: 'SigningError', message: 'Missing credentials in config'});
+        }
+        doneCallback(err);
+      });
+    });
+
+    add('VALIDATE_REGION', 'validate', function VALIDATE_REGION(req) {
+      if (!req.service.config.region) {
+        throw AWS.util.error(new Error(),
+          {code: 'SigningError', message: 'Missing region in config'});
+      }
+    });
+
+    add('VALIDATE_PARAMETERS', 'validate', function VALIDATE_PARAMETERS(req) {
+      var rules = req.service.api.operations[req.operation].input;
+      new AWS.ParamValidator().validate(rules, req.params);
+    });
+
+    add('SET_CONTENT_LENGTH', 'afterBuild', function SET_CONTENT_LENGTH(req) {
+      if (req.httpRequest.headers['Content-Length'] === undefined) {
+        var length = AWS.util.string.byteLength(req.httpRequest.body);
+        req.httpRequest.headers['Content-Length'] = length;
+      }
+    });
+
+    add('SET_HTTP_HOST', 'afterBuild', function SET_HTTP_HOST(req) {
+      req.httpRequest.headers['Host'] = req.httpRequest.endpoint.hostname;
+    });
+
+    addAsync('SIGN', 'sign', function SIGN(req, doneCallback) {
+      if (!req.service.api.signatureVersion) return doneCallback(); // none
+
+      req.service.config.getCredentials(function (err, credentials) {
+        try {
+          if (err) return doneCallback(err);
+
+          var date = AWS.util.date.getDate();
+          var sigVersion = req.service.api.signatureVersion;
+          var SignerClass = AWS.Signers.RequestSigner.getVersion(sigVersion);
+          var signer = new SignerClass(req.httpRequest,
+            req.service.api.signingName || req.service.api.endpointPrefix);
+
+          // clear old authorization headers
+          delete req.httpRequest.headers['Authorization'];
+          delete req.httpRequest.headers['Date'];
+          delete req.httpRequest.headers['X-Amz-Date'];
+
+          // add new authorization
+          signer.addAuthorization(credentials, date);
+          doneCallback();
+        } catch (e) {
+          doneCallback(e);
+        }
+      });
+    });
+
+    add('SETUP_ERROR', 'extractError', function SETUP_ERROR(resp) {
+      if (this.service.successfulResponse(resp, this)) {
+        // throwing null will stop the error extraction chain
+        // but will not set an error for data extraction
+        throw null;
+      }
+
+      resp.error = AWS.util.error(new Error(),
+        {code: 'UnknownError', message: 'An unknown error occurred.'});
+      resp.data = null;
+    });
+
+    add('SETUP_DATA', 'extractData', function SETUP_DATA(resp) {
+      resp.data = {};
+      resp.error = null;
+    });
+
+    add('SEND', 'send', function SEND(resp) {
+      function callback(httpResp) {
+        resp.httpStream = httpResp;
+
+        var headers = [httpResp.statusCode, httpResp.headers, resp];
+        resp.request.emitEvent('httpHeaders', headers);
+
+        if (resp.httpStream) {
+          if (AWS.HttpClient.streamsApiVersion === 2) { // streams2 API check
+            httpResp.on('readable', function onReadable() {
+              var data = httpResp.read();
+              if (data !== null) {
+                resp.request.emitEvent('httpData', [data, resp]);
+              }
+            });
+          } else { // legacy streams API
+            httpResp.on('data', function onData(data) {
+              resp.request.emitEvent('httpData', [data, resp]);
+            });
+          }
+
+          httpResp.on('end', function onEnd() {
+            resp.request.emitEvent('httpDone', [resp]);
+          });
+        }
+      }
+
+      function error(err) {
+        err = AWS.util.error(err, {
+          code: 'NetworkingError',
+          region: resp.request.httpRequest.region,
+          hostname: resp.request.httpRequest.endpoint.hostname,
+          retryable: true
+        });
+        resp.request.emitEvent('httpError', [err, resp]);
+      }
+
+      var http = AWS.HttpClient.getInstance();
+      var httpOptions = resp.request.service.config.httpOptions || {};
+      http.handleRequest(this.httpRequest, httpOptions, callback, error);
+    });
+
+    add('HTTP_HEADERS', 'httpHeaders',
+        function HTTP_HEADERS(statusCode, headers, resp) {
+      resp.httpResponse.statusCode = statusCode;
+      resp.httpResponse.headers = headers;
+      resp.httpResponse.body = new Buffer('');
+      resp.httpResponse.buffers = [];
+    });
+
+    add('HTTP_DATA', 'httpData', function HTTP_DATA(chunk, resp) {
+      if (chunk) resp.httpResponse.buffers.push(new Buffer(chunk));
+    });
+
+    add('HTTP_DONE', 'httpDone', function HTTP_DONE(resp) {
+      // convert buffers array into single buffer
+      if (resp.httpResponse.buffers && resp.httpResponse.buffers.length > 0) {
+        var body = AWS.util.buffer.concat(resp.httpResponse.buffers);
+        resp.httpResponse.body = body;
+      }
+      delete resp.httpResponse.buffers;
+
+      this.completeRequest(resp);
+    });
+
+    add('HTTP_ERROR', 'httpError', function HTTP_ERROR(error, resp) {
+      resp.error = error;
+      this.completeRequest(resp);
+    });
+
+    add('FINALIZE_ERROR', 'retry', function FINALIZE_ERROR(resp) {
+      resp.error.statusCode = resp.httpResponse.statusCode;
+      if (resp.error.retryable === undefined) {
+        resp.error.retryable = this.service.retryableError(resp.error, this);
+      }
+    });
+
+    add('INVALIDATE_CREDENTIALS', 'retry', function INVALIDATE_CREDENTIALS(resp) {
+      switch (resp.error.code) {
+        case 'RequestExpired': // EC2 only
+        case 'ExpiredTokenException':
+        case 'ExpiredToken':
+          resp.error.retryable = true;
+          resp.request.service.config.credentials.expired = true;
+      }
+    });
+
+    add('REDIRECT', 'retry', function REDIRECT(resp) {
+      if (resp.error && resp.error.statusCode >= 300 &&
+          resp.error.statusCode < 400 && resp.httpResponse.headers['location']) {
+        this.httpRequest.endpoint =
+          new AWS.Endpoint(resp.httpResponse.headers['location']);
+        resp.error.redirect = true;
+        resp.error.retryable = true;
+      }
+    });
+
+    add('RETRY_CHECK', 'retry', function RETRY_CHECK(resp) {
+      if (resp.error) {
+        if (resp.error.redirect && resp.redirectCount < this.service.config.maxRedirects) {
+          resp.redirectCount++;
+        } else if (resp.error.retryable && resp.retryCount < this.service.numRetries()) {
+          resp.retryCount++;
+        } else {
+          throw resp.error;
+        }
+      }
+    });
+
+    addAsync('RETRY_SIGN', 'retry', function RETRY_SIGN(resp, doneCallback) {
+      this.emitEvent('sign', resp, doneCallback);
+    });
+
+    addAsync('RETRY_DELAY_SEND', 'retry', function RETRY_DELAY_SEND(resp, doneCallback) {
+      var delay = 0;
+      if (!resp.error.redirect) {
+        delay = this.service.retryDelays()[resp.retryCount-1] || 0;
+      }
+
+      resp.error = null;
+      resp.data = null;
+
+      setTimeout(function() {
+        resp.request.emitEvent('send', resp, doneCallback);
+      }, delay);
+
+    });
+
+  }),
+
+  Json: new AWS.SequentialExecutor().addNamedListeners(function(add) {
+    var svc = AWS.ServiceInterface.Json;
+    add('BUILD', 'build', svc.buildRequest);
+    add('EXTRACT_DATA', 'extractData', svc.extractData);
+    add('EXTRACT_ERROR', 'extractError', svc.extractError);
+  }),
+
+  Rest: new AWS.SequentialExecutor().addNamedListeners(function(add) {
+    var svc = AWS.ServiceInterface.Rest;
+    add('BUILD', 'build', svc.buildRequest);
+    add('EXTRACT_DATA', 'extractData', svc.extractData);
+    add('EXTRACT_ERROR', 'extractError', svc.extractError);
+  }),
+
+  RestJson: new AWS.SequentialExecutor().addNamedListeners(function(add) {
+    var svc = AWS.ServiceInterface.RestJson;
+    add('BUILD', 'build', svc.buildRequest);
+    add('EXTRACT_DATA', 'extractData', svc.extractData);
+    add('EXTRACT_ERROR', 'extractError', svc.extractError);
+  }),
+
+  RestXml: new AWS.SequentialExecutor().addNamedListeners(function(add) {
+    var svc = AWS.ServiceInterface.RestXml;
+    add('BUILD', 'build', svc.buildRequest);
+    add('EXTRACT_DATA', 'extractData', svc.extractData);
+    add('EXTRACT_ERROR', 'extractError', svc.extractError);
+  }),
+
+  Query: new AWS.SequentialExecutor().addNamedListeners(function(add) {
+    var svc = AWS.ServiceInterface.Query;
+    add('BUILD', 'build', svc.buildRequest);
+    add('EXTRACT_DATA', 'extractData', svc.extractData);
+    add('EXTRACT_ERROR', 'extractError', svc.extractError);
+  })
+};
+
+},{"./core":3,"./sequential_executor":10,"./service_interface/json":12,"./service_interface/query":13,"./service_interface/rest":14,"./service_interface/rest_json":15,"./service_interface/rest_xml":16,"buffer":43}],5:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('./core');
+var Stream = require('stream').Stream;
+var inherit = AWS.util.inherit;
+
+/**
+ * The endpoint that a service will talk to, for example,
+ * `'https://ec2.ap-southeast-1.amazonaws.com'`. If
+ * you need to override an endpoint for a service, you can
+ * set the endpoint on a service by passing the endpoint
+ * object with the `endpoint` option key:
+ *
+ * ```js
+ * var ep = new AWS.Endpoint('awsproxy.example.com');
+ * var s3 = new AWS.S3({endpoint: ep});
+ * s3.service.endpoint.hostname == 'awsproxy.example.com'
+ * ```
+ *
+ * Note that if you do not specify a protocol, the protocol will
+ * be selected based on your current {AWS.config} configuration.
+ *
+ * @!attribute protocol
+ *   @return [String] the protocol (http or https) of the endpoint
+ *     URL
+ * @!attribute hostname
+ *   @return [String] the host portion of the endpoint, e.g.,
+ *     example.com
+ * @!attribute host
+ *   @return [String] the host portion of the endpoint including
+ *     the port, e.g., example.com:80
+ * @!attribute port
+ *   @return [Integer] the port of the endpoint
+ * @!attribute href
+ *   @return [String] the full URL of the endpoint
+ */
+AWS.Endpoint = inherit({
+
+  /**
+   * @overload Endpoint(endpoint)
+   *   Constructs a new endpoint given an endpoint URL. If the
+   *   URL omits a protocol (http or https), the default protocol
+   *   set in the global {AWS.config} will be used.
+   *   @param endpoint [String] the URL to construct an endpoint from
+   */
+  constructor: function Endpoint(endpoint, config) {
+    if (typeof endpoint === 'undefined' || endpoint === null) {
+      throw new Error('Invalid endpoint: ' + endpoint);
+    } else if (typeof endpoint !== 'string') {
+      return AWS.util.copy(endpoint);
+    }
+
+    if (!endpoint.match(/^http/)) {
+      var useSSL = config && config.sslEnabled !== undefined ?
+        config.sslEnabled : AWS.config.sslEnabled;
+      endpoint = (useSSL ? 'https' : 'http') + '://' + endpoint;
+    }
+
+    AWS.util.update(this, AWS.util.urlParse(endpoint));
+
+    // Ensure the port property is set as an integer
+    if (this.port) {
+      this.port = parseInt(this.port, 10);
+    } else {
+      this.port = this.protocol === 'https:' ? 443 : 80;
+    }
+  }
+
+});
+
+/**
+ * The low level HTTP request object, encapsulating all HTTP header
+ * and body data sent by a service request.
+ *
+ * @!attribute method
+ *   @return [String] the HTTP method of the request
+ * @!attribute path
+ *   @return [String] the path portion of the URI, e.g.,
+ *     "/list/?start=5&num=10"
+ * @!attribute headers
+ *   @return [map<String,String>]
+ *     a map of header keys and their respective values
+ * @!attribute body
+ *   @return [String] the request body payload
+ * @!attribute endpoint
+ *   @return [AWS.Endpoint] the endpoint for the request
+ * @!attribute region
+ *   @api private
+ *   @return [String] the region, for signing purposes only.
+ */
+AWS.HttpRequest = inherit({
+
+  /**
+   * @api private
+   */
+  constructor: function HttpRequest(endpoint, region) {
+    endpoint = new AWS.Endpoint(endpoint);
+    this.method = 'POST';
+    this.path = endpoint.path || '/';
+    this.headers = {};
+    this.headers['User-Agent'] = AWS.util.userAgent();
+    this.body = '';
+    this.endpoint = endpoint;
+    this.region = region;
+  },
+
+  /**
+   * @return [String] the part of the {path} excluding the
+   *   query string
+   */
+  pathname: function pathname() {
+    return this.path.split('?', 1)[0];
+  },
+
+  /**
+   * @return [String] the query string portion of the {path}
+   */
+  search: function search() {
+    return this.path.split('?', 2)[1] || '';
+  }
+
+});
+
+/**
+ * The low level HTTP response object, encapsulating all HTTP header
+ * and body data returned from the request.
+ *
+ * @!attribute statusCode
+ *   @return [Integer] the HTTP status code of the response (e.g., 200, 404)
+ * @!attribute headers
+ *   @return [map<String,String>]
+ *      a map of response header keys and their respective values
+ * @!attribute body
+ *   @return [String] the response body payload
+ */
+AWS.HttpResponse = inherit({
+
+  /**
+   * @api private
+   */
+  constructor: function HttpResponse() {
+    this.statusCode = undefined;
+    this.headers = {};
+    this.body = undefined;
+  }
+});
+
+/**
+ * @api private
+ */
+AWS.NodeHttpClient = inherit({
+  handleRequest: function handleRequest(httpRequest, httpOptions, callback, errCallback) {
+    /*jshint maxcomplexity:10*/
+    var endpoint = httpRequest.endpoint;
+    var pathPrefix = '';
+    if (!httpOptions) httpOptions = {};
+    if (httpOptions.proxy) {
+      pathPrefix = endpoint.protocol + '//' + endpoint.hostname;
+      if (endpoint.port != 80 && endpoint.port != 443) {
+        pathPrefix += ':' + endpoint.port;
+      }
+      endpoint = new AWS.Endpoint(httpOptions.proxy);
+    }
+
+    var useSSL = endpoint.protocol === 'https:';
+    var http = useSSL ? require('https') : require('http');
+    var options = {
+      host: endpoint.hostname,
+      port: endpoint.port,
+      method: httpRequest.method,
+      headers: httpRequest.headers,
+      path: pathPrefix + httpRequest.path
+    };
+
+    if (useSSL && !httpOptions.agent) {
+      options.agent = this.sslAgent(http);
+    }
+
+    AWS.util.update(options, httpOptions);
+    delete options.proxy; // proxy isn't an HTTP option
+    delete options.timeout; // timeout isn't an HTTP option
+
+    var stream = http.request(options, callback);
+    httpRequest.stream = stream; // attach stream to httpRequest
+
+    // timeout support
+    if (stream.setTimeout) {
+      stream.setTimeout(httpOptions.timeout || 0);
+      stream.once('timeout', function() {
+        var msg = 'Connection timed out after ' + httpOptions.timeout + 'ms';
+        errCallback(AWS.util.error(new Error(msg), {code: 'TimeoutError'}));
+
+        // HACK - abort the connection without tripping our error handler
+        // since we already raised our TimeoutError. Otherwise the connection
+        // comes back with ECONNRESET, which is not a helpful error message
+        stream.removeListener('error', errCallback);
+        stream.on('error', function() { });
+        stream.abort();
+      });
+    }
+
+    stream.on('error', errCallback);
+    this.writeBody(stream, httpRequest);
+    return stream;
+  },
+
+  writeBody: function writeBody(stream, httpRequest) {
+    if (httpRequest.body instanceof Stream) {
+      httpRequest.body.pipe(stream);
+    } else if (httpRequest.body) {
+      stream.end(httpRequest.body);
+    } else {
+      stream.end();
+    }
+  },
+
+  sslAgent: function sslAgent(http) {
+    if (!AWS.NodeHttpClient.sslAgent) {
+      AWS.NodeHttpClient.sslAgent = new http.Agent({
+        rejectUnauthorized: true
+      });
+    }
+    return AWS.NodeHttpClient.sslAgent;
+  }
+});
+
+/**
+ * @api private
+ */
+AWS.HttpClient = AWS.NodeHttpClient;
+
+/**
+ * @api private
+ */
+AWS.HttpClient.streamsApiVersion = require('stream').Readable ? 2 : 1;
+
+/**
+ * @api private
+ */
+AWS.HttpClient.getInstance = function getInstance() {
+  /*jshint newcap:false */
+  if (this.singleton === undefined) {
+    this.singleton = new this();
+  }
+  return this.singleton;
+};
+
+},{"./core":3,"http":50,"https":37,"stream":39}],6:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+/**
+ * @api private
+ */
+AWS.JSON = {};
+
+/**
+ * @api private
+ */
+AWS.JSON.Builder = inherit({
+
+  constructor: function XMLBuilder(rules, options) {
+    this.rules = rules;
+    this.timestampFormat = options.timestampFormat;
+  },
+
+  toJSON: function toJSON(params) {
+    return JSON.stringify(this.translate(this.rules, params));
+  },
+
+  translate: function translate(rules, value) {
+    if (rules.type == 'structure') {
+
+      // translate structures (hashes with pre-defined keys)
+      var struct = {};
+      AWS.util.each.call(this, value, function (memberName, memberValue) {
+        var memberRules = rules[memberName] || {};
+        struct[memberName] = this.translate(memberRules, memberValue);
+      });
+      return struct;
+
+    } else if (rules.type == 'list') {
+
+      // translate each member of the list
+      var list = [];
+      AWS.util.arrayEach.call(this, value, function (memberValue) {
+        var memberRules = rules.members || {};
+        list.push(this.translate(memberRules, memberValue));
+      });
+      return list;
+
+    } else if (rules.type == 'map') {
+
+      // translate maps (hashes with user supplied keys)
+      var map = {};
+      AWS.util.each.call(this, value, function (memberName, memberValue) {
+        var memberRules = rules.members || {};
+        map[memberName] = translate(memberRules, memberValue);
+      });
+      return map;
+
+    } else if (rules.type == 'timestamp') {
+
+      var timestampFormat = rules.format || this.timestampFormat;
+      return AWS.util.date.format(value, timestampFormat);
+
+    } else {
+
+      // all other shapes
+      return value;
+
+    }
+  }
+
+});
+
+},{"../core":3}],7:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('./core');
+require('./http');
+var inherit = AWS.util.inherit;
+
+/**
+ * Represents a metadata service available on EC2 instances. Using the
+ * {request} method, you can receieve metadata about any available resource
+ * on the metadata service.
+ *
+ * @!attribute [r] httpOptions
+ *   @return [map] a map of options to pass to the underlying HTTP request
+ */
+AWS.MetadataService = inherit({
+  /**
+   * @return [String] the hostname of the instance metadata service
+   */
+  host: '169.254.169.254',
+
+  /**
+   * @!ignore
+   */
+
+  /**
+   * Options
+   */
+  httpOptions: { timeout: 1000 },
+
+  /**
+   * Creates a new MetadataService object with a given set of options.
+   *
+   * @option options host [String] the hostname of the instance metadata
+   *   service
+   * @option options httpOptions [map] a map of options to pass to the
+   *   underlying HTTP request
+   */
+  constructor: function MetadataService(options) {
+    AWS.util.update(this, options);
+  },
+
+  /**
+   * Sends a request to the instance metadata service for a given resource.
+   *
+   * @param path [String] the path of the resource to get
+   * @callback callback function(err, data)
+   *   Called when a response is available from the service.
+   *   @param err [Error, null] if an error occurred, this value will be set
+   *   @param data [String, null] if the request was successful, the body of
+   *     the response
+   */
+  request: function request(path, callback) {
+    path = path || '/';
+
+    var data = '';
+    var http = AWS.HttpClient.getInstance();
+    var httpRequest = new AWS.HttpRequest('http://' + this.host + path);
+    httpRequest.method = 'GET';
+
+    http.handleRequest(httpRequest, this.httpOptions, function(httpResponse) {
+      httpResponse.on('data', function(chunk) { data += chunk.toString(); });
+      httpResponse.on('end', function() { callback(null, data); });
+    }, callback);
+  },
+
+  /**
+   * Loads a set of credentials stored in the instance metadata service
+   *
+   * @api private
+   * @callback callback function(err, credentials)
+   *   Called when credentials are loaded from the resource
+   *   @param err [Error] if an error occurred, this value will be set
+   *   @param credentials [Object] the raw JSON object containing all
+   *     metadata from the credentials resource
+   */
+  loadCredentials: function loadCredentials(callback) {
+    var self = this;
+    var basePath = '/latest/meta-data/iam/security-credentials/';
+    self.request(basePath, function (err, roleName) {
+      if (err) callback(err);
+      else {
+        roleName = roleName.split('\n')[0]; // grab first (and only) role
+        self.request(basePath + roleName, function (credErr, credData) {
+          if (credErr) callback(credErr);
+          else {
+            try {
+              var credentials = JSON.parse(credData);
+              callback(null, credentials);
+            } catch (parseError) {
+              callback(parseError);
+            }
+          }
+        });
+      }
+    });
+  }
+});
+
+module.exports = AWS.MetadataService;
+
+},{"./core":3,"./http":5}],8:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('./core');
+var Stream = require('stream').Stream;
+var Buffer = require('buffer').Buffer;
+
+/**
+ * @api private
+ */
+AWS.ParamValidator = AWS.util.inherit({
+  validate: function validate(rules, params, context) {
+    var cRules = (rules || {}).members || {};
+    var payload = rules ? rules.xml : null;
+    if (payload) {
+      cRules = AWS.util.merge(cRules, (cRules[payload] || {}).members || {});
+      delete cRules[payload];
+    }
+
+    return this.validateStructure(cRules, params || {}, context || 'params');
+  },
+
+  validateStructure: function validateStructure(rules, params, context) {
+    /*jshint maxcomplexity:12*/
+    this.validateType(context, params, ['object'], 'structure');
+
+    /*jshint forin:false*/
+    for (var paramName in rules) {
+      if (!rules.hasOwnProperty(paramName)) continue;
+      if (rules[paramName].required && params[paramName] === undefined) {
+        this.fail('MissingRequiredParameter',
+          'Missing required key \'' + paramName + '\' in ' + context);
+      }
+    }
+
+    // validate hash members
+    for (paramName in params) {
+      var paramValue = params[paramName],
+          paramRules = rules[paramName];
+
+      if (paramRules !== undefined) {
+        var memberContext = [context, paramName].join('.');
+        this.validateMember(paramRules, paramValue, memberContext);
+      } else {
+        this.fail('UnexpectedParameter',
+          'Unexpected key \'' + paramName + '\' found in ' + context);
+      }
+    }
+
+    return true;
+  },
+
+  validateMember: function validateMember(rules, param, context) {
+    var memberRules = rules.members || {};
+    switch(rules.type) {
+      case 'structure':
+        return this.validateStructure(memberRules, param, context);
+      case 'list':
+        return this.validateList(memberRules, param, context);
+      case 'map':
+        return this.validateMap(memberRules, param, context);
+      default:
+        return this.validateScalar(rules, param, context);
+    }
+  },
+
+  validateList: function validateList(rules, params, context) {
+    this.validateType(context, params, [Array]);
+
+    // validate array members
+    for (var i = 0; i < params.length; i++) {
+      this.validateMember(rules, params[i], context + '[' + i + ']');
+    }
+  },
+
+  validateMap: function validateMap(rules, params, context) {
+    this.validateType(context, params, ['object'], 'map');
+
+    /*jshint forin:false*/
+    for (var param in params) {
+      if (!params.hasOwnProperty(param)) continue;
+      this.validateMember(rules, params[param],
+                          context + '[\'' +  param + '\']');
+    }
+  },
+
+  validateScalar: function validateScalar(rules, value, context) {
+    /*jshint maxcomplexity:12*/
+    switch (rules.type) {
+      case null:
+      case undefined:
+      case 'string':
+        return this.validateType(context, value, ['string']);
+      case 'base64':
+      case 'binary':
+        return this.validateType(context, value, ['string', Buffer, Stream]);
+      case 'integer':
+      case 'float':
+        return this.validateType(context, value, ['number']);
+      case 'boolean':
+        return this.validateType(context, value, ['boolean']);
+      case 'timestamp':
+        return this.validateType(context, value, [Date,
+          /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/, 'number'],
+          'Date object, ISO-8601 string, or a UNIX timestamp');
+      default:
+        return this.fail('UnkownType', 'Unhandled type ' +
+                         rules.type + ' for ' + context);
+    }
+  },
+
+  fail: function fail(code, message) {
+    throw AWS.util.error(new Error(message), {code: code});
+  },
+
+  validateType: function validateType(context, value, acceptedTypes, type) {
+    /*jshint maxcomplexity:12*/
+    var foundInvalidType = false;
+    for (var i = 0; i < acceptedTypes.length; i++) {
+      if (typeof acceptedTypes[i] === 'string') {
+        if (typeof value === acceptedTypes[i]) return;
+      } else if (acceptedTypes[i] instanceof RegExp) {
+        if ((value || '').toString().match(acceptedTypes[i])) return;
+      } else {
+        if (value instanceof acceptedTypes[i]) return;
+        if (AWS.util.isType(value, acceptedTypes[i].name)) return;
+        if (!type && !foundInvalidType) acceptedTypes = acceptedTypes.slice();
+        acceptedTypes[i] = acceptedTypes[i].name;
+      }
+      foundInvalidType = true;
+    }
+
+    var acceptedType = type;
+    if (!acceptedType) {
+      /*jshint regexp:false*/
+      acceptedType = acceptedTypes.join(', ').replace(/,([^,]+)$/, ', or$1');
+    }
+
+    var vowel = acceptedType.match(/^[aeiou]/i) ? 'n' : '';
+    this.fail('InvalidParameterType', 'Expected ' + context + ' to be a' +
+              vowel + ' ' + acceptedType);
+  }
+});
+
+},{"./core":3,"buffer":43,"stream":39}],9:[function(require,module,exports){
+var process=require("__browserify_process");/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('./core');
+var inherit = AWS.util.inherit;
+var streams = require('stream');
+
+/**
+ * ## Asynchronous Requests
+ *
+ * All requests made through the SDK are asynchronous and use a
+ * callback interface. Each service method that kicks off a request
+ * returns an `AWS.Request` object that you can use to register
+ * callbacks.
+ *
+ * For example, the following service method returns the request
+ * object as "request", which can be used to register callbacks:
+ *
+ * ```js
+ * // request is an AWS.Request object
+ * var request = ec2.describeInstances();
+ *
+ * // register callbacks on request to retrieve response data
+ * request.on('success', function(response) {
+ *   console.log(response.data);
+ * });
+ * ```
+ *
+ * When a request is ready to be sent, the {send} method should
+ * be called:
+ *
+ * ```js
+ * request.send();
+ * ```
+ *
+ * ## Removing Default Listeners for Events
+ *
+ * Request objects are built with default listeners for the various events,
+ * depending on the service type. In some cases, you may want to remove
+ * some built-in listeners to customize behaviour. Doing this requires
+ * access to the built-in listener functions, which are exposed through
+ * the {AWS.EventListeners.Core} namespace. For instance, you may
+ * want to customize the HTTP handler used when sending a request. In this
+ * case, you can remove the built-in listener associated with the 'send'
+ * event, the {AWS.EventListeners.Core.SEND} listener and add your own.
+ *
+ * ## Multiple Callbacks and Chaining
+ *
+ * You can register multiple callbacks on any request object. The
+ * callbacks can be registered for different events, or all for the
+ * same event. In addition, you can chain callback registration, for
+ * example:
+ *
+ * ```js
+ * request.
+ *   on('success', function(response) {
+ *     console.log("Success!");
+ *   }).
+ *   on('error', function(response) {
+ *     console.log("Error!");
+ *   }).
+ *   on('complete', function(response) {
+ *     console.log("Always!");
+ *   }).
+ *   send();
+ * ```
+ *
+ * The above example will print either "Success! Always!", or "Error! Always!",
+ * depending on whether the request succeeded or not.
+ *
+ * @!attribute httpRequest
+ *   @readonly
+ *   @!group HTTP Properties
+ *   @return [AWS.HttpRequest] the raw HTTP request object
+ *     containing request headers and body information
+ *     sent by the service.
+ *
+ * @!group Request Building Events
+ *
+ * @!event validate(request)
+ *   Triggered when a request is being validated. Listeners
+ *   should throw an error if the request should not be sent.
+ *   @param request [Request] the request object being sent
+ *   @see AWS.EventListeners.Core.VALIDATE_CREDENTIALS
+ *   @see AWS.EventListeners.Core.VALIDATE_REGION
+ *
+ * @!event build(request)
+ *   Triggered when the request payload is being built. Listeners
+ *   should fill the necessary information to send the request
+ *   over HTTP.
+ *   @param (see AWS.Request~validate)
+ *
+ * @!event sign(request)
+ *   Triggered when the request is being signed. Listeners should
+ *   add the correct authentication headers and/or adjust the body,
+ *   depending on the authentication mechanism being used.
+ *   @param (see AWS.Request~validate)
+ *
+ * @!group Request Sending Events
+ *
+ * @!event send(response)
+ *   Triggered when the request is ready to be sent. Listeners
+ *   should call the underlying transport layer to initiate
+ *   the sending of the request.
+ *   @param response [Response] the response object
+ *   @context [Request] the request object that was sent
+ *   @see AWS.EventListeners.Core.SEND
+ *
+ * @!event retry(response)
+ *   Triggered when a request failed and might need to be retried.
+ *   Listeners are responsible for checking to see if the request
+ *   is retryable, and if so, re-signing and re-sending the request.
+ *   Information about the failure is set in the `response.error`
+ *   property.
+ *
+ *   If a listener decides that a request should not be retried,
+ *   that listener should `throw` an error to cancel the event chain.
+ *   Unsetting `response.error` will have no effect.
+ *
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *
+ * @!group Data Parsing Events
+ *
+ * @!event extractError(response)
+ *   Triggered on all non-2xx requests so that listeners can extract
+ *   error details from the response body. Listeners to this event
+ *   should set the `response.error` property.
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *
+ * @!event extractData(response)
+ *   Triggered in successful requests to allow listeners to
+ *   de-serialize the response body into `response.data`.
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *
+ * @!group Completion Events
+ *
+ * @!event success(response)
+ *   Triggered when the request completed successfully.
+ *   `response.data` will contain the response data and
+ *   `response.error` will be null.
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *
+ * @!event error(error, response)
+ *   Triggered when an error occurs at any point during the
+ *   request. `response.error` will contain details about the error
+ *   that occurred. `response.data` will be null.
+ *   @param error [Error] the error object containing details about
+ *     the error that occurred.
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *
+ * @!event complete(response)
+ *   Triggered whenever a request cycle completes. `response.error`
+ *   should be checked, since the request may have failed.
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *
+ * @!group HTTP Events
+ *
+ * @!event httpHeaders(statusCode, headers, response)
+ *   Triggered when headers are sent by the remote server
+ *   @param statusCode [Integer] the HTTP response code
+ *   @param headers [map<String,String>] the response headers
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *
+ * @!event httpData(chunk, response)
+ *   Triggered when data is sent by the remote server
+ *   @param chunk [Buffer] the buffer data containing the next data chunk
+ *     from the server
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *   @see AWS.EventListeners.Core.HTTP_DATA
+ *
+ * @!event httpError(error, response)
+ *   Triggered when the HTTP request failed
+ *   @param error [Error] the error object that was thrown
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *
+ * @!event httpDone(response)
+ *   Triggered when the server is finished sending data
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *
+ * @see AWS.Response
+ */
+AWS.Request = inherit({
+
+  /**
+   * Creates a request for an operation on a given service with
+   * a set of input parameters.
+   *
+   * @param service [AWS.Service] the service to perform the operation on
+   * @param operation [String] the operation to perform on the service
+   * @param params [Object] parameters to send to the operation.
+   *   See the operation's documentation for the format of the
+   *   parameters.
+   */
+  constructor: function Request(service, operation, params) {
+    var endpoint = service.endpoint;
+    var region = service.config.region;
+
+    this.service = service;
+    this.operation = operation;
+    this.params = params || {};
+    this.httpRequest = new AWS.HttpRequest(endpoint, region);
+
+    AWS.SequentialExecutor.call(this);
+  },
+
+  /**
+   * @!group Sending a Request
+   */
+
+  /**
+   * @overload send(callback = null)
+   *   Sends the request object.
+   *
+   *   @callback callback function(err, data)
+   *     If a callback is supplied, it is called when a response is returned
+   *     from the service.
+   *     @param err [Error] the error object returned from the request.
+   *       Set to `null` if the request is successful.
+   *     @param data [Object] the de-serialized data returned from
+   *       the request. Set to `null` if a request error occurs.
+   *   @example Sending a request with a callback
+   *     request = s3.putObject({Bucket: 'bucket', Key: 'key'});
+   *     request.send(function(err, data) { console.log(err, data); });
+   *   @example Sending a request with no callback (using event handlers)
+   *     request = s3.putObject({Bucket: 'bucket', Key: 'key'});
+   *     request.on('complete', function(response) { ... }); // register a callback
+   *     request.send();
+   */
+  send: function send(callback, response) {
+    if (callback) {
+      this.on('complete', function (resp) {
+        callback.call(resp, resp.error, resp.data);
+      });
+    }
+
+    if (!response) response = new AWS.Response(this);
+    var eventNames = ['validate', 'build', 'afterBuild', 'sign', 'send'];
+    this.emitEvents(eventNames, response, function(err) {
+      if (err) {
+        // calling failRequest instead of completeRequest because errors
+        // raised before we have finished sending the request should never
+        // get retried
+        this.failRequest(response);
+      }
+    });
+    return response;
+  },
+
+  /**
+   * Aborts a request, emitting the error and complete events.
+   *
+   * @example Aborting a request after sending
+   *   var params = {
+   *     Bucket: 'bucket', Key: 'key',
+   *     Body: new Buffer(1024 * 1024 * 5) // 5MB payload
+   *   };
+   *   var request = s3.putObject(params);
+   *   request.send(function (err, data) {
+   *     if (err) console.log("Error:", err.code, err.message);
+   *     else console.log(data);
+   *   });
+   *
+   *   // abort request in 1 second
+   *   setTimeout(request.abort.bind(request), 1000);
+   *
+   *   // prints "Error: RequestAbortedError Request aborted by user"
+   * @return [AWS.Request] the same request object, for chaining.
+   * @since v1.4.0
+   */
+  abort: function abort() {
+    this._events = { // reset events
+      error: this._events.error,
+      complete: this._events.complete
+    };
+
+    if (this.httpRequest.stream) { // abort HTTP stream
+      this.httpRequest.stream.abort();
+    }
+
+    // emit only error and complete callbacks
+    var response = new AWS.Response(this);
+    response.error = AWS.util.error(new Error('Request aborted by user'), {
+      code: 'RequestAbortedError', retryable: false
+    });
+    this.failRequest(response);
+
+    return this;
+  },
+
+  /**
+   * Iterates over each page of results given a pageable request, calling
+   * the provided callback with each page of data. After all pages have been
+   * retrieved, the callback is called with `null` data.
+   *
+   * @note This operation can generate multiple requests to a service.
+   * @example Iterating over multiple pages of objects in an S3 bucket
+   *   var pages = 1;
+   *   s3.listObjects().eachPage(function(err, data) {
+   *     if (err) return;
+   *     console.log("Page", pages++);
+   *     console.log(data);
+   *   });
+   * @callback callback function(err, data)
+   *   Called with each page of resulting data from the request.
+   *
+   *   @param err [Error] an error object, if an error occurred.
+   *   @param data [Object] a single page of response data. If there is no
+   *     more data, this object will be `null`.
+   *   @return [Boolean] if the callback returns `false`, pagination will
+   *     stop.
+   *
+   * @api experimental
+   * @see AWS.Request.eachItem
+   * @see AWS.Response.nextPage
+   * @since v1.4.0
+   */
+  eachPage: function eachPage(callback) {
+    function wrappedCallback(response) {
+      var result = callback.call(response, response.error, response.data);
+      if (result === false) return;
+
+      if (response.hasNextPage()) {
+        response.nextPage().on('complete', wrappedCallback).send();
+      } else {
+        callback.call(response, null, null);
+      }
+    }
+
+    this.on('complete', wrappedCallback).send();
+  },
+
+  /**
+   * Enumerates over individual items of a request, paging the responses if
+   * necessary.
+   *
+   * @api experimental
+   * @since v1.4.0
+   */
+  eachItem: function eachItem(callback) {
+    function wrappedCallback(err, data) {
+      if (err) return callback(err, null);
+      if (data === null) return callback(null, null);
+
+      var config = this.request.service.paginationConfig(this.request.operation);
+      var resultKey = config.resultKey;
+      if (AWS.util.isType(resultKey, Array)) resultKey = resultKey[0];
+      var results = AWS.util.jamespath.query(resultKey, data);
+      AWS.util.arrayEach(results, function(result) {
+        AWS.util.arrayEach(result, function(item) { callback(null, item); });
+      });
+    }
+
+    this.eachPage(wrappedCallback);
+  },
+
+  /**
+   * @return [Boolean] whether the operation can return multiple pages of
+   *   response data.
+   * @api experimental
+   * @see AWS.Response.eachPage
+   * @since v1.4.0
+   */
+  isPageable: function isPageable() {
+    return this.service.paginationConfig(this.operation) ? true : false;
+  },
+
+  /**
+   * Converts the request object into a readable stream that
+   * can be read from or piped into a writable stream.
+   *
+   * @note The data read from a readable stream contains only
+   *   the raw HTTP body contents.
+   * @example Manually reading from a stream
+   *   request.createReadStream().on('data', function(data) {
+   *     console.log("Got data:", data.toString());
+   *   });
+   * @example Piping a request body into a file
+   *   var out = fs.createWriteStream('/path/to/outfile.jpg');
+   *   s3.service.getObject(params).createReadStream().pipe(out);
+   * @return [Stream] the readable stream object that can be piped
+   *   or read from (by registering 'data' event listeners).
+   */
+  createReadStream: function createReadStream() {
+    var req = this;
+    var stream = null;
+    var legacyStreams = false;
+
+    if (AWS.HttpClient.streamsApiVersion === 2) {
+      stream = new streams.Readable();
+      stream._read = function() { stream.push(''); };
+    } else {
+      stream = new streams.Stream();
+      stream.readable = true;
+    }
+
+    stream.sent = false;
+    stream.on('newListener', function(event) {
+      if (!stream.sent && (event === 'data' || event === 'readable')) {
+        if (event === 'data') legacyStreams = true;
+        stream.sent = true;
+        process.nextTick(function() { req.send(); });
+      }
+    });
+
+    this.on('httpHeaders', function streamHeaders(statusCode, headers, resp) {
+      if (statusCode < 300) {
+        req.removeListener('httpData', AWS.EventListeners.Core.HTTP_DATA);
+        req.removeListener('httpError', AWS.EventListeners.Core.HTTP_ERROR);
+        req.on('httpError', function streamHttpError(error, resp) {
+          resp.error = error;
+          resp.error.retryable = false;
+          this.completeRequest(resp);
+        });
+
+        var httpStream = resp.httpStream;
+        stream.response = resp;
+        stream._read = function() {
+          var data;
+          /*jshint boss:true*/
+          while (data = httpStream.read()) {
+            stream.push(data);
+          }
+          stream.push('');
+        };
+
+        var events = ['end', 'error', (legacyStreams ? 'data' : 'readable')];
+        AWS.util.arrayEach(events, function(event) {
+          httpStream.on(event, function(arg) {
+            stream.emit(event, arg);
+          });
+        });
+
+        resp.httpStream = null; // take ownership of the stream object
+      }
+    });
+
+    this.on('error', function(err) {
+      stream.emit('error', err);
+    });
+
+    return stream;
+  },
+
+  /**
+   * @api private
+   */
+  completeRequest: function completeRequest(response) {
+    this.emitEvents(['extractError', 'extractData'], response, function(err) {
+      if (err) {
+        this.emitEvent('retry', response, function(retryError) {
+          if (retryError) this.failRequest(response);
+        });
+      } else {
+        this.emitEvent('success', [response], this.unhandledErrorCallback);
+        this.emitEvent('complete', [response], this.unhandledErrorCallback);
+      }
+    });
+  },
+
+  /**
+   * @api private
+   */
+  failRequest: function failRequest(response) {
+    this.emitEvent('error', [response.error, response], this.unhandledErrorCallback);
+    this.emitEvent('complete', [response], this.unhandledErrorCallback);
+  },
+
+  /**
+   * @api private
+   */
+  emitEvents: function emitEvents(eventNames, response, doneCallback) {
+    if (!doneCallback) doneCallback = this.unhandledErrorCallback;
+    if (response.error) {
+      doneCallback.call(this, response.error);
+    } else if (eventNames.length === 0) {
+      doneCallback.call(this);
+    } else {
+      this.emitEvent(eventNames[0], response, function(err) {
+        if (err) {
+          doneCallback.call(this, err);
+        } else {
+          // next event (eventNames is a reducing set)
+          this.emitEvents(eventNames.slice(1), response, doneCallback);
+        }
+      });
+    }
+  },
+
+  /**
+   * @param [Array,Response] args This should be the response object,
+   *   or an array of args to send to the event.
+   * @api private
+   */
+  emitEvent: function emitEvent(eventName, args, doneCallback) {
+    if (!doneCallback) doneCallback = this.unhandledErrorCallback;
+    var response = null;
+    if (AWS.util.isType(args, Array)) {
+      response = args[args.length - 1];
+    } else {
+      response = args;
+      args = this.eventParameters(eventName, response);
+    }
+
+    this.emit(eventName, args, function (err) {
+      if (err) {
+        response.error = err;
+      }
+      doneCallback.call(this, err);
+    });
+  },
+
+  /**
+   * @api private
+   */
+  eventParameters: function eventParameters(eventName, response) {
+    /*jshint maxcomplexity:8*/
+    switch (eventName) {
+      case 'validate':
+      case 'sign':
+      case 'build':
+      case 'afterBuild':
+        return [this];
+      default:
+        return [response];
+    }
+  }
+});
+
+AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
+
+/**
+ * This class encapsulates the the response information
+ * from a service request operation sent through {AWS.Request}.
+ * The response object has two main properties for getting information
+ * back from a request:
+ *
+ * ## The `data` property
+ *
+ * The `response.data` property contains the serialized object data
+ * retrieved from the service request. For instance, for an
+ * Amazon DynamoDB `listTables` method call, the response data might
+ * look like:
+ *
+ * ```
+ * > resp.data
+ * { TableNames:
+ *    [ 'table1', 'table2', ... ] }
+ * ```
+ *
+ * The `data` property can be null if an error occurs (see below).
+ *
+ * ## The `error` property
+ *
+ * In the event of a service error (or transfer error), the
+ * `response.error` property will be filled with the given
+ * error data in the form:
+ *
+ * ```
+ * { code: 'SHORT_UNIQUE_ERROR_CODE',
+ *   message: 'Some human readable error message' }
+ * ```
+ *
+ * In the case of an error, the `data` property will be `null`.
+ * Note that if you handle events that can be in a failure state,
+ * you should always check whether `response.error` is set
+ * before attempting to access the `response.data` property.
+ *
+ * @!attribute data
+ *   @readonly
+ *   @!group Data Properties
+ *   @note Inside of a {AWS.Request~httpData} event, this
+ *     property contains a single raw packet instead of the
+ *     full de-serialized service response.
+ *   @return [Object] the de-serialized response data
+ *     from the service.
+ *
+ * @!attribute error
+ *   An structure containing information about a service
+ *   or networking error.
+ *   @readonly
+ *   @!group Data Properties
+ *   @note This attribute is only filled if a service or
+ *     networking error occurs.
+ *   @return [Object]
+ *     * code [String] a unique short code representing the
+ *       error that was emitted.
+ *     * message [String] a longer human readable error message
+ *     * retryable [Boolean] whether the error message is
+ *       retryable.
+ *
+ * @!attribute service
+ *   @readonly
+ *   @!group Operation Properties
+ *   @return [AWS.Service] The service object that initiated the request.
+ *
+ * @!attribute operation
+ *   @readonly
+ *   @!group Operation Properties
+ *   @return [String] the name of the operation executed on
+ *     the service.
+ *
+ * @!attribute params
+ *   @readonly
+ *   @!group Operation Properties
+ *   @return [Object] the parameters sent in the request to
+ *     the service.
+ *
+ * @!attribute retryCount
+ *   @readonly
+ *   @!group Operation Properties
+ *   @return [Integer] the number of retries that were
+ *     attempted before the request was completed.
+ *
+ * @!attribute redirectCount
+ *   @readonly
+ *   @!group Operation Properties
+ *   @return [Integer] the number of redirects that were
+ *     followed before the request was completed.
+ *
+ * @!attribute httpResponse
+ *   @readonly
+ *   @!group HTTP Properties
+ *   @return [AWS.HttpResponse] the raw HTTP response object
+ *     containing the response headers and body information
+ *     from the server.
+ *
+ * @see AWS.Request
+ */
+AWS.Response = inherit({
+
+  /**
+   * @api private
+   */
+  constructor: function Response(request) {
+    this.request = request;
+    this.data = null;
+    this.error = null;
+    this.retryCount = 0;
+    this.redirectCount = 0;
+    this.httpResponse = new AWS.HttpResponse();
+  },
+
+  /**
+   * Creates a new request for the next page of response data, calling the
+   * callback with the page data if a callback is provided.
+   *
+   * @callback callback function(err, data)
+   *   Called when a page of data is returned from the next request.
+   *
+   *   @param err [Error] an error object, if an error occurred in the request
+   *   @param data [Object] the next page of data, or null, if there are no
+   *     more pages left.
+   * @return [AWS.Request] the request object for the next page of data
+   * @return [null] if no callback is provided and there are no pages left
+   *   to retrieve.
+   * @api experimental
+   * @since v1.4.0
+   */
+  nextPage: function nextPage(callback) {
+    /*jshint maxcomplexity:10*/
+    var config;
+    var service = this.request.service;
+    var operation = this.request.operation;
+    try {
+      config = service.paginationConfig(operation, true);
+    } catch (e) { this.error = e; }
+
+    if (!this.hasNextPage()) {
+      if (callback) callback(this.error, null);
+      else if (this.error) throw this.error;
+      return null;
+    }
+
+    var params = AWS.util.copy(this.request.params);
+    if (!this.nextPageTokens) {
+      return callback ? callback(null, null) : null;
+    } else {
+      var inputTokens = config.inputToken;
+      if (typeof inputTokens === 'string') inputTokens = [inputTokens];
+      for (var i = 0; i < inputTokens.length; i++) {
+        params[inputTokens[i]] = this.nextPageTokens[i];
+      }
+      return service.makeRequest(this.request.operation, params, callback);
+    }
+  },
+
+  /**
+   * @return [Boolean] whether more pages of data can be returned by further
+   *   requests
+   * @api experimental
+   * @since v1.4.0
+   */
+  hasNextPage: function hasNextPage() {
+    this.cacheNextPageTokens();
+    if (this.nextPageTokens) return true;
+    if (this.nextPageTokens === undefined) return undefined;
+    else return false;
+  },
+
+  /**
+   * @api private
+   */
+  cacheNextPageTokens: function cacheNextPageTokens() {
+    /*jshint maxcomplexity:10*/
+    if (this.hasOwnProperty('nextPageTokens')) return this.nextPageTokens;
+    this.nextPageTokens = undefined;
+
+    var config = this.request.service.paginationConfig(this.request.operation);
+    if (!config) return this.nextPageTokens;
+
+    this.nextPageTokens = null;
+    if (config.moreResults) {
+      if (!AWS.util.jamespath.find(config.moreResults, this.data)) {
+        return this.nextPageTokens;
+      }
+    }
+
+    var exprs = config.outputToken;
+    if (typeof exprs === 'string') exprs = [exprs];
+    AWS.util.arrayEach.call(this, exprs, function (expr) {
+      var output = AWS.util.jamespath.find(expr, this.data);
+      if (output) {
+        this.nextPageTokens = this.nextPageTokens || [];
+        this.nextPageTokens.push(output);
+      }
+    });
+
+    return this.nextPageTokens;
+  }
+
+});
+
+},{"./core":3,"__browserify_process":55,"stream":39}],10:[function(require,module,exports){
+var process=require("__browserify_process");/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('./core');
+var domain;
+
+/**
+ * @!method on(eventName, callback)
+ *   Registers an event listener callback for the event given by `eventName`.
+ *   Parameters passed to the callback function depend on the individual event
+ *   being triggered. See the event documentation for those parameters.
+ *
+ *   @param eventName [String] the event name to register the listener for
+ *   @param callback [Function] the listener callback function
+ *   @return [AWS.SequentialExecutor] the same object for chaining
+ */
+AWS.SequentialExecutor = AWS.util.inherit({
+
+  constructor: function SequentialExecutor() {
+    this.domain = null;
+    if (require('events').usingDomains) {
+      domain = require('domain');
+      if (domain.active) this.domain = domain.active;
+    }
+    this._events = {};
+  },
+
+  /**
+   * @api private
+   */
+  listeners: function listeners(eventName) {
+    return this._events[eventName] ? this._events[eventName].slice(0) : [];
+  },
+
+  on: function on(eventName, listener) {
+    if (this._events[eventName]) {
+      this._events[eventName].push(listener);
+    } else {
+      this._events[eventName] = [listener];
+    }
+    return this;
+  },
+
+  /**
+   * @api private
+   */
+  onAsync: function onAsync(eventName, listener) {
+    listener._isAsync = true;
+    return this.on(eventName, listener);
+  },
+
+  removeListener: function removeListener(eventName, listener) {
+    var listeners = this._events[eventName];
+    if (listeners) {
+      var length = listeners.length;
+      var position = -1;
+      for (var i = 0; i < length; ++i) {
+        if (listeners[i] === listener) {
+          position = i;
+        }
+      }
+      if (position > -1) {
+        listeners.splice(position, 1);
+      }
+    }
+    return this;
+  },
+
+  removeAllListeners: function removeAllListeners(eventName) {
+    if (eventName) {
+      delete this._events[eventName];
+    } else {
+      this._events = {};
+    }
+    return this;
+  },
+
+  /**
+   * @api private
+   */
+  emit: function emit(eventName, eventArgs, doneCallback) {
+    if (!doneCallback) doneCallback = this.unhandledErrorCallback;
+    if (domain && this.domain instanceof domain.Domain)
+      this.domain.enter();
+
+    var listeners = this.listeners(eventName);
+    var count = listeners.length;
+    this.callListeners(listeners, eventArgs, doneCallback);
+    return count > 0;
+  },
+
+  /**
+   * @api private
+   */
+  callListeners: function callListeners(listeners, args, doneCallback) {
+    if (listeners.length === 0) {
+      doneCallback.call(this);
+      if (domain && this.domain instanceof domain.Domain)
+        this.domain.exit();
+    } else {
+      var listener = listeners.shift();
+      if (listener._isAsync) {
+
+        // asynchronous listener
+        var callNextListener = function(err) {
+          if (err) {
+            doneCallback.call(this, err);
+            if (domain && this.domain instanceof domain.Domain)
+              this.domain.exit();
+          } else {
+            this.callListeners(listeners, args, doneCallback);
+          }
+        }.bind(this);
+        listener.apply(this, args.concat([callNextListener]));
+
+      } else {
+
+        // synchronous listener
+        try {
+          listener.apply(this, args);
+          this.callListeners(listeners, args, doneCallback);
+        } catch (err) {
+          doneCallback.call(this, err);
+          if (domain && this.domain instanceof domain.Domain)
+            this.domain.exit();
+        }
+
+      }
+    }
+  },
+
+  /**
+   * Adds or copies a set of listeners from another list of
+   * listeners or SequentialExecutor object.
+   *
+   * @param listeners [map<String,Array<Function>>, AWS.SequentialExecutor]
+   *   a list of events and callbacks, or an event emitter object
+   *   containing listeners to add to this emitter object.
+   * @return [AWS.SequentialExecutor] the emitter object, for chaining.
+   * @example Adding listeners from a map of listeners
+   *   emitter.addListeners({
+   *     event1: [function() { ... }, function() { ... }],
+   *     event2: [function() { ... }]
+   *   });
+   *   emitter.emit('event1'); // emitter has event1
+   *   emitter.emit('event2'); // emitter has event2
+   * @example Adding listeners from another emitter object
+   *   var emitter1 = new AWS.SequentialExecutor();
+   *   emitter1.on('event1', function() { ... });
+   *   emitter1.on('event2', function() { ... });
+   *   var emitter2 = new AWS.SequentialExecutor();
+   *   emitter2.addListeners(emitter1);
+   *   emitter2.emit('event1'); // emitter2 has event1
+   *   emitter2.emit('event2'); // emitter2 has event2
+   */
+  addListeners: function addListeners(listeners) {
+    var self = this;
+
+    // extract listeners if parameter is an SequentialExecutor object
+    if (listeners._events) listeners = listeners._events;
+
+    AWS.util.each(listeners, function(event, callbacks) {
+      if (typeof callbacks === 'function') callbacks = [callbacks];
+      AWS.util.arrayEach(callbacks, function(callback) {
+        self.on(event, callback);
+      });
+    });
+
+    return self;
+  },
+
+  /**
+   * Registers an event with {on} and saves the callback handle function
+   * as a property on the emitter object using a given `name`.
+   *
+   * @param name [String] the property name to set on this object containing
+   *   the callback function handle so that the listener can be removed in
+   *   the future.
+   * @param (see on)
+   * @return (see on)
+   * @example Adding a named listener DATA_CALLBACK
+   *   var listener = function() { doSomething(); };
+   *   emitter.addNamedListener('DATA_CALLBACK', 'data', listener);
+   *
+   *   // the following prints: true
+   *   console.log(emitter.DATA_CALLBACK == listener);
+   */
+  addNamedListener: function addNamedListener(name, eventName, callback) {
+    this[name] = callback;
+    this.addListener(eventName, callback);
+    return this;
+  },
+
+  /**
+   * @api private
+   */
+  addNamedAsyncListener: function addNamedAsyncListener(name, eventName, callback) {
+    callback._isAsync = true;
+    return this.addNamedListener(name, eventName, callback);
+  },
+
+  /**
+   * Helper method to add a set of named listeners using
+   * {addNamedListener}. The callback contains a parameter
+   * with a handle to the `addNamedListener` method.
+   *
+   * @callback callback function(add)
+   *   The callback function is called immediately in order to provide
+   *   the `add` function to the block. This simplifies the addition of
+   *   a large group of named listeners.
+   *   @param add [Function] the {addNamedListener} function to call
+   *     when registering listeners.
+   * @example Adding a set of named listeners
+   *   emitter.addNamedListeners(function(add) {
+   *     add('DATA_CALLBACK', 'data', function() { ... });
+   *     add('OTHER', 'otherEvent', function() { ... });
+   *     add('LAST', 'lastEvent', function() { ... });
+   *   });
+   *
+   *   // these properties are now set:
+   *   emitter.DATA_CALLBACK;
+   *   emitter.OTHER;
+   *   emitter.LAST;
+   */
+  addNamedListeners: function addNamedListeners(callback) {
+    var self = this;
+    callback(
+      function() {
+        self.addNamedListener.apply(self, arguments);
+      },
+      function() {
+        self.addNamedAsyncListener.apply(self, arguments);
+      }
+    );
+    return this;
+  },
+
+  /**
+   * @api private
+   */
+  unhandledErrorCallback: function unhandledErrorCallback(err) {
+    if (err) {
+      if (domain && this.domain instanceof domain.Domain) {
+        err.domainEmitter = this;
+        err.domain = this.domain;
+        err.domainThrown = false;
+        this.domain.emit('error', err);
+      } else if (process.exit) {
+        console.error(err.stack ? err.stack : err);
+        process.exit(1);
+      } else {
+        throw err;
+      }
+    }
+  }
+});
+
+/**
+ * {on} is the prefered method.
+ * @api private
+ */
+AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.on;
+
+},{"./core":3,"__browserify_process":55,"domain":33,"events":35}],11:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('./core');
+var inherit = AWS.util.inherit;
+
+/**
+ * @api private
+ */
+AWS.Service = inherit({
+
+  constructor: function Service(config) {
+    if (!this.loadServiceClass) {
+      throw AWS.util.error(new Error(),
+        'Service must be constructed with `new\' operator');
+    }
+    var ServiceClass = this.loadServiceClass(config || {});
+    if (ServiceClass) return new ServiceClass(config);
+    this.initialize(config);
+  },
+
+  initialize: function initialize(config) {
+    this.client = this; // backward compatibility with client property
+    this.config = new AWS.Config(AWS.config);
+    if (config) this.config.update(config, true);
+    this.setEndpoint(this.config.endpoint);
+  },
+
+  loadServiceClass: function loadServiceClass(serviceConfig) {
+    var config = serviceConfig;
+    if (!AWS.util.isEmpty(this.api)) {
+      return;
+    } else if (config.apiConfig) {
+      return AWS.Service.defineServiceApi(this.constructor, config.apiConfig);
+    } else if (!this.constructor.services) {
+      return;
+    } else {
+      config = new AWS.Config(AWS.config);
+      config.update(serviceConfig, true);
+      var version = config.apiVersions[this.constructor.serviceIdentifier];
+      version = version || config.apiVersion;
+      return this.getLatestServiceClass(version);
+    }
+  },
+
+  getLatestServiceClass: function getLatestServiceClass(version) {
+    version = this.getLatestServiceVersion(version);
+    if (this.constructor.services[version] === null) {
+      AWS.Service.defineServiceApi(this.constructor, version);
+    }
+
+    return this.constructor.services[version];
+  },
+
+  getLatestServiceVersion: function getLatestServiceVersion(version) {
+    /*jshint maxcomplexity:10*/
+    if (!this.constructor.services || this.constructor.services.length === 0) {
+      throw new Error('No services defined on ' +
+                      this.constructor.serviceIdentifier);
+    }
+
+    if (!version) {
+      version = 'latest';
+    } else if (AWS.util.isType(version, Date)) {
+      version = AWS.util.date.iso8601(version).split('T')[0];
+    }
+
+    if (Object.hasOwnProperty(this.constructor.services, version)) {
+      return version;
+    }
+
+    var keys = Object.keys(this.constructor.services).sort();
+    var selectedVersion = null;
+    for (var i = keys.length - 1; i >= 0; i--) {
+      // versions that end in "*" are not available on disk and can be
+      // skipped, so do not choose these as selectedVersions
+      if (keys[i][keys[i].length - 1] !== '*') {
+        selectedVersion = keys[i];
+      }
+      if (keys[i].substr(0, 10) <= version) {
+        return selectedVersion;
+      }
+    }
+
+    throw new Error('Could not find ' + this.constructor.serviceIdentifier +
+                    ' API to satisfy version constraint `' + version + '\'');
+  },
+
+  api: {},
+
+  defaultRetryCount: 3,
+
+  makeRequest: function makeRequest(operation, params, callback) {
+    if (typeof params === 'function') {
+      callback = params;
+      params = null;
+    }
+
+    params = params || {};
+    if (this.config.params) { // copy only toplevel bound params
+      var rules = this.api.operations[operation];
+      if (rules) {
+        params = AWS.util.copy(params);
+        AWS.util.each(this.config.params, function(key, value) {
+          if (rules.input.members[key]) {
+            if (params[key] === undefined || params[key] === null) {
+              params[key] = value;
+            }
+          }
+        });
+      }
+    }
+
+    var request = new AWS.Request(this, operation, params);
+    this.addAllRequestListeners(request);
+
+    if (callback) request.send(callback);
+    return request;
+  },
+
+  addAllRequestListeners: function addAllRequestListeners(request) {
+    var list = [AWS.events, AWS.EventListeners.Core,
+                this.serviceInterface()];
+    for (var i = 0; i < list.length; i++) {
+      if (list[i]) request.addListeners(list[i]);
+    }
+
+    // disable parameter validation
+    if (!this.config.paramValidation) {
+      request.removeListener('validate',
+        AWS.EventListeners.Core.VALIDATE_PARAMETERS);
+    }
+
+    this.setupRequestListeners(request);
+  },
+
+  setupRequestListeners: function setupRequestListeners() {
+  },
+
+  serviceInterface: function serviceInterface() {
+    /*jshint maxcomplexity:8*/
+    switch (this.api.format) {
+      case 'query': return AWS.EventListeners.Query;
+      case 'json': return AWS.EventListeners.Json;
+      case 'rest-json': return AWS.EventListeners.RestJson;
+      case 'rest-xml': return AWS.EventListeners.RestXml;
+    }
+    if (this.api.format) {
+      throw new Error('Invalid service `format\' ' +
+        this.api.format + ' in API config');
+    }
+  },
+
+  successfulResponse: function successfulResponse(resp) {
+    return resp.httpResponse.statusCode < 300;
+  },
+
+  /**
+   * How many times a failed request should be retried before giving up.
+   * the defaultRetryCount can be overriden by service classes.
+   */
+  numRetries: function numRetries() {
+    if (this.config.maxRetries !== undefined) {
+      return this.config.maxRetries;
+    } else {
+      return this.defaultRetryCount;
+    }
+  },
+
+  retryDelays: function retryDelays() {
+    var retryCount = this.numRetries();
+    var delays = [];
+    for (var i = 0; i < retryCount; ++i) {
+      delays[i] = Math.pow(2, i) * 30;
+    }
+    return delays;
+  },
+
+  retryableError: function retryableError(error) {
+    if (this.networkingError(error)) return true;
+    if (this.expiredCredentialsError(error)) return true;
+    if (this.throttledError(error)) return true;
+    if (error.statusCode >= 500) return true;
+    return false;
+  },
+
+  networkingError: function networkingError(error) {
+    return error.code == 'NetworkingError';
+  },
+
+  expiredCredentialsError: function expiredCredentialsError(error) {
+    // TODO : this only handles *one* of the expired credential codes
+    return (error.code === 'ExpiredTokenException');
+  },
+
+  throttledError: function throttledError(error) {
+    // this logic varies between services
+    return (error.code == 'ProvisionedThroughputExceededException');
+  },
+
+  setEndpoint: function setEndpoint(endpoint) {
+    if (endpoint) {
+      this.endpoint = new AWS.Endpoint(endpoint, this.config);
+    } else if (this.api.globalEndpoint) {
+      this.endpoint = new AWS.Endpoint(this.api.globalEndpoint, this.config);
+    } else {
+      var host = this.api.endpointPrefix + '.' + this.config.region + '.amazonaws.com';
+      this.endpoint = new AWS.Endpoint(host, this.config);
+    }
+  },
+
+  paginationConfig: function paginationConfig(operation, throwException) {
+    function fail(name) {
+      if (throwException) {
+        var e = new Error();
+        throw AWS.util.error(e, 'No pagination configuration for ' + name);
+      }
+      return null;
+    }
+
+    if (!this.api.pagination) return fail('service');
+    if (!this.api.pagination[operation]) return fail(operation);
+    return this.api.pagination[operation];
+  }
+});
+
+AWS.util.update(AWS.Service, {
+
+  /**
+   * Adds one method for each operation described in the api configuration
+   */
+  defineMethods: function defineMethods(svc) {
+    AWS.util.each(svc.prototype.api.operations, function iterator(method) {
+      if (svc.prototype[method]) return;
+      svc.prototype[method] = function (params, callback) {
+        return this.makeRequest(method, params, callback);
+      };
+    });
+  },
+
+  defineService: function defineService(serviceIdentifier, versions, features) {
+    if (!AWS.util.isType(versions, Array)) {
+      features = versions;
+      versions = [];
+    }
+
+    var svc = inherit(AWS.Service, features || {});
+    svc.Client = svc; // backward compatibility for Client class
+
+    if (typeof serviceIdentifier === 'string') {
+      // create versions hash
+      var services = {};
+      for (var i = 0; i < versions.length; i++) {
+        services[versions[i]] = null;
+      }
+
+      svc.services = svc.services || services;
+      svc.serviceIdentifier = svc.serviceIdentifier || serviceIdentifier;
+    } else { // defineService called with an API
+      svc.prototype.api = serviceIdentifier;
+      AWS.Service.defineMethods(svc);
+    }
+
+    return svc;
+  },
+
+  defineServiceApi: function defineServiceApi(superclass, version, apiConfig) {
+    var svc = inherit(superclass, {
+      serviceIdentifier: superclass.serviceIdentifier
+    });
+
+    if (typeof version === 'string') {
+      var apiFile = superclass.serviceIdentifier + '-' + version;
+      try {
+        svc.prototype.api = apiConfig || require('./services/api/' + apiFile);
+      } catch (err) {
+        throw AWS.util.error(err, {
+          message: 'Could not find API configuration ' + apiFile
+        });
+      }
+      superclass.services[version] = svc;
+    } else {
+      svc.prototype.api = version;
+    }
+
+    AWS.Service.defineMethods(svc);
+    return svc;
+  }
+});
+
+},{"./core":3}],12:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+require('../json/builder');
+
+/**
+ * @api private
+ */
+AWS.ServiceInterface.Json = {
+  buildRequest: function buildRequest(req) {
+    var httpRequest = req.httpRequest;
+    var api = req.service.api;
+    var target = api.targetPrefix + '.' + api.operations[req.operation].name;
+    var version = api.jsonVersion || '1.0';
+
+    var rules = api.operations[req.operation].input;
+    var builder = new AWS.JSON.Builder(rules, api);
+
+    httpRequest.path = '/';
+    httpRequest.body = builder.toJSON(req.params || {});
+    httpRequest.headers['Content-Type'] = 'application/x-amz-json-' + version;
+    httpRequest.headers['X-Amz-Target'] = target;
+  },
+
+  extractError: function extractError(resp) {
+    var error = {};
+    var httpResponse = resp.httpResponse;
+
+    if (httpResponse.body.length > 0) {
+      var e = JSON.parse(httpResponse.body.toString());
+      if (e.__type || e.code) {
+        error.code = (e.__type || e.code).split('#').pop();
+      } else {
+        error.code = 'UnknownError';
+      }
+      if (error.code === 'RequestEntityTooLarge') {
+        error.message = 'Request body must be less than 1 MB';
+      } else {
+        error.message = (e.message || e.Message || null);
+      }
+    } else {
+      error.code = httpResponse.statusCode;
+      error.message = null;
+    }
+
+    resp.error = AWS.util.error(new Error(), error);
+  },
+
+  extractData: function extractData(resp) {
+    resp.data = JSON.parse(resp.httpResponse.body.toString() || '{}');
+  }
+
+};
+
+},{"../core":3,"../json/builder":6}],13:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+require('../xml/parser');
+
+/**
+ * @api private
+ */
+AWS.ServiceInterface.Query = {
+  buildRequest: function buildRequest(req) {
+    var operation = req.service.api.operations[req.operation];
+    var httpRequest = req.httpRequest;
+    httpRequest.path = '/';
+    httpRequest.headers['Content-Type'] =
+      'application/x-www-form-urlencoded; charset=utf-8';
+    httpRequest.params = {
+      Version: req.service.api.apiVersion,
+      Action: operation.name
+    };
+
+    // convert the request parameters into a list of query params,
+    // e.g. Deeply.NestedParam.0.Name=value
+    var rules = operation.input;
+    if (rules) rules = rules.members;
+    var builder = new AWS.QueryParamSerializer(rules, req.service.api);
+    builder.serialize(req.params, function(name, value) {
+      httpRequest.params[name] = value;
+    });
+    httpRequest.body = AWS.util.queryParamsToString(httpRequest.params);
+  },
+
+  extractError: function extractError(resp) {
+    var data, body = resp.httpResponse.body.toString();
+    if (body.match('<UnknownOperationException')) {
+      data = {
+        Code: 'UnknownOperation',
+        Message: 'Unknown operation ' + resp.request.operation
+      };
+    } else {
+      data = new AWS.XML.Parser({}).parse(body);
+    }
+
+    if (data.Errors) data = data.Errors;
+    if (data.Error) data = data.Error;
+    if (data.Code) {
+      resp.error = AWS.util.error(new Error(), {
+        code: data.Code,
+        message: data.Message
+      });
+    } else {
+      resp.error = AWS.util.error(new Error(), {
+        code: resp.httpResponse.statusCode,
+        message: null
+      });
+    }
+  },
+
+  extractData: function extractData(resp) {
+    var req = resp.request;
+    var operation = req.service.api.operations[req.operation];
+    var wrapperKey = operation.name + 'Result';
+    var rules = operation.output || {};
+
+    if (req.service.api.resultWrapped) {
+      var tmp = {
+        type: 'structure',
+        members: {}
+      };
+      tmp.members[wrapperKey] = rules;
+      rules = tmp;
+    }
+
+    var parser = new AWS.XML.Parser(rules);
+    var data = parser.parse(resp.httpResponse.body.toString());
+
+    if (req.service.api.resultWrapped) {
+      if (data[wrapperKey]) {
+        AWS.util.update(data, data[wrapperKey]);
+        delete data[wrapperKey];
+      }
+    }
+
+    AWS.util.each((operation.output || {}).members || {}, function (memberName, memberRules) {
+      if (memberRules.wrapper && data[memberName]) {
+        AWS.util.update(data, data[memberName]);
+        delete data[memberName];
+      }
+    });
+
+    resp.data = data;
+  }
+};
+
+/**
+ * @api private
+ */
+AWS.QueryParamSerializer = inherit({
+
+  constructor: function QueryParamSerializer(rules, options) {
+    this.rules = rules;
+    this.timestampFormat = options ? options.timestampFormat : 'iso8601';
+  },
+
+  serialize: function serialize(params, fn) {
+    this.serializeStructure('', params, this.rules, fn);
+  },
+
+  serializeStructure: function serializeStructure(prefix, struct, rules, fn) {
+    var that = this;
+    AWS.util.each(struct, function (name, member) {
+      var n = rules[name].name || name;
+      var memberName = prefix ? prefix + '.' + n : n;
+      that.serializeMember(memberName, member, rules[name], fn);
+    });
+  },
+
+  serializeMap: function serialzeMap(name, map, rules, fn) {
+    var i = 1;
+    var that = this;
+    AWS.util.each(map, function (key, value) {
+      var prefix = rules.flattened ? '.' : '.entry.';
+      var position = prefix + (i++) + '.';
+      var keyName = position + (rules.keys.name || 'key');
+      var valueName = position + (rules.members.name || 'value');
+      that.serializeMember(name + keyName, key, rules.keys, fn);
+      that.serializeMember(name + valueName, value, rules.members, fn);
+    });
+  },
+
+  serializeList: function serializeList(name, list, rules, fn) {
+    var that = this;
+    var memberRules = rules.members || {};
+    AWS.util.arrayEach(list, function (v, n) {
+      var suffix = '.' + (n + 1);
+      if (rules.flattened) {
+        if (memberRules.name) {
+          var parts = name.split('.');
+          parts.pop();
+          parts.push(memberRules.name);
+          name = parts.join('.');
+        }
+      } else {
+        suffix = '.member' + suffix;
+      }
+      that.serializeMember(name + suffix, v, memberRules, fn);
+    });
+  },
+
+  serializeMember: function serializeMember(name, value, rules, fn) {
+    if (rules.type === 'structure') {
+      this.serializeStructure(name, value, rules.members, fn);
+    } else if (rules.type === 'list') {
+      this.serializeList(name, value, rules, fn);
+    } else if (rules.type === 'map') {
+      this.serializeMap(name, value, rules, fn);
+    } else if (rules.type === 'timestamp') {
+      var timestampFormat = rules.format || this.timestampFormat;
+      fn.call(this, name, AWS.util.date.format(value, timestampFormat));
+    } else {
+      fn.call(this, name, String(value));
+    }
+  }
+
+});
+
+},{"../core":3,"../xml/parser":32}],14:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+
+/**
+ * @api private
+ */
+AWS.ServiceInterface.Rest = {
+  buildRequest: function buildRequest(req) {
+    AWS.ServiceInterface.Rest.populateMethod(req);
+    AWS.ServiceInterface.Rest.populateURI(req);
+    AWS.ServiceInterface.Rest.populateHeaders(req);
+  },
+
+  extractError: function extractError() {
+  },
+
+  extractData: function extractData(resp) {
+    var req = resp.request;
+    var data = {};
+    var r = resp.httpResponse;
+    var operation = req.service.api.operations[req.operation];
+    var rules = (operation.output || {}).members || {};
+
+    // normalize headers names to lower-cased keys for matching
+    var headers = {};
+    AWS.util.each(r.headers, function (k, v) {
+      headers[k.toLowerCase()] = v;
+    });
+
+    AWS.util.each(rules, function (name, rule) {
+      if (rule.location === 'header') {
+        var header = (rule.name || name).toLowerCase();
+        if (rule.type == 'map') {
+          data[name] = {};
+          AWS.util.each(r.headers, function (k, v) {
+            var result = k.match(new RegExp('^' + rule.name + '(.+)', 'i'));
+            if (result !== null) {
+              data[name][result[1]] = v;
+            }
+          });
+        }
+        if (headers[header] !== undefined) {
+          data[name] = headers[header];
+        }
+      }
+      if (rule.location === 'status') {
+        data[name] = parseInt(r.statusCode, 10);
+      }
+    });
+
+    resp.data = data;
+  },
+
+  populateMethod: function populateMethod(req) {
+    req.httpRequest.method = req.service.api.operations[req.operation].http.method;
+  },
+
+  populateURI: function populateURI(req) {
+    var operation = req.service.api.operations[req.operation];
+    var uri = operation.http.uri;
+    var pathPattern = uri.split(/\?/)[0];
+    var rules = (operation.input || {}).members || {};
+
+    var escapePathParam = req.service.escapePathParam ||
+      AWS.ServiceInterface.Rest.escapePathParam;
+    var escapeQuerystringParam = req.service.escapeQuerystringParam ||
+      AWS.ServiceInterface.Rest.escapeQuerystringParam;
+
+    AWS.util.each.call(this, rules, function (name, rule) {
+      if (rule.location == 'uri' && req.params[name]) {
+        // if the value is being inserted into the path portion of the
+        // URI, then we need to use a different (potentially) escaping
+        // pattern, this is especially true for S3 path params like Key.
+        var value = pathPattern.match('{' + name + '}') ?
+          escapePathParam(req.params[name]) :
+          escapeQuerystringParam(req.params[name]);
+
+        uri = uri.replace('{' + name + '}', value);
+      }
+    });
+
+    var path = uri.split('?')[0];
+    var querystring = uri.split('?')[1];
+
+    if (querystring) {
+      var parts = [];
+      AWS.util.arrayEach(querystring.split('&'), function (part) {
+        if (!part.match('{\\w+}')) parts.push(part);
+      });
+      uri = (parts.length > 0 ? path + '?' + parts.join('&') : path);
+    } else {
+      uri = path;
+    }
+
+    req.httpRequest.path = uri;
+  },
+
+  escapePathParam: function escapePathParam(value) {
+    return AWS.util.uriEscape(String(value));
+  },
+
+  escapeQuerystringParam: function escapeQuerystringParam(value) {
+    return AWS.util.uriEscape(String(value));
+  },
+
+  populateHeaders: function populateHeaders(req) {
+    var operation = req.service.api.operations[req.operation];
+    var rules = (operation.input || {}).members || {};
+
+    AWS.util.each.call(this, rules, function (name, rule) {
+      if (rule.location === 'header' && req.params[name]) {
+        if (rule.type === 'map') {
+          AWS.util.each(req.params[name], function (key, value) {
+            req.httpRequest.headers[rule.name + key] = value;
+          });
+        } else {
+          var value = req.params[name];
+          if (rule.type === 'timestamp') {
+            var timestampFormat = rule.format || req.service.api.timestampFormat;
+            value = AWS.util.date.format(value, timestampFormat);
+          }
+          req.httpRequest.headers[rule.name || name] = value;
+        }
+      }
+    });
+
+  }
+};
+
+},{"../core":3}],15:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+require('./rest');
+require('./json');
+
+/**
+ * @api private
+ */
+AWS.ServiceInterface.RestJson = {
+  buildRequest: function buildRequest(req) {
+    AWS.ServiceInterface.Rest.buildRequest(req);
+    AWS.ServiceInterface.RestJson.populateBody(req);
+  },
+
+  extractError: function extractError(resp) {
+    AWS.ServiceInterface.Json.extractError(resp);
+  },
+
+  extractData: function extractData(resp) {
+    AWS.ServiceInterface.Rest.extractData(resp);
+
+    var req = resp.request;
+    var rules = req.service.api.operations[req.operation].output || {};
+    if (rules.payload && rules.members[rules.payload]) {
+      if (rules.members[rules.payload].streaming) {
+        resp.data[rules.payload] = resp.httpResponse.body;
+      } else {
+        resp.data[rules.payload] = resp.httpResponse.body.toString();
+      }
+    } else {
+      var data = resp.data;
+      AWS.ServiceInterface.Json.extractData(resp);
+      resp.data = AWS.util.merge(data, resp.data);
+    }
+
+    // extract request id
+    resp.data.RequestId = resp.httpResponse.headers['x-amz-request-id'] ||
+                          resp.httpResponse.headers['x-amzn-requestid'];
+  },
+
+  populateBody: function populateBody(req) {
+    /*jshint maxcomplexity:10*/
+    var input = req.service.api.operations[req.operation].input;
+    var payload = input.payload;
+    var params = {};
+
+    if (typeof payload === 'string') {
+
+      var rules = input.members[payload];
+      params = req.params[payload];
+
+      if (params === undefined) return;
+
+      if (rules.type === 'structure') {
+        req.httpRequest.body = this.toJSON(params, input, req.service.api);
+      } else {
+        // non-xml paylaod
+        req.httpRequest.body = params;
+      }
+
+    } else if (payload) {
+
+      AWS.util.arrayEach(payload, function (param) {
+        if (req.params[param] !== undefined) {
+          params[param] = req.params[param];
+        }
+      });
+      req.httpRequest.body = this.toJSON(params, input, req.service.api);
+
+    }
+  },
+
+  toJSON: function toJSON(params, rules, api) {
+    var builder = new AWS.JSON.Builder(rules, api);
+    return builder.toJSON(params);
+  }
+
+};
+
+},{"../core":3,"./json":12,"./rest":14}],16:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+require('../xml/builder');
+require('./rest');
+
+/**
+ * @api private
+ */
+AWS.ServiceInterface.RestXml = {
+  buildRequest: function buildRequest(req) {
+    AWS.ServiceInterface.Rest.buildRequest(req);
+    AWS.ServiceInterface.RestXml.populateBody(req);
+  },
+
+  extractError: function extractError(resp) {
+    AWS.ServiceInterface.Rest.extractError(resp);
+
+    var data = new AWS.XML.Parser({}).parse(resp.httpResponse.body.toString());
+    if (data.Errors) data = data.Errors;
+    if (data.Error) data = data.Error;
+    if (data.Code) {
+      resp.error = AWS.util.error(new Error(), {
+        code: data.Code,
+        message: data.Message
+      });
+    } else {
+      resp.error = AWS.util.error(new Error(), {
+        code: resp.httpResponse.statusCode,
+        message: null
+      });
+    }
+  },
+
+  extractData: function extractData(resp) {
+    AWS.ServiceInterface.Rest.extractData(resp);
+
+    var req = resp.request;
+    var httpResponse = resp.httpResponse;
+    var operation = req.service.api.operations[req.operation];
+    var rules = operation.output.members;
+
+    var output = operation.output;
+    var payload = output.payload;
+
+    if (payload) {
+      if (rules[payload].streaming) {
+        resp.data[payload] = httpResponse.body;
+      } else {
+        resp.data[payload] = httpResponse.body.toString();
+      }
+    } else if (httpResponse.body.length > 0) {
+      var parser = new AWS.XML.Parser(operation.output || {});
+      AWS.util.update(resp.data, parser.parse(httpResponse.body.toString()));
+    }
+
+    // extract request id
+    resp.data.RequestId = httpResponse.headers['x-amz-request-id'] ||
+                          httpResponse.headers['x-amzn-requestid'];
+  },
+
+  populateBody: function populateBody(req) {
+    /*jshint maxcomplexity:10*/
+    var input = req.service.api.operations[req.operation].input;
+    var payload = input.payload;
+    var rules = {};
+    var builder = null;
+    var params = req.params;
+
+    if (typeof payload === 'string') {
+
+      rules = input.members[payload];
+      params = params[payload];
+
+      if (params === undefined) return;
+
+      if (rules.type === 'structure') {
+        builder = new AWS.XML.Builder(payload, rules.members, req.service.api);
+        req.httpRequest.body = builder.toXML(params);
+      } else {
+        // non-xml paylaod
+        req.httpRequest.body = params;
+      }
+
+    } else if (payload) {
+
+      AWS.util.arrayEach(payload, function (member) {
+        rules[member] = input.members[member];
+      });
+
+      builder = new AWS.XML.Builder(input.wrapper, rules, req.service.api);
+      req.httpRequest.body = builder.toXML(params);
+
+    }
+
+  }
+};
+
+},{"../core":3,"../xml/builder":31,"./rest":14}],17:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+module.exports = {
+  format: 'json',
+  apiVersion: '2012-08-10',
+  endpointPrefix: 'dynamodb',
+  jsonVersion: '1.0',
+  serviceAbbreviation: 'DynamoDB',
+  serviceFullName: 'Amazon DynamoDB',
+  signatureVersion: 'v4',
+  targetPrefix: 'DynamoDB_20120810',
+  timestampFormat: 'iso8601',
+  operations: {
+    batchGetItem: {
+      name: 'BatchGetItem',
+      input: {
+        type: 'structure',
+        members: {
+          RequestItems: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                Keys: {
+                  type: 'list',
+                  members: {
+                    type: 'map',
+                    keys: {
+                    },
+                    members: {
+                      type: 'structure',
+                      members: {
+                        S: {
+                        },
+                        N: {
+                        },
+                        B: {
+                          type: 'base64'
+                        },
+                        SS: {
+                          type: 'list',
+                          members: {
+                          }
+                        },
+                        NS: {
+                          type: 'list',
+                          members: {
+                          }
+                        },
+                        BS: {
+                          type: 'list',
+                          members: {
+                            type: 'base64'
+                          }
+                        }
+                      }
+                    }
+                  },
+                  required: true
+                },
+                AttributesToGet: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                ConsistentRead: {
+                  type: 'boolean'
+                }
+              }
+            },
+            required: true
+          },
+          ReturnConsumedCapacity: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Responses: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'list',
+              members: {
+                type: 'map',
+                keys: {
+                },
+                members: {
+                  type: 'structure',
+                  members: {
+                    S: {
+                    },
+                    N: {
+                    },
+                    B: {
+                      type: 'base64'
+                    },
+                    SS: {
+                      type: 'list',
+                      members: {
+                      }
+                    },
+                    NS: {
+                      type: 'list',
+                      members: {
+                      }
+                    },
+                    BS: {
+                      type: 'list',
+                      members: {
+                        type: 'base64'
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          UnprocessedKeys: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                Keys: {
+                  type: 'list',
+                  members: {
+                    type: 'map',
+                    keys: {
+                    },
+                    members: {
+                      type: 'structure',
+                      members: {
+                        S: {
+                        },
+                        N: {
+                        },
+                        B: {
+                          type: 'base64'
+                        },
+                        SS: {
+                          type: 'list',
+                          members: {
+                          }
+                        },
+                        NS: {
+                          type: 'list',
+                          members: {
+                          }
+                        },
+                        BS: {
+                          type: 'list',
+                          members: {
+                            type: 'base64'
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                AttributesToGet: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                ConsistentRead: {
+                  type: 'boolean'
+                }
+              }
+            }
+          },
+          ConsumedCapacity: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                TableName: {
+                },
+                CapacityUnits: {
+                  type: 'float'
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    batchWriteItem: {
+      name: 'BatchWriteItem',
+      input: {
+        type: 'structure',
+        members: {
+          RequestItems: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'list',
+              members: {
+                type: 'structure',
+                members: {
+                  PutRequest: {
+                    type: 'structure',
+                    members: {
+                      Item: {
+                        type: 'map',
+                        keys: {
+                        },
+                        members: {
+                          type: 'structure',
+                          members: {
+                            S: {
+                            },
+                            N: {
+                            },
+                            B: {
+                              type: 'base64'
+                            },
+                            SS: {
+                              type: 'list',
+                              members: {
+                              }
+                            },
+                            NS: {
+                              type: 'list',
+                              members: {
+                              }
+                            },
+                            BS: {
+                              type: 'list',
+                              members: {
+                                type: 'base64'
+                              }
+                            }
+                          }
+                        },
+                        required: true
+                      }
+                    }
+                  },
+                  DeleteRequest: {
+                    type: 'structure',
+                    members: {
+                      Key: {
+                        type: 'map',
+                        keys: {
+                        },
+                        members: {
+                          type: 'structure',
+                          members: {
+                            S: {
+                            },
+                            N: {
+                            },
+                            B: {
+                              type: 'base64'
+                            },
+                            SS: {
+                              type: 'list',
+                              members: {
+                              }
+                            },
+                            NS: {
+                              type: 'list',
+                              members: {
+                              }
+                            },
+                            BS: {
+                              type: 'list',
+                              members: {
+                                type: 'base64'
+                              }
+                            }
+                          }
+                        },
+                        required: true
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            required: true
+          },
+          ReturnConsumedCapacity: {
+          },
+          ReturnItemCollectionMetrics: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          UnprocessedItems: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'list',
+              members: {
+                type: 'structure',
+                members: {
+                  PutRequest: {
+                    type: 'structure',
+                    members: {
+                      Item: {
+                        type: 'map',
+                        keys: {
+                        },
+                        members: {
+                          type: 'structure',
+                          members: {
+                            S: {
+                            },
+                            N: {
+                            },
+                            B: {
+                              type: 'base64'
+                            },
+                            SS: {
+                              type: 'list',
+                              members: {
+                              }
+                            },
+                            NS: {
+                              type: 'list',
+                              members: {
+                              }
+                            },
+                            BS: {
+                              type: 'list',
+                              members: {
+                                type: 'base64'
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  DeleteRequest: {
+                    type: 'structure',
+                    members: {
+                      Key: {
+                        type: 'map',
+                        keys: {
+                        },
+                        members: {
+                          type: 'structure',
+                          members: {
+                            S: {
+                            },
+                            N: {
+                            },
+                            B: {
+                              type: 'base64'
+                            },
+                            SS: {
+                              type: 'list',
+                              members: {
+                              }
+                            },
+                            NS: {
+                              type: 'list',
+                              members: {
+                              }
+                            },
+                            BS: {
+                              type: 'list',
+                              members: {
+                                type: 'base64'
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          ItemCollectionMetrics: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'list',
+              members: {
+                type: 'structure',
+                members: {
+                  ItemCollectionKey: {
+                    type: 'map',
+                    keys: {
+                    },
+                    members: {
+                      type: 'structure',
+                      members: {
+                        S: {
+                        },
+                        N: {
+                        },
+                        B: {
+                          type: 'base64'
+                        },
+                        SS: {
+                          type: 'list',
+                          members: {
+                          }
+                        },
+                        NS: {
+                          type: 'list',
+                          members: {
+                          }
+                        },
+                        BS: {
+                          type: 'list',
+                          members: {
+                            type: 'base64'
+                          }
+                        }
+                      }
+                    }
+                  },
+                  SizeEstimateRangeGB: {
+                    type: 'list',
+                    members: {
+                      type: 'float'
+                    }
+                  }
+                }
+              }
+            }
+          },
+          ConsumedCapacity: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                TableName: {
+                },
+                CapacityUnits: {
+                  type: 'float'
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    createTable: {
+      name: 'CreateTable',
+      input: {
+        type: 'structure',
+        members: {
+          AttributeDefinitions: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                AttributeName: {
+                  required: true
+                },
+                AttributeType: {
+                  required: true
+                }
+              }
+            },
+            required: true
+          },
+          TableName: {
+            required: true
+          },
+          KeySchema: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                AttributeName: {
+                  required: true
+                },
+                KeyType: {
+                  required: true
+                }
+              }
+            },
+            required: true
+          },
+          LocalSecondaryIndexes: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                IndexName: {
+                  required: true
+                },
+                KeySchema: {
+                  type: 'list',
+                  members: {
+                    type: 'structure',
+                    members: {
+                      AttributeName: {
+                        required: true
+                      },
+                      KeyType: {
+                        required: true
+                      }
+                    }
+                  },
+                  required: true
+                },
+                Projection: {
+                  type: 'structure',
+                  members: {
+                    ProjectionType: {
+                    },
+                    NonKeyAttributes: {
+                      type: 'list',
+                      members: {
+                      }
+                    }
+                  },
+                  required: true
+                }
+              }
+            }
+          },
+          ProvisionedThroughput: {
+            type: 'structure',
+            members: {
+              ReadCapacityUnits: {
+                type: 'integer',
+                required: true
+              },
+              WriteCapacityUnits: {
+                type: 'integer',
+                required: true
+              }
+            },
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          TableDescription: {
+            type: 'structure',
+            members: {
+              AttributeDefinitions: {
+                type: 'list',
+                members: {
+                  type: 'structure',
+                  members: {
+                    AttributeName: {
+                    },
+                    AttributeType: {
+                    }
+                  }
+                }
+              },
+              TableName: {
+              },
+              KeySchema: {
+                type: 'list',
+                members: {
+                  type: 'structure',
+                  members: {
+                    AttributeName: {
+                    },
+                    KeyType: {
+                    }
+                  }
+                }
+              },
+              TableStatus: {
+              },
+              CreationDateTime: {
+                type: 'timestamp'
+              },
+              ProvisionedThroughput: {
+                type: 'structure',
+                members: {
+                  LastIncreaseDateTime: {
+                    type: 'timestamp'
+                  },
+                  LastDecreaseDateTime: {
+                    type: 'timestamp'
+                  },
+                  NumberOfDecreasesToday: {
+                    type: 'integer'
+                  },
+                  ReadCapacityUnits: {
+                    type: 'integer'
+                  },
+                  WriteCapacityUnits: {
+                    type: 'integer'
+                  }
+                }
+              },
+              TableSizeBytes: {
+                type: 'integer'
+              },
+              ItemCount: {
+                type: 'integer'
+              },
+              LocalSecondaryIndexes: {
+                type: 'list',
+                members: {
+                  type: 'structure',
+                  members: {
+                    IndexName: {
+                    },
+                    KeySchema: {
+                      type: 'list',
+                      members: {
+                        type: 'structure',
+                        members: {
+                          AttributeName: {
+                          },
+                          KeyType: {
+                          }
+                        }
+                      }
+                    },
+                    Projection: {
+                      type: 'structure',
+                      members: {
+                        ProjectionType: {
+                        },
+                        NonKeyAttributes: {
+                          type: 'list',
+                          members: {
+                          }
+                        }
+                      }
+                    },
+                    IndexSizeBytes: {
+                      type: 'integer'
+                    },
+                    ItemCount: {
+                      type: 'integer'
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    deleteItem: {
+      name: 'DeleteItem',
+      input: {
+        type: 'structure',
+        members: {
+          TableName: {
+            required: true
+          },
+          Key: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                S: {
+                },
+                N: {
+                },
+                B: {
+                  type: 'base64'
+                },
+                SS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                NS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                BS: {
+                  type: 'list',
+                  members: {
+                    type: 'base64'
+                  }
+                }
+              }
+            },
+            required: true
+          },
+          Expected: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                Value: {
+                  type: 'structure',
+                  members: {
+                    S: {
+                    },
+                    N: {
+                    },
+                    B: {
+                      type: 'base64'
+                    },
+                    SS: {
+                      type: 'list',
+                      members: {
+                      }
+                    },
+                    NS: {
+                      type: 'list',
+                      members: {
+                      }
+                    },
+                    BS: {
+                      type: 'list',
+                      members: {
+                        type: 'base64'
+                      }
+                    }
+                  }
+                },
+                Exists: {
+                  type: 'boolean'
+                }
+              }
+            }
+          },
+          ReturnValues: {
+          },
+          ReturnConsumedCapacity: {
+          },
+          ReturnItemCollectionMetrics: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Attributes: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                S: {
+                },
+                N: {
+                },
+                B: {
+                  type: 'base64'
+                },
+                SS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                NS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                BS: {
+                  type: 'list',
+                  members: {
+                    type: 'base64'
+                  }
+                }
+              }
+            }
+          },
+          ConsumedCapacity: {
+            type: 'structure',
+            members: {
+              TableName: {
+              },
+              CapacityUnits: {
+                type: 'float'
+              }
+            }
+          },
+          ItemCollectionMetrics: {
+            type: 'structure',
+            members: {
+              ItemCollectionKey: {
+                type: 'map',
+                keys: {
+                },
+                members: {
+                  type: 'structure',
+                  members: {
+                    S: {
+                    },
+                    N: {
+                    },
+                    B: {
+                      type: 'base64'
+                    },
+                    SS: {
+                      type: 'list',
+                      members: {
+                      }
+                    },
+                    NS: {
+                      type: 'list',
+                      members: {
+                      }
+                    },
+                    BS: {
+                      type: 'list',
+                      members: {
+                        type: 'base64'
+                      }
+                    }
+                  }
+                }
+              },
+              SizeEstimateRangeGB: {
+                type: 'list',
+                members: {
+                  type: 'float'
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    deleteTable: {
+      name: 'DeleteTable',
+      input: {
+        type: 'structure',
+        members: {
+          TableName: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          TableDescription: {
+            type: 'structure',
+            members: {
+              AttributeDefinitions: {
+                type: 'list',
+                members: {
+                  type: 'structure',
+                  members: {
+                    AttributeName: {
+                    },
+                    AttributeType: {
+                    }
+                  }
+                }
+              },
+              TableName: {
+              },
+              KeySchema: {
+                type: 'list',
+                members: {
+                  type: 'structure',
+                  members: {
+                    AttributeName: {
+                    },
+                    KeyType: {
+                    }
+                  }
+                }
+              },
+              TableStatus: {
+              },
+              CreationDateTime: {
+                type: 'timestamp'
+              },
+              ProvisionedThroughput: {
+                type: 'structure',
+                members: {
+                  LastIncreaseDateTime: {
+                    type: 'timestamp'
+                  },
+                  LastDecreaseDateTime: {
+                    type: 'timestamp'
+                  },
+                  NumberOfDecreasesToday: {
+                    type: 'integer'
+                  },
+                  ReadCapacityUnits: {
+                    type: 'integer'
+                  },
+                  WriteCapacityUnits: {
+                    type: 'integer'
+                  }
+                }
+              },
+              TableSizeBytes: {
+                type: 'integer'
+              },
+              ItemCount: {
+                type: 'integer'
+              },
+              LocalSecondaryIndexes: {
+                type: 'list',
+                members: {
+                  type: 'structure',
+                  members: {
+                    IndexName: {
+                    },
+                    KeySchema: {
+                      type: 'list',
+                      members: {
+                        type: 'structure',
+                        members: {
+                          AttributeName: {
+                          },
+                          KeyType: {
+                          }
+                        }
+                      }
+                    },
+                    Projection: {
+                      type: 'structure',
+                      members: {
+                        ProjectionType: {
+                        },
+                        NonKeyAttributes: {
+                          type: 'list',
+                          members: {
+                          }
+                        }
+                      }
+                    },
+                    IndexSizeBytes: {
+                      type: 'integer'
+                    },
+                    ItemCount: {
+                      type: 'integer'
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    describeTable: {
+      name: 'DescribeTable',
+      input: {
+        type: 'structure',
+        members: {
+          TableName: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Table: {
+            type: 'structure',
+            members: {
+              AttributeDefinitions: {
+                type: 'list',
+                members: {
+                  type: 'structure',
+                  members: {
+                    AttributeName: {
+                    },
+                    AttributeType: {
+                    }
+                  }
+                }
+              },
+              TableName: {
+              },
+              KeySchema: {
+                type: 'list',
+                members: {
+                  type: 'structure',
+                  members: {
+                    AttributeName: {
+                    },
+                    KeyType: {
+                    }
+                  }
+                }
+              },
+              TableStatus: {
+              },
+              CreationDateTime: {
+                type: 'timestamp'
+              },
+              ProvisionedThroughput: {
+                type: 'structure',
+                members: {
+                  LastIncreaseDateTime: {
+                    type: 'timestamp'
+                  },
+                  LastDecreaseDateTime: {
+                    type: 'timestamp'
+                  },
+                  NumberOfDecreasesToday: {
+                    type: 'integer'
+                  },
+                  ReadCapacityUnits: {
+                    type: 'integer'
+                  },
+                  WriteCapacityUnits: {
+                    type: 'integer'
+                  }
+                }
+              },
+              TableSizeBytes: {
+                type: 'integer'
+              },
+              ItemCount: {
+                type: 'integer'
+              },
+              LocalSecondaryIndexes: {
+                type: 'list',
+                members: {
+                  type: 'structure',
+                  members: {
+                    IndexName: {
+                    },
+                    KeySchema: {
+                      type: 'list',
+                      members: {
+                        type: 'structure',
+                        members: {
+                          AttributeName: {
+                          },
+                          KeyType: {
+                          }
+                        }
+                      }
+                    },
+                    Projection: {
+                      type: 'structure',
+                      members: {
+                        ProjectionType: {
+                        },
+                        NonKeyAttributes: {
+                          type: 'list',
+                          members: {
+                          }
+                        }
+                      }
+                    },
+                    IndexSizeBytes: {
+                      type: 'integer'
+                    },
+                    ItemCount: {
+                      type: 'integer'
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    getItem: {
+      name: 'GetItem',
+      input: {
+        type: 'structure',
+        members: {
+          TableName: {
+            required: true
+          },
+          Key: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                S: {
+                },
+                N: {
+                },
+                B: {
+                  type: 'base64'
+                },
+                SS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                NS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                BS: {
+                  type: 'list',
+                  members: {
+                    type: 'base64'
+                  }
+                }
+              }
+            },
+            required: true
+          },
+          AttributesToGet: {
+            type: 'list',
+            members: {
+            }
+          },
+          ConsistentRead: {
+            type: 'boolean'
+          },
+          ReturnConsumedCapacity: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Item: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                S: {
+                },
+                N: {
+                },
+                B: {
+                  type: 'base64'
+                },
+                SS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                NS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                BS: {
+                  type: 'list',
+                  members: {
+                    type: 'base64'
+                  }
+                }
+              }
+            }
+          },
+          ConsumedCapacity: {
+            type: 'structure',
+            members: {
+              TableName: {
+              },
+              CapacityUnits: {
+                type: 'float'
+              }
+            }
+          }
+        }
+      }
+    },
+    listTables: {
+      name: 'ListTables',
+      input: {
+        type: 'structure',
+        members: {
+          ExclusiveStartTableName: {
+          },
+          Limit: {
+            type: 'integer'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          TableNames: {
+            type: 'list',
+            members: {
+            }
+          },
+          LastEvaluatedTableName: {
+          }
+        }
+      }
+    },
+    putItem: {
+      name: 'PutItem',
+      input: {
+        type: 'structure',
+        members: {
+          TableName: {
+            required: true
+          },
+          Item: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                S: {
+                },
+                N: {
+                },
+                B: {
+                  type: 'base64'
+                },
+                SS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                NS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                BS: {
+                  type: 'list',
+                  members: {
+                    type: 'base64'
+                  }
+                }
+              }
+            },
+            required: true
+          },
+          Expected: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                Value: {
+                  type: 'structure',
+                  members: {
+                    S: {
+                    },
+                    N: {
+                    },
+                    B: {
+                      type: 'base64'
+                    },
+                    SS: {
+                      type: 'list',
+                      members: {
+                      }
+                    },
+                    NS: {
+                      type: 'list',
+                      members: {
+                      }
+                    },
+                    BS: {
+                      type: 'list',
+                      members: {
+                        type: 'base64'
+                      }
+                    }
+                  }
+                },
+                Exists: {
+                  type: 'boolean'
+                }
+              }
+            }
+          },
+          ReturnValues: {
+          },
+          ReturnConsumedCapacity: {
+          },
+          ReturnItemCollectionMetrics: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Attributes: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                S: {
+                },
+                N: {
+                },
+                B: {
+                  type: 'base64'
+                },
+                SS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                NS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                BS: {
+                  type: 'list',
+                  members: {
+                    type: 'base64'
+                  }
+                }
+              }
+            }
+          },
+          ConsumedCapacity: {
+            type: 'structure',
+            members: {
+              TableName: {
+              },
+              CapacityUnits: {
+                type: 'float'
+              }
+            }
+          },
+          ItemCollectionMetrics: {
+            type: 'structure',
+            members: {
+              ItemCollectionKey: {
+                type: 'map',
+                keys: {
+                },
+                members: {
+                  type: 'structure',
+                  members: {
+                    S: {
+                    },
+                    N: {
+                    },
+                    B: {
+                      type: 'base64'
+                    },
+                    SS: {
+                      type: 'list',
+                      members: {
+                      }
+                    },
+                    NS: {
+                      type: 'list',
+                      members: {
+                      }
+                    },
+                    BS: {
+                      type: 'list',
+                      members: {
+                        type: 'base64'
+                      }
+                    }
+                  }
+                }
+              },
+              SizeEstimateRangeGB: {
+                type: 'list',
+                members: {
+                  type: 'float'
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    query: {
+      name: 'Query',
+      input: {
+        type: 'structure',
+        members: {
+          TableName: {
+            required: true
+          },
+          IndexName: {
+          },
+          Select: {
+          },
+          AttributesToGet: {
+            type: 'list',
+            members: {
+            }
+          },
+          Limit: {
+            type: 'integer'
+          },
+          ConsistentRead: {
+            type: 'boolean'
+          },
+          KeyConditions: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                AttributeValueList: {
+                  type: 'list',
+                  members: {
+                    type: 'structure',
+                    members: {
+                      S: {
+                      },
+                      N: {
+                      },
+                      B: {
+                        type: 'base64'
+                      },
+                      SS: {
+                        type: 'list',
+                        members: {
+                        }
+                      },
+                      NS: {
+                        type: 'list',
+                        members: {
+                        }
+                      },
+                      BS: {
+                        type: 'list',
+                        members: {
+                          type: 'base64'
+                        }
+                      }
+                    }
+                  }
+                },
+                ComparisonOperator: {
+                  required: true
+                }
+              }
+            }
+          },
+          ScanIndexForward: {
+            type: 'boolean'
+          },
+          ExclusiveStartKey: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                S: {
+                },
+                N: {
+                },
+                B: {
+                  type: 'base64'
+                },
+                SS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                NS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                BS: {
+                  type: 'list',
+                  members: {
+                    type: 'base64'
+                  }
+                }
+              }
+            }
+          },
+          ReturnConsumedCapacity: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Items: {
+            type: 'list',
+            members: {
+              type: 'map',
+              keys: {
+              },
+              members: {
+                type: 'structure',
+                members: {
+                  S: {
+                  },
+                  N: {
+                  },
+                  B: {
+                    type: 'base64'
+                  },
+                  SS: {
+                    type: 'list',
+                    members: {
+                    }
+                  },
+                  NS: {
+                    type: 'list',
+                    members: {
+                    }
+                  },
+                  BS: {
+                    type: 'list',
+                    members: {
+                      type: 'base64'
+                    }
+                  }
+                }
+              }
+            }
+          },
+          Count: {
+            type: 'integer'
+          },
+          LastEvaluatedKey: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                S: {
+                },
+                N: {
+                },
+                B: {
+                  type: 'base64'
+                },
+                SS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                NS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                BS: {
+                  type: 'list',
+                  members: {
+                    type: 'base64'
+                  }
+                }
+              }
+            }
+          },
+          ConsumedCapacity: {
+            type: 'structure',
+            members: {
+              TableName: {
+              },
+              CapacityUnits: {
+                type: 'float'
+              }
+            }
+          }
+        }
+      }
+    },
+    scan: {
+      name: 'Scan',
+      input: {
+        type: 'structure',
+        members: {
+          TableName: {
+            required: true
+          },
+          AttributesToGet: {
+            type: 'list',
+            members: {
+            }
+          },
+          Limit: {
+            type: 'integer'
+          },
+          Select: {
+          },
+          ScanFilter: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                AttributeValueList: {
+                  type: 'list',
+                  members: {
+                    type: 'structure',
+                    members: {
+                      S: {
+                      },
+                      N: {
+                      },
+                      B: {
+                        type: 'base64'
+                      },
+                      SS: {
+                        type: 'list',
+                        members: {
+                        }
+                      },
+                      NS: {
+                        type: 'list',
+                        members: {
+                        }
+                      },
+                      BS: {
+                        type: 'list',
+                        members: {
+                          type: 'base64'
+                        }
+                      }
+                    }
+                  }
+                },
+                ComparisonOperator: {
+                  required: true
+                }
+              }
+            }
+          },
+          ExclusiveStartKey: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                S: {
+                },
+                N: {
+                },
+                B: {
+                  type: 'base64'
+                },
+                SS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                NS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                BS: {
+                  type: 'list',
+                  members: {
+                    type: 'base64'
+                  }
+                }
+              }
+            }
+          },
+          ReturnConsumedCapacity: {
+          },
+          TotalSegments: {
+            type: 'integer'
+          },
+          Segment: {
+            type: 'integer'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Items: {
+            type: 'list',
+            members: {
+              type: 'map',
+              keys: {
+              },
+              members: {
+                type: 'structure',
+                members: {
+                  S: {
+                  },
+                  N: {
+                  },
+                  B: {
+                    type: 'base64'
+                  },
+                  SS: {
+                    type: 'list',
+                    members: {
+                    }
+                  },
+                  NS: {
+                    type: 'list',
+                    members: {
+                    }
+                  },
+                  BS: {
+                    type: 'list',
+                    members: {
+                      type: 'base64'
+                    }
+                  }
+                }
+              }
+            }
+          },
+          Count: {
+            type: 'integer'
+          },
+          ScannedCount: {
+            type: 'integer'
+          },
+          LastEvaluatedKey: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                S: {
+                },
+                N: {
+                },
+                B: {
+                  type: 'base64'
+                },
+                SS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                NS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                BS: {
+                  type: 'list',
+                  members: {
+                    type: 'base64'
+                  }
+                }
+              }
+            }
+          },
+          ConsumedCapacity: {
+            type: 'structure',
+            members: {
+              TableName: {
+              },
+              CapacityUnits: {
+                type: 'float'
+              }
+            }
+          }
+        }
+      }
+    },
+    updateItem: {
+      name: 'UpdateItem',
+      input: {
+        type: 'structure',
+        members: {
+          TableName: {
+            required: true
+          },
+          Key: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                S: {
+                },
+                N: {
+                },
+                B: {
+                  type: 'base64'
+                },
+                SS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                NS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                BS: {
+                  type: 'list',
+                  members: {
+                    type: 'base64'
+                  }
+                }
+              }
+            },
+            required: true
+          },
+          AttributeUpdates: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                Value: {
+                  type: 'structure',
+                  members: {
+                    S: {
+                    },
+                    N: {
+                    },
+                    B: {
+                      type: 'base64'
+                    },
+                    SS: {
+                      type: 'list',
+                      members: {
+                      }
+                    },
+                    NS: {
+                      type: 'list',
+                      members: {
+                      }
+                    },
+                    BS: {
+                      type: 'list',
+                      members: {
+                        type: 'base64'
+                      }
+                    }
+                  }
+                },
+                Action: {
+                }
+              }
+            }
+          },
+          Expected: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                Value: {
+                  type: 'structure',
+                  members: {
+                    S: {
+                    },
+                    N: {
+                    },
+                    B: {
+                      type: 'base64'
+                    },
+                    SS: {
+                      type: 'list',
+                      members: {
+                      }
+                    },
+                    NS: {
+                      type: 'list',
+                      members: {
+                      }
+                    },
+                    BS: {
+                      type: 'list',
+                      members: {
+                        type: 'base64'
+                      }
+                    }
+                  }
+                },
+                Exists: {
+                  type: 'boolean'
+                }
+              }
+            }
+          },
+          ReturnValues: {
+          },
+          ReturnConsumedCapacity: {
+          },
+          ReturnItemCollectionMetrics: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Attributes: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+              type: 'structure',
+              members: {
+                S: {
+                },
+                N: {
+                },
+                B: {
+                  type: 'base64'
+                },
+                SS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                NS: {
+                  type: 'list',
+                  members: {
+                  }
+                },
+                BS: {
+                  type: 'list',
+                  members: {
+                    type: 'base64'
+                  }
+                }
+              }
+            }
+          },
+          ConsumedCapacity: {
+            type: 'structure',
+            members: {
+              TableName: {
+              },
+              CapacityUnits: {
+                type: 'float'
+              }
+            }
+          },
+          ItemCollectionMetrics: {
+            type: 'structure',
+            members: {
+              ItemCollectionKey: {
+                type: 'map',
+                keys: {
+                },
+                members: {
+                  type: 'structure',
+                  members: {
+                    S: {
+                    },
+                    N: {
+                    },
+                    B: {
+                      type: 'base64'
+                    },
+                    SS: {
+                      type: 'list',
+                      members: {
+                      }
+                    },
+                    NS: {
+                      type: 'list',
+                      members: {
+                      }
+                    },
+                    BS: {
+                      type: 'list',
+                      members: {
+                        type: 'base64'
+                      }
+                    }
+                  }
+                }
+              },
+              SizeEstimateRangeGB: {
+                type: 'list',
+                members: {
+                  type: 'float'
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    updateTable: {
+      name: 'UpdateTable',
+      input: {
+        type: 'structure',
+        members: {
+          TableName: {
+            required: true
+          },
+          ProvisionedThroughput: {
+            type: 'structure',
+            members: {
+              ReadCapacityUnits: {
+                type: 'integer',
+                required: true
+              },
+              WriteCapacityUnits: {
+                type: 'integer',
+                required: true
+              }
+            },
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          TableDescription: {
+            type: 'structure',
+            members: {
+              AttributeDefinitions: {
+                type: 'list',
+                members: {
+                  type: 'structure',
+                  members: {
+                    AttributeName: {
+                    },
+                    AttributeType: {
+                    }
+                  }
+                }
+              },
+              TableName: {
+              },
+              KeySchema: {
+                type: 'list',
+                members: {
+                  type: 'structure',
+                  members: {
+                    AttributeName: {
+                    },
+                    KeyType: {
+                    }
+                  }
+                }
+              },
+              TableStatus: {
+              },
+              CreationDateTime: {
+                type: 'timestamp'
+              },
+              ProvisionedThroughput: {
+                type: 'structure',
+                members: {
+                  LastIncreaseDateTime: {
+                    type: 'timestamp'
+                  },
+                  LastDecreaseDateTime: {
+                    type: 'timestamp'
+                  },
+                  NumberOfDecreasesToday: {
+                    type: 'integer'
+                  },
+                  ReadCapacityUnits: {
+                    type: 'integer'
+                  },
+                  WriteCapacityUnits: {
+                    type: 'integer'
+                  }
+                }
+              },
+              TableSizeBytes: {
+                type: 'integer'
+              },
+              ItemCount: {
+                type: 'integer'
+              },
+              LocalSecondaryIndexes: {
+                type: 'list',
+                members: {
+                  type: 'structure',
+                  members: {
+                    IndexName: {
+                    },
+                    KeySchema: {
+                      type: 'list',
+                      members: {
+                        type: 'structure',
+                        members: {
+                          AttributeName: {
+                          },
+                          KeyType: {
+                          }
+                        }
+                      }
+                    },
+                    Projection: {
+                      type: 'structure',
+                      members: {
+                        ProjectionType: {
+                        },
+                        NonKeyAttributes: {
+                          type: 'list',
+                          members: {
+                          }
+                        }
+                      }
+                    },
+                    IndexSizeBytes: {
+                      type: 'integer'
+                    },
+                    ItemCount: {
+                      type: 'integer'
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  pagination: {
+    batchGetItem: {
+      inputToken: 'RequestItems',
+      outputToken: 'UnprocessedKeys',
+      resultKey: 'Items'
+    },
+    listTables: {
+      inputToken: 'ExclusiveStartTableName',
+      outputToken: 'LastEvaluatedTableName',
+      resultKey: 'TableNames'
+    },
+    query: {
+      inputToken: 'ExclusiveStartKey',
+      outputToken: 'LastEvaluatedKey',
+      resultKey: 'Items'
+    },
+    scan: {
+      inputToken: 'ExclusiveStartKey',
+      outputToken: 'LastEvaluatedKey',
+      resultKey: 'Items'
+    }
+  }
+};
+
+},{}],18:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+module.exports = {
+  format: 'rest-xml',
+  apiVersion: '2006-03-01',
+  checksumFormat: 'md5',
+  endpointPrefix: 's3',
+  globalEndpoint: 's3.amazonaws.com',
+  serviceAbbreviation: 'Amazon S3',
+  serviceFullName: 'Amazon Simple Storage Service',
+  signatureVersion: 's3',
+  timestampFormat: 'rfc822',
+  xmlnamespace: 'http://s3.amazonaws.com/doc/2006-03-01/',
+  operations: {
+    abortMultipartUpload: {
+      name: 'AbortMultipartUpload',
+      http: {
+        method: 'DELETE',
+        uri: '/{Bucket}/{Key}?uploadId={UploadId}'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          Key: {
+            required: true,
+            location: 'uri'
+          },
+          UploadId: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    completeMultipartUpload: {
+      name: 'CompleteMultipartUpload',
+      http: {
+        method: 'POST',
+        uri: '/{Bucket}/{Key}?uploadId={UploadId}'
+      },
+      input: {
+        payload: 'MultipartUpload',
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          Key: {
+            required: true,
+            location: 'uri'
+          },
+          MultipartUpload: {
+            type: 'structure',
+            name: 'CompleteMultipartUpload',
+            members: {
+              Parts: {
+                type: 'list',
+                flattened: true,
+                name: 'Part',
+                members: {
+                  type: 'structure',
+                  members: {
+                    ETag: {
+                    },
+                    PartNumber: {
+                      type: 'integer'
+                    }
+                  }
+                }
+              }
+            }
+          },
+          UploadId: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Location: {
+          },
+          Bucket: {
+          },
+          Key: {
+          },
+          Expiration: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'x-amz-expiration'
+          },
+          ETag: {
+          },
+          ServerSideEncryption: {
+            location: 'header',
+            name: 'x-amz-server-side-encryption'
+          },
+          VersionId: {
+            location: 'header',
+            name: 'x-amz-version-id'
+          }
+        }
+      }
+    },
+    copyObject: {
+      name: 'CopyObject',
+      alias: 'PutObjectCopy',
+      http: {
+        method: 'PUT',
+        uri: '/{Bucket}/{Key}'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          ACL: {
+            location: 'header',
+            name: 'x-amz-acl'
+          },
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          CacheControl: {
+            location: 'header',
+            name: 'Cache-Control'
+          },
+          ContentDisposition: {
+            location: 'header',
+            name: 'Content-Disposition'
+          },
+          ContentEncoding: {
+            location: 'header',
+            name: 'Content-Encoding'
+          },
+          ContentLanguage: {
+            location: 'header',
+            name: 'Content-Language'
+          },
+          ContentType: {
+            location: 'header',
+            name: 'Content-Type'
+          },
+          CopySource: {
+            location: 'header',
+            name: 'x-amz-copy-source',
+            required: true
+          },
+          CopySourceIfMatch: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'x-amz-copy-source-if-match'
+          },
+          CopySourceIfModifiedSince: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'x-amz-copy-source-if-modified-since'
+          },
+          CopySourceIfNoneMatch: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'x-amz-copy-source-if-none-match'
+          },
+          CopySourceIfUnmodifiedSince: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'x-amz-copy-source-if-unmodified-since'
+          },
+          Expires: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'Expires'
+          },
+          GrantFullControl: {
+            location: 'header',
+            name: 'x-amz-grant-full-control'
+          },
+          GrantRead: {
+            location: 'header',
+            name: 'x-amz-grant-read'
+          },
+          GrantReadACP: {
+            location: 'header',
+            name: 'x-amz-grant-read-acp'
+          },
+          GrantWriteACP: {
+            location: 'header',
+            name: 'x-amz-grant-write-acp'
+          },
+          Key: {
+            required: true,
+            location: 'uri'
+          },
+          Metadata: {
+            type: 'map',
+            location: 'header',
+            name: 'x-amz-meta-',
+            keys: {
+            },
+            members: {
+            }
+          },
+          MetadataDirective: {
+            location: 'header',
+            name: 'x-amz-metadata-directive'
+          },
+          ServerSideEncryption: {
+            location: 'header',
+            name: 'x-amz-server-side-encryption'
+          },
+          StorageClass: {
+            location: 'header',
+            name: 'x-amz-storage-class'
+          },
+          WebsiteRedirectLocation: {
+            location: 'header',
+            name: 'x-amz-website-redirect-location'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Expiration: {
+            location: 'header',
+            name: 'x-amz-expiration'
+          },
+          CopySourceVersionId: {
+            location: 'header',
+            name: 'x-amz-copy-source-version-id'
+          },
+          ServerSideEncryption: {
+            location: 'header',
+            name: 'x-amz-server-side-encryption'
+          },
+          ETag: {
+          },
+          LastModified: {
+          }
+        }
+      }
+    },
+    createBucket: {
+      name: 'CreateBucket',
+      alias: 'PutBucket',
+      http: {
+        method: 'PUT',
+        uri: '/{Bucket}'
+      },
+      input: {
+        payload: 'CreateBucketConfiguration',
+        type: 'structure',
+        members: {
+          ACL: {
+            location: 'header',
+            name: 'x-amz-acl'
+          },
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          CreateBucketConfiguration: {
+            type: 'structure',
+            members: {
+              LocationConstraint: {
+              }
+            }
+          },
+          GrantFullControl: {
+            location: 'header',
+            name: 'x-amz-grant-full-control'
+          },
+          GrantRead: {
+            location: 'header',
+            name: 'x-amz-grant-read'
+          },
+          GrantReadACP: {
+            location: 'header',
+            name: 'x-amz-grant-read-acp'
+          },
+          GrantWrite: {
+            location: 'header',
+            name: 'x-amz-grant-write'
+          },
+          GrantWriteACP: {
+            location: 'header',
+            name: 'x-amz-grant-write-acp'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Location: {
+            location: 'header',
+            name: 'Location'
+          }
+        }
+      }
+    },
+    createMultipartUpload: {
+      name: 'CreateMultipartUpload',
+      alias: 'InitiateMultipartUpload',
+      http: {
+        method: 'POST',
+        uri: '/{Bucket}/{Key}?uploads'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          ACL: {
+            location: 'header',
+            name: 'x-amz-acl'
+          },
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          CacheControl: {
+            location: 'header',
+            name: 'Cache-Control'
+          },
+          ContentDisposition: {
+            location: 'header',
+            name: 'Content-Disposition'
+          },
+          ContentEncoding: {
+            location: 'header',
+            name: 'Content-Encoding'
+          },
+          ContentLanguage: {
+            location: 'header',
+            name: 'Content-Language'
+          },
+          ContentType: {
+            location: 'header',
+            name: 'Content-Type'
+          },
+          Expires: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'Expires'
+          },
+          GrantFullControl: {
+            location: 'header',
+            name: 'x-amz-grant-full-control'
+          },
+          GrantRead: {
+            location: 'header',
+            name: 'x-amz-grant-read'
+          },
+          GrantReadACP: {
+            location: 'header',
+            name: 'x-amz-grant-read-acp'
+          },
+          GrantWriteACP: {
+            location: 'header',
+            name: 'x-amz-grant-write-acp'
+          },
+          Key: {
+            required: true,
+            location: 'uri'
+          },
+          Metadata: {
+            type: 'map',
+            location: 'header',
+            name: 'x-amz-meta-',
+            keys: {
+            },
+            members: {
+            }
+          },
+          ServerSideEncryption: {
+            location: 'header',
+            name: 'x-amz-server-side-encryption'
+          },
+          StorageClass: {
+            location: 'header',
+            name: 'x-amz-storage-class'
+          },
+          WebsiteRedirectLocation: {
+            location: 'header',
+            name: 'x-amz-website-redirect-location'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            name: 'Bucket'
+          },
+          Key: {
+          },
+          UploadId: {
+          },
+          ServerSideEncryption: {
+            location: 'header',
+            name: 'x-amz-server-side-encryption'
+          }
+        }
+      }
+    },
+    deleteBucket: {
+      name: 'DeleteBucket',
+      http: {
+        method: 'DELETE',
+        uri: '/{Bucket}'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    deleteBucketCors: {
+      name: 'DeleteBucketCors',
+      http: {
+        method: 'DELETE',
+        uri: '/{Bucket}?cors'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    deleteBucketLifecycle: {
+      name: 'DeleteBucketLifecycle',
+      http: {
+        method: 'DELETE',
+        uri: '/{Bucket}?lifecycle'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    deleteBucketPolicy: {
+      name: 'DeleteBucketPolicy',
+      http: {
+        method: 'DELETE',
+        uri: '/{Bucket}?policy'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    deleteBucketTagging: {
+      name: 'DeleteBucketTagging',
+      http: {
+        method: 'DELETE',
+        uri: '/{Bucket}?tagging'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    deleteBucketWebsite: {
+      name: 'DeleteBucketWebsite',
+      http: {
+        method: 'DELETE',
+        uri: '/{Bucket}?website'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    deleteObject: {
+      name: 'DeleteObject',
+      http: {
+        method: 'DELETE',
+        uri: '/{Bucket}/{Key}?versionId={VersionId}'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          Key: {
+            required: true,
+            location: 'uri'
+          },
+          MFA: {
+            location: 'header',
+            name: 'x-amz-mfa'
+          },
+          VersionId: {
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          DeleteMarker: {
+            type: 'boolean',
+            location: 'header',
+            name: 'x-amz-delete-marker'
+          },
+          VersionId: {
+            location: 'header',
+            name: 'x-amz-version-id'
+          }
+        }
+      }
+    },
+    deleteObjects: {
+      name: 'DeleteObjects',
+      alias: 'DeleteMultipleObjects',
+      http: {
+        method: 'POST',
+        uri: '/{Bucket}?delete'
+      },
+      input: {
+        payload: 'Delete',
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          Delete: {
+            type: 'structure',
+            required: true,
+            members: {
+              Objects: {
+                type: 'list',
+                flattened: true,
+                name: 'Object',
+                required: true,
+                members: {
+                  type: 'structure',
+                  members: {
+                    Key: {
+                      required: true
+                    },
+                    VersionId: {
+                    }
+                  }
+                }
+              },
+              Quiet: {
+                type: 'boolean'
+              }
+            }
+          },
+          MFA: {
+            location: 'header',
+            name: 'x-amz-mfa'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Deleted: {
+            type: 'list',
+            flattened: true,
+            members: {
+              type: 'structure',
+              members: {
+                Key: {
+                },
+                VersionId: {
+                },
+                DeleteMarker: {
+                  type: 'boolean'
+                },
+                DeleteMarkerVersionId: {
+                }
+              }
+            }
+          },
+          Error: {
+            type: 'list',
+            flattened: true,
+            name: 'Errors',
+            members: {
+              type: 'structure',
+              members: {
+                Key: {
+                },
+                VersionId: {
+                },
+                Code: {
+                },
+                Message: {
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    getBucketAcl: {
+      name: 'GetBucketAcl',
+      http: {
+        method: 'GET',
+        uri: '/{Bucket}?acl'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Owner: {
+            type: 'structure',
+            members: {
+              ID: {
+              },
+              DisplayName: {
+              }
+            }
+          },
+          AccessControlList: {
+            type: 'list',
+            name: 'Grants',
+            members: {
+              type: 'structure',
+              name: 'Grant',
+              members: {
+                Grantee: {
+                  type: 'structure',
+                  xmlns: {
+                    prefix: 'xsi',
+                    uri: 'http://www.w3.org/2001/XMLSchema-instance'
+                  },
+                  members: {
+                    'xsi:type': {
+                      attribute: true,
+                      name: 'Type'
+                    },
+                    ID: {
+                    },
+                    DisplayName: {
+                    },
+                    EmailAddress: {
+                    },
+                    URI: {
+                    }
+                  }
+                },
+                Permission: {
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    getBucketCors: {
+      name: 'GetBucketCors',
+      http: {
+        method: 'GET',
+        uri: '/{Bucket}?cors'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          CORSRule: {
+            type: 'list',
+            flattened: true,
+            name: 'CORSRules',
+            members: {
+              type: 'structure',
+              members: {
+                AllowedHeader: {
+                  type: 'list',
+                  flattened: true,
+                  name: 'AllowedHeaders',
+                  members: {
+                  }
+                },
+                AllowedOrigin: {
+                  type: 'list',
+                  flattened: true,
+                  name: 'AllowedOrigins',
+                  members: {
+                  }
+                },
+                AllowedMethod: {
+                  type: 'list',
+                  flattened: true,
+                  name: 'AllowedMethods',
+                  members: {
+                  }
+                },
+                MaxAgeSeconds: {
+                  type: 'integer'
+                },
+                ExposeHeader: {
+                  type: 'list',
+                  flattened: true,
+                  name: 'ExposeHeaders',
+                  members: {
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    getBucketLifecycle: {
+      name: 'GetBucketLifecycle',
+      http: {
+        method: 'GET',
+        uri: '/{Bucket}?lifecycle'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Rule: {
+            type: 'list',
+            flattened: true,
+            name: 'Rules',
+            members: {
+              type: 'structure',
+              members: {
+                ID: {
+                },
+                Prefix: {
+                },
+                Status: {
+                },
+                Transition: {
+                  type: 'structure',
+                  members: {
+                    Days: {
+                      type: 'integer'
+                    },
+                    Date: {
+                      type: 'timestamp',
+                      format: 'iso8601'
+                    },
+                    StorageClass: {
+                    }
+                  }
+                },
+                Expiration: {
+                  type: 'structure',
+                  members: {
+                    Days: {
+                      type: 'integer'
+                    },
+                    Date: {
+                      type: 'timestamp',
+                      format: 'iso8601'
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    getBucketLocation: {
+      name: 'GetBucketLocation',
+      http: {
+        method: 'GET',
+        uri: '/{Bucket}?location'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          LocationConstraint: {
+          }
+        }
+      }
+    },
+    getBucketLogging: {
+      name: 'GetBucketLogging',
+      http: {
+        method: 'GET',
+        uri: '/{Bucket}?logging'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          LoggingEnabled: {
+            type: 'structure',
+            members: {
+              TargetBucket: {
+              },
+              TargetPrefix: {
+              },
+              TargetGrants: {
+                type: 'list',
+                members: {
+                  type: 'structure',
+                  name: 'Grant',
+                  members: {
+                    Grantee: {
+                      type: 'structure',
+                      xmlns: {
+                        prefix: 'xsi',
+                        uri: 'http://www.w3.org/2001/XMLSchema-instance'
+                      },
+                      members: {
+                        'xsi:type': {
+                          attribute: true,
+                          name: 'Type'
+                        },
+                        ID: {
+                        },
+                        DisplayName: {
+                        },
+                        EmailAddress: {
+                        },
+                        URI: {
+                        }
+                      }
+                    },
+                    Permission: {
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    getBucketNotification: {
+      name: 'GetBucketNotification',
+      http: {
+        method: 'GET',
+        uri: '/{Bucket}?notification'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          TopicConfiguration: {
+            type: 'structure',
+            members: {
+              Topic: {
+              },
+              Event: {
+              }
+            }
+          }
+        }
+      }
+    },
+    getBucketPolicy: {
+      name: 'GetBucketPolicy',
+      http: {
+        method: 'GET',
+        uri: '/{Bucket}?policy'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Policy: {
+          }
+        },
+        payload: 'Policy'
+      }
+    },
+    getBucketRequestPayment: {
+      name: 'GetBucketRequestPayment',
+      http: {
+        method: 'GET',
+        uri: '/{Bucket}?requestPayment'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Payer: {
+          }
+        }
+      }
+    },
+    getBucketTagging: {
+      name: 'GetBucketTagging',
+      http: {
+        method: 'GET',
+        uri: '/{Bucket}?tagging'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          TagSet: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              name: 'Tag',
+              members: {
+                Key: {
+                },
+                Value: {
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    getBucketVersioning: {
+      name: 'GetBucketVersioning',
+      http: {
+        method: 'GET',
+        uri: '/{Bucket}?versioning'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Status: {
+          },
+          MFADelete: {
+          }
+        }
+      }
+    },
+    getBucketWebsite: {
+      name: 'GetBucketWebsite',
+      http: {
+        method: 'GET',
+        uri: '/{Bucket}?website'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          RedirectAllRequestsTo: {
+            type: 'structure',
+            members: {
+              HostName: {
+              },
+              Protocol: {
+              }
+            }
+          },
+          IndexDocument: {
+            type: 'structure',
+            members: {
+              Suffix: {
+              }
+            }
+          },
+          ErrorDocument: {
+            type: 'structure',
+            members: {
+              Key: {
+              }
+            }
+          },
+          RoutingRules: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              name: 'RoutingRule',
+              members: {
+                Condition: {
+                  type: 'structure',
+                  members: {
+                    KeyPrefixEquals: {
+                    },
+                    HttpErrorCodeReturnedEquals: {
+                    }
+                  }
+                },
+                Redirect: {
+                  type: 'structure',
+                  members: {
+                    HostName: {
+                    },
+                    ReplaceKeyPrefixWith: {
+                    },
+                    ReplaceKeyWith: {
+                    },
+                    HttpRedirectCode: {
+                    },
+                    Protocol: {
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    getObject: {
+      name: 'GetObject',
+      http: {
+        method: 'GET',
+        uri: '/{Bucket}/{Key}?versionId={VersionId}&response-content-type={ResponseContentType}&response-content-language={ResponseContentLanguage}&response-expires={ResponseExpires}&response-cache-control={ResponseCacheControl}&response-content-disposition={ResponseContentDisposition}&response-content-encoding={ResponseContentEncoding}'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          IfMatch: {
+            location: 'header',
+            name: 'If-Match'
+          },
+          IfModifiedSince: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'If-Modified-Since'
+          },
+          IfNoneMatch: {
+            location: 'header',
+            name: 'If-None-Match'
+          },
+          IfUnmodifiedSince: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'If-Unmodified-Since'
+          },
+          Key: {
+            required: true,
+            location: 'uri'
+          },
+          Range: {
+            location: 'header',
+            name: 'Range'
+          },
+          ResponseCacheControl: {
+            location: 'uri'
+          },
+          ResponseContentDisposition: {
+            location: 'uri'
+          },
+          ResponseContentEncoding: {
+            location: 'uri'
+          },
+          ResponseContentLanguage: {
+            location: 'uri'
+          },
+          ResponseContentType: {
+            location: 'uri'
+          },
+          ResponseExpires: {
+            type: 'timestamp',
+            location: 'uri'
+          },
+          VersionId: {
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Body: {
+            type: 'binary',
+            streaming: true
+          },
+          DeleteMarker: {
+            type: 'boolean',
+            location: 'header',
+            name: 'x-amz-delete-marker'
+          },
+          AcceptRanges: {
+            location: 'header',
+            name: 'accept-ranges'
+          },
+          Expiration: {
+            location: 'header',
+            name: 'x-amz-expiration'
+          },
+          Restore: {
+            location: 'header',
+            name: 'x-amz-restore'
+          },
+          LastModified: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'Last-Modified'
+          },
+          ContentLength: {
+            type: 'integer',
+            location: 'header',
+            name: 'Content-Length'
+          },
+          ETag: {
+            location: 'header',
+            name: 'ETag'
+          },
+          MissingMeta: {
+            type: 'integer',
+            location: 'header',
+            name: 'x-amz-missing-meta'
+          },
+          VersionId: {
+            location: 'header',
+            name: 'x-amz-version-id'
+          },
+          CacheControl: {
+            location: 'header',
+            name: 'Cache-Control'
+          },
+          ContentDisposition: {
+            location: 'header',
+            name: 'Content-Disposition'
+          },
+          ContentEncoding: {
+            location: 'header',
+            name: 'Content-Encoding'
+          },
+          ContentLanguage: {
+            location: 'header',
+            name: 'Content-Language'
+          },
+          ContentType: {
+            location: 'header',
+            name: 'Content-Type'
+          },
+          Expires: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'Expires'
+          },
+          WebsiteRedirectLocation: {
+            location: 'header',
+            name: 'x-amz-website-redirect-location'
+          },
+          ServerSideEncryption: {
+            location: 'header',
+            name: 'x-amz-server-side-encryption'
+          },
+          Metadata: {
+            type: 'map',
+            location: 'header',
+            name: 'x-amz-meta-',
+            keys: {
+            },
+            members: {
+            }
+          }
+        },
+        payload: 'Body'
+      }
+    },
+    getObjectAcl: {
+      name: 'GetObjectAcl',
+      http: {
+        method: 'GET',
+        uri: '/{Bucket}/{Key}?acl&versionId={VersionId}'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          Key: {
+            required: true,
+            location: 'uri'
+          },
+          VersionId: {
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Owner: {
+            type: 'structure',
+            members: {
+              ID: {
+              },
+              DisplayName: {
+              }
+            }
+          },
+          AccessControlList: {
+            type: 'list',
+            name: 'Grants',
+            members: {
+              type: 'structure',
+              name: 'Grant',
+              members: {
+                Grantee: {
+                  type: 'structure',
+                  xmlns: {
+                    prefix: 'xsi',
+                    uri: 'http://www.w3.org/2001/XMLSchema-instance'
+                  },
+                  members: {
+                    'xsi:type': {
+                      attribute: true,
+                      name: 'Type'
+                    },
+                    ID: {
+                    },
+                    DisplayName: {
+                    },
+                    EmailAddress: {
+                    },
+                    URI: {
+                    }
+                  }
+                },
+                Permission: {
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    getObjectTorrent: {
+      name: 'GetObjectTorrent',
+      http: {
+        method: 'GET',
+        uri: '/{Bucket}/{Key}?torrent'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          Key: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Body: {
+            type: 'binary',
+            streaming: true
+          }
+        },
+        payload: 'Body'
+      }
+    },
+    headBucket: {
+      name: 'HeadBucket',
+      http: {
+        method: 'HEAD',
+        uri: '/{Bucket}'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    headObject: {
+      name: 'HeadObject',
+      http: {
+        method: 'HEAD',
+        uri: '/{Bucket}/{Key}?versionId={VersionId}'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          IfMatch: {
+            location: 'header',
+            name: 'If-Match'
+          },
+          IfModifiedSince: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'If-Modified-Since'
+          },
+          IfNoneMatch: {
+            location: 'header',
+            name: 'If-None-Match'
+          },
+          IfUnmodifiedSince: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'If-Unmodified-Since'
+          },
+          Key: {
+            required: true,
+            location: 'uri'
+          },
+          Range: {
+            location: 'header',
+            name: 'Range'
+          },
+          VersionId: {
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          DeleteMarker: {
+            type: 'boolean',
+            location: 'header',
+            name: 'x-amz-delete-marker'
+          },
+          AcceptRanges: {
+            location: 'header',
+            name: 'accept-ranges'
+          },
+          Expiration: {
+            location: 'header',
+            name: 'x-amz-expiration'
+          },
+          Restore: {
+            location: 'header',
+            name: 'x-amz-restore'
+          },
+          LastModified: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'Last-Modified'
+          },
+          ContentLength: {
+            type: 'integer',
+            location: 'header',
+            name: 'Content-Length'
+          },
+          ETag: {
+            location: 'header',
+            name: 'ETag'
+          },
+          MissingMeta: {
+            type: 'integer',
+            location: 'header',
+            name: 'x-amz-missing-meta'
+          },
+          VersionId: {
+            location: 'header',
+            name: 'x-amz-version-id'
+          },
+          CacheControl: {
+            location: 'header',
+            name: 'Cache-Control'
+          },
+          ContentDisposition: {
+            location: 'header',
+            name: 'Content-Disposition'
+          },
+          ContentEncoding: {
+            location: 'header',
+            name: 'Content-Encoding'
+          },
+          ContentLanguage: {
+            location: 'header',
+            name: 'Content-Language'
+          },
+          ContentType: {
+            location: 'header',
+            name: 'Content-Type'
+          },
+          Expires: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'Expires'
+          },
+          WebsiteRedirectLocation: {
+            location: 'header',
+            name: 'x-amz-website-redirect-location'
+          },
+          ServerSideEncryption: {
+            location: 'header',
+            name: 'x-amz-server-side-encryption'
+          },
+          Metadata: {
+            type: 'map',
+            location: 'header',
+            name: 'x-amz-meta-',
+            keys: {
+            },
+            members: {
+            }
+          }
+        }
+      }
+    },
+    listBuckets: {
+      name: 'ListBuckets',
+      alias: 'GetService',
+      http: {
+        method: 'GET',
+        uri: '/'
+      },
+      input: {
+        type: 'structure',
+        members: {
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Buckets: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              name: 'Bucket',
+              members: {
+                Name: {
+                },
+                CreationDate: {
+                  type: 'timestamp'
+                }
+              }
+            }
+          },
+          Owner: {
+            type: 'structure',
+            members: {
+              ID: {
+              },
+              DisplayName: {
+              }
+            }
+          }
+        }
+      }
+    },
+    listMultipartUploads: {
+      name: 'ListMultipartUploads',
+      http: {
+        method: 'GET',
+        uri: '/{Bucket}?uploads&prefix={Prefix}&delimiter={Delimiter}&max-uploads={MaxUploads}&key-marker={KeyMarker}&upload-id-marker={UploadIdMarker}'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          Delimiter: {
+            location: 'uri'
+          },
+          KeyMarker: {
+            location: 'uri'
+          },
+          MaxUploads: {
+            type: 'integer',
+            location: 'uri'
+          },
+          Prefix: {
+            location: 'uri'
+          },
+          UploadIdMarker: {
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Bucket: {
+          },
+          KeyMarker: {
+          },
+          UploadIdMarker: {
+          },
+          NextKeyMarker: {
+          },
+          Prefix: {
+          },
+          NextUploadIdMarker: {
+          },
+          MaxUploads: {
+            type: 'integer'
+          },
+          IsTruncated: {
+            type: 'boolean'
+          },
+          Upload: {
+            type: 'list',
+            flattened: true,
+            name: 'Uploads',
+            members: {
+              type: 'structure',
+              members: {
+                UploadId: {
+                },
+                Key: {
+                },
+                Initiated: {
+                  type: 'timestamp'
+                },
+                StorageClass: {
+                },
+                Owner: {
+                  type: 'structure',
+                  members: {
+                    ID: {
+                    },
+                    DisplayName: {
+                    }
+                  }
+                },
+                Initiator: {
+                  type: 'structure',
+                  members: {
+                    ID: {
+                    },
+                    DisplayName: {
+                    }
+                  }
+                }
+              }
+            }
+          },
+          CommonPrefixes: {
+            type: 'list',
+            flattened: true,
+            members: {
+              type: 'structure',
+              members: {
+                Prefix: {
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    listObjectVersions: {
+      name: 'ListObjectVersions',
+      alias: 'GetBucketObjectVersions',
+      http: {
+        method: 'GET',
+        uri: '/{Bucket}?versions&delimiter={Delimiter}&key-marker={KeyMarker}&max-keys={MaxKeys}&prefix={Prefix}&version-id-marker={VersionIdMarker}'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          Delimiter: {
+            location: 'uri'
+          },
+          KeyMarker: {
+            location: 'uri'
+          },
+          MaxKeys: {
+            type: 'integer',
+            location: 'uri'
+          },
+          Prefix: {
+            location: 'uri'
+          },
+          VersionIdMarker: {
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          IsTruncated: {
+            type: 'boolean'
+          },
+          KeyMarker: {
+          },
+          VersionIdMarker: {
+          },
+          NextKeyMarker: {
+          },
+          NextVersionIdMarker: {
+          },
+          Version: {
+            type: 'list',
+            flattened: true,
+            name: 'Versions',
+            members: {
+              type: 'structure',
+              members: {
+                ETag: {
+                },
+                Size: {
+                },
+                StorageClass: {
+                },
+                Key: {
+                },
+                VersionId: {
+                },
+                IsLatest: {
+                  type: 'boolean'
+                },
+                LastModified: {
+                  type: 'timestamp'
+                },
+                Owner: {
+                  type: 'structure',
+                  members: {
+                    ID: {
+                    },
+                    DisplayName: {
+                    }
+                  }
+                }
+              }
+            }
+          },
+          DeleteMarker: {
+            type: 'list',
+            flattened: true,
+            name: 'DeleteMarkers',
+            members: {
+              type: 'structure',
+              members: {
+                Owner: {
+                  type: 'structure',
+                  members: {
+                    ID: {
+                    },
+                    DisplayName: {
+                    }
+                  }
+                },
+                Key: {
+                },
+                VersionId: {
+                },
+                IsLatest: {
+                  type: 'boolean'
+                },
+                LastModified: {
+                  type: 'timestamp'
+                }
+              }
+            }
+          },
+          Name: {
+          },
+          Prefix: {
+          },
+          MaxKeys: {
+            type: 'integer'
+          },
+          CommonPrefixes: {
+            type: 'list',
+            flattened: true,
+            members: {
+              type: 'structure',
+              members: {
+                Prefix: {
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    listObjects: {
+      name: 'ListObjects',
+      alias: 'GetBucket',
+      http: {
+        method: 'GET',
+        uri: '/{Bucket}?delimiter={Delimiter}&marker={Marker}&max-keys={MaxKeys}&prefix={Prefix}'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          Delimiter: {
+            location: 'uri'
+          },
+          Marker: {
+            location: 'uri'
+          },
+          MaxKeys: {
+            type: 'integer',
+            location: 'uri'
+          },
+          Prefix: {
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          IsTruncated: {
+            type: 'boolean'
+          },
+          Marker: {
+          },
+          Contents: {
+            type: 'list',
+            flattened: true,
+            members: {
+              type: 'structure',
+              members: {
+                Key: {
+                },
+                LastModified: {
+                  type: 'timestamp'
+                },
+                ETag: {
+                },
+                Size: {
+                  type: 'integer'
+                },
+                StorageClass: {
+                },
+                Owner: {
+                  type: 'structure',
+                  members: {
+                    ID: {
+                    },
+                    DisplayName: {
+                    }
+                  }
+                }
+              }
+            }
+          },
+          Name: {
+          },
+          Prefix: {
+          },
+          MaxKeys: {
+            type: 'integer'
+          },
+          CommonPrefixes: {
+            type: 'list',
+            flattened: true,
+            members: {
+              type: 'structure',
+              members: {
+                Prefix: {
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    listParts: {
+      name: 'ListParts',
+      http: {
+        method: 'GET',
+        uri: '/{Bucket}/{Key}?uploadId={UploadId}&max-parts={MaxParts}&part-number-marker={PartNumberMarker}'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          Key: {
+            required: true,
+            location: 'uri'
+          },
+          MaxParts: {
+            type: 'integer',
+            location: 'uri'
+          },
+          PartNumberMarker: {
+            location: 'uri'
+          },
+          UploadId: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Bucket: {
+          },
+          Key: {
+          },
+          UploadId: {
+          },
+          PartNumberMarker: {
+            type: 'integer'
+          },
+          NextPartNumberMarker: {
+            type: 'integer'
+          },
+          MaxParts: {
+            type: 'integer'
+          },
+          IsTruncated: {
+            type: 'boolean'
+          },
+          Part: {
+            type: 'list',
+            flattened: true,
+            name: 'Parts',
+            members: {
+              type: 'structure',
+              members: {
+                PartNumber: {
+                  type: 'integer'
+                },
+                LastModified: {
+                  type: 'timestamp'
+                },
+                ETag: {
+                },
+                Size: {
+                  type: 'integer'
+                }
+              }
+            }
+          },
+          Initiator: {
+            type: 'structure',
+            members: {
+              ID: {
+              },
+              DisplayName: {
+              }
+            }
+          },
+          Owner: {
+            type: 'structure',
+            members: {
+              ID: {
+              },
+              DisplayName: {
+              }
+            }
+          },
+          StorageClass: {
+          }
+        }
+      }
+    },
+    putBucketAcl: {
+      name: 'PutBucketAcl',
+      http: {
+        method: 'PUT',
+        uri: '/{Bucket}?acl'
+      },
+      input: {
+        payload: 'AccessControlPolicy',
+        type: 'structure',
+        members: {
+          ACL: {
+            location: 'header',
+            name: 'x-amz-acl'
+          },
+          AccessControlPolicy: {
+            type: 'structure',
+            members: {
+              Grants: {
+                type: 'list',
+                name: 'AccessControlList',
+                members: {
+                  type: 'structure',
+                  name: 'Grant',
+                  members: {
+                    Grantee: {
+                      type: 'structure',
+                      xmlns: {
+                        prefix: 'xsi',
+                        uri: 'http://www.w3.org/2001/XMLSchema-instance'
+                      },
+                      members: {
+                        DisplayName: {
+                        },
+                        EmailAddress: {
+                        },
+                        ID: {
+                        },
+                        Type: {
+                          required: true,
+                          attribute: true,
+                          name: 'xsi:type'
+                        },
+                        URI: {
+                        }
+                      }
+                    },
+                    Permission: {
+                    }
+                  }
+                }
+              },
+              Owner: {
+                type: 'structure',
+                members: {
+                  DisplayName: {
+                  },
+                  ID: {
+                  }
+                }
+              }
+            }
+          },
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          ContentMD5: {
+            location: 'header',
+            name: 'Content-MD5'
+          },
+          GrantFullControl: {
+            location: 'header',
+            name: 'x-amz-grant-full-control'
+          },
+          GrantRead: {
+            location: 'header',
+            name: 'x-amz-grant-read'
+          },
+          GrantReadACP: {
+            location: 'header',
+            name: 'x-amz-grant-read-acp'
+          },
+          GrantWrite: {
+            location: 'header',
+            name: 'x-amz-grant-write'
+          },
+          GrantWriteACP: {
+            location: 'header',
+            name: 'x-amz-grant-write-acp'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    putBucketCors: {
+      name: 'PutBucketCors',
+      http: {
+        method: 'PUT',
+        uri: '/{Bucket}?cors'
+      },
+      input: {
+        payload: 'CORSConfiguration',
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          CORSConfiguration: {
+            type: 'structure',
+            members: {
+              CORSRules: {
+                type: 'list',
+                flattened: true,
+                name: 'CORSRule',
+                members: {
+                  type: 'structure',
+                  members: {
+                    AllowedHeaders: {
+                      type: 'list',
+                      flattened: true,
+                      name: 'AllowedHeader',
+                      members: {
+                      }
+                    },
+                    AllowedMethods: {
+                      type: 'list',
+                      flattened: true,
+                      name: 'AllowedMethod',
+                      members: {
+                      }
+                    },
+                    AllowedOrigins: {
+                      type: 'list',
+                      flattened: true,
+                      name: 'AllowedOrigin',
+                      members: {
+                      }
+                    },
+                    ExposeHeaders: {
+                      type: 'list',
+                      flattened: true,
+                      name: 'ExposeHeader',
+                      members: {
+                      }
+                    },
+                    MaxAgeSeconds: {
+                      type: 'integer'
+                    }
+                  }
+                }
+              }
+            }
+          },
+          ContentMD5: {
+            location: 'header',
+            name: 'Content-MD5'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    putBucketLifecycle: {
+      name: 'PutBucketLifecycle',
+      http: {
+        method: 'PUT',
+        uri: '/{Bucket}?lifecycle'
+      },
+      input: {
+        payload: 'LifecycleConfiguration',
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          ContentMD5: {
+            location: 'header',
+            name: 'Content-MD5'
+          },
+          LifecycleConfiguration: {
+            type: 'structure',
+            members: {
+              Rules: {
+                type: 'list',
+                flattened: true,
+                name: 'Rule',
+                required: true,
+                members: {
+                  type: 'structure',
+                  members: {
+                    Expiration: {
+                      type: 'structure',
+                      members: {
+                        Date: {
+                          type: 'timestamp',
+                          format: 'iso8601'
+                        },
+                        Days: {
+                          type: 'integer'
+                        }
+                      }
+                    },
+                    ID: {
+                    },
+                    Prefix: {
+                      required: true
+                    },
+                    Status: {
+                      required: true
+                    },
+                    Transition: {
+                      type: 'structure',
+                      members: {
+                        Date: {
+                          type: 'timestamp',
+                          format: 'iso8601'
+                        },
+                        Days: {
+                          type: 'integer'
+                        },
+                        StorageClass: {
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    putBucketLogging: {
+      name: 'PutBucketLogging',
+      http: {
+        method: 'PUT',
+        uri: '/{Bucket}?logging'
+      },
+      input: {
+        payload: 'BucketLoggingStatus',
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          BucketLoggingStatus: {
+            type: 'structure',
+            required: true,
+            members: {
+              LoggingEnabled: {
+                type: 'structure',
+                required: true,
+                members: {
+                  TargetBucket: {
+                  },
+                  TargetGrants: {
+                    type: 'list',
+                    members: {
+                      type: 'structure',
+                      name: 'Grant',
+                      members: {
+                        Grantee: {
+                          type: 'structure',
+                          xmlns: {
+                            prefix: 'xsi',
+                            uri: 'http://www.w3.org/2001/XMLSchema-instance'
+                          },
+                          members: {
+                            DisplayName: {
+                            },
+                            EmailAddress: {
+                            },
+                            ID: {
+                            },
+                            Type: {
+                              required: true,
+                              attribute: true,
+                              name: 'xsi:type'
+                            },
+                            URI: {
+                            }
+                          }
+                        },
+                        Permission: {
+                        }
+                      }
+                    }
+                  },
+                  TargetPrefix: {
+                  }
+                }
+              }
+            }
+          },
+          ContentMD5: {
+            location: 'header',
+            name: 'Content-MD5'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    putBucketNotification: {
+      name: 'PutBucketNotification',
+      http: {
+        method: 'PUT',
+        uri: '/{Bucket}?notification'
+      },
+      input: {
+        payload: 'NotificationConfiguration',
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          ContentMD5: {
+            location: 'header',
+            name: 'Content-MD5'
+          },
+          NotificationConfiguration: {
+            type: 'structure',
+            required: true,
+            members: {
+              TopicConfiguration: {
+                type: 'structure',
+                required: true,
+                members: {
+                  Event: {
+                  },
+                  Topic: {
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    putBucketPolicy: {
+      name: 'PutBucketPolicy',
+      http: {
+        method: 'PUT',
+        uri: '/{Bucket}?policy'
+      },
+      input: {
+        payload: 'Policy',
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          ContentMD5: {
+            location: 'header',
+            name: 'Content-MD5'
+          },
+          Policy: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    putBucketRequestPayment: {
+      name: 'PutBucketRequestPayment',
+      http: {
+        method: 'PUT',
+        uri: '/{Bucket}?requestPayment'
+      },
+      input: {
+        payload: 'RequestPaymentConfiguration',
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          ContentMD5: {
+            location: 'header',
+            name: 'Content-MD5'
+          },
+          RequestPaymentConfiguration: {
+            type: 'structure',
+            required: true,
+            members: {
+              Payer: {
+                required: true
+              }
+            }
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    putBucketTagging: {
+      name: 'PutBucketTagging',
+      http: {
+        method: 'PUT',
+        uri: '/{Bucket}?tagging'
+      },
+      input: {
+        payload: 'Tagging',
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          ContentMD5: {
+            location: 'header',
+            name: 'Content-MD5'
+          },
+          Tagging: {
+            type: 'structure',
+            required: true,
+            members: {
+              TagSet: {
+                type: 'list',
+                required: true,
+                members: {
+                  type: 'structure',
+                  name: 'Tag',
+                  required: true,
+                  members: {
+                    Key: {
+                      required: true
+                    },
+                    Value: {
+                      required: true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    putBucketVersioning: {
+      name: 'PutBucketVersioning',
+      http: {
+        method: 'PUT',
+        uri: '/{Bucket}?versioning'
+      },
+      input: {
+        payload: 'VersioningConfiguration',
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          ContentMD5: {
+            location: 'header',
+            name: 'Content-MD5'
+          },
+          MFA: {
+            location: 'header',
+            name: 'x-amz-mfa'
+          },
+          VersioningConfiguration: {
+            type: 'structure',
+            required: true,
+            members: {
+              MFADelete: {
+              },
+              Status: {
+              }
+            }
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    putBucketWebsite: {
+      name: 'PutBucketWebsite',
+      http: {
+        method: 'PUT',
+        uri: '/{Bucket}?website'
+      },
+      input: {
+        payload: 'WebsiteConfiguration',
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          ContentMD5: {
+            location: 'header',
+            name: 'Content-MD5'
+          },
+          WebsiteConfiguration: {
+            type: 'structure',
+            required: true,
+            members: {
+              ErrorDocument: {
+                type: 'structure',
+                members: {
+                  Key: {
+                    required: true
+                  }
+                }
+              },
+              IndexDocument: {
+                type: 'structure',
+                members: {
+                  Suffix: {
+                    required: true
+                  }
+                }
+              },
+              RedirectAllRequestsTo: {
+                type: 'structure',
+                members: {
+                  HostName: {
+                    required: true
+                  },
+                  Protocol: {
+                  }
+                }
+              },
+              RoutingRules: {
+                type: 'list',
+                members: {
+                  type: 'structure',
+                  name: 'RoutingRule',
+                  members: {
+                    Condition: {
+                      type: 'structure',
+                      members: {
+                        HttpErrorCodeReturnedEquals: {
+                        },
+                        KeyPrefixEquals: {
+                        }
+                      }
+                    },
+                    Redirect: {
+                      type: 'structure',
+                      required: true,
+                      members: {
+                        HostName: {
+                        },
+                        HttpRedirectCode: {
+                        },
+                        Protocol: {
+                        },
+                        ReplaceKeyPrefixWith: {
+                        },
+                        ReplaceKeyWith: {
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    putObject: {
+      name: 'PutObject',
+      http: {
+        method: 'PUT',
+        uri: '/{Bucket}/{Key}'
+      },
+      input: {
+        payload: 'Body',
+        type: 'structure',
+        members: {
+          ACL: {
+            location: 'header',
+            name: 'x-amz-acl'
+          },
+          Body: {
+            type: 'binary',
+            streaming: true
+          },
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          CacheControl: {
+            location: 'header',
+            name: 'Cache-Control'
+          },
+          ContentDisposition: {
+            location: 'header',
+            name: 'Content-Disposition'
+          },
+          ContentEncoding: {
+            location: 'header',
+            name: 'Content-Encoding'
+          },
+          ContentLanguage: {
+            location: 'header',
+            name: 'Content-Language'
+          },
+          ContentLength: {
+            type: 'integer',
+            location: 'header',
+            name: 'Content-Length'
+          },
+          ContentMD5: {
+            location: 'header',
+            name: 'Content-MD5'
+          },
+          ContentType: {
+            location: 'header',
+            name: 'Content-Type'
+          },
+          Expires: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'Expires'
+          },
+          GrantFullControl: {
+            location: 'header',
+            name: 'x-amz-grant-full-control'
+          },
+          GrantRead: {
+            location: 'header',
+            name: 'x-amz-grant-read'
+          },
+          GrantReadACP: {
+            location: 'header',
+            name: 'x-amz-grant-read-acp'
+          },
+          GrantWriteACP: {
+            location: 'header',
+            name: 'x-amz-grant-write-acp'
+          },
+          Key: {
+            required: true,
+            location: 'uri'
+          },
+          Metadata: {
+            type: 'map',
+            location: 'header',
+            name: 'x-amz-meta-',
+            keys: {
+            },
+            members: {
+            }
+          },
+          ServerSideEncryption: {
+            location: 'header',
+            name: 'x-amz-server-side-encryption'
+          },
+          StorageClass: {
+            location: 'header',
+            name: 'x-amz-storage-class'
+          },
+          WebsiteRedirectLocation: {
+            location: 'header',
+            name: 'x-amz-website-redirect-location'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Expiration: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'x-amz-expiration'
+          },
+          ETag: {
+            location: 'header',
+            name: 'ETag'
+          },
+          ServerSideEncryption: {
+            location: 'header',
+            name: 'x-amz-server-side-encryption'
+          },
+          VersionId: {
+            location: 'header',
+            name: 'x-amz-version-id'
+          }
+        }
+      }
+    },
+    putObjectAcl: {
+      name: 'PutObjectAcl',
+      http: {
+        method: 'PUT',
+        uri: '/{Bucket}/{Key}?acl'
+      },
+      input: {
+        payload: 'AccessControlPolicy',
+        type: 'structure',
+        members: {
+          ACL: {
+            location: 'header',
+            name: 'x-amz-acl'
+          },
+          AccessControlPolicy: {
+            type: 'structure',
+            members: {
+              Grants: {
+                type: 'list',
+                name: 'AccessControlList',
+                members: {
+                  type: 'structure',
+                  name: 'Grant',
+                  members: {
+                    Grantee: {
+                      type: 'structure',
+                      xmlns: {
+                        prefix: 'xsi',
+                        uri: 'http://www.w3.org/2001/XMLSchema-instance'
+                      },
+                      members: {
+                        DisplayName: {
+                        },
+                        EmailAddress: {
+                        },
+                        ID: {
+                        },
+                        Type: {
+                          required: true,
+                          attribute: true,
+                          name: 'xsi:type'
+                        },
+                        URI: {
+                        }
+                      }
+                    },
+                    Permission: {
+                    }
+                  }
+                }
+              },
+              Owner: {
+                type: 'structure',
+                members: {
+                  DisplayName: {
+                  },
+                  ID: {
+                  }
+                }
+              }
+            }
+          },
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          ContentMD5: {
+            location: 'header',
+            name: 'Content-MD5'
+          },
+          GrantFullControl: {
+            location: 'header',
+            name: 'x-amz-grant-full-control'
+          },
+          GrantRead: {
+            location: 'header',
+            name: 'x-amz-grant-read'
+          },
+          GrantReadACP: {
+            location: 'header',
+            name: 'x-amz-grant-read-acp'
+          },
+          GrantWrite: {
+            location: 'header',
+            name: 'x-amz-grant-write'
+          },
+          GrantWriteACP: {
+            location: 'header',
+            name: 'x-amz-grant-write-acp'
+          },
+          Key: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    restoreObject: {
+      name: 'RestoreObject',
+      alias: 'PostObjectRestore',
+      http: {
+        method: 'POST',
+        uri: '/{Bucket}/{Key}?restore'
+      },
+      input: {
+        payload: 'RestoreRequest',
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          Key: {
+            required: true,
+            location: 'uri'
+          },
+          RestoreRequest: {
+            type: 'structure',
+            members: {
+              Days: {
+                type: 'integer',
+                required: true
+              }
+            }
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    uploadPart: {
+      name: 'UploadPart',
+      http: {
+        method: 'PUT',
+        uri: '/{Bucket}/{Key}?partNumber={PartNumber}&uploadId={UploadId}'
+      },
+      input: {
+        payload: 'Body',
+        type: 'structure',
+        members: {
+          Body: {
+            type: 'binary',
+            streaming: true
+          },
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          ContentLength: {
+            type: 'integer',
+            location: 'header',
+            name: 'Content-Length'
+          },
+          Key: {
+            required: true,
+            location: 'uri'
+          },
+          PartNumber: {
+            required: true,
+            location: 'uri'
+          },
+          UploadId: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          ServerSideEncryption: {
+            location: 'header',
+            name: 'x-amz-server-side-encryption'
+          },
+          ETag: {
+            location: 'header',
+            name: 'ETag'
+          }
+        }
+      }
+    },
+    uploadPartCopy: {
+      name: 'UploadPartCopy',
+      http: {
+        method: 'PUT',
+        uri: '/{Bucket}/{Key}?partNumber={PartNumber}&uploadId={UploadId}'
+      },
+      input: {
+        type: 'structure',
+        members: {
+          Bucket: {
+            required: true,
+            location: 'uri'
+          },
+          CopySource: {
+            location: 'header',
+            name: 'x-amz-copy-source',
+            required: true
+          },
+          CopySourceIfMatch: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'x-amz-copy-source-if-match'
+          },
+          CopySourceIfModifiedSince: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'x-amz-copy-source-if-modified-since'
+          },
+          CopySourceIfNoneMatch: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'x-amz-copy-source-if-none-match'
+          },
+          CopySourceIfUnmodifiedSince: {
+            type: 'timestamp',
+            location: 'header',
+            name: 'x-amz-copy-source-if-unmodified-since'
+          },
+          CopySourceRange: {
+            location: 'header',
+            name: 'x-amz-copy-source-range'
+          },
+          Key: {
+            required: true,
+            location: 'uri'
+          },
+          PartNumber: {
+            required: true,
+            location: 'uri'
+          },
+          UploadId: {
+            required: true,
+            location: 'uri'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          CopySourceVersionId: {
+            location: 'header',
+            name: 'x-amz-copy-source-version-id'
+          },
+          ServerSideEncryption: {
+            location: 'header',
+            name: 'x-amz-server-side-encryption'
+          },
+          ETag: {
+          },
+          LastModified: {
+            type: 'timestamp'
+          }
+        }
+      }
+    }
+  },
+  pagination: {
+    listMultipartUploads: {
+      limitKey: 'MaxUploads',
+      moreResults: 'IsTruncated',
+      outputToken: [
+        'NextKeyMarker',
+        'NextUploadIdMarker'
+      ],
+      inputToken: [
+        'KeyMarker',
+        'UploadIdMarker'
+      ],
+      resultKey: 'Uploads'
+    },
+    listObjectVersions: {
+      moreResults: 'IsTruncated',
+      limitKey: 'MaxKeys',
+      outputToken: [
+        'NextKeyMarker',
+        'NextVersionIdMarker'
+      ],
+      inputToken: [
+        'KeyMarker',
+        'VersionIdMarker'
+      ],
+      resultKey: 'Versions'
+    },
+    listObjects: {
+      moreResults: 'IsTruncated',
+      limitKey: 'MaxKeys',
+      outputToken: 'NextMarker or Contents[-1].Key',
+      inputToken: 'Marker',
+      resultKey: [
+        'Contents',
+        'CommonPrefixes'
+      ]
+    },
+    listParts: {
+      limitKey: 'IsTruncated',
+      outputTokens: 'NextPartNumberMarker',
+      inputToken: 'PartNumberMarker',
+      resultKey: 'Parts'
+    }
+  }
+};
+
+},{}],19:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+module.exports = {
+  format: 'query',
+  apiVersion: '2011-06-15',
+  endpointPrefix: 'sts',
+  globalEndpoint: 'sts.amazonaws.com',
+  resultWrapped: true,
+  serviceAbbreviation: 'AWS STS',
+  serviceFullName: 'AWS Security Token Service',
+  signatureVersion: 'v4',
+  timestampFormat: 'iso8601',
+  operations: {
+    assumeRole: {
+      name: 'AssumeRole',
+      input: {
+        type: 'structure',
+        members: {
+          RoleArn: {
+            required: true
+          },
+          RoleSessionName: {
+            required: true
+          },
+          Policy: {
+          },
+          DurationSeconds: {
+            type: 'integer'
+          },
+          ExternalId: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Credentials: {
+            type: 'structure',
+            members: {
+              AccessKeyId: {
+              },
+              SecretAccessKey: {
+              },
+              SessionToken: {
+              },
+              Expiration: {
+                type: 'timestamp'
+              }
+            }
+          },
+          AssumedRoleUser: {
+            type: 'structure',
+            members: {
+              AssumedRoleId: {
+              },
+              Arn: {
+              }
+            }
+          },
+          PackedPolicySize: {
+            type: 'integer'
+          }
+        }
+      }
+    },
+    assumeRoleWithWebIdentity: {
+      name: 'AssumeRoleWithWebIdentity',
+      input: {
+        type: 'structure',
+        members: {
+          RoleArn: {
+            required: true
+          },
+          RoleSessionName: {
+            required: true
+          },
+          WebIdentityToken: {
+            required: true
+          },
+          ProviderId: {
+          },
+          Policy: {
+          },
+          DurationSeconds: {
+            type: 'integer'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Credentials: {
+            type: 'structure',
+            members: {
+              AccessKeyId: {
+              },
+              SecretAccessKey: {
+              },
+              SessionToken: {
+              },
+              Expiration: {
+                type: 'timestamp'
+              }
+            }
+          },
+          SubjectFromWebIdentityToken: {
+          },
+          AssumedRoleUser: {
+            type: 'structure',
+            members: {
+              AssumedRoleId: {
+              },
+              Arn: {
+              }
+            }
+          },
+          PackedPolicySize: {
+            type: 'integer'
+          }
+        }
+      }
+    },
+    decodeAuthorizationMessage: {
+      name: 'DecodeAuthorizationMessage',
+      input: {
+        type: 'structure',
+        members: {
+          EncodedMessage: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          DecodedMessage: {
+          }
+        }
+      }
+    },
+    getFederationToken: {
+      name: 'GetFederationToken',
+      input: {
+        type: 'structure',
+        members: {
+          Name: {
+            required: true
+          },
+          Policy: {
+          },
+          DurationSeconds: {
+            type: 'integer'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Credentials: {
+            type: 'structure',
+            members: {
+              AccessKeyId: {
+              },
+              SecretAccessKey: {
+              },
+              SessionToken: {
+              },
+              Expiration: {
+                type: 'timestamp'
+              }
+            }
+          },
+          FederatedUser: {
+            type: 'structure',
+            members: {
+              FederatedUserId: {
+              },
+              Arn: {
+              }
+            }
+          },
+          PackedPolicySize: {
+            type: 'integer'
+          }
+        }
+      }
+    },
+    getSessionToken: {
+      name: 'GetSessionToken',
+      input: {
+        type: 'structure',
+        members: {
+          DurationSeconds: {
+            type: 'integer'
+          },
+          SerialNumber: {
+          },
+          TokenCode: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Credentials: {
+            type: 'structure',
+            members: {
+              AccessKeyId: {
+              },
+              SecretAccessKey: {
+              },
+              SessionToken: {
+              },
+              Expiration: {
+                type: 'timestamp'
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+},{}],20:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+
+AWS.DynamoDB = AWS.Service.defineService('dynamodb', ['2012-08-10', '2011-12-05'], {
+  setupRequestListeners: function setupRequestListeners(request) {
+    if (request.service.config.dynamoDbCrc32) {
+      request.addListener('extractData', this.checkCrc32);
+    }
+  },
+
+  /**
+   * @api private
+   */
+  checkCrc32: function checkCrc32(resp) {
+    if (!resp.request.service.crc32IsValid(resp)) {
+      resp.error = AWS.util.error(new Error(), {
+        code: 'CRC32CheckFailed',
+        message: 'CRC32 integrity check failed',
+        retryable: true
+      });
+    }
+  },
+
+  /**
+   * @api private
+   */
+  crc32IsValid: function crc32IsValid(resp) {
+    var crc = resp.httpResponse.headers['x-amz-crc32'];
+    if (!crc) return true; // no (valid) CRC32 header
+    return parseInt(crc, 10) == AWS.util.crypto.crc32(resp.httpResponse.body);
+  },
+
+  /**
+   * @api private
+   */
+  defaultRetryCount: 10,
+
+  /**
+   * @api private
+   */
+  retryDelays: function retryDelays() {
+    var retryCount = this.numRetries();
+    var delays = [];
+    for (var i = 0; i < retryCount; ++i) {
+      if (i === 0) {
+        delays.push(0);
+      } else {
+        delays.push(50 * Math.pow(2, i - 1));
+      }
+    }
+    return delays;
+  }
+});
+
+module.exports = AWS.DynamoDB;
+
+},{"../core":3}],21:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+var Stream = require('stream').Stream;
+
+AWS.S3 = AWS.Service.defineService('s3', ['2006-03-01'], {
+  /**
+   * @api private
+   */
+  initialize: function initialize(options) {
+    AWS.Service.prototype.initialize.call(this, options);
+    this.setEndpoint((options || {}).endpoint, options);
+  },
+
+  setupRequestListeners: function setupRequestListeners(request) {
+    request.addListener('build', this.populateURI);
+    request.addListener('build', this.computeContentMd5);
+    request.removeListener('validate',
+      AWS.EventListeners.Core.VALIDATE_REGION);
+    request.addListener('extractError', this.extractError);
+    request.addListener('extractData', this.extractData);
+  },
+
+  /**
+   * S3 prefers dns-compatible bucket names to be moved from the uri path
+   * to the hostname as a sub-domain.  This is not possible, even for dns-compat
+   * buckets when using SSL and the bucket name contains a dot ('.').  The
+   * ssl wildcard certificate is only 1-level deep.
+   *
+   * @api private
+   */
+  populateURI: function populateURI(req) {
+    var httpRequest = req.httpRequest;
+    var b = req.params.Bucket;
+
+    if (b) {
+      if (!req.service.pathStyleBucketName(b)) {
+        httpRequest.endpoint.host = httpRequest.endpoint.hostname = b + '.' +
+          httpRequest.endpoint.hostname;
+
+        httpRequest.virtualHostedBucket = b; // needed for signing the request
+        httpRequest.path = httpRequest.path.replace(new RegExp('^/' + b), '');
+        if (httpRequest.path[0] !== '/') {
+          httpRequest.path = '/' + httpRequest.path;
+        }
+      }
+    }
+  },
+
+  /**
+   * @api private
+   */
+  computableChecksumOperations: {
+    putBucketCors: true,
+    putBucketLifecycle: true,
+    putBucketTagging: true,
+    deleteObjects: true
+  },
+
+  /**
+   * Checks whether checksums should be computed for the request.
+   * If the request requires checksums to be computed, this will always
+   * return true, otherwise it depends on whether {AWS.Config.computeChecksums}
+   * is set.
+   *
+   * @param req [AWS.Request] the request to check against
+   * @return [Boolean] whether to compute checksums for a request.
+   * @api private
+   */
+  willComputeChecksums: function willComputeChecksums(req) {
+    if (this.computableChecksumOperations[req.operation]) return true;
+    if (!this.config.computeChecksums) return false;
+
+    // TODO: compute checksums for Stream objects
+    if (req.httpRequest.body instanceof Stream) return false;
+
+    var rules = req.service.api.operations[req.operation].input.members;
+    if (rules.ContentMD5 && !req.params.ContentMD5) return true;
+  },
+
+  /**
+   * A listener that computes the Content-MD5 and sets it in the header.
+   * @see AWS.S3.willComputeChecksums
+   * @api private
+   */
+  computeContentMd5: function computeContentMd5(req) {
+    if (req.service.willComputeChecksums(req)) {
+      var md5 = AWS.util.crypto.md5(req.httpRequest.body, 'base64');
+      req.httpRequest.headers['Content-MD5'] = md5;
+    }
+  },
+
+  /**
+   * Returns true if the bucket name should be left in the URI path for
+   * a request to S3.  This function takes into account the current
+   * endpoint protocol (e.g. http or https).
+   *
+   * @api private
+   */
+  pathStyleBucketName: function pathStyleBucketName(bucketName) {
+    // user can force path style requests via the configuration
+    if (this.config.s3ForcePathStyle) return true;
+
+    if (this.dnsCompatibleBucketName(bucketName)) {
+      return (this.config.sslEnabled && bucketName.match(/\./)) ? true : false;
+    } else {
+      return true; // not dns compatible names must always use path style
+    }
+  },
+
+  /**
+   * Returns true if the bucket name is DNS compatible.  Buckets created
+   * outside of the classic region MUST be DNS compatible.
+   *
+   * @api private
+   */
+  dnsCompatibleBucketName: function dnsCompatibleBucketName(bucketName) {
+    var b = bucketName;
+    var domain = new RegExp(/^[a-z0-9][a-z0-9\.\-]{1,61}[a-z0-9]$/);
+    var ipAddress = new RegExp(/(\d+\.){3}\d+/);
+    var dots = new RegExp(/\.\./);
+    return (b.match(domain) && !b.match(ipAddress) && !b.match(dots)) ? true : false;
+  },
+
+  /**
+   * S3 requires that path params not escape forward slashes.
+   *
+   * @api private
+   */
+  escapePathParam: function escapePathParam(value) {
+    return AWS.util.uriEscapePath(String(value));
+  },
+
+  /**
+   * @return [Boolean] whether response contains an error
+   * @api private
+   */
+  successfulResponse: function successfulResponse(resp) {
+    var req = resp.request;
+    var httpResponse = resp.httpResponse;
+    if (req.operation === 'completeMultipartUpload' &&
+        httpResponse.body.toString().match('<Error>'))
+      return false;
+    else
+      return httpResponse.statusCode < 300;
+  },
+
+  /**
+   * @return [Boolean] whether the error can be retried
+   * @api private
+   */
+  retryableError: function retryableError(error, request) {
+    if (request.operation == 'completeMultipartUpload' &&
+        error.statusCode === 200) {
+      return true;
+    } else {
+      var _super = AWS.Service.prototype.retryableError;
+      return _super.call(this, error, request);
+    }
+  },
+
+  /**
+   * Provides a specialized parser for getBucketLocation -- all other
+   * operations are parsed by the super class.
+   *
+   * @api private
+   */
+  extractData: function extractData(resp) {
+    var req = resp.request;
+    if (req.operation === 'getBucketLocation') {
+      /*jshint regexp:false*/
+      var match = resp.httpResponse.body.toString().match(/>(.+)<\/Location/);
+      if (match) {
+        delete resp.data['_'];
+        resp.data.LocationConstraint = match[1];
+      }
+    }
+  },
+
+  /**
+   * Extracts an error object from the http response.
+   *
+   * @api private
+   */
+  extractError: function extractError(resp) {
+    var codes = {
+      304: 'NotModified',
+      403: 'Forbidden',
+      400: 'BadRequest',
+      404: 'NotFound'
+    };
+
+    var code = resp.httpResponse.statusCode;
+    var body = resp.httpResponse.body;
+    if (codes[code] && body.length === 0) {
+      resp.error = AWS.util.error(new Error(), {
+        code: codes[resp.httpResponse.statusCode],
+        message: null
+      });
+    } else {
+      var data = new AWS.XML.Parser({}).parse(body.toString());
+      resp.error = AWS.util.error(new Error(), {
+        code: data.Code || code,
+        message: data.Message || null
+      });
+    }
+  },
+
+  /**
+   * @api private
+   */
+  setEndpoint: function setEndpoint(endpoint) {
+    if (endpoint) {
+      this.endpoint = new AWS.Endpoint(endpoint, this.config);
+    } else if (this.config.region && this.config.region !== 'us-east-1') {
+      var hostname = 's3-' + this.config.region + '.amazonaws.com';
+      this.endpoint = new AWS.Endpoint(hostname);
+    } else {
+      this.endpoint = new AWS.Endpoint(this.api.globalEndpoint, this.config);
+    }
+  },
+
+  /**
+   * Get a pre-signed URL for a given operation name.
+   *
+   * @note You must ensure that you have static or previously resolved
+   *   credentials if you call this method synchronously (with no callback),
+   *   otherwise it may not properly sign the request. If you cannot guarantee
+   *   this (you are using an asynchronous credential provider, i.e., EC2
+   *   IAM roles), you should always call this method with an asynchronous
+   *   callback.
+   * @param operation [String] the name of the operation to call
+   * @param params [map] parameters to pass to the operation. See the given
+   *   operation for the expected operation parameters. In addition, you can
+   *   also pass the "Expires" parameter to inform S3 how long the URL should
+   *   work for.
+   * @option params Expires [Integer] (900) the number of seconds to expire
+   *   the pre-signed URL operation in. Defaults to 15 minutes.
+   * @param callback [Function] if a callback is provided, this function will
+   *   pass the URL as the second parameter (after the error parameter) to
+   *   the callback function.
+   * @return [String] if called synchronously (with no callback), returns the
+   *   signed URL.
+   * @return [null] nothing is returned if a callback is provided.
+   * @example Pre-signing a getObject operation (synchronously)
+   *   var params = {Bucket: 'bucket', Key: 'key'};
+   *   var url = s3.getSignedUrl('getObject', params);
+   *   console.log('The URL is', url);
+   * @example Pre-signing a putObject (asynchronously)
+   *   var params = {Bucket: 'bucket', Key: 'key'};
+   *   s3.getSignedUrl('putObject', params, function (err, url) {
+   *     console.log('The URL is', url);
+   *   });
+   * @example Pre-signing a putObject operation with a specific payload
+   *   var params = {Bucket: 'bucket', Key: 'key', Body: 'body'};
+   *   var url = s3.getSignedUrl('putObject', params);
+   *   console.log('The URL is', url);
+   * @example Passing in a 1-minute expiry time for a pre-signed URL
+   *   var params = {Bucket: 'bucket', Key: 'key', Expires: 60};
+   *   var url = s3.getSignedUrl('getObject', params);
+   *   console.log('The URL is', url); // expires in 60 seconds
+   */
+  getSignedUrl: function getSignedUrl(operation, params, callback) {
+    var expires = params.Expires || 900;
+    delete params.Expires; // we can't validate this
+    var url = require('url');
+    var events = ['validate', 'build', 'sign'];
+    var request = this.makeRequest(operation, params);
+
+    var expiresHeader = 'presigned-expires';
+
+    function signedUrlBuilder() {
+      delete request.httpRequest.headers['User-Agent'];
+      request.httpRequest.headers[expiresHeader] = parseInt(
+        AWS.util.date.unixTimestamp() + expires, 10).toString();
+    }
+
+    function signedUrlSigner() {
+      var queryParams = {};
+
+      AWS.util.each(request.httpRequest.headers, function (key, value) {
+        if (key === expiresHeader) key = 'Expires';
+        queryParams[key] = value;
+      });
+      delete request.httpRequest.headers[expiresHeader];
+
+      var auth = queryParams['Authorization'].split(':');
+      delete queryParams['Authorization'];
+      delete queryParams['Host'];
+      queryParams['AWSAccessKeyId'] = auth[0].split(' ')[1];
+      queryParams['Signature'] = auth[1];
+
+      // build URL
+      var endpoint = request.httpRequest.endpoint;
+      var parsedUrl = url.parse(request.httpRequest.path);
+      var querystring = AWS.util.queryParamsToString(queryParams);
+      endpoint.pathname = parsedUrl.pathname;
+      endpoint.search = !parsedUrl.search ? querystring :
+                        parsedUrl.search + '&' + querystring;
+    }
+
+    request.on('build', signedUrlBuilder);
+    request.on('sign', signedUrlSigner);
+    if (!params.Body) { // no Content-MD5 signing if body is not provided
+      request.removeListener('build', this.computeContentMd5);
+    }
+
+    if (callback) {
+      request.emitEvents(events, new AWS.Response(request), function (err) {
+        if (err) callback(err, null);
+        else callback(null, url.format(request.httpRequest.endpoint));
+      });
+    } else {
+      AWS.util.arrayEach(events, function (item) {
+        request.emitEvent(item, [request]);
+      });
+      return url.format(request.httpRequest.endpoint);
+    }
+  }
+});
+
+AWS.S3.prototype.createBucket = function createBucket(params, callback) {
+  // When creating a bucket *outside* the classic region, the location
+  // constraint must be set for the bucket and it must match the endpoint.
+  // This chunk of code will set the location constraint param based
+  // on the region (when possible), but it will not override a passed-in
+  // location constraint.
+  if (!params) params = {};
+  var hostname = this.endpoint.hostname;
+  if (hostname != this.api.globalEndpoint && !params.CreateBucketConfiguration) {
+    params.CreateBucketConfiguration = { LocationConstraint: this.config.region };
+  }
+  return this.makeRequest('createBucket', params, callback);
+};
+
+module.exports = AWS.S3;
+
+},{"../core":3,"stream":39,"url":40}],22:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+
+AWS.STS = AWS.Service.defineService('sts', ['2011-06-15'], {
+  /**
+   * @api private
+   */
+  setupRequestListeners: function setupRequestListeners(request) {
+    request.removeListener('validate', AWS.EventListeners.Core.VALIDATE_REGION);
+  }
+});
+
+AWS.STS.prototype.assumeRoleWithWebIdentity = function assumeRoleWithWebIdentity(params, callback) {
+  if (typeof params === 'function') {
+    callback = params;
+    params = {};
+  }
+
+  var request = this.makeRequest('assumeRoleWithWebIdentity', params);
+  request.removeListener('validate', AWS.EventListeners.Core.VALIDATE_CREDENTIALS);
+  request.removeListener('sign', AWS.EventListeners.Core.SIGN);
+  request.addListener('build', function(request) {
+    request.httpRequest.method = 'GET';
+    request.httpRequest.path = '/?' + request.httpRequest.body;
+    request.httpRequest.body = '';
+    delete request.httpRequest.headers['Content-Length'];
+    delete request.httpRequest.headers['Content-Type'];
+  });
+  return callback ? request.send(callback) : request;
+};
+
+module.exports = AWS.STS;
+
+},{"../core":3}],23:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+require('./v3');
+var inherit = AWS.util.inherit;
+
+/**
+ * @api private
+ */
+AWS.Signers.CloudFront = inherit(AWS.Signers.S3, {
+  /**
+   * The canonical string for CloudFront is simply the Date header
+   */
+  stringToSign: function stringToSign() {
+    return this.request.headers['X-Amz-Date'];
+  }
+});
+
+module.exports = AWS.Signers.CloudFront;
+
+},{"../core":3,"./v3":27}],24:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+/**
+ * @api private
+ */
+AWS.Signers.RequestSigner = inherit({
+  constructor: function RequestSigner(request) {
+    this.request = request;
+  }
+});
+
+AWS.Signers.RequestSigner.getVersion = function getVersion(version) {
+  /*jshint maxcomplexity:8*/
+  switch (version) {
+    case 'v2': return AWS.Signers.V2;
+    case 'v3': return AWS.Signers.V3;
+    case 'v4': return AWS.Signers.V4;
+    case 's3': return AWS.Signers.S3;
+    case 'v3https': return AWS.Signers.V3Https;
+    case 'cloudfront': return AWS.Signers.CloudFront;
+  }
+  throw new Error('Unknown signing version ' + version);
+};
+
+require('./v2');
+require('./v3');
+require('./v3https');
+require('./v4');
+require('./s3');
+require('./cloudfront');
+
+},{"../core":3,"./cloudfront":23,"./s3":25,"./v2":26,"./v3":27,"./v3https":28,"./v4":29}],25:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+/**
+ * @api private
+ */
+AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
+  /**
+   * When building the stringToSign, these sub resource params should be
+   * part of the canonical resource string with their NON-decoded values
+   */
+  subResources: {
+    'acl': 1,
+    'cors': 1,
+    'lifecycle': 1,
+    'delete': 1,
+    'location': 1,
+    'logging': 1,
+    'notification': 1,
+    'partNumber': 1,
+    'policy': 1,
+    'requestPayment': 1,
+    'tagging': 1,
+    'torrent': 1,
+    'uploadId': 1,
+    'uploads': 1,
+    'versionId': 1,
+    'versioning': 1,
+    'versions': 1,
+    'website': 1
+  },
+
+  // when building the stringToSign, these querystring params should be
+  // part of the canonical resource string with their NON-encoded values
+  responseHeaders: {
+    'response-content-type': 1,
+    'response-content-language': 1,
+    'response-expires': 1,
+    'response-cache-control': 1,
+    'response-content-disposition': 1,
+    'response-content-encoding': 1
+  },
+
+  addAuthorization: function addAuthorization(credentials, date) {
+    if (!this.request.headers['presigned-expires']) {
+    this.request.headers['X-Amz-Date'] = AWS.util.date.rfc822(date);
+    }
+
+    if (credentials.sessionToken) {
+      // presigned URLs require this header to be lowercased
+      this.request.headers['x-amz-security-token'] = credentials.sessionToken;
+    }
+
+    var signature = this.sign(credentials.secretAccessKey, this.stringToSign());
+    var auth = 'AWS ' + credentials.accessKeyId + ':' + signature;
+
+    this.request.headers['Authorization'] = auth;
+  },
+
+  stringToSign: function stringToSign() {
+    var r = this.request;
+
+    var parts = [];
+    parts.push(r.method);
+    parts.push(r.headers['Content-MD5'] || '');
+    parts.push(r.headers['Content-Type'] || '');
+    parts.push(''); // This is the "Date" header, but we use X-Amz-Date.
+                    // The S3 signing mechanism requires us to pass an empty
+                    // string for this Date header regardless.
+    var headers = this.canonicalizedAmzHeaders();
+    if (headers) parts.push(headers);
+    parts.push(this.canonicalizedResource());
+
+    return parts.join('\n');
+
+  },
+
+  canonicalizedAmzHeaders: function canonicalizedAmzHeaders() {
+
+    var amzHeaders = [];
+
+    AWS.util.each(this.request.headers, function (name) {
+      if (name.match(/^x-amz-/i))
+        amzHeaders.push(name);
+    });
+
+    amzHeaders.sort(function (a, b) {
+      return a.toLowerCase() < b.toLowerCase() ? -1 : 1;
+    });
+
+    var parts = [];
+    AWS.util.arrayEach.call(this, amzHeaders, function (name) {
+      parts.push(name.toLowerCase() + ':' + String(this.request.headers[name]));
+    });
+
+    return parts.join('\n');
+
+  },
+
+  canonicalizedResource: function canonicalizedResource() {
+
+    var r = this.request;
+
+    var parts = r.path.split('?');
+    var path = parts[0];
+    var querystring = parts[1];
+
+    var resource = '';
+
+    if (r.virtualHostedBucket)
+      resource += '/' + r.virtualHostedBucket;
+
+    resource += path;
+
+    if (querystring) {
+
+      // collect a list of sub resources and query params that need to be signed
+      var resources = [];
+
+      AWS.util.arrayEach.call(this, querystring.split('&'), function (param) {
+        var name = param.split('=')[0];
+        var value = param.split('=')[1];
+        /*jshint undef:false */
+        if (this.subResources[name] || this.responseHeaders[name]) {
+          var resource = { name: name };
+          if (value !== undefined) {
+            if (this.subResources[name]) {
+              resource.value = value;
+            } else {
+              resource.value = decodeURIComponent(value);
+            }
+          }
+          resources.push(resource);
+        }
+      });
+
+      resources.sort(function (a, b) { return a.name < b.name ? -1 : 1; });
+
+      if (resources.length) {
+
+        querystring = [];
+        AWS.util.arrayEach(resources, function (resource) {
+          if (resource.value === undefined)
+            querystring.push(resource.name);
+          else
+            querystring.push(resource.name + '=' + resource.value);
+        });
+
+        resource += '?' + querystring.join('&');
+      }
+
+    }
+
+    return resource;
+
+  },
+
+  sign: function sign(secret, string) {
+    return AWS.util.crypto.hmac(secret, string, 'base64', 'sha1');
+  }
+});
+
+module.exports = AWS.Signers.S3;
+
+},{"../core":3}],26:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+/**
+ * @api private
+ */
+AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
+  addAuthorization: function addAuthorization(credentials, date) {
+
+    if (!date) date = AWS.util.date.getDate();
+
+    var r = this.request;
+
+    r.params.Timestamp = AWS.util.date.iso8601(date);
+    r.params.SignatureVersion = '2';
+    r.params.SignatureMethod = 'HmacSHA256';
+    r.params.AWSAccessKeyId = credentials.accessKeyId;
+
+    if (credentials.sessionToken) {
+      r.params.SecurityToken = credentials.sessionToken;
+    }
+
+    delete r.params.Signature; // delete old Signature for re-signing
+    r.params.Signature = this.signature(credentials);
+
+    r.body = AWS.util.queryParamsToString(r.params);
+    r.headers['Content-Length'] = r.body.length;
+  },
+
+  signature: function signature(credentials) {
+    return AWS.util.crypto.hmac(credentials.secretAccessKey, this.stringToSign(), 'base64');
+  },
+
+  stringToSign: function stringToSign() {
+    var parts = [];
+    parts.push(this.request.method);
+    parts.push(this.request.endpoint.host.toLowerCase());
+    parts.push(this.request.pathname());
+    parts.push(AWS.util.queryParamsToString(this.request.params));
+    return parts.join('\n');
+  }
+
+});
+
+module.exports = AWS.Signers.V2;
+
+},{"../core":3}],27:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+/**
+ * @api private
+ */
+AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
+  addAuthorization: function addAuthorization(credentials, date) {
+
+    var datetime = AWS.util.date.rfc822(date);
+
+    this.request.headers['X-Amz-Date'] = datetime;
+
+    if (credentials.sessionToken) {
+      this.request.headers['x-amz-security-token'] = credentials.sessionToken;
+    }
+
+    this.request.headers['X-Amzn-Authorization'] =
+      this.authorization(credentials, datetime);
+
+  },
+
+  authorization: function authorization(credentials) {
+    return 'AWS3 ' +
+      'AWSAccessKeyId=' + credentials.accessKeyId + ',' +
+      'Algorithm=HmacSHA256,' +
+      'SignedHeaders=' + this.signedHeaders() + ',' +
+      'Signature=' + this.signature(credentials);
+  },
+
+  signedHeaders: function signedHeaders() {
+    var headers = [];
+    AWS.util.arrayEach(this.headersToSign(), function iterator(h) {
+      headers.push(h.toLowerCase());
+    });
+    return headers.sort().join(';');
+  },
+
+  canonicalHeaders: function canonicalHeaders() {
+    var headers = this.request.headers;
+    var parts = [];
+    AWS.util.arrayEach(this.headersToSign(), function iterator(h) {
+      parts.push(h.toLowerCase().trim() + ':' + String(headers[h]).trim());
+    });
+    return parts.sort().join('\n') + '\n';
+  },
+
+  headersToSign: function headersToSign() {
+    var headers = [];
+    AWS.util.each(this.request.headers, function iterator(k) {
+      if (k === 'Host' || k === 'Content-Encoding' || k.match(/^X-Amz/i)) {
+        headers.push(k);
+      }
+    });
+    return headers;
+  },
+
+  signature: function signature(credentials) {
+    return AWS.util.crypto.hmac(credentials.secretAccessKey, this.stringToSign(), 'base64');
+  },
+
+  stringToSign: function stringToSign() {
+    var parts = [];
+    parts.push(this.request.method);
+    parts.push('/');
+    parts.push('');
+    parts.push(this.canonicalHeaders());
+    parts.push(this.request.body);
+    return AWS.util.crypto.sha256(parts.join('\n'));
+  }
+
+});
+
+module.exports = AWS.Signers.V3;
+
+},{"../core":3}],28:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+require('./v3');
+
+/**
+ * @api private
+ */
+AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
+  authorization: function authorization(credentials) {
+    return 'AWS3-HTTPS ' +
+      'AWSAccessKeyId=' + credentials.accessKeyId + ',' +
+      'Algorithm=HmacSHA256,' +
+      'Signature=' + this.signature(credentials);
+  },
+
+  stringToSign: function stringToSign() {
+    return this.request.headers['X-Amz-Date'];
+  }
+});
+
+module.exports = AWS.Signers.V3Https;
+
+},{"../core":3,"./v3":27}],29:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+/**
+ * @api private
+ */
+AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
+  constructor: function V4(request, serviceName) {
+    AWS.Signers.RequestSigner.call(this, request);
+    this.serviceName = serviceName;
+  },
+
+  addAuthorization: function addAuthorization(credentials, date) {
+    var datetime = AWS.util.date.iso8601(date).replace(/[:\-]|\.\d{3}/g, '');
+    this.addHeaders(credentials, datetime);
+    this.request.headers['Authorization'] =
+      this.authorization(credentials, datetime);
+  },
+
+  addHeaders: function addHeaders(credentials, datetime) {
+    this.request.headers['X-Amz-Date'] = datetime;
+    if (credentials.sessionToken) {
+      this.request.headers['x-amz-security-token'] = credentials.sessionToken;
+    }
+  },
+
+  authorization: function authorization(credentials, datetime) {
+    var parts = [];
+    var credString = this.credentialString(datetime);
+    parts.push('AWS4-HMAC-SHA256 Credential=' +
+      credentials.accessKeyId + '/' + credString);
+    parts.push('SignedHeaders=' + this.signedHeaders());
+    parts.push('Signature=' + this.signature(credentials, datetime));
+    return parts.join(', ');
+  },
+
+  signature: function signature(credentials, datetime) {
+    var kSecret = credentials.secretAccessKey;
+    var kDate = AWS.util.crypto.hmac('AWS4' + kSecret, datetime.substr(0, 8));
+    var kRegion = AWS.util.crypto.hmac(kDate, this.request.region);
+    var kService = AWS.util.crypto.hmac(kRegion, this.serviceName);
+    var kCredentials = AWS.util.crypto.hmac(kService, 'aws4_request');
+    return AWS.util.crypto.hmac(kCredentials, this.stringToSign(datetime), 'hex');
+  },
+
+  stringToSign: function stringToSign(datetime) {
+    var parts = [];
+    parts.push('AWS4-HMAC-SHA256');
+    parts.push(datetime);
+    parts.push(this.credentialString(datetime));
+    parts.push(this.hexEncodedHash(this.canonicalString()));
+    return parts.join('\n');
+  },
+
+  canonicalString: function canonicalString() {
+    var parts = [];
+    parts.push(this.request.method);
+    parts.push(this.request.pathname());
+    parts.push(this.request.search());
+    parts.push(this.canonicalHeaders() + '\n');
+    parts.push(this.signedHeaders());
+    parts.push(this.hexEncodedHash(this.request.body));
+    return parts.join('\n');
+  },
+
+  canonicalHeaders: function canonicalHeaders() {
+    var headers = [];
+    AWS.util.each.call(this, this.request.headers, function (key, item) {
+      headers.push([key, item]);
+    });
+    headers.sort(function (a, b) {
+      return a[0].toLowerCase() < b[0].toLowerCase() ? -1 : 1;
+    });
+    var parts = [];
+    AWS.util.arrayEach.call(this, headers, function (item) {
+      if (item[0] !== 'Authorization' && item[0] !== 'User-Agent' && item[0] !== 'Content-Type') {
+        parts.push(item[0].toLowerCase() + ':' +
+          this.canonicalHeaderValues(item[1].toString()));
+      }
+    });
+    return parts.join('\n');
+  },
+
+  canonicalHeaderValues: function canonicalHeaderValues(values) {
+    return values.replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '');
+  },
+
+  signedHeaders: function signedHeaders() {
+    var keys = [];
+    AWS.util.each.call(this, this.request.headers, function (key) {
+      key = key.toLowerCase();
+      if (key !== 'authorization' && key !== 'user-agent' && key !== 'content-type') keys.push(key);
+    });
+    return keys.sort().join(';');
+  },
+
+  credentialString: function credentialString(datetime) {
+    var parts = [];
+    parts.push(datetime.substr(0, 8));
+    parts.push(this.request.region);
+    parts.push(this.serviceName);
+    parts.push('aws4_request');
+    return parts.join('/');
+  },
+
+  hexEncodedHash: function hash(string) {
+    return AWS.util.crypto.sha256(string, 'hex');
+  }
+
+});
+
+module.exports = AWS.Signers.V4;
+
+},{"../core":3}],30:[function(require,module,exports){
+var process=require("__browserify_process");/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+/*global escape:true */
+
+var AWS = require('./core');
+var cryptoLib = require('crypto');
+var Buffer = require('buffer').Buffer;
+
+/**
+ * A set of utility methods for use with the AWS SDK.
+ *
+ * @!attribute abort
+ *   Return this value from an iterator function ({each} or {arrayEach})
+ *   to break out of the iteration.
+ *   @example Breaking out of an iterator function
+ *     AWS.util.each({a: 1, b: 2, c: 3}, function(key, value) {
+ *       if (key == 'b') return AWS.util.abort;
+ *     });
+ *   @see each
+ *   @see arrayEach
+ * @api private
+ */
+AWS.util = {
+
+  engine: function enc() {
+    return process.platform + '/' + process.version;
+  },
+
+  userAgent: function userAgent() {
+    return 'aws-sdk-nodejs/' + AWS.VERSION + ' ' + AWS.util.engine();
+  },
+
+  uriEscape: function uriEscape(string) {
+    /*jshint undef:false */
+    var output = encodeURIComponent(string);
+    output = output.replace(/[^A-Za-z0-9_.~\-%]+/g, escape);
+
+    // AWS percent-encodes some extra non-standard characters in a URI
+    output = output.replace(/[*]/g, function(ch) {
+      return '%' + ch.charCodeAt(0).toString(16).toUpperCase();
+    });
+
+    return output;
+  },
+
+  uriEscapePath: function uriEscapePath(string) {
+    var parts = [];
+    AWS.util.arrayEach(string.split('/'), function (part) {
+      parts.push(AWS.util.uriEscape(part));
+    });
+    return parts.join('/');
+  },
+
+  urlParse: function urlParse(url) {
+    return require('url').parse(url);
+  },
+
+  queryParamsToString: function queryParamsToString(params) {
+    var items = [];
+    var escape = AWS.util.uriEscape;
+    var sortedKeys = Object.keys(params).sort();
+
+    AWS.util.arrayEach(sortedKeys, function(name) {
+      var value = params[name];
+      var ename = escape(name);
+      var result = ename;
+      if (Array.isArray(value)) {
+        var vals = [];
+        AWS.util.arrayEach(value, function(item) { vals.push(escape(item)); });
+        result = ename + '=' + vals.sort().join('&' + ename + '=');
+      } else if (value !== undefined && value !== null) {
+        result = ename + '=' + escape(value);
+      }
+      items.push(result);
+    });
+
+    return items.join('&');
+  },
+
+  readFileSync: function readFileSync(path) {
+    if (typeof window !== 'undefined') return null;
+    return require('fs').readFileSync(path, 'utf-8');
+  },
+
+  base64: {
+
+    encode: function encode64(string) {
+      return new Buffer(string).toString('base64');
+    },
+
+    decode: function decode64(string) {
+      return new Buffer(string, 'base64').toString();
+    }
+
+  },
+
+  buffer: {
+    /**
+     * Concatenates a list of Buffer objects.
+     */
+    concat: function(buffers) {
+      var length = 0,
+          offset = 0,
+          buffer = null, i;
+
+      for (i = 0; i < buffers.length; i++) {
+        length += buffers[i].length;
+      }
+
+      buffer = new Buffer(length);
+
+      for (i = 0; i < buffers.length; i++) {
+        buffers[i].copy(buffer, offset);
+        offset += buffers[i].length;
+      }
+
+      return buffer;
+    }
+  },
+
+  string: {
+    byteLength: function byteLength(string) {
+      if (string === null || string === undefined) return 0;
+      if (typeof string === 'string') string = new Buffer(string);
+
+      if (string.length !== undefined) {
+        return string.length;
+      } else if (typeof(string.path) === 'string') {
+        return require('fs').lstatSync(string.path).size;
+      } else {
+        throw AWS.util.error(new Error(), {
+          message: 'Cannot determine length of ' + string, object: string
+        });
+      }
+    }
+  },
+
+  jamespath: {
+    query: function query(expression, data) {
+      if (!data) return [];
+
+      var results = [];
+      var expressions = expression.split(/\s+or\s+/);
+      AWS.util.arrayEach.call(this, expressions, function (expr) {
+        var objects = [data];
+        var tokens = expr.split('.');
+        AWS.util.arrayEach.call(this, tokens, function (token) {
+          var match = token.match('^(.+?)(?:\\[(-?\\d+|\\*)\\])?$');
+          var newObjects = [];
+          AWS.util.arrayEach.call(this, objects, function (obj) {
+            if (match[1] === '*') {
+              AWS.util.arrayEach.call(this, obj, function (value) {
+                newObjects.push(value);
+              });
+            } else if (obj.hasOwnProperty(match[1])) {
+              newObjects.push(obj[match[1]]);
+            }
+          });
+          objects = newObjects;
+
+          // handle indexing (token[0], token[-1])
+          if (match[2]) {
+            newObjects = [];
+            AWS.util.arrayEach.call(this, objects, function (obj) {
+              if (AWS.util.isType(obj, Array)) {
+                if (match[2] === '*') {
+                  newObjects = newObjects.concat(obj);
+                } else {
+                  var idx = parseInt(match[2], 10);
+                  if (idx < 0) idx = obj.length + idx; // negative indexing
+                  newObjects.push(obj[idx]);
+                }
+              }
+            });
+            objects = newObjects;
+          }
+
+          if (objects.length === 0) return AWS.util.abort;
+        });
+
+        if (objects.length > 0) {
+          results = objects;
+          return AWS.util.abort;
+        }
+      });
+
+      return results;
+    },
+
+    find: function find(expression, data) {
+      return AWS.util.jamespath.query(expression, data)[0];
+    }
+  },
+
+  /**
+   * Date and time utility functions.
+   */
+  date: {
+
+    /**
+     * @return [Date] the current JavaScript date object. Since all
+     *   AWS services rely on this date object, you can override
+     *   this function to provide a special time value to AWS service
+     *   requests.
+     */
+    getDate: function getDate() { return new Date(); },
+
+    /**
+     * @return [String] the date in ISO-8601 format
+     */
+    iso8601: function iso8601(date) {
+      if (date === undefined) { date = AWS.util.date.getDate(); }
+      return date.toISOString();
+    },
+
+    /**
+     * @return [String] the date in RFC 822 format
+     */
+    rfc822: function rfc822(date) {
+      if (date === undefined) { date = AWS.util.date.getDate(); }
+      return date.toUTCString();
+    },
+
+    /**
+     * @return [Integer] the UNIX timestamp value for the current time
+     */
+    unixTimestamp: function unixTimestamp(date) {
+      if (date === undefined) { date = AWS.util.date.getDate(); }
+      return date.getTime() / 1000;
+    },
+
+    /**
+     * @param [String,number,Date] date
+     * @return [Date]
+     */
+    from: function format(date) {
+      if (typeof date === 'number') {
+        return new Date(date * 1000); // unix timestamp
+      } else {
+        return new Date(date);
+      }
+    },
+
+    /**
+     * Given a Date or date-like value, this function formats the
+     * date into a string of the requested value.
+     * @param [String,number,Date] date
+     * @param [String] formatter Valid formats are:
+     #   * 'iso8601'
+     #   * 'rfc822'
+     #   * 'unixTimestamp'
+     * @return [String]
+     */
+    format: function format(date, formatter) {
+      if (!formatter) formatter = 'iso8601';
+      return AWS.util.date[formatter](AWS.util.date.from(date));
+    }
+
+  },
+
+  crypto: {
+    crc32Table: [
+     0x00000000, 0x77073096, 0xEE0E612C, 0x990951BA, 0x076DC419,
+     0x706AF48F, 0xE963A535, 0x9E6495A3, 0x0EDB8832, 0x79DCB8A4,
+     0xE0D5E91E, 0x97D2D988, 0x09B64C2B, 0x7EB17CBD, 0xE7B82D07,
+     0x90BF1D91, 0x1DB71064, 0x6AB020F2, 0xF3B97148, 0x84BE41DE,
+     0x1ADAD47D, 0x6DDDE4EB, 0xF4D4B551, 0x83D385C7, 0x136C9856,
+     0x646BA8C0, 0xFD62F97A, 0x8A65C9EC, 0x14015C4F, 0x63066CD9,
+     0xFA0F3D63, 0x8D080DF5, 0x3B6E20C8, 0x4C69105E, 0xD56041E4,
+     0xA2677172, 0x3C03E4D1, 0x4B04D447, 0xD20D85FD, 0xA50AB56B,
+     0x35B5A8FA, 0x42B2986C, 0xDBBBC9D6, 0xACBCF940, 0x32D86CE3,
+     0x45DF5C75, 0xDCD60DCF, 0xABD13D59, 0x26D930AC, 0x51DE003A,
+     0xC8D75180, 0xBFD06116, 0x21B4F4B5, 0x56B3C423, 0xCFBA9599,
+     0xB8BDA50F, 0x2802B89E, 0x5F058808, 0xC60CD9B2, 0xB10BE924,
+     0x2F6F7C87, 0x58684C11, 0xC1611DAB, 0xB6662D3D, 0x76DC4190,
+     0x01DB7106, 0x98D220BC, 0xEFD5102A, 0x71B18589, 0x06B6B51F,
+     0x9FBFE4A5, 0xE8B8D433, 0x7807C9A2, 0x0F00F934, 0x9609A88E,
+     0xE10E9818, 0x7F6A0DBB, 0x086D3D2D, 0x91646C97, 0xE6635C01,
+     0x6B6B51F4, 0x1C6C6162, 0x856530D8, 0xF262004E, 0x6C0695ED,
+     0x1B01A57B, 0x8208F4C1, 0xF50FC457, 0x65B0D9C6, 0x12B7E950,
+     0x8BBEB8EA, 0xFCB9887C, 0x62DD1DDF, 0x15DA2D49, 0x8CD37CF3,
+     0xFBD44C65, 0x4DB26158, 0x3AB551CE, 0xA3BC0074, 0xD4BB30E2,
+     0x4ADFA541, 0x3DD895D7, 0xA4D1C46D, 0xD3D6F4FB, 0x4369E96A,
+     0x346ED9FC, 0xAD678846, 0xDA60B8D0, 0x44042D73, 0x33031DE5,
+     0xAA0A4C5F, 0xDD0D7CC9, 0x5005713C, 0x270241AA, 0xBE0B1010,
+     0xC90C2086, 0x5768B525, 0x206F85B3, 0xB966D409, 0xCE61E49F,
+     0x5EDEF90E, 0x29D9C998, 0xB0D09822, 0xC7D7A8B4, 0x59B33D17,
+     0x2EB40D81, 0xB7BD5C3B, 0xC0BA6CAD, 0xEDB88320, 0x9ABFB3B6,
+     0x03B6E20C, 0x74B1D29A, 0xEAD54739, 0x9DD277AF, 0x04DB2615,
+     0x73DC1683, 0xE3630B12, 0x94643B84, 0x0D6D6A3E, 0x7A6A5AA8,
+     0xE40ECF0B, 0x9309FF9D, 0x0A00AE27, 0x7D079EB1, 0xF00F9344,
+     0x8708A3D2, 0x1E01F268, 0x6906C2FE, 0xF762575D, 0x806567CB,
+     0x196C3671, 0x6E6B06E7, 0xFED41B76, 0x89D32BE0, 0x10DA7A5A,
+     0x67DD4ACC, 0xF9B9DF6F, 0x8EBEEFF9, 0x17B7BE43, 0x60B08ED5,
+     0xD6D6A3E8, 0xA1D1937E, 0x38D8C2C4, 0x4FDFF252, 0xD1BB67F1,
+     0xA6BC5767, 0x3FB506DD, 0x48B2364B, 0xD80D2BDA, 0xAF0A1B4C,
+     0x36034AF6, 0x41047A60, 0xDF60EFC3, 0xA867DF55, 0x316E8EEF,
+     0x4669BE79, 0xCB61B38C, 0xBC66831A, 0x256FD2A0, 0x5268E236,
+     0xCC0C7795, 0xBB0B4703, 0x220216B9, 0x5505262F, 0xC5BA3BBE,
+     0xB2BD0B28, 0x2BB45A92, 0x5CB36A04, 0xC2D7FFA7, 0xB5D0CF31,
+     0x2CD99E8B, 0x5BDEAE1D, 0x9B64C2B0, 0xEC63F226, 0x756AA39C,
+     0x026D930A, 0x9C0906A9, 0xEB0E363F, 0x72076785, 0x05005713,
+     0x95BF4A82, 0xE2B87A14, 0x7BB12BAE, 0x0CB61B38, 0x92D28E9B,
+     0xE5D5BE0D, 0x7CDCEFB7, 0x0BDBDF21, 0x86D3D2D4, 0xF1D4E242,
+     0x68DDB3F8, 0x1FDA836E, 0x81BE16CD, 0xF6B9265B, 0x6FB077E1,
+     0x18B74777, 0x88085AE6, 0xFF0F6A70, 0x66063BCA, 0x11010B5C,
+     0x8F659EFF, 0xF862AE69, 0x616BFFD3, 0x166CCF45, 0xA00AE278,
+     0xD70DD2EE, 0x4E048354, 0x3903B3C2, 0xA7672661, 0xD06016F7,
+     0x4969474D, 0x3E6E77DB, 0xAED16A4A, 0xD9D65ADC, 0x40DF0B66,
+     0x37D83BF0, 0xA9BCAE53, 0xDEBB9EC5, 0x47B2CF7F, 0x30B5FFE9,
+     0xBDBDF21C, 0xCABAC28A, 0x53B39330, 0x24B4A3A6, 0xBAD03605,
+     0xCDD70693, 0x54DE5729, 0x23D967BF, 0xB3667A2E, 0xC4614AB8,
+     0x5D681B02, 0x2A6F2B94, 0xB40BBE37, 0xC30C8EA1, 0x5A05DF1B,
+     0x2D02EF8D],
+
+    crc32: function crc32(data) {
+      /*jshint bitwise:false*/
+      var tbl = AWS.util.crypto.crc32Table;
+      var crc = 0 ^ -1;
+
+      if (typeof data === 'string') {
+        data = new Buffer(data);
+      }
+
+      for (var i = 0; i < data.length; i++) {
+        var code = data.readUInt8(i);
+        crc = (crc>>>8) ^ tbl[(crc^code)&0xFF];
+      }
+      return (crc ^ -1) >>> 0;
+    },
+
+    hmac: function hmac(key, string, digest, fn) {
+      if (!digest) digest = 'binary';
+      if (!fn) fn = 'sha256';
+      return cryptoLib.createHmac(fn, key).update(string).digest(digest);
+    },
+
+    md5: function md5(data, digest) {
+      if (!digest) { digest = 'binary'; }
+      if (typeof data === 'string') data = new Buffer(data);
+      return AWS.util.crypto.createHash('md5').update(data).digest(digest);
+    },
+
+    sha256: function sha256(string, digest) {
+      if (!digest) { digest = 'binary'; }
+      if (typeof string === 'string') string = new Buffer(string);
+      return AWS.util.crypto.createHash('sha256').update(string).digest(digest);
+    },
+
+    toHex: function toHex(data) {
+      var out = [];
+      for (var i = 0; i < data.length; i++) {
+        out.push(('0' + data.charCodeAt(i).toString(16)).substr(-2, 2));
+      }
+      return out.join('');
+    },
+
+    createHash: function createHash(algorithm) {
+      return cryptoLib.createHash(algorithm);
+    }
+
+  },
+
+  /** @!ignore */
+
+  /* Abort constant */
+  abort: {},
+
+  each: function each(object, iterFunction) {
+    for (var key in object) {
+      if (object.hasOwnProperty(key)) {
+        var ret = iterFunction.call(this, key, object[key]);
+        if (ret === AWS.util.abort) break;
+      }
+    }
+  },
+
+  arrayEach: function arrayEach(array, iterFunction) {
+    for (var idx in array) {
+      if (array.hasOwnProperty(idx)) {
+        var ret = iterFunction.call(this, array[idx], parseInt(idx, 10));
+        if (ret === AWS.util.abort) break;
+      }
+    }
+  },
+
+  update: function update(obj1, obj2) {
+    AWS.util.each(obj2, function iterator(key, item) {
+      obj1[key] = item;
+    });
+    return obj1;
+  },
+
+  merge: function merge(obj1, obj2) {
+    return AWS.util.update(AWS.util.copy(obj1), obj2);
+  },
+
+  copy: function copy(object) {
+    if (object === null || object === undefined) return object;
+    var dupe = {};
+    /*jshint forin:false */
+    for (var key in object) {
+      dupe[key] = object[key];
+    }
+    return dupe;
+  },
+
+  isEmpty: function isEmpty(obj) {
+    for (var prop in obj) {
+      if (obj.hasOwnProperty(prop)) {
+        return false;
+      }
+    }
+    return true;
+  },
+
+  isType: function isType(obj, type) {
+    // handle cross-"frame" objects
+    if (typeof type === 'function') type = type.name;
+    return Object.prototype.toString.call(obj) === '[object ' + type + ']';
+  },
+
+  error: function error(err, options) {
+    err.message = err.message || null;
+
+    if (typeof options === 'string') {
+      err.message = options;
+    } else {
+      AWS.util.update(err, options);
+    }
+
+    err.name = err.code || 'Error';
+    return err;
+  },
+
+  /**
+   * @api private
+   */
+  inherit: function inherit(klass, features) {
+    var newObject = null;
+    if (features === undefined) {
+      features = klass;
+      klass = Object;
+      newObject = {};
+    } else {
+      /*jshint newcap:false */
+      /*jshint camelcase:false */
+      var ctor = function __ctor_wrapper__() {};
+      ctor.prototype = klass.prototype;
+      newObject = new ctor();
+    }
+
+    // constructor not supplied, create pass-through ctor
+    if (features.constructor === Object) {
+      features.constructor = function() {
+        if (klass !== Object) {
+          return klass.apply(this, arguments);
+        }
+      };
+    }
+
+    features.constructor.prototype = newObject;
+    AWS.util.update(features.constructor.prototype, features);
+    features.constructor.__super__ = klass;
+    return features.constructor;
+  },
+
+  /**
+   * @api private
+   */
+  mixin: function mixin() {
+    var klass = arguments[0];
+    for (var i = 1; i < arguments.length; i++) {
+      /*jshint forin:false*/
+      for (var prop in arguments[i].prototype) {
+        var fn = arguments[i].prototype[prop];
+        if (prop != 'constructor') {
+          klass.prototype[prop] = fn;
+        }
+      }
+    }
+    return klass;
+  }
+
+};
+
+module.exports = AWS.util;
+
+},{"./core":3,"__browserify_process":55,"buffer":43,"crypto":45,"fs":36,"url":40}],31:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+var builder = require('xmlbuilder');
+var inherit = AWS.util.inherit;
+
+/**
+ * @api private
+ */
+AWS.XML.Builder = inherit({
+
+  constructor: function XMLBuilder(root, rules, options) {
+    this.root = root;
+    this.rules = rules;
+    this.xmlns = options.xmlnamespace;
+    this.timestampFormat = options.timestampFormat;
+  },
+
+  toXML: function toXML(params) {
+    var xml = builder.create(this.root);
+    if (this.xmlns) xml.att('xmlns', this.xmlns);
+    this.serializeStructure(this.rules, params, xml);
+    return xml.root().toString();
+  },
+
+  serializeStructure: function serializeStructure(rules, params, xml) {
+
+    AWS.util.each.call(this, rules || {}, function (memberName, memberRules) {
+      var value = params[memberName];
+      if (value !== undefined) {
+        if (memberRules.attribute) {
+          xml.att(memberRules.name, value);
+        } else {
+          this.serializeMember(memberName, memberRules, value, xml);
+        }
+      }
+    });
+  },
+
+  serializeList: function serializeList(name, rules, list, xml) {
+    if (rules.flattened) {
+      AWS.util.arrayEach.call(this, list, function (value) {
+        this.serializeMember(rules.name || name, rules.members, value, xml);
+      });
+    } else {
+      xml = xml.ele(rules.name || name);
+      AWS.util.arrayEach.call(this, list, function (value) {
+        var memberName = rules.members.name || 'member';
+        this.serializeMember(memberName, rules.members, value, xml);
+      });
+    }
+  },
+
+  serializeMember: function serializeMember(memberName, rules, params, xml) {
+    var name = memberName;
+    if (rules.type === 'structure') {
+      xml = xml.ele(name);
+      this.serializeStructure(rules.members, params, xml);
+    } else if (rules.type === 'list') {
+      this.serializeList(name, rules, params, xml);
+    } else if (rules.type === 'timestamp') {
+      var timestampFormat = rules.format || this.timestampFormat;
+      var date = AWS.util.date.format(params, timestampFormat);
+      xml = xml.ele(name, String(date));
+    } else {
+      xml = xml.ele(name, String(params));
+    }
+    this.applyNamespaces(xml, rules);
+  },
+
+  applyNamespaces: function applyNamespaces(xml, rules) {
+    if (rules.xmlns) {
+      var attr = 'xmlns';
+      if (rules.xmlns.prefix) attr += ':' + rules.xmlns.prefix;
+      xml.att(attr, rules.xmlns.uri);
+    }
+  }
+
+
+});
+
+},{"../core":3,"xmlbuilder":60}],32:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+var xml2js = require('xml2js');
+
+/**
+ * @api private
+ */
+AWS.XML.Parser = inherit({
+
+  constructor: function XMLParser(rules) {
+    this.rules = (rules || {}).members || {};
+  },
+
+  // options passed to xml2js parser
+  options: {
+    explicitCharkey: false, // undocumented
+    trim: false,            // trim the leading/trailing whitespace from text nodes
+    normalize: false,       // trim interior whitespace inside text nodes
+    explicitRoot: false,    // return the root node in the resulting object?
+    emptyTag: null,         // the default value for empty nodes
+    explicitArray: true,    // always put child nodes in an array
+    ignoreAttrs: false,     // ignore attributes, only create text nodes
+    mergeAttrs: false,      // merge attributes and child elements
+    validator: null         // a callable validator
+  },
+
+  parse: function parse(xml) {
+
+    var result = null;
+    var error = null;
+    var parser = new xml2js.Parser(this.options);
+    parser.parseString(xml, function (e, r) {
+      error = e;
+      result = r;
+    });
+
+    if (result) {
+      delete result.xmlns;
+      return this.parseStructure(result, this.rules);
+    } else if (error) {
+      throw AWS.util.error(error, {code: 'XMLParserError'});
+    } else { // empty xml document
+      return this.parseStructure({}, this.rules);
+    }
+
+  },
+
+  parseStructure: function parseStructure(structure, rules) {
+    var data = {};
+
+    // force array members to always be present
+    AWS.util.each.call(this, rules, function(memberName, memberRules) {
+      if (memberRules.type == 'list') {
+        data[memberRules.name || memberName] = [];
+      }
+    });
+
+    AWS.util.each.call(this, structure, function (xmlName, value) {
+      if (xmlName == '$') {
+        AWS.util.each.call(this, value, function (attrName, attrValue) {
+          if (rules[attrName]) {
+            var rule = rules[attrName];
+            data[rule.name || xmlName] = this.parseMember([attrValue], rule);
+          }
+        });
+      } else {
+        var rule = rules[xmlName] || {};
+        data[rule.name || xmlName] = this.parseMember(value, rule);
+      }
+    });
+
+    return data;
+  },
+
+  parseMap: function parseMap(map, rules) {
+    var data = {};
+    var keyRules = rules.keys || {};
+    var valueRules = rules.members || {};
+    var keyName = keyRules.name || 'key';
+    var valueName = valueRules.name || 'value';
+    if (!rules.flattened) {
+      map = map[0].entry;
+    }
+    AWS.util.arrayEach.call(this, map, function (entry) {
+      var value = this.parseMember(entry[valueName], valueRules);
+      data[entry[keyName][0]] = value;
+    });
+    return data;
+  },
+
+  parseList: function parseList(list, rules) {
+    var data = [];
+    var memberRules = rules.members || {};
+    var memberName = memberRules.name || 'member';
+    if (rules.flattened) {
+      AWS.util.arrayEach.call(this, list, function (value) {
+        data.push(this.parseMember([value], memberRules));
+      });
+    } else {
+      AWS.util.arrayEach.call(this, list, function (member) {
+        AWS.util.arrayEach.call(this, member[memberName], function (value) {
+          data.push(this.parseMember([value], memberRules));
+        });
+      });
+    }
+    return data;
+  },
+
+  parseMember: function parseMember(values, rules) {
+    /*jshint maxcomplexity:20*/
+
+    if (values[0] === null) {
+      if (rules.type === 'structure') return {};
+      if (rules.type === 'list') return [];
+      if (rules.type === 'map') return {};
+      return null;
+    }
+
+    if (values[0]['$'] && values[0]['$'].encoding == 'base64') {
+      return AWS.util.base64.decode(values[0]['_']);
+    }
+
+    if (!rules.type) {
+      if (typeof values[0] === 'string') {
+        rules.type = 'string';
+      } else if (values[0]['_']) {
+        rules.type = 'string';
+        values = [values[0]['_']];
+      } else {
+        rules.type = 'structure';
+      }
+    }
+
+    if (rules.type === 'string') {
+
+      return values[0];
+
+    } else if (rules.type === 'structure') {
+
+      return this.parseStructure(values[0], rules.members || {});
+
+    } else if (rules.type === 'list') {
+
+      return this.parseList(values, rules);
+
+    } else if (rules.type === 'map') {
+
+      return this.parseMap(values, rules);
+
+    } else if (rules.type === 'integer') {
+
+      return parseInt(values[0], 10);
+
+    } else if (rules.type === 'float') {
+
+      return parseFloat(values[0]);
+
+    } else if (rules.type === 'timestamp') {
+
+      return this.parseTimestamp(values[0]);
+
+    } else if (rules.type === 'boolean') {
+
+      return values[0] === 'true';
+
+    } else {
+
+      var msg = 'unhandled type: ' + rules.type;
+      throw AWS.util.error(new Error(msg), {code: 'XMLParserError'});
+
+    }
+
+  },
+
+  parseTimestamp: function parseTimestamp(value) {
+
+    if (value.match(/^\d+$/)) { // unix timestamp
+
+      return new Date(value * 1000);
+
+    } else if (value.match(/^\d{4}/)) { // iso8601
+
+      return new Date(value);
+
+    } else if (value.match(/^\w{3},/)) { // rfc822
+
+      return new Date(value);
+
+    } else {
+
+      throw AWS.util.error(
+        new Error('unhandled timestamp format: ' + value),
+        {code: 'TimestampParserError'});
+
+    }
+
+  }
+
+});
+
+},{"../core":3,"xml2js":56}],33:[function(require,module,exports){
+
+},{}],34:[function(require,module,exports){
 // UTILITY
 var util = require('util');
 var Buffer = require("buffer").Buffer;
@@ -328,7 +11410,7 @@ assert.doesNotThrow = function(block, /*optional*/error, /*optional*/message) {
 
 assert.ifError = function(err) { if (err) {throw err;}};
 
-},{"buffer":11,"util":9}],3:[function(require,module,exports){
+},{"buffer":43,"util":41}],35:[function(require,module,exports){
 var process=require("__browserify_process");if (!process.EventEmitter) process.EventEmitter = function () {};
 
 var EventEmitter = exports.EventEmitter = process.EventEmitter;
@@ -524,10 +11606,10 @@ EventEmitter.listenerCount = function(emitter, type) {
   return ret;
 };
 
-},{"__browserify_process":23}],4:[function(require,module,exports){
+},{"__browserify_process":55}],36:[function(require,module,exports){
 // nothing to see here... no file methods for the browser
 
-},{}],5:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 var http = require('http');
 
 var https = module.exports;
@@ -541,7 +11623,7 @@ https.request = function (params, cb) {
     params.scheme = 'https';
     return http.request.call(this, params, cb);
 }
-},{"http":18}],6:[function(require,module,exports){
+},{"http":50}],38:[function(require,module,exports){
 
 /**
  * Object#toString() ref for stringify().
@@ -860,7 +11942,7 @@ function decode(str) {
   }
 }
 
-},{}],7:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 var events = require('events');
 var util = require('util');
 
@@ -981,7 +12063,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":3,"util":9}],8:[function(require,module,exports){
+},{"events":35,"util":41}],40:[function(require,module,exports){
 var punycode = { encode : function (s) { return s } };
 
 exports.parse = urlParse;
@@ -1587,7 +12669,7 @@ function parseHost(host) {
   return out;
 }
 
-},{"querystring":6}],9:[function(require,module,exports){
+},{"querystring":38}],41:[function(require,module,exports){
 var events = require('events');
 
 exports.isArray = isArray;
@@ -1934,7 +13016,7 @@ exports.format = function(f) {
   return str;
 };
 
-},{"events":3}],10:[function(require,module,exports){
+},{"events":35}],42:[function(require,module,exports){
 exports.readIEEE754 = function(buffer, offset, isBE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -2020,7 +13102,7 @@ exports.writeIEEE754 = function(buffer, value, offset, isBE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128;
 };
 
-},{}],11:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 var assert = require('assert');
 exports.Buffer = Buffer;
 exports.SlowBuffer = Buffer;
@@ -3103,7 +14185,7 @@ Buffer.prototype.writeDoubleBE = function(value, offset, noAssert) {
   writeDouble(this, value, offset, true, noAssert);
 };
 
-},{"./buffer_ieee754":10,"assert":2,"base64-js":12}],12:[function(require,module,exports){
+},{"./buffer_ieee754":42,"assert":34,"base64-js":44}],44:[function(require,module,exports){
 (function (exports) {
 	'use strict';
 
@@ -3189,7 +14271,7 @@ Buffer.prototype.writeDoubleBE = function(value, offset, noAssert) {
 	module.exports.fromByteArray = uint8ToBase64;
 }());
 
-},{}],13:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 var Buffer = require('buffer').Buffer
 var sha = require('./sha')
 var sha256 = require('./sha256')
@@ -3319,7 +14401,7 @@ each(['createCredentials'
   }
 })
 
-},{"./md5":14,"./rng":15,"./sha":16,"./sha256":17,"buffer":11}],14:[function(require,module,exports){
+},{"./md5":46,"./rng":47,"./sha":48,"./sha256":49,"buffer":43}],46:[function(require,module,exports){
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
  * Digest Algorithm, as defined in RFC 1321.
@@ -3584,7 +14666,7 @@ exports.hex_hmac_md5 = hex_hmac_md5;
 exports.b64_hmac_md5 = b64_hmac_md5;
 exports.bin_hmac_md5 = str_hmac_md5;
 
-},{}],15:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 // Original code adapted from Robert Kieffer.
 // details at https://github.com/broofa/node-uuid
 (function() {
@@ -3622,7 +14704,7 @@ exports.bin_hmac_md5 = str_hmac_md5;
 
 }())
 
-},{}],16:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
  * in FIPS PUB 180-1
@@ -3834,7 +14916,7 @@ function binb2b64(binarray)
 }
 
 
-},{}],17:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
@@ -4010,7 +15092,7 @@ var core_hmac_sha256 = function(key, data) {
 };
 
 
-},{}],18:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 var http = module.exports;
 var EventEmitter = require('events').EventEmitter;
 var Request = require('./lib/request');
@@ -4072,7 +15154,7 @@ var xhrHttp = (function () {
     }
 })();
 
-},{"./lib/request":19,"events":3}],19:[function(require,module,exports){
+},{"./lib/request":51,"events":35}],51:[function(require,module,exports){
 var Stream = require('stream');
 var Response = require('./response');
 var concatStream = require('concat-stream')
@@ -4205,7 +15287,7 @@ var indexOf = function (xs, x) {
     return -1;
 };
 
-},{"./response":20,"buffer":11,"concat-stream":21,"stream":7}],20:[function(require,module,exports){
+},{"./response":52,"buffer":43,"concat-stream":53,"stream":39}],52:[function(require,module,exports){
 var Stream = require('stream');
 
 var Response = module.exports = function (res) {
@@ -4326,7 +15408,7 @@ var isArray = Array.isArray || function (xs) {
     return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{"stream":7}],21:[function(require,module,exports){
+},{"stream":39}],53:[function(require,module,exports){
 var Buffer=require("__browserify_Buffer").Buffer;var stream = require('stream')
 var util = require('util')
 
@@ -4376,7 +15458,7 @@ module.exports = function(cb) {
 
 module.exports.ConcatStream = ConcatStream
 
-},{"__browserify_Buffer":22,"stream":7,"util":9}],22:[function(require,module,exports){
+},{"__browserify_Buffer":54,"stream":39,"util":41}],54:[function(require,module,exports){
 require=(function(e,t,n,r){function i(r){if(!n[r]){if(!t[r]){if(e)return e(r);throw new Error("Cannot find module '"+r+"'")}var s=n[r]={exports:{}};t[r][0](function(e){var n=t[r][1][e];return i(n?n:e)},s,s.exports)}return n[r].exports}for(var s=0;s<r.length;s++)i(r[s]);return i})(typeof require!=="undefined"&&require,{1:[function(require,module,exports){
 // UTILITY
 var util = require('util');
@@ -8238,7 +19320,7 @@ SlowBuffer.prototype.writeDoubleBE = Buffer.prototype.writeDoubleBE;
 },{}]},{},[])
 ;;module.exports=require("buffer-browserify")
 
-},{}],23:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -8292,11027 +19374,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],24:[function(require,module,exports){
-var AWS = require("./core"); module.exports = AWS;
-AWS.Service.defineServiceApi(require("./services/dynamodb"), "2012-08-10", require("./services/api/dynamodb-2012-08-10"));
-AWS.Service.defineServiceApi(require("./services/s3"), "2006-03-01", require("./services/api/s3-2006-03-01"));
-AWS.Service.defineServiceApi(require("./services/sts"), "2011-06-15", require("./services/api/sts-2011-06-15"));
-},{"./core":26,"./services/api/dynamodb-2012-08-10":40,"./services/api/s3-2006-03-01":41,"./services/api/sts-2011-06-15":42,"./services/dynamodb":43,"./services/s3":44,"./services/sts":45}],25:[function(require,module,exports){
-var process=require("__browserify_process");/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('./core');
-require('./event_listeners');
-require('./sequential_executor');
-require('./metadata_service');
-var inherit = AWS.util.inherit;
-
-/**
- * The main configuration class used by all service objects to set
- * the region, credentials, and other options for requests.
- *
- * By default, credentials and region settings are left unconfigured.
- * This should be configured by the application before using any
- * AWS service APIs.
- *
- * In order to set global configuration options, properties should
- * be assigned to the global {AWS.config} object.
- *
- * @see AWS.config
- *
- * @!attribute credentials
- *   @return [AWS.Credentials] the AWS credentials to sign requests with.
- *
- * @!attribute region
- *   @example Set the global region setting to us-west-2
- *     AWS.config.update({region: 'us-west-2'});
- *   @return [AWS.Credentials] The region to send service requests to.
- *   @see http://docs.amazonwebservices.com/general/latest/gr/rande.html
- *     A list of available endpoints for each AWS service
- *
- * @!attribute maxRetries
- *   @return [Integer] the maximum amount of retries to perform for a
- *     service request. By default this value is calculated by the specific
- *     service object that the request is being made to.
- *
- * @!attribute maxRedirects
- *   @return [Integer] the maximum amount of redirects to follow for a
- *     service request. Defaults to 10.
- *
- * @!attribute paramValidation
- *   @return [Boolean] whether input parameters should be validated against
- *     the operation description before sending the request. Defaults to true.
- *
- * @!attribute computeChecksums
- *   @return [Boolean] whether to compute checksums for payload bodies when
- *     the service accepts it (currently supported in S3 only).
- *
- * @!attribute sslEnabled
- *   @return [Boolean] whether SSL is enabled for requests
- *
- * @!attribute s3ForcePathStyle
- *   @return [Boolean] whether to force path style URLs for S3 objects
- */
-AWS.Config = inherit({
-
-  /**
-   * Creates a new configuration object. This is the object that passes
-   * option data along to service requests, including credentials, security,
-   * region information, and some service specific settings.
-   *
-   * @example Creating a new configuration object with credentials and region
-   *   var config = new AWS.Config({
-   *     accessKeyId: 'AKID', secretAccessKey: 'SECRET', region: 'us-west-2'
-   *   });
-   * @option options accessKeyId [String] your AWS access key ID.
-   * @option options secretAccessKey [String] your AWS secret access key.
-   * @option options sessionToken [AWS.Credentials] the optional AWS
-   *   session token to sign requests with.
-   * @option options credentials [AWS.Credentials] the AWS credentials
-   *   to sign requests with. You can either specify this object, or
-   *   specify the accessKeyId and secretAccessKey options directly.
-   * @option options credentialProvider [AWS.CredentialProviderChain] the
-   *   provider chain used to resolve credentials if no static `credentials`
-   *   property is set.
-   * @option options region [String] the region to send service requests to.
-   *   See {region} for more information.
-   * @option options maxRetries [Integer] the maximum amount of retries to
-   *   attempt with a request. See {maxRetries} for more information.
-   * @option options maxRedirects [Integer] the maximum amount of redirects to
-   *   follow with a request. See {maxRedirects} for more information.
-   * @option options sslEnabled [Boolean] whether to enable SSL for
-   *   requests.
-   * @option options paramValidation [Boolean] whether parameter validation
-   *   is on.
-   * @option options computeChecksums [Boolean] whether to compute checksums
-   *   for payload bodies when the service accepts it (currently supported
-   *   in S3 only)
-   * @option options s3ForcePathStyle [Boolean] whether to force path
-   *   style URLs for S3 objects.
-   * @option options httpOptions [map] A set of options to pass to the low-level
-   *   HTTP request. Currently supported options are:
-   *
-   *   * **proxy** [String] &mdash; the URL to proxy requests through
-   *   * **agent** [http.Agent, https.Agent] &mdash; the Agent object to perform
-   *     HTTP requests with. Used for connection pooling. Defaults to the global
-   *     agent (`http.globalAgent`) for non-SSL connections. Note that for
-   *     SSL connections, a special Agent object is used in order to enable
-   *     peer certificate verification.
-   *   * **timeout** [Integer] &mdash; The number of milliseconds to wait before
-   *     giving up on a connection attempt. Defaults to no timeout.
-   * @option options apiVersion [String, Date] a String in YYYY-MM-DD format
-   *   (or a date) that represents the latest possible API version that can be
-   *   used in all services (unless overridden by `apiVersions`). Specify
-   *   'latest' to use the latest possible version.
-   * @option options apiVersions [map<String, String|Date>] a map of service
-   *   identifiers (the lowercase service class name) with the API version to
-   *   use when instantiating a service. Specify 'latest' for each individual
-   *   that can use the latest available version.
-   */
-  constructor: function Config(options) {
-    if (options === undefined) options = {};
-    options = this.extractCredentials(options);
-
-    AWS.util.each.call(this, this.keys, function (key, value) {
-      this.set(key, options[key], value);
-    });
-  },
-
-  /**
-   * @overload update(options, allowUnknownKeys = false)
-   *   Updates the current configuration object with new options.
-   *
-   *   @example Update maxRetries property of a configuration object
-   *     config.update({maxRetries: 10});
-   *   @param [Object] options a map of option keys and values.
-   *   @param [Boolean] allowUnknownKeys whether unknown keys can be set on
-   *     the configuration object. Defaults to `false`.
-   *   @see constructor
-   */
-  update: function update(options, allowUnknownKeys) {
-    allowUnknownKeys = allowUnknownKeys || false;
-    options = this.extractCredentials(options);
-    AWS.util.each.call(this, options, function (key, value) {
-      if (allowUnknownKeys || this.keys.hasOwnProperty(key)) this[key] = value;
-    });
-  },
-
-  /**
-   * @api private
-   */
-  getCredentials: function getCredentials(callback) {
-    var self = this;
-
-    function finish(err) {
-      callback(err, err ? null : self.credentials);
-    }
-
-    function credError(msg, err) {
-      return new AWS.util.error(err || new Error(), {
-        code: 'CredentialsError', message: msg
-      });
-    }
-
-    function getAsyncCredentials() {
-      self.credentials.get(function(err) {
-        if (err) {
-          var msg = 'Could not load credentials from ' +
-            self.credentials.constructor.name;
-          err = credError(msg, err);
-        }
-        finish(err);
-      });
-    }
-
-    function getStaticCredentials() {
-      var err = null;
-      if (!self.credentials.accessKeyId || !self.credentials.secretAccessKey) {
-        err = credError('Missing credentials');
-      }
-      finish(err);
-    }
-
-    if (self.credentials) {
-      if (typeof self.credentials.get === 'function') {
-        getAsyncCredentials();
-      } else { // static credentials
-        getStaticCredentials();
-      }
-    } else if (self.credentialProvider) {
-      self.credentialProvider.resolve(function(err, creds) {
-        if (err) {
-          err = credError('Could not load credentials from any providers', err);
-        }
-        self.credentials = creds;
-        finish(err);
-      });
-    } else {
-      finish(credError('No credentials to load'));
-    }
-  },
-
-  /**
-   * Loads configuration data from a JSON file into this config object.
-   * @note Loading configuration will reset all existing configuration
-   *   on the object.
-   * @param path [String] the path to load configuration from
-   * @return [AWS.Config] the same configuration object
-   */
-  loadFromPath: function loadFromPath(path) {
-    this.clear();
-
-    var options = JSON.parse(AWS.util.readFileSync(path));
-    var fileSystemCreds = new AWS.FileSystemCredentials(path);
-    var chain = new AWS.CredentialProviderChain();
-    chain.providers.unshift(fileSystemCreds);
-    chain.resolve(function (err, creds) {
-      if (err) throw err;
-      else options.credentials = creds;
-    });
-
-    this.constructor(options);
-
-    return this;
-  },
-
-  /**
-   * Clears configuration data on this object
-   *
-   * @api private
-   */
-  clear: function clear() {
-    /*jshint forin:false */
-    AWS.util.each.call(this, this.keys, function (key) {
-      delete this[key];
-    });
-
-    // reset credential provider
-    this.set('credentials', undefined);
-    this.set('credentialProvider', undefined);
-  },
-
-  /**
-   * Sets a property on the configuration object, allowing for a
-   * default value
-   * @api private
-   */
-  set: function set(property, value, defaultValue) {
-    if (value === undefined) {
-      if (defaultValue === undefined) {
-        defaultValue = this.keys[property];
-      }
-      if (typeof defaultValue === 'function') {
-        this[property] = defaultValue.call(this);
-      } else {
-        this[property] = defaultValue;
-      }
-    } else {
-      this[property] = value;
-    }
-  },
-
-  /**
-   * All of the keys with their default values.
-   *
-   * @constant
-   * @api private
-   */
-  keys: {
-    credentials: function () {
-      var credentials = null;
-      new AWS.CredentialProviderChain([
-        function () { return new AWS.EnvironmentCredentials('AWS'); },
-        function () { return new AWS.EnvironmentCredentials('AMAZON'); }
-      ]).resolve(function(err, creds) {
-        if (!err) credentials = creds;
-      });
-      return credentials;
-    },
-    credentialProvider: function() {
-      return new AWS.CredentialProviderChain([
-        function() { return new AWS.EC2MetadataCredentials(); }
-      ]);
-    },
-    region: function() {
-      return process.env.AWS_REGION || process.env.AMAZON_REGION;
-    },
-    apiVersions: {},
-    apiVersion: null,
-    endpoint: undefined,
-    httpOptions: {},
-    maxRetries: undefined,
-    maxRedirects: 10,
-    paramValidation: true,
-    sslEnabled: true,
-    s3ForcePathStyle: false,
-    computeChecksums: true,
-    dynamoDbCrc32: true
-  },
-
-  /**
-   * Extracts accessKeyId, secretAccessKey and sessionToken
-   * from a configuration hash.
-   *
-   * @api private
-   */
-  extractCredentials: function extractCredentials(options) {
-    if (options.accessKeyId && options.secretAccessKey) {
-      options = AWS.util.copy(options);
-      options.credentials = new AWS.Credentials(options);
-    }
-    return options;
-  }
-});
-
-/**
- * Represents your AWS security credentials, specifically the
- * {accessKeyId}, {secretAccessKey}, and optional {sessionToken}.
- * Creating a `Credentials` object allows you to pass around your
- * security information to configuration and service objects.
- *
- * Note that this class typically does not need to be constructed manually,
- * as the {AWS.Config} and {AWS.Service} classes both accept simple
- * options hashes with the three keys. These structures will be converted
- * into Credentials objects automatically.
- *
- * ## Expiring and Refreshing Credentials
- *
- * Occasionally credentials can expire in the middle of a long-running
- * application. In this case, the SDK will automatically attempt to
- * refresh the credentials from the storage location if the Credentials
- * class implements the {refresh} method.
- *
- * If you are implementing a credential storage location, you
- * will want to create a subclass of the `Credentials` class and
- * override the {refresh} method. This method allows credentials to be
- * retrieved from the backing store, be it a file system, database, or
- * some network storage. The method should reset the credential attributes
- * on the object.
- *
- * @!attribute expired
- *   @return [Boolean] whether the credentials have been expired and
- *     require a refresh
- * @!attribute accessKeyId
- *   @return [String] the AWS access key ID
- * @!attribute secretAccessKey
- *   @return [String] the AWS secret access key
- * @!attribute sessionToken
- *   @return [String] an optional AWS session token
- */
-AWS.Credentials = inherit({
-  /**
-   * A credentials object can be created using positional arguments or an options
-   * hash.
-   *
-   * @overload AWS.Credentials(accessKeyId, secretAccessKey, sessionToken=null)
-   *   Creates a Credentials object with a given set of credential information
-   *   as positional arguments.
-   *   @param accessKeyId [String] the AWS access key ID
-   *   @param secretAccessKey [String] the AWS secret access key
-   *   @param sessionToken [String] the optional AWS session token
-   *   @example Create a credentials object with AWS credentials
-   *     var creds = new AWS.Credentials('akid', 'secret', 'session');
-   * @overload AWS.Credentials(options)
-   *   Creates a Credentials object with a given set of credential information
-   *   as an options hash.
-   *   @option options accessKeyId [String] the AWS access key ID
-   *   @option options secretAccessKey [String] the AWS secret access key
-   *   @option options sessionToken [String] the optional AWS session token
-   *   @example Create a credentials object with AWS credentials
-   *     var creds = new AWS.Credentials({
-   *       accessKeyId: 'akid', secretAccessKey: 'secret', sessionToken: 'session'
-   *     });
-   */
-  constructor: function Credentials() {
-    this.expired = false;
-    if (arguments.length == 1 && typeof arguments[0] === 'object') {
-      var creds = arguments[0].credentials || arguments[0];
-      this.accessKeyId = creds.accessKeyId;
-      this.secretAccessKey = creds.secretAccessKey;
-      this.sessionToken = creds.sessionToken;
-    } else {
-      this.accessKeyId = arguments[0];
-      this.secretAccessKey = arguments[1];
-      this.sessionToken = arguments[2];
-    }
-  },
-
-  /**
-   * @return [Boolean] whether the credentials object should call {refresh}
-   * @note Subclasses should override this method to provide custom refresh
-   *   logic.
-   */
-  needsRefresh: function needsRefresh() {
-    return this.expired || !this.accessKeyId || !this.secretAccessKey;
-  },
-
-  /**
-   * Gets the existing credentials, refreshing them if they are not yet loaded
-   * or have expired. Users should call this method before using {refresh},
-   * as this will not attempt to reload credentials when they are already
-   * loaded into the object.
-   *
-   * @callback callback function(err)
-   *   Called when the instance metadata service responds (or fails). When
-   *   this callback is called with no error, it means that the credentials
-   *   information has been loaded into the object (as the `accessKeyId`,
-   *   `secretAccessKey`, and `sessionToken` properties).
-   *   @param err [Error] if an error occurred, this value will be filled
-   */
-  get: function get(callback) {
-    var self = this;
-    if (this.needsRefresh()) {
-      this.refresh(function(err) {
-        if (!err) self.expired = false; // reset expired flag
-        callback(err);
-      });
-    } else {
-      callback();
-    }
-  },
-
-  /**
-   * Refreshes the credentials. Users should call {get} before attempting
-   * to forcibly refresh credentials.
-   *
-   * @callback callback function(err)
-   *   Called when the instance metadata service responds (or fails). When
-   *   this callback is called with no error, it means that the credentials
-   *   information has been loaded into the object (as the `accessKeyId`,
-   *   `secretAccessKey`, and `sessionToken` properties).
-   *   @param err [Error] if an error occurred, this value will be filled
-   * @note Subclasses should override this class to reset the
-   *   {accessKeyId}, {secretAccessKey} and optional {sessionToken}
-   *   on the credentials object and then call the callback with
-   *   any error information.
-   * @see get
-   */
-  refresh: function refresh(callback) {
-    this.expired = false;
-    callback();
-  }
-});
-
-/**
- * Represents credentials from a JSON file on disk.
- * If the credentials expire, the SDK can {refresh} the credentials
- * from the file.
- *
- * The format of the file should be similar to the options passed to
- * {AWS.Config}:
- *
- * ```js
- * {accessKeyId: 'akid', secretAccessKey: 'secret', sessionToken: 'optional'}
- * ```
- *
- * @example Loading credentials from disk
- *   var creds = new AWS.FileSystemCredentials('./configuration.json');
- *   creds.accessKeyId == 'AKID'
- *
- * @!attribute filename
- *   @readonly
- *   @return [String] the path to the JSON file on disk containing the
- *     credentials.
- */
-AWS.FileSystemCredentials = inherit(AWS.Credentials, {
-
-  /**
-   * @overload AWS.FileSystemCredentials(filename)
-   *   Creates a new FileSystemCredentials object from a filename
-   *
-   *   @param filename [String] the path on disk to the JSON file to load.
-   */
-  constructor: function FileSystemCredentials(filename) {
-    AWS.Credentials.call(this);
-    this.filename = filename;
-    this.get(function() {});
-  },
-
-  /**
-   * Loads the credentials from the {filename} on disk.
-   *
-   * @callback callback function(err)
-   *   Called when the instance metadata service responds (or fails). When
-   *   this callback is called with no error, it means that the credentials
-   *   information has been loaded into the object (as the `accessKeyId`,
-   *   `secretAccessKey`, and `sessionToken` properties).
-   *   @param err [Error] if an error occurred, this value will be filled
-   * @see get
-   */
-  refresh: function refresh(callback) {
-    if (!callback) callback = function(err) { if (err) throw err; };
-    try {
-      var creds = JSON.parse(AWS.util.readFileSync(this.filename));
-      AWS.Credentials.call(this, creds);
-      if (!this.accessKeyId || !this.secretAccessKey) {
-        throw new Error('Credentials not set in ' + this.filename);
-      }
-      this.expired = false;
-      callback();
-    } catch (err) {
-      callback(err);
-    }
-  }
-
-});
-
-/**
- * Represents credentials from the environment.
- *
- * By default, this class will look for the matching environment variables
- * prefixed by a given {envPrefix}. The un-prefixed environment variable names
- * for each credential value is listed below:
- *
- * ```js
- * accessKeyId: ACCESS_KEY_ID
- * secretAccessKey: SECRET_ACCESS_KEY
- * sessionToken: SESSION_TOKEN
- * ```
- *
- * With the default prefix of 'AWS', the environment variables would be:
- *
- *     AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN
- *
- * @!attribute envPrefix
- *   @readonly
- *   @return [String] the prefix for the environment variable names excluding
- *     the separating underscore ('_').
- */
-AWS.EnvironmentCredentials = inherit(AWS.Credentials, {
-
-  /**
-   * Creates a new EnvironmentCredentials class with a given variable
-   * prefix {envPrefix}. For example, to load credentials using the 'AWS'
-   * prefix:
-   *
-   * ```js
-   * var creds = new AWS.EnvironmentCredentials('AWS');
-   * creds.accessKeyId == 'AKID' // from AWS_ACCESS_KEY_ID env var
-   * ```
-   *
-   * @param envPrefix [String] the prefix to use (e.g., 'AWS') for environment
-   *   variables. Do not include the separating underscore.
-   */
-  constructor: function EnvironmentCredentials(envPrefix) {
-    this.envPrefix = envPrefix;
-    this.get(function() {});
-  },
-
-  /**
-   * Loads credentials from the environment using the prefixed
-   * environment variables.
-   *
-   * @callback callback function(err)
-   *   Called when the instance metadata service responds (or fails). When
-   *   this callback is called with no error, it means that the credentials
-   *   information has been loaded into the object (as the `accessKeyId`,
-   *   `secretAccessKey`, and `sessionToken` properties).
-   *   @param err [Error] if an error occurred, this value will be filled
-   * @see get
-   */
-  refresh: function refresh(callback) {
-    /*jshint maxcomplexity:10*/
-    if (!callback) callback = function(err) { if (err) throw err; };
-
-    if (process === undefined) {
-      callback(new Error('No process info available'));
-      return;
-    }
-
-    var keys = ['ACCESS_KEY_ID', 'SECRET_ACCESS_KEY', 'SESSION_TOKEN'];
-    var values = [];
-
-    for (var i = 0; i < keys.length; i++) {
-      var prefix = '';
-      if (this.envPrefix) prefix = this.envPrefix + '_';
-      values[i] = process.env[prefix + keys[i]];
-      if (!values[i] && keys[i] !== 'SESSION_TOKEN') {
-        callback(new Error('Variable ' + prefix + keys[i] + ' not set.'));
-        return;
-      }
-    }
-
-    this.expired = false;
-    AWS.Credentials.apply(this, values);
-    callback();
-  }
-
-});
-
-/**
- * Represents credentials recieved from the metadata service on an EC2 instance.
- *
- * By default, this class will connect to the metadata service using
- * {AWS.MetadataService} and attempt to load any available credentials. If it
- * can connect, and credentials are available, these will be used with zero
- * configuration.
- */
-AWS.EC2MetadataCredentials = inherit(AWS.Credentials, {
-  constructor: function EC2MetadataCredentials(options) {
-    this.serviceError = null;
-    this.metadataService = new AWS.MetadataService(options);
-    this.metadata = {};
-  },
-
-  /**
-   * Loads the credentials from the instance metadata service
-   *
-   * @callback callback function(err)
-   *   Called when the instance metadata service responds (or fails). When
-   *   this callback is called with no error, it means that the credentials
-   *   information has been loaded into the object (as the `accessKeyId`,
-   *   `secretAccessKey`, and `sessionToken` properties).
-   *   @param err [Error] if an error occurred, this value will be filled
-   * @see get
-   */
-  refresh: function refresh(callback) {
-    var self = this;
-    if (!callback) callback = function(err) { if (err) throw err; };
-    if (self.serviceError) {
-      callback(self.serviceError);
-      return;
-    }
-
-    self.metadataService.loadCredentials(function (err, creds) {
-      if (err) {
-        self.serviceError = err;
-      } else {
-        self.expired = false;
-        self.metadata = creds;
-        self.accessKeyId = creds.AccessKeyId;
-        self.secretAccessKey = creds.SecretAccessKey;
-        self.sessionToken = creds.Token;
-      }
-      callback(err);
-    });
-  }
-});
-
-/**
- * Creates a credential provider chain that searches for AWS credentials
- * in a list of credential providers specified by the {providers} property.
- *
- * By default, the chain will use the {defaultProviders} to resolve credentials.
- * These providers will look in the environment using the
- * {AWS.EnvironmentCredentials} class with the 'AWS' and 'AMAZON' prefixes.
- *
- * ## Setting Providers
- *
- * Each provider in the {providers} list should be a function that returns
- * a {AWS.Credentials} object, or a hardcoded credentials object. The function
- * form allows for delayed execution of the credential construction.
- *
- * ## Resolving Credentials from a Chain
- *
- * Call {resolve} to return the first valid credential object that can be
- * loaded by the provider chain.
- *
- * For example, to resolve a chain with a custom provider that checks a file
- * on disk after the set of {defaultProviders}:
- *
- * ```js
- * var diskProvider = new AWS.FileSystemCredentials('./creds.json');
- * var chain = new AWS.CredentialProviderChain();
- * chain.providers.push(diskProvider);
- * chain.resolve();
- * ```
- *
- * The above code will return the `diskProvider` object if the
- * file contains credentials and the `defaultProviders` do not contain
- * any credential settings.
- *
- * @!attribute providers
- *   @return [Array<AWS.Credentials, Function>]
- *     a list of credentials objects or functions that return credentials
- *     objects. If the provider is a function, the function will be
- *     executed lazily when the provider needs to be checked for valid
- *     credentials. By default, this object will be set to the
- *     {defaultProviders}.
- *   @see defaultProviders
- */
-AWS.CredentialProviderChain = inherit(AWS.Credentials, {
-
-  /**
-   * Creates a new CredentialProviderChain with a default set of providers
-   * specified by {defaultProviders}.
-   */
-  constructor: function CredentialProviderChain(providers) {
-    if (providers) {
-      this.providers = providers;
-    } else {
-      this.providers = AWS.CredentialProviderChain.defaultProviders.slice(0);
-    }
-  },
-
-  /**
-   * Resolves the provider chain by searching for the first set of
-   * credentials in {providers}.
-   *
-   * @callback callback function(err, credentials)
-   *   Called when the provider resolves the chain to a credentials object
-   *   or null if no credentials can be found.
-   *
-   *   @param err [Error] the error object returned if no credentials are
-   *     found.
-   *   @param credentials [AWS.Credentials] the credentials object resolved
-   *     by the provider chain.
-   * @return [AWS.CredentialProviderChain] the provider, for chaining.
-   */
-  resolve: function resolve(callback) {
-    if (this.providers.length === 0) {
-      callback(new Error('No providers'));
-      return;
-    }
-
-    var index = 0;
-    var providers = this.providers.slice(0);
-
-    function resolveNext(err, creds) {
-      if ((!err && creds) || index === providers.length) {
-        callback(err, creds);
-        return;
-      }
-
-      var provider = providers[index++];
-      if (typeof provider === 'function') {
-        creds = provider.call();
-      } else {
-        creds = provider;
-      }
-
-      if (creds.get) {
-        creds.get(function(err) {
-          resolveNext(err, err ? null : creds);
-        });
-      } else {
-        resolveNext(null, creds);
-      }
-    }
-
-    resolveNext();
-    return this;
-  }
-
-});
-
-/**
- * The default set of providers used by a vanilla CredentialProviderChain.
- */
-AWS.CredentialProviderChain.defaultProviders = [
-  function () { return new AWS.EnvironmentCredentials('AWS'); },
-  function () { return new AWS.EnvironmentCredentials('AMAZON'); },
-  function () { return new AWS.EC2MetadataCredentials(); }
-];
-
-/**
- * @return [AWS.Config] The global configuration object singleton instance
- * @readonly
- * @see AWS.Config
- */
-AWS.config = new AWS.Config();
-
-},{"./core":26,"./event_listeners":27,"./metadata_service":30,"./sequential_executor":33,"__browserify_process":23}],26:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-/**
- * The main AWS namespace
- */
-var AWS = {};
-module.exports = AWS;
-require('./util');
-
-AWS.util.update(AWS, {
-
-  /**
-   * @constant
-   */
-  VERSION: 'v1.5.0',
-
-  /**
-   * @api private
-   */
-  ServiceInterface: {},
-
-  /**
-   * @api private
-   */
-  Signers: {},
-
-  /**
-   * @api private
-   */
-  XML: {}
-
-});
-
-require('./config');
-require('./http');
-require('./sequential_executor');
-require('./event_listeners');
-require('./request');
-require('./service');
-require('./signers/request_signer');
-require('./param_validator');
-require('./metadata_service');
-
-/**
- * @readonly
- * @return [AWS.SequentialExecutor] a collection of global event listeners that
- *   are attached to every sent request.
- * @see AWS.Request AWS.Request for a list of events to listen for
- * @example Logging the time taken to send a request
- *   AWS.events.on('send', function startSend(resp) {
- *     resp.startTime = new Date().getTime();
- *   }).on('complete', function calculateTime(resp) {
- *     var time = (new Date().getTime() - resp.startTime) / 1000;
- *     console.log('Request took ' + time + ' seconds');
- *   });
- *
- *   new AWS.S3().listBuckets(); // prints 'Request took 0.285 seconds'
- */
-AWS.events = new AWS.SequentialExecutor();
-
-if (typeof window !== 'undefined') window.AWS = AWS;
-
-},{"./config":25,"./event_listeners":27,"./http":28,"./metadata_service":30,"./param_validator":31,"./request":32,"./sequential_executor":33,"./service":34,"./signers/request_signer":47,"./util":53}],27:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('./core');
-var Buffer = require('buffer').Buffer;
-require('./sequential_executor');
-require('./service_interface/json');
-require('./service_interface/query');
-require('./service_interface/rest');
-require('./service_interface/rest_json');
-require('./service_interface/rest_xml');
-
-/**
- * The namespace used to register global event listeners for request building
- * and sending.
- */
-AWS.EventListeners = {
-  /**
-   * @!attribute VALIDATE_CREDENTIALS
-   *   A request listener that validates whether the request is being
-   *   sent with credentials.
-   *   Handles the {AWS.Request~validate 'validate' Request event}
-   *   @example Sending a request without validating credentials
-   *     var listener = AWS.EventListeners.Core.VALIDATE_CREDENTIALS;
-   *     request.removeListener('validate', listener);
-   *   @readonly
-   *   @return [Function]
-   * @!attribute VALIDATE_REGION
-   *   A request listener that validates whether the region is set
-   *   for a request.
-   *   Handles the {AWS.Request~validate 'validate' Request event}
-   *   @example Sending a request without validating region configuration
-   *     var listener = AWS.EventListeners.Core.VALIDATE_REGION;
-   *     request.removeListener('validate', listener);
-   *   @readonly
-   *   @return [Function]
-   * @!attribute VALIDATE_PARAMETERS
-   *   A request listener that validates input parameters in a request.
-   *   Handles the {AWS.Request~validate 'validate' Request event}
-   *   @example Sending a request without validating parameters
-   *     var listener = AWS.EventListeners.Core.VALIDATE_PARAMETERS;
-   *     request.removeListener('validate', listener);
-   *   @example Disable parameter validation globally
-   *     AWS.EventListeners.Core.removeListener('validate',
-   *       AWS.EventListeners.Core.VALIDATE_REGION);
-   *   @readonly
-   *   @return [Function]
-   * @!attribute SEND
-   *   A request listener that initiates the HTTP connection for a
-   *   request being sent. Handles the {AWS.Request~send 'send' Request event}
-   *   @example Replacing the HTTP handler
-   *     var listener = AWS.EventListeners.Core.SEND;
-   *     request.removeListener('send', listener);
-   *     request.on('send', function(response) {
-   *       customHandler.send(response);
-   *     });
-   *   @return [Function]
-   *   @readonly
-   * @!attribute HTTP_DATA
-   *   A request listener that reads data from the HTTP connection in order
-   *   to build the response data.
-   *   Handles the {AWS.Request~httpData 'httpData' Request event}.
-   *   Remove this handler if you are overriding the 'httpData' event and
-   *   do not want extra data processing and buffering overhead.
-   *   @example Disabling default data processing
-   *     var listener = AWS.EventListeners.Core.HTTP_DATA;
-   *     request.removeListener('httpData', listener);
-   *   @return [Function]
-   *   @readonly
-   */
-  Core: {} /* doc hack */
-};
-
-AWS.EventListeners = {
-  Core: new AWS.SequentialExecutor().addNamedListeners(function(add, addAsync) {
-    addAsync('VALIDATE_CREDENTIALS', 'validate',
-        function VALIDATE_CREDENTIALS(req, doneCallback) {
-      req.service.config.getCredentials(function(err) {
-        if (err) {
-          err = AWS.util.error(err,
-            {code: 'SigningError', message: 'Missing credentials in config'});
-        }
-        doneCallback(err);
-      });
-    });
-
-    add('VALIDATE_REGION', 'validate', function VALIDATE_REGION(req) {
-      if (!req.service.config.region) {
-        throw AWS.util.error(new Error(),
-          {code: 'SigningError', message: 'Missing region in config'});
-      }
-    });
-
-    add('VALIDATE_PARAMETERS', 'validate', function VALIDATE_PARAMETERS(req) {
-      var rules = req.service.api.operations[req.operation].input;
-      new AWS.ParamValidator().validate(rules, req.params);
-    });
-
-    add('SET_CONTENT_LENGTH', 'afterBuild', function SET_CONTENT_LENGTH(req) {
-      if (req.httpRequest.headers['Content-Length'] === undefined) {
-        var length = AWS.util.string.byteLength(req.httpRequest.body);
-        req.httpRequest.headers['Content-Length'] = length;
-      }
-    });
-
-    add('SET_HTTP_HOST', 'afterBuild', function SET_HTTP_HOST(req) {
-      req.httpRequest.headers['Host'] = req.httpRequest.endpoint.hostname;
-    });
-
-    addAsync('SIGN', 'sign', function SIGN(req, doneCallback) {
-      if (!req.service.api.signatureVersion) return doneCallback(); // none
-
-      req.service.config.getCredentials(function (err, credentials) {
-        try {
-          if (err) return doneCallback(err);
-
-          var date = AWS.util.date.getDate();
-          var sigVersion = req.service.api.signatureVersion;
-          var SignerClass = AWS.Signers.RequestSigner.getVersion(sigVersion);
-          var signer = new SignerClass(req.httpRequest,
-            req.service.api.signingName || req.service.api.endpointPrefix);
-
-          // clear old authorization headers
-          delete req.httpRequest.headers['Authorization'];
-          delete req.httpRequest.headers['Date'];
-          delete req.httpRequest.headers['X-Amz-Date'];
-
-          // add new authorization
-          signer.addAuthorization(credentials, date);
-          doneCallback();
-        } catch (e) {
-          doneCallback(e);
-        }
-      });
-    });
-
-    add('SETUP_ERROR', 'extractError', function SETUP_ERROR(resp) {
-      if (this.service.successfulResponse(resp, this)) {
-        // throwing null will stop the error extraction chain
-        // but will not set an error for data extraction
-        throw null;
-      }
-
-      resp.error = AWS.util.error(new Error(),
-        {code: 'UnknownError', message: 'An unknown error occurred.'});
-      resp.data = null;
-    });
-
-    add('SETUP_DATA', 'extractData', function SETUP_DATA(resp) {
-      resp.data = {};
-      resp.error = null;
-    });
-
-    add('SEND', 'send', function SEND(resp) {
-      function callback(httpResp) {
-        resp.httpStream = httpResp;
-
-        var headers = [httpResp.statusCode, httpResp.headers, resp];
-        resp.request.emitEvent('httpHeaders', headers);
-
-        if (resp.httpStream) {
-          if (AWS.HttpClient.streamsApiVersion === 2) { // streams2 API check
-            httpResp.on('readable', function onReadable() {
-              resp.request.emitEvent('httpData', [httpResp.read(), resp]);
-            });
-          } else { // legacy streams API
-            httpResp.on('data', function onData(data) {
-              resp.request.emitEvent('httpData', [data, resp]);
-            });
-          }
-
-          httpResp.on('end', function onEnd() {
-            resp.request.emitEvent('httpDone', [resp]);
-          });
-        }
-      }
-
-      function error(err) {
-        err = AWS.util.error(err, {
-          code: 'NetworkingError',
-          region: resp.request.httpRequest.region,
-          hostname: resp.request.httpRequest.endpoint.hostname,
-          retryable: true
-        });
-        resp.request.emitEvent('httpError', [err, resp]);
-      }
-
-      var http = AWS.HttpClient.getInstance();
-      var httpOptions = resp.request.service.config.httpOptions || {};
-      http.handleRequest(this.httpRequest, httpOptions, callback, error);
-    });
-
-    add('HTTP_HEADERS', 'httpHeaders',
-        function HTTP_HEADERS(statusCode, headers, resp) {
-      resp.httpResponse.statusCode = statusCode;
-      resp.httpResponse.headers = headers;
-      resp.httpResponse.body = new Buffer('');
-      resp.httpResponse.buffers = [];
-    });
-
-    add('HTTP_DATA', 'httpData', function HTTP_DATA(chunk, resp) {
-      resp.httpResponse.buffers.push(new Buffer(chunk));
-    });
-
-    add('HTTP_DONE', 'httpDone', function HTTP_DONE(resp) {
-      // convert buffers array into single buffer
-      if (resp.httpResponse.buffers && resp.httpResponse.buffers.length > 0) {
-        var body = AWS.util.buffer.concat(resp.httpResponse.buffers);
-        resp.httpResponse.body = body;
-      }
-      delete resp.httpResponse.buffers;
-
-      this.completeRequest(resp);
-    });
-
-    add('HTTP_ERROR', 'httpError', function HTTP_ERROR(error, resp) {
-      resp.error = error;
-      this.completeRequest(resp);
-    });
-
-    add('FINALIZE_ERROR', 'retry', function FINALIZE_ERROR(resp) {
-      resp.error.statusCode = resp.httpResponse.statusCode;
-      if (resp.error.retryable === undefined) {
-        resp.error.retryable = this.service.retryableError(resp.error, this);
-      }
-    });
-
-    add('INVALIDATE_CREDENTIALS', 'retry', function INVALIDATE_CREDENTIALS(resp) {
-      switch (resp.error.code) {
-        case 'RequestExpired': // EC2 only
-        case 'ExpiredTokenException':
-        case 'ExpiredToken':
-          resp.error.retryable = true;
-          resp.request.service.config.credentials.expired = true;
-      }
-    });
-
-    add('REDIRECT', 'retry', function REDIRECT(resp) {
-      if (resp.error && resp.error.statusCode >= 300 &&
-          resp.error.statusCode < 400 && resp.httpResponse.headers['location']) {
-        this.httpRequest.endpoint =
-          new AWS.Endpoint(resp.httpResponse.headers['location']);
-        resp.error.redirect = true;
-        resp.error.retryable = true;
-      }
-    });
-
-    add('RETRY_CHECK', 'retry', function RETRY_CHECK(resp) {
-      if (resp.error) {
-        if (resp.error.redirect && resp.redirectCount < this.service.config.maxRedirects) {
-          resp.redirectCount++;
-        } else if (resp.error.retryable && resp.retryCount < this.service.numRetries()) {
-          resp.retryCount++;
-        } else {
-          throw resp.error;
-        }
-      }
-    });
-
-    addAsync('RETRY_SIGN', 'retry', function RETRY_SIGN(resp, doneCallback) {
-      this.emitEvent('sign', resp, doneCallback);
-    });
-
-    addAsync('RETRY_DELAY_SEND', 'retry', function RETRY_DELAY_SEND(resp, doneCallback) {
-      var delay = 0;
-      if (!resp.error.redirect) {
-        delay = this.service.retryDelays()[resp.retryCount-1] || 0;
-      }
-
-      resp.error = null;
-      resp.data = null;
-
-      setTimeout(function() {
-        resp.request.emitEvent('send', resp, doneCallback);
-      }, delay);
-
-    });
-
-  }),
-
-  Json: new AWS.SequentialExecutor().addNamedListeners(function(add) {
-    var svc = AWS.ServiceInterface.Json;
-    add('BUILD', 'build', svc.buildRequest);
-    add('EXTRACT_DATA', 'extractData', svc.extractData);
-    add('EXTRACT_ERROR', 'extractError', svc.extractError);
-  }),
-
-  Rest: new AWS.SequentialExecutor().addNamedListeners(function(add) {
-    var svc = AWS.ServiceInterface.Rest;
-    add('BUILD', 'build', svc.buildRequest);
-    add('EXTRACT_DATA', 'extractData', svc.extractData);
-    add('EXTRACT_ERROR', 'extractError', svc.extractError);
-  }),
-
-  RestJson: new AWS.SequentialExecutor().addNamedListeners(function(add) {
-    var svc = AWS.ServiceInterface.RestJson;
-    add('BUILD', 'build', svc.buildRequest);
-    add('EXTRACT_DATA', 'extractData', svc.extractData);
-    add('EXTRACT_ERROR', 'extractError', svc.extractError);
-  }),
-
-  RestXml: new AWS.SequentialExecutor().addNamedListeners(function(add) {
-    var svc = AWS.ServiceInterface.RestXml;
-    add('BUILD', 'build', svc.buildRequest);
-    add('EXTRACT_DATA', 'extractData', svc.extractData);
-    add('EXTRACT_ERROR', 'extractError', svc.extractError);
-  }),
-
-  Query: new AWS.SequentialExecutor().addNamedListeners(function(add) {
-    var svc = AWS.ServiceInterface.Query;
-    add('BUILD', 'build', svc.buildRequest);
-    add('EXTRACT_DATA', 'extractData', svc.extractData);
-    add('EXTRACT_ERROR', 'extractError', svc.extractError);
-  })
-};
-
-},{"./core":26,"./sequential_executor":33,"./service_interface/json":35,"./service_interface/query":36,"./service_interface/rest":37,"./service_interface/rest_json":38,"./service_interface/rest_xml":39,"buffer":11}],28:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('./core');
-var Stream = require('stream').Stream;
-var inherit = AWS.util.inherit;
-
-/**
- * The endpoint that a service will talk to, for example,
- * `'https://ec2.ap-southeast-1.amazonaws.com'`. If
- * you need to override an endpoint for a service, you can
- * set the endpoint on a service by passing the endpoint
- * object with the `endpoint` option key:
- *
- * ```js
- * var ep = new AWS.Endpoint('awsproxy.example.com');
- * var s3 = new AWS.S3({endpoint: ep});
- * s3.service.endpoint.hostname == 'awsproxy.example.com'
- * ```
- *
- * Note that if you do not specify a protocol, the protocol will
- * be selected based on your current {AWS.config} configuration.
- *
- * @!attribute protocol
- *   @return [String] the protocol (http or https) of the endpoint
- *     URL
- * @!attribute hostname
- *   @return [String] the host portion of the endpoint, e.g.,
- *     example.com
- * @!attribute host
- *   @return [String] the host portion of the endpoint including
- *     the port, e.g., example.com:80
- * @!attribute port
- *   @return [Integer] the port of the endpoint
- * @!attribute href
- *   @return [String] the full URL of the endpoint
- */
-AWS.Endpoint = inherit({
-
-  /**
-   * @overload Endpoint(endpoint)
-   *   Constructs a new endpoint given an endpoint URL. If the
-   *   URL omits a protocol (http or https), the default protocol
-   *   set in the global {AWS.config} will be used.
-   *   @param endpoint [String] the URL to construct an endpoint from
-   */
-  constructor: function Endpoint(endpoint, config) {
-    if (typeof endpoint === 'undefined' || endpoint === null) {
-      throw new Error('Invalid endpoint: ' + endpoint);
-    } else if (typeof endpoint !== 'string') {
-      return AWS.util.copy(endpoint);
-    }
-
-    if (!endpoint.match(/^http/)) {
-      var useSSL = config && config.sslEnabled !== undefined ?
-        config.sslEnabled : AWS.config.sslEnabled;
-      endpoint = (useSSL ? 'https' : 'http') + '://' + endpoint;
-    }
-
-    AWS.util.update(this, AWS.util.urlParse(endpoint));
-
-    // Ensure the port property is set as an integer
-    if (this.port) {
-      this.port = parseInt(this.port, 10);
-    } else {
-      this.port = this.protocol === 'https:' ? 443 : 80;
-    }
-  }
-
-});
-
-/**
- * The low level HTTP request object, encapsulating all HTTP header
- * and body data sent by a service request.
- *
- * @!attribute method
- *   @return [String] the HTTP method of the request
- * @!attribute path
- *   @return [String] the path portion of the URI, e.g.,
- *     "/list/?start=5&num=10"
- * @!attribute headers
- *   @return [map<String,String>]
- *     a map of header keys and their respective values
- * @!attribute body
- *   @return [String] the request body payload
- * @!attribute endpoint
- *   @return [AWS.Endpoint] the endpoint for the request
- * @!attribute region
- *   @api private
- *   @return [String] the region, for signing purposes only.
- */
-AWS.HttpRequest = inherit({
-
-  /**
-   * @api private
-   */
-  constructor: function HttpRequest(endpoint, region) {
-    endpoint = new AWS.Endpoint(endpoint);
-    this.method = 'POST';
-    this.path = endpoint.path || '/';
-    this.headers = {};
-    this.headers['User-Agent'] = AWS.util.userAgent();
-    this.body = '';
-    this.endpoint = endpoint;
-    this.region = region;
-  },
-
-  /**
-   * @return [String] the part of the {path} excluding the
-   *   query string
-   */
-  pathname: function pathname() {
-    return this.path.split('?', 1)[0];
-  },
-
-  /**
-   * @return [String] the query string portion of the {path}
-   */
-  search: function search() {
-    return this.path.split('?', 2)[1] || '';
-  }
-
-});
-
-/**
- * The low level HTTP response object, encapsulating all HTTP header
- * and body data returned from the request.
- *
- * @!attribute statusCode
- *   @return [Integer] the HTTP status code of the response (e.g., 200, 404)
- * @!attribute headers
- *   @return [map<String,String>]
- *      a map of response header keys and their respective values
- * @!attribute body
- *   @return [String] the response body payload
- */
-AWS.HttpResponse = inherit({
-
-  /**
-   * @api private
-   */
-  constructor: function HttpResponse() {
-    this.statusCode = undefined;
-    this.headers = {};
-    this.body = undefined;
-  }
-});
-
-/**
- * @api private
- */
-AWS.NodeHttpClient = inherit({
-  handleRequest: function handleRequest(httpRequest, httpOptions, callback, errCallback) {
-    /*jshint maxcomplexity:10*/
-    var endpoint = httpRequest.endpoint;
-    var pathPrefix = '';
-    if (!httpOptions) httpOptions = {};
-    if (httpOptions.proxy) {
-      pathPrefix = endpoint.protocol + '//' + endpoint.hostname;
-      if (endpoint.port != 80 && endpoint.port != 443) {
-        pathPrefix += ':' + endpoint.port;
-      }
-      endpoint = new AWS.Endpoint(httpOptions.proxy);
-    }
-
-    var useSSL = endpoint.protocol === 'https:';
-    var http = useSSL ? require('https') : require('http');
-    var options = {
-      host: endpoint.hostname,
-      port: endpoint.port,
-      method: httpRequest.method,
-      headers: httpRequest.headers,
-      path: pathPrefix + httpRequest.path
-    };
-
-    if (useSSL && !httpOptions.agent) {
-      options.agent = this.sslAgent(http);
-    }
-
-    AWS.util.update(options, httpOptions);
-    delete options.proxy; // proxy isn't an HTTP option
-    delete options.timeout; // timeout isn't an HTTP option
-
-    var stream = http.request(options, callback);
-    httpRequest.stream = stream; // attach stream to httpRequest
-
-    // timeout support
-    if (stream.setTimeout) {
-      stream.setTimeout(httpOptions.timeout || 0);
-      stream.once('timeout', function() {
-        var msg = 'Connection timed out after ' + httpOptions.timeout + 'ms';
-        errCallback(AWS.util.error(new Error(msg), {code: 'TimeoutError'}));
-
-        // HACK - abort the connection without tripping our error handler
-        // since we already raised our TimeoutError. Otherwise the connection
-        // comes back with ECONNRESET, which is not a helpful error message
-        stream.removeListener('error', errCallback);
-        stream.on('error', function() { });
-        stream.abort();
-      });
-    }
-
-    stream.on('error', errCallback);
-    this.writeBody(stream, httpRequest);
-    return stream;
-  },
-
-  writeBody: function writeBody(stream, httpRequest) {
-    if (httpRequest.body instanceof Stream) {
-      httpRequest.body.pipe(stream);
-    } else if (httpRequest.body) {
-      stream.end(httpRequest.body);
-    } else {
-      stream.end();
-    }
-  },
-
-  sslAgent: function sslAgent(http) {
-    if (!AWS.NodeHttpClient.sslAgent) {
-      AWS.NodeHttpClient.sslAgent = new http.Agent({
-        rejectUnauthorized: true
-      });
-    }
-    return AWS.NodeHttpClient.sslAgent;
-  }
-});
-
-/**
- * @api private
- */
-AWS.HttpClient = AWS.NodeHttpClient;
-
-/**
- * @api private
- */
-AWS.HttpClient.streamsApiVersion = require('stream').Readable ? 2 : 1;
-
-/**
- * @api private
- */
-AWS.HttpClient.getInstance = function getInstance() {
-  /*jshint newcap:false */
-  if (this.singleton === undefined) {
-    this.singleton = new this();
-  }
-  return this.singleton;
-};
-
-},{"./core":26,"http":18,"https":5,"stream":7}],29:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-/**
- * @api private
- */
-AWS.JSON = {};
-
-/**
- * @api private
- */
-AWS.JSON.Builder = inherit({
-
-  constructor: function XMLBuilder(rules, options) {
-    this.rules = rules;
-    this.timestampFormat = options.timestampFormat;
-  },
-
-  toJSON: function toJSON(params) {
-    return JSON.stringify(this.translate(this.rules, params));
-  },
-
-  translate: function translate(rules, value) {
-    if (rules.type == 'structure') {
-
-      // translate structures (hashes with pre-defined keys)
-      var struct = {};
-      AWS.util.each.call(this, value, function (memberName, memberValue) {
-        var memberRules = rules[memberName] || {};
-        struct[memberName] = this.translate(memberRules, memberValue);
-      });
-      return struct;
-
-    } else if (rules.type == 'list') {
-
-      // translate each member of the list
-      var list = [];
-      AWS.util.arrayEach.call(this, value, function (memberValue) {
-        var memberRules = rules.members || {};
-        list.push(this.translate(memberRules, memberValue));
-      });
-      return list;
-
-    } else if (rules.type == 'map') {
-
-      // translate maps (hashes with user supplied keys)
-      var map = {};
-      AWS.util.each.call(this, value, function (memberName, memberValue) {
-        var memberRules = rules.members || {};
-        map[memberName] = translate(memberRules, memberValue);
-      });
-      return map;
-
-    } else if (rules.type == 'timestamp') {
-
-      var timestampFormat = rules.format || this.timestampFormat;
-      return AWS.util.date.format(value, timestampFormat);
-
-    } else {
-
-      // all other shapes
-      return value;
-
-    }
-  }
-
-});
-
-},{"../core":26}],30:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('./core');
-require('./http');
-var inherit = AWS.util.inherit;
-
-/**
- * Represents a metadata service available on EC2 instances. Using the
- * {request} method, you can receieve metadata about any available resource
- * on the metadata service.
- *
- * @!attribute [r] httpOptions
- *   @return [map] a map of options to pass to the underlying HTTP request
- */
-AWS.MetadataService = inherit({
-  /**
-   * @return [String] the hostname of the instance metadata service
-   */
-  host: '169.254.169.254',
-
-  /**
-   * @!ignore
-   */
-
-  /**
-   * Options
-   */
-  httpOptions: { timeout: 1000 },
-
-  /**
-   * Creates a new MetadataService object with a given set of options.
-   *
-   * @option options host [String] the hostname of the instance metadata
-   *   service
-   * @option options httpOptions [map] a map of options to pass to the
-   *   underlying HTTP request
-   */
-  constructor: function MetadataService(options) {
-    AWS.util.update(this, options);
-  },
-
-  /**
-   * Sends a request to the instance metadata service for a given resource.
-   *
-   * @param path [String] the path of the resource to get
-   * @callback callback function(err, data)
-   *   Called when a response is available from the service.
-   *   @param err [Error, null] if an error occurred, this value will be set
-   *   @param data [String, null] if the request was successful, the body of
-   *     the response
-   */
-  request: function request(path, callback) {
-    path = path || '/';
-
-    var data = '';
-    var http = AWS.HttpClient.getInstance();
-    var httpRequest = new AWS.HttpRequest('http://' + this.host + path);
-    httpRequest.method = 'GET';
-
-    http.handleRequest(httpRequest, this.httpOptions, function(httpResponse) {
-      httpResponse.on('data', function(chunk) { data += chunk.toString(); });
-      httpResponse.on('end', function() { callback(null, data); });
-    }, callback);
-  },
-
-  /**
-   * Loads a set of credentials stored in the instance metadata service
-   *
-   * @api private
-   * @callback callback function(err, credentials)
-   *   Called when credentials are loaded from the resource
-   *   @param err [Error] if an error occurred, this value will be set
-   *   @param credentials [Object] the raw JSON object containing all
-   *     metadata from the credentials resource
-   */
-  loadCredentials: function loadCredentials(callback) {
-    var self = this;
-    var basePath = '/latest/meta-data/iam/security-credentials/';
-    self.request(basePath, function (err, roleName) {
-      if (err) callback(err);
-      else {
-        roleName = roleName.split('\n')[0]; // grab first (and only) role
-        self.request(basePath + roleName, function (credErr, credData) {
-          if (credErr) callback(credErr);
-          else {
-            try {
-              var credentials = JSON.parse(credData);
-              callback(null, credentials);
-            } catch (parseError) {
-              callback(parseError);
-            }
-          }
-        });
-      }
-    });
-  }
-});
-
-module.exports = AWS.MetadataService;
-
-},{"./core":26,"./http":28}],31:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('./core');
-var Stream = require('stream').Stream;
-var Buffer = require('buffer').Buffer;
-
-/**
- * @api private
- */
-AWS.ParamValidator = AWS.util.inherit({
-  validate: function validate(rules, params, context) {
-    var cRules = (rules || {}).members || {};
-    var payload = rules ? rules.xml : null;
-    if (payload) {
-      cRules = AWS.util.merge(cRules, (cRules[payload] || {}).members || {});
-      delete cRules[payload];
-    }
-
-    return this.validateStructure(cRules, params || {}, context || 'params');
-  },
-
-  validateStructure: function validateStructure(rules, params, context) {
-    /*jshint maxcomplexity:12*/
-    this.validateType(context, params, ['object'], 'structure');
-
-    /*jshint forin:false*/
-    for (var paramName in rules) {
-      if (!rules.hasOwnProperty(paramName)) continue;
-      if (rules[paramName].required && params[paramName] === undefined) {
-        this.fail('MissingRequiredParameter',
-          'Missing required key \'' + paramName + '\' in ' + context);
-      }
-    }
-
-    // validate hash members
-    for (paramName in params) {
-      var paramValue = params[paramName],
-          paramRules = rules[paramName];
-
-      if (paramRules !== undefined) {
-        var memberContext = [context, paramName].join('.');
-        this.validateMember(paramRules, paramValue, memberContext);
-      } else {
-        this.fail('UnexpectedParameter',
-          'Unexpected key \'' + paramName + '\' found in ' + context);
-      }
-    }
-
-    return true;
-  },
-
-  validateMember: function validateMember(rules, param, context) {
-    var memberRules = rules.members || {};
-    switch(rules.type) {
-      case 'structure':
-        return this.validateStructure(memberRules, param, context);
-      case 'list':
-        return this.validateList(memberRules, param, context);
-      case 'map':
-        return this.validateMap(memberRules, param, context);
-      default:
-        return this.validateScalar(rules, param, context);
-    }
-  },
-
-  validateList: function validateList(rules, params, context) {
-    this.validateType(context, params, [Array]);
-
-    // validate array members
-    for (var i = 0; i < params.length; i++) {
-      this.validateMember(rules, params[i], context + '[' + i + ']');
-    }
-  },
-
-  validateMap: function validateMap(rules, params, context) {
-    this.validateType(context, params, ['object'], 'map');
-
-    /*jshint forin:false*/
-    for (var param in params) {
-      if (!params.hasOwnProperty(param)) continue;
-      this.validateMember(rules, params[param],
-                          context + '[\'' +  param + '\']');
-    }
-  },
-
-  validateScalar: function validateScalar(rules, value, context) {
-    /*jshint maxcomplexity:12*/
-    switch (rules.type) {
-      case null:
-      case undefined:
-      case 'string':
-        return this.validateType(context, value, ['string']);
-      case 'base64':
-      case 'binary':
-        return this.validateType(context, value, ['string', Buffer, Stream]);
-      case 'integer':
-      case 'float':
-        return this.validateType(context, value, ['number']);
-      case 'boolean':
-        return this.validateType(context, value, ['boolean']);
-      case 'timestamp':
-        return this.validateType(context, value, [Date,
-          /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/, 'number'],
-          'Date object, ISO-8601 string, or a UNIX timestamp');
-      default:
-        return this.fail('UnkownType', 'Unhandled type ' +
-                         rules.type + ' for ' + context);
-    }
-  },
-
-  fail: function fail(code, message) {
-    throw AWS.util.error(new Error(message), {code: code});
-  },
-
-  validateType: function validateType(context, value, acceptedTypes, type) {
-    /*jshint maxcomplexity:12*/
-    var foundInvalidType = false;
-    for (var i = 0; i < acceptedTypes.length; i++) {
-      if (typeof acceptedTypes[i] === 'string') {
-        if (typeof value === acceptedTypes[i]) return;
-      } else if (acceptedTypes[i] instanceof RegExp) {
-        if ((value || '').toString().match(acceptedTypes[i])) return;
-      } else {
-        if (value instanceof acceptedTypes[i]) return;
-        if (AWS.util.isType(value, acceptedTypes[i].name)) return;
-        if (!type && !foundInvalidType) acceptedTypes = acceptedTypes.slice();
-        acceptedTypes[i] = acceptedTypes[i].name;
-      }
-      foundInvalidType = true;
-    }
-
-    var acceptedType = type;
-    if (!acceptedType) {
-      /*jshint regexp:false*/
-      acceptedType = acceptedTypes.join(', ').replace(/,([^,]+)$/, ', or$1');
-    }
-
-    var vowel = acceptedType.match(/^[aeiou]/i) ? 'n' : '';
-    this.fail('InvalidParameterType', 'Expected ' + context + ' to be a' +
-              vowel + ' ' + acceptedType);
-  }
-});
-
-},{"./core":26,"buffer":11,"stream":7}],32:[function(require,module,exports){
-var process=require("__browserify_process");/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('./core');
-var inherit = AWS.util.inherit;
-var streams = require('stream');
-
-/**
- * ## Asynchronous Requests
- *
- * All requests made through the SDK are asynchronous and use a
- * callback interface. Each service method that kicks off a request
- * returns an `AWS.Request` object that you can use to register
- * callbacks.
- *
- * For example, the following service method returns the request
- * object as "request", which can be used to register callbacks:
- *
- * ```js
- * // request is an AWS.Request object
- * var request = ec2.describeInstances();
- *
- * // register callbacks on request to retrieve response data
- * request.on('success', function(response) {
- *   console.log(response.data);
- * });
- * ```
- *
- * When a request is ready to be sent, the {send} method should
- * be called:
- *
- * ```js
- * request.send();
- * ```
- *
- * ## Removing Default Listeners for Events
- *
- * Request objects are built with default listeners for the various events,
- * depending on the service type. In some cases, you may want to remove
- * some built-in listeners to customize behaviour. Doing this requires
- * access to the built-in listener functions, which are exposed through
- * the {AWS.EventListeners.Core} namespace. For instance, you may
- * want to customize the HTTP handler used when sending a request. In this
- * case, you can remove the built-in listener associated with the 'send'
- * event, the {AWS.EventListeners.Core.SEND} listener and add your own.
- *
- * ## Multiple Callbacks and Chaining
- *
- * You can register multiple callbacks on any request object. The
- * callbacks can be registered for different events, or all for the
- * same event. In addition, you can chain callback registration, for
- * example:
- *
- * ```js
- * request.
- *   on('success', function(response) {
- *     console.log("Success!");
- *   }).
- *   on('error', function(response) {
- *     console.log("Error!");
- *   }).
- *   on('complete', function(response) {
- *     console.log("Always!");
- *   }).
- *   send();
- * ```
- *
- * The above example will print either "Success! Always!", or "Error! Always!",
- * depending on whether the request succeeded or not.
- *
- * @!attribute httpRequest
- *   @readonly
- *   @!group HTTP Properties
- *   @return [AWS.HttpRequest] the raw HTTP request object
- *     containing request headers and body information
- *     sent by the service.
- *
- * @!group Request Building Events
- *
- * @!event validate(request)
- *   Triggered when a request is being validated. Listeners
- *   should throw an error if the request should not be sent.
- *   @param request [Request] the request object being sent
- *   @see AWS.EventListeners.Core.VALIDATE_CREDENTIALS
- *   @see AWS.EventListeners.Core.VALIDATE_REGION
- *
- * @!event build(request)
- *   Triggered when the request payload is being built. Listeners
- *   should fill the necessary information to send the request
- *   over HTTP.
- *   @param (see AWS.Request~validate)
- *
- * @!event sign(request)
- *   Triggered when the request is being signed. Listeners should
- *   add the correct authentication headers and/or adjust the body,
- *   depending on the authentication mechanism being used.
- *   @param (see AWS.Request~validate)
- *
- * @!group Request Sending Events
- *
- * @!event send(response)
- *   Triggered when the request is ready to be sent. Listeners
- *   should call the underlying transport layer to initiate
- *   the sending of the request.
- *   @param response [Response] the response object
- *   @context [Request] the request object that was sent
- *   @see AWS.EventListeners.Core.SEND
- *
- * @!event retry(response)
- *   Triggered when a request failed and might need to be retried.
- *   Listeners are responsible for checking to see if the request
- *   is retryable, and if so, re-signing and re-sending the request.
- *   Information about the failure is set in the `response.error`
- *   property.
- *
- *   If a listener decides that a request should not be retried,
- *   that listener should `throw` an error to cancel the event chain.
- *   Unsetting `response.error` will have no effect.
- *
- *   @param (see AWS.Request~send)
- *   @context (see AWS.Request~send)
- *
- * @!group Data Parsing Events
- *
- * @!event extractError(response)
- *   Triggered on all non-2xx requests so that listeners can extract
- *   error details from the response body. Listeners to this event
- *   should set the `response.error` property.
- *   @param (see AWS.Request~send)
- *   @context (see AWS.Request~send)
- *
- * @!event extractData(response)
- *   Triggered in successful requests to allow listeners to
- *   de-serialize the response body into `response.data`.
- *   @param (see AWS.Request~send)
- *   @context (see AWS.Request~send)
- *
- * @!group Completion Events
- *
- * @!event success(response)
- *   Triggered when the request completed successfully.
- *   `response.data` will contain the response data and
- *   `response.error` will be null.
- *   @param (see AWS.Request~send)
- *   @context (see AWS.Request~send)
- *
- * @!event error(error, response)
- *   Triggered when an error occurs at any point during the
- *   request. `response.error` will contain details about the error
- *   that occurred. `response.data` will be null.
- *   @param error [Error] the error object containing details about
- *     the error that occurred.
- *   @param (see AWS.Request~send)
- *   @context (see AWS.Request~send)
- *
- * @!event complete(response)
- *   Triggered whenever a request cycle completes. `response.error`
- *   should be checked, since the request may have failed.
- *   @param (see AWS.Request~send)
- *   @context (see AWS.Request~send)
- *
- * @!group HTTP Events
- *
- * @!event httpHeaders(statusCode, headers, response)
- *   Triggered when headers are sent by the remote server
- *   @param statusCode [Integer] the HTTP response code
- *   @param headers [map<String,String>] the response headers
- *   @param (see AWS.Request~send)
- *   @context (see AWS.Request~send)
- *
- * @!event httpData(chunk, response)
- *   Triggered when data is sent by the remote server
- *   @param chunk [Buffer] the buffer data containing the next data chunk
- *     from the server
- *   @param (see AWS.Request~send)
- *   @context (see AWS.Request~send)
- *   @see AWS.EventListeners.Core.HTTP_DATA
- *
- * @!event httpError(error, response)
- *   Triggered when the HTTP request failed
- *   @param error [Error] the error object that was thrown
- *   @param (see AWS.Request~send)
- *   @context (see AWS.Request~send)
- *
- * @!event httpDone(response)
- *   Triggered when the server is finished sending data
- *   @param (see AWS.Request~send)
- *   @context (see AWS.Request~send)
- *
- * @see AWS.Response
- */
-AWS.Request = inherit({
-
-  /**
-   * Creates a request for an operation on a given service with
-   * a set of input parameters.
-   *
-   * @param service [AWS.Service] the service to perform the operation on
-   * @param operation [String] the operation to perform on the service
-   * @param params [Object] parameters to send to the operation.
-   *   See the operation's documentation for the format of the
-   *   parameters.
-   */
-  constructor: function Request(service, operation, params) {
-    var endpoint = service.endpoint;
-    var region = service.config.region;
-
-    this.service = service;
-    this.operation = operation;
-    this.params = params || {};
-    this.httpRequest = new AWS.HttpRequest(endpoint, region);
-
-    AWS.SequentialExecutor.call(this);
-  },
-
-  /**
-   * @!group Sending a Request
-   */
-
-  /**
-   * @overload send(callback = null)
-   *   Sends the request object.
-   *
-   *   @callback callback function(err, data)
-   *     If a callback is supplied, it is called when a response is returned
-   *     from the service.
-   *     @param err [Error] the error object returned from the request.
-   *       Set to `null` if the request is successful.
-   *     @param data [Object] the de-serialized data returned from
-   *       the request. Set to `null` if a request error occurs.
-   *   @example Sending a request with a callback
-   *     request = s3.putObject({Bucket: 'bucket', Key: 'key'});
-   *     request.send(function(err, data) { console.log(err, data); });
-   *   @example Sending a request with no callback (using event handlers)
-   *     request = s3.putObject({Bucket: 'bucket', Key: 'key'});
-   *     request.on('complete', function(response) { ... }); // register a callback
-   *     request.send();
-   */
-  send: function send(callback, response) {
-    if (callback) {
-      this.on('complete', function (resp) {
-        callback.call(resp, resp.error, resp.data);
-      });
-    }
-
-    if (!response) response = new AWS.Response(this);
-    var eventNames = ['validate', 'build', 'afterBuild', 'sign', 'send'];
-    this.emitEvents(eventNames, response, function(err) {
-      if (err) {
-        // calling failRequest instead of completeRequest because errors
-        // raised before we have finished sending the request should never
-        // get retried
-        this.failRequest(response);
-      }
-    });
-    return response;
-  },
-
-  /**
-   * Aborts a request, emitting the error and complete events.
-   *
-   * @example Aborting a request after sending
-   *   var params = {
-   *     Bucket: 'bucket', Key: 'key',
-   *     Body: new Buffer(1024 * 1024 * 5) // 5MB payload
-   *   };
-   *   var request = s3.putObject(params);
-   *   request.send(function (err, data) {
-   *     if (err) console.log("Error:", err.code, err.message);
-   *     else console.log(data);
-   *   });
-   *
-   *   // abort request in 1 second
-   *   setTimeout(request.abort.bind(request), 1000);
-   *
-   *   // prints "Error: RequestAbortedError Request aborted by user"
-   * @return [AWS.Request] the same request object, for chaining.
-   * @since v1.4.0
-   */
-  abort: function abort() {
-    this._events = { // reset events
-      error: this._events.error,
-      complete: this._events.complete
-    };
-
-    if (this.httpRequest.stream) { // abort HTTP stream
-      this.httpRequest.stream.abort();
-    }
-
-    // emit only error and complete callbacks
-    var response = new AWS.Response(this);
-    response.error = AWS.util.error(new Error('Request aborted by user'), {
-      code: 'RequestAbortedError', retryable: false
-    });
-    this.failRequest(response);
-
-    return this;
-  },
-
-  /**
-   * Iterates over each page of results given a pageable request, calling
-   * the provided callback with each page of data. After all pages have been
-   * retrieved, the callback is called with `null` data.
-   *
-   * @note This operation can generate multiple requests to a service.
-   * @example Iterating over multiple pages of objects in an S3 bucket
-   *   var pages = 1;
-   *   s3.listObjects().eachPage(function(err, data) {
-   *     if (err) return;
-   *     console.log("Page", pages++);
-   *     console.log(data);
-   *   });
-   * @callback callback function(err, data)
-   *   Called with each page of resulting data from the request.
-   *
-   *   @param err [Error] an error object, if an error occurred.
-   *   @param data [Object] a single page of response data. If there is no
-   *     more data, this object will be `null`.
-   *   @return [Boolean] if the callback returns `false`, pagination will
-   *     stop.
-   *
-   * @api experimental
-   * @see AWS.Request.eachItem
-   * @see AWS.Response.nextPage
-   * @since v1.4.0
-   */
-  eachPage: function eachPage(callback) {
-    function wrappedCallback(response) {
-      var result = callback.call(response, response.error, response.data);
-      if (result === false) return;
-
-      if (response.hasNextPage()) {
-        response.nextPage().on('complete', wrappedCallback).send();
-      } else {
-        callback.call(response, null, null);
-      }
-    }
-
-    this.on('complete', wrappedCallback).send();
-  },
-
-  /**
-   * Enumerates over individual items of a request, paging the responses if
-   * necessary.
-   *
-   * @api experimental
-   * @since v1.4.0
-   */
-  eachItem: function eachItem(callback) {
-    function wrappedCallback(err, data) {
-      if (err) return callback(err, null);
-      if (data === null) return callback(null, null);
-
-      var config = this.request.service.paginationConfig(this.request.operation);
-      var resultKey = config.resultKey;
-      if (AWS.util.isType(resultKey, Array)) resultKey = resultKey[0];
-      var results = AWS.util.jamespath.query(resultKey, data);
-      AWS.util.arrayEach(results, function(result) {
-        AWS.util.arrayEach(result, function(item) { callback(null, item); });
-      });
-    }
-
-    this.eachPage(wrappedCallback);
-  },
-
-  /**
-   * @return [Boolean] whether the operation can return multiple pages of
-   *   response data.
-   * @api experimental
-   * @see AWS.Response.eachPage
-   * @since v1.4.0
-   */
-  isPageable: function isPageable() {
-    return this.service.paginationConfig(this.operation) ? true : false;
-  },
-
-  /**
-   * Converts the request object into a readable stream that
-   * can be read from or piped into a writable stream.
-   *
-   * @note The data read from a readable stream contains only
-   *   the raw HTTP body contents.
-   * @example Manually reading from a stream
-   *   request.createReadStream().on('data', function(data) {
-   *     console.log("Got data:", data.toString());
-   *   });
-   * @example Piping a request body into a file
-   *   var out = fs.createWriteStream('/path/to/outfile.jpg');
-   *   s3.service.getObject(params).createReadStream().pipe(out);
-   * @return [Stream] the readable stream object that can be piped
-   *   or read from (by registering 'data' event listeners).
-   */
-  createReadStream: function createReadStream() {
-    var req = this;
-    var stream = null;
-    var legacyStreams = false;
-
-    if (AWS.HttpClient.streamsApiVersion === 2) {
-      stream = new streams.Readable();
-      stream._read = function() { stream.push(''); };
-    } else {
-      stream = new streams.Stream();
-      stream.readable = true;
-    }
-
-    stream.sent = false;
-    stream.on('newListener', function(event) {
-      if (!stream.sent && (event === 'data' || event === 'readable')) {
-        if (event === 'data') legacyStreams = true;
-        stream.sent = true;
-        process.nextTick(function() { req.send(); });
-      }
-    });
-
-    this.on('httpHeaders', function streamHeaders(statusCode, headers, resp) {
-      if (statusCode < 300) {
-        req.removeListener('httpData', AWS.EventListeners.Core.HTTP_DATA);
-        req.removeListener('httpError', AWS.EventListeners.Core.HTTP_ERROR);
-        req.on('httpError', function streamHttpError(error, resp) {
-          resp.error = error;
-          resp.error.retryable = false;
-          this.completeRequest(resp);
-        });
-
-        var httpStream = resp.httpStream;
-        stream.response = resp;
-        stream._read = function() {
-          var data;
-          /*jshint boss:true*/
-          while (data = httpStream.read()) {
-            stream.push(data);
-          }
-          stream.push('');
-        };
-
-        var events = ['end', 'error', (legacyStreams ? 'data' : 'readable')];
-        AWS.util.arrayEach(events, function(event) {
-          httpStream.on(event, function(arg) {
-            stream.emit(event, arg);
-          });
-        });
-
-        resp.httpStream = null; // take ownership of the stream object
-      }
-    });
-
-    this.on('error', function(err) {
-      stream.emit('error', err);
-    });
-
-    return stream;
-  },
-
-  /**
-   * @api private
-   */
-  completeRequest: function completeRequest(response) {
-    this.emitEvents(['extractError', 'extractData'], response, function(err) {
-      if (err) {
-        this.emitEvent('retry', response, function(retryError) {
-          if (retryError) this.failRequest(response);
-        });
-      } else {
-        this.emitEvent('success', [response], this.unhandledErrorCallback);
-        this.emitEvent('complete', [response], this.unhandledErrorCallback);
-      }
-    });
-  },
-
-  /**
-   * @api private
-   */
-  failRequest: function failRequest(response) {
-    this.emitEvent('error', [response.error, response], this.unhandledErrorCallback);
-    this.emitEvent('complete', [response], this.unhandledErrorCallback);
-  },
-
-  /**
-   * @api private
-   */
-  emitEvents: function emitEvents(eventNames, response, doneCallback) {
-    if (!doneCallback) doneCallback = this.unhandledErrorCallback;
-    if (response.error) {
-      doneCallback.call(this, response.error);
-    } else if (eventNames.length === 0) {
-      doneCallback.call(this);
-    } else {
-      this.emitEvent(eventNames[0], response, function(err) {
-        if (err) {
-          doneCallback.call(this, err);
-        } else {
-          // next event (eventNames is a reducing set)
-          this.emitEvents(eventNames.slice(1), response, doneCallback);
-        }
-      });
-    }
-  },
-
-  /**
-   * @param [Array,Response] args This should be the response object,
-   *   or an array of args to send to the event.
-   * @api private
-   */
-  emitEvent: function emitEvent(eventName, args, doneCallback) {
-    if (!doneCallback) doneCallback = this.unhandledErrorCallback;
-    var response = null;
-    if (AWS.util.isType(args, Array)) {
-      response = args[args.length - 1];
-    } else {
-      response = args;
-      args = this.eventParameters(eventName, response);
-    }
-
-    this.emit(eventName, args, function (err) {
-      if (err) {
-        response.error = err;
-      }
-      doneCallback.call(this, err);
-    });
-  },
-
-  /**
-   * @api private
-   */
-  eventParameters: function eventParameters(eventName, response) {
-    /*jshint maxcomplexity:8*/
-    switch (eventName) {
-      case 'validate':
-      case 'sign':
-      case 'build':
-      case 'afterBuild':
-        return [this];
-      default:
-        return [response];
-    }
-  }
-});
-
-AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
-
-/**
- * This class encapsulates the the response information
- * from a service request operation sent through {AWS.Request}.
- * The response object has two main properties for getting information
- * back from a request:
- *
- * ## The `data` property
- *
- * The `response.data` property contains the serialized object data
- * retrieved from the service request. For instance, for an
- * Amazon DynamoDB `listTables` method call, the response data might
- * look like:
- *
- * ```
- * > resp.data
- * { TableNames:
- *    [ 'table1', 'table2', ... ] }
- * ```
- *
- * The `data` property can be null if an error occurs (see below).
- *
- * ## The `error` property
- *
- * In the event of a service error (or transfer error), the
- * `response.error` property will be filled with the given
- * error data in the form:
- *
- * ```
- * { code: 'SHORT_UNIQUE_ERROR_CODE',
- *   message: 'Some human readable error message' }
- * ```
- *
- * In the case of an error, the `data` property will be `null`.
- * Note that if you handle events that can be in a failure state,
- * you should always check whether `response.error` is set
- * before attempting to access the `response.data` property.
- *
- * @!attribute data
- *   @readonly
- *   @!group Data Properties
- *   @note Inside of a {AWS.Request~httpData} event, this
- *     property contains a single raw packet instead of the
- *     full de-serialized service response.
- *   @return [Object] the de-serialized response data
- *     from the service.
- *
- * @!attribute error
- *   An structure containing information about a service
- *   or networking error.
- *   @readonly
- *   @!group Data Properties
- *   @note This attribute is only filled if a service or
- *     networking error occurs.
- *   @return [Object]
- *     * code [String] a unique short code representing the
- *       error that was emitted.
- *     * message [String] a longer human readable error message
- *     * retryable [Boolean] whether the error message is
- *       retryable.
- *
- * @!attribute service
- *   @readonly
- *   @!group Operation Properties
- *   @return [AWS.Service] The service object that initiated the request.
- *
- * @!attribute operation
- *   @readonly
- *   @!group Operation Properties
- *   @return [String] the name of the operation executed on
- *     the service.
- *
- * @!attribute params
- *   @readonly
- *   @!group Operation Properties
- *   @return [Object] the parameters sent in the request to
- *     the service.
- *
- * @!attribute retryCount
- *   @readonly
- *   @!group Operation Properties
- *   @return [Integer] the number of retries that were
- *     attempted before the request was completed.
- *
- * @!attribute redirectCount
- *   @readonly
- *   @!group Operation Properties
- *   @return [Integer] the number of redirects that were
- *     followed before the request was completed.
- *
- * @!attribute httpResponse
- *   @readonly
- *   @!group HTTP Properties
- *   @return [AWS.HttpResponse] the raw HTTP response object
- *     containing the response headers and body information
- *     from the server.
- *
- * @see AWS.Request
- */
-AWS.Response = inherit({
-
-  /**
-   * @api private
-   */
-  constructor: function Response(request) {
-    this.request = request;
-    this.data = null;
-    this.error = null;
-    this.retryCount = 0;
-    this.redirectCount = 0;
-    this.httpResponse = new AWS.HttpResponse();
-  },
-
-  /**
-   * Creates a new request for the next page of response data, calling the
-   * callback with the page data if a callback is provided.
-   *
-   * @callback callback function(err, data)
-   *   Called when a page of data is returned from the next request.
-   *
-   *   @param err [Error] an error object, if an error occurred in the request
-   *   @param data [Object] the next page of data, or null, if there are no
-   *     more pages left.
-   * @return [AWS.Request] the request object for the next page of data
-   * @return [null] if no callback is provided and there are no pages left
-   *   to retrieve.
-   * @api experimental
-   * @since v1.4.0
-   */
-  nextPage: function nextPage(callback) {
-    /*jshint maxcomplexity:10*/
-    var config;
-    var service = this.request.service;
-    var operation = this.request.operation;
-    try {
-      config = service.paginationConfig(operation, true);
-    } catch (e) { this.error = e; }
-
-    if (!this.hasNextPage()) {
-      if (callback) callback(this.error, null);
-      else if (this.error) throw this.error;
-      return null;
-    }
-
-    var params = AWS.util.copy(this.request.params);
-    if (!this.nextPageTokens) {
-      return callback ? callback(null, null) : null;
-    } else {
-      var inputTokens = config.inputToken;
-      if (typeof inputTokens === 'string') inputTokens = [inputTokens];
-      for (var i = 0; i < inputTokens.length; i++) {
-        params[inputTokens[i]] = this.nextPageTokens[i];
-      }
-      return service.makeRequest(this.request.operation, params, callback);
-    }
-  },
-
-  /**
-   * @return [Boolean] whether more pages of data can be returned by further
-   *   requests
-   * @api experimental
-   * @since v1.4.0
-   */
-  hasNextPage: function hasNextPage() {
-    this.cacheNextPageTokens();
-    if (this.nextPageTokens) return true;
-    if (this.nextPageTokens === undefined) return undefined;
-    else return false;
-  },
-
-  /**
-   * @api private
-   */
-  cacheNextPageTokens: function cacheNextPageTokens() {
-    /*jshint maxcomplexity:10*/
-    if (this.hasOwnProperty('nextPageTokens')) return this.nextPageTokens;
-    this.nextPageTokens = undefined;
-
-    var config = this.request.service.paginationConfig(this.request.operation);
-    if (!config) return this.nextPageTokens;
-
-    this.nextPageTokens = null;
-    if (config.moreResults) {
-      if (!AWS.util.jamespath.find(config.moreResults, this.data)) {
-        return this.nextPageTokens;
-      }
-    }
-
-    var exprs = config.outputToken;
-    if (typeof exprs === 'string') exprs = [exprs];
-    AWS.util.arrayEach.call(this, exprs, function (expr) {
-      var output = AWS.util.jamespath.find(expr, this.data);
-      if (output) {
-        this.nextPageTokens = this.nextPageTokens || [];
-        this.nextPageTokens.push(output);
-      }
-    });
-
-    return this.nextPageTokens;
-  }
-
-});
-
-},{"./core":26,"__browserify_process":23,"stream":7}],33:[function(require,module,exports){
-var process=require("__browserify_process");/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('./core');
-var domain;
-
-/**
- * @!method on(eventName, callback)
- *   Registers an event listener callback for the event given by `eventName`.
- *   Parameters passed to the callback function depend on the individual event
- *   being triggered. See the event documentation for those parameters.
- *
- *   @param eventName [String] the event name to register the listener for
- *   @param callback [Function] the listener callback function
- *   @return [AWS.SequentialExecutor] the same object for chaining
- */
-AWS.SequentialExecutor = AWS.util.inherit({
-
-  constructor: function SequentialExecutor() {
-    this.domain = null;
-    if (require('events').usingDomains) {
-      domain = require('domain');
-      if (domain.active) this.domain = domain.active;
-    }
-    this._events = {};
-  },
-
-  /**
-   * @api private
-   */
-  listeners: function listeners(eventName) {
-    return this._events[eventName] ? this._events[eventName].slice(0) : [];
-  },
-
-  on: function on(eventName, listener) {
-    if (this._events[eventName]) {
-      this._events[eventName].push(listener);
-    } else {
-      this._events[eventName] = [listener];
-    }
-    return this;
-  },
-
-  /**
-   * @api private
-   */
-  onAsync: function onAsync(eventName, listener) {
-    listener.async = true;
-    return this.on(eventName, listener);
-  },
-
-  removeListener: function removeListener(eventName, listener) {
-    var listeners = this._events[eventName];
-    if (listeners) {
-      var length = listeners.length;
-      var position = -1;
-      for (var i = 0; i < length; ++i) {
-        if (listeners[i] === listener) {
-          position = i;
-        }
-      }
-      if (position > -1) {
-        listeners.splice(position, 1);
-      }
-    }
-    return this;
-  },
-
-  removeAllListeners: function removeAllListeners(eventName) {
-    if (eventName) {
-      delete this._events[eventName];
-    } else {
-      this._events = {};
-    }
-    return this;
-  },
-
-  /**
-   * @api private
-   */
-  emit: function emit(eventName, eventArgs, doneCallback) {
-    if (!doneCallback) doneCallback = this.unhandledErrorCallback;
-    if (domain && this.domain instanceof domain.Domain)
-      this.domain.enter();
-
-    var listeners = this.listeners(eventName);
-    var count = listeners.length;
-    this.callListeners(listeners, eventArgs, doneCallback);
-    return count > 0;
-  },
-
-  /**
-   * @api private
-   */
-  callListeners: function callListeners(listeners, args, doneCallback) {
-    if (listeners.length === 0) {
-      doneCallback.call(this);
-      if (domain && this.domain instanceof domain.Domain)
-        this.domain.exit();
-    } else {
-      var listener = listeners.shift();
-      if (listener.async) {
-
-        // asynchronous listener
-        var callNextListener = function(err) {
-          if (err) {
-            doneCallback.call(this, err);
-            if (domain && this.domain instanceof domain.Domain)
-              this.domain.exit();
-          } else {
-            this.callListeners(listeners, args, doneCallback);
-          }
-        }.bind(this);
-        listener.apply(this, args.concat([callNextListener]));
-
-      } else {
-
-        // synchronous listener
-        try {
-          listener.apply(this, args);
-          this.callListeners(listeners, args, doneCallback);
-        } catch (err) {
-          doneCallback.call(this, err);
-          if (domain && this.domain instanceof domain.Domain)
-            this.domain.exit();
-        }
-
-      }
-    }
-  },
-
-  /**
-   * Adds or copies a set of listeners from another list of
-   * listeners or SequentialExecutor object.
-   *
-   * @param listeners [map<String,Array<Function>>, AWS.SequentialExecutor]
-   *   a list of events and callbacks, or an event emitter object
-   *   containing listeners to add to this emitter object.
-   * @return [AWS.SequentialExecutor] the emitter object, for chaining.
-   * @example Adding listeners from a map of listeners
-   *   emitter.addListeners({
-   *     event1: [function() { ... }, function() { ... }],
-   *     event2: [function() { ... }]
-   *   });
-   *   emitter.emit('event1'); // emitter has event1
-   *   emitter.emit('event2'); // emitter has event2
-   * @example Adding listeners from another emitter object
-   *   var emitter1 = new AWS.SequentialExecutor();
-   *   emitter1.on('event1', function() { ... });
-   *   emitter1.on('event2', function() { ... });
-   *   var emitter2 = new AWS.SequentialExecutor();
-   *   emitter2.addListeners(emitter1);
-   *   emitter2.emit('event1'); // emitter2 has event1
-   *   emitter2.emit('event2'); // emitter2 has event2
-   */
-  addListeners: function addListeners(listeners) {
-    var self = this;
-
-    // extract listeners if parameter is an SequentialExecutor object
-    if (listeners._events) listeners = listeners._events;
-
-    AWS.util.each(listeners, function(event, callbacks) {
-      if (typeof callbacks === 'function') callbacks = [callbacks];
-      AWS.util.arrayEach(callbacks, function(callback) {
-        self.on(event, callback);
-      });
-    });
-
-    return self;
-  },
-
-  /**
-   * Registers an event with {on} and saves the callback handle function
-   * as a property on the emitter object using a given `name`.
-   *
-   * @param name [String] the property name to set on this object containing
-   *   the callback function handle so that the listener can be removed in
-   *   the future.
-   * @param (see on)
-   * @return (see on)
-   * @example Adding a named listener DATA_CALLBACK
-   *   var listener = function() { doSomething(); };
-   *   emitter.addNamedListener('DATA_CALLBACK', 'data', listener);
-   *
-   *   // the following prints: true
-   *   console.log(emitter.DATA_CALLBACK == listener);
-   */
-  addNamedListener: function addNamedListener(name, eventName, callback) {
-    this[name] = callback;
-    this.addListener(eventName, callback);
-    return this;
-  },
-
-  /**
-   * @api private
-   */
-  addNamedAsyncListener: function addNamedAsyncListener(name, eventName, callback) {
-    callback.async = true;
-    return this.addNamedListener(name, eventName, callback);
-  },
-
-  /**
-   * Helper method to add a set of named listeners using
-   * {addNamedListener}. The callback contains a parameter
-   * with a handle to the `addNamedListener` method.
-   *
-   * @callback callback function(add)
-   *   The callback function is called immediately in order to provide
-   *   the `add` function to the block. This simplifies the addition of
-   *   a large group of named listeners.
-   *   @param add [Function] the {addNamedListener} function to call
-   *     when registering listeners.
-   * @example Adding a set of named listeners
-   *   emitter.addNamedListeners(function(add) {
-   *     add('DATA_CALLBACK', 'data', function() { ... });
-   *     add('OTHER', 'otherEvent', function() { ... });
-   *     add('LAST', 'lastEvent', function() { ... });
-   *   });
-   *
-   *   // these properties are now set:
-   *   emitter.DATA_CALLBACK;
-   *   emitter.OTHER;
-   *   emitter.LAST;
-   */
-  addNamedListeners: function addNamedListeners(callback) {
-    var self = this;
-    callback(
-      function() {
-        self.addNamedListener.apply(self, arguments);
-      },
-      function() {
-        self.addNamedAsyncListener.apply(self, arguments);
-      }
-    );
-    return this;
-  },
-
-  /**
-   * @api private
-   */
-  unhandledErrorCallback: function unhandledErrorCallback(err) {
-    if (err) {
-      if (domain && this.domain instanceof domain.Domain) {
-        err.domainEmitter = this;
-        err.domain = this.domain;
-        err.domainThrown = false;
-        this.domain.emit('error', err);
-      } else if (process.exit) {
-        console.error(err.stack ? err.stack : err);
-        process.exit(1);
-      } else {
-        throw err;
-      }
-    }
-  }
-});
-
-/**
- * {on} is the prefered method.
- * @api private
- */
-AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.on;
-
-},{"./core":26,"__browserify_process":23,"domain":1,"events":3}],34:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('./core');
-var inherit = AWS.util.inherit;
-
-/**
- * @api private
- */
-AWS.Service = inherit({
-
-  constructor: function Service(config) {
-    if (!this.loadServiceClass) {
-      throw AWS.util.error(new Error(),
-        'Service must be constructed with `new\' operator');
-    }
-    var ServiceClass = this.loadServiceClass(config || {});
-    if (ServiceClass) return new ServiceClass(config);
-    this.initialize(config);
-  },
-
-  initialize: function initialize(config) {
-    this.client = this; // backward compatibility with client property
-    this.config = new AWS.Config(AWS.config);
-    if (config) this.config.update(config, true);
-    this.setEndpoint(this.config.endpoint);
-  },
-
-  loadServiceClass: function loadServiceClass(serviceConfig) {
-    var config = serviceConfig;
-    if (!AWS.util.isEmpty(this.api)) {
-      return;
-    } else if (config.apiConfig) {
-      return AWS.Service.defineServiceApi(this.constructor, config.apiConfig);
-    } else if (!this.constructor.services) {
-      return;
-    } else {
-      config = new AWS.Config(AWS.config);
-      config.update(serviceConfig, true);
-      var version = config.apiVersions[this.constructor.serviceIdentifier];
-      version = version || config.apiVersion;
-      return this.getLatestServiceClass(version);
-    }
-  },
-
-  getLatestServiceClass: function getLatestServiceClass(version) {
-    version = this.getLatestServiceVersion(version);
-    if (this.constructor.services[version] === null) {
-      AWS.Service.defineServiceApi(this.constructor, version);
-    }
-
-    return this.constructor.services[version];
-  },
-
-  getLatestServiceVersion: function getLatestServiceVersion(version) {
-    /*jshint maxcomplexity:10*/
-    if (!this.constructor.services || this.constructor.services.length === 0) {
-      throw new Error('No services defined on ' +
-                      this.constructor.serviceIdentifier);
-    }
-
-    if (!version) {
-      version = 'latest';
-    } else if (AWS.util.isType(version, Date)) {
-      version = AWS.util.date.iso8601(version).split('T')[0];
-    }
-
-    if (Object.hasOwnProperty(this.constructor.services, version)) {
-      return version;
-    }
-
-    var keys = Object.keys(this.constructor.services).sort();
-    for (var i = keys.length - 1; i >= 0; i--) {
-      if (keys[i] <= version) return keys[i];
-    }
-
-    throw new Error('Could not find ' + this.constructor.serviceIdentifier +
-                    ' API to satisfy version constraint `' + version + '\'');
-  },
-
-  api: {},
-
-  defaultRetryCount: 3,
-
-  makeRequest: function makeRequest(operation, params, callback) {
-    if (typeof params === 'function') {
-      callback = params;
-      params = null;
-    }
-
-    params = params || {};
-    if (this.config.params) { // copy only toplevel bound params
-      var rules = this.api.operations[operation];
-      if (rules) {
-        params = AWS.util.copy(params);
-        AWS.util.each(this.config.params, function(key, value) {
-          if (rules.input.members[key]) {
-            if (params[key] === undefined || params[key] === null) {
-              params[key] = value;
-            }
-          }
-        });
-      }
-    }
-
-    var request = new AWS.Request(this, operation, params);
-    this.addAllRequestListeners(request);
-
-    if (callback) request.send(callback);
-    return request;
-  },
-
-  addAllRequestListeners: function addAllRequestListeners(request) {
-    var list = [AWS.events, AWS.EventListeners.Core,
-                this.serviceInterface()];
-    for (var i = 0; i < list.length; i++) {
-      if (list[i]) request.addListeners(list[i]);
-    }
-
-    // disable parameter validation
-    if (!this.config.paramValidation) {
-      request.removeListener('validate',
-        AWS.EventListeners.Core.VALIDATE_PARAMETERS);
-    }
-
-    this.setupRequestListeners(request);
-  },
-
-  setupRequestListeners: function setupRequestListeners() {
-  },
-
-  serviceInterface: function serviceInterface() {
-    /*jshint maxcomplexity:8*/
-    switch (this.api.format) {
-      case 'query': return AWS.EventListeners.Query;
-      case 'json': return AWS.EventListeners.Json;
-      case 'rest-json': return AWS.EventListeners.RestJson;
-      case 'rest-xml': return AWS.EventListeners.RestXml;
-    }
-    if (this.api.format) {
-      throw new Error('Invalid service `format\' ' +
-        this.api.format + ' in API config');
-    }
-  },
-
-  successfulResponse: function successfulResponse(resp) {
-    return resp.httpResponse.statusCode < 300;
-  },
-
-  /**
-   * How many times a failed request should be retried before giving up.
-   * the defaultRetryCount can be overriden by service classes.
-   */
-  numRetries: function numRetries() {
-    if (this.config.maxRetries !== undefined) {
-      return this.config.maxRetries;
-    } else {
-      return this.defaultRetryCount;
-    }
-  },
-
-  retryDelays: function retryDelays() {
-    var retryCount = this.numRetries();
-    var delays = [];
-    for (var i = 0; i < retryCount; ++i) {
-      delays[i] = Math.pow(2, i) * 30;
-    }
-    return delays;
-  },
-
-  retryableError: function retryableError(error) {
-    if (this.networkingError(error)) return true;
-    if (this.expiredCredentialsError(error)) return true;
-    if (this.throttledError(error)) return true;
-    if (error.statusCode >= 500) return true;
-    return false;
-  },
-
-  networkingError: function networkingError(error) {
-    return error.code == 'NetworkingError';
-  },
-
-  expiredCredentialsError: function expiredCredentialsError(error) {
-    // TODO : this only handles *one* of the expired credential codes
-    return (error.code === 'ExpiredTokenException');
-  },
-
-  throttledError: function throttledError(error) {
-    // this logic varies between services
-    return (error.code == 'ProvisionedThroughputExceededException');
-  },
-
-  setEndpoint: function setEndpoint(endpoint) {
-    if (endpoint) {
-      this.endpoint = new AWS.Endpoint(endpoint, this.config);
-    } else if (this.api.globalEndpoint) {
-      this.endpoint = new AWS.Endpoint(this.api.globalEndpoint, this.config);
-    } else {
-      var host = this.api.endpointPrefix + '.' + this.config.region + '.amazonaws.com';
-      this.endpoint = new AWS.Endpoint(host, this.config);
-    }
-  },
-
-  paginationConfig: function paginationConfig(operation, throwException) {
-    function fail(name) {
-      if (throwException) {
-        var e = new Error();
-        throw AWS.util.error(e, 'No pagination configuration for ' + name);
-      }
-      return null;
-    }
-
-    if (!this.api.pagination) return fail('service');
-    if (!this.api.pagination[operation]) return fail(operation);
-    return this.api.pagination[operation];
-  }
-});
-
-AWS.util.update(AWS.Service, {
-
-  /**
-   * Adds one method for each operation described in the api configuration
-   */
-  defineMethods: function defineMethods(svc) {
-    AWS.util.each(svc.prototype.api.operations, function iterator(method) {
-      if (svc.prototype[method]) return;
-      svc.prototype[method] = function (params, callback) {
-        return this.makeRequest(method, params, callback);
-      };
-    });
-  },
-
-  defineService: function defineService(serviceIdentifier, versions, features) {
-    if (!AWS.util.isType(versions, Array)) {
-      features = versions;
-      versions = [];
-    }
-
-    var svc = inherit(AWS.Service, features || {});
-    svc.Client = svc; // backward compatibility for Client class
-
-    if (typeof serviceIdentifier === 'string') {
-      // create versions hash
-      var services = {};
-      for (var i = 0; i < versions.length; i++) {
-        services[versions[i]] = null;
-      }
-
-      svc.services = svc.services || services;
-      svc.serviceIdentifier = svc.serviceIdentifier || serviceIdentifier;
-    } else { // defineService called with an API
-      svc.prototype.api = serviceIdentifier;
-      AWS.Service.defineMethods(svc);
-    }
-
-    return svc;
-  },
-
-  defineServiceApi: function defineServiceApi(superclass, version, apiConfig) {
-    var svc = inherit(superclass, {
-      serviceIdentifier: superclass.serviceIdentifier
-    });
-
-    if (typeof version === 'string') {
-      var apiFile = superclass.serviceIdentifier + '-' + version;
-      try {
-        svc.prototype.api = apiConfig || require('./services/api/' + apiFile);
-      } catch (err) {
-        throw AWS.util.error(err, {
-          message: 'Could not find API configuration ' + apiFile
-        });
-      }
-      superclass.services[version] = svc;
-    } else {
-      svc.prototype.api = version;
-    }
-
-    AWS.Service.defineMethods(svc);
-    return svc;
-  }
-});
-
-},{"./core":26}],35:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('../core');
-require('../json/builder');
-
-/**
- * @api private
- */
-AWS.ServiceInterface.Json = {
-  buildRequest: function buildRequest(req) {
-    var httpRequest = req.httpRequest;
-    var api = req.service.api;
-    var target = api.targetPrefix + '.' + api.operations[req.operation].name;
-    var version = api.jsonVersion || '1.0';
-
-    var rules = api.operations[req.operation].input;
-    var builder = new AWS.JSON.Builder(rules, api);
-
-    httpRequest.path = '/';
-    httpRequest.body = builder.toJSON(req.params || {});
-    httpRequest.headers['Content-Type'] = 'application/x-amz-json-' + version;
-    httpRequest.headers['X-Amz-Target'] = target;
-  },
-
-  extractError: function extractError(resp) {
-    var error = {};
-    var httpResponse = resp.httpResponse;
-
-    if (httpResponse.body.length > 0) {
-      var e = JSON.parse(httpResponse.body.toString());
-      if (e.__type || e.code) {
-        error.code = (e.__type || e.code).split('#').pop();
-      } else {
-        error.code = 'UnknownError';
-      }
-      if (error.code === 'RequestEntityTooLarge') {
-        error.message = 'Request body must be less than 1 MB';
-      } else {
-        error.message = (e.message || e.Message || null);
-      }
-    } else {
-      error.code = httpResponse.statusCode;
-      error.message = null;
-    }
-
-    resp.error = AWS.util.error(new Error(), error);
-  },
-
-  extractData: function extractData(resp) {
-    resp.data = JSON.parse(resp.httpResponse.body.toString() || '{}');
-  }
-
-};
-
-},{"../core":26,"../json/builder":29}],36:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-require('../xml/parser');
-
-/**
- * @api private
- */
-AWS.ServiceInterface.Query = {
-  buildRequest: function buildRequest(req) {
-    var operation = req.service.api.operations[req.operation];
-    var httpRequest = req.httpRequest;
-    httpRequest.path = '/';
-    httpRequest.headers['Content-Type'] =
-      'application/x-www-form-urlencoded; charset=utf-8';
-    httpRequest.params = {
-      Version: req.service.api.apiVersion,
-      Action: operation.name
-    };
-
-    // convert the request parameters into a list of query params,
-    // e.g. Deeply.NestedParam.0.Name=value
-    var rules = operation.input;
-    if (rules) rules = rules.members;
-    var builder = new AWS.QueryParamSerializer(rules, req.service.api);
-    builder.serialize(req.params, function(name, value) {
-      httpRequest.params[name] = value;
-    });
-    httpRequest.body = AWS.util.queryParamsToString(httpRequest.params);
-  },
-
-  extractError: function extractError(resp) {
-    var data, body = resp.httpResponse.body.toString();
-    if (body.match('<UnknownOperationException')) {
-      data = {
-        Code: 'UnknownOperation',
-        Message: 'Unknown operation ' + resp.request.operation
-      };
-    } else {
-      data = new AWS.XML.Parser({}).parse(body);
-    }
-
-    if (data.Errors) data = data.Errors;
-    if (data.Error) data = data.Error;
-    if (data.Code) {
-      resp.error = AWS.util.error(new Error(), {
-        code: data.Code,
-        message: data.Message
-      });
-    } else {
-      resp.error = AWS.util.error(new Error(), {
-        code: resp.httpResponse.statusCode,
-        message: null
-      });
-    }
-  },
-
-  extractData: function extractData(resp) {
-    var req = resp.request;
-    var operation = req.service.api.operations[req.operation];
-    var wrapperKey = operation.name + 'Result';
-    var rules = operation.output || {};
-
-    if (req.service.api.resultWrapped) {
-      var tmp = {
-        type: 'structure',
-        members: {}
-      };
-      tmp.members[wrapperKey] = rules;
-      rules = tmp;
-    }
-
-    var parser = new AWS.XML.Parser(rules);
-    var data = parser.parse(resp.httpResponse.body.toString());
-
-    if (req.service.api.resultWrapped) {
-      if (data[wrapperKey]) {
-        AWS.util.update(data, data[wrapperKey]);
-        delete data[wrapperKey];
-      }
-    }
-
-    AWS.util.each((operation.output || {}).members || {}, function (memberName, memberRules) {
-      if (memberRules.wrapper && data[memberName]) {
-        AWS.util.update(data, data[memberName]);
-        delete data[memberName];
-      }
-    });
-
-    resp.data = data;
-  }
-};
-
-/**
- * @api private
- */
-AWS.QueryParamSerializer = inherit({
-
-  constructor: function QueryParamSerializer(rules, options) {
-    this.rules = rules;
-    this.timestampFormat = options ? options.timestampFormat : 'iso8601';
-  },
-
-  serialize: function serialize(params, fn) {
-    this.serializeStructure('', params, this.rules, fn);
-  },
-
-  serializeStructure: function serializeStructure(prefix, struct, rules, fn) {
-    var that = this;
-    AWS.util.each(struct, function (name, member) {
-      var n = rules[name].name || name;
-      var memberName = prefix ? prefix + '.' + n : n;
-      that.serializeMember(memberName, member, rules[name], fn);
-    });
-  },
-
-  serializeMap: function serialzeMap(name, map, rules, fn) {
-    var i = 1;
-    var that = this;
-    AWS.util.each(map, function (key, value) {
-      var prefix = rules.flattened ? '.' : '.entry.';
-      var position = prefix + (i++) + '.';
-      var keyName = position + (rules.keys.name || 'key');
-      var valueName = position + (rules.members.name || 'value');
-      that.serializeMember(name + keyName, key, rules.keys, fn);
-      that.serializeMember(name + valueName, value, rules.members, fn);
-    });
-  },
-
-  serializeList: function serializeList(name, list, rules, fn) {
-    var that = this;
-    var memberRules = rules.members || {};
-    AWS.util.arrayEach(list, function (v, n) {
-      var suffix = '.' + (n + 1);
-      if (rules.flattened) {
-        if (memberRules.name) {
-          var parts = name.split('.');
-          parts.pop();
-          parts.push(memberRules.name);
-          name = parts.join('.');
-        }
-      } else {
-        suffix = '.member' + suffix;
-      }
-      that.serializeMember(name + suffix, v, memberRules, fn);
-    });
-  },
-
-  serializeMember: function serializeMember(name, value, rules, fn) {
-    if (rules.type === 'structure') {
-      this.serializeStructure(name, value, rules.members, fn);
-    } else if (rules.type === 'list') {
-      this.serializeList(name, value, rules, fn);
-    } else if (rules.type === 'map') {
-      this.serializeMap(name, value, rules, fn);
-    } else if (rules.type === 'timestamp') {
-      var timestampFormat = rules.format || this.timestampFormat;
-      fn.call(this, name, AWS.util.date.format(value, timestampFormat));
-    } else {
-      fn.call(this, name, String(value));
-    }
-  }
-
-});
-
-},{"../core":26,"../xml/parser":55}],37:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('../core');
-
-/**
- * @api private
- */
-AWS.ServiceInterface.Rest = {
-  buildRequest: function buildRequest(req) {
-    AWS.ServiceInterface.Rest.populateMethod(req);
-    AWS.ServiceInterface.Rest.populateURI(req);
-    AWS.ServiceInterface.Rest.populateHeaders(req);
-  },
-
-  extractError: function extractError() {
-  },
-
-  extractData: function extractData(resp) {
-    var req = resp.request;
-    var data = {};
-    var r = resp.httpResponse;
-    var operation = req.service.api.operations[req.operation];
-    var rules = (operation.output || {}).members || {};
-
-    // normalize headers names to lower-cased keys for matching
-    var headers = {};
-    AWS.util.each(r.headers, function (k, v) {
-      headers[k.toLowerCase()] = v;
-    });
-
-    AWS.util.each(rules, function (name, rule) {
-      if (rule.location === 'header') {
-        var header = (rule.name || name).toLowerCase();
-        if (rule.type == 'map') {
-          data[name] = {};
-          AWS.util.each(r.headers, function (k, v) {
-            var result = k.match(new RegExp('^' + rule.name + '(.+)', 'i'));
-            if (result !== null) {
-              data[name][result[1]] = v;
-            }
-          });
-        }
-        if (headers[header] !== undefined) {
-          data[name] = headers[header];
-        }
-      }
-      if (rule.location === 'status') {
-        data[name] = parseInt(r.statusCode, 10);
-      }
-    });
-
-    resp.data = data;
-  },
-
-  populateMethod: function populateMethod(req) {
-    req.httpRequest.method = req.service.api.operations[req.operation].http.method;
-  },
-
-  populateURI: function populateURI(req) {
-    var operation = req.service.api.operations[req.operation];
-    var uri = operation.http.uri;
-    var pathPattern = uri.split(/\?/)[0];
-    var rules = (operation.input || {}).members || {};
-
-    var escapePathParam = req.service.escapePathParam ||
-      AWS.ServiceInterface.Rest.escapePathParam;
-    var escapeQuerystringParam = req.service.escapeQuerystringParam ||
-      AWS.ServiceInterface.Rest.escapeQuerystringParam;
-
-    AWS.util.each.call(this, rules, function (name, rule) {
-      if (rule.location == 'uri' && req.params[name]) {
-        // if the value is being inserted into the path portion of the
-        // URI, then we need to use a different (potentially) escaping
-        // pattern, this is especially true for S3 path params like Key.
-        var value = pathPattern.match('{' + name + '}') ?
-          escapePathParam(req.params[name]) :
-          escapeQuerystringParam(req.params[name]);
-
-        uri = uri.replace('{' + name + '}', value);
-      }
-    });
-
-    var path = uri.split('?')[0];
-    var querystring = uri.split('?')[1];
-
-    if (querystring) {
-      var parts = [];
-      AWS.util.arrayEach(querystring.split('&'), function (part) {
-        if (!part.match('{\\w+}')) parts.push(part);
-      });
-      uri = (parts.length > 0 ? path + '?' + parts.join('&') : path);
-    } else {
-      uri = path;
-    }
-
-    req.httpRequest.path = uri;
-  },
-
-  escapePathParam: function escapePathParam(value) {
-    return AWS.util.uriEscape(String(value));
-  },
-
-  escapeQuerystringParam: function escapeQuerystringParam(value) {
-    return AWS.util.uriEscape(String(value));
-  },
-
-  populateHeaders: function populateHeaders(req) {
-    var operation = req.service.api.operations[req.operation];
-    var rules = (operation.input || {}).members || {};
-
-    AWS.util.each.call(this, rules, function (name, rule) {
-      if (rule.location === 'header' && req.params[name]) {
-        if (rule.type === 'map') {
-          AWS.util.each(req.params[name], function (key, value) {
-            req.httpRequest.headers[rule.name + key] = value;
-          });
-        } else {
-          var value = req.params[name];
-          if (rule.type === 'timestamp') {
-            var timestampFormat = rule.format || req.service.api.timestampFormat;
-            value = AWS.util.date.format(value, timestampFormat);
-          }
-          req.httpRequest.headers[rule.name || name] = value;
-        }
-      }
-    });
-
-  }
-};
-
-},{"../core":26}],38:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('../core');
-require('./rest');
-require('./json');
-
-/**
- * @api private
- */
-AWS.ServiceInterface.RestJson = {
-  buildRequest: function buildRequest(req) {
-    AWS.ServiceInterface.Rest.buildRequest(req);
-    AWS.ServiceInterface.RestJson.populateBody(req);
-  },
-
-  extractError: function extractError(resp) {
-    AWS.ServiceInterface.Json.extractError(resp);
-  },
-
-  extractData: function extractData(resp) {
-    AWS.ServiceInterface.Rest.extractData(resp);
-
-    var req = resp.request;
-    var rules = req.service.api.operations[req.operation].output || {};
-    if (rules.payload && rules.members[rules.payload]) {
-      if (rules.members[rules.payload].streaming) {
-        resp.data[rules.payload] = resp.httpResponse.body;
-      } else {
-        resp.data[rules.payload] = resp.httpResponse.body.toString();
-      }
-    } else {
-      var data = resp.data;
-      AWS.ServiceInterface.Json.extractData(resp);
-      resp.data = AWS.util.merge(data, resp.data);
-    }
-
-    // extract request id
-    resp.data.RequestId = resp.httpResponse.headers['x-amz-request-id'] ||
-                          resp.httpResponse.headers['x-amzn-requestid'];
-  },
-
-  populateBody: function populateBody(req) {
-    /*jshint maxcomplexity:10*/
-    var input = req.service.api.operations[req.operation].input;
-    var payload = input.payload;
-    var params = {};
-
-    if (typeof payload === 'string') {
-
-      var rules = input.members[payload];
-      params = req.params[payload];
-
-      if (params === undefined) return;
-
-      if (rules.type === 'structure') {
-        req.httpRequest.body = this.toJSON(params, input, req.service.api);
-      } else {
-        // non-xml paylaod
-        req.httpRequest.body = params;
-      }
-
-    } else if (payload) {
-
-      AWS.util.arrayEach(payload, function (param) {
-        if (req.params[param] !== undefined) {
-          params[param] = req.params[param];
-        }
-      });
-      req.httpRequest.body = this.toJSON(params, input, req.service.api);
-
-    }
-  },
-
-  toJSON: function toJSON(params, rules, api) {
-    var builder = new AWS.JSON.Builder(rules, api);
-    return builder.toJSON(params);
-  }
-
-};
-
-},{"../core":26,"./json":35,"./rest":37}],39:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('../core');
-require('../xml/builder');
-require('./rest');
-
-/**
- * @api private
- */
-AWS.ServiceInterface.RestXml = {
-  buildRequest: function buildRequest(req) {
-    AWS.ServiceInterface.Rest.buildRequest(req);
-    AWS.ServiceInterface.RestXml.populateBody(req);
-  },
-
-  extractError: function extractError(resp) {
-    AWS.ServiceInterface.Rest.extractError(resp);
-
-    var data = new AWS.XML.Parser({}).parse(resp.httpResponse.body.toString());
-    if (data.Errors) data = data.Errors;
-    if (data.Error) data = data.Error;
-    if (data.Code) {
-      resp.error = AWS.util.error(new Error(), {
-        code: data.Code,
-        message: data.Message
-      });
-    } else {
-      resp.error = AWS.util.error(new Error(), {
-        code: resp.httpResponse.statusCode,
-        message: null
-      });
-    }
-  },
-
-  extractData: function extractData(resp) {
-    AWS.ServiceInterface.Rest.extractData(resp);
-
-    var req = resp.request;
-    var httpResponse = resp.httpResponse;
-    var operation = req.service.api.operations[req.operation];
-    var rules = operation.output.members;
-
-    var output = operation.output;
-    var payload = output.payload;
-
-    if (payload) {
-      if (rules[payload].streaming) {
-        resp.data[payload] = httpResponse.body;
-      } else {
-        resp.data[payload] = httpResponse.body.toString();
-      }
-    } else if (httpResponse.body.length > 0) {
-      var parser = new AWS.XML.Parser(operation.output || {});
-      AWS.util.update(resp.data, parser.parse(httpResponse.body.toString()));
-    }
-
-    // extract request id
-    resp.data.RequestId = httpResponse.headers['x-amz-request-id'] ||
-                          httpResponse.headers['x-amzn-requestid'];
-  },
-
-  populateBody: function populateBody(req) {
-    /*jshint maxcomplexity:10*/
-    var input = req.service.api.operations[req.operation].input;
-    var payload = input.payload;
-    var rules = {};
-    var builder = null;
-    var params = req.params;
-
-    if (typeof payload === 'string') {
-
-      rules = input.members[payload];
-      params = params[payload];
-
-      if (params === undefined) return;
-
-      if (rules.type === 'structure') {
-        builder = new AWS.XML.Builder(payload, rules.members, req.service.api);
-        req.httpRequest.body = builder.toXML(params);
-      } else {
-        // non-xml paylaod
-        req.httpRequest.body = params;
-      }
-
-    } else if (payload) {
-
-      AWS.util.arrayEach(payload, function (member) {
-        rules[member] = input.members[member];
-      });
-
-      builder = new AWS.XML.Builder(input.wrapper, rules, req.service.api);
-      req.httpRequest.body = builder.toXML(params);
-
-    }
-
-  }
-};
-
-},{"../core":26,"../xml/builder":54,"./rest":37}],40:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-module.exports = {
-  format: 'json',
-  apiVersion: '2012-08-10',
-  endpointPrefix: 'dynamodb',
-  jsonVersion: '1.0',
-  serviceAbbreviation: 'DynamoDB',
-  serviceFullName: 'Amazon DynamoDB',
-  signatureVersion: 'v4',
-  targetPrefix: 'DynamoDB_20120810',
-  timestampFormat: 'iso8601',
-  operations: {
-    batchGetItem: {
-      name: 'BatchGetItem',
-      input: {
-        type: 'structure',
-        members: {
-          RequestItems: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                Keys: {
-                  type: 'list',
-                  members: {
-                    type: 'map',
-                    keys: {
-                    },
-                    members: {
-                      type: 'structure',
-                      members: {
-                        S: {
-                        },
-                        N: {
-                        },
-                        B: {
-                          type: 'base64'
-                        },
-                        SS: {
-                          type: 'list',
-                          members: {
-                          }
-                        },
-                        NS: {
-                          type: 'list',
-                          members: {
-                          }
-                        },
-                        BS: {
-                          type: 'list',
-                          members: {
-                            type: 'base64'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  required: true
-                },
-                AttributesToGet: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                ConsistentRead: {
-                  type: 'boolean'
-                }
-              }
-            },
-            required: true
-          },
-          ReturnConsumedCapacity: {
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Responses: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'list',
-              members: {
-                type: 'map',
-                keys: {
-                },
-                members: {
-                  type: 'structure',
-                  members: {
-                    S: {
-                    },
-                    N: {
-                    },
-                    B: {
-                      type: 'base64'
-                    },
-                    SS: {
-                      type: 'list',
-                      members: {
-                      }
-                    },
-                    NS: {
-                      type: 'list',
-                      members: {
-                      }
-                    },
-                    BS: {
-                      type: 'list',
-                      members: {
-                        type: 'base64'
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          UnprocessedKeys: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                Keys: {
-                  type: 'list',
-                  members: {
-                    type: 'map',
-                    keys: {
-                    },
-                    members: {
-                      type: 'structure',
-                      members: {
-                        S: {
-                        },
-                        N: {
-                        },
-                        B: {
-                          type: 'base64'
-                        },
-                        SS: {
-                          type: 'list',
-                          members: {
-                          }
-                        },
-                        NS: {
-                          type: 'list',
-                          members: {
-                          }
-                        },
-                        BS: {
-                          type: 'list',
-                          members: {
-                            type: 'base64'
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                AttributesToGet: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                ConsistentRead: {
-                  type: 'boolean'
-                }
-              }
-            }
-          },
-          ConsumedCapacity: {
-            type: 'list',
-            members: {
-              type: 'structure',
-              members: {
-                TableName: {
-                },
-                CapacityUnits: {
-                  type: 'float'
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    batchWriteItem: {
-      name: 'BatchWriteItem',
-      input: {
-        type: 'structure',
-        members: {
-          RequestItems: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'list',
-              members: {
-                type: 'structure',
-                members: {
-                  PutRequest: {
-                    type: 'structure',
-                    members: {
-                      Item: {
-                        type: 'map',
-                        keys: {
-                        },
-                        members: {
-                          type: 'structure',
-                          members: {
-                            S: {
-                            },
-                            N: {
-                            },
-                            B: {
-                              type: 'base64'
-                            },
-                            SS: {
-                              type: 'list',
-                              members: {
-                              }
-                            },
-                            NS: {
-                              type: 'list',
-                              members: {
-                              }
-                            },
-                            BS: {
-                              type: 'list',
-                              members: {
-                                type: 'base64'
-                              }
-                            }
-                          }
-                        },
-                        required: true
-                      }
-                    }
-                  },
-                  DeleteRequest: {
-                    type: 'structure',
-                    members: {
-                      Key: {
-                        type: 'map',
-                        keys: {
-                        },
-                        members: {
-                          type: 'structure',
-                          members: {
-                            S: {
-                            },
-                            N: {
-                            },
-                            B: {
-                              type: 'base64'
-                            },
-                            SS: {
-                              type: 'list',
-                              members: {
-                              }
-                            },
-                            NS: {
-                              type: 'list',
-                              members: {
-                              }
-                            },
-                            BS: {
-                              type: 'list',
-                              members: {
-                                type: 'base64'
-                              }
-                            }
-                          }
-                        },
-                        required: true
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            required: true
-          },
-          ReturnConsumedCapacity: {
-          },
-          ReturnItemCollectionMetrics: {
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          UnprocessedItems: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'list',
-              members: {
-                type: 'structure',
-                members: {
-                  PutRequest: {
-                    type: 'structure',
-                    members: {
-                      Item: {
-                        type: 'map',
-                        keys: {
-                        },
-                        members: {
-                          type: 'structure',
-                          members: {
-                            S: {
-                            },
-                            N: {
-                            },
-                            B: {
-                              type: 'base64'
-                            },
-                            SS: {
-                              type: 'list',
-                              members: {
-                              }
-                            },
-                            NS: {
-                              type: 'list',
-                              members: {
-                              }
-                            },
-                            BS: {
-                              type: 'list',
-                              members: {
-                                type: 'base64'
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  DeleteRequest: {
-                    type: 'structure',
-                    members: {
-                      Key: {
-                        type: 'map',
-                        keys: {
-                        },
-                        members: {
-                          type: 'structure',
-                          members: {
-                            S: {
-                            },
-                            N: {
-                            },
-                            B: {
-                              type: 'base64'
-                            },
-                            SS: {
-                              type: 'list',
-                              members: {
-                              }
-                            },
-                            NS: {
-                              type: 'list',
-                              members: {
-                              }
-                            },
-                            BS: {
-                              type: 'list',
-                              members: {
-                                type: 'base64'
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          ItemCollectionMetrics: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'list',
-              members: {
-                type: 'structure',
-                members: {
-                  ItemCollectionKey: {
-                    type: 'map',
-                    keys: {
-                    },
-                    members: {
-                      type: 'structure',
-                      members: {
-                        S: {
-                        },
-                        N: {
-                        },
-                        B: {
-                          type: 'base64'
-                        },
-                        SS: {
-                          type: 'list',
-                          members: {
-                          }
-                        },
-                        NS: {
-                          type: 'list',
-                          members: {
-                          }
-                        },
-                        BS: {
-                          type: 'list',
-                          members: {
-                            type: 'base64'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  SizeEstimateRangeGB: {
-                    type: 'list',
-                    members: {
-                      type: 'float'
-                    }
-                  }
-                }
-              }
-            }
-          },
-          ConsumedCapacity: {
-            type: 'list',
-            members: {
-              type: 'structure',
-              members: {
-                TableName: {
-                },
-                CapacityUnits: {
-                  type: 'float'
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    createTable: {
-      name: 'CreateTable',
-      input: {
-        type: 'structure',
-        members: {
-          AttributeDefinitions: {
-            type: 'list',
-            members: {
-              type: 'structure',
-              members: {
-                AttributeName: {
-                  required: true
-                },
-                AttributeType: {
-                  required: true
-                }
-              }
-            },
-            required: true
-          },
-          TableName: {
-            required: true
-          },
-          KeySchema: {
-            type: 'list',
-            members: {
-              type: 'structure',
-              members: {
-                AttributeName: {
-                  required: true
-                },
-                KeyType: {
-                  required: true
-                }
-              }
-            },
-            required: true
-          },
-          LocalSecondaryIndexes: {
-            type: 'list',
-            members: {
-              type: 'structure',
-              members: {
-                IndexName: {
-                  required: true
-                },
-                KeySchema: {
-                  type: 'list',
-                  members: {
-                    type: 'structure',
-                    members: {
-                      AttributeName: {
-                        required: true
-                      },
-                      KeyType: {
-                        required: true
-                      }
-                    }
-                  },
-                  required: true
-                },
-                Projection: {
-                  type: 'structure',
-                  members: {
-                    ProjectionType: {
-                    },
-                    NonKeyAttributes: {
-                      type: 'list',
-                      members: {
-                      }
-                    }
-                  },
-                  required: true
-                }
-              }
-            }
-          },
-          ProvisionedThroughput: {
-            type: 'structure',
-            members: {
-              ReadCapacityUnits: {
-                type: 'integer',
-                required: true
-              },
-              WriteCapacityUnits: {
-                type: 'integer',
-                required: true
-              }
-            },
-            required: true
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          TableDescription: {
-            type: 'structure',
-            members: {
-              AttributeDefinitions: {
-                type: 'list',
-                members: {
-                  type: 'structure',
-                  members: {
-                    AttributeName: {
-                    },
-                    AttributeType: {
-                    }
-                  }
-                }
-              },
-              TableName: {
-              },
-              KeySchema: {
-                type: 'list',
-                members: {
-                  type: 'structure',
-                  members: {
-                    AttributeName: {
-                    },
-                    KeyType: {
-                    }
-                  }
-                }
-              },
-              TableStatus: {
-              },
-              CreationDateTime: {
-                type: 'timestamp'
-              },
-              ProvisionedThroughput: {
-                type: 'structure',
-                members: {
-                  LastIncreaseDateTime: {
-                    type: 'timestamp'
-                  },
-                  LastDecreaseDateTime: {
-                    type: 'timestamp'
-                  },
-                  NumberOfDecreasesToday: {
-                    type: 'integer'
-                  },
-                  ReadCapacityUnits: {
-                    type: 'integer'
-                  },
-                  WriteCapacityUnits: {
-                    type: 'integer'
-                  }
-                }
-              },
-              TableSizeBytes: {
-                type: 'integer'
-              },
-              ItemCount: {
-                type: 'integer'
-              },
-              LocalSecondaryIndexes: {
-                type: 'list',
-                members: {
-                  type: 'structure',
-                  members: {
-                    IndexName: {
-                    },
-                    KeySchema: {
-                      type: 'list',
-                      members: {
-                        type: 'structure',
-                        members: {
-                          AttributeName: {
-                          },
-                          KeyType: {
-                          }
-                        }
-                      }
-                    },
-                    Projection: {
-                      type: 'structure',
-                      members: {
-                        ProjectionType: {
-                        },
-                        NonKeyAttributes: {
-                          type: 'list',
-                          members: {
-                          }
-                        }
-                      }
-                    },
-                    IndexSizeBytes: {
-                      type: 'integer'
-                    },
-                    ItemCount: {
-                      type: 'integer'
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    deleteItem: {
-      name: 'DeleteItem',
-      input: {
-        type: 'structure',
-        members: {
-          TableName: {
-            required: true
-          },
-          Key: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                S: {
-                },
-                N: {
-                },
-                B: {
-                  type: 'base64'
-                },
-                SS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                NS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                BS: {
-                  type: 'list',
-                  members: {
-                    type: 'base64'
-                  }
-                }
-              }
-            },
-            required: true
-          },
-          Expected: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                Value: {
-                  type: 'structure',
-                  members: {
-                    S: {
-                    },
-                    N: {
-                    },
-                    B: {
-                      type: 'base64'
-                    },
-                    SS: {
-                      type: 'list',
-                      members: {
-                      }
-                    },
-                    NS: {
-                      type: 'list',
-                      members: {
-                      }
-                    },
-                    BS: {
-                      type: 'list',
-                      members: {
-                        type: 'base64'
-                      }
-                    }
-                  }
-                },
-                Exists: {
-                  type: 'boolean'
-                }
-              }
-            }
-          },
-          ReturnValues: {
-          },
-          ReturnConsumedCapacity: {
-          },
-          ReturnItemCollectionMetrics: {
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Attributes: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                S: {
-                },
-                N: {
-                },
-                B: {
-                  type: 'base64'
-                },
-                SS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                NS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                BS: {
-                  type: 'list',
-                  members: {
-                    type: 'base64'
-                  }
-                }
-              }
-            }
-          },
-          ConsumedCapacity: {
-            type: 'structure',
-            members: {
-              TableName: {
-              },
-              CapacityUnits: {
-                type: 'float'
-              }
-            }
-          },
-          ItemCollectionMetrics: {
-            type: 'structure',
-            members: {
-              ItemCollectionKey: {
-                type: 'map',
-                keys: {
-                },
-                members: {
-                  type: 'structure',
-                  members: {
-                    S: {
-                    },
-                    N: {
-                    },
-                    B: {
-                      type: 'base64'
-                    },
-                    SS: {
-                      type: 'list',
-                      members: {
-                      }
-                    },
-                    NS: {
-                      type: 'list',
-                      members: {
-                      }
-                    },
-                    BS: {
-                      type: 'list',
-                      members: {
-                        type: 'base64'
-                      }
-                    }
-                  }
-                }
-              },
-              SizeEstimateRangeGB: {
-                type: 'list',
-                members: {
-                  type: 'float'
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    deleteTable: {
-      name: 'DeleteTable',
-      input: {
-        type: 'structure',
-        members: {
-          TableName: {
-            required: true
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          TableDescription: {
-            type: 'structure',
-            members: {
-              AttributeDefinitions: {
-                type: 'list',
-                members: {
-                  type: 'structure',
-                  members: {
-                    AttributeName: {
-                    },
-                    AttributeType: {
-                    }
-                  }
-                }
-              },
-              TableName: {
-              },
-              KeySchema: {
-                type: 'list',
-                members: {
-                  type: 'structure',
-                  members: {
-                    AttributeName: {
-                    },
-                    KeyType: {
-                    }
-                  }
-                }
-              },
-              TableStatus: {
-              },
-              CreationDateTime: {
-                type: 'timestamp'
-              },
-              ProvisionedThroughput: {
-                type: 'structure',
-                members: {
-                  LastIncreaseDateTime: {
-                    type: 'timestamp'
-                  },
-                  LastDecreaseDateTime: {
-                    type: 'timestamp'
-                  },
-                  NumberOfDecreasesToday: {
-                    type: 'integer'
-                  },
-                  ReadCapacityUnits: {
-                    type: 'integer'
-                  },
-                  WriteCapacityUnits: {
-                    type: 'integer'
-                  }
-                }
-              },
-              TableSizeBytes: {
-                type: 'integer'
-              },
-              ItemCount: {
-                type: 'integer'
-              },
-              LocalSecondaryIndexes: {
-                type: 'list',
-                members: {
-                  type: 'structure',
-                  members: {
-                    IndexName: {
-                    },
-                    KeySchema: {
-                      type: 'list',
-                      members: {
-                        type: 'structure',
-                        members: {
-                          AttributeName: {
-                          },
-                          KeyType: {
-                          }
-                        }
-                      }
-                    },
-                    Projection: {
-                      type: 'structure',
-                      members: {
-                        ProjectionType: {
-                        },
-                        NonKeyAttributes: {
-                          type: 'list',
-                          members: {
-                          }
-                        }
-                      }
-                    },
-                    IndexSizeBytes: {
-                      type: 'integer'
-                    },
-                    ItemCount: {
-                      type: 'integer'
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    describeTable: {
-      name: 'DescribeTable',
-      input: {
-        type: 'structure',
-        members: {
-          TableName: {
-            required: true
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Table: {
-            type: 'structure',
-            members: {
-              AttributeDefinitions: {
-                type: 'list',
-                members: {
-                  type: 'structure',
-                  members: {
-                    AttributeName: {
-                    },
-                    AttributeType: {
-                    }
-                  }
-                }
-              },
-              TableName: {
-              },
-              KeySchema: {
-                type: 'list',
-                members: {
-                  type: 'structure',
-                  members: {
-                    AttributeName: {
-                    },
-                    KeyType: {
-                    }
-                  }
-                }
-              },
-              TableStatus: {
-              },
-              CreationDateTime: {
-                type: 'timestamp'
-              },
-              ProvisionedThroughput: {
-                type: 'structure',
-                members: {
-                  LastIncreaseDateTime: {
-                    type: 'timestamp'
-                  },
-                  LastDecreaseDateTime: {
-                    type: 'timestamp'
-                  },
-                  NumberOfDecreasesToday: {
-                    type: 'integer'
-                  },
-                  ReadCapacityUnits: {
-                    type: 'integer'
-                  },
-                  WriteCapacityUnits: {
-                    type: 'integer'
-                  }
-                }
-              },
-              TableSizeBytes: {
-                type: 'integer'
-              },
-              ItemCount: {
-                type: 'integer'
-              },
-              LocalSecondaryIndexes: {
-                type: 'list',
-                members: {
-                  type: 'structure',
-                  members: {
-                    IndexName: {
-                    },
-                    KeySchema: {
-                      type: 'list',
-                      members: {
-                        type: 'structure',
-                        members: {
-                          AttributeName: {
-                          },
-                          KeyType: {
-                          }
-                        }
-                      }
-                    },
-                    Projection: {
-                      type: 'structure',
-                      members: {
-                        ProjectionType: {
-                        },
-                        NonKeyAttributes: {
-                          type: 'list',
-                          members: {
-                          }
-                        }
-                      }
-                    },
-                    IndexSizeBytes: {
-                      type: 'integer'
-                    },
-                    ItemCount: {
-                      type: 'integer'
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    getItem: {
-      name: 'GetItem',
-      input: {
-        type: 'structure',
-        members: {
-          TableName: {
-            required: true
-          },
-          Key: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                S: {
-                },
-                N: {
-                },
-                B: {
-                  type: 'base64'
-                },
-                SS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                NS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                BS: {
-                  type: 'list',
-                  members: {
-                    type: 'base64'
-                  }
-                }
-              }
-            },
-            required: true
-          },
-          AttributesToGet: {
-            type: 'list',
-            members: {
-            }
-          },
-          ConsistentRead: {
-            type: 'boolean'
-          },
-          ReturnConsumedCapacity: {
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Item: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                S: {
-                },
-                N: {
-                },
-                B: {
-                  type: 'base64'
-                },
-                SS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                NS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                BS: {
-                  type: 'list',
-                  members: {
-                    type: 'base64'
-                  }
-                }
-              }
-            }
-          },
-          ConsumedCapacity: {
-            type: 'structure',
-            members: {
-              TableName: {
-              },
-              CapacityUnits: {
-                type: 'float'
-              }
-            }
-          }
-        }
-      }
-    },
-    listTables: {
-      name: 'ListTables',
-      input: {
-        type: 'structure',
-        members: {
-          ExclusiveStartTableName: {
-          },
-          Limit: {
-            type: 'integer'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          TableNames: {
-            type: 'list',
-            members: {
-            }
-          },
-          LastEvaluatedTableName: {
-          }
-        }
-      }
-    },
-    putItem: {
-      name: 'PutItem',
-      input: {
-        type: 'structure',
-        members: {
-          TableName: {
-            required: true
-          },
-          Item: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                S: {
-                },
-                N: {
-                },
-                B: {
-                  type: 'base64'
-                },
-                SS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                NS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                BS: {
-                  type: 'list',
-                  members: {
-                    type: 'base64'
-                  }
-                }
-              }
-            },
-            required: true
-          },
-          Expected: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                Value: {
-                  type: 'structure',
-                  members: {
-                    S: {
-                    },
-                    N: {
-                    },
-                    B: {
-                      type: 'base64'
-                    },
-                    SS: {
-                      type: 'list',
-                      members: {
-                      }
-                    },
-                    NS: {
-                      type: 'list',
-                      members: {
-                      }
-                    },
-                    BS: {
-                      type: 'list',
-                      members: {
-                        type: 'base64'
-                      }
-                    }
-                  }
-                },
-                Exists: {
-                  type: 'boolean'
-                }
-              }
-            }
-          },
-          ReturnValues: {
-          },
-          ReturnConsumedCapacity: {
-          },
-          ReturnItemCollectionMetrics: {
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Attributes: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                S: {
-                },
-                N: {
-                },
-                B: {
-                  type: 'base64'
-                },
-                SS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                NS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                BS: {
-                  type: 'list',
-                  members: {
-                    type: 'base64'
-                  }
-                }
-              }
-            }
-          },
-          ConsumedCapacity: {
-            type: 'structure',
-            members: {
-              TableName: {
-              },
-              CapacityUnits: {
-                type: 'float'
-              }
-            }
-          },
-          ItemCollectionMetrics: {
-            type: 'structure',
-            members: {
-              ItemCollectionKey: {
-                type: 'map',
-                keys: {
-                },
-                members: {
-                  type: 'structure',
-                  members: {
-                    S: {
-                    },
-                    N: {
-                    },
-                    B: {
-                      type: 'base64'
-                    },
-                    SS: {
-                      type: 'list',
-                      members: {
-                      }
-                    },
-                    NS: {
-                      type: 'list',
-                      members: {
-                      }
-                    },
-                    BS: {
-                      type: 'list',
-                      members: {
-                        type: 'base64'
-                      }
-                    }
-                  }
-                }
-              },
-              SizeEstimateRangeGB: {
-                type: 'list',
-                members: {
-                  type: 'float'
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    query: {
-      name: 'Query',
-      input: {
-        type: 'structure',
-        members: {
-          TableName: {
-            required: true
-          },
-          IndexName: {
-          },
-          Select: {
-          },
-          AttributesToGet: {
-            type: 'list',
-            members: {
-            }
-          },
-          Limit: {
-            type: 'integer'
-          },
-          ConsistentRead: {
-            type: 'boolean'
-          },
-          KeyConditions: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                AttributeValueList: {
-                  type: 'list',
-                  members: {
-                    type: 'structure',
-                    members: {
-                      S: {
-                      },
-                      N: {
-                      },
-                      B: {
-                        type: 'base64'
-                      },
-                      SS: {
-                        type: 'list',
-                        members: {
-                        }
-                      },
-                      NS: {
-                        type: 'list',
-                        members: {
-                        }
-                      },
-                      BS: {
-                        type: 'list',
-                        members: {
-                          type: 'base64'
-                        }
-                      }
-                    }
-                  }
-                },
-                ComparisonOperator: {
-                  required: true
-                }
-              }
-            }
-          },
-          ScanIndexForward: {
-            type: 'boolean'
-          },
-          ExclusiveStartKey: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                S: {
-                },
-                N: {
-                },
-                B: {
-                  type: 'base64'
-                },
-                SS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                NS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                BS: {
-                  type: 'list',
-                  members: {
-                    type: 'base64'
-                  }
-                }
-              }
-            }
-          },
-          ReturnConsumedCapacity: {
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Items: {
-            type: 'list',
-            members: {
-              type: 'map',
-              keys: {
-              },
-              members: {
-                type: 'structure',
-                members: {
-                  S: {
-                  },
-                  N: {
-                  },
-                  B: {
-                    type: 'base64'
-                  },
-                  SS: {
-                    type: 'list',
-                    members: {
-                    }
-                  },
-                  NS: {
-                    type: 'list',
-                    members: {
-                    }
-                  },
-                  BS: {
-                    type: 'list',
-                    members: {
-                      type: 'base64'
-                    }
-                  }
-                }
-              }
-            }
-          },
-          Count: {
-            type: 'integer'
-          },
-          LastEvaluatedKey: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                S: {
-                },
-                N: {
-                },
-                B: {
-                  type: 'base64'
-                },
-                SS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                NS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                BS: {
-                  type: 'list',
-                  members: {
-                    type: 'base64'
-                  }
-                }
-              }
-            }
-          },
-          ConsumedCapacity: {
-            type: 'structure',
-            members: {
-              TableName: {
-              },
-              CapacityUnits: {
-                type: 'float'
-              }
-            }
-          }
-        }
-      }
-    },
-    scan: {
-      name: 'Scan',
-      input: {
-        type: 'structure',
-        members: {
-          TableName: {
-            required: true
-          },
-          AttributesToGet: {
-            type: 'list',
-            members: {
-            }
-          },
-          Limit: {
-            type: 'integer'
-          },
-          Select: {
-          },
-          ScanFilter: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                AttributeValueList: {
-                  type: 'list',
-                  members: {
-                    type: 'structure',
-                    members: {
-                      S: {
-                      },
-                      N: {
-                      },
-                      B: {
-                        type: 'base64'
-                      },
-                      SS: {
-                        type: 'list',
-                        members: {
-                        }
-                      },
-                      NS: {
-                        type: 'list',
-                        members: {
-                        }
-                      },
-                      BS: {
-                        type: 'list',
-                        members: {
-                          type: 'base64'
-                        }
-                      }
-                    }
-                  }
-                },
-                ComparisonOperator: {
-                  required: true
-                }
-              }
-            }
-          },
-          ExclusiveStartKey: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                S: {
-                },
-                N: {
-                },
-                B: {
-                  type: 'base64'
-                },
-                SS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                NS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                BS: {
-                  type: 'list',
-                  members: {
-                    type: 'base64'
-                  }
-                }
-              }
-            }
-          },
-          ReturnConsumedCapacity: {
-          },
-          TotalSegments: {
-            type: 'integer'
-          },
-          Segment: {
-            type: 'integer'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Items: {
-            type: 'list',
-            members: {
-              type: 'map',
-              keys: {
-              },
-              members: {
-                type: 'structure',
-                members: {
-                  S: {
-                  },
-                  N: {
-                  },
-                  B: {
-                    type: 'base64'
-                  },
-                  SS: {
-                    type: 'list',
-                    members: {
-                    }
-                  },
-                  NS: {
-                    type: 'list',
-                    members: {
-                    }
-                  },
-                  BS: {
-                    type: 'list',
-                    members: {
-                      type: 'base64'
-                    }
-                  }
-                }
-              }
-            }
-          },
-          Count: {
-            type: 'integer'
-          },
-          ScannedCount: {
-            type: 'integer'
-          },
-          LastEvaluatedKey: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                S: {
-                },
-                N: {
-                },
-                B: {
-                  type: 'base64'
-                },
-                SS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                NS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                BS: {
-                  type: 'list',
-                  members: {
-                    type: 'base64'
-                  }
-                }
-              }
-            }
-          },
-          ConsumedCapacity: {
-            type: 'structure',
-            members: {
-              TableName: {
-              },
-              CapacityUnits: {
-                type: 'float'
-              }
-            }
-          }
-        }
-      }
-    },
-    updateItem: {
-      name: 'UpdateItem',
-      input: {
-        type: 'structure',
-        members: {
-          TableName: {
-            required: true
-          },
-          Key: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                S: {
-                },
-                N: {
-                },
-                B: {
-                  type: 'base64'
-                },
-                SS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                NS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                BS: {
-                  type: 'list',
-                  members: {
-                    type: 'base64'
-                  }
-                }
-              }
-            },
-            required: true
-          },
-          AttributeUpdates: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                Value: {
-                  type: 'structure',
-                  members: {
-                    S: {
-                    },
-                    N: {
-                    },
-                    B: {
-                      type: 'base64'
-                    },
-                    SS: {
-                      type: 'list',
-                      members: {
-                      }
-                    },
-                    NS: {
-                      type: 'list',
-                      members: {
-                      }
-                    },
-                    BS: {
-                      type: 'list',
-                      members: {
-                        type: 'base64'
-                      }
-                    }
-                  }
-                },
-                Action: {
-                }
-              }
-            }
-          },
-          Expected: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                Value: {
-                  type: 'structure',
-                  members: {
-                    S: {
-                    },
-                    N: {
-                    },
-                    B: {
-                      type: 'base64'
-                    },
-                    SS: {
-                      type: 'list',
-                      members: {
-                      }
-                    },
-                    NS: {
-                      type: 'list',
-                      members: {
-                      }
-                    },
-                    BS: {
-                      type: 'list',
-                      members: {
-                        type: 'base64'
-                      }
-                    }
-                  }
-                },
-                Exists: {
-                  type: 'boolean'
-                }
-              }
-            }
-          },
-          ReturnValues: {
-          },
-          ReturnConsumedCapacity: {
-          },
-          ReturnItemCollectionMetrics: {
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Attributes: {
-            type: 'map',
-            keys: {
-            },
-            members: {
-              type: 'structure',
-              members: {
-                S: {
-                },
-                N: {
-                },
-                B: {
-                  type: 'base64'
-                },
-                SS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                NS: {
-                  type: 'list',
-                  members: {
-                  }
-                },
-                BS: {
-                  type: 'list',
-                  members: {
-                    type: 'base64'
-                  }
-                }
-              }
-            }
-          },
-          ConsumedCapacity: {
-            type: 'structure',
-            members: {
-              TableName: {
-              },
-              CapacityUnits: {
-                type: 'float'
-              }
-            }
-          },
-          ItemCollectionMetrics: {
-            type: 'structure',
-            members: {
-              ItemCollectionKey: {
-                type: 'map',
-                keys: {
-                },
-                members: {
-                  type: 'structure',
-                  members: {
-                    S: {
-                    },
-                    N: {
-                    },
-                    B: {
-                      type: 'base64'
-                    },
-                    SS: {
-                      type: 'list',
-                      members: {
-                      }
-                    },
-                    NS: {
-                      type: 'list',
-                      members: {
-                      }
-                    },
-                    BS: {
-                      type: 'list',
-                      members: {
-                        type: 'base64'
-                      }
-                    }
-                  }
-                }
-              },
-              SizeEstimateRangeGB: {
-                type: 'list',
-                members: {
-                  type: 'float'
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    updateTable: {
-      name: 'UpdateTable',
-      input: {
-        type: 'structure',
-        members: {
-          TableName: {
-            required: true
-          },
-          ProvisionedThroughput: {
-            type: 'structure',
-            members: {
-              ReadCapacityUnits: {
-                type: 'integer',
-                required: true
-              },
-              WriteCapacityUnits: {
-                type: 'integer',
-                required: true
-              }
-            },
-            required: true
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          TableDescription: {
-            type: 'structure',
-            members: {
-              AttributeDefinitions: {
-                type: 'list',
-                members: {
-                  type: 'structure',
-                  members: {
-                    AttributeName: {
-                    },
-                    AttributeType: {
-                    }
-                  }
-                }
-              },
-              TableName: {
-              },
-              KeySchema: {
-                type: 'list',
-                members: {
-                  type: 'structure',
-                  members: {
-                    AttributeName: {
-                    },
-                    KeyType: {
-                    }
-                  }
-                }
-              },
-              TableStatus: {
-              },
-              CreationDateTime: {
-                type: 'timestamp'
-              },
-              ProvisionedThroughput: {
-                type: 'structure',
-                members: {
-                  LastIncreaseDateTime: {
-                    type: 'timestamp'
-                  },
-                  LastDecreaseDateTime: {
-                    type: 'timestamp'
-                  },
-                  NumberOfDecreasesToday: {
-                    type: 'integer'
-                  },
-                  ReadCapacityUnits: {
-                    type: 'integer'
-                  },
-                  WriteCapacityUnits: {
-                    type: 'integer'
-                  }
-                }
-              },
-              TableSizeBytes: {
-                type: 'integer'
-              },
-              ItemCount: {
-                type: 'integer'
-              },
-              LocalSecondaryIndexes: {
-                type: 'list',
-                members: {
-                  type: 'structure',
-                  members: {
-                    IndexName: {
-                    },
-                    KeySchema: {
-                      type: 'list',
-                      members: {
-                        type: 'structure',
-                        members: {
-                          AttributeName: {
-                          },
-                          KeyType: {
-                          }
-                        }
-                      }
-                    },
-                    Projection: {
-                      type: 'structure',
-                      members: {
-                        ProjectionType: {
-                        },
-                        NonKeyAttributes: {
-                          type: 'list',
-                          members: {
-                          }
-                        }
-                      }
-                    },
-                    IndexSizeBytes: {
-                      type: 'integer'
-                    },
-                    ItemCount: {
-                      type: 'integer'
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  pagination: {
-    batchGetItem: {
-      inputToken: 'RequestItems',
-      outputToken: 'UnprocessedKeys',
-      resultKey: 'Items'
-    },
-    listTables: {
-      inputToken: 'ExclusiveStartTableName',
-      outputToken: 'LastEvaluatedTableName',
-      resultKey: 'TableNames'
-    },
-    query: {
-      inputToken: 'ExclusiveStartKey',
-      outputToken: 'LastEvaluatedKey',
-      resultKey: 'Items'
-    },
-    scan: {
-      inputToken: 'ExclusiveStartKey',
-      outputToken: 'LastEvaluatedKey',
-      resultKey: 'Items'
-    }
-  }
-};
-
-},{}],41:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-module.exports = {
-  format: 'rest-xml',
-  apiVersion: '2006-03-01',
-  checksumFormat: 'md5',
-  endpointPrefix: 's3',
-  globalEndpoint: 's3.amazonaws.com',
-  serviceAbbreviation: 'Amazon S3',
-  serviceFullName: 'Amazon Simple Storage Service',
-  signatureVersion: 's3',
-  timestampFormat: 'rfc822',
-  xmlnamespace: 'http://s3.amazonaws.com/doc/2006-03-01/',
-  operations: {
-    abortMultipartUpload: {
-      name: 'AbortMultipartUpload',
-      http: {
-        method: 'DELETE',
-        uri: '/{Bucket}/{Key}?uploadId={UploadId}'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          Key: {
-            required: true,
-            location: 'uri'
-          },
-          UploadId: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    completeMultipartUpload: {
-      name: 'CompleteMultipartUpload',
-      http: {
-        method: 'POST',
-        uri: '/{Bucket}/{Key}?uploadId={UploadId}'
-      },
-      input: {
-        payload: 'MultipartUpload',
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          Key: {
-            required: true,
-            location: 'uri'
-          },
-          MultipartUpload: {
-            type: 'structure',
-            name: 'CompleteMultipartUpload',
-            members: {
-              Parts: {
-                type: 'list',
-                flattened: true,
-                name: 'Part',
-                members: {
-                  type: 'structure',
-                  members: {
-                    ETag: {
-                    },
-                    PartNumber: {
-                      type: 'integer'
-                    }
-                  }
-                }
-              }
-            }
-          },
-          UploadId: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Location: {
-          },
-          Bucket: {
-          },
-          Key: {
-          },
-          Expiration: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'x-amz-expiration'
-          },
-          ETag: {
-          },
-          ServerSideEncryption: {
-            location: 'header',
-            name: 'x-amz-server-side-encryption'
-          },
-          VersionId: {
-            location: 'header',
-            name: 'x-amz-version-id'
-          }
-        }
-      }
-    },
-    copyObject: {
-      name: 'CopyObject',
-      alias: 'PutObjectCopy',
-      http: {
-        method: 'PUT',
-        uri: '/{Bucket}/{Key}'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          ACL: {
-            location: 'header',
-            name: 'x-amz-acl'
-          },
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          CacheControl: {
-            location: 'header',
-            name: 'Cache-Control'
-          },
-          ContentDisposition: {
-            location: 'header',
-            name: 'Content-Disposition'
-          },
-          ContentEncoding: {
-            location: 'header',
-            name: 'Content-Encoding'
-          },
-          ContentLanguage: {
-            location: 'header',
-            name: 'Content-Language'
-          },
-          ContentType: {
-            location: 'header',
-            name: 'Content-Type'
-          },
-          CopySource: {
-            location: 'header',
-            name: 'x-amz-copy-source',
-            required: true
-          },
-          CopySourceIfMatch: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'x-amz-copy-source-if-match'
-          },
-          CopySourceIfModifiedSince: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'x-amz-copy-source-if-modified-since'
-          },
-          CopySourceIfNoneMatch: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'x-amz-copy-source-if-none-match'
-          },
-          CopySourceIfUnmodifiedSince: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'x-amz-copy-source-if-unmodified-since'
-          },
-          Expires: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'Expires'
-          },
-          GrantFullControl: {
-            location: 'header',
-            name: 'x-amz-grant-full-control'
-          },
-          GrantRead: {
-            location: 'header',
-            name: 'x-amz-grant-read'
-          },
-          GrantReadACP: {
-            location: 'header',
-            name: 'x-amz-grant-read-acp'
-          },
-          GrantWriteACP: {
-            location: 'header',
-            name: 'x-amz-grant-write-acp'
-          },
-          Key: {
-            required: true,
-            location: 'uri'
-          },
-          Metadata: {
-            type: 'map',
-            location: 'header',
-            name: 'x-amz-meta-',
-            keys: {
-            },
-            members: {
-            }
-          },
-          MetadataDirective: {
-            location: 'header',
-            name: 'x-amz-metadata-directive'
-          },
-          ServerSideEncryption: {
-            location: 'header',
-            name: 'x-amz-server-side-encryption'
-          },
-          StorageClass: {
-            location: 'header',
-            name: 'x-amz-storage-class'
-          },
-          WebsiteRedirectLocation: {
-            location: 'header',
-            name: 'x-amz-website-redirect-location'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Expiration: {
-            location: 'header',
-            name: 'x-amz-expiration'
-          },
-          CopySourceVersionId: {
-            location: 'header',
-            name: 'x-amz-copy-source-version-id'
-          },
-          ServerSideEncryption: {
-            location: 'header',
-            name: 'x-amz-server-side-encryption'
-          },
-          ETag: {
-          },
-          LastModified: {
-          }
-        }
-      }
-    },
-    createBucket: {
-      name: 'CreateBucket',
-      alias: 'PutBucket',
-      http: {
-        method: 'PUT',
-        uri: '/{Bucket}'
-      },
-      input: {
-        payload: 'CreateBucketConfiguration',
-        type: 'structure',
-        members: {
-          ACL: {
-            location: 'header',
-            name: 'x-amz-acl'
-          },
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          CreateBucketConfiguration: {
-            type: 'structure',
-            members: {
-              LocationConstraint: {
-              }
-            }
-          },
-          GrantFullControl: {
-            location: 'header',
-            name: 'x-amz-grant-full-control'
-          },
-          GrantRead: {
-            location: 'header',
-            name: 'x-amz-grant-read'
-          },
-          GrantReadACP: {
-            location: 'header',
-            name: 'x-amz-grant-read-acp'
-          },
-          GrantWrite: {
-            location: 'header',
-            name: 'x-amz-grant-write'
-          },
-          GrantWriteACP: {
-            location: 'header',
-            name: 'x-amz-grant-write-acp'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Location: {
-            location: 'header',
-            name: 'Location'
-          }
-        }
-      }
-    },
-    createMultipartUpload: {
-      name: 'CreateMultipartUpload',
-      alias: 'InitiateMultipartUpload',
-      http: {
-        method: 'POST',
-        uri: '/{Bucket}/{Key}?uploads'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          ACL: {
-            location: 'header',
-            name: 'x-amz-acl'
-          },
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          CacheControl: {
-            location: 'header',
-            name: 'Cache-Control'
-          },
-          ContentDisposition: {
-            location: 'header',
-            name: 'Content-Disposition'
-          },
-          ContentEncoding: {
-            location: 'header',
-            name: 'Content-Encoding'
-          },
-          ContentLanguage: {
-            location: 'header',
-            name: 'Content-Language'
-          },
-          ContentType: {
-            location: 'header',
-            name: 'Content-Type'
-          },
-          Expires: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'Expires'
-          },
-          GrantFullControl: {
-            location: 'header',
-            name: 'x-amz-grant-full-control'
-          },
-          GrantRead: {
-            location: 'header',
-            name: 'x-amz-grant-read'
-          },
-          GrantReadACP: {
-            location: 'header',
-            name: 'x-amz-grant-read-acp'
-          },
-          GrantWriteACP: {
-            location: 'header',
-            name: 'x-amz-grant-write-acp'
-          },
-          Key: {
-            required: true,
-            location: 'uri'
-          },
-          Metadata: {
-            type: 'map',
-            location: 'header',
-            name: 'x-amz-meta-',
-            keys: {
-            },
-            members: {
-            }
-          },
-          ServerSideEncryption: {
-            location: 'header',
-            name: 'x-amz-server-side-encryption'
-          },
-          StorageClass: {
-            location: 'header',
-            name: 'x-amz-storage-class'
-          },
-          WebsiteRedirectLocation: {
-            location: 'header',
-            name: 'x-amz-website-redirect-location'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            name: 'Bucket'
-          },
-          Key: {
-          },
-          UploadId: {
-          },
-          ServerSideEncryption: {
-            location: 'header',
-            name: 'x-amz-server-side-encryption'
-          }
-        }
-      }
-    },
-    deleteBucket: {
-      name: 'DeleteBucket',
-      http: {
-        method: 'DELETE',
-        uri: '/{Bucket}'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    deleteBucketCors: {
-      name: 'DeleteBucketCors',
-      http: {
-        method: 'DELETE',
-        uri: '/{Bucket}?cors'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    deleteBucketLifecycle: {
-      name: 'DeleteBucketLifecycle',
-      http: {
-        method: 'DELETE',
-        uri: '/{Bucket}?lifecycle'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    deleteBucketPolicy: {
-      name: 'DeleteBucketPolicy',
-      http: {
-        method: 'DELETE',
-        uri: '/{Bucket}?policy'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    deleteBucketTagging: {
-      name: 'DeleteBucketTagging',
-      http: {
-        method: 'DELETE',
-        uri: '/{Bucket}?tagging'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    deleteBucketWebsite: {
-      name: 'DeleteBucketWebsite',
-      http: {
-        method: 'DELETE',
-        uri: '/{Bucket}?website'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    deleteObject: {
-      name: 'DeleteObject',
-      http: {
-        method: 'DELETE',
-        uri: '/{Bucket}/{Key}'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          Key: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          DeleteMarker: {
-            location: 'header',
-            name: 'x-amz-delete-marker'
-          },
-          VersionId: {
-            location: 'header',
-            name: 'x-amz-version-id'
-          }
-        }
-      }
-    },
-    deleteObjects: {
-      name: 'DeleteObjects',
-      alias: 'DeleteMultipleObjects',
-      http: {
-        method: 'POST',
-        uri: '/{Bucket}?delete'
-      },
-      input: {
-        payload: 'Delete',
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          Delete: {
-            type: 'structure',
-            required: true,
-            members: {
-              Objects: {
-                type: 'list',
-                flattened: true,
-                name: 'Object',
-                required: true,
-                members: {
-                  type: 'structure',
-                  members: {
-                    Key: {
-                      required: true
-                    },
-                    VersionId: {
-                    }
-                  }
-                }
-              },
-              Quiet: {
-                type: 'boolean'
-              }
-            }
-          },
-          MFA: {
-            location: 'header',
-            name: 'x-amz-mfa'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Deleted: {
-            type: 'list',
-            flattened: true,
-            members: {
-              type: 'structure',
-              members: {
-                Key: {
-                },
-                VersionId: {
-                },
-                DeleteMarker: {
-                  type: 'boolean'
-                },
-                DeleteMarkerVersionId: {
-                }
-              }
-            }
-          },
-          Error: {
-            type: 'list',
-            flattened: true,
-            name: 'Errors',
-            members: {
-              type: 'structure',
-              members: {
-                Key: {
-                },
-                VersionId: {
-                },
-                Code: {
-                },
-                Message: {
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    getBucketAcl: {
-      name: 'GetBucketAcl',
-      http: {
-        method: 'GET',
-        uri: '/{Bucket}?acl'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Owner: {
-            type: 'structure',
-            members: {
-              ID: {
-              },
-              DisplayName: {
-              }
-            }
-          },
-          AccessControlList: {
-            type: 'list',
-            name: 'Grants',
-            members: {
-              type: 'structure',
-              name: 'Grant',
-              members: {
-                Grantee: {
-                  type: 'structure',
-                  xmlns: {
-                    prefix: 'xsi',
-                    uri: 'http://www.w3.org/2001/XMLSchema-instance'
-                  },
-                  members: {
-                    'xsi:type': {
-                      attribute: true,
-                      name: 'Type'
-                    },
-                    ID: {
-                    },
-                    DisplayName: {
-                    },
-                    EmailAddress: {
-                    },
-                    URI: {
-                    }
-                  }
-                },
-                Permission: {
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    getBucketCors: {
-      name: 'GetBucketCors',
-      http: {
-        method: 'GET',
-        uri: '/{Bucket}?cors'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          CORSRule: {
-            type: 'list',
-            flattened: true,
-            name: 'CORSRules',
-            members: {
-              type: 'structure',
-              members: {
-                AllowedHeader: {
-                  type: 'list',
-                  flattened: true,
-                  name: 'AllowedHeaders',
-                  members: {
-                  }
-                },
-                AllowedOrigin: {
-                  type: 'list',
-                  flattened: true,
-                  name: 'AllowedOrigins',
-                  members: {
-                  }
-                },
-                AllowedMethod: {
-                  type: 'list',
-                  flattened: true,
-                  name: 'AllowedMethods',
-                  members: {
-                  }
-                },
-                MaxAgeSeconds: {
-                  type: 'integer'
-                },
-                ExposeHeader: {
-                  type: 'list',
-                  flattened: true,
-                  name: 'ExposeHeaders',
-                  members: {
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    getBucketLifecycle: {
-      name: 'GetBucketLifecycle',
-      http: {
-        method: 'GET',
-        uri: '/{Bucket}?lifecycle'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Rule: {
-            type: 'list',
-            flattened: true,
-            name: 'Rules',
-            members: {
-              type: 'structure',
-              members: {
-                ID: {
-                },
-                Prefix: {
-                },
-                Status: {
-                },
-                Transition: {
-                  type: 'structure',
-                  members: {
-                    Days: {
-                      type: 'integer'
-                    },
-                    Date: {
-                      type: 'timestamp',
-                      format: 'iso8601'
-                    },
-                    StorageClass: {
-                    }
-                  }
-                },
-                Expiration: {
-                  type: 'structure',
-                  members: {
-                    Days: {
-                      type: 'integer'
-                    },
-                    Date: {
-                      type: 'timestamp',
-                      format: 'iso8601'
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    getBucketLocation: {
-      name: 'GetBucketLocation',
-      http: {
-        method: 'GET',
-        uri: '/{Bucket}?location'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          LocationConstraint: {
-          }
-        }
-      }
-    },
-    getBucketLogging: {
-      name: 'GetBucketLogging',
-      http: {
-        method: 'GET',
-        uri: '/{Bucket}?logging'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          LoggingEnabled: {
-            type: 'structure',
-            members: {
-              TargetBucket: {
-              },
-              TargetPrefix: {
-              },
-              TargetGrants: {
-                type: 'list',
-                members: {
-                  type: 'structure',
-                  name: 'Grant',
-                  members: {
-                    Grantee: {
-                      type: 'structure',
-                      xmlns: {
-                        prefix: 'xsi',
-                        uri: 'http://www.w3.org/2001/XMLSchema-instance'
-                      },
-                      members: {
-                        'xsi:type': {
-                          attribute: true,
-                          name: 'Type'
-                        },
-                        ID: {
-                        },
-                        DisplayName: {
-                        },
-                        EmailAddress: {
-                        },
-                        URI: {
-                        }
-                      }
-                    },
-                    Permission: {
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    getBucketNotification: {
-      name: 'GetBucketNotification',
-      http: {
-        method: 'GET',
-        uri: '/{Bucket}?notification'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          TopicConfiguration: {
-            type: 'structure',
-            members: {
-              Topic: {
-              },
-              Event: {
-              }
-            }
-          }
-        }
-      }
-    },
-    getBucketPolicy: {
-      name: 'GetBucketPolicy',
-      http: {
-        method: 'GET',
-        uri: '/{Bucket}?policy'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Policy: {
-          }
-        },
-        payload: 'Policy'
-      }
-    },
-    getBucketRequestPayment: {
-      name: 'GetBucketRequestPayment',
-      http: {
-        method: 'GET',
-        uri: '/{Bucket}?requestPayment'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Payer: {
-          }
-        }
-      }
-    },
-    getBucketTagging: {
-      name: 'GetBucketTagging',
-      http: {
-        method: 'GET',
-        uri: '/{Bucket}?tagging'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          TagSet: {
-            type: 'list',
-            members: {
-              type: 'structure',
-              name: 'Tag',
-              members: {
-                Key: {
-                },
-                Value: {
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    getBucketVersioning: {
-      name: 'GetBucketVersioning',
-      http: {
-        method: 'GET',
-        uri: '/{Bucket}?versioning'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Status: {
-          },
-          MFADelete: {
-          }
-        }
-      }
-    },
-    getBucketWebsite: {
-      name: 'GetBucketWebsite',
-      http: {
-        method: 'GET',
-        uri: '/{Bucket}?website'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          RedirectAllRequestsTo: {
-            type: 'structure',
-            members: {
-              HostName: {
-              },
-              Protocol: {
-              }
-            }
-          },
-          IndexDocument: {
-            type: 'structure',
-            members: {
-              Suffix: {
-              }
-            }
-          },
-          ErrorDocument: {
-            type: 'structure',
-            members: {
-              Key: {
-              }
-            }
-          },
-          RoutingRules: {
-            type: 'list',
-            members: {
-              type: 'structure',
-              name: 'RoutingRule',
-              members: {
-                Condition: {
-                  type: 'structure',
-                  members: {
-                    KeyPrefixEquals: {
-                    },
-                    HttpErrorCodeReturnedEquals: {
-                    }
-                  }
-                },
-                Redirect: {
-                  type: 'structure',
-                  members: {
-                    HostName: {
-                    },
-                    ReplaceKeyPrefixWith: {
-                    },
-                    ReplaceKeyWith: {
-                    },
-                    HttpRedirectCode: {
-                    },
-                    Protocol: {
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    getObject: {
-      name: 'GetObject',
-      http: {
-        method: 'GET',
-        uri: '/{Bucket}/{Key}?versionId={VersionId}&response-content-type={ResponseContentType}&response-content-language={ResponseContentLanguage}&response-expires={ResponseExpires}&response-cache-control={ResponseCacheControl}&response-content-disposition={ResponseContentDisposition}&response-content-encoding={ResponseContentEncoding}'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          IfMatch: {
-            location: 'header',
-            name: 'If-Match'
-          },
-          IfModifiedSince: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'If-Modified-Since'
-          },
-          IfNoneMatch: {
-            location: 'header',
-            name: 'If-None-Match'
-          },
-          IfUnmodifiedSince: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'If-Unmodified-Since'
-          },
-          Key: {
-            required: true,
-            location: 'uri'
-          },
-          Range: {
-            location: 'header',
-            name: 'Range'
-          },
-          ResponseCacheControl: {
-            location: 'uri'
-          },
-          ResponseContentDisposition: {
-            location: 'uri'
-          },
-          ResponseContentEncoding: {
-            location: 'uri'
-          },
-          ResponseContentLanguage: {
-            location: 'uri'
-          },
-          ResponseContentType: {
-            location: 'uri'
-          },
-          ResponseExpires: {
-            type: 'timestamp',
-            location: 'uri'
-          },
-          VersionId: {
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Body: {
-            type: 'binary',
-            streaming: true
-          },
-          DeleteMarker: {
-            location: 'header',
-            name: 'x-amz-delete-marker'
-          },
-          AcceptRanges: {
-            location: 'header',
-            name: 'accept-ranges'
-          },
-          Expiration: {
-            location: 'header',
-            name: 'x-amz-expiration'
-          },
-          Restore: {
-            location: 'header',
-            name: 'x-amz-restore'
-          },
-          LastModified: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'Last-Modified'
-          },
-          ContentLength: {
-            type: 'integer',
-            location: 'header',
-            name: 'Content-Length'
-          },
-          ETag: {
-            location: 'header',
-            name: 'ETag'
-          },
-          MissingMeta: {
-            type: 'integer',
-            location: 'header',
-            name: 'x-amz-missing-meta'
-          },
-          VersionId: {
-            location: 'header',
-            name: 'x-amz-version-id'
-          },
-          CacheControl: {
-            location: 'header',
-            name: 'Cache-Control'
-          },
-          ContentDisposition: {
-            location: 'header',
-            name: 'Content-Disposition'
-          },
-          ContentEncoding: {
-            location: 'header',
-            name: 'Content-Encoding'
-          },
-          ContentLanguage: {
-            location: 'header',
-            name: 'Content-Language'
-          },
-          ContentType: {
-            location: 'header',
-            name: 'Content-Type'
-          },
-          Expires: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'Expires'
-          },
-          WebsiteRedirectLocation: {
-            location: 'header',
-            name: 'x-amz-website-redirect-location'
-          },
-          ServerSideEncryption: {
-            location: 'header',
-            name: 'x-amz-server-side-encryption'
-          },
-          Metadata: {
-            type: 'map',
-            location: 'header',
-            name: 'x-amz-meta-',
-            keys: {
-            },
-            members: {
-            }
-          }
-        },
-        payload: 'Body'
-      }
-    },
-    getObjectAcl: {
-      name: 'GetObjectAcl',
-      http: {
-        method: 'GET',
-        uri: '/{Bucket}/{Key}?acl&versionId={VersionId}'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          Key: {
-            required: true,
-            location: 'uri'
-          },
-          VersionId: {
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Owner: {
-            type: 'structure',
-            members: {
-              ID: {
-              },
-              DisplayName: {
-              }
-            }
-          },
-          AccessControlList: {
-            type: 'list',
-            name: 'Grants',
-            members: {
-              type: 'structure',
-              name: 'Grant',
-              members: {
-                Grantee: {
-                  type: 'structure',
-                  xmlns: {
-                    prefix: 'xsi',
-                    uri: 'http://www.w3.org/2001/XMLSchema-instance'
-                  },
-                  members: {
-                    'xsi:type': {
-                      attribute: true,
-                      name: 'Type'
-                    },
-                    ID: {
-                    },
-                    DisplayName: {
-                    },
-                    EmailAddress: {
-                    },
-                    URI: {
-                    }
-                  }
-                },
-                Permission: {
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    getObjectTorrent: {
-      name: 'GetObjectTorrent',
-      http: {
-        method: 'GET',
-        uri: '/{Bucket}/{Key}?torrent'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          Key: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Body: {
-            type: 'binary',
-            streaming: true
-          }
-        },
-        payload: 'Body'
-      }
-    },
-    headBucket: {
-      name: 'HeadBucket',
-      http: {
-        method: 'HEAD',
-        uri: '/{Bucket}'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    headObject: {
-      name: 'HeadObject',
-      http: {
-        method: 'HEAD',
-        uri: '/{Bucket}/{Key}?versionId={VersionId}'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          IfMatch: {
-            location: 'header',
-            name: 'If-Match'
-          },
-          IfModifiedSince: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'If-Modified-Since'
-          },
-          IfNoneMatch: {
-            location: 'header',
-            name: 'If-None-Match'
-          },
-          IfUnmodifiedSince: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'If-Unmodified-Since'
-          },
-          Key: {
-            required: true,
-            location: 'uri'
-          },
-          Range: {
-            location: 'header',
-            name: 'Range'
-          },
-          VersionId: {
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          DeleteMarker: {
-            location: 'header',
-            name: 'x-amz-delete-marker'
-          },
-          AcceptRanges: {
-            location: 'header',
-            name: 'accept-ranges'
-          },
-          Expiration: {
-            location: 'header',
-            name: 'x-amz-expiration'
-          },
-          Restore: {
-            location: 'header',
-            name: 'x-amz-restore'
-          },
-          LastModified: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'Last-Modified'
-          },
-          ContentLength: {
-            type: 'integer',
-            location: 'header',
-            name: 'Content-Length'
-          },
-          ETag: {
-            location: 'header',
-            name: 'ETag'
-          },
-          MissingMeta: {
-            type: 'integer',
-            location: 'header',
-            name: 'x-amz-missing-meta'
-          },
-          VersionId: {
-            location: 'header',
-            name: 'x-amz-version-id'
-          },
-          CacheControl: {
-            location: 'header',
-            name: 'Cache-Control'
-          },
-          ContentDisposition: {
-            location: 'header',
-            name: 'Content-Disposition'
-          },
-          ContentEncoding: {
-            location: 'header',
-            name: 'Content-Encoding'
-          },
-          ContentLanguage: {
-            location: 'header',
-            name: 'Content-Language'
-          },
-          ContentType: {
-            location: 'header',
-            name: 'Content-Type'
-          },
-          Expires: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'Expires'
-          },
-          WebsiteRedirectLocation: {
-            location: 'header',
-            name: 'x-amz-website-redirect-location'
-          },
-          ServerSideEncryption: {
-            location: 'header',
-            name: 'x-amz-server-side-encryption'
-          },
-          Metadata: {
-            type: 'map',
-            location: 'header',
-            name: 'x-amz-meta-',
-            keys: {
-            },
-            members: {
-            }
-          }
-        }
-      }
-    },
-    listBuckets: {
-      name: 'ListBuckets',
-      alias: 'GetService',
-      http: {
-        method: 'GET',
-        uri: '/'
-      },
-      input: {
-        type: 'structure',
-        members: {
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Buckets: {
-            type: 'list',
-            members: {
-              type: 'structure',
-              name: 'Bucket',
-              members: {
-                Name: {
-                },
-                CreationDate: {
-                  type: 'timestamp'
-                }
-              }
-            }
-          },
-          Owner: {
-            type: 'structure',
-            members: {
-              ID: {
-              },
-              DisplayName: {
-              }
-            }
-          }
-        }
-      }
-    },
-    listMultipartUploads: {
-      name: 'ListMultipartUploads',
-      http: {
-        method: 'GET',
-        uri: '/{Bucket}?uploads&prefix={Prefix}&delimiter={Delimiter}&max-uploads={MaxUploads}&key-marker={KeyMarker}&upload-id-marker={UploadIdMarker}'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          Delimiter: {
-            location: 'uri'
-          },
-          KeyMarker: {
-            location: 'uri'
-          },
-          MaxUploads: {
-            type: 'integer',
-            location: 'uri'
-          },
-          Prefix: {
-            location: 'uri'
-          },
-          UploadIdMarker: {
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Bucket: {
-          },
-          KeyMarker: {
-          },
-          UploadIdMarker: {
-          },
-          NextKeyMarker: {
-          },
-          NextUploadIdMarker: {
-          },
-          MaxUploads: {
-            type: 'integer'
-          },
-          IsTruncated: {
-            type: 'boolean'
-          },
-          Upload: {
-            type: 'list',
-            flattened: true,
-            name: 'Uploads',
-            members: {
-              type: 'structure',
-              members: {
-                UploadId: {
-                },
-                Key: {
-                },
-                Initiated: {
-                  type: 'timestamp'
-                },
-                StorageClass: {
-                },
-                Owner: {
-                  type: 'structure',
-                  members: {
-                    ID: {
-                    },
-                    DisplayName: {
-                    }
-                  }
-                },
-                Initiator: {
-                  type: 'structure',
-                  members: {
-                    ID: {
-                    },
-                    DisplayName: {
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    listObjectVersions: {
-      name: 'ListObjectVersions',
-      alias: 'GetBucketObjectVersions',
-      http: {
-        method: 'GET',
-        uri: '/{Bucket}?versions&delimiter={Delimiter}&key-marker={KeyMarker}&max-keys={MaxKeys}&prefix={Prefix}&version-id-marker={VersionIdMarker}'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          Delimiter: {
-            location: 'uri'
-          },
-          KeyMarker: {
-            location: 'uri'
-          },
-          MaxKeys: {
-            type: 'integer',
-            location: 'uri'
-          },
-          Prefix: {
-            location: 'uri'
-          },
-          VersionIdMarker: {
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          IsTruncated: {
-            type: 'boolean'
-          },
-          KeyMarker: {
-          },
-          VersionIdMarker: {
-          },
-          NextKeyMarker: {
-          },
-          NextVersionIdMarker: {
-          },
-          Version: {
-            type: 'list',
-            flattened: true,
-            name: 'Versions',
-            members: {
-              type: 'structure',
-              members: {
-                ETag: {
-                },
-                Size: {
-                },
-                StorageClass: {
-                },
-                Key: {
-                },
-                VersionId: {
-                },
-                IsLatest: {
-                  type: 'boolean'
-                },
-                LastModified: {
-                  type: 'timestamp'
-                },
-                Owner: {
-                  type: 'structure',
-                  members: {
-                    ID: {
-                    },
-                    DisplayName: {
-                    }
-                  }
-                }
-              }
-            }
-          },
-          DeleteMarker: {
-            type: 'list',
-            flattened: true,
-            name: 'DeleteMarkers',
-            members: {
-              type: 'structure',
-              members: {
-                Owner: {
-                  type: 'structure',
-                  members: {
-                    ID: {
-                    },
-                    DisplayName: {
-                    }
-                  }
-                },
-                Key: {
-                },
-                VersionId: {
-                },
-                IsLatest: {
-                  type: 'boolean'
-                },
-                LastModified: {
-                  type: 'timestamp'
-                }
-              }
-            }
-          },
-          Name: {
-          },
-          Prefix: {
-          },
-          MaxKeys: {
-            type: 'integer'
-          },
-          CommonPrefixes: {
-            type: 'list',
-            flattened: true,
-            members: {
-              type: 'structure',
-              members: {
-                Prefix: {
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    listObjects: {
-      name: 'ListObjects',
-      alias: 'GetBucket',
-      http: {
-        method: 'GET',
-        uri: '/{Bucket}?delimiter={Delimiter}&marker={Marker}&max-keys={MaxKeys}&prefix={Prefix}'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          Delimiter: {
-            location: 'uri'
-          },
-          Marker: {
-            location: 'uri'
-          },
-          MaxKeys: {
-            type: 'integer',
-            location: 'uri'
-          },
-          Prefix: {
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          IsTruncated: {
-            type: 'boolean'
-          },
-          Marker: {
-          },
-          Contents: {
-            type: 'list',
-            flattened: true,
-            members: {
-              type: 'structure',
-              members: {
-                Key: {
-                },
-                LastModified: {
-                  type: 'timestamp'
-                },
-                ETag: {
-                },
-                Size: {
-                  type: 'integer'
-                },
-                StorageClass: {
-                },
-                Owner: {
-                  type: 'structure',
-                  members: {
-                    ID: {
-                    },
-                    DisplayName: {
-                    }
-                  }
-                }
-              }
-            }
-          },
-          Name: {
-          },
-          Prefix: {
-          },
-          MaxKeys: {
-            type: 'integer'
-          },
-          CommonPrefixes: {
-            type: 'list',
-            flattened: true,
-            members: {
-              type: 'structure',
-              members: {
-                Prefix: {
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    listParts: {
-      name: 'ListParts',
-      http: {
-        method: 'GET',
-        uri: '/{Bucket}/{Key}?uploadId={UploadId}&max-parts={MaxParts}&part-number-marker={PartNumberMarker}'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          Key: {
-            required: true,
-            location: 'uri'
-          },
-          MaxParts: {
-            type: 'integer',
-            location: 'uri'
-          },
-          PartNumberMarker: {
-            location: 'uri'
-          },
-          UploadId: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Bucket: {
-          },
-          Key: {
-          },
-          UploadId: {
-          },
-          PartNumberMarker: {
-            type: 'integer'
-          },
-          NextPartNumberMarker: {
-            type: 'integer'
-          },
-          MaxParts: {
-            type: 'integer'
-          },
-          IsTruncated: {
-            type: 'boolean'
-          },
-          Part: {
-            type: 'list',
-            flattened: true,
-            name: 'Parts',
-            members: {
-              type: 'structure',
-              members: {
-                PartNumber: {
-                  type: 'integer'
-                },
-                LastModified: {
-                  type: 'timestamp'
-                },
-                ETag: {
-                },
-                Size: {
-                  type: 'integer'
-                }
-              }
-            }
-          },
-          Initiator: {
-            type: 'structure',
-            members: {
-              ID: {
-              },
-              DisplayName: {
-              }
-            }
-          },
-          Owner: {
-            type: 'structure',
-            members: {
-              ID: {
-              },
-              DisplayName: {
-              }
-            }
-          },
-          StorageClass: {
-          }
-        }
-      }
-    },
-    putBucketAcl: {
-      name: 'PutBucketAcl',
-      http: {
-        method: 'PUT',
-        uri: '/{Bucket}?acl'
-      },
-      input: {
-        payload: 'AccessControlPolicy',
-        type: 'structure',
-        members: {
-          ACL: {
-            location: 'header',
-            name: 'x-amz-acl'
-          },
-          AccessControlPolicy: {
-            type: 'structure',
-            members: {
-              Grants: {
-                type: 'list',
-                name: 'AccessControlList',
-                members: {
-                  type: 'structure',
-                  name: 'Grant',
-                  members: {
-                    Grantee: {
-                      type: 'structure',
-                      xmlns: {
-                        prefix: 'xsi',
-                        uri: 'http://www.w3.org/2001/XMLSchema-instance'
-                      },
-                      members: {
-                        DisplayName: {
-                        },
-                        EmailAddress: {
-                        },
-                        ID: {
-                        },
-                        Type: {
-                          required: true,
-                          attribute: true,
-                          name: 'xsi:type'
-                        },
-                        URI: {
-                        }
-                      }
-                    },
-                    Permission: {
-                    }
-                  }
-                }
-              },
-              Owner: {
-                type: 'structure',
-                members: {
-                  DisplayName: {
-                  },
-                  ID: {
-                  }
-                }
-              }
-            }
-          },
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          ContentMD5: {
-            location: 'header',
-            name: 'Content-MD5'
-          },
-          GrantFullControl: {
-            location: 'header',
-            name: 'x-amz-grant-full-control'
-          },
-          GrantRead: {
-            location: 'header',
-            name: 'x-amz-grant-read'
-          },
-          GrantReadACP: {
-            location: 'header',
-            name: 'x-amz-grant-read-acp'
-          },
-          GrantWrite: {
-            location: 'header',
-            name: 'x-amz-grant-write'
-          },
-          GrantWriteACP: {
-            location: 'header',
-            name: 'x-amz-grant-write-acp'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    putBucketCors: {
-      name: 'PutBucketCors',
-      http: {
-        method: 'PUT',
-        uri: '/{Bucket}?cors'
-      },
-      input: {
-        payload: 'CORSConfiguration',
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          CORSConfiguration: {
-            type: 'structure',
-            members: {
-              CORSRules: {
-                type: 'list',
-                flattened: true,
-                name: 'CORSRule',
-                members: {
-                  type: 'structure',
-                  members: {
-                    AllowedHeaders: {
-                      type: 'list',
-                      flattened: true,
-                      name: 'AllowedHeader',
-                      members: {
-                      }
-                    },
-                    AllowedMethods: {
-                      type: 'list',
-                      flattened: true,
-                      name: 'AllowedMethod',
-                      members: {
-                      }
-                    },
-                    AllowedOrigins: {
-                      type: 'list',
-                      flattened: true,
-                      name: 'AllowedOrigin',
-                      members: {
-                      }
-                    },
-                    ExposeHeaders: {
-                      type: 'list',
-                      flattened: true,
-                      name: 'ExposeHeader',
-                      members: {
-                      }
-                    },
-                    MaxAgeSeconds: {
-                      type: 'integer'
-                    }
-                  }
-                }
-              }
-            }
-          },
-          ContentMD5: {
-            location: 'header',
-            name: 'Content-MD5'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    putBucketLifecycle: {
-      name: 'PutBucketLifecycle',
-      http: {
-        method: 'PUT',
-        uri: '/{Bucket}?lifecycle'
-      },
-      input: {
-        payload: 'LifecycleConfiguration',
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          ContentMD5: {
-            location: 'header',
-            name: 'Content-MD5'
-          },
-          LifecycleConfiguration: {
-            type: 'structure',
-            members: {
-              Rules: {
-                type: 'list',
-                flattened: true,
-                name: 'Rule',
-                required: true,
-                members: {
-                  type: 'structure',
-                  members: {
-                    Expiration: {
-                      type: 'structure',
-                      members: {
-                        Date: {
-                          type: 'timestamp',
-                          format: 'iso8601'
-                        },
-                        Days: {
-                          type: 'integer'
-                        }
-                      }
-                    },
-                    ID: {
-                    },
-                    Prefix: {
-                      required: true
-                    },
-                    Status: {
-                      required: true
-                    },
-                    Transition: {
-                      type: 'structure',
-                      members: {
-                        Date: {
-                          type: 'timestamp',
-                          format: 'iso8601'
-                        },
-                        Days: {
-                          type: 'integer'
-                        },
-                        StorageClass: {
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    putBucketLogging: {
-      name: 'PutBucketLogging',
-      http: {
-        method: 'PUT',
-        uri: '/{Bucket}?logging'
-      },
-      input: {
-        payload: 'BucketLoggingStatus',
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          BucketLoggingStatus: {
-            type: 'structure',
-            required: true,
-            members: {
-              LoggingEnabled: {
-                type: 'structure',
-                required: true,
-                members: {
-                  TargetBucket: {
-                  },
-                  TargetGrants: {
-                    type: 'list',
-                    members: {
-                      type: 'structure',
-                      name: 'Grant',
-                      members: {
-                        Grantee: {
-                          type: 'structure',
-                          xmlns: {
-                            prefix: 'xsi',
-                            uri: 'http://www.w3.org/2001/XMLSchema-instance'
-                          },
-                          members: {
-                            DisplayName: {
-                            },
-                            EmailAddress: {
-                            },
-                            ID: {
-                            },
-                            Type: {
-                              required: true,
-                              attribute: true,
-                              name: 'xsi:type'
-                            },
-                            URI: {
-                            }
-                          }
-                        },
-                        Permission: {
-                        }
-                      }
-                    }
-                  },
-                  TargetPrefix: {
-                  }
-                }
-              }
-            }
-          },
-          ContentMD5: {
-            location: 'header',
-            name: 'Content-MD5'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    putBucketNotification: {
-      name: 'PutBucketNotification',
-      http: {
-        method: 'PUT',
-        uri: '/{Bucket}?notification'
-      },
-      input: {
-        payload: 'NotificationConfiguration',
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          ContentMD5: {
-            location: 'header',
-            name: 'Content-MD5'
-          },
-          NotificationConfiguration: {
-            type: 'structure',
-            required: true,
-            members: {
-              TopicConfiguration: {
-                type: 'structure',
-                required: true,
-                members: {
-                  Event: {
-                  },
-                  Topic: {
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    putBucketPolicy: {
-      name: 'PutBucketPolicy',
-      http: {
-        method: 'PUT',
-        uri: '/{Bucket}?policy'
-      },
-      input: {
-        payload: 'Policy',
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          ContentMD5: {
-            location: 'header',
-            name: 'Content-MD5'
-          },
-          Policy: {
-            required: true
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    putBucketRequestPayment: {
-      name: 'PutBucketRequestPayment',
-      http: {
-        method: 'PUT',
-        uri: '/{Bucket}?requestPayment'
-      },
-      input: {
-        payload: 'RequestPaymentConfiguration',
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          ContentMD5: {
-            location: 'header',
-            name: 'Content-MD5'
-          },
-          RequestPaymentConfiguration: {
-            type: 'structure',
-            required: true,
-            members: {
-              Payer: {
-                required: true
-              }
-            }
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    putBucketTagging: {
-      name: 'PutBucketTagging',
-      http: {
-        method: 'PUT',
-        uri: '/{Bucket}?tagging'
-      },
-      input: {
-        payload: 'Tagging',
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          ContentMD5: {
-            location: 'header',
-            name: 'Content-MD5'
-          },
-          Tagging: {
-            type: 'structure',
-            required: true,
-            members: {
-              TagSet: {
-                type: 'list',
-                required: true,
-                members: {
-                  type: 'structure',
-                  name: 'Tag',
-                  required: true,
-                  members: {
-                    Key: {
-                      required: true
-                    },
-                    Value: {
-                      required: true
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    putBucketVersioning: {
-      name: 'PutBucketVersioning',
-      http: {
-        method: 'PUT',
-        uri: '/{Bucket}?versioning'
-      },
-      input: {
-        payload: 'VersioningConfiguration',
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          ContentMD5: {
-            location: 'header',
-            name: 'Content-MD5'
-          },
-          MFA: {
-            location: 'header',
-            name: 'x-amz-mfa'
-          },
-          VersioningConfiguration: {
-            type: 'structure',
-            required: true,
-            members: {
-              MFADelete: {
-              },
-              Status: {
-              }
-            }
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    putBucketWebsite: {
-      name: 'PutBucketWebsite',
-      http: {
-        method: 'PUT',
-        uri: '/{Bucket}?website'
-      },
-      input: {
-        payload: 'WebsiteConfiguration',
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          ContentMD5: {
-            location: 'header',
-            name: 'Content-MD5'
-          },
-          WebsiteConfiguration: {
-            type: 'structure',
-            required: true,
-            members: {
-              ErrorDocument: {
-                type: 'structure',
-                members: {
-                  Key: {
-                    required: true
-                  }
-                }
-              },
-              IndexDocument: {
-                type: 'structure',
-                members: {
-                  Suffix: {
-                    required: true
-                  }
-                }
-              },
-              RedirectAllRequestsTo: {
-                type: 'structure',
-                members: {
-                  HostName: {
-                    required: true
-                  },
-                  Protocol: {
-                  }
-                }
-              },
-              RoutingRules: {
-                type: 'list',
-                members: {
-                  type: 'structure',
-                  name: 'RoutingRule',
-                  members: {
-                    Condition: {
-                      type: 'structure',
-                      members: {
-                        HttpErrorCodeReturnedEquals: {
-                        },
-                        KeyPrefixEquals: {
-                        }
-                      }
-                    },
-                    Redirect: {
-                      type: 'structure',
-                      required: true,
-                      members: {
-                        HostName: {
-                        },
-                        HttpRedirectCode: {
-                        },
-                        Protocol: {
-                        },
-                        ReplaceKeyPrefixWith: {
-                        },
-                        ReplaceKeyWith: {
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    putObject: {
-      name: 'PutObject',
-      http: {
-        method: 'PUT',
-        uri: '/{Bucket}/{Key}'
-      },
-      input: {
-        payload: 'Body',
-        type: 'structure',
-        members: {
-          ACL: {
-            location: 'header',
-            name: 'x-amz-acl'
-          },
-          Body: {
-            type: 'binary',
-            streaming: true
-          },
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          CacheControl: {
-            location: 'header',
-            name: 'Cache-Control'
-          },
-          ContentDisposition: {
-            location: 'header',
-            name: 'Content-Disposition'
-          },
-          ContentEncoding: {
-            location: 'header',
-            name: 'Content-Encoding'
-          },
-          ContentLanguage: {
-            location: 'header',
-            name: 'Content-Language'
-          },
-          ContentLength: {
-            type: 'integer',
-            location: 'header',
-            name: 'Content-Length'
-          },
-          ContentMD5: {
-            location: 'header',
-            name: 'Content-MD5'
-          },
-          ContentType: {
-            location: 'header',
-            name: 'Content-Type'
-          },
-          Expires: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'Expires'
-          },
-          GrantFullControl: {
-            location: 'header',
-            name: 'x-amz-grant-full-control'
-          },
-          GrantRead: {
-            location: 'header',
-            name: 'x-amz-grant-read'
-          },
-          GrantReadACP: {
-            location: 'header',
-            name: 'x-amz-grant-read-acp'
-          },
-          GrantWriteACP: {
-            location: 'header',
-            name: 'x-amz-grant-write-acp'
-          },
-          Key: {
-            required: true,
-            location: 'uri'
-          },
-          Metadata: {
-            type: 'map',
-            location: 'header',
-            name: 'x-amz-meta-',
-            keys: {
-            },
-            members: {
-            }
-          },
-          ServerSideEncryption: {
-            location: 'header',
-            name: 'x-amz-server-side-encryption'
-          },
-          StorageClass: {
-            location: 'header',
-            name: 'x-amz-storage-class'
-          },
-          WebsiteRedirectLocation: {
-            location: 'header',
-            name: 'x-amz-website-redirect-location'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Expiration: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'x-amz-expiration'
-          },
-          ETag: {
-            location: 'header',
-            name: 'ETag'
-          },
-          ServerSideEncryption: {
-            location: 'header',
-            name: 'x-amz-server-side-encryption'
-          },
-          VersionId: {
-            location: 'header',
-            name: 'x-amz-version-id'
-          }
-        }
-      }
-    },
-    putObjectAcl: {
-      name: 'PutObjectAcl',
-      http: {
-        method: 'PUT',
-        uri: '/{Bucket}/{Key}?acl'
-      },
-      input: {
-        payload: 'AccessControlPolicy',
-        type: 'structure',
-        members: {
-          ACL: {
-            location: 'header',
-            name: 'x-amz-acl'
-          },
-          AccessControlPolicy: {
-            type: 'structure',
-            members: {
-              Grants: {
-                type: 'list',
-                name: 'AccessControlList',
-                members: {
-                  type: 'structure',
-                  name: 'Grant',
-                  members: {
-                    Grantee: {
-                      type: 'structure',
-                      xmlns: {
-                        prefix: 'xsi',
-                        uri: 'http://www.w3.org/2001/XMLSchema-instance'
-                      },
-                      members: {
-                        DisplayName: {
-                        },
-                        EmailAddress: {
-                        },
-                        ID: {
-                        },
-                        Type: {
-                          required: true,
-                          attribute: true,
-                          name: 'xsi:type'
-                        },
-                        URI: {
-                        }
-                      }
-                    },
-                    Permission: {
-                    }
-                  }
-                }
-              },
-              Owner: {
-                type: 'structure',
-                members: {
-                  DisplayName: {
-                  },
-                  ID: {
-                  }
-                }
-              }
-            }
-          },
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          ContentMD5: {
-            location: 'header',
-            name: 'Content-MD5'
-          },
-          GrantFullControl: {
-            location: 'header',
-            name: 'x-amz-grant-full-control'
-          },
-          GrantRead: {
-            location: 'header',
-            name: 'x-amz-grant-read'
-          },
-          GrantReadACP: {
-            location: 'header',
-            name: 'x-amz-grant-read-acp'
-          },
-          GrantWrite: {
-            location: 'header',
-            name: 'x-amz-grant-write'
-          },
-          GrantWriteACP: {
-            location: 'header',
-            name: 'x-amz-grant-write-acp'
-          },
-          Key: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    restoreObject: {
-      name: 'RestoreObject',
-      alias: 'PostObjectRestore',
-      http: {
-        method: 'POST',
-        uri: '/{Bucket}/{Key}?restore'
-      },
-      input: {
-        payload: 'RestoreRequest',
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          Key: {
-            required: true,
-            location: 'uri'
-          },
-          RestoreRequest: {
-            type: 'structure',
-            members: {
-              Days: {
-                type: 'integer',
-                required: true
-              }
-            }
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-        }
-      }
-    },
-    uploadPart: {
-      name: 'UploadPart',
-      http: {
-        method: 'PUT',
-        uri: '/{Bucket}/{Key}?partNumber={PartNumber}&uploadId={UploadId}'
-      },
-      input: {
-        payload: 'Body',
-        type: 'structure',
-        members: {
-          Body: {
-            type: 'binary',
-            streaming: true
-          },
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          ContentLength: {
-            type: 'integer',
-            location: 'header',
-            name: 'Content-Length'
-          },
-          Key: {
-            required: true,
-            location: 'uri'
-          },
-          PartNumber: {
-            required: true,
-            location: 'uri'
-          },
-          UploadId: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          ServerSideEncryption: {
-            location: 'header',
-            name: 'x-amz-server-side-encryption'
-          },
-          ETag: {
-            location: 'header',
-            name: 'ETag'
-          }
-        }
-      }
-    },
-    uploadPartCopy: {
-      name: 'UploadPartCopy',
-      http: {
-        method: 'PUT',
-        uri: '/{Bucket}/{Key}?partNumber={PartNumber}&uploadId={UploadId}'
-      },
-      input: {
-        type: 'structure',
-        members: {
-          Bucket: {
-            required: true,
-            location: 'uri'
-          },
-          CopySource: {
-            location: 'header',
-            name: 'x-amz-copy-source',
-            required: true
-          },
-          CopySourceIfMatch: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'x-amz-copy-source-if-match'
-          },
-          CopySourceIfModifiedSince: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'x-amz-copy-source-if-modified-since'
-          },
-          CopySourceIfNoneMatch: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'x-amz-copy-source-if-none-match'
-          },
-          CopySourceIfUnmodifiedSince: {
-            type: 'timestamp',
-            location: 'header',
-            name: 'x-amz-copy-source-if-unmodified-since'
-          },
-          CopySourceRange: {
-            location: 'header',
-            name: 'x-amz-copy-source-range'
-          },
-          Key: {
-            required: true,
-            location: 'uri'
-          },
-          PartNumber: {
-            required: true,
-            location: 'uri'
-          },
-          UploadId: {
-            required: true,
-            location: 'uri'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          CopySourceVersionId: {
-            location: 'header',
-            name: 'x-amz-copy-source-version-id'
-          },
-          ServerSideEncryption: {
-            location: 'header',
-            name: 'x-amz-server-side-encryption'
-          },
-          ETag: {
-          },
-          LastModified: {
-            type: 'timestamp'
-          }
-        }
-      }
-    }
-  },
-  pagination: {
-    listMultipartUploads: {
-      limitKey: 'MaxUploads',
-      moreResults: 'IsTruncated',
-      outputToken: [
-        'NextKeyMarker',
-        'NextUploadIdMarker'
-      ],
-      inputToken: [
-        'KeyMarker',
-        'UploadIdMarker'
-      ],
-      resultKey: 'Uploads'
-    },
-    listObjectVersions: {
-      moreResults: 'IsTruncated',
-      limitKey: 'MaxKeys',
-      outputToken: [
-        'NextKeyMarker',
-        'NextVersionIdMarker'
-      ],
-      inputToken: [
-        'KeyMarker',
-        'VersionIdMarker'
-      ],
-      resultKey: 'Versions'
-    },
-    listObjects: {
-      moreResults: 'IsTruncated',
-      limitKey: 'MaxKeys',
-      outputToken: 'NextMarker or Contents[-1].Key',
-      inputToken: 'Marker',
-      resultKey: [
-        'Contents',
-        'CommonPrefixes'
-      ]
-    },
-    listParts: {
-      limitKey: 'IsTruncated',
-      outputTokens: 'NextPartNumberMarker',
-      inputToken: 'PartNumberMarker',
-      resultKey: 'Parts'
-    }
-  }
-};
-
-},{}],42:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-module.exports = {
-  format: 'query',
-  apiVersion: '2011-06-15',
-  endpointPrefix: 'sts',
-  globalEndpoint: 'sts.amazonaws.com',
-  resultWrapped: true,
-  serviceAbbreviation: 'AWS STS',
-  serviceFullName: 'AWS Security Token Service',
-  signatureVersion: 'v4',
-  timestampFormat: 'iso8601',
-  operations: {
-    assumeRole: {
-      name: 'AssumeRole',
-      input: {
-        type: 'structure',
-        members: {
-          RoleArn: {
-            required: true
-          },
-          RoleSessionName: {
-            required: true
-          },
-          Policy: {
-          },
-          DurationSeconds: {
-            type: 'integer'
-          },
-          ExternalId: {
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Credentials: {
-            type: 'structure',
-            members: {
-              AccessKeyId: {
-              },
-              SecretAccessKey: {
-              },
-              SessionToken: {
-              },
-              Expiration: {
-                type: 'timestamp'
-              }
-            }
-          },
-          AssumedRoleUser: {
-            type: 'structure',
-            members: {
-              AssumedRoleId: {
-              },
-              Arn: {
-              }
-            }
-          },
-          PackedPolicySize: {
-            type: 'integer'
-          }
-        }
-      }
-    },
-    assumeRoleWithWebIdentity: {
-      name: 'AssumeRoleWithWebIdentity',
-      input: {
-        type: 'structure',
-        members: {
-          RoleArn: {
-            required: true
-          },
-          RoleSessionName: {
-            required: true
-          },
-          WebIdentityToken: {
-            required: true
-          },
-          ProviderId: {
-          },
-          Policy: {
-          },
-          DurationSeconds: {
-            type: 'integer'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Credentials: {
-            type: 'structure',
-            members: {
-              AccessKeyId: {
-              },
-              SecretAccessKey: {
-              },
-              SessionToken: {
-              },
-              Expiration: {
-                type: 'timestamp'
-              }
-            }
-          },
-          SubjectFromWebIdentityToken: {
-          },
-          AssumedRoleUser: {
-            type: 'structure',
-            members: {
-              AssumedRoleId: {
-              },
-              Arn: {
-              }
-            }
-          },
-          PackedPolicySize: {
-            type: 'integer'
-          }
-        }
-      }
-    },
-    decodeAuthorizationMessage: {
-      name: 'DecodeAuthorizationMessage',
-      input: {
-        type: 'structure',
-        members: {
-          EncodedMessage: {
-            required: true
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          DecodedMessage: {
-          }
-        }
-      }
-    },
-    getFederationToken: {
-      name: 'GetFederationToken',
-      input: {
-        type: 'structure',
-        members: {
-          Name: {
-            required: true
-          },
-          Policy: {
-          },
-          DurationSeconds: {
-            type: 'integer'
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Credentials: {
-            type: 'structure',
-            members: {
-              AccessKeyId: {
-              },
-              SecretAccessKey: {
-              },
-              SessionToken: {
-              },
-              Expiration: {
-                type: 'timestamp'
-              }
-            }
-          },
-          FederatedUser: {
-            type: 'structure',
-            members: {
-              FederatedUserId: {
-              },
-              Arn: {
-              }
-            }
-          },
-          PackedPolicySize: {
-            type: 'integer'
-          }
-        }
-      }
-    },
-    getSessionToken: {
-      name: 'GetSessionToken',
-      input: {
-        type: 'structure',
-        members: {
-          DurationSeconds: {
-            type: 'integer'
-          },
-          SerialNumber: {
-          },
-          TokenCode: {
-          }
-        }
-      },
-      output: {
-        type: 'structure',
-        members: {
-          Credentials: {
-            type: 'structure',
-            members: {
-              AccessKeyId: {
-              },
-              SecretAccessKey: {
-              },
-              SessionToken: {
-              },
-              Expiration: {
-                type: 'timestamp'
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-};
-
-},{}],43:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('../core');
-
-AWS.DynamoDB = AWS.Service.defineService('dynamodb', ['2012-08-10', '2011-12-05'], {
-  setupRequestListeners: function setupRequestListeners(request) {
-    if (request.service.config.dynamoDbCrc32) {
-      request.addListener('extractData', this.checkCrc32);
-    }
-  },
-
-  /**
-   * @api private
-   */
-  checkCrc32: function checkCrc32(resp) {
-    if (!resp.request.service.crc32IsValid(resp)) {
-      resp.error = AWS.util.error(new Error(), {
-        code: 'CRC32CheckFailed',
-        message: 'CRC32 integrity check failed',
-        retryable: true
-      });
-    }
-  },
-
-  /**
-   * @api private
-   */
-  crc32IsValid: function crc32IsValid(resp) {
-    var crc = resp.httpResponse.headers['x-amz-crc32'];
-    if (!crc) return true; // no (valid) CRC32 header
-    return parseInt(crc, 10) == AWS.util.crypto.crc32(resp.httpResponse.body);
-  },
-
-  /**
-   * @api private
-   */
-  defaultRetryCount: 10,
-
-  /**
-   * @api private
-   */
-  retryDelays: function retryDelays() {
-    var retryCount = this.numRetries();
-    var delays = [];
-    for (var i = 0; i < retryCount; ++i) {
-      if (i === 0) {
-        delays.push(0);
-      } else {
-        delays.push(50 * Math.pow(2, i - 1));
-      }
-    }
-    return delays;
-  }
-});
-
-module.exports = AWS.DynamoDB;
-
-},{"../core":26}],44:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('../core');
-var Stream = require('stream').Stream;
-
-AWS.S3 = AWS.Service.defineService('s3', ['2006-03-01'], {
-  /**
-   * @api private
-   */
-  initialize: function initialize(options) {
-    AWS.Service.prototype.initialize.call(this, options);
-    this.setEndpoint((options || {}).endpoint, options);
-  },
-
-  setupRequestListeners: function setupRequestListeners(request) {
-    request.addListener('build', this.populateURI);
-    request.addListener('build', this.computeContentMd5);
-    request.removeListener('validate',
-      AWS.EventListeners.Core.VALIDATE_REGION);
-    request.addListener('extractError', this.extractError);
-    request.addListener('extractData', this.extractData);
-  },
-
-  /**
-   * S3 prefers dns-compatible bucket names to be moved from the uri path
-   * to the hostname as a sub-domain.  This is not possible, even for dns-compat
-   * buckets when using SSL and the bucket name contains a dot ('.').  The
-   * ssl wildcard certificate is only 1-level deep.
-   *
-   * @api private
-   */
-  populateURI: function populateURI(req) {
-    var httpRequest = req.httpRequest;
-    var b = req.params.Bucket;
-
-    if (b) {
-      if (!req.service.pathStyleBucketName(b)) {
-        httpRequest.endpoint.host = httpRequest.endpoint.hostname = b + '.' +
-          httpRequest.endpoint.hostname;
-
-        httpRequest.virtualHostedBucket = b; // needed for signing the request
-        httpRequest.path = httpRequest.path.replace(new RegExp('^/' + b), '');
-        if (httpRequest.path[0] !== '/') {
-          httpRequest.path = '/' + httpRequest.path;
-        }
-      }
-    }
-  },
-
-  /**
-   * @api private
-   */
-  computableChecksumOperations: {
-    putBucketCors: true,
-    putBucketLifecycle: true,
-    putBucketTagging: true,
-    deleteObjects: true
-  },
-
-  /**
-   * Checks whether checksums should be computed for the request.
-   * If the request requires checksums to be computed, this will always
-   * return true, otherwise it depends on whether {AWS.Config.computeChecksums}
-   * is set.
-   *
-   * @param req [AWS.Request] the request to check against
-   * @return [Boolean] whether to compute checksums for a request.
-   * @api private
-   */
-  willComputeChecksums: function willComputeChecksums(req) {
-    if (this.computableChecksumOperations[req.operation]) return true;
-    if (!this.config.computeChecksums) return false;
-
-    // TODO: compute checksums for Stream objects
-    if (req.httpRequest.body instanceof Stream) return false;
-
-    var rules = req.service.api.operations[req.operation].input.members;
-    if (rules.ContentMD5 && !req.params.ContentMD5) return true;
-  },
-
-  /**
-   * A listener that computes the Content-MD5 and sets it in the header.
-   * @see AWS.S3.willComputeChecksums
-   * @api private
-   */
-  computeContentMd5: function computeContentMd5(req) {
-    if (req.service.willComputeChecksums(req)) {
-      var md5 = AWS.util.crypto.md5(req.httpRequest.body, 'base64');
-      req.httpRequest.headers['Content-MD5'] = md5;
-    }
-  },
-
-  /**
-   * Returns true if the bucket name should be left in the URI path for
-   * a request to S3.  This function takes into account the current
-   * endpoint protocol (e.g. http or https).
-   *
-   * @api private
-   */
-  pathStyleBucketName: function pathStyleBucketName(bucketName) {
-    // user can force path style requests via the configuration
-    if (this.config.s3ForcePathStyle) return true;
-
-    if (this.dnsCompatibleBucketName(bucketName)) {
-      return (this.config.sslEnabled && bucketName.match(/\./)) ? true : false;
-    } else {
-      return true; // not dns compatible names must always use path style
-    }
-  },
-
-  /**
-   * Returns true if the bucket name is DNS compatible.  Buckets created
-   * outside of the classic region MUST be DNS compatible.
-   *
-   * @api private
-   */
-  dnsCompatibleBucketName: function dnsCompatibleBucketName(bucketName) {
-    var b = bucketName;
-    var domain = new RegExp(/^[a-z0-9][a-z0-9\.\-]{1,61}[a-z0-9]$/);
-    var ipAddress = new RegExp(/(\d+\.){3}\d+/);
-    var dots = new RegExp(/\.\./);
-    return (b.match(domain) && !b.match(ipAddress) && !b.match(dots)) ? true : false;
-  },
-
-  /**
-   * S3 requires that path params not escape forward slashes.
-   *
-   * @api private
-   */
-  escapePathParam: function escapePathParam(value) {
-    return AWS.util.uriEscapePath(String(value));
-  },
-
-  /**
-   * @return [Boolean] whether response contains an error
-   * @api private
-   */
-  successfulResponse: function successfulResponse(resp) {
-    var req = resp.request;
-    var httpResponse = resp.httpResponse;
-    if (req.operation === 'completeMultipartUpload' &&
-        httpResponse.body.toString().match('<Error>'))
-      return false;
-    else
-      return httpResponse.statusCode < 300;
-  },
-
-  /**
-   * @return [Boolean] whether the error can be retried
-   * @api private
-   */
-  retryableError: function retryableError(error, request) {
-    if (request.operation == 'completeMultipartUpload' &&
-        error.statusCode === 200) {
-      return true;
-    } else {
-      var _super = AWS.Service.prototype.retryableError;
-      return _super.call(this, error, request);
-    }
-  },
-
-  /**
-   * Provides a specialized parser for getBucketLocation -- all other
-   * operations are parsed by the super class.
-   *
-   * @api private
-   */
-  extractData: function extractData(resp) {
-    var req = resp.request;
-    if (req.operation === 'getBucketLocation') {
-      /*jshint regexp:false*/
-      var match = resp.httpResponse.body.toString().match(/>(.+)<\/Location/);
-      if (match) {
-        delete resp.data['_'];
-        resp.data.LocationConstraint = match[1];
-      }
-    }
-  },
-
-  /**
-   * Extracts an error object from the http response.
-   *
-   * @api private
-   */
-  extractError: function extractError(resp) {
-    var codes = {
-      304: 'NotModified',
-      403: 'Forbidden',
-      400: 'BadRequest',
-      404: 'NotFound'
-    };
-
-    var code = resp.httpResponse.statusCode;
-    var body = resp.httpResponse.body;
-    if (codes[code] && body.length === 0) {
-      resp.error = AWS.util.error(new Error(), {
-        code: codes[resp.httpResponse.statusCode],
-        message: null
-      });
-    } else {
-      var data = new AWS.XML.Parser({}).parse(body.toString());
-      resp.error = AWS.util.error(new Error(), {
-        code: data.Code || code,
-        message: data.Message || null
-      });
-    }
-  },
-
-  /**
-   * @api private
-   */
-  setEndpoint: function setEndpoint(endpoint) {
-    if (endpoint) {
-      this.endpoint = new AWS.Endpoint(endpoint, this.config);
-    } else if (this.config.region && this.config.region !== 'us-east-1') {
-      var hostname = 's3-' + this.config.region + '.amazonaws.com';
-      this.endpoint = new AWS.Endpoint(hostname);
-    } else {
-      this.endpoint = new AWS.Endpoint(this.api.globalEndpoint, this.config);
-    }
-  },
-
-  /**
-   * Get a pre-signed URL for a given operation name.
-   *
-   * @note You must ensure that you have static or previously resolved
-   *   credentials if you call this method synchronously (with no callback),
-   *   otherwise it may not properly sign the request. If you cannot guarantee
-   *   this (you are using an asynchronous credential provider, i.e., EC2
-   *   IAM roles), you should always call this method with an asynchronous
-   *   callback.
-   * @param operation [String] the name of the operation to call
-   * @param params [map] parameters to pass to the operation. See the given
-   *   operation for the expected operation parameters. In addition, you can
-   *   also pass the "Expires" parameter to inform S3 how long the URL should
-   *   work for.
-   * @option params Expires [Integer] (900) the number of seconds to expire
-   *   the pre-signed URL operation in. Defaults to 15 minutes.
-   * @param callback [Function] if a callback is provided, this function will
-   *   pass the URL as the second parameter (after the error parameter) to
-   *   the callback function.
-   * @return [String] if called synchronously (with no callback), returns the
-   *   signed URL.
-   * @return [null] nothing is returned if a callback is provided.
-   * @example Pre-signing a getObject operation (synchronously)
-   *   var params = {Bucket: 'bucket', Key: 'key'};
-   *   var url = s3.getSignedUrl('getObject', params);
-   *   console.log('The URL is', url);
-   * @example Pre-signing a putObject (asynchronously)
-   *   var params = {Bucket: 'bucket', Key: 'key'};
-   *   s3.getSignedUrl('putObject', params, function (err, url) {
-   *     console.log('The URL is', url);
-   *   });
-   * @example Pre-signing a putObject operation with a specific payload
-   *   var params = {Bucket: 'bucket', Key: 'key', Body: 'body'};
-   *   var url = s3.getSignedUrl('putObject', params);
-   *   console.log('The URL is', url);
-   * @example Passing in a 1-minute expiry time for a pre-signed URL
-   *   var params = {Bucket: 'bucket', Key: 'key', Expires: 60};
-   *   var url = s3.getSignedUrl('getObject', params);
-   *   console.log('The URL is', url); // expires in 60 seconds
-   */
-  getSignedUrl: function getSignedUrl(operation, params, callback) {
-    var expires = params.Expires || 900;
-    delete params.Expires; // we can't validate this
-    var url = require('url');
-    var events = ['validate', 'build', 'sign'];
-    var request = this.makeRequest(operation, params);
-
-    var expiresHeader = 'presigned-expires';
-
-    function signedUrlBuilder() {
-      delete request.httpRequest.headers['User-Agent'];
-      request.httpRequest.headers[expiresHeader] = parseInt(
-        AWS.util.date.unixTimestamp() + expires, 10).toString();
-    }
-
-    function signedUrlSigner() {
-      var queryParams = {};
-
-      AWS.util.each(request.httpRequest.headers, function (key, value) {
-        if (key === expiresHeader) key = 'Expires';
-        queryParams[key] = value;
-      });
-      delete request.httpRequest.headers[expiresHeader];
-
-      var auth = queryParams['Authorization'].split(':');
-      delete queryParams['Authorization'];
-      delete queryParams['Host'];
-      queryParams['AWSAccessKeyId'] = auth[0].split(' ')[1];
-      queryParams['Signature'] = auth[1];
-
-      // build URL
-      var endpoint = request.httpRequest.endpoint;
-      var parsedUrl = url.parse(request.httpRequest.path);
-      var querystring = AWS.util.queryParamsToString(queryParams);
-      endpoint.pathname = parsedUrl.pathname;
-      endpoint.search = !parsedUrl.search ? querystring :
-                        parsedUrl.search + '&' + querystring;
-    }
-
-    request.on('build', signedUrlBuilder);
-    request.on('sign', signedUrlSigner);
-    if (!params.Body) { // no Content-MD5 signing if body is not provided
-      request.removeListener('build', this.computeContentMd5);
-    }
-
-    if (callback) {
-      request.emitEvents(events, new AWS.Response(request), function (err) {
-        if (err) callback(err, null);
-        else callback(null, url.format(request.httpRequest.endpoint));
-      });
-    } else {
-      AWS.util.arrayEach(events, function (item) {
-        request.emitEvent(item, [request]);
-      });
-      return url.format(request.httpRequest.endpoint);
-    }
-  }
-});
-
-AWS.S3.prototype.createBucket = function createBucket(params, callback) {
-  // When creating a bucket *outside* the classic region, the location
-  // constraint must be set for the bucket and it must match the endpoint.
-  // This chunk of code will set the location constraint param based
-  // on the region (when possible), but it will not override a passed-in
-  // location constraint.
-  if (!params) params = {};
-  var hostname = this.endpoint.hostname;
-  if (hostname != this.api.globalEndpoint && !params.CreateBucketConfiguration) {
-    params.CreateBucketConfiguration = { LocationConstraint: this.config.region };
-  }
-  return this.makeRequest('createBucket', params, callback);
-};
-
-module.exports = AWS.S3;
-
-},{"../core":26,"stream":7,"url":8}],45:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('../core');
-
-AWS.STS = AWS.Service.defineService('sts', ['2011-06-15']);
-
-module.exports = AWS.STS;
-
-},{"../core":26}],46:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('../core');
-require('./v3');
-var inherit = AWS.util.inherit;
-
-/**
- * @api private
- */
-AWS.Signers.CloudFront = inherit(AWS.Signers.S3, {
-  /**
-   * The canonical string for CloudFront is simply the Date header
-   */
-  stringToSign: function stringToSign() {
-    return this.request.headers['X-Amz-Date'];
-  }
-});
-
-module.exports = AWS.Signers.CloudFront;
-
-},{"../core":26,"./v3":50}],47:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-/**
- * @api private
- */
-AWS.Signers.RequestSigner = inherit({
-  constructor: function RequestSigner(request) {
-    this.request = request;
-  }
-});
-
-AWS.Signers.RequestSigner.getVersion = function getVersion(version) {
-  /*jshint maxcomplexity:8*/
-  switch (version) {
-    case 'v2': return AWS.Signers.V2;
-    case 'v3': return AWS.Signers.V3;
-    case 'v4': return AWS.Signers.V4;
-    case 's3': return AWS.Signers.S3;
-    case 'v3https': return AWS.Signers.V3Https;
-    case 'cloudfront': return AWS.Signers.CloudFront;
-  }
-  throw new Error('Unknown signing version ' + version);
-};
-
-require('./v2');
-require('./v3');
-require('./v3https');
-require('./v4');
-require('./s3');
-require('./cloudfront');
-
-},{"../core":26,"./cloudfront":46,"./s3":48,"./v2":49,"./v3":50,"./v3https":51,"./v4":52}],48:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-/**
- * @api private
- */
-AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
-  /**
-   * When building the stringToSign, these sub resource params should be
-   * part of the canonical resource string with their NON-decoded values
-   */
-  subResources: {
-    'acl': 1,
-    'cors': 1,
-    'lifecycle': 1,
-    'delete': 1,
-    'location': 1,
-    'logging': 1,
-    'notification': 1,
-    'partNumber': 1,
-    'policy': 1,
-    'requestPayment': 1,
-    'tagging': 1,
-    'torrent': 1,
-    'uploadId': 1,
-    'uploads': 1,
-    'versionId': 1,
-    'versioning': 1,
-    'versions': 1,
-    'website': 1
-  },
-
-  // when building the stringToSign, these querystring params should be
-  // part of the canonical resource string with their NON-encoded values
-  responseHeaders: {
-    'response-content-type': 1,
-    'response-content-language': 1,
-    'response-expires': 1,
-    'response-cache-control': 1,
-    'response-content-disposition': 1,
-    'response-content-encoding': 1
-  },
-
-  addAuthorization: function addAuthorization(credentials, date) {
-    if (!this.request.headers['presigned-expires']) {
-    this.request.headers['X-Amz-Date'] = AWS.util.date.rfc822(date);
-    }
-
-    if (credentials.sessionToken) {
-      // presigned URLs require this header to be lowercased
-      this.request.headers['x-amz-security-token'] = credentials.sessionToken;
-    }
-
-    var signature = this.sign(credentials.secretAccessKey, this.stringToSign());
-    var auth = 'AWS ' + credentials.accessKeyId + ':' + signature;
-
-    this.request.headers['Authorization'] = auth;
-  },
-
-  stringToSign: function stringToSign() {
-    var r = this.request;
-
-    var parts = [];
-    parts.push(r.method);
-    parts.push(r.headers['Content-MD5'] || '');
-    parts.push(r.headers['Content-Type'] || '');
-    parts.push(''); // This is the "Date" header, but we use X-Amz-Date.
-                    // The S3 signing mechanism requires us to pass an empty
-                    // string for this Date header regardless.
-    var headers = this.canonicalizedAmzHeaders();
-    if (headers) parts.push(headers);
-    parts.push(this.canonicalizedResource());
-
-    return parts.join('\n');
-
-  },
-
-  canonicalizedAmzHeaders: function canonicalizedAmzHeaders() {
-
-    var amzHeaders = [];
-
-    AWS.util.each(this.request.headers, function (name) {
-      if (name.match(/^x-amz-/i))
-        amzHeaders.push(name);
-    });
-
-    amzHeaders.sort(function (a, b) {
-      return a.toLowerCase() < b.toLowerCase() ? -1 : 1;
-    });
-
-    var parts = [];
-    AWS.util.arrayEach.call(this, amzHeaders, function (name) {
-      parts.push(name.toLowerCase() + ':' + String(this.request.headers[name]));
-    });
-
-    return parts.join('\n');
-
-  },
-
-  canonicalizedResource: function canonicalizedResource() {
-
-    var r = this.request;
-
-    var parts = r.path.split('?');
-    var path = parts[0];
-    var querystring = parts[1];
-
-    var resource = '';
-
-    if (r.virtualHostedBucket)
-      resource += '/' + r.virtualHostedBucket;
-
-    resource += path;
-
-    if (querystring) {
-
-      // collect a list of sub resources and query params that need to be signed
-      var resources = [];
-
-      AWS.util.arrayEach.call(this, querystring.split('&'), function (param) {
-        var name = param.split('=')[0];
-        var value = param.split('=')[1];
-        /*jshint undef:false */
-        if (this.subResources[name] || this.responseHeaders[name]) {
-          var resource = { name: name };
-          if (value !== undefined) {
-            if (this.subResources[name]) {
-              resource.value = value;
-            } else {
-              resource.value = decodeURIComponent(value);
-            }
-          }
-          resources.push(resource);
-        }
-      });
-
-      resources.sort(function (a, b) { return a.name < b.name ? -1 : 1; });
-
-      if (resources.length) {
-
-        querystring = [];
-        AWS.util.arrayEach(resources, function (resource) {
-          if (resource.value === undefined)
-            querystring.push(resource.name);
-          else
-            querystring.push(resource.name + '=' + resource.value);
-        });
-
-        resource += '?' + querystring.join('&');
-      }
-
-    }
-
-    return resource;
-
-  },
-
-  sign: function sign(secret, string) {
-    return AWS.util.crypto.hmac(secret, string, 'base64', 'sha1');
-  }
-});
-
-module.exports = AWS.Signers.S3;
-
-},{"../core":26}],49:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-/**
- * @api private
- */
-AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
-  addAuthorization: function addAuthorization(credentials, date) {
-
-    if (!date) date = AWS.util.date.getDate();
-
-    var r = this.request;
-
-    r.params.Timestamp = AWS.util.date.iso8601(date);
-    r.params.SignatureVersion = '2';
-    r.params.SignatureMethod = 'HmacSHA256';
-    r.params.AWSAccessKeyId = credentials.accessKeyId;
-
-    if (credentials.sessionToken) {
-      r.params.SecurityToken = credentials.sessionToken;
-    }
-
-    delete r.params.Signature; // delete old Signature for re-signing
-    r.params.Signature = this.signature(credentials);
-
-    r.body = AWS.util.queryParamsToString(r.params);
-    r.headers['Content-Length'] = r.body.length;
-  },
-
-  signature: function signature(credentials) {
-    return AWS.util.crypto.hmac(credentials.secretAccessKey, this.stringToSign(), 'base64');
-  },
-
-  stringToSign: function stringToSign() {
-    var parts = [];
-    parts.push(this.request.method);
-    parts.push(this.request.endpoint.host.toLowerCase());
-    parts.push(this.request.pathname());
-    parts.push(AWS.util.queryParamsToString(this.request.params));
-    return parts.join('\n');
-  }
-
-});
-
-module.exports = AWS.Signers.V2;
-
-},{"../core":26}],50:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-/**
- * @api private
- */
-AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
-  addAuthorization: function addAuthorization(credentials, date) {
-
-    var datetime = AWS.util.date.rfc822(date);
-
-    this.request.headers['X-Amz-Date'] = datetime;
-
-    if (credentials.sessionToken) {
-      this.request.headers['x-amz-security-token'] = credentials.sessionToken;
-    }
-
-    this.request.headers['X-Amzn-Authorization'] =
-      this.authorization(credentials, datetime);
-
-  },
-
-  authorization: function authorization(credentials) {
-    return 'AWS3 ' +
-      'AWSAccessKeyId=' + credentials.accessKeyId + ',' +
-      'Algorithm=HmacSHA256,' +
-      'SignedHeaders=' + this.signedHeaders() + ',' +
-      'Signature=' + this.signature(credentials);
-  },
-
-  signedHeaders: function signedHeaders() {
-    var headers = [];
-    AWS.util.arrayEach(this.headersToSign(), function iterator(h) {
-      headers.push(h.toLowerCase());
-    });
-    return headers.sort().join(';');
-  },
-
-  canonicalHeaders: function canonicalHeaders() {
-    var headers = this.request.headers;
-    var parts = [];
-    AWS.util.arrayEach(this.headersToSign(), function iterator(h) {
-      parts.push(h.toLowerCase().trim() + ':' + String(headers[h]).trim());
-    });
-    return parts.sort().join('\n') + '\n';
-  },
-
-  headersToSign: function headersToSign() {
-    var headers = [];
-    AWS.util.each(this.request.headers, function iterator(k) {
-      if (k === 'Host' || k === 'Content-Encoding' || k.match(/^X-Amz/i)) {
-        headers.push(k);
-      }
-    });
-    return headers;
-  },
-
-  signature: function signature(credentials) {
-    return AWS.util.crypto.hmac(credentials.secretAccessKey, this.stringToSign(), 'base64');
-  },
-
-  stringToSign: function stringToSign() {
-    var parts = [];
-    parts.push(this.request.method);
-    parts.push('/');
-    parts.push('');
-    parts.push(this.canonicalHeaders());
-    parts.push(this.request.body);
-    return AWS.util.crypto.sha256(parts.join('\n'));
-  }
-
-});
-
-module.exports = AWS.Signers.V3;
-
-},{"../core":26}],51:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-require('./v3');
-
-/**
- * @api private
- */
-AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
-  authorization: function authorization(credentials) {
-    return 'AWS3-HTTPS ' +
-      'AWSAccessKeyId=' + credentials.accessKeyId + ',' +
-      'Algorithm=HmacSHA256,' +
-      'Signature=' + this.signature(credentials);
-  },
-
-  stringToSign: function stringToSign() {
-    return this.request.headers['X-Amz-Date'];
-  }
-});
-
-module.exports = AWS.Signers.V3Https;
-
-},{"../core":26,"./v3":50}],52:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-/**
- * @api private
- */
-AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
-  constructor: function V4(request, serviceName) {
-    AWS.Signers.RequestSigner.call(this, request);
-    this.serviceName = serviceName;
-  },
-
-  addAuthorization: function addAuthorization(credentials, date) {
-    var datetime = AWS.util.date.iso8601(date).replace(/[:\-]|\.\d{3}/g, '');
-    this.addHeaders(credentials, datetime);
-    this.request.headers['Authorization'] =
-      this.authorization(credentials, datetime);
-  },
-
-  addHeaders: function addHeaders(credentials, datetime) {
-    this.request.headers['X-Amz-Date'] = datetime;
-    if (credentials.sessionToken) {
-      this.request.headers['x-amz-security-token'] = credentials.sessionToken;
-    }
-  },
-
-  authorization: function authorization(credentials, datetime) {
-    var parts = [];
-    var credString = this.credentialString(datetime);
-    parts.push('AWS4-HMAC-SHA256 Credential=' +
-      credentials.accessKeyId + '/' + credString);
-    parts.push('SignedHeaders=' + this.signedHeaders());
-    parts.push('Signature=' + this.signature(credentials, datetime));
-    return parts.join(', ');
-  },
-
-  signature: function signature(credentials, datetime) {
-    var kSecret = credentials.secretAccessKey;
-    var kDate = AWS.util.crypto.hmac('AWS4' + kSecret, datetime.substr(0, 8));
-    var kRegion = AWS.util.crypto.hmac(kDate, this.request.region);
-    var kService = AWS.util.crypto.hmac(kRegion, this.serviceName);
-    var kCredentials = AWS.util.crypto.hmac(kService, 'aws4_request');
-    return AWS.util.crypto.hmac(kCredentials, this.stringToSign(datetime), 'hex');
-  },
-
-  stringToSign: function stringToSign(datetime) {
-    var parts = [];
-    parts.push('AWS4-HMAC-SHA256');
-    parts.push(datetime);
-    parts.push(this.credentialString(datetime));
-    parts.push(this.hexEncodedHash(this.canonicalString()));
-    return parts.join('\n');
-  },
-
-  canonicalString: function canonicalString() {
-    var parts = [];
-    parts.push(this.request.method);
-    parts.push(this.request.pathname());
-    parts.push(this.request.search());
-    parts.push(this.canonicalHeaders() + '\n');
-    parts.push(this.signedHeaders());
-    parts.push(this.hexEncodedHash(this.request.body));
-    return parts.join('\n');
-  },
-
-  canonicalHeaders: function canonicalHeaders() {
-    var headers = [];
-    AWS.util.each.call(this, this.request.headers, function (key, item) {
-      headers.push([key, item]);
-    });
-    headers.sort(function (a, b) {
-      return a[0].toLowerCase() < b[0].toLowerCase() ? -1 : 1;
-    });
-    var parts = [];
-    AWS.util.arrayEach.call(this, headers, function (item) {
-      if (item[0] !== 'Authorization' && item[0] !== 'User-Agent' && item[0] !== 'Content-Type') {
-        parts.push(item[0].toLowerCase() + ':' +
-          this.canonicalHeaderValues(item[1].toString()));
-      }
-    });
-    return parts.join('\n');
-  },
-
-  canonicalHeaderValues: function canonicalHeaderValues(values) {
-    return values.replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '');
-  },
-
-  signedHeaders: function signedHeaders() {
-    var keys = [];
-    AWS.util.each.call(this, this.request.headers, function (key) {
-      key = key.toLowerCase();
-      if (key !== 'authorization' && key !== 'user-agent' && key !== 'content-type') keys.push(key);
-    });
-    return keys.sort().join(';');
-  },
-
-  credentialString: function credentialString(datetime) {
-    var parts = [];
-    parts.push(datetime.substr(0, 8));
-    parts.push(this.request.region);
-    parts.push(this.serviceName);
-    parts.push('aws4_request');
-    return parts.join('/');
-  },
-
-  hexEncodedHash: function hash(string) {
-    return AWS.util.crypto.sha256(string, 'hex');
-  }
-
-});
-
-module.exports = AWS.Signers.V4;
-
-},{"../core":26}],53:[function(require,module,exports){
-var process=require("__browserify_process");/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('./core');
-var cryptoLib = require('crypto');
-var Buffer = require('buffer').Buffer;
-
-/**
- * A set of utility methods for use with the AWS SDK.
- *
- * @!attribute abort
- *   Return this value from an iterator function ({each} or {arrayEach})
- *   to break out of the iteration.
- *   @example Breaking out of an iterator function
- *     AWS.util.each({a: 1, b: 2, c: 3}, function(key, value) {
- *       if (key == 'b') return AWS.util.abort;
- *     });
- *   @see each
- *   @see arrayEach
- * @api private
- */
-AWS.util = {
-
-  engine: function enc() {
-    return process.platform + '/' + process.version;
-  },
-
-  userAgent: function userAgent() {
-    return 'aws-sdk-nodejs/' + AWS.VERSION + ' ' + AWS.util.engine();
-  },
-
-  uriEscape: function uriEscape(string) {
-    /*jshint undef:false */
-    var output = encodeURIComponent(string);
-    output = output.replace(/[^A-Za-z0-9_.~\-%]+/g, encodeURIComponent);
-
-    // AWS percent-encodes some extra non-standard characters in a URI
-    output = output.replace(/[*]/g, function(ch) {
-      return '%' + ch.charCodeAt(0).toString(16).toUpperCase();
-    });
-
-    return output;
-  },
-
-  uriEscapePath: function uriEscapePath(string) {
-    var parts = [];
-    AWS.util.arrayEach(string.split('/'), function (part) {
-      parts.push(AWS.util.uriEscape(part));
-    });
-    return parts.join('/');
-  },
-
-  urlParse: function urlParse(url) {
-    return require('url').parse(url);
-  },
-
-  queryParamsToString: function queryParamsToString(params) {
-    var items = [];
-    var escape = AWS.util.uriEscape;
-    var sortedKeys = Object.keys(params).sort();
-
-    AWS.util.arrayEach(sortedKeys, function(name) {
-      var value = params[name];
-      var ename = escape(name);
-      var result = ename;
-      if (Array.isArray(value)) {
-        var vals = [];
-        AWS.util.arrayEach(value, function(item) { vals.push(escape(item)); });
-        result = ename + '=' + vals.sort().join('&' + ename + '=');
-      } else if (value !== undefined && value !== null) {
-        result = ename + '=' + escape(value);
-      }
-      items.push(result);
-    });
-
-    return items.join('&');
-  },
-
-  readFileSync: function readFileSync(path) {
-    if (typeof window !== 'undefined') return null;
-    return require('fs').readFileSync(path, 'utf-8');
-  },
-
-  base64: {
-
-    encode: function encode64(string) {
-      return new Buffer(string).toString('base64');
-    },
-
-    decode: function decode64(string) {
-      return new Buffer(string, 'base64').toString();
-    }
-
-  },
-
-  buffer: {
-    /**
-     * Concatenates a list of Buffer objects.
-     */
-    concat: function(buffers) {
-      var length = 0,
-          offset = 0,
-          buffer = null, i;
-
-      for (i = 0; i < buffers.length; i++) {
-        length += buffers[i].length;
-      }
-
-      buffer = new Buffer(length);
-
-      for (i = 0; i < buffers.length; i++) {
-        buffers[i].copy(buffer, offset);
-        offset += buffers[i].length;
-      }
-
-      return buffer;
-    }
-  },
-
-  string: {
-    byteLength: function byteLength(string) {
-      if (string === null || string === undefined) return 0;
-      if (typeof string === 'string') string = new Buffer(string);
-
-      if (string.length !== undefined) {
-        return string.length;
-      } else if (typeof(string.path) === 'string') {
-        return require('fs').lstatSync(string.path).size;
-      } else {
-        throw AWS.util.error(new Error(), {
-          message: 'Cannot determine length of ' + string, object: string
-        });
-      }
-    }
-  },
-
-  jamespath: {
-    query: function query(expression, data) {
-      if (!data) return [];
-
-      var results = [];
-      var expressions = expression.split(/\s+or\s+/);
-      AWS.util.arrayEach.call(this, expressions, function (expr) {
-        var objects = [data];
-        var tokens = expr.split('.');
-        AWS.util.arrayEach.call(this, tokens, function (token) {
-          var match = token.match('^(.+?)(?:\\[(-?\\d+|\\*)\\])?$');
-          var newObjects = [];
-          AWS.util.arrayEach.call(this, objects, function (obj) {
-            if (match[1] === '*') {
-              AWS.util.arrayEach.call(this, obj, function (value) {
-                newObjects.push(value);
-              });
-            } else if (obj.hasOwnProperty(match[1])) {
-              newObjects.push(obj[match[1]]);
-            }
-          });
-          objects = newObjects;
-
-          // handle indexing (token[0], token[-1])
-          if (match[2]) {
-            newObjects = [];
-            AWS.util.arrayEach.call(this, objects, function (obj) {
-              if (AWS.util.isType(obj, Array)) {
-                if (match[2] === '*') {
-                  newObjects = newObjects.concat(obj);
-                } else {
-                  var idx = parseInt(match[2], 10);
-                  if (idx < 0) idx = obj.length + idx; // negative indexing
-                  newObjects.push(obj[idx]);
-                }
-              }
-            });
-            objects = newObjects;
-          }
-
-          if (objects.length === 0) return AWS.util.abort;
-        });
-
-        if (objects.length > 0) {
-          results = objects;
-          return AWS.util.abort;
-        }
-      });
-
-      return results;
-    },
-
-    find: function find(expression, data) {
-      return AWS.util.jamespath.query(expression, data)[0];
-    }
-  },
-
-  /**
-   * Date and time utility functions.
-   */
-  date: {
-
-    /**
-     * @return [Date] the current JavaScript date object. Since all
-     *   AWS services rely on this date object, you can override
-     *   this function to provide a special time value to AWS service
-     *   requests.
-     */
-    getDate: function getDate() { return new Date(); },
-
-    /**
-     * @return [String] the date in ISO-8601 format
-     */
-    iso8601: function iso8601(date) {
-      if (date === undefined) { date = AWS.util.date.getDate(); }
-      return date.toISOString();
-    },
-
-    /**
-     * @return [String] the date in RFC 822 format
-     */
-    rfc822: function rfc822(date) {
-      if (date === undefined) { date = AWS.util.date.getDate(); }
-      return date.toUTCString();
-    },
-
-    /**
-     * @return [Integer] the UNIX timestamp value for the current time
-     */
-    unixTimestamp: function unixTimestamp(date) {
-      if (date === undefined) { date = AWS.util.date.getDate(); }
-      return date.getTime() / 1000;
-    },
-
-    /**
-     * @param [String,number,Date] date
-     * @return [Date]
-     */
-    from: function format(date) {
-      if (typeof date === 'number') {
-        return new Date(date * 1000); // unix timestamp
-      } else {
-        return new Date(date);
-      }
-    },
-
-    /**
-     * Given a Date or date-like value, this function formats the
-     * date into a string of the requested value.
-     * @param [String,number,Date] date
-     * @param [String] formatter Valid formats are:
-     #   * 'iso8601'
-     #   * 'rfc822'
-     #   * 'unixTimestamp'
-     * @return [String]
-     */
-    format: function format(date, formatter) {
-      if (!formatter) formatter = 'iso8601';
-      return AWS.util.date[formatter](AWS.util.date.from(date));
-    }
-
-  },
-
-  crypto: {
-    crc32Table: [
-     0x00000000, 0x77073096, 0xEE0E612C, 0x990951BA, 0x076DC419,
-     0x706AF48F, 0xE963A535, 0x9E6495A3, 0x0EDB8832, 0x79DCB8A4,
-     0xE0D5E91E, 0x97D2D988, 0x09B64C2B, 0x7EB17CBD, 0xE7B82D07,
-     0x90BF1D91, 0x1DB71064, 0x6AB020F2, 0xF3B97148, 0x84BE41DE,
-     0x1ADAD47D, 0x6DDDE4EB, 0xF4D4B551, 0x83D385C7, 0x136C9856,
-     0x646BA8C0, 0xFD62F97A, 0x8A65C9EC, 0x14015C4F, 0x63066CD9,
-     0xFA0F3D63, 0x8D080DF5, 0x3B6E20C8, 0x4C69105E, 0xD56041E4,
-     0xA2677172, 0x3C03E4D1, 0x4B04D447, 0xD20D85FD, 0xA50AB56B,
-     0x35B5A8FA, 0x42B2986C, 0xDBBBC9D6, 0xACBCF940, 0x32D86CE3,
-     0x45DF5C75, 0xDCD60DCF, 0xABD13D59, 0x26D930AC, 0x51DE003A,
-     0xC8D75180, 0xBFD06116, 0x21B4F4B5, 0x56B3C423, 0xCFBA9599,
-     0xB8BDA50F, 0x2802B89E, 0x5F058808, 0xC60CD9B2, 0xB10BE924,
-     0x2F6F7C87, 0x58684C11, 0xC1611DAB, 0xB6662D3D, 0x76DC4190,
-     0x01DB7106, 0x98D220BC, 0xEFD5102A, 0x71B18589, 0x06B6B51F,
-     0x9FBFE4A5, 0xE8B8D433, 0x7807C9A2, 0x0F00F934, 0x9609A88E,
-     0xE10E9818, 0x7F6A0DBB, 0x086D3D2D, 0x91646C97, 0xE6635C01,
-     0x6B6B51F4, 0x1C6C6162, 0x856530D8, 0xF262004E, 0x6C0695ED,
-     0x1B01A57B, 0x8208F4C1, 0xF50FC457, 0x65B0D9C6, 0x12B7E950,
-     0x8BBEB8EA, 0xFCB9887C, 0x62DD1DDF, 0x15DA2D49, 0x8CD37CF3,
-     0xFBD44C65, 0x4DB26158, 0x3AB551CE, 0xA3BC0074, 0xD4BB30E2,
-     0x4ADFA541, 0x3DD895D7, 0xA4D1C46D, 0xD3D6F4FB, 0x4369E96A,
-     0x346ED9FC, 0xAD678846, 0xDA60B8D0, 0x44042D73, 0x33031DE5,
-     0xAA0A4C5F, 0xDD0D7CC9, 0x5005713C, 0x270241AA, 0xBE0B1010,
-     0xC90C2086, 0x5768B525, 0x206F85B3, 0xB966D409, 0xCE61E49F,
-     0x5EDEF90E, 0x29D9C998, 0xB0D09822, 0xC7D7A8B4, 0x59B33D17,
-     0x2EB40D81, 0xB7BD5C3B, 0xC0BA6CAD, 0xEDB88320, 0x9ABFB3B6,
-     0x03B6E20C, 0x74B1D29A, 0xEAD54739, 0x9DD277AF, 0x04DB2615,
-     0x73DC1683, 0xE3630B12, 0x94643B84, 0x0D6D6A3E, 0x7A6A5AA8,
-     0xE40ECF0B, 0x9309FF9D, 0x0A00AE27, 0x7D079EB1, 0xF00F9344,
-     0x8708A3D2, 0x1E01F268, 0x6906C2FE, 0xF762575D, 0x806567CB,
-     0x196C3671, 0x6E6B06E7, 0xFED41B76, 0x89D32BE0, 0x10DA7A5A,
-     0x67DD4ACC, 0xF9B9DF6F, 0x8EBEEFF9, 0x17B7BE43, 0x60B08ED5,
-     0xD6D6A3E8, 0xA1D1937E, 0x38D8C2C4, 0x4FDFF252, 0xD1BB67F1,
-     0xA6BC5767, 0x3FB506DD, 0x48B2364B, 0xD80D2BDA, 0xAF0A1B4C,
-     0x36034AF6, 0x41047A60, 0xDF60EFC3, 0xA867DF55, 0x316E8EEF,
-     0x4669BE79, 0xCB61B38C, 0xBC66831A, 0x256FD2A0, 0x5268E236,
-     0xCC0C7795, 0xBB0B4703, 0x220216B9, 0x5505262F, 0xC5BA3BBE,
-     0xB2BD0B28, 0x2BB45A92, 0x5CB36A04, 0xC2D7FFA7, 0xB5D0CF31,
-     0x2CD99E8B, 0x5BDEAE1D, 0x9B64C2B0, 0xEC63F226, 0x756AA39C,
-     0x026D930A, 0x9C0906A9, 0xEB0E363F, 0x72076785, 0x05005713,
-     0x95BF4A82, 0xE2B87A14, 0x7BB12BAE, 0x0CB61B38, 0x92D28E9B,
-     0xE5D5BE0D, 0x7CDCEFB7, 0x0BDBDF21, 0x86D3D2D4, 0xF1D4E242,
-     0x68DDB3F8, 0x1FDA836E, 0x81BE16CD, 0xF6B9265B, 0x6FB077E1,
-     0x18B74777, 0x88085AE6, 0xFF0F6A70, 0x66063BCA, 0x11010B5C,
-     0x8F659EFF, 0xF862AE69, 0x616BFFD3, 0x166CCF45, 0xA00AE278,
-     0xD70DD2EE, 0x4E048354, 0x3903B3C2, 0xA7672661, 0xD06016F7,
-     0x4969474D, 0x3E6E77DB, 0xAED16A4A, 0xD9D65ADC, 0x40DF0B66,
-     0x37D83BF0, 0xA9BCAE53, 0xDEBB9EC5, 0x47B2CF7F, 0x30B5FFE9,
-     0xBDBDF21C, 0xCABAC28A, 0x53B39330, 0x24B4A3A6, 0xBAD03605,
-     0xCDD70693, 0x54DE5729, 0x23D967BF, 0xB3667A2E, 0xC4614AB8,
-     0x5D681B02, 0x2A6F2B94, 0xB40BBE37, 0xC30C8EA1, 0x5A05DF1B,
-     0x2D02EF8D],
-
-    crc32: function crc32(data) {
-      /*jshint bitwise:false*/
-      var tbl = AWS.util.crypto.crc32Table;
-      var crc = 0 ^ -1;
-
-      if (typeof data === 'string') {
-        data = new Buffer(data);
-      }
-
-      for (var i = 0; i < data.length; i++) {
-        var code = data.readUInt8(i);
-        crc = (crc>>>8) ^ tbl[(crc^code)&0xFF];
-      }
-      return (crc ^ -1) >>> 0;
-    },
-
-    hmac: function hmac(key, string, digest, fn) {
-      if (!digest) digest = 'binary';
-      if (!fn) fn = 'sha256';
-      return cryptoLib.createHmac(fn, key).update(string).digest(digest);
-    },
-
-    md5: function md5(data, digest) {
-      if (!digest) { digest = 'binary'; }
-      if (typeof data === 'string') data = new Buffer(data);
-      return AWS.util.crypto.createHash('md5').update(data).digest(digest);
-    },
-
-    sha256: function sha256(string, digest) {
-      if (!digest) { digest = 'binary'; }
-      if (typeof string === 'string') string = new Buffer(string);
-      return AWS.util.crypto.createHash('sha256').update(string).digest(digest);
-    },
-
-    toHex: function toHex(data) {
-      var out = [];
-      for (var i = 0; i < data.length; i++) {
-        out.push(('0' + data.charCodeAt(i).toString(16)).substr(-2, 2));
-      }
-      return out.join('');
-    },
-
-    createHash: function createHash(algorithm) {
-      return cryptoLib.createHash(algorithm);
-    }
-
-  },
-
-  /** @!ignore */
-
-  /* Abort constant */
-  abort: {},
-
-  each: function each(object, iterFunction) {
-    for (var key in object) {
-      if (object.hasOwnProperty(key)) {
-        var ret = iterFunction.call(this, key, object[key]);
-        if (ret === AWS.util.abort) break;
-      }
-    }
-  },
-
-  arrayEach: function arrayEach(array, iterFunction) {
-    for (var idx in array) {
-      if (array.hasOwnProperty(idx)) {
-        var ret = iterFunction.call(this, array[idx], parseInt(idx, 10));
-        if (ret === AWS.util.abort) break;
-      }
-    }
-  },
-
-  update: function update(obj1, obj2) {
-    AWS.util.each(obj2, function iterator(key, item) {
-      obj1[key] = item;
-    });
-    return obj1;
-  },
-
-  merge: function merge(obj1, obj2) {
-    return AWS.util.update(AWS.util.copy(obj1), obj2);
-  },
-
-  copy: function copy(object) {
-    if (object === null || object === undefined) return object;
-    var dupe = {};
-    /*jshint forin:false */
-    for (var key in object) {
-      dupe[key] = object[key];
-    }
-    return dupe;
-  },
-
-  isEmpty: function isEmpty(obj) {
-    for (var prop in obj) {
-      if (obj.hasOwnProperty(prop)) {
-        return false;
-      }
-    }
-    return true;
-  },
-
-  isType: function isType(obj, type) {
-    // handle cross-"frame" objects
-    if (typeof type === 'function') type = type.name;
-    return Object.prototype.toString.call(obj) === '[object ' + type + ']';
-  },
-
-  error: function error(err, options) {
-    err.message = err.message || null;
-
-    if (typeof options === 'string') {
-      err.message = options;
-    } else {
-      AWS.util.update(err, options);
-    }
-
-    err.name = err.code || 'Error';
-    return err;
-  },
-
-  /**
-   * @api private
-   */
-  inherit: function inherit(klass, features) {
-    var newObject = null;
-    if (features === undefined) {
-      features = klass;
-      klass = Object;
-      newObject = {};
-    } else {
-      /*jshint newcap:false */
-      /*jshint camelcase:false */
-      var ctor = function __ctor_wrapper__() {};
-      ctor.prototype = klass.prototype;
-      newObject = new ctor();
-    }
-
-    // constructor not supplied, create pass-through ctor
-    if (features.constructor === Object) {
-      features.constructor = function() {
-        if (klass !== Object) {
-          return klass.apply(this, arguments);
-        }
-      };
-    }
-
-    features.constructor.prototype = newObject;
-    AWS.util.update(features.constructor.prototype, features);
-    features.constructor.__super__ = klass;
-    return features.constructor;
-  },
-
-  /**
-   * @api private
-   */
-  mixin: function mixin() {
-    var klass = arguments[0];
-    for (var i = 1; i < arguments.length; i++) {
-      /*jshint forin:false*/
-      for (var prop in arguments[i].prototype) {
-        var fn = arguments[i].prototype[prop];
-        if (prop != 'constructor') {
-          klass.prototype[prop] = fn;
-        }
-      }
-    }
-    return klass;
-  }
-
-};
-
-module.exports = AWS.util;
-
-},{"./core":26,"__browserify_process":23,"buffer":11,"crypto":13,"fs":4,"url":8}],54:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('../core');
-var builder = require('xmlbuilder');
-var inherit = AWS.util.inherit;
-
-/**
- * @api private
- */
-AWS.XML.Builder = inherit({
-
-  constructor: function XMLBuilder(root, rules, options) {
-    this.root = root;
-    this.rules = rules;
-    this.xmlns = options.xmlnamespace;
-    this.timestampFormat = options.timestampFormat;
-  },
-
-  toXML: function toXML(params) {
-    var xml = builder.create(this.root);
-    if (this.xmlns) xml.att('xmlns', this.xmlns);
-    this.serializeStructure(this.rules, params, xml);
-    return xml.root().toString();
-  },
-
-  serializeStructure: function serializeStructure(rules, params, xml) {
-
-    AWS.util.each.call(this, rules || {}, function (memberName, memberRules) {
-      var value = params[memberName];
-      if (value !== undefined) {
-        if (memberRules.attribute) {
-          xml.att(memberRules.name, value);
-        } else {
-          this.serializeMember(memberName, memberRules, value, xml);
-        }
-      }
-    });
-  },
-
-  serializeList: function serializeList(name, rules, list, xml) {
-    if (rules.flattened) {
-      AWS.util.arrayEach.call(this, list, function (value) {
-        this.serializeMember(rules.name || name, rules.members, value, xml);
-      });
-    } else {
-      xml = xml.ele(rules.name || name);
-      AWS.util.arrayEach.call(this, list, function (value) {
-        var memberName = rules.members.name || 'member';
-        this.serializeMember(memberName, rules.members, value, xml);
-      });
-    }
-  },
-
-  serializeMember: function serializeMember(memberName, rules, params, xml) {
-    var name = memberName;
-    if (rules.type === 'structure') {
-      xml = xml.ele(name);
-      this.serializeStructure(rules.members, params, xml);
-    } else if (rules.type === 'list') {
-      this.serializeList(name, rules, params, xml);
-    } else if (rules.type === 'timestamp') {
-      var timestampFormat = rules.format || this.timestampFormat;
-      var date = AWS.util.date.format(params, timestampFormat);
-      xml = xml.ele(name, String(date));
-    } else {
-      xml = xml.ele(name, String(params));
-    }
-    this.applyNamespaces(xml, rules);
-  },
-
-  applyNamespaces: function applyNamespaces(xml, rules) {
-    if (rules.xmlns) {
-      var attr = 'xmlns';
-      if (rules.xmlns.prefix) attr += ':' + rules.xmlns.prefix;
-      xml.att(attr, rules.xmlns.uri);
-    }
-  }
-
-
-});
-
-},{"../core":26,"xmlbuilder":60}],55:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-var xml2js = require('xml2js');
-
-/**
- * @api private
- */
-AWS.XML.Parser = inherit({
-
-  constructor: function XMLParser(rules) {
-    this.rules = (rules || {}).members || {};
-  },
-
-  // options passed to xml2js parser
-  options: {
-    explicitCharkey: false, // undocumented
-    trim: false,            // trim the leading/trailing whitespace from text nodes
-    normalize: false,       // trim interior whitespace inside text nodes
-    explicitRoot: false,    // return the root node in the resulting object?
-    emptyTag: null,         // the default value for empty nodes
-    explicitArray: true,    // always put child nodes in an array
-    ignoreAttrs: false,     // ignore attributes, only create text nodes
-    mergeAttrs: false,      // merge attributes and child elements
-    validator: null         // a callable validator
-  },
-
-  parse: function parse(xml) {
-
-    var result = null;
-    var error = null;
-    var parser = new xml2js.Parser(this.options);
-    parser.parseString(xml, function (e, r) {
-      error = e;
-      result = r;
-    });
-
-    if (result) {
-      delete result.xmlns;
-      return this.parseStructure(result, this.rules);
-    } else if (error) {
-      throw AWS.util.error(error, {code: 'XMLParserError'});
-    } else { // empty xml document
-      return this.parseStructure({}, this.rules);
-    }
-
-  },
-
-  parseStructure: function parseStructure(structure, rules) {
-    var data = {};
-
-    // force array members to always be present
-    AWS.util.each.call(this, rules, function(memberName, memberRules) {
-      if (memberRules.type == 'list') {
-        data[memberRules.name || memberName] = [];
-      }
-    });
-
-    AWS.util.each.call(this, structure, function (xmlName, value) {
-      if (xmlName == '$') {
-        AWS.util.each.call(this, value, function (attrName, attrValue) {
-          if (rules[attrName]) {
-            var rule = rules[attrName];
-            data[rule.name || xmlName] = this.parseMember([attrValue], rule);
-          }
-        });
-      } else {
-        var rule = rules[xmlName] || {};
-        data[rule.name || xmlName] = this.parseMember(value, rule);
-      }
-    });
-
-    return data;
-  },
-
-  parseMap: function parseMap(map, rules) {
-    var data = {};
-    var keyRules = rules.keys || {};
-    var valueRules = rules.members || {};
-    var keyName = keyRules.name || 'key';
-    var valueName = valueRules.name || 'value';
-    if (!rules.flattened) {
-      map = map[0].entry;
-    }
-    AWS.util.arrayEach.call(this, map, function (entry) {
-      var value = this.parseMember(entry[valueName], valueRules);
-      data[entry[keyName][0]] = value;
-    });
-    return data;
-  },
-
-  parseList: function parseList(list, rules) {
-    var data = [];
-    var memberRules = rules.members || {};
-    var memberName = memberRules.name || 'member';
-    if (rules.flattened) {
-      AWS.util.arrayEach.call(this, list, function (value) {
-        data.push(this.parseMember([value], memberRules));
-      });
-    } else {
-      AWS.util.arrayEach.call(this, list, function (member) {
-        AWS.util.arrayEach.call(this, member[memberName], function (value) {
-          data.push(this.parseMember([value], memberRules));
-        });
-      });
-    }
-    return data;
-  },
-
-  parseMember: function parseMember(values, rules) {
-    /*jshint maxcomplexity:20*/
-
-    if (values[0] === null) {
-      if (rules.type === 'structure') return {};
-      if (rules.type === 'list') return [];
-      if (rules.type === 'map') return {};
-      return null;
-    }
-
-    if (values[0]['$'] && values[0]['$'].encoding == 'base64') {
-      return AWS.util.base64.decode(values[0]['_']);
-    }
-
-    if (!rules.type) {
-      if (typeof values[0] === 'string') {
-        rules.type = 'string';
-      } else if (values[0]['_']) {
-        rules.type = 'string';
-        values = [values[0]['_']];
-      } else {
-        rules.type = 'structure';
-      }
-    }
-
-    if (rules.type === 'string') {
-
-      return values[0];
-
-    } else if (rules.type === 'structure') {
-
-      return this.parseStructure(values[0], rules.members || {});
-
-    } else if (rules.type === 'list') {
-
-      return this.parseList(values, rules);
-
-    } else if (rules.type === 'map') {
-
-      return this.parseMap(values, rules);
-
-    } else if (rules.type === 'integer') {
-
-      return parseInt(values[0], 10);
-
-    } else if (rules.type === 'float') {
-
-      return parseFloat(values[0]);
-
-    } else if (rules.type === 'timestamp') {
-
-      return this.parseTimestamp(values[0]);
-
-    } else if (rules.type === 'boolean') {
-
-      return values[0] === 'true';
-
-    } else {
-
-      var msg = 'unhandled type: ' + rules.type;
-      throw AWS.util.error(new Error(msg), {code: 'XMLParserError'});
-
-    }
-
-  },
-
-  parseTimestamp: function parseTimestamp(value) {
-
-    if (value.match(/^\d+$/)) { // unix timestamp
-
-      return new Date(value * 1000);
-
-    } else if (value.match(/^\d{4}/)) { // iso8601
-
-      return new Date(value);
-
-    } else if (value.match(/^\w{3},/)) { // rfc822
-
-      return new Date(value);
-
-    } else {
-
-      throw AWS.util.error(
-        new Error('unhandled timestamp format: ' + value),
-        {code: 'TimestampParserError'});
-
-    }
-
-  }
-
-});
-
-},{"../core":26,"xml2js":56}],56:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 // Generated by CoffeeScript 1.4.0
 (function() {
   var events, isEmpty, sax,
@@ -19564,7 +19626,7 @@ AWS.XML.Parser = inherit({
 
 }).call(this);
 
-},{"events":3,"sax":57}],57:[function(require,module,exports){
+},{"events":35,"sax":57}],57:[function(require,module,exports){
 // wrapper for non-node envs
 ;(function (sax) {
 
@@ -20882,7 +20944,7 @@ function write (chunk) {
 
 })(typeof exports === "undefined" ? sax = {} : exports)
 
-},{"stream":7}],58:[function(require,module,exports){
+},{"stream":39}],58:[function(require,module,exports){
 // Generated by CoffeeScript 1.3.3
 (function() {
   var XMLBuilder, XMLFragment;
@@ -21444,5 +21506,5 @@ function write (chunk) {
 
 }).call(this);
 
-},{"./XMLBuilder":58}]},{},[24])
+},{"./XMLBuilder":58}]},{},[1])
 ;

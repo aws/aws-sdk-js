@@ -13,6 +13,6 @@
  * language governing permissions and limitations under the License.
  */
 
-// Fill these in with your AWS credentials
-accessKeyId = '...';
-secretAccessKey = '...';
+// Fill these in with your application details
+appId = '...';
+roleArn = '...';
