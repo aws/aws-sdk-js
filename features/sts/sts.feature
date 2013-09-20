@@ -23,6 +23,13 @@ Feature: AWS Security Token Service
     Then the result should contain an access key ID and secret access key
     And the TTL on the session token credentials should be less than 900
 
+  Scenario: Web Identity Federation
+    Given I try to assume role with web identity
+    Then the error message should equal:
+    """
+    Not authorized to perform sts:AssumeRoleWithWebIdentity
+    """
+
   Scenario: Error handling
     Given I get an STS session token with a duration of 60 seconds
     Then the error code should be "ValidationError"
