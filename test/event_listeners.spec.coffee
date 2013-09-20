@@ -95,6 +95,14 @@ describe 'AWS.EventListeners', ->
       expect(call.args[0].code).toEqual('SigningError')
       expect(call.args[0].message).toMatch(/Missing region in config/)
 
+    it 'ignores region validation if service has global endpoint', ->
+      service.config.region = null
+      service.api.globalEndpoint = 'mock.mockservice.tld'
+
+      makeRequest(->)
+      expect(errorHandler).not.toHaveBeenCalled()
+      delete service.api.globalEndpoint
+
   describe 'build', ->
     it 'takes the request object as a parameter', ->
       request = makeRequest()
