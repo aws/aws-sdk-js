@@ -35,4 +35,9 @@ module.exports = function() {
     this.assert.compare(ttl, '<', duration);
     callback();
   });
+
+  this.Given(/^I try to assume role with web identity$/, function(callback) {
+    var params = {RoleArn: 'arn:aws:iam::123456789:role/WebIdentity', RoleSessionName: 'name', WebIdentityToken: 'token'};
+    this.request(null, 'assumeRoleWithWebIdentity', params, callback, false);
+  });
 };
