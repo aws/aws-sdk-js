@@ -15,6 +15,7 @@
     "devDependencies": {
       "repl.history": "latest",
       "jasmine-node": "latest",
+      "semver": "latest",
       "coffee-script": "latest",
       "jshint": "2.1.0",
       "cucumber": "latest"
