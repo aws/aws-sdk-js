@@ -11,7 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-AWS = require('../lib/core')
+helpers = require('./helpers')
+AWS = helpers.AWS
 
 validateCredentials = (creds, key, secret, session) ->
   expect(creds.accessKeyId).toEqual(key || 'akid')
@@ -163,6 +164,47 @@ describe 'AWS.EC2MetadataCredentials', ->
     it 'does not try to load creds second time if Metadata service failed', ->
       creds = new AWS.EC2MetadataCredentials(host: 'host')
       spy = spyOn(creds.metadataService, 'loadCredentials').andCallFake (cb) ->
+        cb(new Error('INVALID SERVICE'))
+
+      creds.refresh (err) ->
+        expect(err.message).toEqual('INVALID SERVICE')
+      creds.refresh ->
+        creds.refresh ->
+          creds.refresh ->
+            expect(spy.calls.length).toEqual(1)
+
+describe 'AWS.WebIdentityCredentials', ->
+  creds = null
+
+  beforeEach ->
+    creds = new AWS.WebIdentityCredentials(WebIdentityToken: 'token', RoleArn: 'arn')
+
+  mockSTS = (expireTime) ->
+    spyOn(creds.service, 'assumeRoleWithWebIdentity').andCallFake (params, cb) ->
+      expect(params).toEqual(RoleArn: 'arn', WebIdentityToken: 'token', RoleSessionName: 'web-identity')
+      cb null, Credentials:
+        AccessKeyId: 'KEY'
+        SecretAccessKey: 'SECRET'
+        SessionToken: 'TOKEN'
+        Expiration: expireTime
+
+  describe 'needsRefresh', ->
+    it 'can be expired based on expire time from STS response', ->
+      mockSTS(new Date(0))
+      creds.refresh(->)
+      expect(creds.needsRefresh()).toEqual(true)
+
+  describe 'refresh', ->
+    it 'loads credentials from EC2 Metadata service', ->
+      mockSTS(new Date(AWS.util.date.getDate().getTime() + 1000))
+      creds.refresh(->)
+      expect(creds.accessKeyId).toEqual('KEY')
+      expect(creds.secretAccessKey).toEqual('SECRET')
+      expect(creds.sessionToken).toEqual('TOKEN')
+      expect(creds.needsRefresh()).toEqual(false)
+
+    it 'does not try to load creds second time if Metadata service failed', ->
+      spy = spyOn(creds.service, 'assumeRoleWithWebIdentity').andCallFake (params, cb) ->
         cb(new Error('INVALID SERVICE'))
 
       creds.refresh (err) ->
