@@ -14,5 +14,17 @@
  */
 
 // Fill these in with your application details
-appId = '...';
-roleArn = '...';
+appInfo = {
+  amazon: {
+    appId: '...',
+    roleArn: '...'
+  },
+  facebook: {
+    appId: '...',
+    roleArn: '...'
+  },
+  google: {
+    appId: '...',
+    roleArn: '...'
+  }
+};

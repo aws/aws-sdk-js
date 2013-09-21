@@ -959,7 +959,7 @@ AWS.EventListeners = {
     });
 
     add('VALIDATE_REGION', 'validate', function VALIDATE_REGION(req) {
-      if (!req.service.config.region) {
+      if (!req.service.config.region && !req.service.api.globalEndpoint) {
         throw AWS.util.error(new Error(),
           {code: 'SigningError', message: 'Missing region in config'});
       }
@@ -2026,6 +2026,9 @@ AWS.Request = inherit({
   constructor: function Request(service, operation, params) {
     var endpoint = service.endpoint;
     var region = service.config.region;
+
+    // global endpoints sign as us-east-1
+    if (service.api.globalEndpoint) region = 'us-east-1';
 
     this.service = service;
     this.operation = operation;
@@ -9668,14 +9671,7 @@ module.exports = AWS.S3;
 
 var AWS = require('../core');
 
-AWS.STS = AWS.Service.defineService('sts', ['2011-06-15'], {
-  /**
-   * @api private
-   */
-  setupRequestListeners: function setupRequestListeners(request) {
-    request.removeListener('validate', AWS.EventListeners.Core.VALIDATE_REGION);
-  }
-});
+AWS.STS = AWS.Service.defineService('sts', ['2011-06-15']);
 
 AWS.STS.prototype.assumeRoleWithWebIdentity = function assumeRoleWithWebIdentity(params, callback) {
   if (typeof params === 'function') {
@@ -9686,13 +9682,16 @@ AWS.STS.prototype.assumeRoleWithWebIdentity = function assumeRoleWithWebIdentity
   var request = this.makeRequest('assumeRoleWithWebIdentity', params);
   request.removeListener('validate', AWS.EventListeners.Core.VALIDATE_CREDENTIALS);
   request.removeListener('sign', AWS.EventListeners.Core.SIGN);
-  request.addListener('build', function(request) {
+  request.addListener('build', function convertToGET(request) {
     request.httpRequest.method = 'GET';
     request.httpRequest.path = '/?' + request.httpRequest.body;
     request.httpRequest.body = '';
+
+    // don't need these headers on a GET request
     delete request.httpRequest.headers['Content-Length'];
     delete request.httpRequest.headers['Content-Type'];
   });
+
   return callback ? request.send(callback) : request;
 };
 

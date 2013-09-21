@@ -35,6 +35,8 @@ language governing permissions and limitations under the License.
     .break { clear: both; }
     table, th, td { border: 1px solid #ccc; border-collapse: collapse; vertical-align: top; }
 
+    #login-buttons { float: right; }
+
     /* jquery-ui overrides */
     :focus { outline-width: 0; }
   </style>
@@ -419,7 +421,7 @@ language governing permissions and limitations under the License.
     function loaded() {
       $('#selectOperation').tabs({collapsible: true});
       $('#executeOperation').click(executeOperation);
-      $('#header').text('AWS SDK for JavaScript ' + AWS.VERSION);
+      $('#header .title').text('AWS SDK for JavaScript ' + AWS.VERSION);
     }
 
     function init() {
@@ -428,10 +430,34 @@ language governing permissions and limitations under the License.
       loaded();
     }
 
-    function loadSTSCredentials(provider, accessToken) {
+    function loginButtons() {
+      $('#login-amazon').click(function() {
+        amazon.Login.authorize({scope: 'profile'}, function(response) {
+          if (!response.error) {
+            loadSTSCredentials('www.amazon.com',
+              window.appInfo.amazon.roleArn,
+              response.access_token);
+          }
+        });
+      });
+
+      $('#login-facebook').click(function() {
+        FB.login(function(response) {
+          if (response.authResponse) {
+            loadSTSCredentials('graph.facebook.com',
+              window.appInfo.facebook.roleArn,
+              response.authResponse.accessToken);
+          } else {
+            console.log('User cancelled login or did not fully authorize.');
+          }
+        });
+      });
+    }
+
+    function loadSTSCredentials(provider, arn, accessToken) {
       var params = {
         ProviderId: provider,
-        RoleArn: window.roleArn,
+        RoleArn: arn,
         RoleSessionName: 'web-identity-session',
         WebIdentityToken: accessToken
       };
@@ -451,6 +477,7 @@ language governing permissions and limitations under the License.
     }
 
     $(init);
+    $(loginButtons);
   </script>
 </head>
 <body>
@@ -459,19 +486,9 @@ language governing permissions and limitations under the License.
     window.fbAsyncInit = function() {
       // init the FB JS SDK
       FB.init({
-        appId      : window.appId, // App ID from the app dashboard
-        //channelUrl : '///channel.html', // Channel file for x-domain comms
-        status     : true, // Check Facebook Login status
-        xfbml      : true // Look for social plugins on the page
-      });
-
-      // Additional initialization code such as adding Event Listeners goes here
-      FB.login(function(response) {
-        if (response.authResponse) {
-          loadSTSCredentials('graph.facebook.com', response.authResponse.accessToken);
-        } else {
-          console.log('User cancelled login or did not fully authorize.');
-        }
+        appId: window.appInfo.facebook.appId,
+        status: false,
+        xfbml: false
       });
     };
 
@@ -485,16 +502,10 @@ language governing permissions and limitations under the License.
      }(document, 'script', 'facebook-jssdk'));
   </script>
 
-<!--
   <div id="amazon-root"></div>
   <script type="text/javascript">
     window.onAmazonLoginReady = function() {
-      amazon.Login.setClientId('amzn1.application-oa2-client.f94aea5a9ca940d685c4f31268317417');
-      amazon.Login.authorize({scope: 'profile'}, function(response) {
-        if (!response.error) {
-          loadSTSCredentials('www.amazon.com', response.access_token);
-        }
-      });
+      amazon.Login.setClientId(window.appInfo.amazon.appId);
     };
 
     (function(d) {
@@ -504,9 +515,14 @@ language governing permissions and limitations under the License.
       d.getElementById('amazon-root').appendChild(a);
     })(document);
   </script>
--->
 
-  <div id="header" class="padding"></div>
+  <div id="header" class="padding">
+    <span class="title"></span>
+    <div id="login-buttons">
+      <button id="login-amazon">Login with Amazon</button>
+      <button id="login-facebook">Login with Facebook</button>
+    </div>
+  </div>
   <div id="selectOperation">
     <ul>
       <li><a href="#selectOperationTab">Select an operation</a></li>
