@@ -58,6 +58,12 @@ describe 'AWS.Credentials', ->
       creds.expired = true
       expect(creds.needsRefresh()).toEqual(true)
 
+    it 'can be expired based on expireTime', ->
+      creds = new AWS.Credentials('akid', 'secret')
+      creds.expired = false
+      creds.expireTime = new Date(0)
+      expect(creds.needsRefresh()).toEqual(true)
+
   describe 'get', ->
     it 'does not call refresh if not needsRefresh', ->
       spy = jasmine.createSpy('done callback')
