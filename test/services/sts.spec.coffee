@@ -36,7 +36,7 @@ describe 'AWS.STS', ->
       expect(creds.expireTime).toEqual(new Date(0))
       expect(creds.expired).toEqual(false)
 
-    it 'creates a TemporaryCredentials object with hydrated data', ->
+    it 'updates an existing Credentials object with hydrated data', ->
       data = Credentials:
          AccessKeyId: 'KEY'
          SecretAccessKey: 'SECRET'
