@@ -22,6 +22,35 @@ describe 'AWS.STS', ->
   beforeEach ->
     sts = new AWS.STS()
 
+  describe 'credentialsFrom', ->
+    it 'creates a TemporaryCredentials object with hydrated data', ->
+      creds = sts.credentialsFrom Credentials:
+         AccessKeyId: 'KEY'
+         SecretAccessKey: 'SECRET'
+         SessionToken: 'TOKEN'
+         Expiration: new Date(0)
+      expect(creds instanceof AWS.TemporaryCredentials)
+      expect(creds.accessKeyId).toEqual('KEY')
+      expect(creds.secretAccessKey).toEqual('SECRET')
+      expect(creds.sessionToken).toEqual('TOKEN')
+      expect(creds.expireTime).toEqual(new Date(0))
+      expect(creds.expired).toEqual(false)
+
+    it 'updates an existing Credentials object with hydrated data', ->
+      data = Credentials:
+         AccessKeyId: 'KEY'
+         SecretAccessKey: 'SECRET'
+         SessionToken: 'TOKEN'
+         Expiration: new Date(0)
+      creds = new AWS.Credentials
+      sts.credentialsFrom(data, creds)
+      expect(creds instanceof AWS.Credentials)
+      expect(creds.accessKeyId).toEqual('KEY')
+      expect(creds.secretAccessKey).toEqual('SECRET')
+      expect(creds.sessionToken).toEqual('TOKEN')
+      expect(creds.expireTime).toEqual(new Date(0))
+      expect(creds.expired).toEqual(false)
+
   describe 'assumeRoleWithWebIdentity', ->
     service = new AWS.STS
 

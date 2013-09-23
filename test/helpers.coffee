@@ -14,6 +14,7 @@
 AWS = require('../lib/aws')
 EventEmitter = require('events').EventEmitter
 Buffer = require('buffer').Buffer
+semver = require('semver')
 
 require('util').print = (data) ->
   process.stdout.write(data)
@@ -79,7 +80,7 @@ mockHttpSuccessfulResponse = (status, headers, data, cb) ->
   cb(httpResp)
 
   AWS.util.arrayEach data.slice(), (str) ->
-    if httpResp._events.readable || process.version > 'v0.11.3'
+    if httpResp._events.readable || semver.gt(process.version, 'v0.11.3')
       httpResp.emit('readable')
     else
       httpResp.emit('data', new Buffer(str))
