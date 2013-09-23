@@ -118,7 +118,7 @@ describe 'AWS.Config', ->
       expect(config.maxRetries).toEqual(undefined)
       expect(config.sslEnabled).toEqual(undefined)
       expect(config.credentials).not.toBe(undefined)
-      expect(config.credentialProvider).not.toEqual(undefined)
+      expect(config.credentialProvider).not.toBe(undefined)
 
   describe 'update', ->
     it 'should be able to update keyed values', ->
