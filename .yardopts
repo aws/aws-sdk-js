@@ -1,6 +1,7 @@
 -m markdown
 --markup-provider rdiscount
 --exclude /api/
+--exclude lib/aws.js
 --no-api private
 --api experimental
 --no-highlight
