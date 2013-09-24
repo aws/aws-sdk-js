@@ -356,7 +356,7 @@ language governing permissions and limitations under the License.
 
       var data;
       if (resp.error) {
-        data = resp.error.stack;
+        data = resp.error.message + '\n' + resp.error.stack;
       } else {
         if (resp.data.Body) delete resp.data.Body.parent; // remove circular ref
         data = JSON.stringify(resp.data, null, 2);
@@ -399,6 +399,7 @@ language governing permissions and limitations under the License.
       try {
         updateHistoryEntry(resp);
       } catch (err) {
+        console.log(err.message);
         console.log(err.stack);
       }
     }
@@ -422,46 +423,25 @@ language governing permissions and limitations under the License.
       loaded();
     }
 
-    function loginButtons() {
-      $('#login-amazon').click(function() {
-        amazon.Login.authorize({scope: 'profile'}, function(response) {
-          if (!response.error) {
-            loadIDPCredentials('www.amazon.com',
-              window.appInfo.amazon.roleArn,
-              response.access_token);
-          }
-        });
-      });
-
-      $('#login-facebook').click(function() {
-        FB.login(function(response) {
-          if (response.authResponse) {
-            loadIDPCredentials('graph.facebook.com',
-              window.appInfo.facebook.roleArn,
-              response.authResponse.accessToken);
-          } else {
-            console.log('User cancelled login or did not fully authorize.');
-          }
-        });
-      });
-    }
-
     function loadIDPCredentials(provider, arn, accessToken) {
       var params = {
         ProviderId: provider,
         RoleArn: arn,
         WebIdentityToken: accessToken
       };
+      if (provider === null) delete params.ProviderId;
 
       AWS.config.credentials = new AWS.WebIdentityCredentials(params);
       AWS.config.credentials.get(function (err) {
-        if (err) console.log(err.stack);
+        if (err) {
+          console.log(err.message);
+          console.log(err.stack);
+        }
         else loadServices();
       });
     }
 
     $(init);
-    $(loginButtons);
   </script>
 </head>
 <body>
@@ -474,6 +454,17 @@ language governing permissions and limitations under the License.
         status: false,
         xfbml: false
       });
+
+      FB.Event.subscribe('auth.authResponseChange', function(response) {
+        if (response.status === 'connected') {
+          loadIDPCredentials('graph.facebook.com',
+            window.appInfo.facebook.roleArn,
+            response.authResponse.accessToken);
+        }
+      });
+
+      FB.getLoginStatus();
+      $('#login-facebook').click(function() { FB.login() });
     };
 
     // Load the SDK asynchronously
@@ -490,6 +481,16 @@ language governing permissions and limitations under the License.
   <script type="text/javascript">
     window.onAmazonLoginReady = function() {
       amazon.Login.setClientId(window.appInfo.amazon.appId);
+
+      $('#login-amazon').click(function() {
+        amazon.Login.authorize({scope: 'profile'}, function(response) {
+          if (!response.error) {
+            loadIDPCredentials('www.amazon.com',
+              window.appInfo.amazon.roleArn,
+              response.access_token);
+          }
+        });
+      });
     };
 
     (function(d) {
@@ -500,11 +501,36 @@ language governing permissions and limitations under the License.
     })(document);
   </script>
 
+  <script type="text/javascript">
+    (function() {
+     var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+     po.src = 'https://apis.google.com/js/client:plusone.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+   })();
+
+   function loginToGoogle(response) {
+     if (!response.error) {
+       loadIDPCredentials(null, window.appInfo.google.roleArn, response.id_token);
+     }
+   }
+  </script>
+
   <div id="header" class="padding">
     <span class="title"></span>
     <div id="login-buttons">
       <button id="login-amazon">Login with Amazon</button>
       <button id="login-facebook">Login with Facebook</button>
+      <button id="login-google">
+        <span
+          class="g-signin"
+          data-height="short"
+          data-callback="loginToGoogle"
+          data-clientid="156058024465.apps.googleusercontent.com"
+          data-cookiepolicy="single_host_origin"
+          data-requestvisibleactions="http://schemas.google.com/AddActivity"
+          data-scope="https://www.googleapis.com/auth/plus.login">
+        </span>
+      </button>
     </div>
   </div>
   <div id="selectOperation">
