@@ -64,6 +64,19 @@ describe 'AWS.Credentials', ->
       creds.expireTime = new Date(0)
       expect(creds.needsRefresh()).toEqual(true)
 
+    it 'needs refresh if expireTime is within expiryWindow secs from now', ->
+      creds = new AWS.Credentials('akid', 'secret')
+      creds.expired = false
+      creds.expireTime = new Date(AWS.util.date.getDate().getTime() + 1000)
+      expect(creds.needsRefresh()).toEqual(true)
+
+    it 'does not need refresh if expireTime outside expiryWindow', ->
+      creds = new AWS.Credentials('akid', 'secret')
+      creds.expired = false
+      ms = AWS.util.date.getDate().getTime() + (creds.expiryWindow + 5) * 1000
+      creds.expireTime = new Date(ms)
+      expect(creds.needsRefresh()).toEqual(false)
+
   describe 'get', ->
     it 'does not call refresh if not needsRefresh', ->
       spy = jasmine.createSpy('done callback')
@@ -227,7 +240,7 @@ describe 'AWS.TemporaryCredentials', ->
 
   describe 'refresh', ->
     it 'loads temporary credentials from STS using getSessionToken', ->
-      mockSTS(new Date(AWS.util.date.getDate().getTime() + 1000))
+      mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000))
       creds.refresh(->)
       expect(creds.accessKeyId).toEqual('KEY')
       expect(creds.secretAccessKey).toEqual('SECRET')
@@ -236,7 +249,7 @@ describe 'AWS.TemporaryCredentials', ->
 
     it 'loads temporary credentials from STS using assumeRole if RoleArn is provided', ->
       creds = new AWS.TemporaryCredentials(RoleArn: 'ARN')
-      mockSTS(new Date(AWS.util.date.getDate().getTime() + 1000),
+      mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000),
         RoleArn: 'ARN', RoleSessionName: 'temporary-credentials')
       creds.refresh(->)
       expect(creds.accessKeyId).toEqual('KEY')
@@ -272,7 +285,7 @@ describe 'AWS.WebIdentityCredentials', ->
 
   describe 'refresh', ->
     it 'loads federated credentials from STS', ->
-      mockSTS(new Date(AWS.util.date.getDate().getTime() + 1000))
+      mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000))
       creds.refresh(->)
       expect(creds.accessKeyId).toEqual('KEY')
       expect(creds.secretAccessKey).toEqual('SECRET')
