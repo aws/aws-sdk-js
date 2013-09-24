@@ -316,14 +316,6 @@ language governing permissions and limitations under the License.
       currentService[currentOperation](params).send();
     }
 
-    function loadConfig(akid, secret, session) {
-      AWS.config.update({
-        accessKeyId: akid,
-        secretAccessKey: secret,
-        sessionToken: session
-      });
-    }
-
     function template(name, options) {
       var html = $('#template-' + name).html();
       html = html.replace(/\{(.+?)\}/g, function(matches, key) {
@@ -434,7 +426,7 @@ language governing permissions and limitations under the License.
       $('#login-amazon').click(function() {
         amazon.Login.authorize({scope: 'profile'}, function(response) {
           if (!response.error) {
-            loadSTSCredentials('www.amazon.com',
+            loadIDPCredentials('www.amazon.com',
               window.appInfo.amazon.roleArn,
               response.access_token);
           }
@@ -444,7 +436,7 @@ language governing permissions and limitations under the License.
       $('#login-facebook').click(function() {
         FB.login(function(response) {
           if (response.authResponse) {
-            loadSTSCredentials('graph.facebook.com',
+            loadIDPCredentials('graph.facebook.com',
               window.appInfo.facebook.roleArn,
               response.authResponse.accessToken);
           } else {
@@ -454,25 +446,17 @@ language governing permissions and limitations under the License.
       });
     }
 
-    function loadSTSCredentials(provider, arn, accessToken) {
+    function loadIDPCredentials(provider, arn, accessToken) {
       var params = {
         ProviderId: provider,
         RoleArn: arn,
-        RoleSessionName: 'web-identity-session',
         WebIdentityToken: accessToken
       };
 
-      var sts = new AWS.STS();
-      sts.assumeRoleWithWebIdentity(params, function (err, data) {
-        if (data) {
-          loadConfig(
-            data.Credentials.AccessKeyId,
-            data.Credentials.SecretAccessKey,
-            data.Credentials.SessionToken);
-          loadServices();
-        } else {
-          console.log(err.stack);
-        }
+      AWS.config.credentials = new AWS.WebIdentityCredentials(params);
+      AWS.config.credentials.get(function (err) {
+        if (err) console.log(err.stack);
+        else loadServices();
       });
     }
 
