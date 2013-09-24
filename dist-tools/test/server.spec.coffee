@@ -58,7 +58,7 @@ describe 'bundle server routes', ->
     it 'builds minified SDK', (done) ->
       get().expect(200).end (err, res) ->
           expect(res.text).toMatch(/Copyright .+ Amazon\.com, Inc\./)
-          expect(res.text).toMatch(/!function e\(t,r,n\)\{function i\(s,a\)\{/)
+          expect(res.text).toMatch(/!function \w\(\w,\w,\w\)\{function \w\(\w,\w\)\{/)
           svc = helpers.evalCode("new window.AWS.DynamoDB()", res.text)
           api = helpers.apiFilesMap
           expect(svc.api.apiVersion).toEqual(api.dynamodb[-1..-1][0])

@@ -28,7 +28,7 @@ runTransform = (tr, data, cb) ->
 
 # Bundle helpers
 
-bundleFile = bundleHelpers.mainFile
+bundleFile = bundleHelpers.servicesFile
 header = 'var AWS = require("./core"); module.exports = AWS;'
 buildBundle = (services) ->
   data = [header]

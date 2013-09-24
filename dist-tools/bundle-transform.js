@@ -111,7 +111,7 @@ module.exports = function(file, servicesPassed, callback) {
   }
 
   function transform(file) {
-    if (file !== bundleHelpers.mainFile) return through();
+    if (file !== bundleHelpers.servicesFile) return through();
 
     function write() { }
     function end() {

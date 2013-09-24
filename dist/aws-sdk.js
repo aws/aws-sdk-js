@@ -13,12 +13,26 @@
  * language governing permissions and limitations under the License.
  */
 ;(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var AWS = require("./core"); module.exports = AWS;
-AWS.Service.defineServiceApi(require("./services/dynamodb"), "2012-08-10", require("./services/api/dynamodb-2012-08-10"));
-AWS.Service.defineServiceApi(require("./services/s3"), "2006-03-01", require("./services/api/s3-2006-03-01"));
-AWS.Service.defineServiceApi(require("./services/sts"), "2011-06-15", require("./services/api/sts-2011-06-15"));
-},{"./core":3,"./services/api/dynamodb-2012-08-10":17,"./services/api/s3-2006-03-01":18,"./services/api/sts-2011-06-15":19,"./services/dynamodb":20,"./services/s3":21,"./services/sts":22}],2:[function(require,module,exports){
-var process=require("__browserify_process");/**
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+window.AWS = module.exports = require('./core');
+require('./services');
+
+},{"./core":3,"./services":20}],2:[function(require,module,exports){
+/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -34,10 +48,8 @@ var process=require("__browserify_process");/**
  */
 
 var AWS = require('./core');
-require('./event_listeners');
-require('./sequential_executor');
-require('./metadata_service');
-var inherit = AWS.util.inherit;
+require('./credentials');
+require('./credentials/credential_provider_chain');
 
 /**
  * The main configuration class used by all service objects to set
@@ -85,7 +97,7 @@ var inherit = AWS.util.inherit;
  * @!attribute s3ForcePathStyle
  *   @return [Boolean] whether to force path style URLs for S3 objects
  */
-AWS.Config = inherit({
+AWS.Config = AWS.util.inherit({
 
   /**
    * Creates a new configuration object. This is the object that passes
@@ -290,24 +302,9 @@ AWS.Config = inherit({
    * @api private
    */
   keys: {
-    credentials: function () {
-      var credentials = null;
-      new AWS.CredentialProviderChain([
-        function () { return new AWS.EnvironmentCredentials('AWS'); },
-        function () { return new AWS.EnvironmentCredentials('AMAZON'); }
-      ]).resolve(function(err, creds) {
-        if (!err) credentials = creds;
-      });
-      return credentials;
-    },
-    credentialProvider: function() {
-      return new AWS.CredentialProviderChain([
-        function() { return new AWS.EC2MetadataCredentials(); }
-      ]);
-    },
-    region: function() {
-      return process.env.AWS_REGION || process.env.AMAZON_REGION;
-    },
+    credentials: null,
+    credentialProvider: null,
+    region: null,
     apiVersions: {},
     apiVersion: null,
     endpoint: undefined,
@@ -337,6 +334,112 @@ AWS.Config = inherit({
 });
 
 /**
+ * @return [AWS.Config] The global configuration object singleton instance
+ * @readonly
+ * @see AWS.Config
+ */
+AWS.config = new AWS.Config();
+
+},{"./core":3,"./credentials":4,"./credentials/credential_provider_chain":5}],3:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+/**
+ * The main AWS namespace
+ */
+var AWS = {};
+module.exports = AWS;
+require('./util');
+
+AWS.util.update(AWS, {
+
+  /**
+   * @constant
+   */
+  VERSION: '1.6.0',
+
+  /**
+   * @api private
+   */
+  ServiceInterface: {},
+
+  /**
+   * @api private
+   */
+  Signers: {},
+
+  /**
+   * @api private
+   */
+  XML: {}
+
+});
+
+require('./service');
+
+require('./credentials');
+require('./credentials/credential_provider_chain');
+require('./credentials/temporary_credentials');
+require('./credentials/web_identity_credentials');
+
+require('./config');
+require('./http');
+require('./sequential_executor');
+require('./event_listeners');
+require('./request');
+require('./signers/request_signer');
+require('./param_validator');
+
+/**
+ * @readonly
+ * @return [AWS.SequentialExecutor] a collection of global event listeners that
+ *   are attached to every sent request.
+ * @see AWS.Request AWS.Request for a list of events to listen for
+ * @example Logging the time taken to send a request
+ *   AWS.events.on('send', function startSend(resp) {
+ *     resp.startTime = new Date().getTime();
+ *   }).on('complete', function calculateTime(resp) {
+ *     var time = (new Date().getTime() - resp.startTime) / 1000;
+ *     console.log('Request took ' + time + ' seconds');
+ *   });
+ *
+ *   new AWS.S3().listBuckets(); // prints 'Request took 0.285 seconds'
+ */
+AWS.events = new AWS.SequentialExecutor();
+
+if (typeof window !== 'undefined') window.AWS = AWS;
+
+},{"./config":2,"./credentials":4,"./credentials/credential_provider_chain":5,"./credentials/temporary_credentials":6,"./credentials/web_identity_credentials":7,"./event_listeners":8,"./http":9,"./param_validator":11,"./request":12,"./sequential_executor":13,"./service":14,"./signers/request_signer":28,"./util":34}],4:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('./core');
+
+/**
  * Represents your AWS security credentials, specifically the
  * {accessKeyId}, {secretAccessKey}, and optional {sessionToken}.
  * Creating a `Credentials` object allows you to pass around your
@@ -363,7 +466,10 @@ AWS.Config = inherit({
  *
  * @!attribute expired
  *   @return [Boolean] whether the credentials have been expired and
- *     require a refresh
+ *     require a refresh. Used in conjunction with {expireTime}.
+ * @!attribute expireTime
+ *   @return [Date] a time when credentials should be considered expired. Used
+ *     in conjunction with {expired}.
  * @!attribute accessKeyId
  *   @return [String] the AWS access key ID
  * @!attribute secretAccessKey
@@ -371,7 +477,7 @@ AWS.Config = inherit({
  * @!attribute sessionToken
  *   @return [String] an optional AWS session token
  */
-AWS.Credentials = inherit({
+AWS.Credentials = AWS.util.inherit({
   /**
    * A credentials object can be created using positional arguments or an options
    * hash.
@@ -397,6 +503,7 @@ AWS.Credentials = inherit({
    */
   constructor: function Credentials() {
     this.expired = false;
+    this.expireTime = null;
     if (arguments.length == 1 && typeof arguments[0] === 'object') {
       var creds = arguments[0].credentials || arguments[0];
       this.accessKeyId = creds.accessKeyId;
@@ -415,7 +522,11 @@ AWS.Credentials = inherit({
    *   logic.
    */
   needsRefresh: function needsRefresh() {
-    return this.expired || !this.accessKeyId || !this.secretAccessKey;
+    if (this.expireTime && AWS.util.date.getDate() > this.expireTime) {
+      return true;
+    } else {
+      return this.expired || !this.accessKeyId || !this.secretAccessKey;
+    }
   },
 
   /**
@@ -465,200 +576,24 @@ AWS.Credentials = inherit({
   }
 });
 
+},{"./core":3}],5:[function(require,module,exports){
 /**
- * Represents credentials from a JSON file on disk.
- * If the credentials expire, the SDK can {refresh} the credentials
- * from the file.
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
- * The format of the file should be similar to the options passed to
- * {AWS.Config}:
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
  *
- * ```js
- * {accessKeyId: 'akid', secretAccessKey: 'secret', sessionToken: 'optional'}
- * ```
+ *     http://aws.amazon.com/apache2.0/
  *
- * @example Loading credentials from disk
- *   var creds = new AWS.FileSystemCredentials('./configuration.json');
- *   creds.accessKeyId == 'AKID'
- *
- * @!attribute filename
- *   @readonly
- *   @return [String] the path to the JSON file on disk containing the
- *     credentials.
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
  */
-AWS.FileSystemCredentials = inherit(AWS.Credentials, {
 
-  /**
-   * @overload AWS.FileSystemCredentials(filename)
-   *   Creates a new FileSystemCredentials object from a filename
-   *
-   *   @param filename [String] the path on disk to the JSON file to load.
-   */
-  constructor: function FileSystemCredentials(filename) {
-    AWS.Credentials.call(this);
-    this.filename = filename;
-    this.get(function() {});
-  },
-
-  /**
-   * Loads the credentials from the {filename} on disk.
-   *
-   * @callback callback function(err)
-   *   Called when the instance metadata service responds (or fails). When
-   *   this callback is called with no error, it means that the credentials
-   *   information has been loaded into the object (as the `accessKeyId`,
-   *   `secretAccessKey`, and `sessionToken` properties).
-   *   @param err [Error] if an error occurred, this value will be filled
-   * @see get
-   */
-  refresh: function refresh(callback) {
-    if (!callback) callback = function(err) { if (err) throw err; };
-    try {
-      var creds = JSON.parse(AWS.util.readFileSync(this.filename));
-      AWS.Credentials.call(this, creds);
-      if (!this.accessKeyId || !this.secretAccessKey) {
-        throw new Error('Credentials not set in ' + this.filename);
-      }
-      this.expired = false;
-      callback();
-    } catch (err) {
-      callback(err);
-    }
-  }
-
-});
-
-/**
- * Represents credentials from the environment.
- *
- * By default, this class will look for the matching environment variables
- * prefixed by a given {envPrefix}. The un-prefixed environment variable names
- * for each credential value is listed below:
- *
- * ```js
- * accessKeyId: ACCESS_KEY_ID
- * secretAccessKey: SECRET_ACCESS_KEY
- * sessionToken: SESSION_TOKEN
- * ```
- *
- * With the default prefix of 'AWS', the environment variables would be:
- *
- *     AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN
- *
- * @!attribute envPrefix
- *   @readonly
- *   @return [String] the prefix for the environment variable names excluding
- *     the separating underscore ('_').
- */
-AWS.EnvironmentCredentials = inherit(AWS.Credentials, {
-
-  /**
-   * Creates a new EnvironmentCredentials class with a given variable
-   * prefix {envPrefix}. For example, to load credentials using the 'AWS'
-   * prefix:
-   *
-   * ```js
-   * var creds = new AWS.EnvironmentCredentials('AWS');
-   * creds.accessKeyId == 'AKID' // from AWS_ACCESS_KEY_ID env var
-   * ```
-   *
-   * @param envPrefix [String] the prefix to use (e.g., 'AWS') for environment
-   *   variables. Do not include the separating underscore.
-   */
-  constructor: function EnvironmentCredentials(envPrefix) {
-    this.envPrefix = envPrefix;
-    this.get(function() {});
-  },
-
-  /**
-   * Loads credentials from the environment using the prefixed
-   * environment variables.
-   *
-   * @callback callback function(err)
-   *   Called when the instance metadata service responds (or fails). When
-   *   this callback is called with no error, it means that the credentials
-   *   information has been loaded into the object (as the `accessKeyId`,
-   *   `secretAccessKey`, and `sessionToken` properties).
-   *   @param err [Error] if an error occurred, this value will be filled
-   * @see get
-   */
-  refresh: function refresh(callback) {
-    /*jshint maxcomplexity:10*/
-    if (!callback) callback = function(err) { if (err) throw err; };
-
-    if (process === undefined) {
-      callback(new Error('No process info available'));
-      return;
-    }
-
-    var keys = ['ACCESS_KEY_ID', 'SECRET_ACCESS_KEY', 'SESSION_TOKEN'];
-    var values = [];
-
-    for (var i = 0; i < keys.length; i++) {
-      var prefix = '';
-      if (this.envPrefix) prefix = this.envPrefix + '_';
-      values[i] = process.env[prefix + keys[i]];
-      if (!values[i] && keys[i] !== 'SESSION_TOKEN') {
-        callback(new Error('Variable ' + prefix + keys[i] + ' not set.'));
-        return;
-      }
-    }
-
-    this.expired = false;
-    AWS.Credentials.apply(this, values);
-    callback();
-  }
-
-});
-
-/**
- * Represents credentials recieved from the metadata service on an EC2 instance.
- *
- * By default, this class will connect to the metadata service using
- * {AWS.MetadataService} and attempt to load any available credentials. If it
- * can connect, and credentials are available, these will be used with zero
- * configuration.
- */
-AWS.EC2MetadataCredentials = inherit(AWS.Credentials, {
-  constructor: function EC2MetadataCredentials(options) {
-    this.serviceError = null;
-    this.metadataService = new AWS.MetadataService(options);
-    this.metadata = {};
-  },
-
-  /**
-   * Loads the credentials from the instance metadata service
-   *
-   * @callback callback function(err)
-   *   Called when the instance metadata service responds (or fails). When
-   *   this callback is called with no error, it means that the credentials
-   *   information has been loaded into the object (as the `accessKeyId`,
-   *   `secretAccessKey`, and `sessionToken` properties).
-   *   @param err [Error] if an error occurred, this value will be filled
-   * @see get
-   */
-  refresh: function refresh(callback) {
-    var self = this;
-    if (!callback) callback = function(err) { if (err) throw err; };
-    if (self.serviceError) {
-      callback(self.serviceError);
-      return;
-    }
-
-    self.metadataService.loadCredentials(function (err, creds) {
-      if (err) {
-        self.serviceError = err;
-      } else {
-        self.expired = false;
-        self.metadata = creds;
-        self.accessKeyId = creds.AccessKeyId;
-        self.secretAccessKey = creds.SecretAccessKey;
-        self.sessionToken = creds.Token;
-      }
-      callback(err);
-    });
-  }
-});
+var AWS = require('../core');
+require('../credentials');
 
 /**
  * Creates a credential provider chain that searches for AWS credentials
@@ -702,7 +637,7 @@ AWS.EC2MetadataCredentials = inherit(AWS.Credentials, {
  *     {defaultProviders}.
  *   @see defaultProviders
  */
-AWS.CredentialProviderChain = inherit(AWS.Credentials, {
+AWS.CredentialProviderChain = AWS.util.inherit(AWS.Credentials, {
 
   /**
    * Creates a new CredentialProviderChain with a default set of providers
@@ -770,20 +705,9 @@ AWS.CredentialProviderChain = inherit(AWS.Credentials, {
 /**
  * The default set of providers used by a vanilla CredentialProviderChain.
  */
-AWS.CredentialProviderChain.defaultProviders = [
-  function () { return new AWS.EnvironmentCredentials('AWS'); },
-  function () { return new AWS.EnvironmentCredentials('AMAZON'); },
-  function () { return new AWS.EC2MetadataCredentials(); }
-];
+AWS.CredentialProviderChain.defaultProviders = [];
 
-/**
- * @return [AWS.Config] The global configuration object singleton instance
- * @readonly
- * @see AWS.Config
- */
-AWS.config = new AWS.Config();
-
-},{"./core":3,"./event_listeners":4,"./metadata_service":7,"./sequential_executor":10,"__browserify_process":55}],3:[function(require,module,exports){
+},{"../core":3,"../credentials":4}],6:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -799,67 +723,224 @@ AWS.config = new AWS.Config();
  * language governing permissions and limitations under the License.
  */
 
+var AWS = require('../core');
+require('../credentials');
+require('../services/sts');
+
 /**
- * The main AWS namespace
+ * Represents temporary credentials retrieved from {AWS.STS}. Without any
+ * extra parameters, credentials will be fetched from the
+ * {AWS.STS.getSessionToken} operation. If an IAM role is provided, the
+ * {AWS.STS.assumeRole} operation will be used to fetch credentials for the
+ * role instead.
+ *
+ * To setup temporary credentials, configure a set of master credentials
+ * using the standard credentials providers (environment, EC2 instance metadata,
+ * or from the filesystem), then set the global credentials to a new
+ * temporary credentials object:
+ *
+ * ```js
+ * // Note that environment credentials are loaded by default,
+ * // the following line is shown for clarity:
+ * AWS.config.credentials = new AWS.EnvironmentCredentials('AWS');
+ *
+ * // Now set temporary credentials seeded from the master credentials
+ * AWS.config.credentials = new AWS.TemporaryCredentials();
+ *
+ * // subsequent requests will now use temporary credentials from AWS STS.
+ * new AWS.S3().listBucket(function(err, data) { ... });
+ * ```
+ *
+ * @!attribute masterCredentials
+ *   @return [AWS.Credentials] the master (non-temporary) credentials used to
+ *     get and refresh temporary credentials from AWS STS.
+ * @note (see constructor)
  */
-var AWS = {};
-module.exports = AWS;
-require('./util');
+AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
+  /**
+   * Creates a new temporary credentials object.
+   *
+   * @note In order to create temporary credentials, you first need to have
+   *   "master" credentials configured in {AWS.Config.credentials}. These
+   *   master credentials are necessary to retrieve the temporary credentials,
+   *   as well as refresh the credentials when they expire.
+   * @param params [map] a map of options that are passed to the
+   *   {AWS.STS.assumeRole} or {AWS.STS.getSessionToken} operations.
+   *   If a `RoleArn` parameter is passed in, credentials will be based on the
+   *   IAM role.
+   * @example Creating a new credenials object for generic temporary credentials
+   *   AWS.config.credentials = new AWS.TemporaryCredentials();
+   * @example Creating a new credentials object for an IAM role
+   *   AWS.config.credentials = new AWS.TemporaryCredentials({
+   *     RoleArn: 'arn:aws:iam::1234567890:role/TemporaryCredentials',
+   *   });
+   * @see AWS.STS.assumeRole
+   * @see AWS.STS.getSessionToken
+   */
+  constructor: function TemporaryCredentials(params) {
+    this.loadMasterCredentials();
+    this.serviceError = null;
+    this.service = new AWS.STS();
+    this.expired = true;
 
-AWS.util.update(AWS, {
+    this.params = params || {};
+    if (this.params.RoleArn) {
+      this.params.RoleSessionName =
+        this.params.RoleSessionName || 'temporary-credentials';
+    }
+  },
 
   /**
-   * @constant
+   * Refreshes credentials using {AWS.STS.assumeRole} or
+   * {AWS.STS.getSessionToken}, depending on whether an IAM role ARN was passed
+   * to the credentials {constructor}.
+   *
+   * @callback callback function(err)
+   *   Called when the STS service responds (or fails). When
+   *   this callback is called with no error, it means that the credentials
+   *   information has been loaded into the object (as the `accessKeyId`,
+   *   `secretAccessKey`, and `sessionToken` properties).
+   *   @param err [Error] if an error occurred, this value will be filled
+   * @see get
    */
-  VERSION: '1.6.0',
+  refresh: function refresh(callback) {
+    var self = this;
+    if (!callback) callback = function(err) { if (err) throw err; };
+    if (self.serviceError) {
+      callback(self.serviceError);
+      return;
+    }
+
+    self.service.config.credentials = self.masterCredentials;
+    var operation = self.params.RoleArn ?
+      self.service.assumeRole : self.service.getSessionToken;
+    operation.call(self.service, self.params, function (err, data) {
+      if (err) {
+        self.serviceError = err;
+      } else {
+        self.service.credentialsFrom(data, self);
+      }
+      callback(err);
+    });
+  },
 
   /**
    * @api private
    */
-  ServiceInterface: {},
-
-  /**
-   * @api private
-   */
-  Signers: {},
-
-  /**
-   * @api private
-   */
-  XML: {}
-
+  loadMasterCredentials: function loadMasterCredentials() {
+    this.masterCredentials = AWS.config.credentials;
+    while (this.masterCredentials.masterCredentials) {
+      this.masterCredentials = this.masterCredentials.masterCredentials;
+    }
+  }
 });
 
-require('./config');
-require('./http');
-require('./sequential_executor');
-require('./event_listeners');
-require('./request');
-require('./service');
-require('./signers/request_signer');
-require('./param_validator');
-require('./metadata_service');
+},{"../core":3,"../credentials":4,"../services/sts":26}],7:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+require('../credentials');
+require('../services/sts');
 
 /**
- * @readonly
- * @return [AWS.SequentialExecutor] a collection of global event listeners that
- *   are attached to every sent request.
- * @see AWS.Request AWS.Request for a list of events to listen for
- * @example Logging the time taken to send a request
- *   AWS.events.on('send', function startSend(resp) {
- *     resp.startTime = new Date().getTime();
- *   }).on('complete', function calculateTime(resp) {
- *     var time = (new Date().getTime() - resp.startTime) / 1000;
- *     console.log('Request took ' + time + ' seconds');
- *   });
+ * Represents credentials retrieved from STS Web Identity Federation support.
  *
- *   new AWS.S3().listBuckets(); // prints 'Request took 0.285 seconds'
+ * By default this provider gets credentials using the
+ * {AWS.STS.assumeRoleWithWebIdentity} service operation. This operation
+ * requires a `RoleArn` containing the ARN of the IAM trust policy for the
+ * application for which credentials will be given. In addition, the
+ * `WebIdentityToken` must be set to the token provided by the identity
+ * provider. See {constructor} for an example on creating a credentials
+ * object with proper `RoleArn` and `WebIdentityToken` values.
+ *
+ * ## Refreshing Credentials from Identity Service
+ *
+ * In addition to AWS credentials expiring after a given amount of time, the
+ * login token from the identity provider will also expire. Once this token
+ * expires, it will not be usable to refresh AWS credentials, and another
+ * token will be needed. The SDK does not manage refreshing of the token value,
+ * but this can be done through a "refresh token" supported by most identity
+ * providers. Consult the documentation for the identity provider for refreshing
+ * tokens. Once the refreshed token is acquired, you should make sure to update
+ * this new token in the credentials object's {params} property. The following
+ * code will update the WebIdentityToken, assuming you have retrieved an updated
+ * token from the identity provider:
+ *
+ * ```js
+ * AWS.config.credentials.params.WebIdentityToken = updatedToken;
+ * ```
+ *
+ * Future calls to `credentials.refresh()` will now use the new token.
+ *
+ * @!attribute params
+ *   @return [map] the map of params passed to
+ *     {AWS.STS.assumeRoleWithWebIdentity}. To update the token, set the
+ *     `params.WebIdentityToken` property.
  */
-AWS.events = new AWS.SequentialExecutor();
+AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
+  /**
+   * Creates a new credentials object.
+   * @param (see AWS.STS.assumeRoleWithWebIdentity)
+   * @example Creating a new credentials object
+   *   AWS.config.credentials = new AWS.WebIdentityCredentials({
+   *     RoleArn: 'arn:aws:iam::1234567890:role/WebIdentity',
+   *     WebIdentityToken: 'ABCDEFGHIJKLMNOP', // token from identity service
+   *     RoleSessionName: 'web' // optional name, defaults to web-identity
+   *   });
+   * @see AWS.STS.assumeRoleWithWebIdentity
+   */
+  constructor: function WebIdentityCredentials(params) {
+    this.serviceError = null;
+    this.expired = true;
+    this.service = new AWS.STS();
+    this.params = params;
+    this.params.RoleSessionName = this.params.RoleSessionName || 'web-identity';
+  },
 
-if (typeof window !== 'undefined') window.AWS = AWS;
+  /**
+   * Refreshes credentials using {AWS.STS.assumeRoleWithWebIdentity}
+   *
+   * @callback callback function(err)
+   *   Called when the STS service responds (or fails). When
+   *   this callback is called with no error, it means that the credentials
+   *   information has been loaded into the object (as the `accessKeyId`,
+   *   `secretAccessKey`, and `sessionToken` properties).
+   *   @param err [Error] if an error occurred, this value will be filled
+   * @see get
+   */
+  refresh: function refresh(callback) {
+    var self = this;
+    if (!callback) callback = function(err) { if (err) throw err; };
+    if (self.serviceError) {
+      callback(self.serviceError);
+      return;
+    }
 
-},{"./config":2,"./event_listeners":4,"./http":5,"./metadata_service":7,"./param_validator":8,"./request":9,"./sequential_executor":10,"./service":11,"./signers/request_signer":24,"./util":30}],4:[function(require,module,exports){
+    self.service.assumeRoleWithWebIdentity(self.params, function (err, data) {
+      if (err) {
+        self.serviceError = err;
+      } else {
+        self.service.credentialsFrom(data, self);
+      }
+      callback(err);
+    });
+  }
+});
+
+},{"../core":3,"../credentials":4,"../services/sts":26}],8:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -1191,7 +1272,7 @@ AWS.EventListeners = {
   })
 };
 
-},{"./core":3,"./sequential_executor":10,"./service_interface/json":12,"./service_interface/query":13,"./service_interface/rest":14,"./service_interface/rest_json":15,"./service_interface/rest_xml":16,"buffer":43}],5:[function(require,module,exports){
+},{"./core":3,"./sequential_executor":13,"./service_interface/json":15,"./service_interface/query":16,"./service_interface/rest":17,"./service_interface/rest_json":18,"./service_interface/rest_xml":19,"buffer":47}],9:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -1452,7 +1533,7 @@ AWS.HttpClient.getInstance = function getInstance() {
   return this.singleton;
 };
 
-},{"./core":3,"http":50,"https":37,"stream":39}],6:[function(require,module,exports){
+},{"./core":3,"http":54,"https":41,"stream":43}],10:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -1536,121 +1617,7 @@ AWS.JSON.Builder = inherit({
 
 });
 
-},{"../core":3}],7:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-var AWS = require('./core');
-require('./http');
-var inherit = AWS.util.inherit;
-
-/**
- * Represents a metadata service available on EC2 instances. Using the
- * {request} method, you can receieve metadata about any available resource
- * on the metadata service.
- *
- * @!attribute [r] httpOptions
- *   @return [map] a map of options to pass to the underlying HTTP request
- */
-AWS.MetadataService = inherit({
-  /**
-   * @return [String] the hostname of the instance metadata service
-   */
-  host: '169.254.169.254',
-
-  /**
-   * @!ignore
-   */
-
-  /**
-   * Options
-   */
-  httpOptions: { timeout: 1000 },
-
-  /**
-   * Creates a new MetadataService object with a given set of options.
-   *
-   * @option options host [String] the hostname of the instance metadata
-   *   service
-   * @option options httpOptions [map] a map of options to pass to the
-   *   underlying HTTP request
-   */
-  constructor: function MetadataService(options) {
-    AWS.util.update(this, options);
-  },
-
-  /**
-   * Sends a request to the instance metadata service for a given resource.
-   *
-   * @param path [String] the path of the resource to get
-   * @callback callback function(err, data)
-   *   Called when a response is available from the service.
-   *   @param err [Error, null] if an error occurred, this value will be set
-   *   @param data [String, null] if the request was successful, the body of
-   *     the response
-   */
-  request: function request(path, callback) {
-    path = path || '/';
-
-    var data = '';
-    var http = AWS.HttpClient.getInstance();
-    var httpRequest = new AWS.HttpRequest('http://' + this.host + path);
-    httpRequest.method = 'GET';
-
-    http.handleRequest(httpRequest, this.httpOptions, function(httpResponse) {
-      httpResponse.on('data', function(chunk) { data += chunk.toString(); });
-      httpResponse.on('end', function() { callback(null, data); });
-    }, callback);
-  },
-
-  /**
-   * Loads a set of credentials stored in the instance metadata service
-   *
-   * @api private
-   * @callback callback function(err, credentials)
-   *   Called when credentials are loaded from the resource
-   *   @param err [Error] if an error occurred, this value will be set
-   *   @param credentials [Object] the raw JSON object containing all
-   *     metadata from the credentials resource
-   */
-  loadCredentials: function loadCredentials(callback) {
-    var self = this;
-    var basePath = '/latest/meta-data/iam/security-credentials/';
-    self.request(basePath, function (err, roleName) {
-      if (err) callback(err);
-      else {
-        roleName = roleName.split('\n')[0]; // grab first (and only) role
-        self.request(basePath + roleName, function (credErr, credData) {
-          if (credErr) callback(credErr);
-          else {
-            try {
-              var credentials = JSON.parse(credData);
-              callback(null, credentials);
-            } catch (parseError) {
-              callback(parseError);
-            }
-          }
-        });
-      }
-    });
-  }
-});
-
-module.exports = AWS.MetadataService;
-
-},{"./core":3,"./http":5}],8:[function(require,module,exports){
+},{"../core":3}],11:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -1807,7 +1774,7 @@ AWS.ParamValidator = AWS.util.inherit({
   }
 });
 
-},{"./core":3,"buffer":43,"stream":39}],9:[function(require,module,exports){
+},{"./core":3,"buffer":47,"stream":43}],12:[function(require,module,exports){
 var process=require("__browserify_process");/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -2565,7 +2532,7 @@ AWS.Response = inherit({
 
 });
 
-},{"./core":3,"__browserify_process":55,"stream":39}],10:[function(require,module,exports){
+},{"./core":3,"__browserify_process":59,"stream":43}],13:[function(require,module,exports){
 var process=require("__browserify_process");/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -2841,7 +2808,7 @@ AWS.SequentialExecutor = AWS.util.inherit({
  */
 AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.on;
 
-},{"./core":3,"__browserify_process":55,"domain":33,"events":35}],11:[function(require,module,exports){
+},{"./core":3,"__browserify_process":59,"domain":37,"events":39}],14:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -3144,7 +3111,7 @@ AWS.util.update(AWS.Service, {
   }
 });
 
-},{"./core":3}],12:[function(require,module,exports){
+},{"./core":3}],15:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -3212,7 +3179,7 @@ AWS.ServiceInterface.Json = {
 
 };
 
-},{"../core":3,"../json/builder":6}],13:[function(require,module,exports){
+},{"../core":3,"../json/builder":10}],16:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -3393,7 +3360,7 @@ AWS.QueryParamSerializer = inherit({
 
 });
 
-},{"../core":3,"../xml/parser":32}],14:[function(require,module,exports){
+},{"../core":3,"../xml/parser":36}],17:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -3537,7 +3504,7 @@ AWS.ServiceInterface.Rest = {
   }
 };
 
-},{"../core":3}],15:[function(require,module,exports){
+},{"../core":3}],18:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -3631,7 +3598,7 @@ AWS.ServiceInterface.RestJson = {
 
 };
 
-},{"../core":3,"./json":12,"./rest":14}],16:[function(require,module,exports){
+},{"../core":3,"./json":15,"./rest":17}],19:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -3743,7 +3710,11 @@ AWS.ServiceInterface.RestXml = {
   }
 };
 
-},{"../core":3,"../xml/builder":31,"./rest":14}],17:[function(require,module,exports){
+},{"../core":3,"../xml/builder":35,"./rest":17}],20:[function(require,module,exports){
+AWS.Service.defineServiceApi(require("./services/dynamodb"), "2012-08-10", require("./services/api/dynamodb-2012-08-10"));
+AWS.Service.defineServiceApi(require("./services/s3"), "2006-03-01", require("./services/api/s3-2006-03-01"));
+AWS.Service.defineServiceApi(require("./services/sts"), "2011-06-15", require("./services/api/sts-2011-06-15"));
+},{"./services/api/dynamodb-2012-08-10":21,"./services/api/s3-2006-03-01":22,"./services/api/sts-2011-06-15":23,"./services/dynamodb":24,"./services/s3":25,"./services/sts":26}],21:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -5917,7 +5888,7 @@ module.exports = {
   }
 };
 
-},{}],18:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -8993,7 +8964,7 @@ module.exports = {
   }
 };
 
-},{}],19:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9231,7 +9202,7 @@ module.exports = {
   }
 };
 
-},{}],20:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9302,7 +9273,7 @@ AWS.DynamoDB = AWS.Service.defineService('dynamodb', ['2012-08-10', '2011-12-05'
 
 module.exports = AWS.DynamoDB;
 
-},{"../core":3}],21:[function(require,module,exports){
+},{"../core":3}],25:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9653,7 +9624,7 @@ AWS.S3.prototype.createBucket = function createBucket(params, callback) {
 
 module.exports = AWS.S3;
 
-},{"../core":3,"stream":39,"url":40}],22:[function(require,module,exports){
+},{"../core":3,"stream":43,"url":44}],26:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9671,7 +9642,43 @@ module.exports = AWS.S3;
 
 var AWS = require('../core');
 
-AWS.STS = AWS.Service.defineService('sts', ['2011-06-15']);
+AWS.STS = AWS.Service.defineService('sts', ['2011-06-15'], {
+  /**
+   * @overload credentialsFrom(data, credentials = null)
+   *   Creates a credentials object from STS response data containing
+   *   credentials information. Useful for quickly setting AWS credentials.
+   *
+   *   @note This is a low-level utility function. If you want to load temporary
+   *     credentials into your process for subsequent requests to AWS resources,
+   *     you should use {AWS.TemporaryCredentials} instead.
+   *   @param data [map] data retrieved from a call to {getFederatedToken},
+   *     {getSessionToken}, {assumeRole}, or {assumeRoleWithWebIdentity}.
+   *   @param credentials [AWS.Credentials] an optional credentials object to
+   *     fill instead of creating a new object. Useful when modifying an
+   *     existing credentials object from a refresh call.
+   *   @return [AWS.TemporaryCredentials] the set of temporary credentials
+   *     loaded from a raw STS operation response.
+   *   @example Using credentialsFrom to load global AWS credentials
+   *     var sts = new AWS.STS();
+   *     sts.getSessionToken(function (err, data) {
+   *       if (err) console.log("Error getting credentials");
+   *       else {
+   *         AWS.config.credentials = sts.credentialsFrom(data);
+   *       }
+   *     });
+   *   @see AWS.TemporaryCredentials
+   */
+  credentialsFrom: function credentialsFrom(data, credentials) {
+    if (!data) return null;
+    if (!credentials) credentials = new AWS.TemporaryCredentials();
+    credentials.expired = false;
+    credentials.accessKeyId = data.Credentials.AccessKeyId;
+    credentials.secretAccessKey = data.Credentials.SecretAccessKey;
+    credentials.sessionToken = data.Credentials.SessionToken;
+    credentials.expireTime = data.Credentials.Expiration;
+    return credentials;
+  }
+});
 
 AWS.STS.prototype.assumeRoleWithWebIdentity = function assumeRoleWithWebIdentity(params, callback) {
   if (typeof params === 'function') {
@@ -9697,7 +9704,7 @@ AWS.STS.prototype.assumeRoleWithWebIdentity = function assumeRoleWithWebIdentity
 
 module.exports = AWS.STS;
 
-},{"../core":3}],23:[function(require,module,exports){
+},{"../core":3}],27:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9731,7 +9738,7 @@ AWS.Signers.CloudFront = inherit(AWS.Signers.S3, {
 
 module.exports = AWS.Signers.CloudFront;
 
-},{"../core":3,"./v3":27}],24:[function(require,module,exports){
+},{"../core":3,"./v3":31}],28:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9779,7 +9786,7 @@ require('./v4');
 require('./s3');
 require('./cloudfront');
 
-},{"../core":3,"./cloudfront":23,"./s3":25,"./v2":26,"./v3":27,"./v3https":28,"./v4":29}],25:[function(require,module,exports){
+},{"../core":3,"./cloudfront":27,"./s3":29,"./v2":30,"./v3":31,"./v3https":32,"./v4":33}],29:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9959,7 +9966,7 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.S3;
 
-},{"../core":3}],26:[function(require,module,exports){
+},{"../core":3}],30:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10021,7 +10028,7 @@ AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V2;
 
-},{"../core":3}],27:[function(require,module,exports){
+},{"../core":3}],31:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10112,7 +10119,7 @@ AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V3;
 
-},{"../core":3}],28:[function(require,module,exports){
+},{"../core":3}],32:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10151,7 +10158,7 @@ AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
 
 module.exports = AWS.Signers.V3Https;
 
-},{"../core":3,"./v3":27}],29:[function(require,module,exports){
+},{"../core":3,"./v3":31}],33:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10280,7 +10287,7 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V4;
 
-},{"../core":3}],30:[function(require,module,exports){
+},{"../core":3}],34:[function(require,module,exports){
 var process=require("__browserify_process");/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10782,7 +10789,7 @@ AWS.util = {
 
 module.exports = AWS.util;
 
-},{"./core":3,"__browserify_process":55,"buffer":43,"crypto":45,"fs":36,"url":40}],31:[function(require,module,exports){
+},{"./core":3,"__browserify_process":59,"buffer":47,"crypto":49,"fs":40,"url":44}],35:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10877,7 +10884,7 @@ AWS.XML.Builder = inherit({
 
 });
 
-},{"../core":3,"xmlbuilder":60}],32:[function(require,module,exports){
+},{"../core":3,"xmlbuilder":64}],36:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -11093,9 +11100,9 @@ AWS.XML.Parser = inherit({
 
 });
 
-},{"../core":3,"xml2js":56}],33:[function(require,module,exports){
+},{"../core":3,"xml2js":60}],37:[function(require,module,exports){
 
-},{}],34:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 // UTILITY
 var util = require('util');
 var Buffer = require("buffer").Buffer;
@@ -11409,7 +11416,7 @@ assert.doesNotThrow = function(block, /*optional*/error, /*optional*/message) {
 
 assert.ifError = function(err) { if (err) {throw err;}};
 
-},{"buffer":43,"util":41}],35:[function(require,module,exports){
+},{"buffer":47,"util":45}],39:[function(require,module,exports){
 var process=require("__browserify_process");if (!process.EventEmitter) process.EventEmitter = function () {};
 
 var EventEmitter = exports.EventEmitter = process.EventEmitter;
@@ -11605,10 +11612,10 @@ EventEmitter.listenerCount = function(emitter, type) {
   return ret;
 };
 
-},{"__browserify_process":55}],36:[function(require,module,exports){
+},{"__browserify_process":59}],40:[function(require,module,exports){
 // nothing to see here... no file methods for the browser
 
-},{}],37:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 var http = require('http');
 
 var https = module.exports;
@@ -11622,7 +11629,7 @@ https.request = function (params, cb) {
     params.scheme = 'https';
     return http.request.call(this, params, cb);
 }
-},{"http":50}],38:[function(require,module,exports){
+},{"http":54}],42:[function(require,module,exports){
 
 /**
  * Object#toString() ref for stringify().
@@ -11941,7 +11948,7 @@ function decode(str) {
   }
 }
 
-},{}],39:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 var events = require('events');
 var util = require('util');
 
@@ -12062,7 +12069,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":35,"util":41}],40:[function(require,module,exports){
+},{"events":39,"util":45}],44:[function(require,module,exports){
 var punycode = { encode : function (s) { return s } };
 
 exports.parse = urlParse;
@@ -12668,7 +12675,7 @@ function parseHost(host) {
   return out;
 }
 
-},{"querystring":38}],41:[function(require,module,exports){
+},{"querystring":42}],45:[function(require,module,exports){
 var events = require('events');
 
 exports.isArray = isArray;
@@ -13015,7 +13022,7 @@ exports.format = function(f) {
   return str;
 };
 
-},{"events":35}],42:[function(require,module,exports){
+},{"events":39}],46:[function(require,module,exports){
 exports.readIEEE754 = function(buffer, offset, isBE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -13101,7 +13108,7 @@ exports.writeIEEE754 = function(buffer, value, offset, isBE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128;
 };
 
-},{}],43:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 var assert = require('assert');
 exports.Buffer = Buffer;
 exports.SlowBuffer = Buffer;
@@ -14184,7 +14191,7 @@ Buffer.prototype.writeDoubleBE = function(value, offset, noAssert) {
   writeDouble(this, value, offset, true, noAssert);
 };
 
-},{"./buffer_ieee754":42,"assert":34,"base64-js":44}],44:[function(require,module,exports){
+},{"./buffer_ieee754":46,"assert":38,"base64-js":48}],48:[function(require,module,exports){
 (function (exports) {
 	'use strict';
 
@@ -14270,7 +14277,7 @@ Buffer.prototype.writeDoubleBE = function(value, offset, noAssert) {
 	module.exports.fromByteArray = uint8ToBase64;
 }());
 
-},{}],45:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 var Buffer = require('buffer').Buffer
 var sha = require('./sha')
 var sha256 = require('./sha256')
@@ -14400,7 +14407,7 @@ each(['createCredentials'
   }
 })
 
-},{"./md5":46,"./rng":47,"./sha":48,"./sha256":49,"buffer":43}],46:[function(require,module,exports){
+},{"./md5":50,"./rng":51,"./sha":52,"./sha256":53,"buffer":47}],50:[function(require,module,exports){
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
  * Digest Algorithm, as defined in RFC 1321.
@@ -14665,7 +14672,7 @@ exports.hex_hmac_md5 = hex_hmac_md5;
 exports.b64_hmac_md5 = b64_hmac_md5;
 exports.bin_hmac_md5 = str_hmac_md5;
 
-},{}],47:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 // Original code adapted from Robert Kieffer.
 // details at https://github.com/broofa/node-uuid
 (function() {
@@ -14703,7 +14710,7 @@ exports.bin_hmac_md5 = str_hmac_md5;
 
 }())
 
-},{}],48:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
  * in FIPS PUB 180-1
@@ -14915,7 +14922,7 @@ function binb2b64(binarray)
 }
 
 
-},{}],49:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
@@ -15091,7 +15098,7 @@ var core_hmac_sha256 = function(key, data) {
 };
 
 
-},{}],50:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 var http = module.exports;
 var EventEmitter = require('events').EventEmitter;
 var Request = require('./lib/request');
@@ -15153,7 +15160,7 @@ var xhrHttp = (function () {
     }
 })();
 
-},{"./lib/request":51,"events":35}],51:[function(require,module,exports){
+},{"./lib/request":55,"events":39}],55:[function(require,module,exports){
 var Stream = require('stream');
 var Response = require('./response');
 var concatStream = require('concat-stream')
@@ -15286,7 +15293,7 @@ var indexOf = function (xs, x) {
     return -1;
 };
 
-},{"./response":52,"buffer":43,"concat-stream":53,"stream":39}],52:[function(require,module,exports){
+},{"./response":56,"buffer":47,"concat-stream":57,"stream":43}],56:[function(require,module,exports){
 var Stream = require('stream');
 
 var Response = module.exports = function (res) {
@@ -15407,7 +15414,7 @@ var isArray = Array.isArray || function (xs) {
     return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{"stream":39}],53:[function(require,module,exports){
+},{"stream":43}],57:[function(require,module,exports){
 var Buffer=require("__browserify_Buffer").Buffer;var stream = require('stream')
 var util = require('util')
 
@@ -15457,7 +15464,7 @@ module.exports = function(cb) {
 
 module.exports.ConcatStream = ConcatStream
 
-},{"__browserify_Buffer":54,"stream":39,"util":41}],54:[function(require,module,exports){
+},{"__browserify_Buffer":58,"stream":43,"util":45}],58:[function(require,module,exports){
 require=(function(e,t,n,r){function i(r){if(!n[r]){if(!t[r]){if(e)return e(r);throw new Error("Cannot find module '"+r+"'")}var s=n[r]={exports:{}};t[r][0](function(e){var n=t[r][1][e];return i(n?n:e)},s,s.exports)}return n[r].exports}for(var s=0;s<r.length;s++)i(r[s]);return i})(typeof require!=="undefined"&&require,{1:[function(require,module,exports){
 // UTILITY
 var util = require('util');
@@ -19319,7 +19326,7 @@ SlowBuffer.prototype.writeDoubleBE = Buffer.prototype.writeDoubleBE;
 },{}]},{},[])
 ;;module.exports=require("buffer-browserify")
 
-},{}],55:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -19373,7 +19380,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],56:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 // Generated by CoffeeScript 1.4.0
 (function() {
   var events, isEmpty, sax,
@@ -19625,7 +19632,7 @@ process.chdir = function (dir) {
 
 }).call(this);
 
-},{"events":35,"sax":57}],57:[function(require,module,exports){
+},{"events":39,"sax":61}],61:[function(require,module,exports){
 // wrapper for non-node envs
 ;(function (sax) {
 
@@ -20943,7 +20950,7 @@ function write (chunk) {
 
 })(typeof exports === "undefined" ? sax = {} : exports)
 
-},{"stream":39}],58:[function(require,module,exports){
+},{"stream":43}],62:[function(require,module,exports){
 // Generated by CoffeeScript 1.3.3
 (function() {
   var XMLBuilder, XMLFragment;
@@ -21064,7 +21071,7 @@ function write (chunk) {
 
 }).call(this);
 
-},{"./XMLFragment":59}],59:[function(require,module,exports){
+},{"./XMLFragment":63}],63:[function(require,module,exports){
 // Generated by CoffeeScript 1.3.3
 (function() {
   var XMLFragment,
@@ -21488,7 +21495,7 @@ function write (chunk) {
 
 }).call(this);
 
-},{}],60:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 // Generated by CoffeeScript 1.3.3
 (function() {
   var XMLBuilder;
@@ -21505,5 +21512,5 @@ function write (chunk) {
 
 }).call(this);
 
-},{"./XMLBuilder":58}]},{},[1])
+},{"./XMLBuilder":62}]},{},[1])
 ;
