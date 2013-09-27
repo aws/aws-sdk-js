@@ -55,7 +55,7 @@ describe 'browser builder', ->
   it 'can be minified (slow)', ->
     buildBundle null, minify: true, null, ->
       expect(stream.data).toMatch(/Copyright .+ Amazon\.com/) # has license
-      expect(stream.data).toMatch(/!function \w\(\w,\w,\w\)\{function \w\(\w,\w\)\{/)
+      expect(stream.data).toMatch(/function \w\(\w,\w,\w\)\{function \w\(\w,\w\)\{/)
 
   it 'defaults to printing to stdout', ->
     origStdout = process.stdout
@@ -120,5 +120,5 @@ describe 'browser builder', ->
       waitsFor -> done
       runs ->
         expect(stream.data).toMatch(/Copyright .+ Amazon\.com/)
-        expect(stream.data).toMatch(/!function \w\(\w,\w,\w\)\{function \w\(\w,\w\)\{/)
+        expect(stream.data).toMatch(/function \w\(\w,\w,\w\)\{function \w\(\w,\w\)\{/)
         expect(stream.data).toContain('s3-2006-03-01')

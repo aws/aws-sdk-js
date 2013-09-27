@@ -24,7 +24,8 @@ root = path.normalize(root);
 
 module.exports = {
   root: root,
-  mainFile: path.join(root, 'browser.js'),
+  mainFile: path.join(root, 'aws.js'),
+  browserFile: path.join(root, 'browser.js'),
   servicesFile: path.join(root, 'services.js'),
   defaultServices: 'dynamodb,s3,sts'
 };

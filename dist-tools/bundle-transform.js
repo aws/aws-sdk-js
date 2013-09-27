@@ -111,6 +111,13 @@ module.exports = function(file, servicesPassed, callback) {
   }
 
   function transform(file) {
+    if (file === bundleHelpers.mainFile) {
+      var data = fs.readFileSync(bundleHelpers.browserFile);
+      return through(function() {}, function() {
+        this.queue(data); this.queue(null);
+      });
+    }
+
     if (file !== bundleHelpers.servicesFile) return through();
 
     function write() { }
