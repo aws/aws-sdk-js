@@ -202,7 +202,7 @@ describe 'AWS.util.crypto', ->
 
     it 'accepts UTF-8 input for string', ->
       r = util.hmac('foo', 'å∆ç∂', 'hex')
-      expect(r).toEqual('b2ce6b3feec8a02f3bb2e3f32f7bf0daee0f14e79631707a266fddcf404edded')
+      expect(r).toEqual('bc11556145cbe4935ba187b9f8ba0c12bae2c866e5795013dfe2d08cabc33e13')
 
   describe 'sha256', ->
     input = 'foo'
