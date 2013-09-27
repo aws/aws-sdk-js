@@ -17,5 +17,8 @@
     "coffee-script": "latest",
     "jshint": "latest",
     "supertest": "latest"
+  },
+  "scripts" : {
+    "test" : "jasmine-node --noColor --coffee test"
   }
 }
