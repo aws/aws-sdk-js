@@ -28,7 +28,7 @@ runTransform = (tr, data, cb) ->
 
 # Bundle helpers
 
-bundleFile = bundleHelpers.servicesFile
+servicesFile = bundleHelpers.servicesFile
 header = 'var AWS = require("./core"); module.exports = AWS;'
 buildBundle = (services) ->
   data = [header]
@@ -47,12 +47,12 @@ defaultBundle = buildBundle
 # Assertions
 
 assertBundle = (services, bundle, errMsg) ->
-  runTransform transform(services, true)(bundleFile), 'data', (err, data) ->
+  runTransform transform(services, true)(servicesFile), 'data', (err, data) ->
     expect(err).toEqual(null)
     expect(data).toEqual(bundle)
 
 assertBundleFailed = (services, errMsg) ->
-  runTransform transform(services, true)(bundleFile), 'data', (err) ->
+  runTransform transform(services, true)(servicesFile), 'data', (err) ->
     expect(err.message).toEqual(errMsg)
 
 describe 'bundle transformer', ->
@@ -71,14 +71,14 @@ describe 'bundle transformer', ->
       expect(data).toEqual 'foo'
 
   it 'returns bundle if file is aws.js', ->
-    runTransform transform(bundleFile), 'data', (e, data) ->
+    runTransform transform(servicesFile), 'data', (e, data) ->
       expect(e).toEqual(null)
       expect(data).toEqual(defaultBundle)
 
   it 'uses SERVICES environment variable if services not initialized', ->
     process.env.SERVICES = 's3,cloudwatch'
     bundle = buildBundle s3: ['2006-03-01'], cloudwatch: ['2010-08-01']
-    runTransform transform(bundleFile), 'data', (e, data) ->
+    runTransform transform(servicesFile), 'data', (e, data) ->
       expect(e).toEqual(null)
       expect(data).toEqual(bundle)
 
@@ -132,6 +132,6 @@ describe 'bundle transformer', ->
     waitsFor -> err || tr
     runs ->
       expect(err.message).toEqual('Missing modules: invalidmodule')
-      runTransform tr(bundleFile), 'data', (e, out) ->
+      runTransform tr(servicesFile), 'data', (e, out) ->
         expect(e.message).toEqual(err.message)
         expect(out).toEqual(null)
