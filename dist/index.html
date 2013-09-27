@@ -358,8 +358,12 @@ language governing permissions and limitations under the License.
       if (resp.error) {
         data = resp.error.message + '\n' + resp.error.stack;
       } else {
-        if (resp.data.Body) delete resp.data.Body.parent; // remove circular ref
-        data = JSON.stringify(resp.data, null, 2);
+        data = AWS.util.copy(resp.data);
+        if (data.Body) {
+          delete data.Body.parent; // remove circular ref
+          data.Body = data.Body.toString();
+        }
+        data = JSON.stringify(data, null, 2);
 
         var tableData = resp.data;
         var resultKey = '';
@@ -380,11 +384,13 @@ language governing permissions and limitations under the License.
       link.text('[' + info + '] ' + link.text());
 
       delete resp.httpResponse.body.parent; // remove circular reference
+      resp.httpResponse.body = resp.httpResponse.body.toString();
       var respHttpData = JSON.stringify(resp.httpResponse, null, 2);
       entry.find('.operationResponseDetails').text(respHttpData);
     }
 
     function startRequest(resp) {
+      addHistoryEntry(resp.request);
       resp.requestStarted = new Date().getTime();
     }
 
@@ -406,7 +412,6 @@ language governing permissions and limitations under the License.
 
     function loadEvents() {
       AWS.events.
-        on('validate', addHistoryEntry).
         on('send', startRequest).
         on('complete', endRequest);
     }
