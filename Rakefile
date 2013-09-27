@@ -22,6 +22,7 @@ end
 
 namespace :browser do
   $BUILDER = "./dist-tools/browser-builder.js"
+  $BROWSERIFY = "./dist-tools/node_modules/.bin/browserify"
   $BROWSERIFY_ARGS = "-i domain -t ./dist-tools/bundle-transform lib/aws.js"
   $BROWSERIFY_DIST = "dist/aws-sdk.js"
   $BROWSERIFY_TEST = "dist/tests.js"
@@ -61,8 +62,10 @@ namespace :browser do
 
   desc 'Builds browser test harness and runner'
   task :test => :dist_path do
-    sh "find test -name '*.coffee' | SERVICES=all xargs browserify " +
+    sh "coffee -c test/helpers.coffee"
+    sh "find test -name '*.coffee' | SERVICES=all xargs #{$BROWSERIFY} " +
        "-t coffeeify #{$BROWSERIFY_ARGS} > #{$BROWSERIFY_TEST}"
+    rm_f "test/helpers.js"
     puts "Now run `testem`"
   end
 
