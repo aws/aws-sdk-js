@@ -14,6 +14,8 @@
 helpers = require('./helpers')
 AWS = helpers.AWS
 
+require('../lib/credentials/environment_credentials')
+
 validateCredentials = (creds, key, secret, session) ->
   expect(creds.accessKeyId).toEqual(key || 'akid')
   expect(creds.secretAccessKey).toEqual(secret || 'secret')
@@ -129,68 +131,69 @@ describe 'AWS.EnvironmentCredentials', ->
       creds.refresh()
       expect(creds.accessKeyId).toEqual('akid')
 
-describe 'AWS.FileSystemCredentials', ->
-  describe 'constructor', ->
-    it 'should accept filename and load credentials from root doc', ->
-      mock = '{"accessKeyId":"akid", "secretAccessKey":"secret","sessionToken":"session"}'
-      spyOn(AWS.util, 'readFileSync').andReturn(mock)
+if AWS.util.isNode()
+  describe 'AWS.FileSystemCredentials', ->
+    describe 'constructor', ->
+      it 'should accept filename and load credentials from root doc', ->
+        mock = '{"accessKeyId":"akid", "secretAccessKey":"secret","sessionToken":"session"}'
+        spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
-      creds = new AWS.FileSystemCredentials('foo')
-      validateCredentials(creds)
+        creds = new AWS.FileSystemCredentials('foo')
+        validateCredentials(creds)
 
-    it 'should accept filename and load credentials from credentials block', ->
-      mock = '{"credentials":{"accessKeyId":"akid", "secretAccessKey":"secret","sessionToken":"session"}}'
-      spy = spyOn(AWS.util, 'readFileSync').andReturn(mock)
+      it 'should accept filename and load credentials from credentials block', ->
+        mock = '{"credentials":{"accessKeyId":"akid", "secretAccessKey":"secret","sessionToken":"session"}}'
+        spy = spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
-      creds = new AWS.FileSystemCredentials('foo')
-      validateCredentials(creds)
+        creds = new AWS.FileSystemCredentials('foo')
+        validateCredentials(creds)
 
-  describe 'refresh', ->
-    it 'should refresh from given filename', ->
-      mock = '{"credentials":{"accessKeyId":"RELOADED", "secretAccessKey":"RELOADED","sessionToken":"RELOADED"}}'
-      spyOn(AWS.util, 'readFileSync').andReturn(mock)
+    describe 'refresh', ->
+      it 'should refresh from given filename', ->
+        mock = '{"credentials":{"accessKeyId":"RELOADED", "secretAccessKey":"RELOADED","sessionToken":"RELOADED"}}'
+        spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
-      creds = new AWS.FileSystemCredentials('foo')
-      validateCredentials(creds, 'RELOADED', 'RELOADED', 'RELOADED')
+        creds = new AWS.FileSystemCredentials('foo')
+        validateCredentials(creds, 'RELOADED', 'RELOADED', 'RELOADED')
 
-    it 'fails if credentials are not in the file', ->
-      mock = '{"credentials":{}}'
-      spyOn(AWS.util, 'readFileSync').andReturn(mock)
+      it 'fails if credentials are not in the file', ->
+        mock = '{"credentials":{}}'
+        spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
-      new AWS.FileSystemCredentials('foo').refresh (err) ->
-        expect(err.message).toEqual('Credentials not set in foo')
+        new AWS.FileSystemCredentials('foo').refresh (err) ->
+          expect(err.message).toEqual('Credentials not set in foo')
 
-      expect(-> new AWS.FileSystemCredentials('foo').refresh()).
-        toThrow('Credentials not set in foo')
+        expect(-> new AWS.FileSystemCredentials('foo').refresh()).
+          toThrow('Credentials not set in foo')
 
-describe 'AWS.EC2MetadataCredentials', ->
-  describe 'constructor', ->
-    it 'allows passing of AWS.MetadataService options', ->
-      creds = new AWS.EC2MetadataCredentials(host: 'host')
-      expect(creds.metadataService.host).toEqual('host')
+  describe 'AWS.EC2MetadataCredentials', ->
+    describe 'constructor', ->
+      it 'allows passing of AWS.MetadataService options', ->
+        creds = new AWS.EC2MetadataCredentials(host: 'host')
+        expect(creds.metadataService.host).toEqual('host')
 
-  describe 'refresh', ->
-    it 'loads credentials from EC2 Metadata service', ->
-      creds = new AWS.EC2MetadataCredentials(host: 'host')
-      spy = spyOn(creds.metadataService, 'loadCredentials').andCallFake (cb) ->
-        cb(null, Code:"Success",AccessKeyId:"KEY",SecretAccessKey:"SECRET",Token:"TOKEN")
-      creds.refresh(->)
-      expect(creds.metadata.Code).toEqual('Success')
-      expect(creds.accessKeyId).toEqual('KEY')
-      expect(creds.secretAccessKey).toEqual('SECRET')
-      expect(creds.sessionToken).toEqual('TOKEN')
+    describe 'refresh', ->
+      it 'loads credentials from EC2 Metadata service', ->
+        creds = new AWS.EC2MetadataCredentials(host: 'host')
+        spy = spyOn(creds.metadataService, 'loadCredentials').andCallFake (cb) ->
+          cb(null, Code:"Success",AccessKeyId:"KEY",SecretAccessKey:"SECRET",Token:"TOKEN")
+        creds.refresh(->)
+        expect(creds.metadata.Code).toEqual('Success')
+        expect(creds.accessKeyId).toEqual('KEY')
+        expect(creds.secretAccessKey).toEqual('SECRET')
+        expect(creds.sessionToken).toEqual('TOKEN')
 
-    it 'does not try to load creds second time if Metadata service failed', ->
-      creds = new AWS.EC2MetadataCredentials(host: 'host')
-      spy = spyOn(creds.metadataService, 'loadCredentials').andCallFake (cb) ->
-        cb(new Error('INVALID SERVICE'))
+      it 'does not try to load creds second time if Metadata service failed', ->
+        creds = new AWS.EC2MetadataCredentials(host: 'host')
+        spy = spyOn(creds.metadataService, 'loadCredentials').andCallFake (cb) ->
+          cb(new Error('INVALID SERVICE'))
 
-      creds.refresh (err) ->
-        expect(err.message).toEqual('INVALID SERVICE')
-      creds.refresh ->
+        creds.refresh (err) ->
+          expect(err.message).toEqual('INVALID SERVICE')
         creds.refresh ->
           creds.refresh ->
-            expect(spy.calls.length).toEqual(1)
+            creds.refresh ->
+              expect(spy.calls.length).toEqual(1)
 
 describe 'AWS.TemporaryCredentials', ->
   creds = null

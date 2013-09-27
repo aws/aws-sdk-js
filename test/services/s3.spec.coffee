@@ -464,16 +464,16 @@ describe 'AWS.S3', ->
 
     it 'gets a signed URL for getObject', ->
       url = s3.getSignedUrl('getObject', Bucket: 'bucket', Key: 'key')
-      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=uefzBaGpqvO9QhGtT%2BbYda0pgQY%3D')
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=gUAM0PxELXi27AXC0alWL%2BM2ehw%3D')
 
     it 'gets a signed URL with Expires time', ->
       url = s3.getSignedUrl('getObject', Bucket: 'bucket', Key: 'key', Expires: 60)
-      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=60&Signature=ZJKBOuhI99B2OZdkGSOmfG86BOI%3D')
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=60&Signature=gUAM0PxELXi27AXC0alWL%2BM2ehw%3D')
 
     it 'gets a signed URL with expiration and bound bucket parameters', ->
       s3 = new AWS.S3(paramValidation: true, params: Bucket: 'bucket')
       url = s3.getSignedUrl('getObject', Key: 'key', Expires: 60)
-      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=60&Signature=ZJKBOuhI99B2OZdkGSOmfG86BOI%3D')
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=60&Signature=gUAM0PxELXi27AXC0alWL%2BM2ehw%3D')
 
     it 'gets a signed URL with callback', ->
       url = null
@@ -481,20 +481,20 @@ describe 'AWS.S3', ->
         s3.getSignedUrl 'getObject', Bucket: 'bucket', Key: 'key', (err, value) -> url = value
       waitsFor -> url
       runs ->
-        expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=uefzBaGpqvO9QhGtT%2BbYda0pgQY%3D')
+        expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=gUAM0PxELXi27AXC0alWL%2BM2ehw%3D')
 
     it 'gets a signed URL for putObject with no body', ->
       url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key')
-      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=h%2FphNvPoGxx9qq2U7Zhbfqgi0Xs%3D')
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=bQNttlfmy9E7SHU0r6gUg7jaeig%3D')
 
     it 'gets a signed URL for putObject with special characters', ->
       url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: '!@#$%^&*();\':"{}[],./?`~')
-      expect(url).toEqual('https://bucket.s3.amazonaws.com/%21%40%23%24%25%5E%26%2A%28%29%3B%27%3A%22%7B%7D%5B%5D%2C./%3F%60~?AWSAccessKeyId=akid&Expires=900&Signature=ymM%2F7R7Ri6bIXA7vrhzaaZgNRHg%3D')
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/%21%40%23%24%25%5E%26%2A%28%29%3B%27%3A%22%7B%7D%5B%5D%2C./%3F%60~?AWSAccessKeyId=akid&Expires=900&Signature=O6r7DGjWkcqnDqwGUKmd0uy51sU%3D')
 
     it 'gets a signed URL for putObject with a body (and checksum)', ->
       url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', Body: 'body')
-      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Content-MD5=hBotaJrYa9FhFEdFPCLG%2FA%3D%3D&Expires=900&Signature=7%2BXiHEwB%2B3nSg2rhTyatSigkGPI%3D')
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Content-MD5=hBotaJrYa9FhFEdFPCLG%2FA%3D%3D&Expires=900&Signature=gABIG%2BdP5FI%2BE2DHuWU8tSoN6Qc%3D')
 
     it 'gets a signed URL and appends to existing query parameters', ->
       url = s3.getSignedUrl('listObjects', Bucket: 'bucket', Prefix: 'prefix')
-      expect(url).toEqual('https://bucket.s3.amazonaws.com/?prefix=prefix&AWSAccessKeyId=akid&Expires=900&Signature=fWeCHJBop4LyDXm2%2F%2BvR%2BqzH5zk%3D')
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/?prefix=prefix&AWSAccessKeyId=akid&Expires=900&Signature=%2FOeqjdbPbtyEni%2B4%2FNFD0mDzmzg%3D')

@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 AWS = require('../lib/core')
+require('../lib/credentials/environment_credentials')
 
 describe 'AWS.CredentialProviderChain', ->
 

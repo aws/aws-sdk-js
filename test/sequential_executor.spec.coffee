@@ -86,19 +86,20 @@ describe 'AWS.SequentialExecutor', ->
       expect(spy1).toHaveBeenCalledWith('arg1')
       expect(spy2).toHaveBeenCalledWith('arg2')
 
-  describe 'domain support', ->
-    domain = null
-    beforeEach -> domain = require('domain').create()
-    afterEach -> domain.dispose()
+  if AWS.util.isNode()
+    describe 'domain support', ->
+      domain = null
+      beforeEach -> domain = require('domain').create()
+      afterEach -> domain.dispose()
 
-    it 'supports domains', ->
-      helpers.mockHttpResponse 200, {}, 'Success!'
+      it 'supports domains', ->
+        helpers.mockHttpResponse 200, {}, 'Success!'
 
-      thrown = null
-      domain.on 'error', (err) -> thrown = err
-      domain.run ->
-        service = new MockService()
-        service.makeRequest 'operationName', ->
-          throw 'ERROR'
+        thrown = null
+        domain.on 'error', (err) -> thrown = err
+        domain.run ->
+          service = new MockService()
+          service.makeRequest 'operationName', ->
+            throw 'ERROR'
 
-      expect(thrown).toEqual('ERROR')
+        expect(thrown).toEqual('ERROR')

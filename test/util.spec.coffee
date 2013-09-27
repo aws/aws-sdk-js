@@ -128,12 +128,13 @@ describe 'AWS.util.string', ->
       expect(len('')).toEqual(0)
       expect(len('∂ƒ©∆')).toEqual(10)
 
-    it 'handles file object input (path property)', ->
-      fs = require('fs')
-      file = fs.createReadStream(__filename)
-      fileLen = fs.lstatSync(file.path).size
-      expect(len(file)).toEqual(fileLen)
-      expect(len(path: __filename)).toEqual(fileLen)
+    if AWS.util.isNode()
+      it 'handles file object input (path property)', ->
+        fs = require('fs')
+        file = fs.createReadStream(__filename)
+        fileLen = fs.lstatSync(file.path).size
+        expect(len(file)).toEqual(fileLen)
+        expect(len(path: __filename)).toEqual(fileLen)
 
     it 'fails if input is not a string, buffer, or file', ->
       err = null

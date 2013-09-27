@@ -45,21 +45,22 @@ describe 'AWS.Config', ->
     it 'defaults to undefined', ->
       expect(configure().region).toEqual(undefined)
 
-    it 'grabs AWS_REGION from the env', ->
-      process.env.AWS_REGION = 'us-west-2'
-      config = new AWS.Config()
-      expect(config.region).toEqual('us-west-2')
+    if AWS.util.isNode()
+      it 'grabs AWS_REGION from the env', ->
+        process.env.AWS_REGION = 'us-west-2'
+        config = new AWS.Config()
+        expect(config.region).toEqual('us-west-2')
 
-    it 'also grabs AMAZON_REGION from the env', ->
-      process.env.AMAZON_REGION = 'us-west-1'
-      config = new AWS.Config()
-      expect(config.region).toEqual('us-west-1')
+      it 'also grabs AMAZON_REGION from the env', ->
+        process.env.AMAZON_REGION = 'us-west-1'
+        config = new AWS.Config()
+        expect(config.region).toEqual('us-west-1')
 
-    it 'prefers AWS_REGION to AMAZON_REGION', ->
-      process.env.AWS_REGION = 'us-west-2'
-      process.env.AMAZON_REGION = 'us-west-1'
-      config = new AWS.Config()
-      expect(config.region).toEqual('us-west-2')
+      it 'prefers AWS_REGION to AMAZON_REGION', ->
+        process.env.AWS_REGION = 'us-west-2'
+        process.env.AMAZON_REGION = 'us-west-1'
+        config = new AWS.Config()
+        expect(config.region).toEqual('us-west-2')
 
     it 'can be set to a string', ->
       expect(configure(region: 'us-west-1').region).toEqual('us-west-1')

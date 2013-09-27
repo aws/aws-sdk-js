@@ -138,11 +138,12 @@ describe 'AWS.EventListeners', ->
     it 'builds Content-Length for buffer body', ->
       expect(contentLength(new Buffer('tï№'))).toEqual(6)
 
-    it 'builds Content-Length for file body', ->
-      fs = require('fs')
-      file = fs.createReadStream(__filename)
-      fileLen = fs.lstatSync(file.path).size
-      expect(contentLength(file)).toEqual(fileLen)
+    if AWS.util.isNode()
+      it 'builds Content-Length for file body', ->
+        fs = require('fs')
+        file = fs.createReadStream(__filename)
+        fileLen = fs.lstatSync(file.path).size
+        expect(contentLength(file)).toEqual(fileLen)
 
   describe 'sign', ->
     it 'takes the request object as a parameter', ->
@@ -338,81 +339,82 @@ describe 'AWS.EventListeners', ->
       expect(errorHandler).toHaveBeenCalled()
       expect(completeHandler).toHaveBeenCalled()
 
-  describe 'terminal callback error handling', ->
-    beforeEach ->
-      spyOn(process, 'exit')
-      spyOn(console, 'error')
+  if AWS.util.isNode()
+    describe 'terminal callback error handling', ->
+      beforeEach ->
+        spyOn(process, 'exit')
+        spyOn(console, 'error')
 
-    didError = ->
-      expect(console.error).toHaveBeenCalledWith('ERROR')
-      expect(process.exit).toHaveBeenCalledWith(1)
+      didError = ->
+        expect(console.error).toHaveBeenCalledWith('ERROR')
+        expect(process.exit).toHaveBeenCalledWith(1)
 
-    describe 'without domains', ->
-      it 'logs exceptions raised from success event and exits process', ->
-        helpers.mockHttpResponse 200, {}, []
-        request = makeRequest()
-        request.on 'success', -> throw "ERROR"
-        expect(-> request.send()).not.toThrow('ERROR')
-        expect(completeHandler).toHaveBeenCalled()
-        expect(retryHandler).not.toHaveBeenCalled()
-        didError()
+      describe 'without domains', ->
+        it 'logs exceptions raised from success event and exits process', ->
+          helpers.mockHttpResponse 200, {}, []
+          request = makeRequest()
+          request.on 'success', -> throw "ERROR"
+          expect(-> request.send()).not.toThrow('ERROR')
+          expect(completeHandler).toHaveBeenCalled()
+          expect(retryHandler).not.toHaveBeenCalled()
+          didError()
 
-      it 'logs exceptions raised from complete event and exits process', ->
-        helpers.mockHttpResponse 200, {}, []
-        request = makeRequest()
-        request.on 'complete', -> throw "ERROR"
-        expect(-> request.send()).not.toThrow('ERROR')
-        expect(completeHandler).toHaveBeenCalled()
-        expect(retryHandler).not.toHaveBeenCalled()
-        didError()
+        it 'logs exceptions raised from complete event and exits process', ->
+          helpers.mockHttpResponse 200, {}, []
+          request = makeRequest()
+          request.on 'complete', -> throw "ERROR"
+          expect(-> request.send()).not.toThrow('ERROR')
+          expect(completeHandler).toHaveBeenCalled()
+          expect(retryHandler).not.toHaveBeenCalled()
+          didError()
 
-      it 'logs exceptions raised from error event and exits process', ->
-        helpers.mockHttpResponse 500, {}, []
-        request = makeRequest()
-        request.on 'error', -> throw "ERROR"
-        expect(-> request.send()).not.toThrow('ERROR')
-        expect(completeHandler).toHaveBeenCalled()
-        didError()
+        it 'logs exceptions raised from error event and exits process', ->
+          helpers.mockHttpResponse 500, {}, []
+          request = makeRequest()
+          request.on 'error', -> throw "ERROR"
+          expect(-> request.send()).not.toThrow('ERROR')
+          expect(completeHandler).toHaveBeenCalled()
+          didError()
 
-    describe 'with domains', ->
-      it 'sends error raised from complete event to a domain', ->
-        result = false
-        d = require('domain').create()
-        if d.run
-          d.on('error', (e) -> result = e)
-          d.run ->
-            helpers.mockHttpResponse 200, {}, []
-            request = makeRequest()
-            request.on 'complete', -> throw "ERROR"
-            expect(-> request.send()).not.toThrow('ERROR')
-            expect(completeHandler).toHaveBeenCalled()
-            expect(retryHandler).not.toHaveBeenCalled()
-            expect(result).toEqual("ERROR")
+      describe 'with domains', ->
+        it 'sends error raised from complete event to a domain', ->
+          result = false
+          d = require('domain').create()
+          if d.run
+            d.on('error', (e) -> result = e)
+            d.run ->
+              helpers.mockHttpResponse 200, {}, []
+              request = makeRequest()
+              request.on 'complete', -> throw "ERROR"
+              expect(-> request.send()).not.toThrow('ERROR')
+              expect(completeHandler).toHaveBeenCalled()
+              expect(retryHandler).not.toHaveBeenCalled()
+              expect(result).toEqual("ERROR")
 
-      it 'supports inner domains', ->
-        helpers.mockHttpResponse 200, {}, []
+        it 'supports inner domains', ->
+          helpers.mockHttpResponse 200, {}, []
 
-        done = false
-        err = new Error()
-        gotOuterError = false
-        gotInnerError = false
-        Domain = require("domain")
-        outerDomain = Domain.create()
-        outerDomain.on 'error', (err) -> gotOuterError = true
+          done = false
+          err = new Error()
+          gotOuterError = false
+          gotInnerError = false
+          Domain = require("domain")
+          outerDomain = Domain.create()
+          outerDomain.on 'error', (err) -> gotOuterError = true
 
-        if outerDomain.run
-          outerDomain.run ->
-            request = makeRequest()
-            innerDomain = Domain.create()
-            innerDomain.add(request)
-            innerDomain.on 'error', -> gotInnerError = true
+          if outerDomain.run
+            outerDomain.run ->
+              request = makeRequest()
+              innerDomain = Domain.create()
+              innerDomain.add(request)
+              innerDomain.on 'error', -> gotInnerError = true
 
-            runs ->
-              request.send ->
-                innerDomain.run -> done = true; throw err
-            waitsFor -> done
-            runs ->
-              expect(gotOuterError).toEqual(false)
-              expect(gotInnerError).toEqual(true)
-              expect(err.domainThrown).toEqual(false)
-              expect(err.domain).toEqual(innerDomain)
+              runs ->
+                request.send ->
+                  innerDomain.run -> done = true; throw err
+              waitsFor -> done
+              runs ->
+                expect(gotOuterError).toEqual(false)
+                expect(gotInnerError).toEqual(true)
+                expect(err.domainThrown).toEqual(false)
+                expect(err.domain).toEqual(innerDomain)
