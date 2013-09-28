@@ -84639,7 +84639,7 @@ AWS.util = {
 
   buffer: {
     Buffer: Buffer,
-    
+
     /**
      * Concatenates a list of Buffer objects.
      */
