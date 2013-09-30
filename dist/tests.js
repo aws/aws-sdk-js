@@ -94394,81 +94394,82 @@ AWS = helpers.AWS;
 
 Buffer = require('buffer').Buffer;
 
-require('../../lib/services/glacier');
-
-describe('AWS.Glacier', function() {
-  var glacier;
-  glacier = null;
-  beforeEach(function() {
-    return glacier = new AWS.Glacier();
-  });
-  describe('building requests', function() {
-    it('sets accountId to "-" if not set', function() {
-      var req;
-      req = glacier.listVaults();
-      req.emit('validate', [req]);
-      req.emit('build', [req]);
-      return expect(req.httpRequest.path).toEqual('/-/vaults');
+if (AWS.util.isNode()) {
+  require('../../lib/services/glacier');
+  describe('AWS.Glacier', function() {
+    var glacier;
+    glacier = null;
+    beforeEach(function() {
+      return glacier = new AWS.Glacier();
     });
-    return it('will not override accountId if set', function() {
-      var req;
-      req = glacier.listVaults({
-        accountId: 'ABC123'
-      });
-      req.emit('validate', [req]);
-      req.emit('build', [req]);
-      return expect(req.httpRequest.path).toEqual('/ABC123/vaults');
-    });
-  });
-  describe('computeChecksums', function() {
-    return it('returns correct linear and tree hash for buffer data', function() {
-      var data, expected;
-      data = new Buffer(1024 * 1024 * 5.5);
-      data.fill('0');
-      expected = {
-        linearHash: '68aff0c5a91aa0491752bfb96e3fef33eb74953804f6a2f7b708d5bcefa8ff6b',
-        treeHash: '154e26c78fd74d0c2c9b3cc4644191619dc4f2cd539ae2a74d5fd07957a3ee6a'
-      };
-      return expect(glacier.computeChecksums(data)).toEqual(expected);
-    });
-  });
-  describe('initiateJob', function() {
-    return it('correctly builds the request', function() {
-      var params;
-      helpers.mockHttpResponse(200, {}, '');
-      params = {
-        vaultName: 'vault-name',
-        jobParameters: {
-          Format: 'foo',
-          Type: 'bar'
-        }
-      };
-      return glacier.initiateJob(params, function(err, data) {
+    describe('building requests', function() {
+      it('sets accountId to "-" if not set', function() {
         var req;
-        req = this.request.httpRequest;
-        expect(req.path).toEqual('/-/vaults/vault-name/jobs');
-        return expect(req.body).toEqual('{"Format":"foo","Type":"bar"}');
+        req = glacier.listVaults();
+        req.emit('validate', [req]);
+        req.emit('build', [req]);
+        return expect(req.httpRequest.path).toEqual('/-/vaults');
       });
-    });
-  });
-  return describe('uploadArchive', function() {
-    return it('passes the body along', function() {
-      var params;
-      helpers.mockHttpResponse(200, {}, '');
-      params = {
-        vaultName: 'vault-name',
-        body: 'abc'
-      };
-      return glacier.uploadArchive(params, function(err, data) {
+      return it('will not override accountId if set', function() {
         var req;
-        req = this.request.httpRequest;
-        expect(req.method).toEqual('POST');
-        expect(req.path).toEqual('/-/vaults/vault-name/archives');
-        return expect(req.body).toEqual('abc');
+        req = glacier.listVaults({
+          accountId: 'ABC123'
+        });
+        req.emit('validate', [req]);
+        req.emit('build', [req]);
+        return expect(req.httpRequest.path).toEqual('/ABC123/vaults');
+      });
+    });
+    describe('computeChecksums', function() {
+      return it('returns correct linear and tree hash for buffer data', function() {
+        var data, expected;
+        data = new Buffer(1024 * 1024 * 5.5);
+        data.fill('0');
+        expected = {
+          linearHash: '68aff0c5a91aa0491752bfb96e3fef33eb74953804f6a2f7b708d5bcefa8ff6b',
+          treeHash: '154e26c78fd74d0c2c9b3cc4644191619dc4f2cd539ae2a74d5fd07957a3ee6a'
+        };
+        return expect(glacier.computeChecksums(data)).toEqual(expected);
+      });
+    });
+    describe('initiateJob', function() {
+      return it('correctly builds the request', function() {
+        var params;
+        helpers.mockHttpResponse(200, {}, '');
+        params = {
+          vaultName: 'vault-name',
+          jobParameters: {
+            Format: 'foo',
+            Type: 'bar'
+          }
+        };
+        return glacier.initiateJob(params, function(err, data) {
+          var req;
+          req = this.request.httpRequest;
+          expect(req.path).toEqual('/-/vaults/vault-name/jobs');
+          return expect(req.body).toEqual('{"Format":"foo","Type":"bar"}');
+        });
+      });
+    });
+    return describe('uploadArchive', function() {
+      return it('passes the body along', function() {
+        var params;
+        helpers.mockHttpResponse(200, {}, '');
+        params = {
+          vaultName: 'vault-name',
+          body: 'abc'
+        };
+        return glacier.uploadArchive(params, function(err, data) {
+          var req;
+          req = this.request.httpRequest;
+          expect(req.method).toEqual('POST');
+          expect(req.path).toEqual('/-/vaults/vault-name/archives');
+          return expect(req.body).toEqual('abc');
+        });
       });
     });
   });
-});
+}
 
 
 },{"../../lib/services/glacier":116,"../helpers":154,"buffer":19}],175:[function(require,module,exports){
@@ -97914,5 +97915,5 @@ describe('AWS.XML.Parser', function() {
 });
 
 
-},{"../helpers":154}]},{},[47,148,149,150,151,152,153,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185])
+},{"../helpers":154}]},{},[47,151,152,153,155,156,157,158,159,160,161,162,163,164,148,150,166,165,149,168,167,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185])
 ;
