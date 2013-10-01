@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 # language: en
-@cloudfront @cloudfront-2013-05-12
+@cloudfront @cloudfront-2013-08-26
 Feature: Amazon CloudFront
 
   I want to use Amazon CloudFront
