@@ -10855,9 +10855,9 @@ AWS.ParamValidator = AWS.util.inherit({
         if ((value || '').toString().match(acceptedTypes[i])) return;
       } else {
         if (value instanceof acceptedTypes[i]) return;
-        if (AWS.util.isType(value, acceptedTypes[i].name)) return;
+        if (AWS.util.isType(value, acceptedTypes[i])) return;
         if (!type && !foundInvalidType) acceptedTypes = acceptedTypes.slice();
-        acceptedTypes[i] = acceptedTypes[i].name;
+        acceptedTypes[i] = AWS.util.typeName(acceptedTypes[i]);
       }
       foundInvalidType = true;
     }
@@ -87871,11 +87871,13 @@ AWS.util = {
 
   isType: function isType(obj, type) {
     // handle cross-"frame" objects
-    if (typeof type === 'function') {
-      if (type.hasOwnProperty('name')) type = type.name;
-      else type = type.toString().match(/^\s+function (.+)\(/)[1];
-    }
+    if (typeof type === 'function') type = AWS.util.typeName(type);
     return Object.prototype.toString.call(obj) === '[object ' + type + ']';
+  },
+
+  typeName: function typeName(type) {
+    if (type.hasOwnProperty('name')) return type.name;
+    else return type.toString().match(/^\s+function (.+)\(/)[1];
   },
 
   error: function error(err, options) {
