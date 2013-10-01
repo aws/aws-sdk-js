@@ -273,6 +273,7 @@ describe 'AWS.XML.Builder', ->
   describe 'timestamps', ->
 
     time = new Date()
+    time.setMilliseconds(0)
 
     it 'iso8601', ->
       rules = {Expires:{type:'timestamp'}}

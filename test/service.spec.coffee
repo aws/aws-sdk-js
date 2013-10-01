@@ -158,7 +158,10 @@ describe 'AWS.Service', ->
       helpers.mockHttpResponse(500, {}, ['ServiceError'])
       service = new MockService(maxRetries: 0)
       req = service.makeRequest 'operation', {}, (err, data) ->
-        expect(err).toEqual({code:'ServiceError', message:null, retryable:true, statusCode:500})
+        expect(err.code).toEqual('ServiceError')
+        expect(err.message).toEqual(null)
+        expect(err.statusCode).toEqual(500)
+        expect(err.retryable).toEqual(true)
         expect(data).toEqual(null)
 
     it 'yields network errors to the callback', ->

@@ -87,27 +87,33 @@ describe 'AWS.util.date', ->
 
   describe 'iso8601', ->
     it 'should return date formatted as YYYYMMDDTHHnnssZ', ->
-      spyOn(util, 'getDate').andCallFake -> new Date(600000)
+      date = new Date(600000); date.setMilliseconds(0)
+      spyOn(util, 'getDate').andCallFake -> date
       expect(util.iso8601()).toEqual('1970-01-01T00:10:00.000Z')
 
     it 'should allow date parameter', ->
-      expect(util.iso8601(new Date(660000))).toEqual('1970-01-01T00:11:00.000Z')
+      date = new Date(660000); date.setMilliseconds(0)
+      expect(util.iso8601(date)).toEqual('1970-01-01T00:11:00.000Z')
 
   describe 'rfc822', ->
     it 'should return date formatted as YYYYMMDDTHHnnssZ', ->
-      spyOn(util, 'getDate').andCallFake -> new Date(600000)
+      date = new Date(600000); date.setMilliseconds(0)
+      spyOn(util, 'getDate').andCallFake -> date
       expect(util.rfc822()).toEqual('Thu, 01 Jan 1970 00:10:00 GMT')
 
     it 'should allow date parameter', ->
-      expect(util.rfc822(new Date(660000))).toEqual('Thu, 01 Jan 1970 00:11:00 GMT')
+      date = new Date(660000); date.setMilliseconds(0)
+      expect(util.rfc822(date)).toEqual('Thu, 01 Jan 1970 00:11:00 GMT')
 
   describe 'unixTimestamp', ->
     it 'should return date formatted as unix timestamp', ->
-      spyOn(util, 'getDate').andCallFake -> new Date(600000)
+      date = new Date(600000); date.setMilliseconds(0)
+      spyOn(util, 'getDate').andCallFake -> date
       expect(util.unixTimestamp()).toEqual(600)
 
     it 'should allow date parameter', ->
-      expect(util.unixTimestamp(new Date(660000))).toEqual(660)
+      date = new Date(660000); date.setMilliseconds(0)
+      expect(util.unixTimestamp(date)).toEqual(660)
 
     it 'should return date formatted as unix timestamp with milliseconds', ->
       spyOn(util, 'getDate').andCallFake -> new Date(600123)

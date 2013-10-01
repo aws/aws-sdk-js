@@ -231,11 +231,10 @@ describe 'AWS.EventListeners', ->
       helpers.mockHttpResponse 500, {}, ''
 
       makeRequest (err) ->
-        expect(err).toEqual
-          code: 500,
-          message: null,
-          statusCode: 500
-          retryable: true
+        expect(err.code).toEqual 500
+        expect(err.message).toEqual(null)
+        expect(err.statusCode).toEqual(500)
+        expect(err.retryable).toEqual(true)
         expect(@retryCount).
           toEqual(service.config.maxRetries)
 

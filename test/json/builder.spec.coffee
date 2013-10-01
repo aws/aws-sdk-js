@@ -70,6 +70,7 @@ describe 'AWS.JSON.Builder', ->
           Build:
             type: 'timestamp'
       now = new Date()
+      now.setMilliseconds(0)
       params =
         Build:
           When: now

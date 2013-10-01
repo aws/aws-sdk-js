@@ -150,7 +150,7 @@ describe 'AWS.ServiceInterface.Rest', ->
 
     describe 'timestamp header with format', ->
       it 'populates the header with correct timestamp formatting', ->
-        date = new Date(Date.now());
+        date = new Date(); date.setMilliseconds(0)
         buildRequest ->
           operation.input =
             members:
@@ -164,7 +164,7 @@ describe 'AWS.ServiceInterface.Rest', ->
 
     describe 'timestamp header without format', ->
       it 'populates the header using the api formatting', ->
-        date = new Date(Date.now());
+        date = new Date(); date.setMilliseconds(0)
         buildRequest ->
           service.api.timestampFormat = 'rfc822'
           operation.input =
@@ -178,7 +178,7 @@ describe 'AWS.ServiceInterface.Rest', ->
 
     describe 'timestamp header with api formatting and parameter formatting', ->
       it 'populates the header using the parameter formatting', ->
-        date = new Date(Date.now());
+        date = new Date(); date.setMilliseconds(0)
         buildRequest ->
           service.api.timestampFormat = 'invalid'
           operation.input =
@@ -193,7 +193,7 @@ describe 'AWS.ServiceInterface.Rest', ->
 
     describe 'timestamp header with iso formatting', ->
       it 'populates the header using the parameter formatting', ->
-        date = new Date(Date.now());
+        date = new Date(); date.setMilliseconds(0)
         buildRequest ->
           operation.input =
             members:
