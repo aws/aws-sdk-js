@@ -87613,7 +87613,7 @@ AWS.util = {
           if (match[2]) {
             newObjects = [];
             AWS.util.arrayEach.call(this, objects, function (obj) {
-              if (AWS.util.isType(obj, Array)) {
+              if (Array.isArray(obj)) {
                 if (match[2] === '*') {
                   newObjects = newObjects.concat(obj);
                 } else {
@@ -87872,7 +87872,7 @@ AWS.util = {
   isType: function isType(obj, type) {
     // handle cross-"frame" objects
     if (typeof type === 'function') {
-      if (type.name) type = type.name;
+      if (type.hasOwnProperty('name')) type = type.name;
       else type = type.toString().match(/^\s+function (.+)\(/)[1];
     }
     return Object.prototype.toString.call(obj) === '[object ' + type + ']';
