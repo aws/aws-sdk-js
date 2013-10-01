@@ -11245,7 +11245,7 @@ AWS.Request = inherit({
 
       var config = this.request.service.paginationConfig(this.request.operation);
       var resultKey = config.resultKey;
-      if (AWS.util.isType(resultKey, Array)) resultKey = resultKey[0];
+      if (Array.isArray(resultKey)) resultKey = resultKey[0];
       var results = AWS.util.jamespath.query(resultKey, data);
       AWS.util.arrayEach(results, function(result) {
         AWS.util.arrayEach(result, function(item) { callback(null, item); });
@@ -11396,7 +11396,7 @@ AWS.Request = inherit({
   emitEvent: function emitEvent(eventName, args, doneCallback) {
     if (!doneCallback) doneCallback = this.unhandledErrorCallback;
     var response = null;
-    if (AWS.util.isType(args, Array)) {
+    if (Array.isArray(args)) {
       response = args[args.length - 1];
     } else {
       response = args;
@@ -12162,7 +12162,7 @@ AWS.util.update(AWS.Service, {
   },
 
   defineService: function defineService(serviceIdentifier, versions, features) {
-    if (!AWS.util.isType(versions, Array)) {
+    if (!Array.isArray(versions)) {
       features = versions;
       versions = [];
     }
@@ -87871,7 +87871,10 @@ AWS.util = {
 
   isType: function isType(obj, type) {
     // handle cross-"frame" objects
-    if (typeof type === 'function') type = type.name;
+    if (typeof type === 'function') {
+      if (type.name) type = type.name;
+      else type = type.toString().match(/^\s+function (.+)\(/)[1];
+    }
     return Object.prototype.toString.call(obj) === '[object ' + type + ']';
   },
 
@@ -92482,12 +92485,10 @@ describe('AWS.EventListeners', function() {
     it('retries if status code is >= 500', function() {
       helpers.mockHttpResponse(500, {}, '');
       return makeRequest(function(err) {
-        expect(err).toEqual({
-          code: 500,
-          message: null,
-          statusCode: 500,
-          retryable: true
-        });
+        expect(err.code).toEqual(500);
+        expect(err.message).toEqual(null);
+        expect(err.statusCode).toEqual(500);
+        expect(err.retryable).toEqual(true);
         return expect(this.retryCount).toEqual(service.config.maxRetries);
       });
     });
@@ -93171,6 +93172,7 @@ describe('AWS.JSON.Builder', function() {
         }
       };
       now = new Date();
+      now.setMilliseconds(0);
       params = {
         Build: {
           When: now
@@ -94991,12 +94993,10 @@ describe('AWS.Service', function() {
         maxRetries: 0
       });
       return req = service.makeRequest('operation', {}, function(err, data) {
-        expect(err).toEqual({
-          code: 'ServiceError',
-          message: null,
-          retryable: true,
-          statusCode: 500
-        });
+        expect(err.code).toEqual('ServiceError');
+        expect(err.message).toEqual(null);
+        expect(err.statusCode).toEqual(500);
+        expect(err.retryable).toEqual(true);
         return expect(data).toEqual(null);
       });
     });
@@ -95850,6 +95850,7 @@ describe('AWS.QueryParamSerializer', function() {
     it('serializes timestamp to iso8601 strings by default', function() {
       var date, params, rules;
       date = new Date();
+      date.setMilliseconds(0);
       rules = {
         Date: {
           type: 'timestamp'
@@ -95863,6 +95864,7 @@ describe('AWS.QueryParamSerializer', function() {
     return it('obeys format options in the rules', function() {
       var date, params, rules;
       date = new Date();
+      date.setMilliseconds(0);
       rules = {
         Date: {
           type: 'timestamp',
@@ -96110,7 +96112,8 @@ describe('AWS.ServiceInterface.Rest', function() {
     describe('timestamp header with format', function() {
       return it('populates the header with correct timestamp formatting', function() {
         var date;
-        date = new Date(Date.now());
+        date = new Date();
+        date.setMilliseconds(0);
         buildRequest(function() {
           operation.input = {
             members: {
@@ -96132,7 +96135,8 @@ describe('AWS.ServiceInterface.Rest', function() {
     describe('timestamp header without format', function() {
       return it('populates the header using the api formatting', function() {
         var date;
-        date = new Date(Date.now());
+        date = new Date();
+        date.setMilliseconds(0);
         buildRequest(function() {
           service.api.timestampFormat = 'rfc822';
           operation.input = {
@@ -96154,7 +96158,8 @@ describe('AWS.ServiceInterface.Rest', function() {
     describe('timestamp header with api formatting and parameter formatting', function() {
       return it('populates the header using the parameter formatting', function() {
         var date;
-        date = new Date(Date.now());
+        date = new Date();
+        date.setMilliseconds(0);
         buildRequest(function() {
           service.api.timestampFormat = 'invalid';
           operation.input = {
@@ -96177,7 +96182,8 @@ describe('AWS.ServiceInterface.Rest', function() {
     return describe('timestamp header with iso formatting', function() {
       return it('populates the header using the parameter formatting', function() {
         var date;
-        date = new Date(Date.now());
+        date = new Date();
+        date.setMilliseconds(0);
         buildRequest(function() {
           operation.input = {
             members: {
@@ -98860,35 +98866,53 @@ describe('AWS.util.date', function() {
   });
   describe('iso8601', function() {
     it('should return date formatted as YYYYMMDDTHHnnssZ', function() {
+      var date;
+      date = new Date(600000);
+      date.setMilliseconds(0);
       spyOn(util, 'getDate').andCallFake(function() {
-        return new Date(600000);
+        return date;
       });
       return expect(util.iso8601()).toEqual('1970-01-01T00:10:00.000Z');
     });
     return it('should allow date parameter', function() {
-      return expect(util.iso8601(new Date(660000))).toEqual('1970-01-01T00:11:00.000Z');
+      var date;
+      date = new Date(660000);
+      date.setMilliseconds(0);
+      return expect(util.iso8601(date)).toEqual('1970-01-01T00:11:00.000Z');
     });
   });
   describe('rfc822', function() {
     it('should return date formatted as YYYYMMDDTHHnnssZ', function() {
+      var date;
+      date = new Date(600000);
+      date.setMilliseconds(0);
       spyOn(util, 'getDate').andCallFake(function() {
-        return new Date(600000);
+        return date;
       });
       return expect(util.rfc822()).toEqual('Thu, 01 Jan 1970 00:10:00 GMT');
     });
     return it('should allow date parameter', function() {
-      return expect(util.rfc822(new Date(660000))).toEqual('Thu, 01 Jan 1970 00:11:00 GMT');
+      var date;
+      date = new Date(660000);
+      date.setMilliseconds(0);
+      return expect(util.rfc822(date)).toEqual('Thu, 01 Jan 1970 00:11:00 GMT');
     });
   });
   return describe('unixTimestamp', function() {
     it('should return date formatted as unix timestamp', function() {
+      var date;
+      date = new Date(600000);
+      date.setMilliseconds(0);
       spyOn(util, 'getDate').andCallFake(function() {
-        return new Date(600000);
+        return date;
       });
       return expect(util.unixTimestamp()).toEqual(600);
     });
     it('should allow date parameter', function() {
-      return expect(util.unixTimestamp(new Date(660000))).toEqual(660);
+      var date;
+      date = new Date(660000);
+      date.setMilliseconds(0);
+      return expect(util.unixTimestamp(date)).toEqual(660);
     });
     return it('should return date formatted as unix timestamp with milliseconds', function() {
       spyOn(util, 'getDate').andCallFake(function() {
@@ -99893,6 +99917,7 @@ describe('AWS.XML.Builder', function() {
   describe('timestamps', function() {
     var time;
     time = new Date();
+    time.setMilliseconds(0);
     it('iso8601', function() {
       var params, rules, xml;
       rules = {
