@@ -99,11 +99,11 @@ describe 'AWS.util.date', ->
     it 'should return date formatted as YYYYMMDDTHHnnssZ', ->
       date = new Date(600000); date.setMilliseconds(0)
       spyOn(util, 'getDate').andCallFake -> date
-      expect(util.rfc822()).toMatch(/^Thu, 01 Jan 1970 00:10:00 (GMT|UTC)$/)
+      expect(util.rfc822()).toMatch(/^Thu, 0?1 Jan 1970 00:10:00 (GMT|UTC)$/)
 
     it 'should allow date parameter', ->
       date = new Date(660000); date.setMilliseconds(0)
-      expect(util.rfc822(date)).toMatch(/^Thu, 01 Jan 1970 00:11:00 (GMT|UTC)$/)
+      expect(util.rfc822(date)).toMatch(/^Thu, 0?1 Jan 1970 00:11:00 (GMT|UTC)$/)
 
   describe 'unixTimestamp', ->
     it 'should return date formatted as unix timestamp', ->
