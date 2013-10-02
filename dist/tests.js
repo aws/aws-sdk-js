@@ -87877,7 +87877,9 @@ AWS.util = {
 
   typeName: function typeName(type) {
     if (type.hasOwnProperty('name')) return type.name;
-    else return type.toString().match(/^\s+function (.+)\(/)[1];
+    var str = type.toString();
+    var match = str.match(/^\s+function (.+)\(/);
+    return match ? match[1] : str;
   },
 
   error: function error(err, options) {
