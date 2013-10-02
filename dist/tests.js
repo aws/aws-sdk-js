@@ -98893,13 +98893,13 @@ describe('AWS.util.date', function() {
       spyOn(util, 'getDate').andCallFake(function() {
         return date;
       });
-      return expect(util.rfc822()).toEqual('Thu, 01 Jan 1970 00:10:00 GMT');
+      return expect(util.rfc822()).toMatch(/^Thu, 01 Jan 1970 00:10:00 (GMT|UTC)$/);
     });
     return it('should allow date parameter', function() {
       var date;
       date = new Date(660000);
       date.setMilliseconds(0);
-      return expect(util.rfc822(date)).toEqual('Thu, 01 Jan 1970 00:11:00 GMT');
+      return expect(util.rfc822(date)).toMatch(/^Thu, 01 Jan 1970 00:11:00 (GMT|UTC)$/);
     });
   });
   return describe('unixTimestamp', function() {
