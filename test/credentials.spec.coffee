@@ -167,24 +167,41 @@ if AWS.util.isNode()
           toThrow('Credentials not set in foo')
 
   describe 'AWS.EC2MetadataCredentials', ->
+    creds = null
+
+    beforeEach ->
+      creds = new AWS.EC2MetadataCredentials(host: 'host')
+
+    mockMetadataService = (expireTime) ->
+      spyOn(creds.metadataService, 'loadCredentials').andCallFake (cb) ->
+          cb null,
+            Code: 'Success'
+            AccessKeyId: 'KEY'
+            SecretAccessKey: 'SECRET'
+            Token: 'TOKEN'
+            Expiration: expireTime.toISOString()
+
     describe 'constructor', ->
       it 'allows passing of AWS.MetadataService options', ->
-        creds = new AWS.EC2MetadataCredentials(host: 'host')
         expect(creds.metadataService.host).toEqual('host')
+
+    describe 'needsRefresh', ->
+      it 'can be expired based on expire time from EC2 Metadata service', ->
+        mockMetadataService(new Date(0))
+        creds.refresh(->)
+        expect(creds.needsRefresh()).toEqual(true)
 
     describe 'refresh', ->
       it 'loads credentials from EC2 Metadata service', ->
-        creds = new AWS.EC2MetadataCredentials(host: 'host')
-        spy = spyOn(creds.metadataService, 'loadCredentials').andCallFake (cb) ->
-          cb(null, Code:"Success",AccessKeyId:"KEY",SecretAccessKey:"SECRET",Token:"TOKEN")
+        mockMetadataService(new Date(AWS.util.date.getDate().getTime() + 100000))
         creds.refresh(->)
         expect(creds.metadata.Code).toEqual('Success')
         expect(creds.accessKeyId).toEqual('KEY')
         expect(creds.secretAccessKey).toEqual('SECRET')
         expect(creds.sessionToken).toEqual('TOKEN')
+        expect(creds.needsRefresh()).toEqual(false)
 
       it 'does not try to load creds second time if Metadata service failed', ->
-        creds = new AWS.EC2MetadataCredentials(host: 'host')
         spy = spyOn(creds.metadataService, 'loadCredentials').andCallFake (cb) ->
           cb(new Error('INVALID SERVICE'))
 
