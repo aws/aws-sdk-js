@@ -91913,40 +91913,48 @@ if (AWS.util.isNode()) {
     });
   });
   describe('AWS.EC2MetadataCredentials', function() {
+    var creds, mockMetadataService;
+    creds = null;
+    beforeEach(function() {
+      return creds = new AWS.EC2MetadataCredentials({
+        host: 'host'
+      });
+    });
+    mockMetadataService = function(expireTime) {
+      return spyOn(creds.metadataService, 'loadCredentials').andCallFake(function(cb) {
+        return cb(null, {
+          Code: 'Success',
+          AccessKeyId: 'KEY',
+          SecretAccessKey: 'SECRET',
+          Token: 'TOKEN',
+          Expiration: expireTime.toISOString()
+        });
+      });
+    };
     describe('constructor', function() {
       return it('allows passing of AWS.MetadataService options', function() {
-        var creds;
-        creds = new AWS.EC2MetadataCredentials({
-          host: 'host'
-        });
         return expect(creds.metadataService.host).toEqual('host');
+      });
+    });
+    describe('needsRefresh', function() {
+      return it('can be expired based on expire time from EC2 Metadata service', function() {
+        mockMetadataService(new Date(0));
+        creds.refresh(function() {});
+        return expect(creds.needsRefresh()).toEqual(true);
       });
     });
     return describe('refresh', function() {
       it('loads credentials from EC2 Metadata service', function() {
-        var creds, spy;
-        creds = new AWS.EC2MetadataCredentials({
-          host: 'host'
-        });
-        spy = spyOn(creds.metadataService, 'loadCredentials').andCallFake(function(cb) {
-          return cb(null, {
-            Code: "Success",
-            AccessKeyId: "KEY",
-            SecretAccessKey: "SECRET",
-            Token: "TOKEN"
-          });
-        });
+        mockMetadataService(new Date(AWS.util.date.getDate().getTime() + 100000));
         creds.refresh(function() {});
         expect(creds.metadata.Code).toEqual('Success');
         expect(creds.accessKeyId).toEqual('KEY');
         expect(creds.secretAccessKey).toEqual('SECRET');
-        return expect(creds.sessionToken).toEqual('TOKEN');
+        expect(creds.sessionToken).toEqual('TOKEN');
+        return expect(creds.needsRefresh()).toEqual(false);
       });
       return it('does not try to load creds second time if Metadata service failed', function() {
-        var creds, spy;
-        creds = new AWS.EC2MetadataCredentials({
-          host: 'host'
-        });
+        var spy;
         spy = spyOn(creds.metadataService, 'loadCredentials').andCallFake(function(cb) {
           return cb(new Error('INVALID SERVICE'));
         });
