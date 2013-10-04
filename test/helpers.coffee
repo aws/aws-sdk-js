@@ -45,6 +45,7 @@ matchXML = (xml1, xml2) ->
   expect(flattenXML(xml1)).toEqual(flattenXML(xml2))
 
 MockService = AWS.Service.defineService 'mockService',
+  serviceIdentifier: 'mock'
   initialize: (config) ->
     AWS.Service.prototype.initialize.call(this, config)
     @config.credentials = accessKeyId: 'akid', secretAccessKey: 'secret'
