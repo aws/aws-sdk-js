@@ -183,24 +183,24 @@ describe 'AWS.Service', ->
         expect(err).toEqual(null)
         expect(data).toEqual('FOOBAR')
 
-      describe 'bound parameters', ->
-        it 'accepts toplevel bound parameters on the service', ->
-          service = new AWS.S3(params: {Bucket: 'bucket', Key: 'key'})
-          req = service.makeRequest 'getObject'
-          expect(req.params).toEqual(Bucket: 'bucket', Key: 'key')
+    describe 'bound parameters', ->
+      it 'accepts toplevel bound parameters on the service', ->
+        service = new AWS.S3(params: {Bucket: 'bucket', Key: 'key'})
+        req = service.makeRequest 'getObject'
+        expect(req.params).toEqual(Bucket: 'bucket', Key: 'key')
 
-        it 'ignores bound parameters not in input members', ->
-          service = new AWS.S3(params: {Bucket: 'bucket', Key: 'key'})
-          req = service.makeRequest 'listObjects'
-          expect(req.params).toEqual(Bucket: 'bucket')
+      it 'ignores bound parameters not in input members', ->
+        service = new AWS.S3(params: {Bucket: 'bucket', Key: 'key'})
+        req = service.makeRequest 'listObjects'
+        expect(req.params).toEqual(Bucket: 'bucket')
 
-        it 'can override bound parameters', ->
-          service = new AWS.S3(params: {Bucket: 'bucket', Key: 'key'})
-          params = Bucket: 'notBucket'
+      it 'can override bound parameters', ->
+        service = new AWS.S3(params: {Bucket: 'bucket', Key: 'key'})
+        params = Bucket: 'notBucket'
 
-          req = service.makeRequest('listObjects', params)
-          expect(params).not.toBe(req.params)
-          expect(req.params).toEqual(Bucket: 'notBucket')
+        req = service.makeRequest('listObjects', params)
+        expect(params).not.toBe(req.params)
+        expect(req.params).toEqual(Bucket: 'notBucket')
 
     describe 'global events', ->
       it 'adds AWS.events listeners to requests', ->
