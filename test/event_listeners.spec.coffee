@@ -338,6 +338,35 @@ describe 'AWS.EventListeners', ->
       expect(errorHandler).toHaveBeenCalled()
       expect(completeHandler).toHaveBeenCalled()
 
+  describe 'logging', ->
+    data = null
+    logger = null
+    logfn = (d) -> data += d
+    match = /\[AWS mock 200 .* 0 retries\] mockMethod\(.*foo.*bar.*\)/
+
+    beforeEach ->
+      data = ''
+      logger = {}
+      service = new MockService(logger: logger)
+
+    it 'does nothing if logging is off', ->
+      service = new MockService(logger: null)
+      helpers.mockHttpResponse 200, {}, []
+      makeRequest().send()
+      expect(completeHandler).toHaveBeenCalled()
+
+    it 'calls .log() on logger if it is available', ->
+      helpers.mockHttpResponse 200, {}, []
+      logger.log = logfn
+      makeRequest().send()
+      expect(data).toMatch(match)
+
+    it 'calls .write() on logger if it is available', ->
+      helpers.mockHttpResponse 200, {}, []
+      logger.write = logfn
+      makeRequest().send()
+      expect(data).toMatch(match)
+
   if AWS.util.isNode()
     describe 'terminal callback error handling', ->
       beforeEach ->

@@ -9085,6 +9085,11 @@ require('./credentials/credential_provider_chain');
  *
  * @!attribute s3ForcePathStyle
  *   @return [Boolean] whether to force path style URLs for S3 objects
+ *
+ * @!attribute logger
+ *   @return [#write,#log] an object that responds to .write() (like a stream)
+ *     or .log() (like the console object) in order to log information about
+ *     requests
  */
 AWS.Config = AWS.util.inherit({
 
@@ -9141,6 +9146,9 @@ AWS.Config = AWS.util.inherit({
    *   identifiers (the lowercase service class name) with the API version to
    *   use when instantiating a service. Specify 'latest' for each individual
    *   that can use the latest available version.
+   * @option options logger [#write,#log] an object that responds to .write()
+   *   (like a stream) or .log() (like the console object) in order to log
+   *   information about requests
    */
   constructor: function Config(options) {
     if (options === undefined) options = {};
@@ -9294,6 +9302,7 @@ AWS.Config = AWS.util.inherit({
     credentials: null,
     credentialProvider: null,
     region: null,
+    logger: null,
     apiVersions: {},
     apiVersion: null,
     endpoint: undefined,
@@ -10336,6 +10345,38 @@ AWS.EventListeners = {
 
   }),
 
+  Logger: new AWS.SequentialExecutor().addNamedListeners(function(add) {
+    add('LOG_REQUEST', 'complete', function LOG_REQUEST(resp) {
+      var req = resp.request;
+      var logger = req.service.config.logger;
+      if (!logger) return;
+
+      function buildMessage() {
+        var time = AWS.util.date.getDate().getTime();
+        var delta = (time - req.startTime.getTime()) / 1000;
+        var ansi = logger.isTTY ? true : false;
+        var status = resp.httpResponse.statusCode;
+        var params = require('util').inspect(req.params, true, true);
+
+        var message = '';
+        if (ansi) message += '\x1B[33m';
+        message += '[AWS ' + req.service.serviceIdentifier + ' ' + status;
+        message += ' ' + delta.toString() + 's ' + resp.retryCount + ' retries]';
+        if (ansi) message += '\x1B[0;1m';
+        message += ' ' + req.operation + '(' + params + ')';
+        if (ansi) message += '\x1B[0m';
+        return message;
+      }
+
+      var message = buildMessage();
+      if (typeof logger.log === 'function') {
+        logger.log(message);
+      } else if (typeof logger.write === 'function') {
+        logger.write(message + '\n');
+      }
+    });
+  }),
+
   Json: new AWS.SequentialExecutor().addNamedListeners(function(add) {
     var svc = AWS.ServiceInterface.Json;
     add('BUILD', 'build', svc.buildRequest);
@@ -10372,7 +10413,7 @@ AWS.EventListeners = {
   })
 };
 
-},{"./core":43,"./sequential_executor":54,"./service_interface/json":56,"./service_interface/query":57,"./service_interface/rest":58,"./service_interface/rest_json":59,"./service_interface/rest_xml":60,"buffer":19}],50:[function(require,module,exports){
+},{"./core":43,"./sequential_executor":54,"./service_interface/json":56,"./service_interface/query":57,"./service_interface/rest":58,"./service_interface/rest_json":59,"./service_interface/rest_xml":60,"buffer":19,"util":17}],50:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10964,6 +11005,11 @@ var streams = require('stream');
  *     containing request headers and body information
  *     sent by the service.
  *
+ * @!attribute startTime
+ *   @readonly
+ *   @!group Operation Properties
+ *   @return [Date] the time that the request started
+ *
  * @!group Request Building Events
  *
  * @!event validate(request)
@@ -11101,6 +11147,7 @@ AWS.Request = inherit({
     this.operation = operation;
     this.params = params || {};
     this.httpRequest = new AWS.HttpRequest(endpoint, region);
+    this.startTime = AWS.util.date.getDate();
 
     AWS.SequentialExecutor.call(this);
   },
@@ -12052,6 +12099,10 @@ AWS.Service = inherit({
     if (!this.config.paramValidation) {
       request.removeListener('validate',
         AWS.EventListeners.Core.VALIDATE_PARAMETERS);
+    }
+
+    if (this.config.logger) { // add logging events
+      request.addListeners(AWS.EventListeners.Logger);
     }
 
     this.setupRequestListeners(request);
@@ -92616,6 +92667,42 @@ describe('AWS.EventListeners', function() {
       return expect(completeHandler).toHaveBeenCalled();
     });
   });
+  describe('logging', function() {
+    var data, logfn, logger, match;
+    data = null;
+    logger = null;
+    logfn = function(d) {
+      return data += d;
+    };
+    match = /\[AWS mock 200 .* 0 retries\] mockMethod\(.*foo.*bar.*\)/;
+    beforeEach(function() {
+      data = '';
+      logger = {};
+      return service = new MockService({
+        logger: logger
+      });
+    });
+    it('does nothing if logging is off', function() {
+      service = new MockService({
+        logger: null
+      });
+      helpers.mockHttpResponse(200, {}, []);
+      makeRequest().send();
+      return expect(completeHandler).toHaveBeenCalled();
+    });
+    it('calls .log() on logger if it is available', function() {
+      helpers.mockHttpResponse(200, {}, []);
+      logger.log = logfn;
+      makeRequest().send();
+      return expect(data).toMatch(match);
+    });
+    return it('calls .write() on logger if it is available', function() {
+      helpers.mockHttpResponse(200, {}, []);
+      logger.write = logfn;
+      makeRequest().send();
+      return expect(data).toMatch(match);
+    });
+  });
   if (AWS.util.isNode()) {
     return describe('terminal callback error handling', function() {
       var didError;
@@ -92780,6 +92867,7 @@ matchXML = function(xml1, xml2) {
 };
 
 MockService = AWS.Service.defineService('mockService', {
+  serviceIdentifier: 'mock',
   initialize: function(config) {
     AWS.Service.prototype.initialize.call(this, config);
     this.config.credentials = {
@@ -92926,6 +93014,7 @@ var process=require("__browserify_process");// Generated by CoffeeScript 1.6.3
   };
 
   MockService = AWS.Service.defineService('mockService', {
+    serviceIdentifier: 'mock',
     initialize: function(config) {
       AWS.Service.prototype.initialize.call(this, config);
       this.config.credentials = {
@@ -95040,52 +95129,54 @@ describe('AWS.Service', function() {
       service = new MockService({
         paramValidation: false
       });
-      req = service.makeRequest('operation', {}, function(err, data) {
+      return req = service.makeRequest('operation', {}, function(err, data) {
         expect(err).toEqual(null);
         return expect(data).toEqual('FOOBAR');
       });
-      return describe('bound parameters', function() {
-        it('accepts toplevel bound parameters on the service', function() {
-          service = new AWS.S3({
-            params: {
-              Bucket: 'bucket',
-              Key: 'key'
-            }
-          });
-          req = service.makeRequest('getObject');
-          return expect(req.params).toEqual({
+    });
+    describe('bound parameters', function() {
+      it('accepts toplevel bound parameters on the service', function() {
+        var req;
+        service = new AWS.S3({
+          params: {
             Bucket: 'bucket',
             Key: 'key'
-          });
+          }
         });
-        it('ignores bound parameters not in input members', function() {
-          service = new AWS.S3({
-            params: {
-              Bucket: 'bucket',
-              Key: 'key'
-            }
-          });
-          req = service.makeRequest('listObjects');
-          return expect(req.params).toEqual({
-            Bucket: 'bucket'
-          });
+        req = service.makeRequest('getObject');
+        return expect(req.params).toEqual({
+          Bucket: 'bucket',
+          Key: 'key'
         });
-        return it('can override bound parameters', function() {
-          var params;
-          service = new AWS.S3({
-            params: {
-              Bucket: 'bucket',
-              Key: 'key'
-            }
-          });
-          params = {
-            Bucket: 'notBucket'
-          };
-          req = service.makeRequest('listObjects', params);
-          expect(params).not.toBe(req.params);
-          return expect(req.params).toEqual({
-            Bucket: 'notBucket'
-          });
+      });
+      it('ignores bound parameters not in input members', function() {
+        var req;
+        service = new AWS.S3({
+          params: {
+            Bucket: 'bucket',
+            Key: 'key'
+          }
+        });
+        req = service.makeRequest('listObjects');
+        return expect(req.params).toEqual({
+          Bucket: 'bucket'
+        });
+      });
+      return it('can override bound parameters', function() {
+        var params, req;
+        service = new AWS.S3({
+          params: {
+            Bucket: 'bucket',
+            Key: 'key'
+          }
+        });
+        params = {
+          Bucket: 'notBucket'
+        };
+        req = service.makeRequest('listObjects', params);
+        expect(params).not.toBe(req.params);
+        return expect(req.params).toEqual({
+          Bucket: 'notBucket'
         });
       });
     });
