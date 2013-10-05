@@ -384,8 +384,10 @@ language governing permissions and limitations under the License.
       var link = entry.children('ul').find('a').first();
       link.text('[' + info + '] ' + link.text());
 
-      delete resp.httpResponse.body.parent; // remove circular reference
-      resp.httpResponse.body = resp.httpResponse.body.toString();
+      if (resp.httpResponse.body) {
+        delete resp.httpResponse.body.parent; // remove circular reference
+        resp.httpResponse.body = resp.httpResponse.body.toString();
+      }
       var respHttpData = JSON.stringify(resp.httpResponse, null, 2);
       entry.find('.operationResponseDetails').text(respHttpData);
     }
