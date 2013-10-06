@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!--
+Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License"). You
+may not use this file except in compliance with the License. A copy of
+the License is located at
+
+    http://aws.amazon.com/apache2.0/
+
+or in the "license" file accompanying this file. This file is
+distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ANY KIND, either express or implied. See the License for the specific
+language governing permissions and limitations under the License.
+-->
+<html>
+<head>
+  <title>AWS SDK for JavaScript - Console</title>
+  <style type="text/css">
+    body { font-family: Helvetica, Arial, sans-serif; font-size: 9pt; }
+    #drop_zone { padding: 40px; border: 2px dashed #666; color: #777; font-size: 2em; }
+  </style>
+</head>
+<body>
+  <div id="fb-root"></div>
+  <h1>Upload a file to S3</h1>
+  <p>Bucket name: <input type="text" id="bucket"/></p>
+  <div id="drop_zone">Drop files here</div>
+  <div id="notes"></div>
+  <script type="text/javascript" src="aws-sdk.js"></script>
+  <script type="text/javascript" src="appinfo.js"></script>
+  <script type="text/javascript">
+    var elDropZone = document.getElementById('drop_zone');
+    var elFile = document.getElementById('file');
+    var elBucket = document.getElementById('bucket');
+    var elNotes = document.getElementById('notes');
+    elBucket.value = localStorage.s3BucketName;
+
+    var s3 = new AWS.S3({
+      paramValidation: false,
+      computeChecksums: false,
+      params: {Bucket: elBucket.value || ''}
+    });
+
+    function init() {
+      elDropZone.addEventListener('dragover', handleDragOver, false);
+      elDropZone.addEventListener('drop', handleFileSelect, false);
+      elBucket.addEventListener('change', function () {
+        localStorage.s3BucketName = elBucket.value;
+        s3.config.params.Bucket = elBucket.value;
+      }, false);
+    }
+
+    var firstTime = true;
+    function handleFileSelect(evt) {
+      if (firstTime) {
+        firstTime = false;
+        elDropZone.innerHTML = '';
+      }
+      evt.stopPropagation();
+      evt.preventDefault();
+
+      var files = evt.dataTransfer.files; // FileList object.
+      for (var i = 0; i < files.length; i++) {
+        var params = {Key: files[i].name, ContentType: files[i].type, Body: files[i]};
+        console.log(params);
+        s3.putObject(params, function (err, data) {
+          console.log("FINISHED")
+          if (err) {
+            elDropZone.innerHTML += '<p>ERROR UPLOADING ' + files[i].name + '</p>';
+          } else {
+            var url = s3.getSignedUrl('getObject', {Key: params.Key});
+            console.log(url)
+            elDropZone.innerHTML += '<img src="' + url + '">';
+          }
+        })
+      }
+    }
+
+    function handleDragOver(evt) {
+      evt.stopPropagation();
+      evt.preventDefault();
+      evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+    }
+
+    function loadIDPCredentials(provider, arn, accessToken) {
+      var params = {
+        ProviderId: provider,
+        RoleArn: arn,
+        WebIdentityToken: accessToken
+      };
+      if (provider === null) delete params.ProviderId;
+      s3.config.credentials = new AWS.WebIdentityCredentials(params);
+    }
+
+    window.fbAsyncInit = function() {
+      // init the FB JS SDK
+      FB.init({
+        appId: window.appInfo.facebook.appId,
+        status: false,
+        xfbml: false
+      });
+
+      FB.Event.subscribe('auth.authResponseChange', function(response) {
+        if (response.status === 'connected') {
+          loadIDPCredentials('graph.facebook.com',
+            window.appInfo.facebook.roleArn,
+            response.authResponse.accessToken);
+        } else { FB.login(); }
+      });
+
+      FB.getLoginStatus();
+    };
+
+    // Load the SDK asynchronously
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/all.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+
+    document.addEventListener('DOMContentLoaded', init, false);
+  </script>
+</body>
+</html>
