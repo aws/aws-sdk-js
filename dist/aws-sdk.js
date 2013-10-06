@@ -12,9 +12,40 @@
  * ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-;(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+;/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})
+({1:[function(require,module,exports){
 
 },{}],2:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
 
 
 //
@@ -233,6 +264,21 @@ if (typeof Object.getOwnPropertyDescriptor === 'function') {
 }
 
 },{}],3:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -306,6 +352,21 @@ function onend() {
 }
 
 },{"_shims":2,"_stream_readable":5,"_stream_writable":7,"timers":14,"util":16}],4:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -349,7 +410,22 @@ PassThrough.prototype._transform = function(chunk, encoding, cb) {
 };
 
 },{"_stream_transform":6,"util":16}],5:[function(require,module,exports){
-var process=require("__browserify_process");// Copyright Joyent, Inc. and other Node contributors.
+var process=require("__browserify_process");/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the
@@ -1270,6 +1346,21 @@ function endReadable(stream) {
 }
 
 },{"__browserify_process":21,"_shims":2,"buffer":18,"events":9,"stream":12,"string_decoder":13,"timers":14,"util":16}],6:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1476,6 +1567,21 @@ function done(stream, er) {
 }
 
 },{"_stream_duplex":3,"util":16}],7:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1846,6 +1952,21 @@ function endWritable(stream, state, cb) {
 }
 
 },{"buffer":18,"stream":12,"timers":14,"util":16}],8:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2162,7 +2283,23 @@ assert.doesNotThrow = function(block, /*optional*/message) {
 };
 
 assert.ifError = function(err) { if (err) {throw err;}};
+
 },{"_shims":2,"util":16}],9:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2443,13 +2580,44 @@ EventEmitter.listenerCount = function(emitter, type) {
     ret = emitter._events[type].length;
   return ret;
 };
+
 },{"util":16}],10:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
 
 // not implemented
 // The reason for having an empty file and not throwing is to allow
 // untraditional implementation of this module.
 
 },{}],11:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2660,7 +2828,23 @@ QueryString.parse = QueryString.decode = function(qs, sep, eq, options) {
 
   return obj;
 };
+
 },{"_shims":2,"buffer":18,"util":16}],12:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2790,6 +2974,21 @@ Stream.prototype.pipe = function(dest, options) {
 };
 
 },{"_stream_duplex":3,"_stream_passthrough":4,"_stream_readable":5,"_stream_transform":6,"_stream_writable":7,"events":9,"util":16}],13:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2983,6 +3182,21 @@ function base64DetectIncompleteChar(buffer) {
 }
 
 },{"buffer":18}],14:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
 try {
     // Old IE browsers that do not curry arguments
     if (!setTimeout.call) {
@@ -3102,6 +3316,21 @@ if (!exports.setImmediate) {
 }
 
 },{}],15:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -3796,8 +4025,24 @@ Url.prototype.parseHost = function() {
   }
   if (host) this.hostname = host;
 };
+
 },{"_shims":2,"querystring":11,"util":16}],16:[function(require,module,exports){
-var Buffer=require("__browserify_Buffer").Buffer;// Copyright Joyent, Inc. and other Node contributors.
+var Buffer=require("__browserify_Buffer").Buffer;/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the
@@ -4338,6 +4583,21 @@ function hasOwnProperty(obj, prop) {
 }
 
 },{"__browserify_Buffer":20,"_shims":2}],17:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
 exports.readIEEE754 = function(buffer, offset, isBE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -4424,6 +4684,21 @@ exports.writeIEEE754 = function(buffer, value, offset, isBE, mLen, nBytes) {
 };
 
 },{}],18:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
 var assert;
 exports.Buffer = Buffer;
 exports.SlowBuffer = Buffer;
@@ -5550,6 +5825,21 @@ Buffer.prototype.writeDoubleBE = function(value, offset, noAssert) {
 };
 
 },{"./buffer_ieee754":17,"assert":8,"base64-js":19}],19:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
 (function (exports) {
 	'use strict';
 
@@ -5636,6 +5926,21 @@ Buffer.prototype.writeDoubleBE = function(value, offset, noAssert) {
 }());
 
 },{}],20:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 exports.readIEEE754 = function(buffer, offset, isBE, mLen, nBytes) {
   var e, m,
@@ -8016,6 +8321,21 @@ function hasOwnProperty(obj, prop) {
 ;;module.exports=require("buffer-browserify")
 
 },{}],21:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -8435,7 +8755,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '1.7.0',
+  VERSION: '1.7.1',
 
   /**
    * @api private
@@ -9845,7 +10165,7 @@ AWS.ParamValidator = AWS.util.inherit({
         return this.validateType(context, value, ['string']);
       case 'base64':
       case 'binary':
-        return this.validateType(context, value, ['string', Buffer]);
+        return this.validateType(context, value, ['string', Buffer, Stream]);
       case 'integer':
       case 'float':
         return this.validateType(context, value, ['number']);
@@ -19405,7 +19725,7 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
     // This is the "Date" header, but we use X-Amz-Date.
     // The S3 signing mechanism requires us to pass an empty
     // string for this Date header regardless.
-    parts.push(r.headers['presigned-expires'] || ''); 
+    parts.push(r.headers['presigned-expires'] || '');
 
     var headers = this.canonicalizedAmzHeaders();
     if (headers) parts.push(headers);
@@ -19749,14 +20069,15 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
 
   signature: function signature(credentials, datetime) {
     var cache = cachedSecret[this.serviceName];
-    if (!cache || cache.region !== this.request.region) {
+    var date = datetime.substr(0, 8);
+    if (!cache || cache.region !== this.request.region || cache.date !== date) {
       var kSecret = credentials.secretAccessKey;
-      var kDate = AWS.util.crypto.hmac('AWS4' + kSecret, datetime.substr(0, 8), 'buffer');
+      var kDate = AWS.util.crypto.hmac('AWS4' + kSecret, date, 'buffer');
       var kRegion = AWS.util.crypto.hmac(kDate, this.request.region, 'buffer');
       var kService = AWS.util.crypto.hmac(kRegion, this.serviceName, 'buffer');
       var kCredentials = AWS.util.crypto.hmac(kService, 'aws4_request', 'buffer');
       cachedSecret[this.serviceName] = {
-        region: this.request.region, key: kCredentials
+        region: this.request.region, date: date, key: kCredentials
       };
     }
 
