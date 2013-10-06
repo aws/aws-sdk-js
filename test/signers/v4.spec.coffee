@@ -59,10 +59,9 @@ describe 'AWS.Signers.V4', ->
       'Authorization' : authorization
     }
 
-    beforeEach -> signer.addAuthorization(creds, date)
-
     for key, value of headers
       it 'should add ' + key + ' header', ->
+        signer.addAuthorization(creds, date)
         key = this.description.match(/(\S+) header/)[1]
         expect(signer.request.headers[key]).toEqual(headers[key])
 
@@ -73,6 +72,38 @@ describe 'AWS.Signers.V4', ->
   describe 'signature', ->
     it 'should generate proper signature', ->
       expect(signer.signature(creds, datetime)).toEqual(signature)
+
+    describe 'caching', ->
+      callCount = null
+      calls = null
+
+      beforeEach ->
+        spyOn(AWS.util.crypto, 'hmac')
+        signer.signature(creds, datetime)
+        calls = AWS.util.crypto.hmac.calls
+        callCount = calls.length
+
+      it 'caches subsequent requests', ->
+        signer.signature(creds, datetime)
+        expect(calls.length).toEqual(callCount + 1)
+        signer.signature(creds, datetime)
+        expect(calls.length).toEqual(callCount + 2)
+
+      it 'busts cache if region changes', ->
+        signer.request.region = 'new-region'
+        signer.signature(creds, datetime)
+        expect(calls.length).toEqual(callCount + 5)
+
+      it 'busts cache if service changes', ->
+        signer.serviceName = 'newService'
+        signer.signature(creds, datetime)
+        expect(calls.length).toEqual(callCount + 5)
+
+      it 'busts cache if date changes', ->
+        newDate = new Date(date.getTime() + 1000000000)
+        newDatetime = AWS.util.date.iso8601(newDate).replace(/[:\-]|\.\d{3}/g, '')
+        signer.signature(creds, newDatetime)
+        expect(calls.length).toEqual(callCount + 5)
 
   describe 'stringToSign', ->
     it 'should sign correctly generated input string', ->
