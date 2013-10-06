@@ -305,7 +305,7 @@ function onend() {
   timers.setImmediate(shims.bind(this.end, this));
 }
 
-},{"_shims":2,"_stream_readable":5,"_stream_writable":7,"timers":15,"util":17}],4:[function(require,module,exports){
+},{"_shims":2,"_stream_readable":5,"_stream_writable":7,"timers":14,"util":16}],4:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -348,7 +348,7 @@ PassThrough.prototype._transform = function(chunk, encoding, cb) {
   cb(null, chunk);
 };
 
-},{"_stream_transform":6,"util":17}],5:[function(require,module,exports){
+},{"_stream_transform":6,"util":16}],5:[function(require,module,exports){
 var process=require("__browserify_process");// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1269,7 +1269,7 @@ function endReadable(stream) {
   }
 }
 
-},{"__browserify_process":46,"_shims":2,"buffer":19,"events":9,"stream":13,"string_decoder":14,"timers":15,"util":17}],6:[function(require,module,exports){
+},{"__browserify_process":21,"_shims":2,"buffer":18,"events":9,"stream":12,"string_decoder":13,"timers":14,"util":16}],6:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1475,7 +1475,7 @@ function done(stream, er) {
   return stream.push(null);
 }
 
-},{"_stream_duplex":3,"util":17}],7:[function(require,module,exports){
+},{"_stream_duplex":3,"util":16}],7:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1845,7 +1845,7 @@ function endWritable(stream, state, cb) {
   state.ended = true;
 }
 
-},{"buffer":19,"stream":13,"timers":15,"util":17}],8:[function(require,module,exports){
+},{"buffer":18,"stream":12,"timers":14,"util":16}],8:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2162,7 +2162,7 @@ assert.doesNotThrow = function(block, /*optional*/message) {
 };
 
 assert.ifError = function(err) { if (err) {throw err;}};
-},{"_shims":2,"util":17}],9:[function(require,module,exports){
+},{"_shims":2,"util":16}],9:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2443,27 +2443,13 @@ EventEmitter.listenerCount = function(emitter, type) {
     ret = emitter._events[type].length;
   return ret;
 };
-},{"util":17}],10:[function(require,module,exports){
+},{"util":16}],10:[function(require,module,exports){
 
 // not implemented
 // The reason for having an empty file and not throwing is to allow
 // untraditional implementation of this module.
 
 },{}],11:[function(require,module,exports){
-var http = require('http');
-
-var https = module.exports;
-
-for (var key in http) {
-    if (http.hasOwnProperty(key)) https[key] = http[key];
-};
-
-https.request = function (params, cb) {
-    if (!params) params = {};
-    params.scheme = 'https';
-    return http.request.call(this, params, cb);
-}
-},{"http":27}],12:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2674,7 +2660,7 @@ QueryString.parse = QueryString.decode = function(qs, sep, eq, options) {
 
   return obj;
 };
-},{"_shims":2,"buffer":19,"util":17}],13:[function(require,module,exports){
+},{"_shims":2,"buffer":18,"util":16}],12:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2803,7 +2789,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"_stream_duplex":3,"_stream_passthrough":4,"_stream_readable":5,"_stream_transform":6,"_stream_writable":7,"events":9,"util":17}],14:[function(require,module,exports){
+},{"_stream_duplex":3,"_stream_passthrough":4,"_stream_readable":5,"_stream_transform":6,"_stream_writable":7,"events":9,"util":16}],13:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2996,7 +2982,7 @@ function base64DetectIncompleteChar(buffer) {
   return incomplete;
 }
 
-},{"buffer":19}],15:[function(require,module,exports){
+},{"buffer":18}],14:[function(require,module,exports){
 try {
     // Old IE browsers that do not curry arguments
     if (!setTimeout.call) {
@@ -3115,7 +3101,7 @@ if (!exports.setImmediate) {
   };
 }
 
-},{}],16:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -3810,7 +3796,7 @@ Url.prototype.parseHost = function() {
   }
   if (host) this.hostname = host;
 };
-},{"_shims":2,"querystring":12,"util":17}],17:[function(require,module,exports){
+},{"_shims":2,"querystring":11,"util":16}],16:[function(require,module,exports){
 var Buffer=require("__browserify_Buffer").Buffer;// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -4351,7 +4337,7 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-},{"__browserify_Buffer":45,"_shims":2}],18:[function(require,module,exports){
+},{"__browserify_Buffer":20,"_shims":2}],17:[function(require,module,exports){
 exports.readIEEE754 = function(buffer, offset, isBE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -4437,7 +4423,7 @@ exports.writeIEEE754 = function(buffer, value, offset, isBE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128;
 };
 
-},{}],19:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 var assert;
 exports.Buffer = Buffer;
 exports.SlowBuffer = Buffer;
@@ -5563,7 +5549,7 @@ Buffer.prototype.writeDoubleBE = function(value, offset, noAssert) {
   writeDouble(this, value, offset, true, noAssert);
 };
 
-},{"./buffer_ieee754":18,"assert":8,"base64-js":20}],20:[function(require,module,exports){
+},{"./buffer_ieee754":17,"assert":8,"base64-js":19}],19:[function(require,module,exports){
 (function (exports) {
 	'use strict';
 
@@ -5649,1480 +5635,7 @@ Buffer.prototype.writeDoubleBE = function(value, offset, noAssert) {
 	module.exports.fromByteArray = uint8ToBase64;
 }());
 
-},{}],21:[function(require,module,exports){
-var Buffer = require('buffer').Buffer;
-var zeroBuffer = new Buffer(4); zeroBuffer.fill(0);
-
-function toArray(buf, bigEndian) {
-  if (buf.length % 4 !== 0) {
-    buf = Buffer.concat([buf, zeroBuffer], buf.length + (4 - (buf.length % 4)));
-  }
-
-  var arr = [];
-  for (var i = 0; i < buf.length; i += 4) {
-    var fn = bigEndian ? buf.readInt32BE : buf.readInt32LE;
-    arr.push(fn.call(buf, i));
-  }
-  return arr;
-}
-
-function toBuffer(arr, size, bigEndian) {
-  var buf = new Buffer(size);
-  for (var i = 0; i < arr.length; i++) {
-    var fn = bigEndian ? buf.writeInt32BE : buf.writeInt32LE;
-    fn.call(buf, arr[i], i*4, true);
-  }
-  return buf;
-}
-
-module.exports = {
-  toArray: toArray,
-  toBuffer: toBuffer
-};
-
-},{"buffer":19}],22:[function(require,module,exports){
-var Buffer = require('buffer').Buffer
-var rng = require('./rng')
-var blocksize = 64;
-var zeroBuffer = new Buffer(blocksize); zeroBuffer.fill(0);
-
-var algorithms = {
-  sha1: require('./sha'),
-  sha256: require('./sha256'),
-  md5: require('./md5')
-}
-
-function hmac(fn, key, data) {
-  if (!Buffer.isBuffer(key)) key = new Buffer(key);
-  if (!Buffer.isBuffer(data)) data = new Buffer(data);
-  if (key.length > blocksize) key = core_sha256(key);
-  key = Buffer.concat([key, zeroBuffer], blocksize);
-
-  // build padded buffers
-  var ipad = new Buffer(blocksize), opad = new Buffer(blocksize);
-  for (var i = 0; i < blocksize; i ++) {
-    ipad[i] = key[i] ^ 0x36;
-    opad[i] = key[i] ^ 0x5C;
-  }
-
-  var hash = fn(Buffer.concat([ipad, data]));
-  return fn(Buffer.concat([opad, hash]));
-}
-
-function cryptoInterface(alg, hmacKey) {
-  alg = alg || 'sha1'
-  var bufs = []
-  var len = 0
-  var algfn = algorithms[alg]
-  if(!algfn)
-    error('algorithm:', alg, 'is not yet supported')
-
-  return {
-    update: function (data) {
-      buf = new Buffer(data)
-      len += buf.length
-      bufs.push(buf)
-      return this
-    },
-
-    digest: function (enc) {
-      var buf = new Buffer(len)
-
-      var offset = 0
-      for (var i = 0; i < bufs.length; i++) {
-        bufs[i].copy(buf, offset)
-        offset += bufs[i].length
-      }
-      bufs = null
-
-      var r = hmacKey ? hmac(algfn, hmacKey, buf) : algfn(buf)
-      return enc ? r.toString(enc) : r
-    }
-  }
-}
-
-function error () {
-  var m = [].slice.call(arguments).join(' ')
-  throw new Error([
-    m,
-    'we accept pull requests',
-    'http://github.com/dominictarr/crypto-browserify'
-    ].join('\n'))
-}
-
-exports.createHash = cryptoInterface;
-exports.createHmac = cryptoInterface;
-
-exports.randomBytes = function(size, callback) {
-  if (callback && callback.call) {
-    try {
-      callback.call(this, undefined, new Buffer(rng(size)));
-    } catch (err) { callback(err); }
-  } else {
-    return new Buffer(rng(size));
-  }
-}
-
-function each(a, f) {
-  for(var i in a)
-    f(a[i], i)
-}
-
-// the least I can do is make error messages for the rest of the node.js/crypto api.
-each(['createCredentials'
-, 'createCipher'
-, 'createCipheriv'
-, 'createDecipher'
-, 'createDecipheriv'
-, 'createSign'
-, 'createVerify'
-, 'createDiffieHellman'
-, 'pbkdf2'], function (name) {
-  exports[name] = function () {
-    error('sorry,', name, 'is not implemented yet')
-  }
-})
-
-},{"./md5":23,"./rng":24,"./sha":25,"./sha256":26,"buffer":19}],23:[function(require,module,exports){
-
-/*
- * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
- * Digest Algorithm, as defined in RFC 1321.
- * Version 2.1 Copyright (C) Paul Johnston 1999 - 2002.
- * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
- * Distributed under the BSD License
- * See http://pajhome.org.uk/crypt/md5 for more info.
- */
-
-var Buffer = require('buffer').Buffer;
-var helpers = require('./helpers');
-var chrsz = 8; /* bits per input character. 8 - ASCII; 16 - Unicode */
-
-/*
- * Perform a simple self-test to see if the VM is working
- */
-function md5_vm_test()
-{
-  return hex_md5("abc") == "900150983cd24fb0d6963f7d28e17f72";
-}
-
-/*
- * Calculate the MD5 of an array of little-endian words, and a bit length
- */
-function core_md5(buf)
-{
-  var len = buf.length * chrsz;
-  if (!Buffer.isBuffer(buf)) buf = new Buffer(buf);
-  var x = helpers.toArray(buf);
-
-  /* append padding */
-  x[len >> 5] |= 0x80 << ((len) % 32);
-  x[(((len + 64) >>> 9) << 4) + 14] = len;
-
-  var a =  1732584193;
-  var b = -271733879;
-  var c = -1732584194;
-  var d =  271733878;
-
-  for(var i = 0; i < x.length; i += 16)
-  {
-    var olda = a;
-    var oldb = b;
-    var oldc = c;
-    var oldd = d;
-
-    a = md5_ff(a, b, c, d, x[i+ 0], 7 , -680876936);
-    d = md5_ff(d, a, b, c, x[i+ 1], 12, -389564586);
-    c = md5_ff(c, d, a, b, x[i+ 2], 17,  606105819);
-    b = md5_ff(b, c, d, a, x[i+ 3], 22, -1044525330);
-    a = md5_ff(a, b, c, d, x[i+ 4], 7 , -176418897);
-    d = md5_ff(d, a, b, c, x[i+ 5], 12,  1200080426);
-    c = md5_ff(c, d, a, b, x[i+ 6], 17, -1473231341);
-    b = md5_ff(b, c, d, a, x[i+ 7], 22, -45705983);
-    a = md5_ff(a, b, c, d, x[i+ 8], 7 ,  1770035416);
-    d = md5_ff(d, a, b, c, x[i+ 9], 12, -1958414417);
-    c = md5_ff(c, d, a, b, x[i+10], 17, -42063);
-    b = md5_ff(b, c, d, a, x[i+11], 22, -1990404162);
-    a = md5_ff(a, b, c, d, x[i+12], 7 ,  1804603682);
-    d = md5_ff(d, a, b, c, x[i+13], 12, -40341101);
-    c = md5_ff(c, d, a, b, x[i+14], 17, -1502002290);
-    b = md5_ff(b, c, d, a, x[i+15], 22,  1236535329);
-
-    a = md5_gg(a, b, c, d, x[i+ 1], 5 , -165796510);
-    d = md5_gg(d, a, b, c, x[i+ 6], 9 , -1069501632);
-    c = md5_gg(c, d, a, b, x[i+11], 14,  643717713);
-    b = md5_gg(b, c, d, a, x[i+ 0], 20, -373897302);
-    a = md5_gg(a, b, c, d, x[i+ 5], 5 , -701558691);
-    d = md5_gg(d, a, b, c, x[i+10], 9 ,  38016083);
-    c = md5_gg(c, d, a, b, x[i+15], 14, -660478335);
-    b = md5_gg(b, c, d, a, x[i+ 4], 20, -405537848);
-    a = md5_gg(a, b, c, d, x[i+ 9], 5 ,  568446438);
-    d = md5_gg(d, a, b, c, x[i+14], 9 , -1019803690);
-    c = md5_gg(c, d, a, b, x[i+ 3], 14, -187363961);
-    b = md5_gg(b, c, d, a, x[i+ 8], 20,  1163531501);
-    a = md5_gg(a, b, c, d, x[i+13], 5 , -1444681467);
-    d = md5_gg(d, a, b, c, x[i+ 2], 9 , -51403784);
-    c = md5_gg(c, d, a, b, x[i+ 7], 14,  1735328473);
-    b = md5_gg(b, c, d, a, x[i+12], 20, -1926607734);
-
-    a = md5_hh(a, b, c, d, x[i+ 5], 4 , -378558);
-    d = md5_hh(d, a, b, c, x[i+ 8], 11, -2022574463);
-    c = md5_hh(c, d, a, b, x[i+11], 16,  1839030562);
-    b = md5_hh(b, c, d, a, x[i+14], 23, -35309556);
-    a = md5_hh(a, b, c, d, x[i+ 1], 4 , -1530992060);
-    d = md5_hh(d, a, b, c, x[i+ 4], 11,  1272893353);
-    c = md5_hh(c, d, a, b, x[i+ 7], 16, -155497632);
-    b = md5_hh(b, c, d, a, x[i+10], 23, -1094730640);
-    a = md5_hh(a, b, c, d, x[i+13], 4 ,  681279174);
-    d = md5_hh(d, a, b, c, x[i+ 0], 11, -358537222);
-    c = md5_hh(c, d, a, b, x[i+ 3], 16, -722521979);
-    b = md5_hh(b, c, d, a, x[i+ 6], 23,  76029189);
-    a = md5_hh(a, b, c, d, x[i+ 9], 4 , -640364487);
-    d = md5_hh(d, a, b, c, x[i+12], 11, -421815835);
-    c = md5_hh(c, d, a, b, x[i+15], 16,  530742520);
-    b = md5_hh(b, c, d, a, x[i+ 2], 23, -995338651);
-
-    a = md5_ii(a, b, c, d, x[i+ 0], 6 , -198630844);
-    d = md5_ii(d, a, b, c, x[i+ 7], 10,  1126891415);
-    c = md5_ii(c, d, a, b, x[i+14], 15, -1416354905);
-    b = md5_ii(b, c, d, a, x[i+ 5], 21, -57434055);
-    a = md5_ii(a, b, c, d, x[i+12], 6 ,  1700485571);
-    d = md5_ii(d, a, b, c, x[i+ 3], 10, -1894986606);
-    c = md5_ii(c, d, a, b, x[i+10], 15, -1051523);
-    b = md5_ii(b, c, d, a, x[i+ 1], 21, -2054922799);
-    a = md5_ii(a, b, c, d, x[i+ 8], 6 ,  1873313359);
-    d = md5_ii(d, a, b, c, x[i+15], 10, -30611744);
-    c = md5_ii(c, d, a, b, x[i+ 6], 15, -1560198380);
-    b = md5_ii(b, c, d, a, x[i+13], 21,  1309151649);
-    a = md5_ii(a, b, c, d, x[i+ 4], 6 , -145523070);
-    d = md5_ii(d, a, b, c, x[i+11], 10, -1120210379);
-    c = md5_ii(c, d, a, b, x[i+ 2], 15,  718787259);
-    b = md5_ii(b, c, d, a, x[i+ 9], 21, -343485551);
-
-    a = safe_add(a, olda);
-    b = safe_add(b, oldb);
-    c = safe_add(c, oldc);
-    d = safe_add(d, oldd);
-  }
-
-  return helpers.toBuffer([a, b, c, d], 16);
-}
-
-/*
- * These functions implement the four basic operations the algorithm uses.
- */
-function md5_cmn(q, a, b, x, s, t)
-{
-  return safe_add(bit_rol(safe_add(safe_add(a, q), safe_add(x, t)), s),b);
-}
-function md5_ff(a, b, c, d, x, s, t)
-{
-  return md5_cmn((b & c) | ((~b) & d), a, b, x, s, t);
-}
-function md5_gg(a, b, c, d, x, s, t)
-{
-  return md5_cmn((b & d) | (c & (~d)), a, b, x, s, t);
-}
-function md5_hh(a, b, c, d, x, s, t)
-{
-  return md5_cmn(b ^ c ^ d, a, b, x, s, t);
-}
-function md5_ii(a, b, c, d, x, s, t)
-{
-  return md5_cmn(c ^ (b | (~d)), a, b, x, s, t);
-}
-
-/*
- * Add integers, wrapping at 2^32. This uses 16-bit operations internally
- * to work around bugs in some JS interpreters.
- */
-function safe_add(x, y)
-{
-  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
-  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
-  return (msw << 16) | (lsw & 0xFFFF);
-}
-
-/*
- * Bitwise rotate a 32-bit number to the left.
- */
-function bit_rol(num, cnt)
-{
-  return (num << cnt) | (num >>> (32 - cnt));
-}
-
-module.exports = core_md5;
-
-},{"./helpers":21,"buffer":19}],24:[function(require,module,exports){
-// Original code adapted from Robert Kieffer.
-// details at https://github.com/broofa/node-uuid
-(function() {
-  var _global = this;
-
-  var mathRNG, whatwgRNG;
-
-  // NOTE: Math.random() does not guarantee "cryptographic quality"
-  mathRNG = function(size) {
-    var bytes = new Array(size);
-    var r;
-
-    for (var i = 0, r; i < size; i++) {
-      if ((i & 0x03) == 0) r = Math.random() * 0x100000000;
-      bytes[i] = r >>> ((i & 0x03) << 3) & 0xff;
-    }
-
-    return bytes;
-  }
-
-  if (_global.crypto && crypto.getRandomValues) {
-    var _rnds = new Uint32Array(4);
-    whatwgRNG = function(size) {
-      var bytes = new Array(size);
-      crypto.getRandomValues(_rnds);
-
-      for (var c = 0 ; c < size; c++) {
-        bytes[c] = _rnds[c >> 2] >>> ((c & 0x03) * 8) & 0xff;
-      }
-      return bytes;
-    }
-  }
-
-  module.exports = whatwgRNG || mathRNG;
-
-}())
-
-},{}],25:[function(require,module,exports){
-/*
- * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
- * in FIPS PUB 180-1
- * Version 2.1a Copyright Paul Johnston 2000 - 2002.
- * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
- * Distributed under the BSD License
- * See http://pajhome.org.uk/crypt/md5 for details.
- */
-
-var Buffer = require('buffer').Buffer;
-var helpers = require('./helpers');
-var chrsz = 8; /* bits per input character. 8 - ASCII; 16 - Unicode */
-
-/*
- * Perform a simple self-test to see if the VM is working
- */
-function sha1_vm_test()
-{
-  return hex_sha1("abc") == "a9993e364706816aba3e25717850c26c9cd0d89d";
-}
-
-/*
- * Calculate the SHA-1 of an array of big-endian words, and a bit length
- */
-function core_sha1(buf)
-{
-  if (!Buffer.isBuffer(buf)) buf = new Buffer(buf);
-  var x = helpers.toArray(buf, true);
-  var len = buf.length * chrsz;
-
-  /* append padding */
-  x[len >> 5] |= 0x80 << (24 - len % 32);
-  x[((len + 64 >> 9) << 4) + 15] = len;
-
-  var w = Array(80);
-  var a =  1732584193;
-  var b = -271733879;
-  var c = -1732584194;
-  var d =  271733878;
-  var e = -1009589776;
-
-  for(var i = 0; i < x.length; i += 16)
-  {
-    var olda = a;
-    var oldb = b;
-    var oldc = c;
-    var oldd = d;
-    var olde = e;
-
-    for(var j = 0; j < 80; j++)
-    {
-      if(j < 16) w[j] = x[i + j];
-      else w[j] = rol(w[j-3] ^ w[j-8] ^ w[j-14] ^ w[j-16], 1);
-      var t = safe_add(safe_add(rol(a, 5), sha1_ft(j, b, c, d)),
-                       safe_add(safe_add(e, w[j]), sha1_kt(j)));
-      e = d;
-      d = c;
-      c = rol(b, 30);
-      b = a;
-      a = t;
-    }
-
-    a = safe_add(a, olda);
-    b = safe_add(b, oldb);
-    c = safe_add(c, oldc);
-    d = safe_add(d, oldd);
-    e = safe_add(e, olde);
-  }
-  return helpers.toBuffer([a, b, c, d, e], 20, true);
-
-}
-
-/*
- * Perform the appropriate triplet combination function for the current
- * iteration
- */
-function sha1_ft(t, b, c, d)
-{
-  if(t < 20) return (b & c) | ((~b) & d);
-  if(t < 40) return b ^ c ^ d;
-  if(t < 60) return (b & c) | (b & d) | (c & d);
-  return b ^ c ^ d;
-}
-
-/*
- * Determine the appropriate additive constant for the current iteration
- */
-function sha1_kt(t)
-{
-  return (t < 20) ?  1518500249 : (t < 40) ?  1859775393 :
-         (t < 60) ? -1894007588 : -899497514;
-}
-
-/*
- * Add integers, wrapping at 2^32. This uses 16-bit operations internally
- * to work around bugs in some JS interpreters.
- */
-function safe_add(x, y)
-{
-  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
-  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
-  return (msw << 16) | (lsw & 0xFFFF);
-}
-
-/*
- * Bitwise rotate a 32-bit number to the left.
- */
-function rol(num, cnt)
-{
-  return (num << cnt) | (num >>> (32 - cnt));
-}
-
-module.exports = core_sha1;
-
-},{"./helpers":21,"buffer":19}],26:[function(require,module,exports){
-
-/**
- * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
- * in FIPS 180-2
- * Version 2.2-beta Copyright Angel Marin, Paul Johnston 2000 - 2009.
- * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
- *
- */
-
-var Buffer = require('buffer').Buffer;
-var helpers = require('./helpers');
-var chrsz = 8; /* bits per input character. 8 - ASCII; 16 - Unicode */
-
-var safe_add = function(x, y) {
-  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
-  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
-  return (msw << 16) | (lsw & 0xFFFF);
-};
-
-var S = function(X, n) {
-  return (X >>> n) | (X << (32 - n));
-};
-
-var R = function(X, n) {
-  return (X >>> n);
-};
-
-var Ch = function(x, y, z) {
-  return ((x & y) ^ ((~x) & z));
-};
-
-var Maj = function(x, y, z) {
-  return ((x & y) ^ (x & z) ^ (y & z));
-};
-
-var Sigma0256 = function(x) {
-  return (S(x, 2) ^ S(x, 13) ^ S(x, 22));
-};
-
-var Sigma1256 = function(x) {
-  return (S(x, 6) ^ S(x, 11) ^ S(x, 25));
-};
-
-var Gamma0256 = function(x) {
-  return (S(x, 7) ^ S(x, 18) ^ R(x, 3));
-};
-
-var Gamma1256 = function(x) {
-  return (S(x, 17) ^ S(x, 19) ^ R(x, 10));
-};
-
-function core_sha256(buf) {
-  if (!Buffer.isBuffer(buf)) buf = new Buffer(buf);
-  var m = helpers.toArray(buf, true);
-  var l = buf.length * chrsz;
-  var K = new Array(0x428A2F98,0x71374491,0xB5C0FBCF,0xE9B5DBA5,0x3956C25B,0x59F111F1,0x923F82A4,0xAB1C5ED5,0xD807AA98,0x12835B01,0x243185BE,0x550C7DC3,0x72BE5D74,0x80DEB1FE,0x9BDC06A7,0xC19BF174,0xE49B69C1,0xEFBE4786,0xFC19DC6,0x240CA1CC,0x2DE92C6F,0x4A7484AA,0x5CB0A9DC,0x76F988DA,0x983E5152,0xA831C66D,0xB00327C8,0xBF597FC7,0xC6E00BF3,0xD5A79147,0x6CA6351,0x14292967,0x27B70A85,0x2E1B2138,0x4D2C6DFC,0x53380D13,0x650A7354,0x766A0ABB,0x81C2C92E,0x92722C85,0xA2BFE8A1,0xA81A664B,0xC24B8B70,0xC76C51A3,0xD192E819,0xD6990624,0xF40E3585,0x106AA070,0x19A4C116,0x1E376C08,0x2748774C,0x34B0BCB5,0x391C0CB3,0x4ED8AA4A,0x5B9CCA4F,0x682E6FF3,0x748F82EE,0x78A5636F,0x84C87814,0x8CC70208,0x90BEFFFA,0xA4506CEB,0xBEF9A3F7,0xC67178F2);
-  var HASH = new Array(0x6A09E667, 0xBB67AE85, 0x3C6EF372, 0xA54FF53A, 0x510E527F, 0x9B05688C, 0x1F83D9AB, 0x5BE0CD19);
-    var W = new Array(64);
-    var a, b, c, d, e, f, g, h, i, j;
-    var T1, T2;
-  /* append padding */
-  m[l >> 5] |= 0x80 << (24 - l % 32);
-  m[((l + 64 >> 9) << 4) + 15] = l;
-  for (var i = 0; i < m.length; i += 16) {
-    a = HASH[0]; b = HASH[1]; c = HASH[2]; d = HASH[3]; e = HASH[4]; f = HASH[5]; g = HASH[6]; h = HASH[7];
-    for (var j = 0; j < 64; j++) {
-      if (j < 16) {
-        W[j] = m[j + i];
-      } else {
-        W[j] = safe_add(safe_add(safe_add(Gamma1256(W[j - 2]), W[j - 7]), Gamma0256(W[j - 15])), W[j - 16]);
-      }
-      T1 = safe_add(safe_add(safe_add(safe_add(h, Sigma1256(e)), Ch(e, f, g)), K[j]), W[j]);
-      T2 = safe_add(Sigma0256(a), Maj(a, b, c));
-      h = g; g = f; f = e; e = safe_add(d, T1); d = c; c = b; b = a; a = safe_add(T1, T2);
-    }
-    HASH[0] = safe_add(a, HASH[0]); HASH[1] = safe_add(b, HASH[1]); HASH[2] = safe_add(c, HASH[2]); HASH[3] = safe_add(d, HASH[3]);
-    HASH[4] = safe_add(e, HASH[4]); HASH[5] = safe_add(f, HASH[5]); HASH[6] = safe_add(g, HASH[6]); HASH[7] = safe_add(h, HASH[7]);
-  }
-
-  return helpers.toBuffer(HASH, 32, true);
-}
-
-module.exports = core_sha256;
-
-},{"./helpers":21,"buffer":19}],27:[function(require,module,exports){
-var http = module.exports;
-var EventEmitter = require('events').EventEmitter;
-var Request = require('./lib/request');
-
-http.request = function (params, cb) {
-    if (!params) params = {};
-    if (!params.host) params.host = window.location.host.split(':')[0];
-    if (!params.port) params.port = window.location.port;
-    if (!params.scheme) params.scheme = window.location.protocol.split(':')[0];
-    
-    var req = new Request(new xhrHttp, params);
-    if (cb) req.on('response', cb);
-    return req;
-};
-
-http.get = function (params, cb) {
-    params.method = 'GET';
-    var req = http.request(params, cb);
-    req.end();
-    return req;
-};
-
-http.Agent = function () {};
-http.Agent.defaultMaxSockets = 4;
-
-var xhrHttp = (function () {
-    if (typeof window === 'undefined') {
-        throw new Error('no window object present');
-    }
-    else if (window.XMLHttpRequest) {
-        return window.XMLHttpRequest;
-    }
-    else if (window.ActiveXObject) {
-        var axs = [
-            'Msxml2.XMLHTTP.6.0',
-            'Msxml2.XMLHTTP.3.0',
-            'Microsoft.XMLHTTP'
-        ];
-        for (var i = 0; i < axs.length; i++) {
-            try {
-                var ax = new(window.ActiveXObject)(axs[i]);
-                return function () {
-                    if (ax) {
-                        var ax_ = ax;
-                        ax = null;
-                        return ax_;
-                    }
-                    else {
-                        return new(window.ActiveXObject)(axs[i]);
-                    }
-                };
-            }
-            catch (e) {}
-        }
-        throw new Error('ajax not supported in this browser')
-    }
-    else {
-        throw new Error('ajax not supported in this browser');
-    }
-})();
-
-},{"./lib/request":28,"events":9}],28:[function(require,module,exports){
-var Stream = require('stream');
-var Response = require('./response');
-var concatStream = require('concat-stream');
-var Base64 = require('Base64');
-var util = require('util');
-
-var Request = module.exports = function (xhr, params) {
-    var self = this;
-    self.writable = true;
-    self.xhr = xhr;
-    self.body = concatStream()
-    
-    var uri = params.host
-        + (params.port ? ':' + params.port : '')
-        + (params.path || '/')
-    ;
-    
-    xhr.open(
-        params.method || 'GET',
-        (params.scheme || 'http') + '://' + uri,
-        true
-    );
-    
-    if (params.headers) {
-        var keys = objectKeys(params.headers);
-        for (var i = 0; i < keys.length; i++) {
-            var key = keys[i];
-            if (!self.isSafeRequestHeader(key)) continue;
-            var value = params.headers[key];
-            if (isArray(value)) {
-                for (var j = 0; j < value.length; j++) {
-                    xhr.setRequestHeader(key, value[j]);
-                }
-            }
-            else xhr.setRequestHeader(key, value)
-        }
-    }
-    
-    if (params.auth) {
-        //basic auth
-        this.setHeader('Authorization', 'Basic ' + Base64.btoa(params.auth));
-    }
-
-    var res = new Response;
-    res.on('close', function () {
-        self.emit('close');
-    });
-    
-    res.on('ready', function () {
-        self.emit('response', res);
-    });
-    
-    xhr.onreadystatechange = function () {
-        res.handle(xhr);
-    };
-};
-
-util.inherits(Request, Stream);
-
-Request.prototype.setHeader = function (key, value) {
-    if (isArray(value)) {
-        for (var i = 0; i < value.length; i++) {
-            this.xhr.setRequestHeader(key, value[i]);
-        }
-    }
-    else {
-        this.xhr.setRequestHeader(key, value);
-    }
-};
-
-Request.prototype.write = function (s) {
-    this.body.write(s);
-};
-
-Request.prototype.destroy = function (s) {
-    this.xhr.abort();
-    this.emit('close');
-};
-
-Request.prototype.end = function (s) {
-    if (s !== undefined) this.body.write(s);
-    this.body.end()
-    this.xhr.send(this.body.getBody());
-};
-
-// Taken from http://dxr.mozilla.org/mozilla/mozilla-central/content/base/src/nsXMLHttpRequest.cpp.html
-Request.unsafeHeaders = [
-    "accept-charset",
-    "accept-encoding",
-    "access-control-request-headers",
-    "access-control-request-method",
-    "connection",
-    "content-length",
-    "cookie",
-    "cookie2",
-    "content-transfer-encoding",
-    "date",
-    "expect",
-    "host",
-    "keep-alive",
-    "origin",
-    "referer",
-    "te",
-    "trailer",
-    "transfer-encoding",
-    "upgrade",
-    "user-agent",
-    "via"
-];
-
-Request.prototype.isSafeRequestHeader = function (headerName) {
-    if (!headerName) return false;
-    return indexOf(Request.unsafeHeaders, headerName.toLowerCase()) === -1;
-};
-
-var objectKeys = Object.keys || function (obj) {
-    var keys = [];
-    for (var key in obj) keys.push(key);
-    return keys;
-};
-
-var isArray = Array.isArray || function (xs) {
-    return Object.prototype.toString.call(xs) === '[object Array]';
-};
-
-var indexOf = function (xs, x) {
-    if (xs.indexOf) return xs.indexOf(x);
-    for (var i = 0; i < xs.length; i++) {
-        if (xs[i] === x) return i;
-    }
-    return -1;
-};
-
-},{"./response":29,"Base64":30,"concat-stream":31,"stream":13,"util":17}],29:[function(require,module,exports){
-var Stream = require('stream');
-var util = require('util');
-
-var Response = module.exports = function (res) {
-    this.offset = 0;
-    this.readable = true;
-};
-
-util.inherits(Response, Stream);
-
-var capable = {
-    streaming : true,
-    status2 : true
-};
-
-function parseHeaders (res) {
-    var lines = res.getAllResponseHeaders().split(/\r?\n/);
-    var headers = {};
-    for (var i = 0; i < lines.length; i++) {
-        var line = lines[i];
-        if (line === '') continue;
-        
-        var m = line.match(/^([^:]+):\s*(.*)/);
-        if (m) {
-            var key = m[1].toLowerCase(), value = m[2];
-            
-            if (headers[key] !== undefined) {
-            
-                if (isArray(headers[key])) {
-                    headers[key].push(value);
-                }
-                else {
-                    headers[key] = [ headers[key], value ];
-                }
-            }
-            else {
-                headers[key] = value;
-            }
-        }
-        else {
-            headers[line] = true;
-        }
-    }
-    return headers;
-}
-
-Response.prototype.getResponse = function (xhr) {
-    var respType = String(xhr.responseType).toLowerCase();
-    if (respType === 'blob') return xhr.responseBlob || xhr.response;
-    if (respType === 'arraybuffer') return xhr.response;
-    return xhr.responseText;
-}
-
-Response.prototype.getHeader = function (key) {
-    return this.headers[key.toLowerCase()];
-};
-
-Response.prototype.handle = function (res) {
-    if (res.readyState === 2 && capable.status2) {
-        try {
-            this.statusCode = res.status;
-            this.headers = parseHeaders(res);
-        }
-        catch (err) {
-            capable.status2 = false;
-        }
-        
-        if (capable.status2) {
-            this.emit('ready');
-        }
-    }
-    else if (capable.streaming && res.readyState === 3) {
-        try {
-            if (!this.statusCode) {
-                this.statusCode = res.status;
-                this.headers = parseHeaders(res);
-                this.emit('ready');
-            }
-        }
-        catch (err) {}
-        
-        try {
-            this._emitData(res);
-        }
-        catch (err) {
-            capable.streaming = false;
-        }
-    }
-    else if (res.readyState === 4) {
-        if (!this.statusCode) {
-            this.statusCode = res.status;
-            this.emit('ready');
-        }
-        this._emitData(res);
-        
-        if (res.error) {
-            this.emit('error', this.getResponse(res));
-        }
-        else this.emit('end');
-        
-        this.emit('close');
-    }
-};
-
-Response.prototype._emitData = function (res) {
-    var respBody = this.getResponse(res);
-    if (respBody.toString().match(/ArrayBuffer/)) {
-        this.emit('data', new Uint8Array(respBody, this.offset));
-        this.offset = respBody.byteLength;
-        return;
-    }
-    if (respBody.length > this.offset) {
-        this.emit('data', respBody.slice(this.offset));
-        this.offset = respBody.length;
-    }
-};
-
-var isArray = Array.isArray || function (xs) {
-    return Object.prototype.toString.call(xs) === '[object Array]';
-};
-
-},{"stream":13,"util":17}],30:[function(require,module,exports){
-;(function () {
-
-  var
-    object = typeof exports != 'undefined' ? exports : window,
-    chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
-    INVALID_CHARACTER_ERR = (function () {
-      // fabricate a suitable error object
-      try { document.createElement('$'); }
-      catch (error) { return error; }}());
-
-  // encoder
-  // [https://gist.github.com/999166] by [https://github.com/nignag]
-  object.btoa || (
-  object.btoa = function (input) {
-    for (
-      // initialize result and counter
-      var block, charCode, idx = 0, map = chars, output = '';
-      // if the next input index does not exist:
-      //   change the mapping table to "="
-      //   check if d has no fractional digits
-      input.charAt(idx | 0) || (map = '=', idx % 1);
-      // "8 - idx % 1 * 8" generates the sequence 2, 4, 6, 8
-      output += map.charAt(63 & block >> 8 - idx % 1 * 8)
-    ) {
-      charCode = input.charCodeAt(idx += 3/4);
-      if (charCode > 0xFF) throw INVALID_CHARACTER_ERR;
-      block = block << 8 | charCode;
-    }
-    return output;
-  });
-
-  // decoder
-  // [https://gist.github.com/1020396] by [https://github.com/atk]
-  object.atob || (
-  object.atob = function (input) {
-    input = input.replace(/=+$/, '')
-    if (input.length % 4 == 1) throw INVALID_CHARACTER_ERR;
-    for (
-      // initialize result and counters
-      var bc = 0, bs, buffer, idx = 0, output = '';
-      // get next character
-      buffer = input.charAt(idx++);
-      // character found in table? initialize bit storage and add its ascii value;
-      ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer,
-        // and if not first of each 4 characters,
-        // convert the first 8 bits to one ascii character
-        bc++ % 4) ? output += String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0
-    ) {
-      // try to find character in table (0-63, not found => -1)
-      buffer = chars.indexOf(buffer);
-    }
-    return output;
-  });
-
-}());
-
-},{}],31:[function(require,module,exports){
-var stream = require('stream')
-var bops = require('bops')
-var util = require('util')
-
-function ConcatStream(cb) {
-  stream.Stream.call(this)
-  this.writable = true
-  if (cb) this.cb = cb
-  this.body = []
-  this.on('error', function(err) {
-    // no-op
-  })
-}
-
-util.inherits(ConcatStream, stream.Stream)
-
-ConcatStream.prototype.write = function(chunk) {
-  this.body.push(chunk)
-}
-
-ConcatStream.prototype.destroy = function() {}
-
-ConcatStream.prototype.arrayConcat = function(arrs) {
-  if (arrs.length === 0) return []
-  if (arrs.length === 1) return arrs[0]
-  return arrs.reduce(function (a, b) { return a.concat(b) })
-}
-
-ConcatStream.prototype.isArray = function(arr) {
-  return Array.isArray(arr)
-}
-
-ConcatStream.prototype.getBody = function () {
-  if (this.body.length === 0) return
-  if (typeof(this.body[0]) === "string") return this.body.join('')
-  if (this.isArray(this.body[0])) return this.arrayConcat(this.body)
-  if (bops.is(this.body[0])) return bops.join(this.body)
-  return this.body
-}
-
-ConcatStream.prototype.end = function() {
-  if (this.cb) this.cb(this.getBody())
-}
-
-module.exports = function(cb) {
-  return new ConcatStream(cb)
-}
-
-module.exports.ConcatStream = ConcatStream
-
-},{"bops":32,"stream":13,"util":17}],32:[function(require,module,exports){
-var proto = {}
-module.exports = proto
-
-proto.from = require('./from.js')
-proto.to = require('./to.js')
-proto.is = require('./is.js')
-proto.subarray = require('./subarray.js')
-proto.join = require('./join.js')
-proto.copy = require('./copy.js')
-proto.create = require('./create.js')
-
-mix(require('./read.js'), proto)
-mix(require('./write.js'), proto)
-
-function mix(from, into) {
-  for(var key in from) {
-    into[key] = from[key]
-  }
-}
-
-},{"./copy.js":35,"./create.js":36,"./from.js":37,"./is.js":38,"./join.js":39,"./read.js":41,"./subarray.js":42,"./to.js":43,"./write.js":44}],33:[function(require,module,exports){
-module.exports=require(20)
-},{}],34:[function(require,module,exports){
-module.exports = to_utf8
-
-var out = []
-  , col = []
-  , fcc = String.fromCharCode
-  , mask = [0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01]
-  , unmask = [
-      0x00
-    , 0x01
-    , 0x02 | 0x01
-    , 0x04 | 0x02 | 0x01
-    , 0x08 | 0x04 | 0x02 | 0x01
-    , 0x10 | 0x08 | 0x04 | 0x02 | 0x01
-    , 0x20 | 0x10 | 0x08 | 0x04 | 0x02 | 0x01
-    , 0x40 | 0x20 | 0x10 | 0x08 | 0x04 | 0x02 | 0x01
-  ]
-
-function to_utf8(bytes, start, end) {
-  start = start === undefined ? 0 : start
-  end = end === undefined ? bytes.length : end
-
-  var idx = 0
-    , hi = 0x80
-    , collecting = 0
-    , pos
-    , by
-
-  col.length =
-  out.length = 0
-
-  while(idx < bytes.length) {
-    by = bytes[idx]
-    if(!collecting && by & hi) {
-      pos = find_pad_position(by)
-      collecting += pos
-      if(pos < 8) {
-        col[col.length] = by & unmask[6 - pos]
-      }
-    } else if(collecting) {
-      col[col.length] = by & unmask[6]
-      --collecting
-      if(!collecting && col.length) {
-        out[out.length] = fcc(reduced(col, pos))
-        col.length = 0
-      }
-    } else { 
-      out[out.length] = fcc(by)
-    }
-    ++idx
-  }
-  if(col.length && !collecting) {
-    out[out.length] = fcc(reduced(col, pos))
-    col.length = 0
-  }
-  return out.join('')
-}
-
-function find_pad_position(byt) {
-  for(var i = 0; i < 7; ++i) {
-    if(!(byt & mask[i])) {
-      break
-    }
-  }
-  return i
-}
-
-function reduced(list) {
-  var out = 0
-  for(var i = 0, len = list.length; i < len; ++i) {
-    out |= list[i] << ((len - i - 1) * 6)
-  }
-  return out
-}
-
-},{}],35:[function(require,module,exports){
-module.exports = copy
-
-var slice = [].slice
-
-function copy(source, target, target_start, source_start, source_end) {
-  target_start = arguments.length < 3 ? 0 : target_start
-  source_start = arguments.length < 4 ? 0 : source_start
-  source_end = arguments.length < 5 ? source.length : source_end
-
-  if(source_end === source_start) {
-    return
-  }
-
-  if(target.length === 0 || source.length === 0) {
-    return
-  }
-
-  if(source_end > source.length) {
-    source_end = source.length
-  }
-
-  if(target.length - target_start < source_end - source_start) {
-    source_end = target.length - target_start + start
-  }
-
-  if(source.buffer !== target.buffer) {
-    return fast_copy(source, target, target_start, source_start, source_end)
-  }
-  return slow_copy(source, target, target_start, source_start, source_end)
-}
-
-function fast_copy(source, target, target_start, source_start, source_end) {
-  var len = (source_end - source_start) + target_start
-
-  for(var i = target_start, j = source_start;
-      i < len;
-      ++i,
-      ++j) {
-    target[i] = source[j]
-  }
-}
-
-function slow_copy(from, to, j, i, jend) {
-  // the buffers could overlap.
-  var iend = jend + i
-    , tmp = new Uint8Array(slice.call(from, i, iend))
-    , x = 0
-
-  for(; i < iend; ++i, ++x) {
-    to[j++] = tmp[x]
-  }
-}
-
-},{}],36:[function(require,module,exports){
-module.exports = function(size) {
-  return new Uint8Array(size)
-}
-
-},{}],37:[function(require,module,exports){
-module.exports = from
-
-var base64 = require('base64-js')
-
-var decoders = {
-    hex: from_hex
-  , utf8: from_utf
-  , base64: from_base64
-}
-
-function from(source, encoding) {
-  if(Array.isArray(source)) {
-    return new Uint8Array(source)
-  }
-
-  return decoders[encoding || 'utf8'](source)
-}
-
-function from_hex(str) {
-  var size = str.length / 2
-    , buf = new Uint8Array(size)
-    , character = ''
-
-  for(var i = 0, len = str.length; i < len; ++i) {
-    character += str.charAt(i)
-
-    if(i > 0 && (i % 2) === 1) {
-      buf[i>>>1] = parseInt(character, 16)
-      character = '' 
-    }
-  }
-
-  return buf 
-}
-
-function from_utf(str) {
-  var bytes = []
-    , tmp
-    , ch
-
-  for(var i = 0, len = str.length; i < len; ++i) {
-    ch = str.charCodeAt(i)
-    if(ch & 0x80) {
-      tmp = encodeURIComponent(str.charAt(i)).substr(1).split('%')
-      for(var j = 0, jlen = tmp.length; j < jlen; ++j) {
-        bytes[bytes.length] = parseInt(tmp[j], 16)
-      }
-    } else {
-      bytes[bytes.length] = ch 
-    }
-  }
-
-  return new Uint8Array(bytes)
-}
-
-function from_base64(str) {
-  return new Uint8Array(base64.toByteArray(str)) 
-}
-
-},{"base64-js":33}],38:[function(require,module,exports){
-
-module.exports = function(buffer) {
-  return buffer instanceof Uint8Array;
-}
-
-},{}],39:[function(require,module,exports){
-module.exports = join
-
-function join(targets, hint) {
-  if(!targets.length) {
-    return new Uint8Array(0)
-  }
-
-  var len = hint !== undefined ? hint : get_length(targets)
-    , out = new Uint8Array(len)
-    , cur = targets[0]
-    , curlen = cur.length
-    , curidx = 0
-    , curoff = 0
-    , i = 0
-
-  while(i < len) {
-    if(curoff === curlen) {
-      curoff = 0
-      ++curidx
-      cur = targets[curidx]
-      curlen = cur && cur.length
-      continue
-    }
-    out[i++] = cur[curoff++] 
-  }
-
-  return out
-}
-
-function get_length(targets) {
-  var size = 0
-  for(var i = 0, len = targets.length; i < len; ++i) {
-    size += targets[i].byteLength
-  }
-  return size
-}
-
-},{}],40:[function(require,module,exports){
-var proto
-  , map
-
-module.exports = proto = {}
-
-map = typeof WeakMap === 'undefined' ? null : new WeakMap
-
-proto.get = !map ? no_weakmap_get : get
-
-function no_weakmap_get(target) {
-  return new DataView(target.buffer, 0)
-}
-
-function get(target) {
-  var out = map.get(target.buffer)
-  if(!out) {
-    map.set(target.buffer, out = new DataView(target.buffer, 0))
-  }
-  return out
-}
-
-},{}],41:[function(require,module,exports){
-module.exports = {
-    readUInt8:      read_uint8
-  , readInt8:       read_int8
-  , readUInt16LE:   read_uint16_le
-  , readUInt32LE:   read_uint32_le
-  , readInt16LE:    read_int16_le
-  , readInt32LE:    read_int32_le
-  , readFloatLE:    read_float_le
-  , readDoubleLE:   read_double_le
-  , readUInt16BE:   read_uint16_be
-  , readUInt32BE:   read_uint32_be
-  , readInt16BE:    read_int16_be
-  , readInt32BE:    read_int32_be
-  , readFloatBE:    read_float_be
-  , readDoubleBE:   read_double_be
-}
-
-var map = require('./mapped.js')
-
-function read_uint8(target, at) {
-  return target[at]
-}
-
-function read_int8(target, at) {
-  var v = target[at];
-  return v < 0x80 ? v : v - 0x100
-}
-
-function read_uint16_le(target, at) {
-  var dv = map.get(target);
-  return dv.getUint16(at + target.byteOffset, true)
-}
-
-function read_uint32_le(target, at) {
-  var dv = map.get(target);
-  return dv.getUint32(at + target.byteOffset, true)
-}
-
-function read_int16_le(target, at) {
-  var dv = map.get(target);
-  return dv.getInt16(at + target.byteOffset, true)
-}
-
-function read_int32_le(target, at) {
-  var dv = map.get(target);
-  return dv.getInt32(at + target.byteOffset, true)
-}
-
-function read_float_le(target, at) {
-  var dv = map.get(target);
-  return dv.getFloat32(at + target.byteOffset, true)
-}
-
-function read_double_le(target, at) {
-  var dv = map.get(target);
-  return dv.getFloat64(at + target.byteOffset, true)
-}
-
-function read_uint16_be(target, at) {
-  var dv = map.get(target);
-  return dv.getUint16(at + target.byteOffset, false)
-}
-
-function read_uint32_be(target, at) {
-  var dv = map.get(target);
-  return dv.getUint32(at + target.byteOffset, false)
-}
-
-function read_int16_be(target, at) {
-  var dv = map.get(target);
-  return dv.getInt16(at + target.byteOffset, false)
-}
-
-function read_int32_be(target, at) {
-  var dv = map.get(target);
-  return dv.getInt32(at + target.byteOffset, false)
-}
-
-function read_float_be(target, at) {
-  var dv = map.get(target);
-  return dv.getFloat32(at + target.byteOffset, false)
-}
-
-function read_double_be(target, at) {
-  var dv = map.get(target);
-  return dv.getFloat64(at + target.byteOffset, false)
-}
-
-},{"./mapped.js":40}],42:[function(require,module,exports){
-module.exports = subarray
-
-function subarray(buf, from, to) {
-  return buf.subarray(from || 0, to || buf.length)
-}
-
-},{}],43:[function(require,module,exports){
-module.exports = to
-
-var base64 = require('base64-js')
-  , toutf8 = require('to-utf8')
-
-var encoders = {
-    hex: to_hex
-  , utf8: to_utf
-  , base64: to_base64
-}
-
-function to(buf, encoding) {
-  return encoders[encoding || 'utf8'](buf)
-}
-
-function to_hex(buf) {
-  var str = ''
-    , byt
-
-  for(var i = 0, len = buf.length; i < len; ++i) {
-    byt = buf[i]
-    str += ((byt & 0xF0) >>> 4).toString(16)
-    str += (byt & 0x0F).toString(16)
-  }
-
-  return str
-}
-
-function to_utf(buf) {
-  return toutf8(buf)
-}
-
-function to_base64(buf) {
-  return base64.fromByteArray(buf)
-}
-
-
-},{"base64-js":33,"to-utf8":34}],44:[function(require,module,exports){
-module.exports = {
-    writeUInt8:      write_uint8
-  , writeInt8:       write_int8
-  , writeUInt16LE:   write_uint16_le
-  , writeUInt32LE:   write_uint32_le
-  , writeInt16LE:    write_int16_le
-  , writeInt32LE:    write_int32_le
-  , writeFloatLE:    write_float_le
-  , writeDoubleLE:   write_double_le
-  , writeUInt16BE:   write_uint16_be
-  , writeUInt32BE:   write_uint32_be
-  , writeInt16BE:    write_int16_be
-  , writeInt32BE:    write_int32_be
-  , writeFloatBE:    write_float_be
-  , writeDoubleBE:   write_double_be
-}
-
-var map = require('./mapped.js')
-
-function write_uint8(target, value, at) {
-  return target[at] = value
-}
-
-function write_int8(target, value, at) {
-  return target[at] = value < 0 ? value + 0x100 : value
-}
-
-function write_uint16_le(target, value, at) {
-  var dv = map.get(target);
-  return dv.setUint16(at + target.byteOffset, value, true)
-}
-
-function write_uint32_le(target, value, at) {
-  var dv = map.get(target);
-  return dv.setUint32(at + target.byteOffset, value, true)
-}
-
-function write_int16_le(target, value, at) {
-  var dv = map.get(target);
-  return dv.setInt16(at + target.byteOffset, value, true)
-}
-
-function write_int32_le(target, value, at) {
-  var dv = map.get(target);
-  return dv.setInt32(at + target.byteOffset, value, true)
-}
-
-function write_float_le(target, value, at) {
-  var dv = map.get(target);
-  return dv.setFloat32(at + target.byteOffset, value, true)
-}
-
-function write_double_le(target, value, at) {
-  var dv = map.get(target);
-  return dv.setFloat64(at + target.byteOffset, value, true)
-}
-
-function write_uint16_be(target, value, at) {
-  var dv = map.get(target);
-  return dv.setUint16(at + target.byteOffset, value, false)
-}
-
-function write_uint32_be(target, value, at) {
-  var dv = map.get(target);
-  return dv.setUint32(at + target.byteOffset, value, false)
-}
-
-function write_int16_be(target, value, at) {
-  var dv = map.get(target);
-  return dv.setInt16(at + target.byteOffset, value, false)
-}
-
-function write_int32_be(target, value, at) {
-  var dv = map.get(target);
-  return dv.setInt32(at + target.byteOffset, value, false)
-}
-
-function write_float_be(target, value, at) {
-  var dv = map.get(target);
-  return dv.setFloat32(at + target.byteOffset, value, false)
-}
-
-function write_double_be(target, value, at) {
-  var dv = map.get(target);
-  return dv.setFloat64(at + target.byteOffset, value, false)
-}
-
-},{"./mapped.js":40}],45:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 exports.readIEEE754 = function(buffer, offset, isBE, mLen, nBytes) {
   var e, m,
@@ -9502,7 +8015,7 @@ function hasOwnProperty(obj, prop) {
 },{"_shims":5}]},{},[])
 ;;module.exports=require("buffer-browserify")
 
-},{}],46:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -9556,7 +8069,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],47:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9573,10 +8086,10 @@ process.chdir = function (dir) {
  */
 
 window.AWS = module.exports = require('./core');
-AWS.HttpClient.streamsApiVersion = 1; // force legacy streams
+require('./http/xhr');
 require('./services');
 
-},{"./core":49,"./services":66}],48:[function(require,module,exports){
+},{"./core":24,"./http/xhr":31,"./services":42}],23:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9641,6 +8154,11 @@ require('./credentials/credential_provider_chain');
  *
  * @!attribute s3ForcePathStyle
  *   @return [Boolean] whether to force path style URLs for S3 objects
+ *
+ * @!attribute logger
+ *   @return [#write,#log] an object that responds to .write() (like a stream)
+ *     or .log() (like the console object) in order to log information about
+ *     requests
  */
 AWS.Config = AWS.util.inherit({
 
@@ -9697,6 +8215,9 @@ AWS.Config = AWS.util.inherit({
    *   identifiers (the lowercase service class name) with the API version to
    *   use when instantiating a service. Specify 'latest' for each individual
    *   that can use the latest available version.
+   * @option options logger [#write,#log] an object that responds to .write()
+   *   (like a stream) or .log() (like the console object) in order to log
+   *   information about requests
    */
   constructor: function Config(options) {
     if (options === undefined) options = {};
@@ -9850,6 +8371,7 @@ AWS.Config = AWS.util.inherit({
     credentials: null,
     credentialProvider: null,
     region: null,
+    logger: null,
     apiVersions: {},
     apiVersion: null,
     endpoint: undefined,
@@ -9885,7 +8407,7 @@ AWS.Config = AWS.util.inherit({
  */
 AWS.config = new AWS.Config();
 
-},{"./core":49,"./credentials":50,"./credentials/credential_provider_chain":51}],49:[function(require,module,exports){
+},{"./core":24,"./credentials":25,"./credentials/credential_provider_chain":26}],24:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9913,7 +8435,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '1.6.0',
+  VERSION: '1.7.0',
 
   /**
    * @api private
@@ -9966,7 +8488,7 @@ AWS.events = new AWS.SequentialExecutor();
 
 if (typeof window !== 'undefined') window.AWS = AWS;
 
-},{"./config":48,"./credentials":50,"./credentials/credential_provider_chain":51,"./credentials/temporary_credentials":52,"./credentials/web_identity_credentials":53,"./event_listeners":54,"./http":55,"./param_validator":57,"./request":58,"./sequential_executor":59,"./service":60,"./signers/request_signer":74,"./util":80}],50:[function(require,module,exports){
+},{"./config":23,"./credentials":25,"./credentials/credential_provider_chain":26,"./credentials/temporary_credentials":27,"./credentials/web_identity_credentials":28,"./event_listeners":29,"./http":30,"./param_validator":33,"./request":34,"./sequential_executor":35,"./service":36,"./signers/request_signer":54,"./util":60}],25:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10130,7 +8652,7 @@ AWS.Credentials = AWS.util.inherit({
   }
 });
 
-},{"./core":49}],51:[function(require,module,exports){
+},{"./core":24}],26:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10261,7 +8783,7 @@ AWS.CredentialProviderChain = AWS.util.inherit(AWS.Credentials, {
  */
 AWS.CredentialProviderChain.defaultProviders = [];
 
-},{"../core":49,"../credentials":50}],52:[function(require,module,exports){
+},{"../core":24,"../credentials":25}],27:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10389,7 +8911,7 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
   }
 });
 
-},{"../core":49,"../credentials":50,"../services/sts":72}],53:[function(require,module,exports){
+},{"../core":24,"../credentials":25,"../services/sts":52}],28:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10494,7 +9016,7 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
   }
 });
 
-},{"../core":49,"../credentials":50,"../services/sts":72}],54:[function(require,module,exports){
+},{"../core":24,"../credentials":25,"../services/sts":52}],29:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10606,6 +9128,7 @@ AWS.EventListeners = {
     });
 
     add('SET_CONTENT_LENGTH', 'afterBuild', function SET_CONTENT_LENGTH(req) {
+      if (AWS.util.isBrowser()) return;
       if (req.httpRequest.headers['Content-Length'] === undefined) {
         var length = AWS.util.string.byteLength(req.httpRequest.body);
         req.httpRequest.headers['Content-Length'] = length;
@@ -10790,6 +9313,38 @@ AWS.EventListeners = {
 
   }),
 
+  Logger: new AWS.SequentialExecutor().addNamedListeners(function(add) {
+    add('LOG_REQUEST', 'complete', function LOG_REQUEST(resp) {
+      var req = resp.request;
+      var logger = req.service.config.logger;
+      if (!logger) return;
+
+      function buildMessage() {
+        var time = AWS.util.date.getDate().getTime();
+        var delta = (time - req.startTime.getTime()) / 1000;
+        var ansi = logger.isTTY ? true : false;
+        var status = resp.httpResponse.statusCode;
+        var params = require('util').inspect(req.params, true, true);
+
+        var message = '';
+        if (ansi) message += '\x1B[33m';
+        message += '[AWS ' + req.service.serviceIdentifier + ' ' + status;
+        message += ' ' + delta.toString() + 's ' + resp.retryCount + ' retries]';
+        if (ansi) message += '\x1B[0;1m';
+        message += ' ' + req.operation + '(' + params + ')';
+        if (ansi) message += '\x1B[0m';
+        return message;
+      }
+
+      var message = buildMessage();
+      if (typeof logger.log === 'function') {
+        logger.log(message);
+      } else if (typeof logger.write === 'function') {
+        logger.write(message + '\n');
+      }
+    });
+  }),
+
   Json: new AWS.SequentialExecutor().addNamedListeners(function(add) {
     var svc = AWS.ServiceInterface.Json;
     add('BUILD', 'build', svc.buildRequest);
@@ -10826,7 +9381,7 @@ AWS.EventListeners = {
   })
 };
 
-},{"./core":49,"./sequential_executor":59,"./service_interface/json":61,"./service_interface/query":62,"./service_interface/rest":63,"./service_interface/rest_json":64,"./service_interface/rest_xml":65,"buffer":19}],55:[function(require,module,exports){
+},{"./core":24,"./sequential_executor":35,"./service_interface/json":37,"./service_interface/query":38,"./service_interface/rest":39,"./service_interface/rest_json":40,"./service_interface/rest_xml":41,"buffer":18,"util":16}],30:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10843,7 +9398,6 @@ AWS.EventListeners = {
  */
 
 var AWS = require('./core');
-var Stream = require('stream').Stream;
 var inherit = AWS.util.inherit;
 
 /**
@@ -10987,94 +9541,8 @@ AWS.HttpResponse = inherit({
   }
 });
 
-/**
- * @api private
- */
-AWS.NodeHttpClient = inherit({
-  handleRequest: function handleRequest(httpRequest, httpOptions, callback, errCallback) {
-    /*jshint maxcomplexity:10*/
-    var endpoint = httpRequest.endpoint;
-    var pathPrefix = '';
-    if (!httpOptions) httpOptions = {};
-    if (httpOptions.proxy) {
-      pathPrefix = endpoint.protocol + '//' + endpoint.hostname;
-      if (endpoint.port != 80 && endpoint.port != 443) {
-        pathPrefix += ':' + endpoint.port;
-      }
-      endpoint = new AWS.Endpoint(httpOptions.proxy);
-    }
 
-    var useSSL = endpoint.protocol === 'https:';
-    var http = useSSL ? require('https') : require('http');
-    var options = {
-      host: endpoint.hostname,
-      port: endpoint.port,
-      method: httpRequest.method,
-      headers: httpRequest.headers,
-      path: pathPrefix + httpRequest.path
-    };
-
-    if (useSSL && !httpOptions.agent) {
-      options.agent = this.sslAgent(http);
-    }
-
-    AWS.util.update(options, httpOptions);
-    delete options.proxy; // proxy isn't an HTTP option
-    delete options.timeout; // timeout isn't an HTTP option
-
-    var stream = http.request(options, callback);
-    httpRequest.stream = stream; // attach stream to httpRequest
-
-    // timeout support
-    if (stream.setTimeout) {
-      stream.setTimeout(httpOptions.timeout || 0);
-      stream.once('timeout', function() {
-        var msg = 'Connection timed out after ' + httpOptions.timeout + 'ms';
-        errCallback(AWS.util.error(new Error(msg), {code: 'TimeoutError'}));
-
-        // HACK - abort the connection without tripping our error handler
-        // since we already raised our TimeoutError. Otherwise the connection
-        // comes back with ECONNRESET, which is not a helpful error message
-        stream.removeListener('error', errCallback);
-        stream.on('error', function() { });
-        stream.abort();
-      });
-    }
-
-    stream.on('error', errCallback);
-    this.writeBody(stream, httpRequest);
-    return stream;
-  },
-
-  writeBody: function writeBody(stream, httpRequest) {
-    if (httpRequest.body instanceof Stream) {
-      httpRequest.body.pipe(stream);
-    } else if (httpRequest.body) {
-      stream.end(httpRequest.body);
-    } else {
-      stream.end();
-    }
-  },
-
-  sslAgent: function sslAgent(http) {
-    if (!AWS.NodeHttpClient.sslAgent) {
-      AWS.NodeHttpClient.sslAgent = new http.Agent({
-        rejectUnauthorized: true
-      });
-    }
-    return AWS.NodeHttpClient.sslAgent;
-  }
-});
-
-/**
- * @api private
- */
-AWS.HttpClient = AWS.NodeHttpClient;
-
-/**
- * @api private
- */
-AWS.HttpClient.streamsApiVersion = require('stream').Readable ? 2 : 1;
+AWS.HttpClient = inherit({});
 
 /**
  * @api private
@@ -11087,7 +9555,106 @@ AWS.HttpClient.getInstance = function getInstance() {
   return this.singleton;
 };
 
-},{"./core":49,"http":27,"https":11,"stream":13}],56:[function(require,module,exports){
+},{"./core":24}],31:[function(require,module,exports){
+var Buffer=require("__browserify_Buffer").Buffer;/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+var EventEmitter = require('events').EventEmitter;
+require('../http');
+
+/**
+ * @api private
+ */
+AWS.XHRClient = AWS.util.inherit({
+  handleRequest: function handleRequest(httpRequest, httpOptions, callback, errCallback) {
+    var self = this;
+    var endpoint = httpRequest.endpoint;
+    var xhr = new XMLHttpRequest();
+    var emitter = new EventEmitter();
+    var href = endpoint.protocol + '//' + endpoint.host;
+    if (endpoint.port != 80 && endpoint.port != 443) {
+      href += ':' + endpoint.port;
+    }
+    href += httpRequest.path;
+
+    xhr.responseType = 'arraybuffer';
+    if (httpOptions.timeout) {
+      xhr.timeout = httpOptions.timeout;
+    }
+
+    xhr.addEventListener('readystatechange', function(evt) {
+      if (this.readyState === this.HEADERS_RECEIVED) {
+        emitter.statusCode = xhr.status;
+        emitter.headers = self.parseHeaders(xhr.getAllResponseHeaders());
+        callback(emitter);
+      } else if (this.readyState === this.DONE) {
+        var ab = xhr.response;
+        if (ab) {
+          var buffer = new Buffer(ab.byteLength);
+          var view = new Uint8Array(ab);
+          for (var i = 0; i < buffer.length; ++i) {
+            buffer[i] = view[i];
+          }
+
+          emitter.emit('data', buffer);
+        }
+
+        emitter.emit('end');
+      }
+    }, false);
+    xhr.addEventListener('timeout', function () {
+      errCallback(AWS.util.error(new Error('Timeout'), {code: 'TimeoutError'}));
+    }, false);
+    xhr.addEventListener('error', function () {
+      errCallback(new Error('Network Failure'));
+    }, false);
+
+    xhr.open(httpRequest.method, href, true);
+    AWS.util.each(httpRequest.headers, function (key, value) {
+      if (key !== 'Content-Length' && key !== 'User-Agent' && key !== 'Host') {
+        xhr.setRequestHeader(key, value);
+      }
+    });
+    xhr.send(httpRequest.body);
+
+    return emitter;
+  },
+
+  parseHeaders: function parseHeaders(rawHeaders) {
+    var headers = {};
+    AWS.util.arrayEach(rawHeaders.split(/\r?\n/), function (line) {
+      var key = line.split(':', 1)[0];
+      var value = line.substring(key.length + 2);
+      headers[key] = value;
+    });
+    return headers;
+  }
+});
+
+/**
+ * @api private
+ */
+AWS.HttpClient.prototype = AWS.XHRClient.prototype;
+
+/**
+ * @api private
+ */
+AWS.HttpClient.streamsApiVersion = 1;
+
+},{"../core":24,"../http":30,"__browserify_Buffer":20,"events":9}],32:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -11171,7 +9738,7 @@ AWS.JSON.Builder = inherit({
 
 });
 
-},{"../core":49}],57:[function(require,module,exports){
+},{"../core":24}],33:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -11188,7 +9755,6 @@ AWS.JSON.Builder = inherit({
  */
 
 var AWS = require('./core');
-var Stream = require('stream').Stream;
 var Buffer = require('buffer').Buffer;
 
 /**
@@ -11279,7 +9845,7 @@ AWS.ParamValidator = AWS.util.inherit({
         return this.validateType(context, value, ['string']);
       case 'base64':
       case 'binary':
-        return this.validateType(context, value, ['string', Buffer, Stream]);
+        return this.validateType(context, value, ['string', Buffer]);
       case 'integer':
       case 'float':
         return this.validateType(context, value, ['number']);
@@ -11309,9 +9875,9 @@ AWS.ParamValidator = AWS.util.inherit({
         if ((value || '').toString().match(acceptedTypes[i])) return;
       } else {
         if (value instanceof acceptedTypes[i]) return;
-        if (AWS.util.isType(value, acceptedTypes[i].name)) return;
+        if (AWS.util.isType(value, acceptedTypes[i])) return;
         if (!type && !foundInvalidType) acceptedTypes = acceptedTypes.slice();
-        acceptedTypes[i] = acceptedTypes[i].name;
+        acceptedTypes[i] = AWS.util.typeName(acceptedTypes[i]);
       }
       foundInvalidType = true;
     }
@@ -11328,7 +9894,7 @@ AWS.ParamValidator = AWS.util.inherit({
   }
 });
 
-},{"./core":49,"buffer":19,"stream":13}],58:[function(require,module,exports){
+},{"./core":24,"buffer":18}],34:[function(require,module,exports){
 var process=require("__browserify_process");/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -11346,7 +9912,6 @@ var process=require("__browserify_process");/**
 
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
-var streams = require('stream');
 
 /**
  * ## Asynchronous Requests
@@ -11417,6 +9982,11 @@ var streams = require('stream');
  *   @return [AWS.HttpRequest] the raw HTTP request object
  *     containing request headers and body information
  *     sent by the service.
+ *
+ * @!attribute startTime
+ *   @readonly
+ *   @!group Operation Properties
+ *   @return [Date] the time that the request started
  *
  * @!group Request Building Events
  *
@@ -11555,6 +10125,7 @@ AWS.Request = inherit({
     this.operation = operation;
     this.params = params || {};
     this.httpRequest = new AWS.HttpRequest(endpoint, region);
+    this.startTime = AWS.util.date.getDate();
 
     AWS.SequentialExecutor.call(this);
   },
@@ -11699,7 +10270,7 @@ AWS.Request = inherit({
 
       var config = this.request.service.paginationConfig(this.request.operation);
       var resultKey = config.resultKey;
-      if (AWS.util.isType(resultKey, Array)) resultKey = resultKey[0];
+      if (Array.isArray(resultKey)) resultKey = resultKey[0];
       var results = AWS.util.jamespath.query(resultKey, data);
       AWS.util.arrayEach(results, function(result) {
         AWS.util.arrayEach(result, function(item) { callback(null, item); });
@@ -11737,6 +10308,7 @@ AWS.Request = inherit({
    *   or read from (by registering 'data' event listeners).
    */
   createReadStream: function createReadStream() {
+    var streams = require('stream');
     var req = this;
     var stream = null;
     var legacyStreams = false;
@@ -11850,7 +10422,7 @@ AWS.Request = inherit({
   emitEvent: function emitEvent(eventName, args, doneCallback) {
     if (!doneCallback) doneCallback = this.unhandledErrorCallback;
     var response = null;
-    if (AWS.util.isType(args, Array)) {
+    if (Array.isArray(args)) {
       response = args[args.length - 1];
     } else {
       response = args;
@@ -12086,7 +10658,7 @@ AWS.Response = inherit({
 
 });
 
-},{"./core":49,"__browserify_process":46,"stream":13}],59:[function(require,module,exports){
+},{"./core":24,"__browserify_process":21,"stream":12}],35:[function(require,module,exports){
 var process=require("__browserify_process");/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -12362,7 +10934,7 @@ AWS.SequentialExecutor = AWS.util.inherit({
  */
 AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.on;
 
-},{"./core":49,"__browserify_process":46,"domain":1,"events":9}],60:[function(require,module,exports){
+},{"./core":24,"__browserify_process":21,"domain":1,"events":9}],36:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -12508,6 +11080,10 @@ AWS.Service = inherit({
         AWS.EventListeners.Core.VALIDATE_PARAMETERS);
     }
 
+    if (this.config.logger) { // add logging events
+      request.addListeners(AWS.EventListeners.Logger);
+    }
+
     this.setupRequestListeners(request);
   },
 
@@ -12616,7 +11192,7 @@ AWS.util.update(AWS.Service, {
   },
 
   defineService: function defineService(serviceIdentifier, versions, features) {
-    if (!AWS.util.isType(versions, Array)) {
+    if (!Array.isArray(versions)) {
       features = versions;
       versions = [];
     }
@@ -12665,7 +11241,7 @@ AWS.util.update(AWS.Service, {
   }
 });
 
-},{"./core":49}],61:[function(require,module,exports){
+},{"./core":24}],37:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -12733,7 +11309,7 @@ AWS.ServiceInterface.Json = {
 
 };
 
-},{"../core":49,"../json/builder":56}],62:[function(require,module,exports){
+},{"../core":24,"../json/builder":32}],38:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -12914,7 +11490,7 @@ AWS.QueryParamSerializer = inherit({
 
 });
 
-},{"../core":49,"../xml/parser":82}],63:[function(require,module,exports){
+},{"../core":24,"../xml/parser":62}],39:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -13058,7 +11634,7 @@ AWS.ServiceInterface.Rest = {
   }
 };
 
-},{"../core":49}],64:[function(require,module,exports){
+},{"../core":24}],40:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -13152,7 +11728,7 @@ AWS.ServiceInterface.RestJson = {
 
 };
 
-},{"../core":49,"./json":61,"./rest":63}],65:[function(require,module,exports){
+},{"../core":24,"./json":37,"./rest":39}],41:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -13264,12 +11840,14 @@ AWS.ServiceInterface.RestXml = {
   }
 };
 
-},{"../core":49,"../xml/builder":81,"./rest":63}],66:[function(require,module,exports){
+},{"../core":24,"../xml/builder":61,"./rest":39}],42:[function(require,module,exports){
 var AWS = require("./core"); module.exports = AWS;
 AWS.Service.defineServiceApi(require("./services/dynamodb"), "2012-08-10", require("./services/api/dynamodb-2012-08-10"));
 AWS.Service.defineServiceApi(require("./services/s3"), "2006-03-01", require("./services/api/s3-2006-03-01"));
+AWS.Service.defineServiceApi(require("./services/sqs"), "2012-11-05", require("./services/api/sqs-2012-11-05"));
+AWS.Service.defineServiceApi(require("./services/sns"), "2010-03-31", require("./services/api/sns-2010-03-31"));
 AWS.Service.defineServiceApi(require("./services/sts"), "2011-06-15", require("./services/api/sts-2011-06-15"));
-},{"./core":49,"./services/api/dynamodb-2012-08-10":67,"./services/api/s3-2006-03-01":68,"./services/api/sts-2011-06-15":69,"./services/dynamodb":70,"./services/s3":71,"./services/sts":72}],67:[function(require,module,exports){
+},{"./core":24,"./services/api/dynamodb-2012-08-10":43,"./services/api/s3-2006-03-01":44,"./services/api/sns-2010-03-31":45,"./services/api/sqs-2012-11-05":46,"./services/api/sts-2011-06-15":47,"./services/dynamodb":48,"./services/s3":49,"./services/sns":50,"./services/sqs":51,"./services/sts":52}],43:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -15443,7 +14021,7 @@ module.exports = {
   }
 };
 
-},{}],68:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -18519,7 +17097,1245 @@ module.exports = {
   }
 };
 
-},{}],69:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+module.exports = {
+  format: 'query',
+  apiVersion: '2010-03-31',
+  endpointPrefix: 'sns',
+  resultWrapped: true,
+  serviceAbbreviation: 'Amazon SNS',
+  serviceFullName: 'Amazon Simple Notification Service',
+  signatureVersion: 'v4',
+  timestampFormat: 'iso8601',
+  operations: {
+    addPermission: {
+      name: 'AddPermission',
+      input: {
+        type: 'structure',
+        members: {
+          TopicArn: {
+            required: true
+          },
+          Label: {
+            required: true
+          },
+          AWSAccountId: {
+            type: 'list',
+            members: {
+            },
+            required: true
+          },
+          ActionName: {
+            type: 'list',
+            members: {
+            },
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    confirmSubscription: {
+      name: 'ConfirmSubscription',
+      input: {
+        type: 'structure',
+        members: {
+          TopicArn: {
+            required: true
+          },
+          Token: {
+            required: true
+          },
+          AuthenticateOnUnsubscribe: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          SubscriptionArn: {
+          }
+        }
+      }
+    },
+    createPlatformApplication: {
+      name: 'CreatePlatformApplication',
+      input: {
+        type: 'structure',
+        members: {
+          Name: {
+            required: true
+          },
+          Platform: {
+            required: true
+          },
+          Attributes: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+            },
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          PlatformApplicationArn: {
+          }
+        }
+      }
+    },
+    createPlatformEndpoint: {
+      name: 'CreatePlatformEndpoint',
+      input: {
+        type: 'structure',
+        members: {
+          PlatformApplicationArn: {
+            required: true
+          },
+          Token: {
+            required: true
+          },
+          CustomUserData: {
+          },
+          Attributes: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+            }
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          EndpointArn: {
+          }
+        }
+      }
+    },
+    createTopic: {
+      name: 'CreateTopic',
+      input: {
+        type: 'structure',
+        members: {
+          Name: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          TopicArn: {
+          }
+        }
+      }
+    },
+    deleteEndpoint: {
+      name: 'DeleteEndpoint',
+      input: {
+        type: 'structure',
+        members: {
+          EndpointArn: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    deletePlatformApplication: {
+      name: 'DeletePlatformApplication',
+      input: {
+        type: 'structure',
+        members: {
+          PlatformApplicationArn: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    deleteTopic: {
+      name: 'DeleteTopic',
+      input: {
+        type: 'structure',
+        members: {
+          TopicArn: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    getEndpointAttributes: {
+      name: 'GetEndpointAttributes',
+      input: {
+        type: 'structure',
+        members: {
+          EndpointArn: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Attributes: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+            }
+          }
+        }
+      }
+    },
+    getPlatformApplicationAttributes: {
+      name: 'GetPlatformApplicationAttributes',
+      input: {
+        type: 'structure',
+        members: {
+          PlatformApplicationArn: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Attributes: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+            }
+          }
+        }
+      }
+    },
+    getSubscriptionAttributes: {
+      name: 'GetSubscriptionAttributes',
+      input: {
+        type: 'structure',
+        members: {
+          SubscriptionArn: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Attributes: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+            }
+          }
+        }
+      }
+    },
+    getTopicAttributes: {
+      name: 'GetTopicAttributes',
+      input: {
+        type: 'structure',
+        members: {
+          TopicArn: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Attributes: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+            }
+          }
+        }
+      }
+    },
+    listEndpointsByPlatformApplication: {
+      name: 'ListEndpointsByPlatformApplication',
+      input: {
+        type: 'structure',
+        members: {
+          PlatformApplicationArn: {
+            required: true
+          },
+          NextToken: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Endpoints: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                EndpointArn: {
+                },
+                Attributes: {
+                  type: 'map',
+                  keys: {
+                  },
+                  members: {
+                  }
+                }
+              }
+            }
+          },
+          NextToken: {
+          }
+        }
+      }
+    },
+    listPlatformApplications: {
+      name: 'ListPlatformApplications',
+      input: {
+        type: 'structure',
+        members: {
+          NextToken: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          PlatformApplications: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                PlatformApplicationArn: {
+                },
+                Attributes: {
+                  type: 'map',
+                  keys: {
+                  },
+                  members: {
+                  }
+                }
+              }
+            }
+          },
+          NextToken: {
+          }
+        }
+      }
+    },
+    listSubscriptions: {
+      name: 'ListSubscriptions',
+      input: {
+        type: 'structure',
+        members: {
+          NextToken: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Subscriptions: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                SubscriptionArn: {
+                },
+                Owner: {
+                },
+                Protocol: {
+                },
+                Endpoint: {
+                },
+                TopicArn: {
+                }
+              }
+            }
+          },
+          NextToken: {
+          }
+        }
+      }
+    },
+    listSubscriptionsByTopic: {
+      name: 'ListSubscriptionsByTopic',
+      input: {
+        type: 'structure',
+        members: {
+          TopicArn: {
+            required: true
+          },
+          NextToken: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Subscriptions: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                SubscriptionArn: {
+                },
+                Owner: {
+                },
+                Protocol: {
+                },
+                Endpoint: {
+                },
+                TopicArn: {
+                }
+              }
+            }
+          },
+          NextToken: {
+          }
+        }
+      }
+    },
+    listTopics: {
+      name: 'ListTopics',
+      input: {
+        type: 'structure',
+        members: {
+          NextToken: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Topics: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                TopicArn: {
+                }
+              }
+            }
+          },
+          NextToken: {
+          }
+        }
+      }
+    },
+    publish: {
+      name: 'Publish',
+      input: {
+        type: 'structure',
+        members: {
+          TopicArn: {
+          },
+          TargetArn: {
+          },
+          Message: {
+            required: true
+          },
+          Subject: {
+          },
+          MessageStructure: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          MessageId: {
+          }
+        }
+      }
+    },
+    removePermission: {
+      name: 'RemovePermission',
+      input: {
+        type: 'structure',
+        members: {
+          TopicArn: {
+            required: true
+          },
+          Label: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    setEndpointAttributes: {
+      name: 'SetEndpointAttributes',
+      input: {
+        type: 'structure',
+        members: {
+          EndpointArn: {
+            required: true
+          },
+          Attributes: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+            },
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    setPlatformApplicationAttributes: {
+      name: 'SetPlatformApplicationAttributes',
+      input: {
+        type: 'structure',
+        members: {
+          PlatformApplicationArn: {
+            required: true
+          },
+          Attributes: {
+            type: 'map',
+            keys: {
+            },
+            members: {
+            },
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    setSubscriptionAttributes: {
+      name: 'SetSubscriptionAttributes',
+      input: {
+        type: 'structure',
+        members: {
+          SubscriptionArn: {
+            required: true
+          },
+          AttributeName: {
+            required: true
+          },
+          AttributeValue: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    setTopicAttributes: {
+      name: 'SetTopicAttributes',
+      input: {
+        type: 'structure',
+        members: {
+          TopicArn: {
+            required: true
+          },
+          AttributeName: {
+            required: true
+          },
+          AttributeValue: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    subscribe: {
+      name: 'Subscribe',
+      input: {
+        type: 'structure',
+        members: {
+          TopicArn: {
+            required: true
+          },
+          Protocol: {
+            required: true
+          },
+          Endpoint: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          SubscriptionArn: {
+          }
+        }
+      }
+    },
+    unsubscribe: {
+      name: 'Unsubscribe',
+      input: {
+        type: 'structure',
+        members: {
+          SubscriptionArn: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    }
+  },
+  pagination: {
+    listSubscriptions: {
+      inputToken: 'NextToken',
+      outputToken: 'NextToken',
+      resultKey: 'Subscriptions'
+    },
+    listSubscriptionsByTopic: {
+      inputToken: 'NextToken',
+      outputToken: 'NextToken',
+      resultKey: 'Subscriptions'
+    },
+    listTopics: {
+      inputToken: 'NextToken',
+      outputToken: 'NextToken',
+      resultKey: 'Topics'
+    }
+  }
+};
+
+},{}],46:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+module.exports = {
+  format: 'query',
+  apiVersion: '2012-11-05',
+  endpointPrefix: 'sqs',
+  resultWrapped: true,
+  serviceAbbreviation: 'Amazon SQS',
+  serviceFullName: 'Amazon Simple Queue Service',
+  signatureVersion: 'v4',
+  timestampFormat: 'iso8601',
+  operations: {
+    addPermission: {
+      name: 'AddPermission',
+      input: {
+        type: 'structure',
+        members: {
+          QueueUrl: {
+            required: true
+          },
+          Label: {
+            required: true
+          },
+          AWSAccountIds: {
+            type: 'list',
+            members: {
+              name: 'AWSAccountId'
+            },
+            flattened: true,
+            required: true
+          },
+          Actions: {
+            type: 'list',
+            members: {
+              name: 'ActionName'
+            },
+            flattened: true,
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    changeMessageVisibility: {
+      name: 'ChangeMessageVisibility',
+      input: {
+        type: 'structure',
+        members: {
+          QueueUrl: {
+            required: true
+          },
+          ReceiptHandle: {
+            required: true
+          },
+          VisibilityTimeout: {
+            type: 'integer',
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    changeMessageVisibilityBatch: {
+      name: 'ChangeMessageVisibilityBatch',
+      input: {
+        type: 'structure',
+        members: {
+          QueueUrl: {
+            required: true
+          },
+          Entries: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                Id: {
+                  required: true
+                },
+                ReceiptHandle: {
+                  required: true
+                },
+                VisibilityTimeout: {
+                  type: 'integer'
+                }
+              },
+              name: 'ChangeMessageVisibilityBatchRequestEntry'
+            },
+            flattened: true,
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          ChangeMessageVisibilityBatchResultEntry: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                Id: {
+                }
+              },
+              name: 'ChangeMessageVisibilityBatchResultEntry'
+            },
+            flattened: true,
+            name: 'Successful'
+          },
+          BatchResultErrorEntry: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                Id: {
+                },
+                SenderFault: {
+                  type: 'boolean'
+                },
+                Code: {
+                },
+                Message: {
+                }
+              },
+              name: 'BatchResultErrorEntry'
+            },
+            flattened: true,
+            name: 'Failed'
+          }
+        }
+      }
+    },
+    createQueue: {
+      name: 'CreateQueue',
+      input: {
+        type: 'structure',
+        members: {
+          QueueName: {
+            required: true
+          },
+          Attributes: {
+            type: 'map',
+            keys: {
+              name: 'Name'
+            },
+            members: {
+              name: 'Value'
+            },
+            flattened: true,
+            name: 'Attribute'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          QueueUrl: {
+          }
+        }
+      }
+    },
+    deleteMessage: {
+      name: 'DeleteMessage',
+      input: {
+        type: 'structure',
+        members: {
+          QueueUrl: {
+            required: true
+          },
+          ReceiptHandle: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    deleteMessageBatch: {
+      name: 'DeleteMessageBatch',
+      input: {
+        type: 'structure',
+        members: {
+          QueueUrl: {
+            required: true
+          },
+          Entries: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                Id: {
+                  required: true
+                },
+                ReceiptHandle: {
+                  required: true
+                }
+              },
+              name: 'DeleteMessageBatchRequestEntry'
+            },
+            flattened: true,
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          DeleteMessageBatchResultEntry: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                Id: {
+                }
+              },
+              name: 'DeleteMessageBatchResultEntry'
+            },
+            flattened: true,
+            name: 'Successful'
+          },
+          BatchResultErrorEntry: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                Id: {
+                },
+                SenderFault: {
+                  type: 'boolean'
+                },
+                Code: {
+                },
+                Message: {
+                }
+              },
+              name: 'BatchResultErrorEntry'
+            },
+            flattened: true,
+            name: 'Failed'
+          }
+        }
+      }
+    },
+    deleteQueue: {
+      name: 'DeleteQueue',
+      input: {
+        type: 'structure',
+        members: {
+          QueueUrl: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    getQueueAttributes: {
+      name: 'GetQueueAttributes',
+      input: {
+        type: 'structure',
+        members: {
+          QueueUrl: {
+            required: true
+          },
+          AttributeNames: {
+            type: 'list',
+            members: {
+              name: 'AttributeName'
+            },
+            flattened: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Attribute: {
+            type: 'map',
+            keys: {
+              name: 'Name'
+            },
+            members: {
+              name: 'Value'
+            },
+            flattened: true,
+            name: 'Attributes'
+          }
+        }
+      }
+    },
+    getQueueUrl: {
+      name: 'GetQueueUrl',
+      input: {
+        type: 'structure',
+        members: {
+          QueueName: {
+            required: true
+          },
+          QueueOwnerAWSAccountId: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          QueueUrl: {
+          }
+        }
+      }
+    },
+    listQueues: {
+      name: 'ListQueues',
+      input: {
+        type: 'structure',
+        members: {
+          QueueNamePrefix: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          QueueUrl: {
+            type: 'list',
+            members: {
+              name: 'QueueUrl'
+            },
+            flattened: true,
+            name: 'QueueUrls'
+          }
+        }
+      }
+    },
+    receiveMessage: {
+      name: 'ReceiveMessage',
+      input: {
+        type: 'structure',
+        members: {
+          QueueUrl: {
+            required: true
+          },
+          AttributeNames: {
+            type: 'list',
+            members: {
+              name: 'AttributeName'
+            },
+            flattened: true
+          },
+          MaxNumberOfMessages: {
+            type: 'integer'
+          },
+          VisibilityTimeout: {
+            type: 'integer'
+          },
+          WaitTimeSeconds: {
+            type: 'integer'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          Message: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                MessageId: {
+                },
+                ReceiptHandle: {
+                },
+                MD5OfBody: {
+                },
+                Body: {
+                },
+                Attribute: {
+                  type: 'map',
+                  keys: {
+                    name: 'Name'
+                  },
+                  members: {
+                    name: 'Value'
+                  },
+                  flattened: true,
+                  name: 'Attributes'
+                }
+              },
+              name: 'Message'
+            },
+            flattened: true,
+            name: 'Messages'
+          }
+        }
+      }
+    },
+    removePermission: {
+      name: 'RemovePermission',
+      input: {
+        type: 'structure',
+        members: {
+          QueueUrl: {
+            required: true
+          },
+          Label: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    sendMessage: {
+      name: 'SendMessage',
+      input: {
+        type: 'structure',
+        members: {
+          QueueUrl: {
+            required: true
+          },
+          MessageBody: {
+            required: true
+          },
+          DelaySeconds: {
+            type: 'integer'
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          MD5OfMessageBody: {
+          },
+          MessageId: {
+          }
+        }
+      }
+    },
+    sendMessageBatch: {
+      name: 'SendMessageBatch',
+      input: {
+        type: 'structure',
+        members: {
+          QueueUrl: {
+            required: true
+          },
+          Entries: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                Id: {
+                  required: true
+                },
+                MessageBody: {
+                  required: true
+                },
+                DelaySeconds: {
+                  type: 'integer'
+                }
+              },
+              name: 'SendMessageBatchRequestEntry'
+            },
+            flattened: true,
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          SendMessageBatchResultEntry: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                Id: {
+                },
+                MessageId: {
+                },
+                MD5OfMessageBody: {
+                }
+              },
+              name: 'SendMessageBatchResultEntry'
+            },
+            flattened: true,
+            name: 'Successful'
+          },
+          BatchResultErrorEntry: {
+            type: 'list',
+            members: {
+              type: 'structure',
+              members: {
+                Id: {
+                },
+                SenderFault: {
+                  type: 'boolean'
+                },
+                Code: {
+                },
+                Message: {
+                }
+              },
+              name: 'BatchResultErrorEntry'
+            },
+            flattened: true,
+            name: 'Failed'
+          }
+        }
+      }
+    },
+    setQueueAttributes: {
+      name: 'SetQueueAttributes',
+      input: {
+        type: 'structure',
+        members: {
+          QueueUrl: {
+            required: true
+          },
+          Attributes: {
+            type: 'map',
+            keys: {
+              name: 'Name'
+            },
+            members: {
+              name: 'Value'
+            },
+            flattened: true,
+            name: 'Attribute',
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    }
+  },
+  pagination: {
+    listQueues: {
+      resultKey: 'QueueUrls'
+    }
+  }
+};
+
+},{}],47:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -18757,7 +18573,7 @@ module.exports = {
   }
 };
 
-},{}],70:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -18828,7 +18644,7 @@ AWS.DynamoDB = AWS.Service.defineService('dynamodb', ['2012-08-10', '2011-12-05'
 
 module.exports = AWS.DynamoDB;
 
-},{"../core":49}],71:[function(require,module,exports){
+},{"../core":24}],49:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -18845,7 +18661,6 @@ module.exports = AWS.DynamoDB;
  */
 
 var AWS = require('../core');
-var Stream = require('stream').Stream;
 
 AWS.S3 = AWS.Service.defineService('s3', ['2006-03-01'], {
   /**
@@ -18857,6 +18672,7 @@ AWS.S3 = AWS.Service.defineService('s3', ['2006-03-01'], {
   },
 
   setupRequestListeners: function setupRequestListeners(request) {
+    request.addListener('build', this.addContentType);
     request.addListener('build', this.populateURI);
     request.addListener('build', this.computeContentMd5);
     request.removeListener('validate',
@@ -18892,6 +18708,18 @@ AWS.S3 = AWS.Service.defineService('s3', ['2006-03-01'], {
   },
 
   /**
+   * Adds a default content type if none is supplied.
+   *
+   * @api private
+   */
+  addContentType: function addContentType(req) {
+    var httpRequest = req.httpRequest;
+    if (!httpRequest.headers['Content-Type']) { // always have a Content-Type
+      httpRequest.headers['Content-Type'] = 'application/octet-stream';
+    }
+  },
+
+  /**
    * @api private
    */
   computableChecksumOperations: {
@@ -18916,7 +18744,7 @@ AWS.S3 = AWS.Service.defineService('s3', ['2006-03-01'], {
     if (!this.config.computeChecksums) return false;
 
     // TODO: compute checksums for Stream objects
-    if (req.httpRequest.body instanceof Stream) return false;
+    if (AWS.util.isType(req.httpRequest.body, 'Stream')) return false;
 
     var rules = req.service.api.operations[req.operation].input.members;
     if (rules.ContentMD5 && !req.params.ContentMD5) return true;
@@ -19145,6 +18973,7 @@ AWS.S3 = AWS.Service.defineService('s3', ['2006-03-01'], {
 
     request.on('build', signedUrlBuilder);
     request.on('sign', signedUrlSigner);
+    request.removeListener('build', this.addContentType);
     if (!params.Body) { // no Content-MD5 signing if body is not provided
       request.removeListener('build', this.computeContentMd5);
     }
@@ -19179,7 +19008,156 @@ AWS.S3.prototype.createBucket = function createBucket(params, callback) {
 
 module.exports = AWS.S3;
 
-},{"../core":49,"stream":13,"url":16}],72:[function(require,module,exports){
+},{"../core":24,"url":15}],50:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+
+AWS.SNS = AWS.Service.defineService('sns', ['2010-03-31']);
+
+module.exports = AWS.SNS;
+
+},{"../core":24}],51:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+
+AWS.SQS = AWS.Service.defineService('sqs', ['2012-11-05'], {
+  setupRequestListeners: function setupRequestListeners(request) {
+    request.addListener('build', this.buildEndpoint);
+
+    if (request.service.config.computeChecksums) {
+      if (request.operation === 'sendMessage') {
+        request.addListener('extractData', this.verifySendMessageChecksum);
+      } else if (request.operation === 'sendMessageBatch') {
+        request.addListener('extractData', this.verifySendMessageBatchChecksum);
+      } else if (request.operation === 'receiveMessage') {
+        request.addListener('extractData', this.verifyReceiveMessageChecksum);
+      }
+    }
+  },
+
+  verifySendMessageChecksum: function verifySendMessageChecksum(response) {
+    if (!response.data) return;
+
+    var md5 = response.data.MD5OfMessageBody;
+    var body = this.params.MessageBody;
+    var calculatedMd5 = this.service.calculateChecksum(body);
+    if (calculatedMd5 !== md5) {
+      var msg = 'Got "' + response.data.MD5OfMessageBody +
+        '", expecting "' + calculatedMd5 + '".';
+      this.service.throwInvalidChecksumError(response,
+        [response.data.MessageId], msg);
+    }
+  },
+
+  verifySendMessageBatchChecksum: function verifySendMessageBatchChecksum(response) {
+    if (!response.data) return;
+
+    var service = this.service;
+    var entries = {};
+    var errors = [];
+    var messageIds = [];
+    AWS.util.arrayEach(response.data.Successful, function (entry) {
+      entries[entry.Id] = entry;
+    });
+    AWS.util.arrayEach(this.params.Entries, function (entry) {
+      if (entries[entry.Id]) {
+        var md5 = entries[entry.Id].MD5OfMessageBody;
+        var body = entry.MessageBody;
+        if (!service.isChecksumValid(md5, body)) {
+          errors.push(entry.Id);
+          messageIds.push(entries[entry.Id].MessageId);
+        }
+      }
+    });
+
+    if (errors.length > 0) {
+      service.throwInvalidChecksumError(response, messageIds,
+        'Invalid messages: ' + errors.join(', '));
+    }
+  },
+
+  verifyReceiveMessageChecksum: function verifyReceiveMessageChecksum(response) {
+    if (!response.data) return;
+
+    var service = this.service;
+    var messageIds = [];
+    AWS.util.arrayEach(response.data.Messages, function(message) {
+      var md5 = message.MD5OfBody;
+      var body = message.Body;
+      if (!service.isChecksumValid(md5, body)) {
+        messageIds.push(message.MessageId);
+      }
+    });
+
+    if (messageIds.length > 0) {
+      service.throwInvalidChecksumError(response, messageIds,
+        'Invalid messages: ' + messageIds.join(', '));
+    }
+  },
+
+  throwInvalidChecksumError: function throwInvalidChecksumError(response, ids, message) {
+    response.error = AWS.util.error(new Error(), {
+      retryable: true,
+      code: 'InvalidChecksum',
+      messageIds: ids,
+      message: response.request.operation +
+               ' returned an invalid MD5 response. ' + message
+    });
+  },
+
+  isChecksumValid: function isChecksumValid(checksum, data) {
+    return this.calculateChecksum(data) === checksum;
+  },
+
+  calculateChecksum: function calculateChecksum(data) {
+    return AWS.util.crypto.md5(data, 'hex');
+  },
+
+  buildEndpoint: function buildEndpoint(request) {
+    var url = request.httpRequest.params.QueueUrl;
+    if (url) {
+      request.httpRequest.endpoint = new AWS.Endpoint(url);
+
+      // signature version 4 requires the region name to be set,
+      // sqs queue urls contain the region name
+      /*jshint regexp:false*/
+      var matches = request.httpRequest.endpoint.host.match(/^sqs\.(.+?)\./);
+      if (matches) request.httpRequest.region = matches[1];
+    }
+  }
+});
+
+module.exports = AWS.SQS;
+
+},{"../core":24}],52:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -19259,7 +19237,7 @@ AWS.STS.prototype.assumeRoleWithWebIdentity = function assumeRoleWithWebIdentity
 
 module.exports = AWS.STS;
 
-},{"../core":49}],73:[function(require,module,exports){
+},{"../core":24}],53:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -19293,7 +19271,7 @@ AWS.Signers.CloudFront = inherit(AWS.Signers.S3, {
 
 module.exports = AWS.Signers.CloudFront;
 
-},{"../core":49,"./v3":77}],74:[function(require,module,exports){
+},{"../core":24,"./v3":57}],54:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -19341,7 +19319,7 @@ require('./v4');
 require('./s3');
 require('./cloudfront');
 
-},{"../core":49,"./cloudfront":73,"./s3":75,"./v2":76,"./v3":77,"./v3https":78,"./v4":79}],75:[function(require,module,exports){
+},{"../core":24,"./cloudfront":53,"./s3":55,"./v2":56,"./v3":57,"./v3https":58,"./v4":59}],55:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -19402,11 +19380,7 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
 
   addAuthorization: function addAuthorization(credentials, date) {
     if (!this.request.headers['presigned-expires']) {
-    this.request.headers['X-Amz-Date'] = AWS.util.date.rfc822(date);
-    }
-
-    if (!this.request.headers['Content-Type']) { // always have a content-type
-      this.request.headers['Content-Type'] = 'application/octet-stream';
+      this.request.headers['X-Amz-Date'] = AWS.util.date.rfc822(date);
     }
 
     if (credentials.sessionToken) {
@@ -19427,9 +19401,12 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
     parts.push(r.method);
     parts.push(r.headers['Content-MD5'] || '');
     parts.push(r.headers['Content-Type'] || '');
-    parts.push(''); // This is the "Date" header, but we use X-Amz-Date.
-                    // The S3 signing mechanism requires us to pass an empty
-                    // string for this Date header regardless.
+
+    // This is the "Date" header, but we use X-Amz-Date.
+    // The S3 signing mechanism requires us to pass an empty
+    // string for this Date header regardless.
+    parts.push(r.headers['presigned-expires'] || ''); 
+
     var headers = this.canonicalizedAmzHeaders();
     if (headers) parts.push(headers);
     parts.push(this.canonicalizedResource());
@@ -19525,7 +19502,7 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.S3;
 
-},{"../core":49}],76:[function(require,module,exports){
+},{"../core":24}],56:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -19587,7 +19564,7 @@ AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V2;
 
-},{"../core":49}],77:[function(require,module,exports){
+},{"../core":24}],57:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -19678,7 +19655,7 @@ AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V3;
 
-},{"../core":49}],78:[function(require,module,exports){
+},{"../core":24}],58:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -19717,7 +19694,7 @@ AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
 
 module.exports = AWS.Signers.V3Https;
 
-},{"../core":49,"./v3":77}],79:[function(require,module,exports){
+},{"../core":24,"./v3":57}],59:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -19855,7 +19832,7 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V4;
 
-},{"../core":49}],80:[function(require,module,exports){
+},{"../core":24}],60:[function(require,module,exports){
 var process=require("__browserify_process");/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -19897,8 +19874,15 @@ AWS.util = {
   },
 
   userAgent: function userAgent() {
-    return 'aws-sdk-nodejs/' + AWS.VERSION + ' ' + AWS.util.engine();
+    if (AWS.util.isBrowser()) {
+      return 'aws-sdk-js/' + AWS.VERSION;
+    } else {
+      return 'aws-sdk-nodejs/' + AWS.VERSION + ' ' + AWS.util.engine();
+    }
   },
+
+  isBrowser: function isBrowser() { return typeof window !== 'undefined'; },
+  isNode: function isNode() { return !AWS.util.isBrowser(); },
 
   uriEscape: function uriEscape(string) {
     /*jshint undef:false */
@@ -19966,7 +19950,7 @@ AWS.util = {
 
   buffer: {
     Buffer: Buffer,
-    
+
     /**
      * Concatenates a list of Buffer objects.
      */
@@ -19995,14 +19979,17 @@ AWS.util = {
       if (string === null || string === undefined) return 0;
       if (typeof string === 'string') string = new Buffer(string);
 
-      if (string.length !== undefined) {
+      if (typeof string.byteLength === 'number') {
+        return string.byteLength;
+      } else if (typeof string.length === 'number') {
         return string.length;
-      } else if (typeof(string.path) === 'string') {
+      } else if (typeof string.size === 'number') {
+        return string.size;
+      } else if (typeof string.path === 'string') {
         return require('fs').lstatSync(string.path).size;
       } else {
-        throw AWS.util.error(new Error(), {
-          message: 'Cannot determine length of ' + string, object: string
-        });
+        throw AWS.util.error(new Error('Cannot determine length of ' + string),
+          { object: string });
       }
     }
   },
@@ -20034,7 +20021,7 @@ AWS.util = {
           if (match[2]) {
             newObjects = [];
             AWS.util.arrayEach.call(this, objects, function (obj) {
-              if (AWS.util.isType(obj, Array)) {
+              if (Array.isArray(obj)) {
                 if (match[2] === '*') {
                   newObjects = newObjects.concat(obj);
                 } else {
@@ -20292,8 +20279,15 @@ AWS.util = {
 
   isType: function isType(obj, type) {
     // handle cross-"frame" objects
-    if (typeof type === 'function') type = type.name;
+    if (typeof type === 'function') type = AWS.util.typeName(type);
     return Object.prototype.toString.call(obj) === '[object ' + type + ']';
+  },
+
+  typeName: function typeName(type) {
+    if (type.hasOwnProperty('name')) return type.name;
+    var str = type.toString();
+    var match = str.match(/^\s*function (.+)\(/);
+    return match ? match[1] : str;
   },
 
   error: function error(err, options) {
@@ -20362,7 +20356,7 @@ AWS.util = {
 
 module.exports = AWS.util;
 
-},{"./core":49,"__browserify_process":46,"buffer":19,"crypto":22,"fs":10,"url":16}],81:[function(require,module,exports){
+},{"./core":24,"__browserify_process":21,"buffer":18,"crypto":69,"fs":10,"url":15}],61:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -20457,7 +20451,7 @@ AWS.XML.Builder = inherit({
 
 });
 
-},{"../core":49,"xmlbuilder":87}],82:[function(require,module,exports){
+},{"../core":24,"xmlbuilder":67}],62:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -20673,7 +20667,7 @@ AWS.XML.Parser = inherit({
 
 });
 
-},{"../core":49,"xml2js":83}],83:[function(require,module,exports){
+},{"../core":24,"xml2js":63}],63:[function(require,module,exports){
 // Generated by CoffeeScript 1.4.0
 (function() {
   var events, isEmpty, sax,
@@ -20925,7 +20919,7 @@ AWS.XML.Parser = inherit({
 
 }).call(this);
 
-},{"events":9,"sax":84}],84:[function(require,module,exports){
+},{"events":9,"sax":64}],64:[function(require,module,exports){
 // wrapper for non-node envs
 ;(function (sax) {
 
@@ -22243,7 +22237,7 @@ function write (chunk) {
 
 })(typeof exports === "undefined" ? sax = {} : exports)
 
-},{"stream":13}],85:[function(require,module,exports){
+},{"stream":12}],65:[function(require,module,exports){
 // Generated by CoffeeScript 1.3.3
 (function() {
   var XMLBuilder, XMLFragment;
@@ -22364,7 +22358,7 @@ function write (chunk) {
 
 }).call(this);
 
-},{"./XMLFragment":86}],86:[function(require,module,exports){
+},{"./XMLFragment":66}],66:[function(require,module,exports){
 // Generated by CoffeeScript 1.3.3
 (function() {
   var XMLFragment,
@@ -22788,7 +22782,7 @@ function write (chunk) {
 
 }).call(this);
 
-},{}],87:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 // Generated by CoffeeScript 1.3.3
 (function() {
   var XMLBuilder;
@@ -22805,5 +22799,534 @@ function write (chunk) {
 
 }).call(this);
 
-},{"./XMLBuilder":85}]},{},[47])
+},{"./XMLBuilder":65}],68:[function(require,module,exports){
+var Buffer = require('buffer').Buffer;
+var intSize = 4;
+var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
+var chrsz = 8;
+
+function toArray(buf, bigEndian) {
+  if ((buf.length % intSize) !== 0) {
+    var len = buf.length + (intSize - (buf.length % intSize));
+    buf = Buffer.concat([buf, zeroBuffer], len);
+  }
+
+  var arr = [];
+  var fn = bigEndian ? buf.readInt32BE : buf.readInt32LE;
+  for (var i = 0; i < buf.length; i += intSize) {
+    arr.push(fn.call(buf, i));
+  }
+  return arr;
+}
+
+function toBuffer(arr, size, bigEndian) {
+  var buf = new Buffer(size);
+  var fn = bigEndian ? buf.writeInt32BE : buf.writeInt32LE;
+  for (var i = 0; i < arr.length; i++) {
+    fn.call(buf, arr[i], i * 4, true);
+  }
+  return buf;
+}
+
+function hash(buf, fn, hashSize, bigEndian) {
+  if (!Buffer.isBuffer(buf)) buf = new Buffer(buf);
+  var arr = fn(toArray(buf, bigEndian), buf.length * chrsz);
+  return toBuffer(arr, hashSize, bigEndian);
+}
+
+module.exports = { hash: hash };
+
+},{"buffer":18}],69:[function(require,module,exports){
+var Buffer = require('buffer').Buffer
+var sha = require('./sha')
+var sha256 = require('./sha256')
+var rng = require('./rng')
+var md5 = require('./md5')
+
+var algorithms = {
+  sha1: sha,
+  sha256: sha256,
+  md5: md5
+}
+
+var blocksize = 64
+var zeroBuffer = new Buffer(blocksize); zeroBuffer.fill(0)
+function hmac(fn, key, data) {
+  if(!Buffer.isBuffer(key)) key = new Buffer(key)
+  if(!Buffer.isBuffer(data)) data = new Buffer(data)
+
+  if(key.length > blocksize) {
+    key = fn(key)
+  } else if(key.length < blocksize) {
+    key = Buffer.concat([key, zeroBuffer], blocksize)
+  }
+
+  var ipad = new Buffer(blocksize), opad = new Buffer(blocksize)
+  for(var i = 0; i < blocksize; i++) {
+    ipad[i] = key[i] ^ 0x36;
+    opad[i] = key[i] ^ 0x5C;
+  }
+
+  var hash = fn(Buffer.concat([ipad, data]))
+  return fn(Buffer.concat([opad, hash]))
+}
+
+function hash(alg, key) {
+  alg = alg || 'sha1'
+  var fn = algorithms[alg]
+  var bufs = []
+  var length = 0
+  if(!fn) error('algorithm:', alg, 'is not yet supported')
+  return {
+    update: function (data) {
+      bufs.push(data)
+      length += data.length
+      return this
+    },
+    digest: function (enc) {
+      var buf = Buffer.concat(bufs)
+      var r = key ? hmac(fn, key, buf) : fn(buf)
+      bufs = null
+      return enc ? r.toString(enc) : r
+    }
+  }
+}
+
+function error () {
+  var m = [].slice.call(arguments).join(' ')
+  throw new Error([
+    m,
+    'we accept pull requests',
+    'http://github.com/dominictarr/crypto-browserify'
+    ].join('\n'))
+}
+
+exports.createHash = function (alg) { return hash(alg) }
+exports.createHmac = function (alg, key) { return hash(alg, key) }
+exports.randomBytes = function(size, callback) {
+  if (callback && callback.call) {
+    try {
+      callback.call(this, undefined, new Buffer(rng(size)));
+    } catch (err) { callback(err); }
+  } else {
+    return new Buffer(rng(size));
+  }
+}
+
+function each(a, f) {
+  for(var i in a)
+    f(a[i], i)
+}
+
+// the least I can do is make error messages for the rest of the node.js/crypto api.
+each(['createCredentials'
+, 'createCipher'
+, 'createCipheriv'
+, 'createDecipher'
+, 'createDecipheriv'
+, 'createSign'
+, 'createVerify'
+, 'createDiffieHellman'
+, 'pbkdf2'], function (name) {
+  exports[name] = function () {
+    error('sorry,', name, 'is not implemented yet')
+  }
+})
+
+},{"./md5":70,"./rng":71,"./sha":72,"./sha256":73,"buffer":18}],70:[function(require,module,exports){
+/*
+ * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
+ * Digest Algorithm, as defined in RFC 1321.
+ * Version 2.1 Copyright (C) Paul Johnston 1999 - 2002.
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ * Distributed under the BSD License
+ * See http://pajhome.org.uk/crypt/md5 for more info.
+ */
+
+var helpers = require('./helpers');
+
+/*
+ * Perform a simple self-test to see if the VM is working
+ */
+function md5_vm_test()
+{
+  return hex_md5("abc") == "900150983cd24fb0d6963f7d28e17f72";
+}
+
+/*
+ * Calculate the MD5 of an array of little-endian words, and a bit length
+ */
+function core_md5(x, len)
+{
+  /* append padding */
+  x[len >> 5] |= 0x80 << ((len) % 32);
+  x[(((len + 64) >>> 9) << 4) + 14] = len;
+
+  var a =  1732584193;
+  var b = -271733879;
+  var c = -1732584194;
+  var d =  271733878;
+
+  for(var i = 0; i < x.length; i += 16)
+  {
+    var olda = a;
+    var oldb = b;
+    var oldc = c;
+    var oldd = d;
+
+    a = md5_ff(a, b, c, d, x[i+ 0], 7 , -680876936);
+    d = md5_ff(d, a, b, c, x[i+ 1], 12, -389564586);
+    c = md5_ff(c, d, a, b, x[i+ 2], 17,  606105819);
+    b = md5_ff(b, c, d, a, x[i+ 3], 22, -1044525330);
+    a = md5_ff(a, b, c, d, x[i+ 4], 7 , -176418897);
+    d = md5_ff(d, a, b, c, x[i+ 5], 12,  1200080426);
+    c = md5_ff(c, d, a, b, x[i+ 6], 17, -1473231341);
+    b = md5_ff(b, c, d, a, x[i+ 7], 22, -45705983);
+    a = md5_ff(a, b, c, d, x[i+ 8], 7 ,  1770035416);
+    d = md5_ff(d, a, b, c, x[i+ 9], 12, -1958414417);
+    c = md5_ff(c, d, a, b, x[i+10], 17, -42063);
+    b = md5_ff(b, c, d, a, x[i+11], 22, -1990404162);
+    a = md5_ff(a, b, c, d, x[i+12], 7 ,  1804603682);
+    d = md5_ff(d, a, b, c, x[i+13], 12, -40341101);
+    c = md5_ff(c, d, a, b, x[i+14], 17, -1502002290);
+    b = md5_ff(b, c, d, a, x[i+15], 22,  1236535329);
+
+    a = md5_gg(a, b, c, d, x[i+ 1], 5 , -165796510);
+    d = md5_gg(d, a, b, c, x[i+ 6], 9 , -1069501632);
+    c = md5_gg(c, d, a, b, x[i+11], 14,  643717713);
+    b = md5_gg(b, c, d, a, x[i+ 0], 20, -373897302);
+    a = md5_gg(a, b, c, d, x[i+ 5], 5 , -701558691);
+    d = md5_gg(d, a, b, c, x[i+10], 9 ,  38016083);
+    c = md5_gg(c, d, a, b, x[i+15], 14, -660478335);
+    b = md5_gg(b, c, d, a, x[i+ 4], 20, -405537848);
+    a = md5_gg(a, b, c, d, x[i+ 9], 5 ,  568446438);
+    d = md5_gg(d, a, b, c, x[i+14], 9 , -1019803690);
+    c = md5_gg(c, d, a, b, x[i+ 3], 14, -187363961);
+    b = md5_gg(b, c, d, a, x[i+ 8], 20,  1163531501);
+    a = md5_gg(a, b, c, d, x[i+13], 5 , -1444681467);
+    d = md5_gg(d, a, b, c, x[i+ 2], 9 , -51403784);
+    c = md5_gg(c, d, a, b, x[i+ 7], 14,  1735328473);
+    b = md5_gg(b, c, d, a, x[i+12], 20, -1926607734);
+
+    a = md5_hh(a, b, c, d, x[i+ 5], 4 , -378558);
+    d = md5_hh(d, a, b, c, x[i+ 8], 11, -2022574463);
+    c = md5_hh(c, d, a, b, x[i+11], 16,  1839030562);
+    b = md5_hh(b, c, d, a, x[i+14], 23, -35309556);
+    a = md5_hh(a, b, c, d, x[i+ 1], 4 , -1530992060);
+    d = md5_hh(d, a, b, c, x[i+ 4], 11,  1272893353);
+    c = md5_hh(c, d, a, b, x[i+ 7], 16, -155497632);
+    b = md5_hh(b, c, d, a, x[i+10], 23, -1094730640);
+    a = md5_hh(a, b, c, d, x[i+13], 4 ,  681279174);
+    d = md5_hh(d, a, b, c, x[i+ 0], 11, -358537222);
+    c = md5_hh(c, d, a, b, x[i+ 3], 16, -722521979);
+    b = md5_hh(b, c, d, a, x[i+ 6], 23,  76029189);
+    a = md5_hh(a, b, c, d, x[i+ 9], 4 , -640364487);
+    d = md5_hh(d, a, b, c, x[i+12], 11, -421815835);
+    c = md5_hh(c, d, a, b, x[i+15], 16,  530742520);
+    b = md5_hh(b, c, d, a, x[i+ 2], 23, -995338651);
+
+    a = md5_ii(a, b, c, d, x[i+ 0], 6 , -198630844);
+    d = md5_ii(d, a, b, c, x[i+ 7], 10,  1126891415);
+    c = md5_ii(c, d, a, b, x[i+14], 15, -1416354905);
+    b = md5_ii(b, c, d, a, x[i+ 5], 21, -57434055);
+    a = md5_ii(a, b, c, d, x[i+12], 6 ,  1700485571);
+    d = md5_ii(d, a, b, c, x[i+ 3], 10, -1894986606);
+    c = md5_ii(c, d, a, b, x[i+10], 15, -1051523);
+    b = md5_ii(b, c, d, a, x[i+ 1], 21, -2054922799);
+    a = md5_ii(a, b, c, d, x[i+ 8], 6 ,  1873313359);
+    d = md5_ii(d, a, b, c, x[i+15], 10, -30611744);
+    c = md5_ii(c, d, a, b, x[i+ 6], 15, -1560198380);
+    b = md5_ii(b, c, d, a, x[i+13], 21,  1309151649);
+    a = md5_ii(a, b, c, d, x[i+ 4], 6 , -145523070);
+    d = md5_ii(d, a, b, c, x[i+11], 10, -1120210379);
+    c = md5_ii(c, d, a, b, x[i+ 2], 15,  718787259);
+    b = md5_ii(b, c, d, a, x[i+ 9], 21, -343485551);
+
+    a = safe_add(a, olda);
+    b = safe_add(b, oldb);
+    c = safe_add(c, oldc);
+    d = safe_add(d, oldd);
+  }
+  return Array(a, b, c, d);
+
+}
+
+/*
+ * These functions implement the four basic operations the algorithm uses.
+ */
+function md5_cmn(q, a, b, x, s, t)
+{
+  return safe_add(bit_rol(safe_add(safe_add(a, q), safe_add(x, t)), s),b);
+}
+function md5_ff(a, b, c, d, x, s, t)
+{
+  return md5_cmn((b & c) | ((~b) & d), a, b, x, s, t);
+}
+function md5_gg(a, b, c, d, x, s, t)
+{
+  return md5_cmn((b & d) | (c & (~d)), a, b, x, s, t);
+}
+function md5_hh(a, b, c, d, x, s, t)
+{
+  return md5_cmn(b ^ c ^ d, a, b, x, s, t);
+}
+function md5_ii(a, b, c, d, x, s, t)
+{
+  return md5_cmn(c ^ (b | (~d)), a, b, x, s, t);
+}
+
+/*
+ * Add integers, wrapping at 2^32. This uses 16-bit operations internally
+ * to work around bugs in some JS interpreters.
+ */
+function safe_add(x, y)
+{
+  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
+  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+  return (msw << 16) | (lsw & 0xFFFF);
+}
+
+/*
+ * Bitwise rotate a 32-bit number to the left.
+ */
+function bit_rol(num, cnt)
+{
+  return (num << cnt) | (num >>> (32 - cnt));
+}
+
+module.exports = function md5(buf) {
+  return helpers.hash(buf, core_md5, 16);
+};
+
+},{"./helpers":68}],71:[function(require,module,exports){
+// Original code adapted from Robert Kieffer.
+// details at https://github.com/broofa/node-uuid
+(function() {
+  var _global = this;
+
+  var mathRNG, whatwgRNG;
+
+  // NOTE: Math.random() does not guarantee "cryptographic quality"
+  mathRNG = function(size) {
+    var bytes = new Array(size);
+    var r;
+
+    for (var i = 0, r; i < size; i++) {
+      if ((i & 0x03) == 0) r = Math.random() * 0x100000000;
+      bytes[i] = r >>> ((i & 0x03) << 3) & 0xff;
+    }
+
+    return bytes;
+  }
+
+  if (_global.crypto && crypto.getRandomValues) {
+    var _rnds = new Uint32Array(4);
+    whatwgRNG = function(size) {
+      var bytes = new Array(size);
+      crypto.getRandomValues(_rnds);
+
+      for (var c = 0 ; c < size; c++) {
+        bytes[c] = _rnds[c >> 2] >>> ((c & 0x03) * 8) & 0xff;
+      }
+      return bytes;
+    }
+  }
+
+  module.exports = whatwgRNG || mathRNG;
+
+}())
+
+},{}],72:[function(require,module,exports){
+/*
+ * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
+ * in FIPS PUB 180-1
+ * Version 2.1a Copyright Paul Johnston 2000 - 2002.
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ * Distributed under the BSD License
+ * See http://pajhome.org.uk/crypt/md5 for details.
+ */
+
+var helpers = require('./helpers');
+
+/*
+ * Perform a simple self-test to see if the VM is working
+ */
+function sha1_vm_test()
+{
+  return hex_sha1("abc") == "a9993e364706816aba3e25717850c26c9cd0d89d";
+}
+
+/*
+ * Calculate the SHA-1 of an array of big-endian words, and a bit length
+ */
+function core_sha1(x, len)
+{
+  /* append padding */
+  x[len >> 5] |= 0x80 << (24 - len % 32);
+  x[((len + 64 >> 9) << 4) + 15] = len;
+
+  var w = Array(80);
+  var a =  1732584193;
+  var b = -271733879;
+  var c = -1732584194;
+  var d =  271733878;
+  var e = -1009589776;
+
+  for(var i = 0; i < x.length; i += 16)
+  {
+    var olda = a;
+    var oldb = b;
+    var oldc = c;
+    var oldd = d;
+    var olde = e;
+
+    for(var j = 0; j < 80; j++)
+    {
+      if(j < 16) w[j] = x[i + j];
+      else w[j] = rol(w[j-3] ^ w[j-8] ^ w[j-14] ^ w[j-16], 1);
+      var t = safe_add(safe_add(rol(a, 5), sha1_ft(j, b, c, d)),
+                       safe_add(safe_add(e, w[j]), sha1_kt(j)));
+      e = d;
+      d = c;
+      c = rol(b, 30);
+      b = a;
+      a = t;
+    }
+
+    a = safe_add(a, olda);
+    b = safe_add(b, oldb);
+    c = safe_add(c, oldc);
+    d = safe_add(d, oldd);
+    e = safe_add(e, olde);
+  }
+  return Array(a, b, c, d, e);
+
+}
+
+/*
+ * Perform the appropriate triplet combination function for the current
+ * iteration
+ */
+function sha1_ft(t, b, c, d)
+{
+  if(t < 20) return (b & c) | ((~b) & d);
+  if(t < 40) return b ^ c ^ d;
+  if(t < 60) return (b & c) | (b & d) | (c & d);
+  return b ^ c ^ d;
+}
+
+/*
+ * Determine the appropriate additive constant for the current iteration
+ */
+function sha1_kt(t)
+{
+  return (t < 20) ?  1518500249 : (t < 40) ?  1859775393 :
+         (t < 60) ? -1894007588 : -899497514;
+}
+
+/*
+ * Add integers, wrapping at 2^32. This uses 16-bit operations internally
+ * to work around bugs in some JS interpreters.
+ */
+function safe_add(x, y)
+{
+  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
+  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+  return (msw << 16) | (lsw & 0xFFFF);
+}
+
+/*
+ * Bitwise rotate a 32-bit number to the left.
+ */
+function rol(num, cnt)
+{
+  return (num << cnt) | (num >>> (32 - cnt));
+}
+
+module.exports = function sha1(buf) {
+  return helpers.hash(buf, core_sha1, 20, true);
+};
+
+},{"./helpers":68}],73:[function(require,module,exports){
+
+/**
+ * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
+ * in FIPS 180-2
+ * Version 2.2-beta Copyright Angel Marin, Paul Johnston 2000 - 2009.
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ *
+ */
+
+var helpers = require('./helpers');
+
+var safe_add = function(x, y) {
+  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
+  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+  return (msw << 16) | (lsw & 0xFFFF);
+};
+
+var S = function(X, n) {
+  return (X >>> n) | (X << (32 - n));
+};
+
+var R = function(X, n) {
+  return (X >>> n);
+};
+
+var Ch = function(x, y, z) {
+  return ((x & y) ^ ((~x) & z));
+};
+
+var Maj = function(x, y, z) {
+  return ((x & y) ^ (x & z) ^ (y & z));
+};
+
+var Sigma0256 = function(x) {
+  return (S(x, 2) ^ S(x, 13) ^ S(x, 22));
+};
+
+var Sigma1256 = function(x) {
+  return (S(x, 6) ^ S(x, 11) ^ S(x, 25));
+};
+
+var Gamma0256 = function(x) {
+  return (S(x, 7) ^ S(x, 18) ^ R(x, 3));
+};
+
+var Gamma1256 = function(x) {
+  return (S(x, 17) ^ S(x, 19) ^ R(x, 10));
+};
+
+var core_sha256 = function(m, l) {
+  var K = new Array(0x428A2F98,0x71374491,0xB5C0FBCF,0xE9B5DBA5,0x3956C25B,0x59F111F1,0x923F82A4,0xAB1C5ED5,0xD807AA98,0x12835B01,0x243185BE,0x550C7DC3,0x72BE5D74,0x80DEB1FE,0x9BDC06A7,0xC19BF174,0xE49B69C1,0xEFBE4786,0xFC19DC6,0x240CA1CC,0x2DE92C6F,0x4A7484AA,0x5CB0A9DC,0x76F988DA,0x983E5152,0xA831C66D,0xB00327C8,0xBF597FC7,0xC6E00BF3,0xD5A79147,0x6CA6351,0x14292967,0x27B70A85,0x2E1B2138,0x4D2C6DFC,0x53380D13,0x650A7354,0x766A0ABB,0x81C2C92E,0x92722C85,0xA2BFE8A1,0xA81A664B,0xC24B8B70,0xC76C51A3,0xD192E819,0xD6990624,0xF40E3585,0x106AA070,0x19A4C116,0x1E376C08,0x2748774C,0x34B0BCB5,0x391C0CB3,0x4ED8AA4A,0x5B9CCA4F,0x682E6FF3,0x748F82EE,0x78A5636F,0x84C87814,0x8CC70208,0x90BEFFFA,0xA4506CEB,0xBEF9A3F7,0xC67178F2);
+  var HASH = new Array(0x6A09E667, 0xBB67AE85, 0x3C6EF372, 0xA54FF53A, 0x510E527F, 0x9B05688C, 0x1F83D9AB, 0x5BE0CD19);
+    var W = new Array(64);
+    var a, b, c, d, e, f, g, h, i, j;
+    var T1, T2;
+  /* append padding */
+  m[l >> 5] |= 0x80 << (24 - l % 32);
+  m[((l + 64 >> 9) << 4) + 15] = l;
+  for (var i = 0; i < m.length; i += 16) {
+    a = HASH[0]; b = HASH[1]; c = HASH[2]; d = HASH[3]; e = HASH[4]; f = HASH[5]; g = HASH[6]; h = HASH[7];
+    for (var j = 0; j < 64; j++) {
+      if (j < 16) {
+        W[j] = m[j + i];
+      } else {
+        W[j] = safe_add(safe_add(safe_add(Gamma1256(W[j - 2]), W[j - 7]), Gamma0256(W[j - 15])), W[j - 16]);
+      }
+      T1 = safe_add(safe_add(safe_add(safe_add(h, Sigma1256(e)), Ch(e, f, g)), K[j]), W[j]);
+      T2 = safe_add(Sigma0256(a), Maj(a, b, c));
+      h = g; g = f; f = e; e = safe_add(d, T1); d = c; c = b; b = a; a = safe_add(T1, T2);
+    }
+    HASH[0] = safe_add(a, HASH[0]); HASH[1] = safe_add(b, HASH[1]); HASH[2] = safe_add(c, HASH[2]); HASH[3] = safe_add(d, HASH[3]);
+    HASH[4] = safe_add(e, HASH[4]); HASH[5] = safe_add(f, HASH[5]); HASH[6] = safe_add(g, HASH[6]); HASH[7] = safe_add(h, HASH[7]);
+  }
+  return HASH;
+};
+
+module.exports = function sha256(buf) {
+  return helpers.hash(buf, core_sha256, 32, true);
+};
+
+},{"./helpers":68}]},{},[22])
 ;

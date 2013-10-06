@@ -291,7 +291,7 @@ function onend() {
   timers.setImmediate(shims.bind(this.end, this));
 }
 
-},{"_shims":2,"_stream_readable":5,"_stream_writable":7,"timers":15,"util":17}],4:[function(require,module,exports){
+},{"_shims":2,"_stream_readable":5,"_stream_writable":7,"timers":14,"util":16}],4:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -334,7 +334,7 @@ PassThrough.prototype._transform = function(chunk, encoding, cb) {
   cb(null, chunk);
 };
 
-},{"_stream_transform":6,"util":17}],5:[function(require,module,exports){
+},{"_stream_transform":6,"util":16}],5:[function(require,module,exports){
 var process=require("__browserify_process");// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1255,7 +1255,7 @@ function endReadable(stream) {
   }
 }
 
-},{"__browserify_process":40,"_shims":2,"buffer":19,"events":9,"stream":13,"string_decoder":14,"timers":15,"util":17}],6:[function(require,module,exports){
+},{"__browserify_process":39,"_shims":2,"buffer":18,"events":9,"stream":12,"string_decoder":13,"timers":14,"util":16}],6:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1461,7 +1461,7 @@ function done(stream, er) {
   return stream.push(null);
 }
 
-},{"_stream_duplex":3,"util":17}],7:[function(require,module,exports){
+},{"_stream_duplex":3,"util":16}],7:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1831,7 +1831,7 @@ function endWritable(stream, state, cb) {
   state.ended = true;
 }
 
-},{"buffer":19,"stream":13,"timers":15,"util":17}],8:[function(require,module,exports){
+},{"buffer":18,"stream":12,"timers":14,"util":16}],8:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2148,7 +2148,7 @@ assert.doesNotThrow = function(block, /*optional*/message) {
 };
 
 assert.ifError = function(err) { if (err) {throw err;}};
-},{"_shims":2,"util":17}],9:[function(require,module,exports){
+},{"_shims":2,"util":16}],9:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2429,27 +2429,13 @@ EventEmitter.listenerCount = function(emitter, type) {
     ret = emitter._events[type].length;
   return ret;
 };
-},{"util":17}],10:[function(require,module,exports){
+},{"util":16}],10:[function(require,module,exports){
 
 // not implemented
 // The reason for having an empty file and not throwing is to allow
 // untraditional implementation of this module.
 
 },{}],11:[function(require,module,exports){
-var http = require('http');
-
-var https = module.exports;
-
-for (var key in http) {
-    if (http.hasOwnProperty(key)) https[key] = http[key];
-};
-
-https.request = function (params, cb) {
-    if (!params) params = {};
-    params.scheme = 'https';
-    return http.request.call(this, params, cb);
-}
-},{"http":21}],12:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2660,7 +2646,7 @@ QueryString.parse = QueryString.decode = function(qs, sep, eq, options) {
 
   return obj;
 };
-},{"_shims":2,"buffer":19,"util":17}],13:[function(require,module,exports){
+},{"_shims":2,"buffer":18,"util":16}],12:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2789,7 +2775,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"_stream_duplex":3,"_stream_passthrough":4,"_stream_readable":5,"_stream_transform":6,"_stream_writable":7,"events":9,"util":17}],14:[function(require,module,exports){
+},{"_stream_duplex":3,"_stream_passthrough":4,"_stream_readable":5,"_stream_transform":6,"_stream_writable":7,"events":9,"util":16}],13:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2982,7 +2968,7 @@ function base64DetectIncompleteChar(buffer) {
   return incomplete;
 }
 
-},{"buffer":19}],15:[function(require,module,exports){
+},{"buffer":18}],14:[function(require,module,exports){
 try {
     // Old IE browsers that do not curry arguments
     if (!setTimeout.call) {
@@ -3101,7 +3087,7 @@ if (!exports.setImmediate) {
   };
 }
 
-},{}],16:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -3796,7 +3782,7 @@ Url.prototype.parseHost = function() {
   }
   if (host) this.hostname = host;
 };
-},{"_shims":2,"querystring":12,"util":17}],17:[function(require,module,exports){
+},{"_shims":2,"querystring":11,"util":16}],16:[function(require,module,exports){
 var Buffer=require("__browserify_Buffer").Buffer;// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -4337,7 +4323,7 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-},{"__browserify_Buffer":39,"_shims":2}],18:[function(require,module,exports){
+},{"__browserify_Buffer":38,"_shims":2}],17:[function(require,module,exports){
 exports.readIEEE754 = function(buffer, offset, isBE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -4423,7 +4409,7 @@ exports.writeIEEE754 = function(buffer, value, offset, isBE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128;
 };
 
-},{}],19:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 var assert;
 exports.Buffer = Buffer;
 exports.SlowBuffer = Buffer;
@@ -5549,7 +5535,7 @@ Buffer.prototype.writeDoubleBE = function(value, offset, noAssert) {
   writeDouble(this, value, offset, true, noAssert);
 };
 
-},{"./buffer_ieee754":18,"assert":8,"base64-js":20}],20:[function(require,module,exports){
+},{"./buffer_ieee754":17,"assert":8,"base64-js":19}],19:[function(require,module,exports){
 (function (exports) {
 	'use strict';
 
@@ -5635,7 +5621,7 @@ Buffer.prototype.writeDoubleBE = function(value, offset, noAssert) {
 	module.exports.fromByteArray = uint8ToBase64;
 }());
 
-},{}],21:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 var http = module.exports;
 var EventEmitter = require('events').EventEmitter;
 var Request = require('./lib/request');
@@ -5697,7 +5683,7 @@ var xhrHttp = (function () {
     }
 })();
 
-},{"./lib/request":22,"events":9}],22:[function(require,module,exports){
+},{"./lib/request":21,"events":9}],21:[function(require,module,exports){
 var Stream = require('stream');
 var Response = require('./response');
 var concatStream = require('concat-stream');
@@ -5831,7 +5817,7 @@ var indexOf = function (xs, x) {
     return -1;
 };
 
-},{"./response":23,"Base64":24,"concat-stream":25,"stream":13,"util":17}],23:[function(require,module,exports){
+},{"./response":22,"Base64":23,"concat-stream":24,"stream":12,"util":16}],22:[function(require,module,exports){
 var Stream = require('stream');
 var util = require('util');
 
@@ -5953,7 +5939,7 @@ var isArray = Array.isArray || function (xs) {
     return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{"stream":13,"util":17}],24:[function(require,module,exports){
+},{"stream":12,"util":16}],23:[function(require,module,exports){
 ;(function () {
 
   var
@@ -6010,7 +5996,7 @@ var isArray = Array.isArray || function (xs) {
 
 }());
 
-},{}],25:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 var stream = require('stream')
 var bops = require('bops')
 var util = require('util')
@@ -6061,7 +6047,7 @@ module.exports = function(cb) {
 
 module.exports.ConcatStream = ConcatStream
 
-},{"bops":26,"stream":13,"util":17}],26:[function(require,module,exports){
+},{"bops":25,"stream":12,"util":16}],25:[function(require,module,exports){
 var proto = {}
 module.exports = proto
 
@@ -6082,9 +6068,9 @@ function mix(from, into) {
   }
 }
 
-},{"./copy.js":29,"./create.js":30,"./from.js":31,"./is.js":32,"./join.js":33,"./read.js":35,"./subarray.js":36,"./to.js":37,"./write.js":38}],27:[function(require,module,exports){
-module.exports=require(20)
-},{}],28:[function(require,module,exports){
+},{"./copy.js":28,"./create.js":29,"./from.js":30,"./is.js":31,"./join.js":32,"./read.js":34,"./subarray.js":35,"./to.js":36,"./write.js":37}],26:[function(require,module,exports){
+module.exports=require(19)
+},{}],27:[function(require,module,exports){
 module.exports = to_utf8
 
 var out = []
@@ -6159,7 +6145,7 @@ function reduced(list) {
   return out
 }
 
-},{}],29:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 module.exports = copy
 
 var slice = [].slice
@@ -6213,12 +6199,12 @@ function slow_copy(from, to, j, i, jend) {
   }
 }
 
-},{}],30:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 module.exports = function(size) {
   return new Uint8Array(size)
 }
 
-},{}],31:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 module.exports = from
 
 var base64 = require('base64-js')
@@ -6278,13 +6264,13 @@ function from_base64(str) {
   return new Uint8Array(base64.toByteArray(str)) 
 }
 
-},{"base64-js":27}],32:[function(require,module,exports){
+},{"base64-js":26}],31:[function(require,module,exports){
 
 module.exports = function(buffer) {
   return buffer instanceof Uint8Array;
 }
 
-},{}],33:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 module.exports = join
 
 function join(targets, hint) {
@@ -6322,7 +6308,7 @@ function get_length(targets) {
   return size
 }
 
-},{}],34:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 var proto
   , map
 
@@ -6344,7 +6330,7 @@ function get(target) {
   return out
 }
 
-},{}],35:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 module.exports = {
     readUInt8:      read_uint8
   , readInt8:       read_int8
@@ -6433,14 +6419,14 @@ function read_double_be(target, at) {
   return dv.getFloat64(at + target.byteOffset, false)
 }
 
-},{"./mapped.js":34}],36:[function(require,module,exports){
+},{"./mapped.js":33}],35:[function(require,module,exports){
 module.exports = subarray
 
 function subarray(buf, from, to) {
   return buf.subarray(from || 0, to || buf.length)
 }
 
-},{}],37:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 module.exports = to
 
 var base64 = require('base64-js')
@@ -6478,7 +6464,7 @@ function to_base64(buf) {
 }
 
 
-},{"base64-js":27,"to-utf8":28}],38:[function(require,module,exports){
+},{"base64-js":26,"to-utf8":27}],37:[function(require,module,exports){
 module.exports = {
     writeUInt8:      write_uint8
   , writeInt8:       write_int8
@@ -6566,7 +6552,7 @@ function write_double_be(target, value, at) {
   return dv.setFloat64(at + target.byteOffset, value, false)
 }
 
-},{"./mapped.js":34}],39:[function(require,module,exports){
+},{"./mapped.js":33}],38:[function(require,module,exports){
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 exports.readIEEE754 = function(buffer, offset, isBE, mLen, nBytes) {
   var e, m,
@@ -8946,7 +8932,7 @@ function hasOwnProperty(obj, prop) {
 },{"_shims":5}]},{},[])
 ;;module.exports=require("buffer-browserify")
 
-},{}],40:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -9000,7 +8986,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],41:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9017,10 +9003,10 @@ process.chdir = function (dir) {
  */
 
 window.AWS = module.exports = require('./core');
-AWS.HttpClient.streamsApiVersion = 1; // force legacy streams
+require('./http/xhr');
 require('./services');
 
-},{"./core":43,"./services":61}],42:[function(require,module,exports){
+},{"./core":42,"./http/xhr":50,"./services":61}],41:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9338,7 +9324,7 @@ AWS.Config = AWS.util.inherit({
  */
 AWS.config = new AWS.Config();
 
-},{"./core":43,"./credentials":44,"./credentials/credential_provider_chain":45}],43:[function(require,module,exports){
+},{"./core":42,"./credentials":43,"./credentials/credential_provider_chain":44}],42:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9419,7 +9405,7 @@ AWS.events = new AWS.SequentialExecutor();
 
 if (typeof window !== 'undefined') window.AWS = AWS;
 
-},{"./config":42,"./credentials":44,"./credentials/credential_provider_chain":45,"./credentials/temporary_credentials":47,"./credentials/web_identity_credentials":48,"./event_listeners":49,"./http":50,"./param_validator":52,"./request":53,"./sequential_executor":54,"./service":55,"./signers/request_signer":128,"./util":134}],44:[function(require,module,exports){
+},{"./config":41,"./credentials":43,"./credentials/credential_provider_chain":44,"./credentials/temporary_credentials":46,"./credentials/web_identity_credentials":47,"./event_listeners":48,"./http":49,"./param_validator":52,"./request":53,"./sequential_executor":54,"./service":55,"./signers/request_signer":128,"./util":134}],43:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9583,7 +9569,7 @@ AWS.Credentials = AWS.util.inherit({
   }
 });
 
-},{"./core":43}],45:[function(require,module,exports){
+},{"./core":42}],44:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9714,7 +9700,7 @@ AWS.CredentialProviderChain = AWS.util.inherit(AWS.Credentials, {
  */
 AWS.CredentialProviderChain.defaultProviders = [];
 
-},{"../core":43,"../credentials":44}],46:[function(require,module,exports){
+},{"../core":42,"../credentials":43}],45:[function(require,module,exports){
 var process=require("__browserify_process");/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9816,7 +9802,7 @@ AWS.EnvironmentCredentials = AWS.util.inherit(AWS.Credentials, {
 
 });
 
-},{"../core":43,"../credentials":44,"__browserify_process":40}],47:[function(require,module,exports){
+},{"../core":42,"../credentials":43,"__browserify_process":39}],46:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9944,7 +9930,7 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
   }
 });
 
-},{"../core":43,"../credentials":44,"../services/sts":125}],48:[function(require,module,exports){
+},{"../core":42,"../credentials":43,"../services/sts":125}],47:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10049,7 +10035,7 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
   }
 });
 
-},{"../core":43,"../credentials":44,"../services/sts":125}],49:[function(require,module,exports){
+},{"../core":42,"../credentials":43,"../services/sts":125}],48:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10413,7 +10399,7 @@ AWS.EventListeners = {
   })
 };
 
-},{"./core":43,"./sequential_executor":54,"./service_interface/json":56,"./service_interface/query":57,"./service_interface/rest":58,"./service_interface/rest_json":59,"./service_interface/rest_xml":60,"buffer":19,"util":17}],50:[function(require,module,exports){
+},{"./core":42,"./sequential_executor":54,"./service_interface/json":56,"./service_interface/query":57,"./service_interface/rest":58,"./service_interface/rest_json":59,"./service_interface/rest_xml":60,"buffer":18,"util":16}],49:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10430,7 +10416,6 @@ AWS.EventListeners = {
  */
 
 var AWS = require('./core');
-var Stream = require('stream').Stream;
 var inherit = AWS.util.inherit;
 
 /**
@@ -10574,94 +10559,8 @@ AWS.HttpResponse = inherit({
   }
 });
 
-/**
- * @api private
- */
-AWS.NodeHttpClient = inherit({
-  handleRequest: function handleRequest(httpRequest, httpOptions, callback, errCallback) {
-    /*jshint maxcomplexity:10*/
-    var endpoint = httpRequest.endpoint;
-    var pathPrefix = '';
-    if (!httpOptions) httpOptions = {};
-    if (httpOptions.proxy) {
-      pathPrefix = endpoint.protocol + '//' + endpoint.hostname;
-      if (endpoint.port != 80 && endpoint.port != 443) {
-        pathPrefix += ':' + endpoint.port;
-      }
-      endpoint = new AWS.Endpoint(httpOptions.proxy);
-    }
 
-    var useSSL = endpoint.protocol === 'https:';
-    var http = useSSL ? require('https') : require('http');
-    var options = {
-      host: endpoint.hostname,
-      port: endpoint.port,
-      method: httpRequest.method,
-      headers: httpRequest.headers,
-      path: pathPrefix + httpRequest.path
-    };
-
-    if (useSSL && !httpOptions.agent) {
-      options.agent = this.sslAgent(http);
-    }
-
-    AWS.util.update(options, httpOptions);
-    delete options.proxy; // proxy isn't an HTTP option
-    delete options.timeout; // timeout isn't an HTTP option
-
-    var stream = http.request(options, callback);
-    httpRequest.stream = stream; // attach stream to httpRequest
-
-    // timeout support
-    if (stream.setTimeout) {
-      stream.setTimeout(httpOptions.timeout || 0);
-      stream.once('timeout', function() {
-        var msg = 'Connection timed out after ' + httpOptions.timeout + 'ms';
-        errCallback(AWS.util.error(new Error(msg), {code: 'TimeoutError'}));
-
-        // HACK - abort the connection without tripping our error handler
-        // since we already raised our TimeoutError. Otherwise the connection
-        // comes back with ECONNRESET, which is not a helpful error message
-        stream.removeListener('error', errCallback);
-        stream.on('error', function() { });
-        stream.abort();
-      });
-    }
-
-    stream.on('error', errCallback);
-    this.writeBody(stream, httpRequest);
-    return stream;
-  },
-
-  writeBody: function writeBody(stream, httpRequest) {
-    if (httpRequest.body instanceof Stream) {
-      httpRequest.body.pipe(stream);
-    } else if (httpRequest.body) {
-      stream.end(httpRequest.body);
-    } else {
-      stream.end();
-    }
-  },
-
-  sslAgent: function sslAgent(http) {
-    if (!AWS.NodeHttpClient.sslAgent) {
-      AWS.NodeHttpClient.sslAgent = new http.Agent({
-        rejectUnauthorized: true
-      });
-    }
-    return AWS.NodeHttpClient.sslAgent;
-  }
-});
-
-/**
- * @api private
- */
-AWS.HttpClient = AWS.NodeHttpClient;
-
-/**
- * @api private
- */
-AWS.HttpClient.streamsApiVersion = require('stream').Readable ? 2 : 1;
+AWS.HttpClient = inherit({});
 
 /**
  * @api private
@@ -10674,7 +10573,76 @@ AWS.HttpClient.getInstance = function getInstance() {
   return this.singleton;
 };
 
-},{"./core":43,"http":21,"https":11,"stream":13}],51:[function(require,module,exports){
+},{"./core":42}],50:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
+
+var AWS = require('../core');
+var EventEmitter = require('events').EventEmitter;
+require('../http');
+
+/**
+ * @api private
+ */
+AWS.XHRClient = AWS.util.inherit({
+  handleRequest: function handleRequest(httpRequest, httpOptions, callback, errCallback) {
+    var endpoint = httpRequest.endpoint;
+    var xhr = new XMLHttpRequest();
+    var emitter = new EventEmitter();
+
+    xhr.responseType = 'text';
+    xhr.addEventListener('loadstart', function() {
+      callback({statusCode: xhr.status, headers: xhr.getAllResponseHeaders()});
+    }, false);
+    xhr.addEventListener('load', function() {
+      emitter.emit('data', xhr.responseText);
+      emitter.emit('end');
+    }, false);
+    xhr.addEventListener('error', function () {
+      errCallback(new Error('Network Failure'));
+    }, false);
+
+    xhr.open(httpRequest.method, endpoint.href + httpRequest.path, true);
+    AWS.util.each(httpRequest.headers, xhr.setRequestHeader);
+    xhr.send(httpRequest.body);
+
+    return emitter;
+  },
+
+  writeBody: function writeBody(xhr, httpRequest) {
+    if (httpRequest.body instanceof Stream) {
+      httpRequest.body.pipe(xhr);
+    } else if (httpRequest.body) {
+      xhr.end(httpRequest.body);
+    } else {
+      xhr.end();
+    }
+  }
+});
+
+/**
+ * @api private
+ */
+AWS.HttpClient.prototype = AWS.XHRClient.prototype;
+
+/**
+ * @api private
+ */
+AWS.HttpClient.streamsApiVersion = 1;
+
+},{"../core":42,"../http":49,"events":9}],51:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10758,7 +10726,7 @@ AWS.JSON.Builder = inherit({
 
 });
 
-},{"../core":43}],52:[function(require,module,exports){
+},{"../core":42}],52:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10775,7 +10743,6 @@ AWS.JSON.Builder = inherit({
  */
 
 var AWS = require('./core');
-var Stream = require('stream').Stream;
 var Buffer = require('buffer').Buffer;
 
 /**
@@ -10866,7 +10833,7 @@ AWS.ParamValidator = AWS.util.inherit({
         return this.validateType(context, value, ['string']);
       case 'base64':
       case 'binary':
-        return this.validateType(context, value, ['string', Buffer, Stream]);
+        return this.validateType(context, value, ['string', Buffer]);
       case 'integer':
       case 'float':
         return this.validateType(context, value, ['number']);
@@ -10915,7 +10882,7 @@ AWS.ParamValidator = AWS.util.inherit({
   }
 });
 
-},{"./core":43,"buffer":19,"stream":13}],53:[function(require,module,exports){
+},{"./core":42,"buffer":18}],53:[function(require,module,exports){
 var process=require("__browserify_process");/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10933,7 +10900,6 @@ var process=require("__browserify_process");/**
 
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
-var streams = require('stream');
 
 /**
  * ## Asynchronous Requests
@@ -11330,6 +11296,7 @@ AWS.Request = inherit({
    *   or read from (by registering 'data' event listeners).
    */
   createReadStream: function createReadStream() {
+    var streams = require('stream');
     var req = this;
     var stream = null;
     var legacyStreams = false;
@@ -11679,7 +11646,7 @@ AWS.Response = inherit({
 
 });
 
-},{"./core":43,"__browserify_process":40,"stream":13}],54:[function(require,module,exports){
+},{"./core":42,"__browserify_process":39,"stream":12}],54:[function(require,module,exports){
 var process=require("__browserify_process");/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -11955,7 +11922,7 @@ AWS.SequentialExecutor = AWS.util.inherit({
  */
 AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.on;
 
-},{"./core":43,"__browserify_process":40,"domain":1,"events":9}],55:[function(require,module,exports){
+},{"./core":42,"__browserify_process":39,"domain":1,"events":9}],55:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -12262,7 +12229,7 @@ AWS.util.update(AWS.Service, {
   }
 });
 
-},{"./core":43}],56:[function(require,module,exports){
+},{"./core":42}],56:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -12330,7 +12297,7 @@ AWS.ServiceInterface.Json = {
 
 };
 
-},{"../core":43,"../json/builder":51}],57:[function(require,module,exports){
+},{"../core":42,"../json/builder":51}],57:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -12511,7 +12478,7 @@ AWS.QueryParamSerializer = inherit({
 
 });
 
-},{"../core":43,"../xml/parser":136}],58:[function(require,module,exports){
+},{"../core":42,"../xml/parser":136}],58:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -12655,7 +12622,7 @@ AWS.ServiceInterface.Rest = {
   }
 };
 
-},{"../core":43}],59:[function(require,module,exports){
+},{"../core":42}],59:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -12749,7 +12716,7 @@ AWS.ServiceInterface.RestJson = {
 
 };
 
-},{"../core":43,"./json":56,"./rest":58}],60:[function(require,module,exports){
+},{"../core":42,"./json":56,"./rest":58}],60:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -12861,7 +12828,7 @@ AWS.ServiceInterface.RestXml = {
   }
 };
 
-},{"../core":43,"../xml/builder":135,"./rest":58}],61:[function(require,module,exports){
+},{"../core":42,"../xml/builder":135,"./rest":58}],61:[function(require,module,exports){
 var AWS = require("./core"); module.exports = AWS;
 AWS.Service.defineServiceApi(require("./services/autoscaling"), "2011-01-01", require("./services/api/autoscaling-2011-01-01"));
 AWS.Service.defineServiceApi(require("./services/cloudformation"), "2010-05-15", require("./services/api/cloudformation-2010-05-15"));
@@ -12898,7 +12865,7 @@ AWS.Service.defineServiceApi(require("./services/sqs"), "2012-11-05", require(".
 AWS.Service.defineServiceApi(require("./services/storagegateway"), "2012-06-30", require("./services/api/storagegateway-2012-06-30"));
 AWS.Service.defineServiceApi(require("./services/sts"), "2011-06-15", require("./services/api/sts-2011-06-15"));
 AWS.Service.defineServiceApi(require("./services/support"), "2013-04-15", require("./services/api/support-2013-04-15"));
-},{"./core":43,"./services/api/autoscaling-2011-01-01":62,"./services/api/cloudformation-2010-05-15":63,"./services/api/cloudfront-2012-05-05":64,"./services/api/cloudfront-2013-05-12":65,"./services/api/cloudfront-2013-08-26":66,"./services/api/cloudsearch-2011-02-01":67,"./services/api/cloudwatch-2010-08-01":68,"./services/api/datapipeline-2012-10-29":69,"./services/api/directconnect-2012-10-25":70,"./services/api/dynamodb-2011-12-05":71,"./services/api/dynamodb-2012-08-10":72,"./services/api/ec2-2013-08-15":73,"./services/api/elasticache-2013-06-15":74,"./services/api/elasticbeanstalk-2010-12-01":75,"./services/api/elastictranscoder-2012-09-25":76,"./services/api/elb-2012-06-01":77,"./services/api/emr-2009-03-31":78,"./services/api/glacier-2012-06-01":79,"./services/api/iam-2010-05-08":80,"./services/api/importexport-2010-06-01":81,"./services/api/opsworks-2013-02-18":82,"./services/api/rds-2013-01-10":83,"./services/api/rds-2013-02-12":84,"./services/api/rds-2013-05-15":85,"./services/api/redshift-2012-12-01":86,"./services/api/route53-2012-12-12":87,"./services/api/s3-2006-03-01":88,"./services/api/ses-2010-12-01":89,"./services/api/simpledb-2009-04-15":90,"./services/api/simpleworkflow-2012-01-25":91,"./services/api/sns-2010-03-31":92,"./services/api/sqs-2012-11-05":93,"./services/api/storagegateway-2012-06-30":94,"./services/api/sts-2011-06-15":95,"./services/api/support-2013-04-15":96,"./services/autoscaling":97,"./services/cloudformation":98,"./services/cloudfront":99,"./services/cloudsearch":100,"./services/cloudwatch":101,"./services/datapipeline":102,"./services/directconnect":103,"./services/dynamodb":104,"./services/ec2":105,"./services/elasticache":106,"./services/elasticbeanstalk":107,"./services/elastictranscoder":108,"./services/elb":109,"./services/emr":110,"./services/glacier":111,"./services/iam":112,"./services/importexport":113,"./services/opsworks":114,"./services/rds":115,"./services/redshift":116,"./services/route53":117,"./services/s3":118,"./services/ses":119,"./services/simpledb":120,"./services/simpleworkflow":121,"./services/sns":122,"./services/sqs":123,"./services/storagegateway":124,"./services/sts":125,"./services/support":126}],62:[function(require,module,exports){
+},{"./core":42,"./services/api/autoscaling-2011-01-01":62,"./services/api/cloudformation-2010-05-15":63,"./services/api/cloudfront-2012-05-05":64,"./services/api/cloudfront-2013-05-12":65,"./services/api/cloudfront-2013-08-26":66,"./services/api/cloudsearch-2011-02-01":67,"./services/api/cloudwatch-2010-08-01":68,"./services/api/datapipeline-2012-10-29":69,"./services/api/directconnect-2012-10-25":70,"./services/api/dynamodb-2011-12-05":71,"./services/api/dynamodb-2012-08-10":72,"./services/api/ec2-2013-08-15":73,"./services/api/elasticache-2013-06-15":74,"./services/api/elasticbeanstalk-2010-12-01":75,"./services/api/elastictranscoder-2012-09-25":76,"./services/api/elb-2012-06-01":77,"./services/api/emr-2009-03-31":78,"./services/api/glacier-2012-06-01":79,"./services/api/iam-2010-05-08":80,"./services/api/importexport-2010-06-01":81,"./services/api/opsworks-2013-02-18":82,"./services/api/rds-2013-01-10":83,"./services/api/rds-2013-02-12":84,"./services/api/rds-2013-05-15":85,"./services/api/redshift-2012-12-01":86,"./services/api/route53-2012-12-12":87,"./services/api/s3-2006-03-01":88,"./services/api/ses-2010-12-01":89,"./services/api/simpledb-2009-04-15":90,"./services/api/simpleworkflow-2012-01-25":91,"./services/api/sns-2010-03-31":92,"./services/api/sqs-2012-11-05":93,"./services/api/storagegateway-2012-06-30":94,"./services/api/sts-2011-06-15":95,"./services/api/support-2013-04-15":96,"./services/autoscaling":97,"./services/cloudformation":98,"./services/cloudfront":99,"./services/cloudsearch":100,"./services/cloudwatch":101,"./services/datapipeline":102,"./services/directconnect":103,"./services/dynamodb":104,"./services/ec2":105,"./services/elasticache":106,"./services/elasticbeanstalk":107,"./services/elastictranscoder":108,"./services/elb":109,"./services/emr":110,"./services/glacier":111,"./services/iam":112,"./services/importexport":113,"./services/opsworks":114,"./services/rds":115,"./services/redshift":116,"./services/route53":117,"./services/s3":118,"./services/ses":119,"./services/simpledb":120,"./services/simpleworkflow":121,"./services/sns":122,"./services/sqs":123,"./services/storagegateway":124,"./services/sts":125,"./services/support":126}],62:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -85498,7 +85465,7 @@ AWS.AutoScaling = AWS.Service.defineService('autoscaling', ['2011-01-01']);
 
 module.exports = AWS.AutoScaling;
 
-},{"../core":43}],98:[function(require,module,exports){
+},{"../core":42}],98:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -85520,7 +85487,7 @@ AWS.CloudFormation = AWS.Service.defineService('cloudformation', ['2010-05-15'])
 
 module.exports = AWS.CloudFormation;
 
-},{"../core":43}],99:[function(require,module,exports){
+},{"../core":42}],99:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -85542,7 +85509,7 @@ AWS.CloudFront = AWS.Service.defineService('cloudfront', ['2012-05-05', '2013-05
 
 module.exports = AWS.CloudFront;
 
-},{"../core":43}],100:[function(require,module,exports){
+},{"../core":42}],100:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -85564,7 +85531,7 @@ AWS.CloudSearch = AWS.Service.defineService('cloudsearch', ['2011-02-01']);
 
 module.exports = AWS.CloudSearch;
 
-},{"../core":43}],101:[function(require,module,exports){
+},{"../core":42}],101:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -85586,7 +85553,7 @@ AWS.CloudWatch = AWS.Service.defineService('cloudwatch', ['2010-08-01']);
 
 module.exports = AWS.CloudWatch;
 
-},{"../core":43}],102:[function(require,module,exports){
+},{"../core":42}],102:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -85608,7 +85575,7 @@ AWS.DataPipeline = AWS.Service.defineService('datapipeline', ['2012-10-29']);
 
 module.exports = AWS.DataPipeline;
 
-},{"../core":43}],103:[function(require,module,exports){
+},{"../core":42}],103:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -85630,7 +85597,7 @@ AWS.DirectConnect = AWS.Service.defineService('directconnect', ['2012-10-25']);
 
 module.exports = AWS.DirectConnect;
 
-},{"../core":43}],104:[function(require,module,exports){
+},{"../core":42}],104:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -85701,7 +85668,7 @@ AWS.DynamoDB = AWS.Service.defineService('dynamodb', ['2012-08-10', '2011-12-05'
 
 module.exports = AWS.DynamoDB;
 
-},{"../core":43}],105:[function(require,module,exports){
+},{"../core":42}],105:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -85747,7 +85714,7 @@ AWS.EC2 = AWS.Service.defineService('ec2', ['2013-06-15*', '2013-07-15*', '2013-
 
 module.exports = AWS.EC2;
 
-},{"../core":43}],106:[function(require,module,exports){
+},{"../core":42}],106:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -85769,7 +85736,7 @@ AWS.ElastiCache = AWS.Service.defineService('elasticache', ['2012-11-15*', '2013
 
 module.exports = AWS.ElastiCache;
 
-},{"../core":43}],107:[function(require,module,exports){
+},{"../core":42}],107:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -85791,7 +85758,7 @@ AWS.ElasticBeanstalk = AWS.Service.defineService('elasticbeanstalk', ['2010-12-0
 
 module.exports = AWS.ElasticBeanstalk;
 
-},{"../core":43}],108:[function(require,module,exports){
+},{"../core":42}],108:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -85828,7 +85795,7 @@ AWS.ElasticTranscoder = AWS.Service.defineService('elastictranscoder', ['2012-09
 
 module.exports = AWS.ElasticTranscoder;
 
-},{"../core":43}],109:[function(require,module,exports){
+},{"../core":42}],109:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -85850,7 +85817,7 @@ AWS.ELB = AWS.Service.defineService('elb', ['2012-06-01']);
 
 module.exports = AWS.ELB;
 
-},{"../core":43}],110:[function(require,module,exports){
+},{"../core":42}],110:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -85872,7 +85839,7 @@ AWS.EMR = AWS.Service.defineService('emr', ['2009-03-31']);
 
 module.exports = AWS.EMR;
 
-},{"../core":43}],111:[function(require,module,exports){
+},{"../core":42}],111:[function(require,module,exports){
 var Buffer=require("__browserify_Buffer").Buffer;/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -85989,7 +85956,7 @@ AWS.util.update(AWS.Glacier.prototype, {
 
 module.exports = AWS.Glacier;
 
-},{"../core":43,"__browserify_Buffer":39}],112:[function(require,module,exports){
+},{"../core":42,"__browserify_Buffer":38}],112:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86011,7 +85978,7 @@ AWS.IAM = AWS.Service.defineService('iam', ['2010-05-08']);
 
 module.exports = AWS.IAM;
 
-},{"../core":43}],113:[function(require,module,exports){
+},{"../core":42}],113:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86033,7 +86000,7 @@ AWS.ImportExport = AWS.Service.defineService('importexport', ['2010-06-01']);
 
 module.exports = AWS.ImportExport;
 
-},{"../core":43}],114:[function(require,module,exports){
+},{"../core":42}],114:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86055,7 +86022,7 @@ AWS.OpsWorks = AWS.Service.defineService('opsworks', ['2013-02-18']);
 
 module.exports = AWS.OpsWorks;
 
-},{"../core":43}],115:[function(require,module,exports){
+},{"../core":42}],115:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86077,7 +86044,7 @@ AWS.RDS = AWS.Service.defineService('rds', ['2013-05-15', '2013-02-12', '2013-01
 
 module.exports = AWS.RDS;
 
-},{"../core":43}],116:[function(require,module,exports){
+},{"../core":42}],116:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86099,7 +86066,7 @@ AWS.Redshift = AWS.Service.defineService('redshift', ['2012-12-01']);
 
 module.exports = AWS.Redshift;
 
-},{"../core":43}],117:[function(require,module,exports){
+},{"../core":42}],117:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86148,7 +86115,7 @@ AWS.Route53 = AWS.Service.defineService('route53', ['2012-12-12'], {
 
 module.exports = AWS.Route53;
 
-},{"../core":43}],118:[function(require,module,exports){
+},{"../core":42}],118:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86165,7 +86132,6 @@ module.exports = AWS.Route53;
  */
 
 var AWS = require('../core');
-var Stream = require('stream').Stream;
 
 AWS.S3 = AWS.Service.defineService('s3', ['2006-03-01'], {
   /**
@@ -86249,7 +86215,7 @@ AWS.S3 = AWS.Service.defineService('s3', ['2006-03-01'], {
     if (!this.config.computeChecksums) return false;
 
     // TODO: compute checksums for Stream objects
-    if (req.httpRequest.body instanceof Stream) return false;
+    if (AWS.util.isType(req.httpRequest.body, 'Stream')) return false;
 
     var rules = req.service.api.operations[req.operation].input.members;
     if (rules.ContentMD5 && !req.params.ContentMD5) return true;
@@ -86513,7 +86479,7 @@ AWS.S3.prototype.createBucket = function createBucket(params, callback) {
 
 module.exports = AWS.S3;
 
-},{"../core":43,"stream":13,"url":16}],119:[function(require,module,exports){
+},{"../core":42,"url":15}],119:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86557,7 +86523,7 @@ AWS.SES = AWS.Service.defineService('ses', ['2010-12-01'], {
 
 module.exports = AWS.SES;
 
-},{"../core":43}],120:[function(require,module,exports){
+},{"../core":42}],120:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86591,7 +86557,7 @@ AWS.SimpleDB = AWS.Service.defineService('simpledb', ['2009-04-15'], {
 
 module.exports = AWS.SimpleDB;
 
-},{"../core":43}],121:[function(require,module,exports){
+},{"../core":42}],121:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86613,7 +86579,7 @@ AWS.SimpleWorkflow = AWS.Service.defineService('simpleworkflow', ['2012-01-25'])
 
 module.exports = AWS.SimpleWorkflow;
 
-},{"../core":43}],122:[function(require,module,exports){
+},{"../core":42}],122:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86635,7 +86601,7 @@ AWS.SNS = AWS.Service.defineService('sns', ['2010-03-31']);
 
 module.exports = AWS.SNS;
 
-},{"../core":43}],123:[function(require,module,exports){
+},{"../core":42}],123:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86762,7 +86728,7 @@ AWS.SQS = AWS.Service.defineService('sqs', ['2012-11-05'], {
 
 module.exports = AWS.SQS;
 
-},{"../core":43}],124:[function(require,module,exports){
+},{"../core":42}],124:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86784,7 +86750,7 @@ AWS.StorageGateway = AWS.Service.defineService('storagegateway', ['2012-06-30'])
 
 module.exports = AWS.StorageGateway;
 
-},{"../core":43}],125:[function(require,module,exports){
+},{"../core":42}],125:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86864,7 +86830,7 @@ AWS.STS.prototype.assumeRoleWithWebIdentity = function assumeRoleWithWebIdentity
 
 module.exports = AWS.STS;
 
-},{"../core":43}],126:[function(require,module,exports){
+},{"../core":42}],126:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86886,7 +86852,7 @@ AWS.Support = AWS.Service.defineService('support', ['2013-04-15']);
 
 module.exports = AWS.Support;
 
-},{"../core":43}],127:[function(require,module,exports){
+},{"../core":42}],127:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86920,7 +86886,7 @@ AWS.Signers.CloudFront = inherit(AWS.Signers.S3, {
 
 module.exports = AWS.Signers.CloudFront;
 
-},{"../core":43,"./v3":131}],128:[function(require,module,exports){
+},{"../core":42,"./v3":131}],128:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86968,7 +86934,7 @@ require('./v4');
 require('./s3');
 require('./cloudfront');
 
-},{"../core":43,"./cloudfront":127,"./s3":129,"./v2":130,"./v3":131,"./v3https":132,"./v4":133}],129:[function(require,module,exports){
+},{"../core":42,"./cloudfront":127,"./s3":129,"./v2":130,"./v3":131,"./v3https":132,"./v4":133}],129:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87148,7 +87114,7 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.S3;
 
-},{"../core":43}],130:[function(require,module,exports){
+},{"../core":42}],130:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87210,7 +87176,7 @@ AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V2;
 
-},{"../core":43}],131:[function(require,module,exports){
+},{"../core":42}],131:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87301,7 +87267,7 @@ AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V3;
 
-},{"../core":43}],132:[function(require,module,exports){
+},{"../core":42}],132:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87340,7 +87306,7 @@ AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
 
 module.exports = AWS.Signers.V3Https;
 
-},{"../core":43,"./v3":131}],133:[function(require,module,exports){
+},{"../core":42,"./v3":131}],133:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87478,7 +87444,7 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V4;
 
-},{"../core":43}],134:[function(require,module,exports){
+},{"../core":42}],134:[function(require,module,exports){
 var process=require("__browserify_process");/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87625,7 +87591,9 @@ AWS.util = {
       if (string === null || string === undefined) return 0;
       if (typeof string === 'string') string = new Buffer(string);
 
-      if (string.length !== undefined) {
+      if (string.byteLength !== undefined) {
+        return string.byteLength;
+      } else if (string.length !== undefined) {
         return string.length;
       } else if (typeof(string.path) === 'string') {
         return require('fs').lstatSync(string.path).size;
@@ -87999,7 +87967,7 @@ AWS.util = {
 
 module.exports = AWS.util;
 
-},{"./core":43,"__browserify_process":40,"buffer":19,"crypto":182,"fs":10,"url":16}],135:[function(require,module,exports){
+},{"./core":42,"__browserify_process":39,"buffer":18,"crypto":182,"fs":10,"url":15}],135:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -88094,7 +88062,7 @@ AWS.XML.Builder = inherit({
 
 });
 
-},{"../core":43,"xmlbuilder":142}],136:[function(require,module,exports){
+},{"../core":42,"xmlbuilder":142}],136:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -88310,7 +88278,7 @@ AWS.XML.Parser = inherit({
 
 });
 
-},{"../core":43,"xml2js":138}],137:[function(require,module,exports){
+},{"../core":42,"xml2js":138}],137:[function(require,module,exports){
 ;(function(exports) {
 
 // export the class if we are in a Node-like system.
@@ -90801,7 +90769,7 @@ function write (chunk) {
 
 })(typeof exports === "undefined" ? sax = {} : exports)
 
-},{"stream":13}],140:[function(require,module,exports){
+},{"stream":12}],140:[function(require,module,exports){
 // Generated by CoffeeScript 1.3.3
 (function() {
   var XMLBuilder, XMLFragment;
@@ -91670,7 +91638,7 @@ describe('AWS.config', function() {
 });
 
 
-},{"./helpers":149,"__browserify_process":40}],144:[function(require,module,exports){
+},{"./helpers":149,"__browserify_process":39}],144:[function(require,module,exports){
 var process=require("__browserify_process");var AWS;
 
 AWS = require('../lib/core');
@@ -91775,7 +91743,7 @@ describe('AWS.CredentialProviderChain', function() {
 });
 
 
-},{"../lib/core":43,"../lib/credentials/environment_credentials":46,"__browserify_process":40}],145:[function(require,module,exports){
+},{"../lib/core":42,"../lib/credentials/environment_credentials":45,"__browserify_process":39}],145:[function(require,module,exports){
 var process=require("__browserify_process");var AWS, helpers, validateCredentials;
 
 helpers = require('./helpers');
@@ -92182,7 +92150,7 @@ describe('AWS.WebIdentityCredentials', function() {
 });
 
 
-},{"../lib/credentials/environment_credentials":46,"./helpers":149,"__browserify_process":40}],146:[function(require,module,exports){
+},{"../lib/credentials/environment_credentials":45,"./helpers":149,"__browserify_process":39}],146:[function(require,module,exports){
 var AWS;
 
 AWS = require('../lib/core');
@@ -92284,7 +92252,7 @@ describe('AWS.Endpoint', function() {
 });
 
 
-},{"../lib/core":43}],147:[function(require,module,exports){
+},{"../lib/core":42}],147:[function(require,module,exports){
 var process=require("__browserify_process"),__filename="/test/event_listeners.spec.coffee";var AWS, Buffer, MockService, helpers;
 
 helpers = require('./helpers');
@@ -92829,7 +92797,7 @@ describe('AWS.EventListeners', function() {
 });
 
 
-},{"./helpers":149,"__browserify_process":40,"buffer":19,"domain":1,"fs":10}],148:[function(require,module,exports){
+},{"./helpers":149,"__browserify_process":39,"buffer":18,"domain":1,"fs":10}],148:[function(require,module,exports){
 var process=require("__browserify_process");var AWS, Buffer, EventEmitter, MockService, flattenXML, matchXML, mockHttpResponse, mockHttpSuccessfulResponse, mockIntermittentFailureResponse, semver;
 
 AWS = require('../lib/aws');
@@ -92974,7 +92942,7 @@ module.exports = {
 };
 
 
-},{"../lib/aws":41,"__browserify_process":40,"buffer":19,"events":9,"semver":137,"util":17}],149:[function(require,module,exports){
+},{"../lib/aws":40,"__browserify_process":39,"buffer":18,"events":9,"semver":137,"util":16}],149:[function(require,module,exports){
 var process=require("__browserify_process");// Generated by CoffeeScript 1.6.3
 (function() {
   var AWS, Buffer, EventEmitter, MockService, flattenXML, matchXML, mockHttpResponse, mockHttpSuccessfulResponse, mockIntermittentFailureResponse, semver;
@@ -93122,7 +93090,7 @@ var process=require("__browserify_process");// Generated by CoffeeScript 1.6.3
 
 }).call(this);
 
-},{"../lib/aws":41,"__browserify_process":40,"buffer":19,"events":9,"semver":137,"util":17}],150:[function(require,module,exports){
+},{"../lib/aws":40,"__browserify_process":39,"buffer":18,"events":9,"semver":137,"util":16}],150:[function(require,module,exports){
 var AWS;
 
 AWS = require('../lib/core');
@@ -93177,7 +93145,7 @@ describe('AWS.HttpRequest', function() {
 });
 
 
-},{"../lib/core":43}],151:[function(require,module,exports){
+},{"../lib/core":42}],151:[function(require,module,exports){
 var AWS, helpers;
 
 helpers = require('../helpers');
@@ -93381,7 +93349,7 @@ if (AWS.util.isNode()) {
 }
 
 
-},{"./helpers":149,"http":21,"url":16}],153:[function(require,module,exports){
+},{"./helpers":149,"http":20,"url":15}],153:[function(require,module,exports){
 var AWS, helpers;
 
 helpers = require('./helpers');
@@ -94223,7 +94191,7 @@ describe('AWS.ParamValidator', function() {
 });
 
 
-},{"./helpers":149,"buffer":19,"stream":13}],155:[function(require,module,exports){
+},{"./helpers":149,"buffer":18,"stream":12}],155:[function(require,module,exports){
 var process=require("__browserify_process");var AWS, Buffer, EventEmitter, MockService, helpers;
 
 helpers = require('./helpers');
@@ -94608,7 +94576,7 @@ describe('AWS.Request', function() {
 });
 
 
-},{"./helpers":149,"__browserify_process":40,"buffer":19,"events":9}],156:[function(require,module,exports){
+},{"./helpers":149,"__browserify_process":39,"buffer":18,"events":9}],156:[function(require,module,exports){
 var AWS, EventEmitter, helpers;
 
 helpers = require('./helpers');
@@ -95409,7 +95377,7 @@ describe('AWS.ServiceInterface.Json', function() {
 });
 
 
-},{"../../lib/core":43,"../../lib/service_interface/json":56,"buffer":19}],160:[function(require,module,exports){
+},{"../../lib/core":42,"../../lib/service_interface/json":56,"buffer":18}],160:[function(require,module,exports){
 var AWS, Buffer;
 
 AWS = require('../../lib/core');
@@ -95599,7 +95567,7 @@ describe('AWS.ServiceInterface.Query', function() {
 });
 
 
-},{"../../lib/core":43,"../../lib/service_interface/query":57,"buffer":19}],161:[function(require,module,exports){
+},{"../../lib/core":42,"../../lib/service_interface/query":57,"buffer":18}],161:[function(require,module,exports){
 var AWS;
 
 AWS = require('../../lib/core');
@@ -95983,7 +95951,7 @@ describe('AWS.QueryParamSerializer', function() {
 });
 
 
-},{"../../lib/core":43,"../../lib/service_interface/query":57}],162:[function(require,module,exports){
+},{"../../lib/core":42,"../../lib/service_interface/query":57}],162:[function(require,module,exports){
 var AWS;
 
 AWS = require('../../lib/core');
@@ -96433,7 +96401,7 @@ describe('AWS.ServiceInterface.Rest', function() {
 });
 
 
-},{"../../lib/core":43,"../../lib/service_interface/rest":58}],163:[function(require,module,exports){
+},{"../../lib/core":42,"../../lib/service_interface/rest":58}],163:[function(require,module,exports){
 var AWS, Buffer, helpers;
 
 helpers = require('../helpers');
@@ -96846,7 +96814,7 @@ describe('AWS.ServiceInterface.RestJson', function() {
 });
 
 
-},{"../../lib/service_interface/rest_json":59,"../helpers":149,"buffer":19}],164:[function(require,module,exports){
+},{"../../lib/service_interface/rest_json":59,"../helpers":149,"buffer":18}],164:[function(require,module,exports){
 var AWS, Buffer, helpers;
 
 helpers = require('../helpers');
@@ -97187,7 +97155,7 @@ describe('AWS.ServiceInterface.RestXml', function() {
 });
 
 
-},{"../../lib/service_interface/rest_xml":60,"../helpers":149,"buffer":19}],165:[function(require,module,exports){
+},{"../../lib/service_interface/rest_xml":60,"../helpers":149,"buffer":18}],165:[function(require,module,exports){
 var AWS, helpers;
 
 helpers = require('../helpers');
@@ -97282,7 +97250,7 @@ describe('AWS.DynamoDB', function() {
 });
 
 
-},{"../../lib/core":43,"../../lib/services/dynamodb":104}],167:[function(require,module,exports){
+},{"../../lib/core":42,"../../lib/services/dynamodb":104}],167:[function(require,module,exports){
 var AWS, helpers;
 
 AWS = require('../../lib/core');
@@ -97344,7 +97312,7 @@ describe('AWS.EC2', function() {
 });
 
 
-},{"../../lib/core":43,"../../lib/services/ec2":105,"../helpers":149}],168:[function(require,module,exports){
+},{"../../lib/core":42,"../../lib/services/ec2":105,"../helpers":149}],168:[function(require,module,exports){
 var AWS, helpers;
 
 helpers = require('../helpers');
@@ -97487,7 +97455,7 @@ if (AWS.util.isNode()) {
 }
 
 
-},{"../../lib/services/glacier":111,"../helpers":149,"buffer":19}],170:[function(require,module,exports){
+},{"../../lib/services/glacier":111,"../helpers":149,"buffer":18}],170:[function(require,module,exports){
 var AWS, helpers;
 
 helpers = require('../helpers');
@@ -98194,7 +98162,7 @@ describe('AWS.S3', function() {
 });
 
 
-},{"../../lib/services/s3":118,"../helpers":149,"buffer":19,"stream":13}],172:[function(require,module,exports){
+},{"../../lib/services/s3":118,"../helpers":149,"buffer":18,"stream":12}],172:[function(require,module,exports){
 var AWS, helpers;
 
 helpers = require('../helpers');
@@ -98645,7 +98613,7 @@ describe('AWS.Signers.S3', function() {
 });
 
 
-},{"../../lib/core":43,"../../lib/signers/s3":129}],176:[function(require,module,exports){
+},{"../../lib/core":42,"../../lib/signers/s3":129}],176:[function(require,module,exports){
 var AWS;
 
 AWS = require('../../lib/core');
@@ -98724,7 +98692,7 @@ describe('AWS.Signers.V2', function() {
 });
 
 
-},{"../../lib/core":43,"../../lib/service_interface/query":57,"../../lib/signers/v2":130}],177:[function(require,module,exports){
+},{"../../lib/core":42,"../../lib/service_interface/query":57,"../../lib/signers/v2":130}],177:[function(require,module,exports){
 var AWS, buildRequest, buildSigner, helpers;
 
 AWS = require('../../lib/core');
@@ -98860,7 +98828,7 @@ describe('AWS.Signers.V4', function() {
 });
 
 
-},{"../../lib/core":43,"../../lib/services/dynamodb":104,"../helpers":149}],178:[function(require,module,exports){
+},{"../../lib/core":42,"../../lib/services/dynamodb":104,"../helpers":149}],178:[function(require,module,exports){
 var __filename="/test/util.spec.coffee";var AWS, Buffer;
 
 AWS = require('../lib/core');
@@ -99683,7 +99651,7 @@ describe('AWS.util.jamespath', function() {
 });
 
 
-},{"../lib/core":43,"buffer":19,"fs":10}],179:[function(require,module,exports){
+},{"../lib/core":42,"buffer":18,"fs":10}],179:[function(require,module,exports){
 var AWS, helpers, matchXML;
 
 helpers = require('../helpers');
@@ -100986,7 +100954,7 @@ function hash(buf, fn, hashSize, bigEndian) {
 
 module.exports = { hash: hash };
 
-},{"buffer":19}],182:[function(require,module,exports){
+},{"buffer":18}],182:[function(require,module,exports){
 var Buffer = require('buffer').Buffer
 var sha = require('./sha')
 var sha256 = require('./sha256')
@@ -101083,7 +101051,7 @@ each(['createCredentials'
   }
 })
 
-},{"./md5":183,"./rng":184,"./sha":185,"./sha256":186,"buffer":19}],183:[function(require,module,exports){
+},{"./md5":183,"./rng":184,"./sha":185,"./sha256":186,"buffer":18}],183:[function(require,module,exports){
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
  * Digest Algorithm, as defined in RFC 1321.
@@ -101478,5 +101446,5 @@ module.exports = function sha256(buf) {
   return helpers.hash(buf, core_sha256, 32, true);
 };
 
-},{"./helpers":181}]},{},[41,143,144,145,146,147,148,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180])
+},{"./helpers":181}]},{},[40,143,144,145,146,147,148,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180])
 ;
