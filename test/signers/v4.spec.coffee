@@ -31,7 +31,7 @@ buildSigner = (request) ->
 describe 'AWS.Signers.V4', ->
   date = new Date(1935346573456)
   datetime = AWS.util.date.iso8601(date).replace(/[:\-]|\.\d{3}/g, '')
-  creds = {accessKeyId: 'akid', secretAccessKey: 'secret', sessionToken: 'session'}
+  creds = null
   signature = '98f67f143b30a6de9c4a9f03fb33b0b0f78d664ba5d7195e4dc420bdb3cd94f2'
   authorization = 'AWS4-HMAC-SHA256 Credential=akid/20310430/region/dynamodb/aws4_request, ' +
     'SignedHeaders=content-length;content-type;date;host;user-agent;x-amz-date;x-amz-security-token;x-amz-target, ' +
@@ -39,6 +39,7 @@ describe 'AWS.Signers.V4', ->
   signer = null
 
   beforeEach ->
+    creds = accessKeyId: 'akid', secretAccessKey: 'secret', sessionToken: 'session'
     signer = buildSigner()
     signer.addHeaders(creds, datetime)
 
@@ -97,6 +98,11 @@ describe 'AWS.Signers.V4', ->
 
       it 'busts cache if service changes', ->
         signer.serviceName = 'newService'
+        signer.signature(creds, datetime)
+        expect(calls.length).toEqual(callCount + 5)
+
+      it 'busts cache if access key changes', ->
+        creds.accessKeyId = 'NEWAKID'
         signer.signature(creds, datetime)
         expect(calls.length).toEqual(callCount + 5)
 
