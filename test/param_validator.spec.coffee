@@ -148,6 +148,13 @@ describe 'AWS.ParamValidator', ->
     it 'rejects unknown members', ->
       expectError hash1: oops: 'abc'
 
+    it 'does not check inherited properties on parameters', ->
+      cls = -> this
+      cls.prototype.otherKey = 'value'
+      obj = new cls
+      obj.hash1 = {}
+      expectValid obj
+
   describe 'list', ->
     beforeEach ->
       members = {}
