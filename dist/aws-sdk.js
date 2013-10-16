@@ -8684,6 +8684,19 @@ require('./credentials/credential_provider_chain');
  * @!attribute s3ForcePathStyle
  *   @return [Boolean] whether to force path style URLs for S3 objects
  *
+ * @!attribute httpOptions
+ *   @return [map] A set of options to pass to the low-level HTTP request.
+ *     Currently supported options are:
+ *
+ *     * **proxy** [String] &mdash; the URL to proxy requests through
+ *     * **agent** [http.Agent, https.Agent] &mdash; the Agent object to perform
+ *       HTTP requests with. Used for connection pooling. Defaults to the global
+ *       agent (`http.globalAgent`) for non-SSL connections. Note that for
+ *       SSL connections, a special Agent object is used in order to enable
+ *       peer certificate verification.
+ *     * **timeout** [Integer] &mdash; The number of milliseconds to wait before
+ *       giving up on a connection attempt. Defaults to no timeout.
+ *
  * @!attribute logger
  *   @return [#write,#log] an object that responds to .write() (like a stream)
  *     or .log() (like the console object) in order to log information about
@@ -8964,7 +8977,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '1.7.1',
+  VERSION: '1.8.1',
 
   /**
    * @api private
@@ -9098,6 +9111,9 @@ AWS.Credentials = AWS.util.inherit({
    *     });
    */
   constructor: function Credentials() {
+    // hide secretAccessKey from being displayed with util.inspect
+    AWS.util.hideProperties(this, ['secretAccessKey']);
+
     this.expired = false;
     this.expireTime = null;
     if (arguments.length == 1 && typeof arguments[0] === 'object') {
@@ -9152,9 +9168,9 @@ AWS.Credentials = AWS.util.inherit({
     if (this.needsRefresh()) {
       this.refresh(function(err) {
         if (!err) self.expired = false; // reset expired flag
-        callback(err);
+        if (callback) callback(err);
       });
-    } else {
+    } else if (callback) {
       callback();
     }
   },
@@ -9383,6 +9399,7 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
    * @see AWS.STS.getSessionToken
    */
   constructor: function TemporaryCredentials(params) {
+    AWS.Credentials.call(this);
     this.loadMasterCredentials();
     this.serviceError = null;
     this.service = new AWS.STS();
@@ -9508,6 +9525,7 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
    * @see AWS.STS.assumeRoleWithWebIdentity
    */
   constructor: function WebIdentityCredentials(params) {
+    AWS.Credentials.call(this);
     this.serviceError = null;
     this.expired = true;
     this.service = new AWS.STS();
@@ -9657,7 +9675,6 @@ AWS.EventListeners = {
     });
 
     add('SET_CONTENT_LENGTH', 'afterBuild', function SET_CONTENT_LENGTH(req) {
-      if (AWS.util.isBrowser()) return;
       if (req.httpRequest.headers['Content-Length'] === undefined) {
         var length = AWS.util.string.byteLength(req.httpRequest.body);
         req.httpRequest.headers['Content-Length'] = length;
@@ -9969,6 +9986,8 @@ AWS.Endpoint = inherit({
    *   @param endpoint [String] the URL to construct an endpoint from
    */
   constructor: function Endpoint(endpoint, config) {
+    AWS.util.hideProperties(this, ['slashes', 'auth', 'hash', 'search', 'query']);
+
     if (typeof endpoint === 'undefined' || endpoint === null) {
       throw new Error('Invalid endpoint: ' + endpoint);
     } else if (typeof endpoint !== 'string') {
@@ -10284,6 +10303,7 @@ AWS.JSON.Builder = inherit({
  */
 
 var AWS = require('./core');
+var Stream = require('stream').Stream;
 var Buffer = require('buffer').Buffer;
 
 /**
@@ -10425,7 +10445,7 @@ AWS.ParamValidator = AWS.util.inherit({
   }
 });
 
-},{"./core":30,"buffer":18}],40:[function(require,module,exports){
+},{"./core":30,"buffer":18,"stream":12}],40:[function(require,module,exports){
 var process=require("__browserify_process");/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -11500,6 +11520,7 @@ AWS.Service = inherit({
   },
 
   initialize: function initialize(config) {
+    AWS.util.hideProperties(this, ['client']);
     this.client = this; // backward compatibility with client property
     this.config = new AWS.Config(AWS.config);
     if (config) this.config.update(config, true);
@@ -19192,6 +19213,7 @@ module.exports = AWS.DynamoDB;
  */
 
 var AWS = require('../core');
+var Buffer = require('buffer').Buffer;
 
 AWS.S3 = AWS.Service.defineService('s3', ['2006-03-01'], {
   /**
@@ -19275,7 +19297,10 @@ AWS.S3 = AWS.Service.defineService('s3', ['2006-03-01'], {
     if (!this.config.computeChecksums) return false;
 
     // TODO: compute checksums for Stream objects
-    if (AWS.util.isType(req.httpRequest.body, 'Stream')) return false;
+    if (!Buffer.isBuffer(req.httpRequest.body) &&
+        typeof req.httpRequest.body !== 'string') {
+      return false;
+    }
 
     var rules = req.service.api.operations[req.operation].input.members;
     if (rules.ContentMD5 && !req.params.ContentMD5) return true;
@@ -19539,7 +19564,7 @@ AWS.S3.prototype.createBucket = function createBucket(params, callback) {
 
 module.exports = AWS.S3;
 
-},{"../core":30,"url":15}],56:[function(require,module,exports){
+},{"../core":30,"buffer":18,"url":15}],56:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -20243,6 +20268,10 @@ module.exports = AWS.Signers.V3Https;
 
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
+
+/**
+ * @api private
+ */
 var cachedSecret = {};
 
 /**
@@ -20886,8 +20915,19 @@ AWS.util = {
       }
     }
     return klass;
-  }
+  },
 
+  /**
+   * @api private
+   */
+  hideProperties: function hideProperties(obj, props) {
+    if (typeof Object.defineProperty !== 'function') return;
+
+    AWS.util.arrayEach(props, function (key) {
+      Object.defineProperty(obj, key, {
+        enumerable: false, writable: true, configurable: true });
+    });
+  }
 };
 
 module.exports = AWS.util;

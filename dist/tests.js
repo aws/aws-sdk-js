@@ -9601,6 +9601,19 @@ require('./credentials/credential_provider_chain');
  * @!attribute s3ForcePathStyle
  *   @return [Boolean] whether to force path style URLs for S3 objects
  *
+ * @!attribute httpOptions
+ *   @return [map] A set of options to pass to the low-level HTTP request.
+ *     Currently supported options are:
+ *
+ *     * **proxy** [String] &mdash; the URL to proxy requests through
+ *     * **agent** [http.Agent, https.Agent] &mdash; the Agent object to perform
+ *       HTTP requests with. Used for connection pooling. Defaults to the global
+ *       agent (`http.globalAgent`) for non-SSL connections. Note that for
+ *       SSL connections, a special Agent object is used in order to enable
+ *       peer certificate verification.
+ *     * **timeout** [Integer] &mdash; The number of milliseconds to wait before
+ *       giving up on a connection attempt. Defaults to no timeout.
+ *
  * @!attribute logger
  *   @return [#write,#log] an object that responds to .write() (like a stream)
  *     or .log() (like the console object) in order to log information about
@@ -9881,7 +9894,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '1.7.1',
+  VERSION: '1.8.1',
 
   /**
    * @api private
@@ -10015,6 +10028,9 @@ AWS.Credentials = AWS.util.inherit({
    *     });
    */
   constructor: function Credentials() {
+    // hide secretAccessKey from being displayed with util.inspect
+    AWS.util.hideProperties(this, ['secretAccessKey']);
+
     this.expired = false;
     this.expireTime = null;
     if (arguments.length == 1 && typeof arguments[0] === 'object') {
@@ -10069,9 +10085,9 @@ AWS.Credentials = AWS.util.inherit({
     if (this.needsRefresh()) {
       this.refresh(function(err) {
         if (!err) self.expired = false; // reset expired flag
-        callback(err);
+        if (callback) callback(err);
       });
-    } else {
+    } else if (callback) {
       callback();
     }
   },
@@ -10286,6 +10302,7 @@ AWS.EnvironmentCredentials = AWS.util.inherit(AWS.Credentials, {
    *   variables. Do not include the separating underscore.
    */
   constructor: function EnvironmentCredentials(envPrefix) {
+    AWS.Credentials.call(this);
     this.envPrefix = envPrefix;
     this.get(function() {});
   },
@@ -10402,6 +10419,7 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
    * @see AWS.STS.getSessionToken
    */
   constructor: function TemporaryCredentials(params) {
+    AWS.Credentials.call(this);
     this.loadMasterCredentials();
     this.serviceError = null;
     this.service = new AWS.STS();
@@ -10527,6 +10545,7 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
    * @see AWS.STS.assumeRoleWithWebIdentity
    */
   constructor: function WebIdentityCredentials(params) {
+    AWS.Credentials.call(this);
     this.serviceError = null;
     this.expired = true;
     this.service = new AWS.STS();
@@ -10987,6 +11006,8 @@ AWS.Endpoint = inherit({
    *   @param endpoint [String] the URL to construct an endpoint from
    */
   constructor: function Endpoint(endpoint, config) {
+    AWS.util.hideProperties(this, ['slashes', 'auth', 'hash', 'search', 'query']);
+
     if (typeof endpoint === 'undefined' || endpoint === null) {
       throw new Error('Invalid endpoint: ' + endpoint);
     } else if (typeof endpoint !== 'string') {
@@ -12519,6 +12540,7 @@ AWS.Service = inherit({
   },
 
   initialize: function initialize(config) {
+    AWS.util.hideProperties(this, ['client']);
     this.client = this; // backward compatibility with client property
     this.config = new AWS.Config(AWS.config);
     if (config) this.config.update(config, true);
@@ -13403,7 +13425,7 @@ AWS.Service.defineServiceApi(require("./services/datapipeline"), "2012-10-29", r
 AWS.Service.defineServiceApi(require("./services/directconnect"), "2012-10-25", require("./services/api/directconnect-2012-10-25"));
 AWS.Service.defineServiceApi(require("./services/dynamodb"), "2011-12-05", require("./services/api/dynamodb-2011-12-05"));
 AWS.Service.defineServiceApi(require("./services/dynamodb"), "2012-08-10", require("./services/api/dynamodb-2012-08-10"));
-AWS.Service.defineServiceApi(require("./services/ec2"), "2013-08-15", require("./services/api/ec2-2013-08-15"));
+AWS.Service.defineServiceApi(require("./services/ec2"), "2013-10-01", require("./services/api/ec2-2013-10-01"));
 AWS.Service.defineServiceApi(require("./services/elasticache"), "2013-06-15", require("./services/api/elasticache-2013-06-15"));
 AWS.Service.defineServiceApi(require("./services/elasticbeanstalk"), "2010-12-01", require("./services/api/elasticbeanstalk-2010-12-01"));
 AWS.Service.defineServiceApi(require("./services/elastictranscoder"), "2012-09-25", require("./services/api/elastictranscoder-2012-09-25"));
@@ -13427,7 +13449,7 @@ AWS.Service.defineServiceApi(require("./services/sqs"), "2012-11-05", require(".
 AWS.Service.defineServiceApi(require("./services/storagegateway"), "2012-06-30", require("./services/api/storagegateway-2012-06-30"));
 AWS.Service.defineServiceApi(require("./services/sts"), "2011-06-15", require("./services/api/sts-2011-06-15"));
 AWS.Service.defineServiceApi(require("./services/support"), "2013-04-15", require("./services/api/support-2013-04-15"));
-},{"./core":48,"./services/api/autoscaling-2011-01-01":68,"./services/api/cloudformation-2010-05-15":69,"./services/api/cloudfront-2012-05-05":70,"./services/api/cloudfront-2013-05-12":71,"./services/api/cloudfront-2013-08-26":72,"./services/api/cloudsearch-2011-02-01":73,"./services/api/cloudwatch-2010-08-01":74,"./services/api/datapipeline-2012-10-29":75,"./services/api/directconnect-2012-10-25":76,"./services/api/dynamodb-2011-12-05":77,"./services/api/dynamodb-2012-08-10":78,"./services/api/ec2-2013-08-15":79,"./services/api/elasticache-2013-06-15":80,"./services/api/elasticbeanstalk-2010-12-01":81,"./services/api/elastictranscoder-2012-09-25":82,"./services/api/elb-2012-06-01":83,"./services/api/emr-2009-03-31":84,"./services/api/glacier-2012-06-01":85,"./services/api/iam-2010-05-08":86,"./services/api/importexport-2010-06-01":87,"./services/api/opsworks-2013-02-18":88,"./services/api/rds-2013-01-10":89,"./services/api/rds-2013-02-12":90,"./services/api/rds-2013-05-15":91,"./services/api/redshift-2012-12-01":92,"./services/api/route53-2012-12-12":93,"./services/api/s3-2006-03-01":94,"./services/api/ses-2010-12-01":95,"./services/api/simpledb-2009-04-15":96,"./services/api/simpleworkflow-2012-01-25":97,"./services/api/sns-2010-03-31":98,"./services/api/sqs-2012-11-05":99,"./services/api/storagegateway-2012-06-30":100,"./services/api/sts-2011-06-15":101,"./services/api/support-2013-04-15":102,"./services/autoscaling":103,"./services/cloudformation":104,"./services/cloudfront":105,"./services/cloudsearch":106,"./services/cloudwatch":107,"./services/datapipeline":108,"./services/directconnect":109,"./services/dynamodb":110,"./services/ec2":111,"./services/elasticache":112,"./services/elasticbeanstalk":113,"./services/elastictranscoder":114,"./services/elb":115,"./services/emr":116,"./services/glacier":117,"./services/iam":118,"./services/importexport":119,"./services/opsworks":120,"./services/rds":121,"./services/redshift":122,"./services/route53":123,"./services/s3":124,"./services/ses":125,"./services/simpledb":126,"./services/simpleworkflow":127,"./services/sns":128,"./services/sqs":129,"./services/storagegateway":130,"./services/sts":131,"./services/support":132}],68:[function(require,module,exports){
+},{"./core":48,"./services/api/autoscaling-2011-01-01":68,"./services/api/cloudformation-2010-05-15":69,"./services/api/cloudfront-2012-05-05":70,"./services/api/cloudfront-2013-05-12":71,"./services/api/cloudfront-2013-08-26":72,"./services/api/cloudsearch-2011-02-01":73,"./services/api/cloudwatch-2010-08-01":74,"./services/api/datapipeline-2012-10-29":75,"./services/api/directconnect-2012-10-25":76,"./services/api/dynamodb-2011-12-05":77,"./services/api/dynamodb-2012-08-10":78,"./services/api/ec2-2013-10-01":79,"./services/api/elasticache-2013-06-15":80,"./services/api/elasticbeanstalk-2010-12-01":81,"./services/api/elastictranscoder-2012-09-25":82,"./services/api/elb-2012-06-01":83,"./services/api/emr-2009-03-31":84,"./services/api/glacier-2012-06-01":85,"./services/api/iam-2010-05-08":86,"./services/api/importexport-2010-06-01":87,"./services/api/opsworks-2013-02-18":88,"./services/api/rds-2013-01-10":89,"./services/api/rds-2013-02-12":90,"./services/api/rds-2013-05-15":91,"./services/api/redshift-2012-12-01":92,"./services/api/route53-2012-12-12":93,"./services/api/s3-2006-03-01":94,"./services/api/ses-2010-12-01":95,"./services/api/simpledb-2009-04-15":96,"./services/api/simpleworkflow-2012-01-25":97,"./services/api/sns-2010-03-31":98,"./services/api/sqs-2012-11-05":99,"./services/api/storagegateway-2012-06-30":100,"./services/api/sts-2011-06-15":101,"./services/api/support-2013-04-15":102,"./services/autoscaling":103,"./services/cloudformation":104,"./services/cloudfront":105,"./services/cloudsearch":106,"./services/cloudwatch":107,"./services/datapipeline":108,"./services/directconnect":109,"./services/dynamodb":110,"./services/ec2":111,"./services/elasticache":112,"./services/elasticbeanstalk":113,"./services/elastictranscoder":114,"./services/elb":115,"./services/emr":116,"./services/glacier":117,"./services/iam":118,"./services/importexport":119,"./services/opsworks":120,"./services/rds":121,"./services/redshift":122,"./services/route53":123,"./services/s3":124,"./services/ses":125,"./services/simpledb":126,"./services/simpleworkflow":127,"./services/sns":128,"./services/sqs":129,"./services/storagegateway":130,"./services/sts":131,"./services/support":132}],68:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -32553,7 +32575,7 @@ module.exports = {
 
 module.exports = {
   format: 'query',
-  apiVersion: '2013-08-15',
+  apiVersion: '2013-10-01',
   endpointPrefix: 'ec2',
   serviceAbbreviation: 'Amazon EC2',
   serviceFullName: 'Amazon Elastic Compute Cloud',
@@ -38636,6 +38658,9 @@ module.exports = {
                           instanceCount: {
                             type: 'integer',
                             name: 'InstanceCount'
+                          },
+                          instanceType: {
+                            name: 'InstanceType'
                           }
                         },
                         name: 'TargetConfiguration'
@@ -41648,6 +41673,8 @@ module.exports = {
                 },
                 InstanceCount: {
                   type: 'integer'
+                },
+                InstanceType: {
                 }
               },
               name: 'ReservedInstancesConfigurationSetItemType'
@@ -54853,6 +54880,42 @@ module.exports = {
   targetPrefix: 'OpsWorks_20130218',
   timestampFormat: 'iso8601',
   operations: {
+    assignVolume: {
+      name: 'AssignVolume',
+      input: {
+        type: 'structure',
+        members: {
+          VolumeId: {
+            required: true
+          },
+          InstanceId: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    associateElasticIp: {
+      name: 'AssociateElasticIp',
+      input: {
+        type: 'structure',
+        members: {
+          ElasticIp: {
+            required: true
+          },
+          InstanceId: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
     attachElasticLoadBalancer: {
       name: 'AttachElasticLoadBalancer',
       input: {
@@ -55192,6 +55255,9 @@ module.exports = {
           AutoAssignElasticIps: {
             type: 'boolean'
           },
+          AutoAssignPublicIps: {
+            type: 'boolean'
+          },
           CustomRecipes: {
             type: 'structure',
             members: {
@@ -55422,6 +55488,38 @@ module.exports = {
         }
       }
     },
+    deregisterElasticIp: {
+      name: 'DeregisterElasticIp',
+      input: {
+        type: 'structure',
+        members: {
+          ElasticIp: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    deregisterVolume: {
+      name: 'DeregisterVolume',
+      input: {
+        type: 'structure',
+        members: {
+          VolumeId: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
     describeApps: {
       name: 'DescribeApps',
       input: {
@@ -55638,6 +55736,8 @@ module.exports = {
         members: {
           InstanceId: {
           },
+          StackId: {
+          },
           Ips: {
             type: 'list',
             members: {
@@ -55660,6 +55760,8 @@ module.exports = {
                 Domain: {
                 },
                 Region: {
+                },
+                InstanceId: {
                 }
               }
             }
@@ -55894,6 +55996,9 @@ module.exports = {
                   type: 'boolean'
                 },
                 AutoAssignElasticIps: {
+                  type: 'boolean'
+                },
+                AutoAssignPublicIps: {
                   type: 'boolean'
                 },
                 DefaultRecipes: {
@@ -56390,6 +56495,8 @@ module.exports = {
         members: {
           InstanceId: {
           },
+          StackId: {
+          },
           RaidArrayId: {
           },
           VolumeIds: {
@@ -56455,6 +56562,22 @@ module.exports = {
         }
       }
     },
+    disassociateElasticIp: {
+      name: 'DisassociateElasticIp',
+      input: {
+        type: 'structure',
+        members: {
+          ElasticIp: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
     getHostnameSuggestion: {
       name: 'GetHostnameSuggestion',
       input: {
@@ -56488,6 +56611,47 @@ module.exports = {
       output: {
         type: 'structure',
         members: {
+        }
+      }
+    },
+    registerElasticIp: {
+      name: 'RegisterElasticIp',
+      input: {
+        type: 'structure',
+        members: {
+          ElasticIp: {
+            required: true
+          },
+          StackId: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          ElasticIp: {
+          }
+        }
+      }
+    },
+    registerVolume: {
+      name: 'RegisterVolume',
+      input: {
+        type: 'structure',
+        members: {
+          Ec2VolumeId: {
+          },
+          StackId: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+          VolumeId: {
+          }
         }
       }
     },
@@ -56715,6 +56879,22 @@ module.exports = {
         }
       }
     },
+    unassignVolume: {
+      name: 'UnassignVolume',
+      input: {
+        type: 'structure',
+        members: {
+          VolumeId: {
+            required: true
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
     updateApp: {
       name: 'UpdateApp',
       input: {
@@ -56773,6 +56953,24 @@ module.exports = {
             },
             members: {
             }
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    updateElasticIp: {
+      name: 'UpdateElasticIp',
+      input: {
+        type: 'structure',
+        members: {
+          ElasticIp: {
+            required: true
+          },
+          Name: {
           }
         }
       },
@@ -56877,6 +57075,9 @@ module.exports = {
             type: 'boolean'
           },
           AutoAssignElasticIps: {
+            type: 'boolean'
+          },
+          AutoAssignPublicIps: {
             type: 'boolean'
           },
           CustomRecipes: {
@@ -57003,6 +57204,26 @@ module.exports = {
           SshUsername: {
           },
           SshPublicKey: {
+          }
+        }
+      },
+      output: {
+        type: 'structure',
+        members: {
+        }
+      }
+    },
+    updateVolume: {
+      name: 'UpdateVolume',
+      input: {
+        type: 'structure',
+        members: {
+          VolumeId: {
+            required: true
+          },
+          Name: {
+          },
+          MountPoint: {
           }
         }
       },
@@ -86248,7 +86469,7 @@ module.exports = AWS.DynamoDB;
 
 var AWS = require('../core');
 
-AWS.EC2 = AWS.Service.defineService('ec2', ['2013-06-15*', '2013-07-15*', '2013-08-15'], {
+AWS.EC2 = AWS.Service.defineService('ec2', ['2013-06-15*', '2013-07-15*', '2013-08-15*', '2013-10-01'], {
   setupRequestListeners: function setupRequestListeners(request) {
     request.removeListener('extractError', AWS.EventListeners.Query.EXTRACT_ERROR);
     request.addListener('extractError', this.extractError);
@@ -87893,6 +88114,10 @@ module.exports = AWS.Signers.V3Https;
 
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
+
+/**
+ * @api private
+ */
 var cachedSecret = {};
 
 /**
@@ -88536,8 +88761,19 @@ AWS.util = {
       }
     }
     return klass;
-  }
+  },
 
+  /**
+   * @api private
+   */
+  hideProperties: function hideProperties(obj, props) {
+    if (typeof Object.defineProperty !== 'function') return;
+
+    AWS.util.arrayEach(props, function (key) {
+      Object.defineProperty(obj, key, {
+        enumerable: false, writable: true, configurable: true });
+    });
+  }
 };
 
 module.exports = AWS.util;
