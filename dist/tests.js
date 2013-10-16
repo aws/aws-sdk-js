@@ -1,37 +1,6 @@
-;/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})
-({1:[function(require,module,exports){
+;(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
 },{}],2:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
 
 
 //
@@ -250,21 +219,6 @@ if (typeof Object.getOwnPropertyDescriptor === 'function') {
 }
 
 },{}],3:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -338,21 +292,6 @@ function onend() {
 }
 
 },{"_shims":2,"_stream_readable":5,"_stream_writable":7,"timers":14,"util":16}],4:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -396,22 +335,7 @@ PassThrough.prototype._transform = function(chunk, encoding, cb) {
 };
 
 },{"_stream_transform":6,"util":16}],5:[function(require,module,exports){
-var process=require("__browserify_process");/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-// Copyright Joyent, Inc. and other Node contributors.
+var process=require("__browserify_process");// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the
@@ -1331,22 +1255,7 @@ function endReadable(stream) {
   }
 }
 
-},{"__browserify_process":39,"_shims":2,"buffer":18,"events":9,"stream":12,"string_decoder":13,"timers":14,"util":16}],6:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{"__browserify_process":45,"_shims":2,"buffer":18,"events":9,"stream":12,"string_decoder":13,"timers":14,"util":16}],6:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1553,21 +1462,6 @@ function done(stream, er) {
 }
 
 },{"_stream_duplex":3,"util":16}],7:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1938,21 +1832,6 @@ function endWritable(stream, state, cb) {
 }
 
 },{"buffer":18,"stream":12,"timers":14,"util":16}],8:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2269,23 +2148,7 @@ assert.doesNotThrow = function(block, /*optional*/message) {
 };
 
 assert.ifError = function(err) { if (err) {throw err;}};
-
 },{"_shims":2,"util":16}],9:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2566,44 +2429,13 @@ EventEmitter.listenerCount = function(emitter, type) {
     ret = emitter._events[type].length;
   return ret;
 };
-
 },{"util":16}],10:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
 
 // not implemented
 // The reason for having an empty file and not throwing is to allow
 // untraditional implementation of this module.
 
 },{}],11:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2814,23 +2646,7 @@ QueryString.parse = QueryString.decode = function(qs, sep, eq, options) {
 
   return obj;
 };
-
 },{"_shims":2,"buffer":18,"util":16}],12:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2960,21 +2776,6 @@ Stream.prototype.pipe = function(dest, options) {
 };
 
 },{"_stream_duplex":3,"_stream_passthrough":4,"_stream_readable":5,"_stream_transform":6,"_stream_writable":7,"events":9,"util":16}],13:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -3168,21 +2969,6 @@ function base64DetectIncompleteChar(buffer) {
 }
 
 },{"buffer":18}],14:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
 try {
     // Old IE browsers that do not curry arguments
     if (!setTimeout.call) {
@@ -3302,21 +3088,6 @@ if (!exports.setImmediate) {
 }
 
 },{}],15:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -4011,24 +3782,8 @@ Url.prototype.parseHost = function() {
   }
   if (host) this.hostname = host;
 };
-
 },{"_shims":2,"querystring":11,"util":16}],16:[function(require,module,exports){
-var Buffer=require("__browserify_Buffer").Buffer;/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
-// Copyright Joyent, Inc. and other Node contributors.
+var Buffer=require("__browserify_Buffer").Buffer;// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the
@@ -4568,22 +4323,7 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-},{"__browserify_Buffer":38,"_shims":2}],17:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{"__browserify_Buffer":44,"_shims":2}],17:[function(require,module,exports){
 exports.readIEEE754 = function(buffer, offset, isBE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -4670,21 +4410,6 @@ exports.writeIEEE754 = function(buffer, value, offset, isBE, mLen, nBytes) {
 };
 
 },{}],18:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
 var assert;
 exports.Buffer = Buffer;
 exports.SlowBuffer = Buffer;
@@ -5811,21 +5536,6 @@ Buffer.prototype.writeDoubleBE = function(value, offset, noAssert) {
 };
 
 },{"./buffer_ieee754":17,"assert":8,"base64-js":19}],19:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
 (function (exports) {
 	'use strict';
 
@@ -5912,21 +5622,535 @@ Buffer.prototype.writeDoubleBE = function(value, offset, noAssert) {
 }());
 
 },{}],20:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
+var Buffer = require('buffer').Buffer;
+var intSize = 4;
+var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
+var chrsz = 8;
+
+function toArray(buf, bigEndian) {
+  if ((buf.length % intSize) !== 0) {
+    var len = buf.length + (intSize - (buf.length % intSize));
+    buf = Buffer.concat([buf, zeroBuffer], len);
+  }
+
+  var arr = [];
+  var fn = bigEndian ? buf.readInt32BE : buf.readInt32LE;
+  for (var i = 0; i < buf.length; i += intSize) {
+    arr.push(fn.call(buf, i));
+  }
+  return arr;
+}
+
+function toBuffer(arr, size, bigEndian) {
+  var buf = new Buffer(size);
+  var fn = bigEndian ? buf.writeInt32BE : buf.writeInt32LE;
+  for (var i = 0; i < arr.length; i++) {
+    fn.call(buf, arr[i], i * 4, true);
+  }
+  return buf;
+}
+
+function hash(buf, fn, hashSize, bigEndian) {
+  if (!Buffer.isBuffer(buf)) buf = new Buffer(buf);
+  var arr = fn(toArray(buf, bigEndian), buf.length * chrsz);
+  return toBuffer(arr, hashSize, bigEndian);
+}
+
+module.exports = { hash: hash };
+
+},{"buffer":18}],21:[function(require,module,exports){
+var Buffer = require('buffer').Buffer
+var sha = require('./sha')
+var sha256 = require('./sha256')
+var rng = require('./rng')
+var md5 = require('./md5')
+
+var algorithms = {
+  sha1: sha,
+  sha256: sha256,
+  md5: md5
+}
+
+var blocksize = 64
+var zeroBuffer = new Buffer(blocksize); zeroBuffer.fill(0)
+function hmac(fn, key, data) {
+  if(!Buffer.isBuffer(key)) key = new Buffer(key)
+  if(!Buffer.isBuffer(data)) data = new Buffer(data)
+
+  if(key.length > blocksize) {
+    key = fn(key)
+  } else if(key.length < blocksize) {
+    key = Buffer.concat([key, zeroBuffer], blocksize)
+  }
+
+  var ipad = new Buffer(blocksize), opad = new Buffer(blocksize)
+  for(var i = 0; i < blocksize; i++) {
+    ipad[i] = key[i] ^ 0x36
+    opad[i] = key[i] ^ 0x5C
+  }
+
+  var hash = fn(Buffer.concat([ipad, data]))
+  return fn(Buffer.concat([opad, hash]))
+}
+
+function hash(alg, key) {
+  alg = alg || 'sha1'
+  var fn = algorithms[alg]
+  var bufs = []
+  var length = 0
+  if(!fn) error('algorithm:', alg, 'is not yet supported')
+  return {
+    update: function (data) {
+      bufs.push(data)
+      length += data.length
+      return this
+    },
+    digest: function (enc) {
+      var buf = Buffer.concat(bufs)
+      var r = key ? hmac(fn, key, buf) : fn(buf)
+      bufs = null
+      return enc ? r.toString(enc) : r
+    }
+  }
+}
+
+function error () {
+  var m = [].slice.call(arguments).join(' ')
+  throw new Error([
+    m,
+    'we accept pull requests',
+    'http://github.com/dominictarr/crypto-browserify'
+    ].join('\n'))
+}
+
+exports.createHash = function (alg) { return hash(alg) }
+exports.createHmac = function (alg, key) { return hash(alg, key) }
+exports.randomBytes = function(size, callback) {
+  if (callback && callback.call) {
+    try {
+      callback.call(this, undefined, new Buffer(rng(size)))
+    } catch (err) { callback(err) }
+  } else {
+    return new Buffer(rng(size))
+  }
+}
+
+function each(a, f) {
+  for(var i in a)
+    f(a[i], i)
+}
+
+// the least I can do is make error messages for the rest of the node.js/crypto api.
+each(['createCredentials'
+, 'createCipher'
+, 'createCipheriv'
+, 'createDecipher'
+, 'createDecipheriv'
+, 'createSign'
+, 'createVerify'
+, 'createDiffieHellman'
+, 'pbkdf2'], function (name) {
+  exports[name] = function () {
+    error('sorry,', name, 'is not implemented yet')
+  }
+})
+
+},{"./md5":22,"./rng":23,"./sha":24,"./sha256":25,"buffer":18}],22:[function(require,module,exports){
+/*
+ * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
+ * Digest Algorithm, as defined in RFC 1321.
+ * Version 2.1 Copyright (C) Paul Johnston 1999 - 2002.
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ * Distributed under the BSD License
+ * See http://pajhome.org.uk/crypt/md5 for more info.
  */
 
+var helpers = require('./helpers');
+
+/*
+ * Perform a simple self-test to see if the VM is working
+ */
+function md5_vm_test()
+{
+  return hex_md5("abc") == "900150983cd24fb0d6963f7d28e17f72";
+}
+
+/*
+ * Calculate the MD5 of an array of little-endian words, and a bit length
+ */
+function core_md5(x, len)
+{
+  /* append padding */
+  x[len >> 5] |= 0x80 << ((len) % 32);
+  x[(((len + 64) >>> 9) << 4) + 14] = len;
+
+  var a =  1732584193;
+  var b = -271733879;
+  var c = -1732584194;
+  var d =  271733878;
+
+  for(var i = 0; i < x.length; i += 16)
+  {
+    var olda = a;
+    var oldb = b;
+    var oldc = c;
+    var oldd = d;
+
+    a = md5_ff(a, b, c, d, x[i+ 0], 7 , -680876936);
+    d = md5_ff(d, a, b, c, x[i+ 1], 12, -389564586);
+    c = md5_ff(c, d, a, b, x[i+ 2], 17,  606105819);
+    b = md5_ff(b, c, d, a, x[i+ 3], 22, -1044525330);
+    a = md5_ff(a, b, c, d, x[i+ 4], 7 , -176418897);
+    d = md5_ff(d, a, b, c, x[i+ 5], 12,  1200080426);
+    c = md5_ff(c, d, a, b, x[i+ 6], 17, -1473231341);
+    b = md5_ff(b, c, d, a, x[i+ 7], 22, -45705983);
+    a = md5_ff(a, b, c, d, x[i+ 8], 7 ,  1770035416);
+    d = md5_ff(d, a, b, c, x[i+ 9], 12, -1958414417);
+    c = md5_ff(c, d, a, b, x[i+10], 17, -42063);
+    b = md5_ff(b, c, d, a, x[i+11], 22, -1990404162);
+    a = md5_ff(a, b, c, d, x[i+12], 7 ,  1804603682);
+    d = md5_ff(d, a, b, c, x[i+13], 12, -40341101);
+    c = md5_ff(c, d, a, b, x[i+14], 17, -1502002290);
+    b = md5_ff(b, c, d, a, x[i+15], 22,  1236535329);
+
+    a = md5_gg(a, b, c, d, x[i+ 1], 5 , -165796510);
+    d = md5_gg(d, a, b, c, x[i+ 6], 9 , -1069501632);
+    c = md5_gg(c, d, a, b, x[i+11], 14,  643717713);
+    b = md5_gg(b, c, d, a, x[i+ 0], 20, -373897302);
+    a = md5_gg(a, b, c, d, x[i+ 5], 5 , -701558691);
+    d = md5_gg(d, a, b, c, x[i+10], 9 ,  38016083);
+    c = md5_gg(c, d, a, b, x[i+15], 14, -660478335);
+    b = md5_gg(b, c, d, a, x[i+ 4], 20, -405537848);
+    a = md5_gg(a, b, c, d, x[i+ 9], 5 ,  568446438);
+    d = md5_gg(d, a, b, c, x[i+14], 9 , -1019803690);
+    c = md5_gg(c, d, a, b, x[i+ 3], 14, -187363961);
+    b = md5_gg(b, c, d, a, x[i+ 8], 20,  1163531501);
+    a = md5_gg(a, b, c, d, x[i+13], 5 , -1444681467);
+    d = md5_gg(d, a, b, c, x[i+ 2], 9 , -51403784);
+    c = md5_gg(c, d, a, b, x[i+ 7], 14,  1735328473);
+    b = md5_gg(b, c, d, a, x[i+12], 20, -1926607734);
+
+    a = md5_hh(a, b, c, d, x[i+ 5], 4 , -378558);
+    d = md5_hh(d, a, b, c, x[i+ 8], 11, -2022574463);
+    c = md5_hh(c, d, a, b, x[i+11], 16,  1839030562);
+    b = md5_hh(b, c, d, a, x[i+14], 23, -35309556);
+    a = md5_hh(a, b, c, d, x[i+ 1], 4 , -1530992060);
+    d = md5_hh(d, a, b, c, x[i+ 4], 11,  1272893353);
+    c = md5_hh(c, d, a, b, x[i+ 7], 16, -155497632);
+    b = md5_hh(b, c, d, a, x[i+10], 23, -1094730640);
+    a = md5_hh(a, b, c, d, x[i+13], 4 ,  681279174);
+    d = md5_hh(d, a, b, c, x[i+ 0], 11, -358537222);
+    c = md5_hh(c, d, a, b, x[i+ 3], 16, -722521979);
+    b = md5_hh(b, c, d, a, x[i+ 6], 23,  76029189);
+    a = md5_hh(a, b, c, d, x[i+ 9], 4 , -640364487);
+    d = md5_hh(d, a, b, c, x[i+12], 11, -421815835);
+    c = md5_hh(c, d, a, b, x[i+15], 16,  530742520);
+    b = md5_hh(b, c, d, a, x[i+ 2], 23, -995338651);
+
+    a = md5_ii(a, b, c, d, x[i+ 0], 6 , -198630844);
+    d = md5_ii(d, a, b, c, x[i+ 7], 10,  1126891415);
+    c = md5_ii(c, d, a, b, x[i+14], 15, -1416354905);
+    b = md5_ii(b, c, d, a, x[i+ 5], 21, -57434055);
+    a = md5_ii(a, b, c, d, x[i+12], 6 ,  1700485571);
+    d = md5_ii(d, a, b, c, x[i+ 3], 10, -1894986606);
+    c = md5_ii(c, d, a, b, x[i+10], 15, -1051523);
+    b = md5_ii(b, c, d, a, x[i+ 1], 21, -2054922799);
+    a = md5_ii(a, b, c, d, x[i+ 8], 6 ,  1873313359);
+    d = md5_ii(d, a, b, c, x[i+15], 10, -30611744);
+    c = md5_ii(c, d, a, b, x[i+ 6], 15, -1560198380);
+    b = md5_ii(b, c, d, a, x[i+13], 21,  1309151649);
+    a = md5_ii(a, b, c, d, x[i+ 4], 6 , -145523070);
+    d = md5_ii(d, a, b, c, x[i+11], 10, -1120210379);
+    c = md5_ii(c, d, a, b, x[i+ 2], 15,  718787259);
+    b = md5_ii(b, c, d, a, x[i+ 9], 21, -343485551);
+
+    a = safe_add(a, olda);
+    b = safe_add(b, oldb);
+    c = safe_add(c, oldc);
+    d = safe_add(d, oldd);
+  }
+  return Array(a, b, c, d);
+
+}
+
+/*
+ * These functions implement the four basic operations the algorithm uses.
+ */
+function md5_cmn(q, a, b, x, s, t)
+{
+  return safe_add(bit_rol(safe_add(safe_add(a, q), safe_add(x, t)), s),b);
+}
+function md5_ff(a, b, c, d, x, s, t)
+{
+  return md5_cmn((b & c) | ((~b) & d), a, b, x, s, t);
+}
+function md5_gg(a, b, c, d, x, s, t)
+{
+  return md5_cmn((b & d) | (c & (~d)), a, b, x, s, t);
+}
+function md5_hh(a, b, c, d, x, s, t)
+{
+  return md5_cmn(b ^ c ^ d, a, b, x, s, t);
+}
+function md5_ii(a, b, c, d, x, s, t)
+{
+  return md5_cmn(c ^ (b | (~d)), a, b, x, s, t);
+}
+
+/*
+ * Add integers, wrapping at 2^32. This uses 16-bit operations internally
+ * to work around bugs in some JS interpreters.
+ */
+function safe_add(x, y)
+{
+  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
+  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+  return (msw << 16) | (lsw & 0xFFFF);
+}
+
+/*
+ * Bitwise rotate a 32-bit number to the left.
+ */
+function bit_rol(num, cnt)
+{
+  return (num << cnt) | (num >>> (32 - cnt));
+}
+
+module.exports = function md5(buf) {
+  return helpers.hash(buf, core_md5, 16);
+};
+
+},{"./helpers":20}],23:[function(require,module,exports){
+// Original code adapted from Robert Kieffer.
+// details at https://github.com/broofa/node-uuid
+(function() {
+  var _global = this;
+
+  var mathRNG, whatwgRNG;
+
+  // NOTE: Math.random() does not guarantee "cryptographic quality"
+  mathRNG = function(size) {
+    var bytes = new Array(size);
+    var r;
+
+    for (var i = 0, r; i < size; i++) {
+      if ((i & 0x03) == 0) r = Math.random() * 0x100000000;
+      bytes[i] = r >>> ((i & 0x03) << 3) & 0xff;
+    }
+
+    return bytes;
+  }
+
+  if (_global.crypto && crypto.getRandomValues) {
+    var _rnds = new Uint32Array(4);
+    whatwgRNG = function(size) {
+      var bytes = new Array(size);
+      crypto.getRandomValues(_rnds);
+
+      for (var c = 0 ; c < size; c++) {
+        bytes[c] = _rnds[c >> 2] >>> ((c & 0x03) * 8) & 0xff;
+      }
+      return bytes;
+    }
+  }
+
+  module.exports = whatwgRNG || mathRNG;
+
+}())
+
+},{}],24:[function(require,module,exports){
+/*
+ * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
+ * in FIPS PUB 180-1
+ * Version 2.1a Copyright Paul Johnston 2000 - 2002.
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ * Distributed under the BSD License
+ * See http://pajhome.org.uk/crypt/md5 for details.
+ */
+
+var helpers = require('./helpers');
+
+/*
+ * Perform a simple self-test to see if the VM is working
+ */
+function sha1_vm_test()
+{
+  return hex_sha1("abc") == "a9993e364706816aba3e25717850c26c9cd0d89d";
+}
+
+/*
+ * Calculate the SHA-1 of an array of big-endian words, and a bit length
+ */
+function core_sha1(x, len)
+{
+  /* append padding */
+  x[len >> 5] |= 0x80 << (24 - len % 32);
+  x[((len + 64 >> 9) << 4) + 15] = len;
+
+  var w = Array(80);
+  var a =  1732584193;
+  var b = -271733879;
+  var c = -1732584194;
+  var d =  271733878;
+  var e = -1009589776;
+
+  for(var i = 0; i < x.length; i += 16)
+  {
+    var olda = a;
+    var oldb = b;
+    var oldc = c;
+    var oldd = d;
+    var olde = e;
+
+    for(var j = 0; j < 80; j++)
+    {
+      if(j < 16) w[j] = x[i + j];
+      else w[j] = rol(w[j-3] ^ w[j-8] ^ w[j-14] ^ w[j-16], 1);
+      var t = safe_add(safe_add(rol(a, 5), sha1_ft(j, b, c, d)),
+                       safe_add(safe_add(e, w[j]), sha1_kt(j)));
+      e = d;
+      d = c;
+      c = rol(b, 30);
+      b = a;
+      a = t;
+    }
+
+    a = safe_add(a, olda);
+    b = safe_add(b, oldb);
+    c = safe_add(c, oldc);
+    d = safe_add(d, oldd);
+    e = safe_add(e, olde);
+  }
+  return Array(a, b, c, d, e);
+
+}
+
+/*
+ * Perform the appropriate triplet combination function for the current
+ * iteration
+ */
+function sha1_ft(t, b, c, d)
+{
+  if(t < 20) return (b & c) | ((~b) & d);
+  if(t < 40) return b ^ c ^ d;
+  if(t < 60) return (b & c) | (b & d) | (c & d);
+  return b ^ c ^ d;
+}
+
+/*
+ * Determine the appropriate additive constant for the current iteration
+ */
+function sha1_kt(t)
+{
+  return (t < 20) ?  1518500249 : (t < 40) ?  1859775393 :
+         (t < 60) ? -1894007588 : -899497514;
+}
+
+/*
+ * Add integers, wrapping at 2^32. This uses 16-bit operations internally
+ * to work around bugs in some JS interpreters.
+ */
+function safe_add(x, y)
+{
+  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
+  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+  return (msw << 16) | (lsw & 0xFFFF);
+}
+
+/*
+ * Bitwise rotate a 32-bit number to the left.
+ */
+function rol(num, cnt)
+{
+  return (num << cnt) | (num >>> (32 - cnt));
+}
+
+module.exports = function sha1(buf) {
+  return helpers.hash(buf, core_sha1, 20, true);
+};
+
+},{"./helpers":20}],25:[function(require,module,exports){
+
+/**
+ * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
+ * in FIPS 180-2
+ * Version 2.2-beta Copyright Angel Marin, Paul Johnston 2000 - 2009.
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ *
+ */
+
+var helpers = require('./helpers');
+
+var safe_add = function(x, y) {
+  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
+  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+  return (msw << 16) | (lsw & 0xFFFF);
+};
+
+var S = function(X, n) {
+  return (X >>> n) | (X << (32 - n));
+};
+
+var R = function(X, n) {
+  return (X >>> n);
+};
+
+var Ch = function(x, y, z) {
+  return ((x & y) ^ ((~x) & z));
+};
+
+var Maj = function(x, y, z) {
+  return ((x & y) ^ (x & z) ^ (y & z));
+};
+
+var Sigma0256 = function(x) {
+  return (S(x, 2) ^ S(x, 13) ^ S(x, 22));
+};
+
+var Sigma1256 = function(x) {
+  return (S(x, 6) ^ S(x, 11) ^ S(x, 25));
+};
+
+var Gamma0256 = function(x) {
+  return (S(x, 7) ^ S(x, 18) ^ R(x, 3));
+};
+
+var Gamma1256 = function(x) {
+  return (S(x, 17) ^ S(x, 19) ^ R(x, 10));
+};
+
+var core_sha256 = function(m, l) {
+  var K = new Array(0x428A2F98,0x71374491,0xB5C0FBCF,0xE9B5DBA5,0x3956C25B,0x59F111F1,0x923F82A4,0xAB1C5ED5,0xD807AA98,0x12835B01,0x243185BE,0x550C7DC3,0x72BE5D74,0x80DEB1FE,0x9BDC06A7,0xC19BF174,0xE49B69C1,0xEFBE4786,0xFC19DC6,0x240CA1CC,0x2DE92C6F,0x4A7484AA,0x5CB0A9DC,0x76F988DA,0x983E5152,0xA831C66D,0xB00327C8,0xBF597FC7,0xC6E00BF3,0xD5A79147,0x6CA6351,0x14292967,0x27B70A85,0x2E1B2138,0x4D2C6DFC,0x53380D13,0x650A7354,0x766A0ABB,0x81C2C92E,0x92722C85,0xA2BFE8A1,0xA81A664B,0xC24B8B70,0xC76C51A3,0xD192E819,0xD6990624,0xF40E3585,0x106AA070,0x19A4C116,0x1E376C08,0x2748774C,0x34B0BCB5,0x391C0CB3,0x4ED8AA4A,0x5B9CCA4F,0x682E6FF3,0x748F82EE,0x78A5636F,0x84C87814,0x8CC70208,0x90BEFFFA,0xA4506CEB,0xBEF9A3F7,0xC67178F2);
+  var HASH = new Array(0x6A09E667, 0xBB67AE85, 0x3C6EF372, 0xA54FF53A, 0x510E527F, 0x9B05688C, 0x1F83D9AB, 0x5BE0CD19);
+    var W = new Array(64);
+    var a, b, c, d, e, f, g, h, i, j;
+    var T1, T2;
+  /* append padding */
+  m[l >> 5] |= 0x80 << (24 - l % 32);
+  m[((l + 64 >> 9) << 4) + 15] = l;
+  for (var i = 0; i < m.length; i += 16) {
+    a = HASH[0]; b = HASH[1]; c = HASH[2]; d = HASH[3]; e = HASH[4]; f = HASH[5]; g = HASH[6]; h = HASH[7];
+    for (var j = 0; j < 64; j++) {
+      if (j < 16) {
+        W[j] = m[j + i];
+      } else {
+        W[j] = safe_add(safe_add(safe_add(Gamma1256(W[j - 2]), W[j - 7]), Gamma0256(W[j - 15])), W[j - 16]);
+      }
+      T1 = safe_add(safe_add(safe_add(safe_add(h, Sigma1256(e)), Ch(e, f, g)), K[j]), W[j]);
+      T2 = safe_add(Sigma0256(a), Maj(a, b, c));
+      h = g; g = f; f = e; e = safe_add(d, T1); d = c; c = b; b = a; a = safe_add(T1, T2);
+    }
+    HASH[0] = safe_add(a, HASH[0]); HASH[1] = safe_add(b, HASH[1]); HASH[2] = safe_add(c, HASH[2]); HASH[3] = safe_add(d, HASH[3]);
+    HASH[4] = safe_add(e, HASH[4]); HASH[5] = safe_add(f, HASH[5]); HASH[6] = safe_add(g, HASH[6]); HASH[7] = safe_add(h, HASH[7]);
+  }
+  return HASH;
+};
+
+module.exports = function sha256(buf) {
+  return helpers.hash(buf, core_sha256, 32, true);
+};
+
+},{"./helpers":20}],26:[function(require,module,exports){
 var http = module.exports;
 var EventEmitter = require('events').EventEmitter;
 var Request = require('./lib/request');
@@ -5988,22 +6212,7 @@ var xhrHttp = (function () {
     }
 })();
 
-},{"./lib/request":21,"events":9}],21:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{"./lib/request":27,"events":9}],27:[function(require,module,exports){
 var Stream = require('stream');
 var Response = require('./response');
 var concatStream = require('concat-stream');
@@ -6137,22 +6346,7 @@ var indexOf = function (xs, x) {
     return -1;
 };
 
-},{"./response":22,"Base64":23,"concat-stream":24,"stream":12,"util":16}],22:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{"./response":28,"Base64":29,"concat-stream":30,"stream":12,"util":16}],28:[function(require,module,exports){
 var Stream = require('stream');
 var util = require('util');
 
@@ -6274,26 +6468,11 @@ var isArray = Array.isArray || function (xs) {
     return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{"stream":12,"util":16}],23:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{"stream":12,"util":16}],29:[function(require,module,exports){
 ;(function () {
 
   var
-    object = typeof exports != 'undefined' ? exports : window,
+    object = typeof exports != 'undefined' ? exports : this, // #8: web workers
     chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
     INVALID_CHARACTER_ERR = (function () {
       // fabricate a suitable error object
@@ -6346,22 +6525,7 @@ var isArray = Array.isArray || function (xs) {
 
 }());
 
-},{}],24:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{}],30:[function(require,module,exports){
 var stream = require('stream')
 var bops = require('bops')
 var util = require('util')
@@ -6412,22 +6576,7 @@ module.exports = function(cb) {
 
 module.exports.ConcatStream = ConcatStream
 
-},{"bops":25,"stream":12,"util":16}],25:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{"bops":31,"stream":12,"util":16}],31:[function(require,module,exports){
 var proto = {}
 module.exports = proto
 
@@ -6448,24 +6597,9 @@ function mix(from, into) {
   }
 }
 
-},{"./copy.js":28,"./create.js":29,"./from.js":30,"./is.js":31,"./join.js":32,"./read.js":34,"./subarray.js":35,"./to.js":36,"./write.js":37}],26:[function(require,module,exports){
+},{"./copy.js":34,"./create.js":35,"./from.js":36,"./is.js":37,"./join.js":38,"./read.js":40,"./subarray.js":41,"./to.js":42,"./write.js":43}],32:[function(require,module,exports){
 module.exports=require(19)
-},{}],27:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{}],33:[function(require,module,exports){
 module.exports = to_utf8
 
 var out = []
@@ -6540,22 +6674,7 @@ function reduced(list) {
   return out
 }
 
-},{}],28:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{}],34:[function(require,module,exports){
 module.exports = copy
 
 var slice = [].slice
@@ -6609,42 +6728,12 @@ function slow_copy(from, to, j, i, jend) {
   }
 }
 
-},{}],29:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{}],35:[function(require,module,exports){
 module.exports = function(size) {
   return new Uint8Array(size)
 }
 
-},{}],30:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{}],36:[function(require,module,exports){
 module.exports = from
 
 var base64 = require('base64-js')
@@ -6704,43 +6793,13 @@ function from_base64(str) {
   return new Uint8Array(base64.toByteArray(str)) 
 }
 
-},{"base64-js":26}],31:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{"base64-js":32}],37:[function(require,module,exports){
 
 module.exports = function(buffer) {
   return buffer instanceof Uint8Array;
 }
 
-},{}],32:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{}],38:[function(require,module,exports){
 module.exports = join
 
 function join(targets, hint) {
@@ -6778,22 +6837,7 @@ function get_length(targets) {
   return size
 }
 
-},{}],33:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{}],39:[function(require,module,exports){
 var proto
   , map
 
@@ -6815,22 +6859,7 @@ function get(target) {
   return out
 }
 
-},{}],34:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{}],40:[function(require,module,exports){
 module.exports = {
     readUInt8:      read_uint8
   , readInt8:       read_int8
@@ -6919,44 +6948,14 @@ function read_double_be(target, at) {
   return dv.getFloat64(at + target.byteOffset, false)
 }
 
-},{"./mapped.js":33}],35:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{"./mapped.js":39}],41:[function(require,module,exports){
 module.exports = subarray
 
 function subarray(buf, from, to) {
   return buf.subarray(from || 0, to || buf.length)
 }
 
-},{}],36:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{}],42:[function(require,module,exports){
 module.exports = to
 
 var base64 = require('base64-js')
@@ -6994,22 +6993,7 @@ function to_base64(buf) {
 }
 
 
-},{"base64-js":26,"to-utf8":27}],37:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{"base64-js":32,"to-utf8":33}],43:[function(require,module,exports){
 module.exports = {
     writeUInt8:      write_uint8
   , writeInt8:       write_int8
@@ -7097,22 +7081,7 @@ function write_double_be(target, value, at) {
   return dv.setFloat64(at + target.byteOffset, value, false)
 }
 
-},{"./mapped.js":33}],38:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{"./mapped.js":39}],44:[function(require,module,exports){
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 exports.readIEEE754 = function(buffer, offset, isBE, mLen, nBytes) {
   var e, m,
@@ -9492,22 +9461,7 @@ function hasOwnProperty(obj, prop) {
 },{"_shims":5}]},{},[])
 ;;module.exports=require("buffer-browserify")
 
-},{}],39:[function(require,module,exports){
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
+},{}],45:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -9561,7 +9515,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],40:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9581,7 +9535,7 @@ window.AWS = module.exports = require('./core');
 require('./http/xhr');
 require('./services');
 
-},{"./core":42,"./http/xhr":50,"./services":61}],41:[function(require,module,exports){
+},{"./core":48,"./http/xhr":56,"./services":67}],47:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9899,7 +9853,7 @@ AWS.Config = AWS.util.inherit({
  */
 AWS.config = new AWS.Config();
 
-},{"./core":42,"./credentials":43,"./credentials/credential_provider_chain":44}],42:[function(require,module,exports){
+},{"./core":48,"./credentials":49,"./credentials/credential_provider_chain":50}],48:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -9980,7 +9934,7 @@ AWS.events = new AWS.SequentialExecutor();
 
 if (typeof window !== 'undefined') window.AWS = AWS;
 
-},{"./config":41,"./credentials":43,"./credentials/credential_provider_chain":44,"./credentials/temporary_credentials":46,"./credentials/web_identity_credentials":47,"./event_listeners":48,"./http":49,"./param_validator":52,"./request":53,"./sequential_executor":54,"./service":55,"./signers/request_signer":128,"./util":134}],43:[function(require,module,exports){
+},{"./config":47,"./credentials":49,"./credentials/credential_provider_chain":50,"./credentials/temporary_credentials":52,"./credentials/web_identity_credentials":53,"./event_listeners":54,"./http":55,"./param_validator":58,"./request":59,"./sequential_executor":60,"./service":61,"./signers/request_signer":134,"./util":140}],49:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10144,7 +10098,7 @@ AWS.Credentials = AWS.util.inherit({
   }
 });
 
-},{"./core":42}],44:[function(require,module,exports){
+},{"./core":48}],50:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10275,7 +10229,7 @@ AWS.CredentialProviderChain = AWS.util.inherit(AWS.Credentials, {
  */
 AWS.CredentialProviderChain.defaultProviders = [];
 
-},{"../core":42,"../credentials":43}],45:[function(require,module,exports){
+},{"../core":48,"../credentials":49}],51:[function(require,module,exports){
 var process=require("__browserify_process");/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10377,7 +10331,7 @@ AWS.EnvironmentCredentials = AWS.util.inherit(AWS.Credentials, {
 
 });
 
-},{"../core":42,"../credentials":43,"__browserify_process":39}],46:[function(require,module,exports){
+},{"../core":48,"../credentials":49,"__browserify_process":45}],52:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10505,7 +10459,7 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
   }
 });
 
-},{"../core":42,"../credentials":43,"../services/sts":125}],47:[function(require,module,exports){
+},{"../core":48,"../credentials":49,"../services/sts":131}],53:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10610,7 +10564,7 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
   }
 });
 
-},{"../core":42,"../credentials":43,"../services/sts":125}],48:[function(require,module,exports){
+},{"../core":48,"../credentials":49,"../services/sts":131}],54:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -10722,7 +10676,6 @@ AWS.EventListeners = {
     });
 
     add('SET_CONTENT_LENGTH', 'afterBuild', function SET_CONTENT_LENGTH(req) {
-      if (AWS.util.isBrowser()) return;
       if (req.httpRequest.headers['Content-Length'] === undefined) {
         var length = AWS.util.string.byteLength(req.httpRequest.body);
         req.httpRequest.headers['Content-Length'] = length;
@@ -10730,7 +10683,7 @@ AWS.EventListeners = {
     });
 
     add('SET_HTTP_HOST', 'afterBuild', function SET_HTTP_HOST(req) {
-      req.httpRequest.headers['Host'] = req.httpRequest.endpoint.hostname;
+      req.httpRequest.headers['Host'] = req.httpRequest.endpoint.host;
     });
 
     addAsync('SIGN', 'sign', function SIGN(req, doneCallback) {
@@ -10975,7 +10928,7 @@ AWS.EventListeners = {
   })
 };
 
-},{"./core":42,"./sequential_executor":54,"./service_interface/json":56,"./service_interface/query":57,"./service_interface/rest":58,"./service_interface/rest_json":59,"./service_interface/rest_xml":60,"buffer":18,"util":16}],49:[function(require,module,exports){
+},{"./core":48,"./sequential_executor":60,"./service_interface/json":62,"./service_interface/query":63,"./service_interface/rest":64,"./service_interface/rest_json":65,"./service_interface/rest_xml":66,"buffer":18,"util":16}],55:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -11149,7 +11102,7 @@ AWS.HttpClient.getInstance = function getInstance() {
   return this.singleton;
 };
 
-},{"./core":42}],50:[function(require,module,exports){
+},{"./core":48}],56:[function(require,module,exports){
 var Buffer=require("__browserify_Buffer").Buffer;/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -11248,7 +11201,7 @@ AWS.HttpClient.prototype = AWS.XHRClient.prototype;
  */
 AWS.HttpClient.streamsApiVersion = 1;
 
-},{"../core":42,"../http":49,"__browserify_Buffer":38,"events":9}],51:[function(require,module,exports){
+},{"../core":48,"../http":55,"__browserify_Buffer":44,"events":9}],57:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -11332,7 +11285,7 @@ AWS.JSON.Builder = inherit({
 
 });
 
-},{"../core":42}],52:[function(require,module,exports){
+},{"../core":48}],58:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -11349,6 +11302,7 @@ AWS.JSON.Builder = inherit({
  */
 
 var AWS = require('./core');
+var Stream = require('stream').Stream;
 var Buffer = require('buffer').Buffer;
 
 /**
@@ -11381,6 +11335,8 @@ AWS.ParamValidator = AWS.util.inherit({
 
     // validate hash members
     for (paramName in params) {
+      if (!params.hasOwnProperty(paramName)) continue;
+
       var paramValue = params[paramName],
           paramRules = rules[paramName];
 
@@ -11488,7 +11444,7 @@ AWS.ParamValidator = AWS.util.inherit({
   }
 });
 
-},{"./core":42,"buffer":18}],53:[function(require,module,exports){
+},{"./core":48,"buffer":18,"stream":12}],59:[function(require,module,exports){
 var process=require("__browserify_process");/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -12252,7 +12208,7 @@ AWS.Response = inherit({
 
 });
 
-},{"./core":42,"__browserify_process":39,"stream":12}],54:[function(require,module,exports){
+},{"./core":48,"__browserify_process":45,"stream":12}],60:[function(require,module,exports){
 var process=require("__browserify_process");/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -12528,7 +12484,7 @@ AWS.SequentialExecutor = AWS.util.inherit({
  */
 AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.on;
 
-},{"./core":42,"__browserify_process":39,"domain":1,"events":9}],55:[function(require,module,exports){
+},{"./core":48,"__browserify_process":45,"domain":1,"events":9}],61:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -12835,7 +12791,7 @@ AWS.util.update(AWS.Service, {
   }
 });
 
-},{"./core":42}],56:[function(require,module,exports){
+},{"./core":48}],62:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -12903,7 +12859,7 @@ AWS.ServiceInterface.Json = {
 
 };
 
-},{"../core":42,"../json/builder":51}],57:[function(require,module,exports){
+},{"../core":48,"../json/builder":57}],63:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -13084,7 +13040,7 @@ AWS.QueryParamSerializer = inherit({
 
 });
 
-},{"../core":42,"../xml/parser":136}],58:[function(require,module,exports){
+},{"../core":48,"../xml/parser":142}],64:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -13228,7 +13184,7 @@ AWS.ServiceInterface.Rest = {
   }
 };
 
-},{"../core":42}],59:[function(require,module,exports){
+},{"../core":48}],65:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -13322,7 +13278,7 @@ AWS.ServiceInterface.RestJson = {
 
 };
 
-},{"../core":42,"./json":56,"./rest":58}],60:[function(require,module,exports){
+},{"../core":48,"./json":62,"./rest":64}],66:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -13434,7 +13390,7 @@ AWS.ServiceInterface.RestXml = {
   }
 };
 
-},{"../core":42,"../xml/builder":135,"./rest":58}],61:[function(require,module,exports){
+},{"../core":48,"../xml/builder":141,"./rest":64}],67:[function(require,module,exports){
 var AWS = require("./core"); module.exports = AWS;
 AWS.Service.defineServiceApi(require("./services/autoscaling"), "2011-01-01", require("./services/api/autoscaling-2011-01-01"));
 AWS.Service.defineServiceApi(require("./services/cloudformation"), "2010-05-15", require("./services/api/cloudformation-2010-05-15"));
@@ -13471,7 +13427,7 @@ AWS.Service.defineServiceApi(require("./services/sqs"), "2012-11-05", require(".
 AWS.Service.defineServiceApi(require("./services/storagegateway"), "2012-06-30", require("./services/api/storagegateway-2012-06-30"));
 AWS.Service.defineServiceApi(require("./services/sts"), "2011-06-15", require("./services/api/sts-2011-06-15"));
 AWS.Service.defineServiceApi(require("./services/support"), "2013-04-15", require("./services/api/support-2013-04-15"));
-},{"./core":42,"./services/api/autoscaling-2011-01-01":62,"./services/api/cloudformation-2010-05-15":63,"./services/api/cloudfront-2012-05-05":64,"./services/api/cloudfront-2013-05-12":65,"./services/api/cloudfront-2013-08-26":66,"./services/api/cloudsearch-2011-02-01":67,"./services/api/cloudwatch-2010-08-01":68,"./services/api/datapipeline-2012-10-29":69,"./services/api/directconnect-2012-10-25":70,"./services/api/dynamodb-2011-12-05":71,"./services/api/dynamodb-2012-08-10":72,"./services/api/ec2-2013-08-15":73,"./services/api/elasticache-2013-06-15":74,"./services/api/elasticbeanstalk-2010-12-01":75,"./services/api/elastictranscoder-2012-09-25":76,"./services/api/elb-2012-06-01":77,"./services/api/emr-2009-03-31":78,"./services/api/glacier-2012-06-01":79,"./services/api/iam-2010-05-08":80,"./services/api/importexport-2010-06-01":81,"./services/api/opsworks-2013-02-18":82,"./services/api/rds-2013-01-10":83,"./services/api/rds-2013-02-12":84,"./services/api/rds-2013-05-15":85,"./services/api/redshift-2012-12-01":86,"./services/api/route53-2012-12-12":87,"./services/api/s3-2006-03-01":88,"./services/api/ses-2010-12-01":89,"./services/api/simpledb-2009-04-15":90,"./services/api/simpleworkflow-2012-01-25":91,"./services/api/sns-2010-03-31":92,"./services/api/sqs-2012-11-05":93,"./services/api/storagegateway-2012-06-30":94,"./services/api/sts-2011-06-15":95,"./services/api/support-2013-04-15":96,"./services/autoscaling":97,"./services/cloudformation":98,"./services/cloudfront":99,"./services/cloudsearch":100,"./services/cloudwatch":101,"./services/datapipeline":102,"./services/directconnect":103,"./services/dynamodb":104,"./services/ec2":105,"./services/elasticache":106,"./services/elasticbeanstalk":107,"./services/elastictranscoder":108,"./services/elb":109,"./services/emr":110,"./services/glacier":111,"./services/iam":112,"./services/importexport":113,"./services/opsworks":114,"./services/rds":115,"./services/redshift":116,"./services/route53":117,"./services/s3":118,"./services/ses":119,"./services/simpledb":120,"./services/simpleworkflow":121,"./services/sns":122,"./services/sqs":123,"./services/storagegateway":124,"./services/sts":125,"./services/support":126}],62:[function(require,module,exports){
+},{"./core":48,"./services/api/autoscaling-2011-01-01":68,"./services/api/cloudformation-2010-05-15":69,"./services/api/cloudfront-2012-05-05":70,"./services/api/cloudfront-2013-05-12":71,"./services/api/cloudfront-2013-08-26":72,"./services/api/cloudsearch-2011-02-01":73,"./services/api/cloudwatch-2010-08-01":74,"./services/api/datapipeline-2012-10-29":75,"./services/api/directconnect-2012-10-25":76,"./services/api/dynamodb-2011-12-05":77,"./services/api/dynamodb-2012-08-10":78,"./services/api/ec2-2013-08-15":79,"./services/api/elasticache-2013-06-15":80,"./services/api/elasticbeanstalk-2010-12-01":81,"./services/api/elastictranscoder-2012-09-25":82,"./services/api/elb-2012-06-01":83,"./services/api/emr-2009-03-31":84,"./services/api/glacier-2012-06-01":85,"./services/api/iam-2010-05-08":86,"./services/api/importexport-2010-06-01":87,"./services/api/opsworks-2013-02-18":88,"./services/api/rds-2013-01-10":89,"./services/api/rds-2013-02-12":90,"./services/api/rds-2013-05-15":91,"./services/api/redshift-2012-12-01":92,"./services/api/route53-2012-12-12":93,"./services/api/s3-2006-03-01":94,"./services/api/ses-2010-12-01":95,"./services/api/simpledb-2009-04-15":96,"./services/api/simpleworkflow-2012-01-25":97,"./services/api/sns-2010-03-31":98,"./services/api/sqs-2012-11-05":99,"./services/api/storagegateway-2012-06-30":100,"./services/api/sts-2011-06-15":101,"./services/api/support-2013-04-15":102,"./services/autoscaling":103,"./services/cloudformation":104,"./services/cloudfront":105,"./services/cloudsearch":106,"./services/cloudwatch":107,"./services/datapipeline":108,"./services/directconnect":109,"./services/dynamodb":110,"./services/ec2":111,"./services/elasticache":112,"./services/elasticbeanstalk":113,"./services/elastictranscoder":114,"./services/elb":115,"./services/emr":116,"./services/glacier":117,"./services/iam":118,"./services/importexport":119,"./services/opsworks":120,"./services/rds":121,"./services/redshift":122,"./services/route53":123,"./services/s3":124,"./services/ses":125,"./services/simpledb":126,"./services/simpleworkflow":127,"./services/sns":128,"./services/sqs":129,"./services/storagegateway":130,"./services/sts":131,"./services/support":132}],68:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -14888,7 +14844,7 @@ module.exports = {
   }
 };
 
-},{}],63:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -15491,7 +15447,7 @@ module.exports = {
   }
 };
 
-},{}],64:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -18309,7 +18265,7 @@ module.exports = {
   }
 };
 
-},{}],65:[function(require,module,exports){
+},{}],71:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -21558,7 +21514,7 @@ module.exports = {
   }
 };
 
-},{}],66:[function(require,module,exports){
+},{}],72:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -25000,7 +24956,7 @@ module.exports = {
   }
 };
 
-},{}],67:[function(require,module,exports){
+},{}],73:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -26390,7 +26346,7 @@ module.exports = {
   }
 };
 
-},{}],68:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -27096,7 +27052,7 @@ module.exports = {
   }
 };
 
-},{}],69:[function(require,module,exports){
+},{}],75:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -27787,7 +27743,7 @@ module.exports = {
   }
 };
 
-},{}],70:[function(require,module,exports){
+},{}],76:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -28356,7 +28312,7 @@ module.exports = {
   }
 };
 
-},{}],71:[function(require,module,exports){
+},{}],77:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -30405,7 +30361,7 @@ module.exports = {
   }
 };
 
-},{}],72:[function(require,module,exports){
+},{}],78:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -32579,7 +32535,7 @@ module.exports = {
   }
 };
 
-},{}],73:[function(require,module,exports){
+},{}],79:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -43866,7 +43822,7 @@ module.exports = {
   }
 };
 
-},{}],74:[function(require,module,exports){
+},{}],80:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -46312,7 +46268,7 @@ module.exports = {
   }
 };
 
-},{}],75:[function(require,module,exports){
+},{}],81:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -47784,7 +47740,7 @@ module.exports = {
   }
 };
 
-},{}],76:[function(require,module,exports){
+},{}],82:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -50006,7 +49962,7 @@ module.exports = {
   }
 };
 
-},{}],77:[function(require,module,exports){
+},{}],83:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -50942,7 +50898,7 @@ module.exports = {
   }
 };
 
-},{}],78:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -51592,7 +51548,7 @@ module.exports = {
   }
 };
 
-},{}],79:[function(require,module,exports){
+},{}],85:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -52456,7 +52412,7 @@ module.exports = {
   }
 };
 
-},{}],80:[function(require,module,exports){
+},{}],86:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -54638,7 +54594,7 @@ module.exports = {
   }
 };
 
-},{}],81:[function(require,module,exports){
+},{}],87:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -54871,7 +54827,7 @@ module.exports = {
   }
 };
 
-},{}],82:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -57103,7 +57059,7 @@ module.exports = {
   }
 };
 
-},{}],83:[function(require,module,exports){
+},{}],89:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -61630,7 +61586,7 @@ module.exports = {
   }
 };
 
-},{}],84:[function(require,module,exports){
+},{}],90:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -66418,7 +66374,7 @@ module.exports = {
   }
 };
 
-},{}],85:[function(require,module,exports){
+},{}],91:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -71688,7 +71644,7 @@ module.exports = {
   }
 };
 
-},{}],86:[function(require,module,exports){
+},{}],92:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -74525,7 +74481,7 @@ module.exports = {
   }
 };
 
-},{}],87:[function(require,module,exports){
+},{}],93:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -75341,7 +75297,7 @@ module.exports = {
   }
 };
 
-},{}],88:[function(require,module,exports){
+},{}],94:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -78417,7 +78373,7 @@ module.exports = {
   }
 };
 
-},{}],89:[function(require,module,exports){
+},{}],95:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -78954,7 +78910,7 @@ module.exports = {
   }
 };
 
-},{}],90:[function(require,module,exports){
+},{}],96:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -79401,7 +79357,7 @@ module.exports = {
   }
 };
 
-},{}],91:[function(require,module,exports){
+},{}],97:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -82893,7 +82849,7 @@ module.exports = {
   }
 };
 
-},{}],92:[function(require,module,exports){
+},{}],98:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -83555,7 +83511,7 @@ module.exports = {
   }
 };
 
-},{}],93:[function(require,module,exports){
+},{}],99:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -84131,7 +84087,7 @@ module.exports = {
   }
 };
 
-},{}],94:[function(require,module,exports){
+},{}],100:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -85212,7 +85168,7 @@ module.exports = {
   }
 };
 
-},{}],95:[function(require,module,exports){
+},{}],101:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -85450,7 +85406,7 @@ module.exports = {
   }
 };
 
-},{}],96:[function(require,module,exports){
+},{}],102:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86049,7 +86005,7 @@ module.exports = {
   }
 };
 
-},{}],97:[function(require,module,exports){
+},{}],103:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86071,7 +86027,7 @@ AWS.AutoScaling = AWS.Service.defineService('autoscaling', ['2011-01-01']);
 
 module.exports = AWS.AutoScaling;
 
-},{"../core":42}],98:[function(require,module,exports){
+},{"../core":48}],104:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86093,7 +86049,7 @@ AWS.CloudFormation = AWS.Service.defineService('cloudformation', ['2010-05-15'])
 
 module.exports = AWS.CloudFormation;
 
-},{"../core":42}],99:[function(require,module,exports){
+},{"../core":48}],105:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86115,7 +86071,7 @@ AWS.CloudFront = AWS.Service.defineService('cloudfront', ['2012-05-05', '2013-05
 
 module.exports = AWS.CloudFront;
 
-},{"../core":42}],100:[function(require,module,exports){
+},{"../core":48}],106:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86137,7 +86093,7 @@ AWS.CloudSearch = AWS.Service.defineService('cloudsearch', ['2011-02-01']);
 
 module.exports = AWS.CloudSearch;
 
-},{"../core":42}],101:[function(require,module,exports){
+},{"../core":48}],107:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86159,7 +86115,7 @@ AWS.CloudWatch = AWS.Service.defineService('cloudwatch', ['2010-08-01']);
 
 module.exports = AWS.CloudWatch;
 
-},{"../core":42}],102:[function(require,module,exports){
+},{"../core":48}],108:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86181,7 +86137,7 @@ AWS.DataPipeline = AWS.Service.defineService('datapipeline', ['2012-10-29']);
 
 module.exports = AWS.DataPipeline;
 
-},{"../core":42}],103:[function(require,module,exports){
+},{"../core":48}],109:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86203,7 +86159,7 @@ AWS.DirectConnect = AWS.Service.defineService('directconnect', ['2012-10-25']);
 
 module.exports = AWS.DirectConnect;
 
-},{"../core":42}],104:[function(require,module,exports){
+},{"../core":48}],110:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86274,7 +86230,7 @@ AWS.DynamoDB = AWS.Service.defineService('dynamodb', ['2012-08-10', '2011-12-05'
 
 module.exports = AWS.DynamoDB;
 
-},{"../core":42}],105:[function(require,module,exports){
+},{"../core":48}],111:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86320,7 +86276,7 @@ AWS.EC2 = AWS.Service.defineService('ec2', ['2013-06-15*', '2013-07-15*', '2013-
 
 module.exports = AWS.EC2;
 
-},{"../core":42}],106:[function(require,module,exports){
+},{"../core":48}],112:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86342,7 +86298,7 @@ AWS.ElastiCache = AWS.Service.defineService('elasticache', ['2012-11-15*', '2013
 
 module.exports = AWS.ElastiCache;
 
-},{"../core":42}],107:[function(require,module,exports){
+},{"../core":48}],113:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86364,7 +86320,7 @@ AWS.ElasticBeanstalk = AWS.Service.defineService('elasticbeanstalk', ['2010-12-0
 
 module.exports = AWS.ElasticBeanstalk;
 
-},{"../core":42}],108:[function(require,module,exports){
+},{"../core":48}],114:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86401,7 +86357,7 @@ AWS.ElasticTranscoder = AWS.Service.defineService('elastictranscoder', ['2012-09
 
 module.exports = AWS.ElasticTranscoder;
 
-},{"../core":42}],109:[function(require,module,exports){
+},{"../core":48}],115:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86423,7 +86379,7 @@ AWS.ELB = AWS.Service.defineService('elb', ['2012-06-01']);
 
 module.exports = AWS.ELB;
 
-},{"../core":42}],110:[function(require,module,exports){
+},{"../core":48}],116:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86445,7 +86401,7 @@ AWS.EMR = AWS.Service.defineService('emr', ['2009-03-31']);
 
 module.exports = AWS.EMR;
 
-},{"../core":42}],111:[function(require,module,exports){
+},{"../core":48}],117:[function(require,module,exports){
 var Buffer=require("__browserify_Buffer").Buffer;/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86562,7 +86518,7 @@ AWS.util.update(AWS.Glacier.prototype, {
 
 module.exports = AWS.Glacier;
 
-},{"../core":42,"__browserify_Buffer":38}],112:[function(require,module,exports){
+},{"../core":48,"__browserify_Buffer":44}],118:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86584,7 +86540,7 @@ AWS.IAM = AWS.Service.defineService('iam', ['2010-05-08']);
 
 module.exports = AWS.IAM;
 
-},{"../core":42}],113:[function(require,module,exports){
+},{"../core":48}],119:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86606,7 +86562,7 @@ AWS.ImportExport = AWS.Service.defineService('importexport', ['2010-06-01']);
 
 module.exports = AWS.ImportExport;
 
-},{"../core":42}],114:[function(require,module,exports){
+},{"../core":48}],120:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86628,7 +86584,7 @@ AWS.OpsWorks = AWS.Service.defineService('opsworks', ['2013-02-18']);
 
 module.exports = AWS.OpsWorks;
 
-},{"../core":42}],115:[function(require,module,exports){
+},{"../core":48}],121:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86650,7 +86606,7 @@ AWS.RDS = AWS.Service.defineService('rds', ['2013-05-15', '2013-02-12', '2013-01
 
 module.exports = AWS.RDS;
 
-},{"../core":42}],116:[function(require,module,exports){
+},{"../core":48}],122:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86672,7 +86628,7 @@ AWS.Redshift = AWS.Service.defineService('redshift', ['2012-12-01']);
 
 module.exports = AWS.Redshift;
 
-},{"../core":42}],117:[function(require,module,exports){
+},{"../core":48}],123:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86721,7 +86677,7 @@ AWS.Route53 = AWS.Service.defineService('route53', ['2012-12-12'], {
 
 module.exports = AWS.Route53;
 
-},{"../core":42}],118:[function(require,module,exports){
+},{"../core":48}],124:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -86738,6 +86694,7 @@ module.exports = AWS.Route53;
  */
 
 var AWS = require('../core');
+var Buffer = require('buffer').Buffer;
 
 AWS.S3 = AWS.Service.defineService('s3', ['2006-03-01'], {
   /**
@@ -86821,7 +86778,10 @@ AWS.S3 = AWS.Service.defineService('s3', ['2006-03-01'], {
     if (!this.config.computeChecksums) return false;
 
     // TODO: compute checksums for Stream objects
-    if (AWS.util.isType(req.httpRequest.body, 'Stream')) return false;
+    if (!Buffer.isBuffer(req.httpRequest.body) &&
+        typeof req.httpRequest.body !== 'string') {
+      return false;
+    }
 
     var rules = req.service.api.operations[req.operation].input.members;
     if (rules.ContentMD5 && !req.params.ContentMD5) return true;
@@ -87085,7 +87045,7 @@ AWS.S3.prototype.createBucket = function createBucket(params, callback) {
 
 module.exports = AWS.S3;
 
-},{"../core":42,"url":15}],119:[function(require,module,exports){
+},{"../core":48,"buffer":18,"url":15}],125:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87129,7 +87089,7 @@ AWS.SES = AWS.Service.defineService('ses', ['2010-12-01'], {
 
 module.exports = AWS.SES;
 
-},{"../core":42}],120:[function(require,module,exports){
+},{"../core":48}],126:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87163,7 +87123,7 @@ AWS.SimpleDB = AWS.Service.defineService('simpledb', ['2009-04-15'], {
 
 module.exports = AWS.SimpleDB;
 
-},{"../core":42}],121:[function(require,module,exports){
+},{"../core":48}],127:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87185,7 +87145,7 @@ AWS.SimpleWorkflow = AWS.Service.defineService('simpleworkflow', ['2012-01-25'])
 
 module.exports = AWS.SimpleWorkflow;
 
-},{"../core":42}],122:[function(require,module,exports){
+},{"../core":48}],128:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87207,7 +87167,7 @@ AWS.SNS = AWS.Service.defineService('sns', ['2010-03-31']);
 
 module.exports = AWS.SNS;
 
-},{"../core":42}],123:[function(require,module,exports){
+},{"../core":48}],129:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87334,7 +87294,7 @@ AWS.SQS = AWS.Service.defineService('sqs', ['2012-11-05'], {
 
 module.exports = AWS.SQS;
 
-},{"../core":42}],124:[function(require,module,exports){
+},{"../core":48}],130:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87356,7 +87316,7 @@ AWS.StorageGateway = AWS.Service.defineService('storagegateway', ['2012-06-30'])
 
 module.exports = AWS.StorageGateway;
 
-},{"../core":42}],125:[function(require,module,exports){
+},{"../core":48}],131:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87436,7 +87396,7 @@ AWS.STS.prototype.assumeRoleWithWebIdentity = function assumeRoleWithWebIdentity
 
 module.exports = AWS.STS;
 
-},{"../core":42}],126:[function(require,module,exports){
+},{"../core":48}],132:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87458,7 +87418,7 @@ AWS.Support = AWS.Service.defineService('support', ['2013-04-15']);
 
 module.exports = AWS.Support;
 
-},{"../core":42}],127:[function(require,module,exports){
+},{"../core":48}],133:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87492,7 +87452,7 @@ AWS.Signers.CloudFront = inherit(AWS.Signers.S3, {
 
 module.exports = AWS.Signers.CloudFront;
 
-},{"../core":42,"./v3":131}],128:[function(require,module,exports){
+},{"../core":48,"./v3":137}],134:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87540,7 +87500,7 @@ require('./v4');
 require('./s3');
 require('./cloudfront');
 
-},{"../core":42,"./cloudfront":127,"./s3":129,"./v2":130,"./v3":131,"./v3https":132,"./v4":133}],129:[function(require,module,exports){
+},{"../core":48,"./cloudfront":133,"./s3":135,"./v2":136,"./v3":137,"./v3https":138,"./v4":139}],135:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87723,7 +87683,7 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.S3;
 
-},{"../core":42}],130:[function(require,module,exports){
+},{"../core":48}],136:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87785,7 +87745,7 @@ AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V2;
 
-},{"../core":42}],131:[function(require,module,exports){
+},{"../core":48}],137:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87876,7 +87836,7 @@ AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V3;
 
-},{"../core":42}],132:[function(require,module,exports){
+},{"../core":48}],138:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87915,7 +87875,7 @@ AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
 
 module.exports = AWS.Signers.V3Https;
 
-},{"../core":42,"./v3":131}],133:[function(require,module,exports){
+},{"../core":48,"./v3":137}],139:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -87971,14 +87931,18 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
   signature: function signature(credentials, datetime) {
     var cache = cachedSecret[this.serviceName];
     var date = datetime.substr(0, 8);
-    if (!cache || cache.region !== this.request.region || cache.date !== date) {
+    if (!cache ||
+        cache.akid !== credentials.accessKeyId ||
+        cache.region !== this.request.region ||
+        cache.date !== date) {
       var kSecret = credentials.secretAccessKey;
       var kDate = AWS.util.crypto.hmac('AWS4' + kSecret, date, 'buffer');
       var kRegion = AWS.util.crypto.hmac(kDate, this.request.region, 'buffer');
       var kService = AWS.util.crypto.hmac(kRegion, this.serviceName, 'buffer');
       var kCredentials = AWS.util.crypto.hmac(kService, 'aws4_request', 'buffer');
       cachedSecret[this.serviceName] = {
-        region: this.request.region, date: date, key: kCredentials
+        region: this.request.region, date: date,
+        key: kCredentials, akid: credentials.accessKeyId
       };
     }
 
@@ -88054,7 +88018,7 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V4;
 
-},{"../core":42}],134:[function(require,module,exports){
+},{"../core":48}],140:[function(require,module,exports){
 var process=require("__browserify_process");/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -88578,7 +88542,7 @@ AWS.util = {
 
 module.exports = AWS.util;
 
-},{"./core":42,"__browserify_process":39,"buffer":18,"crypto":182,"fs":10,"url":15}],135:[function(require,module,exports){
+},{"./core":48,"__browserify_process":45,"buffer":18,"crypto":21,"fs":10,"url":15}],141:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -88673,7 +88637,7 @@ AWS.XML.Builder = inherit({
 
 });
 
-},{"../core":42,"xmlbuilder":142}],136:[function(require,module,exports){
+},{"../core":48,"xmlbuilder":148}],142:[function(require,module,exports){
 /**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -88889,7 +88853,7 @@ AWS.XML.Parser = inherit({
 
 });
 
-},{"../core":42,"xml2js":138}],137:[function(require,module,exports){
+},{"../core":48,"xml2js":144}],143:[function(require,module,exports){
 ;(function(exports) {
 
 // export the class if we are in a Node-like system.
@@ -89810,7 +89774,7 @@ if (typeof define === 'function' && define.amd)
   semver = {}
 );
 
-},{}],138:[function(require,module,exports){
+},{}],144:[function(require,module,exports){
 // Generated by CoffeeScript 1.4.0
 (function() {
   var events, isEmpty, sax,
@@ -90062,8 +90026,8 @@ if (typeof define === 'function' && define.amd)
 
 }).call(this);
 
-},{"events":9,"sax":139}],139:[function(require,module,exports){
-// wrapper for non-node envs
+},{"events":9,"sax":145}],145:[function(require,module,exports){
+var Buffer=require("__browserify_Buffer").Buffer;// wrapper for non-node envs
 ;(function (sax) {
 
 sax.parser = function (strict, opt) { return new SAXParser(strict, opt) }
@@ -90244,6 +90208,8 @@ function SAXStream (strict, opt) {
     me._parser.error = null
   }
 
+  this._decoder = null;
+
   streamWraps.forEach(function (ev) {
     Object.defineProperty(me, "on" + ev, {
       get: function () { return me._parser["on" + ev] },
@@ -90264,13 +90230,24 @@ SAXStream.prototype = Object.create(Stream.prototype,
   { constructor: { value: SAXStream } })
 
 SAXStream.prototype.write = function (data) {
+  if (typeof Buffer === 'function' &&
+      typeof Buffer.isBuffer === 'function' &&
+      Buffer.isBuffer(data)) {
+    if (!this._decoder) {
+      var SD = require('string_decoder').StringDecoder
+      this._decoder = new SD('utf8')
+    }
+    data = this._decoder.write(data);
+  }
+
   this._parser.write(data.toString())
   this.emit("data", data)
   return true
 }
 
 SAXStream.prototype.end = function (chunk) {
-  if (chunk && chunk.length) this._parser.write(chunk.toString())
+  if (chunk && chunk.length) this.write(chunk)
+  else if (this.leftovers) this._parser.write(this.leftovers.toString())
   this._parser.end()
   return true
 }
@@ -91380,7 +91357,7 @@ function write (chunk) {
 
 })(typeof exports === "undefined" ? sax = {} : exports)
 
-},{"stream":12}],140:[function(require,module,exports){
+},{"__browserify_Buffer":44,"stream":12,"string_decoder":13}],146:[function(require,module,exports){
 // Generated by CoffeeScript 1.3.3
 (function() {
   var XMLBuilder, XMLFragment;
@@ -91501,7 +91478,7 @@ function write (chunk) {
 
 }).call(this);
 
-},{"./XMLFragment":141}],141:[function(require,module,exports){
+},{"./XMLFragment":147}],147:[function(require,module,exports){
 // Generated by CoffeeScript 1.3.3
 (function() {
   var XMLFragment,
@@ -91925,7 +91902,7 @@ function write (chunk) {
 
 }).call(this);
 
-},{}],142:[function(require,module,exports){
+},{}],148:[function(require,module,exports){
 // Generated by CoffeeScript 1.3.3
 (function() {
   var XMLBuilder;
@@ -91942,7 +91919,7 @@ function write (chunk) {
 
 }).call(this);
 
-},{"./XMLBuilder":140}],143:[function(require,module,exports){
+},{"./XMLBuilder":146}],149:[function(require,module,exports){
 var process=require("__browserify_process");var AWS, configure, helpers;
 
 helpers = require('./helpers');
@@ -92249,7 +92226,7 @@ describe('AWS.config', function() {
 });
 
 
-},{"./helpers":149,"__browserify_process":39}],144:[function(require,module,exports){
+},{"./helpers":155,"__browserify_process":45}],150:[function(require,module,exports){
 var process=require("__browserify_process");var AWS;
 
 AWS = require('../lib/core');
@@ -92354,7 +92331,7 @@ describe('AWS.CredentialProviderChain', function() {
 });
 
 
-},{"../lib/core":42,"../lib/credentials/environment_credentials":45,"__browserify_process":39}],145:[function(require,module,exports){
+},{"../lib/core":48,"../lib/credentials/environment_credentials":51,"__browserify_process":45}],151:[function(require,module,exports){
 var process=require("__browserify_process");var AWS, helpers, validateCredentials;
 
 helpers = require('./helpers');
@@ -92761,7 +92738,7 @@ describe('AWS.WebIdentityCredentials', function() {
 });
 
 
-},{"../lib/credentials/environment_credentials":45,"./helpers":149,"__browserify_process":39}],146:[function(require,module,exports){
+},{"../lib/credentials/environment_credentials":51,"./helpers":155,"__browserify_process":45}],152:[function(require,module,exports){
 var AWS;
 
 AWS = require('../lib/core');
@@ -92863,7 +92840,7 @@ describe('AWS.Endpoint', function() {
 });
 
 
-},{"../lib/core":42}],147:[function(require,module,exports){
+},{"../lib/core":48}],153:[function(require,module,exports){
 var process=require("__browserify_process"),__filename="/test/event_listeners.spec.coffee";var AWS, Buffer, MockService, helpers;
 
 helpers = require('./helpers');
@@ -93408,7 +93385,7 @@ describe('AWS.EventListeners', function() {
 });
 
 
-},{"./helpers":149,"__browserify_process":39,"buffer":18,"domain":1,"fs":10}],148:[function(require,module,exports){
+},{"./helpers":155,"__browserify_process":45,"buffer":18,"domain":1,"fs":10}],154:[function(require,module,exports){
 var process=require("__browserify_process");var AWS, Buffer, EventEmitter, MockService, flattenXML, matchXML, mockHttpResponse, mockHttpSuccessfulResponse, mockIntermittentFailureResponse, semver;
 
 AWS = require('../lib/aws');
@@ -93553,7 +93530,7 @@ module.exports = {
 };
 
 
-},{"../lib/aws":40,"__browserify_process":39,"buffer":18,"events":9,"semver":137,"util":16}],149:[function(require,module,exports){
+},{"../lib/aws":46,"__browserify_process":45,"buffer":18,"events":9,"semver":143,"util":16}],155:[function(require,module,exports){
 var process=require("__browserify_process");// Generated by CoffeeScript 1.6.3
 (function() {
   var AWS, Buffer, EventEmitter, MockService, flattenXML, matchXML, mockHttpResponse, mockHttpSuccessfulResponse, mockIntermittentFailureResponse, semver;
@@ -93701,7 +93678,7 @@ var process=require("__browserify_process");// Generated by CoffeeScript 1.6.3
 
 }).call(this);
 
-},{"../lib/aws":40,"__browserify_process":39,"buffer":18,"events":9,"semver":137,"util":16}],150:[function(require,module,exports){
+},{"../lib/aws":46,"__browserify_process":45,"buffer":18,"events":9,"semver":143,"util":16}],156:[function(require,module,exports){
 var AWS;
 
 AWS = require('../lib/core');
@@ -93756,7 +93733,7 @@ describe('AWS.HttpRequest', function() {
 });
 
 
-},{"../lib/core":42}],151:[function(require,module,exports){
+},{"../lib/core":48}],157:[function(require,module,exports){
 var AWS, helpers;
 
 helpers = require('../helpers');
@@ -93865,7 +93842,7 @@ describe('AWS.JSON.Builder', function() {
 });
 
 
-},{"../helpers":149}],152:[function(require,module,exports){
+},{"../helpers":155}],158:[function(require,module,exports){
 var AWS, helpers, http, url;
 
 helpers = require('./helpers');
@@ -93960,7 +93937,7 @@ if (AWS.util.isNode()) {
 }
 
 
-},{"./helpers":149,"http":20,"url":15}],153:[function(require,module,exports){
+},{"./helpers":155,"http":26,"url":15}],159:[function(require,module,exports){
 var AWS, helpers;
 
 helpers = require('./helpers');
@@ -94015,7 +93992,7 @@ if (AWS.util.isNode()) {
 }
 
 
-},{"./helpers":149}],154:[function(require,module,exports){
+},{"./helpers":155}],160:[function(require,module,exports){
 var AWS, Buffer, helpers;
 
 helpers = require('./helpers');
@@ -94239,12 +94216,22 @@ describe('AWS.ParamValidator', function() {
         }
       });
     });
-    return it('rejects unknown members', function() {
+    it('rejects unknown members', function() {
       return expectError({
         hash1: {
           oops: 'abc'
         }
       });
+    });
+    return it('does not check inherited properties on parameters', function() {
+      var cls, obj;
+      cls = function() {
+        return this;
+      };
+      cls.prototype.otherKey = 'value';
+      obj = new cls;
+      obj.hash1 = {};
+      return expectValid(obj);
     });
   });
   describe('list', function() {
@@ -94802,7 +94789,7 @@ describe('AWS.ParamValidator', function() {
 });
 
 
-},{"./helpers":149,"buffer":18,"stream":12}],155:[function(require,module,exports){
+},{"./helpers":155,"buffer":18,"stream":12}],161:[function(require,module,exports){
 var process=require("__browserify_process");var AWS, Buffer, EventEmitter, MockService, helpers;
 
 helpers = require('./helpers');
@@ -95187,7 +95174,7 @@ describe('AWS.Request', function() {
 });
 
 
-},{"./helpers":149,"__browserify_process":39,"buffer":18,"events":9}],156:[function(require,module,exports){
+},{"./helpers":155,"__browserify_process":45,"buffer":18,"events":9}],162:[function(require,module,exports){
 var AWS, EventEmitter, helpers;
 
 helpers = require('./helpers');
@@ -95323,7 +95310,7 @@ describe('AWS.Response', function() {
 });
 
 
-},{"./helpers":149,"events":9}],157:[function(require,module,exports){
+},{"./helpers":155,"events":9}],163:[function(require,module,exports){
 var AWS, helpers;
 
 helpers = require('./helpers');
@@ -95449,7 +95436,7 @@ describe('AWS.SequentialExecutor', function() {
 });
 
 
-},{"./helpers":149,"domain":1}],158:[function(require,module,exports){
+},{"./helpers":155,"domain":1}],164:[function(require,module,exports){
 var AWS, MockService, helpers;
 
 helpers = require('./helpers');
@@ -95822,7 +95809,7 @@ describe('AWS.Service', function() {
 });
 
 
-},{"./helpers":149}],159:[function(require,module,exports){
+},{"./helpers":155}],165:[function(require,module,exports){
 var AWS, Buffer;
 
 AWS = require('../../lib/core');
@@ -95988,7 +95975,7 @@ describe('AWS.ServiceInterface.Json', function() {
 });
 
 
-},{"../../lib/core":42,"../../lib/service_interface/json":56,"buffer":18}],160:[function(require,module,exports){
+},{"../../lib/core":48,"../../lib/service_interface/json":62,"buffer":18}],166:[function(require,module,exports){
 var AWS, Buffer;
 
 AWS = require('../../lib/core');
@@ -96178,7 +96165,7 @@ describe('AWS.ServiceInterface.Query', function() {
 });
 
 
-},{"../../lib/core":42,"../../lib/service_interface/query":57,"buffer":18}],161:[function(require,module,exports){
+},{"../../lib/core":48,"../../lib/service_interface/query":63,"buffer":18}],167:[function(require,module,exports){
 var AWS;
 
 AWS = require('../../lib/core');
@@ -96562,7 +96549,7 @@ describe('AWS.QueryParamSerializer', function() {
 });
 
 
-},{"../../lib/core":42,"../../lib/service_interface/query":57}],162:[function(require,module,exports){
+},{"../../lib/core":48,"../../lib/service_interface/query":63}],168:[function(require,module,exports){
 var AWS;
 
 AWS = require('../../lib/core');
@@ -97012,7 +96999,7 @@ describe('AWS.ServiceInterface.Rest', function() {
 });
 
 
-},{"../../lib/core":42,"../../lib/service_interface/rest":58}],163:[function(require,module,exports){
+},{"../../lib/core":48,"../../lib/service_interface/rest":64}],169:[function(require,module,exports){
 var AWS, Buffer, helpers;
 
 helpers = require('../helpers');
@@ -97425,7 +97412,7 @@ describe('AWS.ServiceInterface.RestJson', function() {
 });
 
 
-},{"../../lib/service_interface/rest_json":59,"../helpers":149,"buffer":18}],164:[function(require,module,exports){
+},{"../../lib/service_interface/rest_json":65,"../helpers":155,"buffer":18}],170:[function(require,module,exports){
 var AWS, Buffer, helpers;
 
 helpers = require('../helpers');
@@ -97766,7 +97753,7 @@ describe('AWS.ServiceInterface.RestXml', function() {
 });
 
 
-},{"../../lib/service_interface/rest_xml":60,"../helpers":149,"buffer":18}],165:[function(require,module,exports){
+},{"../../lib/service_interface/rest_xml":66,"../helpers":155,"buffer":18}],171:[function(require,module,exports){
 var AWS, helpers;
 
 helpers = require('../helpers');
@@ -97818,7 +97805,7 @@ describe('AWS.CloudFront', function() {
 });
 
 
-},{"../../lib/services/cloudfront":99,"../helpers":149}],166:[function(require,module,exports){
+},{"../../lib/services/cloudfront":105,"../helpers":155}],172:[function(require,module,exports){
 var AWS;
 
 AWS = require('../../lib/core');
@@ -97861,7 +97848,7 @@ describe('AWS.DynamoDB', function() {
 });
 
 
-},{"../../lib/core":42,"../../lib/services/dynamodb":104}],167:[function(require,module,exports){
+},{"../../lib/core":48,"../../lib/services/dynamodb":110}],173:[function(require,module,exports){
 var AWS, helpers;
 
 AWS = require('../../lib/core');
@@ -97923,7 +97910,7 @@ describe('AWS.EC2', function() {
 });
 
 
-},{"../../lib/core":42,"../../lib/services/ec2":105,"../helpers":149}],168:[function(require,module,exports){
+},{"../../lib/core":48,"../../lib/services/ec2":111,"../helpers":155}],174:[function(require,module,exports){
 var AWS, helpers;
 
 helpers = require('../helpers');
@@ -97979,7 +97966,7 @@ describe('AWS.Route53', function() {
 });
 
 
-},{"../../lib/services/route53":117,"../helpers":149}],169:[function(require,module,exports){
+},{"../../lib/services/route53":123,"../helpers":155}],175:[function(require,module,exports){
 var AWS, Buffer, helpers;
 
 helpers = require('../helpers');
@@ -98066,7 +98053,7 @@ if (AWS.util.isNode()) {
 }
 
 
-},{"../../lib/services/glacier":111,"../helpers":149,"buffer":18}],170:[function(require,module,exports){
+},{"../../lib/services/glacier":117,"../helpers":155,"buffer":18}],176:[function(require,module,exports){
 var AWS, helpers;
 
 helpers = require('../helpers');
@@ -98150,7 +98137,7 @@ describe('AWS.Route53', function() {
 });
 
 
-},{"../../lib/services/route53":117,"../helpers":149}],171:[function(require,module,exports){
+},{"../../lib/services/route53":123,"../helpers":155}],177:[function(require,module,exports){
 var AWS, Buffer, Stream, helpers;
 
 helpers = require('../helpers');
@@ -98693,7 +98680,7 @@ describe('AWS.S3', function() {
         Bucket: 'bucket',
         Key: 'key'
       });
-      return expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=gUAM0PxELXi27AXC0alWL%2BM2ehw%3D');
+      return expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=uefzBaGpqvO9QhGtT%2BbYda0pgQY%3D');
     });
     it('gets a signed URL with Expires time', function() {
       var url;
@@ -98702,7 +98689,7 @@ describe('AWS.S3', function() {
         Key: 'key',
         Expires: 60
       });
-      return expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=60&Signature=gUAM0PxELXi27AXC0alWL%2BM2ehw%3D');
+      return expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=60&Signature=ZJKBOuhI99B2OZdkGSOmfG86BOI%3D');
     });
     it('gets a signed URL with expiration and bound bucket parameters', function() {
       var url;
@@ -98716,7 +98703,7 @@ describe('AWS.S3', function() {
         Key: 'key',
         Expires: 60
       });
-      return expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=60&Signature=gUAM0PxELXi27AXC0alWL%2BM2ehw%3D');
+      return expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=60&Signature=ZJKBOuhI99B2OZdkGSOmfG86BOI%3D');
     });
     it('gets a signed URL with callback', function() {
       var url;
@@ -98733,7 +98720,7 @@ describe('AWS.S3', function() {
         return url;
       });
       return runs(function() {
-        return expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=gUAM0PxELXi27AXC0alWL%2BM2ehw%3D');
+        return expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=uefzBaGpqvO9QhGtT%2BbYda0pgQY%3D');
       });
     });
     it('gets a signed URL for putObject with no body', function() {
@@ -98742,7 +98729,7 @@ describe('AWS.S3', function() {
         Bucket: 'bucket',
         Key: 'key'
       });
-      return expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=bQNttlfmy9E7SHU0r6gUg7jaeig%3D');
+      return expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=h%2FphNvPoGxx9qq2U7Zhbfqgi0Xs%3D');
     });
     it('gets a signed URL for putObject with special characters', function() {
       var url;
@@ -98750,7 +98737,7 @@ describe('AWS.S3', function() {
         Bucket: 'bucket',
         Key: '!@#$%^&*();\':"{}[],./?`~'
       });
-      return expect(url).toEqual('https://bucket.s3.amazonaws.com/%21%40%23%24%25%5E%26%2A%28%29%3B%27%3A%22%7B%7D%5B%5D%2C./%3F%60~?AWSAccessKeyId=akid&Expires=900&Signature=O6r7DGjWkcqnDqwGUKmd0uy51sU%3D');
+      return expect(url).toEqual('https://bucket.s3.amazonaws.com/%21%40%23%24%25%5E%26%2A%28%29%3B%27%3A%22%7B%7D%5B%5D%2C./%3F%60~?AWSAccessKeyId=akid&Expires=900&Signature=ymM%2F7R7Ri6bIXA7vrhzaaZgNRHg%3D');
     });
     it('gets a signed URL for putObject with a body (and checksum)', function() {
       var url;
@@ -98759,7 +98746,7 @@ describe('AWS.S3', function() {
         Key: 'key',
         Body: 'body'
       });
-      return expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Content-MD5=hBotaJrYa9FhFEdFPCLG%2FA%3D%3D&Expires=900&Signature=gABIG%2BdP5FI%2BE2DHuWU8tSoN6Qc%3D');
+      return expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Content-MD5=hBotaJrYa9FhFEdFPCLG%2FA%3D%3D&Expires=900&Signature=7%2BXiHEwB%2B3nSg2rhTyatSigkGPI%3D');
     });
     return it('gets a signed URL and appends to existing query parameters', function() {
       var url;
@@ -98767,13 +98754,13 @@ describe('AWS.S3', function() {
         Bucket: 'bucket',
         Prefix: 'prefix'
       });
-      return expect(url).toEqual('https://bucket.s3.amazonaws.com/?prefix=prefix&AWSAccessKeyId=akid&Expires=900&Signature=%2FOeqjdbPbtyEni%2B4%2FNFD0mDzmzg%3D');
+      return expect(url).toEqual('https://bucket.s3.amazonaws.com/?prefix=prefix&AWSAccessKeyId=akid&Expires=900&Signature=fWeCHJBop4LyDXm2%2F%2BvR%2BqzH5zk%3D');
     });
   });
 });
 
 
-},{"../../lib/services/s3":118,"../helpers":149,"buffer":18,"stream":12}],172:[function(require,module,exports){
+},{"../../lib/services/s3":124,"../helpers":155,"buffer":18,"stream":12}],178:[function(require,module,exports){
 var AWS, helpers;
 
 helpers = require('../helpers');
@@ -98805,7 +98792,7 @@ describe('AWS.SimpleDB', function() {
 });
 
 
-},{"../../lib/services/simpledb":120,"../helpers":149}],173:[function(require,module,exports){
+},{"../../lib/services/simpledb":126,"../helpers":155}],179:[function(require,module,exports){
 var AWS, helpers;
 
 helpers = require('../helpers');
@@ -98953,7 +98940,7 @@ describe('AWS.SQS', function() {
 });
 
 
-},{"../../lib/services/sqs":123,"../helpers":149}],174:[function(require,module,exports){
+},{"../../lib/services/sqs":129,"../helpers":155}],180:[function(require,module,exports){
 var AWS, helpers;
 
 helpers = require('../helpers');
@@ -99031,7 +99018,7 @@ describe('AWS.STS', function() {
 });
 
 
-},{"../../lib/services/sts":125,"../helpers":149}],175:[function(require,module,exports){
+},{"../../lib/services/sts":131,"../helpers":155}],181:[function(require,module,exports){
 var AWS;
 
 AWS = require('../../lib/core');
@@ -99224,7 +99211,7 @@ describe('AWS.Signers.S3', function() {
 });
 
 
-},{"../../lib/core":42,"../../lib/signers/s3":129}],176:[function(require,module,exports){
+},{"../../lib/core":48,"../../lib/signers/s3":135}],182:[function(require,module,exports){
 var AWS;
 
 AWS = require('../../lib/core');
@@ -99303,7 +99290,7 @@ describe('AWS.Signers.V2', function() {
 });
 
 
-},{"../../lib/core":42,"../../lib/service_interface/query":57,"../../lib/signers/v2":130}],177:[function(require,module,exports){
+},{"../../lib/core":48,"../../lib/service_interface/query":63,"../../lib/signers/v2":136}],183:[function(require,module,exports){
 var AWS, buildRequest, buildSigner, helpers;
 
 AWS = require('../../lib/core');
@@ -99339,15 +99326,16 @@ describe('AWS.Signers.V4', function() {
   var authorization, creds, date, datetime, signature, signer;
   date = new Date(1935346573456);
   datetime = AWS.util.date.iso8601(date).replace(/[:\-]|\.\d{3}/g, '');
-  creds = {
-    accessKeyId: 'akid',
-    secretAccessKey: 'secret',
-    sessionToken: 'session'
-  };
+  creds = null;
   signature = '838c924736f5ce488c99f0955097c9571544d84968102543edc9b01dfaa7ef16';
   authorization = 'AWS4-HMAC-SHA256 Credential=akid/20310430/region/dynamodb/aws4_request, ' + 'SignedHeaders=content-length;host;x-amz-date;x-amz-security-token;x-amz-target, ' + 'Signature=' + signature;
   signer = null;
   beforeEach(function() {
+    creds = {
+      accessKeyId: 'akid',
+      secretAccessKey: 'secret',
+      sessionToken: 'session'
+    };
     signer = buildSigner();
     return signer.addHeaders(creds, datetime);
   });
@@ -99416,6 +99404,11 @@ describe('AWS.Signers.V4', function() {
         signer.signature(creds, datetime);
         return expect(calls.length).toEqual(callCount + 5);
       });
+      it('busts cache if access key changes', function() {
+        creds.accessKeyId = 'NEWAKID';
+        signer.signature(creds, datetime);
+        return expect(calls.length).toEqual(callCount + 5);
+      });
       return it('busts cache if date changes', function() {
         var newDate, newDatetime;
         newDate = new Date(date.getTime() + 1000000000);
@@ -99471,7 +99464,7 @@ describe('AWS.Signers.V4', function() {
 });
 
 
-},{"../../lib/core":42,"../../lib/services/dynamodb":104,"../helpers":149}],178:[function(require,module,exports){
+},{"../../lib/core":48,"../../lib/services/dynamodb":110,"../helpers":155}],184:[function(require,module,exports){
 var __filename="/test/util.spec.coffee";var AWS, Buffer;
 
 AWS = require('../lib/core');
@@ -100294,7 +100287,7 @@ describe('AWS.util.jamespath', function() {
 });
 
 
-},{"../lib/core":42,"buffer":18,"fs":10}],179:[function(require,module,exports){
+},{"../lib/core":48,"buffer":18,"fs":10}],185:[function(require,module,exports){
 var AWS, helpers, matchXML;
 
 helpers = require('../helpers');
@@ -100804,7 +100797,7 @@ describe('AWS.XML.Builder', function() {
 });
 
 
-},{"../helpers":149}],180:[function(require,module,exports){
+},{"../helpers":155}],186:[function(require,module,exports){
 var AWS, helpers;
 
 helpers = require('../helpers');
@@ -101560,534 +101553,5 @@ describe('AWS.XML.Parser', function() {
 });
 
 
-},{"../helpers":149}],181:[function(require,module,exports){
-var Buffer = require('buffer').Buffer;
-var intSize = 4;
-var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
-var chrsz = 8;
-
-function toArray(buf, bigEndian) {
-  if ((buf.length % intSize) !== 0) {
-    var len = buf.length + (intSize - (buf.length % intSize));
-    buf = Buffer.concat([buf, zeroBuffer], len);
-  }
-
-  var arr = [];
-  var fn = bigEndian ? buf.readInt32BE : buf.readInt32LE;
-  for (var i = 0; i < buf.length; i += intSize) {
-    arr.push(fn.call(buf, i));
-  }
-  return arr;
-}
-
-function toBuffer(arr, size, bigEndian) {
-  var buf = new Buffer(size);
-  var fn = bigEndian ? buf.writeInt32BE : buf.writeInt32LE;
-  for (var i = 0; i < arr.length; i++) {
-    fn.call(buf, arr[i], i * 4, true);
-  }
-  return buf;
-}
-
-function hash(buf, fn, hashSize, bigEndian) {
-  if (!Buffer.isBuffer(buf)) buf = new Buffer(buf);
-  var arr = fn(toArray(buf, bigEndian), buf.length * chrsz);
-  return toBuffer(arr, hashSize, bigEndian);
-}
-
-module.exports = { hash: hash };
-
-},{"buffer":18}],182:[function(require,module,exports){
-var Buffer = require('buffer').Buffer
-var sha = require('./sha')
-var sha256 = require('./sha256')
-var rng = require('./rng')
-var md5 = require('./md5')
-
-var algorithms = {
-  sha1: sha,
-  sha256: sha256,
-  md5: md5
-}
-
-var blocksize = 64
-var zeroBuffer = new Buffer(blocksize); zeroBuffer.fill(0)
-function hmac(fn, key, data) {
-  if(!Buffer.isBuffer(key)) key = new Buffer(key)
-  if(!Buffer.isBuffer(data)) data = new Buffer(data)
-
-  if(key.length > blocksize) {
-    key = fn(key)
-  } else if(key.length < blocksize) {
-    key = Buffer.concat([key, zeroBuffer], blocksize)
-  }
-
-  var ipad = new Buffer(blocksize), opad = new Buffer(blocksize)
-  for(var i = 0; i < blocksize; i++) {
-    ipad[i] = key[i] ^ 0x36;
-    opad[i] = key[i] ^ 0x5C;
-  }
-
-  var hash = fn(Buffer.concat([ipad, data]))
-  return fn(Buffer.concat([opad, hash]))
-}
-
-function hash(alg, key) {
-  alg = alg || 'sha1'
-  var fn = algorithms[alg]
-  var bufs = []
-  var length = 0
-  if(!fn) error('algorithm:', alg, 'is not yet supported')
-  return {
-    update: function (data) {
-      bufs.push(data)
-      length += data.length
-      return this
-    },
-    digest: function (enc) {
-      var buf = Buffer.concat(bufs)
-      var r = key ? hmac(fn, key, buf) : fn(buf)
-      bufs = null
-      return enc ? r.toString(enc) : r
-    }
-  }
-}
-
-function error () {
-  var m = [].slice.call(arguments).join(' ')
-  throw new Error([
-    m,
-    'we accept pull requests',
-    'http://github.com/dominictarr/crypto-browserify'
-    ].join('\n'))
-}
-
-exports.createHash = function (alg) { return hash(alg) }
-exports.createHmac = function (alg, key) { return hash(alg, key) }
-exports.randomBytes = function(size, callback) {
-  if (callback && callback.call) {
-    try {
-      callback.call(this, undefined, new Buffer(rng(size)));
-    } catch (err) { callback(err); }
-  } else {
-    return new Buffer(rng(size));
-  }
-}
-
-function each(a, f) {
-  for(var i in a)
-    f(a[i], i)
-}
-
-// the least I can do is make error messages for the rest of the node.js/crypto api.
-each(['createCredentials'
-, 'createCipher'
-, 'createCipheriv'
-, 'createDecipher'
-, 'createDecipheriv'
-, 'createSign'
-, 'createVerify'
-, 'createDiffieHellman'
-, 'pbkdf2'], function (name) {
-  exports[name] = function () {
-    error('sorry,', name, 'is not implemented yet')
-  }
-})
-
-},{"./md5":183,"./rng":184,"./sha":185,"./sha256":186,"buffer":18}],183:[function(require,module,exports){
-/*
- * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
- * Digest Algorithm, as defined in RFC 1321.
- * Version 2.1 Copyright (C) Paul Johnston 1999 - 2002.
- * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
- * Distributed under the BSD License
- * See http://pajhome.org.uk/crypt/md5 for more info.
- */
-
-var helpers = require('./helpers');
-
-/*
- * Perform a simple self-test to see if the VM is working
- */
-function md5_vm_test()
-{
-  return hex_md5("abc") == "900150983cd24fb0d6963f7d28e17f72";
-}
-
-/*
- * Calculate the MD5 of an array of little-endian words, and a bit length
- */
-function core_md5(x, len)
-{
-  /* append padding */
-  x[len >> 5] |= 0x80 << ((len) % 32);
-  x[(((len + 64) >>> 9) << 4) + 14] = len;
-
-  var a =  1732584193;
-  var b = -271733879;
-  var c = -1732584194;
-  var d =  271733878;
-
-  for(var i = 0; i < x.length; i += 16)
-  {
-    var olda = a;
-    var oldb = b;
-    var oldc = c;
-    var oldd = d;
-
-    a = md5_ff(a, b, c, d, x[i+ 0], 7 , -680876936);
-    d = md5_ff(d, a, b, c, x[i+ 1], 12, -389564586);
-    c = md5_ff(c, d, a, b, x[i+ 2], 17,  606105819);
-    b = md5_ff(b, c, d, a, x[i+ 3], 22, -1044525330);
-    a = md5_ff(a, b, c, d, x[i+ 4], 7 , -176418897);
-    d = md5_ff(d, a, b, c, x[i+ 5], 12,  1200080426);
-    c = md5_ff(c, d, a, b, x[i+ 6], 17, -1473231341);
-    b = md5_ff(b, c, d, a, x[i+ 7], 22, -45705983);
-    a = md5_ff(a, b, c, d, x[i+ 8], 7 ,  1770035416);
-    d = md5_ff(d, a, b, c, x[i+ 9], 12, -1958414417);
-    c = md5_ff(c, d, a, b, x[i+10], 17, -42063);
-    b = md5_ff(b, c, d, a, x[i+11], 22, -1990404162);
-    a = md5_ff(a, b, c, d, x[i+12], 7 ,  1804603682);
-    d = md5_ff(d, a, b, c, x[i+13], 12, -40341101);
-    c = md5_ff(c, d, a, b, x[i+14], 17, -1502002290);
-    b = md5_ff(b, c, d, a, x[i+15], 22,  1236535329);
-
-    a = md5_gg(a, b, c, d, x[i+ 1], 5 , -165796510);
-    d = md5_gg(d, a, b, c, x[i+ 6], 9 , -1069501632);
-    c = md5_gg(c, d, a, b, x[i+11], 14,  643717713);
-    b = md5_gg(b, c, d, a, x[i+ 0], 20, -373897302);
-    a = md5_gg(a, b, c, d, x[i+ 5], 5 , -701558691);
-    d = md5_gg(d, a, b, c, x[i+10], 9 ,  38016083);
-    c = md5_gg(c, d, a, b, x[i+15], 14, -660478335);
-    b = md5_gg(b, c, d, a, x[i+ 4], 20, -405537848);
-    a = md5_gg(a, b, c, d, x[i+ 9], 5 ,  568446438);
-    d = md5_gg(d, a, b, c, x[i+14], 9 , -1019803690);
-    c = md5_gg(c, d, a, b, x[i+ 3], 14, -187363961);
-    b = md5_gg(b, c, d, a, x[i+ 8], 20,  1163531501);
-    a = md5_gg(a, b, c, d, x[i+13], 5 , -1444681467);
-    d = md5_gg(d, a, b, c, x[i+ 2], 9 , -51403784);
-    c = md5_gg(c, d, a, b, x[i+ 7], 14,  1735328473);
-    b = md5_gg(b, c, d, a, x[i+12], 20, -1926607734);
-
-    a = md5_hh(a, b, c, d, x[i+ 5], 4 , -378558);
-    d = md5_hh(d, a, b, c, x[i+ 8], 11, -2022574463);
-    c = md5_hh(c, d, a, b, x[i+11], 16,  1839030562);
-    b = md5_hh(b, c, d, a, x[i+14], 23, -35309556);
-    a = md5_hh(a, b, c, d, x[i+ 1], 4 , -1530992060);
-    d = md5_hh(d, a, b, c, x[i+ 4], 11,  1272893353);
-    c = md5_hh(c, d, a, b, x[i+ 7], 16, -155497632);
-    b = md5_hh(b, c, d, a, x[i+10], 23, -1094730640);
-    a = md5_hh(a, b, c, d, x[i+13], 4 ,  681279174);
-    d = md5_hh(d, a, b, c, x[i+ 0], 11, -358537222);
-    c = md5_hh(c, d, a, b, x[i+ 3], 16, -722521979);
-    b = md5_hh(b, c, d, a, x[i+ 6], 23,  76029189);
-    a = md5_hh(a, b, c, d, x[i+ 9], 4 , -640364487);
-    d = md5_hh(d, a, b, c, x[i+12], 11, -421815835);
-    c = md5_hh(c, d, a, b, x[i+15], 16,  530742520);
-    b = md5_hh(b, c, d, a, x[i+ 2], 23, -995338651);
-
-    a = md5_ii(a, b, c, d, x[i+ 0], 6 , -198630844);
-    d = md5_ii(d, a, b, c, x[i+ 7], 10,  1126891415);
-    c = md5_ii(c, d, a, b, x[i+14], 15, -1416354905);
-    b = md5_ii(b, c, d, a, x[i+ 5], 21, -57434055);
-    a = md5_ii(a, b, c, d, x[i+12], 6 ,  1700485571);
-    d = md5_ii(d, a, b, c, x[i+ 3], 10, -1894986606);
-    c = md5_ii(c, d, a, b, x[i+10], 15, -1051523);
-    b = md5_ii(b, c, d, a, x[i+ 1], 21, -2054922799);
-    a = md5_ii(a, b, c, d, x[i+ 8], 6 ,  1873313359);
-    d = md5_ii(d, a, b, c, x[i+15], 10, -30611744);
-    c = md5_ii(c, d, a, b, x[i+ 6], 15, -1560198380);
-    b = md5_ii(b, c, d, a, x[i+13], 21,  1309151649);
-    a = md5_ii(a, b, c, d, x[i+ 4], 6 , -145523070);
-    d = md5_ii(d, a, b, c, x[i+11], 10, -1120210379);
-    c = md5_ii(c, d, a, b, x[i+ 2], 15,  718787259);
-    b = md5_ii(b, c, d, a, x[i+ 9], 21, -343485551);
-
-    a = safe_add(a, olda);
-    b = safe_add(b, oldb);
-    c = safe_add(c, oldc);
-    d = safe_add(d, oldd);
-  }
-  return Array(a, b, c, d);
-
-}
-
-/*
- * These functions implement the four basic operations the algorithm uses.
- */
-function md5_cmn(q, a, b, x, s, t)
-{
-  return safe_add(bit_rol(safe_add(safe_add(a, q), safe_add(x, t)), s),b);
-}
-function md5_ff(a, b, c, d, x, s, t)
-{
-  return md5_cmn((b & c) | ((~b) & d), a, b, x, s, t);
-}
-function md5_gg(a, b, c, d, x, s, t)
-{
-  return md5_cmn((b & d) | (c & (~d)), a, b, x, s, t);
-}
-function md5_hh(a, b, c, d, x, s, t)
-{
-  return md5_cmn(b ^ c ^ d, a, b, x, s, t);
-}
-function md5_ii(a, b, c, d, x, s, t)
-{
-  return md5_cmn(c ^ (b | (~d)), a, b, x, s, t);
-}
-
-/*
- * Add integers, wrapping at 2^32. This uses 16-bit operations internally
- * to work around bugs in some JS interpreters.
- */
-function safe_add(x, y)
-{
-  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
-  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
-  return (msw << 16) | (lsw & 0xFFFF);
-}
-
-/*
- * Bitwise rotate a 32-bit number to the left.
- */
-function bit_rol(num, cnt)
-{
-  return (num << cnt) | (num >>> (32 - cnt));
-}
-
-module.exports = function md5(buf) {
-  return helpers.hash(buf, core_md5, 16);
-};
-
-},{"./helpers":181}],184:[function(require,module,exports){
-// Original code adapted from Robert Kieffer.
-// details at https://github.com/broofa/node-uuid
-(function() {
-  var _global = this;
-
-  var mathRNG, whatwgRNG;
-
-  // NOTE: Math.random() does not guarantee "cryptographic quality"
-  mathRNG = function(size) {
-    var bytes = new Array(size);
-    var r;
-
-    for (var i = 0, r; i < size; i++) {
-      if ((i & 0x03) == 0) r = Math.random() * 0x100000000;
-      bytes[i] = r >>> ((i & 0x03) << 3) & 0xff;
-    }
-
-    return bytes;
-  }
-
-  if (_global.crypto && crypto.getRandomValues) {
-    var _rnds = new Uint32Array(4);
-    whatwgRNG = function(size) {
-      var bytes = new Array(size);
-      crypto.getRandomValues(_rnds);
-
-      for (var c = 0 ; c < size; c++) {
-        bytes[c] = _rnds[c >> 2] >>> ((c & 0x03) * 8) & 0xff;
-      }
-      return bytes;
-    }
-  }
-
-  module.exports = whatwgRNG || mathRNG;
-
-}())
-
-},{}],185:[function(require,module,exports){
-/*
- * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
- * in FIPS PUB 180-1
- * Version 2.1a Copyright Paul Johnston 2000 - 2002.
- * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
- * Distributed under the BSD License
- * See http://pajhome.org.uk/crypt/md5 for details.
- */
-
-var helpers = require('./helpers');
-
-/*
- * Perform a simple self-test to see if the VM is working
- */
-function sha1_vm_test()
-{
-  return hex_sha1("abc") == "a9993e364706816aba3e25717850c26c9cd0d89d";
-}
-
-/*
- * Calculate the SHA-1 of an array of big-endian words, and a bit length
- */
-function core_sha1(x, len)
-{
-  /* append padding */
-  x[len >> 5] |= 0x80 << (24 - len % 32);
-  x[((len + 64 >> 9) << 4) + 15] = len;
-
-  var w = Array(80);
-  var a =  1732584193;
-  var b = -271733879;
-  var c = -1732584194;
-  var d =  271733878;
-  var e = -1009589776;
-
-  for(var i = 0; i < x.length; i += 16)
-  {
-    var olda = a;
-    var oldb = b;
-    var oldc = c;
-    var oldd = d;
-    var olde = e;
-
-    for(var j = 0; j < 80; j++)
-    {
-      if(j < 16) w[j] = x[i + j];
-      else w[j] = rol(w[j-3] ^ w[j-8] ^ w[j-14] ^ w[j-16], 1);
-      var t = safe_add(safe_add(rol(a, 5), sha1_ft(j, b, c, d)),
-                       safe_add(safe_add(e, w[j]), sha1_kt(j)));
-      e = d;
-      d = c;
-      c = rol(b, 30);
-      b = a;
-      a = t;
-    }
-
-    a = safe_add(a, olda);
-    b = safe_add(b, oldb);
-    c = safe_add(c, oldc);
-    d = safe_add(d, oldd);
-    e = safe_add(e, olde);
-  }
-  return Array(a, b, c, d, e);
-
-}
-
-/*
- * Perform the appropriate triplet combination function for the current
- * iteration
- */
-function sha1_ft(t, b, c, d)
-{
-  if(t < 20) return (b & c) | ((~b) & d);
-  if(t < 40) return b ^ c ^ d;
-  if(t < 60) return (b & c) | (b & d) | (c & d);
-  return b ^ c ^ d;
-}
-
-/*
- * Determine the appropriate additive constant for the current iteration
- */
-function sha1_kt(t)
-{
-  return (t < 20) ?  1518500249 : (t < 40) ?  1859775393 :
-         (t < 60) ? -1894007588 : -899497514;
-}
-
-/*
- * Add integers, wrapping at 2^32. This uses 16-bit operations internally
- * to work around bugs in some JS interpreters.
- */
-function safe_add(x, y)
-{
-  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
-  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
-  return (msw << 16) | (lsw & 0xFFFF);
-}
-
-/*
- * Bitwise rotate a 32-bit number to the left.
- */
-function rol(num, cnt)
-{
-  return (num << cnt) | (num >>> (32 - cnt));
-}
-
-module.exports = function sha1(buf) {
-  return helpers.hash(buf, core_sha1, 20, true);
-};
-
-},{"./helpers":181}],186:[function(require,module,exports){
-
-/**
- * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
- * in FIPS 180-2
- * Version 2.2-beta Copyright Angel Marin, Paul Johnston 2000 - 2009.
- * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
- *
- */
-
-var helpers = require('./helpers');
-
-var safe_add = function(x, y) {
-  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
-  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
-  return (msw << 16) | (lsw & 0xFFFF);
-};
-
-var S = function(X, n) {
-  return (X >>> n) | (X << (32 - n));
-};
-
-var R = function(X, n) {
-  return (X >>> n);
-};
-
-var Ch = function(x, y, z) {
-  return ((x & y) ^ ((~x) & z));
-};
-
-var Maj = function(x, y, z) {
-  return ((x & y) ^ (x & z) ^ (y & z));
-};
-
-var Sigma0256 = function(x) {
-  return (S(x, 2) ^ S(x, 13) ^ S(x, 22));
-};
-
-var Sigma1256 = function(x) {
-  return (S(x, 6) ^ S(x, 11) ^ S(x, 25));
-};
-
-var Gamma0256 = function(x) {
-  return (S(x, 7) ^ S(x, 18) ^ R(x, 3));
-};
-
-var Gamma1256 = function(x) {
-  return (S(x, 17) ^ S(x, 19) ^ R(x, 10));
-};
-
-var core_sha256 = function(m, l) {
-  var K = new Array(0x428A2F98,0x71374491,0xB5C0FBCF,0xE9B5DBA5,0x3956C25B,0x59F111F1,0x923F82A4,0xAB1C5ED5,0xD807AA98,0x12835B01,0x243185BE,0x550C7DC3,0x72BE5D74,0x80DEB1FE,0x9BDC06A7,0xC19BF174,0xE49B69C1,0xEFBE4786,0xFC19DC6,0x240CA1CC,0x2DE92C6F,0x4A7484AA,0x5CB0A9DC,0x76F988DA,0x983E5152,0xA831C66D,0xB00327C8,0xBF597FC7,0xC6E00BF3,0xD5A79147,0x6CA6351,0x14292967,0x27B70A85,0x2E1B2138,0x4D2C6DFC,0x53380D13,0x650A7354,0x766A0ABB,0x81C2C92E,0x92722C85,0xA2BFE8A1,0xA81A664B,0xC24B8B70,0xC76C51A3,0xD192E819,0xD6990624,0xF40E3585,0x106AA070,0x19A4C116,0x1E376C08,0x2748774C,0x34B0BCB5,0x391C0CB3,0x4ED8AA4A,0x5B9CCA4F,0x682E6FF3,0x748F82EE,0x78A5636F,0x84C87814,0x8CC70208,0x90BEFFFA,0xA4506CEB,0xBEF9A3F7,0xC67178F2);
-  var HASH = new Array(0x6A09E667, 0xBB67AE85, 0x3C6EF372, 0xA54FF53A, 0x510E527F, 0x9B05688C, 0x1F83D9AB, 0x5BE0CD19);
-    var W = new Array(64);
-    var a, b, c, d, e, f, g, h, i, j;
-    var T1, T2;
-  /* append padding */
-  m[l >> 5] |= 0x80 << (24 - l % 32);
-  m[((l + 64 >> 9) << 4) + 15] = l;
-  for (var i = 0; i < m.length; i += 16) {
-    a = HASH[0]; b = HASH[1]; c = HASH[2]; d = HASH[3]; e = HASH[4]; f = HASH[5]; g = HASH[6]; h = HASH[7];
-    for (var j = 0; j < 64; j++) {
-      if (j < 16) {
-        W[j] = m[j + i];
-      } else {
-        W[j] = safe_add(safe_add(safe_add(Gamma1256(W[j - 2]), W[j - 7]), Gamma0256(W[j - 15])), W[j - 16]);
-      }
-      T1 = safe_add(safe_add(safe_add(safe_add(h, Sigma1256(e)), Ch(e, f, g)), K[j]), W[j]);
-      T2 = safe_add(Sigma0256(a), Maj(a, b, c));
-      h = g; g = f; f = e; e = safe_add(d, T1); d = c; c = b; b = a; a = safe_add(T1, T2);
-    }
-    HASH[0] = safe_add(a, HASH[0]); HASH[1] = safe_add(b, HASH[1]); HASH[2] = safe_add(c, HASH[2]); HASH[3] = safe_add(d, HASH[3]);
-    HASH[4] = safe_add(e, HASH[4]); HASH[5] = safe_add(f, HASH[5]); HASH[6] = safe_add(g, HASH[6]); HASH[7] = safe_add(h, HASH[7]);
-  }
-  return HASH;
-};
-
-module.exports = function sha256(buf) {
-  return helpers.hash(buf, core_sha256, 32, true);
-};
-
-},{"./helpers":181}]},{},[40,143,144,145,146,147,148,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180])
+},{"../helpers":155}]},{},[46,149,150,151,152,153,154,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186])
 ;
