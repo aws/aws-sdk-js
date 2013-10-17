@@ -73,7 +73,7 @@ The SDK currently supports the following services:
   <tbody>
     <tr><td rowspan="3">Amazon CloudFront</td><td rowspan="3">AWS.CloudFront</td><td>2012-05-05</td></tr>
     <tr><td>2013-05-12</td></tr>
-    <tr><td>2013-08-26</td></tr>
+    <tr><td>2013-09-27</td></tr>
     <tr><td>Amazon CloudSearch</td><td>AWS.CloudSearch</td><td>2011-02-01</td></tr>
     <tr><td>Amazon CloudWatch</td><td>AWS.CloudWatch</td><td>2010-08-01</td></tr>
     <tr><td rowspan="2">Amazon DynamoDB</td><td rowspan="2">AWS.DynamoDB</td><td>2011-12-05</td></tr>
