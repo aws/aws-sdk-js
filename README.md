@@ -2,6 +2,8 @@
 
 The official JavaScript implementation of the AWS SDK for Node.js.
 
+Release notes can be found at http://aws.amazon.com/releasenotes/SDK/JavaScript
+
 ## Installing
 
 The preferred way to install the AWS SDK for Node.js is to use the
