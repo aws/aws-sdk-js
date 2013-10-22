@@ -25,6 +25,11 @@ describe 'AWS.Service', ->
     config = new AWS.Config()
     service = new AWS.Service(config)
 
+  describe 'apiVersions', ->
+    it 'should set apiVersions property', ->
+      CustomService = AWS.Service.defineService('custom', ['2001-01-01', '1999-05-05'])
+      expect(CustomService.apiVersions).toEqual(['1999-05-05', '2001-01-01'])
+
   describe 'constructor', ->
     it 'should use AWS.config copy if no config is provided', ->
       service = new AWS.Service()
