@@ -5,11 +5,10 @@
 --no-api private
 --api experimental
 --no-highlight
---title "AWS SDK for Node.js"
+--title "AWS SDK for JavaScript"
 --template-path doc-src/templates
 --plugin sitemap
 doc-src/*.docs.js
 lib/**/*.js
 -
 README.md
-UPGRADING.md
