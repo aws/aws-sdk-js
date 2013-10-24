@@ -18,17 +18,14 @@ Feature: AWS Direct Connect
   I want to use AWS Direct Connect
 
   Scenario: Managing connections
-    Given I describe Direct Connect offerings
-    And I take the first offering ID
-    When I create a Direct Connect connection with name prefix "aws-sdk-js" and the offering ID
+    Given I create a Direct Connect connection with name prefix "aws-sdk-js"
     Then I should get a Direct Connect connection ID
-    And the region should match the offering region
-    And I describe connection details for the connection
-    Then the bandwidth should match the offering bandwidth
+    And I describe the connection
+    Then the bandwidth should match the connection bandwidth
     And I delete the Direct Connect connection
 
   Scenario: Error handling
-    Given I create a Direct Connect connection with an invalid offering ID
+    Given I create a Direct Connect connection with an invalid location
     Then the error code should be "DirectConnectServerException"
     And the error message should be:
     """
