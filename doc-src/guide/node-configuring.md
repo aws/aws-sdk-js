@@ -1,6 +1,6 @@
-# @title Configuring the SDK
+# @title Configuring the SDK in Node.js
 
-# Configuring the SDK
+# Configuring the SDK in Node.js
 
 ## The Configuration Object
 
@@ -22,6 +22,8 @@ new settings. The most common settings are:
 2. `region` &mdash; to set the region for requests
 3. `sslEnabled` &mdash; whether SSL is enabled or not
 4. `maxRetries` &mdash; to control the number of retries for a request
+5. `logger` &mdash; a logger object to write debug information to. Set to `process.stdout`
+   to get logging information about service requests.
 
 More configuration settings can be found in the
 [API reference documentation](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html).
@@ -120,7 +122,7 @@ AWS.config.update({region: 'us-west-1'});
 ### Locking API Versions
 
 <p class="note">For more information on API version locking in the SDK, see the
-{file:Services.md} section
+{file:node-services.md Working With Services} section
 </p>
 
 You can globally configure a set of API versions to use for each service by

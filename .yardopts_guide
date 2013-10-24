@@ -1,15 +1,19 @@
 --plugin sitemap
 -t flasky_sphinx_guide
 -p doc-src/templates
---title "AWS SDK for Node.js"
+--title "AWS SDK for JavaScript"
 --no-highlight
 -o doc-guide
---readme doc-src/guide/Introduction.md
+--readme doc-src/guide/index.md
 -
-doc-src/guide/Introduction.md
-doc-src/guide/Installing.md
-doc-src/guide/Configuring.md
-doc-src/guide/Services.md
-doc-src/guide/MakingRequests.md
-doc-src/guide/Examples.md
-UPGRADING.md
+doc-src/guide/browser-intro.md
+doc-src/guide/browser-configuring.md
+doc-src/guide/browser-services.md
+doc-src/guide/browser-making-requests.md
+doc-src/guide/browser-examples.md
+doc-src/guide/browser-building.md
+doc-src/guide/node-intro.md
+doc-src/guide/node-configuring.md
+doc-src/guide/node-services.md
+doc-src/guide/node-making-requests.md
+doc-src/guide/node-examples.md

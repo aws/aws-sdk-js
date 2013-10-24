@@ -1,6 +1,6 @@
-# @title Making Requests
+# @title Making Requests in Node.js
 
-# Making Requests
+# Making Requests in Node.js
 
 A "request" to an AWS service includes the full request and response lifecycle
 of a call to an operation on a service object, including any retries that are

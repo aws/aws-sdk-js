@@ -1,6 +1,6 @@
-# @title Working with Services
+# @title Working with Services in Node.js
 
-# Working with Services
+# Working with Services in Node.js
 
 ## Supported Services
 
@@ -77,7 +77,7 @@ var dynamodb = new AWS.DynamoDB({apiVersion: '2011-12-05'});
 
 Note that versions can also be locked globally by specifying the `apiVersion`
 or `apiVersions` global configuration parameters. This is documented with
-more detail in the {file:Configuring.md} file.
+more detail in the {file:node-configuring.md Configuring} section.
 
 ### Using the Latest Version
 
