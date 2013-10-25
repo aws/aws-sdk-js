@@ -16,6 +16,12 @@ AWS = require('../lib/core')
 describe 'AWS.HttpRequest', ->
 
   request = null
+  agentHeader = null
+  if AWS.util.isBrowser()
+    agentHeader = 'X-Amz-User-Agent'
+  else
+    agentHeader = 'User-Agent'
+
   beforeEach ->
     request = new AWS.HttpRequest('http://domain.com')
 
@@ -28,7 +34,9 @@ describe 'AWS.HttpRequest', ->
       expect(request.path).toEqual('/')
 
     it 'provides headers with a default user agent', ->
-      expect(request.headers).toEqual({ 'User-Agent': AWS.util.userAgent() })
+      headers = {}
+      headers[agentHeader] = AWS.util.userAgent()
+      expect(request.headers).toEqual(headers)
 
     it 'defaults body to empty string', ->
       expect(request.body).toEqual('')
