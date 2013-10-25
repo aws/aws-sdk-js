@@ -278,8 +278,22 @@ describe 'AWS.ParamValidator', ->
     it 'accepts Buffers', ->
       expectValid param: new Buffer(100)
 
+    it 'accepts typed arrays', ->
+      expectValid param: new Uint8Array(1, 2, 3)
+      expectValid param: new Uint32Array(1, 2, 3)
+
     it 'rejects other objects', ->
       expectError param: {}
+
+    if AWS.util.isBrowser()
+      it 'accepts Blob objects', ->
+        expectValid param: new Blob([1, 2, 3])
+
+      it 'accepts ArrayBuffer objects', ->
+        expectValid param: new ArrayBuffer
+
+      it 'accepts DataView objects', ->
+        expectValid param: new DataView(new ArrayBuffer)
 
   describe 'binary', ->
     beforeEach ->
@@ -408,7 +422,7 @@ describe 'AWS.ParamValidator', ->
 
     it 'throws helpful messages for invalid base64 params', ->
       msg = "Expected params.config.settings.data to be a " +
-            "string, Buffer, or Stream"
+            "string, Buffer, Stream, Blob, or typed array object"
       rules.config.members.settings.members.data =
         type: 'base64'
 
@@ -416,7 +430,7 @@ describe 'AWS.ParamValidator', ->
 
     it 'throws helpful messages for invalid binary params', ->
       msg = "Expected params.config.settings.data to be a " +
-            "string, Buffer, or Stream"
+            "string, Buffer, Stream, Blob, or typed array object"
       rules.config.members.settings.members.data =
         type: 'binary'
 
