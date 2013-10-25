@@ -3797,7 +3797,7 @@ Url.prototype.parseHost = function() {
   if (host) this.hostname = host;
 };
 },{"_shims":2,"querystring":11,"util":16}],16:[function(require,module,exports){
-var Buffer=require("__browserify_Buffer").Buffer;// Copyright Joyent, Inc. and other Node contributors.
+// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the
@@ -4263,7 +4263,11 @@ function isPrimitive(arg) {
 exports.isPrimitive = isPrimitive;
 
 function isBuffer(arg) {
-  return arg instanceof Buffer;
+  return arg && typeof arg === 'object'
+    && typeof arg.copy === 'function'
+    && typeof arg.fill === 'function'
+    && typeof arg.binarySlice === 'function'
+  ;
 }
 exports.isBuffer = isBuffer;
 
@@ -4337,7 +4341,7 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-},{"__browserify_Buffer":26,"_shims":2}],17:[function(require,module,exports){
+},{"_shims":2}],17:[function(require,module,exports){
 exports.readIEEE754 = function(buffer, offset, isBE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -10042,10 +10046,18 @@ AWS.HttpRequest = inherit({
     this.method = 'POST';
     this.path = endpoint.path || '/';
     this.headers = {};
-    this.headers['User-Agent'] = AWS.util.userAgent();
     this.body = '';
     this.endpoint = endpoint;
     this.region = region;
+    this.setUserAgent();
+  },
+
+  /**
+   * @api private
+   */
+  setUserAgent: function setUserAgent() {
+    var prefix = AWS.util.isBrowser() ? 'X-Amz-' : '';
+    this.headers[prefix + 'User-Agent'] = AWS.util.userAgent();
   },
 
   /**
@@ -10138,13 +10150,13 @@ AWS.XHRClient = AWS.util.inherit({
     }
     href += httpRequest.path;
 
-    xhr.responseType = 'arraybuffer';
     if (httpOptions.timeout) {
       xhr.timeout = httpOptions.timeout;
     }
 
-    xhr.addEventListener('readystatechange', function(evt) {
+    xhr.addEventListener('readystatechange', function() {
       if (this.readyState === this.HEADERS_RECEIVED) {
+        xhr.responseType = 'arraybuffer';
         emitter.statusCode = xhr.status;
         emitter.headers = self.parseHeaders(xhr.getAllResponseHeaders());
         callback(emitter);
@@ -10396,7 +10408,7 @@ AWS.ParamValidator = AWS.util.inherit({
         return this.validateType(context, value, ['string']);
       case 'base64':
       case 'binary':
-        return this.validateType(context, value, ['string', Buffer, Stream]);
+        return this.validatePayload(context, value);
       case 'integer':
       case 'float':
         return this.validateType(context, value, ['number']);
@@ -10442,6 +10454,21 @@ AWS.ParamValidator = AWS.util.inherit({
     var vowel = acceptedType.match(/^[aeiou]/i) ? 'n' : '';
     this.fail('InvalidParameterType', 'Expected ' + context + ' to be a' +
               vowel + ' ' + acceptedType);
+  },
+
+  validatePayload: function validatePayload(context, value) {
+    if (typeof value === 'string') return;
+    if (value && typeof value.byteLength === 'number') return; // typed arrays
+
+    var types = ['Buffer', 'Stream', 'File', 'Blob', 'ArrayBuffer', 'DataView'];
+    if (value) {
+      for (var i = 0; i < types.length; i++) {
+        if (AWS.util.typeName(value.constructor) == types[i]) return;
+      }
+    }
+
+    this.fail('InvalidParameterType', 'Expected ' + context + ' to be a ' +
+      'string, Buffer, Stream, Blob, or typed array object');
   }
 });
 
@@ -19499,6 +19526,7 @@ AWS.S3 = AWS.Service.defineService('s3', ['2006-03-01'], {
 
     function signedUrlBuilder() {
       delete request.httpRequest.headers['User-Agent'];
+      delete request.httpRequest.headers['X-Amz-User-Agent'];
       request.httpRequest.headers[expiresHeader] = parseInt(
         AWS.util.date.unixTimestamp() + expires, 10).toString();
     }
@@ -20359,7 +20387,9 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
     });
     var parts = [];
     AWS.util.arrayEach.call(this, headers, function (item) {
-      if (item[0] !== 'Authorization' && item[0] !== 'User-Agent' && item[0] !== 'Content-Type') {
+      if (item[0] !== 'Authorization' &&
+          item[0] !== 'User-Agent' && item[0] !== 'X-Amz-User-Agent' &&
+          item[0] !== 'Content-Type') {
         parts.push(item[0].toLowerCase() + ':' +
           this.canonicalHeaderValues(item[1].toString()));
       }
@@ -20375,7 +20405,8 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
     var keys = [];
     AWS.util.each.call(this, this.request.headers, function (key) {
       key = key.toLowerCase();
-      if (key !== 'authorization' && key !== 'user-agent' && key !== 'content-type') keys.push(key);
+      if (key !== 'authorization' && key !== 'user-agent' &&
+          key !== 'x-amz-user-agent' && key !== 'content-type') keys.push(key);
     });
     return keys.sort().join(';');
   },
@@ -20434,16 +20465,17 @@ var Buffer = require('buffer').Buffer;
  * @api private
  */
 AWS.util = {
-  engine: function enc() {
-    return process.platform + '/' + process.version;
+  engine: function engine() {
+    if (AWS.util.isBrowser() && typeof navigator !== 'undefined') {
+      return navigator.userAgent;
+    } else {
+      return process.platform + '/' + process.version;
+    }
   },
 
   userAgent: function userAgent() {
-    if (AWS.util.isBrowser()) {
-      return 'aws-sdk-js/' + AWS.VERSION;
-    } else {
-      return 'aws-sdk-nodejs/' + AWS.VERSION + ' ' + AWS.util.engine();
-    }
+    var name = AWS.util.isBrowser() ? 'js' : 'nodejs';
+    return 'aws-sdk-' + name + '/' + AWS.VERSION + ' ' + AWS.util.engine();
   },
 
   isBrowser: function isBrowser() { return typeof window !== 'undefined'; },
@@ -20541,6 +20573,7 @@ AWS.util = {
 
   string: {
     byteLength: function byteLength(string) {
+      /*jshint maxcomplexity:10*/
       if (string === null || string === undefined) return 0;
       if (typeof string === 'string') string = new Buffer(string);
 
