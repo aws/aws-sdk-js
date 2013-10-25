@@ -23,7 +23,7 @@
   "maxparams": false,
   "maxdepth": false,
   "maxstatements": 40,
-  "maxcomplexity": 5,
+  "maxcomplexity": 10,
   "sub": true,
   "indent": false
 }

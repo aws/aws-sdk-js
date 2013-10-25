@@ -17,7 +17,7 @@
       "jasmine-node": "latest",
       "semver": "latest",
       "coffee-script": "latest",
-      "jshint": "2.1.0",
+      "jshint": "latest",
       "cucumber": "latest"
     },
     "dependencies": {
