@@ -10324,7 +10324,6 @@ AWS.EnvironmentCredentials = AWS.util.inherit(AWS.Credentials, {
    * @see get
    */
   refresh: function refresh(callback) {
-    /*jshint maxcomplexity:10*/
     if (!callback) callback = function(err) { if (err) throw err; };
 
     if (process === undefined) {
@@ -10604,13 +10603,16 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
  */
 
 var AWS = require('./core');
-var Buffer = require('buffer').Buffer;
 require('./sequential_executor');
 require('./service_interface/json');
 require('./service_interface/query');
 require('./service_interface/rest');
 require('./service_interface/rest_json');
 require('./service_interface/rest_xml');
+
+/* jshint -W079 */
+var Buffer = require('buffer').Buffer;
+/* jshint +W079 */
 
 /**
  * The namespace used to register global event listeners for request building
@@ -11335,8 +11337,6 @@ AWS.JSON.Builder = inherit({
  */
 
 var AWS = require('./core');
-var Stream = require('stream').Stream;
-var Buffer = require('buffer').Buffer;
 
 /**
  * @api private
@@ -11483,6 +11483,7 @@ AWS.ParamValidator = AWS.util.inherit({
     var types = ['Buffer', 'Stream', 'File', 'Blob', 'ArrayBuffer', 'DataView'];
     if (value) {
       for (var i = 0; i < types.length; i++) {
+        if (AWS.util.isType(value, types[i])) return;
         if (AWS.util.typeName(value.constructor) == types[i]) return;
       }
     }
@@ -11492,7 +11493,7 @@ AWS.ParamValidator = AWS.util.inherit({
   }
 });
 
-},{"./core":48,"buffer":18,"stream":12}],59:[function(require,module,exports){
+},{"./core":48}],59:[function(require,module,exports){
 var process=require("__browserify_process");/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -12039,7 +12040,6 @@ AWS.Request = inherit({
    * @api private
    */
   eventParameters: function eventParameters(eventName, response) {
-    /*jshint maxcomplexity:8*/
     switch (eventName) {
       case 'validate':
       case 'sign':
@@ -12183,7 +12183,6 @@ AWS.Response = inherit({
    * @since v1.4.0
    */
   nextPage: function nextPage(callback) {
-    /*jshint maxcomplexity:10*/
     var config;
     var service = this.request.service;
     var operation = this.request.operation;
@@ -12227,7 +12226,6 @@ AWS.Response = inherit({
    * @api private
    */
   cacheNextPageTokens: function cacheNextPageTokens() {
-    /*jshint maxcomplexity:10*/
     if (this.hasOwnProperty('nextPageTokens')) return this.nextPageTokens;
     this.nextPageTokens = undefined;
 
@@ -12601,7 +12599,6 @@ AWS.Service = inherit({
   },
 
   getLatestServiceVersion: function getLatestServiceVersion(version) {
-    /*jshint maxcomplexity:10*/
     if (!this.constructor.services || this.constructor.services.length === 0) {
       throw new Error('No services defined on ' +
                       this.constructor.serviceIdentifier);
@@ -12690,7 +12687,6 @@ AWS.Service = inherit({
   },
 
   serviceInterface: function serviceInterface() {
-    /*jshint maxcomplexity:8*/
     switch (this.api.format) {
       case 'query': return AWS.EventListeners.Query;
       case 'json': return AWS.EventListeners.Json;
@@ -13289,7 +13285,6 @@ AWS.ServiceInterface.RestJson = {
   },
 
   populateBody: function populateBody(req) {
-    /*jshint maxcomplexity:10*/
     var input = req.service.api.operations[req.operation].input;
     var payload = input.payload;
     var params = {};
@@ -13403,7 +13398,6 @@ AWS.ServiceInterface.RestXml = {
   },
 
   populateBody: function populateBody(req) {
-    /*jshint maxcomplexity:10*/
     var input = req.service.api.operations[req.operation].input;
     var payload = input.payload;
     var rules = {};
@@ -86942,7 +86936,10 @@ module.exports = AWS.Route53;
  */
 
 var AWS = require('../core');
+
+/* jshint -W079 */
 var Buffer = require('buffer').Buffer;
+/* jshint +W079 */
 
 AWS.S3 = AWS.Service.defineService('s3', ['2006-03-01'], {
   /**
@@ -87730,7 +87727,6 @@ AWS.Signers.RequestSigner = inherit({
 });
 
 AWS.Signers.RequestSigner.getVersion = function getVersion(version) {
-  /*jshint maxcomplexity:8*/
   switch (version) {
     case 'v2': return AWS.Signers.V2;
     case 'v3': return AWS.Signers.V3;
@@ -88294,7 +88290,10 @@ var process=require("__browserify_process");/**
 
 var AWS = require('./core');
 var cryptoLib = require('crypto');
+
+/* jshint -W079 */
 var Buffer = require('buffer').Buffer;
+/* jshint +W079 */
 
 /**
  * A set of utility methods for use with the AWS SDK.
@@ -88419,7 +88418,6 @@ AWS.util = {
 
   string: {
     byteLength: function byteLength(string) {
-      /*jshint maxcomplexity:10*/
       if (string === null || string === undefined) return 0;
       if (typeof string === 'string') string = new Buffer(string);
 
@@ -93132,7 +93130,7 @@ describe('AWS.EventListeners', function() {
   completeHandler = null;
   retryHandler = null;
   beforeEach(function() {
-    setTimeout = jasmine.createSpy('setTimeout');;
+    window.setTimeout = jasmine.createSpy('setTimeout');;
     setTimeout.andCallFake(function(callback, delay) {
       totalWaited += delay;
       delays.push(delay);
@@ -93150,7 +93148,7 @@ describe('AWS.EventListeners', function() {
     return retryHandler = jasmine.createSpy('retry');
   });
   afterEach(function() {
-    return setTimeout = oldSetTimeout;
+    return window.setTimeout = oldSetTimeout;
   });
   makeRequest = function(callback) {
     var request;
@@ -93210,6 +93208,7 @@ describe('AWS.EventListeners', function() {
       return expect(call.args[0].message).toMatch(/Missing region in config/);
     });
     return it('ignores region validation if service has global endpoint', function() {
+      helpers.mockHttpResponse(200, {}, ['DATA']);
       service.config.region = null;
       service.api.globalEndpoint = 'mock.mockservice.tld';
       makeRequest(function() {});
@@ -93678,7 +93677,7 @@ AWS.config.update({
   }
 });
 
-setTimeout = function(fn, delay) { fn(); };
+window.setTimeout = function(fn, delay) { fn(); };
 
 flattenXML = function(xml) {
   if (!xml) {
@@ -93825,7 +93824,7 @@ var process=require("__browserify_process");// Generated by CoffeeScript 1.6.3
     }
   });
 
-  setTimeout = function(fn, delay) { fn(); };
+  window.setTimeout = function(fn, delay) { fn(); };
 
   flattenXML = function(xml) {
     if (!xml) {
@@ -98163,6 +98162,7 @@ describe('AWS.EC2', function() {
   ec2 = new AWS.EC2();
   describe('proxy support', function() {
     return it('always sets Host header to correct endpoint', function() {
+      helpers.mockHttpResponse(200, {}, ['DATA']);
       ec2 = new AWS.EC2({
         httpOptions: {
           proxy: 'http://__INVALID_HOSTNAME__:9999'
@@ -99867,9 +99867,9 @@ describe('AWS.util.date', function() {
       var now, oldDate;
       oldDate = Date;
       now = {};
-      Date = jasmine.createSpy().andReturn(now);;
+      window.Date = jasmine.createSpy().andReturn(now);;
       expect(util.getDate()).toBe(now);
-      return Date = oldDate;;
+      return window.Date = oldDate;;
     });
   });
   describe('iso8601', function() {

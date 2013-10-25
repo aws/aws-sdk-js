@@ -9584,13 +9584,16 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
  */
 
 var AWS = require('./core');
-var Buffer = require('buffer').Buffer;
 require('./sequential_executor');
 require('./service_interface/json');
 require('./service_interface/query');
 require('./service_interface/rest');
 require('./service_interface/rest_json');
 require('./service_interface/rest_xml');
+
+/* jshint -W079 */
+var Buffer = require('buffer').Buffer;
+/* jshint +W079 */
 
 /**
  * The namespace used to register global event listeners for request building
@@ -10315,8 +10318,6 @@ AWS.JSON.Builder = inherit({
  */
 
 var AWS = require('./core');
-var Stream = require('stream').Stream;
-var Buffer = require('buffer').Buffer;
 
 /**
  * @api private
@@ -10472,7 +10473,7 @@ AWS.ParamValidator = AWS.util.inherit({
   }
 });
 
-},{"./core":30,"buffer":18,"stream":12}],40:[function(require,module,exports){
+},{"./core":30}],40:[function(require,module,exports){
 var process=require("__browserify_process");/**
  * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -11019,7 +11020,6 @@ AWS.Request = inherit({
    * @api private
    */
   eventParameters: function eventParameters(eventName, response) {
-    /*jshint maxcomplexity:8*/
     switch (eventName) {
       case 'validate':
       case 'sign':
@@ -11163,7 +11163,6 @@ AWS.Response = inherit({
    * @since v1.4.0
    */
   nextPage: function nextPage(callback) {
-    /*jshint maxcomplexity:10*/
     var config;
     var service = this.request.service;
     var operation = this.request.operation;
@@ -11207,7 +11206,6 @@ AWS.Response = inherit({
    * @api private
    */
   cacheNextPageTokens: function cacheNextPageTokens() {
-    /*jshint maxcomplexity:10*/
     if (this.hasOwnProperty('nextPageTokens')) return this.nextPageTokens;
     this.nextPageTokens = undefined;
 
@@ -11581,7 +11579,6 @@ AWS.Service = inherit({
   },
 
   getLatestServiceVersion: function getLatestServiceVersion(version) {
-    /*jshint maxcomplexity:10*/
     if (!this.constructor.services || this.constructor.services.length === 0) {
       throw new Error('No services defined on ' +
                       this.constructor.serviceIdentifier);
@@ -11670,7 +11667,6 @@ AWS.Service = inherit({
   },
 
   serviceInterface: function serviceInterface() {
-    /*jshint maxcomplexity:8*/
     switch (this.api.format) {
       case 'query': return AWS.EventListeners.Query;
       case 'json': return AWS.EventListeners.Json;
@@ -12269,7 +12265,6 @@ AWS.ServiceInterface.RestJson = {
   },
 
   populateBody: function populateBody(req) {
-    /*jshint maxcomplexity:10*/
     var input = req.service.api.operations[req.operation].input;
     var payload = input.payload;
     var params = {};
@@ -12383,7 +12378,6 @@ AWS.ServiceInterface.RestXml = {
   },
 
   populateBody: function populateBody(req) {
-    /*jshint maxcomplexity:10*/
     var input = req.service.api.operations[req.operation].input;
     var payload = input.payload;
     var rules = {};
@@ -19240,7 +19234,10 @@ module.exports = AWS.DynamoDB;
  */
 
 var AWS = require('../core');
+
+/* jshint -W079 */
 var Buffer = require('buffer').Buffer;
+/* jshint +W079 */
 
 AWS.S3 = AWS.Service.defineService('s3', ['2006-03-01'], {
   /**
@@ -19884,7 +19881,6 @@ AWS.Signers.RequestSigner = inherit({
 });
 
 AWS.Signers.RequestSigner.getVersion = function getVersion(version) {
-  /*jshint maxcomplexity:8*/
   switch (version) {
     case 'v2': return AWS.Signers.V2;
     case 'v3': return AWS.Signers.V3;
@@ -20448,7 +20444,10 @@ var process=require("__browserify_process");/**
 
 var AWS = require('./core');
 var cryptoLib = require('crypto');
+
+/* jshint -W079 */
 var Buffer = require('buffer').Buffer;
+/* jshint +W079 */
 
 /**
  * A set of utility methods for use with the AWS SDK.
@@ -20573,7 +20572,6 @@ AWS.util = {
 
   string: {
     byteLength: function byteLength(string) {
-      /*jshint maxcomplexity:10*/
       if (string === null || string === undefined) return 0;
       if (typeof string === 'string') string = new Buffer(string);
 
