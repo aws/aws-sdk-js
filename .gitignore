@@ -7,3 +7,6 @@ vendor
 doc
 doc-guide
 dist/appinfo.js
+dist/aws-sdk.js
+dist/aws-sdk.min.js
+dist/tests.js
