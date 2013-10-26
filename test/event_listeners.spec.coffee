@@ -97,6 +97,7 @@ describe 'AWS.EventListeners', ->
       expect(call.args[0].message).toMatch(/Missing region in config/)
 
     it 'ignores region validation if service has global endpoint', ->
+      helpers.mockHttpResponse 200, {}, ''
       service.config.region = null
       service.api.globalEndpoint = 'mock.mockservice.tld'
 

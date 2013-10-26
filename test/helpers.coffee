@@ -32,8 +32,6 @@ AWS.config.update
 # TODO: refactor this out.
 `setTimeout = function(fn, delay) { fn(); }`
 
-#AWS.HttpClient.getInstance = -> throw new Error('Unmocked HTTP request')
-
 flattenXML = (xml) ->
   if (!xml)
     return xml

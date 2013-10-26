@@ -21,6 +21,7 @@ describe 'AWS.EC2', ->
 
   describe 'proxy support', ->
     it 'always sets Host header to correct endpoint', ->
+      helpers.mockHttpResponse 200, {}, ''
       ec2 = new AWS.EC2(httpOptions: proxy: 'http://__INVALID_HOSTNAME__:9999')
       ec2.makeRequest 'describeInstances', ->
         expect(@request.httpRequest.headers.Host).
