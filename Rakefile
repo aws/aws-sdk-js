@@ -21,6 +21,20 @@ task :setup do
 end
 
 namespace :browser do
+  def write_configuration()
+    require 'json'
+    config = {}
+    if File.exist?('configuration')
+      config = JSON.parse(File.read('configuration'))
+      config['accessKeyId'] ||= ENV['AWS_ACCESS_KEY_ID']
+      config['secretAccessKey'] ||= ENV['AWS_SECRET_ACCESS_KEY']
+    end
+    File.open('test/configuration.js', 'w') do |f|
+      config_json = JSON.generate(config).inspect
+      f.puts "module.exports = JSON.parse(#{config_json});"
+    end
+  end
+
   $BUILDER = "./dist-tools/browser-builder.js"
   $BROWSERIFY = "./dist-tools/node_modules/.bin/browserify"
   $BROWSERIFY_ARGS = "-i domain -t ./dist-tools/bundle-transform lib/aws.js"
@@ -62,10 +76,12 @@ namespace :browser do
 
   desc 'Builds browser test harness and runner'
   task :test => :dist_path do
+    write_configuration
     sh "coffee -c test/helpers.coffee"
     sh "find test -name '*.coffee' | SERVICES=all xargs #{$BROWSERIFY} " +
        "-t coffeeify #{$BROWSERIFY_ARGS} > #{$BROWSERIFY_TEST}"
     rm_f "test/helpers.js"
+    rm_f "test/configuration.js"
     puts "Now run `testem`"
   end
 
