@@ -109,122 +109,6 @@ language governing permissions and limitations under the License.
              s4() + '-' + s4() + s4() + s4();
     }
 
-    var iterators = {
-      operations: {
-        listTables: {
-          result_key: 'TableNames'
-        },
-        describeAddresses: {
-          result_key: 'Addresses',
-        },
-        describeAvailabilityZones: {
-          result_key: 'AvailabilityZones',
-        },
-        describeBundleTasks: {
-          result_key: 'BundleTasks',
-        },
-        describeConversionTasks: {
-          result_key: 'ConversionTasks',
-        },
-        describeCustomerGateways: {
-          result_key: 'CustomerGateways',
-        },
-        describeDhcpOptions: {
-          result_key: 'DhcpOptions',
-        },
-        describeExportTasks: {
-          result_key: 'ExportTasks',
-        },
-        describeImages: {
-          result_key: 'Images',
-        },
-        describeInstanceStatus: {
-          token_param: 'NextToken',
-          token_key: 'NextToken',
-          limit_key: 'MaxResults',
-          result_key: 'InstanceStatuses',
-        },
-        describeInstances: {
-          result_key: 'Reservations',
-        },
-        describeInternetGateways: {
-          result_key: 'InternetGateways',
-        },
-        describeKeyPairs: {
-          result_key: 'KeyPairs',
-        },
-        describeLicenses: {
-          result_key: 'Licenses',
-        },
-        describeNetworkAcls: {
-          result_key: 'NetworkAcls',
-        },
-        describeNetworkInterfaces: {
-          result_key: 'NetworkInterfaces',
-        },
-        describePlacementGroups: {
-          result_key: 'PlacementGroups',
-        },
-        describeRegions: {
-          result_key: 'Regions',
-        },
-        describeReservedInstances: {
-          result_key: 'ReservedInstances',
-        },
-        describeReservedInstancesListings: {
-          result_key: 'ReservedInstancesListings',
-        },
-        describeReservedInstancesOfferings: {
-          token_param: 'NextToken',
-          token_key: 'NextToken',
-          limit_key: 'MaxResults',
-          result_key: 'ReservedInstancesOfferings',
-        },
-        describeRouteTables: {
-          result_key: 'RouteTables',
-        },
-        describeSecurityGroups: {
-          result_key: 'SecurityGroups',
-        },
-        describeSnapshots: {
-          result_key: 'Snapshots',
-        },
-        describeSpotInstanceRequests: {
-          result_key: 'SpotInstanceRequests',
-        },
-        describeSpotPriceHistory: {
-          token_param: 'NextToken',
-          token_key: 'NextToken',
-          limit_key: 'MaxResults',
-          result_key: 'SpotPriceHistory',
-        },
-        describeSubnets: {
-          result_key: 'Subnets',
-        },
-        describeTags: {
-          result_key: 'Tags',
-        },
-        describeVolumeStatus: {
-          token_param: 'NextToken',
-          token_key: 'NextToken',
-          limit_key: 'MaxResults',
-          result_key: 'VolumeStatuses',
-        },
-        describeVolumes: {
-          result_key: 'Volumes',
-        },
-        describeVpcs: {
-          result_key: 'Vpcs',
-        },
-        describeVpnConnections: {
-          result_key: 'VpnConnections',
-        },
-        describeVpnGateways: {
-          result_key: 'VpnGateways',
-        },
-      }
-    };
-
     /**
      * Turns a JS object into a table representation using a set of hints
      * to detect the key/value structure.
@@ -368,10 +252,6 @@ language governing permissions and limitations under the License.
 
         var tableData = resp.data;
         var resultKey = '';
-        if (iterators.operations[operation]) {
-          resultKey = iterators.operations[operation].result_key;
-          tableData = resp.data[resultKey];
-        }
         entry.find('.tableOutput').html(tableView(tableData, resultKey));
       }
 
