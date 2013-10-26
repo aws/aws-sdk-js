@@ -15,27 +15,13 @@
 
 module.exports = function() {
   this.Before("@directconnect", function (callback) {
-    this.service = new this.AWS.DirectConnect.Client();
+    this.service = new this.AWS.DirectConnect();
     callback();
   });
 
-  this.Given(/^I describe Direct Connect offerings$/, function(callback) {
-    this.request(null, 'describeOfferings', {}, callback);
-  });
-
-  this.Given(/^I take the first offering ID$/, function(callback) {
-    this.AWS.util.arrayEach.call(this, this.data.offerings, function(item) {
-      if (item.region === this.service.config.region) {
-        this.offering = item;
-        return this.AWS.util.abort;
-      }
-    });
-    callback();
-  });
-
-  this.When(/^I create a Direct Connect connection with name prefix "([^"]*)" and the offering ID$/, function(prefix, callback) {
+  this.When(/^I create a Direct Connect connection with name prefix "([^"]*)"$/, function(prefix, callback) {
     var params = {
-      offeringId: this.offering.offeringId,
+      bandwidth: '1Gbps', location: 'EqDC2',
       connectionName: this.uniqueName(prefix)
     };
     this.request(null, 'createConnection', params, callback);
@@ -43,21 +29,17 @@ module.exports = function() {
 
   this.Then(/^I should get a Direct Connect connection ID$/, function(callback) {
     this.connectionId = this.data.connectionId;
+    this.connectionData = this.data;
     callback();
   });
 
-  this.Then(/^the region should match the offering region$/, function(callback) {
-    this.assert.equal(this.offering.region, this.data.region);
-    callback();
-  });
-
-  this.Then(/^I describe connection details for the connection$/, function(callback) {
+  this.Then(/^I describe the connection$/, function(callback) {
     var params = {connectionId: this.connectionId};
-    this.request(null, 'describeConnectionDetail', params, callback);
+    this.request(null, 'describeConnections', params, callback);
   });
 
-  this.Then(/^the bandwidth should match the offering bandwidth$/, function(callback) {
-    this.assert.equal(this.offering.bandwidth, this.data.bandwidth);
+  this.Then(/^the bandwidth should match the connection bandwidth$/, function(callback) {
+    this.assert.equal(this.connectionData.bandwidth, this.data.connections[0].bandwidth);
     callback();
   });
 
@@ -66,9 +48,10 @@ module.exports = function() {
     this.request(null, 'deleteConnection', params, callback);
   });
 
-  this.Given(/^I create a Direct Connect connection with an invalid offering ID$/, function(callback) {
+  this.Given(/^I create a Direct Connect connection with an invalid location$/, function(callback) {
     var params = {
-      offeringId: 'INVALID_OFFERING_ID',
+      bandwidth: '1Gbps',
+      location: 'INVALID_LOCATION',
       connectionName: this.uniqueName('aws-sdk-js')
     };
     this.request(null, 'createConnection', params, callback, false);
