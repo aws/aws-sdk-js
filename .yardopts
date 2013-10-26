@@ -9,6 +9,7 @@
 --template-path doc-src/templates
 --plugin sitemap
 doc-src/*.docs.js
+lib/core.js
 lib/**/*.js
 -
 README.md
