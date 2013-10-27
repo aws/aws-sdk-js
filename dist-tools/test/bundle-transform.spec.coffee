@@ -42,6 +42,8 @@ buildBundle = (services) ->
 defaultBundle = buildBundle
   dynamodb: ['2012-08-10']
   s3:['2006-03-01']
+  sqs: ['2012-11-05']
+  sns: ['2010-03-31']
   sts: ['2011-06-15']
 
 # Assertions
