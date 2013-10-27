@@ -103,9 +103,63 @@ Note that the constructor takes all of the same configuration data as the
 
 ## Configuring Resources and Permissions
 
-### CORS
+### Cross-Origin Resource Sharing (CORS)
 
-TODO
+Cross-Origin Resource Sharing, or CORS, is a security feature of modern web
+browsers that allow them to negotiate which domains they will allow to make
+requests against which external websites or services. This is an important
+feature to keep in mind when developing applications with the AWS SDK for
+JavaScript in the browser, since most requests to resources will be sent to an
+external domain (the endpoint for the given AWS service). If your browser or
+environment enforces CORS security, you will need to configure CORS with the
+service.
+
+Fortunately, only Amazon S3 requires explicit configuration for CORS. Other
+services only require that the request is signed using authentication keys
+that have permissions on the resource (discussed below).
+
+#### Configuring CORS for an Amazon S3 Bucket
+
+In order to configure an Amazon S3 bucket to use CORS, you can visit the
+[Amazon S3 console](https://console.aws.amazon.com/s3), click on the properties
+tab of the bucket you want to configure, and then click "Edit CORS
+Configuration" in the Permissions section. A set of
+[sample configurations](http://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html#how-do-i-enable-cors)
+are provided in the S3 documentation.
+
+A quick CORS configuration sample is shown below. This sample allows a user to
+view, add, remove, or update objects inside of a bucket from any external domain,
+though it is recommended that you scope the "AllowedOrigin" to the domain that
+your website runs from.
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+      <CORSRule>
+        <AllowedOrigin>*</AllowedOrigin>
+        <AllowedMethod>HEAD</AllowedMethod>
+        <AllowedMethod>GET</AllowedMethod>
+        <AllowedMethod>PUT</AllowedMethod>
+        <AllowedMethod>POST</AllowedMethod>
+        <AllowedMethod>DELETE</AllowedMethod>
+        <AllowedHeader>*</AllowedHeader>
+      </CORSRule>
+    </CORSConfiguration>
+
+**Note** that this does *not* authorize the user to perform any actions on the
+bucket, it simply enables the browser's security model to allow a request
+to S3. Actual permissions for the user must be configured either via bucket
+permissions, or IAM role level permissions.
+
+#### When CORS is Not Required
+
+CORS does not always need to be configured explicitly. In some environments,
+like local desktop or mobile devices, CORS may not be enforced, and configuring
+it is not necessary.
+
+Furthermore, if you host your application from within S3 and access
+resources from "*.s3.amazonaws.com" (or a specific regional endpoint), your
+requests will not be accessing an external domain and therefore will not
+require CORS. CORS will still be used for services besides S3 in this case.
 
 ### Permissions for IAM Roles
 
