@@ -8,7 +8,7 @@ The quickest way to get started with the SDK is to load it using the hosted
 package directly from Amazon Web Services. To do this, simply add the following
 script tag to your HTML pages:
 
-    <script src="https://sdk.amazonaws.com/js/aws-sdk.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.0.rc1.min.js"></script>
 
 You can also download this package by clicking the following link:
 [aws-sdk.min.js](https://sdk.amazonaws.com/js/aws-sdk.min.js)
