@@ -145,7 +145,7 @@ console.log("The URL is", url);
 
 ### Listing tables
 
-The following example will list all tables in a DynamoDB instance:
+The following example will list all tables in a DynamoDB instance.
 
 ```js
 var db = new AWS.DynamoDB();
@@ -156,16 +156,74 @@ db.listTables(function(err, data) {
 
 ### Reading and writing items in a table
 
-TODO
+The following example puts an item in a DynamoDB table and then reads it back
+using the hash key.
+
+```js
+var table = new AWS.DynamoDB({params: {TableName: 'MY_TABLE'}});
+var key = 'UNIQUE_KEY_ID';
+
+// Write the item to the table
+var itemParams = {Item: {id: {S: key}, data: {S: 'data'}}};
+table.putItem(itemParams, function() {
+  // Read the item from the table
+  table.getItem({Key: {id: {S: key}}}, function(err, data) {
+    console.log(data.Item); // print the item data
+  });
+});
+```
 
 ## Amazon SQS
 
+### Creating a queue
+
+The following example creates a queue resource in Amazon SQS.
+
+```js
+var sqs = new AWS.SQS();
+sqs.createQueue({QueueName: 'MY_QUEUE_NAME'}, function (err, data) {
+  if (data) {
+    var url = data.QueueUrl; // use this queue URL to operate on the queue
+  }
+});
+```
+
+### Sending a message
+
+The following example sends a message to the queue created in the previous
+example.
+
+```js
+var queue = new AWS.SQS({params: {QueueUrl: url}}); // using url to queue
+queue.sendMessage({MessageBody: 'THE MESSAGE TO SEND'}, function (err, data) {
+  if (!err) console.log('Message sent.');
+});
+```
+
 ### Receiving a message
 
-TODO
+The following example receives the message from the queue sent in the
+previous example.
+
+```js
+var queue = new AWS.SQS({params: {QueueUrl: url}}); // using url to queue
+queue.receiveMessage(function (err, data) {
+  if (data) {
+    console.log(data.Messages); // message data in Messages structure
+  }
+});
+```
 
 ## Amazon SNS
 
 ### Publishing to a topic
 
-TODO
+The following example publishes a message to an SNS topic resource. The topic
+can be identified with a topic ARN.
+
+```js
+var sns = new AWS.SNS({params: {TopicArn: 'ARN_FOR_SNS_TOPIC'}});
+sns.publish({Message: 'THE MESSAGE TO PUBLISH'}, function (err, data) {
+  if (!err) console.log('Message published');
+});
+```
