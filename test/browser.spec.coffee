@@ -108,13 +108,14 @@ integrationTests ->
 
   describe 'AWS.SQS', ->
     integration 'posts and receives messages on a queue', (done) ->
+      name = uniqueName('aws-sdk-js')
       msg = 'ƒoo'
-      sqs.createQueue {QueueName: uniqueName('aws-sdk-js')}, (err, data) ->
+      sqs.createQueue {QueueName: name}, (err, data) ->
         url = data.QueueUrl
         sqs = new AWS.SQS(sqs.config)
         sqs.config.params = QueueUrl: url
-        eventually ((err, data) -> data.QueueUrls.indexOf(url) >= 0),
-          ((cb) -> sqs.listQueues(cb)), ->
+        eventually ((err) -> err == null),
+          ((cb) -> sqs.getQueueUrl({QueueName: name}, cb)), ->
             sqs.sendMessage {MessageBody:msg}, (err, data) ->
               noError(err)
               eventually ((err, data) -> data.Messages[0].Body == msg),
