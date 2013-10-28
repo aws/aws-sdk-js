@@ -25,8 +25,8 @@ More configuration settings can be found in the
 [API reference documentation](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html).
 
 If you have multiple service objects that work in different regions, you can
-look at the *Service-Specific Configuration* section below to see how to pass
-the region to each individual service.
+look at the [Service-Specific Configuration](#Service-Specific_Configuration)
+section below to see how to pass the region to each individual service.
 
 ### Loading Credentials in the Client's Browser
 
