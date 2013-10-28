@@ -43,17 +43,16 @@ Credentials are the most important thing you need to set when using any AWS SDK.
 Credentials can be set globally on the `AWS.config` object or per service by
 passing the credential information to the service object directly.
 
-There are a few ways to load credentials. Here they are, in order of
+There are a couple of ways to load credentials. Here they are, in order of
 recommendation:
 
-1. Loaded from environment variables,
-2. Loaded from a JSON file on disk,
-3. Loaded from EC2 metadata service,
-4. Hardcoded in your application
+1. Using web identity federation to authenticate users
+2. Hard-coded in your application
 
 We recommend you not hard-code your AWS credentials in your application;
 however, it is reasonable to temporarily hard-code credential information
-in small personal scripts or for testing purposes.
+in small personal scripts or for testing purposes. It is also sometimes
+necessary to hard-code **read-only** credentials in your application.
 
 #### Using Web Identity Federation to Authenticate Users
 
