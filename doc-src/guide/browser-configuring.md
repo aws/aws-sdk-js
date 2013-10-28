@@ -133,7 +133,7 @@ will get them an access token. Using the IAM role ARN and the access token from
 your provider, you will setup the `AWS.WebIdentityCredentials` helper object in
 the SDK like so:
 
-```js
+```javascript
 AWS.config.credentials = new AWS.WebIdentityCredentials({
   RoleArn: 'arn:aws:iam::<AWS_ACCOUNT_ID>:role/<WEB_IDENTITY_ROLE_NAME>',
   ProviderId: 'graph.facebook.com|www.amazon.com', // this is null for Google
@@ -160,7 +160,7 @@ that depend on credentials before loading the access token. To do this,
 simply create the credentials object without the `WebIdentityToken` parameter
 and add it in later:
 
-```js
+```javascript
 AWS.config.credentials = new AWS.WebIdentityCredentials({
   RoleArn: 'arn:aws:iam::<AWS_ACCOUNT_ID>:role/<WEB_IDENTITY_ROLE_NAME>',
   ProviderId: 'graph.facebook.com|www.amazon.com' // this is null for Google
@@ -172,7 +172,7 @@ var s3 = new AWS.S3;
 
 In the callback from the identity provider's SDK with the access token:
 
-```js
+```javascript
 AWS.config.credentials.params.WebIdentityToken = accessToken;
 ```
 
@@ -236,7 +236,7 @@ an access token.
 You can hard-code credentials by passing the credential information to the
 configuration object using `AWS.config.update()`:
 
-```js
+```javascript
 AWS.config.update({accessKeyId: 'akid', secretAccessKey: 'secret'});
 ```
 
@@ -247,7 +247,7 @@ a region by setting the `region` property on the global configuration object,
 or by setting it per-service. The following code sets the region globally for
 all subsequent service objects:
 
-```js
+```javascript
 AWS.config.region = 'us-west-1';
 ```
 
@@ -258,7 +258,7 @@ For instance, you want to use multiple EC2 objects in different regions.
 You can do this by passing configuration data directly to the service object 
 constructor:
 
-```js
+```javascript
 var s3 = new AWS.S3({region: 'ap-southeast-2', maxRetries: 15});
 ```
 

@@ -34,7 +34,7 @@ will be merged on top of global configuration, so there is no need to
 re-specify any global settings. For example, an DynamoDB object can be created
 for a specific region:
 
-```js
+```javascript
 var dynamodb = new AWS.DynamoDB({region: 'us-west-2'});
 ```
 
@@ -47,7 +47,7 @@ option values, similar to the way configuration is passed.
 For example, to read an object for a given bucket and key in S3, you
 can pass the following parameters to the `getObject` method:
 
-```js
+```javascript
 s3.getObject({Bucket: 'bucketName', Key: 'keyName'});
 ```
 
@@ -61,7 +61,7 @@ directly when constructing the service object. To do this, pass the `params`
 parameter to your constructed service with the map of default parameter
 values like so:
 
-```js
+```javascript
 var s3bucket = new AWS.S3({ params: {Bucket: 'myBucket'} });
 ```
 

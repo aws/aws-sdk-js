@@ -81,13 +81,13 @@ You can also load configuration and credentials from disk using
 containing the configuration data. For example, if you had a file
 named 'config.json' with the contents:
 
-```js
+```javascript
 { "accessKeyId": "akid", "secretAccessKey": "secret", "region": "us-east-1" }
 ```
 
 You can load the JSON data using the command:
 
-```js
+```javascript
 AWS.config.loadFromPath('./config.json');
 ```
 
@@ -105,7 +105,7 @@ after this call.
 You can hard-code credentials by passing the credential information to the
 configuration object using `AWS.config.update()`:
 
-```js
+```javascript
 AWS.config.update({accessKeyId: 'akid', secretAccessKey: 'secret'});
 ```
 
@@ -115,7 +115,7 @@ The AWS SDK for Node.js doesn't select the region by default. You can choose
 a region similarly to setting credentials by either loading from disk or
 using `AWS.config.update()`:
 
-```js
+```javascript
 AWS.config.update({region: 'us-west-1'});
 ```
 
@@ -130,7 +130,7 @@ specifying the `apiVersions` parameter in `AWS.config`. For example,
 you can choose to set specific versions of the DynamoDB and EC2 services,
 while selecting the "latest" version of Redshift:
 
-```js
+```javascript
 AWS.config.apiVersions = {
   dynamodb: '2011-12-05',
   ec2: '2013-02-01',
@@ -144,7 +144,7 @@ when constructing a service.
 You can also lock all services at a specific point in time by using a "fuzzy
 version":
 
-```js
+```javascript
 // Try to use latest available APIs before this date
 AWS.config.apiVersion = '2012-05-04';
 ```
@@ -156,7 +156,7 @@ HTTP or HTTPS proxies through global or per-service configuration options. To
 set a proxy, pass the `proxy` option to the `httpOptions` setting of your
 config object. This is how you could set a global proxy:
 
-```js
+```javascript
 AWS.config.update({
   httpOptions: {
     proxy: 'http://localhost:8080'
@@ -176,7 +176,7 @@ For instance, you want to use multiple EC2 objects in different regions.
 You can do this by passing configuration data directly to the service object 
 constructor:
 
-```js
+```javascript
 var ec2 = new AWS.EC2({region: 'ap-southeast-2', maxRetries: 15});
 ```
 
@@ -193,6 +193,6 @@ service objects. These services would have to be manually updated with the new
 configuration data, or recreated using the following command (assuming an
 existing `s3` service object):
 
-```js
+```javascript
 s3 = new AWS.S3(s3.config);
 ```

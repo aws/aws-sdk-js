@@ -20,7 +20,7 @@ the response or error data is available.
 For example, the following service method can be called with
 a standard callback to retrieve the response data or error:
 
-```js
+```javascript
 new AWS.S3().listObjects({Bucket: 'myBucket'}, function(error, data) {
   if (error) {
     console.log(error); // an error occurred
@@ -37,7 +37,7 @@ Note that if you do not specify a callback, the operation will
 return an `AWS.Request` object that must be manually sent using
 the `send()` method:
 
-```js
+```javascript
 // create the AWS.Request object
 var request = new AWS.S3().listObjects({Bucket: 'myBucket'});
 
@@ -67,7 +67,7 @@ retrieved from the service request. For instance, for an
 Amazon DynamoDB `listTables` method call, the response data might 
 look like this:
 
-```js
+```javascript
 > response.data
 { TableNames: 
    [ 'table1', 'table2', ... ] }
@@ -81,7 +81,7 @@ In the event of a service error (or transfer error), the
 `response.error` property will be filled with the given
 error data in the form:
 
-```js
+```javascript
 { code: 'SHORT_UNIQUE_ERROR_CODE',
   message: 'Some human readable error message' }
 ```
@@ -97,7 +97,7 @@ Access to the originating request object is available through this
 property. For example, to access the parameters that were sent
 with a request:
 
-```js
+```javascript
 s3.getObject({Bucket: 'bucket', Key: 'key'}).on('success', function(response) {
   console.log("Key was", response.request.params.Key);
 }).send();
@@ -111,7 +111,7 @@ accept an `error` parameter, followed by the `data` from the response.
 
 For example:
 
-```js
+```javascript
 s3.listBuckets(function(error, data) {
   if (err) {
     console.log(error); // error is Response.error
@@ -123,7 +123,7 @@ s3.listBuckets(function(error, data) {
 
 Prints (assuming the request succeeded):
 
-```js
+```javascript
 { Owner: { ID: '...', DisplayName: '...' },
   Buckets:
    [ { Name: 'someBucketName', CreationDate: someCreationDate },
@@ -157,7 +157,7 @@ kick off the request to the remote server.
 
 #### Event: 'success'
 
-```js
+```javascript
 req.on('success', function(response) { ... });
 ```
 
@@ -167,7 +167,7 @@ with the serialized response data from the service.
 
 For example:
 
-```js
+```javascript
 s3.listBuckets().done(function(response) {
   console.log(response.data);
 }).send();
@@ -175,7 +175,7 @@ s3.listBuckets().done(function(response) {
 
 Prints:
 
-```js
+```javascript
 { Owner: { ID: '...', DisplayName: '...' },
   Buckets: 
    [ { Name: 'someBucketName', CreationDate: someCreationDate },
@@ -185,7 +185,7 @@ Prints:
 
 #### Event: 'error'
 
-```js
+```javascript
 req.on('error', function(error, response) { ... });
 ```
 
@@ -195,7 +195,7 @@ will be `null` and the `response.error` field will be filled with
 the error data. Note that the `error` object is also passed directly
 as the first parameter to the event:
 
-```js
+```javascript
 s3.config.credentials.accessKeyId = 'invalid';
 s3.listBuckets().fail(function(error, response) {
   console.log(error);
@@ -206,13 +206,13 @@ s3.listBuckets().fail(function(error, response) {
 
 Prints:
 
-```js
+```javascript
 { code: 'Forbidden', message: null }
 ```
 
 #### Event: 'complete'
 
-```js
+```javascript
 req.on('complete', function(response) { ... });
 ```
 
@@ -223,7 +223,7 @@ do intend to use response data inside of this callback, you must check
 for the presence of `response.data` or `response.error` before attempting
 to access either property. For example:
 
-```js
+```javascript
 request.on('complete', function(response) {
   if (response.error) {
     // an error occurred, handle it
@@ -235,7 +235,7 @@ request.on('complete', function(response) {
 
 #### Event: 'httpData'
 
-```js
+```javascript
 req.on('httpData', function(chunk, response) { ... });
 ```
 
@@ -261,7 +261,7 @@ callbacks can be registered for different events, or all for the
 same event. In addition, you can chain callback registration, for
 example:
 
-```js
+```javascript
 request.
   on('success', function(response) {
     console.log("Success!");

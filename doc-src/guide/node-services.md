@@ -53,7 +53,7 @@ will be merged on top of global configuration, so there is no need to
 re-specify any global settings. For example, an EC2 object can be created
 for a specific region:
 
-```js
+```javascript
 var ec2 = new AWS.EC2({region: 'us-west-2'});
 ```
 
@@ -71,7 +71,7 @@ SDK.
 In order to lock into an API version of a given service, simply pass the
 `apiVersion` parameter when constructing the object, for example:
 
-```js
+```javascript
 var dynamodb = new AWS.DynamoDB({apiVersion: '2011-12-05'});
 ```
 
@@ -86,7 +86,7 @@ when constructing a service object (unless overridden globally). You can
 also force the latest API version to be used by passing the "latest" value
 as the `apiVersion` parameter like so:
 
-```js
+```javascript
 var ec2 = new AWS.EC2({apiVersion: 'latest'});
 ```
 
@@ -99,7 +99,7 @@ and the SDK will look for the *last* available matching API version when
 loading the service object. For instance, you can also load the 2011-12-05
 DynamoDB API by using the following code:
 
-```js
+```javascript
 var dynamodb = new AWS.DynamoDB({apiVersion: '2012-04-04'});
 ```
 
@@ -111,7 +111,7 @@ You can also use this strategy to globally lock your application to a point
 in time. For instance, if you begin developing your application on 2012-07-05,
 you can add the following global `apiVersion` lock value:
 
-```js
+```javascript
 AWS.config.apiVersion = '2012-07-05';
 ```
 
@@ -120,7 +120,7 @@ API versions at the specified lock time. You can override any API versions
 if you need a newer version, or if the service had not yet been released,
 by adding the `apiVersion` parameter to the constructor call as normal:
 
-```js
+```javascript
 // Amazon Redshift was not yet released in 2012-07-05
 var redshift = new AWS.Redshift({apiVersion: '2012-12-01'});
 ```
@@ -132,7 +132,7 @@ option values, similar to the way configuration is passed.
 For example, to read an object for a given bucket and key in S3, you
 can pass the following parameters to the `getObject` method:
 
-```js
+```javascript
 s3.getObject({Bucket: 'bucketName', Key: 'keyName'});
 ```
 
@@ -146,7 +146,7 @@ directly when constructing the service object. To do this, pass the `params`
 parameter to your constructed service with the map of default parameter
 values like so:
 
-```js
+```javascript
 var s3bucket = new AWS.S3({ params: {Bucket: 'myBucket'} });
 ```
 

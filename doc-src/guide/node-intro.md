@@ -17,7 +17,7 @@ npm install aws-sdk
 After you've installed the SDK, you can require the AWS package in your node
 application using `require()`:
 
-```js
+```javascript
 var AWS = require('aws-sdk');
 ```
 
