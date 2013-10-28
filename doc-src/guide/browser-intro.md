@@ -11,7 +11,7 @@ script tag to your HTML pages:
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.0.rc1.min.js"></script>
 
 You can also download this package by clicking the following link:
-[aws-sdk.min.js](https://sdk.amazonaws.com/js/aws-sdk.min.js)
+[aws-sdk-2.0.0.rc1.min.js](https://sdk.amazonaws.com/js/aws-sdk-2.0.0.rc1.min.js)
 
 Once the SDK is loaded in your page, the module will be available from
 the global variable `AWS` (or `window.AWS`).

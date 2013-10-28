@@ -18,7 +18,7 @@ new settings. The most common settings are:
 2. `region` &mdash; to set the region for requests
 3. `sslEnabled` &mdash; whether SSL is enabled or not
 4. `maxRetries` &mdash; to control the number of retries for a request
-5. `logger` &mdash; a logger object to write debug information to. Set to `process.stdout`
+5. `logger` &mdash; a logger object to write debug information to. Set to `console`
    to get logging information about service requests.
 
 More configuration settings can be found in the
@@ -71,13 +71,13 @@ your web application. For a more detailed guide, please see the
 [AWS Security Token Service documentation](http://docs.aws.amazon.com/STS/latest/UsingSTS/CreatingWIF.html)
 on creating temporary credentials using web identity federation.
 
-#### 1. Register an application with the identity provider
+##### 1. Register an application with the identity provider
 
 The first step is to register an application with the provider you are
 interested in using. In each case, you will get an application ID. This
 ID will be used to configure user roles.
 
-#### 2. Create an IAM role for the identity provider
+##### 2. Create an IAM role for the identity provider
 
 Once you have the application ID, you can visit the Roles section of the
 [IAM console](https://console.aws.amazon.com/iam) to create a new role. Click
@@ -92,7 +92,7 @@ to users with the correct privileges, otherwise any user with an Amazon,
 Facebook, or Google identity will be able to modify resources in your
 application.
 
-#### 3. Setup permissions for the IAM role
+##### 3. Setup permissions for the IAM role
 
 <p class="note">
   If you are configuring permissions for an Amazon S3 bucket, you may also
@@ -113,7 +113,7 @@ view the details pane of the role to get the role ARN. Store this value for
 later, as you will use it at the end of this guide to setup authentication in
 the SDK.
 
-#### 4. Use the identity provider's SDK to get an access token after logging in
+##### 4. Use the identity provider's SDK to get an access token after logging in
 
 For the next step, you will setup the login action for your application,
 which will rely on the identity provider's SDK. In order to setup the relevant
@@ -122,7 +122,7 @@ identity provider. In each case you will want to download and install a
 JavaScript SDK that allows users to login either by OAuth or OpenID. We will
 see examples of this in step 6.
 
-#### 5. Use the AWS SDK for JavaScript to get temporary credentials
+##### 5. Use the AWS SDK for JavaScript to get temporary credentials
 
 After you have configured your application, roles, and resource permissions,
 it is now time to write the code that you will use in your application to get
@@ -176,7 +176,7 @@ In the callback from the identity provider's SDK with the access token:
 AWS.config.credentials.params.WebIdentityToken = accessToken;
 ```
 
-#### 6. Putting it all together
+##### 6. Putting it all together
 
 Here is some example code using Facebook's SDK to get credentials
 into your application. Other identity providers will have a similar setup
