@@ -81,9 +81,10 @@ describe 'AWS.util.date', ->
   describe 'getDate', ->
     it 'should return current date by default', ->
       oldDate = Date; now = {}
-      `Date = jasmine.createSpy().andReturn(now);`
+      mock = jasmine.createSpy().andReturn(now)
+      `typeof window !== 'undefined' ? (window.Date = mock) : (Date = mock);`
       expect(util.getDate()).toBe(now)
-      `Date = oldDate;`
+      `typeof window !== 'undefined' ? (window.Date = oldDate) : (Date = oldDate);`
 
   describe 'iso8601', ->
     it 'should return date formatted as YYYYMMDDTHHnnssZ', ->
