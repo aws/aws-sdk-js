@@ -27,8 +27,8 @@ describe 'bundle server routes', ->
     it 'builds unminified SDK', (done) ->
       get().set('Accept-Encoding', '').expect(200).
         expect(/AWS\.DynamoDB/).expect(/AWS\.S3/).
-        expect(/Copyright .+ Amazon\.com, Inc\./).end (err, res) ->
-          expect(res.text.substr(0, 3)).toEqual('/**') # license first
+        expect(/Copyright .+ Amazon\.com, Inc\./i).end (err, res) ->
+          expect(res.text.substr(0, 3)).toEqual('// ') # license first
           expect(res.headers['content-encoding']).not.toEqual('gzip')
           svc = helpers.evalCode("new window.AWS.DynamoDB()", res.text)
           api = helpers.apiFilesMap
@@ -57,7 +57,7 @@ describe 'bundle server routes', ->
 
     it 'builds minified SDK', (done) ->
       get().expect(200).end (err, res) ->
-          expect(res.text).toMatch(/Copyright .+ Amazon\.com, Inc\./)
+          expect(res.text).toMatch(/Copyright .+ Amazon\.com, Inc\./i)
           expect(res.text).toMatch(/function \w\(\w,\w,\w\)\{function \w\(\w,\w\)\{/)
           svc = helpers.evalCode("new window.AWS.DynamoDB()", res.text)
           api = helpers.apiFilesMap

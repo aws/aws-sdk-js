@@ -50,11 +50,11 @@ describe 'browser builder', ->
 
   it 'defaults to no minification', ->
     buildBundle null, null, null, ->
-      expect(stream.data).toMatch(/Copyright .+ Amazon\.com/)
+      expect(stream.data).toMatch(/Copyright .+ Amazon\.com/i)
 
   it 'can be minified (slow)', ->
     buildBundle null, minify: true, null, ->
-      expect(stream.data).toMatch(/Copyright .+ Amazon\.com/) # has license
+      expect(stream.data).toMatch(/Copyright .+ Amazon\.com/i) # has license
       expect(stream.data).toMatch(/function \w\(\w,\w,\w\)\{function \w\(\w,\w\)\{/)
 
   it 'defaults to printing to stdout', ->
@@ -105,7 +105,7 @@ describe 'browser builder', ->
         pid.on('close', -> done = true)
       waitsFor -> done
       runs ->
-        expect(stream.data).toMatch(/Copyright .+ Amazon\.com/)
+        expect(stream.data).toMatch(/Copyright .+ Amazon\.com/i)
         expect(stream.data).toContain('/api/iam-2010-05-08"')
         expect(stream.data).not.toContain('/api/s3-2006-03-01"')
 
@@ -119,6 +119,6 @@ describe 'browser builder', ->
         pid.on('close', -> done = true)
       waitsFor -> done
       runs ->
-        expect(stream.data).toMatch(/Copyright .+ Amazon\.com/)
+        expect(stream.data).toMatch(/Copyright .+ Amazon\.com/i)
         expect(stream.data).toMatch(/function \w\(\w,\w,\w\)\{function \w\(\w,\w\)\{/)
         expect(stream.data).toContain('s3-2006-03-01')
