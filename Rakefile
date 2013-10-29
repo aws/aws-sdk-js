@@ -11,6 +11,25 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+require 'json'
+
+def write_configuration
+  config = {}
+  if File.exist?('configuration')
+    config = JSON.parse(File.read('configuration'))
+    config['accessKeyId'] ||= ENV['AWS_ACCESS_KEY_ID']
+    config['secretAccessKey'] ||= ENV['AWS_SECRET_ACCESS_KEY']
+  end
+  File.open('test/configuration.js', 'w') do |f|
+    config_json = JSON.generate(config).inspect
+    f.puts "module.exports = JSON.parse(#{config_json});"
+  end
+end
+
+def sdk_version
+  JSON.parse(File.read('package.json'))['version']
+end
+
 LOGLEVEL = ($DEBUG || ENV['DEBUG']) ? '' : '-s'
 
 task :default => 'test:all'
@@ -21,24 +40,11 @@ task :setup do
 end
 
 namespace :browser do
-  def write_configuration()
-    require 'json'
-    config = {}
-    if File.exist?('configuration')
-      config = JSON.parse(File.read('configuration'))
-      config['accessKeyId'] ||= ENV['AWS_ACCESS_KEY_ID']
-      config['secretAccessKey'] ||= ENV['AWS_SECRET_ACCESS_KEY']
-    end
-    File.open('test/configuration.js', 'w') do |f|
-      config_json = JSON.generate(config).inspect
-      f.puts "module.exports = JSON.parse(#{config_json});"
-    end
-  end
-
   $BUILDER = "./dist-tools/browser-builder.js"
   $BROWSERIFY = "./dist-tools/node_modules/.bin/browserify"
   $BROWSERIFY_ARGS = "-i domain -t ./dist-tools/bundle-transform lib/aws.js"
-  $BROWSERIFY_DIST = "dist/aws-sdk.js"
+  $BROWSERIFY_DIST = "dist/aws-sdk-#{sdk_version}.js"
+  $BROWSERIFY_DIST_LATEST = "dist/aws-sdk.js"
   $BROWSERIFY_TEST = "dist/tests.js"
 
   task :all => [:build, :test]
@@ -50,10 +56,10 @@ namespace :browser do
 
   task :build_complete => :dist_path do
     sh "MINIFY='' #{$BUILDER} > #{$BROWSERIFY_DIST}"
+    cp $BROWSERIFY_DIST, $BROWSERIFY_DIST_LATEST
   end
 
   task :build_server do
-    require 'json'
     pkg_file = File.dirname(__FILE__) + '/dist-tools/package.json'
     json = JSON.parse(File.read(pkg_file))
     local_json = JSON.parse(File.read(File.dirname(__FILE__) + '/package.json'))
