@@ -66,72 +66,17 @@ federation through 3 identity providers:
 2. [Facebook](https://www.facebook.com/about/login/)
 3. [Google](https://developers.google.com/+/)
 
-This guide gives a brief overview of setting up web identity federation for
-your web application. For a more detailed guide, please see the
-[AWS Security Token Service documentation](http://docs.aws.amazon.com/STS/latest/UsingSTS/CreatingWIF.html)
-on creating temporary credentials using web identity federation.
+After you select an identity provider, you must register an application with
+the provider, create an IAM role, and setup permissions for this role. The
+IAM role you create will be used to grant the permissions you configured
+to the users that login through the respective identity provider. For example,
+you can setup a role that allows users who login through Facebook to get read
+access to a specific S3 bucket that you control.
 
-##### 1. Register an application with the identity provider
-
-The first step is to register an application with the provider you are
-interested in using. In each case, you will get an application ID. This
-ID will be used to configure user roles.
-
-##### 2. Create an IAM role for the identity provider
-
-Once you have the application ID, you can visit the Roles section of the
-[IAM console](https://console.aws.amazon.com/iam) to create a new role. Click
-the "Create New Role" button and use the "Role for Web Identity Provider Access"
-radio button when configuring the role. This will ask for the identity provider
-and application ID that you got when you registered your application.
-
-**Note** that you can also provide other constraints to the role, like scoping
-the role to specific user IDs. If your role is providing write permissions
-to your resources, you should make sure that you have correctly scoped this
-to users with the correct privileges, otherwise any user with an Amazon,
-Facebook, or Google identity will be able to modify resources in your
-application.
-
-##### 3. Setup permissions for the IAM role
-
-<p class="note">
-  If you are configuring permissions for an Amazon S3 bucket, you may also
-  need to configure CORS. See the
-  <a href="#Cross-Origin_Resource_Sharing__CORS_">last section in this chapter</a>
-  for details on configuring CORS for your bucket.
-</p>
-
-The next step of the role creation wizard will ask you to configure permissions
-for the resources you want to expose. This is where you would allow access to
-specific operations on specific resources. You can use the policy generator
-provided in the wizard to easily manage these permissions. You can also read
-more about how to configure policies in the
-[IAM documentation](http://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html).
-
-After you have configured permissions you will now have an IAM role. You can
-view the details pane of the role to get the role ARN. Store this value for
-later, as you will use it at the end of this guide to setup authentication in
-the SDK.
-
-##### 4. Use the identity provider's SDK to get an access token after logging in
-
-For the next step, you will setup the login action for your application,
-which will rely on the identity provider's SDK. In order to setup the relevant
-SDK code in your application, you can visit the documentation for your
-identity provider. In each case you will want to download and install a
-JavaScript SDK that allows users to login either by OAuth or OpenID. We will
-see examples of this in step 6.
-
-##### 5. Use the AWS SDK for JavaScript to get temporary credentials
-
-After you have configured your application, roles, and resource permissions,
-it is now time to write the code that you will use in your application to get
-temporary credentials. These credentials will be provided through the AWS
-Security Token Service using web identity federation. Users will login to
-the identity provider using the SDK code setup in the previous step, which
-will get them an access token. Using the IAM role ARN and the access token from
-your provider, you will setup the `AWS.WebIdentityCredentials` helper object in
-the SDK like so:
+Once you have an IAM role with configured privileges and an application
+registered with your identity provider of choice, you can setup the SDK to
+get credentials for this role using the following credential management helper
+code:
 
 ```javascript
 AWS.config.credentials = new AWS.WebIdentityCredentials({
@@ -139,89 +84,27 @@ AWS.config.credentials = new AWS.WebIdentityCredentials({
   ProviderId: 'graph.facebook.com|www.amazon.com', // this is null for Google
   WebIdentityToken: ACCESS_TOKEN
 });
-
-// You can now load service objects. Note that any objects created before
-// setting the global config.credentials property will not have the
-// credentials copied over.
-
-var s3 = new AWS.S3;
 ```
 
-<p class="note">The <code>ProviderId</code> parameter should be set to null
-  or left unset when configuring web identity federation through Google.
-</p>
+The `ProviderId` parameter will depend on the identity provider you choose,
+and the `WebIdentityToken` will be the access token retrieved from the login
+process with the identity provider. You can visit the following
+web-specific documentation pages in order to find out how to configure and
+retrieve access tokens for users logging in through each respective identity
+provider:
 
-Remember, the `ACCESS_TOKEN` value is the access token you got from your
-identity provider.
+1. [Login with Amazon](http://login.amazon.com/website)
+2. [Facebook Login](https://developers.facebook.com/docs/reference/javascript/)
+3. [Google+ Sign-In](https://developers.google.com/+/web/signin/)
 
-Note that you can also create the `AWS.WebIdentityCredentials` object before
-retrieving the access token. This will allow you to create service objects
-that depend on credentials before loading the access token. To do this,
-simply create the credentials object without the `WebIdentityToken` parameter
-and add it in later:
 
-```javascript
-AWS.config.credentials = new AWS.WebIdentityCredentials({
-  RoleArn: 'arn:aws:iam::<AWS_ACCOUNT_ID>:role/<WEB_IDENTITY_ROLE_NAME>',
-  ProviderId: 'graph.facebook.com|www.amazon.com' // this is null for Google
-});
-
-// Create a service object
-var s3 = new AWS.S3;
-```
-
-In the callback from the identity provider's SDK with the access token:
-
-```javascript
-AWS.config.credentials.params.WebIdentityToken = accessToken;
-```
-
-##### 6. Putting it all together
-
-Here is some example code using Facebook's SDK to get credentials
-into your application. Other identity providers will have a similar setup
-step that involves loading the respective SDK, logging in, and receiving
-an access token.
-
-    <button id="login">Login</button>
-    <div id="fb-root"></div>
-    <script type="text/javascript">
-    var s3 = null;
-    var appId = 'FACEBOOK_APP_ID';
-    var roleArn = 'arn:aws:iam::<AWS_ACCOUNT_ID>:role/<WEB_IDENTITY_ROLE_NAME>';
-
-    window.fbAsyncInit = function() {
-      // init the FB JS SDK
-      FB.init({appId: appId});
-
-      document.getElementById('login').onclick = function() {
-        FB.login(function (response) {
-          if (response.authResponse) { // logged in
-            AWS.config.credentials = new AWS.WebIdentityCredentials({
-              RoleArn: roleArn,
-              ProviderId: 'graph.facebook.com',
-              WebIdentityToken: response.authResponse.accessToken
-            });
-
-            s3 = new AWS.S3;
-
-            console.log('You are now logged in.');
-          } else {
-            console.log('There was a problem logging you in.');
-          }
-        });
-      };
-    };
-
-    // Load the FB JS SDK asynchronously
-    (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = d.createElement(s); js.id = id;
-       js.src = "//connect.facebook.net/en_US/all.js";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
-    </script>
+A full look at how to setup web identity federation for your application can
+be found in the {file:browser-configuring-wif.md Configuring Web Identity Federation}
+chapter of this guide. You can also read the
+[AWS Security Token Service documentation](http://docs.aws.amazon.com/STS/latest/UsingSTS/CreatingWIF.html)
+on creating temporary credentials using web identity federation, or see the
+[Web Identity Federation Playground](https://web-identity-federation-playground.s3.amazonaws.com/index.html),
+which provides a hands-on look at how this process works.
 
 #### Hard-Coding Credentials
 

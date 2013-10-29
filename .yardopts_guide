@@ -12,6 +12,7 @@ doc-src/guide/browser-services.md
 doc-src/guide/browser-making-requests.md
 doc-src/guide/browser-examples.md
 doc-src/guide/browser-building.md
+doc-src/guide/browser-configuring-wif.md
 doc-src/guide/node-intro.md
 doc-src/guide/node-configuring.md
 doc-src/guide/node-services.md
