@@ -23,9 +23,11 @@ var uglify = require('uglify-js');
 var bundleTransform = require('./bundle-transform');
 var bundleHelpers = require('./bundle-helpers');
 
-var licenseHeader = fs.readFileSync(bundleHelpers.mainFile).
-  toString().match(/\/\*\*[\s\S]+?Copyright.+?Amazon[\s\S]+?\*\//)[0] + '\n';
-var uglifyOptions = { compress: false, fromString: true };
+var licenseHeader = [
+  '// @copyright ' + fs.readFileSync(bundleHelpers.mainFile).toString().
+                     match(/Copyright\s+(.+?Amazon.+?)\n/)[1],
+  '// @license https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt'
+].join('\n') + '\n';
 
 function defaultOptions() {
   return {
