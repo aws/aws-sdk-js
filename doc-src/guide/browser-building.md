@@ -2,12 +2,14 @@
 
 # Building the SDK for Use in the Browser
 
-If you are working with the SDK outside of an environment that enforces CORS
-in your browser and want access to the full gamut of services provided by the
-**AWS SDK for JavaScript**, it is possible to build a custom copy of the SDK
-locally by cloning the repository and running the same build tools used to
-generate the default hosted version of the SDK. This chapter outlines the steps
-to build the SDK on your own with extra services and API versions.
+This section explains how you can create your own build of the AWS SDK for
+JavaScript. If you are working with the SDK outside of an environment that
+enforces CORS in your browser and want access to the full gamut of services
+provided by the **AWS SDK for JavaScript**, it is possible to build a custom
+copy of the SDK locally by cloning the repository and running the same build
+tools used to generate the default hosted version of the SDK. This chapter
+outlines the steps to build the SDK on your own with extra services and API
+versions.
 
 ## Setting Up
 
@@ -77,6 +79,9 @@ command:
 ```bash
 node dist-tools/browser-builder.js dynamodb-2011-12-05,dynamodb-2012-08-10
 ```
+
+Available service identifiers and API versions can be found by looking at the
+file list in https://github.com/aws/aws-sdk-js/tree/master/lib/services/api
 
 #### Building All Services
 

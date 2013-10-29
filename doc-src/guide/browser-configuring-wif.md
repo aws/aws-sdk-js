@@ -23,7 +23,7 @@ The first step is to register an application with the provider you are
 interested in using. In order to do this, visit the identity provider through
 the URLs above. You will be asked to provide some information that identifies
 your application, and, in some cases, identifies the author of the application.
-This is to ensure that the identity provider knows who it is handing off its
+This is to ensure that the identity provider knows whom it is handing off its
 user information to. In each case, you will get an application ID after you
 have registered the application. This ID will be used to configure user roles. 
 

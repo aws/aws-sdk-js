@@ -112,21 +112,6 @@ s3.getSignedUrl('getObject', params, function (err, url) {
 });
 ```
 
-The `getSignedUrl()` operation can also be called synchronously, when the
-callback is omitted. When it is called without a callback, the return value is
-the pre-signed URL. The above example can be re-written synchronously as:
-
-```javascript
-var params = {Bucket: 'myBucket', Key: 'myKey'};
-var url = s3.getSignedUrl('getObject', params);
-console.log("The URL is", url);
-```
-
-Note that this method should only be called synchronously if you can guarantee
-that your credentials are already loaded (or defined statically). In general,
-it is safe to use this method synchronously unless you are using EC2 IAM roles
-or another custom asynchronous credential provider.
-
 ### Controlling Expires time with pre-signed URLs
 
 As mentioned above, pre-signed URLs will expire in 15 minutes by default
@@ -137,8 +122,9 @@ valid, and can be set with any call to `getSignedUrl()`:
 ```javascript
 // This URL will expire in one minute (60 seconds)
 var params = {Bucket: 'myBucket', Key: 'myKey', Expires: 60};
-var url = s3.getSignedUrl('getObject', params);
-console.log("The URL is", url);
+var url = s3.getSignedUrl('getObject', params, function (err, url) {
+  if (url) console.log("The URL is", url);
+});
 ```
 
 ## Amazon DynamoDB
