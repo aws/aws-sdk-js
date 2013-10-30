@@ -23,11 +23,13 @@ var uglify = require('uglify-js');
 var bundleTransform = require('./bundle-transform');
 var bundleHelpers = require('./bundle-helpers');
 
+var version = JSON.parse(fs.readFileSync('package.json')).version;
 var licenseHeader = [
-  '// @copyright ' + fs.readFileSync(bundleHelpers.mainFile).toString().
-                     match(/Copyright\s+(.+?Amazon.+?)\n/)[1],
-  '// @license https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt'
-].join('\n') + '\n';
+  '// AWS SDK for JavaScript v' + version,
+  '// ' + fs.readFileSync(bundleHelpers.mainFile).toString().
+          match(/Copyright\s+.+?Amazon.+?\n/)[0],
+  '// License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt'
+].join('') + '\n';
 
 function defaultOptions() {
   return {
@@ -54,6 +56,45 @@ function minifyStream(options) {
   return through(write, end);
 }
 
+function stripCommentStream() {
+  var buffer = [];
+
+  function write(data) { buffer.push(data); }
+  function end() {
+    var lines = buffer.join('').split(/\r?\n/);
+    var multiLine = false;
+    lines = lines.map(function (line) {
+      rLine = line;
+      if (line.match(/^\s*\/\//)) {
+        rLine = null;
+      } else if (line.match(/^\s*\/\*/)) {
+        multiLine = true;
+        rLine = null;
+      }
+
+      if (multiLine) {
+        var multiLineEnd = line.match(/\*\/(.*)/);
+        if (multiLineEnd) {
+          multiLine = false;
+          rLine = multiLineEnd[1];
+        } else {
+          rLine = null;
+        }
+      }
+
+      return rLine;
+    }).filter(function(l) { return l != null; });
+    var code = lines.join('\n');
+    code = code.replace(/\/\*\*[\s\S]+?Copyright\s+.+?Amazon[\s\S]+?\*\//g, '');
+    this.queue(licenseHeader); // put license back
+    this.queue(code);
+    this.queue(null);
+    buffer = null;
+  }
+
+  return through(write, end);
+}
+
 function build(services, options, callback) {
   options = _.defaults(options || {}, defaultOptions());
 
@@ -73,6 +114,10 @@ function build(services, options, callback) {
       var newStream = minifyStream(options.minifyOptions);
       stream.on('error', newStream.emit.bind(newStream, 'error'));
       stream = stream.pipe(newStream);
+    } else {
+      var newStream = stripCommentStream();
+      stream.on('error', newStream.emit.bind(newStream, 'error'));
+      stream = stream.pipe(newStream);
     }
     if (options.stream) {
       stream.on('error', options.stream.emit.bind(options.stream, 'error'));
@@ -80,7 +125,6 @@ function build(services, options, callback) {
     }
 
     if (callback) callback(err, stream);
-    b.write(licenseHeader);
   });
 }
 
