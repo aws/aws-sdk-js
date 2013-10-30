@@ -3,7 +3,7 @@
 -p doc-src/templates
 --title "AWS SDK for JavaScript"
 --no-highlight
--o doc-guide
+-o doc/guide
 --readme doc-src/guide/index.md
 -
 doc-src/guide/browser-intro.md

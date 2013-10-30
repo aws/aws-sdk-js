@@ -8,7 +8,7 @@
 --title "AWS SDK for JavaScript"
 --template-path doc-src/templates
 --plugin sitemap
-doc-src/*.docs.js
+-o doc/latest
 lib/core.js
 lib/**/*.js
 -

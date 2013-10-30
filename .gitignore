@@ -5,7 +5,6 @@ coverage.html
 vendor
 .yardoc
 doc
-doc-guide
 dist/appinfo.js
 dist/aws-sdk*.js
 dist/tests.js

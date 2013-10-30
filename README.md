@@ -12,7 +12,7 @@ Release notes can be found at http://aws.amazon.com/releasenotes/SDK/JavaScript
 To use the SDK in the browser, simply add the following script tag to your
 HTML pages:
 
-    <script src="https://sdk.amazonaws.com/js/aws-sdk.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-version.min.js"></script>
 
 ### In Node.js
 
@@ -28,7 +28,7 @@ npm install aws-sdk
 
 You can find a getting started guide at:
 
-http://docs.amazonwebservices.com/nodejs/latest/dg/
+http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/
 
 ## Supported Services
 
