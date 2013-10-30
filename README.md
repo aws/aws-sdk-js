@@ -105,7 +105,7 @@ The SDK currently supports the following services:
     <tr><td>AWS Import/Export</td><td>AWS.ImportExport</td><td>2010-06-01</td></tr>
     <tr><td>AWS OpsWorks</td><td>AWS.OpsWorks</td><td>2013-02-18</td></tr>
     <tr><td>AWS Security Token Service</td><td>AWS.STS</td><td>2011-06-15</td></tr>
-    <tr><td>AWS Storage Gateway</td><td>AWS.StorageGateway</td><td>2012-06-30</td></tr>
+    <tr><td>AWS Storage Gateway</td><td>AWS.StorageGateway</td><td>2013-06-30</td></tr>
     <tr><td>AWS Support</td><td>AWS.Support</td><td>2013-04-15</td></tr>
     <tr><td>Elastic Load Balancing</td><td>AWS.ELB</td><td>2012-06-01</td></tr>
   </tbody>
