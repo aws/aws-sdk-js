@@ -27,7 +27,7 @@ def write_configuration
 end
 
 def sdk_version
-  JSON.parse(File.read('package.json'))['version']
+  JSON.parse(File.read('package.json'))['version'].sub(/-rc/, '.rc')
 end
 
 LOGLEVEL = ($DEBUG || ENV['DEBUG']) ? '' : '-s'
