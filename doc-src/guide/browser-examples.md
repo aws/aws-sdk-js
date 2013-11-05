@@ -7,7 +7,7 @@ and authenticated with the correct credentials.
 
 The common preamble code can be summarized as follows:
 
-    <script src="https://sdk.amazonaws.com/js/aws-sdk.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.0-rc1.min.js"></script>
     <script type="text/javascript">
       AWS.config.region = 'us-west-2';
     </script>
