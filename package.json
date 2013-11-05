@@ -13,16 +13,16 @@
       "Trevor Rowe <trevrowe@amazon.com>"
     ],
     "devDependencies": {
-      "repl.history": "latest",
-      "jasmine-node": "latest",
-      "semver": "latest",
-      "coffee-script": "latest",
-      "jshint": "latest",
-      "cucumber": "latest"
+      "repl.history": "",
+      "jasmine-node": "",
+      "semver": "",
+      "coffee-script": "",
+      "jshint": "",
+      "cucumber": ""
     },
     "dependencies": {
       "xml2js": "0.2.4",
-      "xmlbuilder": "latest"
+      "xmlbuilder": "0.4.2"
     },
     "main": "lib/aws.js",
     "directories":  {
