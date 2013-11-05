@@ -14,9 +14,6 @@ The common preamble code can be summarized as follows:
 
       // Configure your region
       AWS.config.region = 'us-west-2';
-
-      // Your code here
-      ...
     </script>
 
 ## Basic Usage Example
