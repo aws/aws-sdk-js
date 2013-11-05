@@ -9,7 +9,14 @@ The common preamble code can be summarized as follows:
 
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.0-rc1.min.js"></script>
     <script type="text/javascript">
+      // See the Configuring section to configure credentials in the SDK
+      AWS.config.credentials = ...;
+
+      // Configure your region
       AWS.config.region = 'us-west-2';
+
+      // Your code here
+      ...
     </script>
 
 ## Basic Usage Example
