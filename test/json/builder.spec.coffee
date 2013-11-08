@@ -18,16 +18,16 @@ describe 'AWS.JSON.Builder', ->
 
   timestampFormat = 'iso8601'
 
-  toJSON = (rules, params, options) ->
+  build = (rules, params, options) ->
     options = {} if (!options)
     options.timestampFormat = timestampFormat
     builder = new AWS.JSON.Builder(rules, options)
-    builder.toJSON(params)
+    builder.build(params)
 
-  describe 'toJSON', ->
+  describe 'build', ->
 
     it 'returns an empty document when there are no params', ->
-      expect(toJSON({}, {})).toEqual("{}")
+      expect(build({}, {})).toEqual("{}")
 
     it 'translates strucutres', ->
       rules =
@@ -41,7 +41,7 @@ describe 'AWS.JSON.Builder', ->
               B:
                 type: 'string'
       params = { Items: { A: 'a', B: 'b' } }
-      expect(toJSON(rules, params)).toEqual('{"Items":{"A":"a","B":"b"}}')
+      expect(build(rules, params)).toEqual('{"Items":{"A":"a","B":"b"}}')
 
     it 'translates lists', ->
       rules =
@@ -52,7 +52,7 @@ describe 'AWS.JSON.Builder', ->
             members:
               type: 'string'
       params = { Items: ['a','b','c'] }
-      expect(toJSON(rules, params)).toEqual('{"Items":["a","b","c"]}')
+      expect(build(rules, params)).toEqual('{"Items":["a","b","c"]}')
 
     it 'translates maps', ->
       rules =
@@ -61,7 +61,7 @@ describe 'AWS.JSON.Builder', ->
           Items:
             type: 'map'
       params = { Items: { A: 'a', B: 'b' } }
-      expect(toJSON(rules, params)).toEqual('{"Items":{"A":"a","B":"b"}}')
+      expect(build(rules, params)).toEqual('{"Items":{"A":"a","B":"b"}}')
 
     it 'traslates nested timestamps', ->
       rules =
@@ -75,5 +75,5 @@ describe 'AWS.JSON.Builder', ->
         Build:
           When: now
       formatted = AWS.util.date.iso8601(now)
-      expect(toJSON(rules, params)).toEqual('{"Build":{"When":"'+formatted+'"}}')
+      expect(build(rules, params)).toEqual('{"Build":{"When":"'+formatted+'"}}')
 
