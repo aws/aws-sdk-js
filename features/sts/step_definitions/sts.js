@@ -40,4 +40,11 @@ module.exports = function() {
     var params = {RoleArn: 'arn:aws:iam::123456789:role/WebIdentity', RoleSessionName: 'name', WebIdentityToken: 'token'};
     this.request(null, 'assumeRoleWithWebIdentity', params, callback, false);
   });
+
+  this.Given(/^I try to assume role with SAML$/, function(callback) {
+    var arn = 'arn:aws:iam::123456789:role/Role';
+    var token = 'TOKENVALUETOKENVALUETOKENVALUETOKENVALUE';
+    var params = {RoleArn: arn, PrincipalArn: arn, SAMLAssertion: token};
+    this.request(null, 'assumeRoleWithSAML', params, callback, false);
+  });
 };

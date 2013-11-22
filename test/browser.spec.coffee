@@ -61,6 +61,19 @@ integrationTests = (fn) ->
     describe 'Integration tests', fn
 
 integrationTests ->
+  describe 'Request.abort', ->
+    it 'can abort a request', ->
+      err = null
+      done = null
+      runs ->
+        req = s3.putObject Key: 'key', Body: 'body'
+        req.on 'complete', (resp) -> done = true; err = resp.error
+        req.send()
+        req.abort()
+      waitsFor -> done
+      runs ->
+        expect(err.name).toEqual('RequestAbortedError')
+
   describe 'AWS.S3', ->
     testWrite = (done, body, compareFn) ->
       key = uniqueName('test')

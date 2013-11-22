@@ -66,3 +66,19 @@ describe 'AWS.STS', ->
         expect(hr.path).toEqual('/?Action=AssumeRoleWithWebIdentity&' +
           'RoleArn=ARN&RoleSessionName=NAME&Version=' +
           service.api.apiVersion + '&WebIdentityToken=TOK')
+
+  describe 'assumeRoleWithSAML', ->
+    service = new AWS.STS
+
+    it 'sends an unsigned GET request (params in query string)', ->
+      helpers.mockHttpResponse 200, {}, '{}'
+      params = RoleArn: 'ARN', PrincipalArn: 'PARN', SAMLAssertion: 'OK'
+      service.assumeRoleWithSAML params, ->
+        hr = @request.httpRequest
+        expect(hr.method).toEqual('GET')
+        expect(hr.body).toEqual('')
+        expect(hr.headers['Authorization']).toEqual(undefined)
+        expect(hr.headers['Content-Type']).toEqual(undefined)
+        expect(hr.path).toEqual('/?Action=AssumeRoleWithSAML&' +
+          'PrincipalArn=PARN&RoleArn=ARN&SAMLAssertion=OK&' +
+          'Version=' + service.api.apiVersion)

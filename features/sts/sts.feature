@@ -30,6 +30,13 @@ Feature: AWS Security Token Service
     Not authorized to perform sts:AssumeRoleWithWebIdentity
     """
 
+  Scenario: SAML Support
+    Given I try to assume role with SAML
+    Then the error message should equal:
+    """
+    Not authorized to perform sts:AssumeRoleWithSAML
+    """
+
   Scenario: Error handling
     Given I get an STS session token with a duration of 60 seconds
     Then the error code should be "ValidationError"

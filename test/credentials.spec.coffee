@@ -322,3 +322,38 @@ describe 'AWS.WebIdentityCredentials', ->
         creds.refresh ->
           creds.refresh ->
             expect(spy.calls.length).toEqual(1)
+
+describe 'AWS.SAMLCredentials', ->
+  creds = null
+
+  beforeEach ->
+    creds = new AWS.SAMLCredentials(SAMLAssertion: 'token', RoleArn: 'arn', PrincipalArn: 'arn')
+
+  mockSTS = (expireTime) ->
+    spyOn(creds.service, 'assumeRoleWithSAML').andCallFake (params, cb) ->
+     expect(params).toEqual(SAMLAssertion: 'token', RoleArn: 'arn', PrincipalArn: 'arn')
+     cb null, Credentials:
+       AccessKeyId: 'KEY'
+       SecretAccessKey: 'SECRET'
+       SessionToken: 'TOKEN'
+       Expiration: expireTime
+
+  describe 'refresh', ->
+    it 'loads federated credentials from STS', ->
+      mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000))
+      creds.refresh(->)
+      expect(creds.accessKeyId).toEqual('KEY')
+      expect(creds.secretAccessKey).toEqual('SECRET')
+      expect(creds.sessionToken).toEqual('TOKEN')
+      expect(creds.needsRefresh()).toEqual(false)
+
+    it 'does not try to load creds second time if service request failed', ->
+      spy = spyOn(creds.service, 'assumeRoleWithSAML').andCallFake (params, cb) ->
+        cb(new Error('INVALID SERVICE'))
+
+      creds.refresh (err) ->
+        expect(err.message).toEqual('INVALID SERVICE')
+      creds.refresh ->
+        creds.refresh ->
+          creds.refresh ->
+            expect(spy.calls.length).toEqual(1)

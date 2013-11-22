@@ -13,8 +13,17 @@
  * language governing permissions and limitations under the License.
  */
 
-var AWS = require('../core');
+module.exports = function() {
+  this.Before("@cloudtrail", function (callback) {
+    this.service = new this.AWS.CloudTrail();
+    callback();
+  });
 
-AWS.RDS = AWS.Service.defineService('rds', ['2013-01-10', '2013-02-12', '2013-05-15*', '2013-09-09']);
+  this.Given(/^I describe trails$/, function(callback) {
+    this.request(null, 'describeTrails', {}, callback);
+  });
 
-module.exports = AWS.RDS;
+  this.Given(/^I create a trail with an invalid name$/, function(callback) {
+    this.request(null, 'createTrail', {trail: {Name: ''}}, callback, false);
+  });
+};
