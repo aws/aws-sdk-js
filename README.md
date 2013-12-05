@@ -48,7 +48,7 @@ The SDK currently supports the following services:
     <tr><td>Amazon CloudWatch</td><td>AWS.CloudWatch</td><td>2010-08-01</td></tr>
     <tr><td rowspan="2">Amazon DynamoDB</td><td rowspan="2">AWS.DynamoDB</td><td>2011-12-05</td></tr>
     <tr><td>2012-08-10</td></tr>
-    <tr><td>Amazon Elastic Compute Cloud</td><td>AWS.EC2</td><td>2013-10-01</td></tr>
+    <tr><td>Amazon Elastic Compute Cloud</td><td>AWS.EC2</td><td>2013-10-15</td></tr>
     <tr><td>Amazon Elastic MapReduce</td><td>AWS.EMR</td><td>2009-03-31</td></tr>
     <tr><td>Amazon Elastic Transcoder</td><td>AWS.ElasticTranscoder</td><td>2012-09-25</td></tr>
     <tr><td>Amazon ElastiCache</td><td>AWS.ElastiCache</td><td>2013-06-15</td></tr>
@@ -66,6 +66,7 @@ The SDK currently supports the following services:
     <tr><td>Amazon SimpleDB</td><td>AWS.SimpleDB</td><td>2009-04-15</td></tr>
     <tr><td>Auto Scaling</td><td>AWS.AutoScaling</td><td>2011-01-01</td></tr>
     <tr><td>AWS CloudFormation</td><td>AWS.CloudFormation</td><td>2010-05-15</td></tr>
+    <tr><td>AWS CloudTrail</td><td>AWS.CloudTrail</td><td>2013-11-01</td></tr>
     <tr><td>AWS Data Pipeline</td><td>AWS.DataPipeline</td><td>2012-10-29</td></tr>
     <tr><td>AWS Direct Connect</td><td>AWS.DirectConnect</td><td>2012-10-25</td></tr>
     <tr><td>AWS Elastic Beanstalk</td><td>AWS.ElasticBeanstalk</td><td>2010-12-01</td></tr>
@@ -73,7 +74,8 @@ The SDK currently supports the following services:
     <tr><td>AWS Import/Export</td><td>AWS.ImportExport</td><td>2010-06-01</td></tr>
     <tr><td>AWS OpsWorks</td><td>AWS.OpsWorks</td><td>2013-02-18</td></tr>
     <tr><td>AWS Security Token Service</td><td>AWS.STS</td><td>2011-06-15</td></tr>
-    <tr><td>AWS Storage Gateway</td><td>AWS.StorageGateway</td><td>2012-06-30</td></tr>
+    <tr><td rowspan="2">AWS Storage Gateway</td><td rowspan="2">AWS.StorageGateway</td><td>2012-06-30</td></tr>
+    <tr><td>2013-06-30</td></tr>
     <tr><td>AWS Support</td><td>AWS.Support</td><td>2013-04-15</td></tr>
     <tr><td>Elastic Load Balancing</td><td>AWS.ELB</td><td>2012-06-01</td></tr>
   </tbody>
