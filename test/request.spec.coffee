@@ -38,6 +38,11 @@ describe 'AWS.Request', ->
       delete service.api.pagination
       expect(service.makeRequest('mockMethod').isPageable()).toEqual(false)
 
+  describe 'waitFor', ->
+    it 'creates a ResourceWaiter object', ->
+      service.api.waiters = state: operation: 'mockMethod'
+      expect(service.waitFor('state'))
+
   describe 'send', ->
     it 'accepts an optional callback', ->
       error = null; data = null
