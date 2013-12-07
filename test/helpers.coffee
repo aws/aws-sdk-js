@@ -108,10 +108,38 @@ mockIntermittentFailureResponse = (numFailures, status, headers, data) ->
       mockHttpSuccessfulResponse statusCode, headers, data, cb
     new EventEmitter()
 
+mockResponse = (svc, resp) ->
+  spyOn(svc, 'addAllRequestListeners').andCallFake (req) ->
+    resp = AWS.util.update(new AWS.Response(req), resp)
+    req.on 'retry', (resp) ->
+      if !resp.error.retryable
+        throw resp.error
+    req.onAsync 'afterRetry', (resp, done) ->
+      if resp.error.retryable
+        resp.error = null; resp.data = null
+        req.emitEvent('send', resp, done)
+    req.on 'send', -> req.completeRequest(resp)
+
+mockResponses = (svc, resps) ->
+  index = 0
+  spyOn(svc, 'addAllRequestListeners').andCallFake (req) ->
+    resp = new AWS.Response(req)
+    req.on 'retry', (resp) ->
+      if !resp.error.retryable
+        throw resp.error
+    req.onAsync 'afterRetry', (resp, done) ->
+      if resp.error.retryable
+        resp.error = null; resp.data = null
+        index += 1
+        req.emitEvent('send', resp, done)
+    req.on 'send', -> req.completeRequest(AWS.util.update(resp, resps[index]))
+
 module.exports =
   AWS: AWS
   matchXML: matchXML
   mockHttpResponse: mockHttpResponse
   mockIntermittentFailureResponse: mockIntermittentFailureResponse
   mockHttpSuccessfulResponse: mockHttpSuccessfulResponse
+  mockResponse: mockResponse
+  mockResponses: mockResponses
   MockService: MockService
