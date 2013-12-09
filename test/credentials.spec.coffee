@@ -201,7 +201,7 @@ if AWS.util.isNode()
         expect(creds.sessionToken).toEqual('TOKEN')
         expect(creds.needsRefresh()).toEqual(false)
 
-      it 'does not try to load creds second time if Metadata service failed', ->
+      it 'does try to load creds second time if Metadata service failed', ->
         spy = spyOn(creds.metadataService, 'loadCredentials').andCallFake (cb) ->
           cb(new Error('INVALID SERVICE'))
 
@@ -210,7 +210,7 @@ if AWS.util.isNode()
         creds.refresh ->
           creds.refresh ->
             creds.refresh ->
-              expect(spy.calls.length).toEqual(1)
+              expect(spy.calls.length).toEqual(4)
 
 describe 'AWS.TemporaryCredentials', ->
   creds = null
@@ -277,7 +277,7 @@ describe 'AWS.TemporaryCredentials', ->
       expect(creds.sessionToken).toEqual('TOKEN')
       expect(creds.needsRefresh()).toEqual(false)
 
-    it 'does not try to load creds second time if service request failed', ->
+    it 'does try to load creds second time if service request failed', ->
       spy = spyOn(creds.service, 'getSessionToken').andCallFake (params, cb) ->
         cb(new Error('INVALID SERVICE'))
 
@@ -286,7 +286,7 @@ describe 'AWS.TemporaryCredentials', ->
       creds.refresh ->
         creds.refresh ->
           creds.refresh ->
-            expect(spy.calls.length).toEqual(1)
+            expect(spy.calls.length).toEqual(4)
 
 describe 'AWS.WebIdentityCredentials', ->
   creds = null
@@ -312,7 +312,7 @@ describe 'AWS.WebIdentityCredentials', ->
       expect(creds.sessionToken).toEqual('TOKEN')
       expect(creds.needsRefresh()).toEqual(false)
 
-    it 'does not try to load creds second time if service request failed', ->
+    it 'does try to load creds second time if service request failed', ->
       spy = spyOn(creds.service, 'assumeRoleWithWebIdentity').andCallFake (params, cb) ->
         cb(new Error('INVALID SERVICE'))
 
@@ -321,7 +321,7 @@ describe 'AWS.WebIdentityCredentials', ->
       creds.refresh ->
         creds.refresh ->
           creds.refresh ->
-            expect(spy.calls.length).toEqual(1)
+            expect(spy.calls.length).toEqual(4)
 
 describe 'AWS.SAMLCredentials', ->
   creds = null
@@ -347,7 +347,7 @@ describe 'AWS.SAMLCredentials', ->
       expect(creds.sessionToken).toEqual('TOKEN')
       expect(creds.needsRefresh()).toEqual(false)
 
-    it 'does not try to load creds second time if service request failed', ->
+    it 'does try to load creds second time if service request failed', ->
       spy = spyOn(creds.service, 'assumeRoleWithSAML').andCallFake (params, cb) ->
         cb(new Error('INVALID SERVICE'))
 
@@ -356,4 +356,4 @@ describe 'AWS.SAMLCredentials', ->
       creds.refresh ->
         creds.refresh ->
           creds.refresh ->
-            expect(spy.calls.length).toEqual(1)
+            expect(spy.calls.length).toEqual(4)
