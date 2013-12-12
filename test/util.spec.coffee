@@ -427,6 +427,14 @@ describe 'AWS.util.error', ->
     expect(err.message).toEqual('ERROR')
     expect(err.code).toEqual('code')
 
+  it 'keeps track of the old error', ->
+    origError = new Error('ERROR')
+    origError.value = 1
+    err = AWS.util.error(origError, code: 'code', message: 'FOO')
+    expect(err.originalError.message).toEqual('ERROR')
+    expect(err.originalError.code).toEqual(undefined)
+    expect(err.originalError.value).toEqual(1)
+
 describe 'AWS.util.base64', ->
 
   base64 = AWS.util.base64
