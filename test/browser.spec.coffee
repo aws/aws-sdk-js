@@ -74,6 +74,26 @@ integrationTests ->
       runs ->
         expect(err.name).toEqual('RequestAbortedError')
 
+  describe 'XHR', ->
+    it 'does not emit http events if networking issue occurs', ->
+      err = null
+      done = null
+      httpHeaders = false; httpData = false; httpError = false
+      runs ->
+        svc = new AWS.S3(accessKeyId: 'akid', secretAccessKey: 'secret')
+        req = svc.getObject(Bucket:'invalidbucket' + new Date(), Key: 'foo')
+        req.on 'httpHeaders', -> httpHeaders = true
+        req.on 'httpData', -> httpData = true
+        req.on 'httpError', -> httpError = true
+        req.on 'complete', (resp) -> done = true; err = resp.error
+        req.send()
+      waitsFor -> done
+      runs ->
+        expect(httpHeaders).toEqual(false)
+        expect(httpData).toEqual(false)
+        expect(httpError).toEqual(true)
+        expect(err.name).toEqual('NetworkingError')
+
   describe 'AWS.S3', ->
     testWrite = (done, body, compareFn) ->
       key = uniqueName('test')
