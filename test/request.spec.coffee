@@ -174,6 +174,7 @@ describe 'AWS.Request', ->
           req.statusCode = 200
           req.headers = {}
           cb(req)
+          req.emit('headers', 200, {})
           AWS.util.arrayEach ['FOO', 'BAR', 'BAZ'], (str) ->
             req.emit 'data', new Buffer(str)
           errCb new Error('fail')
@@ -201,6 +202,7 @@ describe 'AWS.Request', ->
           req.headers = {}
           process.nextTick ->
             cb(req)
+            req.emit('headers', 200, {})
             AWS.util.arrayEach ['FOO', 'BAR', 'BAZ', 'QUX'], (str) ->
               if str == 'BAZ' and retryCount < 1
                 process.nextTick ->

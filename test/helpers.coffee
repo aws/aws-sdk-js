@@ -77,6 +77,7 @@ mockHttpSuccessfulResponse = (status, headers, data, cb) ->
       null
 
   cb(httpResp)
+  httpResp.emit('headers', status, headers)
 
   AWS.util.arrayEach data.slice(), (str) ->
     if AWS.util.isNode() && (httpResp._events.readable || semver.gt(process.version, 'v0.11.3'))
