@@ -36,11 +36,7 @@ language governing permissions and limitations under the License.
     var elNotes = document.getElementById('notes');
     elBucket.value = localStorage.s3BucketName;
 
-    var s3 = new AWS.S3({
-      paramValidation: false,
-      computeChecksums: false,
-      params: {Bucket: elBucket.value || ''}
-    });
+    var s3 = new AWS.S3({params: {Bucket: elBucket.value || ''}});
 
     function init() {
       elDropZone.addEventListener('dragover', handleDragOver, false);
@@ -73,8 +69,9 @@ language governing permissions and limitations under the License.
             console.log(url)
             elDropZone.innerHTML += '<img src="' + url + '">';
           }
-        })
+        });
       }
+      return false;
     }
 
     function handleDragOver(evt) {
