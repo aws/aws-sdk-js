@@ -89,12 +89,14 @@ mockHttpSuccessfulResponse = (status, headers, data, cb) ->
 
 mockHttpResponse = (status, headers, data) ->
   stream = new EventEmitter()
+  stream.setMaxListeners(0)
   spyOn(AWS.HttpClient, 'getInstance')
   AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
     if typeof status == 'number'
       mockHttpSuccessfulResponse status, headers, data, cb
     else
       errCb(status)
+    stream
 
   return stream
 
@@ -108,6 +110,7 @@ mockIntermittentFailureResponse = (numFailures, status, headers, data) ->
     else
       statusCode = retryCount < numFailures ? 500 : status
       mockHttpSuccessfulResponse statusCode, headers, data, cb
+    new EventEmitter()
 
 module.exports =
   AWS: AWS
