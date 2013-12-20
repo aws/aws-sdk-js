@@ -174,9 +174,11 @@ describe 'AWS.Request', ->
           req.statusCode = 200
           req.headers = {}
           cb(req)
+          req.emit('headers', 200, {})
           AWS.util.arrayEach ['FOO', 'BAR', 'BAZ'], (str) ->
             req.emit 'data', new Buffer(str)
           errCb new Error('fail')
+          req
 
         runs ->
           request = service.makeRequest('mockMethod')
@@ -201,6 +203,7 @@ describe 'AWS.Request', ->
           req.headers = {}
           process.nextTick ->
             cb(req)
+            req.emit('headers', 200, {})
             AWS.util.arrayEach ['FOO', 'BAR', 'BAZ', 'QUX'], (str) ->
               if str == 'BAZ' and retryCount < 1
                 process.nextTick ->
@@ -211,6 +214,7 @@ describe 'AWS.Request', ->
                 process.nextTick -> req.emit 'data', new Buffer(str)
             if retryCount >= 1
               process.nextTick -> req.emit('end')
+            req
 
         runs ->
           request = service.makeRequest('mockMethod')

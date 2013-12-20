@@ -122,6 +122,30 @@ integrationTests ->
         expect(data.Body[1]).toEqual(98)
         expect(data.Body[2]).toEqual(99)
 
+    describe 'progress events', ->
+      integration 'emits http(Upload|Download)Progress events', (done) ->
+        data = []
+        progress = []
+        key = uniqueName('test')
+        body = new Blob([new Array(512 * 1024).join('x')])
+        req = s3.putObject(Key: key, Body: body)
+        req.on 'httpUploadProgress', (p) -> progress.push(p)
+        req.send (err, data) ->
+          noError(err)
+          expect(progress.length > 1).toEqual(true)
+          expect(progress[0].total).toEqual(body.size)
+          expect(progress[0].loaded > 10).toEqual(true)
+
+          progress = []
+          req = s3.getObject(Key: key)
+          req.on 'httpDownloadProgress', (p) -> progress.push(p)
+          req.send (err, data) ->
+            noError(err)
+            expect(progress.length > 1).toEqual(true)
+            expect(progress[0].total).toEqual(body.size)
+            expect(progress[0].loaded > 10).toEqual(true)
+            s3.deleteObject(Key: key).send(done)
+
   describe 'AWS.DynamoDB', ->
     integration 'writes and reads from a table', (done) ->
       key = uniqueName('test')

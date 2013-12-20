@@ -161,6 +161,40 @@ module.exports = function () {
     callback();
   });
 
+  // progress events
+
+  this.When(/^I write a (\d+)KB buffer to the key "([^"]*)" with progress events$/, function(kb, key, callback) {
+    var self = this;
+    var body = new Buffer(new Array(kb * 1024 + 1).join('x'));
+    this.progress = [];
+    var req = this.s3.putObject({Bucket: this.sharedBucket, Key: key, Body: body});
+    req.on('httpUploadProgress', function (p) { self.progress.push(p) });
+    req.send(callback);
+  });
+
+  this.Then(/^more than (\d+) "([^"]*)" event should fire$/, function(numEvents, eventName, callback) {
+    this.assert.compare(this.progress.length, '>', numEvents);
+    callback();
+  });
+
+  this.Then(/^the "([^"]*)" value of the progress event should equal (\d+)KB$/, function(prop, kb, callback) {
+    this.assert.equal(this.progress[0][prop], kb * 1024);
+    callback();
+  });
+
+  this.Then(/^the "([^"]*)" value of the first progress event should be greater than (\d+) bytes$/, function(prop, bytes, callback) {
+    this.assert.compare(this.progress[0][prop], '>', bytes);
+    callback();
+  });
+
+  this.When(/^I read the key "([^"]*)" with progress events$/, function(key, callback) {
+    var self = this;
+    this.progress = [];
+    var req = this.s3.getObject({Bucket: this.sharedBucket, Key: key}, function (err, data) { });
+    req.on('httpDownloadProgress', function (p) { self.progress.push(p) });
+    req.send(function (err,data) { callback(); });
+  });
+
   // this scenario is a work around for not having an after all hook
   this.Then(/^I delete the shared bucket$/, function(next) {
     this.request('s3', 'deleteBucket', {Bucket:this.sharedBucket}, next);
