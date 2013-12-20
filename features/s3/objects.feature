@@ -79,6 +79,18 @@ Feature: Working with Objects in S3
     When I stream2 key "hello"
     Then the streamed data should contain "CONTENTS OF FILE"
 
+  @progress
+  Scenario: Progress events
+    When I write a 512KB buffer to the key "hello" with progress events
+    Then more than 1 "httpUploadProgress" event should fire
+    And the "total" value of the progress event should equal 512KB
+    And the "loaded" value of the first progress event should be greater than 10 bytes
+
+    When I read the key "hello" with progress events
+    Then more than 1 "httpDownloadProgress" event should fire
+    And the "total" value of the progress event should equal 512KB
+    And the "loaded" value of the first progress event should be greater than 10 bytes
+
   @proxy
   Scenario: Proxy support
     When I write "world" to the key "hello"
