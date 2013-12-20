@@ -77,6 +77,7 @@ mockHttpSuccessfulResponse = (status, headers, data, cb) ->
       null
 
   cb(httpResp)
+  httpResp.emit('headers', status, headers)
 
   AWS.util.arrayEach data.slice(), (str) ->
     if AWS.util.isNode() && (httpResp._events.readable || semver.gt(process.version, 'v0.11.3'))
@@ -88,12 +89,14 @@ mockHttpSuccessfulResponse = (status, headers, data, cb) ->
 
 mockHttpResponse = (status, headers, data) ->
   stream = new EventEmitter()
+  stream.setMaxListeners(0)
   spyOn(AWS.HttpClient, 'getInstance')
   AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
     if typeof status == 'number'
       mockHttpSuccessfulResponse status, headers, data, cb
     else
       errCb(status)
+    stream
 
   return stream
 
@@ -107,6 +110,7 @@ mockIntermittentFailureResponse = (numFailures, status, headers, data) ->
     else
       statusCode = retryCount < numFailures ? 500 : status
       mockHttpSuccessfulResponse statusCode, headers, data, cb
+    new EventEmitter()
 
 module.exports =
   AWS: AWS

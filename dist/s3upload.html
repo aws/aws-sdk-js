@@ -59,9 +59,10 @@ language governing permissions and limitations under the License.
       var files = evt.dataTransfer.files; // FileList object.
       for (var i = 0; i < files.length; i++) {
         var params = {Key: files[i].name, ContentType: files[i].type, Body: files[i]};
-        console.log(params);
-        s3.putObject(params, function (err, data) {
-          console.log("FINISHED")
+        var req = s3.putObject(params).on('httpUploadProgress', function (progress) {
+          console.log(progress);
+        }).send(function (err, data) {
+          console.log("FINISHED");
           if (err) {
             elDropZone.innerHTML += '<p>ERROR UPLOADING ' + files[i].name + '</p>';
           } else {
