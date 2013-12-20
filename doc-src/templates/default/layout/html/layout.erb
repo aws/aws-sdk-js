@@ -1,0 +1,51 @@
+<%
+# Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"). You
+# may not use this file except in compliance with the License. A copy of
+# the License is located at
+#
+#     http://aws.amazon.com/apache2.0/
+#
+# or in the "license" file accompanying this file. This file is
+# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+# ANY KIND, either express or implied. See the License for the specific
+# language governing permissions and limitations under the License.
+%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <%= erb(:headers) %>
+  </head>
+  <body>
+    <div id="header">
+      <%= erb(:breadcrumb) %>
+      <%= erb(:search) %>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content">
+      <style type="text/css">
+        #capabilities-banner { margin-top: 12px; font-size: 1.1em; font-weight: bold; }
+      </style>
+      <div id="capabilities-banner" class="note">
+        AWS services or capabilities described in AWS Documentation may vary
+        by region/location. Click <a href="http://docs.amazonaws.cn/en_us/aws/latest/userguide/api.html">Getting Started with Amazon AWS</a>
+        to see specific differences applicable to the China (Beijing) Region.
+      </div>
+      <script type="text/javascript">
+        if (!window.location.hostname.match(/\.cn$/)) {
+          document.getElementById('capabilities-banner').style.display = 'none';
+        }
+      </script>
+
+      <%= yieldall %>
+    </div>
+
+    <%= erb(:footer) %>
+  </body>
+</html>

@@ -58,6 +58,20 @@
         <div class="documentwrapper">
           <div class="bodywrapper">
             <div class="body">
+              <style type="text/css">
+                #capabilities-banner { margin-bottom: 12px; font-weight: bold; padding: 12px; }
+              </style>
+              <div id="capabilities-banner" class="note">
+                AWS services or capabilities described in AWS Documentation may vary
+                by region/location. Click <a href="http://docs.amazonaws.cn/en_us/aws/latest/userguide/api.html">Getting Started with Amazon AWS</a>
+                to see specific differences applicable to the China (Beijing) Region.
+              </div>
+              <script type="text/javascript">
+                if (!window.location.hostname.match(/\.cn$/)) {
+                  document.getElementById('capabilities-banner').style.display = 'none';
+                }
+              </script>
+
               <div class="section">
                 <%= yieldall %>
               </div>

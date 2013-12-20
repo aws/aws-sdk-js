@@ -12,7 +12,7 @@ Release notes can be found at http://aws.amazon.com/releasenotes/SDK/JavaScript
 To use the SDK in the browser, simply add the following script tag to your
 HTML pages:
 
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.0-rc2.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.0-rc3.min.js"></script>
 
 ### In Node.js
 
@@ -41,9 +41,8 @@ The SDK currently supports the following services:
     <th>API Version</th>
   </thead>
   <tbody>
-    <tr><td rowspan="3">Amazon CloudFront</td><td rowspan="3">AWS.CloudFront</td><td>2012-05-05</td></tr>
-    <tr><td>2013-05-12</td></tr>
-    <tr><td>2013-09-27</td></tr>
+    <tr><td rowspan="2">Amazon CloudFront</td><td rowspan="2">AWS.CloudFront</td><td>2012-05-05</td></tr>
+    <tr><td>2013-11-11</td></tr>
     <tr><td>Amazon CloudSearch</td><td>AWS.CloudSearch</td><td>2011-02-01</td></tr>
     <tr><td>Amazon CloudWatch</td><td>AWS.CloudWatch</td><td>2010-08-01</td></tr>
     <tr><td rowspan="2">Amazon DynamoDB</td><td rowspan="2">AWS.DynamoDB</td><td>2011-12-05</td></tr>
