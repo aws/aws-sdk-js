@@ -89,6 +89,7 @@ namespace :browser do
     rm_f "test/helpers.js"
     rm_f "test/configuration.js"
     puts "Now run `testem`"
+    sh "open dist/tests.html" if ENV['OPEN']
   end
 
   task :dist_path do
