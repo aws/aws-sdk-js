@@ -1,16 +1,3 @@
-# Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License"). You
-# may not use this file except in compliance with the License. A copy of
-# the License is located at
-#
-#     http://aws.amazon.com/apache2.0/
-#
-# or in the "license" file accompanying this file. This file is
-# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-# ANY KIND, either express or implied. See the License for the specific
-# language governing permissions and limitations under the License.
-
 helpers = require('./helpers')
 AWS = helpers.AWS
 config = {}
@@ -121,6 +108,30 @@ integrationTests ->
         expect(data.Body[0]).toEqual(97)
         expect(data.Body[1]).toEqual(98)
         expect(data.Body[2]).toEqual(99)
+
+    describe 'progress events', ->
+      integration 'emits http(Upload|Download)Progress events', (done) ->
+        data = []
+        progress = []
+        key = uniqueName('test')
+        body = new Blob([new Array(512 * 1024).join('x')])
+        req = s3.putObject(Key: key, Body: body)
+        req.on 'httpUploadProgress', (p) -> progress.push(p)
+        req.send (err, data) ->
+          noError(err)
+          expect(progress.length > 1).toEqual(true)
+          expect(progress[0].total).toEqual(body.size)
+          expect(progress[0].loaded > 10).toEqual(true)
+
+          progress = []
+          req = s3.getObject(Key: key)
+          req.on 'httpDownloadProgress', (p) -> progress.push(p)
+          req.send (err, data) ->
+            noError(err)
+            expect(progress.length > 1).toEqual(true)
+            expect(progress[0].total).toEqual(body.size)
+            expect(progress[0].loaded > 10).toEqual(true)
+            s3.deleteObject(Key: key).send(done)
 
   describe 'AWS.DynamoDB', ->
     integration 'writes and reads from a table', (done) ->

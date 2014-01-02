@@ -6,7 +6,8 @@ This guide will walk through the steps required to configure your application
 and vend federated credentials using trusted identity providers such
 as [Login with Amazon](http://login.amazon.com/),
 [Facebook](https://www.facebook.com/about/login/), or
-[Google](https://www.facebook.com/about/login/). In short, you will want to:
+[Google](https://developers.google.com/+/features/sign-in). In short, you will
+want to:
 
 1. Register an application with the identity provider
 2. Create an IAM role for the identity provider

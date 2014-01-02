@@ -1,16 +1,3 @@
-# Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License"). You
-# may not use this file except in compliance with the License. A copy of
-# the License is located at
-#
-#     http://aws.amazon.com/apache2.0/
-#
-# or in the "license" file accompanying this file. This file is
-# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-# ANY KIND, either express or implied. See the License for the specific
-# language governing permissions and limitations under the License.
-
 AWS = require('../lib/aws')
 EventEmitter = require('events').EventEmitter
 Buffer = require('buffer').Buffer
@@ -77,6 +64,7 @@ mockHttpSuccessfulResponse = (status, headers, data, cb) ->
       null
 
   cb(httpResp)
+  httpResp.emit('headers', status, headers)
 
   AWS.util.arrayEach data.slice(), (str) ->
     if AWS.util.isNode() && (httpResp._events.readable || semver.gt(process.version, 'v0.11.3'))
@@ -88,12 +76,14 @@ mockHttpSuccessfulResponse = (status, headers, data, cb) ->
 
 mockHttpResponse = (status, headers, data) ->
   stream = new EventEmitter()
+  stream.setMaxListeners(0)
   spyOn(AWS.HttpClient, 'getInstance')
   AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
     if typeof status == 'number'
       mockHttpSuccessfulResponse status, headers, data, cb
     else
       errCb(status)
+    stream
 
   return stream
 
@@ -107,6 +97,7 @@ mockIntermittentFailureResponse = (numFailures, status, headers, data) ->
     else
       statusCode = retryCount < numFailures ? 500 : status
       mockHttpSuccessfulResponse statusCode, headers, data, cb
+    new EventEmitter()
 
 module.exports =
   AWS: AWS

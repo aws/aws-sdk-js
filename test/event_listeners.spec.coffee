@@ -1,16 +1,3 @@
-# Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License"). You
-# may not use this file except in compliance with the License. A copy of
-# the License is located at
-#
-#     http://aws.amazon.com/apache2.0/
-#
-# or in the "license" file accompanying this file. This file is
-# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-# ANY KIND, either express or implied. See the License for the specific
-# language governing permissions and limitations under the License.
-
 helpers = require('./helpers')
 AWS = helpers.AWS
 MockService = helpers.MockService
@@ -201,6 +188,24 @@ describe 'AWS.EventListeners', ->
       response = request.send()
 
       expect(response.httpResponse.body.toString()).toEqual('FOOBARBAZQUX')
+
+  if AWS.util.isNode() and AWS.HttpClient.streamsApiVersion > 1
+    describe 'httpDownloadProgress', ->
+      beforeEach ->
+        helpers.mockHttpResponse 200, {'content-length': 12}, ['FOO', 'BAR', 'BAZ', 'QUX']
+
+      it 'emits httpDownloadProgress for each chunk', ->
+        progress = []
+
+        # register httpData event
+        request = makeRequest()
+        request.on('httpDownloadProgress', (p) -> progress.push(p))
+        request.send()
+
+        expect(progress[0]).toEqual(loaded: 3, total: 12)
+        expect(progress[1]).toEqual(loaded: 6, total: 12)
+        expect(progress[2]).toEqual(loaded: 9, total: 12)
+        expect(progress[3]).toEqual(loaded: 12, total: 12)
 
   describe 'retry', ->
     it 'retries a request with a set maximum retries', ->

@@ -1,18 +1,3 @@
-/**
- * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You
- * may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
- * ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- */
-
 module.exports = function () {
   /**
    * Create a single bucket that will be shared by all s3 object scenarios.
@@ -159,6 +144,40 @@ module.exports = function () {
   this.Given(/^I setup the listObjects request for the bucket$/, function(callback) {
     this.params = { Bucket: this.sharedBucket };
     callback();
+  });
+
+  // progress events
+
+  this.When(/^I write a (\d+)KB buffer to the key "([^"]*)" with progress events$/, function(kb, key, callback) {
+    var self = this;
+    var body = new Buffer(new Array(kb * 1024 + 1).join('x'));
+    this.progress = [];
+    var req = this.s3.putObject({Bucket: this.sharedBucket, Key: key, Body: body});
+    req.on('httpUploadProgress', function (p) { self.progress.push(p) });
+    req.send(callback);
+  });
+
+  this.Then(/^more than (\d+) "([^"]*)" event should fire$/, function(numEvents, eventName, callback) {
+    this.assert.compare(this.progress.length, '>', numEvents);
+    callback();
+  });
+
+  this.Then(/^the "([^"]*)" value of the progress event should equal (\d+)KB$/, function(prop, kb, callback) {
+    this.assert.equal(this.progress[0][prop], kb * 1024);
+    callback();
+  });
+
+  this.Then(/^the "([^"]*)" value of the first progress event should be greater than (\d+) bytes$/, function(prop, bytes, callback) {
+    this.assert.compare(this.progress[0][prop], '>', bytes);
+    callback();
+  });
+
+  this.When(/^I read the key "([^"]*)" with progress events$/, function(key, callback) {
+    var self = this;
+    this.progress = [];
+    var req = this.s3.getObject({Bucket: this.sharedBucket, Key: key}, function (err, data) { });
+    req.on('httpDownloadProgress', function (p) { self.progress.push(p) });
+    req.send(function (err,data) { callback(); });
   });
 
   // this scenario is a work around for not having an after all hook
