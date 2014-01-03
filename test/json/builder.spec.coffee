@@ -55,12 +55,28 @@ describe 'AWS.JSON.Builder', ->
         type: 'structure'
         members:
           Build:
-            type: 'timestamp'
+            type: 'structure'
+            members:
+              When:
+                type: 'timestamp'
       now = new Date()
-      now.setMilliseconds(0)
+      now.setMilliseconds(100)
       params =
         Build:
           When: now
       formatted = AWS.util.date.iso8601(now)
       expect(build(rules, params)).toEqual('{"Build":{"When":"'+formatted+'"}}')
 
+    it 'translates integers formatted as strings', ->
+      rules =
+        type: 'structure'
+        members:
+          Integer: type: 'integer'
+      expect(build(rules, Integer: '20')).toEqual('{"Integer":20}')
+
+    it 'translates floats formatted as strings', ->
+      rules =
+        type: 'structure'
+        members:
+          Float: type: 'float'
+      expect(build(rules, Float: '20.1')).toEqual('{"Float":20.1}')

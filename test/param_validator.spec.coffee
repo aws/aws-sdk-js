@@ -242,8 +242,11 @@ describe 'AWS.ParamValidator', ->
     it 'accepts integers', ->
       expectValid param: 123
 
+    it 'accepts floats formatted as strings', ->
+      expectValid param: '1.23'
+
     it 'rejects other objects', ->
-      expectError param: '123'
+      expectError param: 'NOTFLOAT'
 
   describe 'integer', ->
     beforeEach ->
@@ -252,8 +255,11 @@ describe 'AWS.ParamValidator', ->
     it 'accepts integers', ->
       expectValid param: 123
 
+    it 'accepts integers formatted as strings', ->
+      expectValid param: '123'
+
     it 'rejects other objects', ->
-      expectError param: '123'
+      expectError param: 'NOTINT'
 
   describe 'binary', ->
     beforeEach ->
