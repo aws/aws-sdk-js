@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var Translator = require('../lib/api/translator');
+var util = require('util');
+
+var basePath = __dirname + '/../apis/';
+var paths = fs.readdirSync(basePath + 'source');
+var modelName = process.argv[2];
+var modelNames = {
+  elasticloadbalancing: 'elb',
+  elasticmapreduce: 'emr',
+  email: 'ses',
+  monitoring: 'cloudwatch',
+  sdb: 'simpledb',
+  swf: 'simpleworkflow'
+};
+
+paths.forEach(function (path) {
+  if (path.match(new RegExp('^' + modelName ? modelName : ''))) {
+    var outpath = path;
+    Object.keys(modelNames).forEach(function (key) {
+      outpath = outpath.replace(new RegExp('^' + key), modelNames[key]);
+    });
+    console.log('Generating API', outpath);
+    var data = fs.readFileSync(basePath + 'source/' + path);
+    var json = JSON.stringify(new Translator(data, {documentation: false}), null, '  ');
+    //json = json.replace(/"(\w+)": /g, function (_, m) { return m === 'default' ? _ : m + ": "; }).replace(/"/g, '\'');
+    fs.writeFileSync(basePath + outpath, json);
+  }
+});
