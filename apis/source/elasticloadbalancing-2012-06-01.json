@@ -1,0 +1,2184 @@
+{
+  "api_version": "2012-06-01",
+  "type": "query",
+  "result_wrapped": true,
+  "signature_version": "v4",
+  "service_full_name": "Elastic Load Balancing",
+  "endpoint_prefix": "elasticloadbalancing",
+  "documentation": "\n    \t<fullname>Elastic Load Balancing</fullname>\n        \n        <p>\n        Elastic Load Balancing is a cost-effective and easy\n        to use web service to help you improve the availability and\n        scalability of your application running on Amazon Elastic Cloud Compute (Amazon EC2). It makes it easy for\n        you to distribute application loads between two or more\n        EC2 instances. Elastic Load Balancing supports the growth in traffic of your application by enabling availability through redundancy.\n        </p>\n        \n        <p>This guide provides detailed information about Elastic Load Balancing \n            actions, data types, and parameters that can be used for sending a \n            query request. Query requests are HTTP or HTTPS requests that use the \n            HTTP verb GET or POST and a query parameter named Action or Operation. \n            Action is used throughout this documentation, although Operation is \n            supported for backward compatibility with other AWS Query APIs.</p>\n                \n        <p>For detailed information on constructing a query request using the actions, data types, and parameters mentioned in this guide,\n            go to <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/using-query-api.html\">Using the Query API</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n                   \n        <p>For detailed information about Elastic Load Balancing features and their associated actions, go to \n            <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/UserScenarios.html\">Using Elastic Load Balancing</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        \n        <p>This reference guide is based on the current WSDL, which is available at:\n            <a href=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/ElasticLoadBalancing.wsdl\"></a>   \n        </p>\n        <p><b>Endpoints</b></p>\n        <p>The examples in this guide assume that your load balancers are created in the US East (Northern Virginia) region and use us-east-1 as the endpoint.</p>\n        <p>You can create your load balancers in other AWS regions. For information about regions and endpoints supported by Elastic Load Balancing, see \n            <a href=\"http://docs.aws.amazon.com/general/latest/gr/index.html?rande.html\">Regions and Endpoints</a> \n            in the Amazon Web Services General Reference.\n        </p>\n            \n    ",
+  "operations": {
+    "ApplySecurityGroupsToLoadBalancer": {
+      "name": "ApplySecurityGroupsToLoadBalancer",
+      "input": {
+        "shape_name": "ApplySecurityGroupsToLoadBalancerInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The name associated with the load balancer.\n            The name must be unique within the set of load balancers associated with your AWS account. \n        </p> \n    ",
+            "required": true
+          },
+          "SecurityGroups": {
+            "shape_name": "SecurityGroups",
+            "type": "list",
+            "members": {
+              "shape_name": "SecurityGroupId",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n        <p>\n            A list of security group IDs to associate with your load balancer in VPC. The security\n            group IDs must be provided as the ID and not the security group name (For example, sg-1234).\n        </p>  \n    ",
+            "required": true
+          }
+        },
+        "documentation": "\n        <p>\n            The input for the <a>ApplySecurityGroupsToLoadBalancer</a> action.\n        </p>  \n    "
+      },
+      "output": {
+        "shape_name": "ApplySecurityGroupsToLoadBalancerOutput",
+        "type": "structure",
+        "members": {
+          "SecurityGroups": {
+            "shape_name": "SecurityGroups",
+            "type": "list",
+            "members": {
+              "shape_name": "SecurityGroupId",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n        <p>\n            A list of security group IDs associated with your load balancer.\n        </p> \n    "
+          }
+        },
+        "documentation": "\n        <p>\n            The out for the <a>ApplySecurityGroupsToLoadBalancer</a> action.\n        </p> \n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidConfigurationRequestException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        Requested configuration change is invalid.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidSecurityGroupException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            One or more specified security groups do not exist.  \n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n            Associates one or more security groups with your load balancer in Amazon Virtual Private Cloud (Amazon VPC). \n            The provided security group IDs will override any currently applied security groups.\n        </p> \n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/USVPC_ApplySG.html\">Manage Security Groups in Amazon VPC</a> in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        \n        <examples>      \n            <queryrequest>https://elasticloadbalancing.amazonaws.com/?SecurityGroups.member.1=sg-123456789\n&LoadBalancerName=my-test-vpc-loadbalancer\n&Version=2012-06-01\n&Action=ApplySecurityGroupsToLoadBalancer\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><ApplySecurityGroupsToLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n  <ApplySecurityGroupsToLoadBalancerResult>\n    <SecurityGroups>\n      <member>sg-123456789</member>\n    </SecurityGroups>\n  </ApplySecurityGroupsToLoadBalancerResult>\n  <ResponseMetadata>\n    <RequestId>06b5decc-102a-11e3-9ad6-bf3e4EXAMPLE</RequestId>\n  </ResponseMetadata>\n</ApplySecurityGroupsToLoadBalancerResponse>\n </queryresponse>\n        </examples>       \n    "
+    },
+    "AttachLoadBalancerToSubnets": {
+      "name": "AttachLoadBalancerToSubnets",
+      "input": {
+        "shape_name": "AttachLoadBalancerToSubnetsInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The name associated with the load balancer.\n            The name must be unique within the set of load balancers associated with your AWS account.\n        </p>\n    ",
+            "required": true
+          },
+          "Subnets": {
+            "shape_name": "Subnets",
+            "type": "list",
+            "members": {
+              "shape_name": "SubnetId",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n        <p>\n            A list of subnet IDs to add for the load balancer. You can add only one subnet per Availability Zone.\n        </p>  \n    ",
+            "required": true
+          }
+        },
+        "documentation": "\n        <p>\n            The input for the <a>AttachLoadBalancerToSubnets</a> action.  \n        </p> \n    "
+      },
+      "output": {
+        "shape_name": "AttachLoadBalancerToSubnetsOutput",
+        "type": "structure",
+        "members": {
+          "Subnets": {
+            "shape_name": "Subnets",
+            "type": "list",
+            "members": {
+              "shape_name": "SubnetId",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n        <p>\n            A list of subnet IDs attached to the load balancer.  \n        </p>  \n    "
+          }
+        },
+        "documentation": "\n        <p>\n            The output for the <a>AttachLoadBalancerToSubnets</a> action.\n        </p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidConfigurationRequestException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        Requested configuration change is invalid.\n        </p>\n    "
+        },
+        {
+          "shape_name": "SubnetNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n          One or more subnets were not found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidSubnetException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The VPC has no Internet gateway. \n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n            Adds one or more subnets to the set of configured subnets in the Amazon Virtual Private Cloud (Amazon VPC) for the load balancer.\n        </p>  \n        <p>\n            The load balancers evenly distribute requests across all of the registered subnets. \n            For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/UserScenariosForVPC.html\">Deploy Elastic Load Balancing in Amazon VPC</a> in the <i>Elastic Load Balancing Developer Guide</i>.\n        </p>\n        <examples>      \n            <queryrequest>https://elasticloadbalancing.amazonaws.com/?Subnets.member.1=subnet-3561b05e\n&LoadBalancerName=my-test-vpc-loadbalancer\n&Version=2012-06-01\n&Action=AttachLoadBalancerToSubnets\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><AttachLoadBalancerToSubnetsResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<AttachLoadBalancerToSubnetsResult>\n    <Subnets>\n      <member>subnet-119f0078</member>\n      <member>subnet-3561b05e</member>\n    </Subnets>\n</AttachLoadBalancerToSubnetsResult>\n  <ResponseMetadata>\n    <RequestId>07b1ecbc-1100-11e3-acaf-dd7edEXAMPLE</RequestId>\n  </ResponseMetadata>\n</AttachLoadBalancerToSubnetsResponse>\n </queryresponse>\n        </examples>   \n    "
+    },
+    "ConfigureHealthCheck": {
+      "name": "ConfigureHealthCheck",
+      "input": {
+        "shape_name": "ConfigureHealthCheckInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The mnemonic name associated with the load balancer.\n            The name must be unique within the set of load balancers associated with your AWS account.\n        </p>\n    ",
+            "required": true
+          },
+          "HealthCheck": {
+            "shape_name": "HealthCheck",
+            "type": "structure",
+            "members": {
+              "Target": {
+                "shape_name": "HealthCheckTarget",
+                "type": "string",
+                "documentation": "\n        <p>\n        Specifies the instance being checked. The protocol is either TCP, HTTP, HTTPS, or SSL.\n        The range of valid ports is one (1) through 65535.\n        </p>\n        <note>\n            <p>\n            TCP is the default, specified as a TCP: port pair,\n            for example \"TCP:5000\". In this case a healthcheck simply\n            attempts to open a TCP connection to the instance on the\n            specified port. Failure to connect within the configured\n            timeout is considered unhealthy.\n            </p>\n            <p>SSL is also specified as SSL: port pair, for example, SSL:5000.</p>\n            <p>\n            For HTTP or HTTPS protocol, the situation is different. You have to include a ping path in the string. HTTP is specified\n            as a HTTP:port;/;PathToPing; grouping, for example\n            \"HTTP:80/weather/us/wa/seattle\". In this case, a HTTP GET\n            request is issued to the instance on the given port and path.\n            Any answer other than \"200 OK\" within the timeout period is\n            considered unhealthy.\n            </p>\n            <p>\n            The total length of the HTTP ping target needs to\n            be 1024 16-bit Unicode characters or less.\n            </p>\n        </note>\n    ",
+                "required": true
+              },
+              "Interval": {
+                "shape_name": "HealthCheckInterval",
+                "type": "integer",
+                "min_length": 1,
+                "max_length": 300,
+                "documentation": "\n        <p>\n        Specifies the approximate interval, in seconds,\n        between health checks of an individual instance.\n        </p>\n    ",
+                "required": true
+              },
+              "Timeout": {
+                "shape_name": "HealthCheckTimeout",
+                "type": "integer",
+                "min_length": 1,
+                "max_length": 300,
+                "documentation": "\n        <p>\n        Specifies the amount of time, in seconds, during which no response\n        means a failed health probe.\n        </p>\n        <note>\n        This value must be less than the <i>Interval</i> value.\n        </note>\n    ",
+                "required": true
+              },
+              "UnhealthyThreshold": {
+                "shape_name": "UnhealthyThreshold",
+                "type": "integer",
+                "min_length": 2,
+                "max_length": 10,
+                "documentation": "\n        <p>\n        Specifies the number of consecutive health probe failures required\n        before moving the instance to the <i>Unhealthy</i> state.\n        </p>\n    ",
+                "required": true
+              },
+              "HealthyThreshold": {
+                "shape_name": "HealthyThreshold",
+                "type": "integer",
+                "min_length": 2,
+                "max_length": 10,
+                "documentation": "\n        <p>\n        Specifies the number of consecutive health probe successes required before\n        moving the instance to the <i>Healthy</i> state.\n        </p>\n    ",
+                "required": true
+              }
+            },
+            "documentation": "\n        <p>\n            A structure containing the configuration information\n            for the new healthcheck.\n        </p>\n    ",
+            "required": true
+          }
+        },
+        "documentation": "\n        <p>\n            Input for the <a>ConfigureHealthCheck</a> action.\n        </p>\n    "
+      },
+      "output": {
+        "shape_name": "ConfigureHealthCheckOutput",
+        "type": "structure",
+        "members": {
+          "HealthCheck": {
+            "shape_name": "HealthCheck",
+            "type": "structure",
+            "members": {
+              "Target": {
+                "shape_name": "HealthCheckTarget",
+                "type": "string",
+                "documentation": "\n        <p>\n        Specifies the instance being checked. The protocol is either TCP, HTTP, HTTPS, or SSL.\n        The range of valid ports is one (1) through 65535.\n        </p>\n        <note>\n            <p>\n            TCP is the default, specified as a TCP: port pair,\n            for example \"TCP:5000\". In this case a healthcheck simply\n            attempts to open a TCP connection to the instance on the\n            specified port. Failure to connect within the configured\n            timeout is considered unhealthy.\n            </p>\n            <p>SSL is also specified as SSL: port pair, for example, SSL:5000.</p>\n            <p>\n            For HTTP or HTTPS protocol, the situation is different. You have to include a ping path in the string. HTTP is specified\n            as a HTTP:port;/;PathToPing; grouping, for example\n            \"HTTP:80/weather/us/wa/seattle\". In this case, a HTTP GET\n            request is issued to the instance on the given port and path.\n            Any answer other than \"200 OK\" within the timeout period is\n            considered unhealthy.\n            </p>\n            <p>\n            The total length of the HTTP ping target needs to\n            be 1024 16-bit Unicode characters or less.\n            </p>\n        </note>\n    ",
+                "required": true
+              },
+              "Interval": {
+                "shape_name": "HealthCheckInterval",
+                "type": "integer",
+                "min_length": 1,
+                "max_length": 300,
+                "documentation": "\n        <p>\n        Specifies the approximate interval, in seconds,\n        between health checks of an individual instance.\n        </p>\n    ",
+                "required": true
+              },
+              "Timeout": {
+                "shape_name": "HealthCheckTimeout",
+                "type": "integer",
+                "min_length": 1,
+                "max_length": 300,
+                "documentation": "\n        <p>\n        Specifies the amount of time, in seconds, during which no response\n        means a failed health probe.\n        </p>\n        <note>\n        This value must be less than the <i>Interval</i> value.\n        </note>\n    ",
+                "required": true
+              },
+              "UnhealthyThreshold": {
+                "shape_name": "UnhealthyThreshold",
+                "type": "integer",
+                "min_length": 2,
+                "max_length": 10,
+                "documentation": "\n        <p>\n        Specifies the number of consecutive health probe failures required\n        before moving the instance to the <i>Unhealthy</i> state.\n        </p>\n    ",
+                "required": true
+              },
+              "HealthyThreshold": {
+                "shape_name": "HealthyThreshold",
+                "type": "integer",
+                "min_length": 2,
+                "max_length": 10,
+                "documentation": "\n        <p>\n        Specifies the number of consecutive health probe successes required before\n        moving the instance to the <i>Healthy</i> state.\n        </p>\n    ",
+                "required": true
+              }
+            },
+            "documentation": "\n        <p>\n            The updated healthcheck for the instances.\n        </p>\n    "
+          }
+        },
+        "documentation": "\n        <p>\n            The output for the <a>ConfigureHealthCheck</a> action.\n        </p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n            Specifies the health check settings to use for evaluating the health state of your back-end instances.            \n        </p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#healthcheck\">Health Check</a> in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        <examples>      \n            <queryrequest>https://elasticloadbalancing.amazonaws.com/?HealthCheck.HealthyThreshold=2\n&HealthCheck.UnhealthyThreshold=2\n&LoadBalancerName=MyLoadBalancer\n&HealthCheck.Target=HTTP:80/ping\n&HealthCheck.Interval=30\n&HealthCheck.Timeout=3\n&Version=2012-06-01\n&Action=ConfigureHealthCheck\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><ConfigureHealthCheckResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<ConfigureHealthCheckResult>\n    <HealthCheck>\n      <Interval>30</Interval>\n      <Target>HTTP:80/ping</Target>\n      <HealthyThreshold>2</HealthyThreshold>\n      <Timeout>3</Timeout>\n      <UnhealthyThreshold>2</UnhealthyThreshold>\n    </HealthCheck>\n</ConfigureHealthCheckResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</ConfigureHealthCheckResponse>\n </queryresponse>\n        </examples>   \n    "
+    },
+    "CreateAppCookieStickinessPolicy": {
+      "name": "CreateAppCookieStickinessPolicy",
+      "input": {
+        "shape_name": "CreateAppCookieStickinessPolicyInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The name of the load balancer.            \n        </p>\n    ",
+            "required": true
+          },
+          "PolicyName": {
+            "shape_name": "PolicyName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The name of the policy being created. \n            The name must be unique within the set of policies for this load balancer.    \n        </p>\n    ",
+            "required": true
+          },
+          "CookieName": {
+            "shape_name": "CookieName",
+            "type": "string",
+            "documentation": "\n        <p>\n            Name of the application cookie used for stickiness. \n        </p>\n    ",
+            "required": true
+          }
+        },
+        "documentation": "\n        <p>\n            The input for the <a>CreateAppCookieStickinessPolicy</a> action.\n        </p>\n    "
+      },
+      "output": {
+        "shape_name": "CreateAppCookieStickinessPolicyOutput",
+        "type": "structure",
+        "members": {
+        },
+        "documentation": "\n        <p>\n            The output for the <a>CreateAppCookieStickinessPolicy</a> action.\n        </p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "DuplicatePolicyNameException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            Policy with the same name exists for this load balancer.\n            Please choose another name.\n        </p>\n    "
+        },
+        {
+          "shape_name": "TooManyPoliciesException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            Quota for number of policies for this load balancer\n            has already been reached.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidConfigurationRequestException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        Requested configuration change is invalid.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n            Generates a stickiness policy with sticky session lifetimes that follow \n            that of an application-generated cookie. This policy can be associated\n            only with HTTP/HTTPS listeners.\n        </p>\n        <p>\n            This policy is similar to the policy created by <a>CreateLBCookieStickinessPolicy</a>, \n            except that the lifetime of the special Elastic Load Balancing cookie follows the\n            lifetime of the application-generated cookie specified in the policy configuration. \n            The load balancer only inserts a new stickiness cookie when the application response\n            includes a new application cookie. \n        </p>\n        <p>\n            If the application cookie is explicitly removed or expires, the session stops being\n            sticky until a new application cookie is issued. \n        </p>\n        <note>\n            An application client must receive and send two cookies: the application-generated \n            cookie and the special Elastic Load Balancing cookie named <code>AWSELB</code>. \n            This is the default behavior for many common web browsers.\n        </note>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/US_StickySessions.html#US_EnableStickySessionsAppCookies\">Enabling Application-Controlled Session Stickiness</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        <examples>      \n            <queryrequest>https://elasticloadbalancing.amazonaws.com/?CookieName=MyAppCookie\n&LoadBalancerName=MyLoadBalancer\n&PolicyName=MyAppStickyPolicy\n&Version=2012-06-01\n&Action=CreateAppCookieStickinessPolicy\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><CreateAppCookieStickinessPolicyResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<CreateAppCookieStickinessPolicyResult/>\n<ResponseMetadata>\n    <RequestId>99a693e9-12b8-11e3-9ad6-bf3e4EXAMPLE</RequestId>\n</ResponseMetadata>\n</CreateAppCookieStickinessPolicyResponse>\n </queryresponse>\n        </examples>   \n    "
+    },
+    "CreateLBCookieStickinessPolicy": {
+      "name": "CreateLBCookieStickinessPolicy",
+      "input": {
+        "shape_name": "CreateLBCookieStickinessPolicyInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The name associated with the load balancer.            \n        </p>\n    ",
+            "required": true
+          },
+          "PolicyName": {
+            "shape_name": "PolicyName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The name of the policy being created. \n            The name must be unique within the set of policies for this load balancer.    \n        </p>\n    ",
+            "required": true
+          },
+          "CookieExpirationPeriod": {
+            "shape_name": "CookieExpirationPeriod",
+            "type": "long",
+            "documentation": "\n        <p>\n            The time period in seconds after which the cookie should be considered stale. \n            Not specifying this parameter indicates that the sticky session will last for the duration \n            of the browser session. \n        </p>\n    "
+          }
+        },
+        "documentation": "\n        <p>\n            The input for the <a>CreateLBCookieStickinessPolicy</a> action.\n        </p>\n    "
+      },
+      "output": {
+        "shape_name": "CreateLBCookieStickinessPolicyOutput",
+        "type": "structure",
+        "members": {
+        },
+        "documentation": "\n        <p>\n            The output for the <a>CreateLBCookieStickinessPolicy</a> action.\n        </p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "DuplicatePolicyNameException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            Policy with the same name exists for this load balancer.\n            Please choose another name.\n        </p>\n    "
+        },
+        {
+          "shape_name": "TooManyPoliciesException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            Quota for number of policies for this load balancer\n            has already been reached.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidConfigurationRequestException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        Requested configuration change is invalid.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n            Generates a stickiness policy with sticky session lifetimes controlled by the \n            lifetime of the browser (user-agent) or a specified expiration period. This \n            policy can be associated only with HTTP/HTTPS listeners.\n        </p>\n        <p>\n            When a load balancer implements this policy, the load balancer uses a special\n            cookie to track the backend server instance for each request. When the load balancer\n            receives a request, it first checks to see if this cookie is present in the request. \n            If so, the load balancer sends the request to the application server specified in the\n            cookie. If not, the load balancer sends the request to a server that is chosen based on\n            the existing load balancing algorithm.\n        </p>\n        <p>\n            A cookie is inserted into the response for binding subsequent requests from the same user to\n            that server. The validity of the cookie is based on the cookie expiration time, which is \n            specified in the policy configuration. \n        </p>\n        \n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/US_StickySessions.html#US_EnableStickySessionsLBCookies\">Enabling Duration-Based Session Stickiness</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>        \n        <examples>      \n            <queryrequest>https://elasticloadbalancing.amazonaws.com/?CookieExpirationPeriod=60\n&LoadBalancerName=MyLoadBalancer&PolicyName=MyDurationStickyPolicy\n&Version=2012-06-01\n&Action=CreateLBCookieStickinessPolicy\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><CreateLBCookieStickinessPolicyResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<CreateLBCookieStickinessPolicyResult/>\n<ResponseMetadata>\n    <RequestId>99a693e9-12b8-11e3-9ad6-bf3e4EXAMPLE</RequestId>\n</ResponseMetadata>\n</CreateLBCookieStickinessPolicyResponse>\n </queryresponse>\n        </examples>   \n        \n    "
+    },
+    "CreateLoadBalancer": {
+      "name": "CreateLoadBalancer",
+      "input": {
+        "shape_name": "CreateAccessPointInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The name associated with the load balancer.\n            The name must be unique within your set of load balancers.\n        </p>\n    ",
+            "required": true
+          },
+          "Listeners": {
+            "shape_name": "Listeners",
+            "type": "list",
+            "members": {
+              "shape_name": "Listener",
+              "type": "structure",
+              "members": {
+                "Protocol": {
+                  "shape_name": "Protocol",
+                  "type": "string",
+                  "documentation": "\n        <p>\n        Specifies the load balancer transport protocol to use for routing\n        - HTTP, HTTPS, TCP or SSL.\n        This property cannot be modified for the life of the load balancer.\n        </p>\n    ",
+                  "required": true
+                },
+                "LoadBalancerPort": {
+                  "shape_name": "AccessPointPort",
+                  "type": "integer",
+                  "documentation": "\n        <p>\n        Specifies the external load balancer port number.\n        This property cannot be modified for the life of the load balancer.\n        </p>\n    ",
+                  "required": true
+                },
+                "InstanceProtocol": {
+                  "shape_name": "Protocol",
+                  "type": "string",
+                  "documentation": "\n   \t<p>\n   \tSpecifies the protocol to use for routing traffic to back-end instances - HTTP, HTTPS, TCP, or SSL.\n   \tThis property cannot be modified for the life of the load balancer.\n   \t</p>\n   \t<note>\n   \tIf the front-end protocol is HTTP or HTTPS, <code>InstanceProtocol</code> has to be at the same protocol layer,\n   \t    i.e., HTTP or HTTPS. Likewise, if the front-end protocol is TCP or SSL, InstanceProtocol has to be TCP or SSL.\n   \t</note>\n   \t<note>\n   \tIf there is another listener with the same <code>InstancePort</code> whose <code>InstanceProtocol</code> is secure,\n   \ti.e., HTTPS or SSL, the listener's <code>InstanceProtocol</code> has to be secure, i.e., HTTPS or SSL. \n    If there is another listener with the same <code>InstancePort</code> whose <code>InstanceProtocol</code> is HTTP or TCP,\n    the listener's <code>InstanceProtocol</code> must be either HTTP or TCP. \n   \t</note>\n   "
+                },
+                "InstancePort": {
+                  "shape_name": "InstancePort",
+                  "type": "integer",
+                  "min_length": 1,
+                  "max_length": 65535,
+                  "documentation": "\n        <p>\n        Specifies the TCP port on which the instance server is listening.\n        This property cannot be modified for the life of the load balancer.\n        </p>\n    ",
+                  "required": true
+                },
+                "SSLCertificateId": {
+                  "shape_name": "SSLCertificateId",
+                  "type": "string",
+                  "documentation": "\n        <p>\n            The ARN string of the server certificate. \n            To get the ARN of the server certificate, call the AWS Identity and Access Management  \n            <a href=\"http://docs.aws.amazon.com/IAM/latest/APIReference/index.html?API_UploadServerCertificate.html\">UploadServerCertificate   \t\n            </a> API. </p>\n    "
+                }
+              },
+              "documentation": "\n        <p>\n        The Listener data type.\n        </p>\n    "
+            },
+            "documentation": "\n        <p>\n            A list of the following tuples:\n            LoadBalancerPort, InstancePort, and Protocol.\n        </p>\n    ",
+            "required": true
+          },
+          "AvailabilityZones": {
+            "shape_name": "AvailabilityZones",
+            "type": "list",
+            "members": {
+              "shape_name": "AvailabilityZone",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n        <p>\n            A list of Availability Zones.\n        </p>\n        <p>\n            At least one Availability Zone must be specified.\n            Specified Availability Zones must be in the same EC2 Region\n            as the load balancer.\n            Traffic will be equally distributed across all zones.\n        </p>\n        <p>\n            You can later add more Availability Zones after the creation of the \n            load balancer by calling <a>EnableAvailabilityZonesForLoadBalancer</a> action.\n        </p>\n    "
+          },
+          "Subnets": {
+            "shape_name": "Subnets",
+            "type": "list",
+            "members": {
+              "shape_name": "SubnetId",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n        <p>\n            A list of subnet IDs in your VPC to attach to your load balancer.\n            Specify one subnet per Availability Zone.\n        </p> \n    "
+          },
+          "SecurityGroups": {
+            "shape_name": "SecurityGroups",
+            "type": "list",
+            "members": {
+              "shape_name": "SecurityGroupId",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n        <p>\n            The security groups to assign to your load balancer within your VPC.\n        </p>  \n    "
+          },
+          "Scheme": {
+            "shape_name": "LoadBalancerScheme",
+            "type": "string",
+            "documentation": "\n        <p>The type of a load balancer. </p>          \n        \n        <p>By default, Elastic Load Balancing creates an Internet-facing load balancer\n            with a publicly resolvable DNS name, which resolves to public IP addresses.\n            For more informationabout Internet-facing and Internal load balancers, \n            see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/vpc-loadbalancer-types.html\">Internet-facing and Internal Load Balancers</a>.</p>\n        \n        <p>Specify the value <code>internal</code> for this option to create an internal load balancer\n            with a DNS name that resolves to private IP addresses.</p>\n        <note>\n            <p>This option is only available for load balancers created within EC2-VPC.</p>\n        </note>   \n        \n    "
+          }
+        },
+        "documentation": "\n        <p>\n            The input for the <a>CreateLoadBalancer</a> action.\n        </p>\n    "
+      },
+      "output": {
+        "shape_name": "CreateAccessPointOutput",
+        "type": "structure",
+        "members": {
+          "DNSName": {
+            "shape_name": "DNSName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The DNS name for the load balancer.\n        </p>\n    "
+          }
+        },
+        "documentation": "\n        <p>\n            The output for the <a>CreateLoadBalancer</a> action.\n        </p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "DuplicateAccessPointNameException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            Load balancer name already exists for this account.\n            Please choose another name.\n        </p>\n    "
+        },
+        {
+          "shape_name": "TooManyAccessPointsException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The quota for the number of load balancers has already been reached.\n        </p>\n    "
+        },
+        {
+          "shape_name": "CertificateNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified SSL ID does not refer to a valid SSL certificate \n            in the AWS Identity and Access Management Service.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidConfigurationRequestException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        Requested configuration change is invalid.\n        </p>\n    "
+        },
+        {
+          "shape_name": "SubnetNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n          One or more subnets were not found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidSubnetException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The VPC has no Internet gateway. \n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidSecurityGroupException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            One or more specified security groups do not exist.  \n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidSchemeException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            Invalid value for scheme. Scheme can only be specified for load balancers in VPC.         \n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n            Creates a new load balancer.\n        </p>\n        <p>\n            After the call has completed successfully, a new load balancer\n            is created with a unique Domain Name Service (DNS) name. The DNS \n            name includes the name of the AWS region in which the load balance \n            was created. For example, if your load balancer was created in the\n            United States, the DNS name might end with either of the following:</p>        \n        <ul>\n            <li>\n                <i>us-east-1.elb.amazonaws.com</i> (for the Northern Virginia Region)\n            </li>\n            <li>\n                <i>us-west-1.elb.amazonaws.com</i> (for the Northern California Region)\n            </li>\n        </ul>\n        <p>For information about the AWS regions supported by Elastic Load Balancing, \n            see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#elb_region\">Regions and Endpoints</a>.</p>        \n        \n        <p>You can create up to 10 load balancers per region per account.</p>\n        \n        <p>Elastic Load Balancing supports load balancing your Amazon EC2 instances launched\n            within any one of the following platforms:</p>\n        <ul>\n            <li>\n                <i>EC2-Classic</i>\n                <p>For information on creating and managing your load balancers in EC2-Classic, \n                    see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/UserScenariosForEC2.html\">Deploy Elastic Load Balancing in Amazon EC2-Classic</a>.</p>\n            </li>\n            <li>\n                <i>EC2-VPC</i>\n                <p>For information on creating and managing your load balancers in EC2-VPC, \n                    see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/UserScenariosForVPC.html\">Deploy Elastic Load Balancing in Amazon VPC</a>.</p>\n            </li>\n        </ul> \n        \n        <examples> \n            <example>\n                <name>Create a TCP load balancer in EC2-Classic</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&AvailabilityZones.member.1=us-east-1c\n&Listeners.member.1.LoadBalancerPort=80\n&Listeners.member.1.InstancePort=80\n&Listeners.member.1.Protocol=http\n&Listeners.member.1.InstanceProtocol=http\n&Version=2012-06-01\n&Action=CreateLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><CreateLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<CreateLoadBalancerResult>\n    <DNSName>MyLoadBalancer-1234567890.us-east-1.elb.amazonaws.com</DNSName>\n  </CreateLoadBalancerResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</CreateLoadBalancerResponse>\n </queryresponse>\n            </example> \n            <example>\n                <name>Create HTTPS load balancer in EC2-Classic</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyHTTPSLoadBalancer\n&AvailabilityZones.member.1=us-east-1c\n&Listeners.member.1.LoadBalancerPort=443\n&Listeners.member.1.InstancePort=443\n&Listeners.member.1.Protocol=https\n&Listeners.member.1.InstanceProtocol=https\n&Listeners.member.1.SSLCertificateId=arn:aws:iam::123456789012:server-certificate/servercert\n&Version=2012-06-01\n&Action=CreateLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><CreateLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<CreateLoadBalancerResult>\n    <DNSName>MyHTTPSLoadBalancer-1234567890.us-east-1.elb.amazonaws.com</DNSName>\n  </CreateLoadBalancerResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</CreateLoadBalancerResponse>\n </queryresponse>\n            </example> \n            <example>\n                <name>Create a TCP load balancer in EC2-VPC</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?SecurityGroups.member.1=sg-6801da07\n&LoadBalancerName=MyVPCLoadBalancer\n&Listeners.member.1.LoadBalancerPort=80\n&Listeners.member.1.InstancePort=80\n&Listeners.member.1.Protocol=http\n&Listeners.member.1.InstanceProtocol=http\n&Subnets.member.1=subnet-6dec9f03\n&Version=2012-06-01\n&Action=CreateLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><CreateLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<CreateLoadBalancerResult>\n    <DNSName>MyVPCLoadBalancer-1234567890.us-east-1.elb.amazonaws.com</DNSName>\n  </CreateLoadBalancerResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</CreateLoadBalancerResponse>\n </queryresponse>\n            </example> \n            <example>\n                <name>Create an internal TCP load balancer in EC2-VPC</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?Scheme=internal\n&SecurityGroups.member.1=sg-706cb61f\n&LoadBalancerName=MyInternalLoadBalancer\n&Listeners.member.1.LoadBalancerPort=80\n&Listeners.member.1.InstancePort=80\n&Listeners.member.1.Protocol=http\n&Listeners.member.1.InstanceProtocol=http\n&Subnets.member.1=subnet-9edc97f0\n&Version=2012-06-01\n&Action=CreateLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><CreateLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<CreateLoadBalancerResult>\n    <DNSName>internal-MyInternalLoadBalancer-1234567890.us-east-1.elb.amazonaws.com</DNSName>\n  </CreateLoadBalancerResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</CreateLoadBalancerResponse>\n </queryresponse>\n            </example>           \n            <example>\n                <name>Create a TCP load balancer in default VPC</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyDefaultVPCLoadBalancer\n&AvailabilityZones.member.1=sa-east-1b\n&Listeners.member.1.LoadBalancerPort=80\n&Listeners.member.1.InstancePort=80\n&Listeners.member.1.Protocol=http\n&Listeners.member.1.InstanceProtocol=http\n&Version=2012-06-01\n&Action=CreateLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><CreateLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<CreateLoadBalancerResult>\n    <DNSName>MyDefaultVPCLoadBalancer-1234567890.sa.east-1.elb.amazonaws.com</DNSName>\n  </CreateLoadBalancerResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</CreateLoadBalancerResponse>\n </queryresponse>\n            </example>           \n        </examples>        \n    "
+    },
+    "CreateLoadBalancerListeners": {
+      "name": "CreateLoadBalancerListeners",
+      "input": {
+        "shape_name": "CreateLoadBalancerListenerInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The name of the load balancer.  \n        </p>\n    ",
+            "required": true
+          },
+          "Listeners": {
+            "shape_name": "Listeners",
+            "type": "list",
+            "members": {
+              "shape_name": "Listener",
+              "type": "structure",
+              "members": {
+                "Protocol": {
+                  "shape_name": "Protocol",
+                  "type": "string",
+                  "documentation": "\n        <p>\n        Specifies the load balancer transport protocol to use for routing\n        - HTTP, HTTPS, TCP or SSL.\n        This property cannot be modified for the life of the load balancer.\n        </p>\n    ",
+                  "required": true
+                },
+                "LoadBalancerPort": {
+                  "shape_name": "AccessPointPort",
+                  "type": "integer",
+                  "documentation": "\n        <p>\n        Specifies the external load balancer port number.\n        This property cannot be modified for the life of the load balancer.\n        </p>\n    ",
+                  "required": true
+                },
+                "InstanceProtocol": {
+                  "shape_name": "Protocol",
+                  "type": "string",
+                  "documentation": "\n   \t<p>\n   \tSpecifies the protocol to use for routing traffic to back-end instances - HTTP, HTTPS, TCP, or SSL.\n   \tThis property cannot be modified for the life of the load balancer.\n   \t</p>\n   \t<note>\n   \tIf the front-end protocol is HTTP or HTTPS, <code>InstanceProtocol</code> has to be at the same protocol layer,\n   \t    i.e., HTTP or HTTPS. Likewise, if the front-end protocol is TCP or SSL, InstanceProtocol has to be TCP or SSL.\n   \t</note>\n   \t<note>\n   \tIf there is another listener with the same <code>InstancePort</code> whose <code>InstanceProtocol</code> is secure,\n   \ti.e., HTTPS or SSL, the listener's <code>InstanceProtocol</code> has to be secure, i.e., HTTPS or SSL. \n    If there is another listener with the same <code>InstancePort</code> whose <code>InstanceProtocol</code> is HTTP or TCP,\n    the listener's <code>InstanceProtocol</code> must be either HTTP or TCP. \n   \t</note>\n   "
+                },
+                "InstancePort": {
+                  "shape_name": "InstancePort",
+                  "type": "integer",
+                  "min_length": 1,
+                  "max_length": 65535,
+                  "documentation": "\n        <p>\n        Specifies the TCP port on which the instance server is listening.\n        This property cannot be modified for the life of the load balancer.\n        </p>\n    ",
+                  "required": true
+                },
+                "SSLCertificateId": {
+                  "shape_name": "SSLCertificateId",
+                  "type": "string",
+                  "documentation": "\n        <p>\n            The ARN string of the server certificate. \n            To get the ARN of the server certificate, call the AWS Identity and Access Management  \n            <a href=\"http://docs.aws.amazon.com/IAM/latest/APIReference/index.html?API_UploadServerCertificate.html\">UploadServerCertificate   \t\n            </a> API. </p>\n    "
+                }
+              },
+              "documentation": "\n        <p>\n        The Listener data type.\n        </p>\n    "
+            },
+            "documentation": "\n        <p>\n            A list of <code>LoadBalancerPort</code>, \n            <code>InstancePort</code>, \n            <code>Protocol</code>, and \n            <code>SSLCertificateId</code> items.   \t\n        </p>\n    ",
+            "required": true
+          }
+        },
+        "documentation": "\n        <p>\n            The input for the <a>CreateLoadBalancerListeners</a> action.\n        </p>\n       \n    "
+      },
+      "output": {
+        "shape_name": "CreateLoadBalancerListenerOutput",
+        "type": "structure",
+        "members": {
+        },
+        "documentation": "\n        <p>\n            The output for the <a>CreateLoadBalancerListeners</a> action.\n        </p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "DuplicateListenerException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            A <code>Listener</code> already exists for the given \n            <code>LoadBalancerName</code> and <code>LoadBalancerPort</code>, \n            but with a different <code>InstancePort</code>, <code>Protocol</code>, \n            or <code>SSLCertificateId</code>.   \t\n        </p>\n    "
+        },
+        {
+          "shape_name": "CertificateNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified SSL ID does not refer to a valid SSL certificate \n            in the AWS Identity and Access Management Service.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidConfigurationRequestException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        Requested configuration change is invalid.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n            Creates one or more listeners on a load balancer for the specified port. \n            If a listener with the given port does not already exist, it will be created; \n            otherwise, the properties of the new listener must match the properties \n            of the existing listener. \n        </p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/us-add-listener.html\">Add a Listener to Your Load Balancer</a> \n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        \n        <examples>\n            <name>Create HTTPS load balancer listener in EC2-Classic</name>                \n            <queryrequest>https://elasticloadbalancing.amazonaws.com/?Listeners.member.1.Protocol=https\n&Listeners.member.1.LoadBalancerPort=443\n&Listeners.member.1.InstancePort=443\n&Listeners.member.1.InstanceProtocol=https\n&Listeners.member.1.SSLCertificateId=arn:aws:iam::123456789012:server-certificate/servercert\n&LoadBalancerName=MyHTTPSLoadBalancer\n&Version=2012-06-01\n&Action=CreateLoadBalancerListeners\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><CreateLoadBalancerListenersResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n  <CreateLoadBalancerListenersResult/>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</CreateLoadBalancerListenersResponse>\n </queryresponse>\n        </examples>         \n    "
+    },
+    "CreateLoadBalancerPolicy": {
+      "name": "CreateLoadBalancerPolicy",
+      "input": {
+        "shape_name": "CreateLoadBalancerPolicyInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n   \t<p>\n   \tThe name associated with the LoadBalancer for which the policy is being created.   \t\n   \t</p>\n   ",
+            "required": true
+          },
+          "PolicyName": {
+            "shape_name": "PolicyName",
+            "type": "string",
+            "documentation": "\n   \t<p>\n   \tThe name of the load balancer policy being created.\n   \tThe name must be unique within the set of policies for this load balancer.\n   \t</p>\n   ",
+            "required": true
+          },
+          "PolicyTypeName": {
+            "shape_name": "PolicyTypeName",
+            "type": "string",
+            "documentation": "\n   \t<p>\n   \tThe name of the base policy type being used to create this policy.\n   \tTo get the list of policy types, use the <a>DescribeLoadBalancerPolicyTypes</a> action.\n   \t</p>\n   ",
+            "required": true
+          },
+          "PolicyAttributes": {
+            "shape_name": "PolicyAttributes",
+            "type": "list",
+            "members": {
+              "shape_name": "PolicyAttribute",
+              "type": "structure",
+              "members": {
+                "AttributeName": {
+                  "shape_name": "AttributeName",
+                  "type": "string",
+                  "documentation": "\n        <p>\n            The name of the attribute associated with the policy.\n        </p>\n    "
+                },
+                "AttributeValue": {
+                  "shape_name": "AttributeValue",
+                  "type": "string",
+                  "documentation": "\n        <p>\n            The value of the attribute associated with the policy.\n        </p>\n    "
+                }
+              },
+              "documentation": "\n        <p>\n            The <a>PolicyAttribute</a> data type.  This data type contains a key/value pair that defines properties of\n            a specific policy.\n        </p>\n    "
+            },
+            "documentation": "\n   \t<p>\n   \tA list of attributes associated with the policy being created.\n   \t</p>\n   "
+          }
+        },
+        "documentation": "\n   "
+      },
+      "output": {
+        "shape_name": "CreateLoadBalancerPolicyOutput",
+        "type": "structure",
+        "members": {
+        },
+        "documentation": "\n    <p>The output for the <a>CreateLoadBalancerPolicy</a> action.\n    </p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "PolicyTypeNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            One or more of the specified policy types do not exist.\n        </p>\n    "
+        },
+        {
+          "shape_name": "DuplicatePolicyNameException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            Policy with the same name exists for this load balancer.\n            Please choose another name.\n        </p>\n    "
+        },
+        {
+          "shape_name": "TooManyPoliciesException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            Quota for number of policies for this load balancer\n            has already been reached.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidConfigurationRequestException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        Requested configuration change is invalid.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n   \t<p>\n   \tCreates a new policy that contains the necessary attributes depending on the policy type.\n   \tPolicies are settings that are saved for your load balancer and that can be applied to the\n   \tfront-end listener, or the back-end application server, depending on your policy type.\n   \t</p>\n       <examples>      \n           <queryrequest>https://elasticloadbalancing.amazonaws.com/?PolicyAttributes.member.1.AttributeName=ProxyProtocol\n&PolicyAttributes.member.1.AttributeValue=true\n&PolicyTypeName=ProxyProtocolPolicyType\n&LoadBalancerName=my-test-loadbalancer\n&PolicyName=EnableProxyProtocol\n&Version=2012-06-01\n&Action=CreateLoadBalancerPolicy\n&AUTHPARAMS </queryrequest>      \n           <queryresponse><CreateLoadBalancerPolicyResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<CreateLoadBalancerPolicyResult/>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</CreateLoadBalancerPolicyResponse>\n </queryresponse>\n       </examples>   \n       \n   "
+    },
+    "DeleteLoadBalancer": {
+      "name": "DeleteLoadBalancer",
+      "input": {
+        "shape_name": "DeleteAccessPointInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The name associated with the load balancer.            \n        </p>\n    ",
+            "required": true
+          }
+        },
+        "documentation": "\n        <p>\n            The input for the <a>DeleteLoadBalancer</a> action.\n        </p>\n    "
+      },
+      "output": {
+        "shape_name": "DeleteAccessPointOutput",
+        "type": "structure",
+        "members": {
+        },
+        "documentation": "\n        <p>\n            The output for the <a>DeleteLoadBalancer</a> action.\n        </p>\n    "
+      },
+      "errors": [
+
+      ],
+      "documentation": "\n        <p>\n            Deletes the specified load balancer.\n        </p>\n        <p>\n            If attempting to recreate the load balancer,\n            you must reconfigure all the settings.\n            The DNS name associated with a deleted load balancer\n            will no longer be usable.\n            Once deleted, the name and associated DNS record of the\n            load balancer no longer exist and traffic sent to any of its\n            IP addresses will no longer be delivered to back-end instances.            \n        </p>\n        <p>\n            To successfully call this API, you must provide the same\n            account credentials as were used to create the load balancer.\n        </p>\n        <note>\n            By design, if the load balancer does not exist or has already been deleted, a call to\n            <code>DeleteLoadBalancer</code> action still succeeds.\n        </note>\n    "
+    },
+    "DeleteLoadBalancerListeners": {
+      "name": "DeleteLoadBalancerListeners",
+      "input": {
+        "shape_name": "DeleteLoadBalancerListenerInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The mnemonic name associated with the load balancer. \n        </p>\n    ",
+            "required": true
+          },
+          "LoadBalancerPorts": {
+            "shape_name": "Ports",
+            "type": "list",
+            "members": {
+              "shape_name": "AccessPointPort",
+              "type": "integer",
+              "documentation": null
+            },
+            "documentation": "\n        <p>\n            The client port number(s) of the load balancer listener(s) to be removed. \n        </p>\n    ",
+            "required": true
+          }
+        },
+        "documentation": "\n        <p>\n            The input for the <a>DeleteLoadBalancerListeners</a> action.\n        </p>\n    "
+      },
+      "output": {
+        "shape_name": "DeleteLoadBalancerListenerOutput",
+        "type": "structure",
+        "members": {
+        },
+        "documentation": "\n        <p>\n            The output for the <a>DeleteLoadBalancerListeners</a> action.\n        </p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n            Deletes listeners from the load balancer for the specified port.\n        </p>\n        \n    "
+    },
+    "DeleteLoadBalancerPolicy": {
+      "name": "DeleteLoadBalancerPolicy",
+      "input": {
+        "shape_name": "DeleteLoadBalancerPolicyInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The mnemonic name associated with the load balancer.             \n        </p>\n    ",
+            "required": true
+          },
+          "PolicyName": {
+            "shape_name": "PolicyName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The mnemonic name for the policy being deleted. \n        </p>\n    ",
+            "required": true
+          }
+        },
+        "documentation": "\n        <p>\n            The input for the <a>DeleteLoadBalancerPolicy</a> action.\n        </p>\n    "
+      },
+      "output": {
+        "shape_name": "DeleteLoadBalancerPolicyOutput",
+        "type": "structure",
+        "members": {
+        },
+        "documentation": "\n        <p>\n            The output for the <a>DeleteLoadBalancerPolicy</a> action.\n        </p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidConfigurationRequestException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        Requested configuration change is invalid.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n            Deletes a policy from the load balancer. \n            The specified policy must not be enabled for any listeners.\n        </p>\n    "
+    },
+    "DeregisterInstancesFromLoadBalancer": {
+      "name": "DeregisterInstancesFromLoadBalancer",
+      "input": {
+        "shape_name": "DeregisterEndPointsInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The name associated with the load balancer.            \n        </p>\n    ",
+            "required": true
+          },
+          "Instances": {
+            "shape_name": "Instances",
+            "type": "list",
+            "members": {
+              "shape_name": "Instance",
+              "type": "structure",
+              "members": {
+                "InstanceId": {
+                  "shape_name": "InstanceId",
+                  "type": "string",
+                  "documentation": "\n        <p>\n        Provides an EC2 instance ID.\n        </p>\n    "
+                }
+              },
+              "documentation": "\n        <p>\n        The Instance data type.\n        </p>\n    "
+            },
+            "documentation": "\n        <p>\n            A list of EC2 instance IDs consisting of all\n            instances to be deregistered.\n        </p>\n    ",
+            "required": true
+          }
+        },
+        "documentation": "\n        <p>\n            The input for the <a>DeregisterInstancesFromLoadBalancer</a> action.\n        </p>\n    "
+      },
+      "output": {
+        "shape_name": "DeregisterEndPointsOutput",
+        "type": "structure",
+        "members": {
+          "Instances": {
+            "shape_name": "Instances",
+            "type": "list",
+            "members": {
+              "shape_name": "Instance",
+              "type": "structure",
+              "members": {
+                "InstanceId": {
+                  "shape_name": "InstanceId",
+                  "type": "string",
+                  "documentation": "\n        <p>\n        Provides an EC2 instance ID.\n        </p>\n    "
+                }
+              },
+              "documentation": "\n        <p>\n        The Instance data type.\n        </p>\n    "
+            },
+            "documentation": "\n        <p>\n            An updated list of remaining instances\n            registered with the load balancer.\n        </p>\n    "
+          }
+        },
+        "documentation": "\n        <p>\n            The output for the <a>DeregisterInstancesFromLoadBalancer</a> action.\n        </p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidEndPointException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified EndPoint is not valid.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n            Deregisters instances from the load balancer.\n            Once the instance is deregistered,\n            it will stop receiving traffic from the load balancer. \n        </p>\n        <p>\n            In order to successfully call this API,\n            the same account credentials as those\n            used to create the load balancer must be provided.\n        </p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/US_DeReg_Reg_Instances.html\">De-register and Register Amazon EC2 Instances</a> \n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        \n        <p>You can use <a>DescribeLoadBalancers</a> to verify if the instance is deregistered from the load balancer.</p>  \n        <examples>\n            <example>\n                <name>Deregister instance <i>i-e3677ad7</i> from <i>MyHTTPSLoadBalancer</i> load balancer.</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?Instances.member.1.InstanceId=i-e3677ad7\n&LoadBalancerName=MyHTTPSLoadBalancer\n&Version=2012-06-01\n&Action=DeregisterInstancesFromLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><DeregisterInstancesFromLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n  <DeregisterInstancesFromLoadBalancerResult>\n    <Instances>\n      <member>\n        <InstanceId>i-6ec63d59</InstanceId>\n      </member>\n    </Instances>\n  </DeregisterInstancesFromLoadBalancerResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</DeregisterInstancesFromLoadBalancerResponse>\n </queryresponse>\n            </example>\n        </examples>   \n    "
+    },
+    "DescribeInstanceHealth": {
+      "name": "DescribeInstanceHealth",
+      "input": {
+        "shape_name": "DescribeEndPointStateInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n        The name of the load balancer.       \n        </p>\n    ",
+            "required": true
+          },
+          "Instances": {
+            "shape_name": "Instances",
+            "type": "list",
+            "members": {
+              "shape_name": "Instance",
+              "type": "structure",
+              "members": {
+                "InstanceId": {
+                  "shape_name": "InstanceId",
+                  "type": "string",
+                  "documentation": "\n        <p>\n        Provides an EC2 instance ID.\n        </p>\n    "
+                }
+              },
+              "documentation": "\n        <p>\n        The Instance data type.\n        </p>\n    "
+            },
+            "documentation": "\n        <p>\n        A list of instance IDs whose states are being queried.\n        </p>\n    "
+          }
+        },
+        "documentation": "\n        <p>\n        The input for the <a>DescribeEndPointState</a> action.\n        </p>\n    "
+      },
+      "output": {
+        "shape_name": "DescribeEndPointStateOutput",
+        "type": "structure",
+        "members": {
+          "InstanceStates": {
+            "shape_name": "InstanceStates",
+            "type": "list",
+            "members": {
+              "shape_name": "InstanceState",
+              "type": "structure",
+              "members": {
+                "InstanceId": {
+                  "shape_name": "InstanceId",
+                  "type": "string",
+                  "documentation": "\n        <p>\n        Provides an EC2 instance ID.\n        </p>\n    "
+                },
+                "State": {
+                  "shape_name": "State",
+                  "type": "string",
+                  "documentation": "\n        <p>Specifies the current state of the instance.</p>\n        \n        <p>Valid value: <code>InService</code>|<code>OutOfService</code></p>\n    "
+                },
+                "ReasonCode": {
+                  "shape_name": "ReasonCode",
+                  "type": "string",
+                  "documentation": "\n        <p>\n        Provides information about the cause of <i>OutOfService</i> instances.\n        Specifically, it indicates whether the cause is Elastic Load Balancing\n        or the instance behind the load balancer.\n        </p>\n        <p>Valid value: <code>ELB</code>|<code>Instance</code>|<code>N/A</code></p>\n    "
+                },
+                "Description": {
+                  "shape_name": "Description",
+                  "type": "string",
+                  "documentation": "\n        <p>\n            Provides a description of the instance state.\n        </p>\n    "
+                }
+              },
+              "documentation": "\n        <p>\n        The InstanceState data type.\n        </p>\n    "
+            },
+            "documentation": "\n        <p>\n        A list containing health information\n        for the specified instances.\n        </p>\n    "
+          }
+        },
+        "documentation": "\n\t\t<p>\n\t\tThe output for the <a>DescribeInstanceHealth</a> action.\n\t\t</p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidEndPointException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified EndPoint is not valid.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n        Returns the current state of the specified instances registered with the specified load balancer.\n        If no instances are specified, the state of all the instances registered with the load balancer is returned.\n        </p>\n        <note>\n       You must provide the same account credentials\n        as those that were used to create the load balancer.\n        </note>\n        <examples>\n            <example>\n                <name>Description of a healthy (InService) instance</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&Version=2012-06-01\n&Action=DescribeInstanceHealth\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><DescribeInstanceHealthResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n  <DescribeInstanceHealthResult>\n    <InstanceStates>\n      <member>\n        <Description>N/A</Description>\n        <InstanceId>i-90d8c2a5</InstanceId>\n        <State>InService</State>\n        <ReasonCode>N/A</ReasonCode>\n      </member>\n    </InstanceStates>\n  </DescribeInstanceHealthResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</DescribeInstanceHealthResponse>  \n </queryresponse>\n            </example> \n            <example>\n                <name>Description of an instance with registration in progress</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=my-test-loadbalancer\n&Version=2012-06-01\n&Action=DescribeInstanceHealth\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><DescribeInstanceHealthResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n  <DescribeInstanceHealthResult>\n    <InstanceStates>\n      <member>\n        <Description>Instance registration is still in progress.</Description>\n        <InstanceId>i-315b7e51</InstanceId>\n        <State>OutOfService</State>\n        <ReasonCode>ELB</ReasonCode>\n      </member>\n    </InstanceStates>\n  </DescribeInstanceHealthResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</DescribeInstanceHealthResponse>  \n </queryresponse>\n            </example> \n            <example>\n                <name>Description of an unhealthy (OutOfService) instance</name>              \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer-2\n&Version=2012-06-01\n&Action=DescribeInstanceHealth\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><DescribeInstanceHealthResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n  <DescribeInstanceHealthResult>\n    <InstanceStates>\n      <member>\n        <Description>Instance has failed at least the UnhealthyThreshold number of health checks consecutively.</Description>\n        <InstanceId>i-fda142c9</InstanceId>\n        <State>OutOfService</State>\n        <ReasonCode>Instance</ReasonCode>\n      </member>\n    </InstanceStates>\n  </DescribeInstanceHealthResult>\n  <ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</DescribeInstanceHealthResponse>\n </queryresponse>\n            </example>             \n        </examples>   \n    "
+    },
+    "DescribeLoadBalancerAttributes": {
+      "name": "DescribeLoadBalancerAttributes",
+      "input": {
+        "shape_name": "DescribeLoadBalancerAttributesInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n      <p>The name of the load balancer.</p>  \n    ",
+            "required": true
+          }
+        },
+        "documentation": "\n        <p>The input for the <a>DescribeLoadBalancerAttributes</a> action.</p>  \n    "
+      },
+      "output": {
+        "shape_name": "DescribeLoadBalancerAttributesOutput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerAttributes": {
+            "shape_name": "LoadBalancerAttributes",
+            "type": "structure",
+            "members": {
+              "CrossZoneLoadBalancing": {
+                "shape_name": "CrossZoneLoadBalancing",
+                "type": "structure",
+                "members": {
+                  "Enabled": {
+                    "shape_name": "CrossZoneLoadBalancingEnabled",
+                    "type": "boolean",
+                    "documentation": "\n        <p>Specifies whether cross-zone load balancing is enabled for the load balancer.</p>\n    ",
+                    "required": true
+                  }
+                },
+                "documentation": "\n       <p>The name of the load balancer attribute.</p> \n    "
+              }
+            },
+            "documentation": "\n      <p>The load balancer attributes structure.</p>  \n    "
+          }
+        },
+        "documentation": "\n        <p>The following element is returned in a structure named <code>DescribeLoadBalancerAttributesResult</code>.</p>   \n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "LoadBalancerAttributeNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>The specified load balancer attribute could not be found.</p>  \n    "
+        }
+      ],
+      "documentation": "\n        <p>Returns detailed information about all of the attributes associated with the specified load balancer.</p>   \n    "
+    },
+    "DescribeLoadBalancerPolicies": {
+      "name": "DescribeLoadBalancerPolicies",
+      "input": {
+        "shape_name": "DescribeLoadBalancerPoliciesInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n   \t<p>\n   \tThe mnemonic name associated with the load balancer.\n   \tIf no name is specified, the operation returns the attributes of either all the sample policies pre-defined by Elastic Load Balancing or the specified sample polices.\n   \t</p>\n   "
+          },
+          "PolicyNames": {
+            "shape_name": "PolicyNames",
+            "type": "list",
+            "members": {
+              "shape_name": "PolicyName",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n   \t<p>\n   \t  The names of load balancer policies you've created or Elastic Load Balancing sample policy names.\n   \t</p>\n   "
+          }
+        },
+        "documentation": "\n   "
+      },
+      "output": {
+        "shape_name": "DescribeLoadBalancerPoliciesOutput",
+        "type": "structure",
+        "members": {
+          "PolicyDescriptions": {
+            "shape_name": "PolicyDescriptions",
+            "type": "list",
+            "members": {
+              "shape_name": "PolicyDescription",
+              "type": "structure",
+              "members": {
+                "PolicyName": {
+                  "shape_name": "PolicyName",
+                  "type": "string",
+                  "documentation": "\n        <p>\n            The name of the policy associated with the load balancer.\n        </p>\n    "
+                },
+                "PolicyTypeName": {
+                  "shape_name": "PolicyTypeName",
+                  "type": "string",
+                  "documentation": "\n        <p>\n            The name of the policy type associated with the load balancer.\n        </p>\n    "
+                },
+                "PolicyAttributeDescriptions": {
+                  "shape_name": "PolicyAttributeDescriptions",
+                  "type": "list",
+                  "members": {
+                    "shape_name": "PolicyAttributeDescription",
+                    "type": "structure",
+                    "members": {
+                      "AttributeName": {
+                        "shape_name": "AttributeName",
+                        "type": "string",
+                        "documentation": "\n        <p>\n            The name of the attribute associated with the policy.\n        </p>\n    "
+                      },
+                      "AttributeValue": {
+                        "shape_name": "AttributeValue",
+                        "type": "string",
+                        "documentation": "\n        <p>\n            The value of the attribute associated with the policy.\n        </p>\n    "
+                      }
+                    },
+                    "documentation": "\n        <p>\n            The <code>PolicyAttributeDescription</code> data type.\n            This data type is used to describe the attributes and values\n            associated with a policy.\n        </p>\n    "
+                  },
+                  "documentation": "\n        <p>\n            A list of policy attribute description structures.\n        </p>\n    "
+                }
+              },
+              "documentation": "\n        <p>\n            The <code>PolicyDescription</code> data type.\n        </p>\n    "
+            },
+            "documentation": "\n   \t<p>\n   \tA list of policy description structures.\n   \t</p>\n   "
+          }
+        },
+        "documentation": "\n     <p>The output for the <a>DescribeLoadBalancerPolicies</a> action.\n     </p>\n   "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "PolicyNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        One or more specified policies were not found.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n   <p>Returns detailed descriptions of the policies.\n   If you specify a load balancer name, the action returns the descriptions of all the policies created for the load balancer.\n   If you specify a policy name associated with your load balancer, the action returns the description of that policy. \n   If you don't specify a load balancer name, the action returns descriptions of the specified sample policies, or descriptions of all the sample policies.\n   The names of the sample policies have the <code>ELBSample-</code> prefix.\n   </p>\n       <examples>\n           <example>\n               <name>Description of all the policies associated with a load balancer</name>              \n               <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&Version=2012-06-01\n&Action=DescribeLoadBalancerPolicies\n&AUTHPARAMS </queryrequest>      \n               <queryresponse><DescribeLoadBalancerPoliciesResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n  <DescribeLoadBalancerPoliciesResult>\n    <PolicyDescriptions>\n      <member>\n        <PolicyName>MyDurationStickyPolicy</PolicyName>\n        <PolicyTypeName>LBCookieStickinessPolicyType</PolicyTypeName>\n        <PolicyAttributeDescriptions>\n          <member>\n            <AttributeName>CookieExpirationPeriod</AttributeName>\n            <AttributeValue>60</AttributeValue>\n          </member>\n        </PolicyAttributeDescriptions>\n      </member>\n      <member>\n        <PolicyName>MyAppStickyPolicy</PolicyName>\n        <PolicyTypeName>AppCookieStickinessPolicyType</PolicyTypeName>\n        <PolicyAttributeDescriptions>\n          <member>\n            <AttributeName>CookieName</AttributeName>\n            <AttributeValue>MyAppCookie</AttributeValue>\n          </member>\n        </PolicyAttributeDescriptions>\n      </member>\n    </PolicyDescriptions>\n  </DescribeLoadBalancerPoliciesResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</DescribeLoadBalancerPoliciesResponse>\n </queryresponse>\n           </example> \n           <example>\n               <name>Description of a specified policy associated with the load balancer</name>                \n               <queryrequest>https://elasticloadbalancing.amazonaws.com/?PolicyNames.member.1=EnableProxyProtocol\n&LoadBalancerName=my-test-loadbalancer\n&Version=2012-06-01\n&Action=DescribeLoadBalancerPolicies\n&AUTHPARAMS </queryrequest>      \n               <queryresponse><DescribeLoadBalancerPoliciesResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n  <DescribeLoadBalancerPoliciesResult>\n   <PolicyDescriptions>\n      <member>\n        <PolicyName>EnableProxyProtocol</PolicyName>\n        <PolicyTypeName>ProxyProtocolPolicyType</PolicyTypeName>\n        <PolicyAttributeDescriptions>\n          <member>\n            <AttributeName>ProxyProtocol</AttributeName>\n            <AttributeValue>true</AttributeValue>\n          </member>\n        </PolicyAttributeDescriptions>\n      </member>\n    </PolicyDescriptions> \n  </DescribeLoadBalancerPoliciesResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</DescribeLoadBalancerPoliciesResponse>\n </queryresponse>\n           </example> \n       </examples>   \n   "
+    },
+    "DescribeLoadBalancerPolicyTypes": {
+      "name": "DescribeLoadBalancerPolicyTypes",
+      "input": {
+        "shape_name": "DescribeLoadBalancerPolicyTypesInput",
+        "type": "structure",
+        "members": {
+          "PolicyTypeNames": {
+            "shape_name": "PolicyTypeNames",
+            "type": "list",
+            "members": {
+              "shape_name": "PolicyTypeName",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n   \t<p>\n   \tSpecifies the name of the policy types.  If no names are specified,\n   \treturns the description of all\n   \tthe policy types defined by Elastic Load Balancing service.\n   \t</p>\n   "
+          }
+        },
+        "documentation": "\n   \t"
+      },
+      "output": {
+        "shape_name": "DescribeLoadBalancerPolicyTypesOutput",
+        "type": "structure",
+        "members": {
+          "PolicyTypeDescriptions": {
+            "shape_name": "PolicyTypeDescriptions",
+            "type": "list",
+            "members": {
+              "shape_name": "PolicyTypeDescription",
+              "type": "structure",
+              "members": {
+                "PolicyTypeName": {
+                  "shape_name": "PolicyTypeName",
+                  "type": "string",
+                  "documentation": "\n        <p>\n            The name of the policy type.\n        </p>\n    "
+                },
+                "Description": {
+                  "shape_name": "Description",
+                  "type": "string",
+                  "documentation": "\n        <p>\n            A human-readable description of the policy type.\n        </p>\n    "
+                },
+                "PolicyAttributeTypeDescriptions": {
+                  "shape_name": "PolicyAttributeTypeDescriptions",
+                  "type": "list",
+                  "members": {
+                    "shape_name": "PolicyAttributeTypeDescription",
+                    "type": "structure",
+                    "members": {
+                      "AttributeName": {
+                        "shape_name": "AttributeName",
+                        "type": "string",
+                        "documentation": "\n        <p>\n            The name of the attribute associated with the policy type.\n        </p>\n    "
+                      },
+                      "AttributeType": {
+                        "shape_name": "AttributeType",
+                        "type": "string",
+                        "documentation": "\n        <p>\n            The type of attribute.  For example, Boolean, Integer, etc.\n        </p>\n    "
+                      },
+                      "Description": {
+                        "shape_name": "Description",
+                        "type": "string",
+                        "documentation": "\n        <p>\n            A human-readable description of the attribute.\n        </p>\n    "
+                      },
+                      "DefaultValue": {
+                        "shape_name": "DefaultValue",
+                        "type": "string",
+                        "documentation": "\n        <p>\n            The default value of the attribute, if applicable.\n        </p>\n    "
+                      },
+                      "Cardinality": {
+                        "shape_name": "Cardinality",
+                        "type": "string",
+                        "documentation": "\n        <p>\n            The cardinality of the attribute.  Valid Values:\n            <ul>\n                <li>ONE(1) : Single value required</li>\n                <li>ZERO_OR_ONE(0..1) : Up to one value can be supplied</li>\n                <li>ZERO_OR_MORE(0..*) : Optional. Multiple values are allowed</li>\n                <li>ONE_OR_MORE(1..*0) : Required.  Multiple values are allowed</li>\n            </ul>\n        </p>\n    "
+                      }
+                    },
+                    "documentation": "\n        <p>\n            The <code>PolicyAttributeTypeDescription</code> data type. This data type is used to describe values\n            that are acceptable for the policy attribute.\n        </p>\n    "
+                  },
+                  "documentation": "\n        <p>\n            The description of the policy attributes associated with the load balancer policies defined by the Elastic Load Balancing service.\n        </p>\n    "
+                }
+              },
+              "documentation": "\n        <p>\n            The <a>PolicyTypeDescription</a> data type.\n        </p>\n    "
+            },
+            "documentation": "\n   \t<p>\n   \tList of policy type description structures of the specified policy type.\n   \tIf no policy type names are specified,\n   \treturns the description of all the policy types defined by Elastic Load Balancing service.\n   \t</p>\n   "
+          }
+        },
+        "documentation": "\n   \t<p>\n   \tThe output for the <a>DescribeLoadBalancerPolicyTypes</a> action.\n   \t</p>\n   "
+      },
+      "errors": [
+        {
+          "shape_name": "PolicyTypeNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            One or more of the specified policy types do not exist.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n   \t<p>\n   \tReturns meta-information on the specified load balancer policies defined by the\n   \tElastic Load Balancing service.  The policy types that are\n   \treturned from this action can be used in a <a>CreateLoadBalancerPolicy</a> action to\n   \tinstantiate specific policy configurations that will be applied to a load balancer.\n   \t</p>\n       <examples>\n          <example>\n            <name>Partial description of all the policy types defined by Elastic Load Balancing for your account</name>              \n           <queryrequest>https://elasticloadbalancing.amazonaws.com/?Version=2012-06-01\n&Action=DescribeLoadBalancerPolicyTypes\n&AUTHPARAMS </queryrequest>      \n           <queryresponse><DescribeLoadBalancerPolicyTypesResponse  xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<DescribeLoadBalancerPolicyTypesResult>\n  <PolicyTypeName>SSLNegotiationPolicyType</PolicyTypeName>\n       < . . . .>\n   <PolicyTypeName>BackendServerAuthenticationPolicyType</PolicyTypeName>\n      < . . . .>\n   <PolicyTypeName>PublicKeyPolicyType</PolicyTypeName>\n     < . . . .>\n   <PolicyTypeName>AppCookieStickinessPolicyType</PolicyTypeName>\n   < . . . .>\n   <PolicyTypeName>LBCookieStickinessPolicyType</PolicyTypeName>\n     < . . . .>\n   <PolicyTypeName>ProxyProtocolPolicyType</PolicyTypeName>\n     < . . . .>\n</DescribeLoadBalancerPolicyTypesResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</ DescribeLoadBalancerPolicyTypesResponse >\t\n </queryresponse>\n          </example> \n           <example>\n               <name>Description of ProxyProtocolPolicyType</name>                \n               <queryrequest>https://elasticloadbalancing.amazonaws.com/?PolicyTypeNames.member.1=ProxyProtocolPolicyType\n&Version=2012-06-01\n&Action=DescribeLoadBalancerPolicyTypes\n&AUTHPARAMS </queryrequest>      \n               <queryresponse><DescribeLoadBalancerPolicyTypesResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n  <DescribeLoadBalancerPolicyTypesResult>\n    <PolicyTypeDescriptions>\n      <member>\n        <PolicyAttributeTypeDescriptions>\n          <member>\n            <AttributeName>ProxyProtocol</AttributeName>\n            <AttributeType>Boolean</AttributeType>\n            <Cardinality>ONE</Cardinality>\n          </member>\n        </PolicyAttributeTypeDescriptions>\n        <PolicyTypeName>ProxyProtocolPolicyType</PolicyTypeName>\n        <Description>Policy that controls whether to include the IP address and port of the originating request for TCP messages.\n        This policy operates on TCP/SSL listeners only</Description>\n      </member>\n    </PolicyTypeDescriptions>\n  </DescribeLoadBalancerPolicyTypesResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</DescribeLoadBalancerPolicyTypesResponse>\n </queryresponse>\n           </example> \n       </examples>   \n     \n   "
+    },
+    "DescribeLoadBalancers": {
+      "name": "DescribeLoadBalancers",
+      "input": {
+        "shape_name": "DescribeAccessPointsInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerNames": {
+            "shape_name": "LoadBalancerNames",
+            "type": "list",
+            "members": {
+              "shape_name": "AccessPointName",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n        <p>\n            A list of load balancer names associated with the account.\n        </p>\n    "
+          },
+          "Marker": {
+            "shape_name": "Marker",
+            "type": "string",
+            "documentation": "\n        <p>\n            An optional parameter reserved for future use.\n        </p>\n    "
+          }
+        },
+        "documentation": "\n\t\t<p>\n\t\tThe input for the <a>DescribeLoadBalancers</a> action.\n\t\t</p>\n    "
+      },
+      "output": {
+        "shape_name": "DescribeAccessPointsOutput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerDescriptions": {
+            "shape_name": "LoadBalancerDescriptions",
+            "type": "list",
+            "members": {
+              "shape_name": "LoadBalancerDescription",
+              "type": "structure",
+              "members": {
+                "LoadBalancerName": {
+                  "shape_name": "AccessPointName",
+                  "type": "string",
+                  "documentation": "\n        <p>\n        Specifies the name associated with the load balancer.\n        </p>\n    "
+                },
+                "DNSName": {
+                  "shape_name": "DNSName",
+                  "type": "string",
+                  "documentation": "\n        <p>\n        Specifies the external DNS name associated with the load balancer.\n        </p>\n    "
+                },
+                "CanonicalHostedZoneName": {
+                  "shape_name": "DNSName",
+                  "type": "string",
+                  "documentation": "\n        <p>\n        Provides the name of the Amazon Route 53 hosted zone that is associated\n        with the load balancer. For information on how to associate your load\n        balancer with a hosted zone, go to <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/using-domain-names-with-elb.html\">Using Domain Names With Elastic Load Balancing</a>\n        in the <i>Elastic Load Balancing Developer Guide</i>.\n        </p>\n    "
+                },
+                "CanonicalHostedZoneNameID": {
+                  "shape_name": "DNSName",
+                  "type": "string",
+                  "documentation": "\n        <p>\n        Provides the ID of the Amazon Route 53 hosted zone name that is associated\n        with the load balancer. For information on how to associate or disassociate your load\n        balancer with a hosted zone, go to <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/using-domain-names-with-elb.html\">Using Domain Names With Elastic Load Balancing</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>. \n        </p>\n    "
+                },
+                "ListenerDescriptions": {
+                  "shape_name": "ListenerDescriptions",
+                  "type": "list",
+                  "members": {
+                    "shape_name": "ListenerDescription",
+                    "type": "structure",
+                    "members": {
+                      "Listener": {
+                        "shape_name": "Listener",
+                        "type": "structure",
+                        "members": {
+                          "Protocol": {
+                            "shape_name": "Protocol",
+                            "type": "string",
+                            "documentation": "\n        <p>\n        Specifies the load balancer transport protocol to use for routing\n        - HTTP, HTTPS, TCP or SSL.\n        This property cannot be modified for the life of the load balancer.\n        </p>\n    ",
+                            "required": true
+                          },
+                          "LoadBalancerPort": {
+                            "shape_name": "AccessPointPort",
+                            "type": "integer",
+                            "documentation": "\n        <p>\n        Specifies the external load balancer port number.\n        This property cannot be modified for the life of the load balancer.\n        </p>\n    ",
+                            "required": true
+                          },
+                          "InstanceProtocol": {
+                            "shape_name": "Protocol",
+                            "type": "string",
+                            "documentation": "\n   \t<p>\n   \tSpecifies the protocol to use for routing traffic to back-end instances - HTTP, HTTPS, TCP, or SSL.\n   \tThis property cannot be modified for the life of the load balancer.\n   \t</p>\n   \t<note>\n   \tIf the front-end protocol is HTTP or HTTPS, <code>InstanceProtocol</code> has to be at the same protocol layer,\n   \t    i.e., HTTP or HTTPS. Likewise, if the front-end protocol is TCP or SSL, InstanceProtocol has to be TCP or SSL.\n   \t</note>\n   \t<note>\n   \tIf there is another listener with the same <code>InstancePort</code> whose <code>InstanceProtocol</code> is secure,\n   \ti.e., HTTPS or SSL, the listener's <code>InstanceProtocol</code> has to be secure, i.e., HTTPS or SSL. \n    If there is another listener with the same <code>InstancePort</code> whose <code>InstanceProtocol</code> is HTTP or TCP,\n    the listener's <code>InstanceProtocol</code> must be either HTTP or TCP. \n   \t</note>\n   "
+                          },
+                          "InstancePort": {
+                            "shape_name": "InstancePort",
+                            "type": "integer",
+                            "min_length": 1,
+                            "max_length": 65535,
+                            "documentation": "\n        <p>\n        Specifies the TCP port on which the instance server is listening.\n        This property cannot be modified for the life of the load balancer.\n        </p>\n    ",
+                            "required": true
+                          },
+                          "SSLCertificateId": {
+                            "shape_name": "SSLCertificateId",
+                            "type": "string",
+                            "documentation": "\n        <p>\n            The ARN string of the server certificate. \n            To get the ARN of the server certificate, call the AWS Identity and Access Management  \n            <a href=\"http://docs.aws.amazon.com/IAM/latest/APIReference/index.html?API_UploadServerCertificate.html\">UploadServerCertificate   \t\n            </a> API. </p>\n    "
+                          }
+                        },
+                        "documentation": "\n        <p>\n        The Listener data type.\n        </p>\n    "
+                      },
+                      "PolicyNames": {
+                        "shape_name": "PolicyNames",
+                        "type": "list",
+                        "members": {
+                          "shape_name": "PolicyName",
+                          "type": "string",
+                          "documentation": null
+                        },
+                        "documentation": "\n        <p>\n            A list of policies enabled for this listener. \n            An empty list indicates that no policies are enabled.\n        </p>\n    "
+                      }
+                    },
+                    "documentation": "\n        <p>\n            The ListenerDescription data type. \n        </p>\n    "
+                  },
+                  "documentation": "\n        <p>\n        LoadBalancerPort, InstancePort, Protocol, InstanceProtocol, and PolicyNames are returned\n        in a list of tuples in the ListenerDescriptions element.\n        </p>\n    "
+                },
+                "Policies": {
+                  "shape_name": "Policies",
+                  "type": "structure",
+                  "members": {
+                    "AppCookieStickinessPolicies": {
+                      "shape_name": "AppCookieStickinessPolicies",
+                      "type": "list",
+                      "members": {
+                        "shape_name": "AppCookieStickinessPolicy",
+                        "type": "structure",
+                        "members": {
+                          "PolicyName": {
+                            "shape_name": "PolicyName",
+                            "type": "string",
+                            "documentation": "\n        <p>The mnemonic name for the policy being created. The name must be unique within a set of policies for this load balancer.\n        </p>\n    "
+                          },
+                          "CookieName": {
+                            "shape_name": "CookieName",
+                            "type": "string",
+                            "documentation": "\n        <p>The name of the application cookie used for stickiness.\n        </p>\n        \n    "
+                          }
+                        },
+                        "documentation": "\n        <p>The AppCookieStickinessPolicy data type.\n        </p>\n    "
+                      },
+                      "documentation": "\n        <p>\n            A list of the <a>AppCookieStickinessPolicy</a> objects created with <a>CreateAppCookieStickinessPolicy</a>.\n        </p>\n    "
+                    },
+                    "LBCookieStickinessPolicies": {
+                      "shape_name": "LBCookieStickinessPolicies",
+                      "type": "list",
+                      "members": {
+                        "shape_name": "LBCookieStickinessPolicy",
+                        "type": "structure",
+                        "members": {
+                          "PolicyName": {
+                            "shape_name": "PolicyName",
+                            "type": "string",
+                            "documentation": "\n        <p>The name for the policy being created. The name must be unique within the set of policies for this load balancer.\n        </p>\n    "
+                          },
+                          "CookieExpirationPeriod": {
+                            "shape_name": "CookieExpirationPeriod",
+                            "type": "long",
+                            "documentation": "\n        <p>The time period in seconds after which the cookie should be considered stale. Not specifying this parameter indicates that the stickiness session will last for the duration of the browser session.\n        </p>\n    "
+                          }
+                        },
+                        "documentation": "\n        <p>The LBCookieStickinessPolicy data type.\n        </p>\n    "
+                      },
+                      "documentation": "\n        <p>\n            A list of <a>LBCookieStickinessPolicy</a> objects created with <a>CreateAppCookieStickinessPolicy</a>.\n        </p>\n    "
+                    },
+                    "OtherPolicies": {
+                      "shape_name": "PolicyNames",
+                      "type": "list",
+                      "members": {
+                        "shape_name": "PolicyName",
+                        "type": "string",
+                        "documentation": null
+                      },
+                      "documentation": "\n        <p>\n            A list of policy names other than the stickiness policies.\n        </p>\n    "
+                    }
+                  },
+                  "documentation": "\n   \t\t<p>\n   \t\tProvides a list of policies defined for the load balancer.\n   \t\t</p>\n   \t"
+                },
+                "BackendServerDescriptions": {
+                  "shape_name": "BackendServerDescriptions",
+                  "type": "list",
+                  "members": {
+                    "shape_name": "BackendServerDescription",
+                    "type": "structure",
+                    "members": {
+                      "InstancePort": {
+                        "shape_name": "InstancePort",
+                        "type": "integer",
+                        "min_length": 1,
+                        "max_length": 65535,
+                        "documentation": "\n        <p>\n            Provides the port on which the back-end server is listening.\n        </p>\n    "
+                      },
+                      "PolicyNames": {
+                        "shape_name": "PolicyNames",
+                        "type": "list",
+                        "members": {
+                          "shape_name": "PolicyName",
+                          "type": "string",
+                          "documentation": null
+                        },
+                        "documentation": "\n        <p>\n            Provides a list of policy names enabled for the back-end server.\n        </p>\n    "
+                      }
+                    },
+                    "documentation": "\n        <p>\n            This data type is used as a response element in the <a>DescribeLoadBalancers</a> action to describe the configuration of the back-end server.\n        </p>\n    "
+                  },
+                  "documentation": "\n        <p>\n            Contains a list of back-end server descriptions.\n        </p>\n    "
+                },
+                "AvailabilityZones": {
+                  "shape_name": "AvailabilityZones",
+                  "type": "list",
+                  "members": {
+                    "shape_name": "AvailabilityZone",
+                    "type": "string",
+                    "documentation": null
+                  },
+                  "documentation": "\n        <p>\n        Specifies a list of Availability Zones.\n        </p>\n    "
+                },
+                "Subnets": {
+                  "shape_name": "Subnets",
+                  "type": "list",
+                  "members": {
+                    "shape_name": "SubnetId",
+                    "type": "string",
+                    "documentation": null
+                  },
+                  "documentation": "\n      <p>\n          Provides a list of VPC subnet IDs for the load balancer.\n      </p>  \n    "
+                },
+                "VPCId": {
+                  "shape_name": "VPCId",
+                  "type": "string",
+                  "documentation": "\n      <p>\n          Provides the ID of the VPC attached to the load balancer.\n      </p>  \n    "
+                },
+                "Instances": {
+                  "shape_name": "Instances",
+                  "type": "list",
+                  "members": {
+                    "shape_name": "Instance",
+                    "type": "structure",
+                    "members": {
+                      "InstanceId": {
+                        "shape_name": "InstanceId",
+                        "type": "string",
+                        "documentation": "\n        <p>\n        Provides an EC2 instance ID.\n        </p>\n    "
+                      }
+                    },
+                    "documentation": "\n        <p>\n        The Instance data type.\n        </p>\n    "
+                  },
+                  "documentation": "\n        <p>\n        Provides a list of EC2 instance IDs for the load balancer.\n        </p>\n    "
+                },
+                "HealthCheck": {
+                  "shape_name": "HealthCheck",
+                  "type": "structure",
+                  "members": {
+                    "Target": {
+                      "shape_name": "HealthCheckTarget",
+                      "type": "string",
+                      "documentation": "\n        <p>\n        Specifies the instance being checked. The protocol is either TCP, HTTP, HTTPS, or SSL.\n        The range of valid ports is one (1) through 65535.\n        </p>\n        <note>\n            <p>\n            TCP is the default, specified as a TCP: port pair,\n            for example \"TCP:5000\". In this case a healthcheck simply\n            attempts to open a TCP connection to the instance on the\n            specified port. Failure to connect within the configured\n            timeout is considered unhealthy.\n            </p>\n            <p>SSL is also specified as SSL: port pair, for example, SSL:5000.</p>\n            <p>\n            For HTTP or HTTPS protocol, the situation is different. You have to include a ping path in the string. HTTP is specified\n            as a HTTP:port;/;PathToPing; grouping, for example\n            \"HTTP:80/weather/us/wa/seattle\". In this case, a HTTP GET\n            request is issued to the instance on the given port and path.\n            Any answer other than \"200 OK\" within the timeout period is\n            considered unhealthy.\n            </p>\n            <p>\n            The total length of the HTTP ping target needs to\n            be 1024 16-bit Unicode characters or less.\n            </p>\n        </note>\n    ",
+                      "required": true
+                    },
+                    "Interval": {
+                      "shape_name": "HealthCheckInterval",
+                      "type": "integer",
+                      "min_length": 1,
+                      "max_length": 300,
+                      "documentation": "\n        <p>\n        Specifies the approximate interval, in seconds,\n        between health checks of an individual instance.\n        </p>\n    ",
+                      "required": true
+                    },
+                    "Timeout": {
+                      "shape_name": "HealthCheckTimeout",
+                      "type": "integer",
+                      "min_length": 1,
+                      "max_length": 300,
+                      "documentation": "\n        <p>\n        Specifies the amount of time, in seconds, during which no response\n        means a failed health probe.\n        </p>\n        <note>\n        This value must be less than the <i>Interval</i> value.\n        </note>\n    ",
+                      "required": true
+                    },
+                    "UnhealthyThreshold": {
+                      "shape_name": "UnhealthyThreshold",
+                      "type": "integer",
+                      "min_length": 2,
+                      "max_length": 10,
+                      "documentation": "\n        <p>\n        Specifies the number of consecutive health probe failures required\n        before moving the instance to the <i>Unhealthy</i> state.\n        </p>\n    ",
+                      "required": true
+                    },
+                    "HealthyThreshold": {
+                      "shape_name": "HealthyThreshold",
+                      "type": "integer",
+                      "min_length": 2,
+                      "max_length": 10,
+                      "documentation": "\n        <p>\n        Specifies the number of consecutive health probe successes required before\n        moving the instance to the <i>Healthy</i> state.\n        </p>\n    ",
+                      "required": true
+                    }
+                  },
+                  "documentation": "\n        <p>\n        Specifies information regarding the\n        various health probes conducted on the load balancer.\n        </p>\n    "
+                },
+                "SourceSecurityGroup": {
+                  "shape_name": "SourceSecurityGroup",
+                  "type": "structure",
+                  "members": {
+                    "OwnerAlias": {
+                      "shape_name": "SecurityGroupOwnerAlias",
+                      "type": "string",
+                      "documentation": "\n        <p>\n            Owner of the source security group. Use this value for the \n            <code>--source-group-user</code> parameter of the <code>ec2-authorize</code>\n            command in the Amazon EC2 command line tool.\n        </p>\n    "
+                    },
+                    "GroupName": {
+                      "shape_name": "SecurityGroupName",
+                      "type": "string",
+                      "documentation": "\n        <p>\n            Name of the source security group. Use this value for the \n            <code>--source-group</code> parameter of the <code>ec2-authorize</code>\n            command in the Amazon EC2 command line tool.\n        </p>\n    "
+                    }
+                  },
+                  "documentation": "\n        <p>\n            The security group that you can use as part of your inbound rules for \n            your load balancer's back-end Amazon EC2 application instances.  \n            To only allow traffic from load balancers, add a security group rule to your back end instance that specifies this\n            source security group as the inbound source. \n        </p>\n    "
+                },
+                "SecurityGroups": {
+                  "shape_name": "SecurityGroups",
+                  "type": "list",
+                  "members": {
+                    "shape_name": "SecurityGroupId",
+                    "type": "string",
+                    "documentation": null
+                  },
+                  "documentation": "\n       <p>\n          The security groups the load balancer is a member of (VPC only).\n       </p> \n    "
+                },
+                "CreatedTime": {
+                  "shape_name": "CreatedTime",
+                  "type": "timestamp",
+                  "documentation": "\n        <p>\n        Provides the date and time the load balancer was created.\n        </p>\n    "
+                },
+                "Scheme": {
+                  "shape_name": "LoadBalancerScheme",
+                  "type": "string",
+                  "documentation": "\n       <p>Specifies the type of load balancer.</p>\n\n        <p>If the <code>Scheme</code>  is <code>internet-facing</code>, the load balancer\n        has a publicly resolvable DNS name that resolves to public IP addresses.</p>\n        \n        <p>If the <code>Scheme</code>  is <code>internal</code>, the load balancer has a publicly resolvable\n           DNS name that resolves to private IP addresses.</p>\n          \n         <p> This option is only available for load balancers attached to an Amazon VPC. </p> \n    "
+                }
+              },
+              "documentation": "\n        <p>\n       Contains the result of a successful invocation of <a>DescribeLoadBalancers</a>.\n        </p>\n    "
+            },
+            "documentation": "\n        <p>\n            A list of load balancer description structures.\n        </p>\n    "
+          },
+          "NextMarker": {
+            "shape_name": "Marker",
+            "type": "string",
+            "documentation": "\n        <p>\n            An optional parameter reserved for future use.\n        </p>\n    "
+          }
+        },
+        "documentation": "\n\t\t<p>\n\t\tThe output for the <a>DescribeLoadBalancers</a> action.\n\t\t</p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n        Returns detailed configuration information for all the load balancers created for the account.\n        If you specify load balancer names, the action returns configuration information of the specified\n        load balancers. </p>\n        <note>\n            In order to retrieve this information, you must provide the same account credentials \n            that was used to create the load balancer.</note>\n        <examples>\n            <example>\n                <name>Description of a specified load balancer</name>              \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerNames.member.1=MyLoadBalancer\n&Version=2012-06-01\n&Action=DescribeLoadBalancers\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><DescribeLoadBalancersResult>\n    <LoadBalancerDescriptions>\n      <member>\n        <SecurityGroups/>\n        <LoadBalancerName>MyLoadBalancer</LoadBalancerName>\n        <CreatedTime>2013-05-24T21:15:31.280Z</CreatedTime>\n        <HealthCheck>\n          <Interval>90</Interval>\n          <Target>HTTP:80/</Target>\n          <HealthyThreshold>2</HealthyThreshold>\n          <Timeout>60</Timeout>\n          <UnhealthyThreshold>10</UnhealthyThreshold>\n        </HealthCheck>\n        <ListenerDescriptions>\n          <member>\n            <PolicyNames/>\n            <Listener>\n              <Protocol>HTTP</Protocol>\n              <LoadBalancerPort>80</LoadBalancerPort>\n              <InstanceProtocol>HTTP</InstanceProtocol>\n              <InstancePort>80</InstancePort>\n            </Listener>\n          </member>\n        </ListenerDescriptions>\n        <Instances>\n          <member>\n            <InstanceId>i-e4cbe38d</InstanceId>\n          </member>\n        </Instances>\n        <Policies>\n          <AppCookieStickinessPolicies/>\n          <OtherPolicies/>\n          <LBCookieStickinessPolicies/>\n        </Policies>\n        <AvailabilityZones>\n          <member>us-east-1a</member>\n        </AvailabilityZones>\n        <CanonicalHostedZoneNameID>ZZZZZZZZZZZ123X</CanonicalHostedZoneNameID>\n        <CanonicalHostedZoneName>MyLoadBalancer-123456789.us-east-1.elb.amazonaws.com</CanonicalHostedZoneName>\n        <Scheme>internet-facing</Scheme>\n        <SourceSecurityGroup>\n          <OwnerAlias>amazon-elb</OwnerAlias>\n          <GroupName>amazon-elb-sg</GroupName>\n        </SourceSecurityGroup>\n        <DNSName>MyLoadBalancer-123456789.us-east-1.elb.amazonaws.com</DNSName>\n        <BackendServerDescriptions/>\n        <Subnets/>\n      </member>\n    </LoadBalancerDescriptions>\n  </DescribeLoadBalancersResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</ DescribeLoadBalancerPolicyTypesResponse >\t\n </queryresponse>\n            </example>\n     </examples>            \n    "
+    },
+    "DetachLoadBalancerFromSubnets": {
+      "name": "DetachLoadBalancerFromSubnets",
+      "input": {
+        "shape_name": "DetachLoadBalancerFromSubnetsInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The name associated with the load balancer to be detached.            \n        </p>\n    ",
+            "required": true
+          },
+          "Subnets": {
+            "shape_name": "Subnets",
+            "type": "list",
+            "members": {
+              "shape_name": "SubnetId",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n        <p>\n            A list of subnet IDs to remove from the set of configured subnets for the load balancer.\n        </p>  \n    ",
+            "required": true
+          }
+        },
+        "documentation": "\n        <p>\n            The input for the <a>DetachLoadBalancerFromSubnets</a> action. \n        </p> \n    "
+      },
+      "output": {
+        "shape_name": "DetachLoadBalancerFromSubnetsOutput",
+        "type": "structure",
+        "members": {
+          "Subnets": {
+            "shape_name": "Subnets",
+            "type": "list",
+            "members": {
+              "shape_name": "SubnetId",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n        <p>\n            A list of subnet IDs the load balancer is now attached to.  \n        </p>  \n    "
+          }
+        },
+        "documentation": "\n        <p>\n            The output for the <a>DetachLoadBalancerFromSubnets</a> action.\n        </p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidConfigurationRequestException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        Requested configuration change is invalid.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n            Removes subnets from the set of configured subnets in the Amazon Virtual Private Cloud (Amazon VPC) for the load balancer.  \n        </p> \n        <p>\n            After a subnet is removed all of the EC2 instances registered with the load balancer that are \n            in the removed subnet will go into the <i>OutOfService</i> state. When a subnet is removed, the load balancer\n            will balance the traffic among the remaining routable subnets for the load balancer.    \n        </p>\n        <examples>      \n            <queryrequest>https://elasticloadbalancing.amazonaws.com/?Subnets.member.1=subnet-119f0078\n&LoadBalancerName=my-test-vpc-loadbalancer\n&Version=2012-06-01\n&Action=DetachLoadBalancerFromSubnets\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><DetachLoadBalancerFromSubnetsResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n  <DetachLoadBalancerFromSubnetsResult>\n    <Subnets>\n      <member>subnet-159f007c</member>\n      <member>subnet-3561b05e</member>\n    </Subnets>\n  </DetachLoadBalancerFromSubnetsResult>\n  <ResponseMetadata>\n    <RequestId>07b1ecbc-1100-11e3-acaf-dd7edEXAMPLE</RequestId>\n  </ResponseMetadata>\n</DetachLoadBalancerFromSubnetsResponse>\n </queryresponse>\n        </examples>   \n    "
+    },
+    "DisableAvailabilityZonesForLoadBalancer": {
+      "name": "DisableAvailabilityZonesForLoadBalancer",
+      "input": {
+        "shape_name": "RemoveAvailabilityZonesInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n        The name associated with the load balancer.        \n        </p>\n    ",
+            "required": true
+          },
+          "AvailabilityZones": {
+            "shape_name": "AvailabilityZones",
+            "type": "list",
+            "members": {
+              "shape_name": "AvailabilityZone",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n        <p>\n        A list of Availability Zones to be removed from the load balancer.\n        </p>\n        <note>\n        There must be at least one Availability Zone\n        registered with a load balancer at all times.       \n        Specified Availability Zones must be in the same region.\n        </note>\n    ",
+            "required": true
+          }
+        },
+        "documentation": "\n\t\t<p>\n\t\tThe input for the <a>DisableAvailabilityZonesForLoadBalancer</a> action.\n\t\t</p>\n    "
+      },
+      "output": {
+        "shape_name": "RemoveAvailabilityZonesOutput",
+        "type": "structure",
+        "members": {
+          "AvailabilityZones": {
+            "shape_name": "AvailabilityZones",
+            "type": "list",
+            "members": {
+              "shape_name": "AvailabilityZone",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n        <p>\n        A list of updated Availability Zones for the load balancer.\n        </p>\n    "
+          }
+        },
+        "documentation": "\n\t\t<p>\n\t\tThe output for the <a>DisableAvailabilityZonesForLoadBalancer</a> action.\n\t\t</p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidConfigurationRequestException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        Requested configuration change is invalid.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n        Removes the specified EC2 Availability Zones from\n        the set of configured Availability Zones for the load balancer.\n        </p>\n        <p>\n        There must be at least one Availability Zone registered\n        with a load balancer at all times. \n        Once an Availability Zone is removed, all the instances\n        registered with the load balancer that are in the removed\n        Availability Zone go into the <i>OutOfService</i> state. Upon Availability\n        Zone removal, the load balancer attempts to equally balance\n        the traffic among its remaining usable Availability Zones.\n        Trying to remove an Availability Zone that was not associated with\n        the load balancer does nothing.\n        </p> \n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/US_ShrinkLBApp04.html\">Disable an Availability Zone from a Load-Balanced Application</a>\n        in the <i>Elastic Load Balancing Developer Guide</i>.</p>        \n        <examples>\n            <example>            \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?AvailabilityZones.member.1=us-east-1a\n&LoadBalancerName=MyHTTPSLoadBalancer\n&Version=2012-06-01\n&Action=DisableAvailabilityZonesForLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><DisableAvailabilityZonesForLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n  <DisableAvailabilityZonesForLoadBalancerResult>\n    <AvailabilityZones>\n      <member>us-east-1b</member>\n    </AvailabilityZones>\n  </DisableAvailabilityZonesForLoadBalancerResult>\n  <ResponseMetadata>\n    <RequestId>ba6267d5-2566-11e3-9c6d-eb728EXAMPLE</RequestId>\n  </ResponseMetadata>\n</DisableAvailabilityZonesForLoadBalancerResponse>\n </queryresponse>\n            </example>\n        </examples>   \n    "
+    },
+    "EnableAvailabilityZonesForLoadBalancer": {
+      "name": "EnableAvailabilityZonesForLoadBalancer",
+      "input": {
+        "shape_name": "AddAvailabilityZonesInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n        The name associated with the load balancer.       \n        </p>\n    ",
+            "required": true
+          },
+          "AvailabilityZones": {
+            "shape_name": "AvailabilityZones",
+            "type": "list",
+            "members": {
+              "shape_name": "AvailabilityZone",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n        <p>\n        A list of new Availability Zones for the load balancer.\n        Each Availability Zone must be in the same region as the load balancer.\n        </p>\n    ",
+            "required": true
+          }
+        },
+        "documentation": "\n\t\t<p>\n\t\tThe input for the <a>EnableAvailabilityZonesForLoadBalancer</a> action.\n\t\t</p>\n    "
+      },
+      "output": {
+        "shape_name": "AddAvailabilityZonesOutput",
+        "type": "structure",
+        "members": {
+          "AvailabilityZones": {
+            "shape_name": "AvailabilityZones",
+            "type": "list",
+            "members": {
+              "shape_name": "AvailabilityZone",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n        <p>\n        An updated list of Availability Zones for the load balancer.\n        </p>\n    "
+          }
+        },
+        "documentation": "\n\t\t<p>\n\t\tThe output for the <a>EnableAvailabilityZonesForLoadBalancer</a> action.\n\t\t</p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n        Adds one or more EC2 Availability Zones to the load balancer.\n        </p>\n        <p>\n        The load balancer evenly distributes requests across all\n        its registered Availability Zones that contain instances.        \n        </p>\n        <note>\n        The new EC2 Availability Zones to be added must be in the same\n        EC2 Region as the Availability Zones for which the\n        load balancer was created.\n        </note>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/US_AddLBAvailabilityZone.html\">Expand a Load Balanced Application to an Additional Availability Zone</a>\n        in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        <examples>\n            <example>\n                <name>Enable Availability Zone <i>us-east-1c</i> for <i>my-test-loadbalancer</i>.</name>                \n            <queryrequest>https://elasticloadbalancing.amazonaws.com/?AvailabilityZones.member.1=us-east-1c\n&LoadBalancerName=my-test-loadbalancer\n&Version=2012-06-01\n&Action=EnableAvailabilityZonesForLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><EnableAvailabilityZonesForLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n  <EnableAvailabilityZonesForLoadBalancerResult>\n    <AvailabilityZones>\n      <member>us-east-1a</member>\n      <member>us-east-1c</member>\n    </AvailabilityZones>\n  </EnableAvailabilityZonesForLoadBalancerResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</EnableAvailabilityZonesForLoadBalancerResponse>\n </queryresponse>\n            </example>\n        </examples>   \n    "
+    },
+    "ModifyLoadBalancerAttributes": {
+      "name": "ModifyLoadBalancerAttributes",
+      "input": {
+        "shape_name": "ModifyLoadBalancerAttributesInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>The name of the load balancer.</p>  \n    ",
+            "required": true
+          },
+          "LoadBalancerAttributes": {
+            "shape_name": "LoadBalancerAttributes",
+            "type": "structure",
+            "members": {
+              "CrossZoneLoadBalancing": {
+                "shape_name": "CrossZoneLoadBalancing",
+                "type": "structure",
+                "members": {
+                  "Enabled": {
+                    "shape_name": "CrossZoneLoadBalancingEnabled",
+                    "type": "boolean",
+                    "documentation": "\n        <p>Specifies whether cross-zone load balancing is enabled for the load balancer.</p>\n    ",
+                    "required": true
+                  }
+                },
+                "documentation": "\n       <p>The name of the load balancer attribute.</p> \n    "
+              }
+            },
+            "documentation": "\n      <p>Attributes of the load balancer.</p>  \n    ",
+            "required": true
+          }
+        },
+        "documentation": "\n        <p>The input for the <a>ModifyLoadBalancerAttributes</a> action.</p> \n    "
+      },
+      "output": {
+        "shape_name": "ModifyLoadBalancerAttributesOutput",
+        "type": "structure",
+        "members": {
+        },
+        "documentation": "\n        <p>The output for the <a>ModifyLoadBalancerAttributes</a> action.</p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "LoadBalancerAttributeNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>The specified load balancer attribute could not be found.</p>  \n    "
+        },
+        {
+          "shape_name": "InvalidConfigurationRequestException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        Requested configuration change is invalid.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>Modifies the attributes of a specified load balancer.</p>  \n    "
+    },
+    "RegisterInstancesWithLoadBalancer": {
+      "name": "RegisterInstancesWithLoadBalancer",
+      "input": {
+        "shape_name": "RegisterEndPointsInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n        The name associated with the load balancer.\n        The name must be unique within your set of load balancers.        \n        </p>\n    ",
+            "required": true
+          },
+          "Instances": {
+            "shape_name": "Instances",
+            "type": "list",
+            "members": {
+              "shape_name": "Instance",
+              "type": "structure",
+              "members": {
+                "InstanceId": {
+                  "shape_name": "InstanceId",
+                  "type": "string",
+                  "documentation": "\n        <p>\n        Provides an EC2 instance ID.\n        </p>\n    "
+                }
+              },
+              "documentation": "\n        <p>\n        The Instance data type.\n        </p>\n    "
+            },
+            "documentation": "\n        <p>\n        A list of instance IDs that should be registered with the load balancer.</p>    \n        \n    ",
+            "required": true
+          }
+        },
+        "documentation": "\n\t\t<p>\n\t\tThe input for the <a>RegisterInstancesWithLoadBalancer</a> action.\n\t\t</p>\n    "
+      },
+      "output": {
+        "shape_name": "RegisterEndPointsOutput",
+        "type": "structure",
+        "members": {
+          "Instances": {
+            "shape_name": "Instances",
+            "type": "list",
+            "members": {
+              "shape_name": "Instance",
+              "type": "structure",
+              "members": {
+                "InstanceId": {
+                  "shape_name": "InstanceId",
+                  "type": "string",
+                  "documentation": "\n        <p>\n        Provides an EC2 instance ID.\n        </p>\n    "
+                }
+              },
+              "documentation": "\n        <p>\n        The Instance data type.\n        </p>\n    "
+            },
+            "documentation": "\n        <p>\n        An updated list of instances for the load balancer.\n        </p>\n    "
+          }
+        },
+        "documentation": "\n\t\t<p>\n\t\tThe output for the <a>RegisterInstancesWithLoadBalancer</a> action.\n\t\t</p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidEndPointException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified EndPoint is not valid.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n        Adds new instances to the load balancer.\n        </p>\n        <p>\n        Once the instance is registered, it starts receiving traffic\n        and requests from the load balancer. Any instance that is not\n        in any of the Availability Zones registered for the load balancer\n        will be moved to the <i>OutOfService</i> state. It will move to the\n        <i>InService</i> state when the Availability Zone is added to the load balancer.\n        </p>\n        <p>When an instance registered with a load balancer is stopped and then restarted, \n            the IP addresses associated with the instance changes. Elastic Load Balancing \n            cannot recognize the new IP address, which prevents it from routing traffic to\n            the instances. We recommend that you de-register your Amazon EC2 instances from\n            your load balancer after you stop your instance, and then register the load \n            balancer with your instance after you've restarted. To de-register your instances \n            from load balancer, use <a>DeregisterInstancesFromLoadBalancer</a> action.</p>\n        <p>For more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/US_DeReg_Reg_Instances.html\">De-register and Register Amazon EC2 Instances</a> \n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        <note>\n        In order for this call to be successful, you must provide the same \n        account credentials as those that were used to create the load balancer.\n        </note>\n        <note>\n        Completion of this API does not guarantee that operation has completed.\n        Rather, it means that the request has been registered and the\n        changes will happen shortly.\n        </note>\n        <p>You can use <a>DescribeLoadBalancers</a> or <a>DescribeInstanceHealth</a> action to check the state of the newly registered instances.</p>  \n        <examples>\n            <example>            \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?Instances.member.1.InstanceId=i-315b7e51\n&LoadBalancerName=my-test-loadbalancer\n&Version=2012-06-01\n&Action=RegisterInstancesWithLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><RegisterInstancesWithLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n  <RegisterInstancesWithLoadBalancerResult>\n    <Instances>\n      <member>\n        <InstanceId>i-315b7e51</InstanceId>\n      </member>\n    </Instances>\n  </RegisterInstancesWithLoadBalancerResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</RegisterInstancesWithLoadBalancerResponse>\n </queryresponse>\n            </example>\n        </examples>  \n        \n    "
+    },
+    "SetLoadBalancerListenerSSLCertificate": {
+      "name": "SetLoadBalancerListenerSSLCertificate",
+      "input": {
+        "shape_name": "SetLoadBalancerListenerSSLCertificateInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The name of the load balancer. \n        </p>\n    ",
+            "required": true
+          },
+          "LoadBalancerPort": {
+            "shape_name": "AccessPointPort",
+            "type": "integer",
+            "documentation": "\n        <p>\n            The port that uses the specified SSL certificate. \n        </p>\n    ",
+            "required": true
+          },
+          "SSLCertificateId": {
+            "shape_name": "SSLCertificateId",
+            "type": "string",
+            "documentation": "\n        <p>\n            The Amazon Resource Number (ARN) of the SSL certificate chain to use. \n            For more information on SSL certificates, see \n            <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingServerCerts.html\">\n                Managing Server Certificates</a> in the <i>AWS Identity and Access Management User Guide</i>.</p>\n    ",
+            "required": true
+          }
+        },
+        "documentation": "\n        <p>\n            The input for the <a>SetLoadBalancerListenerSSLCertificate</a> action.\n        </p>\n    "
+      },
+      "output": {
+        "shape_name": "SetLoadBalancerListenerSSLCertificateOutput",
+        "type": "structure",
+        "members": {
+        },
+        "documentation": "\n        <p>\n            The output for the <a>SetLoadBalancerListenerSSLCertificate</a> action.\n        </p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "CertificateNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified SSL ID does not refer to a valid SSL certificate \n            in the AWS Identity and Access Management Service.\n        </p>\n    "
+        },
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "ListenerNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        Load balancer does not have a listener configured at the given port.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidConfigurationRequestException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        Requested configuration change is invalid.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n            Sets the certificate that terminates the specified listener's SSL connections. \n            The specified certificate replaces any prior certificate that was used on the same load balancer and port. \n        </p>\n        <p>For more information on updating your SSL certificate, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/US_UpdatingLoadBalancerSSL.html\">Updating an SSL Certificate for a Load Balancer</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        \n        <examples>\n            <example>                           \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyInternalLoadBalancer\n&SSLCertificateId=arn:aws:iam::123456789012:server-certificate/testcert\n&LoadBalancerPort=443\n&Version=2012-06-01\n&Action=SetLoadBalancerListenerSSLCertificate\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><SetLoadBalancerListenerSSLCertificateResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n <SetLoadBalancerListenerSSLCertificateResult/>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</SetLoadBalancerListenerSSLCertificateResponse>\n </queryresponse>\n            </example>\n        </examples>     \n    "
+    },
+    "SetLoadBalancerPoliciesForBackendServer": {
+      "name": "SetLoadBalancerPoliciesForBackendServer",
+      "input": {
+        "shape_name": "SetLoadBalancerPoliciesForBackendServerInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The mnemonic name associated with the load balancer.\n            This name must be unique within the set of your load balancers.\n        </p>\n    ",
+            "required": true
+          },
+          "InstancePort": {
+            "shape_name": "EndPointPort",
+            "type": "integer",
+            "documentation": "\n        <p>\n            The port number associated with the back-end server.\n        </p>\n    ",
+            "required": true
+          },
+          "PolicyNames": {
+            "shape_name": "PolicyNames",
+            "type": "list",
+            "members": {
+              "shape_name": "PolicyName",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n        <p>\n            List of policy names to be set.  If the list is empty, then all current polices are\n            removed from the back-end server.\n        </p>\n    ",
+            "required": true
+          }
+        },
+        "documentation": "\n    "
+      },
+      "output": {
+        "shape_name": "SetLoadBalancerPoliciesForBackendServerOutput",
+        "type": "structure",
+        "members": {
+        },
+        "documentation": "\n        <p>\n            The output for the <a>SetLoadBalancerPoliciesForBackendServer</a> action.\n        </p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "PolicyNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        One or more specified policies were not found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidConfigurationRequestException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        Requested configuration change is invalid.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n            Replaces the current set of policies associated with a port on which the back-end server is listening with a new set of policies. After the policies have been created using <a>CreateLoadBalancerPolicy</a>, \n            they can be applied here as a list. At this time, only the back-end server authentication policy type can be applied to the back-end ports; this policy type is composed of multiple public key policies.\n        </p>\n        <note>\n            <p>The <i>SetLoadBalancerPoliciesForBackendServer</i> replaces the current set of policies associated with the specified instance port. \n                Every time you use this action to enable the policies, use the <code>PolicyNames</code> parameter to list all the policies you want to enable.</p>\n        </note>\n        <examples>      \n            <queryrequest>https://elasticloadbalancing.amazonaws.com/?InstancePort=80\n&PolicyNames.member.1=EnableProxyProtocol\n&PolicyNames.member.2=MyPolicyName2\n&PolicyNames.member.3=MyPolicyName3\n&LoadBalancerName=my-test-loadbalancer\n&Version=2012-06-01\n&Action=SetLoadBalancerPoliciesForBackendServer\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><SetLoadBalancerPoliciesForBackendServerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n  <SetLoadBalancerPoliciesForBackendServerResult/>\n  <ResponseMetadata>\n    <RequestId>0eb9b381-dde0-11e2-8d78-6ddbaEXAMPLE</RequestId>\n  </ResponseMetadata>\n</SetLoadBalancerPoliciesForBackendServerResponse>  \n </queryresponse>\n        </examples>   \n        <p>You can use <a>DescribeLoadBalancers</a> or <a>DescribeLoadBalancerPolicies</a> action to verify that the policy has been associated with the back-end server.</p>     \n    "
+    },
+    "SetLoadBalancerPoliciesOfListener": {
+      "name": "SetLoadBalancerPoliciesOfListener",
+      "input": {
+        "shape_name": "SetLoadBalancerPoliciesOfListenerInput",
+        "type": "structure",
+        "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>\n            The name of the load balancer.            \n        </p>\n    ",
+            "required": true
+          },
+          "LoadBalancerPort": {
+            "shape_name": "AccessPointPort",
+            "type": "integer",
+            "documentation": "\n        <p>\n            The external port of the load balancer to associate the policy.  \n        </p>\n    ",
+            "required": true
+          },
+          "PolicyNames": {
+            "shape_name": "PolicyNames",
+            "type": "list",
+            "members": {
+              "shape_name": "PolicyName",
+              "type": "string",
+              "documentation": null
+            },
+            "documentation": "\n        <p>\n            List of policies to be associated with the listener. If the list is empty, the current policy is removed from the listener.\n        </p>\n    ",
+            "required": true
+          }
+        },
+        "documentation": "\n        <p>\n            The input for the <a>SetLoadBalancerPoliciesOfListener</a> action.\n        </p>\n    "
+      },
+      "output": {
+        "shape_name": "SetLoadBalancerPoliciesOfListenerOutput",
+        "type": "structure",
+        "members": {
+        },
+        "documentation": "\n        <p>\n            The output for the <a>SetLoadBalancerPoliciesOfListener</a> action.\n        </p>\n    "
+      },
+      "errors": [
+        {
+          "shape_name": "AccessPointNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n            The specified load balancer could not be found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "PolicyNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        One or more specified policies were not found.\n        </p>\n    "
+        },
+        {
+          "shape_name": "ListenerNotFoundException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        Load balancer does not have a listener configured at the given port.\n        </p>\n    "
+        },
+        {
+          "shape_name": "InvalidConfigurationRequestException",
+          "type": "structure",
+          "members": {
+          },
+          "documentation": "\n        <p>\n        Requested configuration change is invalid.\n        </p>\n    "
+        }
+      ],
+      "documentation": "\n        <p>\n            Associates, updates, or disables a policy with a listener on the load balancer. \n            You can associate multiple policies with a listener. \n        </p>\n        <examples>\n            <name>Associate <i>MySSLNegotiationPolicy</i> with the load balancer port <i>443</i> on the <i>MyInternalLoadbalancer</i> load balancer.</name>            \n            <queryrequest>https://elasticloadbalancing.amazonaws.com/?PolicyNames.member.1=MySSLNegotiationPolicy\n&LoadBalancerName=MyInternalLoadBalancer\n&LoadBalancerPort=443\n&Version=2012-06-01\n&Action=SetLoadBalancerPoliciesOfListener\n&AUTHPARAMS </queryrequest>      \n            <queryresponse><SetLoadBalancerPoliciesOfListenerResponse xmlns=\"http://elasticloadbalancing.am\nazonaws.com/doc/2012-06-01/\">\n  <SetLoadBalancerPoliciesOfListenerResult/>\n  <ResponseMetadata>\n    <RequestId>07b1ecbc-1100-11e3-acaf-dd7edEXAMPLE</RequestId>\n  </ResponseMetadata>\n</SetLoadBalancerPoliciesOfListenerResponse>\n </queryresponse>\n        </examples>   \n        \n    "
+    }
+  },
+  "pagination": {
+    "DescribeInstanceHealth": {
+      "result_key": "InstanceStates"
+    },
+    "DescribeLoadBalancerPolicies": {
+      "result_key": "PolicyDescriptions"
+    },
+    "DescribeLoadBalancerPolicyTypes": {
+      "result_key": "PolicyTypeDescriptions"
+    },
+    "DescribeLoadBalancers": {
+      "input_token": "Marker",
+      "output_token": "NextMarker",
+      "result_key": "LoadBalancerDescriptions"
+    }
+  }
+}

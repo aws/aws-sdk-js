@@ -1,0 +1,884 @@
+{
+  "api_version": "2010-06-01",
+  "type": "query",
+  "result_wrapped": true,
+  "signature_version": "v2",
+  "service_full_name": "AWS Import/Export",
+  "global_endpoint": "importexport.amazonaws.com",
+  "endpoint_prefix": "importexport",
+  "xmlnamespace": "http://importexport.amazonaws.com/doc/2010-06-01/",
+  "documentation": "\n    <fullname>AWS Import/Export Service</fullname>\n    AWS Import/Export accelerates transferring large amounts of data between\n    the AWS cloud and portable storage devices that you mail to us. AWS\n    Import/Export transfers data directly onto and off of your storage devices\n    using Amazon's high-speed internal network and bypassing the Internet. For\n    large data sets, AWS Import/Export is often faster than Internet transfer\n    and more cost effective than upgrading your connectivity.\n  ",
+  "operations": {
+    "CancelJob": {
+      "name": "CancelJob",
+      "http": {
+        "method": "POST",
+        "uri": "/?Operation=CancelJob"
+      },
+      "input": {
+        "shape_name": "CancelJobInput",
+        "type": "structure",
+        "members": {
+          "JobId": {
+            "shape_name": "JobId",
+            "type": "string",
+            "documentation": "\n    A unique identifier which refers to a particular job.\n  ",
+            "required": true
+          }
+        },
+        "documentation": "\n    Input structure for the CancelJob operation.\n  "
+      },
+      "output": {
+        "shape_name": "CancelJobOutput",
+        "type": "structure",
+        "members": {
+          "Success": {
+            "shape_name": "Success",
+            "type": "boolean",
+            "documentation": "\n    Specifies whether (true) or not (false) AWS Import/Export updated your job.\n  "
+          }
+        },
+        "documentation": "\n    Output structure for the CancelJob operation.\n  "
+      },
+      "errors": [
+        {
+          "shape_name": "InvalidJobIdException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    The JOBID was missing, not found, or not associated with the AWS account.\n  "
+        },
+        {
+          "shape_name": "ExpiredJobIdException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    Indicates that the specified job has expired out of the system.\n  "
+        },
+        {
+          "shape_name": "CanceledJobIdException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    The specified job ID has been canceled and is no longer valid.\n  "
+        },
+        {
+          "shape_name": "UnableToCancelJobIdException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    AWS Import/Export cannot cancel the job\n  "
+        },
+        {
+          "shape_name": "InvalidAccessKeyIdException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    The AWS Access Key ID specified in the request did not match the manifest's\n    accessKeyId value. The manifest and the request authentication must use the\n    same AWS Access Key ID.\n  "
+        }
+      ],
+      "documentation": "\n    This operation cancels a specified job. Only the job owner can cancel it.\n    The operation fails if the job has already started or is complete.\n  "
+    },
+    "CreateJob": {
+      "name": "CreateJob",
+      "http": {
+        "method": "POST",
+        "uri": "/?Operation=CreateJob"
+      },
+      "input": {
+        "shape_name": "CreateJobInput",
+        "type": "structure",
+        "members": {
+          "JobType": {
+            "shape_name": "JobType",
+            "type": "string",
+            "enum": [
+              "Import",
+              "Export"
+            ],
+            "documentation": "\n    Specifies whether the job to initiate is an import or export job.\n  ",
+            "required": true
+          },
+          "Manifest": {
+            "shape_name": "Manifest",
+            "type": "string",
+            "documentation": "\n    The UTF-8 encoded text of the manifest file.\n  ",
+            "required": true
+          },
+          "ManifestAddendum": {
+            "shape_name": "ManifestAddendum",
+            "type": "string",
+            "documentation": "\n    For internal use only.\n  "
+          },
+          "ValidateOnly": {
+            "shape_name": "ValidateOnly",
+            "type": "boolean",
+            "documentation": "\n    Validate the manifest and parameter values in the request but do not actually create a job.\n  ",
+            "required": true
+          }
+        },
+        "documentation": "\n    Input structure for the CreateJob operation.\n  "
+      },
+      "output": {
+        "shape_name": "CreateJobOutput",
+        "type": "structure",
+        "members": {
+          "JobId": {
+            "shape_name": "JobId",
+            "type": "string",
+            "documentation": "\n    A unique identifier which refers to a particular job.\n  "
+          },
+          "JobType": {
+            "shape_name": "JobType",
+            "type": "string",
+            "enum": [
+              "Import",
+              "Export"
+            ],
+            "documentation": "\n    Specifies whether the job to initiate is an import or export job.\n  "
+          },
+          "AwsShippingAddress": {
+            "shape_name": "AwsShippingAddress",
+            "type": "string",
+            "documentation": "\n    Address you ship your storage device to.\n  "
+          },
+          "Signature": {
+            "shape_name": "Signature",
+            "type": "string",
+            "documentation": "\n    An encrypted code used to authenticate the request and response, for\n    example, \"DV+TpDfx1/TdSE9ktyK9k/bDTVI=\". Only use this value is you want to\n    create the signature file yourself.  Generally you should use the\n    SignatureFileContents value.\n  "
+          },
+          "SignatureFileContents": {
+            "shape_name": "SignatureFileContents",
+            "type": "string",
+            "documentation": "\n    The actual text of the SIGNATURE file to be written to disk.\n  "
+          },
+          "WarningMessage": {
+            "shape_name": "WarningMessage",
+            "type": "string",
+            "documentation": "\n    An optional message notifying you of non-fatal issues with the job, such as\n    use of an incompatible Amazon S3 bucket name.\n  "
+          }
+        },
+        "documentation": "\n    Output structure for the CreateJob operation.\n  "
+      },
+      "errors": [
+        {
+          "shape_name": "MissingParameterException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    One or more required parameters was missing from the request.\n  "
+        },
+        {
+          "shape_name": "InvalidParameterException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    One or more parameters had an invalid value.\n  "
+        },
+        {
+          "shape_name": "InvalidParameterException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    One or more parameters had an invalid value.\n  "
+        },
+        {
+          "shape_name": "InvalidAccessKeyIdException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    The AWS Access Key ID specified in the request did not match the manifest's\n    accessKeyId value. The manifest and the request authentication must use the\n    same AWS Access Key ID.\n  "
+        },
+        {
+          "shape_name": "InvalidAddressException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    The address specified in the manifest is invalid.\n  "
+        },
+        {
+          "shape_name": "InvalidManifestFieldException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    One or more manifest fields was invalid. Please correct and resubmit.\n  "
+        },
+        {
+          "shape_name": "MissingManifestFieldException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    One or more required fields were missing from the manifest file. Please correct and resubmit.\n  "
+        },
+        {
+          "shape_name": "NoSuchBucketException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    The specified bucket does not exist. Create the specified bucket or change\n    the manifest's bucket, exportBucket, or logBucket field to a bucket that\n    the account, as specified by the manifest's Access Key ID, has write\n    permissions to.\n  "
+        },
+        {
+          "shape_name": "MissingCustomsException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    One or more required customs parameters was missing from the manifest.\n  "
+        },
+        {
+          "shape_name": "InvalidCustomsException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    One or more customs parameters was invalid. Please correct and resubmit.\n  "
+        },
+        {
+          "shape_name": "InvalidFileSystemException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    File system specified in export manifest is invalid.\n  "
+        },
+        {
+          "shape_name": "MultipleRegionsException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    Your manifest file contained buckets from multiple regions.  A job is\n    restricted to buckets from one region.  Please correct and resubmit.\n  "
+        },
+        {
+          "shape_name": "BucketPermissionException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    The account specified does not have the appropriate bucket permissions.\n  "
+        },
+        {
+          "shape_name": "MalformedManifestException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    Your manifest is not well-formed.\n  "
+        }
+      ],
+      "documentation": "\n    This operation initiates the process of scheduling an upload or download of\n    your data. You include in the request a manifest that describes the data\n    transfer specifics. The response to the request includes a job ID, which\n    you can use in other operations, a signature that you use to identify your\n    storage device, and the address where you should ship your storage device.\n  "
+    },
+    "GetStatus": {
+      "name": "GetStatus",
+      "http": {
+        "method": "POST",
+        "uri": "/?Operation=GetStatus"
+      },
+      "input": {
+        "shape_name": "GetStatusInput",
+        "type": "structure",
+        "members": {
+          "JobId": {
+            "shape_name": "JobId",
+            "type": "string",
+            "documentation": "\n    A unique identifier which refers to a particular job.\n  ",
+            "required": true
+          }
+        },
+        "documentation": "\n    Input structure for the GetStatus operation.\n  "
+      },
+      "output": {
+        "shape_name": "GetStatusOutput",
+        "type": "structure",
+        "members": {
+          "JobId": {
+            "shape_name": "JobId",
+            "type": "string",
+            "documentation": "\n    A unique identifier which refers to a particular job.\n  "
+          },
+          "JobType": {
+            "shape_name": "JobType",
+            "type": "string",
+            "enum": [
+              "Import",
+              "Export"
+            ],
+            "documentation": "\n    Specifies whether the job to initiate is an import or export job.\n  "
+          },
+          "AwsShippingAddress": {
+            "shape_name": "AwsShippingAddress",
+            "type": "string",
+            "documentation": "\n    Address you ship your storage device to.\n  "
+          },
+          "LocationCode": {
+            "shape_name": "LocationCode",
+            "type": "string",
+            "documentation": "\n    A token representing the location of the storage device, such as \"AtAWS\".\n  "
+          },
+          "LocationMessage": {
+            "shape_name": "LocationMessage",
+            "type": "string",
+            "documentation": "\n    A more human readable form of the physical location of the storage device.\n  "
+          },
+          "ProgressCode": {
+            "shape_name": "ProgressCode",
+            "type": "string",
+            "documentation": "\n    A token representing the state of the job, such as \"Started\".\n  "
+          },
+          "ProgressMessage": {
+            "shape_name": "ProgressMessage",
+            "type": "string",
+            "documentation": "\n    A more human readable form of the job status.\n  "
+          },
+          "Carrier": {
+            "shape_name": "Carrier",
+            "type": "string",
+            "documentation": "\n    Name of the shipping company. This value is included when the LocationCode is \"Returned\".\n  "
+          },
+          "TrackingNumber": {
+            "shape_name": "TrackingNumber",
+            "type": "string",
+            "documentation": "\n    The shipping tracking number assigned by AWS Import/Export to the storage\n    device when it's returned to you. We return this value when the\n    LocationCode is \"Returned\".\n  "
+          },
+          "LogBucket": {
+            "shape_name": "LogBucket",
+            "type": "string",
+            "documentation": "\n    Amazon S3 bucket for user logs.\n  "
+          },
+          "LogKey": {
+            "shape_name": "LogKey",
+            "type": "string",
+            "documentation": "\n    The key where the user logs were stored.\n  "
+          },
+          "ErrorCount": {
+            "shape_name": "ErrorCount",
+            "type": "integer",
+            "documentation": "\n    Number of errors. We return this value when the ProgressCode is Success or SuccessWithErrors.\n  "
+          },
+          "Signature": {
+            "shape_name": "Signature",
+            "type": "string",
+            "documentation": "\n    An encrypted code used to authenticate the request and response, for\n    example, \"DV+TpDfx1/TdSE9ktyK9k/bDTVI=\". Only use this value is you want to\n    create the signature file yourself.  Generally you should use the\n    SignatureFileContents value.\n  "
+          },
+          "SignatureFileContents": {
+            "shape_name": "Signature",
+            "type": "string",
+            "documentation": "\n    An encrypted code used to authenticate the request and response, for\n    example, \"DV+TpDfx1/TdSE9ktyK9k/bDTVI=\". Only use this value is you want to\n    create the signature file yourself.  Generally you should use the\n    SignatureFileContents value.\n  "
+          },
+          "CurrentManifest": {
+            "shape_name": "CurrentManifest",
+            "type": "string",
+            "documentation": "\n    The last manifest submitted, which will be used to process the job.\n  "
+          },
+          "CreationDate": {
+            "shape_name": "CreationDate",
+            "type": "timestamp",
+            "documentation": "\n    Timestamp of the CreateJob request in ISO8601 date format. For example \"2010-03-28T20:27:35Z\".\n  "
+          }
+        },
+        "documentation": "\n    Output structure for the GetStatus operation.\n  "
+      },
+      "errors": [
+        {
+          "shape_name": "InvalidJobIdException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    The JOBID was missing, not found, or not associated with the AWS account.\n  "
+        },
+        {
+          "shape_name": "ExpiredJobIdException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    Indicates that the specified job has expired out of the system.\n  "
+        },
+        {
+          "shape_name": "CanceledJobIdException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    The specified job ID has been canceled and is no longer valid.\n  "
+        },
+        {
+          "shape_name": "InvalidAccessKeyIdException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    The AWS Access Key ID specified in the request did not match the manifest's\n    accessKeyId value. The manifest and the request authentication must use the\n    same AWS Access Key ID.\n  "
+        }
+      ],
+      "documentation": "\n    This operation returns information about a job, including where the job is\n    in the processing pipeline, the status of the results, and the signature\n    value associated with the job. You can only return information about jobs\n    you own.\n  "
+    },
+    "ListJobs": {
+      "name": "ListJobs",
+      "http": {
+        "method": "POST",
+        "uri": "/?Operation=ListJobs"
+      },
+      "input": {
+        "shape_name": "ListJobsInput",
+        "type": "structure",
+        "members": {
+          "MaxJobs": {
+            "shape_name": "MaxJobs",
+            "type": "integer",
+            "documentation": "\n    Sets the maximum number of jobs returned in the response. If there are\n    additional jobs that were not returned because MaxJobs was exceeded, the\n    response contains &lt;IsTruncated&gt;true&lt;/IsTruncated&gt;. To return\n    the additional jobs, see Marker.\n  "
+          },
+          "Marker": {
+            "shape_name": "Marker",
+            "type": "string",
+            "documentation": "\n    Specifies the JOBID to start after when listing the jobs created with your\n    account. AWS Import/Export lists your jobs in reverse chronological order.\n    See MaxJobs.\n  "
+          }
+        },
+        "documentation": "\n    Input structure for the ListJobs operation.\n  "
+      },
+      "output": {
+        "shape_name": "ListJobsOutput",
+        "type": "structure",
+        "members": {
+          "Jobs": {
+            "shape_name": "JobsList",
+            "type": "list",
+            "members": {
+              "shape_name": "Job",
+              "type": "structure",
+              "members": {
+                "JobId": {
+                  "shape_name": "JobId",
+                  "type": "string",
+                  "documentation": "\n    A unique identifier which refers to a particular job.\n  "
+                },
+                "CreationDate": {
+                  "shape_name": "CreationDate",
+                  "type": "timestamp",
+                  "documentation": "\n    Timestamp of the CreateJob request in ISO8601 date format. For example \"2010-03-28T20:27:35Z\".\n  "
+                },
+                "IsCanceled": {
+                  "shape_name": "IsCanceled",
+                  "type": "boolean",
+                  "documentation": "\n    Indicates whether the job was canceled.\n  "
+                },
+                "JobType": {
+                  "shape_name": "JobType",
+                  "type": "string",
+                  "enum": [
+                    "Import",
+                    "Export"
+                  ],
+                  "documentation": "\n    Specifies whether the job to initiate is an import or export job.\n  "
+                }
+              },
+              "documentation": "\n    Representation of a job returned by the ListJobs operation.\n  "
+            },
+            "documentation": "\n    A list container for Jobs returned by the ListJobs operation.\n  "
+          },
+          "IsTruncated": {
+            "shape_name": "IsTruncated",
+            "type": "boolean",
+            "documentation": "\n    Indicates whether the list of jobs was truncated. If true, then call\n    ListJobs again using the last JobId element as the marker.\n  "
+          }
+        },
+        "documentation": "\n    Output structure for the ListJobs operation.\n  "
+      },
+      "errors": [
+        {
+          "shape_name": "InvalidParameterException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    One or more parameters had an invalid value.\n  "
+        },
+        {
+          "shape_name": "InvalidAccessKeyIdException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    The AWS Access Key ID specified in the request did not match the manifest's\n    accessKeyId value. The manifest and the request authentication must use the\n    same AWS Access Key ID.\n  "
+        }
+      ],
+      "documentation": "\n    This operation returns the jobs associated with the requester. AWS\n    Import/Export lists the jobs in reverse chronological order based on the\n    date of creation. For example if Job Test1 was created 2009Dec30 and Test2\n    was created 2010Feb05, the ListJobs operation would return Test2 followed\n    by Test1.\n  "
+    },
+    "UpdateJob": {
+      "name": "UpdateJob",
+      "http": {
+        "method": "POST",
+        "uri": "/?Operation=UpdateJob"
+      },
+      "input": {
+        "shape_name": "UpdateJobInput",
+        "type": "structure",
+        "members": {
+          "JobId": {
+            "shape_name": "JobId",
+            "type": "string",
+            "documentation": "\n    A unique identifier which refers to a particular job.\n  ",
+            "required": true
+          },
+          "Manifest": {
+            "shape_name": "Manifest",
+            "type": "string",
+            "documentation": "\n    The UTF-8 encoded text of the manifest file.\n  ",
+            "required": true
+          },
+          "JobType": {
+            "shape_name": "JobType",
+            "type": "string",
+            "enum": [
+              "Import",
+              "Export"
+            ],
+            "documentation": "\n    Specifies whether the job to initiate is an import or export job.\n  ",
+            "required": true
+          },
+          "ValidateOnly": {
+            "shape_name": "ValidateOnly",
+            "type": "boolean",
+            "documentation": "\n    Validate the manifest and parameter values in the request but do not actually create a job.\n  ",
+            "required": true
+          }
+        },
+        "documentation": "\n    Input structure for the UpateJob operation.\n  "
+      },
+      "output": {
+        "shape_name": "UpdateJobOutput",
+        "type": "structure",
+        "members": {
+          "Success": {
+            "shape_name": "Success",
+            "type": "boolean",
+            "documentation": "\n    Specifies whether (true) or not (false) AWS Import/Export updated your job.\n  "
+          },
+          "WarningMessage": {
+            "shape_name": "WarningMessage",
+            "type": "string",
+            "documentation": "\n    An optional message notifying you of non-fatal issues with the job, such as\n    use of an incompatible Amazon S3 bucket name.\n  "
+          }
+        },
+        "documentation": "\n    Output structure for the UpateJob operation.\n  "
+      },
+      "errors": [
+        {
+          "shape_name": "MissingParameterException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    One or more required parameters was missing from the request.\n  "
+        },
+        {
+          "shape_name": "InvalidParameterException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    One or more parameters had an invalid value.\n  "
+        },
+        {
+          "shape_name": "InvalidAccessKeyIdException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    The AWS Access Key ID specified in the request did not match the manifest's\n    accessKeyId value. The manifest and the request authentication must use the\n    same AWS Access Key ID.\n  "
+        },
+        {
+          "shape_name": "InvalidAddressException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    The address specified in the manifest is invalid.\n  "
+        },
+        {
+          "shape_name": "InvalidManifestFieldException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    One or more manifest fields was invalid. Please correct and resubmit.\n  "
+        },
+        {
+          "shape_name": "InvalidJobIdException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    The JOBID was missing, not found, or not associated with the AWS account.\n  "
+        },
+        {
+          "shape_name": "MissingManifestFieldException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    One or more required fields were missing from the manifest file. Please correct and resubmit.\n  "
+        },
+        {
+          "shape_name": "NoSuchBucketException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    The specified bucket does not exist. Create the specified bucket or change\n    the manifest's bucket, exportBucket, or logBucket field to a bucket that\n    the account, as specified by the manifest's Access Key ID, has write\n    permissions to.\n  "
+        },
+        {
+          "shape_name": "ExpiredJobIdException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    Indicates that the specified job has expired out of the system.\n  "
+        },
+        {
+          "shape_name": "CanceledJobIdException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    The specified job ID has been canceled and is no longer valid.\n  "
+        },
+        {
+          "shape_name": "MissingCustomsException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    One or more required customs parameters was missing from the manifest.\n  "
+        },
+        {
+          "shape_name": "InvalidCustomsException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    One or more customs parameters was invalid. Please correct and resubmit.\n  "
+        },
+        {
+          "shape_name": "InvalidFileSystemException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    File system specified in export manifest is invalid.\n  "
+        },
+        {
+          "shape_name": "MultipleRegionsException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    Your manifest file contained buckets from multiple regions.  A job is\n    restricted to buckets from one region.  Please correct and resubmit.\n  "
+        },
+        {
+          "shape_name": "BucketPermissionException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    The account specified does not have the appropriate bucket permissions.\n  "
+        },
+        {
+          "shape_name": "MalformedManifestException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "\n    The human-readable description of a particular error.\n  "
+            }
+          },
+          "documentation": "\n    Your manifest is not well-formed.\n  "
+        }
+      ],
+      "documentation": "\n    You use this operation to change the parameters specified in the original\n    manifest file by supplying a new manifest file. The manifest file attached\n    to this request replaces the original manifest file. You can only use the\n    operation after a CreateJob request but before the data transfer starts and\n    you can only use it on jobs you own.\n  "
+    }
+  },
+  "pagination": {
+    "ListJobs": {
+      "input_token": "Marker",
+      "more_results": "IsTruncated",
+      "limit_key": "MaxJobs",
+      "result_key": "Jobs"
+    }
+  }
+}
