@@ -4,13 +4,14 @@ var path = require('path');
 var through = require('through');
 var _ = require('underscore');
 var bundleHelpers = require('./bundle-helpers');
+var AWS = require('../lib/aws');
 
 var sanitizeRegex = /[^a-zA-Z0-9,-]/g;
 
 function mapFromNames(names) {
   var map = {};
   _.each(names, function (name) {
-    var match = name.match(/^(.+?)(?:-(.+?)(?:\.js)?)?$/);
+    var match = name.match(/^(.+?)(?:-(.+?))?$/);
     var service = match[1], version = match[2];
     if (!map[service]) map[service] = [];
     if (version) map[service].push(version);
@@ -18,43 +19,64 @@ function mapFromNames(names) {
   return map;
 }
 
+function mapFromServices() {
+  var map = {};
+  AWS.util.each(AWS, function(name, ServiceClass) {
+    if (ServiceClass.serviceIdentifier) {
+      map[ServiceClass.serviceIdentifier] = ServiceClass;
+    }
+  });
+  return map;
+}
+
+function allServicesMap() {
+  var map = {};
+  AWS.util.each(AWS, function(name, ServiceClass) {
+    if (ServiceClass.serviceIdentifier) {
+      var apis = ServiceClass.apiVersions.filter(function (v) {
+        return v.indexOf('*') < 0;
+      }).map(function (v) { return new ServiceClass({apiVersion: v})});
+      map[ServiceClass.serviceIdentifier] = apis;
+    }
+  });
+  return map;
+}
+
 function parseServiceMap(services, callback) {
   if (!services) services = bundleHelpers.defaultServices;
+  if (services === 'all') return callback(null, allServicesMap());
   if (services.match(sanitizeRegex)) {
     return callback(new Error('Incorrectly formatted service names'));
   }
   services = services.split(',');
 
-  var dir = path.join(bundleHelpers.root, 'services', 'api');
-  fs.readdir(dir, function (err, files) {
-    var diskMap = mapFromNames(files);
-    if (services.length === 1 && services[0] === 'all') {
-      return callback(null, diskMap); // all services
-    }
+  var serviceMap = mapFromServices();
+  var givenMap = mapFromNames(services);
+  var invalidModules = [];
+  var outMap = {};
 
-    var givenMap = mapFromNames(services);
-    var invalidModules = [];
-
-    _.each(givenMap, function (versions, service) {
-      if (!diskMap[service]) { // no such service
-        invalidModules.push(service);
-      } else if (versions.length === 0) { // take latest
-        givenMap[service] = [diskMap[service][diskMap[service].length - 1]];
-      } else { // validate all versions
-        _.each(versions, function (version) {
-          if (diskMap[service].indexOf(version) < 0) {
-            invalidModules.push(service + '-' + version);
-          }
-        });
-      }
-    });
-
-    if (invalidModules.length > 0) {
-      callback(new Error('Missing modules: ' + invalidModules.join(', ')));
-    } else {
-      callback(null, givenMap);
+  _.each(givenMap, function (versions, service) {
+    if (!serviceMap[service]) { // no such service
+      invalidModules.push(service);
+    } else if (versions.length === 0) { // take latest
+      outMap[service] = [new serviceMap[service]()];
+    } else { // validate all versions
+      outMap[service] = [];
+      _.each(versions, function (version) {
+        try {
+          outMap[service].push(new serviceMap[service]({apiVersion: version}));
+        } catch (e) {
+          invalidModules.push(service + '-' + version);
+        }
+      });
     }
   });
+
+  if (invalidModules.length > 0) {
+    callback(new Error('Missing modules: ' + invalidModules.join(', ')));
+  } else {
+    callback(null, outMap);
+  }
 }
 
 function generateBundleFile(services, callback) {
@@ -63,11 +85,12 @@ function generateBundleFile(services, callback) {
 
     var contents = ['var AWS = require("./core"); module.exports = AWS;'];
 
-    _.each(serviceMap, function (versions, service) {
-      _.each(versions, function (version) {
+    _.each(serviceMap, function (versions, svcName) {
+      _.each(versions, function (svc) {
         var line = util.format(
-          '%s(require("./services/%s"), "%s", require("./services/api/%s-%s"));',
-          'AWS.Service.defineServiceApi', service, version, service, version);
+          '%s(require("./services/%s"), "%s", %s);',
+          'AWS.Service.defineServiceApi', svcName, svc.api.apiVersion,
+          JSON.stringify(svc.api));
         contents.push(line);
       });
     });

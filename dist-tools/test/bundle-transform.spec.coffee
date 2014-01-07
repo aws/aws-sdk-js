@@ -19,19 +19,24 @@ servicesFile = bundleHelpers.servicesFile
 header = 'var AWS = require("./core"); module.exports = AWS;'
 buildBundle = (services) ->
   data = [header]
+  if services == 'all'
+    services = {}
+    Object.keys(helpers.AWS).forEach (s) ->
+      if helpers.AWS[s].serviceIdentifier
+        services[s] = helpers.AWS[s].apiVersions.filter (v) -> v.indexOf("*") < 0
   Object.keys(services).forEach (s) ->
     services[s].forEach (v) ->
       line = "AWS.Service.defineServiceApi(" +
-        "require(\"./services/#{s}\"), \"#{v}\", " +
-        "require(\"./services/api/#{s}-#{v}\"));"
+        "require(\"./services/#{s.toLowerCase()}\"), \"#{v}\", " +
+        JSON.stringify(new helpers.AWS[s](apiVersion: v).api) + ");"
       data.push(line)
   data.join('\n')
 defaultBundle = buildBundle
-  dynamodb: ['2012-08-10']
-  s3:['2006-03-01']
-  sqs: ['2012-11-05']
-  sns: ['2010-03-31']
-  sts: ['2011-06-15']
+  DynamoDB: ['2012-08-10']
+  S3:['2006-03-01']
+  SQS: ['2012-11-05']
+  SNS: ['2010-03-31']
+  STS: ['2011-06-15']
 
 # Assertions
 
@@ -66,30 +71,28 @@ describe 'bundle transformer', ->
 
   it 'uses SERVICES environment variable if services not initialized', ->
     process.env.SERVICES = 's3,cloudwatch'
-    bundle = buildBundle s3: ['2006-03-01'], cloudwatch: ['2010-08-01']
+    bundle = buildBundle S3: ['2006-03-01'], CloudWatch: ['2010-08-01']
     runTransform transform(servicesFile), 'data', (e, data) ->
       expect(e).toEqual(null)
       expect(data).toEqual(bundle)
 
   it 'accepts comma delimited services by name', ->
     services = 's3,cloudwatch'
-    bundle = buildBundle s3: ['2006-03-01'], cloudwatch: ['2010-08-01']
+    bundle = buildBundle S3: ['2006-03-01'], CloudWatch: ['2010-08-01']
     assertBundle(services, bundle)
 
   it 'uses latest service version if version suffix is not supplied', ->
     services = 'rds'
-    bundle = buildBundle rds: helpers.apiFilesMap.rds[-1..-1]
+    bundle = buildBundle RDS: [new helpers.AWS.RDS().api.apiVersion]
     assertBundle(services, bundle)
 
   it 'accepts fully qualified service-version pair', ->
-    services = 'rds-2013-05-15'
-    bundle = buildBundle rds: ['2013-05-15']
+    services = 'rds-2013-09-09'
+    bundle = buildBundle RDS: ['2013-09-09']
     assertBundle(services, bundle)
 
   it 'accepts "all" for all services', ->
-    services = 'all'
-    bundle = buildBundle helpers.apiFilesMap
-    assertBundle(services, bundle)
+    assertBundle('all', buildBundle('all'))
 
   it 'throws an error if the service does not exist', ->
     assertBundleFailed 'invalidmodule', 'Missing modules: invalidmodule'
