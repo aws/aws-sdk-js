@@ -1,6 +1,5 @@
 -m markdown
 --markup-provider rdiscount
---exclude /api/
 --exclude lib/aws.js
 --no-api private
 --api experimental
@@ -9,6 +8,11 @@
 --template-path doc-src/templates
 --plugin sitemap
 -o doc/latest
+-e doc-src/templates/api-versions/plugin.rb
+--plugin js
+--define-class-expr (AWS\.util\.)?inherit
+--update-class-expr (AWS\.util\.)?update
+--mixin-module-expr (AWS\.util\.)?mixin
 lib/core.js
 lib/**/*.js
 -
