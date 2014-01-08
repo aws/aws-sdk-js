@@ -7,25 +7,24 @@ var util = require('util');
 var basePath = __dirname + '/../apis/';
 var paths = fs.readdirSync(basePath + 'source');
 var modelName = process.argv[2];
-var modelNames = {
-  elasticloadbalancing: 'elb',
-  elasticmapreduce: 'emr',
-  email: 'ses',
-  monitoring: 'cloudwatch',
-  sdb: 'simpledb',
-  swf: 'simpleworkflow'
-};
+
+function outpath(api) {
+  var name = api.serviceAbbreviation || api.serviceFullName;
+  name = name.replace(/^Amazon|AWS\s*|\(.*|\s+|\W+/g, '');
+  if (name === 'ElasticLoadBalancing') name = 'ELB';
+  else if (name === 'SWF') name = 'SimpleWorkflow';
+  name = name.toLowerCase() + '-' + api.apiVersion;
+  return name;
+}
 
 paths.forEach(function (path) {
   if (path.match(new RegExp('^' + modelName ? modelName : ''))) {
-    var outpath = path;
-    Object.keys(modelNames).forEach(function (key) {
-      outpath = outpath.replace(new RegExp('^' + key), modelNames[key]);
-    });
-    console.log('Generating API', outpath);
     var data = fs.readFileSync(basePath + 'source/' + path);
-    var json = JSON.stringify(new Translator(data, {documentation: false}), null, '  ');
+    var translated = new Translator(data, {documentation: false});
+    var opath = outpath(translated);
+    var json = JSON.stringify(translated, null, '  ');
     //json = json.replace(/"(\w+)": /g, function (_, m) { return m === 'default' ? _ : m + ": "; }).replace(/"/g, '\'');
-    fs.writeFileSync(basePath + outpath, json);
+    fs.writeFileSync(basePath + opath + '.json', json);
+    console.log('** Generated service for \'' + opath + '\'');
   }
 });
