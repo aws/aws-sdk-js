@@ -218,7 +218,17 @@
           "CompletionDate": {},
           "SHA256TreeHash": {},
           "ArchiveSHA256TreeHash": {},
-          "RetrievalByteRange": {}
+          "RetrievalByteRange": {},
+          "InventoryRetrievalParameters": {
+            "type": "structure",
+            "members": {
+              "Format": {},
+              "StartDate": {},
+              "EndDate": {},
+              "Limit": {},
+              "Marker": {}
+            }
+          }
         }
       }
     },
@@ -366,7 +376,16 @@
               "ArchiveId": {},
               "Description": {},
               "SNSTopic": {},
-              "RetrievalByteRange": {}
+              "RetrievalByteRange": {},
+              "InventoryRetrievalParameters": {
+                "type": "structure",
+                "members": {
+                  "StartDate": {},
+                  "EndDate": {},
+                  "Limit": {},
+                  "Marker": {}
+                }
+              }
             }
           }
         }
@@ -482,7 +501,17 @@
                 "CompletionDate": {},
                 "SHA256TreeHash": {},
                 "ArchiveSHA256TreeHash": {},
-                "RetrievalByteRange": {}
+                "RetrievalByteRange": {},
+                "InventoryRetrievalParameters": {
+                  "type": "structure",
+                  "members": {
+                    "Format": {},
+                    "StartDate": {},
+                    "EndDate": {},
+                    "Limit": {},
+                    "Marker": {}
+                  }
+                }
               }
             }
           },
