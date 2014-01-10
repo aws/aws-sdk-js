@@ -18,8 +18,7 @@ describe 'bundle server routes', ->
           expect(res.text.substr(0, 3)).toEqual('// ') # license first
           expect(res.headers['content-encoding']).not.toEqual('gzip')
           svc = helpers.evalCode("new window.AWS.DynamoDB()", res.text)
-          api = helpers.apiFilesMap
-          expect(svc.api.apiVersion).toEqual(api.dynamodb[-1..-1][0])
+          expect(svc.api.apiVersion).toEqual(new helpers.AWS.DynamoDB().api.apiVersion)
           done(err)
 
     it 'accepts services list as query string', (done) ->
@@ -47,8 +46,7 @@ describe 'bundle server routes', ->
           expect(res.text).toMatch(/Copyright .+ Amazon\.com, Inc\./i)
           expect(res.text).toMatch(/function \w\(\w,\w,\w\)\{function \w\(\w,\w\)\{/)
           svc = helpers.evalCode("new window.AWS.DynamoDB()", res.text)
-          api = helpers.apiFilesMap
-          expect(svc.api.apiVersion).toEqual(api.dynamodb[-1..-1][0])
+          expect(svc.api.apiVersion).toEqual(new helpers.AWS.DynamoDB().api.apiVersion)
           done(err)
 
   describe 'error handling', ->

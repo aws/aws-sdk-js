@@ -1,0 +1,894 @@
+{
+  "api_version": "2013-12-02",
+  "type": "json",
+  "json_version": 1.1,
+  "target_prefix": "Kinesis_20131202",
+  "signature_version": "v4",
+  "service_full_name": "Amazon Kinesis",
+  "service_abbreviation": "Kinesis",
+  "endpoint_prefix": "kinesis",
+  "xmlnamespace": "http://kinesis.amazonaws.com/doc/2013-12-02",
+  "documentation": "\n       <fullname>Amazon Kinesis Service API Reference</fullname>\n       <p>Amazon Kinesis is a managed service that scales elastically for real time processing of streaming big data.</p>\n   ",
+  "operations": {
+    "CreateStream": {
+      "name": "CreateStream",
+      "input": {
+        "shape_name": "CreateStreamInput",
+        "type": "structure",
+        "members": {
+          "StreamName": {
+            "shape_name": "StreamName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 128,
+            "pattern": "[a-zA-Z0-9_.-]+",
+            "documentation": "\n       <p>A name to identify the stream. The stream name is scoped to the AWS account used by the application that creates the stream.\n           It is also scoped by region. That is, two streams in two different AWS accounts can have the same name,\n           and two streams in the same AWS account, but in two different regions, can have the same name.</p>\n   ",
+            "required": true
+          },
+          "ShardCount": {
+            "shape_name": "PositiveIntegerObject",
+            "type": "integer",
+            "min_length": 1,
+            "documentation": "\n       <p>The number of shards that the stream will use. The throughput of the stream is a function of the number of shards; more shards are required for greater\n           provisioned throughput.</p>\n       <p><b>Note:</b> The default limit for an AWS account is two shards per stream.  \n           If you need to create a stream with more than two shards, contact AWS Support to increase the limit on your account.</p>\n   ",
+            "required": true
+          }
+        },
+        "documentation": "\n       <p>Represents the input of a <code>CreateStream</code> operation.</p>\n   "
+      },
+      "output": null,
+      "errors": [
+        {
+          "shape_name": "ResourceInUseException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "   \n   "
+            }
+          },
+          "documentation": "   \n   "
+        },
+        {
+          "shape_name": "LimitExceededException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "   \n   "
+            }
+          },
+          "documentation": " \n   "
+        },
+        {
+          "shape_name": "InvalidArgumentException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "   \n   "
+            }
+          },
+          "documentation": "   \n   "
+        }
+      ],
+      "documentation": "\n   \t        <p>This operation adds a new Amazon Kinesis stream to your AWS account. A stream captures and transports data records that are continuously emitted from different data sources or <i>producers</i>. \n\t            Scale-out within an Amazon Kinesis stream is explicitly supported by means of shards, which are uniquely identified groups of data records in an Amazon Kinesis stream.</p> \n\t        <p>You specify and control the number of shards that a stream is composed of. Each shard can support up to 5 read transactions per second up to a maximum total of 2 MB of data read per second. Each shard can support up to 1000 write transactions per second up to a maximum total of 1 MB data written per second. \n\t            You can add shards to a stream if the amount of data input increases and you can remove shards if the amount of data input decreases.</p>\n\t        <p>The stream name identifies the stream. The name is scoped to the AWS account used by the application. It is also scoped by region. \n\t            That is, two streams in two different accounts can have the same name, and two streams in the same account, but in two different regions, can have the same name. </p>     \n\t        <p><code>CreateStream</code> is an asynchronous operation. Upon receiving a <code>CreateStream</code> request, \n\t            Amazon Kinesis immediately returns and sets the stream status to CREATING. After the stream is created, Amazon Kinesis sets the stream status to ACTIVE. \n\t            You should perform read and write operations only on an ACTIVE stream. </p> \n\t        <p>You receive a <code>LimitExceededException</code> when making a <code>CreateStream</code> request if you try to do one of the following:</p>\n\t        <ul> \n\t            <li>Have more than five streams in the CREATING state at any point in time.</li>\n\t            <li>Create more shards than are authorized for your account.</li>\n\t        </ul>\n\t        <p><b>Note:</b> The default limit for an AWS account is two shards per stream.  \n\t            If you need to create a stream with more than two shards, contact AWS Support to increase the limit on your account.</p>\n\t        <p>You can use the <code>DescribeStream</code> operation to check the stream status, which is returned in <code>StreamStatus</code>.</p>   \n\t        <p><code>CreateStream</code> has a limit of 5 transactions per second per account.</p>   \n\t        <examples>\n\t            <example>\n\t                <name>Create a Stream </name>\n\t                <description>The following is an example of an Amazon Kinesis <code>CreateStream</code> request and response.</description>\n\t                <request><![CDATA[\nPOST / HTTP/1.1\nHost: kinesis.<region>.<domain>\nx-amz-Date: <Date>\nAuthorization: AWS4-HMAC-SHA256 Credential=<Credential>, SignedHeaders=content-type;date;host;user-agent;x-amz-date;x-amz-target;x-amzn-requestid, Signature=<Signature>\nUser-Agent: <UserAgentString>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nConnection: Keep-Alive]]>\nX-Amz-Target: Kinesis_20131202.CreateStream \n\n{\n    \"StreamName\":\"exampleStreamName\",\"ShardCount\":3\n}\n\t                </request>\n\t                <response><![CDATA[\nHTTP/1.1 200 OK\nx-amzn-RequestId: <RequestId>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nDate: <Date>]]>\n\t                </response>\n\t            </example>\n\t        </examples>\n   "
+    },
+    "DeleteStream": {
+      "name": "DeleteStream",
+      "input": {
+        "shape_name": "DeleteStreamInput",
+        "type": "structure",
+        "members": {
+          "StreamName": {
+            "shape_name": "StreamName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 128,
+            "pattern": "[a-zA-Z0-9_.-]+",
+            "documentation": "\n           <p>The name of the stream to delete.</p>   \n   ",
+            "required": true
+          }
+        },
+        "documentation": "\n           <p>Represents the input of a <code>DeleteStream</code> operation.</p>    \n   "
+      },
+      "output": null,
+      "errors": [
+        {
+          "shape_name": "ResourceNotFoundException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "  \n   "
+            }
+          },
+          "documentation": "   \n   "
+        },
+        {
+          "shape_name": "LimitExceededException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "   \n   "
+            }
+          },
+          "documentation": " \n   "
+        }
+      ],
+      "documentation": "\n   \t        <p>This operation deletes a stream and all of its shards and data. \n\t            You must shut down any applications that are operating on the stream before you delete the stream. \n\t            If an application attempts to operate on a deleted stream, it will receive the exception <code>ResourceNotFoundException</code>.</p>  \n\t        <p>If the stream is in the ACTIVE state, you can delete it. \n\t            After a <code>DeleteStream</code> request, the specified stream is in the DELETING state until Amazon Kinesis completes the deletion.</p> \n\t        <p><b>Note:</b> Amazon Kinesis might continue to accept data read and write operations, such as <a>PutRecord</a> and <a>GetRecords</a>, \n\t        on a stream in the DELETING state until the stream deletion is complete.</p>    \n\t        <p>When you delete a stream, any shards in that stream are also deleted.</p>\n\t        <p>You can use the <a>DescribeStream</a> operation to check the state of the stream, which is returned in <code>StreamStatus</code>.</p>\n\t        <p><code>DeleteStream</code> has a limit of 5 transactions per second per account.</p> \n\t        <examples>\n\t            <example>\n\t                <name>Delete a Stream </name>\n\t                <description>The following is an example of an Amazon Kinesis <code>DeleteStream</code> request and response.</description>\n\t                <request><![CDATA[\nPOST / HTTP/1.1\nHost: kinesis.<region>.<domain>\nx-amz-Date: <Date>\nAuthorization: AWS4-HMAC-SHA256 Credential=<Credential>, SignedHeaders=content-type;date;host;user-agent;x-amz-date;x-amz-target;x-amzn-requestid, Signature=<Signature>\nUser-Agent: <UserAgentString>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nConnection: Keep-Alive]]>\nX-Amz-Target: Kinesis_20131202.DeleteStream\n\n{\n    \"StreamName\":\"exampleStreamName\"\n}\n\t                </request>\n\t                <response><![CDATA[\nHTTP/1.1 200 OK\nx-amzn-RequestId: <RequestId>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nDate: <Date>]]>\n\t                </response>\n\t            </example>\n\t        </examples>\n   "
+    },
+    "DescribeStream": {
+      "name": "DescribeStream",
+      "input": {
+        "shape_name": "DescribeStreamInput",
+        "type": "structure",
+        "members": {
+          "StreamName": {
+            "shape_name": "StreamName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 128,
+            "pattern": "[a-zA-Z0-9_.-]+",
+            "documentation": "\n        <p>The name of the stream to describe.</p>     \n   ",
+            "required": true
+          },
+          "Limit": {
+            "shape_name": "DescribeStreamInputLimit",
+            "type": "integer",
+            "min_length": 1,
+            "max_length": 10000,
+            "documentation": "\n        <p>The maximum number of shards to return.</p>           \n   "
+          },
+          "ExclusiveStartShardId": {
+            "shape_name": "ShardId",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 128,
+            "pattern": "[a-zA-Z0-9_.-]+",
+            "documentation": "\n        <p>The shard ID of the shard to start with for the stream description.</p>   \n   "
+          }
+        },
+        "documentation": "\n        <p>Represents the input of a <code>DescribeStream</code> operation.</p> \n   "
+      },
+      "output": {
+        "shape_name": "DescribeStreamOutput",
+        "type": "structure",
+        "members": {
+          "StreamDescription": {
+            "shape_name": "StreamDescription",
+            "type": "structure",
+            "members": {
+              "StreamName": {
+                "shape_name": "StreamName",
+                "type": "string",
+                "min_length": 1,
+                "max_length": 128,
+                "pattern": "[a-zA-Z0-9_.-]+",
+                "documentation": "\n       <p>The name of the stream being described.</p>        \n   ",
+                "required": true
+              },
+              "StreamARN": {
+                "shape_name": "StreamARN",
+                "type": "string",
+                "documentation": "\n       <p>The Amazon Resource Name (ARN) for the stream being described.</p>     \n   ",
+                "required": true
+              },
+              "StreamStatus": {
+                "shape_name": "StreamStatus",
+                "type": "string",
+                "enum": [
+                  "CREATING",
+                  "DELETING",
+                  "ACTIVE",
+                  "UPDATING"
+                ],
+                "documentation": "\n       <p>The current status of the stream being described.</p>\n       <p>The stream status is one of the following states:</p>\n       <ul>\n           <li>CREATING - The stream is being created. Upon receiving a <a>CreateStream</a> request, Amazon Kinesis immediately returns and sets <code>StreamStatus</code> to CREATING.</li>\n           <li>DELETING - The stream is being deleted. After a <a>DeleteStream</a> request, the specified stream is in the DELETING state until Amazon Kinesis completes the deletion.</li>\n           <li>ACTIVE - The stream exists and is ready for read and write operations or deletion. You should perform read and write operations only on an ACTIVE stream.</li>\n           <li>UPDATING - Shards in the stream are being merged or split. Read and write operations continue to work while the stream is in the UPDATING state.</li>\n       </ul>   \n   ",
+                "required": true
+              },
+              "Shards": {
+                "shape_name": "ShardList",
+                "type": "list",
+                "members": {
+                  "shape_name": "Shard",
+                  "type": "structure",
+                  "members": {
+                    "ShardId": {
+                      "shape_name": "ShardId",
+                      "type": "string",
+                      "min_length": 1,
+                      "max_length": 128,
+                      "pattern": "[a-zA-Z0-9_.-]+",
+                      "documentation": "\n       <p>The unique identifier of the shard within the Amazon Kinesis stream.</p>        \n   ",
+                      "required": true
+                    },
+                    "ParentShardId": {
+                      "shape_name": "ShardId",
+                      "type": "string",
+                      "min_length": 1,
+                      "max_length": 128,
+                      "pattern": "[a-zA-Z0-9_.-]+",
+                      "documentation": "\n       <p>The shard Id of the shard's parent.</p>   \n   "
+                    },
+                    "AdjacentParentShardId": {
+                      "shape_name": "ShardId",
+                      "type": "string",
+                      "min_length": 1,
+                      "max_length": 128,
+                      "pattern": "[a-zA-Z0-9_.-]+",
+                      "documentation": "\n       <p>The shard Id of the shard adjacent to the shard's parent.</p>        \n   "
+                    },
+                    "HashKeyRange": {
+                      "shape_name": "HashKeyRange",
+                      "type": "structure",
+                      "members": {
+                        "StartingHashKey": {
+                          "shape_name": "HashKey",
+                          "type": "string",
+                          "pattern": "0|([1-9]\\d{0,38})",
+                          "documentation": "\n       <p>The starting hash key of the hash key range.</p>        \n   ",
+                          "required": true
+                        },
+                        "EndingHashKey": {
+                          "shape_name": "HashKey",
+                          "type": "string",
+                          "pattern": "0|([1-9]\\d{0,38})",
+                          "documentation": "\n       <p>The ending hash key of the hash key range.</p>         \n   ",
+                          "required": true
+                        }
+                      },
+                      "documentation": "\n       <p>The range of possible hash key values for the shard, which is a set of ordered contiguous positive integers.</p>           \n   ",
+                      "required": true
+                    },
+                    "SequenceNumberRange": {
+                      "shape_name": "SequenceNumberRange",
+                      "type": "structure",
+                      "members": {
+                        "StartingSequenceNumber": {
+                          "shape_name": "SequenceNumber",
+                          "type": "string",
+                          "pattern": "0|([1-9]\\d{0,128})",
+                          "documentation": "\n       <p>The starting sequence number for the range.</p>\n   ",
+                          "required": true
+                        },
+                        "EndingSequenceNumber": {
+                          "shape_name": "SequenceNumber",
+                          "type": "string",
+                          "pattern": "0|([1-9]\\d{0,128})",
+                          "documentation": "\n       <p>The ending sequence number for the range. Shards that are in the OPEN state have an ending sequence number of <code>null</code>.</p>\n   "
+                        }
+                      },
+                      "documentation": "\n       <p>The range of possible sequence numbers for the shard.</p>         \n   ",
+                      "required": true
+                    }
+                  },
+                  "documentation": "\n       <p>A uniquely identified group of data records in an Amazon Kinesis stream.</p>\n   "
+                },
+                "documentation": "\n       <p>The shards that comprise the stream.</p>\n   ",
+                "required": true
+              },
+              "HasMoreShards": {
+                "shape_name": "BooleanObject",
+                "type": "boolean",
+                "documentation": "\n       <p>If set to <code>true</code> there are more shards in the stream available to describe.</p>\n   ",
+                "required": true
+              }
+            },
+            "documentation": "     \n        <p>Contains the current status of the stream, the stream ARN, an array of shard objects that comprise the stream, \n            and states whether there are more shards available.</p>\n   ",
+            "required": true
+          }
+        },
+        "documentation": "    \n        <p>Represents the output of a <code>DescribeStream</code> operation.</p>\n   "
+      },
+      "errors": [
+        {
+          "shape_name": "ResourceNotFoundException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "  \n   "
+            }
+          },
+          "documentation": "   \n   "
+        },
+        {
+          "shape_name": "LimitExceededException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "   \n   "
+            }
+          },
+          "documentation": " \n   "
+        }
+      ],
+      "documentation": "\n   \t        <p>This operation returns the following information about the stream: the current status of the stream, the stream Amazon Resource Name (ARN), \n\t            and an array of shard objects that comprise the stream. For each shard object there is information about the hash key and sequence number ranges that the shard spans, \n\t            and the IDs of any earlier shards that played in a role in a <a>MergeShards</a> or <a>SplitShard</a> operation that created the shard. \n\t            A sequence number is the identifier associated with every record ingested in the Amazon Kinesis stream. \n\t            The sequence number is assigned by the Amazon Kinesis service when a record is put into the stream. </p>\n\t        <p>You can limit the number of returned shards using the <code>Limit</code> parameter. \n\t            The number of shards in a stream may be too large to return from a single call to <code>DescribeStream</code>.  \n\t            You can detect this by using the <code>HasMoreShards</code> flag in the returned output. \n\t            <code>HasMoreShards</code> is set to <code>true</code> when there is more data available.            \n\t        </p> \n\t        <p>If there are more shards available, you can request more shards by using the shard ID of the last shard returned by the <code>DescribeStream</code> \n\t            request, in the <code>ExclusiveStartShardId</code> parameter in a subsequent request to <code>DescribeStream</code>. \n\t            <code>DescribeStream</code> is a paginated operation. \n\t        </p>\n\t        <p><code>DescribeStream</code> has a limit of 10 transactions per second per account.</p>\n\t        <examples>\n\t            <example>\n\t                <name>Obtain Information About a Stream </name>\n\t                <description>The following is an example of an Amazon Kinesis <code>DescribeStream</code> request and response.</description>\n\t                <request><![CDATA[\nPOST / HTTP/1.1\nHost: kinesis.<region>.<domain>\nx-amz-Date: <Date>\nAuthorization: AWS4-HMAC-SHA256 Credential=<Credential>, SignedHeaders=content-type;date;host;user-agent;x-amz-date;x-amz-target;x-amzn-requestid, Signature=<Signature>\nUser-Agent: <UserAgentString>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nConnection: Keep-Alive]]>\nX-Amz-Target: Kinesis_20131202.DescribeStream\n{\n    \"StreamName\":\"exampleStreamName\"\n}\n\t                </request>\n\t                <response><![CDATA[\nHTTP/1.1 200 OK\nx-amzn-RequestId: <RequestId>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nDate: <Date>]]>\n\n\n{\n  \"StreamDescription\": {\n    \"HasMoreShards\": false,\n    \"Shards\": [\n      {\n        \"HashKeyRange\": {\n          \"EndingHashKey\": \"113427455640312821154458202477256070484\",\n          \"StartingHashKey\": \"0\"\n        },\n        \"SequenceNumberRange\": {\n          \"EndingSequenceNumber\": \"21269319989741826081360214168359141376\",\n          \"StartingSequenceNumber\": \"21267647932558653966460912964485513216\"\n        },\n        \"ShardId\": \"shardId-000000000000\"\n      },\n      {\n        \"HashKeyRange\": {\n          \"EndingHashKey\": \"226854911280625642308916404954512140969\",\n          \"StartingHashKey\": \"113427455640312821154458202477256070485\"\n        },\n        \"SequenceNumberRange\": {\n          \"StartingSequenceNumber\": \"21267647932558653966460912964485513217\"\n        },\n        \"ShardId\": \"shardId-000000000001\"\n      },\n      {\n        \"HashKeyRange\": {\n          \"EndingHashKey\": \"340282366920938463463374607431768211455\",\n          \"StartingHashKey\": \"226854911280625642308916404954512140970\"\n        },\n        \"SequenceNumberRange\": {\n          \"StartingSequenceNumber\": \"21267647932558653966460912964485513218\"\n        },\n        \"ShardId\": \"shardId-000000000002\"\n      }\n    ],\n    \"StreamARN\": \"arn:aws:kinesis:us-east-1:052958737983:exampleStreamName\",\n    \"StreamName\": \"exampleStreamName\",\n    \"StreamStatus\": \"ACTIVE\"\n  }\n}\n\t                </response>\n\t            </example>\n\t        </examples>\n   "
+    },
+    "GetRecords": {
+      "name": "GetRecords",
+      "input": {
+        "shape_name": "GetRecordsInput",
+        "type": "structure",
+        "members": {
+          "ShardIterator": {
+            "shape_name": "ShardIterator",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 512,
+            "documentation": "\n           <p>The position in the shard from which you want to start sequentially reading data records.</p>       \n   ",
+            "required": true
+          },
+          "Limit": {
+            "shape_name": "GetRecordsInputLimit",
+            "type": "integer",
+            "min_length": 1,
+            "max_length": 10000,
+            "documentation": "\n       <p>The maximum number of records to return, which can be set to a value of up to 10,000.</p>        \n   "
+          }
+        },
+        "documentation": "\n       <p>Represents the input of a <code>GetRecords</code> operation.</p>\n   "
+      },
+      "output": {
+        "shape_name": "GetRecordsOutput",
+        "type": "structure",
+        "members": {
+          "Records": {
+            "shape_name": "RecordList",
+            "type": "list",
+            "members": {
+              "shape_name": "Record",
+              "type": "structure",
+              "members": {
+                "SequenceNumber": {
+                  "shape_name": "SequenceNumber",
+                  "type": "string",
+                  "pattern": "0|([1-9]\\d{0,128})",
+                  "documentation": "\n       <p>The unique identifier for the record in the Amazon Kinesis stream.</p>\n   ",
+                  "required": true
+                },
+                "Data": {
+                  "shape_name": "Data",
+                  "type": "blob",
+                  "min_length": 0,
+                  "max_length": 51200,
+                  "documentation": "\n       <p>The data blob. The data in the blob is both opaque and immutable to the Amazon Kinesis service, \n           which does not inspect, interpret, or change the data in the blob in any way. The maximum size of the data blob is 50 kilobytes (KB). </p>\n   ",
+                  "required": true
+                },
+                "PartitionKey": {
+                  "shape_name": "PartitionKey",
+                  "type": "string",
+                  "min_length": 1,
+                  "max_length": 256,
+                  "documentation": "\n       <p>Identifies which shard in the stream the data record is assigned to.</p>\n   ",
+                  "required": true
+                }
+              },
+              "documentation": "\n       <p>The unit of data of the Amazon Kinesis stream, which is composed of a sequence number, a partition key, and a data blob.</p> \n   "
+            },
+            "documentation": "\n       <P>The data records retrieved from the shard.</P>  \n   ",
+            "required": true
+          },
+          "NextShardIterator": {
+            "shape_name": "ShardIterator",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 512,
+            "documentation": "\n       <p>The next position in the shard from which to start sequentially reading data records.\n           If set to <code>null</code>, the shard has been closed and the requested iterator will not return any more data.             \n       </p>            \n   "
+          }
+        },
+        "documentation": "\n       <p>Represents the output of a <code>GetRecords</code> operation.</p>\n   "
+      },
+      "errors": [
+        {
+          "shape_name": "ResourceNotFoundException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "  \n   "
+            }
+          },
+          "documentation": "   \n   "
+        },
+        {
+          "shape_name": "InvalidArgumentException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "   \n   "
+            }
+          },
+          "documentation": "   \n   "
+        },
+        {
+          "shape_name": "ProvisionedThroughputExceededException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "   \n   "
+            }
+          },
+          "documentation": "   \n   "
+        },
+        {
+          "shape_name": "ExpiredIteratorException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "  \n   "
+            }
+          },
+          "documentation": "   \n   "
+        }
+      ],
+      "documentation": "\n   \t        <p>This operation returns one or more data records from a shard. A <code>GetRecords</code> operation request can retrieve up to 10 MB of data.</p>\n\t        <p>You specify a shard iterator for the shard that you want to read data from in the <code>ShardIterator</code> parameter. \n\t            The shard iterator specifies the position in the shard from which you want to start reading data records sequentially. \n\t            A shard iterator specifies this position using the sequence number of a data record in the shard. \n\t            For more information about the shard iterator, see <a>GetShardIterator</a>.</p>         \n\t        <p><code>GetRecords</code> may return a partial result if the response size limit is exceeded. \n\t            You will get an error, but not a partial result if the shard's provisioned throughput is exceeded, the shard iterator has expired, \n\t            or an internal processing failure has occurred. \n\t            Clients can request a smaller amount of data by specifying a maximum number of returned records using the <code>Limit</code> parameter. \n\t            The <code>Limit</code> parameter can be set to an integer value of up to 10,000. \n\t            If you set the value to an integer greater than 10,000, you will receive <code>InvalidArgumentException</code>.</p>\n\t        <p>A new shard iterator is returned by every <code>GetRecords</code> request in <code>NextShardIterator</code>, \n\t            which you use in the <code>ShardIterator</code> parameter of the next <code>GetRecords</code> request. \n\t            When you repeatedly read from an Amazon Kinesis stream use a <a>GetShardIterator</a> request to get the first shard iterator to \n\t            use in your first <code>GetRecords</code> request and then use the shard iterator returned in <code>NextShardIterator</code> for subsequent reads.</p>       \n\t        <p><code>GetRecords</code> can return <code>null</code> for the <code>NextShardIterator</code> to reflect that the shard has been closed \n\t            and that the requested shard iterator would never have returned more data. </p>\n\t        <p>If no items can be processed because of insufficient provisioned throughput on the shard involved in the request, \n\t            <code>GetRecords</code> throws <code>ProvisionedThroughputExceededException</code>.</p>          \n\t        <examples>\n\t            <example>\n\t                <name>Get Data from the Shards in a Stream</name>\n\t                <description>The following is an example of an Amazon Kinesis <code>GetRecords</code> request and response.</description>\n\t                <request><![CDATA[\nPOST / HTTP/1.1\nHost: kinesis.<region>.<domain>\nx-amz-Date: <Date>\nAuthorization: AWS4-HMAC-SHA256 Credential=<Credential>, SignedHeaders=content-type;date;host;user-agent;x-amz-date;x-amz-target;x-amzn-requestid, Signature=<Signature>\nUser-Agent: <UserAgentString>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nConnection: Keep-Alive]]>\nX-Amz-Target: Kinesis_20131202.GetRecords\n\n{\n  \"ShardIterator\": \"AAAAAAAAAAETYyAYzd665+8e0X7JTsASDM/Hr2rSwc0X2qz93iuA3udrjTH+ikQvpQk/1ZcMMLzRdAesqwBGPnsthzU0/CBlM/U8/8oEqGwX3pKw0XyeDNRAAZyXBo3MqkQtCpXhr942BRTjvWKhFz7OmCb2Ncfr8Tl2cBktooi6kJhr+djN5WYkB38Rr3akRgCl9qaU4dY=\",\n  \"Limit\": 2\n}\n\t                </request>\n\t                <response><![CDATA[\nHTTP/1.1 200 OK\nx-amzn-RequestId: <RequestId>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nDate: <Date>]]>\n\n\n{\n  \"NextShardIterator\": \"AAAAAAAAAAHsW8zCWf9164uy8Epue6WS3w6wmj4a4USt+CNvMd6uXQ+HL5vAJMznqqC0DLKsIjuoiTi1BpT6nW0LN2M2D56zM5H8anHm30Gbri9ua+qaGgj+3XTyvbhpERfrezgLHbPB/rIcVpykJbaSj5tmcXYRmFnqZBEyHwtZYFmh6hvWVFkIwLuMZLMrpWhG5r5hzkE=\",\n  \"Records\": [\n    {\n      \"Data\": \"XzxkYXRhPl8w\",\n      \"PartitionKey\": \"partitionKey\",\n      \"SequenceNumber\": \"21269319989652663814458848515492872193\"\n    }\n  ] \n}\n\t                </response>\n\t            </example>\n\t        </examples>\n   "
+    },
+    "GetShardIterator": {
+      "name": "GetShardIterator",
+      "input": {
+        "shape_name": "GetShardIteratorInput",
+        "type": "structure",
+        "members": {
+          "StreamName": {
+            "shape_name": "StreamName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 128,
+            "pattern": "[a-zA-Z0-9_.-]+",
+            "documentation": "\n       <p>The name of the stream.</p>            \n   ",
+            "required": true
+          },
+          "ShardId": {
+            "shape_name": "ShardId",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 128,
+            "pattern": "[a-zA-Z0-9_.-]+",
+            "documentation": "\n        <p>The shard ID of the shard to get the iterator for.</p>      \n   ",
+            "required": true
+          },
+          "ShardIteratorType": {
+            "shape_name": "ShardIteratorType",
+            "type": "string",
+            "enum": [
+              "AT_SEQUENCE_NUMBER",
+              "AFTER_SEQUENCE_NUMBER",
+              "TRIM_HORIZON",
+              "LATEST"
+            ],
+            "documentation": "\n       <p>Determines how the shard iterator is used to start reading data records from the shard.</p> \n       <p>The following are the valid shard iterator types:</p>  \n       <ul>\n           <li>AT_SEQUENCE_NUMBER -  Start reading exactly from the position denoted by a specific sequence number.</li>\n           <li>AFTER_SEQUENCE_NUMBER  - Start reading right after the position denoted by a specific sequence number.</li>\n           <li>TRIM_HORIZON -  Start reading at the last untrimmed record in the shard in the system, which is the oldest data record in the shard.</li>\n           <li>LATEST - Start reading just after the most recent record in the shard, so that you always read the most recent data in the shard.</li>\n       </ul>   \n   ",
+            "required": true
+          },
+          "StartingSequenceNumber": {
+            "shape_name": "SequenceNumber",
+            "type": "string",
+            "pattern": "0|([1-9]\\d{0,128})",
+            "documentation": "\n       <p>The sequence number of the data record in the shard from which to start reading from.</p>                   \n   "
+          }
+        },
+        "documentation": "\n           <p>Represents the input of a <code>GetShardIterator</code> operation.</p> \n   "
+      },
+      "output": {
+        "shape_name": "GetShardIteratorOutput",
+        "type": "structure",
+        "members": {
+          "ShardIterator": {
+            "shape_name": "ShardIterator",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 512,
+            "documentation": "\n       <p>The position in the shard from which to start reading data records sequentially. \n           A shard iterator specifies this position using the sequence number of a data record in a shard.</p>\n   "
+          }
+        },
+        "documentation": "\n       <p>Represents the output of a <code>GetShardIterator</code> operation.</p> \n   "
+      },
+      "errors": [
+        {
+          "shape_name": "ResourceNotFoundException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "  \n   "
+            }
+          },
+          "documentation": "   \n   "
+        },
+        {
+          "shape_name": "InvalidArgumentException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "   \n   "
+            }
+          },
+          "documentation": "   \n   "
+        },
+        {
+          "shape_name": "ProvisionedThroughputExceededException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "   \n   "
+            }
+          },
+          "documentation": "   \n   "
+        }
+      ],
+      "documentation": "\n   \t        <p>This operation returns a shard iterator in <code>ShardIterator</code>. The shard iterator specifies the position in the shard from \n\t            which you want to start reading data records sequentially. \n\t            A shard iterator specifies this position using the sequence number of a data record in a shard. \n\t            A sequence number is the identifier associated with every record ingested in the Amazon Kinesis stream. \n\t            The sequence number is assigned by the Amazon Kinesis service when a record is put into the stream. </p>\n\t        <p>You must specify the shard iterator type in the <code>GetShardIterator</code> request. \n\t            For example, you can set the <code>ShardIteratorType</code> parameter to read exactly from the position denoted by a specific sequence number \n\t            by using the AT_SEQUENCE_NUMBER shard iterator type, or right after the sequence number by using the AFTER_SEQUENCE_NUMBER shard iterator type, \n\t            using sequence numbers returned by earlier <a>PutRecord</a>, <a>GetRecords</a> or <a>DescribeStream</a> requests. \n\t            You can specify the shard iterator type TRIM_HORIZON in the request to cause <code>ShardIterator</code> \n\t            to point to the last untrimmed record in the shard in the system, which is the oldest data record in the shard. \n\t            Or you can point to just after the most recent record in the shard, by using the shard iterator type LATEST, so that you always \n\t            read the most recent data in the shard. </p>  \n\t        <p><b>Note:</b> Each shard iterator expires five minutes after it is returned to the requester.</p>\n\t        <p>When you repeatedly read from an Amazon Kinesis stream use a <a>GetShardIterator</a> request to get the first shard iterator to \n\t            to use in your first <code>GetRecords</code> request and then use the shard iterator returned by the \n\t            <code>GetRecords</code> request in <code>NextShardIterator</code> for subsequent reads.\n\t            A new shard iterator is returned by every <code>GetRecords</code> request in <code>NextShardIterator</code>, \n\t            which you use in the <code>ShardIterator</code> parameter of the next <code>GetRecords</code> request. </p>\n\t        <p>If a <code>GetShardIterator</code> request is made too often, you will receive a <code>ProvisionedThroughputExceededException</code>. \n\t            For more information about throughput limits, see the <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/\">Amazon Kinesis Developer Guide</a>. </p>  \n\t        <p><code>GetShardIterator</code> can return <code>null</code> for its <code>ShardIterator</code> to indicate that the shard has been closed \n\t            and that the requested iterator will return no more data. A shard can be closed by a <a>SplitShard</a> or <a>MergeShards</a> operation.</p> \n\t        <p><code>GetShardIterator</code> has a limit of 5 transactions per second per account per shard.</p>         \n\t        <examples>\n\t            <example>\n\t                <name>Get a Shard Iterator</name>\n\t                <description>The following is an example of an Amazon Kinesis <code>GetShardIterator</code> request and response.</description>\n\t                <request><![CDATA[\nPOST / HTTP/1.1\nHost: kinesis.<region>.<domain>\nx-amz-Date: <Date>\nAuthorization: AWS4-HMAC-SHA256 Credential=<Credential>, SignedHeaders=content-type;date;host;user-agent;x-amz-date;x-amz-target;x-amzn-requestid, Signature=<Signature>\nUser-Agent: <UserAgentString>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nConnection: Keep-Alive]]>\nX-Amz-Target: Kinesis_20131202.GetShardIterator\n\n{\n  \"StreamName\": \"exampleStreamName\",\n  \"ShardId\": \"shardId-000000000001\",\n  \"ShardIteratorType\": \"LATEST\"\n}\n\t                </request>\n\t                <response><![CDATA[\nHTTP/1.1 200 OK\nx-amzn-RequestId: <RequestId>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nDate: <Date>]]>\n\n{\n  \"ShardIterator\": \"AAAAAAAAAAETYyAYzd665+8e0X7JTsASDM/Hr2rSwc0X2qz93iuA3udrjTH+ikQvpQk/1ZcMMLzRdAesqwBGPnsthzU0/CBlM/U8/8oEqGwX3pKw0XyeDNRAAZyXBo3MqkQtCpXhr942BRTjvWKhFz7OmCb2Ncfr8Tl2cBktooi6kJhr+djN5WYkB38Rr3akRgCl9qaU4dY=\"  \n}\n\t                </response>\n\t            </example>\n\t        </examples>\n   "
+    },
+    "ListStreams": {
+      "name": "ListStreams",
+      "input": {
+        "shape_name": "ListStreamsInput",
+        "type": "structure",
+        "members": {
+          "Limit": {
+            "shape_name": "ListStreamsInputLimit",
+            "type": "integer",
+            "min_length": 1,
+            "max_length": 10000,
+            "documentation": "\n       <p>The maximum number of streams to list.</p>    \n   "
+          },
+          "ExclusiveStartStreamName": {
+            "shape_name": "StreamName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 128,
+            "pattern": "[a-zA-Z0-9_.-]+",
+            "documentation": "\n       <p>The name of the stream to start the list with.</p>           \n   "
+          }
+        },
+        "documentation": "\n       <p>Represents the input of a <code>ListStreams</code> operation.</p>     \n   "
+      },
+      "output": {
+        "shape_name": "ListStreamsOutput",
+        "type": "structure",
+        "members": {
+          "StreamNames": {
+            "shape_name": "StreamNameList",
+            "type": "list",
+            "members": {
+              "shape_name": "StreamName",
+              "type": "string",
+              "min_length": 1,
+              "max_length": 128,
+              "pattern": "[a-zA-Z0-9_.-]+",
+              "documentation": null
+            },
+            "documentation": "\n       <p>The names of the streams that are associated with the AWS account making the <code>ListStreams</code> request.</p>    \n   ",
+            "required": true
+          },
+          "HasMoreStreams": {
+            "shape_name": "BooleanObject",
+            "type": "boolean",
+            "documentation": "\n       <p>If set to <code>true</code>, there are more streams available to list.</p>  \n   ",
+            "required": true
+          }
+        },
+        "documentation": "\n      <p>Represents the output of a <code>ListStreams</code> operation.</p> \n   "
+      },
+      "errors": [
+        {
+          "shape_name": "LimitExceededException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "   \n   "
+            }
+          },
+          "documentation": " \n   "
+        }
+      ],
+      "documentation": "\n \t        <p> This operation returns an array of the names of all the streams that are associated with the AWS account \n\t            making the <code>ListStreams</code> request. A given AWS account can have many streams active at one time. \n\t        </p>\n\t        <p> The number of streams may be too large to return from a single call to <code>ListStreams</code>. \n\t            You can limit the number of returned streams using the <code>Limit</code> parameter. \n\t            If you do not specify a value for the <code>Limit</code> parameter, Amazon Kinesis uses the default limit, which is currently 10.</p>\n\t        <p> You can detect if there are more streams available to list by using the <code>HasMoreStreams</code> flag from the returned output. \n\t            If there are more streams available, you can request more streams by using the name of the last stream returned by the <code>ListStreams</code> \n\t            request in the <code>ExclusiveStartStreamName</code> parameter in a subsequent request to <code>ListStreams</code>. \n\t            The group of stream names returned by the subsequent request is then added to the list. \n\t            You can continue this process until all the stream names have been collected in the list. </p>\n\t        <p><code>ListStreams</code> has a limit of 5 transactions per second per account.</p>\n\t        <examples>\n\t            <example>\n\t                <name>List the Streams for an AWS Account</name>\n\t                <description>The following is an example of an Amazon Kinesis <code>ListStreams</code> request and response.</description>\n\t                <request><![CDATA[\nPOST / HTTP/1.1\nHost: kinesis.<region>.<domain>\nx-amz-Date: <Date>\nAuthorization: AWS4-HMAC-SHA256 Credential=<Credential>, SignedHeaders=content-type;date;host;user-agent;x-amz-date;x-amz-target;x-amzn-requestid, Signature=<Signature>\nUser-Agent: <UserAgentString>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nConnection: Keep-Alive]]>\nX-Amz-Target: Kinesis_20131202.ListStreams\n\n\t                </request>\n\t                <response><![CDATA[\nHTTP/1.1 200 OK\nx-amzn-RequestId: <RequestId>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nDate: <Date>]]>\n\n\n{\n  \"HasMoreStreams\": false,\n  \"StreamNames\": [\n    \"exampleStreamName\"\n  ]\n}\n\t                </response>\n\t            </example>\n\t        </examples>  \n   "
+    },
+    "MergeShards": {
+      "name": "MergeShards",
+      "input": {
+        "shape_name": "MergeShardsInput",
+        "type": "structure",
+        "members": {
+          "StreamName": {
+            "shape_name": "StreamName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 128,
+            "pattern": "[a-zA-Z0-9_.-]+",
+            "documentation": "\n       <p>The name of the stream for the merge.</p>            \n   ",
+            "required": true
+          },
+          "ShardToMerge": {
+            "shape_name": "ShardId",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 128,
+            "pattern": "[a-zA-Z0-9_.-]+",
+            "documentation": "\n       <p>The shard ID of the shard to combine with the adjacent shard for the merge.</p>          \n   ",
+            "required": true
+          },
+          "AdjacentShardToMerge": {
+            "shape_name": "ShardId",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 128,
+            "pattern": "[a-zA-Z0-9_.-]+",
+            "documentation": "\n       <p>The shard ID of the adjacent shard for the merge.</p>          \n   ",
+            "required": true
+          }
+        },
+        "documentation": "\n       <p>Represents the input of a <code>MergeShards</code> operation.</p>    \n   "
+      },
+      "output": null,
+      "errors": [
+        {
+          "shape_name": "ResourceNotFoundException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "  \n   "
+            }
+          },
+          "documentation": "   \n   "
+        },
+        {
+          "shape_name": "ResourceInUseException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "   \n   "
+            }
+          },
+          "documentation": "   \n   "
+        },
+        {
+          "shape_name": "InvalidArgumentException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "   \n   "
+            }
+          },
+          "documentation": "   \n   "
+        },
+        {
+          "shape_name": "LimitExceededException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "   \n   "
+            }
+          },
+          "documentation": " \n   "
+        }
+      ],
+      "documentation": "\n   \t        <p>This operation merges two adjacent shards in a stream and combines them into a single shard to reduce the stream's capacity to ingest and transport data. \n\t            Two shards are considered adjacent if the union of the hash key ranges for the two shards form a contiguous set with no gaps. \n\t            For example, if you have two shards, one with a hash key range of 276...381 and the other with a hash key range of 382...454, \n\t            then you could merge these two shards into a single shard that would have a hash key range of 276...454. After the\n\t            merge, the single child shard receives data for all hash key values covered by the two parent shards.</p>\n\t        <p><code>MergeShards</code> is called when there is a need to reduce the overall capacity of a stream because of excess capacity \n\t            that is not being used. \n\t            The operation requires that you specify the shard to be merged and the adjacent shard for a given stream. \n\t            For more information about merging shards, see the <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/\">Amazon Kinesis Developer Guide</a>.</p>\n\t        <p>If the stream is in the ACTIVE state, you can call <code>MergeShards</code>. If a stream is in CREATING or UPDATING or DELETING states, \n\t            then Amazon Kinesis returns a <code>ResourceInUseException</code>. \n\t            If the specified stream does not exist, Amazon Kinesis returns a <code>ResourceNotFoundException</code>. </p>          \n\t        <p>You can use the <a>DescribeStream</a> operation to check the state of the stream, which is returned in <code>StreamStatus</code>.</p>\n\t        <p><code>MergeShards</code> is an asynchronous operation. Upon receiving a <code>MergeShards</code> request, \n\t            Amazon Kinesis immediately returns a response and sets the <code>StreamStatus</code> to UPDATING. \n\t            After the operation is completed, Amazon Kinesis sets the <code>StreamStatus</code> to ACTIVE. \n\t            Read and write operations continue to work while the stream is in the UPDATING state. </p>\n\t        <p>You use the <a>DescribeStream</a> operation to determine the shard IDs that are specified in the <code>MergeShards</code> request. </p> \n\t        <p>If you try to operate on too many streams in parallel using <a>CreateStream</a>, <a>DeleteStream</a>, \n\t            <code>MergeShards</code> or <a>SplitShard</a>, you will receive a <code>LimitExceededException</code>. </p>\n\t        <p><code>MergeShards</code> has limit of 5 transactions per second per account.</p>\n\t        <examples>\n\t            <example>\n\t                <name>Merge Two Adjacent Shards</name>\n\t                <description>The following is an example of an Amazon Kinesis <code>MergeShards</code> request and response.</description>\n\t                <request><![CDATA[\nPOST / HTTP/1.1\nHost: kinesis.<region>.<domain>\nx-amz-Date: <Date>\nAuthorization: AWS4-HMAC-SHA256 Credential=<Credential>, SignedHeaders=content-type;date;host;user-agent;x-amz-date;x-amz-target;x-amzn-requestid, Signature=<Signature>\nUser-Agent: <UserAgentString>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nConnection: Keep-Alive]]>\nX-Amz-Target: Kinesis_20131202.MergeShards\n\n{\n  \"StreamName\": \"exampleStreamName\",\n  \"ShardToMerge\": \"shardId-000000000000\",\n  \"AdjacentShardToMerge\": \"shardId-000000000001\"\n}\n\t                </request>\n\t                <response><![CDATA[\nHTTP/1.1 200 OK\nx-amzn-RequestId: <RequestId>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nDate: <Date>]]>\n\t      </response>\n\t            </example>\n\t        </examples>\n   "
+    },
+    "PutRecord": {
+      "name": "PutRecord",
+      "input": {
+        "shape_name": "PutRecordInput",
+        "type": "structure",
+        "members": {
+          "StreamName": {
+            "shape_name": "StreamName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 128,
+            "pattern": "[a-zA-Z0-9_.-]+",
+            "documentation": "\n       <p>The name of the stream to put the data record into.</p>        \n   ",
+            "required": true
+          },
+          "Data": {
+            "shape_name": "Data",
+            "type": "blob",
+            "min_length": 0,
+            "max_length": 51200,
+            "documentation": "\n       <p>The data blob to put into the record, which must be Base64 encoded. The maximum size of the data blob is 50 kilobytes (KB). </p>      \n   ",
+            "required": true
+          },
+          "PartitionKey": {
+            "shape_name": "PartitionKey",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 256,
+            "documentation": "\n       <p>Determines which shard in the stream the data record is assigned to. \n          Partition keys are Unicode strings with a maximum length limit of 256 bytes. \n          Amazon Kinesis uses the partition key as input to a hash function that maps the partition key and associated data to a specific shard.      \n          Specifically, an MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. \n          As a result of this hashing mechanism, all data records with the same partition key will map to the same shard within the stream.</p>   \n   ",
+            "required": true
+          },
+          "ExplicitHashKey": {
+            "shape_name": "HashKey",
+            "type": "string",
+            "pattern": "0|([1-9]\\d{0,38})",
+            "documentation": "\n       <p>The hash value used to explicitly determine the shard the data record is assigned to by overriding the partition key hash.</p>\n   "
+          },
+          "SequenceNumberForOrdering": {
+            "shape_name": "SequenceNumber",
+            "type": "string",
+            "pattern": "0|([1-9]\\d{0,128})",
+            "documentation": "\n       <p>The sequence number to use as the initial number for the partition key. Subsequent calls to <code>PutRecord</code> from the same client and for the same partition key will increase from the <code>SequenceNumberForOrdering</code> value. </p> \n   "
+          }
+        },
+        "documentation": "\n       <p>Represents the input of a <code>PutRecord</code> operation.</p>  \n   "
+      },
+      "output": {
+        "shape_name": "PutRecordOutput",
+        "type": "structure",
+        "members": {
+          "ShardId": {
+            "shape_name": "ShardId",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 128,
+            "pattern": "[a-zA-Z0-9_.-]+",
+            "documentation": "\n       <p>The shard ID of the shard where the data record was placed.</p>       \n   ",
+            "required": true
+          },
+          "SequenceNumber": {
+            "shape_name": "SequenceNumber",
+            "type": "string",
+            "pattern": "0|([1-9]\\d{0,128})",
+            "documentation": "\n       <p>The sequence number identifier that was assigned to the put data record. The sequence number for the record is unique across \n           all records in the stream. A sequence number is the identifier associated with every record put into the stream.</p>   \n   ",
+            "required": true
+          }
+        },
+        "documentation": "\n       <p>Represents the output of a <code>PutRecord</code> operation.</p>         \n   "
+      },
+      "errors": [
+        {
+          "shape_name": "ResourceNotFoundException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "  \n   "
+            }
+          },
+          "documentation": "   \n   "
+        },
+        {
+          "shape_name": "InvalidArgumentException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "   \n   "
+            }
+          },
+          "documentation": "   \n   "
+        },
+        {
+          "shape_name": "ProvisionedThroughputExceededException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "   \n   "
+            }
+          },
+          "documentation": "   \n   "
+        }
+      ],
+      "documentation": "\n\t        <p>This operation puts a data record into an Amazon Kinesis stream from a producer. \n\t            This operation must be called to send data from the producer into the Amazon Kinesis stream for real-time ingestion and subsequent processing. \n\t            The <code>PutRecord</code> operation requires the name of the stream that captures, stores, and transports the data; a partition key; \n\t            and the data blob itself. The data blob could be a segment from a log file, geographic/location data, website clickstream data, \n\t            or any other data type.</p>\n\t        <p>The partition key is used to distribute data across shards. Amazon Kinesis segregates the data records that belong to a data stream into multiple shards, \n\t            using the partition key associated with each data record to determine which shard a given data record belongs to. </p> \n\t        <p>Partition keys are Unicode strings, with a maximum length limit of 256 bytes. An MD5 hash function is used to map partition keys to 128-bit \n\t            integer values and to map associated data records to shards using the hash key ranges of the shards. \n\t            You can override hashing the partition key to determine the shard by explicitly specifying a hash value \n\t            using the <code>ExplicitHashKey</code> parameter. For more information, see the \n\t            <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/\">Amazon Kinesis Developer Guide</a>.</p>\n\t        <p><code>PutRecord</code> returns the shard ID of where the data record was placed and the sequence number that was assigned to the data record.</p>  \n\t        <p>The <code>SequenceNumberForOrdering</code> sets the initial sequence number for the partition key. Later <code>PutRecord</code> requests to the same partition key (from the same client) will automatically increase from <code>SequenceNumberForOrdering</code>, ensuring strict sequential ordering.</p>\n\t        <p>If a <code>PutRecord</code> request cannot be processed because of insufficient provisioned throughput on the shard involved in the request, \n\t            <code>PutRecord</code> throws <code>ProvisionedThroughputExceededException</code>. </p>  \n\t        <p>Data records are accessible for only 24 hours from the time that they are added to an Amazon Kinesis stream.</p>  \n\t        <examples>\n\t            <example>\n\t                <name>Add Data to a Stream </name>\n\t                <description>The following is an example of an Amazon Kinesis <code>PutRecord</code> request and response.</description>\n\t                <request><![CDATA[\nPOST / HTTP/1.1\nHost: kinesis.<region>.<domain>\nx-amz-Date: <Date>\nAuthorization: AWS4-HMAC-SHA256 Credential=<Credential>, SignedHeaders=content-type;date;host;user-agent;x-amz-date;x-amz-target;x-amzn-requestid, Signature=<Signature>\nUser-Agent: <UserAgentString>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nConnection: Keep-Alive]]>\nX-Amz-Target: Kinesis_20131202.PutRecord\n\n{\n  \"StreamName\": \"exampleStreamName\",\n  \"Data\": \"XzxkYXRhPl8x\",\n  \"PartitionKey\": \"partitionKey\"\n}\n\t                </request>\n\t                <response><![CDATA[\nHTTP/1.1 200 OK\nx-amzn-RequestId: <RequestId>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nDate: <Date>]]>\n\n{\n  \"SequenceNumber\": \"21269319989653637946712965403778482177\",\n  \"ShardId\": \"shardId-000000000001\"\n}\n\t                </response>\n\t            </example>\n\t        </examples>\n   "
+    },
+    "SplitShard": {
+      "name": "SplitShard",
+      "input": {
+        "shape_name": "SplitShardInput",
+        "type": "structure",
+        "members": {
+          "StreamName": {
+            "shape_name": "StreamName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 128,
+            "pattern": "[a-zA-Z0-9_.-]+",
+            "documentation": "\n       <p>The name of the stream for the shard split.</p>  \n   ",
+            "required": true
+          },
+          "ShardToSplit": {
+            "shape_name": "ShardId",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 128,
+            "pattern": "[a-zA-Z0-9_.-]+",
+            "documentation": "\n       <p>The shard ID of the shard to split.</p>\n   ",
+            "required": true
+          },
+          "NewStartingHashKey": {
+            "shape_name": "HashKey",
+            "type": "string",
+            "pattern": "0|([1-9]\\d{0,38})",
+            "documentation": "\n       <p>A hash key value for the starting hash key of one of the child shards created by the split. \n           The hash key range for a given shard constitutes a set of ordered contiguous positive integers. \n           The value for <code>NewStartingHashKey</code> must be in the range of hash keys being mapped into the shard.          \n           The <code>NewStartingHashKey</code> hash key value and all higher hash key values in hash key range are distributed to one of the child shards. \n           All the lower hash key values in the range are distributed to the other child shard.</p>           \n   ",
+            "required": true
+          }
+        },
+        "documentation": "\n       <p>Represents the input of a <code>SplitShard</code> operation.</p>  \n   "
+      },
+      "output": null,
+      "errors": [
+        {
+          "shape_name": "ResourceNotFoundException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "  \n   "
+            }
+          },
+          "documentation": "   \n   "
+        },
+        {
+          "shape_name": "ResourceInUseException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "   \n   "
+            }
+          },
+          "documentation": "   \n   "
+        },
+        {
+          "shape_name": "InvalidArgumentException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "   \n   "
+            }
+          },
+          "documentation": "   \n   "
+        },
+        {
+          "shape_name": "LimitExceededException",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": "   \n   "
+            }
+          },
+          "documentation": " \n   "
+        }
+      ],
+      "documentation": "\n\t       <p>This operation splits a shard into two new shards in the stream, to increase the stream's capacity to ingest and transport data. \n\t            <code>SplitShard</code> is called when there is a need to increase the overall capacity of stream because of an expected increase \n\t            in the volume of data records being ingested. </p>\n\t        <p><code>SplitShard</code> can also be used when a given shard appears to be approaching its maximum utilization, for example, \n\t            when the set of producers sending data into the specific shard are suddenly sending more than previously anticipated. \n\t            You can also call the <code>SplitShard</code> operation to increase stream capacity, so that more\n\t            Amazon Kinesis applications can simultaneously read data from the stream for real-time processing. </p>  \n\t        <p>The <code>SplitShard</code> operation requires that you specify the shard to be split and the new hash key, \n\t            which is the position in the shard where the shard gets split in two. \n\t            In many cases, the new hash key might simply be the average of the beginning and ending hash key, \n\t            but it can be any hash key value in the range being mapped into the shard. \n\t            For more information about splitting shards, see the <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/\">Amazon Kinesis Developer Guide</a>.\n\t        </p>\n\t        <p>You can use the <a>DescribeStream</a> operation to determine the shard ID and hash key values for the \n\t            <code>ShardToSplit</code> and <code>NewStartingHashKey</code> parameters that are specified in the <code>SplitShard</code> request.</p>\n\t        <p><code>SplitShard</code> is an asynchronous operation. Upon receiving a <code>SplitShard</code> request, Amazon Kinesis \n\t            immediately returns a response and sets the stream status to UPDATING. After the operation is completed, Amazon Kinesis \n\t            sets the stream status to ACTIVE. Read and write operations continue to work while the stream is in the UPDATING state.         \n\t            </p>\n\t        <p>You can use <code>DescribeStream</code> to check the status of the stream, which is returned in <code>StreamStatus</code>. \n\t            If the stream is in the ACTIVE state, you can call <code>SplitShard</code>. \n\t            If a stream is in CREATING or UPDATING or DELETING states, then Amazon Kinesis returns a <code>ResourceInUseException</code>.</p>  \n\t        <p>If the specified stream does not exist, Amazon Kinesis returns a <code>ResourceNotFoundException</code>. \n\t                If you try to create more shards than are authorized for your account, you receive a <code>LimitExceededException</code>. </p>\n\t        <p><b>Note:</b> The default limit for an AWS account is two shards per stream.  \n\t            If you need to create a stream with more than two shards, contact AWS Support to increase the limit on your account.</p>\n\t        <p>If you try to operate on too many streams in parallel using <a>CreateStream</a>, <a>DeleteStream</a>, <a>MergeShards</a> or <a>SplitShard</a>, \n\t                you will receive a <code>LimitExceededException</code>. </p> \n\t        <p><code>SplitShard</code> has limit of 5 transactions per second per account.</p>\n\t        <examples>\n\t            <example>\n\t                <name>Split a Shard </name>\n\t                <description>The following is an example of an Amazon Kinesis <code>SplitShard</code> request and response.</description>\n\t                <request><![CDATA[\nPOST / HTTP/1.1\nHost: kinesis.<region>.<domain>\nx-amz-Date: <Date>\nAuthorization: AWS4-HMAC-SHA256 Credential=<Credential>, SignedHeaders=content-type;date;host;user-agent;x-amz-date;x-amz-target;x-amzn-requestid, Signature=<Signature>\nUser-Agent: <UserAgentString>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nConnection: Keep-Alive]]>\nX-Amz-Target: Kinesis_20131202.SplitShard\n\n{\n  \"StreamName\": \"exampleStreamName\",\n  \"ShardToSplit\": \"shardId-000000000000\",\n  \"NewStartingHashKey\": \"10\"\n}\n\t                </request>\n\t                <response><![CDATA[\nHTTP/1.1 200 OK\nx-amzn-RequestId: <RequestId>\nContent-Type: application/x-amz-json-1.1\nContent-Length: <PayloadSizeBytes>\nDate: <Date>]]>\n\t                </response>\n\t            </example>\n\t        </examples>    \n   "
+    }
+  }
+}

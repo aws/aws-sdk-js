@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var Translator = require('../lib/api/translator');
+var util = require('util');
+
+var basePath = __dirname + '/../apis/';
+var paths = fs.readdirSync(basePath + 'source');
+var modelName = process.argv[2];
+
+function outpath(api) {
+  var name = api.serviceAbbreviation || api.serviceFullName;
+  name = name.replace(/^Amazon|AWS\s*|\(.*|\s+|\W+/g, '');
+  if (name === 'ElasticLoadBalancing') name = 'ELB';
+  else if (name === 'SWF') name = 'SimpleWorkflow';
+  name = name.toLowerCase() + '-' + api.apiVersion;
+  return name;
+}
+
+paths.forEach(function (path) {
+  if (path.match(new RegExp('^' + modelName ? modelName : ''))) {
+    var data = fs.readFileSync(basePath + 'source/' + path);
+    var translated = new Translator(data, {documentation: false});
+    var opath = outpath(translated);
+    var json = JSON.stringify(translated, null, '  ');
+    //json = json.replace(/"(\w+)": /g, function (_, m) { return m === 'default' ? _ : m + ": "; }).replace(/"/g, '\'');
+    fs.writeFileSync(basePath + opath + '.json', json);
+    console.log('** Generated service for \'' + opath + '\'');
+  }
+});

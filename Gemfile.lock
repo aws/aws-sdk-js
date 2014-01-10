@@ -1,0 +1,32 @@
+GIT
+  remote: git://github.com/lsegal/parsejs.git
+  revision: 7ba09b48fefc2db2970406938c34fb3d97ad4148
+  specs:
+    parsejs (0.0.1)
+      kpeg
+      yard
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    kpeg (1.0.0)
+    mini_portile (0.5.2)
+    nokogiri (1.6.1)
+      mini_portile (~> 0.5.0)
+    rake (10.1.1)
+    rdiscount (2.1.7)
+    yard (0.8.7.3)
+    yard-js (0.1.1)
+    yard-sitemap (1.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  nokogiri
+  parsejs!
+  rake
+  rdiscount
+  yard (~> 0.0)
+  yard-js (~> 0.0)
+  yard-sitemap (~> 1.0)

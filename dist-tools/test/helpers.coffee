@@ -16,15 +16,7 @@ evalCode = (code, preamble) ->
     })();
   """
 
-apiDir = __dirname + '/../../lib/services/api'
-apiFiles = fs.readdirSync(apiDir)
-apiFilesMap = {}
-apiFiles.forEach (file) ->
-  match = file.match(/^(.+?)-(.+)\.js$/)
-  apiFilesMap[match[1]] = (apiFilesMap[match[1]] || []).concat(match[2])
-
 module.exports =
-  apiFiles: apiFiles
-  apiFilesMap: apiFilesMap
+  AWS: require('../../lib/aws')
   evalCode: evalCode
   stringstream: stringstream

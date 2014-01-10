@@ -235,6 +235,17 @@ describe 'AWS.XML.Builder', ->
       """
       matchXML(toXML(rules, params), xml)
 
+    it 'ints and floats formatted as numbers', ->
+      rules = {CountI:{type:'integer'},CountF:{type:'float'}}
+      params = { CountI: '123', CountF: '1.23' }
+      xml = """
+      <Data xmlns="#{xmlns}">
+        <CountI>123</CountI>
+        <CountF>1.23</CountF>
+      </Data>
+      """
+      matchXML(toXML(rules, params), xml)
+
   describe 'booleans', ->
 
     it 'true', ->

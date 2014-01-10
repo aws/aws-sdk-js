@@ -66,15 +66,15 @@ describe 'browser builder', ->
 
   it 'can build default services into bundle', ->
     buildBundle null, null, "window.AWS", (err, AWS) ->
-      api = helpers.apiFilesMap
-      expect(new AWS.S3().api.apiVersion).toEqual(api.s3[-1..-1][0])
-      expect(new AWS.DynamoDB().api.apiVersion).toEqual(api.dynamodb[-1..-1][0])
-      expect(new AWS.STS().api.apiVersion).toEqual(api.sts[-1..-1][0])
+      expect(new AWS.S3().api.apiVersion).toEqual(new helpers.AWS.S3().api.apiVersion)
+      expect(new AWS.DynamoDB().api.apiVersion).toEqual(new helpers.AWS.DynamoDB().api.apiVersion)
+      expect(new AWS.STS().api.apiVersion).toEqual(new helpers.AWS.STS().api.apiVersion)
 
   it 'can build all services into bundle', ->
     buildBundle 'all', null, "window.AWS", (err, AWS) ->
-      expect(Object.keys(AWS).length >
-        Object.keys(helpers.apiFilesMap).length).toEqual(true)
+      Object.keys(helpers.AWS).forEach (k) ->
+        if k.serviceIdentifier
+          expect(typeof AWS[k]).toEqual('object')
 
   it 'passes errors to stream', ->
     buildBundle 'invalidmodule', null, null, (err) ->
@@ -93,8 +93,8 @@ describe 'browser builder', ->
       waitsFor -> done
       runs ->
         expect(stream.data).toMatch(/Copyright .+ Amazon\.com/i)
-        expect(stream.data).toContain('/api/iam-2010-05-08"')
-        expect(stream.data).not.toContain('/api/s3-2006-03-01"')
+        expect(stream.data).toContain('"2010-05-08"')
+        expect(stream.data).not.toContain('"2006-03-01"')
 
     it 'uses MINIFY environment variable to set minification mode', ->
       done = false
@@ -108,4 +108,4 @@ describe 'browser builder', ->
       runs ->
         expect(stream.data).toMatch(/Copyright .+ Amazon\.com/i)
         expect(stream.data).toMatch(/function \w\(\w,\w,\w\)\{function \w\(\w,\w\)\{/)
-        expect(stream.data).toContain('s3-2006-03-01')
+        expect(stream.data).toContain('"2006-03-01"')
