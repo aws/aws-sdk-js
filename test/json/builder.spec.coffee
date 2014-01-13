@@ -50,6 +50,17 @@ describe 'AWS.JSON.Builder', ->
       params = { Items: { A: 'a', B: 'b' } }
       expect(build(rules, params)).toEqual('{"Items":{"A":"a","B":"b"}}')
 
+    it 'translates nested maps', ->
+      rules =
+        type: 'structure'
+        members:
+          Items: type: 'map', members: type: 'integer'
+      now = new Date()
+      now.setMilliseconds(100)
+      params = Items: MyKey: "5", MyOtherKey: "10"
+      str = '{"Items":{"MyKey":5,"MyOtherKey":10}}'
+      expect(build(rules, params)).toEqual(str)
+
     it 'traslates nested timestamps', ->
       rules =
         type: 'structure'

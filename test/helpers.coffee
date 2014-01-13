@@ -72,7 +72,10 @@ mockHttpSuccessfulResponse = (status, headers, data, cb) ->
     else
       httpResp.emit('data', new Buffer(str))
 
-  httpResp.emit('end')
+  if httpResp._events['readable'] || httpResp._events['data']
+    httpResp.emit('end')
+  else
+    httpResp.emit('aborted')
 
 mockHttpResponse = (status, headers, data) ->
   stream = new EventEmitter()
