@@ -88,37 +88,37 @@ describe 'AWS.Credentials', ->
       expect(spy.argsForCall[0][0]).toEqual(null)
       expect(creds.expired).toEqual(false)
 
-describe 'AWS.EnvironmentCredentials', ->
-  beforeEach ->
-    process.env = {}
-
-  describe 'constructor', ->
-    it 'should be able to read credentials from env with a prefix', ->
-      process.env.AWS_ACCESS_KEY_ID = 'akid'
-      process.env.AWS_SECRET_ACCESS_KEY = 'secret'
-      process.env.AWS_SESSION_TOKEN = 'session'
-      creds = new AWS.EnvironmentCredentials('AWS')
-      validateCredentials(creds)
-
-    it 'should be able to read credentials from env without a prefix', ->
-      process.env.ACCESS_KEY_ID = 'akid'
-      process.env.SECRET_ACCESS_KEY = 'secret'
-      process.env.SESSION_TOKEN = 'session'
-      creds = new AWS.EnvironmentCredentials()
-      validateCredentials(creds)
-
-  describe 'refresh', ->
-    it 'can refresh credentials', ->
-      process.env.AWS_ACCESS_KEY_ID = 'akid'
-      process.env.AWS_SECRET_ACCESS_KEY = 'secret'
-      creds = new AWS.EnvironmentCredentials('AWS')
-      expect(creds.accessKeyId).toEqual('akid')
-      creds.accessKeyId = 'not_akid'
-      expect(creds.accessKeyId).not.toEqual('akid')
-      creds.refresh()
-      expect(creds.accessKeyId).toEqual('akid')
-
 if AWS.util.isNode()
+  describe 'AWS.EnvironmentCredentials', ->
+    beforeEach ->
+      process.env = {}
+
+    describe 'constructor', ->
+      it 'should be able to read credentials from env with a prefix', ->
+        process.env.AWS_ACCESS_KEY_ID = 'akid'
+        process.env.AWS_SECRET_ACCESS_KEY = 'secret'
+        process.env.AWS_SESSION_TOKEN = 'session'
+        creds = new AWS.EnvironmentCredentials('AWS')
+        validateCredentials(creds)
+
+      it 'should be able to read credentials from env without a prefix', ->
+        process.env.ACCESS_KEY_ID = 'akid'
+        process.env.SECRET_ACCESS_KEY = 'secret'
+        process.env.SESSION_TOKEN = 'session'
+        creds = new AWS.EnvironmentCredentials()
+        validateCredentials(creds)
+
+    describe 'refresh', ->
+      it 'can refresh credentials', ->
+        process.env.AWS_ACCESS_KEY_ID = 'akid'
+        process.env.AWS_SECRET_ACCESS_KEY = 'secret'
+        creds = new AWS.EnvironmentCredentials('AWS')
+        expect(creds.accessKeyId).toEqual('akid')
+        creds.accessKeyId = 'not_akid'
+        expect(creds.accessKeyId).not.toEqual('akid')
+        creds.refresh()
+        expect(creds.accessKeyId).toEqual('akid')
+
   describe 'AWS.FileSystemCredentials', ->
     describe 'constructor', ->
       it 'should accept filename and load credentials from root doc', ->

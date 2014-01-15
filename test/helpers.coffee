@@ -1,4 +1,9 @@
-AWS = require('../lib/aws')
+AWS = null
+if typeof window == 'undefined'
+  AWS = require('../lib/aws')
+else
+  AWS = window.AWS
+
 EventEmitter = require('events').EventEmitter
 Buffer = require('buffer').Buffer
 semver = require('semver')
