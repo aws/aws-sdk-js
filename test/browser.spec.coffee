@@ -67,8 +67,9 @@ integrationTests ->
       done = null
       httpHeaders = false; httpData = false; httpError = false
       runs ->
-        svc = new AWS.S3(accessKeyId: 'akid', secretAccessKey: 'secret')
-        req = svc.getObject(Bucket:'invalidbucket' + new Date(), Key: 'foo')
+        svc = new AWS.S3(accessKeyId: 'akid', secretAccessKey: 'secret', maxRetries: 0)
+        date = AWS.util.date.iso8601().replace(/[^0-9]/g,'')
+        req = svc.getObject(Bucket:'invalidbucket' + date, Key: 'foo')
         req.on 'httpHeaders', -> httpHeaders = true
         req.on 'httpData', -> httpData = true
         req.on 'httpError', -> httpError = true
