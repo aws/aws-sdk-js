@@ -261,7 +261,7 @@ describe 'AWS.ServiceInterface.RestXml', ->
           Body:
             streaming: true
       extractData 'Buffer data'
-      expect(response.data.Body instanceof Buffer).toBeTruthy()
+      expect(Buffer.isBuffer(response.data.Body)).toBeTruthy()
       expect(response.data.Body.toString()).toEqual('Buffer data')
 
     it 'sets payload element to String when it does not stream', ->
