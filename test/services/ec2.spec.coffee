@@ -1,6 +1,5 @@
-AWS = require('../../lib/core')
 helpers = require('../helpers')
-require('../../lib/services/ec2')
+AWS = helpers.AWS
 
 describe 'AWS.EC2', ->
 

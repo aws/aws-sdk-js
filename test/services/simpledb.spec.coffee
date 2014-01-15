@@ -1,8 +1,6 @@
 helpers = require('../helpers')
 AWS = helpers.AWS
 
-require('../../lib/services/simpledb')
-
 describe 'AWS.SimpleDB', ->
   describe 'setEndpoint', ->
     it 'uses global endpoint if region is us-east-1', ->

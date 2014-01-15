@@ -1,6 +1,6 @@
-helpers = require('../helpers'); AWS = helpers.AWS
+helpers = require('../helpers')
+AWS = helpers.AWS
 Buffer = require('buffer').Buffer
-require('../../lib/service_interface/rest_xml')
 
 describe 'AWS.ServiceInterface.RestXml', ->
 

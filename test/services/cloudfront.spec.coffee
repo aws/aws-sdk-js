@@ -1,8 +1,6 @@
 helpers = require('../helpers')
 AWS = helpers.AWS
 
-require('../../lib/services/cloudfront')
-
 describe 'AWS.CloudFront', ->
 
   cf = null

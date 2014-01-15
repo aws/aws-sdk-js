@@ -1,4 +1,4 @@
-AWS = require('../lib/core')
+AWS = require('./helpers').AWS
 
 describe 'AWS.HttpRequest', ->
 

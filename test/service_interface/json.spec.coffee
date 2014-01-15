@@ -1,6 +1,6 @@
-AWS = require('../../lib/core')
+helpers = require('../helpers')
+AWS = helpers.AWS
 Buffer = require('buffer').Buffer
-require('../../lib/service_interface/json')
 
 describe 'AWS.ServiceInterface.Json', ->
 

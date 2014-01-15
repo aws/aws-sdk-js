@@ -3,8 +3,6 @@ AWS = helpers.AWS
 Stream = require('stream').Stream
 Buffer = require('buffer').Buffer
 
-require('../../lib/services/s3')
-
 describe 'AWS.S3', ->
 
   s3 = null

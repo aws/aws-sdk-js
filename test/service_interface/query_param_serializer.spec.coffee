@@ -1,5 +1,5 @@
-AWS = require('../../lib/core')
-require('../../lib/service_interface/query')
+helpers = require('../helpers')
+AWS = helpers.AWS
 
 describe 'AWS.QueryParamSerializer', ->
 

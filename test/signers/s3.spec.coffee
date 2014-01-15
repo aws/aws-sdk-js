@@ -1,5 +1,4 @@
-AWS = require('../../lib/core')
-require('../../lib/signers/s3')
+AWS = require('../helpers').AWS
 
 describe 'AWS.Signers.S3', ->
 

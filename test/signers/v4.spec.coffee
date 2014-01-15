@@ -1,6 +1,5 @@
-AWS = require('../../lib/core')
 helpers = require('../helpers')
-require('../../lib/services/dynamodb')
+AWS = helpers.AWS
 
 beforeEach ->
   spyOn(AWS.util, 'userAgent').andReturn('aws-sdk-js/0.1')

@@ -3,8 +3,6 @@ AWS = helpers.AWS
 Buffer = require('buffer').Buffer
 
 if AWS.util.isNode()
-  require('../../lib/services/glacier')
-
   describe 'AWS.Glacier', ->
 
     glacier = null
