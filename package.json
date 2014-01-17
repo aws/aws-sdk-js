@@ -18,7 +18,8 @@
       "semver": "",
       "coffee-script": "",
       "jshint": "",
-      "cucumber": ""
+      "cucumber": "",
+      "coffeeify": ""
     },
     "dependencies": {
       "xml2js": "0.2.4",
