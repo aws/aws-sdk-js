@@ -1,7 +1,6 @@
 helpers = require('./helpers')
 AWS = helpers.AWS
 MockService = helpers.MockService
-Buffer = require('buffer').Buffer
 
 describe 'AWS.EventListeners', ->
 
@@ -124,7 +123,7 @@ describe 'AWS.EventListeners', ->
       expect(contentLength('tï№')).toEqual(6)
 
     it 'builds Content-Length for buffer body', ->
-      expect(contentLength(new Buffer('tï№'))).toEqual(6)
+      expect(contentLength(new AWS.util.Buffer('tï№'))).toEqual(6)
 
     if AWS.util.isNode()
       it 'builds Content-Length for file body', ->

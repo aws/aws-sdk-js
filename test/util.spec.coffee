@@ -1,5 +1,5 @@
 AWS = require('./helpers').AWS
-Buffer = require('buffer').Buffer
+Buffer = AWS.util.Buffer
 
 describe 'uriEscape', ->
 

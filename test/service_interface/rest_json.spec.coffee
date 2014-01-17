@@ -1,5 +1,5 @@
 helpers = require('../helpers'); AWS = helpers.AWS
-Buffer = require('buffer').Buffer
+Buffer = AWS.util.Buffer
 
 describe 'AWS.ServiceInterface.RestJson', ->
 

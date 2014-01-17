@@ -2,7 +2,7 @@ helpers = require('./helpers')
 EventEmitter = require('events').EventEmitter
 AWS = helpers.AWS
 MockService = helpers.MockService
-Buffer = require('buffer').Buffer
+Buffer = AWS.util.Buffer
 
 describe 'AWS.Request', ->
   service = null

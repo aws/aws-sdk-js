@@ -1,8 +1,6 @@
 helpers = require('./helpers')
 AWS = helpers.AWS
 
-require('../lib/credentials/environment_credentials')
-
 validateCredentials = (creds, key, secret, session) ->
   expect(creds.accessKeyId).toEqual(key || 'akid')
   expect(creds.secretAccessKey).toEqual(secret || 'secret')
