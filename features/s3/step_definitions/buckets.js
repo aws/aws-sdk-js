@@ -32,11 +32,9 @@ module.exports = function() {
 
   this.Then(/^the bucket should have a location constraint of "([^"]*)"$/, function(loc, next) {
     this.s3.getBucketLocation({Bucket:this.bucket}, function(err, data) {
-      if (data && data.LocationConstraint == loc)
-        next();
-      else
-        fail();
-    });
+      this.assert.equal(data.LocationConstraint, loc);
+      next();
+    }.bind(this));
   });
 
   this.Then(/^I delete the bucket$/, function(next) {

@@ -6,10 +6,7 @@ beforeEach ->
 
 buildRequest = ->
   ddb = new AWS.DynamoDB({region: 'region', endpoint: 'localhost', apiVersion: '2011-12-05'})
-  req = ddb.makeRequest('listTables', {foo: 'bår'})
-  resp = new AWS.Response(req)
-  req.emitEvents(['validate', 'build', 'afterBuild'], resp)
-  return req.httpRequest
+  ddb.makeRequest('listTables', {foo: 'bår'}).build().httpRequest
 
 buildSigner = (request) ->
   return new AWS.Signers.V4(request || buildRequest(), 'dynamodb')

@@ -50,13 +50,13 @@ describe 'AWS.Request', ->
 
   describe 'abort', ->
     it 'allows aborting requests', ->
-      error = null; data = null
+      error = null; data = null; done = null
       helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
       runs ->
         req = service.makeRequest('mockMethod')
-        req.send (e, d) -> error = e; data = d
-        req.abort()
-      waitsFor -> error || data
+        req.on 'send', (resp) -> req.abort()
+        req.send (e, d) -> done = true; error = e; data = d
+      waitsFor -> done
       runs ->
         expect(data).toEqual(null)
         expect(error.code).toEqual('RequestAbortedError')
@@ -201,7 +201,7 @@ describe 'AWS.Request', ->
                 process.nextTick -> req.emit 'data', new Buffer(str)
             if retryCount >= 1
               process.nextTick -> req.emit('end')
-            req
+          req
 
         runs ->
           request = service.makeRequest('mockMethod')

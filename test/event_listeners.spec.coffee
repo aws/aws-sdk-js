@@ -38,9 +38,7 @@ describe 'AWS.EventListeners', ->
     request.on('success', successHandler)
     request.on('complete', completeHandler)
     if callback
-      request.on 'complete', (resp) ->
-        callback.call(resp, resp.error, resp.data)
-      request.send()
+      request.send(callback)
     else
       request
 
@@ -50,7 +48,7 @@ describe 'AWS.EventListeners', ->
       request.on 'validate', (req) ->
         expect(req).toBe(request)
         throw "ERROR"
-      response = request.send()
+      response = request.send(->)
       expect(response.error).toEqual("ERROR")
 
     it 'sends error event if credentials are not set', ->
@@ -60,17 +58,17 @@ describe 'AWS.EventListeners', ->
 
       service.config.credentialProvider = null
       service.config.credentials.accessKeyId = null
-      request.send()
+      request.send(->)
 
       service.config.credentials.accessKeyId = 'akid'
       service.config.credentials.secretAccessKey = null
-      request.send()
+      request.send(->)
 
       expect(errorHandler).toHaveBeenCalled()
       AWS.util.arrayEach errorHandler.calls, (call) ->
         expect(call.args[0] instanceof Error).toBeTruthy()
-        expect(call.args[0].code).toEqual('SigningError')
-        expect(call.args[0].message).toMatch(/Missing credentials in config/)
+        expect(call.args[0].code).toEqual('CredentialsError')
+        expect(call.args[0].message).toMatch(/Missing credentials/)
 
     it 'sends error event if region is not set', ->
       service.config.region = null
@@ -97,7 +95,7 @@ describe 'AWS.EventListeners', ->
       request.on 'build', (req) ->
         expect(req).toBe(request)
         throw "ERROR"
-      response = request.send()
+      response = request.send(->)
       expect(response.error).toEqual("ERROR")
 
   describe 'afterBuild', ->
@@ -107,7 +105,7 @@ describe 'AWS.EventListeners', ->
     sendRequest = (body) ->
       request = makeRequest()
       request.on('build', (req) -> req.httpRequest.body = body)
-      request.send()
+      request.send(->)
       request
 
     contentLength = (body) ->
@@ -138,7 +136,7 @@ describe 'AWS.EventListeners', ->
       request.on 'sign', (req) ->
         expect(req).toBe(request)
         throw "ERROR"
-      response = request.send()
+      response = request.send(->)
       expect(response.error).toEqual("ERROR")
 
     it 'uses the api.signingName if provided', ->
@@ -146,7 +144,7 @@ describe 'AWS.EventListeners', ->
       spyOn(AWS.Signers.RequestSigner, 'getVersion').andCallFake ->
         (req, signingName) -> throw signingName
       request = makeRequest()
-      response = request.send()
+      response = request.send(->)
       expect(response.error).toEqual('SIGNING_NAME')
       delete service.api.signingName
 
@@ -154,7 +152,7 @@ describe 'AWS.EventListeners', ->
       spyOn(AWS.Signers.RequestSigner, 'getVersion').andCallFake ->
         (req, signingName) -> throw signingName
       request = makeRequest()
-      response = request.send()
+      response = request.send(->)
       expect(response.error).toEqual('mockservice')
 
   describe 'send', ->
@@ -162,6 +160,7 @@ describe 'AWS.EventListeners', ->
       options = {}
       spyOn(AWS.HttpClient, 'getInstance').andReturn handleRequest: (req, opts) ->
         options = opts
+        new AWS.SequentialExecutor()
       service.config.httpOptions = timeout: 15
       service.config.maxRetries = 0
       makeRequest(->)
@@ -217,7 +216,7 @@ describe 'AWS.EventListeners', ->
 
       request = makeRequest()
       request.on('send', sendHandler)
-      response = request.send()
+      response = request.send(->)
 
       expect(retryHandler).toHaveBeenCalled()
       expect(errorHandler).toHaveBeenCalled()
@@ -261,6 +260,7 @@ describe 'AWS.EventListeners', ->
             helpers.mockHttpSuccessfulResponse 403, {}, name, cb
           else
             helpers.mockHttpSuccessfulResponse 200, {}, 'DATA', cb
+          new AWS.SequentialExecutor()
 
         creds =
           numCalls: 0
@@ -320,11 +320,11 @@ describe 'AWS.EventListeners', ->
 
       response = makeRequest(->)
 
-      expect(retryHandler).not.toHaveBeenCalled()
+      expect(retryHandler).toHaveBeenCalled()
       expect(errorHandler).toHaveBeenCalled()
       expect(completeHandler).toHaveBeenCalled()
       expect(successHandler).not.toHaveBeenCalled()
-      expect(response.retryCount).toEqual(0);
+      expect(response.retryCount).toEqual(0)
 
     it 'emits error if an error is set in extractError', ->
       error = code: 'ParseError', message: 'error message'
@@ -335,11 +335,11 @@ describe 'AWS.EventListeners', ->
       request = makeRequest()
       request.on('extractData', extractDataHandler)
       request.on('extractError', (resp) -> resp.error = error)
-      response = request.send()
+      response = request.send(->)
 
       expect(response.error).toBe(error)
       expect(extractDataHandler).not.toHaveBeenCalled()
-      expect(retryHandler).not.toHaveBeenCalled()
+      expect(retryHandler).toHaveBeenCalled()
       expect(errorHandler).toHaveBeenCalled()
       expect(completeHandler).toHaveBeenCalled()
 
@@ -374,40 +374,21 @@ describe 'AWS.EventListeners', ->
 
   if AWS.util.isNode()
     describe 'terminal callback error handling', ->
-      beforeEach ->
-        spyOn(process, 'exit')
-        spyOn(console, 'error')
-
-      didError = ->
-        expect(console.error).toHaveBeenCalledWith('ERROR')
-        expect(process.exit).toHaveBeenCalledWith(1)
-
       describe 'without domains', ->
-        it 'logs exceptions raised from success event and exits process', ->
+        it 'emits uncaughtException', ->
           helpers.mockHttpResponse 200, {}, []
-          request = makeRequest()
-          request.on 'success', -> throw "ERROR"
-          expect(-> request.send()).not.toThrow('ERROR')
+          expect(-> (makeRequest -> throw 'ERROR')).toThrow('ERROR')
           expect(completeHandler).toHaveBeenCalled()
-          expect(retryHandler).not.toHaveBeenCalled()
-          didError()
+          expect(errorHandler).toHaveBeenCalled()
+          expect(retryHandler).toHaveBeenCalled()
 
-        it 'logs exceptions raised from complete event and exits process', ->
-          helpers.mockHttpResponse 200, {}, []
-          request = makeRequest()
-          request.on 'complete', -> throw "ERROR"
-          expect(-> request.send()).not.toThrow('ERROR')
-          expect(completeHandler).toHaveBeenCalled()
-          expect(retryHandler).not.toHaveBeenCalled()
-          didError()
-
-        it 'logs exceptions raised from error event and exits process', ->
-          helpers.mockHttpResponse 500, {}, []
-          request = makeRequest()
-          request.on 'error', -> throw "ERROR"
-          expect(-> request.send()).not.toThrow('ERROR')
-          expect(completeHandler).toHaveBeenCalled()
-          didError()
+        ['error', 'complete'].forEach (evt) ->
+          it 'raise exceptions from terminal ' + evt + ' events', ->
+            helpers.mockHttpResponse 500, {}, []
+            request = makeRequest()
+            request.on evt, -> throw "ERROR"
+            expect(-> request.send()).toThrow('ERROR')
+            expect(completeHandler).toHaveBeenCalled()
 
       describe 'with domains', ->
         it 'sends error raised from complete event to a domain', ->

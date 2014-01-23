@@ -3,7 +3,8 @@ AWS = helpers.AWS
 
 describe 'AWS.SQS', ->
   sqs = null
-  beforeEach -> sqs = new AWS.SQS params: QueueUrl: 'http://url'
+  beforeEach ->
+    sqs = new AWS.SQS params: QueueUrl: 'http://url'
 
   checksumValidate = (operation, input, response, shouldPass, cb) ->
     output = null
