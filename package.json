@@ -16,7 +16,7 @@
       "repl.history": "",
       "jasmine-node": "",
       "semver": "",
-      "coffee-script": "",
+      "coffee-script": "1.6.3",
       "jshint": "",
       "cucumber": "",
       "coffeeify": ""
