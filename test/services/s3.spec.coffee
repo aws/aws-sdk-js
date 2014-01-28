@@ -483,3 +483,8 @@ describe 'AWS.S3', ->
     it 'gets a signed URL and appends to existing query parameters', ->
       url = s3.getSignedUrl('listObjects', Bucket: 'bucket', Prefix: 'prefix')
       expect(url).toEqual('https://bucket.s3.amazonaws.com/?prefix=prefix&AWSAccessKeyId=akid&Expires=900&Signature=fWeCHJBop4LyDXm2%2F%2BvR%2BqzH5zk%3D')
+
+    it 'gets a signed URL for getObject using SigV4', ->
+      s3 = new AWS.S3(signatureVersion: 'v4')
+      url = s3.getSignedUrl('getObject', Bucket: 'bucket', Key: 'object')
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/object?X-Amz-Date=19700101T000000Z&X-Amz-Signature=1829997c9cea443f92ce0f1ab5debfb554c5d609b9110366a819f3fc8a0b71d5')
