@@ -175,9 +175,9 @@ module.exports = function () {
   this.When(/^I read the key "([^"]*)" with progress events$/, function(key, callback) {
     var self = this;
     this.progress = [];
-    var req = this.s3.getObject({Bucket: this.sharedBucket, Key: key}, function (err, data) { });
+    var req = this.s3.getObject({Bucket: this.sharedBucket, Key: key});
     req.on('httpDownloadProgress', function (p) { self.progress.push(p) });
-    req.send(function (err,data) { callback(); });
+    req.send(callback);
   });
 
   // this scenario is a work around for not having an after all hook
