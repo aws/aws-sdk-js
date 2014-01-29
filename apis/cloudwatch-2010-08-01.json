@@ -5,7 +5,7 @@
   "resultWrapped": true,
   "serviceAbbreviation": "CloudWatch",
   "serviceFullName": "Amazon CloudWatch",
-  "signatureVersion": "v2",
+  "signatureVersion": "v4",
   "timestampFormat": "iso8601",
   "operations": {
     "deleteAlarms": {
