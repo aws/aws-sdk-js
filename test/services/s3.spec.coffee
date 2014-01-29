@@ -488,3 +488,11 @@ describe 'AWS.S3', ->
       s3 = new AWS.S3(signatureVersion: 'v4')
       url = s3.getSignedUrl('getObject', Bucket: 'bucket', Key: 'object')
       expect(url).toEqual('https://bucket.s3.amazonaws.com/object?X-Amz-Date=19700101T000000Z&X-Amz-Signature=1829997c9cea443f92ce0f1ab5debfb554c5d609b9110366a819f3fc8a0b71d5')
+
+    it 'errors when expiry time is greater than a week out on SigV4', (done) ->
+      s3 = new AWS.S3(signatureVersion: 'v4')
+      params = Bucket: 'bucket', Key: 'object', Expires: 60 * 60 * 24 * 7 + 120
+      error = 'getSignedUrl() does not support expiry time greater than a week with SigV4 signing.'
+      s3.getSignedUrl 'getObject', params, (err) ->
+        expect(err.message).toEqual(error)
+        done()
