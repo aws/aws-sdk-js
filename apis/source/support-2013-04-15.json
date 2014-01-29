@@ -1277,12 +1277,6 @@
     },
     "DescribeTrustedAdvisorCheckSummaries": {
       "result_key": "summaries"
-    },
-    "DescribeSeverityLevels": {
-      "result_key": "severityLevelsList"
-    },
-    "DescribeTrustedAdvisorChecks": {
-      "result_key": "checks"
     }
   }
 }

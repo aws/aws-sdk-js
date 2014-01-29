@@ -8829,24 +8829,28 @@
     "ListCloudFrontOriginAccessIdentities": {
       "input_token": "Marker",
       "output_token": "NextMarker",
+      "limit_key": "MaxItems",
       "more_results": "IsTruncated",
       "result_key": "Items"
     },
     "ListDistributions": {
       "input_token": "Marker",
       "output_token": "NextMarker",
+      "limit_key": "MaxItems",
       "more_results": "IsTruncated",
       "result_key": "Items"
     },
     "ListInvalidations": {
       "input_token": "Marker",
       "output_token": "NextMarker",
+      "limit_key": "MaxItems",
       "more_results": "IsTruncated",
       "result_key": "Items"
     },
     "ListStreamingDistributions": {
       "input_token": "Marker",
       "output_token": "NextMarker",
+      "limit_key": "MaxItems",
       "more_results": "IsTruncated",
       "result_key": "Items"
     }

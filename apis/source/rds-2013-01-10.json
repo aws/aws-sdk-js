@@ -1049,7 +1049,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": null
+          "documentation": "\n        <p>\n         The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. \n        </p>\n    "
         },
         {
           "shape_name": "InvalidVPCNetworkStateFault",
@@ -1566,7 +1566,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": null
+          "documentation": "\n        <p>\n         The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. \n        </p>\n    "
         },
         {
           "shape_name": "InvalidVPCNetworkStateFault",
@@ -2086,7 +2086,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": null
+          "documentation": "\n        <p>\n         The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. \n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n            Creates a new DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the region.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?Action=CreateDBSubnetGroup\n    &DBSubnetGroupName=mydbsubnetgroup\n    &DBSubnetGroupDescription=My%20new%20DBSubnetGroup\n    &Version=2013-01-10\n    &SignatureVersion=2\n    &SignatureMethod=HmacSHA256\n    &Timestamp=2011-02-15T18%3A14%3A49.482Z\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><CreateDBSubnetGroupResponse xmlns=\"http://rds.amazonaws.com/doc/2013-01-10/\">\n    <CreateDBSubnetGroupResult>\n            <DBSubnetGroup>\n                <VpcId>990524496922</VpcId>\n                <SubnetGroupStatus>Complete</SubnetGroupStatus>\n                <DBSubnetGroupDescription>My new DBSubnetGroup</DBSubnetGroupDescription>\n                <DBSubnetGroupName>mydbsubnetgroup</DBSubnetGroupName>\n                <Subnets>\n                    <Subnet>\n                        <SubnetStatus>Active</SubnetStatus>\n                        <SubnetIdentifier>subnet-7c5b4115</SubnetIdentifier>\n                        <SubnetAvailabilityZone>\n                            <Name>us-east-1c</Name>\n                        </SubnetAvailabilityZone>\n                    </Subnet>\n                    <Subnet>\n                        <SubnetStatus>Active</SubnetStatus>\n                        <SubnetIdentifier>subnet-7b5b4112</SubnetIdentifier>\n                        <SubnetAvailabilityZone>\n                            <Name>us-east-1b</Name>\n                        </SubnetAvailabilityZone>\n                    </Subnet>\n                    <Subnet>\n                        <SubnetStatus>Active</SubnetStatus>\n                        <SubnetIdentifier>subnet-3ea6bd57</SubnetIdentifier>\n                        <SubnetAvailabilityZone>\n                            <Name>us-east-1d</Name>\n                        </SubnetAvailabilityZone>\n                    </Subnet>\n                </Subnets>\n            </DBSubnetGroup>       \n        </CreateDBSubnetGroupResult>\n        <ResponseMetadata>\n            <RequestId>ed662948-a57b-11df-9e38-7ffab86c801f</RequestId>\n        </ResponseMetadata>\n    </CreateDBSubnetGroupResponse></queryresponse>\n            </examples>\n    "
@@ -6174,7 +6174,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": null
+          "documentation": "\n        <p>\n            The DB upgrade failed because a resource the DB depends on could not be modified.\n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n        Modify settings for a DB Instance. You can change one\n        or more database configuration parameters by specifying these parameters and the new values in the\n        request.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n   ?Action=ModifyDBInstance\n   &DBInstanceIdentifier=simcoprod01\n   &AllocatedStorage=50\n   &Version=2013-01-10\n   &ApplyImmediately=false\n   &SignatureVersion=2\n   &SignatureMethod=HmacSHA256\n   &Timestamp=2011-05-23T08%3A02%3A09.574Z\n   &AWSAccessKeyId=<AWS Access Key ID>\n   &Signature=<Signature></queryrequest>\n            <queryresponse><ModifyDBInstanceResponse xmlns=\"http://rds.amazonaws.com/doc/2013-01-10/\">\n  <ModifyDBInstanceResult>\n    <DBInstance>\n      <ReadReplicaDBInstanceIdentifiers/>\n      <LatestRestorableTime>2011-05-23T08:00:00Z</LatestRestorableTime>\n      <Engine>mysql</Engine>\n      <PendingModifiedValues>\n        <AllocatedStorage>50</AllocatedStorage>\n      </PendingModifiedValues>\n      <BackupRetentionPeriod>1</BackupRetentionPeriod>\n      <MultiAZ>false</MultiAZ>\n      <LicenseModel>general-public-license</LicenseModel>\n      <DBInstanceStatus>available</DBInstanceStatus>\n      <EngineVersion>5.1.50</EngineVersion>\n      <Endpoint>\n        <Port>3306</Port>\n        <Address>simcoprod01.cu7u2t4uz396.us-east-1.rds.amazonaws.com</Address>\n      </Endpoint>\n      <DBInstanceIdentifier>simcoprod01</DBInstanceIdentifier>\n      <DBParameterGroups>\n        <DBParameterGroup>\n          <ParameterApplyStatus>in-sync</ParameterApplyStatus>\n          <DBParameterGroupName>default.mysql5.1</DBParameterGroupName>\n        </DBParameterGroup>\n      </DBParameterGroups>\n      <DBSecurityGroups>\n        <DBSecurityGroup>\n          <Status>active</Status>\n          <DBSecurityGroupName>default</DBSecurityGroupName>\n        </DBSecurityGroup>\n      </DBSecurityGroups>\n      <PreferredBackupWindow>00:00-00:30</PreferredBackupWindow>\n      <AutoMinorVersionUpgrade>true</AutoMinorVersionUpgrade>\n      <PreferredMaintenanceWindow>sat:07:30-sat:08:00</PreferredMaintenanceWindow>\n      <AvailabilityZone>us-east-1a</AvailabilityZone>\n      <InstanceCreateTime>2011-05-23T06:06:43.110Z</InstanceCreateTime>\n      <AllocatedStorage>10</AllocatedStorage>\n      <DBInstanceClass>db.m1.large</DBInstanceClass>\n      <MasterUsername>master</MasterUsername>\n    </DBInstance>\n  </ModifyDBInstanceResult>\n  <ResponseMetadata>\n    <RequestId>f61a020f-8512-11e0-90aa-eb648410240d</RequestId>\n  </ResponseMetadata>\n</ModifyDBInstanceResponse></queryresponse>\n        </examples>\n    "
@@ -6433,7 +6433,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": null
+          "documentation": "\n        <p>\n         The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. \n        </p>\n    "
         }
       ],
       "documentation": "\n        <p>\n            Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the region.\n        </p>\n        <examples>\n            <queryrequest>https://rds.amazonaws.com/\n    ?Action=ModifyDBSubnetGroup\n    &DBSubnetGroupName=mydbsubnetgroup\n    &DBSubnetGroupDescription=My%20modified%20DBSubnetGroup\n    &Version=2013-01-10\n    &SignatureVersion=2\n    &SignatureMethod=HmacSHA256\n    &Timestamp=2011-02-15T18%3A14%3A49.482Z\n    &AWSAccessKeyId=<AWS Access Key ID>\n    &Signature=<Signature></queryrequest>\n            <queryresponse><ModifyDBSubnetGroupResponse xmlns=\"http://rds.amazonaws.com/doc/2013-01-10/\">\n    <ModifyDBSubnetGroupResult>\n            <DBSubnetGroup>\n                <VpcId>990524496922</VpcId>\n                <SubnetGroupStatus>Complete</SubnetGroupStatus>\n                <DBSubnetGroupDescription>My modified DBSubnetGroup</DBSubnetGroupDescription>\n                <DBSubnetGroupName>mydbsubnetgroup</DBSubnetGroupName>\n                <Subnets>\n                    <Subnet>\n                        <SubnetStatus>Active</SubnetStatus>\n                        <SubnetIdentifier>subnet-7c5b4115</SubnetIdentifier>\n                        <SubnetAvailabilityZone>\n                            <Name>us-east-1c</Name>\n                        </SubnetAvailabilityZone>\n                    </Subnet>\n                    <Subnet>\n                        <SubnetStatus>Active</SubnetStatus>\n                        <SubnetIdentifier>subnet-7b5b4112</SubnetIdentifier>\n                        <SubnetAvailabilityZone>\n                            <Name>us-east-1b</Name>\n                        </SubnetAvailabilityZone>\n                    </Subnet>\n                    <Subnet>\n                        <SubnetStatus>Active</SubnetStatus>\n                        <SubnetIdentifier>subnet-3ea6bd57</SubnetIdentifier>\n                        <SubnetAvailabilityZone>\n                            <Name>us-east-1d</Name>\n                        </SubnetAvailabilityZone>\n                    </Subnet>\n                </Subnets>\n            </DBSubnetGroup>       \n        </ModifyDBSubnetGroupResult>\n        <ResponseMetadata>\n            <RequestId>ed662948-a57b-11df-9e38-7ffab86c801f</RequestId>\n        </ResponseMetadata>\n    </ModifyDBSubnetGroupResponse></queryresponse>\n            </examples>\n    "
@@ -8558,7 +8558,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": null
+          "documentation": "\n        <p>\n         The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. \n        </p>\n    "
         },
         {
           "shape_name": "ProvisionedIopsNotAvailableInAZFault",
@@ -9110,7 +9110,7 @@
           "type": "structure",
           "members": {
           },
-          "documentation": null
+          "documentation": "\n        <p>\n         The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC. \n        </p>\n    "
         },
         {
           "shape_name": "ProvisionedIopsNotAvailableInAZFault",
@@ -9331,6 +9331,7 @@
     },
     "DescribeEngineDefaultParameters": {
       "input_token": "Marker",
+      "output_token": "EngineDefaults.Marker",
       "limit_key": "MaxRecords"
     },
     "DescribeEventSubscriptions": {

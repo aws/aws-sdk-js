@@ -9306,13 +9306,33 @@
     },
     "DescribeDefaultClusterParameters": {
       "input_token": "Marker",
-      "limit_key": "MaxRecords"
+      "output_token": "DefaultClusterParameters.Marker",
+      "limit_key": "MaxRecords",
+      "result_key": "DefaultClusterParameters.Parameters"
+    },
+    "DescribeEventSubscriptions": {
+      "input_token": "Marker",
+      "output_token": "Marker",
+      "limit_key": "MaxRecords",
+      "result_key": "EventSubscriptionsList"
     },
     "DescribeEvents": {
       "input_token": "Marker",
       "output_token": "Marker",
       "limit_key": "MaxRecords",
       "result_key": "Events"
+    },
+    "DescribeHsmClientCertificates": {
+      "input_token": "Marker",
+      "output_token": "Marker",
+      "limit_key": "MaxRecords",
+      "result_key": "HsmClientCertificates"
+    },
+    "DescribeHsmConfigurations": {
+      "input_token": "Marker",
+      "output_token": "Marker",
+      "limit_key": "MaxRecords",
+      "result_key": "HsmConfigurations"
     },
     "DescribeOrderableClusterOptions": {
       "input_token": "Marker",
