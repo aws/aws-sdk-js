@@ -5,7 +5,7 @@
   "globalEndpoint": "cloudfront.amazonaws.com",
   "serviceAbbreviation": "CloudFront",
   "serviceFullName": "Amazon CloudFront",
-  "signatureVersion": "v4",
+  "signatureVersion": "cloudfront",
   "timestampFormat": "iso8601",
   "xmlnamespace": "http://cloudfront.amazonaws.com/doc/2012-05-05/",
   "operations": {
