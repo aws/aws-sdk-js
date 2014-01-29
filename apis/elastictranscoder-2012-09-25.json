@@ -2082,9 +2082,13 @@
       "resultKey": "Jobs"
     },
     "listPipelines": {
+      "inputToken": "PageToken",
+      "outputToken": "NextPageToken",
       "resultKey": "Pipelines"
     },
     "listPresets": {
+      "inputToken": "PageToken",
+      "outputToken": "NextPageToken",
       "resultKey": "Presets"
     }
   }

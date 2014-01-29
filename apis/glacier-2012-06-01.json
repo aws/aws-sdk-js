@@ -793,19 +793,19 @@
     },
     "listMultipartUploads": {
       "inputToken": "marker",
-      "outputToken": "marker",
+      "outputToken": "Marker",
       "limitKey": "limit",
       "resultKey": "UploadsList"
     },
     "listParts": {
       "inputToken": "marker",
-      "outputToken": "marker",
+      "outputToken": "Marker",
       "limitKey": "limit",
       "resultKey": "Parts"
     },
     "listVaults": {
       "inputToken": "marker",
-      "outputToken": "marker",
+      "outputToken": "Marker",
       "limitKey": "limit",
       "resultKey": "VaultList"
     }

@@ -1999,6 +1999,9 @@
       "limitKey": "MaxItems",
       "resultKey": "Roles"
     },
+    "listSAMLProviders": {
+      "resultKey": "SAMLProviderList"
+    },
     "listServerCertificates": {
       "inputToken": "Marker",
       "outputToken": "Marker",

@@ -2887,7 +2887,8 @@
       ]
     },
     "listParts": {
-      "limitKey": "IsTruncated",
+      "moreResults": "IsTruncated",
+      "limitKey": "MaxParts",
       "outputToken": "NextPartNumberMarker",
       "inputToken": "PartNumberMarker",
       "resultKey": "Parts"

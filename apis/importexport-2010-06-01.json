@@ -183,6 +183,7 @@
   "pagination": {
     "listJobs": {
       "inputToken": "Marker",
+      "outputToken": "Jobs[-1].JobId",
       "moreResults": "IsTruncated",
       "limitKey": "MaxJobs",
       "resultKey": "Jobs"
