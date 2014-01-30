@@ -495,12 +495,6 @@
     },
     "describeTrustedAdvisorCheckSummaries": {
       "resultKey": "summaries"
-    },
-    "describeSeverityLevels": {
-      "resultKey": "severityLevelsList"
-    },
-    "describeTrustedAdvisorChecks": {
-      "resultKey": "checks"
     }
   }
 }

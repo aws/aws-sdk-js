@@ -2,7 +2,7 @@
   "api_version": "2010-08-01",
   "type": "query",
   "result_wrapped": true,
-  "signature_version": "v2",
+  "signature_version": "v4",
   "service_full_name": "Amazon CloudWatch",
   "service_abbreviation": "CloudWatch",
   "endpoint_prefix": "monitoring",

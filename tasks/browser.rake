@@ -37,6 +37,10 @@ namespace :browser do
     cp $BROWSERIFY_DIST, $BROWSERIFY_DIST_LATEST
   end
 
+  task :build_all => :dist_path do
+    sh "MINIFY='' #{$BUILDER} all > dist/aws-sdk-all.js"
+  end
+
   task :build_server do
     pkg_file = File.dirname(__FILE__) + '/dist-tools/package.json'
     json = JSON.parse(File.read(pkg_file))
@@ -59,11 +63,11 @@ namespace :browser do
   end
 
   desc 'Builds browser test harness and runner'
-  task :test => :dist_path do
+  task :test => [:dist_path, :build_all] do
     write_configuration
     sh "coffee -c test/helpers.coffee"
     sh "find test -name '*.coffee' | SERVICES=all xargs #{$BROWSERIFY} " +
-       "-t coffeeify #{$BROWSERIFY_ARGS} > #{$BROWSERIFY_TEST}"
+       "-t coffeeify -i domain > #{$BROWSERIFY_TEST}"
     rm_f "test/helpers.js"
     rm_f "test/configuration.js"
     puts "Now run `testem`"

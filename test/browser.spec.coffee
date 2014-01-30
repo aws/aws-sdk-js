@@ -65,12 +65,14 @@ integrationTests ->
     it 'does not emit http events if networking issue occurs', ->
       err = null
       done = null
-      httpHeaders = false; httpData = false; httpError = false
+      httpHeaders = false; httpData = false; httpError = false; httpDone = false
       runs ->
-        svc = new AWS.S3(accessKeyId: 'akid', secretAccessKey: 'secret')
-        req = svc.getObject(Bucket:'invalidbucket' + new Date(), Key: 'foo')
+        svc = new AWS.S3(accessKeyId: 'akid', secretAccessKey: 'secret', maxRetries: 0)
+        date = AWS.util.date.iso8601().replace(/[^0-9]/g,'')
+        req = svc.getObject(Bucket:'invalidbucket' + date, Key: 'foo')
         req.on 'httpHeaders', -> httpHeaders = true
         req.on 'httpData', -> httpData = true
+        req.on 'httpDone', -> httpDone = true
         req.on 'httpError', -> httpError = true
         req.on 'complete', (resp) -> done = true; err = resp.error
         req.send()
@@ -78,6 +80,7 @@ integrationTests ->
       runs ->
         expect(httpHeaders).toEqual(false)
         expect(httpData).toEqual(false)
+        expect(httpDone).toEqual(false)
         expect(httpError).toEqual(true)
         expect(err.name).toEqual('NetworkingError')
 

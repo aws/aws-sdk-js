@@ -1841,6 +1841,9 @@
                     },
                     "state": {
                       "name": "State"
+                    },
+                    "origin": {
+                      "name": "Origin"
                     }
                   },
                   "name": "item"
@@ -2533,28 +2536,6 @@
             "name": "VpnGateway"
           }
         }
-      }
-    },
-    "deactivateLicense": {
-      "name": "DeactivateLicense",
-      "input": {
-        "type": "structure",
-        "members": {
-          "DryRun": {
-            "type": "boolean"
-          },
-          "LicenseId": {
-            "required": true
-          },
-          "Capacity": {
-            "type": "integer",
-            "required": true
-          }
-        }
-      },
-      "output": {
-        "type": "structure",
-        "members": {}
       }
     },
     "deleteCustomerGateway": {
@@ -4620,15 +4601,6 @@
                       "spotInstanceRequestId": {
                         "name": "SpotInstanceRequestId"
                       },
-                      "license": {
-                        "type": "structure",
-                        "members": {
-                          "pool": {
-                            "name": "Pool"
-                          }
-                        },
-                        "name": "License"
-                      },
                       "clientToken": {
                         "name": "ClientToken"
                       },
@@ -4973,107 +4945,6 @@
               "name": "item"
             },
             "name": "KeyPairs"
-          }
-        }
-      }
-    },
-    "describeLicenses": {
-      "name": "DescribeLicenses",
-      "input": {
-        "type": "structure",
-        "members": {
-          "DryRun": {
-            "type": "boolean"
-          },
-          "LicenseIds": {
-            "type": "list",
-            "members": {
-              "name": "LicenseId"
-            },
-            "flattened": true
-          },
-          "Filters": {
-            "type": "list",
-            "members": {
-              "type": "structure",
-              "members": {
-                "Name": {},
-                "Values": {
-                  "type": "list",
-                  "members": {
-                    "name": "Value"
-                  },
-                  "flattened": true
-                }
-              },
-              "name": "Filter"
-            },
-            "flattened": true
-          }
-        }
-      },
-      "output": {
-        "type": "structure",
-        "members": {
-          "licenseSet": {
-            "type": "list",
-            "members": {
-              "type": "structure",
-              "members": {
-                "licenseId": {
-                  "name": "LicenseId"
-                },
-                "type": {
-                  "name": "Type"
-                },
-                "pool": {
-                  "name": "Pool"
-                },
-                "capacitySet": {
-                  "type": "list",
-                  "members": {
-                    "type": "structure",
-                    "members": {
-                      "capacity": {
-                        "type": "integer",
-                        "name": "Capacity"
-                      },
-                      "instanceCapacity": {
-                        "type": "integer",
-                        "name": "InstanceCapacity"
-                      },
-                      "state": {
-                        "name": "State"
-                      },
-                      "earliestAllowedDeactivationTime": {
-                        "type": "timestamp",
-                        "name": "EarliestAllowedDeactivationTime"
-                      }
-                    },
-                    "name": "item"
-                  },
-                  "name": "Capacities"
-                },
-                "tagSet": {
-                  "type": "list",
-                  "members": {
-                    "type": "structure",
-                    "members": {
-                      "key": {
-                        "name": "Key"
-                      },
-                      "value": {
-                        "name": "Value"
-                      }
-                    },
-                    "name": "item"
-                  },
-                  "name": "Tags"
-                }
-              },
-              "name": "item"
-            },
-            "name": "Licenses"
           }
         }
       }
@@ -6244,6 +6115,9 @@
                       },
                       "state": {
                         "name": "State"
+                      },
+                      "origin": {
+                        "name": "Origin"
                       }
                     },
                     "name": "item"
@@ -10154,12 +10028,6 @@
             "type": "boolean"
           },
           "InstanceInitiatedShutdownBehavior": {},
-          "License": {
-            "type": "structure",
-            "members": {
-              "Pool": {}
-            }
-          },
           "PrivateIpAddress": {},
           "ClientToken": {},
           "AdditionalInfo": {},
@@ -10196,8 +10064,7 @@
                       "Primary": {
                         "type": "boolean"
                       }
-                    },
-                    "name": "PrivateIpAddressesSet"
+                    }
                   },
                   "flattened": true
                 },
@@ -10422,15 +10289,6 @@
                 },
                 "spotInstanceRequestId": {
                   "name": "SpotInstanceRequestId"
-                },
-                "license": {
-                  "type": "structure",
-                  "members": {
-                    "pool": {
-                      "name": "Pool"
-                    }
-                  },
-                  "name": "License"
                 },
                 "clientToken": {
                   "name": "ClientToken"
@@ -10928,6 +10786,9 @@
       "resultKey": "InstanceStatuses"
     },
     "describeInstances": {
+      "inputToken": "NextToken",
+      "outputToken": "NextToken",
+      "limitKey": "MaxResults",
       "resultKey": "Reservations"
     },
     "describeInternetGateways": {
@@ -10957,6 +10818,11 @@
     "describeReservedInstancesListings": {
       "resultKey": "ReservedInstancesListings"
     },
+    "describeReservedInstancesModifications": {
+      "inputToken": "NextToken",
+      "outputToken": "NextToken",
+      "resultKey": "ReservedInstancesModifications"
+    },
     "describeReservedInstancesOfferings": {
       "inputToken": "NextToken",
       "outputToken": "NextToken",
@@ -10985,6 +10851,9 @@
       "resultKey": "Subnets"
     },
     "describeTags": {
+      "inputToken": "NextToken",
+      "outputToken": "NextToken",
+      "limitKey": "MaxResults",
       "resultKey": "Tags"
     },
     "describeVolumeStatus": {

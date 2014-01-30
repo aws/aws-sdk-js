@@ -556,6 +556,16 @@
     }
   },
   "pagination": {
+    "listEndpointsByPlatformApplication": {
+      "inputToken": "NextToken",
+      "outputToken": "NextToken",
+      "resultKey": "Endpoints"
+    },
+    "listPlatformApplications": {
+      "inputToken": "NextToken",
+      "outputToken": "NextToken",
+      "resultKey": "PlatformApplications"
+    },
     "listSubscriptions": {
       "inputToken": "NextToken",
       "outputToken": "NextToken",

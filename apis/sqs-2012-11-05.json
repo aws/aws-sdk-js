@@ -304,6 +304,30 @@
         }
       }
     },
+    "listDeadLetterSourceQueues": {
+      "name": "ListDeadLetterSourceQueues",
+      "input": {
+        "type": "structure",
+        "members": {
+          "QueueUrl": {
+            "required": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "QueueUrl": {
+            "type": "list",
+            "members": {
+              "name": "QueueUrl"
+            },
+            "flattened": true,
+            "name": "queueUrls"
+          }
+        }
+      }
+    },
     "listQueues": {
       "name": "ListQueues",
       "input": {

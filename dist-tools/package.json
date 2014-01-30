@@ -4,13 +4,13 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "browserify": "2.x",
+    "browserify": "3.x",
     "through": "2.x",
     "uglify-js": "2.x",
-    "underscore": "1.x",
+    "underscore": "1.4.2",
     "express": "3.x",
     "xml2js": "0.2.4",
-    "xmlbuilder": "latest"
+    "xmlbuilder": "0.4.2"
   },
   "devDependencies": {
     "jasmine-node": "latest",

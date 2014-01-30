@@ -6,6 +6,7 @@
   "signature_version": "v4",
   "service_full_name": "AWS Storage Gateway",
   "endpoint_prefix": "storagegateway",
+  "xmlnamespace": "http://storagegateway.amazonaws.com/doc/2013-06-30",
   "documentation": "\n      <fullname>AWS Storage Gateway Service</fullname>\n\n      <p>AWS Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to\n         provide seamless and secure integration between an organization's on-premises IT environment and AWS's storage\n         infrastructure. The service enables you to securely upload data to the AWS cloud for cost effective backup and\n         rapid disaster recovery.</p>\n\n      <p>Use the following links to get started using the <i>AWS Storage Gateway Service API Reference</i>:</p>\n      <ul>\n         <li>\n<a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayHTTPRequestsHeaders.html\">AWS Storage Gateway Required Request Headers</a>: Describes the required headers that you must send with\n            every POST request to AWS Storage Gateway.</li>\n         <li>\n<a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewaySigningRequests.html\">Signing Requests</a>: AWS Storage Gateway requires that you authenticate every request you send; this\n            topic describes how sign such a request.</li>\n         <li>\n<a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/APIErrorResponses.html\">Error\n               Responses</a>: Provides reference information about AWS Storage Gateway errors.</li>         \n         <li>\n<a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPIOperations.html\">Operations in AWS Storage Gateway</a>: Contains detailed descriptions of all AWS Storage Gateway\n            operations, their request parameters, response elements, possible errors, and examples of requests and\n            responses.</li>\n         <li>\n<a href=\"http://docs.aws.amazon.com/general/latest/gr/index.html?rande.html\">AWS Storage Gateway Regions and\n               Endpoints</a>: Provides a list of each of the regions and endpoints available for use with AWS Storage Gateway. </li>\n      </ul>\n   ",
   "operations": {
     "ActivateGateway": {
@@ -12563,6 +12564,30 @@
     },
     "DescribeStorediSCSIVolumes": {
       "result_key": "StorediSCSIVolumes"
+    },
+    "DescribeTapeArchives": {
+      "input_token": "Marker",
+      "output_token": "Marker",
+      "limit_key": "Limit",
+      "result_key": "TapeArchives"
+    },
+    "DescribeTapeRecoveryPoints": {
+      "input_token": "Marker",
+      "output_token": "Marker",
+      "limit_key": "Limit",
+      "result_key": "TapeRecoveryPointInfos"
+    },
+    "DescribeTapes": {
+      "input_token": "Marker",
+      "output_token": "Marker",
+      "limit_key": "Limit",
+      "result_key": "Tapes"
+    },
+    "DescribeVTLDevices": {
+      "input_token": "Marker",
+      "output_token": "Marker",
+      "limit_key": "Limit",
+      "result_key": "VTLDevices"
     },
     "ListGateways": {
       "input_token": "Marker",

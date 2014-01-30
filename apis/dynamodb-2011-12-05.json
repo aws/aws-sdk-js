@@ -1798,21 +1798,24 @@
     "batchGetItem": {
       "inputToken": "RequestItems",
       "outputToken": "UnprocessedKeys",
-      "resultKey": "Items"
+      "resultKey": "Responses[]"
     },
     "listTables": {
       "inputToken": "ExclusiveStartTableName",
       "outputToken": "LastEvaluatedTableName",
+      "limitKey": "Limit",
       "resultKey": "TableNames"
     },
     "query": {
       "inputToken": "ExclusiveStartKey",
       "outputToken": "LastEvaluatedKey",
+      "limitKey": "Limit",
       "resultKey": "Items"
     },
     "scan": {
       "inputToken": "ExclusiveStartKey",
       "outputToken": "LastEvaluatedKey",
+      "limitKey": "Limit",
       "resultKey": "Items"
     }
   }

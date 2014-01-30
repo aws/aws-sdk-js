@@ -2965,45 +2965,45 @@
   },
   "pagination": {
     "getWorkflowExecutionHistory": {
+      "limitKey": "maximumPageSize",
       "inputToken": "nextPageToken",
       "outputToken": "nextPageToken",
-      "limitKey": "maximumPageSize",
       "resultKey": "events"
     },
     "listActivityTypes": {
+      "limitKey": "maximumPageSize",
       "inputToken": "nextPageToken",
       "outputToken": "nextPageToken",
-      "limitKey": "maximumPageSize",
       "resultKey": "typeInfos"
     },
     "listClosedWorkflowExecutions": {
+      "limitKey": "maximumPageSize",
       "inputToken": "nextPageToken",
       "outputToken": "nextPageToken",
-      "limitKey": "maximumPageSize",
       "resultKey": "executionInfos"
     },
     "listDomains": {
+      "limitKey": "maximumPageSize",
       "inputToken": "nextPageToken",
       "outputToken": "nextPageToken",
-      "limitKey": "maximumPageSize",
       "resultKey": "domainInfos"
     },
     "listOpenWorkflowExecutions": {
+      "limitKey": "maximumPageSize",
       "inputToken": "nextPageToken",
       "outputToken": "nextPageToken",
-      "limitKey": "maximumPageSize",
       "resultKey": "executionInfos"
     },
     "listWorkflowTypes": {
+      "limitKey": "maximumPageSize",
       "inputToken": "nextPageToken",
       "outputToken": "nextPageToken",
-      "limitKey": "maximumPageSize",
       "resultKey": "typeInfos"
     },
     "pollForDecisionTask": {
+      "limitKey": "maximumPageSize",
       "inputToken": "nextPageToken",
       "outputToken": "nextPageToken",
-      "limitKey": "maximumPageSize",
       "resultKey": "events"
     }
   }

@@ -1,5 +1,5 @@
-AWS = require('../../lib/core')
-require('../../lib/services/dynamodb')
+helpers = require('../helpers')
+AWS = helpers.AWS
 
 describe 'AWS.DynamoDB', ->
 

@@ -155,7 +155,7 @@
           "documentation": "\n  <p>Indicates that a resource was not found.</p>\n  "
         }
       ],
-      "documentation": "\n  <p>Attaches an Elastic Load Balancing load balancer to a specified layer.</p>\n  <note>You must create the Elastic Load Balancing instance separately, by using the Elastic Load Balancing console, API, or CLI. For more information,\n         see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/Welcome.html\">\n            Elastic Load Balancing Developer Guide</a>.</note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
+      "documentation": "\n  <p>Attaches an Elastic Load Balancing load balancer to a specified layer.</p>\n  <note>\n      <p>You must create the Elastic Load Balancing instance separately, by using the Elastic Load Balancing console, API, or CLI. For\n        more information, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/Welcome.html\">\n          Elastic Load Balancing Developer Guide</a>.</p>\n    </note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
     },
     "CloneStack": {
       "name": "CloneStack",
@@ -205,7 +205,7 @@
           "ServiceRoleArn": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n  <p>The stack AWS Identity and Access Management (IAM) role, which allows AWS OpsWorks to work with AWS resources on your behalf.\n         You must set this parameter to the Amazon Resource Name (ARN) for an existing IAM role. If you create a stack by using the AWS OpsWorks console,\n         it creates the role for you. You can obtain an existing stack's IAM ARN programmatically by calling <a>DescribePermissions</a>. For more information about IAM ARNs, see\n  <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">Using Identifiers</a>.</p>\n  <note>You must set this parameter to a valid service role ARN or the action will fail; there is no default value.\n         You can specify the source stack's service role ARN, if you prefer, but you must do so explicitly.</note>\n  ",
+            "documentation": "\n  <p>The stack AWS Identity and Access Management (IAM) role, which allows AWS OpsWorks to work with AWS resources on your behalf.\n         You must set this parameter to the Amazon Resource Name (ARN) for an existing IAM role. If you create a stack by using the AWS OpsWorks console,\n         it creates the role for you. You can obtain an existing stack's IAM ARN programmatically by calling <a>DescribePermissions</a>. For more information about IAM ARNs, see\n  <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">Using Identifiers</a>.</p>\n  <note>\n      <p>You must set this parameter to a valid service role ARN or the action will fail; there is\n        no default value. You can specify the source stack's service role ARN, if you prefer, but\n        you must do so explicitly.</p>\n    </note>\n  ",
             "required": true
           },
           "DefaultInstanceProfileArn": {
@@ -236,7 +236,7 @@
           "CustomJson": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n  <p>A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON\n         values. The string should be in the following format and must escape characters such as '\"'.:</p>\n  <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code>\n  <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration JSON</a></p>\n  "
+            "documentation": "\n  <p>A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON\n         values. The string should be in the following format and must escape characters such as '\"'.:</p>\n    <p><code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code></p>\n  <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration JSON</a></p>\n  "
           },
           "ConfigurationManager": {
             "shape_name": "StackConfigurationManager",
@@ -519,7 +519,7 @@
               "type": "string",
               "documentation": null
             },
-            "documentation": "\n  <p>One or more user-defined key/value pairs to be added to the stack attributes bag.</p> \n  "
+            "documentation": "\n  <p>One or more user-defined key/value pairs to be added to the stack attributes.</p> \n  "
           }
         },
         "documentation": null
@@ -645,7 +645,7 @@
           "CustomJson": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n  <p>A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. \nThe string should be in the following format and must escape characters such as '\"'.:</p>\n  <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code>\n  <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration JSON</a>.</p>\n  "
+            "documentation": "\n  <p>A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. \nThe string should be in the following format and must escape characters such as '\"'.:</p>\n    <p><code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code></p>\n  <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration JSON</a>.</p>\n  "
           }
         },
         "documentation": null
@@ -765,7 +765,7 @@
               "x86_64",
               "i386"
             ],
-            "documentation": "\n  <p>The instance architecture. Instance types do not necessarily support both architectures.\n         For a list of the architectures that are supported by the different instance types, see\n  <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Families and Types</a>.</p>\n  "
+            "documentation": "\n  <p>The instance architecture. The default option is <code>x86_64</code>. Instance types do not necessarily support both architectures.\n         For a list of the architectures that are supported by the different instance types, see\n  <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Families and Types</a>.</p>\n  "
           },
           "RootDeviceType": {
             "shape_name": "RootDeviceType",
@@ -780,7 +780,7 @@
             "shape_name": "Boolean",
             "type": "boolean",
             "box": true,
-            "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>We strongly recommend using the default value of <code>true</code>, to ensure that your instances have the latest security updates.</note>\n  "
+            "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>\n      <p>We strongly recommend using the default value of <code>true</code>, to ensure that your\n        instances have the latest security updates.</p>\n    </note>\n  "
           }
         },
         "documentation": null
@@ -905,7 +905,7 @@
               "type": "string",
               "documentation": null
             },
-            "documentation": "\n  <p>One or more user-defined key/value pairs to be added to the stack attributes bag.</p>\n  "
+            "documentation": "\n  <p>One or more user-defined key/value pairs to be added to the stack attributes.</p>\n  "
           },
           "CustomInstanceProfileArn": {
             "shape_name": "String",
@@ -1049,7 +1049,7 @@
             "shape_name": "Boolean",
             "type": "boolean",
             "box": true,
-            "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>We strongly recommend using the default value of <code>true</code>, to ensure that your instances have the latest security updates.</note>\n  "
+            "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>\n      <p>We strongly recommend using the default value of <code>true</code>, to ensure that your\n        instances have the latest security updates.</p>\n    </note>\n  "
           }
         },
         "documentation": null
@@ -1092,7 +1092,7 @@
           "documentation": "\n  <p>Indicates that a resource was not found.</p>\n  "
         }
       ],
-      "documentation": "\n  <p>Creates a layer. For more information, see\n  <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-create.html\">How to Create a Layer</a>.</p>\n  <note>You should use <b>CreateLayer</b> for noncustom layer types such as PHP App Server only if the stack does not have an existing layer of that type.\n         A stack can have at most one instance of each noncustom layer; if you attempt to create a second instance, <b>CreateLayer</b> fails. A stack can have an arbitrary\n         number of custom layers, so you can call <b>CreateLayer</b> as many times as you like for that layer type.</note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
+      "documentation": "\n  <p>Creates a layer. For more information, see\n  <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-create.html\">How to Create a Layer</a>.</p>\n  <note>\n      <p>You should use <b>CreateLayer</b> for noncustom layer types such as PHP App Server only if the stack\n        does not have an existing layer of that type. A stack can have at most one instance of each\n        noncustom layer; if you attempt to create a second instance, <b>CreateLayer</b> fails. A\n        stack can have an arbitrary number of custom layers, so you can call <b>CreateLayer</b> as\n        many times as you like for that layer type.</p>\n    </note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
     },
     "CreateStack": {
       "name": "CreateStack",
@@ -1133,7 +1133,7 @@
               "type": "string",
               "documentation": null
             },
-            "documentation": "\n  <p>One or more user-defined key/value pairs to be added to the stack attributes bag.</p>\n  "
+            "documentation": "\n  <p>One or more user-defined key/value pairs to be added to the stack attributes.</p>\n  "
           },
           "ServiceRoleArn": {
             "shape_name": "String",
@@ -1170,7 +1170,7 @@
           "CustomJson": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n  <p>A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. \nThe string should be in the following format and must escape characters such as '\"'.:</p>\n  <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code>\n  <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration JSON</a>.</p>\n  "
+            "documentation": "\n  <p>A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. \nThe string should be in the following format and must escape characters such as '\"'.:</p>\n    <p><code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code></p>\n  <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration JSON</a>.</p>\n  "
           },
           "ConfigurationManager": {
             "shape_name": "StackConfigurationManager",
@@ -1250,7 +1250,7 @@
               "ebs",
               "instance-store"
             ],
-            "documentation": "\n  <p>The default root device type. This value is used by default for all instances in the cloned stack,\n         but you can override it when you create an instance. For more information, see \n  <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device\">Storage for the Root Device</a>.</p>\n  "
+            "documentation": "\n  <p>The default root device type. This value is used by default for all instances in the cloned stack,\n         but you can override it when you create an instance. The default option is <code>instance-store</code>. For more information, see \n  <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device\">Storage for the Root Device</a>.</p>\n  "
           }
         },
         "documentation": null
@@ -1835,7 +1835,7 @@
                     "type": "string",
                     "documentation": null
                   },
-                  "documentation": "\n  <p>The contents of the stack attributes bag.</p>\n  "
+                  "documentation": "\n  <p>The stack attributes.</p>\n  "
                 },
                 "CreatedAt": {
                   "shape_name": "String",
@@ -1845,7 +1845,7 @@
               },
               "documentation": "\n  <p>A description of the app.</p>\n  "
             },
-            "documentation": "\n      An array of <code>App</code> objects that describe the specified apps.\n  "
+            "documentation": "\n    <p>An array of <code>App</code> objects that describe the specified apps. </p>\n  "
           }
         },
         "documentation": "<p>Contains the response to a <code>DescribeApps</code> request.</p>"
@@ -1876,7 +1876,7 @@
           "documentation": "\n  <p>Indicates that a resource was not found.</p>\n  "
         }
       ],
-      "documentation": "\n  <p>Requests a description of a specified set of apps.</p>\n  <note>You must specify at least one of the parameters.</note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
+      "documentation": "\n  <p>Requests a description of a specified set of apps.</p>\n  <note>\n      <p>You must specify at least one of the parameters.</p>\n    </note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
     },
     "DescribeCommands": {
       "name": "DescribeCommands",
@@ -2003,7 +2003,7 @@
           "documentation": "\n  <p>Indicates that a resource was not found.</p>\n  "
         }
       ],
-      "documentation": "\n  <p>Describes the results of specified commands.</p>\n  <note>You must specify at least one of the parameters.</note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
+      "documentation": "\n  <p>Describes the results of specified commands.</p>\n  <note>\n      <p>You must specify at least one of the parameters.</p>\n    </note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
     },
     "DescribeDeployments": {
       "name": "DescribeDeployments",
@@ -2139,7 +2139,7 @@
                 "CustomJson": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": "\n  <p>A string that contains user-defined custom JSON. It is used to override the corresponding default stack configuration JSON values for \n         stack. The string should be in the following format and must escape characters such as '\"'.:</p>\n  <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code>\n  <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration JSON</a>.</p>\n  "
+                  "documentation": "\n  <p>A string that contains user-defined custom JSON. It is used to override the corresponding default stack configuration JSON values for \n         stack. The string should be in the following format and must escape characters such as '\"'.:</p>\n    <p><code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code></p>\n  <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration JSON</a>.</p>\n  "
                 },
                 "InstanceIds": {
                   "shape_name": "Strings",
@@ -2185,7 +2185,7 @@
           "documentation": "\n  <p>Indicates that a resource was not found.</p>\n  "
         }
       ],
-      "documentation": "\n  <p>Requests a description of a specified set of deployments.</p>\n  <note>You must specify at least one of the parameters.</note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
+      "documentation": "\n  <p>Requests a description of a specified set of deployments.</p>\n  <note>\n      <p>You must specify at least one of the parameters.</p>\n    </note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
     },
     "DescribeElasticIps": {
       "name": "DescribeElasticIps",
@@ -2286,7 +2286,7 @@
           "documentation": "\n  <p>Indicates that a resource was not found.</p>\n  "
         }
       ],
-      "documentation": "\n  <p>Describes <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP addresses</a>.</p>\n  <note>You must specify at least one of the parameters.</note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
+      "documentation": "\n  <p>Describes <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP addresses</a>.</p>\n  <note>\n      <p>You must specify at least one of the parameters.</p>\n    </note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
     },
     "DescribeElasticLoadBalancers": {
       "name": "DescribeElasticLoadBalancers",
@@ -2417,7 +2417,7 @@
           "documentation": "\n  <p>Indicates that a resource was not found.</p>\n  "
         }
       ],
-      "documentation": "\n  <p>Describes a stack's Elastic Load Balancing instances.</p>\n  <note>You must specify at least one of the parameters.</note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
+      "documentation": "\n  <p>Describes a stack's Elastic Load Balancing instances.</p>\n  <note>\n      <p>You must specify at least one of the parameters.</p>\n    </note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
     },
     "DescribeInstances": {
       "name": "DescribeInstances",
@@ -2620,7 +2620,7 @@
                   "shape_name": "Boolean",
                   "type": "boolean",
                   "box": true,
-                  "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         If this value is set to <code>false</code>, you must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>We strongly recommend using the default value of <code>true</code>, to ensure that your instances have the latest security updates.</note>\n  "
+                  "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         If this value is set to <code>false</code>, you must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>\n      <p>We strongly recommend using the default value of <code>true</code>, to ensure that your\n        instances have the latest security updates.</p>\n    </note>\n  "
                 }
               },
               "documentation": "\n    <p>Describes an instance.</p>\n  "
@@ -2656,7 +2656,7 @@
           "documentation": "\n  <p>Indicates that a resource was not found.</p>\n  "
         }
       ],
-      "documentation": "\n  <p>Requests a description of a set of instances.</p>      \n  <note>You must specify at least one of the parameters.</note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
+      "documentation": "\n  <p>Requests a description of a set of instances.</p>      \n  <note>\n      <p>You must specify at least one of the parameters.</p>\n    </note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
     },
     "DescribeLayers": {
       "name": "DescribeLayers",
@@ -2984,7 +2984,7 @@
                   "shape_name": "Boolean",
                   "type": "boolean",
                   "box": true,
-                  "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         If this value is set to <code>false</code>, you must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>We strongly recommend using the default value of <code>true</code>, to ensure that your instances have the latest security updates.</note>\n  "
+                  "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         If this value is set to <code>false</code>, you must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>\n      <p>We strongly recommend using the default value of <code>true</code>, to ensure that your\n        instances have the latest security updates.</p>\n    </note>\n  "
                 }
               },
               "documentation": "\n    <p>Describes a layer.</p>\n  "
@@ -3020,7 +3020,7 @@
           "documentation": "\n  <p>Indicates that a resource was not found.</p>\n  "
         }
       ],
-      "documentation": "\n  <p>Requests a description of one or more layers in a specified stack.</p>\n  <note>You must specify at least one of the parameters.</note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
+      "documentation": "\n  <p>Requests a description of one or more layers in a specified stack.</p>\n  <note>\n      <p>You must specify at least one of the parameters.</p>\n    </note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
     },
     "DescribeLoadBasedAutoScaling": {
       "name": "DescribeLoadBasedAutoScaling",
@@ -3188,7 +3188,7 @@
           "documentation": "\n  <p>Indicates that a resource was not found.</p>\n  "
         }
       ],
-      "documentation": "\n  <p>Describes load-based auto scaling configurations for specified layers.</p>\n  <note>You must specify at least one of the parameters.</note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
+      "documentation": "\n  <p>Describes load-based auto scaling configurations for specified layers.</p>\n  <note>\n      <p>You must specify at least one of the parameters.</p>\n    </note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
     },
     "DescribeMyUserProfile": {
       "name": "DescribeMyUserProfile",
@@ -3447,7 +3447,7 @@
           "documentation": "\n  <p>Indicates that a resource was not found.</p>\n  "
         }
       ],
-      "documentation": "\n  <p>Describe an instance's RAID arrays.</p>\n  <note>You must specify at least one of the parameters.</note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage\n       permissions level for the stack, or an attached policy that explicitly grants permissions.\n       For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
+      "documentation": "\n  <p>Describe an instance's RAID arrays.</p>\n  <note>\n      <p>You must specify at least one of the parameters.</p>\n    </note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage\n       permissions level for the stack, or an attached policy that explicitly grants permissions.\n       For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
     },
     "DescribeServiceErrors": {
       "name": "DescribeServiceErrors",
@@ -3779,7 +3779,7 @@
                     "type": "string",
                     "documentation": null
                   },
-                  "documentation": "\n  <p>The contents of the stack's attributes bag.</p> \n  "
+                  "documentation": "\n  <p>The stack's attributes.</p> \n  "
                 },
                 "ServiceRoleArn": {
                   "shape_name": "String",
@@ -3814,7 +3814,7 @@
                 "CustomJson": {
                   "shape_name": "String",
                   "type": "string",
-                  "documentation": "\n  <p>A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values.\nThe string should be in the following format and must escape characters such as '\"'.:</p>\n  <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code>\n  <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration JSON</a>.</p>\n  "
+                  "documentation": "\n  <p>A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values.\nThe string should be in the following format and must escape characters such as '\"'.:</p>\n    <p><code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code></p>\n  <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration JSON</a>.</p>\n  "
                 },
                 "ConfigurationManager": {
                   "shape_name": "StackConfigurationManager",
@@ -4119,7 +4119,7 @@
           "documentation": "\n  <p>Indicates that a resource was not found.</p>\n  "
         }
       ],
-      "documentation": "\n  <p>Describes time-based auto scaling configurations for specified instances.</p>\n  <note>You must specify at least one of the parameters.</note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage\n       permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
+      "documentation": "\n  <p>Describes time-based auto scaling configurations for specified instances.</p>\n  <note>\n      <p>You must specify at least one of the parameters.</p>\n    </note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage\n       permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
     },
     "DescribeUserProfiles": {
       "name": "DescribeUserProfiles",
@@ -4348,7 +4348,7 @@
           "documentation": "\n  <p>Indicates that a resource was not found.</p>\n  "
         }
       ],
-      "documentation": "\n  <p>Describes an instance's Amazon EBS volumes.</p>\n  <note>You must specify at least one of the parameters.</note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions\n       level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
+      "documentation": "\n  <p>Describes an instance's Amazon EBS volumes.</p>\n  <note>\n      <p>You must specify at least one of the parameters.</p>\n    </note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Show, Deploy, or Manage permissions\n       level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
     },
     "DetachElasticLoadBalancer": {
       "name": "DetachElasticLoadBalancer",
@@ -4795,7 +4795,7 @@
           "documentation": "\n  <p>Indicates that a resource was not found.</p>\n  "
         }
       ],
-      "documentation": "\n  <p>Specify the load-based auto scaling configuration for a specified layer. For more information, see\n  <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html\">Managing Load\n            with Time-based and Load-based Instances</a>.</p>\n  <note>To use load-based auto scaling, you must create a set of load-based auto scaling instances. Load-based auto scaling operates only \n         on the instances from that set, so you must ensure that you have created enough instances to handle the maximum anticipated load.</note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
+      "documentation": "\n  <p>Specify the load-based auto scaling configuration for a specified layer. For more information, see\n  <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html\">Managing Load\n            with Time-based and Load-based Instances</a>.</p>\n  <note>\n      <p>To use load-based auto scaling, you must create a set of load-based auto scaling instances.\n        Load-based auto scaling operates only on the instances from that set, so you must ensure\n        that you have created enough instances to handle the maximum anticipated load.</p>\n    </note>\n    <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached\n       policy that explicitly grants permissions. For more information on user permissions, see\n      <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>\n  "
     },
     "SetPermission": {
       "name": "SetPermission",
@@ -5375,7 +5375,7 @@
               "type": "string",
               "documentation": null
             },
-            "documentation": "\n  <p>One or more user-defined key/value pairs to be added to the stack attributes bag.</p>\n  "
+            "documentation": "\n  <p>One or more user-defined key/value pairs to be added to the stack attributes.</p>\n  "
           }
         },
         "documentation": null
@@ -5527,7 +5527,7 @@
             "shape_name": "Boolean",
             "type": "boolean",
             "box": true,
-            "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>We strongly recommend using the default value of <code>true</code>, to ensure that your instances have the latest security updates.</note>\n  "
+            "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>\n      <p>We strongly recommend using the default value of <code>true</code>, to ensure that your\n        instances have the latest security updates.</p>\n    </note>\n  "
           }
         },
         "documentation": null
@@ -5622,7 +5622,7 @@
               "type": "string",
               "documentation": null
             },
-            "documentation": "\n  <p>One or more user-defined key/value pairs to be added to the stack attributes bag.</p>\n  "
+            "documentation": "\n  <p>One or more user-defined key/value pairs to be added to the stack attributes.</p>\n  "
           },
           "CustomInstanceProfileArn": {
             "shape_name": "String",
@@ -5766,7 +5766,7 @@
             "shape_name": "Boolean",
             "type": "boolean",
             "box": true,
-            "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>We strongly recommend using the default value of <code>true</code>, to ensure that your instances have the latest security updates.</note>\n  "
+            "documentation": "\n  <p>Whether to install operating system and package updates when the instance boots. The default value is <code>true</code>.\n         To control when updates are installed, set this value to <code>false</code>. You must then update your instances manually by\n         using <a>CreateDeployment</a> to run the <code>update_dependencies</code> stack command or\n         manually running <code>yum</code> (Amazon Linux) or <code>apt-get</code> (Ubuntu) on the instances.\n  </p>\n  <note>\n      <p>We strongly recommend using the default value of <code>true</code>, to ensure that your\n        instances have the latest security updates.</p>\n    </note>\n  "
           }
         },
         "documentation": null
@@ -5864,12 +5864,12 @@
               "type": "string",
               "documentation": null
             },
-            "documentation": "   \n  <p>One or more user-defined key/value pairs to be added to the stack attributes bag.</p>\n  "
+            "documentation": "   \n  <p>One or more user-defined key/value pairs to be added to the stack attributes.</p>\n  "
           },
           "ServiceRoleArn": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n  <p>The stack AWS Identity and Access Management (IAM) role, which allows AWS OpsWorks to work with AWS resources on your behalf.\n         You must set this parameter to the Amazon Resource Name (ARN) for an existing IAM role. For more information about IAM ARNs, see\n  <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">Using Identifiers</a>.</p>   \n  <note>You must set this parameter to a valid service role ARN or the action will fail; there is no default value.\n         You can specify the stack's current service role ARN, if you prefer, but you must do so explicitly.</note>\n  "
+            "documentation": "\n  <p>The stack AWS Identity and Access Management (IAM) role, which allows AWS OpsWorks to work with AWS resources on your behalf.\n         You must set this parameter to the Amazon Resource Name (ARN) for an existing IAM role. For more information about IAM ARNs, see\n  <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">Using Identifiers</a>.</p>   \n  <note>\n      <p>You must set this parameter to a valid service role ARN or the action will fail; there is\n        no default value. You can specify the stack's current service role ARN, if you prefer, but\n        you must do so explicitly.</p>\n    </note>\n  "
           },
           "DefaultInstanceProfileArn": {
             "shape_name": "String",
@@ -5899,7 +5899,7 @@
           "CustomJson": {
             "shape_name": "String",
             "type": "string",
-            "documentation": "\n  <p>A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. \nThe string should be in the following format and must escape characters such as '\"'.:</p>\n  <code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code>\n  <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration JSON</a>.</p>\n  "
+            "documentation": "\n  <p>A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. \nThe string should be in the following format and must escape characters such as '\"'.:</p>\n    <p><code>\"{\\\"key1\\\": \\\"value1\\\", \\\"key2\\\": \\\"value2\\\",...}\"</code></p>\n  <p>For more information on custom JSON, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html\">Use Custom JSON to Modify the Stack Configuration JSON</a>.</p>\n  "
           },
           "ConfigurationManager": {
             "shape_name": "StackConfigurationManager",

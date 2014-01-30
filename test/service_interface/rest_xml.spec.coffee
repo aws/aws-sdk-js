@@ -1,6 +1,6 @@
-helpers = require('../helpers'); AWS = helpers.AWS
-Buffer = require('buffer').Buffer
-require('../../lib/service_interface/rest_xml')
+helpers = require('../helpers')
+AWS = helpers.AWS
+Buffer = AWS.util.Buffer
 
 describe 'AWS.ServiceInterface.RestXml', ->
 
@@ -261,7 +261,7 @@ describe 'AWS.ServiceInterface.RestXml', ->
           Body:
             streaming: true
       extractData 'Buffer data'
-      expect(response.data.Body instanceof Buffer).toBeTruthy()
+      expect(Buffer.isBuffer(response.data.Body)).toBeTruthy()
       expect(response.data.Body.toString()).toEqual('Buffer data')
 
     it 'sets payload element to String when it does not stream', ->

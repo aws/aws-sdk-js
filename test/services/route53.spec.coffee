@@ -1,8 +1,6 @@
 helpers = require('../helpers')
 AWS = helpers.AWS
 
-require('../../lib/services/route53')
-
 describe 'AWS.Route53', ->
 
   r53 = null

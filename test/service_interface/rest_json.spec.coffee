@@ -1,6 +1,5 @@
 helpers = require('../helpers'); AWS = helpers.AWS
-Buffer = require('buffer').Buffer
-require('../../lib/service_interface/rest_json')
+Buffer = AWS.util.Buffer
 
 describe 'AWS.ServiceInterface.RestJson', ->
 
@@ -278,7 +277,7 @@ describe 'AWS.ServiceInterface.RestJson', ->
 
       extractData 'foobar'
       expect(response.error).toEqual(null)
-      expect(response.data.Body instanceof Buffer).toEqual(true)
+      expect(Buffer.isBuffer(response.data.Body)).toEqual(true)
       expect(response.data.Body.toString()).toEqual('foobar')
 
     it 'returns an empty object when the body is an empty string', ->

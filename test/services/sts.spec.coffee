@@ -1,8 +1,6 @@
 helpers = require('../helpers')
 AWS = helpers.AWS
 
-require('../../lib/services/sts')
-
 describe 'AWS.STS', ->
 
   sts = null

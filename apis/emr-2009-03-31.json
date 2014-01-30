@@ -1046,6 +1046,31 @@
   "pagination": {
     "describeJobFlows": {
       "resultKey": "JobFlows"
+    },
+    "listBootstrapActions": {
+      "inputToken": "Marker",
+      "outputToken": "Marker",
+      "resultKey": "BootstrapActions"
+    },
+    "listClusters": {
+      "inputToken": "Marker",
+      "outputToken": "Marker",
+      "resultKey": "Clusters"
+    },
+    "listInstanceGroups": {
+      "inputToken": "Marker",
+      "outputToken": "Marker",
+      "resultKey": "InstanceGroups"
+    },
+    "listInstances": {
+      "inputToken": "Marker",
+      "outputToken": "Marker",
+      "resultKey": "Instances"
+    },
+    "listSteps": {
+      "inputToken": "Marker",
+      "outputToken": "Marker",
+      "resultKey": "Steps"
     }
   }
 }

@@ -3758,6 +3758,7 @@
     },
     "describeEngineDefaultParameters": {
       "inputToken": "Marker",
+      "outputToken": "EngineDefaults.Marker",
       "limitKey": "MaxRecords"
     },
     "describeEventSubscriptions": {

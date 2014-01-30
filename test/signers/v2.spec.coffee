@@ -1,6 +1,4 @@
-AWS = require('../../lib/core')
-require('../../lib/service_interface/query')
-require('../../lib/signers/v2')
+AWS = require('../helpers').AWS
 
 describe 'AWS.Signers.V2', ->
 

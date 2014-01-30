@@ -1,8 +1,6 @@
 helpers = require('../helpers')
 AWS = helpers.AWS
 
-require('../../lib/services/sqs')
-
 describe 'AWS.SQS', ->
   sqs = null
   beforeEach -> sqs = new AWS.SQS params: QueueUrl: 'http://url'
