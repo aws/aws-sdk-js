@@ -9,38 +9,6 @@
   "xmlnamespace": "http://ec2.amazonaws.com/doc/2013-10-15",
   "documentation": "\n\t\t<fullname>Amazon Elastic Compute Cloud</fullname>\n        <p>Amazon Elastic Compute Cloud (Amazon EC2) provides resizable computing\n        capacity in the Amazon Web Services (AWS) cloud. Using Amazon EC2 eliminates\n        your need to invest in hardware up front, so you can develop and deploy\n        applications faster.</p>\n    ",
   "operations": {
-    "ActivateLicense": {
-      "name": "ActivateLicense",
-      "input": {
-        "shape_name": "ActivateLicenseRequest",
-        "type": "structure",
-        "members": {
-          "DryRun": {
-            "shape_name": "Boolean",
-            "type": "boolean",
-            "documentation": null
-          },
-          "LicenseId": {
-            "shape_name": "String",
-            "type": "string",
-            "documentation": "\n        <p>\n        Specifies the ID for the specific license to activate against.\n        </p>\n    ",
-            "required": true
-          },
-          "Capacity": {
-            "shape_name": "Integer",
-            "type": "integer",
-            "documentation": "\n        <p>\n        Specifies the additional number of licenses to activate.\n        </p>\n    ",
-            "required": true
-          }
-        },
-        "documentation": "\n        <p></p>\n    "
-      },
-      "output": null,
-      "errors": [
-
-      ],
-      "documentation": "\n        <p>\n        Activates a specific number of licenses for a 90-day period.\n        Activations can be done against a specific license ID.\n        </p>\n    "
-    },
     "AllocateAddress": {
       "name": "AllocateAddress",
       "input": {
