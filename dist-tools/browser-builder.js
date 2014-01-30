@@ -13,7 +13,7 @@ var version = JSON.parse(fs.readFileSync('package.json')).version;
 var licenseHeader = [
   '// AWS SDK for JavaScript v' + version,
   '// ' + fs.readFileSync(__dirname + '/../LICENSE.txt').toString().
-          match(/(Copyright\s+.+?Amazon.+?)\n/)[1],
+          match(/(Copyright\s+.+?Amazon.+?)\r?\n/)[1],
   '// License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt'
 ].join('\n') + '\n';
 
