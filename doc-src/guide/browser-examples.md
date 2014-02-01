@@ -184,7 +184,8 @@ The following example sends a message to the queue created in the previous
 example.
 
 ```javascript
-var queue = new AWS.SQS({params: {QueueUrl: url}}); // using url to queue
+// using Queue URL variable (`url`) from previous example
+var queue = new AWS.SQS({params: {QueueUrl: url}});
 queue.sendMessage({MessageBody: 'THE MESSAGE TO SEND'}, function (err, data) {
   if (!err) console.log('Message sent.');
 });
