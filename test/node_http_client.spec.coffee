@@ -5,6 +5,14 @@ if AWS.util.isNode()
   describe 'AWS.NodeHttpClient', ->
     http = new AWS.NodeHttpClient()
 
+    describe 'maxSockets delegation', ->
+      it 'delegates maxSockets from agent to globalAgent', ->
+        https = require('https')
+        agent = http.sslAgent()
+        expect(https.globalAgent.maxSockets).toEqual(agent.maxSockets)
+        https.globalAgent.maxSockets += 1
+        expect(https.globalAgent.maxSockets).toEqual(agent.maxSockets)
+
     describe 'handleRequest', ->
       it 'emits error event', ->
         error = null
