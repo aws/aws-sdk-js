@@ -1,19 +1,19 @@
 {
-  "api_version": "2012-12-12",
+  "api_version": "2013-04-01",
   "type": "rest-xml",
   "signature_version": "v3https",
   "service_full_name": "Amazon Route 53",
   "service_abbreviation": "Route 53",
   "global_endpoint": "route53.amazonaws.com",
   "endpoint_prefix": "route53",
-  "xmlnamespace": "https://route53.amazonaws.com/doc/2012-12-12/",
+  "xmlnamespace": "https://route53.amazonaws.com/doc/2013-04-01/",
   "documentation": "\n   ",
   "operations": {
     "ChangeResourceRecordSets": {
       "name": "ChangeResourceRecordSets",
       "http": {
         "method": "POST",
-        "uri": "/2012-12-12/hostedzone/{HostedZoneId}/rrset/"
+        "uri": "/2013-04-01/hostedzone/{HostedZoneId}/rrset/"
       },
       "input": {
         "shape_name": "ChangeResourceRecordSetsRequest",
@@ -23,7 +23,7 @@
             "shape_name": "ResourceId",
             "type": "string",
             "max_length": 32,
-            "documentation": "\n    <p><i>Alias resource record sets only:</i> The value of the hosted zone ID for the AWS resource.</p>\n    <p>For more information, an example, and several ways to get the hosted zone ID for the LoadBalancer, see <a href=\"http://docs.amazonwebservices.com/Route53/latest/DeveloperGuide/CreatingAliasRRSets.html\">Creating Alias Resource Record Sets for Elastic Load Balancing</a> in the <i>Amazon Route 53 Developer Guide</i></p>.\n   ",
+            "documentation": "\n    <p> The ID of the hosted zone that contains the resource record sets that you want to change.</p>\n   ",
             "required": true,
             "location": "uri"
           },
@@ -49,9 +49,10 @@
                       "type": "string",
                       "enum": [
                         "CREATE",
-                        "DELETE"
+                        "DELETE",
+                        "UPSERT"
                       ],
-                      "documentation": "\n    <p>The action to perform.</p>\n    <p>Valid values: <code>CREATE</code> | <code>DELETE</code></p>\n   ",
+                      "documentation": "\n    <p>The action to perform.</p>\n    <p>Valid values: <code>CREATE</code> | <code>DELETE</code> | <code>UPSERT</code></p>\n   ",
                       "required": true
                     },
                     "ResourceRecordSet": {
@@ -110,7 +111,8 @@
                             "ap-southeast-1",
                             "ap-southeast-2",
                             "ap-northeast-1",
-                            "sa-east-1"
+                            "sa-east-1",
+                            "cn-north-1"
                           ],
                           "documentation": "\n    <p><i>Regional resource record sets only:</i> Among resource record sets that have the same combination of DNS name and type, a value that specifies the AWS region for the current resource record set.</p>\n   "
                         },
@@ -356,13 +358,13 @@
           "documentation": "\n    <p>The request was rejected because Route 53 was still processing a prior request.</p>\n   "
         }
       ],
-      "documentation": "\n    <p>Use this action to create or change your authoritative DNS information. To use this action, send a <code>POST</code> request to the <code>2012-12-12/hostedzone/<i>hosted Zone ID</i>/rrset</code> resource. The request body must include an XML document with a <code>ChangeResourceRecordSetsRequest</code> element.</p>\n    <p>Changes are a list of change items and are considered transactional. For more information on transactional changes, also known as change batches, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/RRSchanges.html#RRSchanges_API\">Creating, Changing, and Deleting Resource Record Sets Using the Route 53 API</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>\n    <important>Due to the nature of transactional changes, you cannot delete the same resource record set more than once in a single change batch. If you attempt to delete the same change batch more than once, Route 53 returns an <code>InvalidChangeBatch</code> error.</important>\n    <p>In response to a <code>ChangeResourceRecordSets</code> request, your DNS data is changed on all Route 53 DNS servers. Initially, the status of a change is <code>PENDING</code>. This means the change has not yet propagated to all the authoritative Route 53 DNS servers. When the change is propagated to all hosts, the change returns a status of <code>INSYNC</code>.</p>\n    <p>Note the following limitations on a <code>ChangeResourceRecordSets</code> request:</p>\n    <p>- A request cannot contain more than 100 Change elements.</p>\n    <p>- A request cannot contain more than 1000 ResourceRecord elements.</p>\n    <p>The sum of the number of characters (including spaces) in all <code>Value</code> elements in a request cannot exceed 32,000 characters.</p>\n   "
+      "documentation": "\n    <p>Use this action to create or change your authoritative DNS information. To use this action, send a <code>POST</code> request to the <code>2013-04-01/hostedzone/<i>hosted Zone ID</i>/rrset</code> resource. The request body must include an XML document with a <code>ChangeResourceRecordSetsRequest</code> element.</p>\n    <p>Changes are a list of change items and are considered transactional. For more information on transactional changes, also known as change batches, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/RRSchanges.html#RRSchanges_API\">Creating, Changing, and Deleting Resource Record Sets Using the Route 53 API</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>\n    <important>Due to the nature of transactional changes, you cannot delete the same resource record set more than once in a single change batch. If you attempt to delete the same change batch more than once, Route 53 returns an <code>InvalidChangeBatch</code> error.</important>\n    <p>In response to a <code>ChangeResourceRecordSets</code> request, your DNS data is changed on all Route 53 DNS servers. Initially, the status of a change is <code>PENDING</code>. This means the change has not yet propagated to all the authoritative Route 53 DNS servers. When the change is propagated to all hosts, the change returns a status of <code>INSYNC</code>.</p>\n    <p>Note the following limitations on a <code>ChangeResourceRecordSets</code> request:</p>\n    <p>- A request cannot contain more than 100 Change elements.</p>\n    <p>- A request cannot contain more than 1000 ResourceRecord elements.</p>\n    <p>The sum of the number of characters (including spaces) in all <code>Value</code> elements in a request cannot exceed 32,000 characters.</p>\n   "
     },
     "CreateHealthCheck": {
       "name": "CreateHealthCheck",
       "http": {
         "method": "POST",
-        "uri": "/2012-12-12/healthcheck",
+        "uri": "/2013-04-01/healthcheck",
         "response_code": 201
       },
       "input": {
@@ -394,29 +396,38 @@
                 "type": "integer",
                 "min_length": 1,
                 "max_length": 65535,
-                "documentation": "\n    <p>Port on which connection will be opened to the instance to health check. For HTTP this defaults to 80 if the port is not specified.</p>\n   "
+                "documentation": "\n    <p>Port on which connection will be opened to the instance to health check. For HTTP and HTTP_STR_MATCH this defaults to 80 if the port is not specified. For HTTPS and HTTPS_STR_MATCH this defaults to 443 if the port is not specified.</p>\n   "
               },
               "Type": {
                 "shape_name": "HealthCheckType",
                 "type": "string",
                 "enum": [
                   "HTTP",
+                  "HTTPS",
+                  "HTTP_STR_MATCH",
+                  "HTTPS_STR_MATCH",
                   "TCP"
                 ],
-                "documentation": "\n    <p>The type of health check to be performed. Currently supported protocols are TCP and HTTP.</p>\n   ",
+                "documentation": "\n    <p>The type of health check to be performed. Currently supported types are TCP, HTTP, HTTPS, HTTP_STR_MATCH, and HTTPS_STR_MATCH.</p>\n   ",
                 "required": true
               },
               "ResourcePath": {
                 "shape_name": "ResourcePath",
                 "type": "string",
                 "max_length": 255,
-                "documentation": "\n    <p>Path to ping on the instance to check the health. Required only for HTTP health checks, HTTP request is issued to the instance on the given port and path. </p>\n   "
+                "documentation": "\n    <p>Path to ping on the instance to check the health. Required for HTTP, HTTPS, HTTP_STR_MATCH, and HTTPS_STR_MATCH health checks, HTTP request is issued to the instance on the given port and path.</p>\n   "
               },
               "FullyQualifiedDomainName": {
                 "shape_name": "FullyQualifiedDomainName",
                 "type": "string",
                 "max_length": 255,
                 "documentation": "\n    <p>Fully qualified domain name of the instance to be health checked.</p>\n   "
+              },
+              "SearchString": {
+                "shape_name": "SearchString",
+                "type": "string",
+                "max_length": 255,
+                "documentation": "\n    <p>A string to search for in the body of a health check response. Required for HTTP_STR_MATCH and HTTPS_STR_MATCH health checks.</p>\n   "
               }
             },
             "member_order": [
@@ -424,7 +435,8 @@
               "Port",
               "Type",
               "ResourcePath",
-              "FullyQualifiedDomainName"
+              "FullyQualifiedDomainName",
+              "SearchString"
             ],
             "documentation": "\n    <p>A complex type that contains health check configuration.</p>\n   ",
             "required": true
@@ -476,29 +488,38 @@
                     "type": "integer",
                     "min_length": 1,
                     "max_length": 65535,
-                    "documentation": "\n    <p>Port on which connection will be opened to the instance to health check. For HTTP this defaults to 80 if the port is not specified.</p>\n   "
+                    "documentation": "\n    <p>Port on which connection will be opened to the instance to health check. For HTTP and HTTP_STR_MATCH this defaults to 80 if the port is not specified. For HTTPS and HTTPS_STR_MATCH this defaults to 443 if the port is not specified.</p>\n   "
                   },
                   "Type": {
                     "shape_name": "HealthCheckType",
                     "type": "string",
                     "enum": [
                       "HTTP",
+                      "HTTPS",
+                      "HTTP_STR_MATCH",
+                      "HTTPS_STR_MATCH",
                       "TCP"
                     ],
-                    "documentation": "\n    <p>The type of health check to be performed. Currently supported protocols are TCP and HTTP.</p>\n   ",
+                    "documentation": "\n    <p>The type of health check to be performed. Currently supported types are TCP, HTTP, HTTPS, HTTP_STR_MATCH, and HTTPS_STR_MATCH.</p>\n   ",
                     "required": true
                   },
                   "ResourcePath": {
                     "shape_name": "ResourcePath",
                     "type": "string",
                     "max_length": 255,
-                    "documentation": "\n    <p>Path to ping on the instance to check the health. Required only for HTTP health checks, HTTP request is issued to the instance on the given port and path. </p>\n   "
+                    "documentation": "\n    <p>Path to ping on the instance to check the health. Required for HTTP, HTTPS, HTTP_STR_MATCH, and HTTPS_STR_MATCH health checks, HTTP request is issued to the instance on the given port and path.</p>\n   "
                   },
                   "FullyQualifiedDomainName": {
                     "shape_name": "FullyQualifiedDomainName",
                     "type": "string",
                     "max_length": 255,
                     "documentation": "\n    <p>Fully qualified domain name of the instance to be health checked.</p>\n   "
+                  },
+                  "SearchString": {
+                    "shape_name": "SearchString",
+                    "type": "string",
+                    "max_length": 255,
+                    "documentation": "\n    <p>A string to search for in the body of a health check response. Required for HTTP_STR_MATCH and HTTPS_STR_MATCH health checks.</p>\n   "
                   }
                 },
                 "member_order": [
@@ -506,7 +527,8 @@
                   "Port",
                   "Type",
                   "ResourcePath",
-                  "FullyQualifiedDomainName"
+                  "FullyQualifiedDomainName",
+                  "SearchString"
                 ],
                 "documentation": "\n    <p>A complex type that contains the health check configuration.</p>\n   ",
                 "required": true
@@ -574,13 +596,13 @@
           "documentation": "\n    <p>Some value specified in the request is invalid or the XML document is malformed.</p>\n   "
         }
       ],
-      "documentation": "\n    <p> This action creates a new health check.</p>\n    <p> To create a new health check, send a <code>POST</code> request to the <code>2012-12-12/healthcheck</code> resource. The request body must include an XML document with a <code>CreateHealthCheckRequest</code> element. The response returns the <code>CreateHealthCheckResponse</code> element that contains metadata about the health check.</p>\n   "
+      "documentation": "\n    <p> This action creates a new health check.</p>\n    <p> To create a new health check, send a <code>POST</code> request to the <code>2013-04-01/healthcheck</code> resource. The request body must include an XML document with a <code>CreateHealthCheckRequest</code> element. The response returns the <code>CreateHealthCheckResponse</code> element that contains metadata about the health check.</p>\n   "
     },
     "CreateHostedZone": {
       "name": "CreateHostedZone",
       "http": {
         "method": "POST",
-        "uri": "/2012-12-12/hostedzone",
+        "uri": "/2013-04-01/hostedzone",
         "response_code": 201
       },
       "input": {
@@ -836,13 +858,13 @@
           "documentation": "\n    <p>Route 53 allows some duplicate domain names, but there is a maximum number of duplicate names. This error indicates that you have reached that maximum. If you want to create another hosted zone with the same name and Route 53 generates this error, you can request an increase to the limit on the <a href=\"http://aws.amazon.com/route53-request/\">Contact Us</a> page.</p>\n   "
         }
       ],
-      "documentation": "\n    <p> This action creates a new hosted zone.</p>\n    <p>To create a new hosted zone, send a <code>POST</code> request to the <code>2012-12-12/hostedzone</code> resource. The request body must include an XML document with a <code>CreateHostedZoneRequest</code> element. The response returns the <code>CreateHostedZoneResponse</code> element that contains metadata about the hosted zone.</p>\n    <p>Route 53 automatically creates a default SOA record and four NS records for the zone. The NS records in the hosted zone are the name servers you give your registrar to delegate your domain to. For more information about SOA and NS records, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html\">NS and SOA Records that Route 53 Creates for a Hosted Zone</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>\n    <p>When you create a zone, its initial status is <code>PENDING</code>. This means that it is not yet available on all DNS servers. The status of the zone changes to <code>INSYNC</code> when the NS and SOA records are available on all Route 53 DNS servers. </p>\n   "
+      "documentation": "\n    <p> This action creates a new hosted zone.</p>\n    <p>To create a new hosted zone, send a <code>POST</code> request to the <code>2013-04-01/hostedzone</code> resource. The request body must include an XML document with a <code>CreateHostedZoneRequest</code> element. The response returns the <code>CreateHostedZoneResponse</code> element that contains metadata about the hosted zone.</p>\n    <p>Route 53 automatically creates a default SOA record and four NS records for the zone. The NS records in the hosted zone are the name servers you give your registrar to delegate your domain to. For more information about SOA and NS records, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html\">NS and SOA Records that Route 53 Creates for a Hosted Zone</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>\n    <p>When you create a zone, its initial status is <code>PENDING</code>. This means that it is not yet available on all DNS servers. The status of the zone changes to <code>INSYNC</code> when the NS and SOA records are available on all Route 53 DNS servers. </p>\n   "
     },
     "DeleteHealthCheck": {
       "name": "DeleteHealthCheck",
       "http": {
         "method": "DELETE",
-        "uri": "/2012-12-12/healthcheck/{HealthCheckId}"
+        "uri": "/2013-04-01/healthcheck/{HealthCheckId}"
       },
       "input": {
         "shape_name": "DeleteHealthCheckRequest",
@@ -907,13 +929,13 @@
           "documentation": "\n    <p>Some value specified in the request is invalid or the XML document is malformed.</p>\n   "
         }
       ],
-      "documentation": "\n    <p>This action deletes a health check. To delete a health check, send a <code>DELETE</code> request to the <code>2012-12-12/healthcheck/<i>health check ID</i></code> resource.</p>\n    <important> You can delete a health check only if there are no resource record sets associated with this health check. If resource record sets are associated with this health check, you must disassociate them before you can delete your health check. If you try to delete a health check that is associated with resource record sets, Route 53 will deny your request with a <code>HealthCheckInUse</code> error. For information about disassociating the records from your health check, see <a>ChangeResourceRecordSets</a>.</important>\n   "
+      "documentation": "\n    <p>This action deletes a health check. To delete a health check, send a <code>DELETE</code> request to the <code>2013-04-01/healthcheck/<i>health check ID</i></code> resource.</p>\n    <important> You can delete a health check only if there are no resource record sets associated with this health check. If resource record sets are associated with this health check, you must disassociate them before you can delete your health check. If you try to delete a health check that is associated with resource record sets, Route 53 will deny your request with a <code>HealthCheckInUse</code> error. For information about disassociating the records from your health check, see <a>ChangeResourceRecordSets</a>.</important>\n   "
     },
     "DeleteHostedZone": {
       "name": "DeleteHostedZone",
       "http": {
         "method": "DELETE",
-        "uri": "/2012-12-12/hostedzone/{Id}"
+        "uri": "/2013-04-01/hostedzone/{Id}"
       },
       "input": {
         "shape_name": "DeleteHostedZoneRequest",
@@ -1036,13 +1058,13 @@
           "documentation": "\n    <p>Some value specified in the request is invalid or the XML document is malformed.</p>\n   "
         }
       ],
-      "documentation": "\n    <p>This action deletes a hosted zone. To delete a hosted zone, send a <code>DELETE</code> request to the <code>2012-12-12/hostedzone/<i>hosted zone ID</i></code> resource.</p>\n    <p>For more information about deleting a hosted zone, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DeleteHostedZone.html\">Deleting a Hosted Zone</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>\n    <important> You can delete a hosted zone only if there are no resource record sets other than the default SOA record and NS resource record sets. If your hosted zone contains other resource record sets, you must delete them before you can delete your hosted zone. If you try to delete a hosted zone that contains other resource record sets, Route 53 will deny your request with a <code>HostedZoneNotEmpty</code> error. For information about deleting records from your hosted zone, see <a>ChangeResourceRecordSets</a>.</important>\n   "
+      "documentation": "\n    <p>This action deletes a hosted zone. To delete a hosted zone, send a <code>DELETE</code> request to the <code>2013-04-01/hostedzone/<i>hosted zone ID</i></code> resource.</p>\n    <p>For more information about deleting a hosted zone, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DeleteHostedZone.html\">Deleting a Hosted Zone</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>\n    <important> You can delete a hosted zone only if there are no resource record sets other than the default SOA record and NS resource record sets. If your hosted zone contains other resource record sets, you must delete them before you can delete your hosted zone. If you try to delete a hosted zone that contains other resource record sets, Route 53 will deny your request with a <code>HostedZoneNotEmpty</code> error. For information about deleting records from your hosted zone, see <a>ChangeResourceRecordSets</a>.</important>\n   "
     },
     "GetChange": {
       "name": "GetChange",
       "http": {
         "method": "GET",
-        "uri": "/2012-12-12/change/{Id}"
+        "uri": "/2013-04-01/change/{Id}"
       },
       "input": {
         "shape_name": "GetChangeRequest",
@@ -1147,7 +1169,7 @@
       "name": "GetHealthCheck",
       "http": {
         "method": "GET",
-        "uri": "/2012-12-12/healthcheck/{HealthCheckId}"
+        "uri": "/2013-04-01/healthcheck/{HealthCheckId}"
       },
       "input": {
         "shape_name": "GetHealthCheckRequest",
@@ -1207,29 +1229,38 @@
                     "type": "integer",
                     "min_length": 1,
                     "max_length": 65535,
-                    "documentation": "\n    <p>Port on which connection will be opened to the instance to health check. For HTTP this defaults to 80 if the port is not specified.</p>\n   "
+                    "documentation": "\n    <p>Port on which connection will be opened to the instance to health check. For HTTP and HTTP_STR_MATCH this defaults to 80 if the port is not specified. For HTTPS and HTTPS_STR_MATCH this defaults to 443 if the port is not specified.</p>\n   "
                   },
                   "Type": {
                     "shape_name": "HealthCheckType",
                     "type": "string",
                     "enum": [
                       "HTTP",
+                      "HTTPS",
+                      "HTTP_STR_MATCH",
+                      "HTTPS_STR_MATCH",
                       "TCP"
                     ],
-                    "documentation": "\n    <p>The type of health check to be performed. Currently supported protocols are TCP and HTTP.</p>\n   ",
+                    "documentation": "\n    <p>The type of health check to be performed. Currently supported types are TCP, HTTP, HTTPS, HTTP_STR_MATCH, and HTTPS_STR_MATCH.</p>\n   ",
                     "required": true
                   },
                   "ResourcePath": {
                     "shape_name": "ResourcePath",
                     "type": "string",
                     "max_length": 255,
-                    "documentation": "\n    <p>Path to ping on the instance to check the health. Required only for HTTP health checks, HTTP request is issued to the instance on the given port and path. </p>\n   "
+                    "documentation": "\n    <p>Path to ping on the instance to check the health. Required for HTTP, HTTPS, HTTP_STR_MATCH, and HTTPS_STR_MATCH health checks, HTTP request is issued to the instance on the given port and path.</p>\n   "
                   },
                   "FullyQualifiedDomainName": {
                     "shape_name": "FullyQualifiedDomainName",
                     "type": "string",
                     "max_length": 255,
                     "documentation": "\n    <p>Fully qualified domain name of the instance to be health checked.</p>\n   "
+                  },
+                  "SearchString": {
+                    "shape_name": "SearchString",
+                    "type": "string",
+                    "max_length": 255,
+                    "documentation": "\n    <p>A string to search for in the body of a health check response. Required for HTTP_STR_MATCH and HTTPS_STR_MATCH health checks.</p>\n   "
                   }
                 },
                 "member_order": [
@@ -1237,7 +1268,8 @@
                   "Port",
                   "Type",
                   "ResourcePath",
-                  "FullyQualifiedDomainName"
+                  "FullyQualifiedDomainName",
+                  "SearchString"
                 ],
                 "documentation": "\n    <p>A complex type that contains the health check configuration.</p>\n   ",
                 "required": true
@@ -1281,15 +1313,27 @@
             }
           },
           "documentation": "\n    <p>Some value specified in the request is invalid or the XML document is malformed.</p>\n   "
+        },
+        {
+          "shape_name": "IncompatibleVersion",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": null
+            }
+          },
+          "documentation": "\n    <p>The resource you are trying to access is unsupported on this Route 53 endpoint. Please consider using a newer endpoint or a tool that does so.</p>\n   "
         }
       ],
-      "documentation": "\n    <p> To retrieve the health check, send a <code>GET</code> request to the <code>2012-12-12/healthcheck/<i>health check ID</i></code> resource. </p>\n   "
+      "documentation": "\n    <p> To retrieve the health check, send a <code>GET</code> request to the <code>2013-04-01/healthcheck/<i>health check ID</i></code> resource. </p>\n   "
     },
     "GetHostedZone": {
       "name": "GetHostedZone",
       "http": {
         "method": "GET",
-        "uri": "/2012-12-12/hostedzone/{Id}"
+        "uri": "/2013-04-01/hostedzone/{Id}"
       },
       "input": {
         "shape_name": "GetHostedZoneRequest",
@@ -1429,13 +1473,13 @@
           "documentation": "\n    <p>Some value specified in the request is invalid or the XML document is malformed.</p>\n   "
         }
       ],
-      "documentation": "\n    <p> To retrieve the delegation set for a hosted zone, send a <code>GET</code> request to the <code>2012-12-12/hostedzone/<i>hosted zone ID</i></code> resource. The delegation set is the four Route 53 name servers that were assigned to the hosted zone when you created it.</p>\n   "
+      "documentation": "\n    <p> To retrieve the delegation set for a hosted zone, send a <code>GET</code> request to the <code>2013-04-01/hostedzone/<i>hosted zone ID</i></code> resource. The delegation set is the four Route 53 name servers that were assigned to the hosted zone when you created it.</p>\n   "
     },
     "ListHealthChecks": {
       "name": "ListHealthChecks",
       "http": {
         "method": "GET",
-        "uri": "/2012-12-12/healthcheck?marker={Marker}&maxitems={MaxItems}"
+        "uri": "/2013-04-01/healthcheck?marker={Marker}&maxitems={MaxItems}"
       },
       "input": {
         "shape_name": "ListHealthChecksRequest",
@@ -1459,7 +1503,7 @@
           "Marker",
           "MaxItems"
         ],
-        "documentation": "\n    <p> To retrieve a list of your health checks, send a <code>GET</code> request to the <code>2012-12-12/healthcheck</code> resource. The response to this request includes a <code>HealthChecks</code> element with zero or more <code>HealthCheck</code> child elements. By default, the list of health checks is displayed on a single page. You can control the length of the page that is displayed by using the <code>MaxItems</code> parameter. You can use the <code>Marker</code> parameter to control the health check that the list begins with.</p>\n    <note> Route 53 returns a maximum of 100 items. If you set <code>MaxItems</code> to a value greater than 100, Route 53 returns only the first 100.</note>\n   "
+        "documentation": "\n    <p> To retrieve a list of your health checks, send a <code>GET</code> request to the <code>2013-04-01/healthcheck</code> resource. The response to this request includes a <code>HealthChecks</code> element with zero or more <code>HealthCheck</code> child elements. By default, the list of health checks is displayed on a single page. You can control the length of the page that is displayed by using the <code>MaxItems</code> parameter. You can use the <code>Marker</code> parameter to control the health check that the list begins with.</p>\n    <note> Route 53 returns a maximum of 100 items. If you set <code>MaxItems</code> to a value greater than 100, Route 53 returns only the first 100.</note>\n   "
       },
       "output": {
         "shape_name": "ListHealthChecksResponse",
@@ -1504,29 +1548,38 @@
                       "type": "integer",
                       "min_length": 1,
                       "max_length": 65535,
-                      "documentation": "\n    <p>Port on which connection will be opened to the instance to health check. For HTTP this defaults to 80 if the port is not specified.</p>\n   "
+                      "documentation": "\n    <p>Port on which connection will be opened to the instance to health check. For HTTP and HTTP_STR_MATCH this defaults to 80 if the port is not specified. For HTTPS and HTTPS_STR_MATCH this defaults to 443 if the port is not specified.</p>\n   "
                     },
                     "Type": {
                       "shape_name": "HealthCheckType",
                       "type": "string",
                       "enum": [
                         "HTTP",
+                        "HTTPS",
+                        "HTTP_STR_MATCH",
+                        "HTTPS_STR_MATCH",
                         "TCP"
                       ],
-                      "documentation": "\n    <p>The type of health check to be performed. Currently supported protocols are TCP and HTTP.</p>\n   ",
+                      "documentation": "\n    <p>The type of health check to be performed. Currently supported types are TCP, HTTP, HTTPS, HTTP_STR_MATCH, and HTTPS_STR_MATCH.</p>\n   ",
                       "required": true
                     },
                     "ResourcePath": {
                       "shape_name": "ResourcePath",
                       "type": "string",
                       "max_length": 255,
-                      "documentation": "\n    <p>Path to ping on the instance to check the health. Required only for HTTP health checks, HTTP request is issued to the instance on the given port and path. </p>\n   "
+                      "documentation": "\n    <p>Path to ping on the instance to check the health. Required for HTTP, HTTPS, HTTP_STR_MATCH, and HTTPS_STR_MATCH health checks, HTTP request is issued to the instance on the given port and path.</p>\n   "
                     },
                     "FullyQualifiedDomainName": {
                       "shape_name": "FullyQualifiedDomainName",
                       "type": "string",
                       "max_length": 255,
                       "documentation": "\n    <p>Fully qualified domain name of the instance to be health checked.</p>\n   "
+                    },
+                    "SearchString": {
+                      "shape_name": "SearchString",
+                      "type": "string",
+                      "max_length": 255,
+                      "documentation": "\n    <p>A string to search for in the body of a health check response. Required for HTTP_STR_MATCH and HTTPS_STR_MATCH health checks.</p>\n   "
                     }
                   },
                   "member_order": [
@@ -1534,7 +1587,8 @@
                     "Port",
                     "Type",
                     "ResourcePath",
-                    "FullyQualifiedDomainName"
+                    "FullyQualifiedDomainName",
+                    "SearchString"
                   ],
                   "documentation": "\n    <p>A complex type that contains the health check configuration.</p>\n   ",
                   "required": true
@@ -1598,15 +1652,27 @@
             }
           },
           "documentation": "\n    <p>Some value specified in the request is invalid or the XML document is malformed.</p>\n   "
+        },
+        {
+          "shape_name": "IncompatibleVersion",
+          "type": "structure",
+          "members": {
+            "message": {
+              "shape_name": "ErrorMessage",
+              "type": "string",
+              "documentation": null
+            }
+          },
+          "documentation": "\n    <p>The resource you are trying to access is unsupported on this Route 53 endpoint. Please consider using a newer endpoint or a tool that does so.</p>\n   "
         }
       ],
-      "documentation": "\n    <p> To retrieve a list of your health checks, send a <code>GET</code> request to the <code>2012-12-12/healthcheck</code> resource. The response to this request includes a <code>HealthChecks</code> element with zero, one, or multiple <code>HealthCheck</code> child elements. By default, the list of health checks is displayed on a single page. You can control the length of the page that is displayed by using the <code>MaxItems</code> parameter. You can use the <code>Marker</code> parameter to control the health check that the list begins with. </p>\n    <note> Amazon Route 53 returns a maximum of 100 items. If you set MaxItems to a value greater than 100, Amazon Route 53 returns only the first 100.</note>\n   "
+      "documentation": "\n    <p> To retrieve a list of your health checks, send a <code>GET</code> request to the <code>2013-04-01/healthcheck</code> resource. The response to this request includes a <code>HealthChecks</code> element with zero, one, or multiple <code>HealthCheck</code> child elements. By default, the list of health checks is displayed on a single page. You can control the length of the page that is displayed by using the <code>MaxItems</code> parameter. You can use the <code>Marker</code> parameter to control the health check that the list begins with. </p>\n    <note> Amazon Route 53 returns a maximum of 100 items. If you set MaxItems to a value greater than 100, Amazon Route 53 returns only the first 100.</note>\n   "
     },
     "ListHostedZones": {
       "name": "ListHostedZones",
       "http": {
         "method": "GET",
-        "uri": "/2012-12-12/hostedzone?marker={Marker}&maxitems={MaxItems}"
+        "uri": "/2013-04-01/hostedzone?marker={Marker}&maxitems={MaxItems}"
       },
       "input": {
         "shape_name": "ListHostedZonesRequest",
@@ -1630,7 +1696,7 @@
           "Marker",
           "MaxItems"
         ],
-        "documentation": "\n    <p> To retrieve a list of your hosted zones, send a <code>GET</code> request to the <code>2012-12-12/hostedzone</code> resource. The response to this request includes a <code>HostedZones</code> element with zero or more <code>HostedZone</code> child elements. By default, the list of hosted zones is displayed on a single page. You can control the length of the page that is displayed by using the <code>MaxItems</code> parameter. You can use the <code>Marker</code> parameter to control the hosted zone that the list begins with. For more information about listing hosted zones, see <a href=\"http://docs.amazonwebservices.com/Route53/latest/DeveloperGuide/ListInfoOnHostedZone.html\">Listing the Hosted Zones for an AWS Account</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>\n    <note> Route 53 returns a maximum of 100 items. If you set <code>MaxItems</code> to a value greater than 100, Route 53 returns only the first 100.</note>\n   "
+        "documentation": "\n    <p> To retrieve a list of your hosted zones, send a <code>GET</code> request to the <code>2013-04-01/hostedzone</code> resource. The response to this request includes a <code>HostedZones</code> element with zero or more <code>HostedZone</code> child elements. By default, the list of hosted zones is displayed on a single page. You can control the length of the page that is displayed by using the <code>MaxItems</code> parameter. You can use the <code>Marker</code> parameter to control the hosted zone that the list begins with. For more information about listing hosted zones, see <a href=\"http://docs.amazonwebservices.com/Route53/latest/DeveloperGuide/ListInfoOnHostedZone.html\">Listing the Hosted Zones for an AWS Account</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>\n    <note> Route 53 returns a maximum of 100 items. If you set <code>MaxItems</code> to a value greater than 100, Route 53 returns only the first 100.</note>\n   "
       },
       "output": {
         "shape_name": "ListHostedZonesResponse",
@@ -1749,13 +1815,13 @@
           "documentation": "\n    <p>Some value specified in the request is invalid or the XML document is malformed.</p>\n   "
         }
       ],
-      "documentation": "\n    <p> To retrieve a list of your hosted zones, send a <code>GET</code> request to the <code>2012-12-12/hostedzone</code> resource. The response to this request includes a <code>HostedZones</code> element with zero, one, or multiple <code>HostedZone</code> child elements. By default, the list of hosted zones is displayed on a single page. You can control the length of the page that is displayed by using the <code>MaxItems</code> parameter. You can use the <code>Marker</code> parameter to control the hosted zone that the list begins with. </p>\n    <note> Amazon Route 53 returns a maximum of 100 items. If you set MaxItems to a value greater than 100, Amazon Route 53 returns only the first 100.</note>\n   "
+      "documentation": "\n    <p> To retrieve a list of your hosted zones, send a <code>GET</code> request to the <code>2013-04-01/hostedzone</code> resource. The response to this request includes a <code>HostedZones</code> element with zero, one, or multiple <code>HostedZone</code> child elements. By default, the list of hosted zones is displayed on a single page. You can control the length of the page that is displayed by using the <code>MaxItems</code> parameter. You can use the <code>Marker</code> parameter to control the hosted zone that the list begins with. </p>\n    <note> Amazon Route 53 returns a maximum of 100 items. If you set MaxItems to a value greater than 100, Amazon Route 53 returns only the first 100.</note>\n   "
     },
     "ListResourceRecordSets": {
       "name": "ListResourceRecordSets",
       "http": {
         "method": "GET",
-        "uri": "/2012-12-12/hostedzone/{HostedZoneId}/rrset?type={StartRecordType}&name={StartRecordName}&identifier={StartRecordIdentifier}&maxitems={MaxItems}"
+        "uri": "/2013-04-01/hostedzone/{HostedZoneId}/rrset?type={StartRecordType}&name={StartRecordName}&identifier={StartRecordIdentifier}&maxitems={MaxItems}"
       },
       "input": {
         "shape_name": "ListResourceRecordSetsRequest",
@@ -1881,7 +1947,8 @@
                     "ap-southeast-1",
                     "ap-southeast-2",
                     "ap-northeast-1",
-                    "sa-east-1"
+                    "sa-east-1",
+                    "cn-north-1"
                   ],
                   "documentation": "\n    <p><i>Regional resource record sets only:</i> Among resource record sets that have the same combination of DNS name and type, a value that specifies the AWS region for the current resource record set.</p>\n   "
                 },
@@ -2067,14 +2134,14 @@
   "pagination": {
     "ListHealthChecks": {
       "input_token": "Marker",
-      "output_token": "Marker",
+      "output_token": "NextMarker",
       "more_results": "IsTruncated",
       "limit_key": "MaxItems",
       "result_key": "HealthChecks"
     },
     "ListHostedZones": {
       "input_token": "Marker",
-      "output_token": "Marker",
+      "output_token": "NextMarker",
       "more_results": "IsTruncated",
       "limit_key": "MaxItems",
       "result_key": "HostedZones"

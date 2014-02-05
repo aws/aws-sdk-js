@@ -57,7 +57,7 @@ The SDK currently supports the following services:
     <tr><td rowspan="3">Amazon Relational Database Service</td><td rowspan="3">AWS.RDS</td><td>2013-01-10</td></tr>
     <tr><td>2013-02-12</td></tr>
     <tr><td>2013-09-09</td></tr>
-    <tr><td>Amazon Route 53</td><td>AWS.Route53</td><td>2012-12-12</td></tr>
+    <tr><td>Amazon Route 53</td><td>AWS.Route53</td><td>2013-04-01</td></tr>
     <tr><td>Amazon Simple Email Service</td><td>AWS.SES</td><td>2010-12-01</td></tr>
     <tr><td>Amazon Simple Notification Service</td><td>AWS.SNS</td><td>2010-03-31</td></tr>
     <tr><td>Amazon Simple Queue Service</td><td>AWS.SQS</td><td>2012-11-05</td></tr>
