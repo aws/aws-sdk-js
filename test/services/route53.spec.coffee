@@ -3,9 +3,11 @@ AWS = helpers.AWS
 
 describe 'AWS.Route53', ->
 
-  r53 = null
+  service = null
+  api = null
   beforeEach ->
-    r53 = new AWS.Route53()
+    service = new AWS.Route53()
+    api = service.api.apiVersion
 
   describe 'setEndpoint', ->
     it 'always enables SSL if no endpoint is set', ->
@@ -33,7 +35,7 @@ describe 'AWS.Route53', ->
     it 'correctly builds the XML document', ->
       xml =
         """
-        <ChangeResourceRecordSetsRequest xmlns="https://route53.amazonaws.com/doc/2012-12-12/">
+        <ChangeResourceRecordSetsRequest xmlns="https://route53.amazonaws.com/doc/#{api}/">
           <ChangeBatch>
             <Comment>comment</Comment>
             <Changes>
@@ -71,5 +73,5 @@ describe 'AWS.Route53', ->
             }
           ]
           Comment: 'comment'
-      r53.changeResourceRecordSets params, (err, data) ->
+      service.changeResourceRecordSets params, (err, data) ->
         helpers.matchXML(this.request.httpRequest.body, xml)
