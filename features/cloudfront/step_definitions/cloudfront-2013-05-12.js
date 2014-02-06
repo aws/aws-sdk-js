@@ -47,7 +47,7 @@ module.exports = function() {
   };
 
   this.Before("@cloudfront-2013-05-12", function (callback) {
-    this.service = new this.AWS.CloudFront.Client({apiVersion: '2013-05-12'});
+    this.service = new this.AWS.CloudFront({apiVersion: '2013-05-12'});
     this.cfCreateParams = createParams;
     callback();
   });

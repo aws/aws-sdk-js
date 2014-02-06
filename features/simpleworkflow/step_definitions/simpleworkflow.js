@@ -1,6 +1,6 @@
 module.exports = function() {
   this.Before("@simpleworkflow", function (callback) {
-    this.service = new this.AWS.SimpleWorkflow.Client();
+    this.service = new this.AWS.SimpleWorkflow();
     callback();
   });
 

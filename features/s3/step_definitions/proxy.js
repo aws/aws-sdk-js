@@ -5,7 +5,7 @@ module.exports = function() {
   this.Before("@s3", "@proxy", function(callback) {
     setupProxyServer.call(this);
 
-    this.service = this.s3 = new this.AWS.S3.Client({
+    this.service = this.s3 = new this.AWS.S3({
       httpOptions: { proxy: 'http://localhost:' + this.proxyPort }
     });
 
@@ -13,7 +13,7 @@ module.exports = function() {
   });
 
   this.Then(/^I teardown the local proxy server$/, function(callback) {
-    this.service = this.s3 = new this.AWS.S3.Client();
+    this.service = this.s3 = new this.AWS.S3();
     this.proxyServer.close(callback);
   });
 

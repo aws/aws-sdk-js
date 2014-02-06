@@ -1,6 +1,6 @@
 module.exports = function() {
   this.Before("@iam", function (callback) {
-    this.iam = new this.AWS.IAM.Client();
+    this.iam = new this.AWS.IAM();
     callback();
   });
 

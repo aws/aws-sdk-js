@@ -1,6 +1,6 @@
 module.exports = function() {
   this.Before("@glacier", function (callback) {
-    this.service = new this.AWS.Glacier.Client();
+    this.service = new this.AWS.Glacier();
     callback();
   });
 

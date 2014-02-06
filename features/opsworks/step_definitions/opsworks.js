@@ -1,7 +1,7 @@
 module.exports = function() {
   this.Before("@opsworks", function (callback) {
-    this.iam = new this.AWS.IAM.Client();
-    this.service = new this.AWS.OpsWorks.Client();
+    this.iam = new this.AWS.IAM();
+    this.service = new this.AWS.OpsWorks();
     callback();
   });
 

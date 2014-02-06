@@ -1,6 +1,6 @@
 module.exports = function() {
   this.Before("@ses", function (callback) {
-    this.service = new this.AWS.SES.Client();
+    this.service = new this.AWS.SES();
     callback();
   });
 

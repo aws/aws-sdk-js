@@ -1,6 +1,6 @@
 module.exports = function() {
   this.Before("@rds", function (callback) {
-    this.service = new this.AWS.RDS.Client();
+    this.service = new this.AWS.RDS();
     callback();
   });
 

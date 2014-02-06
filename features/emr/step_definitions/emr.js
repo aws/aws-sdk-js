@@ -1,6 +1,6 @@
 module.exports = function() {
   this.Before("@emr", function (callback) {
-    this.service = new this.AWS.EMR.Client();
+    this.service = new this.AWS.EMR();
     callback();
   });
 

@@ -1,6 +1,6 @@
 module.exports = function() {
   this.Before("@simpledb", function (callback) {
-    this.service = new this.AWS.SimpleDB.Client();
+    this.service = new this.AWS.SimpleDB();
     this.domainName = 'aws-sdk-js-integration-' + new Date().getTime();
     callback();
   });

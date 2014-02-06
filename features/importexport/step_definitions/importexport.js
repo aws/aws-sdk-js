@@ -1,7 +1,7 @@
 module.exports = function() {
   this.Before("@importexport", function (callback) {
-    this.s3 = new this.AWS.S3.Client();
-    this.service = new this.AWS.ImportExport.Client();
+    this.s3 = new this.AWS.S3();
+    this.service = new this.AWS.ImportExport();
     callback();
   });
 

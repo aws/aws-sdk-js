@@ -1,6 +1,6 @@
 module.exports = function() {
   this.Before("@elasticache", function (callback) {
-    this.service = new this.AWS.ElastiCache.Client();
+    this.service = new this.AWS.ElastiCache();
     callback();
   });
 

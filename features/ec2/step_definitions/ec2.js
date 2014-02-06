@@ -1,6 +1,6 @@
 module.exports = function() {
   this.Before("@ec2", function (callback) {
-    this.service = new this.AWS.EC2.Client();
+    this.service = new this.AWS.EC2();
     callback();
   });
 

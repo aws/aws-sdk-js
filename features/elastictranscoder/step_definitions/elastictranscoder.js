@@ -1,8 +1,8 @@
 module.exports = function() {
   this.Before("@elastictranscoder", function (callback) {
-    this.iam = new this.AWS.IAM.Client();
-    this.s3 = new this.AWS.S3.Client();
-    this.service = new this.AWS.ElasticTranscoder.Client();
+    this.iam = new this.AWS.IAM();
+    this.s3 = new this.AWS.S3();
+    this.service = new this.AWS.ElasticTranscoder();
     callback();
   });
 

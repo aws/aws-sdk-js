@@ -1,6 +1,6 @@
 module.exports = function() {
   this.Before("@dynamodb-2011-12-05", function (next) {
-    this.service = new this.AWS.DynamoDB.Client({
+    this.service = new this.AWS.DynamoDB({
       apiVersion: '2011-12-05',
       region: 'us-west-2',
       maxRetries: 2
@@ -9,7 +9,7 @@ module.exports = function() {
   });
 
   this.Before("@dynamodb-2012-08-10", function (next) {
-    this.service = new this.AWS.DynamoDB.Client({
+    this.service = new this.AWS.DynamoDB({
       apiVersion: '2012-08-10',
       region: 'us-west-2',
       maxRetries: 2
