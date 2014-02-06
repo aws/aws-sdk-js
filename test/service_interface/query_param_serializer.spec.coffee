@@ -31,6 +31,11 @@ describe 'AWS.QueryParamSerializer', ->
       params = serialize({ ParamName:'abc' }, rules)
       expect(params).toEqual([['ParamName', 'abc']])
 
+    it 'ignores null values', ->
+      rules = {ParamName: {}}
+      params = serialize({ ParamName:null }, rules)
+      expect(params).toEqual([])
+
   describe 'structures', ->
 
     it 'works with deeply nested objects', ->
@@ -77,6 +82,18 @@ describe 'AWS.QueryParamSerializer', ->
       expect(params).toEqual([
         ['ROOT.lEAF', 'value']
       ])
+
+    it 'ignores null', ->
+      rules =
+        Root:
+          type: 'structure'
+          name: 'ROOT'
+          members:
+            Leaf:
+              name: 'lEAF'
+      params = serialize({Root:null}, rules)
+      expect(params).toEqual([])
+
 
   describe 'lists', ->
 

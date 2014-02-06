@@ -28,6 +28,24 @@ describe 'AWS.XML.Builder', ->
       """
       matchXML(toXML(rules, params), xml)
 
+    it 'ignores null input', ->
+      rules = {Name:{},State:{}}
+      params = { Name:null, State:undefined }
+      xml = """
+      <Data xmlns="#{xmlns}"/>
+      """
+      matchXML(toXML(rules, params), xml)
+
+    it 'ignores nested null input', ->
+      rules = {Struct:{type: 'structure', members: {State:{}}}}
+      params = { Struct: { State: null } }
+      xml = """
+      <Data xmlns="#{xmlns}">
+        <Struct/>
+      </Data>
+      """
+      matchXML(toXML(rules, params), xml)
+
     it 'orders xml members by the order they appear in the rules', ->
       rules = {Count:{type:'integer'},State:{}}
       params = { State: 'Disabled', Count: 123 }

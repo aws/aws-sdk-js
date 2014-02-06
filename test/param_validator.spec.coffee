@@ -82,6 +82,9 @@ describe 'AWS.ParamValidator', ->
     it 'throws an error if a top-level required param is omitted', ->
       expectError {}
 
+    it 'throws an error if a top-level required param is null', ->
+      expectError req: null
+
     it 'optional params can be omitted, even if they have required params', ->
       expectValid req: 'abc'
 
@@ -168,6 +171,9 @@ describe 'AWS.ParamValidator', ->
     it 'accepts maps', ->
       expectValid hash: {}
 
+    it 'accepts null', ->
+      expectValid hash: null
+
     it 'rejects non-maps', ->
       expectError hash: 'oops'
 
@@ -197,6 +203,9 @@ describe 'AWS.ParamValidator', ->
     it 'accpets false', ->
       expectValid param: false
 
+    it 'accepts null', ->
+      expectValid param: null
+
     it 'rejects other values', ->
       expectError param: 'true'
 
@@ -214,6 +223,9 @@ describe 'AWS.ParamValidator', ->
     it 'accepts UNIX timestamps as number values', ->
       expectValid param: 12345
 
+    it 'accepts null', ->
+      expectValid param: null
+
     it 'rejects other param values', ->
       expectError param: 'abc'
 
@@ -226,6 +238,9 @@ describe 'AWS.ParamValidator', ->
 
     it 'accepts empty string', ->
       expectValid param: ''
+
+    it 'accepts null', ->
+      expectValid param: null
 
     it 'rejects other objects', ->
       expectError param: 123
@@ -245,6 +260,9 @@ describe 'AWS.ParamValidator', ->
     it 'accepts floats formatted as strings', ->
       expectValid param: '1.23'
 
+    it 'accepts null', ->
+      expectValid param: null
+
     it 'rejects other objects', ->
       expectError param: 'NOTFLOAT'
 
@@ -258,10 +276,13 @@ describe 'AWS.ParamValidator', ->
     it 'accepts integers formatted as strings', ->
       expectValid param: '123'
 
+    it 'accepts null', ->
+      expectValid param: null
+
     it 'rejects other objects', ->
       expectError param: 'NOTINT'
 
-  describe 'binary', ->
+  describe 'base64', ->
     beforeEach ->
       rules = param: type: 'base64'
 
@@ -274,6 +295,9 @@ describe 'AWS.ParamValidator', ->
     it 'accepts typed arrays', ->
       expectValid param: new Uint8Array(1, 2, 3)
       expectValid param: new Uint32Array(1, 2, 3)
+
+    it 'accepts null', ->
+      expectValid param: null
 
     it 'rejects other objects', ->
       expectError param: {}
@@ -301,6 +325,9 @@ describe 'AWS.ParamValidator', ->
     it 'accepts Streams', ->
       Stream = require('stream').Stream
       expectValid param: new Stream()
+
+    it 'accepts null', ->
+      expectValid param: null
 
     it 'rejects other objects', ->
       expectError param: {}
@@ -385,14 +412,14 @@ describe 'AWS.ParamValidator', ->
       rules['config']['members']['settings']['members']['name'] =
         type: 'string'
 
-      expectError msg, config: settings: name: null
+      expectError msg, config: settings: name: 123
 
     it 'throws helpful messages for invalid integers', ->
       msg = "Expected params.config.settings.count to be a number"
       rules['config']['members']['settings']['members']['count'] =
         type: 'integer'
 
-      expectError msg, config: settings: count: null
+      expectError msg, config: settings: count: 'invalid-integer'
 
     it 'throws helpful messages for invalid timestamps', ->
       msg = "Expected params.config.settings.when to be a " +
@@ -400,18 +427,18 @@ describe 'AWS.ParamValidator', ->
       rules['config']['members']['settings']['members']['when'] =
         type: 'timestamp'
 
-      expectError msg, config: settings: when: null
+      expectError msg, config: settings: when: 'invalid-date'
 
     it 'throws helpful messages for invalid booleans', ->
       msg = "Expected params.config.settings.enabled to be a boolean"
-      expectError msg, config: settings: enabled: null
+      expectError msg, config: settings: enabled: 'invalid-boolean'
 
     it 'throws helpful messages for invalid floats', ->
       msg = "Expected params.config.settings.value to be a number"
       rules.config.members.settings.members.value =
         type: 'float'
 
-      expectError msg, config: settings: value: null
+      expectError msg, config: settings: value: 'invalid-float'
 
     it 'throws helpful messages for invalid base64 params', ->
       msg = "Expected params.config.settings.data to be a " +
@@ -419,7 +446,7 @@ describe 'AWS.ParamValidator', ->
       rules.config.members.settings.members.data =
         type: 'base64'
 
-      expectError msg, config: settings: data: null
+      expectError msg, config: settings: data: 123
 
     it 'throws helpful messages for invalid binary params', ->
       msg = "Expected params.config.settings.data to be a " +
@@ -427,4 +454,4 @@ describe 'AWS.ParamValidator', ->
       rules.config.members.settings.members.data =
         type: 'binary'
 
-      expectError msg, config: settings: data: null
+      expectError msg, config: settings: data: 123

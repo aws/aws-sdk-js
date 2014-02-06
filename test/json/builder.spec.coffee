@@ -16,7 +16,7 @@ describe 'AWS.JSON.Builder', ->
     it 'returns an empty document when there are no params', ->
       expect(build({}, {})).toEqual("{}")
 
-    it 'translates strucutres', ->
+    describe 'structures', ->
       rules =
         type: 'structure'
         members:
@@ -27,10 +27,18 @@ describe 'AWS.JSON.Builder', ->
                 type: 'string'
               B:
                 type: 'string'
-      params = { Items: { A: 'a', B: 'b' } }
-      expect(build(rules, params)).toEqual('{"Items":{"A":"a","B":"b"}}')
 
-    it 'translates lists', ->
+      it 'translates input', ->
+        params = { Items: { A: 'a', B: 'b' } }
+        expect(build(rules, params)).toEqual('{"Items":{"A":"a","B":"b"}}')
+
+      it 'ignores null', ->
+        expect(build(rules, Items: null)).toEqual('{}')
+
+      it 'ignores undefined', ->
+        expect(build(rules, Items: undefined)).toEqual('{}')
+
+    describe 'lists', ->
       rules =
         type: 'structure'
         members:
@@ -38,17 +46,33 @@ describe 'AWS.JSON.Builder', ->
             type: 'list'
             members:
               type: 'string'
-      params = { Items: ['a','b','c'] }
-      expect(build(rules, params)).toEqual('{"Items":["a","b","c"]}')
 
-    it 'translates maps', ->
+      it 'translates input', ->
+        params = { Items: ['a','b','c'] }
+        expect(build(rules, params)).toEqual('{"Items":["a","b","c"]}')
+
+      it 'ignores null', ->
+        expect(build(rules, Items: null)).toEqual('{}')
+
+      it 'ignores undefined', ->
+        expect(build(rules, Items: undefined)).toEqual('{}')
+
+    describe 'maps', ->
       rules =
         type: 'structure'
         members:
           Items:
             type: 'map'
-      params = { Items: { A: 'a', B: 'b' } }
-      expect(build(rules, params)).toEqual('{"Items":{"A":"a","B":"b"}}')
+
+      it 'translates maps', ->
+        params = { Items: { A: 'a', B: 'b' } }
+        expect(build(rules, params)).toEqual('{"Items":{"A":"a","B":"b"}}')
+
+      it 'ignores null', ->
+        expect(build(rules, Items: null)).toEqual('{}')
+
+      it 'ignores undefined', ->
+        expect(build(rules, Items: undefined)).toEqual('{}')
 
     it 'translates nested maps', ->
       rules =
@@ -91,3 +115,11 @@ describe 'AWS.JSON.Builder', ->
         members:
           Float: type: 'float'
       expect(build(rules, Float: '20.1')).toEqual('{"Float":20.1}')
+
+    it 'ignores nulls null as null', ->
+      rules =
+        type: 'structure'
+        members:
+          Float: type: 'float'
+          Other: type: 'string'
+      expect(build(rules, Float: null, Other: 'foo')).toEqual('{"Other":"foo"}')
