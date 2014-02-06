@@ -11,7 +11,7 @@ module.exports = function() {
   });
 
   this.Given(/^the Redshift cluster security group name is in the result$/, function(callback) {
-    var name = this.data.ClusterSecurityGroupName;
+    var name = this.data.ClusterSecurityGroup.ClusterSecurityGroupName;
     this.assert.equal(name, this.clusterGroupName);
     callback();
   });

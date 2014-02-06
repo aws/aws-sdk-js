@@ -48,8 +48,7 @@
               "Enabled": {
                 "type": "boolean"
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -129,8 +128,7 @@
                   "name": "IPRange"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -180,8 +178,7 @@
                 "type": "integer"
               },
               "OptionGroupName": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -337,16 +334,14 @@
                             "ProvisionedIopsCapable": {
                               "type": "boolean"
                             }
-                          },
-                          "wrapper": true
+                          }
                         },
                         "SubnetStatus": {}
                       },
                       "name": "Subnet"
                     }
                   }
-                },
-                "wrapper": true
+                }
               },
               "PreferredMaintenanceWindow": {},
               "PendingModifiedValues": {
@@ -410,8 +405,7 @@
               "PubliclyAccessible": {
                 "type": "boolean"
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -529,16 +523,14 @@
                             "ProvisionedIopsCapable": {
                               "type": "boolean"
                             }
-                          },
-                          "wrapper": true
+                          }
                         },
                         "SubnetStatus": {}
                       },
                       "name": "Subnet"
                     }
                   }
-                },
-                "wrapper": true
+                }
               },
               "PreferredMaintenanceWindow": {},
               "PendingModifiedValues": {
@@ -602,8 +594,7 @@
               "PubliclyAccessible": {
                 "type": "boolean"
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -633,8 +624,7 @@
               "DBParameterGroupName": {},
               "DBParameterGroupFamily": {},
               "Description": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -686,8 +676,7 @@
                   "name": "IPRange"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -737,8 +726,7 @@
                 "type": "integer"
               },
               "OptionGroupName": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -786,16 +774,14 @@
                         "ProvisionedIopsCapable": {
                           "type": "boolean"
                         }
-                      },
-                      "wrapper": true
+                      }
                     },
                     "SubnetStatus": {}
                   },
                   "name": "Subnet"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -856,8 +842,7 @@
               "Enabled": {
                 "type": "boolean"
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -956,8 +941,7 @@
                 "type": "boolean"
               },
               "VpcId": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -1061,16 +1045,14 @@
                             "ProvisionedIopsCapable": {
                               "type": "boolean"
                             }
-                          },
-                          "wrapper": true
+                          }
                         },
                         "SubnetStatus": {}
                       },
                       "name": "Subnet"
                     }
                   }
-                },
-                "wrapper": true
+                }
               },
               "PreferredMaintenanceWindow": {},
               "PendingModifiedValues": {
@@ -1134,8 +1116,7 @@
               "PubliclyAccessible": {
                 "type": "boolean"
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -1212,8 +1193,7 @@
                 "type": "integer"
               },
               "OptionGroupName": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -1270,8 +1250,7 @@
               "Enabled": {
                 "type": "boolean"
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -1450,16 +1429,14 @@
                               "ProvisionedIopsCapable": {
                                 "type": "boolean"
                               }
-                            },
-                            "wrapper": true
+                            }
                           },
                           "SubnetStatus": {}
                         },
                         "name": "Subnet"
                       }
                     }
-                  },
-                  "wrapper": true
+                  }
                 },
                 "PreferredMaintenanceWindow": {},
                 "PendingModifiedValues": {
@@ -1524,7 +1501,6 @@
                   "type": "boolean"
                 }
               },
-              "wrapper": true,
               "name": "DBInstance"
             }
           }
@@ -1600,7 +1576,6 @@
                 "DBParameterGroupFamily": {},
                 "Description": {}
               },
-              "wrapper": true,
               "name": "DBParameterGroup"
             }
           }
@@ -1700,7 +1675,6 @@
                   }
                 }
               },
-              "wrapper": true,
               "name": "DBSecurityGroup"
             }
           }
@@ -1757,7 +1731,6 @@
                 },
                 "OptionGroupName": {}
               },
-              "wrapper": true,
               "name": "DBSnapshot"
             }
           }
@@ -1802,8 +1775,7 @@
                           "ProvisionedIopsCapable": {
                             "type": "boolean"
                           }
-                        },
-                        "wrapper": true
+                        }
                       },
                       "SubnetStatus": {}
                     },
@@ -1811,7 +1783,6 @@
                   }
                 }
               },
-              "wrapper": true,
               "name": "DBSubnetGroup"
             }
           }
@@ -1861,8 +1832,7 @@
                   "name": "Parameter"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -1891,7 +1861,6 @@
                   }
                 }
               },
-              "wrapper": true,
               "name": "EventCategoriesMap"
             }
           }
@@ -1941,7 +1910,6 @@
                   "type": "boolean"
                 }
               },
-              "wrapper": true,
               "name": "EventSubscription"
             }
           }
@@ -2164,7 +2132,6 @@
                 },
                 "VpcId": {}
               },
-              "wrapper": true,
               "name": "OptionGroup"
             }
           },
@@ -2214,7 +2181,6 @@
                         "type": "boolean"
                       }
                     },
-                    "wrapper": true,
                     "name": "AvailabilityZone"
                   }
                 },
@@ -2228,7 +2194,6 @@
                   "type": "boolean"
                 }
               },
-              "wrapper": true,
               "name": "OrderableDBInstanceOption"
             }
           },
@@ -2300,12 +2265,10 @@
                       },
                       "RecurringChargeFrequency": {}
                     },
-                    "wrapper": true,
                     "name": "RecurringCharge"
                   }
                 }
               },
-              "wrapper": true,
               "name": "ReservedDBInstance"
             }
           }
@@ -2367,12 +2330,10 @@
                       },
                       "RecurringChargeFrequency": {}
                     },
-                    "wrapper": true,
                     "name": "RecurringCharge"
                   }
                 }
               },
-              "wrapper": true,
               "name": "ReservedDBInstancesOffering"
             }
           }
@@ -2570,16 +2531,14 @@
                             "ProvisionedIopsCapable": {
                               "type": "boolean"
                             }
-                          },
-                          "wrapper": true
+                          }
                         },
                         "SubnetStatus": {}
                       },
                       "name": "Subnet"
                     }
                   }
-                },
-                "wrapper": true
+                }
               },
               "PreferredMaintenanceWindow": {},
               "PendingModifiedValues": {
@@ -2643,8 +2602,7 @@
               "PubliclyAccessible": {
                 "type": "boolean"
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -2729,16 +2687,14 @@
                         "ProvisionedIopsCapable": {
                           "type": "boolean"
                         }
-                      },
-                      "wrapper": true
+                      }
                     },
                     "SubnetStatus": {}
                   },
                   "name": "Subnet"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -2791,8 +2747,7 @@
               "Enabled": {
                 "type": "boolean"
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -2938,8 +2893,7 @@
                 "type": "boolean"
               },
               "VpcId": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -3043,16 +2997,14 @@
                             "ProvisionedIopsCapable": {
                               "type": "boolean"
                             }
-                          },
-                          "wrapper": true
+                          }
                         },
                         "SubnetStatus": {}
                       },
                       "name": "Subnet"
                     }
                   }
-                },
-                "wrapper": true
+                }
               },
               "PreferredMaintenanceWindow": {},
               "PendingModifiedValues": {
@@ -3116,8 +3068,7 @@
               "PubliclyAccessible": {
                 "type": "boolean"
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -3177,12 +3128,10 @@
                     },
                     "RecurringChargeFrequency": {}
                   },
-                  "wrapper": true,
                   "name": "RecurringCharge"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -3285,16 +3234,14 @@
                             "ProvisionedIopsCapable": {
                               "type": "boolean"
                             }
-                          },
-                          "wrapper": true
+                          }
                         },
                         "SubnetStatus": {}
                       },
                       "name": "Subnet"
                     }
                   }
-                },
-                "wrapper": true
+                }
               },
               "PreferredMaintenanceWindow": {},
               "PendingModifiedValues": {
@@ -3358,8 +3305,7 @@
               "PubliclyAccessible": {
                 "type": "boolean"
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -3404,8 +3350,7 @@
               "Enabled": {
                 "type": "boolean"
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -3591,16 +3536,14 @@
                             "ProvisionedIopsCapable": {
                               "type": "boolean"
                             }
-                          },
-                          "wrapper": true
+                          }
                         },
                         "SubnetStatus": {}
                       },
                       "name": "Subnet"
                     }
                   }
-                },
-                "wrapper": true
+                }
               },
               "PreferredMaintenanceWindow": {},
               "PendingModifiedValues": {
@@ -3664,8 +3607,7 @@
               "PubliclyAccessible": {
                 "type": "boolean"
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -3796,16 +3738,14 @@
                             "ProvisionedIopsCapable": {
                               "type": "boolean"
                             }
-                          },
-                          "wrapper": true
+                          }
                         },
                         "SubnetStatus": {}
                       },
                       "name": "Subnet"
                     }
                   }
-                },
-                "wrapper": true
+                }
               },
               "PreferredMaintenanceWindow": {},
               "PendingModifiedValues": {
@@ -3869,8 +3809,7 @@
               "PubliclyAccessible": {
                 "type": "boolean"
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -3923,8 +3862,7 @@
                   "name": "IPRange"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }

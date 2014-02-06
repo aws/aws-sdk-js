@@ -11,7 +11,7 @@ module.exports = function() {
   });
 
   this.Given(/^the ElastiCache security group name is in the result$/, function(callback) {
-    var name = this.data.CacheSecurityGroupName;
+    var name = this.data.CacheSecurityGroup.CacheSecurityGroupName;
     this.assert.equal(name, this.cacheGroupName);
     callback();
   });

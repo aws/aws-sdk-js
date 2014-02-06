@@ -11,7 +11,7 @@ module.exports = function() {
   });
 
   this.Given(/^the RDS security group name is in the result$/, function(callback) {
-    var name = this.data.DBSecurityGroupName;
+    var name = this.data.DBSecurityGroup.DBSecurityGroupName;
     this.assert.equal(name, this.dbGroupName);
     callback();
   });

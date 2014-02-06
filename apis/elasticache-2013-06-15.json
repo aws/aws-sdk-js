@@ -44,8 +44,7 @@
                   "name": "EC2SecurityGroup"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -216,8 +215,7 @@
                 }
               },
               "ReplicationGroupId": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -247,8 +245,7 @@
               "CacheParameterGroupName": {},
               "CacheParameterGroupFamily": {},
               "Description": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -287,8 +284,7 @@
                   "name": "EC2SecurityGroup"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -332,15 +328,13 @@
                       "type": "structure",
                       "members": {
                         "Name": {}
-                      },
-                      "wrapper": true
+                      }
                     }
                   },
                   "name": "Subnet"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -424,8 +418,7 @@
                   "name": "NodeGroup"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -555,8 +548,7 @@
                 }
               },
               "ReplicationGroupId": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -679,8 +671,7 @@
                   "name": "NodeGroup"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -819,7 +810,6 @@
                 },
                 "ReplicationGroupId": {}
               },
-              "wrapper": true,
               "name": "CacheCluster"
             }
           }
@@ -889,7 +879,6 @@
                 "CacheParameterGroupFamily": {},
                 "Description": {}
               },
-              "wrapper": true,
               "name": "CacheParameterGroup"
             }
           }
@@ -1003,7 +992,6 @@
                   }
                 }
               },
-              "wrapper": true,
               "name": "CacheSecurityGroup"
             }
           }
@@ -1044,15 +1032,13 @@
                         "type": "structure",
                         "members": {
                           "Name": {}
-                        },
-                        "wrapper": true
+                        }
                       }
                     },
                     "name": "Subnet"
                   }
                 }
               },
-              "wrapper": true,
               "name": "CacheSubnetGroup"
             }
           }
@@ -1129,8 +1115,7 @@
                   "name": "CacheNodeTypeSpecificParameter"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -1258,7 +1243,6 @@
                   }
                 }
               },
-              "wrapper": true,
               "name": "ReplicationGroup"
             }
           }
@@ -1322,12 +1306,10 @@
                       },
                       "RecurringChargeFrequency": {}
                     },
-                    "wrapper": true,
                     "name": "RecurringCharge"
                   }
                 }
               },
-              "wrapper": true,
               "name": "ReservedCacheNode"
             }
           }
@@ -1382,12 +1364,10 @@
                       },
                       "RecurringChargeFrequency": {}
                     },
-                    "wrapper": true,
                     "name": "RecurringCharge"
                   }
                 }
               },
-              "wrapper": true,
               "name": "ReservedCacheNodesOffering"
             }
           }
@@ -1551,8 +1531,7 @@
                 }
               },
               "ReplicationGroupId": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -1622,15 +1601,13 @@
                       "type": "structure",
                       "members": {
                         "Name": {}
-                      },
-                      "wrapper": true
+                      }
                     }
                   },
                   "name": "Subnet"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -1733,8 +1710,7 @@
                   "name": "NodeGroup"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -1790,12 +1766,10 @@
                     },
                     "RecurringChargeFrequency": {}
                   },
-                  "wrapper": true,
                   "name": "RecurringCharge"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -1932,8 +1906,7 @@
                 }
               },
               "ReplicationGroupId": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -2007,8 +1980,7 @@
                   "name": "EC2SecurityGroup"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }

@@ -51,8 +51,7 @@
                   "name": "IPRange"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -135,8 +134,7 @@
                 "type": "integer"
               },
               "SourceRegion": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -219,8 +217,7 @@
                 "type": "integer"
               },
               "SourceRegion": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -433,8 +430,7 @@
                   "Status": {}
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -464,8 +460,7 @@
               "ParameterGroupName": {},
               "ParameterGroupFamily": {},
               "Description": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -514,8 +509,7 @@
                   "name": "IPRange"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -597,8 +591,7 @@
                 "type": "integer"
               },
               "SourceRegion": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -643,16 +636,14 @@
                       "type": "structure",
                       "members": {
                         "Name": {}
-                      },
-                      "wrapper": true
+                      }
                     },
                     "SubnetStatus": {}
                   },
                   "name": "Subnet"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -717,8 +708,7 @@
               "Enabled": {
                 "type": "boolean"
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -741,8 +731,7 @@
             "members": {
               "HsmClientCertificateIdentifier": {},
               "HsmClientCertificatePublicKey": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -782,8 +771,7 @@
               "Description": {},
               "HsmIpAddress": {},
               "HsmPartitionName": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -951,8 +939,7 @@
                   "Status": {}
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -1062,8 +1049,7 @@
                 "type": "integer"
               },
               "SourceRegion": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -1153,7 +1139,6 @@
                 "ParameterGroupFamily": {},
                 "Description": {}
               },
-              "wrapper": true,
               "name": "ClusterParameterGroup"
             }
           }
@@ -1248,7 +1233,6 @@
                   }
                 }
               },
-              "wrapper": true,
               "name": "ClusterSecurityGroup"
             }
           }
@@ -1344,7 +1328,6 @@
                 },
                 "SourceRegion": {}
               },
-              "wrapper": true,
               "name": "Snapshot"
             }
           }
@@ -1386,8 +1369,7 @@
                         "type": "structure",
                         "members": {
                           "Name": {}
-                        },
-                        "wrapper": true
+                        }
                       },
                       "SubnetStatus": {}
                     },
@@ -1395,7 +1377,6 @@
                   }
                 }
               },
-              "wrapper": true,
               "name": "ClusterSubnetGroup"
             }
           }
@@ -1599,7 +1580,6 @@
                   }
                 }
               },
-              "wrapper": true,
               "name": "Cluster"
             }
           }
@@ -1647,8 +1627,7 @@
                   "name": "Parameter"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -1685,12 +1664,10 @@
                       "EventDescription": {},
                       "Severity": {}
                     },
-                    "wrapper": true,
                     "name": "EventInfoMap"
                   }
                 }
               },
-              "wrapper": true,
               "name": "EventCategoriesMap"
             }
           }
@@ -1743,7 +1720,6 @@
                   "type": "boolean"
                 }
               },
-              "wrapper": true,
               "name": "EventSubscription"
             }
           }
@@ -1826,7 +1802,6 @@
                 "HsmClientCertificateIdentifier": {},
                 "HsmClientCertificatePublicKey": {}
               },
-              "wrapper": true,
               "name": "HsmClientCertificate"
             }
           }
@@ -1859,7 +1834,6 @@
                 "HsmIpAddress": {},
                 "HsmPartitionName": {}
               },
-              "wrapper": true,
               "name": "HsmConfiguration"
             }
           }
@@ -1925,12 +1899,10 @@
                     "members": {
                       "Name": {}
                     },
-                    "wrapper": true,
                     "name": "AvailabilityZone"
                   }
                 }
               },
-              "wrapper": true,
               "name": "OrderableClusterOption"
             }
           },
@@ -1982,12 +1954,10 @@
                       },
                       "RecurringChargeFrequency": {}
                     },
-                    "wrapper": true,
                     "name": "RecurringCharge"
                   }
                 }
               },
-              "wrapper": true,
               "name": "ReservedNodeOffering"
             }
           }
@@ -2046,12 +2016,10 @@
                       },
                       "RecurringChargeFrequency": {}
                     },
-                    "wrapper": true,
                     "name": "RecurringCharge"
                   }
                 }
               },
-              "wrapper": true,
               "name": "ReservedNode"
             }
           }
@@ -2279,8 +2247,7 @@
                   "Status": {}
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -2482,8 +2449,7 @@
                   "Status": {}
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -2676,8 +2642,7 @@
                   "Status": {}
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -2758,16 +2723,14 @@
                       "type": "structure",
                       "members": {
                         "Name": {}
-                      },
-                      "wrapper": true
+                      }
                     },
                     "SubnetStatus": {}
                   },
                   "name": "Subnet"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -2830,8 +2793,7 @@
               "Enabled": {
                 "type": "boolean"
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -2999,8 +2961,7 @@
                   "Status": {}
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -3055,12 +3016,10 @@
                     },
                     "RecurringChargeFrequency": {}
                   },
-                  "wrapper": true,
                   "name": "RecurringCharge"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -3224,8 +3183,7 @@
                   "Status": {}
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -3448,8 +3406,7 @@
                   "Status": {}
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -3498,8 +3455,7 @@
                   "name": "IPRange"
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -3582,8 +3538,7 @@
                 "type": "integer"
               },
               "SourceRegion": {}
-            },
-            "wrapper": true
+            }
           }
         }
       }
@@ -3747,8 +3702,7 @@
                   "Status": {}
                 }
               }
-            },
-            "wrapper": true
+            }
           }
         }
       }
