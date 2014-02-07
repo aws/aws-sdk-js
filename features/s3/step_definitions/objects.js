@@ -180,6 +180,20 @@ module.exports = function () {
     req.send(callback);
   });
 
+  this.When(/^I write "([^"]*)" to the public key "([^"]*)"$/, function(data, key, next) {
+    var params = {Bucket: this.sharedBucket, Key: key, Body: data, ACL: 'public-read'};
+    this.request('s3', 'putObject', params, next);
+  });
+
+  this.Then(/^the unauthenticated request to read key "([^"]*)" should equal "([^"]*)"$/, function(key, body, next) {
+    var params = {Bucket: this.sharedBucket, Key: key};
+    this.s3.makeUnauthenticatedRequest('getObject', params, function (err, data) {
+      if (err) return next(err);
+      this.assert.equal(data.Body.toString(), body);
+      next();
+    }.bind(this));
+  });
+
   // this scenario is a work around for not having an after all hook
   this.Then(/^I delete the shared bucket$/, function(next) {
     this.request('s3', 'deleteBucket', {Bucket:this.sharedBucket}, next);

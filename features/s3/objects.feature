@@ -33,6 +33,10 @@ Feature: Working with Objects in S3
     And the object with the key "byebye" should contain "åß∂ƒ©"
     And I delete the object with the key "byebye"
 
+    # Unauthenticated request
+    When I write "world" to the public key "hello"
+    Then the unauthenticated request to read key "hello" should equal "world"
+
     When I delete the object with the key "hello"
     Then the object with the key "hello" should not exist
 

@@ -16,15 +16,15 @@ module.exports = function () {
         world.AWS.util.arrayEach(data.Contents, function (item) {
           params.Delete.Objects.push({Key: item.Key});
         });
-        world.request('s3', 'deleteObjects', params, deleteBucket);
+        world.request('s3', 'deleteObjects', params, callback);
       } else {
-        deleteBucket();
+        callback();
       }
     });
   }
 
   this.Before("@s3", function (callback) {
-    this.service = this.s3 = new this.AWS.S3();
+    this.service = this.s3 = new this.AWS.S3({maxRetries: 100});
     callback();
   });
 
