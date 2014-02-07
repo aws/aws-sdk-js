@@ -10,9 +10,7 @@ module.exports = function () {
       return;
     }
 
-    this.sharedBucket = 'aws-sdk-js-integration-' +
-      this.AWS.util.date.unixTimestamp() * 1000;
-
+    this.sharedBucket = this.uniqueName('aws-sdk-js-integration');
     this.s3.createBucket({Bucket:this.sharedBucket}, function(err, data) {
       callback();
     });
@@ -192,10 +190,5 @@ module.exports = function () {
       this.assert.equal(data.Body.toString(), body);
       next();
     }.bind(this));
-  });
-
-  // this scenario is a work around for not having an after all hook
-  this.Then(/^I delete the shared bucket$/, function(next) {
-    this.request('s3', 'deleteBucket', {Bucket:this.sharedBucket}, next);
   });
 };

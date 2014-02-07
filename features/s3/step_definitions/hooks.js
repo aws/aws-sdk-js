@@ -16,9 +16,9 @@ module.exports = function () {
         world.AWS.util.arrayEach(data.Contents, function (item) {
           params.Delete.Objects.push({Key: item.Key});
         });
-        world.request('s3', 'deleteObjects', params, callback);
+        world.request('s3', 'deleteObjects', params, deleteBucket);
       } else {
-        callback();
+        deleteBucket();
       }
     });
   }
