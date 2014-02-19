@@ -28,7 +28,7 @@ describe 'AWS.ServiceInterface.Rest', ->
     operation = MockRESTService.prototype.api.operations.sampleOperation
     service = new MockRESTService(region: 'region')
     request = new AWS.Request(service, 'sampleOperation')
-    response = new AWS.Response(request)
+    response = request.response
 
   describe 'buildRequest', ->
     buildRequest = (callback) ->

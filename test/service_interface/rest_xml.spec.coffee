@@ -32,7 +32,7 @@ describe 'AWS.ServiceInterface.RestXml', ->
     operation = MockRESTXMLService.prototype.api.operations.sampleOperation
     service = new MockRESTXMLService(region: 'region')
     request = new AWS.Request(service, 'sampleOperation')
-    response = new AWS.Response(request)
+    response = request.response
 
   describe 'buildRequest', ->
     buildRequest = (callback) ->

@@ -31,7 +31,7 @@ describe 'AWS.ServiceInterface.Query', ->
                     type: 'float'
 
     request = new AWS.Request(service, 'operationName')
-    response = new AWS.Response(request)
+    response = request.response
 
   describe 'buildRequest', ->
     stringify = (params) -> AWS.util.queryParamsToString(params)
