@@ -48,6 +48,15 @@ describe 'AWS.ServiceInterface.Rest', ->
           operation.http.uri = '/path'
         expect(request.httpRequest.path).toEqual('/path')
 
+      it 'appends to existing httpRequest endpoint', ->
+        service = new MockRESTService(endpoint: 'https://localhost/foo/bar')
+        request = new AWS.Request(service, 'sampleOperation')
+        buildRequest ->
+          operation.http.uri = '/Owner/{Id}'
+          operation.input = {members:{Id:{location:'uri'}}}
+          request.params = Id: 'abc'
+        expect(request.httpRequest.path).toEqual('/foo/bar/Owner/abc')
+
       it 'replaces param placeholders', ->
         buildRequest ->
           operation.http.uri = '/Owner/{Id}'

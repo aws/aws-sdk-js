@@ -50,6 +50,12 @@ describe 'AWS.ServiceInterface.Query', ->
       buildRequest()
       expect(request.httpRequest.path).toEqual('/')
 
+    it 'allows mounted path to be specified', ->
+      service.setEndpoint('https://localhost/foo/bar')
+      request = new AWS.Request(service, 'operationName')
+      buildRequest()
+      expect(request.httpRequest.path).toEqual('/foo/bar')
+
     it 'should set Content-Type header', ->
       buildRequest()
       expect(request.httpRequest.headers['Content-Type']).
