@@ -245,8 +245,7 @@ describe 'AWS.S3', ->
                 Type: 'Group',
                 URI: 'uri'
             }
-          ],
-          RequestId : 'request-id'
+          ]
         })
 
   describe 'putBucketAcl', ->
@@ -324,8 +323,8 @@ describe 'AWS.S3', ->
           Bucket: 'Example-Bucket'
           Key: 'Example-Object'
           ETag: '"3858f62230ac3c915f300c664312c11f-9"'
-          RequestId: '656c76696e6727732072657175657374'
         })
+        expect(this.requestId).toEqual('656c76696e6727732072657175657374')
 
     it 'returns an error when the resp is 200 with an error xml document', ->
       body =
@@ -363,10 +362,8 @@ describe 'AWS.S3', ->
       helpers.mockHttpResponse 200, headers, body
       s3.getBucketLocation (error, data) ->
         expect(error).toBe(null)
-        expect(data).toEqual({
-          LocationConstraint: 'EU',
-          RequestId: 'abcxyz',
-        })
+        expect(data).toEqual(LocationConstraint: 'EU')
+        expect(this.requestId).toEqual('abcxyz')
 
   describe 'createBucket', ->
     it 'auto-populates the LocationConstraint based on the region', ->
