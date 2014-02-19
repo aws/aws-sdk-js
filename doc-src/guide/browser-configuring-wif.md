@@ -96,7 +96,7 @@ the SDK like so:
 ```javascript
 AWS.config.credentials = new AWS.WebIdentityCredentials({
   RoleArn: 'arn:aws:iam::<AWS_ACCOUNT_ID>:role/<WEB_IDENTITY_ROLE_NAME>',
-  ProviderId: 'graph.facebook.com|www.amazon.com', // this is null for Google
+  ProviderId: 'graph.facebook.com|www.amazon.com', // Omit this for Google
   WebIdentityToken: ACCESS_TOKEN
 });
 
@@ -108,7 +108,7 @@ var s3 = new AWS.S3;
 ```
 
 <p class="note">The <code>ProviderId</code> parameter should be set to null
-  or left unset when configuring web identity federation through Google.
+  or omitted when configuring web identity federation through Google.
 </p>
 
 Remember, the `ACCESS_TOKEN` value is the access token you got from your
@@ -123,7 +123,7 @@ and add it in later:
 ```javascript
 AWS.config.credentials = new AWS.WebIdentityCredentials({
   RoleArn: 'arn:aws:iam::<AWS_ACCOUNT_ID>:role/<WEB_IDENTITY_ROLE_NAME>',
-  ProviderId: 'graph.facebook.com|www.amazon.com' // this is null for Google
+  ProviderId: 'graph.facebook.com|www.amazon.com' // Omit this for Google
 });
 
 // Create a service object
@@ -139,15 +139,66 @@ AWS.config.credentials.params.WebIdentityToken = accessToken;
 ## 6. Putting it all together
 
 <p class="note">
-  This example code must be run from a http:// or https:// host scheme.
-  This is to ensure that the Facebook login page is able to redirect back
-  to your application.
+  These examples must be run from a http:// or https:// host scheme to
+  ensure that the identity provider is able to redirect back to your
+  application.
 </p>
 
-Here is some example code using Facebook's SDK to get credentials
-into your application. Other identity providers will have a similar setup
+Here is some example code using various identity providers to get credentials
+into your application. Most identity providers will have a similar setup
 step that involves loading the respective SDK, logging in, and receiving
 an access token.
+
+### Login with Amazon
+
+The following code shows how to use Login with Amazon as an identity provider
+with the SDK:
+
+    <a href="#" id="login">
+      <img border="0" alt="Login with Amazon"
+        src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png"
+        width="156" height="32" />
+    </a>
+    <div id="amazon-root"></div>
+    <script type="text/javascript">
+      var s3 = null;
+      var appId = 'AMAZON_APP_ID';
+      var roleArn = 'arn:aws:iam::<AWS_ACCOUNT_ID>:role/<WEB_IDENTITY_ROLE_NAME>';
+
+      window.onAmazonLoginReady = function() {
+        amazon.Login.setClientId(appId); // set app ID
+
+        document.getElementById('login').onclick = function() {
+          amazon.Login.authorize({scope: 'profile'}, function(response) {
+            if (!response.error) { // logged in
+              AWS.config.credentials = new AWS.WebIdentityCredentials({
+                RoleArn: roleArn,
+                ProviderId: 'www.amazon.com',
+                WebIdentityToken: response.access_token
+              });
+
+              s3 = new AWS.S3;
+
+              console.log('You are now logged in.');
+            } else {
+              console.log('There was a problem logging you in.');
+            }
+          });
+        };
+      };
+
+      (function(d) {
+        var a = d.createElement('script'); a.type = 'text/javascript';
+        a.async = true; a.id = 'amazon-login-sdk';
+        a.src = 'https://api-cdn.amazon.com/sdk/login1.js';
+        d.getElementById('amazon-root').appendChild(a);
+      })(document);
+    </script>
+
+### Facebook Login
+
+The following code shows how to setup Facebook as an identity provider with
+the SDK:
 
     <button id="login">Login</button>
     <div id="fb-root"></div>
@@ -188,3 +239,49 @@ an access token.
        fjs.parentNode.insertBefore(js, fjs);
      }(document, 'script', 'facebook-jssdk'));
     </script>
+
+### Google
+
+The following code shows how to setup Google as an identity provider with
+the SDK:
+
+<p class="note">The access token used for web identity federation from Google
+  is found in the <code>response.id_token</code> property, not
+  <code>access_token</code> like other identity providers.
+</p>
+
+    <span
+      id="login"
+      class="g-signin"
+      data-height="short"
+      data-callback="loginToGoogle"
+      data-cookiepolicy="single_host_origin"
+      data-requestvisibleactions="http://schemas.google.com/AddActivity"
+      data-scope="https://www.googleapis.com/auth/plus.login">
+    </span>
+    <script type="text/javascript">
+      var s3 = null;
+      var appId = 'GOOGLE_APP_ID';
+      var roleArn = 'arn:aws:iam::<AWS_ACCOUNT_ID>:role/<WEB_IDENTITY_ROLE_NAME>';
+
+      document.getElementById('login').setAttribute('data-clientid', appId);
+      function loginToGoogle(response) {
+        if (!response.error) {
+          AWS.config.credentials = new AWS.WebIdentityCredentials({
+            RoleArn: roleArn, WebIdentityToken: response.id_token
+          });
+
+          s3 = new AWS.S3;
+
+          console.log('You are now logged in.');
+        } else {
+          console.log('There was a problem logging you in.');
+        }
+      }
+
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/client:plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+     </script>
