@@ -122,7 +122,7 @@ AWS.config.update({region: 'us-west-1'});
 ### Locking API Versions
 
 <p class="note">For more information on API version locking in the SDK, see the
-{file:node-services.md Working With Services} section
+{file:node-services.md Working With Services} section.
 </p>
 
 You can globally configure a set of API versions to use for each service by
