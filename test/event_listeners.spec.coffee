@@ -231,6 +231,14 @@ describe 'AWS.EventListeners', ->
       makeRequest(->)
       expect(delays).toEqual([30, 60, 120])
 
+    it 'uses retry from error.retryDelay property', ->
+      helpers.mockHttpResponse
+        code: 'NetworkingError', message: 'Cannot connect'
+      request = makeRequest()
+      request.on 'retry', (resp) -> resp.error.retryDelay = 17
+      response = request.send(->)
+      expect(delays).toEqual([17, 17, 17])
+
     it 'retries if status code is >= 500', ->
       helpers.mockHttpResponse 500, {}, ''
 
