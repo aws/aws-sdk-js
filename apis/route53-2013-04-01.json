@@ -177,7 +177,13 @@
               },
               "ResourcePath": {},
               "FullyQualifiedDomainName": {},
-              "SearchString": {}
+              "SearchString": {},
+              "RequestInterval": {
+                "type": "integer"
+              },
+              "FailureThreshold": {
+                "type": "integer"
+              }
             },
             "order": [
               "IPAddress",
@@ -185,7 +191,9 @@
               "Type",
               "ResourcePath",
               "FullyQualifiedDomainName",
-              "SearchString"
+              "SearchString",
+              "RequestInterval",
+              "FailureThreshold"
             ],
             "required": true
           }
@@ -213,7 +221,13 @@
                   "Type": {},
                   "ResourcePath": {},
                   "FullyQualifiedDomainName": {},
-                  "SearchString": {}
+                  "SearchString": {},
+                  "RequestInterval": {
+                    "type": "integer"
+                  },
+                  "FailureThreshold": {
+                    "type": "integer"
+                  }
                 }
               }
             }
@@ -440,7 +454,13 @@
                   "Type": {},
                   "ResourcePath": {},
                   "FullyQualifiedDomainName": {},
-                  "SearchString": {}
+                  "SearchString": {},
+                  "RequestInterval": {
+                    "type": "integer"
+                  },
+                  "FailureThreshold": {
+                    "type": "integer"
+                  }
                 }
               }
             }
@@ -541,7 +561,13 @@
                     "Type": {},
                     "ResourcePath": {},
                     "FullyQualifiedDomainName": {},
-                    "SearchString": {}
+                    "SearchString": {},
+                    "RequestInterval": {
+                      "type": "integer"
+                    },
+                    "FailureThreshold": {
+                      "type": "integer"
+                    }
                   }
                 }
               },

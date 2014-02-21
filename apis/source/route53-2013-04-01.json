@@ -428,6 +428,20 @@
                 "type": "string",
                 "max_length": 255,
                 "documentation": "\n    <p>A string to search for in the body of a health check response. Required for HTTP_STR_MATCH and HTTPS_STR_MATCH health checks.</p>\n   "
+              },
+              "RequestInterval": {
+                "shape_name": "RequestInterval",
+                "type": "integer",
+                "min_length": 10,
+                "max_length": 30,
+                "documentation": "\n    <p>The number of seconds between the time that Route 53 gets a response from your endpoint and the time that it sends the next health-check request.</p>\n    <p>Each Route 53 health checker makes requests at this interval. Valid values are 10 and 30. The default value is 30.</p>\n  "
+              },
+              "FailureThreshold": {
+                "shape_name": "FailureThreshold",
+                "type": "integer",
+                "min_length": 1,
+                "max_length": 10,
+                "documentation": "\n    <p>The number of consecutive health checks that an endpoint must pass or fail for Route 53 to\n      change the current status of the endpoint from unhealthy to healthy or vice versa.</p>\n    <p>Valid values are integers between 1 and 10. For more information,\n      see \"How Amazon Route 53 Determines Whether an Endpoint Is Healthy\" in the\n      Amazon Route 53 Developer Guide.</p>\n  "
               }
             },
             "member_order": [
@@ -436,7 +450,9 @@
               "Type",
               "ResourcePath",
               "FullyQualifiedDomainName",
-              "SearchString"
+              "SearchString",
+              "RequestInterval",
+              "FailureThreshold"
             ],
             "documentation": "\n    <p>A complex type that contains health check configuration.</p>\n   ",
             "required": true
@@ -520,6 +536,20 @@
                     "type": "string",
                     "max_length": 255,
                     "documentation": "\n    <p>A string to search for in the body of a health check response. Required for HTTP_STR_MATCH and HTTPS_STR_MATCH health checks.</p>\n   "
+                  },
+                  "RequestInterval": {
+                    "shape_name": "RequestInterval",
+                    "type": "integer",
+                    "min_length": 10,
+                    "max_length": 30,
+                    "documentation": "\n    <p>The number of seconds between the time that Route 53 gets a response from your endpoint and the time that it sends the next health-check request.</p>\n    <p>Each Route 53 health checker makes requests at this interval. Valid values are 10 and 30. The default value is 30.</p>\n  "
+                  },
+                  "FailureThreshold": {
+                    "shape_name": "FailureThreshold",
+                    "type": "integer",
+                    "min_length": 1,
+                    "max_length": 10,
+                    "documentation": "\n    <p>The number of consecutive health checks that an endpoint must pass or fail for Route 53 to\n      change the current status of the endpoint from unhealthy to healthy or vice versa.</p>\n    <p>Valid values are integers between 1 and 10. For more information,\n      see \"How Amazon Route 53 Determines Whether an Endpoint Is Healthy\" in the\n      Amazon Route 53 Developer Guide.</p>\n  "
                   }
                 },
                 "member_order": [
@@ -528,7 +558,9 @@
                   "Type",
                   "ResourcePath",
                   "FullyQualifiedDomainName",
-                  "SearchString"
+                  "SearchString",
+                  "RequestInterval",
+                  "FailureThreshold"
                 ],
                 "documentation": "\n    <p>A complex type that contains the health check configuration.</p>\n   ",
                 "required": true
@@ -1261,6 +1293,20 @@
                     "type": "string",
                     "max_length": 255,
                     "documentation": "\n    <p>A string to search for in the body of a health check response. Required for HTTP_STR_MATCH and HTTPS_STR_MATCH health checks.</p>\n   "
+                  },
+                  "RequestInterval": {
+                    "shape_name": "RequestInterval",
+                    "type": "integer",
+                    "min_length": 10,
+                    "max_length": 30,
+                    "documentation": "\n    <p>The number of seconds between the time that Route 53 gets a response from your endpoint and the time that it sends the next health-check request.</p>\n    <p>Each Route 53 health checker makes requests at this interval. Valid values are 10 and 30. The default value is 30.</p>\n  "
+                  },
+                  "FailureThreshold": {
+                    "shape_name": "FailureThreshold",
+                    "type": "integer",
+                    "min_length": 1,
+                    "max_length": 10,
+                    "documentation": "\n    <p>The number of consecutive health checks that an endpoint must pass or fail for Route 53 to\n      change the current status of the endpoint from unhealthy to healthy or vice versa.</p>\n    <p>Valid values are integers between 1 and 10. For more information,\n      see \"How Amazon Route 53 Determines Whether an Endpoint Is Healthy\" in the\n      Amazon Route 53 Developer Guide.</p>\n  "
                   }
                 },
                 "member_order": [
@@ -1269,7 +1315,9 @@
                   "Type",
                   "ResourcePath",
                   "FullyQualifiedDomainName",
-                  "SearchString"
+                  "SearchString",
+                  "RequestInterval",
+                  "FailureThreshold"
                 ],
                 "documentation": "\n    <p>A complex type that contains the health check configuration.</p>\n   ",
                 "required": true
@@ -1580,6 +1628,20 @@
                       "type": "string",
                       "max_length": 255,
                       "documentation": "\n    <p>A string to search for in the body of a health check response. Required for HTTP_STR_MATCH and HTTPS_STR_MATCH health checks.</p>\n   "
+                    },
+                    "RequestInterval": {
+                      "shape_name": "RequestInterval",
+                      "type": "integer",
+                      "min_length": 10,
+                      "max_length": 30,
+                      "documentation": "\n    <p>The number of seconds between the time that Route 53 gets a response from your endpoint and the time that it sends the next health-check request.</p>\n    <p>Each Route 53 health checker makes requests at this interval. Valid values are 10 and 30. The default value is 30.</p>\n  "
+                    },
+                    "FailureThreshold": {
+                      "shape_name": "FailureThreshold",
+                      "type": "integer",
+                      "min_length": 1,
+                      "max_length": 10,
+                      "documentation": "\n    <p>The number of consecutive health checks that an endpoint must pass or fail for Route 53 to\n      change the current status of the endpoint from unhealthy to healthy or vice versa.</p>\n    <p>Valid values are integers between 1 and 10. For more information,\n      see \"How Amazon Route 53 Determines Whether an Endpoint Is Healthy\" in the\n      Amazon Route 53 Developer Guide.</p>\n  "
                     }
                   },
                   "member_order": [
@@ -1588,7 +1650,9 @@
                     "Type",
                     "ResourcePath",
                     "FullyQualifiedDomainName",
-                    "SearchString"
+                    "SearchString",
+                    "RequestInterval",
+                    "FailureThreshold"
                   ],
                   "documentation": "\n    <p>A complex type that contains the health check configuration.</p>\n   ",
                   "required": true
