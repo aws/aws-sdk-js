@@ -175,12 +175,12 @@ are provided in the S3 documentation.
 A quick CORS configuration sample is shown below. This sample allows a user to
 view, add, remove, or update objects inside of a bucket from any external domain,
 though it is recommended that you scope the "AllowedOrigin" to the domain that
-your website runs from.
+your website runs from (you can specify "*" to allow any origin).
 
     <?xml version="1.0" encoding="UTF-8"?>
     <CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
       <CORSRule>
-        <AllowedOrigin>*</AllowedOrigin>
+        <AllowedOrigin>https://example.org</AllowedOrigin>
         <AllowedMethod>HEAD</AllowedMethod>
         <AllowedMethod>GET</AllowedMethod>
         <AllowedMethod>PUT</AllowedMethod>
