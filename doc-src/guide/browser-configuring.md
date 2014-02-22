@@ -187,6 +187,8 @@ your website runs from.
         <AllowedMethod>POST</AllowedMethod>
         <AllowedMethod>DELETE</AllowedMethod>
         <AllowedHeader>*</AllowedHeader>
+        <ExposeHeader>ETag</ExposeHeader>
+        <ExposeHeader>x-amz-meta-custom-header</ExposeHeader>
       </CORSRule>
     </CORSConfiguration>
 
@@ -194,6 +196,15 @@ your website runs from.
 bucket, it simply enables the browser's security model to allow a request
 to S3. Actual permissions for the user must be configured either via bucket
 permissions, or IAM role level permissions.
+
+You can use `ExposeHeader` to allow the SDK to read response headers returned
+from S3. For example, if you want to read the "ETag" header from a PUT
+or multipart upload, you will need to include the above `ExposeHeader` tag
+in your configuration. Due to a limitation in browser security layers, the SDK
+can only access headers that have been exposed through CORS configuration.
+Note that if you set metadata on the object, these values are returned as
+headers with the prefix `x-amz-meta-`, i.e., `x-amz-meta-my-custom-header`,
+and must also be exposed in the same way.
 
 ### When CORS is Not Required
 
