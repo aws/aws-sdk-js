@@ -29,11 +29,8 @@ function on service.
 ```javascript
 var #{klass.downcase} = new AWS.#{klass}();
 #{klass.downcase}.#{find_example_operation(api)}(params, function (err, data) {
-  if (err) {
-    console.log(err); // an error occurred
-  } else {
-    console.log(data); // successful response
-  }
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
 });
 ```
 
@@ -102,6 +99,13 @@ class MethodDocumentor
     @lines << "@param params [Object]"
     @lines += shapes(operation['input']).map {|line| "  " + line }
 
+    ## @example tag
+
+    @lines << "@example Calling the #{method_name(operation)} operation"
+    @lines << generate_example(klass, method_name(operation),
+                operation['input']).split("\n").map {|line| "  " + line }
+    @lines << ""
+
     ## @callback tag
 
     @lines << "@callback callback function(err, data)"
@@ -148,6 +152,95 @@ class MethodDocumentor
     end
   end
 
+  def generate_example(klass, name, input)
+    lines = []
+    params = ExampleShapeVisitor.new.traverse(input)
+    params_var = ""
+    if params.strip.length > 0
+      lines << "var params = " + params + ";"
+      params_var = "params, "
+    end
+    lines << "#{klass.downcase}.#{name}(#{params_var}function(err, data) {"
+    lines << "  if (err) console.log(err, err.stack); // an error occurred"
+    lines << "  else     console.log(data);           // successful response"
+    lines << "}"
+    lines.join("\n")
+  end
+
+end
+
+class ExampleShapeVisitor
+  def traverse(node)
+    if (meth = "visit_" + (node['type'] || 'string')) && respond_to?(meth)
+      return send(meth, node)
+    end
+    ""
+  end
+
+  def visit_structure(node)
+    lines = ["{" + (node['required'] ? " // required" : "")]
+    node['members'].sort_by {|n, v| [v['required'] ? -1 : 1, n] }.each do |key, value|
+      lines << "  #{key}: " + indent(traverse(value), false) + "," +
+        (value['required'] && !%w(list map structure).include?(value['type']) ?
+          " // required" : "")
+    end
+    lines << "}"
+    lines.join("\n")
+  end
+
+  def visit_list(node)
+    lines = ["[" + (node['required'] ? " // required" : "")]
+    lines << indent(traverse(node['members'])) + ","
+    lines << "  // ... more items ..."
+    lines << "]"
+    lines.join("\n")
+  end
+
+  def visit_map(node)
+    lines = ["{" + (node['required'] ? " // required" : "")]
+    lines << indent("someKey: " + traverse(node['members'])) + ","
+    lines << "  // anotherKey: ..."
+    lines << "}"
+    lines.join("\n")
+  end
+
+  def visit_string(node)
+    value = node['enum'] ? node['enum'].join(' | ') : 'STRING_VALUE'
+    "'#{value}'"
+  end
+
+  def visit_integer(node)
+    "0"
+  end
+  alias visit_long visit_integer
+
+  def visit_float(node)
+    "0.0"
+  end
+  alias visit_double visit_float
+  alias visit_bigdecimal visit_float
+
+  def visit_boolean(node)
+    "true || false"
+  end
+
+  def visit_base64(node)
+    "'BASE64_ENCODED_STRING'"
+  end
+
+  def visit_binary(node)
+    "new Buffer('...') || streamObject || 'STRING_VALUE'"
+  end
+
+  def visit_timestamp(node)
+    "new Date || 'Wed Dec 31 1969 16:00:00 GMT-0800 (PST)' || 123456789"
+  end
+
+  def indent(text, first_line = true, n = 2)
+    text = text.split(/\r?\n/).map {|l| "#{' ' * n}#{l}" }.join("\n")
+    text = text.sub(/\A\s+/, '') if !first_line
+    text
+  end
 end
 
 class ShapeDocumentor

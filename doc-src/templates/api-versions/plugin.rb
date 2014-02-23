@@ -77,8 +77,9 @@ class DefineServiceHandler < YARDJS::Handlers::Base
     klass = config[/"endpointPrefix": "(\S+)"/, 1]
 
     file = "#{klass}-#{api_version}"
-    translate = "require(\"./lib/api/translator\")(require(\"fs\")." +
-                "readFileSync(\"apis/source/#{file}.json\"), {documentation:true})"
+    dir = File.expand_path(File.dirname(__FILE__)) + "/../../.."
+    translate = "require(\"#{dir}/lib/api/translator\")(require(\"fs\")." +
+                "readFileSync(\"#{dir}/apis/source/#{file}.json\"), {documentation:true})"
     json = `node -e 'console.log(JSON.stringify(#{translate}))'`
     api = JSON.parse(json)
   end
