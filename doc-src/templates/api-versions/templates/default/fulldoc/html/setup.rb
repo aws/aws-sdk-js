@@ -37,7 +37,6 @@ def class_list(root = Registry.root)
       out << "</ul>"
     end
     out << '</ul>'
-    out << '<li class="expander"><a class="toggle"></a> Other Classes</li><ul>'
   end
 
   children.reject {|c| c.nil? }.sort_by {|child| child.path }.map do |child|
