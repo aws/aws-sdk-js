@@ -32,6 +32,15 @@ http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/
 
 ## Supported Services
 
+<p class="note"><strong>Note</strong>:
+Although all services are supported in the browser version of the SDK,
+not all of the services are available in the default hosted build (using the
+script tag provided above). A list of services in the hosted build are provided
+in the "<a href="http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/browser-services.html">Working With Services</a>"
+section of the browser SDK guide, including instructions on how to build a
+custom version of the SDK with extra services.
+</p>
+
 The SDK currently supports the following services:
 
 <table>
