@@ -4419,5 +4419,39 @@
     "listTagsForResource": {
       "resultKey": "TagList"
     }
+  },
+  "waiters": {
+    "__default__": {
+      "interval": 30,
+      "maxAttempts": 60
+    },
+    "__DBInstanceState": {
+      "operation": "DescribeDBInstances",
+      "acceptorPath": "DBInstances[].DBInstanceStatus",
+      "acceptorType": "output"
+    },
+    "dBInstanceAvailable": {
+      "extends": "__DBInstanceState",
+      "successValue": "available",
+      "failureValue": [
+        "deleted",
+        "deleting",
+        "failed",
+        "incompatible-restore",
+        "incompatible-parameters",
+        "incompatible-parameters",
+        "incompatible-restore"
+      ]
+    },
+    "dBInstanceDeleted": {
+      "extends": "__DBInstanceState",
+      "successValue": "deleted",
+      "failureValue": [
+        "creating",
+        "modifying",
+        "rebooting",
+        "resetting-master-credentials"
+      ]
+    }
   }
 }

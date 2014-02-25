@@ -474,5 +474,17 @@
     "listVerifiedEmailAddresses": {
       "resultKey": "VerifiedEmailAddresses"
     }
+  },
+  "waiters": {
+    "__default__": {
+      "interval": 3,
+      "maxAttempts": 20
+    },
+    "identityExists": {
+      "operation": "GetIdentityVerificationAttributes",
+      "successType": "output",
+      "successPath": "VerificationAttributes[].VerificationStatus",
+      "successValue": true
+    }
   }
 }
