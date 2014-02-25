@@ -1818,5 +1818,30 @@
       "limitKey": "Limit",
       "resultKey": "Items"
     }
+  },
+  "waiters": {
+    "__default__": {
+      "interval": 20,
+      "maxAttempts": 25
+    },
+    "__TableState": {
+      "operation": "DescribeTable"
+    },
+    "tableExists": {
+      "extends": "__TableState",
+      "description": "Wait until a table exists and can be accessed",
+      "ignoreErrors": [
+        "ResourceNotFoundException"
+      ],
+      "successType": "output",
+      "successPath": "Table.TableStatus",
+      "successValue": "ACTIVE"
+    },
+    "tableNotExists": {
+      "extends": "__TableState",
+      "description": "Wait until a table is deleted",
+      "successType": "error",
+      "successValue": "ResourceNotFoundException"
+    }
   }
 }

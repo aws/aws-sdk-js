@@ -2474,5 +2474,28 @@
       "limitKey": "Limit",
       "resultKey": "Items"
     }
+  },
+  "waiters": {
+    "__default__": {
+      "interval": 20,
+      "maxAttempts": 25
+    },
+    "__TableState": {
+      "operation": "DescribeTable"
+    },
+    "tableExists": {
+      "extends": "__TableState",
+      "ignoreErrors": [
+        "ResourceNotFoundException"
+      ],
+      "successType": "output",
+      "successPath": "Table.TableStatus",
+      "successValue": "ACTIVE"
+    },
+    "tableNotExists": {
+      "extends": "__TableState",
+      "successType": "error",
+      "successValue": "ResourceNotFoundException"
+    }
   }
 }

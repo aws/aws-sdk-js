@@ -3799,5 +3799,46 @@
       "limitKey": "MaxRecords",
       "resultKey": "ReservedNodes"
     }
+  },
+  "waiters": {
+    "__default__": {
+      "acceptorType": "output"
+    },
+    "__ClusterState": {
+      "interval": 60,
+      "maxAttempts": 30,
+      "operation": "DescribeClusters",
+      "acceptorPath": "Clusters[].ClusterStatus"
+    },
+    "clusterAvailable": {
+      "extends": "__ClusterState",
+      "ignoreErrors": [
+        "ClusterNotFound"
+      ],
+      "successValue": "available",
+      "failureValue": [
+        "deleting"
+      ]
+    },
+    "clusterDeleted": {
+      "extends": "__ClusterState",
+      "successType": "error",
+      "successValue": "ClusterNotFound",
+      "failureValue": [
+        "creating",
+        "rebooting"
+      ]
+    },
+    "snapshotAvailable": {
+      "interval": 15,
+      "maxAttempts": 20,
+      "operation": "DescribeClusterSnapshots",
+      "acceptorPath": "Snapshots[].Status",
+      "successValue": "available",
+      "failureValue": [
+        "failed",
+        "deleted"
+      ]
+    }
   }
 }

@@ -7,28 +7,6 @@
   "signatureVersion": "v2",
   "timestampFormat": "iso8601",
   "operations": {
-    "activateLicense": {
-      "name": "ActivateLicense",
-      "input": {
-        "type": "structure",
-        "members": {
-          "DryRun": {
-            "type": "boolean"
-          },
-          "LicenseId": {
-            "required": true
-          },
-          "Capacity": {
-            "type": "integer",
-            "required": true
-          }
-        }
-      },
-      "output": {
-        "type": "structure",
-        "members": {}
-      }
-    },
     "allocateAddress": {
       "name": "AllocateAddress",
       "input": {
@@ -10873,6 +10851,150 @@
     },
     "describeVpnGateways": {
       "resultKey": "VpnGateways"
+    }
+  },
+  "waiters": {
+    "__default__": {
+      "interval": 15,
+      "maxAttempts": 40,
+      "acceptorType": "output"
+    },
+    "__InstanceState": {
+      "operation": "DescribeInstances",
+      "acceptorPath": "Reservations[].Instances[].State.Name"
+    },
+    "instanceRunning": {
+      "extends": "__InstanceState",
+      "successValue": "running",
+      "failureValue": [
+        "shutting-down",
+        "terminated",
+        "stopping"
+      ]
+    },
+    "instanceStopped": {
+      "extends": "__InstanceState",
+      "successValue": "stopped",
+      "failureValue": [
+        "pending",
+        "terminated"
+      ]
+    },
+    "instanceTerminated": {
+      "extends": "__InstanceState",
+      "successValue": "terminated",
+      "failureValue": [
+        "pending",
+        "stopping"
+      ]
+    },
+    "__ExportTaskState": {
+      "operation": "DescribeExportTasks",
+      "acceptorPath": "ExportTasks[].State"
+    },
+    "exportTaskCompleted": {
+      "extends": "__ExportTaskState",
+      "successValue": "completed"
+    },
+    "exportTaskCancelled": {
+      "extends": "__ExportTaskState",
+      "successValue": "cancelled"
+    },
+    "snapshotCompleted": {
+      "operation": "DescribeSnapshots",
+      "successPath": "Snapshots[].State",
+      "successValue": "completed"
+    },
+    "subnetAvailable": {
+      "operation": "DescribeSubnets",
+      "successPath": "Subnets[].State",
+      "successValue": "available"
+    },
+    "__VolumeStatus": {
+      "operation": "DescribeVolumes",
+      "acceptorPath": "VolumeStatuses[].VolumeStatus.Status"
+    },
+    "volumeAvailable": {
+      "extends": "__VolumeStatus",
+      "successValue": "available",
+      "failureValue": [
+        "deleted"
+      ]
+    },
+    "volumeInUse": {
+      "extends": "__VolumeStatus",
+      "successValue": "in-use",
+      "failureValue": [
+        "deleted"
+      ]
+    },
+    "volumeDeleted": {
+      "extends": "__VolumeStatus",
+      "successValue": "deleted"
+    },
+    "vpcAvailable": {
+      "operation": "DescribeVpcs",
+      "successPath": "Vpcs[].State",
+      "successValue": "available"
+    },
+    "__VpnConnectionState": {
+      "operation": "DescribeVpnConnections",
+      "acceptorPath": "VpnConnections[].State"
+    },
+    "vpnConnectionAvailable": {
+      "extends": "__VpnConnectionState",
+      "successValue": "available",
+      "failureValue": [
+        "deleting",
+        "deleted"
+      ]
+    },
+    "vpnConnectionDeleted": {
+      "extends": "__VpnConnectionState",
+      "successValue": "deleted",
+      "failureValue": [
+        "pending"
+      ]
+    },
+    "bundleTaskComplete": {
+      "operation": "DescribeBundleTasks",
+      "acceptorPath": "BundleTasks[].State",
+      "successValue": "complete",
+      "failureValue": [
+        "failed"
+      ]
+    },
+    "__ConversionTaskState": {
+      "operation": "DescribeConversionTasks",
+      "acceptorPath": "ConversionTasks[].State"
+    },
+    "conversionTaskCompleted": {
+      "extends": "__ConversionTaskState",
+      "successValue": "completed",
+      "failureValue": [
+        "cancelled",
+        "cancelling"
+      ]
+    },
+    "conversionTaskCancelled": {
+      "extends": "__ConversionTaskState",
+      "successValue": "cancelled"
+    },
+    "__CustomerGatewayState": {
+      "operation": "DescribeCustomerGateways",
+      "acceptorPath": "CustomerGateways[].State"
+    },
+    "customerGatewayAvailable": {
+      "extends": "__CustomerGatewayState",
+      "successValue": "available",
+      "failureValue": [
+        "deleted",
+        "deleting"
+      ]
+    },
+    "conversionTaskDeleted": {
+      "extends": "__CustomerGatewayState",
+      "successValue": "deleted"
     }
   }
 }
