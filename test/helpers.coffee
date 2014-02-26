@@ -109,30 +109,30 @@ mockIntermittentFailureResponse = (numFailures, status, headers, data) ->
     new EventEmitter()
 
 mockResponse = (svc, resp) ->
+  addAll = svc.addAllRequestListeners
   spyOn(svc, 'addAllRequestListeners').andCallFake (req) ->
-    resp = AWS.util.update(new AWS.Response(req), resp)
-    req.on 'retry', (resp) ->
-      if !resp.error.retryable
-        throw resp.error
-    req.onAsync 'afterRetry', (resp, done) ->
-      if resp.error.retryable
-        resp.error = null; resp.data = null
-        req.emitEvent('send', resp, done)
-    req.on 'send', -> req.completeRequest(resp)
+    req.response.httpResponse.statusCode = 200
+    addAll.call(svc, req)
+    req.removeAllListeners('send')
+    req.removeAllListeners('extractError')
+    req.removeAllListeners('extractData')
+    req.on 'validateResponse', ->
+      AWS.util.update req.response, resp
 
 mockResponses = (svc, resps) ->
   index = 0
+  addAll = svc.addAllRequestListeners
   spyOn(svc, 'addAllRequestListeners').andCallFake (req) ->
-    resp = new AWS.Response(req)
-    req.on 'retry', (resp) ->
-      if !resp.error.retryable
-        throw resp.error
-    req.onAsync 'afterRetry', (resp, done) ->
-      if resp.error.retryable
-        resp.error = null; resp.data = null
+    req.response.httpResponse.statusCode = 200
+    addAll.call(svc, req)
+    req.removeAllListeners('send')
+    req.removeAllListeners('extractError')
+    req.removeAllListeners('extractData')
+    req.on 'validateResponse', ->
+      resp = resps[index]
+      if resp
+        AWS.util.update req.response, resp
         index += 1
-        req.emitEvent('send', resp, done)
-    req.on 'send', -> req.completeRequest(AWS.util.update(resp, resps[index]))
 
 module.exports =
   AWS: AWS
