@@ -41,7 +41,7 @@ describe 'AWS.Request', ->
   describe 'waitFor', ->
     it 'creates a ResourceWaiter object', ->
       service.api.waiters = state: operation: 'mockMethod'
-      expect(service.waitFor('state'))
+      service.waitFor('state')
 
   describe 'send', ->
     it 'accepts an optional callback', ->

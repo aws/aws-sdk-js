@@ -29,7 +29,7 @@ describe 'AWS.ResourceWaiter', ->
       waiter.wait (e, d) -> resp = this; err = e; data = d
       expect(err).toEqual(null)
       expect(data.Table.TableStatus).toEqual('ACTIVE')
-      expect(resp.waiterRetryCount).toEqual(2)
+      expect(resp.retryCount).toEqual(2)
 
     it 'can override the final state', ->
       err = null; data = null; resp = null
@@ -45,7 +45,7 @@ describe 'AWS.ResourceWaiter', ->
       waiter.wait (e, d) -> resp = this; err = e; data = d
       expect(err).toEqual(null)
       expect(data.Table.TableStatus).toEqual('FOO')
-      expect(resp.waiterRetryCount).toEqual(3)
+      expect(resp.retryCount).toEqual(3)
 
     it 'throws an error if terminal state is not configured', ->
       try
@@ -65,8 +65,8 @@ describe 'AWS.ResourceWaiter', ->
       waiter.wait (e, d) -> resp = this; err = e; data = d
       expect(data).toEqual(null)
       expect(err.code).toEqual('ResourceNotReady')
-      expect(resp.waiterRetryCount).toEqual(25)            # 25 max retries
-      expect(resp.request.retryDelay(resp)).toEqual(20000) # 20s delay
+      expect(resp.retryCount).toEqual(25)          # 25 max retries
+      expect(resp.error.retryDelay).toEqual(20000) # 20s delay
 
     it 'accepts error state as a terminal state', ->
       err = null; data = null; resp = null
@@ -81,7 +81,7 @@ describe 'AWS.ResourceWaiter', ->
       waiter.wait Bucket: 'bucket', (e, d) -> resp = this; err = e; data = d
       expect(err).toEqual(null)
       expect(resp.httpResponse.statusCode).toEqual(404)
-      expect(resp.waiterRetryCount).toEqual(2)
+      expect(resp.retryCount).toEqual(3)
 
     it 'fails fast if failure value is found', ->
       err = null; data = null; resp = null
@@ -99,4 +99,4 @@ describe 'AWS.ResourceWaiter', ->
       waiter.wait InstanceIds: ['id-123456'], (e, d) -> resp = this; err = e; data = d
       expect(data).toEqual(null)
       expect(err.code).toEqual('ResourceNotReady')
-      expect(resp.waiterRetryCount).toEqual(3)
+      expect(resp.retryCount).toEqual(3)
