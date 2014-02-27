@@ -78,7 +78,6 @@ DOCS
     list = api['operations'].keys if list.size == 0
     list.first
   end
-
 end
 
 class MethodDocumentor
