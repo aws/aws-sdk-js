@@ -21,6 +21,7 @@ class WaiterObject < YARD::CodeObjects::Base
   attr_accessor :operation
 
   def parameters; [] end
+  def property_type; 'function' end
   def sep; '$waiter$' end
   def title; name.to_s end
 end
@@ -96,6 +97,7 @@ Waits for a given #{service.name} resource. The final callback or
 is either in its final state or the waiter has timed out and stopped polling
 for the final state.
 
+@api experimental
 @param state [String] the resource state to wait for. Available states for this
   service are listed in "Waiter Resource States" below.
 @param params [map] a list of parameters for the given state. See each waiter
@@ -122,6 +124,7 @@ Waits for the `#{name}` state by periodically calling the underlying
 {#{operation_name}} operation every #{config['interval']} seconds
 (at most #{config['maxAttempts']} times).
 
+@api experimental
 @callback (see #{obj.operation.path})
 @param (see #{obj.operation.path})
 @return (see #{obj.operation.path})
