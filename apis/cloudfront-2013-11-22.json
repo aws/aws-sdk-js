@@ -1,18 +1,18 @@
 {
   "format": "rest-xml",
-  "apiVersion": "2013-11-11",
+  "apiVersion": "2013-11-22",
   "endpointPrefix": "cloudfront",
   "globalEndpoint": "cloudfront.amazonaws.com",
   "serviceAbbreviation": "CloudFront",
   "serviceFullName": "Amazon CloudFront",
   "signatureVersion": "v4",
   "timestampFormat": "iso8601",
-  "xmlnamespace": "http://cloudfront.amazonaws.com/doc/2013-11-11/",
+  "xmlnamespace": "http://cloudfront.amazonaws.com/doc/2013-11-22/",
   "operations": {
     "createCloudFrontOriginAccessIdentity": {
-      "name": "CreateCloudFrontOriginAccessIdentity2013_11_11",
+      "name": "CreateCloudFrontOriginAccessIdentity2013_11_22",
       "http": {
-        "uri": "/2013-11-11/origin-access-identity/cloudfront",
+        "uri": "/2013-11-22/origin-access-identity/cloudfront",
         "method": "POST"
       },
       "input": {
@@ -57,9 +57,9 @@
       }
     },
     "createDistribution": {
-      "name": "CreateDistribution2013_11_11",
+      "name": "CreateDistribution2013_11_22",
       "http": {
-        "uri": "/2013-11-11/distribution",
+        "uri": "/2013-11-22/distribution",
         "method": "POST"
       },
       "input": {
@@ -221,6 +221,9 @@
                         }
                       }
                     }
+                  },
+                  "SmoothStreaming": {
+                    "type": "boolean"
                   }
                 },
                 "required": true
@@ -318,6 +321,9 @@
                               }
                             }
                           }
+                        },
+                        "SmoothStreaming": {
+                          "type": "boolean"
                         }
                       },
                       "name": "CacheBehavior"
@@ -598,6 +604,9 @@
                         }
                       }
                     }
+                  },
+                  "SmoothStreaming": {
+                    "type": "boolean"
                   }
                 }
               },
@@ -676,6 +685,9 @@
                               }
                             }
                           }
+                        },
+                        "SmoothStreaming": {
+                          "type": "boolean"
                         }
                       },
                       "name": "CacheBehavior"
@@ -761,9 +773,9 @@
       }
     },
     "createInvalidation": {
-      "name": "CreateInvalidation2013_11_11",
+      "name": "CreateInvalidation2013_11_22",
       "http": {
-        "uri": "/2013-11-11/distribution/{DistributionId}/invalidation",
+        "uri": "/2013-11-22/distribution/{DistributionId}/invalidation",
         "method": "POST"
       },
       "input": {
@@ -837,9 +849,9 @@
       }
     },
     "createStreamingDistribution": {
-      "name": "CreateStreamingDistribution2013_11_11",
+      "name": "CreateStreamingDistribution2013_11_22",
       "http": {
-        "uri": "/2013-11-11/streaming-distribution",
+        "uri": "/2013-11-22/streaming-distribution",
         "method": "POST"
       },
       "input": {
@@ -1046,9 +1058,9 @@
       }
     },
     "deleteCloudFrontOriginAccessIdentity": {
-      "name": "DeleteCloudFrontOriginAccessIdentity2013_11_11",
+      "name": "DeleteCloudFrontOriginAccessIdentity2013_11_22",
       "http": {
-        "uri": "/2013-11-11/origin-access-identity/cloudfront/{Id}",
+        "uri": "/2013-11-22/origin-access-identity/cloudfront/{Id}",
         "method": "DELETE"
       },
       "input": {
@@ -1069,9 +1081,9 @@
       }
     },
     "deleteDistribution": {
-      "name": "DeleteDistribution2013_11_11",
+      "name": "DeleteDistribution2013_11_22",
       "http": {
-        "uri": "/2013-11-11/distribution/{Id}",
+        "uri": "/2013-11-22/distribution/{Id}",
         "method": "DELETE"
       },
       "input": {
@@ -1092,9 +1104,9 @@
       }
     },
     "deleteStreamingDistribution": {
-      "name": "DeleteStreamingDistribution2013_11_11",
+      "name": "DeleteStreamingDistribution2013_11_22",
       "http": {
-        "uri": "/2013-11-11/streaming-distribution/{Id}",
+        "uri": "/2013-11-22/streaming-distribution/{Id}",
         "method": "DELETE"
       },
       "input": {
@@ -1115,9 +1127,9 @@
       }
     },
     "getCloudFrontOriginAccessIdentity": {
-      "name": "GetCloudFrontOriginAccessIdentity2013_11_11",
+      "name": "GetCloudFrontOriginAccessIdentity2013_11_22",
       "http": {
-        "uri": "/2013-11-11/origin-access-identity/cloudfront/{Id}",
+        "uri": "/2013-11-22/origin-access-identity/cloudfront/{Id}",
         "method": "GET"
       },
       "input": {
@@ -1148,9 +1160,9 @@
       }
     },
     "getCloudFrontOriginAccessIdentityConfig": {
-      "name": "GetCloudFrontOriginAccessIdentityConfig2013_11_11",
+      "name": "GetCloudFrontOriginAccessIdentityConfig2013_11_22",
       "http": {
-        "uri": "/2013-11-11/origin-access-identity/cloudfront/{Id}/config",
+        "uri": "/2013-11-22/origin-access-identity/cloudfront/{Id}/config",
         "method": "GET"
       },
       "input": {
@@ -1174,9 +1186,9 @@
       }
     },
     "getDistribution": {
-      "name": "GetDistribution2013_11_11",
+      "name": "GetDistribution2013_11_22",
       "http": {
-        "uri": "/2013-11-11/distribution/{Id}",
+        "uri": "/2013-11-22/distribution/{Id}",
         "method": "GET"
       },
       "input": {
@@ -1360,6 +1372,9 @@
                         }
                       }
                     }
+                  },
+                  "SmoothStreaming": {
+                    "type": "boolean"
                   }
                 }
               },
@@ -1438,6 +1453,9 @@
                               }
                             }
                           }
+                        },
+                        "SmoothStreaming": {
+                          "type": "boolean"
                         }
                       },
                       "name": "CacheBehavior"
@@ -1523,9 +1541,9 @@
       }
     },
     "getDistributionConfig": {
-      "name": "GetDistributionConfig2013_11_11",
+      "name": "GetDistributionConfig2013_11_22",
       "http": {
-        "uri": "/2013-11-11/distribution/{Id}/config",
+        "uri": "/2013-11-22/distribution/{Id}/config",
         "method": "GET"
       },
       "input": {
@@ -1662,6 +1680,9 @@
                     }
                   }
                 }
+              },
+              "SmoothStreaming": {
+                "type": "boolean"
               }
             }
           },
@@ -1740,6 +1761,9 @@
                           }
                         }
                       }
+                    },
+                    "SmoothStreaming": {
+                      "type": "boolean"
                     }
                   },
                   "name": "CacheBehavior"
@@ -1823,9 +1847,9 @@
       }
     },
     "getInvalidation": {
-      "name": "GetInvalidation2013_11_11",
+      "name": "GetInvalidation2013_11_22",
       "http": {
-        "uri": "/2013-11-11/distribution/{DistributionId}/invalidation/{Id}",
+        "uri": "/2013-11-22/distribution/{DistributionId}/invalidation/{Id}",
         "method": "GET"
       },
       "input": {
@@ -1873,9 +1897,9 @@
       }
     },
     "getStreamingDistribution": {
-      "name": "GetStreamingDistribution2013_11_11",
+      "name": "GetStreamingDistribution2013_11_22",
       "http": {
-        "uri": "/2013-11-11/streaming-distribution/{Id}",
+        "uri": "/2013-11-22/streaming-distribution/{Id}",
         "method": "GET"
       },
       "input": {
@@ -1997,9 +2021,9 @@
       }
     },
     "getStreamingDistributionConfig": {
-      "name": "GetStreamingDistributionConfig2013_11_11",
+      "name": "GetStreamingDistributionConfig2013_11_22",
       "http": {
-        "uri": "/2013-11-11/streaming-distribution/{Id}/config",
+        "uri": "/2013-11-22/streaming-distribution/{Id}/config",
         "method": "GET"
       },
       "input": {
@@ -2075,9 +2099,9 @@
       }
     },
     "listCloudFrontOriginAccessIdentities": {
-      "name": "ListCloudFrontOriginAccessIdentities2013_11_11",
+      "name": "ListCloudFrontOriginAccessIdentities2013_11_22",
       "http": {
-        "uri": "/2013-11-11/origin-access-identity/cloudfront?Marker={Marker}&MaxItems={MaxItems}",
+        "uri": "/2013-11-22/origin-access-identity/cloudfront?Marker={Marker}&MaxItems={MaxItems}",
         "method": "GET"
       },
       "input": {
@@ -2121,9 +2145,9 @@
       }
     },
     "listDistributions": {
-      "name": "ListDistributions2013_11_11",
+      "name": "ListDistributions2013_11_22",
       "http": {
-        "uri": "/2013-11-11/distribution?Marker={Marker}&MaxItems={MaxItems}",
+        "uri": "/2013-11-22/distribution?Marker={Marker}&MaxItems={MaxItems}",
         "method": "GET"
       },
       "input": {
@@ -2279,6 +2303,9 @@
                           }
                         }
                       }
+                    },
+                    "SmoothStreaming": {
+                      "type": "boolean"
                     }
                   }
                 },
@@ -2357,6 +2384,9 @@
                                 }
                               }
                             }
+                          },
+                          "SmoothStreaming": {
+                            "type": "boolean"
                           }
                         },
                         "name": "CacheBehavior"
@@ -2431,9 +2461,9 @@
       }
     },
     "listInvalidations": {
-      "name": "ListInvalidations2013_11_11",
+      "name": "ListInvalidations2013_11_22",
       "http": {
-        "uri": "/2013-11-11/distribution/{DistributionId}/invalidation?Marker={Marker}&MaxItems={MaxItems}",
+        "uri": "/2013-11-22/distribution/{DistributionId}/invalidation?Marker={Marker}&MaxItems={MaxItems}",
         "method": "GET"
       },
       "input": {
@@ -2483,9 +2513,9 @@
       }
     },
     "listStreamingDistributions": {
-      "name": "ListStreamingDistributions2013_11_11",
+      "name": "ListStreamingDistributions2013_11_22",
       "http": {
-        "uri": "/2013-11-11/streaming-distribution?Marker={Marker}&MaxItems={MaxItems}",
+        "uri": "/2013-11-22/streaming-distribution?Marker={Marker}&MaxItems={MaxItems}",
         "method": "GET"
       },
       "input": {
@@ -2575,9 +2605,9 @@
       }
     },
     "updateCloudFrontOriginAccessIdentity": {
-      "name": "UpdateCloudFrontOriginAccessIdentity2013_11_11",
+      "name": "UpdateCloudFrontOriginAccessIdentity2013_11_22",
       "http": {
-        "uri": "/2013-11-11/origin-access-identity/cloudfront/{Id}/config",
+        "uri": "/2013-11-22/origin-access-identity/cloudfront/{Id}/config",
         "method": "PUT"
       },
       "input": {
@@ -2625,9 +2655,9 @@
       }
     },
     "updateDistribution": {
-      "name": "UpdateDistribution2013_11_11",
+      "name": "UpdateDistribution2013_11_22",
       "http": {
-        "uri": "/2013-11-11/distribution/{Id}/config",
+        "uri": "/2013-11-22/distribution/{Id}/config",
         "method": "PUT"
       },
       "input": {
@@ -2789,6 +2819,9 @@
                         }
                       }
                     }
+                  },
+                  "SmoothStreaming": {
+                    "type": "boolean"
                   }
                 },
                 "required": true
@@ -2886,6 +2919,9 @@
                               }
                             }
                           }
+                        },
+                        "SmoothStreaming": {
+                          "type": "boolean"
                         }
                       },
                       "name": "CacheBehavior"
@@ -3169,6 +3205,9 @@
                         }
                       }
                     }
+                  },
+                  "SmoothStreaming": {
+                    "type": "boolean"
                   }
                 }
               },
@@ -3247,6 +3286,9 @@
                               }
                             }
                           }
+                        },
+                        "SmoothStreaming": {
+                          "type": "boolean"
                         }
                       },
                       "name": "CacheBehavior"
@@ -3332,9 +3374,9 @@
       }
     },
     "updateStreamingDistribution": {
-      "name": "UpdateStreamingDistribution2013_11_11",
+      "name": "UpdateStreamingDistribution2013_11_22",
       "http": {
-        "uri": "/2013-11-11/streaming-distribution/{Id}/config",
+        "uri": "/2013-11-22/streaming-distribution/{Id}/config",
         "method": "PUT"
       },
       "input": {
