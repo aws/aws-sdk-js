@@ -2,6 +2,8 @@ require 'json'
 require_relative './model_documentor'
 
 YARD::Tags::Library.define_tag 'Service', :service
+YARD::Tags::Library.define_tag 'Waiter Resources', :waiter
+YARD::Tags::Library.visible_tags << :waiter
 YARD::Templates::Engine.register_template_path(File.dirname(__FILE__) + '/templates')
 
 class YARD::CodeObjects::ClassObject
@@ -13,6 +15,14 @@ class YARD::CodeObjects::ClassObject
     return super unless prefix
     @name.to_s.gsub(/_(\d{4})(\d{2})(\d{2})/, ' (\1-\2-\3)')
   end
+end
+
+class WaiterObject < YARD::CodeObjects::Base
+  attr_accessor :operation
+
+  def parameters; [] end
+  def sep; '$waiter$' end
+  def title; name.to_s end
 end
 
 class DefineServiceHandler < YARDJS::Handlers::Base
@@ -42,6 +52,7 @@ class DefineServiceHandler < YARDJS::Handlers::Base
     model = load_model(klass.downcase, version)
     add_class_documentation(svc, klass, model)
     add_methods(svc, klass, model)
+    add_waiters(svc, klass, model)
 
     svc.docstring.add_tag(YARD::Tags::Tag.new(:service, identifier))
     svc.docstring.add_tag(YARD::Tags::Tag.new(:version, version))
@@ -65,10 +76,49 @@ class DefineServiceHandler < YARDJS::Handlers::Base
       docs = MethodDocumentor.new(operation, model, klass).lines.join("\n")
       meth.property_type = :function
       meth.parameters = [['params', '{}'], ['callback', nil]]
-      meth.signature = "#{name}(params = {}, callback)"
+      meth.signature = "#{name}(params = {}, [callback])"
       meth.dynamic = true
       meth.docstring = docs
     end
+  end
+
+  def add_waiters(service, klass, model)
+    return unless waiters = model['waiters']
+
+    wait_for = YARDJS::CodeObjects::PropertyObject.new(service, 'waitFor')
+    wait_for.property_type = :function
+    wait_for.parameters = [['state', nil], ['params', '{}'], ['callback', nil]]
+    wait_for.signature = "waitFor(state, params = {}, [callback])"
+    wait_for.dynamic = true
+    wait_for.docstring = "Waits for a given #{service.name} resource."
+
+    waiters.keys.each do |name|
+      next if name =~ /^_/
+      config = load_waiter(waiters, name)
+      operation_name = config['operation'][0,1].downcase + config['operation'][1..-1]
+      obj = WaiterObject.new(service, name)
+      obj.operation = YARDJS::CodeObjects::PropertyObject.new(service, operation_name)
+      obj.operation.docstring.add_tag YARD::Tags::Tag.new(:waiter, "{#{obj.path}}")
+      obj.docstring = <<-eof
+Waits for the #{name} state, calling the underlying {#{operation_name}} operation.
+
+@callback (see #{obj.operation.path})
+@param (see #{obj.operation.path})
+@return (see #{obj.operation.path})
+eof
+
+      wait_for.docstring.add_tag YARD::Tags::Tag.new(:waiter, "{#{obj.path}}")
+    end
+  end
+
+  def load_waiter(waiters, name)
+    waiter = waiters[name]
+    if waiter['extends']
+      waiter = waiter.merge(load_waiter(waiters, waiter['extends']))
+    elsif name != '__default__'
+      waiter = waiter.merge(load_waiter(waiters, '__default__'))
+    end
+    waiter
   end
 
   def load_model(klass, api_version)
