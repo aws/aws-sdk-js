@@ -12,5 +12,5 @@ module.exports = {
   mainFile: path.join(root, 'aws.js'),
   browserFile: path.join(root, 'browser.js'),
   servicesFile: path.join(root, 'services.js'),
-  defaultServices: 'dynamodb,s3,sqs,sns,sts'
+  defaultServices: 'dynamodb,s3,sqs,sns,sts,kinesis,cloudwatch'
 };
