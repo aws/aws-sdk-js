@@ -1,0 +1,7 @@
+<div id="waiter_details" class="waiter_details_list method_details_list">
+  <h2>Waiter Resource Details</h2>
+
+  <% @waiters.each_with_index do |waiter, i| %>
+    <%= yieldall :object => waiter, :owner => object, :index => i %>
+  <% end %>
+</div>

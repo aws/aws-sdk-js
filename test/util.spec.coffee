@@ -478,6 +478,11 @@ describe 'AWS.util.jamespath', ->
         child4: 'notarray'
       expect(query('foo.*[*]', data)).toEqual(['value1', 'value2', 'value3'])
 
+    it 'can support array flattening', ->
+      data = foo: [ {bar: 1}, {bar: 2}, {bar: 3} ]
+      expect(query('foo[].bar', data)).toEqual([1, 2, 3])
+
+
   describe 'find', ->
     it 'returns the first match of query', ->
       expect(find('foo.*', foo: bar: 1, baz: 2)).toEqual(1)

@@ -3615,5 +3615,32 @@
       "moreResults": "IsTruncated",
       "resultKey": "Items"
     }
+  },
+  "waiters": {
+    "__default__": {
+      "successType": "output",
+      "successPath": "Status"
+    },
+    "streamingDistributionDeployed": {
+      "operation": "GetStreamingDistribution",
+      "description": "Wait until a streaming distribution is deployed.",
+      "interval": 60,
+      "maxAttempts": 25,
+      "successValue": "Deployed"
+    },
+    "distributionDeployed": {
+      "operation": "GetDistribution",
+      "description": "Wait until a distribution is deployed.",
+      "interval": 60,
+      "maxAttempts": 25,
+      "successValue": "Deployed"
+    },
+    "invalidationCompleted": {
+      "operation": "GetInvalidation",
+      "description": "Wait until an invalidation has completed.",
+      "interval": 20,
+      "maxAttempts": 30,
+      "successValue": "Completed"
+    }
   }
 }

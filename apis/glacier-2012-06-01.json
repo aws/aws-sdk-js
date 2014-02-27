@@ -809,5 +809,26 @@
       "limitKey": "limit",
       "resultKey": "VaultList"
     }
+  },
+  "waiters": {
+    "__default__": {
+      "interval": 3,
+      "maxAttempts": 15
+    },
+    "__VaultState": {
+      "operation": "DescribeVault"
+    },
+    "vaultExists": {
+      "extends": "__VaultState",
+      "ignoreErrors": [
+        "ResourceNotFoundException"
+      ],
+      "successType": "output"
+    },
+    "vaultNotExists": {
+      "extends": "__VaultState",
+      "successType": "error",
+      "successValue": "ResourceNotFoundException"
+    }
   }
 }

@@ -2893,5 +2893,30 @@
       "inputToken": "PartNumberMarker",
       "resultKey": "Parts"
     }
+  },
+  "waiters": {
+    "__default__": {
+      "interval": 5,
+      "maxAttempts": 20
+    },
+    "bucketExists": {
+      "operation": "HeadBucket",
+      "ignoreErrors": [
+        "NoSuchBucket"
+      ],
+      "successType": "output"
+    },
+    "bucketNotExists": {
+      "operation": "HeadBucket",
+      "successType": "error",
+      "successValue": 404
+    },
+    "objectExists": {
+      "operation": "HeadObject",
+      "ignoreErrors": [
+        "NoSuchKey"
+      ],
+      "successType": "output"
+    }
   }
 }
