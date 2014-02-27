@@ -24,7 +24,9 @@
           "DurationSeconds": {
             "type": "integer"
           },
-          "ExternalId": {}
+          "ExternalId": {},
+          "SerialNumber": {},
+          "TokenCode": {}
         }
       },
       "output": {
