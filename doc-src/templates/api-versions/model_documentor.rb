@@ -152,8 +152,19 @@ class MethodDocumentor
   end
 
   def generate_example(klass, name, input)
+    ExampleShapeVisitor.new.example(klass, name, input)
+  end
+
+end
+
+class ExampleShapeVisitor
+  def initialize(required_only = false)
+    @required_only = required_only
+  end
+
+  def example(klass, name, input)
     lines = []
-    params = ExampleShapeVisitor.new.traverse(input)
+    params = traverse(input)
     params_var = ""
     if params.strip.length > 0
       lines << "var params = " + params + ";"
@@ -166,9 +177,6 @@ class MethodDocumentor
     lines.join("\n")
   end
 
-end
-
-class ExampleShapeVisitor
   def traverse(node)
     if (meth = "visit_" + (node['type'] || 'string')) && respond_to?(meth)
       return send(meth, node)
@@ -179,6 +187,7 @@ class ExampleShapeVisitor
   def visit_structure(node)
     lines = ["{" + (node['required'] ? " // required" : "")]
     node['members'].sort_by {|n, v| [v['required'] ? -1 : 1, n] }.each do |key, value|
+      next if @required_only && !value['required']
       lines << "  #{key}: " + indent(traverse(value), false) + "," +
         (value['required'] && !%w(list map structure).include?(value['type']) ?
           " // required" : "")
