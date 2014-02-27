@@ -123,7 +123,18 @@ Waits for the #{name} state, calling the underlying {#{operation_name}} operatio
 @callback (see #{obj.operation.path})
 @param (see #{obj.operation.path})
 @return (see #{obj.operation.path})
+@see #{operation_name}
 eof
+
+      waiter_ex = ExampleShapeVisitor.new(true).example(
+        service.name.to_s.downcase, 'waitFor', model['operations'][operation_name]['input'])
+      waiter_ex = waiter_ex.sub(/\.waitFor\(/, ".waitFor('#{name}', ")
+      obj.docstring.add_tag YARD::Tags::Tag.new(:example, waiter_ex, nil,
+        "Waiting for the #{name} state")
+      unless wait_for.docstring.tag(:example)
+        wait_for.docstring.add_tag YARD::Tags::Tag.new(:example, waiter_ex, nil,
+          "Waiting for the #{name} state")
+      end
 
       wait_for.docstring.add_tag YARD::Tags::Tag.new(:waiter, "{#{obj.path}}")
     end
