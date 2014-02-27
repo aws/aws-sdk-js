@@ -118,7 +118,9 @@ eof
       obj.operation = YARDJS::CodeObjects::PropertyObject.new(service, operation_name)
       obj.operation.docstring.add_tag YARD::Tags::Tag.new(:waiter, "{#{obj.path}}")
       obj.docstring = <<-eof
-Waits for the #{name} state, calling the underlying {#{operation_name}} operation.
+Waits for the `#{name}` state by periodically calling the underlying
+{#{operation_name}} operation every #{config['interval']} seconds
+(at most #{config['maxAttempts']} times).
 
 @callback (see #{obj.operation.path})
 @param (see #{obj.operation.path})
