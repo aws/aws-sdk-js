@@ -2,7 +2,7 @@ require 'json'
 require_relative './model_documentor'
 
 YARD::Tags::Library.define_tag 'Service', :service
-YARD::Tags::Library.define_tag 'Waiter Resources', :waiter
+YARD::Tags::Library.define_tag 'Waiter Resource States', :waiter
 YARD::Tags::Library.visible_tags << :waiter
 YARD::Templates::Engine.register_template_path(File.dirname(__FILE__) + '/templates')
 
@@ -90,7 +90,25 @@ class DefineServiceHandler < YARDJS::Handlers::Base
     wait_for.parameters = [['state', nil], ['params', '{}'], ['callback', nil]]
     wait_for.signature = "waitFor(state, params = {}, [callback])"
     wait_for.dynamic = true
-    wait_for.docstring = "Waits for a given #{service.name} resource."
+    wait_for.docstring = <<-eof
+Waits for a given #{service.name} resource. The final callback or
+{AWS.Request~complete 'complete' event} will be fired only when the resource
+is either in its final state or the waiter has timed out and stopped polling
+for the final state.
+
+@param state [String] the resource state to wait for. Available states for this
+  service are listed in "Waiter Resource States" below.
+@param params [map] a list of parameters for the given state. See each waiter
+  resource state for required parameters.
+@callback callback function(err, data)
+  Callback containing error and data information. See the respective resource
+  state for the expected error or data information.
+
+  If the waiter times out its requests, it will return a `ResourceNotReady`
+  error.
+@return [AWS.Request] a handle to the operation request for subsequent event
+  callback registration.
+eof
 
     waiters.keys.each do |name|
       next if name =~ /^_/
