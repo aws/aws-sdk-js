@@ -428,6 +428,19 @@
                     "type": "boolean"
                   }
                 }
+              },
+              "AccessLog": {
+                "type": "structure",
+                "members": {
+                  "Enabled": {
+                    "type": "boolean"
+                  },
+                  "S3BucketName": {},
+                  "EmitInterval": {
+                    "type": "integer"
+                  },
+                  "S3BucketPrefix": {}
+                }
               }
             }
           }
@@ -760,6 +773,20 @@
                     "required": true
                   }
                 }
+              },
+              "AccessLog": {
+                "type": "structure",
+                "members": {
+                  "Enabled": {
+                    "type": "boolean",
+                    "required": true
+                  },
+                  "S3BucketName": {},
+                  "EmitInterval": {
+                    "type": "integer"
+                  },
+                  "S3BucketPrefix": {}
+                }
               }
             },
             "required": true
@@ -768,7 +795,35 @@
       },
       "output": {
         "type": "structure",
-        "members": {}
+        "members": {
+          "LoadBalancerName": {},
+          "LoadBalancerAttributes": {
+            "type": "structure",
+            "members": {
+              "CrossZoneLoadBalancing": {
+                "type": "structure",
+                "members": {
+                  "Enabled": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "AccessLog": {
+                "type": "structure",
+                "members": {
+                  "Enabled": {
+                    "type": "boolean"
+                  },
+                  "S3BucketName": {},
+                  "EmitInterval": {
+                    "type": "integer"
+                  },
+                  "S3BucketPrefix": {}
+                }
+              }
+            }
+          }
+        }
       }
     },
     "registerInstancesWithLoadBalancer": {

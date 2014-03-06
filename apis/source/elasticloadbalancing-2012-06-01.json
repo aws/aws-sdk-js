@@ -5,7 +5,8 @@
   "signature_version": "v4",
   "service_full_name": "Elastic Load Balancing",
   "endpoint_prefix": "elasticloadbalancing",
-  "documentation": "\n    \t<fullname>Elastic Load Balancing</fullname>\n        \n        <p>\n        Elastic Load Balancing is a cost-effective and easy\n        to use web service to help you improve the availability and\n        scalability of your application running on Amazon Elastic Cloud Compute (Amazon EC2). It makes it easy for\n        you to distribute application loads between two or more\n        EC2 instances. Elastic Load Balancing supports the growth in traffic of your application by enabling availability through redundancy.\n        </p>\n        \n        <p>This guide provides detailed information about Elastic Load Balancing \n            actions, data types, and parameters that can be used for sending a \n            query request. Query requests are HTTP or HTTPS requests that use the \n            HTTP verb GET or POST and a query parameter named Action or Operation. \n            Action is used throughout this documentation, although Operation is \n            supported for backward compatibility with other AWS Query APIs.</p>\n                \n        <p>For detailed information on constructing a query request using the actions, data types, and parameters mentioned in this guide,\n            go to <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/using-query-api.html\">Using the Query API</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n                   \n        <p>For detailed information about Elastic Load Balancing features and their associated actions, go to \n            <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/UserScenarios.html\">Using Elastic Load Balancing</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        \n        <p>This reference guide is based on the current WSDL, which is available at:\n            <a href=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/ElasticLoadBalancing.wsdl\"></a>   \n        </p>\n        <p><b>Endpoints</b></p>\n        <p>The examples in this guide assume that your load balancers are created in the US East (Northern Virginia) region and use us-east-1 as the endpoint.</p>\n        <p>You can create your load balancers in other AWS regions. For information about regions and endpoints supported by Elastic Load Balancing, see \n            <a href=\"http://docs.aws.amazon.com/general/latest/gr/index.html?rande.html\">Regions and Endpoints</a> \n            in the Amazon Web Services General Reference.\n        </p>\n            \n    ",
+  "xmlnamespace": "http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/",
+  "documentation": "\n    \t<fullname>Elastic Load Balancing</fullname>\n        \n        <p>\n        Elastic Load Balancing is a cost-effective and easy\n        to use web service to help you improve the availability and\n        scalability of your application running on Amazon Elastic Cloud Compute (Amazon EC2). It makes it easy for\n        you to distribute application loads between two or more\n        EC2 instances. Elastic Load Balancing supports the growth in traffic of your application by enabling availability through redundancy.\n        </p>\n        \n        <p>This guide provides detailed information about Elastic Load Balancing \n            actions, data types, and parameters that can be used for sending a \n            query request. Query requests are HTTP or HTTPS requests that use the \n            HTTP verb GET or POST and a query parameter named Action or Operation. \n            Action is used throughout this documentation, although Operation is \n            supported for backward compatibility with other AWS Query APIs.</p>\n                \n        <p>For detailed information on constructing a query request using the actions, data types, and parameters mentioned in this guide,\n            go to <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/using-query-api.html\">Using the Query API</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n                   \n        <p>For detailed information about Elastic Load Balancing features and their associated actions, go to \n            <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/UserScenarios.html\">Using Elastic Load Balancing</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        \n        <p>This reference guide is based on the current WSDL, which is available at:\n            <a href=\"http://ec2-downloads.s3.amazonaws.com/ElasticLoadBalancing.wsdl\"></a>   \n        </p>\n        <p><b>Endpoints</b></p>\n        <p>The examples in this guide assume that your load balancers are created in the US East (Northern Virginia) region and use us-east-1 as the endpoint.</p>\n        <p>You can create your load balancers in other AWS regions. For information about regions and endpoints supported by Elastic Load Balancing, see \n            <a href=\"http://docs.aws.amazon.com/general/latest/gr/index.html?rande.html\">Regions and Endpoints</a> \n            in the Amazon Web Services General Reference.\n        </p>\n            \n    ",
   "operations": {
     "ApplySecurityGroupsToLoadBalancer": {
       "name": "ApplySecurityGroupsToLoadBalancer",
@@ -568,7 +569,7 @@
           "documentation": "\n        <p>\n            Invalid value for scheme. Scheme can only be specified for load balancers in VPC.         \n        </p>\n    "
         }
       ],
-      "documentation": "\n        <p>\n            Creates a new load balancer.\n        </p>\n        <p>\n            After the call has completed successfully, a new load balancer\n            is created with a unique Domain Name Service (DNS) name. The DNS \n            name includes the name of the AWS region in which the load balance \n            was created. For example, if your load balancer was created in the\n            United States, the DNS name might end with either of the following:</p>        \n        <ul>\n            <li>\n                <i>us-east-1.elb.amazonaws.com</i> (for the Northern Virginia Region)\n            </li>\n            <li>\n                <i>us-west-1.elb.amazonaws.com</i> (for the Northern California Region)\n            </li>\n        </ul>\n        <p>For information about the AWS regions supported by Elastic Load Balancing, \n            see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#elb_region\">Regions and Endpoints</a>.</p>        \n        \n        <p>You can create up to 10 load balancers per region per account.</p>\n        \n        <p>Elastic Load Balancing supports load balancing your Amazon EC2 instances launched\n            within any one of the following platforms:</p>\n        <ul>\n            <li>\n                <i>EC2-Classic</i>\n                <p>For information on creating and managing your load balancers in EC2-Classic, \n                    see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/UserScenariosForEC2.html\">Deploy Elastic Load Balancing in Amazon EC2-Classic</a>.</p>\n            </li>\n            <li>\n                <i>EC2-VPC</i>\n                <p>For information on creating and managing your load balancers in EC2-VPC, \n                    see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/UserScenariosForVPC.html\">Deploy Elastic Load Balancing in Amazon VPC</a>.</p>\n            </li>\n        </ul> \n        \n        <examples> \n            <example>\n                <name>Create a TCP load balancer in EC2-Classic</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&AvailabilityZones.member.1=us-east-1c\n&Listeners.member.1.LoadBalancerPort=80\n&Listeners.member.1.InstancePort=80\n&Listeners.member.1.Protocol=http\n&Listeners.member.1.InstanceProtocol=http\n&Version=2012-06-01\n&Action=CreateLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><CreateLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<CreateLoadBalancerResult>\n    <DNSName>MyLoadBalancer-1234567890.us-east-1.elb.amazonaws.com</DNSName>\n  </CreateLoadBalancerResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</CreateLoadBalancerResponse>\n </queryresponse>\n            </example> \n            <example>\n                <name>Create HTTPS load balancer in EC2-Classic</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyHTTPSLoadBalancer\n&AvailabilityZones.member.1=us-east-1c\n&Listeners.member.1.LoadBalancerPort=443\n&Listeners.member.1.InstancePort=443\n&Listeners.member.1.Protocol=https\n&Listeners.member.1.InstanceProtocol=https\n&Listeners.member.1.SSLCertificateId=arn:aws:iam::123456789012:server-certificate/servercert\n&Version=2012-06-01\n&Action=CreateLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><CreateLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<CreateLoadBalancerResult>\n    <DNSName>MyHTTPSLoadBalancer-1234567890.us-east-1.elb.amazonaws.com</DNSName>\n  </CreateLoadBalancerResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</CreateLoadBalancerResponse>\n </queryresponse>\n            </example> \n            <example>\n                <name>Create a TCP load balancer in EC2-VPC</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?SecurityGroups.member.1=sg-6801da07\n&LoadBalancerName=MyVPCLoadBalancer\n&Listeners.member.1.LoadBalancerPort=80\n&Listeners.member.1.InstancePort=80\n&Listeners.member.1.Protocol=http\n&Listeners.member.1.InstanceProtocol=http\n&Subnets.member.1=subnet-6dec9f03\n&Version=2012-06-01\n&Action=CreateLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><CreateLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<CreateLoadBalancerResult>\n    <DNSName>MyVPCLoadBalancer-1234567890.us-east-1.elb.amazonaws.com</DNSName>\n  </CreateLoadBalancerResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</CreateLoadBalancerResponse>\n </queryresponse>\n            </example> \n            <example>\n                <name>Create an internal TCP load balancer in EC2-VPC</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?Scheme=internal\n&SecurityGroups.member.1=sg-706cb61f\n&LoadBalancerName=MyInternalLoadBalancer\n&Listeners.member.1.LoadBalancerPort=80\n&Listeners.member.1.InstancePort=80\n&Listeners.member.1.Protocol=http\n&Listeners.member.1.InstanceProtocol=http\n&Subnets.member.1=subnet-9edc97f0\n&Version=2012-06-01\n&Action=CreateLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><CreateLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<CreateLoadBalancerResult>\n    <DNSName>internal-MyInternalLoadBalancer-1234567890.us-east-1.elb.amazonaws.com</DNSName>\n  </CreateLoadBalancerResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</CreateLoadBalancerResponse>\n </queryresponse>\n            </example>           \n            <example>\n                <name>Create a TCP load balancer in default VPC</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyDefaultVPCLoadBalancer\n&AvailabilityZones.member.1=sa-east-1b\n&Listeners.member.1.LoadBalancerPort=80\n&Listeners.member.1.InstancePort=80\n&Listeners.member.1.Protocol=http\n&Listeners.member.1.InstanceProtocol=http\n&Version=2012-06-01\n&Action=CreateLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><CreateLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<CreateLoadBalancerResult>\n    <DNSName>MyDefaultVPCLoadBalancer-1234567890.sa.east-1.elb.amazonaws.com</DNSName>\n  </CreateLoadBalancerResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</CreateLoadBalancerResponse>\n </queryresponse>\n            </example>           \n        </examples>        \n    "
+      "documentation": "\n        <p>\n            Creates a new load balancer.\n        </p>\n        <p>\n            After the call has completed successfully, a new load balancer\n            is created with a unique Domain Name Service (DNS) name. The DNS \n            name includes the name of the AWS region in which the load balance \n            was created. For example, if your load balancer was created in the\n            United States, the DNS name might end with either of the following:</p>        \n        <ul>\n            <li>\n                <i>us-east-1.elb.amazonaws.com</i> (for the Northern Virginia Region)\n            </li>\n            <li>\n                <i>us-west-1.elb.amazonaws.com</i> (for the Northern California Region)\n            </li>\n        </ul>\n        <p>For information about the AWS regions supported by Elastic Load Balancing, \n            see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#elb_region\">Regions and Endpoints</a>.</p>        \n        \n        <p>You can create up to 20 load balancers per region per account.</p>\n        \n        <p>Elastic Load Balancing supports load balancing your Amazon EC2 instances launched\n            within any one of the following platforms:</p>\n        <ul>\n            <li>\n                <i>EC2-Classic</i>\n                <p>For information on creating and managing your load balancers in EC2-Classic, \n                    see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/UserScenariosForEC2.html\">Deploy Elastic Load Balancing in Amazon EC2-Classic</a>.</p>\n            </li>\n            <li>\n                <i>EC2-VPC</i>\n                <p>For information on creating and managing your load balancers in EC2-VPC, \n                    see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/UserScenariosForVPC.html\">Deploy Elastic Load Balancing in Amazon VPC</a>.</p>\n            </li>\n        </ul> \n        \n        <examples> \n            <example>\n                <name>Create a TCP load balancer in EC2-Classic</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&AvailabilityZones.member.1=us-east-1c\n&Listeners.member.1.LoadBalancerPort=80\n&Listeners.member.1.InstancePort=80\n&Listeners.member.1.Protocol=http\n&Listeners.member.1.InstanceProtocol=http\n&Version=2012-06-01\n&Action=CreateLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><CreateLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<CreateLoadBalancerResult>\n    <DNSName>MyLoadBalancer-1234567890.us-east-1.elb.amazonaws.com</DNSName>\n  </CreateLoadBalancerResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</CreateLoadBalancerResponse>\n </queryresponse>\n            </example> \n            <example>\n                <name>Create HTTPS load balancer in EC2-Classic</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyHTTPSLoadBalancer\n&AvailabilityZones.member.1=us-east-1c\n&Listeners.member.1.LoadBalancerPort=443\n&Listeners.member.1.InstancePort=443\n&Listeners.member.1.Protocol=https\n&Listeners.member.1.InstanceProtocol=https\n&Listeners.member.1.SSLCertificateId=arn:aws:iam::123456789012:server-certificate/servercert\n&Version=2012-06-01\n&Action=CreateLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><CreateLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<CreateLoadBalancerResult>\n    <DNSName>MyHTTPSLoadBalancer-1234567890.us-east-1.elb.amazonaws.com</DNSName>\n  </CreateLoadBalancerResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</CreateLoadBalancerResponse>\n </queryresponse>\n            </example> \n            <example>\n                <name>Create a TCP load balancer in EC2-VPC</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?SecurityGroups.member.1=sg-6801da07\n&LoadBalancerName=MyVPCLoadBalancer\n&Listeners.member.1.LoadBalancerPort=80\n&Listeners.member.1.InstancePort=80\n&Listeners.member.1.Protocol=http\n&Listeners.member.1.InstanceProtocol=http\n&Subnets.member.1=subnet-6dec9f03\n&Version=2012-06-01\n&Action=CreateLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><CreateLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<CreateLoadBalancerResult>\n    <DNSName>MyVPCLoadBalancer-1234567890.us-east-1.elb.amazonaws.com</DNSName>\n  </CreateLoadBalancerResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</CreateLoadBalancerResponse>\n </queryresponse>\n            </example> \n            <example>\n                <name>Create an internal TCP load balancer in EC2-VPC</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?Scheme=internal\n&SecurityGroups.member.1=sg-706cb61f\n&LoadBalancerName=MyInternalLoadBalancer\n&Listeners.member.1.LoadBalancerPort=80\n&Listeners.member.1.InstancePort=80\n&Listeners.member.1.Protocol=http\n&Listeners.member.1.InstanceProtocol=http\n&Subnets.member.1=subnet-9edc97f0\n&Version=2012-06-01\n&Action=CreateLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><CreateLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<CreateLoadBalancerResult>\n    <DNSName>internal-MyInternalLoadBalancer-1234567890.us-east-1.elb.amazonaws.com</DNSName>\n  </CreateLoadBalancerResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</CreateLoadBalancerResponse>\n </queryresponse>\n            </example>           \n            <example>\n                <name>Create a TCP load balancer in default VPC</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyDefaultVPCLoadBalancer\n&AvailabilityZones.member.1=sa-east-1b\n&Listeners.member.1.LoadBalancerPort=80\n&Listeners.member.1.InstancePort=80\n&Listeners.member.1.Protocol=http\n&Listeners.member.1.InstanceProtocol=http\n&Version=2012-06-01\n&Action=CreateLoadBalancer\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><CreateLoadBalancerResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<CreateLoadBalancerResult>\n    <DNSName>MyDefaultVPCLoadBalancer-1234567890.sa.east-1.elb.amazonaws.com</DNSName>\n  </CreateLoadBalancerResult>\n  <ResponseMetadata>\n    <RequestId>1549581b-12b7-11e3-895e-1334aEXAMPLE</RequestId>\n  </ResponseMetadata>\n</CreateLoadBalancerResponse>\n </queryresponse>\n            </example>           \n        </examples>        \n    "
     },
     "CreateLoadBalancerListeners": {
       "name": "CreateLoadBalancerListeners",
@@ -1078,6 +1079,34 @@
                   }
                 },
                 "documentation": "\n       <p>The name of the load balancer attribute.</p> \n    "
+              },
+              "AccessLog": {
+                "shape_name": "AccessLog",
+                "type": "structure",
+                "members": {
+                  "Enabled": {
+                    "shape_name": "AccessLogEnabled",
+                    "type": "boolean",
+                    "documentation": "\n        <p>Specifies whether access log is enabled for the load balancer.</p>\n    ",
+                    "required": true
+                  },
+                  "S3BucketName": {
+                    "shape_name": "S3BucketName",
+                    "type": "string",
+                    "documentation": "\n        <p>The name of the Amazon S3 bucket where the access logs are stored.</p>\n    "
+                  },
+                  "EmitInterval": {
+                    "shape_name": "AccessLogInterval",
+                    "type": "integer",
+                    "documentation": "\n        <p>The interval for publishing the access logs. You can specify an interval of either 5 minutes or 60 minutes.</p>\n        <p>Default: 60 minutes</p>\n    "
+                  },
+                  "S3BucketPrefix": {
+                    "shape_name": "AccessLogPrefix",
+                    "type": "string",
+                    "documentation": "\n        <p>The logical hierarchy you created for your Amazon S3 bucket, for example <code>/my-bucket-prefix/prod</code>.  \n            If the prefix is not provided, the log is placed at the root level of the bucket.</p>\n    "
+                  }
+                },
+                "documentation": "\n        <p>The name of the load balancer attribute.</p> \n    "
               }
             },
             "documentation": "\n      <p>The load balancer attributes structure.</p>  \n    "
@@ -1101,7 +1130,7 @@
           "documentation": "\n        <p>The specified load balancer attribute could not be found.</p>  \n    "
         }
       ],
-      "documentation": "\n        <p>Returns detailed information about all of the attributes associated with the specified load balancer.</p>   \n    "
+      "documentation": "\n        <p>Returns detailed information about all of the attributes associated with the specified load balancer.</p>  \n        <examples>\n            <example>                           \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&Version=2012-06-01\n&Action=DescribeLoadBalancerAttributes\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><DescribeLoadBalancerAttributesResponse  xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n <DescribeLoadBalancerAttributesResult>\n    <LoadBalancerAttributes>\n    <AccessLog>\n        <Enabled>true</Enabled>\n        <S3BucketName>my-loadbalancer-logs</S3BucketName>\n        <S3BucketPrefix>testprefix</S3BucketPrefix>\n        <EmitInterval>5</EmitInterval>\n      </AccessLog>\n      <CrossZoneLoadBalancing>\n        <Enabled>true</Enabled>\n      </CrossZoneLoadBalancing>\n    </LoadBalancerAttributes>\n  </DescribeLoadBalancerAttributesResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</DescribeLoadBalancerAttributesResponse>\n </queryresponse>\n            </example>\n        </examples>             \n    "
     },
     "DescribeLoadBalancerPolicies": {
       "name": "DescribeLoadBalancerPolicies",
@@ -1848,6 +1877,34 @@
                   }
                 },
                 "documentation": "\n       <p>The name of the load balancer attribute.</p> \n    "
+              },
+              "AccessLog": {
+                "shape_name": "AccessLog",
+                "type": "structure",
+                "members": {
+                  "Enabled": {
+                    "shape_name": "AccessLogEnabled",
+                    "type": "boolean",
+                    "documentation": "\n        <p>Specifies whether access log is enabled for the load balancer.</p>\n    ",
+                    "required": true
+                  },
+                  "S3BucketName": {
+                    "shape_name": "S3BucketName",
+                    "type": "string",
+                    "documentation": "\n        <p>The name of the Amazon S3 bucket where the access logs are stored.</p>\n    "
+                  },
+                  "EmitInterval": {
+                    "shape_name": "AccessLogInterval",
+                    "type": "integer",
+                    "documentation": "\n        <p>The interval for publishing the access logs. You can specify an interval of either 5 minutes or 60 minutes.</p>\n        <p>Default: 60 minutes</p>\n    "
+                  },
+                  "S3BucketPrefix": {
+                    "shape_name": "AccessLogPrefix",
+                    "type": "string",
+                    "documentation": "\n        <p>The logical hierarchy you created for your Amazon S3 bucket, for example <code>/my-bucket-prefix/prod</code>.  \n            If the prefix is not provided, the log is placed at the root level of the bucket.</p>\n    "
+                  }
+                },
+                "documentation": "\n        <p>The name of the load balancer attribute.</p> \n    "
               }
             },
             "documentation": "\n      <p>Attributes of the load balancer.</p>  \n    ",
@@ -1860,6 +1917,59 @@
         "shape_name": "ModifyLoadBalancerAttributesOutput",
         "type": "structure",
         "members": {
+          "LoadBalancerName": {
+            "shape_name": "AccessPointName",
+            "type": "string",
+            "documentation": "\n        <p>The name of the load balancer.</p>  \n    "
+          },
+          "LoadBalancerAttributes": {
+            "shape_name": "LoadBalancerAttributes",
+            "type": "structure",
+            "members": {
+              "CrossZoneLoadBalancing": {
+                "shape_name": "CrossZoneLoadBalancing",
+                "type": "structure",
+                "members": {
+                  "Enabled": {
+                    "shape_name": "CrossZoneLoadBalancingEnabled",
+                    "type": "boolean",
+                    "documentation": "\n        <p>Specifies whether cross-zone load balancing is enabled for the load balancer.</p>\n    ",
+                    "required": true
+                  }
+                },
+                "documentation": "\n       <p>The name of the load balancer attribute.</p> \n    "
+              },
+              "AccessLog": {
+                "shape_name": "AccessLog",
+                "type": "structure",
+                "members": {
+                  "Enabled": {
+                    "shape_name": "AccessLogEnabled",
+                    "type": "boolean",
+                    "documentation": "\n        <p>Specifies whether access log is enabled for the load balancer.</p>\n    ",
+                    "required": true
+                  },
+                  "S3BucketName": {
+                    "shape_name": "S3BucketName",
+                    "type": "string",
+                    "documentation": "\n        <p>The name of the Amazon S3 bucket where the access logs are stored.</p>\n    "
+                  },
+                  "EmitInterval": {
+                    "shape_name": "AccessLogInterval",
+                    "type": "integer",
+                    "documentation": "\n        <p>The interval for publishing the access logs. You can specify an interval of either 5 minutes or 60 minutes.</p>\n        <p>Default: 60 minutes</p>\n    "
+                  },
+                  "S3BucketPrefix": {
+                    "shape_name": "AccessLogPrefix",
+                    "type": "string",
+                    "documentation": "\n        <p>The logical hierarchy you created for your Amazon S3 bucket, for example <code>/my-bucket-prefix/prod</code>.  \n            If the prefix is not provided, the log is placed at the root level of the bucket.</p>\n    "
+                  }
+                },
+                "documentation": "\n        <p>The name of the load balancer attribute.</p> \n    "
+              }
+            },
+            "documentation": "\n        <p>The <code>LoadBalancerAttributes</code> data type.</p>\n    "
+          }
         },
         "documentation": "\n        <p>The output for the <a>ModifyLoadBalancerAttributes</a> action.</p>\n    "
       },
@@ -1886,7 +1996,7 @@
           "documentation": "\n        <p>\n        Requested configuration change is invalid.\n        </p>\n    "
         }
       ],
-      "documentation": "\n        <p>Modifies the attributes of a specified load balancer.</p>  \n    "
+      "documentation": "\n        <p>Modifies the attributes of a specified load balancer.</p> \n        <p>You can modify the attributes, such as cross-zone load balancing and access logs, \n            by either enabling or disabling them.</p>\n        \n        <p>For information on modifying the cross-zone load balancing attribute, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/enable-disable-crosszone-lb.html\">Enable or Disable Cross-Zone Load Balancing for Your Load balancer</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        <p>For information on modifying the access log attribute, see <a href=\"http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/access-log-collection.html\">Enable or Disable Access Log Collection for Your Load Balancer</a>\n            in the <i>Elastic Load Balancing Developer Guide</i>.</p>\n        <examples>\n            <example>\n                  <name>Enable Cross-Zone Load Balancing</name>                \n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&LoadBalancerAttributes.CrossZoneLoadBalancing.Enabled=true                    \n&Version=2012-06-01\n&Action=ModifyLoadBalancerAttributes\n&AUTHPARAMS </queryrequest>      \n                <queryresponse><<ModifyLoadBalancerAttributesResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<ModifyLoadBalancerAttributesResult> \n<LoadBalancerName>MyLoadBalancer</LoadBalancerName>\n    <LoadBalancerAttributes>\n      <CrossZoneLoadBalancing>\n        <Enabled>true</Enabled>\n      </CrossZoneLoadBalancing>\n    </LoadBalancerAttributes>\n  </ModifyLoadBalancerAttributesResult>\n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</ModifyLoadBalancerAttributesResponse>\n </queryresponse>\n            </example>\n            <example>\n                <name>Enable Access Log</name>\n                <queryrequest>https://elasticloadbalancing.amazonaws.com/?LoadBalancerName=MyLoadBalancer\n&LoadBalancerAttributes.AccessLog.Enabled=true \n&LoadBalancerAttributes.AccessLog.S3BucketName=my-loadbalancer-logs\n&LoadBalancerAttributes.AccessLog.S3BucketPrefix=my-bucket-prefix/prod\n&LoadBalancerAttributes.AccessLog.EmitInterval=5\n&Version=2012-06-01\n&Action=ModifyLoadBalancerAttributes\n&AUTHPARAMS </queryrequest>\n                \n                <queryresponse><<ModifyLoadBalancerAttributesResponse xmlns=\"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/\">\n<ModifyLoadBalancerAttributesResult>\n    <LoadBalancerName>MyLoadBalancer</LoadBalancerName>\n    <LoadBalancerAttributes>\n      <AccessLog>\n        <Enabled>true</Enabled>\n        <S3BucketName>my-loadbalancer-logs</S3BucketName>\n        <S3BucketPrefix>my-bucket-prefix/prod</S3BucketPrefix>\n        <EmitInterval>5</EmitInterval>\n      </AccessLog>\n    </LoadBalancerAttributes>\n  </ModifyLoadBalancerAttributesResult>\n \n<ResponseMetadata>\n    <RequestId>83c88b9d-12b7-11e3-8b82-87b12EXAMPLE</RequestId>\n</ResponseMetadata>\n</ModifyLoadBalancerAttributesResponse>\n </queryresponse>\n                \n            </example>\n        </examples>             \n    "
     },
     "RegisterInstancesWithLoadBalancer": {
       "name": "RegisterInstancesWithLoadBalancer",
