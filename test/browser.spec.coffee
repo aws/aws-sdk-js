@@ -134,7 +134,8 @@ integrationTests ->
             expect(progress.length > 1).toEqual(true)
             expect(progress[0].total).toEqual(body.size)
             expect(progress[0].loaded > 10).toEqual(true)
-            s3.deleteObject(Key: key).send(done)
+            s3.deleteObject(Key: key).send()
+            done()
 
   describe 'AWS.DynamoDB', ->
     integration 'writes and reads from a table', (done) ->
