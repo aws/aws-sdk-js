@@ -55,8 +55,8 @@ integrationTests ->
       runs ->
         req = s3.putObject Key: 'key', Body: 'body'
         req.on 'complete', (resp) -> done = true; err = resp.error
+        req.on 'send', (resp) -> resp.request.abort()
         req.send()
-        req.abort()
       waitsFor -> done
       runs ->
         expect(err.name).toEqual('RequestAbortedError')
