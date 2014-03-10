@@ -65,7 +65,7 @@ describe 'AWS.S3', ->
       request(operation, params).build().httpRequest
 
     it 'obeys the configuration for s3ForcePathStyle', ->
-      config = new AWS.Config({s3ForcePathStyle: true })
+      config = new AWS.Config(s3ForcePathStyle: true, accessKeyId: 'AKID', secretAccessKey: 'SECRET')
       s3 = new AWS.S3(config)
       expect(s3.config.s3ForcePathStyle).toEqual(true)
       req = build('headObject', {Bucket:'bucket', Key:'key'})
