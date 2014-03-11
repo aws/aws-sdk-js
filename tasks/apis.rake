@@ -1,8 +1,6 @@
 require 'fileutils'
 require 'json'
 
-require_relative './lib/service_generator'
-require_relative './lib/services_loader_generator'
 require_relative './lib/cucumber_generator'
 
 $apis = {}
@@ -39,22 +37,6 @@ def add_tasks model
     task :versions
 
     namespace(service) do
-      task(:class) do
-        target = "#{root}/lib/services/#{service}.js"
-        unless File.exist?(target)
-          File.open(target, 'w') do |file|
-            file.write ServiceGenerator.new(klass, service, version).to_s
-          end
-        end
-      end
-
-      task(:loader_file) do
-        target = "#{root}/lib/services.js"
-        File.open(target, 'w') do |file|
-          file.write ServicesLoaderGenerator.new(root).to_s
-        end
-      end
-
       task(:api) do
         verbose(false) do
           sh "#{root}/scripts/translate-api #{model}"
@@ -100,10 +82,8 @@ def add_tasks model
 
     desc "Builds the API for #{service}."
     task service => [
-      "#{service}:class",
       "#{service}:api",
-      "#{service}:cucumber",
-      "#{service}:loader_file",
+      "#{service}:cucumber"
     ]
 
     task :api => "#{service}:api"
