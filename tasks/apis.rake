@@ -20,12 +20,11 @@ def service_name(api)
   # Hack for special service names
   case name
   when 'ElasticLoadBalancing'; 'ELB'
-  when 'SWF'; 'SimpleWorkflow'
   else name
   end
 end
 
-def add_tasks model
+def add_tasks(model)
   model = model.gsub(/\.json$/, '')
   model_path = File.join(models_path, "#{model}.json")
   api = JSON.parse(File.read(model_path), :max_nesting => false)
