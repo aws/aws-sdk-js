@@ -1,5 +1,5 @@
 # language: en
-@cloudfront @cloudfront-2013-05-12
+@cloudfront
 Feature: Amazon CloudFront
 
   I want to use Amazon CloudFront
