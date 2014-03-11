@@ -12,8 +12,7 @@ function outpath(api) {
   var name = api.serviceAbbreviation || api.serviceFullName;
   name = name.replace(/^Amazon|AWS\s*|\(.*|\s+|\W+/g, '');
   if (name === 'ElasticLoadBalancing') name = 'ELB';
-  else if (name === 'SWF') name = 'SimpleWorkflow';
-  name = name.toLowerCase() + '-' + api.apiVersion;
+  name = name + '-' + api.apiVersion;
   return name;
 }
 
