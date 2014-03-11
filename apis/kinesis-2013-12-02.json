@@ -249,5 +249,27 @@
         "members": {}
       }
     }
+  },
+  "pagination": {
+    "describeStream": {
+      "inputToken": "ExclusiveStartShardId",
+      "limitKey": "Limit",
+      "moreResults": "StreamDescription.HasMoreShards",
+      "outputToken": "StreamDescription.Shards[-1].ShardId",
+      "resultKey": "StreamDescription.Shards"
+    },
+    "getRecords": {
+      "inputToken": "ShardIterator",
+      "limitKey": "Limit",
+      "outputToken": "NextShardIterator",
+      "resultKey": "Records"
+    },
+    "listStreams": {
+      "inputToken": "ExclusiveStartStreamName",
+      "limitKey": "Limit",
+      "moreResults": "HasMoreStreams",
+      "outputToken": "StreamNames[-1]",
+      "resultKey": "StreamNames"
+    }
   }
 }
