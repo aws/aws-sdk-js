@@ -14,17 +14,18 @@ Feature: AWS Import/Export
     deviceId: ABCDE
     generator: AWS ImportExport Web Service Tool 1.0
     prefix: imported/
-    eraseDevice: no
+    eraseDevice: yes
+    notificationEmail: email@domain.com
     returnAddress:
-        name: Joe Random 
+        name: Joe Random
         company: Amazon Web Services
-        street1: 123 Any Street    
-        city: Anytown
+        street1: 123 Any Street
+        city: Seattle
         stateOrProvince: WA
         postalCode: 91111
         phoneNumber: 555-555-0100
         country: USA
-    serviceLevel: expeditedShipping   
+    serviceLevel: expeditedShipping
     """
     And I store the Import job ID
     And I get the Import job status

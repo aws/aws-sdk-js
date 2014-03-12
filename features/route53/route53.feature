@@ -30,7 +30,6 @@ Feature: Amazon Route 53
 
   Scenario: Type checking
     When I list Route53 hosted zones
-    Then the result should contain a property RequestId with a string
     And the result should contain a property HostedZones with an Array
 
   Scenario: Error handling

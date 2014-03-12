@@ -39,13 +39,8 @@ module.exports = function() {
         callback.fail(err);
         return;
       }
-      world.eventually(callback, function (next) {
-        next.condition = function() {
-          return this.data.Table.TableStatus === 'ACTIVE';
-        };
-        params = { TableName: world.tableName };
-        world.request(null, 'describeTable', params, next);
-      }, {maxTime: 500, delay: 10, backoff: 0});
+      params = { TableName: world.tableName };
+      db.waitFor('tableExists', params, callback);
     });
   }
 
@@ -90,17 +85,8 @@ module.exports = function() {
   });
 
   this.Then(/^the table should eventually not exist$/, function(callback) {
-    this.eventually(callback, function (next) {
-      next.condition = function() {
-        for (var i = 0; i < this.data.TableNames.length; i++) {
-          if (this.data.TableNames[i] == this.tableName) {
-            return false;
-          }
-        }
-        return true;
-      };
-      this.request(null, 'listTables', {}, next);
-    });
+    var params = {TableName: this.tableName};
+    this.service.waitFor('tableNotExists', params, callback);
   });
 
   this.Given(/^my first request is corrupted with CRC checking (ON|OFF)$/, function(toggle, callback) {

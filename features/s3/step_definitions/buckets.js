@@ -12,9 +12,7 @@ module.exports = function() {
   });
 
   this.Then(/^the bucket should exist$/, function(next) {
-    this.eventually(next, function (retry) {
-      this.request('s3', 'headBucket', {Bucket:this.bucket}, retry);
-    });
+    this.s3.waitFor('bucketExists', {Bucket:this.bucket}, next);
   });
 
   this.When(/^I delete the bucket$/, function(next) {
@@ -22,22 +20,19 @@ module.exports = function() {
   });
 
   this.Then(/^the bucket should not exist$/, function(next) {
-    this.eventually(next, function (retry) {
-      retry.condition = function() {
-        return this.error && this.error.code === 'NotFound';
-      }
-      this.request('s3', 'headBucket', {Bucket:this.bucket}, retry, false);
-    });
+    this.s3.waitFor('bucketNotExists', {Bucket:this.bucket}, next);
   });
 
   this.Then(/^the bucket should have a location constraint of "([^"]*)"$/, function(loc, next) {
-    this.s3.getBucketLocation({Bucket:this.bucket}, function(err, data) {
-      this.assert.equal(data.LocationConstraint, loc);
+    var self = this;
+    self.s3.getBucketLocation({Bucket:self.bucket}, function(err, data) {
+      self.assert.equal(data.LocationConstraint, loc);
       next();
-    }.bind(this));
+    });
   });
 
   this.Then(/^I delete the bucket$/, function(next) {
+    console.log("Delete bucket")
     this.request('s3', 'deleteBucket', {Bucket:this.bucket}, next);
   });
 

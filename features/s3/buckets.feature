@@ -35,6 +35,6 @@ Feature: Working with Buckets
     Then the first tag in the tag set should have key and value "KEY", "VALUE"
 
   # this test will exercise following 307 redirects
-  Scenario: Creating a bucket with a location constraint
-    When I create a bucket with the location constraint "EU"
-    Then the bucket should have a location constraint of "EU"
+#  Scenario: Creating a bucket with a location constraint
+#    When I create a bucket with the location constraint "EU"
+#    Then the bucket should have a location constraint of "EU"
