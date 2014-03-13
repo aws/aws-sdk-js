@@ -1,6 +1,10 @@
 require 'json'
 require_relative './model_documentor'
 
+$APIS_DIR = File.expand_path(File.dirname(__FILE__) +
+                             "/../../../vendor/apis/apis")
+$API_FILE_MATCH = /(?:^|\/)([^\/-]+)-(\d+-\d+-\d+)\.json$/
+
 YARD::Tags::Library.define_tag 'Service', :service
 YARD::Tags::Library.define_tag 'Waiter Resource States', :waiter
 YARD::Tags::Library.visible_tags << :waiter
@@ -17,6 +21,17 @@ class YARD::CodeObjects::ClassObject
   end
 end
 
+module YARD::Registry
+  class << self
+    def register_aws(object)
+      register_without_aws(object)
+      ApiDocumentor.new(object).run if object.path == 'AWS'
+    end
+    alias register_without_aws register
+    alias register register_aws
+  end
+end
+
 class WaiterObject < YARD::CodeObjects::Base
   attr_accessor :operation
 
@@ -26,31 +41,38 @@ class WaiterObject < YARD::CodeObjects::Base
   def title; name.to_s end
 end
 
-class DefineServiceHandler < YARDJS::Handlers::Base
-  handles AssignmentExpression
-
-  process do
-    statement.comments ||= parser.extra_state.comments
-    handle_default_comments
-
-    left, right = statement.left, statement.right
-    return unless right.is_a?(CallExpression)
-    return unless right.callee.source == 'AWS.Service.defineService'
-    return unless right.args[1].respond_to?(:elements)
-
-    identifier = right.args[0].val.val
-    apis = right.args[1].elements.map {|t| t.val.val }.sort
-    apis = apis.reject {|api| api.include?('*') }
-    apis[0...-1].each {|api| generate_api(left.source, right, identifier, api) }
-    generate_api(left.source, right, identifier, apis.last, false)
+class ApiDocumentor
+  def initialize(root = :root)
+    @root = root
   end
 
-  def generate_api(klass, right, identifier, version, version_suffix = true)
-    name = version_suffix ? klass + '_' + version.gsub('-', '') : klass
-    svc = register YARD::CodeObjects::ClassObject.new(:root, name)
+  def run
+    build_map.each do |service, files|
+      files.sort.each.with_index do |file, i|
+        generate_api(file, !(i == files.length - 1))
+      end
+    end
+  end
 
-    klass = klass.gsub(/^AWS\./, '')
-    model = load_model(klass.downcase, version)
+  def build_map
+    map = {}
+    Dir.entries($APIS_DIR).each do |file|
+      if file =~ $API_FILE_MATCH
+        (map[$1] ||= []).push(File.join($APIS_DIR, file))
+      end
+    end
+    map
+  end
+
+  def generate_api(file, version_suffix = true)
+    _, klass, version = *file.match($API_FILE_MATCH)
+    identifier = klass.downcase
+    name = version_suffix ? klass + '_' + version.gsub('-', '') : klass
+
+    log.progress("Parsing AWS.#{klass} (#{version})")
+    svc = YARD::CodeObjects::ClassObject.new(@root, name)
+
+    model = load_model(file)
     add_class_documentation(svc, klass, model)
     add_methods(svc, klass, model)
     add_waiters(svc, klass, model)
@@ -58,16 +80,12 @@ class DefineServiceHandler < YARDJS::Handlers::Base
     svc.docstring.add_tag(YARD::Tags::Tag.new(:service, identifier))
     svc.docstring.add_tag(YARD::Tags::Tag.new(:version, version))
     svc.superclass = 'AWS.Service'
-
-    if right.args.last.respond_to?(:properties)
-      parse_block(right.args.last.properties, :namespace => svc)
-    end
   end
 
   def add_class_documentation(service, klass, model)
     docstring = ModelDocumentor.new(klass, model).lines.join("\n")
     parser = YARD::Docstring.parser
-    parser.parse(docstring, service, self)
+    parser.parse(docstring, service)
     service.docstring = parser.to_docstring
   end
 
@@ -156,16 +174,17 @@ eof
     waiter
   end
 
-  def load_model(klass, api_version)
-    # get real endpoint prefix for json models
-    config = File.read(File.dirname(__FILE__) + "/../../../apis/#{klass}-#{api_version}.json")
-    klass = config[/"endpointPrefix": "(\S+)"/, 1]
+  def load_model(file)
+    data = File.read(file, 4096)
+    endpoint_prefix = data[/"endpointPrefix":\s*"(.+?)"/, 1]
 
-    file = "#{klass}-#{api_version}"
-    dir = File.expand_path(File.dirname(__FILE__)) + "/../../.."
-    translate = "require(\"#{dir}/lib/api/translator\")(require(\"fs\")." +
-                "readFileSync(\"#{dir}/apis/source/#{file}.json\"), {documentation:true})"
+    dir = File.expand_path(File.dirname(file))
+    name = File.basename(file).downcase
+    name = name.sub(/^([^-]+)/, endpoint_prefix)
+    file = dir + '/source/' + name
+    translate = "require(\"#{dir}/../lib/translator\")(require(\"fs\")." +
+                "readFileSync(\"#{file}\"), {documentation:true})"
     json = `node -e 'console.log(JSON.stringify(#{translate}))'`
-    api = JSON.parse(json)
+    JSON.parse(json)
   end
 end
