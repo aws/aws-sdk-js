@@ -27,23 +27,29 @@ namespace :browser do
 
   task :all => [:build, :test]
 
+  task :setup_dist_tools do
+    unless File.directory?("vendor/dist-tools")
+      sh "git clone git://github.com/aws/aws-sdk-js-dist-tools vendor/dist-tools"
+    end
+  end
+
   desc 'Builds browser distributable (SERVICES=s3,dynamodb,...)'
   task :build => :build_complete do
     sh "MINIFY=1 #{$BUILDER} > #{$BROWSERIFY_DIST.sub('.js', '.min.js')}"
   end
 
-  task :build_complete => :dist_path do
+  task :build_complete => [:setup_dist_tools, :dist_path] do
     sh "MINIFY='' #{$BUILDER} > #{$BROWSERIFY_DIST}"
     cp $BROWSERIFY_DIST, $BROWSERIFY_DIST_LATEST
   end
 
-  task :build_all => :dist_path do
+  task :build_all => [:setup_dist_tools, :dist_path] do
     sh "MINIFY='' #{$BUILDER} all > dist/aws-sdk-all.js"
   end
 
 
   desc 'Builds browser test harness and runner'
-  task :test => [:dist_path, :build_all] do
+  task :test => [:setup_dist_tools, :dist_path, :build_all] do
     write_configuration
     sh "coffee -c test/helpers.coffee"
     sh "find test -name '*.coffee' | SERVICES=all xargs #{$BROWSERIFY} " +
