@@ -20,15 +20,15 @@ a version of [Node.js](http://nodejs.org) installed on your machine.
 First, clone the repository from GitHub and cd into the directory:
 
 ```bash
-git clone git://github.com/aws/aws-sdk-js
-cd aws-sdk-js
+git clone git://github.com/aws/aws-sdk-js-dist-tools
+cd aws-sdk-js-dist-tools
 ```
 
 After you have cloned the repository, you need to download the dependency modules
 for both the SDK and build tool:
 
 ```bash
-npm install --production && cd dist-tools && npm install --production && cd ..
+npm install --production
 ```
 
 You should now be able to build a packaged version of the SDK.
@@ -39,7 +39,7 @@ The builder tool is found in `dist-tools/browser-builder.js`. You can run
 this script by typing:
 
 ```bash
-node dist-tools/browser-builder.js > aws-sdk.js
+node browser-builder.js > aws-sdk.js
 ```
 
 This will build to the file `aws-sdk.js`. By default this package includes
@@ -53,7 +53,7 @@ The builder tool can also compress output. To do this, set the `MINIFY`
 environment variable like so:
 
 ```bash
-MINIFY=1 node dist-tools/browser-builder.js > aws-sdk.js
+MINIFY=1 node browser-builder.js > aws-sdk.js
 ```
 
 ### Building Specific Services and API Versions
@@ -66,7 +66,7 @@ delimited by commas as arguments to the tool on the command-line. For example,
 to build only Amazon S3 and Amazon EC2, use the following command:
 
 ```bash
-node dist-tools/browser-builder.js s3,ec2 > aws-sdk-s3-ec2.js
+node browser-builder.js s3,ec2 > aws-sdk-s3-ec2.js
 ```
 
 #### Selecting API Versions
@@ -77,7 +77,7 @@ build both API versions of Amazon DynamoDB, you could use the following
 command:
 
 ```bash
-node dist-tools/browser-builder.js dynamodb-2011-12-05,dynamodb-2012-08-10
+node browser-builder.js dynamodb-2011-12-05,dynamodb-2012-08-10
 ```
 
 Available service identifiers and API versions can be found by looking at the
@@ -89,28 +89,28 @@ Finally, you can build **all services** (and API versions) by passing "all"
 as a command-line argument:
 
 ```bash
-node dist-tools/browser-builder.js all > aws-sdk-full.js
+node browser-builder.js all > aws-sdk-full.js
 ```
 
 ## The Build Server
 
-The `dist-tools` directory also comes with a utility server that can bundle
+The repository also comes with a utility server that can bundle
 and serve the SDK over HTTP. To launch the server, type:
 
 ```bash
-node dist-tools/server.js
+USE_MASTER=1 node server.js
 ```
 
 You can then access a bundled version of the SDK by hitting either:
 
 ```no-highlight
-http://localhost:8080/aws-sdk.js
+http://localhost:8080/aws-sdk-latest.js
 ```
 
 or
 
 ```no-highlight
-http://localhost:8080/aws-sdk.min.js
+http://localhost:8080/aws-sdk-latest.min.js
 ```
 
 For the uncompressed or compressed versions.
@@ -124,5 +124,5 @@ but you can also use a conventional query string syntax. An example to load
 the DynamoDB 2011-12-05 API version and latest S3 service would look like:
 
 ```no-highlight
-http://localhost:8080/aws-sdk.min.js?dynamodb=2011-12-05&s3
+http://localhost:8080/aws-sdk-latest.min.js?dynamodb=2011-12-05&s3
 ```
