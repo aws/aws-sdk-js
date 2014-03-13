@@ -18,9 +18,9 @@ def sdk_version
 end
 
 namespace :browser do
-  $BUILDER = "./dist-tools/browser-builder.js"
-  $BROWSERIFY = "./dist-tools/node_modules/.bin/browserify"
-  $BROWSERIFY_ARGS = "-i domain -t ./dist-tools/bundle-transform lib/aws.js"
+  $BUILDER = "./vendor/dist-tools/browser-builder.js"
+  $BROWSERIFY = "./vendor/dist-tools/node_modules/.bin/browserify"
+  $BROWSERIFY_ARGS = "-i domain -t ./vendor/dist-tools/bundle-transform lib/aws.js"
   $BROWSERIFY_DIST = "dist/aws-sdk-#{sdk_version}.js"
   $BROWSERIFY_DIST_LATEST = "dist/aws-sdk.js"
   $BROWSERIFY_TEST = "dist/tests.js"
@@ -41,26 +41,6 @@ namespace :browser do
     sh "MINIFY='' #{$BUILDER} all > dist/aws-sdk-all.js"
   end
 
-  task :build_server do
-    pkg_file = File.dirname(__FILE__) + '/dist-tools/package.json'
-    json = JSON.parse(File.read(pkg_file))
-    local_json = JSON.parse(File.read(File.dirname(__FILE__) + '/package.json'))
-    json['dependencies'].update(local_json['dependencies'])
-    File.open(pkg_file, 'w') do |f|
-      f.puts(JSON.pretty_generate(json, indent: '  '))
-    end
-
-    rm_f "#{json['name']}.tar.gz"
-    rm_f "#{json['name']}.zip"
-    cp_r 'dist-tools', 'server'
-    cp_r 'lib', 'server/aws-sdk'
-    Dir.chdir('server') do
-      sh "npm install"
-      sh "zip -rq ../#{json['name']}.zip *"
-      sh "tar cfz ../#{json['name']}.tgz *"
-    end
-    rm_rf 'server'
-  end
 
   desc 'Builds browser test harness and runner'
   task :test => [:dist_path, :build_all] do
