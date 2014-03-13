@@ -3,9 +3,9 @@
     "description": "AWS SDK for JavaScript",
     "version": "2.0.0-rc11",
     "author": {
-        "name":"Amazon Web Services",
-        "email":"",
-        "url":"http://aws.amazon.com/"
+      "name":"Amazon Web Services",
+      "email":"",
+      "url":"http://aws.amazon.com/"
     },
     "homepage": "https://github.com/aws/aws-sdk-js",
     "contributors": [
@@ -28,34 +28,34 @@
     },
     "main": "lib/aws.js",
     "directories":  {
-        "lib": "lib"
+      "lib": "lib"
     },
     "engines": {
-        "node": ">= 0.6.0"
+      "node": ">= 0.6.0"
     },
     "repository": {
-        "type" : "git",
-        "url": "git://github.com/aws/aws-sdk-js"
+      "type" : "git",
+      "url": "git://github.com/aws/aws-sdk-js"
     },
    "bugs" : {
-        "url" : "http://github.com/aws/aws-sdk-js/issues",
-        "mail" : ""
+      "url" : "http://github.com/aws/aws-sdk-js/issues",
+      "mail" : ""
     },
     "licenses": [{
-        "type": "Apache 2.0",
-        "url": "http://github.com/aws/aws-sdk-js/raw/master/LICENSE.txt"
+      "type": "Apache 2.0",
+      "url": "http://github.com/aws/aws-sdk-js/raw/master/LICENSE.txt"
     }],
     "keywords": [
-        "api", "amazon","aws","ec2","simpledb","s3","sqs","ses","sns","route53","rds","elasticache","cloudfront","fps",
-        "cloudformation","cloudwatch","dynamodb","iam","swf","autoscaling","cloudsearch","elb",
-        "loadbalancing","emr","mapreduce","importexport","storagegateway","workflow","ebs","vpc","beanstalk",
-        "glacier"
+      "api", "amazon","aws","ec2","simpledb","s3","sqs","ses","sns","route53","rds","elasticache","cloudfront","fps",
+      "cloudformation","cloudwatch","dynamodb","iam","swf","autoscaling","cloudsearch","elb",
+      "loadbalancing","emr","mapreduce","importexport","storagegateway","workflow","ebs","vpc","beanstalk",
+      "glacier","kinesis","cloudtrail"
     ],
     "scripts" : {
-        "test" : "npm -s run-script lint && npm -s run-script unit && ([ -f configuration ] && npm -s run-script integration || true)",
-        "unit" : "jasmine-node --noColor --coffee test",
-        "integration": "cucumber.js",
-        "lint" : "jshint lib",
-        "console": "./scripts/console"
+      "test" : "npm -s run-script lint && npm -s run-script unit && ([ -f configuration ] && npm -s run-script integration || true)",
+      "unit" : "jasmine-node --noColor --coffee test",
+      "integration": "cucumber.js",
+      "lint" : "jshint lib",
+      "console": "./scripts/console"
     }
 }
