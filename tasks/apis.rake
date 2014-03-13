@@ -10,7 +10,7 @@ def root
 end
 
 def models_path
-  File.join(root, 'apis', 'source')
+  File.join(root, 'vendor', 'apis', 'apis', 'source')
 end
 
 def service_name(api)
@@ -38,7 +38,7 @@ def add_tasks(model)
     namespace(service) do
       task(:api) do
         verbose(false) do
-          sh "#{root}/scripts/translate-api #{model}"
+          sh "#{root}/vendor/apis/scripts/translate-api #{model}"
         end
       end
 
