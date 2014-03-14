@@ -20,16 +20,16 @@ end
 namespace :browser do
   $BUILDER = "./vendor/dist-tools/browser-builder.js"
   $BROWSERIFY = "./vendor/dist-tools/node_modules/.bin/browserify"
-  $BROWSERIFY_ARGS = "-i domain -t ./vendor/dist-tools/bundle-transform lib/aws.js"
   $BROWSERIFY_DIST = "dist/aws-sdk-#{sdk_version}.js"
   $BROWSERIFY_DIST_LATEST = "dist/aws-sdk.js"
-  $BROWSERIFY_TEST = "dist/tests.js"
+  $BROWSERIFY_TEST = "test/browser/build/tests.js"
 
   task :all => [:build, :test]
 
   task :setup_dist_tools do
     unless File.directory?("vendor/dist-tools")
       sh "git clone git://github.com/aws/aws-sdk-js-dist-tools vendor/dist-tools"
+      sh "cd vendor/dist-tools && npm install"
     end
   end
 
@@ -51,13 +51,15 @@ namespace :browser do
   desc 'Builds browser test harness and runner'
   task :test => [:setup_dist_tools, :dist_path, :build_all] do
     write_configuration
+    mkdir_p "test/browser/build"
+    cp "dist/aws-sdk-all.js", "test/browser/build/aws-sdk-all.js"
     sh "coffee -c test/helpers.coffee"
     sh "find test -name '*.coffee' | SERVICES=all xargs #{$BROWSERIFY} " +
        "-t coffeeify -i domain > #{$BROWSERIFY_TEST}"
     rm_f "test/helpers.js"
     rm_f "test/configuration.js"
-    puts "Now run `testem`"
-    sh "open dist/tests.html" if ENV['OPEN']
+    sh "open test/browser/runner.html" if ENV['OPEN']
+    sh "phantomjs test/browser/runner.js"
   end
 
   task :dist_path do

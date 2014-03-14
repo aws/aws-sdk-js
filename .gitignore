@@ -7,4 +7,4 @@ vendor
 doc
 dist/appinfo.js
 dist/aws-sdk*.js
-dist/tests.js
+test/browser/build
