@@ -20,8 +20,7 @@ end
 namespace :browser do
   $BUILDER = "./vendor/dist-tools/browser-builder.js"
   $BROWSERIFY = "./vendor/dist-tools/node_modules/.bin/browserify"
-  $BROWSERIFY_DIST = "dist/aws-sdk-#{sdk_version}.js"
-  $BROWSERIFY_DIST_LATEST = "dist/aws-sdk.js"
+  $BROWSERIFY_DIST = "dist/aws-sdk.js"
   $BROWSERIFY_TEST = "test/browser/build/tests.js"
 
   task :all => [:build, :test]
@@ -40,7 +39,6 @@ namespace :browser do
 
   task :build_complete => [:setup_dist_tools, :dist_path] do
     sh "MINIFY='' #{$BUILDER} > #{$BROWSERIFY_DIST}"
-    cp $BROWSERIFY_DIST, $BROWSERIFY_DIST_LATEST
   end
 
   task :build_all => [:setup_dist_tools, :dist_path] do

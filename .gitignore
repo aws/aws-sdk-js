@@ -5,6 +5,6 @@ coverage.html
 vendor
 .yardoc
 doc
-dist/appinfo.js
-dist/aws-sdk*.js
 test/browser/build
+test/browser/sample/appinfo.js
+dist/aws-sdk-all.js
