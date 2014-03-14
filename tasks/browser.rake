@@ -29,7 +29,7 @@ namespace :browser do
   task :setup_dist_tools do
     unless File.directory?("vendor/dist-tools")
       sh "git clone git://github.com/aws/aws-sdk-js-dist-tools vendor/dist-tools"
-      sh "cd vendor/dist-tools && npm install"
+      sh "cd vendor/dist-tools && npm install --production"
     end
   end
 
