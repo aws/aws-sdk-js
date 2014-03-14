@@ -304,7 +304,8 @@ describe 'AWS.ParamValidator', ->
 
     if AWS.util.isBrowser()
       it 'accepts Blob objects', ->
-        expectValid param: new Blob
+        try blob = new Blob
+        if blob then expectValid param: blob
 
       it 'accepts ArrayBuffer objects', ->
         expectValid param: new ArrayBuffer
