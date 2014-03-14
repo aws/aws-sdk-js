@@ -1,5 +1,3 @@
-require 'bundler/setup'
-
 LOGLEVEL = ($DEBUG || ENV['DEBUG']) ? '' : '-s'
 
 task :default => 'test:all'
