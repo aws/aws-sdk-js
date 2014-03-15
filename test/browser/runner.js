@@ -46,7 +46,13 @@ page.open(system.args[1] || 'test/browser/runner.html', function(status){
       if (!items) return;
       for (; index < items.length; index++) {
         if (items[index] === 'pending') break;
-        system.stdout.write(items[index] === 'passed' ? '.' : 'X');
+        var item = '';
+        switch (items[index]) {
+          case 'skipped': item = '';  break;
+          case 'passed':  item = '.'; break;
+          case 'failed':  item = 'X'; break;
+        }
+        system.stdout.write(item);
       }
     }
 
