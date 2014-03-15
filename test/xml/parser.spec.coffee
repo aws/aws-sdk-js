@@ -34,11 +34,6 @@ describe 'AWS.XML.Parser', ->
       parse xml, rules, (data) ->
         expect(data).toEqual({count:'123'})
 
-    it 'flattens sibling elements of the same name', ->
-      xml = '<xml><foo><bar>1</bar><bar>2</bar></foo></xml>'
-      parse xml, rules, (data) ->
-        expect(data).toEqual({foo:{bar:'1'}})
-
     it 'ignores xmlns on the root element', ->
       xml = '<xml xmlns="http://foo.bar.com"><Abc>xyz</Abc></xml>'
       parse xml, rules, (data) ->
@@ -179,15 +174,12 @@ describe 'AWS.XML.Parser', ->
     </xml>
     """
 
-    it 'flattens siblings of the same name into a single element', ->
-      parse xml, {}, (data) ->
-        expect(data).toEqual({person:{name:'Unknown',alias:'John Doe'}})
-
     it 'collects sibling elements of the same name', ->
       rules =
         type: 'structure'
         members:
           person:
+            type: 'structure'
             members:
               alias:
                 name: 'aka'
@@ -552,12 +544,5 @@ describe 'AWS.XML.Parser', ->
     it 'throws an error when unable to parse the xml', ->
       xml = 'asdf'
       rules = {}
-      message = """
-      Non-whitespace before first tag.
-      Line: 0
-      Column: 1
-      Char: a
-      """
-      error = { code: 'AWS.XML.Parser.Error', message: message }
-      expect(-> new AWS.XML.Parser(rules).parse(xml)).toThrow(error)
+      expect(-> new AWS.XML.Parser(rules).parse(xml)).toThrow(AWS.XML.Parser.Error)
 
