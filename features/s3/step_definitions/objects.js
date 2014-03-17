@@ -46,7 +46,16 @@ module.exports = function () {
 
   this.Then(/^the object with the key "([^"]*)" should (not )?exist$/, function(key, shouldNotExist, next) {
     var params = { Bucket:this.sharedBucket, Key:key };
-    this.s3.waitFor(shouldNotExist ? 'objectNotExists' : 'objectExists', params, next);
+    this.eventually(next, function (retry) {
+      retry.condition = function() {
+        if (shouldNotExist) {
+          return this.error && this.error.code == 'NoSuchKey';
+        } else {
+          return !this.error;
+        }
+      };
+      this.request('s3', 'getObject', params, retry, false);
+    });
   });
 
   this.When(/^I write file "([^"]*)" to the key "([^"]*)"$/, function(filename, key, next) {

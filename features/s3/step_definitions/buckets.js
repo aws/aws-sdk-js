@@ -32,7 +32,6 @@ module.exports = function() {
   });
 
   this.Then(/^I delete the bucket$/, function(next) {
-    console.log("Delete bucket")
     this.request('s3', 'deleteBucket', {Bucket:this.bucket}, next);
   });
 
