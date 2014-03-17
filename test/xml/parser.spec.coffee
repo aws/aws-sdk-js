@@ -14,10 +14,10 @@ describe 'AWS.XML.Parser', ->
       parse xml, rules, (data) ->
         expect(data).toEqual({})
 
-    it 'returns empty elements as null', ->
+    it 'returns empty elements as empty string', ->
       xml = '<xml><element/></xml>'
       parse xml, rules, (data) ->
-        expect(data).toEqual({element:null})
+        expect(data).toEqual({element:''})
 
     it 'converts string elements to properties', ->
       xml = '<xml><foo>abc</foo><bar>xyz</bar></xml>'
