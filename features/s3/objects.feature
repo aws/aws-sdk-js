@@ -23,6 +23,11 @@ Feature: Working with Objects in S3
     Then the object with the key "hello" should exist
     And the object with the key "hello" should contain "foo"
 
+    # ContentLength
+    When I write empty buffer to the key "hello"
+    Then the object with the key "hello" should exist
+    And the object with the key "hello" should contain ""
+
     # UTF-8
     When I write "åß∂ƒ©" to the key "hello"
     Then the object with the key "hello" should exist

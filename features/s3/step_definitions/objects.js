@@ -27,6 +27,11 @@ module.exports = function () {
     this.request('s3nochecksums', 'putObject', params, next);
   });
 
+  this.When(/^I write empty buffer to the key "([^"]*)"$/, function (key, next) {
+    var params = {Bucket: this.sharedBucket, Key: key, Body: new Buffer(0)};
+    this.request('s3', 'putObject', params, next);
+  });
+
   this.Then(/^the object with the key "([^"]*)" should contain "([^"]*)"$/, function(key, contents, next) {
     this.assert.equal(this.data.Body.toString().replace("\n", ""), contents);
     next();
