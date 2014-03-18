@@ -99,8 +99,8 @@ describe 'AWS.JSON.Builder', ->
       params =
         Build:
           When: now
-      formatted = AWS.util.date.iso8601(now)
-      expect(build(rules, params)).toEqual('{"Build":{"When":"'+formatted+'"}}')
+      formatted = AWS.util.date.iso8601(now).replace(/\.\d+Z$/, '')
+      expect(build(rules, params)).toMatch('\\{"Build":\\{"When":"'+formatted+'\\.\\d+Z"\\}\\}')
 
     it 'translates integers formatted as strings', ->
       rules =
