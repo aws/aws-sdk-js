@@ -64,6 +64,13 @@ describe 'AWS.ServiceInterface.Rest', ->
           request.params = Id: 'abc'
         expect(request.httpRequest.path).toEqual('/Owner/abc')
 
+      it 'replaces param with empty string', ->
+        buildRequest ->
+          operation.http.uri = '/Owner/{Id}'
+          operation.input = {members:{Id:{location:'uri'}}}
+          request.params = Id: ''
+        expect(request.httpRequest.path).toEqual('/Owner/')
+
       it 'can replace multiple path placeholders', ->
         buildRequest ->
           operation.http.uri = '/{Id}/{Count}'

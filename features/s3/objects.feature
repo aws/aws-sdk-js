@@ -115,3 +115,8 @@ Feature: Working with Objects in S3
     And I setup the listObjects request for the bucket
     When I paginate the "listObjects" operation with limit 3
     Then I should get 4 pages
+
+  @error
+  Scenario: Error handling
+    Given I write "data" to the invalid key ""
+    Then the status code should be 400

@@ -21,6 +21,11 @@ module.exports = function () {
     this.request('s3', 'putObject', params, next);
   });
 
+  this.When(/^I write (buffer )?"([^"]*)" to the invalid key "([^"]*)"$/, function(buffer, contents, key, next) {
+    var params = {Bucket: this.sharedBucket, Key: key, Body: buffer ? new Buffer(contents) : contents};
+    this.request('s3', 'putObject', params, next, false);
+  });
+
   this.When(/^I write "([^"]*)" to the key "([^"]*)" with ContentLength (\d+)$/, function(contents, key, contentLength, next) {
     var params = {Bucket: this.sharedBucket, Key: key, Body: contents, ContentLength: parseInt(contentLength)};
     this.s3nochecksums = new this.AWS.S3({computeChecksums: false});
