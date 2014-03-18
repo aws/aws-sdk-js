@@ -380,24 +380,24 @@ describe 'AWS.EventListeners', ->
       makeRequest().send()
       expect(data).toMatch(match)
 
-  if AWS.util.isNode()
-    describe 'terminal callback error handling', ->
-      describe 'without domains', ->
-        it 'emits uncaughtException', ->
-          helpers.mockHttpResponse 200, {}, []
-          expect(-> (makeRequest -> throw 'ERROR')).toThrow('ERROR')
+  describe 'terminal callback error handling', ->
+    describe 'without domains', ->
+      it 'emits uncaughtException', ->
+        helpers.mockHttpResponse 200, {}, []
+        expect(-> (makeRequest -> throw 'ERROR')).toThrow('ERROR')
+        expect(completeHandler).toHaveBeenCalled()
+        expect(errorHandler).toHaveBeenCalled()
+        expect(retryHandler).toHaveBeenCalled()
+
+      ['error', 'complete'].forEach (evt) ->
+        it 'raise exceptions from terminal ' + evt + ' events', ->
+          count = 0
+          helpers.mockHttpResponse 500, {}, []
+          request = makeRequest()
+          expect(-> request.send(-> throw 'ERROR')).toThrow('ERROR')
           expect(completeHandler).toHaveBeenCalled()
-          expect(errorHandler).toHaveBeenCalled()
-          expect(retryHandler).toHaveBeenCalled()
 
-        ['error', 'complete'].forEach (evt) ->
-          it 'raise exceptions from terminal ' + evt + ' events', ->
-            helpers.mockHttpResponse 500, {}, []
-            request = makeRequest()
-            request.on evt, -> throw "ERROR"
-            expect(-> request.send()).toThrow('ERROR')
-            expect(completeHandler).toHaveBeenCalled()
-
+    if AWS.util.isNode()
       describe 'with domains', ->
         it 'sends error raised from complete event to a domain', ->
           result = false
