@@ -412,6 +412,17 @@ describe 'AWS.EventListeners', ->
               expect(retryHandler).not.toHaveBeenCalled()
               expect(result).toEqual("ERROR")
 
+        it 'does not leak service error into domain', ->
+          result = false
+          d = require('domain').create()
+          if d.run
+            d.on('error', (e) -> result = e)
+            d.run ->
+              helpers.mockHttpResponse 500, {}, []
+              makeRequest().send()
+              expect(completeHandler).toHaveBeenCalled()
+              expect(result).toEqual(false)
+
         it 'supports inner domains', ->
           helpers.mockHttpResponse 200, {}, []
 
