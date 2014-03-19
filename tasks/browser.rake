@@ -45,6 +45,21 @@ namespace :browser do
     sh "MINIFY='' #{$BUILDER} all > dist/aws-sdk-all.js"
   end
 
+  desc 'Caches assets to the dist-tools build server'
+  task :build_server => [:setup_dist_tools] do
+    version = ENV['VERSION'].sub(/^v/, '')
+    raise "Missing version" unless version
+    root = "vendor/dist-tools/sdks/v#{version}"
+    mkdir_p(root)
+    mkdir_p("#{root}/node_modules")
+    cp_r "lib", root
+    cp_r "node_modules/aws-sdk-apis", "#{root}/node_modules/aws-sdk-apis"
+    cp_r "node_modules/xmlbuilder", "#{root}/node_modules/xmlbuilder"
+    cp_r "node_modules/xml2js", "#{root}/node_modules/xml2js"
+    Dir.chdir("vendor/dist-tools") do
+      sh "node setup-versions v#{version}"
+    end
+  end
 
   desc 'Builds browser test harness and runner'
   task :test => [:setup_dist_tools, :dist_path, :build_all] do
