@@ -391,7 +391,6 @@ describe 'AWS.EventListeners', ->
 
       ['error', 'complete'].forEach (evt) ->
         it 'raise exceptions from terminal ' + evt + ' events', ->
-          count = 0
           helpers.mockHttpResponse 500, {}, []
           request = makeRequest()
           expect(-> request.send(-> throw 'ERROR')).toThrow('ERROR')
