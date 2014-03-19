@@ -13,13 +13,13 @@
       "Trevor Rowe <trevrowe@amazon.com>"
     ],
     "devDependencies": {
-      "repl.history": "",
-      "jasmine-node": "",
-      "semver": "",
+      "repl.history": "*",
+      "jasmine-node": "*",
+      "semver": "*",
       "coffee-script": "1.6.3",
-      "eslint": "",
-      "cucumber": "",
-      "coffeeify": ""
+      "eslint": "*",
+      "cucumber": "*",
+      "coffeeify": "*"
     },
     "dependencies": {
       "aws-sdk-apis": "2.x",
