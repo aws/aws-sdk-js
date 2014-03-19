@@ -56,7 +56,7 @@
       "unit" : "jasmine-node --noColor --coffee test",
       "browsertest": "rake browser:test",
       "integration": "cucumber.js",
-      "lint" : "eslint lib",
+      "lint" : "eslint --rulesdir eslint-rules lib",
       "console": "./scripts/console"
     }
 }
