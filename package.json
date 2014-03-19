@@ -17,7 +17,7 @@
       "jasmine-node": "",
       "semver": "",
       "coffee-script": "1.6.3",
-      "jshint": "",
+      "eslint": "",
       "cucumber": "",
       "coffeeify": ""
     },
@@ -56,7 +56,7 @@
       "unit" : "jasmine-node --noColor --coffee test",
       "browsertest": "rake browser:test",
       "integration": "cucumber.js",
-      "lint" : "jshint lib",
+      "lint" : "eslint lib",
       "console": "./scripts/console"
     }
 }
