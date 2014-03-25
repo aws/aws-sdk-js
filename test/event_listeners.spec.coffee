@@ -166,6 +166,28 @@ describe 'AWS.EventListeners', ->
       makeRequest(->)
       expect(options.timeout).toEqual(15)
 
+    it 'signs only once in normal case', ->
+      signHandler = jasmine.createSpy('sign')
+      helpers.mockHttpResponse 200, {}, ['data']
+
+      request = makeRequest()
+      request.on('sign', signHandler)
+      request.build()
+      request.signedAt = new Date(request.signedAt - 60 * 5 * 1000)
+      request.send()
+      expect(signHandler.callCount).toEqual(1)
+
+    it 'resigns if it took more than 10 min to get to send', ->
+      signHandler = jasmine.createSpy('sign')
+      helpers.mockHttpResponse 200, {}, ['data']
+
+      request = makeRequest()
+      request.on('sign', signHandler)
+      request.build()
+      request.signedAt = new Date(request.signedAt - 60 * 12 * 1000)
+      request.send()
+      expect(signHandler.callCount).toEqual(2)
+
   describe 'httpData', ->
     beforeEach ->
       helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
