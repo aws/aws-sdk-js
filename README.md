@@ -52,11 +52,12 @@ The SDK currently supports the following services:
   <tbody>
     <tr><td rowspan="2">Amazon CloudFront</td><td rowspan="2">AWS.CloudFront</td><td>2012-05-05</td></tr>
     <tr><td>2013-11-11</td></tr>
-    <tr><td>Amazon CloudSearch</td><td>AWS.CloudSearch</td><td>2011-02-01</td></tr>
+    <tr><td rowspan="2">Amazon CloudSearch</td><td rowspan="2">AWS.CloudSearch</td><td>2011-02-01</td></tr>
+    <tr><td>2013-01-01</td></tr>
     <tr><td>Amazon CloudWatch</td><td>AWS.CloudWatch</td><td>2010-08-01</td></tr>
     <tr><td rowspan="2">Amazon DynamoDB</td><td rowspan="2">AWS.DynamoDB</td><td>2011-12-05</td></tr>
     <tr><td>2012-08-10</td></tr>
-    <tr><td>Amazon Elastic Compute Cloud</td><td>AWS.EC2</td><td>2013-10-15</td></tr>
+    <tr><td>Amazon Elastic Compute Cloud</td><td>AWS.EC2</td><td>2014-02-01</td></tr>
     <tr><td>Amazon Elastic MapReduce</td><td>AWS.EMR</td><td>2009-03-31</td></tr>
     <tr><td>Amazon Elastic Transcoder</td><td>AWS.ElasticTranscoder</td><td>2012-09-25</td></tr>
     <tr><td>Amazon ElastiCache</td><td>AWS.ElastiCache</td><td>2013-06-15</td></tr>
