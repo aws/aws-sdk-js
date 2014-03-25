@@ -10,3 +10,7 @@ group :documentation do
   gem 'yard-js', '~> 0.0'
   gem 'parsejs', github: 'lsegal/parsejs'
 end
+
+group :release do
+  gem 'samus'
+end
