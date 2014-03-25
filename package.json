@@ -37,7 +37,7 @@
       "type" : "git",
       "url": "git://github.com/aws/aws-sdk-js"
     },
-   "bugs" : {
+    "bugs" : {
       "url" : "http://github.com/aws/aws-sdk-js/issues",
       "mail" : ""
     },
