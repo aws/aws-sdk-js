@@ -1,6 +1,11 @@
 module.exports = function() {
-  this.Before("@cloudsearch", function (callback) {
-    this.service = new this.AWS.CloudSearch();
+  this.Before("@cloudsearch-2011-02-01", function (callback) {
+    this.service = new this.AWS.CloudSearch({apiVersion: '2011-02-01'});
+    callback();
+  });
+
+  this.Before("@cloudsearch-2013-01-01", function (callback) {
+    this.service = new this.AWS.CloudSearch({apiVersion: '2013-01-01'});
     callback();
   });
 
