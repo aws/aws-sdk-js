@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.0.0-rc12
+// AWS SDK for JavaScript v2.0.0-rc13
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -177,7 +177,7 @@ require('./util');
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.0.0-rc12',
+  VERSION: '2.0.0-rc13',
 
 
   ServiceInterface: {},
@@ -497,6 +497,7 @@ AWS.EventListeners = {
           delete req.httpRequest.headers['X-Amz-Date'];
 
           signer.addAuthorization(credentials, date);
+          req.signedAt = date;
         } catch (e) {
           req.response.error = e;
         }
@@ -517,6 +518,8 @@ AWS.EventListeners = {
 
     addAsync('SEND', 'send', function SEND(resp, done) {
       resp.httpResponse._abortCallback = done;
+      resp.error = null;
+      resp.data = null;
 
       function callback(httpResp) {
         resp.httpResponse.stream = httpResp;
@@ -568,13 +571,23 @@ AWS.EventListeners = {
         });
       }
 
-      resp.error = null;
-      resp.data = null;
+      function executeSend() {
+        var http = AWS.HttpClient.getInstance();
+        var httpOptions = resp.request.service.config.httpOptions || {};
+        var stream = http.handleRequest(resp.request.httpRequest, httpOptions,
+                                        callback, error);
+        progress(stream);
+      }
 
-      var http = AWS.HttpClient.getInstance();
-      var httpOptions = resp.request.service.config.httpOptions || {};
-      var s = http.handleRequest(this.httpRequest, httpOptions, callback, error);
-      progress(s);
+      var timeDiff = (AWS.util.date.getDate() - this.signedAt) / 1000;
+      if (timeDiff >= 60 * 10) { // if we signed 10min ago, re-sign
+        this.emit('sign', [this], function(err) {
+          if (err) done(err);
+          else executeSend();
+        });
+      } else {
+        executeSend();
+      }
     });
 
     add('HTTP_HEADERS', 'httpHeaders',
