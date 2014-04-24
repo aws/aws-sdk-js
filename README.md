@@ -60,7 +60,7 @@ The SDK currently supports the following services:
     <tr><td>Amazon Elastic Compute Cloud</td><td>AWS.EC2</td><td>2014-02-01</td></tr>
     <tr><td>Amazon Elastic MapReduce</td><td>AWS.EMR</td><td>2009-03-31</td></tr>
     <tr><td>Amazon Elastic Transcoder</td><td>AWS.ElasticTranscoder</td><td>2012-09-25</td></tr>
-    <tr><td>Amazon ElastiCache</td><td>AWS.ElastiCache</td><td>2013-06-15</td></tr>
+    <tr><td>Amazon ElastiCache</td><td>AWS.ElastiCache</td><td>2014-03-24</td></tr>
     <tr><td>Amazon Glacier</td><td>AWS.Glacier</td><td>2012-06-01</td></tr>
     <tr><td>Amazon Kinesis</td><td>AWS.Kinesis</td><td>2013-12-02</td></tr>
     <tr><td>Amazon Redshift</td><td>AWS.Redshift</td><td>2012-12-01</td></tr>
