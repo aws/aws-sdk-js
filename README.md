@@ -12,7 +12,7 @@ Release notes can be found at http://aws.amazon.com/releasenotes/SDK/JavaScript
 To use the SDK in the browser, simply add the following script tag to your
 HTML pages:
 
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.0-rc13.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.0-rc.14.min.js"></script>
 
 ### In Node.js
 
