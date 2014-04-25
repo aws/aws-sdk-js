@@ -62,7 +62,7 @@ namespace :browser do
   end
 
   desc 'Builds browser test harness and runner'
-  task :test => [:setup_dist_tools, :dist_path, :build_all] do
+  task :test => [:node10_only, :setup_dist_tools, :dist_path, :build_all] do
     write_configuration
     mkdir_p "test/browser/build"
     cp "dist/aws-sdk-all.js", "test/browser/build/aws-sdk-all.js"
@@ -77,5 +77,14 @@ namespace :browser do
 
   task :dist_path do
     mkdir_p 'dist'
+  end
+
+  task :node10_only do
+    version = `node -v`.chomp
+    v = version.split('.')
+    if v[0] == 'v0' && v[1].to_i < 10
+      puts "Skipping task #{ARGV[0]} due to unmet Node version (#{version} < v0.10.x)."
+      exit 0
+    end
   end
 end
