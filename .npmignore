@@ -1,5 +1,5 @@
 .yard*
-.jshintrc
+.eslintrc
 .travis.yml
 apis/source
 configuration
@@ -8,6 +8,7 @@ dist
 dist-tools
 doc
 doc-src
+eslint-rules
 Gemfile
 Gemfile.lock
 features
