@@ -19,6 +19,9 @@ describe 'AWS.ServiceInterface.Query', ->
             members:
               Input:
                 members: {}
+              List:
+                type: 'list',
+                members: {}
           output:
             type: 'structure'
             members:
@@ -36,10 +39,10 @@ describe 'AWS.ServiceInterface.Query', ->
   describe 'buildRequest', ->
     stringify = (params) -> AWS.util.queryParamsToString(params)
 
-    buildRequest = (input) ->
+    buildRequest = (input, list) ->
       if input == undefined
         input = 'foo+bar: yuck/baz=~'
-      request.params = Input: input
+      request.params = Input: input, List: list
       svc.buildRequest(request)
 
     it 'should use POST method requests', ->
@@ -80,6 +83,10 @@ describe 'AWS.ServiceInterface.Query', ->
       buildRequest('')
       expect(stringify(request.httpRequest.params)).
         toMatch(/Input=($|&)/);
+
+    it 'serializes empty lists', ->
+      buildRequest(null, [])
+      expect(stringify(request.httpRequest.params)).toMatch(/[?&]List(&|$)/)
 
   describe 'extractError', ->
     extractError = (body) ->

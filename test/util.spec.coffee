@@ -61,6 +61,9 @@ describe 'AWS.util.queryParamsToString', ->
   it 'escapes list values', ->
     expect(qpts(a: ['+', '&', '*'], b: '4')).toEqual('a=%26&a=%2A&a=%2B&b=4')
 
+  it 'does not provide value if value is null', ->
+    expect(qpts(a: null, b: null)).toEqual('a&b')
+
 describe 'AWS.util.date', ->
 
   util = AWS.util.date
