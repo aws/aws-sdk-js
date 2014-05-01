@@ -5,5 +5,5 @@ def stylesheets
 end
 
 def javascripts
-  super + %w(js/underscore.js js/doctools.js js/searchtools.js js/highlight.pack.js)
+  super + %w(js/underscore.js js/sphinx/doctools.js js/sphinx/searchtools.js js/highlight.pack.js)
 end

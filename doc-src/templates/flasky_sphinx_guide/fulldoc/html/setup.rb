@@ -11,7 +11,7 @@ def generate_assets
   asset('search.html', T('layout').run(opts))
   asset('searchindex.js', search_index)
   asset('img/logo.png', file('img/logo.png'))
-  asset('css/file.png', file('img/file.png'))
+  asset('css/file.png', file('js/sphinx/file.png'))
 end
 
 def search_index
