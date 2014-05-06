@@ -154,6 +154,22 @@ describe 'AWS.util.string', ->
       expect(err.message).toMatch(/Cannot determine length of /)
       expect(err.object).toBe(object)
 
+describe 'AWS.util.ini', ->
+  describe 'parse', ->
+    it 'parses an ini file', ->
+      ini = '''
+      ; comment at the beginning of the line
+      [section1] ; comment at end of line
+      invalidline
+      key1=value1 ; another comment
+        key2 = value2;value3
+      [emptysection]
+      '''
+      map = AWS.util.ini.parse(ini)
+      expect(map.section1.key1).toEqual('value1')
+      expect(map.section1.key2).toEqual('value2;value3')
+      expect(map.emptysection).toBe(undefined)
+
 describe 'AWS.util.buffer', ->
   describe 'concat', ->
     it 'concatenates a list of buffers', ->

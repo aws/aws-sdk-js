@@ -151,6 +151,111 @@ if AWS.util.isNode()
         expect(-> new AWS.FileSystemCredentials('foo').refresh()).
           toThrow('Credentials not set in foo')
 
+  describe 'AWS.SharedIniFileCredentials', ->
+    beforeEach ->
+      delete process.env.AWS_PROFILE
+      delete process.env.HOME
+      delete process.env.HOMEPATH
+      delete process.env.USERPROFILE
+
+    describe 'constructor', ->
+      it 'throws an error if HOME/HOMEPATH/USERPROFILE are not set', ->
+        expect(-> new AWS.SharedIniFileCredentials().refresh()).
+          toThrow('Cannot load credentials, HOME path not set')
+
+      it 'uses HOMEPATH if HOME is not set', ->
+        process.env.HOMEPATH = '/homepath'
+        creds = new AWS.SharedIniFileCredentials()
+        expect(creds.filename).toEqual('/homepath/.aws/credentials')
+
+      it 'uses USERPROFILE if HOME and HOMEPATH are not set', ->
+        process.env.USERPROFILE = '/userprofile'
+        creds = new AWS.SharedIniFileCredentials()
+        expect(creds.filename).toEqual('/userprofile/.aws/credentials')
+
+      it 'can override filename as a constructor argument', ->
+        creds = new AWS.SharedIniFileCredentials(filename: '/etc/creds')
+        expect(creds.filename).toEqual('/etc/creds')
+
+    describe 'loading', ->
+      beforeEach -> process.env.HOME = '/home/user'
+
+      it 'loads credentials from ~/.aws/credentials using default profile', ->
+        mock = '''
+        [default]
+        aws_access_key_id = akid
+        aws_secret_access_key = secret
+        aws_session_token = session
+        '''
+        spyOn(AWS.util, 'readFileSync').andReturn(mock)
+
+        creds = new AWS.SharedIniFileCredentials()
+        validateCredentials(creds)
+        expect(AWS.util.readFileSync.calls[0].args[0]).toEqual('/home/user/.aws/credentials')
+
+      it 'loads the default profile if AWS_PROFILE is empty', ->
+        process.env.AWS_PROFILE = ''
+        mock = '''
+        [default]
+        aws_access_key_id = akid
+        aws_secret_access_key = secret
+        aws_session_token = session
+        '''
+        spyOn(AWS.util, 'readFileSync').andReturn(mock)
+
+        creds = new AWS.SharedIniFileCredentials()
+        validateCredentials(creds)
+
+      it 'accepts a profile name parameter', ->
+        mock = '''
+        [foo]
+        aws_access_key_id = akid
+        aws_secret_access_key = secret
+        aws_session_token = session
+        '''
+        spy = spyOn(AWS.util, 'readFileSync').andReturn(mock)
+
+        creds = new AWS.SharedIniFileCredentials(profile: 'foo')
+        validateCredentials(creds)
+
+      it 'sets profile based on ENV', ->
+        process.env.AWS_PROFILE = 'foo'
+        mock = '''
+        [foo]
+        aws_access_key_id = akid
+        aws_secret_access_key = secret
+        aws_session_token = session
+        '''
+        spy = spyOn(AWS.util, 'readFileSync').andReturn(mock)
+
+        creds = new AWS.SharedIniFileCredentials()
+        validateCredentials(creds)
+
+    describe 'refresh', ->
+      beforeEach -> process.env.HOME = '/home/user'
+
+      it 'should refresh from disk', ->
+        mock = '''
+        [default]
+        aws_access_key_id = RELOADED
+        aws_secret_access_key = RELOADED
+        aws_session_token = RELOADED
+        '''
+        spyOn(AWS.util, 'readFileSync').andReturn(mock)
+
+        creds = new AWS.SharedIniFileCredentials()
+        validateCredentials(creds, 'RELOADED', 'RELOADED', 'RELOADED')
+
+      it 'fails if credentials are not in the file', ->
+        mock = ''
+        spyOn(AWS.util, 'readFileSync').andReturn(mock)
+
+        new AWS.SharedIniFileCredentials().refresh (err) ->
+          expect(err.message).toEqual('Credentials not set in /home/user/.aws/credentials using profile default')
+
+        expect(-> new AWS.SharedIniFileCredentials().refresh()).
+          toThrow('Credentials not set in /home/user/.aws/credentials using profile default')
+
   describe 'AWS.EC2MetadataCredentials', ->
     creds = null
 
