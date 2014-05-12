@@ -173,7 +173,7 @@ class ExampleShapeVisitor
     lines << "#{klass.downcase}.#{name}(#{params_var}function(err, data) {"
     lines << "  if (err) console.log(err, err.stack); // an error occurred"
     lines << "  else     console.log(data);           // successful response"
-    lines << "}"
+    lines << "});"
     lines.join("\n")
   end
 
