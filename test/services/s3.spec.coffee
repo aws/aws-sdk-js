@@ -91,7 +91,24 @@ describe 'AWS.S3', ->
         req = build('listObjects', { Bucket: 'bucket', MaxKeys:123 })
         expect(req.path).toEqual('/?max-keys=123')
 
-      it 'ensures a single forward slash exists when querystring is present'
+    describe 'adding Content-Type', ->
+      beforeEach -> spyOn(AWS.util, 'isBrowser').andReturn(true)
+
+      it 'adds default content-type when not supplied', ->
+        req = build('putObject', Bucket: 'bucket', Key: 'key', Body: 'body')
+        expect(req.headers['Content-Type']).toEqual('application/octet-stream; charset=UTF-8')
+
+      it 'adds charset to existing content-type if not supplied', ->
+        req = build('putObject', Bucket: 'bucket', Key: 'key', Body: 'body', ContentType: 'text/html')
+        expect(req.headers['Content-Type']).toEqual('text/html; charset=UTF-8')
+
+      it 'normalized charset to uppercase', ->
+        req = build('putObject', Bucket: 'bucket', Key: 'key', Body: 'body', ContentType: 'text/html; charset=utf-8')
+        expect(req.headers['Content-Type']).toEqual('text/html; charset=UTF-8')
+
+      it 'does not add charset to non-string data', ->
+        req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer('body'), ContentType: 'image/png')
+        expect(req.headers['Content-Type']).toEqual('image/png')
 
     describe 'virtual-hosted vs path-style bucket requests', ->
 

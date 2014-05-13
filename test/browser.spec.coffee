@@ -112,6 +112,16 @@ integrationTests ->
         expect(data.Body[1]).toEqual(98)
         expect(data.Body[2]).toEqual(99)
 
+    integration 'writes with charset', (done) ->
+      key = uniqueName('test')
+      body = 'body string'
+      s3.putObject {Key: key, Body: body, ContentType: 'text/html'}, (err, data) ->
+        noError(err)
+        s3.deleteObject(Key: key).send(done)
+      s3.putObject {Key: key, Body: body, ContentType: 'text/html; charset=utf-8'}, (err, data) ->
+        noError(err)
+        s3.deleteObject(Key: key).send(done)
+
     describe 'progress events', ->
       integration 'emits http(Upload|Download)Progress events', (done) ->
         data = []
