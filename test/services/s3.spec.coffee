@@ -469,7 +469,13 @@ describe 'AWS.S3', ->
     it 'gets a signed URL for getObject using SigV4', ->
       s3 = new AWS.S3(signatureVersion: 'v4', region: undefined)
       url = s3.getSignedUrl('getObject', Bucket: 'bucket', Key: 'object')
-      expect(url).toEqual('https://bucket.s3.amazonaws.com/object?X-Amz-Date=19700101T000000Z&X-Amz-Signature=1829997c9cea443f92ce0f1ab5debfb554c5d609b9110366a819f3fc8a0b71d5')
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/object?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=311b330f9b1ee8b30213861d783d4f4a5f189250b47208421d7f207235d4c3e9')
+
+    it 'gets a signed URL for getObject using SigV4', ->
+      s3 = new AWS.S3(signatureVersion: 'v4', region: undefined)
+      s3.config.credentials.sessionToken = 'session'
+      url = s3.getSignedUrl('getObject', Bucket: 'bucket', Key: 'object')
+      expect(url).toEqual('https://bucket.s3.amazonaws.com/object?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=900&X-Amz-Security-Token=session&X-Amz-SignedHeaders=host&X-Amz-Signature=05ae40d2d22c93549a1de0686232ff56baf556876ec497d0d8349431f98b8dfe')
 
     it 'errors when expiry time is greater than a week out on SigV4', ->
       err = null
