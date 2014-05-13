@@ -387,11 +387,13 @@ describe 'AWS.WebIdentityCredentials', ->
   mockSTS = (expireTime) ->
     spyOn(creds.service, 'assumeRoleWithWebIdentity').andCallFake (params, cb) ->
      expect(params).toEqual(RoleArn: 'arn', WebIdentityToken: 'token', RoleSessionName: 'web-identity')
-     cb null, Credentials:
-       AccessKeyId: 'KEY'
-       SecretAccessKey: 'SECRET'
-       SessionToken: 'TOKEN'
-       Expiration: expireTime
+     cb null,
+       Credentials:
+         AccessKeyId: 'KEY'
+         SecretAccessKey: 'SECRET'
+         SessionToken: 'TOKEN'
+         Expiration: expireTime
+       OtherProperty: true
 
   describe 'refresh', ->
     it 'loads federated credentials from STS', ->
@@ -401,6 +403,7 @@ describe 'AWS.WebIdentityCredentials', ->
       expect(creds.secretAccessKey).toEqual('SECRET')
       expect(creds.sessionToken).toEqual('TOKEN')
       expect(creds.needsRefresh()).toEqual(false)
+      expect(creds.data.OtherProperty).toEqual(true)
 
     it 'does try to load creds second time if service request failed', ->
       spy = spyOn(creds.service, 'assumeRoleWithWebIdentity').andCallFake (params, cb) ->
