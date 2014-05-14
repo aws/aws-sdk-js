@@ -1188,3 +1188,5 @@ div.body ul.search li {
     background-image: linear-gradient(#0085cf, #004379);
 }
 .buttons a:last-child { margin-right: 0; }
+
+#capabilities-banner { margin-bottom: 12px; font-weight: bold; padding: 12px; }
