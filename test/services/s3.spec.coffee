@@ -459,6 +459,11 @@ describe 'AWS.S3', ->
       url = s3.getSignedUrl('getObject', Key: 'key', Expires: 60)
       expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=60&Signature=ZJKBOuhI99B2OZdkGSOmfG86BOI%3D')
 
+    it 'generates the right URL with a custom endpoint', ->
+      s3 = new AWS.S3(endpoint: 'https://foo.bar.baz:555/prefix', params: Bucket: 'bucket')
+      url = s3.getSignedUrl('getObject', Key: 'key', Expires: 60)
+      expect(url).toEqual('https://bucket.foo.bar.baz:555/prefix/key?AWSAccessKeyId=akid&Expires=60&Signature=lv0VuR7s4YW6v9NBHmaCoP6%2BmPk%3D')
+
     it 'gets a signed URL with callback', ->
       url = null
       runs ->
