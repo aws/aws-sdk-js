@@ -500,13 +500,14 @@ describe 'AWS.S3', ->
       expect(url).toEqual('https://bucket.s3.amazonaws.com/object?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=900&X-Amz-Security-Token=session&X-Amz-SignedHeaders=host&X-Amz-Signature=05ae40d2d22c93549a1de0686232ff56baf556876ec497d0d8349431f98b8dfe')
 
     it 'errors when expiry time is greater than a week out on SigV4', ->
-      err = null
+      err = null; data = null
       s3 = new AWS.S3(signatureVersion: 'v4', region: undefined)
       params = Bucket: 'bucket', Key: 'object', Expires: 60 * 60 * 24 * 7 + 120
-      error = 'getSignedUrl() does not support expiry time greater than a week with SigV4 signing.'
+      error = 'Presigning does not support expiry time greater than a week with SigV4 signing.'
       runs ->
-        s3.getSignedUrl 'getObject', params, (e, d) -> err = e
-      waitsFor -> err
+        s3.getSignedUrl 'getObject', params, (e, d) -> data = d; err = e
+      waitsFor -> err || data
       runs ->
+        expect(err).not.toEqual(null)
         expect(err.message).toEqual(error)
         #expect(-> s3.getSignedUrl('getObject', params)).toThrow(error) # sync mode
