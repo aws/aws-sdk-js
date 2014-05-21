@@ -12,11 +12,13 @@ service name in the list below).
 
 The 5 services that come with the default hosted package of the SDK are:
 
-* [AWS.DynamoDB](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/DynamoDB.html)
-* [AWS.S3](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/S3.html)
-* [AWS.SNS](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/SNS.html)
-* [AWS.SQS](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/SQS.html)
-* [AWS.STS](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/STS.html)
+* [AWS.DynamoDB](/AWSJavaScriptSDK/latest/frames.html#!AWS/DynamoDB.html)
+* [AWS.S3](/AWSJavaScriptSDK/latest/frames.html#!AWS/S3.html)
+* [AWS.SNS](/AWSJavaScriptSDK/latest/frames.html#!AWS/SNS.html)
+* [AWS.SQS](/AWSJavaScriptSDK/latest/frames.html#!AWS/SQS.html)
+* [AWS.Kinesis](/AWSJavaScriptSDK/latest/frames.html#!AWS/Kinesis.html)
+* [AWS.CloudWatch](/AWSJavaScriptSDK/latest/frames.html#!AWS/CloudWatch.html)
+* [AWS.STS](/AWSJavaScriptSDK/latest/frames.html#!AWS/STS.html)
 
 <div class="clear"></div>
 
