@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.0.0-rc.17
+// AWS SDK for JavaScript v2.0.0-rc.18
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -8,7 +8,7 @@ require('./xml/browser_parser');
 
 require('./http/xhr');
 
-},{"./core":3,"./http/xhr":11,"./xml/browser_parser":32}],2:[function(require,module,exports){
+},{"./core":3,"./http/xhr":11,"./xml/browser_parser":33}],2:[function(require,module,exports){
 var AWS = require('./core');
 require('./credentials');
 require('./credentials/credential_provider_chain');
@@ -177,7 +177,7 @@ require('./util');
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.0.0-rc.17',
+  VERSION: '2.0.0-rc.18',
 
 
   ServiceInterface: {},
@@ -213,7 +213,7 @@ AWS.events = new AWS.SequentialExecutor();
 
 if (typeof window !== 'undefined') window.AWS = AWS;
 
-},{"./config":2,"./credentials":4,"./credentials/credential_provider_chain":5,"./credentials/saml_credentials":6,"./credentials/temporary_credentials":7,"./credentials/web_identity_credentials":8,"./event_listeners":9,"./http":10,"./param_validator":13,"./request":14,"./resource_waiter":15,"./response":16,"./sequential_executor":17,"./service":18,"./signers/request_signer":24,"./util":31}],4:[function(require,module,exports){
+},{"./config":2,"./credentials":4,"./credentials/credential_provider_chain":5,"./credentials/saml_credentials":6,"./credentials/temporary_credentials":7,"./credentials/web_identity_credentials":8,"./event_listeners":9,"./http":10,"./param_validator":13,"./request":14,"./resource_waiter":15,"./response":16,"./sequential_executor":17,"./service":18,"./signers/request_signer":25,"./util":32}],4:[function(require,module,exports){
 var AWS = require('./core');
 
 
@@ -758,7 +758,7 @@ AWS.EventListeners = {
   })
 };
 
-},{"./core":3,"./sequential_executor":17,"./service_interface/json":19,"./service_interface/query":20,"./service_interface/rest":21,"./service_interface/rest_json":22,"./service_interface/rest_xml":23,"util":56}],10:[function(require,module,exports){
+},{"./core":3,"./sequential_executor":17,"./service_interface/json":19,"./service_interface/query":20,"./service_interface/rest":21,"./service_interface/rest_json":22,"./service_interface/rest_xml":23,"util":57}],10:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 
@@ -955,7 +955,7 @@ AWS.HttpClient.prototype = AWS.XHRClient.prototype;
 
 AWS.HttpClient.streamsApiVersion = 1;
 
-},{"../core":3,"../http":10,"events":48}],12:[function(require,module,exports){
+},{"../core":3,"../http":10,"events":49}],12:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -1474,13 +1474,48 @@ AWS.Request = inherit({
       default:
         return [this.response];
     }
+  },
+
+
+  presign: function presign(expires, callback) {
+    if (!callback && typeof expires === 'function') {
+      callback = expires;
+      expires = null;
+    }
+    return new AWS.Signers.Presign().sign(this.toGet(), expires, callback);
+  },
+
+
+  toUnauthenticated: function toUnauthenticated() {
+    this.removeListener('validate', AWS.EventListeners.Core.VALIDATE_CREDENTIALS);
+    this.removeListener('sign', AWS.EventListeners.Core.SIGN);
+    return this.toGet();
+  },
+
+
+  toGet: function toGet() {
+    if (this.service.api.format === 'query') {
+      this.removeListener('build', this.buildAsGet);
+      this.addListener('build', this.buildAsGet);
+    }
+    return this;
+  },
+
+
+  buildAsGet: function buildAsGet(request) {
+    request.httpRequest.method = 'GET';
+    request.httpRequest.path = '/?' + request.httpRequest.body;
+    request.httpRequest.body = '';
+
+    delete request.httpRequest.headers['Content-Length'];
+    delete request.httpRequest.headers['Content-Type'];
   }
 });
 
 AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
 
 }).call(this,{browser:true})
-},{"./core":3,"./state_machine":30}],15:[function(require,module,exports){
+},{"./core":3,"./state_machine":31}],15:[function(require,module,exports){
 
 
 var AWS = require('./core');
@@ -2031,20 +2066,7 @@ AWS.Service = inherit({
       params = {};
     }
 
-    var request = this.makeRequest(operation, params);
-    request.removeListener('validate', AWS.EventListeners.Core.VALIDATE_CREDENTIALS);
-    request.removeListener('sign', AWS.EventListeners.Core.SIGN);
-    if (this.api.format === 'query') { // query services turn into GET requests
-      request.addListener('build', function convertToGET(request) {
-        request.httpRequest.method = 'GET';
-        request.httpRequest.path = '/?' + request.httpRequest.body;
-        request.httpRequest.body = '';
-
-        delete request.httpRequest.headers['Content-Length'];
-        delete request.httpRequest.headers['Content-Type'];
-      });
-    }
-
+    var request = this.makeRequest(operation, params).toUnauthenticated();
     return callback ? request.send(callback) : request;
   },
 
@@ -2297,7 +2319,7 @@ AWS.util.update(AWS.Service, {
   }
 });
 
-},{"./core":3,"aws-sdk-apis/lib/translator":34}],19:[function(require,module,exports){
+},{"./core":3,"aws-sdk-apis/lib/translator":35}],19:[function(require,module,exports){
 var AWS = require('../core');
 require('../json/builder');
 
@@ -2791,7 +2813,104 @@ AWS.ServiceInterface.RestXml = {
   }
 };
 
-},{"../core":3,"../xml/builder":33,"./rest":21}],24:[function(require,module,exports){
+},{"../core":3,"../xml/builder":34,"./rest":21}],24:[function(require,module,exports){
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+
+var expiresHeader = 'presigned-expires';
+
+
+function signedUrlBuilder(request) {
+  var expires = request.httpRequest.headers[expiresHeader];
+
+  delete request.httpRequest.headers['User-Agent'];
+  delete request.httpRequest.headers['X-Amz-User-Agent'];
+
+  if (request.service.getSignerClass() === AWS.Signers.V4) {
+    if (expires > 604800) { // one week expiry is invalid
+      var message = 'Presigning does not support expiry time greater ' +
+                    'than a week with SigV4 signing.';
+      throw AWS.util.error(new Error(), {
+        code: 'InvalidExpiryTime', message: message, retryable: false
+      });
+    }
+    request.httpRequest.headers[expiresHeader] = expires;
+  } else if (request.service.getSignerClass() === AWS.Signers.S3) {
+    request.httpRequest.headers[expiresHeader] = parseInt(
+      AWS.util.date.unixTimestamp() + expires, 10).toString();
+  } else {
+    throw AWS.util.error(new Error(), {
+      message: 'Presigning only supports S3 or SigV4 signing.',
+      code: 'UnsupportedSigner', retryable: false
+    });
+  }
+}
+
+
+function signedUrlSigner(request) {
+  var endpoint = request.httpRequest.endpoint;
+  var parsedUrl = AWS.util.urlParse(request.httpRequest.path);
+  var queryParams = {};
+
+  if (parsedUrl.search) {
+    queryParams = AWS.util.queryStringParse(parsedUrl.search.substr(1));
+  }
+
+  AWS.util.each(request.httpRequest.headers, function (key, value) {
+    if (key === expiresHeader) key = 'Expires';
+    queryParams[key] = value;
+  });
+  delete request.httpRequest.headers[expiresHeader];
+
+  var auth = queryParams['Authorization'].split(' ');
+  if (auth[0] === 'AWS') {
+    auth = auth[1].split(':');
+    queryParams['AWSAccessKeyId'] = auth[0];
+    queryParams['Signature'] = auth[1];
+  } else if (auth[0] === 'AWS4-HMAC-SHA256') { // SigV4 signing
+    auth.shift();
+    var rest = auth.join(' ');
+    var signature = rest.match(/Signature=(.*?)(?:,|\s|\r?\n|$)/)[1];
+    queryParams['X-Amz-Signature'] = signature;
+    delete queryParams['Expires'];
+  }
+  delete queryParams['Authorization'];
+  delete queryParams['Host'];
+
+  endpoint.pathname = parsedUrl.pathname;
+  endpoint.search = AWS.util.queryParamsToString(queryParams);
+}
+
+
+AWS.Signers.Presign = inherit({
+
+  sign: function sign(request, expireTime, callback) {
+    request.httpRequest.headers[expiresHeader] = expireTime || 3600;
+    request.on('build', signedUrlBuilder);
+    request.on('sign', signedUrlSigner);
+    request.removeListener('afterBuild',
+      AWS.EventListeners.Core.SET_CONTENT_LENGTH);
+
+    request.emit('beforePresign', [request]);
+
+    if (callback) {
+      request.build(function() {
+        if (this.response.error) callback(this.response.error);
+        else {
+          callback(null, AWS.util.urlFormat(request.httpRequest.endpoint));
+        }
+      });
+    } else {
+      request.build();
+      return AWS.util.urlFormat(request.httpRequest.endpoint);
+    }
+  }
+});
+
+module.exports = AWS.Signers.Presign;
+
+},{"../core":3}],25:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -2818,8 +2937,9 @@ require('./v3');
 require('./v3https');
 require('./v4');
 require('./s3');
+require('./presign');
 
-},{"../core":3,"./s3":25,"./v2":26,"./v3":27,"./v3https":28,"./v4":29}],25:[function(require,module,exports){
+},{"../core":3,"./presign":24,"./s3":26,"./v2":27,"./v3":28,"./v3https":29,"./v4":30}],26:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -2975,7 +3095,7 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.S3;
 
-},{"../core":3}],26:[function(require,module,exports){
+},{"../core":3}],27:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -3020,7 +3140,7 @@ AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V2;
 
-},{"../core":3}],27:[function(require,module,exports){
+},{"../core":3}],28:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -3094,7 +3214,7 @@ AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V3;
 
-},{"../core":3}],28:[function(require,module,exports){
+},{"../core":3}],29:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -3116,7 +3236,7 @@ AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
 
 module.exports = AWS.Signers.V3Https;
 
-},{"../core":3,"./v3":27}],29:[function(require,module,exports){
+},{"../core":3,"./v3":28}],30:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -3182,6 +3302,18 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
     if (credentials.sessionToken) {
       qs['X-Amz-Security-Token'] = credentials.sessionToken;
     }
+
+    if (this.request.headers['Content-Type']) {
+      qs['Content-Type'] = this.request.headers['Content-Type'];
+    }
+
+    AWS.util.each.call(this, this.request.headers, function(key, value) {
+      if (key === expiresHeader) return;
+      if (this.isSignableHeader(key) &&
+          key.toLowerCase().indexOf('x-amz-') === 0) {
+        qs[key] = value;
+      }
+    });
 
     var sep = this.request.path.indexOf('?') >= 0 ? '&' : '?';
     this.request.path += sep + AWS.util.queryParamsToString(qs);
@@ -3285,7 +3417,7 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
   },
 
   hexEncodedBodyHash: function hexEncodedBodyHash() {
-    if (this.isPresigned()) {
+    if (this.isPresigned() && this.serviceName === 's3') {
       return 'UNSIGNED-PAYLOAD';
     } else if (this.request.headers['X-Amz-Content-Sha256']) {
       return this.request.headers['X-Amz-Content-Sha256'];
@@ -3309,7 +3441,7 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V4;
 
-},{"../core":3}],30:[function(require,module,exports){
+},{"../core":3}],31:[function(require,module,exports){
 function AcceptorStateMachine(states, state) {
   this.currentState = state || null;
   this.states = states || {};
@@ -3327,13 +3459,15 @@ AcceptorStateMachine.prototype.runTo = function runTo(finalState, done, bindObje
     if (err) {
       if (bindObject.logger) bindObject.logger.log(self.currentState, '->', state.fail, err);
       if (state.fail) self.currentState = state.fail;
-      else return done ? done(err) : null;
+      else return done ? done.call(bindObject, err) : null;
     } else {
       if (bindObject.logger) bindObject.logger.log(self.currentState, '->', state.accept);
       if (state.accept) self.currentState = state.accept;
-      else return done ? done() : null;
+      else return done ? done.call(bindObject) : null;
     }
-    if (self.currentState === finalState) return done ? done(err) : null;
+    if (self.currentState === finalState) {
+      return done ? done.call(bindObject, err) : null;
+    }
 
     self.runTo(finalState, done, bindObject, err);
   });
@@ -3353,7 +3487,7 @@ AcceptorStateMachine.prototype.addState = function addState(name, acceptState, f
 
 module.exports = AcceptorStateMachine;
 
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 (function (process){
 
 
@@ -3410,6 +3544,10 @@ AWS.util = {
 
   urlFormat: function urlFormat(url) {
     return require('url').format(url);
+  },
+
+  queryStringParse: function queryStringParse(qs) {
+    return require('querystring').parse(qs);
   },
 
   queryParamsToString: function queryParamsToString(params) {
@@ -3889,7 +4027,7 @@ AWS.util = {
 module.exports = AWS.util;
 
 }).call(this,{browser:true})
-},{"./core":3,"buffer":39,"crypto":43,"fs":38,"url":54}],32:[function(require,module,exports){
+},{"./core":3,"buffer":40,"crypto":44,"fs":39,"querystring":54,"url":55}],33:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -4057,7 +4195,7 @@ AWS.XML.Parser = inherit({
   }
 });
 
-},{"../core":3}],33:[function(require,module,exports){
+},{"../core":3}],34:[function(require,module,exports){
 var AWS = require('../core');
 var builder = require('xmlbuilder');
 var inherit = AWS.util.inherit;
@@ -4136,7 +4274,7 @@ AWS.XML.Builder = inherit({
 
 });
 
-},{"../core":3,"xmlbuilder":37}],34:[function(require,module,exports){
+},{"../core":3,"xmlbuilder":38}],35:[function(require,module,exports){
 
 
 
@@ -4513,7 +4651,7 @@ function Translator(api, options) {
 
 module.exports = Translator;
 
-},{"buffer":39}],35:[function(require,module,exports){
+},{"buffer":40}],36:[function(require,module,exports){
 (function() {
   var XMLBuilder, XMLFragment;
 
@@ -4633,7 +4771,7 @@ module.exports = Translator;
 
 }).call(this);
 
-},{"./XMLFragment":36}],36:[function(require,module,exports){
+},{"./XMLFragment":37}],37:[function(require,module,exports){
 (function() {
   var XMLFragment,
     __hasProp = {}.hasOwnProperty;
@@ -5056,7 +5194,7 @@ module.exports = Translator;
 
 }).call(this);
 
-},{}],37:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 (function() {
   var XMLBuilder;
 
@@ -5072,9 +5210,9 @@ module.exports = Translator;
 
 }).call(this);
 
-},{"./XMLBuilder":35}],38:[function(require,module,exports){
+},{"./XMLBuilder":36}],39:[function(require,module,exports){
 
-},{}],39:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 
 
 var base64 = require('base64-js')
@@ -6116,7 +6254,7 @@ function assert (test, message) {
   if (!test) throw new Error(message || 'Failed assertion')
 }
 
-},{"base64-js":40,"ieee754":41}],40:[function(require,module,exports){
+},{"base64-js":41,"ieee754":42}],41:[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -6230,7 +6368,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	module.exports.fromByteArray = uint8ToBase64
 }())
 
-},{}],41:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 exports.read = function(buffer, offset, isLE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -6316,7 +6454,7 @@ exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128;
 };
 
-},{}],42:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 var Buffer = require('buffer').Buffer;
 var intSize = 4;
 var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
@@ -6353,7 +6491,7 @@ function hash(buf, fn, hashSize, bigEndian) {
 
 module.exports = { hash: hash };
 
-},{"buffer":39}],43:[function(require,module,exports){
+},{"buffer":40}],44:[function(require,module,exports){
 var Buffer = require('buffer').Buffer
 var sha = require('./sha')
 var sha256 = require('./sha256')
@@ -6451,7 +6589,7 @@ each(['createCredentials'
   }
 })
 
-},{"./md5":44,"./rng":45,"./sha":46,"./sha256":47,"buffer":39}],44:[function(require,module,exports){
+},{"./md5":45,"./rng":46,"./sha":47,"./sha256":48,"buffer":40}],45:[function(require,module,exports){
 
 
 var helpers = require('./helpers');
@@ -6598,7 +6736,7 @@ module.exports = function md5(buf) {
   return helpers.hash(buf, core_md5, 16);
 };
 
-},{"./helpers":42}],45:[function(require,module,exports){
+},{"./helpers":43}],46:[function(require,module,exports){
 (function() {
   var _global = this;
 
@@ -6628,7 +6766,7 @@ module.exports = function md5(buf) {
 
 }())
 
-},{}],46:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 
 
 var helpers = require('./helpers');
@@ -6712,7 +6850,7 @@ module.exports = function sha1(buf) {
   return helpers.hash(buf, core_sha1, 20, true);
 };
 
-},{"./helpers":42}],47:[function(require,module,exports){
+},{"./helpers":43}],48:[function(require,module,exports){
 
 
 
@@ -6787,7 +6925,7 @@ module.exports = function sha256(buf) {
   return helpers.hash(buf, core_sha256, 32, true);
 };
 
-},{"./helpers":42}],48:[function(require,module,exports){
+},{"./helpers":43}],49:[function(require,module,exports){
 
 function EventEmitter() {
   this._events = this._events || {};
@@ -7051,7 +7189,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],49:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   module.exports = function inherits(ctor, superCtor) {
     ctor.super_ = superCtor
@@ -7074,7 +7212,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],50:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 (function (global){
 
 ;(function(root) {
@@ -7447,7 +7585,7 @@ if (typeof Object.create === 'function') {
 }(this));
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],51:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 
 'use strict';
 
@@ -7509,7 +7647,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],52:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 
 'use strict';
 
@@ -7576,13 +7714,13 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],53:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":51,"./encode":52}],54:[function(require,module,exports){
+},{"./decode":52,"./encode":53}],55:[function(require,module,exports){
 
 (function () {
   "use strict";
@@ -8089,14 +8227,14 @@ function parseHost(host) {
 
 }());
 
-},{"punycode":50,"querystring":53}],55:[function(require,module,exports){
+},{"punycode":51,"querystring":54}],56:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],56:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 (function (process,global){
 
 var formatRegExp = /%[sdj%]/g;
@@ -8616,7 +8754,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,{browser:true},typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":55,"inherits":49}]},{},[1]);window.AWS.CloudWatch = window.AWS.Service.defineService('cloudwatch');
+},{"./support/isBuffer":56,"inherits":50}]},{},[1]);window.AWS.CloudWatch = window.AWS.Service.defineService('cloudwatch');
 
 window.AWS.Service.defineServiceApi(window.AWS.CloudWatch, "2010-08-01", {"format":"query","apiVersion":"2010-08-01","endpointPrefix":"monitoring","resultWrapped":true,"serviceAbbreviation":"CloudWatch","serviceFullName":"Amazon CloudWatch","signatureVersion":"v4","timestampFormat":"iso8601","operations":{"deleteAlarms":{"name":"DeleteAlarms","input":{"type":"structure","members":{"AlarmNames":{"type":"list","members":{},"required":true}}},"output":{"type":"structure","members":{}}},"describeAlarmHistory":{"name":"DescribeAlarmHistory","input":{"type":"structure","members":{"AlarmName":{},"HistoryItemType":{},"StartDate":{"type":"timestamp"},"EndDate":{"type":"timestamp"},"MaxRecords":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"AlarmHistoryItems":{"type":"list","members":{"type":"structure","members":{"AlarmName":{},"Timestamp":{"type":"timestamp"},"HistoryItemType":{},"HistorySummary":{},"HistoryData":{}}}},"NextToken":{}}}},"describeAlarms":{"name":"DescribeAlarms","input":{"type":"structure","members":{"AlarmNames":{"type":"list","members":{}},"AlarmNamePrefix":{},"StateValue":{},"ActionPrefix":{},"MaxRecords":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"MetricAlarms":{"type":"list","members":{"type":"structure","members":{"AlarmName":{},"AlarmArn":{},"AlarmDescription":{},"AlarmConfigurationUpdatedTimestamp":{"type":"timestamp"},"ActionsEnabled":{"type":"boolean"},"OKActions":{"type":"list","members":{}},"AlarmActions":{"type":"list","members":{}},"InsufficientDataActions":{"type":"list","members":{}},"StateValue":{},"StateReason":{},"StateReasonData":{},"StateUpdatedTimestamp":{"type":"timestamp"},"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"type":"list","members":{"type":"structure","members":{"Name":{},"Value":{}}}},"Period":{"type":"integer"},"Unit":{},"EvaluationPeriods":{"type":"integer"},"Threshold":{"type":"float"},"ComparisonOperator":{}}}},"NextToken":{}}}},"describeAlarmsForMetric":{"name":"DescribeAlarmsForMetric","input":{"type":"structure","members":{"MetricName":{"required":true},"Namespace":{"required":true},"Statistic":{},"Dimensions":{"type":"list","members":{"type":"structure","members":{"Name":{"required":true},"Value":{"required":true}},"order":["Name","Value"]}},"Period":{"type":"integer"},"Unit":{}}},"output":{"type":"structure","members":{"MetricAlarms":{"type":"list","members":{"type":"structure","members":{"AlarmName":{},"AlarmArn":{},"AlarmDescription":{},"AlarmConfigurationUpdatedTimestamp":{"type":"timestamp"},"ActionsEnabled":{"type":"boolean"},"OKActions":{"type":"list","members":{}},"AlarmActions":{"type":"list","members":{}},"InsufficientDataActions":{"type":"list","members":{}},"StateValue":{},"StateReason":{},"StateReasonData":{},"StateUpdatedTimestamp":{"type":"timestamp"},"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"type":"list","members":{"type":"structure","members":{"Name":{},"Value":{}}}},"Period":{"type":"integer"},"Unit":{},"EvaluationPeriods":{"type":"integer"},"Threshold":{"type":"float"},"ComparisonOperator":{}}}}}}},"disableAlarmActions":{"name":"DisableAlarmActions","input":{"type":"structure","members":{"AlarmNames":{"type":"list","members":{},"required":true}}},"output":{"type":"structure","members":{}}},"enableAlarmActions":{"name":"EnableAlarmActions","input":{"type":"structure","members":{"AlarmNames":{"type":"list","members":{},"required":true}}},"output":{"type":"structure","members":{}}},"getMetricStatistics":{"name":"GetMetricStatistics","input":{"type":"structure","members":{"Namespace":{"required":true},"MetricName":{"required":true},"Dimensions":{"type":"list","members":{"type":"structure","members":{"Name":{"required":true},"Value":{"required":true}},"order":["Name","Value"]}},"StartTime":{"type":"timestamp","required":true},"EndTime":{"type":"timestamp","required":true},"Period":{"type":"integer","required":true},"Statistics":{"type":"list","members":{},"required":true},"Unit":{}}},"output":{"type":"structure","members":{"Label":{},"Datapoints":{"type":"list","members":{"type":"structure","members":{"Timestamp":{"type":"timestamp"},"SampleCount":{"type":"float"},"Average":{"type":"float"},"Sum":{"type":"float"},"Minimum":{"type":"float"},"Maximum":{"type":"float"},"Unit":{}}}}}}},"listMetrics":{"name":"ListMetrics","input":{"type":"structure","members":{"Namespace":{},"MetricName":{},"Dimensions":{"type":"list","members":{"type":"structure","members":{"Name":{"required":true},"Value":{}}}},"NextToken":{}}},"output":{"type":"structure","members":{"Metrics":{"type":"list","members":{"type":"structure","members":{"Namespace":{},"MetricName":{},"Dimensions":{"type":"list","members":{"type":"structure","members":{"Name":{},"Value":{}}}}}}},"NextToken":{}}}},"putMetricAlarm":{"name":"PutMetricAlarm","input":{"type":"structure","members":{"AlarmName":{"required":true},"AlarmDescription":{},"ActionsEnabled":{"type":"boolean"},"OKActions":{"type":"list","members":{}},"AlarmActions":{"type":"list","members":{}},"InsufficientDataActions":{"type":"list","members":{}},"MetricName":{"required":true},"Namespace":{"required":true},"Statistic":{"required":true},"Dimensions":{"type":"list","members":{"type":"structure","members":{"Name":{"required":true},"Value":{"required":true}},"order":["Name","Value"]}},"Period":{"type":"integer","required":true},"Unit":{},"EvaluationPeriods":{"type":"integer","required":true},"Threshold":{"type":"float","required":true},"ComparisonOperator":{"required":true}}},"output":{"type":"structure","members":{}}},"putMetricData":{"name":"PutMetricData","input":{"type":"structure","members":{"Namespace":{"required":true},"MetricData":{"type":"list","members":{"type":"structure","members":{"MetricName":{"required":true},"Dimensions":{"type":"list","members":{"type":"structure","members":{"Name":{"required":true},"Value":{"required":true}},"order":["Name","Value"]}},"Timestamp":{"type":"timestamp"},"Value":{"type":"float"},"StatisticValues":{"type":"structure","members":{"SampleCount":{"type":"float","required":true},"Sum":{"type":"float","required":true},"Minimum":{"type":"float","required":true},"Maximum":{"type":"float","required":true}}},"Unit":{}}},"required":true}}},"output":{"type":"structure","members":{}}},"setAlarmState":{"name":"SetAlarmState","input":{"type":"structure","members":{"AlarmName":{"required":true},"StateValue":{"required":true},"StateReason":{"required":true},"StateReasonData":{}}},"output":{"type":"structure","members":{}}}},"pagination":{"describeAlarmHistory":{"inputToken":"NextToken","outputToken":"NextToken","limitKey":"MaxRecords","resultKey":"AlarmHistoryItems"},"describeAlarms":{"inputToken":"NextToken","outputToken":"NextToken","limitKey":"MaxRecords","resultKey":"MetricAlarms"},"describeAlarmsForMetric":{"resultKey":"MetricAlarms"},"listMetrics":{"inputToken":"NextToken","outputToken":"NextToken","resultKey":"Metrics"}}});
 window.AWS.DynamoDB = window.AWS.Service.defineService('dynamodb');
@@ -8689,6 +8827,7 @@ window.AWS.util.update(window.AWS.S3.prototype, {
       window.AWS.EventListeners.Core.VALIDATE_REGION);
     request.addListener('extractError', this.extractError);
     request.addListener('extractData', this.extractData);
+    request.addListener('beforePresign', this.prepareSignedUrl);
   },
 
 
@@ -8887,78 +9026,15 @@ window.AWS.util.update(window.AWS.S3.prototype, {
     var expires = params.Expires || 900;
     delete params.Expires; // we can't validate this
     var request = this.makeRequest(operation, params);
+    return request.presign(expires, callback);
+  },
 
-    var expiresHeader = 'presigned-expires';
 
-    function signedUrlBuilder() {
-      delete request.httpRequest.headers['User-Agent'];
-      delete request.httpRequest.headers['X-Amz-User-Agent'];
-
-      if (request.service.getSignerClass() === window.AWS.Signers.V4) {
-        if (expires > 604800) { // one week expiry is invalid
-          var message = 'getSignedUrl() does not support expiry time greater ' +
-                        'than a week with SigV4 signing.';
-          throw window.AWS.util.error(new Error(), {
-            code: 'InvalidExpiryTime', message: message, retryable: false
-          });
-        }
-        request.httpRequest.headers[expiresHeader] = expires;
-      } else {
-        request.httpRequest.headers[expiresHeader] = parseInt(
-          window.AWS.util.date.unixTimestamp() + expires, 10).toString();
-      }
-    }
-
-    function signedUrlSigner() {
-      var queryParams = {};
-
-      window.AWS.util.each(request.httpRequest.headers, function (key, value) {
-        if (key === expiresHeader) key = 'Expires';
-        queryParams[key] = value;
-      });
-      delete request.httpRequest.headers[expiresHeader];
-
-      var auth = queryParams['Authorization'].split(' ');
-      if (auth[0] === 'AWS') {
-        auth = auth[1].split(':');
-        queryParams['AWSAccessKeyId'] = auth[0];
-        queryParams['Signature'] = auth[1];
-      } else if (auth[0] === 'AWS4-HMAC-SHA256') { // SigV4 signing
-        auth.shift();
-        var rest = auth.join(' ');
-        var signature = rest.match(/Signature=(.*?)(?:,|\s|\r?\n|$)/)[1];
-        queryParams['X-Amz-Signature'] = signature;
-        delete queryParams['Expires'];
-      }
-      delete queryParams['Authorization'];
-      delete queryParams['Host'];
-
-      var endpoint = request.httpRequest.endpoint;
-      var parsedUrl = window.AWS.util.urlParse(request.httpRequest.path);
-      var querystring = window.AWS.util.queryParamsToString(queryParams);
-      endpoint.pathname = parsedUrl.pathname;
-      endpoint.search = !parsedUrl.search ? querystring :
-                        parsedUrl.search + '&' + querystring;
-    }
-
-    request.on('build', signedUrlBuilder);
-    request.on('sign', signedUrlSigner);
-    request.removeListener('build', this.addContentType);
-    request.removeListener('afterBuild',
-      window.AWS.EventListeners.Core.SET_CONTENT_LENGTH);
-    if (!params.Body) { // no Content-MD5/SHA-256 if body is not provided
-      request.removeListener('build', this.computeContentMd5);
-      request.removeListener('build', this.computeSha256);
-    }
-
-    if (callback) {
-      request.build(function() {
-        if (request.response.error) callback(request.response.error, null);
-        else callback(null, window.AWS.util.urlFormat(request.httpRequest.endpoint));
-      });
-    } else {
-      request.build();
-      return window.AWS.util.urlFormat(request.httpRequest.endpoint);
+  prepareSignedUrl: function prepareSignedUrl(request) {
+    request.removeListener('build', request.service.addContentType);
+    if (!request.params.Body) {
+      request.removeListener('build', request.service.computeContentMd5);
+      request.removeListener('build', request.service.computeSha256);
     }
   },
 
@@ -8972,7 +9048,7 @@ window.AWS.util.update(window.AWS.S3.prototype, {
   }
 });
 
-window.AWS.Service.defineServiceApi(window.AWS.S3, "2006-03-01", {"format":"rest-xml","apiVersion":"2006-03-01","checksumFormat":"md5","endpointPrefix":"s3","globalEndpoint":"s3.amazonaws.com","serviceAbbreviation":"Amazon S3","serviceFullName":"Amazon Simple Storage Service","signatureVersion":"s3","timestampFormat":"rfc822","xmlnamespace":"http://s3.amazonaws.com/doc/2006-03-01/","operations":{"abortMultipartUpload":{"name":"AbortMultipartUpload","http":{"method":"DELETE","uri":"/{Bucket}/{Key}?uploadId={UploadId}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"},"UploadId":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"completeMultipartUpload":{"name":"CompleteMultipartUpload","http":{"method":"POST","uri":"/{Bucket}/{Key}?uploadId={UploadId}"},"input":{"payload":"MultipartUpload","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"},"MultipartUpload":{"type":"structure","members":{"Parts":{"type":"list","members":{"type":"structure","members":{"ETag":{},"PartNumber":{"type":"integer"}}},"flattened":true,"name":"Part"}},"name":"CompleteMultipartUpload"},"UploadId":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Location":{},"Bucket":{},"Key":{},"Expiration":{"type":"timestamp","location":"header","name":"x-amz-expiration"},"ETag":{},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"VersionId":{"location":"header","name":"x-amz-version-id"}}}},"copyObject":{"name":"CopyObject","http":{"method":"PUT","uri":"/{Bucket}/{Key}"},"input":{"type":"structure","members":{"ACL":{"location":"header","name":"x-amz-acl"},"Bucket":{"required":true,"location":"uri"},"CacheControl":{"location":"header","name":"Cache-Control"},"ContentDisposition":{"location":"header","name":"Content-Disposition"},"ContentEncoding":{"location":"header","name":"Content-Encoding"},"ContentLanguage":{"location":"header","name":"Content-Language"},"ContentType":{"location":"header","name":"Content-Type"},"CopySource":{"required":true,"location":"header","name":"x-amz-copy-source"},"CopySourceIfMatch":{"location":"header","name":"x-amz-copy-source-if-match"},"CopySourceIfModifiedSince":{"type":"timestamp","location":"header","name":"x-amz-copy-source-if-modified-since"},"CopySourceIfNoneMatch":{"location":"header","name":"x-amz-copy-source-if-none-match"},"CopySourceIfUnmodifiedSince":{"type":"timestamp","location":"header","name":"x-amz-copy-source-if-unmodified-since"},"Expires":{"type":"timestamp","location":"header","name":"Expires"},"GrantFullControl":{"location":"header","name":"x-amz-grant-full-control"},"GrantRead":{"location":"header","name":"x-amz-grant-read"},"GrantReadACP":{"location":"header","name":"x-amz-grant-read-acp"},"GrantWriteACP":{"location":"header","name":"x-amz-grant-write-acp"},"Key":{"required":true,"location":"uri"},"Metadata":{"type":"map","location":"header","name":"x-amz-meta-","keys":{},"members":{}},"MetadataDirective":{"location":"header","name":"x-amz-metadata-directive"},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"StorageClass":{"location":"header","name":"x-amz-storage-class"},"WebsiteRedirectLocation":{"location":"header","name":"x-amz-website-redirect-location"}}},"output":{"type":"structure","members":{"Expiration":{"type":"timestamp","location":"header","name":"x-amz-expiration"},"CopySourceVersionId":{"location":"header","name":"x-amz-copy-source-version-id"},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"ETag":{},"LastModified":{"type":"timestamp"}}},"alias":"PutObjectCopy"},"createBucket":{"name":"CreateBucket","http":{"method":"PUT","uri":"/{Bucket}"},"input":{"payload":"CreateBucketConfiguration","type":"structure","members":{"ACL":{"location":"header","name":"x-amz-acl"},"Bucket":{"required":true,"location":"uri"},"CreateBucketConfiguration":{"type":"structure","members":{"LocationConstraint":{}}},"GrantFullControl":{"location":"header","name":"x-amz-grant-full-control"},"GrantRead":{"location":"header","name":"x-amz-grant-read"},"GrantReadACP":{"location":"header","name":"x-amz-grant-read-acp"},"GrantWrite":{"location":"header","name":"x-amz-grant-write"},"GrantWriteACP":{"location":"header","name":"x-amz-grant-write-acp"}}},"output":{"type":"structure","members":{"Location":{"location":"header","name":"Location"}}},"alias":"PutBucket"},"createMultipartUpload":{"name":"CreateMultipartUpload","http":{"method":"POST","uri":"/{Bucket}/{Key}?uploads"},"input":{"type":"structure","members":{"ACL":{"location":"header","name":"x-amz-acl"},"Bucket":{"required":true,"location":"uri"},"CacheControl":{"location":"header","name":"Cache-Control"},"ContentDisposition":{"location":"header","name":"Content-Disposition"},"ContentEncoding":{"location":"header","name":"Content-Encoding"},"ContentLanguage":{"location":"header","name":"Content-Language"},"ContentType":{"location":"header","name":"Content-Type"},"Expires":{"type":"timestamp","location":"header","name":"Expires"},"GrantFullControl":{"location":"header","name":"x-amz-grant-full-control"},"GrantRead":{"location":"header","name":"x-amz-grant-read"},"GrantReadACP":{"location":"header","name":"x-amz-grant-read-acp"},"GrantWriteACP":{"location":"header","name":"x-amz-grant-write-acp"},"Key":{"required":true,"location":"uri"},"Metadata":{"type":"map","location":"header","name":"x-amz-meta-","keys":{},"members":{}},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"StorageClass":{"location":"header","name":"x-amz-storage-class"},"WebsiteRedirectLocation":{"location":"header","name":"x-amz-website-redirect-location"}}},"output":{"type":"structure","members":{"Bucket":{"name":"Bucket"},"Key":{},"UploadId":{},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"}}},"alias":"InitiateMultipartUpload"},"deleteBucket":{"name":"DeleteBucket","http":{"method":"DELETE","uri":"/{Bucket}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"deleteBucketCors":{"name":"DeleteBucketCors","http":{"method":"DELETE","uri":"/{Bucket}?cors"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"deleteBucketLifecycle":{"name":"DeleteBucketLifecycle","http":{"method":"DELETE","uri":"/{Bucket}?lifecycle"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"deleteBucketPolicy":{"name":"DeleteBucketPolicy","http":{"method":"DELETE","uri":"/{Bucket}?policy"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"deleteBucketTagging":{"name":"DeleteBucketTagging","http":{"method":"DELETE","uri":"/{Bucket}?tagging"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"deleteBucketWebsite":{"name":"DeleteBucketWebsite","http":{"method":"DELETE","uri":"/{Bucket}?website"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"deleteObject":{"name":"DeleteObject","http":{"method":"DELETE","uri":"/{Bucket}/{Key}?versionId={VersionId}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"},"MFA":{"location":"header","name":"x-amz-mfa"},"VersionId":{"location":"uri"}}},"output":{"type":"structure","members":{"DeleteMarker":{"type":"boolean","location":"header","name":"x-amz-delete-marker"},"VersionId":{"location":"header","name":"x-amz-version-id"}}}},"deleteObjects":{"name":"DeleteObjects","http":{"method":"POST","uri":"/{Bucket}?delete"},"input":{"payload":"Delete","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Delete":{"type":"structure","members":{"Objects":{"type":"list","members":{"type":"structure","members":{"Key":{"required":true},"VersionId":{}}},"flattened":true,"required":true,"name":"Object"},"Quiet":{"type":"boolean"}},"required":true},"MFA":{"location":"header","name":"x-amz-mfa"}}},"output":{"type":"structure","members":{"Deleted":{"type":"list","members":{"type":"structure","members":{"Key":{},"VersionId":{},"DeleteMarker":{"type":"boolean"},"DeleteMarkerVersionId":{}}},"flattened":true},"Error":{"type":"list","members":{"type":"structure","members":{"Key":{},"VersionId":{},"Code":{},"Message":{}}},"flattened":true,"name":"Errors"}}},"alias":"DeleteMultipleObjects"},"getBucketAcl":{"name":"GetBucketAcl","http":{"method":"GET","uri":"/{Bucket}?acl"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}},"AccessControlList":{"type":"list","members":{"type":"structure","members":{"Grantee":{"type":"structure","members":{"DisplayName":{},"EmailAddress":{},"ID":{},"xsi:type":{"attribute":true,"name":"Type"},"URI":{}},"xmlns":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"Permission":{}},"name":"Grant"},"name":"Grants"}}}},"getBucketCors":{"name":"GetBucketCors","http":{"method":"GET","uri":"/{Bucket}?cors"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"CORSRule":{"type":"list","members":{"type":"structure","members":{"AllowedHeader":{"type":"list","members":{},"flattened":true,"name":"AllowedHeaders"},"AllowedMethod":{"type":"list","members":{},"flattened":true,"name":"AllowedMethods"},"AllowedOrigin":{"type":"list","members":{},"flattened":true,"name":"AllowedOrigins"},"ExposeHeader":{"type":"list","members":{},"flattened":true,"name":"ExposeHeaders"},"MaxAgeSeconds":{"type":"integer"}}},"flattened":true,"name":"CORSRules"}}}},"getBucketLifecycle":{"name":"GetBucketLifecycle","http":{"method":"GET","uri":"/{Bucket}?lifecycle"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Rule":{"type":"list","members":{"type":"structure","members":{"Expiration":{"type":"structure","members":{"Date":{"type":"timestamp","format":"iso8601"},"Days":{"type":"integer"}}},"ID":{},"Prefix":{},"Status":{},"Transition":{"type":"structure","members":{"Date":{"type":"timestamp","format":"iso8601"},"Days":{"type":"integer"},"StorageClass":{}}}}},"flattened":true,"name":"Rules"}}}},"getBucketLocation":{"name":"GetBucketLocation","http":{"method":"GET","uri":"/{Bucket}?location"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"LocationConstraint":{}}}},"getBucketLogging":{"name":"GetBucketLogging","http":{"method":"GET","uri":"/{Bucket}?logging"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"LoggingEnabled":{"type":"structure","members":{"TargetBucket":{},"TargetGrants":{"type":"list","members":{"type":"structure","members":{"Grantee":{"type":"structure","members":{"DisplayName":{},"EmailAddress":{},"ID":{},"xsi:type":{"attribute":true,"name":"Type"},"URI":{}},"xmlns":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"Permission":{}},"name":"Grant"}},"TargetPrefix":{}}}}}},"getBucketNotification":{"name":"GetBucketNotification","http":{"method":"GET","uri":"/{Bucket}?notification"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"TopicConfiguration":{"type":"structure","members":{"Event":{},"Topic":{}}}}}},"getBucketPolicy":{"name":"GetBucketPolicy","http":{"method":"GET","uri":"/{Bucket}?policy"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Policy":{}},"payload":"Policy"}},"getBucketRequestPayment":{"name":"GetBucketRequestPayment","http":{"method":"GET","uri":"/{Bucket}?requestPayment"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Payer":{}}}},"getBucketTagging":{"name":"GetBucketTagging","http":{"method":"GET","uri":"/{Bucket}?tagging"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"TagSet":{"type":"list","members":{"type":"structure","members":{"Key":{},"Value":{}},"name":"Tag"}}}}},"getBucketVersioning":{"name":"GetBucketVersioning","http":{"method":"GET","uri":"/{Bucket}?versioning"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Status":{},"MFADelete":{}}}},"getBucketWebsite":{"name":"GetBucketWebsite","http":{"method":"GET","uri":"/{Bucket}?website"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"RedirectAllRequestsTo":{"type":"structure","members":{"HostName":{},"Protocol":{}}},"IndexDocument":{"type":"structure","members":{"Suffix":{}}},"ErrorDocument":{"type":"structure","members":{"Key":{}}},"RoutingRules":{"type":"list","members":{"type":"structure","members":{"Condition":{"type":"structure","members":{"HttpErrorCodeReturnedEquals":{},"KeyPrefixEquals":{}}},"Redirect":{"type":"structure","members":{"HostName":{},"HttpRedirectCode":{},"Protocol":{},"ReplaceKeyPrefixWith":{},"ReplaceKeyWith":{}}}},"name":"RoutingRule"}}}}},"getObject":{"name":"GetObject","http":{"method":"GET","uri":"/{Bucket}/{Key}?versionId={VersionId}&response-content-type={ResponseContentType}&response-content-language={ResponseContentLanguage}&response-expires={ResponseExpires}&response-cache-control={ResponseCacheControl}&response-content-disposition={ResponseContentDisposition}&response-content-encoding={ResponseContentEncoding}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"IfMatch":{"location":"header","name":"If-Match"},"IfModifiedSince":{"type":"timestamp","location":"header","name":"If-Modified-Since"},"IfNoneMatch":{"location":"header","name":"If-None-Match"},"IfUnmodifiedSince":{"type":"timestamp","location":"header","name":"If-Unmodified-Since"},"Key":{"required":true,"location":"uri"},"Range":{"location":"header","name":"Range"},"ResponseCacheControl":{"location":"uri"},"ResponseContentDisposition":{"location":"uri"},"ResponseContentEncoding":{"location":"uri"},"ResponseContentLanguage":{"location":"uri"},"ResponseContentType":{"location":"uri"},"ResponseExpires":{"type":"timestamp","location":"uri"},"VersionId":{"location":"uri"}}},"output":{"type":"structure","members":{"Body":{"type":"binary","streaming":true},"DeleteMarker":{"type":"boolean","location":"header","name":"x-amz-delete-marker"},"AcceptRanges":{"location":"header","name":"accept-ranges"},"Expiration":{"type":"timestamp","location":"header","name":"x-amz-expiration"},"Restore":{"location":"header","name":"x-amz-restore"},"LastModified":{"type":"timestamp","location":"header","name":"Last-Modified"},"ContentLength":{"type":"integer","location":"header","name":"Content-Length"},"ETag":{"location":"header","name":"ETag"},"MissingMeta":{"type":"integer","location":"header","name":"x-amz-missing-meta"},"VersionId":{"location":"header","name":"x-amz-version-id"},"CacheControl":{"location":"header","name":"Cache-Control"},"ContentDisposition":{"location":"header","name":"Content-Disposition"},"ContentEncoding":{"location":"header","name":"Content-Encoding"},"ContentLanguage":{"location":"header","name":"Content-Language"},"ContentType":{"location":"header","name":"Content-Type"},"Expires":{"type":"timestamp","location":"header","name":"Expires"},"WebsiteRedirectLocation":{"location":"header","name":"x-amz-website-redirect-location"},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"Metadata":{"type":"map","location":"header","name":"x-amz-meta-","keys":{},"members":{}}},"payload":"Body"}},"getObjectAcl":{"name":"GetObjectAcl","http":{"method":"GET","uri":"/{Bucket}/{Key}?acl&versionId={VersionId}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"},"VersionId":{"location":"uri"}}},"output":{"type":"structure","members":{"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}},"AccessControlList":{"type":"list","members":{"type":"structure","members":{"Grantee":{"type":"structure","members":{"DisplayName":{},"EmailAddress":{},"ID":{},"xsi:type":{"attribute":true,"name":"Type"},"URI":{}},"xmlns":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"Permission":{}},"name":"Grant"},"name":"Grants"}}}},"getObjectTorrent":{"name":"GetObjectTorrent","http":{"method":"GET","uri":"/{Bucket}/{Key}?torrent"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Body":{"type":"binary","streaming":true}},"payload":"Body"}},"headBucket":{"name":"HeadBucket","http":{"method":"HEAD","uri":"/{Bucket}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"headObject":{"name":"HeadObject","http":{"method":"HEAD","uri":"/{Bucket}/{Key}?versionId={VersionId}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"IfMatch":{"location":"header","name":"If-Match"},"IfModifiedSince":{"type":"timestamp","location":"header","name":"If-Modified-Since"},"IfNoneMatch":{"location":"header","name":"If-None-Match"},"IfUnmodifiedSince":{"type":"timestamp","location":"header","name":"If-Unmodified-Since"},"Key":{"required":true,"location":"uri"},"Range":{"location":"header","name":"Range"},"VersionId":{"location":"uri"}}},"output":{"type":"structure","members":{"DeleteMarker":{"type":"boolean","location":"header","name":"x-amz-delete-marker"},"AcceptRanges":{"location":"header","name":"accept-ranges"},"Expiration":{"type":"timestamp","location":"header","name":"x-amz-expiration"},"Restore":{"location":"header","name":"x-amz-restore"},"LastModified":{"type":"timestamp","location":"header","name":"Last-Modified"},"ContentLength":{"type":"integer","location":"header","name":"Content-Length"},"ETag":{"location":"header","name":"ETag"},"MissingMeta":{"type":"integer","location":"header","name":"x-amz-missing-meta"},"VersionId":{"location":"header","name":"x-amz-version-id"},"CacheControl":{"location":"header","name":"Cache-Control"},"ContentDisposition":{"location":"header","name":"Content-Disposition"},"ContentEncoding":{"location":"header","name":"Content-Encoding"},"ContentLanguage":{"location":"header","name":"Content-Language"},"ContentType":{"location":"header","name":"Content-Type"},"Expires":{"type":"timestamp","location":"header","name":"Expires"},"WebsiteRedirectLocation":{"location":"header","name":"x-amz-website-redirect-location"},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"Metadata":{"type":"map","location":"header","name":"x-amz-meta-","keys":{},"members":{}}}}},"listBuckets":{"name":"ListBuckets","http":{"method":"GET","uri":"/"},"input":{"type":"structure","members":{}},"output":{"type":"structure","members":{"Buckets":{"type":"list","members":{"type":"structure","members":{"Name":{},"CreationDate":{"type":"timestamp"}},"name":"Bucket"}},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}}}},"alias":"GetService"},"listMultipartUploads":{"name":"ListMultipartUploads","http":{"method":"GET","uri":"/{Bucket}?uploads&prefix={Prefix}&delimiter={Delimiter}&max-uploads={MaxUploads}&key-marker={KeyMarker}&upload-id-marker={UploadIdMarker}&encoding-type={EncodingType}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Delimiter":{"location":"uri"},"EncodingType":{"location":"uri"},"KeyMarker":{"location":"uri"},"MaxUploads":{"type":"integer","location":"uri"},"Prefix":{"location":"uri"},"UploadIdMarker":{"location":"uri"}}},"output":{"type":"structure","members":{"Bucket":{},"KeyMarker":{},"UploadIdMarker":{},"NextKeyMarker":{},"Prefix":{},"NextUploadIdMarker":{},"MaxUploads":{"type":"integer"},"IsTruncated":{"type":"boolean"},"Upload":{"type":"list","members":{"type":"structure","members":{"UploadId":{},"Key":{},"Initiated":{"type":"timestamp"},"StorageClass":{},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}},"Initiator":{"type":"structure","members":{"ID":{},"DisplayName":{}}}}},"flattened":true,"name":"Uploads"},"CommonPrefixes":{"type":"list","members":{"type":"structure","members":{"Prefix":{}}},"flattened":true},"EncodingType":{}}}},"listObjectVersions":{"name":"ListObjectVersions","http":{"method":"GET","uri":"/{Bucket}?versions&delimiter={Delimiter}&key-marker={KeyMarker}&max-keys={MaxKeys}&prefix={Prefix}&version-id-marker={VersionIdMarker}&encoding-type={EncodingType}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Delimiter":{"location":"uri"},"EncodingType":{"location":"uri"},"KeyMarker":{"location":"uri"},"MaxKeys":{"type":"integer","location":"uri"},"Prefix":{"location":"uri"},"VersionIdMarker":{"location":"uri"}}},"output":{"type":"structure","members":{"IsTruncated":{"type":"boolean"},"KeyMarker":{},"VersionIdMarker":{},"NextKeyMarker":{},"NextVersionIdMarker":{},"Version":{"type":"list","members":{"type":"structure","members":{"ETag":{},"Size":{"type":"integer"},"StorageClass":{},"Key":{},"VersionId":{},"IsLatest":{"type":"boolean"},"LastModified":{"type":"timestamp"},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}}}},"flattened":true,"name":"Versions"},"DeleteMarker":{"type":"list","members":{"type":"structure","members":{"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}},"Key":{},"VersionId":{},"IsLatest":{"type":"boolean"},"LastModified":{"type":"timestamp"}}},"flattened":true,"name":"DeleteMarkers"},"Name":{},"Prefix":{},"MaxKeys":{"type":"integer"},"CommonPrefixes":{"type":"list","members":{"type":"structure","members":{"Prefix":{}}},"flattened":true},"EncodingType":{}}},"alias":"GetBucketObjectVersions"},"listObjects":{"name":"ListObjects","http":{"method":"GET","uri":"/{Bucket}?delimiter={Delimiter}&marker={Marker}&max-keys={MaxKeys}&prefix={Prefix}&encoding-type={EncodingType}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Delimiter":{"location":"uri"},"EncodingType":{"location":"uri"},"Marker":{"location":"uri"},"MaxKeys":{"type":"integer","location":"uri"},"Prefix":{"location":"uri"}}},"output":{"type":"structure","members":{"IsTruncated":{"type":"boolean"},"Marker":{},"NextMarker":{},"Contents":{"type":"list","members":{"type":"structure","members":{"Key":{},"LastModified":{"type":"timestamp"},"ETag":{},"Size":{"type":"integer"},"StorageClass":{},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}}}},"flattened":true},"Name":{},"Prefix":{},"MaxKeys":{"type":"integer"},"CommonPrefixes":{"type":"list","members":{"type":"structure","members":{"Prefix":{}}},"flattened":true},"EncodingType":{}}},"alias":"GetBucket"},"listParts":{"name":"ListParts","http":{"method":"GET","uri":"/{Bucket}/{Key}?uploadId={UploadId}&max-parts={MaxParts}&part-number-marker={PartNumberMarker}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"},"MaxParts":{"type":"integer","location":"uri"},"PartNumberMarker":{"type":"integer","location":"uri"},"UploadId":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Bucket":{},"Key":{},"UploadId":{},"PartNumberMarker":{"type":"integer"},"NextPartNumberMarker":{"type":"integer"},"MaxParts":{"type":"integer"},"IsTruncated":{"type":"boolean"},"Part":{"type":"list","members":{"type":"structure","members":{"PartNumber":{"type":"integer"},"LastModified":{"type":"timestamp"},"ETag":{},"Size":{"type":"integer"}}},"flattened":true,"name":"Parts"},"Initiator":{"type":"structure","members":{"ID":{},"DisplayName":{}}},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}},"StorageClass":{}}}},"putBucketAcl":{"name":"PutBucketAcl","http":{"method":"PUT","uri":"/{Bucket}?acl"},"input":{"payload":"AccessControlPolicy","type":"structure","members":{"ACL":{"location":"header","name":"x-amz-acl"},"AccessControlPolicy":{"type":"structure","members":{"Grants":{"type":"list","members":{"type":"structure","members":{"Grantee":{"type":"structure","members":{"DisplayName":{},"EmailAddress":{},"ID":{},"Type":{"required":true,"attribute":true,"name":"xsi:type"},"URI":{}},"xmlns":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"Permission":{}},"name":"Grant"},"name":"AccessControlList"},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}}}},"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"GrantFullControl":{"location":"header","name":"x-amz-grant-full-control"},"GrantRead":{"location":"header","name":"x-amz-grant-read"},"GrantReadACP":{"location":"header","name":"x-amz-grant-read-acp"},"GrantWrite":{"location":"header","name":"x-amz-grant-write"},"GrantWriteACP":{"location":"header","name":"x-amz-grant-write-acp"}}},"output":{"type":"structure","members":{}}},"putBucketCors":{"name":"PutBucketCors","http":{"method":"PUT","uri":"/{Bucket}?cors"},"input":{"payload":"CORSConfiguration","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"CORSConfiguration":{"type":"structure","members":{"CORSRules":{"type":"list","members":{"type":"structure","members":{"AllowedHeaders":{"type":"list","members":{},"flattened":true,"name":"AllowedHeader"},"AllowedMethods":{"type":"list","members":{},"flattened":true,"name":"AllowedMethod"},"AllowedOrigins":{"type":"list","members":{},"flattened":true,"name":"AllowedOrigin"},"ExposeHeaders":{"type":"list","members":{},"flattened":true,"name":"ExposeHeader"},"MaxAgeSeconds":{"type":"integer"}}},"flattened":true,"name":"CORSRule"}}},"ContentMD5":{"location":"header","name":"Content-MD5"}}},"output":{"type":"structure","members":{}}},"putBucketLifecycle":{"name":"PutBucketLifecycle","http":{"method":"PUT","uri":"/{Bucket}?lifecycle"},"input":{"payload":"LifecycleConfiguration","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"LifecycleConfiguration":{"type":"structure","members":{"Rules":{"type":"list","members":{"type":"structure","members":{"Expiration":{"type":"structure","members":{"Date":{"type":"timestamp","format":"iso8601"},"Days":{"type":"integer"}}},"ID":{},"Prefix":{"required":true},"Status":{"required":true},"Transition":{"type":"structure","members":{"Date":{"type":"timestamp","format":"iso8601"},"Days":{"type":"integer"},"StorageClass":{}}}}},"flattened":true,"required":true,"name":"Rule"}}}}},"output":{"type":"structure","members":{}}},"putBucketLogging":{"name":"PutBucketLogging","http":{"method":"PUT","uri":"/{Bucket}?logging"},"input":{"payload":"BucketLoggingStatus","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"BucketLoggingStatus":{"type":"structure","members":{"LoggingEnabled":{"type":"structure","members":{"TargetBucket":{},"TargetGrants":{"type":"list","members":{"type":"structure","members":{"Grantee":{"type":"structure","members":{"DisplayName":{},"EmailAddress":{},"ID":{},"Type":{"required":true,"attribute":true,"name":"xsi:type"},"URI":{}},"xmlns":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"Permission":{}},"name":"Grant"}},"TargetPrefix":{}}}},"required":true},"ContentMD5":{"location":"header","name":"Content-MD5"}}},"output":{"type":"structure","members":{}}},"putBucketNotification":{"name":"PutBucketNotification","http":{"method":"PUT","uri":"/{Bucket}?notification"},"input":{"payload":"NotificationConfiguration","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"NotificationConfiguration":{"type":"structure","members":{"TopicConfiguration":{"type":"structure","members":{"Event":{},"Topic":{}},"required":true}},"required":true}}},"output":{"type":"structure","members":{}}},"putBucketPolicy":{"name":"PutBucketPolicy","http":{"method":"PUT","uri":"/{Bucket}?policy"},"input":{"payload":"Policy","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"Policy":{"required":true}}},"output":{"type":"structure","members":{}}},"putBucketRequestPayment":{"name":"PutBucketRequestPayment","http":{"method":"PUT","uri":"/{Bucket}?requestPayment"},"input":{"payload":"RequestPaymentConfiguration","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"RequestPaymentConfiguration":{"type":"structure","members":{"Payer":{"required":true}},"required":true}}},"output":{"type":"structure","members":{}}},"putBucketTagging":{"name":"PutBucketTagging","http":{"method":"PUT","uri":"/{Bucket}?tagging"},"input":{"payload":"Tagging","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"Tagging":{"type":"structure","members":{"TagSet":{"type":"list","members":{"type":"structure","members":{"Key":{"required":true},"Value":{"required":true}},"name":"Tag"},"required":true}},"required":true}}},"output":{"type":"structure","members":{}}},"putBucketVersioning":{"name":"PutBucketVersioning","http":{"method":"PUT","uri":"/{Bucket}?versioning"},"input":{"payload":"VersioningConfiguration","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"MFA":{"location":"header","name":"x-amz-mfa"},"VersioningConfiguration":{"type":"structure","members":{"MFADelete":{},"Status":{}},"required":true}}},"output":{"type":"structure","members":{}}},"putBucketWebsite":{"name":"PutBucketWebsite","http":{"method":"PUT","uri":"/{Bucket}?website"},"input":{"payload":"WebsiteConfiguration","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"WebsiteConfiguration":{"type":"structure","members":{"ErrorDocument":{"type":"structure","members":{"Key":{"required":true}}},"IndexDocument":{"type":"structure","members":{"Suffix":{"required":true}}},"RedirectAllRequestsTo":{"type":"structure","members":{"HostName":{"required":true},"Protocol":{}}},"RoutingRules":{"type":"list","members":{"type":"structure","members":{"Condition":{"type":"structure","members":{"HttpErrorCodeReturnedEquals":{},"KeyPrefixEquals":{}}},"Redirect":{"type":"structure","members":{"HostName":{},"HttpRedirectCode":{},"Protocol":{},"ReplaceKeyPrefixWith":{},"ReplaceKeyWith":{}},"required":true}},"name":"RoutingRule"}}},"required":true}}},"output":{"type":"structure","members":{}}},"putObject":{"name":"PutObject","http":{"method":"PUT","uri":"/{Bucket}/{Key}"},"input":{"payload":"Body","type":"structure","members":{"ACL":{"location":"header","name":"x-amz-acl"},"Body":{"type":"binary","streaming":true},"Bucket":{"required":true,"location":"uri"},"CacheControl":{"location":"header","name":"Cache-Control"},"ContentDisposition":{"location":"header","name":"Content-Disposition"},"ContentEncoding":{"location":"header","name":"Content-Encoding"},"ContentLanguage":{"location":"header","name":"Content-Language"},"ContentLength":{"type":"integer","location":"header","name":"Content-Length"},"ContentMD5":{"location":"header","name":"Content-MD5"},"ContentType":{"location":"header","name":"Content-Type"},"Expires":{"type":"timestamp","location":"header","name":"Expires"},"GrantFullControl":{"location":"header","name":"x-amz-grant-full-control"},"GrantRead":{"location":"header","name":"x-amz-grant-read"},"GrantReadACP":{"location":"header","name":"x-amz-grant-read-acp"},"GrantWriteACP":{"location":"header","name":"x-amz-grant-write-acp"},"Key":{"required":true,"location":"uri"},"Metadata":{"type":"map","location":"header","name":"x-amz-meta-","keys":{},"members":{}},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"StorageClass":{"location":"header","name":"x-amz-storage-class"},"WebsiteRedirectLocation":{"location":"header","name":"x-amz-website-redirect-location"}}},"output":{"type":"structure","members":{"Expiration":{"type":"timestamp","location":"header","name":"x-amz-expiration"},"ETag":{"location":"header","name":"ETag"},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"VersionId":{"location":"header","name":"x-amz-version-id"}}}},"putObjectAcl":{"name":"PutObjectAcl","http":{"method":"PUT","uri":"/{Bucket}/{Key}?acl"},"input":{"payload":"AccessControlPolicy","type":"structure","members":{"ACL":{"location":"header","name":"x-amz-acl"},"AccessControlPolicy":{"type":"structure","members":{"Grants":{"type":"list","members":{"type":"structure","members":{"Grantee":{"type":"structure","members":{"DisplayName":{},"EmailAddress":{},"ID":{},"Type":{"required":true,"attribute":true,"name":"xsi:type"},"URI":{}},"xmlns":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"Permission":{}},"name":"Grant"},"name":"AccessControlList"},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}}}},"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"GrantFullControl":{"location":"header","name":"x-amz-grant-full-control"},"GrantRead":{"location":"header","name":"x-amz-grant-read"},"GrantReadACP":{"location":"header","name":"x-amz-grant-read-acp"},"GrantWrite":{"location":"header","name":"x-amz-grant-write"},"GrantWriteACP":{"location":"header","name":"x-amz-grant-write-acp"},"Key":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"restoreObject":{"name":"RestoreObject","http":{"method":"POST","uri":"/{Bucket}/{Key}?restore"},"input":{"payload":"RestoreRequest","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"},"RestoreRequest":{"type":"structure","members":{"Days":{"type":"integer","required":true}}}}},"output":{"type":"structure","members":{}},"alias":"PostObjectRestore"},"uploadPart":{"name":"UploadPart","http":{"method":"PUT","uri":"/{Bucket}/{Key}?partNumber={PartNumber}&uploadId={UploadId}"},"input":{"payload":"Body","type":"structure","members":{"Body":{"type":"binary","streaming":true},"Bucket":{"required":true,"location":"uri"},"ContentLength":{"type":"integer","location":"header","name":"Content-Length"},"ContentMD5":{"location":"header","name":"Content-MD5"},"Key":{"required":true,"location":"uri"},"PartNumber":{"type":"integer","required":true,"location":"uri"},"UploadId":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"ETag":{"location":"header","name":"ETag"}}}},"uploadPartCopy":{"name":"UploadPartCopy","http":{"method":"PUT","uri":"/{Bucket}/{Key}?partNumber={PartNumber}&uploadId={UploadId}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"CopySource":{"required":true,"location":"header","name":"x-amz-copy-source"},"CopySourceIfMatch":{"location":"header","name":"x-amz-copy-source-if-match"},"CopySourceIfModifiedSince":{"type":"timestamp","location":"header","name":"x-amz-copy-source-if-modified-since"},"CopySourceIfNoneMatch":{"location":"header","name":"x-amz-copy-source-if-none-match"},"CopySourceIfUnmodifiedSince":{"type":"timestamp","location":"header","name":"x-amz-copy-source-if-unmodified-since"},"CopySourceRange":{"location":"header","name":"x-amz-copy-source-range"},"Key":{"required":true,"location":"uri"},"PartNumber":{"type":"integer","required":true,"location":"uri"},"UploadId":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"CopySourceVersionId":{"location":"header","name":"x-amz-copy-source-version-id"},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"ETag":{},"LastModified":{"type":"timestamp"}}}}},"pagination":{"listBuckets":{"resultKey":"Buckets"},"listMultipartUploads":{"limitKey":"MaxUploads","moreResults":"IsTruncated","outputToken":["NextKeyMarker","NextUploadIdMarker"],"inputToken":["KeyMarker","UploadIdMarker"],"resultKey":"Uploads"},"listObjectVersions":{"moreResults":"IsTruncated","limitKey":"MaxKeys","outputToken":["NextKeyMarker","NextVersionIdMarker"],"inputToken":["KeyMarker","VersionIdMarker"],"resultKey":"Versions"},"listObjects":{"moreResults":"IsTruncated","limitKey":"MaxKeys","outputToken":"NextMarker or Contents[-1].Key","inputToken":"Marker","resultKey":["Contents","CommonPrefixes"]},"listParts":{"moreResults":"IsTruncated","limitKey":"MaxParts","outputToken":"NextPartNumberMarker","inputToken":"PartNumberMarker","resultKey":"Parts"}},"waiters":{"__default__":{"interval":5,"maxAttempts":20},"bucketExists":{"operation":"HeadBucket","ignoreErrors":["NoSuchBucket"],"successType":"output"},"bucketNotExists":{"operation":"HeadBucket","successType":"error","successValue":404},"objectExists":{"operation":"HeadObject","ignoreErrors":["NoSuchKey"],"successType":"output"},"objectNotExists":{"operation":"HeadObject","successType":"error","successValue":404}}});
+window.AWS.Service.defineServiceApi(window.AWS.S3, "2006-03-01", {"format":"rest-xml","apiVersion":"2006-03-01","checksumFormat":"md5","endpointPrefix":"s3","globalEndpoint":"s3.amazonaws.com","serviceAbbreviation":"Amazon S3","serviceFullName":"Amazon Simple Storage Service","signatureVersion":"s3","timestampFormat":"rfc822","xmlnamespace":"http://s3.amazonaws.com/doc/2006-03-01/","operations":{"abortMultipartUpload":{"name":"AbortMultipartUpload","http":{"method":"DELETE","uri":"/{Bucket}/{Key}?uploadId={UploadId}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"},"UploadId":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"completeMultipartUpload":{"name":"CompleteMultipartUpload","http":{"method":"POST","uri":"/{Bucket}/{Key}?uploadId={UploadId}"},"input":{"payload":"MultipartUpload","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"},"MultipartUpload":{"type":"structure","members":{"Parts":{"type":"list","members":{"type":"structure","members":{"ETag":{},"PartNumber":{"type":"integer"}}},"flattened":true,"name":"Part"}},"name":"CompleteMultipartUpload"},"UploadId":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Location":{},"Bucket":{},"Key":{},"Expiration":{"type":"timestamp","location":"header","name":"x-amz-expiration"},"ETag":{},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"VersionId":{"location":"header","name":"x-amz-version-id"}}}},"copyObject":{"name":"CopyObject","http":{"method":"PUT","uri":"/{Bucket}/{Key}"},"input":{"type":"structure","members":{"ACL":{"location":"header","name":"x-amz-acl"},"Bucket":{"required":true,"location":"uri"},"CacheControl":{"location":"header","name":"Cache-Control"},"ContentDisposition":{"location":"header","name":"Content-Disposition"},"ContentEncoding":{"location":"header","name":"Content-Encoding"},"ContentLanguage":{"location":"header","name":"Content-Language"},"ContentType":{"location":"header","name":"Content-Type"},"CopySource":{"required":true,"location":"header","name":"x-amz-copy-source"},"CopySourceIfMatch":{"location":"header","name":"x-amz-copy-source-if-match"},"CopySourceIfModifiedSince":{"type":"timestamp","location":"header","name":"x-amz-copy-source-if-modified-since"},"CopySourceIfNoneMatch":{"location":"header","name":"x-amz-copy-source-if-none-match"},"CopySourceIfUnmodifiedSince":{"type":"timestamp","location":"header","name":"x-amz-copy-source-if-unmodified-since"},"Expires":{"type":"timestamp","location":"header","name":"Expires"},"GrantFullControl":{"location":"header","name":"x-amz-grant-full-control"},"GrantRead":{"location":"header","name":"x-amz-grant-read"},"GrantReadACP":{"location":"header","name":"x-amz-grant-read-acp"},"GrantWriteACP":{"location":"header","name":"x-amz-grant-write-acp"},"Key":{"required":true,"location":"uri"},"Metadata":{"type":"map","location":"header","name":"x-amz-meta-","keys":{},"members":{}},"MetadataDirective":{"location":"header","name":"x-amz-metadata-directive"},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"StorageClass":{"location":"header","name":"x-amz-storage-class"},"WebsiteRedirectLocation":{"location":"header","name":"x-amz-website-redirect-location"}}},"output":{"type":"structure","members":{"Expiration":{"type":"timestamp","location":"header","name":"x-amz-expiration"},"CopySourceVersionId":{"location":"header","name":"x-amz-copy-source-version-id"},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"ETag":{},"LastModified":{"type":"timestamp"}}},"alias":"PutObjectCopy"},"createBucket":{"name":"CreateBucket","http":{"method":"PUT","uri":"/{Bucket}"},"input":{"payload":"CreateBucketConfiguration","type":"structure","members":{"ACL":{"location":"header","name":"x-amz-acl"},"Bucket":{"required":true,"location":"uri"},"CreateBucketConfiguration":{"type":"structure","members":{"LocationConstraint":{}}},"GrantFullControl":{"location":"header","name":"x-amz-grant-full-control"},"GrantRead":{"location":"header","name":"x-amz-grant-read"},"GrantReadACP":{"location":"header","name":"x-amz-grant-read-acp"},"GrantWrite":{"location":"header","name":"x-amz-grant-write"},"GrantWriteACP":{"location":"header","name":"x-amz-grant-write-acp"}}},"output":{"type":"structure","members":{"Location":{"location":"header","name":"Location"}}},"alias":"PutBucket"},"createMultipartUpload":{"name":"CreateMultipartUpload","http":{"method":"POST","uri":"/{Bucket}/{Key}?uploads"},"input":{"type":"structure","members":{"ACL":{"location":"header","name":"x-amz-acl"},"Bucket":{"required":true,"location":"uri"},"CacheControl":{"location":"header","name":"Cache-Control"},"ContentDisposition":{"location":"header","name":"Content-Disposition"},"ContentEncoding":{"location":"header","name":"Content-Encoding"},"ContentLanguage":{"location":"header","name":"Content-Language"},"ContentType":{"location":"header","name":"Content-Type"},"Expires":{"type":"timestamp","location":"header","name":"Expires"},"GrantFullControl":{"location":"header","name":"x-amz-grant-full-control"},"GrantRead":{"location":"header","name":"x-amz-grant-read"},"GrantReadACP":{"location":"header","name":"x-amz-grant-read-acp"},"GrantWriteACP":{"location":"header","name":"x-amz-grant-write-acp"},"Key":{"required":true,"location":"uri"},"Metadata":{"type":"map","location":"header","name":"x-amz-meta-","keys":{},"members":{}},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"StorageClass":{"location":"header","name":"x-amz-storage-class"},"WebsiteRedirectLocation":{"location":"header","name":"x-amz-website-redirect-location"}}},"output":{"type":"structure","members":{"Bucket":{"name":"Bucket"},"Key":{},"UploadId":{},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"}}},"alias":"InitiateMultipartUpload"},"deleteBucket":{"name":"DeleteBucket","http":{"method":"DELETE","uri":"/{Bucket}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"deleteBucketCors":{"name":"DeleteBucketCors","http":{"method":"DELETE","uri":"/{Bucket}?cors"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"deleteBucketLifecycle":{"name":"DeleteBucketLifecycle","http":{"method":"DELETE","uri":"/{Bucket}?lifecycle"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"deleteBucketPolicy":{"name":"DeleteBucketPolicy","http":{"method":"DELETE","uri":"/{Bucket}?policy"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"deleteBucketTagging":{"name":"DeleteBucketTagging","http":{"method":"DELETE","uri":"/{Bucket}?tagging"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"deleteBucketWebsite":{"name":"DeleteBucketWebsite","http":{"method":"DELETE","uri":"/{Bucket}?website"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"deleteObject":{"name":"DeleteObject","http":{"method":"DELETE","uri":"/{Bucket}/{Key}?versionId={VersionId}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"},"MFA":{"location":"header","name":"x-amz-mfa"},"VersionId":{"location":"uri"}}},"output":{"type":"structure","members":{"DeleteMarker":{"type":"boolean","location":"header","name":"x-amz-delete-marker"},"VersionId":{"location":"header","name":"x-amz-version-id"}}}},"deleteObjects":{"name":"DeleteObjects","http":{"method":"POST","uri":"/{Bucket}?delete"},"input":{"payload":"Delete","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Delete":{"type":"structure","members":{"Objects":{"type":"list","members":{"type":"structure","members":{"Key":{"required":true},"VersionId":{}}},"flattened":true,"required":true,"name":"Object"},"Quiet":{"type":"boolean"}},"required":true},"MFA":{"location":"header","name":"x-amz-mfa"}}},"output":{"type":"structure","members":{"Deleted":{"type":"list","members":{"type":"structure","members":{"Key":{},"VersionId":{},"DeleteMarker":{"type":"boolean"},"DeleteMarkerVersionId":{}}},"flattened":true},"Error":{"type":"list","members":{"type":"structure","members":{"Key":{},"VersionId":{},"Code":{},"Message":{}}},"flattened":true,"name":"Errors"}}},"alias":"DeleteMultipleObjects"},"getBucketAcl":{"name":"GetBucketAcl","http":{"method":"GET","uri":"/{Bucket}?acl"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}},"AccessControlList":{"type":"list","members":{"type":"structure","members":{"Grantee":{"type":"structure","members":{"DisplayName":{},"EmailAddress":{},"ID":{},"xsi:type":{"attribute":true,"name":"Type"},"URI":{}},"xmlns":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"Permission":{}},"name":"Grant"},"name":"Grants"}}}},"getBucketCors":{"name":"GetBucketCors","http":{"method":"GET","uri":"/{Bucket}?cors"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"CORSRule":{"type":"list","members":{"type":"structure","members":{"AllowedHeader":{"type":"list","members":{},"flattened":true,"name":"AllowedHeaders"},"AllowedMethod":{"type":"list","members":{},"flattened":true,"name":"AllowedMethods"},"AllowedOrigin":{"type":"list","members":{},"flattened":true,"name":"AllowedOrigins"},"ExposeHeader":{"type":"list","members":{},"flattened":true,"name":"ExposeHeaders"},"MaxAgeSeconds":{"type":"integer"}}},"flattened":true,"name":"CORSRules"}}}},"getBucketLifecycle":{"name":"GetBucketLifecycle","http":{"method":"GET","uri":"/{Bucket}?lifecycle"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Rule":{"type":"list","members":{"type":"structure","members":{"Expiration":{"type":"structure","members":{"Date":{"type":"timestamp","format":"iso8601"},"Days":{"type":"integer"}}},"ID":{},"Prefix":{},"Status":{},"Transition":{"type":"structure","members":{"Date":{"type":"timestamp","format":"iso8601"},"Days":{"type":"integer"},"StorageClass":{}}},"NoncurrentVersionTransition":{"type":"structure","members":{"NoncurrentDays":{"type":"integer"},"StorageClass":{}}},"NoncurrentVersionExpiration":{"type":"structure","members":{"NoncurrentDays":{"type":"integer"}}}}},"flattened":true,"name":"Rules"}}}},"getBucketLocation":{"name":"GetBucketLocation","http":{"method":"GET","uri":"/{Bucket}?location"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"LocationConstraint":{}}}},"getBucketLogging":{"name":"GetBucketLogging","http":{"method":"GET","uri":"/{Bucket}?logging"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"LoggingEnabled":{"type":"structure","members":{"TargetBucket":{},"TargetGrants":{"type":"list","members":{"type":"structure","members":{"Grantee":{"type":"structure","members":{"DisplayName":{},"EmailAddress":{},"ID":{},"xsi:type":{"attribute":true,"name":"Type"},"URI":{}},"xmlns":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"Permission":{}},"name":"Grant"}},"TargetPrefix":{}}}}}},"getBucketNotification":{"name":"GetBucketNotification","http":{"method":"GET","uri":"/{Bucket}?notification"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"TopicConfiguration":{"type":"structure","members":{"Event":{},"Topic":{}}}}}},"getBucketPolicy":{"name":"GetBucketPolicy","http":{"method":"GET","uri":"/{Bucket}?policy"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Policy":{}},"payload":"Policy"}},"getBucketRequestPayment":{"name":"GetBucketRequestPayment","http":{"method":"GET","uri":"/{Bucket}?requestPayment"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Payer":{}}}},"getBucketTagging":{"name":"GetBucketTagging","http":{"method":"GET","uri":"/{Bucket}?tagging"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"TagSet":{"type":"list","members":{"type":"structure","members":{"Key":{},"Value":{}},"name":"Tag"}}}}},"getBucketVersioning":{"name":"GetBucketVersioning","http":{"method":"GET","uri":"/{Bucket}?versioning"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Status":{},"MfaDelete":{"name":"MFADelete"}}}},"getBucketWebsite":{"name":"GetBucketWebsite","http":{"method":"GET","uri":"/{Bucket}?website"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"RedirectAllRequestsTo":{"type":"structure","members":{"HostName":{},"Protocol":{}}},"IndexDocument":{"type":"structure","members":{"Suffix":{}}},"ErrorDocument":{"type":"structure","members":{"Key":{}}},"RoutingRules":{"type":"list","members":{"type":"structure","members":{"Condition":{"type":"structure","members":{"HttpErrorCodeReturnedEquals":{},"KeyPrefixEquals":{}}},"Redirect":{"type":"structure","members":{"HostName":{},"HttpRedirectCode":{},"Protocol":{},"ReplaceKeyPrefixWith":{},"ReplaceKeyWith":{}}}},"name":"RoutingRule"}}}}},"getObject":{"name":"GetObject","http":{"method":"GET","uri":"/{Bucket}/{Key}?versionId={VersionId}&response-content-type={ResponseContentType}&response-content-language={ResponseContentLanguage}&response-expires={ResponseExpires}&response-cache-control={ResponseCacheControl}&response-content-disposition={ResponseContentDisposition}&response-content-encoding={ResponseContentEncoding}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"IfMatch":{"location":"header","name":"If-Match"},"IfModifiedSince":{"type":"timestamp","location":"header","name":"If-Modified-Since"},"IfNoneMatch":{"location":"header","name":"If-None-Match"},"IfUnmodifiedSince":{"type":"timestamp","location":"header","name":"If-Unmodified-Since"},"Key":{"required":true,"location":"uri"},"Range":{"location":"header","name":"Range"},"ResponseCacheControl":{"location":"uri"},"ResponseContentDisposition":{"location":"uri"},"ResponseContentEncoding":{"location":"uri"},"ResponseContentLanguage":{"location":"uri"},"ResponseContentType":{"location":"uri"},"ResponseExpires":{"type":"timestamp","location":"uri"},"VersionId":{"location":"uri"}}},"output":{"type":"structure","members":{"Body":{"type":"binary","streaming":true},"DeleteMarker":{"type":"boolean","location":"header","name":"x-amz-delete-marker"},"AcceptRanges":{"location":"header","name":"accept-ranges"},"Expiration":{"type":"timestamp","location":"header","name":"x-amz-expiration"},"Restore":{"location":"header","name":"x-amz-restore"},"LastModified":{"type":"timestamp","location":"header","name":"Last-Modified"},"ContentLength":{"type":"integer","location":"header","name":"Content-Length"},"ETag":{"location":"header","name":"ETag"},"MissingMeta":{"type":"integer","location":"header","name":"x-amz-missing-meta"},"VersionId":{"location":"header","name":"x-amz-version-id"},"CacheControl":{"location":"header","name":"Cache-Control"},"ContentDisposition":{"location":"header","name":"Content-Disposition"},"ContentEncoding":{"location":"header","name":"Content-Encoding"},"ContentLanguage":{"location":"header","name":"Content-Language"},"ContentType":{"location":"header","name":"Content-Type"},"Expires":{"type":"timestamp","location":"header","name":"Expires"},"WebsiteRedirectLocation":{"location":"header","name":"x-amz-website-redirect-location"},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"Metadata":{"type":"map","location":"header","name":"x-amz-meta-","keys":{},"members":{}}},"payload":"Body"}},"getObjectAcl":{"name":"GetObjectAcl","http":{"method":"GET","uri":"/{Bucket}/{Key}?acl&versionId={VersionId}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"},"VersionId":{"location":"uri"}}},"output":{"type":"structure","members":{"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}},"AccessControlList":{"type":"list","members":{"type":"structure","members":{"Grantee":{"type":"structure","members":{"DisplayName":{},"EmailAddress":{},"ID":{},"xsi:type":{"attribute":true,"name":"Type"},"URI":{}},"xmlns":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"Permission":{}},"name":"Grant"},"name":"Grants"}}}},"getObjectTorrent":{"name":"GetObjectTorrent","http":{"method":"GET","uri":"/{Bucket}/{Key}?torrent"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Body":{"type":"binary","streaming":true}},"payload":"Body"}},"headBucket":{"name":"HeadBucket","http":{"method":"HEAD","uri":"/{Bucket}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"headObject":{"name":"HeadObject","http":{"method":"HEAD","uri":"/{Bucket}/{Key}?versionId={VersionId}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"IfMatch":{"location":"header","name":"If-Match"},"IfModifiedSince":{"type":"timestamp","location":"header","name":"If-Modified-Since"},"IfNoneMatch":{"location":"header","name":"If-None-Match"},"IfUnmodifiedSince":{"type":"timestamp","location":"header","name":"If-Unmodified-Since"},"Key":{"required":true,"location":"uri"},"Range":{"location":"header","name":"Range"},"VersionId":{"location":"uri"}}},"output":{"type":"structure","members":{"DeleteMarker":{"type":"boolean","location":"header","name":"x-amz-delete-marker"},"AcceptRanges":{"location":"header","name":"accept-ranges"},"Expiration":{"type":"timestamp","location":"header","name":"x-amz-expiration"},"Restore":{"location":"header","name":"x-amz-restore"},"LastModified":{"type":"timestamp","location":"header","name":"Last-Modified"},"ContentLength":{"type":"integer","location":"header","name":"Content-Length"},"ETag":{"location":"header","name":"ETag"},"MissingMeta":{"type":"integer","location":"header","name":"x-amz-missing-meta"},"VersionId":{"location":"header","name":"x-amz-version-id"},"CacheControl":{"location":"header","name":"Cache-Control"},"ContentDisposition":{"location":"header","name":"Content-Disposition"},"ContentEncoding":{"location":"header","name":"Content-Encoding"},"ContentLanguage":{"location":"header","name":"Content-Language"},"ContentType":{"location":"header","name":"Content-Type"},"Expires":{"type":"timestamp","location":"header","name":"Expires"},"WebsiteRedirectLocation":{"location":"header","name":"x-amz-website-redirect-location"},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"Metadata":{"type":"map","location":"header","name":"x-amz-meta-","keys":{},"members":{}}}}},"listBuckets":{"name":"ListBuckets","http":{"method":"GET","uri":"/"},"input":{"type":"structure","members":{}},"output":{"type":"structure","members":{"Buckets":{"type":"list","members":{"type":"structure","members":{"Name":{},"CreationDate":{"type":"timestamp"}},"name":"Bucket"}},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}}}},"alias":"GetService"},"listMultipartUploads":{"name":"ListMultipartUploads","http":{"method":"GET","uri":"/{Bucket}?uploads&prefix={Prefix}&delimiter={Delimiter}&max-uploads={MaxUploads}&key-marker={KeyMarker}&upload-id-marker={UploadIdMarker}&encoding-type={EncodingType}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Delimiter":{"location":"uri"},"EncodingType":{"location":"uri"},"KeyMarker":{"location":"uri"},"MaxUploads":{"type":"integer","location":"uri"},"Prefix":{"location":"uri"},"UploadIdMarker":{"location":"uri"}}},"output":{"type":"structure","members":{"Bucket":{},"KeyMarker":{},"UploadIdMarker":{},"NextKeyMarker":{},"Prefix":{},"NextUploadIdMarker":{},"MaxUploads":{"type":"integer"},"IsTruncated":{"type":"boolean"},"Upload":{"type":"list","members":{"type":"structure","members":{"UploadId":{},"Key":{},"Initiated":{"type":"timestamp"},"StorageClass":{},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}},"Initiator":{"type":"structure","members":{"ID":{},"DisplayName":{}}}}},"flattened":true,"name":"Uploads"},"CommonPrefixes":{"type":"list","members":{"type":"structure","members":{"Prefix":{}}},"flattened":true},"EncodingType":{}}}},"listObjectVersions":{"name":"ListObjectVersions","http":{"method":"GET","uri":"/{Bucket}?versions&delimiter={Delimiter}&key-marker={KeyMarker}&max-keys={MaxKeys}&prefix={Prefix}&version-id-marker={VersionIdMarker}&encoding-type={EncodingType}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Delimiter":{"location":"uri"},"EncodingType":{"location":"uri"},"KeyMarker":{"location":"uri"},"MaxKeys":{"type":"integer","location":"uri"},"Prefix":{"location":"uri"},"VersionIdMarker":{"location":"uri"}}},"output":{"type":"structure","members":{"IsTruncated":{"type":"boolean"},"KeyMarker":{},"VersionIdMarker":{},"NextKeyMarker":{},"NextVersionIdMarker":{},"Version":{"type":"list","members":{"type":"structure","members":{"ETag":{},"Size":{"type":"integer"},"StorageClass":{},"Key":{},"VersionId":{},"IsLatest":{"type":"boolean"},"LastModified":{"type":"timestamp"},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}}}},"flattened":true,"name":"Versions"},"DeleteMarker":{"type":"list","members":{"type":"structure","members":{"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}},"Key":{},"VersionId":{},"IsLatest":{"type":"boolean"},"LastModified":{"type":"timestamp"}}},"flattened":true,"name":"DeleteMarkers"},"Name":{},"Prefix":{},"MaxKeys":{"type":"integer"},"CommonPrefixes":{"type":"list","members":{"type":"structure","members":{"Prefix":{}}},"flattened":true},"EncodingType":{}}},"alias":"GetBucketObjectVersions"},"listObjects":{"name":"ListObjects","http":{"method":"GET","uri":"/{Bucket}?delimiter={Delimiter}&marker={Marker}&max-keys={MaxKeys}&prefix={Prefix}&encoding-type={EncodingType}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Delimiter":{"location":"uri"},"EncodingType":{"location":"uri"},"Marker":{"location":"uri"},"MaxKeys":{"type":"integer","location":"uri"},"Prefix":{"location":"uri"}}},"output":{"type":"structure","members":{"IsTruncated":{"type":"boolean"},"Marker":{},"NextMarker":{},"Contents":{"type":"list","members":{"type":"structure","members":{"Key":{},"LastModified":{"type":"timestamp"},"ETag":{},"Size":{"type":"integer"},"StorageClass":{},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}}}},"flattened":true},"Name":{},"Prefix":{},"MaxKeys":{"type":"integer"},"CommonPrefixes":{"type":"list","members":{"type":"structure","members":{"Prefix":{}}},"flattened":true},"EncodingType":{}}},"alias":"GetBucket"},"listParts":{"name":"ListParts","http":{"method":"GET","uri":"/{Bucket}/{Key}?uploadId={UploadId}&max-parts={MaxParts}&part-number-marker={PartNumberMarker}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"},"MaxParts":{"type":"integer","location":"uri"},"PartNumberMarker":{"type":"integer","location":"uri"},"UploadId":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Bucket":{},"Key":{},"UploadId":{},"PartNumberMarker":{"type":"integer"},"NextPartNumberMarker":{"type":"integer"},"MaxParts":{"type":"integer"},"IsTruncated":{"type":"boolean"},"Part":{"type":"list","members":{"type":"structure","members":{"PartNumber":{"type":"integer"},"LastModified":{"type":"timestamp"},"ETag":{},"Size":{"type":"integer"}}},"flattened":true,"name":"Parts"},"Initiator":{"type":"structure","members":{"ID":{},"DisplayName":{}}},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}},"StorageClass":{}}}},"putBucketAcl":{"name":"PutBucketAcl","http":{"method":"PUT","uri":"/{Bucket}?acl"},"input":{"payload":"AccessControlPolicy","type":"structure","members":{"ACL":{"location":"header","name":"x-amz-acl"},"AccessControlPolicy":{"type":"structure","members":{"Grants":{"type":"list","members":{"type":"structure","members":{"Grantee":{"type":"structure","members":{"DisplayName":{},"EmailAddress":{},"ID":{},"Type":{"required":true,"attribute":true,"name":"xsi:type"},"URI":{}},"xmlns":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"Permission":{}},"name":"Grant"},"name":"AccessControlList"},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}}}},"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"GrantFullControl":{"location":"header","name":"x-amz-grant-full-control"},"GrantRead":{"location":"header","name":"x-amz-grant-read"},"GrantReadACP":{"location":"header","name":"x-amz-grant-read-acp"},"GrantWrite":{"location":"header","name":"x-amz-grant-write"},"GrantWriteACP":{"location":"header","name":"x-amz-grant-write-acp"}}},"output":{"type":"structure","members":{}}},"putBucketCors":{"name":"PutBucketCors","http":{"method":"PUT","uri":"/{Bucket}?cors"},"input":{"payload":"CORSConfiguration","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"CORSConfiguration":{"type":"structure","members":{"CORSRules":{"type":"list","members":{"type":"structure","members":{"AllowedHeaders":{"type":"list","members":{},"flattened":true,"name":"AllowedHeader"},"AllowedMethods":{"type":"list","members":{},"flattened":true,"name":"AllowedMethod"},"AllowedOrigins":{"type":"list","members":{},"flattened":true,"name":"AllowedOrigin"},"ExposeHeaders":{"type":"list","members":{},"flattened":true,"name":"ExposeHeader"},"MaxAgeSeconds":{"type":"integer"}}},"flattened":true,"name":"CORSRule"}}},"ContentMD5":{"location":"header","name":"Content-MD5"}}},"output":{"type":"structure","members":{}}},"putBucketLifecycle":{"name":"PutBucketLifecycle","http":{"method":"PUT","uri":"/{Bucket}?lifecycle"},"input":{"payload":"LifecycleConfiguration","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"LifecycleConfiguration":{"type":"structure","members":{"Rules":{"type":"list","members":{"type":"structure","members":{"Expiration":{"type":"structure","members":{"Date":{"type":"timestamp","format":"iso8601"},"Days":{"type":"integer"}}},"ID":{},"Prefix":{"required":true},"Status":{"required":true},"Transition":{"type":"structure","members":{"Date":{"type":"timestamp","format":"iso8601"},"Days":{"type":"integer"},"StorageClass":{}}},"NoncurrentVersionTransition":{"type":"structure","members":{"NoncurrentDays":{"type":"integer"},"StorageClass":{}}},"NoncurrentVersionExpiration":{"type":"structure","members":{"NoncurrentDays":{"type":"integer"}}}}},"flattened":true,"required":true,"name":"Rule"}}}}},"output":{"type":"structure","members":{}}},"putBucketLogging":{"name":"PutBucketLogging","http":{"method":"PUT","uri":"/{Bucket}?logging"},"input":{"payload":"BucketLoggingStatus","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"BucketLoggingStatus":{"type":"structure","members":{"LoggingEnabled":{"type":"structure","members":{"TargetBucket":{},"TargetGrants":{"type":"list","members":{"type":"structure","members":{"Grantee":{"type":"structure","members":{"DisplayName":{},"EmailAddress":{},"ID":{},"Type":{"required":true,"attribute":true,"name":"xsi:type"},"URI":{}},"xmlns":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"Permission":{}},"name":"Grant"}},"TargetPrefix":{}}}},"required":true},"ContentMD5":{"location":"header","name":"Content-MD5"}}},"output":{"type":"structure","members":{}}},"putBucketNotification":{"name":"PutBucketNotification","http":{"method":"PUT","uri":"/{Bucket}?notification"},"input":{"payload":"NotificationConfiguration","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"NotificationConfiguration":{"type":"structure","members":{"TopicConfiguration":{"type":"structure","members":{"Event":{},"Topic":{}},"required":true}},"required":true}}},"output":{"type":"structure","members":{}}},"putBucketPolicy":{"name":"PutBucketPolicy","http":{"method":"PUT","uri":"/{Bucket}?policy"},"input":{"payload":"Policy","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"Policy":{"required":true}}},"output":{"type":"structure","members":{}}},"putBucketRequestPayment":{"name":"PutBucketRequestPayment","http":{"method":"PUT","uri":"/{Bucket}?requestPayment"},"input":{"payload":"RequestPaymentConfiguration","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"RequestPaymentConfiguration":{"type":"structure","members":{"Payer":{"required":true}},"required":true}}},"output":{"type":"structure","members":{}}},"putBucketTagging":{"name":"PutBucketTagging","http":{"method":"PUT","uri":"/{Bucket}?tagging"},"input":{"payload":"Tagging","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"Tagging":{"type":"structure","members":{"TagSet":{"type":"list","members":{"type":"structure","members":{"Key":{"required":true},"Value":{"required":true}},"name":"Tag"},"required":true}},"required":true}}},"output":{"type":"structure","members":{}}},"putBucketVersioning":{"name":"PutBucketVersioning","http":{"method":"PUT","uri":"/{Bucket}?versioning"},"input":{"payload":"VersioningConfiguration","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"MFA":{"location":"header","name":"x-amz-mfa"},"VersioningConfiguration":{"type":"structure","members":{"MFADelete":{"name":"MfaDelete"},"Status":{}},"required":true}}},"output":{"type":"structure","members":{}}},"putBucketWebsite":{"name":"PutBucketWebsite","http":{"method":"PUT","uri":"/{Bucket}?website"},"input":{"payload":"WebsiteConfiguration","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"WebsiteConfiguration":{"type":"structure","members":{"ErrorDocument":{"type":"structure","members":{"Key":{"required":true}}},"IndexDocument":{"type":"structure","members":{"Suffix":{"required":true}}},"RedirectAllRequestsTo":{"type":"structure","members":{"HostName":{"required":true},"Protocol":{}}},"RoutingRules":{"type":"list","members":{"type":"structure","members":{"Condition":{"type":"structure","members":{"HttpErrorCodeReturnedEquals":{},"KeyPrefixEquals":{}}},"Redirect":{"type":"structure","members":{"HostName":{},"HttpRedirectCode":{},"Protocol":{},"ReplaceKeyPrefixWith":{},"ReplaceKeyWith":{}},"required":true}},"name":"RoutingRule"}}},"required":true}}},"output":{"type":"structure","members":{}}},"putObject":{"name":"PutObject","http":{"method":"PUT","uri":"/{Bucket}/{Key}"},"input":{"payload":"Body","type":"structure","members":{"ACL":{"location":"header","name":"x-amz-acl"},"Body":{"type":"binary","streaming":true},"Bucket":{"required":true,"location":"uri"},"CacheControl":{"location":"header","name":"Cache-Control"},"ContentDisposition":{"location":"header","name":"Content-Disposition"},"ContentEncoding":{"location":"header","name":"Content-Encoding"},"ContentLanguage":{"location":"header","name":"Content-Language"},"ContentLength":{"type":"integer","location":"header","name":"Content-Length"},"ContentMD5":{"location":"header","name":"Content-MD5"},"ContentType":{"location":"header","name":"Content-Type"},"Expires":{"type":"timestamp","location":"header","name":"Expires"},"GrantFullControl":{"location":"header","name":"x-amz-grant-full-control"},"GrantRead":{"location":"header","name":"x-amz-grant-read"},"GrantReadACP":{"location":"header","name":"x-amz-grant-read-acp"},"GrantWriteACP":{"location":"header","name":"x-amz-grant-write-acp"},"Key":{"required":true,"location":"uri"},"Metadata":{"type":"map","location":"header","name":"x-amz-meta-","keys":{},"members":{}},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"StorageClass":{"location":"header","name":"x-amz-storage-class"},"WebsiteRedirectLocation":{"location":"header","name":"x-amz-website-redirect-location"}}},"output":{"type":"structure","members":{"Expiration":{"type":"timestamp","location":"header","name":"x-amz-expiration"},"ETag":{"location":"header","name":"ETag"},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"VersionId":{"location":"header","name":"x-amz-version-id"}}}},"putObjectAcl":{"name":"PutObjectAcl","http":{"method":"PUT","uri":"/{Bucket}/{Key}?acl"},"input":{"payload":"AccessControlPolicy","type":"structure","members":{"ACL":{"location":"header","name":"x-amz-acl"},"AccessControlPolicy":{"type":"structure","members":{"Grants":{"type":"list","members":{"type":"structure","members":{"Grantee":{"type":"structure","members":{"DisplayName":{},"EmailAddress":{},"ID":{},"Type":{"required":true,"attribute":true,"name":"xsi:type"},"URI":{}},"xmlns":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"Permission":{}},"name":"Grant"},"name":"AccessControlList"},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}}}},"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"GrantFullControl":{"location":"header","name":"x-amz-grant-full-control"},"GrantRead":{"location":"header","name":"x-amz-grant-read"},"GrantReadACP":{"location":"header","name":"x-amz-grant-read-acp"},"GrantWrite":{"location":"header","name":"x-amz-grant-write"},"GrantWriteACP":{"location":"header","name":"x-amz-grant-write-acp"},"Key":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"restoreObject":{"name":"RestoreObject","http":{"method":"POST","uri":"/{Bucket}/{Key}?restore&versionId={VersionId}"},"input":{"payload":"RestoreRequest","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"},"VersionId":{"location":"uri"},"RestoreRequest":{"type":"structure","members":{"Days":{"type":"integer","required":true}}}}},"output":{"type":"structure","members":{}},"alias":"PostObjectRestore"},"uploadPart":{"name":"UploadPart","http":{"method":"PUT","uri":"/{Bucket}/{Key}?partNumber={PartNumber}&uploadId={UploadId}"},"input":{"payload":"Body","type":"structure","members":{"Body":{"type":"binary","streaming":true},"Bucket":{"required":true,"location":"uri"},"ContentLength":{"type":"integer","location":"header","name":"Content-Length"},"ContentMD5":{"location":"header","name":"Content-MD5"},"Key":{"required":true,"location":"uri"},"PartNumber":{"type":"integer","required":true,"location":"uri"},"UploadId":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"ETag":{"location":"header","name":"ETag"}}}},"uploadPartCopy":{"name":"UploadPartCopy","http":{"method":"PUT","uri":"/{Bucket}/{Key}?partNumber={PartNumber}&uploadId={UploadId}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"CopySource":{"required":true,"location":"header","name":"x-amz-copy-source"},"CopySourceIfMatch":{"location":"header","name":"x-amz-copy-source-if-match"},"CopySourceIfModifiedSince":{"type":"timestamp","location":"header","name":"x-amz-copy-source-if-modified-since"},"CopySourceIfNoneMatch":{"location":"header","name":"x-amz-copy-source-if-none-match"},"CopySourceIfUnmodifiedSince":{"type":"timestamp","location":"header","name":"x-amz-copy-source-if-unmodified-since"},"CopySourceRange":{"location":"header","name":"x-amz-copy-source-range"},"Key":{"required":true,"location":"uri"},"PartNumber":{"type":"integer","required":true,"location":"uri"},"UploadId":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"CopySourceVersionId":{"location":"header","name":"x-amz-copy-source-version-id"},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"ETag":{},"LastModified":{"type":"timestamp"}}}}},"pagination":{"listBuckets":{"resultKey":"Buckets"},"listMultipartUploads":{"limitKey":"MaxUploads","moreResults":"IsTruncated","outputToken":["NextKeyMarker","NextUploadIdMarker"],"inputToken":["KeyMarker","UploadIdMarker"],"resultKey":"Uploads"},"listObjectVersions":{"moreResults":"IsTruncated","limitKey":"MaxKeys","outputToken":["NextKeyMarker","NextVersionIdMarker"],"inputToken":["KeyMarker","VersionIdMarker"],"resultKey":"Versions"},"listObjects":{"moreResults":"IsTruncated","limitKey":"MaxKeys","outputToken":"NextMarker or Contents[-1].Key","inputToken":"Marker","resultKey":["Contents","CommonPrefixes"]},"listParts":{"moreResults":"IsTruncated","limitKey":"MaxParts","outputToken":"NextPartNumberMarker","inputToken":"PartNumberMarker","resultKey":"Parts"}},"waiters":{"__default__":{"interval":5,"maxAttempts":20},"bucketExists":{"operation":"HeadBucket","ignoreErrors":["NoSuchBucket"],"successType":"output"},"bucketNotExists":{"operation":"HeadBucket","successType":"error","successValue":404},"objectExists":{"operation":"HeadObject","ignoreErrors":["NoSuchKey"],"successType":"output"},"objectNotExists":{"operation":"HeadObject","successType":"error","successValue":404}}});
 window.AWS.SNS = window.AWS.Service.defineService('sns');
 
 window.AWS.Service.defineServiceApi(window.AWS.SNS, "2010-03-31", {"format":"query","apiVersion":"2010-03-31","endpointPrefix":"sns","resultWrapped":true,"serviceAbbreviation":"Amazon SNS","serviceFullName":"Amazon Simple Notification Service","signatureVersion":"v4","timestampFormat":"iso8601","operations":{"addPermission":{"name":"AddPermission","input":{"type":"structure","members":{"TopicArn":{"required":true},"Label":{"required":true},"AWSAccountId":{"type":"list","members":{},"required":true},"ActionName":{"type":"list","members":{},"required":true}}},"output":{"type":"structure","members":{}}},"confirmSubscription":{"name":"ConfirmSubscription","input":{"type":"structure","members":{"TopicArn":{"required":true},"Token":{"required":true},"AuthenticateOnUnsubscribe":{}}},"output":{"type":"structure","members":{"SubscriptionArn":{}}}},"createPlatformApplication":{"name":"CreatePlatformApplication","input":{"type":"structure","members":{"Name":{"required":true},"Platform":{"required":true},"Attributes":{"type":"map","keys":{},"members":{},"required":true}}},"output":{"type":"structure","members":{"PlatformApplicationArn":{}}}},"createPlatformEndpoint":{"name":"CreatePlatformEndpoint","input":{"type":"structure","members":{"PlatformApplicationArn":{"required":true},"Token":{"required":true},"CustomUserData":{},"Attributes":{"type":"map","keys":{},"members":{}}}},"output":{"type":"structure","members":{"EndpointArn":{}}}},"createTopic":{"name":"CreateTopic","input":{"type":"structure","members":{"Name":{"required":true}}},"output":{"type":"structure","members":{"TopicArn":{}}}},"deleteEndpoint":{"name":"DeleteEndpoint","input":{"type":"structure","members":{"EndpointArn":{"required":true}}},"output":{"type":"structure","members":{}}},"deletePlatformApplication":{"name":"DeletePlatformApplication","input":{"type":"structure","members":{"PlatformApplicationArn":{"required":true}}},"output":{"type":"structure","members":{}}},"deleteTopic":{"name":"DeleteTopic","input":{"type":"structure","members":{"TopicArn":{"required":true}}},"output":{"type":"structure","members":{}}},"getEndpointAttributes":{"name":"GetEndpointAttributes","input":{"type":"structure","members":{"EndpointArn":{"required":true}}},"output":{"type":"structure","members":{"Attributes":{"type":"map","keys":{},"members":{}}}}},"getPlatformApplicationAttributes":{"name":"GetPlatformApplicationAttributes","input":{"type":"structure","members":{"PlatformApplicationArn":{"required":true}}},"output":{"type":"structure","members":{"Attributes":{"type":"map","keys":{},"members":{}}}}},"getSubscriptionAttributes":{"name":"GetSubscriptionAttributes","input":{"type":"structure","members":{"SubscriptionArn":{"required":true}}},"output":{"type":"structure","members":{"Attributes":{"type":"map","keys":{},"members":{}}}}},"getTopicAttributes":{"name":"GetTopicAttributes","input":{"type":"structure","members":{"TopicArn":{"required":true}}},"output":{"type":"structure","members":{"Attributes":{"type":"map","keys":{},"members":{}}}}},"listEndpointsByPlatformApplication":{"name":"ListEndpointsByPlatformApplication","input":{"type":"structure","members":{"PlatformApplicationArn":{"required":true},"NextToken":{}}},"output":{"type":"structure","members":{"Endpoints":{"type":"list","members":{"type":"structure","members":{"EndpointArn":{},"Attributes":{"type":"map","keys":{},"members":{}}}}},"NextToken":{}}}},"listPlatformApplications":{"name":"ListPlatformApplications","input":{"type":"structure","members":{"NextToken":{}}},"output":{"type":"structure","members":{"PlatformApplications":{"type":"list","members":{"type":"structure","members":{"PlatformApplicationArn":{},"Attributes":{"type":"map","keys":{},"members":{}}}}},"NextToken":{}}}},"listSubscriptions":{"name":"ListSubscriptions","input":{"type":"structure","members":{"NextToken":{}}},"output":{"type":"structure","members":{"Subscriptions":{"type":"list","members":{"type":"structure","members":{"SubscriptionArn":{},"Owner":{},"Protocol":{},"Endpoint":{},"TopicArn":{}}}},"NextToken":{}}}},"listSubscriptionsByTopic":{"name":"ListSubscriptionsByTopic","input":{"type":"structure","members":{"TopicArn":{"required":true},"NextToken":{}}},"output":{"type":"structure","members":{"Subscriptions":{"type":"list","members":{"type":"structure","members":{"SubscriptionArn":{},"Owner":{},"Protocol":{},"Endpoint":{},"TopicArn":{}}}},"NextToken":{}}}},"listTopics":{"name":"ListTopics","input":{"type":"structure","members":{"NextToken":{}}},"output":{"type":"structure","members":{"Topics":{"type":"list","members":{"type":"structure","members":{"TopicArn":{}}}},"NextToken":{}}}},"publish":{"name":"Publish","input":{"type":"structure","members":{"TopicArn":{},"TargetArn":{},"Message":{"required":true},"Subject":{},"MessageStructure":{}}},"output":{"type":"structure","members":{"MessageId":{}}}},"removePermission":{"name":"RemovePermission","input":{"type":"structure","members":{"TopicArn":{"required":true},"Label":{"required":true}}},"output":{"type":"structure","members":{}}},"setEndpointAttributes":{"name":"SetEndpointAttributes","input":{"type":"structure","members":{"EndpointArn":{"required":true},"Attributes":{"type":"map","keys":{},"members":{},"required":true}}},"output":{"type":"structure","members":{}}},"setPlatformApplicationAttributes":{"name":"SetPlatformApplicationAttributes","input":{"type":"structure","members":{"PlatformApplicationArn":{"required":true},"Attributes":{"type":"map","keys":{},"members":{},"required":true}}},"output":{"type":"structure","members":{}}},"setSubscriptionAttributes":{"name":"SetSubscriptionAttributes","input":{"type":"structure","members":{"SubscriptionArn":{"required":true},"AttributeName":{"required":true},"AttributeValue":{}}},"output":{"type":"structure","members":{}}},"setTopicAttributes":{"name":"SetTopicAttributes","input":{"type":"structure","members":{"TopicArn":{"required":true},"AttributeName":{"required":true},"AttributeValue":{}}},"output":{"type":"structure","members":{}}},"subscribe":{"name":"Subscribe","input":{"type":"structure","members":{"TopicArn":{"required":true},"Protocol":{"required":true},"Endpoint":{}}},"output":{"type":"structure","members":{"SubscriptionArn":{}}}},"unsubscribe":{"name":"Unsubscribe","input":{"type":"structure","members":{"SubscriptionArn":{"required":true}}},"output":{"type":"structure","members":{}}}},"pagination":{"listEndpointsByPlatformApplication":{"inputToken":"NextToken","outputToken":"NextToken","resultKey":"Endpoints"},"listPlatformApplications":{"inputToken":"NextToken","outputToken":"NextToken","resultKey":"PlatformApplications"},"listSubscriptions":{"inputToken":"NextToken","outputToken":"NextToken","resultKey":"Subscriptions"},"listSubscriptionsByTopic":{"inputToken":"NextToken","outputToken":"NextToken","resultKey":"Subscriptions"},"listTopics":{"inputToken":"NextToken","outputToken":"NextToken","resultKey":"Topics"}}});
