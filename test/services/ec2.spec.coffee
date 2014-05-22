@@ -29,12 +29,13 @@ describe 'AWS.EC2', ->
             "%26SourceSnapshotId%3Dsnap-123456789%26Version%3D#{ec2.api.apiVersion}" +
             "%26X-Amz-Algorithm%3DAWS4-HMAC-SHA256%26X-Amz-Credential%3Dakid%252F19700101" +
             "%252Fsrc-region%252Fec2%252Faws4_request%26X-Amz-Date%3D19700101T000000Z" +
-            "%26X-Amz-Expires%3D3600%26X-Amz-SignedHeaders%3Dhost%26X-Amz-Signature" +
-            "%3D3dc16b5c6a9de16d2ac9aca1df2f20ce5c8c5f9daf57a65b09ee3ae41a553b6a",
+            "%26X-Amz-Expires%3D3600%26X-Amz-Security-Token%3Dsession" +
+            "%26X-Amz-Signature%3D014459362191e87b3b175e1e16d007c0c9aaa1fdb2743f8cebdfd8dea0fb0cc2" +
+            "%26X-Amz-SignedHeaders%3Dhost",
           'SourceRegion=src-region',
           'SourceSnapshotId=snap-123456789'
         ].forEach (i) ->
-          expect(parts.indexOf(i)).not.toEqual(-1)
+          expect(parts).toContain(i)
 
   describe 'parseResponse', ->
     body = ''
