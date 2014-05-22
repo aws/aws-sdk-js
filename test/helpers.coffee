@@ -19,6 +19,7 @@ AWS.config.update
   credentials:
     accessKeyId: 'akid'
     secretAccessKey: 'secret'
+    sessionToken: 'session'
 
 # Disable setTimeout for tests
 # Warning: this might cause unpredictable results
