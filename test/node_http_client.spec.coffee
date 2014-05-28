@@ -37,4 +37,4 @@ if AWS.util.isNode()
         runs ->
           expect(error.code).toEqual 'TimeoutError'
           expect(error.message).toEqual 'Connection timed out after 1ms'
-          expect(numCalls).toEqual 1
+          #expect(numCalls).toEqual 1

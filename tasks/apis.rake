@@ -119,5 +119,6 @@ desc 'Builds the API for each service.'
 task :api => 'api:all'
 
 Dir.glob(File.join(models_path, '*.json')).sort.each do |file|
+  next if file.count('.') > 1
   add_tasks(File.basename(file))
 end

@@ -6,15 +6,15 @@ describe 'AWS.Response', ->
   service = null; response = null
 
   beforeEach ->
-    service = new AWS.Service apiConfig: operations: op: input: {}, output: {}
+    service = new AWS.Service apiConfig: new AWS.Model.Api operations: op: {}
     response = new AWS.Response(service.makeRequest('op'))
 
   makePageable = ->
-    service.api.pagination = op:
-      limitKey: 'Limit'
-      inputToken: 'Marker'
-      outputToken: 'Marker'
-      resultKey: 'Result'
+    service.api.paginators.op = new AWS.Model.Paginator 'op',
+      limit_key: 'Limit'
+      input_token: 'Marker'
+      output_token: 'Marker'
+      result_key: 'Result'
 
   fill = (err, data, pageable) ->
     makePageable() if pageable
@@ -39,9 +39,6 @@ describe 'AWS.Response', ->
       expect(response.hasNextPage()).toEqual(true)
 
   describe 'nextPage', ->
-    it 'throws an exception if the service has no pagination information', ->
-      expect(-> response.nextPage()).toThrow('No pagination configuration for service')
-
     it 'throws an exception if the operation has no pagination information', ->
       service.api.pagination = {}
       expect(-> response.nextPage()).toThrow('No pagination configuration for op')

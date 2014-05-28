@@ -14,7 +14,7 @@ describe 'AWS.ElasticTranscoder', ->
       et.cancelJob { Id: 'job-id' }, (err, data) ->
         req = this.request.httpRequest
         expect(req.path).toEqual('/2012-09-25/jobs/job-id')
-        expect(req.body).toEqual('')
+        expect(req.body).toEqual('{}')
 
   describe 'updatePipelineNotifications', ->
     it 'only populates the body with non-uri and non-header params', ->

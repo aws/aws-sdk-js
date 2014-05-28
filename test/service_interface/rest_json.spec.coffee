@@ -1,15 +1,17 @@
 helpers = require('../helpers'); AWS = helpers.AWS
-Buffer = AWS.util.Buffer
+Operation = helpers.require('model/operation')
+Buffer = helpers.util.Buffer
 
+svc = helpers.require('service_interface/rest_json')
 describe 'AWS.ServiceInterface.RestJson', ->
 
-  MockJSONRESTService = AWS.util.inherit AWS.Service,
+  MockJSONRESTService = helpers.util.inherit AWS.Service,
     endpointPrefix: 'mockservice'
 
   operation = null
   request = null
   response = null
-  svc = eval(@description)
+  service = null
 
   beforeEach ->
     MockJSONRESTService.prototype.api =
@@ -32,158 +34,116 @@ describe 'AWS.ServiceInterface.RestJson', ->
     request = new AWS.Request(service, 'sampleOperation')
     response = new AWS.Response(request)
 
+  defop = (op) ->
+    helpers.util.property(service.api.operations, 'sampleOperation',
+      new Operation('sampleOperation', op, api: service.api))
+
   describe 'buildRequest', ->
-    buildRequest = (callback) ->
-      if callback
-        callback()
-      svc.buildRequest(request)
+    build = -> svc.buildRequest(request); request
 
     describe 'method', ->
       it 'populates method from the operation', ->
-        buildRequest ->
-          operation.http.method = 'GET'
-        expect(request.httpRequest.method).toEqual('GET')
+        defop http: method: 'GET'
+        expect(build().httpRequest.method).toEqual('GET')
 
     describe 'uri', ->
       it 'populates uri from the operation', ->
-        buildRequest ->
-          operation.http.uri = '/path'
-        expect(request.httpRequest.path).toEqual('/path')
+        defop http: requestUri: '/path'
+        expect(build().httpRequest.path).toEqual('/path')
 
       it 'replaces param placeholders', ->
-        buildRequest ->
-          operation.http.uri = '/Owner/{Id}'
-          operation.input =
-            members:
-              Id:
-                location: 'uri'
-          request.params = Id: 'abc'
-        expect(request.httpRequest.path).toEqual('/Owner/abc')
+        request.params = Id: 'abc'
+        defop
+          http: requestUri: '/Owner/{Id}'
+          input: type: 'structure', members: Id: location: 'uri'
+        expect(build().httpRequest.path).toEqual('/Owner/abc')
 
       it 'can replace multiple path placeholders', ->
-        buildRequest ->
-          operation.http.uri = '/{Id}/{Count}'
-          operation.input =
+        request.params = Id: 'abc', Count: 123
+        defop
+          http: requestUri: '/{Id}/{Count}'
+          input:
+            type: 'structure'
             members:
               Id:
                 location: 'uri'
+                type: 'string'
               Count:
                 type: 'integer'
                 location: 'uri'
-          request.params = Id: 'abc', Count: 123
-        expect(request.httpRequest.path).toEqual('/abc/123')
+        expect(build().httpRequest.path).toEqual('/abc/123')
 
       it 'performs querystring param replacements', ->
-        buildRequest ->
-          operation.http.uri = '/path?id-param={Id}'
-          operation.input =
+        request.params = Id: 'abc'
+        defop
+          http: requestUri: '/path'
+          input:
+            type: 'structure'
             members:
               Id:
-                location: 'uri'
-          request.params = Id: 'abc'
-        expect(request.httpRequest.path).toEqual('/path?id-param=abc')
-
-      it 'omits querystring when param is not provided', ->
-        buildRequest ->
-          operation.http.uri = '/path?id-param={Id}'
-          operation.input =
-            members:
-              Id:
-                location: 'uri'
-        expect(request.httpRequest.path).toEqual('/path')
-
-      it 'accpets multiple query params with uri params', ->
-        buildRequest ->
-          operation.http.uri = '/{Abc}/{Xyz}?foo={Foo}&bar={Bar}'
-          operation.input =
-            members:
-              Abc:
-                location: 'uri'
-              Xyz:
-                location: 'uri'
-              Foo:
-                location: 'uri'
-              Bar:
-                location: 'uri'
-          request.params = { Abc:'abc', Xyz:'xyz', Bar:'bar' } # omitted Foo
-        expect(request.httpRequest.path).toEqual('/abc/xyz?bar=bar')
-
-      it 'uri escapes params in both path and querystring', ->
-        buildRequest ->
-          operation.http.uri = '/{Path}?query={Query}'
-          operation.input =
-            members:
-              Path:
-                location: 'uri'
-              Query:
-                location: 'uri'
-          request.params = { Path:'a b', Query:'a/b' }
-        expect(request.httpRequest.path).toEqual('/a%20b?query=a%2Fb')
+                location: 'querystring'
+                locationName: 'id-param'
+        expect(build().httpRequest.path).toEqual('/path?id-param=abc')
 
     describe 'headers', ->
       it 'populates the headers with present params', ->
-        buildRequest ->
-          operation.input =
-            members:
-              ACL:
-                location: 'header'
-                name: 'x-amz-acl'
-          request.params = ACL: 'public-read'
-        expect(request.httpRequest.headers['x-amz-acl']).toEqual('public-read')
+        request.params = ACL: 'public-read'
+        defop input:
+          members:
+            ACL:
+              location: 'header'
+              locationName: 'x-amz-acl'
+        expect(build().httpRequest.headers['x-amz-acl']).toEqual('public-read')
 
       it 'uses default rule name if .n property is not present', ->
-        buildRequest ->
-          operation.input =
-            members:
-              ACL:
-                location: 'header'
-          request.params = ACL: 'public-read'
-        expect(request.httpRequest.headers['ACL']).toEqual('public-read')
+        request.params = ACL: 'public-read'
+        defop input:
+          members:
+            ACL:
+              location: 'header'
+        expect(build().httpRequest.headers['ACL']).toEqual('public-read')
 
       it 'works with map types', ->
-        buildRequest ->
-          operation.input =
-            members:
-              Metadata:
-                type: 'map'
-                location: 'header'
-                name: 'x-amz-meta-'
-          request.params =
+        request.params =
+          Metadata:
+            foo: 'bar'
+            abc: 'xyz'
+        defop input:
+          members:
             Metadata:
-              foo: 'bar'
-              abc: 'xyz'
+              type: 'map'
+              location: 'headers'
+              locationName: 'x-amz-meta-'
+
+        build()
         expect(request.httpRequest.headers['x-amz-meta-foo']).toEqual('bar')
         expect(request.httpRequest.headers['x-amz-meta-abc']).toEqual('xyz')
 
     describe 'body', ->
       it 'builds root element if rules contains root', ->
-        buildRequest ->
-          operation.input =
-            payload: 'Config'
-            members:
-              Config:
-                type: 'structure'
-                members:
-                  Name: type: 'string'
-                  Type: type: 'string'
-          request.params =
+        request.params =
+          Config:
+            Name: 'foo'
+            Type: 'bar'
+        defop input:
+          payload: 'Config'
+          members:
             Config:
-              Name: 'foo'
-              Type: 'bar'
-        expect(request.httpRequest.body.toString()).toEqual(
+              type: 'structure'
+              members:
+                Name: type: 'string'
+                Type: type: 'string'
+        expect(build().httpRequest.body.toString()).toEqual(
           '{"Name":"foo","Type":"bar"}')
 
       it 'builds payload element as non JSON data if rules contains payload', ->
-        buildRequest ->
-          operation.input =
-            payload: 'Body'
-            members:
-              Body:
-                type: 'binary'
-                location: 'body'
-          request.params =
-            Body: 'foobar'
-        expect(request.httpRequest.body).toEqual('foobar')
+        request.params = Body: 'foobar'
+        defop input:
+          payload: 'Body'
+          members:
+            Body:
+              type: 'binary'
+        expect(build().httpRequest.body).toEqual('foobar')
 
   describe 'extractError', ->
     extractError = (body) ->
@@ -248,17 +208,19 @@ describe 'AWS.ServiceInterface.RestJson', ->
 
     it 'pulls header data out of response', ->
       response.httpResponse.headers['x-title'] = 'The title'
-      operation.output =
+      defop output:
         type: 'structure'
         members:
-          Title: location: 'header', name: 'x-title'
+          Title:
+            location: 'header'
+            locationName: 'x-title'
 
       extractData '{}'
       expect(response.error).toEqual(null)
       expect(response.data.Title).toEqual('The title')
 
     it 'pulls body out into data key if body is payload', ->
-      operation.output =
+      defop output:
         type: 'structure'
         payload: 'Body'
         members:
@@ -269,7 +231,7 @@ describe 'AWS.ServiceInterface.RestJson', ->
       expect(response.data.Body).toEqual('foobar')
 
     it 'pulls body out as Buffer if body is streaming payload', ->
-      operation.output =
+      defop output:
         type: 'structure'
         payload: 'Body'
         members:

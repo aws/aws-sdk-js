@@ -14,6 +14,7 @@
     "no-underscore-dangle": 0,
     "new-cap": 0,
     "dot-notation": 0,
+    "no-use-before-define": 0,
     "no-require-in-service": 2
   }
 }

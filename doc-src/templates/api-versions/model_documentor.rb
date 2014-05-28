@@ -86,9 +86,9 @@ class MethodDocumentor
 
   attr_reader :lines
 
-  def initialize(operation, api, klass)
+  def initialize(operation_name, operation, api, klass)
     desc = documentation(operation)
-    desc ||= "Calls the #{method_name(operation, false)} API operation."
+    desc ||= "Calls the #{method_name(operation_name, false)} API operation."
     desc = desc.gsub(/^\s+/, '').strip
 
     @lines = [desc, '']
@@ -96,12 +96,12 @@ class MethodDocumentor
     ## @param tags
 
     @lines << "@param params [Object]"
-    @lines += shapes(operation['input']).map {|line| "  " + line }
+    @lines += shapes(api, operation['input']).map {|line| "  " + line }
 
     ## @example tag
 
-    @lines << "@example Calling the #{method_name(operation)} operation"
-    @lines << generate_example(klass, method_name(operation),
+    @lines << "@example Calling the #{method_name(operation_name)} operation"
+    @lines << generate_example(api, klass, method_name(operation_name),
                 operation['input']).split("\n").map {|line| "  " + line }
     @lines << ""
 
@@ -116,7 +116,7 @@ class MethodDocumentor
     @lines << "  @param data [Object] the de-serialized data returned from"
     @lines << "    the request. Set to `null` if a request error occurs."
 
-    output = shapes(operation['output'])
+    output = shapes(api, operation['output'])
     output = output.map {|line| "    " + line }
     if output.size > 0
       @lines << "    The `data` object has the following properties:"
@@ -131,34 +131,38 @@ class MethodDocumentor
 
     if operation['documentation_url']
       @lines << "@see #{operation['documentation_url']}"
-      @lines << "  #{api['serviceAbbreviation']} Documentation for #{operation['name']}"
+      @lines << "  #{api['serviceAbbreviation']} Documentation for #{operation_name}"
     end
   end
 
-  def method_name(operation, downcased = true)
-    name = operation['name']
+  def method_name(name, downcased = true)
     name = name.sub(/\d{4}_\d{2}_\d{2}$/, '')
     downcased ? name[0].downcase + name[1..-1] : name
   end
 
-  def shapes(rules)
+  def shapes(api, rules)
+    rules = api['shapes'][rules['shape']] if rules && rules['shape']
     if rules and rules['members']
       rules['members'].map do |name, member_rules|
-        ShapeDocumentor.new(member_rules, :name => name).lines
+        if member_rules['shape']
+          member_rules = api['shapes'][member_rules['shape']].merge(member_rules)
+        end
+        ShapeDocumentor.new(api, member_rules, :name => name).lines
       end.flatten
     else
       []
     end
   end
 
-  def generate_example(klass, name, input)
-    ExampleShapeVisitor.new.example(klass, name, input)
+  def generate_example(api, klass, name, input)
+    ExampleShapeVisitor.new(api).example(klass, name, input)
   end
 
 end
 
 class ExampleShapeVisitor
-  def initialize(required_only = false)
+  def initialize(api, required_only = false)
+    @api = api
     @required_only = required_only
   end
 
@@ -177,70 +181,76 @@ class ExampleShapeVisitor
     lines.join("\n")
   end
 
-  def traverse(node)
+  def traverse(node, required = false)
+    return "" if node.nil?
+    node = @api['shapes'][node['shape']].merge(node) if node['shape']
     if (meth = "visit_" + (node['type'] || 'string')) && respond_to?(meth)
-      return send(meth, node)
+      return send(meth, node, required)
     end
     ""
   end
 
-  def visit_structure(node)
-    lines = ["{" + (node['required'] ? " // required" : "")]
-    node['members'].sort_by {|n, v| [v['required'] ? -1 : 1, n] }.each do |key, value|
-      next if @required_only && !value['required']
-      lines << "  #{key}: " + indent(traverse(value), false) + "," +
-        (value['required'] && !%w(list map structure).include?(value['type']) ?
+  def visit_structure(node, required = false)
+    required_map = (node['required'] || []).inject({}) {|h,k| h[k] = true; h }
+    lines = ["{" + (required ? " // required" : "")]
+    node['members'].sort_by {|n, v| [required_map[n] ? -1 : 1, n] }.each_with_index do |(key, value), index|
+      next if @required_only && !required_map[key]
+      value = @api['shapes'][value['shape']].merge(value) if value['shape']
+      lines << "  #{key}: " + indent(traverse(value, required_map[key]), false) +
+        (index + 1 < node['members'].size ? "," : "") +
+        (required_map[key] && !%w(list map structure).include?(value['type']) ?
           " // required" : "")
     end
     lines << "}"
     lines.join("\n")
   end
 
-  def visit_list(node)
-    lines = ["[" + (node['required'] ? " // required" : "")]
-    lines << indent(traverse(node['members'])) + ","
+  def visit_list(node, required = false)
+    lines = ["[" + (required ? " // required" : "")]
+    lines << indent(traverse(node['member'])) + ","
     lines << "  // ... more items ..."
     lines << "]"
     lines.join("\n")
   end
 
-  def visit_map(node)
-    lines = ["{" + (node['required'] ? " // required" : "")]
-    lines << indent("someKey: " + traverse(node['members'])) + ","
+  def visit_map(node, required = false)
+    lines = ["{" + (required ? " // required" : "")]
+    lines << indent("someKey: " + traverse(node['value'])) + ","
     lines << "  // anotherKey: ..."
     lines << "}"
     lines.join("\n")
   end
 
-  def visit_string(node)
+  def visit_string(node, required = false)
     value = node['enum'] ? node['enum'].join(' | ') : 'STRING_VALUE'
     "'#{value}'"
   end
 
-  def visit_integer(node)
+  def visit_integer(node, required = false)
     "0"
   end
   alias visit_long visit_integer
 
-  def visit_float(node)
+  def visit_float(node, required = false)
     "0.0"
   end
   alias visit_double visit_float
   alias visit_bigdecimal visit_float
 
-  def visit_boolean(node)
+  def visit_boolean(node, required = false)
     "true || false"
   end
 
-  def visit_base64(node)
+  def visit_base64(node, required = false)
     "'BASE64_ENCODED_STRING'"
   end
 
-  def visit_binary(node)
+  def visit_binary(node, required = false)
     "new Buffer('...') || streamObject || 'STRING_VALUE'"
   end
+  alias visit_blob visit_binary
 
-  def visit_timestamp(node)
+  def visit_timestamp(node, required = false)
     "new Date || 'Wed Dec 31 1969 16:00:00 GMT-0800 (PST)' || 123456789"
   end
 
@@ -261,11 +271,14 @@ class ShapeDocumentor
   attr_reader :prefix
   attr_reader :type
 
-  def initialize(rules, options = {})
+  def initialize(api, rules, options = {})
+    rules = api['shapes'][rules['shape']].merge(rules) if rules['shape']
 
+    @api = api
     @rules = rules
     @name = options[:name]
     @prefix = options[:prefix] || ''
+    @required = !!options[:required]
 
     @type =
       case rules['type']
@@ -281,6 +294,7 @@ class ShapeDocumentor
       when 'boolean' then 'Boolean'
       when 'base64' then 'Base64 Encoded String'
       when 'binary' then 'Buffer'
+      when 'blob'; then 'Buffer'
       when 'timestamp' then 'Date'
       else raise "unhandled type: #{rules['type']}"
       end
@@ -292,13 +306,15 @@ class ShapeDocumentor
     @nested_lines = []
 
     if structure?
+      required_map = (rules['required'] || []).inject({}) {|h,k| h[k] = true; h }
       rules['members'].each_pair do |name, member_rules|
-        @nested_lines += child_shape(member_rules, :name => name).lines
+        @nested_lines += child_shape(member_rules,
+          :name => name, :required => required_map[name]).lines
       end
     end
 
     if list?
-      child = child_shape(rules['members'] || {}, :prefix => prefix)
+      child = child_shape(rules['member'] || {}, :prefix => prefix)
       @type << "<#{child.type}>"
       @nested_lines += child.nested_lines
     end
@@ -307,10 +323,10 @@ class ShapeDocumentor
 
       # sanity check, I don't think this should ever raise, but if it
       # does we will have to document the key shape
-      key_child = child_shape(rules['keys'] || {}, :prefix => prefix)
+      key_child = child_shape(rules['key'] || {}, :prefix => prefix)
       raise "unhandled map key type" if key_child.type != 'String'
 
-      child = child_shape(rules['members'] || {}, :prefix => prefix)
+      child = child_shape(rules['value'] || {}, :prefix => prefix)
       @type << "<#{child.type}>"
       @nested_lines += child.nested_lines
 
@@ -344,7 +360,7 @@ class ShapeDocumentor
 
   def description
     text = []
-    if rules['required']
+    if @required
       text << "&mdash; **required** &mdash; (`#{@type}`)"
     else
       text << "&mdash; (`#{@type}`)"
@@ -358,6 +374,6 @@ class ShapeDocumentor
   private
 
   def child_shape(rules, options = {})
-    ShapeDocumentor.new(rules, { :prefix => prefix + '    ' }.merge(options))
+    ShapeDocumentor.new(@api, rules, { :prefix => prefix + '    ' }.merge(options))
   end
 end

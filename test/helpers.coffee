@@ -49,7 +49,7 @@ MockService = AWS.Service.defineService 'mockService',
       resp.error =
         code: resp.httpResponse.body.toString() || resp.httpResponse.statusCode
         message: null
-  api:
+  api: new AWS.Model.Api metadata:
     endpointPrefix: 'mockservice'
     signatureVersion: 'v4'
 
@@ -135,8 +135,12 @@ mockResponses = (svc, resps) ->
         AWS.util.update req.response, resp
         index += 1
 
+modRequire = (mod) -> require('../lib/' + mod)
+
 module.exports =
   AWS: AWS
+  util: AWS.util
+  require: modRequire
   matchXML: matchXML
   mockHttpResponse: mockHttpResponse
   mockIntermittentFailureResponse: mockIntermittentFailureResponse
@@ -144,3 +148,4 @@ module.exports =
   mockResponse: mockResponse
   mockResponses: mockResponses
   MockService: MockService
+

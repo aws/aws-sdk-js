@@ -2,18 +2,19 @@ helpers = require('../helpers')
 AWS = helpers.AWS
 Buffer = AWS.util.Buffer
 
+svc = helpers.require('service_interface/query')
 describe 'AWS.ServiceInterface.Query', ->
   service = null
   request = null
   response = null
-  svc = eval(@description)
 
   beforeEach ->
     service = new AWS.Service apiConfig:
-      endpointPrefix: 'mockservice'
-      apiVersion: '2012-01-01'
+      metadata:
+        endpointPrefix: 'mockservice'
+        apiVersion: '2012-01-01'
       operations:
-        operationName:
+        OperationName:
           name: 'OperationName'
           input:
             members:
@@ -174,8 +175,8 @@ describe 'AWS.ServiceInterface.Query', ->
       expect(response.error).toEqual(null)
       expect(response.data).toEqual({Data:{Name:'abc',Count:'123'}})
 
-    it 'removes wrapping result element if resultWrapped is set', ->
-      service.api.resultWrapped = true
+    it 'removes wrapping result element if resultWrapper is set', ->
+      service.api.operations.operationName.output.resultWrapper = 'OperationNameResult'
       extractData """
       <xml>
         <OperationNameResult>
@@ -189,8 +190,8 @@ describe 'AWS.ServiceInterface.Query', ->
       expect(response.error).toEqual(null)
       expect(response.data).toEqual({Data:{Name:'abc',Count:12345.5}})
 
-    it 'does not fail if wrapping element is not present (resultWrapped=true)', ->
-      service.api.resultWrapped = true
+    it 'does not fail if wrapping element is not present (resultWrapper)', ->
+      service.api.operations.operationName.output.resultWrapper = 'OperationNameResult'
       extractData """
       <xml>
         <NotWrapped><Data>abc</Data></NotWrapped>

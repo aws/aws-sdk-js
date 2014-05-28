@@ -15,7 +15,7 @@ Feature: AWS Import/Export
     generator: AWS ImportExport Web Service Tool 1.0
     prefix: imported/
     eraseDevice: yes
-    notificationEmail: email@domain.com
+    notificationEmail: invalid.address@example.com
     returnAddress:
         name: Joe Random
         company: Amazon Web Services

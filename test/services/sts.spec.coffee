@@ -43,7 +43,7 @@ describe 'AWS.STS', ->
       helpers.mockHttpResponse 200, {}, '{}'
       params = RoleArn: 'ARN', RoleSessionName: 'NAME', WebIdentityToken: 'TOK'
       service.assumeRoleWithWebIdentity params, ->
-        hr = @request.httpRequest
+        hr = this.request.httpRequest
         expect(hr.method).toEqual('GET')
         expect(hr.body).toEqual('')
         expect(hr.headers['Authorization']).toEqual(undefined)
@@ -59,7 +59,7 @@ describe 'AWS.STS', ->
       helpers.mockHttpResponse 200, {}, '{}'
       params = RoleArn: 'ARN', PrincipalArn: 'PARN', SAMLAssertion: 'OK'
       service.assumeRoleWithSAML params, ->
-        hr = @request.httpRequest
+        hr = this.request.httpRequest
         expect(hr.method).toEqual('GET')
         expect(hr.body).toEqual('')
         expect(hr.headers['Authorization']).toEqual(undefined)

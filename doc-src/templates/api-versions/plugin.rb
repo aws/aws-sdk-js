@@ -3,7 +3,7 @@ require_relative './model_documentor'
 
 $APIS_DIR = File.expand_path(File.dirname(__FILE__) +
                              "/../../../vendor/apis/apis")
-$API_FILE_MATCH = /(?:^|\/)([^\/-]+)-(\d+-\d+-\d+)\.json$/
+$API_FILE_MATCH = /(?:^|\/)([^\/-]+)-(\d+-\d+-\d+)\.normal\.json$/
 
 YARD::Tags::Library.define_tag 'Service', :service
 YARD::Tags::Library.define_tag 'Waiter Resource States', :waiter
@@ -66,7 +66,7 @@ class ApiDocumentor
 
   def generate_api(file, version_suffix = true)
     _, klass, version = *file.match($API_FILE_MATCH)
-    identifier = klass.downcase
+    identifier, klass = *class_info_for(klass.downcase)
     name = version_suffix ? klass + '_' + version.gsub('-', '') : klass
 
     log.progress("Parsing AWS.#{klass} (#{version})")
@@ -91,8 +91,8 @@ class ApiDocumentor
 
   def add_methods(service, klass, model)
     model['operations'].each_pair do |name, operation|
-      meth = YARDJS::CodeObjects::PropertyObject.new(service, name)
-      docs = MethodDocumentor.new(operation, model, klass).lines.join("\n")
+      meth = YARDJS::CodeObjects::PropertyObject.new(service, name[0].downcase + name[1..-1])
+      docs = MethodDocumentor.new(name, operation, model, klass).lines.join("\n")
       meth.property_type = :function
       meth.parameters = [['params', '{}'], ['callback', nil]]
       meth.signature = "#{name}(params = {}, [callback])"
@@ -149,8 +149,8 @@ Waits for the `#{name}` state by periodically calling the underlying
 @see #{operation_name}
 eof
 
-      waiter_ex = ExampleShapeVisitor.new(true).example(
-        service.name.to_s.downcase, 'waitFor', model['operations'][operation_name]['input'])
+      waiter_ex = ExampleShapeVisitor.new(model, true).example(
+        service.name.to_s.downcase, 'waitFor', model['operations'][config['operation']]['input'])
       waiter_ex = waiter_ex.sub(/\.waitFor\(/, ".waitFor('#{name}', ")
       waiter_ex = waiter_ex.sub(/\{\s+\}/, "{\n  // ... input parameters ...\n}")
       obj.docstring.add_tag YARD::Tags::Tag.new(:example, waiter_ex, nil,
@@ -175,16 +175,24 @@ eof
   end
 
   def load_model(file)
-    data = File.read(file, 4096)
-    endpoint_prefix = data[/"endpointPrefix":\s*"(.+?)"/, 1]
+    json = JSON.parse(File.read(file))
 
-    dir = File.expand_path(File.dirname(file))
-    name = File.basename(file).downcase
-    name = name.sub(/^([^-]+)/, endpoint_prefix)
-    file = dir + '/source/' + name
-    translate = "require(\"#{dir}/../lib/translator\")(require(\"fs\")." +
-                "readFileSync(\"#{file}\"), {documentation:true})"
-    json = `node -e 'console.log(JSON.stringify(#{translate}))'`
-    JSON.parse(json)
+    waiters_file = file.sub(/\.normal\.json$/, '.waiters.json')
+    if File.exist? waiters_file
+      json = json.merge(JSON.parse(File.read(waiters_file)))
+    end
+    json
+  end
+
+  def class_info_for(prefix)
+    @info ||= JSON.parse(File.read(File.join($APIS_DIR, '../apiInfo.json')))
+    @info.each do |identifier, info|
+      iprefix = info['prefix'] || identifier
+      if prefix == iprefix
+        return [identifier, info['name']]
+      end
+    end
+
+    raise "Unknown class name for #{prefix}"
   end
 end

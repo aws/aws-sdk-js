@@ -11,31 +11,25 @@ describe 'AWS.Request', ->
 
   describe 'region', ->
     it 'should set region to us-east-1 for global endpoint region', ->
-      service = new AWS.Service apiConfig:
-        globalEndpoint: 'mock.service.tld'
-        operations: mockMethod: input: {}, output: {}
+      service = new AWS.Service apiConfig: new AWS.Model.Api(
+        metadata: globalEndpoint: 'mock.service.tld'
+        operations: mockMethod: {}
+      )
       req = service.makeRequest('mockMethod')
       expect(req.httpRequest.region).toEqual('us-east-1')
 
   describe 'isPageable', ->
     beforeEach ->
-      service = new AWS.Service apiConfig:
-        operations: mockMethod: input: {}, output: {}
+      service = new AWS.Service apiConfig: new AWS.Model.Api
+        operations: mockMethod: {}
 
     it 'is pageable if it has a pagination config for the operation', ->
-      service.api.pagination =
-          mockMethod:
-            limitKey: 'Marker'
+      service.api.paginators['mockMethod'] = new AWS.Model.Paginator('mockMethod', limit_key: 'Marker')
 
       request = service.makeRequest('mockMethod')
       expect(request.isPageable()).toEqual(true)
 
     it 'is not pageable if the pagination config does not exist for the operation', ->
-      service.api.pagination = {}
-      expect(service.makeRequest('mockMethod').isPageable()).toEqual(false)
-
-    it 'is not pageable if the config does not exist for the service', ->
-      delete service.api.pagination
       expect(service.makeRequest('mockMethod').isPageable()).toEqual(false)
 
   describe 'waitFor', ->

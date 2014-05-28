@@ -2,15 +2,16 @@ helpers = require('../helpers')
 AWS = helpers.AWS
 Buffer = AWS.util.Buffer
 
+svc = helpers.require('service_interface/json')
 describe 'AWS.ServiceInterface.Json', ->
 
   MockJSONClient = AWS.util.inherit AWS.Service,
     endpointPrefix: 'mockservice'
-    api:
-      targetPrefix: 'prefix'
+    api: new AWS.Model.Api
+      metadata:
+        targetPrefix: 'prefix'
       operations:
-        operationName:
-          name: 'OperationName'
+        OperationName:
           input:
             type: 'structure'
             members: {}
@@ -19,7 +20,7 @@ describe 'AWS.ServiceInterface.Json', ->
 
   request = null
   response = null
-  svc = eval(@description)
+  service = null
 
   beforeEach ->
     service = new MockJSONClient(region: 'region')
@@ -55,11 +56,15 @@ describe 'AWS.ServiceInterface.Json', ->
         toEqual('prefix.OperationName')
 
     it 'should set the body to JSON serialized params', ->
+      service.api.operations.operationName.input.members.foo =
+        new AWS.Model.Shape.create({type: 'string'}, api: service.api)
       request.params = foo: 'bar'
       buildRequest()
       expect(request.httpRequest.body).toEqual('{"foo":"bar"}')
 
     it 'should preserve numeric types', ->
+      service.api.operations.operationName.input.members.count =
+        new AWS.Model.Shape.create({type: 'integer'})
       request.params = count: 3
       buildRequest()
       expect(request.httpRequest.body).toEqual('{"count":3}')

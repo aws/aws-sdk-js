@@ -1,14 +1,15 @@
 helpers = require('../helpers')
-AWS = helpers.AWS
+QueryParamSerializer = helpers.require('query/query_param_serializer')
+Shape = helpers.require('model/shape')
 
-describe 'AWS.QueryParamSerializer', ->
+describe 'QueryParamSerializer', ->
 
   serialize = (requestParams, rules) ->
     params = []
-    serializer = new AWS.QueryParamSerializer(rules)
-    serializer.serialize(requestParams, (name, value) ->
+    serializer = new QueryParamSerializer()
+    shape = Shape.create type: 'structure', members: rules
+    serializer.serialize requestParams, shape, (name, value) ->
       params.push([name, value])
-    )
     params
 
   describe 'scalar params', ->
@@ -74,10 +75,10 @@ describe 'AWS.QueryParamSerializer', ->
       rules =
         Root:
           type: 'structure'
-          name: 'ROOT'
+          locationName: 'ROOT'
           members:
             Leaf:
-              name: 'lEAF'
+              locationName: 'lEAF'
       params = serialize({Root:{Leaf:'value'}}, rules)
       expect(params).toEqual([
         ['ROOT.lEAF', 'value']
@@ -87,10 +88,10 @@ describe 'AWS.QueryParamSerializer', ->
       rules =
         Root:
           type: 'structure'
-          name: 'ROOT'
+          locationName: 'ROOT'
           members:
             Leaf:
-              name: 'lEAF'
+              locationName: 'lEAF'
       params = serialize({Root:null}, rules)
       expect(params).toEqual([])
 
@@ -104,7 +105,20 @@ describe 'AWS.QueryParamSerializer', ->
           Name:
             type: 'list'
             flattened: true
-            members: {}
+            member: type: 'string'
+        params = serialize({Name:['a','b','c']}, rules)
+        expect(params).toEqual([
+          ['Name.1', 'a'],
+          ['Name.2', 'b'],
+          ['Name.3', 'c'],
+        ])
+
+      it 'supports queryFlattened key', ->
+        rules =
+          Name:
+            type: 'list'
+            queryFlattened: true
+            member: type: 'string'
         params = serialize({Name:['a','b','c']}, rules)
         expect(params).toEqual([
           ['Name.1', 'a'],
@@ -120,8 +134,8 @@ describe 'AWS.QueryParamSerializer', ->
               Items:
                 type: 'list'
                 flattened: true
-                members:
-                  name: 'ListItem'
+                member:
+                  locationName: 'ListItem'
         params = serialize({Root:{Items:['a', 'b', 'c']}}, rules)
         expect(params).toEqual([
           ['Root.ListItem.1', 'a'],
@@ -137,7 +151,7 @@ describe 'AWS.QueryParamSerializer', ->
               Name:
                 type: 'list'
                 flattened: true
-                members: {}
+                member: type: 'string'
         params = serialize({Person:{Name:['a','b','c']}}, rules)
         expect(params).toEqual([
           ['Person.Name.1', 'a'],
@@ -150,7 +164,7 @@ describe 'AWS.QueryParamSerializer', ->
           Root:
             type: 'list'
             flattened: true
-            members:
+            member:
               type: 'structure'
               members:
                 Aa: {}
@@ -163,11 +177,12 @@ describe 'AWS.QueryParamSerializer', ->
           ['Root.2.Bb', 'b2'],
         ])
 
-      it 'serialzes list members as strings when member rule not present', ->
+      it 'serializes list members as strings when member rule not present', ->
         rules =
           Root:
             type: 'list'
             flattened: true
+            member: type: 'string'
         params = serialize({Root:['a', 'b', 'c']}, rules)
         expect(params).toEqual([
           ['Root.1', 'a'],
@@ -180,7 +195,7 @@ describe 'AWS.QueryParamSerializer', ->
         rules =
           Person:
             type: 'list'
-            members: {}
+            member: type: 'string'
         params = serialize({Person:['a','b','c']}, rules)
         expect(params).toEqual([
           ['Person.member.1', 'a'],
@@ -192,8 +207,8 @@ describe 'AWS.QueryParamSerializer', ->
         rules =
           Person:
             type: 'list'
-            members:
-              name: 'Name'
+            member:
+              locationName: 'Name'
         params = serialize({Person:['a','b','c']}, rules)
         expect(params).toEqual([
           ['Person.member.1', 'a'],
@@ -205,9 +220,9 @@ describe 'AWS.QueryParamSerializer', ->
         rules =
           People:
             type: 'list'
-            name: 'Person',
-            members:
-              name: 'Name'
+            locationName: 'Person',
+            member:
+              locationName: 'Name'
         params = serialize({People:['a','b','c']}, rules)
         expect(params).toEqual([
           ['Person.member.1', 'a'],
@@ -222,8 +237,26 @@ describe 'AWS.QueryParamSerializer', ->
         Attributes:
           type: 'map'
           flattened: true
-          keys: {}
-          members: {}
+          key: {}
+          value: {}
+      data = {Attributes:{Color:'red',Size:'large',Value:'low'}}
+      params = serialize(data, rules)
+      expect(params).toEqual([
+        ['Attributes.1.key', 'Color'],
+        ['Attributes.1.value', 'red'],
+        ['Attributes.2.key', 'Size'],
+        ['Attributes.2.value', 'large'],
+        ['Attributes.3.key', 'Value'],
+        ['Attributes.3.value', 'low'],
+      ])
+
+    it 'supports queryFlattened key', ->
+      rules =
+        Attributes:
+          type: 'map'
+          queryFlattened: true
+          key: {}
+          value: {}
       data = {Attributes:{Color:'red',Size:'large',Value:'low'}}
       params = serialize(data, rules)
       expect(params).toEqual([
@@ -240,8 +273,8 @@ describe 'AWS.QueryParamSerializer', ->
         rules =
           Attributes:
             type: 'map'
-            keys: {}
-            members: {}
+            key: {}
+            value: {}
         data = Attributes: Color: 'red', Size: 'large', Value: 'low'
         params = serialize(data, rules)
         expect(params).toEqual([
@@ -260,10 +293,10 @@ describe 'AWS.QueryParamSerializer', ->
         Attributes:
           type: 'map'
           flattened: true
-          keys:
-            name: 'Name'
-          members:
-            name: 'Value'
+          key:
+            locationName: 'Name'
+          value:
+            locationName: 'Value'
       data = {Attributes:{Color:'red',Size:'large',Value:'low'}}
       params = serialize(data, rules)
       expect(params).toEqual([
@@ -282,13 +315,13 @@ describe 'AWS.QueryParamSerializer', ->
       rules = { Date: { type: 'timestamp' } }
       params = serialize({ Date: date }, rules)
       expect(params).toEqual([
-        ['Date', AWS.util.date.iso8601(date)],
+        ['Date', helpers.util.date.iso8601(date)],
       ])
 
     it 'obeys format options in the rules', ->
       date = new Date(); date.setMilliseconds(0)
-      rules = { Date: { type: 'timestamp', format: 'rfc822' } }
+      rules = { Date: { type: 'timestamp', timestampFormat: 'rfc822' } }
       params = serialize({ Date: date }, rules)
       expect(params).toEqual([
-        ['Date', AWS.util.date.rfc822(date)],
+        ['Date', helpers.util.date.rfc822(date)],
       ])

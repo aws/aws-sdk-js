@@ -223,7 +223,7 @@ describe 'AWS.S3', ->
           <AccessControlList>
             <Grant>
               <Grantee xsi:type="CanonicalUser" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <DisplayName>aws-ruby-sdk</DisplayName>
+                <DisplayName>aws-sdk</DisplayName>
                 <ID>id</ID>
               </Grantee>
               <Permission>FULL_CONTROL</Permission>
@@ -236,7 +236,7 @@ describe 'AWS.S3', ->
             </Grant>
           </AccessControlList>
           <Owner>
-            <DisplayName>aws-ruby-sdk</DisplayName>
+            <DisplayName>aws-sdk</DisplayName>
             <ID>id</ID>
           </Owner>
         </AccessControlPolicy>
@@ -246,20 +246,20 @@ describe 'AWS.S3', ->
         expect(error).toBe(null)
         expect(data).toEqual({
           Owner:
-            DisplayName: 'aws-ruby-sdk',
+            DisplayName: 'aws-sdk',
             ID: 'id'
           Grants: [
             {
               Permission: 'FULL_CONTROL'
               Grantee:
-                Type: 'CanonicalUser',
-                DisplayName: 'aws-ruby-sdk'
+                Type: 'CanonicalUser'
+                DisplayName: 'aws-sdk'
                 ID: 'id'
             },
             {
               Permission : 'READ'
               Grantee:
-                Type: 'Group',
+                Type: 'Group'
                 URI: 'uri'
             }
           ]
@@ -272,21 +272,21 @@ describe 'AWS.S3', ->
         <AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
           <AccessControlList>
             <Grant>
-              <Grantee xsi:type="CanonicalUser" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <DisplayName>aws-ruby-sdk</DisplayName>
+              <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
+                <DisplayName>aws-sdk</DisplayName>
                 <ID>id</ID>
               </Grantee>
               <Permission>FULL_CONTROL</Permission>
             </Grant>
             <Grant>
-              <Grantee xsi:type="Group" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+              <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
                 <URI>uri</URI>
               </Grantee>
               <Permission>READ</Permission>
             </Grant>
           </AccessControlList>
           <Owner>
-            <DisplayName>aws-ruby-sdk</DisplayName>
+            <DisplayName>aws-sdk</DisplayName>
             <ID>id</ID>
           </Owner>
         </AccessControlPolicy>
@@ -295,14 +295,14 @@ describe 'AWS.S3', ->
       params =
         AccessControlPolicy:
           Owner:
-            DisplayName: 'aws-ruby-sdk',
+            DisplayName: 'aws-sdk',
             ID: 'id'
           Grants: [
             {
               Permission: 'FULL_CONTROL'
               Grantee:
                 Type: 'CanonicalUser',
-                DisplayName: 'aws-ruby-sdk'
+                DisplayName: 'aws-sdk'
                 ID: 'id'
             },
             {
