@@ -19,9 +19,9 @@ describe 'AWS.ServiceInterface.Query', ->
           input:
             members:
               Input:
-                members: {}
+                type: 'string'
               List:
-                type: 'list',
+                type: 'list'
                 members: {}
           output:
             type: 'structure'
@@ -189,13 +189,3 @@ describe 'AWS.ServiceInterface.Query', ->
       """
       expect(response.error).toEqual(null)
       expect(response.data).toEqual({Data:{Name:'abc',Count:12345.5}})
-
-    it 'does not fail if wrapping element is not present (resultWrapper)', ->
-      service.api.operations.operationName.output.resultWrapper = 'OperationNameResult'
-      extractData """
-      <xml>
-        <NotWrapped><Data>abc</Data></NotWrapped>
-      </xml>
-      """
-      expect(response.error).toEqual(null)
-      expect(response.data).toEqual({NotWrapped:{Data:'abc'}})
