@@ -14,6 +14,6 @@ env:
     - AWS_REGION=us-east-1 INTEGRATION=1
 
 before_script:
-  - "npm install git://github.com/aws/aws-sdk-apis#$TRAVIS_BRANCH"
+  - "npm install git://github.com/aws/aws-sdk-js-apis#$TRAVIS_BRANCH"
 
 script: "if [ $INTEGRATION ]; then cucumber.js -f pretty; else npm test; fi"
