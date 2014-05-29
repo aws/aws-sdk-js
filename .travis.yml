@@ -5,6 +5,7 @@ node_js:
 branches:
   only:
     - master
+    - normalized
 
 before_script:
   - "npm install git://github.com/aws/aws-sdk-js-apis#$TRAVIS_BRANCH"
