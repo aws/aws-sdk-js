@@ -15,9 +15,9 @@ describe 'AWS.Signers.V4', ->
   date = new Date(1935346573456)
   datetime = AWS.util.date.iso8601(date).replace(/[:\-]|\.\d{3}/g, '')
   creds = null
-  signature = '838c924736f5ce488c99f0955097c9571544d84968102543edc9b01dfaa7ef16'
+  signature = 'a79372c5bd19c0e9ab7720d5c8e2163507b38349fe45395160cf111b63ac1dba'
   authorization = 'AWS4-HMAC-SHA256 Credential=akid/20310430/region/dynamodb/aws4_request, ' +
-    'SignedHeaders=content-length;host;x-amz-date;x-amz-security-token;x-amz-target, ' +
+    'SignedHeaders=host;x-amz-date;x-amz-security-token;x-amz-target, ' +
     'Signature=' + signature
   signer = null
 
@@ -104,7 +104,6 @@ describe 'AWS.Signers.V4', ->
   describe 'canonicalHeaders', ->
     it 'should return headers', ->
       expect(signer.canonicalHeaders()).toEqual [
-        'content-length:14',
         'host:localhost',
         'x-amz-date:' + datetime,
         'x-amz-security-token:session',
