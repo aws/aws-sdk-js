@@ -2,7 +2,7 @@ helpers = require('../helpers')
 AWS = helpers.AWS
 Buffer = AWS.util.Buffer
 
-svc = helpers.require('service_interface/query')
+svc = require('../../lib/service_interface/query')
 describe 'AWS.ServiceInterface.Query', ->
   service = null
   request = null

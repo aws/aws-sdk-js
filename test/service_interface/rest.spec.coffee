@@ -1,9 +1,9 @@
 helpers = require('../helpers')
-Operation = helpers.require('model/operation')
-Api = helpers.require('model/api')
 AWS = helpers.AWS
+Operation = helpers.AWS.Model.Operation
+Api = helpers.AWS.Model.Api
 
-svc = helpers.require('service_interface/rest')
+svc = require('../../lib/service_interface/rest')
 describe 'AWS.ServiceInterface.Rest', ->
 
   MockRESTService = helpers.util.inherit AWS.Service,

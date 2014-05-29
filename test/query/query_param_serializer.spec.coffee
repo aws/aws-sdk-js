@@ -1,6 +1,6 @@
 helpers = require('../helpers')
-QueryParamSerializer = helpers.require('query/query_param_serializer')
-Shape = helpers.require('model/shape')
+QueryParamSerializer = require('../../lib/query/query_param_serializer')
+Shape = helpers.AWS.Model.Shape
 
 describe 'QueryParamSerializer', ->
 

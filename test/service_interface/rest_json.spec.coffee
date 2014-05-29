@@ -1,8 +1,8 @@
 helpers = require('../helpers'); AWS = helpers.AWS
-Operation = helpers.require('model/operation')
+Operation = AWS.Model.Operation
 Buffer = helpers.util.Buffer
 
-svc = helpers.require('service_interface/rest_json')
+svc = require('../../lib/service_interface/rest_json')
 describe 'AWS.ServiceInterface.RestJson', ->
 
   MockJSONRESTService = helpers.util.inherit AWS.Service,

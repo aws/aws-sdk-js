@@ -2,7 +2,7 @@ helpers = require('../helpers')
 AWS = helpers.AWS
 Buffer = AWS.util.Buffer
 
-svc = helpers.require('service_interface/rest_xml')
+svc = require('../../lib/service_interface/rest_xml')
 describe 'AWS.ServiceInterface.RestXml', ->
 
   MockRESTXMLService = AWS.util.inherit AWS.Service,

@@ -135,12 +135,9 @@ mockResponses = (svc, resps) ->
         AWS.util.update req.response, resp
         index += 1
 
-modRequire = (mod) -> require('../lib/' + mod)
-
 module.exports =
   AWS: AWS
   util: AWS.util
-  require: modRequire
   matchXML: matchXML
   mockHttpResponse: mockHttpResponse
   mockIntermittentFailureResponse: mockIntermittentFailureResponse

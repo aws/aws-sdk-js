@@ -2,7 +2,7 @@ helpers = require('../helpers')
 AWS = helpers.AWS
 Buffer = AWS.util.Buffer
 
-svc = helpers.require('service_interface/json')
+svc = require('../../lib/service_interface/json')
 describe 'AWS.ServiceInterface.Json', ->
 
   MockJSONClient = AWS.util.inherit AWS.Service,
