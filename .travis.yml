@@ -1,8 +1,19 @@
 language: node_js
 node_js:
-  #- "0.8"
   - "0.10"
 
 branches:
   only:
     - master
+
+env:
+  global:
+    - secure: "YjByu0iD4T6CLjqKnOOvfgBv7OXH9Fj3+eehr8EnnDQTgMCIkp73BXy1PG7tUn8BPnhTYw+vLHxnRC//RPeKNLXh3JhCcC8R4PY+Mkd4ieUaPdnTaUKUm5rHZ6QGOVVrfr5MHa4pa+OSgqlgn9YJSS7grYIaaZOIhNt742TM9os="
+  matrix:
+    - UNIT=1
+    - AWS_REGION=us-east-1 INTEGRATION=1
+
+before_script:
+  - "npm install git://github.com/aws/aws-sdk-apis#$TRAVIS_BRANCH"
+
+script: "if [ $INTEGRATION ]; then cucumber.js -f pretty; else npm test; fi"
