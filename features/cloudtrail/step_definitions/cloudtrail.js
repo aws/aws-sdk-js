@@ -9,6 +9,6 @@ module.exports = function() {
   });
 
   this.Given(/^I create a trail with an invalid name$/, function(callback) {
-    this.request(null, 'createTrail', {trail: {Name: ''}}, callback, false);
+    this.request(null, 'createTrail', {Name: '', S3BucketName: ''}, callback, false);
   });
 };
