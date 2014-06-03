@@ -3,8 +3,8 @@ AWS = helpers.AWS
 Operation = helpers.AWS.Model.Operation
 Api = helpers.AWS.Model.Api
 
-svc = require('../../lib/service_interface/rest')
-describe 'AWS.ServiceInterface.Rest', ->
+svc = AWS.Protocol.Rest
+describe 'AWS.Protocol.Rest', ->
 
   MockRESTService = helpers.util.inherit AWS.Service,
     endpointPrefix: 'mockservice'

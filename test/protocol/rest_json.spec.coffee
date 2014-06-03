@@ -2,8 +2,8 @@ helpers = require('../helpers'); AWS = helpers.AWS
 Operation = AWS.Model.Operation
 Buffer = helpers.util.Buffer
 
-svc = require('../../lib/service_interface/rest_json')
-describe 'AWS.ServiceInterface.RestJson', ->
+svc = AWS.Protocol.RestJson
+describe 'AWS.Protocol.RestJson', ->
 
   MockJSONRESTService = helpers.util.inherit AWS.Service,
     endpointPrefix: 'mockservice'
