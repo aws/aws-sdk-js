@@ -13,6 +13,9 @@ describe 'AWS.XML.Parser', ->
 
     rules = null # no rules, rely on default parsing behavior
 
+    it 'returns empty object when string is empty', ->
+      parse '', null, (data) -> expect(data).toEqual({})
+
     it 'returns an empty object from an empty document', ->
       xml = '<xml/>'
       parse xml, rules, (data) ->
@@ -59,7 +62,8 @@ describe 'AWS.XML.Parser', ->
         expect(data).toEqual({Item:{}})
 
     it 'parses attributes from tags', ->
-      xml = '<xml><Item xsi:name="name"></Item></xml>'
+      xml = '<xml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+             <Item xsi:name="name"></Item></xml>'
       rules =
         type: 'structure'
         members:
