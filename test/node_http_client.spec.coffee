@@ -8,7 +8,7 @@ if AWS.util.isNode()
     describe 'maxSockets delegation', ->
       it 'delegates maxSockets from agent to globalAgent', ->
         https = require('https')
-        agent = http.sslAgent()
+        agent = http.httpsAgent()
         expect(https.globalAgent.maxSockets).toEqual(agent.maxSockets)
         https.globalAgent.maxSockets += 1
         expect(https.globalAgent.maxSockets).toEqual(agent.maxSockets)
