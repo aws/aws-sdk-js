@@ -23,4 +23,24 @@ module.exports = function () {
     });
   });
 
+  this.When(/^I send the message "([^"]*)" with a binary attribute$/, function (message, callback) {
+    var params = {
+      QueueUrl: this.queueUrl,
+      MessageBody: message,
+      MessageAttributes: {
+        binary: { DataType: 'Binary', BinaryValue: new Buffer([1,2,3]) }
+      }
+    };
+    this.request(null, 'sendMessage', params, callback);
+  });
+
+  this.Then(/^I should eventually be able to receive "([^"]*)" from the queue with a binary attribute$/, function (message, callback) {
+    this.eventually(callback, function (next) {
+      next.condition = function() {
+        return this.data.Messages[0].MessageAttributes.binary.BinaryValue.toString() === '\u0001\u0002\u0003';
+      };
+      var params = {QueueUrl:this.queueUrl,MessageAttributeNames:['binary']};
+      this.request(null, 'receiveMessage', params, next);
+    });
+  });
 };
