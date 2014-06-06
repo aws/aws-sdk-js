@@ -14,7 +14,7 @@ describe 'AWS.Protocol.RestJson', ->
   service = null
 
   beforeEach ->
-    MockJSONRESTService.prototype.api =
+    MockJSONRESTService.prototype.api = new AWS.Model.Api
       operations:
         sampleOperation:
           http:
@@ -25,7 +25,9 @@ describe 'AWS.Protocol.RestJson', ->
             members: {}
           output:
             type: 'structure'
-            members: {}
+            members:
+              a: type: 'string'
+              b: type: 'string'
 
     AWS.Service.defineMethods(MockJSONRESTService)
 

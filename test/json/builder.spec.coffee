@@ -8,7 +8,10 @@ describe 'AWS.JSON.Builder', ->
   api = null
 
   beforeEach ->
-    api = new AWS.Model.Api metadata: timestampFormat: timestampFormat
+    api = new AWS.Model.Api
+      metadata:
+        timestampFormat: timestampFormat
+        protocol: 'json'
 
   build = (rules, params) ->
     shape = AWS.Model.Shape.create(rules, api: api)

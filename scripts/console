@@ -33,6 +33,8 @@ function customEval(cmd, context, filename, callback) {
           callback(err2, null);
           return;
         }
+      } else {
+        callback(null, value);
       }
     } else {
       callback(null, value);

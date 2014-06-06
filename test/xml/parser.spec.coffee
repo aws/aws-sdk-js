@@ -532,7 +532,7 @@ describe 'AWS.XML.Parser', ->
       </xml>
       """
       parse xml, rules, (data) ->
-        expect(data).toEqual(Value:'foo')
+        expect(data.Value.toString()).toEqual('foo')
       rules =
         type: 'structure'
         members:
@@ -543,7 +543,7 @@ describe 'AWS.XML.Parser', ->
       </xml>
       """
       parse xml, rules, (data) ->
-        expect(data).toEqual(Value:'foo')
+        expect(data.Value.toString()).toEqual('foo')
 
   describe 'elements with XML namespaces', ->
     it 'strips the xmlns element', ->

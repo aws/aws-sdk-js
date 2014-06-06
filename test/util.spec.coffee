@@ -452,8 +452,8 @@ describe 'AWS.util.base64', ->
 
   describe 'decode', ->
     it 'decodes the given string', ->
-      expect(base64.decode('Zm9v')).toEqual('foo')
-      expect(base64.decode('0ZHFnQ==')).toEqual('ёŝ')
+      expect(base64.decode('Zm9v').toString()).toEqual('foo')
+      expect(base64.decode('0ZHFnQ==').toString()).toEqual('ёŝ')
 
 describe 'AWS.util.jamespath', ->
   query = AWS.util.jamespath.query
