@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.0.0-rc.18
+// AWS SDK for JavaScript v2.0.0-rc.19
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -177,7 +177,7 @@ require('./util');
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.0.0-rc.18',
+  VERSION: '2.0.0-rc.19',
 
 
   ServiceInterface: {},
@@ -1226,7 +1226,7 @@ fsm.setupStates = function() {
       if (this._hardError) {
         throw e;
       }
-      else if (hardErrorStates.indexOf(this._asm.currentState) >= 0) {
+      else if (hardErrorStates.hasOwnProperty(this._asm.currentState)) {
         this._hardError = true;
       }
       done(e);
@@ -3426,7 +3426,7 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
     }
   },
 
-  unsignableHeaders: ['authorization', 'content-type',
+  unsignableHeaders: ['authorization', 'content-type', 'content-length',
     'user-agent', expiresHeader, 'x-amz-user-agent', 'x-amz-content-sha256'],
 
   isSignableHeader: function isSignableHeader(key) {
@@ -9185,4 +9185,4 @@ window.AWS.util.update(window.AWS.STS.prototype, {
   }
 });
 
-window.AWS.Service.defineServiceApi(window.AWS.STS, "2011-06-15", {"format":"query","apiVersion":"2011-06-15","endpointPrefix":"sts","globalEndpoint":"sts.amazonaws.com","resultWrapped":true,"serviceAbbreviation":"AWS STS","serviceFullName":"AWS Security Token Service","signatureVersion":"v4","timestampFormat":"iso8601","operations":{"assumeRole":{"name":"AssumeRole","input":{"type":"structure","members":{"RoleArn":{"required":true},"RoleSessionName":{"required":true},"Policy":{},"DurationSeconds":{"type":"integer"},"ExternalId":{},"SerialNumber":{},"TokenCode":{}}},"output":{"type":"structure","members":{"Credentials":{"type":"structure","members":{"AccessKeyId":{},"SecretAccessKey":{},"SessionToken":{},"Expiration":{"type":"timestamp"}}},"AssumedRoleUser":{"type":"structure","members":{"AssumedRoleId":{},"Arn":{}}},"PackedPolicySize":{"type":"integer"}}}},"assumeRoleWithSAML":{"name":"AssumeRoleWithSAML","input":{"type":"structure","members":{"RoleArn":{"required":true},"PrincipalArn":{"required":true},"SAMLAssertion":{"required":true},"Policy":{},"DurationSeconds":{"type":"integer"}}},"output":{"type":"structure","members":{"Credentials":{"type":"structure","members":{"AccessKeyId":{},"SecretAccessKey":{},"SessionToken":{},"Expiration":{"type":"timestamp"}}},"AssumedRoleUser":{"type":"structure","members":{"AssumedRoleId":{},"Arn":{}}},"PackedPolicySize":{"type":"integer"}}}},"assumeRoleWithWebIdentity":{"name":"AssumeRoleWithWebIdentity","input":{"type":"structure","members":{"RoleArn":{"required":true},"RoleSessionName":{"required":true},"WebIdentityToken":{"required":true},"ProviderId":{},"Policy":{},"DurationSeconds":{"type":"integer"}}},"output":{"type":"structure","members":{"Credentials":{"type":"structure","members":{"AccessKeyId":{},"SecretAccessKey":{},"SessionToken":{},"Expiration":{"type":"timestamp"}}},"SubjectFromWebIdentityToken":{},"AssumedRoleUser":{"type":"structure","members":{"AssumedRoleId":{},"Arn":{}}},"PackedPolicySize":{"type":"integer"}}}},"decodeAuthorizationMessage":{"name":"DecodeAuthorizationMessage","input":{"type":"structure","members":{"EncodedMessage":{"required":true}}},"output":{"type":"structure","members":{"DecodedMessage":{}}}},"getFederationToken":{"name":"GetFederationToken","input":{"type":"structure","members":{"Name":{"required":true},"Policy":{},"DurationSeconds":{"type":"integer"}}},"output":{"type":"structure","members":{"Credentials":{"type":"structure","members":{"AccessKeyId":{},"SecretAccessKey":{},"SessionToken":{},"Expiration":{"type":"timestamp"}}},"FederatedUser":{"type":"structure","members":{"FederatedUserId":{},"Arn":{}}},"PackedPolicySize":{"type":"integer"}}}},"getSessionToken":{"name":"GetSessionToken","input":{"type":"structure","members":{"DurationSeconds":{"type":"integer"},"SerialNumber":{},"TokenCode":{}}},"output":{"type":"structure","members":{"Credentials":{"type":"structure","members":{"AccessKeyId":{},"SecretAccessKey":{},"SessionToken":{},"Expiration":{"type":"timestamp"}}}}}}}});
+window.AWS.Service.defineServiceApi(window.AWS.STS, "2011-06-15", {"format":"query","apiVersion":"2011-06-15","endpointPrefix":"sts","globalEndpoint":"sts.amazonaws.com","resultWrapped":true,"serviceAbbreviation":"AWS STS","serviceFullName":"AWS Security Token Service","signatureVersion":"v4","timestampFormat":"iso8601","operations":{"assumeRole":{"name":"AssumeRole","input":{"type":"structure","members":{"RoleArn":{"required":true},"RoleSessionName":{"required":true},"Policy":{},"DurationSeconds":{"type":"integer"},"ExternalId":{},"SerialNumber":{},"TokenCode":{}}},"output":{"type":"structure","members":{"Credentials":{"type":"structure","members":{"AccessKeyId":{},"SecretAccessKey":{},"SessionToken":{},"Expiration":{"type":"timestamp"}}},"AssumedRoleUser":{"type":"structure","members":{"AssumedRoleId":{},"Arn":{}}},"PackedPolicySize":{"type":"integer"}}}},"assumeRoleWithSAML":{"name":"AssumeRoleWithSAML","input":{"type":"structure","members":{"RoleArn":{"required":true},"PrincipalArn":{"required":true},"SAMLAssertion":{"required":true},"Policy":{},"DurationSeconds":{"type":"integer"}}},"output":{"type":"structure","members":{"Credentials":{"type":"structure","members":{"AccessKeyId":{},"SecretAccessKey":{},"SessionToken":{},"Expiration":{"type":"timestamp"}}},"AssumedRoleUser":{"type":"structure","members":{"AssumedRoleId":{},"Arn":{}}},"PackedPolicySize":{"type":"integer"},"Subject":{},"SubjectType":{},"Issuer":{},"Audience":{},"NameQualifier":{}}}},"assumeRoleWithWebIdentity":{"name":"AssumeRoleWithWebIdentity","input":{"type":"structure","members":{"RoleArn":{"required":true},"RoleSessionName":{"required":true},"WebIdentityToken":{"required":true},"ProviderId":{},"Policy":{},"DurationSeconds":{"type":"integer"}}},"output":{"type":"structure","members":{"Credentials":{"type":"structure","members":{"AccessKeyId":{},"SecretAccessKey":{},"SessionToken":{},"Expiration":{"type":"timestamp"}}},"SubjectFromWebIdentityToken":{},"AssumedRoleUser":{"type":"structure","members":{"AssumedRoleId":{},"Arn":{}}},"PackedPolicySize":{"type":"integer"},"Provider":{},"Audience":{}}}},"decodeAuthorizationMessage":{"name":"DecodeAuthorizationMessage","input":{"type":"structure","members":{"EncodedMessage":{"required":true}}},"output":{"type":"structure","members":{"DecodedMessage":{}}}},"getFederationToken":{"name":"GetFederationToken","input":{"type":"structure","members":{"Name":{"required":true},"Policy":{},"DurationSeconds":{"type":"integer"}}},"output":{"type":"structure","members":{"Credentials":{"type":"structure","members":{"AccessKeyId":{},"SecretAccessKey":{},"SessionToken":{},"Expiration":{"type":"timestamp"}}},"FederatedUser":{"type":"structure","members":{"FederatedUserId":{},"Arn":{}}},"PackedPolicySize":{"type":"integer"}}}},"getSessionToken":{"name":"GetSessionToken","input":{"type":"structure","members":{"DurationSeconds":{"type":"integer"},"SerialNumber":{},"TokenCode":{}}},"output":{"type":"structure","members":{"Credentials":{"type":"structure","members":{"AccessKeyId":{},"SecretAccessKey":{},"SessionToken":{},"Expiration":{"type":"timestamp"}}}}}}}});
