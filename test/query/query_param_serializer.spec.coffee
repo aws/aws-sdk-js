@@ -170,7 +170,7 @@ describe 'QueryParamSerializer', ->
                 Aa: {}
                 Bb: {}
         params = serialize({Root:[{Aa:'a1',Bb:'b1'},{Aa:'a2',Bb:'b2'}]},rules)
-        expect(params).toEqual([
+        expect(params.sort()).toEqual([
           ['Root.1.Aa', 'a1'],
           ['Root.1.Bb', 'b1'],
           ['Root.2.Aa', 'a2'],
