@@ -19,7 +19,7 @@ end
 
 namespace :browser do
   $BUILDER = "./dist-tools/browser-builder.js"
-  $BROWSERIFY = "./dist-tools/node_modules/.bin/browserify"
+  $BROWSERIFY = "browserify"
   $BROWSERIFY_DIST = "dist/aws-sdk.js"
   $BROWSERIFY_TEST = "test/browser/build/tests.js"
 
