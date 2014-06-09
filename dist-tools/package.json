@@ -1,0 +1,22 @@
+{
+  "name": "aws-sdk-browser-builder",
+  "description": "AWS SDK for JavaScript browser building tools",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "browserify": "3.x",
+    "uglify-js": "2.x"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*",
+    "coffee-script": "1.6.x",
+    "eslint": "*"
+  },
+  "scripts" : {
+    "test": "npm run-script lint && npm run-script unit",
+    "unit": "mocha --compilers coffee:coffee-script -s 1000 -t 10000",
+    "coverage": "istanbul cover node_modules/mocha/bin/_mocha -- --compilers coffee:coffee-script -s 1000 -t 10000",
+    "lint": "eslint --rulesdir ../eslint-rules *.js strategies"
+  }
+}

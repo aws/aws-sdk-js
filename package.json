@@ -52,9 +52,10 @@
       "glacier","kinesis","cloudtrail"
     ],
     "scripts" : {
-      "test" : "npm -s run-script lint && npm -s run-script unit && npm -s run-script browsertest && ([ -f configuration ] && npm -s run-script integration || true)",
+      "test" : "npm -s run-script lint && npm -s run-script unit && npm -s run-script buildertest && npm -s run-script browsertest && ([ -f configuration ] && npm -s run-script integration || true)",
       "unit" : "jasmine-node --noColor --coffee test",
       "browsertest": "rake browser:test",
+      "buildertest": "cd dist-tools && npm install && npm test",
       "integration": "cucumber.js",
       "lint" : "eslint --rulesdir eslint-rules lib",
       "console": "./scripts/console"
