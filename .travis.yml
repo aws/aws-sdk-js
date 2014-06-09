@@ -9,7 +9,6 @@ branches:
 
 before_script:
   - "npm install git://github.com/aws/aws-sdk-js-apis#$TRAVIS_BRANCH"
-  - "pushd dist-tools && npm install && popd"
 
 script: "if [ $INTEGRATION ]; then cucumber.js -f pretty; else npm test; fi"
 
