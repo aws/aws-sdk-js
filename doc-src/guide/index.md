@@ -6,6 +6,12 @@
 
 ## Developer Guide
 
+<p class="note">
+If you are upgrading from 1.x to 2.0 of the SDK, please see
+the {file:UPGRADING.md} notes for information on how to migrate existing code
+to work with the new major version.
+</p>
+
 The **AWS SDK for JavaScript** allows developers to build libraries or
 applications that make use of AWS services using a simple and easy-to-use
 API available both in the browser or inside of Node.js applications on the

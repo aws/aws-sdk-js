@@ -5,6 +5,12 @@ or Node.js backends
 
 Release notes can be found at http://aws.amazon.com/releasenotes/SDK/JavaScript
 
+<p class="note">
+If you are upgrading from 1.x to 2.0 of the SDK, please see
+the {file:UPGRADING.md} notes for information on how to migrate existing code
+to work with the new major version.
+</p>
+
 ## Installing
 
 ### In the Browser
