@@ -242,11 +242,13 @@ class ExampleShapeVisitor
   end
 
   def visit_base64(node, required = false)
-    "'BASE64_ENCODED_STRING'"
+    "new Buffer('...') || 'STRING_VALUE'"
   end
 
   def visit_binary(node, required = false)
-    "new Buffer('...') || streamObject || 'STRING_VALUE'"
+    value = "new Buffer('...') || 'STRING_VALUE'"
+    value += " || streamObject" if node['streaming']
+    value
   end
   alias visit_blob visit_binary
 
@@ -292,15 +294,15 @@ class ShapeDocumentor
       when 'double' then 'Float'
       when 'bigdecimal' then 'Float'
       when 'boolean' then 'Boolean'
-      when 'base64' then 'Base64 Encoded String'
-      when 'binary' then 'Buffer'
-      when 'blob'; then 'Buffer'
+      when 'base64' then 'Buffer, Typed Array, Blob, String'
+      when 'binary' then 'Buffer, Typed Array, Blob, String'
+      when 'blob' then 'Buffer, Typed Array, Blob, String'
       when 'timestamp' then 'Date'
       else raise "unhandled type: #{rules['type']}"
       end
 
     # TODO : update this format description once we add streaming uploads
-    @type = 'String' if streaming?
+    @type += ', ReadableStream' if streaming?
 
     @lines = []
     @nested_lines = []
@@ -343,7 +345,7 @@ class ShapeDocumentor
   end
 
   def streaming?
-    rules['payload'] and rules['type'] == 'blob'
+    rules['streaming']
   end
 
   def structure?
