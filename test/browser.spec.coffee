@@ -38,6 +38,8 @@ eventually = (condition, next, done) ->
 noError = (err) -> expect(err).toEqual(null)
 
 integration = (label, fn) ->
+  if label.match(/\(no phantomjs\)/) and navigator.userAgent.match(/phantomjs/i)
+    return
   it label, ->
     done = false
     runs -> fn(-> done = true)
@@ -84,7 +86,7 @@ integrationTests ->
         expect(httpError).toEqual(true)
         expect(err.name).toEqual('NetworkingError')
 
-    it 'can send synchronous requests', ->
+    integration 'can send synchronous requests (no phantomjs)', (done) ->
       key = uniqueName('test')
       opts = AWS.util.merge(config, config.s3)
       opts.httpOptions = xhrAsync: false
@@ -93,6 +95,7 @@ integrationTests ->
       resp2 = svc.getObject(Key: key).send()
       expect(resp2.data.Body.toString()).toEqual('body')
       svc.deleteObject(Key: key).send()
+      done()
 
   describe 'AWS.S3', ->
     testWrite = (done, body, compareFn) ->
@@ -107,16 +110,16 @@ integrationTests ->
             expect(data.Body.toString()).toEqual(body)
           s3.deleteObject(Key: key).send(done)
 
-    integration 'GETs and PUTs objects to a bucket', (done) ->
+    integration 'GETs and PUTs objects to a bucket (no phantomjs)', (done) ->
       testWrite done, 'ƒoo'
 
-    integration 'writes typed array data', (done) ->
+    integration 'writes typed array data (no phantomjs)', (done) ->
       testWrite done, new Uint8Array([2, 4, 8]), (data) ->
         expect(data.Body[0]).toEqual(2)
         expect(data.Body[1]).toEqual(4)
         expect(data.Body[2]).toEqual(8)
 
-    integration 'writes blobs', (done) ->
+    integration 'writes blobs (no phantomjs)', (done) ->
       testWrite done, new Blob(['a', 'b', 'c']), (data) ->
         expect(data.Body[0]).toEqual(97)
         expect(data.Body[1]).toEqual(98)
@@ -133,7 +136,7 @@ integrationTests ->
         s3.deleteObject(Key: key).send(done)
 
     describe 'progress events', ->
-      integration 'emits http(Upload|Download)Progress events', (done) ->
+      integration 'emits http(Upload|Download)Progress events (no phantomjs)', (done) ->
         data = []
         progress = []
         key = uniqueName('test')
