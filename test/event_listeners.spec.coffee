@@ -99,13 +99,11 @@ describe 'AWS.EventListeners', ->
       expect(response.error).toEqual("ERROR")
 
   describe 'afterBuild', ->
-    beforeEach ->
-      helpers.mockHttpResponse 200, {}, ['DATA']
-
     sendRequest = (body) ->
       request = makeRequest()
+      request.removeAllListeners('sign')
       request.on('build', (req) -> req.httpRequest.body = body)
-      request.send(->)
+      request.build()
       request
 
     contentLength = (body) ->
@@ -406,7 +404,7 @@ describe 'AWS.EventListeners', ->
     describe 'without domains', ->
       it 'emits uncaughtException', ->
         helpers.mockHttpResponse 200, {}, []
-        expect(-> (makeRequest -> throw 'ERROR')).toThrow('ERROR')
+        expect(-> (makeRequest -> invalidCode)).toThrow()
         expect(completeHandler).toHaveBeenCalled()
         expect(errorHandler).toHaveBeenCalled()
         expect(retryHandler).toHaveBeenCalled()
@@ -415,7 +413,7 @@ describe 'AWS.EventListeners', ->
         it 'raise exceptions from terminal ' + evt + ' events', ->
           helpers.mockHttpResponse 500, {}, []
           request = makeRequest()
-          expect(-> request.send(-> throw 'ERROR')).toThrow('ERROR')
+          expect(-> request.send(-> invalidCode)).toThrow()
           expect(completeHandler).toHaveBeenCalled()
 
     if AWS.util.isNode()
@@ -428,11 +426,11 @@ describe 'AWS.EventListeners', ->
             d.run ->
               helpers.mockHttpResponse 200, {}, []
               request = makeRequest()
-              request.on 'complete', -> throw "ERROR"
-              expect(-> request.send()).not.toThrow('ERROR')
+              request.on 'complete', -> invalidCode
+              expect(-> request.send()).not.toThrow()
               expect(completeHandler).toHaveBeenCalled()
               expect(retryHandler).not.toHaveBeenCalled()
-              expect(result).toEqual("ERROR")
+              expect(result.name).toEqual('ReferenceError')
 
         it 'does not leak service error into domain', ->
           result = false
@@ -449,12 +447,12 @@ describe 'AWS.EventListeners', ->
           helpers.mockHttpResponse 200, {}, []
 
           done = false
-          err = new Error()
+          err = new ReferenceError()
           gotOuterError = false
           gotInnerError = false
           Domain = require("domain")
           outerDomain = Domain.create()
-          outerDomain.on 'error', (err) -> gotOuterError = true
+          outerDomain.on 'error', -> gotOuterError = true
 
           if outerDomain.run
             outerDomain.run ->
