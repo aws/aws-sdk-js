@@ -84,6 +84,16 @@ integrationTests ->
         expect(httpError).toEqual(true)
         expect(err.name).toEqual('NetworkingError')
 
+    it 'can send synchronous requests', ->
+      key = uniqueName('test')
+      opts = AWS.util.merge(config, config.s3)
+      opts.httpOptions = xhrAsync: false
+      svc = new AWS.S3(opts)
+      resp1 = svc.putObject(Key: key, Body: 'body').send()
+      resp2 = svc.getObject(Key: key).send()
+      expect(resp2.data.Body.toString()).toEqual('body')
+      svc.deleteObject(Key: key).send()
+
   describe 'AWS.S3', ->
     testWrite = (done, body, compareFn) ->
       key = uniqueName('test')
