@@ -3,7 +3,7 @@ require_relative './model_documentor'
 
 $APIS_DIR = File.expand_path(File.dirname(__FILE__) +
                              "/../../../vendor/apis/apis")
-$API_FILE_MATCH = /(?:^|\/)([^\/-]+)-(\d+-\d+-\d+)\.normal\.json$/
+$API_FILE_MATCH = /(?:^|\/)([^\/-]+)-(\d+-\d+-\d+)\.full\.json$/
 
 YARD::Tags::Library.define_tag 'Service', :service
 YARD::Tags::Library.define_tag 'Waiter Resource States', :waiter
@@ -177,7 +177,7 @@ eof
   def load_model(file)
     json = JSON.parse(File.read(file))
 
-    waiters_file = file.sub(/\.normal\.json$/, '.waiters.json')
+    waiters_file = file.sub(/\.full\.json$/, '.waiters.json')
     if File.exist? waiters_file
       json = json.merge(JSON.parse(File.read(waiters_file)))
     end
@@ -185,7 +185,7 @@ eof
   end
 
   def class_info_for(prefix)
-    @info ||= JSON.parse(File.read(File.join($APIS_DIR, '../apiInfo.json')))
+    @info ||= JSON.parse(File.read(File.join($APIS_DIR, '../metadata.json')))
     @info.each do |identifier, info|
       iprefix = info['prefix'] || identifier
       if prefix == iprefix
