@@ -164,6 +164,29 @@ describe 'AWS.S3', ->
           expect(req.endpoint.hostname).toEqual('s3.amazonaws.com')
           expect(req.path).toEqual('/bucket_name')
 
+  describe 'SSE support', ->
+    beforeEach -> s3 = new AWS.S3
+
+    it 'encodes SSECustomerKey and fills in MD5', ->
+      req = s3.putObject
+        Bucket: 'bucket', Key: 'key', Body: 'data'
+        SSECustomerKey: 'KEY', SSECustomerAlgorithm: 'AES256'
+      req.build()
+      expect(req.httpRequest.headers['x-amz-server-side-encryption-customer-key']).
+        toEqual('S0VZ')
+      expect(req.httpRequest.headers['x-amz-server-side-encryption-customer-key-MD5']).
+        toEqual('TzFsSjRNSnJoM1o2UjFLaWR0NlZjQT09')
+
+    it 'encodes CopySourceSSECustomerKey and fills in MD5', ->
+      req = s3.copyObject
+        Bucket: 'bucket', Key: 'key', CopySource: 'bucket/oldkey', Body: 'data'
+        CopySourceSSECustomerKey: 'KEY', CopySourceSSECustomerAlgorithm: 'AES256'
+      req.build()
+      expect(req.httpRequest.headers['x-amz-copy-source-server-side-encryption-customer-key']).
+        toEqual('S0VZ')
+      expect(req.httpRequest.headers['x-amz-copy-source-server-side-encryption-customer-key-MD5']).
+        toEqual('TzFsSjRNSnJoM1o2UjFLaWR0NlZjQT09')
+
   # S3 returns a handful of errors without xml bodies (to match the
   # http spec) these tests ensure we give meaningful codes/messages for these.
   describe 'errors with no XML body', ->
