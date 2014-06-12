@@ -108,6 +108,12 @@ describe 'AWS.Service', ->
       expect(typeof service.operationName).toEqual('function')
       expect(service.operationName() instanceof AWS.Request).toEqual(true)
 
+    it 'interpolates endpoint when reading from configuration', ->
+      service = new MockService(endpoint: '{scheme}://{service}.{region}.domain.tld')
+      expect(service.config.endpoint).toEqual('https://mockservice.mock-region.domain.tld')
+      service = new MockService(sslEnabled: false, endpoint: '{scheme}://{service}.{region}.domain.tld')
+      expect(service.config.endpoint).toEqual('http://mockservice.mock-region.domain.tld')
+
   describe 'setEndpoint', ->
     FooService = null
 
