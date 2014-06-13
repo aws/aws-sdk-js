@@ -173,6 +173,28 @@ describe 'AWS.Protocol.RestXml', ->
         expect(request.httpRequest.body).toEqual('')
         expect(request.httpRequest.path).toEqual('/abc')
 
+    it 'uses payload member name for payloads', ->
+      request.params =
+        Data:
+          Member1: 'member1'
+          Member2: 'member2'
+      defop
+        input:
+          payload: 'Data'
+          members:
+            Data:
+              type: 'structure'
+              locationName: 'RootElement'
+              members:
+                Member1: type: 'string'
+                Member2: type: 'string'
+      helpers.matchXML build().httpRequest.body, """
+        <RootElement xmlns="http://mockservice.com/xmlns">
+          <Member1>member1</Member1>
+          <Member2>member2</Member2>
+        </RootElement>
+      """
+
   describe 'extractError', ->
     extractError = (body) ->
       if body == undefined
