@@ -1,5218 +1,9 @@
-// AWS SDK for JavaScript v2.0.0-rc.19
+// AWS SDK for JavaScript v2.0.0-rc.20
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-window.AWS = module.exports = require('./core');
 
-require('./xml/browser_parser');
-
-require('./http/xhr');
-
-},{"./core":3,"./http/xhr":11,"./xml/browser_parser":33}],2:[function(require,module,exports){
-var AWS = require('./core');
-require('./credentials');
-require('./credentials/credential_provider_chain');
-
-
-AWS.Config = AWS.util.inherit({
-
-
-  constructor: function Config(options) {
-    if (options === undefined) options = {};
-    options = this.extractCredentials(options);
-
-    AWS.util.each.call(this, this.keys, function (key, value) {
-      this.set(key, options[key], value);
-    });
-  },
-
-
-  update: function update(options, allowUnknownKeys) {
-    allowUnknownKeys = allowUnknownKeys || false;
-    options = this.extractCredentials(options);
-    AWS.util.each.call(this, options, function (key, value) {
-      if (allowUnknownKeys || this.keys.hasOwnProperty(key)) this[key] = value;
-    });
-  },
-
-
-  getCredentials: function getCredentials(callback) {
-    var self = this;
-
-    function finish(err) {
-      callback(err, err ? null : self.credentials);
-    }
-
-    function credError(msg, err) {
-      return new AWS.util.error(err || new Error(), {
-        code: 'CredentialsError', message: msg
-      });
-    }
-
-    function getAsyncCredentials() {
-      self.credentials.get(function(err) {
-        if (err) {
-          var msg = 'Could not load credentials from ' +
-            self.credentials.constructor.name;
-          err = credError(msg, err);
-        }
-        finish(err);
-      });
-    }
-
-    function getStaticCredentials() {
-      var err = null;
-      if (!self.credentials.accessKeyId || !self.credentials.secretAccessKey) {
-        err = credError('Missing credentials');
-      }
-      finish(err);
-    }
-
-    if (self.credentials) {
-      if (typeof self.credentials.get === 'function') {
-        getAsyncCredentials();
-      } else { // static credentials
-        getStaticCredentials();
-      }
-    } else if (self.credentialProvider) {
-      self.credentialProvider.resolve(function(err, creds) {
-        if (err) {
-          err = credError('Could not load credentials from any providers', err);
-        }
-        self.credentials = creds;
-        finish(err);
-      });
-    } else {
-      finish(credError('No credentials to load'));
-    }
-  },
-
-
-  loadFromPath: function loadFromPath(path) {
-    this.clear();
-
-    var options = JSON.parse(AWS.util.readFileSync(path));
-    var fileSystemCreds = new AWS.FileSystemCredentials(path);
-    var chain = new AWS.CredentialProviderChain();
-    chain.providers.unshift(fileSystemCreds);
-    chain.resolve(function (err, creds) {
-      if (err) throw err;
-      else options.credentials = creds;
-    });
-
-    this.constructor(options);
-
-    return this;
-  },
-
-
-  clear: function clear() {
-
-    AWS.util.each.call(this, this.keys, function (key) {
-      delete this[key];
-    });
-
-    this.set('credentials', undefined);
-    this.set('credentialProvider', undefined);
-  },
-
-
-  set: function set(property, value, defaultValue) {
-    if (value === undefined) {
-      if (defaultValue === undefined) {
-        defaultValue = this.keys[property];
-      }
-      if (typeof defaultValue === 'function') {
-        this[property] = defaultValue.call(this);
-      } else {
-        this[property] = defaultValue;
-      }
-    } else {
-      this[property] = value;
-    }
-  },
-
-
-  keys: {
-    credentials: null,
-    credentialProvider: null,
-    region: null,
-    logger: null,
-    apiVersions: {},
-    apiVersion: null,
-    endpoint: undefined,
-    httpOptions: {},
-    maxRetries: undefined,
-    maxRedirects: 10,
-    paramValidation: true,
-    sslEnabled: true,
-    s3ForcePathStyle: false,
-    computeChecksums: true,
-    dynamoDbCrc32: true
-  },
-
-
-  extractCredentials: function extractCredentials(options) {
-    if (options.accessKeyId && options.secretAccessKey) {
-      options = AWS.util.copy(options);
-      options.credentials = new AWS.Credentials(options);
-    }
-    return options;
-  }
-});
-
-
-AWS.config = new AWS.Config();
-
-},{"./core":3,"./credentials":4,"./credentials/credential_provider_chain":5}],3:[function(require,module,exports){
-
-var AWS = {};
-
-
-var _hidden = {}; _hidden = {}; // hack to parse macro
-
-module.exports = AWS;
-require('./util');
-
-AWS.util.update(AWS, {
-
-
-  VERSION: '2.0.0-rc.19',
-
-
-  ServiceInterface: {},
-
-
-  Signers: {},
-
-
-  XML: {}
-
-});
-
-require('./service');
-
-require('./credentials');
-require('./credentials/credential_provider_chain');
-require('./credentials/temporary_credentials');
-require('./credentials/web_identity_credentials');
-require('./credentials/saml_credentials');
-
-require('./config');
-require('./http');
-require('./sequential_executor');
-require('./event_listeners');
-require('./request');
-require('./response');
-require('./resource_waiter');
-require('./signers/request_signer');
-require('./param_validator');
-
-
-AWS.events = new AWS.SequentialExecutor();
-
-if (typeof window !== 'undefined') window.AWS = AWS;
-
-},{"./config":2,"./credentials":4,"./credentials/credential_provider_chain":5,"./credentials/saml_credentials":6,"./credentials/temporary_credentials":7,"./credentials/web_identity_credentials":8,"./event_listeners":9,"./http":10,"./param_validator":13,"./request":14,"./resource_waiter":15,"./response":16,"./sequential_executor":17,"./service":18,"./signers/request_signer":25,"./util":32}],4:[function(require,module,exports){
-var AWS = require('./core');
-
-
-AWS.Credentials = AWS.util.inherit({
-
-  constructor: function Credentials() {
-    AWS.util.hideProperties(this, ['secretAccessKey']);
-
-    this.expired = false;
-    this.expireTime = null;
-    if (arguments.length === 1 && typeof arguments[0] === 'object') {
-      var creds = arguments[0].credentials || arguments[0];
-      this.accessKeyId = creds.accessKeyId;
-      this.secretAccessKey = creds.secretAccessKey;
-      this.sessionToken = creds.sessionToken;
-    } else {
-      this.accessKeyId = arguments[0];
-      this.secretAccessKey = arguments[1];
-      this.sessionToken = arguments[2];
-    }
-  },
-
-
-  expiryWindow: 15,
-
-
-  needsRefresh: function needsRefresh() {
-    var currentTime = AWS.util.date.getDate().getTime();
-    var adjustedTime = new Date(currentTime + this.expiryWindow * 1000);
-
-    if (this.expireTime && adjustedTime > this.expireTime) {
-      return true;
-    } else {
-      return this.expired || !this.accessKeyId || !this.secretAccessKey;
-    }
-  },
-
-
-  get: function get(callback) {
-    var self = this;
-    if (this.needsRefresh()) {
-      this.refresh(function(err) {
-        if (!err) self.expired = false; // reset expired flag
-        if (callback) callback(err);
-      });
-    } else if (callback) {
-      callback();
-    }
-  },
-
-
-  refresh: function refresh(callback) {
-    this.expired = false;
-    callback();
-  }
-});
-
-},{"./core":3}],5:[function(require,module,exports){
-var AWS = require('../core');
-
-
-AWS.CredentialProviderChain = AWS.util.inherit(AWS.Credentials, {
-
-
-  constructor: function CredentialProviderChain(providers) {
-    if (providers) {
-      this.providers = providers;
-    } else {
-      this.providers = AWS.CredentialProviderChain.defaultProviders.slice(0);
-    }
-  },
-
-
-  resolve: function resolve(callback) {
-    if (this.providers.length === 0) {
-      callback(new Error('No providers'));
-      return this;
-    }
-
-    var index = 0;
-    var providers = this.providers.slice(0);
-
-    function resolveNext(err, creds) {
-      if ((!err && creds) || index === providers.length) {
-        callback(err, creds);
-        return;
-      }
-
-      var provider = providers[index++];
-      if (typeof provider === 'function') {
-        creds = provider.call();
-      } else {
-        creds = provider;
-      }
-
-      if (creds.get) {
-        creds.get(function(err) {
-          resolveNext(err, err ? null : creds);
-        });
-      } else {
-        resolveNext(null, creds);
-      }
-    }
-
-    resolveNext();
-    return this;
-  }
-
-});
-
-
-AWS.CredentialProviderChain.defaultProviders = [];
-
-},{"../core":3}],6:[function(require,module,exports){
-var AWS = require('../core');
-
-
-AWS.SAMLCredentials = AWS.util.inherit(AWS.Credentials, {
-
-  constructor: function SAMLCredentials(params) {
-    AWS.Credentials.call(this);
-    this.expired = true;
-    this.service = new AWS.STS();
-    this.params = params;
-  },
-
-
-  refresh: function refresh(callback) {
-    var self = this;
-    if (!callback) callback = function(err) { if (err) throw err; };
-
-    self.service.assumeRoleWithSAML(self.params, function (err, data) {
-      if (!err) {
-        self.service.credentialsFrom(data, self);
-      }
-      callback(err);
-    });
-  }
-});
-
-},{"../core":3}],7:[function(require,module,exports){
-var AWS = require('../core');
-
-
-AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
-
-  constructor: function TemporaryCredentials(params) {
-    AWS.Credentials.call(this);
-    this.loadMasterCredentials();
-    this.service = new AWS.STS();
-    this.expired = true;
-
-    this.params = params || {};
-    if (this.params.RoleArn) {
-      this.params.RoleSessionName =
-        this.params.RoleSessionName || 'temporary-credentials';
-    }
-  },
-
-
-  refresh: function refresh(callback) {
-    var self = this;
-    if (!callback) callback = function(err) { if (err) throw err; };
-
-    self.service.config.credentials = self.masterCredentials;
-    var operation = self.params.RoleArn ?
-      self.service.assumeRole : self.service.getSessionToken;
-    operation.call(self.service, self.params, function (err, data) {
-      if (!err) {
-        self.service.credentialsFrom(data, self);
-      }
-      callback(err);
-    });
-  },
-
-
-  loadMasterCredentials: function loadMasterCredentials() {
-    this.masterCredentials = AWS.config.credentials;
-    while (this.masterCredentials.masterCredentials) {
-      this.masterCredentials = this.masterCredentials.masterCredentials;
-    }
-  }
-});
-
-},{"../core":3}],8:[function(require,module,exports){
-var AWS = require('../core');
-
-
-AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
-
-  constructor: function WebIdentityCredentials(params) {
-    AWS.Credentials.call(this);
-    this.expired = true;
-    this.service = new AWS.STS();
-    this.params = params;
-    this.data = null;
-    this.params.RoleSessionName = this.params.RoleSessionName || 'web-identity';
-  },
-
-
-  refresh: function refresh(callback) {
-    var self = this;
-    if (!callback) callback = function(err) { if (err) throw err; };
-
-    self.service.assumeRoleWithWebIdentity(self.params, function (err, data) {
-      self.data = null;
-      if (!err) {
-        self.data = data;
-        self.service.credentialsFrom(data, self);
-      }
-      callback(err);
-    });
-  }
-});
-
-},{"../core":3}],9:[function(require,module,exports){
-var AWS = require('./core');
-require('./sequential_executor');
-require('./service_interface/json');
-require('./service_interface/query');
-require('./service_interface/rest');
-require('./service_interface/rest_json');
-require('./service_interface/rest_xml');
-
-
-AWS.EventListeners = {
-
-  Core: {} /* doc hack */
-};
-
-AWS.EventListeners = {
-  Core: new AWS.SequentialExecutor().addNamedListeners(function(add, addAsync) {
-    addAsync('VALIDATE_CREDENTIALS', 'validate',
-        function VALIDATE_CREDENTIALS(req, done) {
-      req.service.config.getCredentials(function(err) {
-        if (err) {
-          req.response.err = AWS.util.error(err,
-            {code: 'SigningError', message: 'Missing credentials in config'});
-        }
-        done();
-      });
-    });
-
-    add('VALIDATE_REGION', 'validate', function VALIDATE_REGION(req) {
-      if (!req.service.config.region && !req.service.hasGlobalEndpoint()) {
-        req.response.error = AWS.util.error(new Error(),
-          {code: 'SigningError', message: 'Missing region in config'});
-      }
-    });
-
-    add('VALIDATE_PARAMETERS', 'validate', function VALIDATE_PARAMETERS(req) {
-      var rules = req.service.api.operations[req.operation].input;
-      new AWS.ParamValidator().validate(rules, req.params);
-    });
-
-    add('SET_CONTENT_LENGTH', 'afterBuild', function SET_CONTENT_LENGTH(req) {
-      if (req.httpRequest.headers['Content-Length'] === undefined) {
-        var length = AWS.util.string.byteLength(req.httpRequest.body);
-        req.httpRequest.headers['Content-Length'] = length;
-      }
-    });
-
-    add('SET_HTTP_HOST', 'afterBuild', function SET_HTTP_HOST(req) {
-      req.httpRequest.headers['Host'] = req.httpRequest.endpoint.host;
-    });
-
-    addAsync('SIGN', 'sign', function SIGN(req, done) {
-      if (!req.service.api.signatureVersion) return done(); // none
-
-      req.service.config.getCredentials(function (err, credentials) {
-        if (err) {
-          req.response.error = err;
-          return done();
-        }
-
-        try {
-          var date = AWS.util.date.getDate();
-          var SignerClass = req.service.getSignerClass(req);
-          var signer = new SignerClass(req.httpRequest,
-            req.service.api.signingName || req.service.api.endpointPrefix);
-
-          delete req.httpRequest.headers['Authorization'];
-          delete req.httpRequest.headers['Date'];
-          delete req.httpRequest.headers['X-Amz-Date'];
-
-          signer.addAuthorization(credentials, date);
-          req.signedAt = date;
-        } catch (e) {
-          req.response.error = e;
-        }
-        done();
-      });
-    });
-
-    add('VALIDATE_RESPONSE', 'validateResponse', function VALIDATE_RESPONSE(resp) {
-      if (this.service.successfulResponse(resp, this)) {
-        resp.data = {};
-        resp.error = null;
-      } else {
-        resp.data = null;
-        resp.error = AWS.util.error(new Error(),
-          {code: 'UnknownError', message: 'An unknown error occurred.'});
-      }
-    });
-
-    addAsync('SEND', 'send', function SEND(resp, done) {
-      resp.httpResponse._abortCallback = done;
-      resp.error = null;
-      resp.data = null;
-
-      function callback(httpResp) {
-        resp.httpResponse.stream = httpResp;
-
-        httpResp.on('headers', function onHeaders(statusCode, headers) {
-          resp.request.emit('httpHeaders', [statusCode, headers, resp]);
-
-          if (!resp.request.httpRequest._streaming) {
-            if (AWS.HttpClient.streamsApiVersion === 2) { // streams2 API check
-              httpResp.on('readable', function onReadable() {
-                var data = httpResp.read();
-                if (data !== null) {
-                  resp.request.emit('httpData', [data, resp]);
-                }
-              });
-            } else { // legacy streams API
-              httpResp.on('data', function onData(data) {
-                resp.request.emit('httpData', [data, resp]);
-              });
-            }
-          }
-        });
-
-        httpResp.on('end', function onEnd() {
-          resp.request.emit('httpDone');
-          done();
-        });
-      }
-
-      function progress(httpResp) {
-        httpResp.on('sendProgress', function onSendProgress(progress) {
-          resp.request.emit('httpUploadProgress', [progress, resp]);
-        });
-
-        httpResp.on('receiveProgress', function onReceiveProgress(progress) {
-          resp.request.emit('httpDownloadProgress', [progress, resp]);
-        });
-      }
-
-      function error(err) {
-        resp.error = AWS.util.error(err, {
-          code: 'NetworkingError',
-          region: resp.request.httpRequest.region,
-          hostname: resp.request.httpRequest.endpoint.hostname,
-          retryable: true
-        });
-        resp.request.emit('httpError', [resp.error, resp], function() {
-          done();
-        });
-      }
-
-      function executeSend() {
-        var http = AWS.HttpClient.getInstance();
-        var httpOptions = resp.request.service.config.httpOptions || {};
-        var stream = http.handleRequest(resp.request.httpRequest, httpOptions,
-                                        callback, error);
-        progress(stream);
-      }
-
-      var timeDiff = (AWS.util.date.getDate() - this.signedAt) / 1000;
-      if (timeDiff >= 60 * 10) { // if we signed 10min ago, re-sign
-        this.emit('sign', [this], function(err) {
-          if (err) done(err);
-          else executeSend();
-        });
-      } else {
-        executeSend();
-      }
-    });
-
-    add('HTTP_HEADERS', 'httpHeaders',
-        function HTTP_HEADERS(statusCode, headers, resp) {
-      resp.httpResponse.statusCode = statusCode;
-      resp.httpResponse.headers = headers;
-      resp.httpResponse.body = new AWS.util.Buffer('');
-      resp.httpResponse.buffers = [];
-      resp.httpResponse.numBytes = 0;
-    });
-
-    add('HTTP_DATA', 'httpData', function HTTP_DATA(chunk, resp) {
-      if (chunk) {
-        if (AWS.util.isNode()) {
-          resp.httpResponse.numBytes += chunk.length;
-
-          var total = resp.httpResponse.headers['content-length'];
-          var progress = { loaded: resp.httpResponse.numBytes, total: total };
-          resp.request.emit('httpDownloadProgress', [progress, resp]);
-        }
-
-        resp.httpResponse.buffers.push(new AWS.util.Buffer(chunk));
-      }
-    });
-
-    add('HTTP_DONE', 'httpDone', function HTTP_DONE(resp) {
-      if (resp.httpResponse.buffers && resp.httpResponse.buffers.length > 0) {
-        var body = AWS.util.buffer.concat(resp.httpResponse.buffers);
-        resp.httpResponse.body = body;
-      }
-      delete resp.httpResponse.numBytes;
-      delete resp.httpResponse.buffers;
-    });
-
-    add('FINALIZE_ERROR', 'retry', function FINALIZE_ERROR(resp) {
-      if (resp.httpResponse.statusCode) {
-        resp.error.statusCode = resp.httpResponse.statusCode;
-        if (resp.error.retryable === undefined) {
-          resp.error.retryable = this.service.retryableError(resp.error, this);
-        }
-      }
-    });
-
-    add('INVALIDATE_CREDENTIALS', 'retry', function INVALIDATE_CREDENTIALS(resp) {
-      switch (resp.error.code) {
-        case 'RequestExpired': // EC2 only
-        case 'ExpiredTokenException':
-        case 'ExpiredToken':
-          resp.error.retryable = true;
-          resp.request.service.config.credentials.expired = true;
-      }
-    });
-
-    add('REDIRECT', 'retry', function REDIRECT(resp) {
-      if (resp.error && resp.error.statusCode >= 300 &&
-          resp.error.statusCode < 400 && resp.httpResponse.headers['location']) {
-        this.httpRequest.endpoint =
-          new AWS.Endpoint(resp.httpResponse.headers['location']);
-        resp.error.redirect = true;
-        resp.error.retryable = true;
-      }
-    });
-
-    add('RETRY_CHECK', 'retry', function RETRY_CHECK(resp) {
-      if (resp.error) {
-        if (resp.error.redirect && resp.redirectCount < resp.maxRedirects) {
-          resp.error.retryDelay = 0;
-          resp.redirectCount++;
-          resp.error._willRetry = true;
-        } else if (resp.error.retryable && resp.retryCount < resp.maxRetries) {
-          var delays = this.service.retryDelays();
-          resp.error.retryDelay = delays[resp.retryCount] || 0;
-          resp.retryCount++;
-          resp.error._willRetry = true;
-        } else {
-          resp.error._willRetry = false;
-        }
-      }
-    });
-
-    addAsync('RESET_RETRY_STATE', 'afterRetry', function RESET_RETRY_STATE(resp, done) {
-      if (resp.error && resp.error._willRetry) {
-        var delay = resp.error.retryDelay || 0;
-        resp.error = null;
-        setTimeout(done, delay);
-      } else {
-        done();
-      }
-    });
-
-  }),
-
-  CorePost: new AWS.SequentialExecutor().addNamedListeners(function(add) {
-    add('EXTRACT_REQUEST_ID', 'extractData', function EXTRACT_REQUEST_ID(resp) {
-      resp.requestId = resp.httpResponse.headers['x-amz-request-id'] ||
-                       resp.httpResponse.headers['x-amzn-requestid'];
-    });
-  }),
-
-  Logger: new AWS.SequentialExecutor().addNamedListeners(function(add) {
-    add('LOG_REQUEST', 'complete', function LOG_REQUEST(resp) {
-      var req = resp.request;
-      var logger = req.service.config.logger;
-      if (!logger) return;
-
-      function buildMessage() {
-        var time = AWS.util.date.getDate().getTime();
-        var delta = (time - req.startTime.getTime()) / 1000;
-        var ansi = logger.isTTY ? true : false;
-        var status = resp.httpResponse.statusCode;
-        var params = require('util').inspect(req.params, true, true);
-
-        var message = '';
-        if (ansi) message += '\x1B[33m';
-        message += '[AWS ' + req.service.serviceIdentifier + ' ' + status;
-        message += ' ' + delta.toString() + 's ' + resp.retryCount + ' retries]';
-        if (ansi) message += '\x1B[0;1m';
-        message += ' ' + req.operation + '(' + params + ')';
-        if (ansi) message += '\x1B[0m';
-        return message;
-      }
-
-      var line = buildMessage();
-      if (typeof logger.log === 'function') {
-        logger.log(line);
-      } else if (typeof logger.write === 'function') {
-        logger.write(line + '\n');
-      }
-    });
-  }),
-
-  Json: new AWS.SequentialExecutor().addNamedListeners(function(add) {
-    var svc = AWS.ServiceInterface.Json;
-    add('BUILD', 'build', svc.buildRequest);
-    add('EXTRACT_DATA', 'extractData', svc.extractData);
-    add('EXTRACT_ERROR', 'extractError', svc.extractError);
-  }),
-
-  Rest: new AWS.SequentialExecutor().addNamedListeners(function(add) {
-    var svc = AWS.ServiceInterface.Rest;
-    add('BUILD', 'build', svc.buildRequest);
-    add('EXTRACT_DATA', 'extractData', svc.extractData);
-    add('EXTRACT_ERROR', 'extractError', svc.extractError);
-  }),
-
-  RestJson: new AWS.SequentialExecutor().addNamedListeners(function(add) {
-    var svc = AWS.ServiceInterface.RestJson;
-    add('BUILD', 'build', svc.buildRequest);
-    add('EXTRACT_DATA', 'extractData', svc.extractData);
-    add('EXTRACT_ERROR', 'extractError', svc.extractError);
-  }),
-
-  RestXml: new AWS.SequentialExecutor().addNamedListeners(function(add) {
-    var svc = AWS.ServiceInterface.RestXml;
-    add('BUILD', 'build', svc.buildRequest);
-    add('EXTRACT_DATA', 'extractData', svc.extractData);
-    add('EXTRACT_ERROR', 'extractError', svc.extractError);
-  }),
-
-  Query: new AWS.SequentialExecutor().addNamedListeners(function(add) {
-    var svc = AWS.ServiceInterface.Query;
-    add('BUILD', 'build', svc.buildRequest);
-    add('EXTRACT_DATA', 'extractData', svc.extractData);
-    add('EXTRACT_ERROR', 'extractError', svc.extractError);
-  })
-};
-
-},{"./core":3,"./sequential_executor":17,"./service_interface/json":19,"./service_interface/query":20,"./service_interface/rest":21,"./service_interface/rest_json":22,"./service_interface/rest_xml":23,"util":57}],10:[function(require,module,exports){
-var AWS = require('./core');
-var inherit = AWS.util.inherit;
-
-
-AWS.Endpoint = inherit({
-
-
-  constructor: function Endpoint(endpoint, config) {
-    AWS.util.hideProperties(this, ['slashes', 'auth', 'hash', 'search', 'query']);
-
-    if (typeof endpoint === 'undefined' || endpoint === null) {
-      throw new Error('Invalid endpoint: ' + endpoint);
-    } else if (typeof endpoint !== 'string') {
-      return AWS.util.copy(endpoint);
-    }
-
-    if (!endpoint.match(/^http/)) {
-      var useSSL = config && config.sslEnabled !== undefined ?
-        config.sslEnabled : AWS.config.sslEnabled;
-      endpoint = (useSSL ? 'https' : 'http') + '://' + endpoint;
-    }
-
-    AWS.util.update(this, AWS.util.urlParse(endpoint));
-
-    if (this.port) {
-      this.port = parseInt(this.port, 10);
-    } else {
-      this.port = this.protocol === 'https:' ? 443 : 80;
-    }
-  }
-
-});
-
-
-AWS.HttpRequest = inherit({
-
-
-  constructor: function HttpRequest(endpoint, region) {
-    endpoint = new AWS.Endpoint(endpoint);
-    this.method = 'POST';
-    this.path = endpoint.path || '/';
-    this.headers = {};
-    this.body = '';
-    this.endpoint = endpoint;
-    this.region = region;
-    this.setUserAgent();
-  },
-
-
-  setUserAgent: function setUserAgent() {
-    var prefix = AWS.util.isBrowser() ? 'X-Amz-' : '';
-    this.headers[prefix + 'User-Agent'] = AWS.util.userAgent();
-  },
-
-
-  pathname: function pathname() {
-    return this.path.split('?', 1)[0];
-  },
-
-
-  search: function search() {
-    return this.path.split('?', 2)[1] || '';
-  }
-
-});
-
-
-AWS.HttpResponse = inherit({
-
-
-  constructor: function HttpResponse() {
-    this.statusCode = undefined;
-    this.headers = {};
-    this.body = undefined;
-  }
-});
-
-
-AWS.HttpClient = inherit({});
-
-
-AWS.HttpClient.getInstance = function getInstance() {
-  if (this.singleton === undefined) {
-    this.singleton = new this();
-  }
-  return this.singleton;
-};
-
-},{"./core":3}],11:[function(require,module,exports){
-var AWS = require('../core');
-var EventEmitter = require('events').EventEmitter;
-require('../http');
-
-
-AWS.XHRClient = AWS.util.inherit({
-  handleRequest: function handleRequest(httpRequest, httpOptions, callback, errCallback) {
-    var self = this;
-    var endpoint = httpRequest.endpoint;
-    var emitter = new EventEmitter();
-    var href = endpoint.protocol + '//' + endpoint.hostname;
-    if (endpoint.port !== 80 && endpoint.port !== 443) {
-      href += ':' + endpoint.port;
-    }
-    href += httpRequest.path;
-
-    var xhr = new XMLHttpRequest();
-    httpRequest.stream = xhr;
-
-    if (httpOptions.timeout) {
-      xhr.timeout = httpOptions.timeout;
-    }
-
-    xhr.addEventListener('readystatechange', function() {
-      try {
-        if (xhr.status === 0) return; // 0 code is invalid
-      } catch (e) { return; }
-
-      if (this.readyState === this.HEADERS_RECEIVED) {
-        try { xhr.responseType = 'arraybuffer'; } catch (e) {}
-        emitter.statusCode = xhr.status;
-        emitter.headers = self.parseHeaders(xhr.getAllResponseHeaders());
-        emitter.emit('headers', emitter.statusCode, emitter.headers);
-      } else if (this.readyState === this.DONE) {
-        self.finishRequest(xhr, emitter);
-      }
-    }, false);
-    xhr.upload.addEventListener('progress', function (evt) {
-      emitter.emit('sendProgress', evt);
-    });
-    xhr.addEventListener('progress', function (evt) {
-      emitter.emit('receiveProgress', evt);
-    }, false);
-    xhr.addEventListener('timeout', function () {
-      errCallback(AWS.util.error(new Error('Timeout'), {code: 'TimeoutError'}));
-    }, false);
-    xhr.addEventListener('error', function () {
-      errCallback(AWS.util.error(new Error('Network Failure'), {
-        code: 'NetworkingError'
-      }));
-    }, false);
-
-    callback(emitter);
-    xhr.open(httpRequest.method, href, true);
-    AWS.util.each(httpRequest.headers, function (key, value) {
-      if (key !== 'Content-Length' && key !== 'User-Agent' && key !== 'Host') {
-        xhr.setRequestHeader(key, value);
-      }
-    });
-
-    if (httpRequest.body && typeof httpRequest.body.buffer === 'object') {
-      xhr.send(httpRequest.body.buffer); // typed arrays sent as ArrayBuffer
-    } else {
-      xhr.send(httpRequest.body);
-    }
-
-    return emitter;
-  },
-
-  parseHeaders: function parseHeaders(rawHeaders) {
-    var headers = {};
-    AWS.util.arrayEach(rawHeaders.split(/\r?\n/), function (line) {
-      var key = line.split(':', 1)[0];
-      var value = line.substring(key.length + 2);
-      if (key.length > 0) headers[key] = value;
-    });
-    return headers;
-  },
-
-  finishRequest: function finishRequest(xhr, emitter) {
-    var buffer;
-    if (xhr.responseType === 'arraybuffer' && xhr.response) {
-      var ab = xhr.response;
-      buffer = new AWS.util.Buffer(ab.byteLength);
-      var view = new Uint8Array(ab);
-      for (var i = 0; i < buffer.length; ++i) {
-        buffer[i] = view[i];
-      }
-    }
-
-    try {
-      if (!buffer && typeof xhr.responseText === 'string') {
-        buffer = new AWS.util.Buffer(xhr.responseText);
-      }
-    } catch (e) {}
-
-    if (buffer) emitter.emit('data', buffer);
-    emitter.emit('end');
-  }
-});
-
-
-AWS.HttpClient.prototype = AWS.XHRClient.prototype;
-
-
-AWS.HttpClient.streamsApiVersion = 1;
-
-},{"../core":3,"../http":10,"events":49}],12:[function(require,module,exports){
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-
-AWS.JSON = {};
-
-
-AWS.JSON.Builder = inherit({
-
-  constructor: function JSONBuilder(rules, options) {
-    this.rules = rules;
-    this.timestampFormat = options.timestampFormat;
-  },
-
-  build: function build(params) {
-    return JSON.stringify(this.translate(this.rules, params));
-  },
-
-  translate: function translate(rules, value) {
-    if (value === null || value === undefined) return undefined;
-
-    if (rules.type === 'structure') {
-
-      var struct = {};
-      AWS.util.each.call(this, value, function (memberName, memberValue) {
-        var memberRules = rules.members[memberName] || {};
-        var result = this.translate(memberRules, memberValue);
-        if (result !== undefined) struct[memberName] = result;
-      });
-      return struct;
-
-    } else if (rules.type === 'list') {
-
-      var list = [];
-      AWS.util.arrayEach.call(this, value, function (memberValue) {
-        var memberRules = rules.members || {};
-        var result = this.translate(memberRules, memberValue);
-        if (result !== undefined) list.push(result);
-      });
-      return list;
-
-    } else if (rules.type === 'map') {
-
-      var map = {};
-      AWS.util.each.call(this, value, function (memberName, memberValue) {
-        var memberRules = rules.members || {};
-        var result = this.translate(memberRules, memberValue);
-        if (result !== undefined) map[memberName] = result;
-      });
-      return map;
-
-    } else if (rules.type === 'timestamp') {
-
-      var timestampFormat = rules.format || this.timestampFormat;
-      return AWS.util.date.format(value, timestampFormat);
-
-    } else if (rules.type === 'integer') {
-      return parseInt(value, 10);
-    } else if (rules.type === 'float') {
-      return parseFloat(value);
-    } else {
-
-      return value;
-
-    }
-  }
-
-});
-
-},{"../core":3}],13:[function(require,module,exports){
-var AWS = require('./core');
-
-
-AWS.ParamValidator = AWS.util.inherit({
-  validate: function validate(rules, params, context) {
-    var cRules = (rules || {}).members || {};
-    var payload = rules ? rules.xml : null;
-    if (payload) {
-      cRules = AWS.util.merge(cRules, (cRules[payload] || {}).members || {});
-      delete cRules[payload];
-    }
-
-    return this.validateStructure(cRules, params || {}, context || 'params');
-  },
-
-  validateStructure: function validateStructure(rules, params, context) {
-    this.validateType(context, params, ['object'], 'structure');
-
-    for (var paramName in rules) {
-      if (!rules.hasOwnProperty(paramName)) continue;
-      var value = params[paramName];
-      var notSet = value === undefined || value === null;
-      if (rules[paramName].required && notSet) {
-        this.fail('MissingRequiredParameter',
-          'Missing required key \'' + paramName + '\' in ' + context);
-      }
-    }
-
-    for (paramName in params) {
-      if (!params.hasOwnProperty(paramName)) continue;
-
-      var paramValue = params[paramName],
-          paramRules = rules[paramName];
-
-      if (paramRules !== undefined) {
-        var memberContext = [context, paramName].join('.');
-        this.validateMember(paramRules, paramValue, memberContext);
-      } else {
-        this.fail('UnexpectedParameter',
-          'Unexpected key \'' + paramName + '\' found in ' + context);
-      }
-    }
-
-    return true;
-  },
-
-  validateMember: function validateMember(rules, param, context) {
-    var memberRules = rules.members || {};
-    switch(rules.type) {
-      case 'structure':
-        return this.validateStructure(memberRules, param, context);
-      case 'list':
-        return this.validateList(memberRules, param, context);
-      case 'map':
-        return this.validateMap(memberRules, param, context);
-      default:
-        return this.validateScalar(rules, param, context);
-    }
-  },
-
-  validateList: function validateList(rules, params, context) {
-    this.validateType(context, params, [Array]);
-
-    for (var i = 0; i < params.length; i++) {
-      this.validateMember(rules, params[i], context + '[' + i + ']');
-    }
-  },
-
-  validateMap: function validateMap(rules, params, context) {
-    this.validateType(context, params, ['object'], 'map');
-
-    for (var param in params) {
-      if (!params.hasOwnProperty(param)) continue;
-      this.validateMember(rules, params[param],
-                          context + '[\'' +  param + '\']');
-    }
-  },
-
-  validateScalar: function validateScalar(rules, value, context) {
-    switch (rules.type) {
-      case null:
-      case undefined:
-      case 'string':
-        return this.validateType(context, value, ['string']);
-      case 'base64':
-      case 'binary':
-        return this.validatePayload(context, value);
-      case 'integer':
-      case 'float':
-        return this.validateNumber(context, value);
-      case 'boolean':
-        return this.validateType(context, value, ['boolean']);
-      case 'timestamp':
-        return this.validateType(context, value, [Date,
-          /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/, 'number'],
-          'Date object, ISO-8601 string, or a UNIX timestamp');
-      default:
-        return this.fail('UnkownType', 'Unhandled type ' +
-                         rules.type + ' for ' + context);
-    }
-  },
-
-  fail: function fail(code, message) {
-    throw AWS.util.error(new Error(message), {code: code});
-  },
-
-  validateType: function validateType(context, value, acceptedTypes, type) {
-    if (value === null || value === undefined) return;
-
-    var foundInvalidType = false;
-    for (var i = 0; i < acceptedTypes.length; i++) {
-      if (typeof acceptedTypes[i] === 'string') {
-        if (typeof value === acceptedTypes[i]) return;
-      } else if (acceptedTypes[i] instanceof RegExp) {
-        if ((value || '').toString().match(acceptedTypes[i])) return;
-      } else {
-        if (value instanceof acceptedTypes[i]) return;
-        if (AWS.util.isType(value, acceptedTypes[i])) return;
-        if (!type && !foundInvalidType) acceptedTypes = acceptedTypes.slice();
-        acceptedTypes[i] = AWS.util.typeName(acceptedTypes[i]);
-      }
-      foundInvalidType = true;
-    }
-
-    var acceptedType = type;
-    if (!acceptedType) {
-      acceptedType = acceptedTypes.join(', ').replace(/,([^,]+)$/, ', or$1');
-    }
-
-    var vowel = acceptedType.match(/^[aeiou]/i) ? 'n' : '';
-    this.fail('InvalidParameterType', 'Expected ' + context + ' to be a' +
-              vowel + ' ' + acceptedType);
-  },
-
-  validateNumber: function validateNumber(context, value) {
-    if (value === null || value === undefined) return;
-    if (typeof value === 'string') {
-      var castedValue = parseFloat(value);
-      if (castedValue.toString() === value) value = castedValue;
-    }
-    this.validateType(context, value, ['number']);
-  },
-
-  validatePayload: function validatePayload(context, value) {
-    if (value === null || value === undefined) return;
-    if (typeof value === 'string') return;
-    if (value && typeof value.byteLength === 'number') return; // typed arrays
-    if (AWS.util.isNode()) { // special check for buffer/stream in Node.js
-      var Stream = AWS.util.nodeRequire('stream').Stream;
-      if (AWS.util.Buffer.isBuffer(value) || value instanceof Stream) return;
-    }
-
-    var types = ['Buffer', 'Stream', 'File', 'Blob', 'ArrayBuffer', 'DataView'];
-    if (value) {
-      for (var i = 0; i < types.length; i++) {
-        if (AWS.util.isType(value, types[i])) return;
-        if (AWS.util.typeName(value.constructor) === types[i]) return;
-      }
-    }
-
-    this.fail('InvalidParameterType', 'Expected ' + context + ' to be a ' +
-      'string, Buffer, Stream, Blob, or typed array object');
-  }
-});
-
-},{"./core":3}],14:[function(require,module,exports){
-(function (process){
-var AWS = require('./core');
-var AcceptorStateMachine = require('./state_machine');
-var inherit = AWS.util.inherit;
-
-var fsm = new AcceptorStateMachine();
-fsm.setupStates = function() {
-  var hardErrorStates = {success:1, error:1, complete:1};
-  var transition = function transition(err, done) {
-    try {
-      var self = this, origError = err; // assign err for eslint
-      origError = self.response.error;  // re-assign because err is not used.
-      self.emit(self._asm.currentState, function() {
-        function isTerminalState() {
-          return hardErrorStates[self._asm.currentState] === 1;
-        }
-
-        var nextError = self.response.error;
-        if (self.response.error && origError !== self.response.error) {
-          if (isTerminalState()) self._hardError = true;
-        }
-
-        if (self.response.error && !self._hardError && isTerminalState()) {
-          nextError = null;
-        }
-
-        done(nextError);
-      });
-
-    } catch (e) {
-      this.response.error = e;
-      if (this._hardError) {
-        throw e;
-      }
-      else if (hardErrorStates.hasOwnProperty(this._asm.currentState)) {
-        this._hardError = true;
-      }
-      done(e);
-    }
-  };
-
-  this.addState('validate', 'build', 'error', transition);
-  this.addState('restart', 'build', 'error', function(err, done) {
-    err = this.response.error;
-    if (!err) return done();
-    if (!err.retryable) return done(err);
-
-    if (this.response.retryCount < this.service.config.maxRetries) {
-      this.response.retryCount++;
-      done();
-    } else {
-      done(err);
-    }
-  });
-  this.addState('build', 'afterBuild', 'restart', transition);
-  this.addState('afterBuild', 'sign', 'restart', transition);
-  this.addState('sign', 'send', 'retry', transition);
-  this.addState('retry', 'afterRetry', 'afterRetry', transition);
-  this.addState('afterRetry', 'sign', 'error', transition);
-  this.addState('send', 'validateResponse', 'retry', transition);
-  this.addState('validateResponse', 'extractData', 'extractError', transition);
-  this.addState('extractError', 'extractData', 'retry', transition);
-  this.addState('extractData', 'success', 'retry', transition);
-  this.addState('success', 'complete', 'complete', transition);
-  this.addState('error', 'complete', 'complete', transition);
-  this.addState('complete', null, 'uncaughtException', transition);
-  this.addState('uncaughtException', function(err, done) {
-    try {
-      AWS.SequentialExecutor.prototype.unhandledErrorCallback.call(this, err);
-    } catch (e) {
-      if (this._hardError) {
-        e._hardError = true;
-        throw e;
-      }
-    }
-    done(err);
-  });
-};
-fsm.setupStates();
-
-
-AWS.Request = inherit({
-
-
-  constructor: function Request(service, operation, params) {
-    var endpoint = service.endpoint;
-    var region = service.config.region;
-
-    if (service.hasGlobalEndpoint()) region = 'us-east-1';
-
-    this.service = service;
-    this.operation = operation;
-    this.params = params || {};
-    this.httpRequest = new AWS.HttpRequest(endpoint, region);
-    this.startTime = AWS.util.date.getDate();
-
-    this.response = new AWS.Response(this);
-    this.restartCount = 0;
-    this._asm = new AcceptorStateMachine(fsm.states, 'validate');
-
-    AWS.SequentialExecutor.call(this);
-    this.emit = this.emitEvent;
-  },
-
-
-
-
-  send: function send(callback) {
-    if (callback) {
-      this.on('complete', function (resp) {
-        try {
-          callback.call(resp, resp.error, resp.data);
-        } catch (e) {
-          resp.request._hardError = true;
-          throw e;
-        }
-      });
-    }
-    this.runTo();
-
-    return this.response;
-  },
-
-  build: function build(callback) {
-    this._hardError = callback ? false : true;
-    return this.runTo('send', callback);
-  },
-
-  runTo: function runTo(state, done) {
-    this._asm.runTo(state, done, this);
-    return this;
-  },
-
-
-  abort: function abort() {
-    this.removeAllListeners('validateResponse');
-    this.removeAllListeners('extractError');
-    this.on('validateResponse', function addAbortedError(resp) {
-      resp.error = AWS.util.error(new Error('Request aborted by user'), {
-         code: 'RequestAbortedError', retryable: false
-      });
-    });
-
-    if (this.httpRequest.stream) { // abort HTTP stream
-      this.httpRequest.stream.abort();
-      if (this.httpRequest._abortCallback) {
-         this.httpRequest._abortCallback();
-      } else {
-        this.removeAllListeners('send'); // haven't sent yet, so let's not
-      }
-    }
-
-    return this;
-  },
-
-
-  eachPage: function eachPage(callback) {
-    function wrappedCallback(response) {
-      var result = callback.call(response, response.error, response.data);
-      if (result === false) return;
-
-      if (response.hasNextPage()) {
-        response.nextPage().on('complete', wrappedCallback).send();
-      } else {
-        callback.call(response, null, null);
-      }
-    }
-
-    this.on('complete', wrappedCallback).send();
-  },
-
-
-  eachItem: function eachItem(callback) {
-    function wrappedCallback(err, data) {
-      if (err) return callback(err, null);
-      if (data === null) return callback(null, null);
-
-      var config = this.request.service.paginationConfig(this.request.operation);
-      var resultKey = config.resultKey;
-      if (Array.isArray(resultKey)) resultKey = resultKey[0];
-      var results = AWS.util.jamespath.query(resultKey, data);
-      AWS.util.arrayEach(results, function(result) {
-        AWS.util.arrayEach(result, function(item) { callback(null, item); });
-      });
-    }
-
-    this.eachPage(wrappedCallback);
-  },
-
-
-  isPageable: function isPageable() {
-    return this.service.paginationConfig(this.operation) ? true : false;
-  },
-
-
-  createReadStream: function createReadStream() {
-    var streams = AWS.util.nodeRequire('stream');
-    var req = this;
-    var stream = null;
-    var legacyStreams = false;
-
-    if (AWS.HttpClient.streamsApiVersion === 2) {
-      stream = new streams.Readable();
-      stream._read = function() { stream.push(''); };
-    } else {
-      stream = new streams.Stream();
-      stream.readable = true;
-    }
-
-    stream.sent = false;
-    stream.on('newListener', function(event) {
-      if (!stream.sent && (event === 'data' || event === 'readable')) {
-        if (event === 'data') legacyStreams = true;
-        stream.sent = true;
-        process.nextTick(function() { req.send(function() { }); });
-      }
-    });
-
-    this.on('httpHeaders', function streamHeaders(statusCode, headers, resp) {
-      if (statusCode < 300) {
-        this.httpRequest._streaming = true;
-
-        req.removeListener('httpData', AWS.EventListeners.Core.HTTP_DATA);
-        req.removeListener('httpError', AWS.EventListeners.Core.HTTP_ERROR);
-        req.on('httpError', function streamHttpError(error, resp) {
-          resp.error = error;
-          resp.error.retryable = false;
-        });
-
-        var httpStream = resp.httpResponse.stream;
-        stream.response = resp;
-        stream._read = function() {
-          var data;
-          do {
-            data = httpStream.read();
-            if (data) stream.push(data);
-          } while (data);
-          stream.push('');
-        };
-
-        var events = ['end', 'error', (legacyStreams ? 'data' : 'readable')];
-        AWS.util.arrayEach(events, function(event) {
-          httpStream.on(event, function(arg) {
-            stream.emit(event, arg);
-          });
-        });
-      }
-    });
-
-    this.on('error', function(err) {
-      stream.emit('error', err);
-    });
-
-    return stream;
-  },
-
-
-  emitEvent: function emit(eventName, args, done) {
-    if (typeof args === 'function') { done = args; args = null; }
-    if (!done) done = this.unhandledErrorCallback;
-    if (!args) args = this.eventParameters(eventName, this.response);
-
-    var origEmit = AWS.SequentialExecutor.prototype.emit;
-    origEmit.call(this, eventName, args, function (err) {
-      if (err) this.response.error = err;
-      done.call(this, err);
-    });
-  },
-
-
-  eventParameters: function eventParameters(eventName) {
-    switch (eventName) {
-      case 'validate':
-      case 'sign':
-      case 'build':
-      case 'afterBuild':
-        return [this];
-      case 'error':
-        return [this.response.error, this.response];
-      default:
-        return [this.response];
-    }
-  },
-
-
-  presign: function presign(expires, callback) {
-    if (!callback && typeof expires === 'function') {
-      callback = expires;
-      expires = null;
-    }
-    return new AWS.Signers.Presign().sign(this.toGet(), expires, callback);
-  },
-
-
-  toUnauthenticated: function toUnauthenticated() {
-    this.removeListener('validate', AWS.EventListeners.Core.VALIDATE_CREDENTIALS);
-    this.removeListener('sign', AWS.EventListeners.Core.SIGN);
-    return this.toGet();
-  },
-
-
-  toGet: function toGet() {
-    if (this.service.api.format === 'query') {
-      this.removeListener('build', this.buildAsGet);
-      this.addListener('build', this.buildAsGet);
-    }
-    return this;
-  },
-
-
-  buildAsGet: function buildAsGet(request) {
-    request.httpRequest.method = 'GET';
-    request.httpRequest.path = '/?' + request.httpRequest.body;
-    request.httpRequest.body = '';
-
-    delete request.httpRequest.headers['Content-Length'];
-    delete request.httpRequest.headers['Content-Type'];
-  }
-});
-
-AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
-
-}).call(this,{browser:true})
-},{"./core":3,"./state_machine":31}],15:[function(require,module,exports){
-
-
-var AWS = require('./core');
-var inherit = AWS.util.inherit;
-
-
-AWS.ResourceWaiter = inherit({
-
-  constructor: function constructor(service, state) {
-    this.service = service;
-    this.state = state;
-    this.config = {};
-
-    if (typeof this.state === 'object') {
-      AWS.util.each.call(this, this.state, function (key, value) {
-        this.state = key;
-        this.expectedValue = value;
-      });
-    }
-
-    this.loadWaiterConfig(this.state);
-    if (!this.expectedValue) {
-      this.expectedValue = this.config.successValue;
-    }
-    this.config.operation = AWS.util.string.lowerFirst(this.config.operation);
-  },
-
-  service: null,
-
-  state: null,
-
-  expectedValue: null,
-
-  config: null,
-
-  waitDone: false,
-
-  Listeners: {
-    retry: new AWS.SequentialExecutor().addNamedListeners(function(add) {
-      add('RETRY_CHECK', 'retry', function(resp) {
-        var waiter = resp.request._waiter;
-        if (resp.error && resp.error.code === 'ResourceNotReady') {
-          resp.error.retryDelay = waiter.config.interval * 1000;
-        }
-      });
-    }),
-
-    output: new AWS.SequentialExecutor().addNamedListeners(function(add) {
-      add('CHECK_OUT_ERROR', 'extractError', function CHECK_OUT_ERROR(resp) {
-        if (resp.error) {
-          resp.request._waiter.setError(resp, true);
-        }
-      });
-
-      add('CHECK_OUTPUT', 'extractData', function CHECK_OUTPUT(resp) {
-        var waiter = resp.request._waiter;
-        var success = waiter.checkSuccess(resp);
-        if (!success) {
-          waiter.setError(resp, success === null ? false : true);
-        } else {
-          resp.error = null;
-        }
-      });
-    }),
-
-    error: new AWS.SequentialExecutor().addNamedListeners(function(add) {
-      add('CHECK_ERROR', 'extractError', function CHECK_ERROR(resp) {
-        var waiter = resp.request._waiter;
-        var success = waiter.checkError(resp);
-        if (!success) {
-          waiter.setError(resp, success === null ? false : true);
-        } else {
-          resp.error = null;
-          resp.request.removeAllListeners('extractData');
-        }
-      });
-
-      add('CHECK_ERR_OUTPUT', 'extractData', function CHECK_ERR_OUTPUT(resp) {
-        resp.request._waiter.setError(resp, true);
-      });
-    })
-  },
-
-
-  wait: function wait(params, callback) {
-    if (typeof params === 'function') {
-      callback = params; params = undefined;
-    }
-
-    var request = this.service.makeRequest(this.config.operation, params);
-    var listeners = this.Listeners[this.config.successType];
-    request._waiter = this;
-    request.response.maxRetries = this.config.maxAttempts;
-    request.addListeners(this.Listeners.retry);
-    if (listeners) request.addListeners(listeners);
-
-    if (callback) request.send(callback);
-    return request;
-  },
-
-  setError: function setError(resp, retryable) {
-    resp.data = null;
-    resp.error = AWS.util.error(resp.error || new Error(), {
-      code: 'ResourceNotReady',
-      message: 'Resource is not in the state ' + this.state,
-      retryable: retryable
-    });
-  },
-
-
-  checkSuccess: function checkSuccess(resp) {
-    if (!this.config.successPath) {
-      return resp.httpResponse.statusCode < 300;
-    }
-
-    var r = AWS.util.jamespath.find(this.config.successPath, resp.data);
-
-    if (this.config.failureValue &&
-        this.config.failureValue.indexOf(r) >= 0) {
-      return null; // fast fail
-    }
-
-    if (this.expectedValue) {
-      return r === this.expectedValue;
-    } else {
-      return r ? true : false;
-    }
-  },
-
-
-  checkError: function checkError(resp) {
-    return resp.httpResponse.statusCode === this.config.successValue;
-  },
-
-
-  loadWaiterConfig: function loadWaiterConfig(state, noException) {
-    if (!this.service.api.waiters[state]) {
-      if (noException) return;
-      throw new AWS.util.error(new Error(), {
-        code: 'StateNotFoundError',
-        message: 'State ' + state + ' not found.'
-      });
-    }
-
-    if (state !== '__default__') {
-      var superState = this.service.api.waiters[state]['extends'];
-      superState = superState || '__default__';
-      this.loadWaiterConfig(superState, true);
-    }
-
-    var config = this.config;
-    AWS.util.update(config, this.service.api.waiters[state]);
-
-    (function () { // anonymous function to avoid max complexity count
-      config.successType = config.successType || config.acceptorType;
-      config.successPath = config.successPath || config.acceptorPath;
-      config.successValue = config.successValue || config.acceptorValue;
-      config.failureType = config.failureType || config.acceptorType;
-      config.failurePath = config.failurePath || config.acceptorPath;
-      config.failureValue = config.failureValue || config.acceptorValue;
-    })();
-  }
-});
-
-},{"./core":3}],16:[function(require,module,exports){
-var AWS = require('./core');
-var inherit = AWS.util.inherit;
-
-
-AWS.Response = inherit({
-
-
-  constructor: function Response(request) {
-    this.request = request;
-    this.data = null;
-    this.error = null;
-    this.retryCount = 0;
-    this.redirectCount = 0;
-    this.httpResponse = new AWS.HttpResponse();
-    if (request) {
-      this.maxRetries = request.service.numRetries();
-      this.maxRedirects = request.service.config.maxRedirects;
-    }
-  },
-
-
-  nextPage: function nextPage(callback) {
-    var config;
-    var service = this.request.service;
-    var operation = this.request.operation;
-    try {
-      config = service.paginationConfig(operation, true);
-    } catch (e) { this.error = e; }
-
-    if (!this.hasNextPage()) {
-      if (callback) callback(this.error, null);
-      else if (this.error) throw this.error;
-      return null;
-    }
-
-    var params = AWS.util.copy(this.request.params);
-    if (!this.nextPageTokens) {
-      return callback ? callback(null, null) : null;
-    } else {
-      var inputTokens = config.inputToken;
-      if (typeof inputTokens === 'string') inputTokens = [inputTokens];
-      for (var i = 0; i < inputTokens.length; i++) {
-        params[inputTokens[i]] = this.nextPageTokens[i];
-      }
-      return service.makeRequest(this.request.operation, params, callback);
-    }
-  },
-
-
-  hasNextPage: function hasNextPage() {
-    this.cacheNextPageTokens();
-    if (this.nextPageTokens) return true;
-    if (this.nextPageTokens === undefined) return undefined;
-    else return false;
-  },
-
-
-  cacheNextPageTokens: function cacheNextPageTokens() {
-    if (this.hasOwnProperty('nextPageTokens')) return this.nextPageTokens;
-    this.nextPageTokens = undefined;
-
-    var config = this.request.service.paginationConfig(this.request.operation);
-    if (!config) return this.nextPageTokens;
-
-    this.nextPageTokens = null;
-    if (config.moreResults) {
-      if (!AWS.util.jamespath.find(config.moreResults, this.data)) {
-        return this.nextPageTokens;
-      }
-    }
-
-    var exprs = config.outputToken;
-    if (typeof exprs === 'string') exprs = [exprs];
-    AWS.util.arrayEach.call(this, exprs, function (expr) {
-      var output = AWS.util.jamespath.find(expr, this.data);
-      if (output) {
-        this.nextPageTokens = this.nextPageTokens || [];
-        this.nextPageTokens.push(output);
-      }
-    });
-
-    return this.nextPageTokens;
-  }
-
-});
-
-},{"./core":3}],17:[function(require,module,exports){
-var AWS = require('./core');
-var domain = AWS.util.nodeRequire('domain');
-
-
-AWS.SequentialExecutor = AWS.util.inherit({
-
-  constructor: function SequentialExecutor() {
-    this.domain = domain && domain.active;
-    this._events = {};
-  },
-
-
-  listeners: function listeners(eventName) {
-    return this._events[eventName] ? this._events[eventName].slice(0) : [];
-  },
-
-  on: function on(eventName, listener) {
-    if (this._events[eventName]) {
-      this._events[eventName].push(listener);
-    } else {
-      this._events[eventName] = [listener];
-    }
-    return this;
-  },
-
-
-  onAsync: function onAsync(eventName, listener) {
-    listener._isAsync = true;
-    return this.on(eventName, listener);
-  },
-
-  removeListener: function removeListener(eventName, listener) {
-    var listeners = this._events[eventName];
-    if (listeners) {
-      var length = listeners.length;
-      var position = -1;
-      for (var i = 0; i < length; ++i) {
-        if (listeners[i] === listener) {
-          position = i;
-        }
-      }
-      if (position > -1) {
-        listeners.splice(position, 1);
-      }
-    }
-    return this;
-  },
-
-  removeAllListeners: function removeAllListeners(eventName) {
-    if (eventName) {
-      delete this._events[eventName];
-    } else {
-      this._events = {};
-    }
-    return this;
-  },
-
-
-  emit: function emit(eventName, eventArgs, doneCallback) {
-    if (!doneCallback) doneCallback = this.unhandledErrorCallback;
-    if (domain && this.domain instanceof domain.Domain)
-      this.domain.enter();
-
-    var listeners = this.listeners(eventName);
-    var count = listeners.length;
-    this.callListeners(listeners, eventArgs, doneCallback);
-    return count > 0;
-  },
-
-
-  callListeners: function callListeners(listeners, args, doneCallback) {
-    if (listeners.length === 0) {
-      doneCallback.call(this);
-      if (domain && this.domain instanceof domain.Domain)
-        this.domain.exit();
-    } else {
-      var listener = listeners.shift();
-      if (listener._isAsync) {
-
-        var self = this;
-        var callNextListener = function(err) {
-          if (err) {
-            doneCallback.call(self, err);
-            if (domain && self.domain instanceof domain.Domain)
-              self.domain.exit();
-          } else {
-            self.callListeners(listeners, args, doneCallback);
-          }
-        };
-        listener.apply(this, args.concat([callNextListener]));
-
-      } else {
-
-        try {
-          listener.apply(this, args);
-          this.callListeners(listeners, args, doneCallback);
-        } catch (err) {
-          if (err._hardError) throw err;
-
-          doneCallback.call(this, err);
-          if (domain && this.domain instanceof domain.Domain)
-            this.domain.exit();
-        }
-
-      }
-    }
-  },
-
-
-  addListeners: function addListeners(listeners) {
-    var self = this;
-
-    if (listeners._events) listeners = listeners._events;
-
-    AWS.util.each(listeners, function(event, callbacks) {
-      if (typeof callbacks === 'function') callbacks = [callbacks];
-      AWS.util.arrayEach(callbacks, function(callback) {
-        self.on(event, callback);
-      });
-    });
-
-    return self;
-  },
-
-
-  addNamedListener: function addNamedListener(name, eventName, callback) {
-    this[name] = callback;
-    this.addListener(eventName, callback);
-    return this;
-  },
-
-
-  addNamedAsyncListener: function addNamedAsyncListener(name, eventName, callback) {
-    callback._isAsync = true;
-    return this.addNamedListener(name, eventName, callback);
-  },
-
-
-  addNamedListeners: function addNamedListeners(callback) {
-    var self = this;
-    callback(
-      function() {
-        self.addNamedListener.apply(self, arguments);
-      },
-      function() {
-        self.addNamedAsyncListener.apply(self, arguments);
-      }
-    );
-    return this;
-  },
-
-
-  unhandledErrorCallback: function unhandledErrorCallback(err) {
-    if (err) {
-      if (domain && this.domain instanceof domain.Domain) {
-        err.domainEmitter = this;
-        err.domain = this.domain;
-        err.domainThrown = false;
-        this.domain.emit('error', err);
-      } else {
-        throw err;
-      }
-    }
-  }
-});
-
-
-AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.on;
-
-},{"./core":3}],18:[function(require,module,exports){
-var AWS = require('./core');
-var Translator = require('aws-sdk-apis/lib/translator');
-var inherit = AWS.util.inherit;
-
-
-AWS.Service = inherit({
-
-  constructor: function Service(config) {
-    if (!this.loadServiceClass) {
-      throw AWS.util.error(new Error(),
-        'Service must be constructed with `new\' operator');
-    }
-    var ServiceClass = this.loadServiceClass(config || {});
-    if (ServiceClass) return new ServiceClass(config);
-    this.initialize(config);
-  },
-
-
-  initialize: function initialize(config) {
-    AWS.util.hideProperties(this, ['client']);
-    this.client = this; // backward compatibility with client property
-    this.config = new AWS.Config(AWS.config);
-    if (config) this.config.update(config, true);
-    this.setEndpoint(this.config.endpoint);
-  },
-
-
-  loadServiceClass: function loadServiceClass(serviceConfig) {
-    var config = serviceConfig;
-    if (!AWS.util.isEmpty(this.api)) {
-      return null;
-    } else if (config.apiConfig) {
-      return AWS.Service.defineServiceApi(this.constructor, config.apiConfig);
-    } else if (!this.constructor.services) {
-      return null;
-    } else {
-      config = new AWS.Config(AWS.config);
-      config.update(serviceConfig, true);
-      var version = config.apiVersions[this.constructor.serviceIdentifier];
-      version = version || config.apiVersion;
-      return this.getLatestServiceClass(version);
-    }
-  },
-
-
-  getLatestServiceClass: function getLatestServiceClass(version) {
-    version = this.getLatestServiceVersion(version);
-    if (this.constructor.services[version] === null) {
-      AWS.Service.defineServiceApi(this.constructor, version);
-    }
-
-    return this.constructor.services[version];
-  },
-
-
-  getLatestServiceVersion: function getLatestServiceVersion(version) {
-    if (!this.constructor.services || this.constructor.services.length === 0) {
-      throw new Error('No services defined on ' +
-                      this.constructor.serviceIdentifier);
-    }
-
-    if (!version) {
-      version = 'latest';
-    } else if (AWS.util.isType(version, Date)) {
-      version = AWS.util.date.iso8601(version).split('T')[0];
-    }
-
-    if (Object.hasOwnProperty(this.constructor.services, version)) {
-      return version;
-    }
-
-    var keys = Object.keys(this.constructor.services).sort();
-    var selectedVersion = null;
-    for (var i = keys.length - 1; i >= 0; i--) {
-      if (keys[i][keys[i].length - 1] !== '*') {
-        selectedVersion = keys[i];
-      }
-      if (keys[i].substr(0, 10) <= version) {
-        return selectedVersion;
-      }
-    }
-
-    throw new Error('Could not find ' + this.constructor.serviceIdentifier +
-                    ' API to satisfy version constraint `' + version + '\'');
-  },
-
-
-  api: {},
-
-
-  defaultRetryCount: 3,
-
-
-  makeRequest: function makeRequest(operation, params, callback) {
-    if (typeof params === 'function') {
-      callback = params;
-      params = null;
-    }
-
-    params = params || {};
-    if (this.config.params) { // copy only toplevel bound params
-      var rules = this.api.operations[operation];
-      if (rules) {
-        params = AWS.util.copy(params);
-        AWS.util.each(this.config.params, function(key, value) {
-          if (rules.input.members[key]) {
-            if (params[key] === undefined || params[key] === null) {
-              params[key] = value;
-            }
-          }
-        });
-      }
-    }
-
-    var request = new AWS.Request(this, operation, params);
-    this.addAllRequestListeners(request);
-
-    if (callback) request.send(callback);
-    return request;
-  },
-
-
-  makeUnauthenticatedRequest: function makeUnauthenticatedRequest(operation, params, callback) {
-    if (typeof params === 'function') {
-      callback = params;
-      params = {};
-    }
-
-    var request = this.makeRequest(operation, params).toUnauthenticated();
-    return callback ? request.send(callback) : request;
-  },
-
-
-  waitFor: function waitFor(state, params, callback) {
-    var waiter = new AWS.ResourceWaiter(this, state);
-    return waiter.wait(params, callback);
-  },
-
-
-  addAllRequestListeners: function addAllRequestListeners(request) {
-    var list = [AWS.events, AWS.EventListeners.Core, this.serviceInterface(),
-                AWS.EventListeners.CorePost];
-    for (var i = 0; i < list.length; i++) {
-      if (list[i]) request.addListeners(list[i]);
-    }
-
-    if (!this.config.paramValidation) {
-      request.removeListener('validate',
-        AWS.EventListeners.Core.VALIDATE_PARAMETERS);
-    }
-
-    if (this.config.logger) { // add logging events
-      request.addListeners(AWS.EventListeners.Logger);
-    }
-
-    this.setupRequestListeners(request);
-  },
-
-
-  setupRequestListeners: function setupRequestListeners() {
-  },
-
-
-  getSignerClass: function getSignerClass() {
-    var version = this.api.signatureVersion;
-    if (this.config.signatureVersion) version = this.config.signatureVersion;
-    else if (this.isRegionV4()) version = 'v4';
-    return AWS.Signers.RequestSigner.getVersion(version);
-  },
-
-
-  serviceInterface: function serviceInterface() {
-    switch (this.api.format) {
-      case 'query': return AWS.EventListeners.Query;
-      case 'json': return AWS.EventListeners.Json;
-      case 'rest-json': return AWS.EventListeners.RestJson;
-      case 'rest-xml': return AWS.EventListeners.RestXml;
-    }
-    if (this.api.format) {
-      throw new Error('Invalid service `format\' ' +
-        this.api.format + ' in API config');
-    }
-  },
-
-
-  successfulResponse: function successfulResponse(resp) {
-    return resp.httpResponse.statusCode < 300;
-  },
-
-
-  numRetries: function numRetries() {
-    if (this.config.maxRetries !== undefined) {
-      return this.config.maxRetries;
-    } else {
-      return this.defaultRetryCount;
-    }
-  },
-
-
-  retryDelays: function retryDelays() {
-    var retryCount = this.numRetries();
-    var delays = [];
-    for (var i = 0; i < retryCount; ++i) {
-      delays[i] = Math.pow(2, i) * 30;
-    }
-    return delays;
-  },
-
-
-  retryableError: function retryableError(error) {
-    if (this.networkingError(error)) return true;
-    if (this.expiredCredentialsError(error)) return true;
-    if (this.throttledError(error)) return true;
-    if (error.statusCode >= 500) return true;
-    return false;
-  },
-
-
-  networkingError: function networkingError(error) {
-    return error.code === 'NetworkingError';
-  },
-
-
-  expiredCredentialsError: function expiredCredentialsError(error) {
-    return (error.code === 'ExpiredTokenException');
-  },
-
-
-  throttledError: function throttledError(error) {
-    return (error.code === 'ProvisionedThroughputExceededException');
-  },
-
-
-  setEndpoint: function setEndpoint(endpoint) {
-    if (endpoint) {
-      this.endpoint = new AWS.Endpoint(endpoint, this.config);
-    } else if (this.hasGlobalEndpoint()) {
-      this.endpoint = new AWS.Endpoint(this.api.globalEndpoint, this.config);
-    } else {
-      var host = this.api.endpointPrefix + '.' + this.config.region +
-                 this.endpointSuffix();
-      this.endpoint = new AWS.Endpoint(host, this.config);
-    }
-  },
-
-
-  hasGlobalEndpoint: function hasGlobalEndpoint() {
-    if (this.isRegionV4()) return false;
-    return this.api.globalEndpoint;
-  },
-
-
-  endpointSuffix: function endpointSuffix() {
-    var suffix = '.amazonaws.com';
-    if (this.isRegionCN()) return suffix + '.cn';
-    else return suffix;
-  },
-
-
-  isRegionCN: function isRegionCN() {
-    if (!this.config.region) return false;
-    return this.config.region.match(/^cn-/) ? true : false;
-  },
-
-
-  isRegionV4: function isRegionV4() {
-    return this.isRegionCN();
-  },
-
-
-  paginationConfig: function paginationConfig(operation, throwException) {
-    function fail(name) {
-      if (throwException) {
-        var e = new Error();
-        throw AWS.util.error(e, 'No pagination configuration for ' + name);
-      }
-      return null;
-    }
-
-    if (!this.api.pagination) return fail('service');
-    if (!this.api.pagination[operation]) return fail(operation);
-    return this.api.pagination[operation];
-  }
-});
-
-AWS.util.update(AWS.Service, {
-
-
-  defineMethods: function defineMethods(svc) {
-    AWS.util.each(svc.prototype.api.operations, function iterator(method) {
-      if (svc.prototype[method]) return;
-      svc.prototype[method] = function (params, callback) {
-        return this.makeRequest(method, params, callback);
-      };
-    });
-  },
-
-
-  defineService: function defineService(serviceIdentifier, versions, features) {
-    if (!Array.isArray(versions)) {
-      features = versions;
-      versions = [];
-    }
-
-    var svc = inherit(AWS.Service, features || {});
-
-    if (typeof serviceIdentifier === 'string') {
-      AWS.Service.addVersions(svc, versions);
-
-      var identifier = svc.serviceIdentifier || serviceIdentifier;
-      svc.serviceIdentifier = identifier;
-    } else { // defineService called with an API
-      svc.prototype.api = serviceIdentifier;
-      AWS.Service.defineMethods(svc);
-    }
-
-    return svc;
-  },
-
-
-  addVersions: function addVersions(svc, versions) {
-    if (!Array.isArray(versions)) versions = [versions];
-
-    svc.services = svc.services || {};
-    for (var i = 0; i < versions.length; i++) {
-      if (svc.services[versions[i]] === undefined) {
-        svc.services[versions[i]] = null;
-      }
-    }
-
-    svc.apiVersions = Object.keys(svc.services).sort();
-  },
-
-
-  defineServiceApi: function defineServiceApi(superclass, version, apiConfig) {
-    var svc = inherit(superclass, {
-      serviceIdentifier: superclass.serviceIdentifier
-    });
-
-    function setApi(api) {
-      if (api.type && api.api_version) {
-        svc.prototype.api = new Translator(api, {documentation: false});
-      } else {
-        svc.prototype.api = api;
-      }
-    }
-
-    if (typeof version === 'string') {
-      if (apiConfig) {
-        setApi(apiConfig);
-      } else {
-        var fs = AWS.util.nodeRequire('fs');
-        var path = AWS.util.nodeRequire('path');
-        var apis = AWS.util.nodeRequire('aws-sdk-apis');
-
-        try {
-          var name = null;
-          if (apis) name = apis.serviceName(superclass.serviceIdentifier);
-          var file = (name || superclass.serviceIdentifier) + '-' + version;
-          var fullPath = path.dirname(require.resolve('aws-sdk-apis')) +
-                         '/apis/' + file + '.json';
-          setApi(JSON.parse(fs.readFileSync(fullPath)));
-        } catch (err) {
-          throw AWS.util.error(err, {
-            message: 'Could not find API configuration ' + file
-          });
-        }
-      }
-      if (!superclass.services.hasOwnProperty(version)) {
-        superclass.apiVersions = superclass.apiVersions.concat(version).sort();
-      }
-      superclass.services[version] = svc;
-    } else {
-      setApi(version);
-    }
-
-    AWS.Service.defineMethods(svc);
-    return svc;
-  }
-});
-
-},{"./core":3,"aws-sdk-apis/lib/translator":35}],19:[function(require,module,exports){
-var AWS = require('../core');
-require('../json/builder');
-
-
-AWS.ServiceInterface.Json = {
-  buildRequest: function buildRequest(req) {
-    var httpRequest = req.httpRequest;
-    var api = req.service.api;
-    var target = api.targetPrefix + '.' + api.operations[req.operation].name;
-    var version = api.jsonVersion || '1.0';
-
-    var rules = api.operations[req.operation].input;
-    var builder = new AWS.JSON.Builder(rules, api);
-
-    httpRequest.body = builder.build(req.params || {});
-    httpRequest.headers['Content-Type'] = 'application/x-amz-json-' + version;
-    httpRequest.headers['X-Amz-Target'] = target;
-  },
-
-  extractError: function extractError(resp) {
-    var error = {};
-    var httpResponse = resp.httpResponse;
-
-    if (httpResponse.body.length > 0) {
-      var e = JSON.parse(httpResponse.body.toString());
-      if (e.__type || e.code) {
-        error.code = (e.__type || e.code).split('#').pop();
-      } else {
-        error.code = 'UnknownError';
-      }
-      if (error.code === 'RequestEntityTooLarge') {
-        error.message = 'Request body must be less than 1 MB';
-      } else {
-        error.message = (e.message || e.Message || null);
-      }
-    } else {
-      error.code = httpResponse.statusCode;
-      error.message = null;
-    }
-
-    resp.error = AWS.util.error(new Error(), error);
-  },
-
-  extractData: function extractData(resp) {
-    resp.data = JSON.parse(resp.httpResponse.body.toString() || '{}');
-  }
-
-};
-
-},{"../core":3,"../json/builder":12}],20:[function(require,module,exports){
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-
-AWS.ServiceInterface.Query = {
-  buildRequest: function buildRequest(req) {
-    var operation = req.service.api.operations[req.operation];
-    var httpRequest = req.httpRequest;
-    httpRequest.headers['Content-Type'] =
-      'application/x-www-form-urlencoded; charset=utf-8';
-    httpRequest.params = {
-      Version: req.service.api.apiVersion,
-      Action: operation.name
-    };
-
-    var rules = operation.input;
-    if (rules) rules = rules.members;
-    var builder = new AWS.QueryParamSerializer(rules, req.service.api);
-    builder.serialize(req.params, function(name, value) {
-      httpRequest.params[name] = value;
-    });
-    httpRequest.body = AWS.util.queryParamsToString(httpRequest.params);
-  },
-
-  extractError: function extractError(resp) {
-    var data, body = resp.httpResponse.body.toString();
-    if (body.match('<UnknownOperationException')) {
-      data = {
-        Code: 'UnknownOperation',
-        Message: 'Unknown operation ' + resp.request.operation
-      };
-    } else {
-      data = new AWS.XML.Parser({}).parse(body);
-    }
-
-    if (data.Errors) data = data.Errors;
-    if (data.Error) data = data.Error;
-    if (data.Code) {
-      resp.error = AWS.util.error(new Error(), {
-        code: data.Code,
-        message: data.Message
-      });
-    } else {
-      resp.error = AWS.util.error(new Error(), {
-        code: resp.httpResponse.statusCode,
-        message: null
-      });
-    }
-  },
-
-  extractData: function extractData(resp) {
-    var req = resp.request;
-    var operation = req.service.api.operations[req.operation];
-    var wrapperKey = operation.name + 'Result';
-    var rules = operation.output || {};
-
-    if (req.service.api.resultWrapped) {
-      var tmp = {
-        type: 'structure',
-        members: {}
-      };
-      tmp.members[wrapperKey] = rules;
-      rules = tmp;
-    }
-
-    var parser = new AWS.XML.Parser(rules);
-    var data = parser.parse(resp.httpResponse.body.toString());
-
-    if (req.service.api.resultWrapped) {
-      if (data[wrapperKey]) {
-        AWS.util.update(data, data[wrapperKey]);
-        delete data[wrapperKey];
-      }
-    }
-
-    resp.data = data;
-  }
-};
-
-
-AWS.QueryParamSerializer = inherit({
-
-  constructor: function QueryParamSerializer(rules, options) {
-    this.rules = rules;
-    this.timestampFormat = options ? options.timestampFormat : 'iso8601';
-  },
-
-  serialize: function serialize(params, fn) {
-    this.serializeStructure('', params, this.rules, fn);
-  },
-
-  serializeStructure: function serializeStructure(prefix, struct, rules, fn) {
-    var that = this;
-    AWS.util.each(struct, function (name, member) {
-      var n = rules[name].name || name;
-      var memberName = prefix ? prefix + '.' + n : n;
-      that.serializeMember(memberName, member, rules[name], fn);
-    });
-  },
-
-  serializeMap: function serialzeMap(name, map, rules, fn) {
-    var i = 1;
-    var that = this;
-    AWS.util.each(map, function (key, value) {
-      var prefix = rules.flattened ? '.' : '.entry.';
-      var position = prefix + (i++) + '.';
-      var keyName = position + (rules.keys.name || 'key');
-      var valueName = position + (rules.members.name || 'value');
-      that.serializeMember(name + keyName, key, rules.keys, fn);
-      that.serializeMember(name + valueName, value, rules.members, fn);
-    });
-  },
-
-  serializeList: function serializeList(name, list, rules, fn) {
-    var that = this;
-    var memberRules = rules.members || {};
-
-    if (list.length === 0) {
-      fn.call(this, name, null);
-      return;
-    }
-
-    AWS.util.arrayEach(list, function (v, n) {
-      var suffix = '.' + (n + 1);
-      if (rules.flattened) {
-        if (memberRules.name) {
-          var parts = name.split('.');
-          parts.pop();
-          parts.push(memberRules.name);
-          name = parts.join('.');
-        }
-      } else {
-        suffix = '.member' + suffix;
-      }
-      that.serializeMember(name + suffix, v, memberRules, fn);
-    });
-  },
-
-  serializeMember: function serializeMember(name, value, rules, fn) {
-    if (value === null || value === undefined) return;
-    if (rules.type === 'structure') {
-      this.serializeStructure(name, value, rules.members, fn);
-    } else if (rules.type === 'list') {
-      this.serializeList(name, value, rules, fn);
-    } else if (rules.type === 'map') {
-      this.serializeMap(name, value, rules, fn);
-    } else if (rules.type === 'timestamp') {
-      var timestampFormat = rules.format || this.timestampFormat;
-      fn.call(this, name, AWS.util.date.format(value, timestampFormat));
-    } else {
-      fn.call(this, name, String(value));
-    }
-  }
-
-});
-
-},{"../core":3}],21:[function(require,module,exports){
-var AWS = require('../core');
-
-
-AWS.ServiceInterface.Rest = {
-  buildRequest: function buildRequest(req) {
-    AWS.ServiceInterface.Rest.populateMethod(req);
-    AWS.ServiceInterface.Rest.populateURI(req);
-    AWS.ServiceInterface.Rest.populateHeaders(req);
-  },
-
-  extractError: function extractError() {
-  },
-
-  extractData: function extractData(resp) {
-    var req = resp.request;
-    var data = {};
-    var r = resp.httpResponse;
-    var operation = req.service.api.operations[req.operation];
-    var rules = (operation.output || {}).members || {};
-
-    var headers = {};
-    AWS.util.each(r.headers, function (k, v) {
-      headers[k.toLowerCase()] = v;
-    });
-
-    AWS.util.each(rules, function (name, rule) {
-      if (rule.location === 'header') {
-        var header = (rule.name || name).toLowerCase();
-        if (rule.type === 'map') {
-          data[name] = {};
-          AWS.util.each(r.headers, function (k, v) {
-            var result = k.match(new RegExp('^' + rule.name + '(.+)', 'i'));
-            if (result !== null) {
-              data[name][result[1]] = v;
-            }
-          });
-        }
-        if (headers[header] !== undefined) {
-          data[name] = headers[header];
-        }
-      }
-      if (rule.location === 'status') {
-        data[name] = parseInt(r.statusCode, 10);
-      }
-    });
-
-    resp.data = data;
-  },
-
-  populateMethod: function populateMethod(req) {
-    req.httpRequest.method = req.service.api.operations[req.operation].http.method;
-  },
-
-  populateURI: function populateURI(req) {
-    var operation = req.service.api.operations[req.operation];
-    var uri = [req.httpRequest.endpoint.path, operation.http.uri].join('/');
-    uri = uri.replace(/\/+/g, '/');
-    var pathPattern = uri.split(/\?/)[0];
-    var rules = (operation.input || {}).members || {};
-
-    var escapePathParam = req.service.escapePathParam ||
-      AWS.ServiceInterface.Rest.escapePathParam;
-    var escapeQuerystringParam = req.service.escapeQuerystringParam ||
-      AWS.ServiceInterface.Rest.escapeQuerystringParam;
-
-    AWS.util.each.call(this, rules, function (name, rule) {
-      if (rule.location === 'uri') {
-        var paramValue = req.params[name];
-        if (paramValue === null || paramValue === undefined) return;
-
-        var value = pathPattern.match('{' + name + '}') ?
-          escapePathParam(paramValue) :
-          escapeQuerystringParam(paramValue);
-
-        uri = uri.replace('{' + name + '}', value);
-      }
-    });
-
-    var path = uri.split('?')[0];
-    var querystring = uri.split('?')[1];
-
-    if (querystring) {
-      var parts = [];
-      AWS.util.arrayEach(querystring.split('&'), function (part) {
-        if (!part.match('{\\w+}')) parts.push(part);
-      });
-      uri = (parts.length > 0 ? path + '?' + parts.join('&') : path);
-    } else {
-      uri = path;
-    }
-
-    req.httpRequest.path = uri;
-  },
-
-  escapePathParam: function escapePathParam(value) {
-    return AWS.util.uriEscape(String(value));
-  },
-
-  escapeQuerystringParam: function escapeQuerystringParam(value) {
-    return AWS.util.uriEscape(String(value));
-  },
-
-  populateHeaders: function populateHeaders(req) {
-    var operation = req.service.api.operations[req.operation];
-    var rules = (operation.input || {}).members || {};
-
-    AWS.util.each.call(this, rules, function (name, rule) {
-      if (rule.location === 'header' && req.params[name]) {
-        if (rule.type === 'map') {
-          AWS.util.each(req.params[name], function (key, value) {
-            req.httpRequest.headers[rule.name + key] = value;
-          });
-        } else {
-          var value = req.params[name];
-          if (rule.type === 'timestamp') {
-            var timestampFormat = rule.format || req.service.api.timestampFormat;
-            value = AWS.util.date.format(value, timestampFormat);
-          }
-          req.httpRequest.headers[rule.name || name] = value;
-        }
-      }
-    });
-
-  }
-};
-
-},{"../core":3}],22:[function(require,module,exports){
-var AWS = require('../core');
-require('./rest');
-require('./json');
-
-
-AWS.ServiceInterface.RestJson = {
-  buildRequest: function buildRequest(req) {
-    AWS.ServiceInterface.Rest.buildRequest(req);
-    AWS.ServiceInterface.RestJson.populateBody(req);
-  },
-
-  extractError: function extractError(resp) {
-    AWS.ServiceInterface.Json.extractError(resp);
-  },
-
-  extractData: function extractData(resp) {
-    AWS.ServiceInterface.Rest.extractData(resp);
-
-    var req = resp.request;
-    var rules = req.service.api.operations[req.operation].output || {};
-    if (rules.payload && rules.members[rules.payload]) {
-      if (rules.members[rules.payload].streaming) {
-        resp.data[rules.payload] = resp.httpResponse.body;
-      } else {
-        resp.data[rules.payload] = resp.httpResponse.body.toString();
-      }
-    } else {
-      var data = resp.data;
-      AWS.ServiceInterface.Json.extractData(resp);
-      resp.data = AWS.util.merge(data, resp.data);
-    }
-  },
-
-  populateBody: function populateBody(req) {
-    var input = req.service.api.operations[req.operation].input;
-    var payload = input.payload;
-    var params = {};
-
-    if (typeof payload === 'string') {
-
-      var rules = input.members[payload];
-      params = req.params[payload];
-
-      if (params === undefined) return;
-
-      if (rules.type === 'structure') {
-        req.httpRequest.body = this.buildJSON(params, input, req.service.api);
-      } else {
-        req.httpRequest.body = params;
-      }
-
-    } else if (payload) {
-
-      AWS.util.arrayEach(payload, function (param) {
-        if (req.params[param] !== undefined) {
-          params[param] = req.params[param];
-        }
-      });
-      req.httpRequest.body = this.buildJSON(params, input, req.service.api);
-
-    }
-  },
-
-  buildJSON: function buildJSON(params, rules, api) {
-    var builder = new AWS.JSON.Builder(rules, api);
-    return builder.build(params);
-  }
-
-};
-
-},{"../core":3,"./json":19,"./rest":21}],23:[function(require,module,exports){
-var AWS = require('../core');
-require('../xml/builder');
-require('./rest');
-
-
-AWS.ServiceInterface.RestXml = {
-  buildRequest: function buildRequest(req) {
-    AWS.ServiceInterface.Rest.buildRequest(req);
-    AWS.ServiceInterface.RestXml.populateBody(req);
-  },
-
-  extractError: function extractError(resp) {
-    AWS.ServiceInterface.Rest.extractError(resp);
-
-    var data = new AWS.XML.Parser({}).parse(resp.httpResponse.body.toString());
-    if (data.Errors) data = data.Errors;
-    if (data.Error) data = data.Error;
-    if (data.Code) {
-      resp.error = AWS.util.error(new Error(), {
-        code: data.Code,
-        message: data.Message
-      });
-    } else {
-      resp.error = AWS.util.error(new Error(), {
-        code: resp.httpResponse.statusCode,
-        message: null
-      });
-    }
-  },
-
-  extractData: function extractData(resp) {
-    AWS.ServiceInterface.Rest.extractData(resp);
-
-    var req = resp.request;
-    var httpResponse = resp.httpResponse;
-    var operation = req.service.api.operations[req.operation];
-    var rules = operation.output.members;
-
-    var output = operation.output;
-    var payload = output.payload;
-
-    if (payload) {
-      if (rules[payload].streaming) {
-        resp.data[payload] = httpResponse.body;
-      } else {
-        resp.data[payload] = httpResponse.body.toString();
-      }
-    } else if (httpResponse.body.length > 0) {
-      var parser = new AWS.XML.Parser(operation.output || {});
-      AWS.util.update(resp.data, parser.parse(httpResponse.body.toString()));
-    }
-  },
-
-  populateBody: function populateBody(req) {
-    var input = req.service.api.operations[req.operation].input;
-    var payload = input.payload;
-    var rules = {};
-    var builder = null;
-    var params = req.params;
-
-    if (typeof payload === 'string') {
-
-      rules = input.members[payload];
-      params = params[payload];
-
-      if (params === undefined) return;
-
-      if (rules.type === 'structure') {
-        builder = new AWS.XML.Builder(payload, rules.members, req.service.api);
-        req.httpRequest.body = builder.toXML(params);
-      } else {
-        req.httpRequest.body = params;
-      }
-
-    } else if (payload) {
-
-      AWS.util.arrayEach(payload, function (member) {
-        rules[member] = input.members[member];
-      });
-
-      builder = new AWS.XML.Builder(input.wrapper, rules, req.service.api);
-      req.httpRequest.body = builder.toXML(params);
-
-    }
-
-  }
-};
-
-},{"../core":3,"../xml/builder":34,"./rest":21}],24:[function(require,module,exports){
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-
-var expiresHeader = 'presigned-expires';
-
-
-function signedUrlBuilder(request) {
-  var expires = request.httpRequest.headers[expiresHeader];
-
-  delete request.httpRequest.headers['User-Agent'];
-  delete request.httpRequest.headers['X-Amz-User-Agent'];
-
-  if (request.service.getSignerClass() === AWS.Signers.V4) {
-    if (expires > 604800) { // one week expiry is invalid
-      var message = 'Presigning does not support expiry time greater ' +
-                    'than a week with SigV4 signing.';
-      throw AWS.util.error(new Error(), {
-        code: 'InvalidExpiryTime', message: message, retryable: false
-      });
-    }
-    request.httpRequest.headers[expiresHeader] = expires;
-  } else if (request.service.getSignerClass() === AWS.Signers.S3) {
-    request.httpRequest.headers[expiresHeader] = parseInt(
-      AWS.util.date.unixTimestamp() + expires, 10).toString();
-  } else {
-    throw AWS.util.error(new Error(), {
-      message: 'Presigning only supports S3 or SigV4 signing.',
-      code: 'UnsupportedSigner', retryable: false
-    });
-  }
-}
-
-
-function signedUrlSigner(request) {
-  var endpoint = request.httpRequest.endpoint;
-  var parsedUrl = AWS.util.urlParse(request.httpRequest.path);
-  var queryParams = {};
-
-  if (parsedUrl.search) {
-    queryParams = AWS.util.queryStringParse(parsedUrl.search.substr(1));
-  }
-
-  AWS.util.each(request.httpRequest.headers, function (key, value) {
-    if (key === expiresHeader) key = 'Expires';
-    queryParams[key] = value;
-  });
-  delete request.httpRequest.headers[expiresHeader];
-
-  var auth = queryParams['Authorization'].split(' ');
-  if (auth[0] === 'AWS') {
-    auth = auth[1].split(':');
-    queryParams['AWSAccessKeyId'] = auth[0];
-    queryParams['Signature'] = auth[1];
-  } else if (auth[0] === 'AWS4-HMAC-SHA256') { // SigV4 signing
-    auth.shift();
-    var rest = auth.join(' ');
-    var signature = rest.match(/Signature=(.*?)(?:,|\s|\r?\n|$)/)[1];
-    queryParams['X-Amz-Signature'] = signature;
-    delete queryParams['Expires'];
-  }
-  delete queryParams['Authorization'];
-  delete queryParams['Host'];
-
-  endpoint.pathname = parsedUrl.pathname;
-  endpoint.search = AWS.util.queryParamsToString(queryParams);
-}
-
-
-AWS.Signers.Presign = inherit({
-
-  sign: function sign(request, expireTime, callback) {
-    request.httpRequest.headers[expiresHeader] = expireTime || 3600;
-    request.on('build', signedUrlBuilder);
-    request.on('sign', signedUrlSigner);
-    request.removeListener('afterBuild',
-      AWS.EventListeners.Core.SET_CONTENT_LENGTH);
-
-    request.emit('beforePresign', [request]);
-
-    if (callback) {
-      request.build(function() {
-        if (this.response.error) callback(this.response.error);
-        else {
-          callback(null, AWS.util.urlFormat(request.httpRequest.endpoint));
-        }
-      });
-    } else {
-      request.build();
-      return AWS.util.urlFormat(request.httpRequest.endpoint);
-    }
-  }
-});
-
-module.exports = AWS.Signers.Presign;
-
-},{"../core":3}],25:[function(require,module,exports){
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-
-AWS.Signers.RequestSigner = inherit({
-  constructor: function RequestSigner(request) {
-    this.request = request;
-  }
-});
-
-AWS.Signers.RequestSigner.getVersion = function getVersion(version) {
-  switch (version) {
-    case 'v2': return AWS.Signers.V2;
-    case 'v3': return AWS.Signers.V3;
-    case 'v4': return AWS.Signers.V4;
-    case 's3': return AWS.Signers.S3;
-    case 'v3https': return AWS.Signers.V3Https;
-  }
-  throw new Error('Unknown signing version ' + version);
-};
-
-require('./v2');
-require('./v3');
-require('./v3https');
-require('./v4');
-require('./s3');
-require('./presign');
-
-},{"../core":3,"./presign":24,"./s3":26,"./v2":27,"./v3":28,"./v3https":29,"./v4":30}],26:[function(require,module,exports){
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-
-AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
-
-  subResources: {
-    'acl': 1,
-    'cors': 1,
-    'lifecycle': 1,
-    'delete': 1,
-    'location': 1,
-    'logging': 1,
-    'notification': 1,
-    'partNumber': 1,
-    'policy': 1,
-    'requestPayment': 1,
-    'restore': 1,
-    'tagging': 1,
-    'torrent': 1,
-    'uploadId': 1,
-    'uploads': 1,
-    'versionId': 1,
-    'versioning': 1,
-    'versions': 1,
-    'website': 1
-  },
-
-  responseHeaders: {
-    'response-content-type': 1,
-    'response-content-language': 1,
-    'response-expires': 1,
-    'response-cache-control': 1,
-    'response-content-disposition': 1,
-    'response-content-encoding': 1
-  },
-
-  addAuthorization: function addAuthorization(credentials, date) {
-    if (!this.request.headers['presigned-expires']) {
-      this.request.headers['X-Amz-Date'] = AWS.util.date.rfc822(date);
-    }
-
-    if (credentials.sessionToken) {
-      this.request.headers['x-amz-security-token'] = credentials.sessionToken;
-    }
-
-    var signature = this.sign(credentials.secretAccessKey, this.stringToSign());
-    var auth = 'AWS ' + credentials.accessKeyId + ':' + signature;
-
-    this.request.headers['Authorization'] = auth;
-  },
-
-  stringToSign: function stringToSign() {
-    var r = this.request;
-
-    var parts = [];
-    parts.push(r.method);
-    parts.push(r.headers['Content-MD5'] || '');
-    parts.push(r.headers['Content-Type'] || '');
-
-    parts.push(r.headers['presigned-expires'] || '');
-
-    var headers = this.canonicalizedAmzHeaders();
-    if (headers) parts.push(headers);
-    parts.push(this.canonicalizedResource());
-
-    return parts.join('\n');
-
-  },
-
-  canonicalizedAmzHeaders: function canonicalizedAmzHeaders() {
-
-    var amzHeaders = [];
-
-    AWS.util.each(this.request.headers, function (name) {
-      if (name.match(/^x-amz-/i))
-        amzHeaders.push(name);
-    });
-
-    amzHeaders.sort(function (a, b) {
-      return a.toLowerCase() < b.toLowerCase() ? -1 : 1;
-    });
-
-    var parts = [];
-    AWS.util.arrayEach.call(this, amzHeaders, function (name) {
-      parts.push(name.toLowerCase() + ':' + String(this.request.headers[name]));
-    });
-
-    return parts.join('\n');
-
-  },
-
-  canonicalizedResource: function canonicalizedResource() {
-
-    var r = this.request;
-
-    var parts = r.path.split('?');
-    var path = parts[0];
-    var querystring = parts[1];
-
-    var resource = '';
-
-    if (r.virtualHostedBucket)
-      resource += '/' + r.virtualHostedBucket;
-
-    resource += path;
-
-    if (querystring) {
-
-      var resources = [];
-
-      AWS.util.arrayEach.call(this, querystring.split('&'), function (param) {
-        var name = param.split('=')[0];
-        var value = param.split('=')[1];
-        if (this.subResources[name] || this.responseHeaders[name]) {
-          var subresource = { name: name };
-          if (value !== undefined) {
-            if (this.subResources[name]) {
-              subresource.value = value;
-            } else {
-              subresource.value = decodeURIComponent(value);
-            }
-          }
-          resources.push(subresource);
-        }
-      });
-
-      resources.sort(function (a, b) { return a.name < b.name ? -1 : 1; });
-
-      if (resources.length) {
-
-        querystring = [];
-        AWS.util.arrayEach(resources, function (resource) {
-          if (resource.value === undefined)
-            querystring.push(resource.name);
-          else
-            querystring.push(resource.name + '=' + resource.value);
-        });
-
-        resource += '?' + querystring.join('&');
-      }
-
-    }
-
-    return resource;
-
-  },
-
-  sign: function sign(secret, string) {
-    return AWS.util.crypto.hmac(secret, string, 'base64', 'sha1');
-  }
-});
-
-module.exports = AWS.Signers.S3;
-
-},{"../core":3}],27:[function(require,module,exports){
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-
-AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
-  addAuthorization: function addAuthorization(credentials, date) {
-
-    if (!date) date = AWS.util.date.getDate();
-
-    var r = this.request;
-
-    r.params.Timestamp = AWS.util.date.iso8601(date);
-    r.params.SignatureVersion = '2';
-    r.params.SignatureMethod = 'HmacSHA256';
-    r.params.AWSAccessKeyId = credentials.accessKeyId;
-
-    if (credentials.sessionToken) {
-      r.params.SecurityToken = credentials.sessionToken;
-    }
-
-    delete r.params.Signature; // delete old Signature for re-signing
-    r.params.Signature = this.signature(credentials);
-
-    r.body = AWS.util.queryParamsToString(r.params);
-    r.headers['Content-Length'] = r.body.length;
-  },
-
-  signature: function signature(credentials) {
-    return AWS.util.crypto.hmac(credentials.secretAccessKey, this.stringToSign(), 'base64');
-  },
-
-  stringToSign: function stringToSign() {
-    var parts = [];
-    parts.push(this.request.method);
-    parts.push(this.request.endpoint.host.toLowerCase());
-    parts.push(this.request.pathname());
-    parts.push(AWS.util.queryParamsToString(this.request.params));
-    return parts.join('\n');
-  }
-
-});
-
-module.exports = AWS.Signers.V2;
-
-},{"../core":3}],28:[function(require,module,exports){
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-
-AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
-  addAuthorization: function addAuthorization(credentials, date) {
-
-    var datetime = AWS.util.date.rfc822(date);
-
-    this.request.headers['X-Amz-Date'] = datetime;
-
-    if (credentials.sessionToken) {
-      this.request.headers['x-amz-security-token'] = credentials.sessionToken;
-    }
-
-    this.request.headers['X-Amzn-Authorization'] =
-      this.authorization(credentials, datetime);
-
-  },
-
-  authorization: function authorization(credentials) {
-    return 'AWS3 ' +
-      'AWSAccessKeyId=' + credentials.accessKeyId + ',' +
-      'Algorithm=HmacSHA256,' +
-      'SignedHeaders=' + this.signedHeaders() + ',' +
-      'Signature=' + this.signature(credentials);
-  },
-
-  signedHeaders: function signedHeaders() {
-    var headers = [];
-    AWS.util.arrayEach(this.headersToSign(), function iterator(h) {
-      headers.push(h.toLowerCase());
-    });
-    return headers.sort().join(';');
-  },
-
-  canonicalHeaders: function canonicalHeaders() {
-    var headers = this.request.headers;
-    var parts = [];
-    AWS.util.arrayEach(this.headersToSign(), function iterator(h) {
-      parts.push(h.toLowerCase().trim() + ':' + String(headers[h]).trim());
-    });
-    return parts.sort().join('\n') + '\n';
-  },
-
-  headersToSign: function headersToSign() {
-    var headers = [];
-    AWS.util.each(this.request.headers, function iterator(k) {
-      if (k === 'Host' || k === 'Content-Encoding' || k.match(/^X-Amz/i)) {
-        headers.push(k);
-      }
-    });
-    return headers;
-  },
-
-  signature: function signature(credentials) {
-    return AWS.util.crypto.hmac(credentials.secretAccessKey, this.stringToSign(), 'base64');
-  },
-
-  stringToSign: function stringToSign() {
-    var parts = [];
-    parts.push(this.request.method);
-    parts.push('/');
-    parts.push('');
-    parts.push(this.canonicalHeaders());
-    parts.push(this.request.body);
-    return AWS.util.crypto.sha256(parts.join('\n'));
-  }
-
-});
-
-module.exports = AWS.Signers.V3;
-
-},{"../core":3}],29:[function(require,module,exports){
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-require('./v3');
-
-
-AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
-  authorization: function authorization(credentials) {
-    return 'AWS3-HTTPS ' +
-      'AWSAccessKeyId=' + credentials.accessKeyId + ',' +
-      'Algorithm=HmacSHA256,' +
-      'Signature=' + this.signature(credentials);
-  },
-
-  stringToSign: function stringToSign() {
-    return this.request.headers['X-Amz-Date'];
-  }
-});
-
-module.exports = AWS.Signers.V3Https;
-
-},{"../core":3,"./v3":28}],30:[function(require,module,exports){
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-
-var cachedSecret = {};
-
-
-var expiresHeader = 'presigned-expires';
-
-
-AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
-  constructor: function V4(request, serviceName) {
-    AWS.Signers.RequestSigner.call(this, request);
-    this.serviceName = serviceName;
-  },
-
-  algorithm: 'AWS4-HMAC-SHA256',
-
-  addAuthorization: function addAuthorization(credentials, date) {
-    var datetime = AWS.util.date.iso8601(date).replace(/[:\-]|\.\d{3}/g, '');
-
-    if (this.isPresigned()) {
-      this.updateForPresigned(credentials, datetime);
-    } else {
-      this.addHeaders(credentials, datetime);
-      this.updateBody(credentials);
-    }
-
-    this.request.headers['Authorization'] =
-      this.authorization(credentials, datetime);
-  },
-
-  addHeaders: function addHeaders(credentials, datetime) {
-    this.request.headers['X-Amz-Date'] = datetime;
-    if (credentials.sessionToken) {
-      this.request.headers['x-amz-security-token'] = credentials.sessionToken;
-    }
-  },
-
-  updateBody: function updateBody(credentials) {
-    if (this.request.params) {
-      this.request.params.AWSAccessKeyId = credentials.accessKeyId;
-
-      if (credentials.sessionToken) {
-        this.request.params.SecurityToken = credentials.sessionToken;
-      }
-
-      this.request.body = AWS.util.queryParamsToString(this.request.params);
-      this.request.headers['Content-Length'] = this.request.body.length;
-    }
-  },
-
-  updateForPresigned: function updateForPresigned(credentials, datetime) {
-    var credString = this.credentialString(datetime);
-    var qs = {
-      'X-Amz-Date': datetime,
-      'X-Amz-Algorithm': this.algorithm,
-      'X-Amz-Credential': credentials.accessKeyId + '/' + credString,
-      'X-Amz-Expires': this.request.headers[expiresHeader],
-      'X-Amz-SignedHeaders': this.signedHeaders()
-    };
-
-    if (credentials.sessionToken) {
-      qs['X-Amz-Security-Token'] = credentials.sessionToken;
-    }
-
-    if (this.request.headers['Content-Type']) {
-      qs['Content-Type'] = this.request.headers['Content-Type'];
-    }
-
-    AWS.util.each.call(this, this.request.headers, function(key, value) {
-      if (key === expiresHeader) return;
-      if (this.isSignableHeader(key) &&
-          key.toLowerCase().indexOf('x-amz-') === 0) {
-        qs[key] = value;
-      }
-    });
-
-    var sep = this.request.path.indexOf('?') >= 0 ? '&' : '?';
-    this.request.path += sep + AWS.util.queryParamsToString(qs);
-  },
-
-  authorization: function authorization(credentials, datetime) {
-    var parts = [];
-    var credString = this.credentialString(datetime);
-    parts.push(this.algorithm + ' Credential=' +
-      credentials.accessKeyId + '/' + credString);
-    parts.push('SignedHeaders=' + this.signedHeaders());
-    parts.push('Signature=' + this.signature(credentials, datetime));
-    return parts.join(', ');
-  },
-
-  signature: function signature(credentials, datetime) {
-    var cache = cachedSecret[this.serviceName];
-    var date = datetime.substr(0, 8);
-    if (!cache ||
-        cache.akid !== credentials.accessKeyId ||
-        cache.region !== this.request.region ||
-        cache.date !== date) {
-      var kSecret = credentials.secretAccessKey;
-      var kDate = AWS.util.crypto.hmac('AWS4' + kSecret, date, 'buffer');
-      var kRegion = AWS.util.crypto.hmac(kDate, this.request.region, 'buffer');
-      var kService = AWS.util.crypto.hmac(kRegion, this.serviceName, 'buffer');
-      var kCredentials = AWS.util.crypto.hmac(kService, 'aws4_request', 'buffer');
-      cachedSecret[this.serviceName] = {
-        region: this.request.region, date: date,
-        key: kCredentials, akid: credentials.accessKeyId
-      };
-    }
-
-    var key = cachedSecret[this.serviceName].key;
-    return AWS.util.crypto.hmac(key, this.stringToSign(datetime), 'hex');
-  },
-
-  stringToSign: function stringToSign(datetime) {
-    var parts = [];
-    parts.push('AWS4-HMAC-SHA256');
-    parts.push(datetime);
-    parts.push(this.credentialString(datetime));
-    parts.push(this.hexEncodedHash(this.canonicalString()));
-    return parts.join('\n');
-  },
-
-  canonicalString: function canonicalString() {
-    var parts = [];
-    parts.push(this.request.method);
-    parts.push(this.request.pathname());
-    parts.push(this.request.search());
-    parts.push(this.canonicalHeaders() + '\n');
-    parts.push(this.signedHeaders());
-    parts.push(this.hexEncodedBodyHash());
-    return parts.join('\n');
-  },
-
-  canonicalHeaders: function canonicalHeaders() {
-    var headers = [];
-    AWS.util.each.call(this, this.request.headers, function (key, item) {
-      headers.push([key, item]);
-    });
-    headers.sort(function (a, b) {
-      return a[0].toLowerCase() < b[0].toLowerCase() ? -1 : 1;
-    });
-    var parts = [];
-    AWS.util.arrayEach.call(this, headers, function (item) {
-      var key = item[0].toLowerCase();
-      if (this.isSignableHeader(key)) {
-        parts.push(key + ':' +
-          this.canonicalHeaderValues(item[1].toString()));
-      }
-    });
-    return parts.join('\n');
-  },
-
-  canonicalHeaderValues: function canonicalHeaderValues(values) {
-    return values.replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '');
-  },
-
-  signedHeaders: function signedHeaders() {
-    var keys = [];
-    AWS.util.each.call(this, this.request.headers, function (key) {
-      key = key.toLowerCase();
-      if (this.isSignableHeader(key)) keys.push(key);
-    });
-    return keys.sort().join(';');
-  },
-
-  credentialString: function credentialString(datetime) {
-    var parts = [];
-    parts.push(datetime.substr(0, 8));
-    parts.push(this.request.region);
-    parts.push(this.serviceName);
-    parts.push('aws4_request');
-    return parts.join('/');
-  },
-
-  hexEncodedHash: function hash(string) {
-    return AWS.util.crypto.sha256(string, 'hex');
-  },
-
-  hexEncodedBodyHash: function hexEncodedBodyHash() {
-    if (this.isPresigned() && this.serviceName === 's3') {
-      return 'UNSIGNED-PAYLOAD';
-    } else if (this.request.headers['X-Amz-Content-Sha256']) {
-      return this.request.headers['X-Amz-Content-Sha256'];
-    } else {
-      return this.hexEncodedHash(this.request.body || '');
-    }
-  },
-
-  unsignableHeaders: ['authorization', 'content-type', 'content-length',
-    'user-agent', expiresHeader, 'x-amz-user-agent', 'x-amz-content-sha256'],
-
-  isSignableHeader: function isSignableHeader(key) {
-    return this.unsignableHeaders.indexOf(key) < 0;
-  },
-
-  isPresigned: function isPresigned() {
-    return this.request.headers[expiresHeader] ? true : false;
-  }
-
-});
-
-module.exports = AWS.Signers.V4;
-
-},{"../core":3}],31:[function(require,module,exports){
-function AcceptorStateMachine(states, state) {
-  this.currentState = state || null;
-  this.states = states || {};
-}
-
-AcceptorStateMachine.prototype.runTo = function runTo(finalState, done, bindObject, inputError) {
-  if (typeof finalState === 'function') {
-    inputError = bindObject; bindObject = done;
-    done = finalState; finalState = null;
-  }
-
-  var self = this;
-  var state = self.states[self.currentState];
-  state.fn.call(bindObject || self, inputError, function(err) {
-    if (err) {
-      if (bindObject.logger) bindObject.logger.log(self.currentState, '->', state.fail, err);
-      if (state.fail) self.currentState = state.fail;
-      else return done ? done.call(bindObject, err) : null;
-    } else {
-      if (bindObject.logger) bindObject.logger.log(self.currentState, '->', state.accept);
-      if (state.accept) self.currentState = state.accept;
-      else return done ? done.call(bindObject) : null;
-    }
-    if (self.currentState === finalState) {
-      return done ? done.call(bindObject, err) : null;
-    }
-
-    self.runTo(finalState, done, bindObject, err);
-  });
-};
-
-AcceptorStateMachine.prototype.addState = function addState(name, acceptState, failState, fn) {
-  if (typeof acceptState === 'function') {
-    fn = acceptState; acceptState = null; failState = null;
-  } else if (typeof failState === 'function') {
-    fn = failState; failState = null;
-  }
-
-  if (!this.currentState) this.currentState = name;
-  this.states[name] = { accept: acceptState, fail: failState, fn: fn };
-  return this;
-};
-
-module.exports = AcceptorStateMachine;
-
-},{}],32:[function(require,module,exports){
-(function (process){
-
-
-var AWS = require('./core');
-var cryptoLib = require('crypto');
-
-var Buffer = require('buffer').Buffer;
-
-
-AWS.util = {
-  engine: function engine() {
-    if (AWS.util.isBrowser() && typeof navigator !== 'undefined') {
-      return navigator.userAgent;
-    } else {
-      return process.platform + '/' + process.version;
-    }
-  },
-
-  userAgent: function userAgent() {
-    var name = AWS.util.isBrowser() ? 'js' : 'nodejs';
-    var agent = 'aws-sdk-' + name + '/' + AWS.VERSION;
-    if (name === 'nodejs') agent += ' ' + AWS.util.engine();
-    return agent;
-  },
-
-  isBrowser: function isBrowser() { return process && process.browser; },
-  isNode: function isNode() { return !AWS.util.isBrowser(); },
-  nodeRequire: function nodeRequire(module) {
-    if (AWS.util.isNode()) return require(module);
-  },
-
-  uriEscape: function uriEscape(string) {
-    var output = encodeURIComponent(string);
-    output = output.replace(/[^A-Za-z0-9_.~\-%]+/g, escape);
-
-    output = output.replace(/[*]/g, function(ch) {
-      return '%' + ch.charCodeAt(0).toString(16).toUpperCase();
-    });
-
-    return output;
-  },
-
-  uriEscapePath: function uriEscapePath(string) {
-    var parts = [];
-    AWS.util.arrayEach(string.split('/'), function (part) {
-      parts.push(AWS.util.uriEscape(part));
-    });
-    return parts.join('/');
-  },
-
-  urlParse: function urlParse(url) {
-    return require('url').parse(url);
-  },
-
-  urlFormat: function urlFormat(url) {
-    return require('url').format(url);
-  },
-
-  queryStringParse: function queryStringParse(qs) {
-    return require('querystring').parse(qs);
-  },
-
-  queryParamsToString: function queryParamsToString(params) {
-    var items = [];
-    var escape = AWS.util.uriEscape;
-    var sortedKeys = Object.keys(params).sort();
-
-    AWS.util.arrayEach(sortedKeys, function(name) {
-      var value = params[name];
-      var ename = escape(name);
-      var result = ename;
-      if (Array.isArray(value)) {
-        var vals = [];
-        AWS.util.arrayEach(value, function(item) { vals.push(escape(item)); });
-        result = ename + '=' + vals.sort().join('&' + ename + '=');
-      } else if (value !== undefined && value !== null) {
-        result = ename + '=' + escape(value);
-      }
-      items.push(result);
-    });
-
-    return items.join('&');
-  },
-
-  readFileSync: function readFileSync(path) {
-    if (typeof window !== 'undefined') return null;
-    return require('fs').readFileSync(path, 'utf-8');
-  },
-
-  base64: {
-
-    encode: function encode64(string) {
-      return new Buffer(string).toString('base64');
-    },
-
-    decode: function decode64(string) {
-      return new Buffer(string, 'base64').toString();
-    }
-
-  },
-
-  Buffer: Buffer,
-
-  buffer: {
-
-    concat: function(buffers) {
-      var length = 0,
-          offset = 0,
-          buffer = null, i;
-
-      for (i = 0; i < buffers.length; i++) {
-        length += buffers[i].length;
-      }
-
-      buffer = new Buffer(length);
-
-      for (i = 0; i < buffers.length; i++) {
-        buffers[i].copy(buffer, offset);
-        offset += buffers[i].length;
-      }
-
-      return buffer;
-    }
-  },
-
-  string: {
-    byteLength: function byteLength(string) {
-      if (string === null || string === undefined) return 0;
-      if (typeof string === 'string') string = new Buffer(string);
-
-      if (typeof string.byteLength === 'number') {
-        return string.byteLength;
-      } else if (typeof string.length === 'number') {
-        return string.length;
-      } else if (typeof string.size === 'number') {
-        return string.size;
-      } else if (typeof string.path === 'string') {
-        return require('fs').lstatSync(string.path).size;
-      } else {
-        throw AWS.util.error(new Error('Cannot determine length of ' + string),
-          { object: string });
-      }
-    },
-
-    upperFirst: function upperFirst(string) {
-      return string[0].toUpperCase() + string.substr(1);
-    },
-
-    lowerFirst: function lowerFirst(string) {
-      return string[0].toLowerCase() + string.substr(1);
-    }
-  },
-
-  ini: {
-    parse: function string(ini) {
-      var currentSection, map = {};
-      AWS.util.arrayEach(ini.split(/\r?\n/), function(line) {
-        line = line.split(/(^|\s);/)[0]; // remove comments
-        var section = line.match(/^\s*\[([^\[\]]+)\]\s*$/);
-        if (section) {
-          currentSection = section[1];
-        } else if (currentSection) {
-          var item = line.match(/^\s*(.+?)\s*=\s*(.+)\s*$/);
-          if (item) {
-            map[currentSection] = map[currentSection] || {};
-            map[currentSection][item[1]] = item[2];
-          }
-        }
-      });
-
-      return map;
-    }
-  },
-
-  jamespath: {
-    query: function query(expression, data) {
-      if (!data) return [];
-
-      var results = [];
-      var expressions = expression.split(/\s+or\s+/);
-      AWS.util.arrayEach.call(this, expressions, function (expr) {
-        var objects = [data];
-        var tokens = expr.split('.');
-        AWS.util.arrayEach.call(this, tokens, function (token) {
-          var match = token.match('^(.+?)(?:\\[(-?\\d+|\\*|)\\])?$');
-          var newObjects = [];
-          AWS.util.arrayEach.call(this, objects, function (obj) {
-            if (match[1] === '*') {
-              AWS.util.arrayEach.call(this, obj, function (value) {
-                newObjects.push(value);
-              });
-            } else if (obj.hasOwnProperty(match[1])) {
-              newObjects.push(obj[match[1]]);
-            }
-          });
-          objects = newObjects;
-
-          if (match[2] !== undefined) {
-            newObjects = [];
-            AWS.util.arrayEach.call(this, objects, function (obj) {
-              if (Array.isArray(obj)) {
-                if (match[2] === '*' || match[2] === '') {
-                  newObjects = newObjects.concat(obj);
-                } else {
-                  var idx = parseInt(match[2], 10);
-                  if (idx < 0) idx = obj.length + idx; // negative indexing
-                  newObjects.push(obj[idx]);
-                }
-              }
-            });
-            objects = newObjects;
-          }
-
-          if (objects.length === 0) return AWS.util.abort;
-        });
-
-        if (objects.length > 0) {
-          results = objects;
-          return AWS.util.abort;
-        }
-      });
-
-      return results;
-    },
-
-    find: function find(expression, data) {
-      return AWS.util.jamespath.query(expression, data)[0];
-    }
-  },
-
-
-  date: {
-
-
-    getDate: function getDate() { return new Date(); },
-
-
-    iso8601: function iso8601(date) {
-      if (date === undefined) { date = AWS.util.date.getDate(); }
-      return date.toISOString();
-    },
-
-
-    rfc822: function rfc822(date) {
-      if (date === undefined) { date = AWS.util.date.getDate(); }
-      return date.toUTCString();
-    },
-
-
-    unixTimestamp: function unixTimestamp(date) {
-      if (date === undefined) { date = AWS.util.date.getDate(); }
-      return date.getTime() / 1000;
-    },
-
-
-    from: function format(date) {
-      if (typeof date === 'number') {
-        return new Date(date * 1000); // unix timestamp
-      } else {
-        return new Date(date);
-      }
-    },
-
-
-    format: function format(date, formatter) {
-      if (!formatter) formatter = 'iso8601';
-      return AWS.util.date[formatter](AWS.util.date.from(date));
-    },
-
-    parseTimestamp: function parseTimestamp(value) {
-      if (value.match(/^\d+$/)) { // unix timestamp
-        return new Date(value * 1000);
-      } else if (value.match(/^\d{4}/)) { // iso8601
-        return new Date(value);
-      } else if (value.match(/^\w{3},/)) { // rfc822
-        return new Date(value);
-      } else {
-        throw AWS.util.error(
-          new Error('unhandled timestamp format: ' + value),
-          {code: 'TimestampParserError'});
-      }
-    }
-
-  },
-
-  crypto: {
-    crc32Table: [
-     0x00000000, 0x77073096, 0xEE0E612C, 0x990951BA, 0x076DC419,
-     0x706AF48F, 0xE963A535, 0x9E6495A3, 0x0EDB8832, 0x79DCB8A4,
-     0xE0D5E91E, 0x97D2D988, 0x09B64C2B, 0x7EB17CBD, 0xE7B82D07,
-     0x90BF1D91, 0x1DB71064, 0x6AB020F2, 0xF3B97148, 0x84BE41DE,
-     0x1ADAD47D, 0x6DDDE4EB, 0xF4D4B551, 0x83D385C7, 0x136C9856,
-     0x646BA8C0, 0xFD62F97A, 0x8A65C9EC, 0x14015C4F, 0x63066CD9,
-     0xFA0F3D63, 0x8D080DF5, 0x3B6E20C8, 0x4C69105E, 0xD56041E4,
-     0xA2677172, 0x3C03E4D1, 0x4B04D447, 0xD20D85FD, 0xA50AB56B,
-     0x35B5A8FA, 0x42B2986C, 0xDBBBC9D6, 0xACBCF940, 0x32D86CE3,
-     0x45DF5C75, 0xDCD60DCF, 0xABD13D59, 0x26D930AC, 0x51DE003A,
-     0xC8D75180, 0xBFD06116, 0x21B4F4B5, 0x56B3C423, 0xCFBA9599,
-     0xB8BDA50F, 0x2802B89E, 0x5F058808, 0xC60CD9B2, 0xB10BE924,
-     0x2F6F7C87, 0x58684C11, 0xC1611DAB, 0xB6662D3D, 0x76DC4190,
-     0x01DB7106, 0x98D220BC, 0xEFD5102A, 0x71B18589, 0x06B6B51F,
-     0x9FBFE4A5, 0xE8B8D433, 0x7807C9A2, 0x0F00F934, 0x9609A88E,
-     0xE10E9818, 0x7F6A0DBB, 0x086D3D2D, 0x91646C97, 0xE6635C01,
-     0x6B6B51F4, 0x1C6C6162, 0x856530D8, 0xF262004E, 0x6C0695ED,
-     0x1B01A57B, 0x8208F4C1, 0xF50FC457, 0x65B0D9C6, 0x12B7E950,
-     0x8BBEB8EA, 0xFCB9887C, 0x62DD1DDF, 0x15DA2D49, 0x8CD37CF3,
-     0xFBD44C65, 0x4DB26158, 0x3AB551CE, 0xA3BC0074, 0xD4BB30E2,
-     0x4ADFA541, 0x3DD895D7, 0xA4D1C46D, 0xD3D6F4FB, 0x4369E96A,
-     0x346ED9FC, 0xAD678846, 0xDA60B8D0, 0x44042D73, 0x33031DE5,
-     0xAA0A4C5F, 0xDD0D7CC9, 0x5005713C, 0x270241AA, 0xBE0B1010,
-     0xC90C2086, 0x5768B525, 0x206F85B3, 0xB966D409, 0xCE61E49F,
-     0x5EDEF90E, 0x29D9C998, 0xB0D09822, 0xC7D7A8B4, 0x59B33D17,
-     0x2EB40D81, 0xB7BD5C3B, 0xC0BA6CAD, 0xEDB88320, 0x9ABFB3B6,
-     0x03B6E20C, 0x74B1D29A, 0xEAD54739, 0x9DD277AF, 0x04DB2615,
-     0x73DC1683, 0xE3630B12, 0x94643B84, 0x0D6D6A3E, 0x7A6A5AA8,
-     0xE40ECF0B, 0x9309FF9D, 0x0A00AE27, 0x7D079EB1, 0xF00F9344,
-     0x8708A3D2, 0x1E01F268, 0x6906C2FE, 0xF762575D, 0x806567CB,
-     0x196C3671, 0x6E6B06E7, 0xFED41B76, 0x89D32BE0, 0x10DA7A5A,
-     0x67DD4ACC, 0xF9B9DF6F, 0x8EBEEFF9, 0x17B7BE43, 0x60B08ED5,
-     0xD6D6A3E8, 0xA1D1937E, 0x38D8C2C4, 0x4FDFF252, 0xD1BB67F1,
-     0xA6BC5767, 0x3FB506DD, 0x48B2364B, 0xD80D2BDA, 0xAF0A1B4C,
-     0x36034AF6, 0x41047A60, 0xDF60EFC3, 0xA867DF55, 0x316E8EEF,
-     0x4669BE79, 0xCB61B38C, 0xBC66831A, 0x256FD2A0, 0x5268E236,
-     0xCC0C7795, 0xBB0B4703, 0x220216B9, 0x5505262F, 0xC5BA3BBE,
-     0xB2BD0B28, 0x2BB45A92, 0x5CB36A04, 0xC2D7FFA7, 0xB5D0CF31,
-     0x2CD99E8B, 0x5BDEAE1D, 0x9B64C2B0, 0xEC63F226, 0x756AA39C,
-     0x026D930A, 0x9C0906A9, 0xEB0E363F, 0x72076785, 0x05005713,
-     0x95BF4A82, 0xE2B87A14, 0x7BB12BAE, 0x0CB61B38, 0x92D28E9B,
-     0xE5D5BE0D, 0x7CDCEFB7, 0x0BDBDF21, 0x86D3D2D4, 0xF1D4E242,
-     0x68DDB3F8, 0x1FDA836E, 0x81BE16CD, 0xF6B9265B, 0x6FB077E1,
-     0x18B74777, 0x88085AE6, 0xFF0F6A70, 0x66063BCA, 0x11010B5C,
-     0x8F659EFF, 0xF862AE69, 0x616BFFD3, 0x166CCF45, 0xA00AE278,
-     0xD70DD2EE, 0x4E048354, 0x3903B3C2, 0xA7672661, 0xD06016F7,
-     0x4969474D, 0x3E6E77DB, 0xAED16A4A, 0xD9D65ADC, 0x40DF0B66,
-     0x37D83BF0, 0xA9BCAE53, 0xDEBB9EC5, 0x47B2CF7F, 0x30B5FFE9,
-     0xBDBDF21C, 0xCABAC28A, 0x53B39330, 0x24B4A3A6, 0xBAD03605,
-     0xCDD70693, 0x54DE5729, 0x23D967BF, 0xB3667A2E, 0xC4614AB8,
-     0x5D681B02, 0x2A6F2B94, 0xB40BBE37, 0xC30C8EA1, 0x5A05DF1B,
-     0x2D02EF8D],
-
-    crc32: function crc32(data) {
-      var tbl = AWS.util.crypto.crc32Table;
-      var crc = 0 ^ -1;
-
-      if (typeof data === 'string') {
-        data = new Buffer(data);
-      }
-
-      for (var i = 0; i < data.length; i++) {
-        var code = data.readUInt8(i);
-        crc = (crc >>> 8) ^ tbl[(crc ^ code) & 0xFF];
-      }
-      return (crc ^ -1) >>> 0;
-    },
-
-    hmac: function hmac(key, string, digest, fn) {
-      if (!digest) digest = 'binary';
-      if (digest === 'buffer') { digest = undefined; }
-      if (!fn) fn = 'sha256';
-      if (typeof string === 'string') string = new Buffer(string);
-      return cryptoLib.createHmac(fn, key).update(string).digest(digest);
-    },
-
-    md5: function md5(data, digest) {
-      if (!digest) { digest = 'binary'; }
-      if (digest === 'buffer') { digest = undefined; }
-      if (typeof data === 'string') data = new Buffer(data);
-      return AWS.util.crypto.createHash('md5').update(data).digest(digest);
-    },
-
-    sha256: function sha256(string, digest) {
-      if (!digest) { digest = 'binary'; }
-      if (digest === 'buffer') { digest = undefined; }
-      if (typeof string === 'string') string = new Buffer(string);
-      return AWS.util.crypto.createHash('sha256').update(string).digest(digest);
-    },
-
-    toHex: function toHex(data) {
-      var out = [];
-      for (var i = 0; i < data.length; i++) {
-        out.push(('0' + data.charCodeAt(i).toString(16)).substr(-2, 2));
-      }
-      return out.join('');
-    },
-
-    createHash: function createHash(algorithm) {
-      return cryptoLib.createHash(algorithm);
-    }
-
-  },
-
-
-
-
-  abort: {},
-
-  each: function each(object, iterFunction) {
-    for (var key in object) {
-      if (object.hasOwnProperty(key)) {
-        var ret = iterFunction.call(this, key, object[key]);
-        if (ret === AWS.util.abort) break;
-      }
-    }
-  },
-
-  arrayEach: function arrayEach(array, iterFunction) {
-    for (var idx in array) {
-      if (array.hasOwnProperty(idx)) {
-        var ret = iterFunction.call(this, array[idx], parseInt(idx, 10));
-        if (ret === AWS.util.abort) break;
-      }
-    }
-  },
-
-  update: function update(obj1, obj2) {
-    AWS.util.each(obj2, function iterator(key, item) {
-      obj1[key] = item;
-    });
-    return obj1;
-  },
-
-  merge: function merge(obj1, obj2) {
-    return AWS.util.update(AWS.util.copy(obj1), obj2);
-  },
-
-  copy: function copy(object) {
-    if (object === null || object === undefined) return object;
-    var dupe = {};
-    for (var key in object) {
-      dupe[key] = object[key];
-    }
-    return dupe;
-  },
-
-  isEmpty: function isEmpty(obj) {
-    for (var prop in obj) {
-      if (obj.hasOwnProperty(prop)) {
-        return false;
-      }
-    }
-    return true;
-  },
-
-  isType: function isType(obj, type) {
-    if (typeof type === 'function') type = AWS.util.typeName(type);
-    return Object.prototype.toString.call(obj) === '[object ' + type + ']';
-  },
-
-  typeName: function typeName(type) {
-    if (type.hasOwnProperty('name')) return type.name;
-    var str = type.toString();
-    var match = str.match(/^\s*function (.+)\(/);
-    return match ? match[1] : str;
-  },
-
-  error: function error(err, options) {
-    var originalError = null;
-    if (typeof err.message === 'string' && err.message !== '') {
-      if (typeof options === 'string' || (options && options.message)) {
-        originalError = AWS.util.copy(err);
-        originalError.message = err.message;
-      }
-    }
-    err.message = err.message || null;
-
-    if (typeof options === 'string') {
-      err.message = options;
-    } else {
-      AWS.util.update(err, options);
-    }
-
-    if (typeof Object.defineProperty === 'function') {
-      Object.defineProperty(err, 'name', {writable: true, enumerable: false});
-      Object.defineProperty(err, 'message', {enumerable: true});
-    }
-
-    err.name = err.name || err.code || 'Error';
-    err.time = new Date();
-
-    if (originalError) err.originalError = originalError;
-
-    return err;
-  },
-
-
-  inherit: function inherit(klass, features) {
-    var newObject = null;
-    if (features === undefined) {
-      features = klass;
-      klass = Object;
-      newObject = {};
-    } else {
-      var ctor = function ConstructorWrapper() {};
-      ctor.prototype = klass.prototype;
-      newObject = new ctor();
-    }
-
-    if (features.constructor === Object) {
-      features.constructor = function() {
-        if (klass !== Object) {
-          return klass.apply(this, arguments);
-        }
-      };
-    }
-
-    features.constructor.prototype = newObject;
-    AWS.util.update(features.constructor.prototype, features);
-    features.constructor.__super__ = klass;
-    return features.constructor;
-  },
-
-
-  mixin: function mixin() {
-    var klass = arguments[0];
-    for (var i = 1; i < arguments.length; i++) {
-      for (var prop in arguments[i].prototype) {
-        var fn = arguments[i].prototype[prop];
-        if (prop !== 'constructor') {
-          klass.prototype[prop] = fn;
-        }
-      }
-    }
-    return klass;
-  },
-
-
-  hideProperties: function hideProperties(obj, props) {
-    if (typeof Object.defineProperty !== 'function') return;
-
-    AWS.util.arrayEach(props, function (key) {
-      Object.defineProperty(obj, key, {
-        enumerable: false, writable: true, configurable: true });
-    });
-  }
-};
-
-module.exports = AWS.util;
-
-}).call(this,{browser:true})
-},{"./core":3,"buffer":40,"crypto":44,"fs":39,"querystring":54,"url":55}],33:[function(require,module,exports){
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-
-AWS.XML.Parser = inherit({
-  constructor: function XMLParser(rules) {
-    this.rules = (rules || {}).members || {};
-  },
-
-  parse: function parse(xml) {
-    if (xml.replace(/^\s+/, '') === '') return {};
-
-    var result, error;
-    try {
-      if (window.DOMParser) {
-        var parser = new DOMParser();
-        result = parser.parseFromString(xml, 'text/xml');
-
-        if (result.documentElement === null) {
-          throw new Error('Cannot parse empty document.');
-        }
-
-        var isError = result.getElementsByTagName('parsererror')[0];
-        if (isError && (isError.parentNode === result ||
-            isError.parentNode.nodeName === 'body')) {
-          throw new Error(isError.getElementsByTagName('div')[0].textContent);
-        }
-      } else if (window.ActiveXObject) {
-        result = new window.ActiveXObject('Microsoft.XMLDOM');
-        result.async = false;
- 
-        if (!result.loadXML(xml)) {
-          throw new Error('Parse error in document');
-        }
-      } else {
-        throw new Error('Cannot load XML parser');
-      }
-    } catch (e) {
-      error = e;
-    }
-
-    if (result && result.documentElement && !error) {
-      return this.parseStructure(result.documentElement, this.rules);
-    } else if (error) {
-      throw AWS.util.error(error || new Error(), {code: 'XMLParserError'});
-    } else { // empty xml document
-      return {};
-    }
-  },
-
-  parseStructure: function parseStructure(structure, rules) {
-    var data = {};
-
-    AWS.util.each.call(this, rules, function(memberName, memberRules) {
-      if (memberRules.type === 'list') {
-        data[memberRules.name || memberName] = [];
-      }
-    });
-
-    for (var j = 0; j < structure.attributes.length; j++) {
-      var attr = structure.attributes[j];
-      var attrRule = rules[attr.name];
-      if (attrRule) {
-        var value = this.parseMember({ textContent: attr.value }, attrRule);
-        data[attrRule.name || attr.name] = value;
-      }
-    }
-
-    var child = structure.firstElementChild;
-    while (child) {
-      var rule = rules[child.nodeName] || {};
-      var key = rule.name || child.nodeName;
-      var inData = rule.flattened ? data[key] : null;
-      data[key] = this.parseMember(child, rule, inData);
-      child = child.nextElementSibling;
-    }
-
-    return data;
-  },
-
-  parseMap: function parseMap(map, rules, data) {
-    data = data || {};
-    var keyRules = rules.keys || {};
-    var valueRules = rules.members || {};
-    var keyName = keyRules.name || 'key';
-    var valueName = valueRules.name || 'value';
-
-    function run(item) {
-      var key = item.getElementsByTagName(keyName)[0].textContent;
-      var value = item.getElementsByTagName(valueName)[0];
-      value = this.parseMember(value, valueRules);
-      data[key] = value;
-    }
-
-    if (rules.flattened) {
-      run.call(this, map);
-    } else {
-      var child = map.firstElementChild;
-      while (child) {
-        run.call(this, child);
-        child = child.nextElementSibling;
-      }
-    }
-    return data;
-  },
-
-  parseList: function parseList(list, rules, data) {
-    data = data || [];
-    var memberRules = rules.members || {};
-    var memberName = memberRules.name || 'member';
-    if (rules.flattened) {
-      data.push(this.parseMember(list, memberRules));
-    } else {
-      var child = list.firstElementChild;
-      while (child) {
-        if (child.nodeName === memberName) {
-          data.push(this.parseMember(child, memberRules));
-        }
-        child = child.nextElementSibling;
-      }
-    }
-    return data;
-  },
-
-  parseMember: function parseMember(member, rules, data) {
-    if (!rules.type) {
-      if (member.childElementCount > 0) {
-        rules.type = 'structure';
-      } else {
-        rules.type = 'string';
-      }
-    }
-
-    if (rules.type === 'structure') {
-      return this.parseStructure(member, rules.members || {}, data);
-    } else if (rules.type === 'list') {
-      return this.parseList(member, rules, data);
-    } else if (rules.type === 'map') {
-      return this.parseMap(member, rules, data);
-    }
-
-    if (rules.type === 'string') {
-      if (member.attributes && member.attributes.encoding &&
-          member.attributes.encoding.value === 'base64') {
-        return AWS.util.base64.decode(member.textContent);
-      } else {
-        return member.textContent;
-      }
-    }
-
-    if (member.textContent === '') return null;
-
-    if (rules.type === 'integer') {
-      return parseInt(member.textContent, 10);
-    } else if (rules.type === 'float') {
-      return parseFloat(member.textContent);
-    } else if (rules.type === 'timestamp') {
-      return AWS.util.date.parseTimestamp(member.textContent);
-    } else if (rules.type === 'boolean') {
-      return member.textContent === 'true';
-    } else {
-      var msg = 'unhandled type: ' + rules.type;
-      throw AWS.util.error(new Error(msg), {code: 'XMLParserError'});
-    }
-  }
-});
-
-},{"../core":3}],34:[function(require,module,exports){
-var AWS = require('../core');
-var builder = require('xmlbuilder');
-var inherit = AWS.util.inherit;
-
-
-AWS.XML.Builder = inherit({
-
-  constructor: function XMLBuilder(root, rules, options) {
-    this.root = root;
-    this.rules = rules;
-    this.xmlns = options.xmlnamespace;
-    this.timestampFormat = options.timestampFormat;
-  },
-
-  toXML: function toXML(params) {
-    var xml = builder.create(this.root);
-    if (this.xmlns) xml.att('xmlns', this.xmlns);
-    this.serializeStructure(this.rules, params, xml);
-    return xml.root().toString();
-  },
-
-  serializeStructure: function serializeStructure(rules, params, xml) {
-    AWS.util.each.call(this, rules || {}, function (memberName, memberRules) {
-      var value = params[memberName];
-      if (value !== undefined) {
-        if (memberRules.attribute) {
-          xml.att(memberRules.name, value);
-        } else {
-          this.serializeMember(memberName, memberRules, value, xml);
-        }
-      }
-    });
-  },
-
-  serializeList: function serializeList(name, rules, list, xml) {
-    if (rules.flattened) {
-      AWS.util.arrayEach.call(this, list, function (value) {
-        this.serializeMember(rules.name || name, rules.members, value, xml);
-      });
-    } else {
-      xml = xml.ele(rules.name || name);
-      AWS.util.arrayEach.call(this, list, function (value) {
-        var memberName = rules.members.name || 'member';
-        this.serializeMember(memberName, rules.members, value, xml);
-      });
-    }
-  },
-
-  serializeMember: function serializeMember(memberName, rules, params, xml) {
-    if (params === null || params === undefined) return;
-
-    var name = memberName;
-    if (rules.type === 'structure') {
-      xml = xml.ele(name);
-      this.serializeStructure(rules.members, params, xml);
-    } else if (rules.type === 'list') {
-      this.serializeList(name, rules, params, xml);
-    } else if (rules.type === 'timestamp') {
-      var timestampFormat = rules.format || this.timestampFormat;
-      var date = AWS.util.date.format(params, timestampFormat);
-      xml = xml.ele(name, String(date));
-    } else {
-      xml = xml.ele(name, String(params));
-    }
-    this.applyNamespaces(xml, rules);
-  },
-
-  applyNamespaces: function applyNamespaces(xml, rules) {
-    if (rules.xmlns) {
-      var attr = 'xmlns';
-      if (rules.xmlns.prefix) attr += ':' + rules.xmlns.prefix;
-      xml.att(attr, rules.xmlns.uri);
-    }
-  }
-
-
-});
-
-},{"../core":3,"xmlbuilder":38}],35:[function(require,module,exports){
-
-
-
-var Buffer = require('buffer').Buffer;
-
-
-
-var abort = {};
-
-function each(obj, iter) {
-  for (var key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      var ret = iter(key, obj[key]);
-      if (ret === abort) break;
-    }
-  }
-}
-
-function copy(object) {
-  if (object === null || object === undefined) return object;
-  var dupe = {};
-  for (var key in object) {
-    dupe[key] = object[key];
-  }
-  return dupe;
-}
-
-function update(a, b) {
-  each(b, function iterator(key, value) { a[key] = value; });
-  return a;
-}
-
-function merge(a, b) {
-  return update(copy(a), b);
-}
-
-
-
-function Shape(rules, options) {
-  if (!rules) {
-    this.rules = { type: 'structure', members: {} };
-    return;
-  }
-
-  this.options = options;
-  this.rules = {};
-  this.set_type(rules.type);
-  each(rules, function(key, value) {
-    if (key !== 'type') this['set_' + key](value);
-  }.bind(this));
-
-  if (this.rules.type === 'blob') {
-    if (this.rules.payload || this.rules.streaming) {
-      this.rules.type = 'binary';
-    } else {
-      this.rules.type = 'base64';
-    }
-  }
-}
-
-function InputShape(rules, options) {
-  Shape.call(this, rules, options);
-}
-
-function OutputShape(rules, options) {
-  Shape.call(this, rules, options);
-}
-
-
-Shape.prototype = {
-  shapeClass: function() {
-    if (this instanceof InputShape) return InputShape;
-    if (this instanceof OutputShape) return OutputShape;
-  },
-
-  xmlname: function() {
-    if (this.rules.flattened) {
-      return this._xmlname || (this.rules.members || {}).name;
-    } else {
-      return this._xmlname;
-    }
-  },
-
-  set_type: function(name) {
-    var types = {
-      structure: 'structure',
-      list: 'list',
-      map: 'map',
-      boolean: 'boolean',
-      timestamp: 'timestamp',
-      character: 'string',
-      double: 'float',
-      float: 'float',
-      integer: 'integer',
-      long: 'integer',
-      short: 'integer',
-      string: 'string',
-      blob: 'blob',
-      biginteger: 'integer',
-      bigdecimal: 'float'
-    };
-    if (name === 'string') { // omit string to reduce size
-      return;
-    } else if (types[name]) {
-      this.rules.type = types[name];
-    } else {
-      throw new Error('unhandled shape type ' + name);
-    }
-  },
-
-  set_members: function(members) {
-    var type = this.rules.type;
-    var ShapeClass = this.shapeClass();
-    if (type === 'structure') {
-      this.rules.members = {};
-      each(members, function(memberName, memberRules) {
-        var shape = new ShapeClass(memberRules, this.options);
-        if (this.swapNames(shape)) {
-          shape.rules.name = memberName;
-          memberName = shape.xmlname();
-        }
-        this.rules.members[memberName] = shape.rules;
-      }.bind(this));
-    } else if (type === 'list') {
-      this.rules.members = new ShapeClass(members, this.options).rules;
-    } else if (type === 'map') {
-      this.rules.members = new ShapeClass(members, this.options).rules;
-    } else if (type === 'blob') {
-      this.rules.members = {};
-    } else {
-      throw new Error('unhandled complex shape `' + type + '\'');
-    }
-  },
-
-  set_keys: function(rules) {
-    var ShapeClass = this.shapeClass();
-    this.rules.keys = new ShapeClass(rules, this.options).rules;
-  },
-
-  set_timestamp_format: function(format) {
-    this.rules.format = format;
-  },
-
-  set_xmlname: function(name) {
-    this._xmlname = name;
-    this.rules.name = name;
-  },
-
-  set_location: function (location) {
-    this.rules.location = (location === 'http_status' ? 'status' : location);
-  },
-
-  set_location_name: function(header_name) {
-    this.rules.name = header_name;
-  },
-
-  set_payload: function(state) {
-    if (state) this.rules.payload = true;
-  },
-
-  set_flattened: function(state) {
-    if (state) this.rules.flattened = true;
-  },
-
-  set_streaming: function(state) {
-    if (state) this.rules.streaming = true;
-  },
-
-  set_xmlattribute: function(state) {
-    if (state) this.rules.attribute = true;
-  },
-
-  set_xmlnamespace: function(ns) {
-    this.rules.xmlns = ns;
-  },
-
-  set_documentation: function(docs) {
-    if (this.options.documentation) this.rules.documentation = docs;
-  },
-
-  set_enum: function(values) {
-    if (this.options.documentation) this.rules['enum'] = values;
-  },
-
-  set_wrapper: function() {},
-  set_shape_name: function() {},
-  set_box: function() {},
-  set_sensitive: function() {}
-};
-
-InputShape.prototype = merge(Shape.prototype, {
-  swapNames: function() { return false; },
-
-  set_required: function() { this.rules.required = true; },
-  set_member_order: function(order) { this.rules.order = order; },
-
-  set_min_length: function(min) {
-    if (this.options.documentation) this.rules.min_length = min;
-  },
-
-  set_max_length: function(max) {
-    if (this.options.documentation) this.rules.max_length = max;
-  },
-
-  set_pattern: function(pattern) {
-    if (this.options.documentation) this.rules.pattern = pattern;
-  }
-});
-
-OutputShape.prototype = merge(Shape.prototype, {
-  swapNames: function(shape) {
-    if (this.options.documentation) return false;
-    return shape.xmlname() && ['query', 'rest-xml'].indexOf(this.options.type) >= 0;
-  },
-
-  set_required: function() {},
-  set_member_order: function() {},
-  set_min_length: function() {},
-  set_max_length: function() {},
-  set_pattern: function() {}
-});
-
-function Operation(rules, options) {
-  var origRules = rules;
-
-  function normalizeInputs() {
-    if (options.type.indexOf('rest') < 0) return;
-
-    var xml = options.type.indexOf('xml') >= 0;
-    var payload = false;
-    var wrapper = false;
-
-    var hasPayload = false;
-    each(rules.input.members, function(name, rule) {
-      if (rule.payload) {
-        hasPayload = true;
-        payload = name;
-        delete rule.payload;
-        return abort;
-      }
-    });
-
-    if (!hasPayload) {
-      var list = [];
-      each(rules.input.members, function(name, rule) {
-        if (!rule.location) { list.push(name); }
-      });
-
-      if (list.length > 0) {
-        payload = list;
-        if (xml) wrapper = origRules.input.shape_name;
-      }
-    }
-
-    if (wrapper) rules.input = merge({wrapper: wrapper}, rules.input);
-    if (payload) rules.input = merge({payload: payload}, rules.input);
-  }
-
-  function normalizeOutputs() {
-    var moveUp = null;
-
-    each(rules.output.members, function(memberName, rule) {
-      if (rule.payload && rule.type === 'structure') {
-        delete rule.payload;
-        moveUp = memberName;
-      }
-      else if (rule.payload || rule.streaming) {
-        delete rule.payload;
-        rules.output.payload = memberName;
-      }
-    });
-
-    if (moveUp) {
-      var rule = rules.output.members[moveUp];
-      delete rules.output.members[moveUp];
-      update(rules.output.members, rule.members);
-    }
-  }
-
-  rules = copy(rules);
-
-  rules.input = new InputShape(rules.input, options).rules;
-  rules.output = new OutputShape(rules.output, options).rules;
-  rules.input.members = rules.input.members || {};
-  rules.output.members = rules.output.members || {};
-
-  normalizeInputs();
-  normalizeOutputs();
-
-  if (rules.http) delete rules.http.response_code;
-  if (options.documentation) {
-    rules.errors = rules.errors.map(function(e) { return e.shape_name; });
-  } else {
-    delete rules.errors;
-    delete rules.documentation;
-    delete rules.documentation_url;
-    delete rules.response_code;
-  }
-
-  return rules;
-}
-
-function Translator(api, options) {
-  var translate = {};
-
-  function inflect(key) {
-    return key.replace(/_(\w)/g, function (_, m) { return m.toUpperCase(); });
-  }
-
-  function setTranslatedKeys() {
-    var list = Object.keys(api);
-    list.push('timestamp_format');
-    list.sort().forEach(function (key) { translate[inflect(key)] = api[key]; });
-    translate.timestampFormat = translate.timestampFormat || 'iso8601';
-    if (translate.jsonVersion) translate.jsonVersion = translate.jsonVersion.toString();
-    if (translate.jsonVersion === '1') translate.jsonVersion = '1.0';
-    if (!options.documentation) delete translate.documentation;
-    if (!translate.resultWrapped) delete translate.resultWrapped;
-    if (!api.type.match(/xml/)) delete translate.xmlnamespace;
-    delete translate.operations;
-    delete translate.pagination;
-    delete translate.waiters;
-    delete translate.type;
-  }
-
-  function setOperations() {
-    translate.operations = {};
-    each(api.operations, function (key, value) {
-      var methodName = key[0].toLowerCase() + key.substr(1);
-      methodName = methodName.replace(/\d{4}_\d{2}_\d{2}$/, '');
-      var operation = new Operation(value, options);
-      translate.operations[methodName] = operation;
-    });
-  }
-
-  function setPagination() {
-    if (api.pagination) {
-      translate.pagination = {};
-      each(api.pagination, function (key, value) {
-        var object = {};
-        each(value, function (k2, v2) { object[inflect(k2)] = v2; });
-        translate.pagination[key[0].toLowerCase() + key.substr(1)] = object;
-      });
-    }
-  }
-
-  function setWaiters() {
-    if (api.waiters) {
-      translate.waiters = {};
-      each(api.waiters, function (key, value) {
-        var object = {};
-        each(value, function (k2, v2) { object[inflect(k2)] = v2; });
-        translate.waiters[key[0].toLowerCase() + key.substr(1)] = object;
-      });
-    }
-  }
-
-  if (typeof api === 'string' || Buffer.isBuffer(api)) {
-    api = JSON.parse(api);
-  }
-
-  options = options || {};
-  options.type = api.type;
-
-  translate.format = api.type;
-
-  setTranslatedKeys();
-  setOperations();
-  setPagination();
-  setWaiters();
-
-  return translate;
-}
-
-module.exports = Translator;
-
-},{"buffer":40}],36:[function(require,module,exports){
-(function() {
-  var XMLBuilder, XMLFragment;
-
-  XMLFragment = require('./XMLFragment');
-
-  XMLBuilder = (function() {
-
-    function XMLBuilder(name, xmldec, doctype) {
-      var att, child, _ref;
-      this.children = [];
-      this.rootObject = null;
-      if (this.is(name, 'Object')) {
-        _ref = [name, xmldec], xmldec = _ref[0], doctype = _ref[1];
-        name = null;
-      }
-      if (name != null) {
-        name = '' + name || '';
-        if (xmldec == null) {
-          xmldec = {
-            'version': '1.0'
-          };
-        }
-      }
-      if ((xmldec != null) && !(xmldec.version != null)) {
-        throw new Error("Version number is required");
-      }
-      if (xmldec != null) {
-        xmldec.version = '' + xmldec.version || '';
-        if (!xmldec.version.match(/1\.[0-9]+/)) {
-          throw new Error("Invalid version number: " + xmldec.version);
-        }
-        att = {
-          version: xmldec.version
-        };
-        if (xmldec.encoding != null) {
-          xmldec.encoding = '' + xmldec.encoding || '';
-          if (!xmldec.encoding.match(/[A-Za-z](?:[A-Za-z0-9._-]|-)*/)) {
-            throw new Error("Invalid encoding: " + xmldec.encoding);
-          }
-          att.encoding = xmldec.encoding;
-        }
-        if (xmldec.standalone != null) {
-          att.standalone = xmldec.standalone ? "yes" : "no";
-        }
-        child = new XMLFragment(this, '?xml', att);
-        this.children.push(child);
-      }
-      if (doctype != null) {
-        att = {};
-        if (name != null) {
-          att.name = name;
-        }
-        if (doctype.ext != null) {
-          doctype.ext = '' + doctype.ext || '';
-          att.ext = doctype.ext;
-        }
-        child = new XMLFragment(this, '!DOCTYPE', att);
-        this.children.push(child);
-      }
-      if (name != null) {
-        this.begin(name);
-      }
-    }
-
-    XMLBuilder.prototype.begin = function(name, xmldec, doctype) {
-      var doc, root;
-      if (!(name != null)) {
-        throw new Error("Root element needs a name");
-      }
-      if (this.rootObject) {
-        this.children = [];
-        this.rootObject = null;
-      }
-      if (xmldec != null) {
-        doc = new XMLBuilder(name, xmldec, doctype);
-        return doc.root();
-      }
-      name = '' + name || '';
-      root = new XMLFragment(this, name, {});
-      root.isRoot = true;
-      root.documentObject = this;
-      this.children.push(root);
-      this.rootObject = root;
-      return root;
-    };
-
-    XMLBuilder.prototype.root = function() {
-      return this.rootObject;
-    };
-
-    XMLBuilder.prototype.end = function(options) {
-      return toString(options);
-    };
-
-    XMLBuilder.prototype.toString = function(options) {
-      var child, r, _i, _len, _ref;
-      r = '';
-      _ref = this.children;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        child = _ref[_i];
-        r += child.toString(options);
-      }
-      return r;
-    };
-
-    XMLBuilder.prototype.is = function(obj, type) {
-      var clas;
-      clas = Object.prototype.toString.call(obj).slice(8, -1);
-      return (obj != null) && clas === type;
-    };
-
-    return XMLBuilder;
-
-  })();
-
-  module.exports = XMLBuilder;
-
-}).call(this);
-
-},{"./XMLFragment":37}],37:[function(require,module,exports){
-(function() {
-  var XMLFragment,
-    __hasProp = {}.hasOwnProperty;
-
-  XMLFragment = (function() {
-
-    function XMLFragment(parent, name, attributes, text) {
-      this.isRoot = false;
-      this.documentObject = null;
-      this.parent = parent;
-      this.name = name;
-      this.attributes = attributes;
-      this.value = text;
-      this.children = [];
-    }
-
-    XMLFragment.prototype.element = function(name, attributes, text) {
-      var child, key, val, _ref, _ref1;
-      if (!(name != null)) {
-        throw new Error("Missing element name");
-      }
-      name = '' + name || '';
-      this.assertLegalChar(name);
-      if (attributes == null) {
-        attributes = {};
-      }
-      if (this.is(attributes, 'String') && this.is(text, 'Object')) {
-        _ref = [text, attributes], attributes = _ref[0], text = _ref[1];
-      } else if (this.is(attributes, 'String')) {
-        _ref1 = [{}, attributes], attributes = _ref1[0], text = _ref1[1];
-      }
-      for (key in attributes) {
-        if (!__hasProp.call(attributes, key)) continue;
-        val = attributes[key];
-        val = '' + val || '';
-        attributes[key] = this.escape(val);
-      }
-      child = new XMLFragment(this, name, attributes);
-      if (text != null) {
-        text = '' + text || '';
-        text = this.escape(text);
-        this.assertLegalChar(text);
-        child.raw(text);
-      }
-      this.children.push(child);
-      return child;
-    };
-
-    XMLFragment.prototype.insertBefore = function(name, attributes, text) {
-      var child, i, key, val, _ref, _ref1;
-      if (this.isRoot) {
-        throw new Error("Cannot insert elements at root level");
-      }
-      if (!(name != null)) {
-        throw new Error("Missing element name");
-      }
-      name = '' + name || '';
-      this.assertLegalChar(name);
-      if (attributes == null) {
-        attributes = {};
-      }
-      if (this.is(attributes, 'String') && this.is(text, 'Object')) {
-        _ref = [text, attributes], attributes = _ref[0], text = _ref[1];
-      } else if (this.is(attributes, 'String')) {
-        _ref1 = [{}, attributes], attributes = _ref1[0], text = _ref1[1];
-      }
-      for (key in attributes) {
-        if (!__hasProp.call(attributes, key)) continue;
-        val = attributes[key];
-        val = '' + val || '';
-        attributes[key] = this.escape(val);
-      }
-      child = new XMLFragment(this.parent, name, attributes);
-      if (text != null) {
-        text = '' + text || '';
-        text = this.escape(text);
-        this.assertLegalChar(text);
-        child.raw(text);
-      }
-      i = this.parent.children.indexOf(this);
-      this.parent.children.splice(i, 0, child);
-      return child;
-    };
-
-    XMLFragment.prototype.insertAfter = function(name, attributes, text) {
-      var child, i, key, val, _ref, _ref1;
-      if (this.isRoot) {
-        throw new Error("Cannot insert elements at root level");
-      }
-      if (!(name != null)) {
-        throw new Error("Missing element name");
-      }
-      name = '' + name || '';
-      this.assertLegalChar(name);
-      if (attributes == null) {
-        attributes = {};
-      }
-      if (this.is(attributes, 'String') && this.is(text, 'Object')) {
-        _ref = [text, attributes], attributes = _ref[0], text = _ref[1];
-      } else if (this.is(attributes, 'String')) {
-        _ref1 = [{}, attributes], attributes = _ref1[0], text = _ref1[1];
-      }
-      for (key in attributes) {
-        if (!__hasProp.call(attributes, key)) continue;
-        val = attributes[key];
-        val = '' + val || '';
-        attributes[key] = this.escape(val);
-      }
-      child = new XMLFragment(this.parent, name, attributes);
-      if (text != null) {
-        text = '' + text || '';
-        text = this.escape(text);
-        this.assertLegalChar(text);
-        child.raw(text);
-      }
-      i = this.parent.children.indexOf(this);
-      this.parent.children.splice(i + 1, 0, child);
-      return child;
-    };
-
-    XMLFragment.prototype.remove = function() {
-      var i, _ref;
-      if (this.isRoot) {
-        throw new Error("Cannot remove the root element");
-      }
-      i = this.parent.children.indexOf(this);
-      [].splice.apply(this.parent.children, [i, i - i + 1].concat(_ref = [])), _ref;
-      return this.parent;
-    };
-
-    XMLFragment.prototype.text = function(value) {
-      var child;
-      if (!(value != null)) {
-        throw new Error("Missing element text");
-      }
-      value = '' + value || '';
-      value = this.escape(value);
-      this.assertLegalChar(value);
-      child = new XMLFragment(this, '', {}, value);
-      this.children.push(child);
-      return this;
-    };
-
-    XMLFragment.prototype.cdata = function(value) {
-      var child;
-      if (!(value != null)) {
-        throw new Error("Missing CDATA text");
-      }
-      value = '' + value || '';
-      this.assertLegalChar(value);
-      if (value.match(/]]>/)) {
-        throw new Error("Invalid CDATA text: " + value);
-      }
-      child = new XMLFragment(this, '', {}, '<![CDATA[' + value + ']]>');
-      this.children.push(child);
-      return this;
-    };
-
-    XMLFragment.prototype.comment = function(value) {
-      var child;
-      if (!(value != null)) {
-        throw new Error("Missing comment text");
-      }
-      value = '' + value || '';
-      value = this.escape(value);
-      this.assertLegalChar(value);
-      if (value.match(/--/)) {
-        throw new Error("Comment text cannot contain double-hypen: " + value);
-      }
-      child = new XMLFragment(this, '', {}, '<!-- ' + value + ' -->');
-      this.children.push(child);
-      return this;
-    };
-
-    XMLFragment.prototype.raw = function(value) {
-      var child;
-      if (!(value != null)) {
-        throw new Error("Missing raw text");
-      }
-      value = '' + value || '';
-      child = new XMLFragment(this, '', {}, value);
-      this.children.push(child);
-      return this;
-    };
-
-    XMLFragment.prototype.up = function() {
-      if (this.isRoot) {
-        throw new Error("This node has no parent. Use doc() if you need to get the document object.");
-      }
-      return this.parent;
-    };
-
-    XMLFragment.prototype.root = function() {
-      var child;
-      if (this.isRoot) {
-        return this;
-      }
-      child = this.parent;
-      while (!child.isRoot) {
-        child = child.parent;
-      }
-      return child;
-    };
-
-    XMLFragment.prototype.document = function() {
-      return this.root().documentObject;
-    };
-
-    XMLFragment.prototype.end = function(options) {
-      return this.document().toString(options);
-    };
-
-    XMLFragment.prototype.prev = function() {
-      var i;
-      if (this.isRoot) {
-        throw new Error("Root node has no siblings");
-      }
-      i = this.parent.children.indexOf(this);
-      if (i < 1) {
-        throw new Error("Already at the first node");
-      }
-      return this.parent.children[i - 1];
-    };
-
-    XMLFragment.prototype.next = function() {
-      var i;
-      if (this.isRoot) {
-        throw new Error("Root node has no siblings");
-      }
-      i = this.parent.children.indexOf(this);
-      if (i === -1 || i === this.parent.children.length - 1) {
-        throw new Error("Already at the last node");
-      }
-      return this.parent.children[i + 1];
-    };
-
-    XMLFragment.prototype.clone = function(deep) {
-      var clonedSelf;
-      clonedSelf = new XMLFragment(this.parent, this.name, this.attributes, this.value);
-      if (deep) {
-        this.children.forEach(function(child) {
-          var clonedChild;
-          clonedChild = child.clone(deep);
-          clonedChild.parent = clonedSelf;
-          return clonedSelf.children.push(clonedChild);
-        });
-      }
-      return clonedSelf;
-    };
-
-    XMLFragment.prototype.importXMLBuilder = function(xmlbuilder) {
-      var clonedRoot;
-      clonedRoot = xmlbuilder.root().clone(true);
-      clonedRoot.parent = this;
-      this.children.push(clonedRoot);
-      clonedRoot.isRoot = false;
-      return this;
-    };
-
-    XMLFragment.prototype.attribute = function(name, value) {
-      var _ref;
-      if (!(name != null)) {
-        throw new Error("Missing attribute name");
-      }
-      if (!(value != null)) {
-        throw new Error("Missing attribute value");
-      }
-      name = '' + name || '';
-      value = '' + value || '';
-      if ((_ref = this.attributes) == null) {
-        this.attributes = {};
-      }
-      this.attributes[name] = this.escape(value);
-      return this;
-    };
-
-    XMLFragment.prototype.removeAttribute = function(name) {
-      if (!(name != null)) {
-        throw new Error("Missing attribute name");
-      }
-      name = '' + name || '';
-      delete this.attributes[name];
-      return this;
-    };
-
-    XMLFragment.prototype.toString = function(options, level) {
-      var attName, attValue, child, indent, newline, pretty, r, space, _i, _len, _ref, _ref1;
-      pretty = (options != null) && options.pretty || false;
-      indent = (options != null) && options.indent || '  ';
-      newline = (options != null) && options.newline || '\n';
-      level || (level = 0);
-      space = new Array(level + 1).join(indent);
-      r = '';
-      if (pretty) {
-        r += space;
-      }
-      if (!(this.value != null)) {
-        r += '<' + this.name;
-      } else {
-        r += '' + this.value;
-      }
-      _ref = this.attributes;
-      for (attName in _ref) {
-        attValue = _ref[attName];
-        if (this.name === '!DOCTYPE') {
-          r += ' ' + attValue;
-        } else {
-          r += ' ' + attName + '="' + attValue + '"';
-        }
-      }
-      if (this.children.length === 0) {
-        if (!(this.value != null)) {
-          r += this.name === '?xml' ? '?>' : this.name === '!DOCTYPE' ? '>' : '/>';
-        }
-        if (pretty) {
-          r += newline;
-        }
-      } else if (pretty && this.children.length === 1 && this.children[0].value) {
-        r += '>';
-        r += this.children[0].value;
-        r += '</' + this.name + '>';
-        r += newline;
-      } else {
-        r += '>';
-        if (pretty) {
-          r += newline;
-        }
-        _ref1 = this.children;
-        for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
-          child = _ref1[_i];
-          r += child.toString(options, level + 1);
-        }
-        if (pretty) {
-          r += space;
-        }
-        r += '</' + this.name + '>';
-        if (pretty) {
-          r += newline;
-        }
-      }
-      return r;
-    };
-
-    XMLFragment.prototype.escape = function(str) {
-      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&apos;').replace(/"/g, '&quot;');
-    };
-
-    XMLFragment.prototype.assertLegalChar = function(str) {
-      var chars, chr;
-      chars = /[\u0000-\u0008\u000B-\u000C\u000E-\u001F\uD800-\uDFFF\uFFFE-\uFFFF]/;
-      chr = str.match(chars);
-      if (chr) {
-        throw new Error("Invalid character (" + chr + ") in string: " + str);
-      }
-    };
-
-    XMLFragment.prototype.is = function(obj, type) {
-      var clas;
-      clas = Object.prototype.toString.call(obj).slice(8, -1);
-      return (obj != null) && clas === type;
-    };
-
-    XMLFragment.prototype.ele = function(name, attributes, text) {
-      return this.element(name, attributes, text);
-    };
-
-    XMLFragment.prototype.txt = function(value) {
-      return this.text(value);
-    };
-
-    XMLFragment.prototype.dat = function(value) {
-      return this.cdata(value);
-    };
-
-    XMLFragment.prototype.att = function(name, value) {
-      return this.attribute(name, value);
-    };
-
-    XMLFragment.prototype.com = function(value) {
-      return this.comment(value);
-    };
-
-    XMLFragment.prototype.doc = function() {
-      return this.document();
-    };
-
-    XMLFragment.prototype.e = function(name, attributes, text) {
-      return this.element(name, attributes, text);
-    };
-
-    XMLFragment.prototype.t = function(value) {
-      return this.text(value);
-    };
-
-    XMLFragment.prototype.d = function(value) {
-      return this.cdata(value);
-    };
-
-    XMLFragment.prototype.a = function(name, value) {
-      return this.attribute(name, value);
-    };
-
-    XMLFragment.prototype.c = function(value) {
-      return this.comment(value);
-    };
-
-    XMLFragment.prototype.r = function(value) {
-      return this.raw(value);
-    };
-
-    XMLFragment.prototype.u = function() {
-      return this.up();
-    };
-
-    return XMLFragment;
-
-  })();
-
-  module.exports = XMLFragment;
-
-}).call(this);
-
-},{}],38:[function(require,module,exports){
-(function() {
-  var XMLBuilder;
-
-  XMLBuilder = require('./XMLBuilder');
-
-  module.exports.create = function(name, xmldec, doctype) {
-    if (name != null) {
-      return new XMLBuilder(name, xmldec, doctype).root();
-    } else {
-      return new XMLBuilder();
-    }
-  };
-
-}).call(this);
-
-},{"./XMLBuilder":36}],39:[function(require,module,exports){
-
-},{}],40:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 
 
 var base64 = require('base64-js')
@@ -5225,11 +16,9 @@ Buffer.poolSize = 8192
 
 
 Buffer._useTypedArrays = (function () {
-  if (typeof Uint8Array !== 'function' || typeof ArrayBuffer !== 'function')
-    return false
-
   try {
-    var arr = new Uint8Array(0)
+    var buf = new ArrayBuffer(0)
+    var arr = new Uint8Array(buf)
     arr.foo = function () { return 42 }
     return 42 === arr.foo() &&
         typeof arr.subarray === 'function' // Chrome 9-10 lack `subarray`
@@ -5258,13 +47,13 @@ function Buffer (subject, encoding, noZero) {
   else if (type === 'string')
     length = Buffer.byteLength(subject, encoding)
   else if (type === 'object')
-    length = coerce(subject.length) // Assume object is an array
+    length = coerce(subject.length) // assume that object is array-like
   else
     throw new Error('First argument needs to be a number, array or string.')
 
   var buf
   if (Buffer._useTypedArrays) {
-    buf = augment(new Uint8Array(length))
+    buf = Buffer._augment(new Uint8Array(length))
   } else {
     buf = this
     buf.length = length
@@ -5272,8 +61,7 @@ function Buffer (subject, encoding, noZero) {
   }
 
   var i
-  if (Buffer._useTypedArrays && typeof Uint8Array === 'function' &&
-      subject instanceof Uint8Array) {
+  if (Buffer._useTypedArrays && typeof subject.byteLength === 'number') {
     buf._set(subject)
   } else if (isArrayish(subject)) {
     for (i = 0; i < length; i++) {
@@ -5557,8 +345,14 @@ Buffer.prototype.copy = function (target, target_start, start, end) {
   if (target.length - target_start < end - start)
     end = target.length - target_start + start
 
-  for (var i = 0; i < end - start; i++)
-    target[i + target_start] = this[i + start]
+  var len = end - start
+
+  if (len < 100 || !Buffer._useTypedArrays) {
+    for (var i = 0; i < len; i++)
+      target[i + target_start] = this[i + start]
+  } else {
+    target._set(this.subarray(start, start + len), target_start)
+  }
 }
 
 function _base64Slice (buf, start, end) {
@@ -5627,7 +421,7 @@ Buffer.prototype.slice = function (start, end) {
   end = clamp(end, len, len)
 
   if (Buffer._useTypedArrays) {
-    return augment(this.subarray(start, end))
+    return Buffer._augment(this.subarray(start, end))
   } else {
     var sliceLen = end - start
     var newBuf = new Buffer(sliceLen, undefined, true)
@@ -6063,7 +857,7 @@ Buffer.prototype.inspect = function () {
 
 
 Buffer.prototype.toArrayBuffer = function () {
-  if (typeof Uint8Array === 'function') {
+  if (typeof Uint8Array !== 'undefined') {
     if (Buffer._useTypedArrays) {
       return (new Buffer(this)).buffer
     } else {
@@ -6086,7 +880,7 @@ function stringtrim (str) {
 var BP = Buffer.prototype
 
 
-function augment (arr) {
+Buffer._augment = function (arr) {
   arr._isBuffer = true
 
   arr._get = arr.get
@@ -6254,7 +1048,7 @@ function assert (test, message) {
   if (!test) throw new Error(message || 'Failed assertion')
 }
 
-},{"base64-js":41,"ieee754":42}],41:[function(require,module,exports){
+},{"base64-js":3,"ieee754":4}],3:[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -6264,7 +1058,6 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
     ? Uint8Array
     : Array
 
-	var ZERO   = '0'.charCodeAt(0)
 	var PLUS   = '+'.charCodeAt(0)
 	var SLASH  = '/'.charCodeAt(0)
 	var NUMBER = '0'.charCodeAt(0)
@@ -6364,11 +1157,11 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 		return output
 	}
 
-	module.exports.toByteArray = b64ToByteArray
-	module.exports.fromByteArray = uint8ToBase64
-}())
+	exports.toByteArray = b64ToByteArray
+	exports.fromByteArray = uint8ToBase64
+}(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-},{}],42:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 exports.read = function(buffer, offset, isLE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -6454,7 +1247,7 @@ exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128;
 };
 
-},{}],43:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 var Buffer = require('buffer').Buffer;
 var intSize = 4;
 var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
@@ -6491,7 +1284,7 @@ function hash(buf, fn, hashSize, bigEndian) {
 
 module.exports = { hash: hash };
 
-},{"buffer":40}],44:[function(require,module,exports){
+},{"buffer":2}],6:[function(require,module,exports){
 var Buffer = require('buffer').Buffer
 var sha = require('./sha')
 var sha256 = require('./sha256')
@@ -6589,7 +1382,7 @@ each(['createCredentials'
   }
 })
 
-},{"./md5":45,"./rng":46,"./sha":47,"./sha256":48,"buffer":40}],45:[function(require,module,exports){
+},{"./md5":7,"./rng":8,"./sha":9,"./sha256":10,"buffer":2}],7:[function(require,module,exports){
 
 
 var helpers = require('./helpers');
@@ -6736,7 +1529,7 @@ module.exports = function md5(buf) {
   return helpers.hash(buf, core_md5, 16);
 };
 
-},{"./helpers":43}],46:[function(require,module,exports){
+},{"./helpers":5}],8:[function(require,module,exports){
 (function() {
   var _global = this;
 
@@ -6766,7 +1559,7 @@ module.exports = function md5(buf) {
 
 }())
 
-},{}],47:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 
 
 var helpers = require('./helpers');
@@ -6850,7 +1643,7 @@ module.exports = function sha1(buf) {
   return helpers.hash(buf, core_sha1, 20, true);
 };
 
-},{"./helpers":43}],48:[function(require,module,exports){
+},{"./helpers":5}],10:[function(require,module,exports){
 
 
 
@@ -6925,7 +1718,7 @@ module.exports = function sha256(buf) {
   return helpers.hash(buf, core_sha256, 32, true);
 };
 
-},{"./helpers":43}],49:[function(require,module,exports){
+},{"./helpers":5}],11:[function(require,module,exports){
 
 function EventEmitter() {
   this._events = this._events || {};
@@ -7039,7 +1832,9 @@ EventEmitter.prototype.addListener = function(type, listener) {
                     'leak detected. %d listeners added. ' +
                     'Use emitter.setMaxListeners() to increase limit.',
                     this._events[type].length);
-      console.trace();
+      if (typeof console.trace === 'function') {
+        console.trace();
+      }
     }
   }
 
@@ -7189,7 +1984,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],50:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   module.exports = function inherits(ctor, superCtor) {
     ctor.super_ = superCtor
@@ -7212,7 +2007,70 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],51:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
+
+var process = module.exports = {};
+
+process.nextTick = (function () {
+    var canSetImmediate = typeof window !== 'undefined'
+    && window.setImmediate;
+    var canPost = typeof window !== 'undefined'
+    && window.postMessage && window.addEventListener
+    ;
+
+    if (canSetImmediate) {
+        return function (f) { return window.setImmediate(f) };
+    }
+
+    if (canPost) {
+        var queue = [];
+        window.addEventListener('message', function (ev) {
+            var source = ev.source;
+            if ((source === window || source === null) && ev.data === 'process-tick') {
+                ev.stopPropagation();
+                if (queue.length > 0) {
+                    var fn = queue.shift();
+                    fn();
+                }
+            }
+        }, true);
+
+        return function nextTick(fn) {
+            queue.push(fn);
+            window.postMessage('process-tick', '*');
+        };
+    }
+
+    return function nextTick(fn) {
+        setTimeout(fn, 0);
+    };
+})();
+
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+}
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+
+},{}],14:[function(require,module,exports){
 (function (global){
 
 ;(function(root) {
@@ -7585,7 +2443,7 @@ if (typeof Object.create === 'function') {
 }(this));
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],52:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 
 'use strict';
 
@@ -7647,7 +2505,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],53:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 
 'use strict';
 
@@ -7714,17 +2572,13 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],54:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":52,"./encode":53}],55:[function(require,module,exports){
-
-(function () {
-  "use strict";
-
+},{"./decode":15,"./encode":16}],18:[function(require,module,exports){
 
 var punycode = require('punycode');
 
@@ -7733,21 +2587,37 @@ exports.resolve = urlResolve;
 exports.resolveObject = urlResolveObject;
 exports.format = urlFormat;
 
+exports.Url = Url;
+
+function Url() {
+  this.protocol = null;
+  this.slashes = null;
+  this.auth = null;
+  this.host = null;
+  this.port = null;
+  this.hostname = null;
+  this.hash = null;
+  this.search = null;
+  this.query = null;
+  this.pathname = null;
+  this.path = null;
+  this.href = null;
+}
+
 
 var protocolPattern = /^([a-z0-9.+-]+:)/i,
     portPattern = /:[0-9]*$/,
 
     delims = ['<', '>', '"', '`', ' ', '\r', '\n', '\t'],
 
-    unwise = ['{', '}', '|', '\\', '^', '~', '`'].concat(delims),
+    unwise = ['{', '}', '|', '\\', '^', '`'].concat(delims),
 
-    autoEscape = ['\''].concat(delims),
-    nonHostChars = ['%', '/', '?', ';', '#']
-      .concat(unwise).concat(autoEscape),
-    nonAuthChars = ['/', '@', '?', '#'].concat(delims),
+    autoEscape = ['\''].concat(unwise),
+    nonHostChars = ['%', '/', '?', ';', '#'].concat(autoEscape),
+    hostEndingChars = ['/', '?', '#'],
     hostnameMaxLen = 255,
-    hostnamePartPattern = /^[a-zA-Z0-9][a-z0-9A-Z_-]{0,62}$/,
-    hostnamePartStart = /^([a-zA-Z0-9][a-z0-9A-Z_-]{0,62})(.*)$/,
+    hostnamePartPattern = /^[a-z0-9A-Z_-]{0,63}$/,
+    hostnamePartStart = /^([a-z0-9A-Z_-]{0,63})(.*)$/,
     unsafeProtocol = {
       'javascript': true,
       'javascript:': true
@@ -7755,17 +2625,6 @@ var protocolPattern = /^([a-z0-9.+-]+:)/i,
     hostlessProtocol = {
       'javascript': true,
       'javascript:': true
-    },
-    pathedProtocol = {
-      'http': true,
-      'https': true,
-      'ftp': true,
-      'gopher': true,
-      'file': true,
-      'http:': true,
-      'ftp:': true,
-      'gopher:': true,
-      'file:': true
     },
     slashedProtocol = {
       'http': true,
@@ -7782,14 +2641,19 @@ var protocolPattern = /^([a-z0-9.+-]+:)/i,
     querystring = require('querystring');
 
 function urlParse(url, parseQueryString, slashesDenoteHost) {
-  if (url && typeof(url) === 'object' && url.href) return url;
+  if (url && isObject(url) && url instanceof Url) return url;
 
-  if (typeof url !== 'string') {
+  var u = new Url;
+  u.parse(url, parseQueryString, slashesDenoteHost);
+  return u;
+}
+
+Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
+  if (!isString(url)) {
     throw new TypeError("Parameter 'url' must be a string, not " + typeof url);
   }
 
-  var out = {},
-      rest = url;
+  var rest = url;
 
   rest = rest.trim();
 
@@ -7797,7 +2661,7 @@ function urlParse(url, parseQueryString, slashesDenoteHost) {
   if (proto) {
     proto = proto[0];
     var lowerProto = proto.toLowerCase();
-    out.protocol = lowerProto;
+    this.protocol = lowerProto;
     rest = rest.substr(proto.length);
   }
 
@@ -7805,62 +2669,56 @@ function urlParse(url, parseQueryString, slashesDenoteHost) {
     var slashes = rest.substr(0, 2) === '//';
     if (slashes && !(proto && hostlessProtocol[proto])) {
       rest = rest.substr(2);
-      out.slashes = true;
+      this.slashes = true;
     }
   }
 
   if (!hostlessProtocol[proto] &&
       (slashes || (proto && !slashedProtocol[proto]))) {
 
-    var atSign = rest.indexOf('@');
-    if (atSign !== -1) {
-      var auth = rest.slice(0, atSign);
 
-      var hasAuth = true;
-      for (var i = 0, l = nonAuthChars.length; i < l; i++) {
-        if (auth.indexOf(nonAuthChars[i]) !== -1) {
-          hasAuth = false;
-          break;
-        }
-      }
 
-      if (hasAuth) {
-        out.auth = decodeURIComponent(auth);
-        rest = rest.substr(atSign + 1);
-      }
+    var hostEnd = -1;
+    for (var i = 0; i < hostEndingChars.length; i++) {
+      var hec = rest.indexOf(hostEndingChars[i]);
+      if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
+        hostEnd = hec;
     }
 
-    var firstNonHost = -1;
-    for (var i = 0, l = nonHostChars.length; i < l; i++) {
-      var index = rest.indexOf(nonHostChars[i]);
-      if (index !== -1 &&
-          (firstNonHost < 0 || index < firstNonHost)) firstNonHost = index;
-    }
-
-    if (firstNonHost !== -1) {
-      out.host = rest.substr(0, firstNonHost);
-      rest = rest.substr(firstNonHost);
+    var auth, atSign;
+    if (hostEnd === -1) {
+      atSign = rest.lastIndexOf('@');
     } else {
-      out.host = rest;
-      rest = '';
+      atSign = rest.lastIndexOf('@', hostEnd);
     }
 
-    var p = parseHost(out.host);
-    var keys = Object.keys(p);
-    for (var i = 0, l = keys.length; i < l; i++) {
-      var key = keys[i];
-      out[key] = p[key];
+    if (atSign !== -1) {
+      auth = rest.slice(0, atSign);
+      rest = rest.slice(atSign + 1);
+      this.auth = decodeURIComponent(auth);
     }
 
-    out.hostname = out.hostname || '';
+    hostEnd = -1;
+    for (var i = 0; i < nonHostChars.length; i++) {
+      var hec = rest.indexOf(nonHostChars[i]);
+      if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
+        hostEnd = hec;
+    }
+    if (hostEnd === -1)
+      hostEnd = rest.length;
 
-    var ipv6Hostname = out.hostname[0] === '[' &&
-        out.hostname[out.hostname.length - 1] === ']';
+    this.host = rest.slice(0, hostEnd);
+    rest = rest.slice(hostEnd);
 
-    if (out.hostname.length > hostnameMaxLen) {
-      out.hostname = '';
-    } else if (!ipv6Hostname) {
-      var hostparts = out.hostname.split(/\./);
+    this.parseHost();
+
+    this.hostname = this.hostname || '';
+
+    var ipv6Hostname = this.hostname[0] === '[' &&
+        this.hostname[this.hostname.length - 1] === ']';
+
+    if (!ipv6Hostname) {
+      var hostparts = this.hostname.split(/\./);
       for (var i = 0, l = hostparts.length; i < l; i++) {
         var part = hostparts[i];
         if (!part) continue;
@@ -7884,32 +2742,37 @@ function urlParse(url, parseQueryString, slashesDenoteHost) {
             if (notHost.length) {
               rest = '/' + notHost.join('.') + rest;
             }
-            out.hostname = validParts.join('.');
+            this.hostname = validParts.join('.');
             break;
           }
         }
       }
     }
 
-    out.hostname = out.hostname.toLowerCase();
+    if (this.hostname.length > hostnameMaxLen) {
+      this.hostname = '';
+    } else {
+      this.hostname = this.hostname.toLowerCase();
+    }
 
     if (!ipv6Hostname) {
-      var domainArray = out.hostname.split('.');
+      var domainArray = this.hostname.split('.');
       var newOut = [];
       for (var i = 0; i < domainArray.length; ++i) {
         var s = domainArray[i];
         newOut.push(s.match(/[^A-Za-z0-9_-]/) ?
             'xn--' + punycode.encode(s) : s);
       }
-      out.hostname = newOut.join('.');
+      this.hostname = newOut.join('.');
     }
 
-    out.host = (out.hostname || '') +
-        ((out.port) ? ':' + out.port : '');
-    out.href += out.host;
+    var p = this.port ? ':' + this.port : '';
+    var h = this.hostname || '';
+    this.host = h + p;
+    this.href += this.host;
 
     if (ipv6Hostname) {
-      out.hostname = out.hostname.substr(1, out.hostname.length - 2);
+      this.hostname = this.hostname.substr(1, this.hostname.length - 2);
       if (rest[0] !== '/') {
         rest = '/' + rest;
       }
@@ -7931,73 +2794,79 @@ function urlParse(url, parseQueryString, slashesDenoteHost) {
 
   var hash = rest.indexOf('#');
   if (hash !== -1) {
-    out.hash = rest.substr(hash);
+    this.hash = rest.substr(hash);
     rest = rest.slice(0, hash);
   }
   var qm = rest.indexOf('?');
   if (qm !== -1) {
-    out.search = rest.substr(qm);
-    out.query = rest.substr(qm + 1);
+    this.search = rest.substr(qm);
+    this.query = rest.substr(qm + 1);
     if (parseQueryString) {
-      out.query = querystring.parse(out.query);
+      this.query = querystring.parse(this.query);
     }
     rest = rest.slice(0, qm);
   } else if (parseQueryString) {
-    out.search = '';
-    out.query = {};
+    this.search = '';
+    this.query = {};
   }
-  if (rest) out.pathname = rest;
-  if (slashedProtocol[proto] &&
-      out.hostname && !out.pathname) {
-    out.pathname = '/';
-  }
-
-  if (out.pathname || out.search) {
-    out.path = (out.pathname ? out.pathname : '') +
-               (out.search ? out.search : '');
+  if (rest) this.pathname = rest;
+  if (slashedProtocol[lowerProto] &&
+      this.hostname && !this.pathname) {
+    this.pathname = '/';
   }
 
-  out.href = urlFormat(out);
-  return out;
-}
+  if (this.pathname || this.search) {
+    var p = this.pathname || '';
+    var s = this.search || '';
+    this.path = p + s;
+  }
+
+  this.href = this.format();
+  return this;
+};
 
 function urlFormat(obj) {
-  if (typeof(obj) === 'string') obj = urlParse(obj);
+  if (isString(obj)) obj = urlParse(obj);
+  if (!(obj instanceof Url)) return Url.prototype.format.call(obj);
+  return obj.format();
+}
 
-  var auth = obj.auth || '';
+Url.prototype.format = function() {
+  var auth = this.auth || '';
   if (auth) {
     auth = encodeURIComponent(auth);
     auth = auth.replace(/%3A/i, ':');
     auth += '@';
   }
 
-  var protocol = obj.protocol || '',
-      pathname = obj.pathname || '',
-      hash = obj.hash || '',
+  var protocol = this.protocol || '',
+      pathname = this.pathname || '',
+      hash = this.hash || '',
       host = false,
       query = '';
 
-  if (obj.host !== undefined) {
-    host = auth + obj.host;
-  } else if (obj.hostname !== undefined) {
-    host = auth + (obj.hostname.indexOf(':') === -1 ?
-        obj.hostname :
-        '[' + obj.hostname + ']');
-    if (obj.port) {
-      host += ':' + obj.port;
+  if (this.host) {
+    host = auth + this.host;
+  } else if (this.hostname) {
+    host = auth + (this.hostname.indexOf(':') === -1 ?
+        this.hostname :
+        '[' + this.hostname + ']');
+    if (this.port) {
+      host += ':' + this.port;
     }
   }
 
-  if (obj.query && typeof obj.query === 'object' &&
-      Object.keys(obj.query).length) {
-    query = querystring.stringify(obj.query);
+  if (this.query &&
+      isObject(this.query) &&
+      Object.keys(this.query).length) {
+    query = querystring.stringify(this.query);
   }
 
-  var search = obj.search || (query && ('?' + query)) || '';
+  var search = this.search || (query && ('?' + query)) || '';
 
   if (protocol && protocol.substr(-1) !== ':') protocol += ':';
 
-  if (obj.slashes ||
+  if (this.slashes ||
       (!protocol || slashedProtocol[protocol]) && host !== false) {
     host = '//' + (host || '');
     if (pathname && pathname.charAt(0) !== '/') pathname = '/' + pathname;
@@ -8008,42 +2877,71 @@ function urlFormat(obj) {
   if (hash && hash.charAt(0) !== '#') hash = '#' + hash;
   if (search && search.charAt(0) !== '?') search = '?' + search;
 
+  pathname = pathname.replace(/[?#]/g, function(match) {
+    return encodeURIComponent(match);
+  });
+  search = search.replace('#', '%23');
+
   return protocol + host + pathname + search + hash;
-}
+};
 
 function urlResolve(source, relative) {
-  return urlFormat(urlResolveObject(source, relative));
+  return urlParse(source, false, true).resolve(relative);
 }
+
+Url.prototype.resolve = function(relative) {
+  return this.resolveObject(urlParse(relative, false, true)).format();
+};
 
 function urlResolveObject(source, relative) {
   if (!source) return relative;
+  return urlParse(source, false, true).resolveObject(relative);
+}
 
-  source = urlParse(urlFormat(source), false, true);
-  relative = urlParse(urlFormat(relative), false, true);
+Url.prototype.resolveObject = function(relative) {
+  if (isString(relative)) {
+    var rel = new Url();
+    rel.parse(relative, false, true);
+    relative = rel;
+  }
 
-  source.hash = relative.hash;
+  var result = new Url();
+  Object.keys(this).forEach(function(k) {
+    result[k] = this[k];
+  }, this);
+
+  result.hash = relative.hash;
 
   if (relative.href === '') {
-    source.href = urlFormat(source);
-    return source;
+    result.href = result.format();
+    return result;
   }
 
   if (relative.slashes && !relative.protocol) {
-    relative.protocol = source.protocol;
-    if (slashedProtocol[relative.protocol] &&
-        relative.hostname && !relative.pathname) {
-      relative.path = relative.pathname = '/';
+    Object.keys(relative).forEach(function(k) {
+      if (k !== 'protocol')
+        result[k] = relative[k];
+    });
+
+    if (slashedProtocol[result.protocol] &&
+        result.hostname && !result.pathname) {
+      result.path = result.pathname = '/';
     }
-    relative.href = urlFormat(relative);
-    return relative;
+
+    result.href = result.format();
+    return result;
   }
 
-  if (relative.protocol && relative.protocol !== source.protocol) {
+  if (relative.protocol && relative.protocol !== result.protocol) {
     if (!slashedProtocol[relative.protocol]) {
-      relative.href = urlFormat(relative);
-      return relative;
+      Object.keys(relative).forEach(function(k) {
+        result[k] = relative[k];
+      });
+      result.href = result.format();
+      return result;
     }
-    source.protocol = relative.protocol;
+
+    result.protocol = relative.protocol;
     if (!relative.host && !hostlessProtocol[relative.protocol]) {
       var relPath = (relative.pathname || '').split('/');
       while (relPath.length && !(relative.host = relPath.shift()));
@@ -8051,104 +2949,106 @@ function urlResolveObject(source, relative) {
       if (!relative.hostname) relative.hostname = '';
       if (relPath[0] !== '') relPath.unshift('');
       if (relPath.length < 2) relPath.unshift('');
-      relative.pathname = relPath.join('/');
+      result.pathname = relPath.join('/');
+    } else {
+      result.pathname = relative.pathname;
     }
-    source.pathname = relative.pathname;
-    source.search = relative.search;
-    source.query = relative.query;
-    source.host = relative.host || '';
-    source.auth = relative.auth;
-    source.hostname = relative.hostname || relative.host;
-    source.port = relative.port;
-    if (source.pathname !== undefined || source.search !== undefined) {
-      source.path = (source.pathname ? source.pathname : '') +
-                    (source.search ? source.search : '');
+    result.search = relative.search;
+    result.query = relative.query;
+    result.host = relative.host || '';
+    result.auth = relative.auth;
+    result.hostname = relative.hostname || relative.host;
+    result.port = relative.port;
+    if (result.pathname || result.search) {
+      var p = result.pathname || '';
+      var s = result.search || '';
+      result.path = p + s;
     }
-    source.slashes = source.slashes || relative.slashes;
-    source.href = urlFormat(source);
-    return source;
+    result.slashes = result.slashes || relative.slashes;
+    result.href = result.format();
+    return result;
   }
 
-  var isSourceAbs = (source.pathname && source.pathname.charAt(0) === '/'),
+  var isSourceAbs = (result.pathname && result.pathname.charAt(0) === '/'),
       isRelAbs = (
-          relative.host !== undefined ||
+          relative.host ||
           relative.pathname && relative.pathname.charAt(0) === '/'
       ),
       mustEndAbs = (isRelAbs || isSourceAbs ||
-                    (source.host && relative.pathname)),
+                    (result.host && relative.pathname)),
       removeAllDots = mustEndAbs,
-      srcPath = source.pathname && source.pathname.split('/') || [],
+      srcPath = result.pathname && result.pathname.split('/') || [],
       relPath = relative.pathname && relative.pathname.split('/') || [],
-      psychotic = source.protocol &&
-          !slashedProtocol[source.protocol];
+      psychotic = result.protocol && !slashedProtocol[result.protocol];
 
   if (psychotic) {
-
-    delete source.hostname;
-    delete source.port;
-    if (source.host) {
-      if (srcPath[0] === '') srcPath[0] = source.host;
-      else srcPath.unshift(source.host);
+    result.hostname = '';
+    result.port = null;
+    if (result.host) {
+      if (srcPath[0] === '') srcPath[0] = result.host;
+      else srcPath.unshift(result.host);
     }
-    delete source.host;
+    result.host = '';
     if (relative.protocol) {
-      delete relative.hostname;
-      delete relative.port;
+      relative.hostname = null;
+      relative.port = null;
       if (relative.host) {
         if (relPath[0] === '') relPath[0] = relative.host;
         else relPath.unshift(relative.host);
       }
-      delete relative.host;
+      relative.host = null;
     }
     mustEndAbs = mustEndAbs && (relPath[0] === '' || srcPath[0] === '');
   }
 
   if (isRelAbs) {
-    source.host = (relative.host || relative.host === '') ?
-                      relative.host : source.host;
-    source.hostname = (relative.hostname || relative.hostname === '') ?
-                      relative.hostname : source.hostname;
-    source.search = relative.search;
-    source.query = relative.query;
+    result.host = (relative.host || relative.host === '') ?
+                  relative.host : result.host;
+    result.hostname = (relative.hostname || relative.hostname === '') ?
+                      relative.hostname : result.hostname;
+    result.search = relative.search;
+    result.query = relative.query;
     srcPath = relPath;
   } else if (relPath.length) {
     if (!srcPath) srcPath = [];
     srcPath.pop();
     srcPath = srcPath.concat(relPath);
-    source.search = relative.search;
-    source.query = relative.query;
-  } else if ('search' in relative) {
+    result.search = relative.search;
+    result.query = relative.query;
+  } else if (!isNullOrUndefined(relative.search)) {
     if (psychotic) {
-      source.hostname = source.host = srcPath.shift();
-      var authInHost = source.host && source.host.indexOf('@') > 0 ?
-                       source.host.split('@') : false;
+      result.hostname = result.host = srcPath.shift();
+      var authInHost = result.host && result.host.indexOf('@') > 0 ?
+                       result.host.split('@') : false;
       if (authInHost) {
-        source.auth = authInHost.shift();
-        source.host = source.hostname = authInHost.shift();
+        result.auth = authInHost.shift();
+        result.host = result.hostname = authInHost.shift();
       }
     }
-    source.search = relative.search;
-    source.query = relative.query;
-    if (source.pathname !== undefined || source.search !== undefined) {
-      source.path = (source.pathname ? source.pathname : '') +
-                    (source.search ? source.search : '');
+    result.search = relative.search;
+    result.query = relative.query;
+    if (!isNull(result.pathname) || !isNull(result.search)) {
+      result.path = (result.pathname ? result.pathname : '') +
+                    (result.search ? result.search : '');
     }
-    source.href = urlFormat(source);
-    return source;
+    result.href = result.format();
+    return result;
   }
+
   if (!srcPath.length) {
-    delete source.pathname;
-    if (!source.search) {
-      source.path = '/' + source.search;
+    result.pathname = null;
+    if (result.search) {
+      result.path = '/' + result.search;
     } else {
-      delete source.path;
+      result.path = null;
     }
-    source.href = urlFormat(source);
-    return source;
+    result.href = result.format();
+    return result;
   }
+
   var last = srcPath.slice(-1)[0];
   var hasTrailingSlash = (
-      (source.host || relative.host) && (last === '.' || last === '..') ||
+      (result.host || relative.host) && (last === '.' || last === '..') ||
       last === '');
 
   var up = 0;
@@ -8184,57 +3084,75 @@ function urlResolveObject(source, relative) {
       (srcPath[0] && srcPath[0].charAt(0) === '/');
 
   if (psychotic) {
-    source.hostname = source.host = isAbsolute ? '' :
+    result.hostname = result.host = isAbsolute ? '' :
                                     srcPath.length ? srcPath.shift() : '';
-    var authInHost = source.host && source.host.indexOf('@') > 0 ?
-                     source.host.split('@') : false;
+    var authInHost = result.host && result.host.indexOf('@') > 0 ?
+                     result.host.split('@') : false;
     if (authInHost) {
-      source.auth = authInHost.shift();
-      source.host = source.hostname = authInHost.shift();
+      result.auth = authInHost.shift();
+      result.host = result.hostname = authInHost.shift();
     }
   }
 
-  mustEndAbs = mustEndAbs || (source.host && srcPath.length);
+  mustEndAbs = mustEndAbs || (result.host && srcPath.length);
 
   if (mustEndAbs && !isAbsolute) {
     srcPath.unshift('');
   }
 
-  source.pathname = srcPath.join('/');
-  if (source.pathname !== undefined || source.search !== undefined) {
-    source.path = (source.pathname ? source.pathname : '') +
-                  (source.search ? source.search : '');
+  if (!srcPath.length) {
+    result.pathname = null;
+    result.path = null;
+  } else {
+    result.pathname = srcPath.join('/');
   }
-  source.auth = relative.auth || source.auth;
-  source.slashes = source.slashes || relative.slashes;
-  source.href = urlFormat(source);
-  return source;
-}
 
-function parseHost(host) {
-  var out = {};
+  if (!isNull(result.pathname) || !isNull(result.search)) {
+    result.path = (result.pathname ? result.pathname : '') +
+                  (result.search ? result.search : '');
+  }
+  result.auth = relative.auth || result.auth;
+  result.slashes = result.slashes || relative.slashes;
+  result.href = result.format();
+  return result;
+};
+
+Url.prototype.parseHost = function() {
+  var host = this.host;
   var port = portPattern.exec(host);
   if (port) {
     port = port[0];
     if (port !== ':') {
-      out.port = port.substr(1);
+      this.port = port.substr(1);
     }
     host = host.substr(0, host.length - port.length);
   }
-  if (host) out.hostname = host;
-  return out;
+  if (host) this.hostname = host;
+};
+
+function isString(arg) {
+  return typeof arg === "string";
 }
 
-}());
+function isObject(arg) {
+  return typeof arg === 'object' && arg !== null;
+}
 
-},{"punycode":51,"querystring":54}],56:[function(require,module,exports){
+function isNull(arg) {
+  return arg === null;
+}
+function isNullOrUndefined(arg) {
+  return  arg == null;
+}
+
+},{"punycode":14,"querystring":17}],19:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],57:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 (function (process,global){
 
 var formatRegExp = /%[sdj%]/g;
@@ -8753,14 +3671,5423 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-}).call(this,{browser:true},typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":56,"inherits":50}]},{},[1]);window.AWS.CloudWatch = window.AWS.Service.defineService('cloudwatch');
+}).call(this,require("G+mPsH"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./support/isBuffer":19,"G+mPsH":13,"inherits":12}],21:[function(require,module,exports){
+var AWS = require('./core');
 
-window.AWS.Service.defineServiceApi(window.AWS.CloudWatch, "2010-08-01", {"format":"query","apiVersion":"2010-08-01","endpointPrefix":"monitoring","resultWrapped":true,"serviceAbbreviation":"CloudWatch","serviceFullName":"Amazon CloudWatch","signatureVersion":"v4","timestampFormat":"iso8601","operations":{"deleteAlarms":{"name":"DeleteAlarms","input":{"type":"structure","members":{"AlarmNames":{"type":"list","members":{},"required":true}}},"output":{"type":"structure","members":{}}},"describeAlarmHistory":{"name":"DescribeAlarmHistory","input":{"type":"structure","members":{"AlarmName":{},"HistoryItemType":{},"StartDate":{"type":"timestamp"},"EndDate":{"type":"timestamp"},"MaxRecords":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"AlarmHistoryItems":{"type":"list","members":{"type":"structure","members":{"AlarmName":{},"Timestamp":{"type":"timestamp"},"HistoryItemType":{},"HistorySummary":{},"HistoryData":{}}}},"NextToken":{}}}},"describeAlarms":{"name":"DescribeAlarms","input":{"type":"structure","members":{"AlarmNames":{"type":"list","members":{}},"AlarmNamePrefix":{},"StateValue":{},"ActionPrefix":{},"MaxRecords":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"MetricAlarms":{"type":"list","members":{"type":"structure","members":{"AlarmName":{},"AlarmArn":{},"AlarmDescription":{},"AlarmConfigurationUpdatedTimestamp":{"type":"timestamp"},"ActionsEnabled":{"type":"boolean"},"OKActions":{"type":"list","members":{}},"AlarmActions":{"type":"list","members":{}},"InsufficientDataActions":{"type":"list","members":{}},"StateValue":{},"StateReason":{},"StateReasonData":{},"StateUpdatedTimestamp":{"type":"timestamp"},"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"type":"list","members":{"type":"structure","members":{"Name":{},"Value":{}}}},"Period":{"type":"integer"},"Unit":{},"EvaluationPeriods":{"type":"integer"},"Threshold":{"type":"float"},"ComparisonOperator":{}}}},"NextToken":{}}}},"describeAlarmsForMetric":{"name":"DescribeAlarmsForMetric","input":{"type":"structure","members":{"MetricName":{"required":true},"Namespace":{"required":true},"Statistic":{},"Dimensions":{"type":"list","members":{"type":"structure","members":{"Name":{"required":true},"Value":{"required":true}},"order":["Name","Value"]}},"Period":{"type":"integer"},"Unit":{}}},"output":{"type":"structure","members":{"MetricAlarms":{"type":"list","members":{"type":"structure","members":{"AlarmName":{},"AlarmArn":{},"AlarmDescription":{},"AlarmConfigurationUpdatedTimestamp":{"type":"timestamp"},"ActionsEnabled":{"type":"boolean"},"OKActions":{"type":"list","members":{}},"AlarmActions":{"type":"list","members":{}},"InsufficientDataActions":{"type":"list","members":{}},"StateValue":{},"StateReason":{},"StateReasonData":{},"StateUpdatedTimestamp":{"type":"timestamp"},"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"type":"list","members":{"type":"structure","members":{"Name":{},"Value":{}}}},"Period":{"type":"integer"},"Unit":{},"EvaluationPeriods":{"type":"integer"},"Threshold":{"type":"float"},"ComparisonOperator":{}}}}}}},"disableAlarmActions":{"name":"DisableAlarmActions","input":{"type":"structure","members":{"AlarmNames":{"type":"list","members":{},"required":true}}},"output":{"type":"structure","members":{}}},"enableAlarmActions":{"name":"EnableAlarmActions","input":{"type":"structure","members":{"AlarmNames":{"type":"list","members":{},"required":true}}},"output":{"type":"structure","members":{}}},"getMetricStatistics":{"name":"GetMetricStatistics","input":{"type":"structure","members":{"Namespace":{"required":true},"MetricName":{"required":true},"Dimensions":{"type":"list","members":{"type":"structure","members":{"Name":{"required":true},"Value":{"required":true}},"order":["Name","Value"]}},"StartTime":{"type":"timestamp","required":true},"EndTime":{"type":"timestamp","required":true},"Period":{"type":"integer","required":true},"Statistics":{"type":"list","members":{},"required":true},"Unit":{}}},"output":{"type":"structure","members":{"Label":{},"Datapoints":{"type":"list","members":{"type":"structure","members":{"Timestamp":{"type":"timestamp"},"SampleCount":{"type":"float"},"Average":{"type":"float"},"Sum":{"type":"float"},"Minimum":{"type":"float"},"Maximum":{"type":"float"},"Unit":{}}}}}}},"listMetrics":{"name":"ListMetrics","input":{"type":"structure","members":{"Namespace":{},"MetricName":{},"Dimensions":{"type":"list","members":{"type":"structure","members":{"Name":{"required":true},"Value":{}}}},"NextToken":{}}},"output":{"type":"structure","members":{"Metrics":{"type":"list","members":{"type":"structure","members":{"Namespace":{},"MetricName":{},"Dimensions":{"type":"list","members":{"type":"structure","members":{"Name":{},"Value":{}}}}}}},"NextToken":{}}}},"putMetricAlarm":{"name":"PutMetricAlarm","input":{"type":"structure","members":{"AlarmName":{"required":true},"AlarmDescription":{},"ActionsEnabled":{"type":"boolean"},"OKActions":{"type":"list","members":{}},"AlarmActions":{"type":"list","members":{}},"InsufficientDataActions":{"type":"list","members":{}},"MetricName":{"required":true},"Namespace":{"required":true},"Statistic":{"required":true},"Dimensions":{"type":"list","members":{"type":"structure","members":{"Name":{"required":true},"Value":{"required":true}},"order":["Name","Value"]}},"Period":{"type":"integer","required":true},"Unit":{},"EvaluationPeriods":{"type":"integer","required":true},"Threshold":{"type":"float","required":true},"ComparisonOperator":{"required":true}}},"output":{"type":"structure","members":{}}},"putMetricData":{"name":"PutMetricData","input":{"type":"structure","members":{"Namespace":{"required":true},"MetricData":{"type":"list","members":{"type":"structure","members":{"MetricName":{"required":true},"Dimensions":{"type":"list","members":{"type":"structure","members":{"Name":{"required":true},"Value":{"required":true}},"order":["Name","Value"]}},"Timestamp":{"type":"timestamp"},"Value":{"type":"float"},"StatisticValues":{"type":"structure","members":{"SampleCount":{"type":"float","required":true},"Sum":{"type":"float","required":true},"Minimum":{"type":"float","required":true},"Maximum":{"type":"float","required":true}}},"Unit":{}}},"required":true}}},"output":{"type":"structure","members":{}}},"setAlarmState":{"name":"SetAlarmState","input":{"type":"structure","members":{"AlarmName":{"required":true},"StateValue":{"required":true},"StateReason":{"required":true},"StateReasonData":{}}},"output":{"type":"structure","members":{}}}},"pagination":{"describeAlarmHistory":{"inputToken":"NextToken","outputToken":"NextToken","limitKey":"MaxRecords","resultKey":"AlarmHistoryItems"},"describeAlarms":{"inputToken":"NextToken","outputToken":"NextToken","limitKey":"MaxRecords","resultKey":"MetricAlarms"},"describeAlarmsForMetric":{"resultKey":"MetricAlarms"},"listMetrics":{"inputToken":"NextToken","outputToken":"NextToken","resultKey":"Metrics"}}});
-window.AWS.DynamoDB = window.AWS.Service.defineService('dynamodb');
+AWS.XML.Parser = require('./xml/browser_parser');
+
+require('./http/xhr');
+
+if (typeof window !== 'undefined') window.AWS = AWS;
+
+},{"./core":23,"./http/xhr":31,"./xml/browser_parser":61}],22:[function(require,module,exports){
+var AWS = require('./core');
+require('./credentials');
+require('./credentials/credential_provider_chain');
 
 
-window.AWS.util.update(window.AWS.DynamoDB.prototype, {
+AWS.Config = AWS.util.inherit({
+
+
+  constructor: function Config(options) {
+    if (options === undefined) options = {};
+    options = this.extractCredentials(options);
+
+    AWS.util.each.call(this, this.keys, function (key, value) {
+      this.set(key, options[key], value);
+    });
+  },
+
+
+  update: function update(options, allowUnknownKeys) {
+    allowUnknownKeys = allowUnknownKeys || false;
+    options = this.extractCredentials(options);
+    AWS.util.each.call(this, options, function (key, value) {
+      if (allowUnknownKeys || this.keys.hasOwnProperty(key)) this[key] = value;
+    });
+  },
+
+
+  getCredentials: function getCredentials(callback) {
+    var self = this;
+
+    function finish(err) {
+      callback(err, err ? null : self.credentials);
+    }
+
+    function credError(msg, err) {
+      return new AWS.util.error(err || new Error(), {
+        code: 'CredentialsError', message: msg
+      });
+    }
+
+    function getAsyncCredentials() {
+      self.credentials.get(function(err) {
+        if (err) {
+          var msg = 'Could not load credentials from ' +
+            self.credentials.constructor.name;
+          err = credError(msg, err);
+        }
+        finish(err);
+      });
+    }
+
+    function getStaticCredentials() {
+      var err = null;
+      if (!self.credentials.accessKeyId || !self.credentials.secretAccessKey) {
+        err = credError('Missing credentials');
+      }
+      finish(err);
+    }
+
+    if (self.credentials) {
+      if (typeof self.credentials.get === 'function') {
+        getAsyncCredentials();
+      } else { // static credentials
+        getStaticCredentials();
+      }
+    } else if (self.credentialProvider) {
+      self.credentialProvider.resolve(function(err, creds) {
+        if (err) {
+          err = credError('Could not load credentials from any providers', err);
+        }
+        self.credentials = creds;
+        finish(err);
+      });
+    } else {
+      finish(credError('No credentials to load'));
+    }
+  },
+
+
+  loadFromPath: function loadFromPath(path) {
+    this.clear();
+
+    var options = JSON.parse(AWS.util.readFileSync(path));
+    var fileSystemCreds = new AWS.FileSystemCredentials(path);
+    var chain = new AWS.CredentialProviderChain();
+    chain.providers.unshift(fileSystemCreds);
+    chain.resolve(function (err, creds) {
+      if (err) throw err;
+      else options.credentials = creds;
+    });
+
+    this.constructor(options);
+
+    return this;
+  },
+
+
+  clear: function clear() {
+
+    AWS.util.each.call(this, this.keys, function (key) {
+      delete this[key];
+    });
+
+    this.set('credentials', undefined);
+    this.set('credentialProvider', undefined);
+  },
+
+
+  set: function set(property, value, defaultValue) {
+    if (value === undefined) {
+      if (defaultValue === undefined) {
+        defaultValue = this.keys[property];
+      }
+      if (typeof defaultValue === 'function') {
+        this[property] = defaultValue.call(this);
+      } else {
+        this[property] = defaultValue;
+      }
+    } else {
+      this[property] = value;
+    }
+  },
+
+
+  keys: {
+    credentials: null,
+    credentialProvider: null,
+    region: null,
+    logger: null,
+    apiVersions: {},
+    apiVersion: null,
+    endpoint: undefined,
+    httpOptions: {},
+    maxRetries: undefined,
+    maxRedirects: 10,
+    paramValidation: true,
+    sslEnabled: true,
+    s3ForcePathStyle: false,
+    computeChecksums: true,
+    convertResponseTypes: true,
+    dynamoDbCrc32: true,
+    signatureVersion: null
+  },
+
+
+  extractCredentials: function extractCredentials(options) {
+    if (options.accessKeyId && options.secretAccessKey) {
+      options = AWS.util.copy(options);
+      options.credentials = new AWS.Credentials(options);
+    }
+    return options;
+  }
+});
+
+
+AWS.config = new AWS.Config();
+
+},{"./core":23,"./credentials":24,"./credentials/credential_provider_chain":25}],23:[function(require,module,exports){
+
+var AWS = { util: require('./util') };
+
+
+var _hidden = {}; _hidden = {}; // hack to parse macro
+
+module.exports = AWS;
+
+AWS.util.update(AWS, {
+
+
+  VERSION: '2.0.0-rc.20',
+
+
+  Signers: {},
+
+
+  Protocol: {
+    Json: require('./protocol/json'),
+    Query: require('./protocol/query'),
+    Rest: require('./protocol/rest'),
+    RestJson: require('./protocol/rest_json'),
+    RestXml: require('./protocol/rest_xml')
+  },
+
+
+  XML: {
+    Builder: require('./xml/builder'),
+    Parser: null // conditionally set based on environment
+  },
+
+
+  JSON: {
+    Builder: require('./json/builder'),
+    Parser: require('./json/parser')
+  },
+
+
+  Model: {
+    Api: require('./model/api'),
+    Operation: require('./model/operation'),
+    Shape: require('./model/shape'),
+    Paginator: require('./model/paginator'),
+    ResourceWaiter: require('./model/resource_waiter')
+  },
+
+  util: require('./util')
+});
+
+require('./service');
+
+require('./credentials');
+require('./credentials/credential_provider_chain');
+require('./credentials/temporary_credentials');
+require('./credentials/web_identity_credentials');
+require('./credentials/saml_credentials');
+
+require('./config');
+require('./http');
+require('./sequential_executor');
+require('./event_listeners');
+require('./request');
+require('./response');
+require('./resource_waiter');
+require('./signers/request_signer');
+require('./param_validator');
+
+
+AWS.events = new AWS.SequentialExecutor();
+
+},{"./config":22,"./credentials":24,"./credentials/credential_provider_chain":25,"./credentials/saml_credentials":26,"./credentials/temporary_credentials":27,"./credentials/web_identity_credentials":28,"./event_listeners":29,"./http":30,"./json/builder":32,"./json/parser":33,"./model/api":34,"./model/operation":36,"./model/paginator":37,"./model/resource_waiter":38,"./model/shape":39,"./param_validator":40,"./protocol/json":41,"./protocol/query":42,"./protocol/rest":43,"./protocol/rest_json":44,"./protocol/rest_xml":45,"./request":47,"./resource_waiter":48,"./response":49,"./sequential_executor":50,"./service":51,"./signers/request_signer":53,"./util":60,"./xml/builder":62}],24:[function(require,module,exports){
+var AWS = require('./core');
+
+
+AWS.Credentials = AWS.util.inherit({
+
+  constructor: function Credentials() {
+    AWS.util.hideProperties(this, ['secretAccessKey']);
+
+    this.expired = false;
+    this.expireTime = null;
+    if (arguments.length === 1 && typeof arguments[0] === 'object') {
+      var creds = arguments[0].credentials || arguments[0];
+      this.accessKeyId = creds.accessKeyId;
+      this.secretAccessKey = creds.secretAccessKey;
+      this.sessionToken = creds.sessionToken;
+    } else {
+      this.accessKeyId = arguments[0];
+      this.secretAccessKey = arguments[1];
+      this.sessionToken = arguments[2];
+    }
+  },
+
+
+  expiryWindow: 15,
+
+
+  needsRefresh: function needsRefresh() {
+    var currentTime = AWS.util.date.getDate().getTime();
+    var adjustedTime = new Date(currentTime + this.expiryWindow * 1000);
+
+    if (this.expireTime && adjustedTime > this.expireTime) {
+      return true;
+    } else {
+      return this.expired || !this.accessKeyId || !this.secretAccessKey;
+    }
+  },
+
+
+  get: function get(callback) {
+    var self = this;
+    if (this.needsRefresh()) {
+      this.refresh(function(err) {
+        if (!err) self.expired = false; // reset expired flag
+        if (callback) callback(err);
+      });
+    } else if (callback) {
+      callback();
+    }
+  },
+
+
+  refresh: function refresh(callback) {
+    this.expired = false;
+    callback();
+  }
+});
+
+},{"./core":23}],25:[function(require,module,exports){
+var AWS = require('../core');
+
+
+AWS.CredentialProviderChain = AWS.util.inherit(AWS.Credentials, {
+
+
+  constructor: function CredentialProviderChain(providers) {
+    if (providers) {
+      this.providers = providers;
+    } else {
+      this.providers = AWS.CredentialProviderChain.defaultProviders.slice(0);
+    }
+  },
+
+
+  resolve: function resolve(callback) {
+    if (this.providers.length === 0) {
+      callback(new Error('No providers'));
+      return this;
+    }
+
+    var index = 0;
+    var providers = this.providers.slice(0);
+
+    function resolveNext(err, creds) {
+      if ((!err && creds) || index === providers.length) {
+        callback(err, creds);
+        return;
+      }
+
+      var provider = providers[index++];
+      if (typeof provider === 'function') {
+        creds = provider.call();
+      } else {
+        creds = provider;
+      }
+
+      if (creds.get) {
+        creds.get(function(err) {
+          resolveNext(err, err ? null : creds);
+        });
+      } else {
+        resolveNext(null, creds);
+      }
+    }
+
+    resolveNext();
+    return this;
+  }
+
+});
+
+
+AWS.CredentialProviderChain.defaultProviders = [];
+
+},{"../core":23}],26:[function(require,module,exports){
+var AWS = require('../core');
+
+
+AWS.SAMLCredentials = AWS.util.inherit(AWS.Credentials, {
+
+  constructor: function SAMLCredentials(params) {
+    AWS.Credentials.call(this);
+    this.expired = true;
+    this.service = new AWS.STS();
+    this.params = params;
+  },
+
+
+  refresh: function refresh(callback) {
+    var self = this;
+    if (!callback) callback = function(err) { if (err) throw err; };
+
+    self.service.assumeRoleWithSAML(self.params, function (err, data) {
+      if (!err) {
+        self.service.credentialsFrom(data, self);
+      }
+      callback(err);
+    });
+  }
+});
+
+},{"../core":23}],27:[function(require,module,exports){
+var AWS = require('../core');
+
+
+AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
+
+  constructor: function TemporaryCredentials(params) {
+    AWS.Credentials.call(this);
+    this.loadMasterCredentials();
+    this.service = new AWS.STS();
+    this.expired = true;
+
+    this.params = params || {};
+    if (this.params.RoleArn) {
+      this.params.RoleSessionName =
+        this.params.RoleSessionName || 'temporary-credentials';
+    }
+  },
+
+
+  refresh: function refresh(callback) {
+    var self = this;
+    if (!callback) callback = function(err) { if (err) throw err; };
+
+    self.service.config.credentials = self.masterCredentials;
+    var operation = self.params.RoleArn ?
+      self.service.assumeRole : self.service.getSessionToken;
+    operation.call(self.service, self.params, function (err, data) {
+      if (!err) {
+        self.service.credentialsFrom(data, self);
+      }
+      callback(err);
+    });
+  },
+
+
+  loadMasterCredentials: function loadMasterCredentials() {
+    this.masterCredentials = AWS.config.credentials;
+    while (this.masterCredentials.masterCredentials) {
+      this.masterCredentials = this.masterCredentials.masterCredentials;
+    }
+  }
+});
+
+},{"../core":23}],28:[function(require,module,exports){
+var AWS = require('../core');
+
+
+AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
+
+  constructor: function WebIdentityCredentials(params) {
+    AWS.Credentials.call(this);
+    this.expired = true;
+    this.service = new AWS.STS();
+    this.params = params;
+    this.data = null;
+    this.params.RoleSessionName = this.params.RoleSessionName || 'web-identity';
+  },
+
+
+  refresh: function refresh(callback) {
+    var self = this;
+    if (!callback) callback = function(err) { if (err) throw err; };
+
+    self.service.assumeRoleWithWebIdentity(self.params, function (err, data) {
+      self.data = null;
+      if (!err) {
+        self.data = data;
+        self.service.credentialsFrom(data, self);
+      }
+      callback(err);
+    });
+  }
+});
+
+},{"../core":23}],29:[function(require,module,exports){
+var AWS = require('./core');
+var SequentialExecutor = require('./sequential_executor');
+
+
+AWS.EventListeners = {
+
+  Core: {} /* doc hack */
+};
+
+AWS.EventListeners = {
+  Core: new SequentialExecutor().addNamedListeners(function(add, addAsync) {
+    addAsync('VALIDATE_CREDENTIALS', 'validate',
+        function VALIDATE_CREDENTIALS(req, done) {
+      req.service.config.getCredentials(function(err) {
+        if (err) {
+          req.response.err = AWS.util.error(err,
+            {code: 'SigningError', message: 'Missing credentials in config'});
+        }
+        done();
+      });
+    });
+
+    add('VALIDATE_REGION', 'validate', function VALIDATE_REGION(req) {
+      if (!req.service.config.region && !req.service.hasGlobalEndpoint()) {
+        req.response.error = AWS.util.error(new Error(),
+          {code: 'SigningError', message: 'Missing region in config'});
+      }
+    });
+
+    add('VALIDATE_PARAMETERS', 'validate', function VALIDATE_PARAMETERS(req) {
+      var rules = req.service.api.operations[req.operation].input;
+      new AWS.ParamValidator().validate(rules, req.params);
+    });
+
+    add('SET_CONTENT_LENGTH', 'afterBuild', function SET_CONTENT_LENGTH(req) {
+      if (req.httpRequest.headers['Content-Length'] === undefined) {
+        var length = AWS.util.string.byteLength(req.httpRequest.body);
+        req.httpRequest.headers['Content-Length'] = length;
+      }
+    });
+
+    add('SET_HTTP_HOST', 'afterBuild', function SET_HTTP_HOST(req) {
+      req.httpRequest.headers['Host'] = req.httpRequest.endpoint.host;
+    });
+
+    addAsync('SIGN', 'sign', function SIGN(req, done) {
+      if (!req.service.api.signatureVersion) return done(); // none
+
+      req.service.config.getCredentials(function (err, credentials) {
+        if (err) {
+          req.response.error = err;
+          return done();
+        }
+
+        try {
+          var date = AWS.util.date.getDate();
+          var SignerClass = req.service.getSignerClass(req);
+          var signer = new SignerClass(req.httpRequest,
+            req.service.api.signingName || req.service.api.endpointPrefix);
+
+          delete req.httpRequest.headers['Authorization'];
+          delete req.httpRequest.headers['Date'];
+          delete req.httpRequest.headers['X-Amz-Date'];
+
+          signer.addAuthorization(credentials, date);
+          req.signedAt = date;
+        } catch (e) {
+          req.response.error = e;
+        }
+        done();
+      });
+    });
+
+    add('VALIDATE_RESPONSE', 'validateResponse', function VALIDATE_RESPONSE(resp) {
+      if (this.service.successfulResponse(resp, this)) {
+        resp.data = {};
+        resp.error = null;
+      } else {
+        resp.data = null;
+        resp.error = AWS.util.error(new Error(),
+          {code: 'UnknownError', message: 'An unknown error occurred.'});
+      }
+    });
+
+    addAsync('SEND', 'send', function SEND(resp, done) {
+      resp.httpResponse._abortCallback = done;
+      resp.error = null;
+      resp.data = null;
+
+      function callback(httpResp) {
+        resp.httpResponse.stream = httpResp;
+
+        httpResp.on('headers', function onHeaders(statusCode, headers) {
+          resp.request.emit('httpHeaders', [statusCode, headers, resp]);
+
+          if (!resp.request.httpRequest._streaming) {
+            if (AWS.HttpClient.streamsApiVersion === 2) { // streams2 API check
+              httpResp.on('readable', function onReadable() {
+                var data = httpResp.read();
+                if (data !== null) {
+                  resp.request.emit('httpData', [data, resp]);
+                }
+              });
+            } else { // legacy streams API
+              httpResp.on('data', function onData(data) {
+                resp.request.emit('httpData', [data, resp]);
+              });
+            }
+          }
+        });
+
+        httpResp.on('end', function onEnd() {
+          resp.request.emit('httpDone');
+          done();
+        });
+      }
+
+      function progress(httpResp) {
+        httpResp.on('sendProgress', function onSendProgress(progress) {
+          resp.request.emit('httpUploadProgress', [progress, resp]);
+        });
+
+        httpResp.on('receiveProgress', function onReceiveProgress(progress) {
+          resp.request.emit('httpDownloadProgress', [progress, resp]);
+        });
+      }
+
+      function error(err) {
+        resp.error = AWS.util.error(err, {
+          code: 'NetworkingError',
+          region: resp.request.httpRequest.region,
+          hostname: resp.request.httpRequest.endpoint.hostname,
+          retryable: true
+        });
+        resp.request.emit('httpError', [resp.error, resp], function() {
+          done();
+        });
+      }
+
+      function executeSend() {
+        var http = AWS.HttpClient.getInstance();
+        var httpOptions = resp.request.service.config.httpOptions || {};
+        var stream = http.handleRequest(resp.request.httpRequest, httpOptions,
+                                        callback, error);
+        progress(stream);
+      }
+
+      var timeDiff = (AWS.util.date.getDate() - this.signedAt) / 1000;
+      if (timeDiff >= 60 * 10) { // if we signed 10min ago, re-sign
+        this.emit('sign', [this], function(err) {
+          if (err) done(err);
+          else executeSend();
+        });
+      } else {
+        executeSend();
+      }
+    });
+
+    add('HTTP_HEADERS', 'httpHeaders',
+        function HTTP_HEADERS(statusCode, headers, resp) {
+      resp.httpResponse.statusCode = statusCode;
+      resp.httpResponse.headers = headers;
+      resp.httpResponse.body = new AWS.util.Buffer('');
+      resp.httpResponse.buffers = [];
+      resp.httpResponse.numBytes = 0;
+    });
+
+    add('HTTP_DATA', 'httpData', function HTTP_DATA(chunk, resp) {
+      if (chunk) {
+        if (AWS.util.isNode()) {
+          resp.httpResponse.numBytes += chunk.length;
+
+          var total = resp.httpResponse.headers['content-length'];
+          var progress = { loaded: resp.httpResponse.numBytes, total: total };
+          resp.request.emit('httpDownloadProgress', [progress, resp]);
+        }
+
+        resp.httpResponse.buffers.push(new AWS.util.Buffer(chunk));
+      }
+    });
+
+    add('HTTP_DONE', 'httpDone', function HTTP_DONE(resp) {
+      if (resp.httpResponse.buffers && resp.httpResponse.buffers.length > 0) {
+        var body = AWS.util.buffer.concat(resp.httpResponse.buffers);
+        resp.httpResponse.body = body;
+      }
+      delete resp.httpResponse.numBytes;
+      delete resp.httpResponse.buffers;
+    });
+
+    add('FINALIZE_ERROR', 'retry', function FINALIZE_ERROR(resp) {
+      if (resp.httpResponse.statusCode) {
+        resp.error.statusCode = resp.httpResponse.statusCode;
+        if (resp.error.retryable === undefined) {
+          resp.error.retryable = this.service.retryableError(resp.error, this);
+        }
+      }
+    });
+
+    add('INVALIDATE_CREDENTIALS', 'retry', function INVALIDATE_CREDENTIALS(resp) {
+      if (!resp.error) return;
+      switch (resp.error.code) {
+        case 'RequestExpired': // EC2 only
+        case 'ExpiredTokenException':
+        case 'ExpiredToken':
+          resp.error.retryable = true;
+          resp.request.service.config.credentials.expired = true;
+      }
+    });
+
+    add('REDIRECT', 'retry', function REDIRECT(resp) {
+      if (resp.error && resp.error.statusCode >= 300 &&
+          resp.error.statusCode < 400 && resp.httpResponse.headers['location']) {
+        this.httpRequest.endpoint =
+          new AWS.Endpoint(resp.httpResponse.headers['location']);
+        resp.error.redirect = true;
+        resp.error.retryable = true;
+      }
+    });
+
+    add('RETRY_CHECK', 'retry', function RETRY_CHECK(resp) {
+      if (resp.error) {
+        if (resp.error.redirect && resp.redirectCount < resp.maxRedirects) {
+          resp.error.retryDelay = 0;
+        } else if (resp.error.retryable && resp.retryCount < resp.maxRetries) {
+          var delays = this.service.retryDelays();
+          resp.error.retryDelay = delays[resp.retryCount] || 0;
+        }
+      }
+    });
+
+    addAsync('RESET_RETRY_STATE', 'afterRetry', function RESET_RETRY_STATE(resp, done) {
+      var delay, willRetry = false;
+
+      if (resp.error) {
+        delay = resp.error.retryDelay || 0;
+        if (resp.error.retryable && resp.retryCount < resp.maxRetries) {
+          resp.retryCount++;
+          willRetry = true;
+        } else if (resp.error.redirect && resp.redirectCount < resp.maxRedirects) {
+          resp.redirectCount++;
+          willRetry = true;
+        }
+      }
+
+      if (willRetry) {
+        resp.error = null;
+        setTimeout(done, delay);
+      } else {
+        done();
+      }
+    });
+  }),
+
+  CorePost: new SequentialExecutor().addNamedListeners(function(add) {
+    add('EXTRACT_REQUEST_ID', 'extractData', function EXTRACT_REQUEST_ID(resp) {
+      resp.requestId = resp.httpResponse.headers['x-amz-request-id'] ||
+                       resp.httpResponse.headers['x-amzn-requestid'];
+
+      if (!resp.requestId && resp.data && resp.data.ResponseMetadata) {
+        resp.requestId = resp.data.ResponseMetadata.RequestId;
+      }
+    });
+  }),
+
+  Logger: new SequentialExecutor().addNamedListeners(function(add) {
+    add('LOG_REQUEST', 'complete', function LOG_REQUEST(resp) {
+      var req = resp.request;
+      var logger = req.service.config.logger;
+      if (!logger) return;
+
+      function buildMessage() {
+        var time = AWS.util.date.getDate().getTime();
+        var delta = (time - req.startTime.getTime()) / 1000;
+        var ansi = logger.isTTY ? true : false;
+        var status = resp.httpResponse.statusCode;
+        var params = require('util').inspect(req.params, true, true);
+
+        var message = '';
+        if (ansi) message += '\x1B[33m';
+        message += '[AWS ' + req.service.serviceIdentifier + ' ' + status;
+        message += ' ' + delta.toString() + 's ' + resp.retryCount + ' retries]';
+        if (ansi) message += '\x1B[0;1m';
+        message += ' ' + AWS.util.string.lowerFirst(req.operation);
+        message += '(' + params + ')';
+        if (ansi) message += '\x1B[0m';
+        return message;
+      }
+
+      var line = buildMessage();
+      if (typeof logger.log === 'function') {
+        logger.log(line);
+      } else if (typeof logger.write === 'function') {
+        logger.write(line + '\n');
+      }
+    });
+  }),
+
+  Json: new SequentialExecutor().addNamedListeners(function(add) {
+    var svc = require('./protocol/json');
+    add('BUILD', 'build', svc.buildRequest);
+    add('EXTRACT_DATA', 'extractData', svc.extractData);
+    add('EXTRACT_ERROR', 'extractError', svc.extractError);
+  }),
+
+  Rest: new SequentialExecutor().addNamedListeners(function(add) {
+    var svc = require('./protocol/rest');
+    add('BUILD', 'build', svc.buildRequest);
+    add('EXTRACT_DATA', 'extractData', svc.extractData);
+    add('EXTRACT_ERROR', 'extractError', svc.extractError);
+  }),
+
+  RestJson: new SequentialExecutor().addNamedListeners(function(add) {
+    var svc = require('./protocol/rest_json');
+    add('BUILD', 'build', svc.buildRequest);
+    add('EXTRACT_DATA', 'extractData', svc.extractData);
+    add('EXTRACT_ERROR', 'extractError', svc.extractError);
+  }),
+
+  RestXml: new SequentialExecutor().addNamedListeners(function(add) {
+    var svc = require('./protocol/rest_xml');
+    add('BUILD', 'build', svc.buildRequest);
+    add('EXTRACT_DATA', 'extractData', svc.extractData);
+    add('EXTRACT_ERROR', 'extractError', svc.extractError);
+  }),
+
+  Query: new SequentialExecutor().addNamedListeners(function(add) {
+    var svc = require('./protocol/query');
+    add('BUILD', 'build', svc.buildRequest);
+    add('EXTRACT_DATA', 'extractData', svc.extractData);
+    add('EXTRACT_ERROR', 'extractError', svc.extractError);
+  })
+};
+
+},{"./core":23,"./protocol/json":41,"./protocol/query":42,"./protocol/rest":43,"./protocol/rest_json":44,"./protocol/rest_xml":45,"./sequential_executor":50,"util":20}],30:[function(require,module,exports){
+var AWS = require('./core');
+var inherit = AWS.util.inherit;
+
+
+AWS.Endpoint = inherit({
+
+
+  constructor: function Endpoint(endpoint, config) {
+    AWS.util.hideProperties(this, ['slashes', 'auth', 'hash', 'search', 'query']);
+
+    if (typeof endpoint === 'undefined' || endpoint === null) {
+      throw new Error('Invalid endpoint: ' + endpoint);
+    } else if (typeof endpoint !== 'string') {
+      return AWS.util.copy(endpoint);
+    }
+
+    if (!endpoint.match(/^http/)) {
+      var useSSL = config && config.sslEnabled !== undefined ?
+        config.sslEnabled : AWS.config.sslEnabled;
+      endpoint = (useSSL ? 'https' : 'http') + '://' + endpoint;
+    }
+
+    AWS.util.update(this, AWS.util.urlParse(endpoint));
+
+    if (this.port) {
+      this.port = parseInt(this.port, 10);
+    } else {
+      this.port = this.protocol === 'https:' ? 443 : 80;
+    }
+  }
+
+});
+
+
+AWS.HttpRequest = inherit({
+
+
+  constructor: function HttpRequest(endpoint, region) {
+    endpoint = new AWS.Endpoint(endpoint);
+    this.method = 'POST';
+    this.path = endpoint.path || '/';
+    this.headers = {};
+    this.body = '';
+    this.endpoint = endpoint;
+    this.region = region;
+    this.setUserAgent();
+  },
+
+
+  setUserAgent: function setUserAgent() {
+    var prefix = AWS.util.isBrowser() ? 'X-Amz-' : '';
+    this.headers[prefix + 'User-Agent'] = AWS.util.userAgent();
+  },
+
+
+  pathname: function pathname() {
+    return this.path.split('?', 1)[0];
+  },
+
+
+  search: function search() {
+    return this.path.split('?', 2)[1] || '';
+  }
+
+});
+
+
+AWS.HttpResponse = inherit({
+
+
+  constructor: function HttpResponse() {
+    this.statusCode = undefined;
+    this.headers = {};
+    this.body = undefined;
+  }
+});
+
+
+AWS.HttpClient = inherit({});
+
+
+AWS.HttpClient.getInstance = function getInstance() {
+  if (this.singleton === undefined) {
+    this.singleton = new this();
+  }
+  return this.singleton;
+};
+
+},{"./core":23}],31:[function(require,module,exports){
+var AWS = require('../core');
+var EventEmitter = require('events').EventEmitter;
+require('../http');
+
+
+AWS.XHRClient = AWS.util.inherit({
+  handleRequest: function handleRequest(httpRequest, httpOptions, callback, errCallback) {
+    var self = this;
+    var endpoint = httpRequest.endpoint;
+    var emitter = new EventEmitter();
+    var href = endpoint.protocol + '//' + endpoint.hostname;
+    if (endpoint.port !== 80 && endpoint.port !== 443) {
+      href += ':' + endpoint.port;
+    }
+    href += httpRequest.path;
+
+    var xhr = new XMLHttpRequest(), headersEmitted = false;
+    httpRequest.stream = xhr;
+
+    if (httpOptions.timeout) {
+      xhr.timeout = httpOptions.timeout;
+    }
+
+    xhr.addEventListener('readystatechange', function() {
+      try {
+        if (xhr.status === 0) return; // 0 code is invalid
+      } catch (e) { return; }
+
+      if (this.readyState >= this.HEADERS_RECEIVED && !headersEmitted) {
+        try { xhr.responseType = 'arraybuffer'; } catch (e) {}
+        emitter.statusCode = xhr.status;
+        emitter.headers = self.parseHeaders(xhr.getAllResponseHeaders());
+        emitter.emit('headers', emitter.statusCode, emitter.headers);
+        headersEmitted = true;
+      }
+      if (this.readyState === this.DONE) {
+        self.finishRequest(xhr, emitter);
+      }
+    }, false);
+    xhr.upload.addEventListener('progress', function (evt) {
+      emitter.emit('sendProgress', evt);
+    });
+    xhr.addEventListener('progress', function (evt) {
+      emitter.emit('receiveProgress', evt);
+    }, false);
+    xhr.addEventListener('timeout', function () {
+      errCallback(AWS.util.error(new Error('Timeout'), {code: 'TimeoutError'}));
+    }, false);
+    xhr.addEventListener('error', function () {
+      errCallback(AWS.util.error(new Error('Network Failure'), {
+        code: 'NetworkingError'
+      }));
+    }, false);
+
+    callback(emitter);
+    xhr.open(httpRequest.method, href, httpOptions.xhrAsync !== false);
+    AWS.util.each(httpRequest.headers, function (key, value) {
+      if (key !== 'Content-Length' && key !== 'User-Agent' && key !== 'Host') {
+        xhr.setRequestHeader(key, value);
+      }
+    });
+
+    if (httpRequest.body && typeof httpRequest.body.buffer === 'object') {
+      xhr.send(httpRequest.body.buffer); // typed arrays sent as ArrayBuffer
+    } else {
+      xhr.send(httpRequest.body);
+    }
+
+    return emitter;
+  },
+
+  parseHeaders: function parseHeaders(rawHeaders) {
+    var headers = {};
+    AWS.util.arrayEach(rawHeaders.split(/\r?\n/), function (line) {
+      var key = line.split(':', 1)[0];
+      var value = line.substring(key.length + 2);
+      if (key.length > 0) headers[key] = value;
+    });
+    return headers;
+  },
+
+  finishRequest: function finishRequest(xhr, emitter) {
+    var buffer;
+    if (xhr.responseType === 'arraybuffer' && xhr.response) {
+      var ab = xhr.response;
+      buffer = new AWS.util.Buffer(ab.byteLength);
+      var view = new Uint8Array(ab);
+      for (var i = 0; i < buffer.length; ++i) {
+        buffer[i] = view[i];
+      }
+    }
+
+    try {
+      if (!buffer && typeof xhr.responseText === 'string') {
+        buffer = new AWS.util.Buffer(xhr.responseText);
+      }
+    } catch (e) {}
+
+    if (buffer) emitter.emit('data', buffer);
+    emitter.emit('end');
+  }
+});
+
+
+AWS.HttpClient.prototype = AWS.XHRClient.prototype;
+
+
+AWS.HttpClient.streamsApiVersion = 1;
+
+},{"../core":23,"../http":30,"events":11}],32:[function(require,module,exports){
+var util = require('../util');
+
+function JsonBuilder() { }
+
+JsonBuilder.prototype.build = function(value, shape) {
+  return JSON.stringify(translate(value, shape));
+};
+
+function translate(value, shape) {
+  if (!shape || value === undefined || value === null) return undefined;
+
+  switch (shape.type) {
+    case 'structure': return translateStructure(value, shape);
+    case 'map': return translateMap(value, shape);
+    case 'list': return translateList(value, shape);
+    default: return translateScalar(value, shape);
+  }
+}
+
+function translateStructure(structure, shape) {
+  var struct = {};
+  util.each(structure, function(name, value) {
+    var memberShape = shape.members[name];
+    if (memberShape) {
+      if (memberShape.location !== 'body') return;
+
+      var result = translate(value, memberShape);
+      if (result !== undefined) struct[name] = result;
+    }
+  });
+  return struct;
+}
+
+function translateList(list, shape) {
+  var out = [];
+  util.arrayEach(list, function(value) {
+    var result = translate(value, shape.member);
+    if (result !== undefined) out.push(result);
+  });
+  return out;
+}
+
+function translateMap(map, shape) {
+  var out = {};
+  util.each(map, function(key, value) {
+    var result = translate(value, shape.value);
+    if (result !== undefined) out[key] = result;
+  });
+  return out;
+}
+
+function translateScalar(value, shape) {
+  return shape.toWireFormat(value);
+}
+
+module.exports = JsonBuilder;
+
+},{"../util":60}],33:[function(require,module,exports){
+var util = require('../util');
+
+function JsonParser() { }
+
+JsonParser.prototype.parse = function(value, shape) {
+  return translate(JSON.parse(value), shape);
+};
+
+function translate(value, shape) {
+  if (!shape || value === undefined || value === null) return undefined;
+
+  switch (shape.type) {
+    case 'structure': return translateStructure(value, shape);
+    case 'map': return translateMap(value, shape);
+    case 'list': return translateList(value, shape);
+    default: return translateScalar(value, shape);
+  }
+}
+
+function translateStructure(structure, shape) {
+  var struct = {};
+  util.each(structure, function(name, value) {
+    var memberShape = shape.members[name];
+    if (memberShape) {
+      var result = translate(value, memberShape);
+      if (result !== undefined) struct[name] = result;
+    }
+  });
+  return struct;
+}
+
+function translateList(list, shape) {
+  var out = [];
+  util.arrayEach(list, function(value) {
+    var result = translate(value, shape.member);
+    if (result !== undefined) out.push(result);
+  });
+  return out;
+}
+
+function translateMap(map, shape) {
+  var out = {};
+  util.each(map, function(key, value) {
+    var result = translate(value, shape.value);
+    if (result !== undefined) out[key] = result;
+  });
+  return out;
+}
+
+function translateScalar(value, shape) {
+  return shape.toType(value);
+}
+
+module.exports = JsonParser;
+
+},{"../util":60}],34:[function(require,module,exports){
+var Collection = require('./collection');
+var Operation = require('./operation');
+var Shape = require('./shape');
+var Paginator = require('./paginator');
+var ResourceWaiter = require('./resource_waiter');
+
+var util = require('../util');
+var property = util.property;
+var memoizedProperty = util.memoizedProperty;
+
+function Api(api, options) {
+  api = api || {};
+  options = options || {};
+  options.api = this;
+
+  api.metadata = api.metadata || {};
+
+  property(this, 'isApi', true, false);
+  property(this, 'apiVersion', api.metadata.apiVersion);
+  property(this, 'endpointPrefix', api.metadata.endpointPrefix);
+  property(this, 'globalEndpoint', api.metadata.globalEndpoint);
+  property(this, 'signatureVersion', api.metadata.signatureVersion);
+  property(this, 'jsonVersion', api.metadata.jsonVersion);
+  property(this, 'targetPrefix', api.metadata.targetPrefix);
+  property(this, 'protocol', api.metadata.protocol);
+  property(this, 'timestampFormat', api.metadata.timestampFormat);
+  property(this, 'xmlNamespaceUri', api.metadata.xmlNamespace);
+  property(this, 'abbreviation', api.metadata.serviceAbbreviation);
+  property(this, 'fullName', api.metadata.serviceFullName);
+
+  memoizedProperty(this, 'className', function() {
+    var name = api.metadata.serviceAbbreviation || api.metadata.serviceFullName;
+    if (!name) return null;
+
+    name = name.replace(/^Amazon|AWS\s*|\(.*|\s+|\W+/g, '');
+    if (name === 'ElasticLoadBalancing') name = 'ELB';
+    return name;
+  });
+
+  property(this, 'operations', new Collection(api.operations, options, function(name, operation) {
+    return new Operation(name, operation, options);
+  }, util.string.lowerFirst));
+
+  property(this, 'shapes', new Collection(api.shapes, options, function(name, shape) {
+    return Shape.create(shape, options);
+  }));
+
+  property(this, 'paginators', new Collection(api.paginators, options, function(name, paginator) {
+    return new Paginator(name, paginator, options);
+  }));
+
+  property(this, 'waiters', new Collection(api.waiters, options, function(name, waiter) {
+    return new ResourceWaiter(name, waiter, options);
+  }, util.string.lowerFirst));
+
+  if (options.documentation) {
+    property(this, 'documentation', api.documentation);
+    property(this, 'documentationUrl', api.documentationUrl);
+  }
+}
+
+module.exports = Api;
+
+},{"../util":60,"./collection":35,"./operation":36,"./paginator":37,"./resource_waiter":38,"./shape":39}],35:[function(require,module,exports){
+var memoizedProperty = require('../util').memoizedProperty;
+
+function Collection(iterable, options, fn, nameTr) {
+  nameTr = nameTr || String;
+  var self = this;
+
+  for (var id in iterable) {
+    if (iterable.hasOwnProperty(id)) {
+      (function(name) {
+        memoizedProperty(self, nameTr(name), function() {
+          return fn(name, iterable[name]);
+        });
+      })(id);
+    }
+  }
+}
+
+module.exports = Collection;
+
+},{"../util":60}],36:[function(require,module,exports){
+var Shape = require('./shape');
+
+var util = require('../util');
+var property = util.property;
+var memoizedProperty = util.memoizedProperty;
+
+function Operation(name, operation, options) {
+  options = options || {};
+
+  property(this, 'name', name);
+  property(this, 'api', options.api, false);
+
+  operation.http = operation.http || {};
+  property(this, 'httpMethod', operation.http.method || 'POST');
+  property(this, 'httpPath', operation.http.requestUri || '/');
+
+  memoizedProperty(this, 'input', function() {
+    if (!operation.input) {
+      return new Shape.create({type: 'structure'}, options);
+    }
+    return Shape.create(operation.input, options);
+  });
+
+  memoizedProperty(this, 'output', function() {
+    if (!operation.output) {
+      return new Shape.create({type: 'structure'}, options);
+    }
+    return Shape.create(operation.output, options);
+  });
+
+  memoizedProperty(this, 'errors', function() {
+    var list = [];
+    if (!operation.errors) return null;
+
+    for (var i = 0; i < operation.errors.length; i++) {
+      list.push(Shape.create(operation.errors[i], options));
+    }
+
+    return list;
+  });
+
+  memoizedProperty(this, 'paginator', function() {
+    return options.api.paginators[name];
+  });
+
+  if (options.documentation) {
+    property(this, 'documentation', operation.documentation);
+    property(this, 'documentationUrl', operation.documentationUrl);
+  }
+}
+
+module.exports = Operation;
+
+},{"../util":60,"./shape":39}],37:[function(require,module,exports){
+var property = require('../util').property;
+
+function Paginator(name, paginator) {
+  property(this, 'inputToken', paginator.input_token);
+  property(this, 'limitKey', paginator.limit_key);
+  property(this, 'moreResults', paginator.more_results);
+  property(this, 'outputToken', paginator.output_token);
+  property(this, 'resultKey', paginator.result_key);
+}
+
+module.exports = Paginator;
+
+},{"../util":60}],38:[function(require,module,exports){
+var Shape = require('./shape');
+var StructureShape = Shape.shapes.StructureShape;
+
+var util = require('../util');
+var property = util.property;
+var memoizedProperty = util.memoizedProperty;
+
+function ResourceWaiter(name, waiter, options) {
+  options = options || {};
+
+  function InnerResourceWaiter() {
+    property(this, 'name', name);
+    property(this, 'api', options.api, false);
+
+    if (waiter.operation) {
+      property(this, 'operation', util.string.lowerFirst(waiter.operation));
+    }
+
+    var self = this, map = {
+      ignoreErrors: 'ignore_errors',
+      successType: 'success_type',
+      successValue: 'success_value',
+      successPath: 'success_path',
+      acceptorType: 'acceptor_type',
+      acceptorValue: 'acceptor_value',
+      acceptorPath: 'acceptor_path',
+      failureType: 'failure_type',
+      failureValue: 'failure_value',
+      failurePath: 'success_path',
+      interval: 'interval',
+      maxAttempts: 'max_attempts'
+    };
+    Object.keys(map).forEach(function(key) {
+      var value = waiter[map[key]];
+      if (value) property(self, key, value);
+    });
+  }
+
+  if (options.api) {
+    var proto = null;
+    if (waiter['extends']) {
+      proto = options.api.waiters[waiter['extends']];
+    } else if (name !== '__default__') {
+      proto = options.api.waiters['__default__'];
+    }
+
+    if (proto) InnerResourceWaiter.prototype = proto;
+  }
+
+  return new InnerResourceWaiter();
+}
+
+module.exports = ResourceWaiter;
+
+},{"../util":60,"./shape":39}],39:[function(require,module,exports){
+var Collection = require('./collection');
+
+var util = require('../util');
+
+function property(obj, name, value) {
+  if (value !== null && value !== undefined) {
+    util.property.apply(this, arguments);
+  }
+}
+
+function memoizedProperty(obj, name) {
+  if (!obj.constructor.prototype[name]) {
+    util.memoizedProperty.apply(this, arguments);
+  }
+}
+
+function Shape(shape, options, memberName) {
+  options = options || {};
+
+  property(this, 'shape', shape.shape);
+  property(this, 'api', options.api, false);
+  property(this, 'type', shape.type);
+  property(this, 'location', shape.location || 'body');
+  property(this, 'queryName', shape.queryName);
+  property(this, 'queryFlattened', shape.queryFlattened);
+  property(this, 'name', this.name || shape.xmlName || shape.locationName ||
+                         memberName);
+  property(this, 'isStreaming', shape.streaming || false);
+  property(this, 'isComposite', shape.isComposite || false);
+  property(this, 'isShape', true, false);
+
+  if (options.documentation) {
+    property(this, 'documentation', shape.documentation);
+    property(this, 'documentationUrl', shape.documentationUrl);
+  }
+
+  if (shape.xmlAttribute) {
+    property(this, 'isXmlAttribute', shape.xmlAttribute || false);
+  }
+
+  property(this, 'defaultValue', null);
+  this.toWireFormat = function(value) {
+    if (value === null || value === undefined) return '';
+    return value;
+  };
+  this.toType = function(value) { return value; };
+}
+
+Shape.normalizedTypes = {
+  character: 'string',
+  double: 'float',
+  long: 'integer',
+  short: 'integer',
+  biginteger: 'integer',
+  bigdecimal: 'float',
+  blob: 'binary'
+};
+
+Shape.types = {
+  structure: StructureShape,
+  list: ListShape,
+  map: MapShape,
+  boolean: BooleanShape,
+  timestamp: TimestampShape,
+  float: FloatShape,
+  integer: IntegerShape,
+  string: StringShape,
+  base64: Base64Shape,
+  binary: BinaryShape
+};
+
+Shape.resolve = function resolve(shape, options) {
+  if (shape.shape) {
+    var refShape = options.api.shapes[shape.shape];
+    if (!refShape) {
+      throw new Error('Cannot find shape reference: ' + shape.shape);
+    }
+
+    return refShape;
+  } else {
+    return null;
+  }
+};
+
+Shape.create = function create(shape, options, memberName) {
+  if (shape.isShape) return shape;
+
+  var refShape = Shape.resolve(shape, options);
+  if (refShape) {
+    var filteredKeys = Object.keys(shape);
+    if (!options.documentation) {
+      filteredKeys = filteredKeys.filter(function(name) {
+        return !name.match(/documentation/);
+      });
+    }
+    if (filteredKeys === ['shape']) { // no inline customizations
+      return refShape;
+    }
+
+    var InlineShape = function() {
+      refShape.constructor.call(this, shape, options, memberName);
+    };
+    InlineShape.prototype = refShape;
+    return new InlineShape();
+  } else {
+    if (!shape.type) {
+      if (shape.members) shape.type = 'structure';
+      else if (shape.member) shape.type = 'list';
+      else if (shape.key) shape.type = 'map';
+      else shape.type = 'string';
+    }
+
+    var origType = shape.type;
+    if (Shape.normalizedTypes[shape.type]) {
+      shape.type = Shape.normalizedTypes[shape.type];
+    }
+
+    if (Shape.types[shape.type]) {
+      return new Shape.types[shape.type](shape, options, memberName);
+    } else {
+      throw new Error('Unrecognized shape type: ' + origType);
+    }
+  }
+};
+
+function CompositeShape(shape) {
+  Shape.apply(this, arguments);
+  property(this, 'isComposite', true);
+
+  if (shape.flattened) {
+    property(this, 'flattened', shape.flattened || false);    
+  }
+}
+
+function StructureShape(shape, options) {
+  var requiredMap = null, firstInit = !this.isShape;
+
+  CompositeShape.apply(this, arguments);
+
+  if (firstInit) {
+    property(this, 'defaultValue', function() { return {}; });
+    property(this, 'members', {});
+    property(this, 'memberNames', []);
+    property(this, 'required', []);
+    property(this, 'isRequired', function(name) { return false; });
+  }
+
+  if (shape.members) {
+    property(this, 'members', new Collection(shape.members, options, function(name, member) {
+      return Shape.create(member, options, name);
+    }));
+    memoizedProperty(this, 'memberNames', function() {
+      return shape.xmlOrder || Object.keys(shape.members);
+    });
+  }
+
+  if (shape.required) {
+    property(this, 'required', shape.required);
+    property(this, 'isRequired', function(name) {
+      if (!requiredMap) {
+        requiredMap = {};
+        for (var i = 0; i < shape.required.length; i++) {
+          requiredMap[shape.required[i]] = true;
+        }
+      }
+
+      return requiredMap[name];
+    }, false, true);
+  }
+
+  property(this, 'resultWrapper', shape.resultWrapper || null);
+
+  if (shape.payload) {
+    property(this, 'payload', shape.payload);
+  }
+
+  if (typeof shape.xmlNamespace === 'string') {
+    property(this, 'xmlNamespaceUri', shape.xmlNamespace);
+  } else if (typeof shape.xmlNamespace === 'object') {
+    property(this, 'xmlNamespacePrefix', shape.xmlNamespace.prefix);
+    property(this, 'xmlNamespaceUri', shape.xmlNamespace.uri);
+  }
+}
+
+function ListShape(shape, options) {
+  var self = this, firstInit = !this.isShape;
+  CompositeShape.apply(this, arguments);
+
+  if (firstInit) {
+    property(this, 'defaultValue', function() { return []; });
+  }
+
+  if (shape.member) {
+    memoizedProperty(this, 'member', function() {
+      return Shape.create(shape.member, options);
+    });
+  }
+
+  if (this.flattened) {
+    var oldName = this.name;
+    memoizedProperty(this, 'name', function() {
+      return self.member.name || oldName;
+    });
+  }
+}
+
+function MapShape(shape, options) {
+  var firstInit = !this.isShape;
+  CompositeShape.apply(this, arguments);
+
+  if (firstInit) {
+    property(this, 'defaultValue', function() { return {}; });
+    property(this, 'key', Shape.create({type: 'string'}, options));
+    property(this, 'value', Shape.create({type: 'string'}, options));
+  }
+
+  if (shape.key) {
+    memoizedProperty(this, 'key', function() {
+      return Shape.create(shape.key, options);
+    });
+  }
+  if (shape.value) {
+    memoizedProperty(this, 'value', function() {
+      return Shape.create(shape.value, options);
+    });    
+  }
+}
+
+function TimestampShape(shape) {
+  var self = this;
+  Shape.apply(this, arguments);
+
+  if (shape.timestampFormat) {
+    property(this, 'timestampFormat', shape.timestampFormat);
+  } else if (this.api) {
+    property(this, 'timestampFormat', this.api.timestampFormat);
+  }
+
+  this.toType = function(value) {
+    if (value === null || value === undefined) return null;
+    if (typeof value.toUTCString === 'function') return value;
+    return typeof value === 'string' ? util.date.parseTimestamp(value) : null;
+  };
+
+  this.toWireFormat = function(value) {
+    return util.date.format(value, self.timestampFormat);
+  };
+}
+
+function StringShape() {
+  Shape.apply(this, arguments);
+}
+
+function FloatShape() {
+  Shape.apply(this, arguments);
+
+  this.toType = function(value) {
+    if (value === null || value === undefined) return null;
+    return parseFloat(value);
+  };
+  this.toWireFormat = this.toType;
+}
+
+function IntegerShape() {
+  Shape.apply(this, arguments);
+
+  this.toType = function(value) {
+    if (value === null || value === undefined) return null;
+    return parseInt(value, 10);
+  };
+  this.toWireFormat = this.toType;
+}
+
+function BinaryShape() {
+  Shape.apply(this, arguments);
+  this.toType = util.base64.decode;
+  this.toWireFormat = util.base64.encode;
+}
+
+function Base64Shape() {
+  BinaryShape.apply(this, arguments);
+}
+
+function BooleanShape() {
+  Shape.apply(this, arguments);
+
+  this.toType = function(value) {
+    if (value === null || value === undefined) return null;
+    return value === 'true';
+  };
+}
+
+Shape.shapes = {
+  StructureShape: StructureShape,
+  ListShape: ListShape,
+  MapShape: MapShape,
+  StringShape: StringShape,
+  BooleanShape: BooleanShape,
+  Base64Shape: Base64Shape
+};
+
+module.exports = Shape;
+
+},{"../util":60,"./collection":35}],40:[function(require,module,exports){
+var AWS = require('./core');
+
+
+AWS.ParamValidator = AWS.util.inherit({
+  validate: function validate(shape, params, context) {
+    return this.validateMember(shape, params || {}, context || 'params');
+  },
+
+  validateStructure: function validateStructure(shape, params, context) {
+    this.validateType(context, params, ['object'], 'structure');
+
+    for (var i = 0; shape.required && i < shape.required.length; i++) {
+      var paramName = shape.required[i];
+      var value = params[paramName];
+      if (value === undefined || value === null) {
+        this.fail('MissingRequiredParameter',
+          'Missing required key \'' + paramName + '\' in ' + context);
+      }
+    }
+
+    for (paramName in params) {
+      if (!params.hasOwnProperty(paramName)) continue;
+
+      var paramValue = params[paramName],
+          memberShape = shape.members[paramName];
+
+      if (memberShape !== undefined) {
+        var memberContext = [context, paramName].join('.');
+        this.validateMember(memberShape, paramValue, memberContext);
+      } else {
+        this.fail('UnexpectedParameter',
+          'Unexpected key \'' + paramName + '\' found in ' + context);
+      }
+    }
+
+    return true;
+  },
+
+  validateMember: function validateMember(shape, param, context) {
+    switch(shape.type) {
+      case 'structure':
+        return this.validateStructure(shape, param, context);
+      case 'list':
+        return this.validateList(shape, param, context);
+      case 'map':
+        return this.validateMap(shape, param, context);
+      default:
+        return this.validateScalar(shape, param, context);
+    }
+  },
+
+  validateList: function validateList(shape, params, context) {
+    this.validateType(context, params, [Array]);
+
+    for (var i = 0; i < params.length; i++) {
+      this.validateMember(shape.member, params[i], context + '[' + i + ']');
+    }
+  },
+
+  validateMap: function validateMap(shape, params, context) {
+    this.validateType(context, params, ['object'], 'map');
+
+    for (var param in params) {
+      if (!params.hasOwnProperty(param)) continue;
+      this.validateMember(shape.value, params[param],
+                          context + '[\'' +  param + '\']');
+    }
+  },
+
+  validateScalar: function validateScalar(shape, value, context) {
+    switch (shape.type) {
+      case null:
+      case undefined:
+      case 'string':
+        return this.validateType(context, value, ['string']);
+      case 'base64':
+      case 'binary':
+        return this.validatePayload(context, value);
+      case 'integer':
+      case 'float':
+        return this.validateNumber(context, value);
+      case 'boolean':
+        return this.validateType(context, value, ['boolean']);
+      case 'timestamp':
+        return this.validateType(context, value, [Date,
+          /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/, 'number'],
+          'Date object, ISO-8601 string, or a UNIX timestamp');
+      default:
+        return this.fail('UnkownType', 'Unhandled type ' +
+                         shape.type + ' for ' + context);
+    }
+  },
+
+  fail: function fail(code, message) {
+    throw AWS.util.error(new Error(message), {code: code});
+  },
+
+  validateType: function validateType(context, value, acceptedTypes, type) {
+    if (value === null || value === undefined) return;
+
+    var foundInvalidType = false;
+    for (var i = 0; i < acceptedTypes.length; i++) {
+      if (typeof acceptedTypes[i] === 'string') {
+        if (typeof value === acceptedTypes[i]) return;
+      } else if (acceptedTypes[i] instanceof RegExp) {
+        if ((value || '').toString().match(acceptedTypes[i])) return;
+      } else {
+        if (value instanceof acceptedTypes[i]) return;
+        if (AWS.util.isType(value, acceptedTypes[i])) return;
+        if (!type && !foundInvalidType) acceptedTypes = acceptedTypes.slice();
+        acceptedTypes[i] = AWS.util.typeName(acceptedTypes[i]);
+      }
+      foundInvalidType = true;
+    }
+
+    var acceptedType = type;
+    if (!acceptedType) {
+      acceptedType = acceptedTypes.join(', ').replace(/,([^,]+)$/, ', or$1');
+    }
+
+    var vowel = acceptedType.match(/^[aeiou]/i) ? 'n' : '';
+    this.fail('InvalidParameterType', 'Expected ' + context + ' to be a' +
+              vowel + ' ' + acceptedType);
+  },
+
+  validateNumber: function validateNumber(context, value) {
+    if (value === null || value === undefined) return;
+    if (typeof value === 'string') {
+      var castedValue = parseFloat(value);
+      if (castedValue.toString() === value) value = castedValue;
+    }
+    this.validateType(context, value, ['number']);
+  },
+
+  validatePayload: function validatePayload(context, value) {
+    if (value === null || value === undefined) return;
+    if (typeof value === 'string') return;
+    if (value && typeof value.byteLength === 'number') return; // typed arrays
+    if (AWS.util.isNode()) { // special check for buffer/stream in Node.js
+      var Stream = AWS.util.nodeRequire('stream').Stream;
+      if (AWS.util.Buffer.isBuffer(value) || value instanceof Stream) return;
+    }
+
+    var types = ['Buffer', 'Stream', 'File', 'Blob', 'ArrayBuffer', 'DataView'];
+    if (value) {
+      for (var i = 0; i < types.length; i++) {
+        if (AWS.util.isType(value, types[i])) return;
+        if (AWS.util.typeName(value.constructor) === types[i]) return;
+      }
+    }
+
+    this.fail('InvalidParameterType', 'Expected ' + context + ' to be a ' +
+      'string, Buffer, Stream, Blob, or typed array object');
+  }
+});
+
+},{"./core":23}],41:[function(require,module,exports){
+var util = require('../util');
+var JsonBuilder = require('../json/builder');
+var JsonParser = require('../json/parser');
+
+function buildRequest(req) {
+  var httpRequest = req.httpRequest;
+  var api = req.service.api;
+  var target = api.targetPrefix + '.' + api.operations[req.operation].name;
+  var version = api.jsonVersion || '1.0';
+  var input = api.operations[req.operation].input;
+  var builder = new JsonBuilder();
+
+  if (version === 1) version = '1.0';
+  httpRequest.body = builder.build(req.params || {}, input);
+  httpRequest.headers['Content-Type'] = 'application/x-amz-json-' + version;
+  httpRequest.headers['X-Amz-Target'] = target;
+}
+
+function extractError(resp) {
+  var error = {};
+  var httpResponse = resp.httpResponse;
+
+  if (httpResponse.body.length > 0) {
+    var e = JSON.parse(httpResponse.body.toString());
+    if (e.__type || e.code) {
+      error.code = (e.__type || e.code).split('#').pop();
+    } else {
+      error.code = 'UnknownError';
+    }
+    if (error.code === 'RequestEntityTooLarge') {
+      error.message = 'Request body must be less than 1 MB';
+    } else {
+      error.message = (e.message || e.Message || null);
+    }
+  } else {
+    error.code = httpResponse.statusCode;
+    error.message = null;
+  }
+
+  resp.error = util.error(new Error(), error);
+}
+
+function extractData(resp) {
+  var body = resp.httpResponse.body.toString() || '{}';
+  if (resp.request.service.config.convertResponseTypes === false) {
+    resp.data = JSON.parse(body);
+  } else {
+    var operation = resp.request.service.api.operations[resp.request.operation];
+    var shape = operation.output || {};
+    var parser = new JsonParser();
+    resp.data = parser.parse(body, shape);
+  }
+}
+
+module.exports = {
+  buildRequest: buildRequest,
+  extractError: extractError,
+  extractData: extractData
+};
+
+},{"../json/builder":32,"../json/parser":33,"../util":60}],42:[function(require,module,exports){
+var AWS = require('../core');
+var util = require('../util');
+var QueryParamSerializer = require('../query/query_param_serializer');
+var Shape = require('../model/shape');
+
+function buildRequest(req) {
+  var operation = req.service.api.operations[req.operation];
+  var httpRequest = req.httpRequest;
+  httpRequest.headers['Content-Type'] =
+    'application/x-www-form-urlencoded; charset=utf-8';
+  httpRequest.params = {
+    Version: req.service.api.apiVersion,
+    Action: operation.name
+  };
+
+  var builder = new QueryParamSerializer();
+  builder.serialize(req.params, operation.input, function(name, value) {
+    httpRequest.params[name] = value;
+  });
+  httpRequest.body = util.queryParamsToString(httpRequest.params);
+}
+
+function extractError(resp) {
+  var data, body = resp.httpResponse.body.toString();
+  if (body.match('<UnknownOperationException')) {
+    data = {
+      Code: 'UnknownOperation',
+      Message: 'Unknown operation ' + resp.request.operation
+    };
+  } else {
+    data = new AWS.XML.Parser().parse(body);
+  }
+
+  if (data.Errors) data = data.Errors;
+  if (data.Error) data = data.Error;
+  if (data.Code) {
+    resp.error = util.error(new Error(), {
+      code: data.Code,
+      message: data.Message
+    });
+  } else {
+    resp.error = util.error(new Error(), {
+      code: resp.httpResponse.statusCode,
+      message: null
+    });
+  }
+}
+
+function extractData(resp) {
+  var req = resp.request;
+  var operation = req.service.api.operations[req.operation];
+  var shape = operation.output || {};
+  var origRules = shape;
+
+  if (origRules.resultWrapper) {
+    var tmp = Shape.create({type: 'structure'});
+    tmp.members[origRules.resultWrapper] = shape;
+    tmp.memberNames = [origRules.resultWrapper];
+    util.property(shape, 'name', shape.resultWrapper);
+    shape = tmp;
+  }
+
+  var parser = new AWS.XML.Parser();
+  var data = parser.parse(resp.httpResponse.body.toString(), shape);
+
+  if (origRules.resultWrapper) {
+    if (data[origRules.resultWrapper]) {
+      util.update(data, data[origRules.resultWrapper]);
+      delete data[origRules.resultWrapper];
+    }
+  }
+
+  resp.data = data;
+}
+
+module.exports = {
+  buildRequest: buildRequest,
+  extractError: extractError,
+  extractData: extractData
+};
+
+},{"../core":23,"../model/shape":39,"../query/query_param_serializer":46,"../util":60}],43:[function(require,module,exports){
+var util = require('../util');
+
+function populateMethod(req) {
+  req.httpRequest.method = req.service.api.operations[req.operation].httpMethod;
+}
+
+function populateURI(req) {
+  var operation = req.service.api.operations[req.operation];
+  var input = operation.input;
+  var uri = [req.httpRequest.endpoint.path, operation.httpPath].join('/');
+  uri = uri.replace(/\/+/g, '/');
+
+  var escapePathParamFn = req.service.escapePathParam || escapePathParam;
+  var escapeQuerystringParamFn = req.service.escapeQuerystringParam ||
+                                 escapeQuerystringParam;
+
+  var queryString = {}, queryStringSet = false;
+  util.each(input.members, function (name, member) {
+    var paramValue = req.params[name];
+    if (paramValue === null || paramValue === undefined) return;
+    if (member.location === 'uri') {
+      uri = uri.replace('{' + member.name + '}', escapePathParamFn(paramValue));
+    } else if (member.location === 'querystring') {
+      queryStringSet = true;
+      queryString[member.name] = escapeQuerystringParamFn(paramValue);
+    }
+  });
+
+  if (queryStringSet) {
+    uri += (uri.indexOf('?') >= 0 ? '&' : '?');
+    var parts = [];
+    util.arrayEach(Object.keys(queryString).sort(), function(key) {
+      parts.push(escapeQuerystringParam(key) + '=' + queryString[key]);
+    });
+    uri += parts.join('&');
+  }
+
+  req.httpRequest.path = uri;
+}
+
+function escapePathParam(value) {
+  return util.uriEscape(String(value));
+}
+
+function escapeQuerystringParam(value) {
+  return util.uriEscape(String(value));
+}
+
+function populateHeaders(req) {
+  var operation = req.service.api.operations[req.operation];
+  util.each(operation.input.members, function (name, member) {
+    var value = req.params[name];
+    if (value === null || value === undefined) return;
+
+    if (member.location === 'headers' && member.type === 'map') {
+      util.each(value, function(key, value) {
+        req.httpRequest.headers[member.name + key] = value;
+      });
+    } else if (member.location === 'header') {
+      value = member.toWireFormat(value).toString();
+      req.httpRequest.headers[member.name] = value;
+    }
+  });
+}
+
+function buildRequest(req) {
+  populateMethod(req);
+  populateURI(req);
+  populateHeaders(req);
+}
+
+function extractError() {
+}
+
+function extractData(resp) {
+  var req = resp.request;
+  var data = {};
+  var r = resp.httpResponse;
+  var operation = req.service.api.operations[req.operation];
+  var output = operation.output;
+
+  var headers = {};
+  util.each(r.headers, function (k, v) {
+    headers[k.toLowerCase()] = v;
+  });
+
+  util.each(output.members, function(name, member) {
+    var header = (member.name || name).toLowerCase();
+    if (member.location === 'headers' && member.type === 'map') {
+      data[name] = {};
+      util.each(r.headers, function (k, v) {
+        var result = k.match(new RegExp('^' + member.name + '(.+)', 'i'));
+        if (result !== null) {
+          data[name][result[1]] = v;
+        }
+      });
+    } else if (member.location === 'header') {
+      if (headers[header] !== undefined) {
+        data[name] = headers[header];
+      }
+    } else if (member.location === 'status') {
+      data[name] = parseInt(r.statusCode, 10);
+    }
+  });
+
+  resp.data = data;
+}
+
+module.exports = {
+  buildRequest: buildRequest,
+  extractError: extractError,
+  extractData: extractData
+};
+
+},{"../util":60}],44:[function(require,module,exports){
+var util = require('../util');
+var Rest = require('./rest');
+var Json = require('./json');
+var JsonBuilder = require('../json/builder');
+
+function populateBody(req) {
+  var builder = new JsonBuilder();
+  var input = req.service.api.operations[req.operation].input;
+
+  if (input.payload) {
+    var params = {};
+    var payloadShape = input.members[input.payload];
+    params = req.params[input.payload];
+    if (params === undefined) return;
+
+    if (payloadShape.type === 'structure') {
+      req.httpRequest.body = builder.build(params, payloadShape);
+    } else { // non-JSON payload
+      req.httpRequest.body = params;
+    }
+  } else {
+    req.httpRequest.body = builder.build(req.params, input);
+  }
+}
+
+function buildRequest(req) {
+  Rest.buildRequest(req);
+  populateBody(req);
+}
+
+function extractError(resp) {
+  Json.extractError(resp);
+}
+
+function extractData(resp) {
+  Rest.extractData(resp);
+
+  var req = resp.request;
+  var rules = req.service.api.operations[req.operation].output || {};
+  if (rules.payload) {
+    var payloadMember = rules.members[rules.payload];
+    if (payloadMember.isStreaming) {
+      resp.data[rules.payload] = resp.httpResponse.body;
+    } else if (payloadMember.type === 'structure') {
+      Json.extractData(resp);
+    } else {
+      resp.data[rules.payload] = resp.httpResponse.body.toString();
+    }
+  } else {
+    var data = resp.data;
+    Json.extractData(resp);
+    resp.data = util.merge(data, resp.data);
+  }
+}
+
+module.exports = {
+  buildRequest: buildRequest,
+  extractError: extractError,
+  extractData: extractData
+};
+
+},{"../json/builder":32,"../util":60,"./json":41,"./rest":43}],45:[function(require,module,exports){
+var AWS = require('../core');
+var util = require('../util');
+var Rest = require('./rest');
+
+function populateBody(req) {
+  var input = req.service.api.operations[req.operation].input;
+  var builder = new AWS.XML.Builder();
+  var params = req.params;
+
+  var payload = input.payload;
+  if (payload) {
+    var payloadMember = input.members[payload];
+    params = params[payload];
+    if (params === undefined) return;
+
+    if (payloadMember.type === 'structure') {
+      req.httpRequest.body = builder.toXML(params, payloadMember, payload);
+    } else { // non-xml payload
+      req.httpRequest.body = params;
+    }
+  } else {
+    req.httpRequest.body = builder.toXML(params, input, input.shape ||
+      util.string.upperFirst(req.operation) + 'Request');
+  }
+}
+
+function buildRequest(req) {
+  Rest.buildRequest(req);
+  populateBody(req);
+}
+
+function extractError(resp) {
+  Rest.extractError(resp);
+
+  var data = new AWS.XML.Parser().parse(resp.httpResponse.body.toString());
+  if (data.Errors) data = data.Errors;
+  if (data.Error) data = data.Error;
+  if (data.Code) {
+    resp.error = util.error(new Error(), {
+      code: data.Code,
+      message: data.Message
+    });
+  } else {
+    resp.error = util.error(new Error(), {
+      code: resp.httpResponse.statusCode,
+      message: null
+    });
+  }
+}
+
+function extractData(resp) {
+  Rest.extractData(resp);
+
+  var parser;
+  var req = resp.request;
+  var body = resp.httpResponse.body;
+  var operation = req.service.api.operations[req.operation];
+  var output = operation.output;
+
+  var payload = output.payload;
+  if (payload) {
+    var payloadMember = output.members[payload];
+    if (payloadMember.isStreaming) {
+      resp.data[payload] = body;
+    } else if (payloadMember.type === 'structure') {
+      parser = new AWS.XML.Parser();
+      resp.data = parser.parse(body.toString(), payloadMember);
+    } else {
+      resp.data[payload] = body.toString();
+    }
+  } else if (body.length > 0) {
+    parser = new AWS.XML.Parser();
+    var data = parser.parse(body.toString(), output);
+    util.update(resp.data, data);
+  }
+}
+
+module.exports = {
+  buildRequest: buildRequest,
+  extractError: extractError,
+  extractData: extractData
+};
+
+},{"../core":23,"../util":60,"./rest":43}],46:[function(require,module,exports){
+var util = require('../util');
+
+function QueryParamSerializer() { }
+
+QueryParamSerializer.prototype.serialize = function(params, shape, fn) {
+  serializeStructure('', params, shape, fn);
+};
+
+function serializeStructure(prefix, struct, rules, fn) {
+  util.each(rules.members, function(name, member) {
+    var value = struct[name];
+    if (value === null || value === undefined) return;
+
+    var memberName = prefix ? prefix + '.' + member.name : member.name;
+    serializeMember(memberName, value, member, fn);
+  });
+}
+
+function serializeMap(name, map, rules, fn) {
+  var i = 1;
+  util.each(map, function (key, value) {
+    var prefix = rules.flattened || rules.queryFlattened ? '.' : '.entry.';
+    var position = prefix + (i++) + '.';
+    var keyName = position + (rules.key.name || 'key');
+    var valueName = position + (rules.value.name || 'value');
+    serializeMember(name + keyName, key, rules.key, fn);
+    serializeMember(name + valueName, value, rules.value, fn);
+  });
+}
+
+function serializeList(name, list, rules, fn) {
+  var memberRules = rules.member || {};
+
+  if (list.length === 0) {
+    fn.call(this, name, null);
+    return;
+  }
+
+  util.arrayEach(list, function (v, n) {
+    var suffix = '.' + (n + 1);
+    if (rules.flattened || rules.queryFlattened) {
+      if (memberRules.name) {
+        var parts = name.split('.');
+        parts.pop();
+        parts.push(memberRules.name);
+        name = parts.join('.');
+      }
+    } else {
+      suffix = '.member' + suffix;
+    }
+    serializeMember(name + suffix, v, memberRules, fn);
+  });
+}
+
+function serializeMember(name, value, rules, fn) {
+  if (value === null || value === undefined) return;
+  if (rules.type === 'structure') {
+    serializeStructure(name, value, rules, fn);
+  } else if (rules.type === 'list') {
+    serializeList(name, value, rules, fn);
+  } else if (rules.type === 'map') {
+    serializeMap(name, value, rules, fn);
+  } else {
+    fn(name, rules.toWireFormat(value).toString());
+  }
+}
+
+module.exports = QueryParamSerializer;
+
+},{"../util":60}],47:[function(require,module,exports){
+(function (process){
+var AWS = require('./core');
+var AcceptorStateMachine = require('./state_machine');
+var inherit = AWS.util.inherit;
+
+var hardErrorStates = {success:1, error:1, complete:1};
+var hardErrors = {
+  EvalError: 1,
+  RangeError: 1,
+  ReferenceError: 1,
+  SyntaxError: 1,
+  TypeError: 1,
+  URIError: 1
+};
+
+function isTerminalState(machine) {
+  return hardErrorStates.hasOwnProperty(machine._asm.currentState);
+}
+
+var fsm = new AcceptorStateMachine();
+fsm.setupStates = function() {
+  var transition = function(err, done) {
+    try {
+      var self = this;
+      self.emit(self._asm.currentState, function() {
+        var nextError = self.response.error;
+        if (nextError && isTerminalState(self)) {
+          var isHardError = hardErrors.hasOwnProperty(nextError.name);
+          if (!isHardError) nextError = null;
+        }
+
+        done(nextError);
+      });
+
+    } catch (e) {
+      err = e;
+      if (isTerminalState(self)) {
+        var isHardError = hardErrors.hasOwnProperty(err.name);
+        if (!isHardError) err = null;
+      }
+      done(err);
+    }
+  };
+
+  this.addState('validate', 'build', 'error', transition);
+  this.addState('restart', 'build', 'error', function(err, done) {
+    err = this.response.error;
+    if (!err) return done();
+    if (!err.retryable) return done(err);
+
+    if (this.response.retryCount < this.service.config.maxRetries) {
+      this.response.retryCount++;
+      done();
+    } else {
+      done(err);
+    }
+  });
+  this.addState('build', 'afterBuild', 'restart', transition);
+  this.addState('afterBuild', 'sign', 'restart', transition);
+  this.addState('sign', 'send', 'retry', transition);
+  this.addState('retry', 'afterRetry', 'afterRetry', transition);
+  this.addState('afterRetry', 'sign', 'error', transition);
+  this.addState('send', 'validateResponse', 'retry', transition);
+  this.addState('validateResponse', 'extractData', 'extractError', transition);
+  this.addState('extractError', 'extractData', 'retry', transition);
+  this.addState('extractData', 'success', 'retry', transition);
+  this.addState('success', 'complete', 'complete', transition);
+  this.addState('error', 'complete', 'complete', transition);
+  this.addState('complete', null, 'uncaughtException', transition);
+  this.addState('uncaughtException', function(err, done) {
+    AWS.SequentialExecutor.prototype.unhandledErrorCallback.call(this, err);
+    done(err);
+  });
+};
+fsm.setupStates();
+
+
+AWS.Request = inherit({
+
+
+  constructor: function Request(service, operation, params) {
+    var endpoint = service.endpoint;
+    var region = service.config.region;
+
+    if (service.hasGlobalEndpoint()) region = 'us-east-1';
+
+    this.service = service;
+    this.operation = operation;
+    this.params = params || {};
+    this.httpRequest = new AWS.HttpRequest(endpoint, region);
+    this.startTime = AWS.util.date.getDate();
+
+    this.response = new AWS.Response(this);
+    this.restartCount = 0;
+    this._asm = new AcceptorStateMachine(fsm.states, 'validate');
+
+    AWS.SequentialExecutor.call(this);
+    this.emit = this.emitEvent;
+  },
+
+
+
+
+  send: function send(callback) {
+    if (callback) {
+      this.on('complete', function (resp) {
+        callback.call(resp, resp.error, resp.data);
+      });
+    }
+    this.runTo();
+
+    return this.response;
+  },
+
+  build: function build(callback) {
+    return this.runTo('send', callback);
+  },
+
+  runTo: function runTo(state, done) {
+    this._asm.runTo(state, done, this);
+    return this;
+  },
+
+
+  abort: function abort() {
+    this.removeAllListeners('validateResponse');
+    this.removeAllListeners('extractError');
+    this.on('validateResponse', function addAbortedError(resp) {
+      resp.error = AWS.util.error(new Error('Request aborted by user'), {
+         code: 'RequestAbortedError', retryable: false
+      });
+    });
+
+    if (this.httpRequest.stream) { // abort HTTP stream
+      this.httpRequest.stream.abort();
+      if (this.httpRequest._abortCallback) {
+         this.httpRequest._abortCallback();
+      } else {
+        this.removeAllListeners('send'); // haven't sent yet, so let's not
+      }
+    }
+
+    return this;
+  },
+
+
+  eachPage: function eachPage(callback) {
+    function wrappedCallback(response) {
+      var result = callback.call(response, response.error, response.data);
+      if (result === false) return;
+
+      if (response.hasNextPage()) {
+        response.nextPage().on('complete', wrappedCallback).send();
+      } else {
+        callback.call(response, null, null);
+      }
+    }
+
+    this.on('complete', wrappedCallback).send();
+  },
+
+
+  eachItem: function eachItem(callback) {
+    function wrappedCallback(err, data) {
+      if (err) return callback(err, null);
+      if (data === null) return callback(null, null);
+
+      var config = this.request.service.paginationConfig(this.request.operation);
+      var resultKey = config.resultKey;
+      if (Array.isArray(resultKey)) resultKey = resultKey[0];
+      var results = AWS.util.jamespath.query(resultKey, data);
+      AWS.util.arrayEach(results, function(result) {
+        AWS.util.arrayEach(result, function(item) { callback(null, item); });
+      });
+    }
+
+    this.eachPage(wrappedCallback);
+  },
+
+
+  isPageable: function isPageable() {
+    return this.service.paginationConfig(this.operation) ? true : false;
+  },
+
+
+  createReadStream: function createReadStream() {
+    var streams = AWS.util.nodeRequire('stream');
+    var req = this;
+    var stream = null;
+    var legacyStreams = false;
+
+    if (AWS.HttpClient.streamsApiVersion === 2) {
+      stream = new streams.Readable();
+      stream._read = function() { stream.push(''); };
+    } else {
+      stream = new streams.Stream();
+      stream.readable = true;
+    }
+
+    stream.sent = false;
+    stream.on('newListener', function(event) {
+      if (!stream.sent && (event === 'data' || event === 'readable')) {
+        if (event === 'data') legacyStreams = true;
+        stream.sent = true;
+        process.nextTick(function() { req.send(function() { }); });
+      }
+    });
+
+    this.on('httpHeaders', function streamHeaders(statusCode, headers, resp) {
+      if (statusCode < 300) {
+        this.httpRequest._streaming = true;
+
+        req.removeListener('httpData', AWS.EventListeners.Core.HTTP_DATA);
+        req.removeListener('httpError', AWS.EventListeners.Core.HTTP_ERROR);
+        req.on('httpError', function streamHttpError(error, resp) {
+          resp.error = error;
+          resp.error.retryable = false;
+        });
+
+        var httpStream = resp.httpResponse.stream;
+        stream.response = resp;
+        stream._read = function() {
+          var data;
+          do {
+            data = httpStream.read();
+            if (data) stream.push(data);
+          } while (data);
+          stream.push('');
+        };
+
+        var events = ['end', 'error', (legacyStreams ? 'data' : 'readable')];
+        AWS.util.arrayEach(events, function(event) {
+          httpStream.on(event, function(arg) {
+            stream.emit(event, arg);
+          });
+        });
+      }
+    });
+
+    this.on('error', function(err) {
+      stream.emit('error', err);
+    });
+
+    return stream;
+  },
+
+
+  emitEvent: function emit(eventName, args, done) {
+    if (typeof args === 'function') { done = args; args = null; }
+    if (!done) done = this.unhandledErrorCallback;
+    if (!args) args = this.eventParameters(eventName, this.response);
+
+    var origEmit = AWS.SequentialExecutor.prototype.emit;
+    origEmit.call(this, eventName, args, function (err) {
+      if (err) this.response.error = err;
+      done.call(this, err);
+    });
+  },
+
+
+  eventParameters: function eventParameters(eventName) {
+    switch (eventName) {
+      case 'validate':
+      case 'sign':
+      case 'build':
+      case 'afterValidate':
+      case 'afterBuild':
+        return [this];
+      case 'error':
+        return [this.response.error, this.response];
+      default:
+        return [this.response];
+    }
+  },
+
+
+  presign: function presign(expires, callback) {
+    if (!callback && typeof expires === 'function') {
+      callback = expires;
+      expires = null;
+    }
+    return new AWS.Signers.Presign().sign(this.toGet(), expires, callback);
+  },
+
+
+  toUnauthenticated: function toUnauthenticated() {
+    this.removeListener('validate', AWS.EventListeners.Core.VALIDATE_CREDENTIALS);
+    this.removeListener('sign', AWS.EventListeners.Core.SIGN);
+    return this.toGet();
+  },
+
+
+  toGet: function toGet() {
+    if (this.service.api.protocol === 'query') {
+      this.removeListener('build', this.buildAsGet);
+      this.addListener('build', this.buildAsGet);
+    }
+    return this;
+  },
+
+
+  buildAsGet: function buildAsGet(request) {
+    request.httpRequest.method = 'GET';
+    request.httpRequest.path = '/?' + request.httpRequest.body;
+    request.httpRequest.body = '';
+
+    delete request.httpRequest.headers['Content-Length'];
+    delete request.httpRequest.headers['Content-Type'];
+  }
+});
+
+AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
+
+}).call(this,require("G+mPsH"))
+},{"./core":23,"./state_machine":59,"G+mPsH":13}],48:[function(require,module,exports){
+
+
+var AWS = require('./core');
+var inherit = AWS.util.inherit;
+
+
+AWS.ResourceWaiter = inherit({
+
+  constructor: function constructor(service, state) {
+    this.service = service;
+    this.state = state;
+
+    if (typeof this.state === 'object') {
+      AWS.util.each.call(this, this.state, function (key, value) {
+        this.state = key;
+        this.expectedValue = value;
+      });
+    }
+
+    this.loadWaiterConfig(this.state);
+    if (!this.expectedValue) {
+      this.expectedValue = this.config.successValue;
+    }
+  },
+
+  service: null,
+
+  state: null,
+
+  expectedValue: null,
+
+  config: null,
+
+  waitDone: false,
+
+  Listeners: {
+    retry: new AWS.SequentialExecutor().addNamedListeners(function(add) {
+      add('RETRY_CHECK', 'retry', function(resp) {
+        var waiter = resp.request._waiter;
+        if (resp.error && resp.error.code === 'ResourceNotReady') {
+          resp.error.retryDelay = waiter.config.interval * 1000;
+        }
+      });
+    }),
+
+    output: new AWS.SequentialExecutor().addNamedListeners(function(add) {
+      add('CHECK_OUT_ERROR', 'extractError', function CHECK_OUT_ERROR(resp) {
+        if (resp.error) {
+          resp.request._waiter.setError(resp, true);
+        }
+      });
+
+      add('CHECK_OUTPUT', 'extractData', function CHECK_OUTPUT(resp) {
+        var waiter = resp.request._waiter;
+        var success = waiter.checkSuccess(resp);
+        if (!success) {
+          waiter.setError(resp, success === null ? false : true);
+        } else {
+          resp.error = null;
+        }
+      });
+    }),
+
+    error: new AWS.SequentialExecutor().addNamedListeners(function(add) {
+      add('CHECK_ERROR', 'extractError', function CHECK_ERROR(resp) {
+        var waiter = resp.request._waiter;
+        var success = waiter.checkError(resp);
+        if (!success) {
+          waiter.setError(resp, success === null ? false : true);
+        } else {
+          resp.error = null;
+          resp.request.removeAllListeners('extractData');
+        }
+      });
+
+      add('CHECK_ERR_OUTPUT', 'extractData', function CHECK_ERR_OUTPUT(resp) {
+        resp.request._waiter.setError(resp, true);
+      });
+    })
+  },
+
+
+  wait: function wait(params, callback) {
+    if (typeof params === 'function') {
+      callback = params; params = undefined;
+    }
+
+    var request = this.service.makeRequest(this.config.operation, params);
+    var listeners = this.Listeners[this.config.successType];
+    request._waiter = this;
+    request.response.maxRetries = this.config.maxAttempts;
+    request.addListeners(this.Listeners.retry);
+    if (listeners) request.addListeners(listeners);
+
+    if (callback) request.send(callback);
+    return request;
+  },
+
+  setError: function setError(resp, retryable) {
+    resp.data = null;
+    resp.error = AWS.util.error(resp.error || new Error(), {
+      code: 'ResourceNotReady',
+      message: 'Resource is not in the state ' + this.state,
+      retryable: retryable
+    });
+  },
+
+
+  checkSuccess: function checkSuccess(resp) {
+    if (!this.config.successPath) {
+      return resp.httpResponse.statusCode < 300;
+    }
+
+    var r = AWS.util.jamespath.find(this.config.successPath, resp.data);
+
+    if (this.config.failureValue &&
+        this.config.failureValue.indexOf(r) >= 0) {
+      return null; // fast fail
+    }
+
+    if (this.expectedValue) {
+      return r === this.expectedValue;
+    } else {
+      return r ? true : false;
+    }
+  },
+
+
+  checkError: function checkError(resp) {
+    return resp.httpResponse.statusCode === this.config.successValue;
+  },
+
+
+  loadWaiterConfig: function loadWaiterConfig(state, noException) {
+    if (!this.service.api.waiters[state]) {
+      if (noException) return;
+      throw new AWS.util.error(new Error(), {
+        code: 'StateNotFoundError',
+        message: 'State ' + state + ' not found.'
+      });
+    }
+
+    this.config = this.service.api.waiters[state];
+    var config = this.config;
+
+    (function () { // anonymous function to avoid max complexity count
+      config.successType = config.successType || config.acceptorType;
+      config.successPath = config.successPath || config.acceptorPath;
+      config.successValue = config.successValue || config.acceptorValue;
+      config.failureType = config.failureType || config.acceptorType;
+      config.failurePath = config.failurePath || config.acceptorPath;
+      config.failureValue = config.failureValue || config.acceptorValue;
+    })();
+  }
+});
+
+},{"./core":23}],49:[function(require,module,exports){
+var AWS = require('./core');
+var inherit = AWS.util.inherit;
+
+
+AWS.Response = inherit({
+
+
+  constructor: function Response(request) {
+    this.request = request;
+    this.data = null;
+    this.error = null;
+    this.retryCount = 0;
+    this.redirectCount = 0;
+    this.httpResponse = new AWS.HttpResponse();
+    if (request) {
+      this.maxRetries = request.service.numRetries();
+      this.maxRedirects = request.service.config.maxRedirects;
+    }
+  },
+
+
+  nextPage: function nextPage(callback) {
+    var config;
+    var service = this.request.service;
+    var operation = this.request.operation;
+    try {
+      config = service.paginationConfig(operation, true);
+    } catch (e) { this.error = e; }
+
+    if (!this.hasNextPage()) {
+      if (callback) callback(this.error, null);
+      else if (this.error) throw this.error;
+      return null;
+    }
+
+    var params = AWS.util.copy(this.request.params);
+    if (!this.nextPageTokens) {
+      return callback ? callback(null, null) : null;
+    } else {
+      var inputTokens = config.inputToken;
+      if (typeof inputTokens === 'string') inputTokens = [inputTokens];
+      for (var i = 0; i < inputTokens.length; i++) {
+        params[inputTokens[i]] = this.nextPageTokens[i];
+      }
+      return service.makeRequest(this.request.operation, params, callback);
+    }
+  },
+
+
+  hasNextPage: function hasNextPage() {
+    this.cacheNextPageTokens();
+    if (this.nextPageTokens) return true;
+    if (this.nextPageTokens === undefined) return undefined;
+    else return false;
+  },
+
+
+  cacheNextPageTokens: function cacheNextPageTokens() {
+    if (this.hasOwnProperty('nextPageTokens')) return this.nextPageTokens;
+    this.nextPageTokens = undefined;
+
+    var config = this.request.service.paginationConfig(this.request.operation);
+    if (!config) return this.nextPageTokens;
+
+    this.nextPageTokens = null;
+    if (config.moreResults) {
+      if (!AWS.util.jamespath.find(config.moreResults, this.data)) {
+        return this.nextPageTokens;
+      }
+    }
+
+    var exprs = config.outputToken;
+    if (typeof exprs === 'string') exprs = [exprs];
+    AWS.util.arrayEach.call(this, exprs, function (expr) {
+      var output = AWS.util.jamespath.find(expr, this.data);
+      if (output) {
+        this.nextPageTokens = this.nextPageTokens || [];
+        this.nextPageTokens.push(output);
+      }
+    });
+
+    return this.nextPageTokens;
+  }
+
+});
+
+},{"./core":23}],50:[function(require,module,exports){
+var AWS = require('./core');
+var domain = AWS.util.nodeRequire('domain');
+
+
+AWS.SequentialExecutor = AWS.util.inherit({
+
+  constructor: function SequentialExecutor() {
+    this.domain = domain && domain.active;
+    this._events = {};
+  },
+
+
+  listeners: function listeners(eventName) {
+    return this._events[eventName] ? this._events[eventName].slice(0) : [];
+  },
+
+  on: function on(eventName, listener) {
+    if (this._events[eventName]) {
+      this._events[eventName].push(listener);
+    } else {
+      this._events[eventName] = [listener];
+    }
+    return this;
+  },
+
+
+  onAsync: function onAsync(eventName, listener) {
+    listener._isAsync = true;
+    return this.on(eventName, listener);
+  },
+
+  removeListener: function removeListener(eventName, listener) {
+    var listeners = this._events[eventName];
+    if (listeners) {
+      var length = listeners.length;
+      var position = -1;
+      for (var i = 0; i < length; ++i) {
+        if (listeners[i] === listener) {
+          position = i;
+        }
+      }
+      if (position > -1) {
+        listeners.splice(position, 1);
+      }
+    }
+    return this;
+  },
+
+  removeAllListeners: function removeAllListeners(eventName) {
+    if (eventName) {
+      delete this._events[eventName];
+    } else {
+      this._events = {};
+    }
+    return this;
+  },
+
+
+  emit: function emit(eventName, eventArgs, doneCallback) {
+    if (!doneCallback) doneCallback = this.unhandledErrorCallback;
+    if (domain && this.domain instanceof domain.Domain)
+      this.domain.enter();
+
+    var listeners = this.listeners(eventName);
+    var count = listeners.length;
+    this.callListeners(listeners, eventArgs, doneCallback);
+    return count > 0;
+  },
+
+
+  callListeners: function callListeners(listeners, args, doneCallback) {
+    if (listeners.length === 0) {
+      doneCallback.call(this);
+      if (domain && this.domain instanceof domain.Domain)
+        this.domain.exit();
+    } else {
+      var listener = listeners.shift();
+      if (listener._isAsync) {
+
+        var self = this;
+        var callNextListener = function(err) {
+          if (err) {
+            doneCallback.call(self, err);
+            if (domain && self.domain instanceof domain.Domain)
+              self.domain.exit();
+          } else {
+            self.callListeners(listeners, args, doneCallback);
+          }
+        };
+        listener.apply(this, args.concat([callNextListener]));
+
+      } else {
+
+        try {
+          listener.apply(this, args);
+          this.callListeners(listeners, args, doneCallback);
+        } catch (err) {
+          if (err._hardError) throw err;
+
+          doneCallback.call(this, err);
+          if (domain && this.domain instanceof domain.Domain)
+            this.domain.exit();
+        }
+
+      }
+    }
+  },
+
+
+  addListeners: function addListeners(listeners) {
+    var self = this;
+
+    if (listeners._events) listeners = listeners._events;
+
+    AWS.util.each(listeners, function(event, callbacks) {
+      if (typeof callbacks === 'function') callbacks = [callbacks];
+      AWS.util.arrayEach(callbacks, function(callback) {
+        self.on(event, callback);
+      });
+    });
+
+    return self;
+  },
+
+
+  addNamedListener: function addNamedListener(name, eventName, callback) {
+    this[name] = callback;
+    this.addListener(eventName, callback);
+    return this;
+  },
+
+
+  addNamedAsyncListener: function addNamedAsyncListener(name, eventName, callback) {
+    callback._isAsync = true;
+    return this.addNamedListener(name, eventName, callback);
+  },
+
+
+  addNamedListeners: function addNamedListeners(callback) {
+    var self = this;
+    callback(
+      function() {
+        self.addNamedListener.apply(self, arguments);
+      },
+      function() {
+        self.addNamedAsyncListener.apply(self, arguments);
+      }
+    );
+    return this;
+  },
+
+
+  unhandledErrorCallback: function unhandledErrorCallback(err) {
+    if (err) {
+      if (domain && this.domain instanceof domain.Domain) {
+        err.domainEmitter = this;
+        err.domain = this.domain;
+        err.domainThrown = false;
+        this.domain.emit('error', err);
+      } else {
+        throw err;
+      }
+    }
+  }
+});
+
+
+AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.on;
+
+module.exports = AWS.SequentialExecutor;
+
+},{"./core":23}],51:[function(require,module,exports){
+var AWS = require('./core');
+var Api = require('./model/api');
+var inherit = AWS.util.inherit;
+
+
+AWS.Service = inherit({
+
+  constructor: function Service(config) {
+    if (!this.loadServiceClass) {
+      throw AWS.util.error(new Error(),
+        'Service must be constructed with `new\' operator');
+    }
+    var ServiceClass = this.loadServiceClass(config || {});
+    if (ServiceClass) return new ServiceClass(config);
+    this.initialize(config);
+  },
+
+
+  initialize: function initialize(config) {
+    this.config = new AWS.Config(AWS.config);
+    if (config) this.config.update(config, true);
+
+    this.config.endpoint = this.endpointFromTemplate(this.config.endpoint);
+    this.setEndpoint(this.config.endpoint);
+  },
+
+
+  loadServiceClass: function loadServiceClass(serviceConfig) {
+    var config = serviceConfig;
+    if (!AWS.util.isEmpty(this.api)) {
+      return null;
+    } else if (config.apiConfig) {
+      return AWS.Service.defineServiceApi(this.constructor, config.apiConfig);
+    } else if (!this.constructor.services) {
+      return null;
+    } else {
+      config = new AWS.Config(AWS.config);
+      config.update(serviceConfig, true);
+      var version = config.apiVersions[this.constructor.serviceIdentifier];
+      version = version || config.apiVersion;
+      return this.getLatestServiceClass(version);
+    }
+  },
+
+
+  getLatestServiceClass: function getLatestServiceClass(version) {
+    version = this.getLatestServiceVersion(version);
+    if (this.constructor.services[version] === null) {
+      AWS.Service.defineServiceApi(this.constructor, version);
+    }
+
+    return this.constructor.services[version];
+  },
+
+
+  getLatestServiceVersion: function getLatestServiceVersion(version) {
+    if (!this.constructor.services || this.constructor.services.length === 0) {
+      throw new Error('No services defined on ' +
+                      this.constructor.serviceIdentifier);
+    }
+
+    if (!version) {
+      version = 'latest';
+    } else if (AWS.util.isType(version, Date)) {
+      version = AWS.util.date.iso8601(version).split('T')[0];
+    }
+
+    if (Object.hasOwnProperty(this.constructor.services, version)) {
+      return version;
+    }
+
+    var keys = Object.keys(this.constructor.services).sort();
+    var selectedVersion = null;
+    for (var i = keys.length - 1; i >= 0; i--) {
+      if (keys[i][keys[i].length - 1] !== '*') {
+        selectedVersion = keys[i];
+      }
+      if (keys[i].substr(0, 10) <= version) {
+        return selectedVersion;
+      }
+    }
+
+    throw new Error('Could not find ' + this.constructor.serviceIdentifier +
+                    ' API to satisfy version constraint `' + version + '\'');
+  },
+
+
+  api: {},
+
+
+  defaultRetryCount: 3,
+
+
+  makeRequest: function makeRequest(operation, params, callback) {
+    if (typeof params === 'function') {
+      callback = params;
+      params = null;
+    }
+
+    params = params || {};
+    if (this.config.params) { // copy only toplevel bound params
+      var rules = this.api.operations[operation];
+      if (rules) {
+        params = AWS.util.copy(params);
+        AWS.util.each(this.config.params, function(key, value) {
+          if (rules.input.members[key]) {
+            if (params[key] === undefined || params[key] === null) {
+              params[key] = value;
+            }
+          }
+        });
+      }
+    }
+
+    var request = new AWS.Request(this, operation, params);
+    this.addAllRequestListeners(request);
+
+    if (callback) request.send(callback);
+    return request;
+  },
+
+
+  makeUnauthenticatedRequest: function makeUnauthenticatedRequest(operation, params, callback) {
+    if (typeof params === 'function') {
+      callback = params;
+      params = {};
+    }
+
+    var request = this.makeRequest(operation, params).toUnauthenticated();
+    return callback ? request.send(callback) : request;
+  },
+
+
+  waitFor: function waitFor(state, params, callback) {
+    var waiter = new AWS.ResourceWaiter(this, state);
+    return waiter.wait(params, callback);
+  },
+
+
+  addAllRequestListeners: function addAllRequestListeners(request) {
+    var list = [AWS.events, AWS.EventListeners.Core, this.serviceInterface(),
+                AWS.EventListeners.CorePost];
+    for (var i = 0; i < list.length; i++) {
+      if (list[i]) request.addListeners(list[i]);
+    }
+
+    if (!this.config.paramValidation) {
+      request.removeListener('validate',
+        AWS.EventListeners.Core.VALIDATE_PARAMETERS);
+    }
+
+    if (this.config.logger) { // add logging events
+      request.addListeners(AWS.EventListeners.Logger);
+    }
+
+    this.setupRequestListeners(request);
+  },
+
+
+  setupRequestListeners: function setupRequestListeners() {
+  },
+
+
+  getSignerClass: function getSignerClass() {
+    var version = this.api.signatureVersion;
+    if (this.config.signatureVersion) version = this.config.signatureVersion;
+    else if (this.isRegionV4()) version = 'v4';
+    return AWS.Signers.RequestSigner.getVersion(version);
+  },
+
+
+  serviceInterface: function serviceInterface() {
+    switch (this.api.protocol) {
+      case 'query': return AWS.EventListeners.Query;
+      case 'json': return AWS.EventListeners.Json;
+      case 'rest-json': return AWS.EventListeners.RestJson;
+      case 'rest-xml': return AWS.EventListeners.RestXml;
+    }
+    if (this.api.protocol) {
+      throw new Error('Invalid service `protocol\' ' +
+        this.api.protocol + ' in API config');
+    }
+  },
+
+
+  successfulResponse: function successfulResponse(resp) {
+    return resp.httpResponse.statusCode < 300;
+  },
+
+
+  numRetries: function numRetries() {
+    if (this.config.maxRetries !== undefined) {
+      return this.config.maxRetries;
+    } else {
+      return this.defaultRetryCount;
+    }
+  },
+
+
+  retryDelays: function retryDelays() {
+    var retryCount = this.numRetries();
+    var delays = [];
+    for (var i = 0; i < retryCount; ++i) {
+      delays[i] = Math.pow(2, i) * 30;
+    }
+    return delays;
+  },
+
+
+  retryableError: function retryableError(error) {
+    if (this.networkingError(error)) return true;
+    if (this.expiredCredentialsError(error)) return true;
+    if (this.throttledError(error)) return true;
+    if (error.statusCode >= 500) return true;
+    return false;
+  },
+
+
+  networkingError: function networkingError(error) {
+    return error.code === 'NetworkingError';
+  },
+
+
+  expiredCredentialsError: function expiredCredentialsError(error) {
+    return (error.code === 'ExpiredTokenException');
+  },
+
+
+  throttledError: function throttledError(error) {
+    return (error.code === 'ProvisionedThroughputExceededException');
+  },
+
+
+  endpointFromTemplate: function endpointFromTemplate(endpoint) {
+    if (typeof endpoint !== 'string') return endpoint;
+
+    var e = endpoint;
+    e = e.replace(/\{service\}/g, this.api.endpointPrefix);
+    e = e.replace(/\{region\}/g, this.config.region);
+    e = e.replace(/\{scheme\}/g, this.config.sslEnabled ? 'https' : 'http');
+    return e;
+  },
+
+
+  setEndpoint: function setEndpoint(endpoint) {
+    if (endpoint) {
+      this.endpoint = new AWS.Endpoint(endpoint, this.config);
+    } else if (this.hasGlobalEndpoint()) {
+      this.endpoint = new AWS.Endpoint(this.api.globalEndpoint, this.config);
+    } else {
+      var host = this.api.endpointPrefix + '.' + this.config.region +
+                 this.endpointSuffix();
+      this.endpoint = new AWS.Endpoint(host, this.config);
+    }
+  },
+
+
+  hasGlobalEndpoint: function hasGlobalEndpoint() {
+    if (this.isRegionV4()) return false;
+    return this.api.globalEndpoint;
+  },
+
+
+  endpointSuffix: function endpointSuffix() {
+    var suffix = '.amazonaws.com';
+    if (this.isRegionCN()) return suffix + '.cn';
+    else return suffix;
+  },
+
+
+  isRegionCN: function isRegionCN() {
+    if (!this.config.region) return false;
+    return this.config.region.match(/^cn-/) ? true : false;
+  },
+
+
+  isRegionV4: function isRegionV4() {
+    return this.isRegionCN();
+  },
+
+
+  paginationConfig: function paginationConfig(operation, throwException) {
+    var paginator = this.api.operations[operation].paginator;
+    if (!paginator) {
+      if (throwException) {
+        var e = new Error();
+        throw AWS.util.error(e, 'No pagination configuration for ' + operation);
+      }
+      return null;
+    }
+
+    return paginator;
+  }
+});
+
+AWS.util.update(AWS.Service, {
+
+
+  defineMethods: function defineMethods(svc) {
+    AWS.util.each(svc.prototype.api.operations, function iterator(method) {
+      if (svc.prototype[method]) return;
+      svc.prototype[method] = function (params, callback) {
+        return this.makeRequest(method, params, callback);
+      };
+    });
+  },
+
+
+  defineService: function defineService(serviceIdentifier, versions, features) {
+    if (!Array.isArray(versions)) {
+      features = versions;
+      versions = [];
+    }
+
+    var svc = inherit(AWS.Service, features || {});
+
+    if (typeof serviceIdentifier === 'string') {
+      AWS.Service.addVersions(svc, versions);
+
+      var identifier = svc.serviceIdentifier || serviceIdentifier;
+      svc.serviceIdentifier = identifier;
+    } else { // defineService called with an API
+      svc.prototype.api = serviceIdentifier;
+      AWS.Service.defineMethods(svc);
+    }
+
+    return svc;
+  },
+
+
+  addVersions: function addVersions(svc, versions) {
+    if (!Array.isArray(versions)) versions = [versions];
+
+    svc.services = svc.services || {};
+    for (var i = 0; i < versions.length; i++) {
+      if (svc.services[versions[i]] === undefined) {
+        svc.services[versions[i]] = null;
+      }
+    }
+
+    svc.apiVersions = Object.keys(svc.services).sort();
+  },
+
+
+  defineServiceApi: function defineServiceApi(superclass, version, apiConfig) {
+    var svc = inherit(superclass, {
+      serviceIdentifier: superclass.serviceIdentifier
+    });
+
+    function setApi(api) {
+      if (api.isApi) {
+        svc.prototype.api = api;
+      } else {
+        svc.prototype.api = new Api(api);
+      }
+    }
+
+    if (typeof version === 'string') {
+      if (apiConfig) {
+        setApi(apiConfig);
+      } else {
+        try {
+          var apis = AWS.util.nodeRequire('aws-sdk-apis');
+          setApi(apis.load(superclass.serviceIdentifier, version));
+        } catch (err) {
+          throw AWS.util.error(err, {
+            message: 'Could not find API configuration ' +
+              superclass.serviceIdentifier + '-' + version
+          });
+        }
+      }
+      if (!superclass.services.hasOwnProperty(version)) {
+        superclass.apiVersions = superclass.apiVersions.concat(version).sort();
+      }
+      superclass.services[version] = svc;
+    } else {
+      setApi(version);
+    }
+
+    AWS.Service.defineMethods(svc);
+    return svc;
+  }
+});
+
+},{"./core":23,"./model/api":34}],52:[function(require,module,exports){
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+
+var expiresHeader = 'presigned-expires';
+
+
+function signedUrlBuilder(request) {
+  var expires = request.httpRequest.headers[expiresHeader];
+
+  delete request.httpRequest.headers['User-Agent'];
+  delete request.httpRequest.headers['X-Amz-User-Agent'];
+
+  if (request.service.getSignerClass() === AWS.Signers.V4) {
+    if (expires > 604800) { // one week expiry is invalid
+      var message = 'Presigning does not support expiry time greater ' +
+                    'than a week with SigV4 signing.';
+      throw AWS.util.error(new Error(), {
+        code: 'InvalidExpiryTime', message: message, retryable: false
+      });
+    }
+    request.httpRequest.headers[expiresHeader] = expires;
+  } else if (request.service.getSignerClass() === AWS.Signers.S3) {
+    request.httpRequest.headers[expiresHeader] = parseInt(
+      AWS.util.date.unixTimestamp() + expires, 10).toString();
+  } else {
+    throw AWS.util.error(new Error(), {
+      message: 'Presigning only supports S3 or SigV4 signing.',
+      code: 'UnsupportedSigner', retryable: false
+    });
+  }
+}
+
+
+function signedUrlSigner(request) {
+  var endpoint = request.httpRequest.endpoint;
+  var parsedUrl = AWS.util.urlParse(request.httpRequest.path);
+  var queryParams = {};
+
+  if (parsedUrl.search) {
+    queryParams = AWS.util.queryStringParse(parsedUrl.search.substr(1));
+  }
+
+  AWS.util.each(request.httpRequest.headers, function (key, value) {
+    if (key === expiresHeader) key = 'Expires';
+    queryParams[key] = value;
+  });
+  delete request.httpRequest.headers[expiresHeader];
+
+  var auth = queryParams['Authorization'].split(' ');
+  if (auth[0] === 'AWS') {
+    auth = auth[1].split(':');
+    queryParams['AWSAccessKeyId'] = auth[0];
+    queryParams['Signature'] = auth[1];
+  } else if (auth[0] === 'AWS4-HMAC-SHA256') { // SigV4 signing
+    auth.shift();
+    var rest = auth.join(' ');
+    var signature = rest.match(/Signature=(.*?)(?:,|\s|\r?\n|$)/)[1];
+    queryParams['X-Amz-Signature'] = signature;
+    delete queryParams['Expires'];
+  }
+  delete queryParams['Authorization'];
+  delete queryParams['Host'];
+
+  endpoint.pathname = parsedUrl.pathname;
+  endpoint.search = AWS.util.queryParamsToString(queryParams);
+}
+
+
+AWS.Signers.Presign = inherit({
+
+  sign: function sign(request, expireTime, callback) {
+    request.httpRequest.headers[expiresHeader] = expireTime || 3600;
+    request.on('build', signedUrlBuilder);
+    request.on('sign', signedUrlSigner);
+    request.removeListener('afterBuild',
+      AWS.EventListeners.Core.SET_CONTENT_LENGTH);
+
+    request.emit('beforePresign', [request]);
+
+    if (callback) {
+      request.build(function() {
+        if (this.response.error) callback(this.response.error);
+        else {
+          callback(null, AWS.util.urlFormat(request.httpRequest.endpoint));
+        }
+      });
+    } else {
+      request.build();
+      return AWS.util.urlFormat(request.httpRequest.endpoint);
+    }
+  }
+});
+
+module.exports = AWS.Signers.Presign;
+
+},{"../core":23}],53:[function(require,module,exports){
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+
+AWS.Signers.RequestSigner = inherit({
+  constructor: function RequestSigner(request) {
+    this.request = request;
+  }
+});
+
+AWS.Signers.RequestSigner.getVersion = function getVersion(version) {
+  switch (version) {
+    case 'v2': return AWS.Signers.V2;
+    case 'v3': return AWS.Signers.V3;
+    case 'v4': return AWS.Signers.V4;
+    case 's3': return AWS.Signers.S3;
+    case 'v3https': return AWS.Signers.V3Https;
+  }
+  throw new Error('Unknown signing version ' + version);
+};
+
+require('./v2');
+require('./v3');
+require('./v3https');
+require('./v4');
+require('./s3');
+require('./presign');
+
+},{"../core":23,"./presign":52,"./s3":54,"./v2":55,"./v3":56,"./v3https":57,"./v4":58}],54:[function(require,module,exports){
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+
+AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
+
+  subResources: {
+    'acl': 1,
+    'cors': 1,
+    'lifecycle': 1,
+    'delete': 1,
+    'location': 1,
+    'logging': 1,
+    'notification': 1,
+    'partNumber': 1,
+    'policy': 1,
+    'requestPayment': 1,
+    'restore': 1,
+    'tagging': 1,
+    'torrent': 1,
+    'uploadId': 1,
+    'uploads': 1,
+    'versionId': 1,
+    'versioning': 1,
+    'versions': 1,
+    'website': 1
+  },
+
+  responseHeaders: {
+    'response-content-type': 1,
+    'response-content-language': 1,
+    'response-expires': 1,
+    'response-cache-control': 1,
+    'response-content-disposition': 1,
+    'response-content-encoding': 1
+  },
+
+  addAuthorization: function addAuthorization(credentials, date) {
+    if (!this.request.headers['presigned-expires']) {
+      this.request.headers['X-Amz-Date'] = AWS.util.date.rfc822(date);
+    }
+
+    if (credentials.sessionToken) {
+      this.request.headers['x-amz-security-token'] = credentials.sessionToken;
+    }
+
+    var signature = this.sign(credentials.secretAccessKey, this.stringToSign());
+    var auth = 'AWS ' + credentials.accessKeyId + ':' + signature;
+
+    this.request.headers['Authorization'] = auth;
+  },
+
+  stringToSign: function stringToSign() {
+    var r = this.request;
+
+    var parts = [];
+    parts.push(r.method);
+    parts.push(r.headers['Content-MD5'] || '');
+    parts.push(r.headers['Content-Type'] || '');
+
+    parts.push(r.headers['presigned-expires'] || '');
+
+    var headers = this.canonicalizedAmzHeaders();
+    if (headers) parts.push(headers);
+    parts.push(this.canonicalizedResource());
+
+    return parts.join('\n');
+
+  },
+
+  canonicalizedAmzHeaders: function canonicalizedAmzHeaders() {
+
+    var amzHeaders = [];
+
+    AWS.util.each(this.request.headers, function (name) {
+      if (name.match(/^x-amz-/i))
+        amzHeaders.push(name);
+    });
+
+    amzHeaders.sort(function (a, b) {
+      return a.toLowerCase() < b.toLowerCase() ? -1 : 1;
+    });
+
+    var parts = [];
+    AWS.util.arrayEach.call(this, amzHeaders, function (name) {
+      parts.push(name.toLowerCase() + ':' + String(this.request.headers[name]));
+    });
+
+    return parts.join('\n');
+
+  },
+
+  canonicalizedResource: function canonicalizedResource() {
+
+    var r = this.request;
+
+    var parts = r.path.split('?');
+    var path = parts[0];
+    var querystring = parts[1];
+
+    var resource = '';
+
+    if (r.virtualHostedBucket)
+      resource += '/' + r.virtualHostedBucket;
+
+    resource += path;
+
+    if (querystring) {
+
+      var resources = [];
+
+      AWS.util.arrayEach.call(this, querystring.split('&'), function (param) {
+        var name = param.split('=')[0];
+        var value = param.split('=')[1];
+        if (this.subResources[name] || this.responseHeaders[name]) {
+          var subresource = { name: name };
+          if (value !== undefined) {
+            if (this.subResources[name]) {
+              subresource.value = value;
+            } else {
+              subresource.value = decodeURIComponent(value);
+            }
+          }
+          resources.push(subresource);
+        }
+      });
+
+      resources.sort(function (a, b) { return a.name < b.name ? -1 : 1; });
+
+      if (resources.length) {
+
+        querystring = [];
+        AWS.util.arrayEach(resources, function (resource) {
+          if (resource.value === undefined)
+            querystring.push(resource.name);
+          else
+            querystring.push(resource.name + '=' + resource.value);
+        });
+
+        resource += '?' + querystring.join('&');
+      }
+
+    }
+
+    return resource;
+
+  },
+
+  sign: function sign(secret, string) {
+    return AWS.util.crypto.hmac(secret, string, 'base64', 'sha1');
+  }
+});
+
+module.exports = AWS.Signers.S3;
+
+},{"../core":23}],55:[function(require,module,exports){
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+
+AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
+  addAuthorization: function addAuthorization(credentials, date) {
+
+    if (!date) date = AWS.util.date.getDate();
+
+    var r = this.request;
+
+    r.params.Timestamp = AWS.util.date.iso8601(date);
+    r.params.SignatureVersion = '2';
+    r.params.SignatureMethod = 'HmacSHA256';
+    r.params.AWSAccessKeyId = credentials.accessKeyId;
+
+    if (credentials.sessionToken) {
+      r.params.SecurityToken = credentials.sessionToken;
+    }
+
+    delete r.params.Signature; // delete old Signature for re-signing
+    r.params.Signature = this.signature(credentials);
+
+    r.body = AWS.util.queryParamsToString(r.params);
+    r.headers['Content-Length'] = r.body.length;
+  },
+
+  signature: function signature(credentials) {
+    return AWS.util.crypto.hmac(credentials.secretAccessKey, this.stringToSign(), 'base64');
+  },
+
+  stringToSign: function stringToSign() {
+    var parts = [];
+    parts.push(this.request.method);
+    parts.push(this.request.endpoint.host.toLowerCase());
+    parts.push(this.request.pathname());
+    parts.push(AWS.util.queryParamsToString(this.request.params));
+    return parts.join('\n');
+  }
+
+});
+
+module.exports = AWS.Signers.V2;
+
+},{"../core":23}],56:[function(require,module,exports){
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+
+AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
+  addAuthorization: function addAuthorization(credentials, date) {
+
+    var datetime = AWS.util.date.rfc822(date);
+
+    this.request.headers['X-Amz-Date'] = datetime;
+
+    if (credentials.sessionToken) {
+      this.request.headers['x-amz-security-token'] = credentials.sessionToken;
+    }
+
+    this.request.headers['X-Amzn-Authorization'] =
+      this.authorization(credentials, datetime);
+
+  },
+
+  authorization: function authorization(credentials) {
+    return 'AWS3 ' +
+      'AWSAccessKeyId=' + credentials.accessKeyId + ',' +
+      'Algorithm=HmacSHA256,' +
+      'SignedHeaders=' + this.signedHeaders() + ',' +
+      'Signature=' + this.signature(credentials);
+  },
+
+  signedHeaders: function signedHeaders() {
+    var headers = [];
+    AWS.util.arrayEach(this.headersToSign(), function iterator(h) {
+      headers.push(h.toLowerCase());
+    });
+    return headers.sort().join(';');
+  },
+
+  canonicalHeaders: function canonicalHeaders() {
+    var headers = this.request.headers;
+    var parts = [];
+    AWS.util.arrayEach(this.headersToSign(), function iterator(h) {
+      parts.push(h.toLowerCase().trim() + ':' + String(headers[h]).trim());
+    });
+    return parts.sort().join('\n') + '\n';
+  },
+
+  headersToSign: function headersToSign() {
+    var headers = [];
+    AWS.util.each(this.request.headers, function iterator(k) {
+      if (k === 'Host' || k === 'Content-Encoding' || k.match(/^X-Amz/i)) {
+        headers.push(k);
+      }
+    });
+    return headers;
+  },
+
+  signature: function signature(credentials) {
+    return AWS.util.crypto.hmac(credentials.secretAccessKey, this.stringToSign(), 'base64');
+  },
+
+  stringToSign: function stringToSign() {
+    var parts = [];
+    parts.push(this.request.method);
+    parts.push('/');
+    parts.push('');
+    parts.push(this.canonicalHeaders());
+    parts.push(this.request.body);
+    return AWS.util.crypto.sha256(parts.join('\n'));
+  }
+
+});
+
+module.exports = AWS.Signers.V3;
+
+},{"../core":23}],57:[function(require,module,exports){
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+require('./v3');
+
+
+AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
+  authorization: function authorization(credentials) {
+    return 'AWS3-HTTPS ' +
+      'AWSAccessKeyId=' + credentials.accessKeyId + ',' +
+      'Algorithm=HmacSHA256,' +
+      'Signature=' + this.signature(credentials);
+  },
+
+  stringToSign: function stringToSign() {
+    return this.request.headers['X-Amz-Date'];
+  }
+});
+
+module.exports = AWS.Signers.V3Https;
+
+},{"../core":23,"./v3":56}],58:[function(require,module,exports){
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+
+var cachedSecret = {};
+
+
+var expiresHeader = 'presigned-expires';
+
+
+AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
+  constructor: function V4(request, serviceName) {
+    AWS.Signers.RequestSigner.call(this, request);
+    this.serviceName = serviceName;
+  },
+
+  algorithm: 'AWS4-HMAC-SHA256',
+
+  addAuthorization: function addAuthorization(credentials, date) {
+    var datetime = AWS.util.date.iso8601(date).replace(/[:\-]|\.\d{3}/g, '');
+
+    if (this.isPresigned()) {
+      this.updateForPresigned(credentials, datetime);
+    } else {
+      this.addHeaders(credentials, datetime);
+      this.updateBody(credentials);
+    }
+
+    this.request.headers['Authorization'] =
+      this.authorization(credentials, datetime);
+  },
+
+  addHeaders: function addHeaders(credentials, datetime) {
+    this.request.headers['X-Amz-Date'] = datetime;
+    if (credentials.sessionToken) {
+      this.request.headers['x-amz-security-token'] = credentials.sessionToken;
+    }
+  },
+
+  updateBody: function updateBody(credentials) {
+    if (this.request.params) {
+      this.request.params.AWSAccessKeyId = credentials.accessKeyId;
+
+      if (credentials.sessionToken) {
+        this.request.params.SecurityToken = credentials.sessionToken;
+      }
+
+      this.request.body = AWS.util.queryParamsToString(this.request.params);
+      this.request.headers['Content-Length'] = this.request.body.length;
+    }
+  },
+
+  updateForPresigned: function updateForPresigned(credentials, datetime) {
+    var credString = this.credentialString(datetime);
+    var qs = {
+      'X-Amz-Date': datetime,
+      'X-Amz-Algorithm': this.algorithm,
+      'X-Amz-Credential': credentials.accessKeyId + '/' + credString,
+      'X-Amz-Expires': this.request.headers[expiresHeader],
+      'X-Amz-SignedHeaders': this.signedHeaders()
+    };
+
+    if (credentials.sessionToken) {
+      qs['X-Amz-Security-Token'] = credentials.sessionToken;
+    }
+
+    if (this.request.headers['Content-Type']) {
+      qs['Content-Type'] = this.request.headers['Content-Type'];
+    }
+
+    AWS.util.each.call(this, this.request.headers, function(key, value) {
+      if (key === expiresHeader) return;
+      if (this.isSignableHeader(key) &&
+          key.toLowerCase().indexOf('x-amz-') === 0) {
+        qs[key] = value;
+      }
+    });
+
+    var sep = this.request.path.indexOf('?') >= 0 ? '&' : '?';
+    this.request.path += sep + AWS.util.queryParamsToString(qs);
+  },
+
+  authorization: function authorization(credentials, datetime) {
+    var parts = [];
+    var credString = this.credentialString(datetime);
+    parts.push(this.algorithm + ' Credential=' +
+      credentials.accessKeyId + '/' + credString);
+    parts.push('SignedHeaders=' + this.signedHeaders());
+    parts.push('Signature=' + this.signature(credentials, datetime));
+    return parts.join(', ');
+  },
+
+  signature: function signature(credentials, datetime) {
+    var cache = cachedSecret[this.serviceName];
+    var date = datetime.substr(0, 8);
+    if (!cache ||
+        cache.akid !== credentials.accessKeyId ||
+        cache.region !== this.request.region ||
+        cache.date !== date) {
+      var kSecret = credentials.secretAccessKey;
+      var kDate = AWS.util.crypto.hmac('AWS4' + kSecret, date, 'buffer');
+      var kRegion = AWS.util.crypto.hmac(kDate, this.request.region, 'buffer');
+      var kService = AWS.util.crypto.hmac(kRegion, this.serviceName, 'buffer');
+      var kCredentials = AWS.util.crypto.hmac(kService, 'aws4_request', 'buffer');
+      cachedSecret[this.serviceName] = {
+        region: this.request.region, date: date,
+        key: kCredentials, akid: credentials.accessKeyId
+      };
+    }
+
+    var key = cachedSecret[this.serviceName].key;
+    return AWS.util.crypto.hmac(key, this.stringToSign(datetime), 'hex');
+  },
+
+  stringToSign: function stringToSign(datetime) {
+    var parts = [];
+    parts.push('AWS4-HMAC-SHA256');
+    parts.push(datetime);
+    parts.push(this.credentialString(datetime));
+    parts.push(this.hexEncodedHash(this.canonicalString()));
+    return parts.join('\n');
+  },
+
+  canonicalString: function canonicalString() {
+    var parts = [];
+    parts.push(this.request.method);
+    parts.push(this.request.pathname());
+    parts.push(this.request.search());
+    parts.push(this.canonicalHeaders() + '\n');
+    parts.push(this.signedHeaders());
+    parts.push(this.hexEncodedBodyHash());
+    return parts.join('\n');
+  },
+
+  canonicalHeaders: function canonicalHeaders() {
+    var headers = [];
+    AWS.util.each.call(this, this.request.headers, function (key, item) {
+      headers.push([key, item]);
+    });
+    headers.sort(function (a, b) {
+      return a[0].toLowerCase() < b[0].toLowerCase() ? -1 : 1;
+    });
+    var parts = [];
+    AWS.util.arrayEach.call(this, headers, function (item) {
+      var key = item[0].toLowerCase();
+      if (this.isSignableHeader(key)) {
+        parts.push(key + ':' +
+          this.canonicalHeaderValues(item[1].toString()));
+      }
+    });
+    return parts.join('\n');
+  },
+
+  canonicalHeaderValues: function canonicalHeaderValues(values) {
+    return values.replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '');
+  },
+
+  signedHeaders: function signedHeaders() {
+    var keys = [];
+    AWS.util.each.call(this, this.request.headers, function (key) {
+      key = key.toLowerCase();
+      if (this.isSignableHeader(key)) keys.push(key);
+    });
+    return keys.sort().join(';');
+  },
+
+  credentialString: function credentialString(datetime) {
+    var parts = [];
+    parts.push(datetime.substr(0, 8));
+    parts.push(this.request.region);
+    parts.push(this.serviceName);
+    parts.push('aws4_request');
+    return parts.join('/');
+  },
+
+  hexEncodedHash: function hash(string) {
+    return AWS.util.crypto.sha256(string, 'hex');
+  },
+
+  hexEncodedBodyHash: function hexEncodedBodyHash() {
+    if (this.isPresigned() && this.serviceName === 's3') {
+      return 'UNSIGNED-PAYLOAD';
+    } else if (this.request.headers['X-Amz-Content-Sha256']) {
+      return this.request.headers['X-Amz-Content-Sha256'];
+    } else {
+      return this.hexEncodedHash(this.request.body || '');
+    }
+  },
+
+  unsignableHeaders: ['authorization', 'content-type', 'content-length',
+    'user-agent', expiresHeader, 'x-amz-user-agent', 'x-amz-content-sha256'],
+
+  isSignableHeader: function isSignableHeader(key) {
+    return this.unsignableHeaders.indexOf(key) < 0;
+  },
+
+  isPresigned: function isPresigned() {
+    return this.request.headers[expiresHeader] ? true : false;
+  }
+
+});
+
+module.exports = AWS.Signers.V4;
+
+},{"../core":23}],59:[function(require,module,exports){
+function AcceptorStateMachine(states, state) {
+  this.currentState = state || null;
+  this.states = states || {};
+}
+
+AcceptorStateMachine.prototype.runTo = function runTo(finalState, done, bindObject, inputError) {
+  if (typeof finalState === 'function') {
+    inputError = bindObject; bindObject = done;
+    done = finalState; finalState = null;
+  }
+
+  var self = this;
+  var state = self.states[self.currentState];
+  state.fn.call(bindObject || self, inputError, function(err) {
+    if (err) {
+      if (state.fail) self.currentState = state.fail;
+      else return done ? done.call(bindObject, err) : null;
+    } else {
+      if (state.accept) self.currentState = state.accept;
+      else return done ? done.call(bindObject) : null;
+    }
+    if (self.currentState === finalState) {
+      return done ? done.call(bindObject, err) : null;
+    }
+
+    self.runTo(finalState, done, bindObject, err);
+  });
+};
+
+AcceptorStateMachine.prototype.addState = function addState(name, acceptState, failState, fn) {
+  if (typeof acceptState === 'function') {
+    fn = acceptState; acceptState = null; failState = null;
+  } else if (typeof failState === 'function') {
+    fn = failState; failState = null;
+  }
+
+  if (!this.currentState) this.currentState = name;
+  this.states[name] = { accept: acceptState, fail: failState, fn: fn };
+  return this;
+};
+
+module.exports = AcceptorStateMachine;
+
+},{}],60:[function(require,module,exports){
+(function (process){
+
+
+var cryptoLib = require('crypto');
+var Buffer = require('buffer').Buffer;
+
+
+var util = {
+  engine: function engine() {
+    if (util.isBrowser() && typeof navigator !== 'undefined') {
+      return navigator.userAgent;
+    } else {
+      return process.platform + '/' + process.version;
+    }
+  },
+
+  userAgent: function userAgent() {
+    var name = util.isBrowser() ? 'js' : 'nodejs';
+    var agent = 'aws-sdk-' + name + '/' + require('./core').VERSION;
+    if (name === 'nodejs') agent += ' ' + util.engine();
+    return agent;
+  },
+
+  isBrowser: function isBrowser() { return process && process.browser; },
+  isNode: function isNode() { return !util.isBrowser(); },
+  nodeRequire: function nodeRequire(module) {
+    if (util.isNode()) return require(module);
+  },
+  multiRequire: function multiRequire(module1, module2) {
+    return require(util.isNode() ? module1 : module2);
+  },
+
+  uriEscape: function uriEscape(string) {
+    var output = encodeURIComponent(string);
+    output = output.replace(/[^A-Za-z0-9_.~\-%]+/g, escape);
+
+    output = output.replace(/[*]/g, function(ch) {
+      return '%' + ch.charCodeAt(0).toString(16).toUpperCase();
+    });
+
+    return output;
+  },
+
+  uriEscapePath: function uriEscapePath(string) {
+    var parts = [];
+    util.arrayEach(string.split('/'), function (part) {
+      parts.push(util.uriEscape(part));
+    });
+    return parts.join('/');
+  },
+
+  urlParse: function urlParse(url) {
+    return require('url').parse(url);
+  },
+
+  urlFormat: function urlFormat(url) {
+    return require('url').format(url);
+  },
+
+  queryStringParse: function queryStringParse(qs) {
+    return require('querystring').parse(qs);
+  },
+
+  queryParamsToString: function queryParamsToString(params) {
+    var items = [];
+    var escape = util.uriEscape;
+    var sortedKeys = Object.keys(params).sort();
+
+    util.arrayEach(sortedKeys, function(name) {
+      var value = params[name];
+      var ename = escape(name);
+      var result = ename;
+      if (Array.isArray(value)) {
+        var vals = [];
+        util.arrayEach(value, function(item) { vals.push(escape(item)); });
+        result = ename + '=' + vals.sort().join('&' + ename + '=');
+      } else if (value !== undefined && value !== null) {
+        result = ename + '=' + escape(value);
+      }
+      items.push(result);
+    });
+
+    return items.join('&');
+  },
+
+  readFileSync: function readFileSync(path) {
+    if (typeof window !== 'undefined') return null;
+    return require('fs').readFileSync(path, 'utf-8');
+  },
+
+  base64: {
+
+    encode: function encode64(string) {
+      return new Buffer(string).toString('base64');
+    },
+
+    decode: function decode64(string) {
+      return new Buffer(string, 'base64');
+    }
+
+  },
+
+  Buffer: Buffer,
+
+  buffer: {
+
+    concat: function(buffers) {
+      var length = 0,
+          offset = 0,
+          buffer = null, i;
+
+      for (i = 0; i < buffers.length; i++) {
+        length += buffers[i].length;
+      }
+
+      buffer = new Buffer(length);
+
+      for (i = 0; i < buffers.length; i++) {
+        buffers[i].copy(buffer, offset);
+        offset += buffers[i].length;
+      }
+
+      return buffer;
+    }
+  },
+
+  string: {
+    byteLength: function byteLength(string) {
+      if (string === null || string === undefined) return 0;
+      if (typeof string === 'string') string = new Buffer(string);
+
+      if (typeof string.byteLength === 'number') {
+        return string.byteLength;
+      } else if (typeof string.length === 'number') {
+        return string.length;
+      } else if (typeof string.size === 'number') {
+        return string.size;
+      } else if (typeof string.path === 'string') {
+        return require('fs').lstatSync(string.path).size;
+      } else {
+        throw util.error(new Error('Cannot determine length of ' + string),
+          { object: string });
+      }
+    },
+
+    upperFirst: function upperFirst(string) {
+      return string[0].toUpperCase() + string.substr(1);
+    },
+
+    lowerFirst: function lowerFirst(string) {
+      return string[0].toLowerCase() + string.substr(1);
+    }
+  },
+
+  ini: {
+    parse: function string(ini) {
+      var currentSection, map = {};
+      util.arrayEach(ini.split(/\r?\n/), function(line) {
+        line = line.split(/(^|\s);/)[0]; // remove comments
+        var section = line.match(/^\s*\[([^\[\]]+)\]\s*$/);
+        if (section) {
+          currentSection = section[1];
+        } else if (currentSection) {
+          var item = line.match(/^\s*(.+?)\s*=\s*(.+)\s*$/);
+          if (item) {
+            map[currentSection] = map[currentSection] || {};
+            map[currentSection][item[1]] = item[2];
+          }
+        }
+      });
+
+      return map;
+    }
+  },
+
+  jamespath: {
+    query: function query(expression, data) {
+      if (!data) return [];
+
+      var results = [];
+      var expressions = expression.split(/\s+or\s+/);
+      util.arrayEach.call(this, expressions, function (expr) {
+        var objects = [data];
+        var tokens = expr.split('.');
+        util.arrayEach.call(this, tokens, function (token) {
+          var match = token.match('^(.+?)(?:\\[(-?\\d+|\\*|)\\])?$');
+          var newObjects = [];
+          util.arrayEach.call(this, objects, function (obj) {
+            if (match[1] === '*') {
+              util.arrayEach.call(this, obj, function (value) {
+                newObjects.push(value);
+              });
+            } else if (obj.hasOwnProperty(match[1])) {
+              newObjects.push(obj[match[1]]);
+            }
+          });
+          objects = newObjects;
+
+          if (match[2] !== undefined) {
+            newObjects = [];
+            util.arrayEach.call(this, objects, function (obj) {
+              if (Array.isArray(obj)) {
+                if (match[2] === '*' || match[2] === '') {
+                  newObjects = newObjects.concat(obj);
+                } else {
+                  var idx = parseInt(match[2], 10);
+                  if (idx < 0) idx = obj.length + idx; // negative indexing
+                  newObjects.push(obj[idx]);
+                }
+              }
+            });
+            objects = newObjects;
+          }
+
+          if (objects.length === 0) return util.abort;
+        });
+
+        if (objects.length > 0) {
+          results = objects;
+          return util.abort;
+        }
+      });
+
+      return results;
+    },
+
+    find: function find(expression, data) {
+      return util.jamespath.query(expression, data)[0];
+    }
+  },
+
+
+  date: {
+
+
+    getDate: function getDate() { return new Date(); },
+
+
+    iso8601: function iso8601(date) {
+      if (date === undefined) { date = util.date.getDate(); }
+      return date.toISOString();
+    },
+
+
+    rfc822: function rfc822(date) {
+      if (date === undefined) { date = util.date.getDate(); }
+      return date.toUTCString();
+    },
+
+
+    unixTimestamp: function unixTimestamp(date) {
+      if (date === undefined) { date = util.date.getDate(); }
+      return date.getTime() / 1000;
+    },
+
+
+    from: function format(date) {
+      if (typeof date === 'number') {
+        return new Date(date * 1000); // unix timestamp
+      } else {
+        return new Date(date);
+      }
+    },
+
+
+    format: function format(date, formatter) {
+      if (!formatter) formatter = 'iso8601';
+      return util.date[formatter](util.date.from(date));
+    },
+
+    parseTimestamp: function parseTimestamp(value) {
+      if (value.match(/^\d+$/)) { // unix timestamp
+        return new Date(value * 1000);
+      } else if (value.match(/^\d{4}/)) { // iso8601
+        return new Date(value);
+      } else if (value.match(/^\w{3},/)) { // rfc822
+        return new Date(value);
+      } else {
+        throw util.error(
+          new Error('unhandled timestamp format: ' + value),
+          {code: 'TimestampParserError'});
+      }
+    }
+
+  },
+
+  crypto: {
+    crc32Table: [
+     0x00000000, 0x77073096, 0xEE0E612C, 0x990951BA, 0x076DC419,
+     0x706AF48F, 0xE963A535, 0x9E6495A3, 0x0EDB8832, 0x79DCB8A4,
+     0xE0D5E91E, 0x97D2D988, 0x09B64C2B, 0x7EB17CBD, 0xE7B82D07,
+     0x90BF1D91, 0x1DB71064, 0x6AB020F2, 0xF3B97148, 0x84BE41DE,
+     0x1ADAD47D, 0x6DDDE4EB, 0xF4D4B551, 0x83D385C7, 0x136C9856,
+     0x646BA8C0, 0xFD62F97A, 0x8A65C9EC, 0x14015C4F, 0x63066CD9,
+     0xFA0F3D63, 0x8D080DF5, 0x3B6E20C8, 0x4C69105E, 0xD56041E4,
+     0xA2677172, 0x3C03E4D1, 0x4B04D447, 0xD20D85FD, 0xA50AB56B,
+     0x35B5A8FA, 0x42B2986C, 0xDBBBC9D6, 0xACBCF940, 0x32D86CE3,
+     0x45DF5C75, 0xDCD60DCF, 0xABD13D59, 0x26D930AC, 0x51DE003A,
+     0xC8D75180, 0xBFD06116, 0x21B4F4B5, 0x56B3C423, 0xCFBA9599,
+     0xB8BDA50F, 0x2802B89E, 0x5F058808, 0xC60CD9B2, 0xB10BE924,
+     0x2F6F7C87, 0x58684C11, 0xC1611DAB, 0xB6662D3D, 0x76DC4190,
+     0x01DB7106, 0x98D220BC, 0xEFD5102A, 0x71B18589, 0x06B6B51F,
+     0x9FBFE4A5, 0xE8B8D433, 0x7807C9A2, 0x0F00F934, 0x9609A88E,
+     0xE10E9818, 0x7F6A0DBB, 0x086D3D2D, 0x91646C97, 0xE6635C01,
+     0x6B6B51F4, 0x1C6C6162, 0x856530D8, 0xF262004E, 0x6C0695ED,
+     0x1B01A57B, 0x8208F4C1, 0xF50FC457, 0x65B0D9C6, 0x12B7E950,
+     0x8BBEB8EA, 0xFCB9887C, 0x62DD1DDF, 0x15DA2D49, 0x8CD37CF3,
+     0xFBD44C65, 0x4DB26158, 0x3AB551CE, 0xA3BC0074, 0xD4BB30E2,
+     0x4ADFA541, 0x3DD895D7, 0xA4D1C46D, 0xD3D6F4FB, 0x4369E96A,
+     0x346ED9FC, 0xAD678846, 0xDA60B8D0, 0x44042D73, 0x33031DE5,
+     0xAA0A4C5F, 0xDD0D7CC9, 0x5005713C, 0x270241AA, 0xBE0B1010,
+     0xC90C2086, 0x5768B525, 0x206F85B3, 0xB966D409, 0xCE61E49F,
+     0x5EDEF90E, 0x29D9C998, 0xB0D09822, 0xC7D7A8B4, 0x59B33D17,
+     0x2EB40D81, 0xB7BD5C3B, 0xC0BA6CAD, 0xEDB88320, 0x9ABFB3B6,
+     0x03B6E20C, 0x74B1D29A, 0xEAD54739, 0x9DD277AF, 0x04DB2615,
+     0x73DC1683, 0xE3630B12, 0x94643B84, 0x0D6D6A3E, 0x7A6A5AA8,
+     0xE40ECF0B, 0x9309FF9D, 0x0A00AE27, 0x7D079EB1, 0xF00F9344,
+     0x8708A3D2, 0x1E01F268, 0x6906C2FE, 0xF762575D, 0x806567CB,
+     0x196C3671, 0x6E6B06E7, 0xFED41B76, 0x89D32BE0, 0x10DA7A5A,
+     0x67DD4ACC, 0xF9B9DF6F, 0x8EBEEFF9, 0x17B7BE43, 0x60B08ED5,
+     0xD6D6A3E8, 0xA1D1937E, 0x38D8C2C4, 0x4FDFF252, 0xD1BB67F1,
+     0xA6BC5767, 0x3FB506DD, 0x48B2364B, 0xD80D2BDA, 0xAF0A1B4C,
+     0x36034AF6, 0x41047A60, 0xDF60EFC3, 0xA867DF55, 0x316E8EEF,
+     0x4669BE79, 0xCB61B38C, 0xBC66831A, 0x256FD2A0, 0x5268E236,
+     0xCC0C7795, 0xBB0B4703, 0x220216B9, 0x5505262F, 0xC5BA3BBE,
+     0xB2BD0B28, 0x2BB45A92, 0x5CB36A04, 0xC2D7FFA7, 0xB5D0CF31,
+     0x2CD99E8B, 0x5BDEAE1D, 0x9B64C2B0, 0xEC63F226, 0x756AA39C,
+     0x026D930A, 0x9C0906A9, 0xEB0E363F, 0x72076785, 0x05005713,
+     0x95BF4A82, 0xE2B87A14, 0x7BB12BAE, 0x0CB61B38, 0x92D28E9B,
+     0xE5D5BE0D, 0x7CDCEFB7, 0x0BDBDF21, 0x86D3D2D4, 0xF1D4E242,
+     0x68DDB3F8, 0x1FDA836E, 0x81BE16CD, 0xF6B9265B, 0x6FB077E1,
+     0x18B74777, 0x88085AE6, 0xFF0F6A70, 0x66063BCA, 0x11010B5C,
+     0x8F659EFF, 0xF862AE69, 0x616BFFD3, 0x166CCF45, 0xA00AE278,
+     0xD70DD2EE, 0x4E048354, 0x3903B3C2, 0xA7672661, 0xD06016F7,
+     0x4969474D, 0x3E6E77DB, 0xAED16A4A, 0xD9D65ADC, 0x40DF0B66,
+     0x37D83BF0, 0xA9BCAE53, 0xDEBB9EC5, 0x47B2CF7F, 0x30B5FFE9,
+     0xBDBDF21C, 0xCABAC28A, 0x53B39330, 0x24B4A3A6, 0xBAD03605,
+     0xCDD70693, 0x54DE5729, 0x23D967BF, 0xB3667A2E, 0xC4614AB8,
+     0x5D681B02, 0x2A6F2B94, 0xB40BBE37, 0xC30C8EA1, 0x5A05DF1B,
+     0x2D02EF8D],
+
+    crc32: function crc32(data) {
+      var tbl = util.crypto.crc32Table;
+      var crc = 0 ^ -1;
+
+      if (typeof data === 'string') {
+        data = new Buffer(data);
+      }
+
+      for (var i = 0; i < data.length; i++) {
+        var code = data.readUInt8(i);
+        crc = (crc >>> 8) ^ tbl[(crc ^ code) & 0xFF];
+      }
+      return (crc ^ -1) >>> 0;
+    },
+
+    hmac: function hmac(key, string, digest, fn) {
+      if (!digest) digest = 'binary';
+      if (digest === 'buffer') { digest = undefined; }
+      if (!fn) fn = 'sha256';
+      if (typeof string === 'string') string = new Buffer(string);
+      return cryptoLib.createHmac(fn, key).update(string).digest(digest);
+    },
+
+    md5: function md5(data, digest) {
+      if (!digest) { digest = 'binary'; }
+      if (digest === 'buffer') { digest = undefined; }
+      if (typeof data === 'string') data = new Buffer(data);
+      return util.crypto.createHash('md5').update(data).digest(digest);
+    },
+
+    sha256: function sha256(string, digest) {
+      if (!digest) { digest = 'binary'; }
+      if (digest === 'buffer') { digest = undefined; }
+      if (typeof string === 'string') string = new Buffer(string);
+      return util.crypto.createHash('sha256').update(string).digest(digest);
+    },
+
+    toHex: function toHex(data) {
+      var out = [];
+      for (var i = 0; i < data.length; i++) {
+        out.push(('0' + data.charCodeAt(i).toString(16)).substr(-2, 2));
+      }
+      return out.join('');
+    },
+
+    createHash: function createHash(algorithm) {
+      return cryptoLib.createHash(algorithm);
+    }
+
+  },
+
+
+
+
+  abort: {},
+
+  each: function each(object, iterFunction) {
+    for (var key in object) {
+      if (object.hasOwnProperty(key)) {
+        var ret = iterFunction.call(this, key, object[key]);
+        if (ret === util.abort) break;
+      }
+    }
+  },
+
+  arrayEach: function arrayEach(array, iterFunction) {
+    for (var idx in array) {
+      if (array.hasOwnProperty(idx)) {
+        var ret = iterFunction.call(this, array[idx], parseInt(idx, 10));
+        if (ret === util.abort) break;
+      }
+    }
+  },
+
+  update: function update(obj1, obj2) {
+    util.each(obj2, function iterator(key, item) {
+      obj1[key] = item;
+    });
+    return obj1;
+  },
+
+  merge: function merge(obj1, obj2) {
+    return util.update(util.copy(obj1), obj2);
+  },
+
+  copy: function copy(object) {
+    if (object === null || object === undefined) return object;
+    var dupe = {};
+    for (var key in object) {
+      dupe[key] = object[key];
+    }
+    return dupe;
+  },
+
+  isEmpty: function isEmpty(obj) {
+    for (var prop in obj) {
+      if (obj.hasOwnProperty(prop)) {
+        return false;
+      }
+    }
+    return true;
+  },
+
+  isType: function isType(obj, type) {
+    if (typeof type === 'function') type = util.typeName(type);
+    return Object.prototype.toString.call(obj) === '[object ' + type + ']';
+  },
+
+  typeName: function typeName(type) {
+    if (type.hasOwnProperty('name')) return type.name;
+    var str = type.toString();
+    var match = str.match(/^\s*function (.+)\(/);
+    return match ? match[1] : str;
+  },
+
+  error: function error(err, options) {
+    var originalError = null;
+    if (typeof err.message === 'string' && err.message !== '') {
+      if (typeof options === 'string' || (options && options.message)) {
+        originalError = util.copy(err);
+        originalError.message = err.message;
+      }
+    }
+    err.message = err.message || null;
+
+    if (typeof options === 'string') {
+      err.message = options;
+    } else {
+      util.update(err, options);
+    }
+
+    if (typeof Object.defineProperty === 'function') {
+      Object.defineProperty(err, 'name', {writable: true, enumerable: false});
+      Object.defineProperty(err, 'message', {enumerable: true});
+    }
+
+    err.name = err.name || err.code || 'Error';
+    err.time = new Date();
+
+    if (originalError) err.originalError = originalError;
+
+    return err;
+  },
+
+
+  inherit: function inherit(klass, features) {
+    var newObject = null;
+    if (features === undefined) {
+      features = klass;
+      klass = Object;
+      newObject = {};
+    } else {
+      var ctor = function ConstructorWrapper() {};
+      ctor.prototype = klass.prototype;
+      newObject = new ctor();
+    }
+
+    if (features.constructor === Object) {
+      features.constructor = function() {
+        if (klass !== Object) {
+          return klass.apply(this, arguments);
+        }
+      };
+    }
+
+    features.constructor.prototype = newObject;
+    util.update(features.constructor.prototype, features);
+    features.constructor.__super__ = klass;
+    return features.constructor;
+  },
+
+
+  mixin: function mixin() {
+    var klass = arguments[0];
+    for (var i = 1; i < arguments.length; i++) {
+      for (var prop in arguments[i].prototype) {
+        var fn = arguments[i].prototype[prop];
+        if (prop !== 'constructor') {
+          klass.prototype[prop] = fn;
+        }
+      }
+    }
+    return klass;
+  },
+
+
+  hideProperties: function hideProperties(obj, props) {
+    if (typeof Object.defineProperty !== 'function') return;
+
+    util.arrayEach(props, function (key) {
+      Object.defineProperty(obj, key, {
+        enumerable: false, writable: true, configurable: true });
+    });
+  },
+
+
+  property: function property(obj, name, value, enumerable, isValue) {
+    var opts = {
+      configurable: true,
+      enumerable: enumerable !== undefined ? enumerable : true
+    };
+    if (typeof value === 'function' && !isValue) {
+      opts.get = value;
+    }
+    else {
+      opts.value = value; opts.writable = true;
+    }
+
+    Object.defineProperty(obj, name, opts);
+  },
+
+
+  memoizedProperty: function memoizedProperty(obj, name, get, enumerable) {
+    var cachedValue = null;
+
+    util.property(obj, name, function() {
+      if (cachedValue === null) {
+        cachedValue = get();
+      }
+      return cachedValue;
+    }, enumerable);
+  }
+};
+
+module.exports = util;
+
+}).call(this,require("G+mPsH"))
+},{"./core":23,"G+mPsH":13,"buffer":2,"crypto":6,"fs":1,"querystring":17,"url":18}],61:[function(require,module,exports){
+var util = require('../util');
+var Shape = require('../model/shape');
+
+function DomXmlParser() { }
+
+DomXmlParser.prototype.parse = function(xml, shape) {
+  if (xml.replace(/^\s+/, '') === '') return {};
+
+  var result, error;
+  try {
+    if (window.DOMParser) {
+      var parser = new DOMParser();
+      result = parser.parseFromString(xml, 'text/xml');
+
+      if (result.documentElement === null) {
+        throw new Error('Cannot parse empty document.');
+      }
+
+      var isError = result.getElementsByTagName('parsererror')[0];
+      if (isError && (isError.parentNode === result ||
+          isError.parentNode.nodeName === 'body')) {
+        throw new Error(isError.getElementsByTagName('div')[0].textContent);
+      }
+    } else if (window.ActiveXObject) {
+      result = new window.ActiveXObject('Microsoft.XMLDOM');
+      result.async = false;
+
+      if (!result.loadXML(xml)) {
+        throw new Error('Parse error in document');
+      }
+    } else {
+      throw new Error('Cannot load XML parser');
+    }
+  } catch (e) {
+    error = e;
+  }
+
+  if (result && result.documentElement && !error) {
+    var data = parseXml(result.documentElement, shape);
+    var metadata = result.getElementsByTagName('ResponseMetadata')[0];
+    if (metadata) {
+      data.ResponseMetadata = parseXml(metadata, {});
+    }
+    return data;
+  } else if (error) {
+    throw util.error(error || new Error(), {code: 'XMLParserError'});
+  } else { // empty xml document
+    return {};
+  }
+};
+
+function parseXml(xml, shape) {
+  if (!shape) shape = {};
+  switch(shape.type) {
+    case 'structure': return parseStructure(xml, shape);
+    case 'map': return parseMap(xml, shape);
+    case 'list': return parseList(xml, shape);
+    case undefined: case null: return parseUnknown(xml);
+    default: return parseScalar(xml, shape);
+  }
+}
+
+function parseStructure(xml, shape) {
+  var data = {};
+  if (xml === null) return data;
+
+  util.each(shape.members, function(memberName, memberShape) {
+    if (memberShape.isXmlAttribute) {
+      if (xml.attributes.hasOwnProperty(memberShape.name)) {
+        var value = xml.attributes[memberShape.name].value;
+        data[memberName] = parseXml({textContent: value}, memberShape);
+      }
+    } else {
+      var xmlChild = memberShape.flattened ? xml :
+        xml.getElementsByTagName(memberShape.name)[0];
+      if (xmlChild) {
+        data[memberName] = parseXml(xmlChild, memberShape);
+      } else if (!memberShape.flattened && memberShape.type === 'list') {
+        data[memberName] = memberShape.defaultValue;
+      }
+    }
+  });
+
+  return data;
+}
+
+function parseMap(xml, shape) {
+  var data = {};
+  var xmlKey = shape.key.name || 'key';
+  var xmlValue = shape.value.name || 'value';
+  var tagName = shape.flattened ? shape.name : 'entry';
+
+  var child = xml.firstElementChild;
+  while (child) {
+    if (child.nodeName === tagName) {
+      var key = child.getElementsByTagName(xmlKey)[0].textContent;
+      var value = child.getElementsByTagName(xmlValue)[0];
+      data[key] = parseXml(value, shape.value);
+    }
+    child = child.nextElementSibling;
+  }
+  return data;
+}
+
+function parseList(xml, shape) {
+  var data = [];
+  var tagName = shape.flattened ? shape.name : (shape.member.name || 'member');
+
+  var child = xml.firstElementChild;
+  while (child) {
+    if (child.nodeName === tagName) {
+      data.push(parseXml(child, shape.member));
+    }
+    child = child.nextElementSibling;
+  }
+  return data;
+}
+
+function parseScalar(xml, shape) {
+  if (xml.getAttribute) {
+    var encoding = xml.getAttribute('encoding');
+    if (encoding === 'base64') {
+      shape = new Shape.create({type: encoding});
+    }
+  }
+
+  var text = xml.textContent;
+  if (text === '') text = null;
+  if (typeof shape.toType === 'function') {
+    return shape.toType(text);
+  } else {
+    return text;
+  }
+}
+
+function parseUnknown(xml) {
+  if (xml === undefined || xml === null) return '';
+
+  if (!xml.firstElementChild) {
+    if (xml.parentNode.parentNode === null) return {};
+    if (xml.childNodes.length === 0) return '';
+    else return xml.textContent;
+  }
+
+  var shape = {type: 'structure', members: {}};
+  var child = xml.firstElementChild;
+  while (child) {
+    var tag = child.nodeName;
+    if (shape.members.hasOwnProperty(tag)) {
+      shape.members[tag].type = 'list';
+    } else {
+      shape.members[tag] = {name: tag};
+    }
+    child = child.nextElementSibling;
+  }
+  return parseStructure(xml, shape);
+}
+
+module.exports = DomXmlParser;
+
+},{"../model/shape":39,"../util":60}],62:[function(require,module,exports){
+var util = require('../util');
+var builder = require('xmlbuilder');
+
+function XmlBuilder() { }
+
+XmlBuilder.prototype.toXML = function(params, shape, rootElement) {
+  var xml = builder.create(rootElement);
+  applyNamespaces(xml, shape);
+  serialize(xml, params, shape);
+  return xml.children.length === 0 ? '' : xml.root().toString();
+};
+
+function serialize(xml, value, shape) {
+  switch(shape.type) {
+    case 'structure': return serializeStructure(xml, value, shape);
+    case 'map': return serializeMap(xml, value, shape);
+    case 'list': return serializeList(xml, value, shape);
+    default: return serializeScalar(xml, value, shape);
+  }
+}
+
+function serializeStructure(xml, params, shape) {
+  util.arrayEach(shape.memberNames, function(memberName) {
+    var memberShape = shape.members[memberName];
+    if (memberShape.location !== 'body') return;
+
+    var value = params[memberName];
+    var name = memberShape.queryName || memberShape.name;
+    if (value !== undefined && value !== null) {
+      if (memberShape.isXmlAttribute) {
+        xml.att(name, value);
+      } else if (memberShape.flattened) {
+        serialize(xml, value, memberShape);
+      } else {
+        var element = xml.ele(name);
+        applyNamespaces(element, memberShape);
+        serialize(element, value, memberShape);
+      }
+    }
+  });
+}
+
+function serializeMap(xml, map, shape) {
+  var xmlKey = shape.key.queryName || shape.key.name || 'key';
+  var xmlValue = shape.value.queryName || shape.value.name || 'value';
+
+  util.each(map, function(key, value) {
+    var entry = xml.ele(shape.flattened ? shape.name : 'entry');
+    serialize(entry.ele(xmlKey), key, shape.key);
+    serialize(entry.ele(xmlValue), value, shape.value);
+  });
+}
+
+function serializeList(xml, list, shape) {
+  if (shape.flattened) {
+    util.arrayEach(list, function(value) {
+      var name = shape.member.queryName || shape.member.name || shape.name;
+      var element = xml.ele(name);
+      serialize(element, value, shape.member);
+    });
+  } else {
+    util.arrayEach(list, function(value) {
+      var name = shape.member.queryName || shape.member.name || 'member';
+      var element = xml.ele(name);
+      serialize(element, value, shape.member);
+    });
+  }
+}
+
+function serializeScalar(xml, value, shape) {
+  xml.txt(shape.toWireFormat(value));
+}
+
+function applyNamespaces(xml, shape) {
+  var uri, prefix = 'xmlns';
+  if (shape.xmlNamespaceUri) {
+    uri = shape.xmlNamespaceUri;
+    if (shape.xmlNamespacePrefix) prefix += ':' + shape.xmlNamespacePrefix;
+  } else if (xml.isRoot && shape.api.xmlNamespaceUri) {
+    uri = shape.api.xmlNamespaceUri;
+  }
+
+  if (uri) xml.att(prefix, uri);
+}
+
+module.exports = XmlBuilder;
+
+},{"../util":60,"xmlbuilder":65}],63:[function(require,module,exports){
+(function() {
+  var XMLBuilder, XMLFragment;
+
+  XMLFragment = require('./XMLFragment');
+
+  XMLBuilder = (function() {
+
+    function XMLBuilder(name, xmldec, doctype) {
+      var att, child, _ref;
+      this.children = [];
+      this.rootObject = null;
+      if (this.is(name, 'Object')) {
+        _ref = [name, xmldec], xmldec = _ref[0], doctype = _ref[1];
+        name = null;
+      }
+      if (name != null) {
+        name = '' + name || '';
+        if (xmldec == null) {
+          xmldec = {
+            'version': '1.0'
+          };
+        }
+      }
+      if ((xmldec != null) && !(xmldec.version != null)) {
+        throw new Error("Version number is required");
+      }
+      if (xmldec != null) {
+        xmldec.version = '' + xmldec.version || '';
+        if (!xmldec.version.match(/1\.[0-9]+/)) {
+          throw new Error("Invalid version number: " + xmldec.version);
+        }
+        att = {
+          version: xmldec.version
+        };
+        if (xmldec.encoding != null) {
+          xmldec.encoding = '' + xmldec.encoding || '';
+          if (!xmldec.encoding.match(/[A-Za-z](?:[A-Za-z0-9._-]|-)*/)) {
+            throw new Error("Invalid encoding: " + xmldec.encoding);
+          }
+          att.encoding = xmldec.encoding;
+        }
+        if (xmldec.standalone != null) {
+          att.standalone = xmldec.standalone ? "yes" : "no";
+        }
+        child = new XMLFragment(this, '?xml', att);
+        this.children.push(child);
+      }
+      if (doctype != null) {
+        att = {};
+        if (name != null) {
+          att.name = name;
+        }
+        if (doctype.ext != null) {
+          doctype.ext = '' + doctype.ext || '';
+          att.ext = doctype.ext;
+        }
+        child = new XMLFragment(this, '!DOCTYPE', att);
+        this.children.push(child);
+      }
+      if (name != null) {
+        this.begin(name);
+      }
+    }
+
+    XMLBuilder.prototype.begin = function(name, xmldec, doctype) {
+      var doc, root;
+      if (!(name != null)) {
+        throw new Error("Root element needs a name");
+      }
+      if (this.rootObject) {
+        this.children = [];
+        this.rootObject = null;
+      }
+      if (xmldec != null) {
+        doc = new XMLBuilder(name, xmldec, doctype);
+        return doc.root();
+      }
+      name = '' + name || '';
+      root = new XMLFragment(this, name, {});
+      root.isRoot = true;
+      root.documentObject = this;
+      this.children.push(root);
+      this.rootObject = root;
+      return root;
+    };
+
+    XMLBuilder.prototype.root = function() {
+      return this.rootObject;
+    };
+
+    XMLBuilder.prototype.end = function(options) {
+      return toString(options);
+    };
+
+    XMLBuilder.prototype.toString = function(options) {
+      var child, r, _i, _len, _ref;
+      r = '';
+      _ref = this.children;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        child = _ref[_i];
+        r += child.toString(options);
+      }
+      return r;
+    };
+
+    XMLBuilder.prototype.is = function(obj, type) {
+      var clas;
+      clas = Object.prototype.toString.call(obj).slice(8, -1);
+      return (obj != null) && clas === type;
+    };
+
+    return XMLBuilder;
+
+  })();
+
+  module.exports = XMLBuilder;
+
+}).call(this);
+
+},{"./XMLFragment":64}],64:[function(require,module,exports){
+(function() {
+  var XMLFragment,
+    __hasProp = {}.hasOwnProperty;
+
+  XMLFragment = (function() {
+
+    function XMLFragment(parent, name, attributes, text) {
+      this.isRoot = false;
+      this.documentObject = null;
+      this.parent = parent;
+      this.name = name;
+      this.attributes = attributes;
+      this.value = text;
+      this.children = [];
+    }
+
+    XMLFragment.prototype.element = function(name, attributes, text) {
+      var child, key, val, _ref, _ref1;
+      if (!(name != null)) {
+        throw new Error("Missing element name");
+      }
+      name = '' + name || '';
+      this.assertLegalChar(name);
+      if (attributes == null) {
+        attributes = {};
+      }
+      if (this.is(attributes, 'String') && this.is(text, 'Object')) {
+        _ref = [text, attributes], attributes = _ref[0], text = _ref[1];
+      } else if (this.is(attributes, 'String')) {
+        _ref1 = [{}, attributes], attributes = _ref1[0], text = _ref1[1];
+      }
+      for (key in attributes) {
+        if (!__hasProp.call(attributes, key)) continue;
+        val = attributes[key];
+        val = '' + val || '';
+        attributes[key] = this.escape(val);
+      }
+      child = new XMLFragment(this, name, attributes);
+      if (text != null) {
+        text = '' + text || '';
+        text = this.escape(text);
+        this.assertLegalChar(text);
+        child.raw(text);
+      }
+      this.children.push(child);
+      return child;
+    };
+
+    XMLFragment.prototype.insertBefore = function(name, attributes, text) {
+      var child, i, key, val, _ref, _ref1;
+      if (this.isRoot) {
+        throw new Error("Cannot insert elements at root level");
+      }
+      if (!(name != null)) {
+        throw new Error("Missing element name");
+      }
+      name = '' + name || '';
+      this.assertLegalChar(name);
+      if (attributes == null) {
+        attributes = {};
+      }
+      if (this.is(attributes, 'String') && this.is(text, 'Object')) {
+        _ref = [text, attributes], attributes = _ref[0], text = _ref[1];
+      } else if (this.is(attributes, 'String')) {
+        _ref1 = [{}, attributes], attributes = _ref1[0], text = _ref1[1];
+      }
+      for (key in attributes) {
+        if (!__hasProp.call(attributes, key)) continue;
+        val = attributes[key];
+        val = '' + val || '';
+        attributes[key] = this.escape(val);
+      }
+      child = new XMLFragment(this.parent, name, attributes);
+      if (text != null) {
+        text = '' + text || '';
+        text = this.escape(text);
+        this.assertLegalChar(text);
+        child.raw(text);
+      }
+      i = this.parent.children.indexOf(this);
+      this.parent.children.splice(i, 0, child);
+      return child;
+    };
+
+    XMLFragment.prototype.insertAfter = function(name, attributes, text) {
+      var child, i, key, val, _ref, _ref1;
+      if (this.isRoot) {
+        throw new Error("Cannot insert elements at root level");
+      }
+      if (!(name != null)) {
+        throw new Error("Missing element name");
+      }
+      name = '' + name || '';
+      this.assertLegalChar(name);
+      if (attributes == null) {
+        attributes = {};
+      }
+      if (this.is(attributes, 'String') && this.is(text, 'Object')) {
+        _ref = [text, attributes], attributes = _ref[0], text = _ref[1];
+      } else if (this.is(attributes, 'String')) {
+        _ref1 = [{}, attributes], attributes = _ref1[0], text = _ref1[1];
+      }
+      for (key in attributes) {
+        if (!__hasProp.call(attributes, key)) continue;
+        val = attributes[key];
+        val = '' + val || '';
+        attributes[key] = this.escape(val);
+      }
+      child = new XMLFragment(this.parent, name, attributes);
+      if (text != null) {
+        text = '' + text || '';
+        text = this.escape(text);
+        this.assertLegalChar(text);
+        child.raw(text);
+      }
+      i = this.parent.children.indexOf(this);
+      this.parent.children.splice(i + 1, 0, child);
+      return child;
+    };
+
+    XMLFragment.prototype.remove = function() {
+      var i, _ref;
+      if (this.isRoot) {
+        throw new Error("Cannot remove the root element");
+      }
+      i = this.parent.children.indexOf(this);
+      [].splice.apply(this.parent.children, [i, i - i + 1].concat(_ref = [])), _ref;
+      return this.parent;
+    };
+
+    XMLFragment.prototype.text = function(value) {
+      var child;
+      if (!(value != null)) {
+        throw new Error("Missing element text");
+      }
+      value = '' + value || '';
+      value = this.escape(value);
+      this.assertLegalChar(value);
+      child = new XMLFragment(this, '', {}, value);
+      this.children.push(child);
+      return this;
+    };
+
+    XMLFragment.prototype.cdata = function(value) {
+      var child;
+      if (!(value != null)) {
+        throw new Error("Missing CDATA text");
+      }
+      value = '' + value || '';
+      this.assertLegalChar(value);
+      if (value.match(/]]>/)) {
+        throw new Error("Invalid CDATA text: " + value);
+      }
+      child = new XMLFragment(this, '', {}, '<![CDATA[' + value + ']]>');
+      this.children.push(child);
+      return this;
+    };
+
+    XMLFragment.prototype.comment = function(value) {
+      var child;
+      if (!(value != null)) {
+        throw new Error("Missing comment text");
+      }
+      value = '' + value || '';
+      value = this.escape(value);
+      this.assertLegalChar(value);
+      if (value.match(/--/)) {
+        throw new Error("Comment text cannot contain double-hypen: " + value);
+      }
+      child = new XMLFragment(this, '', {}, '<!-- ' + value + ' -->');
+      this.children.push(child);
+      return this;
+    };
+
+    XMLFragment.prototype.raw = function(value) {
+      var child;
+      if (!(value != null)) {
+        throw new Error("Missing raw text");
+      }
+      value = '' + value || '';
+      child = new XMLFragment(this, '', {}, value);
+      this.children.push(child);
+      return this;
+    };
+
+    XMLFragment.prototype.up = function() {
+      if (this.isRoot) {
+        throw new Error("This node has no parent. Use doc() if you need to get the document object.");
+      }
+      return this.parent;
+    };
+
+    XMLFragment.prototype.root = function() {
+      var child;
+      if (this.isRoot) {
+        return this;
+      }
+      child = this.parent;
+      while (!child.isRoot) {
+        child = child.parent;
+      }
+      return child;
+    };
+
+    XMLFragment.prototype.document = function() {
+      return this.root().documentObject;
+    };
+
+    XMLFragment.prototype.end = function(options) {
+      return this.document().toString(options);
+    };
+
+    XMLFragment.prototype.prev = function() {
+      var i;
+      if (this.isRoot) {
+        throw new Error("Root node has no siblings");
+      }
+      i = this.parent.children.indexOf(this);
+      if (i < 1) {
+        throw new Error("Already at the first node");
+      }
+      return this.parent.children[i - 1];
+    };
+
+    XMLFragment.prototype.next = function() {
+      var i;
+      if (this.isRoot) {
+        throw new Error("Root node has no siblings");
+      }
+      i = this.parent.children.indexOf(this);
+      if (i === -1 || i === this.parent.children.length - 1) {
+        throw new Error("Already at the last node");
+      }
+      return this.parent.children[i + 1];
+    };
+
+    XMLFragment.prototype.clone = function(deep) {
+      var clonedSelf;
+      clonedSelf = new XMLFragment(this.parent, this.name, this.attributes, this.value);
+      if (deep) {
+        this.children.forEach(function(child) {
+          var clonedChild;
+          clonedChild = child.clone(deep);
+          clonedChild.parent = clonedSelf;
+          return clonedSelf.children.push(clonedChild);
+        });
+      }
+      return clonedSelf;
+    };
+
+    XMLFragment.prototype.importXMLBuilder = function(xmlbuilder) {
+      var clonedRoot;
+      clonedRoot = xmlbuilder.root().clone(true);
+      clonedRoot.parent = this;
+      this.children.push(clonedRoot);
+      clonedRoot.isRoot = false;
+      return this;
+    };
+
+    XMLFragment.prototype.attribute = function(name, value) {
+      var _ref;
+      if (!(name != null)) {
+        throw new Error("Missing attribute name");
+      }
+      if (!(value != null)) {
+        throw new Error("Missing attribute value");
+      }
+      name = '' + name || '';
+      value = '' + value || '';
+      if ((_ref = this.attributes) == null) {
+        this.attributes = {};
+      }
+      this.attributes[name] = this.escape(value);
+      return this;
+    };
+
+    XMLFragment.prototype.removeAttribute = function(name) {
+      if (!(name != null)) {
+        throw new Error("Missing attribute name");
+      }
+      name = '' + name || '';
+      delete this.attributes[name];
+      return this;
+    };
+
+    XMLFragment.prototype.toString = function(options, level) {
+      var attName, attValue, child, indent, newline, pretty, r, space, _i, _len, _ref, _ref1;
+      pretty = (options != null) && options.pretty || false;
+      indent = (options != null) && options.indent || '  ';
+      newline = (options != null) && options.newline || '\n';
+      level || (level = 0);
+      space = new Array(level + 1).join(indent);
+      r = '';
+      if (pretty) {
+        r += space;
+      }
+      if (!(this.value != null)) {
+        r += '<' + this.name;
+      } else {
+        r += '' + this.value;
+      }
+      _ref = this.attributes;
+      for (attName in _ref) {
+        attValue = _ref[attName];
+        if (this.name === '!DOCTYPE') {
+          r += ' ' + attValue;
+        } else {
+          r += ' ' + attName + '="' + attValue + '"';
+        }
+      }
+      if (this.children.length === 0) {
+        if (!(this.value != null)) {
+          r += this.name === '?xml' ? '?>' : this.name === '!DOCTYPE' ? '>' : '/>';
+        }
+        if (pretty) {
+          r += newline;
+        }
+      } else if (pretty && this.children.length === 1 && this.children[0].value) {
+        r += '>';
+        r += this.children[0].value;
+        r += '</' + this.name + '>';
+        r += newline;
+      } else {
+        r += '>';
+        if (pretty) {
+          r += newline;
+        }
+        _ref1 = this.children;
+        for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+          child = _ref1[_i];
+          r += child.toString(options, level + 1);
+        }
+        if (pretty) {
+          r += space;
+        }
+        r += '</' + this.name + '>';
+        if (pretty) {
+          r += newline;
+        }
+      }
+      return r;
+    };
+
+    XMLFragment.prototype.escape = function(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&apos;').replace(/"/g, '&quot;');
+    };
+
+    XMLFragment.prototype.assertLegalChar = function(str) {
+      var chars, chr;
+      chars = /[\u0000-\u0008\u000B-\u000C\u000E-\u001F\uD800-\uDFFF\uFFFE-\uFFFF]/;
+      chr = str.match(chars);
+      if (chr) {
+        throw new Error("Invalid character (" + chr + ") in string: " + str);
+      }
+    };
+
+    XMLFragment.prototype.is = function(obj, type) {
+      var clas;
+      clas = Object.prototype.toString.call(obj).slice(8, -1);
+      return (obj != null) && clas === type;
+    };
+
+    XMLFragment.prototype.ele = function(name, attributes, text) {
+      return this.element(name, attributes, text);
+    };
+
+    XMLFragment.prototype.txt = function(value) {
+      return this.text(value);
+    };
+
+    XMLFragment.prototype.dat = function(value) {
+      return this.cdata(value);
+    };
+
+    XMLFragment.prototype.att = function(name, value) {
+      return this.attribute(name, value);
+    };
+
+    XMLFragment.prototype.com = function(value) {
+      return this.comment(value);
+    };
+
+    XMLFragment.prototype.doc = function() {
+      return this.document();
+    };
+
+    XMLFragment.prototype.e = function(name, attributes, text) {
+      return this.element(name, attributes, text);
+    };
+
+    XMLFragment.prototype.t = function(value) {
+      return this.text(value);
+    };
+
+    XMLFragment.prototype.d = function(value) {
+      return this.cdata(value);
+    };
+
+    XMLFragment.prototype.a = function(name, value) {
+      return this.attribute(name, value);
+    };
+
+    XMLFragment.prototype.c = function(value) {
+      return this.comment(value);
+    };
+
+    XMLFragment.prototype.r = function(value) {
+      return this.raw(value);
+    };
+
+    XMLFragment.prototype.u = function() {
+      return this.up();
+    };
+
+    return XMLFragment;
+
+  })();
+
+  module.exports = XMLFragment;
+
+}).call(this);
+
+},{}],65:[function(require,module,exports){
+(function() {
+  var XMLBuilder;
+
+  XMLBuilder = require('./XMLBuilder');
+
+  module.exports.create = function(name, xmldec, doctype) {
+    if (name != null) {
+      return new XMLBuilder(name, xmldec, doctype).root();
+    } else {
+      return new XMLBuilder();
+    }
+  };
+
+}).call(this);
+
+},{"./XMLBuilder":63}]},{},[21]);AWS.CloudWatch = AWS.Service.defineService('cloudwatch');
+
+AWS.Service.defineServiceApi(AWS.CloudWatch, "2010-08-01", {"metadata":{"apiVersion":"2010-08-01","endpointPrefix":"monitoring","serviceAbbreviation":"CloudWatch","serviceFullName":"Amazon CloudWatch","signatureVersion":"v4","xmlNamespace":"http://monitoring.amazonaws.com/doc/2010-08-01/","protocol":"query"},"operations":{"DeleteAlarms":{"input":{"type":"structure","required":["AlarmNames"],"members":{"AlarmNames":{"shape":"S2"}}}},"DescribeAlarmHistory":{"input":{"type":"structure","members":{"AlarmName":{},"HistoryItemType":{},"StartDate":{"type":"timestamp"},"EndDate":{"type":"timestamp"},"MaxRecords":{"type":"integer"},"NextToken":{}}},"output":{"resultWrapper":"DescribeAlarmHistoryResult","type":"structure","members":{"AlarmHistoryItems":{"type":"list","member":{"type":"structure","members":{"AlarmName":{},"Timestamp":{"type":"timestamp"},"HistoryItemType":{},"HistorySummary":{},"HistoryData":{}}}},"NextToken":{}}}},"DescribeAlarms":{"input":{"type":"structure","members":{"AlarmNames":{"shape":"S2"},"AlarmNamePrefix":{},"StateValue":{},"ActionPrefix":{},"MaxRecords":{"type":"integer"},"NextToken":{}}},"output":{"resultWrapper":"DescribeAlarmsResult","type":"structure","members":{"MetricAlarms":{"shape":"Sj"},"NextToken":{}}}},"DescribeAlarmsForMetric":{"input":{"type":"structure","required":["MetricName","Namespace"],"members":{"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"shape":"Sv"},"Period":{"type":"integer"},"Unit":{}}},"output":{"resultWrapper":"DescribeAlarmsForMetricResult","type":"structure","members":{"MetricAlarms":{"shape":"Sj"}}}},"DisableAlarmActions":{"input":{"type":"structure","required":["AlarmNames"],"members":{"AlarmNames":{"shape":"S2"}}}},"EnableAlarmActions":{"input":{"type":"structure","required":["AlarmNames"],"members":{"AlarmNames":{"shape":"S2"}}}},"GetMetricStatistics":{"input":{"type":"structure","required":["Namespace","MetricName","StartTime","EndTime","Period","Statistics"],"members":{"Namespace":{},"MetricName":{},"Dimensions":{"shape":"Sv"},"StartTime":{"type":"timestamp"},"EndTime":{"type":"timestamp"},"Period":{"type":"integer"},"Statistics":{"type":"list","member":{}},"Unit":{}}},"output":{"resultWrapper":"GetMetricStatisticsResult","type":"structure","members":{"Label":{},"Datapoints":{"type":"list","member":{"type":"structure","members":{"Timestamp":{"type":"timestamp"},"SampleCount":{"type":"double"},"Average":{"type":"double"},"Sum":{"type":"double"},"Minimum":{"type":"double"},"Maximum":{"type":"double"},"Unit":{}},"xmlOrder":["Timestamp","SampleCount","Average","Sum","Minimum","Maximum","Unit"]}}}}},"ListMetrics":{"input":{"type":"structure","members":{"Namespace":{},"MetricName":{},"Dimensions":{"type":"list","member":{"type":"structure","required":["Name"],"members":{"Name":{},"Value":{}}}},"NextToken":{}}},"output":{"xmlOrder":["Metrics","NextToken"],"resultWrapper":"ListMetricsResult","type":"structure","members":{"Metrics":{"type":"list","member":{"type":"structure","members":{"Namespace":{},"MetricName":{},"Dimensions":{"shape":"Sv"}},"xmlOrder":["Namespace","MetricName","Dimensions"]}},"NextToken":{}}}},"PutMetricAlarm":{"input":{"type":"structure","required":["AlarmName","MetricName","Namespace","Statistic","Period","EvaluationPeriods","Threshold","ComparisonOperator"],"members":{"AlarmName":{},"AlarmDescription":{},"ActionsEnabled":{"type":"boolean"},"OKActions":{"shape":"So"},"AlarmActions":{"shape":"So"},"InsufficientDataActions":{"shape":"So"},"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"shape":"Sv"},"Period":{"type":"integer"},"Unit":{},"EvaluationPeriods":{"type":"integer"},"Threshold":{"type":"double"},"ComparisonOperator":{}}}},"PutMetricData":{"input":{"type":"structure","required":["Namespace","MetricData"],"members":{"Namespace":{},"MetricData":{"type":"list","member":{"type":"structure","required":["MetricName"],"members":{"MetricName":{},"Dimensions":{"shape":"Sv"},"Timestamp":{"type":"timestamp"},"Value":{"type":"double"},"StatisticValues":{"type":"structure","required":["SampleCount","Sum","Minimum","Maximum"],"members":{"SampleCount":{"type":"double"},"Sum":{"type":"double"},"Minimum":{"type":"double"},"Maximum":{"type":"double"}}},"Unit":{}}}}}}},"SetAlarmState":{"input":{"type":"structure","required":["AlarmName","StateValue","StateReason"],"members":{"AlarmName":{},"StateValue":{},"StateReason":{},"StateReasonData":{}}}}},"shapes":{"S2":{"type":"list","member":{}},"Sj":{"type":"list","member":{"type":"structure","members":{"AlarmName":{},"AlarmArn":{},"AlarmDescription":{},"AlarmConfigurationUpdatedTimestamp":{"type":"timestamp"},"ActionsEnabled":{"type":"boolean"},"OKActions":{"shape":"So"},"AlarmActions":{"shape":"So"},"InsufficientDataActions":{"shape":"So"},"StateValue":{},"StateReason":{},"StateReasonData":{},"StateUpdatedTimestamp":{"type":"timestamp"},"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"shape":"Sv"},"Period":{"type":"integer"},"Unit":{},"EvaluationPeriods":{"type":"integer"},"Threshold":{"type":"double"},"ComparisonOperator":{}},"xmlOrder":["AlarmName","AlarmArn","AlarmDescription","AlarmConfigurationUpdatedTimestamp","ActionsEnabled","OKActions","AlarmActions","InsufficientDataActions","StateValue","StateReason","StateReasonData","StateUpdatedTimestamp","MetricName","Namespace","Statistic","Dimensions","Period","Unit","EvaluationPeriods","Threshold","ComparisonOperator"]}},"So":{"type":"list","member":{}},"Sv":{"type":"list","member":{"type":"structure","required":["Name","Value"],"members":{"Name":{},"Value":{}},"xmlOrder":["Name","Value"]}}},"paginators":{"DescribeAlarmHistory":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"AlarmHistoryItems"},"DescribeAlarms":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"MetricAlarms"},"DescribeAlarmsForMetric":{"result_key":"MetricAlarms"},"ListMetrics":{"input_token":"NextToken","output_token":"NextToken","result_key":"Metrics"}}});
+AWS.DynamoDB = AWS.Service.defineService('dynamodb');
+
+
+AWS.util.update(AWS.DynamoDB.prototype, {
+
   setupRequestListeners: function setupRequestListeners(request) {
     if (request.service.config.dynamoDbCrc32) {
       request.addListener('extractData', this.checkCrc32);
@@ -8770,7 +9097,7 @@ window.AWS.util.update(window.AWS.DynamoDB.prototype, {
 
   checkCrc32: function checkCrc32(resp) {
     if (!resp.request.service.crc32IsValid(resp)) {
-      resp.error = window.AWS.util.error(new Error(), {
+      resp.error = AWS.util.error(new Error(), {
         code: 'CRC32CheckFailed',
         message: 'CRC32 integrity check failed',
         retryable: true
@@ -8782,7 +9109,7 @@ window.AWS.util.update(window.AWS.DynamoDB.prototype, {
   crc32IsValid: function crc32IsValid(resp) {
     var crc = resp.httpResponse.headers['x-amz-crc32'];
     if (!crc) return true; // no (valid) CRC32 header
-    return parseInt(crc, 10) === window.AWS.util.crypto.crc32(resp.httpResponse.body);
+    return parseInt(crc, 10) === AWS.util.crypto.crc32(resp.httpResponse.body);
   },
 
 
@@ -8803,18 +9130,18 @@ window.AWS.util.update(window.AWS.DynamoDB.prototype, {
   }
 });
 
-window.AWS.Service.defineServiceApi(window.AWS.DynamoDB, "2012-08-10", {"format":"json","apiVersion":"2012-08-10","endpointPrefix":"dynamodb","jsonVersion":"1.0","serviceAbbreviation":"DynamoDB","serviceFullName":"Amazon DynamoDB","signatureVersion":"v4","targetPrefix":"DynamoDB_20120810","timestampFormat":"iso8601","operations":{"batchGetItem":{"name":"BatchGetItem","input":{"type":"structure","members":{"RequestItems":{"type":"map","keys":{},"members":{"type":"structure","members":{"Keys":{"type":"list","members":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}},"required":true},"AttributesToGet":{"type":"list","members":{}},"ConsistentRead":{"type":"boolean"}}},"required":true},"ReturnConsumedCapacity":{}}},"output":{"type":"structure","members":{"Responses":{"type":"map","keys":{},"members":{"type":"list","members":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}}}},"UnprocessedKeys":{"type":"map","keys":{},"members":{"type":"structure","members":{"Keys":{"type":"list","members":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}}},"AttributesToGet":{"type":"list","members":{}},"ConsistentRead":{"type":"boolean"}}}},"ConsumedCapacity":{"type":"list","members":{"type":"structure","members":{"TableName":{},"CapacityUnits":{"type":"float"},"Table":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}},"LocalSecondaryIndexes":{"type":"map","keys":{},"members":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}}},"GlobalSecondaryIndexes":{"type":"map","keys":{},"members":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}}}}}}}}},"batchWriteItem":{"name":"BatchWriteItem","input":{"type":"structure","members":{"RequestItems":{"type":"map","keys":{},"members":{"type":"list","members":{"type":"structure","members":{"PutRequest":{"type":"structure","members":{"Item":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}},"required":true}}},"DeleteRequest":{"type":"structure","members":{"Key":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}},"required":true}}}}}},"required":true},"ReturnConsumedCapacity":{},"ReturnItemCollectionMetrics":{}}},"output":{"type":"structure","members":{"UnprocessedItems":{"type":"map","keys":{},"members":{"type":"list","members":{"type":"structure","members":{"PutRequest":{"type":"structure","members":{"Item":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}}}},"DeleteRequest":{"type":"structure","members":{"Key":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}}}}}}}},"ItemCollectionMetrics":{"type":"map","keys":{},"members":{"type":"list","members":{"type":"structure","members":{"ItemCollectionKey":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}},"SizeEstimateRangeGB":{"type":"list","members":{"type":"float"}}}}}},"ConsumedCapacity":{"type":"list","members":{"type":"structure","members":{"TableName":{},"CapacityUnits":{"type":"float"},"Table":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}},"LocalSecondaryIndexes":{"type":"map","keys":{},"members":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}}},"GlobalSecondaryIndexes":{"type":"map","keys":{},"members":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}}}}}}}}},"createTable":{"name":"CreateTable","input":{"type":"structure","members":{"AttributeDefinitions":{"type":"list","members":{"type":"structure","members":{"AttributeName":{"required":true},"AttributeType":{"required":true}}},"required":true},"TableName":{"required":true},"KeySchema":{"type":"list","members":{"type":"structure","members":{"AttributeName":{"required":true},"KeyType":{"required":true}}},"required":true},"LocalSecondaryIndexes":{"type":"list","members":{"type":"structure","members":{"IndexName":{"required":true},"KeySchema":{"type":"list","members":{"type":"structure","members":{"AttributeName":{"required":true},"KeyType":{"required":true}}},"required":true},"Projection":{"type":"structure","members":{"ProjectionType":{},"NonKeyAttributes":{"type":"list","members":{}}},"required":true}}}},"GlobalSecondaryIndexes":{"type":"list","members":{"type":"structure","members":{"IndexName":{"required":true},"KeySchema":{"type":"list","members":{"type":"structure","members":{"AttributeName":{"required":true},"KeyType":{"required":true}}},"required":true},"Projection":{"type":"structure","members":{"ProjectionType":{},"NonKeyAttributes":{"type":"list","members":{}}},"required":true},"ProvisionedThroughput":{"type":"structure","members":{"ReadCapacityUnits":{"type":"integer","required":true},"WriteCapacityUnits":{"type":"integer","required":true}},"required":true}}}},"ProvisionedThroughput":{"type":"structure","members":{"ReadCapacityUnits":{"type":"integer","required":true},"WriteCapacityUnits":{"type":"integer","required":true}},"required":true}}},"output":{"type":"structure","members":{"TableDescription":{"type":"structure","members":{"AttributeDefinitions":{"type":"list","members":{"type":"structure","members":{"AttributeName":{},"AttributeType":{}}}},"TableName":{},"KeySchema":{"type":"list","members":{"type":"structure","members":{"AttributeName":{},"KeyType":{}}}},"TableStatus":{},"CreationDateTime":{"type":"timestamp"},"ProvisionedThroughput":{"type":"structure","members":{"LastIncreaseDateTime":{"type":"timestamp"},"LastDecreaseDateTime":{"type":"timestamp"},"NumberOfDecreasesToday":{"type":"integer"},"ReadCapacityUnits":{"type":"integer"},"WriteCapacityUnits":{"type":"integer"}}},"TableSizeBytes":{"type":"integer"},"ItemCount":{"type":"integer"},"LocalSecondaryIndexes":{"type":"list","members":{"type":"structure","members":{"IndexName":{},"KeySchema":{"type":"list","members":{"type":"structure","members":{"AttributeName":{},"KeyType":{}}}},"Projection":{"type":"structure","members":{"ProjectionType":{},"NonKeyAttributes":{"type":"list","members":{}}}},"IndexSizeBytes":{"type":"integer"},"ItemCount":{"type":"integer"}}}},"GlobalSecondaryIndexes":{"type":"list","members":{"type":"structure","members":{"IndexName":{},"KeySchema":{"type":"list","members":{"type":"structure","members":{"AttributeName":{},"KeyType":{}}}},"Projection":{"type":"structure","members":{"ProjectionType":{},"NonKeyAttributes":{"type":"list","members":{}}}},"IndexStatus":{},"ProvisionedThroughput":{"type":"structure","members":{"LastIncreaseDateTime":{"type":"timestamp"},"LastDecreaseDateTime":{"type":"timestamp"},"NumberOfDecreasesToday":{"type":"integer"},"ReadCapacityUnits":{"type":"integer"},"WriteCapacityUnits":{"type":"integer"}}},"IndexSizeBytes":{"type":"integer"},"ItemCount":{"type":"integer"}}}}}}}}},"deleteItem":{"name":"DeleteItem","input":{"type":"structure","members":{"TableName":{"required":true},"Key":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}},"required":true},"Expected":{"type":"map","keys":{},"members":{"type":"structure","members":{"Value":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}},"Exists":{"type":"boolean"},"ComparisonOperator":{},"AttributeValueList":{"type":"list","members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}}}}},"ConditionalOperator":{},"ReturnValues":{},"ReturnConsumedCapacity":{},"ReturnItemCollectionMetrics":{}}},"output":{"type":"structure","members":{"Attributes":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}},"ConsumedCapacity":{"type":"structure","members":{"TableName":{},"CapacityUnits":{"type":"float"},"Table":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}},"LocalSecondaryIndexes":{"type":"map","keys":{},"members":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}}},"GlobalSecondaryIndexes":{"type":"map","keys":{},"members":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}}}}},"ItemCollectionMetrics":{"type":"structure","members":{"ItemCollectionKey":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}},"SizeEstimateRangeGB":{"type":"list","members":{"type":"float"}}}}}}},"deleteTable":{"name":"DeleteTable","input":{"type":"structure","members":{"TableName":{"required":true}}},"output":{"type":"structure","members":{"TableDescription":{"type":"structure","members":{"AttributeDefinitions":{"type":"list","members":{"type":"structure","members":{"AttributeName":{},"AttributeType":{}}}},"TableName":{},"KeySchema":{"type":"list","members":{"type":"structure","members":{"AttributeName":{},"KeyType":{}}}},"TableStatus":{},"CreationDateTime":{"type":"timestamp"},"ProvisionedThroughput":{"type":"structure","members":{"LastIncreaseDateTime":{"type":"timestamp"},"LastDecreaseDateTime":{"type":"timestamp"},"NumberOfDecreasesToday":{"type":"integer"},"ReadCapacityUnits":{"type":"integer"},"WriteCapacityUnits":{"type":"integer"}}},"TableSizeBytes":{"type":"integer"},"ItemCount":{"type":"integer"},"LocalSecondaryIndexes":{"type":"list","members":{"type":"structure","members":{"IndexName":{},"KeySchema":{"type":"list","members":{"type":"structure","members":{"AttributeName":{},"KeyType":{}}}},"Projection":{"type":"structure","members":{"ProjectionType":{},"NonKeyAttributes":{"type":"list","members":{}}}},"IndexSizeBytes":{"type":"integer"},"ItemCount":{"type":"integer"}}}},"GlobalSecondaryIndexes":{"type":"list","members":{"type":"structure","members":{"IndexName":{},"KeySchema":{"type":"list","members":{"type":"structure","members":{"AttributeName":{},"KeyType":{}}}},"Projection":{"type":"structure","members":{"ProjectionType":{},"NonKeyAttributes":{"type":"list","members":{}}}},"IndexStatus":{},"ProvisionedThroughput":{"type":"structure","members":{"LastIncreaseDateTime":{"type":"timestamp"},"LastDecreaseDateTime":{"type":"timestamp"},"NumberOfDecreasesToday":{"type":"integer"},"ReadCapacityUnits":{"type":"integer"},"WriteCapacityUnits":{"type":"integer"}}},"IndexSizeBytes":{"type":"integer"},"ItemCount":{"type":"integer"}}}}}}}}},"describeTable":{"name":"DescribeTable","input":{"type":"structure","members":{"TableName":{"required":true}}},"output":{"type":"structure","members":{"Table":{"type":"structure","members":{"AttributeDefinitions":{"type":"list","members":{"type":"structure","members":{"AttributeName":{},"AttributeType":{}}}},"TableName":{},"KeySchema":{"type":"list","members":{"type":"structure","members":{"AttributeName":{},"KeyType":{}}}},"TableStatus":{},"CreationDateTime":{"type":"timestamp"},"ProvisionedThroughput":{"type":"structure","members":{"LastIncreaseDateTime":{"type":"timestamp"},"LastDecreaseDateTime":{"type":"timestamp"},"NumberOfDecreasesToday":{"type":"integer"},"ReadCapacityUnits":{"type":"integer"},"WriteCapacityUnits":{"type":"integer"}}},"TableSizeBytes":{"type":"integer"},"ItemCount":{"type":"integer"},"LocalSecondaryIndexes":{"type":"list","members":{"type":"structure","members":{"IndexName":{},"KeySchema":{"type":"list","members":{"type":"structure","members":{"AttributeName":{},"KeyType":{}}}},"Projection":{"type":"structure","members":{"ProjectionType":{},"NonKeyAttributes":{"type":"list","members":{}}}},"IndexSizeBytes":{"type":"integer"},"ItemCount":{"type":"integer"}}}},"GlobalSecondaryIndexes":{"type":"list","members":{"type":"structure","members":{"IndexName":{},"KeySchema":{"type":"list","members":{"type":"structure","members":{"AttributeName":{},"KeyType":{}}}},"Projection":{"type":"structure","members":{"ProjectionType":{},"NonKeyAttributes":{"type":"list","members":{}}}},"IndexStatus":{},"ProvisionedThroughput":{"type":"structure","members":{"LastIncreaseDateTime":{"type":"timestamp"},"LastDecreaseDateTime":{"type":"timestamp"},"NumberOfDecreasesToday":{"type":"integer"},"ReadCapacityUnits":{"type":"integer"},"WriteCapacityUnits":{"type":"integer"}}},"IndexSizeBytes":{"type":"integer"},"ItemCount":{"type":"integer"}}}}}}}}},"getItem":{"name":"GetItem","input":{"type":"structure","members":{"TableName":{"required":true},"Key":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}},"required":true},"AttributesToGet":{"type":"list","members":{}},"ConsistentRead":{"type":"boolean"},"ReturnConsumedCapacity":{}}},"output":{"type":"structure","members":{"Item":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}},"ConsumedCapacity":{"type":"structure","members":{"TableName":{},"CapacityUnits":{"type":"float"},"Table":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}},"LocalSecondaryIndexes":{"type":"map","keys":{},"members":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}}},"GlobalSecondaryIndexes":{"type":"map","keys":{},"members":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}}}}}}}},"listTables":{"name":"ListTables","input":{"type":"structure","members":{"ExclusiveStartTableName":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"TableNames":{"type":"list","members":{}},"LastEvaluatedTableName":{}}}},"putItem":{"name":"PutItem","input":{"type":"structure","members":{"TableName":{"required":true},"Item":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}},"required":true},"Expected":{"type":"map","keys":{},"members":{"type":"structure","members":{"Value":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}},"Exists":{"type":"boolean"},"ComparisonOperator":{},"AttributeValueList":{"type":"list","members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}}}}},"ReturnValues":{},"ReturnConsumedCapacity":{},"ReturnItemCollectionMetrics":{},"ConditionalOperator":{}}},"output":{"type":"structure","members":{"Attributes":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}},"ConsumedCapacity":{"type":"structure","members":{"TableName":{},"CapacityUnits":{"type":"float"},"Table":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}},"LocalSecondaryIndexes":{"type":"map","keys":{},"members":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}}},"GlobalSecondaryIndexes":{"type":"map","keys":{},"members":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}}}}},"ItemCollectionMetrics":{"type":"structure","members":{"ItemCollectionKey":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}},"SizeEstimateRangeGB":{"type":"list","members":{"type":"float"}}}}}}},"query":{"name":"Query","input":{"type":"structure","members":{"TableName":{"required":true},"IndexName":{},"Select":{},"AttributesToGet":{"type":"list","members":{}},"Limit":{"type":"integer"},"ConsistentRead":{"type":"boolean"},"KeyConditions":{"type":"map","keys":{},"members":{"type":"structure","members":{"AttributeValueList":{"type":"list","members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}},"ComparisonOperator":{"required":true}}},"required":true},"QueryFilter":{"type":"map","keys":{},"members":{"type":"structure","members":{"AttributeValueList":{"type":"list","members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}},"ComparisonOperator":{"required":true}}}},"ConditionalOperator":{},"ScanIndexForward":{"type":"boolean"},"ExclusiveStartKey":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}},"ReturnConsumedCapacity":{}}},"output":{"type":"structure","members":{"Items":{"type":"list","members":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}}},"Count":{"type":"integer"},"ScannedCount":{"type":"integer"},"LastEvaluatedKey":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}},"ConsumedCapacity":{"type":"structure","members":{"TableName":{},"CapacityUnits":{"type":"float"},"Table":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}},"LocalSecondaryIndexes":{"type":"map","keys":{},"members":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}}},"GlobalSecondaryIndexes":{"type":"map","keys":{},"members":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}}}}}}}},"scan":{"name":"Scan","input":{"type":"structure","members":{"TableName":{"required":true},"AttributesToGet":{"type":"list","members":{}},"Limit":{"type":"integer"},"Select":{},"ScanFilter":{"type":"map","keys":{},"members":{"type":"structure","members":{"AttributeValueList":{"type":"list","members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}},"ComparisonOperator":{"required":true}}}},"ConditionalOperator":{},"ExclusiveStartKey":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}},"ReturnConsumedCapacity":{},"TotalSegments":{"type":"integer"},"Segment":{"type":"integer"}}},"output":{"type":"structure","members":{"Items":{"type":"list","members":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}}},"Count":{"type":"integer"},"ScannedCount":{"type":"integer"},"LastEvaluatedKey":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}},"ConsumedCapacity":{"type":"structure","members":{"TableName":{},"CapacityUnits":{"type":"float"},"Table":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}},"LocalSecondaryIndexes":{"type":"map","keys":{},"members":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}}},"GlobalSecondaryIndexes":{"type":"map","keys":{},"members":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}}}}}}}},"updateItem":{"name":"UpdateItem","input":{"type":"structure","members":{"TableName":{"required":true},"Key":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}},"required":true},"AttributeUpdates":{"type":"map","keys":{},"members":{"type":"structure","members":{"Value":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}},"Action":{}}}},"Expected":{"type":"map","keys":{},"members":{"type":"structure","members":{"Value":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}},"Exists":{"type":"boolean"},"ComparisonOperator":{},"AttributeValueList":{"type":"list","members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}}}}},"ConditionalOperator":{},"ReturnValues":{},"ReturnConsumedCapacity":{},"ReturnItemCollectionMetrics":{}}},"output":{"type":"structure","members":{"Attributes":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}},"ConsumedCapacity":{"type":"structure","members":{"TableName":{},"CapacityUnits":{"type":"float"},"Table":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}},"LocalSecondaryIndexes":{"type":"map","keys":{},"members":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}}},"GlobalSecondaryIndexes":{"type":"map","keys":{},"members":{"type":"structure","members":{"CapacityUnits":{"type":"float"}}}}}},"ItemCollectionMetrics":{"type":"structure","members":{"ItemCollectionKey":{"type":"map","keys":{},"members":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"base64"},"SS":{"type":"list","members":{}},"NS":{"type":"list","members":{}},"BS":{"type":"list","members":{"type":"base64"}}}}},"SizeEstimateRangeGB":{"type":"list","members":{"type":"float"}}}}}}},"updateTable":{"name":"UpdateTable","input":{"type":"structure","members":{"TableName":{"required":true},"ProvisionedThroughput":{"type":"structure","members":{"ReadCapacityUnits":{"type":"integer","required":true},"WriteCapacityUnits":{"type":"integer","required":true}}},"GlobalSecondaryIndexUpdates":{"type":"list","members":{"type":"structure","members":{"Update":{"type":"structure","members":{"IndexName":{"required":true},"ProvisionedThroughput":{"type":"structure","members":{"ReadCapacityUnits":{"type":"integer","required":true},"WriteCapacityUnits":{"type":"integer","required":true}},"required":true}}}}}}}},"output":{"type":"structure","members":{"TableDescription":{"type":"structure","members":{"AttributeDefinitions":{"type":"list","members":{"type":"structure","members":{"AttributeName":{},"AttributeType":{}}}},"TableName":{},"KeySchema":{"type":"list","members":{"type":"structure","members":{"AttributeName":{},"KeyType":{}}}},"TableStatus":{},"CreationDateTime":{"type":"timestamp"},"ProvisionedThroughput":{"type":"structure","members":{"LastIncreaseDateTime":{"type":"timestamp"},"LastDecreaseDateTime":{"type":"timestamp"},"NumberOfDecreasesToday":{"type":"integer"},"ReadCapacityUnits":{"type":"integer"},"WriteCapacityUnits":{"type":"integer"}}},"TableSizeBytes":{"type":"integer"},"ItemCount":{"type":"integer"},"LocalSecondaryIndexes":{"type":"list","members":{"type":"structure","members":{"IndexName":{},"KeySchema":{"type":"list","members":{"type":"structure","members":{"AttributeName":{},"KeyType":{}}}},"Projection":{"type":"structure","members":{"ProjectionType":{},"NonKeyAttributes":{"type":"list","members":{}}}},"IndexSizeBytes":{"type":"integer"},"ItemCount":{"type":"integer"}}}},"GlobalSecondaryIndexes":{"type":"list","members":{"type":"structure","members":{"IndexName":{},"KeySchema":{"type":"list","members":{"type":"structure","members":{"AttributeName":{},"KeyType":{}}}},"Projection":{"type":"structure","members":{"ProjectionType":{},"NonKeyAttributes":{"type":"list","members":{}}}},"IndexStatus":{},"ProvisionedThroughput":{"type":"structure","members":{"LastIncreaseDateTime":{"type":"timestamp"},"LastDecreaseDateTime":{"type":"timestamp"},"NumberOfDecreasesToday":{"type":"integer"},"ReadCapacityUnits":{"type":"integer"},"WriteCapacityUnits":{"type":"integer"}}},"IndexSizeBytes":{"type":"integer"},"ItemCount":{"type":"integer"}}}}}}}}}},"pagination":{"batchGetItem":{"inputToken":"RequestItems","outputToken":"UnprocessedKeys","resultKey":"Responses[]"},"listTables":{"inputToken":"ExclusiveStartTableName","outputToken":"LastEvaluatedTableName","limitKey":"Limit","resultKey":"TableNames"},"query":{"inputToken":"ExclusiveStartKey","outputToken":"LastEvaluatedKey","limitKey":"Limit","resultKey":"Items"},"scan":{"inputToken":"ExclusiveStartKey","outputToken":"LastEvaluatedKey","limitKey":"Limit","resultKey":"Items"}},"waiters":{"__default__":{"interval":20,"maxAttempts":25},"__TableState":{"operation":"DescribeTable"},"tableExists":{"extends":"__TableState","ignoreErrors":["ResourceNotFoundException"],"successType":"output","successPath":"Table.TableStatus","successValue":"ACTIVE"},"tableNotExists":{"extends":"__TableState","successType":"error","successValue":"ResourceNotFoundException"}}});
-window.AWS.Kinesis = window.AWS.Service.defineService('kinesis');
+AWS.Service.defineServiceApi(AWS.DynamoDB, "2012-08-10", {"metadata":{"apiVersion":"2012-08-10","endpointPrefix":"dynamodb","jsonVersion":"1.0","serviceAbbreviation":"DynamoDB","serviceFullName":"Amazon DynamoDB","signatureVersion":"v4","targetPrefix":"DynamoDB_20120810","protocol":"json"},"operations":{"BatchGetItem":{"input":{"type":"structure","required":["RequestItems"],"members":{"RequestItems":{"shape":"S2"},"ReturnConsumedCapacity":{}}},"output":{"type":"structure","members":{"Responses":{"type":"map","key":{},"value":{"shape":"Sk"}},"UnprocessedKeys":{"shape":"S2"},"ConsumedCapacity":{"shape":"Sm"}}}},"BatchWriteItem":{"input":{"type":"structure","required":["RequestItems"],"members":{"RequestItems":{"shape":"St"},"ReturnConsumedCapacity":{},"ReturnItemCollectionMetrics":{}}},"output":{"type":"structure","members":{"UnprocessedItems":{"shape":"St"},"ItemCollectionMetrics":{"type":"map","key":{},"value":{"type":"list","member":{"shape":"S13"}}},"ConsumedCapacity":{"shape":"Sm"}}}},"CreateTable":{"input":{"type":"structure","required":["AttributeDefinitions","TableName","KeySchema","ProvisionedThroughput"],"members":{"AttributeDefinitions":{"shape":"S18"},"TableName":{},"KeySchema":{"shape":"S1c"},"LocalSecondaryIndexes":{"type":"list","member":{"type":"structure","required":["IndexName","KeySchema","Projection"],"members":{"IndexName":{},"KeySchema":{"shape":"S1c"},"Projection":{"shape":"S1h"}}}},"GlobalSecondaryIndexes":{"type":"list","member":{"type":"structure","required":["IndexName","KeySchema","Projection","ProvisionedThroughput"],"members":{"IndexName":{},"KeySchema":{"shape":"S1c"},"Projection":{"shape":"S1h"},"ProvisionedThroughput":{"shape":"S1n"}}}},"ProvisionedThroughput":{"shape":"S1n"}}},"output":{"type":"structure","members":{"TableDescription":{"shape":"S1q"}}}},"DeleteItem":{"input":{"type":"structure","required":["TableName","Key"],"members":{"TableName":{},"Key":{"shape":"S6"},"Expected":{"shape":"S21"},"ConditionalOperator":{},"ReturnValues":{},"ReturnConsumedCapacity":{},"ReturnItemCollectionMetrics":{}}},"output":{"type":"structure","members":{"Attributes":{"shape":"Sl"},"ConsumedCapacity":{"shape":"Sn"},"ItemCollectionMetrics":{"shape":"S13"}}}},"DeleteTable":{"input":{"type":"structure","required":["TableName"],"members":{"TableName":{}}},"output":{"type":"structure","members":{"TableDescription":{"shape":"S1q"}}}},"DescribeTable":{"input":{"type":"structure","required":["TableName"],"members":{"TableName":{}}},"output":{"type":"structure","members":{"Table":{"shape":"S1q"}}}},"GetItem":{"input":{"type":"structure","required":["TableName","Key"],"members":{"TableName":{},"Key":{"shape":"S6"},"AttributesToGet":{"shape":"Sf"},"ConsistentRead":{"type":"boolean"},"ReturnConsumedCapacity":{}}},"output":{"type":"structure","members":{"Item":{"shape":"Sl"},"ConsumedCapacity":{"shape":"Sn"}}}},"ListTables":{"input":{"type":"structure","members":{"ExclusiveStartTableName":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"TableNames":{"type":"list","member":{}},"LastEvaluatedTableName":{}}}},"PutItem":{"input":{"type":"structure","required":["TableName","Item"],"members":{"TableName":{},"Item":{"shape":"Sx"},"Expected":{"shape":"S21"},"ReturnValues":{},"ReturnConsumedCapacity":{},"ReturnItemCollectionMetrics":{},"ConditionalOperator":{}}},"output":{"type":"structure","members":{"Attributes":{"shape":"Sl"},"ConsumedCapacity":{"shape":"Sn"},"ItemCollectionMetrics":{"shape":"S13"}}}},"Query":{"input":{"type":"structure","required":["TableName","KeyConditions"],"members":{"TableName":{},"IndexName":{},"Select":{},"AttributesToGet":{"shape":"Sf"},"Limit":{"type":"integer"},"ConsistentRead":{"type":"boolean"},"KeyConditions":{"type":"map","key":{},"value":{"shape":"S2p"}},"QueryFilter":{"shape":"S2q"},"ConditionalOperator":{},"ScanIndexForward":{"type":"boolean"},"ExclusiveStartKey":{"shape":"S6"},"ReturnConsumedCapacity":{}}},"output":{"type":"structure","members":{"Items":{"shape":"Sk"},"Count":{"type":"integer"},"ScannedCount":{"type":"integer"},"LastEvaluatedKey":{"shape":"S6"},"ConsumedCapacity":{"shape":"Sn"}}}},"Scan":{"input":{"type":"structure","required":["TableName"],"members":{"TableName":{},"AttributesToGet":{"shape":"Sf"},"Limit":{"type":"integer"},"Select":{},"ScanFilter":{"shape":"S2q"},"ConditionalOperator":{},"ExclusiveStartKey":{"shape":"S6"},"ReturnConsumedCapacity":{},"TotalSegments":{"type":"integer"},"Segment":{"type":"integer"}}},"output":{"type":"structure","members":{"Items":{"shape":"Sk"},"Count":{"type":"integer"},"ScannedCount":{"type":"integer"},"LastEvaluatedKey":{"shape":"S6"},"ConsumedCapacity":{"shape":"Sn"}}}},"UpdateItem":{"input":{"type":"structure","required":["TableName","Key"],"members":{"TableName":{},"Key":{"shape":"S6"},"AttributeUpdates":{"type":"map","key":{},"value":{"type":"structure","members":{"Value":{"shape":"S8"},"Action":{}}}},"Expected":{"shape":"S21"},"ConditionalOperator":{},"ReturnValues":{},"ReturnConsumedCapacity":{},"ReturnItemCollectionMetrics":{}}},"output":{"type":"structure","members":{"Attributes":{"shape":"Sl"},"ConsumedCapacity":{"shape":"Sn"},"ItemCollectionMetrics":{"shape":"S13"}}}},"UpdateTable":{"input":{"type":"structure","required":["TableName"],"members":{"TableName":{},"ProvisionedThroughput":{"shape":"S1n"},"GlobalSecondaryIndexUpdates":{"type":"list","member":{"type":"structure","members":{"Update":{"type":"structure","required":["IndexName","ProvisionedThroughput"],"members":{"IndexName":{},"ProvisionedThroughput":{"shape":"S1n"}}}}}}}},"output":{"type":"structure","members":{"TableDescription":{"shape":"S1q"}}}}},"shapes":{"S2":{"type":"map","key":{},"value":{"type":"structure","required":["Keys"],"members":{"Keys":{"type":"list","member":{"shape":"S6"}},"AttributesToGet":{"shape":"Sf"},"ConsistentRead":{"type":"boolean"}}}},"S6":{"type":"map","key":{},"value":{"shape":"S8"}},"S8":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"blob"},"SS":{"type":"list","member":{}},"NS":{"type":"list","member":{}},"BS":{"type":"list","member":{"type":"blob"}}}},"Sf":{"type":"list","member":{}},"Sk":{"type":"list","member":{"shape":"Sl"}},"Sl":{"type":"map","key":{},"value":{"shape":"S8"}},"Sm":{"type":"list","member":{"shape":"Sn"}},"Sn":{"type":"structure","members":{"TableName":{},"CapacityUnits":{"type":"double"},"Table":{"shape":"Sp"},"LocalSecondaryIndexes":{"shape":"Sq"},"GlobalSecondaryIndexes":{"shape":"Sq"}}},"Sp":{"type":"structure","members":{"CapacityUnits":{"type":"double"}}},"Sq":{"type":"map","key":{},"value":{"shape":"Sp"}},"St":{"type":"map","key":{},"value":{"type":"list","member":{"type":"structure","members":{"PutRequest":{"type":"structure","required":["Item"],"members":{"Item":{"shape":"Sx"}}},"DeleteRequest":{"type":"structure","required":["Key"],"members":{"Key":{"shape":"S6"}}}}}}},"Sx":{"type":"map","key":{},"value":{"shape":"S8"}},"S13":{"type":"structure","members":{"ItemCollectionKey":{"type":"map","key":{},"value":{"shape":"S8"}},"SizeEstimateRangeGB":{"type":"list","member":{"type":"double"}}}},"S18":{"type":"list","member":{"type":"structure","required":["AttributeName","AttributeType"],"members":{"AttributeName":{},"AttributeType":{}}}},"S1c":{"type":"list","member":{"type":"structure","required":["AttributeName","KeyType"],"members":{"AttributeName":{},"KeyType":{}}}},"S1h":{"type":"structure","members":{"ProjectionType":{},"NonKeyAttributes":{"type":"list","member":{}}}},"S1n":{"type":"structure","required":["ReadCapacityUnits","WriteCapacityUnits"],"members":{"ReadCapacityUnits":{"type":"long"},"WriteCapacityUnits":{"type":"long"}}},"S1q":{"type":"structure","members":{"AttributeDefinitions":{"shape":"S18"},"TableName":{},"KeySchema":{"shape":"S1c"},"TableStatus":{},"CreationDateTime":{"type":"timestamp"},"ProvisionedThroughput":{"shape":"S1t"},"TableSizeBytes":{"type":"long"},"ItemCount":{"type":"long"},"LocalSecondaryIndexes":{"type":"list","member":{"type":"structure","members":{"IndexName":{},"KeySchema":{"shape":"S1c"},"Projection":{"shape":"S1h"},"IndexSizeBytes":{"type":"long"},"ItemCount":{"type":"long"}}}},"GlobalSecondaryIndexes":{"type":"list","member":{"type":"structure","members":{"IndexName":{},"KeySchema":{"shape":"S1c"},"Projection":{"shape":"S1h"},"IndexStatus":{},"ProvisionedThroughput":{"shape":"S1t"},"IndexSizeBytes":{"type":"long"},"ItemCount":{"type":"long"}}}}}},"S1t":{"type":"structure","members":{"LastIncreaseDateTime":{"type":"timestamp"},"LastDecreaseDateTime":{"type":"timestamp"},"NumberOfDecreasesToday":{"type":"long"},"ReadCapacityUnits":{"type":"long"},"WriteCapacityUnits":{"type":"long"}}},"S21":{"type":"map","key":{},"value":{"type":"structure","members":{"Value":{"shape":"S8"},"Exists":{"type":"boolean"},"ComparisonOperator":{},"AttributeValueList":{"shape":"S25"}}}},"S25":{"type":"list","member":{"shape":"S8"}},"S2p":{"type":"structure","required":["ComparisonOperator"],"members":{"AttributeValueList":{"shape":"S25"},"ComparisonOperator":{}}},"S2q":{"type":"map","key":{},"value":{"shape":"S2p"}}},"paginators":{"BatchGetItem":{"input_token":"RequestItems","output_token":"UnprocessedKeys","result_key":"Responses[]"},"ListTables":{"input_token":"ExclusiveStartTableName","output_token":"LastEvaluatedTableName","limit_key":"Limit","result_key":"TableNames"},"Query":{"input_token":"ExclusiveStartKey","output_token":"LastEvaluatedKey","limit_key":"Limit","result_key":"Items"},"Scan":{"input_token":"ExclusiveStartKey","output_token":"LastEvaluatedKey","limit_key":"Limit","result_key":"Items"}},"waiters":{"__default__":{"interval":20,"max_attempts":25},"__TableState":{"operation":"DescribeTable"},"TableExists":{"extends":"__TableState","ignore_errors":["ResourceNotFoundException"],"success_type":"output","success_path":"Table.TableStatus","success_value":"ACTIVE"},"TableNotExists":{"extends":"__TableState","success_type":"error","success_value":"ResourceNotFoundException"}}});
+AWS.Kinesis = AWS.Service.defineService('kinesis');
 
-window.AWS.Service.defineServiceApi(window.AWS.Kinesis, "2013-12-02", {"format":"json","apiVersion":"2013-12-02","endpointPrefix":"kinesis","jsonVersion":"1.1","serviceAbbreviation":"Kinesis","serviceFullName":"Amazon Kinesis","signatureVersion":"v4","targetPrefix":"Kinesis_20131202","timestampFormat":"iso8601","operations":{"createStream":{"name":"CreateStream","input":{"type":"structure","members":{"StreamName":{"required":true},"ShardCount":{"type":"integer","required":true}}},"output":{"type":"structure","members":{}}},"deleteStream":{"name":"DeleteStream","input":{"type":"structure","members":{"StreamName":{"required":true}}},"output":{"type":"structure","members":{}}},"describeStream":{"name":"DescribeStream","input":{"type":"structure","members":{"StreamName":{"required":true},"Limit":{"type":"integer"},"ExclusiveStartShardId":{}}},"output":{"type":"structure","members":{"StreamDescription":{"type":"structure","members":{"StreamName":{},"StreamARN":{},"StreamStatus":{},"Shards":{"type":"list","members":{"type":"structure","members":{"ShardId":{},"ParentShardId":{},"AdjacentParentShardId":{},"HashKeyRange":{"type":"structure","members":{"StartingHashKey":{},"EndingHashKey":{}}},"SequenceNumberRange":{"type":"structure","members":{"StartingSequenceNumber":{},"EndingSequenceNumber":{}}}}}},"HasMoreShards":{"type":"boolean"}}}}}},"getRecords":{"name":"GetRecords","input":{"type":"structure","members":{"ShardIterator":{"required":true},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"Records":{"type":"list","members":{"type":"structure","members":{"SequenceNumber":{},"Data":{"type":"base64"},"PartitionKey":{}}}},"NextShardIterator":{}}}},"getShardIterator":{"name":"GetShardIterator","input":{"type":"structure","members":{"StreamName":{"required":true},"ShardId":{"required":true},"ShardIteratorType":{"required":true},"StartingSequenceNumber":{}}},"output":{"type":"structure","members":{"ShardIterator":{}}}},"listStreams":{"name":"ListStreams","input":{"type":"structure","members":{"Limit":{"type":"integer"},"ExclusiveStartStreamName":{}}},"output":{"type":"structure","members":{"StreamNames":{"type":"list","members":{}},"HasMoreStreams":{"type":"boolean"}}}},"mergeShards":{"name":"MergeShards","input":{"type":"structure","members":{"StreamName":{"required":true},"ShardToMerge":{"required":true},"AdjacentShardToMerge":{"required":true}}},"output":{"type":"structure","members":{}}},"putRecord":{"name":"PutRecord","input":{"type":"structure","members":{"StreamName":{"required":true},"Data":{"type":"base64","required":true},"PartitionKey":{"required":true},"ExplicitHashKey":{},"SequenceNumberForOrdering":{}}},"output":{"type":"structure","members":{"ShardId":{},"SequenceNumber":{}}}},"splitShard":{"name":"SplitShard","input":{"type":"structure","members":{"StreamName":{"required":true},"ShardToSplit":{"required":true},"NewStartingHashKey":{"required":true}}},"output":{"type":"structure","members":{}}}},"pagination":{"describeStream":{"inputToken":"ExclusiveStartShardId","limitKey":"Limit","moreResults":"StreamDescription.HasMoreShards","outputToken":"StreamDescription.Shards[-1].ShardId","resultKey":"StreamDescription.Shards"},"getRecords":{"inputToken":"ShardIterator","limitKey":"Limit","outputToken":"NextShardIterator","resultKey":"Records"},"listStreams":{"inputToken":"ExclusiveStartStreamName","limitKey":"Limit","moreResults":"HasMoreStreams","outputToken":"StreamNames[-1]","resultKey":"StreamNames"}}});
-window.AWS.S3 = window.AWS.Service.defineService('s3');
+AWS.Service.defineServiceApi(AWS.Kinesis, "2013-12-02", {"metadata":{"apiVersion":"2013-12-02","endpointPrefix":"kinesis","jsonVersion":"1.1","serviceAbbreviation":"Kinesis","serviceFullName":"Amazon Kinesis","signatureVersion":"v4","targetPrefix":"Kinesis_20131202","protocol":"json"},"operations":{"CreateStream":{"input":{"type":"structure","required":["StreamName","ShardCount"],"members":{"StreamName":{},"ShardCount":{"type":"integer"}}}},"DeleteStream":{"input":{"type":"structure","required":["StreamName"],"members":{"StreamName":{}}}},"DescribeStream":{"input":{"type":"structure","required":["StreamName"],"members":{"StreamName":{},"Limit":{"type":"integer"},"ExclusiveStartShardId":{}}},"output":{"type":"structure","required":["StreamDescription"],"members":{"StreamDescription":{"type":"structure","required":["StreamName","StreamARN","StreamStatus","Shards","HasMoreShards"],"members":{"StreamName":{},"StreamARN":{},"StreamStatus":{},"Shards":{"type":"list","member":{"type":"structure","required":["ShardId","HashKeyRange","SequenceNumberRange"],"members":{"ShardId":{},"ParentShardId":{},"AdjacentParentShardId":{},"HashKeyRange":{"type":"structure","required":["StartingHashKey","EndingHashKey"],"members":{"StartingHashKey":{},"EndingHashKey":{}}},"SequenceNumberRange":{"type":"structure","required":["StartingSequenceNumber"],"members":{"StartingSequenceNumber":{},"EndingSequenceNumber":{}}}}}},"HasMoreShards":{"type":"boolean"}}}}}},"GetRecords":{"input":{"type":"structure","required":["ShardIterator"],"members":{"ShardIterator":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","required":["Records"],"members":{"Records":{"type":"list","member":{"type":"structure","required":["SequenceNumber","Data","PartitionKey"],"members":{"SequenceNumber":{},"Data":{"type":"blob"},"PartitionKey":{}}}},"NextShardIterator":{}}}},"GetShardIterator":{"input":{"type":"structure","required":["StreamName","ShardId","ShardIteratorType"],"members":{"StreamName":{},"ShardId":{},"ShardIteratorType":{},"StartingSequenceNumber":{}}},"output":{"type":"structure","members":{"ShardIterator":{}}}},"ListStreams":{"input":{"type":"structure","members":{"Limit":{"type":"integer"},"ExclusiveStartStreamName":{}}},"output":{"type":"structure","required":["StreamNames","HasMoreStreams"],"members":{"StreamNames":{"type":"list","member":{}},"HasMoreStreams":{"type":"boolean"}}}},"MergeShards":{"input":{"type":"structure","required":["StreamName","ShardToMerge","AdjacentShardToMerge"],"members":{"StreamName":{},"ShardToMerge":{},"AdjacentShardToMerge":{}}}},"PutRecord":{"input":{"type":"structure","required":["StreamName","Data","PartitionKey"],"members":{"StreamName":{},"Data":{"type":"blob"},"PartitionKey":{},"ExplicitHashKey":{},"SequenceNumberForOrdering":{}}},"output":{"type":"structure","required":["ShardId","SequenceNumber"],"members":{"ShardId":{},"SequenceNumber":{}}}},"SplitShard":{"input":{"type":"structure","required":["StreamName","ShardToSplit","NewStartingHashKey"],"members":{"StreamName":{},"ShardToSplit":{},"NewStartingHashKey":{}}}}},"shapes":{},"paginators":{"DescribeStream":{"input_token":"ExclusiveStartShardId","limit_key":"Limit","more_results":"StreamDescription.HasMoreShards","output_token":"StreamDescription.Shards[-1].ShardId","result_key":"StreamDescription.Shards"},"GetRecords":{"input_token":"ShardIterator","limit_key":"Limit","output_token":"NextShardIterator","result_key":"Records"},"ListStreams":{"input_token":"ExclusiveStartStreamName","limit_key":"Limit","more_results":"HasMoreStreams","output_token":"StreamNames[-1]","result_key":"StreamNames"}}});
+AWS.S3 = AWS.Service.defineService('s3');
 
 
-window.AWS.util.update(window.AWS.S3.prototype, {
+AWS.util.update(AWS.S3.prototype, {
 
   initialize: function initialize(options) {
-    window.AWS.Service.prototype.initialize.call(this, options);
-    this.setEndpoint((options || {}).endpoint, options);
+    AWS.Service.prototype.initialize.call(this, options);
+    this.setEndpoint(this.config.endpoint, options);
   },
 
 
@@ -8823,8 +9150,9 @@ window.AWS.util.update(window.AWS.S3.prototype, {
     request.addListener('build', this.populateURI);
     request.addListener('build', this.computeContentMd5);
     request.addListener('build', this.computeSha256);
+    request.addListener('build', this.computeSseCustomerKeyMd5);
     request.removeListener('validate',
-      window.AWS.EventListeners.Core.VALIDATE_REGION);
+      AWS.EventListeners.Core.VALIDATE_REGION);
     request.addListener('extractError', this.extractError);
     request.addListener('extractData', this.extractData);
     request.addListener('beforePresign', this.prepareSignedUrl);
@@ -8864,7 +9192,7 @@ window.AWS.util.update(window.AWS.S3.prototype, {
     }
 
     var contentType = httpRequest.headers['Content-Type'];
-    if (window.AWS.util.isBrowser()) {
+    if (AWS.util.isBrowser()) {
       if (typeof httpRequest.body === 'string' && !contentType.match(/;\s*charset=/)) {
         var charset = '; charset=UTF-8';
         httpRequest.headers['Content-Type'] += charset;
@@ -8892,14 +9220,14 @@ window.AWS.util.update(window.AWS.S3.prototype, {
     if (this.computableChecksumOperations[req.operation]) return true;
     if (!this.config.computeChecksums) return false;
 
-    if (!window.AWS.util.Buffer.isBuffer(req.httpRequest.body) &&
+    if (!AWS.util.Buffer.isBuffer(req.httpRequest.body) &&
         typeof req.httpRequest.body !== 'string') {
       return false;
     }
 
     var rules = req.service.api.operations[req.operation].input.members;
 
-    if (req.service.getSignerClass(req) === window.AWS.Signers.V4) {
+    if (req.service.getSignerClass(req) === AWS.Signers.V4) {
       if (rules.ContentMD5 && !rules.ContentMD5.required) return false;
     }
 
@@ -8909,17 +9237,38 @@ window.AWS.util.update(window.AWS.S3.prototype, {
 
   computeContentMd5: function computeContentMd5(req) {
     if (req.service.willComputeChecksums(req)) {
-      var md5 = window.AWS.util.crypto.md5(req.httpRequest.body, 'base64');
+      var md5 = AWS.util.crypto.md5(req.httpRequest.body, 'base64');
       req.httpRequest.headers['Content-MD5'] = md5;
     }
   },
 
 
   computeSha256: function computeSha256(req) {
-    if (req.service.getSignerClass(req) === window.AWS.Signers.V4) {
+    if (req.service.getSignerClass(req) === AWS.Signers.V4) {
       req.httpRequest.headers['X-Amz-Content-Sha256'] =
-        window.AWS.util.crypto.sha256(req.httpRequest.body || '', 'hex');
+        AWS.util.crypto.sha256(req.httpRequest.body || '', 'hex');
     }
+  },
+
+
+  computeSseCustomerKeyMd5: function computeSseCustomerKeyMd5(req) {
+    var headers = [
+      'x-amz-server-side-encryption-customer-key',
+      'x-amz-copy-source-server-side-encryption-customer-key'
+    ];
+    AWS.util.arrayEach(headers, function(header) {
+      if (req.httpRequest.headers[header]) {
+        var key = req.httpRequest.headers[header];
+        var md5header = header + '-MD5';
+
+        req.httpRequest.headers[header] = AWS.util.base64.encode(key);
+        if (!req.httpRequest.headers[md5header]) {
+          var value = AWS.util.crypto.md5(key, 'base64');
+          req.httpRequest.headers[md5header] = AWS.util.base64.encode(value);
+        }
+
+      }
+    });
   },
 
 
@@ -8944,7 +9293,7 @@ window.AWS.util.update(window.AWS.S3.prototype, {
 
 
   escapePathParam: function escapePathParam(value) {
-    return window.AWS.util.uriEscapePath(String(value));
+    return AWS.util.uriEscapePath(String(value));
   },
 
 
@@ -8964,7 +9313,7 @@ window.AWS.util.update(window.AWS.S3.prototype, {
         error.statusCode === 200) {
       return true;
     } else {
-      var _super = window.AWS.Service.prototype.retryableError;
+      var _super = AWS.Service.prototype.retryableError;
       return _super.call(this, error, request);
     }
   },
@@ -8993,13 +9342,13 @@ window.AWS.util.update(window.AWS.S3.prototype, {
     var code = resp.httpResponse.statusCode;
     var body = resp.httpResponse.body;
     if (codes[code] && body.length === 0) {
-      resp.error = window.AWS.util.error(new Error(), {
+      resp.error = AWS.util.error(new Error(), {
         code: codes[resp.httpResponse.statusCode],
         message: null
       });
     } else {
-      var data = new window.AWS.XML.Parser({}).parse(body.toString());
-      resp.error = window.AWS.util.error(new Error(), {
+      var data = new AWS.XML.Parser().parse(body.toString());
+      resp.error = AWS.util.error(new Error(), {
         code: data.Code || code,
         message: data.Message || null
       });
@@ -9009,20 +9358,20 @@ window.AWS.util.update(window.AWS.S3.prototype, {
 
   setEndpoint: function setEndpoint(endpoint) {
     if (endpoint) {
-      this.endpoint = new window.AWS.Endpoint(endpoint, this.config);
+      this.endpoint = new AWS.Endpoint(endpoint, this.config);
     } else if (this.config.region && this.config.region !== 'us-east-1') {
       var sep = '-';
       if (this.isRegionV4()) sep = '.';
       var hostname = 's3' + sep + this.config.region + this.endpointSuffix();
-      this.endpoint = new window.AWS.Endpoint(hostname);
+      this.endpoint = new AWS.Endpoint(hostname);
     } else {
-      this.endpoint = new window.AWS.Endpoint(this.api.globalEndpoint, this.config);
+      this.endpoint = new AWS.Endpoint(this.api.globalEndpoint, this.config);
     }
   },
 
 
   getSignedUrl: function getSignedUrl(operation, params, callback) {
-    params = window.AWS.util.copy(params || {});
+    params = AWS.util.copy(params || {});
     var expires = params.Expires || 900;
     delete params.Expires; // we can't validate this
     var request = this.makeRequest(operation, params);
@@ -9048,14 +9397,15 @@ window.AWS.util.update(window.AWS.S3.prototype, {
   }
 });
 
-window.AWS.Service.defineServiceApi(window.AWS.S3, "2006-03-01", {"format":"rest-xml","apiVersion":"2006-03-01","checksumFormat":"md5","endpointPrefix":"s3","globalEndpoint":"s3.amazonaws.com","serviceAbbreviation":"Amazon S3","serviceFullName":"Amazon Simple Storage Service","signatureVersion":"s3","timestampFormat":"rfc822","xmlnamespace":"http://s3.amazonaws.com/doc/2006-03-01/","operations":{"abortMultipartUpload":{"name":"AbortMultipartUpload","http":{"method":"DELETE","uri":"/{Bucket}/{Key}?uploadId={UploadId}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"},"UploadId":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"completeMultipartUpload":{"name":"CompleteMultipartUpload","http":{"method":"POST","uri":"/{Bucket}/{Key}?uploadId={UploadId}"},"input":{"payload":"MultipartUpload","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"},"MultipartUpload":{"type":"structure","members":{"Parts":{"type":"list","members":{"type":"structure","members":{"ETag":{},"PartNumber":{"type":"integer"}}},"flattened":true,"name":"Part"}},"name":"CompleteMultipartUpload"},"UploadId":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Location":{},"Bucket":{},"Key":{},"Expiration":{"type":"timestamp","location":"header","name":"x-amz-expiration"},"ETag":{},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"VersionId":{"location":"header","name":"x-amz-version-id"}}}},"copyObject":{"name":"CopyObject","http":{"method":"PUT","uri":"/{Bucket}/{Key}"},"input":{"type":"structure","members":{"ACL":{"location":"header","name":"x-amz-acl"},"Bucket":{"required":true,"location":"uri"},"CacheControl":{"location":"header","name":"Cache-Control"},"ContentDisposition":{"location":"header","name":"Content-Disposition"},"ContentEncoding":{"location":"header","name":"Content-Encoding"},"ContentLanguage":{"location":"header","name":"Content-Language"},"ContentType":{"location":"header","name":"Content-Type"},"CopySource":{"required":true,"location":"header","name":"x-amz-copy-source"},"CopySourceIfMatch":{"location":"header","name":"x-amz-copy-source-if-match"},"CopySourceIfModifiedSince":{"type":"timestamp","location":"header","name":"x-amz-copy-source-if-modified-since"},"CopySourceIfNoneMatch":{"location":"header","name":"x-amz-copy-source-if-none-match"},"CopySourceIfUnmodifiedSince":{"type":"timestamp","location":"header","name":"x-amz-copy-source-if-unmodified-since"},"Expires":{"type":"timestamp","location":"header","name":"Expires"},"GrantFullControl":{"location":"header","name":"x-amz-grant-full-control"},"GrantRead":{"location":"header","name":"x-amz-grant-read"},"GrantReadACP":{"location":"header","name":"x-amz-grant-read-acp"},"GrantWriteACP":{"location":"header","name":"x-amz-grant-write-acp"},"Key":{"required":true,"location":"uri"},"Metadata":{"type":"map","location":"header","name":"x-amz-meta-","keys":{},"members":{}},"MetadataDirective":{"location":"header","name":"x-amz-metadata-directive"},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"StorageClass":{"location":"header","name":"x-amz-storage-class"},"WebsiteRedirectLocation":{"location":"header","name":"x-amz-website-redirect-location"}}},"output":{"type":"structure","members":{"Expiration":{"type":"timestamp","location":"header","name":"x-amz-expiration"},"CopySourceVersionId":{"location":"header","name":"x-amz-copy-source-version-id"},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"ETag":{},"LastModified":{"type":"timestamp"}}},"alias":"PutObjectCopy"},"createBucket":{"name":"CreateBucket","http":{"method":"PUT","uri":"/{Bucket}"},"input":{"payload":"CreateBucketConfiguration","type":"structure","members":{"ACL":{"location":"header","name":"x-amz-acl"},"Bucket":{"required":true,"location":"uri"},"CreateBucketConfiguration":{"type":"structure","members":{"LocationConstraint":{}}},"GrantFullControl":{"location":"header","name":"x-amz-grant-full-control"},"GrantRead":{"location":"header","name":"x-amz-grant-read"},"GrantReadACP":{"location":"header","name":"x-amz-grant-read-acp"},"GrantWrite":{"location":"header","name":"x-amz-grant-write"},"GrantWriteACP":{"location":"header","name":"x-amz-grant-write-acp"}}},"output":{"type":"structure","members":{"Location":{"location":"header","name":"Location"}}},"alias":"PutBucket"},"createMultipartUpload":{"name":"CreateMultipartUpload","http":{"method":"POST","uri":"/{Bucket}/{Key}?uploads"},"input":{"type":"structure","members":{"ACL":{"location":"header","name":"x-amz-acl"},"Bucket":{"required":true,"location":"uri"},"CacheControl":{"location":"header","name":"Cache-Control"},"ContentDisposition":{"location":"header","name":"Content-Disposition"},"ContentEncoding":{"location":"header","name":"Content-Encoding"},"ContentLanguage":{"location":"header","name":"Content-Language"},"ContentType":{"location":"header","name":"Content-Type"},"Expires":{"type":"timestamp","location":"header","name":"Expires"},"GrantFullControl":{"location":"header","name":"x-amz-grant-full-control"},"GrantRead":{"location":"header","name":"x-amz-grant-read"},"GrantReadACP":{"location":"header","name":"x-amz-grant-read-acp"},"GrantWriteACP":{"location":"header","name":"x-amz-grant-write-acp"},"Key":{"required":true,"location":"uri"},"Metadata":{"type":"map","location":"header","name":"x-amz-meta-","keys":{},"members":{}},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"StorageClass":{"location":"header","name":"x-amz-storage-class"},"WebsiteRedirectLocation":{"location":"header","name":"x-amz-website-redirect-location"}}},"output":{"type":"structure","members":{"Bucket":{"name":"Bucket"},"Key":{},"UploadId":{},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"}}},"alias":"InitiateMultipartUpload"},"deleteBucket":{"name":"DeleteBucket","http":{"method":"DELETE","uri":"/{Bucket}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"deleteBucketCors":{"name":"DeleteBucketCors","http":{"method":"DELETE","uri":"/{Bucket}?cors"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"deleteBucketLifecycle":{"name":"DeleteBucketLifecycle","http":{"method":"DELETE","uri":"/{Bucket}?lifecycle"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"deleteBucketPolicy":{"name":"DeleteBucketPolicy","http":{"method":"DELETE","uri":"/{Bucket}?policy"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"deleteBucketTagging":{"name":"DeleteBucketTagging","http":{"method":"DELETE","uri":"/{Bucket}?tagging"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"deleteBucketWebsite":{"name":"DeleteBucketWebsite","http":{"method":"DELETE","uri":"/{Bucket}?website"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"deleteObject":{"name":"DeleteObject","http":{"method":"DELETE","uri":"/{Bucket}/{Key}?versionId={VersionId}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"},"MFA":{"location":"header","name":"x-amz-mfa"},"VersionId":{"location":"uri"}}},"output":{"type":"structure","members":{"DeleteMarker":{"type":"boolean","location":"header","name":"x-amz-delete-marker"},"VersionId":{"location":"header","name":"x-amz-version-id"}}}},"deleteObjects":{"name":"DeleteObjects","http":{"method":"POST","uri":"/{Bucket}?delete"},"input":{"payload":"Delete","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Delete":{"type":"structure","members":{"Objects":{"type":"list","members":{"type":"structure","members":{"Key":{"required":true},"VersionId":{}}},"flattened":true,"required":true,"name":"Object"},"Quiet":{"type":"boolean"}},"required":true},"MFA":{"location":"header","name":"x-amz-mfa"}}},"output":{"type":"structure","members":{"Deleted":{"type":"list","members":{"type":"structure","members":{"Key":{},"VersionId":{},"DeleteMarker":{"type":"boolean"},"DeleteMarkerVersionId":{}}},"flattened":true},"Error":{"type":"list","members":{"type":"structure","members":{"Key":{},"VersionId":{},"Code":{},"Message":{}}},"flattened":true,"name":"Errors"}}},"alias":"DeleteMultipleObjects"},"getBucketAcl":{"name":"GetBucketAcl","http":{"method":"GET","uri":"/{Bucket}?acl"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}},"AccessControlList":{"type":"list","members":{"type":"structure","members":{"Grantee":{"type":"structure","members":{"DisplayName":{},"EmailAddress":{},"ID":{},"xsi:type":{"attribute":true,"name":"Type"},"URI":{}},"xmlns":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"Permission":{}},"name":"Grant"},"name":"Grants"}}}},"getBucketCors":{"name":"GetBucketCors","http":{"method":"GET","uri":"/{Bucket}?cors"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"CORSRule":{"type":"list","members":{"type":"structure","members":{"AllowedHeader":{"type":"list","members":{},"flattened":true,"name":"AllowedHeaders"},"AllowedMethod":{"type":"list","members":{},"flattened":true,"name":"AllowedMethods"},"AllowedOrigin":{"type":"list","members":{},"flattened":true,"name":"AllowedOrigins"},"ExposeHeader":{"type":"list","members":{},"flattened":true,"name":"ExposeHeaders"},"MaxAgeSeconds":{"type":"integer"}}},"flattened":true,"name":"CORSRules"}}}},"getBucketLifecycle":{"name":"GetBucketLifecycle","http":{"method":"GET","uri":"/{Bucket}?lifecycle"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Rule":{"type":"list","members":{"type":"structure","members":{"Expiration":{"type":"structure","members":{"Date":{"type":"timestamp","format":"iso8601"},"Days":{"type":"integer"}}},"ID":{},"Prefix":{},"Status":{},"Transition":{"type":"structure","members":{"Date":{"type":"timestamp","format":"iso8601"},"Days":{"type":"integer"},"StorageClass":{}}},"NoncurrentVersionTransition":{"type":"structure","members":{"NoncurrentDays":{"type":"integer"},"StorageClass":{}}},"NoncurrentVersionExpiration":{"type":"structure","members":{"NoncurrentDays":{"type":"integer"}}}}},"flattened":true,"name":"Rules"}}}},"getBucketLocation":{"name":"GetBucketLocation","http":{"method":"GET","uri":"/{Bucket}?location"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"LocationConstraint":{}}}},"getBucketLogging":{"name":"GetBucketLogging","http":{"method":"GET","uri":"/{Bucket}?logging"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"LoggingEnabled":{"type":"structure","members":{"TargetBucket":{},"TargetGrants":{"type":"list","members":{"type":"structure","members":{"Grantee":{"type":"structure","members":{"DisplayName":{},"EmailAddress":{},"ID":{},"xsi:type":{"attribute":true,"name":"Type"},"URI":{}},"xmlns":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"Permission":{}},"name":"Grant"}},"TargetPrefix":{}}}}}},"getBucketNotification":{"name":"GetBucketNotification","http":{"method":"GET","uri":"/{Bucket}?notification"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"TopicConfiguration":{"type":"structure","members":{"Event":{},"Topic":{}}}}}},"getBucketPolicy":{"name":"GetBucketPolicy","http":{"method":"GET","uri":"/{Bucket}?policy"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Policy":{}},"payload":"Policy"}},"getBucketRequestPayment":{"name":"GetBucketRequestPayment","http":{"method":"GET","uri":"/{Bucket}?requestPayment"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Payer":{}}}},"getBucketTagging":{"name":"GetBucketTagging","http":{"method":"GET","uri":"/{Bucket}?tagging"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"TagSet":{"type":"list","members":{"type":"structure","members":{"Key":{},"Value":{}},"name":"Tag"}}}}},"getBucketVersioning":{"name":"GetBucketVersioning","http":{"method":"GET","uri":"/{Bucket}?versioning"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Status":{},"MfaDelete":{"name":"MFADelete"}}}},"getBucketWebsite":{"name":"GetBucketWebsite","http":{"method":"GET","uri":"/{Bucket}?website"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"RedirectAllRequestsTo":{"type":"structure","members":{"HostName":{},"Protocol":{}}},"IndexDocument":{"type":"structure","members":{"Suffix":{}}},"ErrorDocument":{"type":"structure","members":{"Key":{}}},"RoutingRules":{"type":"list","members":{"type":"structure","members":{"Condition":{"type":"structure","members":{"HttpErrorCodeReturnedEquals":{},"KeyPrefixEquals":{}}},"Redirect":{"type":"structure","members":{"HostName":{},"HttpRedirectCode":{},"Protocol":{},"ReplaceKeyPrefixWith":{},"ReplaceKeyWith":{}}}},"name":"RoutingRule"}}}}},"getObject":{"name":"GetObject","http":{"method":"GET","uri":"/{Bucket}/{Key}?versionId={VersionId}&response-content-type={ResponseContentType}&response-content-language={ResponseContentLanguage}&response-expires={ResponseExpires}&response-cache-control={ResponseCacheControl}&response-content-disposition={ResponseContentDisposition}&response-content-encoding={ResponseContentEncoding}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"IfMatch":{"location":"header","name":"If-Match"},"IfModifiedSince":{"type":"timestamp","location":"header","name":"If-Modified-Since"},"IfNoneMatch":{"location":"header","name":"If-None-Match"},"IfUnmodifiedSince":{"type":"timestamp","location":"header","name":"If-Unmodified-Since"},"Key":{"required":true,"location":"uri"},"Range":{"location":"header","name":"Range"},"ResponseCacheControl":{"location":"uri"},"ResponseContentDisposition":{"location":"uri"},"ResponseContentEncoding":{"location":"uri"},"ResponseContentLanguage":{"location":"uri"},"ResponseContentType":{"location":"uri"},"ResponseExpires":{"type":"timestamp","location":"uri"},"VersionId":{"location":"uri"}}},"output":{"type":"structure","members":{"Body":{"type":"binary","streaming":true},"DeleteMarker":{"type":"boolean","location":"header","name":"x-amz-delete-marker"},"AcceptRanges":{"location":"header","name":"accept-ranges"},"Expiration":{"type":"timestamp","location":"header","name":"x-amz-expiration"},"Restore":{"location":"header","name":"x-amz-restore"},"LastModified":{"type":"timestamp","location":"header","name":"Last-Modified"},"ContentLength":{"type":"integer","location":"header","name":"Content-Length"},"ETag":{"location":"header","name":"ETag"},"MissingMeta":{"type":"integer","location":"header","name":"x-amz-missing-meta"},"VersionId":{"location":"header","name":"x-amz-version-id"},"CacheControl":{"location":"header","name":"Cache-Control"},"ContentDisposition":{"location":"header","name":"Content-Disposition"},"ContentEncoding":{"location":"header","name":"Content-Encoding"},"ContentLanguage":{"location":"header","name":"Content-Language"},"ContentType":{"location":"header","name":"Content-Type"},"Expires":{"type":"timestamp","location":"header","name":"Expires"},"WebsiteRedirectLocation":{"location":"header","name":"x-amz-website-redirect-location"},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"Metadata":{"type":"map","location":"header","name":"x-amz-meta-","keys":{},"members":{}}},"payload":"Body"}},"getObjectAcl":{"name":"GetObjectAcl","http":{"method":"GET","uri":"/{Bucket}/{Key}?acl&versionId={VersionId}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"},"VersionId":{"location":"uri"}}},"output":{"type":"structure","members":{"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}},"AccessControlList":{"type":"list","members":{"type":"structure","members":{"Grantee":{"type":"structure","members":{"DisplayName":{},"EmailAddress":{},"ID":{},"xsi:type":{"attribute":true,"name":"Type"},"URI":{}},"xmlns":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"Permission":{}},"name":"Grant"},"name":"Grants"}}}},"getObjectTorrent":{"name":"GetObjectTorrent","http":{"method":"GET","uri":"/{Bucket}/{Key}?torrent"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Body":{"type":"binary","streaming":true}},"payload":"Body"}},"headBucket":{"name":"HeadBucket","http":{"method":"HEAD","uri":"/{Bucket}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"headObject":{"name":"HeadObject","http":{"method":"HEAD","uri":"/{Bucket}/{Key}?versionId={VersionId}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"IfMatch":{"location":"header","name":"If-Match"},"IfModifiedSince":{"type":"timestamp","location":"header","name":"If-Modified-Since"},"IfNoneMatch":{"location":"header","name":"If-None-Match"},"IfUnmodifiedSince":{"type":"timestamp","location":"header","name":"If-Unmodified-Since"},"Key":{"required":true,"location":"uri"},"Range":{"location":"header","name":"Range"},"VersionId":{"location":"uri"}}},"output":{"type":"structure","members":{"DeleteMarker":{"type":"boolean","location":"header","name":"x-amz-delete-marker"},"AcceptRanges":{"location":"header","name":"accept-ranges"},"Expiration":{"type":"timestamp","location":"header","name":"x-amz-expiration"},"Restore":{"location":"header","name":"x-amz-restore"},"LastModified":{"type":"timestamp","location":"header","name":"Last-Modified"},"ContentLength":{"type":"integer","location":"header","name":"Content-Length"},"ETag":{"location":"header","name":"ETag"},"MissingMeta":{"type":"integer","location":"header","name":"x-amz-missing-meta"},"VersionId":{"location":"header","name":"x-amz-version-id"},"CacheControl":{"location":"header","name":"Cache-Control"},"ContentDisposition":{"location":"header","name":"Content-Disposition"},"ContentEncoding":{"location":"header","name":"Content-Encoding"},"ContentLanguage":{"location":"header","name":"Content-Language"},"ContentType":{"location":"header","name":"Content-Type"},"Expires":{"type":"timestamp","location":"header","name":"Expires"},"WebsiteRedirectLocation":{"location":"header","name":"x-amz-website-redirect-location"},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"Metadata":{"type":"map","location":"header","name":"x-amz-meta-","keys":{},"members":{}}}}},"listBuckets":{"name":"ListBuckets","http":{"method":"GET","uri":"/"},"input":{"type":"structure","members":{}},"output":{"type":"structure","members":{"Buckets":{"type":"list","members":{"type":"structure","members":{"Name":{},"CreationDate":{"type":"timestamp"}},"name":"Bucket"}},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}}}},"alias":"GetService"},"listMultipartUploads":{"name":"ListMultipartUploads","http":{"method":"GET","uri":"/{Bucket}?uploads&prefix={Prefix}&delimiter={Delimiter}&max-uploads={MaxUploads}&key-marker={KeyMarker}&upload-id-marker={UploadIdMarker}&encoding-type={EncodingType}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Delimiter":{"location":"uri"},"EncodingType":{"location":"uri"},"KeyMarker":{"location":"uri"},"MaxUploads":{"type":"integer","location":"uri"},"Prefix":{"location":"uri"},"UploadIdMarker":{"location":"uri"}}},"output":{"type":"structure","members":{"Bucket":{},"KeyMarker":{},"UploadIdMarker":{},"NextKeyMarker":{},"Prefix":{},"NextUploadIdMarker":{},"MaxUploads":{"type":"integer"},"IsTruncated":{"type":"boolean"},"Upload":{"type":"list","members":{"type":"structure","members":{"UploadId":{},"Key":{},"Initiated":{"type":"timestamp"},"StorageClass":{},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}},"Initiator":{"type":"structure","members":{"ID":{},"DisplayName":{}}}}},"flattened":true,"name":"Uploads"},"CommonPrefixes":{"type":"list","members":{"type":"structure","members":{"Prefix":{}}},"flattened":true},"EncodingType":{}}}},"listObjectVersions":{"name":"ListObjectVersions","http":{"method":"GET","uri":"/{Bucket}?versions&delimiter={Delimiter}&key-marker={KeyMarker}&max-keys={MaxKeys}&prefix={Prefix}&version-id-marker={VersionIdMarker}&encoding-type={EncodingType}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Delimiter":{"location":"uri"},"EncodingType":{"location":"uri"},"KeyMarker":{"location":"uri"},"MaxKeys":{"type":"integer","location":"uri"},"Prefix":{"location":"uri"},"VersionIdMarker":{"location":"uri"}}},"output":{"type":"structure","members":{"IsTruncated":{"type":"boolean"},"KeyMarker":{},"VersionIdMarker":{},"NextKeyMarker":{},"NextVersionIdMarker":{},"Version":{"type":"list","members":{"type":"structure","members":{"ETag":{},"Size":{"type":"integer"},"StorageClass":{},"Key":{},"VersionId":{},"IsLatest":{"type":"boolean"},"LastModified":{"type":"timestamp"},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}}}},"flattened":true,"name":"Versions"},"DeleteMarker":{"type":"list","members":{"type":"structure","members":{"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}},"Key":{},"VersionId":{},"IsLatest":{"type":"boolean"},"LastModified":{"type":"timestamp"}}},"flattened":true,"name":"DeleteMarkers"},"Name":{},"Prefix":{},"MaxKeys":{"type":"integer"},"CommonPrefixes":{"type":"list","members":{"type":"structure","members":{"Prefix":{}}},"flattened":true},"EncodingType":{}}},"alias":"GetBucketObjectVersions"},"listObjects":{"name":"ListObjects","http":{"method":"GET","uri":"/{Bucket}?delimiter={Delimiter}&marker={Marker}&max-keys={MaxKeys}&prefix={Prefix}&encoding-type={EncodingType}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Delimiter":{"location":"uri"},"EncodingType":{"location":"uri"},"Marker":{"location":"uri"},"MaxKeys":{"type":"integer","location":"uri"},"Prefix":{"location":"uri"}}},"output":{"type":"structure","members":{"IsTruncated":{"type":"boolean"},"Marker":{},"NextMarker":{},"Contents":{"type":"list","members":{"type":"structure","members":{"Key":{},"LastModified":{"type":"timestamp"},"ETag":{},"Size":{"type":"integer"},"StorageClass":{},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}}}},"flattened":true},"Name":{},"Prefix":{},"MaxKeys":{"type":"integer"},"CommonPrefixes":{"type":"list","members":{"type":"structure","members":{"Prefix":{}}},"flattened":true},"EncodingType":{}}},"alias":"GetBucket"},"listParts":{"name":"ListParts","http":{"method":"GET","uri":"/{Bucket}/{Key}?uploadId={UploadId}&max-parts={MaxParts}&part-number-marker={PartNumberMarker}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"},"MaxParts":{"type":"integer","location":"uri"},"PartNumberMarker":{"type":"integer","location":"uri"},"UploadId":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"Bucket":{},"Key":{},"UploadId":{},"PartNumberMarker":{"type":"integer"},"NextPartNumberMarker":{"type":"integer"},"MaxParts":{"type":"integer"},"IsTruncated":{"type":"boolean"},"Part":{"type":"list","members":{"type":"structure","members":{"PartNumber":{"type":"integer"},"LastModified":{"type":"timestamp"},"ETag":{},"Size":{"type":"integer"}}},"flattened":true,"name":"Parts"},"Initiator":{"type":"structure","members":{"ID":{},"DisplayName":{}}},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}},"StorageClass":{}}}},"putBucketAcl":{"name":"PutBucketAcl","http":{"method":"PUT","uri":"/{Bucket}?acl"},"input":{"payload":"AccessControlPolicy","type":"structure","members":{"ACL":{"location":"header","name":"x-amz-acl"},"AccessControlPolicy":{"type":"structure","members":{"Grants":{"type":"list","members":{"type":"structure","members":{"Grantee":{"type":"structure","members":{"DisplayName":{},"EmailAddress":{},"ID":{},"Type":{"required":true,"attribute":true,"name":"xsi:type"},"URI":{}},"xmlns":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"Permission":{}},"name":"Grant"},"name":"AccessControlList"},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}}}},"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"GrantFullControl":{"location":"header","name":"x-amz-grant-full-control"},"GrantRead":{"location":"header","name":"x-amz-grant-read"},"GrantReadACP":{"location":"header","name":"x-amz-grant-read-acp"},"GrantWrite":{"location":"header","name":"x-amz-grant-write"},"GrantWriteACP":{"location":"header","name":"x-amz-grant-write-acp"}}},"output":{"type":"structure","members":{}}},"putBucketCors":{"name":"PutBucketCors","http":{"method":"PUT","uri":"/{Bucket}?cors"},"input":{"payload":"CORSConfiguration","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"CORSConfiguration":{"type":"structure","members":{"CORSRules":{"type":"list","members":{"type":"structure","members":{"AllowedHeaders":{"type":"list","members":{},"flattened":true,"name":"AllowedHeader"},"AllowedMethods":{"type":"list","members":{},"flattened":true,"name":"AllowedMethod"},"AllowedOrigins":{"type":"list","members":{},"flattened":true,"name":"AllowedOrigin"},"ExposeHeaders":{"type":"list","members":{},"flattened":true,"name":"ExposeHeader"},"MaxAgeSeconds":{"type":"integer"}}},"flattened":true,"name":"CORSRule"}}},"ContentMD5":{"location":"header","name":"Content-MD5"}}},"output":{"type":"structure","members":{}}},"putBucketLifecycle":{"name":"PutBucketLifecycle","http":{"method":"PUT","uri":"/{Bucket}?lifecycle"},"input":{"payload":"LifecycleConfiguration","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"LifecycleConfiguration":{"type":"structure","members":{"Rules":{"type":"list","members":{"type":"structure","members":{"Expiration":{"type":"structure","members":{"Date":{"type":"timestamp","format":"iso8601"},"Days":{"type":"integer"}}},"ID":{},"Prefix":{"required":true},"Status":{"required":true},"Transition":{"type":"structure","members":{"Date":{"type":"timestamp","format":"iso8601"},"Days":{"type":"integer"},"StorageClass":{}}},"NoncurrentVersionTransition":{"type":"structure","members":{"NoncurrentDays":{"type":"integer"},"StorageClass":{}}},"NoncurrentVersionExpiration":{"type":"structure","members":{"NoncurrentDays":{"type":"integer"}}}}},"flattened":true,"required":true,"name":"Rule"}}}}},"output":{"type":"structure","members":{}}},"putBucketLogging":{"name":"PutBucketLogging","http":{"method":"PUT","uri":"/{Bucket}?logging"},"input":{"payload":"BucketLoggingStatus","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"BucketLoggingStatus":{"type":"structure","members":{"LoggingEnabled":{"type":"structure","members":{"TargetBucket":{},"TargetGrants":{"type":"list","members":{"type":"structure","members":{"Grantee":{"type":"structure","members":{"DisplayName":{},"EmailAddress":{},"ID":{},"Type":{"required":true,"attribute":true,"name":"xsi:type"},"URI":{}},"xmlns":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"Permission":{}},"name":"Grant"}},"TargetPrefix":{}}}},"required":true},"ContentMD5":{"location":"header","name":"Content-MD5"}}},"output":{"type":"structure","members":{}}},"putBucketNotification":{"name":"PutBucketNotification","http":{"method":"PUT","uri":"/{Bucket}?notification"},"input":{"payload":"NotificationConfiguration","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"NotificationConfiguration":{"type":"structure","members":{"TopicConfiguration":{"type":"structure","members":{"Event":{},"Topic":{}},"required":true}},"required":true}}},"output":{"type":"structure","members":{}}},"putBucketPolicy":{"name":"PutBucketPolicy","http":{"method":"PUT","uri":"/{Bucket}?policy"},"input":{"payload":"Policy","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"Policy":{"required":true}}},"output":{"type":"structure","members":{}}},"putBucketRequestPayment":{"name":"PutBucketRequestPayment","http":{"method":"PUT","uri":"/{Bucket}?requestPayment"},"input":{"payload":"RequestPaymentConfiguration","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"RequestPaymentConfiguration":{"type":"structure","members":{"Payer":{"required":true}},"required":true}}},"output":{"type":"structure","members":{}}},"putBucketTagging":{"name":"PutBucketTagging","http":{"method":"PUT","uri":"/{Bucket}?tagging"},"input":{"payload":"Tagging","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"Tagging":{"type":"structure","members":{"TagSet":{"type":"list","members":{"type":"structure","members":{"Key":{"required":true},"Value":{"required":true}},"name":"Tag"},"required":true}},"required":true}}},"output":{"type":"structure","members":{}}},"putBucketVersioning":{"name":"PutBucketVersioning","http":{"method":"PUT","uri":"/{Bucket}?versioning"},"input":{"payload":"VersioningConfiguration","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"MFA":{"location":"header","name":"x-amz-mfa"},"VersioningConfiguration":{"type":"structure","members":{"MFADelete":{"name":"MfaDelete"},"Status":{}},"required":true}}},"output":{"type":"structure","members":{}}},"putBucketWebsite":{"name":"PutBucketWebsite","http":{"method":"PUT","uri":"/{Bucket}?website"},"input":{"payload":"WebsiteConfiguration","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"WebsiteConfiguration":{"type":"structure","members":{"ErrorDocument":{"type":"structure","members":{"Key":{"required":true}}},"IndexDocument":{"type":"structure","members":{"Suffix":{"required":true}}},"RedirectAllRequestsTo":{"type":"structure","members":{"HostName":{"required":true},"Protocol":{}}},"RoutingRules":{"type":"list","members":{"type":"structure","members":{"Condition":{"type":"structure","members":{"HttpErrorCodeReturnedEquals":{},"KeyPrefixEquals":{}}},"Redirect":{"type":"structure","members":{"HostName":{},"HttpRedirectCode":{},"Protocol":{},"ReplaceKeyPrefixWith":{},"ReplaceKeyWith":{}},"required":true}},"name":"RoutingRule"}}},"required":true}}},"output":{"type":"structure","members":{}}},"putObject":{"name":"PutObject","http":{"method":"PUT","uri":"/{Bucket}/{Key}"},"input":{"payload":"Body","type":"structure","members":{"ACL":{"location":"header","name":"x-amz-acl"},"Body":{"type":"binary","streaming":true},"Bucket":{"required":true,"location":"uri"},"CacheControl":{"location":"header","name":"Cache-Control"},"ContentDisposition":{"location":"header","name":"Content-Disposition"},"ContentEncoding":{"location":"header","name":"Content-Encoding"},"ContentLanguage":{"location":"header","name":"Content-Language"},"ContentLength":{"type":"integer","location":"header","name":"Content-Length"},"ContentMD5":{"location":"header","name":"Content-MD5"},"ContentType":{"location":"header","name":"Content-Type"},"Expires":{"type":"timestamp","location":"header","name":"Expires"},"GrantFullControl":{"location":"header","name":"x-amz-grant-full-control"},"GrantRead":{"location":"header","name":"x-amz-grant-read"},"GrantReadACP":{"location":"header","name":"x-amz-grant-read-acp"},"GrantWriteACP":{"location":"header","name":"x-amz-grant-write-acp"},"Key":{"required":true,"location":"uri"},"Metadata":{"type":"map","location":"header","name":"x-amz-meta-","keys":{},"members":{}},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"StorageClass":{"location":"header","name":"x-amz-storage-class"},"WebsiteRedirectLocation":{"location":"header","name":"x-amz-website-redirect-location"}}},"output":{"type":"structure","members":{"Expiration":{"type":"timestamp","location":"header","name":"x-amz-expiration"},"ETag":{"location":"header","name":"ETag"},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"VersionId":{"location":"header","name":"x-amz-version-id"}}}},"putObjectAcl":{"name":"PutObjectAcl","http":{"method":"PUT","uri":"/{Bucket}/{Key}?acl"},"input":{"payload":"AccessControlPolicy","type":"structure","members":{"ACL":{"location":"header","name":"x-amz-acl"},"AccessControlPolicy":{"type":"structure","members":{"Grants":{"type":"list","members":{"type":"structure","members":{"Grantee":{"type":"structure","members":{"DisplayName":{},"EmailAddress":{},"ID":{},"Type":{"required":true,"attribute":true,"name":"xsi:type"},"URI":{}},"xmlns":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"Permission":{}},"name":"Grant"},"name":"AccessControlList"},"Owner":{"type":"structure","members":{"DisplayName":{},"ID":{}}}}},"Bucket":{"required":true,"location":"uri"},"ContentMD5":{"location":"header","name":"Content-MD5"},"GrantFullControl":{"location":"header","name":"x-amz-grant-full-control"},"GrantRead":{"location":"header","name":"x-amz-grant-read"},"GrantReadACP":{"location":"header","name":"x-amz-grant-read-acp"},"GrantWrite":{"location":"header","name":"x-amz-grant-write"},"GrantWriteACP":{"location":"header","name":"x-amz-grant-write-acp"},"Key":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{}}},"restoreObject":{"name":"RestoreObject","http":{"method":"POST","uri":"/{Bucket}/{Key}?restore&versionId={VersionId}"},"input":{"payload":"RestoreRequest","type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"Key":{"required":true,"location":"uri"},"VersionId":{"location":"uri"},"RestoreRequest":{"type":"structure","members":{"Days":{"type":"integer","required":true}}}}},"output":{"type":"structure","members":{}},"alias":"PostObjectRestore"},"uploadPart":{"name":"UploadPart","http":{"method":"PUT","uri":"/{Bucket}/{Key}?partNumber={PartNumber}&uploadId={UploadId}"},"input":{"payload":"Body","type":"structure","members":{"Body":{"type":"binary","streaming":true},"Bucket":{"required":true,"location":"uri"},"ContentLength":{"type":"integer","location":"header","name":"Content-Length"},"ContentMD5":{"location":"header","name":"Content-MD5"},"Key":{"required":true,"location":"uri"},"PartNumber":{"type":"integer","required":true,"location":"uri"},"UploadId":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"ETag":{"location":"header","name":"ETag"}}}},"uploadPartCopy":{"name":"UploadPartCopy","http":{"method":"PUT","uri":"/{Bucket}/{Key}?partNumber={PartNumber}&uploadId={UploadId}"},"input":{"type":"structure","members":{"Bucket":{"required":true,"location":"uri"},"CopySource":{"required":true,"location":"header","name":"x-amz-copy-source"},"CopySourceIfMatch":{"location":"header","name":"x-amz-copy-source-if-match"},"CopySourceIfModifiedSince":{"type":"timestamp","location":"header","name":"x-amz-copy-source-if-modified-since"},"CopySourceIfNoneMatch":{"location":"header","name":"x-amz-copy-source-if-none-match"},"CopySourceIfUnmodifiedSince":{"type":"timestamp","location":"header","name":"x-amz-copy-source-if-unmodified-since"},"CopySourceRange":{"location":"header","name":"x-amz-copy-source-range"},"Key":{"required":true,"location":"uri"},"PartNumber":{"type":"integer","required":true,"location":"uri"},"UploadId":{"required":true,"location":"uri"}}},"output":{"type":"structure","members":{"CopySourceVersionId":{"location":"header","name":"x-amz-copy-source-version-id"},"ServerSideEncryption":{"location":"header","name":"x-amz-server-side-encryption"},"ETag":{},"LastModified":{"type":"timestamp"}}}}},"pagination":{"listBuckets":{"resultKey":"Buckets"},"listMultipartUploads":{"limitKey":"MaxUploads","moreResults":"IsTruncated","outputToken":["NextKeyMarker","NextUploadIdMarker"],"inputToken":["KeyMarker","UploadIdMarker"],"resultKey":"Uploads"},"listObjectVersions":{"moreResults":"IsTruncated","limitKey":"MaxKeys","outputToken":["NextKeyMarker","NextVersionIdMarker"],"inputToken":["KeyMarker","VersionIdMarker"],"resultKey":"Versions"},"listObjects":{"moreResults":"IsTruncated","limitKey":"MaxKeys","outputToken":"NextMarker or Contents[-1].Key","inputToken":"Marker","resultKey":["Contents","CommonPrefixes"]},"listParts":{"moreResults":"IsTruncated","limitKey":"MaxParts","outputToken":"NextPartNumberMarker","inputToken":"PartNumberMarker","resultKey":"Parts"}},"waiters":{"__default__":{"interval":5,"maxAttempts":20},"bucketExists":{"operation":"HeadBucket","ignoreErrors":["NoSuchBucket"],"successType":"output"},"bucketNotExists":{"operation":"HeadBucket","successType":"error","successValue":404},"objectExists":{"operation":"HeadObject","ignoreErrors":["NoSuchKey"],"successType":"output"},"objectNotExists":{"operation":"HeadObject","successType":"error","successValue":404}}});
-window.AWS.SNS = window.AWS.Service.defineService('sns');
+AWS.Service.defineServiceApi(AWS.S3, "2006-03-01", {"metadata":{"apiVersion":"2006-03-01","checksumFormat":"md5","endpointPrefix":"s3","globalEndpoint":"s3.amazonaws.com","serviceAbbreviation":"Amazon S3","serviceFullName":"Amazon Simple Storage Service","signatureVersion":"s3","timestampFormat":"rfc822","protocol":"rest-xml"},"operations":{"AbortMultipartUpload":{"http":{"method":"DELETE","requestUri":"/{Bucket}/{Key}"},"input":{"type":"structure","required":["Bucket","Key","UploadId"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"Key":{"location":"uri","locationName":"Key"},"UploadId":{"location":"querystring","locationName":"uploadId"}}}},"CompleteMultipartUpload":{"http":{"requestUri":"/{Bucket}/{Key}"},"input":{"type":"structure","required":["Bucket","Key","UploadId"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"Key":{"location":"uri","locationName":"Key"},"MultipartUpload":{"locationName":"CompleteMultipartUpload","xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/","type":"structure","members":{"Parts":{"locationName":"Part","type":"list","member":{"type":"structure","members":{"ETag":{},"PartNumber":{"type":"integer"}}},"flattened":true}}},"UploadId":{"location":"querystring","locationName":"uploadId"}},"payload":"MultipartUpload"},"output":{"type":"structure","members":{"Location":{},"Bucket":{},"Key":{},"Expiration":{"location":"header","locationName":"x-amz-expiration","type":"timestamp"},"ETag":{},"ServerSideEncryption":{"location":"header","locationName":"x-amz-server-side-encryption"},"VersionId":{"location":"header","locationName":"x-amz-version-id"}}}},"CopyObject":{"http":{"method":"PUT","requestUri":"/{Bucket}/{Key}"},"input":{"type":"structure","required":["Bucket","CopySource","Key"],"members":{"ACL":{"location":"header","locationName":"x-amz-acl"},"Bucket":{"location":"uri","locationName":"Bucket"},"CacheControl":{"location":"header","locationName":"Cache-Control"},"ContentDisposition":{"location":"header","locationName":"Content-Disposition"},"ContentEncoding":{"location":"header","locationName":"Content-Encoding"},"ContentLanguage":{"location":"header","locationName":"Content-Language"},"ContentType":{"location":"header","locationName":"Content-Type"},"CopySource":{"location":"header","locationName":"x-amz-copy-source"},"CopySourceIfMatch":{"location":"header","locationName":"x-amz-copy-source-if-match"},"CopySourceIfModifiedSince":{"location":"header","locationName":"x-amz-copy-source-if-modified-since","type":"timestamp"},"CopySourceIfNoneMatch":{"location":"header","locationName":"x-amz-copy-source-if-none-match"},"CopySourceIfUnmodifiedSince":{"location":"header","locationName":"x-amz-copy-source-if-unmodified-since","type":"timestamp"},"Expires":{"location":"header","locationName":"Expires","type":"timestamp"},"GrantFullControl":{"location":"header","locationName":"x-amz-grant-full-control"},"GrantRead":{"location":"header","locationName":"x-amz-grant-read"},"GrantReadACP":{"location":"header","locationName":"x-amz-grant-read-acp"},"GrantWriteACP":{"location":"header","locationName":"x-amz-grant-write-acp"},"Key":{"location":"uri","locationName":"Key"},"Metadata":{"shape":"Sx","location":"headers","locationName":"x-amz-meta-"},"MetadataDirective":{"location":"header","locationName":"x-amz-metadata-directive"},"ServerSideEncryption":{"location":"header","locationName":"x-amz-server-side-encryption"},"StorageClass":{"location":"header","locationName":"x-amz-storage-class"},"WebsiteRedirectLocation":{"location":"header","locationName":"x-amz-website-redirect-location"},"SSECustomerAlgorithm":{"location":"header","locationName":"x-amz-server-side-encryption-customer-algorithm"},"SSECustomerKey":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key"},"SSECustomerKeyMD5":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key-MD5"},"CopySourceSSECustomerAlgorithm":{"location":"header","locationName":"x-amz-copy-source-server-side-encryption-customer-algorithm"},"CopySourceSSECustomerKey":{"location":"header","locationName":"x-amz-copy-source-server-side-encryption-customer-key"},"CopySourceSSECustomerKeyMD5":{"location":"header","locationName":"x-amz-copy-source-server-side-encryption-customer-key-MD5"}}},"output":{"type":"structure","members":{"CopyObjectResult":{"type":"structure","members":{"ETag":{},"LastModified":{"type":"timestamp"}}},"Expiration":{"location":"header","locationName":"x-amz-expiration","type":"timestamp"},"CopySourceVersionId":{"location":"header","locationName":"x-amz-copy-source-version-id"},"ServerSideEncryption":{"location":"header","locationName":"x-amz-server-side-encryption"},"SSECustomerAlgorithm":{"location":"header","locationName":"x-amz-server-side-encryption-customer-algorithm"},"SSECustomerKeyMD5":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key-MD5"}},"payload":"CopyObjectResult"},"alias":"PutObjectCopy"},"CreateBucket":{"http":{"method":"PUT","requestUri":"/{Bucket}"},"input":{"type":"structure","required":["Bucket"],"members":{"ACL":{"location":"header","locationName":"x-amz-acl"},"Bucket":{"location":"uri","locationName":"Bucket"},"CreateBucketConfiguration":{"xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/","locationName":"CreateBucketConfiguration","type":"structure","members":{"LocationConstraint":{}}},"GrantFullControl":{"location":"header","locationName":"x-amz-grant-full-control"},"GrantRead":{"location":"header","locationName":"x-amz-grant-read"},"GrantReadACP":{"location":"header","locationName":"x-amz-grant-read-acp"},"GrantWrite":{"location":"header","locationName":"x-amz-grant-write"},"GrantWriteACP":{"location":"header","locationName":"x-amz-grant-write-acp"}},"payload":"CreateBucketConfiguration"},"output":{"type":"structure","members":{"Location":{"location":"header","locationName":"Location"}}},"alias":"PutBucket"},"CreateMultipartUpload":{"http":{"requestUri":"/{Bucket}/{Key}?uploads"},"input":{"type":"structure","required":["Bucket","Key"],"members":{"ACL":{"location":"header","locationName":"x-amz-acl"},"Bucket":{"location":"uri","locationName":"Bucket"},"CacheControl":{"location":"header","locationName":"Cache-Control"},"ContentDisposition":{"location":"header","locationName":"Content-Disposition"},"ContentEncoding":{"location":"header","locationName":"Content-Encoding"},"ContentLanguage":{"location":"header","locationName":"Content-Language"},"ContentType":{"location":"header","locationName":"Content-Type"},"Expires":{"location":"header","locationName":"Expires","type":"timestamp"},"GrantFullControl":{"location":"header","locationName":"x-amz-grant-full-control"},"GrantRead":{"location":"header","locationName":"x-amz-grant-read"},"GrantReadACP":{"location":"header","locationName":"x-amz-grant-read-acp"},"GrantWriteACP":{"location":"header","locationName":"x-amz-grant-write-acp"},"Key":{"location":"uri","locationName":"Key"},"Metadata":{"shape":"Sx","location":"headers","locationName":"x-amz-meta-"},"ServerSideEncryption":{"location":"header","locationName":"x-amz-server-side-encryption"},"StorageClass":{"location":"header","locationName":"x-amz-storage-class"},"WebsiteRedirectLocation":{"location":"header","locationName":"x-amz-website-redirect-location"},"SSECustomerAlgorithm":{"location":"header","locationName":"x-amz-server-side-encryption-customer-algorithm"},"SSECustomerKey":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key"},"SSECustomerKeyMD5":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key-MD5"}}},"output":{"type":"structure","members":{"Bucket":{"locationName":"Bucket"},"Key":{},"UploadId":{},"ServerSideEncryption":{"location":"header","locationName":"x-amz-server-side-encryption"},"SSECustomerAlgorithm":{"location":"header","locationName":"x-amz-server-side-encryption-customer-algorithm"},"SSECustomerKeyMD5":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key-MD5"}}},"alias":"InitiateMultipartUpload"},"DeleteBucket":{"http":{"method":"DELETE","requestUri":"/{Bucket}"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"}}}},"DeleteBucketCors":{"http":{"method":"DELETE","requestUri":"/{Bucket}?cors"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"}}}},"DeleteBucketLifecycle":{"http":{"method":"DELETE","requestUri":"/{Bucket}?lifecycle"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"}}}},"DeleteBucketPolicy":{"http":{"method":"DELETE","requestUri":"/{Bucket}?policy"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"}}}},"DeleteBucketTagging":{"http":{"method":"DELETE","requestUri":"/{Bucket}?tagging"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"}}}},"DeleteBucketWebsite":{"http":{"method":"DELETE","requestUri":"/{Bucket}?website"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"}}}},"DeleteObject":{"http":{"method":"DELETE","requestUri":"/{Bucket}/{Key}"},"input":{"type":"structure","required":["Bucket","Key"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"Key":{"location":"uri","locationName":"Key"},"MFA":{"location":"header","locationName":"x-amz-mfa"},"VersionId":{"location":"querystring","locationName":"versionId"}}},"output":{"type":"structure","members":{"DeleteMarker":{"location":"header","locationName":"x-amz-delete-marker","type":"boolean"},"VersionId":{"location":"header","locationName":"x-amz-version-id"}}}},"DeleteObjects":{"http":{"requestUri":"/{Bucket}?delete"},"input":{"type":"structure","required":["Bucket","Delete"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"Delete":{"xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/","locationName":"Delete","type":"structure","required":["Objects"],"members":{"Objects":{"locationName":"Object","type":"list","member":{"type":"structure","required":["Key"],"members":{"Key":{},"VersionId":{}}},"flattened":true},"Quiet":{"type":"boolean"}}},"MFA":{"location":"header","locationName":"x-amz-mfa"}},"payload":"Delete"},"output":{"type":"structure","members":{"Deleted":{"type":"list","member":{"type":"structure","members":{"Key":{},"VersionId":{},"DeleteMarker":{"type":"boolean"},"DeleteMarkerVersionId":{}}},"flattened":true},"Errors":{"locationName":"Error","type":"list","member":{"type":"structure","members":{"Key":{},"VersionId":{},"Code":{},"Message":{}}},"flattened":true}}},"alias":"DeleteMultipleObjects"},"GetBucketAcl":{"http":{"method":"GET","requestUri":"/{Bucket}?acl"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"}}},"output":{"type":"structure","members":{"Owner":{"shape":"S2a"},"Grants":{"shape":"S2d","locationName":"AccessControlList"}}}},"GetBucketCors":{"http":{"method":"GET","requestUri":"/{Bucket}?cors"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"}}},"output":{"type":"structure","members":{"CORSRules":{"shape":"S2m","locationName":"CORSRule"}}}},"GetBucketLifecycle":{"http":{"method":"GET","requestUri":"/{Bucket}?lifecycle"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"}}},"output":{"type":"structure","members":{"Rules":{"shape":"S2z","locationName":"Rule"}}}},"GetBucketLocation":{"http":{"method":"GET","requestUri":"/{Bucket}?location"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"}}},"output":{"type":"structure","members":{"LocationConstraint":{}}}},"GetBucketLogging":{"http":{"method":"GET","requestUri":"/{Bucket}?logging"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"}}},"output":{"type":"structure","members":{"LoggingEnabled":{"shape":"S3e"}}}},"GetBucketNotification":{"http":{"method":"GET","requestUri":"/{Bucket}?notification"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"}}},"output":{"type":"structure","members":{"TopicConfiguration":{"shape":"S3m"}}}},"GetBucketPolicy":{"http":{"method":"GET","requestUri":"/{Bucket}?policy"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"}}},"output":{"type":"structure","members":{"Policy":{}},"payload":"Policy"}},"GetBucketRequestPayment":{"http":{"method":"GET","requestUri":"/{Bucket}?requestPayment"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"}}},"output":{"type":"structure","members":{"Payer":{}}}},"GetBucketTagging":{"http":{"method":"GET","requestUri":"/{Bucket}?tagging"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"}}},"output":{"type":"structure","required":["TagSet"],"members":{"TagSet":{"shape":"S3x"}}}},"GetBucketVersioning":{"http":{"method":"GET","requestUri":"/{Bucket}?versioning"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"}}},"output":{"type":"structure","members":{"Status":{},"MFADelete":{"locationName":"MfaDelete"}}}},"GetBucketWebsite":{"http":{"method":"GET","requestUri":"/{Bucket}?website"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"}}},"output":{"type":"structure","members":{"RedirectAllRequestsTo":{"shape":"S46"},"IndexDocument":{"shape":"S49"},"ErrorDocument":{"shape":"S4b"},"RoutingRules":{"shape":"S4c"}}}},"GetObject":{"http":{"method":"GET","requestUri":"/{Bucket}/{Key}"},"input":{"type":"structure","required":["Bucket","Key"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"IfMatch":{"location":"header","locationName":"If-Match"},"IfModifiedSince":{"location":"header","locationName":"If-Modified-Since","type":"timestamp"},"IfNoneMatch":{"location":"header","locationName":"If-None-Match"},"IfUnmodifiedSince":{"location":"header","locationName":"If-Unmodified-Since","type":"timestamp"},"Key":{"location":"uri","locationName":"Key"},"Range":{"location":"header","locationName":"Range"},"ResponseCacheControl":{"location":"querystring","locationName":"response-cache-control"},"ResponseContentDisposition":{"location":"querystring","locationName":"response-content-disposition"},"ResponseContentEncoding":{"location":"querystring","locationName":"response-content-encoding"},"ResponseContentLanguage":{"location":"querystring","locationName":"response-content-language"},"ResponseContentType":{"location":"querystring","locationName":"response-content-type"},"ResponseExpires":{"location":"querystring","locationName":"response-expires","type":"timestamp"},"VersionId":{"location":"querystring","locationName":"versionId"},"SSECustomerAlgorithm":{"location":"header","locationName":"x-amz-server-side-encryption-customer-algorithm"},"SSECustomerKey":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key"},"SSECustomerKeyMD5":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key-MD5"}}},"output":{"type":"structure","members":{"Body":{"streaming":true,"type":"blob"},"DeleteMarker":{"location":"header","locationName":"x-amz-delete-marker","type":"boolean"},"AcceptRanges":{"location":"header","locationName":"accept-ranges"},"Expiration":{"location":"header","locationName":"x-amz-expiration","type":"timestamp"},"Restore":{"location":"header","locationName":"x-amz-restore"},"LastModified":{"location":"header","locationName":"Last-Modified","type":"timestamp"},"ContentLength":{"location":"header","locationName":"Content-Length","type":"integer"},"ETag":{"location":"header","locationName":"ETag"},"MissingMeta":{"location":"header","locationName":"x-amz-missing-meta","type":"integer"},"VersionId":{"location":"header","locationName":"x-amz-version-id"},"CacheControl":{"location":"header","locationName":"Cache-Control"},"ContentDisposition":{"location":"header","locationName":"Content-Disposition"},"ContentEncoding":{"location":"header","locationName":"Content-Encoding"},"ContentLanguage":{"location":"header","locationName":"Content-Language"},"ContentType":{"location":"header","locationName":"Content-Type"},"Expires":{"location":"header","locationName":"Expires","type":"timestamp"},"WebsiteRedirectLocation":{"location":"header","locationName":"x-amz-website-redirect-location"},"ServerSideEncryption":{"location":"header","locationName":"x-amz-server-side-encryption"},"Metadata":{"shape":"Sx","location":"headers","locationName":"x-amz-meta-"},"SSECustomerAlgorithm":{"location":"header","locationName":"x-amz-server-side-encryption-customer-algorithm"},"SSECustomerKeyMD5":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key-MD5"}},"payload":"Body"}},"GetObjectAcl":{"http":{"method":"GET","requestUri":"/{Bucket}/{Key}?acl"},"input":{"type":"structure","required":["Bucket","Key"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"Key":{"location":"uri","locationName":"Key"},"VersionId":{"location":"querystring","locationName":"versionId"}}},"output":{"type":"structure","members":{"Owner":{"shape":"S2a"},"Grants":{"shape":"S2d","locationName":"AccessControlList"}}}},"GetObjectTorrent":{"http":{"method":"GET","requestUri":"/{Bucket}/{Key}?torrent"},"input":{"type":"structure","required":["Bucket","Key"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"Key":{"location":"uri","locationName":"Key"}}},"output":{"type":"structure","members":{"Body":{"streaming":true,"type":"blob"}},"payload":"Body"}},"HeadBucket":{"http":{"method":"HEAD","requestUri":"/{Bucket}"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"}}}},"HeadObject":{"http":{"method":"HEAD","requestUri":"/{Bucket}/{Key}"},"input":{"type":"structure","required":["Bucket","Key"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"IfMatch":{"location":"header","locationName":"If-Match"},"IfModifiedSince":{"location":"header","locationName":"If-Modified-Since","type":"timestamp"},"IfNoneMatch":{"location":"header","locationName":"If-None-Match"},"IfUnmodifiedSince":{"location":"header","locationName":"If-Unmodified-Since","type":"timestamp"},"Key":{"location":"uri","locationName":"Key"},"Range":{"location":"header","locationName":"Range"},"VersionId":{"location":"querystring","locationName":"versionId"},"SSECustomerAlgorithm":{"location":"header","locationName":"x-amz-server-side-encryption-customer-algorithm"},"SSECustomerKey":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key"},"SSECustomerKeyMD5":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key-MD5"}}},"output":{"type":"structure","members":{"DeleteMarker":{"location":"header","locationName":"x-amz-delete-marker","type":"boolean"},"AcceptRanges":{"location":"header","locationName":"accept-ranges"},"Expiration":{"location":"header","locationName":"x-amz-expiration","type":"timestamp"},"Restore":{"location":"header","locationName":"x-amz-restore"},"LastModified":{"location":"header","locationName":"Last-Modified","type":"timestamp"},"ContentLength":{"location":"header","locationName":"Content-Length","type":"integer"},"ETag":{"location":"header","locationName":"ETag"},"MissingMeta":{"location":"header","locationName":"x-amz-missing-meta","type":"integer"},"VersionId":{"location":"header","locationName":"x-amz-version-id"},"CacheControl":{"location":"header","locationName":"Cache-Control"},"ContentDisposition":{"location":"header","locationName":"Content-Disposition"},"ContentEncoding":{"location":"header","locationName":"Content-Encoding"},"ContentLanguage":{"location":"header","locationName":"Content-Language"},"ContentType":{"location":"header","locationName":"Content-Type"},"Expires":{"location":"header","locationName":"Expires","type":"timestamp"},"WebsiteRedirectLocation":{"location":"header","locationName":"x-amz-website-redirect-location"},"ServerSideEncryption":{"location":"header","locationName":"x-amz-server-side-encryption"},"Metadata":{"shape":"Sx","location":"headers","locationName":"x-amz-meta-"},"SSECustomerAlgorithm":{"location":"header","locationName":"x-amz-server-side-encryption-customer-algorithm"},"SSECustomerKeyMD5":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key-MD5"}}}},"ListBuckets":{"http":{"method":"GET"},"output":{"type":"structure","members":{"Buckets":{"type":"list","member":{"locationName":"Bucket","type":"structure","members":{"Name":{},"CreationDate":{"type":"timestamp"}}}},"Owner":{"shape":"S2a"}}},"alias":"GetService"},"ListMultipartUploads":{"http":{"method":"GET","requestUri":"/{Bucket}?uploads"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"Delimiter":{"location":"querystring","locationName":"delimiter"},"EncodingType":{"location":"querystring","locationName":"encoding-type"},"KeyMarker":{"location":"querystring","locationName":"key-marker"},"MaxUploads":{"location":"querystring","locationName":"max-uploads","type":"integer"},"Prefix":{"location":"querystring","locationName":"prefix"},"UploadIdMarker":{"location":"querystring","locationName":"upload-id-marker"}}},"output":{"type":"structure","members":{"Bucket":{},"KeyMarker":{},"UploadIdMarker":{},"NextKeyMarker":{},"Prefix":{},"NextUploadIdMarker":{},"MaxUploads":{"type":"integer"},"IsTruncated":{"type":"boolean"},"Uploads":{"locationName":"Upload","type":"list","member":{"type":"structure","members":{"UploadId":{},"Key":{},"Initiated":{"type":"timestamp"},"StorageClass":{},"Owner":{"shape":"S2a"},"Initiator":{"shape":"S5r"}}},"flattened":true},"CommonPrefixes":{"shape":"S5s"},"EncodingType":{}}}},"ListObjectVersions":{"http":{"method":"GET","requestUri":"/{Bucket}?versions"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"Delimiter":{"location":"querystring","locationName":"delimiter"},"EncodingType":{"location":"querystring","locationName":"encoding-type"},"KeyMarker":{"location":"querystring","locationName":"key-marker"},"MaxKeys":{"location":"querystring","locationName":"max-keys","type":"integer"},"Prefix":{"location":"querystring","locationName":"prefix"},"VersionIdMarker":{"location":"querystring","locationName":"version-id-marker"}}},"output":{"type":"structure","members":{"IsTruncated":{"type":"boolean"},"KeyMarker":{},"VersionIdMarker":{},"NextKeyMarker":{},"NextVersionIdMarker":{},"Versions":{"locationName":"Version","type":"list","member":{"type":"structure","members":{"ETag":{},"Size":{"type":"integer"},"StorageClass":{},"Key":{},"VersionId":{},"IsLatest":{"type":"boolean"},"LastModified":{"type":"timestamp"},"Owner":{"shape":"S2a"}}},"flattened":true},"DeleteMarkers":{"locationName":"DeleteMarker","type":"list","member":{"type":"structure","members":{"Owner":{"shape":"S2a"},"Key":{},"VersionId":{},"IsLatest":{"type":"boolean"},"LastModified":{"type":"timestamp"}}},"flattened":true},"Name":{},"Prefix":{},"MaxKeys":{"type":"integer"},"CommonPrefixes":{"shape":"S5s"},"EncodingType":{}}},"alias":"GetBucketObjectVersions"},"ListObjects":{"http":{"method":"GET","requestUri":"/{Bucket}"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"Delimiter":{"location":"querystring","locationName":"delimiter"},"EncodingType":{"location":"querystring","locationName":"encoding-type"},"Marker":{"location":"querystring","locationName":"marker"},"MaxKeys":{"location":"querystring","locationName":"max-keys","type":"integer"},"Prefix":{"location":"querystring","locationName":"prefix"}}},"output":{"type":"structure","members":{"IsTruncated":{"type":"boolean"},"Marker":{},"NextMarker":{},"Contents":{"type":"list","member":{"type":"structure","members":{"Key":{},"LastModified":{"type":"timestamp"},"ETag":{},"Size":{"type":"integer"},"StorageClass":{},"Owner":{"shape":"S2a"}}},"flattened":true},"Name":{},"Prefix":{},"MaxKeys":{"type":"integer"},"CommonPrefixes":{"shape":"S5s"},"EncodingType":{}}},"alias":"GetBucket"},"ListParts":{"http":{"method":"GET","requestUri":"/{Bucket}/{Key}"},"input":{"type":"structure","required":["Bucket","Key","UploadId"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"Key":{"location":"uri","locationName":"Key"},"MaxParts":{"location":"querystring","locationName":"max-parts","type":"integer"},"PartNumberMarker":{"location":"querystring","locationName":"part-number-marker","type":"integer"},"UploadId":{"location":"querystring","locationName":"uploadId"}}},"output":{"type":"structure","members":{"Bucket":{},"Key":{},"UploadId":{},"PartNumberMarker":{"type":"integer"},"NextPartNumberMarker":{"type":"integer"},"MaxParts":{"type":"integer"},"IsTruncated":{"type":"boolean"},"Parts":{"locationName":"Part","type":"list","member":{"type":"structure","members":{"PartNumber":{"type":"integer"},"LastModified":{"type":"timestamp"},"ETag":{},"Size":{"type":"integer"}}},"flattened":true},"Initiator":{"shape":"S5r"},"Owner":{"shape":"S2a"},"StorageClass":{}}}},"PutBucketAcl":{"http":{"method":"PUT","requestUri":"/{Bucket}?acl"},"input":{"type":"structure","required":["Bucket"],"members":{"ACL":{"location":"header","locationName":"x-amz-acl"},"AccessControlPolicy":{"shape":"S6l","xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/","locationName":"AccessControlPolicy"},"Bucket":{"location":"uri","locationName":"Bucket"},"ContentMD5":{"location":"header","locationName":"Content-MD5"},"GrantFullControl":{"location":"header","locationName":"x-amz-grant-full-control"},"GrantRead":{"location":"header","locationName":"x-amz-grant-read"},"GrantReadACP":{"location":"header","locationName":"x-amz-grant-read-acp"},"GrantWrite":{"location":"header","locationName":"x-amz-grant-write"},"GrantWriteACP":{"location":"header","locationName":"x-amz-grant-write-acp"}},"payload":"AccessControlPolicy"}},"PutBucketCors":{"http":{"method":"PUT","requestUri":"/{Bucket}?cors"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"CORSConfiguration":{"xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/","locationName":"CORSConfiguration","type":"structure","members":{"CORSRules":{"shape":"S2m","locationName":"CORSRule"}}},"ContentMD5":{"location":"header","locationName":"Content-MD5"}},"payload":"CORSConfiguration"}},"PutBucketLifecycle":{"http":{"method":"PUT","requestUri":"/{Bucket}?lifecycle"},"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"ContentMD5":{"location":"header","locationName":"Content-MD5"},"LifecycleConfiguration":{"xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/","locationName":"LifecycleConfiguration","type":"structure","required":["Rules"],"members":{"Rules":{"shape":"S2z","locationName":"Rule"}}}},"payload":"LifecycleConfiguration"}},"PutBucketLogging":{"http":{"method":"PUT","requestUri":"/{Bucket}?logging"},"input":{"type":"structure","required":["Bucket","BucketLoggingStatus"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"BucketLoggingStatus":{"xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/","locationName":"BucketLoggingStatus","type":"structure","members":{"LoggingEnabled":{"shape":"S3e"}}},"ContentMD5":{"location":"header","locationName":"Content-MD5"}},"payload":"BucketLoggingStatus"}},"PutBucketNotification":{"http":{"method":"PUT","requestUri":"/{Bucket}?notification"},"input":{"type":"structure","required":["Bucket","NotificationConfiguration"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"ContentMD5":{"location":"header","locationName":"Content-MD5"},"NotificationConfiguration":{"xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/","locationName":"NotificationConfiguration","type":"structure","required":["TopicConfiguration"],"members":{"TopicConfiguration":{"shape":"S3m"}}}},"payload":"NotificationConfiguration"}},"PutBucketPolicy":{"http":{"method":"PUT","requestUri":"/{Bucket}?policy"},"input":{"xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/","locationName":"PutBucketPolicyRequest","type":"structure","required":["Bucket","Policy"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"ContentMD5":{"location":"header","locationName":"Content-MD5"},"Policy":{}},"payload":"Policy"}},"PutBucketRequestPayment":{"http":{"method":"PUT","requestUri":"/{Bucket}?requestPayment"},"input":{"type":"structure","required":["Bucket","RequestPaymentConfiguration"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"ContentMD5":{"location":"header","locationName":"Content-MD5"},"RequestPaymentConfiguration":{"xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/","locationName":"RequestPaymentConfiguration","type":"structure","required":["Payer"],"members":{"Payer":{}}}},"payload":"RequestPaymentConfiguration"}},"PutBucketTagging":{"http":{"method":"PUT","requestUri":"/{Bucket}?tagging"},"input":{"type":"structure","required":["Bucket","Tagging"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"ContentMD5":{"location":"header","locationName":"Content-MD5"},"Tagging":{"xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/","locationName":"Tagging","type":"structure","required":["TagSet"],"members":{"TagSet":{"shape":"S3x"}}}},"payload":"Tagging"}},"PutBucketVersioning":{"http":{"method":"PUT","requestUri":"/{Bucket}?versioning"},"input":{"type":"structure","required":["Bucket","VersioningConfiguration"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"ContentMD5":{"location":"header","locationName":"Content-MD5"},"MFA":{"location":"header","locationName":"x-amz-mfa"},"VersioningConfiguration":{"xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/","locationName":"VersioningConfiguration","type":"structure","members":{"MFADelete":{"locationName":"MfaDelete"},"Status":{}}}},"payload":"VersioningConfiguration"}},"PutBucketWebsite":{"http":{"method":"PUT","requestUri":"/{Bucket}?website"},"input":{"type":"structure","required":["Bucket","WebsiteConfiguration"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"ContentMD5":{"location":"header","locationName":"Content-MD5"},"WebsiteConfiguration":{"xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/","locationName":"WebsiteConfiguration","type":"structure","members":{"ErrorDocument":{"shape":"S4b"},"IndexDocument":{"shape":"S49"},"RedirectAllRequestsTo":{"shape":"S46"},"RoutingRules":{"shape":"S4c"}}}},"payload":"WebsiteConfiguration"}},"PutObject":{"http":{"method":"PUT","requestUri":"/{Bucket}/{Key}"},"input":{"type":"structure","required":["Bucket","Key"],"members":{"ACL":{"location":"header","locationName":"x-amz-acl"},"Body":{"streaming":true,"type":"blob"},"Bucket":{"location":"uri","locationName":"Bucket"},"CacheControl":{"location":"header","locationName":"Cache-Control"},"ContentDisposition":{"location":"header","locationName":"Content-Disposition"},"ContentEncoding":{"location":"header","locationName":"Content-Encoding"},"ContentLanguage":{"location":"header","locationName":"Content-Language"},"ContentLength":{"location":"header","locationName":"Content-Length","type":"integer"},"ContentMD5":{"location":"header","locationName":"Content-MD5"},"ContentType":{"location":"header","locationName":"Content-Type"},"Expires":{"location":"header","locationName":"Expires","type":"timestamp"},"GrantFullControl":{"location":"header","locationName":"x-amz-grant-full-control"},"GrantRead":{"location":"header","locationName":"x-amz-grant-read"},"GrantReadACP":{"location":"header","locationName":"x-amz-grant-read-acp"},"GrantWriteACP":{"location":"header","locationName":"x-amz-grant-write-acp"},"Key":{"location":"uri","locationName":"Key"},"Metadata":{"shape":"Sx","location":"headers","locationName":"x-amz-meta-"},"ServerSideEncryption":{"location":"header","locationName":"x-amz-server-side-encryption"},"StorageClass":{"location":"header","locationName":"x-amz-storage-class"},"WebsiteRedirectLocation":{"location":"header","locationName":"x-amz-website-redirect-location"},"SSECustomerAlgorithm":{"location":"header","locationName":"x-amz-server-side-encryption-customer-algorithm"},"SSECustomerKey":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key"},"SSECustomerKeyMD5":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key-MD5"}},"payload":"Body"},"output":{"type":"structure","members":{"Expiration":{"location":"header","locationName":"x-amz-expiration","type":"timestamp"},"ETag":{"location":"header","locationName":"ETag"},"ServerSideEncryption":{"location":"header","locationName":"x-amz-server-side-encryption"},"VersionId":{"location":"header","locationName":"x-amz-version-id"},"SSECustomerAlgorithm":{"location":"header","locationName":"x-amz-server-side-encryption-customer-algorithm"},"SSECustomerKeyMD5":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key-MD5"}}}},"PutObjectAcl":{"http":{"method":"PUT","requestUri":"/{Bucket}/{Key}?acl"},"input":{"type":"structure","required":["Bucket","Key"],"members":{"ACL":{"location":"header","locationName":"x-amz-acl"},"AccessControlPolicy":{"shape":"S6l","xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/","locationName":"AccessControlPolicy"},"Bucket":{"location":"uri","locationName":"Bucket"},"ContentMD5":{"location":"header","locationName":"Content-MD5"},"GrantFullControl":{"location":"header","locationName":"x-amz-grant-full-control"},"GrantRead":{"location":"header","locationName":"x-amz-grant-read"},"GrantReadACP":{"location":"header","locationName":"x-amz-grant-read-acp"},"GrantWrite":{"location":"header","locationName":"x-amz-grant-write"},"GrantWriteACP":{"location":"header","locationName":"x-amz-grant-write-acp"},"Key":{"location":"uri","locationName":"Key"}},"payload":"AccessControlPolicy"}},"RestoreObject":{"http":{"requestUri":"/{Bucket}/{Key}?restore"},"input":{"type":"structure","required":["Bucket","Key"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"Key":{"location":"uri","locationName":"Key"},"VersionId":{"location":"querystring","locationName":"versionId"},"RestoreRequest":{"xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/","locationName":"RestoreRequest","type":"structure","required":["Days"],"members":{"Days":{"type":"integer"}}}},"payload":"RestoreRequest"},"alias":"PostObjectRestore"},"UploadPart":{"http":{"method":"PUT","requestUri":"/{Bucket}/{Key}"},"input":{"type":"structure","required":["Bucket","Key","PartNumber","UploadId"],"members":{"Body":{"streaming":true,"type":"blob"},"Bucket":{"location":"uri","locationName":"Bucket"},"ContentLength":{"location":"header","locationName":"Content-Length","type":"integer"},"ContentMD5":{"location":"header","locationName":"Content-MD5"},"Key":{"location":"uri","locationName":"Key"},"PartNumber":{"location":"querystring","locationName":"partNumber","type":"integer"},"UploadId":{"location":"querystring","locationName":"uploadId"},"SSECustomerAlgorithm":{"location":"header","locationName":"x-amz-server-side-encryption-customer-algorithm"},"SSECustomerKey":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key"},"SSECustomerKeyMD5":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key-MD5"}},"payload":"Body"},"output":{"type":"structure","members":{"ServerSideEncryption":{"location":"header","locationName":"x-amz-server-side-encryption"},"ETag":{"location":"header","locationName":"ETag"},"SSECustomerAlgorithm":{"location":"header","locationName":"x-amz-server-side-encryption-customer-algorithm"},"SSECustomerKeyMD5":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key-MD5"}}}},"UploadPartCopy":{"http":{"method":"PUT","requestUri":"/{Bucket}/{Key}"},"input":{"type":"structure","required":["Bucket","CopySource","Key","PartNumber","UploadId"],"members":{"Bucket":{"location":"uri","locationName":"Bucket"},"CopySource":{"location":"header","locationName":"x-amz-copy-source"},"CopySourceIfMatch":{"location":"header","locationName":"x-amz-copy-source-if-match"},"CopySourceIfModifiedSince":{"location":"header","locationName":"x-amz-copy-source-if-modified-since","type":"timestamp"},"CopySourceIfNoneMatch":{"location":"header","locationName":"x-amz-copy-source-if-none-match"},"CopySourceIfUnmodifiedSince":{"location":"header","locationName":"x-amz-copy-source-if-unmodified-since","type":"timestamp"},"CopySourceRange":{"location":"header","locationName":"x-amz-copy-source-range"},"Key":{"location":"uri","locationName":"Key"},"PartNumber":{"location":"querystring","locationName":"partNumber","type":"integer"},"UploadId":{"location":"querystring","locationName":"uploadId"},"SSECustomerAlgorithm":{"location":"header","locationName":"x-amz-server-side-encryption-customer-algorithm"},"SSECustomerKey":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key"},"SSECustomerKeyMD5":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key-MD5"},"CopySourceSSECustomerAlgorithm":{"location":"header","locationName":"x-amz-copy-source-server-side-encryption-customer-algorithm"},"CopySourceSSECustomerKey":{"location":"header","locationName":"x-amz-copy-source-server-side-encryption-customer-key"},"CopySourceSSECustomerKeyMD5":{"location":"header","locationName":"x-amz-copy-source-server-side-encryption-customer-key-MD5"}}},"output":{"type":"structure","members":{"CopySourceVersionId":{"location":"header","locationName":"x-amz-copy-source-version-id"},"CopyPartResult":{"type":"structure","members":{"ETag":{},"LastModified":{"type":"timestamp"}}},"ServerSideEncryption":{"location":"header","locationName":"x-amz-server-side-encryption"},"SSECustomerAlgorithm":{"location":"header","locationName":"x-amz-server-side-encryption-customer-algorithm"},"SSECustomerKeyMD5":{"location":"header","locationName":"x-amz-server-side-encryption-customer-key-MD5"}},"payload":"CopyPartResult"}}},"shapes":{"Sx":{"type":"map","key":{},"value":{}},"S2a":{"type":"structure","members":{"DisplayName":{},"ID":{}}},"S2d":{"type":"list","member":{"locationName":"Grant","type":"structure","members":{"Grantee":{"shape":"S2f"},"Permission":{}}}},"S2f":{"type":"structure","required":["Type"],"members":{"DisplayName":{},"EmailAddress":{},"ID":{},"Type":{"type":"string","xmlAttribute":true,"locationName":"xsi:type"},"URI":{}},"xmlNamespace":{"prefix":"xsi","uri":"http://www.w3.org/2001/XMLSchema-instance"}},"S2m":{"type":"list","member":{"type":"structure","members":{"AllowedHeaders":{"locationName":"AllowedHeader","type":"list","member":{},"flattened":true},"AllowedMethods":{"locationName":"AllowedMethod","type":"list","member":{},"flattened":true},"AllowedOrigins":{"locationName":"AllowedOrigin","type":"list","member":{},"flattened":true},"ExposeHeaders":{"locationName":"ExposeHeader","type":"list","member":{},"flattened":true},"MaxAgeSeconds":{"type":"integer"}}},"flattened":true},"S2z":{"type":"list","member":{"type":"structure","required":["Prefix","Status"],"members":{"Expiration":{"type":"structure","members":{"Date":{"shape":"S32"},"Days":{"type":"integer"}}},"ID":{},"Prefix":{},"Status":{},"Transition":{"type":"structure","members":{"Date":{"shape":"S32"},"Days":{"type":"integer"},"StorageClass":{}}},"NoncurrentVersionTransition":{"type":"structure","members":{"NoncurrentDays":{"type":"integer"},"StorageClass":{}}},"NoncurrentVersionExpiration":{"type":"structure","members":{"NoncurrentDays":{"type":"integer"}}}}},"flattened":true},"S32":{"type":"timestamp","timestampFormat":"iso8601"},"S3e":{"type":"structure","members":{"TargetBucket":{},"TargetGrants":{"type":"list","member":{"locationName":"Grant","type":"structure","members":{"Grantee":{"shape":"S2f"},"Permission":{}}}},"TargetPrefix":{}}},"S3m":{"type":"structure","members":{"Event":{},"Topic":{}}},"S3x":{"type":"list","member":{"locationName":"Tag","type":"structure","required":["Key","Value"],"members":{"Key":{},"Value":{}}}},"S46":{"type":"structure","required":["HostName"],"members":{"HostName":{},"Protocol":{}}},"S49":{"type":"structure","required":["Suffix"],"members":{"Suffix":{}}},"S4b":{"type":"structure","required":["Key"],"members":{"Key":{}}},"S4c":{"type":"list","member":{"locationName":"RoutingRule","type":"structure","required":["Redirect"],"members":{"Condition":{"type":"structure","members":{"HttpErrorCodeReturnedEquals":{},"KeyPrefixEquals":{}}},"Redirect":{"type":"structure","members":{"HostName":{},"HttpRedirectCode":{},"Protocol":{},"ReplaceKeyPrefixWith":{},"ReplaceKeyWith":{}}}}}},"S5r":{"type":"structure","members":{"ID":{},"DisplayName":{}}},"S5s":{"type":"list","member":{"type":"structure","members":{"Prefix":{}}},"flattened":true},"S6l":{"type":"structure","members":{"Grants":{"shape":"S2d","locationName":"AccessControlList"},"Owner":{"shape":"S2a"}}}},"paginators":{"ListBuckets":{"result_key":"Buckets"},"ListMultipartUploads":{"limit_key":"MaxUploads","more_results":"IsTruncated","output_token":["NextKeyMarker","NextUploadIdMarker"],"input_token":["KeyMarker","UploadIdMarker"],"result_key":["Uploads","CommonPrefixes"]},"ListObjectVersions":{"more_results":"IsTruncated","limit_key":"MaxKeys","output_token":["NextKeyMarker","NextVersionIdMarker"],"input_token":["KeyMarker","VersionIdMarker"],"result_key":["Versions","DeleteMarkers","CommonPrefixes"]},"ListObjects":{"more_results":"IsTruncated","limit_key":"MaxKeys","output_token":"NextMarker or Contents[-1].Key","input_token":"Marker","result_key":["Contents","CommonPrefixes"]},"ListParts":{"more_results":"IsTruncated","limit_key":"MaxParts","output_token":"NextPartNumberMarker","input_token":"PartNumberMarker","result_key":"Parts"}},"waiters":{"__default__":{"interval":5,"max_attempts":20},"BucketExists":{"operation":"HeadBucket","ignore_errors":[404],"success_type":"output"},"BucketNotExists":{"operation":"HeadBucket","success_type":"error","success_value":404},"ObjectExists":{"operation":"HeadObject","ignore_errors":[404],"success_type":"output"},"ObjectNotExists":{"operation":"HeadObject","success_type":"error","success_value":404}}});
+AWS.SNS = AWS.Service.defineService('sns');
 
-window.AWS.Service.defineServiceApi(window.AWS.SNS, "2010-03-31", {"format":"query","apiVersion":"2010-03-31","endpointPrefix":"sns","resultWrapped":true,"serviceAbbreviation":"Amazon SNS","serviceFullName":"Amazon Simple Notification Service","signatureVersion":"v4","timestampFormat":"iso8601","operations":{"addPermission":{"name":"AddPermission","input":{"type":"structure","members":{"TopicArn":{"required":true},"Label":{"required":true},"AWSAccountId":{"type":"list","members":{},"required":true},"ActionName":{"type":"list","members":{},"required":true}}},"output":{"type":"structure","members":{}}},"confirmSubscription":{"name":"ConfirmSubscription","input":{"type":"structure","members":{"TopicArn":{"required":true},"Token":{"required":true},"AuthenticateOnUnsubscribe":{}}},"output":{"type":"structure","members":{"SubscriptionArn":{}}}},"createPlatformApplication":{"name":"CreatePlatformApplication","input":{"type":"structure","members":{"Name":{"required":true},"Platform":{"required":true},"Attributes":{"type":"map","keys":{},"members":{},"required":true}}},"output":{"type":"structure","members":{"PlatformApplicationArn":{}}}},"createPlatformEndpoint":{"name":"CreatePlatformEndpoint","input":{"type":"structure","members":{"PlatformApplicationArn":{"required":true},"Token":{"required":true},"CustomUserData":{},"Attributes":{"type":"map","keys":{},"members":{}}}},"output":{"type":"structure","members":{"EndpointArn":{}}}},"createTopic":{"name":"CreateTopic","input":{"type":"structure","members":{"Name":{"required":true}}},"output":{"type":"structure","members":{"TopicArn":{}}}},"deleteEndpoint":{"name":"DeleteEndpoint","input":{"type":"structure","members":{"EndpointArn":{"required":true}}},"output":{"type":"structure","members":{}}},"deletePlatformApplication":{"name":"DeletePlatformApplication","input":{"type":"structure","members":{"PlatformApplicationArn":{"required":true}}},"output":{"type":"structure","members":{}}},"deleteTopic":{"name":"DeleteTopic","input":{"type":"structure","members":{"TopicArn":{"required":true}}},"output":{"type":"structure","members":{}}},"getEndpointAttributes":{"name":"GetEndpointAttributes","input":{"type":"structure","members":{"EndpointArn":{"required":true}}},"output":{"type":"structure","members":{"Attributes":{"type":"map","keys":{},"members":{}}}}},"getPlatformApplicationAttributes":{"name":"GetPlatformApplicationAttributes","input":{"type":"structure","members":{"PlatformApplicationArn":{"required":true}}},"output":{"type":"structure","members":{"Attributes":{"type":"map","keys":{},"members":{}}}}},"getSubscriptionAttributes":{"name":"GetSubscriptionAttributes","input":{"type":"structure","members":{"SubscriptionArn":{"required":true}}},"output":{"type":"structure","members":{"Attributes":{"type":"map","keys":{},"members":{}}}}},"getTopicAttributes":{"name":"GetTopicAttributes","input":{"type":"structure","members":{"TopicArn":{"required":true}}},"output":{"type":"structure","members":{"Attributes":{"type":"map","keys":{},"members":{}}}}},"listEndpointsByPlatformApplication":{"name":"ListEndpointsByPlatformApplication","input":{"type":"structure","members":{"PlatformApplicationArn":{"required":true},"NextToken":{}}},"output":{"type":"structure","members":{"Endpoints":{"type":"list","members":{"type":"structure","members":{"EndpointArn":{},"Attributes":{"type":"map","keys":{},"members":{}}}}},"NextToken":{}}}},"listPlatformApplications":{"name":"ListPlatformApplications","input":{"type":"structure","members":{"NextToken":{}}},"output":{"type":"structure","members":{"PlatformApplications":{"type":"list","members":{"type":"structure","members":{"PlatformApplicationArn":{},"Attributes":{"type":"map","keys":{},"members":{}}}}},"NextToken":{}}}},"listSubscriptions":{"name":"ListSubscriptions","input":{"type":"structure","members":{"NextToken":{}}},"output":{"type":"structure","members":{"Subscriptions":{"type":"list","members":{"type":"structure","members":{"SubscriptionArn":{},"Owner":{},"Protocol":{},"Endpoint":{},"TopicArn":{}}}},"NextToken":{}}}},"listSubscriptionsByTopic":{"name":"ListSubscriptionsByTopic","input":{"type":"structure","members":{"TopicArn":{"required":true},"NextToken":{}}},"output":{"type":"structure","members":{"Subscriptions":{"type":"list","members":{"type":"structure","members":{"SubscriptionArn":{},"Owner":{},"Protocol":{},"Endpoint":{},"TopicArn":{}}}},"NextToken":{}}}},"listTopics":{"name":"ListTopics","input":{"type":"structure","members":{"NextToken":{}}},"output":{"type":"structure","members":{"Topics":{"type":"list","members":{"type":"structure","members":{"TopicArn":{}}}},"NextToken":{}}}},"publish":{"name":"Publish","input":{"type":"structure","members":{"TopicArn":{},"TargetArn":{},"Message":{"required":true},"Subject":{},"MessageStructure":{}}},"output":{"type":"structure","members":{"MessageId":{}}}},"removePermission":{"name":"RemovePermission","input":{"type":"structure","members":{"TopicArn":{"required":true},"Label":{"required":true}}},"output":{"type":"structure","members":{}}},"setEndpointAttributes":{"name":"SetEndpointAttributes","input":{"type":"structure","members":{"EndpointArn":{"required":true},"Attributes":{"type":"map","keys":{},"members":{},"required":true}}},"output":{"type":"structure","members":{}}},"setPlatformApplicationAttributes":{"name":"SetPlatformApplicationAttributes","input":{"type":"structure","members":{"PlatformApplicationArn":{"required":true},"Attributes":{"type":"map","keys":{},"members":{},"required":true}}},"output":{"type":"structure","members":{}}},"setSubscriptionAttributes":{"name":"SetSubscriptionAttributes","input":{"type":"structure","members":{"SubscriptionArn":{"required":true},"AttributeName":{"required":true},"AttributeValue":{}}},"output":{"type":"structure","members":{}}},"setTopicAttributes":{"name":"SetTopicAttributes","input":{"type":"structure","members":{"TopicArn":{"required":true},"AttributeName":{"required":true},"AttributeValue":{}}},"output":{"type":"structure","members":{}}},"subscribe":{"name":"Subscribe","input":{"type":"structure","members":{"TopicArn":{"required":true},"Protocol":{"required":true},"Endpoint":{}}},"output":{"type":"structure","members":{"SubscriptionArn":{}}}},"unsubscribe":{"name":"Unsubscribe","input":{"type":"structure","members":{"SubscriptionArn":{"required":true}}},"output":{"type":"structure","members":{}}}},"pagination":{"listEndpointsByPlatformApplication":{"inputToken":"NextToken","outputToken":"NextToken","resultKey":"Endpoints"},"listPlatformApplications":{"inputToken":"NextToken","outputToken":"NextToken","resultKey":"PlatformApplications"},"listSubscriptions":{"inputToken":"NextToken","outputToken":"NextToken","resultKey":"Subscriptions"},"listSubscriptionsByTopic":{"inputToken":"NextToken","outputToken":"NextToken","resultKey":"Subscriptions"},"listTopics":{"inputToken":"NextToken","outputToken":"NextToken","resultKey":"Topics"}}});
-window.AWS.SQS = window.AWS.Service.defineService('sqs');
+AWS.Service.defineServiceApi(AWS.SNS, "2010-03-31", {"metadata":{"apiVersion":"2010-03-31","endpointPrefix":"sns","serviceAbbreviation":"Amazon SNS","serviceFullName":"Amazon Simple Notification Service","signatureVersion":"v4","xmlNamespace":"http://sns.amazonaws.com/doc/2010-03-31/","protocol":"query"},"operations":{"AddPermission":{"input":{"type":"structure","required":["TopicArn","Label","AWSAccountId","ActionName"],"members":{"TopicArn":{},"Label":{},"AWSAccountId":{"type":"list","member":{}},"ActionName":{"type":"list","member":{}}}}},"ConfirmSubscription":{"input":{"type":"structure","required":["TopicArn","Token"],"members":{"TopicArn":{},"Token":{},"AuthenticateOnUnsubscribe":{}}},"output":{"resultWrapper":"ConfirmSubscriptionResult","type":"structure","members":{"SubscriptionArn":{}}}},"CreatePlatformApplication":{"input":{"type":"structure","required":["Name","Platform","Attributes"],"members":{"Name":{},"Platform":{},"Attributes":{"shape":"Sf"}}},"output":{"resultWrapper":"CreatePlatformApplicationResult","type":"structure","members":{"PlatformApplicationArn":{}}}},"CreatePlatformEndpoint":{"input":{"type":"structure","required":["PlatformApplicationArn","Token"],"members":{"PlatformApplicationArn":{},"Token":{},"CustomUserData":{},"Attributes":{"shape":"Sf"}}},"output":{"resultWrapper":"CreatePlatformEndpointResult","type":"structure","members":{"EndpointArn":{}}}},"CreateTopic":{"input":{"type":"structure","required":["Name"],"members":{"Name":{}}},"output":{"resultWrapper":"CreateTopicResult","type":"structure","members":{"TopicArn":{}}}},"DeleteEndpoint":{"input":{"type":"structure","required":["EndpointArn"],"members":{"EndpointArn":{}}}},"DeletePlatformApplication":{"input":{"type":"structure","required":["PlatformApplicationArn"],"members":{"PlatformApplicationArn":{}}}},"DeleteTopic":{"input":{"type":"structure","required":["TopicArn"],"members":{"TopicArn":{}}}},"GetEndpointAttributes":{"input":{"type":"structure","required":["EndpointArn"],"members":{"EndpointArn":{}}},"output":{"resultWrapper":"GetEndpointAttributesResult","type":"structure","members":{"Attributes":{"shape":"Sf"}}}},"GetPlatformApplicationAttributes":{"input":{"type":"structure","required":["PlatformApplicationArn"],"members":{"PlatformApplicationArn":{}}},"output":{"resultWrapper":"GetPlatformApplicationAttributesResult","type":"structure","members":{"Attributes":{"shape":"Sf"}}}},"GetSubscriptionAttributes":{"input":{"type":"structure","required":["SubscriptionArn"],"members":{"SubscriptionArn":{}}},"output":{"resultWrapper":"GetSubscriptionAttributesResult","type":"structure","members":{"Attributes":{"type":"map","key":{},"value":{}}}}},"GetTopicAttributes":{"input":{"type":"structure","required":["TopicArn"],"members":{"TopicArn":{}}},"output":{"resultWrapper":"GetTopicAttributesResult","type":"structure","members":{"Attributes":{"type":"map","key":{},"value":{}}}}},"ListEndpointsByPlatformApplication":{"input":{"type":"structure","required":["PlatformApplicationArn"],"members":{"PlatformApplicationArn":{},"NextToken":{}}},"output":{"resultWrapper":"ListEndpointsByPlatformApplicationResult","type":"structure","members":{"Endpoints":{"type":"list","member":{"type":"structure","members":{"EndpointArn":{},"Attributes":{"shape":"Sf"}}}},"NextToken":{}}}},"ListPlatformApplications":{"input":{"type":"structure","members":{"NextToken":{}}},"output":{"resultWrapper":"ListPlatformApplicationsResult","type":"structure","members":{"PlatformApplications":{"type":"list","member":{"type":"structure","members":{"PlatformApplicationArn":{},"Attributes":{"shape":"Sf"}}}},"NextToken":{}}}},"ListSubscriptions":{"input":{"type":"structure","members":{"NextToken":{}}},"output":{"resultWrapper":"ListSubscriptionsResult","type":"structure","members":{"Subscriptions":{"shape":"S1c"},"NextToken":{}}}},"ListSubscriptionsByTopic":{"input":{"type":"structure","required":["TopicArn"],"members":{"TopicArn":{},"NextToken":{}}},"output":{"resultWrapper":"ListSubscriptionsByTopicResult","type":"structure","members":{"Subscriptions":{"shape":"S1c"},"NextToken":{}}}},"ListTopics":{"input":{"type":"structure","members":{"NextToken":{}}},"output":{"resultWrapper":"ListTopicsResult","type":"structure","members":{"Topics":{"type":"list","member":{"type":"structure","members":{"TopicArn":{}}}},"NextToken":{}}}},"Publish":{"input":{"type":"structure","required":["Message"],"members":{"TopicArn":{},"TargetArn":{},"Message":{},"Subject":{},"MessageStructure":{},"MessageAttributes":{"type":"map","key":{"locationName":"Name"},"value":{"locationName":"Value","type":"structure","required":["DataType"],"members":{"DataType":{},"StringValue":{},"BinaryValue":{"type":"blob"}}}}}},"output":{"resultWrapper":"PublishResult","type":"structure","members":{"MessageId":{}}}},"RemovePermission":{"input":{"type":"structure","required":["TopicArn","Label"],"members":{"TopicArn":{},"Label":{}}}},"SetEndpointAttributes":{"input":{"type":"structure","required":["EndpointArn","Attributes"],"members":{"EndpointArn":{},"Attributes":{"shape":"Sf"}}}},"SetPlatformApplicationAttributes":{"input":{"type":"structure","required":["PlatformApplicationArn","Attributes"],"members":{"PlatformApplicationArn":{},"Attributes":{"shape":"Sf"}}}},"SetSubscriptionAttributes":{"input":{"type":"structure","required":["SubscriptionArn","AttributeName"],"members":{"SubscriptionArn":{},"AttributeName":{},"AttributeValue":{}}}},"SetTopicAttributes":{"input":{"type":"structure","required":["TopicArn","AttributeName"],"members":{"TopicArn":{},"AttributeName":{},"AttributeValue":{}}}},"Subscribe":{"input":{"type":"structure","required":["TopicArn","Protocol"],"members":{"TopicArn":{},"Protocol":{},"Endpoint":{}}},"output":{"resultWrapper":"SubscribeResult","type":"structure","members":{"SubscriptionArn":{}}}},"Unsubscribe":{"input":{"type":"structure","required":["SubscriptionArn"],"members":{"SubscriptionArn":{}}}}},"shapes":{"Sf":{"type":"map","key":{},"value":{}},"S1c":{"type":"list","member":{"type":"structure","members":{"SubscriptionArn":{},"Owner":{},"Protocol":{},"Endpoint":{},"TopicArn":{}}}}},"paginators":{"ListEndpointsByPlatformApplication":{"input_token":"NextToken","output_token":"NextToken","result_key":"Endpoints"},"ListPlatformApplications":{"input_token":"NextToken","output_token":"NextToken","result_key":"PlatformApplications"},"ListSubscriptions":{"input_token":"NextToken","output_token":"NextToken","result_key":"Subscriptions"},"ListSubscriptionsByTopic":{"input_token":"NextToken","output_token":"NextToken","result_key":"Subscriptions"},"ListTopics":{"input_token":"NextToken","output_token":"NextToken","result_key":"Topics"}}});
+AWS.SQS = AWS.Service.defineService('sqs');
 
 
-window.AWS.util.update(window.AWS.SQS.prototype, {
+AWS.util.update(AWS.SQS.prototype, {
+
   setupRequestListeners: function setupRequestListeners(request) {
     request.addListener('build', this.buildEndpoint);
 
@@ -9069,6 +9419,7 @@ window.AWS.util.update(window.AWS.SQS.prototype, {
       }
     }
   },
+
 
   verifySendMessageChecksum: function verifySendMessageChecksum(response) {
     if (!response.data) return;
@@ -9084,6 +9435,7 @@ window.AWS.util.update(window.AWS.SQS.prototype, {
     }
   },
 
+
   verifySendMessageBatchChecksum: function verifySendMessageBatchChecksum(response) {
     if (!response.data) return;
 
@@ -9091,10 +9443,10 @@ window.AWS.util.update(window.AWS.SQS.prototype, {
     var entries = {};
     var errors = [];
     var messageIds = [];
-    window.AWS.util.arrayEach(response.data.Successful, function (entry) {
+    AWS.util.arrayEach(response.data.Successful, function (entry) {
       entries[entry.Id] = entry;
     });
-    window.AWS.util.arrayEach(this.params.Entries, function (entry) {
+    AWS.util.arrayEach(this.params.Entries, function (entry) {
       if (entries[entry.Id]) {
         var md5 = entries[entry.Id].MD5OfMessageBody;
         var body = entry.MessageBody;
@@ -9111,12 +9463,13 @@ window.AWS.util.update(window.AWS.SQS.prototype, {
     }
   },
 
+
   verifyReceiveMessageChecksum: function verifyReceiveMessageChecksum(response) {
     if (!response.data) return;
 
     var service = this.service;
     var messageIds = [];
-    window.AWS.util.arrayEach(response.data.Messages, function(message) {
+    AWS.util.arrayEach(response.data.Messages, function(message) {
       var md5 = message.MD5OfBody;
       var body = message.Body;
       if (!service.isChecksumValid(md5, body)) {
@@ -9130,8 +9483,9 @@ window.AWS.util.update(window.AWS.SQS.prototype, {
     }
   },
 
+
   throwInvalidChecksumError: function throwInvalidChecksumError(response, ids, message) {
-    response.error = window.AWS.util.error(new Error(), {
+    response.error = AWS.util.error(new Error(), {
       retryable: true,
       code: 'InvalidChecksum',
       messageIds: ids,
@@ -9140,18 +9494,20 @@ window.AWS.util.update(window.AWS.SQS.prototype, {
     });
   },
 
+
   isChecksumValid: function isChecksumValid(checksum, data) {
     return this.calculateChecksum(data) === checksum;
   },
 
   calculateChecksum: function calculateChecksum(data) {
-    return window.AWS.util.crypto.md5(data, 'hex');
+    return AWS.util.crypto.md5(data, 'hex');
   },
+
 
   buildEndpoint: function buildEndpoint(request) {
     var url = request.httpRequest.params.QueueUrl;
     if (url) {
-      request.httpRequest.endpoint = new window.AWS.Endpoint(url);
+      request.httpRequest.endpoint = new AWS.Endpoint(url);
 
       var matches = request.httpRequest.endpoint.host.match(/^sqs\.(.+?)\./);
       if (matches) request.httpRequest.region = matches[1];
@@ -9159,15 +9515,15 @@ window.AWS.util.update(window.AWS.SQS.prototype, {
   }
 });
 
-window.AWS.Service.defineServiceApi(window.AWS.SQS, "2012-11-05", {"format":"query","apiVersion":"2012-11-05","endpointPrefix":"sqs","resultWrapped":true,"serviceAbbreviation":"Amazon SQS","serviceFullName":"Amazon Simple Queue Service","signatureVersion":"v4","timestampFormat":"iso8601","operations":{"addPermission":{"name":"AddPermission","input":{"type":"structure","members":{"QueueUrl":{"required":true},"Label":{"required":true},"AWSAccountIds":{"type":"list","members":{"name":"AWSAccountId"},"flattened":true,"required":true},"Actions":{"type":"list","members":{"name":"ActionName"},"flattened":true,"required":true}}},"output":{"type":"structure","members":{}}},"changeMessageVisibility":{"name":"ChangeMessageVisibility","input":{"type":"structure","members":{"QueueUrl":{"required":true},"ReceiptHandle":{"required":true},"VisibilityTimeout":{"type":"integer","required":true}}},"output":{"type":"structure","members":{}}},"changeMessageVisibilityBatch":{"name":"ChangeMessageVisibilityBatch","input":{"type":"structure","members":{"QueueUrl":{"required":true},"Entries":{"type":"list","members":{"type":"structure","members":{"Id":{"required":true},"ReceiptHandle":{"required":true},"VisibilityTimeout":{"type":"integer"}},"name":"ChangeMessageVisibilityBatchRequestEntry"},"flattened":true,"required":true}}},"output":{"type":"structure","members":{"ChangeMessageVisibilityBatchResultEntry":{"type":"list","members":{"type":"structure","members":{"Id":{}},"name":"ChangeMessageVisibilityBatchResultEntry"},"flattened":true,"name":"Successful"},"BatchResultErrorEntry":{"type":"list","members":{"type":"structure","members":{"Id":{},"SenderFault":{"type":"boolean"},"Code":{},"Message":{}},"name":"BatchResultErrorEntry"},"flattened":true,"name":"Failed"}}}},"createQueue":{"name":"CreateQueue","input":{"type":"structure","members":{"QueueName":{"required":true},"Attributes":{"type":"map","keys":{"name":"Name"},"members":{"name":"Value"},"flattened":true,"name":"Attribute"}}},"output":{"type":"structure","members":{"QueueUrl":{}}}},"deleteMessage":{"name":"DeleteMessage","input":{"type":"structure","members":{"QueueUrl":{"required":true},"ReceiptHandle":{"required":true}}},"output":{"type":"structure","members":{}}},"deleteMessageBatch":{"name":"DeleteMessageBatch","input":{"type":"structure","members":{"QueueUrl":{"required":true},"Entries":{"type":"list","members":{"type":"structure","members":{"Id":{"required":true},"ReceiptHandle":{"required":true}},"name":"DeleteMessageBatchRequestEntry"},"flattened":true,"required":true}}},"output":{"type":"structure","members":{"DeleteMessageBatchResultEntry":{"type":"list","members":{"type":"structure","members":{"Id":{}},"name":"DeleteMessageBatchResultEntry"},"flattened":true,"name":"Successful"},"BatchResultErrorEntry":{"type":"list","members":{"type":"structure","members":{"Id":{},"SenderFault":{"type":"boolean"},"Code":{},"Message":{}},"name":"BatchResultErrorEntry"},"flattened":true,"name":"Failed"}}}},"deleteQueue":{"name":"DeleteQueue","input":{"type":"structure","members":{"QueueUrl":{"required":true}}},"output":{"type":"structure","members":{}}},"getQueueAttributes":{"name":"GetQueueAttributes","input":{"type":"structure","members":{"QueueUrl":{"required":true},"AttributeNames":{"type":"list","members":{"name":"AttributeName"},"flattened":true}}},"output":{"type":"structure","members":{"Attribute":{"type":"map","keys":{"name":"Name"},"members":{"name":"Value"},"flattened":true,"name":"Attributes"}}}},"getQueueUrl":{"name":"GetQueueUrl","input":{"type":"structure","members":{"QueueName":{"required":true},"QueueOwnerAWSAccountId":{}}},"output":{"type":"structure","members":{"QueueUrl":{}}}},"listDeadLetterSourceQueues":{"name":"ListDeadLetterSourceQueues","input":{"type":"structure","members":{"QueueUrl":{"required":true}}},"output":{"type":"structure","members":{"QueueUrl":{"type":"list","members":{"name":"QueueUrl"},"flattened":true,"name":"queueUrls"}}}},"listQueues":{"name":"ListQueues","input":{"type":"structure","members":{"QueueNamePrefix":{}}},"output":{"type":"structure","members":{"QueueUrl":{"type":"list","members":{"name":"QueueUrl"},"flattened":true,"name":"QueueUrls"}}}},"receiveMessage":{"name":"ReceiveMessage","input":{"type":"structure","members":{"QueueUrl":{"required":true},"AttributeNames":{"type":"list","members":{"name":"AttributeName"},"flattened":true},"MessageAttributeNames":{"type":"list","members":{"name":"MessageAttributeName"},"flattened":true},"MaxNumberOfMessages":{"type":"integer"},"VisibilityTimeout":{"type":"integer"},"WaitTimeSeconds":{"type":"integer"}}},"output":{"type":"structure","members":{"Message":{"type":"list","members":{"type":"structure","members":{"MessageId":{},"ReceiptHandle":{},"MD5OfBody":{},"Body":{},"Attribute":{"type":"map","keys":{"name":"Name"},"members":{"name":"Value"},"flattened":true,"name":"Attributes"},"MD5OfMessageAttributes":{},"MessageAttribute":{"type":"map","keys":{"name":"Name"},"members":{"type":"structure","members":{"StringValue":{},"BinaryValue":{"type":"base64"},"StringListValue":{"type":"list","members":{"name":"StringListValue"},"flattened":true,"name":"StringListValues"},"BinaryListValue":{"type":"list","members":{"type":"base64","name":"BinaryListValue"},"flattened":true,"name":"BinaryListValues"},"DataType":{}},"name":"Value"},"flattened":true,"name":"MessageAttributes"}},"name":"Message"},"flattened":true,"name":"Messages"}}}},"removePermission":{"name":"RemovePermission","input":{"type":"structure","members":{"QueueUrl":{"required":true},"Label":{"required":true}}},"output":{"type":"structure","members":{}}},"sendMessage":{"name":"SendMessage","input":{"type":"structure","members":{"QueueUrl":{"required":true},"MessageBody":{"required":true},"DelaySeconds":{"type":"integer"},"MessageAttributes":{"type":"map","keys":{"name":"Name"},"members":{"type":"structure","members":{"StringValue":{},"BinaryValue":{"type":"base64"},"StringListValues":{"type":"list","members":{"name":"StringListValue"},"flattened":true,"name":"StringListValue"},"BinaryListValues":{"type":"list","members":{"type":"base64","name":"BinaryListValue"},"flattened":true,"name":"BinaryListValue"},"DataType":{"required":true}},"name":"Value"},"flattened":true,"name":"MessageAttribute"}}},"output":{"type":"structure","members":{"MD5OfMessageBody":{},"MD5OfMessageAttributes":{},"MessageId":{}}}},"sendMessageBatch":{"name":"SendMessageBatch","input":{"type":"structure","members":{"QueueUrl":{"required":true},"Entries":{"type":"list","members":{"type":"structure","members":{"Id":{"required":true},"MessageBody":{"required":true},"DelaySeconds":{"type":"integer"},"MessageAttributes":{"type":"map","keys":{"name":"Name"},"members":{"type":"structure","members":{"StringValue":{},"BinaryValue":{"type":"base64"},"StringListValues":{"type":"list","members":{"name":"StringListValue"},"flattened":true,"name":"StringListValue"},"BinaryListValues":{"type":"list","members":{"type":"base64","name":"BinaryListValue"},"flattened":true,"name":"BinaryListValue"},"DataType":{"required":true}},"name":"Value"},"flattened":true,"name":"MessageAttribute"}},"name":"SendMessageBatchRequestEntry"},"flattened":true,"required":true}}},"output":{"type":"structure","members":{"SendMessageBatchResultEntry":{"type":"list","members":{"type":"structure","members":{"Id":{},"MessageId":{},"MD5OfMessageBody":{},"MD5OfMessageAttributes":{}},"name":"SendMessageBatchResultEntry"},"flattened":true,"name":"Successful"},"BatchResultErrorEntry":{"type":"list","members":{"type":"structure","members":{"Id":{},"SenderFault":{"type":"boolean"},"Code":{},"Message":{}},"name":"BatchResultErrorEntry"},"flattened":true,"name":"Failed"}}}},"setQueueAttributes":{"name":"SetQueueAttributes","input":{"type":"structure","members":{"QueueUrl":{"required":true},"Attributes":{"type":"map","keys":{"name":"Name"},"members":{"name":"Value"},"flattened":true,"name":"Attribute","required":true}}},"output":{"type":"structure","members":{}}}},"pagination":{"listQueues":{"resultKey":"QueueUrls"}}});
-window.AWS.STS = window.AWS.Service.defineService('sts');
+AWS.Service.defineServiceApi(AWS.SQS, "2012-11-05", {"metadata":{"apiVersion":"2012-11-05","endpointPrefix":"sqs","serviceAbbreviation":"Amazon SQS","serviceFullName":"Amazon Simple Queue Service","signatureVersion":"v4","xmlNamespace":"http://queue.amazonaws.com/doc/2012-11-05/","protocol":"query"},"operations":{"AddPermission":{"input":{"type":"structure","required":["QueueUrl","Label","AWSAccountIds","Actions"],"members":{"QueueUrl":{},"Label":{},"AWSAccountIds":{"type":"list","member":{"locationName":"AWSAccountId"},"flattened":true},"Actions":{"type":"list","member":{"locationName":"ActionName"},"flattened":true}}}},"ChangeMessageVisibility":{"input":{"type":"structure","required":["QueueUrl","ReceiptHandle","VisibilityTimeout"],"members":{"QueueUrl":{},"ReceiptHandle":{},"VisibilityTimeout":{"type":"integer"}}}},"ChangeMessageVisibilityBatch":{"input":{"type":"structure","required":["QueueUrl","Entries"],"members":{"QueueUrl":{},"Entries":{"type":"list","member":{"locationName":"ChangeMessageVisibilityBatchRequestEntry","type":"structure","required":["Id","ReceiptHandle"],"members":{"Id":{},"ReceiptHandle":{},"VisibilityTimeout":{"type":"integer"}}},"flattened":true}}},"output":{"resultWrapper":"ChangeMessageVisibilityBatchResult","type":"structure","required":["Successful","Failed"],"members":{"Successful":{"type":"list","member":{"locationName":"ChangeMessageVisibilityBatchResultEntry","type":"structure","required":["Id"],"members":{"Id":{}}},"flattened":true},"Failed":{"shape":"Sd"}}}},"CreateQueue":{"input":{"type":"structure","required":["QueueName"],"members":{"QueueName":{},"Attributes":{"shape":"Sh","locationName":"Attribute"}}},"output":{"resultWrapper":"CreateQueueResult","type":"structure","members":{"QueueUrl":{}}}},"DeleteMessage":{"input":{"type":"structure","required":["QueueUrl","ReceiptHandle"],"members":{"QueueUrl":{},"ReceiptHandle":{}}}},"DeleteMessageBatch":{"input":{"type":"structure","required":["QueueUrl","Entries"],"members":{"QueueUrl":{},"Entries":{"type":"list","member":{"locationName":"DeleteMessageBatchRequestEntry","type":"structure","required":["Id","ReceiptHandle"],"members":{"Id":{},"ReceiptHandle":{}}},"flattened":true}}},"output":{"resultWrapper":"DeleteMessageBatchResult","type":"structure","required":["Successful","Failed"],"members":{"Successful":{"type":"list","member":{"locationName":"DeleteMessageBatchResultEntry","type":"structure","required":["Id"],"members":{"Id":{}}},"flattened":true},"Failed":{"shape":"Sd"}}}},"DeleteQueue":{"input":{"type":"structure","required":["QueueUrl"],"members":{"QueueUrl":{}}}},"GetQueueAttributes":{"input":{"type":"structure","required":["QueueUrl"],"members":{"QueueUrl":{},"AttributeNames":{"shape":"St"}}},"output":{"resultWrapper":"GetQueueAttributesResult","type":"structure","members":{"Attributes":{"shape":"Sh","locationName":"Attribute"}}}},"GetQueueUrl":{"input":{"type":"structure","required":["QueueName"],"members":{"QueueName":{},"QueueOwnerAWSAccountId":{}}},"output":{"resultWrapper":"GetQueueUrlResult","type":"structure","members":{"QueueUrl":{}}}},"ListDeadLetterSourceQueues":{"input":{"type":"structure","required":["QueueUrl"],"members":{"QueueUrl":{}}},"output":{"resultWrapper":"ListDeadLetterSourceQueuesResult","type":"structure","required":["queueUrls"],"members":{"queueUrls":{"shape":"Sz"}}}},"ListQueues":{"input":{"type":"structure","members":{"QueueNamePrefix":{}}},"output":{"resultWrapper":"ListQueuesResult","type":"structure","members":{"QueueUrls":{"shape":"Sz"}}}},"ReceiveMessage":{"input":{"type":"structure","required":["QueueUrl"],"members":{"QueueUrl":{},"AttributeNames":{"shape":"St"},"MessageAttributeNames":{"type":"list","member":{"locationName":"MessageAttributeName"},"flattened":true},"MaxNumberOfMessages":{"type":"integer"},"VisibilityTimeout":{"type":"integer"},"WaitTimeSeconds":{"type":"integer"}}},"output":{"resultWrapper":"ReceiveMessageResult","type":"structure","members":{"Messages":{"type":"list","member":{"locationName":"Message","type":"structure","members":{"MessageId":{},"ReceiptHandle":{},"MD5OfBody":{},"Body":{},"Attributes":{"shape":"Sh","locationName":"Attribute"},"MD5OfMessageAttributes":{},"MessageAttributes":{"shape":"S18","locationName":"MessageAttribute"}}},"flattened":true}}}},"RemovePermission":{"input":{"type":"structure","required":["QueueUrl","Label"],"members":{"QueueUrl":{},"Label":{}}}},"SendMessage":{"input":{"type":"structure","required":["QueueUrl","MessageBody"],"members":{"QueueUrl":{},"MessageBody":{},"DelaySeconds":{"type":"integer"},"MessageAttributes":{"shape":"S18","locationName":"MessageAttribute"}}},"output":{"resultWrapper":"SendMessageResult","type":"structure","members":{"MD5OfMessageBody":{},"MD5OfMessageAttributes":{},"MessageId":{}}}},"SendMessageBatch":{"input":{"type":"structure","required":["QueueUrl","Entries"],"members":{"QueueUrl":{},"Entries":{"type":"list","member":{"locationName":"SendMessageBatchRequestEntry","type":"structure","required":["Id","MessageBody"],"members":{"Id":{},"MessageBody":{},"DelaySeconds":{"type":"integer"},"MessageAttributes":{"shape":"S18","locationName":"MessageAttribute"}}},"flattened":true}}},"output":{"resultWrapper":"SendMessageBatchResult","type":"structure","required":["Successful","Failed"],"members":{"Successful":{"type":"list","member":{"locationName":"SendMessageBatchResultEntry","type":"structure","required":["Id","MessageId","MD5OfMessageBody"],"members":{"Id":{},"MessageId":{},"MD5OfMessageBody":{},"MD5OfMessageAttributes":{}}},"flattened":true},"Failed":{"shape":"Sd"}}}},"SetQueueAttributes":{"input":{"type":"structure","required":["QueueUrl","attributes"],"members":{"QueueUrl":{},"Attributes":{"shape":"Sh","locationName":"Attribute"}}}}},"shapes":{"Sd":{"type":"list","member":{"locationName":"BatchResultErrorEntry","type":"structure","required":["Id","SenderFault","Code"],"members":{"Id":{},"SenderFault":{"type":"boolean"},"Code":{},"Message":{}}},"flattened":true},"Sh":{"type":"map","key":{"locationName":"Name"},"value":{"locationName":"Value"},"flattened":true,"locationName":"Attribute"},"St":{"type":"list","member":{"locationName":"AttributeName"},"flattened":true},"Sz":{"type":"list","member":{"locationName":"QueueUrl"},"flattened":true},"S18":{"type":"map","key":{"locationName":"Name"},"value":{"locationName":"Value","type":"structure","required":["DataType"],"members":{"StringValue":{},"BinaryValue":{"type":"blob"},"StringListValues":{"flattened":true,"locationName":"StringListValue","type":"list","member":{"locationName":"StringListValue"}},"BinaryListValues":{"flattened":true,"locationName":"BinaryListValue","type":"list","member":{"locationName":"BinaryListValue","type":"blob"}},"DataType":{}}},"flattened":true}},"paginators":{"ListQueues":{"result_key":"QueueUrls"}}});
+AWS.STS = AWS.Service.defineService('sts');
 
 
-window.AWS.util.update(window.AWS.STS.prototype, {
+AWS.util.update(AWS.STS.prototype, {
 
   credentialsFrom: function credentialsFrom(data, credentials) {
     if (!data) return null;
-    if (!credentials) credentials = new window.AWS.TemporaryCredentials();
+    if (!credentials) credentials = new AWS.TemporaryCredentials();
     credentials.expired = false;
     credentials.accessKeyId = data.Credentials.AccessKeyId;
     credentials.secretAccessKey = data.Credentials.SecretAccessKey;
@@ -9185,4 +9541,4 @@ window.AWS.util.update(window.AWS.STS.prototype, {
   }
 });
 
-window.AWS.Service.defineServiceApi(window.AWS.STS, "2011-06-15", {"format":"query","apiVersion":"2011-06-15","endpointPrefix":"sts","globalEndpoint":"sts.amazonaws.com","resultWrapped":true,"serviceAbbreviation":"AWS STS","serviceFullName":"AWS Security Token Service","signatureVersion":"v4","timestampFormat":"iso8601","operations":{"assumeRole":{"name":"AssumeRole","input":{"type":"structure","members":{"RoleArn":{"required":true},"RoleSessionName":{"required":true},"Policy":{},"DurationSeconds":{"type":"integer"},"ExternalId":{},"SerialNumber":{},"TokenCode":{}}},"output":{"type":"structure","members":{"Credentials":{"type":"structure","members":{"AccessKeyId":{},"SecretAccessKey":{},"SessionToken":{},"Expiration":{"type":"timestamp"}}},"AssumedRoleUser":{"type":"structure","members":{"AssumedRoleId":{},"Arn":{}}},"PackedPolicySize":{"type":"integer"}}}},"assumeRoleWithSAML":{"name":"AssumeRoleWithSAML","input":{"type":"structure","members":{"RoleArn":{"required":true},"PrincipalArn":{"required":true},"SAMLAssertion":{"required":true},"Policy":{},"DurationSeconds":{"type":"integer"}}},"output":{"type":"structure","members":{"Credentials":{"type":"structure","members":{"AccessKeyId":{},"SecretAccessKey":{},"SessionToken":{},"Expiration":{"type":"timestamp"}}},"AssumedRoleUser":{"type":"structure","members":{"AssumedRoleId":{},"Arn":{}}},"PackedPolicySize":{"type":"integer"},"Subject":{},"SubjectType":{},"Issuer":{},"Audience":{},"NameQualifier":{}}}},"assumeRoleWithWebIdentity":{"name":"AssumeRoleWithWebIdentity","input":{"type":"structure","members":{"RoleArn":{"required":true},"RoleSessionName":{"required":true},"WebIdentityToken":{"required":true},"ProviderId":{},"Policy":{},"DurationSeconds":{"type":"integer"}}},"output":{"type":"structure","members":{"Credentials":{"type":"structure","members":{"AccessKeyId":{},"SecretAccessKey":{},"SessionToken":{},"Expiration":{"type":"timestamp"}}},"SubjectFromWebIdentityToken":{},"AssumedRoleUser":{"type":"structure","members":{"AssumedRoleId":{},"Arn":{}}},"PackedPolicySize":{"type":"integer"},"Provider":{},"Audience":{}}}},"decodeAuthorizationMessage":{"name":"DecodeAuthorizationMessage","input":{"type":"structure","members":{"EncodedMessage":{"required":true}}},"output":{"type":"structure","members":{"DecodedMessage":{}}}},"getFederationToken":{"name":"GetFederationToken","input":{"type":"structure","members":{"Name":{"required":true},"Policy":{},"DurationSeconds":{"type":"integer"}}},"output":{"type":"structure","members":{"Credentials":{"type":"structure","members":{"AccessKeyId":{},"SecretAccessKey":{},"SessionToken":{},"Expiration":{"type":"timestamp"}}},"FederatedUser":{"type":"structure","members":{"FederatedUserId":{},"Arn":{}}},"PackedPolicySize":{"type":"integer"}}}},"getSessionToken":{"name":"GetSessionToken","input":{"type":"structure","members":{"DurationSeconds":{"type":"integer"},"SerialNumber":{},"TokenCode":{}}},"output":{"type":"structure","members":{"Credentials":{"type":"structure","members":{"AccessKeyId":{},"SecretAccessKey":{},"SessionToken":{},"Expiration":{"type":"timestamp"}}}}}}}});
+AWS.Service.defineServiceApi(AWS.STS, "2011-06-15", {"metadata":{"apiVersion":"2011-06-15","endpointPrefix":"sts","globalEndpoint":"sts.amazonaws.com","serviceAbbreviation":"AWS STS","serviceFullName":"AWS Security Token Service","signatureVersion":"v4","xmlNamespace":"https://sts.amazonaws.com/doc/2011-06-15/","protocol":"query"},"operations":{"AssumeRole":{"input":{"type":"structure","required":["RoleArn","RoleSessionName"],"members":{"RoleArn":{},"RoleSessionName":{},"Policy":{},"DurationSeconds":{"type":"integer"},"ExternalId":{},"SerialNumber":{},"TokenCode":{}}},"output":{"resultWrapper":"AssumeRoleResult","type":"structure","members":{"Credentials":{"shape":"Sa"},"AssumedRoleUser":{"shape":"Sf"},"PackedPolicySize":{"type":"integer"}}}},"AssumeRoleWithSAML":{"input":{"type":"structure","required":["RoleArn","PrincipalArn","SAMLAssertion"],"members":{"RoleArn":{},"PrincipalArn":{},"SAMLAssertion":{},"Policy":{},"DurationSeconds":{"type":"integer"}}},"output":{"resultWrapper":"AssumeRoleWithSAMLResult","type":"structure","members":{"Credentials":{"shape":"Sa"},"AssumedRoleUser":{"shape":"Sf"},"PackedPolicySize":{"type":"integer"},"Subject":{},"SubjectType":{},"Issuer":{},"Audience":{},"NameQualifier":{}}}},"AssumeRoleWithWebIdentity":{"input":{"type":"structure","required":["RoleArn","RoleSessionName","WebIdentityToken"],"members":{"RoleArn":{},"RoleSessionName":{},"WebIdentityToken":{},"ProviderId":{},"Policy":{},"DurationSeconds":{"type":"integer"}}},"output":{"resultWrapper":"AssumeRoleWithWebIdentityResult","type":"structure","members":{"Credentials":{"shape":"Sa"},"SubjectFromWebIdentityToken":{},"AssumedRoleUser":{"shape":"Sf"},"PackedPolicySize":{"type":"integer"},"Provider":{},"Audience":{}}}},"DecodeAuthorizationMessage":{"input":{"type":"structure","required":["EncodedMessage"],"members":{"EncodedMessage":{}}},"output":{"resultWrapper":"DecodeAuthorizationMessageResult","type":"structure","members":{"DecodedMessage":{}}}},"GetFederationToken":{"input":{"type":"structure","required":["Name"],"members":{"Name":{},"Policy":{},"DurationSeconds":{"type":"integer"}}},"output":{"resultWrapper":"GetFederationTokenResult","type":"structure","members":{"Credentials":{"shape":"Sa"},"FederatedUser":{"type":"structure","required":["FederatedUserId","Arn"],"members":{"FederatedUserId":{},"Arn":{}}},"PackedPolicySize":{"type":"integer"}}}},"GetSessionToken":{"input":{"type":"structure","members":{"DurationSeconds":{"type":"integer"},"SerialNumber":{},"TokenCode":{}}},"output":{"resultWrapper":"GetSessionTokenResult","type":"structure","members":{"Credentials":{"shape":"Sa"}}}}},"shapes":{"Sa":{"type":"structure","required":["AccessKeyId","SecretAccessKey","SessionToken","Expiration"],"members":{"AccessKeyId":{},"SecretAccessKey":{},"SessionToken":{},"Expiration":{"type":"timestamp"}}},"Sf":{"type":"structure","required":["AssumedRoleId","Arn"],"members":{"AssumedRoleId":{},"Arn":{}}}}});
