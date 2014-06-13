@@ -18,3 +18,4 @@ doc-src/guide/node-configuring.md
 doc-src/guide/node-services.md
 doc-src/guide/node-making-requests.md
 doc-src/guide/node-examples.md
+UPGRADING.md
