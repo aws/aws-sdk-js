@@ -5,6 +5,7 @@
 apis/source
 configuration
 configuration.sample
+coverage
 dist
 dist-tools
 doc
