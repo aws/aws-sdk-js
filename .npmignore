@@ -1,6 +1,7 @@
 .yard*
 .eslintrc
 .travis.yml
+.gitignore
 apis/source
 configuration
 configuration.sample
