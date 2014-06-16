@@ -8,6 +8,9 @@ describe 'AWS.STS', ->
     sts = new AWS.STS()
 
   describe 'credentialsFrom', ->
+    it 'returns null if no data is provided', ->
+      expect(sts.credentialsFrom(null)).toEqual(null)
+
     it 'creates a TemporaryCredentials object with hydrated data', ->
       creds = sts.credentialsFrom Credentials:
          AccessKeyId: 'KEY'

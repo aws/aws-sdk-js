@@ -20,6 +20,16 @@ describe 'AWS.SQS', ->
       if cb
         cb(output.error, output.data)
 
+  describe 'buildEndpoint', ->
+    it 'should detect correct region from QueueUrl', ->
+      sqs = new AWS.SQS
+        computeChecksums: false
+        params: QueueUrl: 'http://sqs.region-1.amazonaws.com/queue'
+      helpers.mockHttpResponse 200, {}, ''
+      req = sqs.sendMessage(MessageBody: 'foo')
+      req.build()
+      expect(req.httpRequest.region).toEqual('region-1')
+
   describe 'sendMessage', ->
     input = MessageBody: 'foo'
     md5 = 'acbd18db4cc2f85cedef654fccc4a4d8'

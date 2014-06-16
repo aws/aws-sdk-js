@@ -7,6 +7,17 @@ describe 'AWS.ElasticTranscoder', ->
   beforeEach ->
     et = new AWS.ElasticTranscoder()
 
+  describe 'error handling', ->
+    it 'should generate the correct error name', ->
+      helpers.mockHttpResponse 400, {'x-amzn-errortype': 'ErrorName:'}, ''
+      et.listPipelines (err, data) ->
+        expect(err.code).toEqual('ErrorName')
+
+    it 'generates generic error name if header is not present', ->
+      helpers.mockHttpResponse 400, {}, ''
+      et.listPipelines (err, data) ->
+        expect(err.code).toEqual('UnknownError')
+
   describe 'cancelJob', ->
     it 'omits the body', ->
       helpers.mockHttpResponse 200, {}, ''

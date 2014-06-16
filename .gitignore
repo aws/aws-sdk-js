@@ -1,7 +1,7 @@
 configuration
 node_modules
 npm-debug.log
-coverage.html
+coverage
 vendor
 .yardoc
 doc
