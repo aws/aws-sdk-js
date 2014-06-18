@@ -187,6 +187,14 @@ describe 'AWS.S3', ->
       expect(req.httpRequest.headers['x-amz-copy-source-server-side-encryption-customer-key-MD5']).
         toEqual('TzFsSjRNSnJoM1o2UjFLaWR0NlZjQT09')
 
+  describe 'retry behavior', ->
+    it 'retries RequestTimeout errors', ->
+      s3.config.maxRetries = 3
+      helpers.mockHttpResponse 400, {},
+        '<xml><Code>RequestTimeout</Code><Message>message</Message></xml>'
+      s3.putObject (err, data) ->
+        expect(@retryCount).toEqual(s3.config.maxRetries)
+
   # S3 returns a handful of errors without xml bodies (to match the
   # http spec) these tests ensure we give meaningful codes/messages for these.
   describe 'errors with no XML body', ->
