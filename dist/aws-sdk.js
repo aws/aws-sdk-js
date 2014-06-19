@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.0.0-rc.20
+// AWS SDK for JavaScript v2.0.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -3851,7 +3851,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.0.0-rc.20',
+  VERSION: '2.0.0',
 
 
   Signers: {},
@@ -5778,7 +5778,8 @@ function populateBody(req) {
     if (params === undefined) return;
 
     if (payloadMember.type === 'structure') {
-      req.httpRequest.body = builder.toXML(params, payloadMember, payload);
+      var rootElement = payloadMember.name;
+      req.httpRequest.body = builder.toXML(params, payloadMember, rootElement);
     } else { // non-xml payload
       req.httpRequest.body = params;
     }
@@ -9311,6 +9312,8 @@ AWS.util.update(AWS.S3.prototype, {
   retryableError: function retryableError(error, request) {
     if (request.operation === 'completeMultipartUpload' &&
         error.statusCode === 200) {
+      return true;
+    } else if (error && error.code === 'RequestTimeout') {
       return true;
     } else {
       var _super = AWS.Service.prototype.retryableError;
