@@ -131,11 +131,11 @@ modifySnapshotCopyRetentionPeriod, purchaseReservedNodeOffering, rebootCluster,
 restoreFromClusterSnapshot, revokeClusterSecurityGroupIngress,
 revokeSnapshotAccess, rotateEncryptionKey
 
-## 4. Dropped `.Client` Property  
+## 4. Dropped `.Client` and `.client` Properties
 
-The `.Client` property has been removed from Service objects.
-If you are using the `.Client` property on a Service class, remove
-this property from your code.
+The `.Client` and `.client` properties have been removed from Service objects.
+If you are using the `.Client` property on a Service class or a `.client`
+property on an instance of the service, remove these properties from your code.
 
 Upgrading example:
 
@@ -143,10 +143,15 @@ The following 1.x code:
 
 ```
 var sts = new AWS.STS.Client();
+// or
+var sts = new AWS.STS();
+
+sts.client.operation(...);
 ```
 
 Should be changed to the following:
 
 ```
 var sts = new AWS.STS();
+sts.operation(...)
 ```
