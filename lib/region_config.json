@@ -1,0 +1,56 @@
+[
+  {
+    "regions": ["*"],
+    "serviceConfigs": [
+      {
+        "services": ["*"],
+        "config": {
+          "endpoint": "{service}.{region}.amazonaws.com"
+        }
+      },
+      {
+        "services": ["cloudfront", "iam", "importexport", "sts"],
+        "config": {
+          "endpoint": "{service}.amazonaws.com"
+        },
+        "globalEndpoint": true
+      },
+      {
+        "services": ["s3"],
+        "config": {
+          "endpoint": "{service}-{region}.amazonaws.com"
+        }
+      },
+      {
+        "services": ["route53"],
+        "config": {
+          "endpoint": "https://{service}.amazonaws.com"
+        },
+        "globalEndpoint": true
+      }
+    ]
+  },
+  {
+    "regions": ["us-east-1"],
+    "serviceConfigs": [
+      {
+        "services": ["s3", "simpledb"],
+        "config": {
+          "endpoint": "{service}.amazonaws.com"
+        }
+      }
+    ]
+  },
+  {
+    "regions": ["cn-*"],
+    "serviceConfigs": [
+      {
+        "services": ["*"],
+        "config": {
+          "endpoint": "{service}.{region}.amazonaws.com.cn",
+          "signatureVersion": "v4"
+        }
+      }
+    ]
+  }
+]

@@ -83,11 +83,11 @@ describe 'AWS.EventListeners', ->
     it 'ignores region validation if service has global endpoint', ->
       helpers.mockHttpResponse 200, {}, ''
       service.config.region = null
-      service.api.globalEndpoint = 'mock.mockservice.tld'
+      service.isGlobalEndpoint = true
 
       makeRequest(->)
       expect(errorHandler).not.toHaveBeenCalled()
-      delete service.api.globalEndpoint
+      delete service.isGlobalEndpoint
 
   describe 'build', ->
     it 'takes the request object as a parameter', ->

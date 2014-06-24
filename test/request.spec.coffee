@@ -9,15 +9,6 @@ describe 'AWS.Request', ->
   beforeEach ->
     service = new MockService
 
-  describe 'region', ->
-    it 'should set region to us-east-1 for global endpoint region', ->
-      service = new AWS.Service apiConfig: new AWS.Model.Api(
-        metadata: globalEndpoint: 'mock.service.tld'
-        operations: mockMethod: {}
-      )
-      req = service.makeRequest('mockMethod')
-      expect(req.httpRequest.region).toEqual('us-east-1')
-
   describe 'isPageable', ->
     beforeEach ->
       service = new AWS.Service apiConfig: new AWS.Model.Api

@@ -12,7 +12,7 @@ describe 'AWS.DynamoDB', ->
   describe 'config', ->
 
     it 'returns the configuration object it was constructed with', ->
-      config = configure()
+      config = configure(endpoint: 'localhost')
       dynamo = new AWS.DynamoDB(config)
       expect(dynamo.config).toEqual(config)
 

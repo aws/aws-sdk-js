@@ -126,17 +126,6 @@ describe 'AWS.Service', ->
       service.setEndpoint('notfooservice.amazonaws.com')
       expect(service.endpoint.host).toEqual('notfooservice.amazonaws.com')
 
-    it 'uses global endpoint if defined on service API', ->
-      FooService.prototype.api.globalEndpoint = 'fooservice.amazonaws.com'
-      service = new FooService()
-      service.setEndpoint()
-      expect(service.endpoint.host).toEqual('fooservice.amazonaws.com')
-
-    it 'generates endpoint based on region if no global endpoint / not provided', ->
-      service = new FooService({region:'someregion'})
-      service.setEndpoint()
-      expect(service.endpoint.host).toEqual('fooservice.someregion.amazonaws.com')
-
   describe 'makeRequest', ->
 
     it 'it treats params as an optinal parameter', ->
