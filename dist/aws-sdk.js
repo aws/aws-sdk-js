@@ -1,9 +1,7 @@
-// AWS SDK for JavaScript v2.0.0
+// AWS SDK for JavaScript v2.0.2
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-
-},{}],2:[function(require,module,exports){
 
 
 var base64 = require('base64-js')
@@ -1048,7 +1046,7 @@ function assert (test, message) {
   if (!test) throw new Error(message || 'Failed assertion')
 }
 
-},{"base64-js":3,"ieee754":4}],3:[function(require,module,exports){
+},{"base64-js":2,"ieee754":3}],2:[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -1161,7 +1159,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 exports.read = function(buffer, offset, isLE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -1247,7 +1245,7 @@ exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128;
 };
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 var Buffer = require('buffer').Buffer;
 var intSize = 4;
 var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
@@ -1284,7 +1282,7 @@ function hash(buf, fn, hashSize, bigEndian) {
 
 module.exports = { hash: hash };
 
-},{"buffer":2}],6:[function(require,module,exports){
+},{"buffer":1}],5:[function(require,module,exports){
 var Buffer = require('buffer').Buffer
 var sha = require('./sha')
 var sha256 = require('./sha256')
@@ -1382,7 +1380,7 @@ each(['createCredentials'
   }
 })
 
-},{"./md5":7,"./rng":8,"./sha":9,"./sha256":10,"buffer":2}],7:[function(require,module,exports){
+},{"./md5":6,"./rng":7,"./sha":8,"./sha256":9,"buffer":1}],6:[function(require,module,exports){
 
 
 var helpers = require('./helpers');
@@ -1529,7 +1527,7 @@ module.exports = function md5(buf) {
   return helpers.hash(buf, core_md5, 16);
 };
 
-},{"./helpers":5}],8:[function(require,module,exports){
+},{"./helpers":4}],7:[function(require,module,exports){
 (function() {
   var _global = this;
 
@@ -1559,7 +1557,7 @@ module.exports = function md5(buf) {
 
 }())
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 
 
 var helpers = require('./helpers');
@@ -1643,7 +1641,7 @@ module.exports = function sha1(buf) {
   return helpers.hash(buf, core_sha1, 20, true);
 };
 
-},{"./helpers":5}],10:[function(require,module,exports){
+},{"./helpers":4}],9:[function(require,module,exports){
 
 
 
@@ -1718,7 +1716,7 @@ module.exports = function sha256(buf) {
   return helpers.hash(buf, core_sha256, 32, true);
 };
 
-},{"./helpers":5}],11:[function(require,module,exports){
+},{"./helpers":4}],10:[function(require,module,exports){
 
 function EventEmitter() {
   this._events = this._events || {};
@@ -1984,7 +1982,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],12:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   module.exports = function inherits(ctor, superCtor) {
     ctor.super_ = superCtor
@@ -2007,7 +2005,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],13:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 
 var process = module.exports = {};
 
@@ -2070,7 +2068,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],14:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 (function (global){
 
 ;(function(root) {
@@ -2443,7 +2441,7 @@ process.chdir = function (dir) {
 }(this));
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],15:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 
 'use strict';
 
@@ -2505,7 +2503,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],16:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 
 'use strict';
 
@@ -2572,13 +2570,13 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],17:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":15,"./encode":16}],18:[function(require,module,exports){
+},{"./decode":14,"./encode":15}],17:[function(require,module,exports){
 
 var punycode = require('punycode');
 
@@ -3145,14 +3143,14 @@ function isNullOrUndefined(arg) {
   return  arg == null;
 }
 
-},{"punycode":14,"querystring":17}],19:[function(require,module,exports){
+},{"punycode":13,"querystring":16}],18:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],20:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 (function (process,global){
 
 var formatRegExp = /%[sdj%]/g;
@@ -3672,7 +3670,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require("G+mPsH"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":19,"G+mPsH":13,"inherits":12}],21:[function(require,module,exports){
+},{"./support/isBuffer":18,"G+mPsH":12,"inherits":11}],20:[function(require,module,exports){
 var AWS = require('./core');
 
 AWS.XML.Parser = require('./xml/browser_parser');
@@ -3681,7 +3679,7 @@ require('./http/xhr');
 
 if (typeof window !== 'undefined') window.AWS = AWS;
 
-},{"./core":23,"./http/xhr":31,"./xml/browser_parser":61}],22:[function(require,module,exports){
+},{"./core":22,"./http/xhr":30,"./xml/browser_parser":62}],21:[function(require,module,exports){
 var AWS = require('./core');
 require('./credentials');
 require('./credentials/credential_provider_chain');
@@ -3839,7 +3837,7 @@ AWS.Config = AWS.util.inherit({
 
 AWS.config = new AWS.Config();
 
-},{"./core":23,"./credentials":24,"./credentials/credential_provider_chain":25}],23:[function(require,module,exports){
+},{"./core":22,"./credentials":23,"./credentials/credential_provider_chain":24}],22:[function(require,module,exports){
 
 var AWS = { util: require('./util') };
 
@@ -3851,7 +3849,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.0.0',
+  VERSION: '2.0.2',
 
 
   Signers: {},
@@ -3910,7 +3908,7 @@ require('./param_validator');
 
 AWS.events = new AWS.SequentialExecutor();
 
-},{"./config":22,"./credentials":24,"./credentials/credential_provider_chain":25,"./credentials/saml_credentials":26,"./credentials/temporary_credentials":27,"./credentials/web_identity_credentials":28,"./event_listeners":29,"./http":30,"./json/builder":32,"./json/parser":33,"./model/api":34,"./model/operation":36,"./model/paginator":37,"./model/resource_waiter":38,"./model/shape":39,"./param_validator":40,"./protocol/json":41,"./protocol/query":42,"./protocol/rest":43,"./protocol/rest_json":44,"./protocol/rest_xml":45,"./request":47,"./resource_waiter":48,"./response":49,"./sequential_executor":50,"./service":51,"./signers/request_signer":53,"./util":60,"./xml/builder":62}],24:[function(require,module,exports){
+},{"./config":21,"./credentials":23,"./credentials/credential_provider_chain":24,"./credentials/saml_credentials":25,"./credentials/temporary_credentials":26,"./credentials/web_identity_credentials":27,"./event_listeners":28,"./http":29,"./json/builder":31,"./json/parser":32,"./model/api":33,"./model/operation":35,"./model/paginator":36,"./model/resource_waiter":37,"./model/shape":38,"./param_validator":39,"./protocol/json":40,"./protocol/query":41,"./protocol/rest":42,"./protocol/rest_json":43,"./protocol/rest_xml":44,"./request":48,"./resource_waiter":49,"./response":50,"./sequential_executor":51,"./service":52,"./signers/request_signer":54,"./util":61,"./xml/builder":63}],23:[function(require,module,exports){
 var AWS = require('./core');
 
 
@@ -3968,7 +3966,7 @@ AWS.Credentials = AWS.util.inherit({
   }
 });
 
-},{"./core":23}],25:[function(require,module,exports){
+},{"./core":22}],24:[function(require,module,exports){
 var AWS = require('../core');
 
 
@@ -4024,7 +4022,7 @@ AWS.CredentialProviderChain = AWS.util.inherit(AWS.Credentials, {
 
 AWS.CredentialProviderChain.defaultProviders = [];
 
-},{"../core":23}],26:[function(require,module,exports){
+},{"../core":22}],25:[function(require,module,exports){
 var AWS = require('../core');
 
 
@@ -4051,7 +4049,7 @@ AWS.SAMLCredentials = AWS.util.inherit(AWS.Credentials, {
   }
 });
 
-},{"../core":23}],27:[function(require,module,exports){
+},{"../core":22}],26:[function(require,module,exports){
 var AWS = require('../core');
 
 
@@ -4095,7 +4093,7 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
   }
 });
 
-},{"../core":23}],28:[function(require,module,exports){
+},{"../core":22}],27:[function(require,module,exports){
 var AWS = require('../core');
 
 
@@ -4126,7 +4124,7 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
   }
 });
 
-},{"../core":23}],29:[function(require,module,exports){
+},{"../core":22}],28:[function(require,module,exports){
 var AWS = require('./core');
 var SequentialExecutor = require('./sequential_executor');
 
@@ -4150,7 +4148,7 @@ AWS.EventListeners = {
     });
 
     add('VALIDATE_REGION', 'validate', function VALIDATE_REGION(req) {
-      if (!req.service.config.region && !req.service.hasGlobalEndpoint()) {
+      if (!req.service.config.region && !req.service.isGlobalEndpoint) {
         req.response.error = AWS.util.error(new Error(),
           {code: 'SigningError', message: 'Missing region in config'});
       }
@@ -4461,7 +4459,7 @@ AWS.EventListeners = {
   })
 };
 
-},{"./core":23,"./protocol/json":41,"./protocol/query":42,"./protocol/rest":43,"./protocol/rest_json":44,"./protocol/rest_xml":45,"./sequential_executor":50,"util":20}],30:[function(require,module,exports){
+},{"./core":22,"./protocol/json":40,"./protocol/query":41,"./protocol/rest":42,"./protocol/rest_json":43,"./protocol/rest_xml":44,"./sequential_executor":51,"util":19}],29:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 
@@ -4550,7 +4548,7 @@ AWS.HttpClient.getInstance = function getInstance() {
   return this.singleton;
 };
 
-},{"./core":23}],31:[function(require,module,exports){
+},{"./core":22}],30:[function(require,module,exports){
 var AWS = require('../core');
 var EventEmitter = require('events').EventEmitter;
 require('../http');
@@ -4660,7 +4658,7 @@ AWS.HttpClient.prototype = AWS.XHRClient.prototype;
 
 AWS.HttpClient.streamsApiVersion = 1;
 
-},{"../core":23,"../http":30,"events":11}],32:[function(require,module,exports){
+},{"../core":22,"../http":29,"events":10}],31:[function(require,module,exports){
 var util = require('../util');
 
 function JsonBuilder() { }
@@ -4718,7 +4716,7 @@ function translateScalar(value, shape) {
 
 module.exports = JsonBuilder;
 
-},{"../util":60}],33:[function(require,module,exports){
+},{"../util":61}],32:[function(require,module,exports){
 var util = require('../util');
 
 function JsonParser() { }
@@ -4774,7 +4772,7 @@ function translateScalar(value, shape) {
 
 module.exports = JsonParser;
 
-},{"../util":60}],34:[function(require,module,exports){
+},{"../util":61}],33:[function(require,module,exports){
 var Collection = require('./collection');
 var Operation = require('./operation');
 var Shape = require('./shape');
@@ -4838,7 +4836,7 @@ function Api(api, options) {
 
 module.exports = Api;
 
-},{"../util":60,"./collection":35,"./operation":36,"./paginator":37,"./resource_waiter":38,"./shape":39}],35:[function(require,module,exports){
+},{"../util":61,"./collection":34,"./operation":35,"./paginator":36,"./resource_waiter":37,"./shape":38}],34:[function(require,module,exports){
 var memoizedProperty = require('../util').memoizedProperty;
 
 function Collection(iterable, options, fn, nameTr) {
@@ -4858,7 +4856,7 @@ function Collection(iterable, options, fn, nameTr) {
 
 module.exports = Collection;
 
-},{"../util":60}],36:[function(require,module,exports){
+},{"../util":61}],35:[function(require,module,exports){
 var Shape = require('./shape');
 
 var util = require('../util');
@@ -4912,7 +4910,7 @@ function Operation(name, operation, options) {
 
 module.exports = Operation;
 
-},{"../util":60,"./shape":39}],37:[function(require,module,exports){
+},{"../util":61,"./shape":38}],36:[function(require,module,exports){
 var property = require('../util').property;
 
 function Paginator(name, paginator) {
@@ -4925,7 +4923,7 @@ function Paginator(name, paginator) {
 
 module.exports = Paginator;
 
-},{"../util":60}],38:[function(require,module,exports){
+},{"../util":61}],37:[function(require,module,exports){
 var Shape = require('./shape');
 var StructureShape = Shape.shapes.StructureShape;
 
@@ -4980,7 +4978,7 @@ function ResourceWaiter(name, waiter, options) {
 
 module.exports = ResourceWaiter;
 
-},{"../util":60,"./shape":39}],39:[function(require,module,exports){
+},{"../util":61,"./shape":38}],38:[function(require,module,exports){
 var Collection = require('./collection');
 
 var util = require('../util');
@@ -5284,7 +5282,7 @@ Shape.shapes = {
 
 module.exports = Shape;
 
-},{"../util":60,"./collection":35}],40:[function(require,module,exports){
+},{"../util":61,"./collection":34}],39:[function(require,module,exports){
 var AWS = require('./core');
 
 
@@ -5441,7 +5439,7 @@ AWS.ParamValidator = AWS.util.inherit({
   }
 });
 
-},{"./core":23}],41:[function(require,module,exports){
+},{"./core":22}],40:[function(require,module,exports){
 var util = require('../util');
 var JsonBuilder = require('../json/builder');
 var JsonParser = require('../json/parser');
@@ -5502,7 +5500,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../json/builder":32,"../json/parser":33,"../util":60}],42:[function(require,module,exports){
+},{"../json/builder":31,"../json/parser":32,"../util":61}],41:[function(require,module,exports){
 var AWS = require('../core');
 var util = require('../util');
 var QueryParamSerializer = require('../query/query_param_serializer');
@@ -5584,7 +5582,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../core":23,"../model/shape":39,"../query/query_param_serializer":46,"../util":60}],43:[function(require,module,exports){
+},{"../core":22,"../model/shape":38,"../query/query_param_serializer":45,"../util":61}],42:[function(require,module,exports){
 var util = require('../util');
 
 function populateMethod(req) {
@@ -5699,7 +5697,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../util":60}],44:[function(require,module,exports){
+},{"../util":61}],43:[function(require,module,exports){
 var util = require('../util');
 var Rest = require('./rest');
 var Json = require('./json');
@@ -5761,7 +5759,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../json/builder":32,"../util":60,"./json":41,"./rest":43}],45:[function(require,module,exports){
+},{"../json/builder":31,"../util":61,"./json":40,"./rest":42}],44:[function(require,module,exports){
 var AWS = require('../core');
 var util = require('../util');
 var Rest = require('./rest');
@@ -5846,7 +5844,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../core":23,"../util":60,"./rest":43}],46:[function(require,module,exports){
+},{"../core":22,"../util":61,"./rest":42}],45:[function(require,module,exports){
 var util = require('../util');
 
 function QueryParamSerializer() { }
@@ -5916,7 +5914,98 @@ function serializeMember(name, value, rules, fn) {
 
 module.exports = QueryParamSerializer;
 
-},{"../util":60}],47:[function(require,module,exports){
+},{"../util":61}],46:[function(require,module,exports){
+var util = require('./util');
+var config = require('./region_config.json');
+
+function regionConfig(service) {
+  var sId = service.serviceIdentifier || '';
+  var sRegion = service.config.region || '';
+  var finalConfig = {};
+
+  config.forEach(function(item) {
+    (item.regions || []).forEach(function(region) {
+      if (sRegion.match(new RegExp('^' + region.replace('*', '.*') + '$'))) {
+        (item.serviceConfigs || []).forEach(function(svcConfig) {
+          (svcConfig.services || []).forEach(function(svcName) {
+            if (sId.match(new RegExp('^' + svcName.replace('*', '.*') + '$'))) {
+              util.update(finalConfig, svcConfig.config);
+              service.isGlobalEndpoint = !!svcConfig.globalEndpoint;
+            }
+          });
+        });
+      }
+    });
+  });
+
+  util.each(finalConfig, function(key, value) {
+    if (service.config[key] === undefined || service.config[key] === null) {
+      service.config[key] = value;
+    }
+  });
+}
+
+module.exports = regionConfig;
+
+},{"./region_config.json":47,"./util":61}],47:[function(require,module,exports){
+module.exports=[
+  {
+    "regions": ["*"],
+    "serviceConfigs": [
+      {
+        "services": ["*"],
+        "config": {
+          "endpoint": "{service}.{region}.amazonaws.com"
+        }
+      },
+      {
+        "services": ["cloudfront", "iam", "importexport", "sts"],
+        "config": {
+          "endpoint": "{service}.amazonaws.com"
+        },
+        "globalEndpoint": true
+      },
+      {
+        "services": ["s3"],
+        "config": {
+          "endpoint": "{service}-{region}.amazonaws.com"
+        }
+      },
+      {
+        "services": ["route53"],
+        "config": {
+          "endpoint": "https://{service}.amazonaws.com"
+        },
+        "globalEndpoint": true
+      }
+    ]
+  },
+  {
+    "regions": ["us-east-1"],
+    "serviceConfigs": [
+      {
+        "services": ["s3", "simpledb"],
+        "config": {
+          "endpoint": "{service}.amazonaws.com"
+        }
+      }
+    ]
+  },
+  {
+    "regions": ["cn-*"],
+    "serviceConfigs": [
+      {
+        "services": ["*"],
+        "config": {
+          "endpoint": "{service}.{region}.amazonaws.com.cn",
+          "signatureVersion": "v4"
+        }
+      }
+    ]
+  }
+]
+
+},{}],48:[function(require,module,exports){
 (function (process){
 var AWS = require('./core');
 var AcceptorStateMachine = require('./state_machine');
@@ -6001,7 +6090,7 @@ AWS.Request = inherit({
     var endpoint = service.endpoint;
     var region = service.config.region;
 
-    if (service.hasGlobalEndpoint()) region = 'us-east-1';
+    if (service.isGlobalEndpoint) region = 'us-east-1';
 
     this.service = service;
     this.operation = operation;
@@ -6231,7 +6320,7 @@ AWS.Request = inherit({
 AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
 
 }).call(this,require("G+mPsH"))
-},{"./core":23,"./state_machine":59,"G+mPsH":13}],48:[function(require,module,exports){
+},{"./core":22,"./state_machine":60,"G+mPsH":12}],49:[function(require,module,exports){
 
 
 var AWS = require('./core');
@@ -6388,7 +6477,7 @@ AWS.ResourceWaiter = inherit({
   }
 });
 
-},{"./core":23}],49:[function(require,module,exports){
+},{"./core":22}],50:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 
@@ -6475,7 +6564,7 @@ AWS.Response = inherit({
 
 });
 
-},{"./core":23}],50:[function(require,module,exports){
+},{"./core":22}],51:[function(require,module,exports){
 var AWS = require('./core');
 var domain = AWS.util.nodeRequire('domain');
 
@@ -6647,9 +6736,10 @@ AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.
 
 module.exports = AWS.SequentialExecutor;
 
-},{"./core":23}],51:[function(require,module,exports){
+},{"./core":22}],52:[function(require,module,exports){
 var AWS = require('./core');
 var Api = require('./model/api');
+var regionConfig = require('./region_config');
 var inherit = AWS.util.inherit;
 
 
@@ -6669,6 +6759,8 @@ AWS.Service = inherit({
   initialize: function initialize(config) {
     this.config = new AWS.Config(AWS.config);
     if (config) this.config.update(config, true);
+
+    regionConfig(this);
 
     this.config.endpoint = this.endpointFromTemplate(this.config.endpoint);
     this.setEndpoint(this.config.endpoint);
@@ -6812,9 +6904,12 @@ AWS.Service = inherit({
 
 
   getSignerClass: function getSignerClass() {
-    var version = this.api.signatureVersion;
-    if (this.config.signatureVersion) version = this.config.signatureVersion;
-    else if (this.isRegionV4()) version = 'v4';
+    var version;
+    if (this.config.signatureVersion) {
+      version = this.config.signatureVersion;
+    } else {
+      version = this.api.signatureVersion;
+    }
     return AWS.Signers.RequestSigner.getVersion(version);
   },
 
@@ -6893,39 +6988,7 @@ AWS.Service = inherit({
 
 
   setEndpoint: function setEndpoint(endpoint) {
-    if (endpoint) {
-      this.endpoint = new AWS.Endpoint(endpoint, this.config);
-    } else if (this.hasGlobalEndpoint()) {
-      this.endpoint = new AWS.Endpoint(this.api.globalEndpoint, this.config);
-    } else {
-      var host = this.api.endpointPrefix + '.' + this.config.region +
-                 this.endpointSuffix();
-      this.endpoint = new AWS.Endpoint(host, this.config);
-    }
-  },
-
-
-  hasGlobalEndpoint: function hasGlobalEndpoint() {
-    if (this.isRegionV4()) return false;
-    return this.api.globalEndpoint;
-  },
-
-
-  endpointSuffix: function endpointSuffix() {
-    var suffix = '.amazonaws.com';
-    if (this.isRegionCN()) return suffix + '.cn';
-    else return suffix;
-  },
-
-
-  isRegionCN: function isRegionCN() {
-    if (!this.config.region) return false;
-    return this.config.region.match(/^cn-/) ? true : false;
-  },
-
-
-  isRegionV4: function isRegionV4() {
-    return this.isRegionCN();
+    this.endpoint = new AWS.Endpoint(endpoint, this.config);
   },
 
 
@@ -7032,7 +7095,7 @@ AWS.util.update(AWS.Service, {
   }
 });
 
-},{"./core":23,"./model/api":34}],52:[function(require,module,exports){
+},{"./core":22,"./model/api":33,"./region_config":46}],53:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -7129,7 +7192,7 @@ AWS.Signers.Presign = inherit({
 
 module.exports = AWS.Signers.Presign;
 
-},{"../core":23}],53:[function(require,module,exports){
+},{"../core":22}],54:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -7158,7 +7221,7 @@ require('./v4');
 require('./s3');
 require('./presign');
 
-},{"../core":23,"./presign":52,"./s3":54,"./v2":55,"./v3":56,"./v3https":57,"./v4":58}],54:[function(require,module,exports){
+},{"../core":22,"./presign":53,"./s3":55,"./v2":56,"./v3":57,"./v3https":58,"./v4":59}],55:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -7314,7 +7377,7 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.S3;
 
-},{"../core":23}],55:[function(require,module,exports){
+},{"../core":22}],56:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -7359,7 +7422,7 @@ AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V2;
 
-},{"../core":23}],56:[function(require,module,exports){
+},{"../core":22}],57:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -7433,7 +7496,7 @@ AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V3;
 
-},{"../core":23}],57:[function(require,module,exports){
+},{"../core":22}],58:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -7455,7 +7518,7 @@ AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
 
 module.exports = AWS.Signers.V3Https;
 
-},{"../core":23,"./v3":56}],58:[function(require,module,exports){
+},{"../core":22,"./v3":57}],59:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -7660,7 +7723,7 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V4;
 
-},{"../core":23}],59:[function(require,module,exports){
+},{"../core":22}],60:[function(require,module,exports){
 function AcceptorStateMachine(states, state) {
   this.currentState = state || null;
   this.states = states || {};
@@ -7704,7 +7767,7 @@ AcceptorStateMachine.prototype.addState = function addState(name, acceptState, f
 
 module.exports = AcceptorStateMachine;
 
-},{}],60:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 (function (process){
 
 
@@ -7792,7 +7855,7 @@ var util = {
 
   readFileSync: function readFileSync(path) {
     if (typeof window !== 'undefined') return null;
-    return require('fs').readFileSync(path, 'utf-8');
+    return util.nodeRequire('fs').readFileSync(path, 'utf-8');
   },
 
   base64: {
@@ -7843,7 +7906,7 @@ var util = {
       } else if (typeof string.size === 'number') {
         return string.size;
       } else if (typeof string.path === 'string') {
-        return require('fs').lstatSync(string.path).size;
+        return util.nodeRequire('fs').lstatSync(string.path).size;
       } else {
         throw util.error(new Error('Cannot determine length of ' + string),
           { object: string });
@@ -8273,7 +8336,7 @@ var util = {
 module.exports = util;
 
 }).call(this,require("G+mPsH"))
-},{"./core":23,"G+mPsH":13,"buffer":2,"crypto":6,"fs":1,"querystring":17,"url":18}],61:[function(require,module,exports){
+},{"./core":22,"G+mPsH":12,"buffer":1,"crypto":5,"querystring":16,"url":17}],62:[function(require,module,exports){
 var util = require('../util');
 var Shape = require('../model/shape');
 
@@ -8434,7 +8497,7 @@ function parseUnknown(xml) {
 
 module.exports = DomXmlParser;
 
-},{"../model/shape":39,"../util":60}],62:[function(require,module,exports){
+},{"../model/shape":38,"../util":61}],63:[function(require,module,exports){
 var util = require('../util');
 var builder = require('xmlbuilder');
 
@@ -8522,7 +8585,7 @@ function applyNamespaces(xml, shape) {
 
 module.exports = XmlBuilder;
 
-},{"../util":60,"xmlbuilder":65}],63:[function(require,module,exports){
+},{"../util":61,"xmlbuilder":66}],64:[function(require,module,exports){
 (function() {
   var XMLBuilder, XMLFragment;
 
@@ -8642,7 +8705,7 @@ module.exports = XmlBuilder;
 
 }).call(this);
 
-},{"./XMLFragment":64}],64:[function(require,module,exports){
+},{"./XMLFragment":65}],65:[function(require,module,exports){
 (function() {
   var XMLFragment,
     __hasProp = {}.hasOwnProperty;
@@ -9065,7 +9128,7 @@ module.exports = XmlBuilder;
 
 }).call(this);
 
-},{}],65:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 (function() {
   var XMLBuilder;
 
@@ -9081,7 +9144,7 @@ module.exports = XmlBuilder;
 
 }).call(this);
 
-},{"./XMLBuilder":63}]},{},[21]);AWS.CloudWatch = AWS.Service.defineService('cloudwatch');
+},{"./XMLBuilder":64}]},{},[20]);AWS.CloudWatch = AWS.Service.defineService('cloudwatch');
 
 AWS.Service.defineServiceApi(AWS.CloudWatch, "2010-08-01", {"metadata":{"apiVersion":"2010-08-01","endpointPrefix":"monitoring","serviceAbbreviation":"CloudWatch","serviceFullName":"Amazon CloudWatch","signatureVersion":"v4","xmlNamespace":"http://monitoring.amazonaws.com/doc/2010-08-01/","protocol":"query"},"operations":{"DeleteAlarms":{"input":{"type":"structure","required":["AlarmNames"],"members":{"AlarmNames":{"shape":"S2"}}}},"DescribeAlarmHistory":{"input":{"type":"structure","members":{"AlarmName":{},"HistoryItemType":{},"StartDate":{"type":"timestamp"},"EndDate":{"type":"timestamp"},"MaxRecords":{"type":"integer"},"NextToken":{}}},"output":{"resultWrapper":"DescribeAlarmHistoryResult","type":"structure","members":{"AlarmHistoryItems":{"type":"list","member":{"type":"structure","members":{"AlarmName":{},"Timestamp":{"type":"timestamp"},"HistoryItemType":{},"HistorySummary":{},"HistoryData":{}}}},"NextToken":{}}}},"DescribeAlarms":{"input":{"type":"structure","members":{"AlarmNames":{"shape":"S2"},"AlarmNamePrefix":{},"StateValue":{},"ActionPrefix":{},"MaxRecords":{"type":"integer"},"NextToken":{}}},"output":{"resultWrapper":"DescribeAlarmsResult","type":"structure","members":{"MetricAlarms":{"shape":"Sj"},"NextToken":{}}}},"DescribeAlarmsForMetric":{"input":{"type":"structure","required":["MetricName","Namespace"],"members":{"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"shape":"Sv"},"Period":{"type":"integer"},"Unit":{}}},"output":{"resultWrapper":"DescribeAlarmsForMetricResult","type":"structure","members":{"MetricAlarms":{"shape":"Sj"}}}},"DisableAlarmActions":{"input":{"type":"structure","required":["AlarmNames"],"members":{"AlarmNames":{"shape":"S2"}}}},"EnableAlarmActions":{"input":{"type":"structure","required":["AlarmNames"],"members":{"AlarmNames":{"shape":"S2"}}}},"GetMetricStatistics":{"input":{"type":"structure","required":["Namespace","MetricName","StartTime","EndTime","Period","Statistics"],"members":{"Namespace":{},"MetricName":{},"Dimensions":{"shape":"Sv"},"StartTime":{"type":"timestamp"},"EndTime":{"type":"timestamp"},"Period":{"type":"integer"},"Statistics":{"type":"list","member":{}},"Unit":{}}},"output":{"resultWrapper":"GetMetricStatisticsResult","type":"structure","members":{"Label":{},"Datapoints":{"type":"list","member":{"type":"structure","members":{"Timestamp":{"type":"timestamp"},"SampleCount":{"type":"double"},"Average":{"type":"double"},"Sum":{"type":"double"},"Minimum":{"type":"double"},"Maximum":{"type":"double"},"Unit":{}},"xmlOrder":["Timestamp","SampleCount","Average","Sum","Minimum","Maximum","Unit"]}}}}},"ListMetrics":{"input":{"type":"structure","members":{"Namespace":{},"MetricName":{},"Dimensions":{"type":"list","member":{"type":"structure","required":["Name"],"members":{"Name":{},"Value":{}}}},"NextToken":{}}},"output":{"xmlOrder":["Metrics","NextToken"],"resultWrapper":"ListMetricsResult","type":"structure","members":{"Metrics":{"type":"list","member":{"type":"structure","members":{"Namespace":{},"MetricName":{},"Dimensions":{"shape":"Sv"}},"xmlOrder":["Namespace","MetricName","Dimensions"]}},"NextToken":{}}}},"PutMetricAlarm":{"input":{"type":"structure","required":["AlarmName","MetricName","Namespace","Statistic","Period","EvaluationPeriods","Threshold","ComparisonOperator"],"members":{"AlarmName":{},"AlarmDescription":{},"ActionsEnabled":{"type":"boolean"},"OKActions":{"shape":"So"},"AlarmActions":{"shape":"So"},"InsufficientDataActions":{"shape":"So"},"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"shape":"Sv"},"Period":{"type":"integer"},"Unit":{},"EvaluationPeriods":{"type":"integer"},"Threshold":{"type":"double"},"ComparisonOperator":{}}}},"PutMetricData":{"input":{"type":"structure","required":["Namespace","MetricData"],"members":{"Namespace":{},"MetricData":{"type":"list","member":{"type":"structure","required":["MetricName"],"members":{"MetricName":{},"Dimensions":{"shape":"Sv"},"Timestamp":{"type":"timestamp"},"Value":{"type":"double"},"StatisticValues":{"type":"structure","required":["SampleCount","Sum","Minimum","Maximum"],"members":{"SampleCount":{"type":"double"},"Sum":{"type":"double"},"Minimum":{"type":"double"},"Maximum":{"type":"double"}}},"Unit":{}}}}}}},"SetAlarmState":{"input":{"type":"structure","required":["AlarmName","StateValue","StateReason"],"members":{"AlarmName":{},"StateValue":{},"StateReason":{},"StateReasonData":{}}}}},"shapes":{"S2":{"type":"list","member":{}},"Sj":{"type":"list","member":{"type":"structure","members":{"AlarmName":{},"AlarmArn":{},"AlarmDescription":{},"AlarmConfigurationUpdatedTimestamp":{"type":"timestamp"},"ActionsEnabled":{"type":"boolean"},"OKActions":{"shape":"So"},"AlarmActions":{"shape":"So"},"InsufficientDataActions":{"shape":"So"},"StateValue":{},"StateReason":{},"StateReasonData":{},"StateUpdatedTimestamp":{"type":"timestamp"},"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"shape":"Sv"},"Period":{"type":"integer"},"Unit":{},"EvaluationPeriods":{"type":"integer"},"Threshold":{"type":"double"},"ComparisonOperator":{}},"xmlOrder":["AlarmName","AlarmArn","AlarmDescription","AlarmConfigurationUpdatedTimestamp","ActionsEnabled","OKActions","AlarmActions","InsufficientDataActions","StateValue","StateReason","StateReasonData","StateUpdatedTimestamp","MetricName","Namespace","Statistic","Dimensions","Period","Unit","EvaluationPeriods","Threshold","ComparisonOperator"]}},"So":{"type":"list","member":{}},"Sv":{"type":"list","member":{"type":"structure","required":["Name","Value"],"members":{"Name":{},"Value":{}},"xmlOrder":["Name","Value"]}}},"paginators":{"DescribeAlarmHistory":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"AlarmHistoryItems"},"DescribeAlarms":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"MetricAlarms"},"DescribeAlarmsForMetric":{"result_key":"MetricAlarms"},"ListMetrics":{"input_token":"NextToken","output_token":"NextToken","result_key":"Metrics"}}});
 AWS.DynamoDB = AWS.Service.defineService('dynamodb');
@@ -9141,8 +9204,12 @@ AWS.S3 = AWS.Service.defineService('s3');
 AWS.util.update(AWS.S3.prototype, {
 
   initialize: function initialize(options) {
+    options = options || {};
+    if (options.hasOwnProperty('region') && !options.region) {
+      options.region = 'us-east-1';
+    }
+
     AWS.Service.prototype.initialize.call(this, options);
-    this.setEndpoint(this.config.endpoint, options);
   },
 
 
@@ -9359,20 +9426,6 @@ AWS.util.update(AWS.S3.prototype, {
   },
 
 
-  setEndpoint: function setEndpoint(endpoint) {
-    if (endpoint) {
-      this.endpoint = new AWS.Endpoint(endpoint, this.config);
-    } else if (this.config.region && this.config.region !== 'us-east-1') {
-      var sep = '-';
-      if (this.isRegionV4()) sep = '.';
-      var hostname = 's3' + sep + this.config.region + this.endpointSuffix();
-      this.endpoint = new AWS.Endpoint(hostname);
-    } else {
-      this.endpoint = new AWS.Endpoint(this.api.globalEndpoint, this.config);
-    }
-  },
-
-
   getSignedUrl: function getSignedUrl(operation, params, callback) {
     params = AWS.util.copy(params || {});
     var expires = params.Expires || 900;
@@ -9518,7 +9571,7 @@ AWS.util.update(AWS.SQS.prototype, {
   }
 });
 
-AWS.Service.defineServiceApi(AWS.SQS, "2012-11-05", {"metadata":{"apiVersion":"2012-11-05","endpointPrefix":"sqs","serviceAbbreviation":"Amazon SQS","serviceFullName":"Amazon Simple Queue Service","signatureVersion":"v4","xmlNamespace":"http://queue.amazonaws.com/doc/2012-11-05/","protocol":"query"},"operations":{"AddPermission":{"input":{"type":"structure","required":["QueueUrl","Label","AWSAccountIds","Actions"],"members":{"QueueUrl":{},"Label":{},"AWSAccountIds":{"type":"list","member":{"locationName":"AWSAccountId"},"flattened":true},"Actions":{"type":"list","member":{"locationName":"ActionName"},"flattened":true}}}},"ChangeMessageVisibility":{"input":{"type":"structure","required":["QueueUrl","ReceiptHandle","VisibilityTimeout"],"members":{"QueueUrl":{},"ReceiptHandle":{},"VisibilityTimeout":{"type":"integer"}}}},"ChangeMessageVisibilityBatch":{"input":{"type":"structure","required":["QueueUrl","Entries"],"members":{"QueueUrl":{},"Entries":{"type":"list","member":{"locationName":"ChangeMessageVisibilityBatchRequestEntry","type":"structure","required":["Id","ReceiptHandle"],"members":{"Id":{},"ReceiptHandle":{},"VisibilityTimeout":{"type":"integer"}}},"flattened":true}}},"output":{"resultWrapper":"ChangeMessageVisibilityBatchResult","type":"structure","required":["Successful","Failed"],"members":{"Successful":{"type":"list","member":{"locationName":"ChangeMessageVisibilityBatchResultEntry","type":"structure","required":["Id"],"members":{"Id":{}}},"flattened":true},"Failed":{"shape":"Sd"}}}},"CreateQueue":{"input":{"type":"structure","required":["QueueName"],"members":{"QueueName":{},"Attributes":{"shape":"Sh","locationName":"Attribute"}}},"output":{"resultWrapper":"CreateQueueResult","type":"structure","members":{"QueueUrl":{}}}},"DeleteMessage":{"input":{"type":"structure","required":["QueueUrl","ReceiptHandle"],"members":{"QueueUrl":{},"ReceiptHandle":{}}}},"DeleteMessageBatch":{"input":{"type":"structure","required":["QueueUrl","Entries"],"members":{"QueueUrl":{},"Entries":{"type":"list","member":{"locationName":"DeleteMessageBatchRequestEntry","type":"structure","required":["Id","ReceiptHandle"],"members":{"Id":{},"ReceiptHandle":{}}},"flattened":true}}},"output":{"resultWrapper":"DeleteMessageBatchResult","type":"structure","required":["Successful","Failed"],"members":{"Successful":{"type":"list","member":{"locationName":"DeleteMessageBatchResultEntry","type":"structure","required":["Id"],"members":{"Id":{}}},"flattened":true},"Failed":{"shape":"Sd"}}}},"DeleteQueue":{"input":{"type":"structure","required":["QueueUrl"],"members":{"QueueUrl":{}}}},"GetQueueAttributes":{"input":{"type":"structure","required":["QueueUrl"],"members":{"QueueUrl":{},"AttributeNames":{"shape":"St"}}},"output":{"resultWrapper":"GetQueueAttributesResult","type":"structure","members":{"Attributes":{"shape":"Sh","locationName":"Attribute"}}}},"GetQueueUrl":{"input":{"type":"structure","required":["QueueName"],"members":{"QueueName":{},"QueueOwnerAWSAccountId":{}}},"output":{"resultWrapper":"GetQueueUrlResult","type":"structure","members":{"QueueUrl":{}}}},"ListDeadLetterSourceQueues":{"input":{"type":"structure","required":["QueueUrl"],"members":{"QueueUrl":{}}},"output":{"resultWrapper":"ListDeadLetterSourceQueuesResult","type":"structure","required":["queueUrls"],"members":{"queueUrls":{"shape":"Sz"}}}},"ListQueues":{"input":{"type":"structure","members":{"QueueNamePrefix":{}}},"output":{"resultWrapper":"ListQueuesResult","type":"structure","members":{"QueueUrls":{"shape":"Sz"}}}},"ReceiveMessage":{"input":{"type":"structure","required":["QueueUrl"],"members":{"QueueUrl":{},"AttributeNames":{"shape":"St"},"MessageAttributeNames":{"type":"list","member":{"locationName":"MessageAttributeName"},"flattened":true},"MaxNumberOfMessages":{"type":"integer"},"VisibilityTimeout":{"type":"integer"},"WaitTimeSeconds":{"type":"integer"}}},"output":{"resultWrapper":"ReceiveMessageResult","type":"structure","members":{"Messages":{"type":"list","member":{"locationName":"Message","type":"structure","members":{"MessageId":{},"ReceiptHandle":{},"MD5OfBody":{},"Body":{},"Attributes":{"shape":"Sh","locationName":"Attribute"},"MD5OfMessageAttributes":{},"MessageAttributes":{"shape":"S18","locationName":"MessageAttribute"}}},"flattened":true}}}},"RemovePermission":{"input":{"type":"structure","required":["QueueUrl","Label"],"members":{"QueueUrl":{},"Label":{}}}},"SendMessage":{"input":{"type":"structure","required":["QueueUrl","MessageBody"],"members":{"QueueUrl":{},"MessageBody":{},"DelaySeconds":{"type":"integer"},"MessageAttributes":{"shape":"S18","locationName":"MessageAttribute"}}},"output":{"resultWrapper":"SendMessageResult","type":"structure","members":{"MD5OfMessageBody":{},"MD5OfMessageAttributes":{},"MessageId":{}}}},"SendMessageBatch":{"input":{"type":"structure","required":["QueueUrl","Entries"],"members":{"QueueUrl":{},"Entries":{"type":"list","member":{"locationName":"SendMessageBatchRequestEntry","type":"structure","required":["Id","MessageBody"],"members":{"Id":{},"MessageBody":{},"DelaySeconds":{"type":"integer"},"MessageAttributes":{"shape":"S18","locationName":"MessageAttribute"}}},"flattened":true}}},"output":{"resultWrapper":"SendMessageBatchResult","type":"structure","required":["Successful","Failed"],"members":{"Successful":{"type":"list","member":{"locationName":"SendMessageBatchResultEntry","type":"structure","required":["Id","MessageId","MD5OfMessageBody"],"members":{"Id":{},"MessageId":{},"MD5OfMessageBody":{},"MD5OfMessageAttributes":{}}},"flattened":true},"Failed":{"shape":"Sd"}}}},"SetQueueAttributes":{"input":{"type":"structure","required":["QueueUrl","attributes"],"members":{"QueueUrl":{},"Attributes":{"shape":"Sh","locationName":"Attribute"}}}}},"shapes":{"Sd":{"type":"list","member":{"locationName":"BatchResultErrorEntry","type":"structure","required":["Id","SenderFault","Code"],"members":{"Id":{},"SenderFault":{"type":"boolean"},"Code":{},"Message":{}}},"flattened":true},"Sh":{"type":"map","key":{"locationName":"Name"},"value":{"locationName":"Value"},"flattened":true,"locationName":"Attribute"},"St":{"type":"list","member":{"locationName":"AttributeName"},"flattened":true},"Sz":{"type":"list","member":{"locationName":"QueueUrl"},"flattened":true},"S18":{"type":"map","key":{"locationName":"Name"},"value":{"locationName":"Value","type":"structure","required":["DataType"],"members":{"StringValue":{},"BinaryValue":{"type":"blob"},"StringListValues":{"flattened":true,"locationName":"StringListValue","type":"list","member":{"locationName":"StringListValue"}},"BinaryListValues":{"flattened":true,"locationName":"BinaryListValue","type":"list","member":{"locationName":"BinaryListValue","type":"blob"}},"DataType":{}}},"flattened":true}},"paginators":{"ListQueues":{"result_key":"QueueUrls"}}});
+AWS.Service.defineServiceApi(AWS.SQS, "2012-11-05", {"metadata":{"apiVersion":"2012-11-05","endpointPrefix":"sqs","serviceAbbreviation":"Amazon SQS","serviceFullName":"Amazon Simple Queue Service","signatureVersion":"v4","xmlNamespace":"http://queue.amazonaws.com/doc/2012-11-05/","protocol":"query"},"operations":{"AddPermission":{"input":{"type":"structure","required":["QueueUrl","Label","AWSAccountIds","Actions"],"members":{"QueueUrl":{},"Label":{},"AWSAccountIds":{"type":"list","member":{"locationName":"AWSAccountId"},"flattened":true},"Actions":{"type":"list","member":{"locationName":"ActionName"},"flattened":true}}}},"ChangeMessageVisibility":{"input":{"type":"structure","required":["QueueUrl","ReceiptHandle","VisibilityTimeout"],"members":{"QueueUrl":{},"ReceiptHandle":{},"VisibilityTimeout":{"type":"integer"}}}},"ChangeMessageVisibilityBatch":{"input":{"type":"structure","required":["QueueUrl","Entries"],"members":{"QueueUrl":{},"Entries":{"type":"list","member":{"locationName":"ChangeMessageVisibilityBatchRequestEntry","type":"structure","required":["Id","ReceiptHandle"],"members":{"Id":{},"ReceiptHandle":{},"VisibilityTimeout":{"type":"integer"}}},"flattened":true}}},"output":{"resultWrapper":"ChangeMessageVisibilityBatchResult","type":"structure","required":["Successful","Failed"],"members":{"Successful":{"type":"list","member":{"locationName":"ChangeMessageVisibilityBatchResultEntry","type":"structure","required":["Id"],"members":{"Id":{}}},"flattened":true},"Failed":{"shape":"Sd"}}}},"CreateQueue":{"input":{"type":"structure","required":["QueueName"],"members":{"QueueName":{},"Attributes":{"shape":"Sh","locationName":"Attribute"}}},"output":{"resultWrapper":"CreateQueueResult","type":"structure","members":{"QueueUrl":{}}}},"DeleteMessage":{"input":{"type":"structure","required":["QueueUrl","ReceiptHandle"],"members":{"QueueUrl":{},"ReceiptHandle":{}}}},"DeleteMessageBatch":{"input":{"type":"structure","required":["QueueUrl","Entries"],"members":{"QueueUrl":{},"Entries":{"type":"list","member":{"locationName":"DeleteMessageBatchRequestEntry","type":"structure","required":["Id","ReceiptHandle"],"members":{"Id":{},"ReceiptHandle":{}}},"flattened":true}}},"output":{"resultWrapper":"DeleteMessageBatchResult","type":"structure","required":["Successful","Failed"],"members":{"Successful":{"type":"list","member":{"locationName":"DeleteMessageBatchResultEntry","type":"structure","required":["Id"],"members":{"Id":{}}},"flattened":true},"Failed":{"shape":"Sd"}}}},"DeleteQueue":{"input":{"type":"structure","required":["QueueUrl"],"members":{"QueueUrl":{}}}},"GetQueueAttributes":{"input":{"type":"structure","required":["QueueUrl"],"members":{"QueueUrl":{},"AttributeNames":{"shape":"St"}}},"output":{"resultWrapper":"GetQueueAttributesResult","type":"structure","members":{"Attributes":{"shape":"Sh","locationName":"Attribute"}}}},"GetQueueUrl":{"input":{"type":"structure","required":["QueueName"],"members":{"QueueName":{},"QueueOwnerAWSAccountId":{}}},"output":{"resultWrapper":"GetQueueUrlResult","type":"structure","members":{"QueueUrl":{}}}},"ListDeadLetterSourceQueues":{"input":{"type":"structure","required":["QueueUrl"],"members":{"QueueUrl":{}}},"output":{"resultWrapper":"ListDeadLetterSourceQueuesResult","type":"structure","required":["queueUrls"],"members":{"queueUrls":{"shape":"Sz"}}}},"ListQueues":{"input":{"type":"structure","members":{"QueueNamePrefix":{}}},"output":{"resultWrapper":"ListQueuesResult","type":"structure","members":{"QueueUrls":{"shape":"Sz"}}}},"ReceiveMessage":{"input":{"type":"structure","required":["QueueUrl"],"members":{"QueueUrl":{},"AttributeNames":{"shape":"St"},"MessageAttributeNames":{"type":"list","member":{"locationName":"MessageAttributeName"},"flattened":true},"MaxNumberOfMessages":{"type":"integer"},"VisibilityTimeout":{"type":"integer"},"WaitTimeSeconds":{"type":"integer"}}},"output":{"resultWrapper":"ReceiveMessageResult","type":"structure","members":{"Messages":{"type":"list","member":{"locationName":"Message","type":"structure","members":{"MessageId":{},"ReceiptHandle":{},"MD5OfBody":{},"Body":{},"Attributes":{"shape":"Sh","locationName":"Attribute"},"MD5OfMessageAttributes":{},"MessageAttributes":{"shape":"S18","locationName":"MessageAttribute"}}},"flattened":true}}}},"RemovePermission":{"input":{"type":"structure","required":["QueueUrl","Label"],"members":{"QueueUrl":{},"Label":{}}}},"SendMessage":{"input":{"type":"structure","required":["QueueUrl","MessageBody"],"members":{"QueueUrl":{},"MessageBody":{},"DelaySeconds":{"type":"integer"},"MessageAttributes":{"shape":"S18","locationName":"MessageAttribute"}}},"output":{"resultWrapper":"SendMessageResult","type":"structure","members":{"MD5OfMessageBody":{},"MD5OfMessageAttributes":{},"MessageId":{}}}},"SendMessageBatch":{"input":{"type":"structure","required":["QueueUrl","Entries"],"members":{"QueueUrl":{},"Entries":{"type":"list","member":{"locationName":"SendMessageBatchRequestEntry","type":"structure","required":["Id","MessageBody"],"members":{"Id":{},"MessageBody":{},"DelaySeconds":{"type":"integer"},"MessageAttributes":{"shape":"S18","locationName":"MessageAttribute"}}},"flattened":true}}},"output":{"resultWrapper":"SendMessageBatchResult","type":"structure","required":["Successful","Failed"],"members":{"Successful":{"type":"list","member":{"locationName":"SendMessageBatchResultEntry","type":"structure","required":["Id","MessageId","MD5OfMessageBody"],"members":{"Id":{},"MessageId":{},"MD5OfMessageBody":{},"MD5OfMessageAttributes":{}}},"flattened":true},"Failed":{"shape":"Sd"}}}},"SetQueueAttributes":{"input":{"type":"structure","required":["QueueUrl","Attributes"],"members":{"QueueUrl":{},"Attributes":{"shape":"Sh","locationName":"Attribute"}}}}},"shapes":{"Sd":{"type":"list","member":{"locationName":"BatchResultErrorEntry","type":"structure","required":["Id","SenderFault","Code"],"members":{"Id":{},"SenderFault":{"type":"boolean"},"Code":{},"Message":{}}},"flattened":true},"Sh":{"type":"map","key":{"locationName":"Name"},"value":{"locationName":"Value"},"flattened":true,"locationName":"Attribute"},"St":{"type":"list","member":{"locationName":"AttributeName"},"flattened":true},"Sz":{"type":"list","member":{"locationName":"QueueUrl"},"flattened":true},"S18":{"type":"map","key":{"locationName":"Name"},"value":{"locationName":"Value","type":"structure","required":["DataType"],"members":{"StringValue":{},"BinaryValue":{"type":"blob"},"StringListValues":{"flattened":true,"locationName":"StringListValue","type":"list","member":{"locationName":"StringListValue"}},"BinaryListValues":{"flattened":true,"locationName":"BinaryListValue","type":"list","member":{"locationName":"BinaryListValue","type":"blob"}},"DataType":{}}},"flattened":true}},"paginators":{"ListQueues":{"result_key":"QueueUrls"}}});
 AWS.STS = AWS.Service.defineService('sts');
 
 
