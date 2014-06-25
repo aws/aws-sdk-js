@@ -70,6 +70,16 @@ describe 'AWS.EventListeners', ->
         expect(call.args[0].code).toEqual('CredentialsError')
         expect(call.args[0].message).toMatch(/Missing credentials/)
 
+    it 'does not validate credentials if request is not signed', ->
+      helpers.mockHttpResponse 200, {}, ''
+      service.api = new AWS.Model.Api metadata:
+        endpointPrefix: 'mockservice'
+        signatureVersion: null
+      request = makeRequest()
+      request.send(->)
+      expect(errorHandler).not.toHaveBeenCalled()
+      expect(successHandler).toHaveBeenCalled()
+
     it 'sends error event if region is not set', ->
       service.config.region = null
       request = makeRequest(->)
