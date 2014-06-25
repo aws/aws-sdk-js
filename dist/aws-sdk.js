@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.0.2
+// AWS SDK for JavaScript v2.0.3
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -3849,7 +3849,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.0.2',
+  VERSION: '2.0.3',
 
 
   Signers: {},
@@ -6760,10 +6760,15 @@ AWS.Service = inherit({
     this.config = new AWS.Config(AWS.config);
     if (config) this.config.update(config, true);
 
+    this.validateService();
     regionConfig(this);
 
     this.config.endpoint = this.endpointFromTemplate(this.config.endpoint);
     this.setEndpoint(this.config.endpoint);
+  },
+
+
+  validateService: function validateService() {
   },
 
 
@@ -9203,13 +9208,8 @@ AWS.S3 = AWS.Service.defineService('s3');
 
 AWS.util.update(AWS.S3.prototype, {
 
-  initialize: function initialize(options) {
-    options = options || {};
-    if (options.hasOwnProperty('region') && !options.region) {
-      options.region = 'us-east-1';
-    }
-
-    AWS.Service.prototype.initialize.call(this, options);
+  validateService: function validateService() {
+    if (!this.config.region) this.config.region = 'us-east-1';
   },
 
 
