@@ -115,7 +115,6 @@ Waits for a given #{service.name} resource. The final callback or
 is either in its final state or the waiter has timed out and stopped polling
 for the final state.
 
-@api experimental
 @param state [String] the resource state to wait for. Available states for this
   service are listed in "Waiter Resource States" below.
 @param params [map] a list of parameters for the given state. See each waiter
