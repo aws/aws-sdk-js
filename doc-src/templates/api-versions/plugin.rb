@@ -133,6 +133,7 @@ eof
       next if name =~ /^_/
       config = load_waiter(waiters, name)
       operation_name = config['operation'][0,1].downcase + config['operation'][1..-1]
+      name = name[0,1].downcase + name[1..-1]
       obj = WaiterObject.new(service, name)
       obj.operation = YARDJS::CodeObjects::PropertyObject.new(service, operation_name)
       obj.operation.docstring.add_tag YARD::Tags::Tag.new(:waiter, "{#{obj.path}}")
