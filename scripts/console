@@ -2,7 +2,6 @@
 
 var repl = require('repl').start('aws-sdk> '),
     replEval = repl.eval,
-    replHistory = require('repl.history'),
     defaultOptions = {
       logger: process.stdout,
       region: process.env.AWS_REGION || 'us-east-1'
@@ -52,7 +51,13 @@ repl.context.request = null;
 repl.context.response = null;
 
 // setup REPL history
-replHistory(repl, process.env.HOME + '/.node_history');
+try {
+  var replHistory = require('repl.history');
+  replHistory(repl, process.env.HOME + '/.node_history');
+} catch (e) {
+  console.log("Missing repl.history package, history will not be supported.");
+  console.log("  Type `npm install repl.history` to enable history.");
+}
 
 // load services as defined instances
 for (var key in AWS) {
