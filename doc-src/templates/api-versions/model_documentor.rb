@@ -10,6 +10,11 @@ module Documentor
     docs = docs.gsub(/\s+/, ' ').strip
     docs == '' ? nil : docs
   end
+
+  def method_name(name, downcased = true)
+    name = name.sub(/\d{4}_\d{2}_\d{2}$/, '')
+    downcased ? name[0].downcase + name[1..-1] : name
+  end
 end
 
 class ModelDocumentor
@@ -18,6 +23,7 @@ class ModelDocumentor
   attr_reader :lines
 
   def initialize(klass, api)
+    api_version = api['metadata']['apiVersion']
     @lines = []
     @lines << ''
     @lines << <<-DOCS.strip
@@ -40,7 +46,7 @@ In order to ensure that the #{klass} object uses this specific API, you can
 construct the object by passing the `apiVersion` option to the constructor:
 
 ```javascript
-var #{klass.downcase} = new AWS.#{klass}({apiVersion: '#{api['apiVersion']}'});
+var #{klass.downcase} = new AWS.#{klass}({apiVersion: '#{api_version}'});
 ```
 
 You can also set the API version globally in `AWS.config.apiVersions` using
@@ -48,7 +54,7 @@ the **#{klass.downcase}** service identifier:
 
 ```javascript
 AWS.config.apiVersions = {
-  #{klass.downcase}: '#{api['apiVersion']}',
+  #{klass.downcase}: '#{api_version}',
   // other service API versions
 };
 
@@ -60,7 +66,7 @@ var #{klass.downcase} = new AWS.#{klass}();
   API operation.
 
   @example Constructing a #{klass} object
-    var #{klass.downcase} = new AWS.#{klass}({apiVersion: '#{api['apiVersion']}'});
+    var #{klass.downcase} = new AWS.#{klass}({apiVersion: '#{api_version}'});
 
   @option options [String] endpoint The endpoint URI to send requests
     to.  The default endpoint is built from the configured `region`.
@@ -76,7 +82,7 @@ DOCS
   def find_example_operation(api)
     list = api['operations'].keys.grep(/describe|list|get/)
     list = api['operations'].keys if list.size == 0
-    list.first
+    method_name(list.first)
   end
 end
 
@@ -133,11 +139,6 @@ class MethodDocumentor
       @lines << "@see #{operation['documentation_url']}"
       @lines << "  #{api['serviceAbbreviation']} Documentation for #{operation_name}"
     end
-  end
-
-  def method_name(name, downcased = true)
-    name = name.sub(/\d{4}_\d{2}_\d{2}$/, '')
-    downcased ? name[0].downcase + name[1..-1] : name
   end
 
   def shapes(api, rules)
