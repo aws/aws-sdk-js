@@ -73,7 +73,7 @@ class ApiDocumentor
     svc = YARD::CodeObjects::ClassObject.new(@root, name)
 
     model = load_model(file)
-    add_class_documentation(svc, klass, model)
+    add_class_documentation(svc, klass, model, version)
     add_methods(svc, klass, model)
     add_waiters(svc, klass, model)
 
@@ -82,11 +82,37 @@ class ApiDocumentor
     svc.superclass = 'AWS.Service'
   end
 
-  def add_class_documentation(service, klass, model)
+  def add_class_documentation(service, klass, model, api_version)
     docstring = ModelDocumentor.new(klass, model).lines.join("\n")
     parser = YARD::Docstring.parser
     parser.parse(docstring, service)
     service.docstring = parser.to_docstring
+
+    # constructor
+    ctor = YARDJS::CodeObjects::PropertyObject.new(service, 'constructor')
+    ctor.property_type = :function
+    ctor.parameters = [['options', '{}']]
+    ctor.signature = "constructor(options = {})"
+    ctor.docstring = <<-eof
+Constructs a service object. This object has one method for each
+API operation.
+
+@example Constructing a #{klass} object
+  var #{klass.downcase} = new AWS.#{klass}({apiVersion: '#{api_version}'});
+
+@option options [String] endpoint The endpoint URI to send requests
+  to.  The default endpoint is built from the configured `region`.
+  The endpoint should be a string like `'https://{service}.{region}.amazonaws.com'`.
+@option (see AWS.Config.constructor)
+eof
+
+    # endpoint attribute
+    endpoint = YARDJS::CodeObjects::PropertyObject.new(service, 'endpoint')
+    endpoint.docstring = <<-eof
+@return [AWS.Endpoint] an Endpoint object representing the endpoint URL
+  for service requests.
+eof
+
   end
 
   def add_methods(service, klass, model)

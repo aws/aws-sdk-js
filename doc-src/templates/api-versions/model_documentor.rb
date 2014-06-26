@@ -60,22 +60,6 @@ AWS.config.apiVersions = {
 
 var #{klass.downcase} = new AWS.#{klass}();
 ```
-
-@!method constructor(options = {})
-  Constructs a service object. This object has one method for each
-  API operation.
-
-  @example Constructing a #{klass} object
-    var #{klass.downcase} = new AWS.#{klass}({apiVersion: '#{api_version}'});
-
-  @option options [String] endpoint The endpoint URI to send requests
-    to.  The default endpoint is built from the configured `region`.
-    The endpoint should be a string like `'https://s3.amazonaws.com'`.
-  @option (see AWS.Config.constructor)
-
-@!attribute endpoint
-  @return [AWS.Endpoint] an Endpoint object representing the endpoint URL
-    for service requests.
 DOCS
   end
 
