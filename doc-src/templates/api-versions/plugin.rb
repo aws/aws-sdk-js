@@ -23,9 +23,15 @@ end
 
 module YARD::Registry
   class << self
+    @@parsed_apis = false
+
     def register_aws(object)
       register_without_aws(object)
-      ApiDocumentor.new(object).run if object.path == 'AWS'
+
+      if !@@parsed_apis && object.path == 'AWS'
+        @@parsed_apis = true
+        ApiDocumentor.new(object).run
+      end
     end
     alias register_without_aws register
     alias register register_aws
