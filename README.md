@@ -56,11 +56,10 @@ The SDK currently supports the following services:
     <th>API Version</th>
   </thead>
   <tbody>
-    <tr><td rowspan="2">Amazon CloudFront</td><td rowspan="2">AWS.CloudFront</td><td>2012-05-05</td></tr>
-    <tr><td>2013-11-11</td></tr>
+    <tr><td>Amazon CloudFront</td><td>AWS.CloudFront</td><td>2014-05-31</td></tr>
     <tr><td rowspan="2">Amazon CloudSearch</td><td rowspan="2">AWS.CloudSearch</td><td>2011-02-01</td></tr>
     <tr><td>2013-01-01</td></tr>
-    <tr><td>Amazon CloudSearch Domain</td><td>2013-01-01</td></tr>
+    <tr><td>Amazon CloudSearch Domain</td><td>AWS.CloudSearchDomain</td><td>2013-01-01</td></tr>
     <tr><td>Amazon CloudWatch</td><td>AWS.CloudWatch</td><td>2010-08-01</td></tr>
     <tr><td rowspan="2">Amazon DynamoDB</td><td rowspan="2">AWS.DynamoDB</td><td>2011-12-05</td></tr>
     <tr><td>2012-08-10</td></tr>
@@ -79,7 +78,7 @@ The SDK currently supports the following services:
     <tr><td>Amazon Simple Notification Service</td><td>AWS.SNS</td><td>2010-03-31</td></tr>
     <tr><td>Amazon Simple Queue Service</td><td>AWS.SQS</td><td>2012-11-05</td></tr>
     <tr><td>Amazon Simple Storage Service</td><td>AWS.S3</td><td>2006-03-01</td></tr>
-    <tr><td>Amazon Simple Workflow Service</td><td>AWS.SimpleWorkflow</td><td>2012-01-25</td></tr>
+    <tr><td>Amazon Simple Workflow Service</td><td>AWS.SWF</td><td>2012-01-25</td></tr>
     <tr><td>Amazon SimpleDB</td><td>AWS.SimpleDB</td><td>2009-04-15</td></tr>
     <tr><td>Auto Scaling</td><td>AWS.AutoScaling</td><td>2011-01-01</td></tr>
     <tr><td>AWS CloudFormation</td><td>AWS.CloudFormation</td><td>2010-05-15</td></tr>
@@ -91,8 +90,7 @@ The SDK currently supports the following services:
     <tr><td>AWS Import/Export</td><td>AWS.ImportExport</td><td>2010-06-01</td></tr>
     <tr><td>AWS OpsWorks</td><td>AWS.OpsWorks</td><td>2013-02-18</td></tr>
     <tr><td>AWS Security Token Service</td><td>AWS.STS</td><td>2011-06-15</td></tr>
-    <tr><td rowspan="2">AWS Storage Gateway</td><td rowspan="2">AWS.StorageGateway</td><td>2012-06-30</td></tr>
-    <tr><td>2013-06-30</td></tr>
+    <tr><td>AWS Storage Gateway</td><td>AWS.StorageGateway</td><td>2013-06-30</td></tr>
     <tr><td>AWS Support</td><td>AWS.Support</td><td>2013-04-15</td></tr>
     <tr><td>Elastic Load Balancing</td><td>AWS.ELB</td><td>2012-06-01</td></tr>
   </tbody>
