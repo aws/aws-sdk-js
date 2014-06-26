@@ -60,6 +60,7 @@ The SDK currently supports the following services:
     <tr><td>2013-11-11</td></tr>
     <tr><td rowspan="2">Amazon CloudSearch</td><td rowspan="2">AWS.CloudSearch</td><td>2011-02-01</td></tr>
     <tr><td>2013-01-01</td></tr>
+    <tr><td>Amazon CloudSearch Domain</td><td>2013-01-01</td></tr>
     <tr><td>Amazon CloudWatch</td><td>AWS.CloudWatch</td><td>2010-08-01</td></tr>
     <tr><td rowspan="2">Amazon DynamoDB</td><td rowspan="2">AWS.DynamoDB</td><td>2011-12-05</td></tr>
     <tr><td>2012-08-10</td></tr>

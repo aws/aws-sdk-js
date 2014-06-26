@@ -61,7 +61,10 @@ try {
 
 // load services as defined instances
 for (var key in AWS) {
-  if (AWS[key].serviceIdentifier) {
+  var id = AWS[key].serviceIdentifier;
+  if (id) {
+    if (id === 'cloudsearchdomain') continue; // this required an explicit endpoint
+
     var svcClass = AWS[key];
     var svc = new svcClass(defaultOptions);
     svc.with = function(config) {

@@ -16,6 +16,7 @@ The supported services are:
 * [AWS.CloudFormation](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/CloudFormation.html)
 * [AWS.CloudFront](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/CloudFront.html)
 * [AWS.CloudSearch](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/CloudSearch.html)
+* [AWS.CloudSearchDomain](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/CloudSearchDomain.html)
 * [AWS.DataPipeline](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/DataPipeline.html)
 * [AWS.DirectConnect](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/DirectConnect.html)
 * [AWS.DynamoDB](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/DynamoDB.html)
