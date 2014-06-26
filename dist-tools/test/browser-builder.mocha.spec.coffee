@@ -15,7 +15,7 @@ describe 'Builder', ->
       code = builder.serviceCode.join('\n')
 
     assertServiceAdded = (klass, version) ->
-      version = version || new helpers.AWS[klass]().api.apiVersion;
+      version = version || new helpers.AWS[klass](endpoint: 'localhost').api.apiVersion;
       expect(code).to.match(new RegExp('AWS\\.' + klass +
         ' = AWS\\.Service\\.defineService\\(\'' +
         helpers.AWS[klass].serviceIdentifier + '\''))

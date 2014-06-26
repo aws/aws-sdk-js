@@ -122,7 +122,7 @@ DefaultStrategy.prototype.getService = function(service, version) {
 
   try {
     var ClassName = this.serviceClasses[service];
-    svc = new ClassName({apiVersion: version});
+    svc = new ClassName({apiVersion: version, endpoint: 'localhost'});
     api = this.apis.load(service, svc.api.apiVersion);
   } catch (e) {
     return null;
