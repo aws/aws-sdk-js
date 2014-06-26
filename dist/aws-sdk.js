@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.0.3
+// AWS SDK for JavaScript v2.0.4
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -3849,7 +3849,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.0.3',
+  VERSION: '2.0.4',
 
 
   Signers: {},
@@ -4138,6 +4138,7 @@ AWS.EventListeners = {
   Core: new SequentialExecutor().addNamedListeners(function(add, addAsync) {
     addAsync('VALIDATE_CREDENTIALS', 'validate',
         function VALIDATE_CREDENTIALS(req, done) {
+      if (!req.service.api.signatureVersion) return done(); // none
       req.service.config.getCredentials(function(err) {
         if (err) {
           req.response.err = AWS.util.error(err,
@@ -5220,7 +5221,8 @@ function TimestampShape(shape) {
   this.toType = function(value) {
     if (value === null || value === undefined) return null;
     if (typeof value.toUTCString === 'function') return value;
-    return typeof value === 'string' ? util.date.parseTimestamp(value) : null;
+    return typeof value === 'string' || typeof value === 'number' ?
+           util.date.parseTimestamp(value) : null;
   };
 
   this.toWireFormat = function(value) {
@@ -8044,7 +8046,9 @@ var util = {
     },
 
     parseTimestamp: function parseTimestamp(value) {
-      if (value.match(/^\d+$/)) { // unix timestamp
+      if (typeof value === 'number') { // unix timestamp (number)
+        return new Date(value);
+      } else if (value.match(/^\d+$/)) { // unix timestamp
         return new Date(value * 1000);
       } else if (value.match(/^\d{4}/)) { // iso8601
         return new Date(value);
