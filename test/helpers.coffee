@@ -60,18 +60,20 @@ mockHttpSuccessfulResponse = (status, headers, data, cb) ->
   httpResp = new EventEmitter()
   httpResp.statusCode = status
   httpResp.headers = headers
-  httpResp.read = ->
-    if data.length > 0
-      chunk = data.shift()
-      if chunk is null
-        null
-      else
-        new Buffer(chunk)
-    else
-      null
 
   cb(httpResp)
   httpResp.emit('headers', status, headers)
+
+  if AWS.util.isNode() && httpResp._events.readable
+    httpResp.read = ->
+      if data.length > 0
+        chunk = data.shift()
+        if chunk is null
+          null
+        else
+          new Buffer(chunk)
+      else
+        null
 
   AWS.util.arrayEach data.slice(), (str) ->
     if AWS.util.isNode() && (httpResp._events.readable || semver.gt(process.version, 'v0.11.3'))
