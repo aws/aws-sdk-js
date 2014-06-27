@@ -7,8 +7,8 @@ describe 'AWS.Model.Shape', ->
       it 'converts unix timestamps', ->
         api = new AWS.Model.Api metadata: timestampFormat: 'unixTimestamp'
         shape = AWS.Model.Shape.create { type: 'timestamp' }, { api: api }
-        date = shape.toType('Thu, 01 Jan 1970 00:00:00 GMT')
-        expect(date).toEqual(new Date(0))
+        date = shape.toType(12300)
+        expect(date).toEqual(new Date(12300000))
 
       it 'converts iso8601 timestamps', ->
         api = new AWS.Model.Api metadata: timestampFormat: 'iso8601'
@@ -19,5 +19,5 @@ describe 'AWS.Model.Shape', ->
       it 'converts rfc822 timestamps', ->
         api = new AWS.Model.Api metadata: timestampFormat: 'rfc822'
         shape = AWS.Model.Shape.create { type: 'timestamp' }, { api: api }
-        date = shape.toType(12300)
-        expect(date).toEqual(new Date(12300))
+        date = shape.toType('Thu, 01 Jan 1970 00:00:00 GMT')
+        expect(date).toEqual(new Date(0))
