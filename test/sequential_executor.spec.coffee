@@ -85,6 +85,14 @@ describe 'AWS.SequentialExecutor', ->
     it 'stops emitting if error is returned', ->
       list = []
       @emitter.on 'event1', -> list.push(1)
+      @emitter.on 'event1', -> list.push(2); throw new Error('error')
+      @emitter.on 'event1', -> list.push(3)
+      expect(=> @emitter.emit 'event1').toThrow('error')
+      expect(list).toEqual([1,2])
+
+    it 'stops emitting if error is returned (async)', ->
+      list = []
+      @emitter.on 'event1', -> list.push(1)
       @emitter.onAsync 'event1', (err, done) -> list.push(2); done('ERROR')
       @emitter.on 'event1', -> list.push(3)
       @emitter.emit 'event1', [null], (err) ->
