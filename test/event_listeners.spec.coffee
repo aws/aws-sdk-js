@@ -52,17 +52,20 @@ describe 'AWS.EventListeners', ->
       expect(response.error).toEqual("ERROR")
 
     it 'sends error event if credentials are not set', ->
-      errorHandler = jasmine.createSpy('errorHandler')
-      request = makeRequest()
-      request.on('error', errorHandler)
-
       service.config.credentialProvider = null
       service.config.credentials.accessKeyId = null
-      request.send(->)
+      makeRequest(->)
 
+      expect(errorHandler).toHaveBeenCalled()
+      AWS.util.arrayEach errorHandler.calls, (call) ->
+        expect(call.args[0] instanceof Error).toBeTruthy()
+        expect(call.args[0].code).toEqual('CredentialsError')
+        expect(call.args[0].message).toMatch(/Missing credentials/)
+
+    it 'sends error event if credentials are not set', ->
       service.config.credentials.accessKeyId = 'akid'
       service.config.credentials.secretAccessKey = null
-      request.send(->)
+      makeRequest(->)
 
       expect(errorHandler).toHaveBeenCalled()
       AWS.util.arrayEach errorHandler.calls, (call) ->
@@ -416,8 +419,8 @@ describe 'AWS.EventListeners', ->
         helpers.mockHttpResponse 200, {}, []
         expect(-> (makeRequest -> invalidCode)).toThrow()
         expect(completeHandler).toHaveBeenCalled()
-        expect(errorHandler).toHaveBeenCalled()
-        expect(retryHandler).toHaveBeenCalled()
+        expect(errorHandler).not.toHaveBeenCalled()
+        expect(retryHandler).not.toHaveBeenCalled()
 
       ['error', 'complete'].forEach (evt) ->
         it 'raise exceptions from terminal ' + evt + ' events', ->
@@ -432,6 +435,7 @@ describe 'AWS.EventListeners', ->
           result = false
           d = require('domain').create()
           if d.run
+            d.enter()
             d.on('error', (e) -> result = e)
             d.run ->
               helpers.mockHttpResponse 200, {}, []
@@ -441,17 +445,20 @@ describe 'AWS.EventListeners', ->
               expect(completeHandler).toHaveBeenCalled()
               expect(retryHandler).not.toHaveBeenCalled()
               expect(result.name).toEqual('ReferenceError')
+              d.exit()
 
         it 'does not leak service error into domain', ->
           result = false
           d = require('domain').create()
           if d.run
             d.on('error', (e) -> result = e)
+            d.enter()
             d.run ->
               helpers.mockHttpResponse 500, {}, []
               makeRequest().send()
               expect(completeHandler).toHaveBeenCalled()
               expect(result).toEqual(false)
+              d.exit()
 
         it 'supports inner domains', ->
           helpers.mockHttpResponse 200, {}, []
@@ -465,9 +472,11 @@ describe 'AWS.EventListeners', ->
           outerDomain.on 'error', -> gotOuterError = true
 
           if outerDomain.run
+            outerDomain.enter()
             outerDomain.run ->
               request = makeRequest()
               innerDomain = Domain.create()
+              innerDomain.enter()
               innerDomain.add(request)
               innerDomain.on 'error', -> gotInnerError = true
 
@@ -480,3 +489,5 @@ describe 'AWS.EventListeners', ->
                 expect(gotInnerError).toEqual(true)
                 expect(err.domainThrown).toEqual(false)
                 expect(err.domain).toEqual(innerDomain)
+                innerDomain.exit()
+                outerDomain.exit()

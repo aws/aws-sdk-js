@@ -9,6 +9,31 @@ describe 'AWS.Request', ->
   beforeEach ->
     service = new MockService
 
+  describe 'error handling', ->
+    it 'throws errors out of callback', ->
+      helpers.mockHttpResponse 200, {}, ''
+      expect(->
+        service.makeRequest 'mockMethod', ->
+          throw new Error('error')
+      ).toThrow('error')
+
+    for evt in ['error', 'success', 'complete']
+      it 'throws errors out of terminal ' + evt + ' event', ->
+        helpers.mockHttpResponse 200, {}, ''
+        expect(->
+          req = service.makeRequest('mockMethod')
+          req.on evt, -> throw new Error('error')
+          req.send()
+        ).toThrow('error')
+
+    it 'propagates errors to error event', ->
+      helpers.mockHttpResponse 200, {}, ''
+      expect(->
+        req = service.makeRequest('mockMethod')
+        req.on 'extractData', -> throw new Error('error')
+        req.send()
+      ).not.toThrow('error')
+
   describe 'isPageable', ->
     beforeEach ->
       service = new AWS.Service apiConfig: new AWS.Model.Api
