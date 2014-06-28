@@ -28,11 +28,13 @@ describe 'AWS.Request', ->
 
     it 'propagates errors to error event', ->
       helpers.mockHttpResponse 200, {}, ''
+      err = null
       expect(->
         req = service.makeRequest('mockMethod')
         req.on 'extractData', -> throw new Error('error')
-        req.send()
+        req.send((e) -> err = e)
       ).not.toThrow('error')
+      expect(err.message).toEqual('error')
 
   describe 'isPageable', ->
     beforeEach ->
