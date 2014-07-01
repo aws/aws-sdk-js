@@ -31,4 +31,42 @@ module.exports = function() {
     var params = {DBSecurityGroupName: this.dbGroupName};
     this.request(null, 'deleteDBSecurityGroup', params, callback);
   });
+
+  this.Given(/^I paginate the "([^"]*)" operation asynchronously with limit (\d+)$/, function (operation, limit, callback) {
+    var maxPages = 3;
+    limit = parseInt(limit);
+
+    var world = this;
+    this.numPages = 0;
+    this.numMarkers = 0
+    this.operation = operation;
+    this.paginationConfig = this.service.paginationConfig(operation);
+    this.params = this.params || {};
+    this.finishedPagination = false;
+
+    var marker = this.paginationConfig.outputToken;
+    if (this.paginationConfig.limitKey) {
+      this.params[this.paginationConfig.limitKey] = limit;
+    }
+    this.service[operation](this.params).eachPage(function (err, data, done) {
+      process.nextTick(function() {
+        if (err) callback.fail(err);
+        else if (data === null || world.numPages === maxPages) {
+          world.finishedPagination = true;
+          callback();
+        } else {
+          if (data[marker]) world.numMarkers++;
+          world.numPages++;
+          world.data = data;
+        }
+
+        done(); // start getting next page
+      });
+    });
+  });
+
+  this.Then(/^I should be able to asynchronously paginate all pages$/, function (callback) {
+    this.assert.equal(this.finishedPagination, true);
+    callback();
+  });
 };
