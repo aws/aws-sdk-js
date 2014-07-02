@@ -50,6 +50,70 @@ describe 'AWS.Request', ->
     it 'is not pageable if the pagination config does not exist for the operation', ->
       expect(service.makeRequest('mockMethod').isPageable()).toEqual(false)
 
+  describe 'eachPage', ->
+    beforeEach ->
+      service = new AWS.Service apiConfig: new AWS.Model.Api
+        operations:
+          mockMethod:
+            input:
+              type: 'structure'
+              members:
+                NextToken: type: 'string'
+            output:
+              type: 'structure'
+              members:
+                NextToken: type: 'string'
+                Value: type: 'integer'
+        paginators:
+          mockMethod:
+            input_token: 'NextToken'
+            output_token: 'NextToken'
+
+      helpers.mockResponses service, [
+        {data: {Value: 1, NextToken: 'a'}},
+        {data: {Value: 2, NextToken: 'b'}},
+        {data: {Value: 3, NextToken: 'c'}},
+        {data: {Value: 4}}
+      ]
+
+    it 'can page multiple responses', ->
+      resps = []
+      runs ->
+        service.mockMethod().eachPage (err, data) ->
+          resps.push([err, data])
+      waitsFor -> resps.length > 3
+      runs ->
+        expect(resps).toEqual [
+          [null, {Value: 1, NextToken: 'a'}],
+          [null, {Value: 2, NextToken: 'b'}],
+          [null, {Value: 3, NextToken: 'c'}],
+          [null, {Value: 4}],
+          [null, null]
+        ]
+
+    it 'supports asynchronous eachPage calls', ->
+      resps = []
+      runs ->
+        service.mockMethod().eachPage (err, data, done) ->
+          process.nextTick ->
+            resps.push([err, data])
+            done()
+      waitsFor -> resps.length > 3
+      runs ->
+        expect(resps).toEqual [
+          [null, {Value: 1, NextToken: 'a'}],
+          [null, {Value: 2, NextToken: 'b'}],
+          [null, {Value: 3, NextToken: 'c'}],
+          [null, {Value: 4}],
+          [null, null]
+        ]
+
+    it 'throws error from eachPage callback', ->
+      try
+        service.mockMethod().eachPage -> invalidCode
+      catch e
+        expect(e.name).toEqual('ReferenceError')
+
   describe 'waitFor', ->
     it 'creates a ResourceWaiter object', ->
       service.api.waiters = state: operation: 'mockMethod'
