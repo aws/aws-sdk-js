@@ -7,18 +7,13 @@ describe 'AWS.SQS', ->
     sqs = new AWS.SQS params: QueueUrl: 'http://url'
 
   checksumValidate = (operation, input, response, shouldPass, cb) ->
-    output = null
     helpers.mockHttpResponse 200, {}, response
-    runs ->
-      sqs[operation](input, (e, d) -> output = error: e, data: d)
-    waitsFor -> output
-    runs ->
+    sqs[operation](input).send (err, data) ->
       if shouldPass
-        expect(output.error).toEqual(null)
+        expect(err).toEqual(null)
       else
-        expect(output.error).not.toEqual(null)
-      if cb
-        cb(output.error, output.data)
+        expect(err).not.toEqual(null)
+      cb(err, data)
 
   describe 'buildEndpoint', ->
     it 'should detect correct region from QueueUrl', ->
@@ -41,18 +36,20 @@ describe 'AWS.SQS', ->
       </SendMessageResult></SendMessageResponse>
       """
 
-    it 'correctly validates MD5 of message input', ->
+    it 'correctly validates MD5 of message input', (done) ->
       checksumValidate 'sendMessage', input, payload(md5), true, (err, data) ->
         expect(data.MD5OfMessageBody).toEqual(md5)
+        done()
 
-    it 'raises InvalidChecksum if MD5 does not match message input', ->
+    it 'raises InvalidChecksum if MD5 does not match message input', (done) ->
       checksumValidate 'sendMessage', input, payload('000'), false, (err) ->
         expect(err.message).toMatch('Got "000", expecting "acbd18db4cc2f85cedef654fccc4a4d8"')
         expect(err.messageIds).toEqual(['MSGID'])
+        done()
 
-    it 'ignores checksum errors if computeChecksums is false', ->
+    it 'ignores checksum errors if computeChecksums is false', (done) ->
       sqs.config.computeChecksums = false
-      checksumValidate 'sendMessage', input, payload('000'), true
+      checksumValidate 'sendMessage', input, payload('000'), true, -> done()
 
   describe 'sendMessageBatch', ->
     input = Entries: [
@@ -83,23 +80,25 @@ describe 'AWS.SQS', ->
       </SendMessageBatchResult></SendMessageBatchResponse>
       """
 
-    it 'correctly validates MD5 of operation', ->
+    it 'correctly validates MD5 of operation', (done) ->
       output = payload(md5foo, md5bar, md5bar)
       checksumValidate 'sendMessageBatch', input, output, true, (err, data) ->
         expect(data.Successful[0].MD5OfMessageBody).toEqual(md5foo)
         expect(data.Successful[1].MD5OfMessageBody).toEqual(md5bar)
         expect(data.Successful[2].MD5OfMessageBody).toEqual(md5bar)
+        done()
 
-    it 'raises InvalidChecksum with relevent message IDs', ->
+    it 'raises InvalidChecksum with relevent message IDs', (done) ->
       output = payload('000', md5bar, '000')
       checksumValidate 'sendMessageBatch', input, output, false, (err, data) ->
         expect(err.message).toMatch('Invalid messages: a, c')
         expect(err.messageIds).toEqual(['MSGID1', 'MSGID3'])
+        done()
 
-    it 'ignores checksum errors if computeChecksums is false', ->
+    it 'ignores checksum errors if computeChecksums is false', (done) ->
       output = payload(md5foo, '000', md5bar)
       sqs.config.computeChecksums = false
-      checksumValidate 'sendMessageBatch', input, output, true
+      checksumValidate 'sendMessageBatch', input, output, true, -> done()
 
   describe 'receiveMessage', ->
     md5 = 'acbd18db4cc2f85cedef654fccc4a4d8'
@@ -112,19 +111,22 @@ describe 'AWS.SQS', ->
       </Message></ReceiveMessageResult></ReceiveMessageResponse>
       """
 
-    it 'correctly validates MD5 of operation', ->
+    it 'correctly validates MD5 of operation', (done) ->
       output = payload('foo', md5, 'MSGID')
       checksumValidate 'receiveMessage', {}, output, true, (err, data) ->
         expect(data.Messages[0].MD5OfBody).toEqual(md5)
+        done()
 
-    it 'raises InvalidChecksum with relevent message IDs', ->
+    it 'raises InvalidChecksum with relevent message IDs', (done) ->
       output = payload('foo', '000', 'MSGID')
       checksumValidate 'receiveMessage', {}, output, false, (err, data) ->
         expect(err.message).toMatch('Invalid messages: MSGID')
         expect(err.messageIds).toEqual(['MSGID'])
+        done()
 
-    it 'ignores checksum errors if computeChecksums is false', ->
+    it 'ignores checksum errors if computeChecksums is false', (done) ->
       output = payload('foo', '000', 'MSGID')
       sqs.config.computeChecksums = false
       checksumValidate 'receiveMessage', {}, output, true, (err, data) ->
         expect(data.Messages[0].MD5OfBody).not.toEqual(md5)
+        done()

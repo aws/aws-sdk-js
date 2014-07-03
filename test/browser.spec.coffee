@@ -40,10 +40,7 @@ noError = (err) -> expect(err).toEqual(null)
 integration = (label, fn) ->
   if label.match(/\(no phantomjs\)/) and navigator.userAgent.match(/phantomjs/i)
     return
-  it label, ->
-    done = false
-    runs -> fn(-> done = true)
-    waitsFor -> done == true
+  it(label, fn)
 
 integrationTests = (fn) ->
   if config.accessKeyId and AWS.util.isBrowser()
@@ -51,40 +48,31 @@ integrationTests = (fn) ->
 
 integrationTests ->
   describe 'Request.abort', ->
-    it 'can abort a request', ->
-      err = null
-      done = null
-      runs ->
-        req = s3.putObject Key: 'key', Body: 'body'
-        req.on 'complete', (resp) -> done = true; err = resp.error
-        req.on 'send', (resp) -> resp.request.abort()
-        req.send()
-      waitsFor -> done
-      runs ->
+    it 'can abort a request', (done) ->
+      req = s3.putObject Key: 'key', Body: 'body'
+      req.on 'send', (resp) -> resp.request.abort()
+      req.send (err) ->
         expect(err.name).toEqual('RequestAbortedError')
+        done()
 
   describe 'XHR', ->
     it 'does not emit http events if networking issue occurs', ->
       err = null
-      done = null
       httpHeaders = false; httpData = false; httpError = false; httpDone = false
-      runs ->
-        svc = new AWS.S3(accessKeyId: 'akid', secretAccessKey: 'secret', maxRetries: 0)
-        date = AWS.util.date.iso8601().replace(/[^0-9]/g,'')
-        req = svc.getObject(Bucket:'invalidbucket' + date, Key: 'foo')
-        req.on 'httpHeaders', -> httpHeaders = true
-        req.on 'httpData', -> httpData = true
-        req.on 'httpDone', -> httpDone = true
-        req.on 'httpError', -> httpError = true
-        req.on 'complete', (resp) -> done = true; err = resp.error
-        req.send()
-      waitsFor -> done
-      runs ->
+      svc = new AWS.S3(accessKeyId: 'akid', secretAccessKey: 'secret', maxRetries: 0)
+      date = AWS.util.date.iso8601().replace(/[^0-9]/g,'')
+      req = svc.getObject(Bucket:'invalidbucket' + date, Key: 'foo')
+      req.on 'httpHeaders', -> httpHeaders = true
+      req.on 'httpData', -> httpData = true
+      req.on 'httpDone', -> httpDone = true
+      req.on 'httpError', -> httpError = true
+      req.send (err) ->
         expect(httpHeaders).toEqual(false)
         expect(httpData).toEqual(false)
         expect(httpDone).toEqual(false)
         expect(httpError).toEqual(true)
         expect(err.name).toEqual('NetworkingError')
+        done()
 
     integration 'can send synchronous requests (no phantomjs)', (done) ->
       key = uniqueName('test')

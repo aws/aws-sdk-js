@@ -460,10 +460,9 @@ describe 'AWS.EventListeners', ->
               expect(result).toEqual(false)
               d.exit()
 
-        it 'supports inner domains', ->
+        it 'supports inner domains', (done) ->
           helpers.mockHttpResponse 200, {}, []
 
-          done = false
           err = new ReferenceError()
           gotOuterError = false
           gotInnerError = false
@@ -478,16 +477,15 @@ describe 'AWS.EventListeners', ->
               innerDomain = Domain.create()
               innerDomain.enter()
               innerDomain.add(request)
-              innerDomain.on 'error', -> gotInnerError = true
-
-              runs ->
-                request.send ->
-                  innerDomain.run -> done = true; throw err
-              waitsFor -> done
-              runs ->
+              innerDomain.on 'error', ->
+                gotInnerError = true
                 expect(gotOuterError).toEqual(false)
                 expect(gotInnerError).toEqual(true)
                 expect(err.domainThrown).toEqual(false)
-                expect(err.domain).toEqual(innerDomain)
+                expect(err.domain).toBe(innerDomain)
                 innerDomain.exit()
                 outerDomain.exit()
+                done()
+
+              request.send ->
+                  innerDomain.run -> throw err

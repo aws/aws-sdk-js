@@ -57,16 +57,13 @@ describe 'AWS.Response', ->
       fill(new Error('error!'), null, true)
       expect(-> response.nextPage()).toThrow('error!')
 
-    it 'sends the request if passed with a callback', ->
-      err = null; data = null
+    it 'sends the request if passed with a callback', (done) ->
       helpers.mockHttpResponse 200, {}, ['']
       fill(null, Marker: 'next_page', true)
-      runs ->
-        response.nextPage (e, d) -> err = e; data = d
-      waitsFor -> err || data
-      runs ->
+      response.nextPage (err, data) ->
         expect(err).toEqual(null)
         expect(data).toEqual({})
+        done()
 
     it 'passes null to callback if there are no more pages', ->
       fill(null, {}, true)

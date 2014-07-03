@@ -14,27 +14,17 @@ if AWS.util.isNode()
         expect(https.globalAgent.maxSockets).toEqual(agent.maxSockets)
 
     describe 'handleRequest', ->
-      it 'emits error event', ->
-        error = null
+      it 'emits error event', (done) ->
         req = new AWS.HttpRequest 'http://invalid'
-        runs ->
-          http.handleRequest req, {}, null, (err) ->
-            error = err
-        waitsFor -> error
-        runs ->
-          expect(error.code).toEqual 'ENOTFOUND'
+        http.handleRequest req, {}, null, (err) ->
+          expect(err.code).toEqual 'ENOTFOUND'
+          done()
 
       it 'supports timeout in httpOptions', ->
-        error = null
         numCalls = 0
         req = new AWS.HttpRequest 'http://1.1.1.1'
-        runs ->
-          http.handleRequest req, {timeout: 1}, null, (err) ->
-            error = err
-            numCalls += 1
-
-        waitsFor((-> error), 'Timed out', 100)
-        runs ->
-          expect(error.code).toEqual 'TimeoutError'
-          expect(error.message).toEqual 'Connection timed out after 1ms'
+        http.handleRequest req, {timeout: 1}, null, (err) ->
+          numCalls += 1
+          expect(err.code).toEqual 'TimeoutError'
+          expect(err.message).toEqual 'Connection timed out after 1ms'
           expect(numCalls).toEqual 1

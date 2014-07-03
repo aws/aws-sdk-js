@@ -495,13 +495,10 @@ describe 'AWS.S3', ->
       url = s3.getSignedUrl('getObject', Key: 'key', Expires: 60)
       expect(url).toEqual('https://bucket.foo.bar.baz:555/prefix/key?AWSAccessKeyId=akid&Expires=60&Signature=zA6k0cQqDkTZgLamfoYLOd%2Bqfg8%3D&x-amz-security-token=session')
 
-    it 'gets a signed URL with callback', ->
-      url = null
-      runs ->
-        s3.getSignedUrl 'getObject', Bucket: 'bucket', Key: 'key', (err, value) -> url = value
-      waitsFor -> url
-      runs ->
+    it 'gets a signed URL with callback', (done) ->
+      s3.getSignedUrl 'getObject', Bucket: 'bucket', Key: 'key', (err, url) ->
         expect(url).toEqual('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=4mlYnRmz%2BBFEPrgYz5tXcl9Wc4w%3D&x-amz-security-token=session')
+        done()
 
     it 'gets a signed URL for putObject with no body', ->
       url = s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key')
@@ -524,15 +521,13 @@ describe 'AWS.S3', ->
       url = s3.getSignedUrl('getObject', Bucket: 'bucket', Key: 'object')
       expect(url).toEqual('https://bucket.s3.amazonaws.com/object?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=900&X-Amz-Security-Token=session&X-Amz-Signature=05ae40d2d22c93549a1de0686232ff56baf556876ec497d0d8349431f98b8dfe&X-Amz-SignedHeaders=host')
 
-    it 'errors when expiry time is greater than a week out on SigV4', ->
+    it 'errors when expiry time is greater than a week out on SigV4', (done) ->
       err = null; data = null
       s3 = new AWS.S3(signatureVersion: 'v4', region: undefined)
       params = Bucket: 'bucket', Key: 'object', Expires: 60 * 60 * 24 * 7 + 120
       error = 'Presigning does not support expiry time greater than a week with SigV4 signing.'
-      runs ->
-        s3.getSignedUrl 'getObject', params, (e, d) -> data = d; err = e
-      waitsFor -> err || data
-      runs ->
+      s3.getSignedUrl 'getObject', params, (err, data) ->
         expect(err).not.toEqual(null)
         expect(err.message).toEqual(error)
         #expect(-> s3.getSignedUrl('getObject', params)).toThrow(error) # sync mode
+        done()

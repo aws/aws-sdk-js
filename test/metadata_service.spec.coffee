@@ -29,26 +29,20 @@ if AWS.util.isNode()
 
       afterEach -> server.close() if server
 
-      it 'should load credentials from metadata service', ->
-        [err, data] = [null, null]
-        runs ->
-          service.loadCredentials (e, d) -> [err, data] = [e, d]
-        waitsFor -> err || data
-        runs ->
+      it 'should load credentials from metadata service', (done) ->
+        service.loadCredentials (err, data) ->
           expect(err).toBe(null)
           expect(data.Code).toEqual('Success')
           expect(data.AccessKeyId).toEqual('KEY')
           expect(data.SecretAccessKey).toEqual('SECRET')
           expect(data.Token).toEqual('TOKEN')
+          done()
 
-      it 'should fail if server is not up', ->
+      it 'should fail if server is not up', (done) ->
         server.close(); server = null
         service = new AWS.MetadataService(host: '255.255.255.255')
         service.httpOptions.timeout = 10
-        [err, data] = [null, null]
-        runs ->
-          service.loadCredentials (e, d) -> [err, data] = [e, d]
-        waitsFor -> err || data
-        runs ->
+        service.loadCredentials (err, data) ->
           expect(err instanceof Error).toBe(true)
           expect(data).toEqual(null)
+          done()
