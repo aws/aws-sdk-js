@@ -310,3 +310,20 @@ describe 'AWS.Protocol.RestXml', ->
       expect(response.data.Foo).toEqual('foo')
       expect(response.data.Bar).toEqual('bar')
       expect(response.data.Baz).toEqual('Buffer data')
+
+    it 'parses headers when a payload is provided', ->
+      response.httpResponse.headers['x-amz-foo'] = 'foo'
+      defop output:
+        type: 'structure'
+        payload: 'Bar'
+        members:
+          Foo:
+            location: 'header'
+            locationName: 'x-amz-foo'
+          Bar:
+            type: 'structure'
+            members:
+              Baz: type: 'string'
+      extractData '<Bar><Baz>Buffer data</Baz></Bar>'
+      expect(response.data.Foo).toEqual('foo')
+      expect(response.data.Baz).toEqual('Buffer data')
