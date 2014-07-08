@@ -91,6 +91,21 @@ describe 'AWS.Request', ->
           [null, null]
         ]
 
+    it 'supports stopping responses if false is returned', ->
+      resps = []
+      runs ->
+        service.mockMethod().eachPage (err, data) ->
+          if resps.length == 2
+            return false
+          resps.push([err, data])
+          true
+      waitsFor -> resps.length == 2
+      runs ->
+        expect(resps).toEqual [
+          [null, {Value: 1, NextToken: 'a'}],
+          [null, {Value: 2, NextToken: 'b'}]
+        ]
+
     it 'supports asynchronous eachPage calls', ->
       resps = []
       runs ->
