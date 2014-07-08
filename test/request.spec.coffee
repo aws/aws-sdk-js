@@ -215,7 +215,7 @@ describe 'AWS.Request', ->
 
       it 'streams partial data and raises an error', (done) ->
         data = ''; error = null; reqError = null
-        spyOn(AWS.HttpClient, 'getInstance')
+        helpers.spyOn(AWS.HttpClient, 'getInstance')
         AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
           req = new EventEmitter()
           req.statusCode = 200
@@ -242,7 +242,7 @@ describe 'AWS.Request', ->
       it 'fails if retry occurs in the middle of a failing stream', (done) ->
         data = ''; error = null; reqError = null; resp = null
         retryCount = 0
-        spyOn(AWS.HttpClient, 'getInstance')
+        helpers.spyOn(AWS.HttpClient, 'getInstance')
         AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
           req = new EventEmitter()
           req.statusCode = 200

@@ -21,6 +21,42 @@ AWS.config.update
     secretAccessKey: 'secret'
     sessionToken: 'session'
 
+spies = null
+beforeEach ->
+  spies = []
+
+afterEach ->
+  while spies.length > 0
+    spy = spies.pop()
+    spy.object[spy.methodName] = spy.origMethod
+
+_createSpy = (name) ->
+  spy = ->
+    spy.calls.push
+      object: this
+      arguments: arguments
+    if spy.callFn
+      return spy.callFn.apply(spy.object, arguments)
+    if spy.shouldReturn
+      return spy.returnValue
+  spy.object = this
+  spy.methodName = name
+  spy.callFn = null
+  spy.shouldReturn = false
+  spy.returnValue = null
+  spy.calls = []
+  spy.andReturn = (value) -> spy.shouldReturn = true; spy.returnValue = value; spy
+  spy.andCallFake = (fn) -> spy.callFn = fn; spy
+  spy
+
+_spyOn = (obj, methodName) ->
+  spy = _createSpy.call(obj, methodName)
+  spy.origMethod = obj[methodName]
+  spy.andCallThrough = -> spy.callFn = spy.origMethod; spy
+  obj[methodName] = spy
+  spies.push(spy)
+  spy
+
 # Disable setTimeout for tests
 # Warning: this might cause unpredictable results
 # TODO: refactor this out.
@@ -89,7 +125,7 @@ mockHttpSuccessfulResponse = (status, headers, data, cb) ->
 mockHttpResponse = (status, headers, data) ->
   stream = new EventEmitter()
   stream.setMaxListeners(0)
-  spyOn(AWS.HttpClient, 'getInstance')
+  _spyOn(AWS.HttpClient, 'getInstance')
   AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
     if typeof status == 'number'
       mockHttpSuccessfulResponse status, headers, data, cb
@@ -101,7 +137,7 @@ mockHttpResponse = (status, headers, data) ->
 
 mockIntermittentFailureResponse = (numFailures, status, headers, data) ->
   retryCount = 0
-  spyOn(AWS.HttpClient, 'getInstance')
+  _spyOn(AWS.HttpClient, 'getInstance')
   AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
     if retryCount < numFailures
       retryCount += 1
@@ -113,7 +149,7 @@ mockIntermittentFailureResponse = (numFailures, status, headers, data) ->
 
 mockResponse = (svc, resp) ->
   addAll = svc.addAllRequestListeners
-  spyOn(svc, 'addAllRequestListeners').andCallFake (req) ->
+  _spyOn(svc, 'addAllRequestListeners').andCallFake (req) ->
     req.response.httpResponse.statusCode = 200
     addAll.call(svc, req)
     req.removeAllListeners('send')
@@ -125,7 +161,7 @@ mockResponse = (svc, resp) ->
 mockResponses = (svc, resps) ->
   index = 0
   addAll = svc.addAllRequestListeners
-  spyOn(svc, 'addAllRequestListeners').andCallFake (req) ->
+  _spyOn(svc, 'addAllRequestListeners').andCallFake (req) ->
     req.response.httpResponse.statusCode = 200
     addAll.call(svc, req)
     req.removeAllListeners('send')
@@ -140,6 +176,8 @@ mockResponses = (svc, resps) ->
 module.exports =
   AWS: AWS
   util: AWS.util
+  spyOn: _spyOn
+  createSpy: _createSpy
   matchXML: matchXML
   mockHttpResponse: mockHttpResponse
   mockIntermittentFailureResponse: mockIntermittentFailureResponse

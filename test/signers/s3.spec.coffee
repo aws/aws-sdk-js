@@ -1,4 +1,5 @@
-AWS = require('../helpers').AWS
+helpers = require('../helpers')
+AWS = helpers.AWS
 
 describe 'AWS.Signers.S3', ->
 
@@ -80,7 +81,7 @@ describe 'AWS.Signers.S3', ->
 
       signer = new AWS.Signers.S3(req)
 
-      spyOn(signer, 'stringToSign')
+      helpers.spyOn(signer, 'stringToSign')
       signer.stringToSign.andReturn('string-to-sign')
       signer.addAuthorization(creds, date)
 
@@ -94,7 +95,7 @@ describe 'AWS.Signers.S3', ->
 
       signer = new AWS.Signers.S3(req)
 
-      spyOn(signer, 'stringToSign')
+      helpers.spyOn(signer, 'stringToSign')
       signer.stringToSign.andReturn('!@#$%^&*();\':"{}[],./?`~')
       signer.addAuthorization(creds, date)
 

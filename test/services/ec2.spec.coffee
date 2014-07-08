@@ -15,7 +15,7 @@ describe 'AWS.EC2', ->
 
   describe 'copySnapshot', ->
     it 'generates PresignedUrl and DestinationRegion parameters', ->
-      spyOn(AWS.util.date, 'getDate').andReturn(new Date(0))
+      helpers.spyOn(AWS.util.date, 'getDate').andReturn(new Date(0))
       helpers.mockHttpResponse 200, {}, ''
       params = SourceRegion: 'src-region', SourceSnapshotId: 'snap-123456789'
       ec2.copySnapshot params, ->

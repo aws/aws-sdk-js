@@ -66,24 +66,24 @@ describe 'AWS.Credentials', ->
 
   describe 'get', ->
     it 'does not call refresh if not needsRefresh', ->
-      spy = jasmine.createSpy('done callback')
+      spy = helpers.createSpy('done callback')
       creds = new AWS.Credentials('akid', 'secret')
-      refresh = spyOn(creds, 'refresh')
+      refresh = helpers.spyOn(creds, 'refresh')
       creds.get(spy)
-      expect(refresh).not.toHaveBeenCalled()
-      expect(spy).toHaveBeenCalled()
-      expect(spy.argsForCall[0][0]).toEqual(null)
+      expect(refresh.calls.length).toEqual(0)
+      expect(spy.calls.length).not.toEqual(0)
+      expect(spy.calls[0].arguments[0]).toEqual(null)
       expect(creds.expired).toEqual(false)
 
     it 'calls refresh only if needsRefresh', ->
-      spy = jasmine.createSpy('done callback')
+      spy = helpers.createSpy('done callback')
       creds = new AWS.Credentials('akid', 'secret')
       creds.expired = true
-      refresh = spyOn(creds, 'refresh').andCallThrough()
+      refresh = helpers.spyOn(creds, 'refresh').andCallThrough()
       creds.get(spy)
-      expect(refresh).toHaveBeenCalled()
-      expect(spy).toHaveBeenCalled()
-      expect(spy.argsForCall[0][0]).toEqual(null)
+      expect(refresh.calls.length).not.toEqual(0)
+      expect(spy.calls.length).not.toEqual(0)
+      expect(spy.calls[0].arguments[0]).toEqual(null)
       expect(creds.expired).toEqual(false)
 
 if AWS.util.isNode()
@@ -121,14 +121,14 @@ if AWS.util.isNode()
     describe 'constructor', ->
       it 'should accept filename and load credentials from root doc', ->
         mock = '{"accessKeyId":"akid", "secretAccessKey":"secret","sessionToken":"session"}'
-        spyOn(AWS.util, 'readFileSync').andReturn(mock)
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
         creds = new AWS.FileSystemCredentials('foo')
         validateCredentials(creds)
 
       it 'should accept filename and load credentials from credentials block', ->
         mock = '{"credentials":{"accessKeyId":"akid", "secretAccessKey":"secret","sessionToken":"session"}}'
-        spy = spyOn(AWS.util, 'readFileSync').andReturn(mock)
+        spy = helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
         creds = new AWS.FileSystemCredentials('foo')
         validateCredentials(creds)
@@ -136,14 +136,14 @@ if AWS.util.isNode()
     describe 'refresh', ->
       it 'should refresh from given filename', ->
         mock = '{"credentials":{"accessKeyId":"RELOADED", "secretAccessKey":"RELOADED","sessionToken":"RELOADED"}}'
-        spyOn(AWS.util, 'readFileSync').andReturn(mock)
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
         creds = new AWS.FileSystemCredentials('foo')
         validateCredentials(creds, 'RELOADED', 'RELOADED', 'RELOADED')
 
       it 'fails if credentials are not in the file', ->
         mock = '{"credentials":{}}'
-        spyOn(AWS.util, 'readFileSync').andReturn(mock)
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
         new AWS.FileSystemCredentials('foo').refresh (err) ->
           expect(err.message).toEqual('Credentials not set in foo')
@@ -194,11 +194,11 @@ if AWS.util.isNode()
         aws_secret_access_key = secret
         aws_session_token = session
         '''
-        spyOn(AWS.util, 'readFileSync').andReturn(mock)
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
         creds = new AWS.SharedIniFileCredentials()
         validateCredentials(creds)
-        expect(AWS.util.readFileSync.calls[0].args[0]).toEqual('/home/user/.aws/credentials')
+        expect(AWS.util.readFileSync.calls[0].arguments[0]).toEqual('/home/user/.aws/credentials')
 
       it 'loads the default profile if AWS_PROFILE is empty', ->
         process.env.AWS_PROFILE = ''
@@ -208,7 +208,7 @@ if AWS.util.isNode()
         aws_secret_access_key = secret
         aws_session_token = session
         '''
-        spyOn(AWS.util, 'readFileSync').andReturn(mock)
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
         creds = new AWS.SharedIniFileCredentials()
         validateCredentials(creds)
@@ -220,7 +220,7 @@ if AWS.util.isNode()
         aws_secret_access_key = secret
         aws_session_token = session
         '''
-        spy = spyOn(AWS.util, 'readFileSync').andReturn(mock)
+        spy = helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
         creds = new AWS.SharedIniFileCredentials(profile: 'foo')
         validateCredentials(creds)
@@ -233,7 +233,7 @@ if AWS.util.isNode()
         aws_secret_access_key = secret
         aws_session_token = session
         '''
-        spy = spyOn(AWS.util, 'readFileSync').andReturn(mock)
+        spy = helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
         creds = new AWS.SharedIniFileCredentials()
         validateCredentials(creds)
@@ -248,14 +248,14 @@ if AWS.util.isNode()
         aws_secret_access_key = RELOADED
         aws_session_token = RELOADED
         '''
-        spyOn(AWS.util, 'readFileSync').andReturn(mock)
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
         creds = new AWS.SharedIniFileCredentials()
         validateCredentials(creds, 'RELOADED', 'RELOADED', 'RELOADED')
 
       it 'fails if credentials are not in the file', ->
         mock = ''
-        spyOn(AWS.util, 'readFileSync').andReturn(mock)
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
         new AWS.SharedIniFileCredentials().refresh (err) ->
           expect(err.message).toEqual('Credentials not set in /home/user/.aws/credentials using profile default')
@@ -270,7 +270,7 @@ if AWS.util.isNode()
       creds = new AWS.EC2MetadataCredentials(host: 'host')
 
     mockMetadataService = (expireTime) ->
-      spyOn(creds.metadataService, 'loadCredentials').andCallFake (cb) ->
+      helpers.spyOn(creds.metadataService, 'loadCredentials').andCallFake (cb) ->
           cb null,
             Code: 'Success'
             AccessKeyId: 'KEY'
@@ -299,7 +299,7 @@ if AWS.util.isNode()
         expect(creds.needsRefresh()).toEqual(false)
 
       it 'does try to load creds second time if Metadata service failed', ->
-        spy = spyOn(creds.metadataService, 'loadCredentials').andCallFake (cb) ->
+        spy = helpers.spyOn(creds.metadataService, 'loadCredentials').andCallFake (cb) ->
           cb(new Error('INVALID SERVICE'))
 
         creds.refresh (err) ->
@@ -322,7 +322,7 @@ describe 'AWS.TemporaryCredentials', ->
       operation = 'assumeRole'
     else
       operation = 'getSessionToken'
-    spyOn(creds.service, operation).andCallFake (params, cb) ->
+    helpers.spyOn(creds.service, operation).andCallFake (params, cb) ->
      expect(params).toEqual(inParams)
      cb null, Credentials:
        AccessKeyId: 'KEY'
@@ -375,7 +375,7 @@ describe 'AWS.TemporaryCredentials', ->
       expect(creds.needsRefresh()).toEqual(false)
 
     it 'does try to load creds second time if service request failed', ->
-      spy = spyOn(creds.service, 'getSessionToken').andCallFake (params, cb) ->
+      spy = helpers.spyOn(creds.service, 'getSessionToken').andCallFake (params, cb) ->
         cb(new Error('INVALID SERVICE'))
 
       creds.refresh (err) ->
@@ -392,7 +392,7 @@ describe 'AWS.WebIdentityCredentials', ->
     creds = new AWS.WebIdentityCredentials(WebIdentityToken: 'token', RoleArn: 'arn')
 
   mockSTS = (expireTime) ->
-    spyOn(creds.service, 'assumeRoleWithWebIdentity').andCallFake (params, cb) ->
+    helpers.spyOn(creds.service, 'assumeRoleWithWebIdentity').andCallFake (params, cb) ->
      expect(params).toEqual(RoleArn: 'arn', WebIdentityToken: 'token', RoleSessionName: 'web-identity')
      cb null,
        Credentials:
@@ -413,7 +413,7 @@ describe 'AWS.WebIdentityCredentials', ->
       expect(creds.data.OtherProperty).toEqual(true)
 
     it 'does try to load creds second time if service request failed', ->
-      spy = spyOn(creds.service, 'assumeRoleWithWebIdentity').andCallFake (params, cb) ->
+      spy = helpers.spyOn(creds.service, 'assumeRoleWithWebIdentity').andCallFake (params, cb) ->
         cb(new Error('INVALID SERVICE'))
 
       creds.refresh (err) ->
@@ -430,7 +430,7 @@ describe 'AWS.SAMLCredentials', ->
     creds = new AWS.SAMLCredentials(SAMLAssertion: 'token', RoleArn: 'arn', PrincipalArn: 'arn')
 
   mockSTS = (expireTime) ->
-    spyOn(creds.service, 'assumeRoleWithSAML').andCallFake (params, cb) ->
+    helpers.spyOn(creds.service, 'assumeRoleWithSAML').andCallFake (params, cb) ->
      expect(params).toEqual(SAMLAssertion: 'token', RoleArn: 'arn', PrincipalArn: 'arn')
      cb null, Credentials:
        AccessKeyId: 'KEY'
@@ -448,7 +448,7 @@ describe 'AWS.SAMLCredentials', ->
       expect(creds.needsRefresh()).toEqual(false)
 
     it 'does try to load creds second time if service request failed', ->
-      spy = spyOn(creds.service, 'assumeRoleWithSAML').andCallFake (params, cb) ->
+      spy = helpers.spyOn(creds.service, 'assumeRoleWithSAML').andCallFake (params, cb) ->
         cb(new Error('INVALID SERVICE'))
 
       creds.refresh (err) ->

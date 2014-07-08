@@ -92,7 +92,7 @@ describe 'AWS.S3', ->
         expect(req.path).toEqual('/?max-keys=123')
 
     describe 'adding Content-Type', ->
-      beforeEach -> spyOn(AWS.util, 'isBrowser').andReturn(true)
+      beforeEach -> helpers.spyOn(AWS.util, 'isBrowser').andReturn(true)
 
       it 'adds default content-type when not supplied', ->
         req = build('putObject', Bucket: 'bucket', Key: 'key', Body: 'body')

@@ -1,4 +1,5 @@
-AWS = require('./helpers').AWS
+helpers = require('./helpers')
+AWS = helpers.AWS
 Buffer = AWS.util.Buffer
 
 describe 'uriEscape', ->
@@ -51,7 +52,7 @@ describe 'AWS.util.queryParamsToString', ->
     expect(qpts(a: undefined, b: null)).toEqual('a&b')
 
   it 'calls uriEscape on each name and value', ->
-    spy = spyOn(AWS.util, 'uriEscape').andCallThrough()
+    spy = helpers.spyOn(AWS.util, 'uriEscape').andCallThrough()
     qpts(c: '1', b: '2', a: '3')
     expect(spy.calls.length).toEqual(6)
 
@@ -71,15 +72,15 @@ describe 'AWS.util.date', ->
   describe 'getDate', ->
     it 'should return current date by default', ->
       oldDate = Date; now = {}
-      mock = jasmine.createSpy().andReturn(now)
+      mock = helpers.createSpy().andReturn(now)
       `typeof window !== 'undefined' ? (window.Date = mock) : (Date = mock);`
-      expect(util.getDate()).toBe(now)
+      expect(util.getDate()).toEqual(now)
       `typeof window !== 'undefined' ? (window.Date = oldDate) : (Date = oldDate);`
 
   describe 'iso8601', ->
     it 'should return date formatted as YYYYMMDDTHHnnssZ', ->
       date = new Date(600000); date.setMilliseconds(0)
-      spyOn(util, 'getDate').andCallFake -> date
+      helpers.spyOn(util, 'getDate').andCallFake -> date
       expect(util.iso8601()).toEqual('1970-01-01T00:10:00.000Z')
 
     it 'should allow date parameter', ->
@@ -89,7 +90,7 @@ describe 'AWS.util.date', ->
   describe 'rfc822', ->
     it 'should return date formatted as YYYYMMDDTHHnnssZ', ->
       date = new Date(600000); date.setMilliseconds(0)
-      spyOn(util, 'getDate').andCallFake -> date
+      helpers.spyOn(util, 'getDate').andCallFake -> date
       expect(util.rfc822()).toMatch(/^Thu, 0?1 Jan 1970 00:10:00 (GMT|UTC)$/)
 
     it 'should allow date parameter', ->
@@ -99,7 +100,7 @@ describe 'AWS.util.date', ->
   describe 'unixTimestamp', ->
     it 'should return date formatted as unix timestamp', ->
       date = new Date(600000); date.setMilliseconds(0)
-      spyOn(util, 'getDate').andCallFake -> date
+      helpers.spyOn(util, 'getDate').andCallFake -> date
       expect(util.unixTimestamp()).toEqual(600)
 
     it 'should allow date parameter', ->
@@ -107,7 +108,7 @@ describe 'AWS.util.date', ->
       expect(util.unixTimestamp(date)).toEqual(660)
 
     it 'should return date formatted as unix timestamp with milliseconds', ->
-      spyOn(util, 'getDate').andCallFake -> new Date(600123)
+      helpers.spyOn(util, 'getDate').andCallFake -> new Date(600123)
       expect(util.unixTimestamp()).toEqual(600.123)
 
 describe 'AWS.util.string', ->
@@ -372,14 +373,14 @@ describe 'AWS.util.inherit', ->
 
   it 'should create pass-through constructor if not defined', ->
     Base = AWS.util.inherit
-      constructor: jasmine.createSpy()
+      constructor: helpers.createSpy()
 
     Derived = AWS.util.inherit Base,
       other: true
 
     derived = new Derived(1, 2, 'three')
     expect(derived.other).toEqual(true)
-    expect(Base.prototype.constructor).toHaveBeenCalledWith(1, 2, 'three')
+    expect(Base.prototype.constructor.calls[0].arguments).toEqual([1, 2, 'three'])
 
 describe 'AWS.util.mixin', ->
   it 'copies properties to other object prototype', ->

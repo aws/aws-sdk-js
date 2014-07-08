@@ -83,16 +83,16 @@ describe 'AWS.Config', ->
       expect(config.maxRetries).toEqual('DEFAULT')
 
     it 'should execute default value if it is a function', ->
-      mock = jasmine.createSpy()
+      mock = helpers.createSpy()
       config = new AWS.Config()
       config.set('maxRetries', undefined, mock)
-      expect(mock).toHaveBeenCalled()
+      expect(mock.calls.length).not.toEqual(0)
 
     it 'should not expand default value function if value is present', ->
-      mock = jasmine.createSpy()
+      mock = helpers.createSpy()
       config = new AWS.Config()
       config.set('maxRetries', 'VALUE', mock)
-      expect(mock).not.toHaveBeenCalled()
+      expect(mock.calls.length).toEqual(0)
 
   describe 'clear', ->
     it 'should be able to clear all key values from a config object', ->
@@ -139,7 +139,7 @@ describe 'AWS.Config', ->
     spy = null
     config = null
     beforeEach ->
-      spy = jasmine.createSpy('getCredentials callback')
+      spy = helpers.createSpy('getCredentials callback')
 
     expectValid = (options, key) ->
       if options instanceof AWS.Config
@@ -147,8 +147,8 @@ describe 'AWS.Config', ->
       else
         config = new AWS.Config(options)
       config.getCredentials(spy)
-      expect(spy).toHaveBeenCalled()
-      expect(spy.argsForCall[0][0]).toEqual(null)
+      expect(spy.calls.length).not.toEqual(0)
+      expect(spy.calls[0].arguments[0]).toEqual(null)
       if key
         expect(config.credentials.accessKeyId).toEqual(key)
 
@@ -158,9 +158,9 @@ describe 'AWS.Config', ->
       else
         config = new AWS.Config(options)
       config.getCredentials(spy)
-      expect(spy).toHaveBeenCalled()
-      expect(spy.argsForCall[0][0].code).toEqual('CredentialsError')
-      expect(spy.argsForCall[0][0].message).toEqual(message)
+      expect(spy.calls.length).not.toEqual(0)
+      expect(spy.calls[0].arguments[0].code).toEqual('CredentialsError')
+      expect(spy.calls[0].arguments[0].message).toEqual(message)
 
     it 'should check credentials for static object first', ->
       expectValid credentials: accessKeyId: '123', secretAccessKey: '456'

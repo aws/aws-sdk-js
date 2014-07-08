@@ -2,7 +2,7 @@ helpers = require('../helpers')
 AWS = helpers.AWS
 
 beforeEach ->
-  spyOn(AWS.util, 'userAgent').andReturn('aws-sdk-js/0.1')
+  helpers.spyOn(AWS.util, 'userAgent').andReturn('aws-sdk-js/0.1')
 
 buildRequest = ->
   ddb = new AWS.DynamoDB({region: 'region', endpoint: 'localhost', apiVersion: '2011-12-05'})
@@ -65,7 +65,7 @@ describe 'AWS.Signers.V4', ->
       calls = null
 
       beforeEach ->
-        spyOn(AWS.util.crypto, 'hmac')
+        helpers.spyOn(AWS.util.crypto, 'hmac')
         signer.signature(creds, datetime)
         calls = AWS.util.crypto.hmac.calls
         callCount = calls.length

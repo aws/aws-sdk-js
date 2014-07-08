@@ -162,9 +162,9 @@ describe 'AWS.Service', ->
     it 'does not send the request if a callback function is omitted', ->
       helpers.mockHttpResponse(200, {}, ['FOO', 'BAR'])
       httpClient = AWS.HttpClient.getInstance()
-      spyOn(httpClient, 'handleRequest')
+      helpers.spyOn(httpClient, 'handleRequest')
       new MockService().makeRequest('operation')
-      expect(httpClient.handleRequest).not.toHaveBeenCalled()
+      expect(httpClient.handleRequest.calls.length).toEqual(0)
 
     it 'allows parameter validation to be disabled in config', ->
       helpers.mockHttpResponse(200, {}, ['FOO', 'BAR'])
@@ -196,11 +196,11 @@ describe 'AWS.Service', ->
       it 'adds AWS.events listeners to requests', ->
         helpers.mockHttpResponse(200, {}, ['FOO', 'BAR'])
 
-        event = jasmine.createSpy()
+        event = helpers.createSpy()
         AWS.events.on('complete', event)
 
         new MockService().makeRequest('operation').send()
-        expect(event).toHaveBeenCalled()
+        expect(event.calls.length).not.toEqual(0)
 
   describe 'retryableError', ->
 

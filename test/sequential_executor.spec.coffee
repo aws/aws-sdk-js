@@ -41,13 +41,13 @@ describe 'AWS.SequentialExecutor', ->
 
   describe 'addNamedListener', ->
     it 'defines a constant with the callback', ->
-      spy = jasmine.createSpy()
+      spy = helpers.createSpy()
       @emitter.addNamedListener('CONSTNAME', 'eventName', spy)
       expect(@emitter.CONSTNAME).toBe(spy)
 
       # also verify that event is hooked up like normal
       @emitter.emit('eventName', ['argument'])
-      expect(spy).toHaveBeenCalledWith('argument')
+      expect(spy.calls[0].arguments).toEqual(['argument'])
 
     it 'is chainable', ->
       r = @emitter.addNamedListener('CONSTNAME', 'eventName', ->)
@@ -59,7 +59,7 @@ describe 'AWS.SequentialExecutor', ->
       expect(r).toBe(@emitter)
 
     it 'provides an add function in callback to call addNamedListener', ->
-      spy1 = jasmine.createSpy(); spy2 = jasmine.createSpy()
+      spy1 = helpers.createSpy(); spy2 = helpers.createSpy()
       @emitter.addNamedListeners (add) ->
         add('CONST1', 'event1', spy1)
         add('CONST2', 'event2', spy2)
@@ -70,8 +70,8 @@ describe 'AWS.SequentialExecutor', ->
       @emitter.emit('event1', ['arg1'])
       @emitter.emit('event2', ['arg2'])
 
-      expect(spy1).toHaveBeenCalledWith('arg1')
-      expect(spy2).toHaveBeenCalledWith('arg2')
+      expect(spy1.calls[0].arguments).toEqual(['arg1'])
+      expect(spy2.calls[0].arguments).toEqual(['arg2'])
 
   describe 'emit', ->
     it 'emits to all listeners', ->

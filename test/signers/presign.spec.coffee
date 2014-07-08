@@ -12,7 +12,7 @@ describe 'AWS.Signers.Presign', ->
     "X-Amz-SignedHeaders=host"
 
   beforeEach ->
-    spyOn(AWS.util.date, 'getDate').andReturn(new Date(0))
+    helpers.spyOn(AWS.util.date, 'getDate').andReturn(new Date(0))
 
   it 'presigns requests', ->
     cw.listMetrics().presign (err, url) ->

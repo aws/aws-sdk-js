@@ -10,8 +10,8 @@ describe 'AWS.EventListeners', ->
   retryHandler = null
 
   beforeEach ->
-    # Mock the timer manually (jasmine.Clock does not work in node)
-    `setTimeout = jasmine.createSpy('setTimeout');`
+    # Mock the timer manually
+    GLOBAL.setTimeout = helpers.createSpy('setTimeout')
     setTimeout.andCallFake (callback, delay) ->
       totalWaited += delay
       delays.push(delay)
@@ -23,10 +23,10 @@ describe 'AWS.EventListeners', ->
     service.config.credentials = AWS.util.copy(service.config.credentials)
 
     # Helpful handlers
-    successHandler = jasmine.createSpy('success')
-    errorHandler = jasmine.createSpy('error')
-    completeHandler = jasmine.createSpy('complete')
-    retryHandler = jasmine.createSpy('retry')
+    successHandler = helpers.createSpy('success')
+    errorHandler = helpers.createSpy('error')
+    completeHandler = helpers.createSpy('complete')
+    retryHandler = helpers.createSpy('retry')
 
   # Safely tear down setTimeout hack
   afterEach -> `setTimeout = oldSetTimeout`
@@ -56,22 +56,22 @@ describe 'AWS.EventListeners', ->
       service.config.credentials.accessKeyId = null
       makeRequest(->)
 
-      expect(errorHandler).toHaveBeenCalled()
+      expect(errorHandler.calls.length).not.toEqual(0)
       AWS.util.arrayEach errorHandler.calls, (call) ->
-        expect(call.args[0] instanceof Error).toBeTruthy()
-        expect(call.args[0].code).toEqual('CredentialsError')
-        expect(call.args[0].message).toMatch(/Missing credentials/)
+        expect(call.arguments[0] instanceof Error).toBeTruthy()
+        expect(call.arguments[0].code).toEqual('CredentialsError')
+        expect(call.arguments[0].message).toMatch(/Missing credentials/)
 
     it 'sends error event if credentials are not set', ->
       service.config.credentials.accessKeyId = 'akid'
       service.config.credentials.secretAccessKey = null
       makeRequest(->)
 
-      expect(errorHandler).toHaveBeenCalled()
+      expect(errorHandler.calls.length).not.toEqual(0)
       AWS.util.arrayEach errorHandler.calls, (call) ->
-        expect(call.args[0] instanceof Error).toBeTruthy()
-        expect(call.args[0].code).toEqual('CredentialsError')
-        expect(call.args[0].message).toMatch(/Missing credentials/)
+        expect(call.arguments[0] instanceof Error).toBeTruthy()
+        expect(call.arguments[0].code).toEqual('CredentialsError')
+        expect(call.arguments[0].message).toMatch(/Missing credentials/)
 
     it 'does not validate credentials if request is not signed', ->
       helpers.mockHttpResponse 200, {}, ''
@@ -80,18 +80,19 @@ describe 'AWS.EventListeners', ->
         signatureVersion: null
       request = makeRequest()
       request.send(->)
-      expect(errorHandler).not.toHaveBeenCalled()
-      expect(successHandler).toHaveBeenCalled()
+      expect(errorHandler.calls.length).toEqual(0)
+      expect(successHandler.calls.length).not.toEqual(0)
 
     it 'sends error event if region is not set', ->
+      helpers.mockHttpResponse 200, {}, ''
       service.config.region = null
       request = makeRequest(->)
 
       call = errorHandler.calls[0]
-      expect(errorHandler).toHaveBeenCalled()
-      expect(call.args[0] instanceof Error).toBeTruthy()
-      expect(call.args[0].code).toEqual('SigningError')
-      expect(call.args[0].message).toMatch(/Missing region in config/)
+      expect(errorHandler.calls.length).not.toEqual(0)
+      expect(call.arguments[0] instanceof Error).toBeTruthy()
+      expect(call.arguments[0].code).toEqual('SigningError')
+      expect(call.arguments[0].message).toMatch(/Missing region in config/)
 
     it 'ignores region validation if service has global endpoint', ->
       helpers.mockHttpResponse 200, {}, ''
@@ -99,11 +100,12 @@ describe 'AWS.EventListeners', ->
       service.isGlobalEndpoint = true
 
       makeRequest(->)
-      expect(errorHandler).not.toHaveBeenCalled()
+      expect(errorHandler.calls.length).toEqual(0)
       delete service.isGlobalEndpoint
 
   describe 'build', ->
     it 'takes the request object as a parameter', ->
+      helpers.mockHttpResponse 200, {}, ''
       request = makeRequest()
       request.on 'build', (req) ->
         expect(req).toBe(request)
@@ -143,6 +145,7 @@ describe 'AWS.EventListeners', ->
 
   describe 'sign', ->
     it 'takes the request object as a parameter', ->
+      helpers.mockHttpResponse 200, {}, ''
       request = makeRequest()
       request.on 'sign', (req) ->
         expect(req).toBe(request)
@@ -151,8 +154,9 @@ describe 'AWS.EventListeners', ->
       expect(response.error).toEqual("ERROR")
 
     it 'uses the api.signingName if provided', ->
+      helpers.mockHttpResponse 200, {}, ''
       service.api.signingName = 'SIGNING_NAME'
-      spyOn(AWS.Signers.RequestSigner, 'getVersion').andCallFake ->
+      helpers.spyOn(AWS.Signers.RequestSigner, 'getVersion').andCallFake ->
         (req, signingName) -> throw signingName
       request = makeRequest()
       response = request.send(->)
@@ -160,7 +164,8 @@ describe 'AWS.EventListeners', ->
       delete service.api.signingName
 
     it 'uses the api.endpointPrefix if signingName not provided', ->
-      spyOn(AWS.Signers.RequestSigner, 'getVersion').andCallFake ->
+      helpers.mockHttpResponse 200, {}, ''
+      helpers.spyOn(AWS.Signers.RequestSigner, 'getVersion').andCallFake ->
         (req, signingName) -> throw signingName
       request = makeRequest()
       response = request.send(->)
@@ -169,7 +174,7 @@ describe 'AWS.EventListeners', ->
   describe 'send', ->
     it 'passes httpOptions from config', ->
       options = {}
-      spyOn(AWS.HttpClient, 'getInstance').andReturn handleRequest: (req, opts) ->
+      helpers.spyOn(AWS.HttpClient, 'getInstance').andReturn handleRequest: (req, opts) ->
         options = opts
         new AWS.SequentialExecutor()
       service.config.httpOptions = timeout: 15
@@ -178,7 +183,7 @@ describe 'AWS.EventListeners', ->
       expect(options.timeout).toEqual(15)
 
     it 'signs only once in normal case', ->
-      signHandler = jasmine.createSpy('sign')
+      signHandler = helpers.createSpy('sign')
       helpers.mockHttpResponse 200, {}, ['data']
 
       request = makeRequest()
@@ -186,10 +191,10 @@ describe 'AWS.EventListeners', ->
       request.build()
       request.signedAt = new Date(request.signedAt - 60 * 5 * 1000)
       request.send()
-      expect(signHandler.callCount).toEqual(1)
+      expect(signHandler.calls.length).toEqual(1)
 
     it 'resigns if it took more than 10 min to get to send', ->
-      signHandler = jasmine.createSpy('sign')
+      signHandler = helpers.createSpy('sign')
       helpers.mockHttpResponse 200, {}, ['data']
 
       request = makeRequest()
@@ -197,7 +202,7 @@ describe 'AWS.EventListeners', ->
       request.build()
       request.signedAt = new Date(request.signedAt - 60 * 12 * 1000)
       request.send()
-      expect(signHandler.callCount).toEqual(2)
+      expect(signHandler.calls.length).toEqual(2)
 
   describe 'httpData', ->
     beforeEach ->
@@ -240,7 +245,7 @@ describe 'AWS.EventListeners', ->
 
   describe 'retry', ->
     it 'retries a request with a set maximum retries', ->
-      sendHandler = jasmine.createSpy('send')
+      sendHandler = helpers.createSpy('send')
       service.config.maxRetries = 10
 
       # fail every request with a fake networking error
@@ -251,10 +256,10 @@ describe 'AWS.EventListeners', ->
       request.on('send', sendHandler)
       response = request.send(->)
 
-      expect(retryHandler).toHaveBeenCalled()
-      expect(errorHandler).toHaveBeenCalled()
-      expect(completeHandler).toHaveBeenCalled()
-      expect(successHandler).not.toHaveBeenCalled()
+      expect(retryHandler.calls.length).not.toEqual(0)
+      expect(errorHandler.calls.length).not.toEqual(0)
+      expect(completeHandler.calls.length).not.toEqual(0)
+      expect(successHandler.calls.length).toEqual(0)
       expect(response.retryCount).toEqual(service.config.maxRetries);
       expect(sendHandler.calls.length).toEqual(service.config.maxRetries + 1)
 
@@ -291,11 +296,11 @@ describe 'AWS.EventListeners', ->
       expect(totalWaited).toEqual(90)
       expect(response.retryCount).toBeLessThan(service.config.maxRetries)
       expect(response.data).toEqual('foo')
-      expect(errorHandler).not.toHaveBeenCalled()
+      expect(errorHandler.calls.length).toEqual(0)
 
     ['ExpiredToken', 'ExpiredTokenException', 'RequestExpired'].forEach (name) ->
       it 'invalidates expired credentials and retries', ->
-        spyOn(AWS.HttpClient, 'getInstance')
+        helpers.spyOn(AWS.HttpClient, 'getInstance')
         AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
           if req.headers.Authorization.match('Credential=INVALIDKEY')
             helpers.mockHttpSuccessfulResponse 403, {}, name, cb
@@ -348,10 +353,10 @@ describe 'AWS.EventListeners', ->
 
       response = makeRequest(->)
 
-      expect(retryHandler).not.toHaveBeenCalled()
-      expect(errorHandler).not.toHaveBeenCalled()
-      expect(completeHandler).toHaveBeenCalled()
-      expect(successHandler).toHaveBeenCalled()
+      expect(retryHandler.calls.length).toEqual(0)
+      expect(errorHandler.calls.length).toEqual(0)
+      expect(completeHandler.calls.length).not.toEqual(0)
+      expect(successHandler.calls.length).not.toEqual(0)
       expect(response.retryCount).toEqual(0);
 
   describe 'error', ->
@@ -361,15 +366,15 @@ describe 'AWS.EventListeners', ->
 
       response = makeRequest(->)
 
-      expect(retryHandler).toHaveBeenCalled()
-      expect(errorHandler).toHaveBeenCalled()
-      expect(completeHandler).toHaveBeenCalled()
-      expect(successHandler).not.toHaveBeenCalled()
+      expect(retryHandler.calls.length).not.toEqual(0)
+      expect(errorHandler.calls.length).not.toEqual(0)
+      expect(completeHandler.calls.length).not.toEqual(0)
+      expect(successHandler.calls.length).toEqual(0)
       expect(response.retryCount).toEqual(0)
 
     it 'emits error if an error is set in extractError', ->
       error = code: 'ParseError', message: 'error message'
-      extractDataHandler = jasmine.createSpy('extractData')
+      extractDataHandler = helpers.createSpy('extractData')
 
       helpers.mockHttpResponse 400, {}, ''
 
@@ -379,10 +384,10 @@ describe 'AWS.EventListeners', ->
       response = request.send(->)
 
       expect(response.error).toBe(error)
-      expect(extractDataHandler).not.toHaveBeenCalled()
-      expect(retryHandler).toHaveBeenCalled()
-      expect(errorHandler).toHaveBeenCalled()
-      expect(completeHandler).toHaveBeenCalled()
+      expect(extractDataHandler.calls.length).toEqual(0)
+      expect(retryHandler.calls.length).not.toEqual(0)
+      expect(errorHandler.calls.length).not.toEqual(0)
+      expect(completeHandler.calls.length).not.toEqual(0)
 
   describe 'logging', ->
     data = null
@@ -399,7 +404,7 @@ describe 'AWS.EventListeners', ->
       service = new MockService(logger: null)
       helpers.mockHttpResponse 200, {}, []
       makeRequest().send()
-      expect(completeHandler).toHaveBeenCalled()
+      expect(completeHandler.calls.length).not.toEqual(0)
 
     it 'calls .log() on logger if it is available', ->
       helpers.mockHttpResponse 200, {}, []
@@ -418,16 +423,16 @@ describe 'AWS.EventListeners', ->
       it 'emits uncaughtException', ->
         helpers.mockHttpResponse 200, {}, []
         expect(-> (makeRequest -> invalidCode)).toThrow()
-        expect(completeHandler).toHaveBeenCalled()
-        expect(errorHandler).not.toHaveBeenCalled()
-        expect(retryHandler).not.toHaveBeenCalled()
+        expect(completeHandler.calls.length).not.toEqual(0)
+        expect(errorHandler.calls.length).toEqual(0)
+        expect(retryHandler.calls.length).toEqual(0)
 
       ['error', 'complete'].forEach (evt) ->
         it 'raise exceptions from terminal ' + evt + ' events', ->
           helpers.mockHttpResponse 500, {}, []
           request = makeRequest()
           expect(-> request.send(-> invalidCode)).toThrow()
-          expect(completeHandler).toHaveBeenCalled()
+          expect(completeHandler.calls.length).not.toEqual(0)
 
     if AWS.util.isNode()
       describe 'with domains', ->
@@ -442,8 +447,8 @@ describe 'AWS.EventListeners', ->
               request = makeRequest()
               request.on 'complete', -> invalidCode
               expect(-> request.send()).not.toThrow()
-              expect(completeHandler).toHaveBeenCalled()
-              expect(retryHandler).not.toHaveBeenCalled()
+              expect(completeHandler.calls.length).not.toEqual(0)
+              expect(retryHandler.calls.length).toEqual(0)
               expect(result.name).toEqual('ReferenceError')
               d.exit()
 
@@ -456,7 +461,7 @@ describe 'AWS.EventListeners', ->
             d.run ->
               helpers.mockHttpResponse 500, {}, []
               makeRequest().send()
-              expect(completeHandler).toHaveBeenCalled()
+              expect(completeHandler.calls.length).not.toEqual(0)
               expect(result).toEqual(false)
               d.exit()
 
