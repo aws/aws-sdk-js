@@ -6,7 +6,10 @@ beforeEach ->
 
 buildRequest = ->
   ddb = new AWS.DynamoDB({region: 'region', endpoint: 'localhost', apiVersion: '2011-12-05'})
-  ddb.makeRequest('listTables', {ExclusiveStartTableName: 'bår'}).build().httpRequest
+  req = ddb.makeRequest('listTables', {ExclusiveStartTableName: 'bår'})
+  req.build()
+  req.httpRequest.headers['X-Amz-User-Agent'] = 'aws-sdk-js/0.1'
+  req.httpRequest
 
 buildSigner = (request) ->
   return new AWS.Signers.V4(request || buildRequest(), 'dynamodb')
@@ -15,9 +18,9 @@ describe 'AWS.Signers.V4', ->
   date = new Date(1935346573456)
   datetime = AWS.util.date.iso8601(date).replace(/[:\-]|\.\d{3}/g, '')
   creds = null
-  signature = 'be723920bdf3f2ee6c0299adeafd5bc875cca511e2a4b8374d0d4e229acf2931'
+  signature = '0e24aaa0cc86cdc1b73143a147e731cf8c93d450cfcf1d18b2b7473f810b7a1d'
   authorization = 'AWS4-HMAC-SHA256 Credential=akid/20310430/region/dynamodb/aws4_request, ' +
-    'SignedHeaders=host;x-amz-date;x-amz-security-token;x-amz-target, ' +
+    'SignedHeaders=host;x-amz-date;x-amz-security-token;x-amz-target;x-amz-user-agent, ' +
     'Signature=' + signature
   signer = null
 
@@ -107,7 +110,8 @@ describe 'AWS.Signers.V4', ->
         'host:localhost',
         'x-amz-date:' + datetime,
         'x-amz-security-token:session',
-        'x-amz-target:DynamoDB_20111205.ListTables'
+        'x-amz-target:DynamoDB_20111205.ListTables',
+        'x-amz-user-agent:aws-sdk-js/0.1'
       ].join('\n')
 
     it 'should ignore Authorization header', ->
