@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.0.4
+// AWS SDK for JavaScript v2.0.5
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -3842,14 +3842,14 @@ AWS.config = new AWS.Config();
 var AWS = { util: require('./util') };
 
 
-var _hidden = {}; _hidden = {}; // hack to parse macro
+var _hidden = {}; _hidden.toString(); // hack to parse macro
 
 module.exports = AWS;
 
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.0.4',
+  VERSION: '2.0.5',
 
 
   Signers: {},
@@ -4169,6 +4169,17 @@ AWS.EventListeners = {
 
     add('SET_HTTP_HOST', 'afterBuild', function SET_HTTP_HOST(req) {
       req.httpRequest.headers['Host'] = req.httpRequest.endpoint.host;
+    });
+
+    add('RESTART', 'restart', function RESTART(req) {
+      var err = this.response.error;
+      if (!err || !err.retryable) return;
+
+      if (this.response.retryCount < this.service.config.maxRetries) {
+        this.response.retryCount++;
+      } else {
+        this.response.error = null;
+      }
     });
 
     addAsync('SIGN', 'sign', function SIGN(req, done) {
@@ -4925,12 +4936,8 @@ function Paginator(name, paginator) {
 module.exports = Paginator;
 
 },{"../util":61}],37:[function(require,module,exports){
-var Shape = require('./shape');
-var StructureShape = Shape.shapes.StructureShape;
-
 var util = require('../util');
 var property = util.property;
-var memoizedProperty = util.memoizedProperty;
 
 function ResourceWaiter(name, waiter, options) {
   options = options || {};
@@ -4979,7 +4986,7 @@ function ResourceWaiter(name, waiter, options) {
 
 module.exports = ResourceWaiter;
 
-},{"../util":61,"./shape":38}],38:[function(require,module,exports){
+},{"../util":61}],38:[function(require,module,exports){
 var Collection = require('./collection');
 
 var util = require('../util');
@@ -5829,7 +5836,7 @@ function extractData(resp) {
       resp.data[payload] = body;
     } else if (payloadMember.type === 'structure') {
       parser = new AWS.XML.Parser();
-      resp.data = parser.parse(body.toString(), payloadMember);
+      util.update(resp.data, parser.parse(body.toString(), payloadMember));
     } else {
       resp.data[payload] = body.toString();
     }
@@ -6014,14 +6021,6 @@ var AcceptorStateMachine = require('./state_machine');
 var inherit = AWS.util.inherit;
 
 var hardErrorStates = {success:1, error:1, complete:1};
-var hardErrors = {
-  EvalError: 1,
-  RangeError: 1,
-  ReferenceError: 1,
-  SyntaxError: 1,
-  TypeError: 1,
-  URIError: 1
-};
 
 function isTerminalState(machine) {
   return hardErrorStates.hasOwnProperty(machine._asm.currentState);
@@ -6034,37 +6033,24 @@ fsm.setupStates = function() {
       var self = this;
       self.emit(self._asm.currentState, function() {
         var nextError = self.response.error;
-        if (nextError && isTerminalState(self)) {
-          var isHardError = hardErrors.hasOwnProperty(nextError.name);
-          if (!isHardError) nextError = null;
+        if (nextError && nextError !== err && isTerminalState(self)) {
+          throw nextError;
         }
 
         done(nextError);
       });
 
     } catch (e) {
-      err = e;
-      if (isTerminalState(self)) {
-        var isHardError = hardErrors.hasOwnProperty(err.name);
-        if (!isHardError) err = null;
+      if (e !== err && isTerminalState(self)) {
+        AWS.SequentialExecutor.prototype.unhandledErrorCallback.call(this, e);
+        done();
+      } else {
+        done(e);
       }
-      done(err);
     }
   };
 
   this.addState('validate', 'build', 'error', transition);
-  this.addState('restart', 'build', 'error', function(err, done) {
-    err = this.response.error;
-    if (!err) return done();
-    if (!err.retryable) return done(err);
-
-    if (this.response.retryCount < this.service.config.maxRetries) {
-      this.response.retryCount++;
-      done();
-    } else {
-      done(err);
-    }
-  });
   this.addState('build', 'afterBuild', 'restart', transition);
   this.addState('afterBuild', 'sign', 'restart', transition);
   this.addState('sign', 'send', 'retry', transition);
@@ -6074,13 +6060,10 @@ fsm.setupStates = function() {
   this.addState('validateResponse', 'extractData', 'extractError', transition);
   this.addState('extractError', 'extractData', 'retry', transition);
   this.addState('extractData', 'success', 'retry', transition);
+  this.addState('restart', 'build', 'error', transition);
   this.addState('success', 'complete', 'complete', transition);
   this.addState('error', 'complete', 'complete', transition);
-  this.addState('complete', null, 'uncaughtException', transition);
-  this.addState('uncaughtException', function(err, done) {
-    AWS.SequentialExecutor.prototype.unhandledErrorCallback.call(this, err);
-    done(err);
-  });
+  this.addState('complete', null, null, transition);
 };
 fsm.setupStates();
 
@@ -6101,7 +6084,6 @@ AWS.Request = inherit({
     this.startTime = AWS.util.date.getDate();
 
     this.response = new AWS.Response(this);
-    this.restartCount = 0;
     this._asm = new AcceptorStateMachine(fsm.states, 'validate');
 
     AWS.SequentialExecutor.call(this);
@@ -6155,15 +6137,18 @@ AWS.Request = inherit({
 
 
   eachPage: function eachPage(callback) {
-    function wrappedCallback(response) {
-      var result = callback.call(response, response.error, response.data);
-      if (result === false) return;
+    callback = AWS.util.fn.makeAsync(callback, 3);
 
-      if (response.hasNextPage()) {
-        response.nextPage().on('complete', wrappedCallback).send();
-      } else {
-        callback.call(response, null, null);
-      }
+    function wrappedCallback(response) {
+      callback.call(response, response.error, response.data, function (result) {
+        if (result === false) return;
+
+        if (response.hasNextPage()) {
+          response.nextPage().on('complete', wrappedCallback).send();
+        } else {
+          callback.call(response, null, null, AWS.util.fn.noop);
+        }
+      });
     }
 
     this.on('complete', wrappedCallback).send();
@@ -6270,6 +6255,7 @@ AWS.Request = inherit({
 
   eventParameters: function eventParameters(eventName) {
     switch (eventName) {
+      case 'restart':
       case 'validate':
       case 'sign':
       case 'build':
@@ -6627,9 +6613,6 @@ AWS.SequentialExecutor = AWS.util.inherit({
 
   emit: function emit(eventName, eventArgs, doneCallback) {
     if (!doneCallback) doneCallback = this.unhandledErrorCallback;
-    if (domain && this.domain instanceof domain.Domain)
-      this.domain.enter();
-
     var listeners = this.listeners(eventName);
     var count = listeners.length;
     this.callListeners(listeners, eventArgs, doneCallback);
@@ -6640,37 +6623,25 @@ AWS.SequentialExecutor = AWS.util.inherit({
   callListeners: function callListeners(listeners, args, doneCallback) {
     if (listeners.length === 0) {
       doneCallback.call(this);
-      if (domain && this.domain instanceof domain.Domain)
-        this.domain.exit();
-    } else {
-      var listener = listeners.shift();
-      if (listener._isAsync) {
+      return;
+    }
 
-        var self = this;
-        var callNextListener = function(err) {
-          if (err) {
-            doneCallback.call(self, err);
-            if (domain && self.domain instanceof domain.Domain)
-              self.domain.exit();
-          } else {
-            self.callListeners(listeners, args, doneCallback);
-          }
-        };
-        listener.apply(this, args.concat([callNextListener]));
-
-      } else {
-
-        try {
-          listener.apply(this, args);
-          this.callListeners(listeners, args, doneCallback);
-        } catch (err) {
-          if (err._hardError) throw err;
-
-          doneCallback.call(this, err);
-          if (domain && this.domain instanceof domain.Domain)
-            this.domain.exit();
+    var self = this, listener = listeners.shift();
+    if (listener._isAsync) { // asynchronous listener
+      var callNextListener = function(err) {
+        if (err) {
+          doneCallback.call(self, err);
+        } else {
+          self.callListeners(listeners, args, doneCallback);
         }
-
+      };
+      listener.apply(self, args.concat([callNextListener]));
+    } else { // synchronous listener
+      try {
+        listener.apply(self, args);
+        self.callListeners(listeners, args, doneCallback);
+      } catch (err) {
+        doneCallback.call(self, err);
       }
     }
   },
@@ -7716,9 +7687,10 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
   },
 
   unsignableHeaders: ['authorization', 'content-type', 'content-length',
-    'user-agent', expiresHeader, 'x-amz-user-agent', 'x-amz-content-sha256'],
+                      'user-agent', expiresHeader],
 
   isSignableHeader: function isSignableHeader(key) {
+    if (key.toLowerCase().indexOf('x-amz-') === 0) return true;
     return this.unsignableHeaders.indexOf(key) < 0;
   },
 
@@ -7950,6 +7922,24 @@ var util = {
     }
   },
 
+  fn: {
+    noop: function(){},
+
+
+    makeAsync: function makeAsync(fn, expectedArgs) {
+      if (expectedArgs && expectedArgs <= fn.length) {
+        return fn;
+      }
+
+      return function() {
+        var args = Array.prototype.slice.call(arguments, 0);
+        var callback = args.pop();
+        var result = fn.apply(null, args);
+        callback(result);
+      };
+    }
+  },
+
   jamespath: {
     query: function query(expression, data) {
       if (!data) return [];
@@ -8047,7 +8037,7 @@ var util = {
 
     parseTimestamp: function parseTimestamp(value) {
       if (typeof value === 'number') { // unix timestamp (number)
-        return new Date(value);
+        return new Date(value * 1000);
       } else if (value.match(/^\d+$/)) { // unix timestamp
         return new Date(value * 1000);
       } else if (value.match(/^\d{4}/)) { // iso8601
