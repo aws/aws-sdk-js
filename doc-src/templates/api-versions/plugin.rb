@@ -3,7 +3,7 @@ require_relative './model_documentor'
 
 $APIS_DIR = File.expand_path(File.dirname(__FILE__) +
                              "/../../../vendor/apis/apis")
-$API_FILE_MATCH = /(?:^|\/)([^\/-]+)-(\d+-\d+-\d+)\.full\.json$/
+$API_FILE_MATCH = /(?:^|\/)([^\/]+?)-(\d+-\d+-\d+)\.full\.json$/
 
 YARD::Tags::Library.define_tag 'Service', :service
 YARD::Tags::Library.define_tag 'Waiter Resource States', :waiter
