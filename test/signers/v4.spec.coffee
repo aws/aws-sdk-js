@@ -104,6 +104,17 @@ describe 'AWS.Signers.V4', ->
         '20310430/region/dynamodb/aws4_request\n' +
         signer.hexEncodedHash(signer.canonicalString())
 
+  describe 'canonicalString', ->
+    it 'double URI encodes paths for non S3 services', ->
+      req = new AWS.CognitoSync().listDatasets(IdentityPoolId:'id', IdentityId:'a:b:c').build()
+      signer = new AWS.Signers.V4(req.httpRequest, 'cognito-identity')
+      expect(signer.canonicalString().split('\n')[1]).toEqual('/identitypools/id/identities/a%253Ab%253Ac/datasets')
+
+    it 'does not double encode path for S3', ->
+      req = new AWS.S3().getObject(Bucket: 'bucket', Key: 'a:b:c').build()
+      signer = new AWS.Signers.V4(req.httpRequest, 's3')
+      expect(signer.canonicalString().split('\n')[1]).toEqual('/a%3Ab%3Ac')
+
   describe 'canonicalHeaders', ->
     it 'should return headers', ->
       expect(signer.canonicalHeaders()).toEqual [
