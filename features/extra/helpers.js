@@ -2,9 +2,10 @@ module.exports = {
 
   assert: require('./assertions').assert,
 
-  uniqueName: function uniqueName(base) {
+  uniqueName: function uniqueName(base, sep) {
+    if (sep === undefined) sep = '-';
     if (base === "") return "";
-    return base + '-' + new Date().getTime();
+    return base + sep + new Date().getTime();
   },
 
   /**
