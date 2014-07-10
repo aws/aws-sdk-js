@@ -90,14 +90,26 @@ describe 'AWS.Request', ->
           ]
           done()
 
+    it 'supports stopping responses if false is returned', ->
+      resps = []
+      service.mockMethod().eachPage (err, data) ->
+        if resps.length == 2
+          return false
+        resps.push([err, data])
+        true
+      expect(resps).toEqual [
+        [null, {Value: 1, NextToken: 'a'}],
+        [null, {Value: 2, NextToken: 'b'}]
+      ]
+
     it 'supports asynchronous eachPage calls', (done) ->
       resps = []
       service.mockMethod().eachPage (err, data, next) ->
         process.nextTick ->
-          if resps.length == 2
-            return false
           resps.push([err, data])
-          if err == null && data == null
+          next()
+
+          if resps.length > 4
             expect(resps).toEqual [
               [null, {Value: 1, NextToken: 'a'}],
               [null, {Value: 2, NextToken: 'b'}],
@@ -106,7 +118,6 @@ describe 'AWS.Request', ->
               [null, null]
             ]
             done()
-          next()
 
     it 'throws error from eachPage callback', ->
       try
