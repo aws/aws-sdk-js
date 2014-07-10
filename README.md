@@ -61,6 +61,9 @@ The SDK currently supports the following services:
     <tr><td>2013-01-01</td></tr>
     <tr><td>Amazon CloudSearch Domain</td><td>AWS.CloudSearchDomain</td><td>2013-01-01</td></tr>
     <tr><td>Amazon CloudWatch</td><td>AWS.CloudWatch</td><td>2010-08-01</td></tr>
+    <tr><td>Amazon CloudWatch Logs</td><td>AWS.CloudWatchLogs</td><td>2014-03-28</td></tr>
+    <tr><td>Amazon Cognito Identity</td><td>AWS.CognitoIdentity</td><td>2014-06-30</td></tr>
+    <tr><td>Amazon Cognito Sync</td><td>AWS.CognitoSync</td><td>2014-06-30</td></tr>
     <tr><td rowspan="2">Amazon DynamoDB</td><td rowspan="2">AWS.DynamoDB</td><td>2011-12-05</td></tr>
     <tr><td>2012-08-10</td></tr>
     <tr><td>Amazon Elastic Compute Cloud</td><td>AWS.EC2</td><td>2014-05-01</td></tr>
