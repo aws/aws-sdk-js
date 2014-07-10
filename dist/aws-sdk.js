@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.0.5
+// AWS SDK for JavaScript v2.0.6
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -3849,7 +3849,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.0.5',
+  VERSION: '2.0.6',
 
 
   Signers: {},
@@ -5010,8 +5010,6 @@ function Shape(shape, options, memberName) {
   property(this, 'api', options.api, false);
   property(this, 'type', shape.type);
   property(this, 'location', shape.location || 'body');
-  property(this, 'queryName', shape.queryName);
-  property(this, 'queryFlattened', shape.queryFlattened);
   property(this, 'name', this.name || shape.xmlName || shape.locationName ||
                          memberName);
   property(this, 'isStreaming', shape.streaming || false);
@@ -5129,7 +5127,6 @@ function StructureShape(shape, options) {
   if (firstInit) {
     property(this, 'defaultValue', function() { return {}; });
     property(this, 'members', {});
-    property(this, 'memberNames', []);
     property(this, 'required', []);
     property(this, 'isRequired', function(name) { return false; });
   }
@@ -5138,9 +5135,6 @@ function StructureShape(shape, options) {
     property(this, 'members', new Collection(shape.members, options, function(name, member) {
       return Shape.create(member, options, name);
     }));
-    memoizedProperty(this, 'memberNames', function() {
-      return shape.xmlOrder || Object.keys(shape.members);
-    });
   }
 
   if (shape.required) {
@@ -5567,7 +5561,6 @@ function extractData(resp) {
   if (origRules.resultWrapper) {
     var tmp = Shape.create({type: 'structure'});
     tmp.members[origRules.resultWrapper] = shape;
-    tmp.memberNames = [origRules.resultWrapper];
     util.property(shape, 'name', shape.resultWrapper);
     shape = tmp;
   }
@@ -5875,7 +5868,7 @@ function serializeStructure(prefix, struct, rules, fn) {
 function serializeMap(name, map, rules, fn) {
   var i = 1;
   util.each(map, function (key, value) {
-    var prefix = rules.flattened || rules.queryFlattened ? '.' : '.entry.';
+    var prefix = rules.flattened ? '.' : '.entry.';
     var position = prefix + (i++) + '.';
     var keyName = position + (rules.key.name || 'key');
     var valueName = position + (rules.value.name || 'value');
@@ -5894,7 +5887,7 @@ function serializeList(name, list, rules, fn) {
 
   util.arrayEach(list, function (v, n) {
     var suffix = '.' + (n + 1);
-    if (rules.flattened || rules.queryFlattened) {
+    if (rules.flattened) {
       if (memberRules.name) {
         var parts = name.split('.');
         parts.pop();
@@ -6186,7 +6179,7 @@ AWS.Request = inherit({
 
     if (AWS.HttpClient.streamsApiVersion === 2) {
       stream = new streams.Readable();
-      stream._read = function() { stream.push(''); };
+      stream._read = function() {};
     } else {
       stream = new streams.Stream();
       stream.readable = true;
@@ -6213,21 +6206,29 @@ AWS.Request = inherit({
         });
 
         var httpStream = resp.httpResponse.stream;
-        stream.response = resp;
-        stream._read = function() {
-          var data;
-          do {
-            data = httpStream.read();
-            if (data) stream.push(data);
-          } while (data);
-          stream.push('');
-        };
-
-        var events = ['end', 'error', (legacyStreams ? 'data' : 'readable')];
-        AWS.util.arrayEach(events, function(event) {
-          httpStream.on(event, function(arg) {
-            stream.emit(event, arg);
+        if (legacyStreams) {
+          httpStream.on('data', function(arg) {
+            stream.emit('data', arg);
           });
+          httpStream.on('end', function() {
+            stream.emit('end');
+          });
+        } else {
+          httpStream.on('readable', function() {
+            var chunk;
+            do {
+              chunk = httpStream.read();
+              if (chunk !== null) stream.push(chunk);
+            } while (chunk !== null);
+            stream.read(0);
+          });
+          httpStream.on('end', function() {
+            stream.push(null);
+          });
+        }
+
+        httpStream.on('error', function(err) {
+          stream.emit('error', err);
         });
       }
     });
@@ -7621,9 +7622,11 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
   },
 
   canonicalString: function canonicalString() {
-    var parts = [];
+    var parts = [], pathname = this.request.pathname();
+    if (this.serviceName !== 's3') pathname = AWS.util.uriEscapePath(pathname);
+
     parts.push(this.request.method);
-    parts.push(this.request.pathname());
+    parts.push(pathname);
     parts.push(this.request.search());
     parts.push(this.canonicalHeaders() + '\n');
     parts.push(this.signedHeaders());
@@ -8519,12 +8522,11 @@ function serialize(xml, value, shape) {
 }
 
 function serializeStructure(xml, params, shape) {
-  util.arrayEach(shape.memberNames, function(memberName) {
-    var memberShape = shape.members[memberName];
+  util.each(shape.members, function(memberName, memberShape) {
     if (memberShape.location !== 'body') return;
 
     var value = params[memberName];
-    var name = memberShape.queryName || memberShape.name;
+    var name = memberShape.name;
     if (value !== undefined && value !== null) {
       if (memberShape.isXmlAttribute) {
         xml.att(name, value);
@@ -8540,8 +8542,8 @@ function serializeStructure(xml, params, shape) {
 }
 
 function serializeMap(xml, map, shape) {
-  var xmlKey = shape.key.queryName || shape.key.name || 'key';
-  var xmlValue = shape.value.queryName || shape.value.name || 'value';
+  var xmlKey = shape.key.name || 'key';
+  var xmlValue = shape.value.name || 'value';
 
   util.each(map, function(key, value) {
     var entry = xml.ele(shape.flattened ? shape.name : 'entry');
@@ -8553,13 +8555,13 @@ function serializeMap(xml, map, shape) {
 function serializeList(xml, list, shape) {
   if (shape.flattened) {
     util.arrayEach(list, function(value) {
-      var name = shape.member.queryName || shape.member.name || shape.name;
+      var name = shape.member.name || shape.name;
       var element = xml.ele(name);
       serialize(element, value, shape.member);
     });
   } else {
     util.arrayEach(list, function(value) {
-      var name = shape.member.queryName || shape.member.name || 'member';
+      var name = shape.member.name || 'member';
       var element = xml.ele(name);
       serialize(element, value, shape.member);
     });
@@ -9145,7 +9147,7 @@ module.exports = XmlBuilder;
 
 },{"./XMLBuilder":64}]},{},[20]);AWS.CloudWatch = AWS.Service.defineService('cloudwatch');
 
-AWS.Service.defineServiceApi(AWS.CloudWatch, "2010-08-01", {"metadata":{"apiVersion":"2010-08-01","endpointPrefix":"monitoring","serviceAbbreviation":"CloudWatch","serviceFullName":"Amazon CloudWatch","signatureVersion":"v4","xmlNamespace":"http://monitoring.amazonaws.com/doc/2010-08-01/","protocol":"query"},"operations":{"DeleteAlarms":{"input":{"type":"structure","required":["AlarmNames"],"members":{"AlarmNames":{"shape":"S2"}}}},"DescribeAlarmHistory":{"input":{"type":"structure","members":{"AlarmName":{},"HistoryItemType":{},"StartDate":{"type":"timestamp"},"EndDate":{"type":"timestamp"},"MaxRecords":{"type":"integer"},"NextToken":{}}},"output":{"resultWrapper":"DescribeAlarmHistoryResult","type":"structure","members":{"AlarmHistoryItems":{"type":"list","member":{"type":"structure","members":{"AlarmName":{},"Timestamp":{"type":"timestamp"},"HistoryItemType":{},"HistorySummary":{},"HistoryData":{}}}},"NextToken":{}}}},"DescribeAlarms":{"input":{"type":"structure","members":{"AlarmNames":{"shape":"S2"},"AlarmNamePrefix":{},"StateValue":{},"ActionPrefix":{},"MaxRecords":{"type":"integer"},"NextToken":{}}},"output":{"resultWrapper":"DescribeAlarmsResult","type":"structure","members":{"MetricAlarms":{"shape":"Sj"},"NextToken":{}}}},"DescribeAlarmsForMetric":{"input":{"type":"structure","required":["MetricName","Namespace"],"members":{"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"shape":"Sv"},"Period":{"type":"integer"},"Unit":{}}},"output":{"resultWrapper":"DescribeAlarmsForMetricResult","type":"structure","members":{"MetricAlarms":{"shape":"Sj"}}}},"DisableAlarmActions":{"input":{"type":"structure","required":["AlarmNames"],"members":{"AlarmNames":{"shape":"S2"}}}},"EnableAlarmActions":{"input":{"type":"structure","required":["AlarmNames"],"members":{"AlarmNames":{"shape":"S2"}}}},"GetMetricStatistics":{"input":{"type":"structure","required":["Namespace","MetricName","StartTime","EndTime","Period","Statistics"],"members":{"Namespace":{},"MetricName":{},"Dimensions":{"shape":"Sv"},"StartTime":{"type":"timestamp"},"EndTime":{"type":"timestamp"},"Period":{"type":"integer"},"Statistics":{"type":"list","member":{}},"Unit":{}}},"output":{"resultWrapper":"GetMetricStatisticsResult","type":"structure","members":{"Label":{},"Datapoints":{"type":"list","member":{"type":"structure","members":{"Timestamp":{"type":"timestamp"},"SampleCount":{"type":"double"},"Average":{"type":"double"},"Sum":{"type":"double"},"Minimum":{"type":"double"},"Maximum":{"type":"double"},"Unit":{}},"xmlOrder":["Timestamp","SampleCount","Average","Sum","Minimum","Maximum","Unit"]}}}}},"ListMetrics":{"input":{"type":"structure","members":{"Namespace":{},"MetricName":{},"Dimensions":{"type":"list","member":{"type":"structure","required":["Name"],"members":{"Name":{},"Value":{}}}},"NextToken":{}}},"output":{"xmlOrder":["Metrics","NextToken"],"resultWrapper":"ListMetricsResult","type":"structure","members":{"Metrics":{"type":"list","member":{"type":"structure","members":{"Namespace":{},"MetricName":{},"Dimensions":{"shape":"Sv"}},"xmlOrder":["Namespace","MetricName","Dimensions"]}},"NextToken":{}}}},"PutMetricAlarm":{"input":{"type":"structure","required":["AlarmName","MetricName","Namespace","Statistic","Period","EvaluationPeriods","Threshold","ComparisonOperator"],"members":{"AlarmName":{},"AlarmDescription":{},"ActionsEnabled":{"type":"boolean"},"OKActions":{"shape":"So"},"AlarmActions":{"shape":"So"},"InsufficientDataActions":{"shape":"So"},"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"shape":"Sv"},"Period":{"type":"integer"},"Unit":{},"EvaluationPeriods":{"type":"integer"},"Threshold":{"type":"double"},"ComparisonOperator":{}}}},"PutMetricData":{"input":{"type":"structure","required":["Namespace","MetricData"],"members":{"Namespace":{},"MetricData":{"type":"list","member":{"type":"structure","required":["MetricName"],"members":{"MetricName":{},"Dimensions":{"shape":"Sv"},"Timestamp":{"type":"timestamp"},"Value":{"type":"double"},"StatisticValues":{"type":"structure","required":["SampleCount","Sum","Minimum","Maximum"],"members":{"SampleCount":{"type":"double"},"Sum":{"type":"double"},"Minimum":{"type":"double"},"Maximum":{"type":"double"}}},"Unit":{}}}}}}},"SetAlarmState":{"input":{"type":"structure","required":["AlarmName","StateValue","StateReason"],"members":{"AlarmName":{},"StateValue":{},"StateReason":{},"StateReasonData":{}}}}},"shapes":{"S2":{"type":"list","member":{}},"Sj":{"type":"list","member":{"type":"structure","members":{"AlarmName":{},"AlarmArn":{},"AlarmDescription":{},"AlarmConfigurationUpdatedTimestamp":{"type":"timestamp"},"ActionsEnabled":{"type":"boolean"},"OKActions":{"shape":"So"},"AlarmActions":{"shape":"So"},"InsufficientDataActions":{"shape":"So"},"StateValue":{},"StateReason":{},"StateReasonData":{},"StateUpdatedTimestamp":{"type":"timestamp"},"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"shape":"Sv"},"Period":{"type":"integer"},"Unit":{},"EvaluationPeriods":{"type":"integer"},"Threshold":{"type":"double"},"ComparisonOperator":{}},"xmlOrder":["AlarmName","AlarmArn","AlarmDescription","AlarmConfigurationUpdatedTimestamp","ActionsEnabled","OKActions","AlarmActions","InsufficientDataActions","StateValue","StateReason","StateReasonData","StateUpdatedTimestamp","MetricName","Namespace","Statistic","Dimensions","Period","Unit","EvaluationPeriods","Threshold","ComparisonOperator"]}},"So":{"type":"list","member":{}},"Sv":{"type":"list","member":{"type":"structure","required":["Name","Value"],"members":{"Name":{},"Value":{}},"xmlOrder":["Name","Value"]}}},"paginators":{"DescribeAlarmHistory":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"AlarmHistoryItems"},"DescribeAlarms":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"MetricAlarms"},"DescribeAlarmsForMetric":{"result_key":"MetricAlarms"},"ListMetrics":{"input_token":"NextToken","output_token":"NextToken","result_key":"Metrics"}}});
+AWS.Service.defineServiceApi(AWS.CloudWatch, "2010-08-01", {"metadata":{"apiVersion":"2010-08-01","endpointPrefix":"monitoring","serviceAbbreviation":"CloudWatch","serviceFullName":"Amazon CloudWatch","signatureVersion":"v4","xmlNamespace":"http://monitoring.amazonaws.com/doc/2010-08-01/","protocol":"query"},"operations":{"DeleteAlarms":{"input":{"type":"structure","required":["AlarmNames"],"members":{"AlarmNames":{"shape":"S2"}}}},"DescribeAlarmHistory":{"input":{"type":"structure","members":{"AlarmName":{},"HistoryItemType":{},"StartDate":{"type":"timestamp"},"EndDate":{"type":"timestamp"},"MaxRecords":{"type":"integer"},"NextToken":{}}},"output":{"resultWrapper":"DescribeAlarmHistoryResult","type":"structure","members":{"AlarmHistoryItems":{"type":"list","member":{"type":"structure","members":{"AlarmName":{},"Timestamp":{"type":"timestamp"},"HistoryItemType":{},"HistorySummary":{},"HistoryData":{}}}},"NextToken":{}}}},"DescribeAlarms":{"input":{"type":"structure","members":{"AlarmNames":{"shape":"S2"},"AlarmNamePrefix":{},"StateValue":{},"ActionPrefix":{},"MaxRecords":{"type":"integer"},"NextToken":{}}},"output":{"resultWrapper":"DescribeAlarmsResult","type":"structure","members":{"MetricAlarms":{"shape":"Sj"},"NextToken":{}}}},"DescribeAlarmsForMetric":{"input":{"type":"structure","required":["MetricName","Namespace"],"members":{"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"shape":"Sv"},"Period":{"type":"integer"},"Unit":{}}},"output":{"resultWrapper":"DescribeAlarmsForMetricResult","type":"structure","members":{"MetricAlarms":{"shape":"Sj"}}}},"DisableAlarmActions":{"input":{"type":"structure","required":["AlarmNames"],"members":{"AlarmNames":{"shape":"S2"}}}},"EnableAlarmActions":{"input":{"type":"structure","required":["AlarmNames"],"members":{"AlarmNames":{"shape":"S2"}}}},"GetMetricStatistics":{"input":{"type":"structure","required":["Namespace","MetricName","StartTime","EndTime","Period","Statistics"],"members":{"Namespace":{},"MetricName":{},"Dimensions":{"shape":"Sv"},"StartTime":{"type":"timestamp"},"EndTime":{"type":"timestamp"},"Period":{"type":"integer"},"Statistics":{"type":"list","member":{}},"Unit":{}}},"output":{"resultWrapper":"GetMetricStatisticsResult","type":"structure","members":{"Label":{},"Datapoints":{"type":"list","member":{"type":"structure","members":{"Timestamp":{"type":"timestamp"},"SampleCount":{"type":"double"},"Average":{"type":"double"},"Sum":{"type":"double"},"Minimum":{"type":"double"},"Maximum":{"type":"double"},"Unit":{}}}}}}},"ListMetrics":{"input":{"type":"structure","members":{"Namespace":{},"MetricName":{},"Dimensions":{"type":"list","member":{"type":"structure","required":["Name"],"members":{"Name":{},"Value":{}}}},"NextToken":{}}},"output":{"resultWrapper":"ListMetricsResult","type":"structure","members":{"Metrics":{"type":"list","member":{"type":"structure","members":{"Namespace":{},"MetricName":{},"Dimensions":{"shape":"Sv"}}}},"NextToken":{}}}},"PutMetricAlarm":{"input":{"type":"structure","required":["AlarmName","MetricName","Namespace","Statistic","Period","EvaluationPeriods","Threshold","ComparisonOperator"],"members":{"AlarmName":{},"AlarmDescription":{},"ActionsEnabled":{"type":"boolean"},"OKActions":{"shape":"So"},"AlarmActions":{"shape":"So"},"InsufficientDataActions":{"shape":"So"},"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"shape":"Sv"},"Period":{"type":"integer"},"Unit":{},"EvaluationPeriods":{"type":"integer"},"Threshold":{"type":"double"},"ComparisonOperator":{}}}},"PutMetricData":{"input":{"type":"structure","required":["Namespace","MetricData"],"members":{"Namespace":{},"MetricData":{"type":"list","member":{"type":"structure","required":["MetricName"],"members":{"MetricName":{},"Dimensions":{"shape":"Sv"},"Timestamp":{"type":"timestamp"},"Value":{"type":"double"},"StatisticValues":{"type":"structure","required":["SampleCount","Sum","Minimum","Maximum"],"members":{"SampleCount":{"type":"double"},"Sum":{"type":"double"},"Minimum":{"type":"double"},"Maximum":{"type":"double"}}},"Unit":{}}}}}}},"SetAlarmState":{"input":{"type":"structure","required":["AlarmName","StateValue","StateReason"],"members":{"AlarmName":{},"StateValue":{},"StateReason":{},"StateReasonData":{}}}}},"shapes":{"S2":{"type":"list","member":{}},"Sj":{"type":"list","member":{"type":"structure","members":{"AlarmName":{},"AlarmArn":{},"AlarmDescription":{},"AlarmConfigurationUpdatedTimestamp":{"type":"timestamp"},"ActionsEnabled":{"type":"boolean"},"OKActions":{"shape":"So"},"AlarmActions":{"shape":"So"},"InsufficientDataActions":{"shape":"So"},"StateValue":{},"StateReason":{},"StateReasonData":{},"StateUpdatedTimestamp":{"type":"timestamp"},"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"shape":"Sv"},"Period":{"type":"integer"},"Unit":{},"EvaluationPeriods":{"type":"integer"},"Threshold":{"type":"double"},"ComparisonOperator":{}}}},"So":{"type":"list","member":{}},"Sv":{"type":"list","member":{"type":"structure","required":["Name","Value"],"members":{"Name":{},"Value":{}}}}},"paginators":{"DescribeAlarmHistory":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"AlarmHistoryItems"},"DescribeAlarms":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"MetricAlarms"},"DescribeAlarmsForMetric":{"result_key":"MetricAlarms"},"ListMetrics":{"input_token":"NextToken","output_token":"NextToken","result_key":"Metrics"}}});
 AWS.DynamoDB = AWS.Service.defineService('dynamodb');
 
 
