@@ -14,7 +14,7 @@ function CacheStrategy(builder) {
 CacheStrategy.prototype.loadServices = function() {
   this.services = {};
   fs.readdirSync(this.cacheRoot).forEach(function(file) {
-    var match = file.match(/^([^_-]+)-(latest|\d+-\d+-\d+)\.(?:min\.)?js$/);
+    var match = file.match(/^([^_]+?)-(latest|\d+-\d+-\d+)\.(?:min\.)?js$/);
     if (match) {
       var service = match[1], version = match[2];
       if (!this.services[service]) this.services[service] = {};
