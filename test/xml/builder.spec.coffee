@@ -45,17 +45,6 @@ describe 'AWS.XML.Builder', ->
       """
       matchXML(toXML(rules, params), xml)
 
-    it 'orders xml members by the order they appear in the rules', ->
-      rules = xmlOrder: ['Count', 'State'], members: {Count:{type:'integer'},State:{}}
-      params = { State: 'Disabled', Count: 123 }
-      xml = """
-      <Data xmlns="#{xmlns}">
-        <Count>123</Count>
-        <State>Disabled</State>
-      </Data>
-      """
-      matchXML(toXML(rules, params), xml)
-
     it 'can serializes structures into XML', ->
       rules = members:
         Name: {}
