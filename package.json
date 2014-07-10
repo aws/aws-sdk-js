@@ -28,7 +28,7 @@
       "istanbul": "*"
     },
     "dependencies": {
-      "aws-sdk-apis": "3.x",
+      "aws-sdk-apis": "^3.1",
       "xml2js": "0.2.6",
       "xmlbuilder": "0.4.2"
     },
