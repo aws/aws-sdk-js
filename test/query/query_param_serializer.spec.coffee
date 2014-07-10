@@ -113,19 +113,6 @@ describe 'QueryParamSerializer', ->
           ['Name.3', 'c'],
         ])
 
-      it 'supports queryFlattened key', ->
-        rules =
-          Name:
-            type: 'list'
-            queryFlattened: true
-            member: type: 'string'
-        params = serialize({Name:['a','b','c']}, rules)
-        expect(params).toEqual([
-          ['Name.1', 'a'],
-          ['Name.2', 'b'],
-          ['Name.3', 'c'],
-        ])
-
       it 'Uses list-member names instead of the list name', ->
         rules =
           Root:
@@ -237,24 +224,6 @@ describe 'QueryParamSerializer', ->
         Attributes:
           type: 'map'
           flattened: true
-          key: {}
-          value: {}
-      data = {Attributes:{Color:'red',Size:'large',Value:'low'}}
-      params = serialize(data, rules)
-      expect(params).toEqual([
-        ['Attributes.1.key', 'Color'],
-        ['Attributes.1.value', 'red'],
-        ['Attributes.2.key', 'Size'],
-        ['Attributes.2.value', 'large'],
-        ['Attributes.3.key', 'Value'],
-        ['Attributes.3.value', 'low'],
-      ])
-
-    it 'supports queryFlattened key', ->
-      rules =
-        Attributes:
-          type: 'map'
-          queryFlattened: true
           key: {}
           value: {}
       data = {Attributes:{Color:'red',Size:'large',Value:'low'}}
