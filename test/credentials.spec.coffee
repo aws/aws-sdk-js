@@ -156,6 +156,7 @@ if AWS.util.isNode()
       delete process.env.AWS_PROFILE
       delete process.env.HOME
       delete process.env.HOMEPATH
+      delete process.env.HOMEDRIVE
       delete process.env.USERPROFILE
 
     describe 'constructor', ->
@@ -163,12 +164,18 @@ if AWS.util.isNode()
         expect(-> new AWS.SharedIniFileCredentials().refresh()).
           toThrow('Cannot load credentials, HOME path not set')
 
-      it 'uses HOMEPATH if HOME is not set', ->
-        process.env.HOMEPATH = '/homepath'
+      it 'uses HOMEDRIVE\\HOMEPATH if HOME and USERPROFILE are not set', ->
+        process.env.HOMEDRIVE = 'd:/'
+        process.env.HOMEPATH = 'homepath'
         creds = new AWS.SharedIniFileCredentials()
-        expect(creds.filename).toEqual('/homepath/.aws/credentials')
+        expect(creds.filename).toEqual('d:/homepath/.aws/credentials')
 
-      it 'uses USERPROFILE if HOME and HOMEPATH are not set', ->
+      it 'uses default HOMEDRIVE of C:/', ->
+        process.env.HOMEPATH = 'homepath'
+        creds = new AWS.SharedIniFileCredentials()
+        expect(creds.filename).toEqual('C:/homepath/.aws/credentials')
+
+      it 'uses USERPROFILE if HOME is not set', ->
         process.env.USERPROFILE = '/userprofile'
         creds = new AWS.SharedIniFileCredentials()
         expect(creds.filename).toEqual('/userprofile/.aws/credentials')
