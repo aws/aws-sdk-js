@@ -54,6 +54,7 @@ module.exports = function() {
         else if (data === null || world.numPages === maxPages) {
           world.finishedPagination = true;
           callback();
+          return false;
         } else {
           if (data[marker]) world.numMarkers++;
           world.numPages++;
