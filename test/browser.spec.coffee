@@ -56,7 +56,7 @@ integrationTests ->
         done()
 
   describe 'XHR', ->
-    it 'does not emit http events if networking issue occurs', ->
+    it 'does not emit http events if networking issue occurs', (done) ->
       err = null
       httpHeaders = false; httpData = false; httpError = false; httpDone = false
       svc = new AWS.S3(accessKeyId: 'akid', secretAccessKey: 'secret', maxRetries: 0)
@@ -118,10 +118,10 @@ integrationTests ->
       body = 'body string'
       s3.putObject {Key: key, Body: body, ContentType: 'text/html'}, (err, data) ->
         noError(err)
-        s3.deleteObject(Key: key).send(done)
-      s3.putObject {Key: key, Body: body, ContentType: 'text/html; charset=utf-8'}, (err, data) ->
-        noError(err)
-        s3.deleteObject(Key: key).send(done)
+        s3.deleteObject(Key: key).send ->
+          s3.putObject {Key: key, Body: body, ContentType: 'text/html; charset=utf-8'}, (err, data) ->
+            noError(err)
+            s3.deleteObject(Key: key).send(done)
 
     describe 'progress events', ->
       integration 'emits http(Upload|Download)Progress events (no phantomjs)', (done) ->
@@ -145,8 +145,7 @@ integrationTests ->
             expect(progress.length > 1).to.equal(true)
             expect(progress[0].total).to.equal(body.size)
             expect(progress[0].loaded > 10).to.equal(true)
-            s3.deleteObject(Key: key).send()
-            done()
+            s3.deleteObject(Key: key).send(done)
 
   describe 'AWS.DynamoDB', ->
     integration 'writes and reads from a table', (done) ->
