@@ -19,7 +19,7 @@ if AWS.util.isNode()
 
       it 'returns an error by default', ->
         chain.resolve (err) ->
-          expect(err.message).toEqual('Variable AMAZON_ACCESS_KEY_ID not set.')
+          expect(err.message).to.equal('Variable AMAZON_ACCESS_KEY_ID not set.')
 
       it 'returns AWS-prefixed credentials found in ENV', ->
 
@@ -28,9 +28,9 @@ if AWS.util.isNode()
         process.env['AWS_SESSION_TOKEN'] = 'session'
 
         chain.resolve (err, creds) ->
-          expect(creds.accessKeyId).toEqual('akid')
-          expect(creds.secretAccessKey).toEqual('secret')
-          expect(creds.sessionToken).toEqual('session')
+          expect(creds.accessKeyId).to.equal('akid')
+          expect(creds.secretAccessKey).to.equal('secret')
+          expect(creds.sessionToken).to.equal('session')
 
       it 'returns AMAZON-prefixed credentials found in ENV', ->
 
@@ -39,9 +39,9 @@ if AWS.util.isNode()
         process.env['AMAZON_SESSION_TOKEN'] = 'session'
 
         chain.resolve (err, creds) ->
-          expect(creds.accessKeyId).toEqual('akid')
-          expect(creds.secretAccessKey).toEqual('secret')
-          expect(creds.sessionToken).toEqual('session')
+          expect(creds.accessKeyId).to.equal('akid')
+          expect(creds.secretAccessKey).to.equal('secret')
+          expect(creds.sessionToken).to.equal('session')
 
       it 'prefers AWS credentials to AMAZON credentials', ->
 
@@ -54,9 +54,9 @@ if AWS.util.isNode()
         process.env['AMAZON_SESSION_TOKEN'] = 'session2'
 
         chain.resolve (err, creds) ->
-          expect(creds.accessKeyId).toEqual('akid')
-          expect(creds.secretAccessKey).toEqual('secret')
-          expect(creds.sessionToken).toEqual('session')
+          expect(creds.accessKeyId).to.equal('akid')
+          expect(creds.secretAccessKey).to.equal('secret')
+          expect(creds.sessionToken).to.equal('session')
 
       it 'uses the defaultProviders property on the constructor', ->
 
@@ -70,21 +70,21 @@ if AWS.util.isNode()
 
         chain = new AWS.CredentialProviderChain()
         chain.resolve (err) ->
-          expect(err.message).toEqual('No providers')
+          expect(err.message).to.equal('No providers')
 
       it 'calls resolve on each provider in the chain, stopping for akid', ->
         staticCreds = accessKeyId: 'abc', secretAccessKey: 'xyz'
         chain = new AWS.CredentialProviderChain([staticCreds])
         chain.resolve (err, creds) ->
-          expect(creds.accessKeyId).toEqual('abc')
-          expect(creds.secretAccessKey).toEqual('xyz')
-          expect(creds.sessionToken).toEqual(undefined)
+          expect(creds.accessKeyId).to.equal('abc')
+          expect(creds.secretAccessKey).to.equal('xyz')
+          expect(creds.sessionToken).to.equal(undefined)
 
       it 'accepts providers as functions, elavuating them during resolution', ->
         provider = ->
           accessKeyId: 'abc', secretAccessKey: 'xyz'
         chain = new AWS.CredentialProviderChain([provider])
         chain.resolve (err, creds) ->
-          expect(creds.accessKeyId).toEqual('abc')
-          expect(creds.secretAccessKey).toEqual('xyz')
-          expect(creds.sessionToken).toEqual(undefined)
+          expect(creds.accessKeyId).to.equal('abc')
+          expect(creds.secretAccessKey).to.equal('xyz')
+          expect(creds.sessionToken).to.equal(undefined)

@@ -14,8 +14,6 @@
     ],
     "devDependencies": {
       "repl.history": "*",
-      "jasmine-node": "1.x",
-      "jasmine-reporters": "1.x",
       "semver": "*",
       "coffee-script": "1.6.3",
       "eslint": "*",

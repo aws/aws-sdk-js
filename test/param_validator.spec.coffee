@@ -12,12 +12,12 @@ describe 'AWS.ParamValidator', ->
     new AWS.ParamValidator().validate(r, params)
 
   expectValid = (params) ->
-    expect(validate(params)).toEqual true
+    expect(validate(params)).to.equal(true)
 
   expectError = (message, params) ->
     if params == undefined
       [message, params] = [undefined, message]
-    expect(-> validate(params)).toThrow(message)
+    expect(-> validate(params)).to.throw(message)
 
   # empty input (nil or {}) means no arguments are accepted
   describe 'empty input', ->

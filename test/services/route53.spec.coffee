@@ -12,11 +12,11 @@ describe 'AWS.Route53', ->
   describe 'setEndpoint', ->
     it 'always enables SSL if no endpoint is set', ->
       service = new AWS.Route53(sslEnabled: false)
-      expect(service.endpoint.protocol).toEqual('https:')
+      expect(service.endpoint.protocol).to.equal('https:')
 
     it 'allows overriding SSL if custom endpoint is set', ->
       service = new AWS.Route53(endpoint: 'http://example.com')
-      expect(service.endpoint.protocol).toEqual('http:')
+      expect(service.endpoint.protocol).to.equal('http:')
 
   describe 'building requests', ->
     service = new AWS.Route53
@@ -24,12 +24,12 @@ describe 'AWS.Route53', ->
     it 'should fix hosted zone ID on input', ->
       req = service.getHostedZone(Id: '/hostedzone/ABCDEFG')
       req.emit('build', [req])
-      expect(req.httpRequest.path).toMatch('/hostedzone/ABCDEFG$')
+      expect(req.httpRequest.path).to.match(new RegExp('/hostedzone/ABCDEFG$'))
 
     it 'should fix health check ID on input', ->
       req = service.getHealthCheck(HealthCheckId: '/healthcheck/ABCDEFG')
       req.emit('build', [req])
-      expect(req.httpRequest.path).toMatch('/healthcheck/ABCDEFG$')
+      expect(req.httpRequest.path).to.match(new RegExp('/healthcheck/ABCDEFG$'))
 
   describe 'changeResourceRecordSets', ->
     it 'correctly builds the XML document', ->

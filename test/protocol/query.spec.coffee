@@ -48,46 +48,46 @@ describe 'AWS.Protocol.Query', ->
 
     it 'should use POST method requests', ->
       buildRequest()
-      expect(request.httpRequest.method).toEqual('POST')
+      expect(request.httpRequest.method).to.equal('POST')
 
     it 'should perform all operations on root (/)', ->
       buildRequest()
-      expect(request.httpRequest.path).toEqual('/')
+      expect(request.httpRequest.path).to.equal('/')
 
     it 'allows mounted path to be specified', ->
       service.setEndpoint('https://localhost/foo/bar')
       request = new AWS.Request(service, 'operationName')
       buildRequest()
-      expect(request.httpRequest.path).toEqual('/foo/bar')
+      expect(request.httpRequest.path).to.equal('/foo/bar')
 
     it 'should set Content-Type header', ->
       buildRequest()
       expect(request.httpRequest.headers['Content-Type']).
-        toEqual('application/x-www-form-urlencoded; charset=utf-8')
+        to.equal('application/x-www-form-urlencoded; charset=utf-8')
 
     it 'should add the api version param', ->
       buildRequest()
       expect(stringify(request.httpRequest.params)).
-        toMatch(/Version=2012-01-01/)
+        to.match(/Version=2012-01-01/)
 
     it 'should add the operation name as Action', ->
       buildRequest()
       expect(stringify(request.httpRequest.params)).
-        toMatch(/Action=OperationName/)
+        to.match(/Action=OperationName/)
 
     it 'should uri encode params properly', ->
       buildRequest()
       expect(stringify(request.httpRequest.params)).
-        toMatch(/foo%2Bbar%3A%20yuck%2Fbaz%3D~/);
+        to.match(/foo%2Bbar%3A%20yuck%2Fbaz%3D~/);
 
     it 'encodes empty string values properly', ->
       buildRequest('')
       expect(stringify(request.httpRequest.params)).
-        toMatch(/Input=($|&)/);
+        to.match(/Input=($|&)/);
 
     it 'serializes empty lists', ->
       buildRequest(null, [])
-      expect(stringify(request.httpRequest.params)).toMatch(/[?&]List(&|$)/)
+      expect(stringify(request.httpRequest.params)).to.match(/[?&]List(&|$)/)
 
   describe 'extractError', ->
     extractError = (body) ->
@@ -104,23 +104,23 @@ describe 'AWS.Protocol.Query', ->
 
     it 'extracts error from UnknownOperationException', ->
       extractError '<UnknownOperationException/>'
-      expect(response.error instanceof Error).toBeTruthy()
-      expect(response.error.code).toEqual('UnknownOperation')
-      expect(response.error.message).toEqual('Unknown operation operationName')
-      expect(response.data).toEqual(null)
+      expect(response.error ).to.be.instanceOf(Error)
+      expect(response.error.code).to.equal('UnknownOperation')
+      expect(response.error.message).to.equal('Unknown operation operationName')
+      expect(response.data).to.equal(null)
 
     it 'extracts the error code and message', ->
       extractError()
-      expect(response.error instanceof Error).toBeTruthy()
-      expect(response.error.code).toEqual('InvalidArgument')
-      expect(response.error.message).toEqual('Provided param is bad')
-      expect(response.data).toEqual(null)
+      expect(response.error ).to.be.instanceOf(Error)
+      expect(response.error.code).to.equal('InvalidArgument')
+      expect(response.error.message).to.equal('Provided param is bad')
+      expect(response.data).to.equal(null)
 
     it 'returns an empty error when the body is blank', ->
       extractError('')
-      expect(response.error.code).toEqual(400)
-      expect(response.error.message).toEqual(null)
-      expect(response.data).toEqual(null)
+      expect(response.error.code).to.equal(400)
+      expect(response.error.message).to.equal(null)
+      expect(response.data).to.equal(null)
 
     it 'extracts error when inside <Errors>', ->
       extractError """
@@ -131,8 +131,8 @@ describe 'AWS.Protocol.Query', ->
           </Error>
         </Errors>
       </SomeResponse>"""
-      expect(response.error.code).toEqual('code')
-      expect(response.error.message).toEqual('msg')
+      expect(response.error.code).to.equal('code')
+      expect(response.error.message).to.equal('msg')
 
     it 'extracts error when <Error> is nested', ->
       extractError """
@@ -141,8 +141,8 @@ describe 'AWS.Protocol.Query', ->
           <Code>code</Code><Message>msg</Message>
         </Error>
       </SomeResponse>"""
-      expect(response.error.code).toEqual('code')
-      expect(response.error.message).toEqual('msg')
+      expect(response.error.code).to.equal('code')
+      expect(response.error.message).to.equal('msg')
 
   describe 'extractData', ->
     extractData = (body) ->
@@ -159,8 +159,8 @@ describe 'AWS.Protocol.Query', ->
         </Data>
       </xml>
       """
-      expect(response.error).toEqual(null)
-      expect(response.data).toEqual({Data:{Name:'abc',Count:123}})
+      expect(response.error).to.equal(null)
+      expect(response.data).to.eql({Data:{Name:'abc',Count:123}})
 
     it 'performs default xml parsing when output rule is missing', ->
       delete service.api.operations.operationName.output
@@ -172,8 +172,8 @@ describe 'AWS.Protocol.Query', ->
         </Data>
       </xml>
       """
-      expect(response.error).toEqual(null)
-      expect(response.data).toEqual({Data:{Name:'abc',Count:'123'}})
+      expect(response.error).to.equal(null)
+      expect(response.data).to.eql({Data:{Name:'abc',Count:'123'}})
 
     it 'removes wrapping result element if resultWrapper is set', ->
       service.api.operations.operationName.output.resultWrapper = 'OperationNameResult'
@@ -187,5 +187,5 @@ describe 'AWS.Protocol.Query', ->
         </OperationNameResult>
       </xml>
       """
-      expect(response.error).toEqual(null)
-      expect(response.data).toEqual({Data:{Name:'abc',Count:12345.5}})
+      expect(response.error).to.equal(null)
+      expect(response.data).to.eql({Data:{Name:'abc',Count:12345.5}})

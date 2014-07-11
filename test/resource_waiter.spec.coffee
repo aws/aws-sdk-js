@@ -14,9 +14,9 @@ describe 'AWS.ResourceWaiter', ->
 
       waiter = new AWS.ResourceWaiter(db, 'tableExists')
       waiter.wait (e, d) -> resp = this; err = e; data = d
-      expect(err).toEqual(null)
-      expect(data.Table.TableStatus).toEqual('ACTIVE')
-      expect(resp.retryCount).toEqual(2)
+      expect(err).to.equal(null)
+      expect(data.Table.TableStatus).to.equal('ACTIVE')
+      expect(resp.retryCount).to.equal(2)
 
     it 'can override the final state', ->
       err = null; data = null; resp = null
@@ -30,16 +30,16 @@ describe 'AWS.ResourceWaiter', ->
 
       waiter = new AWS.ResourceWaiter(db, {tableExists: 'FOO'})
       waiter.wait (e, d) -> resp = this; err = e; data = d
-      expect(err).toEqual(null)
-      expect(data.Table.TableStatus).toEqual('FOO')
-      expect(resp.retryCount).toEqual(3)
+      expect(err).to.equal(null)
+      expect(data.Table.TableStatus).to.equal('FOO')
+      expect(resp.retryCount).to.equal(3)
 
     it 'throws an error if terminal state is not configured', ->
       try
         new AWS.ResourceWaiter(new AWS.DynamoDB, 'invalidState')
       catch e
         err = e
-      expect(err.message).toEqual('State invalidState not found.')
+      expect(err.message).to.equal('State invalidState not found.')
 
     it 'gives up after a maximum number of retries', ->
       err = null; data = null; resp = null
@@ -50,10 +50,10 @@ describe 'AWS.ResourceWaiter', ->
 
       waiter = new AWS.ResourceWaiter(db, 'tableExists')
       waiter.wait (e, d) -> resp = this; err = e; data = d
-      expect(data).toEqual(null)
-      expect(err.code).toEqual('ResourceNotReady')
-      expect(resp.retryCount).toEqual(25)          # 25 max retries
-      expect(resp.error.retryDelay).toEqual(20000) # 20s delay
+      expect(data).to.equal(null)
+      expect(err.code).to.equal('ResourceNotReady')
+      expect(resp.retryCount).to.equal(25)          # 25 max retries
+      expect(resp.error.retryDelay).to.equal(20000) # 20s delay
 
     it 'accepts error state as a terminal state', ->
       err = null; data = null; resp = null
@@ -66,9 +66,9 @@ describe 'AWS.ResourceWaiter', ->
 
       waiter = new AWS.ResourceWaiter(s3, 'bucketNotExists')
       waiter.wait Bucket: 'bucket', (e, d) -> resp = this; err = e; data = d
-      expect(err).toEqual(null)
-      expect(resp.httpResponse.statusCode).toEqual(404)
-      expect(resp.retryCount).toEqual(3)
+      expect(err).to.equal(null)
+      expect(resp.httpResponse.statusCode).to.equal(404)
+      expect(resp.retryCount).to.equal(3)
 
     it 'fails fast if failure value is found', ->
       err = null; data = null; resp = null
@@ -84,6 +84,6 @@ describe 'AWS.ResourceWaiter', ->
 
       waiter = new AWS.ResourceWaiter(ec2, 'instanceRunning')
       waiter.wait InstanceIds: ['id-123456'], (e, d) -> resp = this; err = e; data = d
-      expect(data).toEqual(null)
-      expect(err.code).toEqual('ResourceNotReady')
-      expect(resp.retryCount).toEqual(3)
+      expect(data).to.equal(null)
+      expect(err.code).to.equal('ResourceNotReady')
+      expect(resp.retryCount).to.equal(3)

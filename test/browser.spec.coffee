@@ -35,7 +35,7 @@ eventually = (condition, next, done) ->
           id = setInterval(timeoutFn, delay)
   nextFn()
 
-noError = (err) -> expect(err).toEqual(null)
+noError = (err) -> expect(err).to.equal(null)
 
 integration = (label, fn) ->
   if label.match(/\(no phantomjs\)/) and navigator.userAgent.match(/phantomjs/i)
@@ -52,7 +52,7 @@ integrationTests ->
       req = s3.putObject Key: 'key', Body: 'body'
       req.on 'send', (resp) -> resp.request.abort()
       req.send (err) ->
-        expect(err.name).toEqual('RequestAbortedError')
+        expect(err.name).to.equal('RequestAbortedError')
         done()
 
   describe 'XHR', ->
@@ -67,11 +67,11 @@ integrationTests ->
       req.on 'httpDone', -> httpDone = true
       req.on 'httpError', -> httpError = true
       req.send (err) ->
-        expect(httpHeaders).toEqual(false)
-        expect(httpData).toEqual(false)
-        expect(httpDone).toEqual(false)
-        expect(httpError).toEqual(true)
-        expect(err.name).toEqual('NetworkingError')
+        expect(httpHeaders).to.equal(false)
+        expect(httpData).to.equal(false)
+        expect(httpDone).to.equal(false)
+        expect(httpError).to.equal(true)
+        expect(err.name).to.equal('NetworkingError')
         done()
 
     integration 'can send synchronous requests (no phantomjs)', (done) ->
@@ -81,7 +81,7 @@ integrationTests ->
       svc = new AWS.S3(opts)
       resp1 = svc.putObject(Key: key, Body: 'body').send()
       resp2 = svc.getObject(Key: key).send()
-      expect(resp2.data.Body.toString()).toEqual('body')
+      expect(resp2.data.Body.toString()).to.equal('body')
       svc.deleteObject(Key: key).send()
       done()
 
@@ -95,7 +95,7 @@ integrationTests ->
           if compareFn
             compareFn(data)
           else
-            expect(data.Body.toString()).toEqual(body)
+            expect(data.Body.toString()).to.equal(body)
           s3.deleteObject(Key: key).send(done)
 
     integration 'GETs and PUTs objects to a bucket (no phantomjs)', (done) ->
@@ -103,15 +103,15 @@ integrationTests ->
 
     integration 'writes typed array data (no phantomjs)', (done) ->
       testWrite done, new Uint8Array([2, 4, 8]), (data) ->
-        expect(data.Body[0]).toEqual(2)
-        expect(data.Body[1]).toEqual(4)
-        expect(data.Body[2]).toEqual(8)
+        expect(data.Body[0]).to.equal(2)
+        expect(data.Body[1]).to.equal(4)
+        expect(data.Body[2]).to.equal(8)
 
     integration 'writes blobs (no phantomjs)', (done) ->
       testWrite done, new Blob(['a', 'b', 'c']), (data) ->
-        expect(data.Body[0]).toEqual(97)
-        expect(data.Body[1]).toEqual(98)
-        expect(data.Body[2]).toEqual(99)
+        expect(data.Body[0]).to.equal(97)
+        expect(data.Body[1]).to.equal(98)
+        expect(data.Body[2]).to.equal(99)
 
     integration 'writes with charset', (done) ->
       key = uniqueName('test')
@@ -133,18 +133,18 @@ integrationTests ->
         req.on 'httpUploadProgress', (p) -> progress.push(p)
         req.send (err, data) ->
           noError(err)
-          expect(progress.length > 1).toEqual(true)
-          expect(progress[0].total).toEqual(body.size)
-          expect(progress[0].loaded > 10).toEqual(true)
+          expect(progress.length > 1).to.equal(true)
+          expect(progress[0].total).to.equal(body.size)
+          expect(progress[0].loaded > 10).to.equal(true)
 
           progress = []
           req = s3.getObject(Key: key)
           req.on 'httpDownloadProgress', (p) -> progress.push(p)
           req.send (err, data) ->
             noError(err)
-            expect(progress.length > 1).toEqual(true)
-            expect(progress[0].total).toEqual(body.size)
-            expect(progress[0].loaded > 10).toEqual(true)
+            expect(progress.length > 1).to.equal(true)
+            expect(progress[0].total).to.equal(body.size)
+            expect(progress[0].loaded > 10).to.equal(true)
             s3.deleteObject(Key: key).send()
             done()
 
@@ -155,14 +155,14 @@ integrationTests ->
         noError(err)
         dynamodb.getItem {Key: {id: {S: key}}}, (err, data) ->
           noError(err)
-          expect(data.Item.data.S).toEqual('ƒoo')
+          expect(data.Item.data.S).to.equal('ƒoo')
           dynamodb.deleteItem({Key: {id: {S: key}}}).send(done)
 
   describe 'AWS.STS', ->
     integration 'gets a session token', (done) ->
       sts.getSessionToken (err, data) ->
         noError(err)
-        expect(data.Credentials.AccessKeyId).not.toEqual('')
+        expect(data.Credentials.AccessKeyId).not.to.equal('')
         done()
 
   describe 'AWS.SQS', ->
@@ -180,7 +180,7 @@ integrationTests ->
               eventually ((err, data) -> data.Messages[0].Body == msg),
                 ((cb) -> sqs.receiveMessage(cb)), (err, data) ->
                   noError(err)
-                  expect(data.Messages[0].MD5OfBody).toEqual(AWS.util.crypto.md5(msg, 'hex'))
+                  expect(data.Messages[0].MD5OfBody).to.equal(AWS.util.crypto.md5(msg, 'hex'))
                   sqs.deleteQueue(done)
 
   describe 'AWS.SNS', ->
@@ -191,5 +191,5 @@ integrationTests ->
         sns = new AWS.SNS(sns.config)
         sns.config.params = TopicArn: arn
         sns.listTopics (err, data) ->
-          expect(data.Topics.filter((o) -> o.TopicArn == arn)).not.toEqual(null)
+          expect(data.Topics.filter((o) -> o.TopicArn == arn)).not.to.equal(null)
           sns.deleteTopic(done)

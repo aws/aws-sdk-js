@@ -9,7 +9,7 @@ describe 'AWS.CloudSearchDomain', ->
         new AWS.CloudSearchDomain
       catch e
         err = e
-      expect(err.name).toEqual('InvalidEndpoint')
+      expect(err.name).to.equal('InvalidEndpoint')
 
     it 'fails if the endpoint is a template', ->
       err = {}
@@ -17,7 +17,7 @@ describe 'AWS.CloudSearchDomain', ->
         new AWS.CloudSearchDomain endpoint: '{region}.domain'
       catch e
         err = e
-      expect(err.name).toEqual('InvalidEndpoint')
+      expect(err.name).to.equal('InvalidEndpoint')
 
     it 'allows explicit endpoint', ->
-      expect(-> new AWS.CloudSearchDomain endpoint: 'host.domain').not.toThrow()
+      expect(-> new AWS.CloudSearchDomain endpoint: 'host.domain').not.to.throw()

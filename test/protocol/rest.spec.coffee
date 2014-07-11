@@ -39,7 +39,7 @@ describe 'AWS.Protocol.Rest', ->
     describe 'method', ->
       it 'populates method from the operation', ->
         defop http: method: 'GET'
-        expect(build().httpRequest.method).toEqual('GET')
+        expect(build().httpRequest.method).to.equal('GET')
 
     describe 'uri', ->
       beforeEach ->
@@ -50,41 +50,41 @@ describe 'AWS.Protocol.Rest', ->
 
       it 'populates uri from the operation', ->
         defop http: requestUri: '/path'
-        expect(build().httpRequest.path).toEqual('/path')
+        expect(build().httpRequest.path).to.equal('/path')
 
       it 'appends to existing httpRequest endpoint', ->
         service = new MockRESTService(endpoint: 'https://localhost/foo/bar')
         request = new AWS.Request(service, 'sampleOperation')
         request.params = Id: 'abc'
         defop input: input, http: requestUri: '/Owner/{Id}'
-        expect(build().httpRequest.path).toEqual('/foo/bar/Owner/abc')
+        expect(build().httpRequest.path).to.equal('/foo/bar/Owner/abc')
 
       it 'replaces param placeholders', ->
         request.params = Id: 'abc'
         defop input: input, http: requestUri: '/Owner/{Id}'
-        expect(build().httpRequest.path).toEqual('/Owner/abc')
+        expect(build().httpRequest.path).to.equal('/Owner/abc')
 
       it 'replaces param with empty string', ->
         request.params = Id: ''
         defop input: input, http: requestUri: '/Owner/{Id}'
-        expect(build().httpRequest.path).toEqual('/Owner/')
+        expect(build().httpRequest.path).to.equal('/Owner/')
 
       it 'can replace multiple path placeholders', ->
         request.params = Id: 'abc', Count: 123
         input.members.Count = type: 'integer', location: 'uri'
         defop input: input, http: requestUri: '/{Id}/{Count}'
-        expect(build().httpRequest.path).toEqual('/abc/123')
+        expect(build().httpRequest.path).to.equal('/abc/123')
 
       it 'performs querystring param replacements', ->
         request.params = Id: 'abc'
         defop input: input, http: requestUri: '/path'
         input.members.Id = location: 'querystring', locationName: 'id-param'
-        expect(build().httpRequest.path).toEqual('/path?id-param=abc')
+        expect(build().httpRequest.path).to.equal('/path?id-param=abc')
 
       it 'omits querystring when param is not provided', ->
         defop input: input, http: requestUri: '/path'
         input.members.Id = location: 'querystring', locationName: 'id-param'
-        expect(build().httpRequest.path).toEqual('/path')
+        expect(build().httpRequest.path).to.equal('/path')
 
       it 'accpets multiple query params with uri params', ->
         request.params = Abc:'abc', Xyz:'xyz', Bar:'bar'
@@ -93,14 +93,14 @@ describe 'AWS.Protocol.Rest', ->
         input.members.Xyz = location: 'uri'
         input.members.Foo = location: 'querystring', locationName: 'foo'
         input.members.Bar = location: 'querystring', locationName: 'bar'
-        expect(build().httpRequest.path).toEqual('/abc/xyz?bar=bar')
+        expect(build().httpRequest.path).to.equal('/abc/xyz?bar=bar')
 
       it 'uri escapes params in both path and querystring', ->
         request.params = Path:'a b', Query:'a/b'
         defop input: input, http: requestUri: '/{Path}'
         input.members.Path = location: 'uri'
         input.members.Query = location: 'querystring', locationName: 'query'
-        expect(build().httpRequest.path).toEqual('/a%20b?query=a%2Fb')
+        expect(build().httpRequest.path).to.equal('/a%20b?query=a%2Fb')
 
     describe 'headers', ->
       beforeEach ->
@@ -112,18 +112,18 @@ describe 'AWS.Protocol.Rest', ->
       it 'populates the headers with present params', ->
         request.params = ACL: 'public-read'
         defop input: input
-        expect(build().httpRequest.headers['x-amz-acl']).toEqual('public-read')
+        expect(build().httpRequest.headers['x-amz-acl']).to.equal('public-read')
 
       it 'populates the headers type translations', ->
         request.params = Count: 123
         defop input: members: Count: locationName: 'count', type: 'integer', location: 'header'
-        expect(build().httpRequest.headers['count']).toEqual('123')
+        expect(build().httpRequest.headers['count']).to.equal('123')
 
       it 'uses default rule name if locationName property is not present', ->
         request.params = ACL: 'public-read'
         delete input.members.ACL.locationName
         defop input: input
-        expect(build().httpRequest.headers['ACL']).toEqual('public-read')
+        expect(build().httpRequest.headers['ACL']).to.equal('public-read')
 
       it 'works with map types', ->
         request.params =
@@ -137,8 +137,8 @@ describe 'AWS.Protocol.Rest', ->
         defop input: input
 
         build()
-        expect(request.httpRequest.headers['x-amz-meta-foo']).toEqual('bar')
-        expect(request.httpRequest.headers['x-amz-meta-abc']).toEqual('xyz')
+        expect(request.httpRequest.headers['x-amz-meta-foo']).to.equal('bar')
+        expect(request.httpRequest.headers['x-amz-meta-abc']).to.equal('xyz')
 
     describe 'timestamp header with format', ->
       it 'populates the header with correct timestamp formatting', ->
@@ -150,7 +150,7 @@ describe 'AWS.Protocol.Rest', ->
           type: 'timestamp'
           timestampFormat: 'rfc822'
         defop input: input
-        expect(build().httpRequest.headers['If-Modified-Since']).toEqual(date.toUTCString())
+        expect(build().httpRequest.headers['If-Modified-Since']).to.equal(date.toUTCString())
 
     describe 'timestamp header without format', ->
       it 'populates the header using the api formatting', ->
@@ -162,7 +162,7 @@ describe 'AWS.Protocol.Rest', ->
           locationName: 'If-Modified-Since'
           type: 'timestamp'
         defop input: input
-        expect(build().httpRequest.headers['If-Modified-Since']).toEqual(date.toUTCString())
+        expect(build().httpRequest.headers['If-Modified-Since']).to.equal(date.toUTCString())
 
     describe 'timestamp header with api formatting and parameter formatting', ->
       it 'populates the header using the parameter formatting', ->
@@ -175,7 +175,7 @@ describe 'AWS.Protocol.Rest', ->
           type: 'timestamp'
           timestampFormat: 'rfc822'
         defop input: input
-        expect(build().httpRequest.headers['If-Modified-Since']).toEqual(date.toUTCString())
+        expect(build().httpRequest.headers['If-Modified-Since']).to.equal(date.toUTCString())
 
     describe 'timestamp header with iso formatting', ->
       it 'populates the header using the parameter formatting', ->
@@ -187,7 +187,7 @@ describe 'AWS.Protocol.Rest', ->
           type: 'timestamp'
           timestampFormat: 'iso8601'
         defop input: input
-        expect(build().httpRequest.headers['If-Modified-Since']).toEqual(date.toISOString())
+        expect(build().httpRequest.headers['If-Modified-Since']).to.equal(date.toISOString())
 
   describe 'extractData', ->
     output = type: 'structure', members:
@@ -201,16 +201,16 @@ describe 'AWS.Protocol.Rest', ->
     describe 'headers', ->
       it 'extracts header values', ->
         response.httpResponse.headers['content-type'] = 'text/plain'
-        expect(extract().data.ContentType).toEqual('text/plain')
+        expect(extract().data.ContentType).to.equal('text/plain')
 
       it 'extracts headers when the rule name is camel-cased', ->
         response.httpResponse.headers['content-type'] = 'text/plain'
         output.members.ContentType.locationName = 'Content-Type'
-        expect(extract().data.ContentType).toEqual('text/plain')
+        expect(extract().data.ContentType).to.equal('text/plain')
 
       it 'extracts headers when the header name is camel-cased', ->
         response.httpResponse.headers['Content-Type'] = 'text/plain'
-        expect(extract().data.ContentType).toEqual('text/plain')
+        expect(extract().data.ContentType).to.equal('text/plain')
 
       it 'extracts map types from header', ->
         output.members.Metadata = type: 'map', location: 'headers', locationName: 'x-amz-meta-'
@@ -218,20 +218,20 @@ describe 'AWS.Protocol.Rest', ->
         response.httpResponse.headers['x-amz-meta-bar'] = 'bar'
 
         extract()
-        expect(response.data.Metadata.FOO).toEqual('foo')
-        expect(response.data.Metadata.bar).toEqual('bar')
+        expect(response.data.Metadata.FOO).to.equal('foo')
+        expect(response.data.Metadata.bar).to.equal('bar')
 
       it 'adds empty map if no matching headers are found', ->
         output.members.Metadata = type: 'map', location: 'headers', locationName: 'x-amz-meta-'
-        expect(extract().data.Metadata).toEqual({})
+        expect(extract().data.Metadata).to.eql({})
 
     describe 'status code', ->
       it 'extracts the http status when instructed to', ->
         output.members.Result = type: 'integer', location: 'status'
         response.httpResponse.statusCode = 200
-        expect(extract().data.Result).toEqual(200)
+        expect(extract().data.Result).to.equal(200)
 
       it 'casts string status codes to integers', ->
         output.members.Result = type: 'integer', location: 'status'
         response.httpResponse.statusCode = '202'
-        expect(extract().data.Result).toEqual(202)
+        expect(extract().data.Result).to.equal(202)

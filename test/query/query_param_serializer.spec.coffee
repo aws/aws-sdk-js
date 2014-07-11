@@ -17,7 +17,7 @@ describe 'QueryParamSerializer', ->
     it 'can serialize simple strings', ->
       rules = {Name1:{type:'string'},Name2:{type:'string'}}
       params = serialize({Name1:'abc',Name2:'xyz'}, rules)
-      expect(params).toEqual([
+      expect(params).to.eql([
         ['Name1', 'abc']
         ['Name2', 'xyz']
       ])
@@ -25,17 +25,17 @@ describe 'QueryParamSerializer', ->
     it 'stringifies values', ->
       rules = {Count: {type:'string'}}
       params = serialize({ Count:1 }, rules)
-      expect(params).toEqual([['Count', '1']])
+      expect(params).to.eql([['Count', '1']])
 
     it 'defaults params to strings when type not specified', ->
       rules = {ParamName: {}}
       params = serialize({ ParamName:'abc' }, rules)
-      expect(params).toEqual([['ParamName', 'abc']])
+      expect(params).to.eql([['ParamName', 'abc']])
 
     it 'ignores null values', ->
       rules = {ParamName: {}}
       params = serialize({ ParamName:null }, rules)
-      expect(params).toEqual([])
+      expect(params).to.eql([])
 
   describe 'structures', ->
 
@@ -52,7 +52,7 @@ describe 'QueryParamSerializer', ->
                   members:
                     Dd: {}
       params = serialize({Aa:Bb:Cc:Dd:'value'}, rules)
-      expect(params).toEqual([
+      expect(params).to.eql([
         ['Aa.Bb.Cc.Dd', 'value']
       ])
 
@@ -65,7 +65,7 @@ describe 'QueryParamSerializer', ->
             Xyz: {}
         Root2: {}
       params = serialize({Root:{Abc:'1',Xyz:'2'},Root2:'3'}, rules)
-      expect(params).toEqual([
+      expect(params).to.eql([
         ['Root.Abc', '1']
         ['Root.Xyz', '2']
         ['Root2', '3']
@@ -80,7 +80,7 @@ describe 'QueryParamSerializer', ->
             Leaf:
               locationName: 'lEAF'
       params = serialize({Root:{Leaf:'value'}}, rules)
-      expect(params).toEqual([
+      expect(params).to.eql([
         ['ROOT.lEAF', 'value']
       ])
 
@@ -93,7 +93,7 @@ describe 'QueryParamSerializer', ->
             Leaf:
               locationName: 'lEAF'
       params = serialize({Root:null}, rules)
-      expect(params).toEqual([])
+      expect(params).to.eql([])
 
 
   describe 'lists', ->
@@ -107,7 +107,7 @@ describe 'QueryParamSerializer', ->
             flattened: true
             member: type: 'string'
         params = serialize({Name:['a','b','c']}, rules)
-        expect(params).toEqual([
+        expect(params).to.eql([
           ['Name.1', 'a'],
           ['Name.2', 'b'],
           ['Name.3', 'c'],
@@ -124,7 +124,7 @@ describe 'QueryParamSerializer', ->
                 member:
                   locationName: 'ListItem'
         params = serialize({Root:{Items:['a', 'b', 'c']}}, rules)
-        expect(params).toEqual([
+        expect(params).to.eql([
           ['Root.ListItem.1', 'a'],
           ['Root.ListItem.2', 'b'],
           ['Root.ListItem.3', 'c'],
@@ -140,7 +140,7 @@ describe 'QueryParamSerializer', ->
                 flattened: true
                 member: type: 'string'
         params = serialize({Person:{Name:['a','b','c']}}, rules)
-        expect(params).toEqual([
+        expect(params).to.eql([
           ['Person.Name.1', 'a'],
           ['Person.Name.2', 'b'],
           ['Person.Name.3', 'c'],
@@ -157,7 +157,7 @@ describe 'QueryParamSerializer', ->
                 Aa: {}
                 Bb: {}
         params = serialize({Root:[{Aa:'a1',Bb:'b1'},{Aa:'a2',Bb:'b2'}]},rules)
-        expect(params.sort()).toEqual([
+        expect(params.sort()).to.eql([
           ['Root.1.Aa', 'a1'],
           ['Root.1.Bb', 'b1'],
           ['Root.2.Aa', 'a2'],
@@ -171,7 +171,7 @@ describe 'QueryParamSerializer', ->
             flattened: true
             member: type: 'string'
         params = serialize({Root:['a', 'b', 'c']}, rules)
-        expect(params).toEqual([
+        expect(params).to.eql([
           ['Root.1', 'a'],
           ['Root.2', 'b'],
           ['Root.3', 'c'],
@@ -184,7 +184,7 @@ describe 'QueryParamSerializer', ->
             type: 'list'
             member: type: 'string'
         params = serialize({Person:['a','b','c']}, rules)
-        expect(params).toEqual([
+        expect(params).to.eql([
           ['Person.member.1', 'a'],
           ['Person.member.2', 'b'],
           ['Person.member.3', 'c'],
@@ -197,7 +197,7 @@ describe 'QueryParamSerializer', ->
             member:
               locationName: 'Name'
         params = serialize({Person:['a','b','c']}, rules)
-        expect(params).toEqual([
+        expect(params).to.eql([
           ['Person.member.1', 'a'],
           ['Person.member.2', 'b'],
           ['Person.member.3', 'c'],
@@ -211,7 +211,7 @@ describe 'QueryParamSerializer', ->
             member:
               locationName: 'Name'
         params = serialize({People:['a','b','c']}, rules)
-        expect(params).toEqual([
+        expect(params).to.eql([
           ['Person.member.1', 'a'],
           ['Person.member.2', 'b'],
           ['Person.member.3', 'c'],
@@ -228,7 +228,7 @@ describe 'QueryParamSerializer', ->
           value: {}
       data = {Attributes:{Color:'red',Size:'large',Value:'low'}}
       params = serialize(data, rules)
-      expect(params).toEqual([
+      expect(params).to.eql([
         ['Attributes.1.key', 'Color'],
         ['Attributes.1.value', 'red'],
         ['Attributes.2.key', 'Size'],
@@ -246,7 +246,7 @@ describe 'QueryParamSerializer', ->
             value: {}
         data = Attributes: Color: 'red', Size: 'large', Value: 'low'
         params = serialize(data, rules)
-        expect(params).toEqual([
+        expect(params).to.eql([
           ['Attributes.entry.1.key', 'Color'],
           ['Attributes.entry.1.value', 'red'],
           ['Attributes.entry.2.key', 'Size'],
@@ -268,7 +268,7 @@ describe 'QueryParamSerializer', ->
             locationName: 'Value'
       data = {Attributes:{Color:'red',Size:'large',Value:'low'}}
       params = serialize(data, rules)
-      expect(params).toEqual([
+      expect(params).to.eql([
         ['Attributes.1.Name', 'Color'],
         ['Attributes.1.Value', 'red'],
         ['Attributes.2.Name', 'Size'],
@@ -283,7 +283,7 @@ describe 'QueryParamSerializer', ->
       date = new Date(); date.setMilliseconds(0)
       rules = { Date: { type: 'timestamp' } }
       params = serialize({ Date: date }, rules)
-      expect(params).toEqual([
+      expect(params).to.eql([
         ['Date', helpers.util.date.iso8601(date)],
       ])
 
@@ -291,6 +291,6 @@ describe 'QueryParamSerializer', ->
       date = new Date(); date.setMilliseconds(0)
       rules = { Date: { type: 'timestamp', timestampFormat: 'rfc822' } }
       params = serialize({ Date: date }, rules)
-      expect(params).toEqual([
+      expect(params).to.eql([
         ['Date', helpers.util.date.rfc822(date)],
       ])

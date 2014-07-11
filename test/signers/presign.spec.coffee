@@ -16,21 +16,21 @@ describe 'AWS.Signers.Presign', ->
 
   it 'presigns requests', ->
     cw.listMetrics().presign (err, url) ->
-      expect(url).toEqual(resultUrl)
+      expect(url).to.equal(resultUrl)
 
   it 'presigns synchronously', ->
-    expect(cw.listMetrics().presign()).toEqual(resultUrl)
+    expect(cw.listMetrics().presign()).to.equal(resultUrl)
 
   it 'allows specifying different expiry time', ->
-    expect(cw.listMetrics().presign(900)).toMatch('X-Amz-Expires=900&')
+    expect(cw.listMetrics().presign(900)).to.contain('X-Amz-Expires=900&')
 
   it 'limits expiry time to a week in SigV4', ->
     cw.listMetrics().presign 9999999, (err) ->
-      expect(err.code).toEqual('InvalidExpiryTime')
-      expect(err.message).toEqual(
+      expect(err.code).to.equal('InvalidExpiryTime')
+      expect(err.message).to.equal(
         'Presigning does not support expiry time greater than a week with SigV4 signing.')
 
   it 'only supports s3 or v4 signers', ->
     new AWS.EC2().describeInstances().presign (err) ->
-      expect(err.code).toEqual('UnsupportedSigner')
-      expect(err.message).toEqual('Presigning only supports S3 or SigV4 signing.')
+      expect(err.code).to.equal('UnsupportedSigner')
+      expect(err.message).to.equal('Presigning only supports S3 or SigV4 signing.')

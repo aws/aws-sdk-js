@@ -14,13 +14,13 @@ if AWS.util.isNode()
         req = glacier.listVaults()
         req.emit('validate', [req])
         req.emit('build', [req])
-        expect(req.httpRequest.path).toEqual('/-/vaults')
+        expect(req.httpRequest.path).to.equal('/-/vaults')
 
       it 'will not override accountId if set', ->
         req = glacier.listVaults(accountId: 'ABC123')
         req.emit('validate', [req])
         req.emit('build', [req])
-        expect(req.httpRequest.path).toEqual('/ABC123/vaults')
+        expect(req.httpRequest.path).to.equal('/ABC123/vaults')
 
     describe 'computeChecksums', ->
       it 'returns correct linear and tree hash for buffer data', ->
@@ -33,7 +33,7 @@ if AWS.util.isNode()
           linearHash: '68aff0c5a91aa0491752bfb96e3fef33eb74953804f6a2f7b708d5bcefa8ff6b',
           treeHash: '154e26c78fd74d0c2c9b3cc4644191619dc4f2cd539ae2a74d5fd07957a3ee6a'
 
-        expect(glacier.computeChecksums(data)).toEqual(expected)
+        expect(glacier.computeChecksums(data)).to.eql(expected)
 
     describe 'initiateJob', ->
       it 'correctly builds the request', ->
@@ -45,8 +45,8 @@ if AWS.util.isNode()
             Type: 'bar'
         glacier.initiateJob params, (err, data) ->
           req = this.request.httpRequest
-          expect(req.path).toEqual('/-/vaults/vault-name/jobs')
-          expect(req.body).toEqual('{"Format":"foo","Type":"bar"}')
+          expect(req.path).to.equal('/-/vaults/vault-name/jobs')
+          expect(req.body).to.equal('{"Format":"foo","Type":"bar"}')
 
     describe 'uploadArchive', ->
       it 'passes the body along', ->
@@ -56,6 +56,6 @@ if AWS.util.isNode()
           body: 'abc'
         glacier.uploadArchive params, (err, data) ->
           req = this.request.httpRequest
-          expect(req.method).toEqual('POST')
-          expect(req.path).toEqual('/-/vaults/vault-name/archives')
-          expect(req.body).toEqual('abc')
+          expect(req.method).to.equal('POST')
+          expect(req.path).to.equal('/-/vaults/vault-name/archives')
+          expect(req.body).to.equal('abc')

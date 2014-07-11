@@ -1,0 +1,5 @@
+--compilers coffee:coffee-script
+--reporter dot
+--ui bdd
+--timeout 2000
+--no-exit

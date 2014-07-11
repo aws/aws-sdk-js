@@ -270,10 +270,10 @@ describe 'AWS.XML.Builder', ->
       matchXML(toXML(otherRules, params), xml)
 
     it 'ignores null', ->
-      expect(toXML(rules, Items: null)).toEqual('')
+      expect(toXML(rules, Items: null)).to.equal('')
 
     it 'ignores undefined', ->
-      expect(toXML(rules, Items: undefined)).toEqual('')
+      expect(toXML(rules, Items: undefined)).to.equal('')
 
   describe 'flattened maps', ->
     rules =
@@ -328,10 +328,10 @@ describe 'AWS.XML.Builder', ->
       matchXML(toXML(otherRules, params), xml)
 
     it 'ignores null', ->
-      expect(toXML(rules, Items: null)).toEqual('')
+      expect(toXML(rules, Items: null)).to.equal('')
 
     it 'ignores undefined', ->
-      expect(toXML(rules, Items: undefined)).toEqual('')
+      expect(toXML(rules, Items: undefined)).to.equal('')
 
   describe 'numbers', ->
 

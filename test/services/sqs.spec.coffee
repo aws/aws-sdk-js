@@ -10,9 +10,9 @@ describe 'AWS.SQS', ->
     helpers.mockHttpResponse 200, {}, response
     sqs[operation](input).send (err, data) ->
       if shouldPass
-        expect(err).toEqual(null)
+        expect(err).to.equal(null)
       else
-        expect(err).not.toEqual(null)
+        expect(err).not.to.equal(null)
       cb(err, data)
 
   describe 'buildEndpoint', ->
@@ -23,7 +23,7 @@ describe 'AWS.SQS', ->
       helpers.mockHttpResponse 200, {}, ''
       req = sqs.sendMessage(MessageBody: 'foo')
       req.build()
-      expect(req.httpRequest.region).toEqual('region-1')
+      expect(req.httpRequest.region).to.equal('region-1')
 
   describe 'sendMessage', ->
     input = MessageBody: 'foo'
@@ -38,13 +38,13 @@ describe 'AWS.SQS', ->
 
     it 'correctly validates MD5 of message input', (done) ->
       checksumValidate 'sendMessage', input, payload(md5), true, (err, data) ->
-        expect(data.MD5OfMessageBody).toEqual(md5)
+        expect(data.MD5OfMessageBody).to.equal(md5)
         done()
 
     it 'raises InvalidChecksum if MD5 does not match message input', (done) ->
       checksumValidate 'sendMessage', input, payload('000'), false, (err) ->
-        expect(err.message).toMatch('Got "000", expecting "acbd18db4cc2f85cedef654fccc4a4d8"')
-        expect(err.messageIds).toEqual(['MSGID'])
+        expect(err.message).to.contain('Got "000", expecting "acbd18db4cc2f85cedef654fccc4a4d8"')
+        expect(err.messageIds).to.eql(['MSGID'])
         done()
 
     it 'ignores checksum errors if computeChecksums is false', (done) ->
@@ -83,16 +83,16 @@ describe 'AWS.SQS', ->
     it 'correctly validates MD5 of operation', (done) ->
       output = payload(md5foo, md5bar, md5bar)
       checksumValidate 'sendMessageBatch', input, output, true, (err, data) ->
-        expect(data.Successful[0].MD5OfMessageBody).toEqual(md5foo)
-        expect(data.Successful[1].MD5OfMessageBody).toEqual(md5bar)
-        expect(data.Successful[2].MD5OfMessageBody).toEqual(md5bar)
+        expect(data.Successful[0].MD5OfMessageBody).to.equal(md5foo)
+        expect(data.Successful[1].MD5OfMessageBody).to.equal(md5bar)
+        expect(data.Successful[2].MD5OfMessageBody).to.equal(md5bar)
         done()
 
     it 'raises InvalidChecksum with relevent message IDs', (done) ->
       output = payload('000', md5bar, '000')
       checksumValidate 'sendMessageBatch', input, output, false, (err, data) ->
-        expect(err.message).toMatch('Invalid messages: a, c')
-        expect(err.messageIds).toEqual(['MSGID1', 'MSGID3'])
+        expect(err.message).to.contain('Invalid messages: a, c')
+        expect(err.messageIds).to.eql(['MSGID1', 'MSGID3'])
         done()
 
     it 'ignores checksum errors if computeChecksums is false', (done) ->
@@ -114,19 +114,19 @@ describe 'AWS.SQS', ->
     it 'correctly validates MD5 of operation', (done) ->
       output = payload('foo', md5, 'MSGID')
       checksumValidate 'receiveMessage', {}, output, true, (err, data) ->
-        expect(data.Messages[0].MD5OfBody).toEqual(md5)
+        expect(data.Messages[0].MD5OfBody).to.equal(md5)
         done()
 
     it 'raises InvalidChecksum with relevent message IDs', (done) ->
       output = payload('foo', '000', 'MSGID')
       checksumValidate 'receiveMessage', {}, output, false, (err, data) ->
-        expect(err.message).toMatch('Invalid messages: MSGID')
-        expect(err.messageIds).toEqual(['MSGID'])
+        expect(err.message).to.contain('Invalid messages: MSGID')
+        expect(err.messageIds).to.eql(['MSGID'])
         done()
 
     it 'ignores checksum errors if computeChecksums is false', (done) ->
       output = payload('foo', '000', 'MSGID')
       sqs.config.computeChecksums = false
       checksumValidate 'receiveMessage', {}, output, true, (err, data) ->
-        expect(data.Messages[0].MD5OfBody).not.toEqual(md5)
+        expect(data.Messages[0].MD5OfBody).not.to.equal(md5)
         done()

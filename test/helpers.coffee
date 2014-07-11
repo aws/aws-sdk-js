@@ -1,9 +1,12 @@
 AWS = null
+global = null
 ignoreRequire = require
 if typeof window == 'undefined'
   AWS = ignoreRequire('../lib/aws')
+  global = GLOBAL
 else
   AWS = window.AWS
+  global = window
 
 EventEmitter = require('events').EventEmitter
 Buffer = AWS.util.Buffer
@@ -34,7 +37,7 @@ _createSpy = (name) ->
   spy = ->
     spy.calls.push
       object: this
-      arguments: arguments
+      arguments: Array.prototype.slice.call(arguments)
     if spy.callFn
       return spy.callFn.apply(spy.object, arguments)
     if spy.shouldReturn
@@ -60,7 +63,9 @@ _spyOn = (obj, methodName) ->
 # Disable setTimeout for tests
 # Warning: this might cause unpredictable results
 # TODO: refactor this out.
-`setTimeout = function(fn, delay) { fn(); }`
+global.setTimeout = (fn) -> fn()
+
+global.expect = require('chai').expect
 
 flattenXML = (xml) ->
   if (!xml)
@@ -70,7 +75,7 @@ flattenXML = (xml) ->
     replace(/^\s+|\s+$/g, '') # trims whitespace from ends
 
 matchXML = (xml1, xml2) ->
-  expect(flattenXML(xml1)).toEqual(flattenXML(xml2))
+  expect(flattenXML(xml1)).to.equal(flattenXML(xml2))
 
 MockService = AWS.Service.defineService 'mockService',
   serviceIdentifier: 'mock'

@@ -11,44 +11,44 @@ describe 'AWS.Model.Api', ->
         signatureVersion: 'v4', protocol: 'json', timestampFormat: 'rfc822'
         xmlNamespace: 'URI', serviceAbbreviation: 'abbr', serviceFullName: 'name'
 
-      expect(api.apiVersion).toEqual('1.0')
-      expect(api.endpointPrefix).toEqual('endpoint')
-      expect(api.globalEndpoint).toEqual('global')
-      expect(api.signatureVersion).toEqual('v4')
-      expect(api.protocol).toEqual('json')
-      expect(api.timestampFormat).toEqual('rfc822')
-      expect(api.xmlNamespaceUri).toEqual('URI')
-      expect(api.abbreviation).toEqual('abbr')
-      expect(api.fullName).toEqual('name')
+      expect(api.apiVersion).to.equal('1.0')
+      expect(api.endpointPrefix).to.equal('endpoint')
+      expect(api.globalEndpoint).to.equal('global')
+      expect(api.signatureVersion).to.equal('v4')
+      expect(api.protocol).to.equal('json')
+      expect(api.timestampFormat).to.equal('rfc822')
+      expect(api.xmlNamespaceUri).to.equal('URI')
+      expect(api.abbreviation).to.equal('abbr')
+      expect(api.fullName).to.equal('name')
 
   describe 'isApi', ->
     it 'is an API', ->
-      expect(make().isApi).toBe(true)
+      expect(make().isApi).to.equal(true)
 
   describe 'className', ->
     it 'generates the correct class name from fullName', ->
       api = make metadata: serviceFullName: 'Amazon Service Name HeRE'
-      expect(api.className).toEqual('ServiceNameHeRE')
+      expect(api.className).to.equal('ServiceNameHeRE')
 
     it 'uses abbreviation if supplied', ->
       api = make metadata: serviceAbbreviation: 'Amazon SNH'
-      expect(api.className).toEqual('SNH')
+      expect(api.className).to.equal('SNH')
 
     it 'special cases ELB', ->
       api = make metadata: serviceFullName: 'AWS Elastic Load Balancing'
-      expect(api.className).toEqual('ELB')
+      expect(api.className).to.equal('ELB')
 
     it 'handles lack of service name', ->
-      expect(make().className).toEqual(null)
+      expect(make().className).to.equal(null)
 
   describe 'documentation', ->
     it 'does not provide documentation by default', ->
       api = make documentation: 'foo'
-      expect(api.documentation).toEqual(null)
+      expect(api.documentation).not.to.exist
 
     it 'can attach documentation if option is enabled', ->
       api = make {documentation: 'foo'}, documentation: true
-      expect(api.documentation).toEqual('foo')
+      expect(api.documentation).to.equal('foo')
 
   describe 'shapes', ->
     it 'creates a set of shapes', ->
@@ -64,4 +64,4 @@ describe 'AWS.Model.Api', ->
             type: 'timestamp'
             timestampFormat: 'iso8601'
 
-      expect(api.shapes.Shape1.members.Member1.type).toEqual('timestamp')
+      expect(api.shapes.Shape1.members.Member1.type).to.equal('timestamp')

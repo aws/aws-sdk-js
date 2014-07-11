@@ -25,9 +25,9 @@ describe 'AWS.RDS', ->
       helpers.mockHttpResponse 200, {}, body
       params = DBSecurityGroupName:'foo', DBSecurityGroupDescription:'foo'
       rds.createDBSecurityGroup params, (error, data) ->
-        expect(error).toBe(null)
-        expect(this.requestId).toEqual('1234567890')
-        expect(data).toEqual
+        expect(error).to.equal(null)
+        expect(this.requestId).to.equal('1234567890')
+        expect(data).to.eql
           DBSecurityGroup:
             DBSecurityGroupDescription: 'foo'
             DBSecurityGroupName: 'foo'

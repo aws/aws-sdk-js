@@ -17,7 +17,7 @@ describe 'AWS.JSON.Parser', ->
   describe 'parse', ->
 
     it 'returns an empty document when there are no params', ->
-      expect(parse({}, '{}')).toEqual({})
+      expect(parse({}, '{}')).to.eql({})
 
     describe 'structures', ->
       rules =
@@ -31,10 +31,10 @@ describe 'AWS.JSON.Parser', ->
 
       it 'translates input', ->
         params = '{ "Items": { "A": "a", "B": "b" } }'
-        expect(parse(rules, params)).toEqual({"Items":{"A":"a","B":"b"}})
+        expect(parse(rules, params)).to.eql({"Items":{"A":"a","B":"b"}})
 
       it 'ignores null', ->
-        expect(parse(rules, '{"Items": null}')).toEqual({})
+        expect(parse(rules, '{"Items": null}')).to.eql({})
 
     describe 'lists', ->
       rules =
@@ -47,10 +47,10 @@ describe 'AWS.JSON.Parser', ->
 
       it 'translates input', ->
         params = '{"Items":["a","b","c"]}'
-        expect(parse(rules, params)).toEqual(Items: ['a', 'b', 'c'])
+        expect(parse(rules, params)).to.eql(Items: ['a', 'b', 'c'])
 
       it 'ignores null', ->
-        expect(parse(rules, '{"Items": null}')).toEqual({})
+        expect(parse(rules, '{"Items": null}')).to.eql({})
 
     describe 'maps', ->
       rules =
@@ -63,10 +63,10 @@ describe 'AWS.JSON.Parser', ->
 
       it 'translates maps', ->
         params = '{"Items":{"A":"a","B":"b"}}'
-        expect(parse(rules, params)).toEqual({ Items: { A: 'a', B: 'b' } })
+        expect(parse(rules, params)).to.eql({ Items: { A: 'a', B: 'b' } })
 
       it 'ignores null', ->
-        expect(parse(rules, '{"Items": null}')).toEqual({})
+        expect(parse(rules, '{"Items": null}')).to.eql({})
 
     it 'translates nested maps', ->
       rules =
@@ -77,7 +77,7 @@ describe 'AWS.JSON.Parser', ->
       now.setMilliseconds(100)
       params = Items: MyKey: 5, MyOtherKey: 10
       str = '{"Items":{"MyKey":5,"MyOtherKey":10}}'
-      expect(parse(rules, str)).toEqual(params)
+      expect(parse(rules, str)).to.eql(params)
 
     it 'traslates nested timestamps', ->
       rules =
@@ -91,7 +91,7 @@ describe 'AWS.JSON.Parser', ->
       time = new Date(0)
       params = Build: When: time
       formatted = AWS.util.date.iso8601(time)
-      expect(parse(rules, '{"Build":{"When":"'+formatted+'"}}')).toEqual(params)
+      expect(parse(rules, '{"Build":{"When":"'+formatted+'"}}')).to.eql(params)
 
     it 'translates binary types', ->
       rules =
@@ -104,5 +104,5 @@ describe 'AWS.JSON.Parser', ->
       data = parse(rules, '{"Binary1":"AQID","Binary2":"AQID"}')
       expect(AWS.util.Buffer.isBuffer(data.Binary1))
       expect(AWS.util.Buffer.isBuffer(data.Binary2))
-      expect(data.Binary1.toString()).toEqual('\u0001\u0002\u0003')
-      expect(data.Binary2.toString()).toEqual('\u0001\u0002\u0003')
+      expect(data.Binary1.toString()).to.equal('\u0001\u0002\u0003')
+      expect(data.Binary2.toString()).to.equal('\u0001\u0002\u0003')

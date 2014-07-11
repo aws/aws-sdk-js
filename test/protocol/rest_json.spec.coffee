@@ -46,19 +46,19 @@ describe 'AWS.Protocol.RestJson', ->
     describe 'method', ->
       it 'populates method from the operation', ->
         defop http: method: 'GET'
-        expect(build().httpRequest.method).toEqual('GET')
+        expect(build().httpRequest.method).to.equal('GET')
 
     describe 'uri', ->
       it 'populates uri from the operation', ->
         defop http: requestUri: '/path'
-        expect(build().httpRequest.path).toEqual('/path')
+        expect(build().httpRequest.path).to.equal('/path')
 
       it 'replaces param placeholders', ->
         request.params = Id: 'abc'
         defop
           http: requestUri: '/Owner/{Id}'
           input: type: 'structure', members: Id: location: 'uri'
-        expect(build().httpRequest.path).toEqual('/Owner/abc')
+        expect(build().httpRequest.path).to.equal('/Owner/abc')
 
       it 'can replace multiple path placeholders', ->
         request.params = Id: 'abc', Count: 123
@@ -73,7 +73,7 @@ describe 'AWS.Protocol.RestJson', ->
               Count:
                 type: 'integer'
                 location: 'uri'
-        expect(build().httpRequest.path).toEqual('/abc/123')
+        expect(build().httpRequest.path).to.equal('/abc/123')
 
       it 'performs querystring param replacements', ->
         request.params = Id: 'abc'
@@ -85,7 +85,7 @@ describe 'AWS.Protocol.RestJson', ->
               Id:
                 location: 'querystring'
                 locationName: 'id-param'
-        expect(build().httpRequest.path).toEqual('/path?id-param=abc')
+        expect(build().httpRequest.path).to.equal('/path?id-param=abc')
 
     describe 'headers', ->
       it 'populates the headers with present params', ->
@@ -95,7 +95,7 @@ describe 'AWS.Protocol.RestJson', ->
             ACL:
               location: 'header'
               locationName: 'x-amz-acl'
-        expect(build().httpRequest.headers['x-amz-acl']).toEqual('public-read')
+        expect(build().httpRequest.headers['x-amz-acl']).to.equal('public-read')
 
       it 'uses default rule name if .n property is not present', ->
         request.params = ACL: 'public-read'
@@ -103,7 +103,7 @@ describe 'AWS.Protocol.RestJson', ->
           members:
             ACL:
               location: 'header'
-        expect(build().httpRequest.headers['ACL']).toEqual('public-read')
+        expect(build().httpRequest.headers['ACL']).to.equal('public-read')
 
       it 'works with map types', ->
         request.params =
@@ -118,8 +118,8 @@ describe 'AWS.Protocol.RestJson', ->
               locationName: 'x-amz-meta-'
 
         build()
-        expect(request.httpRequest.headers['x-amz-meta-foo']).toEqual('bar')
-        expect(request.httpRequest.headers['x-amz-meta-abc']).toEqual('xyz')
+        expect(request.httpRequest.headers['x-amz-meta-foo']).to.equal('bar')
+        expect(request.httpRequest.headers['x-amz-meta-abc']).to.equal('xyz')
 
     describe 'body', ->
       it 'builds root element if rules contains root', ->
@@ -135,7 +135,7 @@ describe 'AWS.Protocol.RestJson', ->
               members:
                 Name: type: 'string'
                 Type: type: 'string'
-        expect(build().httpRequest.body.toString()).toEqual(
+        expect(build().httpRequest.body.toString()).to.equal(
           '{"Name":"foo","Type":"bar"}')
 
       it 'builds payload element as non JSON data if rules contains payload', ->
@@ -145,7 +145,7 @@ describe 'AWS.Protocol.RestJson', ->
           members:
             Body:
               type: 'binary'
-        expect(build().httpRequest.body).toEqual('foobar')
+        expect(build().httpRequest.body).to.equal('foobar')
 
   describe 'extractError', ->
     extractError = (body) ->
@@ -155,47 +155,47 @@ describe 'AWS.Protocol.RestJson', ->
 
     it 'removes prefixes from the error code', ->
       extractError '{"__type":"com.amazon.coral.service#ErrorCode" }'
-      expect(response.error instanceof Error).toBeTruthy()
-      expect(response.error.code).toEqual('ErrorCode')
-      expect(response.data).toEqual(null)
+      expect(response.error ).to.be.instanceOf(Error)
+      expect(response.error.code).to.equal('ErrorCode')
+      expect(response.data).to.equal(null)
 
     it 'returns the full code when a # is not present', ->
       extractError '{"__type":"ErrorCode" }'
-      expect(response.error instanceof Error).toBeTruthy()
-      expect(response.error.code).toEqual('ErrorCode')
-      expect(response.data).toEqual(null)
+      expect(response.error ).to.be.instanceOf(Error)
+      expect(response.error.code).to.equal('ErrorCode')
+      expect(response.data).to.equal(null)
 
     it 'returns the status code when the body is blank', ->
       extractError ''
-      expect(response.error instanceof Error).toBeTruthy()
-      expect(response.error.code).toEqual(500)
-      expect(response.error.message).toEqual(null)
-      expect(response.data).toEqual(null)
+      expect(response.error ).to.be.instanceOf(Error)
+      expect(response.error.code).to.equal(500)
+      expect(response.error.message).to.equal(null)
+      expect(response.data).to.equal(null)
 
     it 'returns null for the message when not present', ->
       extractError '{"__type":"ErrorCode" }'
-      expect(response.error instanceof Error).toBeTruthy()
-      expect(response.error.message).toEqual(null)
-      expect(response.data).toEqual(null)
+      expect(response.error ).to.be.instanceOf(Error)
+      expect(response.error.message).to.equal(null)
+      expect(response.data).to.equal(null)
 
     it 'returns the message when present', ->
       extractError '{"__type":"ErrorCode", "message":"Error Message" }'
-      expect(response.error instanceof Error).toBeTruthy()
-      expect(response.error.message).toEqual('Error Message')
-      expect(response.data).toEqual(null)
+      expect(response.error ).to.be.instanceOf(Error)
+      expect(response.error.message).to.equal('Error Message')
+      expect(response.data).to.equal(null)
 
     # DynamoDB and SWF return error message properties with different case
     it 'returns the message when the message property is upper-cased', ->
       extractError '{"__type":"ErrorCode", "Message":"Error Message" }'
-      expect(response.error instanceof Error).toBeTruthy()
-      expect(response.error.message).toEqual('Error Message')
-      expect(response.data).toEqual(null)
+      expect(response.error ).to.be.instanceOf(Error)
+      expect(response.error.message).to.equal('Error Message')
+      expect(response.data).to.equal(null)
 
     it 'returns a special message for RequestEntityToLarge errors', ->
       extractError '{"__type":"RequestEntityTooLarge" }'
-      expect(response.error instanceof Error).toBeTruthy()
-      expect(response.error.message).toEqual('Request body must be less than 1 MB')
-      expect(response.data).toEqual(null)
+      expect(response.error ).to.be.instanceOf(Error)
+      expect(response.error.message).to.equal('Request body must be less than 1 MB')
+      expect(response.data).to.equal(null)
 
   describe 'extractData', ->
     extractData = (body) ->
@@ -205,8 +205,8 @@ describe 'AWS.Protocol.RestJson', ->
 
     it 'JSON parses http response bodies', ->
       extractData '{"a":1, "b":"xyz"}'
-      expect(response.error).toEqual(null)
-      expect(response.data).toEqual({a:1, b:'xyz'})
+      expect(response.error).to.equal(null)
+      expect(response.data).to.eql({a:1, b:'xyz'})
 
     it 'pulls header data out of response', ->
       response.httpResponse.headers['x-title'] = 'The title'
@@ -218,8 +218,8 @@ describe 'AWS.Protocol.RestJson', ->
             locationName: 'x-title'
 
       extractData '{}'
-      expect(response.error).toEqual(null)
-      expect(response.data.Title).toEqual('The title')
+      expect(response.error).to.equal(null)
+      expect(response.data.Title).to.equal('The title')
 
     it 'pulls body out into data key if body is payload', ->
       defop output:
@@ -229,8 +229,8 @@ describe 'AWS.Protocol.RestJson', ->
           Body: location: 'body', type: 'binary'
 
       extractData 'foobar'
-      expect(response.error).toEqual(null)
-      expect(response.data.Body).toEqual('foobar')
+      expect(response.error).to.equal(null)
+      expect(response.data.Body).to.equal('foobar')
 
     it 'pulls body out as Buffer if body is streaming payload', ->
       defop output:
@@ -240,16 +240,16 @@ describe 'AWS.Protocol.RestJson', ->
           Body: location: 'body', type: 'binary', streaming: true
 
       extractData 'foobar'
-      expect(response.error).toEqual(null)
-      expect(Buffer.isBuffer(response.data.Body)).toEqual(true)
-      expect(response.data.Body.toString()).toEqual('foobar')
+      expect(response.error).to.equal(null)
+      expect(Buffer.isBuffer(response.data.Body)).to.equal(true)
+      expect(response.data.Body.toString()).to.equal('foobar')
 
     it 'returns an empty object when the body is an empty string', ->
       extractData ''
-      expect(response.error).toEqual(null)
-      expect(response.data).toEqual({})
+      expect(response.error).to.equal(null)
+      expect(response.data).to.eql({})
 
     it 'returns an empty object when the body is null', ->
       extractData ''
-      expect(response.error).toEqual(null)
-      expect(response.data).toEqual({})
+      expect(response.error).to.equal(null)
+      expect(response.data).to.eql({})

@@ -9,7 +9,7 @@ describe 'AWS.STS', ->
 
   describe 'credentialsFrom', ->
     it 'returns null if no data is provided', ->
-      expect(sts.credentialsFrom(null)).toEqual(null)
+      expect(sts.credentialsFrom(null)).to.equal(null)
 
     it 'creates a TemporaryCredentials object with hydrated data', ->
       creds = sts.credentialsFrom Credentials:
@@ -18,11 +18,11 @@ describe 'AWS.STS', ->
          SessionToken: 'TOKEN'
          Expiration: new Date(0)
       expect(creds instanceof AWS.TemporaryCredentials)
-      expect(creds.accessKeyId).toEqual('KEY')
-      expect(creds.secretAccessKey).toEqual('SECRET')
-      expect(creds.sessionToken).toEqual('TOKEN')
-      expect(creds.expireTime).toEqual(new Date(0))
-      expect(creds.expired).toEqual(false)
+      expect(creds.accessKeyId).to.equal('KEY')
+      expect(creds.secretAccessKey).to.equal('SECRET')
+      expect(creds.sessionToken).to.equal('TOKEN')
+      expect(creds.expireTime).to.eql(new Date(0))
+      expect(creds.expired).to.equal(false)
 
     it 'updates an existing Credentials object with hydrated data', ->
       data = Credentials:
@@ -32,12 +32,12 @@ describe 'AWS.STS', ->
          Expiration: new Date(0)
       creds = new AWS.Credentials
       sts.credentialsFrom(data, creds)
-      expect(creds instanceof AWS.Credentials)
-      expect(creds.accessKeyId).toEqual('KEY')
-      expect(creds.secretAccessKey).toEqual('SECRET')
-      expect(creds.sessionToken).toEqual('TOKEN')
-      expect(creds.expireTime).toEqual(new Date(0))
-      expect(creds.expired).toEqual(false)
+      expect(creds).to.be.instanceOf(AWS.Credentials)
+      expect(creds.accessKeyId).to.equal('KEY')
+      expect(creds.secretAccessKey).to.equal('SECRET')
+      expect(creds.sessionToken).to.equal('TOKEN')
+      expect(creds.expireTime).to.eql(new Date(0))
+      expect(creds.expired).to.equal(false)
 
   describe 'assumeRoleWithWebIdentity', ->
     service = new AWS.STS
@@ -47,11 +47,11 @@ describe 'AWS.STS', ->
       params = RoleArn: 'ARN', RoleSessionName: 'NAME', WebIdentityToken: 'TOK'
       service.assumeRoleWithWebIdentity params, ->
         hr = this.request.httpRequest
-        expect(hr.method).toEqual('GET')
-        expect(hr.body).toEqual('')
-        expect(hr.headers['Authorization']).toEqual(undefined)
-        expect(hr.headers['Content-Type']).toEqual(undefined)
-        expect(hr.path).toEqual('/?Action=AssumeRoleWithWebIdentity&' +
+        expect(hr.method).to.equal('GET')
+        expect(hr.body).to.equal('')
+        expect(hr.headers['Authorization']).to.equal(undefined)
+        expect(hr.headers['Content-Type']).to.equal(undefined)
+        expect(hr.path).to.equal('/?Action=AssumeRoleWithWebIdentity&' +
           'RoleArn=ARN&RoleSessionName=NAME&Version=' +
           service.api.apiVersion + '&WebIdentityToken=TOK')
 
@@ -63,10 +63,10 @@ describe 'AWS.STS', ->
       params = RoleArn: 'ARN', PrincipalArn: 'PARN', SAMLAssertion: 'OK'
       service.assumeRoleWithSAML params, ->
         hr = this.request.httpRequest
-        expect(hr.method).toEqual('GET')
-        expect(hr.body).toEqual('')
-        expect(hr.headers['Authorization']).toEqual(undefined)
-        expect(hr.headers['Content-Type']).toEqual(undefined)
-        expect(hr.path).toEqual('/?Action=AssumeRoleWithSAML&' +
+        expect(hr.method).to.equal('GET')
+        expect(hr.body).to.equal('')
+        expect(hr.headers['Authorization']).to.equal(undefined)
+        expect(hr.headers['Content-Type']).to.equal(undefined)
+        expect(hr.path).to.equal('/?Action=AssumeRoleWithSAML&' +
           'PrincipalArn=PARN&RoleArn=ARN&SAMLAssertion=OK&' +
           'Version=' + service.api.apiVersion)

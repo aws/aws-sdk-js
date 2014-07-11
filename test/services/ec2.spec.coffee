@@ -11,7 +11,7 @@ describe 'AWS.EC2', ->
       ec2 = new AWS.EC2(httpOptions: proxy: 'http://__INVALID_HOSTNAME__:9999')
       ec2.makeRequest 'describeInstances', ->
         expect(@request.httpRequest.headers.Host).
-          toEqual('ec2.mock-region.amazonaws.com')
+          to.equal('ec2.mock-region.amazonaws.com')
 
   describe 'copySnapshot', ->
     it 'generates PresignedUrl and DestinationRegion parameters', ->
@@ -35,7 +35,7 @@ describe 'AWS.EC2', ->
           'SourceRegion=src-region',
           'SourceSnapshotId=snap-123456789'
         ].forEach (i) ->
-          expect(parts).toContain(i)
+          expect(parts).to.contain(i)
 
   describe 'parseResponse', ->
     body = ''
@@ -61,18 +61,18 @@ describe 'AWS.EC2', ->
 
       it 'extracts the error code', ->
         parse (error, data) ->
-          expect(error.code).toEqual('InvalidInstanceID.Malformed')
-          expect(data).toEqual(null)
+          expect(error.code).to.equal('InvalidInstanceID.Malformed')
+          expect(data).to.equal(null)
 
       it 'extracts the error message', ->
         parse (error, data) ->
-          expect(error.message).toEqual('Invalid id: "i-12345678"')
-          expect(data).toEqual(null)
+          expect(error.message).to.equal('Invalid id: "i-12345678"')
+          expect(data).to.equal(null)
 
       it 'returns an empty error when the body is blank', ->
         body = ''
         parse (error, data) ->
-          expect(error.code).toEqual(400)
-          expect(error.message).toEqual(null)
-          expect(data).toEqual(null)
+          expect(error.code).to.equal(400)
+          expect(error.message).to.equal(null)
+          expect(data).to.equal(null)
 

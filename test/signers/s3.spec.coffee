@@ -55,23 +55,23 @@ describe 'AWS.Signers.S3', ->
     it 'sets the date header when not present', ->
       req = buildRequest()
       addAuth(req)
-      expect(req.headers['X-Amz-Date']).toEqual(AWS.util.date.rfc822(date))
+      expect(req.headers['X-Amz-Date']).to.equal(AWS.util.date.rfc822(date))
 
     it 'overwrites Date if present', ->
       req = buildRequest()
       req.headers['X-Amz-Date'] = 'date-string'
       addAuth(req)
-      expect(req.headers['X-Amz-Date']).toEqual(AWS.util.date.rfc822(date))
+      expect(req.headers['X-Amz-Date']).to.equal(AWS.util.date.rfc822(date))
 
     it 'omits the security token header when session token is blank', ->
       sessionToken = null
       req = addAuth()
-      expect(req.headers['x-amz-security-token']).toEqual(undefined)
+      expect(req.headers['x-amz-security-token']).to.equal(undefined)
 
     it 'adds a security token header when session token available', ->
       sessionToken = 'session'
       req = addAuth()
-      expect(req.headers['x-amz-security-token']).toEqual('session')
+      expect(req.headers['x-amz-security-token']).to.equal('session')
 
     it 'adds an Authorization header which contains akid and signature', ->
 
@@ -85,7 +85,7 @@ describe 'AWS.Signers.S3', ->
       signer.stringToSign.andReturn('string-to-sign')
       signer.addAuthorization(creds, date)
 
-      expect(req.headers['Authorization']).toEqual('AWS AKID:Gg5WLabTOvH0WMd15wv7lWe4zK0=')
+      expect(req.headers['Authorization']).to.equal('AWS AKID:Gg5WLabTOvH0WMd15wv7lWe4zK0=')
 
     it 'properly signs special characters', ->
 
@@ -99,7 +99,7 @@ describe 'AWS.Signers.S3', ->
       signer.stringToSign.andReturn('!@#$%^&*();\':"{}[],./?`~')
       signer.addAuthorization(creds, date)
 
-      expect(req.headers['Authorization']).toEqual('AWS AKID:2E04i7QCa0uZTYtxue9dEqto3dg=')
+      expect(req.headers['Authorization']).to.equal('AWS AKID:2E04i7QCa0uZTYtxue9dEqto3dg=')
 
 
   describe 'stringToSign', ->
@@ -108,7 +108,7 @@ describe 'AWS.Signers.S3', ->
       headers['X-Amz-Date'] = 'DATE-STRING'
 
     it 'builds a basic string to sign', ->
-      expect(stringToSign()).toEqual("""
+      expect(stringToSign()).to.equal("""
       POST
 
 
@@ -120,7 +120,7 @@ describe 'AWS.Signers.S3', ->
     it 'includes content md5 and content type when present', ->
       headers['Content-Type'] = 'CONTENT-TYPE'
       headers['Content-MD5'] = 'CONTENT-MD5'
-      expect(stringToSign()).toEqual("""
+      expect(stringToSign()).to.equal("""
       POST
       CONTENT-MD5
       CONTENT-TYPE
@@ -131,7 +131,7 @@ describe 'AWS.Signers.S3', ->
 
     it 'includes the http method, whatever it is', ->
       method = 'VERB'
-      expect(stringToSign()).toEqual("""
+      expect(stringToSign()).to.equal("""
       VERB
 
 
@@ -144,7 +144,7 @@ describe 'AWS.Signers.S3', ->
       headers['X-Amz-Abc'] = 'abc'
       headers['X-Amz-Xyz'] = 'xyz'
       headers['random-header'] = 'random'
-      expect(stringToSign()).toEqual("""
+      expect(stringToSign()).to.equal("""
       POST
 
 
@@ -159,7 +159,7 @@ describe 'AWS.Signers.S3', ->
       headers['x-amz-Abc'] = 'abc'
       headers['x-amz-Xyz'] = 'xyz'
       headers['random-header'] = 'random'
-      expect(stringToSign()).toEqual("""
+      expect(stringToSign()).to.equal("""
       POST
 
 
@@ -174,7 +174,7 @@ describe 'AWS.Signers.S3', ->
       headers['x-amz-mno'] = 'mno'
       headers['x-amz-Xyz'] = 'xyz'
       headers['x-amz-Abc'] = 'abc'
-      expect(stringToSign()).toEqual("""
+      expect(stringToSign()).to.equal("""
       POST
 
 
@@ -188,7 +188,7 @@ describe 'AWS.Signers.S3', ->
 
     it 'builds a canonical resource from the path', ->
       path = '/bucket_name/key'
-      expect(stringToSign()).toEqual("""
+      expect(stringToSign()).to.equal("""
       POST
 
 
@@ -200,7 +200,7 @@ describe 'AWS.Signers.S3', ->
     it 'appends the bucket to the path when it is part of the hostname', ->
       path = '/'
       virtualHostedBucket = 'bucket-name'
-      expect(stringToSign()).toEqual("""
+      expect(stringToSign()).to.equal("""
       POST
 
 
@@ -212,7 +212,7 @@ describe 'AWS.Signers.S3', ->
     it 'appends the subresource portion of the path querystring', ->
       path = '/?acl'
       virtualHostedBucket = 'bucket-name'
-      expect(stringToSign()).toEqual("""
+      expect(stringToSign()).to.equal("""
       POST
 
 
@@ -223,7 +223,7 @@ describe 'AWS.Signers.S3', ->
 
     it 'includes the sub resource value when present', ->
       path = '/bucket_name/key?versionId=123'
-      expect(stringToSign()).toEqual("""
+      expect(stringToSign()).to.equal("""
       POST
 
 
@@ -234,7 +234,7 @@ describe 'AWS.Signers.S3', ->
 
     it 'omits non-sub-resource querystring params from the resource string', ->
       path = '/?versionId=abc&next-marker=xyz'
-      expect(stringToSign()).toEqual("""
+      expect(stringToSign()).to.equal("""
       POST
 
 
@@ -245,7 +245,7 @@ describe 'AWS.Signers.S3', ->
 
     it 'sorts sub resources by name', ->
       path = '/?logging&acl&website&torrent=123' # made up example
-      expect(stringToSign()).toEqual("""
+      expect(stringToSign()).to.equal("""
       POST
 
 
@@ -256,7 +256,7 @@ describe 'AWS.Signers.S3', ->
 
     it 'sorts sub resources by name', ->
       path = '/?logging&acl&website&torrent=123' # made up example
-      expect(stringToSign()).toEqual("""
+      expect(stringToSign()).to.equal("""
       POST
 
 
@@ -267,7 +267,7 @@ describe 'AWS.Signers.S3', ->
 
     it 'includes the un-decoded query string param for sub resources', ->
       path = '/?versionId=a%2Bb' # a+b
-      expect(stringToSign()).toEqual("""
+      expect(stringToSign()).to.equal("""
       POST
 
 
@@ -278,7 +278,7 @@ describe 'AWS.Signers.S3', ->
 
     it 'includes the non-encoded query string get header overrides', ->
       path = '/?response-content-type=a%2Bb' # a+b
-      expect(stringToSign()).toEqual("""
+      expect(stringToSign()).to.equal("""
       POST
 
 
@@ -289,7 +289,7 @@ describe 'AWS.Signers.S3', ->
 
     it 'omits the date header when not present', ->
       delete headers['X-Amz-Date']
-      expect(stringToSign()).toEqual("""
+      expect(stringToSign()).to.equal("""
       POST
 
 

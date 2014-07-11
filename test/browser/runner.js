@@ -32,23 +32,12 @@ page.open(system.args[1] || 'test/browser/runner.html', function(status){
   } else {
     var index = 0;
     function printStatus() {
-      var items = page.evaluate(function() {
-        var symbols = document.body.querySelectorAll('.symbolSummary li');
-        if (!symbols) return null;
-
-        var classes = [];
-        for (var i = 0; i < symbols.length; i++) {
-          classes.push(symbols[i].className);
-        }
-        return classes;
-      });
-
-      if (!items) return;
+      var items = page.evaluate(function() { return jsApiReporter.specs(); });
       for (; index < items.length; index++) {
         if (items[index] === 'pending') break;
         var item = '';
-        switch (items[index]) {
-          case 'skipped': item = '';  break;
+        switch (items[index].status) {
+          case 'skipped': item = 'S';  break;
           case 'passed':  item = '.'; break;
           case 'failed':  item = 'X'; break;
         }
@@ -60,21 +49,21 @@ page.open(system.args[1] || 'test/browser/runner.html', function(status){
 
     waitFor(function(){
       return page.evaluate(function(){
-        return document.body.querySelector('.symbolSummary .pending') === null;
+        return jsApiReporter.status() === 'done';
       });
     }, function(){
       clearInterval(interval);
       var exitCode = page.evaluate(function(){
         console.log('');
         console.log('');
-        var list = document.body.querySelectorAll('.results > #details > .specDetail.failed');
+        var list = document.body.querySelectorAll('.results > .failures > .spec-detail.failed');
         if (list && list.length > 0) {
           console.log('');
           console.log(list.length + ' test(s) FAILED:');
           for (i = 0; i < list.length; ++i) {
             var el = list[i],
               desc = el.querySelector('.description'),
-              msg = el.querySelector('.resultMessage.fail');
+              msg = el.querySelector('.result-message');
             console.log('');
             console.log(desc.innerText);
             console.log(msg.innerText);
@@ -82,7 +71,7 @@ page.open(system.args[1] || 'test/browser/runner.html', function(status){
           }
           return 1;
         } else {
-          console.log(document.body.querySelector('.alert > .passingAlert.bar').innerText);
+          console.log(document.body.querySelector('.alert > .bar').innerText);
           return 0;
         }
       });

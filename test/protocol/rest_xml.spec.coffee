@@ -38,7 +38,7 @@ describe 'AWS.Protocol.RestXml', ->
     describe 'empty bodies', ->
       it 'defaults body to empty string when there are no inputs', ->
         defop input: type: 'structure', members: {}
-        expect(build().httpRequest.body).toEqual('')
+        expect(build().httpRequest.body).to.equal('')
 
       it 'defaults body to empty string when no body params are present', ->
         request.params = Bucket: 'abc', ACL: 'canned-acl'
@@ -54,9 +54,9 @@ describe 'AWS.Protocol.RestXml', ->
                 location: 'header'
 
         build()
-        expect(request.httpRequest.body).toEqual('')
-        expect(request.httpRequest.path).toEqual('/abc')
-        expect(request.httpRequest.headers['x-amz-acl']).toEqual('canned-acl')
+        expect(request.httpRequest.body).to.equal('')
+        expect(request.httpRequest.path).to.equal('/abc')
+        expect(request.httpRequest.headers['x-amz-acl']).to.equal('canned-acl')
 
     describe 'string bodies', ->
       it 'populates the body with string types directly', ->
@@ -70,7 +70,7 @@ describe 'AWS.Protocol.RestXml', ->
                 location: 'uri'
               Data:
                 type: 'string'
-        expect(build().httpRequest.body).toEqual('abc')
+        expect(build().httpRequest.body).to.equal('abc')
 
     describe 'xml bodies', ->
       it 'populates the body with XML from the params', ->
@@ -151,12 +151,12 @@ describe 'AWS.Protocol.RestXml', ->
         """
 
         build()
-        expect(request.httpRequest.method).toEqual('POST')
+        expect(request.httpRequest.method).to.equal('POST')
         expect(request.httpRequest.path).
-          toEqual('/bucket-name?limit=123&next-marker=marker')
-        expect(request.httpRequest.headers['x-amz-acl']).toEqual('canned-acl')
-        expect(request.httpRequest.headers['x-amz-meta-abc']).toEqual('xyz')
-        expect(request.httpRequest.headers['x-amz-meta-mno']).toEqual('hjk')
+          to.equal('/bucket-name?limit=123&next-marker=marker')
+        expect(request.httpRequest.headers['x-amz-acl']).to.equal('canned-acl')
+        expect(request.httpRequest.headers['x-amz-meta-abc']).to.equal('xyz')
+        expect(request.httpRequest.headers['x-amz-meta-mno']).to.equal('hjk')
         helpers.matchXML(request.httpRequest.body, xml)
 
       it 'omits the body xml when body params are not present', ->
@@ -170,8 +170,8 @@ describe 'AWS.Protocol.RestXml', ->
               Config: {}
 
         build()
-        expect(request.httpRequest.body).toEqual('')
-        expect(request.httpRequest.path).toEqual('/abc')
+        expect(request.httpRequest.body).to.equal('')
+        expect(request.httpRequest.path).to.equal('/abc')
 
     it 'uses payload member name for payloads', ->
       request.params =
@@ -210,17 +210,17 @@ describe 'AWS.Protocol.RestXml', ->
 
     it 'extracts the error code and message', ->
       extractError()
-      expect(response.error instanceof Error).toBeTruthy()
-      expect(response.error.code).toEqual('InvalidArgument')
-      expect(response.error.message).toEqual('Provided param is bad')
-      expect(response.data).toEqual(null)
+      expect(response.error ).to.be.instanceOf(Error)
+      expect(response.error.code).to.equal('InvalidArgument')
+      expect(response.error.message).to.equal('Provided param is bad')
+      expect(response.data).to.equal(null)
 
     it 'returns an empty error when the body is blank', ->
       extractError ''
-      expect(response.error instanceof Error).toBeTruthy()
-      expect(response.error.code).toEqual(400)
-      expect(response.error.message).toEqual(null)
-      expect(response.data).toEqual(null)
+      expect(response.error ).to.be.instanceOf(Error)
+      expect(response.error.code).to.equal(400)
+      expect(response.error.message).to.equal(null)
+      expect(response.data).to.equal(null)
 
     it 'extracts error when inside <Errors>', ->
       extractError """
@@ -231,8 +231,8 @@ describe 'AWS.Protocol.RestXml', ->
           </Error>
         </Errors>
       </SomeResponse>"""
-      expect(response.error.code).toEqual('code')
-      expect(response.error.message).toEqual('msg')
+      expect(response.error.code).to.equal('code')
+      expect(response.error.message).to.equal('msg')
 
     it 'extracts error when <Error> is nested', ->
       extractError """
@@ -241,8 +241,8 @@ describe 'AWS.Protocol.RestXml', ->
           <Code>code</Code><Message>msg</Message>
         </Error>
       </SomeResponse>"""
-      expect(response.error.code).toEqual('code')
-      expect(response.error.message).toEqual('msg')
+      expect(response.error.code).to.equal('code')
+      expect(response.error.message).to.equal('msg')
 
   describe 'extractData', ->
     extractData = (body) ->
@@ -269,7 +269,7 @@ describe 'AWS.Protocol.RestXml', ->
         </Bar>
       </xml>
       """
-      expect(response.data).toEqual({Foo:'foo', Bar:['a', 'b', 'c']})
+      expect(response.data).to.eql({Foo:'foo', Bar:['a', 'b', 'c']})
 
     it 'sets payload element to a Buffer object when it streams', ->
       defop output:
@@ -279,8 +279,8 @@ describe 'AWS.Protocol.RestXml', ->
           Body:
             streaming: true
       extractData 'Buffer data'
-      expect(Buffer.isBuffer(response.data.Body)).toBeTruthy()
-      expect(response.data.Body.toString()).toEqual('Buffer data')
+      expect(Buffer.isBuffer(response.data.Body)).to.equal(true)
+      expect(response.data.Body.toString()).to.equal('Buffer data')
 
     it 'sets payload element to String when it does not stream', ->
       defop output:
@@ -289,8 +289,8 @@ describe 'AWS.Protocol.RestXml', ->
         members:
           Body: type: 'string'
       extractData 'Buffer data'
-      expect(typeof response.data.Body).toEqual('string')
-      expect(response.data.Body).toEqual('Buffer data')
+      expect(typeof response.data.Body).to.equal('string')
+      expect(response.data.Body).to.equal('Buffer data')
 
     it 'sets payload element along with other outputs', ->
       response.httpResponse.headers['x-amz-foo'] = 'foo'
@@ -307,9 +307,9 @@ describe 'AWS.Protocol.RestXml', ->
             locationName: 'x-amz-bar'
           Baz: {}
       extractData 'Buffer data'
-      expect(response.data.Foo).toEqual('foo')
-      expect(response.data.Bar).toEqual('bar')
-      expect(response.data.Baz).toEqual('Buffer data')
+      expect(response.data.Foo).to.equal('foo')
+      expect(response.data.Bar).to.equal('bar')
+      expect(response.data.Baz).to.equal('Buffer data')
 
     it 'parses headers when a payload is provided', ->
       response.httpResponse.headers['x-amz-foo'] = 'foo'
@@ -325,5 +325,5 @@ describe 'AWS.Protocol.RestXml', ->
             members:
               Baz: type: 'string'
       extractData '<Bar><Baz>Buffer data</Baz></Bar>'
-      expect(response.data.Foo).toEqual('foo')
-      expect(response.data.Baz).toEqual('Buffer data')
+      expect(response.data.Foo).to.equal('foo')
+      expect(response.data.Baz).to.equal('Buffer data')

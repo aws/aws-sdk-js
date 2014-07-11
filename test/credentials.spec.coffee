@@ -2,9 +2,9 @@ helpers = require('./helpers')
 AWS = helpers.AWS
 
 validateCredentials = (creds, key, secret, session) ->
-  expect(creds.accessKeyId).toEqual(key || 'akid')
-  expect(creds.secretAccessKey).toEqual(secret || 'secret')
-  expect(creds.sessionToken).toEqual(session || 'session')
+  expect(creds.accessKeyId).to.equal(key || 'akid')
+  expect(creds.secretAccessKey).to.equal(secret || 'secret')
+  expect(creds.sessionToken).to.equal(session || 'session')
 
 describe 'AWS.Credentials', ->
   describe 'constructor', ->
@@ -25,44 +25,44 @@ describe 'AWS.Credentials', ->
 
     it 'defaults credentials to undefined when not passed', ->
       creds = new AWS.Credentials()
-      expect(creds.accessKeyId).toBe(undefined)
-      expect(creds.secretAccessKey).toBe(undefined)
-      expect(creds.sessionToken).toBe(undefined)
+      expect(creds.accessKeyId).to.equal(undefined)
+      expect(creds.secretAccessKey).to.equal(undefined)
+      expect(creds.sessionToken).to.equal(undefined)
 
   describe 'needsRefresh', ->
     it 'needs refresh if credentials are not set', ->
       creds = new AWS.Credentials()
-      expect(creds.needsRefresh()).toEqual(true)
+      expect(creds.needsRefresh()).to.equal(true)
       creds = new AWS.Credentials('akid')
-      expect(creds.needsRefresh()).toEqual(true)
+      expect(creds.needsRefresh()).to.equal(true)
 
     it 'does not need refresh if credentials are set', ->
       creds = new AWS.Credentials('akid', 'secret')
-      expect(creds.needsRefresh()).toEqual(false)
+      expect(creds.needsRefresh()).to.equal(false)
 
     it 'needs refresh if creds are expired', ->
       creds = new AWS.Credentials('akid', 'secret')
       creds.expired = true
-      expect(creds.needsRefresh()).toEqual(true)
+      expect(creds.needsRefresh()).to.equal(true)
 
     it 'can be expired based on expireTime', ->
       creds = new AWS.Credentials('akid', 'secret')
       creds.expired = false
       creds.expireTime = new Date(0)
-      expect(creds.needsRefresh()).toEqual(true)
+      expect(creds.needsRefresh()).to.equal(true)
 
     it 'needs refresh if expireTime is within expiryWindow secs from now', ->
       creds = new AWS.Credentials('akid', 'secret')
       creds.expired = false
       creds.expireTime = new Date(AWS.util.date.getDate().getTime() + 1000)
-      expect(creds.needsRefresh()).toEqual(true)
+      expect(creds.needsRefresh()).to.equal(true)
 
     it 'does not need refresh if expireTime outside expiryWindow', ->
       creds = new AWS.Credentials('akid', 'secret')
       creds.expired = false
       ms = AWS.util.date.getDate().getTime() + (creds.expiryWindow + 5) * 1000
       creds.expireTime = new Date(ms)
-      expect(creds.needsRefresh()).toEqual(false)
+      expect(creds.needsRefresh()).to.equal(false)
 
   describe 'get', ->
     it 'does not call refresh if not needsRefresh', ->
@@ -70,10 +70,10 @@ describe 'AWS.Credentials', ->
       creds = new AWS.Credentials('akid', 'secret')
       refresh = helpers.spyOn(creds, 'refresh')
       creds.get(spy)
-      expect(refresh.calls.length).toEqual(0)
-      expect(spy.calls.length).not.toEqual(0)
-      expect(spy.calls[0].arguments[0]).toEqual(null)
-      expect(creds.expired).toEqual(false)
+      expect(refresh.calls.length).to.equal(0)
+      expect(spy.calls.length).not.to.equal(0)
+      expect(spy.calls[0].arguments[0]).not.to.exist
+      expect(creds.expired).to.equal(false)
 
     it 'calls refresh only if needsRefresh', ->
       spy = helpers.createSpy('done callback')
@@ -81,10 +81,10 @@ describe 'AWS.Credentials', ->
       creds.expired = true
       refresh = helpers.spyOn(creds, 'refresh').andCallThrough()
       creds.get(spy)
-      expect(refresh.calls.length).not.toEqual(0)
-      expect(spy.calls.length).not.toEqual(0)
-      expect(spy.calls[0].arguments[0]).toEqual(null)
-      expect(creds.expired).toEqual(false)
+      expect(refresh.calls.length).not.to.equal(0)
+      expect(spy.calls.length).not.to.equal(0)
+      expect(spy.calls[0].arguments[0]).not.to.exist
+      expect(creds.expired).to.equal(false)
 
 if AWS.util.isNode()
   describe 'AWS.EnvironmentCredentials', ->
@@ -111,11 +111,11 @@ if AWS.util.isNode()
         process.env.AWS_ACCESS_KEY_ID = 'akid'
         process.env.AWS_SECRET_ACCESS_KEY = 'secret'
         creds = new AWS.EnvironmentCredentials('AWS')
-        expect(creds.accessKeyId).toEqual('akid')
+        expect(creds.accessKeyId).to.equal('akid')
         creds.accessKeyId = 'not_akid'
-        expect(creds.accessKeyId).not.toEqual('akid')
+        expect(creds.accessKeyId).not.to.equal('akid')
         creds.refresh()
-        expect(creds.accessKeyId).toEqual('akid')
+        expect(creds.accessKeyId).to.equal('akid')
 
   describe 'AWS.FileSystemCredentials', ->
     describe 'constructor', ->
@@ -146,10 +146,10 @@ if AWS.util.isNode()
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
         new AWS.FileSystemCredentials('foo').refresh (err) ->
-          expect(err.message).toEqual('Credentials not set in foo')
+          expect(err.message).to.equal('Credentials not set in foo')
 
         expect(-> new AWS.FileSystemCredentials('foo').refresh()).
-          toThrow('Credentials not set in foo')
+          to.throw('Credentials not set in foo')
 
   describe 'AWS.SharedIniFileCredentials', ->
     beforeEach ->
@@ -162,27 +162,27 @@ if AWS.util.isNode()
     describe 'constructor', ->
       it 'throws an error if HOME/HOMEPATH/USERPROFILE are not set', ->
         expect(-> new AWS.SharedIniFileCredentials().refresh()).
-          toThrow('Cannot load credentials, HOME path not set')
+          to.throw('Cannot load credentials, HOME path not set')
 
       it 'uses HOMEDRIVE\\HOMEPATH if HOME and USERPROFILE are not set', ->
         process.env.HOMEDRIVE = 'd:/'
         process.env.HOMEPATH = 'homepath'
         creds = new AWS.SharedIniFileCredentials()
-        expect(creds.filename).toEqual('d:/homepath/.aws/credentials')
+        expect(creds.filename).to.equal('d:/homepath/.aws/credentials')
 
       it 'uses default HOMEDRIVE of C:/', ->
         process.env.HOMEPATH = 'homepath'
         creds = new AWS.SharedIniFileCredentials()
-        expect(creds.filename).toEqual('C:/homepath/.aws/credentials')
+        expect(creds.filename).to.equal('C:/homepath/.aws/credentials')
 
       it 'uses USERPROFILE if HOME is not set', ->
         process.env.USERPROFILE = '/userprofile'
         creds = new AWS.SharedIniFileCredentials()
-        expect(creds.filename).toEqual('/userprofile/.aws/credentials')
+        expect(creds.filename).to.equal('/userprofile/.aws/credentials')
 
       it 'can override filename as a constructor argument', ->
         creds = new AWS.SharedIniFileCredentials(filename: '/etc/creds')
-        expect(creds.filename).toEqual('/etc/creds')
+        expect(creds.filename).to.equal('/etc/creds')
 
     describe 'loading', ->
       beforeEach -> process.env.HOME = '/home/user'
@@ -198,7 +198,7 @@ if AWS.util.isNode()
 
         creds = new AWS.SharedIniFileCredentials()
         validateCredentials(creds)
-        expect(AWS.util.readFileSync.calls[0].arguments[0]).toEqual('/home/user/.aws/credentials')
+        expect(AWS.util.readFileSync.calls[0].arguments[0]).to.equal('/home/user/.aws/credentials')
 
       it 'loads the default profile if AWS_PROFILE is empty', ->
         process.env.AWS_PROFILE = ''
@@ -258,10 +258,10 @@ if AWS.util.isNode()
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock)
 
         new AWS.SharedIniFileCredentials().refresh (err) ->
-          expect(err.message).toEqual('Credentials not set in /home/user/.aws/credentials using profile default')
+          expect(err.message).to.equal('Credentials not set in /home/user/.aws/credentials using profile default')
 
         expect(-> new AWS.SharedIniFileCredentials().refresh()).
-          toThrow('Credentials not set in /home/user/.aws/credentials using profile default')
+          to.throw('Credentials not set in /home/user/.aws/credentials using profile default')
 
   describe 'AWS.EC2MetadataCredentials', ->
     creds = null
@@ -280,34 +280,34 @@ if AWS.util.isNode()
 
     describe 'constructor', ->
       it 'allows passing of AWS.MetadataService options', ->
-        expect(creds.metadataService.host).toEqual('host')
+        expect(creds.metadataService.host).to.equal('host')
 
     describe 'needsRefresh', ->
       it 'can be expired based on expire time from EC2 Metadata service', ->
         mockMetadataService(new Date(0))
         creds.refresh(->)
-        expect(creds.needsRefresh()).toEqual(true)
+        expect(creds.needsRefresh()).to.equal(true)
 
     describe 'refresh', ->
       it 'loads credentials from EC2 Metadata service', ->
         mockMetadataService(new Date(AWS.util.date.getDate().getTime() + 100000))
         creds.refresh(->)
-        expect(creds.metadata.Code).toEqual('Success')
-        expect(creds.accessKeyId).toEqual('KEY')
-        expect(creds.secretAccessKey).toEqual('SECRET')
-        expect(creds.sessionToken).toEqual('TOKEN')
-        expect(creds.needsRefresh()).toEqual(false)
+        expect(creds.metadata.Code).to.equal('Success')
+        expect(creds.accessKeyId).to.equal('KEY')
+        expect(creds.secretAccessKey).to.equal('SECRET')
+        expect(creds.sessionToken).to.equal('TOKEN')
+        expect(creds.needsRefresh()).to.equal(false)
 
       it 'does try to load creds second time if Metadata service failed', ->
         spy = helpers.spyOn(creds.metadataService, 'loadCredentials').andCallFake (cb) ->
           cb(new Error('INVALID SERVICE'))
 
         creds.refresh (err) ->
-          expect(err.message).toEqual('INVALID SERVICE')
+          expect(err.message).to.equal('INVALID SERVICE')
         creds.refresh ->
           creds.refresh ->
             creds.refresh ->
-              expect(spy.calls.length).toEqual(4)
+              expect(spy.calls.length).to.equal(4)
 
 describe 'AWS.TemporaryCredentials', ->
   creds = null
@@ -323,7 +323,7 @@ describe 'AWS.TemporaryCredentials', ->
     else
       operation = 'getSessionToken'
     helpers.spyOn(creds.service, operation).andCallFake (params, cb) ->
-     expect(params).toEqual(inParams)
+     expect(params).to.eql(inParams)
      cb null, Credentials:
        AccessKeyId: 'KEY'
        SecretAccessKey: 'SECRET'
@@ -335,8 +335,8 @@ describe 'AWS.TemporaryCredentials', ->
       origCreds = AWS.config.credentials
       AWS.config.credentials = new AWS.Credentials('AKID', 'SECRET')
       creds = new AWS.TemporaryCredentials()
-      expect(creds.masterCredentials.accessKeyId).toEqual('AKID')
-      expect(creds.masterCredentials.secretAccessKey).toEqual('SECRET')
+      expect(creds.masterCredentials.accessKeyId).to.equal('AKID')
+      expect(creds.masterCredentials.secretAccessKey).to.equal('SECRET')
       AWS.config.credentials = origCreds
 
     it 'seeds masterCredentials from temporary credentials', ->
@@ -344,8 +344,8 @@ describe 'AWS.TemporaryCredentials', ->
       AWS.config.credentials = new AWS.Credentials('AKID', 'SECRET')
       for i in [0..3]
         creds = new AWS.TemporaryCredentials()
-        expect(creds.masterCredentials.accessKeyId).toEqual('AKID')
-        expect(creds.masterCredentials.secretAccessKey).toEqual('SECRET')
+        expect(creds.masterCredentials.accessKeyId).to.equal('AKID')
+        expect(creds.masterCredentials.secretAccessKey).to.equal('SECRET')
       AWS.config.credentials = origCreds
 
 
@@ -353,37 +353,37 @@ describe 'AWS.TemporaryCredentials', ->
     it 'can be expired based on expire time from STS response', ->
       mockSTS(new Date(0))
       creds.refresh(->)
-      expect(creds.needsRefresh()).toEqual(true)
+      expect(creds.needsRefresh()).to.equal(true)
 
   describe 'refresh', ->
     it 'loads temporary credentials from STS using getSessionToken', ->
       mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000))
       creds.refresh(->)
-      expect(creds.accessKeyId).toEqual('KEY')
-      expect(creds.secretAccessKey).toEqual('SECRET')
-      expect(creds.sessionToken).toEqual('TOKEN')
-      expect(creds.needsRefresh()).toEqual(false)
+      expect(creds.accessKeyId).to.equal('KEY')
+      expect(creds.secretAccessKey).to.equal('SECRET')
+      expect(creds.sessionToken).to.equal('TOKEN')
+      expect(creds.needsRefresh()).to.equal(false)
 
     it 'loads temporary credentials from STS using assumeRole if RoleArn is provided', ->
       creds = new AWS.TemporaryCredentials(RoleArn: 'ARN')
       mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000),
         RoleArn: 'ARN', RoleSessionName: 'temporary-credentials')
       creds.refresh(->)
-      expect(creds.accessKeyId).toEqual('KEY')
-      expect(creds.secretAccessKey).toEqual('SECRET')
-      expect(creds.sessionToken).toEqual('TOKEN')
-      expect(creds.needsRefresh()).toEqual(false)
+      expect(creds.accessKeyId).to.equal('KEY')
+      expect(creds.secretAccessKey).to.equal('SECRET')
+      expect(creds.sessionToken).to.equal('TOKEN')
+      expect(creds.needsRefresh()).to.equal(false)
 
     it 'does try to load creds second time if service request failed', ->
       spy = helpers.spyOn(creds.service, 'getSessionToken').andCallFake (params, cb) ->
         cb(new Error('INVALID SERVICE'))
 
       creds.refresh (err) ->
-        expect(err.message).toEqual('INVALID SERVICE')
+        expect(err.message).to.equal('INVALID SERVICE')
       creds.refresh ->
         creds.refresh ->
           creds.refresh ->
-            expect(spy.calls.length).toEqual(4)
+            expect(spy.calls.length).to.equal(4)
 
 describe 'AWS.WebIdentityCredentials', ->
   creds = null
@@ -393,7 +393,7 @@ describe 'AWS.WebIdentityCredentials', ->
 
   mockSTS = (expireTime) ->
     helpers.spyOn(creds.service, 'assumeRoleWithWebIdentity').andCallFake (params, cb) ->
-     expect(params).toEqual(RoleArn: 'arn', WebIdentityToken: 'token', RoleSessionName: 'web-identity')
+     expect(params).to.eql(RoleArn: 'arn', WebIdentityToken: 'token', RoleSessionName: 'web-identity')
      cb null,
        Credentials:
          AccessKeyId: 'KEY'
@@ -406,22 +406,22 @@ describe 'AWS.WebIdentityCredentials', ->
     it 'loads federated credentials from STS', ->
       mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000))
       creds.refresh(->)
-      expect(creds.accessKeyId).toEqual('KEY')
-      expect(creds.secretAccessKey).toEqual('SECRET')
-      expect(creds.sessionToken).toEqual('TOKEN')
-      expect(creds.needsRefresh()).toEqual(false)
-      expect(creds.data.OtherProperty).toEqual(true)
+      expect(creds.accessKeyId).to.equal('KEY')
+      expect(creds.secretAccessKey).to.equal('SECRET')
+      expect(creds.sessionToken).to.equal('TOKEN')
+      expect(creds.needsRefresh()).to.equal(false)
+      expect(creds.data.OtherProperty).to.equal(true)
 
     it 'does try to load creds second time if service request failed', ->
       spy = helpers.spyOn(creds.service, 'assumeRoleWithWebIdentity').andCallFake (params, cb) ->
         cb(new Error('INVALID SERVICE'))
 
       creds.refresh (err) ->
-        expect(err.message).toEqual('INVALID SERVICE')
+        expect(err.message).to.equal('INVALID SERVICE')
       creds.refresh ->
         creds.refresh ->
           creds.refresh ->
-            expect(spy.calls.length).toEqual(4)
+            expect(spy.calls.length).to.equal(4)
 
 describe 'AWS.SAMLCredentials', ->
   creds = null
@@ -431,7 +431,7 @@ describe 'AWS.SAMLCredentials', ->
 
   mockSTS = (expireTime) ->
     helpers.spyOn(creds.service, 'assumeRoleWithSAML').andCallFake (params, cb) ->
-     expect(params).toEqual(SAMLAssertion: 'token', RoleArn: 'arn', PrincipalArn: 'arn')
+     expect(params).to.eql(SAMLAssertion: 'token', RoleArn: 'arn', PrincipalArn: 'arn')
      cb null, Credentials:
        AccessKeyId: 'KEY'
        SecretAccessKey: 'SECRET'
@@ -442,18 +442,18 @@ describe 'AWS.SAMLCredentials', ->
     it 'loads federated credentials from STS', ->
       mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000))
       creds.refresh(->)
-      expect(creds.accessKeyId).toEqual('KEY')
-      expect(creds.secretAccessKey).toEqual('SECRET')
-      expect(creds.sessionToken).toEqual('TOKEN')
-      expect(creds.needsRefresh()).toEqual(false)
+      expect(creds.accessKeyId).to.equal('KEY')
+      expect(creds.secretAccessKey).to.equal('SECRET')
+      expect(creds.sessionToken).to.equal('TOKEN')
+      expect(creds.needsRefresh()).to.equal(false)
 
     it 'does try to load creds second time if service request failed', ->
       spy = helpers.spyOn(creds.service, 'assumeRoleWithSAML').andCallFake (params, cb) ->
         cb(new Error('INVALID SERVICE'))
 
       creds.refresh (err) ->
-        expect(err.message).toEqual('INVALID SERVICE')
+        expect(err.message).to.equal('INVALID SERVICE')
       creds.refresh ->
         creds.refresh ->
           creds.refresh ->
-            expect(spy.calls.length).toEqual(4)
+            expect(spy.calls.length).to.equal(4)

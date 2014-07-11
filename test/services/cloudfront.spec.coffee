@@ -12,7 +12,7 @@ describe 'AWS.CloudFront', ->
       helpers.mockHttpResponse 200, {}, ''
       cf.listDistributions ->
         auth = @request.httpRequest.headers['Authorization']
-        expect(auth).toMatch(/\/us-east-1\/cloudfront\/aws4_request/)
+        expect(auth).to.match(/\/us-east-1\/cloudfront\/aws4_request/)
 
   describe 'createInvalidation', ->
     it 'correctly builds the request', ->
@@ -40,5 +40,5 @@ describe 'AWS.CloudFront', ->
           CallerReference: 'abc'
       cf.createInvalidation params, (err, data) ->
         req = this.request.httpRequest
-        expect(req.path).toEqual("/#{api}/distribution/ID/invalidation")
+        expect(req.path).to.equal("/#{api}/distribution/ID/invalidation")
         helpers.matchXML(req.body, xml)

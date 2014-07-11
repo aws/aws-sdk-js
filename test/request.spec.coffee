@@ -15,7 +15,7 @@ describe 'AWS.Request', ->
       expect(->
         service.makeRequest 'mockMethod', ->
           throw new Error('error')
-      ).toThrow('error')
+      ).to.throw('error')
 
     for evt in ['error', 'success', 'complete']
       it 'throws errors out of terminal ' + evt + ' event', ->
@@ -24,7 +24,7 @@ describe 'AWS.Request', ->
           req = service.makeRequest('mockMethod')
           req.on evt, -> throw new Error('error')
           req.send()
-        ).toThrow('error')
+        ).to.throw('error')
 
     it 'propagates errors to error event', ->
       helpers.mockHttpResponse 200, {}, ''
@@ -33,8 +33,8 @@ describe 'AWS.Request', ->
         req = service.makeRequest('mockMethod')
         req.on 'extractData', -> throw new Error('error')
         req.send((e) -> err = e)
-      ).not.toThrow('error')
-      expect(err.message).toEqual('error')
+      ).not.to.throw('error')
+      expect(err.message).to.equal('error')
 
   describe 'isPageable', ->
     beforeEach ->
@@ -45,10 +45,10 @@ describe 'AWS.Request', ->
       service.api.paginators['mockMethod'] = new AWS.Model.Paginator('mockMethod', limit_key: 'Marker')
 
       request = service.makeRequest('mockMethod')
-      expect(request.isPageable()).toEqual(true)
+      expect(request.isPageable()).to.equal(true)
 
     it 'is not pageable if the pagination config does not exist for the operation', ->
-      expect(service.makeRequest('mockMethod').isPageable()).toEqual(false)
+      expect(service.makeRequest('mockMethod').isPageable()).to.equal(false)
 
   describe 'eachPage', ->
     beforeEach ->
@@ -81,7 +81,7 @@ describe 'AWS.Request', ->
       service.mockMethod().eachPage (err, data) ->
         resps.push([err, data])
         if err == null && data == null
-          expect(resps).toEqual [
+          expect(resps).to.eql [
             [null, {Value: 1, NextToken: 'a'}],
             [null, {Value: 2, NextToken: 'b'}],
             [null, {Value: 3, NextToken: 'c'}],
@@ -97,7 +97,7 @@ describe 'AWS.Request', ->
           return false
         resps.push([err, data])
         true
-      expect(resps).toEqual [
+      expect(resps).to.eql [
         [null, {Value: 1, NextToken: 'a'}],
         [null, {Value: 2, NextToken: 'b'}]
       ]
@@ -110,7 +110,7 @@ describe 'AWS.Request', ->
           next()
 
           if resps.length > 4
-            expect(resps).toEqual [
+            expect(resps).to.eql [
               [null, {Value: 1, NextToken: 'a'}],
               [null, {Value: 2, NextToken: 'b'}],
               [null, {Value: 3, NextToken: 'c'}],
@@ -123,7 +123,7 @@ describe 'AWS.Request', ->
       try
         service.mockMethod().eachPage -> invalidCode
       catch e
-        expect(e.name).toEqual('ReferenceError')
+        expect(e.name).to.equal('ReferenceError')
 
   describe 'waitFor', ->
     it 'creates a ResourceWaiter object', ->
@@ -134,7 +134,7 @@ describe 'AWS.Request', ->
     it 'accepts an optional callback', (done) ->
       helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
       service.makeRequest('mockMethod').send (err, data) ->
-        expect(data).toEqual('FOOBARBAZQUX')
+        expect(data).to.equal('FOOBARBAZQUX')
         done()
 
   describe 'abort', ->
@@ -143,9 +143,9 @@ describe 'AWS.Request', ->
       req = service.makeRequest('mockMethod')
       req.on 'send', (resp) -> req.abort()
       req.send (err, data) ->
-        expect(data).toEqual(null)
-        expect(err.code).toEqual('RequestAbortedError')
-        expect(err.message).toMatch(/aborted by user/)
+        expect(data).not.to.exist
+        expect(err.code).to.equal('RequestAbortedError')
+        expect(err.message).to.match(/aborted by user/)
         done()
 
   if AWS.util.isNode()
@@ -159,7 +159,7 @@ describe 'AWS.Request', ->
         s.on 'end', -> done = true
         s.on 'data', (c) -> data += c.toString()
         request.on 'complete', ->
-          expect(data).toEqual('FOOBARBAZQUX')
+          expect(data).to.equal('FOOBARBAZQUX')
           done()
 
       it 'streams2 data (readable event)', (done) ->
@@ -171,7 +171,7 @@ describe 'AWS.Request', ->
         request = service.makeRequest('mockMethod')
         s = request.createReadStream()
         s.on 'end', ->
-          expect(data).toEqual('FOOBARBAZQUX')
+          expect(data).to.equal('FOOBARBAZQUX')
           done()
         s.on 'readable', ->
           try
@@ -190,7 +190,7 @@ describe 'AWS.Request', ->
         request = service.makeRequest('mockMethod')
         s = request.createReadStream()
         s.on 'end', ->
-          expect(data).toEqual('FOOBARBAZQUX')
+          expect(data).to.equal('FOOBARBAZQUX')
           done()
         s.on 'readable', ->
           try
@@ -206,8 +206,8 @@ describe 'AWS.Request', ->
         request = service.makeRequest('mockMethod')
         s = request.createReadStream()
         s.on 'error', (error) ->
-          expect(data).toEqual('')
-          expect(error.statusCode).toEqual(404)
+          expect(data).to.equal('')
+          expect(error.statusCode).to.equal(404)
           done()
         s.on 'data', (c) -> data += c.toString()
 
@@ -220,8 +220,8 @@ describe 'AWS.Request', ->
         s.on 'error', (e) -> error = e
         s.on 'data', (c) -> data += c.toString()
         request.on 'complete', ->
-          expect(data).toEqual('FOOBARBAZQUX')
-          expect(error).toEqual(null)
+          expect(data).to.equal('FOOBARBAZQUX')
+          expect(error).to.equal(null)
           done()
 
       it 'streams partial data and raises an error', (done) ->
@@ -241,9 +241,9 @@ describe 'AWS.Request', ->
         request = service.makeRequest('mockMethod')
         request.on 'error', (e) -> reqError = e
         request.on 'complete', ->
-          expect(data).toEqual('FOOBARBAZ')
-          expect(error.message).toEqual('fail')
-          expect(reqError.message).toEqual('fail')
+          expect(data).to.equal('FOOBARBAZ')
+          expect(error.message).to.equal('fail')
+          expect(reqError.message).to.equal('fail')
           done()
 
         s = request.createReadStream()
@@ -280,10 +280,10 @@ describe 'AWS.Request', ->
         s.on 'error', (e) -> error = e
         s.on 'data', (c) -> data += c.toString()
         request.on 'complete', ->
-          expect(data).toEqual('FOOBAR')
-          expect(error.code).toEqual('NetworkingError')
-          expect(reqError.code).toEqual('NetworkingError')
-          expect(reqError.hostname).toEqual('mockservice.mock-region.amazonaws.com')
-          expect(reqError.region).toEqual('mock-region')
-          expect(resp.retryCount).toEqual(0)
+          expect(data).to.equal('FOOBAR')
+          expect(error.code).to.equal('NetworkingError')
+          expect(reqError.code).to.equal('NetworkingError')
+          expect(reqError.hostname).to.equal('mockservice.mock-region.amazonaws.com')
+          expect(reqError.region).to.equal('mock-region')
+          expect(resp.retryCount).to.equal(0)
           done()

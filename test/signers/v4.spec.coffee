@@ -27,13 +27,13 @@ describe 'AWS.Signers.V4', ->
   beforeEach ->
     creds = accessKeyId: 'akid', secretAccessKey: 'secret', sessionToken: 'session'
     signer = buildSigner()
-    signer.addHeaders(creds, datetime)
+    signer.addAuthorization(creds, date)
 
   describe 'constructor', ->
     it 'can build a signer for a request object', ->
       req = buildRequest()
       signer = buildSigner(req)
-      expect(signer.request).toBe(req)
+      expect(signer.request).to.equal(req)
 
   describe 'addAuthorization', ->
     headers = {
@@ -47,18 +47,18 @@ describe 'AWS.Signers.V4', ->
     }
 
     for key, value of headers
-      it 'should add ' + key + ' header', ->
-        signer.addAuthorization(creds, date)
-        key = this.description.match(/(\S+) header/)[1]
-        expect(signer.request.headers[key]).toEqual(headers[key])
+      func = (k) ->
+        it 'should add ' + k + ' header', ->
+          expect(signer.request.headers[k]).to.equal(headers[k])
+      func(key)
 
   describe 'authorization', ->
     it 'should return authorization part for signer', ->
-      expect(signer.authorization(creds, datetime)).toEqual(authorization)
+      expect(signer.authorization(creds, datetime)).to.equal(authorization)
 
   describe 'signature', ->
     it 'should generate proper signature', ->
-      expect(signer.signature(creds, datetime)).toEqual(signature)
+      expect(signer.signature(creds, datetime)).to.equal(signature)
 
     describe 'caching', ->
       callCount = null
@@ -72,34 +72,34 @@ describe 'AWS.Signers.V4', ->
 
       it 'caches subsequent requests', ->
         signer.signature(creds, datetime)
-        expect(calls.length).toEqual(callCount + 1)
+        expect(calls.length).to.equal(callCount + 1)
         signer.signature(creds, datetime)
-        expect(calls.length).toEqual(callCount + 2)
+        expect(calls.length).to.equal(callCount + 2)
 
       it 'busts cache if region changes', ->
         signer.request.region = 'new-region'
         signer.signature(creds, datetime)
-        expect(calls.length).toEqual(callCount + 5)
+        expect(calls.length).to.equal(callCount + 5)
 
       it 'busts cache if service changes', ->
         signer.serviceName = 'newService'
         signer.signature(creds, datetime)
-        expect(calls.length).toEqual(callCount + 5)
+        expect(calls.length).to.equal(callCount + 5)
 
       it 'busts cache if access key changes', ->
         creds.accessKeyId = 'NEWAKID'
         signer.signature(creds, datetime)
-        expect(calls.length).toEqual(callCount + 5)
+        expect(calls.length).to.equal(callCount + 5)
 
       it 'busts cache if date changes', ->
         newDate = new Date(date.getTime() + 1000000000)
         newDatetime = AWS.util.date.iso8601(newDate).replace(/[:\-]|\.\d{3}/g, '')
         signer.signature(creds, newDatetime)
-        expect(calls.length).toEqual(callCount + 5)
+        expect(calls.length).to.equal(callCount + 5)
 
   describe 'stringToSign', ->
     it 'should sign correctly generated input string', ->
-      expect(signer.stringToSign(datetime)).toEqual 'AWS4-HMAC-SHA256\n' +
+      expect(signer.stringToSign(datetime)).to.equal 'AWS4-HMAC-SHA256\n' +
         datetime + '\n' +
         '20310430/region/dynamodb/aws4_request\n' +
         signer.hexEncodedHash(signer.canonicalString())
@@ -108,16 +108,16 @@ describe 'AWS.Signers.V4', ->
     it 'double URI encodes paths for non S3 services', ->
       req = new AWS.CognitoSync().listDatasets(IdentityPoolId:'id', IdentityId:'a:b:c').build()
       signer = new AWS.Signers.V4(req.httpRequest, 'cognito-identity')
-      expect(signer.canonicalString().split('\n')[1]).toEqual('/identitypools/id/identities/a%253Ab%253Ac/datasets')
+      expect(signer.canonicalString().split('\n')[1]).to.equal('/identitypools/id/identities/a%253Ab%253Ac/datasets')
 
     it 'does not double encode path for S3', ->
       req = new AWS.S3().getObject(Bucket: 'bucket', Key: 'a:b:c').build()
       signer = new AWS.Signers.V4(req.httpRequest, 's3')
-      expect(signer.canonicalString().split('\n')[1]).toEqual('/a%3Ab%3Ac')
+      expect(signer.canonicalString().split('\n')[1]).to.equal('/a%3Ab%3Ac')
 
   describe 'canonicalHeaders', ->
     it 'should return headers', ->
-      expect(signer.canonicalHeaders()).toEqual [
+      expect(signer.canonicalHeaders()).to.eql [
         'host:localhost',
         'x-amz-date:' + datetime,
         'x-amz-security-token:session',
@@ -127,20 +127,20 @@ describe 'AWS.Signers.V4', ->
 
     it 'should ignore Authorization header', ->
       signer.request.headers = {'Authorization': 'foo'}
-      expect(signer.canonicalHeaders()).toEqual('')
+      expect(signer.canonicalHeaders()).to.equal('')
 
     it 'should lowercase all header names (not values)', ->
       signer.request.headers = {'FOO': 'BAR'}
-      expect(signer.canonicalHeaders()).toEqual('foo:BAR')
+      expect(signer.canonicalHeaders()).to.equal('foo:BAR')
 
     it 'should sort headers by key', ->
       signer.request.headers = {abc: 'a', bca: 'b', Qux: 'c', bar: 'd'}
-      expect(signer.canonicalHeaders()).toEqual('abc:a\nbar:d\nbca:b\nqux:c')
+      expect(signer.canonicalHeaders()).to.equal('abc:a\nbar:d\nbca:b\nqux:c')
 
     it 'should compact multiple spaces in keys/values to a single space', ->
       signer.request.headers = {'Header': 'Value     with  Multiple   \t spaces'}
-      expect(signer.canonicalHeaders()).toEqual('header:Value with Multiple spaces')
+      expect(signer.canonicalHeaders()).to.equal('header:Value with Multiple spaces')
 
     it 'should strip starting and end of line spaces', ->
       signer.request.headers = {'Header': ' \t   Value  \t  '}
-      expect(signer.canonicalHeaders()).toEqual('header:Value')
+      expect(signer.canonicalHeaders()).to.equal('header:Value')

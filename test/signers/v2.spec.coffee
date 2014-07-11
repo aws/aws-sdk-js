@@ -29,40 +29,40 @@ describe 'AWS.Signers.V2', ->
   describe 'constructor', ->
 
     it 'builds a signer for a request object', ->
-      expect(signer.request).toBe(request)
+      expect(signer.request).to.equal(request)
 
   describe 'addAuthorization', ->
 
     it 'adds a url encoded iso8601 timestamp param', ->
-      expect(stringify(request.params)).toMatch(/Timestamp=2031-04-30T20%3A16%3A13.456Z/)
+      expect(stringify(request.params)).to.match(/Timestamp=2031-04-30T20%3A16%3A13.456Z/)
 
     it 'adds a SignatureVersion param', ->
-      expect(stringify(request.params)).toMatch(/SignatureVersion=2/)
+      expect(stringify(request.params)).to.match(/SignatureVersion=2/)
 
     it 'adds a SignatureMethod param', ->
-      expect(stringify(request.params)).toMatch(/SignatureMethod=HmacSHA256/)
+      expect(stringify(request.params)).to.match(/SignatureMethod=HmacSHA256/)
 
     it 'adds an AWSAccessKeyId param', ->
-      expect(stringify(request.params)).toMatch(/AWSAccessKeyId=akid/)
+      expect(stringify(request.params)).to.match(/AWSAccessKeyId=akid/)
 
     it 'omits SecurityToken when sessionToken has been omitted', ->
-      expect(stringify(request.params)).not.toMatch(/SecurityToken/)
+      expect(stringify(request.params)).not.to.match(/SecurityToken/)
 
     it 'adds the SecurityToken when sessionToken is provided', ->
       credentials.sessionToken = 'session'
       signRequest(buildRequest())
-      expect(stringify(request.params)).toMatch(/SecurityToken=session/)
+      expect(stringify(request.params)).to.match(/SecurityToken=session/)
 
     it 'populates the body', ->
-      expect(request.body).toEqual('AWSAccessKeyId=akid&Signature=%2FrumhWptMPvyb4aaeOv5iGpl6%2FLfs5uVHu8k1d3NNfc%3D&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2031-04-30T20%3A16%3A13.456Z')
+      expect(request.body).to.equal('AWSAccessKeyId=akid&Signature=%2FrumhWptMPvyb4aaeOv5iGpl6%2FLfs5uVHu8k1d3NNfc%3D&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2031-04-30T20%3A16%3A13.456Z')
 
     it 'populates content-length header', ->
-      expect(request.headers['Content-Length']).toEqual(165)
+      expect(request.headers['Content-Length']).to.equal(165)
 
     it 'signs additional body params', ->
       request = buildRequest()
       request.params['Param.1'] = 'abc'
       request.params['Param.2'] = 'xyz'
       signRequest(request)
-      expect(request.body).toEqual('AWSAccessKeyId=akid&Param.1=abc&Param.2=xyz&Signature=3pcXIWw0eVd4wFmp%2Blo24L93UTMGcYSNE%2BFYNNqzDts%3D&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2031-04-30T20%3A16%3A13.456Z')
+      expect(request.body).to.equal('AWSAccessKeyId=akid&Param.1=abc&Param.2=xyz&Signature=3pcXIWw0eVd4wFmp%2Blo24L93UTMGcYSNE%2BFYNNqzDts%3D&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2031-04-30T20%3A16%3A13.456Z')
 
