@@ -67,15 +67,14 @@ global.setTimeout = (fn) -> fn()
 
 global.expect = require('chai').expect
 
-flattenXML = (xml) ->
-  if (!xml)
-    return xml
-  xml.split("\n").join('').   # remove newlines
-    replace(/>\s+</g, '><').  # prunes whitespace between elements
-    replace(/^\s+|\s+$/g, '') # trims whitespace from ends
-
 matchXML = (xml1, xml2) ->
-  expect(flattenXML(xml1)).to.equal(flattenXML(xml2))
+  results = []
+  parser = new (require('xml2js').Parser)()
+  [xml1, xml2].forEach (xml) ->
+    parser.parseString xml, (e,r) ->
+      if e then throw e
+      results.push(r)
+  expect(results[0]).to.eql(results[1])
 
 MockService = AWS.Service.defineService 'mockService',
   serviceIdentifier: 'mock'
