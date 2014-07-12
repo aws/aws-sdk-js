@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.0.6
+// AWS SDK for JavaScript v2.0.7
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -3849,7 +3849,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.0.6',
+  VERSION: '2.0.7',
 
 
   Signers: {},
@@ -6097,9 +6097,11 @@ AWS.Request = inherit({
     return this.response;
   },
 
+
   build: function build(callback) {
     return this.runTo('send', callback);
   },
+
 
   runTo: function runTo(state, done) {
     this._asm.runTo(state, done, this);
@@ -6439,7 +6441,12 @@ AWS.ResourceWaiter = inherit({
 
 
   checkError: function checkError(resp) {
-    return resp.httpResponse.statusCode === this.config.successValue;
+    var value = this.config.successValue;
+    if (typeof value === 'number') {
+      return resp.httpResponse.statusCode === value;
+    } else {
+      return resp.error && resp.error.code === value;
+    }
   },
 
 
