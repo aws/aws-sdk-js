@@ -164,7 +164,7 @@ describe 'AWS.Request', ->
 
       it 'streams2 data (readable event)', (done) ->
         if AWS.HttpClient.streamsApiVersion < 2
-          return
+          return done()
 
         data = ''
         helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
@@ -183,7 +183,7 @@ describe 'AWS.Request', ->
 
       it 'streams2 data does not hang out while waiting response', (done) ->
         if AWS.HttpClient.streamsApiVersion < 2
-          return
+          return done()
 
         data = ''
         helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', null, null, 'BAZ', 'QUX']
