@@ -3,11 +3,6 @@ node_js:
   - "0.8"
   - "0.10"
 
-branches:
-  only:
-    - master
-    - normalized
-
 before_script:
   - "if [[ `node -v` == v0.8.* ]]; then npm install -g npm || exit 0; fi"
   - "npm install git://github.com/aws/aws-sdk-js-apis#$TRAVIS_BRANCH || exit 0"
