@@ -1,5 +1,6 @@
 language: node_js
 node_js:
+  - "0.8"
   - "0.10"
 
 branches:
@@ -8,7 +9,8 @@ branches:
     - normalized
 
 before_script:
-  - "npm install git://github.com/aws/aws-sdk-js-apis#$TRAVIS_BRANCH"
+  - "if [[ `node -v` == v0.8.* ]]; then npm install -g npm || exit 0; fi"
+  - "npm install git://github.com/aws/aws-sdk-js-apis#$TRAVIS_BRANCH || exit 0"
 
 script: "if [ $INTEGRATION ]; then cucumber.js -f pretty; else npm test; fi"
 
