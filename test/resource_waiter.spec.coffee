@@ -70,6 +70,21 @@ describe 'AWS.ResourceWaiter', ->
       expect(resp.httpResponse.statusCode).to.equal(404)
       expect(resp.retryCount).to.equal(3)
 
+    it 'supports error codes as error state', ->
+      err = null; data = null; resp = null
+      db = new AWS.DynamoDB
+      helpers.mockResponses db, [
+        {data: {Table: TableStatus: 'ACTIVE'}},
+        {data: {Table: TableStatus: 'ACTIVE'}},
+        {error: {code: 'ResourceNotFoundException'}}
+      ]
+
+      waiter = new AWS.ResourceWaiter(db, 'tableNotExists')
+      waiter.wait (e, d) -> resp = this; err = e; data = d
+      expect(err).to.equal(null)
+      expect(data).to.eql({})
+      expect(resp.retryCount).to.equal(2)
+
     it 'fails fast if failure value is found', ->
       err = null; data = null; resp = null
       ec2 = new AWS.EC2
