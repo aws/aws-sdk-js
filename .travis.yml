@@ -7,7 +7,7 @@ before_install:
   - "if [[ `node -v` == v0.8.* ]]; then npm install -g npm || exit 0; fi"
 
 before_script:
-  - "npm install git://github.com/aws/aws-sdk-js-apis#$TRAVIS_BRANCH || exit 0"
+  - "npm install git://github.com/aws/aws-sdk-js-apis#master || exit 0"
 
 script: "if [ $INTEGRATION ]; then cucumber.js -f pretty; else npm test; fi"
 
