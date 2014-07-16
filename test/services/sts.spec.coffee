@@ -55,6 +55,16 @@ describe 'AWS.STS', ->
           'RoleArn=ARN&RoleSessionName=NAME&Version=' +
           service.api.apiVersion + '&WebIdentityToken=TOK')
 
+    it 'can build a get request on a mounted path (custom endpoint)', ->
+      helpers.mockHttpResponse 200, {}, '{}'
+      service = new AWS.STS(endpoint: 'http://localhost/foo/bar')
+      params = RoleArn: 'ARN', RoleSessionName: 'NAME', WebIdentityToken: 'TOK'
+      service.assumeRoleWithWebIdentity params, ->
+        hr = this.request.httpRequest
+        expect(hr.path).to.equal('/foo/bar?Action=AssumeRoleWithWebIdentity&' +
+          'RoleArn=ARN&RoleSessionName=NAME&Version=' +
+          service.api.apiVersion + '&WebIdentityToken=TOK')
+
   describe 'assumeRoleWithSAML', ->
     service = new AWS.STS
 
