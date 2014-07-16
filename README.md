@@ -18,7 +18,7 @@ to work with the new major version.
 To use the SDK in the browser, simply add the following script tag to your
 HTML pages:
 
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.7.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.8.min.js"></script>
 
 ### In Node.js
 

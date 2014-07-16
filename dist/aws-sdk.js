@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.0.7
+// AWS SDK for JavaScript v2.0.8
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -3849,7 +3849,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.0.7',
+  VERSION: '2.0.8',
 
 
   Signers: {},
@@ -5033,6 +5033,7 @@ function Shape(shape, options, memberName) {
   this.toType = function(value) { return value; };
 }
 
+
 Shape.normalizedTypes = {
   character: 'string',
   double: 'float',
@@ -5043,17 +5044,18 @@ Shape.normalizedTypes = {
   blob: 'binary'
 };
 
+
 Shape.types = {
-  structure: StructureShape,
-  list: ListShape,
-  map: MapShape,
-  boolean: BooleanShape,
-  timestamp: TimestampShape,
-  float: FloatShape,
-  integer: IntegerShape,
-  string: StringShape,
-  base64: Base64Shape,
-  binary: BinaryShape
+  'structure': StructureShape,
+  'list': ListShape,
+  'map': MapShape,
+  'boolean': BooleanShape,
+  'timestamp': TimestampShape,
+  'float': FloatShape,
+  'integer': IntegerShape,
+  'string': StringShape,
+  'base64': Base64Shape,
+  'binary': BinaryShape
 };
 
 Shape.resolve = function resolve(shape, options) {
@@ -5127,6 +5129,7 @@ function StructureShape(shape, options) {
   if (firstInit) {
     property(this, 'defaultValue', function() { return {}; });
     property(this, 'members', {});
+    property(this, 'memberNames', []);
     property(this, 'required', []);
     property(this, 'isRequired', function(name) { return false; });
   }
@@ -5135,6 +5138,9 @@ function StructureShape(shape, options) {
     property(this, 'members', new Collection(shape.members, options, function(name, member) {
       return Shape.create(member, options, name);
     }));
+    memoizedProperty(this, 'memberNames', function() {
+      return shape.xmlOrder || Object.keys(shape.members);
+    });
   }
 
   if (shape.required) {
@@ -5273,6 +5279,7 @@ function BooleanShape() {
     return value === 'true';
   };
 }
+
 
 Shape.shapes = {
   StructureShape: StructureShape,
@@ -5561,6 +5568,7 @@ function extractData(resp) {
   if (origRules.resultWrapper) {
     var tmp = Shape.create({type: 'structure'});
     tmp.members[origRules.resultWrapper] = shape;
+    tmp.memberNames = [origRules.resultWrapper];
     util.property(shape, 'name', shape.resultWrapper);
     shape = tmp;
   }
@@ -6013,6 +6021,7 @@ var AWS = require('./core');
 var AcceptorStateMachine = require('./state_machine');
 var inherit = AWS.util.inherit;
 
+
 var hardErrorStates = {success:1, error:1, complete:1};
 
 function isTerminalState(machine) {
@@ -6300,7 +6309,8 @@ AWS.Request = inherit({
 
   buildAsGet: function buildAsGet(request) {
     request.httpRequest.method = 'GET';
-    request.httpRequest.path = '/?' + request.httpRequest.body;
+    request.httpRequest.path = request.service.endpoint.path +
+                               '?' + request.httpRequest.body;
     request.httpRequest.body = '';
 
     delete request.httpRequest.headers['Content-Length'];
@@ -7828,7 +7838,7 @@ var util = {
     util.arrayEach(sortedKeys, function(name) {
       var value = params[name];
       var ename = escape(name);
-      var result = ename;
+      var result = ename + '=';
       if (Array.isArray(value)) {
         var vals = [];
         util.arrayEach(value, function(item) { vals.push(escape(item)); });
@@ -8529,7 +8539,8 @@ function serialize(xml, value, shape) {
 }
 
 function serializeStructure(xml, params, shape) {
-  util.each(shape.members, function(memberName, memberShape) {
+  util.arrayEach(shape.memberNames, function(memberName) {
+    var memberShape = shape.members[memberName];
     if (memberShape.location !== 'body') return;
 
     var value = params[memberName];
