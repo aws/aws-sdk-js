@@ -49,7 +49,7 @@ describe 'AWS.util.queryParamsToString', ->
     expect(qpts(a: '', b: '2')).to.equal('a=&b=2')
 
   it 'handles null/undefined values', ->
-    expect(qpts(a: undefined, b: null)).to.equal('a&b')
+    expect(qpts(a: undefined, b: null)).to.equal('a=&b=')
 
   it 'calls uriEscape on each name and value', ->
     spy = helpers.spyOn(AWS.util, 'uriEscape').andCallThrough()
@@ -63,7 +63,7 @@ describe 'AWS.util.queryParamsToString', ->
     expect(qpts(a: ['+', '&', '*'], b: '4')).to.equal('a=%26&a=%2A&a=%2B&b=4')
 
   it 'does not provide value if value is null', ->
-    expect(qpts(a: null, b: null)).to.equal('a&b')
+    expect(qpts(a: null, b: null)).to.equal('a=&b=')
 
 describe 'AWS.util.date', ->
 

@@ -87,7 +87,7 @@ describe 'AWS.Protocol.Query', ->
 
     it 'serializes empty lists', ->
       buildRequest(null, [])
-      expect(stringify(request.httpRequest.params)).to.match(/[?&]List(&|$)/)
+      expect(stringify(request.httpRequest.params)).to.match(/[?&]List=(&|$)/)
 
   describe 'extractError', ->
     extractError = (body) ->
