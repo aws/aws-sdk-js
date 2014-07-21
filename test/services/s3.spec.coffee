@@ -98,6 +98,13 @@ describe 'AWS.S3', ->
         req = build('putObject', Bucket: 'bucket', Key: 'key', Body: 'body')
         expect(req.headers['Content-Type']).to.equal('application/octet-stream; charset=UTF-8')
 
+      it 'does not add content-type for GET/HEAD requests', ->
+        req = build('getObject', Bucket: 'bucket', Key: 'key')
+        expect(req.headers['Content-Type']).not.to.exist
+
+        req = build('headObject', Bucket: 'bucket', Key: 'key')
+        expect(req.headers['Content-Type']).not.to.exist
+
       it 'adds charset to existing content-type if not supplied', ->
         req = build('putObject', Bucket: 'bucket', Key: 'key', Body: 'body', ContentType: 'text/html')
         expect(req.headers['Content-Type']).to.equal('text/html; charset=UTF-8')

@@ -74,7 +74,7 @@ integrationTests ->
         expect(err.name).to.equal('NetworkingError')
         done()
 
-    integration 'can send synchronous requests (no phantomjs)', (done) ->
+    integration 'can send synchronous requests', (done) ->
       key = uniqueName('test')
       opts = AWS.util.merge(config, config.s3)
       opts.httpOptions = xhrAsync: false
@@ -98,7 +98,7 @@ integrationTests ->
             expect(data.Body.toString()).to.equal(body)
           s3.deleteObject(Key: key).send(done)
 
-    integration 'GETs and PUTs objects to a bucket (no phantomjs)', (done) ->
+    integration 'GETs and PUTs objects to a bucket', (done) ->
       testWrite done, 'ƒoo'
 
     integration 'writes typed array data (no phantomjs)', (done) ->
