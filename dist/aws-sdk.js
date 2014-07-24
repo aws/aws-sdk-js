@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.0.8
+// AWS SDK for JavaScript v2.0.9
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -3849,7 +3849,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.0.8',
+  VERSION: '2.0.9',
 
 
   Signers: {},
@@ -4582,6 +4582,10 @@ AWS.XHRClient = AWS.util.inherit({
 
     if (httpOptions.timeout) {
       xhr.timeout = httpOptions.timeout;
+    }
+
+    if (httpOptions.xhrWithCredentials) {
+      xhr.withCredentials = true;
     }
 
     xhr.addEventListener('readystatechange', function() {
@@ -9269,6 +9273,11 @@ AWS.util.update(AWS.S3.prototype, {
 
   addContentType: function addContentType(req) {
     var httpRequest = req.httpRequest;
+    if (httpRequest.method === 'GET' || httpRequest.method === 'HEAD') {
+      delete httpRequest.headers['Content-Type'];
+      return;
+    }
+
     if (!httpRequest.headers['Content-Type']) { // always have a Content-Type
       httpRequest.headers['Content-Type'] = 'application/octet-stream';
     }
