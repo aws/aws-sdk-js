@@ -1,11 +1,18 @@
 require 'json'
 
 def write_configuration
+  config_cmd = <<-eof
+    node -e 'c=require("./").config.credentials;c.refresh(function() {
+      console.log(c.accessKeyId, c.secretAccessKey, c.sessionToken)
+    });'
+  eof
   config = {}
   if File.exist?('configuration')
     config = JSON.parse(File.read('configuration'))
-    config['accessKeyId'] ||= ENV['AWS_ACCESS_KEY_ID']
-    config['secretAccessKey'] ||= ENV['AWS_SECRET_ACCESS_KEY']
+    out = `#{config_cmd}`.split(/\s+/)
+    config['accessKeyId'] ||= out[0]
+    config['secretAccessKey'] ||= out[1]
+    config['sessionToken'] ||= out[2] if out[2] && out[2] != "undefined"
   end
   File.open('test/configuration.js', 'w') do |f|
     config_json = JSON.generate(config).inspect
