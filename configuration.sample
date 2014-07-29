@@ -1,5 +1,9 @@
 {
-    "accessKeyId": "YOUR_ACCESS_KEY_ID",
-    "secretAccessKey": "YOUR_SECRET_ACCESS_KEY",
-    "region": "us-west-1"
+  "region": "us-east-1",
+  "s3": {
+    "params": { "Bucket": "test-s3-bucket" }
+  },
+  "dynamodb": {
+    "params": { "TableName": "aws-sdk-js-integration-test" }
+  }
 }
