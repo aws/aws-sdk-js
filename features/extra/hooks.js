@@ -1,3 +1,4 @@
+var util = require('util');
 var realExit = process.exit;
 
 module.exports = function () {
@@ -21,6 +22,29 @@ module.exports = function () {
   });
 
   /* Global error code steps */
+
+  this.Then(/^the request should be successful$/, function (callback) {
+    this.assert.ok(!this.error, 'Response was not successful');
+    callback();
+  });
+
+  this.Then(/^the value at "([^"]*)" should be a list$/, function (path, callback) {
+    var value = this.AWS.util.jamespath.find(path, this.data);
+    this.assert.ok(Array.isArray(value), "expected " + util.inspect(value) + " to be a list");
+    callback();
+  });
+
+  this.Then(/^the value at "([^"]*)" should be a number$/, function (path, callback) {
+    var value = this.AWS.util.jamespath.find(path, this.data);
+    this.assert.ok(typeof value === 'number', "expected " + util.inspect(value) + " to be a number");
+    callback();
+  });
+
+  this.Then(/^the value at "([^"]*)" should be a string$/, function (path, callback) {
+    var value = this.AWS.util.jamespath.find(path, this.data);
+    this.assert.ok(typeof value === 'string', "expected " + util.inspect(value) + " to be a string");
+    callback();
+  });
 
   this.Then(/^the error code should be "([^"]*)"$/, function(code, callback) {
     this.assert.ok(this.error, 'Response does not contain an error');
