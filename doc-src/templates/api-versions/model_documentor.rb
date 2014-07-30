@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'ostruct'
 
 module Documentor
   def documentation(rules)
@@ -149,6 +150,8 @@ class ExampleShapeVisitor
   def initialize(api, required_only = false)
     @api = api
     @required_only = required_only
+    @visited = Hash.new { 0 }
+    @recursive = {}
   end
 
   def example(klass, name, input)
@@ -168,40 +171,54 @@ class ExampleShapeVisitor
 
   def traverse(node, required = false)
     return "" if node.nil?
-    node = @api['shapes'][node['shape']].merge(node) if node['shape']
-    if (meth = "visit_" + (node['type'] || 'string')) && respond_to?(meth)
-      return send(meth, node, required)
+    result = ""
+    @visited[node['shape']] += 1
+    if !node['shape'] || @visited[node['shape']] < 2
+      node = @api['shapes'][node['shape']].merge(node) if node['shape']
+      if (meth = "visit_" + (node['type'] || 'string')) && respond_to?(meth)
+        result = send(meth, node, required)
+      end
+    else
+      @recursive[node['shape']] = true
+      result = "/* recursive #{node['shape']} */"
     end
-    ""
+    @visited[node['shape']] -= 1
+    result
   end
 
   def visit_structure(node, required = false)
     required_map = (node['required'] || []).inject({}) {|h,k| h[k] = true; h }
-    lines = ["{" + (required ? " // required" : "")]
-    node['members'].sort_by {|n, v| [required_map[n] ? -1 : 1, n] }.each_with_index do |(key, value), index|
+    datas = node['members'].sort_by {|n, v| [required_map[n] ? -1 : 1, n] }.map do |key, value|
       next if @required_only && !required_map[key]
       value = @api['shapes'][value['shape']].merge(value) if value['shape']
-      lines << "  #{key}: " + indent(traverse(value, required_map[key]), false) +
+      [key, value, indent(traverse(value, required_map[key]), false)]
+    end.compact
+
+    lines = ["{" + mark_rec_shape(node) + (required ? " /* required */" : "")]
+    datas.each_with_index do |(key, value, data), index|
+      lines << "  #{key}: " + data +
         (index + 1 < node['members'].size ? "," : "") +
         (required_map[key] && !%w(list map structure).include?(value['type']) ?
-          " // required" : "")
+          " /* required */" : "")
     end
     lines << "}"
     lines.join("\n")
   end
 
   def visit_list(node, required = false)
-    lines = ["[" + (required ? " // required" : "")]
-    lines << indent(traverse(node['member'])) + ","
-    lines << "  // ... more items ..."
+    data = indent(traverse(node['member']))
+    lines = ["[" + mark_rec_shape(node) + (required ? " /* required */" : "")]
+    lines << data + ","
+    lines << "  /* more items */"
     lines << "]"
     lines.join("\n")
   end
 
   def visit_map(node, required = false)
-    lines = ["{" + (required ? " // required" : "")]
-    lines << indent("someKey: " + traverse(node['value'])) + ","
-    lines << "  // anotherKey: ..."
+    data = indent("someKey: " + traverse(node['value']))
+    lines = ["{" + mark_rec_shape(node) + (required ? " /* required */" : "")]
+    lines << data + ","
+    lines << "  /* anotherKey: ... */"
     lines << "}"
     lines.join("\n")
   end
@@ -246,6 +263,10 @@ class ExampleShapeVisitor
     text = text.sub(/\A\s+/, '') if !first_line
     text
   end
+
+  def mark_rec_shape(node)
+    node['shape'] && @recursive[node['shape']] ? " /* #{node['shape']} */" : ""
+  end
 end
 
 class ShapeDocumentor
@@ -258,6 +279,31 @@ class ShapeDocumentor
   attr_reader :prefix
   attr_reader :type
 
+  def self.type_for(rules)
+    type = case rules['type']
+    when 'structure' then 'map'
+    when 'list' then 'Array'
+    when 'map' then 'map'
+    when 'string', nil then 'String'
+    when 'integer' then 'Integer'
+    when 'long' then 'Integer'
+    when 'float' then 'Float'
+    when 'double' then 'Float'
+    when 'bigdecimal' then 'Float'
+    when 'boolean' then 'Boolean'
+    when 'base64' then 'Buffer, Typed Array, Blob, String'
+    when 'binary' then 'Buffer, Typed Array, Blob, String'
+    when 'blob' then 'Buffer, Typed Array, Blob, String'
+    when 'timestamp' then 'Date'
+    else raise "unhandled type: #{rules['type']}"
+    end
+
+    # TODO : update this format description once we add streaming uploads
+    type += ', ReadableStream' if rules['streaming']
+
+    type
+  end
+
   def initialize(api, rules, options = {})
     rules = api['shapes'][rules['shape']].merge(rules) if rules['shape']
 
@@ -266,29 +312,8 @@ class ShapeDocumentor
     @name = options[:name]
     @prefix = options[:prefix] || ''
     @required = !!options[:required]
-
-    @type =
-      case rules['type']
-      when 'structure' then 'map'
-      when 'list' then 'Array'
-      when 'map' then 'map'
-      when 'string', nil then 'String'
-      when 'integer' then 'Integer'
-      when 'long' then 'Integer'
-      when 'float' then 'Float'
-      when 'double' then 'Float'
-      when 'bigdecimal' then 'Float'
-      when 'boolean' then 'Boolean'
-      when 'base64' then 'Buffer, Typed Array, Blob, String'
-      when 'binary' then 'Buffer, Typed Array, Blob, String'
-      when 'blob' then 'Buffer, Typed Array, Blob, String'
-      when 'timestamp' then 'Date'
-      else raise "unhandled type: #{rules['type']}"
-      end
-
-    # TODO : update this format description once we add streaming uploads
-    @type += ', ReadableStream' if streaming?
-
+    @visited = options[:visited] || Hash.new { 0 }
+    @type = self.class.type_for(rules)
     @lines = []
     @nested_lines = []
 
@@ -302,7 +327,7 @@ class ShapeDocumentor
 
     if list?
       child = child_shape(rules['member'] || {}, :prefix => prefix)
-      @type << "<#{child.type}>"
+      @type += "<#{child.type}>"
       @nested_lines += child.nested_lines
     end
 
@@ -311,10 +336,10 @@ class ShapeDocumentor
       # sanity check, I don't think this should ever raise, but if it
       # does we will have to document the key shape
       key_child = child_shape(rules['key'] || {}, :prefix => prefix)
-      raise "unhandled map key type" if key_child.type != 'String'
+      #raise "unhandled map key type" if key_child.type != 'String'
 
       child = child_shape(rules['value'] || {}, :prefix => prefix)
-      @type << "<#{child.type}>"
+      @type += "<#{child.type}>"
       @nested_lines += child.nested_lines
 
     end
@@ -327,10 +352,6 @@ class ShapeDocumentor
       @lines += rules['enum'].map{|v| "#{prefix}   * `#{v.inspect}`" }
     end
 
-  end
-
-  def streaming?
-    rules['streaming']
   end
 
   def structure?
@@ -361,6 +382,17 @@ class ShapeDocumentor
   private
 
   def child_shape(rules, options = {})
-    ShapeDocumentor.new(@api, rules, { :prefix => prefix + '    ' }.merge(options))
+    @visited[rules['shape']] += 1
+    if @visited[rules['shape']] < 2
+      ShapeDocumentor.new(@api, rules, {
+        :prefix => prefix + '    ', :visited => @visited }.merge(options))
+    else
+      OpenStruct.new({
+        :nested_lines => [], :lines => [],
+        :type => @api['shapes'] ?
+          ShapeDocumentor.type_for(@api['shapes'][rules['shape']]) :
+          rules['shape']
+      }.merge(options))
+    end
   end
 end
