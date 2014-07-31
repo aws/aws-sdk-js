@@ -91,7 +91,7 @@ describe 'AWS.EventListeners', ->
       call = errorHandler.calls[0]
       expect(errorHandler.calls.length).not.to.equal(0)
       expect(call.arguments[0] ).to.be.instanceOf(Error)
-      expect(call.arguments[0].code).to.equal('SigningError')
+      expect(call.arguments[0].code).to.equal('ConfigError')
       expect(call.arguments[0].message).to.match(/Missing region in config/)
 
     it 'ignores region validation if service has global endpoint', ->
