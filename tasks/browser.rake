@@ -25,7 +25,7 @@ def sdk_version
 end
 
 namespace :browser do
-  $BUILDER = "./dist-tools/browser-builder.js"
+  $BUILDER = "node dist-tools/browser-builder.js"
   $BROWSERIFY = "browserify"
   $BROWSERIFY_DIST = "dist/aws-sdk.js"
   $BROWSERIFY_TEST = "test/browser/build/tests.js"
@@ -34,21 +34,23 @@ namespace :browser do
 
   task :setup_dist_tools do
     unless File.directory?("dist-tools/node_modules")
-      sh "cd dist-tools && npm install --production"
+      Dir.chdir('dist-tools') do
+        sh "npm install --production"
+      end
     end
   end
 
   desc 'Builds browser distributable (SERVICES=s3,dynamodb,...)'
   task :build => :build_complete do
-    sh "MINIFY=1 #{$BUILDER} > #{$BROWSERIFY_DIST.sub('.js', '.min.js')}"
+    sh({"MINIFY" => "1"}, "#{$BUILDER} > #{$BROWSERIFY_DIST.sub('.js', '.min.js')}")
   end
 
   task :build_complete => [:setup_dist_tools, :dist_path] do
-    sh "MINIFY='' #{$BUILDER} > #{$BROWSERIFY_DIST}"
+    sh({"MINIFY" => ""}, "#{$BUILDER} > #{$BROWSERIFY_DIST}")
   end
 
   task :build_all => [:setup_dist_tools, :dist_path] do
-    sh "MINIFY='' #{$BUILDER} all > dist/aws-sdk-all.js"
+    sh({"MINIFY" => ""}, "#{$BUILDER} all > dist/aws-sdk-all.js")
   end
 
   desc 'Caches assets to the dist-tools build server'
@@ -73,8 +75,9 @@ namespace :browser do
     mkdir_p "test/browser/build"
     cp "dist/aws-sdk-all.js", "test/browser/build/aws-sdk-all.js"
     sh "coffee -c test/helpers.coffee"
-    sh "find test -name '*.coffee' | SERVICES=all xargs #{$BROWSERIFY} " +
-       "-t coffeeify -i domain > #{$BROWSERIFY_TEST}"
+    files = Dir.glob("test/**/*.coffee").join(" ")
+    sh({"SERVICES" => "all"}, $BROWSERIFY +
+       " -t coffeeify -i domain #{files} > #{$BROWSERIFY_TEST}")
     rm_f "test/helpers.js"
     rm_f "test/configuration.js"
     sh "open test/browser/runner.html" if ENV['OPEN']
