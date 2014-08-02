@@ -21,3 +21,22 @@ describe 'AWS.Model.Shape', ->
         shape = AWS.Model.Shape.create { type: 'timestamp' }, { api: api }
         date = shape.toType('Thu, 01 Jan 1970 00:00:00 GMT')
         expect(date).to.eql(new Date(0))
+
+    describe 'BooleanShape', ->
+      describe 'toType()', ->
+        shape = AWS.Model.Shape.create { type: 'boolean' }
+
+        it 'converts true / false booleans', ->
+          expect(shape.toType(true)).to.eql(true)
+          expect(shape.toType(false)).to.eql(false)
+
+        it 'converts string "true" and "false" to boolean', ->
+          expect(shape.toType('true')).to.eql(true)
+          expect(shape.toType('false')).to.eql(false)
+
+        it 'converts other strings to false', ->
+          expect(shape.toType('nottrue')).to.eql(false)
+
+        it 'converts null/undefined to null', ->
+          expect(shape.toType(null)).to.eql(null)
+          expect(shape.toType(undefined)).to.eql(null)
