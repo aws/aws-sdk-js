@@ -10,6 +10,7 @@ describe 'AWS.Model.Api', ->
         apiVersion: '1.0', endpointPrefix: 'endpoint', globalEndpoint: 'global'
         signatureVersion: 'v4', protocol: 'json', timestampFormat: 'rfc822'
         xmlNamespace: 'URI', serviceAbbreviation: 'abbr', serviceFullName: 'name'
+        signingName: 'alias'
 
       expect(api.apiVersion).to.equal('1.0')
       expect(api.endpointPrefix).to.equal('endpoint')
@@ -20,6 +21,7 @@ describe 'AWS.Model.Api', ->
       expect(api.xmlNamespaceUri).to.equal('URI')
       expect(api.abbreviation).to.equal('abbr')
       expect(api.fullName).to.equal('name')
+      expect(api.signingName).to.equal('alias')
 
   describe 'isApi', ->
     it 'is an API', ->
