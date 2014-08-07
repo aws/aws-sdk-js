@@ -322,13 +322,13 @@ describe 'AWS.TemporaryCredentials', ->
       operation = 'assumeRole'
     else
       operation = 'getSessionToken'
-    helpers.spyOn(creds.service, operation).andCallFake (params, cb) ->
-     expect(params).to.eql(inParams)
-     cb null, Credentials:
-       AccessKeyId: 'KEY'
-       SecretAccessKey: 'SECRET'
-       SessionToken: 'TOKEN'
-       Expiration: expireTime
+    helpers.spyOn(creds.service, operation).andCallFake (cb) ->
+      expect(creds.service.config.params).to.eql(inParams)
+      cb null, Credentials:
+        AccessKeyId: 'KEY'
+        SecretAccessKey: 'SECRET'
+        SessionToken: 'TOKEN'
+        Expiration: expireTime
 
   describe 'masterCredentials', ->
     it 'seeds masterCredentials from global credentials', ->
@@ -375,7 +375,7 @@ describe 'AWS.TemporaryCredentials', ->
       expect(creds.needsRefresh()).to.equal(false)
 
     it 'does try to load creds second time if service request failed', ->
-      spy = helpers.spyOn(creds.service, 'getSessionToken').andCallFake (params, cb) ->
+      spy = helpers.spyOn(creds.service, 'getSessionToken').andCallFake (cb) ->
         cb(new Error('INVALID SERVICE'))
 
       creds.refresh (err) ->
@@ -392,15 +392,17 @@ describe 'AWS.WebIdentityCredentials', ->
     creds = new AWS.WebIdentityCredentials(WebIdentityToken: 'token', RoleArn: 'arn')
 
   mockSTS = (expireTime) ->
-    helpers.spyOn(creds.service, 'assumeRoleWithWebIdentity').andCallFake (params, cb) ->
-     expect(params).to.eql(RoleArn: 'arn', WebIdentityToken: 'token', RoleSessionName: 'web-identity')
-     cb null,
-       Credentials:
-         AccessKeyId: 'KEY'
-         SecretAccessKey: 'SECRET'
-         SessionToken: 'TOKEN'
-         Expiration: expireTime
-       OtherProperty: true
+    helpers.spyOn(creds.service, 'assumeRoleWithWebIdentity').andCallFake (cb) ->
+      expect(creds.service.config.params).to.eql
+        RoleArn: 'arn', WebIdentityToken: 'token',
+        RoleSessionName: 'web-identity'
+      cb null,
+        Credentials:
+          AccessKeyId: 'KEY'
+          SecretAccessKey: 'SECRET'
+          SessionToken: 'TOKEN'
+          Expiration: expireTime
+        OtherProperty: true
 
   describe 'refresh', ->
     it 'loads federated credentials from STS', ->
@@ -413,7 +415,7 @@ describe 'AWS.WebIdentityCredentials', ->
       expect(creds.data.OtherProperty).to.equal(true)
 
     it 'does try to load creds second time if service request failed', ->
-      spy = helpers.spyOn(creds.service, 'assumeRoleWithWebIdentity').andCallFake (params, cb) ->
+      spy = helpers.spyOn(creds.service, 'assumeRoleWithWebIdentity').andCallFake (cb) ->
         cb(new Error('INVALID SERVICE'))
 
       creds.refresh (err) ->
@@ -430,13 +432,14 @@ describe 'AWS.SAMLCredentials', ->
     creds = new AWS.SAMLCredentials(SAMLAssertion: 'token', RoleArn: 'arn', PrincipalArn: 'arn')
 
   mockSTS = (expireTime) ->
-    helpers.spyOn(creds.service, 'assumeRoleWithSAML').andCallFake (params, cb) ->
-     expect(params).to.eql(SAMLAssertion: 'token', RoleArn: 'arn', PrincipalArn: 'arn')
-     cb null, Credentials:
-       AccessKeyId: 'KEY'
-       SecretAccessKey: 'SECRET'
-       SessionToken: 'TOKEN'
-       Expiration: expireTime
+    helpers.spyOn(creds.service, 'assumeRoleWithSAML').andCallFake (cb) ->
+      expect(creds.service.config.params).to.eql
+        SAMLAssertion: 'token', RoleArn: 'arn', PrincipalArn: 'arn'
+      cb null, Credentials:
+        AccessKeyId: 'KEY'
+        SecretAccessKey: 'SECRET'
+        SessionToken: 'TOKEN'
+        Expiration: expireTime
 
   describe 'refresh', ->
     it 'loads federated credentials from STS', ->
@@ -448,7 +451,7 @@ describe 'AWS.SAMLCredentials', ->
       expect(creds.needsRefresh()).to.equal(false)
 
     it 'does try to load creds second time if service request failed', ->
-      spy = helpers.spyOn(creds.service, 'assumeRoleWithSAML').andCallFake (params, cb) ->
+      spy = helpers.spyOn(creds.service, 'assumeRoleWithSAML').andCallFake (cb) ->
         cb(new Error('INVALID SERVICE'))
 
       creds.refresh (err) ->
