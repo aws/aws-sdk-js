@@ -59,6 +59,18 @@ describe 'AWS.Protocol.RestXml', ->
         expect(request.httpRequest.headers['x-amz-acl']).to.equal('canned-acl')
 
     describe 'string bodies', ->
+      ['GET', 'HEAD'].forEach (method) ->
+        it 'does not populate a body on a ' + method + ' request', ->
+          request.params = Data: 'abc'
+          defop
+            http: method: method
+            input:
+              payload: 'Data'
+              members:
+                Data:
+                  type: 'string'
+          expect(build().httpRequest.body).to.equal('')
+
       it 'populates the body with string types directly', ->
         request.params = Bucket: 'bucket-name', Data: 'abc'
         defop

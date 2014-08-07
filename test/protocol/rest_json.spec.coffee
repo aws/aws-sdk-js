@@ -122,6 +122,18 @@ describe 'AWS.Protocol.RestJson', ->
         expect(request.httpRequest.headers['x-amz-meta-abc']).to.equal('xyz')
 
     describe 'body', ->
+      ['GET', 'HEAD'].forEach (method) ->
+        it 'does not populate a body on a ' + method + ' request', ->
+          request.params = Data: 'abc'
+          defop
+            http: method: method
+            input:
+              payload: 'Data'
+              members:
+                Data:
+                  type: 'string'
+          expect(build().httpRequest.body).to.equal('')
+
       it 'builds root element if rules contains root', ->
         request.params =
           Config:
