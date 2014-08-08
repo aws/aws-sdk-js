@@ -72,10 +72,11 @@ describe 'AWS.util.date', ->
   describe 'getDate', ->
     it 'should return current date by default', ->
       oldDate = Date; now = {}
+      obj = if AWS.util.isNode() then GLOBAL else window
       mock = helpers.createSpy().andReturn(now)
-      `typeof window !== 'undefined' ? (window.Date = mock) : (Date = mock);`
+      obj.Date = mock
       expect(util.getDate()).to.equal(now)
-      `typeof window !== 'undefined' ? (window.Date = oldDate) : (Date = oldDate);`
+      obj.Date = oldDate
 
   describe 'iso8601', ->
     it 'should return date formatted as YYYYMMDDTHHnnssZ', ->
