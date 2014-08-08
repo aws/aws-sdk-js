@@ -460,3 +460,159 @@ describe 'AWS.SAMLCredentials', ->
         creds.refresh ->
           creds.refresh ->
             expect(spy.calls.length).to.equal(4)
+
+describe 'AWS.CognitoIdentityCredentials', ->
+  if AWS.util.isNode()
+    GLOBAL.window = {localStorage: {}}
+    AWS.util.nodeRequire = require
+
+  creds = null
+  oldStorage = window.localStorage
+  keys = AWS.CognitoIdentityCredentials.prototype.localStorageKey
+
+  beforeEach ->
+    delete window.localStorage[keys.id]
+    delete window.localStorage[keys.providers]
+
+  setupCreds = (params) ->
+    initParams =
+      AccountId: '1234567890'
+      IdentityPoolId: 'pool:id'
+      RoleArn: 'arn'
+    params = AWS.util.merge(initParams, params)
+    creds = new AWS.CognitoIdentityCredentials(params)
+    helpers.spyOn(creds, 'cacheId').andCallThrough()
+
+  describe 'constructor (browser)', ->
+    beforeEach -> helpers.spyOn(AWS.util, 'isBrowser').andReturn(true)
+
+    it 'loads IdentityId from localStorage cache if none provided', ->
+      window.localStorage[keys.id] = 'MYID'
+      setupCreds()
+      expect(creds.params.IdentityId).to.equal('MYID')
+
+    it 'does not load IdentityId from cache if provided', ->
+      window.localStorage[keys.id] = 'NOTMYID'
+      setupCreds(IdentityId: 'MYID')
+      expect(creds.params.IdentityId).to.equal('MYID')
+
+    it 'uses IdentityId if it is cached against one of Logins', ->
+      window.localStorage[keys.id] = 'MYID'
+      window.localStorage[keys.providers] = 'provider1'
+      setupCreds(Logins: {provider1: 'Token'})
+      expect(creds.params.IdentityId).to.equal('MYID')
+
+      window.localStorage[keys.providers] = 'provider1,provider2,provider3'
+      setupCreds(Logins: {provider1: 'Token'})
+      expect(creds.params.IdentityId).to.equal('MYID')
+
+      window.localStorage[keys.providers] = 'provider1,provider2,provider3'
+      setupCreds(Logins: {provider1: 'Token1', provider3: 'Token3'})
+      expect(creds.params.IdentityId).to.equal('MYID')
+
+    it 'ignores IdentityId if it is not cached against any of Logins', ->
+      window.localStorage[keys.id] = 'MYID'
+      window.localStorage[keys.providers] = 'provider4,provider5'
+      setupCreds(Logins: {provider1: 'Token'})
+      expect(creds.params.IdentityId).not.to.exist
+
+  describe 'refresh', ->
+    beforeEach -> setupCreds()
+
+    it 'runs getId, getOpenIdToken, assumeRoleWithWebIdentity', ->
+      helpers.mockResponses creds.cognito, [
+        {data: {IdentityId: 'IDENTITY-ID'}, error: null},
+        {data: {Token: 'TOKEN', IdentityId: 'IDENTITY-ID2'}, error: null}
+      ]
+      helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake (cb) ->
+        expect(creds.webIdentityCredentials.params.IdentityId).to.equal('IDENTITY-ID2')
+        expect(creds.webIdentityCredentials.params.WebIdentityToken).to.equal('TOKEN')
+        expect(creds.webIdentityCredentials.params.ProviderId).to.equal('cognito-identity.amazonaws.com')
+        creds.webIdentityCredentials.data =
+          Credentials:
+            AccessKeyId: 'KEY'
+            SecretAccessKey: 'SECRET'
+            SessionToken: 'TOKEN'
+        cb null
+      creds.refresh(->)
+      expect(creds.identityId).to.equal('IDENTITY-ID2')
+      expect(creds.accessKeyId).to.equal('KEY')
+      expect(creds.secretAccessKey).to.equal('SECRET')
+      expect(creds.sessionToken).to.equal('TOKEN')
+      expect(creds.needsRefresh()).to.equal(false)
+      expect(creds.cacheId.calls.length).to.equal(1)
+
+    it 'does not call getId if IdentityId is passed in', ->
+      setupCreds IdentityId: 'MYID'
+      helpers.mockResponses creds.cognito, [
+        {data: {Token: 'TOKEN', IdentityId: 'MYID2'}, error: null}
+      ]
+      helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake (cb) ->
+        expect(creds.webIdentityCredentials.params.IdentityId).to.equal('MYID2')
+        expect(creds.webIdentityCredentials.params.WebIdentityToken).to.equal('TOKEN')
+        creds.webIdentityCredentials.data =
+          Credentials:
+            AccessKeyId: 'KEY'
+            SecretAccessKey: 'SECRET'
+            SessionToken: 'TOKEN'
+        cb null
+      creds.refresh(->)
+      expect(creds.identityId).to.equal('MYID2')
+      expect(creds.accessKeyId).to.equal('KEY')
+      expect(creds.secretAccessKey).to.equal('SECRET')
+      expect(creds.sessionToken).to.equal('TOKEN')
+      expect(creds.needsRefresh()).to.equal(false)
+      expect(creds.cacheId.calls.length).to.equal(1)
+
+    it 'fails if getId fails', ->
+      helpers.mockResponses creds.cognito, [
+        {data: null, error: new Error('INVALID SERVICE')}
+      ]
+      helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake (cb) ->
+        cb(new Error('INVALID SERVICE'))
+      creds.refresh (err) -> expect(err.message).to.equal('INVALID SERVICE')
+      expect(creds.cacheId.calls.length).to.equal(0)
+
+    it 'fails if getOpenIdToken fails', ->
+      helpers.mockResponses creds.cognito, [
+        {data: {IdentityId: 'IDENTITY-ID'}, error: null},
+        {data: null, error: new Error('INVALID SERVICE')}
+      ]
+      helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake(->)
+      creds.refresh (err) -> expect(err.message).to.equal('INVALID SERVICE')
+      expect(creds.cacheId.calls.length).to.equal(0)
+
+    it 'does try to load creds second time if service request failed', ->
+      helpers.mockResponses creds.cognito, [
+        {data: {IdentityId: 'IDENTITY-ID'}, error: null},
+        {data: {Token: 'TOKEN'}, error: null}
+      ]
+      spy = helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake (cb) ->
+        cb(new Error('INVALID SERVICE'))
+
+      creds.refresh (err) ->
+        expect(err.message).to.equal('INVALID SERVICE')
+      creds.refresh ->
+        creds.refresh ->
+          creds.refresh ->
+            expect(spy.calls.length).to.equal(4)
+
+    describe 'browser caching', ->
+      beforeEach -> helpers.spyOn(AWS.util, 'isBrowser').andReturn(true)
+
+      it 'caches IdentityId into localStorage on successful handshake', ->
+        setupCreds Logins: provider1: 'TOKEN1', provider2: 'TOKEN2'
+        helpers.mockResponses creds.cognito, [
+          {data: {IdentityId: 'IDENTITY-ID1'}, error: null},
+          {data: {Token: 'TOKEN', IdentityId: 'IDENTITY-ID2'}, error: null}
+        ]
+        helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake (cb) ->
+          creds.webIdentityCredentials.data =
+            Credentials:
+              AccessKeyId: 'KEY'
+              SecretAccessKey: 'SECRET'
+              SessionToken: 'TOKEN'
+          cb null
+        creds.refresh(->)
+        expect(window.localStorage[keys.id]).to.equal('IDENTITY-ID2')
+        expect(window.localStorage[keys.providers]).to.equal('provider1,provider2')

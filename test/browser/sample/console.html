@@ -172,12 +172,16 @@
         if (!AWS[key].prototype) continue;
         if (AWS[key].prototype.constructor.__super__.name === 'Service') {
           var svcVarName = key.toLowerCase();
-          var svc = services[svcVarName] = window[svcVarName] = new AWS[key]();
-          var fullName = svc.api.serviceAbbreviation || svc.api.serviceFullName;
-          var el = $('<option/>').attr('value', svcVarName).text(fullName);
-          $('#serviceSelector').append(el).change(function () {
-            loadOperationsForService($(this).val());
-          });
+          try {
+            var svc = services[svcVarName] = window[svcVarName] = new AWS[key]();
+            var fullName = svc.api.abbreviation || svc.api.fullName;
+            var el = $('<option/>').attr('value', svcVarName).text(fullName);
+            $('#serviceSelector').append(el).change(function () {
+              loadOperationsForService($(this).val());
+            });
+          } catch (e) {
+            console.log('Failed to load service ' + key + ': ' + e.message);
+          }
         }
       }
     }
@@ -297,15 +301,16 @@
       loaded();
     }
 
-    function loadIDPCredentials(provider, arn, accessToken) {
+    function loadIDPCredentials(provider, accessToken) {
       var params = {
-        ProviderId: provider,
-        RoleArn: arn,
-        WebIdentityToken: accessToken
+        AccountId: window.appInfo.accountId,
+        RoleArn: window.appInfo.roleArn,
+        IdentityPoolId: window.appInfo.identityPoolId,
+        Logins: {}
       };
-      if (provider === null) delete params.ProviderId;
+      params.Logins[provider] = accessToken;
 
-      AWS.config.credentials = new AWS.WebIdentityCredentials(params);
+      AWS.config.credentials = new AWS.CognitoIdentityCredentials(params);
       AWS.config.credentials.get(function (err) {
         if (err) {
           console.log(err.message);
@@ -332,8 +337,7 @@
       FB.Event.subscribe('auth.authResponseChange', function(response) {
         if (response.status === 'connected') {
           loadIDPCredentials('graph.facebook.com',
-            window.appInfo.facebook.roleArn,
-            response.authResponse.accessToken);
+                             response.authResponse.accessToken);
         }
       });
 
@@ -359,9 +363,7 @@
       $('#login-amazon').click(function() {
         amazon.Login.authorize({scope: 'profile'}, function(response) {
           if (!response.error) {
-            loadIDPCredentials('www.amazon.com',
-              window.appInfo.amazon.roleArn,
-              response.access_token);
+            loadIDPCredentials('www.amazon.com', response.access_token);
           }
         });
       });
@@ -384,7 +386,7 @@
 
    function loginToGoogle(response) {
      if (!response.error) {
-       loadIDPCredentials(null, window.appInfo.google.roleArn, response.id_token);
+       loadIDPCredentials('accounts.google.com', response.id_token);
      }
    }
   </script>
