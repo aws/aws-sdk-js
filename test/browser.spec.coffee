@@ -9,6 +9,8 @@ dynamodb = new AWS.DynamoDB(AWS.util.merge(config, config.dynamodb))
 sqs = new AWS.SQS(AWS.util.merge(config, config.sqs))
 sns = new AWS.SNS(AWS.util.merge(config, config.sns))
 sts = new AWS.STS(AWS.util.merge(config, config.sts))
+cognitosync = new AWS.CognitoSync(AWS.util.merge(config, config.cognitosync))
+cognitoidentity = new AWS.CognitoIdentity(AWS.util.merge(config, config.cognitoidentity))
 
 uniqueName = (prefix) ->
   if prefix
@@ -192,3 +194,15 @@ integrationTests ->
         sns.listTopics (err, data) ->
           expect(data.Topics.filter((o) -> o.TopicArn == arn)).not.to.equal(null)
           sns.deleteTopic(done)
+
+  describe 'AWS.CognitoIdentity', ->
+    integration 'lists identity pools', ->
+      cognitoidentity.listIdentityPools MaxResults: 60, (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.IdentityPools)).to.equal(true)
+
+  describe 'AWS.CognitoSync', ->
+    integration 'lists identity pool usage', ->
+      cognitosync.listIdentityPoolUsage (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.IdentityPoolUsages)).to.equal(true)
