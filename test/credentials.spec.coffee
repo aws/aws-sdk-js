@@ -527,7 +527,6 @@ describe 'AWS.CognitoIdentityCredentials', ->
       helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake (cb) ->
         expect(creds.webIdentityCredentials.params.IdentityId).to.equal('IDENTITY-ID2')
         expect(creds.webIdentityCredentials.params.WebIdentityToken).to.equal('TOKEN')
-        expect(creds.webIdentityCredentials.params.ProviderId).to.equal('cognito-identity.amazonaws.com')
         creds.webIdentityCredentials.data =
           Credentials:
             AccessKeyId: 'KEY'
