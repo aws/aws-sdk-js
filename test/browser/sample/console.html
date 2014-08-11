@@ -162,8 +162,40 @@
       if (currentOperation === operation) return;
       currentOperation = operation;
 
-      var input = currentService.api.operations[operation].input.members;
-      $('#operationData').val(JSON.stringify(input, null, 2));
+      var input = currentService.api.operations[operation].input;
+      var obj = {shapeMap: {}};
+      var sampleInput = inputForShape.call(obj, input);
+      $('#operationData').val(JSON.stringify(sampleInput, null, 2));
+    }
+
+    function inputForShape(shape) {
+      switch (shape.type) {
+        case 'structure': return inputForStructure.call(this, shape);
+        case 'map': return inputForMap.call(this, shape);
+        case 'list': return inputForList.call(this, shape);
+        case 'string': return "STRING";
+        case 'integer': return 123;
+        case 'timestamp': return "new Date()";
+        default: return 'UNKNOWNVALUE';
+      }
+    }
+
+    function inputForMap(shape) {
+      return {someKey: inputForShape.call(this, shape.value)};
+    }
+
+    function inputForList(shape) {
+      var value = inputForShape.call(this, shape.member);
+      return [value, value, value];
+    }
+
+    function inputForStructure(shape) {
+      var self = this, obj = {};
+      AWS.util.each(shape.members, function(key, member) {
+        if (shape.required.indexOf(key) < 0) return;
+        obj[key] = inputForShape.call(self, member);
+      });
+      return obj;
     }
 
     function loadServices() {
@@ -187,7 +219,7 @@
     }
 
     function executeOperation() {
-      var params = JSON.parse($('#operationData').val() || '{}');
+      var params = eval('var _=' + ($('#operationData').val() || '{}') + ';_');
       currentService[currentOperation](params).send();
     }
 
