@@ -165,7 +165,9 @@
       var input = currentService.api.operations[operation].input;
       var obj = {shapeMap: {}};
       var sampleInput = inputForShape.call(obj, input);
-      $('#operationData').val(JSON.stringify(sampleInput, null, 2));
+      sampleInput = JSON.stringify(sampleInput, null, 2);
+      sampleInput = sampleInput.replace(/(\n\s*)"(.+?)":/g, '$1$2:');
+      $('#operationData').val(sampleInput);
     }
 
     function inputForShape(shape) {
