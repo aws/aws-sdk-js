@@ -37,7 +37,7 @@ def add_tasks(model)
     namespace(service) do
       task(:api) do
         verbose(false) do
-          sh "#{root}/vendor/apis/scripts/translate-api #{model}"
+          sh "#{root}/vendor/apis/scripts/translate-api #{api['metadata']['endpointPrefix']}"
         end
       end
 
