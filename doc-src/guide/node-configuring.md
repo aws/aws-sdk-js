@@ -15,15 +15,16 @@ over your requests. Both of these configuration mechanisms are discussed.
 
 ## Global Configuration (`AWS.config`)
 
-By default, you can set global configuration by updating the `AWS.config` object with
-new settings. The most common settings are:
+By default, you can set global configuration by updating the `AWS.config` object
+with new settings. The most common settings are:
 
-1. `accessKeyId`, `secretAccessKey`, `sessionToken` &mdash; for credential management
+1. `accessKeyId`, `secretAccessKey`, `sessionToken` &mdash; for credential
+   management.
 2. `region` &mdash; to set the region for requests
 3. `sslEnabled` &mdash; whether SSL is enabled or not
 4. `maxRetries` &mdash; to control the number of retries for a request
-5. `logger` &mdash; a logger object to write debug information to. Set to `process.stdout`
-   to get logging information about service requests.
+5. `logger` &mdash; a logger object to write debug information to. Set to
+   `process.stdout` to get logging information about service requests.
 
 More configuration settings can be found in the
 [API reference documentation](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html).
