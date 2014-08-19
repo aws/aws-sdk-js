@@ -47,7 +47,7 @@ passing the credential information to the service object directly.
 There are a few ways to load credentials. Here they are, in order of
 recommendation:
 
-1. Loaded from IAM Roles for Amazon EC2 (if running on EC2),
+1. Loaded from IAM roles for Amazon EC2 (if running on EC2),
 2. Loaded from the shared credentials file (`~/.aws/credentials`),
 3. Loaded from environment variables,
 4. Loaded from a JSON file on disk,
@@ -56,6 +56,17 @@ recommendation:
 We do not recommend that you hard-code your AWS credentials in your application;
 however, it is reasonable to temporarily hard-code credential information
 in small personal scripts or for testing purposes.
+
+#### Credentials from IAM Roles for EC2 Instances
+
+If you are running your application on Amazon EC2, you can leverage EC2's
+[IAM roles](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)
+functionality in order to have credentials automatically provided to the
+instance.
+
+If you have configured your instance to use IAM roles, the SDK will
+automatically select these credentials for use in your application, and you do
+not need to manually provide credentials in any other format.
 
 #### Credentials from the Shared Credentials File (`~/.aws/credentials`)
 
