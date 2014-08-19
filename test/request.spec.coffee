@@ -36,6 +36,15 @@ describe 'AWS.Request', ->
       ).not.to.throw('error')
       expect(err.message).to.equal('error')
 
+    it 'propagates request creation errors into response', ->
+      helpers.spyOn(AWS.HttpClient, 'getInstance')
+      AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
+        throw new Error('XHR error')
+      db = new AWS.DynamoDB
+      req = db.listTables()
+      req.send()
+      expect(req.response.error.message).to.equal('XHR error')
+
   describe 'isPageable', ->
     beforeEach ->
       service = new AWS.Service apiConfig: new AWS.Model.Api
