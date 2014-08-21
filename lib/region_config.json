@@ -27,6 +27,13 @@
           "endpoint": "https://{service}.amazonaws.com"
         },
         "globalEndpoint": true
+      },
+      {
+        "services": ["route53domains"],
+        "config": {
+          "endpoint": "{service}.us-east-1.amazonaws.com"
+        },
+        "globalEndpoint": true
       }
     ]
   },
