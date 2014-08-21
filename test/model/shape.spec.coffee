@@ -22,6 +22,39 @@ describe 'AWS.Model.Shape', ->
         date = shape.toType('Thu, 01 Jan 1970 00:00:00 GMT')
         expect(date).to.eql(new Date(0))
 
+    describe 'toWireFormat()', ->
+      it 'converts all header shapes to rfc822', ->
+        api = new AWS.Model.Api metadata: timestampFormat: 'unixTimestamp'
+        shape = AWS.Model.Shape.create { type: 'timestamp', location: 'header' }, { api: api }
+        date = shape.toWireFormat(new Date(0))
+        expect(date).to.equal('Thu, 01 Jan 1970 00:00:00 GMT')
+
+      it 'converts all timestamps in JSON protocol to unixTimestamp', ->
+        # json rpc
+        api = new AWS.Model.Api metadata: protocol: 'json'
+        shape = AWS.Model.Shape.create { type: 'timestamp' }, { api: api }
+        date = shape.toWireFormat(new Date(12300000))
+        expect(date).to.equal(12300)
+
+        # rest-json
+        api = new AWS.Model.Api metadata: protocol: 'rest-json'
+        shape = AWS.Model.Shape.create { type: 'timestamp' }, { api: api }
+        date = shape.toWireFormat(new Date(12300000))
+        expect(date).to.equal(12300)
+
+      it 'converts all timestamps in XML/query protocol to iso8601', ->
+        # rest-xml
+        api = new AWS.Model.Api metadata: protocol: 'rest-xml'
+        shape = AWS.Model.Shape.create { type: 'timestamp' }, { api: api }
+        date = shape.toWireFormat(new Date(12300000))
+        expect(date).to.equal('1970-01-01T03:25:00.000Z')
+
+        # query
+        api = new AWS.Model.Api metadata: protocol: 'query'
+        shape = AWS.Model.Shape.create { type: 'timestamp' }, { api: api }
+        date = shape.toWireFormat(new Date(12300000))
+        expect(date).to.equal('1970-01-01T03:25:00.000Z')
+
     describe 'BooleanShape', ->
       describe 'toType()', ->
         shape = AWS.Model.Shape.create { type: 'boolean' }

@@ -177,18 +177,6 @@ describe 'AWS.Protocol.Rest', ->
         defop input: input
         expect(build().httpRequest.headers['If-Modified-Since']).to.equal(date.toUTCString())
 
-    describe 'timestamp header with iso formatting', ->
-      it 'populates the header using the parameter formatting', ->
-        date = new Date(); date.setMilliseconds(0)
-        request.params = IfModifiedSince: date
-        input.members.IfModifiedSince =
-          location: 'header'
-          locationName: 'If-Modified-Since'
-          type: 'timestamp'
-          timestampFormat: 'iso8601'
-        defop input: input
-        expect(build().httpRequest.headers['If-Modified-Since']).to.equal(date.toISOString())
-
   describe 'extractData', ->
     output = type: 'structure', members:
       ContentType:
