@@ -1,4 +1,3 @@
 {
-  "framework": "jasmine",
-  "test_page": "dist/tests.html"
+  "test_page": "test/browser/runner.html"
 }
