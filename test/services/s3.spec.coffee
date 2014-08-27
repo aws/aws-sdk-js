@@ -174,6 +174,22 @@ describe 'AWS.S3', ->
   describe 'SSE support', ->
     beforeEach -> s3 = new AWS.S3
 
+    it 'fails if the scheme is not HTTPS: when SSECustomerKey is provided', ->
+      req = s3.putObject
+        Bucket: 'bucket', Key: 'key', Body: 'object'
+        SSECustomerKey: 'sse-key', SSECustomerAlgorithm: 'AES256'
+      req.httpRequest.endpoint.protocol = 'http:'
+      req.build()
+      expect(req.response.error.name).to.equal('ConfigError')
+
+    it 'fails if the scheme is not HTTPS: when CopySourceSSECustomerKey is provided', ->
+      req = s3.putObject
+        Bucket: 'bucket', Key: 'key', Body: 'object'
+        CopySourceSSECustomerKey: 'sse-key', CopySourceSSECustomerAlgorithm: 'AES256'
+      req.httpRequest.endpoint.protocol = 'http:'
+      req.build()
+      expect(req.response.error.name).to.equal('ConfigError')
+
     it 'encodes SSECustomerKey and fills in MD5', ->
       req = s3.putObject
         Bucket: 'bucket', Key: 'key', Body: 'data'
