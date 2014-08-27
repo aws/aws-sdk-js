@@ -180,7 +180,7 @@ describe 'AWS.S3', ->
         SSECustomerKey: 'sse-key', SSECustomerAlgorithm: 'AES256'
       req.httpRequest.endpoint.protocol = 'http:'
       req.build()
-      expect(req.response.error.name).to.equal('ConfigError')
+      expect(req.response.error.code).to.equal('ConfigError')
 
     it 'fails if the scheme is not HTTPS: when CopySourceSSECustomerKey is provided', ->
       req = s3.putObject
@@ -188,7 +188,7 @@ describe 'AWS.S3', ->
         CopySourceSSECustomerKey: 'sse-key', CopySourceSSECustomerAlgorithm: 'AES256'
       req.httpRequest.endpoint.protocol = 'http:'
       req.build()
-      expect(req.response.error.name).to.equal('ConfigError')
+      expect(req.response.error.code).to.equal('ConfigError')
 
     it 'encodes SSECustomerKey and fills in MD5', ->
       req = s3.putObject
