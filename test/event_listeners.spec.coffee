@@ -225,6 +225,19 @@ describe 'AWS.EventListeners', ->
 
       expect(response.httpResponse.body.toString()).to.equal('FOOBARBAZQUX')
 
+    it 'disables httpData if createUnbufferedStream() is called', ->
+      calls = []
+      stream = null
+      helpers.mockHttpResponse 200, {}, ['data1', 'data2', 'data3']
+
+      request = makeRequest()
+      request.on('httpData', (chunk) -> calls.push(chunk.toString()))
+      request.on 'httpHeaders', (statusCode, headers) ->
+        stream = request.response.httpResponse.createUnbufferedStream()
+      request.send()
+      expect(calls.length).to.equal(0)
+      expect(stream).to.exist
+
   if AWS.util.isNode() and AWS.HttpClient.streamsApiVersion > 1
     describe 'httpDownloadProgress', ->
       beforeEach ->
