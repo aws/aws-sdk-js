@@ -27,7 +27,7 @@ describe 'AWS.Model.Shape', ->
         api = new AWS.Model.Api metadata: timestampFormat: 'unixTimestamp'
         shape = AWS.Model.Shape.create { type: 'timestamp', location: 'header' }, { api: api }
         date = shape.toWireFormat(new Date(0))
-        expect(date).to.equal('Thu, 01 Jan 1970 00:00:00 GMT')
+        expect(date).to.match(/Thu, 0?1 Jan 1970 00:00:00 (GMT|UTC)/)
 
       it 'converts all timestamps in JSON protocol to unixTimestamp', ->
         # json rpc
