@@ -454,3 +454,17 @@ describe 'AWS.ParamValidator', ->
             "string, Buffer, Stream, Blob, or typed array object"
       input.members.config.members.settings.members.data = type: 'binary'
       expectError msg, config: settings: data: 123
+
+  describe 'multiple errors', ->
+    it 'groups multiple errors together', ->
+      input =
+        type: 'structure'
+        required: ['param2']
+        members:
+          param1: type: 'boolean'
+          param2: type: 'integer'
+
+      msg = "There were 2 validation errors:\n" +
+        "* MissingRequiredParameter: Missing required key 'param2' in params\n" +
+        "* InvalidParameterType: Expected params.param1 to be a boolean"
+      expectError msg, param1: 'notboolean'
