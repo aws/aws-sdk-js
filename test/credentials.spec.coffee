@@ -615,3 +615,20 @@ describe 'AWS.CognitoIdentityCredentials', ->
         creds.refresh(->)
         expect(window.localStorage[keys.id]).to.equal('IDENTITY-ID2')
         expect(window.localStorage[keys.providers]).to.equal('provider1,provider2')
+
+      it 'returns cached id in getId call', ->
+        setupCreds Logins: provider1: 'TOKEN1', provider2: 'TOKEN2'
+        helpers.mockResponses creds.cognito, [
+          {data: {IdentityId: 'IDENTITY-ID1'}, error: null},
+          {data: {Token: 'TOKEN', IdentityId: 'IDENTITY-ID2'}, error: null}
+        ]
+        helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake (cb) ->
+          creds.webIdentityCredentials.data =
+            Credentials:
+              AccessKeyId: 'KEY'
+              SecretAccessKey: 'SECRET'
+              SessionToken: 'TOKEN'
+          cb null
+        creds.refresh(->)
+        creds.getId (err, id) ->
+          expect(id).to.equal('IDENTITY-ID2')
