@@ -588,6 +588,28 @@ describe 'AWS.CognitoIdentityCredentials', ->
       expect(creds.cacheId.calls.length).to.equal(0)
       expect(creds.getStorage('id')).not.to.exist
 
+    it 'clears cache if getId fails', ->
+      creds.setStorage('id', 'MYID')
+      helpers.mockResponses creds.cognito, [
+        {data: {IdentityId: 'IDENTITY-ID'}, error: null},
+        {data: null, error: new Error('INVALID SERVICE')}
+      ]
+      helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake(->)
+      creds.refresh (err) -> expect(err.message).to.equal('INVALID SERVICE')
+      expect(creds.cacheId.calls.length).to.equal(0)
+      expect(creds.getStorage('id')).not.to.exist
+
+    it 'clears cache if getOpenIdToken fails', ->
+      creds.setStorage('id', 'MYID')
+      helpers.mockResponses creds.cognito, [
+        {data: {IdentityId: 'IDENTITY-ID'}, error: null},
+        {data: null, error: new Error('INVALID SERVICE')}
+      ]
+      helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake(->)
+      creds.refresh (err) -> expect(err.message).to.equal('INVALID SERVICE')
+      expect(creds.cacheId.calls.length).to.equal(0)
+      expect(creds.getStorage('id')).not.to.exist
+
     it 'does try to load creds second time if service request failed', ->
       helpers.mockResponses creds.cognito, [
         {data: {IdentityId: 'IDENTITY-ID'}, error: null},
