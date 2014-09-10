@@ -463,22 +463,18 @@ describe 'AWS.SAMLCredentials', ->
 
 describe 'AWS.CognitoIdentityCredentials', ->
   if AWS.util.isNode()
-    GLOBAL.window = {localStorage: {}}
     AWS.util.nodeRequire = require
 
-  creds = null
-  oldStorage = window.localStorage
-  keys = AWS.CognitoIdentityCredentials.prototype.localStorageKey
+  initParams =
+    AccountId: '1234567890'
+    IdentityPoolId: 'pool:id'
+    RoleArn: 'arn'
+  creds = new AWS.CognitoIdentityCredentials(initParams)
 
-  beforeEach ->
-    delete window.localStorage[keys.id]
-    delete window.localStorage[keys.providers]
+  afterEach ->
+    creds.clearCachedId()
 
   setupCreds = (params) ->
-    initParams =
-      AccountId: '1234567890'
-      IdentityPoolId: 'pool:id'
-      RoleArn: 'arn'
     params = AWS.util.merge(initParams, params)
     creds = new AWS.CognitoIdentityCredentials(params)
     helpers.spyOn(creds, 'cacheId').andCallThrough()
@@ -487,34 +483,43 @@ describe 'AWS.CognitoIdentityCredentials', ->
     beforeEach -> helpers.spyOn(AWS.util, 'isBrowser').andReturn(true)
 
     it 'loads IdentityId from localStorage cache if none provided', ->
-      window.localStorage[keys.id] = 'MYID'
+
+      creds.setStorage('id', 'MYID')
       setupCreds()
       expect(creds.params.IdentityId).to.equal('MYID')
 
     it 'does not load IdentityId from cache if provided', ->
-      window.localStorage[keys.id] = 'NOTMYID'
+      creds.setStorage('id', 'NOTMYID')
       setupCreds(IdentityId: 'MYID')
       expect(creds.params.IdentityId).to.equal('MYID')
 
     it 'uses IdentityId if it is cached against one of Logins', ->
-      window.localStorage[keys.id] = 'MYID'
-      window.localStorage[keys.providers] = 'provider1'
+      creds.setStorage('id', 'MYID')
+      creds.setStorage('providers', 'provider1')
       setupCreds(Logins: {provider1: 'Token'})
       expect(creds.params.IdentityId).to.equal('MYID')
 
-      window.localStorage[keys.providers] = 'provider1,provider2,provider3'
+      creds.setStorage('providers', 'provider1,provider2,provider3')
       setupCreds(Logins: {provider1: 'Token'})
       expect(creds.params.IdentityId).to.equal('MYID')
 
-      window.localStorage[keys.providers] = 'provider1,provider2,provider3'
+      creds.setStorage('providers', 'provider1,provider2,provider3')
       setupCreds(Logins: {provider1: 'Token1', provider3: 'Token3'})
       expect(creds.params.IdentityId).to.equal('MYID')
 
     it 'ignores IdentityId if it is not cached against any of Logins', ->
-      window.localStorage[keys.id] = 'MYID'
-      window.localStorage[keys.providers] = 'provider4,provider5'
+      creds.setStorage('id', 'MYID')
+      creds.setStorage('providers', 'provider4,provider5')
       setupCreds(Logins: {provider1: 'Token'})
       expect(creds.params.IdentityId).not.to.exist
+
+  describe 'clearCachedId', ->
+    it 'should clear cache information', ->
+      creds.setStorage('id', 'MYID')
+      creds.setStorage('providers', 'provider1')
+      creds.clearCachedId()
+      expect(creds.getStorage('id')).not.to.exist
+      expect(creds.getStorage('providers')).not.to.exist
 
   describe 'refresh', ->
     beforeEach -> setupCreds()
@@ -571,6 +576,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
         cb(new Error('INVALID SERVICE'))
       creds.refresh (err) -> expect(err.message).to.equal('INVALID SERVICE')
       expect(creds.cacheId.calls.length).to.equal(0)
+      expect(creds.getStorage('id')).not.to.exist
 
     it 'fails if getOpenIdToken fails', ->
       helpers.mockResponses creds.cognito, [
@@ -580,6 +586,29 @@ describe 'AWS.CognitoIdentityCredentials', ->
       helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake(->)
       creds.refresh (err) -> expect(err.message).to.equal('INVALID SERVICE')
       expect(creds.cacheId.calls.length).to.equal(0)
+      expect(creds.getStorage('id')).not.to.exist
+
+    it 'clears cache if getId fails', ->
+      creds.setStorage('id', 'MYID')
+      helpers.mockResponses creds.cognito, [
+        {data: {IdentityId: 'IDENTITY-ID'}, error: null},
+        {data: null, error: new Error('INVALID SERVICE')}
+      ]
+      helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake(->)
+      creds.refresh (err) -> expect(err.message).to.equal('INVALID SERVICE')
+      expect(creds.cacheId.calls.length).to.equal(0)
+      expect(creds.getStorage('id')).not.to.exist
+
+    it 'clears cache if getOpenIdToken fails', ->
+      creds.setStorage('id', 'MYID')
+      helpers.mockResponses creds.cognito, [
+        {data: {IdentityId: 'IDENTITY-ID'}, error: null},
+        {data: null, error: new Error('INVALID SERVICE')}
+      ]
+      helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake(->)
+      creds.refresh (err) -> expect(err.message).to.equal('INVALID SERVICE')
+      expect(creds.cacheId.calls.length).to.equal(0)
+      expect(creds.getStorage('id')).not.to.exist
 
     it 'does try to load creds second time if service request failed', ->
       helpers.mockResponses creds.cognito, [
@@ -613,8 +642,8 @@ describe 'AWS.CognitoIdentityCredentials', ->
               SessionToken: 'TOKEN'
           cb null
         creds.refresh(->)
-        expect(window.localStorage[keys.id]).to.equal('IDENTITY-ID2')
-        expect(window.localStorage[keys.providers]).to.equal('provider1,provider2')
+        expect(creds.getStorage('id')).to.equal('IDENTITY-ID2')
+        expect(creds.getStorage('providers')).to.equal('provider1,provider2')
 
       it 'returns cached id in getId call', ->
         setupCreds Logins: provider1: 'TOKEN1', provider2: 'TOKEN2'
@@ -632,3 +661,4 @@ describe 'AWS.CognitoIdentityCredentials', ->
         creds.refresh(->)
         creds.getId (err, id) ->
           expect(id).to.equal('IDENTITY-ID2')
+          expect(creds.getStorage('id')).to.equal('IDENTITY-ID2')
