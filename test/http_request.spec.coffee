@@ -49,6 +49,10 @@ describe 'AWS.HttpRequest', ->
     it 'defaults to an empty string', ->
       expect(request.search()).to.equal('')
 
+    it 'returns a sorted string', ->
+      request.path = '/version/service?foo=3&bar=1&baz=2&quux=4'
+      expect(request.search()).to.equal('bar=1&baz=2&foo=3&quux=4')
+
     it 'returns the querystring portion of the uri', ->
       request.path = '/abc/xyz?mno=hjk'
       expect(request.search()).to.equal('mno=hjk')
