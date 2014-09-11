@@ -1,7 +1,5136 @@
-// AWS SDK for JavaScript v2.0.15
+// AWS SDK for JavaScript v2.0.16
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var AWS = require('./core');
+
+AWS.XML.Parser = require('./xml/browser_parser');
+
+require('./http/xhr');
+
+if (typeof window !== 'undefined') window.AWS = AWS;
+
+},{"./core":3,"./http/xhr":12,"./xml/browser_parser":44}],2:[function(require,module,exports){
+var AWS = require('./core');
+require('./credentials');
+require('./credentials/credential_provider_chain');
+
+
+AWS.Config = AWS.util.inherit({
+
+
+  constructor: function Config(options) {
+    if (options === undefined) options = {};
+    options = this.extractCredentials(options);
+
+    AWS.util.each.call(this, this.keys, function (key, value) {
+      this.set(key, options[key], value);
+    });
+  },
+
+
+  update: function update(options, allowUnknownKeys) {
+    allowUnknownKeys = allowUnknownKeys || false;
+    options = this.extractCredentials(options);
+    AWS.util.each.call(this, options, function (key, value) {
+      if (allowUnknownKeys || this.keys.hasOwnProperty(key)) this[key] = value;
+    });
+  },
+
+
+  getCredentials: function getCredentials(callback) {
+    var self = this;
+
+    function finish(err) {
+      callback(err, err ? null : self.credentials);
+    }
+
+    function credError(msg, err) {
+      return new AWS.util.error(err || new Error(), {
+        code: 'CredentialsError', message: msg
+      });
+    }
+
+    function getAsyncCredentials() {
+      self.credentials.get(function(err) {
+        if (err) {
+          var msg = 'Could not load credentials from ' +
+            self.credentials.constructor.name;
+          err = credError(msg, err);
+        }
+        finish(err);
+      });
+    }
+
+    function getStaticCredentials() {
+      var err = null;
+      if (!self.credentials.accessKeyId || !self.credentials.secretAccessKey) {
+        err = credError('Missing credentials');
+      }
+      finish(err);
+    }
+
+    if (self.credentials) {
+      if (typeof self.credentials.get === 'function') {
+        getAsyncCredentials();
+      } else { // static credentials
+        getStaticCredentials();
+      }
+    } else if (self.credentialProvider) {
+      self.credentialProvider.resolve(function(err, creds) {
+        if (err) {
+          err = credError('Could not load credentials from any providers', err);
+        }
+        self.credentials = creds;
+        finish(err);
+      });
+    } else {
+      finish(credError('No credentials to load'));
+    }
+  },
+
+
+  loadFromPath: function loadFromPath(path) {
+    this.clear();
+
+    var options = JSON.parse(AWS.util.readFileSync(path));
+    var fileSystemCreds = new AWS.FileSystemCredentials(path);
+    var chain = new AWS.CredentialProviderChain();
+    chain.providers.unshift(fileSystemCreds);
+    chain.resolve(function (err, creds) {
+      if (err) throw err;
+      else options.credentials = creds;
+    });
+
+    this.constructor(options);
+
+    return this;
+  },
+
+
+  clear: function clear() {
+
+    AWS.util.each.call(this, this.keys, function (key) {
+      delete this[key];
+    });
+
+    this.set('credentials', undefined);
+    this.set('credentialProvider', undefined);
+  },
+
+
+  set: function set(property, value, defaultValue) {
+    if (value === undefined) {
+      if (defaultValue === undefined) {
+        defaultValue = this.keys[property];
+      }
+      if (typeof defaultValue === 'function') {
+        this[property] = defaultValue.call(this);
+      } else {
+        this[property] = defaultValue;
+      }
+    } else {
+      this[property] = value;
+    }
+  },
+
+
+  keys: {
+    credentials: null,
+    credentialProvider: null,
+    region: null,
+    logger: null,
+    apiVersions: {},
+    apiVersion: null,
+    endpoint: undefined,
+    httpOptions: {},
+    maxRetries: undefined,
+    maxRedirects: 10,
+    paramValidation: true,
+    sslEnabled: true,
+    s3ForcePathStyle: false,
+    computeChecksums: true,
+    convertResponseTypes: true,
+    dynamoDbCrc32: true,
+    signatureVersion: null
+  },
+
+
+  extractCredentials: function extractCredentials(options) {
+    if (options.accessKeyId && options.secretAccessKey) {
+      options = AWS.util.copy(options);
+      options.credentials = new AWS.Credentials(options);
+    }
+    return options;
+  }
+});
+
+
+AWS.config = new AWS.Config();
+
+},{"./core":3,"./credentials":4,"./credentials/credential_provider_chain":6}],3:[function(require,module,exports){
+
+var AWS = { util: require('./util') };
+
+
+var _hidden = {}; _hidden.toString(); // hack to parse macro
+
+module.exports = AWS;
+
+AWS.util.update(AWS, {
+
+
+  VERSION: '2.0.16',
+
+
+  Signers: {},
+
+
+  Protocol: {
+    Json: require('./protocol/json'),
+    Query: require('./protocol/query'),
+    Rest: require('./protocol/rest'),
+    RestJson: require('./protocol/rest_json'),
+    RestXml: require('./protocol/rest_xml')
+  },
+
+
+  XML: {
+    Builder: require('./xml/builder'),
+    Parser: null // conditionally set based on environment
+  },
+
+
+  JSON: {
+    Builder: require('./json/builder'),
+    Parser: require('./json/parser')
+  },
+
+
+  Model: {
+    Api: require('./model/api'),
+    Operation: require('./model/operation'),
+    Shape: require('./model/shape'),
+    Paginator: require('./model/paginator'),
+    ResourceWaiter: require('./model/resource_waiter')
+  },
+
+  util: require('./util')
+});
+
+require('./service');
+
+require('./credentials');
+require('./credentials/credential_provider_chain');
+require('./credentials/temporary_credentials');
+require('./credentials/web_identity_credentials');
+require('./credentials/cognito_identity_credentials');
+require('./credentials/saml_credentials');
+
+require('./config');
+require('./http');
+require('./sequential_executor');
+require('./event_listeners');
+require('./request');
+require('./response');
+require('./resource_waiter');
+require('./signers/request_signer');
+require('./param_validator');
+
+
+AWS.events = new AWS.SequentialExecutor();
+
+},{"./config":2,"./credentials":4,"./credentials/cognito_identity_credentials":5,"./credentials/credential_provider_chain":6,"./credentials/saml_credentials":7,"./credentials/temporary_credentials":8,"./credentials/web_identity_credentials":9,"./event_listeners":10,"./http":11,"./json/builder":13,"./json/parser":14,"./model/api":15,"./model/operation":17,"./model/paginator":18,"./model/resource_waiter":19,"./model/shape":20,"./param_validator":21,"./protocol/json":22,"./protocol/query":23,"./protocol/rest":24,"./protocol/rest_json":25,"./protocol/rest_xml":26,"./request":30,"./resource_waiter":31,"./response":32,"./sequential_executor":33,"./service":34,"./signers/request_signer":36,"./util":43,"./xml/builder":45}],4:[function(require,module,exports){
+var AWS = require('./core');
+
+
+AWS.Credentials = AWS.util.inherit({
+
+  constructor: function Credentials() {
+    AWS.util.hideProperties(this, ['secretAccessKey']);
+
+    this.expired = false;
+    this.expireTime = null;
+    if (arguments.length === 1 && typeof arguments[0] === 'object') {
+      var creds = arguments[0].credentials || arguments[0];
+      this.accessKeyId = creds.accessKeyId;
+      this.secretAccessKey = creds.secretAccessKey;
+      this.sessionToken = creds.sessionToken;
+    } else {
+      this.accessKeyId = arguments[0];
+      this.secretAccessKey = arguments[1];
+      this.sessionToken = arguments[2];
+    }
+  },
+
+
+  expiryWindow: 15,
+
+
+  needsRefresh: function needsRefresh() {
+    var currentTime = AWS.util.date.getDate().getTime();
+    var adjustedTime = new Date(currentTime + this.expiryWindow * 1000);
+
+    if (this.expireTime && adjustedTime > this.expireTime) {
+      return true;
+    } else {
+      return this.expired || !this.accessKeyId || !this.secretAccessKey;
+    }
+  },
+
+
+  get: function get(callback) {
+    var self = this;
+    if (this.needsRefresh()) {
+      this.refresh(function(err) {
+        if (!err) self.expired = false; // reset expired flag
+        if (callback) callback(err);
+      });
+    } else if (callback) {
+      callback();
+    }
+  },
+
+
+  refresh: function refresh(callback) {
+    this.expired = false;
+    callback();
+  }
+});
+
+},{"./core":3}],5:[function(require,module,exports){
+var AWS = require('../core');
+
+
+AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
+
+  localStorageKey: {
+    id: 'aws.cognito.identity-id.',
+    providers: 'aws.cognito.identity-providers.'
+  },
+
+
+  constructor: function CognitoIdentityCredentials(params) {
+    AWS.Credentials.call(this);
+    this.expired = true;
+    this.webIdentityCredentials = new AWS.WebIdentityCredentials(params);
+    this.cognito = new AWS.CognitoIdentity({params: params});
+    this.sts = new AWS.STS();
+    this.params = params;
+    this.data = null;
+    this.identityId = null;
+    this.loadCachedId();
+  },
+
+
+  refresh: function refresh(callback) {
+    var self = this;
+    self.data = null;
+    self.identityId = null;
+    self.getId(function(err) {
+      if (!err) {
+        self.cognito.getOpenIdToken(function(cogErr, data) {
+          if (!cogErr) {
+            self.cacheId(data);
+            self.params.WebIdentityToken = data.Token;
+            self.webIdentityCredentials.refresh(function(webErr) {
+              if (!webErr) {
+                self.data = self.webIdentityCredentials.data;
+                self.sts.credentialsFrom(self.data, self);
+              } else {
+                self.clearCachedId();
+              }
+              callback(webErr);
+            });
+          } else {
+            self.clearCachedId();
+            callback(cogErr);
+          }
+        });
+      } else {
+        self.clearCachedId();
+        callback(err);
+      }
+    });
+  },
+
+
+  clearCachedId: function clearCache() {
+    var poolId = this.params.IdentityPoolId;
+    delete this.storage[this.localStorageKey.id + poolId];
+    delete this.storage[this.localStorageKey.providers + poolId];
+  },
+
+
+  getId: function getId(callback) {
+    var self = this;
+    if (typeof self.params.IdentityId === 'string') {
+      return callback(null, self.params.IdentityId);
+    }
+
+    self.cognito.getId(function(err, data) {
+      if (!err && data.IdentityId) {
+        self.params.IdentityId = data.IdentityId;
+        callback(null, data.IdentityId);
+      } else {
+        callback(err);
+      }
+    });
+  },
+
+
+  loadCachedId: function loadCachedId() {
+    var self = this;
+
+    if (AWS.util.isBrowser() && !self.params.IdentityId) {
+      var id = self.getStorage('id');
+      if (id && self.params.Logins) {
+        var actualProviders = Object.keys(self.params.Logins);
+        var cachedProviders =
+          (self.getStorage('providers') || '').split(',');
+
+        var intersect = cachedProviders.filter(function(n) {
+          return actualProviders.indexOf(n) !== -1;
+        });
+        if (intersect.length !== 0) {
+          self.params.IdentityId = id;
+        }
+      } else if (id) {
+        self.params.IdentityId = id;
+      }
+    }
+  },
+
+
+  cacheId: function cacheId(data) {
+    this.identityId = data.IdentityId;
+    this.params.IdentityId = this.identityId;
+
+    if (AWS.util.isBrowser()) {
+      this.setStorage('id', data.IdentityId);
+
+      if (this.params.Logins) {
+        this.setStorage('providers', Object.keys(this.params.Logins).join(','));
+      }
+    }
+  },
+
+
+  getStorage: function getStorage(key) {
+    return this.storage[this.localStorageKey[key] + this.params.IdentityPoolId];
+  },
+
+
+  setStorage: function setStorage(key, val) {
+    this.storage[this.localStorageKey[key] + this.params.IdentityPoolId] = val;
+  },
+
+
+  storage: AWS.util.isBrowser() ? window.localStorage : {}
+});
+
+},{"../core":3}],6:[function(require,module,exports){
+var AWS = require('../core');
+
+
+AWS.CredentialProviderChain = AWS.util.inherit(AWS.Credentials, {
+
+
+  constructor: function CredentialProviderChain(providers) {
+    if (providers) {
+      this.providers = providers;
+    } else {
+      this.providers = AWS.CredentialProviderChain.defaultProviders.slice(0);
+    }
+  },
+
+
+  resolve: function resolve(callback) {
+    if (this.providers.length === 0) {
+      callback(new Error('No providers'));
+      return this;
+    }
+
+    var index = 0;
+    var providers = this.providers.slice(0);
+
+    function resolveNext(err, creds) {
+      if ((!err && creds) || index === providers.length) {
+        callback(err, creds);
+        return;
+      }
+
+      var provider = providers[index++];
+      if (typeof provider === 'function') {
+        creds = provider.call();
+      } else {
+        creds = provider;
+      }
+
+      if (creds.get) {
+        creds.get(function(err) {
+          resolveNext(err, err ? null : creds);
+        });
+      } else {
+        resolveNext(null, creds);
+      }
+    }
+
+    resolveNext();
+    return this;
+  }
+
+});
+
+
+AWS.CredentialProviderChain.defaultProviders = [];
+
+},{"../core":3}],7:[function(require,module,exports){
+var AWS = require('../core');
+
+
+AWS.SAMLCredentials = AWS.util.inherit(AWS.Credentials, {
+
+  constructor: function SAMLCredentials(params) {
+    AWS.Credentials.call(this);
+    this.expired = true;
+    this.params = params;
+    this.service = new AWS.STS({params: this.params});
+  },
+
+
+  refresh: function refresh(callback) {
+    var self = this;
+    if (!callback) callback = function(err) { if (err) throw err; };
+
+    self.service.assumeRoleWithSAML(function (err, data) {
+      if (!err) {
+        self.service.credentialsFrom(data, self);
+      }
+      callback(err);
+    });
+  }
+});
+
+},{"../core":3}],8:[function(require,module,exports){
+var AWS = require('../core');
+
+
+AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
+
+  constructor: function TemporaryCredentials(params) {
+    AWS.Credentials.call(this);
+    this.loadMasterCredentials();
+    this.expired = true;
+
+    this.params = params || {};
+    if (this.params.RoleArn) {
+      this.params.RoleSessionName =
+        this.params.RoleSessionName || 'temporary-credentials';
+    }
+    this.service = new AWS.STS({params: this.params});
+  },
+
+
+  refresh: function refresh(callback) {
+    var self = this;
+    if (!callback) callback = function(err) { if (err) throw err; };
+
+    self.service.config.credentials = self.masterCredentials;
+    var operation = self.params.RoleArn ?
+      self.service.assumeRole : self.service.getSessionToken;
+    operation.call(self.service, function (err, data) {
+      if (!err) {
+        self.service.credentialsFrom(data, self);
+      }
+      callback(err);
+    });
+  },
+
+
+  loadMasterCredentials: function loadMasterCredentials() {
+    this.masterCredentials = AWS.config.credentials;
+    while (this.masterCredentials.masterCredentials) {
+      this.masterCredentials = this.masterCredentials.masterCredentials;
+    }
+  }
+});
+
+},{"../core":3}],9:[function(require,module,exports){
+var AWS = require('../core');
+
+
+AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
+
+  constructor: function WebIdentityCredentials(params) {
+    AWS.Credentials.call(this);
+    this.expired = true;
+    this.params = params;
+    this.params.RoleSessionName = this.params.RoleSessionName || 'web-identity';
+    this.service = new AWS.STS({params: this.params});
+    this.data = null;
+  },
+
+
+  refresh: function refresh(callback) {
+    var self = this;
+    if (!callback) callback = function(err) { if (err) throw err; };
+
+    self.service.assumeRoleWithWebIdentity(function (err, data) {
+      self.data = null;
+      if (!err) {
+        self.data = data;
+        self.service.credentialsFrom(data, self);
+      }
+      callback(err);
+    });
+  }
+});
+
+},{"../core":3}],10:[function(require,module,exports){
+var AWS = require('./core');
+var SequentialExecutor = require('./sequential_executor');
+
+
+AWS.EventListeners = {
+
+  Core: {} /* doc hack */
+};
+
+AWS.EventListeners = {
+  Core: new SequentialExecutor().addNamedListeners(function(add, addAsync) {
+    addAsync('VALIDATE_CREDENTIALS', 'validate',
+        function VALIDATE_CREDENTIALS(req, done) {
+      if (!req.service.api.signatureVersion) return done(); // none
+      req.service.config.getCredentials(function(err) {
+        if (err) {
+          req.response.error = AWS.util.error(err,
+            {code: 'CredentialsError', message: 'Missing credentials in config'});
+        }
+        done();
+      });
+    });
+
+    add('VALIDATE_REGION', 'validate', function VALIDATE_REGION(req) {
+      if (!req.service.config.region && !req.service.isGlobalEndpoint) {
+        req.response.error = AWS.util.error(new Error(),
+          {code: 'ConfigError', message: 'Missing region in config'});
+      }
+    });
+
+    add('VALIDATE_PARAMETERS', 'validate', function VALIDATE_PARAMETERS(req) {
+      var rules = req.service.api.operations[req.operation].input;
+      new AWS.ParamValidator().validate(rules, req.params);
+    });
+
+    add('SET_CONTENT_LENGTH', 'afterBuild', function SET_CONTENT_LENGTH(req) {
+      if (req.httpRequest.headers['Content-Length'] === undefined) {
+        var length = AWS.util.string.byteLength(req.httpRequest.body);
+        req.httpRequest.headers['Content-Length'] = length;
+      }
+    });
+
+    add('SET_HTTP_HOST', 'afterBuild', function SET_HTTP_HOST(req) {
+      req.httpRequest.headers['Host'] = req.httpRequest.endpoint.host;
+    });
+
+    add('RESTART', 'restart', function RESTART() {
+      var err = this.response.error;
+      if (!err || !err.retryable) return;
+
+      if (this.response.retryCount < this.service.config.maxRetries) {
+        this.response.retryCount++;
+      } else {
+        this.response.error = null;
+      }
+    });
+
+    addAsync('SIGN', 'sign', function SIGN(req, done) {
+      if (!req.service.api.signatureVersion) return done(); // none
+
+      req.service.config.getCredentials(function (err, credentials) {
+        if (err) {
+          req.response.error = err;
+          return done();
+        }
+
+        try {
+          var date = AWS.util.date.getDate();
+          var SignerClass = req.service.getSignerClass(req);
+          var signer = new SignerClass(req.httpRequest,
+            req.service.api.signingName || req.service.api.endpointPrefix);
+
+          delete req.httpRequest.headers['Authorization'];
+          delete req.httpRequest.headers['Date'];
+          delete req.httpRequest.headers['X-Amz-Date'];
+
+          signer.addAuthorization(credentials, date);
+          req.signedAt = date;
+        } catch (e) {
+          req.response.error = e;
+        }
+        done();
+      });
+    });
+
+    add('VALIDATE_RESPONSE', 'validateResponse', function VALIDATE_RESPONSE(resp) {
+      if (this.service.successfulResponse(resp, this)) {
+        resp.data = {};
+        resp.error = null;
+      } else {
+        resp.data = null;
+        resp.error = AWS.util.error(new Error(),
+          {code: 'UnknownError', message: 'An unknown error occurred.'});
+      }
+    });
+
+    addAsync('SEND', 'send', function SEND(resp, done) {
+      resp.httpResponse._abortCallback = done;
+      resp.error = null;
+      resp.data = null;
+
+      function callback(httpResp) {
+        resp.httpResponse.stream = httpResp;
+
+        httpResp.on('headers', function onHeaders(statusCode, headers) {
+          resp.request.emit('httpHeaders', [statusCode, headers, resp]);
+
+          if (!resp.httpResponse.streaming) {
+            if (AWS.HttpClient.streamsApiVersion === 2) { // streams2 API check
+              httpResp.on('readable', function onReadable() {
+                var data = httpResp.read();
+                if (data !== null) {
+                  resp.request.emit('httpData', [data, resp]);
+                }
+              });
+            } else { // legacy streams API
+              httpResp.on('data', function onData(data) {
+                resp.request.emit('httpData', [data, resp]);
+              });
+            }
+          }
+        });
+
+        httpResp.on('end', function onEnd() {
+          resp.request.emit('httpDone');
+          done();
+        });
+      }
+
+      function progress(httpResp) {
+        httpResp.on('sendProgress', function onSendProgress(progress) {
+          resp.request.emit('httpUploadProgress', [progress, resp]);
+        });
+
+        httpResp.on('receiveProgress', function onReceiveProgress(progress) {
+          resp.request.emit('httpDownloadProgress', [progress, resp]);
+        });
+      }
+
+      function error(err) {
+        resp.error = AWS.util.error(err, {
+          code: 'NetworkingError',
+          region: resp.request.httpRequest.region,
+          hostname: resp.request.httpRequest.endpoint.hostname,
+          retryable: true
+        });
+        resp.request.emit('httpError', [resp.error, resp], function() {
+          done();
+        });
+      }
+
+      function executeSend() {
+        var http = AWS.HttpClient.getInstance();
+        var httpOptions = resp.request.service.config.httpOptions || {};
+        try {
+          var stream = http.handleRequest(resp.request.httpRequest, httpOptions,
+                                          callback, error);
+          progress(stream);
+        } catch (err) {
+          error(err);
+        }
+      }
+
+      var timeDiff = (AWS.util.date.getDate() - this.signedAt) / 1000;
+      if (timeDiff >= 60 * 10) { // if we signed 10min ago, re-sign
+        this.emit('sign', [this], function(err) {
+          if (err) done(err);
+          else executeSend();
+        });
+      } else {
+        executeSend();
+      }
+    });
+
+    add('HTTP_HEADERS', 'httpHeaders',
+        function HTTP_HEADERS(statusCode, headers, resp) {
+      resp.httpResponse.statusCode = statusCode;
+      resp.httpResponse.headers = headers;
+      resp.httpResponse.body = new AWS.util.Buffer('');
+      resp.httpResponse.buffers = [];
+      resp.httpResponse.numBytes = 0;
+    });
+
+    add('HTTP_DATA', 'httpData', function HTTP_DATA(chunk, resp) {
+      if (chunk) {
+        if (AWS.util.isNode()) {
+          resp.httpResponse.numBytes += chunk.length;
+
+          var total = resp.httpResponse.headers['content-length'];
+          var progress = { loaded: resp.httpResponse.numBytes, total: total };
+          resp.request.emit('httpDownloadProgress', [progress, resp]);
+        }
+
+        resp.httpResponse.buffers.push(new AWS.util.Buffer(chunk));
+      }
+    });
+
+    add('HTTP_DONE', 'httpDone', function HTTP_DONE(resp) {
+      if (resp.httpResponse.buffers && resp.httpResponse.buffers.length > 0) {
+        var body = AWS.util.buffer.concat(resp.httpResponse.buffers);
+        resp.httpResponse.body = body;
+      }
+      delete resp.httpResponse.numBytes;
+      delete resp.httpResponse.buffers;
+    });
+
+    add('FINALIZE_ERROR', 'retry', function FINALIZE_ERROR(resp) {
+      if (resp.httpResponse.statusCode) {
+        resp.error.statusCode = resp.httpResponse.statusCode;
+        if (resp.error.retryable === undefined) {
+          resp.error.retryable = this.service.retryableError(resp.error, this);
+        }
+      }
+    });
+
+    add('INVALIDATE_CREDENTIALS', 'retry', function INVALIDATE_CREDENTIALS(resp) {
+      if (!resp.error) return;
+      switch (resp.error.code) {
+        case 'RequestExpired': // EC2 only
+        case 'ExpiredTokenException':
+        case 'ExpiredToken':
+          resp.error.retryable = true;
+          resp.request.service.config.credentials.expired = true;
+      }
+    });
+
+    add('REDIRECT', 'retry', function REDIRECT(resp) {
+      if (resp.error && resp.error.statusCode >= 300 &&
+          resp.error.statusCode < 400 && resp.httpResponse.headers['location']) {
+        this.httpRequest.endpoint =
+          new AWS.Endpoint(resp.httpResponse.headers['location']);
+        resp.error.redirect = true;
+        resp.error.retryable = true;
+      }
+    });
+
+    add('RETRY_CHECK', 'retry', function RETRY_CHECK(resp) {
+      if (resp.error) {
+        if (resp.error.redirect && resp.redirectCount < resp.maxRedirects) {
+          resp.error.retryDelay = 0;
+        } else if (resp.error.retryable && resp.retryCount < resp.maxRetries) {
+          var delays = this.service.retryDelays();
+          resp.error.retryDelay = delays[resp.retryCount] || 0;
+        }
+      }
+    });
+
+    addAsync('RESET_RETRY_STATE', 'afterRetry', function RESET_RETRY_STATE(resp, done) {
+      var delay, willRetry = false;
+
+      if (resp.error) {
+        delay = resp.error.retryDelay || 0;
+        if (resp.error.retryable && resp.retryCount < resp.maxRetries) {
+          resp.retryCount++;
+          willRetry = true;
+        } else if (resp.error.redirect && resp.redirectCount < resp.maxRedirects) {
+          resp.redirectCount++;
+          willRetry = true;
+        }
+      }
+
+      if (willRetry) {
+        resp.error = null;
+        setTimeout(done, delay);
+      } else {
+        done();
+      }
+    });
+  }),
+
+  CorePost: new SequentialExecutor().addNamedListeners(function(add) {
+    add('EXTRACT_REQUEST_ID', 'extractData', function EXTRACT_REQUEST_ID(resp) {
+      resp.requestId = resp.httpResponse.headers['x-amz-request-id'] ||
+                       resp.httpResponse.headers['x-amzn-requestid'];
+
+      if (!resp.requestId && resp.data && resp.data.ResponseMetadata) {
+        resp.requestId = resp.data.ResponseMetadata.RequestId;
+      }
+    });
+  }),
+
+  Logger: new SequentialExecutor().addNamedListeners(function(add) {
+    add('LOG_REQUEST', 'complete', function LOG_REQUEST(resp) {
+      var req = resp.request;
+      var logger = req.service.config.logger;
+      if (!logger) return;
+
+      function buildMessage() {
+        var time = AWS.util.date.getDate().getTime();
+        var delta = (time - req.startTime.getTime()) / 1000;
+        var ansi = logger.isTTY ? true : false;
+        var status = resp.httpResponse.statusCode;
+        var params = require('util').inspect(req.params, true, true);
+
+        var message = '';
+        if (ansi) message += '\x1B[33m';
+        message += '[AWS ' + req.service.serviceIdentifier + ' ' + status;
+        message += ' ' + delta.toString() + 's ' + resp.retryCount + ' retries]';
+        if (ansi) message += '\x1B[0;1m';
+        message += ' ' + AWS.util.string.lowerFirst(req.operation);
+        message += '(' + params + ')';
+        if (ansi) message += '\x1B[0m';
+        return message;
+      }
+
+      var line = buildMessage();
+      if (typeof logger.log === 'function') {
+        logger.log(line);
+      } else if (typeof logger.write === 'function') {
+        logger.write(line + '\n');
+      }
+    });
+  }),
+
+  Json: new SequentialExecutor().addNamedListeners(function(add) {
+    var svc = require('./protocol/json');
+    add('BUILD', 'build', svc.buildRequest);
+    add('EXTRACT_DATA', 'extractData', svc.extractData);
+    add('EXTRACT_ERROR', 'extractError', svc.extractError);
+  }),
+
+  Rest: new SequentialExecutor().addNamedListeners(function(add) {
+    var svc = require('./protocol/rest');
+    add('BUILD', 'build', svc.buildRequest);
+    add('EXTRACT_DATA', 'extractData', svc.extractData);
+    add('EXTRACT_ERROR', 'extractError', svc.extractError);
+  }),
+
+  RestJson: new SequentialExecutor().addNamedListeners(function(add) {
+    var svc = require('./protocol/rest_json');
+    add('BUILD', 'build', svc.buildRequest);
+    add('EXTRACT_DATA', 'extractData', svc.extractData);
+    add('EXTRACT_ERROR', 'extractError', svc.extractError);
+  }),
+
+  RestXml: new SequentialExecutor().addNamedListeners(function(add) {
+    var svc = require('./protocol/rest_xml');
+    add('BUILD', 'build', svc.buildRequest);
+    add('EXTRACT_DATA', 'extractData', svc.extractData);
+    add('EXTRACT_ERROR', 'extractError', svc.extractError);
+  }),
+
+  Query: new SequentialExecutor().addNamedListeners(function(add) {
+    var svc = require('./protocol/query');
+    add('BUILD', 'build', svc.buildRequest);
+    add('EXTRACT_DATA', 'extractData', svc.extractData);
+    add('EXTRACT_ERROR', 'extractError', svc.extractError);
+  })
+};
+
+},{"./core":3,"./protocol/json":22,"./protocol/query":23,"./protocol/rest":24,"./protocol/rest_json":25,"./protocol/rest_xml":26,"./sequential_executor":33,"util":64}],11:[function(require,module,exports){
+var AWS = require('./core');
+var inherit = AWS.util.inherit;
+
+
+AWS.Endpoint = inherit({
+
+
+  constructor: function Endpoint(endpoint, config) {
+    AWS.util.hideProperties(this, ['slashes', 'auth', 'hash', 'search', 'query']);
+
+    if (typeof endpoint === 'undefined' || endpoint === null) {
+      throw new Error('Invalid endpoint: ' + endpoint);
+    } else if (typeof endpoint !== 'string') {
+      return AWS.util.copy(endpoint);
+    }
+
+    if (!endpoint.match(/^http/)) {
+      var useSSL = config && config.sslEnabled !== undefined ?
+        config.sslEnabled : AWS.config.sslEnabled;
+      endpoint = (useSSL ? 'https' : 'http') + '://' + endpoint;
+    }
+
+    AWS.util.update(this, AWS.util.urlParse(endpoint));
+
+    if (this.port) {
+      this.port = parseInt(this.port, 10);
+    } else {
+      this.port = this.protocol === 'https:' ? 443 : 80;
+    }
+  }
+
+});
+
+
+AWS.HttpRequest = inherit({
+
+
+  constructor: function HttpRequest(endpoint, region) {
+    endpoint = new AWS.Endpoint(endpoint);
+    this.method = 'POST';
+    this.path = endpoint.path || '/';
+    this.headers = {};
+    this.body = '';
+    this.endpoint = endpoint;
+    this.region = region;
+    this.setUserAgent();
+  },
+
+
+  setUserAgent: function setUserAgent() {
+    var prefix = AWS.util.isBrowser() ? 'X-Amz-' : '';
+    this.headers[prefix + 'User-Agent'] = AWS.util.userAgent();
+  },
+
+
+  pathname: function pathname() {
+    return this.path.split('?', 1)[0];
+  },
+
+
+  search: function search() {
+    var query = this.path.split('?', 2)[1];
+    var params;
+    if (query) {
+      params = query.split('&').sort().join('&');
+    }
+    return params || '';
+  }
+
+});
+
+
+AWS.HttpResponse = inherit({
+
+
+  constructor: function HttpResponse() {
+    this.statusCode = undefined;
+    this.headers = {};
+    this.body = undefined;
+    this.streaming = false;
+    this.stream = null;
+  },
+
+
+  createUnbufferedStream: function createUnbufferedStream() {
+    this.streaming = true;
+    return this.stream;
+  }
+});
+
+
+AWS.HttpClient = inherit({});
+
+
+AWS.HttpClient.getInstance = function getInstance() {
+  if (this.singleton === undefined) {
+    this.singleton = new this();
+  }
+  return this.singleton;
+};
+
+},{"./core":3}],12:[function(require,module,exports){
+var AWS = require('../core');
+var EventEmitter = require('events').EventEmitter;
+require('../http');
+
+
+AWS.XHRClient = AWS.util.inherit({
+  handleRequest: function handleRequest(httpRequest, httpOptions, callback, errCallback) {
+    var self = this;
+    var endpoint = httpRequest.endpoint;
+    var emitter = new EventEmitter();
+    var href = endpoint.protocol + '//' + endpoint.hostname;
+    if (endpoint.port !== 80 && endpoint.port !== 443) {
+      href += ':' + endpoint.port;
+    }
+    href += httpRequest.path;
+
+    var xhr = new XMLHttpRequest(), headersEmitted = false;
+    httpRequest.stream = xhr;
+
+    xhr.addEventListener('readystatechange', function() {
+      try {
+        if (xhr.status === 0) return; // 0 code is invalid
+      } catch (e) { return; }
+
+      if (this.readyState >= this.HEADERS_RECEIVED && !headersEmitted) {
+        try { xhr.responseType = 'arraybuffer'; } catch (e) {}
+        emitter.statusCode = xhr.status;
+        emitter.headers = self.parseHeaders(xhr.getAllResponseHeaders());
+        emitter.emit('headers', emitter.statusCode, emitter.headers);
+        headersEmitted = true;
+      }
+      if (this.readyState === this.DONE) {
+        self.finishRequest(xhr, emitter);
+      }
+    }, false);
+    xhr.upload.addEventListener('progress', function (evt) {
+      emitter.emit('sendProgress', evt);
+    });
+    xhr.addEventListener('progress', function (evt) {
+      emitter.emit('receiveProgress', evt);
+    }, false);
+    xhr.addEventListener('timeout', function () {
+      errCallback(AWS.util.error(new Error('Timeout'), {code: 'TimeoutError'}));
+    }, false);
+    xhr.addEventListener('error', function () {
+      errCallback(AWS.util.error(new Error('Network Failure'), {
+        code: 'NetworkingError'
+      }));
+    }, false);
+
+    callback(emitter);
+    xhr.open(httpRequest.method, href, httpOptions.xhrAsync !== false);
+    AWS.util.each(httpRequest.headers, function (key, value) {
+      if (key !== 'Content-Length' && key !== 'User-Agent' && key !== 'Host') {
+        xhr.setRequestHeader(key, value);
+      }
+    });
+
+    if (httpOptions.timeout) {
+      xhr.timeout = httpOptions.timeout;
+    }
+
+    if (httpOptions.xhrWithCredentials) {
+      xhr.withCredentials = true;
+    }
+
+    if (httpRequest.body && typeof httpRequest.body.buffer === 'object') {
+      xhr.send(httpRequest.body.buffer); // typed arrays sent as ArrayBuffer
+    } else {
+      xhr.send(httpRequest.body);
+    }
+
+    return emitter;
+  },
+
+  parseHeaders: function parseHeaders(rawHeaders) {
+    var headers = {};
+    AWS.util.arrayEach(rawHeaders.split(/\r?\n/), function (line) {
+      var key = line.split(':', 1)[0];
+      var value = line.substring(key.length + 2);
+      if (key.length > 0) headers[key] = value;
+    });
+    return headers;
+  },
+
+  finishRequest: function finishRequest(xhr, emitter) {
+    var buffer;
+    if (xhr.responseType === 'arraybuffer' && xhr.response) {
+      var ab = xhr.response;
+      buffer = new AWS.util.Buffer(ab.byteLength);
+      var view = new Uint8Array(ab);
+      for (var i = 0; i < buffer.length; ++i) {
+        buffer[i] = view[i];
+      }
+    }
+
+    try {
+      if (!buffer && typeof xhr.responseText === 'string') {
+        buffer = new AWS.util.Buffer(xhr.responseText);
+      }
+    } catch (e) {}
+
+    if (buffer) emitter.emit('data', buffer);
+    emitter.emit('end');
+  }
+});
+
+
+AWS.HttpClient.prototype = AWS.XHRClient.prototype;
+
+
+AWS.HttpClient.streamsApiVersion = 1;
+
+},{"../core":3,"../http":11,"events":55}],13:[function(require,module,exports){
+var util = require('../util');
+
+function JsonBuilder() { }
+
+JsonBuilder.prototype.build = function(value, shape) {
+  return JSON.stringify(translate(value, shape));
+};
+
+function translate(value, shape) {
+  if (!shape || value === undefined || value === null) return undefined;
+
+  switch (shape.type) {
+    case 'structure': return translateStructure(value, shape);
+    case 'map': return translateMap(value, shape);
+    case 'list': return translateList(value, shape);
+    default: return translateScalar(value, shape);
+  }
+}
+
+function translateStructure(structure, shape) {
+  var struct = {};
+  util.each(structure, function(name, value) {
+    var memberShape = shape.members[name];
+    if (memberShape) {
+      if (memberShape.location !== 'body') return;
+
+      var result = translate(value, memberShape);
+      if (result !== undefined) struct[name] = result;
+    }
+  });
+  return struct;
+}
+
+function translateList(list, shape) {
+  var out = [];
+  util.arrayEach(list, function(value) {
+    var result = translate(value, shape.member);
+    if (result !== undefined) out.push(result);
+  });
+  return out;
+}
+
+function translateMap(map, shape) {
+  var out = {};
+  util.each(map, function(key, value) {
+    var result = translate(value, shape.value);
+    if (result !== undefined) out[key] = result;
+  });
+  return out;
+}
+
+function translateScalar(value, shape) {
+  return shape.toWireFormat(value);
+}
+
+module.exports = JsonBuilder;
+
+},{"../util":43}],14:[function(require,module,exports){
+var util = require('../util');
+
+function JsonParser() { }
+
+JsonParser.prototype.parse = function(value, shape) {
+  return translate(JSON.parse(value), shape);
+};
+
+function translate(value, shape) {
+  if (!shape || value === undefined || value === null) return undefined;
+
+  switch (shape.type) {
+    case 'structure': return translateStructure(value, shape);
+    case 'map': return translateMap(value, shape);
+    case 'list': return translateList(value, shape);
+    default: return translateScalar(value, shape);
+  }
+}
+
+function translateStructure(structure, shape) {
+  var struct = {};
+  util.each(structure, function(name, value) {
+    var memberShape = shape.members[name];
+    if (memberShape) {
+      var result = translate(value, memberShape);
+      if (result !== undefined) struct[name] = result;
+    }
+  });
+  return struct;
+}
+
+function translateList(list, shape) {
+  var out = [];
+  util.arrayEach(list, function(value) {
+    var result = translate(value, shape.member);
+    if (result !== undefined) out.push(result);
+  });
+  return out;
+}
+
+function translateMap(map, shape) {
+  var out = {};
+  util.each(map, function(key, value) {
+    var result = translate(value, shape.value);
+    if (result !== undefined) out[key] = result;
+  });
+  return out;
+}
+
+function translateScalar(value, shape) {
+  return shape.toType(value);
+}
+
+module.exports = JsonParser;
+
+},{"../util":43}],15:[function(require,module,exports){
+var Collection = require('./collection');
+var Operation = require('./operation');
+var Shape = require('./shape');
+var Paginator = require('./paginator');
+var ResourceWaiter = require('./resource_waiter');
+
+var util = require('../util');
+var property = util.property;
+var memoizedProperty = util.memoizedProperty;
+
+function Api(api, options) {
+  api = api || {};
+  options = options || {};
+  options.api = this;
+
+  api.metadata = api.metadata || {};
+
+  property(this, 'isApi', true, false);
+  property(this, 'apiVersion', api.metadata.apiVersion);
+  property(this, 'endpointPrefix', api.metadata.endpointPrefix);
+  property(this, 'signingName', api.metadata.signingName);
+  property(this, 'globalEndpoint', api.metadata.globalEndpoint);
+  property(this, 'signatureVersion', api.metadata.signatureVersion);
+  property(this, 'jsonVersion', api.metadata.jsonVersion);
+  property(this, 'targetPrefix', api.metadata.targetPrefix);
+  property(this, 'protocol', api.metadata.protocol);
+  property(this, 'timestampFormat', api.metadata.timestampFormat);
+  property(this, 'xmlNamespaceUri', api.metadata.xmlNamespace);
+  property(this, 'abbreviation', api.metadata.serviceAbbreviation);
+  property(this, 'fullName', api.metadata.serviceFullName);
+
+  memoizedProperty(this, 'className', function() {
+    var name = api.metadata.serviceAbbreviation || api.metadata.serviceFullName;
+    if (!name) return null;
+
+    name = name.replace(/^Amazon|AWS\s*|\(.*|\s+|\W+/g, '');
+    if (name === 'ElasticLoadBalancing') name = 'ELB';
+    return name;
+  });
+
+  property(this, 'operations', new Collection(api.operations, options, function(name, operation) {
+    return new Operation(name, operation, options);
+  }, util.string.lowerFirst));
+
+  property(this, 'shapes', new Collection(api.shapes, options, function(name, shape) {
+    return Shape.create(shape, options);
+  }));
+
+  property(this, 'paginators', new Collection(api.paginators, options, function(name, paginator) {
+    return new Paginator(name, paginator, options);
+  }));
+
+  property(this, 'waiters', new Collection(api.waiters, options, function(name, waiter) {
+    return new ResourceWaiter(name, waiter, options);
+  }, util.string.lowerFirst));
+
+  if (options.documentation) {
+    property(this, 'documentation', api.documentation);
+    property(this, 'documentationUrl', api.documentationUrl);
+  }
+}
+
+module.exports = Api;
+
+},{"../util":43,"./collection":16,"./operation":17,"./paginator":18,"./resource_waiter":19,"./shape":20}],16:[function(require,module,exports){
+var memoizedProperty = require('../util').memoizedProperty;
+
+function Collection(iterable, options, fn, nameTr) {
+  nameTr = nameTr || String;
+  var self = this;
+
+  for (var id in iterable) {
+    if (iterable.hasOwnProperty(id)) {
+      (function(name) {
+        memoizedProperty(self, nameTr(name), function() {
+          return fn(name, iterable[name]);
+        });
+      })(id);
+    }
+  }
+}
+
+module.exports = Collection;
+
+},{"../util":43}],17:[function(require,module,exports){
+var Shape = require('./shape');
+
+var util = require('../util');
+var property = util.property;
+var memoizedProperty = util.memoizedProperty;
+
+function Operation(name, operation, options) {
+  options = options || {};
+
+  property(this, 'name', name);
+  property(this, 'api', options.api, false);
+
+  operation.http = operation.http || {};
+  property(this, 'httpMethod', operation.http.method || 'POST');
+  property(this, 'httpPath', operation.http.requestUri || '/');
+
+  memoizedProperty(this, 'input', function() {
+    if (!operation.input) {
+      return new Shape.create({type: 'structure'}, options);
+    }
+    return Shape.create(operation.input, options);
+  });
+
+  memoizedProperty(this, 'output', function() {
+    if (!operation.output) {
+      return new Shape.create({type: 'structure'}, options);
+    }
+    return Shape.create(operation.output, options);
+  });
+
+  memoizedProperty(this, 'errors', function() {
+    var list = [];
+    if (!operation.errors) return null;
+
+    for (var i = 0; i < operation.errors.length; i++) {
+      list.push(Shape.create(operation.errors[i], options));
+    }
+
+    return list;
+  });
+
+  memoizedProperty(this, 'paginator', function() {
+    return options.api.paginators[name];
+  });
+
+  if (options.documentation) {
+    property(this, 'documentation', operation.documentation);
+    property(this, 'documentationUrl', operation.documentationUrl);
+  }
+}
+
+module.exports = Operation;
+
+},{"../util":43,"./shape":20}],18:[function(require,module,exports){
+var property = require('../util').property;
+
+function Paginator(name, paginator) {
+  property(this, 'inputToken', paginator.input_token);
+  property(this, 'limitKey', paginator.limit_key);
+  property(this, 'moreResults', paginator.more_results);
+  property(this, 'outputToken', paginator.output_token);
+  property(this, 'resultKey', paginator.result_key);
+}
+
+module.exports = Paginator;
+
+},{"../util":43}],19:[function(require,module,exports){
+var util = require('../util');
+var property = util.property;
+
+function ResourceWaiter(name, waiter, options) {
+  options = options || {};
+
+  function InnerResourceWaiter() {
+    property(this, 'name', name);
+    property(this, 'api', options.api, false);
+
+    if (waiter.operation) {
+      property(this, 'operation', util.string.lowerFirst(waiter.operation));
+    }
+
+    var self = this, map = {
+      ignoreErrors: 'ignore_errors',
+      successType: 'success_type',
+      successValue: 'success_value',
+      successPath: 'success_path',
+      acceptorType: 'acceptor_type',
+      acceptorValue: 'acceptor_value',
+      acceptorPath: 'acceptor_path',
+      failureType: 'failure_type',
+      failureValue: 'failure_value',
+      failurePath: 'success_path',
+      interval: 'interval',
+      maxAttempts: 'max_attempts'
+    };
+    Object.keys(map).forEach(function(key) {
+      var value = waiter[map[key]];
+      if (value) property(self, key, value);
+    });
+  }
+
+  if (options.api) {
+    var proto = null;
+    if (waiter['extends']) {
+      proto = options.api.waiters[waiter['extends']];
+    } else if (name !== '__default__') {
+      proto = options.api.waiters['__default__'];
+    }
+
+    if (proto) InnerResourceWaiter.prototype = proto;
+  }
+
+  return new InnerResourceWaiter();
+}
+
+module.exports = ResourceWaiter;
+
+},{"../util":43}],20:[function(require,module,exports){
+var Collection = require('./collection');
+
+var util = require('../util');
+
+function property(obj, name, value) {
+  if (value !== null && value !== undefined) {
+    util.property.apply(this, arguments);
+  }
+}
+
+function memoizedProperty(obj, name) {
+  if (!obj.constructor.prototype[name]) {
+    util.memoizedProperty.apply(this, arguments);
+  }
+}
+
+function Shape(shape, options, memberName) {
+  options = options || {};
+
+  property(this, 'shape', shape.shape);
+  property(this, 'api', options.api, false);
+  property(this, 'type', shape.type);
+  property(this, 'location', shape.location || 'body');
+  property(this, 'name', this.name || shape.xmlName || shape.locationName ||
+                         memberName);
+  property(this, 'isStreaming', shape.streaming || false);
+  property(this, 'isComposite', shape.isComposite || false);
+  property(this, 'isShape', true, false);
+
+  if (options.documentation) {
+    property(this, 'documentation', shape.documentation);
+    property(this, 'documentationUrl', shape.documentationUrl);
+  }
+
+  if (shape.xmlAttribute) {
+    property(this, 'isXmlAttribute', shape.xmlAttribute || false);
+  }
+
+  property(this, 'defaultValue', null);
+  this.toWireFormat = function(value) {
+    if (value === null || value === undefined) return '';
+    return value;
+  };
+  this.toType = function(value) { return value; };
+}
+
+
+Shape.normalizedTypes = {
+  character: 'string',
+  double: 'float',
+  long: 'integer',
+  short: 'integer',
+  biginteger: 'integer',
+  bigdecimal: 'float',
+  blob: 'binary'
+};
+
+
+Shape.types = {
+  'structure': StructureShape,
+  'list': ListShape,
+  'map': MapShape,
+  'boolean': BooleanShape,
+  'timestamp': TimestampShape,
+  'float': FloatShape,
+  'integer': IntegerShape,
+  'string': StringShape,
+  'base64': Base64Shape,
+  'binary': BinaryShape
+};
+
+Shape.resolve = function resolve(shape, options) {
+  if (shape.shape) {
+    var refShape = options.api.shapes[shape.shape];
+    if (!refShape) {
+      throw new Error('Cannot find shape reference: ' + shape.shape);
+    }
+
+    return refShape;
+  } else {
+    return null;
+  }
+};
+
+Shape.create = function create(shape, options, memberName) {
+  if (shape.isShape) return shape;
+
+  var refShape = Shape.resolve(shape, options);
+  if (refShape) {
+    var filteredKeys = Object.keys(shape);
+    if (!options.documentation) {
+      filteredKeys = filteredKeys.filter(function(name) {
+        return !name.match(/documentation/);
+      });
+    }
+    if (filteredKeys === ['shape']) { // no inline customizations
+      return refShape;
+    }
+
+    var InlineShape = function() {
+      refShape.constructor.call(this, shape, options, memberName);
+    };
+    InlineShape.prototype = refShape;
+    return new InlineShape();
+  } else {
+    if (!shape.type) {
+      if (shape.members) shape.type = 'structure';
+      else if (shape.member) shape.type = 'list';
+      else if (shape.key) shape.type = 'map';
+      else shape.type = 'string';
+    }
+
+    var origType = shape.type;
+    if (Shape.normalizedTypes[shape.type]) {
+      shape.type = Shape.normalizedTypes[shape.type];
+    }
+
+    if (Shape.types[shape.type]) {
+      return new Shape.types[shape.type](shape, options, memberName);
+    } else {
+      throw new Error('Unrecognized shape type: ' + origType);
+    }
+  }
+};
+
+function CompositeShape(shape) {
+  Shape.apply(this, arguments);
+  property(this, 'isComposite', true);
+
+  if (shape.flattened) {
+    property(this, 'flattened', shape.flattened || false);
+  }
+}
+
+function StructureShape(shape, options) {
+  var requiredMap = null, firstInit = !this.isShape;
+
+  CompositeShape.apply(this, arguments);
+
+  if (firstInit) {
+    property(this, 'defaultValue', function() { return {}; });
+    property(this, 'members', {});
+    property(this, 'memberNames', []);
+    property(this, 'required', []);
+    property(this, 'isRequired', function() { return false; });
+  }
+
+  if (shape.members) {
+    property(this, 'members', new Collection(shape.members, options, function(name, member) {
+      return Shape.create(member, options, name);
+    }));
+    memoizedProperty(this, 'memberNames', function() {
+      return shape.xmlOrder || Object.keys(shape.members);
+    });
+  }
+
+  if (shape.required) {
+    property(this, 'required', shape.required);
+    property(this, 'isRequired', function(name) {
+      if (!requiredMap) {
+        requiredMap = {};
+        for (var i = 0; i < shape.required.length; i++) {
+          requiredMap[shape.required[i]] = true;
+        }
+      }
+
+      return requiredMap[name];
+    }, false, true);
+  }
+
+  property(this, 'resultWrapper', shape.resultWrapper || null);
+
+  if (shape.payload) {
+    property(this, 'payload', shape.payload);
+  }
+
+  if (typeof shape.xmlNamespace === 'string') {
+    property(this, 'xmlNamespaceUri', shape.xmlNamespace);
+  } else if (typeof shape.xmlNamespace === 'object') {
+    property(this, 'xmlNamespacePrefix', shape.xmlNamespace.prefix);
+    property(this, 'xmlNamespaceUri', shape.xmlNamespace.uri);
+  }
+}
+
+function ListShape(shape, options) {
+  var self = this, firstInit = !this.isShape;
+  CompositeShape.apply(this, arguments);
+
+  if (firstInit) {
+    property(this, 'defaultValue', function() { return []; });
+  }
+
+  if (shape.member) {
+    memoizedProperty(this, 'member', function() {
+      return Shape.create(shape.member, options);
+    });
+  }
+
+  if (this.flattened) {
+    var oldName = this.name;
+    memoizedProperty(this, 'name', function() {
+      return self.member.name || oldName;
+    });
+  }
+}
+
+function MapShape(shape, options) {
+  var firstInit = !this.isShape;
+  CompositeShape.apply(this, arguments);
+
+  if (firstInit) {
+    property(this, 'defaultValue', function() { return {}; });
+    property(this, 'key', Shape.create({type: 'string'}, options));
+    property(this, 'value', Shape.create({type: 'string'}, options));
+  }
+
+  if (shape.key) {
+    memoizedProperty(this, 'key', function() {
+      return Shape.create(shape.key, options);
+    });
+  }
+  if (shape.value) {
+    memoizedProperty(this, 'value', function() {
+      return Shape.create(shape.value, options);
+    });
+  }
+}
+
+function TimestampShape(shape) {
+  var self = this;
+  Shape.apply(this, arguments);
+
+  if (this.location === 'header') {
+    property(this, 'timestampFormat', 'rfc822');
+  } else if (shape.timestampFormat) {
+    property(this, 'timestampFormat', shape.timestampFormat);
+  } else if (this.api) {
+    if (this.api.timestampFormat) {
+      property(this, 'timestampFormat', this.api.timestampFormat);
+    } else {
+      switch (this.api.protocol) {
+        case 'json':
+        case 'rest-json':
+          property(this, 'timestampFormat', 'unixTimestamp');
+          break;
+        case 'rest-xml':
+        case 'query':
+          property(this, 'timestampFormat', 'iso8601');
+          break;
+      }
+    }
+  }
+
+  this.toType = function(value) {
+    if (value === null || value === undefined) return null;
+    if (typeof value.toUTCString === 'function') return value;
+    return typeof value === 'string' || typeof value === 'number' ?
+           util.date.parseTimestamp(value) : null;
+  };
+
+  this.toWireFormat = function(value) {
+    return util.date.format(value, self.timestampFormat);
+  };
+}
+
+function StringShape() {
+  Shape.apply(this, arguments);
+}
+
+function FloatShape() {
+  Shape.apply(this, arguments);
+
+  this.toType = function(value) {
+    if (value === null || value === undefined) return null;
+    return parseFloat(value);
+  };
+  this.toWireFormat = this.toType;
+}
+
+function IntegerShape() {
+  Shape.apply(this, arguments);
+
+  this.toType = function(value) {
+    if (value === null || value === undefined) return null;
+    return parseInt(value, 10);
+  };
+  this.toWireFormat = this.toType;
+}
+
+function BinaryShape() {
+  Shape.apply(this, arguments);
+  this.toType = util.base64.decode;
+  this.toWireFormat = util.base64.encode;
+}
+
+function Base64Shape() {
+  BinaryShape.apply(this, arguments);
+}
+
+function BooleanShape() {
+  Shape.apply(this, arguments);
+
+  this.toType = function(value) {
+    if (typeof value === 'boolean') return value;
+    if (value === null || value === undefined) return null;
+    return value === 'true';
+  };
+}
+
+
+Shape.shapes = {
+  StructureShape: StructureShape,
+  ListShape: ListShape,
+  MapShape: MapShape,
+  StringShape: StringShape,
+  BooleanShape: BooleanShape,
+  Base64Shape: Base64Shape
+};
+
+module.exports = Shape;
+
+},{"../util":43,"./collection":16}],21:[function(require,module,exports){
+var AWS = require('./core');
+
+
+AWS.ParamValidator = AWS.util.inherit({
+  validate: function validate(shape, params, context) {
+    this.errors = [];
+    this.validateMember(shape, params || {}, context || 'params');
+
+    if (this.errors.length > 1) {
+      var msg = this.errors.join('\n* ');
+      if (this.errors.length > 1) {
+        msg = 'There were ' + this.errors.length +
+              ' validation errors:\n* ' + msg;
+        throw AWS.util.error(new Error(msg),
+          {code: 'MultipleValidationErrors', errors: this.errors});
+      }
+    } else if (this.errors.length === 1) {
+      throw this.errors[0];
+    } else {
+      return true;
+    }
+  },
+
+  validateStructure: function validateStructure(shape, params, context) {
+    this.validateType(context, params, ['object'], 'structure');
+
+    for (var i = 0; shape.required && i < shape.required.length; i++) {
+      var paramName = shape.required[i];
+      var value = params[paramName];
+      if (value === undefined || value === null) {
+        this.fail('MissingRequiredParameter',
+          'Missing required key \'' + paramName + '\' in ' + context);
+      }
+    }
+
+    for (paramName in params) {
+      if (!params.hasOwnProperty(paramName)) continue;
+
+      var paramValue = params[paramName],
+          memberShape = shape.members[paramName];
+
+      if (memberShape !== undefined) {
+        var memberContext = [context, paramName].join('.');
+        this.validateMember(memberShape, paramValue, memberContext);
+      } else {
+        this.fail('UnexpectedParameter',
+          'Unexpected key \'' + paramName + '\' found in ' + context);
+      }
+    }
+
+    return true;
+  },
+
+  validateMember: function validateMember(shape, param, context) {
+    switch (shape.type) {
+      case 'structure':
+        return this.validateStructure(shape, param, context);
+      case 'list':
+        return this.validateList(shape, param, context);
+      case 'map':
+        return this.validateMap(shape, param, context);
+      default:
+        return this.validateScalar(shape, param, context);
+    }
+  },
+
+  validateList: function validateList(shape, params, context) {
+    this.validateType(context, params, [Array]);
+
+    for (var i = 0; i < params.length; i++) {
+      this.validateMember(shape.member, params[i], context + '[' + i + ']');
+    }
+  },
+
+  validateMap: function validateMap(shape, params, context) {
+    this.validateType(context, params, ['object'], 'map');
+
+    for (var param in params) {
+      if (!params.hasOwnProperty(param)) continue;
+      this.validateMember(shape.value, params[param],
+                          context + '[\'' +  param + '\']');
+    }
+  },
+
+  validateScalar: function validateScalar(shape, value, context) {
+    switch (shape.type) {
+      case null:
+      case undefined:
+      case 'string':
+        return this.validateType(context, value, ['string']);
+      case 'base64':
+      case 'binary':
+        return this.validatePayload(context, value);
+      case 'integer':
+      case 'float':
+        return this.validateNumber(context, value);
+      case 'boolean':
+        return this.validateType(context, value, ['boolean']);
+      case 'timestamp':
+        return this.validateType(context, value, [Date,
+          /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/, 'number'],
+          'Date object, ISO-8601 string, or a UNIX timestamp');
+      default:
+        return this.fail('UnkownType', 'Unhandled type ' +
+                         shape.type + ' for ' + context);
+    }
+  },
+
+  fail: function fail(code, message) {
+    this.errors.push(AWS.util.error(new Error(message), {code: code}));
+  },
+
+  validateType: function validateType(context, value, acceptedTypes, type) {
+    if (value === null || value === undefined) return;
+
+    var foundInvalidType = false;
+    for (var i = 0; i < acceptedTypes.length; i++) {
+      if (typeof acceptedTypes[i] === 'string') {
+        if (typeof value === acceptedTypes[i]) return;
+      } else if (acceptedTypes[i] instanceof RegExp) {
+        if ((value || '').toString().match(acceptedTypes[i])) return;
+      } else {
+        if (value instanceof acceptedTypes[i]) return;
+        if (AWS.util.isType(value, acceptedTypes[i])) return;
+        if (!type && !foundInvalidType) acceptedTypes = acceptedTypes.slice();
+        acceptedTypes[i] = AWS.util.typeName(acceptedTypes[i]);
+      }
+      foundInvalidType = true;
+    }
+
+    var acceptedType = type;
+    if (!acceptedType) {
+      acceptedType = acceptedTypes.join(', ').replace(/,([^,]+)$/, ', or$1');
+    }
+
+    var vowel = acceptedType.match(/^[aeiou]/i) ? 'n' : '';
+    this.fail('InvalidParameterType', 'Expected ' + context + ' to be a' +
+              vowel + ' ' + acceptedType);
+  },
+
+  validateNumber: function validateNumber(context, value) {
+    if (value === null || value === undefined) return;
+    if (typeof value === 'string') {
+      var castedValue = parseFloat(value);
+      if (castedValue.toString() === value) value = castedValue;
+    }
+    this.validateType(context, value, ['number']);
+  },
+
+  validatePayload: function validatePayload(context, value) {
+    if (value === null || value === undefined) return;
+    if (typeof value === 'string') return;
+    if (value && typeof value.byteLength === 'number') return; // typed arrays
+    if (AWS.util.isNode()) { // special check for buffer/stream in Node.js
+      var Stream = AWS.util.nodeRequire('stream').Stream;
+      if (AWS.util.Buffer.isBuffer(value) || value instanceof Stream) return;
+    }
+
+    var types = ['Buffer', 'Stream', 'File', 'Blob', 'ArrayBuffer', 'DataView'];
+    if (value) {
+      for (var i = 0; i < types.length; i++) {
+        if (AWS.util.isType(value, types[i])) return;
+        if (AWS.util.typeName(value.constructor) === types[i]) return;
+      }
+    }
+
+    this.fail('InvalidParameterType', 'Expected ' + context + ' to be a ' +
+      'string, Buffer, Stream, Blob, or typed array object');
+  }
+});
+
+},{"./core":3}],22:[function(require,module,exports){
+var util = require('../util');
+var JsonBuilder = require('../json/builder');
+var JsonParser = require('../json/parser');
+
+function buildRequest(req) {
+  var httpRequest = req.httpRequest;
+  var api = req.service.api;
+  var target = api.targetPrefix + '.' + api.operations[req.operation].name;
+  var version = api.jsonVersion || '1.0';
+  var input = api.operations[req.operation].input;
+  var builder = new JsonBuilder();
+
+  if (version === 1) version = '1.0';
+  httpRequest.body = builder.build(req.params || {}, input);
+  httpRequest.headers['Content-Type'] = 'application/x-amz-json-' + version;
+  httpRequest.headers['X-Amz-Target'] = target;
+}
+
+function extractError(resp) {
+  var error = {};
+  var httpResponse = resp.httpResponse;
+
+  if (httpResponse.body.length > 0) {
+    var e = JSON.parse(httpResponse.body.toString());
+    if (e.__type || e.code) {
+      error.code = (e.__type || e.code).split('#').pop();
+    } else {
+      error.code = 'UnknownError';
+    }
+    if (error.code === 'RequestEntityTooLarge') {
+      error.message = 'Request body must be less than 1 MB';
+    } else {
+      error.message = (e.message || e.Message || null);
+    }
+  } else {
+    error.code = httpResponse.statusCode;
+    error.message = null;
+  }
+
+  resp.error = util.error(new Error(), error);
+}
+
+function extractData(resp) {
+  var body = resp.httpResponse.body.toString() || '{}';
+  if (resp.request.service.config.convertResponseTypes === false) {
+    resp.data = JSON.parse(body);
+  } else {
+    var operation = resp.request.service.api.operations[resp.request.operation];
+    var shape = operation.output || {};
+    var parser = new JsonParser();
+    resp.data = parser.parse(body, shape);
+  }
+}
+
+module.exports = {
+  buildRequest: buildRequest,
+  extractError: extractError,
+  extractData: extractData
+};
+
+},{"../json/builder":13,"../json/parser":14,"../util":43}],23:[function(require,module,exports){
+var AWS = require('../core');
+var util = require('../util');
+var QueryParamSerializer = require('../query/query_param_serializer');
+var Shape = require('../model/shape');
+
+function buildRequest(req) {
+  var operation = req.service.api.operations[req.operation];
+  var httpRequest = req.httpRequest;
+  httpRequest.headers['Content-Type'] =
+    'application/x-www-form-urlencoded; charset=utf-8';
+  httpRequest.params = {
+    Version: req.service.api.apiVersion,
+    Action: operation.name
+  };
+
+  var builder = new QueryParamSerializer();
+  builder.serialize(req.params, operation.input, function(name, value) {
+    httpRequest.params[name] = value;
+  });
+  httpRequest.body = util.queryParamsToString(httpRequest.params);
+}
+
+function extractError(resp) {
+  var data, body = resp.httpResponse.body.toString();
+  if (body.match('<UnknownOperationException')) {
+    data = {
+      Code: 'UnknownOperation',
+      Message: 'Unknown operation ' + resp.request.operation
+    };
+  } else {
+    data = new AWS.XML.Parser().parse(body);
+  }
+
+  if (data.Errors) data = data.Errors;
+  if (data.Error) data = data.Error;
+  if (data.Code) {
+    resp.error = util.error(new Error(), {
+      code: data.Code,
+      message: data.Message
+    });
+  } else {
+    resp.error = util.error(new Error(), {
+      code: resp.httpResponse.statusCode,
+      message: null
+    });
+  }
+}
+
+function extractData(resp) {
+  var req = resp.request;
+  var operation = req.service.api.operations[req.operation];
+  var shape = operation.output || {};
+  var origRules = shape;
+
+  if (origRules.resultWrapper) {
+    var tmp = Shape.create({type: 'structure'});
+    tmp.members[origRules.resultWrapper] = shape;
+    tmp.memberNames = [origRules.resultWrapper];
+    util.property(shape, 'name', shape.resultWrapper);
+    shape = tmp;
+  }
+
+  var parser = new AWS.XML.Parser();
+  var data = parser.parse(resp.httpResponse.body.toString(), shape);
+
+  if (origRules.resultWrapper) {
+    if (data[origRules.resultWrapper]) {
+      util.update(data, data[origRules.resultWrapper]);
+      delete data[origRules.resultWrapper];
+    }
+  }
+
+  resp.data = data;
+}
+
+module.exports = {
+  buildRequest: buildRequest,
+  extractError: extractError,
+  extractData: extractData
+};
+
+},{"../core":3,"../model/shape":20,"../query/query_param_serializer":27,"../util":43}],24:[function(require,module,exports){
+var util = require('../util');
+
+function populateMethod(req) {
+  req.httpRequest.method = req.service.api.operations[req.operation].httpMethod;
+}
+
+function populateURI(req) {
+  var operation = req.service.api.operations[req.operation];
+  var input = operation.input;
+  var uri = [req.httpRequest.endpoint.path, operation.httpPath].join('/');
+  uri = uri.replace(/\/+/g, '/');
+
+  var escapePathParamFn = req.service.escapePathParam || escapePathParam;
+  var escapeQuerystringParamFn = req.service.escapeQuerystringParam ||
+                                 escapeQuerystringParam;
+
+  var queryString = {}, queryStringSet = false;
+  util.each(input.members, function (name, member) {
+    var paramValue = req.params[name];
+    if (paramValue === null || paramValue === undefined) return;
+    if (member.location === 'uri') {
+      uri = uri.replace('{' + member.name + '}', escapePathParamFn(paramValue));
+    } else if (member.location === 'querystring') {
+      queryStringSet = true;
+      queryString[member.name] = escapeQuerystringParamFn(paramValue);
+    }
+  });
+
+  if (queryStringSet) {
+    uri += (uri.indexOf('?') >= 0 ? '&' : '?');
+    var parts = [];
+    util.arrayEach(Object.keys(queryString).sort(), function(key) {
+      parts.push(escapeQuerystringParam(key) + '=' + queryString[key]);
+    });
+    uri += parts.join('&');
+  }
+
+  req.httpRequest.path = uri;
+}
+
+function escapePathParam(value) {
+  return util.uriEscape(String(value));
+}
+
+function escapeQuerystringParam(value) {
+  return util.uriEscape(String(value));
+}
+
+function populateHeaders(req) {
+  var operation = req.service.api.operations[req.operation];
+  util.each(operation.input.members, function (name, member) {
+    var value = req.params[name];
+    if (value === null || value === undefined) return;
+
+    if (member.location === 'headers' && member.type === 'map') {
+      util.each(value, function(key, value) {
+        req.httpRequest.headers[member.name + key] = value;
+      });
+    } else if (member.location === 'header') {
+      value = member.toWireFormat(value).toString();
+      req.httpRequest.headers[member.name] = value;
+    }
+  });
+}
+
+function buildRequest(req) {
+  populateMethod(req);
+  populateURI(req);
+  populateHeaders(req);
+}
+
+function extractError() {
+}
+
+function extractData(resp) {
+  var req = resp.request;
+  var data = {};
+  var r = resp.httpResponse;
+  var operation = req.service.api.operations[req.operation];
+  var output = operation.output;
+
+  var headers = {};
+  util.each(r.headers, function (k, v) {
+    headers[k.toLowerCase()] = v;
+  });
+
+  util.each(output.members, function(name, member) {
+    var header = (member.name || name).toLowerCase();
+    if (member.location === 'headers' && member.type === 'map') {
+      data[name] = {};
+      util.each(r.headers, function (k, v) {
+        var result = k.match(new RegExp('^' + member.name + '(.+)', 'i'));
+        if (result !== null) {
+          data[name][result[1]] = v;
+        }
+      });
+    } else if (member.location === 'header') {
+      if (headers[header] !== undefined) {
+        data[name] = headers[header];
+      }
+    } else if (member.location === 'status') {
+      data[name] = parseInt(r.statusCode, 10);
+    }
+  });
+
+  resp.data = data;
+}
+
+module.exports = {
+  buildRequest: buildRequest,
+  extractError: extractError,
+  extractData: extractData
+};
+
+},{"../util":43}],25:[function(require,module,exports){
+var util = require('../util');
+var Rest = require('./rest');
+var Json = require('./json');
+var JsonBuilder = require('../json/builder');
+
+function populateBody(req) {
+  var builder = new JsonBuilder();
+  var input = req.service.api.operations[req.operation].input;
+
+  if (input.payload) {
+    var params = {};
+    var payloadShape = input.members[input.payload];
+    params = req.params[input.payload];
+    if (params === undefined) return;
+
+    if (payloadShape.type === 'structure') {
+      req.httpRequest.body = builder.build(params, payloadShape);
+    } else { // non-JSON payload
+      req.httpRequest.body = params;
+    }
+  } else {
+    req.httpRequest.body = builder.build(req.params, input);
+  }
+}
+
+function buildRequest(req) {
+  Rest.buildRequest(req);
+
+  if (['GET', 'HEAD'].indexOf(req.httpRequest.method) < 0) {
+    populateBody(req);
+  }
+}
+
+function extractError(resp) {
+  Json.extractError(resp);
+}
+
+function extractData(resp) {
+  Rest.extractData(resp);
+
+  var req = resp.request;
+  var rules = req.service.api.operations[req.operation].output || {};
+  if (rules.payload) {
+    var payloadMember = rules.members[rules.payload];
+    if (payloadMember.isStreaming) {
+      resp.data[rules.payload] = resp.httpResponse.body;
+    } else if (payloadMember.type === 'structure') {
+      Json.extractData(resp);
+    } else {
+      resp.data[rules.payload] = resp.httpResponse.body.toString();
+    }
+  } else {
+    var data = resp.data;
+    Json.extractData(resp);
+    resp.data = util.merge(data, resp.data);
+  }
+}
+
+module.exports = {
+  buildRequest: buildRequest,
+  extractError: extractError,
+  extractData: extractData
+};
+
+},{"../json/builder":13,"../util":43,"./json":22,"./rest":24}],26:[function(require,module,exports){
+var AWS = require('../core');
+var util = require('../util');
+var Rest = require('./rest');
+
+function populateBody(req) {
+  var input = req.service.api.operations[req.operation].input;
+  var builder = new AWS.XML.Builder();
+  var params = req.params;
+
+  var payload = input.payload;
+  if (payload) {
+    var payloadMember = input.members[payload];
+    params = params[payload];
+    if (params === undefined) return;
+
+    if (payloadMember.type === 'structure') {
+      var rootElement = payloadMember.name;
+      req.httpRequest.body = builder.toXML(params, payloadMember, rootElement);
+    } else { // non-xml payload
+      req.httpRequest.body = params;
+    }
+  } else {
+    req.httpRequest.body = builder.toXML(params, input, input.shape ||
+      util.string.upperFirst(req.operation) + 'Request');
+  }
+}
+
+function buildRequest(req) {
+  Rest.buildRequest(req);
+
+  if (['GET', 'HEAD'].indexOf(req.httpRequest.method) < 0) {
+    populateBody(req);
+  }
+}
+
+function extractError(resp) {
+  Rest.extractError(resp);
+
+  var data = new AWS.XML.Parser().parse(resp.httpResponse.body.toString());
+  if (data.Errors) data = data.Errors;
+  if (data.Error) data = data.Error;
+  if (data.Code) {
+    resp.error = util.error(new Error(), {
+      code: data.Code,
+      message: data.Message
+    });
+  } else {
+    resp.error = util.error(new Error(), {
+      code: resp.httpResponse.statusCode,
+      message: null
+    });
+  }
+}
+
+function extractData(resp) {
+  Rest.extractData(resp);
+
+  var parser;
+  var req = resp.request;
+  var body = resp.httpResponse.body;
+  var operation = req.service.api.operations[req.operation];
+  var output = operation.output;
+
+  var payload = output.payload;
+  if (payload) {
+    var payloadMember = output.members[payload];
+    if (payloadMember.isStreaming) {
+      resp.data[payload] = body;
+    } else if (payloadMember.type === 'structure') {
+      parser = new AWS.XML.Parser();
+      util.update(resp.data, parser.parse(body.toString(), payloadMember));
+    } else {
+      resp.data[payload] = body.toString();
+    }
+  } else if (body.length > 0) {
+    parser = new AWS.XML.Parser();
+    var data = parser.parse(body.toString(), output);
+    util.update(resp.data, data);
+  }
+}
+
+module.exports = {
+  buildRequest: buildRequest,
+  extractError: extractError,
+  extractData: extractData
+};
+
+},{"../core":3,"../util":43,"./rest":24}],27:[function(require,module,exports){
+var util = require('../util');
+
+function QueryParamSerializer() { }
+
+QueryParamSerializer.prototype.serialize = function(params, shape, fn) {
+  serializeStructure('', params, shape, fn);
+};
+
+function serializeStructure(prefix, struct, rules, fn) {
+  util.each(rules.members, function(name, member) {
+    var value = struct[name];
+    if (value === null || value === undefined) return;
+
+    var memberName = prefix ? prefix + '.' + member.name : member.name;
+    serializeMember(memberName, value, member, fn);
+  });
+}
+
+function serializeMap(name, map, rules, fn) {
+  var i = 1;
+  util.each(map, function (key, value) {
+    var prefix = rules.flattened ? '.' : '.entry.';
+    var position = prefix + (i++) + '.';
+    var keyName = position + (rules.key.name || 'key');
+    var valueName = position + (rules.value.name || 'value');
+    serializeMember(name + keyName, key, rules.key, fn);
+    serializeMember(name + valueName, value, rules.value, fn);
+  });
+}
+
+function serializeList(name, list, rules, fn) {
+  var memberRules = rules.member || {};
+
+  if (list.length === 0) {
+    fn.call(this, name, null);
+    return;
+  }
+
+  util.arrayEach(list, function (v, n) {
+    var suffix = '.' + (n + 1);
+    if (rules.flattened) {
+      if (memberRules.name) {
+        var parts = name.split('.');
+        parts.pop();
+        parts.push(memberRules.name);
+        name = parts.join('.');
+      }
+    } else {
+      suffix = '.member' + suffix;
+    }
+    serializeMember(name + suffix, v, memberRules, fn);
+  });
+}
+
+function serializeMember(name, value, rules, fn) {
+  if (value === null || value === undefined) return;
+  if (rules.type === 'structure') {
+    serializeStructure(name, value, rules, fn);
+  } else if (rules.type === 'list') {
+    serializeList(name, value, rules, fn);
+  } else if (rules.type === 'map') {
+    serializeMap(name, value, rules, fn);
+  } else {
+    fn(name, rules.toWireFormat(value).toString());
+  }
+}
+
+module.exports = QueryParamSerializer;
+
+},{"../util":43}],28:[function(require,module,exports){
+var util = require('./util');
+var config = require('./region_config.json');
+
+function regionConfig(service) {
+  var sId = service.serviceIdentifier || '';
+  var sRegion = service.config.region || '';
+  var finalConfig = {};
+
+  config.forEach(function(item) {
+    (item.regions || []).forEach(function(region) {
+      if (sRegion.match(new RegExp('^' + region.replace('*', '.*') + '$'))) {
+        (item.serviceConfigs || []).forEach(function(svcConfig) {
+          (svcConfig.services || []).forEach(function(svcName) {
+            if (sId.match(new RegExp('^' + svcName.replace('*', '.*') + '$'))) {
+              util.update(finalConfig, svcConfig.config);
+              service.isGlobalEndpoint = !!svcConfig.globalEndpoint;
+            }
+          });
+        });
+      }
+    });
+  });
+
+  util.each(finalConfig, function(key, value) {
+    if (service.config[key] === undefined || service.config[key] === null) {
+      service.config[key] = value;
+    }
+  });
+}
+
+module.exports = regionConfig;
+
+},{"./region_config.json":29,"./util":43}],29:[function(require,module,exports){
+module.exports=[
+  {
+    "regions": ["*"],
+    "serviceConfigs": [
+      {
+        "services": ["*"],
+        "config": {
+          "endpoint": "{service}.{region}.amazonaws.com"
+        }
+      },
+      {
+        "services": ["cloudfront", "iam", "importexport", "sts"],
+        "config": {
+          "endpoint": "{service}.amazonaws.com"
+        },
+        "globalEndpoint": true
+      },
+      {
+        "services": ["s3"],
+        "config": {
+          "endpoint": "{service}-{region}.amazonaws.com"
+        }
+      },
+      {
+        "services": ["route53"],
+        "config": {
+          "endpoint": "https://{service}.amazonaws.com"
+        },
+        "globalEndpoint": true
+      }
+    ]
+  },
+  {
+    "regions": ["us-east-1"],
+    "serviceConfigs": [
+      {
+        "services": ["s3", "simpledb"],
+        "config": {
+          "endpoint": "{service}.amazonaws.com"
+        }
+      }
+    ]
+  },
+  {
+    "regions": ["cn-*"],
+    "serviceConfigs": [
+      {
+        "services": ["*"],
+        "config": {
+          "endpoint": "{service}.{region}.amazonaws.com.cn",
+          "signatureVersion": "v4"
+        }
+      }
+    ]
+  }
+]
+
+},{}],30:[function(require,module,exports){
+(function (process){
+var AWS = require('./core');
+var AcceptorStateMachine = require('./state_machine');
+var inherit = AWS.util.inherit;
+
+
+var hardErrorStates = {success:1, error:1, complete:1};
+
+function isTerminalState(machine) {
+  return hardErrorStates.hasOwnProperty(machine._asm.currentState);
+}
+
+var fsm = new AcceptorStateMachine();
+fsm.setupStates = function() {
+  var transition = function(err, done) {
+    try {
+      var self = this;
+      self.emit(self._asm.currentState, function() {
+        var nextError = self.response.error;
+        if (nextError && nextError !== err && isTerminalState(self)) {
+          throw nextError;
+        }
+
+        done(nextError);
+      });
+
+    } catch (e) {
+      if (e !== err && isTerminalState(self)) {
+        AWS.SequentialExecutor.prototype.unhandledErrorCallback.call(this, e);
+        done();
+      } else {
+        done(e);
+      }
+    }
+  };
+
+  this.addState('validate', 'build', 'error', transition);
+  this.addState('build', 'afterBuild', 'restart', transition);
+  this.addState('afterBuild', 'sign', 'restart', transition);
+  this.addState('sign', 'send', 'retry', transition);
+  this.addState('retry', 'afterRetry', 'afterRetry', transition);
+  this.addState('afterRetry', 'sign', 'error', transition);
+  this.addState('send', 'validateResponse', 'retry', transition);
+  this.addState('validateResponse', 'extractData', 'extractError', transition);
+  this.addState('extractError', 'extractData', 'retry', transition);
+  this.addState('extractData', 'success', 'retry', transition);
+  this.addState('restart', 'build', 'error', transition);
+  this.addState('success', 'complete', 'complete', transition);
+  this.addState('error', 'complete', 'complete', transition);
+  this.addState('complete', null, null, transition);
+};
+fsm.setupStates();
+
+
+AWS.Request = inherit({
+
+
+  constructor: function Request(service, operation, params) {
+    var endpoint = service.endpoint;
+    var region = service.config.region;
+
+    if (service.isGlobalEndpoint) region = 'us-east-1';
+
+    this.service = service;
+    this.operation = operation;
+    this.params = params || {};
+    this.httpRequest = new AWS.HttpRequest(endpoint, region);
+    this.startTime = AWS.util.date.getDate();
+
+    this.response = new AWS.Response(this);
+    this._asm = new AcceptorStateMachine(fsm.states, 'validate');
+
+    AWS.SequentialExecutor.call(this);
+    this.emit = this.emitEvent;
+  },
+
+
+
+
+  send: function send(callback) {
+    if (callback) {
+      this.on('complete', function (resp) {
+        callback.call(resp, resp.error, resp.data);
+      });
+    }
+    this.runTo();
+
+    return this.response;
+  },
+
+
+  build: function build(callback) {
+    return this.runTo('send', callback);
+  },
+
+
+  runTo: function runTo(state, done) {
+    this._asm.runTo(state, done, this);
+    return this;
+  },
+
+
+  abort: function abort() {
+    this.removeAllListeners('validateResponse');
+    this.removeAllListeners('extractError');
+    this.on('validateResponse', function addAbortedError(resp) {
+      resp.error = AWS.util.error(new Error('Request aborted by user'), {
+         code: 'RequestAbortedError', retryable: false
+      });
+    });
+
+    if (this.httpRequest.stream) { // abort HTTP stream
+      this.httpRequest.stream.abort();
+      if (this.httpRequest._abortCallback) {
+         this.httpRequest._abortCallback();
+      } else {
+        this.removeAllListeners('send'); // haven't sent yet, so let's not
+      }
+    }
+
+    return this;
+  },
+
+
+  eachPage: function eachPage(callback) {
+    callback = AWS.util.fn.makeAsync(callback, 3);
+
+    function wrappedCallback(response) {
+      callback.call(response, response.error, response.data, function (result) {
+        if (result === false) return;
+
+        if (response.hasNextPage()) {
+          response.nextPage().on('complete', wrappedCallback).send();
+        } else {
+          callback.call(response, null, null, AWS.util.fn.noop);
+        }
+      });
+    }
+
+    this.on('complete', wrappedCallback).send();
+  },
+
+
+  eachItem: function eachItem(callback) {
+    var self = this;
+    function wrappedCallback(err, data) {
+      if (err) return callback(err, null);
+      if (data === null) return callback(null, null);
+
+      var config = self.service.paginationConfig(self.operation);
+      var resultKey = config.resultKey;
+      if (Array.isArray(resultKey)) resultKey = resultKey[0];
+      var results = AWS.util.jamespath.query(resultKey, data);
+      AWS.util.arrayEach(results, function(result) {
+        AWS.util.arrayEach(result, function(item) { callback(null, item); });
+      });
+    }
+
+    this.eachPage(wrappedCallback);
+  },
+
+
+  isPageable: function isPageable() {
+    return this.service.paginationConfig(this.operation) ? true : false;
+  },
+
+
+  createReadStream: function createReadStream() {
+    var streams = AWS.util.nodeRequire('stream');
+    var req = this;
+    var stream = null;
+    var legacyStreams = false;
+
+    if (AWS.HttpClient.streamsApiVersion === 2) {
+      stream = new streams.Readable();
+      stream._read = function() {};
+    } else {
+      stream = new streams.Stream();
+      stream.readable = true;
+    }
+
+    stream.sent = false;
+    stream.on('newListener', function(event) {
+      if (!stream.sent && (event === 'data' || event === 'readable')) {
+        if (event === 'data') legacyStreams = true;
+        stream.sent = true;
+        process.nextTick(function() { req.send(function() { }); });
+      }
+    });
+
+    this.on('httpHeaders', function streamHeaders(statusCode, headers, resp) {
+      if (statusCode < 300) {
+        req.removeListener('httpData', AWS.EventListeners.Core.HTTP_DATA);
+        req.removeListener('httpError', AWS.EventListeners.Core.HTTP_ERROR);
+        req.on('httpError', function streamHttpError(error, resp) {
+          resp.error = error;
+          resp.error.retryable = false;
+        });
+
+        var httpStream = resp.httpResponse.createUnbufferedStream();
+        if (legacyStreams) {
+          httpStream.on('data', function(arg) {
+            stream.emit('data', arg);
+          });
+          httpStream.on('end', function() {
+            stream.emit('end');
+          });
+        } else {
+          httpStream.on('readable', function() {
+            var chunk;
+            do {
+              chunk = httpStream.read();
+              if (chunk !== null) stream.push(chunk);
+            } while (chunk !== null);
+            stream.read(0);
+          });
+          httpStream.on('end', function() {
+            stream.push(null);
+          });
+        }
+
+        httpStream.on('error', function(err) {
+          stream.emit('error', err);
+        });
+      }
+    });
+
+    this.on('error', function(err) {
+      stream.emit('error', err);
+    });
+
+    return stream;
+  },
+
+
+  emitEvent: function emit(eventName, args, done) {
+    if (typeof args === 'function') { done = args; args = null; }
+    if (!done) done = this.unhandledErrorCallback;
+    if (!args) args = this.eventParameters(eventName, this.response);
+
+    var origEmit = AWS.SequentialExecutor.prototype.emit;
+    origEmit.call(this, eventName, args, function (err) {
+      if (err) this.response.error = err;
+      done.call(this, err);
+    });
+  },
+
+
+  eventParameters: function eventParameters(eventName) {
+    switch (eventName) {
+      case 'restart':
+      case 'validate':
+      case 'sign':
+      case 'build':
+      case 'afterValidate':
+      case 'afterBuild':
+        return [this];
+      case 'error':
+        return [this.response.error, this.response];
+      default:
+        return [this.response];
+    }
+  },
+
+
+  presign: function presign(expires, callback) {
+    if (!callback && typeof expires === 'function') {
+      callback = expires;
+      expires = null;
+    }
+    return new AWS.Signers.Presign().sign(this.toGet(), expires, callback);
+  },
+
+
+  toUnauthenticated: function toUnauthenticated() {
+    this.removeListener('validate', AWS.EventListeners.Core.VALIDATE_CREDENTIALS);
+    this.removeListener('sign', AWS.EventListeners.Core.SIGN);
+    return this.toGet();
+  },
+
+
+  toGet: function toGet() {
+    if (this.service.api.protocol === 'query') {
+      this.removeListener('build', this.buildAsGet);
+      this.addListener('build', this.buildAsGet);
+    }
+    return this;
+  },
+
+
+  buildAsGet: function buildAsGet(request) {
+    request.httpRequest.method = 'GET';
+    request.httpRequest.path = request.service.endpoint.path +
+                               '?' + request.httpRequest.body;
+    request.httpRequest.body = '';
+
+    delete request.httpRequest.headers['Content-Length'];
+    delete request.httpRequest.headers['Content-Type'];
+  }
+});
+
+AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
+
+}).call(this,require("FWaASH"))
+},{"./core":3,"./state_machine":42,"FWaASH":57}],31:[function(require,module,exports){
+
+
+var AWS = require('./core');
+var inherit = AWS.util.inherit;
+
+
+AWS.ResourceWaiter = inherit({
+
+  constructor: function constructor(service, state) {
+    this.service = service;
+    this.state = state;
+
+    if (typeof this.state === 'object') {
+      AWS.util.each.call(this, this.state, function (key, value) {
+        this.state = key;
+        this.expectedValue = value;
+      });
+    }
+
+    this.loadWaiterConfig(this.state);
+    if (!this.expectedValue) {
+      this.expectedValue = this.config.successValue;
+    }
+  },
+
+  service: null,
+
+  state: null,
+
+  expectedValue: null,
+
+  config: null,
+
+  waitDone: false,
+
+  Listeners: {
+    retry: new AWS.SequentialExecutor().addNamedListeners(function(add) {
+      add('RETRY_CHECK', 'retry', function(resp) {
+        var waiter = resp.request._waiter;
+        if (resp.error && resp.error.code === 'ResourceNotReady') {
+          resp.error.retryDelay = waiter.config.interval * 1000;
+        }
+      });
+    }),
+
+    output: new AWS.SequentialExecutor().addNamedListeners(function(add) {
+      add('CHECK_OUT_ERROR', 'extractError', function CHECK_OUT_ERROR(resp) {
+        if (resp.error) {
+          resp.request._waiter.setError(resp, true);
+        }
+      });
+
+      add('CHECK_OUTPUT', 'extractData', function CHECK_OUTPUT(resp) {
+        var waiter = resp.request._waiter;
+        var success = waiter.checkSuccess(resp);
+        if (!success) {
+          waiter.setError(resp, success === null ? false : true);
+        } else {
+          resp.error = null;
+        }
+      });
+    }),
+
+    error: new AWS.SequentialExecutor().addNamedListeners(function(add) {
+      add('CHECK_ERROR', 'extractError', function CHECK_ERROR(resp) {
+        var waiter = resp.request._waiter;
+        var success = waiter.checkError(resp);
+        if (!success) {
+          waiter.setError(resp, success === null ? false : true);
+        } else {
+          resp.error = null;
+          resp.request.removeAllListeners('extractData');
+        }
+      });
+
+      add('CHECK_ERR_OUTPUT', 'extractData', function CHECK_ERR_OUTPUT(resp) {
+        resp.request._waiter.setError(resp, true);
+      });
+    })
+  },
+
+
+  wait: function wait(params, callback) {
+    if (typeof params === 'function') {
+      callback = params; params = undefined;
+    }
+
+    var request = this.service.makeRequest(this.config.operation, params);
+    var listeners = this.Listeners[this.config.successType];
+    request._waiter = this;
+    request.response.maxRetries = this.config.maxAttempts;
+    request.addListeners(this.Listeners.retry);
+    if (listeners) request.addListeners(listeners);
+
+    if (callback) request.send(callback);
+    return request;
+  },
+
+  setError: function setError(resp, retryable) {
+    resp.data = null;
+    resp.error = AWS.util.error(resp.error || new Error(), {
+      code: 'ResourceNotReady',
+      message: 'Resource is not in the state ' + this.state,
+      retryable: retryable
+    });
+  },
+
+
+  checkSuccess: function checkSuccess(resp) {
+    if (!this.config.successPath) {
+      return resp.httpResponse.statusCode < 300;
+    }
+
+    var r = AWS.util.jamespath.find(this.config.successPath, resp.data);
+
+    if (this.config.failureValue &&
+        this.config.failureValue.indexOf(r) >= 0) {
+      return null; // fast fail
+    }
+
+    if (this.expectedValue) {
+      return r === this.expectedValue;
+    } else {
+      return r ? true : false;
+    }
+  },
+
+
+  checkError: function checkError(resp) {
+    var value = this.config.successValue;
+    if (typeof value === 'number') {
+      return resp.httpResponse.statusCode === value;
+    } else {
+      return resp.error && resp.error.code === value;
+    }
+  },
+
+
+  loadWaiterConfig: function loadWaiterConfig(state, noException) {
+    if (!this.service.api.waiters[state]) {
+      if (noException) return;
+      throw new AWS.util.error(new Error(), {
+        code: 'StateNotFoundError',
+        message: 'State ' + state + ' not found.'
+      });
+    }
+
+    this.config = this.service.api.waiters[state];
+    var config = this.config;
+
+    (function () { // anonymous function to avoid max complexity count
+      config.successType = config.successType || config.acceptorType;
+      config.successPath = config.successPath || config.acceptorPath;
+      config.successValue = config.successValue || config.acceptorValue;
+      config.failureType = config.failureType || config.acceptorType;
+      config.failurePath = config.failurePath || config.acceptorPath;
+      config.failureValue = config.failureValue || config.acceptorValue;
+    })();
+  }
+});
+
+},{"./core":3}],32:[function(require,module,exports){
+var AWS = require('./core');
+var inherit = AWS.util.inherit;
+
+
+AWS.Response = inherit({
+
+
+  constructor: function Response(request) {
+    this.request = request;
+    this.data = null;
+    this.error = null;
+    this.retryCount = 0;
+    this.redirectCount = 0;
+    this.httpResponse = new AWS.HttpResponse();
+    if (request) {
+      this.maxRetries = request.service.numRetries();
+      this.maxRedirects = request.service.config.maxRedirects;
+    }
+  },
+
+
+  nextPage: function nextPage(callback) {
+    var config;
+    var service = this.request.service;
+    var operation = this.request.operation;
+    try {
+      config = service.paginationConfig(operation, true);
+    } catch (e) { this.error = e; }
+
+    if (!this.hasNextPage()) {
+      if (callback) callback(this.error, null);
+      else if (this.error) throw this.error;
+      return null;
+    }
+
+    var params = AWS.util.copy(this.request.params);
+    if (!this.nextPageTokens) {
+      return callback ? callback(null, null) : null;
+    } else {
+      var inputTokens = config.inputToken;
+      if (typeof inputTokens === 'string') inputTokens = [inputTokens];
+      for (var i = 0; i < inputTokens.length; i++) {
+        params[inputTokens[i]] = this.nextPageTokens[i];
+      }
+      return service.makeRequest(this.request.operation, params, callback);
+    }
+  },
+
+
+  hasNextPage: function hasNextPage() {
+    this.cacheNextPageTokens();
+    if (this.nextPageTokens) return true;
+    if (this.nextPageTokens === undefined) return undefined;
+    else return false;
+  },
+
+
+  cacheNextPageTokens: function cacheNextPageTokens() {
+    if (this.hasOwnProperty('nextPageTokens')) return this.nextPageTokens;
+    this.nextPageTokens = undefined;
+
+    var config = this.request.service.paginationConfig(this.request.operation);
+    if (!config) return this.nextPageTokens;
+
+    this.nextPageTokens = null;
+    if (config.moreResults) {
+      if (!AWS.util.jamespath.find(config.moreResults, this.data)) {
+        return this.nextPageTokens;
+      }
+    }
+
+    var exprs = config.outputToken;
+    if (typeof exprs === 'string') exprs = [exprs];
+    AWS.util.arrayEach.call(this, exprs, function (expr) {
+      var output = AWS.util.jamespath.find(expr, this.data);
+      if (output) {
+        this.nextPageTokens = this.nextPageTokens || [];
+        this.nextPageTokens.push(output);
+      }
+    });
+
+    return this.nextPageTokens;
+  }
+
+});
+
+},{"./core":3}],33:[function(require,module,exports){
+var AWS = require('./core');
+var domain = AWS.util.nodeRequire('domain');
+
+
+AWS.SequentialExecutor = AWS.util.inherit({
+
+  constructor: function SequentialExecutor() {
+    this.domain = domain && domain.active;
+    this._events = {};
+  },
+
+
+  listeners: function listeners(eventName) {
+    return this._events[eventName] ? this._events[eventName].slice(0) : [];
+  },
+
+  on: function on(eventName, listener) {
+    if (this._events[eventName]) {
+      this._events[eventName].push(listener);
+    } else {
+      this._events[eventName] = [listener];
+    }
+    return this;
+  },
+
+
+  onAsync: function onAsync(eventName, listener) {
+    listener._isAsync = true;
+    return this.on(eventName, listener);
+  },
+
+  removeListener: function removeListener(eventName, listener) {
+    var listeners = this._events[eventName];
+    if (listeners) {
+      var length = listeners.length;
+      var position = -1;
+      for (var i = 0; i < length; ++i) {
+        if (listeners[i] === listener) {
+          position = i;
+        }
+      }
+      if (position > -1) {
+        listeners.splice(position, 1);
+      }
+    }
+    return this;
+  },
+
+  removeAllListeners: function removeAllListeners(eventName) {
+    if (eventName) {
+      delete this._events[eventName];
+    } else {
+      this._events = {};
+    }
+    return this;
+  },
+
+
+  emit: function emit(eventName, eventArgs, doneCallback) {
+    if (!doneCallback) doneCallback = this.unhandledErrorCallback;
+    var listeners = this.listeners(eventName);
+    var count = listeners.length;
+    this.callListeners(listeners, eventArgs, doneCallback);
+    return count > 0;
+  },
+
+
+  callListeners: function callListeners(listeners, args, doneCallback) {
+    if (listeners.length === 0) {
+      doneCallback.call(this);
+      return;
+    }
+
+    var self = this, listener = listeners.shift();
+    if (listener._isAsync) { // asynchronous listener
+      var callNextListener = function(err) {
+        if (err) {
+          doneCallback.call(self, err);
+        } else {
+          self.callListeners(listeners, args, doneCallback);
+        }
+      };
+      listener.apply(self, args.concat([callNextListener]));
+    } else { // synchronous listener
+      try {
+        listener.apply(self, args);
+        self.callListeners(listeners, args, doneCallback);
+      } catch (err) {
+        doneCallback.call(self, err);
+      }
+    }
+  },
+
+
+  addListeners: function addListeners(listeners) {
+    var self = this;
+
+    if (listeners._events) listeners = listeners._events;
+
+    AWS.util.each(listeners, function(event, callbacks) {
+      if (typeof callbacks === 'function') callbacks = [callbacks];
+      AWS.util.arrayEach(callbacks, function(callback) {
+        self.on(event, callback);
+      });
+    });
+
+    return self;
+  },
+
+
+  addNamedListener: function addNamedListener(name, eventName, callback) {
+    this[name] = callback;
+    this.addListener(eventName, callback);
+    return this;
+  },
+
+
+  addNamedAsyncListener: function addNamedAsyncListener(name, eventName, callback) {
+    callback._isAsync = true;
+    return this.addNamedListener(name, eventName, callback);
+  },
+
+
+  addNamedListeners: function addNamedListeners(callback) {
+    var self = this;
+    callback(
+      function() {
+        self.addNamedListener.apply(self, arguments);
+      },
+      function() {
+        self.addNamedAsyncListener.apply(self, arguments);
+      }
+    );
+    return this;
+  },
+
+
+  unhandledErrorCallback: function unhandledErrorCallback(err) {
+    if (err) {
+      if (domain && this.domain instanceof domain.Domain) {
+        err.domainEmitter = this;
+        err.domain = this.domain;
+        err.domainThrown = false;
+        this.domain.emit('error', err);
+      } else {
+        throw err;
+      }
+    }
+  }
+});
+
+
+AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.on;
+
+module.exports = AWS.SequentialExecutor;
+
+},{"./core":3}],34:[function(require,module,exports){
+var AWS = require('./core');
+var Api = require('./model/api');
+var regionConfig = require('./region_config');
+var inherit = AWS.util.inherit;
+
+
+AWS.Service = inherit({
+
+  constructor: function Service(config) {
+    if (!this.loadServiceClass) {
+      throw AWS.util.error(new Error(),
+        'Service must be constructed with `new\' operator');
+    }
+    var ServiceClass = this.loadServiceClass(config || {});
+    if (ServiceClass) return new ServiceClass(config);
+    this.initialize(config);
+  },
+
+
+  initialize: function initialize(config) {
+    this.config = new AWS.Config(AWS.config);
+    if (config) this.config.update(config, true);
+
+    this.validateService();
+    regionConfig(this);
+
+    this.config.endpoint = this.endpointFromTemplate(this.config.endpoint);
+    this.setEndpoint(this.config.endpoint);
+  },
+
+
+  validateService: function validateService() {
+  },
+
+
+  loadServiceClass: function loadServiceClass(serviceConfig) {
+    var config = serviceConfig;
+    if (!AWS.util.isEmpty(this.api)) {
+      return null;
+    } else if (config.apiConfig) {
+      return AWS.Service.defineServiceApi(this.constructor, config.apiConfig);
+    } else if (!this.constructor.services) {
+      return null;
+    } else {
+      config = new AWS.Config(AWS.config);
+      config.update(serviceConfig, true);
+      var version = config.apiVersions[this.constructor.serviceIdentifier];
+      version = version || config.apiVersion;
+      return this.getLatestServiceClass(version);
+    }
+  },
+
+
+  getLatestServiceClass: function getLatestServiceClass(version) {
+    version = this.getLatestServiceVersion(version);
+    if (this.constructor.services[version] === null) {
+      AWS.Service.defineServiceApi(this.constructor, version);
+    }
+
+    return this.constructor.services[version];
+  },
+
+
+  getLatestServiceVersion: function getLatestServiceVersion(version) {
+    if (!this.constructor.services || this.constructor.services.length === 0) {
+      throw new Error('No services defined on ' +
+                      this.constructor.serviceIdentifier);
+    }
+
+    if (!version) {
+      version = 'latest';
+    } else if (AWS.util.isType(version, Date)) {
+      version = AWS.util.date.iso8601(version).split('T')[0];
+    }
+
+    if (Object.hasOwnProperty(this.constructor.services, version)) {
+      return version;
+    }
+
+    var keys = Object.keys(this.constructor.services).sort();
+    var selectedVersion = null;
+    for (var i = keys.length - 1; i >= 0; i--) {
+      if (keys[i][keys[i].length - 1] !== '*') {
+        selectedVersion = keys[i];
+      }
+      if (keys[i].substr(0, 10) <= version) {
+        return selectedVersion;
+      }
+    }
+
+    throw new Error('Could not find ' + this.constructor.serviceIdentifier +
+                    ' API to satisfy version constraint `' + version + '\'');
+  },
+
+
+  api: {},
+
+
+  defaultRetryCount: 3,
+
+
+  makeRequest: function makeRequest(operation, params, callback) {
+    if (typeof params === 'function') {
+      callback = params;
+      params = null;
+    }
+
+    params = params || {};
+    if (this.config.params) { // copy only toplevel bound params
+      var rules = this.api.operations[operation];
+      if (rules) {
+        params = AWS.util.copy(params);
+        AWS.util.each(this.config.params, function(key, value) {
+          if (rules.input.members[key]) {
+            if (params[key] === undefined || params[key] === null) {
+              params[key] = value;
+            }
+          }
+        });
+      }
+    }
+
+    var request = new AWS.Request(this, operation, params);
+    this.addAllRequestListeners(request);
+
+    if (callback) request.send(callback);
+    return request;
+  },
+
+
+  makeUnauthenticatedRequest: function makeUnauthenticatedRequest(operation, params, callback) {
+    if (typeof params === 'function') {
+      callback = params;
+      params = {};
+    }
+
+    var request = this.makeRequest(operation, params).toUnauthenticated();
+    return callback ? request.send(callback) : request;
+  },
+
+
+  waitFor: function waitFor(state, params, callback) {
+    var waiter = new AWS.ResourceWaiter(this, state);
+    return waiter.wait(params, callback);
+  },
+
+
+  addAllRequestListeners: function addAllRequestListeners(request) {
+    var list = [AWS.events, AWS.EventListeners.Core, this.serviceInterface(),
+                AWS.EventListeners.CorePost];
+    for (var i = 0; i < list.length; i++) {
+      if (list[i]) request.addListeners(list[i]);
+    }
+
+    if (!this.config.paramValidation) {
+      request.removeListener('validate',
+        AWS.EventListeners.Core.VALIDATE_PARAMETERS);
+    }
+
+    if (this.config.logger) { // add logging events
+      request.addListeners(AWS.EventListeners.Logger);
+    }
+
+    this.setupRequestListeners(request);
+  },
+
+
+  setupRequestListeners: function setupRequestListeners() {
+  },
+
+
+  getSignerClass: function getSignerClass() {
+    var version;
+    if (this.config.signatureVersion) {
+      version = this.config.signatureVersion;
+    } else {
+      version = this.api.signatureVersion;
+    }
+    return AWS.Signers.RequestSigner.getVersion(version);
+  },
+
+
+  serviceInterface: function serviceInterface() {
+    switch (this.api.protocol) {
+      case 'query': return AWS.EventListeners.Query;
+      case 'json': return AWS.EventListeners.Json;
+      case 'rest-json': return AWS.EventListeners.RestJson;
+      case 'rest-xml': return AWS.EventListeners.RestXml;
+    }
+    if (this.api.protocol) {
+      throw new Error('Invalid service `protocol\' ' +
+        this.api.protocol + ' in API config');
+    }
+  },
+
+
+  successfulResponse: function successfulResponse(resp) {
+    return resp.httpResponse.statusCode < 300;
+  },
+
+
+  numRetries: function numRetries() {
+    if (this.config.maxRetries !== undefined) {
+      return this.config.maxRetries;
+    } else {
+      return this.defaultRetryCount;
+    }
+  },
+
+
+  retryDelays: function retryDelays() {
+    var retryCount = this.numRetries();
+    var delays = [];
+    for (var i = 0; i < retryCount; ++i) {
+      delays[i] = Math.pow(2, i) * 30;
+    }
+    return delays;
+  },
+
+
+  retryableError: function retryableError(error) {
+    if (this.networkingError(error)) return true;
+    if (this.expiredCredentialsError(error)) return true;
+    if (this.throttledError(error)) return true;
+    if (error.statusCode >= 500) return true;
+    return false;
+  },
+
+
+  networkingError: function networkingError(error) {
+    return error.code === 'NetworkingError';
+  },
+
+
+  expiredCredentialsError: function expiredCredentialsError(error) {
+    return (error.code === 'ExpiredTokenException');
+  },
+
+
+  throttledError: function throttledError(error) {
+    return (error.code === 'ProvisionedThroughputExceededException');
+  },
+
+
+  endpointFromTemplate: function endpointFromTemplate(endpoint) {
+    if (typeof endpoint !== 'string') return endpoint;
+
+    var e = endpoint;
+    e = e.replace(/\{service\}/g, this.api.endpointPrefix);
+    e = e.replace(/\{region\}/g, this.config.region);
+    e = e.replace(/\{scheme\}/g, this.config.sslEnabled ? 'https' : 'http');
+    return e;
+  },
+
+
+  setEndpoint: function setEndpoint(endpoint) {
+    this.endpoint = new AWS.Endpoint(endpoint, this.config);
+  },
+
+
+  paginationConfig: function paginationConfig(operation, throwException) {
+    var paginator = this.api.operations[operation].paginator;
+    if (!paginator) {
+      if (throwException) {
+        var e = new Error();
+        throw AWS.util.error(e, 'No pagination configuration for ' + operation);
+      }
+      return null;
+    }
+
+    return paginator;
+  }
+});
+
+AWS.util.update(AWS.Service, {
+
+
+  defineMethods: function defineMethods(svc) {
+    AWS.util.each(svc.prototype.api.operations, function iterator(method) {
+      if (svc.prototype[method]) return;
+      svc.prototype[method] = function (params, callback) {
+        return this.makeRequest(method, params, callback);
+      };
+    });
+  },
+
+
+  defineService: function defineService(serviceIdentifier, versions, features) {
+    if (!Array.isArray(versions)) {
+      features = versions;
+      versions = [];
+    }
+
+    var svc = inherit(AWS.Service, features || {});
+
+    if (typeof serviceIdentifier === 'string') {
+      AWS.Service.addVersions(svc, versions);
+
+      var identifier = svc.serviceIdentifier || serviceIdentifier;
+      svc.serviceIdentifier = identifier;
+    } else { // defineService called with an API
+      svc.prototype.api = serviceIdentifier;
+      AWS.Service.defineMethods(svc);
+    }
+
+    return svc;
+  },
+
+
+  addVersions: function addVersions(svc, versions) {
+    if (!Array.isArray(versions)) versions = [versions];
+
+    svc.services = svc.services || {};
+    for (var i = 0; i < versions.length; i++) {
+      if (svc.services[versions[i]] === undefined) {
+        svc.services[versions[i]] = null;
+      }
+    }
+
+    svc.apiVersions = Object.keys(svc.services).sort();
+  },
+
+
+  defineServiceApi: function defineServiceApi(superclass, version, apiConfig) {
+    var svc = inherit(superclass, {
+      serviceIdentifier: superclass.serviceIdentifier
+    });
+
+    function setApi(api) {
+      if (api.isApi) {
+        svc.prototype.api = api;
+      } else {
+        svc.prototype.api = new Api(api);
+      }
+    }
+
+    if (typeof version === 'string') {
+      if (apiConfig) {
+        setApi(apiConfig);
+      } else {
+        try {
+          var apis = AWS.util.nodeRequire('aws-sdk-apis');
+          setApi(apis.load(superclass.serviceIdentifier, version));
+        } catch (err) {
+          throw AWS.util.error(err, {
+            message: 'Could not find API configuration ' +
+              superclass.serviceIdentifier + '-' + version
+          });
+        }
+      }
+      if (!superclass.services.hasOwnProperty(version)) {
+        superclass.apiVersions = superclass.apiVersions.concat(version).sort();
+      }
+      superclass.services[version] = svc;
+    } else {
+      setApi(version);
+    }
+
+    AWS.Service.defineMethods(svc);
+    return svc;
+  }
+});
+
+},{"./core":3,"./model/api":15,"./region_config":28}],35:[function(require,module,exports){
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+
+var expiresHeader = 'presigned-expires';
+
+
+function signedUrlBuilder(request) {
+  var expires = request.httpRequest.headers[expiresHeader];
+
+  delete request.httpRequest.headers['User-Agent'];
+  delete request.httpRequest.headers['X-Amz-User-Agent'];
+
+  if (request.service.getSignerClass() === AWS.Signers.V4) {
+    if (expires > 604800) { // one week expiry is invalid
+      var message = 'Presigning does not support expiry time greater ' +
+                    'than a week with SigV4 signing.';
+      throw AWS.util.error(new Error(), {
+        code: 'InvalidExpiryTime', message: message, retryable: false
+      });
+    }
+    request.httpRequest.headers[expiresHeader] = expires;
+  } else if (request.service.getSignerClass() === AWS.Signers.S3) {
+    request.httpRequest.headers[expiresHeader] = parseInt(
+      AWS.util.date.unixTimestamp() + expires, 10).toString();
+  } else {
+    throw AWS.util.error(new Error(), {
+      message: 'Presigning only supports S3 or SigV4 signing.',
+      code: 'UnsupportedSigner', retryable: false
+    });
+  }
+}
+
+
+function signedUrlSigner(request) {
+  var endpoint = request.httpRequest.endpoint;
+  var parsedUrl = AWS.util.urlParse(request.httpRequest.path);
+  var queryParams = {};
+
+  if (parsedUrl.search) {
+    queryParams = AWS.util.queryStringParse(parsedUrl.search.substr(1));
+  }
+
+  AWS.util.each(request.httpRequest.headers, function (key, value) {
+    if (key === expiresHeader) key = 'Expires';
+    queryParams[key] = value;
+  });
+  delete request.httpRequest.headers[expiresHeader];
+
+  var auth = queryParams['Authorization'].split(' ');
+  if (auth[0] === 'AWS') {
+    auth = auth[1].split(':');
+    queryParams['AWSAccessKeyId'] = auth[0];
+    queryParams['Signature'] = auth[1];
+  } else if (auth[0] === 'AWS4-HMAC-SHA256') { // SigV4 signing
+    auth.shift();
+    var rest = auth.join(' ');
+    var signature = rest.match(/Signature=(.*?)(?:,|\s|\r?\n|$)/)[1];
+    queryParams['X-Amz-Signature'] = signature;
+    delete queryParams['Expires'];
+  }
+  delete queryParams['Authorization'];
+  delete queryParams['Host'];
+
+  endpoint.pathname = parsedUrl.pathname;
+  endpoint.search = AWS.util.queryParamsToString(queryParams);
+}
+
+
+AWS.Signers.Presign = inherit({
+
+  sign: function sign(request, expireTime, callback) {
+    request.httpRequest.headers[expiresHeader] = expireTime || 3600;
+    request.on('build', signedUrlBuilder);
+    request.on('sign', signedUrlSigner);
+    request.removeListener('afterBuild',
+      AWS.EventListeners.Core.SET_CONTENT_LENGTH);
+
+    request.emit('beforePresign', [request]);
+
+    if (callback) {
+      request.build(function() {
+        if (this.response.error) callback(this.response.error);
+        else {
+          callback(null, AWS.util.urlFormat(request.httpRequest.endpoint));
+        }
+      });
+    } else {
+      request.build();
+      return AWS.util.urlFormat(request.httpRequest.endpoint);
+    }
+  }
+});
+
+module.exports = AWS.Signers.Presign;
+
+},{"../core":3}],36:[function(require,module,exports){
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+
+AWS.Signers.RequestSigner = inherit({
+  constructor: function RequestSigner(request) {
+    this.request = request;
+  }
+});
+
+AWS.Signers.RequestSigner.getVersion = function getVersion(version) {
+  switch (version) {
+    case 'v2': return AWS.Signers.V2;
+    case 'v3': return AWS.Signers.V3;
+    case 'v4': return AWS.Signers.V4;
+    case 's3': return AWS.Signers.S3;
+    case 'v3https': return AWS.Signers.V3Https;
+  }
+  throw new Error('Unknown signing version ' + version);
+};
+
+require('./v2');
+require('./v3');
+require('./v3https');
+require('./v4');
+require('./s3');
+require('./presign');
+
+},{"../core":3,"./presign":35,"./s3":37,"./v2":38,"./v3":39,"./v3https":40,"./v4":41}],37:[function(require,module,exports){
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+
+AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
+
+  subResources: {
+    'acl': 1,
+    'cors': 1,
+    'lifecycle': 1,
+    'delete': 1,
+    'location': 1,
+    'logging': 1,
+    'notification': 1,
+    'partNumber': 1,
+    'policy': 1,
+    'requestPayment': 1,
+    'restore': 1,
+    'tagging': 1,
+    'torrent': 1,
+    'uploadId': 1,
+    'uploads': 1,
+    'versionId': 1,
+    'versioning': 1,
+    'versions': 1,
+    'website': 1
+  },
+
+  responseHeaders: {
+    'response-content-type': 1,
+    'response-content-language': 1,
+    'response-expires': 1,
+    'response-cache-control': 1,
+    'response-content-disposition': 1,
+    'response-content-encoding': 1
+  },
+
+  addAuthorization: function addAuthorization(credentials, date) {
+    if (!this.request.headers['presigned-expires']) {
+      this.request.headers['X-Amz-Date'] = AWS.util.date.rfc822(date);
+    }
+
+    if (credentials.sessionToken) {
+      this.request.headers['x-amz-security-token'] = credentials.sessionToken;
+    }
+
+    var signature = this.sign(credentials.secretAccessKey, this.stringToSign());
+    var auth = 'AWS ' + credentials.accessKeyId + ':' + signature;
+
+    this.request.headers['Authorization'] = auth;
+  },
+
+  stringToSign: function stringToSign() {
+    var r = this.request;
+
+    var parts = [];
+    parts.push(r.method);
+    parts.push(r.headers['Content-MD5'] || '');
+    parts.push(r.headers['Content-Type'] || '');
+
+    parts.push(r.headers['presigned-expires'] || '');
+
+    var headers = this.canonicalizedAmzHeaders();
+    if (headers) parts.push(headers);
+    parts.push(this.canonicalizedResource());
+
+    return parts.join('\n');
+
+  },
+
+  canonicalizedAmzHeaders: function canonicalizedAmzHeaders() {
+
+    var amzHeaders = [];
+
+    AWS.util.each(this.request.headers, function (name) {
+      if (name.match(/^x-amz-/i))
+        amzHeaders.push(name);
+    });
+
+    amzHeaders.sort(function (a, b) {
+      return a.toLowerCase() < b.toLowerCase() ? -1 : 1;
+    });
+
+    var parts = [];
+    AWS.util.arrayEach.call(this, amzHeaders, function (name) {
+      parts.push(name.toLowerCase() + ':' + String(this.request.headers[name]));
+    });
+
+    return parts.join('\n');
+
+  },
+
+  canonicalizedResource: function canonicalizedResource() {
+
+    var r = this.request;
+
+    var parts = r.path.split('?');
+    var path = parts[0];
+    var querystring = parts[1];
+
+    var resource = '';
+
+    if (r.virtualHostedBucket)
+      resource += '/' + r.virtualHostedBucket;
+
+    resource += path;
+
+    if (querystring) {
+
+      var resources = [];
+
+      AWS.util.arrayEach.call(this, querystring.split('&'), function (param) {
+        var name = param.split('=')[0];
+        var value = param.split('=')[1];
+        if (this.subResources[name] || this.responseHeaders[name]) {
+          var subresource = { name: name };
+          if (value !== undefined) {
+            if (this.subResources[name]) {
+              subresource.value = value;
+            } else {
+              subresource.value = decodeURIComponent(value);
+            }
+          }
+          resources.push(subresource);
+        }
+      });
+
+      resources.sort(function (a, b) { return a.name < b.name ? -1 : 1; });
+
+      if (resources.length) {
+
+        querystring = [];
+        AWS.util.arrayEach(resources, function (resource) {
+          if (resource.value === undefined)
+            querystring.push(resource.name);
+          else
+            querystring.push(resource.name + '=' + resource.value);
+        });
+
+        resource += '?' + querystring.join('&');
+      }
+
+    }
+
+    return resource;
+
+  },
+
+  sign: function sign(secret, string) {
+    return AWS.util.crypto.hmac(secret, string, 'base64', 'sha1');
+  }
+});
+
+module.exports = AWS.Signers.S3;
+
+},{"../core":3}],38:[function(require,module,exports){
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+
+AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
+  addAuthorization: function addAuthorization(credentials, date) {
+
+    if (!date) date = AWS.util.date.getDate();
+
+    var r = this.request;
+
+    r.params.Timestamp = AWS.util.date.iso8601(date);
+    r.params.SignatureVersion = '2';
+    r.params.SignatureMethod = 'HmacSHA256';
+    r.params.AWSAccessKeyId = credentials.accessKeyId;
+
+    if (credentials.sessionToken) {
+      r.params.SecurityToken = credentials.sessionToken;
+    }
+
+    delete r.params.Signature; // delete old Signature for re-signing
+    r.params.Signature = this.signature(credentials);
+
+    r.body = AWS.util.queryParamsToString(r.params);
+    r.headers['Content-Length'] = r.body.length;
+  },
+
+  signature: function signature(credentials) {
+    return AWS.util.crypto.hmac(credentials.secretAccessKey, this.stringToSign(), 'base64');
+  },
+
+  stringToSign: function stringToSign() {
+    var parts = [];
+    parts.push(this.request.method);
+    parts.push(this.request.endpoint.host.toLowerCase());
+    parts.push(this.request.pathname());
+    parts.push(AWS.util.queryParamsToString(this.request.params));
+    return parts.join('\n');
+  }
+
+});
+
+module.exports = AWS.Signers.V2;
+
+},{"../core":3}],39:[function(require,module,exports){
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+
+AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
+  addAuthorization: function addAuthorization(credentials, date) {
+
+    var datetime = AWS.util.date.rfc822(date);
+
+    this.request.headers['X-Amz-Date'] = datetime;
+
+    if (credentials.sessionToken) {
+      this.request.headers['x-amz-security-token'] = credentials.sessionToken;
+    }
+
+    this.request.headers['X-Amzn-Authorization'] =
+      this.authorization(credentials, datetime);
+
+  },
+
+  authorization: function authorization(credentials) {
+    return 'AWS3 ' +
+      'AWSAccessKeyId=' + credentials.accessKeyId + ',' +
+      'Algorithm=HmacSHA256,' +
+      'SignedHeaders=' + this.signedHeaders() + ',' +
+      'Signature=' + this.signature(credentials);
+  },
+
+  signedHeaders: function signedHeaders() {
+    var headers = [];
+    AWS.util.arrayEach(this.headersToSign(), function iterator(h) {
+      headers.push(h.toLowerCase());
+    });
+    return headers.sort().join(';');
+  },
+
+  canonicalHeaders: function canonicalHeaders() {
+    var headers = this.request.headers;
+    var parts = [];
+    AWS.util.arrayEach(this.headersToSign(), function iterator(h) {
+      parts.push(h.toLowerCase().trim() + ':' + String(headers[h]).trim());
+    });
+    return parts.sort().join('\n') + '\n';
+  },
+
+  headersToSign: function headersToSign() {
+    var headers = [];
+    AWS.util.each(this.request.headers, function iterator(k) {
+      if (k === 'Host' || k === 'Content-Encoding' || k.match(/^X-Amz/i)) {
+        headers.push(k);
+      }
+    });
+    return headers;
+  },
+
+  signature: function signature(credentials) {
+    return AWS.util.crypto.hmac(credentials.secretAccessKey, this.stringToSign(), 'base64');
+  },
+
+  stringToSign: function stringToSign() {
+    var parts = [];
+    parts.push(this.request.method);
+    parts.push('/');
+    parts.push('');
+    parts.push(this.canonicalHeaders());
+    parts.push(this.request.body);
+    return AWS.util.crypto.sha256(parts.join('\n'));
+  }
+
+});
+
+module.exports = AWS.Signers.V3;
+
+},{"../core":3}],40:[function(require,module,exports){
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+require('./v3');
+
+
+AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
+  authorization: function authorization(credentials) {
+    return 'AWS3-HTTPS ' +
+      'AWSAccessKeyId=' + credentials.accessKeyId + ',' +
+      'Algorithm=HmacSHA256,' +
+      'Signature=' + this.signature(credentials);
+  },
+
+  stringToSign: function stringToSign() {
+    return this.request.headers['X-Amz-Date'];
+  }
+});
+
+module.exports = AWS.Signers.V3Https;
+
+},{"../core":3,"./v3":39}],41:[function(require,module,exports){
+var AWS = require('../core');
+var inherit = AWS.util.inherit;
+
+
+var cachedSecret = {};
+
+
+var expiresHeader = 'presigned-expires';
+
+
+AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
+  constructor: function V4(request, serviceName) {
+    AWS.Signers.RequestSigner.call(this, request);
+    this.serviceName = serviceName;
+  },
+
+  algorithm: 'AWS4-HMAC-SHA256',
+
+  addAuthorization: function addAuthorization(credentials, date) {
+    var datetime = AWS.util.date.iso8601(date).replace(/[:\-]|\.\d{3}/g, '');
+
+    if (this.isPresigned()) {
+      this.updateForPresigned(credentials, datetime);
+    } else {
+      this.addHeaders(credentials, datetime);
+      this.updateBody(credentials);
+    }
+
+    this.request.headers['Authorization'] =
+      this.authorization(credentials, datetime);
+  },
+
+  addHeaders: function addHeaders(credentials, datetime) {
+    this.request.headers['X-Amz-Date'] = datetime;
+    if (credentials.sessionToken) {
+      this.request.headers['x-amz-security-token'] = credentials.sessionToken;
+    }
+  },
+
+  updateBody: function updateBody(credentials) {
+    if (this.request.params) {
+      this.request.params.AWSAccessKeyId = credentials.accessKeyId;
+
+      if (credentials.sessionToken) {
+        this.request.params.SecurityToken = credentials.sessionToken;
+      }
+
+      this.request.body = AWS.util.queryParamsToString(this.request.params);
+      this.request.headers['Content-Length'] = this.request.body.length;
+    }
+  },
+
+  updateForPresigned: function updateForPresigned(credentials, datetime) {
+    var credString = this.credentialString(datetime);
+    var qs = {
+      'X-Amz-Date': datetime,
+      'X-Amz-Algorithm': this.algorithm,
+      'X-Amz-Credential': credentials.accessKeyId + '/' + credString,
+      'X-Amz-Expires': this.request.headers[expiresHeader],
+      'X-Amz-SignedHeaders': this.signedHeaders()
+    };
+
+    if (credentials.sessionToken) {
+      qs['X-Amz-Security-Token'] = credentials.sessionToken;
+    }
+
+    if (this.request.headers['Content-Type']) {
+      qs['Content-Type'] = this.request.headers['Content-Type'];
+    }
+
+    AWS.util.each.call(this, this.request.headers, function(key, value) {
+      if (key === expiresHeader) return;
+      if (this.isSignableHeader(key) &&
+          key.toLowerCase().indexOf('x-amz-') === 0) {
+        qs[key] = value;
+      }
+    });
+
+    var sep = this.request.path.indexOf('?') >= 0 ? '&' : '?';
+    this.request.path += sep + AWS.util.queryParamsToString(qs);
+  },
+
+  authorization: function authorization(credentials, datetime) {
+    var parts = [];
+    var credString = this.credentialString(datetime);
+    parts.push(this.algorithm + ' Credential=' +
+      credentials.accessKeyId + '/' + credString);
+    parts.push('SignedHeaders=' + this.signedHeaders());
+    parts.push('Signature=' + this.signature(credentials, datetime));
+    return parts.join(', ');
+  },
+
+  signature: function signature(credentials, datetime) {
+    var cache = cachedSecret[this.serviceName];
+    var date = datetime.substr(0, 8);
+    if (!cache ||
+        cache.akid !== credentials.accessKeyId ||
+        cache.region !== this.request.region ||
+        cache.date !== date) {
+      var kSecret = credentials.secretAccessKey;
+      var kDate = AWS.util.crypto.hmac('AWS4' + kSecret, date, 'buffer');
+      var kRegion = AWS.util.crypto.hmac(kDate, this.request.region, 'buffer');
+      var kService = AWS.util.crypto.hmac(kRegion, this.serviceName, 'buffer');
+      var kCredentials = AWS.util.crypto.hmac(kService, 'aws4_request', 'buffer');
+      cachedSecret[this.serviceName] = {
+        region: this.request.region, date: date,
+        key: kCredentials, akid: credentials.accessKeyId
+      };
+    }
+
+    var key = cachedSecret[this.serviceName].key;
+    return AWS.util.crypto.hmac(key, this.stringToSign(datetime), 'hex');
+  },
+
+  stringToSign: function stringToSign(datetime) {
+    var parts = [];
+    parts.push('AWS4-HMAC-SHA256');
+    parts.push(datetime);
+    parts.push(this.credentialString(datetime));
+    parts.push(this.hexEncodedHash(this.canonicalString()));
+    return parts.join('\n');
+  },
+
+  canonicalString: function canonicalString() {
+    var parts = [], pathname = this.request.pathname();
+    if (this.serviceName !== 's3') pathname = AWS.util.uriEscapePath(pathname);
+
+    parts.push(this.request.method);
+    parts.push(pathname);
+    parts.push(this.request.search());
+    parts.push(this.canonicalHeaders() + '\n');
+    parts.push(this.signedHeaders());
+    parts.push(this.hexEncodedBodyHash());
+    return parts.join('\n');
+  },
+
+  canonicalHeaders: function canonicalHeaders() {
+    var headers = [];
+    AWS.util.each.call(this, this.request.headers, function (key, item) {
+      headers.push([key, item]);
+    });
+    headers.sort(function (a, b) {
+      return a[0].toLowerCase() < b[0].toLowerCase() ? -1 : 1;
+    });
+    var parts = [];
+    AWS.util.arrayEach.call(this, headers, function (item) {
+      var key = item[0].toLowerCase();
+      if (this.isSignableHeader(key)) {
+        parts.push(key + ':' +
+          this.canonicalHeaderValues(item[1].toString()));
+      }
+    });
+    return parts.join('\n');
+  },
+
+  canonicalHeaderValues: function canonicalHeaderValues(values) {
+    return values.replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '');
+  },
+
+  signedHeaders: function signedHeaders() {
+    var keys = [];
+    AWS.util.each.call(this, this.request.headers, function (key) {
+      key = key.toLowerCase();
+      if (this.isSignableHeader(key)) keys.push(key);
+    });
+    return keys.sort().join(';');
+  },
+
+  credentialString: function credentialString(datetime) {
+    var parts = [];
+    parts.push(datetime.substr(0, 8));
+    parts.push(this.request.region);
+    parts.push(this.serviceName);
+    parts.push('aws4_request');
+    return parts.join('/');
+  },
+
+  hexEncodedHash: function hash(string) {
+    return AWS.util.crypto.sha256(string, 'hex');
+  },
+
+  hexEncodedBodyHash: function hexEncodedBodyHash() {
+    if (this.isPresigned() && this.serviceName === 's3') {
+      return 'UNSIGNED-PAYLOAD';
+    } else if (this.request.headers['X-Amz-Content-Sha256']) {
+      return this.request.headers['X-Amz-Content-Sha256'];
+    } else {
+      return this.hexEncodedHash(this.request.body || '');
+    }
+  },
+
+  unsignableHeaders: ['authorization', 'content-type', 'content-length',
+                      'user-agent', expiresHeader],
+
+  isSignableHeader: function isSignableHeader(key) {
+    if (key.toLowerCase().indexOf('x-amz-') === 0) return true;
+    return this.unsignableHeaders.indexOf(key) < 0;
+  },
+
+  isPresigned: function isPresigned() {
+    return this.request.headers[expiresHeader] ? true : false;
+  }
+
+});
+
+module.exports = AWS.Signers.V4;
+
+},{"../core":3}],42:[function(require,module,exports){
+function AcceptorStateMachine(states, state) {
+  this.currentState = state || null;
+  this.states = states || {};
+}
+
+AcceptorStateMachine.prototype.runTo = function runTo(finalState, done, bindObject, inputError) {
+  if (typeof finalState === 'function') {
+    inputError = bindObject; bindObject = done;
+    done = finalState; finalState = null;
+  }
+
+  var self = this;
+  var state = self.states[self.currentState];
+  state.fn.call(bindObject || self, inputError, function(err) {
+    if (err) {
+      if (state.fail) self.currentState = state.fail;
+      else return done ? done.call(bindObject, err) : null;
+    } else {
+      if (state.accept) self.currentState = state.accept;
+      else return done ? done.call(bindObject) : null;
+    }
+    if (self.currentState === finalState) {
+      return done ? done.call(bindObject, err) : null;
+    }
+
+    self.runTo(finalState, done, bindObject, err);
+  });
+};
+
+AcceptorStateMachine.prototype.addState = function addState(name, acceptState, failState, fn) {
+  if (typeof acceptState === 'function') {
+    fn = acceptState; acceptState = null; failState = null;
+  } else if (typeof failState === 'function') {
+    fn = failState; failState = null;
+  }
+
+  if (!this.currentState) this.currentState = name;
+  this.states[name] = { accept: acceptState, fail: failState, fn: fn };
+  return this;
+};
+
+module.exports = AcceptorStateMachine;
+
+},{}],43:[function(require,module,exports){
+(function (process){
+
+
+var cryptoLib = require('crypto');
+var Buffer = require('buffer').Buffer;
+
+
+var util = {
+  engine: function engine() {
+    if (util.isBrowser() && typeof navigator !== 'undefined') {
+      return navigator.userAgent;
+    } else {
+      return process.platform + '/' + process.version;
+    }
+  },
+
+  userAgent: function userAgent() {
+    var name = util.isBrowser() ? 'js' : 'nodejs';
+    var agent = 'aws-sdk-' + name + '/' + require('./core').VERSION;
+    if (name === 'nodejs') agent += ' ' + util.engine();
+    return agent;
+  },
+
+  isBrowser: function isBrowser() { return process && process.browser; },
+  isNode: function isNode() { return !util.isBrowser(); },
+  nodeRequire: function nodeRequire(module) {
+    if (util.isNode()) return require(module);
+  },
+  multiRequire: function multiRequire(module1, module2) {
+    return require(util.isNode() ? module1 : module2);
+  },
+
+  uriEscape: function uriEscape(string) {
+    var output = encodeURIComponent(string);
+    output = output.replace(/[^A-Za-z0-9_.~\-%]+/g, escape);
+
+    output = output.replace(/[*]/g, function(ch) {
+      return '%' + ch.charCodeAt(0).toString(16).toUpperCase();
+    });
+
+    return output;
+  },
+
+  uriEscapePath: function uriEscapePath(string) {
+    var parts = [];
+    util.arrayEach(string.split('/'), function (part) {
+      parts.push(util.uriEscape(part));
+    });
+    return parts.join('/');
+  },
+
+  urlParse: function urlParse(url) {
+    return require('url').parse(url);
+  },
+
+  urlFormat: function urlFormat(url) {
+    return require('url').format(url);
+  },
+
+  queryStringParse: function queryStringParse(qs) {
+    return require('querystring').parse(qs);
+  },
+
+  queryParamsToString: function queryParamsToString(params) {
+    var items = [];
+    var escape = util.uriEscape;
+    var sortedKeys = Object.keys(params).sort();
+
+    util.arrayEach(sortedKeys, function(name) {
+      var value = params[name];
+      var ename = escape(name);
+      var result = ename + '=';
+      if (Array.isArray(value)) {
+        var vals = [];
+        util.arrayEach(value, function(item) { vals.push(escape(item)); });
+        result = ename + '=' + vals.sort().join('&' + ename + '=');
+      } else if (value !== undefined && value !== null) {
+        result = ename + '=' + escape(value);
+      }
+      items.push(result);
+    });
+
+    return items.join('&');
+  },
+
+  readFileSync: function readFileSync(path) {
+    if (typeof window !== 'undefined') return null;
+    return util.nodeRequire('fs').readFileSync(path, 'utf-8');
+  },
+
+  base64: {
+
+    encode: function encode64(string) {
+      return new Buffer(string).toString('base64');
+    },
+
+    decode: function decode64(string) {
+      return new Buffer(string, 'base64');
+    }
+
+  },
+
+  Buffer: Buffer,
+
+  buffer: {
+
+    concat: function(buffers) {
+      var length = 0,
+          offset = 0,
+          buffer = null, i;
+
+      for (i = 0; i < buffers.length; i++) {
+        length += buffers[i].length;
+      }
+
+      buffer = new Buffer(length);
+
+      for (i = 0; i < buffers.length; i++) {
+        buffers[i].copy(buffer, offset);
+        offset += buffers[i].length;
+      }
+
+      return buffer;
+    }
+  },
+
+  string: {
+    byteLength: function byteLength(string) {
+      if (string === null || string === undefined) return 0;
+      if (typeof string === 'string') string = new Buffer(string);
+
+      if (typeof string.byteLength === 'number') {
+        return string.byteLength;
+      } else if (typeof string.length === 'number') {
+        return string.length;
+      } else if (typeof string.size === 'number') {
+        return string.size;
+      } else if (typeof string.path === 'string') {
+        return util.nodeRequire('fs').lstatSync(string.path).size;
+      } else {
+        throw util.error(new Error('Cannot determine length of ' + string),
+          { object: string });
+      }
+    },
+
+    upperFirst: function upperFirst(string) {
+      return string[0].toUpperCase() + string.substr(1);
+    },
+
+    lowerFirst: function lowerFirst(string) {
+      return string[0].toLowerCase() + string.substr(1);
+    }
+  },
+
+  ini: {
+    parse: function string(ini) {
+      var currentSection, map = {};
+      util.arrayEach(ini.split(/\r?\n/), function(line) {
+        line = line.split(/(^|\s);/)[0]; // remove comments
+        var section = line.match(/^\s*\[([^\[\]]+)\]\s*$/);
+        if (section) {
+          currentSection = section[1];
+        } else if (currentSection) {
+          var item = line.match(/^\s*(.+?)\s*=\s*(.+)\s*$/);
+          if (item) {
+            map[currentSection] = map[currentSection] || {};
+            map[currentSection][item[1]] = item[2];
+          }
+        }
+      });
+
+      return map;
+    }
+  },
+
+  fn: {
+    noop: function(){},
+
+
+    makeAsync: function makeAsync(fn, expectedArgs) {
+      if (expectedArgs && expectedArgs <= fn.length) {
+        return fn;
+      }
+
+      return function() {
+        var args = Array.prototype.slice.call(arguments, 0);
+        var callback = args.pop();
+        var result = fn.apply(null, args);
+        callback(result);
+      };
+    }
+  },
+
+  jamespath: {
+    query: function query(expression, data) {
+      if (!data) return [];
+
+      var results = [];
+      var expressions = expression.split(/\s+or\s+/);
+      util.arrayEach.call(this, expressions, function (expr) {
+        var objects = [data];
+        var tokens = expr.split('.');
+        util.arrayEach.call(this, tokens, function (token) {
+          var match = token.match('^(.+?)(?:\\[(-?\\d+|\\*|)\\])?$');
+          var newObjects = [];
+          util.arrayEach.call(this, objects, function (obj) {
+            if (match[1] === '*') {
+              util.arrayEach.call(this, obj, function (value) {
+                newObjects.push(value);
+              });
+            } else if (obj.hasOwnProperty(match[1])) {
+              newObjects.push(obj[match[1]]);
+            }
+          });
+          objects = newObjects;
+
+          if (match[2] !== undefined) {
+            newObjects = [];
+            util.arrayEach.call(this, objects, function (obj) {
+              if (Array.isArray(obj)) {
+                if (match[2] === '*' || match[2] === '') {
+                  newObjects = newObjects.concat(obj);
+                } else {
+                  var idx = parseInt(match[2], 10);
+                  if (idx < 0) idx = obj.length + idx; // negative indexing
+                  newObjects.push(obj[idx]);
+                }
+              }
+            });
+            objects = newObjects;
+          }
+
+          if (objects.length === 0) return util.abort;
+        });
+
+        if (objects.length > 0) {
+          results = objects;
+          return util.abort;
+        }
+      });
+
+      return results;
+    },
+
+    find: function find(expression, data) {
+      return util.jamespath.query(expression, data)[0];
+    }
+  },
+
+
+  date: {
+
+
+    getDate: function getDate() { return new Date(); },
+
+
+    iso8601: function iso8601(date) {
+      if (date === undefined) { date = util.date.getDate(); }
+      return date.toISOString();
+    },
+
+
+    rfc822: function rfc822(date) {
+      if (date === undefined) { date = util.date.getDate(); }
+      return date.toUTCString();
+    },
+
+
+    unixTimestamp: function unixTimestamp(date) {
+      if (date === undefined) { date = util.date.getDate(); }
+      return date.getTime() / 1000;
+    },
+
+
+    from: function format(date) {
+      if (typeof date === 'number') {
+        return new Date(date * 1000); // unix timestamp
+      } else {
+        return new Date(date);
+      }
+    },
+
+
+    format: function format(date, formatter) {
+      if (!formatter) formatter = 'iso8601';
+      return util.date[formatter](util.date.from(date));
+    },
+
+    parseTimestamp: function parseTimestamp(value) {
+      if (typeof value === 'number') { // unix timestamp (number)
+        return new Date(value * 1000);
+      } else if (value.match(/^\d+$/)) { // unix timestamp
+        return new Date(value * 1000);
+      } else if (value.match(/^\d{4}/)) { // iso8601
+        return new Date(value);
+      } else if (value.match(/^\w{3},/)) { // rfc822
+        return new Date(value);
+      } else {
+        throw util.error(
+          new Error('unhandled timestamp format: ' + value),
+          {code: 'TimestampParserError'});
+      }
+    }
+
+  },
+
+  crypto: {
+    crc32Table: [
+     0x00000000, 0x77073096, 0xEE0E612C, 0x990951BA, 0x076DC419,
+     0x706AF48F, 0xE963A535, 0x9E6495A3, 0x0EDB8832, 0x79DCB8A4,
+     0xE0D5E91E, 0x97D2D988, 0x09B64C2B, 0x7EB17CBD, 0xE7B82D07,
+     0x90BF1D91, 0x1DB71064, 0x6AB020F2, 0xF3B97148, 0x84BE41DE,
+     0x1ADAD47D, 0x6DDDE4EB, 0xF4D4B551, 0x83D385C7, 0x136C9856,
+     0x646BA8C0, 0xFD62F97A, 0x8A65C9EC, 0x14015C4F, 0x63066CD9,
+     0xFA0F3D63, 0x8D080DF5, 0x3B6E20C8, 0x4C69105E, 0xD56041E4,
+     0xA2677172, 0x3C03E4D1, 0x4B04D447, 0xD20D85FD, 0xA50AB56B,
+     0x35B5A8FA, 0x42B2986C, 0xDBBBC9D6, 0xACBCF940, 0x32D86CE3,
+     0x45DF5C75, 0xDCD60DCF, 0xABD13D59, 0x26D930AC, 0x51DE003A,
+     0xC8D75180, 0xBFD06116, 0x21B4F4B5, 0x56B3C423, 0xCFBA9599,
+     0xB8BDA50F, 0x2802B89E, 0x5F058808, 0xC60CD9B2, 0xB10BE924,
+     0x2F6F7C87, 0x58684C11, 0xC1611DAB, 0xB6662D3D, 0x76DC4190,
+     0x01DB7106, 0x98D220BC, 0xEFD5102A, 0x71B18589, 0x06B6B51F,
+     0x9FBFE4A5, 0xE8B8D433, 0x7807C9A2, 0x0F00F934, 0x9609A88E,
+     0xE10E9818, 0x7F6A0DBB, 0x086D3D2D, 0x91646C97, 0xE6635C01,
+     0x6B6B51F4, 0x1C6C6162, 0x856530D8, 0xF262004E, 0x6C0695ED,
+     0x1B01A57B, 0x8208F4C1, 0xF50FC457, 0x65B0D9C6, 0x12B7E950,
+     0x8BBEB8EA, 0xFCB9887C, 0x62DD1DDF, 0x15DA2D49, 0x8CD37CF3,
+     0xFBD44C65, 0x4DB26158, 0x3AB551CE, 0xA3BC0074, 0xD4BB30E2,
+     0x4ADFA541, 0x3DD895D7, 0xA4D1C46D, 0xD3D6F4FB, 0x4369E96A,
+     0x346ED9FC, 0xAD678846, 0xDA60B8D0, 0x44042D73, 0x33031DE5,
+     0xAA0A4C5F, 0xDD0D7CC9, 0x5005713C, 0x270241AA, 0xBE0B1010,
+     0xC90C2086, 0x5768B525, 0x206F85B3, 0xB966D409, 0xCE61E49F,
+     0x5EDEF90E, 0x29D9C998, 0xB0D09822, 0xC7D7A8B4, 0x59B33D17,
+     0x2EB40D81, 0xB7BD5C3B, 0xC0BA6CAD, 0xEDB88320, 0x9ABFB3B6,
+     0x03B6E20C, 0x74B1D29A, 0xEAD54739, 0x9DD277AF, 0x04DB2615,
+     0x73DC1683, 0xE3630B12, 0x94643B84, 0x0D6D6A3E, 0x7A6A5AA8,
+     0xE40ECF0B, 0x9309FF9D, 0x0A00AE27, 0x7D079EB1, 0xF00F9344,
+     0x8708A3D2, 0x1E01F268, 0x6906C2FE, 0xF762575D, 0x806567CB,
+     0x196C3671, 0x6E6B06E7, 0xFED41B76, 0x89D32BE0, 0x10DA7A5A,
+     0x67DD4ACC, 0xF9B9DF6F, 0x8EBEEFF9, 0x17B7BE43, 0x60B08ED5,
+     0xD6D6A3E8, 0xA1D1937E, 0x38D8C2C4, 0x4FDFF252, 0xD1BB67F1,
+     0xA6BC5767, 0x3FB506DD, 0x48B2364B, 0xD80D2BDA, 0xAF0A1B4C,
+     0x36034AF6, 0x41047A60, 0xDF60EFC3, 0xA867DF55, 0x316E8EEF,
+     0x4669BE79, 0xCB61B38C, 0xBC66831A, 0x256FD2A0, 0x5268E236,
+     0xCC0C7795, 0xBB0B4703, 0x220216B9, 0x5505262F, 0xC5BA3BBE,
+     0xB2BD0B28, 0x2BB45A92, 0x5CB36A04, 0xC2D7FFA7, 0xB5D0CF31,
+     0x2CD99E8B, 0x5BDEAE1D, 0x9B64C2B0, 0xEC63F226, 0x756AA39C,
+     0x026D930A, 0x9C0906A9, 0xEB0E363F, 0x72076785, 0x05005713,
+     0x95BF4A82, 0xE2B87A14, 0x7BB12BAE, 0x0CB61B38, 0x92D28E9B,
+     0xE5D5BE0D, 0x7CDCEFB7, 0x0BDBDF21, 0x86D3D2D4, 0xF1D4E242,
+     0x68DDB3F8, 0x1FDA836E, 0x81BE16CD, 0xF6B9265B, 0x6FB077E1,
+     0x18B74777, 0x88085AE6, 0xFF0F6A70, 0x66063BCA, 0x11010B5C,
+     0x8F659EFF, 0xF862AE69, 0x616BFFD3, 0x166CCF45, 0xA00AE278,
+     0xD70DD2EE, 0x4E048354, 0x3903B3C2, 0xA7672661, 0xD06016F7,
+     0x4969474D, 0x3E6E77DB, 0xAED16A4A, 0xD9D65ADC, 0x40DF0B66,
+     0x37D83BF0, 0xA9BCAE53, 0xDEBB9EC5, 0x47B2CF7F, 0x30B5FFE9,
+     0xBDBDF21C, 0xCABAC28A, 0x53B39330, 0x24B4A3A6, 0xBAD03605,
+     0xCDD70693, 0x54DE5729, 0x23D967BF, 0xB3667A2E, 0xC4614AB8,
+     0x5D681B02, 0x2A6F2B94, 0xB40BBE37, 0xC30C8EA1, 0x5A05DF1B,
+     0x2D02EF8D],
+
+    crc32: function crc32(data) {
+      var tbl = util.crypto.crc32Table;
+      var crc = 0 ^ -1;
+
+      if (typeof data === 'string') {
+        data = new Buffer(data);
+      }
+
+      for (var i = 0; i < data.length; i++) {
+        var code = data.readUInt8(i);
+        crc = (crc >>> 8) ^ tbl[(crc ^ code) & 0xFF];
+      }
+      return (crc ^ -1) >>> 0;
+    },
+
+    hmac: function hmac(key, string, digest, fn) {
+      if (!digest) digest = 'binary';
+      if (digest === 'buffer') { digest = undefined; }
+      if (!fn) fn = 'sha256';
+      if (typeof string === 'string') string = new Buffer(string);
+      return cryptoLib.createHmac(fn, key).update(string).digest(digest);
+    },
+
+    md5: function md5(data, digest) {
+      if (!digest) { digest = 'binary'; }
+      if (digest === 'buffer') { digest = undefined; }
+      if (typeof data === 'string') data = new Buffer(data);
+      return util.crypto.createHash('md5').update(data).digest(digest);
+    },
+
+    sha256: function sha256(string, digest) {
+      if (!digest) { digest = 'binary'; }
+      if (digest === 'buffer') { digest = undefined; }
+      if (typeof string === 'string') string = new Buffer(string);
+      return util.crypto.createHash('sha256').update(string).digest(digest);
+    },
+
+    toHex: function toHex(data) {
+      var out = [];
+      for (var i = 0; i < data.length; i++) {
+        out.push(('0' + data.charCodeAt(i).toString(16)).substr(-2, 2));
+      }
+      return out.join('');
+    },
+
+    createHash: function createHash(algorithm) {
+      return cryptoLib.createHash(algorithm);
+    }
+
+  },
+
+
+
+
+  abort: {},
+
+  each: function each(object, iterFunction) {
+    for (var key in object) {
+      if (object.hasOwnProperty(key)) {
+        var ret = iterFunction.call(this, key, object[key]);
+        if (ret === util.abort) break;
+      }
+    }
+  },
+
+  arrayEach: function arrayEach(array, iterFunction) {
+    for (var idx in array) {
+      if (array.hasOwnProperty(idx)) {
+        var ret = iterFunction.call(this, array[idx], parseInt(idx, 10));
+        if (ret === util.abort) break;
+      }
+    }
+  },
+
+  update: function update(obj1, obj2) {
+    util.each(obj2, function iterator(key, item) {
+      obj1[key] = item;
+    });
+    return obj1;
+  },
+
+  merge: function merge(obj1, obj2) {
+    return util.update(util.copy(obj1), obj2);
+  },
+
+  copy: function copy(object) {
+    if (object === null || object === undefined) return object;
+    var dupe = {};
+    for (var key in object) {
+      dupe[key] = object[key];
+    }
+    return dupe;
+  },
+
+  isEmpty: function isEmpty(obj) {
+    for (var prop in obj) {
+      if (obj.hasOwnProperty(prop)) {
+        return false;
+      }
+    }
+    return true;
+  },
+
+  isType: function isType(obj, type) {
+    if (typeof type === 'function') type = util.typeName(type);
+    return Object.prototype.toString.call(obj) === '[object ' + type + ']';
+  },
+
+  typeName: function typeName(type) {
+    if (type.hasOwnProperty('name')) return type.name;
+    var str = type.toString();
+    var match = str.match(/^\s*function (.+)\(/);
+    return match ? match[1] : str;
+  },
+
+  error: function error(err, options) {
+    var originalError = null;
+    if (typeof err.message === 'string' && err.message !== '') {
+      if (typeof options === 'string' || (options && options.message)) {
+        originalError = util.copy(err);
+        originalError.message = err.message;
+      }
+    }
+    err.message = err.message || null;
+
+    if (typeof options === 'string') {
+      err.message = options;
+    } else {
+      util.update(err, options);
+    }
+
+    if (typeof Object.defineProperty === 'function') {
+      Object.defineProperty(err, 'name', {writable: true, enumerable: false});
+      Object.defineProperty(err, 'message', {enumerable: true});
+    }
+
+    err.name = err.name || err.code || 'Error';
+    err.time = new Date();
+
+    if (originalError) err.originalError = originalError;
+
+    return err;
+  },
+
+
+  inherit: function inherit(klass, features) {
+    var newObject = null;
+    if (features === undefined) {
+      features = klass;
+      klass = Object;
+      newObject = {};
+    } else {
+      var ctor = function ConstructorWrapper() {};
+      ctor.prototype = klass.prototype;
+      newObject = new ctor();
+    }
+
+    if (features.constructor === Object) {
+      features.constructor = function() {
+        if (klass !== Object) {
+          return klass.apply(this, arguments);
+        }
+      };
+    }
+
+    features.constructor.prototype = newObject;
+    util.update(features.constructor.prototype, features);
+    features.constructor.__super__ = klass;
+    return features.constructor;
+  },
+
+
+  mixin: function mixin() {
+    var klass = arguments[0];
+    for (var i = 1; i < arguments.length; i++) {
+      for (var prop in arguments[i].prototype) {
+        var fn = arguments[i].prototype[prop];
+        if (prop !== 'constructor') {
+          klass.prototype[prop] = fn;
+        }
+      }
+    }
+    return klass;
+  },
+
+
+  hideProperties: function hideProperties(obj, props) {
+    if (typeof Object.defineProperty !== 'function') return;
+
+    util.arrayEach(props, function (key) {
+      Object.defineProperty(obj, key, {
+        enumerable: false, writable: true, configurable: true });
+    });
+  },
+
+
+  property: function property(obj, name, value, enumerable, isValue) {
+    var opts = {
+      configurable: true,
+      enumerable: enumerable !== undefined ? enumerable : true
+    };
+    if (typeof value === 'function' && !isValue) {
+      opts.get = value;
+    }
+    else {
+      opts.value = value; opts.writable = true;
+    }
+
+    Object.defineProperty(obj, name, opts);
+  },
+
+
+  memoizedProperty: function memoizedProperty(obj, name, get, enumerable) {
+    var cachedValue = null;
+
+    util.property(obj, name, function() {
+      if (cachedValue === null) {
+        cachedValue = get();
+      }
+      return cachedValue;
+    }, enumerable);
+  }
+};
+
+module.exports = util;
+
+}).call(this,require("FWaASH"))
+},{"./core":3,"FWaASH":57,"buffer":46,"crypto":50,"querystring":61,"url":62}],44:[function(require,module,exports){
+var util = require('../util');
+var Shape = require('../model/shape');
+
+function DomXmlParser() { }
+
+DomXmlParser.prototype.parse = function(xml, shape) {
+  if (xml.replace(/^\s+/, '') === '') return {};
+
+  var result, error;
+  try {
+    if (window.DOMParser) {
+      try {
+        var parser = new DOMParser();
+        result = parser.parseFromString(xml, 'text/xml');
+      } catch (syntaxError) {
+        throw util.error(new Error('Parse error in document'),
+          {originalError: syntaxError});
+      }
+
+      if (result.documentElement === null) {
+        throw new Error('Cannot parse empty document.');
+      }
+
+      var isError = result.getElementsByTagName('parsererror')[0];
+      if (isError && (isError.parentNode === result ||
+          isError.parentNode.nodeName === 'body')) {
+        throw new Error(isError.getElementsByTagName('div')[0].textContent);
+      }
+    } else if (window.ActiveXObject) {
+      result = new window.ActiveXObject('Microsoft.XMLDOM');
+      result.async = false;
+
+      if (!result.loadXML(xml)) {
+        throw new Error('Parse error in document');
+      }
+    } else {
+      throw new Error('Cannot load XML parser');
+    }
+  } catch (e) {
+    error = e;
+  }
+
+  if (result && result.documentElement && !error) {
+    var data = parseXml(result.documentElement, shape);
+    var metadata = result.getElementsByTagName('ResponseMetadata')[0];
+    if (metadata) {
+      data.ResponseMetadata = parseXml(metadata, {});
+    }
+    return data;
+  } else if (error) {
+    throw util.error(error || new Error(), {code: 'XMLParserError'});
+  } else { // empty xml document
+    return {};
+  }
+};
+
+function parseXml(xml, shape) {
+  if (!shape) shape = {};
+  switch (shape.type) {
+    case 'structure': return parseStructure(xml, shape);
+    case 'map': return parseMap(xml, shape);
+    case 'list': return parseList(xml, shape);
+    case undefined: case null: return parseUnknown(xml);
+    default: return parseScalar(xml, shape);
+  }
+}
+
+function parseStructure(xml, shape) {
+  var data = {};
+  if (xml === null) return data;
+
+  util.each(shape.members, function(memberName, memberShape) {
+    if (memberShape.isXmlAttribute) {
+      if (xml.attributes.hasOwnProperty(memberShape.name)) {
+        var value = xml.attributes[memberShape.name].value;
+        data[memberName] = parseXml({textContent: value}, memberShape);
+      }
+    } else {
+      var xmlChild = memberShape.flattened ? xml :
+        xml.getElementsByTagName(memberShape.name)[0];
+      if (xmlChild) {
+        data[memberName] = parseXml(xmlChild, memberShape);
+      } else if (!memberShape.flattened && memberShape.type === 'list') {
+        data[memberName] = memberShape.defaultValue;
+      }
+    }
+  });
+
+  return data;
+}
+
+function parseMap(xml, shape) {
+  var data = {};
+  var xmlKey = shape.key.name || 'key';
+  var xmlValue = shape.value.name || 'value';
+  var tagName = shape.flattened ? shape.name : 'entry';
+
+  var child = xml.firstElementChild;
+  while (child) {
+    if (child.nodeName === tagName) {
+      var key = child.getElementsByTagName(xmlKey)[0].textContent;
+      var value = child.getElementsByTagName(xmlValue)[0];
+      data[key] = parseXml(value, shape.value);
+    }
+    child = child.nextElementSibling;
+  }
+  return data;
+}
+
+function parseList(xml, shape) {
+  var data = [];
+  var tagName = shape.flattened ? shape.name : (shape.member.name || 'member');
+
+  var child = xml.firstElementChild;
+  while (child) {
+    if (child.nodeName === tagName) {
+      data.push(parseXml(child, shape.member));
+    }
+    child = child.nextElementSibling;
+  }
+  return data;
+}
+
+function parseScalar(xml, shape) {
+  if (xml.getAttribute) {
+    var encoding = xml.getAttribute('encoding');
+    if (encoding === 'base64') {
+      shape = new Shape.create({type: encoding});
+    }
+  }
+
+  var text = xml.textContent;
+  if (text === '') text = null;
+  if (typeof shape.toType === 'function') {
+    return shape.toType(text);
+  } else {
+    return text;
+  }
+}
+
+function parseUnknown(xml) {
+  if (xml === undefined || xml === null) return '';
+
+  if (!xml.firstElementChild) {
+    if (xml.parentNode.parentNode === null) return {};
+    if (xml.childNodes.length === 0) return '';
+    else return xml.textContent;
+  }
+
+  var shape = {type: 'structure', members: {}};
+  var child = xml.firstElementChild;
+  while (child) {
+    var tag = child.nodeName;
+    if (shape.members.hasOwnProperty(tag)) {
+      shape.members[tag].type = 'list';
+    } else {
+      shape.members[tag] = {name: tag};
+    }
+    child = child.nextElementSibling;
+  }
+  return parseStructure(xml, shape);
+}
+
+module.exports = DomXmlParser;
+
+},{"../model/shape":20,"../util":43}],45:[function(require,module,exports){
+var util = require('../util');
+var builder = require('xmlbuilder');
+
+function XmlBuilder() { }
+
+XmlBuilder.prototype.toXML = function(params, shape, rootElement) {
+  var xml = builder.create(rootElement);
+  applyNamespaces(xml, shape);
+  serialize(xml, params, shape);
+  return xml.children.length === 0 ? '' : xml.root().toString();
+};
+
+function serialize(xml, value, shape) {
+  switch (shape.type) {
+    case 'structure': return serializeStructure(xml, value, shape);
+    case 'map': return serializeMap(xml, value, shape);
+    case 'list': return serializeList(xml, value, shape);
+    default: return serializeScalar(xml, value, shape);
+  }
+}
+
+function serializeStructure(xml, params, shape) {
+  util.arrayEach(shape.memberNames, function(memberName) {
+    var memberShape = shape.members[memberName];
+    if (memberShape.location !== 'body') return;
+
+    var value = params[memberName];
+    var name = memberShape.name;
+    if (value !== undefined && value !== null) {
+      if (memberShape.isXmlAttribute) {
+        xml.att(name, value);
+      } else if (memberShape.flattened) {
+        serialize(xml, value, memberShape);
+      } else {
+        var element = xml.ele(name);
+        applyNamespaces(element, memberShape);
+        serialize(element, value, memberShape);
+      }
+    }
+  });
+}
+
+function serializeMap(xml, map, shape) {
+  var xmlKey = shape.key.name || 'key';
+  var xmlValue = shape.value.name || 'value';
+
+  util.each(map, function(key, value) {
+    var entry = xml.ele(shape.flattened ? shape.name : 'entry');
+    serialize(entry.ele(xmlKey), key, shape.key);
+    serialize(entry.ele(xmlValue), value, shape.value);
+  });
+}
+
+function serializeList(xml, list, shape) {
+  if (shape.flattened) {
+    util.arrayEach(list, function(value) {
+      var name = shape.member.name || shape.name;
+      var element = xml.ele(name);
+      serialize(element, value, shape.member);
+    });
+  } else {
+    util.arrayEach(list, function(value) {
+      var name = shape.member.name || 'member';
+      var element = xml.ele(name);
+      serialize(element, value, shape.member);
+    });
+  }
+}
+
+function serializeScalar(xml, value, shape) {
+  xml.txt(shape.toWireFormat(value));
+}
+
+function applyNamespaces(xml, shape) {
+  var uri, prefix = 'xmlns';
+  if (shape.xmlNamespaceUri) {
+    uri = shape.xmlNamespaceUri;
+    if (shape.xmlNamespacePrefix) prefix += ':' + shape.xmlNamespacePrefix;
+  } else if (xml.isRoot && shape.api.xmlNamespaceUri) {
+    uri = shape.api.xmlNamespaceUri;
+  }
+
+  if (uri) xml.att(prefix, uri);
+}
+
+module.exports = XmlBuilder;
+
+},{"../util":43,"xmlbuilder":67}],46:[function(require,module,exports){
 
 
 var base64 = require('base64-js')
@@ -1046,7 +6175,7 @@ function assert (test, message) {
   if (!test) throw new Error(message || 'Failed assertion')
 }
 
-},{"base64-js":2,"ieee754":3}],2:[function(require,module,exports){
+},{"base64-js":47,"ieee754":48}],47:[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -1159,7 +6288,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-},{}],3:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 exports.read = function(buffer, offset, isLE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -1245,7 +6374,7 @@ exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128;
 };
 
-},{}],4:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 var Buffer = require('buffer').Buffer;
 var intSize = 4;
 var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
@@ -1282,7 +6411,7 @@ function hash(buf, fn, hashSize, bigEndian) {
 
 module.exports = { hash: hash };
 
-},{"buffer":1}],5:[function(require,module,exports){
+},{"buffer":46}],50:[function(require,module,exports){
 var Buffer = require('buffer').Buffer
 var sha = require('./sha')
 var sha256 = require('./sha256')
@@ -1380,7 +6509,7 @@ each(['createCredentials'
   }
 })
 
-},{"./md5":6,"./rng":7,"./sha":8,"./sha256":9,"buffer":1}],6:[function(require,module,exports){
+},{"./md5":51,"./rng":52,"./sha":53,"./sha256":54,"buffer":46}],51:[function(require,module,exports){
 
 
 var helpers = require('./helpers');
@@ -1527,7 +6656,7 @@ module.exports = function md5(buf) {
   return helpers.hash(buf, core_md5, 16);
 };
 
-},{"./helpers":4}],7:[function(require,module,exports){
+},{"./helpers":49}],52:[function(require,module,exports){
 (function() {
   var _global = this;
 
@@ -1557,7 +6686,7 @@ module.exports = function md5(buf) {
 
 }())
 
-},{}],8:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 
 
 var helpers = require('./helpers');
@@ -1641,7 +6770,7 @@ module.exports = function sha1(buf) {
   return helpers.hash(buf, core_sha1, 20, true);
 };
 
-},{"./helpers":4}],9:[function(require,module,exports){
+},{"./helpers":49}],54:[function(require,module,exports){
 
 
 
@@ -1716,7 +6845,7 @@ module.exports = function sha256(buf) {
   return helpers.hash(buf, core_sha256, 32, true);
 };
 
-},{"./helpers":4}],10:[function(require,module,exports){
+},{"./helpers":49}],55:[function(require,module,exports){
 
 function EventEmitter() {
   this._events = this._events || {};
@@ -1982,7 +7111,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],11:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   module.exports = function inherits(ctor, superCtor) {
     ctor.super_ = superCtor
@@ -2005,7 +7134,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],12:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 
 var process = module.exports = {};
 
@@ -2068,7 +7197,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],13:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 (function (global){
 
 ;(function(root) {
@@ -2441,7 +7570,7 @@ process.chdir = function (dir) {
 }(this));
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],14:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 
 'use strict';
 
@@ -2503,7 +7632,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],15:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 
 'use strict';
 
@@ -2570,13 +7699,13 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],16:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":14,"./encode":15}],17:[function(require,module,exports){
+},{"./decode":59,"./encode":60}],62:[function(require,module,exports){
 
 var punycode = require('punycode');
 
@@ -3143,14 +8272,14 @@ function isNullOrUndefined(arg) {
   return  arg == null;
 }
 
-},{"punycode":13,"querystring":16}],18:[function(require,module,exports){
+},{"punycode":58,"querystring":61}],63:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],19:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 (function (process,global){
 
 var formatRegExp = /%[sdj%]/g;
@@ -3669,5080 +8798,8 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-}).call(this,require("G+mPsH"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":18,"G+mPsH":12,"inherits":11}],20:[function(require,module,exports){
-var AWS = require('./core');
-
-AWS.XML.Parser = require('./xml/browser_parser');
-
-require('./http/xhr');
-
-if (typeof window !== 'undefined') window.AWS = AWS;
-
-},{"./core":22,"./http/xhr":31,"./xml/browser_parser":63}],21:[function(require,module,exports){
-var AWS = require('./core');
-require('./credentials');
-require('./credentials/credential_provider_chain');
-
-
-AWS.Config = AWS.util.inherit({
-
-
-  constructor: function Config(options) {
-    if (options === undefined) options = {};
-    options = this.extractCredentials(options);
-
-    AWS.util.each.call(this, this.keys, function (key, value) {
-      this.set(key, options[key], value);
-    });
-  },
-
-
-  update: function update(options, allowUnknownKeys) {
-    allowUnknownKeys = allowUnknownKeys || false;
-    options = this.extractCredentials(options);
-    AWS.util.each.call(this, options, function (key, value) {
-      if (allowUnknownKeys || this.keys.hasOwnProperty(key)) this[key] = value;
-    });
-  },
-
-
-  getCredentials: function getCredentials(callback) {
-    var self = this;
-
-    function finish(err) {
-      callback(err, err ? null : self.credentials);
-    }
-
-    function credError(msg, err) {
-      return new AWS.util.error(err || new Error(), {
-        code: 'CredentialsError', message: msg
-      });
-    }
-
-    function getAsyncCredentials() {
-      self.credentials.get(function(err) {
-        if (err) {
-          var msg = 'Could not load credentials from ' +
-            self.credentials.constructor.name;
-          err = credError(msg, err);
-        }
-        finish(err);
-      });
-    }
-
-    function getStaticCredentials() {
-      var err = null;
-      if (!self.credentials.accessKeyId || !self.credentials.secretAccessKey) {
-        err = credError('Missing credentials');
-      }
-      finish(err);
-    }
-
-    if (self.credentials) {
-      if (typeof self.credentials.get === 'function') {
-        getAsyncCredentials();
-      } else { // static credentials
-        getStaticCredentials();
-      }
-    } else if (self.credentialProvider) {
-      self.credentialProvider.resolve(function(err, creds) {
-        if (err) {
-          err = credError('Could not load credentials from any providers', err);
-        }
-        self.credentials = creds;
-        finish(err);
-      });
-    } else {
-      finish(credError('No credentials to load'));
-    }
-  },
-
-
-  loadFromPath: function loadFromPath(path) {
-    this.clear();
-
-    var options = JSON.parse(AWS.util.readFileSync(path));
-    var fileSystemCreds = new AWS.FileSystemCredentials(path);
-    var chain = new AWS.CredentialProviderChain();
-    chain.providers.unshift(fileSystemCreds);
-    chain.resolve(function (err, creds) {
-      if (err) throw err;
-      else options.credentials = creds;
-    });
-
-    this.constructor(options);
-
-    return this;
-  },
-
-
-  clear: function clear() {
-
-    AWS.util.each.call(this, this.keys, function (key) {
-      delete this[key];
-    });
-
-    this.set('credentials', undefined);
-    this.set('credentialProvider', undefined);
-  },
-
-
-  set: function set(property, value, defaultValue) {
-    if (value === undefined) {
-      if (defaultValue === undefined) {
-        defaultValue = this.keys[property];
-      }
-      if (typeof defaultValue === 'function') {
-        this[property] = defaultValue.call(this);
-      } else {
-        this[property] = defaultValue;
-      }
-    } else {
-      this[property] = value;
-    }
-  },
-
-
-  keys: {
-    credentials: null,
-    credentialProvider: null,
-    region: null,
-    logger: null,
-    apiVersions: {},
-    apiVersion: null,
-    endpoint: undefined,
-    httpOptions: {},
-    maxRetries: undefined,
-    maxRedirects: 10,
-    paramValidation: true,
-    sslEnabled: true,
-    s3ForcePathStyle: false,
-    computeChecksums: true,
-    convertResponseTypes: true,
-    dynamoDbCrc32: true,
-    signatureVersion: null
-  },
-
-
-  extractCredentials: function extractCredentials(options) {
-    if (options.accessKeyId && options.secretAccessKey) {
-      options = AWS.util.copy(options);
-      options.credentials = new AWS.Credentials(options);
-    }
-    return options;
-  }
-});
-
-
-AWS.config = new AWS.Config();
-
-},{"./core":22,"./credentials":23,"./credentials/credential_provider_chain":25}],22:[function(require,module,exports){
-
-var AWS = { util: require('./util') };
-
-
-var _hidden = {}; _hidden.toString(); // hack to parse macro
-
-module.exports = AWS;
-
-AWS.util.update(AWS, {
-
-
-  VERSION: '2.0.15',
-
-
-  Signers: {},
-
-
-  Protocol: {
-    Json: require('./protocol/json'),
-    Query: require('./protocol/query'),
-    Rest: require('./protocol/rest'),
-    RestJson: require('./protocol/rest_json'),
-    RestXml: require('./protocol/rest_xml')
-  },
-
-
-  XML: {
-    Builder: require('./xml/builder'),
-    Parser: null // conditionally set based on environment
-  },
-
-
-  JSON: {
-    Builder: require('./json/builder'),
-    Parser: require('./json/parser')
-  },
-
-
-  Model: {
-    Api: require('./model/api'),
-    Operation: require('./model/operation'),
-    Shape: require('./model/shape'),
-    Paginator: require('./model/paginator'),
-    ResourceWaiter: require('./model/resource_waiter')
-  },
-
-  util: require('./util')
-});
-
-require('./service');
-
-require('./credentials');
-require('./credentials/credential_provider_chain');
-require('./credentials/temporary_credentials');
-require('./credentials/web_identity_credentials');
-require('./credentials/cognito_identity_credentials');
-require('./credentials/saml_credentials');
-
-require('./config');
-require('./http');
-require('./sequential_executor');
-require('./event_listeners');
-require('./request');
-require('./response');
-require('./resource_waiter');
-require('./signers/request_signer');
-require('./param_validator');
-
-
-AWS.events = new AWS.SequentialExecutor();
-
-},{"./config":21,"./credentials":23,"./credentials/cognito_identity_credentials":24,"./credentials/credential_provider_chain":25,"./credentials/saml_credentials":26,"./credentials/temporary_credentials":27,"./credentials/web_identity_credentials":28,"./event_listeners":29,"./http":30,"./json/builder":32,"./json/parser":33,"./model/api":34,"./model/operation":36,"./model/paginator":37,"./model/resource_waiter":38,"./model/shape":39,"./param_validator":40,"./protocol/json":41,"./protocol/query":42,"./protocol/rest":43,"./protocol/rest_json":44,"./protocol/rest_xml":45,"./request":49,"./resource_waiter":50,"./response":51,"./sequential_executor":52,"./service":53,"./signers/request_signer":55,"./util":62,"./xml/builder":64}],23:[function(require,module,exports){
-var AWS = require('./core');
-
-
-AWS.Credentials = AWS.util.inherit({
-
-  constructor: function Credentials() {
-    AWS.util.hideProperties(this, ['secretAccessKey']);
-
-    this.expired = false;
-    this.expireTime = null;
-    if (arguments.length === 1 && typeof arguments[0] === 'object') {
-      var creds = arguments[0].credentials || arguments[0];
-      this.accessKeyId = creds.accessKeyId;
-      this.secretAccessKey = creds.secretAccessKey;
-      this.sessionToken = creds.sessionToken;
-    } else {
-      this.accessKeyId = arguments[0];
-      this.secretAccessKey = arguments[1];
-      this.sessionToken = arguments[2];
-    }
-  },
-
-
-  expiryWindow: 15,
-
-
-  needsRefresh: function needsRefresh() {
-    var currentTime = AWS.util.date.getDate().getTime();
-    var adjustedTime = new Date(currentTime + this.expiryWindow * 1000);
-
-    if (this.expireTime && adjustedTime > this.expireTime) {
-      return true;
-    } else {
-      return this.expired || !this.accessKeyId || !this.secretAccessKey;
-    }
-  },
-
-
-  get: function get(callback) {
-    var self = this;
-    if (this.needsRefresh()) {
-      this.refresh(function(err) {
-        if (!err) self.expired = false; // reset expired flag
-        if (callback) callback(err);
-      });
-    } else if (callback) {
-      callback();
-    }
-  },
-
-
-  refresh: function refresh(callback) {
-    this.expired = false;
-    callback();
-  }
-});
-
-},{"./core":22}],24:[function(require,module,exports){
-var AWS = require('../core');
-
-
-AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
-
-  localStorageKey: {
-    id: 'aws.cognito.identity-id',
-    providers: 'aws.cognito.identity-providers'
-  },
-
-
-  constructor: function CognitoIdentityCredentials(params) {
-    AWS.Credentials.call(this);
-    this.expired = true;
-    this.webIdentityCredentials = new AWS.WebIdentityCredentials(params);
-    this.cognito = new AWS.CognitoIdentity({params: params});
-    this.sts = new AWS.STS();
-    this.params = params;
-    this.data = null;
-    this.identityId = null;
-    this.loadCachedId();
-  },
-
-
-  refresh: function refresh(callback) {
-    var self = this;
-    self.data = null;
-    self.identityId = null;
-    self.getId(function(err) {
-      if (!err) {
-        self.cognito.getOpenIdToken(function(cogErr, data) {
-          if (!cogErr) {
-            self.cacheId(data);
-            self.params.WebIdentityToken = data.Token;
-            self.webIdentityCredentials.refresh(function(webErr) {
-              if (!webErr) {
-                self.data = self.webIdentityCredentials.data;
-                self.sts.credentialsFrom(self.data, self);
-              }
-              callback(webErr);
-            });
-          } else {
-            callback(cogErr);
-          }
-        });
-      } else {
-        callback(err);
-      }
-    });
-  },
-
-
-  getId: function getId(callback) {
-    var self = this;
-    if (typeof self.params.IdentityId === 'string') return callback();
-
-    self.cognito.getId(function(err, data) {
-      if (!err && data.IdentityId) {
-        self.params.IdentityId = data.IdentityId;
-      }
-      callback(err, data);
-    });
-  },
-
-
-  loadCachedId: function loadCachedId() {
-    var self = this;
-
-    if (AWS.util.isBrowser() && !self.params.IdentityId) {
-      var storage = window.localStorage;
-      var id = storage[self.localStorageKey.id];
-      if (id && self.params.Logins) {
-        var actualProviders = Object.keys(self.params.Logins);
-        var cachedProviders =
-          (storage[self.localStorageKey.providers] || '').split(',');
-
-        var intersect = cachedProviders.filter(function(n) {
-          return actualProviders.indexOf(n) !== -1;
-        });
-        if (intersect.length !== 0) {
-          self.params.IdentityId = id;
-        }
-      } else if (id) {
-        self.params.IdentityId = id;
-      }
-    }
-  },
-
-
-  cacheId: function cacheId(data) {
-    this.identityId = data.IdentityId;
-    this.params.IdentityId = this.identityId;
-
-    if (AWS.util.isBrowser()) {
-      var storage = window.localStorage;
-      storage[this.localStorageKey.id] = data.IdentityId;
-
-      if (this.params.Logins) {
-        storage[this.localStorageKey.providers] =
-          Object.keys(this.params.Logins).join(',');
-      }
-    }
-  }
-});
-
-},{"../core":22}],25:[function(require,module,exports){
-var AWS = require('../core');
-
-
-AWS.CredentialProviderChain = AWS.util.inherit(AWS.Credentials, {
-
-
-  constructor: function CredentialProviderChain(providers) {
-    if (providers) {
-      this.providers = providers;
-    } else {
-      this.providers = AWS.CredentialProviderChain.defaultProviders.slice(0);
-    }
-  },
-
-
-  resolve: function resolve(callback) {
-    if (this.providers.length === 0) {
-      callback(new Error('No providers'));
-      return this;
-    }
-
-    var index = 0;
-    var providers = this.providers.slice(0);
-
-    function resolveNext(err, creds) {
-      if ((!err && creds) || index === providers.length) {
-        callback(err, creds);
-        return;
-      }
-
-      var provider = providers[index++];
-      if (typeof provider === 'function') {
-        creds = provider.call();
-      } else {
-        creds = provider;
-      }
-
-      if (creds.get) {
-        creds.get(function(err) {
-          resolveNext(err, err ? null : creds);
-        });
-      } else {
-        resolveNext(null, creds);
-      }
-    }
-
-    resolveNext();
-    return this;
-  }
-
-});
-
-
-AWS.CredentialProviderChain.defaultProviders = [];
-
-},{"../core":22}],26:[function(require,module,exports){
-var AWS = require('../core');
-
-
-AWS.SAMLCredentials = AWS.util.inherit(AWS.Credentials, {
-
-  constructor: function SAMLCredentials(params) {
-    AWS.Credentials.call(this);
-    this.expired = true;
-    this.params = params;
-    this.service = new AWS.STS({params: this.params});
-  },
-
-
-  refresh: function refresh(callback) {
-    var self = this;
-    if (!callback) callback = function(err) { if (err) throw err; };
-
-    self.service.assumeRoleWithSAML(function (err, data) {
-      if (!err) {
-        self.service.credentialsFrom(data, self);
-      }
-      callback(err);
-    });
-  }
-});
-
-},{"../core":22}],27:[function(require,module,exports){
-var AWS = require('../core');
-
-
-AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
-
-  constructor: function TemporaryCredentials(params) {
-    AWS.Credentials.call(this);
-    this.loadMasterCredentials();
-    this.expired = true;
-
-    this.params = params || {};
-    if (this.params.RoleArn) {
-      this.params.RoleSessionName =
-        this.params.RoleSessionName || 'temporary-credentials';
-    }
-    this.service = new AWS.STS({params: this.params});
-  },
-
-
-  refresh: function refresh(callback) {
-    var self = this;
-    if (!callback) callback = function(err) { if (err) throw err; };
-
-    self.service.config.credentials = self.masterCredentials;
-    var operation = self.params.RoleArn ?
-      self.service.assumeRole : self.service.getSessionToken;
-    operation.call(self.service, function (err, data) {
-      if (!err) {
-        self.service.credentialsFrom(data, self);
-      }
-      callback(err);
-    });
-  },
-
-
-  loadMasterCredentials: function loadMasterCredentials() {
-    this.masterCredentials = AWS.config.credentials;
-    while (this.masterCredentials.masterCredentials) {
-      this.masterCredentials = this.masterCredentials.masterCredentials;
-    }
-  }
-});
-
-},{"../core":22}],28:[function(require,module,exports){
-var AWS = require('../core');
-
-
-AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
-
-  constructor: function WebIdentityCredentials(params) {
-    AWS.Credentials.call(this);
-    this.expired = true;
-    this.params = params;
-    this.params.RoleSessionName = this.params.RoleSessionName || 'web-identity';
-    this.service = new AWS.STS({params: this.params});
-    this.data = null;
-  },
-
-
-  refresh: function refresh(callback) {
-    var self = this;
-    if (!callback) callback = function(err) { if (err) throw err; };
-
-    self.service.assumeRoleWithWebIdentity(function (err, data) {
-      self.data = null;
-      if (!err) {
-        self.data = data;
-        self.service.credentialsFrom(data, self);
-      }
-      callback(err);
-    });
-  }
-});
-
-},{"../core":22}],29:[function(require,module,exports){
-var AWS = require('./core');
-var SequentialExecutor = require('./sequential_executor');
-
-
-AWS.EventListeners = {
-
-  Core: {} /* doc hack */
-};
-
-AWS.EventListeners = {
-  Core: new SequentialExecutor().addNamedListeners(function(add, addAsync) {
-    addAsync('VALIDATE_CREDENTIALS', 'validate',
-        function VALIDATE_CREDENTIALS(req, done) {
-      if (!req.service.api.signatureVersion) return done(); // none
-      req.service.config.getCredentials(function(err) {
-        if (err) {
-          req.response.error = AWS.util.error(err,
-            {code: 'CredentialsError', message: 'Missing credentials in config'});
-        }
-        done();
-      });
-    });
-
-    add('VALIDATE_REGION', 'validate', function VALIDATE_REGION(req) {
-      if (!req.service.config.region && !req.service.isGlobalEndpoint) {
-        req.response.error = AWS.util.error(new Error(),
-          {code: 'ConfigError', message: 'Missing region in config'});
-      }
-    });
-
-    add('VALIDATE_PARAMETERS', 'validate', function VALIDATE_PARAMETERS(req) {
-      var rules = req.service.api.operations[req.operation].input;
-      new AWS.ParamValidator().validate(rules, req.params);
-    });
-
-    add('SET_CONTENT_LENGTH', 'afterBuild', function SET_CONTENT_LENGTH(req) {
-      if (req.httpRequest.headers['Content-Length'] === undefined) {
-        var length = AWS.util.string.byteLength(req.httpRequest.body);
-        req.httpRequest.headers['Content-Length'] = length;
-      }
-    });
-
-    add('SET_HTTP_HOST', 'afterBuild', function SET_HTTP_HOST(req) {
-      req.httpRequest.headers['Host'] = req.httpRequest.endpoint.host;
-    });
-
-    add('RESTART', 'restart', function RESTART(req) {
-      var err = this.response.error;
-      if (!err || !err.retryable) return;
-
-      if (this.response.retryCount < this.service.config.maxRetries) {
-        this.response.retryCount++;
-      } else {
-        this.response.error = null;
-      }
-    });
-
-    addAsync('SIGN', 'sign', function SIGN(req, done) {
-      if (!req.service.api.signatureVersion) return done(); // none
-
-      req.service.config.getCredentials(function (err, credentials) {
-        if (err) {
-          req.response.error = err;
-          return done();
-        }
-
-        try {
-          var date = AWS.util.date.getDate();
-          var SignerClass = req.service.getSignerClass(req);
-          var signer = new SignerClass(req.httpRequest,
-            req.service.api.signingName || req.service.api.endpointPrefix);
-
-          delete req.httpRequest.headers['Authorization'];
-          delete req.httpRequest.headers['Date'];
-          delete req.httpRequest.headers['X-Amz-Date'];
-
-          signer.addAuthorization(credentials, date);
-          req.signedAt = date;
-        } catch (e) {
-          req.response.error = e;
-        }
-        done();
-      });
-    });
-
-    add('VALIDATE_RESPONSE', 'validateResponse', function VALIDATE_RESPONSE(resp) {
-      if (this.service.successfulResponse(resp, this)) {
-        resp.data = {};
-        resp.error = null;
-      } else {
-        resp.data = null;
-        resp.error = AWS.util.error(new Error(),
-          {code: 'UnknownError', message: 'An unknown error occurred.'});
-      }
-    });
-
-    addAsync('SEND', 'send', function SEND(resp, done) {
-      resp.httpResponse._abortCallback = done;
-      resp.error = null;
-      resp.data = null;
-
-      function callback(httpResp) {
-        resp.httpResponse.stream = httpResp;
-
-        httpResp.on('headers', function onHeaders(statusCode, headers) {
-          resp.request.emit('httpHeaders', [statusCode, headers, resp]);
-
-          if (!resp.request.httpRequest._streaming) {
-            if (AWS.HttpClient.streamsApiVersion === 2) { // streams2 API check
-              httpResp.on('readable', function onReadable() {
-                var data = httpResp.read();
-                if (data !== null) {
-                  resp.request.emit('httpData', [data, resp]);
-                }
-              });
-            } else { // legacy streams API
-              httpResp.on('data', function onData(data) {
-                resp.request.emit('httpData', [data, resp]);
-              });
-            }
-          }
-        });
-
-        httpResp.on('end', function onEnd() {
-          resp.request.emit('httpDone');
-          done();
-        });
-      }
-
-      function progress(httpResp) {
-        httpResp.on('sendProgress', function onSendProgress(progress) {
-          resp.request.emit('httpUploadProgress', [progress, resp]);
-        });
-
-        httpResp.on('receiveProgress', function onReceiveProgress(progress) {
-          resp.request.emit('httpDownloadProgress', [progress, resp]);
-        });
-      }
-
-      function error(err) {
-        resp.error = AWS.util.error(err, {
-          code: 'NetworkingError',
-          region: resp.request.httpRequest.region,
-          hostname: resp.request.httpRequest.endpoint.hostname,
-          retryable: true
-        });
-        resp.request.emit('httpError', [resp.error, resp], function() {
-          done();
-        });
-      }
-
-      function executeSend() {
-        var http = AWS.HttpClient.getInstance();
-        var httpOptions = resp.request.service.config.httpOptions || {};
-        try {
-          var stream = http.handleRequest(resp.request.httpRequest, httpOptions,
-                                          callback, error);
-          progress(stream);
-        } catch (err) {
-          error(err);
-        } 
-      }
-
-      var timeDiff = (AWS.util.date.getDate() - this.signedAt) / 1000;
-      if (timeDiff >= 60 * 10) { // if we signed 10min ago, re-sign
-        this.emit('sign', [this], function(err) {
-          if (err) done(err);
-          else executeSend();
-        });
-      } else {
-        executeSend();
-      }
-    });
-
-    add('HTTP_HEADERS', 'httpHeaders',
-        function HTTP_HEADERS(statusCode, headers, resp) {
-      resp.httpResponse.statusCode = statusCode;
-      resp.httpResponse.headers = headers;
-      resp.httpResponse.body = new AWS.util.Buffer('');
-      resp.httpResponse.buffers = [];
-      resp.httpResponse.numBytes = 0;
-    });
-
-    add('HTTP_DATA', 'httpData', function HTTP_DATA(chunk, resp) {
-      if (chunk) {
-        if (AWS.util.isNode()) {
-          resp.httpResponse.numBytes += chunk.length;
-
-          var total = resp.httpResponse.headers['content-length'];
-          var progress = { loaded: resp.httpResponse.numBytes, total: total };
-          resp.request.emit('httpDownloadProgress', [progress, resp]);
-        }
-
-        resp.httpResponse.buffers.push(new AWS.util.Buffer(chunk));
-      }
-    });
-
-    add('HTTP_DONE', 'httpDone', function HTTP_DONE(resp) {
-      if (resp.httpResponse.buffers && resp.httpResponse.buffers.length > 0) {
-        var body = AWS.util.buffer.concat(resp.httpResponse.buffers);
-        resp.httpResponse.body = body;
-      }
-      delete resp.httpResponse.numBytes;
-      delete resp.httpResponse.buffers;
-    });
-
-    add('FINALIZE_ERROR', 'retry', function FINALIZE_ERROR(resp) {
-      if (resp.httpResponse.statusCode) {
-        resp.error.statusCode = resp.httpResponse.statusCode;
-        if (resp.error.retryable === undefined) {
-          resp.error.retryable = this.service.retryableError(resp.error, this);
-        }
-      }
-    });
-
-    add('INVALIDATE_CREDENTIALS', 'retry', function INVALIDATE_CREDENTIALS(resp) {
-      if (!resp.error) return;
-      switch (resp.error.code) {
-        case 'RequestExpired': // EC2 only
-        case 'ExpiredTokenException':
-        case 'ExpiredToken':
-          resp.error.retryable = true;
-          resp.request.service.config.credentials.expired = true;
-      }
-    });
-
-    add('REDIRECT', 'retry', function REDIRECT(resp) {
-      if (resp.error && resp.error.statusCode >= 300 &&
-          resp.error.statusCode < 400 && resp.httpResponse.headers['location']) {
-        this.httpRequest.endpoint =
-          new AWS.Endpoint(resp.httpResponse.headers['location']);
-        resp.error.redirect = true;
-        resp.error.retryable = true;
-      }
-    });
-
-    add('RETRY_CHECK', 'retry', function RETRY_CHECK(resp) {
-      if (resp.error) {
-        if (resp.error.redirect && resp.redirectCount < resp.maxRedirects) {
-          resp.error.retryDelay = 0;
-        } else if (resp.error.retryable && resp.retryCount < resp.maxRetries) {
-          var delays = this.service.retryDelays();
-          resp.error.retryDelay = delays[resp.retryCount] || 0;
-        }
-      }
-    });
-
-    addAsync('RESET_RETRY_STATE', 'afterRetry', function RESET_RETRY_STATE(resp, done) {
-      var delay, willRetry = false;
-
-      if (resp.error) {
-        delay = resp.error.retryDelay || 0;
-        if (resp.error.retryable && resp.retryCount < resp.maxRetries) {
-          resp.retryCount++;
-          willRetry = true;
-        } else if (resp.error.redirect && resp.redirectCount < resp.maxRedirects) {
-          resp.redirectCount++;
-          willRetry = true;
-        }
-      }
-
-      if (willRetry) {
-        resp.error = null;
-        setTimeout(done, delay);
-      } else {
-        done();
-      }
-    });
-  }),
-
-  CorePost: new SequentialExecutor().addNamedListeners(function(add) {
-    add('EXTRACT_REQUEST_ID', 'extractData', function EXTRACT_REQUEST_ID(resp) {
-      resp.requestId = resp.httpResponse.headers['x-amz-request-id'] ||
-                       resp.httpResponse.headers['x-amzn-requestid'];
-
-      if (!resp.requestId && resp.data && resp.data.ResponseMetadata) {
-        resp.requestId = resp.data.ResponseMetadata.RequestId;
-      }
-    });
-  }),
-
-  Logger: new SequentialExecutor().addNamedListeners(function(add) {
-    add('LOG_REQUEST', 'complete', function LOG_REQUEST(resp) {
-      var req = resp.request;
-      var logger = req.service.config.logger;
-      if (!logger) return;
-
-      function buildMessage() {
-        var time = AWS.util.date.getDate().getTime();
-        var delta = (time - req.startTime.getTime()) / 1000;
-        var ansi = logger.isTTY ? true : false;
-        var status = resp.httpResponse.statusCode;
-        var params = require('util').inspect(req.params, true, true);
-
-        var message = '';
-        if (ansi) message += '\x1B[33m';
-        message += '[AWS ' + req.service.serviceIdentifier + ' ' + status;
-        message += ' ' + delta.toString() + 's ' + resp.retryCount + ' retries]';
-        if (ansi) message += '\x1B[0;1m';
-        message += ' ' + AWS.util.string.lowerFirst(req.operation);
-        message += '(' + params + ')';
-        if (ansi) message += '\x1B[0m';
-        return message;
-      }
-
-      var line = buildMessage();
-      if (typeof logger.log === 'function') {
-        logger.log(line);
-      } else if (typeof logger.write === 'function') {
-        logger.write(line + '\n');
-      }
-    });
-  }),
-
-  Json: new SequentialExecutor().addNamedListeners(function(add) {
-    var svc = require('./protocol/json');
-    add('BUILD', 'build', svc.buildRequest);
-    add('EXTRACT_DATA', 'extractData', svc.extractData);
-    add('EXTRACT_ERROR', 'extractError', svc.extractError);
-  }),
-
-  Rest: new SequentialExecutor().addNamedListeners(function(add) {
-    var svc = require('./protocol/rest');
-    add('BUILD', 'build', svc.buildRequest);
-    add('EXTRACT_DATA', 'extractData', svc.extractData);
-    add('EXTRACT_ERROR', 'extractError', svc.extractError);
-  }),
-
-  RestJson: new SequentialExecutor().addNamedListeners(function(add) {
-    var svc = require('./protocol/rest_json');
-    add('BUILD', 'build', svc.buildRequest);
-    add('EXTRACT_DATA', 'extractData', svc.extractData);
-    add('EXTRACT_ERROR', 'extractError', svc.extractError);
-  }),
-
-  RestXml: new SequentialExecutor().addNamedListeners(function(add) {
-    var svc = require('./protocol/rest_xml');
-    add('BUILD', 'build', svc.buildRequest);
-    add('EXTRACT_DATA', 'extractData', svc.extractData);
-    add('EXTRACT_ERROR', 'extractError', svc.extractError);
-  }),
-
-  Query: new SequentialExecutor().addNamedListeners(function(add) {
-    var svc = require('./protocol/query');
-    add('BUILD', 'build', svc.buildRequest);
-    add('EXTRACT_DATA', 'extractData', svc.extractData);
-    add('EXTRACT_ERROR', 'extractError', svc.extractError);
-  })
-};
-
-},{"./core":22,"./protocol/json":41,"./protocol/query":42,"./protocol/rest":43,"./protocol/rest_json":44,"./protocol/rest_xml":45,"./sequential_executor":52,"util":19}],30:[function(require,module,exports){
-var AWS = require('./core');
-var inherit = AWS.util.inherit;
-
-
-AWS.Endpoint = inherit({
-
-
-  constructor: function Endpoint(endpoint, config) {
-    AWS.util.hideProperties(this, ['slashes', 'auth', 'hash', 'search', 'query']);
-
-    if (typeof endpoint === 'undefined' || endpoint === null) {
-      throw new Error('Invalid endpoint: ' + endpoint);
-    } else if (typeof endpoint !== 'string') {
-      return AWS.util.copy(endpoint);
-    }
-
-    if (!endpoint.match(/^http/)) {
-      var useSSL = config && config.sslEnabled !== undefined ?
-        config.sslEnabled : AWS.config.sslEnabled;
-      endpoint = (useSSL ? 'https' : 'http') + '://' + endpoint;
-    }
-
-    AWS.util.update(this, AWS.util.urlParse(endpoint));
-
-    if (this.port) {
-      this.port = parseInt(this.port, 10);
-    } else {
-      this.port = this.protocol === 'https:' ? 443 : 80;
-    }
-  }
-
-});
-
-
-AWS.HttpRequest = inherit({
-
-
-  constructor: function HttpRequest(endpoint, region) {
-    endpoint = new AWS.Endpoint(endpoint);
-    this.method = 'POST';
-    this.path = endpoint.path || '/';
-    this.headers = {};
-    this.body = '';
-    this.endpoint = endpoint;
-    this.region = region;
-    this.setUserAgent();
-  },
-
-
-  setUserAgent: function setUserAgent() {
-    var prefix = AWS.util.isBrowser() ? 'X-Amz-' : '';
-    this.headers[prefix + 'User-Agent'] = AWS.util.userAgent();
-  },
-
-
-  pathname: function pathname() {
-    return this.path.split('?', 1)[0];
-  },
-
-
-  search: function search() {
-    return this.path.split('?', 2)[1] || '';
-  }
-
-});
-
-
-AWS.HttpResponse = inherit({
-
-
-  constructor: function HttpResponse() {
-    this.statusCode = undefined;
-    this.headers = {};
-    this.body = undefined;
-  }
-});
-
-
-AWS.HttpClient = inherit({});
-
-
-AWS.HttpClient.getInstance = function getInstance() {
-  if (this.singleton === undefined) {
-    this.singleton = new this();
-  }
-  return this.singleton;
-};
-
-},{"./core":22}],31:[function(require,module,exports){
-var AWS = require('../core');
-var EventEmitter = require('events').EventEmitter;
-require('../http');
-
-
-AWS.XHRClient = AWS.util.inherit({
-  handleRequest: function handleRequest(httpRequest, httpOptions, callback, errCallback) {
-    var self = this;
-    var endpoint = httpRequest.endpoint;
-    var emitter = new EventEmitter();
-    var href = endpoint.protocol + '//' + endpoint.hostname;
-    if (endpoint.port !== 80 && endpoint.port !== 443) {
-      href += ':' + endpoint.port;
-    }
-    href += httpRequest.path;
-
-    var xhr = new XMLHttpRequest(), headersEmitted = false;
-    httpRequest.stream = xhr;
-
-    xhr.addEventListener('readystatechange', function() {
-      try {
-        if (xhr.status === 0) return; // 0 code is invalid
-      } catch (e) { return; }
-
-      if (this.readyState >= this.HEADERS_RECEIVED && !headersEmitted) {
-        try { xhr.responseType = 'arraybuffer'; } catch (e) {}
-        emitter.statusCode = xhr.status;
-        emitter.headers = self.parseHeaders(xhr.getAllResponseHeaders());
-        emitter.emit('headers', emitter.statusCode, emitter.headers);
-        headersEmitted = true;
-      }
-      if (this.readyState === this.DONE) {
-        self.finishRequest(xhr, emitter);
-      }
-    }, false);
-    xhr.upload.addEventListener('progress', function (evt) {
-      emitter.emit('sendProgress', evt);
-    });
-    xhr.addEventListener('progress', function (evt) {
-      emitter.emit('receiveProgress', evt);
-    }, false);
-    xhr.addEventListener('timeout', function () {
-      errCallback(AWS.util.error(new Error('Timeout'), {code: 'TimeoutError'}));
-    }, false);
-    xhr.addEventListener('error', function () {
-      errCallback(AWS.util.error(new Error('Network Failure'), {
-        code: 'NetworkingError'
-      }));
-    }, false);
-
-    callback(emitter);
-    xhr.open(httpRequest.method, href, httpOptions.xhrAsync !== false);
-    AWS.util.each(httpRequest.headers, function (key, value) {
-      if (key !== 'Content-Length' && key !== 'User-Agent' && key !== 'Host') {
-        xhr.setRequestHeader(key, value);
-      }
-    });
-
-    if (httpOptions.timeout) {
-      xhr.timeout = httpOptions.timeout;
-    }
-
-    if (httpOptions.xhrWithCredentials) {
-      xhr.withCredentials = true;
-    }
-
-    if (httpRequest.body && typeof httpRequest.body.buffer === 'object') {
-      xhr.send(httpRequest.body.buffer); // typed arrays sent as ArrayBuffer
-    } else {
-      xhr.send(httpRequest.body);
-    }
-
-    return emitter;
-  },
-
-  parseHeaders: function parseHeaders(rawHeaders) {
-    var headers = {};
-    AWS.util.arrayEach(rawHeaders.split(/\r?\n/), function (line) {
-      var key = line.split(':', 1)[0];
-      var value = line.substring(key.length + 2);
-      if (key.length > 0) headers[key] = value;
-    });
-    return headers;
-  },
-
-  finishRequest: function finishRequest(xhr, emitter) {
-    var buffer;
-    if (xhr.responseType === 'arraybuffer' && xhr.response) {
-      var ab = xhr.response;
-      buffer = new AWS.util.Buffer(ab.byteLength);
-      var view = new Uint8Array(ab);
-      for (var i = 0; i < buffer.length; ++i) {
-        buffer[i] = view[i];
-      }
-    }
-
-    try {
-      if (!buffer && typeof xhr.responseText === 'string') {
-        buffer = new AWS.util.Buffer(xhr.responseText);
-      }
-    } catch (e) {}
-
-    if (buffer) emitter.emit('data', buffer);
-    emitter.emit('end');
-  }
-});
-
-
-AWS.HttpClient.prototype = AWS.XHRClient.prototype;
-
-
-AWS.HttpClient.streamsApiVersion = 1;
-
-},{"../core":22,"../http":30,"events":10}],32:[function(require,module,exports){
-var util = require('../util');
-
-function JsonBuilder() { }
-
-JsonBuilder.prototype.build = function(value, shape) {
-  return JSON.stringify(translate(value, shape));
-};
-
-function translate(value, shape) {
-  if (!shape || value === undefined || value === null) return undefined;
-
-  switch (shape.type) {
-    case 'structure': return translateStructure(value, shape);
-    case 'map': return translateMap(value, shape);
-    case 'list': return translateList(value, shape);
-    default: return translateScalar(value, shape);
-  }
-}
-
-function translateStructure(structure, shape) {
-  var struct = {};
-  util.each(structure, function(name, value) {
-    var memberShape = shape.members[name];
-    if (memberShape) {
-      if (memberShape.location !== 'body') return;
-
-      var result = translate(value, memberShape);
-      if (result !== undefined) struct[name] = result;
-    }
-  });
-  return struct;
-}
-
-function translateList(list, shape) {
-  var out = [];
-  util.arrayEach(list, function(value) {
-    var result = translate(value, shape.member);
-    if (result !== undefined) out.push(result);
-  });
-  return out;
-}
-
-function translateMap(map, shape) {
-  var out = {};
-  util.each(map, function(key, value) {
-    var result = translate(value, shape.value);
-    if (result !== undefined) out[key] = result;
-  });
-  return out;
-}
-
-function translateScalar(value, shape) {
-  return shape.toWireFormat(value);
-}
-
-module.exports = JsonBuilder;
-
-},{"../util":62}],33:[function(require,module,exports){
-var util = require('../util');
-
-function JsonParser() { }
-
-JsonParser.prototype.parse = function(value, shape) {
-  return translate(JSON.parse(value), shape);
-};
-
-function translate(value, shape) {
-  if (!shape || value === undefined || value === null) return undefined;
-
-  switch (shape.type) {
-    case 'structure': return translateStructure(value, shape);
-    case 'map': return translateMap(value, shape);
-    case 'list': return translateList(value, shape);
-    default: return translateScalar(value, shape);
-  }
-}
-
-function translateStructure(structure, shape) {
-  var struct = {};
-  util.each(structure, function(name, value) {
-    var memberShape = shape.members[name];
-    if (memberShape) {
-      var result = translate(value, memberShape);
-      if (result !== undefined) struct[name] = result;
-    }
-  });
-  return struct;
-}
-
-function translateList(list, shape) {
-  var out = [];
-  util.arrayEach(list, function(value) {
-    var result = translate(value, shape.member);
-    if (result !== undefined) out.push(result);
-  });
-  return out;
-}
-
-function translateMap(map, shape) {
-  var out = {};
-  util.each(map, function(key, value) {
-    var result = translate(value, shape.value);
-    if (result !== undefined) out[key] = result;
-  });
-  return out;
-}
-
-function translateScalar(value, shape) {
-  return shape.toType(value);
-}
-
-module.exports = JsonParser;
-
-},{"../util":62}],34:[function(require,module,exports){
-var Collection = require('./collection');
-var Operation = require('./operation');
-var Shape = require('./shape');
-var Paginator = require('./paginator');
-var ResourceWaiter = require('./resource_waiter');
-
-var util = require('../util');
-var property = util.property;
-var memoizedProperty = util.memoizedProperty;
-
-function Api(api, options) {
-  api = api || {};
-  options = options || {};
-  options.api = this;
-
-  api.metadata = api.metadata || {};
-
-  property(this, 'isApi', true, false);
-  property(this, 'apiVersion', api.metadata.apiVersion);
-  property(this, 'endpointPrefix', api.metadata.endpointPrefix);
-  property(this, 'signingName', api.metadata.signingName);
-  property(this, 'globalEndpoint', api.metadata.globalEndpoint);
-  property(this, 'signatureVersion', api.metadata.signatureVersion);
-  property(this, 'jsonVersion', api.metadata.jsonVersion);
-  property(this, 'targetPrefix', api.metadata.targetPrefix);
-  property(this, 'protocol', api.metadata.protocol);
-  property(this, 'timestampFormat', api.metadata.timestampFormat);
-  property(this, 'xmlNamespaceUri', api.metadata.xmlNamespace);
-  property(this, 'abbreviation', api.metadata.serviceAbbreviation);
-  property(this, 'fullName', api.metadata.serviceFullName);
-
-  memoizedProperty(this, 'className', function() {
-    var name = api.metadata.serviceAbbreviation || api.metadata.serviceFullName;
-    if (!name) return null;
-
-    name = name.replace(/^Amazon|AWS\s*|\(.*|\s+|\W+/g, '');
-    if (name === 'ElasticLoadBalancing') name = 'ELB';
-    return name;
-  });
-
-  property(this, 'operations', new Collection(api.operations, options, function(name, operation) {
-    return new Operation(name, operation, options);
-  }, util.string.lowerFirst));
-
-  property(this, 'shapes', new Collection(api.shapes, options, function(name, shape) {
-    return Shape.create(shape, options);
-  }));
-
-  property(this, 'paginators', new Collection(api.paginators, options, function(name, paginator) {
-    return new Paginator(name, paginator, options);
-  }));
-
-  property(this, 'waiters', new Collection(api.waiters, options, function(name, waiter) {
-    return new ResourceWaiter(name, waiter, options);
-  }, util.string.lowerFirst));
-
-  if (options.documentation) {
-    property(this, 'documentation', api.documentation);
-    property(this, 'documentationUrl', api.documentationUrl);
-  }
-}
-
-module.exports = Api;
-
-},{"../util":62,"./collection":35,"./operation":36,"./paginator":37,"./resource_waiter":38,"./shape":39}],35:[function(require,module,exports){
-var memoizedProperty = require('../util').memoizedProperty;
-
-function Collection(iterable, options, fn, nameTr) {
-  nameTr = nameTr || String;
-  var self = this;
-
-  for (var id in iterable) {
-    if (iterable.hasOwnProperty(id)) {
-      (function(name) {
-        memoizedProperty(self, nameTr(name), function() {
-          return fn(name, iterable[name]);
-        });
-      })(id);
-    }
-  }
-}
-
-module.exports = Collection;
-
-},{"../util":62}],36:[function(require,module,exports){
-var Shape = require('./shape');
-
-var util = require('../util');
-var property = util.property;
-var memoizedProperty = util.memoizedProperty;
-
-function Operation(name, operation, options) {
-  options = options || {};
-
-  property(this, 'name', name);
-  property(this, 'api', options.api, false);
-
-  operation.http = operation.http || {};
-  property(this, 'httpMethod', operation.http.method || 'POST');
-  property(this, 'httpPath', operation.http.requestUri || '/');
-
-  memoizedProperty(this, 'input', function() {
-    if (!operation.input) {
-      return new Shape.create({type: 'structure'}, options);
-    }
-    return Shape.create(operation.input, options);
-  });
-
-  memoizedProperty(this, 'output', function() {
-    if (!operation.output) {
-      return new Shape.create({type: 'structure'}, options);
-    }
-    return Shape.create(operation.output, options);
-  });
-
-  memoizedProperty(this, 'errors', function() {
-    var list = [];
-    if (!operation.errors) return null;
-
-    for (var i = 0; i < operation.errors.length; i++) {
-      list.push(Shape.create(operation.errors[i], options));
-    }
-
-    return list;
-  });
-
-  memoizedProperty(this, 'paginator', function() {
-    return options.api.paginators[name];
-  });
-
-  if (options.documentation) {
-    property(this, 'documentation', operation.documentation);
-    property(this, 'documentationUrl', operation.documentationUrl);
-  }
-}
-
-module.exports = Operation;
-
-},{"../util":62,"./shape":39}],37:[function(require,module,exports){
-var property = require('../util').property;
-
-function Paginator(name, paginator) {
-  property(this, 'inputToken', paginator.input_token);
-  property(this, 'limitKey', paginator.limit_key);
-  property(this, 'moreResults', paginator.more_results);
-  property(this, 'outputToken', paginator.output_token);
-  property(this, 'resultKey', paginator.result_key);
-}
-
-module.exports = Paginator;
-
-},{"../util":62}],38:[function(require,module,exports){
-var util = require('../util');
-var property = util.property;
-
-function ResourceWaiter(name, waiter, options) {
-  options = options || {};
-
-  function InnerResourceWaiter() {
-    property(this, 'name', name);
-    property(this, 'api', options.api, false);
-
-    if (waiter.operation) {
-      property(this, 'operation', util.string.lowerFirst(waiter.operation));
-    }
-
-    var self = this, map = {
-      ignoreErrors: 'ignore_errors',
-      successType: 'success_type',
-      successValue: 'success_value',
-      successPath: 'success_path',
-      acceptorType: 'acceptor_type',
-      acceptorValue: 'acceptor_value',
-      acceptorPath: 'acceptor_path',
-      failureType: 'failure_type',
-      failureValue: 'failure_value',
-      failurePath: 'success_path',
-      interval: 'interval',
-      maxAttempts: 'max_attempts'
-    };
-    Object.keys(map).forEach(function(key) {
-      var value = waiter[map[key]];
-      if (value) property(self, key, value);
-    });
-  }
-
-  if (options.api) {
-    var proto = null;
-    if (waiter['extends']) {
-      proto = options.api.waiters[waiter['extends']];
-    } else if (name !== '__default__') {
-      proto = options.api.waiters['__default__'];
-    }
-
-    if (proto) InnerResourceWaiter.prototype = proto;
-  }
-
-  return new InnerResourceWaiter();
-}
-
-module.exports = ResourceWaiter;
-
-},{"../util":62}],39:[function(require,module,exports){
-var Collection = require('./collection');
-
-var util = require('../util');
-
-function property(obj, name, value) {
-  if (value !== null && value !== undefined) {
-    util.property.apply(this, arguments);
-  }
-}
-
-function memoizedProperty(obj, name) {
-  if (!obj.constructor.prototype[name]) {
-    util.memoizedProperty.apply(this, arguments);
-  }
-}
-
-function Shape(shape, options, memberName) {
-  options = options || {};
-
-  property(this, 'shape', shape.shape);
-  property(this, 'api', options.api, false);
-  property(this, 'type', shape.type);
-  property(this, 'location', shape.location || 'body');
-  property(this, 'name', this.name || shape.xmlName || shape.locationName ||
-                         memberName);
-  property(this, 'isStreaming', shape.streaming || false);
-  property(this, 'isComposite', shape.isComposite || false);
-  property(this, 'isShape', true, false);
-
-  if (options.documentation) {
-    property(this, 'documentation', shape.documentation);
-    property(this, 'documentationUrl', shape.documentationUrl);
-  }
-
-  if (shape.xmlAttribute) {
-    property(this, 'isXmlAttribute', shape.xmlAttribute || false);
-  }
-
-  property(this, 'defaultValue', null);
-  this.toWireFormat = function(value) {
-    if (value === null || value === undefined) return '';
-    return value;
-  };
-  this.toType = function(value) { return value; };
-}
-
-
-Shape.normalizedTypes = {
-  character: 'string',
-  double: 'float',
-  long: 'integer',
-  short: 'integer',
-  biginteger: 'integer',
-  bigdecimal: 'float',
-  blob: 'binary'
-};
-
-
-Shape.types = {
-  'structure': StructureShape,
-  'list': ListShape,
-  'map': MapShape,
-  'boolean': BooleanShape,
-  'timestamp': TimestampShape,
-  'float': FloatShape,
-  'integer': IntegerShape,
-  'string': StringShape,
-  'base64': Base64Shape,
-  'binary': BinaryShape
-};
-
-Shape.resolve = function resolve(shape, options) {
-  if (shape.shape) {
-    var refShape = options.api.shapes[shape.shape];
-    if (!refShape) {
-      throw new Error('Cannot find shape reference: ' + shape.shape);
-    }
-
-    return refShape;
-  } else {
-    return null;
-  }
-};
-
-Shape.create = function create(shape, options, memberName) {
-  if (shape.isShape) return shape;
-
-  var refShape = Shape.resolve(shape, options);
-  if (refShape) {
-    var filteredKeys = Object.keys(shape);
-    if (!options.documentation) {
-      filteredKeys = filteredKeys.filter(function(name) {
-        return !name.match(/documentation/);
-      });
-    }
-    if (filteredKeys === ['shape']) { // no inline customizations
-      return refShape;
-    }
-
-    var InlineShape = function() {
-      refShape.constructor.call(this, shape, options, memberName);
-    };
-    InlineShape.prototype = refShape;
-    return new InlineShape();
-  } else {
-    if (!shape.type) {
-      if (shape.members) shape.type = 'structure';
-      else if (shape.member) shape.type = 'list';
-      else if (shape.key) shape.type = 'map';
-      else shape.type = 'string';
-    }
-
-    var origType = shape.type;
-    if (Shape.normalizedTypes[shape.type]) {
-      shape.type = Shape.normalizedTypes[shape.type];
-    }
-
-    if (Shape.types[shape.type]) {
-      return new Shape.types[shape.type](shape, options, memberName);
-    } else {
-      throw new Error('Unrecognized shape type: ' + origType);
-    }
-  }
-};
-
-function CompositeShape(shape) {
-  Shape.apply(this, arguments);
-  property(this, 'isComposite', true);
-
-  if (shape.flattened) {
-    property(this, 'flattened', shape.flattened || false);    
-  }
-}
-
-function StructureShape(shape, options) {
-  var requiredMap = null, firstInit = !this.isShape;
-
-  CompositeShape.apply(this, arguments);
-
-  if (firstInit) {
-    property(this, 'defaultValue', function() { return {}; });
-    property(this, 'members', {});
-    property(this, 'memberNames', []);
-    property(this, 'required', []);
-    property(this, 'isRequired', function(name) { return false; });
-  }
-
-  if (shape.members) {
-    property(this, 'members', new Collection(shape.members, options, function(name, member) {
-      return Shape.create(member, options, name);
-    }));
-    memoizedProperty(this, 'memberNames', function() {
-      return shape.xmlOrder || Object.keys(shape.members);
-    });
-  }
-
-  if (shape.required) {
-    property(this, 'required', shape.required);
-    property(this, 'isRequired', function(name) {
-      if (!requiredMap) {
-        requiredMap = {};
-        for (var i = 0; i < shape.required.length; i++) {
-          requiredMap[shape.required[i]] = true;
-        }
-      }
-
-      return requiredMap[name];
-    }, false, true);
-  }
-
-  property(this, 'resultWrapper', shape.resultWrapper || null);
-
-  if (shape.payload) {
-    property(this, 'payload', shape.payload);
-  }
-
-  if (typeof shape.xmlNamespace === 'string') {
-    property(this, 'xmlNamespaceUri', shape.xmlNamespace);
-  } else if (typeof shape.xmlNamespace === 'object') {
-    property(this, 'xmlNamespacePrefix', shape.xmlNamespace.prefix);
-    property(this, 'xmlNamespaceUri', shape.xmlNamespace.uri);
-  }
-}
-
-function ListShape(shape, options) {
-  var self = this, firstInit = !this.isShape;
-  CompositeShape.apply(this, arguments);
-
-  if (firstInit) {
-    property(this, 'defaultValue', function() { return []; });
-  }
-
-  if (shape.member) {
-    memoizedProperty(this, 'member', function() {
-      return Shape.create(shape.member, options);
-    });
-  }
-
-  if (this.flattened) {
-    var oldName = this.name;
-    memoizedProperty(this, 'name', function() {
-      return self.member.name || oldName;
-    });
-  }
-}
-
-function MapShape(shape, options) {
-  var firstInit = !this.isShape;
-  CompositeShape.apply(this, arguments);
-
-  if (firstInit) {
-    property(this, 'defaultValue', function() { return {}; });
-    property(this, 'key', Shape.create({type: 'string'}, options));
-    property(this, 'value', Shape.create({type: 'string'}, options));
-  }
-
-  if (shape.key) {
-    memoizedProperty(this, 'key', function() {
-      return Shape.create(shape.key, options);
-    });
-  }
-  if (shape.value) {
-    memoizedProperty(this, 'value', function() {
-      return Shape.create(shape.value, options);
-    });    
-  }
-}
-
-function TimestampShape(shape) {
-  var self = this;
-  Shape.apply(this, arguments);
-
-  if (this.location === 'header') {
-    property(this, 'timestampFormat', 'rfc822');
-  } else if (shape.timestampFormat) {
-    property(this, 'timestampFormat', shape.timestampFormat);
-  } else if (this.api) {
-    if (this.api.timestampFormat) {
-      property(this, 'timestampFormat', this.api.timestampFormat);
-    } else {
-      switch (this.api.protocol) {
-        case 'json':
-        case 'rest-json':
-          property(this, 'timestampFormat', 'unixTimestamp');
-          break;
-        case 'rest-xml':
-        case 'query':
-          property(this, 'timestampFormat', 'iso8601');
-          break;
-      }
-    }
-  }
-
-  this.toType = function(value) {
-    if (value === null || value === undefined) return null;
-    if (typeof value.toUTCString === 'function') return value;
-    return typeof value === 'string' || typeof value === 'number' ?
-           util.date.parseTimestamp(value) : null;
-  };
-
-  this.toWireFormat = function(value) {
-    return util.date.format(value, self.timestampFormat);
-  };
-}
-
-function StringShape() {
-  Shape.apply(this, arguments);
-}
-
-function FloatShape() {
-  Shape.apply(this, arguments);
-
-  this.toType = function(value) {
-    if (value === null || value === undefined) return null;
-    return parseFloat(value);
-  };
-  this.toWireFormat = this.toType;
-}
-
-function IntegerShape() {
-  Shape.apply(this, arguments);
-
-  this.toType = function(value) {
-    if (value === null || value === undefined) return null;
-    return parseInt(value, 10);
-  };
-  this.toWireFormat = this.toType;
-}
-
-function BinaryShape() {
-  Shape.apply(this, arguments);
-  this.toType = util.base64.decode;
-  this.toWireFormat = util.base64.encode;
-}
-
-function Base64Shape() {
-  BinaryShape.apply(this, arguments);
-}
-
-function BooleanShape() {
-  Shape.apply(this, arguments);
-
-  this.toType = function(value) {
-    if (typeof value === 'boolean') return value;
-    if (value === null || value === undefined) return null;
-    return value === 'true';
-  };
-}
-
-
-Shape.shapes = {
-  StructureShape: StructureShape,
-  ListShape: ListShape,
-  MapShape: MapShape,
-  StringShape: StringShape,
-  BooleanShape: BooleanShape,
-  Base64Shape: Base64Shape
-};
-
-module.exports = Shape;
-
-},{"../util":62,"./collection":35}],40:[function(require,module,exports){
-var AWS = require('./core');
-
-
-AWS.ParamValidator = AWS.util.inherit({
-  validate: function validate(shape, params, context) {
-    return this.validateMember(shape, params || {}, context || 'params');
-  },
-
-  validateStructure: function validateStructure(shape, params, context) {
-    this.validateType(context, params, ['object'], 'structure');
-
-    for (var i = 0; shape.required && i < shape.required.length; i++) {
-      var paramName = shape.required[i];
-      var value = params[paramName];
-      if (value === undefined || value === null) {
-        this.fail('MissingRequiredParameter',
-          'Missing required key \'' + paramName + '\' in ' + context);
-      }
-    }
-
-    for (paramName in params) {
-      if (!params.hasOwnProperty(paramName)) continue;
-
-      var paramValue = params[paramName],
-          memberShape = shape.members[paramName];
-
-      if (memberShape !== undefined) {
-        var memberContext = [context, paramName].join('.');
-        this.validateMember(memberShape, paramValue, memberContext);
-      } else {
-        this.fail('UnexpectedParameter',
-          'Unexpected key \'' + paramName + '\' found in ' + context);
-      }
-    }
-
-    return true;
-  },
-
-  validateMember: function validateMember(shape, param, context) {
-    switch(shape.type) {
-      case 'structure':
-        return this.validateStructure(shape, param, context);
-      case 'list':
-        return this.validateList(shape, param, context);
-      case 'map':
-        return this.validateMap(shape, param, context);
-      default:
-        return this.validateScalar(shape, param, context);
-    }
-  },
-
-  validateList: function validateList(shape, params, context) {
-    this.validateType(context, params, [Array]);
-
-    for (var i = 0; i < params.length; i++) {
-      this.validateMember(shape.member, params[i], context + '[' + i + ']');
-    }
-  },
-
-  validateMap: function validateMap(shape, params, context) {
-    this.validateType(context, params, ['object'], 'map');
-
-    for (var param in params) {
-      if (!params.hasOwnProperty(param)) continue;
-      this.validateMember(shape.value, params[param],
-                          context + '[\'' +  param + '\']');
-    }
-  },
-
-  validateScalar: function validateScalar(shape, value, context) {
-    switch (shape.type) {
-      case null:
-      case undefined:
-      case 'string':
-        return this.validateType(context, value, ['string']);
-      case 'base64':
-      case 'binary':
-        return this.validatePayload(context, value);
-      case 'integer':
-      case 'float':
-        return this.validateNumber(context, value);
-      case 'boolean':
-        return this.validateType(context, value, ['boolean']);
-      case 'timestamp':
-        return this.validateType(context, value, [Date,
-          /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/, 'number'],
-          'Date object, ISO-8601 string, or a UNIX timestamp');
-      default:
-        return this.fail('UnkownType', 'Unhandled type ' +
-                         shape.type + ' for ' + context);
-    }
-  },
-
-  fail: function fail(code, message) {
-    throw AWS.util.error(new Error(message), {code: code});
-  },
-
-  validateType: function validateType(context, value, acceptedTypes, type) {
-    if (value === null || value === undefined) return;
-
-    var foundInvalidType = false;
-    for (var i = 0; i < acceptedTypes.length; i++) {
-      if (typeof acceptedTypes[i] === 'string') {
-        if (typeof value === acceptedTypes[i]) return;
-      } else if (acceptedTypes[i] instanceof RegExp) {
-        if ((value || '').toString().match(acceptedTypes[i])) return;
-      } else {
-        if (value instanceof acceptedTypes[i]) return;
-        if (AWS.util.isType(value, acceptedTypes[i])) return;
-        if (!type && !foundInvalidType) acceptedTypes = acceptedTypes.slice();
-        acceptedTypes[i] = AWS.util.typeName(acceptedTypes[i]);
-      }
-      foundInvalidType = true;
-    }
-
-    var acceptedType = type;
-    if (!acceptedType) {
-      acceptedType = acceptedTypes.join(', ').replace(/,([^,]+)$/, ', or$1');
-    }
-
-    var vowel = acceptedType.match(/^[aeiou]/i) ? 'n' : '';
-    this.fail('InvalidParameterType', 'Expected ' + context + ' to be a' +
-              vowel + ' ' + acceptedType);
-  },
-
-  validateNumber: function validateNumber(context, value) {
-    if (value === null || value === undefined) return;
-    if (typeof value === 'string') {
-      var castedValue = parseFloat(value);
-      if (castedValue.toString() === value) value = castedValue;
-    }
-    this.validateType(context, value, ['number']);
-  },
-
-  validatePayload: function validatePayload(context, value) {
-    if (value === null || value === undefined) return;
-    if (typeof value === 'string') return;
-    if (value && typeof value.byteLength === 'number') return; // typed arrays
-    if (AWS.util.isNode()) { // special check for buffer/stream in Node.js
-      var Stream = AWS.util.nodeRequire('stream').Stream;
-      if (AWS.util.Buffer.isBuffer(value) || value instanceof Stream) return;
-    }
-
-    var types = ['Buffer', 'Stream', 'File', 'Blob', 'ArrayBuffer', 'DataView'];
-    if (value) {
-      for (var i = 0; i < types.length; i++) {
-        if (AWS.util.isType(value, types[i])) return;
-        if (AWS.util.typeName(value.constructor) === types[i]) return;
-      }
-    }
-
-    this.fail('InvalidParameterType', 'Expected ' + context + ' to be a ' +
-      'string, Buffer, Stream, Blob, or typed array object');
-  }
-});
-
-},{"./core":22}],41:[function(require,module,exports){
-var util = require('../util');
-var JsonBuilder = require('../json/builder');
-var JsonParser = require('../json/parser');
-
-function buildRequest(req) {
-  var httpRequest = req.httpRequest;
-  var api = req.service.api;
-  var target = api.targetPrefix + '.' + api.operations[req.operation].name;
-  var version = api.jsonVersion || '1.0';
-  var input = api.operations[req.operation].input;
-  var builder = new JsonBuilder();
-
-  if (version === 1) version = '1.0';
-  httpRequest.body = builder.build(req.params || {}, input);
-  httpRequest.headers['Content-Type'] = 'application/x-amz-json-' + version;
-  httpRequest.headers['X-Amz-Target'] = target;
-}
-
-function extractError(resp) {
-  var error = {};
-  var httpResponse = resp.httpResponse;
-
-  if (httpResponse.body.length > 0) {
-    var e = JSON.parse(httpResponse.body.toString());
-    if (e.__type || e.code) {
-      error.code = (e.__type || e.code).split('#').pop();
-    } else {
-      error.code = 'UnknownError';
-    }
-    if (error.code === 'RequestEntityTooLarge') {
-      error.message = 'Request body must be less than 1 MB';
-    } else {
-      error.message = (e.message || e.Message || null);
-    }
-  } else {
-    error.code = httpResponse.statusCode;
-    error.message = null;
-  }
-
-  resp.error = util.error(new Error(), error);
-}
-
-function extractData(resp) {
-  var body = resp.httpResponse.body.toString() || '{}';
-  if (resp.request.service.config.convertResponseTypes === false) {
-    resp.data = JSON.parse(body);
-  } else {
-    var operation = resp.request.service.api.operations[resp.request.operation];
-    var shape = operation.output || {};
-    var parser = new JsonParser();
-    resp.data = parser.parse(body, shape);
-  }
-}
-
-module.exports = {
-  buildRequest: buildRequest,
-  extractError: extractError,
-  extractData: extractData
-};
-
-},{"../json/builder":32,"../json/parser":33,"../util":62}],42:[function(require,module,exports){
-var AWS = require('../core');
-var util = require('../util');
-var QueryParamSerializer = require('../query/query_param_serializer');
-var Shape = require('../model/shape');
-
-function buildRequest(req) {
-  var operation = req.service.api.operations[req.operation];
-  var httpRequest = req.httpRequest;
-  httpRequest.headers['Content-Type'] =
-    'application/x-www-form-urlencoded; charset=utf-8';
-  httpRequest.params = {
-    Version: req.service.api.apiVersion,
-    Action: operation.name
-  };
-
-  var builder = new QueryParamSerializer();
-  builder.serialize(req.params, operation.input, function(name, value) {
-    httpRequest.params[name] = value;
-  });
-  httpRequest.body = util.queryParamsToString(httpRequest.params);
-}
-
-function extractError(resp) {
-  var data, body = resp.httpResponse.body.toString();
-  if (body.match('<UnknownOperationException')) {
-    data = {
-      Code: 'UnknownOperation',
-      Message: 'Unknown operation ' + resp.request.operation
-    };
-  } else {
-    data = new AWS.XML.Parser().parse(body);
-  }
-
-  if (data.Errors) data = data.Errors;
-  if (data.Error) data = data.Error;
-  if (data.Code) {
-    resp.error = util.error(new Error(), {
-      code: data.Code,
-      message: data.Message
-    });
-  } else {
-    resp.error = util.error(new Error(), {
-      code: resp.httpResponse.statusCode,
-      message: null
-    });
-  }
-}
-
-function extractData(resp) {
-  var req = resp.request;
-  var operation = req.service.api.operations[req.operation];
-  var shape = operation.output || {};
-  var origRules = shape;
-
-  if (origRules.resultWrapper) {
-    var tmp = Shape.create({type: 'structure'});
-    tmp.members[origRules.resultWrapper] = shape;
-    tmp.memberNames = [origRules.resultWrapper];
-    util.property(shape, 'name', shape.resultWrapper);
-    shape = tmp;
-  }
-
-  var parser = new AWS.XML.Parser();
-  var data = parser.parse(resp.httpResponse.body.toString(), shape);
-
-  if (origRules.resultWrapper) {
-    if (data[origRules.resultWrapper]) {
-      util.update(data, data[origRules.resultWrapper]);
-      delete data[origRules.resultWrapper];
-    }
-  }
-
-  resp.data = data;
-}
-
-module.exports = {
-  buildRequest: buildRequest,
-  extractError: extractError,
-  extractData: extractData
-};
-
-},{"../core":22,"../model/shape":39,"../query/query_param_serializer":46,"../util":62}],43:[function(require,module,exports){
-var util = require('../util');
-
-function populateMethod(req) {
-  req.httpRequest.method = req.service.api.operations[req.operation].httpMethod;
-}
-
-function populateURI(req) {
-  var operation = req.service.api.operations[req.operation];
-  var input = operation.input;
-  var uri = [req.httpRequest.endpoint.path, operation.httpPath].join('/');
-  uri = uri.replace(/\/+/g, '/');
-
-  var escapePathParamFn = req.service.escapePathParam || escapePathParam;
-  var escapeQuerystringParamFn = req.service.escapeQuerystringParam ||
-                                 escapeQuerystringParam;
-
-  var queryString = {}, queryStringSet = false;
-  util.each(input.members, function (name, member) {
-    var paramValue = req.params[name];
-    if (paramValue === null || paramValue === undefined) return;
-    if (member.location === 'uri') {
-      uri = uri.replace('{' + member.name + '}', escapePathParamFn(paramValue));
-    } else if (member.location === 'querystring') {
-      queryStringSet = true;
-      queryString[member.name] = escapeQuerystringParamFn(paramValue);
-    }
-  });
-
-  if (queryStringSet) {
-    uri += (uri.indexOf('?') >= 0 ? '&' : '?');
-    var parts = [];
-    util.arrayEach(Object.keys(queryString).sort(), function(key) {
-      parts.push(escapeQuerystringParam(key) + '=' + queryString[key]);
-    });
-    uri += parts.join('&');
-  }
-
-  req.httpRequest.path = uri;
-}
-
-function escapePathParam(value) {
-  return util.uriEscape(String(value));
-}
-
-function escapeQuerystringParam(value) {
-  return util.uriEscape(String(value));
-}
-
-function populateHeaders(req) {
-  var operation = req.service.api.operations[req.operation];
-  util.each(operation.input.members, function (name, member) {
-    var value = req.params[name];
-    if (value === null || value === undefined) return;
-
-    if (member.location === 'headers' && member.type === 'map') {
-      util.each(value, function(key, value) {
-        req.httpRequest.headers[member.name + key] = value;
-      });
-    } else if (member.location === 'header') {
-      value = member.toWireFormat(value).toString();
-      req.httpRequest.headers[member.name] = value;
-    }
-  });
-}
-
-function buildRequest(req) {
-  populateMethod(req);
-  populateURI(req);
-  populateHeaders(req);
-}
-
-function extractError() {
-}
-
-function extractData(resp) {
-  var req = resp.request;
-  var data = {};
-  var r = resp.httpResponse;
-  var operation = req.service.api.operations[req.operation];
-  var output = operation.output;
-
-  var headers = {};
-  util.each(r.headers, function (k, v) {
-    headers[k.toLowerCase()] = v;
-  });
-
-  util.each(output.members, function(name, member) {
-    var header = (member.name || name).toLowerCase();
-    if (member.location === 'headers' && member.type === 'map') {
-      data[name] = {};
-      util.each(r.headers, function (k, v) {
-        var result = k.match(new RegExp('^' + member.name + '(.+)', 'i'));
-        if (result !== null) {
-          data[name][result[1]] = v;
-        }
-      });
-    } else if (member.location === 'header') {
-      if (headers[header] !== undefined) {
-        data[name] = headers[header];
-      }
-    } else if (member.location === 'status') {
-      data[name] = parseInt(r.statusCode, 10);
-    }
-  });
-
-  resp.data = data;
-}
-
-module.exports = {
-  buildRequest: buildRequest,
-  extractError: extractError,
-  extractData: extractData
-};
-
-},{"../util":62}],44:[function(require,module,exports){
-var util = require('../util');
-var Rest = require('./rest');
-var Json = require('./json');
-var JsonBuilder = require('../json/builder');
-
-function populateBody(req) {
-  var builder = new JsonBuilder();
-  var input = req.service.api.operations[req.operation].input;
-
-  if (input.payload) {
-    var params = {};
-    var payloadShape = input.members[input.payload];
-    params = req.params[input.payload];
-    if (params === undefined) return;
-
-    if (payloadShape.type === 'structure') {
-      req.httpRequest.body = builder.build(params, payloadShape);
-    } else { // non-JSON payload
-      req.httpRequest.body = params;
-    }
-  } else {
-    req.httpRequest.body = builder.build(req.params, input);
-  }
-}
-
-function buildRequest(req) {
-  Rest.buildRequest(req);
-
-  if (['GET', 'HEAD'].indexOf(req.httpRequest.method) < 0) {
-    populateBody(req);
-  }
-}
-
-function extractError(resp) {
-  Json.extractError(resp);
-}
-
-function extractData(resp) {
-  Rest.extractData(resp);
-
-  var req = resp.request;
-  var rules = req.service.api.operations[req.operation].output || {};
-  if (rules.payload) {
-    var payloadMember = rules.members[rules.payload];
-    if (payloadMember.isStreaming) {
-      resp.data[rules.payload] = resp.httpResponse.body;
-    } else if (payloadMember.type === 'structure') {
-      Json.extractData(resp);
-    } else {
-      resp.data[rules.payload] = resp.httpResponse.body.toString();
-    }
-  } else {
-    var data = resp.data;
-    Json.extractData(resp);
-    resp.data = util.merge(data, resp.data);
-  }
-}
-
-module.exports = {
-  buildRequest: buildRequest,
-  extractError: extractError,
-  extractData: extractData
-};
-
-},{"../json/builder":32,"../util":62,"./json":41,"./rest":43}],45:[function(require,module,exports){
-var AWS = require('../core');
-var util = require('../util');
-var Rest = require('./rest');
-
-function populateBody(req) {
-  var input = req.service.api.operations[req.operation].input;
-  var builder = new AWS.XML.Builder();
-  var params = req.params;
-
-  var payload = input.payload;
-  if (payload) {
-    var payloadMember = input.members[payload];
-    params = params[payload];
-    if (params === undefined) return;
-
-    if (payloadMember.type === 'structure') {
-      var rootElement = payloadMember.name;
-      req.httpRequest.body = builder.toXML(params, payloadMember, rootElement);
-    } else { // non-xml payload
-      req.httpRequest.body = params;
-    }
-  } else {
-    req.httpRequest.body = builder.toXML(params, input, input.shape ||
-      util.string.upperFirst(req.operation) + 'Request');
-  }
-}
-
-function buildRequest(req) {
-  Rest.buildRequest(req);
-
-  if (['GET', 'HEAD'].indexOf(req.httpRequest.method) < 0) {
-    populateBody(req);
-  }
-}
-
-function extractError(resp) {
-  Rest.extractError(resp);
-
-  var data = new AWS.XML.Parser().parse(resp.httpResponse.body.toString());
-  if (data.Errors) data = data.Errors;
-  if (data.Error) data = data.Error;
-  if (data.Code) {
-    resp.error = util.error(new Error(), {
-      code: data.Code,
-      message: data.Message
-    });
-  } else {
-    resp.error = util.error(new Error(), {
-      code: resp.httpResponse.statusCode,
-      message: null
-    });
-  }
-}
-
-function extractData(resp) {
-  Rest.extractData(resp);
-
-  var parser;
-  var req = resp.request;
-  var body = resp.httpResponse.body;
-  var operation = req.service.api.operations[req.operation];
-  var output = operation.output;
-
-  var payload = output.payload;
-  if (payload) {
-    var payloadMember = output.members[payload];
-    if (payloadMember.isStreaming) {
-      resp.data[payload] = body;
-    } else if (payloadMember.type === 'structure') {
-      parser = new AWS.XML.Parser();
-      util.update(resp.data, parser.parse(body.toString(), payloadMember));
-    } else {
-      resp.data[payload] = body.toString();
-    }
-  } else if (body.length > 0) {
-    parser = new AWS.XML.Parser();
-    var data = parser.parse(body.toString(), output);
-    util.update(resp.data, data);
-  }
-}
-
-module.exports = {
-  buildRequest: buildRequest,
-  extractError: extractError,
-  extractData: extractData
-};
-
-},{"../core":22,"../util":62,"./rest":43}],46:[function(require,module,exports){
-var util = require('../util');
-
-function QueryParamSerializer() { }
-
-QueryParamSerializer.prototype.serialize = function(params, shape, fn) {
-  serializeStructure('', params, shape, fn);
-};
-
-function serializeStructure(prefix, struct, rules, fn) {
-  util.each(rules.members, function(name, member) {
-    var value = struct[name];
-    if (value === null || value === undefined) return;
-
-    var memberName = prefix ? prefix + '.' + member.name : member.name;
-    serializeMember(memberName, value, member, fn);
-  });
-}
-
-function serializeMap(name, map, rules, fn) {
-  var i = 1;
-  util.each(map, function (key, value) {
-    var prefix = rules.flattened ? '.' : '.entry.';
-    var position = prefix + (i++) + '.';
-    var keyName = position + (rules.key.name || 'key');
-    var valueName = position + (rules.value.name || 'value');
-    serializeMember(name + keyName, key, rules.key, fn);
-    serializeMember(name + valueName, value, rules.value, fn);
-  });
-}
-
-function serializeList(name, list, rules, fn) {
-  var memberRules = rules.member || {};
-
-  if (list.length === 0) {
-    fn.call(this, name, null);
-    return;
-  }
-
-  util.arrayEach(list, function (v, n) {
-    var suffix = '.' + (n + 1);
-    if (rules.flattened) {
-      if (memberRules.name) {
-        var parts = name.split('.');
-        parts.pop();
-        parts.push(memberRules.name);
-        name = parts.join('.');
-      }
-    } else {
-      suffix = '.member' + suffix;
-    }
-    serializeMember(name + suffix, v, memberRules, fn);
-  });
-}
-
-function serializeMember(name, value, rules, fn) {
-  if (value === null || value === undefined) return;
-  if (rules.type === 'structure') {
-    serializeStructure(name, value, rules, fn);
-  } else if (rules.type === 'list') {
-    serializeList(name, value, rules, fn);
-  } else if (rules.type === 'map') {
-    serializeMap(name, value, rules, fn);
-  } else {
-    fn(name, rules.toWireFormat(value).toString());
-  }
-}
-
-module.exports = QueryParamSerializer;
-
-},{"../util":62}],47:[function(require,module,exports){
-var util = require('./util');
-var config = require('./region_config.json');
-
-function regionConfig(service) {
-  var sId = service.serviceIdentifier || '';
-  var sRegion = service.config.region || '';
-  var finalConfig = {};
-
-  config.forEach(function(item) {
-    (item.regions || []).forEach(function(region) {
-      if (sRegion.match(new RegExp('^' + region.replace('*', '.*') + '$'))) {
-        (item.serviceConfigs || []).forEach(function(svcConfig) {
-          (svcConfig.services || []).forEach(function(svcName) {
-            if (sId.match(new RegExp('^' + svcName.replace('*', '.*') + '$'))) {
-              util.update(finalConfig, svcConfig.config);
-              service.isGlobalEndpoint = !!svcConfig.globalEndpoint;
-            }
-          });
-        });
-      }
-    });
-  });
-
-  util.each(finalConfig, function(key, value) {
-    if (service.config[key] === undefined || service.config[key] === null) {
-      service.config[key] = value;
-    }
-  });
-}
-
-module.exports = regionConfig;
-
-},{"./region_config.json":48,"./util":62}],48:[function(require,module,exports){
-module.exports=[
-  {
-    "regions": ["*"],
-    "serviceConfigs": [
-      {
-        "services": ["*"],
-        "config": {
-          "endpoint": "{service}.{region}.amazonaws.com"
-        }
-      },
-      {
-        "services": ["cloudfront", "iam", "importexport", "sts"],
-        "config": {
-          "endpoint": "{service}.amazonaws.com"
-        },
-        "globalEndpoint": true
-      },
-      {
-        "services": ["s3"],
-        "config": {
-          "endpoint": "{service}-{region}.amazonaws.com"
-        }
-      },
-      {
-        "services": ["route53"],
-        "config": {
-          "endpoint": "https://{service}.amazonaws.com"
-        },
-        "globalEndpoint": true
-      }
-    ]
-  },
-  {
-    "regions": ["us-east-1"],
-    "serviceConfigs": [
-      {
-        "services": ["s3", "simpledb"],
-        "config": {
-          "endpoint": "{service}.amazonaws.com"
-        }
-      }
-    ]
-  },
-  {
-    "regions": ["cn-*"],
-    "serviceConfigs": [
-      {
-        "services": ["*"],
-        "config": {
-          "endpoint": "{service}.{region}.amazonaws.com.cn",
-          "signatureVersion": "v4"
-        }
-      }
-    ]
-  }
-]
-
-},{}],49:[function(require,module,exports){
-(function (process){
-var AWS = require('./core');
-var AcceptorStateMachine = require('./state_machine');
-var inherit = AWS.util.inherit;
-
-
-var hardErrorStates = {success:1, error:1, complete:1};
-
-function isTerminalState(machine) {
-  return hardErrorStates.hasOwnProperty(machine._asm.currentState);
-}
-
-var fsm = new AcceptorStateMachine();
-fsm.setupStates = function() {
-  var transition = function(err, done) {
-    try {
-      var self = this;
-      self.emit(self._asm.currentState, function() {
-        var nextError = self.response.error;
-        if (nextError && nextError !== err && isTerminalState(self)) {
-          throw nextError;
-        }
-
-        done(nextError);
-      });
-
-    } catch (e) {
-      if (e !== err && isTerminalState(self)) {
-        AWS.SequentialExecutor.prototype.unhandledErrorCallback.call(this, e);
-        done();
-      } else {
-        done(e);
-      }
-    }
-  };
-
-  this.addState('validate', 'build', 'error', transition);
-  this.addState('build', 'afterBuild', 'restart', transition);
-  this.addState('afterBuild', 'sign', 'restart', transition);
-  this.addState('sign', 'send', 'retry', transition);
-  this.addState('retry', 'afterRetry', 'afterRetry', transition);
-  this.addState('afterRetry', 'sign', 'error', transition);
-  this.addState('send', 'validateResponse', 'retry', transition);
-  this.addState('validateResponse', 'extractData', 'extractError', transition);
-  this.addState('extractError', 'extractData', 'retry', transition);
-  this.addState('extractData', 'success', 'retry', transition);
-  this.addState('restart', 'build', 'error', transition);
-  this.addState('success', 'complete', 'complete', transition);
-  this.addState('error', 'complete', 'complete', transition);
-  this.addState('complete', null, null, transition);
-};
-fsm.setupStates();
-
-
-AWS.Request = inherit({
-
-
-  constructor: function Request(service, operation, params) {
-    var endpoint = service.endpoint;
-    var region = service.config.region;
-
-    if (service.isGlobalEndpoint) region = 'us-east-1';
-
-    this.service = service;
-    this.operation = operation;
-    this.params = params || {};
-    this.httpRequest = new AWS.HttpRequest(endpoint, region);
-    this.startTime = AWS.util.date.getDate();
-
-    this.response = new AWS.Response(this);
-    this._asm = new AcceptorStateMachine(fsm.states, 'validate');
-
-    AWS.SequentialExecutor.call(this);
-    this.emit = this.emitEvent;
-  },
-
-
-
-
-  send: function send(callback) {
-    if (callback) {
-      this.on('complete', function (resp) {
-        callback.call(resp, resp.error, resp.data);
-      });
-    }
-    this.runTo();
-
-    return this.response;
-  },
-
-
-  build: function build(callback) {
-    return this.runTo('send', callback);
-  },
-
-
-  runTo: function runTo(state, done) {
-    this._asm.runTo(state, done, this);
-    return this;
-  },
-
-
-  abort: function abort() {
-    this.removeAllListeners('validateResponse');
-    this.removeAllListeners('extractError');
-    this.on('validateResponse', function addAbortedError(resp) {
-      resp.error = AWS.util.error(new Error('Request aborted by user'), {
-         code: 'RequestAbortedError', retryable: false
-      });
-    });
-
-    if (this.httpRequest.stream) { // abort HTTP stream
-      this.httpRequest.stream.abort();
-      if (this.httpRequest._abortCallback) {
-         this.httpRequest._abortCallback();
-      } else {
-        this.removeAllListeners('send'); // haven't sent yet, so let's not
-      }
-    }
-
-    return this;
-  },
-
-
-  eachPage: function eachPage(callback) {
-    callback = AWS.util.fn.makeAsync(callback, 3);
-
-    function wrappedCallback(response) {
-      callback.call(response, response.error, response.data, function (result) {
-        if (result === false) return;
-
-        if (response.hasNextPage()) {
-          response.nextPage().on('complete', wrappedCallback).send();
-        } else {
-          callback.call(response, null, null, AWS.util.fn.noop);
-        }
-      });
-    }
-
-    this.on('complete', wrappedCallback).send();
-  },
-
-
-  eachItem: function eachItem(callback) {
-    function wrappedCallback(err, data) {
-      if (err) return callback(err, null);
-      if (data === null) return callback(null, null);
-
-      var config = this.request.service.paginationConfig(this.request.operation);
-      var resultKey = config.resultKey;
-      if (Array.isArray(resultKey)) resultKey = resultKey[0];
-      var results = AWS.util.jamespath.query(resultKey, data);
-      AWS.util.arrayEach(results, function(result) {
-        AWS.util.arrayEach(result, function(item) { callback(null, item); });
-      });
-    }
-
-    this.eachPage(wrappedCallback);
-  },
-
-
-  isPageable: function isPageable() {
-    return this.service.paginationConfig(this.operation) ? true : false;
-  },
-
-
-  createReadStream: function createReadStream() {
-    var streams = AWS.util.nodeRequire('stream');
-    var req = this;
-    var stream = null;
-    var legacyStreams = false;
-
-    if (AWS.HttpClient.streamsApiVersion === 2) {
-      stream = new streams.Readable();
-      stream._read = function() {};
-    } else {
-      stream = new streams.Stream();
-      stream.readable = true;
-    }
-
-    stream.sent = false;
-    stream.on('newListener', function(event) {
-      if (!stream.sent && (event === 'data' || event === 'readable')) {
-        if (event === 'data') legacyStreams = true;
-        stream.sent = true;
-        process.nextTick(function() { req.send(function() { }); });
-      }
-    });
-
-    this.on('httpHeaders', function streamHeaders(statusCode, headers, resp) {
-      if (statusCode < 300) {
-        this.httpRequest._streaming = true;
-
-        req.removeListener('httpData', AWS.EventListeners.Core.HTTP_DATA);
-        req.removeListener('httpError', AWS.EventListeners.Core.HTTP_ERROR);
-        req.on('httpError', function streamHttpError(error, resp) {
-          resp.error = error;
-          resp.error.retryable = false;
-        });
-
-        var httpStream = resp.httpResponse.stream;
-        if (legacyStreams) {
-          httpStream.on('data', function(arg) {
-            stream.emit('data', arg);
-          });
-          httpStream.on('end', function() {
-            stream.emit('end');
-          });
-        } else {
-          httpStream.on('readable', function() {
-            var chunk;
-            do {
-              chunk = httpStream.read();
-              if (chunk !== null) stream.push(chunk);
-            } while (chunk !== null);
-            stream.read(0);
-          });
-          httpStream.on('end', function() {
-            stream.push(null);
-          });
-        }
-
-        httpStream.on('error', function(err) {
-          stream.emit('error', err);
-        });
-      }
-    });
-
-    this.on('error', function(err) {
-      stream.emit('error', err);
-    });
-
-    return stream;
-  },
-
-
-  emitEvent: function emit(eventName, args, done) {
-    if (typeof args === 'function') { done = args; args = null; }
-    if (!done) done = this.unhandledErrorCallback;
-    if (!args) args = this.eventParameters(eventName, this.response);
-
-    var origEmit = AWS.SequentialExecutor.prototype.emit;
-    origEmit.call(this, eventName, args, function (err) {
-      if (err) this.response.error = err;
-      done.call(this, err);
-    });
-  },
-
-
-  eventParameters: function eventParameters(eventName) {
-    switch (eventName) {
-      case 'restart':
-      case 'validate':
-      case 'sign':
-      case 'build':
-      case 'afterValidate':
-      case 'afterBuild':
-        return [this];
-      case 'error':
-        return [this.response.error, this.response];
-      default:
-        return [this.response];
-    }
-  },
-
-
-  presign: function presign(expires, callback) {
-    if (!callback && typeof expires === 'function') {
-      callback = expires;
-      expires = null;
-    }
-    return new AWS.Signers.Presign().sign(this.toGet(), expires, callback);
-  },
-
-
-  toUnauthenticated: function toUnauthenticated() {
-    this.removeListener('validate', AWS.EventListeners.Core.VALIDATE_CREDENTIALS);
-    this.removeListener('sign', AWS.EventListeners.Core.SIGN);
-    return this.toGet();
-  },
-
-
-  toGet: function toGet() {
-    if (this.service.api.protocol === 'query') {
-      this.removeListener('build', this.buildAsGet);
-      this.addListener('build', this.buildAsGet);
-    }
-    return this;
-  },
-
-
-  buildAsGet: function buildAsGet(request) {
-    request.httpRequest.method = 'GET';
-    request.httpRequest.path = request.service.endpoint.path +
-                               '?' + request.httpRequest.body;
-    request.httpRequest.body = '';
-
-    delete request.httpRequest.headers['Content-Length'];
-    delete request.httpRequest.headers['Content-Type'];
-  }
-});
-
-AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
-
-}).call(this,require("G+mPsH"))
-},{"./core":22,"./state_machine":61,"G+mPsH":12}],50:[function(require,module,exports){
-
-
-var AWS = require('./core');
-var inherit = AWS.util.inherit;
-
-
-AWS.ResourceWaiter = inherit({
-
-  constructor: function constructor(service, state) {
-    this.service = service;
-    this.state = state;
-
-    if (typeof this.state === 'object') {
-      AWS.util.each.call(this, this.state, function (key, value) {
-        this.state = key;
-        this.expectedValue = value;
-      });
-    }
-
-    this.loadWaiterConfig(this.state);
-    if (!this.expectedValue) {
-      this.expectedValue = this.config.successValue;
-    }
-  },
-
-  service: null,
-
-  state: null,
-
-  expectedValue: null,
-
-  config: null,
-
-  waitDone: false,
-
-  Listeners: {
-    retry: new AWS.SequentialExecutor().addNamedListeners(function(add) {
-      add('RETRY_CHECK', 'retry', function(resp) {
-        var waiter = resp.request._waiter;
-        if (resp.error && resp.error.code === 'ResourceNotReady') {
-          resp.error.retryDelay = waiter.config.interval * 1000;
-        }
-      });
-    }),
-
-    output: new AWS.SequentialExecutor().addNamedListeners(function(add) {
-      add('CHECK_OUT_ERROR', 'extractError', function CHECK_OUT_ERROR(resp) {
-        if (resp.error) {
-          resp.request._waiter.setError(resp, true);
-        }
-      });
-
-      add('CHECK_OUTPUT', 'extractData', function CHECK_OUTPUT(resp) {
-        var waiter = resp.request._waiter;
-        var success = waiter.checkSuccess(resp);
-        if (!success) {
-          waiter.setError(resp, success === null ? false : true);
-        } else {
-          resp.error = null;
-        }
-      });
-    }),
-
-    error: new AWS.SequentialExecutor().addNamedListeners(function(add) {
-      add('CHECK_ERROR', 'extractError', function CHECK_ERROR(resp) {
-        var waiter = resp.request._waiter;
-        var success = waiter.checkError(resp);
-        if (!success) {
-          waiter.setError(resp, success === null ? false : true);
-        } else {
-          resp.error = null;
-          resp.request.removeAllListeners('extractData');
-        }
-      });
-
-      add('CHECK_ERR_OUTPUT', 'extractData', function CHECK_ERR_OUTPUT(resp) {
-        resp.request._waiter.setError(resp, true);
-      });
-    })
-  },
-
-
-  wait: function wait(params, callback) {
-    if (typeof params === 'function') {
-      callback = params; params = undefined;
-    }
-
-    var request = this.service.makeRequest(this.config.operation, params);
-    var listeners = this.Listeners[this.config.successType];
-    request._waiter = this;
-    request.response.maxRetries = this.config.maxAttempts;
-    request.addListeners(this.Listeners.retry);
-    if (listeners) request.addListeners(listeners);
-
-    if (callback) request.send(callback);
-    return request;
-  },
-
-  setError: function setError(resp, retryable) {
-    resp.data = null;
-    resp.error = AWS.util.error(resp.error || new Error(), {
-      code: 'ResourceNotReady',
-      message: 'Resource is not in the state ' + this.state,
-      retryable: retryable
-    });
-  },
-
-
-  checkSuccess: function checkSuccess(resp) {
-    if (!this.config.successPath) {
-      return resp.httpResponse.statusCode < 300;
-    }
-
-    var r = AWS.util.jamespath.find(this.config.successPath, resp.data);
-
-    if (this.config.failureValue &&
-        this.config.failureValue.indexOf(r) >= 0) {
-      return null; // fast fail
-    }
-
-    if (this.expectedValue) {
-      return r === this.expectedValue;
-    } else {
-      return r ? true : false;
-    }
-  },
-
-
-  checkError: function checkError(resp) {
-    var value = this.config.successValue;
-    if (typeof value === 'number') {
-      return resp.httpResponse.statusCode === value;
-    } else {
-      return resp.error && resp.error.code === value;
-    }
-  },
-
-
-  loadWaiterConfig: function loadWaiterConfig(state, noException) {
-    if (!this.service.api.waiters[state]) {
-      if (noException) return;
-      throw new AWS.util.error(new Error(), {
-        code: 'StateNotFoundError',
-        message: 'State ' + state + ' not found.'
-      });
-    }
-
-    this.config = this.service.api.waiters[state];
-    var config = this.config;
-
-    (function () { // anonymous function to avoid max complexity count
-      config.successType = config.successType || config.acceptorType;
-      config.successPath = config.successPath || config.acceptorPath;
-      config.successValue = config.successValue || config.acceptorValue;
-      config.failureType = config.failureType || config.acceptorType;
-      config.failurePath = config.failurePath || config.acceptorPath;
-      config.failureValue = config.failureValue || config.acceptorValue;
-    })();
-  }
-});
-
-},{"./core":22}],51:[function(require,module,exports){
-var AWS = require('./core');
-var inherit = AWS.util.inherit;
-
-
-AWS.Response = inherit({
-
-
-  constructor: function Response(request) {
-    this.request = request;
-    this.data = null;
-    this.error = null;
-    this.retryCount = 0;
-    this.redirectCount = 0;
-    this.httpResponse = new AWS.HttpResponse();
-    if (request) {
-      this.maxRetries = request.service.numRetries();
-      this.maxRedirects = request.service.config.maxRedirects;
-    }
-  },
-
-
-  nextPage: function nextPage(callback) {
-    var config;
-    var service = this.request.service;
-    var operation = this.request.operation;
-    try {
-      config = service.paginationConfig(operation, true);
-    } catch (e) { this.error = e; }
-
-    if (!this.hasNextPage()) {
-      if (callback) callback(this.error, null);
-      else if (this.error) throw this.error;
-      return null;
-    }
-
-    var params = AWS.util.copy(this.request.params);
-    if (!this.nextPageTokens) {
-      return callback ? callback(null, null) : null;
-    } else {
-      var inputTokens = config.inputToken;
-      if (typeof inputTokens === 'string') inputTokens = [inputTokens];
-      for (var i = 0; i < inputTokens.length; i++) {
-        params[inputTokens[i]] = this.nextPageTokens[i];
-      }
-      return service.makeRequest(this.request.operation, params, callback);
-    }
-  },
-
-
-  hasNextPage: function hasNextPage() {
-    this.cacheNextPageTokens();
-    if (this.nextPageTokens) return true;
-    if (this.nextPageTokens === undefined) return undefined;
-    else return false;
-  },
-
-
-  cacheNextPageTokens: function cacheNextPageTokens() {
-    if (this.hasOwnProperty('nextPageTokens')) return this.nextPageTokens;
-    this.nextPageTokens = undefined;
-
-    var config = this.request.service.paginationConfig(this.request.operation);
-    if (!config) return this.nextPageTokens;
-
-    this.nextPageTokens = null;
-    if (config.moreResults) {
-      if (!AWS.util.jamespath.find(config.moreResults, this.data)) {
-        return this.nextPageTokens;
-      }
-    }
-
-    var exprs = config.outputToken;
-    if (typeof exprs === 'string') exprs = [exprs];
-    AWS.util.arrayEach.call(this, exprs, function (expr) {
-      var output = AWS.util.jamespath.find(expr, this.data);
-      if (output) {
-        this.nextPageTokens = this.nextPageTokens || [];
-        this.nextPageTokens.push(output);
-      }
-    });
-
-    return this.nextPageTokens;
-  }
-
-});
-
-},{"./core":22}],52:[function(require,module,exports){
-var AWS = require('./core');
-var domain = AWS.util.nodeRequire('domain');
-
-
-AWS.SequentialExecutor = AWS.util.inherit({
-
-  constructor: function SequentialExecutor() {
-    this.domain = domain && domain.active;
-    this._events = {};
-  },
-
-
-  listeners: function listeners(eventName) {
-    return this._events[eventName] ? this._events[eventName].slice(0) : [];
-  },
-
-  on: function on(eventName, listener) {
-    if (this._events[eventName]) {
-      this._events[eventName].push(listener);
-    } else {
-      this._events[eventName] = [listener];
-    }
-    return this;
-  },
-
-
-  onAsync: function onAsync(eventName, listener) {
-    listener._isAsync = true;
-    return this.on(eventName, listener);
-  },
-
-  removeListener: function removeListener(eventName, listener) {
-    var listeners = this._events[eventName];
-    if (listeners) {
-      var length = listeners.length;
-      var position = -1;
-      for (var i = 0; i < length; ++i) {
-        if (listeners[i] === listener) {
-          position = i;
-        }
-      }
-      if (position > -1) {
-        listeners.splice(position, 1);
-      }
-    }
-    return this;
-  },
-
-  removeAllListeners: function removeAllListeners(eventName) {
-    if (eventName) {
-      delete this._events[eventName];
-    } else {
-      this._events = {};
-    }
-    return this;
-  },
-
-
-  emit: function emit(eventName, eventArgs, doneCallback) {
-    if (!doneCallback) doneCallback = this.unhandledErrorCallback;
-    var listeners = this.listeners(eventName);
-    var count = listeners.length;
-    this.callListeners(listeners, eventArgs, doneCallback);
-    return count > 0;
-  },
-
-
-  callListeners: function callListeners(listeners, args, doneCallback) {
-    if (listeners.length === 0) {
-      doneCallback.call(this);
-      return;
-    }
-
-    var self = this, listener = listeners.shift();
-    if (listener._isAsync) { // asynchronous listener
-      var callNextListener = function(err) {
-        if (err) {
-          doneCallback.call(self, err);
-        } else {
-          self.callListeners(listeners, args, doneCallback);
-        }
-      };
-      listener.apply(self, args.concat([callNextListener]));
-    } else { // synchronous listener
-      try {
-        listener.apply(self, args);
-        self.callListeners(listeners, args, doneCallback);
-      } catch (err) {
-        doneCallback.call(self, err);
-      }
-    }
-  },
-
-
-  addListeners: function addListeners(listeners) {
-    var self = this;
-
-    if (listeners._events) listeners = listeners._events;
-
-    AWS.util.each(listeners, function(event, callbacks) {
-      if (typeof callbacks === 'function') callbacks = [callbacks];
-      AWS.util.arrayEach(callbacks, function(callback) {
-        self.on(event, callback);
-      });
-    });
-
-    return self;
-  },
-
-
-  addNamedListener: function addNamedListener(name, eventName, callback) {
-    this[name] = callback;
-    this.addListener(eventName, callback);
-    return this;
-  },
-
-
-  addNamedAsyncListener: function addNamedAsyncListener(name, eventName, callback) {
-    callback._isAsync = true;
-    return this.addNamedListener(name, eventName, callback);
-  },
-
-
-  addNamedListeners: function addNamedListeners(callback) {
-    var self = this;
-    callback(
-      function() {
-        self.addNamedListener.apply(self, arguments);
-      },
-      function() {
-        self.addNamedAsyncListener.apply(self, arguments);
-      }
-    );
-    return this;
-  },
-
-
-  unhandledErrorCallback: function unhandledErrorCallback(err) {
-    if (err) {
-      if (domain && this.domain instanceof domain.Domain) {
-        err.domainEmitter = this;
-        err.domain = this.domain;
-        err.domainThrown = false;
-        this.domain.emit('error', err);
-      } else {
-        throw err;
-      }
-    }
-  }
-});
-
-
-AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.on;
-
-module.exports = AWS.SequentialExecutor;
-
-},{"./core":22}],53:[function(require,module,exports){
-var AWS = require('./core');
-var Api = require('./model/api');
-var regionConfig = require('./region_config');
-var inherit = AWS.util.inherit;
-
-
-AWS.Service = inherit({
-
-  constructor: function Service(config) {
-    if (!this.loadServiceClass) {
-      throw AWS.util.error(new Error(),
-        'Service must be constructed with `new\' operator');
-    }
-    var ServiceClass = this.loadServiceClass(config || {});
-    if (ServiceClass) return new ServiceClass(config);
-    this.initialize(config);
-  },
-
-
-  initialize: function initialize(config) {
-    this.config = new AWS.Config(AWS.config);
-    if (config) this.config.update(config, true);
-
-    this.validateService();
-    regionConfig(this);
-
-    this.config.endpoint = this.endpointFromTemplate(this.config.endpoint);
-    this.setEndpoint(this.config.endpoint);
-  },
-
-
-  validateService: function validateService() {
-  },
-
-
-  loadServiceClass: function loadServiceClass(serviceConfig) {
-    var config = serviceConfig;
-    if (!AWS.util.isEmpty(this.api)) {
-      return null;
-    } else if (config.apiConfig) {
-      return AWS.Service.defineServiceApi(this.constructor, config.apiConfig);
-    } else if (!this.constructor.services) {
-      return null;
-    } else {
-      config = new AWS.Config(AWS.config);
-      config.update(serviceConfig, true);
-      var version = config.apiVersions[this.constructor.serviceIdentifier];
-      version = version || config.apiVersion;
-      return this.getLatestServiceClass(version);
-    }
-  },
-
-
-  getLatestServiceClass: function getLatestServiceClass(version) {
-    version = this.getLatestServiceVersion(version);
-    if (this.constructor.services[version] === null) {
-      AWS.Service.defineServiceApi(this.constructor, version);
-    }
-
-    return this.constructor.services[version];
-  },
-
-
-  getLatestServiceVersion: function getLatestServiceVersion(version) {
-    if (!this.constructor.services || this.constructor.services.length === 0) {
-      throw new Error('No services defined on ' +
-                      this.constructor.serviceIdentifier);
-    }
-
-    if (!version) {
-      version = 'latest';
-    } else if (AWS.util.isType(version, Date)) {
-      version = AWS.util.date.iso8601(version).split('T')[0];
-    }
-
-    if (Object.hasOwnProperty(this.constructor.services, version)) {
-      return version;
-    }
-
-    var keys = Object.keys(this.constructor.services).sort();
-    var selectedVersion = null;
-    for (var i = keys.length - 1; i >= 0; i--) {
-      if (keys[i][keys[i].length - 1] !== '*') {
-        selectedVersion = keys[i];
-      }
-      if (keys[i].substr(0, 10) <= version) {
-        return selectedVersion;
-      }
-    }
-
-    throw new Error('Could not find ' + this.constructor.serviceIdentifier +
-                    ' API to satisfy version constraint `' + version + '\'');
-  },
-
-
-  api: {},
-
-
-  defaultRetryCount: 3,
-
-
-  makeRequest: function makeRequest(operation, params, callback) {
-    if (typeof params === 'function') {
-      callback = params;
-      params = null;
-    }
-
-    params = params || {};
-    if (this.config.params) { // copy only toplevel bound params
-      var rules = this.api.operations[operation];
-      if (rules) {
-        params = AWS.util.copy(params);
-        AWS.util.each(this.config.params, function(key, value) {
-          if (rules.input.members[key]) {
-            if (params[key] === undefined || params[key] === null) {
-              params[key] = value;
-            }
-          }
-        });
-      }
-    }
-
-    var request = new AWS.Request(this, operation, params);
-    this.addAllRequestListeners(request);
-
-    if (callback) request.send(callback);
-    return request;
-  },
-
-
-  makeUnauthenticatedRequest: function makeUnauthenticatedRequest(operation, params, callback) {
-    if (typeof params === 'function') {
-      callback = params;
-      params = {};
-    }
-
-    var request = this.makeRequest(operation, params).toUnauthenticated();
-    return callback ? request.send(callback) : request;
-  },
-
-
-  waitFor: function waitFor(state, params, callback) {
-    var waiter = new AWS.ResourceWaiter(this, state);
-    return waiter.wait(params, callback);
-  },
-
-
-  addAllRequestListeners: function addAllRequestListeners(request) {
-    var list = [AWS.events, AWS.EventListeners.Core, this.serviceInterface(),
-                AWS.EventListeners.CorePost];
-    for (var i = 0; i < list.length; i++) {
-      if (list[i]) request.addListeners(list[i]);
-    }
-
-    if (!this.config.paramValidation) {
-      request.removeListener('validate',
-        AWS.EventListeners.Core.VALIDATE_PARAMETERS);
-    }
-
-    if (this.config.logger) { // add logging events
-      request.addListeners(AWS.EventListeners.Logger);
-    }
-
-    this.setupRequestListeners(request);
-  },
-
-
-  setupRequestListeners: function setupRequestListeners() {
-  },
-
-
-  getSignerClass: function getSignerClass() {
-    var version;
-    if (this.config.signatureVersion) {
-      version = this.config.signatureVersion;
-    } else {
-      version = this.api.signatureVersion;
-    }
-    return AWS.Signers.RequestSigner.getVersion(version);
-  },
-
-
-  serviceInterface: function serviceInterface() {
-    switch (this.api.protocol) {
-      case 'query': return AWS.EventListeners.Query;
-      case 'json': return AWS.EventListeners.Json;
-      case 'rest-json': return AWS.EventListeners.RestJson;
-      case 'rest-xml': return AWS.EventListeners.RestXml;
-    }
-    if (this.api.protocol) {
-      throw new Error('Invalid service `protocol\' ' +
-        this.api.protocol + ' in API config');
-    }
-  },
-
-
-  successfulResponse: function successfulResponse(resp) {
-    return resp.httpResponse.statusCode < 300;
-  },
-
-
-  numRetries: function numRetries() {
-    if (this.config.maxRetries !== undefined) {
-      return this.config.maxRetries;
-    } else {
-      return this.defaultRetryCount;
-    }
-  },
-
-
-  retryDelays: function retryDelays() {
-    var retryCount = this.numRetries();
-    var delays = [];
-    for (var i = 0; i < retryCount; ++i) {
-      delays[i] = Math.pow(2, i) * 30;
-    }
-    return delays;
-  },
-
-
-  retryableError: function retryableError(error) {
-    if (this.networkingError(error)) return true;
-    if (this.expiredCredentialsError(error)) return true;
-    if (this.throttledError(error)) return true;
-    if (error.statusCode >= 500) return true;
-    return false;
-  },
-
-
-  networkingError: function networkingError(error) {
-    return error.code === 'NetworkingError';
-  },
-
-
-  expiredCredentialsError: function expiredCredentialsError(error) {
-    return (error.code === 'ExpiredTokenException');
-  },
-
-
-  throttledError: function throttledError(error) {
-    return (error.code === 'ProvisionedThroughputExceededException');
-  },
-
-
-  endpointFromTemplate: function endpointFromTemplate(endpoint) {
-    if (typeof endpoint !== 'string') return endpoint;
-
-    var e = endpoint;
-    e = e.replace(/\{service\}/g, this.api.endpointPrefix);
-    e = e.replace(/\{region\}/g, this.config.region);
-    e = e.replace(/\{scheme\}/g, this.config.sslEnabled ? 'https' : 'http');
-    return e;
-  },
-
-
-  setEndpoint: function setEndpoint(endpoint) {
-    this.endpoint = new AWS.Endpoint(endpoint, this.config);
-  },
-
-
-  paginationConfig: function paginationConfig(operation, throwException) {
-    var paginator = this.api.operations[operation].paginator;
-    if (!paginator) {
-      if (throwException) {
-        var e = new Error();
-        throw AWS.util.error(e, 'No pagination configuration for ' + operation);
-      }
-      return null;
-    }
-
-    return paginator;
-  }
-});
-
-AWS.util.update(AWS.Service, {
-
-
-  defineMethods: function defineMethods(svc) {
-    AWS.util.each(svc.prototype.api.operations, function iterator(method) {
-      if (svc.prototype[method]) return;
-      svc.prototype[method] = function (params, callback) {
-        return this.makeRequest(method, params, callback);
-      };
-    });
-  },
-
-
-  defineService: function defineService(serviceIdentifier, versions, features) {
-    if (!Array.isArray(versions)) {
-      features = versions;
-      versions = [];
-    }
-
-    var svc = inherit(AWS.Service, features || {});
-
-    if (typeof serviceIdentifier === 'string') {
-      AWS.Service.addVersions(svc, versions);
-
-      var identifier = svc.serviceIdentifier || serviceIdentifier;
-      svc.serviceIdentifier = identifier;
-    } else { // defineService called with an API
-      svc.prototype.api = serviceIdentifier;
-      AWS.Service.defineMethods(svc);
-    }
-
-    return svc;
-  },
-
-
-  addVersions: function addVersions(svc, versions) {
-    if (!Array.isArray(versions)) versions = [versions];
-
-    svc.services = svc.services || {};
-    for (var i = 0; i < versions.length; i++) {
-      if (svc.services[versions[i]] === undefined) {
-        svc.services[versions[i]] = null;
-      }
-    }
-
-    svc.apiVersions = Object.keys(svc.services).sort();
-  },
-
-
-  defineServiceApi: function defineServiceApi(superclass, version, apiConfig) {
-    var svc = inherit(superclass, {
-      serviceIdentifier: superclass.serviceIdentifier
-    });
-
-    function setApi(api) {
-      if (api.isApi) {
-        svc.prototype.api = api;
-      } else {
-        svc.prototype.api = new Api(api);
-      }
-    }
-
-    if (typeof version === 'string') {
-      if (apiConfig) {
-        setApi(apiConfig);
-      } else {
-        try {
-          var apis = AWS.util.nodeRequire('aws-sdk-apis');
-          setApi(apis.load(superclass.serviceIdentifier, version));
-        } catch (err) {
-          throw AWS.util.error(err, {
-            message: 'Could not find API configuration ' +
-              superclass.serviceIdentifier + '-' + version
-          });
-        }
-      }
-      if (!superclass.services.hasOwnProperty(version)) {
-        superclass.apiVersions = superclass.apiVersions.concat(version).sort();
-      }
-      superclass.services[version] = svc;
-    } else {
-      setApi(version);
-    }
-
-    AWS.Service.defineMethods(svc);
-    return svc;
-  }
-});
-
-},{"./core":22,"./model/api":34,"./region_config":47}],54:[function(require,module,exports){
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-
-var expiresHeader = 'presigned-expires';
-
-
-function signedUrlBuilder(request) {
-  var expires = request.httpRequest.headers[expiresHeader];
-
-  delete request.httpRequest.headers['User-Agent'];
-  delete request.httpRequest.headers['X-Amz-User-Agent'];
-
-  if (request.service.getSignerClass() === AWS.Signers.V4) {
-    if (expires > 604800) { // one week expiry is invalid
-      var message = 'Presigning does not support expiry time greater ' +
-                    'than a week with SigV4 signing.';
-      throw AWS.util.error(new Error(), {
-        code: 'InvalidExpiryTime', message: message, retryable: false
-      });
-    }
-    request.httpRequest.headers[expiresHeader] = expires;
-  } else if (request.service.getSignerClass() === AWS.Signers.S3) {
-    request.httpRequest.headers[expiresHeader] = parseInt(
-      AWS.util.date.unixTimestamp() + expires, 10).toString();
-  } else {
-    throw AWS.util.error(new Error(), {
-      message: 'Presigning only supports S3 or SigV4 signing.',
-      code: 'UnsupportedSigner', retryable: false
-    });
-  }
-}
-
-
-function signedUrlSigner(request) {
-  var endpoint = request.httpRequest.endpoint;
-  var parsedUrl = AWS.util.urlParse(request.httpRequest.path);
-  var queryParams = {};
-
-  if (parsedUrl.search) {
-    queryParams = AWS.util.queryStringParse(parsedUrl.search.substr(1));
-  }
-
-  AWS.util.each(request.httpRequest.headers, function (key, value) {
-    if (key === expiresHeader) key = 'Expires';
-    queryParams[key] = value;
-  });
-  delete request.httpRequest.headers[expiresHeader];
-
-  var auth = queryParams['Authorization'].split(' ');
-  if (auth[0] === 'AWS') {
-    auth = auth[1].split(':');
-    queryParams['AWSAccessKeyId'] = auth[0];
-    queryParams['Signature'] = auth[1];
-  } else if (auth[0] === 'AWS4-HMAC-SHA256') { // SigV4 signing
-    auth.shift();
-    var rest = auth.join(' ');
-    var signature = rest.match(/Signature=(.*?)(?:,|\s|\r?\n|$)/)[1];
-    queryParams['X-Amz-Signature'] = signature;
-    delete queryParams['Expires'];
-  }
-  delete queryParams['Authorization'];
-  delete queryParams['Host'];
-
-  endpoint.pathname = parsedUrl.pathname;
-  endpoint.search = AWS.util.queryParamsToString(queryParams);
-}
-
-
-AWS.Signers.Presign = inherit({
-
-  sign: function sign(request, expireTime, callback) {
-    request.httpRequest.headers[expiresHeader] = expireTime || 3600;
-    request.on('build', signedUrlBuilder);
-    request.on('sign', signedUrlSigner);
-    request.removeListener('afterBuild',
-      AWS.EventListeners.Core.SET_CONTENT_LENGTH);
-
-    request.emit('beforePresign', [request]);
-
-    if (callback) {
-      request.build(function() {
-        if (this.response.error) callback(this.response.error);
-        else {
-          callback(null, AWS.util.urlFormat(request.httpRequest.endpoint));
-        }
-      });
-    } else {
-      request.build();
-      return AWS.util.urlFormat(request.httpRequest.endpoint);
-    }
-  }
-});
-
-module.exports = AWS.Signers.Presign;
-
-},{"../core":22}],55:[function(require,module,exports){
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-
-AWS.Signers.RequestSigner = inherit({
-  constructor: function RequestSigner(request) {
-    this.request = request;
-  }
-});
-
-AWS.Signers.RequestSigner.getVersion = function getVersion(version) {
-  switch (version) {
-    case 'v2': return AWS.Signers.V2;
-    case 'v3': return AWS.Signers.V3;
-    case 'v4': return AWS.Signers.V4;
-    case 's3': return AWS.Signers.S3;
-    case 'v3https': return AWS.Signers.V3Https;
-  }
-  throw new Error('Unknown signing version ' + version);
-};
-
-require('./v2');
-require('./v3');
-require('./v3https');
-require('./v4');
-require('./s3');
-require('./presign');
-
-},{"../core":22,"./presign":54,"./s3":56,"./v2":57,"./v3":58,"./v3https":59,"./v4":60}],56:[function(require,module,exports){
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-
-AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
-
-  subResources: {
-    'acl': 1,
-    'cors': 1,
-    'lifecycle': 1,
-    'delete': 1,
-    'location': 1,
-    'logging': 1,
-    'notification': 1,
-    'partNumber': 1,
-    'policy': 1,
-    'requestPayment': 1,
-    'restore': 1,
-    'tagging': 1,
-    'torrent': 1,
-    'uploadId': 1,
-    'uploads': 1,
-    'versionId': 1,
-    'versioning': 1,
-    'versions': 1,
-    'website': 1
-  },
-
-  responseHeaders: {
-    'response-content-type': 1,
-    'response-content-language': 1,
-    'response-expires': 1,
-    'response-cache-control': 1,
-    'response-content-disposition': 1,
-    'response-content-encoding': 1
-  },
-
-  addAuthorization: function addAuthorization(credentials, date) {
-    if (!this.request.headers['presigned-expires']) {
-      this.request.headers['X-Amz-Date'] = AWS.util.date.rfc822(date);
-    }
-
-    if (credentials.sessionToken) {
-      this.request.headers['x-amz-security-token'] = credentials.sessionToken;
-    }
-
-    var signature = this.sign(credentials.secretAccessKey, this.stringToSign());
-    var auth = 'AWS ' + credentials.accessKeyId + ':' + signature;
-
-    this.request.headers['Authorization'] = auth;
-  },
-
-  stringToSign: function stringToSign() {
-    var r = this.request;
-
-    var parts = [];
-    parts.push(r.method);
-    parts.push(r.headers['Content-MD5'] || '');
-    parts.push(r.headers['Content-Type'] || '');
-
-    parts.push(r.headers['presigned-expires'] || '');
-
-    var headers = this.canonicalizedAmzHeaders();
-    if (headers) parts.push(headers);
-    parts.push(this.canonicalizedResource());
-
-    return parts.join('\n');
-
-  },
-
-  canonicalizedAmzHeaders: function canonicalizedAmzHeaders() {
-
-    var amzHeaders = [];
-
-    AWS.util.each(this.request.headers, function (name) {
-      if (name.match(/^x-amz-/i))
-        amzHeaders.push(name);
-    });
-
-    amzHeaders.sort(function (a, b) {
-      return a.toLowerCase() < b.toLowerCase() ? -1 : 1;
-    });
-
-    var parts = [];
-    AWS.util.arrayEach.call(this, amzHeaders, function (name) {
-      parts.push(name.toLowerCase() + ':' + String(this.request.headers[name]));
-    });
-
-    return parts.join('\n');
-
-  },
-
-  canonicalizedResource: function canonicalizedResource() {
-
-    var r = this.request;
-
-    var parts = r.path.split('?');
-    var path = parts[0];
-    var querystring = parts[1];
-
-    var resource = '';
-
-    if (r.virtualHostedBucket)
-      resource += '/' + r.virtualHostedBucket;
-
-    resource += path;
-
-    if (querystring) {
-
-      var resources = [];
-
-      AWS.util.arrayEach.call(this, querystring.split('&'), function (param) {
-        var name = param.split('=')[0];
-        var value = param.split('=')[1];
-        if (this.subResources[name] || this.responseHeaders[name]) {
-          var subresource = { name: name };
-          if (value !== undefined) {
-            if (this.subResources[name]) {
-              subresource.value = value;
-            } else {
-              subresource.value = decodeURIComponent(value);
-            }
-          }
-          resources.push(subresource);
-        }
-      });
-
-      resources.sort(function (a, b) { return a.name < b.name ? -1 : 1; });
-
-      if (resources.length) {
-
-        querystring = [];
-        AWS.util.arrayEach(resources, function (resource) {
-          if (resource.value === undefined)
-            querystring.push(resource.name);
-          else
-            querystring.push(resource.name + '=' + resource.value);
-        });
-
-        resource += '?' + querystring.join('&');
-      }
-
-    }
-
-    return resource;
-
-  },
-
-  sign: function sign(secret, string) {
-    return AWS.util.crypto.hmac(secret, string, 'base64', 'sha1');
-  }
-});
-
-module.exports = AWS.Signers.S3;
-
-},{"../core":22}],57:[function(require,module,exports){
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-
-AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
-  addAuthorization: function addAuthorization(credentials, date) {
-
-    if (!date) date = AWS.util.date.getDate();
-
-    var r = this.request;
-
-    r.params.Timestamp = AWS.util.date.iso8601(date);
-    r.params.SignatureVersion = '2';
-    r.params.SignatureMethod = 'HmacSHA256';
-    r.params.AWSAccessKeyId = credentials.accessKeyId;
-
-    if (credentials.sessionToken) {
-      r.params.SecurityToken = credentials.sessionToken;
-    }
-
-    delete r.params.Signature; // delete old Signature for re-signing
-    r.params.Signature = this.signature(credentials);
-
-    r.body = AWS.util.queryParamsToString(r.params);
-    r.headers['Content-Length'] = r.body.length;
-  },
-
-  signature: function signature(credentials) {
-    return AWS.util.crypto.hmac(credentials.secretAccessKey, this.stringToSign(), 'base64');
-  },
-
-  stringToSign: function stringToSign() {
-    var parts = [];
-    parts.push(this.request.method);
-    parts.push(this.request.endpoint.host.toLowerCase());
-    parts.push(this.request.pathname());
-    parts.push(AWS.util.queryParamsToString(this.request.params));
-    return parts.join('\n');
-  }
-
-});
-
-module.exports = AWS.Signers.V2;
-
-},{"../core":22}],58:[function(require,module,exports){
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-
-AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
-  addAuthorization: function addAuthorization(credentials, date) {
-
-    var datetime = AWS.util.date.rfc822(date);
-
-    this.request.headers['X-Amz-Date'] = datetime;
-
-    if (credentials.sessionToken) {
-      this.request.headers['x-amz-security-token'] = credentials.sessionToken;
-    }
-
-    this.request.headers['X-Amzn-Authorization'] =
-      this.authorization(credentials, datetime);
-
-  },
-
-  authorization: function authorization(credentials) {
-    return 'AWS3 ' +
-      'AWSAccessKeyId=' + credentials.accessKeyId + ',' +
-      'Algorithm=HmacSHA256,' +
-      'SignedHeaders=' + this.signedHeaders() + ',' +
-      'Signature=' + this.signature(credentials);
-  },
-
-  signedHeaders: function signedHeaders() {
-    var headers = [];
-    AWS.util.arrayEach(this.headersToSign(), function iterator(h) {
-      headers.push(h.toLowerCase());
-    });
-    return headers.sort().join(';');
-  },
-
-  canonicalHeaders: function canonicalHeaders() {
-    var headers = this.request.headers;
-    var parts = [];
-    AWS.util.arrayEach(this.headersToSign(), function iterator(h) {
-      parts.push(h.toLowerCase().trim() + ':' + String(headers[h]).trim());
-    });
-    return parts.sort().join('\n') + '\n';
-  },
-
-  headersToSign: function headersToSign() {
-    var headers = [];
-    AWS.util.each(this.request.headers, function iterator(k) {
-      if (k === 'Host' || k === 'Content-Encoding' || k.match(/^X-Amz/i)) {
-        headers.push(k);
-      }
-    });
-    return headers;
-  },
-
-  signature: function signature(credentials) {
-    return AWS.util.crypto.hmac(credentials.secretAccessKey, this.stringToSign(), 'base64');
-  },
-
-  stringToSign: function stringToSign() {
-    var parts = [];
-    parts.push(this.request.method);
-    parts.push('/');
-    parts.push('');
-    parts.push(this.canonicalHeaders());
-    parts.push(this.request.body);
-    return AWS.util.crypto.sha256(parts.join('\n'));
-  }
-
-});
-
-module.exports = AWS.Signers.V3;
-
-},{"../core":22}],59:[function(require,module,exports){
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-require('./v3');
-
-
-AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
-  authorization: function authorization(credentials) {
-    return 'AWS3-HTTPS ' +
-      'AWSAccessKeyId=' + credentials.accessKeyId + ',' +
-      'Algorithm=HmacSHA256,' +
-      'Signature=' + this.signature(credentials);
-  },
-
-  stringToSign: function stringToSign() {
-    return this.request.headers['X-Amz-Date'];
-  }
-});
-
-module.exports = AWS.Signers.V3Https;
-
-},{"../core":22,"./v3":58}],60:[function(require,module,exports){
-var AWS = require('../core');
-var inherit = AWS.util.inherit;
-
-
-var cachedSecret = {};
-
-
-var expiresHeader = 'presigned-expires';
-
-
-AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
-  constructor: function V4(request, serviceName) {
-    AWS.Signers.RequestSigner.call(this, request);
-    this.serviceName = serviceName;
-  },
-
-  algorithm: 'AWS4-HMAC-SHA256',
-
-  addAuthorization: function addAuthorization(credentials, date) {
-    var datetime = AWS.util.date.iso8601(date).replace(/[:\-]|\.\d{3}/g, '');
-
-    if (this.isPresigned()) {
-      this.updateForPresigned(credentials, datetime);
-    } else {
-      this.addHeaders(credentials, datetime);
-      this.updateBody(credentials);
-    }
-
-    this.request.headers['Authorization'] =
-      this.authorization(credentials, datetime);
-  },
-
-  addHeaders: function addHeaders(credentials, datetime) {
-    this.request.headers['X-Amz-Date'] = datetime;
-    if (credentials.sessionToken) {
-      this.request.headers['x-amz-security-token'] = credentials.sessionToken;
-    }
-  },
-
-  updateBody: function updateBody(credentials) {
-    if (this.request.params) {
-      this.request.params.AWSAccessKeyId = credentials.accessKeyId;
-
-      if (credentials.sessionToken) {
-        this.request.params.SecurityToken = credentials.sessionToken;
-      }
-
-      this.request.body = AWS.util.queryParamsToString(this.request.params);
-      this.request.headers['Content-Length'] = this.request.body.length;
-    }
-  },
-
-  updateForPresigned: function updateForPresigned(credentials, datetime) {
-    var credString = this.credentialString(datetime);
-    var qs = {
-      'X-Amz-Date': datetime,
-      'X-Amz-Algorithm': this.algorithm,
-      'X-Amz-Credential': credentials.accessKeyId + '/' + credString,
-      'X-Amz-Expires': this.request.headers[expiresHeader],
-      'X-Amz-SignedHeaders': this.signedHeaders()
-    };
-
-    if (credentials.sessionToken) {
-      qs['X-Amz-Security-Token'] = credentials.sessionToken;
-    }
-
-    if (this.request.headers['Content-Type']) {
-      qs['Content-Type'] = this.request.headers['Content-Type'];
-    }
-
-    AWS.util.each.call(this, this.request.headers, function(key, value) {
-      if (key === expiresHeader) return;
-      if (this.isSignableHeader(key) &&
-          key.toLowerCase().indexOf('x-amz-') === 0) {
-        qs[key] = value;
-      }
-    });
-
-    var sep = this.request.path.indexOf('?') >= 0 ? '&' : '?';
-    this.request.path += sep + AWS.util.queryParamsToString(qs);
-  },
-
-  authorization: function authorization(credentials, datetime) {
-    var parts = [];
-    var credString = this.credentialString(datetime);
-    parts.push(this.algorithm + ' Credential=' +
-      credentials.accessKeyId + '/' + credString);
-    parts.push('SignedHeaders=' + this.signedHeaders());
-    parts.push('Signature=' + this.signature(credentials, datetime));
-    return parts.join(', ');
-  },
-
-  signature: function signature(credentials, datetime) {
-    var cache = cachedSecret[this.serviceName];
-    var date = datetime.substr(0, 8);
-    if (!cache ||
-        cache.akid !== credentials.accessKeyId ||
-        cache.region !== this.request.region ||
-        cache.date !== date) {
-      var kSecret = credentials.secretAccessKey;
-      var kDate = AWS.util.crypto.hmac('AWS4' + kSecret, date, 'buffer');
-      var kRegion = AWS.util.crypto.hmac(kDate, this.request.region, 'buffer');
-      var kService = AWS.util.crypto.hmac(kRegion, this.serviceName, 'buffer');
-      var kCredentials = AWS.util.crypto.hmac(kService, 'aws4_request', 'buffer');
-      cachedSecret[this.serviceName] = {
-        region: this.request.region, date: date,
-        key: kCredentials, akid: credentials.accessKeyId
-      };
-    }
-
-    var key = cachedSecret[this.serviceName].key;
-    return AWS.util.crypto.hmac(key, this.stringToSign(datetime), 'hex');
-  },
-
-  stringToSign: function stringToSign(datetime) {
-    var parts = [];
-    parts.push('AWS4-HMAC-SHA256');
-    parts.push(datetime);
-    parts.push(this.credentialString(datetime));
-    parts.push(this.hexEncodedHash(this.canonicalString()));
-    return parts.join('\n');
-  },
-
-  canonicalString: function canonicalString() {
-    var parts = [], pathname = this.request.pathname();
-    if (this.serviceName !== 's3') pathname = AWS.util.uriEscapePath(pathname);
-
-    parts.push(this.request.method);
-    parts.push(pathname);
-    parts.push(this.request.search());
-    parts.push(this.canonicalHeaders() + '\n');
-    parts.push(this.signedHeaders());
-    parts.push(this.hexEncodedBodyHash());
-    return parts.join('\n');
-  },
-
-  canonicalHeaders: function canonicalHeaders() {
-    var headers = [];
-    AWS.util.each.call(this, this.request.headers, function (key, item) {
-      headers.push([key, item]);
-    });
-    headers.sort(function (a, b) {
-      return a[0].toLowerCase() < b[0].toLowerCase() ? -1 : 1;
-    });
-    var parts = [];
-    AWS.util.arrayEach.call(this, headers, function (item) {
-      var key = item[0].toLowerCase();
-      if (this.isSignableHeader(key)) {
-        parts.push(key + ':' +
-          this.canonicalHeaderValues(item[1].toString()));
-      }
-    });
-    return parts.join('\n');
-  },
-
-  canonicalHeaderValues: function canonicalHeaderValues(values) {
-    return values.replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '');
-  },
-
-  signedHeaders: function signedHeaders() {
-    var keys = [];
-    AWS.util.each.call(this, this.request.headers, function (key) {
-      key = key.toLowerCase();
-      if (this.isSignableHeader(key)) keys.push(key);
-    });
-    return keys.sort().join(';');
-  },
-
-  credentialString: function credentialString(datetime) {
-    var parts = [];
-    parts.push(datetime.substr(0, 8));
-    parts.push(this.request.region);
-    parts.push(this.serviceName);
-    parts.push('aws4_request');
-    return parts.join('/');
-  },
-
-  hexEncodedHash: function hash(string) {
-    return AWS.util.crypto.sha256(string, 'hex');
-  },
-
-  hexEncodedBodyHash: function hexEncodedBodyHash() {
-    if (this.isPresigned() && this.serviceName === 's3') {
-      return 'UNSIGNED-PAYLOAD';
-    } else if (this.request.headers['X-Amz-Content-Sha256']) {
-      return this.request.headers['X-Amz-Content-Sha256'];
-    } else {
-      return this.hexEncodedHash(this.request.body || '');
-    }
-  },
-
-  unsignableHeaders: ['authorization', 'content-type', 'content-length',
-                      'user-agent', expiresHeader],
-
-  isSignableHeader: function isSignableHeader(key) {
-    if (key.toLowerCase().indexOf('x-amz-') === 0) return true;
-    return this.unsignableHeaders.indexOf(key) < 0;
-  },
-
-  isPresigned: function isPresigned() {
-    return this.request.headers[expiresHeader] ? true : false;
-  }
-
-});
-
-module.exports = AWS.Signers.V4;
-
-},{"../core":22}],61:[function(require,module,exports){
-function AcceptorStateMachine(states, state) {
-  this.currentState = state || null;
-  this.states = states || {};
-}
-
-AcceptorStateMachine.prototype.runTo = function runTo(finalState, done, bindObject, inputError) {
-  if (typeof finalState === 'function') {
-    inputError = bindObject; bindObject = done;
-    done = finalState; finalState = null;
-  }
-
-  var self = this;
-  var state = self.states[self.currentState];
-  state.fn.call(bindObject || self, inputError, function(err) {
-    if (err) {
-      if (state.fail) self.currentState = state.fail;
-      else return done ? done.call(bindObject, err) : null;
-    } else {
-      if (state.accept) self.currentState = state.accept;
-      else return done ? done.call(bindObject) : null;
-    }
-    if (self.currentState === finalState) {
-      return done ? done.call(bindObject, err) : null;
-    }
-
-    self.runTo(finalState, done, bindObject, err);
-  });
-};
-
-AcceptorStateMachine.prototype.addState = function addState(name, acceptState, failState, fn) {
-  if (typeof acceptState === 'function') {
-    fn = acceptState; acceptState = null; failState = null;
-  } else if (typeof failState === 'function') {
-    fn = failState; failState = null;
-  }
-
-  if (!this.currentState) this.currentState = name;
-  this.states[name] = { accept: acceptState, fail: failState, fn: fn };
-  return this;
-};
-
-module.exports = AcceptorStateMachine;
-
-},{}],62:[function(require,module,exports){
-(function (process){
-
-
-var cryptoLib = require('crypto');
-var Buffer = require('buffer').Buffer;
-
-
-var util = {
-  engine: function engine() {
-    if (util.isBrowser() && typeof navigator !== 'undefined') {
-      return navigator.userAgent;
-    } else {
-      return process.platform + '/' + process.version;
-    }
-  },
-
-  userAgent: function userAgent() {
-    var name = util.isBrowser() ? 'js' : 'nodejs';
-    var agent = 'aws-sdk-' + name + '/' + require('./core').VERSION;
-    if (name === 'nodejs') agent += ' ' + util.engine();
-    return agent;
-  },
-
-  isBrowser: function isBrowser() { return process && process.browser; },
-  isNode: function isNode() { return !util.isBrowser(); },
-  nodeRequire: function nodeRequire(module) {
-    if (util.isNode()) return require(module);
-  },
-  multiRequire: function multiRequire(module1, module2) {
-    return require(util.isNode() ? module1 : module2);
-  },
-
-  uriEscape: function uriEscape(string) {
-    var output = encodeURIComponent(string);
-    output = output.replace(/[^A-Za-z0-9_.~\-%]+/g, escape);
-
-    output = output.replace(/[*]/g, function(ch) {
-      return '%' + ch.charCodeAt(0).toString(16).toUpperCase();
-    });
-
-    return output;
-  },
-
-  uriEscapePath: function uriEscapePath(string) {
-    var parts = [];
-    util.arrayEach(string.split('/'), function (part) {
-      parts.push(util.uriEscape(part));
-    });
-    return parts.join('/');
-  },
-
-  urlParse: function urlParse(url) {
-    return require('url').parse(url);
-  },
-
-  urlFormat: function urlFormat(url) {
-    return require('url').format(url);
-  },
-
-  queryStringParse: function queryStringParse(qs) {
-    return require('querystring').parse(qs);
-  },
-
-  queryParamsToString: function queryParamsToString(params) {
-    var items = [];
-    var escape = util.uriEscape;
-    var sortedKeys = Object.keys(params).sort();
-
-    util.arrayEach(sortedKeys, function(name) {
-      var value = params[name];
-      var ename = escape(name);
-      var result = ename + '=';
-      if (Array.isArray(value)) {
-        var vals = [];
-        util.arrayEach(value, function(item) { vals.push(escape(item)); });
-        result = ename + '=' + vals.sort().join('&' + ename + '=');
-      } else if (value !== undefined && value !== null) {
-        result = ename + '=' + escape(value);
-      }
-      items.push(result);
-    });
-
-    return items.join('&');
-  },
-
-  readFileSync: function readFileSync(path) {
-    if (typeof window !== 'undefined') return null;
-    return util.nodeRequire('fs').readFileSync(path, 'utf-8');
-  },
-
-  base64: {
-
-    encode: function encode64(string) {
-      return new Buffer(string).toString('base64');
-    },
-
-    decode: function decode64(string) {
-      return new Buffer(string, 'base64');
-    }
-
-  },
-
-  Buffer: Buffer,
-
-  buffer: {
-
-    concat: function(buffers) {
-      var length = 0,
-          offset = 0,
-          buffer = null, i;
-
-      for (i = 0; i < buffers.length; i++) {
-        length += buffers[i].length;
-      }
-
-      buffer = new Buffer(length);
-
-      for (i = 0; i < buffers.length; i++) {
-        buffers[i].copy(buffer, offset);
-        offset += buffers[i].length;
-      }
-
-      return buffer;
-    }
-  },
-
-  string: {
-    byteLength: function byteLength(string) {
-      if (string === null || string === undefined) return 0;
-      if (typeof string === 'string') string = new Buffer(string);
-
-      if (typeof string.byteLength === 'number') {
-        return string.byteLength;
-      } else if (typeof string.length === 'number') {
-        return string.length;
-      } else if (typeof string.size === 'number') {
-        return string.size;
-      } else if (typeof string.path === 'string') {
-        return util.nodeRequire('fs').lstatSync(string.path).size;
-      } else {
-        throw util.error(new Error('Cannot determine length of ' + string),
-          { object: string });
-      }
-    },
-
-    upperFirst: function upperFirst(string) {
-      return string[0].toUpperCase() + string.substr(1);
-    },
-
-    lowerFirst: function lowerFirst(string) {
-      return string[0].toLowerCase() + string.substr(1);
-    }
-  },
-
-  ini: {
-    parse: function string(ini) {
-      var currentSection, map = {};
-      util.arrayEach(ini.split(/\r?\n/), function(line) {
-        line = line.split(/(^|\s);/)[0]; // remove comments
-        var section = line.match(/^\s*\[([^\[\]]+)\]\s*$/);
-        if (section) {
-          currentSection = section[1];
-        } else if (currentSection) {
-          var item = line.match(/^\s*(.+?)\s*=\s*(.+)\s*$/);
-          if (item) {
-            map[currentSection] = map[currentSection] || {};
-            map[currentSection][item[1]] = item[2];
-          }
-        }
-      });
-
-      return map;
-    }
-  },
-
-  fn: {
-    noop: function(){},
-
-
-    makeAsync: function makeAsync(fn, expectedArgs) {
-      if (expectedArgs && expectedArgs <= fn.length) {
-        return fn;
-      }
-
-      return function() {
-        var args = Array.prototype.slice.call(arguments, 0);
-        var callback = args.pop();
-        var result = fn.apply(null, args);
-        callback(result);
-      };
-    }
-  },
-
-  jamespath: {
-    query: function query(expression, data) {
-      if (!data) return [];
-
-      var results = [];
-      var expressions = expression.split(/\s+or\s+/);
-      util.arrayEach.call(this, expressions, function (expr) {
-        var objects = [data];
-        var tokens = expr.split('.');
-        util.arrayEach.call(this, tokens, function (token) {
-          var match = token.match('^(.+?)(?:\\[(-?\\d+|\\*|)\\])?$');
-          var newObjects = [];
-          util.arrayEach.call(this, objects, function (obj) {
-            if (match[1] === '*') {
-              util.arrayEach.call(this, obj, function (value) {
-                newObjects.push(value);
-              });
-            } else if (obj.hasOwnProperty(match[1])) {
-              newObjects.push(obj[match[1]]);
-            }
-          });
-          objects = newObjects;
-
-          if (match[2] !== undefined) {
-            newObjects = [];
-            util.arrayEach.call(this, objects, function (obj) {
-              if (Array.isArray(obj)) {
-                if (match[2] === '*' || match[2] === '') {
-                  newObjects = newObjects.concat(obj);
-                } else {
-                  var idx = parseInt(match[2], 10);
-                  if (idx < 0) idx = obj.length + idx; // negative indexing
-                  newObjects.push(obj[idx]);
-                }
-              }
-            });
-            objects = newObjects;
-          }
-
-          if (objects.length === 0) return util.abort;
-        });
-
-        if (objects.length > 0) {
-          results = objects;
-          return util.abort;
-        }
-      });
-
-      return results;
-    },
-
-    find: function find(expression, data) {
-      return util.jamespath.query(expression, data)[0];
-    }
-  },
-
-
-  date: {
-
-
-    getDate: function getDate() { return new Date(); },
-
-
-    iso8601: function iso8601(date) {
-      if (date === undefined) { date = util.date.getDate(); }
-      return date.toISOString();
-    },
-
-
-    rfc822: function rfc822(date) {
-      if (date === undefined) { date = util.date.getDate(); }
-      return date.toUTCString();
-    },
-
-
-    unixTimestamp: function unixTimestamp(date) {
-      if (date === undefined) { date = util.date.getDate(); }
-      return date.getTime() / 1000;
-    },
-
-
-    from: function format(date) {
-      if (typeof date === 'number') {
-        return new Date(date * 1000); // unix timestamp
-      } else {
-        return new Date(date);
-      }
-    },
-
-
-    format: function format(date, formatter) {
-      if (!formatter) formatter = 'iso8601';
-      return util.date[formatter](util.date.from(date));
-    },
-
-    parseTimestamp: function parseTimestamp(value) {
-      if (typeof value === 'number') { // unix timestamp (number)
-        return new Date(value * 1000);
-      } else if (value.match(/^\d+$/)) { // unix timestamp
-        return new Date(value * 1000);
-      } else if (value.match(/^\d{4}/)) { // iso8601
-        return new Date(value);
-      } else if (value.match(/^\w{3},/)) { // rfc822
-        return new Date(value);
-      } else {
-        throw util.error(
-          new Error('unhandled timestamp format: ' + value),
-          {code: 'TimestampParserError'});
-      }
-    }
-
-  },
-
-  crypto: {
-    crc32Table: [
-     0x00000000, 0x77073096, 0xEE0E612C, 0x990951BA, 0x076DC419,
-     0x706AF48F, 0xE963A535, 0x9E6495A3, 0x0EDB8832, 0x79DCB8A4,
-     0xE0D5E91E, 0x97D2D988, 0x09B64C2B, 0x7EB17CBD, 0xE7B82D07,
-     0x90BF1D91, 0x1DB71064, 0x6AB020F2, 0xF3B97148, 0x84BE41DE,
-     0x1ADAD47D, 0x6DDDE4EB, 0xF4D4B551, 0x83D385C7, 0x136C9856,
-     0x646BA8C0, 0xFD62F97A, 0x8A65C9EC, 0x14015C4F, 0x63066CD9,
-     0xFA0F3D63, 0x8D080DF5, 0x3B6E20C8, 0x4C69105E, 0xD56041E4,
-     0xA2677172, 0x3C03E4D1, 0x4B04D447, 0xD20D85FD, 0xA50AB56B,
-     0x35B5A8FA, 0x42B2986C, 0xDBBBC9D6, 0xACBCF940, 0x32D86CE3,
-     0x45DF5C75, 0xDCD60DCF, 0xABD13D59, 0x26D930AC, 0x51DE003A,
-     0xC8D75180, 0xBFD06116, 0x21B4F4B5, 0x56B3C423, 0xCFBA9599,
-     0xB8BDA50F, 0x2802B89E, 0x5F058808, 0xC60CD9B2, 0xB10BE924,
-     0x2F6F7C87, 0x58684C11, 0xC1611DAB, 0xB6662D3D, 0x76DC4190,
-     0x01DB7106, 0x98D220BC, 0xEFD5102A, 0x71B18589, 0x06B6B51F,
-     0x9FBFE4A5, 0xE8B8D433, 0x7807C9A2, 0x0F00F934, 0x9609A88E,
-     0xE10E9818, 0x7F6A0DBB, 0x086D3D2D, 0x91646C97, 0xE6635C01,
-     0x6B6B51F4, 0x1C6C6162, 0x856530D8, 0xF262004E, 0x6C0695ED,
-     0x1B01A57B, 0x8208F4C1, 0xF50FC457, 0x65B0D9C6, 0x12B7E950,
-     0x8BBEB8EA, 0xFCB9887C, 0x62DD1DDF, 0x15DA2D49, 0x8CD37CF3,
-     0xFBD44C65, 0x4DB26158, 0x3AB551CE, 0xA3BC0074, 0xD4BB30E2,
-     0x4ADFA541, 0x3DD895D7, 0xA4D1C46D, 0xD3D6F4FB, 0x4369E96A,
-     0x346ED9FC, 0xAD678846, 0xDA60B8D0, 0x44042D73, 0x33031DE5,
-     0xAA0A4C5F, 0xDD0D7CC9, 0x5005713C, 0x270241AA, 0xBE0B1010,
-     0xC90C2086, 0x5768B525, 0x206F85B3, 0xB966D409, 0xCE61E49F,
-     0x5EDEF90E, 0x29D9C998, 0xB0D09822, 0xC7D7A8B4, 0x59B33D17,
-     0x2EB40D81, 0xB7BD5C3B, 0xC0BA6CAD, 0xEDB88320, 0x9ABFB3B6,
-     0x03B6E20C, 0x74B1D29A, 0xEAD54739, 0x9DD277AF, 0x04DB2615,
-     0x73DC1683, 0xE3630B12, 0x94643B84, 0x0D6D6A3E, 0x7A6A5AA8,
-     0xE40ECF0B, 0x9309FF9D, 0x0A00AE27, 0x7D079EB1, 0xF00F9344,
-     0x8708A3D2, 0x1E01F268, 0x6906C2FE, 0xF762575D, 0x806567CB,
-     0x196C3671, 0x6E6B06E7, 0xFED41B76, 0x89D32BE0, 0x10DA7A5A,
-     0x67DD4ACC, 0xF9B9DF6F, 0x8EBEEFF9, 0x17B7BE43, 0x60B08ED5,
-     0xD6D6A3E8, 0xA1D1937E, 0x38D8C2C4, 0x4FDFF252, 0xD1BB67F1,
-     0xA6BC5767, 0x3FB506DD, 0x48B2364B, 0xD80D2BDA, 0xAF0A1B4C,
-     0x36034AF6, 0x41047A60, 0xDF60EFC3, 0xA867DF55, 0x316E8EEF,
-     0x4669BE79, 0xCB61B38C, 0xBC66831A, 0x256FD2A0, 0x5268E236,
-     0xCC0C7795, 0xBB0B4703, 0x220216B9, 0x5505262F, 0xC5BA3BBE,
-     0xB2BD0B28, 0x2BB45A92, 0x5CB36A04, 0xC2D7FFA7, 0xB5D0CF31,
-     0x2CD99E8B, 0x5BDEAE1D, 0x9B64C2B0, 0xEC63F226, 0x756AA39C,
-     0x026D930A, 0x9C0906A9, 0xEB0E363F, 0x72076785, 0x05005713,
-     0x95BF4A82, 0xE2B87A14, 0x7BB12BAE, 0x0CB61B38, 0x92D28E9B,
-     0xE5D5BE0D, 0x7CDCEFB7, 0x0BDBDF21, 0x86D3D2D4, 0xF1D4E242,
-     0x68DDB3F8, 0x1FDA836E, 0x81BE16CD, 0xF6B9265B, 0x6FB077E1,
-     0x18B74777, 0x88085AE6, 0xFF0F6A70, 0x66063BCA, 0x11010B5C,
-     0x8F659EFF, 0xF862AE69, 0x616BFFD3, 0x166CCF45, 0xA00AE278,
-     0xD70DD2EE, 0x4E048354, 0x3903B3C2, 0xA7672661, 0xD06016F7,
-     0x4969474D, 0x3E6E77DB, 0xAED16A4A, 0xD9D65ADC, 0x40DF0B66,
-     0x37D83BF0, 0xA9BCAE53, 0xDEBB9EC5, 0x47B2CF7F, 0x30B5FFE9,
-     0xBDBDF21C, 0xCABAC28A, 0x53B39330, 0x24B4A3A6, 0xBAD03605,
-     0xCDD70693, 0x54DE5729, 0x23D967BF, 0xB3667A2E, 0xC4614AB8,
-     0x5D681B02, 0x2A6F2B94, 0xB40BBE37, 0xC30C8EA1, 0x5A05DF1B,
-     0x2D02EF8D],
-
-    crc32: function crc32(data) {
-      var tbl = util.crypto.crc32Table;
-      var crc = 0 ^ -1;
-
-      if (typeof data === 'string') {
-        data = new Buffer(data);
-      }
-
-      for (var i = 0; i < data.length; i++) {
-        var code = data.readUInt8(i);
-        crc = (crc >>> 8) ^ tbl[(crc ^ code) & 0xFF];
-      }
-      return (crc ^ -1) >>> 0;
-    },
-
-    hmac: function hmac(key, string, digest, fn) {
-      if (!digest) digest = 'binary';
-      if (digest === 'buffer') { digest = undefined; }
-      if (!fn) fn = 'sha256';
-      if (typeof string === 'string') string = new Buffer(string);
-      return cryptoLib.createHmac(fn, key).update(string).digest(digest);
-    },
-
-    md5: function md5(data, digest) {
-      if (!digest) { digest = 'binary'; }
-      if (digest === 'buffer') { digest = undefined; }
-      if (typeof data === 'string') data = new Buffer(data);
-      return util.crypto.createHash('md5').update(data).digest(digest);
-    },
-
-    sha256: function sha256(string, digest) {
-      if (!digest) { digest = 'binary'; }
-      if (digest === 'buffer') { digest = undefined; }
-      if (typeof string === 'string') string = new Buffer(string);
-      return util.crypto.createHash('sha256').update(string).digest(digest);
-    },
-
-    toHex: function toHex(data) {
-      var out = [];
-      for (var i = 0; i < data.length; i++) {
-        out.push(('0' + data.charCodeAt(i).toString(16)).substr(-2, 2));
-      }
-      return out.join('');
-    },
-
-    createHash: function createHash(algorithm) {
-      return cryptoLib.createHash(algorithm);
-    }
-
-  },
-
-
-
-
-  abort: {},
-
-  each: function each(object, iterFunction) {
-    for (var key in object) {
-      if (object.hasOwnProperty(key)) {
-        var ret = iterFunction.call(this, key, object[key]);
-        if (ret === util.abort) break;
-      }
-    }
-  },
-
-  arrayEach: function arrayEach(array, iterFunction) {
-    for (var idx in array) {
-      if (array.hasOwnProperty(idx)) {
-        var ret = iterFunction.call(this, array[idx], parseInt(idx, 10));
-        if (ret === util.abort) break;
-      }
-    }
-  },
-
-  update: function update(obj1, obj2) {
-    util.each(obj2, function iterator(key, item) {
-      obj1[key] = item;
-    });
-    return obj1;
-  },
-
-  merge: function merge(obj1, obj2) {
-    return util.update(util.copy(obj1), obj2);
-  },
-
-  copy: function copy(object) {
-    if (object === null || object === undefined) return object;
-    var dupe = {};
-    for (var key in object) {
-      dupe[key] = object[key];
-    }
-    return dupe;
-  },
-
-  isEmpty: function isEmpty(obj) {
-    for (var prop in obj) {
-      if (obj.hasOwnProperty(prop)) {
-        return false;
-      }
-    }
-    return true;
-  },
-
-  isType: function isType(obj, type) {
-    if (typeof type === 'function') type = util.typeName(type);
-    return Object.prototype.toString.call(obj) === '[object ' + type + ']';
-  },
-
-  typeName: function typeName(type) {
-    if (type.hasOwnProperty('name')) return type.name;
-    var str = type.toString();
-    var match = str.match(/^\s*function (.+)\(/);
-    return match ? match[1] : str;
-  },
-
-  error: function error(err, options) {
-    var originalError = null;
-    if (typeof err.message === 'string' && err.message !== '') {
-      if (typeof options === 'string' || (options && options.message)) {
-        originalError = util.copy(err);
-        originalError.message = err.message;
-      }
-    }
-    err.message = err.message || null;
-
-    if (typeof options === 'string') {
-      err.message = options;
-    } else {
-      util.update(err, options);
-    }
-
-    if (typeof Object.defineProperty === 'function') {
-      Object.defineProperty(err, 'name', {writable: true, enumerable: false});
-      Object.defineProperty(err, 'message', {enumerable: true});
-    }
-
-    err.name = err.name || err.code || 'Error';
-    err.time = new Date();
-
-    if (originalError) err.originalError = originalError;
-
-    return err;
-  },
-
-
-  inherit: function inherit(klass, features) {
-    var newObject = null;
-    if (features === undefined) {
-      features = klass;
-      klass = Object;
-      newObject = {};
-    } else {
-      var ctor = function ConstructorWrapper() {};
-      ctor.prototype = klass.prototype;
-      newObject = new ctor();
-    }
-
-    if (features.constructor === Object) {
-      features.constructor = function() {
-        if (klass !== Object) {
-          return klass.apply(this, arguments);
-        }
-      };
-    }
-
-    features.constructor.prototype = newObject;
-    util.update(features.constructor.prototype, features);
-    features.constructor.__super__ = klass;
-    return features.constructor;
-  },
-
-
-  mixin: function mixin() {
-    var klass = arguments[0];
-    for (var i = 1; i < arguments.length; i++) {
-      for (var prop in arguments[i].prototype) {
-        var fn = arguments[i].prototype[prop];
-        if (prop !== 'constructor') {
-          klass.prototype[prop] = fn;
-        }
-      }
-    }
-    return klass;
-  },
-
-
-  hideProperties: function hideProperties(obj, props) {
-    if (typeof Object.defineProperty !== 'function') return;
-
-    util.arrayEach(props, function (key) {
-      Object.defineProperty(obj, key, {
-        enumerable: false, writable: true, configurable: true });
-    });
-  },
-
-
-  property: function property(obj, name, value, enumerable, isValue) {
-    var opts = {
-      configurable: true,
-      enumerable: enumerable !== undefined ? enumerable : true
-    };
-    if (typeof value === 'function' && !isValue) {
-      opts.get = value;
-    }
-    else {
-      opts.value = value; opts.writable = true;
-    }
-
-    Object.defineProperty(obj, name, opts);
-  },
-
-
-  memoizedProperty: function memoizedProperty(obj, name, get, enumerable) {
-    var cachedValue = null;
-
-    util.property(obj, name, function() {
-      if (cachedValue === null) {
-        cachedValue = get();
-      }
-      return cachedValue;
-    }, enumerable);
-  }
-};
-
-module.exports = util;
-
-}).call(this,require("G+mPsH"))
-},{"./core":22,"G+mPsH":12,"buffer":1,"crypto":5,"querystring":16,"url":17}],63:[function(require,module,exports){
-var util = require('../util');
-var Shape = require('../model/shape');
-
-function DomXmlParser() { }
-
-DomXmlParser.prototype.parse = function(xml, shape) {
-  if (xml.replace(/^\s+/, '') === '') return {};
-
-  var result, error;
-  try {
-    if (window.DOMParser) {
-      var parser = new DOMParser();
-      result = parser.parseFromString(xml, 'text/xml');
-
-      if (result.documentElement === null) {
-        throw new Error('Cannot parse empty document.');
-      }
-
-      var isError = result.getElementsByTagName('parsererror')[0];
-      if (isError && (isError.parentNode === result ||
-          isError.parentNode.nodeName === 'body')) {
-        throw new Error(isError.getElementsByTagName('div')[0].textContent);
-      }
-    } else if (window.ActiveXObject) {
-      result = new window.ActiveXObject('Microsoft.XMLDOM');
-      result.async = false;
-
-      if (!result.loadXML(xml)) {
-        throw new Error('Parse error in document');
-      }
-    } else {
-      throw new Error('Cannot load XML parser');
-    }
-  } catch (e) {
-    error = e;
-  }
-
-  if (result && result.documentElement && !error) {
-    var data = parseXml(result.documentElement, shape);
-    var metadata = result.getElementsByTagName('ResponseMetadata')[0];
-    if (metadata) {
-      data.ResponseMetadata = parseXml(metadata, {});
-    }
-    return data;
-  } else if (error) {
-    throw util.error(error || new Error(), {code: 'XMLParserError'});
-  } else { // empty xml document
-    return {};
-  }
-};
-
-function parseXml(xml, shape) {
-  if (!shape) shape = {};
-  switch(shape.type) {
-    case 'structure': return parseStructure(xml, shape);
-    case 'map': return parseMap(xml, shape);
-    case 'list': return parseList(xml, shape);
-    case undefined: case null: return parseUnknown(xml);
-    default: return parseScalar(xml, shape);
-  }
-}
-
-function parseStructure(xml, shape) {
-  var data = {};
-  if (xml === null) return data;
-
-  util.each(shape.members, function(memberName, memberShape) {
-    if (memberShape.isXmlAttribute) {
-      if (xml.attributes.hasOwnProperty(memberShape.name)) {
-        var value = xml.attributes[memberShape.name].value;
-        data[memberName] = parseXml({textContent: value}, memberShape);
-      }
-    } else {
-      var xmlChild = memberShape.flattened ? xml :
-        xml.getElementsByTagName(memberShape.name)[0];
-      if (xmlChild) {
-        data[memberName] = parseXml(xmlChild, memberShape);
-      } else if (!memberShape.flattened && memberShape.type === 'list') {
-        data[memberName] = memberShape.defaultValue;
-      }
-    }
-  });
-
-  return data;
-}
-
-function parseMap(xml, shape) {
-  var data = {};
-  var xmlKey = shape.key.name || 'key';
-  var xmlValue = shape.value.name || 'value';
-  var tagName = shape.flattened ? shape.name : 'entry';
-
-  var child = xml.firstElementChild;
-  while (child) {
-    if (child.nodeName === tagName) {
-      var key = child.getElementsByTagName(xmlKey)[0].textContent;
-      var value = child.getElementsByTagName(xmlValue)[0];
-      data[key] = parseXml(value, shape.value);
-    }
-    child = child.nextElementSibling;
-  }
-  return data;
-}
-
-function parseList(xml, shape) {
-  var data = [];
-  var tagName = shape.flattened ? shape.name : (shape.member.name || 'member');
-
-  var child = xml.firstElementChild;
-  while (child) {
-    if (child.nodeName === tagName) {
-      data.push(parseXml(child, shape.member));
-    }
-    child = child.nextElementSibling;
-  }
-  return data;
-}
-
-function parseScalar(xml, shape) {
-  if (xml.getAttribute) {
-    var encoding = xml.getAttribute('encoding');
-    if (encoding === 'base64') {
-      shape = new Shape.create({type: encoding});
-    }
-  }
-
-  var text = xml.textContent;
-  if (text === '') text = null;
-  if (typeof shape.toType === 'function') {
-    return shape.toType(text);
-  } else {
-    return text;
-  }
-}
-
-function parseUnknown(xml) {
-  if (xml === undefined || xml === null) return '';
-
-  if (!xml.firstElementChild) {
-    if (xml.parentNode.parentNode === null) return {};
-    if (xml.childNodes.length === 0) return '';
-    else return xml.textContent;
-  }
-
-  var shape = {type: 'structure', members: {}};
-  var child = xml.firstElementChild;
-  while (child) {
-    var tag = child.nodeName;
-    if (shape.members.hasOwnProperty(tag)) {
-      shape.members[tag].type = 'list';
-    } else {
-      shape.members[tag] = {name: tag};
-    }
-    child = child.nextElementSibling;
-  }
-  return parseStructure(xml, shape);
-}
-
-module.exports = DomXmlParser;
-
-},{"../model/shape":39,"../util":62}],64:[function(require,module,exports){
-var util = require('../util');
-var builder = require('xmlbuilder');
-
-function XmlBuilder() { }
-
-XmlBuilder.prototype.toXML = function(params, shape, rootElement) {
-  var xml = builder.create(rootElement);
-  applyNamespaces(xml, shape);
-  serialize(xml, params, shape);
-  return xml.children.length === 0 ? '' : xml.root().toString();
-};
-
-function serialize(xml, value, shape) {
-  switch(shape.type) {
-    case 'structure': return serializeStructure(xml, value, shape);
-    case 'map': return serializeMap(xml, value, shape);
-    case 'list': return serializeList(xml, value, shape);
-    default: return serializeScalar(xml, value, shape);
-  }
-}
-
-function serializeStructure(xml, params, shape) {
-  util.arrayEach(shape.memberNames, function(memberName) {
-    var memberShape = shape.members[memberName];
-    if (memberShape.location !== 'body') return;
-
-    var value = params[memberName];
-    var name = memberShape.name;
-    if (value !== undefined && value !== null) {
-      if (memberShape.isXmlAttribute) {
-        xml.att(name, value);
-      } else if (memberShape.flattened) {
-        serialize(xml, value, memberShape);
-      } else {
-        var element = xml.ele(name);
-        applyNamespaces(element, memberShape);
-        serialize(element, value, memberShape);
-      }
-    }
-  });
-}
-
-function serializeMap(xml, map, shape) {
-  var xmlKey = shape.key.name || 'key';
-  var xmlValue = shape.value.name || 'value';
-
-  util.each(map, function(key, value) {
-    var entry = xml.ele(shape.flattened ? shape.name : 'entry');
-    serialize(entry.ele(xmlKey), key, shape.key);
-    serialize(entry.ele(xmlValue), value, shape.value);
-  });
-}
-
-function serializeList(xml, list, shape) {
-  if (shape.flattened) {
-    util.arrayEach(list, function(value) {
-      var name = shape.member.name || shape.name;
-      var element = xml.ele(name);
-      serialize(element, value, shape.member);
-    });
-  } else {
-    util.arrayEach(list, function(value) {
-      var name = shape.member.name || 'member';
-      var element = xml.ele(name);
-      serialize(element, value, shape.member);
-    });
-  }
-}
-
-function serializeScalar(xml, value, shape) {
-  xml.txt(shape.toWireFormat(value));
-}
-
-function applyNamespaces(xml, shape) {
-  var uri, prefix = 'xmlns';
-  if (shape.xmlNamespaceUri) {
-    uri = shape.xmlNamespaceUri;
-    if (shape.xmlNamespacePrefix) prefix += ':' + shape.xmlNamespacePrefix;
-  } else if (xml.isRoot && shape.api.xmlNamespaceUri) {
-    uri = shape.api.xmlNamespaceUri;
-  }
-
-  if (uri) xml.att(prefix, uri);
-}
-
-module.exports = XmlBuilder;
-
-},{"../util":62,"xmlbuilder":67}],65:[function(require,module,exports){
+}).call(this,require("FWaASH"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./support/isBuffer":63,"FWaASH":57,"inherits":56}],65:[function(require,module,exports){
 (function() {
   var XMLBuilder, XMLFragment;
 
@@ -9301,7 +9358,7 @@ module.exports = XmlBuilder;
 
 }).call(this);
 
-},{"./XMLBuilder":65}]},{},[20]);AWS.CloudWatch = AWS.Service.defineService('cloudwatch');
+},{"./XMLBuilder":65}]},{},[1]);AWS.CloudWatch = AWS.Service.defineService('cloudwatch');
 
 AWS.Service.defineServiceApi(AWS.CloudWatch, "2010-08-01", {"metadata":{"apiVersion":"2010-08-01","endpointPrefix":"monitoring","serviceAbbreviation":"CloudWatch","serviceFullName":"Amazon CloudWatch","signatureVersion":"v4","xmlNamespace":"http://monitoring.amazonaws.com/doc/2010-08-01/","protocol":"query"},"operations":{"DeleteAlarms":{"input":{"type":"structure","required":["AlarmNames"],"members":{"AlarmNames":{"shape":"S2"}}}},"DescribeAlarmHistory":{"input":{"type":"structure","members":{"AlarmName":{},"HistoryItemType":{},"StartDate":{"type":"timestamp"},"EndDate":{"type":"timestamp"},"MaxRecords":{"type":"integer"},"NextToken":{}}},"output":{"resultWrapper":"DescribeAlarmHistoryResult","type":"structure","members":{"AlarmHistoryItems":{"type":"list","member":{"type":"structure","members":{"AlarmName":{},"Timestamp":{"type":"timestamp"},"HistoryItemType":{},"HistorySummary":{},"HistoryData":{}}}},"NextToken":{}}}},"DescribeAlarms":{"input":{"type":"structure","members":{"AlarmNames":{"shape":"S2"},"AlarmNamePrefix":{},"StateValue":{},"ActionPrefix":{},"MaxRecords":{"type":"integer"},"NextToken":{}}},"output":{"resultWrapper":"DescribeAlarmsResult","type":"structure","members":{"MetricAlarms":{"shape":"Sj"},"NextToken":{}}}},"DescribeAlarmsForMetric":{"input":{"type":"structure","required":["MetricName","Namespace"],"members":{"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"shape":"Sv"},"Period":{"type":"integer"},"Unit":{}}},"output":{"resultWrapper":"DescribeAlarmsForMetricResult","type":"structure","members":{"MetricAlarms":{"shape":"Sj"}}}},"DisableAlarmActions":{"input":{"type":"structure","required":["AlarmNames"],"members":{"AlarmNames":{"shape":"S2"}}}},"EnableAlarmActions":{"input":{"type":"structure","required":["AlarmNames"],"members":{"AlarmNames":{"shape":"S2"}}}},"GetMetricStatistics":{"input":{"type":"structure","required":["Namespace","MetricName","StartTime","EndTime","Period","Statistics"],"members":{"Namespace":{},"MetricName":{},"Dimensions":{"shape":"Sv"},"StartTime":{"type":"timestamp"},"EndTime":{"type":"timestamp"},"Period":{"type":"integer"},"Statistics":{"type":"list","member":{}},"Unit":{}}},"output":{"resultWrapper":"GetMetricStatisticsResult","type":"structure","members":{"Label":{},"Datapoints":{"type":"list","member":{"type":"structure","members":{"Timestamp":{"type":"timestamp"},"SampleCount":{"type":"double"},"Average":{"type":"double"},"Sum":{"type":"double"},"Minimum":{"type":"double"},"Maximum":{"type":"double"},"Unit":{}},"xmlOrder":["Timestamp","SampleCount","Average","Sum","Minimum","Maximum","Unit"]}}}}},"ListMetrics":{"input":{"type":"structure","members":{"Namespace":{},"MetricName":{},"Dimensions":{"type":"list","member":{"type":"structure","required":["Name"],"members":{"Name":{},"Value":{}}}},"NextToken":{}}},"output":{"xmlOrder":["Metrics","NextToken"],"resultWrapper":"ListMetricsResult","type":"structure","members":{"Metrics":{"type":"list","member":{"type":"structure","members":{"Namespace":{},"MetricName":{},"Dimensions":{"shape":"Sv"}},"xmlOrder":["Namespace","MetricName","Dimensions"]}},"NextToken":{}}}},"PutMetricAlarm":{"input":{"type":"structure","required":["AlarmName","MetricName","Namespace","Statistic","Period","EvaluationPeriods","Threshold","ComparisonOperator"],"members":{"AlarmName":{},"AlarmDescription":{},"ActionsEnabled":{"type":"boolean"},"OKActions":{"shape":"So"},"AlarmActions":{"shape":"So"},"InsufficientDataActions":{"shape":"So"},"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"shape":"Sv"},"Period":{"type":"integer"},"Unit":{},"EvaluationPeriods":{"type":"integer"},"Threshold":{"type":"double"},"ComparisonOperator":{}}}},"PutMetricData":{"input":{"type":"structure","required":["Namespace","MetricData"],"members":{"Namespace":{},"MetricData":{"type":"list","member":{"type":"structure","required":["MetricName"],"members":{"MetricName":{},"Dimensions":{"shape":"Sv"},"Timestamp":{"type":"timestamp"},"Value":{"type":"double"},"StatisticValues":{"type":"structure","required":["SampleCount","Sum","Minimum","Maximum"],"members":{"SampleCount":{"type":"double"},"Sum":{"type":"double"},"Minimum":{"type":"double"},"Maximum":{"type":"double"}}},"Unit":{}}}}}}},"SetAlarmState":{"input":{"type":"structure","required":["AlarmName","StateValue","StateReason"],"members":{"AlarmName":{},"StateValue":{},"StateReason":{},"StateReasonData":{}}}}},"shapes":{"S2":{"type":"list","member":{}},"Sj":{"type":"list","member":{"type":"structure","members":{"AlarmName":{},"AlarmArn":{},"AlarmDescription":{},"AlarmConfigurationUpdatedTimestamp":{"type":"timestamp"},"ActionsEnabled":{"type":"boolean"},"OKActions":{"shape":"So"},"AlarmActions":{"shape":"So"},"InsufficientDataActions":{"shape":"So"},"StateValue":{},"StateReason":{},"StateReasonData":{},"StateUpdatedTimestamp":{"type":"timestamp"},"MetricName":{},"Namespace":{},"Statistic":{},"Dimensions":{"shape":"Sv"},"Period":{"type":"integer"},"Unit":{},"EvaluationPeriods":{"type":"integer"},"Threshold":{"type":"double"},"ComparisonOperator":{}},"xmlOrder":["AlarmName","AlarmArn","AlarmDescription","AlarmConfigurationUpdatedTimestamp","ActionsEnabled","OKActions","AlarmActions","InsufficientDataActions","StateValue","StateReason","StateReasonData","StateUpdatedTimestamp","MetricName","Namespace","Statistic","Dimensions","Period","Unit","EvaluationPeriods","Threshold","ComparisonOperator"]}},"So":{"type":"list","member":{}},"Sv":{"type":"list","member":{"type":"structure","required":["Name","Value"],"members":{"Name":{},"Value":{}},"xmlOrder":["Name","Value"]}}},"paginators":{"DescribeAlarmHistory":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"AlarmHistoryItems"},"DescribeAlarms":{"input_token":"NextToken","output_token":"NextToken","limit_key":"MaxRecords","result_key":"MetricAlarms"},"DescribeAlarmsForMetric":{"result_key":"MetricAlarms"},"ListMetrics":{"input_token":"NextToken","output_token":"NextToken","result_key":"Metrics"}}});
 AWS.CognitoIdentity = AWS.Service.defineService('cognitoidentity');
@@ -9371,7 +9428,7 @@ AWS.util.update(AWS.DynamoDB.prototype, {
 AWS.Service.defineServiceApi(AWS.DynamoDB, "2012-08-10", {"metadata":{"apiVersion":"2012-08-10","endpointPrefix":"dynamodb","jsonVersion":"1.0","serviceAbbreviation":"DynamoDB","serviceFullName":"Amazon DynamoDB","signatureVersion":"v4","targetPrefix":"DynamoDB_20120810","protocol":"json"},"operations":{"BatchGetItem":{"input":{"type":"structure","required":["RequestItems"],"members":{"RequestItems":{"shape":"S2"},"ReturnConsumedCapacity":{}}},"output":{"type":"structure","members":{"Responses":{"type":"map","key":{},"value":{"shape":"Sk"}},"UnprocessedKeys":{"shape":"S2"},"ConsumedCapacity":{"shape":"Sm"}}}},"BatchWriteItem":{"input":{"type":"structure","required":["RequestItems"],"members":{"RequestItems":{"shape":"St"},"ReturnConsumedCapacity":{},"ReturnItemCollectionMetrics":{}}},"output":{"type":"structure","members":{"UnprocessedItems":{"shape":"St"},"ItemCollectionMetrics":{"type":"map","key":{},"value":{"type":"list","member":{"shape":"S13"}}},"ConsumedCapacity":{"shape":"Sm"}}}},"CreateTable":{"input":{"type":"structure","required":["AttributeDefinitions","TableName","KeySchema","ProvisionedThroughput"],"members":{"AttributeDefinitions":{"shape":"S18"},"TableName":{},"KeySchema":{"shape":"S1c"},"LocalSecondaryIndexes":{"type":"list","member":{"type":"structure","required":["IndexName","KeySchema","Projection"],"members":{"IndexName":{},"KeySchema":{"shape":"S1c"},"Projection":{"shape":"S1h"}}}},"GlobalSecondaryIndexes":{"type":"list","member":{"type":"structure","required":["IndexName","KeySchema","Projection","ProvisionedThroughput"],"members":{"IndexName":{},"KeySchema":{"shape":"S1c"},"Projection":{"shape":"S1h"},"ProvisionedThroughput":{"shape":"S1n"}}}},"ProvisionedThroughput":{"shape":"S1n"}}},"output":{"type":"structure","members":{"TableDescription":{"shape":"S1q"}}}},"DeleteItem":{"input":{"type":"structure","required":["TableName","Key"],"members":{"TableName":{},"Key":{"shape":"S6"},"Expected":{"shape":"S21"},"ConditionalOperator":{},"ReturnValues":{},"ReturnConsumedCapacity":{},"ReturnItemCollectionMetrics":{}}},"output":{"type":"structure","members":{"Attributes":{"shape":"Sl"},"ConsumedCapacity":{"shape":"Sn"},"ItemCollectionMetrics":{"shape":"S13"}}}},"DeleteTable":{"input":{"type":"structure","required":["TableName"],"members":{"TableName":{}}},"output":{"type":"structure","members":{"TableDescription":{"shape":"S1q"}}}},"DescribeTable":{"input":{"type":"structure","required":["TableName"],"members":{"TableName":{}}},"output":{"type":"structure","members":{"Table":{"shape":"S1q"}}}},"GetItem":{"input":{"type":"structure","required":["TableName","Key"],"members":{"TableName":{},"Key":{"shape":"S6"},"AttributesToGet":{"shape":"Sf"},"ConsistentRead":{"type":"boolean"},"ReturnConsumedCapacity":{}}},"output":{"type":"structure","members":{"Item":{"shape":"Sl"},"ConsumedCapacity":{"shape":"Sn"}}}},"ListTables":{"input":{"type":"structure","members":{"ExclusiveStartTableName":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","members":{"TableNames":{"type":"list","member":{}},"LastEvaluatedTableName":{}}}},"PutItem":{"input":{"type":"structure","required":["TableName","Item"],"members":{"TableName":{},"Item":{"shape":"Sx"},"Expected":{"shape":"S21"},"ReturnValues":{},"ReturnConsumedCapacity":{},"ReturnItemCollectionMetrics":{},"ConditionalOperator":{}}},"output":{"type":"structure","members":{"Attributes":{"shape":"Sl"},"ConsumedCapacity":{"shape":"Sn"},"ItemCollectionMetrics":{"shape":"S13"}}}},"Query":{"input":{"type":"structure","required":["TableName","KeyConditions"],"members":{"TableName":{},"IndexName":{},"Select":{},"AttributesToGet":{"shape":"Sf"},"Limit":{"type":"integer"},"ConsistentRead":{"type":"boolean"},"KeyConditions":{"type":"map","key":{},"value":{"shape":"S2p"}},"QueryFilter":{"shape":"S2q"},"ConditionalOperator":{},"ScanIndexForward":{"type":"boolean"},"ExclusiveStartKey":{"shape":"S6"},"ReturnConsumedCapacity":{}}},"output":{"type":"structure","members":{"Items":{"shape":"Sk"},"Count":{"type":"integer"},"ScannedCount":{"type":"integer"},"LastEvaluatedKey":{"shape":"S6"},"ConsumedCapacity":{"shape":"Sn"}}}},"Scan":{"input":{"type":"structure","required":["TableName"],"members":{"TableName":{},"AttributesToGet":{"shape":"Sf"},"Limit":{"type":"integer"},"Select":{},"ScanFilter":{"shape":"S2q"},"ConditionalOperator":{},"ExclusiveStartKey":{"shape":"S6"},"ReturnConsumedCapacity":{},"TotalSegments":{"type":"integer"},"Segment":{"type":"integer"}}},"output":{"type":"structure","members":{"Items":{"shape":"Sk"},"Count":{"type":"integer"},"ScannedCount":{"type":"integer"},"LastEvaluatedKey":{"shape":"S6"},"ConsumedCapacity":{"shape":"Sn"}}}},"UpdateItem":{"input":{"type":"structure","required":["TableName","Key"],"members":{"TableName":{},"Key":{"shape":"S6"},"AttributeUpdates":{"type":"map","key":{},"value":{"type":"structure","members":{"Value":{"shape":"S8"},"Action":{}}}},"Expected":{"shape":"S21"},"ConditionalOperator":{},"ReturnValues":{},"ReturnConsumedCapacity":{},"ReturnItemCollectionMetrics":{}}},"output":{"type":"structure","members":{"Attributes":{"shape":"Sl"},"ConsumedCapacity":{"shape":"Sn"},"ItemCollectionMetrics":{"shape":"S13"}}}},"UpdateTable":{"input":{"type":"structure","required":["TableName"],"members":{"TableName":{},"ProvisionedThroughput":{"shape":"S1n"},"GlobalSecondaryIndexUpdates":{"type":"list","member":{"type":"structure","members":{"Update":{"type":"structure","required":["IndexName","ProvisionedThroughput"],"members":{"IndexName":{},"ProvisionedThroughput":{"shape":"S1n"}}}}}}}},"output":{"type":"structure","members":{"TableDescription":{"shape":"S1q"}}}}},"shapes":{"S2":{"type":"map","key":{},"value":{"type":"structure","required":["Keys"],"members":{"Keys":{"type":"list","member":{"shape":"S6"}},"AttributesToGet":{"shape":"Sf"},"ConsistentRead":{"type":"boolean"}}}},"S6":{"type":"map","key":{},"value":{"shape":"S8"}},"S8":{"type":"structure","members":{"S":{},"N":{},"B":{"type":"blob"},"SS":{"type":"list","member":{}},"NS":{"type":"list","member":{}},"BS":{"type":"list","member":{"type":"blob"}}}},"Sf":{"type":"list","member":{}},"Sk":{"type":"list","member":{"shape":"Sl"}},"Sl":{"type":"map","key":{},"value":{"shape":"S8"}},"Sm":{"type":"list","member":{"shape":"Sn"}},"Sn":{"type":"structure","members":{"TableName":{},"CapacityUnits":{"type":"double"},"Table":{"shape":"Sp"},"LocalSecondaryIndexes":{"shape":"Sq"},"GlobalSecondaryIndexes":{"shape":"Sq"}}},"Sp":{"type":"structure","members":{"CapacityUnits":{"type":"double"}}},"Sq":{"type":"map","key":{},"value":{"shape":"Sp"}},"St":{"type":"map","key":{},"value":{"type":"list","member":{"type":"structure","members":{"PutRequest":{"type":"structure","required":["Item"],"members":{"Item":{"shape":"Sx"}}},"DeleteRequest":{"type":"structure","required":["Key"],"members":{"Key":{"shape":"S6"}}}}}}},"Sx":{"type":"map","key":{},"value":{"shape":"S8"}},"S13":{"type":"structure","members":{"ItemCollectionKey":{"type":"map","key":{},"value":{"shape":"S8"}},"SizeEstimateRangeGB":{"type":"list","member":{"type":"double"}}}},"S18":{"type":"list","member":{"type":"structure","required":["AttributeName","AttributeType"],"members":{"AttributeName":{},"AttributeType":{}}}},"S1c":{"type":"list","member":{"type":"structure","required":["AttributeName","KeyType"],"members":{"AttributeName":{},"KeyType":{}}}},"S1h":{"type":"structure","members":{"ProjectionType":{},"NonKeyAttributes":{"type":"list","member":{}}}},"S1n":{"type":"structure","required":["ReadCapacityUnits","WriteCapacityUnits"],"members":{"ReadCapacityUnits":{"type":"long"},"WriteCapacityUnits":{"type":"long"}}},"S1q":{"type":"structure","members":{"AttributeDefinitions":{"shape":"S18"},"TableName":{},"KeySchema":{"shape":"S1c"},"TableStatus":{},"CreationDateTime":{"type":"timestamp"},"ProvisionedThroughput":{"shape":"S1t"},"TableSizeBytes":{"type":"long"},"ItemCount":{"type":"long"},"LocalSecondaryIndexes":{"type":"list","member":{"type":"structure","members":{"IndexName":{},"KeySchema":{"shape":"S1c"},"Projection":{"shape":"S1h"},"IndexSizeBytes":{"type":"long"},"ItemCount":{"type":"long"}}}},"GlobalSecondaryIndexes":{"type":"list","member":{"type":"structure","members":{"IndexName":{},"KeySchema":{"shape":"S1c"},"Projection":{"shape":"S1h"},"IndexStatus":{},"ProvisionedThroughput":{"shape":"S1t"},"IndexSizeBytes":{"type":"long"},"ItemCount":{"type":"long"}}}}}},"S1t":{"type":"structure","members":{"LastIncreaseDateTime":{"type":"timestamp"},"LastDecreaseDateTime":{"type":"timestamp"},"NumberOfDecreasesToday":{"type":"long"},"ReadCapacityUnits":{"type":"long"},"WriteCapacityUnits":{"type":"long"}}},"S21":{"type":"map","key":{},"value":{"type":"structure","members":{"Value":{"shape":"S8"},"Exists":{"type":"boolean"},"ComparisonOperator":{},"AttributeValueList":{"shape":"S25"}}}},"S25":{"type":"list","member":{"shape":"S8"}},"S2p":{"type":"structure","required":["ComparisonOperator"],"members":{"AttributeValueList":{"shape":"S25"},"ComparisonOperator":{}}},"S2q":{"type":"map","key":{},"value":{"shape":"S2p"}}},"paginators":{"BatchGetItem":{"input_token":"RequestItems","output_token":"UnprocessedKeys","result_key":"Responses[]"},"ListTables":{"input_token":"ExclusiveStartTableName","output_token":"LastEvaluatedTableName","limit_key":"Limit","result_key":"TableNames"},"Query":{"input_token":"ExclusiveStartKey","output_token":"LastEvaluatedKey","limit_key":"Limit","result_key":"Items"},"Scan":{"input_token":"ExclusiveStartKey","output_token":"LastEvaluatedKey","limit_key":"Limit","result_key":"Items"}},"waiters":{"__default__":{"interval":20,"max_attempts":25},"__TableState":{"operation":"DescribeTable"},"TableExists":{"extends":"__TableState","ignore_errors":["ResourceNotFoundException"],"success_type":"output","success_path":"Table.TableStatus","success_value":"ACTIVE"},"TableNotExists":{"extends":"__TableState","success_type":"error","success_value":"ResourceNotFoundException"}}});
 AWS.Kinesis = AWS.Service.defineService('kinesis');
 
-AWS.Service.defineServiceApi(AWS.Kinesis, "2013-12-02", {"metadata":{"apiVersion":"2013-12-02","endpointPrefix":"kinesis","jsonVersion":"1.1","serviceAbbreviation":"Kinesis","serviceFullName":"Amazon Kinesis","signatureVersion":"v4","targetPrefix":"Kinesis_20131202","protocol":"json"},"operations":{"CreateStream":{"input":{"type":"structure","required":["StreamName","ShardCount"],"members":{"StreamName":{},"ShardCount":{"type":"integer"}}}},"DeleteStream":{"input":{"type":"structure","required":["StreamName"],"members":{"StreamName":{}}}},"DescribeStream":{"input":{"type":"structure","required":["StreamName"],"members":{"StreamName":{},"Limit":{"type":"integer"},"ExclusiveStartShardId":{}}},"output":{"type":"structure","required":["StreamDescription"],"members":{"StreamDescription":{"type":"structure","required":["StreamName","StreamARN","StreamStatus","Shards","HasMoreShards"],"members":{"StreamName":{},"StreamARN":{},"StreamStatus":{},"Shards":{"type":"list","member":{"type":"structure","required":["ShardId","HashKeyRange","SequenceNumberRange"],"members":{"ShardId":{},"ParentShardId":{},"AdjacentParentShardId":{},"HashKeyRange":{"type":"structure","required":["StartingHashKey","EndingHashKey"],"members":{"StartingHashKey":{},"EndingHashKey":{}}},"SequenceNumberRange":{"type":"structure","required":["StartingSequenceNumber"],"members":{"StartingSequenceNumber":{},"EndingSequenceNumber":{}}}}}},"HasMoreShards":{"type":"boolean"}}}}}},"GetRecords":{"input":{"type":"structure","required":["ShardIterator"],"members":{"ShardIterator":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","required":["Records"],"members":{"Records":{"type":"list","member":{"type":"structure","required":["SequenceNumber","Data","PartitionKey"],"members":{"SequenceNumber":{},"Data":{"type":"blob"},"PartitionKey":{}}}},"NextShardIterator":{}}}},"GetShardIterator":{"input":{"type":"structure","required":["StreamName","ShardId","ShardIteratorType"],"members":{"StreamName":{},"ShardId":{},"ShardIteratorType":{},"StartingSequenceNumber":{}}},"output":{"type":"structure","members":{"ShardIterator":{}}}},"ListStreams":{"input":{"type":"structure","members":{"Limit":{"type":"integer"},"ExclusiveStartStreamName":{}}},"output":{"type":"structure","required":["StreamNames","HasMoreStreams"],"members":{"StreamNames":{"type":"list","member":{}},"HasMoreStreams":{"type":"boolean"}}}},"MergeShards":{"input":{"type":"structure","required":["StreamName","ShardToMerge","AdjacentShardToMerge"],"members":{"StreamName":{},"ShardToMerge":{},"AdjacentShardToMerge":{}}}},"PutRecord":{"input":{"type":"structure","required":["StreamName","Data","PartitionKey"],"members":{"StreamName":{},"Data":{"type":"blob"},"PartitionKey":{},"ExplicitHashKey":{},"SequenceNumberForOrdering":{}}},"output":{"type":"structure","required":["ShardId","SequenceNumber"],"members":{"ShardId":{},"SequenceNumber":{}}}},"SplitShard":{"input":{"type":"structure","required":["StreamName","ShardToSplit","NewStartingHashKey"],"members":{"StreamName":{},"ShardToSplit":{},"NewStartingHashKey":{}}}}},"shapes":{},"paginators":{"DescribeStream":{"input_token":"ExclusiveStartShardId","limit_key":"Limit","more_results":"StreamDescription.HasMoreShards","output_token":"StreamDescription.Shards[-1].ShardId","result_key":"StreamDescription.Shards"},"GetRecords":{"input_token":"ShardIterator","limit_key":"Limit","output_token":"NextShardIterator","result_key":"Records"},"ListStreams":{"input_token":"ExclusiveStartStreamName","limit_key":"Limit","more_results":"HasMoreStreams","output_token":"StreamNames[-1]","result_key":"StreamNames"}}});
+AWS.Service.defineServiceApi(AWS.Kinesis, "2013-12-02", {"metadata":{"apiVersion":"2013-12-02","endpointPrefix":"kinesis","jsonVersion":"1.1","serviceAbbreviation":"Kinesis","serviceFullName":"Amazon Kinesis","signatureVersion":"v4","targetPrefix":"Kinesis_20131202","protocol":"json"},"operations":{"AddTagsToStream":{"input":{"type":"structure","required":["StreamName","Tags"],"members":{"StreamName":{},"Tags":{"type":"map","key":{},"value":{}}}}},"CreateStream":{"input":{"type":"structure","required":["StreamName","ShardCount"],"members":{"StreamName":{},"ShardCount":{"type":"integer"}}}},"DeleteStream":{"input":{"type":"structure","required":["StreamName"],"members":{"StreamName":{}}}},"DescribeStream":{"input":{"type":"structure","required":["StreamName"],"members":{"StreamName":{},"Limit":{"type":"integer"},"ExclusiveStartShardId":{}}},"output":{"type":"structure","required":["StreamDescription"],"members":{"StreamDescription":{"type":"structure","required":["StreamName","StreamARN","StreamStatus","Shards","HasMoreShards"],"members":{"StreamName":{},"StreamARN":{},"StreamStatus":{},"Shards":{"type":"list","member":{"type":"structure","required":["ShardId","HashKeyRange","SequenceNumberRange"],"members":{"ShardId":{},"ParentShardId":{},"AdjacentParentShardId":{},"HashKeyRange":{"type":"structure","required":["StartingHashKey","EndingHashKey"],"members":{"StartingHashKey":{},"EndingHashKey":{}}},"SequenceNumberRange":{"type":"structure","required":["StartingSequenceNumber"],"members":{"StartingSequenceNumber":{},"EndingSequenceNumber":{}}}}}},"HasMoreShards":{"type":"boolean"}}}}}},"GetRecords":{"input":{"type":"structure","required":["ShardIterator"],"members":{"ShardIterator":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","required":["Records"],"members":{"Records":{"type":"list","member":{"type":"structure","required":["SequenceNumber","Data","PartitionKey"],"members":{"SequenceNumber":{},"Data":{"type":"blob"},"PartitionKey":{}}}},"NextShardIterator":{}}}},"GetShardIterator":{"input":{"type":"structure","required":["StreamName","ShardId","ShardIteratorType"],"members":{"StreamName":{},"ShardId":{},"ShardIteratorType":{},"StartingSequenceNumber":{}}},"output":{"type":"structure","members":{"ShardIterator":{}}}},"ListStreams":{"input":{"type":"structure","members":{"Limit":{"type":"integer"},"ExclusiveStartStreamName":{}}},"output":{"type":"structure","required":["StreamNames","HasMoreStreams"],"members":{"StreamNames":{"type":"list","member":{}},"HasMoreStreams":{"type":"boolean"}}}},"ListTagsForStream":{"input":{"type":"structure","required":["StreamName"],"members":{"StreamName":{},"ExclusiveStartTagKey":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","required":["Tags","HasMoreTags"],"members":{"Tags":{"type":"list","member":{"type":"structure","required":["Key"],"members":{"Key":{},"Value":{}}}},"HasMoreTags":{"type":"boolean"}}}},"MergeShards":{"input":{"type":"structure","required":["StreamName","ShardToMerge","AdjacentShardToMerge"],"members":{"StreamName":{},"ShardToMerge":{},"AdjacentShardToMerge":{}}}},"PutRecord":{"input":{"type":"structure","required":["StreamName","Data","PartitionKey"],"members":{"StreamName":{},"Data":{"type":"blob"},"PartitionKey":{},"ExplicitHashKey":{},"SequenceNumberForOrdering":{}}},"output":{"type":"structure","required":["ShardId","SequenceNumber"],"members":{"ShardId":{},"SequenceNumber":{}}}},"RemoveTagsFromStream":{"input":{"type":"structure","required":["StreamName","TagKeys"],"members":{"StreamName":{},"TagKeys":{"type":"list","member":{}}}}},"SplitShard":{"input":{"type":"structure","required":["StreamName","ShardToSplit","NewStartingHashKey"],"members":{"StreamName":{},"ShardToSplit":{},"NewStartingHashKey":{}}}}},"shapes":{},"paginators":{"DescribeStream":{"input_token":"ExclusiveStartShardId","limit_key":"Limit","more_results":"StreamDescription.HasMoreShards","output_token":"StreamDescription.Shards[-1].ShardId","result_key":"StreamDescription.Shards"},"ListStreams":{"input_token":"ExclusiveStartStreamName","limit_key":"Limit","more_results":"HasMoreStreams","output_token":"StreamNames[-1]","result_key":"StreamNames"}}});
 AWS.S3 = AWS.Service.defineService('s3');
 
 
@@ -9383,6 +9440,7 @@ AWS.util.update(AWS.S3.prototype, {
 
 
   setupRequestListeners: function setupRequestListeners(request) {
+    request.addListener('validate', this.validateScheme);
     request.addListener('build', this.addContentType);
     request.addListener('build', this.populateURI);
     request.addListener('build', this.computeContentMd5);
@@ -9393,6 +9451,19 @@ AWS.util.update(AWS.S3.prototype, {
     request.addListener('extractError', this.extractError);
     request.addListener('extractData', this.extractData);
     request.addListener('beforePresign', this.prepareSignedUrl);
+  },
+
+
+  validateScheme: function(req) {
+    var params = req.params,
+        scheme = req.httpRequest.endpoint.protocol,
+        sensitive = params.SSECustomerKey || params.CopySourceSSECustomerKey;
+    if (sensitive && scheme !== 'https:') {
+      var msg = 'Cannot send SSE keys over HTTP. Set \'sslEnabled\'' +
+        'to \'true\' in your configuration';
+      throw AWS.util.error(new Error(),
+        { code: 'ConfigError', message: msg });
+    }
   },
 
 
@@ -9728,6 +9799,7 @@ AWS.util.update(AWS.SQS.prototype, {
   isChecksumValid: function isChecksumValid(checksum, data) {
     return this.calculateChecksum(data) === checksum;
   },
+
 
   calculateChecksum: function calculateChecksum(data) {
     return AWS.util.crypto.md5(data, 'hex');
