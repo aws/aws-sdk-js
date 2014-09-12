@@ -106,9 +106,9 @@ describe 'AWS.Signers.V4', ->
 
   describe 'canonicalString', ->
     it 'sorts the search string', ->
-      req = new AWS.CloudSearchDomain({endpoint: 'host.domain.com'}).search({query: 'foo', cursor: 'initial'}).build()
+      req = new AWS.CloudSearchDomain({endpoint: 'host.domain.com'}).search({query: 'foo', cursor: 'initial', queryOptions: '{}'}).build()
       signer = new AWS.Signers.V4(req.httpRequest, 'cloudsearchdomain')
-      expect(signer.canonicalString().split('\n')[2]).to.equal('cursor=initial&format=sdk&pretty=true&q=foo')
+      expect(signer.canonicalString().split('\n')[2]).to.equal('cursor=initial&format=sdk&pretty=true&q=foo&q.options=%7B%7D')
 
     it 'double URI encodes paths for non S3 services', ->
       req = new AWS.CognitoSync().listDatasets(IdentityPoolId:'id', IdentityId:'a:b:c').build()
