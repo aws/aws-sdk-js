@@ -102,6 +102,7 @@ class MethodDocumentor
     @lines << "  Called when a response from the service is returned. If a"
     @lines << "  callback is not supplied, you must call {AWS.Request.send}"
     @lines << "  on the returned request object to initiate the request."
+    @lines << "  @context [AWS.Request] the request object being sent."
     @lines << "  @param err [Error] the error object returned from the request."
     @lines << "    Set to `null` if the request is successful."
     @lines << "  @param data [Object] the de-serialized data returned from"
