@@ -104,8 +104,8 @@ desc 'Builds the API for each service.'
 task :api => 'api:all'
 
 if File.exists?("#{root}/vendor/apis/metadata.json")
-  $service_map = JSON.parse(File.read('vendor/apis/metadata.json'))
-  $service_map.each do |service, config|
+  service_map = JSON.parse(File.read('vendor/apis/metadata.json'))
+  service_map.each do |service, config|
     add_tasks(service, config)
   end
 end
