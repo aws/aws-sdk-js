@@ -1,4 +1,4 @@
-# AWS SDK for JavaScript [![Version](https://badge.fury.io/js/aws-sdk.png)](http://badge.fury.io/js/aws-sdk) [![Build Status](https://travis-ci.org/aws/aws-sdk-js.png?branch=master)](https://travis-ci.org/aws/aws-sdk-js)
+# AWS SDK for JavaScript [![Version](https://badge.fury.io/js/aws-sdk.png)](http://badge.fury.io/js/aws-sdk) [![Build Status](https://travis-ci.org/aws/aws-sdk-js.png?branch=master)](https://travis-ci.org/aws/aws-sdk-js) [![Coverage Status](https://coveralls.io/repos/aws/aws-sdk-js/badge.png?branch=master)](https://coveralls.io/r/aws/aws-sdk-js?branch=master)
 
 The official AWS SDK for JavaScript, available for browsers and mobile devices,
 or Node.js backends
