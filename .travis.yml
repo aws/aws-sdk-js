@@ -11,7 +11,7 @@ before_script:
 
 script:
   - "if [ $INTEGRATION ]; then cucumber.js -f pretty; else npm test; fi"
-  - "cat coverage/lcov.info | coveralls.js"
+  - "cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
 
 env:
   matrix:
