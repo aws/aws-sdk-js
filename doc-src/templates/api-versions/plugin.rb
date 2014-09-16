@@ -172,9 +172,8 @@ eof
       obj.docstring = <<-eof
 Waits for the `#{name}` state by periodically calling the underlying
 {#{operation_name}} operation every #{config['interval']} seconds
-(at most #{config['maxAttempts']} times).
+(at most #{config['max_attempts']} times).
 
-@api experimental
 @callback (see #{obj.operation.path})
 @param (see #{obj.operation.path})
 @return (see #{obj.operation.path})
