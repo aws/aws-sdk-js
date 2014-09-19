@@ -62,7 +62,7 @@ object in S3:
         results.innerHTML = '';
 
         var params = {Key: 'data.txt', Body: textarea.value};
-        s3.putObject(params, function (err, data) {
+        bucket.putObject(params, function (err, data) {
           results.innerHTML = err ? 'ERROR!' : 'SAVED.';
         });
       }, false);
