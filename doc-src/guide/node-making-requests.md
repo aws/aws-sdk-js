@@ -113,7 +113,7 @@ For example:
 
 ```javascript
 s3.listBuckets(function(error, data) {
-  if (err) {
+  if (error) {
     console.log(error); // error is Response.error
   } else {
     console.log(data); // data is Response.data
