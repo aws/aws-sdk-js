@@ -161,6 +161,7 @@ of a private object in a bucket you own, you can use the following call to
 `getSignedUrl()`:
 
 ```javascript
+var s3 = new AWS.S3();
 var params = {Bucket: 'myBucket', Key: 'myKey'};
 s3.getSignedUrl('getObject', params, function (err, url) {
   console.log("The URL is", url);
@@ -172,6 +173,7 @@ callback is omitted. When it is called without a callback, the return value is
 the pre-signed URL. The above example can be re-written synchronously as:
 
 ```javascript
+var s3 = new AWS.S3();
 var params = {Bucket: 'myBucket', Key: 'myKey'};
 var url = s3.getSignedUrl('getObject', params);
 console.log("The URL is", url);

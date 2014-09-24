@@ -110,6 +110,7 @@ of a private object in a bucket you own, you can use the following call to
 `getSignedUrl()`:
 
 ```javascript
+var s3 = new AWS.S3();
 var params = {Bucket: 'myBucket', Key: 'myKey'};
 s3.getSignedUrl('getObject', params, function (err, url) {
   console.log("The URL is", url);
@@ -124,6 +125,8 @@ parameter, an integer representing the number of seconds that the URL will be
 valid, and can be set with any call to `getSignedUrl()`:
 
 ```javascript
+var s3 = new AWS.S3();
+
 // This URL will expire in one minute (60 seconds)
 var params = {Bucket: 'myBucket', Key: 'myKey', Expires: 60};
 var url = s3.getSignedUrl('getObject', params, function (err, url) {
