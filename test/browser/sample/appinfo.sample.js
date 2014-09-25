@@ -9,3 +9,8 @@ appInfo = {
   amazon:   { appId: '...' },
   google:   { appId: '...' }
 };
+
+// Set any global configuration settings
+AWS.config.update({
+  region: 'us-east-1'
+});

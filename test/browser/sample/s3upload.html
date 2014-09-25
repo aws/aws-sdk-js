@@ -13,7 +13,7 @@
   <p>Bucket name: <input type="text" id="bucket"/></p>
   <div id="drop_zone">Drop files here</div>
   <div id="notes"></div>
-  <script type="text/javascript" src="aws-sdk.js"></script>
+  <script type="text/javascript" src="../../../dist/aws-sdk.js"></script>
   <script type="text/javascript" src="appinfo.js"></script>
   <script type="text/javascript">
     var elDropZone = document.getElementById('drop_zone');
@@ -69,12 +69,14 @@
 
     function loadIDPCredentials(provider, arn, accessToken) {
       var params = {
-        ProviderId: provider,
-        RoleArn: arn,
-        WebIdentityToken: accessToken
+        AccountId: window.appInfo.accountId,
+        RoleArn: window.appInfo.roleArn,
+        IdentityPoolId: window.appInfo.identityPoolId,
+        Logins: {}
       };
-      if (provider === null) delete params.ProviderId;
-      s3.config.credentials = new AWS.WebIdentityCredentials(params);
+      params.Logins[provider] = accessToken;
+
+      s3.config.credentials = new AWS.CognitoIdentityCredentials(params);
     }
 
     window.fbAsyncInit = function() {
