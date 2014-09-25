@@ -282,6 +282,16 @@ if AWS.util.isNode()
       it 'allows passing of AWS.MetadataService options', ->
         expect(creds.metadataService.host).to.equal('host')
 
+      it 'does not modify options object', ->
+        opts = {}
+        creds = new AWS.EC2MetadataCredentials(opts)
+        expect(opts).to.eql({})
+
+      it 'allows setting timeout', ->
+        opts = httpOptions: timeout: 5000
+        creds = new AWS.EC2MetadataCredentials(opts)
+        expect(creds.metadataService.httpOptions.timeout).to.equal(5000)
+
     describe 'needsRefresh', ->
       it 'can be expired based on expire time from EC2 Metadata service', ->
         mockMetadataService(new Date(0))
