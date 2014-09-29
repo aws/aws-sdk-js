@@ -162,11 +162,11 @@ with the SDK:
     <div id="amazon-root"></div>
     <script type="text/javascript">
       var s3 = null;
-      var appId = 'AMAZON_APP_ID';
+      var clientId = 'amzn1.application-oa2-client.1234567890abcdef'; // client ID
       var roleArn = 'arn:aws:iam::<AWS_ACCOUNT_ID>:role/<WEB_IDENTITY_ROLE_NAME>';
 
       window.onAmazonLoginReady = function() {
-        amazon.Login.setClientId(appId); // set app ID
+        amazon.Login.setClientId(clientId); // set client ID
 
         document.getElementById('login').onclick = function() {
           amazon.Login.authorize({scope: 'profile'}, function(response) {
@@ -177,7 +177,7 @@ with the SDK:
                 WebIdentityToken: response.access_token
               });
 
-              s3 = new AWS.S3;
+              s3 = new AWS.S3();
 
               console.log('You are now logged in.');
             } else {
@@ -204,7 +204,7 @@ the SDK:
     <div id="fb-root"></div>
     <script type="text/javascript">
     var s3 = null;
-    var appId = 'FACEBOOK_APP_ID';
+    var appId = '1234567890'; // Facebook app ID
     var roleArn = 'arn:aws:iam::<AWS_ACCOUNT_ID>:role/<WEB_IDENTITY_ROLE_NAME>';
 
     window.fbAsyncInit = function() {
@@ -261,17 +261,17 @@ the SDK:
     </span>
     <script type="text/javascript">
       var s3 = null;
-      var appId = 'GOOGLE_APP_ID';
+      var clientID = '1234567890.apps.googleusercontent.com'; // Google client ID
       var roleArn = 'arn:aws:iam::<AWS_ACCOUNT_ID>:role/<WEB_IDENTITY_ROLE_NAME>';
 
-      document.getElementById('login').setAttribute('data-clientid', appId);
+      document.getElementById('login').setAttribute('data-clientid', clientID);
       function loginToGoogle(response) {
         if (!response.error) {
           AWS.config.credentials = new AWS.WebIdentityCredentials({
             RoleArn: roleArn, WebIdentityToken: response.id_token
           });
 
-          s3 = new AWS.S3;
+          s3 = new AWS.S3();
 
           console.log('You are now logged in.');
         } else {
