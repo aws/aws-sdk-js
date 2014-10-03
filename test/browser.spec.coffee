@@ -11,6 +11,7 @@ sns = new AWS.SNS(AWS.util.merge(config, config.sns))
 sts = new AWS.STS(AWS.util.merge(config, config.sts))
 cognitosync = new AWS.CognitoSync(AWS.util.merge(config, config.cognitosync))
 cognitoidentity = new AWS.CognitoIdentity(AWS.util.merge(config, config.cognitoidentity))
+elastictranscoder = new AWS.ElasticTranscoder(AWS.util.merge(config, config.elastictranscoder))
 
 uniqueName = (prefix) ->
   if prefix
@@ -206,3 +207,9 @@ integrationTests ->
       cognitosync.listIdentityPoolUsage (err, data) ->
         noError(err)
         expect(Array.isArray(data.IdentityPoolUsages)).to.equal(true)
+
+  describe 'AWS.ElasticTranscoder', ->
+    integration 'lists pipelines', ->
+      elastictranscoder.listPipelines (err, data) ->
+        noError(err)
+        expect(Array.isArray(data.Pipelines)).to.equal(true)

@@ -6,7 +6,7 @@ var path = require('path');
 var CacheStrategy = require('./strategies/cache');
 var DefaultStrategy = require('./strategies/default');
 
-var defaultServices = 'cloudwatch,cognitoidentity,cognitosync,dynamodb,kinesis,s3,sqs,sns,sts';
+var defaultServices = 'cloudwatch,cognitoidentity,cognitosync,dynamodb,kinesis,elastictranscoder,s3,sqs,sns,sts';
 var sanitizeRegex = /[^a-zA-Z0-9,-]/;
 
 function Builder(options) {
