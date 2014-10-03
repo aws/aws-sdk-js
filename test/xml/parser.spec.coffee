@@ -519,6 +519,17 @@ describe 'AWS.XML.Parser', ->
       parse xml, rules, (data) ->
         expect(data).to.eql({person:{name:'Joe',aka:'John Doe'}})
 
+  describe 'strings', ->
+    it 'parses empty strings as ""', ->
+      rules =
+        type: 'structure'
+        members:
+          Value:
+            type: 'string'
+      xml = "<xml><Value></Value></xml>"
+      parse xml, rules, (data) ->
+        expect(data.Value).to.equal('')
+
   describe 'base64 encoded strings', ->
     it 'base64 decodes string elements with encoding="base64"', ->
       rules =
