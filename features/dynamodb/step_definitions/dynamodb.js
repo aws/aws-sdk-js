@@ -2,7 +2,6 @@ module.exports = function() {
   this.Before("@dynamodb-2011-12-05", function (next) {
     this.service = new this.AWS.DynamoDB({
       apiVersion: '2011-12-05',
-      region: 'us-west-2',
       maxRetries: 2
     });
     next();
@@ -11,7 +10,6 @@ module.exports = function() {
   this.Before("@dynamodb-2012-08-10", function (next) {
     this.service = new this.AWS.DynamoDB({
       apiVersion: '2012-08-10',
-      region: 'us-west-2',
       maxRetries: 2
     });
     next();
@@ -20,7 +18,6 @@ module.exports = function() {
   function createTable(world, callback) {
     var db = new world.AWS.DynamoDB({
       apiVersion: '2011-12-05',
-      region: 'us-west-2'
     });
 
     var params = {
@@ -75,7 +72,7 @@ module.exports = function() {
   });
 
   this.Then(/^it should have attribute "([^"]*)" containing "([^"]*)"$/, function(attr, value, next) {
-    this.assert.equal(this.data.Item[attr].S, value);
+    this.assert.equal(this.AWS.util.jamespath.find(attr, this.data.Item), value);
     next();
   });
 
