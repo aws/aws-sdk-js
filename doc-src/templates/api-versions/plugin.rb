@@ -197,6 +197,7 @@ eof
 
   def load_waiter(waiters, name)
     waiter = waiters[name]
+    return {} if waiter.nil?
     if waiter['extends']
       waiter = waiter.merge(load_waiter(waiters, waiter['extends']))
     elsif name != '__default__'
