@@ -58,7 +58,7 @@ Feature: DynamoDB Tables (2012-08-10)
       "id": {"S": "fooRecursive"},
       "data": {
         "M": {
-          "attr1": {"L": [{"S": "value1"}, {"S": "value2"}]},
+          "attr1": {"L": [{"S": "value1"}, {"L":[{"M":{"attr12":{"S": "value2"}}}]}]},
           "attr2": {"L": [{"B": "value3"}, {"B": "value4"}, {"NULL": true}, {"BOOL": true}]}
         }
       }
@@ -66,4 +66,4 @@ Feature: DynamoDB Tables (2012-08-10)
     """
     Then the request should be successful
     And the item with id "fooRecursive" should exist
-    And it should have attribute "data.M.attr1.L[1].S" containing "value2"
+    And it should have attribute "data.M.attr1.L[1].L[0].M.attr12.S" containing "value2"
