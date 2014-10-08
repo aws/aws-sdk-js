@@ -13,6 +13,7 @@ service name in the list below).
 The 5 services that come with the default hosted package of the SDK are:
 
 * [AWS.DynamoDB](/AWSJavaScriptSDK/latest/frames.html#!AWS/DynamoDB.html)
+* [AWS.ElasticTranscoder](/AWSJavaScriptSDK/latest/frames.html#!AWS/ElasticTranscoder.html)
 * [AWS.S3](/AWSJavaScriptSDK/latest/frames.html#!AWS/S3.html)
 * [AWS.SNS](/AWSJavaScriptSDK/latest/frames.html#!AWS/SNS.html)
 * [AWS.SQS](/AWSJavaScriptSDK/latest/frames.html#!AWS/SQS.html)
