@@ -4,7 +4,7 @@ describe 'AWS.XML.Parser', ->
 
   parse = (xml, rules, callback) ->
     if rules
-      shape = AWS.Model.Shape.create(rules, api: {})
+      shape = AWS.Model.Shape.create(rules, api: protocol: 'rest-xml')
     else
       shape = {}
     callback.call(this, new AWS.XML.Parser().parse(xml, shape))
