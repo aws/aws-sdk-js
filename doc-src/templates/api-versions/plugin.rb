@@ -3,7 +3,7 @@ require_relative './model_documentor'
 
 $APIS_DIR = File.expand_path(File.dirname(__FILE__) +
                              "/../../../apis")
-$API_FILE_MATCH = /(?:^|\/)([^\/]+?)-(\d+-\d+-\d+)\.full\.json$/
+$API_FILE_MATCH = /(?:^|\/)([^\/]+?)-(\d+-\d+-\d+)\.normal\.json$/
 
 YARD::Tags::Library.define_tag 'Service', :service
 YARD::Tags::Library.define_tag 'Waiter Resource States', :waiter
@@ -209,7 +209,7 @@ eof
   def load_model(file)
     json = JSON.parse(File.read(file))
 
-    waiters_file = file.sub(/\.full\.json$/, '.waiters.json')
+    waiters_file = file.sub(/\.normal\.json$/, '.waiters.json')
     if File.exist? waiters_file
       json = json.merge(JSON.parse(File.read(waiters_file)))
     end

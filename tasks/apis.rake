@@ -12,7 +12,7 @@ end
 def add_tasks(service, config)
   klass = config['name']
   prefix = config['prefix'] || service
-  files = Dir["apis/#{prefix}*.full.json"]
+  files = Dir["apis/#{prefix}*.normal.json"]
   api = JSON.parse(File.read(files[0]), :max_nesting => false)
   version = api['metadata']['apiVersion']
   service_full_name = api['metadata']['serviceFullName']
