@@ -1,0 +1,1144 @@
+{
+  "metadata": {
+    "apiVersion": "2013-04-01",
+    "endpointPrefix": "route53",
+    "globalEndpoint": "route53.amazonaws.com",
+    "serviceAbbreviation": "Route 53",
+    "serviceFullName": "Amazon Route 53",
+    "signatureVersion": "v3https",
+    "protocol": "rest-xml"
+  },
+  "operations": {
+    "ChangeResourceRecordSets": {
+      "http": {
+        "requestUri": "/2013-04-01/hostedzone/{Id}/rrset/"
+      },
+      "input": {
+        "xmlOrder": [
+          "HostedZoneId",
+          "ChangeBatch"
+        ],
+        "xmlNamespace": {
+          "uri": "https://route53.amazonaws.com/doc/2013-04-01/"
+        },
+        "locationName": "ChangeResourceRecordSetsRequest",
+        "type": "structure",
+        "required": [
+          "HostedZoneId",
+          "ChangeBatch"
+        ],
+        "members": {
+          "HostedZoneId": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "ChangeBatch": {
+            "type": "structure",
+            "required": [
+              "Changes"
+            ],
+            "members": {
+              "Comment": {},
+              "Changes": {
+                "type": "list",
+                "member": {
+                  "locationName": "Change",
+                  "type": "structure",
+                  "required": [
+                    "Action",
+                    "ResourceRecordSet"
+                  ],
+                  "members": {
+                    "Action": {},
+                    "ResourceRecordSet": {
+                      "shape": "S8"
+                    }
+                  },
+                  "xmlOrder": [
+                    "Action",
+                    "ResourceRecordSet"
+                  ]
+                }
+              }
+            },
+            "xmlOrder": [
+              "Comment",
+              "Changes"
+            ]
+          }
+        }
+      },
+      "output": {
+        "xmlOrder": [
+          "ChangeInfo"
+        ],
+        "type": "structure",
+        "required": [
+          "ChangeInfo"
+        ],
+        "members": {
+          "ChangeInfo": {
+            "shape": "Sr"
+          }
+        }
+      }
+    },
+    "ChangeTagsForResource": {
+      "http": {
+        "requestUri": "/2013-04-01/tags/{ResourceType}/{ResourceId}"
+      },
+      "input": {
+        "xmlOrder": [
+          "ResourceType",
+          "ResourceId",
+          "AddTags",
+          "RemoveTagKeys"
+        ],
+        "xmlNamespace": {
+          "uri": "https://route53.amazonaws.com/doc/2013-04-01/"
+        },
+        "locationName": "ChangeTagsForResourceRequest",
+        "type": "structure",
+        "required": [
+          "ResourceType",
+          "ResourceId"
+        ],
+        "members": {
+          "ResourceType": {
+            "location": "uri",
+            "locationName": "ResourceType"
+          },
+          "ResourceId": {
+            "location": "uri",
+            "locationName": "ResourceId"
+          },
+          "AddTags": {
+            "shape": "Sx"
+          },
+          "RemoveTagKeys": {
+            "type": "list",
+            "member": {
+              "locationName": "Key"
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "CreateHealthCheck": {
+      "http": {
+        "requestUri": "/2013-04-01/healthcheck",
+        "responseCode": 201
+      },
+      "input": {
+        "xmlOrder": [
+          "CallerReference",
+          "HealthCheckConfig"
+        ],
+        "xmlNamespace": {
+          "uri": "https://route53.amazonaws.com/doc/2013-04-01/"
+        },
+        "locationName": "CreateHealthCheckRequest",
+        "type": "structure",
+        "required": [
+          "CallerReference",
+          "HealthCheckConfig"
+        ],
+        "members": {
+          "CallerReference": {},
+          "HealthCheckConfig": {
+            "shape": "S15"
+          }
+        }
+      },
+      "output": {
+        "xmlOrder": [
+          "HealthCheck",
+          "Location"
+        ],
+        "type": "structure",
+        "required": [
+          "HealthCheck",
+          "Location"
+        ],
+        "members": {
+          "HealthCheck": {
+            "shape": "S1f"
+          },
+          "Location": {
+            "location": "header",
+            "locationName": "Location"
+          }
+        }
+      }
+    },
+    "CreateHostedZone": {
+      "http": {
+        "requestUri": "/2013-04-01/hostedzone",
+        "responseCode": 201
+      },
+      "input": {
+        "xmlOrder": [
+          "Name",
+          "CallerReference",
+          "HostedZoneConfig"
+        ],
+        "xmlNamespace": {
+          "uri": "https://route53.amazonaws.com/doc/2013-04-01/"
+        },
+        "locationName": "CreateHostedZoneRequest",
+        "type": "structure",
+        "required": [
+          "Name",
+          "CallerReference"
+        ],
+        "members": {
+          "Name": {},
+          "CallerReference": {},
+          "HostedZoneConfig": {
+            "shape": "S1k"
+          }
+        }
+      },
+      "output": {
+        "xmlOrder": [
+          "HostedZone",
+          "ChangeInfo",
+          "DelegationSet",
+          "Location"
+        ],
+        "type": "structure",
+        "required": [
+          "HostedZone",
+          "ChangeInfo",
+          "DelegationSet",
+          "Location"
+        ],
+        "members": {
+          "HostedZone": {
+            "shape": "S1m"
+          },
+          "ChangeInfo": {
+            "shape": "Sr"
+          },
+          "DelegationSet": {
+            "shape": "S1o"
+          },
+          "Location": {
+            "location": "header",
+            "locationName": "Location"
+          }
+        }
+      }
+    },
+    "DeleteHealthCheck": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2013-04-01/healthcheck/{HealthCheckId}"
+      },
+      "input": {
+        "xmlOrder": [
+          "HealthCheckId"
+        ],
+        "type": "structure",
+        "required": [
+          "HealthCheckId"
+        ],
+        "members": {
+          "HealthCheckId": {
+            "location": "uri",
+            "locationName": "HealthCheckId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeleteHostedZone": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2013-04-01/hostedzone/{Id}"
+      },
+      "input": {
+        "xmlOrder": [
+          "Id"
+        ],
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "xmlOrder": [
+          "ChangeInfo"
+        ],
+        "type": "structure",
+        "required": [
+          "ChangeInfo"
+        ],
+        "members": {
+          "ChangeInfo": {
+            "shape": "Sr"
+          }
+        }
+      }
+    },
+    "GetChange": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/change/{Id}"
+      },
+      "input": {
+        "xmlOrder": [
+          "Id"
+        ],
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "xmlOrder": [
+          "ChangeInfo"
+        ],
+        "type": "structure",
+        "required": [
+          "ChangeInfo"
+        ],
+        "members": {
+          "ChangeInfo": {
+            "shape": "Sr"
+          }
+        }
+      }
+    },
+    "GetCheckerIpRanges": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/checkeripranges"
+      },
+      "input": {
+        "type": "structure",
+        "members": {}
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "CheckerIpRanges"
+        ],
+        "members": {
+          "CheckerIpRanges": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      }
+    },
+    "GetGeoLocation": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/geolocation"
+      },
+      "input": {
+        "xmlOrder": [
+          "ContinentCode",
+          "CountryCode",
+          "SubdivisionCode"
+        ],
+        "type": "structure",
+        "members": {
+          "ContinentCode": {
+            "location": "querystring",
+            "locationName": "continentcode"
+          },
+          "CountryCode": {
+            "location": "querystring",
+            "locationName": "countrycode"
+          },
+          "SubdivisionCode": {
+            "location": "querystring",
+            "locationName": "subdivisioncode"
+          }
+        }
+      },
+      "output": {
+        "xmlOrder": [
+          "GeoLocationDetails"
+        ],
+        "type": "structure",
+        "required": [
+          "GeoLocationDetails"
+        ],
+        "members": {
+          "GeoLocationDetails": {
+            "shape": "S22"
+          }
+        }
+      }
+    },
+    "GetHealthCheck": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/healthcheck/{HealthCheckId}"
+      },
+      "input": {
+        "xmlOrder": [
+          "HealthCheckId"
+        ],
+        "type": "structure",
+        "required": [
+          "HealthCheckId"
+        ],
+        "members": {
+          "HealthCheckId": {
+            "location": "uri",
+            "locationName": "HealthCheckId"
+          }
+        }
+      },
+      "output": {
+        "xmlOrder": [
+          "HealthCheck"
+        ],
+        "type": "structure",
+        "required": [
+          "HealthCheck"
+        ],
+        "members": {
+          "HealthCheck": {
+            "shape": "S1f"
+          }
+        }
+      }
+    },
+    "GetHealthCheckCount": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/healthcheckcount"
+      },
+      "input": {
+        "type": "structure",
+        "members": {}
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "HealthCheckCount"
+        ],
+        "members": {
+          "HealthCheckCount": {
+            "type": "long"
+          }
+        }
+      }
+    },
+    "GetHostedZone": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/hostedzone/{Id}"
+      },
+      "input": {
+        "xmlOrder": [
+          "Id"
+        ],
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "xmlOrder": [
+          "HostedZone",
+          "DelegationSet"
+        ],
+        "type": "structure",
+        "required": [
+          "HostedZone",
+          "DelegationSet"
+        ],
+        "members": {
+          "HostedZone": {
+            "shape": "S1m"
+          },
+          "DelegationSet": {
+            "shape": "S1o"
+          }
+        }
+      }
+    },
+    "ListGeoLocations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/geolocations"
+      },
+      "input": {
+        "xmlOrder": [
+          "StartContinentCode",
+          "StartCountryCode",
+          "StartSubdivisionCode",
+          "MaxItems"
+        ],
+        "type": "structure",
+        "members": {
+          "StartContinentCode": {
+            "location": "querystring",
+            "locationName": "startcontinentcode"
+          },
+          "StartCountryCode": {
+            "location": "querystring",
+            "locationName": "startcountrycode"
+          },
+          "StartSubdivisionCode": {
+            "location": "querystring",
+            "locationName": "startsubdivisioncode"
+          },
+          "MaxItems": {
+            "location": "querystring",
+            "locationName": "maxitems"
+          }
+        }
+      },
+      "output": {
+        "xmlOrder": [
+          "GeoLocationDetailsList",
+          "IsTruncated",
+          "NextContinentCode",
+          "NextCountryCode",
+          "NextSubdivisionCode",
+          "MaxItems"
+        ],
+        "type": "structure",
+        "required": [
+          "GeoLocationDetailsList",
+          "IsTruncated",
+          "MaxItems"
+        ],
+        "members": {
+          "GeoLocationDetailsList": {
+            "type": "list",
+            "member": {
+              "shape": "S22",
+              "locationName": "GeoLocationDetails"
+            }
+          },
+          "IsTruncated": {
+            "type": "boolean"
+          },
+          "NextContinentCode": {},
+          "NextCountryCode": {},
+          "NextSubdivisionCode": {},
+          "MaxItems": {}
+        }
+      }
+    },
+    "ListHealthChecks": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/healthcheck"
+      },
+      "input": {
+        "xmlOrder": [
+          "Marker",
+          "MaxItems"
+        ],
+        "type": "structure",
+        "members": {
+          "Marker": {
+            "location": "querystring",
+            "locationName": "marker"
+          },
+          "MaxItems": {
+            "location": "querystring",
+            "locationName": "maxitems"
+          }
+        }
+      },
+      "output": {
+        "xmlOrder": [
+          "HealthChecks",
+          "Marker",
+          "IsTruncated",
+          "NextMarker",
+          "MaxItems"
+        ],
+        "type": "structure",
+        "required": [
+          "HealthChecks",
+          "Marker",
+          "IsTruncated",
+          "MaxItems"
+        ],
+        "members": {
+          "HealthChecks": {
+            "type": "list",
+            "member": {
+              "shape": "S1f",
+              "locationName": "HealthCheck"
+            }
+          },
+          "Marker": {},
+          "IsTruncated": {
+            "type": "boolean"
+          },
+          "NextMarker": {},
+          "MaxItems": {}
+        }
+      }
+    },
+    "ListHostedZones": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/hostedzone"
+      },
+      "input": {
+        "xmlOrder": [
+          "Marker",
+          "MaxItems"
+        ],
+        "type": "structure",
+        "members": {
+          "Marker": {
+            "location": "querystring",
+            "locationName": "marker"
+          },
+          "MaxItems": {
+            "location": "querystring",
+            "locationName": "maxitems"
+          }
+        }
+      },
+      "output": {
+        "xmlOrder": [
+          "HostedZones",
+          "Marker",
+          "IsTruncated",
+          "NextMarker",
+          "MaxItems"
+        ],
+        "type": "structure",
+        "required": [
+          "HostedZones",
+          "Marker",
+          "IsTruncated",
+          "MaxItems"
+        ],
+        "members": {
+          "HostedZones": {
+            "type": "list",
+            "member": {
+              "shape": "S1m",
+              "locationName": "HostedZone"
+            }
+          },
+          "Marker": {},
+          "IsTruncated": {
+            "type": "boolean"
+          },
+          "NextMarker": {},
+          "MaxItems": {}
+        }
+      }
+    },
+    "ListResourceRecordSets": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/hostedzone/{Id}/rrset"
+      },
+      "input": {
+        "xmlOrder": [
+          "HostedZoneId",
+          "StartRecordName",
+          "StartRecordType",
+          "StartRecordIdentifier",
+          "MaxItems"
+        ],
+        "type": "structure",
+        "required": [
+          "HostedZoneId"
+        ],
+        "members": {
+          "HostedZoneId": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "StartRecordName": {
+            "location": "querystring",
+            "locationName": "name"
+          },
+          "StartRecordType": {
+            "location": "querystring",
+            "locationName": "type"
+          },
+          "StartRecordIdentifier": {
+            "location": "querystring",
+            "locationName": "identifier"
+          },
+          "MaxItems": {
+            "location": "querystring",
+            "locationName": "maxitems"
+          }
+        }
+      },
+      "output": {
+        "xmlOrder": [
+          "ResourceRecordSets",
+          "IsTruncated",
+          "NextRecordName",
+          "NextRecordType",
+          "NextRecordIdentifier",
+          "MaxItems"
+        ],
+        "type": "structure",
+        "required": [
+          "ResourceRecordSets",
+          "IsTruncated",
+          "MaxItems"
+        ],
+        "members": {
+          "ResourceRecordSets": {
+            "type": "list",
+            "member": {
+              "shape": "S8",
+              "locationName": "ResourceRecordSet"
+            }
+          },
+          "IsTruncated": {
+            "type": "boolean"
+          },
+          "NextRecordName": {},
+          "NextRecordType": {},
+          "NextRecordIdentifier": {},
+          "MaxItems": {}
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/tags/{ResourceType}/{ResourceId}"
+      },
+      "input": {
+        "xmlOrder": [
+          "ResourceType",
+          "ResourceId"
+        ],
+        "type": "structure",
+        "required": [
+          "ResourceType",
+          "ResourceId"
+        ],
+        "members": {
+          "ResourceType": {
+            "location": "uri",
+            "locationName": "ResourceType"
+          },
+          "ResourceId": {
+            "location": "uri",
+            "locationName": "ResourceId"
+          }
+        }
+      },
+      "output": {
+        "xmlOrder": [
+          "ResourceTagSet"
+        ],
+        "type": "structure",
+        "required": [
+          "ResourceTagSet"
+        ],
+        "members": {
+          "ResourceTagSet": {
+            "shape": "S2u"
+          }
+        }
+      }
+    },
+    "ListTagsForResources": {
+      "http": {
+        "requestUri": "/2013-04-01/tags/{ResourceType}"
+      },
+      "input": {
+        "xmlOrder": [
+          "ResourceType",
+          "ResourceIds"
+        ],
+        "xmlNamespace": {
+          "uri": "https://route53.amazonaws.com/doc/2013-04-01/"
+        },
+        "locationName": "ListTagsForResourcesRequest",
+        "type": "structure",
+        "required": [
+          "ResourceType",
+          "ResourceIds"
+        ],
+        "members": {
+          "ResourceType": {
+            "location": "uri",
+            "locationName": "ResourceType"
+          },
+          "ResourceIds": {
+            "type": "list",
+            "member": {
+              "locationName": "ResourceId"
+            }
+          }
+        }
+      },
+      "output": {
+        "xmlOrder": [
+          "ResourceTagSets"
+        ],
+        "type": "structure",
+        "required": [
+          "ResourceTagSets"
+        ],
+        "members": {
+          "ResourceTagSets": {
+            "type": "list",
+            "member": {
+              "shape": "S2u",
+              "locationName": "ResourceTagSet"
+            }
+          }
+        }
+      }
+    },
+    "UpdateHealthCheck": {
+      "http": {
+        "requestUri": "/2013-04-01/healthcheck/{HealthCheckId}"
+      },
+      "input": {
+        "xmlOrder": [
+          "HealthCheckId",
+          "HealthCheckVersion",
+          "IPAddress",
+          "Port",
+          "ResourcePath",
+          "FullyQualifiedDomainName",
+          "SearchString",
+          "FailureThreshold"
+        ],
+        "xmlNamespace": {
+          "uri": "https://route53.amazonaws.com/doc/2013-04-01/"
+        },
+        "locationName": "UpdateHealthCheckRequest",
+        "type": "structure",
+        "required": [
+          "HealthCheckId"
+        ],
+        "members": {
+          "HealthCheckId": {
+            "location": "uri",
+            "locationName": "HealthCheckId"
+          },
+          "HealthCheckVersion": {
+            "type": "long"
+          },
+          "IPAddress": {},
+          "Port": {
+            "type": "integer"
+          },
+          "ResourcePath": {},
+          "FullyQualifiedDomainName": {},
+          "SearchString": {},
+          "FailureThreshold": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "xmlOrder": [
+          "HealthCheck"
+        ],
+        "type": "structure",
+        "required": [
+          "HealthCheck"
+        ],
+        "members": {
+          "HealthCheck": {
+            "shape": "S1f"
+          }
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S8": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Type"
+      ],
+      "members": {
+        "Name": {},
+        "Type": {},
+        "SetIdentifier": {},
+        "Weight": {
+          "type": "long"
+        },
+        "Region": {},
+        "GeoLocation": {
+          "type": "structure",
+          "members": {
+            "ContinentCode": {},
+            "CountryCode": {},
+            "SubdivisionCode": {}
+          },
+          "xmlOrder": [
+            "ContinentCode",
+            "CountryCode",
+            "SubdivisionCode"
+          ]
+        },
+        "Failover": {},
+        "TTL": {
+          "type": "long"
+        },
+        "ResourceRecords": {
+          "type": "list",
+          "member": {
+            "locationName": "ResourceRecord",
+            "type": "structure",
+            "required": [
+              "Value"
+            ],
+            "members": {
+              "Value": {}
+            },
+            "xmlOrder": [
+              "Value"
+            ]
+          }
+        },
+        "AliasTarget": {
+          "type": "structure",
+          "required": [
+            "HostedZoneId",
+            "DNSName",
+            "EvaluateTargetHealth"
+          ],
+          "members": {
+            "HostedZoneId": {},
+            "DNSName": {},
+            "EvaluateTargetHealth": {
+              "type": "boolean"
+            }
+          },
+          "xmlOrder": [
+            "HostedZoneId",
+            "DNSName",
+            "EvaluateTargetHealth"
+          ]
+        },
+        "HealthCheckId": {}
+      },
+      "xmlOrder": [
+        "Name",
+        "Type",
+        "SetIdentifier",
+        "Weight",
+        "Region",
+        "GeoLocation",
+        "Failover",
+        "TTL",
+        "ResourceRecords",
+        "AliasTarget",
+        "HealthCheckId"
+      ]
+    },
+    "Sr": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "Status",
+        "SubmittedAt"
+      ],
+      "members": {
+        "Id": {},
+        "Status": {},
+        "SubmittedAt": {
+          "type": "timestamp"
+        },
+        "Comment": {}
+      },
+      "xmlOrder": [
+        "Id",
+        "Status",
+        "SubmittedAt",
+        "Comment"
+      ]
+    },
+    "Sx": {
+      "type": "list",
+      "member": {
+        "locationName": "Tag",
+        "type": "structure",
+        "members": {
+          "Key": {},
+          "Value": {}
+        }
+      }
+    },
+    "S15": {
+      "type": "structure",
+      "required": [
+        "Type"
+      ],
+      "members": {
+        "IPAddress": {},
+        "Port": {
+          "type": "integer"
+        },
+        "Type": {},
+        "ResourcePath": {},
+        "FullyQualifiedDomainName": {},
+        "SearchString": {},
+        "RequestInterval": {
+          "type": "integer"
+        },
+        "FailureThreshold": {
+          "type": "integer"
+        }
+      },
+      "xmlOrder": [
+        "IPAddress",
+        "Port",
+        "Type",
+        "ResourcePath",
+        "FullyQualifiedDomainName",
+        "SearchString",
+        "RequestInterval",
+        "FailureThreshold"
+      ]
+    },
+    "S1f": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "CallerReference",
+        "HealthCheckConfig",
+        "HealthCheckVersion"
+      ],
+      "members": {
+        "Id": {},
+        "CallerReference": {},
+        "HealthCheckConfig": {
+          "shape": "S15"
+        },
+        "HealthCheckVersion": {
+          "type": "long"
+        }
+      },
+      "xmlOrder": [
+        "Id",
+        "CallerReference",
+        "HealthCheckConfig",
+        "HealthCheckVersion"
+      ]
+    },
+    "S1k": {
+      "type": "structure",
+      "members": {
+        "Comment": {}
+      },
+      "xmlOrder": [
+        "Comment"
+      ]
+    },
+    "S1m": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "Name",
+        "CallerReference"
+      ],
+      "members": {
+        "Id": {},
+        "Name": {},
+        "CallerReference": {},
+        "Config": {
+          "shape": "S1k"
+        },
+        "ResourceRecordSetCount": {
+          "type": "long"
+        }
+      },
+      "xmlOrder": [
+        "Id",
+        "Name",
+        "CallerReference",
+        "Config",
+        "ResourceRecordSetCount"
+      ]
+    },
+    "S1o": {
+      "type": "structure",
+      "required": [
+        "NameServers"
+      ],
+      "members": {
+        "NameServers": {
+          "type": "list",
+          "member": {
+            "locationName": "NameServer"
+          }
+        }
+      },
+      "xmlOrder": [
+        "NameServers"
+      ]
+    },
+    "S22": {
+      "type": "structure",
+      "members": {
+        "ContinentCode": {},
+        "ContinentName": {},
+        "CountryCode": {},
+        "CountryName": {},
+        "SubdivisionCode": {},
+        "SubdivisionName": {}
+      },
+      "xmlOrder": [
+        "ContinentCode",
+        "ContinentName",
+        "CountryCode",
+        "CountryName",
+        "SubdivisionCode",
+        "SubdivisionName"
+      ]
+    },
+    "S2u": {
+      "type": "structure",
+      "members": {
+        "ResourceType": {},
+        "ResourceId": {},
+        "Tags": {
+          "shape": "Sx"
+        }
+      }
+    }
+  }
+}

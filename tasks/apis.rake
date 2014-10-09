@@ -12,7 +12,7 @@ end
 def add_tasks(service, config)
   klass = config['name']
   prefix = config['prefix'] || service
-  files = Dir["vendor/apis/apis/#{prefix}*.full.json"]
+  files = Dir["apis/#{prefix}*.full.json"]
   api = JSON.parse(File.read(files[0]), :max_nesting => false)
   version = api['metadata']['apiVersion']
   service_full_name = api['metadata']['serviceFullName']
@@ -23,7 +23,7 @@ def add_tasks(service, config)
     namespace(service) do
       task(:api) do
         verbose(false) do
-          sh "#{root}/vendor/apis/scripts/translate-api #{prefix}"
+          sh "#{root}/scripts/translate-api #{prefix}"
         end
       end
 
@@ -103,8 +103,8 @@ end
 desc 'Builds the API for each service.'
 task :api => 'api:all'
 
-if File.exists?("#{root}/vendor/apis/metadata.json")
-  service_map = JSON.parse(File.read('vendor/apis/metadata.json'))
+if File.exists?("#{root}/apis/metadata.json")
+  service_map = JSON.parse(File.read('apis/metadata.json'))
   service_map.each do |service, config|
     add_tasks(service, config)
   end

@@ -61,7 +61,6 @@ namespace :browser do
     mkdir_p(root)
     mkdir_p("#{root}/node_modules")
     cp_r "lib", root
-    cp_r "node_modules/aws-sdk-apis", "#{root}/node_modules/aws-sdk-apis"
     cp_r "node_modules/xmlbuilder", "#{root}/node_modules/xmlbuilder"
     cp_r "node_modules/xml2js", "#{root}/node_modules/xml2js"
     Dir.chdir("vendor/dist-server") do

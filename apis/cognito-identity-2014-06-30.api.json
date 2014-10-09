@@ -1,0 +1,324 @@
+{
+  "metadata": {
+    "apiVersion": "2014-06-30",
+    "endpointPrefix": "cognito-identity",
+    "jsonVersion": "1.1",
+    "serviceFullName": "Amazon Cognito Identity",
+    "signatureVersion": "v4",
+    "targetPrefix": "AWSCognitoIdentityService",
+    "protocol": "json"
+  },
+  "operations": {
+    "CreateIdentityPool": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "IdentityPoolName",
+          "AllowUnauthenticatedIdentities"
+        ],
+        "members": {
+          "IdentityPoolName": {},
+          "AllowUnauthenticatedIdentities": {
+            "type": "boolean"
+          },
+          "SupportedLoginProviders": {
+            "shape": "S4"
+          },
+          "DeveloperProviderName": {}
+        }
+      },
+      "output": {
+        "shape": "S8"
+      }
+    },
+    "DeleteIdentityPool": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "IdentityPoolId"
+        ],
+        "members": {
+          "IdentityPoolId": {}
+        }
+      }
+    },
+    "DescribeIdentityPool": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "IdentityPoolId"
+        ],
+        "members": {
+          "IdentityPoolId": {}
+        }
+      },
+      "output": {
+        "shape": "S8"
+      }
+    },
+    "GetId": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "AccountId",
+          "IdentityPoolId"
+        ],
+        "members": {
+          "AccountId": {},
+          "IdentityPoolId": {},
+          "Logins": {
+            "shape": "Se"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "IdentityId": {}
+        }
+      }
+    },
+    "GetOpenIdToken": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "IdentityId"
+        ],
+        "members": {
+          "IdentityId": {},
+          "Logins": {
+            "shape": "Se"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "IdentityId": {},
+          "Token": {}
+        }
+      }
+    },
+    "GetOpenIdTokenForDeveloperIdentity": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "IdentityPoolId",
+          "Logins"
+        ],
+        "members": {
+          "IdentityPoolId": {},
+          "IdentityId": {},
+          "Logins": {
+            "shape": "Se"
+          },
+          "TokenDuration": {
+            "type": "long"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "IdentityId": {},
+          "Token": {}
+        }
+      }
+    },
+    "ListIdentities": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "IdentityPoolId",
+          "MaxResults"
+        ],
+        "members": {
+          "IdentityPoolId": {},
+          "MaxResults": {
+            "type": "integer"
+          },
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "IdentityPoolId": {},
+          "Identities": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "IdentityId": {},
+                "Logins": {
+                  "shape": "Su"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListIdentityPools": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "MaxResults"
+        ],
+        "members": {
+          "MaxResults": {
+            "type": "integer"
+          },
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "IdentityPools": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "IdentityPoolId": {},
+                "IdentityPoolName": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "LookupDeveloperIdentity": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "IdentityPoolId"
+        ],
+        "members": {
+          "IdentityPoolId": {},
+          "IdentityId": {},
+          "DeveloperUserIdentifier": {},
+          "MaxResults": {
+            "type": "integer"
+          },
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "IdentityId": {},
+          "DeveloperUserIdentifierList": {
+            "type": "list",
+            "member": {}
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "MergeDeveloperIdentities": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "SourceUserIdentifier",
+          "DestinationUserIdentifier",
+          "DeveloperProviderName",
+          "IdentityPoolId"
+        ],
+        "members": {
+          "SourceUserIdentifier": {},
+          "DestinationUserIdentifier": {},
+          "DeveloperProviderName": {},
+          "IdentityPoolId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "IdentityId": {}
+        }
+      }
+    },
+    "UnlinkDeveloperIdentity": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "IdentityId",
+          "IdentityPoolId",
+          "DeveloperProviderName",
+          "DeveloperUserIdentifier"
+        ],
+        "members": {
+          "IdentityId": {},
+          "IdentityPoolId": {},
+          "DeveloperProviderName": {},
+          "DeveloperUserIdentifier": {}
+        }
+      }
+    },
+    "UnlinkIdentity": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "IdentityId",
+          "Logins",
+          "LoginsToRemove"
+        ],
+        "members": {
+          "IdentityId": {},
+          "Logins": {
+            "shape": "Se"
+          },
+          "LoginsToRemove": {
+            "shape": "Su"
+          }
+        }
+      }
+    },
+    "UpdateIdentityPool": {
+      "input": {
+        "shape": "S8"
+      },
+      "output": {
+        "shape": "S8"
+      }
+    }
+  },
+  "shapes": {
+    "S4": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S8": {
+      "type": "structure",
+      "required": [
+        "IdentityPoolId",
+        "IdentityPoolName",
+        "AllowUnauthenticatedIdentities"
+      ],
+      "members": {
+        "IdentityPoolId": {},
+        "IdentityPoolName": {},
+        "AllowUnauthenticatedIdentities": {
+          "type": "boolean"
+        },
+        "SupportedLoginProviders": {
+          "shape": "S4"
+        },
+        "DeveloperProviderName": {}
+      }
+    },
+    "Se": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "Su": {
+      "type": "list",
+      "member": {}
+    }
+  }
+}

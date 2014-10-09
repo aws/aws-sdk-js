@@ -2,7 +2,7 @@ require 'json'
 require_relative './model_documentor'
 
 $APIS_DIR = File.expand_path(File.dirname(__FILE__) +
-                             "/../../../vendor/apis/apis")
+                             "/../../../apis")
 $API_FILE_MATCH = /(?:^|\/)([^\/]+?)-(\d+-\d+-\d+)\.full\.json$/
 
 YARD::Tags::Library.define_tag 'Service', :service
@@ -217,7 +217,7 @@ eof
   end
 
   def class_info_for(prefix)
-    @info ||= JSON.parse(File.read(File.join($APIS_DIR, '../metadata.json')))
+    @info ||= JSON.parse(File.read(File.join($APIS_DIR, 'metadata.json')))
     @info.each do |identifier, info|
       iprefix = info['prefix'] || identifier
       if prefix == iprefix
