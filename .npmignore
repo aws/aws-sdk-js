@@ -2,7 +2,7 @@
 .eslintrc
 .travis.yml
 .gitignore
-apis/source
+apis/*.full.json
 configuration
 configuration.sample
 coverage

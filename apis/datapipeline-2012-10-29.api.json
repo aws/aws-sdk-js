@@ -1,0 +1,518 @@
+{
+  "metadata": {
+    "apiVersion": "2012-10-29",
+    "endpointPrefix": "datapipeline",
+    "jsonVersion": "1.1",
+    "serviceFullName": "AWS Data Pipeline",
+    "signatureVersion": "v4",
+    "targetPrefix": "DataPipeline",
+    "protocol": "json"
+  },
+  "operations": {
+    "ActivatePipeline": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "pipelineId"
+        ],
+        "members": {
+          "pipelineId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "CreatePipeline": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "uniqueId"
+        ],
+        "members": {
+          "name": {},
+          "uniqueId": {},
+          "description": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "pipelineId"
+        ],
+        "members": {
+          "pipelineId": {}
+        }
+      }
+    },
+    "DeletePipeline": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "pipelineId"
+        ],
+        "members": {
+          "pipelineId": {}
+        }
+      }
+    },
+    "DescribeObjects": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "pipelineId",
+          "objectIds"
+        ],
+        "members": {
+          "pipelineId": {},
+          "objectIds": {
+            "shape": "S9"
+          },
+          "evaluateExpressions": {
+            "type": "boolean"
+          },
+          "marker": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "pipelineObjects"
+        ],
+        "members": {
+          "pipelineObjects": {
+            "shape": "Sc"
+          },
+          "marker": {},
+          "hasMoreResults": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "DescribePipelines": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "pipelineIds"
+        ],
+        "members": {
+          "pipelineIds": {
+            "shape": "S9"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "pipelineDescriptionList"
+        ],
+        "members": {
+          "pipelineDescriptionList": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "pipelineId",
+                "name",
+                "fields"
+              ],
+              "members": {
+                "pipelineId": {},
+                "name": {},
+                "fields": {
+                  "shape": "Se"
+                },
+                "description": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "EvaluateExpression": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "pipelineId",
+          "objectId",
+          "expression"
+        ],
+        "members": {
+          "pipelineId": {},
+          "objectId": {},
+          "expression": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "evaluatedExpression"
+        ],
+        "members": {
+          "evaluatedExpression": {}
+        }
+      }
+    },
+    "GetPipelineDefinition": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "pipelineId"
+        ],
+        "members": {
+          "pipelineId": {},
+          "version": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "pipelineObjects": {
+            "shape": "Sc"
+          }
+        }
+      }
+    },
+    "ListPipelines": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "marker": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "pipelineIdList"
+        ],
+        "members": {
+          "pipelineIdList": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "id": {},
+                "name": {}
+              }
+            }
+          },
+          "marker": {},
+          "hasMoreResults": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "PollForTask": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "workerGroup"
+        ],
+        "members": {
+          "workerGroup": {},
+          "hostname": {},
+          "instanceIdentity": {
+            "type": "structure",
+            "members": {
+              "document": {},
+              "signature": {}
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "taskObject": {
+            "type": "structure",
+            "members": {
+              "taskId": {},
+              "pipelineId": {},
+              "attemptId": {},
+              "objects": {
+                "type": "map",
+                "key": {},
+                "value": {
+                  "shape": "Sd"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "PutPipelineDefinition": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "pipelineId",
+          "pipelineObjects"
+        ],
+        "members": {
+          "pipelineId": {},
+          "pipelineObjects": {
+            "shape": "Sc"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "errored"
+        ],
+        "members": {
+          "validationErrors": {
+            "shape": "S13"
+          },
+          "validationWarnings": {
+            "shape": "S17"
+          },
+          "errored": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "QueryObjects": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "pipelineId",
+          "sphere"
+        ],
+        "members": {
+          "pipelineId": {},
+          "query": {
+            "type": "structure",
+            "members": {
+              "selectors": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "members": {
+                    "fieldName": {},
+                    "operator": {
+                      "type": "structure",
+                      "members": {
+                        "type": {},
+                        "values": {
+                          "type": "list",
+                          "member": {}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "sphere": {},
+          "marker": {},
+          "limit": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ids": {
+            "shape": "S9"
+          },
+          "marker": {},
+          "hasMoreResults": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "ReportTaskProgress": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "taskId"
+        ],
+        "members": {
+          "taskId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "canceled"
+        ],
+        "members": {
+          "canceled": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "ReportTaskRunnerHeartbeat": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "taskrunnerId"
+        ],
+        "members": {
+          "taskrunnerId": {},
+          "workerGroup": {},
+          "hostname": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "terminate"
+        ],
+        "members": {
+          "terminate": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "SetStatus": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "pipelineId",
+          "objectIds",
+          "status"
+        ],
+        "members": {
+          "pipelineId": {},
+          "objectIds": {
+            "shape": "S9"
+          },
+          "status": {}
+        }
+      }
+    },
+    "SetTaskStatus": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "taskId",
+          "taskStatus"
+        ],
+        "members": {
+          "taskId": {},
+          "taskStatus": {},
+          "errorId": {},
+          "errorMessage": {},
+          "errorStackTrace": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "ValidatePipelineDefinition": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "pipelineId",
+          "pipelineObjects"
+        ],
+        "members": {
+          "pipelineId": {},
+          "pipelineObjects": {
+            "shape": "Sc"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "errored"
+        ],
+        "members": {
+          "validationErrors": {
+            "shape": "S13"
+          },
+          "validationWarnings": {
+            "shape": "S17"
+          },
+          "errored": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S9": {
+      "type": "list",
+      "member": {}
+    },
+    "Sc": {
+      "type": "list",
+      "member": {
+        "shape": "Sd"
+      }
+    },
+    "Sd": {
+      "type": "structure",
+      "required": [
+        "id",
+        "name",
+        "fields"
+      ],
+      "members": {
+        "id": {},
+        "name": {},
+        "fields": {
+          "shape": "Se"
+        }
+      }
+    },
+    "Se": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "key"
+        ],
+        "members": {
+          "key": {},
+          "stringValue": {},
+          "refValue": {}
+        }
+      }
+    },
+    "S13": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "id": {},
+          "errors": {
+            "shape": "S15"
+          }
+        }
+      }
+    },
+    "S15": {
+      "type": "list",
+      "member": {}
+    },
+    "S17": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "id": {},
+          "warnings": {
+            "shape": "S15"
+          }
+        }
+      }
+    }
+  }
+}

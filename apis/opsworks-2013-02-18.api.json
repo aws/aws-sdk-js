@@ -1,0 +1,1826 @@
+{
+  "metadata": {
+    "apiVersion": "2013-02-18",
+    "endpointPrefix": "opsworks",
+    "jsonVersion": "1.1",
+    "serviceFullName": "AWS OpsWorks",
+    "signatureVersion": "v4",
+    "targetPrefix": "OpsWorks_20130218",
+    "protocol": "json"
+  },
+  "operations": {
+    "AssignVolume": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "VolumeId"
+        ],
+        "members": {
+          "VolumeId": {},
+          "InstanceId": {}
+        }
+      }
+    },
+    "AssociateElasticIp": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ElasticIp"
+        ],
+        "members": {
+          "ElasticIp": {},
+          "InstanceId": {}
+        }
+      }
+    },
+    "AttachElasticLoadBalancer": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ElasticLoadBalancerName",
+          "LayerId"
+        ],
+        "members": {
+          "ElasticLoadBalancerName": {},
+          "LayerId": {}
+        }
+      }
+    },
+    "CloneStack": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "SourceStackId",
+          "ServiceRoleArn"
+        ],
+        "members": {
+          "SourceStackId": {},
+          "Name": {},
+          "Region": {},
+          "VpcId": {},
+          "Attributes": {
+            "shape": "S6"
+          },
+          "ServiceRoleArn": {},
+          "DefaultInstanceProfileArn": {},
+          "DefaultOs": {},
+          "HostnameTheme": {},
+          "DefaultAvailabilityZone": {},
+          "DefaultSubnetId": {},
+          "CustomJson": {},
+          "ConfigurationManager": {
+            "shape": "S8"
+          },
+          "ChefConfiguration": {
+            "shape": "S9"
+          },
+          "UseCustomCookbooks": {
+            "type": "boolean"
+          },
+          "UseOpsworksSecurityGroups": {
+            "type": "boolean"
+          },
+          "CustomCookbooksSource": {
+            "shape": "Sb"
+          },
+          "DefaultSshKeyName": {},
+          "ClonePermissions": {
+            "type": "boolean"
+          },
+          "CloneAppIds": {
+            "shape": "Sd"
+          },
+          "DefaultRootDeviceType": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "StackId": {}
+        }
+      }
+    },
+    "CreateApp": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackId",
+          "Name",
+          "Type"
+        ],
+        "members": {
+          "StackId": {},
+          "Shortname": {},
+          "Name": {},
+          "Description": {},
+          "DataSources": {
+            "shape": "Sh"
+          },
+          "Type": {},
+          "AppSource": {
+            "shape": "Sb"
+          },
+          "Domains": {
+            "shape": "Sd"
+          },
+          "EnableSsl": {
+            "type": "boolean"
+          },
+          "SslConfiguration": {
+            "shape": "Sk"
+          },
+          "Attributes": {
+            "shape": "Sl"
+          },
+          "Environment": {
+            "shape": "Sn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "AppId": {}
+        }
+      }
+    },
+    "CreateDeployment": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackId",
+          "Command"
+        ],
+        "members": {
+          "StackId": {},
+          "AppId": {},
+          "InstanceIds": {
+            "shape": "Sd"
+          },
+          "Command": {
+            "shape": "Sr"
+          },
+          "Comment": {},
+          "CustomJson": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "DeploymentId": {}
+        }
+      }
+    },
+    "CreateInstance": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackId",
+          "LayerIds",
+          "InstanceType"
+        ],
+        "members": {
+          "StackId": {},
+          "LayerIds": {
+            "shape": "Sd"
+          },
+          "InstanceType": {},
+          "AutoScalingType": {},
+          "Hostname": {},
+          "Os": {},
+          "AmiId": {},
+          "SshKeyName": {},
+          "AvailabilityZone": {},
+          "VirtualizationType": {},
+          "SubnetId": {},
+          "Architecture": {},
+          "RootDeviceType": {},
+          "InstallUpdatesOnBoot": {
+            "type": "boolean"
+          },
+          "EbsOptimized": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "InstanceId": {}
+        }
+      }
+    },
+    "CreateLayer": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackId",
+          "Type",
+          "Name",
+          "Shortname"
+        ],
+        "members": {
+          "StackId": {},
+          "Type": {},
+          "Name": {},
+          "Shortname": {},
+          "Attributes": {
+            "shape": "S11"
+          },
+          "CustomInstanceProfileArn": {},
+          "CustomSecurityGroupIds": {
+            "shape": "Sd"
+          },
+          "Packages": {
+            "shape": "Sd"
+          },
+          "VolumeConfigurations": {
+            "shape": "S13"
+          },
+          "EnableAutoHealing": {
+            "type": "boolean"
+          },
+          "AutoAssignElasticIps": {
+            "type": "boolean"
+          },
+          "AutoAssignPublicIps": {
+            "type": "boolean"
+          },
+          "CustomRecipes": {
+            "shape": "S16"
+          },
+          "InstallUpdatesOnBoot": {
+            "type": "boolean"
+          },
+          "UseEbsOptimizedInstances": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "LayerId": {}
+        }
+      }
+    },
+    "CreateStack": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name",
+          "Region",
+          "ServiceRoleArn",
+          "DefaultInstanceProfileArn"
+        ],
+        "members": {
+          "Name": {},
+          "Region": {},
+          "VpcId": {},
+          "Attributes": {
+            "shape": "S6"
+          },
+          "ServiceRoleArn": {},
+          "DefaultInstanceProfileArn": {},
+          "DefaultOs": {},
+          "HostnameTheme": {},
+          "DefaultAvailabilityZone": {},
+          "DefaultSubnetId": {},
+          "CustomJson": {},
+          "ConfigurationManager": {
+            "shape": "S8"
+          },
+          "ChefConfiguration": {
+            "shape": "S9"
+          },
+          "UseCustomCookbooks": {
+            "type": "boolean"
+          },
+          "UseOpsworksSecurityGroups": {
+            "type": "boolean"
+          },
+          "CustomCookbooksSource": {
+            "shape": "Sb"
+          },
+          "DefaultSshKeyName": {},
+          "DefaultRootDeviceType": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "StackId": {}
+        }
+      }
+    },
+    "CreateUserProfile": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "IamUserArn"
+        ],
+        "members": {
+          "IamUserArn": {},
+          "SshUsername": {},
+          "SshPublicKey": {},
+          "AllowSelfManagement": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "IamUserArn": {}
+        }
+      }
+    },
+    "DeleteApp": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "AppId"
+        ],
+        "members": {
+          "AppId": {}
+        }
+      }
+    },
+    "DeleteInstance": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "InstanceId"
+        ],
+        "members": {
+          "InstanceId": {},
+          "DeleteElasticIp": {
+            "type": "boolean"
+          },
+          "DeleteVolumes": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "DeleteLayer": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "LayerId"
+        ],
+        "members": {
+          "LayerId": {}
+        }
+      }
+    },
+    "DeleteStack": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackId"
+        ],
+        "members": {
+          "StackId": {}
+        }
+      }
+    },
+    "DeleteUserProfile": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "IamUserArn"
+        ],
+        "members": {
+          "IamUserArn": {}
+        }
+      }
+    },
+    "DeregisterElasticIp": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ElasticIp"
+        ],
+        "members": {
+          "ElasticIp": {}
+        }
+      }
+    },
+    "DeregisterRdsDbInstance": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "RdsDbInstanceArn"
+        ],
+        "members": {
+          "RdsDbInstanceArn": {}
+        }
+      }
+    },
+    "DeregisterVolume": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "VolumeId"
+        ],
+        "members": {
+          "VolumeId": {}
+        }
+      }
+    },
+    "DescribeApps": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "StackId": {},
+          "AppIds": {
+            "shape": "Sd"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Apps": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "AppId": {},
+                "StackId": {},
+                "Shortname": {},
+                "Name": {},
+                "Description": {},
+                "DataSources": {
+                  "shape": "Sh"
+                },
+                "Type": {},
+                "AppSource": {
+                  "shape": "Sb"
+                },
+                "Domains": {
+                  "shape": "Sd"
+                },
+                "EnableSsl": {
+                  "type": "boolean"
+                },
+                "SslConfiguration": {
+                  "shape": "Sk"
+                },
+                "Attributes": {
+                  "shape": "Sl"
+                },
+                "CreatedAt": {},
+                "Environment": {
+                  "shape": "Sn"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeCommands": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "DeploymentId": {},
+          "InstanceId": {},
+          "CommandIds": {
+            "shape": "Sd"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Commands": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "CommandId": {},
+                "InstanceId": {},
+                "DeploymentId": {},
+                "CreatedAt": {},
+                "AcknowledgedAt": {},
+                "CompletedAt": {},
+                "Status": {},
+                "ExitCode": {
+                  "type": "integer"
+                },
+                "LogUrl": {},
+                "Type": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeDeployments": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "StackId": {},
+          "AppId": {},
+          "DeploymentIds": {
+            "shape": "Sd"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Deployments": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "DeploymentId": {},
+                "StackId": {},
+                "AppId": {},
+                "CreatedAt": {},
+                "CompletedAt": {},
+                "Duration": {
+                  "type": "integer"
+                },
+                "IamUserArn": {},
+                "Comment": {},
+                "Command": {
+                  "shape": "Sr"
+                },
+                "Status": {},
+                "CustomJson": {},
+                "InstanceIds": {
+                  "shape": "Sd"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeElasticIps": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "InstanceId": {},
+          "StackId": {},
+          "Ips": {
+            "shape": "Sd"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ElasticIps": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Ip": {},
+                "Name": {},
+                "Domain": {},
+                "Region": {},
+                "InstanceId": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeElasticLoadBalancers": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "StackId": {},
+          "LayerIds": {
+            "shape": "Sd"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ElasticLoadBalancers": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "ElasticLoadBalancerName": {},
+                "Region": {},
+                "DnsName": {},
+                "StackId": {},
+                "LayerId": {},
+                "VpcId": {},
+                "AvailabilityZones": {
+                  "shape": "Sd"
+                },
+                "SubnetIds": {
+                  "shape": "Sd"
+                },
+                "Ec2InstanceIds": {
+                  "shape": "Sd"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeInstances": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "StackId": {},
+          "LayerId": {},
+          "InstanceIds": {
+            "shape": "Sd"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Instances": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "InstanceId": {},
+                "Ec2InstanceId": {},
+                "VirtualizationType": {},
+                "Hostname": {},
+                "StackId": {},
+                "LayerIds": {
+                  "shape": "Sd"
+                },
+                "SecurityGroupIds": {
+                  "shape": "Sd"
+                },
+                "InstanceType": {},
+                "InstanceProfileArn": {},
+                "Status": {},
+                "Os": {},
+                "AmiId": {},
+                "AvailabilityZone": {},
+                "SubnetId": {},
+                "PublicDns": {},
+                "PrivateDns": {},
+                "PublicIp": {},
+                "PrivateIp": {},
+                "ElasticIp": {},
+                "AutoScalingType": {},
+                "SshKeyName": {},
+                "SshHostRsaKeyFingerprint": {},
+                "SshHostDsaKeyFingerprint": {},
+                "CreatedAt": {},
+                "LastServiceErrorId": {},
+                "Architecture": {},
+                "RootDeviceType": {},
+                "RootDeviceVolumeId": {},
+                "InstallUpdatesOnBoot": {
+                  "type": "boolean"
+                },
+                "EbsOptimized": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeLayers": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "StackId": {},
+          "LayerIds": {
+            "shape": "Sd"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Layers": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "StackId": {},
+                "LayerId": {},
+                "Type": {},
+                "Name": {},
+                "Shortname": {},
+                "Attributes": {
+                  "shape": "S11"
+                },
+                "CustomInstanceProfileArn": {},
+                "CustomSecurityGroupIds": {
+                  "shape": "Sd"
+                },
+                "DefaultSecurityGroupNames": {
+                  "shape": "Sd"
+                },
+                "Packages": {
+                  "shape": "Sd"
+                },
+                "VolumeConfigurations": {
+                  "shape": "S13"
+                },
+                "EnableAutoHealing": {
+                  "type": "boolean"
+                },
+                "AutoAssignElasticIps": {
+                  "type": "boolean"
+                },
+                "AutoAssignPublicIps": {
+                  "type": "boolean"
+                },
+                "DefaultRecipes": {
+                  "shape": "S16"
+                },
+                "CustomRecipes": {
+                  "shape": "S16"
+                },
+                "CreatedAt": {},
+                "InstallUpdatesOnBoot": {
+                  "type": "boolean"
+                },
+                "UseEbsOptimizedInstances": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeLoadBasedAutoScaling": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "LayerIds"
+        ],
+        "members": {
+          "LayerIds": {
+            "shape": "Sd"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "LoadBasedAutoScalingConfigurations": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "LayerId": {},
+                "Enable": {
+                  "type": "boolean"
+                },
+                "UpScaling": {
+                  "shape": "S2i"
+                },
+                "DownScaling": {
+                  "shape": "S2i"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeMyUserProfile": {
+      "output": {
+        "type": "structure",
+        "members": {
+          "UserProfile": {
+            "type": "structure",
+            "members": {
+              "IamUserArn": {},
+              "Name": {},
+              "SshUsername": {},
+              "SshPublicKey": {}
+            }
+          }
+        }
+      }
+    },
+    "DescribePermissions": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "IamUserArn": {},
+          "StackId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Permissions": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "StackId": {},
+                "IamUserArn": {},
+                "AllowSsh": {
+                  "type": "boolean"
+                },
+                "AllowSudo": {
+                  "type": "boolean"
+                },
+                "Level": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeRaidArrays": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "InstanceId": {},
+          "StackId": {},
+          "RaidArrayIds": {
+            "shape": "Sd"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "RaidArrays": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "RaidArrayId": {},
+                "InstanceId": {},
+                "Name": {},
+                "RaidLevel": {
+                  "type": "integer"
+                },
+                "NumberOfDisks": {
+                  "type": "integer"
+                },
+                "Size": {
+                  "type": "integer"
+                },
+                "Device": {},
+                "MountPoint": {},
+                "AvailabilityZone": {},
+                "CreatedAt": {},
+                "StackId": {},
+                "VolumeType": {},
+                "Iops": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeRdsDbInstances": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackId"
+        ],
+        "members": {
+          "StackId": {},
+          "RdsDbInstanceArns": {
+            "shape": "Sd"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "RdsDbInstances": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "RdsDbInstanceArn": {},
+                "DbInstanceIdentifier": {},
+                "DbUser": {},
+                "DbPassword": {},
+                "Region": {},
+                "Address": {},
+                "Engine": {},
+                "StackId": {},
+                "MissingOnRds": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeServiceErrors": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "StackId": {},
+          "InstanceId": {},
+          "ServiceErrorIds": {
+            "shape": "Sd"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ServiceErrors": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "ServiceErrorId": {},
+                "StackId": {},
+                "InstanceId": {},
+                "Type": {},
+                "Message": {},
+                "CreatedAt": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeStackSummary": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackId"
+        ],
+        "members": {
+          "StackId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "StackSummary": {
+            "type": "structure",
+            "members": {
+              "StackId": {},
+              "Name": {},
+              "Arn": {},
+              "LayersCount": {
+                "type": "integer"
+              },
+              "AppsCount": {
+                "type": "integer"
+              },
+              "InstancesCount": {
+                "type": "structure",
+                "members": {
+                  "Booting": {
+                    "type": "integer"
+                  },
+                  "ConnectionLost": {
+                    "type": "integer"
+                  },
+                  "Online": {
+                    "type": "integer"
+                  },
+                  "Pending": {
+                    "type": "integer"
+                  },
+                  "Rebooting": {
+                    "type": "integer"
+                  },
+                  "Requested": {
+                    "type": "integer"
+                  },
+                  "RunningSetup": {
+                    "type": "integer"
+                  },
+                  "SetupFailed": {
+                    "type": "integer"
+                  },
+                  "ShuttingDown": {
+                    "type": "integer"
+                  },
+                  "StartFailed": {
+                    "type": "integer"
+                  },
+                  "Stopped": {
+                    "type": "integer"
+                  },
+                  "Stopping": {
+                    "type": "integer"
+                  },
+                  "Terminated": {
+                    "type": "integer"
+                  },
+                  "Terminating": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeStacks": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "StackIds": {
+            "shape": "Sd"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Stacks": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "StackId": {},
+                "Name": {},
+                "Arn": {},
+                "Region": {},
+                "VpcId": {},
+                "Attributes": {
+                  "shape": "S6"
+                },
+                "ServiceRoleArn": {},
+                "DefaultInstanceProfileArn": {},
+                "DefaultOs": {},
+                "HostnameTheme": {},
+                "DefaultAvailabilityZone": {},
+                "DefaultSubnetId": {},
+                "CustomJson": {},
+                "ConfigurationManager": {
+                  "shape": "S8"
+                },
+                "ChefConfiguration": {
+                  "shape": "S9"
+                },
+                "UseCustomCookbooks": {
+                  "type": "boolean"
+                },
+                "UseOpsworksSecurityGroups": {
+                  "type": "boolean"
+                },
+                "CustomCookbooksSource": {
+                  "shape": "Sb"
+                },
+                "DefaultSshKeyName": {},
+                "CreatedAt": {},
+                "DefaultRootDeviceType": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeTimeBasedAutoScaling": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "InstanceIds"
+        ],
+        "members": {
+          "InstanceIds": {
+            "shape": "Sd"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TimeBasedAutoScalingConfigurations": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "InstanceId": {},
+                "AutoScalingSchedule": {
+                  "shape": "S3f"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeUserProfiles": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "IamUserArns": {
+            "shape": "Sd"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "UserProfiles": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "IamUserArn": {},
+                "Name": {},
+                "SshUsername": {},
+                "SshPublicKey": {},
+                "AllowSelfManagement": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeVolumes": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "InstanceId": {},
+          "StackId": {},
+          "RaidArrayId": {},
+          "VolumeIds": {
+            "shape": "Sd"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Volumes": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "VolumeId": {},
+                "Ec2VolumeId": {},
+                "Name": {},
+                "RaidArrayId": {},
+                "InstanceId": {},
+                "Status": {},
+                "Size": {
+                  "type": "integer"
+                },
+                "Device": {},
+                "MountPoint": {},
+                "Region": {},
+                "AvailabilityZone": {},
+                "VolumeType": {},
+                "Iops": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "DetachElasticLoadBalancer": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ElasticLoadBalancerName",
+          "LayerId"
+        ],
+        "members": {
+          "ElasticLoadBalancerName": {},
+          "LayerId": {}
+        }
+      }
+    },
+    "DisassociateElasticIp": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ElasticIp"
+        ],
+        "members": {
+          "ElasticIp": {}
+        }
+      }
+    },
+    "GetHostnameSuggestion": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "LayerId"
+        ],
+        "members": {
+          "LayerId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "LayerId": {},
+          "Hostname": {}
+        }
+      }
+    },
+    "RebootInstance": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "InstanceId"
+        ],
+        "members": {
+          "InstanceId": {}
+        }
+      }
+    },
+    "RegisterElasticIp": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ElasticIp",
+          "StackId"
+        ],
+        "members": {
+          "ElasticIp": {},
+          "StackId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ElasticIp": {}
+        }
+      }
+    },
+    "RegisterRdsDbInstance": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackId",
+          "RdsDbInstanceArn",
+          "DbUser",
+          "DbPassword"
+        ],
+        "members": {
+          "StackId": {},
+          "RdsDbInstanceArn": {},
+          "DbUser": {},
+          "DbPassword": {}
+        }
+      }
+    },
+    "RegisterVolume": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackId"
+        ],
+        "members": {
+          "Ec2VolumeId": {},
+          "StackId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "VolumeId": {}
+        }
+      }
+    },
+    "SetLoadBasedAutoScaling": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "LayerId"
+        ],
+        "members": {
+          "LayerId": {},
+          "Enable": {
+            "type": "boolean"
+          },
+          "UpScaling": {
+            "shape": "S2i"
+          },
+          "DownScaling": {
+            "shape": "S2i"
+          }
+        }
+      }
+    },
+    "SetPermission": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackId",
+          "IamUserArn"
+        ],
+        "members": {
+          "StackId": {},
+          "IamUserArn": {},
+          "AllowSsh": {
+            "type": "boolean"
+          },
+          "AllowSudo": {
+            "type": "boolean"
+          },
+          "Level": {}
+        }
+      }
+    },
+    "SetTimeBasedAutoScaling": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "InstanceId"
+        ],
+        "members": {
+          "InstanceId": {},
+          "AutoScalingSchedule": {
+            "shape": "S3f"
+          }
+        }
+      }
+    },
+    "StartInstance": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "InstanceId"
+        ],
+        "members": {
+          "InstanceId": {}
+        }
+      }
+    },
+    "StartStack": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackId"
+        ],
+        "members": {
+          "StackId": {}
+        }
+      }
+    },
+    "StopInstance": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "InstanceId"
+        ],
+        "members": {
+          "InstanceId": {}
+        }
+      }
+    },
+    "StopStack": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackId"
+        ],
+        "members": {
+          "StackId": {}
+        }
+      }
+    },
+    "UnassignVolume": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "VolumeId"
+        ],
+        "members": {
+          "VolumeId": {}
+        }
+      }
+    },
+    "UpdateApp": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "AppId"
+        ],
+        "members": {
+          "AppId": {},
+          "Name": {},
+          "Description": {},
+          "DataSources": {
+            "shape": "Sh"
+          },
+          "Type": {},
+          "AppSource": {
+            "shape": "Sb"
+          },
+          "Domains": {
+            "shape": "Sd"
+          },
+          "EnableSsl": {
+            "type": "boolean"
+          },
+          "SslConfiguration": {
+            "shape": "Sk"
+          },
+          "Attributes": {
+            "shape": "Sl"
+          },
+          "Environment": {
+            "shape": "Sn"
+          }
+        }
+      }
+    },
+    "UpdateElasticIp": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ElasticIp"
+        ],
+        "members": {
+          "ElasticIp": {},
+          "Name": {}
+        }
+      }
+    },
+    "UpdateInstance": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "InstanceId"
+        ],
+        "members": {
+          "InstanceId": {},
+          "LayerIds": {
+            "shape": "Sd"
+          },
+          "InstanceType": {},
+          "AutoScalingType": {},
+          "Hostname": {},
+          "Os": {},
+          "AmiId": {},
+          "SshKeyName": {},
+          "Architecture": {},
+          "InstallUpdatesOnBoot": {
+            "type": "boolean"
+          },
+          "EbsOptimized": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "UpdateLayer": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "LayerId"
+        ],
+        "members": {
+          "LayerId": {},
+          "Name": {},
+          "Shortname": {},
+          "Attributes": {
+            "shape": "S11"
+          },
+          "CustomInstanceProfileArn": {},
+          "CustomSecurityGroupIds": {
+            "shape": "Sd"
+          },
+          "Packages": {
+            "shape": "Sd"
+          },
+          "VolumeConfigurations": {
+            "shape": "S13"
+          },
+          "EnableAutoHealing": {
+            "type": "boolean"
+          },
+          "AutoAssignElasticIps": {
+            "type": "boolean"
+          },
+          "AutoAssignPublicIps": {
+            "type": "boolean"
+          },
+          "CustomRecipes": {
+            "shape": "S16"
+          },
+          "InstallUpdatesOnBoot": {
+            "type": "boolean"
+          },
+          "UseEbsOptimizedInstances": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "UpdateMyUserProfile": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "SshPublicKey": {}
+        }
+      }
+    },
+    "UpdateRdsDbInstance": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "RdsDbInstanceArn"
+        ],
+        "members": {
+          "RdsDbInstanceArn": {},
+          "DbUser": {},
+          "DbPassword": {}
+        }
+      }
+    },
+    "UpdateStack": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackId"
+        ],
+        "members": {
+          "StackId": {},
+          "Name": {},
+          "Attributes": {
+            "shape": "S6"
+          },
+          "ServiceRoleArn": {},
+          "DefaultInstanceProfileArn": {},
+          "DefaultOs": {},
+          "HostnameTheme": {},
+          "DefaultAvailabilityZone": {},
+          "DefaultSubnetId": {},
+          "CustomJson": {},
+          "ConfigurationManager": {
+            "shape": "S8"
+          },
+          "ChefConfiguration": {
+            "shape": "S9"
+          },
+          "UseCustomCookbooks": {
+            "type": "boolean"
+          },
+          "CustomCookbooksSource": {
+            "shape": "Sb"
+          },
+          "DefaultSshKeyName": {},
+          "DefaultRootDeviceType": {},
+          "UseOpsworksSecurityGroups": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "UpdateUserProfile": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "IamUserArn"
+        ],
+        "members": {
+          "IamUserArn": {},
+          "SshUsername": {},
+          "SshPublicKey": {},
+          "AllowSelfManagement": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "UpdateVolume": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "VolumeId"
+        ],
+        "members": {
+          "VolumeId": {},
+          "Name": {},
+          "MountPoint": {}
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S6": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S8": {
+      "type": "structure",
+      "members": {
+        "Name": {},
+        "Version": {}
+      }
+    },
+    "S9": {
+      "type": "structure",
+      "members": {
+        "ManageBerkshelf": {
+          "type": "boolean"
+        },
+        "BerkshelfVersion": {}
+      }
+    },
+    "Sb": {
+      "type": "structure",
+      "members": {
+        "Type": {},
+        "Url": {},
+        "Username": {},
+        "Password": {},
+        "SshKey": {},
+        "Revision": {}
+      }
+    },
+    "Sd": {
+      "type": "list",
+      "member": {}
+    },
+    "Sh": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "Type": {},
+          "Arn": {},
+          "DatabaseName": {}
+        }
+      }
+    },
+    "Sk": {
+      "type": "structure",
+      "required": [
+        "Certificate",
+        "PrivateKey"
+      ],
+      "members": {
+        "Certificate": {},
+        "PrivateKey": {},
+        "Chain": {}
+      }
+    },
+    "Sl": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "Sn": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "Key",
+          "Value"
+        ],
+        "members": {
+          "Key": {},
+          "Value": {},
+          "Secure": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "Sr": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {},
+        "Args": {
+          "type": "map",
+          "key": {},
+          "value": {
+            "shape": "Sd"
+          }
+        }
+      }
+    },
+    "S11": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S13": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "MountPoint",
+          "NumberOfDisks",
+          "Size"
+        ],
+        "members": {
+          "MountPoint": {},
+          "RaidLevel": {
+            "type": "integer"
+          },
+          "NumberOfDisks": {
+            "type": "integer"
+          },
+          "Size": {
+            "type": "integer"
+          },
+          "VolumeType": {},
+          "Iops": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "S16": {
+      "type": "structure",
+      "members": {
+        "Setup": {
+          "shape": "Sd"
+        },
+        "Configure": {
+          "shape": "Sd"
+        },
+        "Deploy": {
+          "shape": "Sd"
+        },
+        "Undeploy": {
+          "shape": "Sd"
+        },
+        "Shutdown": {
+          "shape": "Sd"
+        }
+      }
+    },
+    "S2i": {
+      "type": "structure",
+      "members": {
+        "InstanceCount": {
+          "type": "integer"
+        },
+        "ThresholdsWaitTime": {
+          "type": "integer"
+        },
+        "IgnoreMetricsTime": {
+          "type": "integer"
+        },
+        "CpuThreshold": {
+          "type": "double"
+        },
+        "MemoryThreshold": {
+          "type": "double"
+        },
+        "LoadThreshold": {
+          "type": "double"
+        }
+      }
+    },
+    "S3f": {
+      "type": "structure",
+      "members": {
+        "Monday": {
+          "shape": "S3g"
+        },
+        "Tuesday": {
+          "shape": "S3g"
+        },
+        "Wednesday": {
+          "shape": "S3g"
+        },
+        "Thursday": {
+          "shape": "S3g"
+        },
+        "Friday": {
+          "shape": "S3g"
+        },
+        "Saturday": {
+          "shape": "S3g"
+        },
+        "Sunday": {
+          "shape": "S3g"
+        }
+      }
+    },
+    "S3g": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    }
+  }
+}

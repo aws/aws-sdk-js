@@ -1,0 +1,512 @@
+{
+  "metadata": {
+    "apiVersion": "2014-05-15",
+    "endpointPrefix": "route53domains",
+    "jsonVersion": "1.1",
+    "serviceFullName": "Amazon Route 53 Domains",
+    "signatureVersion": "v4",
+    "targetPrefix": "Route53Domains_v20140515",
+    "protocol": "json"
+  },
+  "operations": {
+    "CheckDomainAvailability": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DomainName"
+        ],
+        "members": {
+          "DomainName": {},
+          "IdnLangCode": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Availability"
+        ],
+        "members": {
+          "Availability": {}
+        }
+      }
+    },
+    "DisableDomainTransferLock": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DomainName"
+        ],
+        "members": {
+          "DomainName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "OperationId"
+        ],
+        "members": {
+          "OperationId": {}
+        }
+      }
+    },
+    "EnableDomainTransferLock": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DomainName"
+        ],
+        "members": {
+          "DomainName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "OperationId"
+        ],
+        "members": {
+          "OperationId": {}
+        }
+      }
+    },
+    "GetDomainDetail": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DomainName"
+        ],
+        "members": {
+          "DomainName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "DomainName",
+          "Nameservers",
+          "AdminContact",
+          "RegistrantContact",
+          "TechContact"
+        ],
+        "members": {
+          "DomainName": {},
+          "Nameservers": {
+            "shape": "Sd"
+          },
+          "AutoRenew": {
+            "type": "boolean"
+          },
+          "AdminContact": {
+            "shape": "Sj"
+          },
+          "RegistrantContact": {
+            "shape": "Sj"
+          },
+          "TechContact": {
+            "shape": "Sj"
+          },
+          "AdminPrivacy": {
+            "type": "boolean"
+          },
+          "RegistrantPrivacy": {
+            "type": "boolean"
+          },
+          "TechPrivacy": {
+            "type": "boolean"
+          },
+          "RegistrarName": {},
+          "WhoIsServer": {},
+          "RegistrarUrl": {},
+          "AbuseContactEmail": {},
+          "AbuseContactPhone": {},
+          "RegistryDomainId": {},
+          "CreationDate": {
+            "type": "timestamp"
+          },
+          "UpdatedDate": {
+            "type": "timestamp"
+          },
+          "ExpirationDate": {
+            "type": "timestamp"
+          },
+          "Reseller": {},
+          "DnsSec": {},
+          "StatusList": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      }
+    },
+    "GetOperationDetail": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "OperationId"
+        ],
+        "members": {
+          "OperationId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "OperationId": {},
+          "Status": {},
+          "Message": {},
+          "DomainName": {},
+          "Type": {},
+          "SubmittedDate": {
+            "type": "timestamp"
+          }
+        }
+      }
+    },
+    "ListDomains": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "Marker": {},
+          "MaxItems": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Domains"
+        ],
+        "members": {
+          "Domains": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "DomainName"
+              ],
+              "members": {
+                "DomainName": {},
+                "AutoRenew": {
+                  "type": "boolean"
+                },
+                "TransferLock": {
+                  "type": "boolean"
+                },
+                "Expiry": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "NextPageMarker": {}
+        }
+      }
+    },
+    "ListOperations": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "Marker": {},
+          "MaxItems": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Operations"
+        ],
+        "members": {
+          "Operations": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "OperationId",
+                "Status",
+                "Type",
+                "SubmittedDate"
+              ],
+              "members": {
+                "OperationId": {},
+                "Status": {},
+                "Type": {},
+                "SubmittedDate": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "NextPageMarker": {}
+        }
+      }
+    },
+    "RegisterDomain": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DomainName",
+          "DurationInYears",
+          "AdminContact",
+          "RegistrantContact",
+          "TechContact"
+        ],
+        "members": {
+          "DomainName": {},
+          "IdnLangCode": {},
+          "DurationInYears": {
+            "type": "integer"
+          },
+          "AutoRenew": {
+            "type": "boolean"
+          },
+          "AdminContact": {
+            "shape": "Sj"
+          },
+          "RegistrantContact": {
+            "shape": "Sj"
+          },
+          "TechContact": {
+            "shape": "Sj"
+          },
+          "PrivacyProtectAdminContact": {
+            "type": "boolean"
+          },
+          "PrivacyProtectRegistrantContact": {
+            "type": "boolean"
+          },
+          "PrivacyProtectTechContact": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "OperationId"
+        ],
+        "members": {
+          "OperationId": {}
+        }
+      }
+    },
+    "RetrieveDomainAuthCode": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DomainName"
+        ],
+        "members": {
+          "DomainName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "AuthCode"
+        ],
+        "members": {
+          "AuthCode": {
+            "shape": "S1q"
+          }
+        }
+      }
+    },
+    "TransferDomain": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DomainName",
+          "DurationInYears",
+          "Nameservers",
+          "AdminContact",
+          "RegistrantContact",
+          "TechContact"
+        ],
+        "members": {
+          "DomainName": {},
+          "IdnLangCode": {},
+          "DurationInYears": {
+            "type": "integer"
+          },
+          "Nameservers": {
+            "shape": "Sd"
+          },
+          "AuthCode": {
+            "shape": "S1q"
+          },
+          "AutoRenew": {
+            "type": "boolean"
+          },
+          "AdminContact": {
+            "shape": "Sj"
+          },
+          "RegistrantContact": {
+            "shape": "Sj"
+          },
+          "TechContact": {
+            "shape": "Sj"
+          },
+          "PrivacyProtectAdminContact": {
+            "type": "boolean"
+          },
+          "PrivacyProtectRegistrantContact": {
+            "type": "boolean"
+          },
+          "PrivacyProtectTechContact": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "OperationId"
+        ],
+        "members": {
+          "OperationId": {}
+        }
+      }
+    },
+    "UpdateDomainContact": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DomainName"
+        ],
+        "members": {
+          "DomainName": {},
+          "AdminContact": {
+            "shape": "Sj"
+          },
+          "RegistrantContact": {
+            "shape": "Sj"
+          },
+          "TechContact": {
+            "shape": "Sj"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "OperationId"
+        ],
+        "members": {
+          "OperationId": {}
+        }
+      }
+    },
+    "UpdateDomainContactPrivacy": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DomainName"
+        ],
+        "members": {
+          "DomainName": {},
+          "AdminPrivacy": {
+            "type": "boolean"
+          },
+          "RegistrantPrivacy": {
+            "type": "boolean"
+          },
+          "TechPrivacy": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "OperationId"
+        ],
+        "members": {
+          "OperationId": {}
+        }
+      }
+    },
+    "UpdateDomainNameservers": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DomainName",
+          "Nameservers"
+        ],
+        "members": {
+          "DomainName": {},
+          "Nameservers": {
+            "shape": "Sd"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "OperationId"
+        ],
+        "members": {
+          "OperationId": {}
+        }
+      }
+    }
+  },
+  "shapes": {
+    "Sd": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "Name"
+        ],
+        "members": {
+          "Name": {},
+          "GlueIps": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      }
+    },
+    "Sj": {
+      "type": "structure",
+      "members": {
+        "FirstName": {},
+        "LastName": {},
+        "ContactType": {},
+        "OrganizationName": {},
+        "AddressLine1": {},
+        "AddressLine2": {},
+        "City": {},
+        "State": {},
+        "CountryCode": {},
+        "ZipCode": {},
+        "PhoneNumber": {},
+        "Email": {},
+        "Fax": {},
+        "ExtraParams": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "Name",
+              "Value"
+            ],
+            "members": {
+              "Name": {},
+              "Value": {}
+            }
+          }
+        }
+      },
+      "sensitive": true
+    },
+    "S1q": {
+      "type": "string",
+      "sensitive": true
+    }
+  }
+}

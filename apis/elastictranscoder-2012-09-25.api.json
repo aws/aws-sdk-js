@@ -1,0 +1,871 @@
+{
+  "metadata": {
+    "apiVersion": "2012-09-25",
+    "endpointPrefix": "elastictranscoder",
+    "serviceFullName": "Amazon Elastic Transcoder",
+    "signatureVersion": "v4",
+    "protocol": "rest-json"
+  },
+  "operations": {
+    "CancelJob": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2012-09-25/jobs/{Id}",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "CreateJob": {
+      "http": {
+        "requestUri": "/2012-09-25/jobs",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "PipelineId",
+          "Input"
+        ],
+        "members": {
+          "PipelineId": {},
+          "Input": {
+            "shape": "S5"
+          },
+          "Output": {
+            "shape": "Sc"
+          },
+          "Outputs": {
+            "type": "list",
+            "member": {
+              "shape": "Sc"
+            }
+          },
+          "OutputKeyPrefix": {},
+          "Playlists": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Name": {},
+                "Format": {},
+                "OutputKeys": {
+                  "shape": "S1b"
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Job": {
+            "shape": "S1d"
+          }
+        }
+      }
+    },
+    "CreatePipeline": {
+      "http": {
+        "requestUri": "/2012-09-25/pipelines",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name",
+          "InputBucket",
+          "Role"
+        ],
+        "members": {
+          "Name": {},
+          "InputBucket": {},
+          "OutputBucket": {},
+          "Role": {},
+          "Notifications": {
+            "shape": "S1q"
+          },
+          "ContentConfig": {
+            "shape": "S1s"
+          },
+          "ThumbnailConfig": {
+            "shape": "S1s"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Pipeline": {
+            "shape": "S21"
+          }
+        }
+      }
+    },
+    "CreatePreset": {
+      "http": {
+        "requestUri": "/2012-09-25/presets",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name",
+          "Container"
+        ],
+        "members": {
+          "Name": {},
+          "Description": {},
+          "Container": {},
+          "Video": {
+            "shape": "S25"
+          },
+          "Audio": {
+            "shape": "S2l"
+          },
+          "Thumbnails": {
+            "shape": "S2s"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Preset": {
+            "shape": "S2w"
+          },
+          "Warning": {}
+        }
+      }
+    },
+    "DeletePipeline": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2012-09-25/pipelines/{Id}",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeletePreset": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2012-09-25/presets/{Id}",
+        "responseCode": 202
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "ListJobsByPipeline": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2012-09-25/jobsByPipeline/{PipelineId}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "PipelineId"
+        ],
+        "members": {
+          "PipelineId": {
+            "location": "uri",
+            "locationName": "PipelineId"
+          },
+          "Ascending": {
+            "location": "querystring",
+            "locationName": "Ascending"
+          },
+          "PageToken": {
+            "location": "querystring",
+            "locationName": "PageToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Jobs": {
+            "shape": "S35"
+          },
+          "NextPageToken": {}
+        }
+      }
+    },
+    "ListJobsByStatus": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2012-09-25/jobsByStatus/{Status}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Status"
+        ],
+        "members": {
+          "Status": {
+            "location": "uri",
+            "locationName": "Status"
+          },
+          "Ascending": {
+            "location": "querystring",
+            "locationName": "Ascending"
+          },
+          "PageToken": {
+            "location": "querystring",
+            "locationName": "PageToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Jobs": {
+            "shape": "S35"
+          },
+          "NextPageToken": {}
+        }
+      }
+    },
+    "ListPipelines": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2012-09-25/pipelines"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Ascending": {
+            "location": "querystring",
+            "locationName": "Ascending"
+          },
+          "PageToken": {
+            "location": "querystring",
+            "locationName": "PageToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Pipelines": {
+            "type": "list",
+            "member": {
+              "shape": "S21"
+            }
+          },
+          "NextPageToken": {}
+        }
+      }
+    },
+    "ListPresets": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2012-09-25/presets"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Ascending": {
+            "location": "querystring",
+            "locationName": "Ascending"
+          },
+          "PageToken": {
+            "location": "querystring",
+            "locationName": "PageToken"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Presets": {
+            "type": "list",
+            "member": {
+              "shape": "S2w"
+            }
+          },
+          "NextPageToken": {}
+        }
+      }
+    },
+    "ReadJob": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2012-09-25/jobs/{Id}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Job": {
+            "shape": "S1d"
+          }
+        }
+      }
+    },
+    "ReadPipeline": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2012-09-25/pipelines/{Id}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Pipeline": {
+            "shape": "S21"
+          }
+        }
+      }
+    },
+    "ReadPreset": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2012-09-25/presets/{Id}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Preset": {
+            "shape": "S2w"
+          }
+        }
+      }
+    },
+    "TestRole": {
+      "http": {
+        "requestUri": "/2012-09-25/roleTests",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Role",
+          "InputBucket",
+          "OutputBucket",
+          "Topics"
+        ],
+        "members": {
+          "Role": {},
+          "InputBucket": {},
+          "OutputBucket": {},
+          "Topics": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Success": {},
+          "Messages": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      }
+    },
+    "UpdatePipeline": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/2012-09-25/pipelines/{Id}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "Name": {},
+          "InputBucket": {},
+          "Role": {},
+          "Notifications": {
+            "shape": "S1q"
+          },
+          "ContentConfig": {
+            "shape": "S1s"
+          },
+          "ThumbnailConfig": {
+            "shape": "S1s"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Pipeline": {
+            "shape": "S21"
+          }
+        }
+      }
+    },
+    "UpdatePipelineNotifications": {
+      "http": {
+        "requestUri": "/2012-09-25/pipelines/{Id}/notifications"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id",
+          "Notifications"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "Notifications": {
+            "shape": "S1q"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Pipeline": {
+            "shape": "S21"
+          }
+        }
+      }
+    },
+    "UpdatePipelineStatus": {
+      "http": {
+        "requestUri": "/2012-09-25/pipelines/{Id}/status"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id",
+          "Status"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "Status": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Pipeline": {
+            "shape": "S21"
+          }
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S5": {
+      "type": "structure",
+      "members": {
+        "Key": {},
+        "FrameRate": {},
+        "Resolution": {},
+        "AspectRatio": {},
+        "Interlaced": {},
+        "Container": {}
+      }
+    },
+    "Sc": {
+      "type": "structure",
+      "members": {
+        "Key": {},
+        "ThumbnailPattern": {},
+        "Rotate": {},
+        "PresetId": {},
+        "SegmentDuration": {},
+        "Watermarks": {
+          "shape": "Sg"
+        },
+        "AlbumArt": {
+          "shape": "Sk"
+        },
+        "Composition": {
+          "shape": "Ss"
+        },
+        "Captions": {
+          "shape": "Sw"
+        }
+      }
+    },
+    "Sg": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "PresetWatermarkId": {},
+          "InputKey": {}
+        }
+      }
+    },
+    "Sk": {
+      "type": "structure",
+      "members": {
+        "MergePolicy": {},
+        "Artwork": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "InputKey": {},
+              "MaxWidth": {},
+              "MaxHeight": {},
+              "SizingPolicy": {},
+              "PaddingPolicy": {},
+              "AlbumArtFormat": {}
+            }
+          }
+        }
+      }
+    },
+    "Ss": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "TimeSpan": {
+            "type": "structure",
+            "members": {
+              "StartTime": {},
+              "Duration": {}
+            }
+          }
+        }
+      }
+    },
+    "Sw": {
+      "type": "structure",
+      "members": {
+        "MergePolicy": {},
+        "CaptionSources": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "Key": {},
+              "Language": {},
+              "TimeOffset": {},
+              "Label": {}
+            }
+          }
+        },
+        "CaptionFormats": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "Format": {},
+              "Pattern": {}
+            }
+          }
+        }
+      }
+    },
+    "S1b": {
+      "type": "list",
+      "member": {}
+    },
+    "S1d": {
+      "type": "structure",
+      "members": {
+        "Id": {},
+        "Arn": {},
+        "PipelineId": {},
+        "Input": {
+          "shape": "S5"
+        },
+        "Output": {
+          "shape": "S1f"
+        },
+        "Outputs": {
+          "type": "list",
+          "member": {
+            "shape": "S1f"
+          }
+        },
+        "OutputKeyPrefix": {},
+        "Playlists": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "Name": {},
+              "Format": {},
+              "OutputKeys": {
+                "shape": "S1b"
+              },
+              "Status": {},
+              "StatusDetail": {}
+            }
+          }
+        },
+        "Status": {}
+      }
+    },
+    "S1f": {
+      "type": "structure",
+      "members": {
+        "Id": {},
+        "Key": {},
+        "ThumbnailPattern": {},
+        "Rotate": {},
+        "PresetId": {},
+        "SegmentDuration": {},
+        "Status": {},
+        "StatusDetail": {},
+        "Duration": {
+          "type": "long"
+        },
+        "Width": {
+          "type": "integer"
+        },
+        "Height": {
+          "type": "integer"
+        },
+        "Watermarks": {
+          "shape": "Sg"
+        },
+        "AlbumArt": {
+          "shape": "Sk"
+        },
+        "Composition": {
+          "shape": "Ss"
+        },
+        "Captions": {
+          "shape": "Sw"
+        }
+      }
+    },
+    "S1q": {
+      "type": "structure",
+      "members": {
+        "Progressing": {},
+        "Completed": {},
+        "Warning": {},
+        "Error": {}
+      }
+    },
+    "S1s": {
+      "type": "structure",
+      "members": {
+        "Bucket": {},
+        "StorageClass": {},
+        "Permissions": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "GranteeType": {},
+              "Grantee": {},
+              "Access": {
+                "type": "list",
+                "member": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "S21": {
+      "type": "structure",
+      "members": {
+        "Id": {},
+        "Arn": {},
+        "Name": {},
+        "Status": {},
+        "InputBucket": {},
+        "OutputBucket": {},
+        "Role": {},
+        "Notifications": {
+          "shape": "S1q"
+        },
+        "ContentConfig": {
+          "shape": "S1s"
+        },
+        "ThumbnailConfig": {
+          "shape": "S1s"
+        }
+      }
+    },
+    "S25": {
+      "type": "structure",
+      "members": {
+        "Codec": {},
+        "CodecOptions": {
+          "type": "map",
+          "key": {},
+          "value": {}
+        },
+        "KeyframesMaxDist": {},
+        "FixedGOP": {},
+        "BitRate": {},
+        "FrameRate": {},
+        "MaxFrameRate": {},
+        "Resolution": {},
+        "AspectRatio": {},
+        "MaxWidth": {},
+        "MaxHeight": {},
+        "DisplayAspectRatio": {},
+        "SizingPolicy": {},
+        "PaddingPolicy": {},
+        "Watermarks": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "Id": {},
+              "MaxWidth": {},
+              "MaxHeight": {},
+              "SizingPolicy": {},
+              "HorizontalAlign": {},
+              "HorizontalOffset": {},
+              "VerticalAlign": {},
+              "VerticalOffset": {},
+              "Opacity": {},
+              "Target": {}
+            }
+          }
+        }
+      }
+    },
+    "S2l": {
+      "type": "structure",
+      "members": {
+        "Codec": {},
+        "SampleRate": {},
+        "BitRate": {},
+        "Channels": {},
+        "CodecOptions": {
+          "type": "structure",
+          "members": {
+            "Profile": {}
+          }
+        }
+      }
+    },
+    "S2s": {
+      "type": "structure",
+      "members": {
+        "Format": {},
+        "Interval": {},
+        "Resolution": {},
+        "AspectRatio": {},
+        "MaxWidth": {},
+        "MaxHeight": {},
+        "SizingPolicy": {},
+        "PaddingPolicy": {}
+      }
+    },
+    "S2w": {
+      "type": "structure",
+      "members": {
+        "Id": {},
+        "Arn": {},
+        "Name": {},
+        "Description": {},
+        "Container": {},
+        "Audio": {
+          "shape": "S2l"
+        },
+        "Video": {
+          "shape": "S25"
+        },
+        "Thumbnails": {
+          "shape": "S2s"
+        },
+        "Type": {}
+      }
+    },
+    "S35": {
+      "type": "list",
+      "member": {
+        "shape": "S1d"
+      }
+    }
+  }
+}
