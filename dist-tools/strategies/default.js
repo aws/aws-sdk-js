@@ -75,9 +75,14 @@ DefaultStrategy.prototype.getServiceHeader = function(service) {
     }.bind(this)).join('\n');
   }
 
+  if (!this.serviceClasses[service]) return null;
+  var versions = this.serviceClasses[service].apiVersions.map(function(version) {
+    return version.indexOf('*') >= 0 ? null : version;
+  }.bind(this)).filter(function(c) { return c !== null; });
   var file = util.format(
-    'AWS.%s = AWS.Service.defineService(\'%s\');\n',
-    this.apis.serviceName(service), service);
+    'AWS.apiLoader.services[\'%s\'] = {};\n' +
+    'AWS.%s = AWS.Service.defineService(\'%s\', %s);\n',
+    service, this.apis.serviceName(service), service, util.inspect(versions));
   var svcPath = this.libPath + '/lib/services/' + service + '.js';
   if (fs.existsSync(svcPath)) {
     var lines = fs.readFileSync(svcPath).toString().split(/\r?\n/);
@@ -129,8 +134,8 @@ DefaultStrategy.prototype.getService = function(service, version) {
   }
 
   var line = util.format(
-    'AWS.Service.defineServiceApi(AWS.%s, "%s", %s);',
-    this.apis.serviceName(service), svc.api.apiVersion, JSON.stringify(api));
+    'AWS.apiLoader.services[\'%s\'][\'%s\'] = %s;',
+    service, svc.api.apiVersion, JSON.stringify(api));
 
   if (this.isCached) {
     fs.writeFileSync(this.builder.cachePath(service + '-' + version), line);

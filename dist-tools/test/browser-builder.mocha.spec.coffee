@@ -20,8 +20,8 @@ describe 'Builder', ->
         ' = AWS\\.Service\\.defineService\\(\'' +
         helpers.AWS[klass].serviceIdentifier + '\''))
       expect(code).to.match(new RegExp(
-        'AWS\\.Service\\.defineServiceApi\\(AWS\\.' +
-        klass + ', "' + version + '",'))
+        'AWS\\.apiLoader\\.services\\[\'' + klass.toLowerCase() +
+        '\'\\]\\[\'' + version + '\'\\] ='))
 
     assertBundleFailed = (services, errMsg) ->
       expect(-> builder.addServices(services)).to.throw(errMsg)
