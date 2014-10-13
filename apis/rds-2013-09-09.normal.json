@@ -8,7 +8,7 @@
     "xmlNamespace":"http://rds.amazonaws.com/doc/2013-09-09/",
     "protocol":"query"
   },
-  "documentation":"<fullname>Amazon Relational Database Service</fullname> <p> Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud. It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks, freeing up developers to focus on what makes their applications and businesses unique. </p> <p> Amazon RDS gives you access to the capabilities of a familiar MySQL or Oracle database server. This means the code, applications, and tools you already use today with your existing MySQL or Oracle databases work with Amazon RDS without modification. Amazon RDS automatically backs up your database and maintains the database software that powers your DB instance. Amazon RDS is flexible: you can scale your database instance's compute resources and storage capacity to meet your application's demand. As with all Amazon Web Services, there are no up-front investments, and you pay only for the resources you use. </p> <p> This is an interface reference for Amazon RDS. It contains documentation for a programming or command line interface you can use to manage Amazon RDS. Note that Amazon RDS is asynchronous, which means that some interfaces may require techniques such as polling or callback functions to determine when a command has been applied. In this reference, the parameter descriptions indicate whether a command is applied immediately, on the next instance reboot, or during the maintenance window. For a summary of the Amazon RDS interfaces, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html#Welcome.Interfaces\">Available RDS Interfaces</a>. </p>",
+  "documentation":"<fullname>Amazon Relational Database Service</fullname> <p> Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud. It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks, freeing up developers to focus on what makes their applications and businesses unique. </p> <p> Amazon RDS gives you access to the capabilities of a MySQL, PostgreSQL, Microsoft SQL Server, or Oracle database server. This means the code, applications, and tools you already use today with your existing databases work with Amazon RDS without modification. Amazon RDS automatically backs up your database and maintains the database software that powers your DB instance. Amazon RDS is flexible: you can scale your database instance's compute resources and storage capacity to meet your application's demand. As with all Amazon Web Services, there are no up-front investments, and you pay only for the resources you use. </p> <p> This is an interface reference for Amazon RDS. It contains documentation for a programming or command line interface you can use to manage Amazon RDS. Note that Amazon RDS is asynchronous, which means that some interfaces may require techniques such as polling or callback functions to determine when a command has been applied. In this reference, the parameter descriptions indicate whether a command is applied immediately, on the next instance reboot, or during the maintenance window. For a summary of the Amazon RDS interfaces, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html#Welcome.Interfaces\">Available RDS Interfaces</a>. </p>",
   "operations":{
     "AddSourceIdentifierToSubscription":{
       "name":"AddSourceIdentifierToSubscription",
@@ -299,7 +299,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p> Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone. </p>"
+          "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
         },
         {
           "shape":"InvalidSubnet",
@@ -456,7 +456,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p> Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone. </p>"
+          "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
         },
         {
           "shape":"InvalidSubnet",
@@ -559,7 +559,7 @@
           "documentation":"<p> A DB parameter group with the same name exists. </p>"
         }
       ],
-      "documentation":"<p> Creates a new DB parameter group. </p> <p> A DB parameter group is initially created with the default parameters for the database engine used by the DB instance. To provide custom values for any of the parameters, you must modify the group after creating it using <i>ModifyDBParameterGroup</i>. Once you've created a DB parameter group, you need to associate it with your DB instance using <i>ModifyDBInstance</i>. When you associate a new DB parameter group with a running DB instance, you need to reboot the DB Instance for the new DB parameter group and associated settings to take effect. </p>"
+      "documentation":"<p> Creates a new DB parameter group. </p> <p> A DB parameter group is initially created with the default parameters for the database engine used by the DB instance. To provide custom values for any of the parameters, you must modify the group after creating it using <i>ModifyDBParameterGroup</i>. Once you've created a DB parameter group, you need to associate it with your DB instance using <i>ModifyDBInstance</i>. When you associate a new DB parameter group with a running DB instance, you need to reboot the DB Instance for the new DB parameter group and associated settings to take effect. </p> <important> <p>After you create a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon RDS to fully complete the create action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the <code>character_set_database</code> parameter. You can use the <i>Parameter Groups</i> option of the <a href=\"https://console.aws.amazon.com/rds/\">Amazon RDS console</a> or the <i>DescribeDBParameters</i> command to verify that your DB parameter group has been created or modified.</p> </important>"
     },
     "CreateDBSecurityGroup":{
       "name":"CreateDBSecurityGroup",
@@ -726,7 +726,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p> Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone. </p>"
+          "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
         },
         {
           "shape":"InvalidSubnet",
@@ -1600,7 +1600,7 @@
           "documentation":"<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>"
         }
       ],
-      "documentation":"<p> Downloads the last line of the specified log file. </p>"
+      "documentation":"<p> Downloads all or a portion of the specified log file. </p>"
     },
     "ListTagsForResource":{
       "name":"ListTagsForResource",
@@ -1818,7 +1818,7 @@
           "documentation":"<p> The DB parameter group cannot be deleted because it is in use. </p>"
         }
       ],
-      "documentation":"<p> Modifies the parameters of a DB parameter group. To modify more than one parameter, submit a list of the following: <code>ParameterName</code>, <code>ParameterValue</code>, and <code>ApplyMethod</code>. A maximum of 20 parameters can be modified in a single request. </p>"
+      "documentation":"<p> Modifies the parameters of a DB parameter group. To modify more than one parameter, submit a list of the following: <code>ParameterName</code>, <code>ParameterValue</code>, and <code>ApplyMethod</code>. A maximum of 20 parameters can be modified in a single request. </p> <important> <p>After you modify a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon RDS to fully complete the modify action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the <code>character_set_database</code> parameter. You can use the <i>Parameter Groups</i> option of the <a href=\"https://console.aws.amazon.com/rds/\">Amazon RDS console</a> or the <i>DescribeDBParameters</i> command to verify that your DB parameter group has been created or modified.</p> </important>"
     },
     "ModifyDBSubnetGroup":{
       "name":"ModifyDBSubnetGroup",
@@ -1875,7 +1875,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p> Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone. </p>"
+          "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
         },
         {
           "shape":"InvalidSubnet",
@@ -2368,7 +2368,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p> Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone. </p>"
+          "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
         },
         {
           "shape":"InvalidSubnet",
@@ -2528,7 +2528,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p> Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone. </p>"
+          "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
         },
         {
           "shape":"InvalidSubnet",
@@ -2598,7 +2598,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p> Specified CIDRIP or EC2 security group is not authorized for the specified DB security group. </p>"
+          "documentation":"<p> Specified CIDRIP or EC2 security group is not authorized for the specified DB security group. </p> <p>RDS may not also be authorized via IAM to perform necessary actions on your behalf.</p>"
         },
         {
           "shape":"InvalidDBSecurityGroupStateFault",
@@ -2680,7 +2680,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"<p> Specified CIDRIP or EC2 security group is not authorized for the specified DB security group. </p>"
+      "documentation":"<p> Specified CIDRIP or EC2 security group is not authorized for the specified DB security group. </p> <p>RDS may not also be authorized via IAM to perform necessary actions on your behalf.</p>"
     },
     "AuthorizationQuotaExceededFault":{
       "type":"structure",
@@ -2768,7 +2768,7 @@
       "members":{
         "SourceDBSnapshotIdentifier":{
           "shape":"String",
-          "documentation":"<p> The identifier for the source DB snapshot. </p> <p>Constraints:</p> <ul> <li>Must specify a valid system snapshot in the \"available\" state.</li> <li>If the source snapshot is in the same region as the copy, specify a valid DB snapshot identifier.</li> <li>If the source snapshot is in a different region than the copy, specify valid DB snapshot ARN. For more information, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html\"> Copying a DB Snapshot</a>.</li> </ul> <p>Example: <code>rds:mydb-2012-04-02-00-01</code></p> <p>Example: <code>arn:aws:rds:rr-regn-1:123456789012:snapshot:mysql-instance1-snapshot-20130805</code></p>"
+          "documentation":"<p> The identifier for the source DB snapshot. </p> <p>Constraints:</p> <ul> <li>Must specify a valid system snapshot in the \"available\" state.</li> <li>If the source snapshot is in the same region as the copy, specify a valid DB snapshot identifier.</li> <li>If the source snapshot is in a different region than the copy, specify a valid DB snapshot ARN. For more information, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html\"> Copying a DB Snapshot</a>.</li> </ul> <p>Example: <code>rds:mydb-2012-04-02-00-01</code></p> <p>Example: <code>arn:aws:rds:rr-regn-1:123456789012:snapshot:mysql-instance1-snapshot-20130805</code></p>"
         },
         "TargetDBSnapshotIdentifier":{
           "shape":"String",
@@ -2791,7 +2791,7 @@
       "members":{
         "DBName":{
           "shape":"String",
-          "documentation":"<p>The meaning of this parameter differs according to the database engine you use.</p> <p><b>MySQL</b></p> <p>The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. </p> <p>Constraints:</p> <ul> <li>Must contain 1 to 64 alphanumeric characters</li> <li>Cannot be a word reserved by the specified database engine</li> </ul> <p>Type: String</p> <p><b>Oracle</b></p> <p> The Oracle System ID (SID) of the created DB instance. </p> <p>Default: <code>ORCL</code></p> <p>Constraints:</p> <ul> <li>Cannot be longer than 8 characters</li> </ul> <p><b>SQL Server</b></p> <p>Not applicable. Must be null.</p>"
+          "documentation":"<p>The meaning of this parameter differs according to the database engine you use.</p> <p>Type: String</p> <p><b>MySQL</b></p> <p>The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. </p> <p>Constraints:</p> <ul> <li>Must contain 1 to 64 alphanumeric characters</li> <li>Cannot be a word reserved by the specified database engine</li> </ul> <p><b>PostgreSQL</b></p> <p>The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. </p> <p>Constraints:</p> <ul> <li>Must contain 1 to 63 alphanumeric characters</li> <li>Must begin with a letter or an underscore. Subsequent characters can be letters, underscores, or digits (0-9).</li> <li>Cannot be a word reserved by the specified database engine</li> </ul> <p><b>Oracle</b></p> <p> The Oracle System ID (SID) of the created DB instance. </p> <p>Default: <code>ORCL</code></p> <p>Constraints:</p> <ul> <li>Cannot be longer than 8 characters</li> </ul> <p><b>SQL Server</b></p> <p>Not applicable. Must be null.</p>"
         },
         "DBInstanceIdentifier":{
           "shape":"String",
@@ -2799,15 +2799,15 @@
         },
         "AllocatedStorage":{
           "shape":"IntegerOptional",
-          "documentation":"<p> The amount of storage (in gigabytes) to be initially allocated for the database instance. </p> <p><b>MySQL</b></p> <p> Constraints: Must be an integer from 5 to 1024.</p> <p> Type: Integer</p> <p><b>Oracle</b></p> <p> Constraints: Must be an integer from 10 to 1024.</p> <p><b>SQL Server</b></p> <p> Constraints: Must be an integer from 200 to 1024 (Standard Edition and Enterprise Edition) or from 30 to 1024 (Express Edition and Web Edition)</p>"
+          "documentation":"<p> The amount of storage (in gigabytes) to be initially allocated for the database instance. </p> <p> Type: Integer</p> <p><b>MySQL</b></p> <p> Constraints: Must be an integer from 5 to 3072.</p> <p><b>PostgreSQL</b></p> <p> Constraints: Must be an integer from 5 to 3072.</p> <p><b>Oracle</b></p> <p> Constraints: Must be an integer from 10 to 3072.</p> <p><b>SQL Server</b></p> <p> Constraints: Must be an integer from 200 to 1024 (Standard Edition and Enterprise Edition) or from 30 to 1024 (Express Edition and Web Edition)</p>"
         },
         "DBInstanceClass":{
           "shape":"String",
-          "documentation":"<p> The compute and memory capacity of the DB instance. </p> <p> Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge</code> </p>"
+          "documentation":"<p> The compute and memory capacity of the DB instance. </p> <p> Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge</code> </p>"
         },
         "Engine":{
           "shape":"String",
-          "documentation":"<p> The name of the database engine to be used for this instance. </p> <p> Valid Values: <code>MySQL</code> | <code>oracle-se1</code> | <code>oracle-se</code> | <code>oracle-ee</code> | <code>sqlserver-ee</code> | <code>sqlserver-se</code> | <code>sqlserver-ex</code> | <code>sqlserver-web</code> </p>"
+          "documentation":"<p> The name of the database engine to be used for this instance. </p> <p> Valid Values: <code>MySQL</code> | <code>oracle-se1</code> | <code>oracle-se</code> | <code>oracle-ee</code> | <code>sqlserver-ee</code> | <code>sqlserver-se</code> | <code>sqlserver-ex</code> | <code>sqlserver-web</code> | <code>postgres</code> </p>"
         },
         "MasterUsername":{
           "shape":"String",
@@ -2851,7 +2851,7 @@
         },
         "Port":{
           "shape":"IntegerOptional",
-          "documentation":"<p> The port number on which the database accepts connections. </p> <p><b>MySQL</b></p> <p> Default: <code>3306</code> </p> <p> Valid Values: <code>1150-65535</code> </p> <p>Type: Integer </p> <p><b>Oracle</b></p> <p> Default: <code>1521</code> </p> <p> Valid Values: <code>1150-65535</code> </p> <p><b>SQL Server</b></p> <p> Default: <code>1433</code> </p> <p> Valid Values: <code>1150-65535</code> except for <code>1434</code> and <code>3389</code>. </p>"
+          "documentation":"<p> The port number on which the database accepts connections. </p> <p><b>MySQL</b></p> <p> Default: <code>3306</code> </p> <p> Valid Values: <code>1150-65535</code> </p> <p>Type: Integer </p> <p><b>PostgreSQL</b></p> <p> Default: <code>5432</code> </p> <p> Valid Values: <code>1150-65535</code> </p> <p>Type: Integer </p> <p><b>Oracle</b></p> <p> Default: <code>1521</code> </p> <p> Valid Values: <code>1150-65535</code> </p> <p><b>SQL Server</b></p> <p> Default: <code>1433</code> </p> <p> Valid Values: <code>1150-65535</code> except for <code>1434</code>, <code>3389</code>, <code>47001</code>, <code>49152</code>, and <code>49152</code> through <code>49156</code>. </p>"
         },
         "MultiAZ":{
           "shape":"BooleanOptional",
@@ -2859,7 +2859,7 @@
         },
         "EngineVersion":{
           "shape":"String",
-          "documentation":"<p> The version number of the database engine to use. </p> <p><b>MySQL</b></p> <p>Example: <code>5.1.42</code></p> <p>Type: String</p> <p><b>Oracle</b></p> <p>Example: <code>11.2.0.2.v2</code></p> <p>Type: String</p> <p><b>SQL Server</b></p> <p>Example: <code>10.50.2789.0.v1</code></p>"
+          "documentation":"<p> The version number of the database engine to use. </p> <p><b>MySQL</b></p> <p>Example: <code>5.1.42</code></p> <p>Type: String</p> <p><b>PostgreSQL</b></p> <p>Example: <code>9.3</code></p> <p>Type: String</p> <p><b>Oracle</b></p> <p>Example: <code>11.2.0.2.v2</code></p> <p>Type: String</p> <p><b>SQL Server</b></p> <p>Example: <code>10.50.2789.0.v1</code></p>"
         },
         "AutoMinorVersionUpgrade":{
           "shape":"BooleanOptional",
@@ -2871,7 +2871,7 @@
         },
         "Iops":{
           "shape":"IntegerOptional",
-          "documentation":"<p> The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB instance. </p> <p> Constraints: Must be an integer greater than 1000.</p>"
+          "documentation":"<p> The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB instance. </p> <p> Constraints: To use PIOPS, this value must be an integer greater than 1000.</p>"
         },
         "OptionGroupName":{
           "shape":"String",
@@ -2902,11 +2902,11 @@
         },
         "SourceDBInstanceIdentifier":{
           "shape":"String",
-          "documentation":"<p> The identifier of the DB instance that will act as the source for the read replica. Each DB instance can have up to five read replicas. </p> <p>Constraints:</p> <ul> <li>Must be the identifier of an existing DB instance.</li> <li>Can specify a DB instance that is a read replica only if the source is running MySQL 5.6.</li> <li>The specified DB instance must have automatic backups enabled, its backup retention period must be greater than 0.</li> </ul>"
+          "documentation":"<p> The identifier of the DB instance that will act as the source for the read replica. Each DB instance can have up to five read replicas. </p> <p>Constraints:</p> <ul> <li>Must be the identifier of an existing DB instance.</li> <li>Can specify a DB instance that is a read replica only if the source is running MySQL 5.6.</li> <li>The specified DB instance must have automatic backups enabled, its backup retention period must be greater than 0.</li> <li>If the source DB instance is in the same region as the read replica, specify a valid DB instance identifier.</li> <li>If the source DB instance is in a different region than the read replica, specify a valid DB instance ARN. For more information, go to <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN\"> Constructing a Amazon RDS Amazon Resource Name (ARN)</a>.</li> </ul>"
         },
         "DBInstanceClass":{
           "shape":"String",
-          "documentation":"<p> The compute and memory capacity of the read replica. </p> <p> Valid Values: <code>db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge</code> </p> <p>Default: Inherits from the source DB instance.</p>"
+          "documentation":"<p> The compute and memory capacity of the read replica. </p> <p> Valid Values: <code>db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge</code> </p> <p>Default: Inherits from the source DB instance.</p>"
         },
         "AvailabilityZone":{
           "shape":"String",
@@ -2935,7 +2935,7 @@
         "Tags":{"shape":"TagList"},
         "DBSubnetGroupName":{
           "shape":"String",
-          "documentation":"<p>A DB Subnet Group to associate with this DB Instance in case of a cross region read replica.</p> <p>If there is no DB Subnet Group, then it is a non-VPC DB instance.</p> <p> Constraints: All the cross region read replicas that share the source instance should lie within the same VPC. </p>"
+          "documentation":"<p> Specifies a DB subnet group for the DB instance. The new DB instance will be created in the VPC associated with the DB subnet group. If no DB subnet group is specified, then the new DB instance is not created in a VPC. </p> <p>Constraints:</p> <ul> <li>Can only be specified if the source DB instance identifier specifies a DB instance in another region.</li> <li>The specified DB subnet group must be in the same region in which the operation is running.</li> <li> All read replicas in one region that are created from the same source DB instance must either: <ul> <li>Specify DB subnet groups from the same VPC. All these read replicas will be created in the same VPC.</li> <li>Not specify a DB subnet group. All these read replicas will be created outside of any VPC.</li> </ul> </li> </ul>"
         }
       }
     },
@@ -2995,7 +2995,7 @@
         },
         "DBInstanceIdentifier":{
           "shape":"String",
-          "documentation":"<p> The DB instance identifier. This is the unique key that identifies a DB instance. This parameter isn't case sensitive. </p> <p>Constraints:</p> <ul> <li>Must contain from 1 to 63 alphanumeric characters or hyphens</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>"
+          "documentation":"<p> The DB instance identifier. This is the unique key that identifies a DB instance. </p> <p>Constraints:</p> <ul> <li>Must contain from 1 to 63 alphanumeric characters or hyphens</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>"
         },
         "Tags":{"shape":"TagList"}
       },
@@ -3771,7 +3771,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"<p> Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone. </p>"
+      "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
     },
     "DBSubnetGroupMessage":{
       "type":"structure",
@@ -4059,7 +4059,7 @@
         },
         "Marker":{
           "shape":"String",
-          "documentation":"<p> An optional paging token. </p>"
+          "documentation":"<p> A pagination token that can be used in a subsequent DescribeDBLogFiles request. </p>"
         }
       },
       "documentation":"<p> The response from a call to <a>DescribeDBLogFiles</a>. </p>"
@@ -4453,7 +4453,7 @@
         },
         "Marker":{
           "shape":"String",
-          "documentation":"<p> An optional pagination token provided by a previous DownloadDBLogFilePortion request. </p>"
+          "documentation":"<p> A pagination token that can be used in a subsequent DownloadDBLogFilePortion request. </p>"
         },
         "AdditionalDataPending":{
           "shape":"Boolean",
@@ -4479,11 +4479,11 @@
         },
         "Marker":{
           "shape":"String",
-          "documentation":"<p> The pagination token provided in the previous request. If this parameter is specified the response includes only records beyond the marker, up to MaxRecords. </p>"
+          "documentation":"<p> The pagination token provided in the previous request or \"0\". If the Marker parameter is specified the response includes only records beyond the marker until the end of the file or up to NumberOfLines. </p>"
         },
         "NumberOfLines":{
           "shape":"Integer",
-          "documentation":"<p> The number of lines remaining to be downloaded. </p>"
+          "documentation":"<p> The number of lines to download. </p> <p>If the NumberOfLines parameter is specified, then the block of lines returned can be from the beginning or the end of the log file, depending on the value of the Marker parameter. <ul> <li><p>If neither Marker or NumberOfLines are specified, the entire log file is returned.</p></li> <li><p>If NumberOfLines is specified and Marker is not specified, then the most recent lines from the end of the log file are returned.</p></li> <li><p>If Marker is specified as \"0\", then the specified number of lines from the beginning of the log file are returned.</p></li> <li><p>You can download the log file in blocks of lines by specifying the size of the block using the NumberOfLines parameter, and by specifying a value of \"0\" for the Marker parameter in your first request. Include the Marker value returned in the response as the Marker value for the next request, continuing until the AdditionalDataPending response element returns false.</p></li> </ul> </p>"
         }
       },
       "documentation":"<p> </p>"
@@ -4960,11 +4960,11 @@
         },
         "AllocatedStorage":{
           "shape":"IntegerOptional",
-          "documentation":"<p> The new storage capacity of the RDS instance. Changing this parameter does not result in an outage and the change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to <code>true</code> for this request. </p> <p><b>MySQL</b></p> <p>Default: Uses existing setting</p> <p>Valid Values: 5-1024</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p>Type: Integer</p> <p><b>Oracle</b></p> <p>Default: Uses existing setting</p> <p>Valid Values: 10-1024</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p><b>SQL Server</b></p> <p>Cannot be modified.</p> <p> If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance will be available for use, but may experience performance degradation. While the migration takes place, nightly backups for the instance will be suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a read replica for the instance, and creating a DB snapshot of the instance. </p>"
+          "documentation":"<p> The new storage capacity of the RDS instance. Changing this parameter does not result in an outage and the change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to <code>true</code> for this request. </p> <p><b>MySQL</b></p> <p>Default: Uses existing setting</p> <p>Valid Values: 5-3072</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p>Type: Integer</p> <p><b>PostgreSQL</b></p> <p>Default: Uses existing setting</p> <p>Valid Values: 5-3072</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p>Type: Integer</p> <p><b>Oracle</b></p> <p>Default: Uses existing setting</p> <p>Valid Values: 10-3072</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p><b>SQL Server</b></p> <p>Cannot be modified.</p> <p> If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance will be available for use, but may experience performance degradation. While the migration takes place, nightly backups for the instance will be suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a read replica for the instance, and creating a DB snapshot of the instance. </p>"
         },
         "DBInstanceClass":{
           "shape":"String",
-          "documentation":"<p> The new compute and memory capacity of the DB instance. To determine the instance classes that are available for a particular DB engine, use the <a>DescribeOrderableDBInstanceOptions</a> action. </p> <p> Passing a value for this parameter causes an outage during the change and is applied during the next maintenance window, unless the <code>ApplyImmediately</code> parameter is specified as <code>true</code> for this request. </p> <p>Default: Uses existing setting</p> <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge | db.m2.2xlarge | db.m2.4xlarge</code></p>"
+          "documentation":"<p> The new compute and memory capacity of the DB instance. To determine the instance classes that are available for a particular DB engine, use the <a>DescribeOrderableDBInstanceOptions</a> action. </p> <p> Passing a value for this parameter causes an outage during the change and is applied during the next maintenance window, unless the <code>ApplyImmediately</code> parameter is specified as <code>true</code> for this request. </p> <p>Default: Uses existing setting</p> <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge</code></p>"
         },
         "DBSecurityGroups":{
           "shape":"DBSecurityGroupNameList",
@@ -4976,7 +4976,7 @@
         },
         "ApplyImmediately":{
           "shape":"Boolean",
-          "documentation":"<p> Specifies whether or not the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the <code>PreferredMaintenanceWindow</code> setting for the DB instance. </p> <p> If this parameter is passed as <code>false</code>, changes to the DB instance are applied on the next call to <a>RebootDBInstance</a>, the next maintenance reboot, or the next failure reboot, whichever occurs first. See each parameter to determine when a change is applied. </p> <p>Default: <code>false</code></p>"
+          "documentation":"<p>Specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the <code>PreferredMaintenanceWindow</code> setting for the DB instance. </p> <p> If this parameter is set to <code>false</code>, changes to the DB instance are applied during the next maintenance window. Some parameter changes can cause an outage and will be applied on the next call to <a>RebootDBInstance</a>, or the next failure reboot. Review the table of parameters in <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.html#Overview.DBInstance.Modifying\">Modifying a DB Instance and Using the Apply Immediately Parameter</a> to see the impact that setting <code>ApplyImmediately</code> to <code>true</code> or <code>false</code> has for each modified parameter and to determine when the changes will be applied. </p> <p>Default: <code>false</code></p>"
         },
         "MasterUserPassword":{
           "shape":"String",
@@ -4984,7 +4984,7 @@
         },
         "DBParameterGroupName":{
           "shape":"String",
-          "documentation":"<p> The name of the DB parameter group to apply to this DB instance. Changing this parameter does not result in an outage and the change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to <code>true</code> for this request. </p> <p>Default: Uses existing setting</p> <p>Constraints: The DB parameter group must be in the same DB parameter group family as this DB instance.</p>"
+          "documentation":"<p> The name of the DB parameter group to apply to the DB instance. Changing this setting does not result in an outage. The parameter group name itself is changed immediately, but the actual parameter changes are not applied until you reboot the instance without failover. The DB instance will NOT be rebooted automatically and the parameter changes will NOT be applied during the next maintenance window. </p> <p>Default: Uses existing setting</p> <p>Constraints: The DB parameter group must be in the same DB parameter group family as the DB instance.</p>"
         },
         "BackupRetentionPeriod":{
           "shape":"IntegerOptional",
@@ -5016,7 +5016,7 @@
         },
         "Iops":{
           "shape":"IntegerOptional",
-          "documentation":"<p> The new Provisioned IOPS (I/O operations per second) value for the RDS instance. Changing this parameter does not result in an outage and the change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to <code>true</code> for this request. </p> <p>Default: Uses existing setting</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p>Type: Integer</p> <p> If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance will be available for use, but may experience performance degradation. While the migration takes place, nightly backups for the instance will be suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a read replica for the instance, and creating a DB snapshot of the instance. </p>"
+          "documentation":"<p> The new Provisioned IOPS (I/O operations per second) value for the RDS instance. Changing this parameter does not result in an outage and the change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to <code>true</code> for this request. </p> <p>Default: Uses existing setting</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value. If you are migrating from Provisioned IOPS to standard storage, set this value to 0.</p> <p><b>SQL Server</b></p> <p>Setting the IOPS value for the SQL Server database engine is not supported.</p> <p>Type: Integer</p> <p> If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance will be available for use, but may experience performance degradation. While the migration takes place, nightly backups for the instance will be suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a read replica for the instance, and creating a DB snapshot of the instance. </p>"
         },
         "OptionGroupName":{
           "shape":"String",
@@ -5024,7 +5024,7 @@
         },
         "NewDBInstanceIdentifier":{
           "shape":"String",
-          "documentation":"<p> The new DB instance identifier for the DB instance when renaming a DB Instance. This value is stored as a lowercase string. </p> <p>Constraints:</p> <ul> <li>Must contain from 1 to 63 alphanumeric characters or hyphens</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>"
+          "documentation":"<p> The new DB instance identifier for the DB instance when renaming a DB instance. When you change the DB instance identifier, an instance reboot will occur immediately if you set <code>Apply Immediately</code> to true, or will occur during the next maintenance window if <code>Apply Immediately</code> to false. This value is stored as a lowercase string. </p> <p>Constraints:</p> <ul> <li>Must contain from 1 to 63 alphanumeric characters or hyphens</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>"
         }
       },
       "documentation":"<p> </p>"
@@ -6010,15 +6010,15 @@
       "members":{
         "DBInstanceIdentifier":{
           "shape":"String",
-          "documentation":"<p> The identifier for the DB snapshot to restore from. </p> <p>Constraints:</p> <ul> <li>Must contain from 1 to 63 alphanumeric characters or hyphens</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>"
+          "documentation":"<p> Name of the DB instance to create from the DB snapshot. This parameter isn't case sensitive. </p> <p>Constraints:</p> <ul> <li>Must contain from 1 to 255 alphanumeric characters or hyphens</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul> <p>Example: <code>my-snapshot-id</code></p>"
         },
         "DBSnapshotIdentifier":{
           "shape":"String",
-          "documentation":"<p> Name of the DB instance to create from the DB snapshot. This parameter isn't case sensitive. </p> <p>Constraints:</p> <ul> <li>Must contain from 1 to 255 alphanumeric characters or hyphens</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul> <p>Example: <code>my-snapshot-id</code></p>"
+          "documentation":"<p> The identifier for the DB snapshot to restore from. </p> <p>Constraints:</p> <ul> <li>Must contain from 1 to 63 alphanumeric characters or hyphens</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>"
         },
         "DBInstanceClass":{
           "shape":"String",
-          "documentation":"<p> The compute and memory capacity of the Amazon RDS DB instance. </p> <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge</code></p>"
+          "documentation":"<p> The compute and memory capacity of the Amazon RDS DB instance. </p> <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge</code></p>"
         },
         "Port":{
           "shape":"IntegerOptional",
@@ -6058,7 +6058,7 @@
         },
         "Iops":{
           "shape":"IntegerOptional",
-          "documentation":"<p> Specifies the amount of provisioned IOPS for the DB instance, expressed in I/O operations per second. If this parameter is not specified, the IOPS value will be taken from the backup. If this parameter is set to 0, the new instance will be converted to a non-PIOPS instance, which will take additional time, though your DB instance will be available for connections before the conversion starts. </p> <p> Constraints: Must be an integer greater than 1000.</p>"
+          "documentation":"<p> Specifies the amount of provisioned IOPS for the DB instance, expressed in I/O operations per second. If this parameter is not specified, the IOPS value will be taken from the backup. If this parameter is set to 0, the new instance will be converted to a non-PIOPS instance, which will take additional time, though your DB instance will be available for connections before the conversion starts. </p> <p> Constraints: Must be an integer greater than 1000.</p> <p><b>SQL Server</b></p> <p>Setting the IOPS value for the SQL Server database engine is not supported.</p>"
         },
         "OptionGroupName":{
           "shape":"String",
@@ -6093,7 +6093,7 @@
         },
         "DBInstanceClass":{
           "shape":"String",
-          "documentation":"<p> The compute and memory capacity of the Amazon RDS DB instance. </p> <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge</code></p> <p>Default: The same DBInstanceClass as the original DB instance.</p>"
+          "documentation":"<p> The compute and memory capacity of the Amazon RDS DB instance. </p> <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge</code></p> <p>Default: The same DBInstanceClass as the original DB instance.</p>"
         },
         "Port":{
           "shape":"IntegerOptional",
@@ -6133,7 +6133,7 @@
         },
         "Iops":{
           "shape":"IntegerOptional",
-          "documentation":"<p> The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB instance. </p> <p> Constraints: Must be an integer greater than 1000.</p>"
+          "documentation":"<p> The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB instance. </p> <p> Constraints: Must be an integer greater than 1000.</p> <p><b>SQL Server</b></p> <p>Setting the IOPS value for the SQL Server database engine is not supported.</p>"
         },
         "OptionGroupName":{
           "shape":"String",

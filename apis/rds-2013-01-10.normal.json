@@ -299,7 +299,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p> Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone. </p>"
+          "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
         },
         {
           "shape":"InvalidSubnet",
@@ -456,7 +456,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p> Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone. </p>"
+          "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
         },
         {
           "shape":"InvalidSubnet",
@@ -706,7 +706,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p> Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone. </p>"
+          "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
         },
         {
           "shape":"InvalidSubnet",
@@ -1797,7 +1797,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p> Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone. </p>"
+          "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
         },
         {
           "shape":"InvalidSubnet",
@@ -2290,7 +2290,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p> Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone. </p>"
+          "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
         },
         {
           "shape":"InvalidSubnet",
@@ -2450,7 +2450,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p> Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone. </p>"
+          "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
         },
         {
           "shape":"InvalidSubnet",
@@ -2520,7 +2520,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p> Specified CIDRIP or EC2 security group is not authorized for the specified DB security group. </p>"
+          "documentation":"<p> Specified CIDRIP or EC2 security group is not authorized for the specified DB security group. </p> <p>RDS may not also be authorized via IAM to perform necessary actions on your behalf.</p>"
         },
         {
           "shape":"InvalidDBSecurityGroupStateFault",
@@ -2602,7 +2602,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"<p> Specified CIDRIP or EC2 security group is not authorized for the specified DB security group. </p>"
+      "documentation":"<p> Specified CIDRIP or EC2 security group is not authorized for the specified DB security group. </p> <p>RDS may not also be authorized via IAM to perform necessary actions on your behalf.</p>"
     },
     "AuthorizationQuotaExceededFault":{
       "type":"structure",
@@ -3626,7 +3626,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"<p> Subnets in the DB subnet group should cover at least 2 Availability Zones unless there is only 1 availablility zone. </p>"
+      "documentation":"<p> Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone. </p>"
     },
     "DBSubnetGroupMessage":{
       "type":"structure",
