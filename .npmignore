@@ -7,7 +7,6 @@ configuration
 configuration.sample
 coverage
 dist
-dist-tools
 doc
 doc-src
 eslint-rules

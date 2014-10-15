@@ -31,6 +31,8 @@
       "xmlbuilder": "0.4.2"
     },
     "main": "lib/aws.js",
+    "browser": "lib/browser.js",
+    "browserify": { "transform": "./dist-tools/browser-builder-transform.js" },
     "directories":  {
       "lib": "lib"
     },

@@ -85,12 +85,7 @@ DefaultStrategy.prototype.getServiceHeader = function(service) {
     service, this.apis.serviceName(service), service, util.inspect(versions));
   var svcPath = this.libPath + '/lib/services/' + service + '.js';
   if (fs.existsSync(svcPath)) {
-    var lines = fs.readFileSync(svcPath).toString().split(/\r?\n/);
-    file += lines.map(function (line) {
-      line = line.replace(/^var\s*.*\s*=\s*require\s*\(.+\).*/, '');
-      line = line.replace(/^module.exports\s*=.*/, '');
-      return line;
-    }).join('\n');
+    file += 'require(\'./services/' + service + '\');\n';
   }
 
   if (this.isMinified) file = this.minify(file);
