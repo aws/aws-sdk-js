@@ -85,4 +85,5 @@ if (require.main === module) {
   });
 }
 
+build.license = license;
 module.exports = build;
