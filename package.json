@@ -32,7 +32,7 @@
     },
     "main": "lib/aws.js",
     "browser": "lib/browser.js",
-    "browserify": { "transform": "./dist-tools/browser-builder-transform.js" },
+    "browserify": { "transform": "./dist-tools/transform.js" },
     "directories":  {
       "lib": "lib"
     },
