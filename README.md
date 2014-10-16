@@ -59,26 +59,23 @@ The SDK currently supports the following services:
   </thead>
   <tbody>
     <tr><td>Amazon CloudFront</td><td>AWS.CloudFront</td><td>2014-05-31</td></tr>
-    <tr><td rowspan="2">Amazon CloudSearch</td><td rowspan="2">AWS.CloudSearch</td><td>2011-02-01</td></tr>
-    <tr><td>2013-01-01</td></tr>
+    <tr><td>Amazon CloudSearch</td><td>AWS.CloudSearch</td><td>2013-01-01</td></tr>
     <tr><td>Amazon CloudSearch Domain</td><td>AWS.CloudSearchDomain</td><td>2013-01-01</td></tr>
     <tr><td>Amazon CloudWatch</td><td>AWS.CloudWatch</td><td>2010-08-01</td></tr>
     <tr><td>Amazon CloudWatch Logs</td><td>AWS.CloudWatchLogs</td><td>2014-03-28</td></tr>
     <tr><td>Amazon Cognito Identity</td><td>AWS.CognitoIdentity</td><td>2014-06-30</td></tr>
     <tr><td>Amazon Cognito Sync</td><td>AWS.CognitoSync</td><td>2014-06-30</td></tr>
-    <tr><td rowspan="2">Amazon DynamoDB</td><td rowspan="2">AWS.DynamoDB</td><td>2011-12-05</td></tr>
-    <tr><td>2012-08-10</td></tr>
-    <tr><td>Amazon Elastic Compute Cloud</td><td>AWS.EC2</td><td>2014-05-01</td></tr>
+    <tr><td>Amazon DynamoDB</td><td>AWS.DynamoDB</td><td>2012-08-10</td></tr>
+    <tr><td>Amazon Elastic Compute Cloud</td><td>AWS.EC2</td><td>2014-06-15</td></tr>
     <tr><td>Amazon Elastic MapReduce</td><td>AWS.EMR</td><td>2009-03-31</td></tr>
     <tr><td>Amazon Elastic Transcoder</td><td>AWS.ElasticTranscoder</td><td>2012-09-25</td></tr>
-    <tr><td>Amazon ElastiCache</td><td>AWS.ElastiCache</td><td>2014-03-24</td></tr>
+    <tr><td>Amazon ElastiCache</td><td>AWS.ElastiCache</td><td>2014-07-15</td></tr>
     <tr><td>Amazon Glacier</td><td>AWS.Glacier</td><td>2012-06-01</td></tr>
     <tr><td>Amazon Kinesis</td><td>AWS.Kinesis</td><td>2013-12-02</td></tr>
     <tr><td>Amazon Redshift</td><td>AWS.Redshift</td><td>2012-12-01</td></tr>
-    <tr><td rowspan="3">Amazon Relational Database Service</td><td rowspan="3">AWS.RDS</td><td>2013-01-10</td></tr>
-    <tr><td>2013-02-12</td></tr>
-    <tr><td>2013-09-09</td></tr>
+    <tr><td>Amazon Relational Database Service</td><td>AWS.RDS</td><td>2014-09-01</td></tr>
     <tr><td>Amazon Route 53</td><td>AWS.Route53</td><td>2013-04-01</td></tr>
+    <tr><td>Amazon Route 53 Domains</td><td>AWS.Route53Domains</td><td>2014-05-15</td></tr>
     <tr><td>Amazon Simple Email Service</td><td>AWS.SES</td><td>2010-12-01</td></tr>
     <tr><td>Amazon Simple Notification Service</td><td>AWS.SNS</td><td>2010-03-31</td></tr>
     <tr><td>Amazon Simple Queue Service</td><td>AWS.SQS</td><td>2012-11-05</td></tr>
