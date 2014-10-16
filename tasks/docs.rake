@@ -3,14 +3,8 @@ namespace :docs do
     mkdir_p "doc"
   end
 
-  task :setup_apis do
-    unless File.directory?("vendor/apis")
-      sh "git clone git://github.com/aws/aws-sdk-js-apis vendor/apis"
-    end
-  end
-
   desc "Build API documentation"
-  task :api => [:directory, :setup_apis] do
+  task :api => [:directory] do
     ENV['SITEMAP_BASEURL'] = 'http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/'
 
     rm_rf "doc/latest"
