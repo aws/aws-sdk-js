@@ -58,7 +58,7 @@
     },
     "__VolumeStatus": {
       "operation": "DescribeVolumes",
-      "acceptor_path": "VolumeStatuses[].VolumeStatus.Status"
+      "acceptor_path": "Volumes[].State"
     },
     "VolumeAvailable": {
       "extends": "__VolumeStatus",
