@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.0.19
+// AWS SDK for JavaScript v2.0.20
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -3676,6 +3676,8 @@ var AWS = require('./core');
 AWS.apiLoader = function(svc, version) {
   return AWS.apiLoader.services[svc][version];
 };
+
+
 AWS.apiLoader.services = {};
 
 AWS.XML.Parser = require('./xml/browser_parser');
@@ -3754,7 +3756,10 @@ AWS.Config = AWS.util.inherit({
     allowUnknownKeys = allowUnknownKeys || false;
     options = this.extractCredentials(options);
     AWS.util.each.call(this, options, function (key, value) {
-      if (allowUnknownKeys || this.keys.hasOwnProperty(key)) this[key] = value;
+      if (allowUnknownKeys || this.keys.hasOwnProperty(key) ||
+          AWS.Service.hasService(key)) {
+        this[key] = value;
+      }
     });
   },
 
@@ -3901,7 +3906,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.0.19',
+  VERSION: '2.0.20',
 
 
   Signers: {},
@@ -7011,7 +7016,10 @@ AWS.Service = inherit({
 
 
   initialize: function initialize(config) {
+    var svcConfig = AWS.config[this.serviceIdentifier];
+
     this.config = new AWS.Config(AWS.config);
+    if (svcConfig) this.config.update(svcConfig, true);
     if (config) this.config.update(config, true);
 
     this.validateService();
@@ -7279,6 +7287,7 @@ AWS.util.update(AWS.Service, {
 
 
   defineService: function defineService(serviceIdentifier, versions, features) {
+    AWS.Service._serviceMap[serviceIdentifier] = true;
     if (!Array.isArray(versions)) {
       features = versions;
       versions = [];
@@ -7350,7 +7359,15 @@ AWS.util.update(AWS.Service, {
 
     AWS.Service.defineMethods(svc);
     return svc;
-  }
+  },
+
+
+  hasService: function(identifier) {
+    return AWS.Service._serviceMap.hasOwnProperty(identifier);
+  },
+
+
+  _serviceMap: {}
 });
 
 },{"./core":22,"./model/api":34,"./region_config":47}],54:[function(require,module,exports){
