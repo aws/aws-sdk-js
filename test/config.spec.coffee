@@ -120,6 +120,11 @@ describe 'AWS.Config', ->
       config.update(foo: 10)
       expect(config.foo).to.equal(undefined)
 
+    it 'should allow service identifiers to be set', ->
+      config = new AWS.Config()
+      config.update(s3: {endpoint: 'localhost'})
+      expect(config.s3).to.eql(endpoint: 'localhost')
+
     it 'allows unknown keys if allowUnknownKeys is set', ->
       config = new AWS.Config()
       config.update(foo: 10, true)

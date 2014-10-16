@@ -28,6 +28,26 @@ describe 'AWS.Service', ->
       expect(service.config.sslEnabled).to.equal(true)
       expect(service.config.maxRetries).to.equal(5)
 
+    it 'merges service-specific configuration from global config', ->
+      AWS.config.update(s3: endpoint: 'localhost')
+      s3 = new AWS.S3
+      expect(s3.endpoint.host).to.equal('localhost')
+      delete AWS.config.s3
+
+    it 'service-specific global config overrides global config', ->
+      region = AWS.config.region
+      AWS.config.update(region: 'us-west-2', s3: region: 'eu-west-1')
+      s3 = new AWS.S3
+      expect(s3.config.region).to.equal('eu-west-1')
+      AWS.config.region = region
+      delete AWS.config.s3
+
+    it 'service-specific local config overrides service-specific global config', ->
+      AWS.config.update(s3: region: 'us-west-2')
+      s3 = new AWS.S3 region: 'eu-west-1'
+      expect(s3.config.region).to.equal('eu-west-1')
+      delete AWS.config.s3
+
     it 'merges credential data into config', ->
       service = new AWS.Service(accessKeyId: 'foo', secretAccessKey: 'bar')
       expect(service.config.credentials.accessKeyId).to.equal('foo')
