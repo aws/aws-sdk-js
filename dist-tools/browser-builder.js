@@ -1,142 +1,89 @@
 #!/usr/bin/env node
 
 var fs = require('fs');
+var util = require('util');
 var path = require('path');
 
-var CacheStrategy = require('./strategies/cache');
-var DefaultStrategy = require('./strategies/default');
+var AWS = require('../');
 
-var defaultServices = 'cloudwatch,cognitoidentity,cognitosync,dynamodb,kinesis,elastictranscoder,s3,sqs,sns,sts';
-var sanitizeRegex = /[^a-zA-Z0-9,-]/;
+var license = [
+  '// AWS SDK for JavaScript v' + AWS.VERSION,
+  '// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.',
+  '// License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt'
+].join('\n') + '\n';
 
-function Builder(options) {
-  this.setDefaultOptions(options);
-  this.serviceCode = [];
-  this.builtServices = {};
-  this.buildStrategy = this.options.cache ?
-    new CacheStrategy(this) : new DefaultStrategy(this);
+function minify(code) {
+  var uglify = require('uglify-js');
+  var minified = uglify.minify(code, {fromString: true});
+  return minified.code;
 }
 
-Builder.prototype.setDefaultOptions = function(options) {
-  this.options = options || {};
-  this.options.libPath = this.options.libPath || this.getRootPath();
-  this.options.cacheRoot = this.options.cacheRoot ||
-    path.join(this.options.libPath, 'dist-tools', 'cache');
-  this.options.cache = this.options.cache || false;
-  this.options.writeCache = this.options.writeCache || false;
-  this.options.minify = this.options.minify || false;
-  this.options.minifyOptions = this.options.minifyOptions || {compress: false};
-};
+function stripComments(code) {
+  var lines = code.split(/\r?\n/);
+  var multiLine = false;
+  lines = lines.map(function (line) {
+    var rLine = line;
+    if (line.match(/^\s*\/\//)) {
+      rLine = null;
+    } else if (line.match(/^\s*\/\*/)) {
+      multiLine = true;
+      rLine = null;
+    }
 
-Builder.prototype.getRootPath = function() {
-  return path.join(__dirname, '..');
-};
-
-Builder.prototype.cachePath = function(path) {
-  var fullPath = this.options.cacheRoot;
-  if (path) {
-    fullPath += '/' + path + (this.options.minify ? '.min' : '') + '.js';
-  }
-
-  return fullPath;
-};
-
-Builder.prototype.cacheExists = function(path) {
-  return fs.existsSync(this.cachePath(path));
-};
-
-Builder.prototype.buildService = function(name, usingDefaultServices) {
-  var match = name.match(/^(.+?)(?:-(.+?))?$/);
-  var service = match[1], version = match[2] || 'latest';
-  var contents = [];
-  var lines, err;
-
-  if (!this.builtServices[service]) {
-    this.builtServices[service] = {};
-
-    lines = this.buildStrategy.getServiceHeader(service);
-    if (lines === null) {
-      if (!usingDefaultServices) {
-        err = new Error('Invalid module: ' + service);
-        err.name = 'InvalidModuleError';
-        throw err;
+    if (multiLine) {
+      var multiLineEnd = line.match(/\*\/(.*)/);
+      if (multiLineEnd) {
+        multiLine = false;
+        rLine = multiLineEnd[1];
+      } else {
+        rLine = null;
       }
-    } else {
-      contents.push(lines);
     }
+
+    return rLine;
+  }).filter(function(l) { return l !== null; });
+
+  var newCode = lines.join('\n');
+  newCode = newCode.replace(/\/\*\*[\s\S]+?Copyright\s+.+?Amazon[\s\S]+?\*\//g, '');
+  return newCode;
+}
+
+function build(options, callback) {
+  if (arguments.length === 1) {
+    callback = options;
+    options = {};
   }
 
-  if (!this.builtServices[service][version]) {
-    this.builtServices[service][version] = true;
+  var img = require('browserify/node_modules/insert-module-globals');
+  img.vars.process = function() { return '{browser:true}'; };
 
-    lines = this.buildStrategy.getService(service, version);
-    if (lines === null) {
-      if (!usingDefaultServices) {
-        err = new Error('Invalid module: ' + service + '-' + version);
-        err.name = 'InvalidModuleError';
-        throw err;
-      }
-    } else {
-      contents.push(lines);
-    }
-  }
+  if (options.services) process.env.AWS_SERVICES = options.services;
 
-  return contents.join('\n');
-};
+  var browserify = require('browserify');
+  var brOpts = { basedir: path.resolve(__dirname, '..') };
+  browserify(brOpts).add('./').ignore('domain').bundle(function(err, data) {
+    if (err) return callback(err);
 
-Builder.prototype.addServices = function(services) {
-  var usingDefaultServices = false;
-  if (!services) {
-    usingDefaultServices = true;
-    services = defaultServices;
-  }
-  if (services.match(sanitizeRegex)) {
-    throw new Error('Incorrectly formatted service names');
-  }
+    var code = (data || '').toString();
+    if (options.minify) code = minify(code);
+    else code = stripComments(code);
 
-  var invalidModules = [];
-  var stsIncluded = false;
-  services.split(',').sort().forEach(function(name) {
-    if (name.match(/^sts\b/) || name === 'all') stsIncluded = true;
-    try {
-      this.serviceCode.push(this.buildService(name, usingDefaultServices));
-    } catch (e) {
-      if (e.name === 'InvalidModuleError') invalidModules.push(name);
-      else throw e;
-    }
-  }.bind(this));
-
-  if (!stsIncluded) {
-    this.serviceCode.push(this.buildService('sts'));
-  }
-
-  if (invalidModules.length > 0) {
-    throw new Error('Missing modules: ' + invalidModules.join(', '));
-  }
-
-  return this;
-};
-
-Builder.prototype.build = function(callback) {
-  this.buildStrategy.getCore(function(err, core) {
-    callback(err, err ? null : (core + ';' + this.serviceCode.join('\n')));
-  }.bind(this));
+    code = license + code;
+    callback(null, code);
+  });
 };
 
 // run if we called this tool directly
 if (require.main === module) {
   var options = {
-    minify: process.env.MINIFY ? true : false,
-    cache: process.env.CACHE ? true : false,
-    writeCache: process.env.WRITE_CACHE ? true : false,
-    cacheRoot: process.env.CACHE_ROOT,
-    libPath: process.env.LIB_PATH
+    services: process.argv[2] || process.env.SERVICES,
+    minify: process.env.MINIFY ? true : false
   };
-  var services = process.argv[2] || process.env.SERVICES;
-  new Builder(options).addServices(services).build(function (err, code) {
+  build(options, function(err, code) {
     if (err) console.error(err.message);
     else console.log(code);
   });
 }
 
-module.exports = Builder;
+build.license = license;
+module.exports = build;

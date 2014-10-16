@@ -10,7 +10,8 @@ evalCode = (code, preamble) ->
   """
 
 module.exports =
-  AWS: require('../../lib/aws')
-  Builder: require('../browser-builder')
+  AWS: require('../../')
+  build: require('../browser-builder')
+  collector: require('../service-collector')
   chai: require('chai')
   evalCode: evalCode
