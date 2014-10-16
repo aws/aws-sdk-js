@@ -22,6 +22,7 @@ First, clone the repository from GitHub and cd into the directory:
 ```bash
 git clone git://github.com/aws/aws-sdk-js
 cd aws-sdk-js
+git checkout v2.0.19
 ```
 
 After you have cloned the repository, you need to download the dependency modules
@@ -91,3 +92,39 @@ as a command-line argument:
 ```bash
 node dist-tools/browser-builder.js all > aws-sdk-full.js
 ```
+
+### Building the SDK as a Dependency with Browserify
+
+The SDK can be built as library dependency to any application running
+in the browser via [browserify](http://browserify.org). Consider the following
+small Node.js application (`index.js`) that uses the SDK:
+
+```js
+var AWS = require('aws-sdk');
+var s3 = new AWS.S3();
+s3.listBuckets(function(err, data) { console.log(err, data); });
+```
+
+The above file can be compiled to a browser compatible version with
+`browserify` using the following command:
+
+```sh
+$ browserify index.js > browser-app.js
+```
+
+The application, including all of its dependencies (the SDK), will now be
+available in the browser through `browser-app.js`.
+
+### Selecting Custom Services
+
+If you are building the SDK as a dependency in an application using browserify,
+you may also need to customize the selected set of services used. To do this,
+you can pass the `AWS_SERVICES` environment variable to your browserify
+command containing the list of services you want in the same format listed
+above:
+
+```sh
+$ AWS_SERVICES=ec2,s3,dynamodb browserify index.js > browser-app.js
+```
+
+The above bundle will contain the AWS.EC2, AWS.S3, and AWS.DynamoDB services.
