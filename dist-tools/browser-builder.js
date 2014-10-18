@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-var fs = require('fs');
-var util = require('util');
 var path = require('path');
 
 var AWS = require('../');
@@ -71,7 +69,7 @@ function build(options, callback) {
     code = license + code;
     callback(null, code);
   });
-};
+}
 
 // run if we called this tool directly
 if (require.main === module) {

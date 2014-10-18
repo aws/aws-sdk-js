@@ -1,4 +1,3 @@
-var fs = require('fs');
 var Transform = require('stream').Transform;
 var collector = require('./service-collector');
 var license = require('./browser-builder').license;
