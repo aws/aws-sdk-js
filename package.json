@@ -64,7 +64,7 @@
       "browsertest": "rake browser:test",
       "buildertest": "mocha --compilers coffee:coffee-script -s 1000 -t 10000 dist-tools/test",
       "integration": "cucumber.js",
-      "lint" : "eslint --rulesdir eslint-rules lib",
+      "lint" : "eslint lib",
       "console": "./scripts/console"
     }
 }

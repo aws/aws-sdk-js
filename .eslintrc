@@ -15,7 +15,6 @@
     "new-cap": 0,
     "dot-notation": 0,
     "no-use-before-define": 0,
-    "no-require-in-service": 2,
     "space-after-keywords": [2, "always"],
     "no-trailing-spaces": 2
   }
