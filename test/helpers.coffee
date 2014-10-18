@@ -151,31 +151,34 @@ mockIntermittentFailureResponse = (numFailures, status, headers, data) ->
       mockHttpSuccessfulResponse statusCode, headers, data, cb
     new EventEmitter()
 
-mockResponse = (svc, resp) ->
-  addAll = svc.addAllRequestListeners
-  _spyOn(svc, 'addAllRequestListeners').andCallFake (req) ->
-    req.response.httpResponse.statusCode = 200
-    addAll.call(svc, req)
-    req.removeAllListeners('send')
-    req.removeAllListeners('extractError')
-    req.removeAllListeners('extractData')
-    req.on 'validateResponse', ->
-      AWS.util.update req.response, resp
+globalEvents = null
+beforeEach -> globalEvents = AWS.events
+afterEach -> AWS.events = globalEvents
 
-mockResponses = (svc, resps) ->
-  index = 0
-  addAll = svc.addAllRequestListeners
-  _spyOn(svc, 'addAllRequestListeners').andCallFake (req) ->
+setupMockResponse = (cb) ->
+  AWS.events = new AWS.SequentialExecutor()
+  AWS.events.on 'validate', (req) ->
+    ['sign', 'send'].forEach (evt) -> req.removeAllListeners(evt)
+    req.removeListener('extractData', AWS.EventListeners.CorePost.EXTRACT_REQUEST_ID)
+    Object.keys(AWS.EventListeners).forEach (ns) ->
+      if AWS.EventListeners[ns].EXTRACT_DATA
+        req.removeListener('extractData', AWS.EventListeners[ns].EXTRACT_DATA)
+      if AWS.EventListeners[ns].EXTRACT_ERROR
+        req.removeListener('extractError', AWS.EventListeners[ns].EXTRACT_ERROR)
     req.response.httpResponse.statusCode = 200
-    addAll.call(svc, req)
-    req.removeAllListeners('send')
-    req.removeAllListeners('extractError')
-    req.removeAllListeners('extractData')
-    req.on 'validateResponse', ->
-      resp = resps[index]
-      if resp
-        AWS.util.update req.response, resp
-        index += 1
+    req.on('validateResponse', cb)
+
+mockResponse = (resp) ->
+  setupMockResponse (response) ->
+      AWS.util.update response, resp
+
+mockResponses = (resps) ->
+  index = 0
+  setupMockResponse (response) ->
+    resp = resps[index]
+    if resp
+      AWS.util.update response, resp
+      index += 1
 
 module.exports =
   AWS: AWS

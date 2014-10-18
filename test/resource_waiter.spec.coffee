@@ -6,7 +6,7 @@ describe 'AWS.ResourceWaiter', ->
     it 'waits until a given state is met', ->
       err = null; data = null; resp = null
       db = new AWS.DynamoDB
-      helpers.mockResponses db, [
+      helpers.mockResponses [
         {data: {Table: TableStatus: 'LOADING'}},
         {data: {Table: TableStatus: 'LOADING'}},
         {data: {Table: TableStatus: 'ACTIVE'}}
@@ -21,7 +21,7 @@ describe 'AWS.ResourceWaiter', ->
     it 'can override the final state', ->
       err = null; data = null; resp = null
       db = new AWS.DynamoDB
-      helpers.mockResponses db, [
+      helpers.mockResponses [
         {data: {Table: TableStatus: 'LOADING'}},
         {data: {Table: TableStatus: 'LOADING'}},
         {data: {Table: TableStatus: 'ACTIVE'}},
@@ -46,7 +46,7 @@ describe 'AWS.ResourceWaiter', ->
       db = new AWS.DynamoDB
       resps = ({data: {Table: {TableStatus: 'LOADING'}}} for _ in [1..26])
       resps.push({data: {Table: {TableStatus: 'ACTIVE'}}})
-      helpers.mockResponses db, resps
+      helpers.mockResponses resps
 
       waiter = new AWS.ResourceWaiter(db, 'tableExists')
       waiter.wait (e, d) -> resp = this; err = e; data = d
@@ -58,7 +58,7 @@ describe 'AWS.ResourceWaiter', ->
     it 'accepts error state as a terminal state', ->
       err = null; data = null; resp = null
       s3 = new AWS.S3
-      helpers.mockResponses s3, [
+      helpers.mockResponses [
         {httpResponse: {statusCode: 200}},
         {httpResponse: {statusCode: 200}},
         {httpResponse: {statusCode: 404}}
@@ -73,7 +73,7 @@ describe 'AWS.ResourceWaiter', ->
     it 'supports error codes as error state', ->
       err = null; data = null; resp = null
       db = new AWS.DynamoDB
-      helpers.mockResponses db, [
+      helpers.mockResponses [
         {data: {Table: TableStatus: 'ACTIVE'}},
         {data: {Table: TableStatus: 'ACTIVE'}},
         {error: {code: 'ResourceNotFoundException'}}
@@ -88,7 +88,7 @@ describe 'AWS.ResourceWaiter', ->
     it 'fails fast if failure value is found', ->
       err = null; data = null; resp = null
       ec2 = new AWS.EC2
-      helpers.mockResponses ec2, [
+      helpers.mockResponses [
         {data: {Reservations: [{Instances: [{State: {Name: 'pending'}}]}]}},
         {data: {Reservations: [{Instances: [{State: {Name: 'pending'}}]}]}},
         {data: {Reservations: [{Instances: [{State: {Name: 'pending'}}]}]}},

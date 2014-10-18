@@ -78,7 +78,7 @@ describe 'AWS.Request', ->
             input_token: 'NextToken'
             output_token: 'NextToken'
 
-      helpers.mockResponses service, [
+      helpers.mockResponses [
         {data: {Value: 1, NextToken: 'a'}},
         {data: {Value: 2, NextToken: 'b'}},
         {data: {Value: 3, NextToken: 'c'}},

@@ -535,7 +535,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
     beforeEach -> setupCreds()
 
     it 'runs getId, getOpenIdToken, assumeRoleWithWebIdentity', ->
-      helpers.mockResponses creds.cognito, [
+      helpers.mockResponses [
         {data: {IdentityId: 'IDENTITY-ID'}, error: null},
         {data: {Token: 'TOKEN', IdentityId: 'IDENTITY-ID2'}, error: null}
       ]
@@ -558,7 +558,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
 
     it 'does not call getId if IdentityId is passed in', ->
       setupCreds IdentityId: 'MYID'
-      helpers.mockResponses creds.cognito, [
+      helpers.mockResponses [
         {data: {Token: 'TOKEN', IdentityId: 'MYID2'}, error: null}
       ]
       helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake (cb) ->
@@ -579,7 +579,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
       expect(creds.cacheId.calls.length).to.equal(1)
 
     it 'fails if getId fails', ->
-      helpers.mockResponses creds.cognito, [
+      helpers.mockResponses [
         {data: null, error: new Error('INVALID SERVICE')}
       ]
       helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake (cb) ->
@@ -589,7 +589,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
       expect(creds.getStorage('id')).not.to.exist
 
     it 'fails if getOpenIdToken fails', ->
-      helpers.mockResponses creds.cognito, [
+      helpers.mockResponses [
         {data: {IdentityId: 'IDENTITY-ID'}, error: null},
         {data: null, error: new Error('INVALID SERVICE')}
       ]
@@ -600,7 +600,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
 
     it 'clears cache if getId fails', ->
       creds.setStorage('id', 'MYID')
-      helpers.mockResponses creds.cognito, [
+      helpers.mockResponses [
         {data: {IdentityId: 'IDENTITY-ID'}, error: null},
         {data: null, error: new Error('INVALID SERVICE')}
       ]
@@ -611,7 +611,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
 
     it 'clears cache if getOpenIdToken fails', ->
       creds.setStorage('id', 'MYID')
-      helpers.mockResponses creds.cognito, [
+      helpers.mockResponses [
         {data: {IdentityId: 'IDENTITY-ID'}, error: null},
         {data: null, error: new Error('INVALID SERVICE')}
       ]
@@ -621,7 +621,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
       expect(creds.getStorage('id')).not.to.exist
 
     it 'does try to load creds second time if service request failed', ->
-      helpers.mockResponses creds.cognito, [
+      helpers.mockResponses [
         {data: {IdentityId: 'IDENTITY-ID'}, error: null},
         {data: {Token: 'TOKEN'}, error: null}
       ]
@@ -640,7 +640,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
 
       it 'caches IdentityId into localStorage on successful handshake', ->
         setupCreds Logins: provider1: 'TOKEN1', provider2: 'TOKEN2'
-        helpers.mockResponses creds.cognito, [
+        helpers.mockResponses [
           {data: {IdentityId: 'IDENTITY-ID1'}, error: null},
           {data: {Token: 'TOKEN', IdentityId: 'IDENTITY-ID2'}, error: null}
         ]
@@ -657,7 +657,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
 
       it 'returns cached id in getId call', ->
         setupCreds Logins: provider1: 'TOKEN1', provider2: 'TOKEN2'
-        helpers.mockResponses creds.cognito, [
+        helpers.mockResponses [
           {data: {IdentityId: 'IDENTITY-ID1'}, error: null},
           {data: {Token: 'TOKEN', IdentityId: 'IDENTITY-ID2'}, error: null}
         ]
