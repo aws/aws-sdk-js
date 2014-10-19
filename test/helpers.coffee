@@ -8,6 +8,12 @@ else
   AWS = window.AWS
   global = window
 
+_it = it
+global.it = (label, fn) ->
+  if label.match(/\(no phantomjs\)/) and navigator and navigator.userAgent.match(/phantomjs/i)
+    return
+  _it(label, fn)
+
 EventEmitter = require('events').EventEmitter
 Buffer = AWS.util.Buffer
 semver = require('semver')

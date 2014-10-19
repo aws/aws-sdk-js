@@ -40,11 +40,6 @@ eventually = (condition, next, done) ->
 
 noError = (err) -> expect(err).to.equal(null)
 
-integration = (label, fn) ->
-  if label.match(/\(no phantomjs\)/) and navigator.userAgent.match(/phantomjs/i)
-    return
-  it(label, fn)
-
 integrationTests = (fn) ->
   if config.accessKeyId and AWS.util.isBrowser()
     describe 'Integration tests', fn
@@ -77,7 +72,7 @@ integrationTests ->
         expect(err.name).to.equal('NetworkingError')
         done()
 
-    integration 'can send synchronous requests', (done) ->
+    it 'can send synchronous requests', (done) ->
       key = uniqueName('test')
       opts = AWS.util.merge(config, config.s3)
       opts.httpOptions = xhrAsync: false
@@ -101,22 +96,22 @@ integrationTests ->
             expect(data.Body.toString()).to.equal(body)
           s3.deleteObject(Key: key).send(done)
 
-    integration 'GETs and PUTs objects to a bucket', (done) ->
+    it 'GETs and PUTs objects to a bucket', (done) ->
       testWrite done, 'ƒoo'
 
-    integration 'writes typed array data (no phantomjs)', (done) ->
+    it 'writes typed array data (no phantomjs)', (done) ->
       testWrite done, new Uint8Array([2, 4, 8]), (data) ->
         expect(data.Body[0]).to.equal(2)
         expect(data.Body[1]).to.equal(4)
         expect(data.Body[2]).to.equal(8)
 
-    integration 'writes blobs (no phantomjs)', (done) ->
+    it 'writes blobs (no phantomjs)', (done) ->
       testWrite done, new Blob(['a', 'b', 'c']), (data) ->
         expect(data.Body[0]).to.equal(97)
         expect(data.Body[1]).to.equal(98)
         expect(data.Body[2]).to.equal(99)
 
-    integration 'writes with charset', (done) ->
+    it 'writes with charset', (done) ->
       key = uniqueName('test')
       body = 'body string'
       s3.putObject {Key: key, Body: body, ContentType: 'text/html'}, (err, data) ->
@@ -127,7 +122,7 @@ integrationTests ->
             s3.deleteObject(Key: key).send(done)
 
     describe 'progress events', ->
-      integration 'emits http(Upload|Download)Progress events (no phantomjs)', (done) ->
+      it 'emits http(Upload|Download)Progress events (no phantomjs)', (done) ->
         data = []
         progress = []
         key = uniqueName('test')
@@ -151,7 +146,7 @@ integrationTests ->
             s3.deleteObject(Key: key).send(done)
 
   describe 'AWS.DynamoDB', ->
-    integration 'writes and reads from a table', (done) ->
+    it 'writes and reads from a table', (done) ->
       key = uniqueName('test')
       dynamodb.putItem {Item: {id: {S: key}, data: {S: 'ƒoo'}}}, (err, data) ->
         noError(err)
@@ -161,14 +156,14 @@ integrationTests ->
           dynamodb.deleteItem({Key: {id: {S: key}}}).send(done)
 
   describe 'AWS.STS', ->
-    integration 'gets a session token', (done) ->
+    it 'gets a session token', (done) ->
       sts.getSessionToken (err, data) ->
         noError(err)
         expect(data.Credentials.AccessKeyId).not.to.equal('')
         done()
 
   describe 'AWS.SQS', ->
-    integration 'posts and receives messages on a queue', (done) ->
+    it 'posts and receives messages on a queue', (done) ->
       name = uniqueName('aws-sdk-js')
       msg = 'ƒoo'
       sqs.createQueue {QueueName: name}, (err, data) ->
@@ -186,7 +181,7 @@ integrationTests ->
                   sqs.deleteQueue(done)
 
   describe 'AWS.SNS', ->
-    integration 'creates and deletes topics', (done) ->
+    it 'creates and deletes topics', (done) ->
       sns.createTopic {Name: uniqueName('aws-sdk-js')}, (err, data) ->
         noError(err)
         arn = data.TopicArn
@@ -197,19 +192,19 @@ integrationTests ->
           sns.deleteTopic(done)
 
   describe 'AWS.CognitoIdentity', ->
-    integration 'lists identity pools', ->
+    it 'lists identity pools', ->
       cognitoidentity.listIdentityPools MaxResults: 60, (err, data) ->
         noError(err)
         expect(Array.isArray(data.IdentityPools)).to.equal(true)
 
   describe 'AWS.CognitoSync', ->
-    integration 'lists identity pool usage', ->
+    it 'lists identity pool usage', ->
       cognitosync.listIdentityPoolUsage (err, data) ->
         noError(err)
         expect(Array.isArray(data.IdentityPoolUsages)).to.equal(true)
 
   describe 'AWS.ElasticTranscoder', ->
-    integration 'lists pipelines', ->
+    it 'lists pipelines', ->
       elastictranscoder.listPipelines (err, data) ->
         noError(err)
         expect(Array.isArray(data.Pipelines)).to.equal(true)
