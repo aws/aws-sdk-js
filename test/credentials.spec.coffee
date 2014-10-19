@@ -621,19 +621,18 @@ describe 'AWS.CognitoIdentityCredentials', ->
       expect(creds.getStorage('id')).not.to.exist
 
     it 'does try to load creds second time if service request failed', ->
-      helpers.mockResponses [
+      reqs = helpers.mockResponses [
+        {error: {code: 'InvalidService'}, data: null},
         {data: {IdentityId: 'IDENTITY-ID'}, error: null},
-        {data: {Token: 'TOKEN'}, error: null}
+        {data: {Token: 'TOKEN'}, error: null},
+        {data: {Credentials: {AccessKeyId: 'akid', SecretAccessKey: 'secret'}}, error: null}
       ]
-      spy = helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake (cb) ->
-        cb(new Error('INVALID SERVICE'))
 
       creds.refresh (err) ->
-        expect(err.message).to.equal('INVALID SERVICE')
+        expect(err.code).to.equal('InvalidService')
       creds.refresh ->
-        creds.refresh ->
-          creds.refresh ->
-            expect(spy.calls.length).to.equal(4)
+        expect(creds.accessKeyId).to.equal('akid')
+        expect(creds.secretAccessKey).to.equal('secret')
 
     describe 'browser caching', ->
       beforeEach -> helpers.spyOn(AWS.util, 'isBrowser').andReturn(true)

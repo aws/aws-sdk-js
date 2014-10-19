@@ -58,17 +58,20 @@ describe 'AWS.ResourceWaiter', ->
     it 'accepts error state as a terminal state', ->
       err = null; data = null; resp = null
       s3 = new AWS.S3
-      helpers.mockResponses [
-        {httpResponse: {statusCode: 200}},
-        {httpResponse: {statusCode: 200}},
-        {httpResponse: {statusCode: 404}}
+      reqs = helpers.mockResponses [
+        {httpResponse: {statusCode: 200}, error: null, data: {}},
+        {httpResponse: {statusCode: 200}, error: null, data: {}},
+        {httpResponse: {statusCode: 404}, error: {code: 404}, data: null}
       ]
 
       waiter = new AWS.ResourceWaiter(s3, 'bucketNotExists')
       waiter.wait Bucket: 'bucket', (e, d) -> resp = this; err = e; data = d
+      expect(helpers.operationsForRequests(reqs)).to.eql [
+        's3.headBucket', 's3.headBucket', 's3.headBucket'
+      ]
       expect(err).to.equal(null)
       expect(resp.httpResponse.statusCode).to.equal(404)
-      expect(resp.retryCount).to.equal(3)
+      expect(resp.retryCount).to.equal(2)
 
     it 'supports error codes as error state', ->
       err = null; data = null; resp = null

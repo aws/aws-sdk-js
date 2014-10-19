@@ -166,6 +166,7 @@ setupMockResponse = (cb) ->
       if AWS.EventListeners[ns].EXTRACT_ERROR
         req.removeListener('extractError', AWS.EventListeners[ns].EXTRACT_ERROR)
     req.response.httpResponse.statusCode = 200
+    req.removeListener('validateResponse', AWS.EventListeners.Core.VALIDATE_RESPONSE)
     req.on('validateResponse', cb)
 
 mockResponse = (resp) ->
@@ -174,11 +175,18 @@ mockResponse = (resp) ->
 
 mockResponses = (resps) ->
   index = 0
+  reqs = []
   setupMockResponse (response) ->
+    reqs.push(response.request)
     resp = resps[index]
-    if resp
-      AWS.util.update response, resp
-      index += 1
+    AWS.util.update response, resp
+    index += 1
+
+  reqs
+
+operationsForRequests = (reqs) ->
+  reqs.map (req) ->
+    req.service.serviceIdentifier + '.' + req.operation
 
 module.exports =
   AWS: AWS
@@ -191,5 +199,6 @@ module.exports =
   mockHttpSuccessfulResponse: mockHttpSuccessfulResponse
   mockResponse: mockResponse
   mockResponses: mockResponses
+  operationsForRequests: operationsForRequests
   MockService: MockService
 
