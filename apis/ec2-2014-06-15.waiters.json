@@ -76,7 +76,8 @@
     },
     "VolumeDeleted": {
       "extends": "__VolumeStatus",
-      "success_value": "deleted"
+      "success_type": "error",
+      "success_value": "InvalidVolume.NotFound"
     },
     "VpcAvailable": {
       "operation": "DescribeVpcs",
