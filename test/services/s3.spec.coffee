@@ -457,7 +457,7 @@ describe 'AWS.S3', ->
   describe 'willComputeChecksums', ->
     willCompute = (operation, opts) ->
       compute = opts.computeChecksums
-      s3 = new AWS.S3(computeChecksums: compute)
+      s3 = new AWS.S3(computeChecksums: compute, signatureVersion: 's3')
       req = s3.makeRequest(operation, Bucket: 'example', ContentMD5: opts.hash).build()
       checksum = req.httpRequest.headers['Content-MD5']
       if opts.hash != undefined

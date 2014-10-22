@@ -31,6 +31,6 @@ describe 'AWS.Signers.Presign', ->
         'Presigning does not support expiry time greater than a week with SigV4 signing.')
 
   it 'only supports s3 or v4 signers', ->
-    new AWS.EC2().describeInstances().presign (err) ->
+    new AWS.SimpleDB().listDomains().presign (err) ->
       expect(err.code).to.equal('UnsupportedSigner')
       expect(err.message).to.equal('Presigning only supports S3 or SigV4 signing.')
