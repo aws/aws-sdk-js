@@ -434,9 +434,9 @@ describe 'AWS.EventListeners', ->
   describe 'terminal callback error handling', ->
     describe 'without domains', ->
       it 'emits uncaughtException', ->
-        helpers.mockHttpResponse 200, {}, []
+        helpers.mockResponse data: {}
         expect(-> (makeRequest -> invalidCode)).to.throw()
-        expect(completeHandler.calls.length).not.to.equal(0)
+        expect(completeHandler.calls.length).to.equal(1)
         expect(errorHandler.calls.length).to.equal(0)
         expect(retryHandler.calls.length).to.equal(0)
 
