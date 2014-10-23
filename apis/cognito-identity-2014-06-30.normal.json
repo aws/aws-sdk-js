@@ -712,7 +712,8 @@
         "DeveloperProviderName":{
           "shape":"DeveloperProviderName",
           "documentation":"<p>The \"domain\" by which Cognito will refer to your users. This name acts as a placeholder that allows your backend and the Cognito service to communicate about the developer provider. For the <code>DeveloperProviderName</code>, you can use letters as well as period (<code>.</code>), underscore (<code>_</code>), and dash (<code>-</code>).</p> <p>Once you have set a developer provider name, you cannot change it. Please take care in setting this parameter.</p>"
-        }
+        },
+        "OpenIdConnectProviderARNs":{"shape":"OIDCProviderList"}
       },
       "documentation":"<p>Input to the CreateIdentityPool action.</p>"
     },
@@ -913,7 +914,8 @@
         "DeveloperProviderName":{
           "shape":"DeveloperProviderName",
           "documentation":"<p>The \"domain\" by which Cognito will refer to your users.</p>"
-        }
+        },
+        "OpenIdConnectProviderARNs":{"shape":"OIDCProviderList"}
       },
       "documentation":"An object representing a Cognito identity pool."
     },
@@ -963,7 +965,7 @@
     "IdentityProviderToken":{
       "type":"string",
       "min":1,
-      "max":1024,
+      "max":2048,
       "pattern":"[\\S]+"
     },
     "IdentityProviders":{
@@ -1182,10 +1184,20 @@
       "exception":true,
       "documentation":"Thrown when a user is not authorized to access the requested resource."
     },
+    "OIDCProviderARN":{
+      "type":"string",
+      "min":20,
+      "max":2048
+    },
+    "OIDCProviderList":{
+      "type":"list",
+      "member":{"shape":"OIDCProviderARN"}
+    },
     "OIDCToken":{"type":"string"},
     "PaginationKey":{
       "type":"string",
-      "min":1
+      "min":1,
+      "pattern":"[\\S]+"
     },
     "QueryLimit":{
       "type":"integer",
