@@ -39,6 +39,24 @@
       ],
       "documentation":"<p>This operation checks the availability of one domain name. You can access this API without authenticating. Note that if the availability status of a domain is pending, you must submit another request to determine the availability of the domain name.</p>"
     },
+    "DisableDomainAutoRenew":{
+      "name":"DisableDomainAutoRenew",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisableDomainAutoRenewRequest"},
+      "output":{"shape":"DisableDomainAutoRenewResponse"},
+      "errors":[
+        {
+          "shape":"InvalidInput",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>The requested item is not acceptable. For example, for an OperationId it may refer to the ID of an operation that is already completed. For a domain name, it may not be a valid domain name or belong to the requester account.</p>"
+        }
+      ],
+      "documentation":"<p>This operation disables automatic renewal of domain registration for the specified domain.</p>"
+    },
     "DisableDomainTransferLock":{
       "name":"DisableDomainTransferLock",
       "http":{
@@ -80,6 +98,24 @@
         }
       ],
       "documentation":"<p>This operation removes the transfer lock on the domain (specifically the <code>clientTransferProhibited</code> status) to allow domain transfers. We recommend you refrain from performing this action unless you intend to transfer the domain to a different registrar. Successful submission returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.</p>"
+    },
+    "EnableDomainAutoRenew":{
+      "name":"EnableDomainAutoRenew",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"EnableDomainAutoRenewRequest"},
+      "output":{"shape":"EnableDomainAutoRenewResponse"},
+      "errors":[
+        {
+          "shape":"InvalidInput",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>The requested item is not acceptable. For example, for an OperationId it may refer to the ID of an operation that is already completed. For a domain name, it may not be a valid domain name or belong to the requester account.</p>"
+        }
+      ],
+      "documentation":"<p>This operation configures Amazon Route 53 to automatically renew the specified domain before the domain registration expires. The cost of renewing your domain registration is billed to your AWS account.</p> <p>The period during which you can renew a domain name varies by TLD. For a list of TLDs and their renewal policies, see \"Renewal, restoration, and deletion times\" (http://wiki.gandi.net/en/domains/renew#renewal_restoration_and_deletion_times) on the website for our registrar partner, Gandi. Route 53 requires that you renew before the end of the renewal period that is listed on the Gandi website so we can complete processing before the deadline.</p>"
     },
     "EnableDomainTransferLock":{
       "name":"EnableDomainTransferLock",
@@ -830,6 +866,18 @@
       ]
     },
     "DNSSec":{"type":"string"},
+    "DisableDomainAutoRenewRequest":{
+      "type":"structure",
+      "required":["DomainName"],
+      "members":{
+        "DomainName":{"shape":"DomainName"}
+      }
+    },
+    "DisableDomainAutoRenewResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DisableDomainTransferLockRequest":{
       "type":"structure",
       "required":["DomainName"],
@@ -931,6 +979,18 @@
     "Email":{
       "type":"string",
       "max":254
+    },
+    "EnableDomainAutoRenewRequest":{
+      "type":"structure",
+      "required":["DomainName"],
+      "members":{
+        "DomainName":{"shape":"DomainName"}
+      }
+    },
+    "EnableDomainAutoRenewResponse":{
+      "type":"structure",
+      "members":{
+      }
     },
     "EnableDomainTransferLockRequest":{
       "type":"structure",
