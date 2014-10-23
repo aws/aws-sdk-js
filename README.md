@@ -22,6 +22,8 @@ HTML pages:
 
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.21.min.js"></script>
 
+The AWS SDK is also compatible with [browserify](http://browserify.org).
+
 ### In Node.js
 
 The preferred way to install the AWS SDK for Node.js is to use the
