@@ -1,6 +1,6 @@
 helpers = require('../helpers')
 AWS = helpers.AWS
-Stream = AWS.util.nodeRequire('stream').Stream
+Stream = AWS.util.nodeRequire('stream')
 Buffer = AWS.util.Buffer
 
 describe 'AWS.S3', ->
@@ -493,12 +493,12 @@ describe 'AWS.S3', ->
     if AWS.util.isNode()
       it 'does not compute checksums for Stream objects', ->
         s3 = new AWS.S3(computeChecksums: true)
-        req = s3.putObject(Bucket: 'example', Key: 'foo', Body: new Stream)
+        req = s3.putObject(Bucket: 'example', Key: 'foo', Body: new Stream.Stream)
         expect(req.build(->).httpRequest.headers['Content-MD5']).to.equal(undefined)
 
       it 'throws an error in SigV4, if a non-file stream is provided', ->
         s3 = new AWS.S3(signatureVersion: 'v4')
-        req = s3.putObject(Bucket: 'example', Key: 'key', Body: new Stream)
+        req = s3.putObject(Bucket: 'example', Key: 'key', Body: new Stream.Stream)
         req.send (err) ->
           expect(err.message).to.contain('stream objects are not supported')
 
