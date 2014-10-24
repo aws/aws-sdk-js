@@ -15,7 +15,8 @@ GEM
       mini_portile (~> 0.5.0)
     rake (10.1.1)
     rdiscount (2.1.7)
-    samus (1.3.0)
+    redcarpet (3.2.0)
+    samus (1.4.0)
     yard (0.8.7.3)
     yard-js (0.1.3)
     yard-sitemap (1.0.1)
@@ -28,6 +29,7 @@ DEPENDENCIES
   parsejs!
   rake
   rdiscount
+  redcarpet (~> 3.0)
   samus
   yard (~> 0.0)
   yard-js (~> 0.0)
