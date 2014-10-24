@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.0.22
+// AWS SDK for JavaScript v2.0.23
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -3906,7 +3906,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.0.22',
+  VERSION: '2.0.23',
 
 
   Signers: {},
@@ -4737,9 +4737,8 @@ AWS.HttpRequest = inherit({
   search: function search() {
     var query = this.path.split('?', 2)[1];
     if (query) {
-      return  query.split('&').sort(function(x, y) {
-        return x.split('=')[0] > y.split('=')[0] ? 1 : -1;
-      }).join('&');
+      query = AWS.util.queryStringParse(query);
+      return AWS.util.queryParamsToString(query);
     }
     return '';
   }
@@ -7484,7 +7483,7 @@ AWS.util.update(AWS.S3.prototype, {
     request.addListener('build', this.addContentType);
     request.addListener('build', this.populateURI);
     request.addListener('build', this.computeContentMd5);
-    request.addListener('build', this.computeSha256);
+    request.onAsync('build', this.computeSha256);
     request.addListener('build', this.computeSseCustomerKeyMd5);
     request.removeListener('validate',
       AWS.EventListeners.Core.VALIDATE_REGION);
@@ -7596,10 +7595,32 @@ AWS.util.update(AWS.S3.prototype, {
   },
 
 
-  computeSha256: function computeSha256(req) {
+  computeSha256: function computeSha256(req, done) {
     if (req.service.getSignerClass(req) === AWS.Signers.V4) {
-      req.httpRequest.headers['X-Amz-Content-Sha256'] =
-        AWS.util.crypto.sha256(req.httpRequest.body || '', 'hex');
+      var body = req.httpRequest.body || '';
+
+      if (AWS.util.isNode()) {
+        var Stream = AWS.util.nodeRequire('stream').Stream;
+        var fs = AWS.util.nodeRequire('fs');
+        if (body instanceof Stream) {
+          if (typeof body.path === 'string') { // assume file object
+            body = fs.createReadStream(body.path);
+          } else { // TODO support other stream types
+            done(new Error('Non-file stream objects are ' +
+                           'not supported with SigV4 in AWS.S3'));
+            return;
+          }
+        }
+      }
+
+      AWS.util.crypto.sha256(body, 'hex', function(err, sha) {
+        if (!err) {
+          req.httpRequest.headers['X-Amz-Content-Sha256'] = sha;
+        }
+        done(err);
+      });
+    } else {
+      done();
     }
   },
 
@@ -8955,18 +8976,30 @@ var util = {
       return cryptoLib.createHmac(fn, key).update(string).digest(digest);
     },
 
-    md5: function md5(data, digest) {
+    md5: function md5(data, digest, callback) {
+      return util.crypto.hash('md5', data, digest, callback);
+    },
+
+    sha256: function sha256(data, digest, callback) {
+      return util.crypto.hash('sha256', data, digest, callback);
+    },
+
+    hash: function(algorithm, data, digest, callback) {
+      var hash = util.crypto.createHash(algorithm);
       if (!digest) { digest = 'binary'; }
       if (digest === 'buffer') { digest = undefined; }
       if (typeof data === 'string') data = new Buffer(data);
-      return util.crypto.createHash('md5').update(data).digest(digest);
-    },
 
-    sha256: function sha256(string, digest) {
-      if (!digest) { digest = 'binary'; }
-      if (digest === 'buffer') { digest = undefined; }
-      if (typeof string === 'string') string = new Buffer(string);
-      return util.crypto.createHash('sha256').update(string).digest(digest);
+      if (callback && typeof data === 'object' &&
+          typeof data.on === 'function' && !Buffer.isBuffer(data)) {
+        data.on('data', function(chunk) { hash.update(chunk); });
+        data.on('error', function(err) { callback(err); });
+        data.on('end', function() { callback(null, hash.digest(digest)); });
+      } else {
+        var out = hash.update(data).digest(digest);
+        if (callback) callback(null, out);
+        return out;
+      }
     },
 
     toHex: function toHex(data) {
