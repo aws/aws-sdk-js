@@ -1,6 +1,6 @@
 helpers = require('../helpers')
 AWS = helpers.AWS
-Stream = require('stream').Stream
+Stream = AWS.util.nodeRequire('stream').Stream
 Buffer = AWS.util.Buffer
 
 describe 'AWS.S3', ->
@@ -487,13 +487,20 @@ describe 'AWS.S3', ->
     it 'does not compute checksums if computeChecksums is on and ContentMD5 is provided', ->
       willCompute 'putBucketAcl', computeChecksums: true, hash: '000'
 
-    it 'does not compute checksums for Stream objects', ->
-      s3 = new AWS.S3(computeChecksums: true)
-      req = s3.putObject(Bucket: 'example', Key: 'foo', Body: new Stream)
-      expect(req.build(->).httpRequest.headers['Content-MD5']).to.equal(undefined)
-
     it 'computes checksums if computeChecksums is on and ContentMD5 is not provided',->
       willCompute 'putBucketAcl', computeChecksums: true
+
+    if AWS.util.isNode()
+      it 'does not compute checksums for Stream objects', ->
+        s3 = new AWS.S3(computeChecksums: true)
+        req = s3.putObject(Bucket: 'example', Key: 'foo', Body: new Stream)
+        expect(req.build(->).httpRequest.headers['Content-MD5']).to.equal(undefined)
+
+      it 'throws an error in SigV4, if a non-file stream is provided', ->
+        s3 = new AWS.S3(signatureVersion: 'v4')
+        req = s3.putObject(Bucket: 'example', Key: 'key', Body: new Stream)
+        req.send (err) ->
+          expect(err.message).to.contain('stream objects are not supported')
 
   describe 'getSignedUrl', ->
     date = null
