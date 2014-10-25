@@ -242,14 +242,15 @@ describe 'AWS.util.crypto', ->
         expect(d).to.equal(result)
 
     if AWS.util.isNode()
-      it 'handles streams in async interface', ->
+      it 'handles streams in async interface', (done) ->
         Transform = AWS.util.nodeRequire('stream').Transform
         tr = new Transform
         tr._transform = (data, encoding, callback) -> callback(null, data)
         tr.push(new AWS.util.Buffer(input))
+        tr.end()
         util.sha256 tr, 'hex', (e, d) ->
           expect(d).to.equal(result)
-
+          done()
 
   describe 'md5', ->
     input = 'foo'
@@ -272,13 +273,15 @@ describe 'AWS.util.crypto', ->
         expect(d).to.equal(result)
 
     if AWS.util.isNode()
-      it 'handles streams in async interface', ->
+      it 'handles streams in async interface', (done) ->
         Transform = AWS.util.nodeRequire('stream').Transform
         tr = new Transform
-        tr._transform = (data, encoding, callback) -> callback(null, data)
+        tr._transform = (data, enc, callback) -> callback(null, data)
         tr.push(new AWS.util.Buffer(input))
+        tr.end()
         util.md5 tr, 'hex', (e, d) ->
           expect(d).to.equal(result)
+          done()
 
 describe 'AWS.util.each', ->
   it 'should iterate over a hash', ->
