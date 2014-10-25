@@ -8,7 +8,7 @@ The SDK currently supports all available AWS services. Each service object
 in the SDK currently provides low-level access to every API call in the
 respective AWS service. The full list of supported services including
 their operations and parameters are documented in the complete
-[API reference documentation](/AWSJavaScriptSDK/latest/_index.html).
+[API reference documentation](/AWSJavaScriptSDK/latest/frames.html#!_index.html).
 
 ## Constructing a Service
 
