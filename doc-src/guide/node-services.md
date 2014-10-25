@@ -6,54 +6,9 @@
 
 The SDK currently supports all available AWS services. Each service object
 in the SDK currently provides low-level access to every API call in the
-respective AWS service. The full list of methods and their parameters are
-documented in the complete API reference documentation (linked from each
-service name in the list below).
-
-The supported services are:
-
-* [AWS.AutoScaling](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/AutoScaling.html)
-* [AWS.CloudFormation](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/CloudFormation.html)
-* [AWS.CloudFront](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/CloudFront.html)
-* [AWS.CloudSearch](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/CloudSearch.html)
-* [AWS.CloudSearch](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/CloudSearch.html)
-* [AWS.CloudSearchDomain](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/CloudSearchDomain.html)
-* [AWS.CloudTrail](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/CloudTrail.html)
-* [AWS.CognitoIdentity](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/CognitoIdentity.html)
-* [AWS.CognitoSync](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/CognitoSync.html)
-* [AWS.DataPipeline](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/DataPipeline.html)
-* [AWS.DirectConnect](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/DirectConnect.html)
-* [AWS.DynamoDB](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/DynamoDB.html)
-* [AWS.DynamoDB](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/DynamoDB.html)
-* [AWS.EC2](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/EC2.html)
-* [AWS.ElastiCache](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/ElastiCache.html)
-* [AWS.ElasticBeanstalk](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/ElasticBeanstalk.html)
-* [AWS.ELB](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/ELB.html)
-* [AWS.EMR](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/EMR.html)
-* [AWS.ElasticTranscoder](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/ElasticTranscoder.html)
-* [AWS.SES](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/SES.html)
-* [AWS.Glacier](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/Glacier.html)
-* [AWS.IAM](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/IAM.html)
-* [AWS.ImportExport](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/ImportExport.html)
-* [AWS.Kinesis](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/Kinesis.html)
-* [AWS.CloudWatchLogs](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/CloudWatchLogs.html)
-* [AWS.CloudWatch](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/CloudWatch.html)
-* [AWS.OpsWorks](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/OpsWorks.html)
-* [AWS.RDS](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/RDS.html)
-* [AWS.RDS](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/RDS.html)
-* [AWS.RDS](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/RDS.html)
-* [AWS.Redshift](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/Redshift.html)
-* [AWS.Route53](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/Route53.html)
-* [AWS.S3](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/S3.html)
-* [AWS.SimpleDB](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/SimpleDB.html)
-* [AWS.SNS](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/SNS.html)
-* [AWS.SQS](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/SQS.html)
-* [AWS.StorageGateway](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/StorageGateway.html)
-* [AWS.STS](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/STS.html)
-* [AWS.Support](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/Support.html)
-* [AWS.SWF](http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html#!AWS/SWF.html)
-
-<div class="clear"></div>
+respective AWS service. The full list of supported services including
+their operations and parameters are documented in the complete
+[API reference documentation](/AWSJavaScriptSDK/latest/_index.html).
 
 ## Constructing a Service
 

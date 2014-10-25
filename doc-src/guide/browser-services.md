@@ -12,13 +12,15 @@ service name in the list below).
 
 The 5 services that come with the default hosted package of the SDK are:
 
+* [AWS.CloudWatch](/AWSJavaScriptSDK/latest/frames.html#!AWS/CloudWatch.html)
+* [AWS.CognitoIdentity](/AWSJavaScriptSDK/latest/frames.html#!AWS/CognitoIdentity.html)
+* [AWS.CognitoSync](/AWSJavaScriptSDK/latest/frames.html#!AWS/CognitoSync.html)
 * [AWS.DynamoDB](/AWSJavaScriptSDK/latest/frames.html#!AWS/DynamoDB.html)
 * [AWS.ElasticTranscoder](/AWSJavaScriptSDK/latest/frames.html#!AWS/ElasticTranscoder.html)
+* [AWS.Kinesis](/AWSJavaScriptSDK/latest/frames.html#!AWS/Kinesis.html)
 * [AWS.S3](/AWSJavaScriptSDK/latest/frames.html#!AWS/S3.html)
 * [AWS.SNS](/AWSJavaScriptSDK/latest/frames.html#!AWS/SNS.html)
 * [AWS.SQS](/AWSJavaScriptSDK/latest/frames.html#!AWS/SQS.html)
-* [AWS.Kinesis](/AWSJavaScriptSDK/latest/frames.html#!AWS/Kinesis.html)
-* [AWS.CloudWatch](/AWSJavaScriptSDK/latest/frames.html#!AWS/CloudWatch.html)
 * [AWS.STS](/AWSJavaScriptSDK/latest/frames.html#!AWS/STS.html)
 
 <div class="clear"></div>
