@@ -513,7 +513,7 @@ describe 'AWS.util.jamespath', ->
 
     it 'allows multiple expressions to be ORed', ->
       data = foo: {key1: 'wrong'}, bar: {key2: 'right'}
-      expect(query('foo.key2 or bar.key2', data)).to.eql(['right'])
+      expect(query('foo.key2 || bar.key2', data)).to.eql(['right'])
 
     it 'returns multiple matches if a wildcard is used', ->
       data = foo:
