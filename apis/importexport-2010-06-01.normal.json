@@ -8,7 +8,7 @@
     "xmlNamespace":"http://importexport.amazonaws.com/doc/2010-06-01/",
     "protocol":"query"
   },
-  "documentation":"<fullname>AWS Import/Export Service</fullname>\n    AWS Import/Export accelerates transferring large amounts of data between\n    the AWS cloud and portable storage devices that you mail to us. AWS\n    Import/Export transfers data directly onto and off of your storage devices\n    using Amazon's high-speed internal network and bypassing the Internet. For\n    large data sets, AWS Import/Export is often faster than Internet transfer\n    and more cost effective than upgrading your connectivity.",
+  "documentation":"<fullname>AWS Import/Export Service</fullname> AWS Import/Export accelerates transferring large amounts of data between the AWS cloud and portable storage devices that you mail to us. AWS Import/Export transfers data directly onto and off of your storage devices using Amazon's high-speed internal network and bypassing the Internet. For large data sets, AWS Import/Export is often faster than Internet transfer and more cost effective than upgrading your connectivity.",
   "operations":{
     "CancelJob":{
       "name":"CancelJob",
@@ -49,10 +49,10 @@
         {
           "shape":"InvalidAccessKeyIdException",
           "exception":true,
-          "documentation":"The AWS Access Key ID specified in the request did not match the manifest's\n    accessKeyId value. The manifest and the request authentication must use the\n    same AWS Access Key ID."
+          "documentation":"The AWS Access Key ID specified in the request did not match the manifest's accessKeyId value. The manifest and the request authentication must use the same AWS Access Key ID."
         }
       ],
-      "documentation":"This operation cancels a specified job. Only the job owner can cancel it.\n    The operation fails if the job has already started or is complete."
+      "documentation":"This operation cancels a specified job. Only the job owner can cancel it. The operation fails if the job has already started or is complete."
     },
     "CreateJob":{
       "name":"CreateJob",
@@ -88,7 +88,7 @@
         {
           "shape":"InvalidAccessKeyIdException",
           "exception":true,
-          "documentation":"The AWS Access Key ID specified in the request did not match the manifest's\n    accessKeyId value. The manifest and the request authentication must use the\n    same AWS Access Key ID."
+          "documentation":"The AWS Access Key ID specified in the request did not match the manifest's accessKeyId value. The manifest and the request authentication must use the same AWS Access Key ID."
         },
         {
           "shape":"InvalidAddressException",
@@ -108,7 +108,7 @@
         {
           "shape":"NoSuchBucketException",
           "exception":true,
-          "documentation":"The specified bucket does not exist. Create the specified bucket or change\n    the manifest's bucket, exportBucket, or logBucket field to a bucket that\n    the account, as specified by the manifest's Access Key ID, has write\n    permissions to."
+          "documentation":"The specified bucket does not exist. Create the specified bucket or change the manifest's bucket, exportBucket, or logBucket field to a bucket that the account, as specified by the manifest's Access Key ID, has write permissions to."
         },
         {
           "shape":"MissingCustomsException",
@@ -128,7 +128,7 @@
         {
           "shape":"MultipleRegionsException",
           "exception":true,
-          "documentation":"Your manifest file contained buckets from multiple regions.  A job is\n    restricted to buckets from one region.  Please correct and resubmit."
+          "documentation":"Your manifest file contained buckets from multiple regions. A job is restricted to buckets from one region. Please correct and resubmit."
         },
         {
           "shape":"BucketPermissionException",
@@ -141,7 +141,7 @@
           "documentation":"Your manifest is not well-formed."
         }
       ],
-      "documentation":"This operation initiates the process of scheduling an upload or download of\n    your data. You include in the request a manifest that describes the data\n    transfer specifics. The response to the request includes a job ID, which\n    you can use in other operations, a signature that you use to identify your\n    storage device, and the address where you should ship your storage device."
+      "documentation":"This operation initiates the process of scheduling an upload or download of your data. You include in the request a manifest that describes the data transfer specifics. The response to the request includes a job ID, which you can use in other operations, a signature that you use to identify your storage device, and the address where you should ship your storage device."
     },
     "GetStatus":{
       "name":"GetStatus",
@@ -177,10 +177,10 @@
         {
           "shape":"InvalidAccessKeyIdException",
           "exception":true,
-          "documentation":"The AWS Access Key ID specified in the request did not match the manifest's\n    accessKeyId value. The manifest and the request authentication must use the\n    same AWS Access Key ID."
+          "documentation":"The AWS Access Key ID specified in the request did not match the manifest's accessKeyId value. The manifest and the request authentication must use the same AWS Access Key ID."
         }
       ],
-      "documentation":"This operation returns information about a job, including where the job is\n    in the processing pipeline, the status of the results, and the signature\n    value associated with the job. You can only return information about jobs\n    you own."
+      "documentation":"This operation returns information about a job, including where the job is in the processing pipeline, the status of the results, and the signature value associated with the job. You can only return information about jobs you own."
     },
     "ListJobs":{
       "name":"ListJobs",
@@ -206,10 +206,10 @@
         {
           "shape":"InvalidAccessKeyIdException",
           "exception":true,
-          "documentation":"The AWS Access Key ID specified in the request did not match the manifest's\n    accessKeyId value. The manifest and the request authentication must use the\n    same AWS Access Key ID."
+          "documentation":"The AWS Access Key ID specified in the request did not match the manifest's accessKeyId value. The manifest and the request authentication must use the same AWS Access Key ID."
         }
       ],
-      "documentation":"This operation returns the jobs associated with the requester. AWS\n    Import/Export lists the jobs in reverse chronological order based on the\n    date of creation. For example if Job Test1 was created 2009Dec30 and Test2\n    was created 2010Feb05, the ListJobs operation would return Test2 followed\n    by Test1."
+      "documentation":"This operation returns the jobs associated with the requester. AWS Import/Export lists the jobs in reverse chronological order based on the date of creation. For example if Job Test1 was created 2009Dec30 and Test2 was created 2010Feb05, the ListJobs operation would return Test2 followed by Test1."
     },
     "UpdateJob":{
       "name":"UpdateJob",
@@ -240,7 +240,7 @@
         {
           "shape":"InvalidAccessKeyIdException",
           "exception":true,
-          "documentation":"The AWS Access Key ID specified in the request did not match the manifest's\n    accessKeyId value. The manifest and the request authentication must use the\n    same AWS Access Key ID."
+          "documentation":"The AWS Access Key ID specified in the request did not match the manifest's accessKeyId value. The manifest and the request authentication must use the same AWS Access Key ID."
         },
         {
           "shape":"InvalidAddressException",
@@ -265,7 +265,7 @@
         {
           "shape":"NoSuchBucketException",
           "exception":true,
-          "documentation":"The specified bucket does not exist. Create the specified bucket or change\n    the manifest's bucket, exportBucket, or logBucket field to a bucket that\n    the account, as specified by the manifest's Access Key ID, has write\n    permissions to."
+          "documentation":"The specified bucket does not exist. Create the specified bucket or change the manifest's bucket, exportBucket, or logBucket field to a bucket that the account, as specified by the manifest's Access Key ID, has write permissions to."
         },
         {
           "shape":"ExpiredJobIdException",
@@ -295,7 +295,7 @@
         {
           "shape":"MultipleRegionsException",
           "exception":true,
-          "documentation":"Your manifest file contained buckets from multiple regions.  A job is\n    restricted to buckets from one region.  Please correct and resubmit."
+          "documentation":"Your manifest file contained buckets from multiple regions. A job is restricted to buckets from one region. Please correct and resubmit."
         },
         {
           "shape":"BucketPermissionException",
@@ -308,7 +308,7 @@
           "documentation":"Your manifest is not well-formed."
         }
       ],
-      "documentation":"You use this operation to change the parameters specified in the original\n    manifest file by supplying a new manifest file. The manifest file attached\n    to this request replaces the original manifest file. You can only use the\n    operation after a CreateJob request but before the data transfer starts and\n    you can only use it on jobs you own."
+      "documentation":"You use this operation to change the parameters specified in the original manifest file by supplying a new manifest file. The manifest file attached to this request replaces the original manifest file. You can only use the operation after a CreateJob request but before the data transfer starts and you can only use it on jobs you own."
     }
   },
   "shapes":{
@@ -438,7 +438,7 @@
         "message":{"shape":"ErrorMessage"}
       },
       "exception":true,
-      "documentation":"The AWS Access Key ID specified in the request did not match the manifest's\n    accessKeyId value. The manifest and the request authentication must use the\n    same AWS Access Key ID."
+      "documentation":"The AWS Access Key ID specified in the request did not match the manifest's accessKeyId value. The manifest and the request authentication must use the same AWS Access Key ID."
     },
     "InvalidAddressException":{
       "type":"structure",
@@ -494,7 +494,7 @@
     },
     "IsTruncated":{
       "type":"boolean",
-      "documentation":"Indicates whether the list of jobs was truncated. If true, then call\n    ListJobs again using the last JobId element as the marker."
+      "documentation":"Indicates whether the list of jobs was truncated. If true, then call ListJobs again using the last JobId element as the marker."
     },
     "Job":{
       "type":"structure",
@@ -573,11 +573,11 @@
     },
     "Marker":{
       "type":"string",
-      "documentation":"Specifies the JOBID to start after when listing the jobs created with your\n    account. AWS Import/Export lists your jobs in reverse chronological order.\n    See MaxJobs."
+      "documentation":"Specifies the JOBID to start after when listing the jobs created with your account. AWS Import/Export lists your jobs in reverse chronological order. See MaxJobs."
     },
     "MaxJobs":{
       "type":"integer",
-      "documentation":"Sets the maximum number of jobs returned in the response. If there are\n    additional jobs that were not returned because MaxJobs was exceeded, the\n    response contains &lt;IsTruncated&gt;true&lt;/IsTruncated&gt;. To return\n    the additional jobs, see Marker."
+      "documentation":"Sets the maximum number of jobs returned in the response. If there are additional jobs that were not returned because MaxJobs was exceeded, the response contains &lt;IsTruncated&gt;true&lt;/IsTruncated&gt;. To return the additional jobs, see Marker."
     },
     "MissingCustomsException":{
       "type":"structure",
@@ -609,7 +609,7 @@
         "message":{"shape":"ErrorMessage"}
       },
       "exception":true,
-      "documentation":"Your manifest file contained buckets from multiple regions.  A job is\n    restricted to buckets from one region.  Please correct and resubmit."
+      "documentation":"Your manifest file contained buckets from multiple regions. A job is restricted to buckets from one region. Please correct and resubmit."
     },
     "NoSuchBucketException":{
       "type":"structure",
@@ -617,7 +617,7 @@
         "message":{"shape":"ErrorMessage"}
       },
       "exception":true,
-      "documentation":"The specified bucket does not exist. Create the specified bucket or change\n    the manifest's bucket, exportBucket, or logBucket field to a bucket that\n    the account, as specified by the manifest's Access Key ID, has write\n    permissions to."
+      "documentation":"The specified bucket does not exist. Create the specified bucket or change the manifest's bucket, exportBucket, or logBucket field to a bucket that the account, as specified by the manifest's Access Key ID, has write permissions to."
     },
     "ProgressCode":{
       "type":"string",
@@ -629,7 +629,7 @@
     },
     "Signature":{
       "type":"string",
-      "documentation":"An encrypted code used to authenticate the request and response, for\n    example, \"DV+TpDfx1/TdSE9ktyK9k/bDTVI=\". Only use this value is you want to\n    create the signature file yourself.  Generally you should use the\n    SignatureFileContents value."
+      "documentation":"An encrypted code used to authenticate the request and response, for example, \"DV+TpDfx1/TdSE9ktyK9k/bDTVI=\". Only use this value is you want to create the signature file yourself. Generally you should use the SignatureFileContents value."
     },
     "SignatureFileContents":{
       "type":"string",
@@ -641,7 +641,7 @@
     },
     "TrackingNumber":{
       "type":"string",
-      "documentation":"The shipping tracking number assigned by AWS Import/Export to the storage\n    device when it's returned to you. We return this value when the\n    LocationCode is \"Returned\"."
+      "documentation":"The shipping tracking number assigned by AWS Import/Export to the storage device when it's returned to you. We return this value when the LocationCode is \"Returned\"."
     },
     "UnableToCancelJobIdException":{
       "type":"structure",
@@ -681,7 +681,7 @@
     },
     "WarningMessage":{
       "type":"string",
-      "documentation":"An optional message notifying you of non-fatal issues with the job, such as\n    use of an incompatible Amazon S3 bucket name."
+      "documentation":"An optional message notifying you of non-fatal issues with the job, such as use of an incompatible Amazon S3 bucket name."
     }
   }
 }

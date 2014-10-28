@@ -64,7 +64,7 @@
           "documentation":"<p> The quota for capacity groups or launch configurations for this customer has already been reached. </p>"
         }
       ],
-      "documentation":"<p> Creates a new Auto Scaling group with the specified name and other attributes. When the creation request is completed, the Auto Scaling group is ready to be used in other calls. </p>"
+      "documentation":"<p> Creates a new Auto Scaling group with the specified name and other attributes. When the creation request is completed, the Auto Scaling group is ready to be used in other calls. </p> <note> The Auto Scaling group name must be unique within the scope of your AWS account. </note>"
     },
     "CreateLaunchConfiguration":{
       "name":"CreateLaunchConfiguration",
@@ -132,7 +132,7 @@
           "documentation":"<p> The named Auto Scaling group or launch configuration already exists. </p>"
         }
       ],
-      "documentation":"<p> Creates new tags or updates existing tags for an Auto Scaling group. </p> <p>For information on creating tags for your Auto Scaling group, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/ASTagging.html\">Tag Your Auto Scaling Groups and Amazon EC2 Instances</a>.</p>"
+      "documentation":"<p> Creates new tags or updates existing tags for an Auto Scaling group. </p> <note> A tag's definition is composed of a resource ID, resource type, key and value, and the propagate flag. Value and the propagate flag are optional parameters. See the Request Parameters for more information. </note> <p>For information on creating tags for your Auto Scaling group, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/ASTagging.html\">Tag Your Auto Scaling Groups and Amazon EC2 Instances</a>.</p>"
     },
     "DeleteAutoScalingGroup":{
       "name":"DeleteAutoScalingGroup",
@@ -166,7 +166,7 @@
           "documentation":"<p> This is returned when you cannot delete a launch configuration or Auto Scaling group because it is being used. </p>"
         }
       ],
-      "documentation":"<p> Deletes the specified Auto Scaling group if the group has no instances and no scaling activities in progress. </p>"
+      "documentation":"<p> Deletes the specified Auto Scaling group if the group has no instances and no scaling activities in progress. </p> <note> To remove all instances before calling <a>DeleteAutoScalingGroup</a>, you can call <a>UpdateAutoScalingGroup</a> to set the minimum and maximum size of the AutoScalingGroup to zero. </note>"
     },
     "DeleteLaunchConfiguration":{
       "name":"DeleteLaunchConfiguration",
@@ -414,7 +414,7 @@
         "documentation":"<p>The output of the <a>DescribeMetricCollectionTypes</a> action.</p>",
         "resultWrapper":"DescribeMetricCollectionTypesResult"
       },
-      "documentation":"<p> Returns a list of metrics and a corresponding list of granularities for each metric. </p>"
+      "documentation":"<p> Returns a list of metrics and a corresponding list of granularities for each metric. </p> <note> <p>The <code>GroupStandbyInstances</code> metric is not returned by default. You must explicitly request it when calling <a>EnableMetricsCollection</a>.</p> </note>"
     },
     "DescribeNotificationConfigurations":{
       "name":"DescribeNotificationConfigurations",
@@ -761,7 +761,7 @@
           "documentation":"<p> The quota for capacity groups or launch configurations for this customer has already been reached. </p>"
         }
       ],
-      "documentation":"<p> Creates or updates a scheduled scaling action for an Auto Scaling group. When updating a scheduled scaling action, if you leave a parameter unspecified, the corresponding value remains unchanged in the affected Auto Scaling group. </p> <p>For information on creating or updating a scheduled action for your Auto Scaling group, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/schedule_time.html\">Scale Based on a Schedule</a>.</p>"
+      "documentation":"<p> Creates or updates a scheduled scaling action for an Auto Scaling group. When updating a scheduled scaling action, if you leave a parameter unspecified, the corresponding value remains unchanged in the affected Auto Scaling group. </p> <p>For information on creating or updating a scheduled action for your Auto Scaling group, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/schedule_time.html\">Scale Based on a Schedule</a>.</p> <note> <p>Auto Scaling supports the date and time expressed in \"YYYY-MM-DDThh:mm:ssZ\" format in UTC/GMT only.</p> </note>"
     },
     "RecordLifecycleActionHeartbeat":{
       "name":"RecordLifecycleActionHeartbeat",
@@ -855,7 +855,7 @@
           "documentation":"<p> You cannot delete an Auto Scaling group while there are scaling activities in progress for that group. </p>"
         }
       ],
-      "documentation":"<p> Terminates the specified instance. Optionally, the desired group size can be adjusted. </p>"
+      "documentation":"<p> Terminates the specified instance. Optionally, the desired group size can be adjusted. </p> <note> This call simply registers a termination request. The termination of the instance cannot happen immediately. </note>"
     },
     "UpdateAutoScalingGroup":{
       "name":"UpdateAutoScalingGroup",
@@ -879,7 +879,7 @@
           "documentation":"<p> You cannot delete an Auto Scaling group while there are scaling activities in progress for that group. </p>"
         }
       ],
-      "documentation":"<p> Updates the configuration for the specified <a>AutoScalingGroup</a>. </p> <p> The new settings are registered upon the completion of this call. Any launch configuration settings take effect on any triggers after this call returns. Scaling activities that are currently in progress aren't affected. </p>"
+      "documentation":"<p> Updates the configuration for the specified <a>AutoScalingGroup</a>. </p> <note> <p> To update an Auto Scaling group with a launch configuration that has the <code>InstanceMonitoring</code> flag set to <code>False</code>, you must first ensure that collection of group metrics is disabled. Otherwise, calls to <a>UpdateAutoScalingGroup</a> will fail. If you have previously enabled group metrics collection, you can disable collection of all group metrics by calling <a>DisableMetricsCollection</a>. </p> </note> <p> The new settings are registered upon the completion of this call. Any launch configuration settings take effect on any triggers after this call returns. Scaling activities that are currently in progress aren't affected. </p> <note> <ul> <li> <p>If a new value is specified for <i>MinSize</i> without specifying the value for <i>DesiredCapacity</i>, and if the new <i>MinSize</i> is larger than the current size of the Auto Scaling Group, there will be an implicit call to <a>SetDesiredCapacity</a> to set the group to the new <i>MinSize</i>. </p> </li> <li> <p>If a new value is specified for <i>MaxSize</i> without specifying the value for <i>DesiredCapacity</i>, and the new <i>MaxSize</i> is smaller than the current size of the Auto Scaling Group, there will be an implicit call to <a>SetDesiredCapacity</a> to set the group to the new <i>MaxSize</i>. </p> </li> <li> <p>All other optional parameters are left unchanged if not passed in the request.</p> </li> </ul> </note>"
     }
   },
   "shapes":{
@@ -1278,7 +1278,7 @@
         },
         "NoDevice":{
           "shape":"NoDevice",
-          "documentation":"<p> Suppresses the device mapping. </p>"
+          "documentation":"<p> Suppresses the device mapping. </p> <note>If <code>NoDevice</code> is set to <code>true</code> for the root device, the instance might fail the EC2 health check. Auto Scaling launches a replacement instance if the instance fails the health check.</note>"
         }
       },
       "documentation":"<p> The <code>BlockDeviceMapping</code> data type. </p>"
@@ -1414,7 +1414,7 @@
         },
         "UserData":{
           "shape":"XmlStringUserData",
-          "documentation":"<p> The user data to make available to the launched Amazon EC2 instances. For more information about Amazon EC2 user data, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html#instancedata-user-data-retrieval\">User Data Retrieval</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p>"
+          "documentation":"<p> The user data to make available to the launched Amazon EC2 instances. For more information about Amazon EC2 user data, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html#instancedata-user-data-retrieval\">User Data Retrieval</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p> <note> At this time, Auto Scaling launch configurations don't support compressed (e.g. zipped) user data files. </note>"
         },
         "InstanceId":{
           "shape":"XmlStringMaxLen16",
@@ -1454,7 +1454,7 @@
         },
         "AssociatePublicIpAddress":{
           "shape":"AssociatePublicIpAddress",
-          "documentation":"<p>Used for Auto Scaling groups that launch instances into an Amazon Virtual Private Cloud (Amazon VPC). Specifies whether to assign a public IP address to each instance launched in a Amazon VPC. For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/autoscalingsubnets.html\">Auto Scaling in Amazon Virtual Private Cloud</a>.</p> <p>Default: If the instance is launched into a default subnet in a default VPC, the default is <code>true</code>. If the instance is launched into a nondefault subnet in a VPC, the default is <code>false</code>. For information about default VPC and VPC platforms, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide//as-supported-platforms.html\">Supported Platforms</a>.</p>"
+          "documentation":"<p>Used for Auto Scaling groups that launch instances into an Amazon Virtual Private Cloud (Amazon VPC). Specifies whether to assign a public IP address to each instance launched in a Amazon VPC. For more information, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/autoscalingsubnets.html\">Auto Scaling in Amazon Virtual Private Cloud</a>.</p> <note> <p>If you specify a value for this parameter, be sure to specify at least one VPC subnet using the <i>VPCZoneIdentifier</i> parameter when you create your Auto Scaling group. </p> </note> <p>Default: If the instance is launched into a default subnet in a default VPC, the default is <code>true</code>. If the instance is launched into a nondefault subnet in a VPC, the default is <code>false</code>. For information about default VPC and VPC platforms, see <a href=\"http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide//as-supported-platforms.html\">Supported Platforms</a>.</p>"
         },
         "PlacementTenancy":{
           "shape":"XmlStringMaxLen64",
@@ -1660,7 +1660,7 @@
       "members":{
         "Metrics":{
           "shape":"MetricCollectionTypes",
-          "documentation":"<p>The list of Metrics collected. The following metrics are supported: </p> <ul> <li><p>GroupMinSize</p></li> <li><p>GroupMaxSize</p></li> <li><p>GroupDesiredCapacity</p></li> <li><p>GroupInServiceInstances</p></li> <li><p>GroupPendingInstances</p></li> <li><p>GroupStandbyInstances</p></li> <li><p>GroupTerminatingInstances</p></li> <li><p>GroupTotalInstances</p></li> </ul>"
+          "documentation":"<p>The list of Metrics collected. The following metrics are supported: </p> <ul> <li><p>GroupMinSize</p></li> <li><p>GroupMaxSize</p></li> <li><p>GroupDesiredCapacity</p></li> <li><p>GroupInServiceInstances</p></li> <li><p>GroupPendingInstances</p></li> <li><p>GroupStandbyInstances</p></li> <li><p>GroupTerminatingInstances</p></li> <li><p>GroupTotalInstances</p></li> </ul> <note> <p>The <code>GroupStandbyInstances</code> metric is not returned by default. You must explicitly request it when calling <a>EnableMetricsCollection</a>.</p> </note>"
         },
         "Granularities":{
           "shape":"MetricGranularityTypes",
@@ -1886,7 +1886,7 @@
         },
         "Metrics":{
           "shape":"Metrics",
-          "documentation":"<p> The list of metrics to collect. If no metrics are specified, all metrics are enabled. The following metrics are supported: </p> <ul> <li><p>GroupMinSize</p></li> <li><p>GroupMaxSize</p></li> <li><p>GroupDesiredCapacity</p></li> <li><p>GroupInServiceInstances</p></li> <li><p>GroupPendingInstances</p></li> <li><p>GroupStandbyInstances</p></li> <li><p>GroupTerminatingInstances</p></li> <li><p>GroupTotalInstances</p></li> </ul>"
+          "documentation":"<p> The list of metrics to collect. If no metrics are specified, all metrics are enabled. The following metrics are supported: </p> <ul> <li><p>GroupMinSize</p></li> <li><p>GroupMaxSize</p></li> <li><p>GroupDesiredCapacity</p></li> <li><p>GroupInServiceInstances</p></li> <li><p>GroupPendingInstances</p></li> <li><p>GroupStandbyInstances</p></li> <li><p>GroupTerminatingInstances</p></li> <li><p>GroupTotalInstances</p></li> </ul> <note> <p>The <code>GroupStandbyInstances</code> metric is not returned by default. You must explicitly request it when calling <a>EnableMetricsCollection</a>.</p> </note>"
         },
         "Granularity":{
           "shape":"XmlStringMaxLen255",
@@ -2028,7 +2028,7 @@
         },
         "LifecycleState":{
           "shape":"LifecycleState",
-          "documentation":"<p> Contains a description of the current <i>lifecycle</i> state. </p>"
+          "documentation":"<p> Contains a description of the current <i>lifecycle</i> state. </p> <note> <p>The <code>Quarantined</code> lifecycle state is currently not used.</p> </note>"
         },
         "HealthStatus":{
           "shape":"XmlStringMaxLen32",
@@ -2442,15 +2442,15 @@
         },
         "LifecycleTransition":{
           "shape":"LifecycleTransition",
-          "documentation":"<p>The Amazon EC2 instance state to which you want to attach the lifecycle hook. See <a>DescribeLifecycleHookTypes</a> for a list of available lifecycle hook types.</p>"
+          "documentation":"<p>The Amazon EC2 instance state to which you want to attach the lifecycle hook. See <a>DescribeLifecycleHookTypes</a> for a list of available lifecycle hook types.</p> <note> <p>This parameter is required for new lifecycle hooks, but optional when updating existing hooks.</p> </note>"
         },
         "RoleARN":{
           "shape":"ResourceName",
-          "documentation":"<p>The ARN of the Amazon IAM role that allows the Auto Scaling group to publish to the specified notification target.</p>"
+          "documentation":"<p>The ARN of the Amazon IAM role that allows the Auto Scaling group to publish to the specified notification target.</p> <note> <p>This parameter is required for new lifecycle hooks, but optional when updating existing hooks.</p> </note>"
         },
         "NotificationTargetARN":{
           "shape":"ResourceName",
-          "documentation":"<p>The ARN of the notification target that Auto Scaling will use to notify you when an instance is in the transition state for the lifecycle hook. This ARN target can be either an SQS queue or an SNS topic. </p> <p>The notification message sent to the target will include:</p> <ul> <li> <b>LifecycleActionToken</b>. The Lifecycle action token.</li> <li> <b>AccountId</b>. The user account ID.</li> <li> <b>AutoScalingGroupName</b>. The name of the Auto Scaling group.</li> <li> <b>LifecycleHookName</b>. The lifecycle hook name.</li> <li> <b>EC2InstanceId</b>. The EC2 instance ID.</li> <li> <b>LifecycleTransition</b>. The lifecycle transition.</li> <li> <b>NotificationMetadata</b>. The notification metadata.</li> </ul> <p>This operation uses the JSON format when sending notifications to an Amazon SQS queue, and an email key/value pair format when sending notifications to an Amazon SNS topic.</p> <p>When you call this operation, a test message is sent to the notification target. This test message contains an additional key/value pair: <code>Event:autoscaling:TEST_NOTIFICATION</code>.</p>"
+          "documentation":"<p>The ARN of the notification target that Auto Scaling will use to notify you when an instance is in the transition state for the lifecycle hook. This ARN target can be either an SQS queue or an SNS topic. </p> <note> <p>This parameter is required for new lifecycle hooks, but optional when updating existing hooks.</p> </note> <p>The notification message sent to the target will include:</p> <ul> <li> <b>LifecycleActionToken</b>. The Lifecycle action token.</li> <li> <b>AccountId</b>. The user account ID.</li> <li> <b>AutoScalingGroupName</b>. The name of the Auto Scaling group.</li> <li> <b>LifecycleHookName</b>. The lifecycle hook name.</li> <li> <b>EC2InstanceId</b>. The EC2 instance ID.</li> <li> <b>LifecycleTransition</b>. The lifecycle transition.</li> <li> <b>NotificationMetadata</b>. The notification metadata.</li> </ul> <p>This operation uses the JSON format when sending notifications to an Amazon SQS queue, and an email key/value pair format when sending notifications to an Amazon SNS topic.</p> <p>When you call this operation, a test message is sent to the notification target. This test message contains an additional key/value pair: <code>Event:autoscaling:TEST_NOTIFICATION</code>.</p>"
         },
         "NotificationMetadata":{
           "shape":"XmlStringMaxLen1023",

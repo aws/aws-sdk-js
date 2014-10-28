@@ -67,7 +67,7 @@
           "documentation":"<p> The authorization quota for the cluster security group has been reached. </p>"
         }
       ],
-      "documentation":"<p> Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR) IP address range or an EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group. </p> <p>For an overview of CIDR blocks, see the Wikipedia article on <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>. </p> <p> You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html\">Working with Security Groups</a> in the <i>Amazon Redshift Management Guide</i>.</p>"
+      "documentation":"<p> Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR) IP address range or an EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group. </p> <note> The EC2 security group must be defined in the AWS region where the cluster resides. </note> <p>For an overview of CIDR blocks, see the Wikipedia article on <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>. </p> <p> You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html\">Working with Security Groups</a> in the <i>Amazon Redshift Management Guide</i>.</p>"
     },
     "AuthorizeSnapshotAccess":{
       "name":"AuthorizeSnapshotAccess",
@@ -840,7 +840,7 @@
           "documentation":"<p> The parameter group name does not refer to an existing parameter group. </p>"
         }
       ],
-      "documentation":"<p> Deletes a specified Amazon Redshift parameter group. </p>"
+      "documentation":"<p> Deletes a specified Amazon Redshift parameter group. <note>You cannot delete a parameter group if it is associated with a cluster.</note> </p>"
     },
     "DeleteClusterSecurityGroup":{
       "name":"DeleteClusterSecurityGroup",
@@ -874,7 +874,7 @@
           "documentation":"<p> The cluster security group name does not refer to an existing cluster security group. </p>"
         }
       ],
-      "documentation":"<p> Deletes an Amazon Redshift security group. </p> <p> For information about managing security groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html\">Amazon Redshift Cluster Security Groups</a> in the <i>Amazon Redshift Management Guide</i>. </p>"
+      "documentation":"<p> Deletes an Amazon Redshift security group. </p> <note>You cannot delete a security group that is associated with any clusters. You cannot delete the default security group.</note> <p> For information about managing security groups, go to <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html\">Amazon Redshift Cluster Security Groups</a> in the <i>Amazon Redshift Management Guide</i>. </p>"
     },
     "DeleteClusterSnapshot":{
       "name":"DeleteClusterSnapshot",
@@ -3572,7 +3572,7 @@
       "members":{
         "ParameterGroupName":{
           "shape":"String",
-          "documentation":"<p> The name of the cluster parameter group. </p> <p> Constraints: </p> <ul> <li>Must be 1 to 255 alphanumeric characters or hyphens</li> <li>First character must be a letter.</li> <li>Cannot end with a hyphen or contain two consecutive hyphens.</li> <li>Must be unique withing your AWS account.</li> </ul>"
+          "documentation":"<p> The name of the cluster parameter group. </p> <p> Constraints: </p> <ul> <li>Must be 1 to 255 alphanumeric characters or hyphens</li> <li>First character must be a letter.</li> <li>Cannot end with a hyphen or contain two consecutive hyphens.</li> <li>Must be unique withing your AWS account.</li> </ul> <note>This value is stored as a lower-case string.</note>"
         },
         "ParameterGroupFamily":{
           "shape":"String",
@@ -3760,7 +3760,7 @@
         },
         "SkipFinalClusterSnapshot":{
           "shape":"Boolean",
-          "documentation":"<p> Determines whether a final snapshot of the cluster is created before Amazon Redshift deletes the cluster. If <code>true</code>, a final cluster snapshot is not created. If <code>false</code>, a final cluster snapshot is created before the cluster is deleted. </p> <p>Default: <code>false</code></p>"
+          "documentation":"<p> Determines whether a final snapshot of the cluster is created before Amazon Redshift deletes the cluster. If <code>true</code>, a final cluster snapshot is not created. If <code>false</code>, a final cluster snapshot is created before the cluster is deleted. </p> <note>The <i>FinalClusterSnapshotIdentifier</i> parameter must be specified if <i>SkipFinalClusterSnapshot</i> is <code>false</code>.</note> <p>Default: <code>false</code></p>"
         },
         "FinalClusterSnapshotIdentifier":{
           "shape":"String",
@@ -5004,7 +5004,7 @@
         },
         "MasterUserPassword":{
           "shape":"String",
-          "documentation":"<p> The new password for the cluster master user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <p>Default: Uses existing setting.</p> <p> Constraints: </p> <ul> <li>Must be between 8 and 64 characters in length.</li> <li>Must contain at least one uppercase letter.</li> <li>Must contain at least one lowercase letter.</li> <li>Must contain one number.</li> <li>Can be any printable ASCII character (ASCII code 33 to 126) except ' (single quote), \" (double quote), \\, /, @, or space.</li> </ul>"
+          "documentation":"<p> The new password for the cluster master user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. <note> Operations never return the password, so this operation provides a way to regain access to the master user account for a cluster if the password is lost. </note> </p> <p>Default: Uses existing setting.</p> <p> Constraints: </p> <ul> <li>Must be between 8 and 64 characters in length.</li> <li>Must contain at least one uppercase letter.</li> <li>Must contain at least one lowercase letter.</li> <li>Must contain one number.</li> <li>Can be any printable ASCII character (ASCII code 33 to 126) except ' (single quote), \" (double quote), \\, /, @, or space.</li> </ul>"
         },
         "ClusterParameterGroupName":{
           "shape":"String",

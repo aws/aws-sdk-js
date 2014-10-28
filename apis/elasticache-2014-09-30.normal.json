@@ -77,7 +77,7 @@
           "documentation":"<p>Two or more incompatible parameters were specified.</p>"
         }
       ],
-      "documentation":"<p>The <i>AuthorizeCacheSecurityGroupIngress</i> operation allows network ingress to a cache security group. Applications using ElastiCache must be running on Amazon EC2, and Amazon EC2 security groups are used as the authorization mechanism.</p>"
+      "documentation":"<p>The <i>AuthorizeCacheSecurityGroupIngress</i> operation allows network ingress to a cache security group. Applications using ElastiCache must be running on Amazon EC2, and Amazon EC2 security groups are used as the authorization mechanism.</p> <note>You cannot authorize ingress from an Amazon EC2 security group in one region to an ElastiCache cluster in another region. </note>"
     },
     "CopySnapshot":{
       "name":"CopySnapshot",
@@ -935,7 +935,7 @@
           "documentation":"<p>Two or more incompatible parameters were specified.</p>"
         }
       ],
-      "documentation":"<p>The <i>DeleteCacheSecurityGroup</i> operation deletes a cache security group.</p>"
+      "documentation":"<p>The <i>DeleteCacheSecurityGroup</i> operation deletes a cache security group.</p> <note>You cannot delete a cache security group if it is associated with any cache clusters.</note>"
     },
     "DeleteCacheSubnetGroup":{
       "name":"DeleteCacheSubnetGroup",
@@ -969,7 +969,7 @@
           "documentation":"<p>The requested cache subnet group name does not refer to an existing cache subnet group.</p>"
         }
       ],
-      "documentation":"<p>The <i>DeleteCacheSubnetGroup</i> operation deletes a cache subnet group.</p>"
+      "documentation":"<p>The <i>DeleteCacheSubnetGroup</i> operation deletes a cache subnet group.</p> <note>You cannot delete a cache subnet group if it is associated with any cache clusters.</note>"
     },
     "DeleteReplicationGroup":{
       "name":"DeleteReplicationGroup",
@@ -3054,7 +3054,7 @@
         },
         "PreferredAvailabilityZones":{
           "shape":"PreferredAvailabilityZoneList",
-          "documentation":"<p>A list of the Availability Zones in which cache nodes will be created. The order of the zones in the list is not important.</p> <p>This option is only supported on Memcached.</p> <p>If you want all the nodes in the same Availability Zone, use <code>PreferredAvailabilityZone</code> instead, or repeat the Availability Zone multiple times in the list.</p> <p>Default: System chosen Availability Zones.</p> <p>Example: One Memcached node in each of three different Availability Zones: <code>PreferredAvailabilityZones.member.1=us-east-1a&amp;PreferredAvailabilityZones.member.2=us-east-1b&amp;PreferredAvailabilityZones.member.3=us-east-1d</code></p> <p>Example: All three Memcached nodes in one Availability Zone: <code>PreferredAvailabilityZones.member.1=us-east-1a&amp;PreferredAvailabilityZones.member.2=us-east-1a&amp;PreferredAvailabilityZones.member.3=us-east-1a</code></p>"
+          "documentation":"<p>A list of the Availability Zones in which cache nodes will be created. The order of the zones in the list is not important.</p> <p>This option is only supported on Memcached.</p> <note> <p>If you are creating your cache cluster in an Amazon VPC (recommended) you can only locate nodes in Availability Zones that are associated with the subnets in the selected subnet group.</p> <p>The number of Availability Zones listed must equal the value of <code>NumCacheNodes</code>.</p> </note> <p>If you want all the nodes in the same Availability Zone, use <code>PreferredAvailabilityZone</code> instead, or repeat the Availability Zone multiple times in the list.</p> <p>Default: System chosen Availability Zones.</p> <p>Example: One Memcached node in each of three different Availability Zones: <code>PreferredAvailabilityZones.member.1=us-east-1a&amp;PreferredAvailabilityZones.member.2=us-east-1b&amp;PreferredAvailabilityZones.member.3=us-east-1d</code></p> <p>Example: All three Memcached nodes in one Availability Zone: <code>PreferredAvailabilityZones.member.1=us-east-1a&amp;PreferredAvailabilityZones.member.2=us-east-1a&amp;PreferredAvailabilityZones.member.3=us-east-1a</code></p>"
         },
         "NumCacheNodes":{
           "shape":"IntegerOptional",
@@ -3106,7 +3106,7 @@
         },
         "NotificationTopicArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications will be sent.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications will be sent.</p> <note>The Amazon SNS topic owner must be the same as the cache cluster owner.</note>"
         },
         "AutoMinorVersionUpgrade":{
           "shape":"BooleanOptional",
@@ -3208,7 +3208,7 @@
         },
         "AutomaticFailoverEnabled":{
           "shape":"BooleanOptional",
-          "documentation":"<p>Specifies whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails.</p> <p>If <code>true</code>, automatic failover is enabled for this replication group. If <code>false</code>, automatic failover is disabled for this replication group.</p> <p>Default: false</p>"
+          "documentation":"<p>Specifies whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails.</p> <p>If <code>true</code>, automatic failover is enabled for this replication group. If <code>false</code>, automatic failover is disabled for this replication group.</p> <p>Default: false</p> <note><p>ElastiCache Multi-AZ replication groups is not supported on:</p> <ul> <li>Redis version 2.6.</li> <li>T1 and T2 cache node types.</li> </ul> </note>"
         },
         "NumCacheClusters":{
           "shape":"IntegerOptional",
@@ -3216,7 +3216,7 @@
         },
         "PreferredCacheClusterAZs":{
           "shape":"AvailabilityZonesList",
-          "documentation":"<p>A list of EC2 availability zones in which the replication group's cache clusters will be created. The order of the availability zones in the list is not important.</p> <p>Default: system chosen availability zones.</p> <p>Example: One Redis cache cluster in each of three availability zones. PreferredAvailabilityZones.member.1=us-east-1a PreferredAvailabilityZones.member.2=us-east-1c PreferredAvailabilityZones.member.3=us-east-1d</p>"
+          "documentation":"<p>A list of EC2 availability zones in which the replication group's cache clusters will be created. The order of the availability zones in the list is not important.</p> <note>If you are creating your replication group in an Amazon VPC (recommended), you can only locate cache clusters in availability zones associated with the subnets in the selected subnet group. <p>The number of availability zones listed must equal the value of <i>NumCacheClusters</i>.</p></note> <p>Default: system chosen availability zones.</p> <p>Example: One Redis cache cluster in each of three availability zones. PreferredAvailabilityZones.member.1=us-east-1a PreferredAvailabilityZones.member.2=us-east-1c PreferredAvailabilityZones.member.3=us-east-1d</p>"
         },
         "CacheNodeType":{
           "shape":"String",
@@ -3264,7 +3264,7 @@
         },
         "NotificationTopicArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications will be sent.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications will be sent.</p> <note>The Amazon SNS topic owner must be the same as the cache cluster owner.</note>"
         },
         "AutoMinorVersionUpgrade":{
           "shape":"BooleanOptional",
@@ -3320,7 +3320,7 @@
       "members":{
         "CacheParameterGroupName":{
           "shape":"String",
-          "documentation":"<p>The name of the cache parameter group to delete.</p>"
+          "documentation":"<p>The name of the cache parameter group to delete.</p> <note>The specified cache security group must not be associated with any cache clusters.</note>"
         }
       },
       "documentation":"<p>Represents the input of a <i>DeleteCacheParameterGroup</i> operation.</p>"
@@ -3331,7 +3331,7 @@
       "members":{
         "CacheSecurityGroupName":{
           "shape":"String",
-          "documentation":"<p>The name of the cache security group to delete.</p>"
+          "documentation":"<p>The name of the cache security group to delete.</p> <note>You cannot delete the default security group.</note>"
         }
       },
       "documentation":"<p>Represents the input of a <i>DeleteCacheSecurityGroup</i> operation.</p>"
@@ -3943,7 +3943,7 @@
         },
         "AZMode":{
           "shape":"AZMode",
-          "documentation":"<p>Specifies whether the new nodes in this Memcached cache cluster are all created in a single Availability Zone or created across multiple Availability Zones.</p> <p>Valid values: <code>single-az</code> | <code>cross-az</code>.</p> <p>This option is only supported for Memcached cache clusters.</p>"
+          "documentation":"<p>Specifies whether the new nodes in this Memcached cache cluster are all created in a single Availability Zone or created across multiple Availability Zones.</p> <p>Valid values: <code>single-az</code> | <code>cross-az</code>.</p> <p>This option is only supported for Memcached cache clusters.</p> <note><p>You cannot specify <code>single-az</code> if the Memcached cache cluster already has cache nodes in different Availability Zones. If <code>cross-az</code> is specified, existing Memcached nodes remain in their current Availability Zone.</p> <p>Only newly created nodes will be located in different Availability Zones. For instructions on how to move existing Memcached nodes to different Availability Zones, see the <b>Availability Zone Considerations</b> section of <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheNode.Memcached.html\">Cache Node Considerations for Memcached</a>.</p> </note>"
         },
         "NewAvailabilityZones":{
           "shape":"PreferredAvailabilityZoneList",
@@ -3963,7 +3963,7 @@
         },
         "NotificationTopicArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications will be sent.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications will be sent.</p> <note>The Amazon SNS topic owner must be same as the cache cluster owner. </note>"
         },
         "CacheParameterGroupName":{
           "shape":"String",
@@ -4055,7 +4055,7 @@
         },
         "AutomaticFailoverEnabled":{
           "shape":"BooleanOptional",
-          "documentation":"<p>Whether a read replica will be automatically promoted to read/write primary if the existing primary encounters a failure.</p> <p>Valid values: <code>true</code> | <code>false</code></p>"
+          "documentation":"<p>Whether a read replica will be automatically promoted to read/write primary if the existing primary encounters a failure.</p> <p>Valid values: <code>true</code> | <code>false</code></p> <note><p>ElastiCache Multi-AZ replication groups is not supported on:</p> <ul> <li>Redis version 2.6.</li> <li>T1 and T2 cache node types.</li> </ul> </note>"
         },
         "CacheSecurityGroupNames":{
           "shape":"CacheSecurityGroupNameList",
@@ -4071,7 +4071,7 @@
         },
         "NotificationTopicArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications will be sent.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications will be sent.</p> <note>The Amazon SNS topic owner must be same as the replication group owner. </note>"
         },
         "CacheParameterGroupName":{
           "shape":"String",
@@ -4418,7 +4418,7 @@
         },
         "AutomaticFailover":{
           "shape":"AutomaticFailoverStatus",
-          "documentation":"<p>Indicates the status of automatic failover for this replication group.</p>"
+          "documentation":"<p>Indicates the status of automatic failover for this replication group.</p> <note><p>ElastiCache AutoFailover replication groups are not supported on:</p> <ul> <li>Redis version 2.6.</li> <li>T1 and T2 cache node types.</li> </ul> </note>"
         }
       },
       "wrapper":true,
@@ -4478,7 +4478,7 @@
         },
         "AutomaticFailoverStatus":{
           "shape":"PendingAutomaticFailoverStatus",
-          "documentation":"<p>Indicates the status of automatic failover for this replication group.</p>"
+          "documentation":"<p>Indicates the status of automatic failover for this replication group.</p> <note><p>ElastiCache AutoFailover replication groups are not supported on:</p> <ul> <li>Redis version 2.6.</li> <li>T1 and T2 cache node types.</li> </ul> </note>"
         }
       },
       "documentation":"<p>The settings to be applied to the replication group, either immediately or during the next maintenance window.</p>"

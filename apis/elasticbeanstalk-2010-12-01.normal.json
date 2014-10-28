@@ -108,7 +108,7 @@
           "documentation":"<p>The specified S3 bucket does not belong to the S3 region in which the service is running.</p>"
         }
       ],
-      "documentation":"<p>Creates an application version for the specified application.</p>"
+      "documentation":"<p>Creates an application version for the specified application.</p> <note>Once you create an application version with a specified Amazon S3 bucket and key location, you cannot change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version. </note>"
     },
     "CreateConfigurationTemplate":{
       "name":"CreateConfigurationTemplate",
@@ -255,7 +255,7 @@
           "documentation":"<p>Unable to perform the specified operation because another operation is already in progress affecting an an element in this activity.</p>"
         }
       ],
-      "documentation":"<p> Deletes the specified application along with all associated versions and configurations. The application versions will not be deleted from your Amazon S3 bucket. </p>"
+      "documentation":"<p> Deletes the specified application along with all associated versions and configurations. The application versions will not be deleted from your Amazon S3 bucket. </p> <note>You cannot delete an application that has a running environment. </note>"
     },
     "DeleteApplicationVersion":{
       "name":"DeleteApplicationVersion",
@@ -309,7 +309,7 @@
           "documentation":"<p>The specified S3 bucket does not belong to the S3 region in which the service is running.</p>"
         }
       ],
-      "documentation":"<p> Deletes the specified version from the specified application. </p>"
+      "documentation":"<p> Deletes the specified version from the specified application. </p> <note>You cannot delete an application version that is associated with a running environment.</note>"
     },
     "DeleteConfigurationTemplate":{
       "name":"DeleteConfigurationTemplate",
@@ -333,7 +333,7 @@
           "documentation":"<p>Unable to perform the specified operation because another operation is already in progress affecting an an element in this activity.</p>"
         }
       ],
-      "documentation":"<p>Deletes the specified configuration template.</p>"
+      "documentation":"<p>Deletes the specified configuration template.</p> <note>When you launch an environment using a configuration template, the environment gets a copy of the template. You can delete or modify the environment's copy of the template without affecting the running environment.</note>"
     },
     "DeleteEnvironmentConfiguration":{
       "name":"DeleteEnvironmentConfiguration",
@@ -476,7 +476,7 @@
         "documentation":"<p>Result message wrapping a list of event descriptions.</p>",
         "resultWrapper":"DescribeEventsResult"
       },
-      "documentation":"<p>Returns list of event descriptions matching criteria up to the last 6 weeks.</p>"
+      "documentation":"<p>Returns list of event descriptions matching criteria up to the last 6 weeks.</p> <note> This action returns the most recent 1,000 events from the specified <code>NextToken</code>. </note>"
     },
     "ListAvailableSolutionStacks":{
       "name":"ListAvailableSolutionStacks",
@@ -525,7 +525,7 @@
         "shape":"RequestEnvironmentInfoMessage",
         "documentation":"<p>This documentation target is not reported in the API reference.</p>"
       },
-      "documentation":"<p> Initiates a request to compile the specified type of information of the deployed environment. </p> <p> Setting the <code>InfoType</code> to <code>tail</code> compiles the last lines from the application server log files of every Amazon EC2 instance in your environment. </p> <p> Setting the <code>InfoType</code> to <code>bundle</code> compresses the application server log files for every Amazon EC2 instance into a <code>.zip</code> file. Legacy and .NET containers do not support bundle logs. </p> <p> Use <a>RetrieveEnvironmentInfo</a> to obtain the set of logs. </p> <p>Related Topics</p> <ul> <li> <a>RetrieveEnvironmentInfo</a> </li> </ul>"
+      "documentation":"<p> Initiates a request to compile the specified type of information of the deployed environment. </p> <p> Setting the <code>InfoType</code> to <code>tail</code> compiles the last lines from the application server log files of every Amazon EC2 instance in your environment. Use <a>RetrieveEnvironmentInfo</a> to access the compiled information. </p> <p>Related Topics</p> <ul> <li> <a>RetrieveEnvironmentInfo</a> </li> </ul>"
     },
     "RestartAppServer":{
       "name":"RestartAppServer",
@@ -612,7 +612,7 @@
         "documentation":"<p>Result message containing a single description of an application.</p>",
         "resultWrapper":"UpdateApplicationResult"
       },
-      "documentation":"<p>Updates the specified application to have the specified properties. </p>"
+      "documentation":"<p>Updates the specified application to have the specified properties. </p> <note> If a property (for example, <code>description</code>) is not provided, the value remains unchanged. To clear these properties, specify an empty string. </note>"
     },
     "UpdateApplicationVersion":{
       "name":"UpdateApplicationVersion",
@@ -629,7 +629,7 @@
         "documentation":"<p> Result message wrapping a single description of an application version. </p>",
         "resultWrapper":"UpdateApplicationVersionResult"
       },
-      "documentation":"<p> Updates the specified application version to have the specified properties. </p>"
+      "documentation":"<p> Updates the specified application version to have the specified properties. </p> <note> If a property (for example, <code>description</code>) is not provided, the value remains unchanged. To clear properties, specify an empty string. </note>"
     },
     "UpdateConfigurationTemplate":{
       "name":"UpdateConfigurationTemplate",
@@ -658,7 +658,7 @@
           "documentation":"<p>Unable to perform the specified operation because the user does not have enough privileges for one of more downstream aws services</p>"
         }
       ],
-      "documentation":"<p> Updates the specified configuration template to have the specified properties or configuration option values. </p> <p>Related Topics</p> <ul> <li> <a>DescribeConfigurationOptions</a> </li> </ul>"
+      "documentation":"<p> Updates the specified configuration template to have the specified properties or configuration option values. </p> <note> If a property (for example, <code>ApplicationName</code>) is not provided, its value remains unchanged. To clear such properties, specify an empty string. </note> <p>Related Topics</p> <ul> <li> <a>DescribeConfigurationOptions</a> </li> </ul>"
     },
     "UpdateEnvironment":{
       "name":"UpdateEnvironment",
@@ -1598,10 +1598,7 @@
     },
     "EnvironmentInfoType":{
       "type":"string",
-      "enum":[
-        "tail",
-        "bundle"
-      ]
+      "enum":["tail"]
     },
     "EnvironmentName":{
       "type":"string",
