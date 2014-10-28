@@ -1517,7 +1517,7 @@
         "CloudFrontOriginAccessIdentityConfig":{
           "shape":"CloudFrontOriginAccessIdentityConfig",
           "documentation":"The origin access identity's configuration information.",
-          "xmlNamespace":"http://cloudfront.amazonaws.com/doc/2014-05-31/",
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-05-31/"},
           "locationName":"CloudFrontOriginAccessIdentityConfig"
         }
       },
@@ -1554,7 +1554,7 @@
         "DistributionConfig":{
           "shape":"DistributionConfig",
           "documentation":"The distribution's configuration information.",
-          "xmlNamespace":"http://cloudfront.amazonaws.com/doc/2014-05-31/",
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-05-31/"},
           "locationName":"DistributionConfig"
         }
       },
@@ -1600,7 +1600,7 @@
         "InvalidationBatch":{
           "shape":"InvalidationBatch",
           "documentation":"The batch information for the invalidation.",
-          "xmlNamespace":"http://cloudfront.amazonaws.com/doc/2014-05-31/",
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-05-31/"},
           "locationName":"InvalidationBatch"
         }
       },
@@ -1631,7 +1631,7 @@
         "StreamingDistributionConfig":{
           "shape":"StreamingDistributionConfig",
           "documentation":"The streaming distribution's configuration information.",
-          "xmlNamespace":"http://cloudfront.amazonaws.com/doc/2014-05-31/",
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-05-31/"},
           "locationName":"StreamingDistributionConfig"
         }
       },
@@ -3377,7 +3377,7 @@
         "CloudFrontOriginAccessIdentityConfig":{
           "shape":"CloudFrontOriginAccessIdentityConfig",
           "documentation":"The identity's configuration information.",
-          "xmlNamespace":"http://cloudfront.amazonaws.com/doc/2014-05-31/",
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-05-31/"},
           "locationName":"CloudFrontOriginAccessIdentityConfig"
         },
         "Id":{
@@ -3423,7 +3423,7 @@
         "DistributionConfig":{
           "shape":"DistributionConfig",
           "documentation":"The distribution's configuration information.",
-          "xmlNamespace":"http://cloudfront.amazonaws.com/doc/2014-05-31/",
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-05-31/"},
           "locationName":"DistributionConfig"
         },
         "Id":{
@@ -3469,7 +3469,7 @@
         "StreamingDistributionConfig":{
           "shape":"StreamingDistributionConfig",
           "documentation":"The streaming distribution's configuration information.",
-          "xmlNamespace":"http://cloudfront.amazonaws.com/doc/2014-05-31/",
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-05-31/"},
           "locationName":"StreamingDistributionConfig"
         },
         "Id":{
