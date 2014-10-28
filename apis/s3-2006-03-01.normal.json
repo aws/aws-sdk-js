@@ -705,7 +705,8 @@
         "ap-southeast-2",
         "ap-northeast-1",
         "sa-east-1",
-        ""
+        "",
+        "cn-north-1"
       ]
     },
     "BucketLoggingStatus":{
