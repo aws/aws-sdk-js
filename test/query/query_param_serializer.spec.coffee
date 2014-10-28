@@ -7,7 +7,7 @@ describe 'QueryParamSerializer', ->
   serialize = (requestParams, rules) ->
     params = []
     serializer = new QueryParamSerializer()
-    shape = Shape.create type: 'structure', members: rules
+    shape = Shape.create {type: 'structure', members: rules}, {api: {}}
     serializer.serialize requestParams, shape, (name, value) ->
       params.push([name, value])
     params
