@@ -3547,7 +3547,8 @@
         },
         "Body":{
           "shape":"Body",
-          "streaming":true
+          "streaming":true,
+          "documentation":"Object data."
         },
         "Bucket":{
           "shape":"BucketName",
