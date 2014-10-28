@@ -2525,6 +2525,7 @@
           "shape":"Prefix",
           "documentation":"When a prefix is provided in the request, this field contains the specified prefix. The result contains only keys starting with the specified prefix."
         },
+        "Delimiter":{"shape":"Delimiter"},
         "NextUploadIdMarker":{
           "shape":"NextUploadIdMarker",
           "documentation":"When a list is truncated, this element specifies the value that should be used for the upload-id-marker request parameter in a subsequent request."
@@ -2624,6 +2625,7 @@
         },
         "Name":{"shape":"BucketName"},
         "Prefix":{"shape":"Prefix"},
+        "Delimiter":{"shape":"Delimiter"},
         "MaxKeys":{"shape":"MaxKeys"},
         "CommonPrefixes":{"shape":"CommonPrefixList"},
         "EncodingType":{
@@ -2693,6 +2695,7 @@
         "Contents":{"shape":"ObjectList"},
         "Name":{"shape":"BucketName"},
         "Prefix":{"shape":"Prefix"},
+        "Delimiter":{"shape":"Delimiter"},
         "MaxKeys":{"shape":"MaxKeys"},
         "CommonPrefixes":{"shape":"CommonPrefixList"},
         "EncodingType":{
