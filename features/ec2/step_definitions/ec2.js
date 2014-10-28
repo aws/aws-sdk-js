@@ -46,9 +46,7 @@ module.exports = function() {
           if (err) { teardown(); return callback(err); }
           srcSnapId = data.SnapshotId;
 
-          srcEc2.waitFor('snapshotCompleted', {SnapshotIds: [srcSnapId]}, function(err) {
-            if (err) { teardown(); return callback(err); }
-
+          setTimeout(function() {
             params = {SourceRegion: sourceRegion, SourceSnapshotId: srcSnapId};
             dstEc2.copySnapshot(params, function(err, data) {
               if (data) dstSnapId = data.SnapshotId;
@@ -56,7 +54,7 @@ module.exports = function() {
               callback();
               teardown();
             });
-          });
+          }, 5000);
         });
       });
     });
