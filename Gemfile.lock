@@ -6,6 +6,19 @@ GIT
       kpeg
       yard
 
+GIT
+  remote: git://github.com/lsegal/yard-js.git
+  revision: 1f3ee84672655bca1e88fa5d3a652254b127bedc
+  specs:
+    yard-js (0.1.3)
+
+GIT
+  remote: git://github.com/lsegal/yard.git
+  revision: 1b3fbef6b24d522c4d7cfd82b7be8820b8a555cc
+  branch: frameless
+  specs:
+    yard (0.8.7.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -17,8 +30,6 @@ GEM
     rdiscount (2.1.7)
     redcarpet (3.2.0)
     samus (1.4.1)
-    yard (0.8.7.3)
-    yard-js (0.1.3)
     yard-sitemap (1.0.1)
 
 PLATFORMS
@@ -31,6 +42,6 @@ DEPENDENCIES
   rdiscount
   redcarpet (~> 3.0)
   samus
-  yard (~> 0.0)
-  yard-js (~> 0.0)
+  yard!
+  yard-js!
   yard-sitemap (~> 1.0)
