@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/lsegal/yard-js.git
-  revision: 1f3ee84672655bca1e88fa5d3a652254b127bedc
+  revision: c76decbd26c9fe82889d72e10ce50c12cdbe51ff
   specs:
     yard-js (0.1.3)
 
