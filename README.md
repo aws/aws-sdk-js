@@ -2,6 +2,8 @@
 
 [![NPM](https://nodei.co/npm/aws-sdk.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/aws-sdk/)
 
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/aws/aws-sdk-js)
+
 [![Version](https://badge.fury.io/js/aws-sdk.png)](http://badge.fury.io/js/aws-sdk) [![Build Status](https://travis-ci.org/aws/aws-sdk-js.png?branch=master)](https://travis-ci.org/aws/aws-sdk-js) [![Coverage Status](https://coveralls.io/repos/aws/aws-sdk-js/badge.png?branch=master)](https://coveralls.io/r/aws/aws-sdk-js?branch=master)
 
 The official AWS SDK for JavaScript, available for browsers and mobile devices,
