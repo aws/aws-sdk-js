@@ -8,7 +8,7 @@ The SDK currently supports all available AWS services. Each service object
 in the SDK currently provides low-level access to every API call in the
 respective AWS service. The full list of supported services including
 their operations and parameters are documented in the complete
-[API reference documentation](/AWSJavaScriptSDK/latest/frames.html#!_index.html).
+[API reference documentation][api].
 
 ## Constructing a Service
 
@@ -23,6 +23,22 @@ var ec2 = new AWS.EC2({region: 'us-west-2'});
 ```
 
 This object will continue to use the globally provided credentials.
+
+### Global Service-Specific Configuration
+
+In addition to providing service-specific configuration directly on an
+individual service object, you can also configure the SDK globally to apply
+service-specific configuration to all newly created service objects of a
+given type. For example, to configure *all* `AWS.EC2` objects to use the
+"us-west-2" region, you can add the following to the global `AWS.config`:
+
+```javascript
+AWS.config.ec2 = { region: 'us-west-2' };
+```
+
+By adding configuration to `AWS.config.SVCIDENTIFIER`, where "SVCIDENTIFIER"
+is the service identifier (found on each class in the [API reference][api]),
+you can set options globally for a given service.
 
 ## Locking API Versions
 
@@ -121,3 +137,5 @@ have it auto-filled with this value. This value can be overridden by passing
 a new value in the service operation. Additionally, operations that do not
 require a `Bucket` parameter will automatically ignore this bound parameter,
 so the `s3bucket` object can still be used to call `listBuckets`, for instance.
+
+[api]: /AWSJavaScriptSDK/latest/frames.html#!_index.html

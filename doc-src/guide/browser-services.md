@@ -45,6 +45,22 @@ var dynamodb = new AWS.DynamoDB({region: 'us-west-2'});
 
 This object will continue to use the globally provided credentials.
 
+### Global Service-Specific Configuration
+
+In addition to providing service-specific configuration directly on an
+individual service object, you can also configure the SDK globally to apply
+service-specific configuration to all newly created service objects of a
+given type. For example, to configure *all* `AWS.DynamoDB` objects to use the
+"us-west-2" region, you can add the following to the global `AWS.config`:
+
+```javascript
+AWS.config.dynamodb = { region: 'us-west-2' };
+```
+
+By adding configuration to `AWS.config.SVCIDENTIFIER`, where "SVCIDENTIFIER"
+is the service identifier (found on each class in the [API reference][api]),
+you can set options globally for a given service.
+
 ## Passing Parameters to a Service Operation
 
 When calling a method to a service, you should pass parameters in as
@@ -76,3 +92,5 @@ have it auto-filled with this value. This value can be overridden by passing
 a new value in the service operation. Additionally, operations that do not
 require a `Bucket` parameter will automatically ignore this bound parameter,
 so the `s3bucket` object can still be used to call `listBuckets`, for instance.
+
+[api]: /AWSJavaScriptSDK/latest/frames.html
