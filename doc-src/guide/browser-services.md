@@ -12,16 +12,16 @@ service name in the list below).
 
 The 5 services that come with the default hosted package of the SDK are:
 
-* [AWS.CloudWatch](/AWSJavaScriptSDK/latest/frames.html#!AWS/CloudWatch.html)
-* [AWS.CognitoIdentity](/AWSJavaScriptSDK/latest/frames.html#!AWS/CognitoIdentity.html)
-* [AWS.CognitoSync](/AWSJavaScriptSDK/latest/frames.html#!AWS/CognitoSync.html)
-* [AWS.DynamoDB](/AWSJavaScriptSDK/latest/frames.html#!AWS/DynamoDB.html)
-* [AWS.ElasticTranscoder](/AWSJavaScriptSDK/latest/frames.html#!AWS/ElasticTranscoder.html)
-* [AWS.Kinesis](/AWSJavaScriptSDK/latest/frames.html#!AWS/Kinesis.html)
-* [AWS.S3](/AWSJavaScriptSDK/latest/frames.html#!AWS/S3.html)
-* [AWS.SNS](/AWSJavaScriptSDK/latest/frames.html#!AWS/SNS.html)
-* [AWS.SQS](/AWSJavaScriptSDK/latest/frames.html#!AWS/SQS.html)
-* [AWS.STS](/AWSJavaScriptSDK/latest/frames.html#!AWS/STS.html)
+* [AWS.CloudWatch](/AWSJavaScriptSDK/latest/AWS/CloudWatch.html)
+* [AWS.CognitoIdentity](/AWSJavaScriptSDK/latest/AWS/CognitoIdentity.html)
+* [AWS.CognitoSync](/AWSJavaScriptSDK/latest/AWS/CognitoSync.html)
+* [AWS.DynamoDB](/AWSJavaScriptSDK/latest/AWS/DynamoDB.html)
+* [AWS.ElasticTranscoder](/AWSJavaScriptSDK/latest/AWS/ElasticTranscoder.html)
+* [AWS.Kinesis](/AWSJavaScriptSDK/latest/AWS/Kinesis.html)
+* [AWS.S3](/AWSJavaScriptSDK/latest/AWS/S3.html)
+* [AWS.SNS](/AWSJavaScriptSDK/latest/AWS/SNS.html)
+* [AWS.SQS](/AWSJavaScriptSDK/latest/AWS/SQS.html)
+* [AWS.STS](/AWSJavaScriptSDK/latest/AWS/STS.html)
 
 <div class="clear"></div>
 
@@ -93,4 +93,4 @@ a new value in the service operation. Additionally, operations that do not
 require a `Bucket` parameter will automatically ignore this bound parameter,
 so the `s3bucket` object can still be used to call `listBuckets`, for instance.
 
-[api]: /AWSJavaScriptSDK/latest/frames.html
+[api]: /AWSJavaScriptSDK/latest

@@ -21,7 +21,7 @@ This guide will walk developers through many of the high level concepts
 that the SDK provides, as well as provide example code to get started with
 some services. For a more complete look at the classes and methods provided by
 the library, it is recommended to look at the SDK's
-[API reference documentation](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html).
+[API reference documentation](/AWSJavaScriptSDK/latest).
 
 Depending on the platform you are developing for, the installation guide
 may be slightly different, but in both cases, usage of the SDK is the same.

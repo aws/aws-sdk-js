@@ -27,7 +27,7 @@ with new settings. The most common settings are:
    `process.stdout` to get logging information about service requests.
 
 More configuration settings can be found in the
-[API reference documentation](/AWSJavaScriptSDK/latest/frames.html).
+[API reference documentation](/AWSJavaScriptSDK/latest).
 
 The only things you *need* to set in order to use the SDK are credentials and
 the region value. Let's discuss how to do that.

@@ -138,4 +138,4 @@ a new value in the service operation. Additionally, operations that do not
 require a `Bucket` parameter will automatically ignore this bound parameter,
 so the `s3bucket` object can still be used to call `listBuckets`, for instance.
 
-[api]: /AWSJavaScriptSDK/latest/frames.html#!_index.html
+[api]: /AWSJavaScriptSDK/latest/_index.html
