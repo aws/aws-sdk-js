@@ -46,6 +46,7 @@ passing the credential information to the service object directly.
 There are a couple of ways to load credentials. Here they are, in order of
 recommendation:
 
+1. Using [Amazon Cognito][cognito] to authenticate users
 1. Using web identity federation to authenticate users
 2. Hard-coded in your application
 
@@ -54,13 +55,147 @@ however, it is reasonable to temporarily hard-code credential information
 in small personal scripts or for testing purposes. It is also sometimes
 necessary to hard-code **read-only** credentials in your application.
 
+#### Using Amazon Cognito to Authenticate Users
+
+The recommended way to get AWS credentials into your application is to use
+the Cognito Identity credentials object
+([AWS.CognitoIdentityCredentials][ci-creds]) in order to authenticate
+users through third-party identity providers.
+
+To get started, visit the [Amazon Cognito console][cognito-console] to
+create an "Identity Pool". This pool represents the group of identities
+that your application will be vending to your users. The identities you
+give out to your users will uniquely identify each user account. Note that
+these identities are not credentials; instead, they are *exchanged* for
+credentials using [web identity federation support][wif] in [AWS Security
+Token Service][sts] (AWS STS).
+
+In short, Cognito helps to manage the
+abstraction of identities across multiple identity providers, and the SDK's
+`AWS.CognitoIdentityCredentials` object helps to manage the authentication
+flow of loading an identity and exchanging that identity token for
+credentials in STS.
+
+To read more about configuring an identity pool, see the
+[Cognito developer guide][cognito-devguide].
+
+##### Configuring AWS.CognitoIdentityCredentials
+
+Once you have an identity pool configured with identity providers attached,
+you can use the [AWS.CognitoIdentityCredentials][ci-creds] object to
+authenticate users. To configure your credentials to use the
+CognitoIdentityCredentials object, simply set the `credentials` property
+of your config object (either globally or per-service) to be the following
+(using the global config):
+
+```javascript
+AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+  AccountId: '1234567890',
+  IdentityPoolId: 'us-east-1:1699ebc0-7900-4099-b910-2df94f52a030',
+  RoleArn: 'arn:aws:iam::1234567890:role/MYAPP-CognitoIdentity',
+  Logins: { // optional tokens, used for authenticated login
+    'graph.facebook.com': 'FBTOKEN',
+    'www.amazon.com': 'AMAZONTOKEN',
+    'accounts.google.com': 'GOOGLETOKEN'
+  }
+});
+```
+
+The optional `Logins` map is a map of identity provider names to the identity
+tokens for those providers. Getting the token from your identity provider
+is dependent on the provider you are using. For example, if Facebook is one of
+your identity providers, you might use the `FB.login()` function available in
+the [Facebook SDK][fb-sdk] to get an identity provider token:
+
+```javascript
+FB.login(function (response) {
+  if (response.authResponse) { // logged in
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+      AccountId: '1234567890',
+      IdentityPoolId: 'us-east-1:1699ebc0-7900-4099-b910-2df94f52a030',
+      RoleArn: 'arn:aws:iam::1234567890:role/MYAPP-CognitoIdentity',
+      Logins: {
+        'graph.facebook.com': response.authResponse.accessToken
+      }
+    });
+
+    s3 = new AWS.S3; // we can now create our service object
+
+    console.log('You are now logged in.');
+  } else {
+    console.log('There was a problem logging you in.');
+  }
+});
+```
+
+You can see similar identity provider examples in the
+{file:browser-configuring-wif.md Configuring Web Identity Federation}
+section of this developer guide.
+
+##### Switching from Unauthenticated to Authenticated Roles
+
+Amazon Cognito supports "authenticated" and "unauthenticated" access, the
+latter allowing for users to access your resources even though they may
+not have an account with any of your identity providers. This is useful
+if you want to display content to users prior to their logging in. Note that
+each unauthenticated user will also have a unique identity in Cognito.
+
+Users of your website would typically start in the "unauthenticated" role,
+which, using the above configuration, would simply omit a `Logins` property,
+and would set the `RoleArn` to the unauthenticated role in your configured
+IAM roles for the Cognito identity pool. In other words, your default
+configuration might look something like this:
+
+```javascript
+// set the default config object
+var creds = new AWS.CognitoIdentityCredentials({
+ AccountId: '1234567890',
+ IdentityPoolId: 'us-east-1:1699ebc0-7900-4099-b910-2df94f52a030'
+ RoleArn: 'arn:aws:iam::1234567890:role/MYAPP-CognitoIdentity-GUEST',
+});
+AWS.config.credentials = creds;
+```
+
+<p class="note">
+The "GUEST" suffix on our role ARN to indicate it is in the "unautheticated"
+role.
+</p>
+
+Now, once your user logs into an identity provider and you have a token, you
+can switch the role by simply updating the `RoleArn` parameter on the
+credentials object and adding the `Logins`:
+
+```javascript
+// Called when an identity provider (providerName) has a token
+// for a logged in user.
+function userLoggedIn(providerName, token) {
+  // update RoleArn to authenticated role and set token
+  creds.params.RoleArn = 'arn:aws:iam::1234567890:role/MYAPP-CognitoIdentity-AUTH',
+  creds.params.Logins = {};
+  creds.params.Logins[providerName] = token;
+
+  // finally, expire the credentials so we refresh on the next request
+  creds.expired = true;
+}
+```
+
+<p class="note">
+You can also choose to simply create a new
+<code>CognitoIdentityCredentials</code> object, but note that if you do,
+you will have to reset the credentials properties of any service objects
+you have created. Service objects read from global configuration only on
+object initialization.
+</p>
+
+You can read more about managing the credentials object in the API
+documentation on [AWS.CognitoIdentityCredentials][ci-creds].
+
 #### Using Web Identity Federation to Authenticate Users
 
-The recommended way to authorize users of your application to access
-AWS resources is to set up federated login through a trusted third-party
-identity provider. This feature is known as Web Identity Federation. Amazon
-Web Services currently supports authenticating users using web identity
-federation through 3 identity providers:
+You can also directly configure access for individual identity providers to
+access AWS resources using federated login. This feature is known as Web
+Identity Federation. Amazon Web Services currently supports authenticating
+users using web identity federation through 3 identity providers:
 
 1. [Login with Amazon](http://login.amazon.com/)
 2. [Facebook](https://www.facebook.com/about/login/)
@@ -216,3 +351,11 @@ Furthermore, if you host your application from within S3 and access
 resources from "*.s3.amazonaws.com" (or a specific regional endpoint), your
 requests will not be accessing an external domain and therefore will not
 require CORS. CORS will still be used for services besides S3 in this case.
+
+[cognito]: /mobile/sdkforios/developerguide/cognito-auth.html
+[cognito-console]: https://console.aws.amazon.com/cognito
+[cognito-devguide]: /mobile/sdkforios/developerguide/cognito-auth.html#create-an-identity-pool
+[wif]: /STS/latest/UsingSTS/web-identity-federation.html
+[sts]: /STS/latest/APIReference/Welcome.html
+[fb-sdk]: https://developers.facebook.com/docs/facebook-login/login-flow-for-web/v2.2
+[ci-creds]: /AWSJavaScriptSDK/latest/AWS/CognitoIdentityCredentials.html
