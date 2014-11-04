@@ -22,7 +22,7 @@ new settings. The most common settings are:
    to get logging information about service requests.
 
 More configuration settings can be found in the
-[API reference documentation](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html).
+[API reference documentation](/AWSJavaScriptSDK/latest/frames.html).
 
 If you have multiple service objects that work in different regions, you can
 look at the [Service-Specific Configuration](#Service-Specific_Configuration)
