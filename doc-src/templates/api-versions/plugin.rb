@@ -82,10 +82,27 @@ class ApiDocumentor
     add_class_documentation(svc, klass, model, version)
     add_methods(svc, klass, model)
     add_waiters(svc, klass, model)
+    add_config(svc, identifier)
 
     svc.docstring.add_tag(YARD::Tags::Tag.new(:service, identifier))
     svc.docstring.add_tag(YARD::Tags::Tag.new(:version, version))
     svc.superclass = 'AWS.Service'
+  end
+
+  def add_config(service, identifier)
+    config = YARD::CodeObjects::ClassObject.new(@root, 'AWS.Config')
+    config.groups = ["General Configuration Options"]
+
+    prop = YARDJS::CodeObjects::PropertyObject.new(config, identifier)
+    prop.property_type = :object
+    prop.parameters = []
+    prop.signature = identifier
+    prop.group = "Service-Specific Config Options"
+    prop.docstring = <<-eof
+@example Bind parameters to all newly created #{service.name} objects
+  AWS.config.#{identifier} = { params: { /* ... */ } };
+@return [AWS.Config, map] Service-specific configuration options for {#{service.path}}.
+    eof
   end
 
   def add_class_documentation(service, klass, model, api_version)
