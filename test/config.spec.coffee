@@ -73,8 +73,8 @@ describe 'AWS.Config', ->
       expect(configure(sslEnabled: false).sslEnabled).to.equal(false)
 
   describe 'httpOptions', ->
-    it 'defaults to {}', ->
-      expect(configure().httpOptions).to.eql({})
+    it 'defaults to {timeout:60000}', ->
+      expect(configure().httpOptions).to.eql(timeout: 60000)
 
   describe 'set', ->
     it 'should set a default value for a key', ->
