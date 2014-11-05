@@ -71,12 +71,40 @@ describe 'AWS.util.date', ->
 
   describe 'getDate', ->
     it 'should return current date by default', ->
-      oldDate = Date; now = {}
+      now = {}
       obj = if AWS.util.isNode() then GLOBAL else window
-      mock = helpers.createSpy().andReturn(now)
-      obj.Date = mock
+      helpers.spyOn(obj, 'Date').andCallFake -> now
       expect(util.getDate()).to.equal(now)
-      obj.Date = oldDate
+
+    describe 'systemClockOffset', ->
+      [date, mocked, config] = []
+
+      beforeEach ->
+        [date, mocked, config] = [Date, false, AWS.config]
+        obj = if AWS.util.isNode() then GLOBAL else window
+        helpers.spyOn(obj, 'Date').andCallFake (t) ->
+          if mocked
+            new date(t)
+          else
+            mocked = true
+            new date(0)
+
+      afterEach ->
+        AWS.config = config
+        AWS.config.systemClockOffset = 0
+
+      it 'returns a date with a millisecond offset if provided', ->
+        AWS.config.systemClockOffset = 10000
+        expect(util.getDate().getTime()).to.equal(10000)
+
+      it 'returns a date with a millisecond offset from a non-Config object', ->
+        AWS.config = systemClockOffset: 10000
+        expect(util.getDate().getTime()).to.equal(10000)
+        AWS.config = config
+
+      it 'returns a date with no offset if non-Config object has no systemClockOffset property', ->
+        AWS.config = {}
+        expect(util.getDate().getTime()).to.equal(0)
 
   describe 'iso8601', ->
     it 'should return date formatted as YYYYMMDDTHHnnssZ', ->

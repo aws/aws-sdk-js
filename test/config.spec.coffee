@@ -76,6 +76,10 @@ describe 'AWS.Config', ->
     it 'defaults to {timeout:60000}', ->
       expect(configure().httpOptions).to.eql(timeout: 60000)
 
+  describe 'systemClockOffset', ->
+    it 'defaults to 0', ->
+      expect(configure().systemClockOffset).to.equal(0)
+
   describe 'set', ->
     it 'should set a default value for a key', ->
       config = new AWS.Config()
