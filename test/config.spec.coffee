@@ -140,6 +140,13 @@ describe 'AWS.Config', ->
       expect(config.credentials.secretAccessKey).to.equal('secret')
       expect(config.credentials.sessionToken).to.equal('session')
 
+    it 'should deep merge httpOptions', ->
+      config = new AWS.Config()
+      config.update httpOptions: timeout: 1
+      config.update httpOptions: { xhrSync: true }
+      expect(config.httpOptions.timeout).to.equal(1)
+      expect(config.httpOptions.xhrSync).to.equal(true)
+
   describe 'getCredentials', ->
     spy = null
     config = null
