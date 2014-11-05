@@ -356,6 +356,30 @@ describe 'AWS.EventListeners', ->
         expect(creds.accessKeyId).to.equal('VALIDKEY1')
         expect(creds.secretAccessKey).to.equal('VALIDSECRET1')
 
+    it 'retries an expired signature error', ->
+      helpers.mockHttpResponse 403, {}, ''
+
+      request = makeRequest()
+      request.on 'extractError', (resp) ->
+        resp.error =
+          code: 'SignatureDoesNotMatch'
+          message: 'Signature expired: 10 is now earlier than 20'
+          retryable: false
+      response = request.send()
+      expect(response.retryCount).to.equal(service.config.maxRetries)
+
+    it 'does not retry other signature errors', ->
+      helpers.mockHttpResponse 403, {}, ''
+
+      request = makeRequest()
+      request.on 'extractError', (resp) ->
+        resp.error =
+          code: 'SignatureDoesNotMatch'
+          message: 'Invalid signature'
+          retryable: false
+      response = request.send()
+      expect(response.retryCount).to.equal(0)
+
     [301, 307].forEach (code) ->
       it 'attempts to redirect on ' + code + ' responses', ->
         helpers.mockHttpResponse code, {location: 'http://redirected'}, ''
