@@ -7,7 +7,7 @@
   },
   "cloudfront": {
     "name": "CloudFront",
-    "versions": ["2013-05-12*", "2013-11-11*"]
+    "versions": ["2013-05-12*", "2013-11-11*", "2014-05-31*"]
   },
   "cloudsearch": {
     "name": "CloudSearch"
