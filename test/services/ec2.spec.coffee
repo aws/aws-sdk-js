@@ -37,6 +37,19 @@ describe 'AWS.EC2', ->
         ].forEach (i) ->
           expect(parts).to.contain(i)
 
+  describe 'describeTags', ->
+    it 'generates correct request parameters', ->
+      req = ec2.describeTags(Filters: [{Name: 'filter', Values: ['v1', 'v2']}])
+      req.build()
+      expect(req.httpRequest.params).to.eql
+        AWSAccessKeyId: 'akid'
+        SecurityToken: 'session'
+        Action: 'DescribeTags'
+        Version: ec2.api.apiVersion
+        'Filter.1.Name': 'filter'
+        'Filter.1.Value.1': 'v1'
+        'Filter.1.Value.2': 'v2'
+
   describe 'parseResponse', ->
     body = ''
     parse = (callback) ->
