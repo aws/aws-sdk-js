@@ -34,6 +34,10 @@
     "prefix": "cognito-sync",
     "name": "CognitoSync"
   },
+  "configservice": {
+    "prefix": "config",
+    "name": "ConfigService"
+  },
   "datapipeline": {
     "name": "DataPipeline"
   },
