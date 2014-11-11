@@ -198,6 +198,23 @@
       },
       "documentation":"<p>Returns the template body for a specified stack. You can get the template for running or deleted stacks.</p> <p>For deleted stacks, GetTemplate returns the template for up to 90 days after the stack has been deleted.</p> <note> If the template does not exist, a <code>ValidationError</code> is returned. </note>"
     },
+    "GetTemplateSummary":{
+      "name":"GetTemplateSummary",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"GetTemplateSummaryInput",
+        "documentation":"<p>The input for the <a>GetTemplateSummary</a> action.</p>"
+      },
+      "output":{
+        "shape":"GetTemplateSummaryOutput",
+        "documentation":"<p>The output for the <a>GetTemplateSummary</a> action.</p>",
+        "resultWrapper":"GetTemplateSummaryResult"
+      },
+      "documentation":"<p>Returns information about a new or existing template. The <code>GetTemplateSummary</code> action is useful for viewing parameter information, such as default parameter values and parameter types, before you create or update a stack.</p> <p>You can use the <code>GetTemplateSummary</code> action when you submit a template, or you can get template information for a running or deleted stack.</p> <p>For deleted stacks, <code>GetTemplateSummary</code> returns the template information for up to 90 days after the stack has been deleted. If the template does not exist, a <code>ValidationError</code> is returned.</p>"
+    },
     "ListStackResources":{
       "name":"ListStackResources",
       "http":{
@@ -206,7 +223,7 @@
       },
       "input":{
         "shape":"ListStackResourcesInput",
-        "documentation":"<p>The input for <a>ListStackResource</a> action.</p>"
+        "documentation":"<p>The input for the <a>ListStackResource</a> action.</p>"
       },
       "output":{
         "shape":"ListStackResourcesOutput",
@@ -243,6 +260,18 @@
         "documentation":"<p>The input for the <a>SetStackPolicy</a> action.</p>"
       },
       "documentation":"<p>Sets a stack policy for a specified stack.</p>"
+    },
+    "SignalResource":{
+      "name":"SignalResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"SignalResourceInput",
+        "documentation":"<p>The input for the <a>SignalResource</a> action.</p>"
+      },
+      "documentation":"<p>Sends a signal to the specified resource with a success or failure status. You can use the SignalResource API in conjunction with a creation policy or update policy. AWS CloudFormation doesn't proceed with a stack creation or update until resources receive the required number of signals or the timeout period is exceeded. The SignalResource API is useful in cases where you want to send signals from anywhere other than an Amazon EC2 instance.</p>"
     },
     "UpdateStack":{
       "name":"UpdateStack",
@@ -358,7 +387,7 @@
         },
         "Capabilities":{
           "shape":"Capabilities",
-          "documentation":"<p>The list of capabilities that you want to allow in the stack. If your template contains certain resources, you must specify the CAPABILITY_IAM value for this parameter; otherwise, this action returns an InsufficientCapabilities error. The following resources require you to specify the capabilities parameter: <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html\">AWS::CloudFormation::Stack</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html\">AWS::IAM::AccessKey</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html\">AWS::IAM::Group</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html\">AWS::IAM::InstanceProfile</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html\">AWS::IAM::Policy</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html\">AWS::IAM::Role</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html\">AWS::IAM::User</a>, and <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html\">AWS::IAM::UserToGroupAddition</a>.</p>"
+          "documentation":"<p>A list of capabilities that you must specify before AWS CloudFormation can create or update certain stacks. Some stack templates might include resources that can affect permissions in your AWS account. For those stacks, you must explicitly acknowledge their capabilities by specifying this parameter.</p> <p>Currently, the only valid value is <code>CAPABILITY_IAM</code>, which is required for the following resources: <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html\"> AWS::CloudFormation::Stack</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html\"> AWS::IAM::AccessKey</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html\"> AWS::IAM::Group</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html\"> AWS::IAM::InstanceProfile</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html\"> AWS::IAM::Policy</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html\"> AWS::IAM::Role</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html\"> AWS::IAM::User</a>, and <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html\"> AWS::IAM::UserToGroupAddition</a>. If your stack template contains these resources, we recommend that you review any permissions associated with them. If you don't specify this parameter, this action returns an <code>InsufficientCapabilities</code> error.</p>"
         },
         "OnFailure":{
           "shape":"OnFailure",
@@ -586,6 +615,50 @@
       },
       "documentation":"<p>The output for <a>GetTemplate</a> action.</p>"
     },
+    "GetTemplateSummaryInput":{
+      "type":"structure",
+      "members":{
+        "TemplateBody":{
+          "shape":"TemplateBody",
+          "documentation":"<p>Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes. For more information about templates, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>"
+        },
+        "TemplateURL":{
+          "shape":"TemplateURL",
+          "documentation":"<p>Location of file containing the template body. The URL must point to a template (max size: 307,200 bytes) located in an Amazon S3 bucket. For more information about templates, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>"
+        },
+        "StackName":{
+          "shape":"StackNameOrId",
+          "documentation":"<p>The name or the unique identifier associated with the stack, which are not always interchangeable. For running stacks, you can specify either the stack's name or its unique stack ID. For deleted stack, you must specify the unique stack ID.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>"
+        }
+      },
+      "documentation":"<p>The input for the <a>GetTemplateSummary</a> action.</p>"
+    },
+    "GetTemplateSummaryOutput":{
+      "type":"structure",
+      "members":{
+        "Parameters":{
+          "shape":"ParameterDeclarations",
+          "documentation":"<p>A list of parameter declarations that describe various properties for each parameter.</p>"
+        },
+        "Description":{
+          "shape":"Description",
+          "documentation":"<p>The value that is defined in the <code>Description</code> property of the template.</p>"
+        },
+        "Capabilities":{
+          "shape":"Capabilities",
+          "documentation":"<p>The capabilities found within the template. Currently, AWS CloudFormation supports only the CAPABILITY_IAM capability. If your template contains IAM resources, you must specify the CAPABILITY_IAM value for this parameter when you use the <a>CreateStack</a> or <a>UpdateStack</a> actions with your template; otherwise, those actions return an InsufficientCapabilities error.</p>"
+        },
+        "CapabilitiesReason":{
+          "shape":"CapabilitiesReason",
+          "documentation":"<p>The capabilities reason found within the template.</p>"
+        },
+        "Version":{
+          "shape":"Version",
+          "documentation":"<p>The AWS template format version, which identifies the capabilities of the template.</p>"
+        }
+      },
+      "documentation":"<p>The output for the <a>GetTemplateSummary</a> action.</p>"
+    },
     "InsufficientCapabilitiesException":{
       "type":"structure",
       "members":{
@@ -624,7 +697,7 @@
           "documentation":"<p>String that identifies the start of the next list of stack resource summaries, if there is one.</p> <p>Default: There is no default value.</p>"
         }
       },
-      "documentation":"<p>The input for <a>ListStackResource</a> action.</p>"
+      "documentation":"<p>The input for the <a>ListStackResource</a> action.</p>"
     },
     "ListStackResourcesOutput":{
       "type":"structure",
@@ -732,7 +805,38 @@
       },
       "documentation":"<p>The Parameter data type.</p>"
     },
+    "ParameterDeclaration":{
+      "type":"structure",
+      "members":{
+        "ParameterKey":{
+          "shape":"ParameterKey",
+          "documentation":"<p>The name that is associated with the parameter.</p>"
+        },
+        "DefaultValue":{
+          "shape":"ParameterValue",
+          "documentation":"<p>The default value of the parameter.</p>"
+        },
+        "ParameterType":{
+          "shape":"ParameterType",
+          "documentation":"<p>The type of parameter.</p>"
+        },
+        "NoEcho":{
+          "shape":"NoEcho",
+          "documentation":"<p>Flag that indicates whether the parameter value is shown as plain text in logs and in the AWS Management Console.</p>"
+        },
+        "Description":{
+          "shape":"Description",
+          "documentation":"<p>The description that is associate with the parameter.</p>"
+        }
+      },
+      "documentation":"<p>The ParameterDeclaration data type.</p>"
+    },
+    "ParameterDeclarations":{
+      "type":"list",
+      "member":{"shape":"ParameterDeclaration"}
+    },
     "ParameterKey":{"type":"string"},
+    "ParameterType":{"type":"string"},
     "ParameterValue":{"type":"string"},
     "Parameters":{
       "type":"list",
@@ -740,6 +844,18 @@
     },
     "PhysicalResourceId":{"type":"string"},
     "ResourceProperties":{"type":"string"},
+    "ResourceSignalStatus":{
+      "type":"string",
+      "enum":[
+        "SUCCESS",
+        "FAILURE"
+      ]
+    },
+    "ResourceSignalUniqueId":{
+      "type":"string",
+      "min":1,
+      "max":64
+    },
     "ResourceStatus":{
       "type":"string",
       "enum":[
@@ -749,6 +865,7 @@
         "DELETE_IN_PROGRESS",
         "DELETE_FAILED",
         "DELETE_COMPLETE",
+        "DELETE_SKIPPED",
         "UPDATE_IN_PROGRESS",
         "UPDATE_FAILED",
         "UPDATE_COMPLETE"
@@ -774,6 +891,34 @@
         }
       },
       "documentation":"<p>The input for the <a>SetStackPolicy</a> action.</p>"
+    },
+    "SignalResourceInput":{
+      "type":"structure",
+      "required":[
+        "StackName",
+        "LogicalResourceId",
+        "UniqueId",
+        "Status"
+      ],
+      "members":{
+        "StackName":{
+          "shape":"StackNameOrId",
+          "documentation":"<p>The stack name or ID that includes the resource that you want to signal.</p>"
+        },
+        "LogicalResourceId":{
+          "shape":"LogicalResourceId",
+          "documentation":"<p>The logical ID of the resource that you want to signal. The logical ID is the name of the resource that given in the template.</p>"
+        },
+        "UniqueId":{
+          "shape":"ResourceSignalUniqueId",
+          "documentation":"<p>A unique ID of the signal. When you signal Amazon EC2 instances or Auto Scaling groups, specify the instance ID that you are signaling as the unique ID. If you send multiple signals to a single resource (such as signaling a wait condition), each signal requires a different unique ID.</p>"
+        },
+        "Status":{
+          "shape":"ResourceSignalStatus",
+          "documentation":"<p>The status of the signal, which is either success or failure. A failure signal causes AWS CloudFormation to immediately fail the stack creation or update.</p>"
+        }
+      },
+      "documentation":"<p>The input for the <a>SignalResource</a> action.</p>"
     },
     "Stack":{
       "type":"structure",
@@ -900,6 +1045,11 @@
     },
     "StackId":{"type":"string"},
     "StackName":{"type":"string"},
+    "StackNameOrId":{
+      "type":"string",
+      "min":1,
+      "pattern":"([a-zA-Z][-a-zA-Z0-9]*)|(arn:\\b(aws|aws-us-gov|aws-cn)\\b:[-a-zA-Z0-9:/._+]*)"
+    },
     "StackPolicyBody":{
       "type":"string",
       "min":1,
@@ -1236,7 +1386,7 @@
         },
         "Capabilities":{
           "shape":"Capabilities",
-          "documentation":"<p>The list of capabilities that you want to allow in the stack. If your stack contains IAM resources, you must specify the CAPABILITY_IAM value for this parameter; otherwise, this action returns an InsufficientCapabilities error. IAM resources are the following: <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html\">AWS::IAM::AccessKey</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html\">AWS::IAM::Group</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html\">AWS::IAM::Policy</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html\">AWS::IAM::User</a>, and <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html\">AWS::IAM::UserToGroupAddition</a>.</p>"
+          "documentation":"<p>A list of capabilities that you must specify before AWS CloudFormation can create or update certain stacks. Some stack templates might include resources that can affect permissions in your AWS account. For those stacks, you must explicitly acknowledge their capabilities by specifying this parameter. Currently, the only valid value is <code>CAPABILITY_IAM</code>, which is required for the following resources: <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html\"> AWS::CloudFormation::Stack</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html\"> AWS::IAM::AccessKey</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html\"> AWS::IAM::Group</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html\"> AWS::IAM::InstanceProfile</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html\"> AWS::IAM::Policy</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html\"> AWS::IAM::Role</a>, <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html\"> AWS::IAM::User</a>, and <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html\"> AWS::IAM::UserToGroupAddition</a>. If your stack template contains these resources, we recommend that you review any permissions associated with them. If you don't specify this parameter, this action returns an InsufficientCapabilities error.</p>"
         },
         "StackPolicyBody":{
           "shape":"StackPolicyBody",
@@ -1293,7 +1443,7 @@
         },
         "Capabilities":{
           "shape":"Capabilities",
-          "documentation":"<p>The capabilities found within the template. Currently, CAPABILITY_IAM is the only capability detected. If your template contains IAM resources, you must specify the CAPABILITY_IAM value for this parameter when you use the <a>CreateStack</a> or <a>UpdateStack</a> actions with your template; otherwise, those actions return an InsufficientCapabilities error.</p>"
+          "documentation":"<p>The capabilities found within the template. Currently, AWS CloudFormation supports only the CAPABILITY_IAM capability. If your template contains IAM resources, you must specify the CAPABILITY_IAM value for this parameter when you use the <a>CreateStack</a> or <a>UpdateStack</a> actions with your template; otherwise, those actions return an InsufficientCapabilities error.</p>"
         },
         "CapabilitiesReason":{
           "shape":"CapabilitiesReason",
@@ -1301,6 +1451,7 @@
         }
       },
       "documentation":"<p>The output for <a>ValidateTemplate</a> action.</p>"
-    }
+    },
+    "Version":{"type":"string"}
   }
 }
