@@ -26,6 +26,9 @@
     "prefix": "logs",
     "name": "CloudWatchLogs"
   },
+  "codedeploy": {
+    "name": "CodeDeploy"
+  },
   "cognitoidentity": {
     "prefix": "cognito-identity",
     "name": "CognitoIdentity"
