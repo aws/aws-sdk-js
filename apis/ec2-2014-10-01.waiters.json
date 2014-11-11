@@ -9,6 +9,26 @@
       "operation": "DescribeInstances",
       "acceptor_path": "Reservations[].Instances[].State.Name"
     },
+    "__InstanceStatus": {
+      "operation": "DescribeInstanceStatus",
+      "success_value": "ok"
+    },
+    "SystemStatusOk": {
+      "extends": "__InstanceStatus",
+      "acceptor_path": "InstanceStatuses[].SystemStatus.Status"
+    },
+    "InstanceStatusOk": {
+      "extends": "__InstanceStatus",
+      "acceptor_path": "InstanceStatuses[].InstanceStatus.Status"
+    },
+    "ImageAvailable": {
+      "operation": "DescribeImages",
+      "acceptor_path": "Images[].State",
+      "success_value": "available",
+      "failure_value": [
+        "failed"
+      ]
+    },
     "InstanceRunning": {
       "extends": "__InstanceState",
       "success_value": "running",
