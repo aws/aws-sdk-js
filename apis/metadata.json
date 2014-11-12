@@ -87,6 +87,9 @@
   "kms": {
     "name": "KMS"
   },
+  "lambda": {
+    "name": "Lambda"
+  },
   "opsworks": {
     "name": "OpsWorks"
   },
