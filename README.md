@@ -64,7 +64,7 @@ The SDK currently supports the following services:
     <th>API Version</th>
   </thead>
   <tbody>
-    <tr><td>Amazon CloudFront</td><td>AWS.CloudFront</td><td>2014-05-31</td></tr>
+    <tr><td>Amazon CloudFront</td><td>AWS.CloudFront</td><td>2014-10-21</td></tr>
     <tr><td>Amazon CloudSearch</td><td>AWS.CloudSearch</td><td>2013-01-01</td></tr>
     <tr><td>Amazon CloudSearch Domain</td><td>AWS.CloudSearchDomain</td><td>2013-01-01</td></tr>
     <tr><td>Amazon CloudWatch</td><td>AWS.CloudWatch</td><td>2010-08-01</td></tr>
@@ -72,10 +72,10 @@ The SDK currently supports the following services:
     <tr><td>Amazon Cognito Identity</td><td>AWS.CognitoIdentity</td><td>2014-06-30</td></tr>
     <tr><td>Amazon Cognito Sync</td><td>AWS.CognitoSync</td><td>2014-06-30</td></tr>
     <tr><td>Amazon DynamoDB</td><td>AWS.DynamoDB</td><td>2012-08-10</td></tr>
-    <tr><td>Amazon Elastic Compute Cloud</td><td>AWS.EC2</td><td>2014-06-15</td></tr>
+    <tr><td>Amazon Elastic Compute Cloud</td><td>AWS.EC2</td><td>2014-10-01</td></tr>
     <tr><td>Amazon Elastic MapReduce</td><td>AWS.EMR</td><td>2009-03-31</td></tr>
     <tr><td>Amazon Elastic Transcoder</td><td>AWS.ElasticTranscoder</td><td>2012-09-25</td></tr>
-    <tr><td>Amazon ElastiCache</td><td>AWS.ElastiCache</td><td>2014-07-15</td></tr>
+    <tr><td>Amazon ElastiCache</td><td>AWS.ElastiCache</td><td>2014-09-30</td></tr>
     <tr><td>Amazon Glacier</td><td>AWS.Glacier</td><td>2012-06-01</td></tr>
     <tr><td>Amazon Kinesis</td><td>AWS.Kinesis</td><td>2013-12-02</td></tr>
     <tr><td>Amazon Redshift</td><td>AWS.Redshift</td><td>2012-12-01</td></tr>
@@ -91,11 +91,15 @@ The SDK currently supports the following services:
     <tr><td>Auto Scaling</td><td>AWS.AutoScaling</td><td>2011-01-01</td></tr>
     <tr><td>AWS CloudFormation</td><td>AWS.CloudFormation</td><td>2010-05-15</td></tr>
     <tr><td>AWS CloudTrail</td><td>AWS.CloudTrail</td><td>2013-11-01</td></tr>
+    <tr><td>AWS CodeDeploy</td><td>AWS.CodeDeploy</td><td>2014-10-06</td></tr>
+    <tr><td>AWS Config</td><td>AWS.ConfigService</td><td>2014-11-12</td></tr>
     <tr><td>AWS Data Pipeline</td><td>AWS.DataPipeline</td><td>2012-10-29</td></tr>
     <tr><td>AWS Direct Connect</td><td>AWS.DirectConnect</td><td>2012-10-25</td></tr>
     <tr><td>AWS Elastic Beanstalk</td><td>AWS.ElasticBeanstalk</td><td>2010-12-01</td></tr>
     <tr><td>AWS Identity and Access Management</td><td>AWS.IAM</td><td>2010-05-08</td></tr>
     <tr><td>AWS Import/Export</td><td>AWS.ImportExport</td><td>2010-06-01</td></tr>
+    <tr><td>AWS Key Management Service</td><td>AWS.KMS</td><td>2014-11-01</td></tr>
+    <tr><td>AWS Lambda</td><td>AWS.Lambda</td><td>2014-11-11</td></tr>
     <tr><td>AWS OpsWorks</td><td>AWS.OpsWorks</td><td>2013-02-18</td></tr>
     <tr><td>AWS Security Token Service</td><td>AWS.STS</td><td>2011-06-15</td></tr>
     <tr><td>AWS Storage Gateway</td><td>AWS.StorageGateway</td><td>2013-06-30</td></tr>
