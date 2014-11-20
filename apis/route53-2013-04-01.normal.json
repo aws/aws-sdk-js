@@ -2030,7 +2030,10 @@
           "shape":"ResourceDescription",
           "documentation":"<p>An optional comment about your hosted zone. If you don't want to specify a comment, you can omit the <code>HostedZoneConfig</code> and <code>Comment</code> elements from the XML document.</p>"
         },
-        "PrivateZone":{"shape":"IsPrivateZone"}
+        "PrivateZone":{
+          "shape":"IsPrivateZone",
+          "documentation":"<p>A value that indicates whether this is a private hosted zone. The value is returned in the response; do not specify it in the request.</p>"
+        }
       },
       "documentation":"<p>A complex type that contains an optional comment about your hosted zone. If you don't want to specify a comment, you can omit the <code>HostedZoneConfig</code> and <code>Comment</code> elements from the XML document.</p>"
     },
