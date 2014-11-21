@@ -387,6 +387,7 @@ describe 'AWS.EventListeners', ->
         service.config.maxRedirects = 5
         response = makeRequest(->)
         expect(response.request.httpRequest.endpoint.host).to.equal('redirected')
+        expect(response.request.httpRequest.headers.Host).to.equal('redirected')
         expect(response.error.retryable).to.equal(true)
         expect(response.redirectCount).to.equal(service.config.maxRedirects)
         expect(delays).to.eql([0, 0, 0, 0, 0])
@@ -396,6 +397,7 @@ describe 'AWS.EventListeners', ->
       service.config.maxRetries = 0
       response = makeRequest(->)
       expect(response.request.httpRequest.endpoint.host).not.to.equal('redirected')
+      expect(response.request.httpRequest.headers.Host).not.to.equal('redirected')
       expect(response.error.retryable).to.equal(false)
 
   describe 'success', ->
