@@ -15,7 +15,7 @@
       "name":"AbortMultipartUpload",
       "http":{
         "method":"DELETE",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"AbortMultipartUploadRequest"},
       "errors":[
@@ -25,14 +25,14 @@
           "documentation":"The specified multipart upload does not exist."
         }
       ],
-      "documentation":"<p>Aborts a multipart upload.</p>\n<p>To verify that all parts have been removed, so you don't get charged for the part storage, you should call the List Parts operation and ensure the parts list is empty.</p>",
+      "documentation":"<p>Aborts a multipart upload.</p> <p>To verify that all parts have been removed, so you don't get charged for the part storage, you should call the List Parts operation and ensure the parts list is empty.</p>",
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadAbort.html"
     },
     "CompleteMultipartUpload":{
       "name":"CompleteMultipartUpload",
       "http":{
         "method":"POST",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"CompleteMultipartUploadRequest"},
       "output":{"shape":"CompleteMultipartUploadOutput"},
@@ -43,7 +43,7 @@
       "name":"CopyObject",
       "http":{
         "method":"PUT",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"CopyObjectRequest"},
       "output":{"shape":"CopyObjectOutput"},
@@ -81,11 +81,11 @@
       "name":"CreateMultipartUpload",
       "http":{
         "method":"POST",
-        "requestUri":"/{Bucket}/{Key}?uploads"
+        "requestUri":"/{Bucket}/{Key+}?uploads"
       },
       "input":{"shape":"CreateMultipartUploadRequest"},
       "output":{"shape":"CreateMultipartUploadOutput"},
-      "documentation":"<p>Initiates a multipart upload and returns an upload ID.</p>\n<p><b>Note:</b> After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.</p>",
+      "documentation":"<p>Initiates a multipart upload and returns an upload ID.</p> <p><b>Note:</b> After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.</p>",
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadInitiate.html",
       "alias":"InitiateMultipartUpload"
     },
@@ -153,7 +153,7 @@
       "name":"DeleteObject",
       "http":{
         "method":"DELETE",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"DeleteObjectRequest"},
       "output":{"shape":"DeleteObjectOutput"},
@@ -297,7 +297,7 @@
       "name":"GetObject",
       "http":{
         "method":"GET",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"GetObjectRequest"},
       "output":{"shape":"GetObjectOutput"},
@@ -315,7 +315,7 @@
       "name":"GetObjectAcl",
       "http":{
         "method":"GET",
-        "requestUri":"/{Bucket}/{Key}?acl"
+        "requestUri":"/{Bucket}/{Key+}?acl"
       },
       "input":{"shape":"GetObjectAclRequest"},
       "output":{"shape":"GetObjectAclOutput"},
@@ -333,7 +333,7 @@
       "name":"GetObjectTorrent",
       "http":{
         "method":"GET",
-        "requestUri":"/{Bucket}/{Key}?torrent"
+        "requestUri":"/{Bucket}/{Key+}?torrent"
       },
       "input":{"shape":"GetObjectTorrentRequest"},
       "output":{"shape":"GetObjectTorrentOutput"},
@@ -361,7 +361,7 @@
       "name":"HeadObject",
       "http":{
         "method":"HEAD",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"HeadObjectRequest"},
       "output":{"shape":"HeadObjectOutput"},
@@ -432,7 +432,7 @@
       "name":"ListParts",
       "http":{
         "method":"GET",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"ListPartsRequest"},
       "output":{"shape":"ListPartsOutput"},
@@ -495,11 +495,7 @@
         "method":"PUT",
         "requestUri":"/{Bucket}?policy"
       },
-      "input":{
-        "shape":"PutBucketPolicyRequest",
-        "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
-        "locationName":"PutBucketPolicyRequest"
-      },
+      "input":{"shape":"PutBucketPolicyRequest"},
       "documentation":"Replaces a policy on a bucket. If the bucket already has a policy, the one in this request completely replaces it.",
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTpolicy.html"
     },
@@ -547,7 +543,7 @@
       "name":"PutObject",
       "http":{
         "method":"PUT",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"PutObjectRequest"},
       "output":{"shape":"PutObjectOutput"},
@@ -558,7 +554,7 @@
       "name":"PutObjectAcl",
       "http":{
         "method":"PUT",
-        "requestUri":"/{Bucket}/{Key}?acl"
+        "requestUri":"/{Bucket}/{Key+}?acl"
       },
       "input":{"shape":"PutObjectAclRequest"},
       "errors":[
@@ -575,7 +571,7 @@
       "name":"RestoreObject",
       "http":{
         "method":"POST",
-        "requestUri":"/{Bucket}/{Key}?restore"
+        "requestUri":"/{Bucket}/{Key+}?restore"
       },
       "input":{"shape":"RestoreObjectRequest"},
       "errors":[
@@ -593,18 +589,18 @@
       "name":"UploadPart",
       "http":{
         "method":"PUT",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"UploadPartRequest"},
       "output":{"shape":"UploadPartOutput"},
-      "documentation":"<p>Uploads a part in a multipart upload.</p>\n<p><b>Note:</b> After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.</p>",
+      "documentation":"<p>Uploads a part in a multipart upload.</p> <p><b>Note:</b> After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.</p>",
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadUploadPart.html"
     },
     "UploadPartCopy":{
       "name":"UploadPartCopy",
       "http":{
         "method":"PUT",
-        "requestUri":"/{Bucket}/{Key}"
+        "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"UploadPartCopyRequest"},
       "output":{"shape":"UploadPartCopyOutput"},
@@ -709,7 +705,8 @@
         "ap-southeast-2",
         "ap-northeast-1",
         "sa-east-1",
-        ""
+        "",
+        "cn-north-1"
       ]
     },
     "BucketLoggingStatus":{
@@ -785,6 +782,24 @@
       "flattened":true
     },
     "CacheControl":{"type":"string"},
+    "CloudFunction":{"type":"string"},
+    "CloudFunctionConfiguration":{
+      "type":"structure",
+      "members":{
+        "Id":{"shape":"NotificationId"},
+        "Event":{
+          "shape":"Event",
+          "deprecated":true
+        },
+        "Events":{
+          "shape":"Events",
+          "locationName":"Event"
+        },
+        "CloudFunction":{"shape":"CloudFunction"},
+        "InvocationRole":{"shape":"CloudFunctionInvocationRole"}
+      }
+    },
+    "CloudFunctionInvocationRole":{"type":"string"},
     "Code":{"type":"string"},
     "CommonPrefix":{
       "type":"structure",
@@ -817,13 +832,19 @@
           "shape":"ServerSideEncryption",
           "location":"header",
           "locationName":"x-amz-server-side-encryption",
-          "documentation":"The Server-side encryption algorithm used when storing this object in S3."
+          "documentation":"The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms)."
         },
         "VersionId":{
           "shape":"ObjectVersionId",
           "location":"header",
           "locationName":"x-amz-version-id",
           "documentation":"Version of the object."
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
+          "documentation":"If present, specifies the AWS KMS key used to encrypt the object."
         }
       }
     },
@@ -848,7 +869,7 @@
         "MultipartUpload":{
           "shape":"CompletedMultipartUpload",
           "locationName":"CompleteMultipartUpload",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/"
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         },
         "UploadId":{
           "shape":"MultipartUploadId",
@@ -923,7 +944,7 @@
           "shape":"ServerSideEncryption",
           "location":"header",
           "locationName":"x-amz-server-side-encryption",
-          "documentation":"The Server-side encryption algorithm used when storing this object in S3."
+          "documentation":"The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms)."
         },
         "SSECustomerAlgorithm":{
           "shape":"SSECustomerAlgorithm",
@@ -936,6 +957,12 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5",
           "documentation":"If server-side encryption with a customer-provided encryption key was requested, the response will include this header to provide round trip message integrity verification of the customer-provided encryption key."
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
+          "documentation":"If present, specifies the AWS KMS key used to encrypt the object."
         }
       },
       "payload":"CopyObjectResult"
@@ -1070,7 +1097,7 @@
           "shape":"ServerSideEncryption",
           "location":"header",
           "locationName":"x-amz-server-side-encryption",
-          "documentation":"The Server-side encryption algorithm used when storing this object in S3."
+          "documentation":"The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms)."
         },
         "StorageClass":{
           "shape":"StorageClass",
@@ -1088,7 +1115,7 @@
           "shape":"SSECustomerAlgorithm",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-algorithm",
-          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256)."
+          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms)."
         },
         "SSECustomerKey":{
           "shape":"SSECustomerKey",
@@ -1119,6 +1146,12 @@
           "location":"header",
           "locationName":"x-amz-copy-source-server-side-encryption-customer-key-MD5",
           "documentation":"Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error."
+        },
+        "CopySourceSSEKMSKeyId":{
+          "shape":"CopySourceSSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-copy-source-server-side-encryption-aws-kms-key-id",
+          "documentation":"Specifies the AWS KMS key ID to use for object encryption."
         }
       }
     },
@@ -1152,8 +1185,15 @@
     "CopySourceIfUnmodifiedSince":{"type":"timestamp"},
     "CopySourceRange":{"type":"string"},
     "CopySourceSSECustomerAlgorithm":{"type":"string"},
-    "CopySourceSSECustomerKey":{"type":"string"},
+    "CopySourceSSECustomerKey":{
+      "type":"string",
+      "sensitive":true
+    },
     "CopySourceSSECustomerKeyMD5":{"type":"string"},
+    "CopySourceSSEKMSKeyId":{
+      "type":"string",
+      "sensitive":true
+    },
     "CopySourceVersionId":{"type":"string"},
     "CreateBucketConfiguration":{
       "type":"structure",
@@ -1191,7 +1231,7 @@
         },
         "CreateBucketConfiguration":{
           "shape":"CreateBucketConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"CreateBucketConfiguration"
         },
         "GrantFullControl":{
@@ -1247,7 +1287,7 @@
           "shape":"ServerSideEncryption",
           "location":"header",
           "locationName":"x-amz-server-side-encryption",
-          "documentation":"The Server-side encryption algorithm used when storing this object in S3."
+          "documentation":"The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms)."
         },
         "SSECustomerAlgorithm":{
           "shape":"SSECustomerAlgorithm",
@@ -1260,6 +1300,12 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5",
           "documentation":"If server-side encryption with a customer-provided encryption key was requested, the response will include this header to provide round trip message integrity verification of the customer-provided encryption key."
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
+          "documentation":"If present, specifies the AWS KMS key used to encrypt the object."
         }
       }
     },
@@ -1356,7 +1402,7 @@
           "shape":"ServerSideEncryption",
           "location":"header",
           "locationName":"x-amz-server-side-encryption",
-          "documentation":"The Server-side encryption algorithm used when storing this object in S3."
+          "documentation":"The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms)."
         },
         "StorageClass":{
           "shape":"StorageClass",
@@ -1374,7 +1420,7 @@
           "shape":"SSECustomerAlgorithm",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-algorithm",
-          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256)."
+          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms)."
         },
         "SSECustomerKey":{
           "shape":"SSECustomerKey",
@@ -1387,6 +1433,12 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5",
           "documentation":"Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error."
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
+          "documentation":"Specifies the AWS KMS key ID to use for object encryption."
         }
       }
     },
@@ -1577,7 +1629,7 @@
         },
         "Delete":{
           "shape":"Delete",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"Delete"
         },
         "MFA":{
@@ -1638,7 +1690,18 @@
     },
     "Event":{
       "type":"string",
-      "enum":["s3:ReducedRedundancyLostObject"]
+      "enum":[
+        "s3:ReducedRedundancyLostObject",
+        "s3:ObjectCreated:Put",
+        "s3:ObjectCreated:Post",
+        "s3:ObjectCreated:Copy",
+        "s3:ObjectCreated:CompleteMultipartUpload"
+      ]
+    },
+    "Events":{
+      "type":"list",
+      "member":{"shape":"Event"},
+      "flattened":true
     },
     "Expiration":{"type":"timestamp"},
     "ExpirationStatus":{
@@ -1754,7 +1817,9 @@
     "GetBucketNotificationOutput":{
       "type":"structure",
       "members":{
-        "TopicConfiguration":{"shape":"TopicConfiguration"}
+        "TopicConfiguration":{"shape":"TopicConfiguration"},
+        "QueueConfiguration":{"shape":"QueueConfiguration"},
+        "CloudFunctionConfiguration":{"shape":"CloudFunctionConfiguration"}
       }
     },
     "GetBucketNotificationRequest":{
@@ -2015,7 +2080,7 @@
           "shape":"ServerSideEncryption",
           "location":"header",
           "locationName":"x-amz-server-side-encryption",
-          "documentation":"The Server-side encryption algorithm used when storing this object in S3."
+          "documentation":"The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms)."
         },
         "Metadata":{
           "shape":"Metadata",
@@ -2034,6 +2099,12 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5",
           "documentation":"If server-side encryption with a customer-provided encryption key was requested, the response will include this header to provide round trip message integrity verification of the customer-provided encryption key."
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
+          "documentation":"If present, specifies the AWS KMS key used to encrypt the object."
         }
       },
       "payload":"Body"
@@ -2131,7 +2202,7 @@
           "shape":"SSECustomerAlgorithm",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-algorithm",
-          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256)."
+          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms)."
         },
         "SSECustomerKey":{
           "shape":"SSECustomerKey",
@@ -2144,6 +2215,12 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5",
           "documentation":"Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error."
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
+          "documentation":"Specifies the AWS KMS key ID to use for object encryption."
         }
       }
     },
@@ -2341,7 +2418,7 @@
           "shape":"ServerSideEncryption",
           "location":"header",
           "locationName":"x-amz-server-side-encryption",
-          "documentation":"The Server-side encryption algorithm used when storing this object in S3."
+          "documentation":"The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms)."
         },
         "Metadata":{
           "shape":"Metadata",
@@ -2360,6 +2437,12 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5",
           "documentation":"If server-side encryption with a customer-provided encryption key was requested, the response will include this header to provide round trip message integrity verification of the customer-provided encryption key."
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
+          "documentation":"If present, specifies the AWS KMS key used to encrypt the object."
         }
       }
     },
@@ -2420,7 +2503,7 @@
           "shape":"SSECustomerAlgorithm",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-algorithm",
-          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256)."
+          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms)."
         },
         "SSECustomerKey":{
           "shape":"SSECustomerKey",
@@ -2433,6 +2516,12 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5",
           "documentation":"Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error."
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
+          "documentation":"Specifies the AWS KMS key ID to use for object encryption."
         }
       }
     },
@@ -2526,6 +2615,7 @@
           "shape":"Prefix",
           "documentation":"When a prefix is provided in the request, this field contains the specified prefix. The result contains only keys starting with the specified prefix."
         },
+        "Delimiter":{"shape":"Delimiter"},
         "NextUploadIdMarker":{
           "shape":"NextUploadIdMarker",
           "documentation":"When a list is truncated, this element specifies the value that should be used for the upload-id-marker request parameter in a subsequent request."
@@ -2625,6 +2715,7 @@
         },
         "Name":{"shape":"BucketName"},
         "Prefix":{"shape":"Prefix"},
+        "Delimiter":{"shape":"Delimiter"},
         "MaxKeys":{"shape":"MaxKeys"},
         "CommonPrefixes":{"shape":"CommonPrefixList"},
         "EncodingType":{
@@ -2694,6 +2785,7 @@
         "Contents":{"shape":"ObjectList"},
         "Name":{"shape":"BucketName"},
         "Prefix":{"shape":"Prefix"},
+        "Delimiter":{"shape":"Delimiter"},
         "MaxKeys":{"shape":"MaxKeys"},
         "CommonPrefixes":{"shape":"CommonPrefixList"},
         "EncodingType":{
@@ -2940,32 +3032,34 @@
       "members":{
         "NoncurrentDays":{
           "shape":"Days",
-          "documentation":"Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.  For information about the noncurrent days calculations, see <a href=\"/AmazonS3/latest/dev/s3-access-control.html\">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide."
+          "documentation":"Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href=\"/AmazonS3/latest/dev/s3-access-control.html\">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide."
         }
       },
-      "documentation":"Specifies when noncurrent object versions expire. Upon expiration, Amazon S3 permanently deletes the noncurrent object versions.\n\nYou set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that Amazon S3 delete noncurrent object versions at a specific period in the object's lifetime."
+      "documentation":"Specifies when noncurrent object versions expire. Upon expiration, Amazon S3 permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that Amazon S3 delete noncurrent object versions at a specific period in the object's lifetime."
     },
     "NoncurrentVersionTransition":{
       "type":"structure",
       "members":{
         "NoncurrentDays":{
           "shape":"Days",
-          "documentation":"Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.  For information about the noncurrent days calculations, see <a href=\"/AmazonS3/latest/dev/s3-access-control.html\">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide."
+          "documentation":"Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href=\"/AmazonS3/latest/dev/s3-access-control.html\">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide."
         },
         "StorageClass":{
           "shape":"TransitionStorageClass",
           "documentation":"The class of storage used to store the object."
         }
       },
-      "documentation":"Container for the transition rule that describes when noncurrent objects transition to the GLACIER storage class.\n\nIf your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the GLACIER storage class at a specific period in the object's lifetime."
+      "documentation":"Container for the transition rule that describes when noncurrent objects transition to the GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the GLACIER storage class at a specific period in the object's lifetime."
     },
     "NotificationConfiguration":{
       "type":"structure",
-      "required":["TopicConfiguration"],
       "members":{
-        "TopicConfiguration":{"shape":"TopicConfiguration"}
+        "TopicConfiguration":{"shape":"TopicConfiguration"},
+        "QueueConfiguration":{"shape":"QueueConfiguration"},
+        "CloudFunctionConfiguration":{"shape":"CloudFunctionConfiguration"}
       }
     },
+    "NotificationId":{"type":"string"},
     "Object":{
       "type":"structure",
       "members":{
@@ -3152,7 +3246,7 @@
         },
         "AccessControlPolicy":{
           "shape":"AccessControlPolicy",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"AccessControlPolicy"
         },
         "Bucket":{
@@ -3209,7 +3303,7 @@
         },
         "CORSConfiguration":{
           "shape":"CORSConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"CORSConfiguration"
         },
         "ContentMD5":{
@@ -3236,7 +3330,7 @@
         },
         "LifecycleConfiguration":{
           "shape":"LifecycleConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"LifecycleConfiguration"
         }
       },
@@ -3256,7 +3350,7 @@
         },
         "BucketLoggingStatus":{
           "shape":"BucketLoggingStatus",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"BucketLoggingStatus"
         },
         "ContentMD5":{
@@ -3286,7 +3380,7 @@
         },
         "NotificationConfiguration":{
           "shape":"NotificationConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"NotificationConfiguration"
         }
       },
@@ -3335,7 +3429,7 @@
         },
         "RequestPaymentConfiguration":{
           "shape":"RequestPaymentConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"RequestPaymentConfiguration"
         }
       },
@@ -3360,7 +3454,7 @@
         },
         "Tagging":{
           "shape":"Tagging",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"Tagging"
         }
       },
@@ -3391,7 +3485,7 @@
         },
         "VersioningConfiguration":{
           "shape":"VersioningConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"VersioningConfiguration"
         }
       },
@@ -3416,7 +3510,7 @@
         },
         "WebsiteConfiguration":{
           "shape":"WebsiteConfiguration",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"WebsiteConfiguration"
         }
       },
@@ -3437,7 +3531,7 @@
         },
         "AccessControlPolicy":{
           "shape":"AccessControlPolicy",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"AccessControlPolicy"
         },
         "Bucket":{
@@ -3507,7 +3601,7 @@
           "shape":"ServerSideEncryption",
           "location":"header",
           "locationName":"x-amz-server-side-encryption",
-          "documentation":"The Server-side encryption algorithm used when storing this object in S3."
+          "documentation":"The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms)."
         },
         "VersionId":{
           "shape":"ObjectVersionId",
@@ -3526,6 +3620,12 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5",
           "documentation":"If server-side encryption with a customer-provided encryption key was requested, the response will include this header to provide round trip message integrity verification of the customer-provided encryption key."
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
+          "documentation":"If present, specifies the AWS KMS key used to encrypt the object."
         }
       }
     },
@@ -3544,7 +3644,8 @@
         },
         "Body":{
           "shape":"Body",
-          "streaming":true
+          "streaming":true,
+          "documentation":"Object data."
         },
         "Bucket":{
           "shape":"BucketName",
@@ -3637,7 +3738,7 @@
           "shape":"ServerSideEncryption",
           "location":"header",
           "locationName":"x-amz-server-side-encryption",
-          "documentation":"The Server-side encryption algorithm used when storing this object in S3."
+          "documentation":"The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms)."
         },
         "StorageClass":{
           "shape":"StorageClass",
@@ -3655,7 +3756,7 @@
           "shape":"SSECustomerAlgorithm",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-algorithm",
-          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256)."
+          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms)."
         },
         "SSECustomerKey":{
           "shape":"SSECustomerKey",
@@ -3668,9 +3769,31 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5",
           "documentation":"Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error."
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
+          "documentation":"Specifies the AWS KMS key ID to use for object encryption."
         }
       },
       "payload":"Body"
+    },
+    "Queue":{"type":"string"},
+    "QueueConfiguration":{
+      "type":"structure",
+      "members":{
+        "Id":{"shape":"NotificationId"},
+        "Event":{
+          "shape":"Event",
+          "deprecated":true
+        },
+        "Events":{
+          "shape":"Events",
+          "locationName":"Event"
+        },
+        "Queue":{"shape":"Queue"}
+      }
     },
     "Quiet":{"type":"boolean"},
     "Range":{"type":"string"},
@@ -3756,7 +3879,7 @@
         },
         "RestoreRequest":{
           "shape":"RestoreRequest",
-          "xmlNamespace":"http://s3.amazonaws.com/doc/2006-03-01/",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"RestoreRequest"
         }
       },
@@ -3824,8 +3947,15 @@
       "flattened":true
     },
     "SSECustomerAlgorithm":{"type":"string"},
-    "SSECustomerKey":{"type":"string"},
+    "SSECustomerKey":{
+      "type":"string",
+      "sensitive":true
+    },
     "SSECustomerKeyMD5":{"type":"string"},
+    "SSEKMSKeyId":{
+      "type":"string",
+      "sensitive":true
+    },
     "ServerSideEncryption":{
       "type":"string",
       "enum":["AES256"]
@@ -3893,8 +4023,14 @@
     "TopicConfiguration":{
       "type":"structure",
       "members":{
+        "Id":{"shape":"NotificationId"},
+        "Events":{
+          "shape":"Events",
+          "locationName":"Event"
+        },
         "Event":{
           "shape":"Event",
+          "deprecated":true,
           "documentation":"Bucket event for which to send notifications."
         },
         "Topic":{
@@ -3950,7 +4086,7 @@
           "shape":"ServerSideEncryption",
           "location":"header",
           "locationName":"x-amz-server-side-encryption",
-          "documentation":"The Server-side encryption algorithm used when storing this object in S3."
+          "documentation":"The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms)."
         },
         "SSECustomerAlgorithm":{
           "shape":"SSECustomerAlgorithm",
@@ -3963,6 +4099,12 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5",
           "documentation":"If server-side encryption with a customer-provided encryption key was requested, the response will include this header to provide round trip message integrity verification of the customer-provided encryption key."
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
+          "documentation":"If present, specifies the AWS KMS key used to encrypt the object."
         }
       },
       "payload":"CopyPartResult"
@@ -4039,7 +4181,7 @@
           "shape":"SSECustomerAlgorithm",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-algorithm",
-          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256)."
+          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms)."
         },
         "SSECustomerKey":{
           "shape":"SSECustomerKey",
@@ -4070,6 +4212,12 @@
           "location":"header",
           "locationName":"x-amz-copy-source-server-side-encryption-customer-key-MD5",
           "documentation":"Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error."
+        },
+        "CopySourceSSEKMSKeyId":{
+          "shape":"CopySourceSSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
+          "documentation":"Specifies the AWS KMS key ID to use for object encryption."
         }
       }
     },
@@ -4080,7 +4228,7 @@
           "shape":"ServerSideEncryption",
           "location":"header",
           "locationName":"x-amz-server-side-encryption",
-          "documentation":"The Server-side encryption algorithm used when storing this object in S3."
+          "documentation":"The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms)."
         },
         "ETag":{
           "shape":"ETag",
@@ -4099,6 +4247,12 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5",
           "documentation":"If server-side encryption with a customer-provided encryption key was requested, the response will include this header to provide round trip message integrity verification of the customer-provided encryption key."
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
+          "documentation":"If present, specifies the AWS KMS key used to encrypt the object."
         }
       }
     },
@@ -4152,7 +4306,7 @@
           "shape":"SSECustomerAlgorithm",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-algorithm",
-          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256)."
+          "documentation":"Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms)."
         },
         "SSECustomerKey":{
           "shape":"SSECustomerKey",
@@ -4165,6 +4319,12 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5",
           "documentation":"Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error."
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
+          "documentation":"Specifies the AWS KMS key ID to use for object encryption."
         }
       },
       "payload":"Body"

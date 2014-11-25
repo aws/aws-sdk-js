@@ -12,14 +12,16 @@ service name in the list below).
 
 The 5 services that come with the default hosted package of the SDK are:
 
-* [AWS.DynamoDB](/AWSJavaScriptSDK/latest/frames.html#!AWS/DynamoDB.html)
-* [AWS.ElasticTranscoder](/AWSJavaScriptSDK/latest/frames.html#!AWS/ElasticTranscoder.html)
-* [AWS.S3](/AWSJavaScriptSDK/latest/frames.html#!AWS/S3.html)
-* [AWS.SNS](/AWSJavaScriptSDK/latest/frames.html#!AWS/SNS.html)
-* [AWS.SQS](/AWSJavaScriptSDK/latest/frames.html#!AWS/SQS.html)
-* [AWS.Kinesis](/AWSJavaScriptSDK/latest/frames.html#!AWS/Kinesis.html)
-* [AWS.CloudWatch](/AWSJavaScriptSDK/latest/frames.html#!AWS/CloudWatch.html)
-* [AWS.STS](/AWSJavaScriptSDK/latest/frames.html#!AWS/STS.html)
+* [AWS.CloudWatch](/AWSJavaScriptSDK/latest/AWS/CloudWatch.html)
+* [AWS.CognitoIdentity](/AWSJavaScriptSDK/latest/AWS/CognitoIdentity.html)
+* [AWS.CognitoSync](/AWSJavaScriptSDK/latest/AWS/CognitoSync.html)
+* [AWS.DynamoDB](/AWSJavaScriptSDK/latest/AWS/DynamoDB.html)
+* [AWS.ElasticTranscoder](/AWSJavaScriptSDK/latest/AWS/ElasticTranscoder.html)
+* [AWS.Kinesis](/AWSJavaScriptSDK/latest/AWS/Kinesis.html)
+* [AWS.S3](/AWSJavaScriptSDK/latest/AWS/S3.html)
+* [AWS.SNS](/AWSJavaScriptSDK/latest/AWS/SNS.html)
+* [AWS.SQS](/AWSJavaScriptSDK/latest/AWS/SQS.html)
+* [AWS.STS](/AWSJavaScriptSDK/latest/AWS/STS.html)
 
 <div class="clear"></div>
 
@@ -42,6 +44,22 @@ var dynamodb = new AWS.DynamoDB({region: 'us-west-2'});
 ```
 
 This object will continue to use the globally provided credentials.
+
+### Global Service-Specific Configuration
+
+In addition to providing service-specific configuration directly on an
+individual service object, you can also configure the SDK globally to apply
+service-specific configuration to all newly created service objects of a
+given type. For example, to configure *all* `AWS.DynamoDB` objects to use the
+"us-west-2" region, you can add the following to the global `AWS.config`:
+
+```javascript
+AWS.config.dynamodb = { region: 'us-west-2' };
+```
+
+By adding configuration to `AWS.config.SVCIDENTIFIER`, where "SVCIDENTIFIER"
+is the service identifier (found on each class in the [API reference][api]),
+you can set options globally for a given service.
 
 ## Passing Parameters to a Service Operation
 
@@ -74,3 +92,5 @@ have it auto-filled with this value. This value can be overridden by passing
 a new value in the service operation. Additionally, operations that do not
 require a `Bucket` parameter will automatically ignore this bound parameter,
 so the `s3bucket` object can still be used to call `listBuckets`, for instance.
+
+[api]: /AWSJavaScriptSDK/latest

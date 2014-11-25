@@ -10,7 +10,7 @@
     "timestampFormat":"unixTimestamp",
     "protocol":"json"
   },
-  "documentation":"<p> This is the <i>Amazon Elastic MapReduce API Reference</i>. This guide provides descriptions and\n         samples of the Amazon Elastic MapReduce APIs.</p>\n\n      <p>Amazon Elastic MapReduce (Amazon EMR) is a web service that makes it easy to process large amounts of\n         data efficiently. Amazon EMR uses Hadoop processing combined with several AWS\n         products to do tasks such as web indexing, data mining, log file analysis, machine\n         learning, scientific simulation, and data warehousing.</p>",
+  "documentation":"<p> This is the <i>Amazon Elastic MapReduce API Reference</i>. This guide provides descriptions and samples of the Amazon Elastic MapReduce APIs.</p> <p>Amazon Elastic MapReduce (Amazon EMR) is a web service that makes it easy to process large amounts of data efficiently. Amazon EMR uses Hadoop processing combined with several AWS products to do tasks such as web indexing, data mining, log file analysis, machine learning, scientific simulation, and data warehousing.</p>",
   "operations":{
     "AddInstanceGroups":{
       "name":"AddInstanceGroups",
@@ -34,10 +34,10 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not\n         completed.</p>"
+          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>"
         }
       ],
-      "documentation":"<p>AddInstanceGroups adds an instance group to a running cluster.</p>\n\n      <examples>\n         <queryrequest>POST / HTTP/1.1\nContent-Type: application/x-amz-json-1.1\nX-Amz-Target: ElasticMapReduce.AddInstanceGroups\nContent-Length: 168\nUser-Agent: aws-sdk-ruby/1.9.2 ruby/1.9.3 i386-mingw32\nHost: us-east-1.elasticmapreduce.amazonaws.com\nX-Amz-Date: 20130715T223346Z\nX-Amz-Content-Sha256: ac5a7193b1283898dd822a4b16ca36963879bb010d2dbe57198439973ab2a7d3\nAuthorization: AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20130715/us-east-1/elasticmapreduce/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=4c5e7eb762ea45f292a5cd1a1cc56ed60009e19a9dba3d6e5e4e67e96d43af11\nAccept: */*\n\n\n{\n    \"JobFlowId\": \"j-3U7TSX5GZFD8Y\",\n    \"InstanceGroups\": [{\n        \"Name\": \"Task Instance Group\",\n        \"InstanceRole\": \"TASK\",\n        \"InstanceCount\": 2,\n        \"InstanceType\": \"m1.small\",\n        \"Market\": \"ON_DEMAND\"\n    }]\n}\n\n</queryrequest>\n\n         <queryresponse>HTTP/1.1 200 OK\nx-amzn-RequestId: 9da5a349-ed9e-11e2-90db-69a5154aeb8d\nContent-Type: application/x-amz-json-1.1\nContent-Length: 71\nDate: Mon, 15 Jul 2013 22:33:47 GMT\n\n{\n    \"InstanceGroupIds\": [\"ig-294A6A2KWT4WB\"],\n    \"JobFlowId\": \"j-3U7TSX5GZFD8Y\"\n}\n\n</queryresponse>\n      </examples>"
+      "documentation":"<p>AddInstanceGroups adds an instance group to a running cluster.</p>"
     },
     "AddJobFlowSteps":{
       "name":"AddJobFlowSteps",
@@ -61,10 +61,10 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not\n         completed.</p>"
+          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>"
         }
       ],
-      "documentation":"<p> AddJobFlowSteps adds new steps to a running job flow. A maximum of 256 steps are allowed\n      in each job flow. </p>\n      <p>If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/AddMoreThan256Steps.html\">Add More than 256 Steps to a Job Flow</a> in the <i>Amazon Elastic MapReduce Developer's Guide</i>.</p>\n      <p> A step specifies the location of a JAR file stored either on the master node of the job\n         flow or in Amazon S3. Each step is performed by the main function of the main class of the\n         JAR file. The main class can be specified either in the manifest of the JAR or by using the\n         MainFunction parameter of the step. </p>\n      <p> Elastic MapReduce executes each step in the order listed. For a step to be considered\n         complete, the main function must exit with a zero exit code and all Hadoop jobs started\n         while the step was running must have completed and run successfully. </p>\n      <p> You can only add steps to a job flow that is in one of the following states: STARTING,\n      BOOTSTRAPPING, RUNNING, or WAITING.</p>\n\n      <examples>\n         <queryrequest>POST / HTTP/1.1\nContent-Type: application/x-amz-json-1.1\nX-Amz-Target: ElasticMapReduce.AddJobFlowSteps\nContent-Length: 426\nUser-Agent: aws-sdk-ruby/1.9.2 ruby/1.9.3 i386-mingw32\nHost: us-east-1.elasticmapreduce.amazonaws.com\nX-Amz-Date: 20130716T210948Z\nX-Amz-Content-Sha256: 9e5ad0a93c22224947ce98eea94f766103d91b28fa82eb60d0cb8b6f9555a6b2\nAuthorization: AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20130716/us-east-1/elasticmapreduce/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=2a2393390760ae85eb74ee3a539e1d758bfdd8815a1a6d6f14d4a2fbcfdcd5b7\nAccept: */*\n\n{\n    \"JobFlowId\": \"j-3TS0OIYO4NFN\",\n    \"Steps\": [{\n        \"Name\": \"Example Jar Step\",\n        \"ActionOnFailure\": \"CANCEL_AND_WAIT\",\n        \"HadoopJarStep\": {\n            \"Jar\": \"s3n:\\\\/\\\\/elasticmapreduce\\\\/samples\\\\/cloudburst\\\\/cloudburst.jar\",\n            \"Args\": [\n                \"s3n:\\\\/\\\\/elasticmapreduce\\\\/samples\\\\/cloudburst\\\\/input\\\\/s_suis.br\",\n                \"s3n:\\\\/\\\\/elasticmapreduce\\\\/samples\\\\/cloudburst\\\\/input\\\\/100k.br\",\n                \"s3n:\\\\/\\\\/examples-bucket\\\\/cloudburst\\\\/output\",\n                \"36\",\n                \"3\",\n                \"0\",\n                \"1\",\n                \"240\",\n                \"48\",\n                \"24\",\n                \"24\",\n                \"128\",\n                \"16\"\n            ]\n        }\n    }]\n}\n</queryrequest>\n\n         <queryresponse>HTTP/1.1 200 OK\nx-amzn-RequestId: 6514261f-ee5b-11e2-9345-5332e9ab2e6d\nContent-Type: application/x-amz-json-1.1\nContent-Length: 0\nDate: Tue, 16 Jul 2013 21:05:07 GMT\n\n         </queryresponse>\n      </examples>"
+      "documentation":"<p> AddJobFlowSteps adds new steps to a running job flow. A maximum of 256 steps are allowed in each job flow. </p> <p>If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/AddMoreThan256Steps.html\">Add More than 256 Steps to a Job Flow</a> in the <i>Amazon Elastic MapReduce Developer's Guide</i>.</p> <p> A step specifies the location of a JAR file stored either on the master node of the job flow or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step. </p> <p> Elastic MapReduce executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully. </p> <p> You can only add steps to a job flow that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.</p>"
     },
     "AddTags":{
       "name":"AddTags",
@@ -74,11 +74,11 @@
       },
       "input":{
         "shape":"AddTagsInput",
-        "documentation":"<p>This input identifies a cluster and a list of tags to attach.                                                                                                                         \n      </p>"
+        "documentation":"<p>This input identifies a cluster and a list of tags to attach. </p>"
       },
       "output":{
         "shape":"AddTagsOutput",
-        "documentation":"<p>This output indicates the result of adding tags to a resource.                                                                                                                        \n      </p>"
+        "documentation":"<p>This output indicates the result of adding tags to a resource. </p>"
       },
       "errors":[
         {
@@ -93,7 +93,7 @@
           "documentation":"<p>This exception occurs when there is something wrong with user input.</p>"
         }
       ],
-      "documentation":"<p>Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs.         \n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.                            \n      </p>\n      <examples>\n         <queryrequest>POST / HTTP/1.1                                                                                                                                                \nContent-Type: application/x-amz-json-1.1                                                                                                                                                       \nX-Amz-Target: ElasticMapReduce.AddTags                                                                                                                                                         \nAUTHPARAMS                                                                                                                                                                                     \n{                                                                                                                                                                                              \n  \"ResourceId\": \"j-3U7TSX5GZFD8Y\",                                                                                                                                                             \n  \"Tags\": [{                                 \n        \"Key\": \"stack\",                                                                                                                                                                          \n      \"Value\": \"Production\"                                                                                                                                                                    \n  },                                                                                                                                                                                           \n  {                                                                                                                                                                                            \n      \"Key\": \"hbase\"                                                                                                                                                                           \n  }]                                                                                                                                                                                           \n}                                                                                                                                                                                              \n</queryrequest>\n\n         <queryresponse>HTTP/1.1 200 OK                                                                                                                                               \nx-amzn-RequestId: 9da5a349-ed9e-11e2-90db-69a5154aeb8d                                                                                                                                         \nContent-Type: application/x-amz-json-1.1                                                                                                                                                       \nContent-Length: 71                                                                                                                                                                             \nDate: Mon, 15 Jul 2013 22:33:47 GMT                                                                                                                                                            \n{                                                                                                                                                                                              \n}                                                                                                                                                                                              \n </queryresponse>\n      </examples>"
+      "documentation":"<p>Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>. </p>"
     },
     "DescribeCluster":{
       "name":"DescribeCluster",
@@ -146,11 +146,11 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not\n         completed.</p>"
+          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>"
         }
       ],
       "deprecated":true,
-      "documentation":"<p> This API is deprecated and will eventually be removed. We recommend you use <a>ListClusters</a>,\n         <a>DescribeCluster</a>, <a>ListSteps</a>, <a>ListInstanceGroups</a> and <a>ListBootstrapActions</a>\n         instead.</p>\n      <p> DescribeJobFlows returns a list of job flows that match all of the supplied parameters.\n         The parameters can include a list of job flow IDs, job flow states, and restrictions on job\n         flow creation date and time.</p>\n      <p> Regardless of supplied parameters, only job flows created within the last two months are\n         returned.</p>\n      <p> If no parameters are supplied, then job flows matching either of the following criteria\n         are returned:</p>\n      <ul>\n         <li>Job flows created and completed in the last two weeks</li>\n         <li> Job flows created within the last two months that are in one of the following states:\n               <code>RUNNING</code>, <code>WAITING</code>, <code>SHUTTING_DOWN</code>,\n               <code>STARTING</code>\n         </li>\n      </ul>\n      <p> Amazon Elastic MapReduce can return a maximum of 512 job flow descriptions. </p>\n      <examples>\n         <queryrequest>POST / HTTP/1.1\nContent-Type: application/x-amz-json-1.1\nX-Amz-Target: ElasticMapReduce.DescribeJobFlows\nContent-Length: 62\nUser-Agent: aws-sdk-ruby/1.9.2 ruby/1.9.3 i386-mingw32\nHost: us-east-1.elasticmapreduce.amazonaws.com\nX-Amz-Date: 20130715T220330Z\nX-Amz-Content-Sha256: fce83af973f96f173512aca2845c56862b946feb1de0600326f1365b658a0e39\nAuthorization: AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20130715/us-east-1/elasticmapreduce/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=29F98a6f44e05ad54fe1e8b3d1a7101ab08dc3ad348995f89c533693cee2bb3b\nAccept: */*\n\n{\n    \"JobFlowIds\": [\"j-ZKIY4CKQRX72\"],\n    \"DescriptionType\": \"EXTENDED\"\n}\n</queryrequest>\n\n         <queryresponse>HTTP/1.1 200 OK\nx-amzn-RequestId: 634d4142-ed9a-11e2-bbba-b56d7d016ec4\nContent-Type: application/x-amz-json-1.1\nContent-Length: 1624\nDate: Mon, 15 Jul 2013 22:03:31 GMT\n\n{\"JobFlows\": [{\n    \"AmiVersion\": \"2.3.6\",\n    \"BootstrapActions\": [],\n    \"ExecutionStatusDetail\": {\n        \"CreationDateTime\": 1.373923429E9,\n        \"EndDateTime\": 1.373923995E9,\n        \"LastStateChangeReason\": \"Steps completed\",\n        \"ReadyDateTime\": 1.373923754E9,\n        \"StartDateTime\": 1.373923754E9,\n        \"State\": \"COMPLETED\"\n    },\n    \"Instances\": {\n        \"HadoopVersion\": \"1.0.3\",\n        \"InstanceCount\": 1,\n        \"InstanceGroups\": [{\n            \"CreationDateTime\": 1.373923429E9,\n            \"EndDateTime\": 1.373923995E9,\n            \"InstanceGroupId\": \"ig-3SRUWV3E0NB7K\",\n            \"InstanceRequestCount\": 1,\n            \"InstanceRole\": \"MASTER\",\n            \"InstanceRunningCount\": 0,\n            \"InstanceType\": \"m1.small\",\n            \"LastStateChangeReason\": \"Job flow terminated\",\n            \"Market\": \"ON_DEMAND\",\n            \"Name\": \"Master InstanceGroup\",\n            \"ReadyDateTime\": 1.37392375E9,\n            \"StartDateTime\": 1.373923646E9,\n            \"State\": \"ENDED\"\n        }],\n        \"KeepJobFlowAliveWhenNoSteps\": false,\n        \"MasterInstanceId\": \"i-8c4fbbef\",\n        \"MasterInstanceType\": \"m1.small\",\n        \"MasterPublicDnsName\": \"ec2-107-20-46-140.compute-1.amazonaws.com\",\n        \"NormalizedInstanceHours\": 1,\n        \"Placement\": {\"AvailabilityZone\": \"us-east-1a\"},\n        \"TerminationProtected\": false\n    },\n    \"JobFlowId\": \"j-ZKIY4CKQRX72\",\n    \"Name\": \"Development Job Flow\",\n    \"Steps\": [{\n        \"ExecutionStatusDetail\": {\n            \"CreationDateTime\": 1.373923429E9,\n            \"EndDateTime\": 1.373923914E9,\n            \"StartDateTime\": 1.373923754E9,\n            \"State\": \"COMPLETED\"\n        },\n        \"StepConfig\": {\n            \"ActionOnFailure\": \"CANCEL_AND_WAIT\",\n            \"HadoopJarStep\": {\n                \"Args\": [\n                    \"-input\",\n                    \"s3://elasticmapreduce/samples/wordcount/input\",\n                    \"-output\",\n                    \"s3://examples-bucket/example-output\",\n                    \"-mapper\",\n                    \"s3://elasticmapreduce/samples/wordcount/wordSplitter.py\",\n                    \"-reducer\",\n                    \"aggregate\"\n                ],\n                \"Jar\": \"/home/hadoop/contrib/streaming/hadoop-streaming.jar\",\n                \"Properties\": []\n            },\n            \"Name\": \"Example Streaming Step\"\n        }\n    }],\n    \"SupportedProducts\": [],\n    \"VisibleToAllUsers\": false\n}]}\n</queryresponse>\n      </examples>"
+      "documentation":"<p> This API is deprecated and will eventually be removed. We recommend you use <a>ListClusters</a>, <a>DescribeCluster</a>, <a>ListSteps</a>, <a>ListInstanceGroups</a> and <a>ListBootstrapActions</a> instead.</p> <p> DescribeJobFlows returns a list of job flows that match all of the supplied parameters. The parameters can include a list of job flow IDs, job flow states, and restrictions on job flow creation date and time.</p> <p> Regardless of supplied parameters, only job flows created within the last two months are returned.</p> <p> If no parameters are supplied, then job flows matching either of the following criteria are returned:</p> <ul> <li>Job flows created and completed in the last two weeks</li> <li> Job flows created within the last two months that are in one of the following states: <code>RUNNING</code>, <code>WAITING</code>, <code>SHUTTING_DOWN</code>, <code>STARTING</code> </li> </ul> <p> Amazon Elastic MapReduce can return a maximum of 512 job flow descriptions. </p>"
     },
     "DescribeStep":{
       "name":"DescribeStep",
@@ -193,7 +193,7 @@
       },
       "output":{
         "shape":"ListBootstrapActionsOutput",
-        "documentation":"<p>This output contains the boostrap actions detail\n      .</p>"
+        "documentation":"<p>This output contains the boostrap actions detail .</p>"
       },
       "errors":[
         {
@@ -237,7 +237,7 @@
           "documentation":"<p>This exception occurs when there is something wrong with user input.</p>"
         }
       ],
-      "documentation":"<p>Provides the status of all clusters visible to this AWS account. Allows you to filter the list of clusters based on certain criteria; for example, filtering by cluster creation date and time or by status.\n         This call returns a maximum of 50 clusters per call, but returns a marker to track the paging of the cluster list across multiple ListClusters calls.        \n      </p>"
+      "documentation":"<p>Provides the status of all clusters visible to this AWS account. Allows you to filter the list of clusters based on certain criteria; for example, filtering by cluster creation date and time or by status. This call returns a maximum of 50 clusters per call, but returns a marker to track the paging of the cluster list across multiple ListClusters calls. </p>"
     },
     "ListInstanceGroups":{
       "name":"ListInstanceGroups",
@@ -295,7 +295,7 @@
           "documentation":"<p>This exception occurs when there is something wrong with user input.</p>"
         }
       ],
-      "documentation":"<p>Provides information about the cluster instances that Amazon EMR provisions on behalf of a user when it creates the cluster. \n         For example, this operation indicates when the EC2 instances reach the Ready state, when instances become available to Amazon EMR to use for jobs, and the IP addresses for cluster instances, etc.\n      </p>"
+      "documentation":"<p>Provides information about the cluster instances that Amazon EMR provisions on behalf of a user when it creates the cluster. For example, this operation indicates when the EC2 instances reach the Ready state, when instances become available to Amazon EMR to use for jobs, and the IP addresses for cluster instances, etc. </p>"
     },
     "ListSteps":{
       "name":"ListSteps",
@@ -324,7 +324,7 @@
           "documentation":"<p>This exception occurs when there is something wrong with user input.</p>"
         }
       ],
-      "documentation":"<p>Provides a list of steps for the cluster. \n      </p>"
+      "documentation":"<p>Provides a list of steps for the cluster. </p>"
     },
     "ModifyInstanceGroups":{
       "name":"ModifyInstanceGroups",
@@ -344,10 +344,10 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not\n         completed.</p>"
+          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>"
         }
       ],
-      "documentation":"<p>ModifyInstanceGroups modifies the number of nodes and configuration settings of an instance\n         group. The input parameters include the new target instance count for the group and the\n         instance group ID. The call will either succeed or fail atomically.</p>\n\n      <examples>\n         <queryrequest>POST / HTTP/1.1\nContent-Type: application/x-amz-json-1.1\nX-Amz-Target: ElasticMapReduce.ModifyInstanceGroups\nContent-Length: 77\nUser-Agent: aws-sdk-ruby/1.9.2 ruby/1.9.3 i386-mingw32\nHost: us-east-1.elasticmapreduce.amazonaws.com\nX-Amz-Date: 20130716T205843Z\nX-Amz-Content-Sha256: bb1af3d0c6c6a1a09f21ccd7f04a0e2e6c9ce5b5810b0f6777560fe4f81bda8c\nAuthorization: AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20130716/us-east-1/elasticmapreduce/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=17bbbb4448a1f47a14d5657445e9de5cadf16bed58b850585f80865882133b33\nAccept: */*\n\n{\"InstanceGroups\": [{\n    \"InstanceGroupId\": \"ig-1S8NWT31S2OVG\",\n    \"InstanceCount\": 5\n}]}\n</queryrequest>\n\n         <queryresponse>HTTP/1.1 200 OK\nx-amzn-RequestId: 80a74808-ee5a-11e2-90db-69a5154aeb8d\nContent-Type: application/x-amz-json-1.1\nContent-Length: 0\nDate: Tue, 16 Jul 2013 20:58:44 GMT\n\n         </queryresponse>\n      </examples>"
+      "documentation":"<p>ModifyInstanceGroups modifies the number of nodes and configuration settings of an instance group. The input parameters include the new target instance count for the group and the instance group ID. The call will either succeed or fail atomically.</p>"
     },
     "RemoveTags":{
       "name":"RemoveTags",
@@ -357,11 +357,11 @@
       },
       "input":{
         "shape":"RemoveTagsInput",
-        "documentation":"<p>This input identifies a cluster and a list of tags to remove.                                                                                                                         \n      </p>"
+        "documentation":"<p>This input identifies a cluster and a list of tags to remove. </p>"
       },
       "output":{
         "shape":"RemoveTagsOutput",
-        "documentation":"<p>This output indicates the result of removing tags from a resource.                                                                                                                    \n      </p>"
+        "documentation":"<p>This output indicates the result of removing tags from a resource. </p>"
       },
       "errors":[
         {
@@ -376,7 +376,7 @@
           "documentation":"<p>This exception occurs when there is something wrong with user input.</p>"
         }
       ],
-      "documentation":"<p>Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs.    \n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.                            \n      </p>\n      <p>The following example removes the stack tag with value Prod from a cluster:</p>\n      <examples>\n         <queryrequest>POST / HTTP/1.1                                                                                                                                                \nContent-Type: application/x-amz-json-1.1                                                                                                                                                       \nX-Amz-Target: ElasticMapReduce.RemoveTags                                                                                                                                                      \nAUTHPARAMS                                                                                                                                                                                     \n{                                                                                                                                                                                              \n  \"ResourceId\": \"j-3U7TSX5GZFD8Y\",                                                                                                                                                             \n  \"Tags\": [{                                                                                                                                                                                   \n      \"Key\": \"stack\",                                                                                                                                                                          \n      \"Value\": \"Prod\"                                                                                                                                                                          \n  }]                                                                                                                                                                                           \n}                                                                                                                                                                                              \n</queryrequest>\n\n         <queryresponse>HTTP/1.1 200 OK                                                                                                                                               \nx-amzn-RequestId: 9da5a349-ed9e-11e2-90db-69a5154aeb8d                                                                                                                                         \nContent-Type: application/x-amz-json-1.1                                                                                                                                                       \nContent-Length: 71                                                                                                                                                                             \nDate: Mon, 15 Jul 2013 22:33:47 GMT                                                                                                                                                            \n{                                                                                                                                                                                              \n}                                                                                                                                                                                              \n </queryresponse>\n         <p>The following example removes the stack and hbase tags from a cluster:</p>\n         <queryrequest>POST / HTTP/1.1                                                                                                                                                \nContent-Type: application/x-amz-json-1.1                                                                                                                                                       \nX-Amz-Target: ElasticMapReduce.RemoveTags                                                                                                                                                      \nAUTHPARAMS                                                                                                                                                                                     \n{                                                                                                                                                                                              \n  \"ResourceId\": \"j-3U7TSX5GZFD8Y\",                                                                                                                                                             \n  \"Tags\": [{                                                                                                                                                                                   \n      \"Key\": \"stack\"                                                                                                                                                                           \n  },                                                                                                                                                                                           \n  {                                                                                                                                                                                            \n      \"Key\": \"hbase\"                                                                                                                                                                           \n  }]                                                                                                                                                                                           \n}                                                                                                                                                                                              \n</queryrequest>\n\n         <queryresponse>HTTP/1.1 200 OK                                                                                                                                               \nx-amzn-RequestId: 9da5a349-ed9e-11e2-90db-69a5154aeb8d                                                                                                                                         \nContent-Type: application/x-amz-json-1.1                                                                                                                                                       \nContent-Length: 71                                                                                                                                                                             \nDate: Mon, 15 Jul 2013 22:33:47 GMT                                                                                                                                                            \n{                                                                                                                                                                                              \n}                                                                                                                                                                                              \n </queryresponse>\n      </examples>"
+      "documentation":"<p>Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>. </p> <p>The following example removes the stack tag with value Prod from a cluster:</p>"
     },
     "RunJobFlow":{
       "name":"RunJobFlow",
@@ -400,10 +400,10 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not\n         completed.</p>"
+          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>"
         }
       ],
-      "documentation":"<p> RunJobFlow creates and starts running a new job flow. The job flow will run the steps\n         specified. Once the job flow completes, the cluster is stopped and the HDFS partition is\n         lost. To prevent loss of data, configure the last step of the job flow to store results in\n         Amazon S3. If the <a>JobFlowInstancesConfig</a> <code>KeepJobFlowAliveWhenNoSteps</code> parameter is\n         set to <code>TRUE</code>, the job flow will transition to the WAITING state rather than\n         shutting down once the steps have completed. </p>\n      \n      <p>For additional protection, you can set the \n         <a>JobFlowInstancesConfig</a> <code>TerminationProtected</code> parameter to <code>TRUE</code> to lock the \n         job flow and prevent it from being \n         terminated by API call, user intervention, or in the event of a job flow error.</p>\n\n      <p>A maximum of 256 steps are allowed in each job flow.</p>\n      \n      <p>If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/AddMoreThan256Steps.html\">Add More than 256 Steps to a Job Flow</a> in the <i>Amazon Elastic MapReduce Developer's Guide</i>.</p>\n\n      <p>For long running job flows, we recommend that you periodically store your results.</p>\n\n      <examples>\n         <queryrequest>POST / HTTP/1.1\nContent-Type: application/x-amz-json-1.1\nX-Amz-Target: ElasticMapReduce.RunJobFlow\nContent-Length: 734\nUser-Agent: aws-sdk-ruby/1.9.2 ruby/1.9.3 i386-mingw32\nHost: us-east-1.elasticmapreduce.amazonaws.com\nX-Amz-Date: 20130715T210803Z\nX-Amz-Content-Sha256: 8676d21986e4628a89fb1232a1344063778d4ffc23d10be02b437e0d53a24db3\nAuthorization: AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20130715/us-east-1/elasticmapreduce/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=71f79725c4dbe77c0e842718485f0b37fe6df69e1153c80f7748ebd9617ca2f3\nAccept: */*\n\n\n{\n    \"Name\": \"Development Job Flow\",\n    \"Instances\": {\n        \"KeepJobFlowAliveWhenNoSteps\": \"false\",\n        \"TerminationProtected\": \"false\",\n        \"InstanceGroups\": [{\n            \"Name\": \"Master Instance Group\",\n            \"InstanceRole\": \"MASTER\",\n            \"InstanceCount\": 1,\n            \"InstanceType\": \"m1.small\",\n            \"Market\": \"ON_DEMAND\"\n        }]\n    },\n    \"Steps\": [{\n        \"Name\": \"Example Streaming Step\",\n        \"ActionOnFailure\": \"CANCEL_AND_WAIT\",\n        \"HadoopJarStep\": {\n            \"Jar\": \"/home/hadoop/contrib/streaming/hadoop-streaming.jar\",\n            \"Args\": [\n                \"-input\",\n                \"s3://elasticmapreduce/samples/wordcount/input\",\n                \"-output\",\n                \"s3://examples-bucket/example-output\",\n                \"-mapper\",\n                \"s3://elasticmapreduce/samples/wordcount/wordSplitter.py\",\n                \"-reducer\",\n                \"aggregate\"\n            ]\n        }\n    }],\n    \"BootstrapActions\": [],\n    \"VisibleToAllUsers\": \"false\",\n    \"NewSupportedProducts\": [],\n    \"AmiVersion\": \"latest\"\n}\n</queryrequest>\n\n         <queryresponse>HTTP/1.1 200 OK\nx-amzn-RequestId: a4406d6b-ed92-11e2-9787-192218ecb460\nContent-Type: application/x-amz-json-1.1\nContent-Length: 31\nDate: Mon, 15 Jul 2013 21:08:05 GMT\n\n{\"JobFlowId\": \"j-ZKIY4CKQRX72\"}\n </queryresponse>\n      </examples>"
+      "documentation":"<p> RunJobFlow creates and starts running a new job flow. The job flow will run the steps specified. Once the job flow completes, the cluster is stopped and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the <a>JobFlowInstancesConfig</a> <code>KeepJobFlowAliveWhenNoSteps</code> parameter is set to <code>TRUE</code>, the job flow will transition to the WAITING state rather than shutting down once the steps have completed. </p> <p>For additional protection, you can set the <a>JobFlowInstancesConfig</a> <code>TerminationProtected</code> parameter to <code>TRUE</code> to lock the job flow and prevent it from being terminated by API call, user intervention, or in the event of a job flow error.</p> <p>A maximum of 256 steps are allowed in each job flow.</p> <p>If your job flow is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/AddMoreThan256Steps.html\">Add More than 256 Steps to a Job Flow</a> in the <i>Amazon Elastic MapReduce Developer's Guide</i>.</p> <p>For long running job flows, we recommend that you periodically store your results.</p>"
     },
     "SetTerminationProtection":{
       "name":"SetTerminationProtection",
@@ -423,10 +423,10 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not\n         completed.</p>"
+          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>"
         }
       ],
-      "documentation":"<p> SetTerminationProtection locks a job flow so the Amazon EC2 instances in the cluster \n         cannot be terminated by user intervention, an API call, or in the event of a job-flow error. \n         The cluster still terminates upon successful completion of the job flow. Calling \n         SetTerminationProtection on a job flow is analogous to calling the \n         Amazon EC2 DisableAPITermination API on all of the EC2 instances in a cluster.</p>\n      \n      <p> SetTerminationProtection is used to prevent accidental termination of a job flow and to \n         ensure that in the event of an error, the instances will persist so you can recover \n         any data stored in their ephemeral instance storage.</p>\n      \n      <p> To terminate a job flow that has been locked by setting SetTerminationProtection to <code>true</code>, \n         you must first unlock the job flow by a subsequent call to SetTerminationProtection \n         in which you set the value to <code>false</code>. </p>\n      \n      <p> For more information, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/UsingEMR_TerminationProtection.html\">Protecting a Job Flow from Termination</a> in the \n         <i>Amazon Elastic MapReduce Developer's Guide.</i></p>\n      <examples>\n         <queryrequest>POST / HTTP/1.1\nContent-Type: application/x-amz-json-1.1\nX-Amz-Target: ElasticMapReduce.SetTerminationProtection\nContent-Length: 61\nUser-Agent: aws-sdk-ruby/1.9.2 ruby/1.9.3 i386-mingw32\nHost: us-east-1.elasticmapreduce.amazonaws.com\nX-Amz-Date: 20130716T211420Z\nX-Amz-Content-Sha256: c362fadae0fce377aa63f04388aeb90c53cedb17a8bfbb8cffcb10c2378137f9\nAuthorization: AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20130716/us-east-1/elasticmapreduce/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=764b6aa1a38733cadff35a2e884887e9f1208a422266bc83ac77e8d0b80bd4cf\nAccept: */*\n\n{\n    \"JobFlowIds\": [\"j-3TS0OIYO4NFN\"],\n    \"TerminationProtected\": true\n}\n</queryrequest>\n         \n         <queryresponse>HTTP/1.1 200 OK\nx-amzn-RequestId: af23b1db-ee5c-11e2-9787-192218ecb460\nContent-Type: application/x-amz-json-1.1\nContent-Length: 0\nDate: Tue, 16 Jul 2013 21:14:21 GMT\n\n         </queryresponse>\n      </examples>"
+      "documentation":"<p> SetTerminationProtection locks a job flow so the Amazon EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a job flow is analogous to calling the Amazon EC2 DisableAPITermination API on all of the EC2 instances in a cluster.</p> <p> SetTerminationProtection is used to prevent accidental termination of a job flow and to ensure that in the event of an error, the instances will persist so you can recover any data stored in their ephemeral instance storage.</p> <p> To terminate a job flow that has been locked by setting SetTerminationProtection to <code>true</code>, you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to <code>false</code>. </p> <p> For more information, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/UsingEMR_TerminationProtection.html\">Protecting a Job Flow from Termination</a> in the <i>Amazon Elastic MapReduce Developer's Guide.</i></p>"
     },
     "SetVisibleToAllUsers":{
       "name":"SetVisibleToAllUsers",
@@ -446,10 +446,10 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not\n         completed.</p>"
+          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>"
         }
       ],
-      "documentation":"<p>Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified job flows. This action works on running job flows. You can also set the visibility of \n      a job flow when you launch it using the <code>VisibleToAllUsers</code> parameter of <a>RunJobFlow</a>. The SetVisibleToAllUsers action can  be called only by an IAM user who created the job flow or the AWS account that owns the job flow.</p>\n      <examples>\n         <queryrequest>POST / HTTP/1.1\nContent-Type: application/x-amz-json-1.1\nX-Amz-Target: ElasticMapReduce.SetVisibleToAllUsers\nContent-Length: 58\nUser-Agent: aws-sdk-ruby/1.9.2 ruby/1.9.3 i386-mingw32\nHost: us-east-1.elasticmapreduce.amazonaws.com\nX-Amz-Date: 20130715T221616Z\nX-Amz-Content-Sha256: 2ff32d11eab2383d764ffcb97571454e798689ecd09a7b1bb2327e22b0b930d4\nAuthorization: AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20130715/us-east-1/elasticmapreduce/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=e1a00b37787d9ccc43c9de32f1f0a73813b0bd6643d4db7762b62a7092d51997\nAccept: */*\n\n{\n    \"JobFlowIds\": [\"j-ZKIY4CKQRX72\"],\n    \"VisibleToAllUsers\": true\n}\n\n</queryrequest>\n         \n         <queryresponse>HTTP/1.1 200 OK\nx-amzn-RequestId: 2be9cde9-ed9c-11e2-82b6-2351cde3f33f\nContent-Type: application/x-amz-json-1.1\nContent-Length: 0\nDate: Mon, 15 Jul 2013 22:16:18 GMT\n\n\n         </queryresponse>\n      </examples>"
+      "documentation":"<p>Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified job flows. This action works on running job flows. You can also set the visibility of a job flow when you launch it using the <code>VisibleToAllUsers</code> parameter of <a>RunJobFlow</a>. The SetVisibleToAllUsers action can be called only by an IAM user who created the job flow or the AWS account that owns the job flow.</p>"
     },
     "TerminateJobFlows":{
       "name":"TerminateJobFlows",
@@ -469,10 +469,10 @@
             "httpStatusCode":500
           },
           "exception":true,
-          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not\n         completed.</p>"
+          "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>"
         }
       ],
-      "documentation":"<p> \n         TerminateJobFlows shuts a list of job flows down. When a job flow is shut down, any step\n         not yet completed is canceled and the EC2 instances on which the job flow is running are\n         stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was\n         specified when the job flow was created. \n      </p>\n      <p>\n        The call to TerminateJobFlows is asynchronous. Depending on the configuration of the job flow, \n        it may take up to 5-20 minutes for the job flow to \n        completely terminate and release allocated resources, such as Amazon EC2 instances.\n      </p>\n      \n      <examples>\n         <queryrequest>POST / HTTP/1.1\nContent-Type: application/x-amz-json-1.1\nX-Amz-Target: ElasticMapReduce.TerminateJobFlows\nContent-Length: 33\nUser-Agent: aws-sdk-ruby/1.9.2 ruby/1.9.3 i386-mingw32\nHost: us-east-1.elasticmapreduce.amazonaws.com\nX-Amz-Date: 20130716T211858Z\nX-Amz-Content-Sha256: ab64713f61e066e80a6083844b9249b6c6362d34a7ae7393047aa46d38b9e315\nAuthorization: AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20130716/us-east-1/elasticmapreduce/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=9791416eaf09f36aa753a324b0de27ff5cc7084b8548cc748487a2bcb3439d58\nAccept: */*\n\n{\"JobFlowIds\": [\"j-3TS0OIYO4NFN\"]}\n</queryrequest>\n\n         <queryresponse>HTTP/1.1 200 OK\nx-amzn-RequestId: 5551a7c9-ee5d-11e2-9542-25296c300ff0\nContent-Type: application/x-amz-json-1.1\nContent-Length: 0\nDate: Tue, 16 Jul 2013 21:18:59 GMT\n         </queryresponse>\n      </examples>"
+      "documentation":"<p> TerminateJobFlows shuts a list of job flows down. When a job flow is shut down, any step not yet completed is canceled and the EC2 instances on which the job flow is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the job flow was created. </p> <p> The call to TerminateJobFlows is asynchronous. Depending on the configuration of the job flow, it may take up to 5-20 minutes for the job flow to completely terminate and release allocated resources, such as Amazon EC2 instances. </p>"
     }
   },
   "shapes":{
@@ -526,7 +526,7 @@
       "members":{
         "JobFlowId":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>A string that uniquely identifies the job flow. This identifier is returned by\n            <a>RunJobFlow</a> and can also be obtained from <a>ListClusters</a>. </p>"
+          "documentation":"<p>A string that uniquely identifies the job flow. This identifier is returned by <a>RunJobFlow</a> and can also be obtained from <a>ListClusters</a>. </p>"
         },
         "Steps":{
           "shape":"StepConfigList",
@@ -561,13 +561,13 @@
           "documentation":"<p>A list of tags to associate with a cluster and propagate to Amazon EC2 instances. Tags are user-defined key/value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.</p>"
         }
       },
-      "documentation":"<p>This input identifies a cluster and a list of tags to attach.                                                                                                                         \n      </p>"
+      "documentation":"<p>This input identifies a cluster and a list of tags to attach. </p>"
     },
     "AddTagsOutput":{
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>This output indicates the result of adding tags to a resource.                                                                                                                        \n      </p>"
+      "documentation":"<p>This output indicates the result of adding tags to a resource. </p>"
     },
     "Application":{
       "type":"structure",
@@ -589,7 +589,7 @@
           "documentation":"<p>This option is for advanced users only. This is meta information about third-party applications that third-party vendors use for testing purposes.</p>"
         }
       },
-      "documentation":"<p>An application is any Amazon or third-party software that you can add to the cluster. This structure contains a list of strings that indicates the software to use with the cluster and accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation\n         script as bootstrap action argument. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html\">Launch a Job Flow on the MapR Distribution for Hadoop</a>. Currently supported values are:</p>\n      <ul>        \n         <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li>\n         <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li>\n         <li>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition, respectively.</li>\n      </ul>"
+      "documentation":"<p>An application is any Amazon or third-party software that you can add to the cluster. This structure contains a list of strings that indicates the software to use with the cluster and accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action argument. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html\">Launch a Job Flow on the MapR Distribution for Hadoop</a>. Currently supported values are:</p> <ul> <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li> <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li> <li>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition, respectively.</li> </ul>"
     },
     "ApplicationList":{
       "type":"list",
@@ -654,11 +654,11 @@
         },
         "RequestedAmiVersion":{
           "shape":"String",
-          "documentation":"<p>The AMI version requested for this cluster.<!-- For more information, see <a>JobFlowDetail$AmiVersion</a>.--></p>"
+          "documentation":"<p>The AMI version requested for this cluster.</p>"
         },
         "RunningAmiVersion":{
           "shape":"String",
-          "documentation":"<p>The AMI version running on this cluster. This differs from the requested version only if the requested version is a meta version, such as \"latest\". <!--For more information, see <a>JobFlowDetail$AmiVersion</a>.--></p>"
+          "documentation":"<p>The AMI version running on this cluster. This differs from the requested version only if the requested version is a meta version, such as \"latest\". </p>"
         },
         "AutoTerminate":{
           "shape":"Boolean",
@@ -666,11 +666,11 @@
         },
         "TerminationProtected":{
           "shape":"Boolean",
-          "documentation":"<p>Indicates whether Amazon EMR will lock the cluster to prevent the EC2 instances from being terminated by an API call or \n      user intervention, or in the event of a cluster error.</p>"
+          "documentation":"<p>Indicates whether Amazon EMR will lock the cluster to prevent the EC2 instances from being terminated by an API call or user intervention, or in the event of a cluster error.</p>"
         },
         "VisibleToAllUsers":{
           "shape":"Boolean",
-          "documentation":"<p>Indicates whether the job flow is visible to all IAM users of the AWS account associated with the job flow. If this value is set to <code>true</code>, all IAM users of that AWS account can view and manage the job flow if they have the proper policy permissions set. \n         If this value is <code>false</code>, only the IAM user that created the cluster can view and manage it. This value can be changed using the <a>SetVisibleToAllUsers</a> action.</p>"
+          "documentation":"<p>Indicates whether the job flow is visible to all IAM users of the AWS account associated with the job flow. If this value is set to <code>true</code>, all IAM users of that AWS account can view and manage the job flow if they have the proper policy permissions set. If this value is <code>false</code>, only the IAM user that created the cluster can view and manage it. This value can be changed using the <a>SetVisibleToAllUsers</a> action.</p>"
         },
         "Applications":{
           "shape":"ApplicationList",
@@ -901,11 +901,11 @@
       "members":{
         "Ec2KeyName":{
           "shape":"String",
-          "documentation":"<p>The name of the Amazon EC2 key pair to use when connecting with SSH into the master node as\n         a user named \"hadoop\".</p>"
+          "documentation":"<p>The name of the Amazon EC2 key pair to use when connecting with SSH into the master node as a user named \"hadoop\".</p>"
         },
         "Ec2SubnetId":{
           "shape":"String",
-          "documentation":"<p>\n         To launch the job flow in Amazon VPC, set this parameter to the identifier of the Amazon VPC subnet where \n         you want the job flow to launch. If you do not specify this value, the job flow is launched in the normal AWS cloud, outside of \n         a VPC. \n      </p>\n      <p>\n         Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances.  \n         Thus, you cannot specify the cc1.4xlarge instance type for nodes of a job flow launched in a VPC.\n      </p>"
+          "documentation":"<p> To launch the job flow in Amazon VPC, set this parameter to the identifier of the Amazon VPC subnet where you want the job flow to launch. If you do not specify this value, the job flow is launched in the normal AWS cloud, outside of a VPC. </p> <p> Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances. Thus, you cannot specify the cc1.4xlarge instance type for nodes of a job flow launched in a VPC. </p>"
         },
         "Ec2AvailabilityZone":{
           "shape":"String",
@@ -930,7 +930,7 @@
       "members":{
         "Properties":{
           "shape":"KeyValueList",
-          "documentation":"<p>A list of Java properties that are set when the step runs. You can use these properties to\n         pass key value pairs to your main function.</p>"
+          "documentation":"<p>A list of Java properties that are set when the step runs. You can use these properties to pass key value pairs to your main function.</p>"
         },
         "Jar":{
           "shape":"XmlString",
@@ -938,14 +938,14 @@
         },
         "MainClass":{
           "shape":"XmlString",
-          "documentation":"<p>The name of the main class in the specified Java file. If not specified, the JAR file\n         should specify a Main-Class in its manifest file.</p>"
+          "documentation":"<p>The name of the main class in the specified Java file. If not specified, the JAR file should specify a Main-Class in its manifest file.</p>"
         },
         "Args":{
           "shape":"XmlStringList",
           "documentation":"<p>A list of command line arguments passed to the JAR file's main function when executed.</p>"
         }
       },
-      "documentation":"<p>A job flow step consisting of a JAR file whose main function will be executed. The main\n         function submits a job for Hadoop to execute and waits for the job to finish or fail. </p>"
+      "documentation":"<p>A job flow step consisting of a JAR file whose main function will be executed. The main function submits a job for Hadoop to execute and waits for the job to finish or fail. </p>"
     },
     "HadoopStepConfig":{
       "type":"structure",
@@ -956,18 +956,18 @@
         },
         "Properties":{
           "shape":"StringMap",
-          "documentation":"<p>The list of Java properties that are set when the step runs. You can use these properties to\n         pass key value pairs to your main function.</p>"
+          "documentation":"<p>The list of Java properties that are set when the step runs. You can use these properties to pass key value pairs to your main function.</p>"
         },
         "MainClass":{
           "shape":"String",
-          "documentation":"<p>The name of the main class in the specified Java file. If not specified, the JAR file\n         should specify a main class in its manifest file.</p>"
+          "documentation":"<p>The name of the main class in the specified Java file. If not specified, the JAR file should specify a main class in its manifest file.</p>"
         },
         "Args":{
           "shape":"StringList",
           "documentation":"<p>The list of command line arguments to pass to the JAR file's main function for execution.</p>"
         }
       },
-      "documentation":"<p>A cluster step consisting of a JAR file whose main function will be executed. The main\n         function submits a job for Hadoop to execute and waits for the job to finish or fail. </p>"
+      "documentation":"<p>A cluster step consisting of a JAR file whose main function will be executed. The main function submits a job for Hadoop to execute and waits for the job to finish or fail. </p>"
     },
     "Instance":{
       "type":"structure",
@@ -1024,7 +1024,7 @@
         },
         "BidPrice":{
           "shape":"String",
-          "documentation":"<p>The bid price for each EC2 instance in the\n         instance group when launching nodes as Spot Instances, expressed in USD.</p>"
+          "documentation":"<p>The bid price for each EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.</p>"
         },
         "InstanceType":{
           "shape":"InstanceType",
@@ -1067,7 +1067,7 @@
         },
         "BidPrice":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>Bid price for each Amazon EC2 instance in the\n         instance group when launching nodes as Spot Instances, expressed in USD.</p>"
+          "documentation":"<p>Bid price for each Amazon EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.</p>"
         },
         "InstanceType":{
           "shape":"InstanceType",
@@ -1114,7 +1114,7 @@
         },
         "BidPrice":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>Bid price for EC2 Instances when launching nodes as\n         Spot Instances, expressed in USD.</p>"
+          "documentation":"<p>Bid price for EC2 Instances when launching nodes as Spot Instances, expressed in USD.</p>"
         },
         "InstanceType":{
           "shape":"InstanceType",
@@ -1182,7 +1182,7 @@
         },
         "EC2InstanceIdsToTerminate":{
           "shape":"EC2InstanceIdsToTerminateList",
-          "documentation":"<p>The EC2 InstanceIds to terminate. For advanced users only.                                                                                                                            \n         Once you terminate the instances, the instance group will not return to its original requested size.</p>"
+          "documentation":"<p>The EC2 InstanceIds to terminate. For advanced users only. Once you terminate the instances, the instance group will not return to its original requested size.</p>"
         }
       },
       "documentation":"<p>Modify an instance group size.</p>"
@@ -1376,7 +1376,7 @@
         "httpStatusCode":500
       },
       "exception":true,
-      "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not\n         completed.</p>"
+      "documentation":"<p>Indicates that an error occurred while processing the request and that the request was not completed.</p>"
     },
     "InternalServerException":{
       "type":"structure",
@@ -1428,7 +1428,7 @@
         },
         "AmiVersion":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>The version of the AMI used to initialize Amazon EC2 instances in the job flow. For a list of  AMI versions currently \n      supported by Amazon ElasticMapReduce, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported\">AMI Versions Supported in Elastic MapReduce</a> in the \n      <i>Amazon Elastic MapReduce Developer's Guide.</i></p>"
+          "documentation":"<p>The version of the AMI used to initialize Amazon EC2 instances in the job flow. For a list of AMI versions currently supported by Amazon ElasticMapReduce, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported\">AMI Versions Supported in Elastic MapReduce</a> in the <i>Amazon Elastic MapReduce Developer's Guide.</i></p>"
         },
         "ExecutionStatusDetail":{
           "shape":"JobFlowExecutionStatusDetail",
@@ -1481,7 +1481,7 @@
         "COMPLETED",
         "FAILED"
       ],
-      "documentation":"<p> The type of instance. </p>\n      <enumValues>\n         <value name=\"JobFlowExecutionState$COMPLETED\">\n            <p>A small instance</p>\n         </value>\n         <value name=\"JobFlowExecutionState$FAILED\">\n            <p>A large instance</p>\n         </value>\n      </enumValues>"
+      "documentation":"<p> The type of instance. </p> <enumValues> <value name=\"JobFlowExecutionState$COMPLETED\"> <p>A small instance</p> </value> <value name=\"JobFlowExecutionState$FAILED\"> <p>A large instance</p> </value> </enumValues>"
     },
     "JobFlowExecutionStateList":{
       "type":"list",
@@ -1542,7 +1542,7 @@
         },
         "Ec2KeyName":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>The name of the Amazon EC2 key pair that can be used to ssh to the master node as\n         the user called \"hadoop.\"</p>"
+          "documentation":"<p>The name of the Amazon EC2 key pair that can be used to ssh to the master node as the user called \"hadoop.\"</p>"
         },
         "Placement":{
           "shape":"PlacementType",
@@ -1554,18 +1554,18 @@
         },
         "TerminationProtected":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies whether to lock the job flow to prevent the Amazon EC2 instances from being terminated by API call, \n         user intervention, or in the event of a job flow error.</p>"
+          "documentation":"<p>Specifies whether to lock the job flow to prevent the Amazon EC2 instances from being terminated by API call, user intervention, or in the event of a job flow error.</p>"
         },
         "HadoopVersion":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>The Hadoop version for the job flow. Valid inputs are \"0.18\", \"0.20\", or \"0.20.205\". If you do not set this value, the default of 0.18 is used, \n         unless the AmiVersion parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.</p>"
+          "documentation":"<p>The Hadoop version for the job flow. Valid inputs are \"0.18\", \"0.20\", or \"0.20.205\". If you do not set this value, the default of 0.18 is used, unless the AmiVersion parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.</p>"
         },
         "Ec2SubnetId":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>\n         To launch the job flow in Amazon Virtual Private Cloud (Amazon VPC), set this parameter to the identifier of the Amazon VPC subnet where \n         you want the job flow to launch. If you do not specify this value, the job flow is launched in the normal Amazon Web Services cloud, outside of an \n         Amazon VPC. \n      </p>\n      <p>\n         Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances.  \n         Thus you cannot specify the cc1.4xlarge instance type for nodes of a job flow launched in a Amazon VPC.\n      </p>"
+          "documentation":"<p> To launch the job flow in Amazon Virtual Private Cloud (Amazon VPC), set this parameter to the identifier of the Amazon VPC subnet where you want the job flow to launch. If you do not specify this value, the job flow is launched in the normal Amazon Web Services cloud, outside of an Amazon VPC. </p> <p> Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances. Thus you cannot specify the cc1.4xlarge instance type for nodes of a job flow launched in a Amazon VPC. </p>"
         }
       },
-      "documentation":"<p>A description of the Amazon EC2 instance running the job flow. \n         A valid JobFlowInstancesConfig must contain at least InstanceGroups, which is the recommended configuration. However, a valid alternative is to have MasterInstanceType, SlaveInstanceType, and InstanceCount (all three must be present).</p>"
+      "documentation":"<p>A description of the Amazon EC2 instance running the job flow. A valid JobFlowInstancesConfig must contain at least InstanceGroups, which is the recommended configuration. However, a valid alternative is to have MasterInstanceType, SlaveInstanceType, and InstanceCount (all three must be present).</p>"
     },
     "JobFlowInstancesDetail":{
       "type":"structure",
@@ -1593,7 +1593,7 @@
         },
         "InstanceCount":{
           "shape":"Integer",
-          "documentation":"<p>The number of Amazon EC2 instances in the cluster. If the value is 1, the same instance\n         serves as both the master and slave node. If the value is greater than 1, one instance is\n         the master node and all others are slave nodes.</p>"
+          "documentation":"<p>The number of Amazon EC2 instances in the cluster. If the value is 1, the same instance serves as both the master and slave node. If the value is greater than 1, one instance is the master node and all others are slave nodes.</p>"
         },
         "InstanceGroups":{
           "shape":"InstanceGroupDetailList",
@@ -1601,11 +1601,11 @@
         },
         "NormalizedInstanceHours":{
           "shape":"Integer",
-          "documentation":"<p>An approximation of the cost of the job flow, represented in m1.small/hours. This value is\n         incremented once for every hour an m1.small runs. Larger instances are weighted more, so an\n         Amazon EC2 instance that is roughly four times more expensive would result in the\n         normalized instance hours being incremented by four. This result is only an approximation\n         and does not reflect the actual billing rate.</p>"
+          "documentation":"<p>An approximation of the cost of the job flow, represented in m1.small/hours. This value is incremented once for every hour an m1.small runs. Larger instances are weighted more, so an Amazon EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.</p>"
         },
         "Ec2KeyName":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>The name of an Amazon EC2 key pair that can be used to ssh to the master node of job\n         flow.</p>"
+          "documentation":"<p>The name of an Amazon EC2 key pair that can be used to ssh to the master node of job flow.</p>"
         },
         "Ec2SubnetId":{
           "shape":"XmlStringMaxLen256",
@@ -1621,7 +1621,7 @@
         },
         "TerminationProtected":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies whether the Amazon EC2 instances in the cluster are protected from termination by API calls, \n         user intervention, or in the event of a job flow error. </p>"
+          "documentation":"<p>Specifies whether the Amazon EC2 instances in the cluster are protected from termination by API calls, user intervention, or in the event of a job flow error. </p>"
         },
         "HadoopVersion":{
           "shape":"XmlStringMaxLen256",
@@ -1654,11 +1654,11 @@
       "members":{
         "ClusterId":{
           "shape":"ClusterId",
-          "documentation":"<p>The cluster identifier for the bootstrap actions to list\n      .</p>"
+          "documentation":"<p>The cluster identifier for the bootstrap actions to list .</p>"
         },
         "Marker":{
           "shape":"Marker",
-          "documentation":"<p>The pagination token that indicates the next set of results to retrieve\n         .</p>"
+          "documentation":"<p>The pagination token that indicates the next set of results to retrieve .</p>"
         }
       },
       "documentation":"<p>This input determines which bootstrap actions to retrieve.</p>"
@@ -1668,33 +1668,33 @@
       "members":{
         "BootstrapActions":{
           "shape":"CommandList",
-          "documentation":"<p>The bootstrap actions associated with the cluster\n      .</p>"
+          "documentation":"<p>The bootstrap actions associated with the cluster .</p>"
         },
         "Marker":{
           "shape":"Marker",
-          "documentation":"<p>The pagination token that indicates the next set of results to retrieve\n      .</p>"
+          "documentation":"<p>The pagination token that indicates the next set of results to retrieve .</p>"
         }
       },
-      "documentation":"<p>This output contains the boostrap actions detail\n      .</p>"
+      "documentation":"<p>This output contains the boostrap actions detail .</p>"
     },
     "ListClustersInput":{
       "type":"structure",
       "members":{
         "CreatedAfter":{
           "shape":"Date",
-          "documentation":"<p>The creation date and time beginning value filter for listing clusters\n      .</p>"
+          "documentation":"<p>The creation date and time beginning value filter for listing clusters .</p>"
         },
         "CreatedBefore":{
           "shape":"Date",
-          "documentation":"<p>The creation date and time end value filter for listing clusters\n      .</p>"
+          "documentation":"<p>The creation date and time end value filter for listing clusters .</p>"
         },
         "ClusterStates":{
           "shape":"ClusterStateList",
-          "documentation":"<p>The cluster state filters to apply when listing clusters.\n      </p>"
+          "documentation":"<p>The cluster state filters to apply when listing clusters. </p>"
         },
         "Marker":{
           "shape":"Marker",
-          "documentation":"<p>The pagination token that indicates the next set of results to retrieve.\n      </p>"
+          "documentation":"<p>The pagination token that indicates the next set of results to retrieve. </p>"
         }
       },
       "documentation":"<p>This input determines how the ListClusters action filters the list of clusters that it returns.</p>"
@@ -1704,11 +1704,11 @@
       "members":{
         "Clusters":{
           "shape":"ClusterSummaryList",
-          "documentation":"<p>The list of clusters for the account based on the given filters.\n      </p>"
+          "documentation":"<p>The list of clusters for the account based on the given filters. </p>"
         },
         "Marker":{
           "shape":"Marker",
-          "documentation":"<p>The pagination token that indicates the next set of results to retrieve.\n      </p>"
+          "documentation":"<p>The pagination token that indicates the next set of results to retrieve. </p>"
         }
       },
       "documentation":"<p>This contains a ClusterSummaryList with the cluster details; for example, the cluster IDs, names, and status.</p>"
@@ -1861,13 +1861,13 @@
           "documentation":"<p>A list of tag keys to remove from a resource.</p>"
         }
       },
-      "documentation":"<p>This input identifies a cluster and a list of tags to remove.                                                                                                                         \n      </p>"
+      "documentation":"<p>This input identifies a cluster and a list of tags to remove. </p>"
     },
     "RemoveTagsOutput":{
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>This output indicates the result of removing tags from a resource.                                                                                                                    \n      </p>"
+      "documentation":"<p>This output indicates the result of removing tags from a resource. </p>"
     },
     "ResourceId":{"type":"string"},
     "RunJobFlowInput":{
@@ -1883,7 +1883,7 @@
         },
         "LogUri":{
           "shape":"XmlString",
-          "documentation":"<p>The location in Amazon S3 to write the log files of the job flow. If a value is\n         not provided, logs are not created.</p>"
+          "documentation":"<p>The location in Amazon S3 to write the log files of the job flow. If a value is not provided, logs are not created.</p>"
         },
         "AdditionalInfo":{
           "shape":"XmlString",
@@ -1891,11 +1891,11 @@
         },
         "AmiVersion":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>The version of the Amazon Machine Image (AMI) to use when launching Amazon EC2 instances in the job flow. The following values are valid: </p>\n         <ul>\n            <li>\"latest\" (uses the latest AMI)</li>\n            <li>The version number of the AMI to use, for example, \"2.0\"</li>\n         </ul>\n         \n         <p>If the AMI supports multiple versions of Hadoop (for example, AMI 1.0 supports both Hadoop 0.18 and 0.20) you can use the \n            <a>JobFlowInstancesConfig</a> <code>HadoopVersion</code> parameter\n             to modify the version of Hadoop from the defaults shown above.</p>\n         <p>For details about the AMI versions currently \n         supported by Amazon Elastic MapReduce, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported\">AMI Versions Supported in Elastic MapReduce</a> in the \n         <i>Amazon Elastic MapReduce Developer's Guide.</i>\n         </p>"
+          "documentation":"<p>The version of the Amazon Machine Image (AMI) to use when launching Amazon EC2 instances in the job flow. The following values are valid: </p> <ul> <li>\"latest\" (uses the latest AMI)</li> <li>The version number of the AMI to use, for example, \"2.0\"</li> </ul> <p>If the AMI supports multiple versions of Hadoop (for example, AMI 1.0 supports both Hadoop 0.18 and 0.20) you can use the <a>JobFlowInstancesConfig</a> <code>HadoopVersion</code> parameter to modify the version of Hadoop from the defaults shown above.</p> <p>For details about the AMI versions currently supported by Amazon Elastic MapReduce, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported\">AMI Versions Supported in Elastic MapReduce</a> in the <i>Amazon Elastic MapReduce Developer's Guide.</i> </p>"
         },
         "Instances":{
           "shape":"JobFlowInstancesConfig",
-          "documentation":"<p> A specification of the number and type of Amazon EC2 instances on which to run the job\n         flow. </p>"
+          "documentation":"<p> A specification of the number and type of Amazon EC2 instances on which to run the job flow. </p>"
         },
         "Steps":{
           "shape":"StepConfigList",
@@ -1903,15 +1903,15 @@
         },
         "BootstrapActions":{
           "shape":"BootstrapActionConfigList",
-          "documentation":"<p> A list of bootstrap actions that will be run before Hadoop is started on the cluster\n         nodes. </p>"
+          "documentation":"<p> A list of bootstrap actions that will be run before Hadoop is started on the cluster nodes. </p>"
         },
         "SupportedProducts":{
           "shape":"SupportedProductsList",
-          "documentation":"<p>A list of strings that indicates third-party software to use with the job flow. For more information, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-supported-products.html\">Use Third Party Applications with Amazon EMR</a>. Currently supported values are:</p>\n         <ul>            \n            <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li>\n            <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li>\n         </ul>"
+          "documentation":"<p>A list of strings that indicates third-party software to use with the job flow. For more information, go to <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-supported-products.html\">Use Third Party Applications with Amazon EMR</a>. Currently supported values are:</p> <ul> <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li> <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li> </ul>"
         },
         "NewSupportedProducts":{
           "shape":"NewSupportedProductsList",
-          "documentation":"<p>A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation\n         script as bootstrap action arguments. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html\">Launch a Job Flow on the MapR Distribution for Hadoop</a>. Currently supported values are:</p>\n      <ul>\n         <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li>\n         <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li>\n         <li>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition respectively.</li>\n      </ul>"
+          "documentation":"<p>A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html\">Launch a Job Flow on the MapR Distribution for Hadoop</a>. Currently supported values are:</p> <ul> <li>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</li> <li>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</li> <li>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition respectively.</li> </ul>"
         },
         "VisibleToAllUsers":{
           "shape":"Boolean",
@@ -1948,7 +1948,7 @@
       "members":{
         "Path":{
           "shape":"XmlString",
-          "documentation":"<p>Location of the script to run during a bootstrap action. Can be either a location in Amazon\n         S3 or on a local file system.</p>"
+          "documentation":"<p>Location of the script to run during a bootstrap action. Can be either a location in Amazon S3 or on a local file system.</p>"
         },
         "Args":{
           "shape":"XmlStringList",
@@ -1966,11 +1966,11 @@
       "members":{
         "JobFlowIds":{
           "shape":"XmlStringList",
-          "documentation":"<p> A list of strings that uniquely identify the job flows to protect. This identifier is returned by\n         <a>RunJobFlow</a> and can also be obtained from <a>DescribeJobFlows</a> . </p>"
+          "documentation":"<p> A list of strings that uniquely identify the job flows to protect. This identifier is returned by <a>RunJobFlow</a> and can also be obtained from <a>DescribeJobFlows</a> . </p>"
         },
         "TerminationProtected":{
           "shape":"Boolean",
-          "documentation":"<p> A Boolean that indicates whether to protect the job flow and \n         prevent the Amazon EC2 instances in the cluster from shutting down due to \n         API calls, user intervention, or job-flow error. </p>"
+          "documentation":"<p> A Boolean that indicates whether to protect the job flow and prevent the Amazon EC2 instances in the cluster from shutting down due to API calls, user intervention, or job-flow error. </p>"
         }
       },
       "documentation":"<p> The input argument to the <a>TerminationProtection</a> operation. </p>"
@@ -2006,15 +2006,15 @@
         },
         "Config":{
           "shape":"HadoopStepConfig",
-          "documentation":"<p>The Hadoop job configuration of the cluster step.\n      </p>"
+          "documentation":"<p>The Hadoop job configuration of the cluster step. </p>"
         },
         "ActionOnFailure":{
           "shape":"ActionOnFailure",
-          "documentation":"<p>This specifies what action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.\n         </p>"
+          "documentation":"<p>This specifies what action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. </p>"
         },
         "Status":{
           "shape":"StepStatus",
-          "documentation":"<p>The current execution status details of the cluster step.\n      </p>"
+          "documentation":"<p>The current execution status details of the cluster step. </p>"
         }
       },
       "documentation":"<p>This represents a step in a cluster.</p>"
@@ -2130,14 +2130,14 @@
       "members":{
         "Code":{
           "shape":"StepStateChangeReasonCode",
-          "documentation":"<p>The programmable code for the state change reason.\n      </p>"
+          "documentation":"<p>The programmable code for the state change reason. </p>"
         },
         "Message":{
           "shape":"String",
-          "documentation":"<p>The descriptive message for the state change reason.\n      </p>"
+          "documentation":"<p>The descriptive message for the state change reason. </p>"
         }
       },
-      "documentation":"<p>The details of the step state change reason. \n      </p>"
+      "documentation":"<p>The details of the step state change reason. </p>"
     },
     "StepStateChangeReasonCode":{
       "type":"string",
@@ -2152,33 +2152,33 @@
       "members":{
         "State":{
           "shape":"StepState",
-          "documentation":"<p>The execution state of the cluster step.\n      </p>"
+          "documentation":"<p>The execution state of the cluster step. </p>"
         },
         "StateChangeReason":{
           "shape":"StepStateChangeReason",
-          "documentation":"<p>The reason for the step execution status change.\n      </p>"
+          "documentation":"<p>The reason for the step execution status change. </p>"
         },
         "Timeline":{
           "shape":"StepTimeline",
-          "documentation":"<p>The timeline of the cluster step status over time.\n      </p>"
+          "documentation":"<p>The timeline of the cluster step status over time. </p>"
         }
       },
-      "documentation":"<p>The execution status details of the cluster step.\n      </p>"
+      "documentation":"<p>The execution status details of the cluster step. </p>"
     },
     "StepSummary":{
       "type":"structure",
       "members":{
         "Id":{
           "shape":"StepId",
-          "documentation":"<p>The identifier of the cluster step.\n      </p>"
+          "documentation":"<p>The identifier of the cluster step. </p>"
         },
         "Name":{
           "shape":"String",
-          "documentation":"<p>The name of the cluster step.\n      </p>"
+          "documentation":"<p>The name of the cluster step. </p>"
         },
         "Status":{
           "shape":"StepStatus",
-          "documentation":"<p>The current execution status details of the cluster step.\n      </p>"
+          "documentation":"<p>The current execution status details of the cluster step. </p>"
         }
       },
       "documentation":"<p>The summary of the cluster step.</p>"
@@ -2192,18 +2192,18 @@
       "members":{
         "CreationDateTime":{
           "shape":"Date",
-          "documentation":"<p>The date and time when the cluster step was created.\n      </p>"
+          "documentation":"<p>The date and time when the cluster step was created. </p>"
         },
         "StartDateTime":{
           "shape":"Date",
-          "documentation":"<p>The date and time when the cluster step execution started.\n      </p>"
+          "documentation":"<p>The date and time when the cluster step execution started. </p>"
         },
         "EndDateTime":{
           "shape":"Date",
-          "documentation":"<p>The date and time when the cluster step execution completed or failed.\n      </p>"
+          "documentation":"<p>The date and time when the cluster step execution completed or failed. </p>"
         }
       },
-      "documentation":"<p>The timeline of the cluster step lifecycle.\n      </p>"
+      "documentation":"<p>The timeline of the cluster step lifecycle. </p>"
     },
     "String":{"type":"string"},
     "StringList":{
@@ -2238,14 +2238,14 @@
       "members":{
         "Key":{
           "shape":"String",
-          "documentation":"<p>A user-defined key, which is the minimum required information for a valid tag.                                                                                                        \n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.                            \n      </p>"
+          "documentation":"<p>A user-defined key, which is the minimum required information for a valid tag. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>. </p>"
         },
         "Value":{
           "shape":"String",
-          "documentation":"<p>A user-defined value, which is optional in a tag.                                                                                                                                     \n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.                            \n      </p>"
+          "documentation":"<p>A user-defined value, which is optional in a tag. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>. </p>"
         }
       },
-      "documentation":"<p>A key/value pair containing user-defined metadata that you can associate with an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clu\\\nsters to track your Amazon EMR resource allocation costs.                                                                                                                                      \n         For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>.                            \n      </p>"
+      "documentation":"<p>A key/value pair containing user-defined metadata that you can associate with an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clu\\ sters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>. </p>"
     },
     "TagList":{
       "type":"list",

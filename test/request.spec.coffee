@@ -296,3 +296,21 @@ describe 'AWS.Request', ->
           expect(reqError.region).to.equal('mock-region')
           expect(resp.retryCount).to.equal(0)
           done()
+
+  if AWS.util.isNode()
+    describe 'domain support', ->
+      domain = null
+      beforeEach -> domain = require('domain').create()
+      afterEach -> domain.dispose()
+
+      it 'supports domains', ->
+        helpers.mockHttpResponse 200, {}, 'Success!'
+
+        thrown = null
+        domain.on 'error', (err) -> thrown = err
+        domain.run ->
+          service = new helpers.MockService()
+          service.makeRequest 'operationName', ->
+            invalidCode
+
+        expect(thrown.name).to.equal('ReferenceError')

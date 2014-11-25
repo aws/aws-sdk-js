@@ -1,6 +1,6 @@
 helpers = require('../helpers')
 AWS = helpers.AWS
-Stream = require('stream').Stream
+Stream = AWS.util.nodeRequire('stream')
 Buffer = AWS.util.Buffer
 
 describe 'AWS.S3', ->
@@ -457,7 +457,7 @@ describe 'AWS.S3', ->
   describe 'willComputeChecksums', ->
     willCompute = (operation, opts) ->
       compute = opts.computeChecksums
-      s3 = new AWS.S3(computeChecksums: compute)
+      s3 = new AWS.S3(computeChecksums: compute, signatureVersion: 's3')
       req = s3.makeRequest(operation, Bucket: 'example', ContentMD5: opts.hash).build()
       checksum = req.httpRequest.headers['Content-MD5']
       if opts.hash != undefined
@@ -487,13 +487,45 @@ describe 'AWS.S3', ->
     it 'does not compute checksums if computeChecksums is on and ContentMD5 is provided', ->
       willCompute 'putBucketAcl', computeChecksums: true, hash: '000'
 
-    it 'does not compute checksums for Stream objects', ->
-      s3 = new AWS.S3(computeChecksums: true)
-      req = s3.putObject(Bucket: 'example', Key: 'foo', Body: new Stream)
-      expect(req.build(->).httpRequest.headers['Content-MD5']).to.equal(undefined)
-
     it 'computes checksums if computeChecksums is on and ContentMD5 is not provided',->
       willCompute 'putBucketAcl', computeChecksums: true
+
+    if AWS.util.isNode()
+      it 'does not compute checksums for Stream objects', ->
+        s3 = new AWS.S3(computeChecksums: true)
+        req = s3.putObject(Bucket: 'example', Key: 'foo', Body: new Stream.Stream)
+        expect(req.build(->).httpRequest.headers['Content-MD5']).to.equal(undefined)
+
+      it 'throws an error in SigV4, if a non-file stream is provided', (done) ->
+        s3 = new AWS.S3(signatureVersion: 'v4')
+        req = s3.putObject(Bucket: 'example', Key: 'key', Body: new Stream.Stream)
+        req.send (err) ->
+          expect(err.message).to.contain('stream objects are not supported')
+          done()
+
+      it 'opens separate stream if a file object is provided', (done) ->
+        hash = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+        helpers.mockResponse data: ETag: 'etag'
+        
+        fs = require('fs')
+        mock = helpers.spyOn(fs, 'createReadStream').andCallFake ->
+          tr = new Stream.Transform
+          tr._transform = (d,e,c) -> c(null,d)
+          tr.length = 0
+          tr.path = 'path/to/file'
+          tr.push(new Buffer(''))
+          tr.end()
+          tr
+
+        s3 = new AWS.S3(signatureVersion: 'v4')
+        stream = fs.createReadStream('path/to/file')
+        req = s3.putObject(Bucket: 'example', Key: 'key', Body: stream)
+        req.send (err) ->
+          expect(mock.calls[0].arguments).to.eql(['path/to/file'])
+          expect(mock.calls[1].arguments).to.eql(['path/to/file'])
+          expect(err).not.to.exist
+          expect(req.httpRequest.headers['X-Amz-Content-Sha256']).to.equal(hash)
+          done()
 
   describe 'getSignedUrl', ->
     date = null

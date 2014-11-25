@@ -71,12 +71,40 @@ describe 'AWS.util.date', ->
 
   describe 'getDate', ->
     it 'should return current date by default', ->
-      oldDate = Date; now = {}
+      now = {}
       obj = if AWS.util.isNode() then GLOBAL else window
-      mock = helpers.createSpy().andReturn(now)
-      obj.Date = mock
+      helpers.spyOn(obj, 'Date').andCallFake -> now
       expect(util.getDate()).to.equal(now)
-      obj.Date = oldDate
+
+    describe 'systemClockOffset', ->
+      [date, mocked, config] = []
+
+      beforeEach ->
+        [date, mocked, config] = [Date, false, AWS.config]
+        obj = if AWS.util.isNode() then GLOBAL else window
+        helpers.spyOn(obj, 'Date').andCallFake (t) ->
+          if mocked
+            new date(t)
+          else
+            mocked = true
+            new date(0)
+
+      afterEach ->
+        AWS.config = config
+        AWS.config.systemClockOffset = 0
+
+      it 'returns a date with a millisecond offset if provided', ->
+        AWS.config.systemClockOffset = 10000
+        expect(util.getDate().getTime()).to.equal(10000)
+
+      it 'returns a date with a millisecond offset from a non-Config object', ->
+        AWS.config = systemClockOffset: 10000
+        expect(util.getDate().getTime()).to.equal(10000)
+        AWS.config = config
+
+      it 'returns a date with no offset if non-Config object has no systemClockOffset property', ->
+        AWS.config = {}
+        expect(util.getDate().getTime()).to.equal(0)
 
   describe 'iso8601', ->
     it 'should return date formatted as YYYYMMDDTHHnnssZ', ->
@@ -237,6 +265,21 @@ describe 'AWS.util.crypto', ->
       r = util.sha256('ß∂ƒ©', 'hex')
       expect(r).to.equal('3c01ddd413d2cacac59a255e4aade0d9058a8a9ea8b2dfe5bb2dc4ed132b4139')
 
+    it 'handles async interface', ->
+      util.sha256 input, 'hex', (e, d) ->
+        expect(d).to.equal(result)
+
+    if AWS.util.isNode()
+      it 'handles streams in async interface', (done) ->
+        Transform = AWS.util.nodeRequire('stream').Transform
+        tr = new Transform
+        tr._transform = (data, encoding, callback) -> callback(null, data)
+        tr.push(new AWS.util.Buffer(input))
+        tr.end()
+        util.sha256 tr, 'hex', (e, d) ->
+          expect(d).to.equal(result)
+          done()
+
   describe 'md5', ->
     input = 'foo'
     result = 'acbd18db4cc2f85cedef654fccc4a4d8'
@@ -252,6 +295,21 @@ describe 'AWS.util.crypto', ->
     it 'accepts UTF-8 input', ->
       r = util.md5('ￃ', 'hex')
       expect(r).to.equal('b497dbbe19fb58cddaeef11f9d40804c')
+
+    it 'handles async interface', ->
+      util.md5 input, 'hex', (e, d) ->
+        expect(d).to.equal(result)
+
+    if AWS.util.isNode()
+      it 'handles streams in async interface', (done) ->
+        Transform = AWS.util.nodeRequire('stream').Transform
+        tr = new Transform
+        tr._transform = (data, enc, callback) -> callback(null, data)
+        tr.push(new AWS.util.Buffer(input))
+        tr.end()
+        util.md5 tr, 'hex', (e, d) ->
+          expect(d).to.equal(result)
+          done()
 
 describe 'AWS.util.each', ->
   it 'should iterate over a hash', ->
@@ -483,7 +541,7 @@ describe 'AWS.util.jamespath', ->
 
     it 'allows multiple expressions to be ORed', ->
       data = foo: {key1: 'wrong'}, bar: {key2: 'right'}
-      expect(query('foo.key2 or bar.key2', data)).to.eql(['right'])
+      expect(query('foo.key2 || bar.key2', data)).to.eql(['right'])
 
     it 'returns multiple matches if a wildcard is used', ->
       data = foo:

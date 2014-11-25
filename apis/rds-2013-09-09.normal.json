@@ -142,7 +142,7 @@
           "documentation":"<p> DB security group authorization quota has been reached. </p>"
         }
       ],
-      "documentation":"<p> Enables ingress to a DBSecurityGroup using one of two forms of authorization. First, EC2 or VPC security groups can be added to the DBSecurityGroup if the application using the database is running on EC2 or VPC instances. Second, IP ranges are available if the application accessing your database is running on the Internet. Required parameters for this API are one of CIDR range, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId for non-VPC). </p> <p>For an overview of CIDR ranges, go to the <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Wikipedia Tutorial</a>. </p>"
+      "documentation":"<p> Enables ingress to a DBSecurityGroup using one of two forms of authorization. First, EC2 or VPC security groups can be added to the DBSecurityGroup if the application using the database is running on EC2 or VPC instances. Second, IP ranges are available if the application accessing your database is running on the Internet. Required parameters for this API are one of CIDR range, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId for non-VPC). </p> <note> You cannot authorize ingress from an EC2 security group in one Region to an Amazon RDS DB instance in another. You cannot authorize ingress from a VPC security group in one VPC to an Amazon RDS DB instance in another. </note> <p>For an overview of CIDR ranges, go to the <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Wikipedia Tutorial</a>. </p>"
     },
     "CopyDBSnapshot":{
       "name":"CopyDBSnapshot",
@@ -963,7 +963,7 @@
           "documentation":"<p> <i>DBParameterGroupName</i> does not refer to an existing DB parameter group. </p>"
         }
       ],
-      "documentation":"<p> Deletes a specified DBParameterGroup. The DBParameterGroup cannot be associated with any RDS instances to be deleted. </p>"
+      "documentation":"<p> Deletes a specified DBParameterGroup. The DBParameterGroup cannot be associated with any RDS instances to be deleted. </p> <note> The specified DB parameter group cannot be associated with any DB instances. </note>"
     },
     "DeleteDBSecurityGroup":{
       "name":"DeleteDBSecurityGroup",
@@ -997,7 +997,7 @@
           "documentation":"<p> <i>DBSecurityGroupName</i> does not refer to an existing DB security group. </p>"
         }
       ],
-      "documentation":"<p> Deletes a DB security group. </p>"
+      "documentation":"<p> Deletes a DB security group. </p> <note>The specified DB security group must not be associated with any DB instances.</note>"
     },
     "DeleteDBSnapshot":{
       "name":"DeleteDBSnapshot",
@@ -1037,7 +1037,7 @@
           "documentation":"<p> <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot. </p>"
         }
       ],
-      "documentation":"<p> Deletes a DBSnapshot. If the snapshot is being copied, the copy operation is terminated. </p>"
+      "documentation":"<p> Deletes a DBSnapshot. If the snapshot is being copied, the copy operation is terminated. </p> <note>The DBSnapshot must be in the <code>available</code> state to be deleted.</note>"
     },
     "DeleteDBSubnetGroup":{
       "name":"DeleteDBSubnetGroup",
@@ -1081,7 +1081,7 @@
           "documentation":"<p> <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group. </p>"
         }
       ],
-      "documentation":"<p> Deletes a DB subnet group. </p>"
+      "documentation":"<p> Deletes a DB subnet group. </p> <note>The specified database subnet group must not be associated with any DB instances.</note>"
     },
     "DeleteEventSubscription":{
       "name":"DeleteEventSubscription",
@@ -1818,7 +1818,7 @@
           "documentation":"<p> The DB parameter group cannot be deleted because it is in use. </p>"
         }
       ],
-      "documentation":"<p> Modifies the parameters of a DB parameter group. To modify more than one parameter, submit a list of the following: <code>ParameterName</code>, <code>ParameterValue</code>, and <code>ApplyMethod</code>. A maximum of 20 parameters can be modified in a single request. </p> <important> <p>After you modify a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon RDS to fully complete the modify action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the <code>character_set_database</code> parameter. You can use the <i>Parameter Groups</i> option of the <a href=\"https://console.aws.amazon.com/rds/\">Amazon RDS console</a> or the <i>DescribeDBParameters</i> command to verify that your DB parameter group has been created or modified.</p> </important>"
+      "documentation":"<p> Modifies the parameters of a DB parameter group. To modify more than one parameter, submit a list of the following: <code>ParameterName</code>, <code>ParameterValue</code>, and <code>ApplyMethod</code>. A maximum of 20 parameters can be modified in a single request. </p> <note> <p> The <code>apply-immediate</code> method can be used only for dynamic parameters; the <code>pending-reboot</code> method can be used with MySQL, PostgreSQL, and Oracle DB instances for either dynamic or static parameters. For Microsoft SQL Server DB instances, the <code>pending-reboot</code> method can be used only for static parameters. </p> </note> <important> <p>After you modify a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon RDS to fully complete the modify action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the <code>character_set_database</code> parameter. You can use the <i>Parameter Groups</i> option of the <a href=\"https://console.aws.amazon.com/rds/\">Amazon RDS console</a> or the <i>DescribeDBParameters</i> command to verify that your DB parameter group has been created or modified.</p> </important>"
     },
     "ModifyDBSubnetGroup":{
       "name":"ModifyDBSubnetGroup",
@@ -2048,7 +2048,7 @@
           "documentation":"<p> <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. </p>"
         }
       ],
-      "documentation":"<p> Promotes a read replica DB instance to a standalone DB instance. </p>"
+      "documentation":"<p> Promotes a read replica DB instance to a standalone DB instance. </p> <note><p>We recommend that you enable automated backups on your read replica before promoting the read replica. This ensures that no backup is taken during the promotion process. Once the instance is promoted to a primary instance, backups are taken based on your backup settings.</p></note>"
     },
     "PurchaseReservedDBInstancesOffering":{
       "name":"PurchaseReservedDBInstancesOffering",
@@ -2949,7 +2949,7 @@
       "members":{
         "DBParameterGroupName":{
           "shape":"String",
-          "documentation":"<p> The name of the DB parameter group. </p> <p> Constraints: </p> <ul> <li>Must be 1 to 255 alphanumeric characters</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>"
+          "documentation":"<p> The name of the DB parameter group. </p> <p> Constraints: </p> <ul> <li>Must be 1 to 255 alphanumeric characters</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul> <note>This value is stored as a lower-case string.</note>"
         },
         "DBParameterGroupFamily":{
           "shape":"String",
@@ -3864,11 +3864,11 @@
         },
         "SkipFinalSnapshot":{
           "shape":"Boolean",
-          "documentation":"<p> Determines whether a final DB snapshot is created before the DB instance is deleted. If <code>true</code> is specified, no DBSnapshot is created. If <code>false</code> is specified, a DB snapshot is created before the DB instance is deleted. </p> <p>Specify <code>true</code> when deleting a read replica.</p> <p>Default: <code>false</code></p>"
+          "documentation":"<p> Determines whether a final DB snapshot is created before the DB instance is deleted. If <code>true</code> is specified, no DBSnapshot is created. If <code>false</code> is specified, a DB snapshot is created before the DB instance is deleted. </p> <p>Specify <code>true</code> when deleting a read replica.</p> <note>The FinalDBSnapshotIdentifier parameter must be specified if SkipFinalSnapshot is <code>false</code>.</note> <p>Default: <code>false</code></p>"
         },
         "FinalDBSnapshotIdentifier":{
           "shape":"String",
-          "documentation":"<p> The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot is set to <code>false</code>. </p> <p>Constraints:</p> <ul> <li>Must be 1 to 255 alphanumeric characters</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> <li>Cannot be specified when deleting a read replica.</li> </ul>"
+          "documentation":"<p> The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot is set to <code>false</code>. </p> <note> Specifying this parameter and also setting the SkipFinalShapshot parameter to true results in an error. </note> <p>Constraints:</p> <ul> <li>Must be 1 to 255 alphanumeric characters</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> <li>Cannot be specified when deleting a read replica.</li> </ul>"
         }
       },
       "documentation":"<p> </p>"
@@ -3890,7 +3890,7 @@
       "members":{
         "DBSecurityGroupName":{
           "shape":"String",
-          "documentation":"<p> The name of the DB security group to delete. </p> <p> Constraints: </p> <ul> <li>Must be 1 to 255 alphanumeric characters</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> <li>Must not be \"Default\"</li> <li>May not contain spaces</li> </ul>"
+          "documentation":"<p> The name of the DB security group to delete. </p> <note>You cannot delete the default DB security group.</note> <p> Constraints: </p> <ul> <li>Must be 1 to 255 alphanumeric characters</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> <li>Must not be \"Default\"</li> <li>May not contain spaces</li> </ul>"
         }
       },
       "documentation":"<p> </p>"
@@ -3912,7 +3912,7 @@
       "members":{
         "DBSubnetGroupName":{
           "shape":"String",
-          "documentation":"<p> The name of the database subnet group to delete. </p> <p> Constraints: </p> <ul> <li>Must be 1 to 255 alphanumeric characters</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>"
+          "documentation":"<p> The name of the database subnet group to delete. </p> <note>You cannot delete the default subnet group.</note> <p> Constraints: </p> <ul> <li>Must be 1 to 255 alphanumeric characters</li> <li>First character must be a letter</li> <li>Cannot end with a hyphen or contain two consecutive hyphens</li> </ul>"
         }
       },
       "documentation":"<p> </p>"
@@ -3934,7 +3934,7 @@
       "members":{
         "OptionGroupName":{
           "shape":"String",
-          "documentation":"<p> The name of the option group to be deleted. </p>"
+          "documentation":"<p> The name of the option group to be deleted. </p> <note>You cannot delete default option groups.</note>"
         }
       },
       "documentation":"<p> </p>"
@@ -5020,7 +5020,7 @@
         },
         "MasterUserPassword":{
           "shape":"String",
-          "documentation":"<p> The new password for the DB instance master user. Can be any printable ASCII character except \"/\", \"\"\", or \"@\".</p> <p> Changing this parameter does not result in an outage and the change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <p>Default: Uses existing setting</p> <p>Constraints: Must be 8 to 41 alphanumeric characters (MySQL), 8 to 30 alphanumeric characters (Oracle), or 8 to 128 alphanumeric characters (SQL Server).</p>"
+          "documentation":"<p> The new password for the DB instance master user. Can be any printable ASCII character except \"/\", \"\"\", or \"@\".</p> <p> Changing this parameter does not result in an outage and the change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <p>Default: Uses existing setting</p> <p>Constraints: Must be 8 to 41 alphanumeric characters (MySQL), 8 to 30 alphanumeric characters (Oracle), or 8 to 128 alphanumeric characters (SQL Server).</p> <note> Amazon RDS API actions never return the password, so this action provides a way to regain access to a master instance user if the password is lost. </note>"
         },
         "DBParameterGroupName":{
           "shape":"String",
@@ -5082,7 +5082,7 @@
         },
         "Parameters":{
           "shape":"ParametersList",
-          "documentation":"<p> An array of parameter names, values, and the apply method for the parameter update. At least one parameter name, value, and apply method must be supplied; subsequent arguments are optional. A maximum of 20 parameters may be modified in a single request. </p> <p>Valid Values (for the application method): <code>immediate | pending-reboot</code></p>"
+          "documentation":"<p> An array of parameter names, values, and the apply method for the parameter update. At least one parameter name, value, and apply method must be supplied; subsequent arguments are optional. A maximum of 20 parameters may be modified in a single request. </p> <p>Valid Values (for the application method): <code>immediate | pending-reboot</code></p> <note>You can use the immediate value with dynamic parameters only. You can use the pending-reboot value for both dynamic and static parameters, and changes are applied when DB instance reboots. </note>"
         }
       },
       "documentation":"<p> </p>"
@@ -6090,7 +6090,7 @@
         },
         "DBName":{
           "shape":"String",
-          "documentation":"<p> The database name for the restored DB instance. </p>"
+          "documentation":"<p> The database name for the restored DB instance. </p> <note> <p>This parameter doesn't apply to the MySQL engine.</p> </note>"
         },
         "Engine":{
           "shape":"String",
@@ -6165,7 +6165,7 @@
         },
         "DBName":{
           "shape":"String",
-          "documentation":"<p> The database name for the restored DB instance. </p>"
+          "documentation":"<p> The database name for the restored DB instance. </p> <note> <p>This parameter is not used for the MySQL engine.</p> </note>"
         },
         "Engine":{
           "shape":"String",

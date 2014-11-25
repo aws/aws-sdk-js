@@ -7,7 +7,7 @@
     body { font-family: Helvetica, Arial, sans-serif; font-size: 9pt; }
     .padding { padding: 12px; }
     #header { background: #eee; font-size: 1.2em; }
-    .selectorControl * { height: 200px; }
+    .selectorControl select, .selectorControl textarea { height: 200px; }
     #operationSelector { border: 1px solid #ccc; }
     #operationSelector h3 { padding: 0; margin-top: 0; }
     #serviceSelector { width: 20%; }
@@ -203,9 +203,8 @@
     function loadServices() {
       $('#serviceSelector').empty();
       for (var key in AWS) {
-        if (!AWS[key].prototype) continue;
-        if (AWS[key].prototype.constructor.__super__.name === 'Service') {
-          var svcVarName = key.toLowerCase();
+        if (AWS[key].serviceIdentifier) {
+          var svcVarName = AWS[key].serviceIdentifier;
           try {
             var svc = services[svcVarName] = window[svcVarName] = new AWS[key]();
             var fullName = svc.api.abbreviation || svc.api.fullName;

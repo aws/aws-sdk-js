@@ -21,7 +21,7 @@ function Translator(api, options) {
 
   function logResults() {
     console.log('** Generated', api.metadata.endpointPrefix + '-' +
-      api.metadata.apiVersion +'.api.json' +
+      api.metadata.apiVersion +'.min.json' +
       (process.env.DEBUG ? ':' : ''));
 
     if (process.env.DEBUG) {

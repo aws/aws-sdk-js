@@ -58,9 +58,8 @@ def add_tasks(service, config)
       end
 
       task(:'version:md') do
-        base = "http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest/frames.html"
-        anchor = "#!AWS/#{klass}.html"
-        puts "* [AWS.#{klass}](#{base}#{anchor})"
+        base = "http://docs.amazonwebservices.com/AWSJavaScriptSDK/latest"
+        puts "* [AWS.#{klass}](#{base}/#{klass}.html)"
       end
     end
 

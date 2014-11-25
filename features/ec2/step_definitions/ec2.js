@@ -34,14 +34,16 @@ module.exports = function() {
       if (dstSnapId) dstEc2.deleteSnapshot({SnapshotId: dstSnapId}).send();
     }
 
-    params = {AvailabilityZone:sourceRegion+'a',Size:1,Encrypted:true};
+    params = {AvailabilityZone:sourceRegion+'a',Size:10,Encrypted:true};
     srcEc2.createVolume(params, function(err, data) {
-      if (err) return teardown();
+      if (err) { teardown(); return callback(err); }
       volId = data.VolumeId;
 
-      setTimeout(function() {
+      srcEc2.waitFor('volumeAvailable', {VolumeIds: [volId]}, function(err) {
+        if (err) { teardown(); return callback(err); }
+
         srcEc2.createSnapshot({VolumeId: volId}, function(err, data) {
-          if (err) return teardown();
+          if (err) { teardown(); return callback(err); }
           srcSnapId = data.SnapshotId;
 
           setTimeout(function() {
@@ -52,9 +54,9 @@ module.exports = function() {
               callback();
               teardown();
             });
-          }, 1000);
+          }, 5000);
         });
-      }, 1500);
+      });
     });
   });
 

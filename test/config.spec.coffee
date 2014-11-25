@@ -73,8 +73,12 @@ describe 'AWS.Config', ->
       expect(configure(sslEnabled: false).sslEnabled).to.equal(false)
 
   describe 'httpOptions', ->
-    it 'defaults to {}', ->
-      expect(configure().httpOptions).to.eql({})
+    it 'defaults to {timeout:120000}', ->
+      expect(configure().httpOptions).to.eql(timeout: 120000)
+
+  describe 'systemClockOffset', ->
+    it 'defaults to 0', ->
+      expect(configure().systemClockOffset).to.equal(0)
 
   describe 'set', ->
     it 'should set a default value for a key', ->
@@ -139,6 +143,13 @@ describe 'AWS.Config', ->
       expect(config.credentials.accessKeyId).to.equal('akid')
       expect(config.credentials.secretAccessKey).to.equal('secret')
       expect(config.credentials.sessionToken).to.equal('session')
+
+    it 'should deep merge httpOptions', ->
+      config = new AWS.Config()
+      config.update httpOptions: timeout: 1
+      config.update httpOptions: { xhrSync: true }
+      expect(config.httpOptions.timeout).to.equal(1)
+      expect(config.httpOptions.xhrSync).to.equal(true)
 
   describe 'getCredentials', ->
     spy = null

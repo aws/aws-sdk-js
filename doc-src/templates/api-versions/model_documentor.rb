@@ -6,7 +6,11 @@ module Documentor
     docs = rules['documentation'] || ''
     docs = docs.gsub(/<!--.*?-->/m, '')
     docs = docs.gsub(/<examples?>.+?<\/examples?>/m, '')
-    docs = docs.gsub(/<\/?note>/m, '')
+    docs = docs.gsub(/<note>\s*<\/note>/m, '')
+    docs = docs.gsub(/<note>(.+?)<\/note>/m) do
+      text = $1.gsub(/<\/?p>/, '')
+      "<div class=\"note\"><strong>Note:</strong> #{text}</div>"
+    end
     docs = docs.gsub(/\{(\S+)\}/, '`{\1}`')
     docs = docs.gsub(/\s+/, ' ').strip
     docs == '' ? nil : docs

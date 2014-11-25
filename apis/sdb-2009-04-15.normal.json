@@ -7,7 +7,7 @@
     "xmlNamespace":"http://sdb.amazonaws.com/doc/2009-04-15/",
     "protocol":"query"
   },
-  "documentation":"Amazon SimpleDB is a web service providing the core database functions of\n        data indexing and querying in the cloud. By offloading the time and effort associated with\n        building and operating a web-scale database, SimpleDB provides developers the freedom to focus\n        on application development.\n\n        <p>\n        A traditional, clustered relational database requires a sizable upfront capital outlay,\n        is complex to design, and often requires extensive and repetitive database administration.\n        Amazon SimpleDB is dramatically simpler, requiring no schema, automatically indexing your data\n        and providing a simple API for storage and access. This approach eliminates the administrative\n        burden of data modeling, index maintenance, and performance tuning. Developers gain access to\n        this functionality within Amazon's proven computing environment, are able to scale instantly,\n        and pay only for what they use.\n        </p>\n\n        <p>\n        Visit <a href=\"http://aws.amazon.com/simpledb/\">http://aws.amazon.com/simpledb/</a> for\n        more information.\n        </p>",
+  "documentation":"Amazon SimpleDB is a web service providing the core database functions of data indexing and querying in the cloud. By offloading the time and effort associated with building and operating a web-scale database, SimpleDB provides developers the freedom to focus on application development. <p> A traditional, clustered relational database requires a sizable upfront capital outlay, is complex to design, and often requires extensive and repetitive database administration. Amazon SimpleDB is dramatically simpler, requiring no schema, automatically indexing your data and providing a simple API for storage and access. This approach eliminates the administrative burden of data modeling, index maintenance, and performance tuning. Developers gain access to this functionality within Amazon's proven computing environment, are able to scale instantly, and pay only for what they use. </p> <p> Visit <a href=\"http://aws.amazon.com/simpledb/\">http://aws.amazon.com/simpledb/</a> for more information. </p>",
   "operations":{
     "BatchDeleteAttributes":{
       "name":"BatchDeleteAttributes",
@@ -16,7 +16,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"BatchDeleteAttributesRequest"},
-      "documentation":"<p>\n        Performs multiple DeleteAttributes operations in a single call, which reduces round trips and latencies.\n        This enables Amazon SimpleDB to optimize requests, which generally yields better throughput.\n        </p>\n        <note>\n            <p>\n            If you specify BatchDeleteAttributes without attributes or values,\n            all the attributes for the item are deleted.\n            </p>\n            <p>\n            BatchDeleteAttributes is an idempotent operation;\n            running it multiple times on the same item or attribute doesn't result in an error.\n            </p>\n            <p>\n            The BatchDeleteAttributes operation succeeds or fails in its entirety. There are no partial deletes.\n            You can execute multiple BatchDeleteAttributes operations and other operations in parallel.\n            However, large numbers of concurrent BatchDeleteAttributes calls can result in Service Unavailable (503) responses.\n            </p>\n            <p>\n            This operation is vulnerable to exceeding the maximum URL size when making a REST request using the HTTP GET method.\n            </p>\n            <p>\n            This operation does not support conditions using Expected.X.Name, Expected.X.Value, or Expected.X.Exists.\n            </p>\n        </note>\n        <p>\n        The following limitations are enforced for this operation:\n           <ul>\n               <li>1 MB request size</li>\n               <li>25 item limit per BatchDeleteAttributes operation</li>\n           </ul>\n        </p>"
+      "documentation":"<p> Performs multiple DeleteAttributes operations in a single call, which reduces round trips and latencies. This enables Amazon SimpleDB to optimize requests, which generally yields better throughput. </p> <note> <p> If you specify BatchDeleteAttributes without attributes or values, all the attributes for the item are deleted. </p> <p> BatchDeleteAttributes is an idempotent operation; running it multiple times on the same item or attribute doesn't result in an error. </p> <p> The BatchDeleteAttributes operation succeeds or fails in its entirety. There are no partial deletes. You can execute multiple BatchDeleteAttributes operations and other operations in parallel. However, large numbers of concurrent BatchDeleteAttributes calls can result in Service Unavailable (503) responses. </p> <p> This operation is vulnerable to exceeding the maximum URL size when making a REST request using the HTTP GET method. </p> <p> This operation does not support conditions using Expected.X.Name, Expected.X.Value, or Expected.X.Exists. </p> </note> <p> The following limitations are enforced for this operation: <ul> <li>1 MB request size</li> <li>25 item limit per BatchDeleteAttributes operation</li> </ul> </p>"
     },
     "BatchPutAttributes":{
       "name":"BatchPutAttributes",
@@ -117,7 +117,7 @@
           "documentation":"<p>Too many attributes exist in a single call.</p>"
         }
       ],
-      "documentation":"<p>\n\t    The <code>BatchPutAttributes</code> operation creates or replaces attributes within\n\t\tone or more items.  By using this operation, the client can perform multiple\n\t\t<a>PutAttribute</a> operation with a single call.  This helps yield savings in round trips\n\t\tand latencies, enabling Amazon SimpleDB to optimize requests and generally produce better throughput.\n\t\t</p>\n\n        <p>\n\t\tThe client may specify the item name with the <code>Item.X.ItemName</code> parameter.\n\t\tThe client may specify new attributes using a combination of the\n\t\t<code>Item.X.Attribute.Y.Name</code> and <code>Item.X.Attribute.Y.Value</code>\n\t\tparameters. The client may specify the first attribute for the first item using the parameters\n\t\t<code>Item.0.Attribute.0.Name</code> and <code>Item.0.Attribute.0.Value</code>,\n\t\tand for the second attribute for the first item by the parameters\n\t\t<code>Item.0.Attribute.1.Name</code> and <code>Item.0.Attribute.1.Value</code>,\n\t\tand so on.\n        </p>\n\n        <p>\n\t\tAttributes are uniquely identified within an item by their name/value\n\t\tcombination. For example, a single item can have the attributes <code>{\n\t\t\"first_name\", \"first_value\" }</code> and <code>{ \"first_name\", \"second_value\" }</code>.\n\t\tHowever, it cannot have two attribute instances where both the\n\t\t<code>Item.X.Attribute.Y.Name</code> and <code>Item.X.Attribute.Y.Value</code>\n\t\tare the same.\n        </p>\n\n        <p>\n        Optionally, the requester can supply the <code>Replace</code> parameter for each\n\t\tindividual value. Setting this value to <code>true</code> will cause the new\n\t\tattribute values to replace the existing attribute values. For\n\t\texample, if an item <code>I</code> has the attributes <code>{ 'a', '1' }, { 'b', '2'}</code>\n\t\tand <code>{ 'b', '3' }</code> and the requester does a BatchPutAttributes of <code>{'I',\n\t\t'b', '4' }</code> with the Replace parameter set to true, the final\n\t\tattributes of the item will be <code>{ 'a', '1' }</code> and <code>{ 'b', '4' }</code>,\n\t\treplacing the previous values of the 'b' attribute with the new value.\n        </p>\n\n        <note>\n\t\tYou cannot specify an empty string as an item or as an attribute name.\n\t\tThe <code>BatchPutAttributes</code> operation succeeds or fails in its entirety.\n        There are no partial puts.\n        </note>\n\n        <important>\n        This operation is vulnerable to exceeding the maximum URL size when making\n        a REST request using the HTTP GET method.\n        This operation does not support conditions using <code>Expected.X.Name</code>,\n        <code>Expected.X.Value</code>, or\n        <code>Expected.X.Exists</code>.\n        </important>\n\n        <p>\n        You can execute multiple <code>BatchPutAttributes</code> operations and other operations in parallel.\n        However, large numbers of concurrent <code>BatchPutAttributes</code> calls can result in\n        Service Unavailable (503) responses.\n        </p>\n\n        <p>\n        The following limitations are enforced for this operation:\n        <ul>\n            <li>256 attribute name-value pairs per item</li>\n            <li>1 MB request size</li>\n            <li>1 billion attributes per domain</li>\n            <li>10 GB of total user data storage per domain</li>\n            <li>25 item limit per <code>BatchPutAttributes</code> operation</li>\n        </ul>\n        </p>"
+      "documentation":"<p> The <code>BatchPutAttributes</code> operation creates or replaces attributes within one or more items. By using this operation, the client can perform multiple <a>PutAttribute</a> operation with a single call. This helps yield savings in round trips and latencies, enabling Amazon SimpleDB to optimize requests and generally produce better throughput. </p> <p> The client may specify the item name with the <code>Item.X.ItemName</code> parameter. The client may specify new attributes using a combination of the <code>Item.X.Attribute.Y.Name</code> and <code>Item.X.Attribute.Y.Value</code> parameters. The client may specify the first attribute for the first item using the parameters <code>Item.0.Attribute.0.Name</code> and <code>Item.0.Attribute.0.Value</code>, and for the second attribute for the first item by the parameters <code>Item.0.Attribute.1.Name</code> and <code>Item.0.Attribute.1.Value</code>, and so on. </p> <p> Attributes are uniquely identified within an item by their name/value combination. For example, a single item can have the attributes <code>{ \"first_name\", \"first_value\" }</code> and <code>{ \"first_name\", \"second_value\" }</code>. However, it cannot have two attribute instances where both the <code>Item.X.Attribute.Y.Name</code> and <code>Item.X.Attribute.Y.Value</code> are the same. </p> <p> Optionally, the requester can supply the <code>Replace</code> parameter for each individual value. Setting this value to <code>true</code> will cause the new attribute values to replace the existing attribute values. For example, if an item <code>I</code> has the attributes <code>{ 'a', '1' }, { 'b', '2'}</code> and <code>{ 'b', '3' }</code> and the requester does a BatchPutAttributes of <code>{'I', 'b', '4' }</code> with the Replace parameter set to true, the final attributes of the item will be <code>{ 'a', '1' }</code> and <code>{ 'b', '4' }</code>, replacing the previous values of the 'b' attribute with the new value. </p> <note> You cannot specify an empty string as an item or as an attribute name. The <code>BatchPutAttributes</code> operation succeeds or fails in its entirety. There are no partial puts. </note> <important> This operation is vulnerable to exceeding the maximum URL size when making a REST request using the HTTP GET method. This operation does not support conditions using <code>Expected.X.Name</code>, <code>Expected.X.Value</code>, or <code>Expected.X.Exists</code>. </important> <p> You can execute multiple <code>BatchPutAttributes</code> operations and other operations in parallel. However, large numbers of concurrent <code>BatchPutAttributes</code> calls can result in Service Unavailable (503) responses. </p> <p> The following limitations are enforced for this operation: <ul> <li>256 attribute name-value pairs per item</li> <li>1 MB request size</li> <li>1 billion attributes per domain</li> <li>10 GB of total user data storage per domain</li> <li>25 item limit per <code>BatchPutAttributes</code> operation</li> </ul> </p>"
     },
     "CreateDomain":{
       "name":"CreateDomain",
@@ -158,7 +158,7 @@
           "documentation":"<p>Too many domains exist per this account.</p>"
         }
       ],
-      "documentation":"<p>\n\t\tThe <code>CreateDomain</code> operation creates a new domain. The domain name should\n\t\tbe unique among the domains associated with the Access Key ID provided\n\t\tin the request. The <code>CreateDomain</code> operation may take 10 or more seconds to complete.\n\t\t</p>\n\n        <note>\n\t\tCreateDomain is an idempotent operation; running it multiple times using the same\n\t\tdomain name will not result in an error response.\n        </note>\n\n        <p>\n        The client can create up to 100 domains per account.\n        </p>\n\n        <p>\n        If the client requires additional domains, go to\n        <a href=\"http://aws.amazon.com/contact-us/simpledb-limit-request/\">\n        http://aws.amazon.com/contact-us/simpledb-limit-request/</a>.\n        </p>"
+      "documentation":"<p> The <code>CreateDomain</code> operation creates a new domain. The domain name should be unique among the domains associated with the Access Key ID provided in the request. The <code>CreateDomain</code> operation may take 10 or more seconds to complete. </p> <note> CreateDomain is an idempotent operation; running it multiple times using the same domain name will not result in an error response. </note> <p> The client can create up to 100 domains per account. </p> <p> If the client requires additional domains, go to <a href=\"http://aws.amazon.com/contact-us/simpledb-limit-request/\"> http://aws.amazon.com/contact-us/simpledb-limit-request/</a>. </p>"
     },
     "DeleteAttributes":{
       "name":"DeleteAttributes",
@@ -209,7 +209,7 @@
           "documentation":"<p>The specified attribute does not exist.</p>"
         }
       ],
-      "documentation":"<p>\n        Deletes one or more attributes associated with an item.\n        If all attributes of the item are deleted, the item is deleted.\n        </p>\n\n        <note>\n        If <code>DeleteAttributes</code> is called without being passed any attributes or values\n        specified, all the attributes for the item are deleted.\n        </note>\n\n        <p>\n        <code>DeleteAttributes</code> is an idempotent operation; running it multiple\n        times on the same item or attribute does not result in an error response.\n        </p>\n\n        <p>\n        Because Amazon SimpleDB makes multiple copies of item data and uses an\n        eventual consistency update model, performing a <a>GetAttributes</a> or\n        <a>Select</a> operation (read) immediately after a <code>DeleteAttributes</code> or\n        <a>PutAttributes</a> operation (write) might not return updated item data.\n        </p>"
+      "documentation":"<p> Deletes one or more attributes associated with an item. If all attributes of the item are deleted, the item is deleted. </p> <note> If <code>DeleteAttributes</code> is called without being passed any attributes or values specified, all the attributes for the item are deleted. </note> <p> <code>DeleteAttributes</code> is an idempotent operation; running it multiple times on the same item or attribute does not result in an error response. </p> <p> Because Amazon SimpleDB makes multiple copies of item data and uses an eventual consistency update model, performing a <a>GetAttributes</a> or <a>Select</a> operation (read) immediately after a <code>DeleteAttributes</code> or <a>PutAttributes</a> operation (write) might not return updated item data. </p>"
     },
     "DeleteDomain":{
       "name":"DeleteDomain",
@@ -230,7 +230,7 @@
           "documentation":"<p>The request must contain the specified missing parameter.</p>"
         }
       ],
-      "documentation":"<p>\n\t    The <code>DeleteDomain</code> operation deletes a domain. Any items\n\t\t(and their attributes) in the domain are deleted as well.\n\t\tThe <code>DeleteDomain</code> operation might take 10 or more seconds to complete.\n\t\t</p>\n\n        <note>\n        Running <code>DeleteDomain</code> on a domain that does not exist or running the\n\t\tfunction multiple times using the same domain name will not result in an error response.\n        </note>"
+      "documentation":"<p> The <code>DeleteDomain</code> operation deletes a domain. Any items (and their attributes) in the domain are deleted as well. The <code>DeleteDomain</code> operation might take 10 or more seconds to complete. </p> <note> Running <code>DeleteDomain</code> on a domain that does not exist or running the function multiple times using the same domain name will not result in an error response. </note>"
     },
     "DomainMetadata":{
       "name":"DomainMetadata",
@@ -265,7 +265,7 @@
           "documentation":"<p>The specified domain does not exist.</p>"
         }
       ],
-      "documentation":"<p>\n\t\tReturns information about the domain, including when the domain was created,\n\t\tthe number of items and attributes in the domain,\n\t\tand the size of the attribute names and values.\n\t\t</p>"
+      "documentation":"<p> Returns information about the domain, including when the domain was created, the number of items and attributes in the domain, and the size of the attribute names and values. </p>"
     },
     "GetAttributes":{
       "name":"GetAttributes",
@@ -310,7 +310,7 @@
           "documentation":"<p>The specified domain does not exist.</p>"
         }
       ],
-      "documentation":"<p>\n        Returns all of the attributes associated with the specified item.\n        Optionally, the attributes returned can be limited to one or\n        more attributes by specifying an attribute name parameter.\n        </p>\n\n        <p>\n        If the item does not exist on the replica that was accessed\n        for this operation, an empty set is returned. The system does\n        not return an error as it cannot guarantee the item does\n        not exist on other replicas.\n        </p>\n\n        <note>\n        If GetAttributes is called without being passed any attribute names, all\n        the attributes for the item are returned.\n        </note>"
+      "documentation":"<p> Returns all of the attributes associated with the specified item. Optionally, the attributes returned can be limited to one or more attributes by specifying an attribute name parameter. </p> <p> If the item does not exist on the replica that was accessed for this operation, an empty set is returned. The system does not return an error as it cannot guarantee the item does not exist on other replicas. </p> <note> If GetAttributes is called without being passed any attribute names, all the attributes for the item are returned. </note>"
     },
     "ListDomains":{
       "name":"ListDomains",
@@ -345,7 +345,7 @@
           "documentation":"<p>The specified NextToken is not valid. </p>"
         }
       ],
-      "documentation":"<p>\n        The <code>ListDomains</code> operation lists all domains associated with the\n        Access Key ID. It returns domain names up to the limit set by\n        <a href=\"#MaxNumberOfDomains\">MaxNumberOfDomains</a>.\n        A <a href=\"#NextToken\">NextToken</a> is returned if there are more\n    \tthan <code>MaxNumberOfDomains</code> domains. Calling <code>ListDomains</code> successive\n        times with the <code>NextToken</code> provided by the operation\n        returns up to <code>MaxNumberOfDomains</code> more domain names\n        with each successive operation call.\n        </p>"
+      "documentation":"<p> The <code>ListDomains</code> operation lists all domains associated with the Access Key ID. It returns domain names up to the limit set by <a href=\"#MaxNumberOfDomains\">MaxNumberOfDomains</a>. A <a href=\"#NextToken\">NextToken</a> is returned if there are more than <code>MaxNumberOfDomains</code> domains. Calling <code>ListDomains</code> successive times with the <code>NextToken</code> provided by the operation returns up to <code>MaxNumberOfDomains</code> more domain names with each successive operation call. </p>"
     },
     "PutAttributes":{
       "name":"PutAttributes",
@@ -426,7 +426,7 @@
           "documentation":"<p>The specified attribute does not exist.</p>"
         }
       ],
-      "documentation":"<p>\n\t\tThe PutAttributes operation creates or replaces attributes\n\t\tin an item. The client may specify new attributes using a combination\n\t\tof the <code>Attribute.X.Name</code> and <code>Attribute.X.Value</code>\n\t\tparameters. The client specifies the first attribute by the parameters\n\t\t<code>Attribute.0.Name</code> and <code>Attribute.0.Value</code>,\n\t\tthe second attribute by the parameters <code>Attribute.1.Name</code>\n\t\tand <code>Attribute.1.Value</code>, and so on.\n\t\t</p>\n\n        <p>\n\t\tAttributes are uniquely identified in an item by their name/value\n\t\tcombination. For example, a single item can have the attributes\n\t\t<code>{ \"first_name\", \"first_value\" }</code> and <code>{ \"first_name\",\n\t\tsecond_value\" }</code>. However, it cannot have two attribute instances\n\t\twhere both the <code>Attribute.X.Name</code> and <code>Attribute.X.Value</code>\n\t\tare the same.\n        </p>\n\n        <p>\n        Optionally, the requestor can supply the <code>Replace</code> parameter for each\n\t\tindividual attribute. Setting this value to <code>true</code> causes the new\n\t\tattribute value to replace the existing attribute value(s).\n\t\tFor example, if an item has the attributes <code>{ 'a', '1' }</code>,\n\t\t<code>{ 'b', '2'}</code> and <code>{ 'b', '3' }</code> and the requestor\n        calls  <code>PutAttributes</code> using the attributes <code>{ 'b', '4' }</code> with\n        the <code>Replace</code> parameter set to true, the final attributes of the item are changed\n\t\tto <code>{ 'a', '1' }</code> and <code>{ 'b', '4' }</code>, which replaces the\n\t\tprevious values of the 'b' attribute with the new value.\n        </p>\n\n        <note>\n        Using <code>PutAttributes</code> to replace attribute values that do not exist will not\n\t\tresult in an error response.\n        </note>\n\n        <p>\n        You cannot specify an empty string as an attribute name.\n        </p>\n\n        <p>\n        Because Amazon SimpleDB makes multiple copies of client data and uses\n        an eventual consistency update model, an immediate <a>GetAttributes</a>\n        or <a>Select</a> operation (read) immediately after a <a>PutAttributes</a> or\n        <a>DeleteAttributes</a> operation (write) might not return the updated data.\n        </p>\n\n        <p>\n        The following limitations are enforced for this operation:\n\n        <ul>\n           <li>256 total attribute name-value pairs per item</li>\n           <li>One billion attributes per domain</li>\n           <li>10 GB of total user data storage per domain</li>\n        </ul>\n        </p>"
+      "documentation":"<p> The PutAttributes operation creates or replaces attributes in an item. The client may specify new attributes using a combination of the <code>Attribute.X.Name</code> and <code>Attribute.X.Value</code> parameters. The client specifies the first attribute by the parameters <code>Attribute.0.Name</code> and <code>Attribute.0.Value</code>, the second attribute by the parameters <code>Attribute.1.Name</code> and <code>Attribute.1.Value</code>, and so on. </p> <p> Attributes are uniquely identified in an item by their name/value combination. For example, a single item can have the attributes <code>{ \"first_name\", \"first_value\" }</code> and <code>{ \"first_name\", second_value\" }</code>. However, it cannot have two attribute instances where both the <code>Attribute.X.Name</code> and <code>Attribute.X.Value</code> are the same. </p> <p> Optionally, the requestor can supply the <code>Replace</code> parameter for each individual attribute. Setting this value to <code>true</code> causes the new attribute value to replace the existing attribute value(s). For example, if an item has the attributes <code>{ 'a', '1' }</code>, <code>{ 'b', '2'}</code> and <code>{ 'b', '3' }</code> and the requestor calls <code>PutAttributes</code> using the attributes <code>{ 'b', '4' }</code> with the <code>Replace</code> parameter set to true, the final attributes of the item are changed to <code>{ 'a', '1' }</code> and <code>{ 'b', '4' }</code>, which replaces the previous values of the 'b' attribute with the new value. </p> <note> Using <code>PutAttributes</code> to replace attribute values that do not exist will not result in an error response. </note> <p> You cannot specify an empty string as an attribute name. </p> <p> Because Amazon SimpleDB makes multiple copies of client data and uses an eventual consistency update model, an immediate <a>GetAttributes</a> or <a>Select</a> operation (read) immediately after a <a>PutAttributes</a> or <a>DeleteAttributes</a> operation (write) might not return the updated data. </p> <p> The following limitations are enforced for this operation: <ul> <li>256 total attribute name-value pairs per item</li> <li>One billion attributes per domain</li> <li>10 GB of total user data storage per domain</li> </ul> </p>"
     },
     "Select":{
       "name":"Select",
@@ -518,7 +518,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"<p>A timeout occurred when attempting to\n    query the specified domain with specified query expression.</p>"
+          "documentation":"<p>A timeout occurred when attempting to query the specified domain with specified query expression.</p>"
         },
         {
           "shape":"TooManyRequestedAttributes",
@@ -531,7 +531,7 @@
           "documentation":"<p>Too many attributes requested.</p>"
         }
       ],
-      "documentation":"<p>\n        The <code>Select</code> operation returns a set of attributes for <code>ItemNames</code>\n        that match the select expression. <code>Select</code> is similar to the standard\n        SQL SELECT statement.\n        </p>\n\n        <p>\n        The total size of the response cannot exceed 1 MB in total size.\n        Amazon SimpleDB automatically adjusts the number of items\n        returned per page to enforce this limit. For example, if the client asks\n        to retrieve 2500 items, but each individual item\n        is 10 kB in size, the system returns 100 items and an\n        appropriate <code>NextToken</code> so the client can access the next page of results.\n        </p>\n\n        <p>\n        For information on how to construct select expressions,\n        see Using Select to Create Amazon SimpleDB Queries in the\n        Developer Guide.\n        </p>"
+      "documentation":"<p> The <code>Select</code> operation returns a set of attributes for <code>ItemNames</code> that match the select expression. <code>Select</code> is similar to the standard SQL SELECT statement. </p> <p> The total size of the response cannot exceed 1 MB in total size. Amazon SimpleDB automatically adjusts the number of items returned per page to enforce this limit. For example, if the client asks to retrieve 2500 items, but each individual item is 10 kB in size, the system returns 100 items and an appropriate <code>NextToken</code> so the client can access the next page of results. </p> <p> For information on how to construct select expressions, see Using Select to Create Amazon SimpleDB Queries in the Developer Guide. </p>"
     }
   },
   "shapes":{
@@ -631,15 +631,13 @@
       "members":{
         "DomainName":{
           "shape":"String",
-          "documentation":"The name of the domain to create. The name can range between 3 and 255\n\t\tcharacters and can contain the following characters: a-z, A-Z, 0-9,\n\t\t'_', '-', and '.'."
+          "documentation":"The name of the domain to create. The name can range between 3 and 255 characters and can contain the following characters: a-z, A-Z, 0-9, '_', '-', and '.'."
         }
       }
     },
     "DeletableAttribute":{
       "type":"structure",
-      "required":[
-        "Name"
-      ],
+      "required":["Name"],
       "members":{
         "Name":{
           "shape":"String",
@@ -692,15 +690,15 @@
         },
         "ItemName":{
           "shape":"String",
-          "documentation":"The name of the item. Similar to rows on a spreadsheet,\n        items represent individual objects that contain one or more\n        value-attribute pairs."
+          "documentation":"The name of the item. Similar to rows on a spreadsheet, items represent individual objects that contain one or more value-attribute pairs."
         },
         "Attributes":{
           "shape":"DeletableAttributeList",
-          "documentation":"A list of Attributes. Similar to columns on a spreadsheet, attributes\n        represent categories of data that can be assigned to items."
+          "documentation":"A list of Attributes. Similar to columns on a spreadsheet, attributes represent categories of data that can be assigned to items."
         },
         "Expected":{
           "shape":"UpdateCondition",
-          "documentation":"The update condition which, if specified, determines whether the specified attributes\n        will be deleted or not.  The update condition must be satisfied in order for this\n        request to be processed and the attributes to be deleted."
+          "documentation":"The update condition which, if specified, determines whether the specified attributes will be deleted or not. The update condition must be satisfied in order for this request to be processed and the attributes to be deleted."
         }
       }
     },
@@ -800,7 +798,7 @@
         },
         "ConsistentRead":{
           "shape":"Boolean",
-          "documentation":"Determines whether or not strong consistency should be enforced when data is read\n        from SimpleDB. If <code>true</code>, any data previously written to SimpleDB\n        will be returned.  Otherwise, results will be consistent eventually, and the client\n        may not see data that was written immediately before your read."
+          "documentation":"Determines whether or not strong consistency should be enforced when data is read from SimpleDB. If <code>true</code>, any data previously written to SimpleDB will be returned. Otherwise, results will be consistent eventually, and the client may not see data that was written immediately before your read."
         }
       }
     },
@@ -914,11 +912,11 @@
       "members":{
         "MaxNumberOfDomains":{
           "shape":"Integer",
-          "documentation":"The maximum number of domain names you want returned.\n\n        The range is 1 to 100.\n\n        The default setting is 100."
+          "documentation":"The maximum number of domain names you want returned. The range is 1 to 100. The default setting is 100."
         },
         "NextToken":{
           "shape":"String",
-          "documentation":"A string informing Amazon SimpleDB where to start the\n        next list of domain names."
+          "documentation":"A string informing Amazon SimpleDB where to start the next list of domain names."
         }
       }
     },
@@ -931,7 +929,7 @@
         },
         "NextToken":{
           "shape":"String",
-          "documentation":"An opaque token indicating that there are more domains than the specified\n        <code>MaxNumberOfDomains</code> still available."
+          "documentation":"An opaque token indicating that there are more domains than the specified <code>MaxNumberOfDomains</code> still available."
         }
       }
     },
@@ -1062,7 +1060,7 @@
         },
         "Expected":{
           "shape":"UpdateCondition",
-          "documentation":"The update condition which, if specified, determines whether the specified attributes\n        will be updated or not.  The update condition must be satisfied in order for this\n        request to be processed and the attributes to be updated."
+          "documentation":"The update condition which, if specified, determines whether the specified attributes will be updated or not. The update condition must be satisfied in order for this request to be processed and the attributes to be updated."
         }
       }
     },
@@ -1083,7 +1081,7 @@
         },
         "Replace":{
           "shape":"Boolean",
-          "documentation":"A flag specifying whether or not to replace the attribute/value pair or\n        to add a new attribute/value pair. The default setting is <code>false</code>."
+          "documentation":"A flag specifying whether or not to replace the attribute/value pair or to add a new attribute/value pair. The default setting is <code>false</code>."
         }
       },
       "documentation":"<p></p>"
@@ -1134,7 +1132,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"<p>A timeout occurred when attempting to\n    query the specified domain with specified query expression.</p>"
+      "documentation":"<p>A timeout occurred when attempting to query the specified domain with specified query expression.</p>"
     },
     "SelectRequest":{
       "type":"structure",
@@ -1146,11 +1144,11 @@
         },
         "NextToken":{
           "shape":"String",
-          "documentation":"A string informing Amazon SimpleDB where to start the next\n        list of <code>ItemNames</code>."
+          "documentation":"A string informing Amazon SimpleDB where to start the next list of <code>ItemNames</code>."
         },
         "ConsistentRead":{
           "shape":"Boolean",
-          "documentation":"Determines whether or not strong consistency should be enforced when data is read\n        from SimpleDB. If <code>true</code>, any data previously written to SimpleDB\n        will be returned.  Otherwise, results will be consistent eventually, and the client\n        may not see data that was written immediately before your read."
+          "documentation":"Determines whether or not strong consistency should be enforced when data is read from SimpleDB. If <code>true</code>, any data previously written to SimpleDB will be returned. Otherwise, results will be consistent eventually, and the client may not see data that was written immediately before your read."
         }
       }
     },
@@ -1163,7 +1161,7 @@
         },
         "NextToken":{
           "shape":"String",
-          "documentation":"An opaque token indicating that more items than <code>MaxNumberOfItems</code> were matched,\n        the response size exceeded 1 megabyte, or the execution time exceeded 5 seconds."
+          "documentation":"An opaque token indicating that more items than <code>MaxNumberOfItems</code> were matched, the response size exceeded 1 megabyte, or the execution time exceeded 5 seconds."
         }
       }
     },
@@ -1190,14 +1188,14 @@
         },
         "Value":{
           "shape":"String",
-          "documentation":"<p>The value of an attribute.  This value can only be\n        specified when the <code>Exists</code> parameter is equal to <code>true</code>.</p>"
+          "documentation":"<p>The value of an attribute. This value can only be specified when the <code>Exists</code> parameter is equal to <code>true</code>.</p>"
         },
         "Exists":{
           "shape":"Boolean",
-          "documentation":"<p>A value specifying whether or not the specified attribute must exist with the specified\n        value in order for the update condition to be satisfied. Specify <code>true</code> if\n        the attribute must exist for the update condition to be satisfied. Specify <code>false</code>\n        if the attribute should not exist in order for the update condition to be satisfied.</p>"
+          "documentation":"<p>A value specifying whether or not the specified attribute must exist with the specified value in order for the update condition to be satisfied. Specify <code>true</code> if the attribute must exist for the update condition to be satisfied. Specify <code>false</code> if the attribute should not exist in order for the update condition to be satisfied.</p>"
         }
       },
-      "documentation":"<p>\n        Specifies the conditions under which data should be updated.\n        If an update condition is specified for a request,\n        the data will only be updated if the condition is satisfied.\n        For example, if an attribute with a specific name and value\n        exists, or if a specific attribute doesn't exist.\n        </p>"
+      "documentation":"<p> Specifies the conditions under which data should be updated. If an update condition is specified for a request, the data will only be updated if the condition is satisfied. For example, if an attribute with a specific name and value exists, or if a specific attribute doesn't exist. </p>"
     }
   }
 }

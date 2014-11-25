@@ -98,21 +98,3 @@ describe 'AWS.SequentialExecutor', ->
       @emitter.emit 'event1', [null], (err) ->
         expect(err).to.equal('ERROR')
         expect(list).to.eql([1,2])
-
-  if AWS.util.isNode()
-    describe 'domain support', ->
-      domain = null
-      beforeEach -> domain = require('domain').create()
-      afterEach -> domain.dispose()
-
-      it 'supports domains', ->
-        helpers.mockHttpResponse 200, {}, 'Success!'
-
-        thrown = null
-        domain.on 'error', (err) -> thrown = err
-        domain.run ->
-          service = new helpers.MockService()
-          service.makeRequest 'operationName', ->
-            invalidCode
-
-        expect(thrown.name).to.equal('ReferenceError')

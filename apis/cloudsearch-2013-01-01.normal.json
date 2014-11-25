@@ -1968,7 +1968,8 @@
         "SearchInstanceCount":{
           "shape":"InstanceCount",
           "documentation":"<p>The number of search instances that are available to process search requests.</p>"
-        }
+        },
+        "Limits":{"shape":"Limits"}
       },
       "documentation":"<p>The current status of the search domain.</p>"
     },
@@ -2302,6 +2303,17 @@
       "exception":true,
       "documentation":"<p>The request was rejected because a resource limit has already been met.</p>"
     },
+    "Limits":{
+      "type":"structure",
+      "required":[
+        "MaximumReplicationCount",
+        "MaximumPartitionCount"
+      ],
+      "members":{
+        "MaximumReplicationCount":{"shape":"MaximumReplicationCount"},
+        "MaximumPartitionCount":{"shape":"MaximumPartitionCount"}
+      }
+    },
     "ListDomainNamesResponse":{
       "type":"structure",
       "members":{
@@ -2366,6 +2378,14 @@
       "documentation":"<p>Options for literal field. Present if <code>IndexFieldType</code> specifies the field is of type <code>literal</code>. All options are enabled by default.</p>"
     },
     "Long":{"type":"long"},
+    "MaximumPartitionCount":{
+      "type":"integer",
+      "min":1
+    },
+    "MaximumReplicationCount":{
+      "type":"integer",
+      "min":1
+    },
     "MultiAZ":{"type":"boolean"},
     "OptionState":{
       "type":"string",

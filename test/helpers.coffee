@@ -90,10 +90,10 @@ MockService = AWS.Service.defineService 'mockService',
     @config.region = 'mock-region'
   setupRequestListeners: (request) ->
     request.on 'extractData', (resp) ->
-      resp.data = resp.httpResponse.body.toString()
+      resp.data = (resp.httpResponse.body||'').toString()
     request.on 'extractError', (resp) ->
       resp.error =
-        code: resp.httpResponse.body.toString() || resp.httpResponse.statusCode
+        code: (resp.httpResponse.body||'').toString() || resp.httpResponse.statusCode
         message: null
   api: new AWS.Model.Api metadata:
     endpointPrefix: 'mockservice'

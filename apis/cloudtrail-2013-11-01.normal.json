@@ -9,7 +9,7 @@
     "targetPrefix":"com.amazonaws.cloudtrail.v20131101.CloudTrail_20131101",
     "protocol":"json"
   },
-  "documentation":"<fullname>AWS CloudTrail</fullname> <p>This is the CloudTrail API Reference. It provides descriptions of actions, data types, common parameters, and common errors for CloudTrail.</p> <p>CloudTrail is a web service that records AWS API calls for your AWS account and delivers log files to an Amazon S3 bucket. The recorded information includes the identity of the user, the start time of the AWS API call, the source IP address, the request parameters, and the response elements returned by the service.</p> <p>See the CloudTrail User Guide for information about the data that is included with each AWS API call listed in the log files.</p>",
+  "documentation":"<fullname>AWS CloudTrail</fullname> <p>This is the CloudTrail API Reference. It provides descriptions of actions, data types, common parameters, and common errors for CloudTrail.</p> <p>CloudTrail is a web service that records AWS API calls for your AWS account and delivers log files to an Amazon S3 bucket. The recorded information includes the identity of the user, the start time of the AWS API call, the source IP address, the request parameters, and the response elements returned by the service.</p> <note> As an alternative to using the API, you can use one of the AWS SDKs, which consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc.). The SDKs provide a convenient way to create programmatic access to AWSCloudTrail. For example, the SDKs take care of cryptographically signing requests, managing errors, and retrying requests automatically. For information about the AWS SDKs, including how to download and install them, see the <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services page</a>. </note> <p>See the CloudTrail User Guide for information about the data that is included with each AWS API call listed in the log files.</p>",
   "operations":{
     "CreateTrail":{
       "name":"CreateTrail",
@@ -115,6 +115,36 @@
           },
           "exception":true,
           "documentation":"This exception is thrown when the provided trail name is not valid."
+        },
+        {
+          "shape":"InvalidCloudWatchLogsLogGroupArnException",
+          "error":{
+            "code":"InvalidCloudWatchLogsLogGroupArn",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"This exception is thrown when the provided CloudWatch log group is not valid."
+        },
+        {
+          "shape":"InvalidCloudWatchLogsRoleArnException",
+          "error":{
+            "code":"InvalidCloudWatchLogsRoleArn",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"This exception is thrown when the provided role is not valid."
+        },
+        {
+          "shape":"CloudWatchLogsDeliveryUnavailableException",
+          "error":{
+            "code":"CloudWatchLogsDeliveryUnavailable",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Cannot set a CloudWatch Logs delivery for this region."
         }
       ],
       "documentation":"<p>From the command line, use <code>create-subscription</code>. </p> <p>Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. </p>"
@@ -381,6 +411,36 @@
           },
           "exception":true,
           "documentation":"This exception is thrown when the provided trail name is not valid."
+        },
+        {
+          "shape":"InvalidCloudWatchLogsLogGroupArnException",
+          "error":{
+            "code":"InvalidCloudWatchLogsLogGroupArn",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"This exception is thrown when the provided CloudWatch log group is not valid."
+        },
+        {
+          "shape":"InvalidCloudWatchLogsRoleArnException",
+          "error":{
+            "code":"InvalidCloudWatchLogsRoleArn",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"This exception is thrown when the provided role is not valid."
+        },
+        {
+          "shape":"CloudWatchLogsDeliveryUnavailableException",
+          "error":{
+            "code":"CloudWatchLogsDeliveryUnavailable",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"Cannot set a CloudWatch Logs delivery for this region."
         }
       ],
       "documentation":"<p>From the command line, use <code>update-subscription</code>.</p> <p>Updates the settings that specify delivery of log files. Changes to a trail do not require stopping the CloudTrail service. Use this action to designate an existing bucket for log delivery. If the existing bucket has previously been a target for CloudTrail log files, an IAM policy exists for the bucket. </p>"
@@ -388,6 +448,18 @@
   },
   "shapes":{
     "Boolean":{"type":"boolean"},
+    "CloudWatchLogsDeliveryUnavailableException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"CloudWatchLogsDeliveryUnavailable",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"Cannot set a CloudWatch Logs delivery for this region."
+    },
     "CreateTrailRequest":{
       "type":"structure",
       "required":[
@@ -414,6 +486,14 @@
         "IncludeGlobalServiceEvents":{
           "shape":"Boolean",
           "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files. </p>"
+        },
+        "CloudWatchLogsLogGroupArn":{
+          "shape":"String",
+          "documentation":"<p>Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.</p>"
+        },
+        "CloudWatchLogsRoleArn":{
+          "shape":"String",
+          "documentation":"<p>Specifies the role for the CloudWatch Logs endpoint to assume to write to a user’s log group.</p>"
         }
       },
       "documentation":"<p>Specifies the settings for each trail.</p>"
@@ -440,6 +520,14 @@
         "IncludeGlobalServiceEvents":{
           "shape":"Boolean",
           "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files. </p>"
+        },
+        "CloudWatchLogsLogGroupArn":{
+          "shape":"String",
+          "documentation":"<p>Specifies the Amazon Resource Name (ARN) of the log group to which CloudTrail logs will be delivered.</p>"
+        },
+        "CloudWatchLogsRoleArn":{
+          "shape":"String",
+          "documentation":"<p>Specifies the role for the CloudWatch Logs endpoint to assume to write to a user’s log group.</p>"
         }
       },
       "documentation":"Returns the objects or data listed below if successful. Otherwise, returns an error."
@@ -523,6 +611,14 @@
         "StopLoggingTime":{
           "shape":"Date",
           "documentation":"<p>Specifies the most recent date and time when CloudTrail stopped recording API calls for an AWS account. </p>"
+        },
+        "LatestCloudWatchLogsDeliveryError":{
+          "shape":"String",
+          "documentation":"<p>Displays any CloudWatch Logs error that CloudTrail encountered when attempting to deliver logs to CloudWatch Logs.</p>"
+        },
+        "LatestCloudWatchLogsDeliveryTime":{
+          "shape":"Date",
+          "documentation":"<p>Displays the most recent date and time when CloudTrail delivered logs to CloudWatch Logs.</p>"
         }
       },
       "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
@@ -550,6 +646,30 @@
       },
       "exception":true,
       "documentation":"This exception is thrown when the policy on the SNS topic is not sufficient."
+    },
+    "InvalidCloudWatchLogsLogGroupArnException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidCloudWatchLogsLogGroupArn",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"This exception is thrown when the provided CloudWatch log group is not valid."
+    },
+    "InvalidCloudWatchLogsRoleArnException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidCloudWatchLogsRoleArn",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"This exception is thrown when the provided role is not valid."
     },
     "InvalidS3BucketNameException":{
       "type":"structure",
@@ -680,6 +800,14 @@
         "IncludeGlobalServiceEvents":{
           "shape":"Boolean",
           "documentation":"<p>Set to <b>True</b> to include AWS API calls from AWS global services such as IAM. Otherwise, <b>False</b>.</p>"
+        },
+        "CloudWatchLogsLogGroupArn":{
+          "shape":"String",
+          "documentation":"<p>Specifies an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered.</p>"
+        },
+        "CloudWatchLogsRoleArn":{
+          "shape":"String",
+          "documentation":"<p>Specifies the role for the CloudWatch Logs endpoint to assume to write to a user’s log group.</p>"
         }
       },
       "documentation":"<p>The settings for a trail.</p>"
@@ -739,6 +867,14 @@
         "IncludeGlobalServiceEvents":{
           "shape":"Boolean",
           "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files. </p>"
+        },
+        "CloudWatchLogsLogGroupArn":{
+          "shape":"String",
+          "documentation":"<p>Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.</p>"
+        },
+        "CloudWatchLogsRoleArn":{
+          "shape":"String",
+          "documentation":"<p>Specifies the role for the CloudWatch Logs endpoint to assume to write to a user’s log group.</p>"
         }
       },
       "documentation":"<p>Specifies settings to update for the trail.</p>"
@@ -765,6 +901,14 @@
         "IncludeGlobalServiceEvents":{
           "shape":"Boolean",
           "documentation":"<p>Specifies whether the trail is publishing events from global services such as IAM to the log files. </p>"
+        },
+        "CloudWatchLogsLogGroupArn":{
+          "shape":"String",
+          "documentation":"<p>Specifies the Amazon Resource Name (ARN) of the log group to which CloudTrail logs will be delivered.</p>"
+        },
+        "CloudWatchLogsRoleArn":{
+          "shape":"String",
+          "documentation":"<p>Specifies the role for the CloudWatch Logs endpoint to assume to write to a user’s log group.</p>"
         }
       },
       "documentation":"Returns the objects or data listed below if successful. Otherwise, returns an error."

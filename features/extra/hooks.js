@@ -23,6 +23,14 @@ module.exports = function () {
 
   /* Global error code steps */
 
+  this.Given(/^I run the "([^"]*)" operation$/, function (operation, callback) {
+    this.request(null, operation, {}, callback, false);
+  });
+
+  this.Given(/^I run the "([^"]*)" operation with params:$/, function (operation, params, callback) {
+    this.request(null, operation, JSON.parse(params), callback, false);
+  });
+
   this.Then(/^the request should be successful$/, function (callback) {
     this.assert.ok(!this.error, 'Response was not successful');
     callback();

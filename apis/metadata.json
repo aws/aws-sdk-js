@@ -7,7 +7,7 @@
   },
   "cloudfront": {
     "name": "CloudFront",
-    "versions": ["2013-05-12*", "2013-11-11*"]
+    "versions": ["2013-05-12*", "2013-11-11*", "2014-05-31*"]
   },
   "cloudsearch": {
     "name": "CloudSearch"
@@ -26,6 +26,9 @@
     "prefix": "logs",
     "name": "CloudWatchLogs"
   },
+  "codedeploy": {
+    "name": "CodeDeploy"
+  },
   "cognitoidentity": {
     "prefix": "cognito-identity",
     "name": "CognitoIdentity"
@@ -33,6 +36,10 @@
   "cognitosync": {
     "prefix": "cognito-sync",
     "name": "CognitoSync"
+  },
+  "configservice": {
+    "prefix": "config",
+    "name": "ConfigService"
   },
   "datapipeline": {
     "name": "DataPipeline"
@@ -45,11 +52,11 @@
   },
   "ec2": {
     "name": "EC2",
-    "versions": ["2013-06-15*", "2013-10-15*", "2014-02-01*", "2014-05-01*"]
+    "versions": ["2013-06-15*", "2013-10-15*", "2014-02-01*", "2014-05-01*", "2014-06-15*", "2014-09-01*"]
   },
   "elasticache": {
     "name": "ElastiCache",
-    "versions": ["2012-11-15*", "2014-03-24*"]
+    "versions": ["2012-11-15*", "2014-03-24*", "2014-07-15*"]
   },
   "elasticbeanstalk": {
     "name": "ElasticBeanstalk"
@@ -76,6 +83,12 @@
   },
   "kinesis": {
     "name": "Kinesis"
+  },
+  "kms": {
+    "name": "KMS"
+  },
+  "lambda": {
+    "name": "Lambda"
   },
   "opsworks": {
     "name": "OpsWorks"

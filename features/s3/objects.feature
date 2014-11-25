@@ -19,7 +19,7 @@ Feature: Working with Objects in S3
     And the object with the key "hello" should contain ""
 
     # ContentLength
-    When I write "foobar" to the key "hello" with ContentLength 3
+    When I write "foo" to the key "hello" with ContentLength 3
     Then the object with the key "hello" should exist
     And the object with the key "hello" should contain "foo"
 

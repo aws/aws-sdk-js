@@ -1,6 +1,6 @@
 {
   "metadata":{
-    "apiVersion":"2014-05-31",
+    "apiVersion":"2014-10-21",
     "endpointPrefix":"cloudfront",
     "globalEndpoint":"cloudfront.amazonaws.com",
     "serviceAbbreviation":"CloudFront",
@@ -10,10 +10,10 @@
   },
   "operations":{
     "CreateCloudFrontOriginAccessIdentity":{
-      "name":"CreateCloudFrontOriginAccessIdentity2014_05_31",
+      "name":"CreateCloudFrontOriginAccessIdentity2014_10_21",
       "http":{
         "method":"POST",
-        "requestUri":"/2014-05-31/origin-access-identity/cloudfront",
+        "requestUri":"/2014-10-21/origin-access-identity/cloudfront",
         "responseCode":201
       },
       "input":{
@@ -59,10 +59,10 @@
       "documentation":"Create a new origin access identity."
     },
     "CreateDistribution":{
-      "name":"CreateDistribution2014_05_31",
+      "name":"CreateDistribution2014_10_21",
       "http":{
         "method":"POST",
-        "requestUri":"/2014-05-31/distribution",
+        "requestUri":"/2014-10-21/distribution",
         "responseCode":201
       },
       "input":{
@@ -233,15 +233,21 @@
           "shape":"InvalidGeoRestrictionParameter",
           "error":{"httpStatusCode":400},
           "exception":true
+        },
+        {
+          "shape":"InvalidProtocolSettings",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"You cannot specify SSLv3 as the minimum protocol version if you only want to support only clients that Support Server Name Indication (SNI)."
         }
       ],
       "documentation":"Create a new distribution."
     },
     "CreateInvalidation":{
-      "name":"CreateInvalidation2014_05_31",
+      "name":"CreateInvalidation2014_10_21",
       "http":{
         "method":"POST",
-        "requestUri":"/2014-05-31/distribution/{DistributionId}/invalidation",
+        "requestUri":"/2014-10-21/distribution/{DistributionId}/invalidation",
         "responseCode":201
       },
       "input":{
@@ -298,10 +304,10 @@
       "documentation":"Create a new invalidation."
     },
     "CreateStreamingDistribution":{
-      "name":"CreateStreamingDistribution2014_05_31",
+      "name":"CreateStreamingDistribution2014_10_21",
       "http":{
         "method":"POST",
-        "requestUri":"/2014-05-31/streaming-distribution",
+        "requestUri":"/2014-10-21/streaming-distribution",
         "responseCode":201
       },
       "input":{
@@ -386,10 +392,10 @@
       "documentation":"Create a new streaming distribution."
     },
     "DeleteCloudFrontOriginAccessIdentity":{
-      "name":"DeleteCloudFrontOriginAccessIdentity2014_05_31",
+      "name":"DeleteCloudFrontOriginAccessIdentity2014_10_21",
       "http":{
         "method":"DELETE",
-        "requestUri":"/2014-05-31/origin-access-identity/cloudfront/{Id}",
+        "requestUri":"/2014-10-21/origin-access-identity/cloudfront/{Id}",
         "responseCode":204
       },
       "input":{
@@ -430,10 +436,10 @@
       "documentation":"Delete an origin access identity."
     },
     "DeleteDistribution":{
-      "name":"DeleteDistribution2014_05_31",
+      "name":"DeleteDistribution2014_10_21",
       "http":{
         "method":"DELETE",
-        "requestUri":"/2014-05-31/distribution/{Id}",
+        "requestUri":"/2014-10-21/distribution/{Id}",
         "responseCode":204
       },
       "input":{
@@ -474,10 +480,10 @@
       "documentation":"Delete a distribution."
     },
     "DeleteStreamingDistribution":{
-      "name":"DeleteStreamingDistribution2014_05_31",
+      "name":"DeleteStreamingDistribution2014_10_21",
       "http":{
         "method":"DELETE",
-        "requestUri":"/2014-05-31/streaming-distribution/{Id}",
+        "requestUri":"/2014-10-21/streaming-distribution/{Id}",
         "responseCode":204
       },
       "input":{
@@ -518,10 +524,10 @@
       "documentation":"Delete a streaming distribution."
     },
     "GetCloudFrontOriginAccessIdentity":{
-      "name":"GetCloudFrontOriginAccessIdentity2014_05_31",
+      "name":"GetCloudFrontOriginAccessIdentity2014_10_21",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-05-31/origin-access-identity/cloudfront/{Id}"
+        "requestUri":"/2014-10-21/origin-access-identity/cloudfront/{Id}"
       },
       "input":{
         "shape":"GetCloudFrontOriginAccessIdentityRequest",
@@ -548,10 +554,10 @@
       "documentation":"Get the information about an origin access identity."
     },
     "GetCloudFrontOriginAccessIdentityConfig":{
-      "name":"GetCloudFrontOriginAccessIdentityConfig2014_05_31",
+      "name":"GetCloudFrontOriginAccessIdentityConfig2014_10_21",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-05-31/origin-access-identity/cloudfront/{Id}/config"
+        "requestUri":"/2014-10-21/origin-access-identity/cloudfront/{Id}/config"
       },
       "input":{
         "shape":"GetCloudFrontOriginAccessIdentityConfigRequest",
@@ -578,10 +584,10 @@
       "documentation":"Get the configuration information about an origin access identity."
     },
     "GetDistribution":{
-      "name":"GetDistribution2014_05_31",
+      "name":"GetDistribution2014_10_21",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-05-31/distribution/{Id}"
+        "requestUri":"/2014-10-21/distribution/{Id}"
       },
       "input":{
         "shape":"GetDistributionRequest",
@@ -608,10 +614,10 @@
       "documentation":"Get the information about a distribution."
     },
     "GetDistributionConfig":{
-      "name":"GetDistributionConfig2014_05_31",
+      "name":"GetDistributionConfig2014_10_21",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-05-31/distribution/{Id}/config"
+        "requestUri":"/2014-10-21/distribution/{Id}/config"
       },
       "input":{
         "shape":"GetDistributionConfigRequest",
@@ -638,10 +644,10 @@
       "documentation":"Get the configuration information about a distribution."
     },
     "GetInvalidation":{
-      "name":"GetInvalidation2014_05_31",
+      "name":"GetInvalidation2014_10_21",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-05-31/distribution/{DistributionId}/invalidation/{Id}"
+        "requestUri":"/2014-10-21/distribution/{DistributionId}/invalidation/{Id}"
       },
       "input":{
         "shape":"GetInvalidationRequest",
@@ -674,10 +680,10 @@
       "documentation":"Get the information about an invalidation."
     },
     "GetStreamingDistribution":{
-      "name":"GetStreamingDistribution2014_05_31",
+      "name":"GetStreamingDistribution2014_10_21",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-05-31/streaming-distribution/{Id}"
+        "requestUri":"/2014-10-21/streaming-distribution/{Id}"
       },
       "input":{
         "shape":"GetStreamingDistributionRequest",
@@ -704,10 +710,10 @@
       "documentation":"Get the information about a streaming distribution."
     },
     "GetStreamingDistributionConfig":{
-      "name":"GetStreamingDistributionConfig2014_05_31",
+      "name":"GetStreamingDistributionConfig2014_10_21",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-05-31/streaming-distribution/{Id}/config"
+        "requestUri":"/2014-10-21/streaming-distribution/{Id}/config"
       },
       "input":{
         "shape":"GetStreamingDistributionConfigRequest",
@@ -734,10 +740,10 @@
       "documentation":"Get the configuration information about a streaming distribution."
     },
     "ListCloudFrontOriginAccessIdentities":{
-      "name":"ListCloudFrontOriginAccessIdentities2014_05_31",
+      "name":"ListCloudFrontOriginAccessIdentities2014_10_21",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-05-31/origin-access-identity/cloudfront"
+        "requestUri":"/2014-10-21/origin-access-identity/cloudfront"
       },
       "input":{
         "shape":"ListCloudFrontOriginAccessIdentitiesRequest",
@@ -758,10 +764,10 @@
       "documentation":"List origin access identities."
     },
     "ListDistributions":{
-      "name":"ListDistributions2014_05_31",
+      "name":"ListDistributions2014_10_21",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-05-31/distribution"
+        "requestUri":"/2014-10-21/distribution"
       },
       "input":{
         "shape":"ListDistributionsRequest",
@@ -782,10 +788,10 @@
       "documentation":"List distributions."
     },
     "ListInvalidations":{
-      "name":"ListInvalidations2014_05_31",
+      "name":"ListInvalidations2014_10_21",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-05-31/distribution/{DistributionId}/invalidation"
+        "requestUri":"/2014-10-21/distribution/{DistributionId}/invalidation"
       },
       "input":{
         "shape":"ListInvalidationsRequest",
@@ -818,10 +824,10 @@
       "documentation":"List invalidation batches."
     },
     "ListStreamingDistributions":{
-      "name":"ListStreamingDistributions2014_05_31",
+      "name":"ListStreamingDistributions2014_10_21",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-05-31/streaming-distribution"
+        "requestUri":"/2014-10-21/streaming-distribution"
       },
       "input":{
         "shape":"ListStreamingDistributionsRequest",
@@ -842,10 +848,10 @@
       "documentation":"List streaming distributions."
     },
     "UpdateCloudFrontOriginAccessIdentity":{
-      "name":"UpdateCloudFrontOriginAccessIdentity2014_05_31",
+      "name":"UpdateCloudFrontOriginAccessIdentity2014_10_21",
       "http":{
         "method":"PUT",
-        "requestUri":"/2014-05-31/origin-access-identity/cloudfront/{Id}/config"
+        "requestUri":"/2014-10-21/origin-access-identity/cloudfront/{Id}/config"
       },
       "input":{
         "shape":"UpdateCloudFrontOriginAccessIdentityRequest",
@@ -908,10 +914,10 @@
       "documentation":"Update an origin access identity."
     },
     "UpdateDistribution":{
-      "name":"UpdateDistribution2014_05_31",
+      "name":"UpdateDistribution2014_10_21",
       "http":{
         "method":"PUT",
-        "requestUri":"/2014-05-31/distribution/{Id}/config"
+        "requestUri":"/2014-10-21/distribution/{Id}/config"
       },
       "input":{
         "shape":"UpdateDistributionRequest",
@@ -1092,10 +1098,10 @@
       "documentation":"Update a distribution."
     },
     "UpdateStreamingDistribution":{
-      "name":"UpdateStreamingDistribution2014_05_31",
+      "name":"UpdateStreamingDistribution2014_10_21",
       "http":{
         "method":"PUT",
-        "requestUri":"/2014-05-31/streaming-distribution/{Id}/config"
+        "requestUri":"/2014-10-21/streaming-distribution/{Id}/config"
       },
       "input":{
         "shape":"UpdateStreamingDistributionRequest",
@@ -1242,25 +1248,22 @@
     },
     "AllowedMethods":{
       "type":"structure",
-      "required":["Quantity"],
+      "required":[
+        "Quantity",
+        "Items"
+      ],
       "members":{
         "Quantity":{
           "shape":"integer",
-          "documentation":"The number of HTTP methods that you want CloudFront to forward to your origin. Valid values are 2 (for GET and HEAD requests) and 7 (for DELETE, GET, HEAD, OPTIONS, PATCH, POST, and PUT requests)."
+          "documentation":"The number of HTTP methods that you want CloudFront to forward to your origin. Valid values are 2 (for GET and HEAD requests), 3 (for GET, HEAD and OPTIONS requests) and 7 (for GET, HEAD, OPTIONS, PUT, PATCH, POST, and DELETE requests)."
         },
         "Items":{
-          "shape":"AllowedMethodsList",
+          "shape":"MethodsList",
           "documentation":"A complex type that contains the HTTP methods that you want CloudFront to process and forward to your origin."
-        }
+        },
+        "CachedMethods":{"shape":"CachedMethods"}
       },
-      "documentation":"A complex type that controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin. There are two options: - CloudFront forwards only GET and HEAD requests. - CloudFront forwards DELETE, GET, HEAD, OPTIONS, PATCH, POST, and PUT requests. If you choose the second option, you may need to restrict access to your Amazon S3 bucket or to your custom origin so users can't perform operations that you don't want them to. For example, you may not want users to have permission to delete objects from your origin."
-    },
-    "AllowedMethodsList":{
-      "type":"list",
-      "member":{
-        "shape":"Method",
-        "locationName":"Method"
-      }
+      "documentation":"A complex type that controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin. There are three choices: - CloudFront forwards only GET and HEAD requests. - CloudFront forwards only GET, HEAD and OPTIONS requests. - CloudFront forwards GET, HEAD, OPTIONS, PUT, PATCH, POST, and DELETE requests. If you pick the third choice, you may need to restrict access to your Amazon S3 bucket or to your custom origin so users can't perform operations that you don't want them to. For example, you may not want users to have permission to delete objects from your origin."
     },
     "AwsAccountNumberList":{
       "type":"list",
@@ -1349,6 +1352,24 @@
         }
       },
       "documentation":"A complex type that contains zero or more CacheBehavior elements."
+    },
+    "CachedMethods":{
+      "type":"structure",
+      "required":[
+        "Quantity",
+        "Items"
+      ],
+      "members":{
+        "Quantity":{
+          "shape":"integer",
+          "documentation":"The number of HTTP methods for which you want CloudFront to cache responses. Valid values are 2 (for caching responses to GET and HEAD requests) and 3 (for caching responses to GET, HEAD, and OPTIONS requests)."
+        },
+        "Items":{
+          "shape":"MethodsList",
+          "documentation":"A complex type that contains the HTTP methods that you want CloudFront to cache responses to."
+        }
+      },
+      "documentation":"A complex type that controls whether CloudFront caches the response to requests using the specified HTTP methods. There are two choices: - CloudFront caches responses to GET and HEAD requests. - CloudFront caches responses to GET, HEAD, and OPTIONS requests. If you pick the second choice for your S3 Origin, you may need to forward Access-Control-Request-Method, Access-Control-Request-Headers and Origin headers for the responses to be cached correctly."
     },
     "CloudFrontOriginAccessIdentity":{
       "type":"structure",
@@ -1517,7 +1538,7 @@
         "CloudFrontOriginAccessIdentityConfig":{
           "shape":"CloudFrontOriginAccessIdentityConfig",
           "documentation":"The origin access identity's configuration information.",
-          "xmlNamespace":"http://cloudfront.amazonaws.com/doc/2014-05-31/",
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
           "locationName":"CloudFrontOriginAccessIdentityConfig"
         }
       },
@@ -1554,7 +1575,7 @@
         "DistributionConfig":{
           "shape":"DistributionConfig",
           "documentation":"The distribution's configuration information.",
-          "xmlNamespace":"http://cloudfront.amazonaws.com/doc/2014-05-31/",
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
           "locationName":"DistributionConfig"
         }
       },
@@ -1600,7 +1621,7 @@
         "InvalidationBatch":{
           "shape":"InvalidationBatch",
           "documentation":"The batch information for the invalidation.",
-          "xmlNamespace":"http://cloudfront.amazonaws.com/doc/2014-05-31/",
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
           "locationName":"InvalidationBatch"
         }
       },
@@ -1631,7 +1652,7 @@
         "StreamingDistributionConfig":{
           "shape":"StreamingDistributionConfig",
           "documentation":"The streaming distribution's configuration information.",
-          "xmlNamespace":"http://cloudfront.amazonaws.com/doc/2014-05-31/",
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
           "locationName":"StreamingDistributionConfig"
         }
       },
@@ -2451,6 +2472,15 @@
       "exception":true,
       "documentation":"The origin access identity is not valid or doesn't exist."
     },
+    "InvalidProtocolSettings":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"string"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true,
+      "documentation":"You cannot specify SSLv3 as the minimum protocol version if you only want to support only clients that Support Server Name Indication (SNI)."
+    },
     "InvalidRelativePath":{
       "type":"structure",
       "members":{
@@ -2792,6 +2822,20 @@
         "PATCH",
         "OPTIONS",
         "DELETE"
+      ]
+    },
+    "MethodsList":{
+      "type":"list",
+      "member":{
+        "shape":"Method",
+        "locationName":"Method"
+      }
+    },
+    "MinimumProtocolVersion":{
+      "type":"string",
+      "enum":[
+        "SSLv3",
+        "TLSv1"
       ]
     },
     "MissingBody":{
@@ -3377,7 +3421,7 @@
         "CloudFrontOriginAccessIdentityConfig":{
           "shape":"CloudFrontOriginAccessIdentityConfig",
           "documentation":"The identity's configuration information.",
-          "xmlNamespace":"http://cloudfront.amazonaws.com/doc/2014-05-31/",
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
           "locationName":"CloudFrontOriginAccessIdentityConfig"
         },
         "Id":{
@@ -3423,7 +3467,7 @@
         "DistributionConfig":{
           "shape":"DistributionConfig",
           "documentation":"The distribution's configuration information.",
-          "xmlNamespace":"http://cloudfront.amazonaws.com/doc/2014-05-31/",
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
           "locationName":"DistributionConfig"
         },
         "Id":{
@@ -3469,7 +3513,7 @@
         "StreamingDistributionConfig":{
           "shape":"StreamingDistributionConfig",
           "documentation":"The streaming distribution's configuration information.",
-          "xmlNamespace":"http://cloudfront.amazonaws.com/doc/2014-05-31/",
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
           "locationName":"StreamingDistributionConfig"
         },
         "Id":{
@@ -3519,6 +3563,10 @@
         "SSLSupportMethod":{
           "shape":"SSLSupportMethod",
           "documentation":"If you specify a value for IAMCertificateId, you must also specify how you want CloudFront to serve HTTPS requests. Valid values are vip and sni-only. If you specify vip, CloudFront uses dedicated IP addresses for your content and can respond to HTTPS requests from any viewer. However, you must request permission to use this feature, and you incur additional monthly charges. If you specify sni-only, CloudFront can only respond to HTTPS requests from viewers that support Server Name Indication (SNI). All modern browsers support SNI, but some browsers still in use don't support SNI. Do not specify a value for SSLSupportMethod if you specified true for CloudFrontDefaultCertificate."
+        },
+        "MinimumProtocolVersion":{
+          "shape":"MinimumProtocolVersion",
+          "documentation":"Specify the minimum version of the SSL protocol that you want CloudFront to use, SSLv3 or TLSv1, for HTTPS connections. CloudFront will serve your objects only to browsers or devices that support at least the SSL version that you specify. The TLSv1 protocol is more secure, so we recommend that you specify SSLv3 only if your users are using browsers or devices that don't support TLSv1. If you're using a custom certificate (if you specify a value for IAMCertificateId) and if you're using dedicated IP (if you specify vip for SSLSupportMethod), you can choose SSLv3 or TLSv1 as the MinimumProtocolVersion. If you're using a custom certificate (if you specify a value for IAMCertificateId) and if you're using SNI (if you specify sni-only for SSLSupportMethod), you must specify TLSv1 for MinimumProtocolVersion."
         }
       },
       "documentation":"A complex type that contains information about viewer certificates for this distribution."

@@ -9,7 +9,7 @@ describe 'AWS.ElasticTranscoder', ->
 
   describe 'error handling', ->
     it 'should generate the correct error name', ->
-      helpers.mockHttpResponse 400, {'x-amzn-errortype': 'ErrorName:'}, ''
+      helpers.mockHttpResponse 400, {'x-amzn-errortype': 'ErrorName:http://'}, ''
       et.listPipelines (err, data) ->
         expect(err.code).to.equal('ErrorName')
 

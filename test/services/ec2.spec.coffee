@@ -30,12 +30,25 @@ describe 'AWS.EC2', ->
             "%26X-Amz-Algorithm%3DAWS4-HMAC-SHA256%26X-Amz-Credential%3Dakid%252F19700101" +
             "%252Fsrc-region%252Fec2%252Faws4_request%26X-Amz-Date%3D19700101T000000Z" +
             "%26X-Amz-Expires%3D3600%26X-Amz-Security-Token%3Dsession" +
-            "%26X-Amz-Signature%3D2a09621aaae799a2a4f68d40e14d4d57f73227307c992615917acc097cb7400c" +
+            "%26X-Amz-Signature%3D59789a2b46cde824a9e2e4fae739605ec3b8796f8c5266c4f4023bdc9a6ba15e" +
             "%26X-Amz-SignedHeaders%3Dhost",
           'SourceRegion=src-region',
           'SourceSnapshotId=snap-123456789'
         ].forEach (i) ->
           expect(parts).to.contain(i)
+
+  describe 'describeTags', ->
+    it 'generates correct request parameters', ->
+      req = ec2.describeTags(Filters: [{Name: 'filter', Values: ['v1', 'v2']}])
+      req.build()
+      expect(req.httpRequest.params).to.eql
+        AWSAccessKeyId: 'akid'
+        SecurityToken: 'session'
+        Action: 'DescribeTags'
+        Version: ec2.api.apiVersion
+        'Filter.1.Name': 'filter'
+        'Filter.1.Value.1': 'v1'
+        'Filter.1.Value.2': 'v2'
 
   describe 'parseResponse', ->
     body = ''

@@ -97,8 +97,9 @@ describe 'AWS.Protocol.Json', ->
     it 'returns the status code when the body is blank', ->
       extractError ''
       expect(response.error ).to.be.instanceOf(Error)
-      expect(response.error.code).to.equal(500)
-      expect(response.error.message).to.equal(null)
+      expect(response.error.code).to.equal('UnknownError')
+      expect(response.error.statusCode).to.equal(500)
+      expect(response.error.message).to.equal('500')
       expect(response.data).to.equal(null)
 
     it 'returns UnknownError when the error type is not set', ->
