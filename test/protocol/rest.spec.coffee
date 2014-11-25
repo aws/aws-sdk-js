@@ -215,11 +215,11 @@ describe 'AWS.Protocol.Rest', ->
 
     describe 'status code', ->
       it 'extracts the http status when instructed to', ->
-        output.members.Result = type: 'integer', location: 'status'
+        output.members.Result = type: 'integer', location: 'statusCode'
         response.httpResponse.statusCode = 200
         expect(extract().data.Result).to.equal(200)
 
       it 'casts string status codes to integers', ->
-        output.members.Result = type: 'integer', location: 'status'
+        output.members.Result = type: 'integer', location: 'statusCode'
         response.httpResponse.statusCode = '202'
         expect(extract().data.Result).to.equal(202)
