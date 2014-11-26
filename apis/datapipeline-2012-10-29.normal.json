@@ -8,7 +8,7 @@
     "targetPrefix":"DataPipeline",
     "protocol":"json"
   },
-  "documentation":"<p> This is the <i>AWS Data Pipeline API Reference</i>. This guide provides descriptions and samples of the AWS Data Pipeline API. </p> <p> AWS Data Pipeline is a web service that configures and manages a data-driven workflow called a pipeline. AWS Data Pipeline handles the details of scheduling and ensuring that data dependencies are met so your application can focus on processing the data.</p> <p> The AWS Data Pipeline API implements two main sets of functionality. The first set of actions configure the pipeline in the web service. You call these actions to create a pipeline and define data sources, schedules, dependencies, and the transforms to be performed on the data. </p> <p> The second set of actions are used by a task runner application that calls the AWS Data Pipeline API to receive the next task ready for processing. The logic for performing the task, such as querying the data, running data analysis, or converting the data from one format to another, is contained within the task runner. The task runner performs the task assigned to it by the web service, reporting progress to the web service as it does so. When the task is done, the task runner reports the final success or failure of the task to the web service. </p> <p> AWS Data Pipeline provides an open-source implementation of a task runner called AWS Data Pipeline Task Runner. AWS Data Pipeline Task Runner provides logic for common data management scenarios, such as performing database queries and running data analysis using Amazon Elastic MapReduce (Amazon EMR). You can use AWS Data Pipeline Task Runner as your task runner, or you can write your own task runner to provide custom data management. </p> <p> The AWS Data Pipeline API uses the Signature Version 4 protocol for signing requests. For more information about how to sign a request with this protocol, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>. In the code examples in this reference, the Signature Version 4 Request parameters are represented as AuthParams. </p>",
+  "documentation":"<p> AWS Data Pipeline is a web service that configures and manages a data-driven workflow called a pipeline. AWS Data Pipeline handles the details of scheduling and ensuring that data dependencies are met so your application can focus on processing the data.</p> <p> The AWS Data Pipeline SDKs and CLI implements two main sets of functionality. The first set of actions configure the pipeline in the web service. You perform these actions to create a pipeline and define data sources, schedules, dependencies, and the transforms to be performed on the data. </p> <p> The second set of actions are used by a task runner application that calls the AWS Data Pipeline API to receive the next task ready for processing. The logic for performing the task, such as querying the data, running data analysis, or converting the data from one format to another, is contained within the task runner. The task runner performs the task assigned to it by the web service, reporting progress to the web service as it does so. When the task is done, the task runner reports the final success or failure of the task to the web service. </p> <p> AWS Data Pipeline provides a JAR implementation of a task runner called AWS Data Pipeline Task Runner. AWS Data Pipeline Task Runner provides logic for common data management scenarios, such as performing database queries and running data analysis using Amazon Elastic MapReduce (Amazon EMR). You can use AWS Data Pipeline Task Runner as your task runner, or you can write your own task runner to provide custom data management. </p>",
   "operations":{
     "ActivatePipeline":{
       "name":"ActivatePipeline",
@@ -47,7 +47,7 @@
           "documentation":"<p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>"
         }
       ],
-      "documentation":"<p> Validates a pipeline and initiates processing. If the pipeline does not pass validation, activation fails. </p> <p> Call this action to start processing pipeline tasks of a pipeline you've created using the <a>CreatePipeline</a> and <a>PutPipelineDefinition</a> actions. A pipeline cannot be modified after it has been successfully activated. </p>"
+      "documentation":"<p> Validates a pipeline and initiates processing. If the pipeline does not pass validation, activation fails. You cannot perform this operation on FINISHED pipelines and attempting to do so will return an InvalidRequestException. </p> <p> Call this action to start processing pipeline tasks of a pipeline you've created using the <a>CreatePipeline</a> and <a>PutPipelineDefinition</a> actions. A pipeline cannot be modified after it has been successfully activated. </p>"
     },
     "CreatePipeline":{
       "name":"CreatePipeline",
@@ -369,7 +369,7 @@
           "documentation":"<p>The specified pipeline has been deleted.</p>"
         }
       ],
-      "documentation":"<p>Adds tasks, schedules, and preconditions that control the behavior of the pipeline. You can use PutPipelineDefinition to populate a new pipeline. </p> <p> <a>PutPipelineDefinition</a> also validates the configuration as it adds it to the pipeline. Changes to the pipeline are saved unless one of the following three validation errors exists in the pipeline. <ol> <li>An object is missing a name or identifier field.</li> <li>A string or reference field is empty.</li> <li>The number of objects in the pipeline exceeds the maximum allowed objects.</li> </ol> </p> <p> Pipeline object definitions are passed to the <a>PutPipelineDefinition</a> action and returned by the <a>GetPipelineDefinition</a> action. </p>"
+      "documentation":"<p>Adds tasks, schedules, and preconditions that control the behavior of the pipeline. You can use PutPipelineDefinition to populate a new pipeline. </p> <p> <a>PutPipelineDefinition</a> also validates the configuration as it adds it to the pipeline. Changes to the pipeline are saved unless one of the following three validation errors exists in the pipeline. <ol> <li>An object is missing a name or identifier field.</li> <li>A string or reference field is empty.</li> <li>The number of objects in the pipeline exceeds the maximum allowed objects.</li> <li>The pipeline is in a FINISHED state.</li> </ol> </p> <p> Pipeline object definitions are passed to the <a>PutPipelineDefinition</a> action and returned by the <a>GetPipelineDefinition</a> action. </p>"
     },
     "QueryObjects":{
       "name":"QueryObjects",
@@ -516,7 +516,7 @@
           "documentation":"<p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>"
         }
       ],
-      "documentation":"<p>Requests that the status of an array of physical or logical pipeline objects be updated in the pipeline. This update may not occur immediately, but is eventually consistent. The status that can be set depends on the type of object.</p>"
+      "documentation":"<p>Requests that the status of an array of physical or logical pipeline objects be updated in the pipeline. This update may not occur immediately, but is eventually consistent. The status that can be set depends on the type of object, e.g. DataNode or Activity. You cannot perform this operation on FINISHED pipelines and attempting to do so will return an InvalidRequestException.</p>"
     },
     "SetTaskStatus":{
       "name":"SetTaskStatus",
@@ -610,6 +610,10 @@
         "pipelineId":{
           "shape":"id",
           "documentation":"<p>The identifier of the pipeline to activate. </p>"
+        },
+        "parameterValues":{
+          "shape":"ParameterValueList",
+          "documentation":"<p>Returns a list of parameter values to pass to the pipeline at activation.</p>"
         }
       },
       "documentation":"<p>The input of the ActivatePipeline action.</p>"
@@ -805,6 +809,14 @@
         "pipelineObjects":{
           "shape":"PipelineObjectList",
           "documentation":"<p>An array of objects defined in the pipeline.</p>"
+        },
+        "parameterObjects":{
+          "shape":"ParameterObjectList",
+          "documentation":"<p>Returns a list of parameter objects used in the pipeline definition.</p>"
+        },
+        "parameterValues":{
+          "shape":"ParameterValueList",
+          "documentation":"<p>Returns a list of parameter values used in the pipeline definition.</p>"
         }
       },
       "documentation":"<p>Contains the output from the <a>GetPipelineDefinition</a> action.</p>"
@@ -898,6 +910,72 @@
         "GE",
         "BETWEEN"
       ]
+    },
+    "ParameterAttribute":{
+      "type":"structure",
+      "required":[
+        "key",
+        "stringValue"
+      ],
+      "members":{
+        "key":{
+          "shape":"attributeNameString",
+          "documentation":"<p>The field identifier.</p>"
+        },
+        "stringValue":{
+          "shape":"attributeValueString",
+          "documentation":"<p>The field value, expressed as a String.</p>"
+        }
+      },
+      "documentation":"<p>The attributes allowed or specified with a parameter object.</p>"
+    },
+    "ParameterAttributeList":{
+      "type":"list",
+      "member":{"shape":"ParameterAttribute"}
+    },
+    "ParameterObject":{
+      "type":"structure",
+      "required":[
+        "id",
+        "attributes"
+      ],
+      "members":{
+        "id":{
+          "shape":"fieldNameString",
+          "documentation":"<p>Identifier of the parameter object. </p>"
+        },
+        "attributes":{
+          "shape":"ParameterAttributeList",
+          "documentation":"<p>The attributes of the parameter object.</p>"
+        }
+      },
+      "documentation":"<p>Contains information about a parameter object.</p>"
+    },
+    "ParameterObjectList":{
+      "type":"list",
+      "member":{"shape":"ParameterObject"}
+    },
+    "ParameterValue":{
+      "type":"structure",
+      "required":[
+        "id",
+        "stringValue"
+      ],
+      "members":{
+        "id":{
+          "shape":"fieldNameString",
+          "documentation":"<p>Identifier of the parameter value.</p>"
+        },
+        "stringValue":{
+          "shape":"fieldStringValue",
+          "documentation":"<p>The field value, expressed as a String.</p>"
+        }
+      },
+      "documentation":"<p>A value or list of parameter values. </p>"
+    },
+    "ParameterValueList":{
+      "type":"list",
+      "member":{"shape":"ParameterValue"}
     },
     "PipelineDeletedException":{
       "type":"structure",
@@ -1022,7 +1100,7 @@
       "members":{
         "taskObject":{
           "shape":"TaskObject",
-          "documentation":"<p>An instance of <a>PollForTaskResult</a>, which contains an instance of <a>TaskObject</a>. The returned object contains all the information needed to complete the task that is being assigned to the task runner. One of the fields returned in this object is taskId, which contains an identifier for the task being assigned. The calling task runner uses taskId in subsequent calls to <a>ReportTaskProgress</a> and <a>SetTaskStatus</a>.</p>"
+          "documentation":"<p>An instance of <a>TaskObject</a>. The returned object contains all the information needed to complete the task that is being assigned to the task runner. One of the fields returned in this object is taskId, which contains an identifier for the task being assigned. The calling task runner uses taskId in subsequent calls to <a>ReportTaskProgress</a> and <a>SetTaskStatus</a>.</p>"
         }
       },
       "documentation":"<p>Contains the output from the PollForTask action.</p>"
@@ -1041,6 +1119,14 @@
         "pipelineObjects":{
           "shape":"PipelineObjectList",
           "documentation":"<p>The objects that define the pipeline. These will overwrite the existing pipeline definition.</p>"
+        },
+        "parameterObjects":{
+          "shape":"ParameterObjectList",
+          "documentation":"<p>A list of parameter objects used with the pipeline.</p>"
+        },
+        "parameterValues":{
+          "shape":"ParameterValueList",
+          "documentation":"<p>A list of parameter values used with the pipeline.</p>"
         }
       },
       "documentation":"<p>The input of the <a>PutPipelineDefinition</a> action.</p>"
@@ -1129,6 +1215,10 @@
         "taskId":{
           "shape":"taskId",
           "documentation":"<p>Identifier of the task assigned to the task runner. This value is provided in the <a>TaskObject</a> that the service returns with the response for the <a>PollForTask</a> action.</p>"
+        },
+        "fields":{
+          "shape":"fieldList",
+          "documentation":"<p>Key-value pairs that define the properties of the ReportTaskProgressInput object.</p>"
         }
       },
       "documentation":"<p>The input for the ReportTaskProgress action.</p>"
@@ -1304,6 +1394,14 @@
         "pipelineObjects":{
           "shape":"PipelineObjectList",
           "documentation":"<p>A list of objects that define the pipeline changes to validate against the pipeline.</p>"
+        },
+        "parameterObjects":{
+          "shape":"ParameterObjectList",
+          "documentation":"<p>A list of parameter objects used with the pipeline.</p>"
+        },
+        "parameterValues":{
+          "shape":"ParameterValueList",
+          "documentation":"<p>A list of parameter values used with the pipeline.</p>"
         }
       },
       "documentation":"<p>The input of the <a>ValidatePipelineDefinition</a> action.</p>"
@@ -1362,6 +1460,18 @@
     "ValidationWarnings":{
       "type":"list",
       "member":{"shape":"ValidationWarning"}
+    },
+    "attributeNameString":{
+      "type":"string",
+      "min":1,
+      "max":256,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "attributeValueString":{
+      "type":"string",
+      "min":0,
+      "max":10240,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     },
     "boolean":{"type":"boolean"},
     "errorMessage":{"type":"string"},
