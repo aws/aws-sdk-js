@@ -890,6 +890,10 @@
         "AlbumArtFormat":{
           "shape":"JpgOrPng",
           "documentation":"<p>The format of album art, if any. Valid formats are <code>.jpg</code> and <code>.png</code>.</p>"
+        },
+        "Encryption":{
+          "shape":"Encryption",
+          "documentation":"<p>The encryption settings, if any, that you want Elastic Transcoder to apply to your artwork.</p>"
         }
       },
       "documentation":"<p>The file to be used as album art. There can be multiple artworks associated with an audio file, to a maximum of 20.</p> <p>To remove artwork or leave the artwork empty, you can either set <code>Artwork</code> to null, or set the <code>Merge Policy</code> to \"Replace\" and use an empty <code>Artwork</code> array.</p> <p>To pass through existing artwork unchanged, set the <code>Merge Policy</code> to \"Prepend\", \"Append\", or \"Fallback\", and use an empty <code>Artwork</code> array.</p>"
@@ -923,7 +927,7 @@
       "members":{
         "Profile":{
           "shape":"AudioCodecProfile",
-          "documentation":"<p>You can only choose an audio profile when you specify AAC for the value of Audio:Codec.</p> <p>Specify the AAC profile for the output file. Elastic Transcoder supports the following profiles:</p> <ul> <li> <code>auto</code>: If you specify <code>auto</code>, Elastic Transcoder will select the profile based on the bit rate selected for the output file.</li> <li> <code>AAC-LC</code>: The most common AAC profile. Use for bitrates larger than 64 kbps.</li> <li> <code>HE-AAC</code>: Not supported on some older players and devices. Use for bitrates between 40 and 80 kbps.</li> <li> <code>HE-AACv2</code>: Not supported on some players and devices. Use for bitrates less than 48 kbps.</li> </ul> <p>All outputs in a <code>Smooth</code> playlist must have the same value for <code>Profile</code>.</p> <note><p>If you created any presets before AAC profiles were added, Elastic Transcoder automatically updated your presets to use AAC-LC. You can change the value as required.</p></note>"
+          "documentation":"<p>You can only choose an audio profile when you specify AAC for the value of Audio:Codec.</p> <p>Specify the AAC profile for the output file. Elastic Transcoder supports the following profiles:</p> <ul> <li> <code>auto</code>: If you specify <code>auto</code>, Elastic Transcoder will select the profile based on the bit rate selected for the output file.</li> <li> <code>AAC-LC</code>: The most common AAC profile. Use for bit rates larger than 64 kbps.</li> <li> <code>HE-AAC</code>: Not supported on some older players and devices. Use for bit rates between 40 and 80 kbps.</li> <li> <code>HE-AACv2</code>: Not supported on some players and devices. Use for bit rates less than 48 kbps.</li> </ul> <p>All outputs in a <code>Smooth</code> playlist must have the same value for <code>Profile</code>.</p> <note><p>If you created any presets before AAC profiles were added, Elastic Transcoder automatically updated your presets to use AAC-LC. You can change the value as required.</p></note>"
         }
       },
       "documentation":"<p>Options associated with your audio codec.</p>"
@@ -962,6 +966,10 @@
       "type":"string",
       "pattern":"(^auto$)|(^22050$)|(^32000$)|(^44100$)|(^48000$)|(^96000$)"
     },
+    "Base64EncodedString":{
+      "type":"string",
+      "pattern":"^(?:[A-Za-z0-9\\+/]{4})*(?:[A-Za-z0-9\\+/]{2}==|[A-Za-z0-9\\+/]{3}=)?$"
+    },
     "BucketName":{
       "type":"string",
       "pattern":"^(\\w|\\.|-){1,255}$"
@@ -995,6 +1003,10 @@
         "Pattern":{
           "shape":"CaptionFormatPattern",
           "documentation":"<p>The prefix for caption filenames, in the form <i>description</i>-<code>{language}</code>, where:</p> <ul> <li> <i>description</i> is a description of the video.</li> <li> <code>{language}</code> is a literal value that Elastic Transcoder replaces with the two- or three-letter code for the language of the caption in the output file names.</li> </ul> <p>If you don't include <code>{language}</code> in the file name pattern, Elastic Transcoder automatically appends \"<code>{language}</code>\" to the value that you specify for the description. In addition, Elastic Transcoder automatically appends the count to the end of the segment files.</p> <p>For example, suppose you're transcoding into srt format. When you enter \"Sydney-{language}-sunrise\", and the language of the captions is English (en), the name of the first caption file will be Sydney-en-sunrise00000.srt.</p>"
+        },
+        "Encryption":{
+          "shape":"Encryption",
+          "documentation":"<p>The encryption settings, if any, that you want Elastic Transcoder to apply to your caption formats.</p>"
         }
       },
       "documentation":"<p>The file format of the output captions. If you leave this value blank, Elastic Transcoder returns an error.</p>"
@@ -1034,6 +1046,10 @@
         "Label":{
           "shape":"Name",
           "documentation":"<p>The label of the caption shown in the player when choosing a language. We recommend that you put the caption language name here, in the language of the captions.</p>"
+        },
+        "Encryption":{
+          "shape":"Encryption",
+          "documentation":"<p>The encryption settings, if any, that you want Elastic Transcoder to apply to your caption sources.</p>"
         }
       },
       "documentation":"<p>A source file for the input sidecar captions used during the transcoding process.</p>"
@@ -1048,7 +1064,7 @@
       "members":{
         "MergePolicy":{
           "shape":"CaptionMergePolicy",
-          "documentation":"<p>A policy that determines how Elastic Transcoder handles the existence of multiple captions.</p> <ul> <li><p><b>MergeOverride:</b> Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the sidecar captions and ignores the embedded captions for that language.</p></li> <li><p><b>MergeRetain:</b> Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the embedded captions and ignores the sidecar captions for that language. If <guilabel>CaptionSources</guilabel> is empty, Elastic Transcoder omits all sidecar captions from the output files.</p></li> <li><p><b>Override:</b> Elastic Transcoder transcodes only the sidecar captions that you specify in <code>CaptionSources</code>.</p></li> </ul> <p><code>MergePolicy</code> cannot be null.</p>"
+          "documentation":"<p>A policy that determines how Elastic Transcoder handles the existence of multiple captions.</p> <ul> <li><p><b>MergeOverride:</b> Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the sidecar captions and ignores the embedded captions for that language.</p></li> <li><p><b>MergeRetain:</b> Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the embedded captions and ignores the sidecar captions for that language. If <code>CaptionSources</code> is empty, Elastic Transcoder omits all sidecar captions from the output files.</p></li> <li><p><b>Override:</b> Elastic Transcoder transcodes only the sidecar captions that you specify in <code>CaptionSources</code>.</p></li> </ul> <p><code>MergePolicy</code> cannot be null.</p>"
         },
         "CaptionSources":{
           "shape":"CaptionSources",
@@ -1097,6 +1113,10 @@
           "shape":"ThumbnailPattern",
           "documentation":"<p>Whether you want Elastic Transcoder to create thumbnails for your videos and, if so, how you want Elastic Transcoder to name the files.</p> <p>If you don't want Elastic Transcoder to create thumbnails, specify \"\".</p> <p> If you do want Elastic Transcoder to create thumbnails, specify the information that you want to include in the file name for each thumbnail. You can specify the following values in any sequence: </p> <ul> <li> <p> <b><code>{count}</code> (Required)</b>: If you want to create thumbnails, you must include <code>{count}</code> in the <code>ThumbnailPattern</code> object. Wherever you specify <code>{count}</code>, Elastic Transcoder adds a five-digit sequence number (beginning with <b>00001</b>) to thumbnail file names. The number indicates where a given thumbnail appears in the sequence of thumbnails for a transcoded file. </p> <important>If you specify a literal value and/or <code>{resolution}</code> but you omit <code>{count}</code>, Elastic Transcoder returns a validation error and does not create the job.</important> </li> <li> <p> <b>Literal values (Optional)</b>: You can specify literal values anywhere in the <code>ThumbnailPattern</code> object. For example, you can include them as a file name prefix or as a delimiter between <code>{resolution}</code> and <code>{count}</code>. </p> </li> <li> <p> <b><code>{resolution}</code> (Optional)</b>: If you want Elastic Transcoder to include the resolution in the file name, include <code>{resolution}</code> in the <code>ThumbnailPattern</code> object. </p> </li> </ul> <p>When creating thumbnails, Elastic Transcoder automatically saves the files in the format (.jpg or .png) that appears in the preset that you specified in the <code>PresetID</code> value of <code>CreateJobOutput</code>. Elastic Transcoder also appends the applicable file name extension.</p>"
         },
+        "ThumbnailEncryption":{
+          "shape":"Encryption",
+          "documentation":"<p>The encryption settings, if any, that you want Elastic Transcoder to apply to your thumbnail.</p>"
+        },
         "Rotate":{
           "shape":"Rotate",
           "documentation":"<p> The number of degrees clockwise by which you want Elastic Transcoder to rotate the output relative to the input. Enter one of the following values: <code>auto</code>, <code>0</code>, <code>90</code>, <code>180</code>, <code>270</code>. The value <code>auto</code> generally works only if the file that you're transcoding contains rotation metadata. </p>"
@@ -1124,6 +1144,10 @@
         "Captions":{
           "shape":"Captions",
           "documentation":"<p>You can configure Elastic Transcoder to transcode captions, or subtitles, from one format to another. All captions must be in UTF-8. Elastic Transcoder supports two types of captions:</p> <ul> <li> <p><b>Embedded:</b> Embedded captions are included in the same file as the audio and video. Elastic Transcoder supports only one embedded caption per language, to a maximum of 300 embedded captions per file.</p> <p>Valid input values include: <code>CEA-608 (EIA-608</code>, first non-empty channel only), <code>CEA-708 (EIA-708</code>, first non-empty channel only), and <code>mov-text</code></p> <p>Valid outputs include: <code>mov-text</code></p> <p>Elastic Transcoder supports a maximum of one embedded format per output.</p> </li> <li> <p><b>Sidecar:</b> Sidecar captions are kept in a separate metadata file from the audio and video data. Sidecar captions require a player that is capable of understanding the relationship between the video file and the sidecar file. Elastic Transcoder supports only one sidecar caption per language, to a maximum of 20 sidecar captions per file.</p> <p>Valid input values include: <code>dfxp</code> (first div element only), <code>ebu-tt</code>, <code>scc</code>, <code>smpt</code>, <code>srt</code>, <code>ttml</code> (first div element only), and <code>webvtt</code></p> <p>Valid outputs include: <code>dfxp</code> (first div element only), <code>scc</code>, <code>srt</code>, and <code>webvtt</code>.</p> </li> </ul> <p> If you want ttml or smpte-tt compatible captions, specify dfxp as your output format.</p> <p>Elastic Transcoder does not support OCR (Optical Character Recognition), does not accept pictures as a valid input for captions, and is not available for audio-only transcoding. Elastic Transcoder does not preserve text formatting (for example, italics) during the transcoding process.</p> <p>To remove captions or leave the captions empty, set <code>Captions</code> to null. To pass through existing captions unchanged, set the <code>MergePolicy</code> to <code>MergeRetain</code>, and pass in a null <code>CaptionSources</code> array.</p> <p>For more information on embedded files, see the Subtitles Wikipedia page.</p> <p>For more information on sidecar files, see the Extensible Metadata Platform and Sidecar file Wikipedia pages.</p>"
+        },
+        "Encryption":{
+          "shape":"Encryption",
+          "documentation":"<p>You can specify encryption settings for any output files that you want to use for a transcoding job. This includes the output file and any watermarks, thumbnails, album art, or captions that you want to use. You must specify encryption settings for each file individually.</p>"
         }
       },
       "documentation":"<p>The <code>CreateJobOutput</code> structure.</p>"
@@ -1220,6 +1244,10 @@
         "Role":{
           "shape":"Role",
           "documentation":"<p>The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder to use to create the pipeline.</p>"
+        },
+        "AwsKmsKeyArn":{
+          "shape":"KeyArn",
+          "documentation":"<p>The AWS Key Management Service (AWS KMS) key that you want to use with this pipeline.</p> <p>If you use either <code>S3</code> or <code>S3-AWS-KMS</code> as your <code>Encryption:Mode</code>, you don't need to provide a key with your job because a default key, known as an AWS-KMS key, is created for you automatically. You need to provide an AWS-KMS key only if you want to use a non-default AWS-KMS key, or if you are using an <code>Encryption:Mode</code> of <code>AES-PKCS7</code>, <code>AES-CTR</code>, or <code>AES-GCM</code>.</p>"
         },
         "Notifications":{
           "shape":"Notifications",
@@ -1344,6 +1372,32 @@
     "DigitsOrAuto":{
       "type":"string",
       "pattern":"(^auto$)|(^\\d{2,4}$)"
+    },
+    "Encryption":{
+      "type":"structure",
+      "members":{
+        "Mode":{
+          "shape":"EncryptionMode",
+          "documentation":"<p>The specific server-side encryption mode that you want Elastic Transcoder to use when decrypting your input files or encrypting your output files. Elastic Transcoder supports the following options:</p> <ul> <li><p><b>S3:</b> Amazon S3 creates and manages the keys used for encrypting your files.</p></li> <li><p><b>S3-AWS-KMS:</b> Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify <code>S3-AWS-KMS</code> and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline.</p></li> <li><p><b>AES-CBC-PKCS7:</b> A padded cipher-block mode of operation originally used for HLS files.</p></li> <li><p><b>AES-CTR:</b> AES Counter Mode.</p></li> <li><p><b>AES-GCM:</b> AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with will fail the decryption process.</p></li> </ul> <p>For all three AES options, you must provide the following settings, which must be base64-encoded:</p> <ul> <li><p><b>Key</b></p></li> <li><p><b>Key MD5</b></p></li> <li><p><b>Initialization Vector</b></p></li> </ul> <important><p>For the AES modes, your private encryption keys and your unencrypted data are never stored by AWS; therefore, it is important that you safely manage your encryption keys. If you lose them, you won't be able to unencrypt your data.</p></important>"
+        },
+        "Key":{
+          "shape":"Base64EncodedString",
+          "documentation":"<p>The data encryption key that you want Elastic Transcoder to use to encrypt your output file, or that was used to encrypt your input file. The key must be base64-encoded and it must be one of the following bit lengths before being base64-encoded:</p> <p><code>128</code>, <code>192</code>, or <code>256</code>. </p> <p>The key must also be encrypted by using the Amazon Key Management Service.</p>"
+        },
+        "KeyMd5":{
+          "shape":"Base64EncodedString",
+          "documentation":"<p>The MD5 digest of the key that you used to encrypt your input file, or that you want Elastic Transcoder to use to encrypt your output file. Elastic Transcoder uses the key digest as a checksum to make sure your key was not corrupted in transit. The key MD5 must be base64-encoded, and it must be exactly 16 bytes long before being base64-encoded.</p>"
+        },
+        "InitializationVector":{
+          "shape":"Key",
+          "documentation":"<p>The series of random bits created by a random bit generator, unique for every encryption operation, that you used to encrypt your input files or that you want Elastic Transcoder to use to encrypt your output files. The initialization vector must be base64-encoded, and it must be exactly 16 bytes long before being base64-encoded.</p>"
+        }
+      },
+      "documentation":"<p>The encryption settings, if any, that are used for decrypting your input files or encrypting your output files. If your input file is encrypted, you must specify the mode that Elastic Transcoder will use to decrypt your file, otherwise you must specify the mode you want Elastic Transcoder to use to encrypt your output files.</p>"
+    },
+    "EncryptionMode":{
+      "type":"string",
+      "pattern":"(^s3$)|(^s3-aws-kms$)|(^aes-cbc-pkcs7$)|(^aes-ctr$)|(^aes-gcm$)"
     },
     "ExceptionMessages":{
       "type":"list",
@@ -1488,6 +1542,10 @@
         "Container":{
           "shape":"JobContainer",
           "documentation":"<p>The container type for the input file. If you want Elastic Transcoder to automatically detect the container type of the input file, specify <code>auto</code>. If you want to specify the container type for the input file, enter one of the following values: </p> <p> <code>3gp</code>, <code>aac</code>, <code>asf</code>, <code>avi</code>, <code>divx</code>, <code>flv</code>, <code>m4a</code>, <code>mkv</code>, <code>mov</code>, <code>mp3</code>, <code>mp4</code>, <code>mpeg</code>, <code>mpeg-ps</code>, <code>mpeg-ts</code>, <code>mxf</code>, <code>ogg</code>, <code>vob</code>, <code>wav</code>, <code>webm</code> </p>"
+        },
+        "Encryption":{
+          "shape":"Encryption",
+          "documentation":"<p>The encryption settings, if any, that are used for decrypting your input files. If your input file is encrypted, you must specify the mode that Elastic Transcoder will use to decrypt your file.</p>"
         }
       },
       "documentation":"<p>Information about the file that you're transcoding.</p>"
@@ -1506,6 +1564,10 @@
         "ThumbnailPattern":{
           "shape":"ThumbnailPattern",
           "documentation":"<p>Whether you want Elastic Transcoder to create thumbnails for your videos and, if so, how you want Elastic Transcoder to name the files.</p> <p>If you don't want Elastic Transcoder to create thumbnails, specify \"\".</p> <p> If you do want Elastic Transcoder to create thumbnails, specify the information that you want to include in the file name for each thumbnail. You can specify the following values in any sequence: </p> <ul> <li> <p> <b><code>{count}</code> (Required)</b>: If you want to create thumbnails, you must include <code>{count}</code> in the <code>ThumbnailPattern</code> object. Wherever you specify <code>{count}</code>, Elastic Transcoder adds a five-digit sequence number (beginning with <b>00001</b>) to thumbnail file names. The number indicates where a given thumbnail appears in the sequence of thumbnails for a transcoded file. </p> <important>If you specify a literal value and/or <code>{resolution}</code> but you omit <code>{count}</code>, Elastic Transcoder returns a validation error and does not create the job.</important> </li> <li> <p> <b>Literal values (Optional)</b>: You can specify literal values anywhere in the <code>ThumbnailPattern</code> object. For example, you can include them as a file name prefix or as a delimiter between <code>{resolution}</code> and <code>{count}</code>. </p> </li> <li> <p> <b><code>{resolution}</code> (Optional)</b>: If you want Elastic Transcoder to include the resolution in the file name, include <code>{resolution}</code> in the <code>ThumbnailPattern</code> object. </p> </li> </ul> <p>When creating thumbnails, Elastic Transcoder automatically saves the files in the format (.jpg or .png) that appears in the preset that you specified in the <code>PresetID</code> value of <code>CreateJobOutput</code>. Elastic Transcoder also appends the applicable file name extension.</p>"
+        },
+        "ThumbnailEncryption":{
+          "shape":"Encryption",
+          "documentation":"<p>The encryption settings, if any, that you want Elastic Transcoder to apply to your thumbnail.</p>"
         },
         "Rotate":{
           "shape":"Rotate",
@@ -1554,6 +1616,10 @@
         "Captions":{
           "shape":"Captions",
           "documentation":"<p>You can configure Elastic Transcoder to transcode captions, or subtitles, from one format to another. All captions must be in UTF-8. Elastic Transcoder supports two types of captions:</p> <ul> <li> <p><b>Embedded:</b> Embedded captions are included in the same file as the audio and video. Elastic Transcoder supports only one embedded caption per language, to a maximum of 300 embedded captions per file.</p> <p>Valid input values include: <code>CEA-608 (EIA-608</code>, first non-empty channel only), <code>CEA-708 (EIA-708</code>, first non-empty channel only), and <code>mov-text</code></p> <p>Valid outputs include: <code>mov-text</code></p> <p>Elastic Transcoder supports a maximum of one embedded format per output.</p> </li> <li> <p><b>Sidecar:</b> Sidecar captions are kept in a separate metadata file from the audio and video data. Sidecar captions require a player that is capable of understanding the relationship between the video file and the sidecar file. Elastic Transcoder supports only one sidecar caption per language, to a maximum of 20 sidecar captions per file.</p> <p>Valid input values include: <code>dfxp</code> (first div element only), <code>ebu-tt</code>, <code>scc</code>, <code>smpt</code>, <code>srt</code>, <code>ttml</code> (first div element only), and <code>webvtt</code></p> <p>Valid outputs include: <code>dfxp</code> (first div element only), <code>scc</code>, <code>srt</code>, and <code>webvtt</code>.</p> </li> </ul> <p> If you want ttml or smpte-tt compatible captions, specify dfxp as your output format.</p> <p>Elastic Transcoder does not support OCR (Optical Character Recognition), does not accept pictures as a valid input for captions, and is not available for audio-only transcoding. Elastic Transcoder does not preserve text formatting (for example, italics) during the transcoding process.</p> <p>To remove captions or leave the captions empty, set <code>Captions</code> to null. To pass through existing captions unchanged, set the <code>MergePolicy</code> to <code>MergeRetain</code>, and pass in a null <code>CaptionSources</code> array.</p> <p>For more information on embedded files, see the Subtitles Wikipedia page.</p> <p>For more information on sidecar files, see the Extensible Metadata Platform and Sidecar file Wikipedia pages.</p>"
+        },
+        "Encryption":{
+          "shape":"Encryption",
+          "documentation":"<p>The encryption settings, if any, that you want Elastic Transcoder to apply to your output files. If you choose to use encryption, you must specify a mode to use. If you choose not to use encryption, Elastic Transcoder will write an unencrypted file to your Amazon S3 bucket.</p>"
         }
       },
       "documentation":"<p><important>Outputs recommended instead.</important>If you specified one output for a job, information about that output. If you specified multiple outputs for a job, the <code>Output</code> object lists information about the first output. This duplicates the information that is listed for the first output in the <code>Outputs</code> object.</p>"
@@ -1576,6 +1642,10 @@
         "InputKey":{
           "shape":"WatermarkKey",
           "documentation":"<p> The name of the .png or .jpg file that you want to use for the watermark. To determine which Amazon S3 bucket contains the specified file, Elastic Transcoder checks the pipeline specified by <code>Pipeline</code>; the <code>Input Bucket</code> object in that pipeline identifies the bucket.</p> <p> If the file name includes a prefix, for example, <b>logos/128x64.png</b>, include the prefix in the key. If the file isn't in the specified bucket, Elastic Transcoder returns an error. </p>"
+        },
+        "Encryption":{
+          "shape":"Encryption",
+          "documentation":"<p>The encryption settings, if any, that you want Elastic Transcoder to apply to your watermarks.</p>"
         }
       },
       "documentation":"<p>Watermarks can be in .png or .jpg format. If you want to display a watermark that is not rectangular, use the .png format, which supports transparency.</p>"
@@ -1595,6 +1665,11 @@
     "Key":{
       "type":"string",
       "min":1,
+      "max":255
+    },
+    "KeyArn":{
+      "type":"string",
+      "min":0,
       "max":255
     },
     "KeyframesMaxDist":{
@@ -1854,6 +1929,10 @@
         "Role":{
           "shape":"Role",
           "documentation":"<p>The IAM Amazon Resource Name (ARN) for the role that Elastic Transcoder uses to transcode jobs for this pipeline.</p>"
+        },
+        "AwsKmsKeyArn":{
+          "shape":"KeyArn",
+          "documentation":"<p>The AWS Key Management Service (AWS KMS) key that you want to use with this pipeline.</p> <p>If you use either <code>S3</code> or <code>S3-AWS-KMS</code> as your <code>Encryption:Mode</code>, you don't need to provide a key with your job because a default key, known as an AWS-KMS key, is created for you automatically. You need to provide an AWS-KMS key only if you want to use a non-default AWS-KMS key, or if you are using an <code>Encryption:Mode</code> of <code>AES-PKCS7</code>, <code>AES-CTR</code>, or <code>AES-GCM</code>.</p>"
         },
         "Notifications":{
           "shape":"Notifications",
@@ -2225,7 +2304,7 @@
         },
         "Interval":{
           "shape":"Digits",
-          "documentation":"<p>The number of seconds between thumbnails. Specify an integer value.</p>"
+          "documentation":"<p>The approximate number of seconds between thumbnails. Specify an integer value.</p>"
         },
         "Resolution":{
           "shape":"ThumbnailResolution",
@@ -2327,6 +2406,10 @@
         "Role":{
           "shape":"Role",
           "documentation":"<p>The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder to use to transcode jobs for this pipeline.</p>"
+        },
+        "AwsKmsKeyArn":{
+          "shape":"KeyArn",
+          "documentation":"<p>The AWS Key Management Service (AWS KMS) key that you want to use with this pipeline.</p> <p>If you use either <code>S3</code> or <code>S3-AWS-KMS</code> as your <code>Encryption:Mode</code>, you don't need to provide a key with your job because a default key, known as an AWS-KMS key, is created for you automatically. You need to provide an AWS-KMS key only if you want to use a non-default AWS-KMS key, or if you are using an <code>Encryption:Mode</code> of <code>AES-PKCS7</code>, <code>AES-CTR</code>, or <code>AES-GCM</code>.</p>"
         },
         "Notifications":{"shape":"Notifications"},
         "ContentConfig":{
