@@ -706,7 +706,8 @@
         "ap-northeast-1",
         "sa-east-1",
         "",
-        "cn-north-1"
+        "cn-north-1",
+        "eu-central-1"
       ]
     },
     "BucketLoggingStatus":{
@@ -844,7 +845,7 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
-          "documentation":"If present, specifies the AWS KMS key used to encrypt the object."
+          "documentation":"If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object."
         }
       }
     },
@@ -962,7 +963,7 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
-          "documentation":"If present, specifies the AWS KMS key used to encrypt the object."
+          "documentation":"If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object."
         }
       },
       "payload":"CopyObjectResult"
@@ -1129,6 +1130,12 @@
           "locationName":"x-amz-server-side-encryption-customer-key-MD5",
           "documentation":"Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error."
         },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
+          "documentation":"Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version"
+        },
         "CopySourceSSECustomerAlgorithm":{
           "shape":"CopySourceSSECustomerAlgorithm",
           "location":"header",
@@ -1146,12 +1153,6 @@
           "location":"header",
           "locationName":"x-amz-copy-source-server-side-encryption-customer-key-MD5",
           "documentation":"Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error."
-        },
-        "CopySourceSSEKMSKeyId":{
-          "shape":"CopySourceSSEKMSKeyId",
-          "location":"header",
-          "locationName":"x-amz-copy-source-server-side-encryption-aws-kms-key-id",
-          "documentation":"Specifies the AWS KMS key ID to use for object encryption."
         }
       }
     },
@@ -1190,10 +1191,6 @@
       "sensitive":true
     },
     "CopySourceSSECustomerKeyMD5":{"type":"string"},
-    "CopySourceSSEKMSKeyId":{
-      "type":"string",
-      "sensitive":true
-    },
     "CopySourceVersionId":{"type":"string"},
     "CreateBucketConfiguration":{
       "type":"structure",
@@ -1305,7 +1302,7 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
-          "documentation":"If present, specifies the AWS KMS key used to encrypt the object."
+          "documentation":"If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object."
         }
       }
     },
@@ -1438,7 +1435,7 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
-          "documentation":"Specifies the AWS KMS key ID to use for object encryption."
+          "documentation":"Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version"
         }
       }
     },
@@ -2104,7 +2101,7 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
-          "documentation":"If present, specifies the AWS KMS key used to encrypt the object."
+          "documentation":"If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object."
         }
       },
       "payload":"Body"
@@ -2215,12 +2212,6 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5",
           "documentation":"Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error."
-        },
-        "SSEKMSKeyId":{
-          "shape":"SSEKMSKeyId",
-          "location":"header",
-          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
-          "documentation":"Specifies the AWS KMS key ID to use for object encryption."
         }
       }
     },
@@ -2442,7 +2433,7 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
-          "documentation":"If present, specifies the AWS KMS key used to encrypt the object."
+          "documentation":"If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object."
         }
       }
     },
@@ -2516,12 +2507,6 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5",
           "documentation":"Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error."
-        },
-        "SSEKMSKeyId":{
-          "shape":"SSEKMSKeyId",
-          "location":"header",
-          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
-          "documentation":"Specifies the AWS KMS key ID to use for object encryption."
         }
       }
     },
@@ -3625,7 +3610,7 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
-          "documentation":"If present, specifies the AWS KMS key used to encrypt the object."
+          "documentation":"If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object."
         }
       }
     },
@@ -3774,7 +3759,7 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
-          "documentation":"Specifies the AWS KMS key ID to use for object encryption."
+          "documentation":"Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version"
         }
       },
       "payload":"Body"
@@ -4104,7 +4089,7 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
-          "documentation":"If present, specifies the AWS KMS key used to encrypt the object."
+          "documentation":"If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object."
         }
       },
       "payload":"CopyPartResult"
@@ -4212,12 +4197,6 @@
           "location":"header",
           "locationName":"x-amz-copy-source-server-side-encryption-customer-key-MD5",
           "documentation":"Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error."
-        },
-        "CopySourceSSEKMSKeyId":{
-          "shape":"CopySourceSSEKMSKeyId",
-          "location":"header",
-          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
-          "documentation":"Specifies the AWS KMS key ID to use for object encryption."
         }
       }
     },
@@ -4252,7 +4231,7 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
-          "documentation":"If present, specifies the AWS KMS key used to encrypt the object."
+          "documentation":"If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object."
         }
       }
     },
@@ -4319,12 +4298,6 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5",
           "documentation":"Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error."
-        },
-        "SSEKMSKeyId":{
-          "shape":"SSEKMSKeyId",
-          "location":"header",
-          "locationName":"x-amz-server-side-encryption-aws-kms-key-id",
-          "documentation":"Specifies the AWS KMS key ID to use for object encryption."
         }
       },
       "payload":"Body"
