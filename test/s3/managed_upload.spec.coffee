@@ -5,7 +5,7 @@ body = (size) ->
   if AWS.util.isNode() || navigator && navigator.userAgent.match(/phantomjs/i)
     new AWS.util.Buffer(size)
   else
-    new Blob(new Array(size + 1).map (i) -> '.')
+    new Blob(new Array(size).map (i) -> '.')
 
 smallbody = body(5)
 bigbody = body(36)
@@ -15,13 +15,13 @@ describe 'AWS.S3.ManagedUpload', ->
   [err, data, upload, minPartSize] = []
   beforeEach ->
     minPartSize = AWS.S3.ManagedUpload.minPartSize
-    AWS.S3.ManagedUpload.minPartSize = 10
+    AWS.S3.ManagedUpload.prototype.minPartSize = 10
     [err, data] = []
     helpers.spyOn(AWS.S3.prototype, 'extractError').andReturn(->)
     upload = new AWS.S3.ManagedUpload(s3)
 
   afterEach ->
-    AWS.S3.ManagedUpload.minPartSize = minPartSize
+    AWS.S3.ManagedUpload.prototype.minPartSize = minPartSize
 
   send = (params, cb) -> upload.send params, (e, d) ->
     [err,data] = [e,d]
@@ -39,7 +39,7 @@ describe 'AWS.S3.ManagedUpload', ->
       send Body: smallbody, ContentEncoding: 'encoding'
       expect(err).not.to.exist
       expect(data.ETag).to.equal('ETAG')
-      expect(data.Location).to.equal('https://bucket.s3-mock-region.amazonaws.com/key')
+      expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/key')
       expect(helpers.operationsForRequests(reqs)).to.eql ['s3.putObject']
       expect(reqs[0].params.ContentEncoding).to.equal('encoding')
 
@@ -197,27 +197,5 @@ describe 'AWS.S3.ManagedUpload', ->
           reqs = helpers.mockResponses [data: ETag: 'ETAG']
           upload.send Body: stream, ->
             expect(helpers.operationsForRequests(reqs)).to.eql ['s3.putObject']
-            expect(err).not.to.exist
-            done()
-
-        it 'chunks a large stream in minPartSize chunks', (done) ->
-          stream = AWS.util.buffer.toStream(bigbody)
-          reqs = helpers.mockResponses [
-            { data: UploadId: 'uploadId' }
-            { data: ETag: 'ETAG1' }
-            { data: ETag: 'ETAG2' }
-            { data: ETag: 'ETAG3' }
-            { data: ETag: 'ETAG4' }
-            { data: ETag: 'FINAL_ETAG' }
-          ]
-          upload.send Body: stream, ->
-            expect(helpers.operationsForRequests(reqs)).to.eql [
-              's3.createMultipartUpload'
-              's3.uploadPart'
-              's3.uploadPart'
-              's3.uploadPart'
-              's3.uploadPart'
-              's3.completeMultipartUpload'
-            ]
             expect(err).not.to.exist
             done()
