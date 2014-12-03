@@ -6,6 +6,7 @@ Feature: S3 Managed Upload
     When I use S3 managed upload to upload a large buffer
     Then the multipart upload should succeed
 
-  Scenario: Uploading a large buffer
+  Scenario: Uploading a large stream
     When I use S3 managed upload to upload a large stream
     Then the multipart upload should succeed
+    And I should get progress events

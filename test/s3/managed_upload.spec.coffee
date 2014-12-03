@@ -18,18 +18,40 @@ describe 'AWS.S3.ManagedUpload', ->
     AWS.S3.ManagedUpload.prototype.minPartSize = 10
     [err, data] = []
     helpers.spyOn(AWS.S3.prototype, 'extractError').andReturn(->)
-    upload = new AWS.S3.ManagedUpload(s3)
+    upload = null
 
   afterEach ->
     AWS.S3.ManagedUpload.prototype.minPartSize = minPartSize
 
-  send = (params, cb) -> upload.send params, (e, d) ->
-    [err,data] = [e,d]
-    cb() if cb
+  send = (params, cb) ->
+    if !upload
+      upload = new AWS.S3.ManagedUpload(service: s3, params: params)
+    upload.send (e, d) ->
+      [err,data] = [e,d]
+      cb() if cb
 
   describe 'send', ->
+    it 'default callback throws', ->
+      helpers.mockResponses [ error: new Error('ERROR') ]
+      upload = new AWS.S3.ManagedUpload({params: {Body: 'body'}})
+      expect(-> upload.send()).to.throw('ERROR')
+
     it 'fails if Body is not passed', ->
       expect(-> send()).to.throw('params.Body is required')
+
+    it 'fails if Body is unknown type', ->
+      send(Body: 2)
+      expect(err.message).to.match(/Unsupported body payload number/)
+
+    it 'converts string body to Buffer', ->
+      reqs = helpers.mockResponses [
+        data: ETag: 'ETAG'
+      ]
+      send(Body: 'string')
+      expect(data.ETag).to.equal('ETAG')
+
+    it 'uses a default service object if none provided', ->
+      expect(-> new AWS.S3.ManagedUpload()).to.throw('params.Body is required')
 
     it 'uploads a single part if size is less than min multipart size', ->
       reqs = helpers.mockResponses [
@@ -42,6 +64,15 @@ describe 'AWS.S3.ManagedUpload', ->
       expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/key')
       expect(helpers.operationsForRequests(reqs)).to.eql ['s3.putObject']
       expect(reqs[0].params.ContentEncoding).to.equal('encoding')
+
+    it 'can fail a single part', ->
+      reqs = helpers.mockResponses [
+        data: null
+        error: new Error('ERROR')
+      ]
+      send(Body: 'string')
+      expect(data).not.to.exist
+      expect(err.message).to.equal('ERROR')
 
     it 'uploads multipart if size is greater than min multipart size', ->
       reqs = helpers.mockResponses [
@@ -108,9 +139,9 @@ describe 'AWS.S3.ManagedUpload', ->
       ]
 
       size = 18
-      opts = partSize: size, queueSize: 1
-      upload = new AWS.S3.ManagedUpload(s3, opts)
-      send Body: bigbody
+      opts = partSize: size, queueSize: 1, service: s3, params: {Body: bigbody}
+      upload = new AWS.S3.ManagedUpload(opts)
+      send()
       expect(helpers.operationsForRequests(reqs)).to.eql [
         's3.createMultipartUpload'
         's3.uploadPart'
@@ -124,7 +155,7 @@ describe 'AWS.S3.ManagedUpload', ->
       expect(reqs[2].params.ContentLength).to.equal(size)
 
     it 'errors if partSize is smaller than minPartSize', ->
-      expect(-> new AWS.S3.ManagedUpload(s3, partSize: 5)).to.throw(
+      expect(-> new AWS.S3.ManagedUpload(partSize: 5)).to.throw(
         'partSize must be greater than 10')
 
     it 'aborts if uploadPart fails', ->
@@ -135,8 +166,8 @@ describe 'AWS.S3.ManagedUpload', ->
         { data: {}, error: null }
       ]
 
-      upload = new AWS.S3.ManagedUpload(s3, queueSize: 1)
-      send Body: bigbody
+      upload = new AWS.S3.ManagedUpload(queueSize: 1, params: {Body: bigbody})
+      send()
       expect(helpers.operationsForRequests(reqs)).to.eql [
         's3.createMultipartUpload'
         's3.uploadPart'
@@ -179,8 +210,11 @@ describe 'AWS.S3.ManagedUpload', ->
         { data: {}, error: null }
       ]
 
-      upload = new AWS.S3.ManagedUpload(s3, queueSize: 1, leavePartsOnError: true)
-      send Body: bigbody
+      upload = new AWS.S3.ManagedUpload
+        queueSize: 1
+        leavePartsOnError: true
+        params: { Body: bigbody }
+      send()
       expect(helpers.operationsForRequests(reqs)).to.eql [
         's3.createMultipartUpload'
         's3.uploadPart'
@@ -195,7 +229,8 @@ describe 'AWS.S3.ManagedUpload', ->
         it 'sends a small stream in a single putObject', (done) ->
           stream = AWS.util.buffer.toStream(smallbody)
           reqs = helpers.mockResponses [data: ETag: 'ETAG']
-          upload.send Body: stream, ->
+          upload = new AWS.S3.ManagedUpload params: { Body: stream }
+          upload.send ->
             expect(helpers.operationsForRequests(reqs)).to.eql ['s3.putObject']
             expect(err).not.to.exist
             done()

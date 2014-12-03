@@ -27,7 +27,7 @@ module.exports = function () {
     var self = this;
     var buffer = new Buffer(1024 * 1024 * 12);
     var params = {Bucket: self.mgrBucket, Key: 'largebuffer', Body: buffer};
-    self.s3.upload().send(params, function (err, data) {
+    self.s3.upload(params, function (err, data) {
       self.error = err;
       self.data = data;
       callback();
@@ -44,10 +44,21 @@ module.exports = function () {
     var self = this;
     var stream = this.AWS.util.buffer.toStream(new Buffer(1024 * 1024 * 12));
     var params = {Bucket: self.mgrBucket, Key: 'largestream', Body: stream};
-    self.s3.upload().send(params, function (err, data) {
+
+    self.progressEvents = [];
+    var progress = function(info) {
+      self.progressEvents.push(info);
+    }
+
+    self.s3.upload(params).on('httpUploadProgress', progress).send(function (err, data) {
       self.error = err;
       self.data = data;
       callback();
     });
+  });
+
+  this.Then(/^I should get progress events$/, function (callback) {
+    this.assert.compare(this.progressEvents.length, '>', 0);
+    callback();
   });
 };
