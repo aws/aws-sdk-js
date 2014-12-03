@@ -60,6 +60,19 @@ describe 'AWS.S3', ->
       s3 = new AWS.S3(region: 'us-west-1')
       expect(s3.endpoint.hostname).to.equal('s3-us-west-1.amazonaws.com')
 
+    it 'does not enable path style if an endpoint is specified', ->
+      s3 = new AWS.S3(endpoint: 'foo.bar')
+      req = s3.listObjects(Bucket: 'bucket').build()
+      expect(req.httpRequest.endpoint.hostname).to.equal('foo.bar')
+      expect(req.httpRequest.path).to.equal('/')
+      expect(req.httpRequest.virtualHostedBucket).to.equal('bucket')
+
+    it 'allows user override if an endpoint is specified', ->
+      s3 = new AWS.S3(endpoint: 'foo.bar', s3ForcePathStyle: true)
+      req = s3.listObjects(Bucket: 'bucket').build()
+      expect(req.httpRequest.endpoint.hostname).to.equal('foo.bar')
+      expect(req.httpRequest.path).to.equal('/bucket')
+
   describe 'building a request', ->
     build = (operation, params) ->
       request(operation, params).build().httpRequest
@@ -551,7 +564,7 @@ describe 'AWS.S3', ->
     it 'generates the right URL with a custom endpoint', ->
       s3 = new AWS.S3(endpoint: 'https://foo.bar.baz:555/prefix', params: Bucket: 'bucket')
       url = s3.getSignedUrl('getObject', Key: 'key', Expires: 60)
-      expect(url).to.equal('https://bucket.foo.bar.baz:555/prefix/key?AWSAccessKeyId=akid&Expires=60&Signature=zA6k0cQqDkTZgLamfoYLOd%2Bqfg8%3D&x-amz-security-token=session')
+      expect(url).to.equal('https://foo.bar.baz:555/prefix/key?AWSAccessKeyId=akid&Expires=60&Signature=zA6k0cQqDkTZgLamfoYLOd%2Bqfg8%3D&x-amz-security-token=session')
 
     it 'gets a signed URL with callback', (done) ->
       s3.getSignedUrl 'getObject', Bucket: 'bucket', Key: 'key', (err, url) ->
