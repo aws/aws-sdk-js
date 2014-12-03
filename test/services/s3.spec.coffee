@@ -42,6 +42,11 @@ describe 'AWS.S3', ->
       expect(s3.dnsCompatibleBucketName('1.2.3.4')).to.equal(false)
       expect(s3.dnsCompatibleBucketName('a.b.c.d')).to.equal(true)
 
+  describe 'constructor', ->
+    it 'requires endpoint if s3BucketEndpoint is passed', ->
+      expect(-> new AWS.S3(s3BucketEndpoint: true)).to.throw(
+        /An endpoint must be provided/)
+
   describe 'endpoint', ->
 
     it 'sets hostname to s3.amazonaws.com when region is un-specified', ->
@@ -71,6 +76,24 @@ describe 'AWS.S3', ->
       req = build('headObject', {Bucket:'bucket', Key:'key'})
       expect(req.endpoint.hostname).to.equal('s3.amazonaws.com')
       expect(req.path).to.equal('/bucket/key')
+
+    it 'does not enable path style if endpoint is a bucket', ->
+      s3 = new AWS.S3(endpoint: 'foo.bar', s3BucketEndpoint: true)
+      req = build('listObjects', Bucket: 'bucket')
+      expect(req.endpoint.hostname).to.equal('foo.bar')
+      expect(req.path).to.equal('/')
+      expect(req.virtualHostedBucket).to.equal('bucket')
+
+    it 'allows user override if an endpoint is specified', ->
+      s3 = new AWS.S3(endpoint: 'foo.bar', s3ForcePathStyle: true)
+      req = build('listObjects', Bucket: 'bucket')
+      expect(req.endpoint.hostname).to.equal('foo.bar')
+      expect(req.path).to.equal('/bucket')
+
+    it 'does not allow non-bucket operations with s3BucketEndpoint set', ->
+      s3 = new AWS.S3(endpoint: 'foo.bar', s3BucketEndpoint: true, paramValidation: true)
+      req = s3.listBuckets().build()
+      expect(req.response.error.code).to.equal('ConfigError')
 
     describe 'uri escaped params', ->
       it 'uri-escapes path and querystring params', ->
