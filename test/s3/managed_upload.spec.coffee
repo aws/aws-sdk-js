@@ -108,7 +108,7 @@ describe 'AWS.S3.ManagedUpload', ->
       ]
 
       size = 18
-      opts = partSize: size, maxQueue: 1
+      opts = partSize: size, queueSize: 1
       upload = new AWS.S3.ManagedUpload(s3, opts)
       send Body: bigbody
       expect(helpers.operationsForRequests(reqs)).to.eql [
@@ -135,7 +135,7 @@ describe 'AWS.S3.ManagedUpload', ->
         { data: {}, error: null }
       ]
 
-      upload = new AWS.S3.ManagedUpload(s3, maxQueue: 1)
+      upload = new AWS.S3.ManagedUpload(s3, queueSize: 1)
       send Body: bigbody
       expect(helpers.operationsForRequests(reqs)).to.eql [
         's3.createMultipartUpload'
@@ -179,7 +179,7 @@ describe 'AWS.S3.ManagedUpload', ->
         { data: {}, error: null }
       ]
 
-      upload = new AWS.S3.ManagedUpload(s3, maxQueue: 1, leavePartsOnError: true)
+      upload = new AWS.S3.ManagedUpload(s3, queueSize: 1, leavePartsOnError: true)
       send Body: bigbody
       expect(helpers.operationsForRequests(reqs)).to.eql [
         's3.createMultipartUpload'
