@@ -39,7 +39,7 @@ AWS.config.region = 'us-west-2';
 var s3bucket = new AWS.S3({params: {Bucket: 'myBucket'}});
 s3bucket.createBucket(function() {
   var data = {Key: 'myKey', Body: 'Hello!'};
-  s3bucket.putObject(data, function(err, data) {
+  s3bucket.upload(data, function(err, data) {
     if (err) {
       console.log("Error uploading data: ", err);
     } else {
@@ -104,7 +104,7 @@ s3.listBuckets(function(err, data) {
 });
 ```
 
-### Amazon S3: Create a New Bucket and Object (createBucket, putObject)
+### Amazon S3: Create a New Bucket and Object (createBucket, upload)
 
 The following example puts the string 'Hello!' inside the
 object 'myKey' of bucket 'myBucket':
@@ -112,7 +112,7 @@ object 'myKey' of bucket 'myBucket':
 ```javascript
 var s3 = new AWS.S3({params: {Bucket: 'myBucket', Key: 'myKey'}});
 s3.createBucket(function() {
-  s3.putObject({Body: 'Hello!'}, function() {
+  s3.upload({Body: 'Hello!'}, function() {
     console.log("Successfully uploaded data to myBucket/myKey");
   });
 });

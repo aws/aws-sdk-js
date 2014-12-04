@@ -62,7 +62,7 @@ object in S3:
         results.innerHTML = '';
 
         var params = {Key: 'data.txt', Body: textarea.value};
-        bucket.putObject(params, function (err, data) {
+        bucket.upload(params, function (err, data) {
           results.innerHTML = err ? 'ERROR!' : 'SAVED.';
         });
       }, false);
@@ -89,7 +89,7 @@ to upload a file on disk to S3:
           results.innerHTML = '';
 
           var params = {Key: file.name, ContentType: file.type, Body: file};
-          bucket.putObject(params, function (err, data) {
+          bucket.upload(params, function (err, data) {
             results.innerHTML = err ? 'ERROR!' : 'UPLOADED.';
           });
         } else {
