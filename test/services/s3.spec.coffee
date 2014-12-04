@@ -221,13 +221,13 @@ describe 'AWS.S3', ->
   # Managed Upload integration point
   describe 'upload', ->
     it 'accepts parameters in upload() call', ->
-      helpers.mockResponses [ data: { ETag: 'ETAG' } ]
-      s3.upload {Bucket: 'bucket', Key: 'key', Body: 'body'}, (err, data) ->
-        expect(err).not.to.exist
-        expect(data.ETag).to.equal('ETAG')
+      helpers.mockResponses [ { data: { ETag: 'ETAG' } } ]
+      done = false
+      s3.upload({Bucket: 'bucket', Key: 'key', Body: 'body'}, -> done = true)
+      expect(done).to.equal(true)
 
     it 'accepts options as a second parameter', ->
-      helpers.mockResponses [ data: { ETag: 'ETAG' } ]
+      helpers.mockResponses [ { data: { ETag: 'ETAG' } } ]
       upload = s3.upload({Bucket: 'bucket', Key: 'key', Body: 'body'}, {queueSize: 2}, ->)
       expect(upload.queueSize).to.equal(2)
 
