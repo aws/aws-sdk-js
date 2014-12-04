@@ -38,8 +38,8 @@ AWS.config.region = 'us-west-2';
 // Make sure to change the bucket name from "myBucket" to something unique.
 var s3bucket = new AWS.S3({params: {Bucket: 'myBucket'}});
 s3bucket.createBucket(function() {
-  var data = {Key: 'myKey', Body: 'Hello!'};
-  s3bucket.upload(data, function(err, data) {
+  var params = {Key: 'myKey', Body: 'Hello!'};
+  s3bucket.upload(params, function(err, data) {
     if (err) {
       console.log("Error uploading data: ", err);
     } else {
