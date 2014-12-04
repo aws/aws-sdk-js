@@ -118,6 +118,21 @@ s3.createBucket(function() {
 });
 ```
 
+### Amazon S3: Uploading an arbitrarily sized stream (upload)
+
+The following example gzips a large file and uploads it to S3 as a stream:
+
+```javascript
+var fs = require('fs');
+var zlib = require('zlib');
+
+var body = fs.createReadStream('bigfile').pipe(zlib.createGzip());
+var s3obj = new AWS.S3({params: {Bucket: 'myBucket', Key: 'myKey'}});
+s3obj.upload({Body: body}).
+  on('httpUploadProgress', function(evt) { console.log(evt); }).
+  send(function(err, data) { console.log(err, data) });
+```
+
 ### Amazon S3: Streaming Objects to Files on Disk (getObject)
 
 You can use the `createReadStream()` method on a request object to

@@ -45,6 +45,14 @@ Amazon S3 bucket:
 
 ### Uploading data into an object
 
+<p class="note">
+  In order to upload files in the browser, you should ensure that you
+  have configured CORS for your Amazon S3 bucket and exposed the "ETag"
+  header via the <code>&lt;ExposeHeader&gt;ETag&lt;/ExposeHeader&gt;</code>
+  declaration. See the {file:browser-configuring.md Configuring} section
+  for more information on configuring CORS for an Amazon S3 bucket.
+</p>
+
 The following example will upload the contents of a `<textarea>` tag to an
 object in S3:
 
@@ -69,6 +77,14 @@ object in S3:
     </script>
 
 ### Uploading a local file using the File API
+
+<p class="note">
+  In order to upload files in the browser, you should ensure that you
+  have configured CORS for your Amazon S3 bucket and exposed the "ETag"
+  header via the <code>&lt;ExposeHeader&gt;ETag&lt;/ExposeHeader&gt;</code>
+  declaration. See the {file:browser-configuring.md Configuring} section
+  for more information on configuring CORS for an Amazon S3 bucket.
+</p>
 
 The following example uses the [HTML5 File API](http://www.w3.org/TR/FileAPI/)
 to upload a file on disk to S3:
