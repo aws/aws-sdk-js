@@ -134,6 +134,11 @@
           "documentation":"<p>The health check you are trying to get or delete does not exist.</p>"
         },
         {
+          "shape":"NoSuchHostedZone",
+          "error":{"httpStatusCode":404},
+          "exception":true
+        },
+        {
           "shape":"PriorRequestNotComplete",
           "error":{"httpStatusCode":400},
           "exception":true,
@@ -878,6 +883,11 @@
           "documentation":"<p>The health check you are trying to get or delete does not exist.</p>"
         },
         {
+          "shape":"NoSuchHostedZone",
+          "error":{"httpStatusCode":404},
+          "exception":true
+        },
+        {
           "shape":"PriorRequestNotComplete",
           "error":{"httpStatusCode":400},
           "exception":true,
@@ -918,6 +928,11 @@
           "error":{"httpStatusCode":404},
           "exception":true,
           "documentation":"<p>The health check you are trying to get or delete does not exist.</p>"
+        },
+        {
+          "shape":"NoSuchHostedZone",
+          "error":{"httpStatusCode":404},
+          "exception":true
         },
         {
           "shape":"PriorRequestNotComplete",
@@ -965,6 +980,37 @@
         }
       ],
       "documentation":"<p> This action updates an existing health check.</p> <p> To update a health check, send a <code>POST</code> request to the <code>2013-04-01/healthcheck/<i>health check ID</i></code> resource. The request body must include an XML document with an <code>UpdateHealthCheckRequest</code> element. The response returns an <code>UpdateHealthCheckResponse</code> element, which contains metadata about the health check.</p>"
+    },
+    "UpdateHostedZoneComment":{
+      "name":"UpdateHostedZoneComment",
+      "http":{
+        "method":"POST",
+        "requestUri":"/2013-04-01/hostedzone/{Id}"
+      },
+      "input":{
+        "shape":"UpdateHostedZoneCommentRequest",
+        "documentation":"<p>A complex type that contains information about the request to update a hosted zone comment.</p>",
+        "xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},
+        "locationName":"UpdateHostedZoneCommentRequest"
+      },
+      "output":{
+        "shape":"UpdateHostedZoneCommentResponse",
+        "documentation":"<p>A complex type containing information about the specified hosted zone after the update.</p>"
+      },
+      "errors":[
+        {
+          "shape":"NoSuchHostedZone",
+          "error":{"httpStatusCode":404},
+          "exception":true
+        },
+        {
+          "shape":"InvalidInput",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>Some value specified in the request is invalid or the XML document is malformed.</p>"
+        }
+      ],
+      "documentation":"<p> To update the hosted zone comment, send a <code>POST</code> request to the <code>2013-04-01/hostedzone/<i>hosted zone ID</i></code> resource. The request body must include an XML document with a <code>UpdateHostedZoneCommentRequest</code> element. The response to this request includes the modified <code>HostedZone</code> element.</p> <note> The comment can have a maximum length of 256 characters.</note>"
     }
   },
   "shapes":{
@@ -1145,7 +1191,7 @@
           "shape":"TagResourceType",
           "location":"uri",
           "locationName":"ResourceType",
-          "documentation":"<p>The type of the resource. The resource type for health checks is <code>healthcheck</code>.</p>"
+          "documentation":"<p>The type of the resource.</p> <p>- The resource type for health checks is <code>healthcheck</code>.</p> <p>- The resource type for hosted zones is <code>hostedzone</code>.</p>"
         },
         "ResourceId":{
           "shape":"TagResourceId",
@@ -2468,7 +2514,7 @@
           "shape":"TagResourceType",
           "location":"uri",
           "locationName":"ResourceType",
-          "documentation":"<p>The type of the resource. The resource type for health checks is <code>healthcheck</code>.</p>"
+          "documentation":"<p>The type of the resource.</p> <p>- The resource type for health checks is <code>healthcheck</code>.</p> <p>- The resource type for hosted zones is <code>hostedzone</code>.</p>"
         },
         "ResourceId":{
           "shape":"TagResourceId",
@@ -2501,7 +2547,7 @@
           "shape":"TagResourceType",
           "location":"uri",
           "locationName":"ResourceType",
-          "documentation":"<p>The type of the resources. The resource type for health checks is <code>healthcheck</code>.</p>"
+          "documentation":"<p>The type of the resources.</p> <p>- The resource type for health checks is <code>healthcheck</code>.</p> <p>- The resource type for hosted zones is <code>hostedzone</code>.</p>"
         },
         "ResourceIds":{
           "shape":"TagResourceIdList",
@@ -2764,7 +2810,7 @@
       "members":{
         "ResourceType":{
           "shape":"TagResourceType",
-          "documentation":"<p>The type of the resource. The resource type for health checks is <code>healthcheck</code>.</p>"
+          "documentation":"<p>The type of the resource.</p> <p>- The resource type for health checks is <code>healthcheck</code>.</p> <p>- The resource type for hosted zones is <code>hostedzone</code>.</p>"
         },
         "ResourceId":{
           "shape":"TagResourceId",
@@ -2863,7 +2909,10 @@
     },
     "TagResourceType":{
       "type":"string",
-      "enum":["healthcheck"]
+      "enum":[
+        "healthcheck",
+        "hostedzone"
+      ]
     },
     "TagValue":{
       "type":"string",
@@ -2944,6 +2993,31 @@
       "members":{
         "HealthCheck":{"shape":"HealthCheck"}
       }
+    },
+    "UpdateHostedZoneCommentRequest":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "Id":{
+          "shape":"ResourceId",
+          "location":"uri",
+          "locationName":"Id",
+          "documentation":"<p>The ID of the hosted zone you want to update.</p>"
+        },
+        "Comment":{
+          "shape":"ResourceDescription",
+          "documentation":"<p>A comment about your hosted zone.</p>"
+        }
+      },
+      "documentation":"<p>A complex type that contains information about the request to update a hosted zone comment.</p>"
+    },
+    "UpdateHostedZoneCommentResponse":{
+      "type":"structure",
+      "required":["HostedZone"],
+      "members":{
+        "HostedZone":{"shape":"HostedZone"}
+      },
+      "documentation":"<p>A complex type containing information about the specified hosted zone after the update.</p>"
     },
     "VPC":{
       "type":"structure",
