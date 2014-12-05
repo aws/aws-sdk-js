@@ -31,23 +31,33 @@ describe 'AWS.DynamoDB', ->
       expect(ddb().retryDelays()).to.eql(delays)
 
   describe 'CRC32 check', ->
-    dynamo = null;
+    dynamo = null
 
     beforeEach ->
       dynamo = ddb(accessKeyId: 'AKID', secretAccessKey: 'SECRET', region: 'us-west-2')
 
     if AWS.util.isNode()
       it 'does not verify response checksum when streaming', ->
-        spy = helpers.spyOn(dynamo, 'crc32IsValid')
-        helpers.mockHttpResponse 200, {'x-amz-crc32': '1575962599'}, """{"TableNames":["mock-table"]}"""
+        helpers.mockHttpResponse 200, {'x-amz-crc32': '0'}, """{"TableNames":["mock-table"]}"""
         request = dynamo.makeRequest('listTables')
         s = request.createReadStream()
         s.on 'end', ->
-          expect(spy.calls.length).to.eql(0)
+          expect(request.error).to.eql(null)
 
     it 'does verify response checksum when not streaming', ->
-      spy = helpers.spyOn(dynamo, 'crc32IsValid').andCallThrough()
       helpers.mockHttpResponse 200, {'x-amz-crc32': '1575962599'}, """{"TableNames":["mock-table"]}"""
       request = dynamo.makeRequest('listTables')
       request.send (err, data) ->
-        expect(spy.calls.length).to.eql(1)
+        expect(err).to.eql(null)
+
+    it 'does not verify response checksum when no [x-amz-crc32] header', ->
+      helpers.mockHttpResponse 200, {}, """{"TableNames":["mock-table"]}"""
+      request = dynamo.makeRequest('listTables')
+      request.send (err, data) ->
+        expect(err).to.eql(null)
+
+    it 'throws an error when response checksum does not match', ->
+      helpers.mockHttpResponse 200, {'x-amz-crc32': '0'}, """{"TableNames":["mock-table"]}"""
+      request = dynamo.makeRequest('listTables')
+      request.send (err, data) ->
+        expect(err.code).to.eql('CRC32CheckFailed')
