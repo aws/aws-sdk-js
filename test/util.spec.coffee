@@ -280,6 +280,28 @@ describe 'AWS.util.crypto', ->
           expect(d).to.equal(result)
           done()
 
+    if AWS.util.isBrowser()
+      it 'handles ArrayBuffers', (done) ->
+        result = '01d448afd928065458cf670b60f5a594d735af0172c8d67f22a81680132681ca'
+        util.sha256 new ArrayBuffer(10), 'hex', (e, d) ->
+          expect(e).to.eql(null)
+          expect(d).to.equal(result)
+          done()
+
+      it 'handles large ArrayBuffers', (done) ->
+        result = 'fd2a4f95c056f31be0b80c8063950008563a700ebfb94c00aa62df90d6d62a03'
+        util.sha256 new ArrayBuffer(1024 * 1024 + 256), 'hex', (e, d) ->
+          expect(e).to.eql(null)
+          expect(d).to.equal(result)
+          done()
+
+      it 'handles Uint8Array objects directly', (done) ->
+        result = '039058c6f2c0cb492c533b0a4d14ef77cc0f78abccced5287d84a1a2011cfb81'
+        util.sha256 new Uint8Array([1,2,3]), 'hex', (e, d) ->
+          expect(e).to.eql(null)
+          expect(d).to.equal(result)
+          done()
+
   describe 'md5', ->
     input = 'foo'
     result = 'acbd18db4cc2f85cedef654fccc4a4d8'
