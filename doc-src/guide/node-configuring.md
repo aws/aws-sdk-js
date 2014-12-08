@@ -238,14 +238,23 @@ AWS.config.apiVersion = '2012-05-04';
 ### Configuring a Proxy
 
 If you cannot connect to the internet directly, the SDK supports the use of
-HTTP or HTTPS proxies through global or per-service configuration options. To
-set a proxy, pass the `proxy` option to the `httpOptions` setting of your
-config object. This is how you could set a global proxy:
+HTTP or HTTPS proxies through the use of a third party HTTP agent like 
+[proxy-agent](https://github.com/TooTallNate/node-proxy-agent).
+
+##### Installation
+```javascript
+npm install proxy-agent --save
+```
+##### In your code
 
 ```javascript
+var proxy = require('proxy-agent');
+var proxyURI = process.env.http_proxy || 'http://internal.proxy.com'
+var proxyAgent = proxy(proxyURI);
+
 AWS.config.update({
-  httpOptions: {
-    proxy: 'http://localhost:8080'
+  httpOptions : {
+    agent: proxyAgent
   }
 });
 
