@@ -57,10 +57,10 @@ describe 'AWS.util.queryParamsToString', ->
     expect(spy.calls.length).to.equal(6)
 
   it 'handles values as lists', ->
-    expect(qpts(a: ['1', '2', '3'], b: '4')).to.equal('a=1&a=2&a=3&b=4')
+    expect(qpts(a: ['c', 'b', 'a'], b: '4')).to.equal('a=c&a=b&a=a&b=4')
 
   it 'escapes list values', ->
-    expect(qpts(a: ['+', '&', '*'], b: '4')).to.equal('a=%26&a=%2A&a=%2B&b=4')
+    expect(qpts(a: ['+', '&', '*'], b: '4')).to.equal('a=%2B&a=%26&a=%2A&b=4')
 
   it 'does not provide value if value is null', ->
     expect(qpts(a: null, b: null)).to.equal('a=&b=')
