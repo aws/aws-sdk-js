@@ -121,6 +121,17 @@ integrationTests ->
             noError(err)
             s3.deleteObject(Key: key).send(done)
 
+    describe 'upload()', ->
+      it 'supports blobs using upload() (no phantomjs)', (done) ->
+        key = uniqueName('test')
+        size = 100
+        u = s3.upload(Key: key, Body: new Blob(new Array(size).map (i) -> '.'))
+        u.send (err, data) ->
+          expect(err).not.to.exist
+          expect(typeof data.ETag).to.equal('string')
+          expect(typeof data.Location).to.equal('string')
+          done()
+
     describe 'progress events', ->
       it 'emits http(Upload|Download)Progress events (no phantomjs)', (done) ->
         data = []

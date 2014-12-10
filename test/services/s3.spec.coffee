@@ -241,6 +241,22 @@ describe 'AWS.S3', ->
       s3.putObject (err, data) ->
         expect(@retryCount).to.equal(s3.config.maxRetries)
 
+  # Managed Upload integration point
+  describe 'upload', ->
+    it 'accepts parameters in upload() call', ->
+      helpers.mockResponses [ { data: { ETag: 'ETAG' } } ]
+      done = false
+      s3.upload({Bucket: 'bucket', Key: 'key', Body: 'body'}, -> done = true)
+      expect(done).to.equal(true)
+
+    it 'accepts options as a second parameter', ->
+      helpers.mockResponses [ { data: { ETag: 'ETAG' } } ]
+      upload = s3.upload({Bucket: 'bucket', Key: 'key', Body: 'body'}, {queueSize: 2}, ->)
+      expect(upload.queueSize).to.equal(2)
+
+    it 'does not send if no callback is supplied', ->
+      s3.upload(Bucket: 'bucket', Key: 'key', Body: 'body')
+
   # S3 returns a handful of errors without xml bodies (to match the
   # http spec) these tests ensure we give meaningful codes/messages for these.
   describe 'errors with no XML body', ->

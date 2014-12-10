@@ -176,8 +176,11 @@ setupMockResponse = (cb) ->
     req.on('validateResponse', cb)
 
 mockResponse = (resp) ->
+  reqs = []
   setupMockResponse (response) ->
-      AWS.util.update response, resp
+    reqs.push(response.request)
+    AWS.util.update response, resp
+  reqs
 
 mockResponses = (resps) ->
   index = 0
