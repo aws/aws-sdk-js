@@ -114,6 +114,23 @@ describe 'AWS.S3', ->
         req = build('listObjects', { Bucket: 'bucket', MaxKeys:123 })
         expect(req.path).to.equal('/?max-keys=123')
 
+    describe 'adding Expect: 100-continue', ->
+      if AWS.util.isNode()
+        it 'does not add expect header to payloads less than 1MB', ->
+          req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024 * 1024 - 1))
+          expect(req.headers['Expect']).not.to.exist
+
+        it 'adds expect header to payloads greater than 1MB', ->
+          req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024 * 1024 + 1))
+          expect(req.headers['Expect']).to.equal('100-continue')
+
+      if AWS.util.isBrowser()
+        beforeEach -> helpers.spyOn(AWS.util, 'isBrowser').andReturn(true)
+
+        it 'does not add expect header in the browser', ->
+          req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024 * 1024 + 1))
+          expect(req.headers['Expect']).not.to.exist
+
     describe 'adding Content-Type', ->
       beforeEach -> helpers.spyOn(AWS.util, 'isBrowser').andReturn(true)
 
