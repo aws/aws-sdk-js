@@ -5,7 +5,7 @@ body = (size) ->
   if AWS.util.isNode() || navigator && navigator.userAgent.match(/phantomjs/i)
     new AWS.util.Buffer(size)
   else
-    new Blob(new Array(size).map (i) -> '.')
+    new Blob([new Uint8Array(size)])
 
 smallbody = body(5)
 bigbody = body(36)

@@ -125,7 +125,7 @@ integrationTests ->
       it 'supports blobs using upload() (no phantomjs)', (done) ->
         key = uniqueName('test')
         size = 100
-        u = s3.upload(Key: key, Body: new Blob(new Array(size).map (i) -> '.'))
+        u = s3.upload(Key: key, Body: new Blob([new Uint8Array(size)]))
         u.send (err, data) ->
           expect(err).not.to.exist
           expect(typeof data.ETag).to.equal('string')
@@ -137,7 +137,7 @@ integrationTests ->
         data = []
         progress = []
         key = uniqueName('test')
-        body = new Blob([new Array(512 * 1024).join('x')])
+        body = new Blob([new Uint8Array(512 * 1024)])
         req = s3.putObject(Key: key, Body: body)
         req.on 'httpUploadProgress', (p) -> progress.push(p)
         req.send (err, data) ->
