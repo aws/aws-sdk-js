@@ -84,7 +84,8 @@ integrationTests ->
       done()
 
   describe 'AWS.S3', ->
-    testWrite = (done, body, compareFn) ->
+    testWrite = (done, body, compareFn, svc) ->
+      svc = svc || s3
       key = uniqueName('test')
       s3.putObject {Key: key, Body: body}, (err, data) ->
         noError(err)
@@ -98,6 +99,10 @@ integrationTests ->
 
     it 'GETs and PUTs objects to a bucket', (done) ->
       testWrite done, 'ƒoo'
+
+    it 'GETs and PUTs objects to a bucket with signature version 4', (done) ->
+      svc = new AWS.S3(AWS.util.merge({signatureVersion: 'v4'}, config.s3))
+      testWrite done, 'ƒoo', null, svc
 
     it 'writes typed array data (no phantomjs)', (done) ->
       testWrite done, new Uint8Array([2, 4, 8]), (data) ->
