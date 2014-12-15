@@ -42,7 +42,7 @@ module.exports = function () {
 
   this.When(/^I use S3 managed upload to upload a large stream$/, function (callback) {
     var self = this;
-    var stream = this.AWS.util.buffer.toStream(new Buffer(1024 * 1024 * 12));
+    var stream = this.AWS.util.buffer.toStream(new Buffer(1024 * 1024 * 10));
     var params = {Bucket: self.mgrBucket, Key: 'largestream', Body: stream};
 
     self.progressEvents = [];
@@ -59,6 +59,16 @@ module.exports = function () {
 
   this.Then(/^I should get progress events$/, function (callback) {
     this.assert.compare(this.progressEvents.length, '>', 0);
+    callback();
+  });
+
+  this.Then(/^I should head the managed upload object$/, function (callback) {
+    var params = {Bucket: this.mgrBucket, Key: 'largestream'};
+    this.request('s3', 'headObject', params, callback);
+  });
+
+  this.Then(/^the ContentLength should equal (\d+)$/, function (val, callback) {
+    this.assert.equal(this.data.ContentLength, val);
     callback();
   });
 };
