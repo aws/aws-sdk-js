@@ -123,6 +123,9 @@ API operation.
 @example Constructing a #{klass} object
   var #{klass.downcase} = new AWS.#{klass}({apiVersion: '#{api_version}'});
 
+@option options [map] params An optional map of parameters to bind to every
+  request sent by this service object. For more information on bound parameters,
+  see ["Working with Services" in the Getting Started Guide](/AWSJavaScriptSDK/guide/node-services.html#Bound_Parameters).
 @option options [String] endpoint The endpoint URI to send requests
   to.  The default endpoint is built from the configured `region`.
   The endpoint should be a string like `'https://{service}.{region}.amazonaws.com'`.
