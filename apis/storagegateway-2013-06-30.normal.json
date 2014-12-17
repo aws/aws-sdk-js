@@ -995,7 +995,7 @@
           "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
         }
       ],
-      "documentation":"<p>This operation returns a list of the local disks of a gateway. To specify which gateway to describe you use the Amazon Resource Name (ARN) of the gateway in the body of the request.</p> <p>The request returns all disks, specifying which are configured as working storage, stored volume or not configured at all.</p>"
+      "documentation":"<p>This operation returns a list of the gateway's local disks. To specify which gateway to describe, you use the Amazon Resource Name (ARN) of the gateway in the body of the request.</p> <p>The request returns a list of all disks, specifying which are configured as working storage, cache storage, or stored volume or not configured at all. The response includes a <code>DiskStatus</code> field. This field can have a value of present (the disk is availble to use), missing (the disk is no longer connected to the gateway), or mismatch (the disk node is occupied by a disk that has incorrect metadata or the disk content is corrupted). </p>"
     },
     "ListVolumeRecoveryPoints":{
       "name":"ListVolumeRecoveryPoints",
@@ -1047,6 +1047,30 @@
         }
       ],
       "documentation":"<p>This operation lists the iSCSI stored volumes of a gateway. Results are sorted by volume ARN. The response includes only the volume ARNs. If you want additional volume information, use the <a>DescribeStorediSCSIVolumes</a> API.</p> <p>The operation supports pagination. By default, the operation returns a maximum of up to 100 volumes. You can optionally specify the <code>Limit</code> field in the body to limit the number of volumes in the response. If the number of volumes returned in the response is truncated, the response includes a Marker field. You can use this Marker value in your subsequent request to retrieve the next set of volumes.</p>"
+    },
+    "ResetCache":{
+      "name":"ResetCache",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ResetCacheInput"},
+      "output":{"shape":"ResetCacheOutput"},
+      "errors":[
+        {
+          "shape":"InvalidGatewayRequestException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
+        },
+        {
+          "shape":"InternalServerError",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
+        }
+      ],
+      "documentation":"<p>This operation resets all cache disks and makes the disks available for reconfiguration as cache storage. When a cache is reset, the gateway loses its cache storage. At this point you can reconfigure the disks as cache disks. </p>"
     },
     "RetrieveTapeArchive":{
       "name":"RetrieveTapeArchive",
@@ -1344,6 +1368,36 @@
         }
       ],
       "documentation":"<p>This operation updates a snapshot schedule configured for a gateway volume.</p> <p>The default snapshot schedule for volume is once every 24 hours, starting at the creation time of the volume. You can use this API to change the snapshot schedule configured for the volume.</p> <p>In the request you must identify the gateway volume whose snapshot schedule you want to update, and the schedule information, including when you want the snapshot to begin on a day and the frequency (in hours) of snapshots.</p>"
+    },
+    "UpdateVTLDeviceType":{
+      "name":"UpdateVTLDeviceType",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"UpdateVTLDeviceTypeInput",
+        "documentation":"<p>UpdateVTLDeviceTypeInput</p>"
+      },
+      "output":{
+        "shape":"UpdateVTLDeviceTypeOutput",
+        "documentation":"<p>UpdateVTLDeviceTypeOutput</p>"
+      },
+      "errors":[
+        {
+          "shape":"InvalidGatewayRequestException",
+          "error":{"httpStatusCode":400},
+          "exception":true,
+          "documentation":"<p>An exception occurred because an invalid gateway request was issued to the service. See the error and message fields for more information.</p>"
+        },
+        {
+          "shape":"InternalServerError",
+          "error":{"httpStatusCode":500},
+          "exception":true,
+          "documentation":"<p>An internal server error has occurred during the request. See the error and message fields for more information.</p>"
+        }
+      ],
+      "documentation":"<p>This operation updates the type of medium changer in a gateway-VTL. When you activate a gateway-VTL, you select a medium changer type for the gateway-VTL. This operation enables you to select a different type of medium changer after a gateway-VTL is activated.</p>"
     }
   },
   "shapes":{
@@ -1379,7 +1433,7 @@
         },
         "MediumChangerType":{
           "shape":"MediumChangerType",
-          "documentation":"<p>The value that indicates the type of medium changer to use for gateway-VTL. This field is optional.</p> <p><i>Valid Values</i>: \"STK-L700\" </p>"
+          "documentation":"<p>The value that indicates the type of medium changer to use for gateway-VTL. This field is optional.</p> <p><i>Valid Values</i>: \"STK-L700\", \"AWS-Gateway-VTL\"</p>"
         }
       },
       "documentation":"<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <a>ActivateGatewayInput$ActivationKey</a> </li> <li> <a>GatewayName</a> </li> <li> <a>ActivateGatewayInput$GatewayRegion</a> </li> <li> <a>ActivateGatewayInput$GatewayTimezone</a> </li> <li> <a>ActivateGatewayInput$GatewayType</a> </li> <li> <a>ActivateGatewayInput$TapeDriveType</a> </li> <li> <a>ActivateGatewayInput$MediumChangerType</a> </li> </ul>"
@@ -2247,6 +2301,11 @@
       "min":1,
       "max":255
     },
+    "DeviceType":{
+      "type":"string",
+      "min":2,
+      "max":50
+    },
     "DeviceiSCSIAttributes":{
       "type":"structure",
       "members":{
@@ -2293,6 +2352,7 @@
         "DiskId":{"shape":"DiskId"},
         "DiskPath":{"shape":"string"},
         "DiskNode":{"shape":"string"},
+        "DiskStatus":{"shape":"string"},
         "DiskSizeInBytes":{"shape":"long"},
         "DiskAllocationType":{"shape":"DiskAllocationType"},
         "DiskAllocationResource":{"shape":"string"}
@@ -2615,6 +2675,19 @@
       "min":1,
       "max":25
     },
+    "ResetCacheInput":{
+      "type":"structure",
+      "required":["GatewayARN"],
+      "members":{
+        "GatewayARN":{"shape":"GatewayARN"}
+      }
+    },
+    "ResetCacheOutput":{
+      "type":"structure",
+      "members":{
+        "GatewayARN":{"shape":"GatewayARN"}
+      }
+    },
     "RetrieveTapeArchiveInput":{
       "type":"structure",
       "required":[
@@ -2855,11 +2928,7 @@
       "member":{"shape":"TapeRecoveryPointInfo"}
     },
     "TapeRecoveryPointStatus":{"type":"string"},
-    "TapeSize":{
-      "type":"long",
-      "min":107374182400,
-      "max":2748779069440
-    },
+    "TapeSize":{"type":"long"},
     "TapeStatus":{"type":"string"},
     "Tapes":{
       "type":"list",
@@ -3037,6 +3106,34 @@
         "VolumeARN":{"shape":"VolumeARN"}
       },
       "documentation":"<p>A JSON object containing the of the updated storage volume.</p>"
+    },
+    "UpdateVTLDeviceTypeInput":{
+      "type":"structure",
+      "required":[
+        "VTLDeviceARN",
+        "DeviceType"
+      ],
+      "members":{
+        "VTLDeviceARN":{
+          "shape":"VTLDeviceARN",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the medium changer you want to select.</p>"
+        },
+        "DeviceType":{
+          "shape":"DeviceType",
+          "documentation":"<p>The type of medium changer you want to select.</p> <p><i>Valid Values</i>: \"STK-L700\", \"AWS-Gateway-VTL\"</p>"
+        }
+      },
+      "documentation":"<p>UpdateVTLDeviceTypeInput</p>"
+    },
+    "UpdateVTLDeviceTypeOutput":{
+      "type":"structure",
+      "members":{
+        "VTLDeviceARN":{
+          "shape":"VTLDeviceARN",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the medium changer you have selected.</p>"
+        }
+      },
+      "documentation":"<p>UpdateVTLDeviceTypeOutput</p>"
     },
     "VTLDevice":{
       "type":"structure",
