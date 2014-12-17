@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.1.2
+// AWS SDK for JavaScript v2.1.3
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -247,7 +247,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.1.2',
+  VERSION: '2.1.3',
 
 
   Signers: {},
@@ -3343,13 +3343,20 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
           on('readable', function() { self.fillQueue(); }).
           on('end', function() {
             self.isDoneChunking = true;
-            self.numParts = self.totalPartNumbers + 1;
+            self.numParts = self.totalPartNumbers;
             self.fillQueue.call(self);
           });
       }
     }
 
     if (runFill) self.fillQueue.call(self);
+  },
+
+
+  abort: function() {
+    this.cleanup(AWS.util.error(new Error('Request aborted by user'), {
+      code: 'RequestAbortedError', retryable: false
+    }));
   },
 
 
@@ -3463,10 +3470,14 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     }
 
     if (self.partBuffer.length >= self.partSize) {
+      self.nextChunk(self.partBuffer.slice(0, self.partSize));
       self.partBuffer = self.partBuffer.slice(self.partSize);
-    } else if (self.isDoneChunking && self.partBuffer.length > 0) {
+    } else if (self.isDoneChunking) {
       self.totalBytes = self.totalChunkedBytes;
-      self.nextChunk(self.partBuffer);
+      if (self.partBuffer.length > 0) {
+        self.numParts++;
+        self.nextChunk(self.partBuffer);
+      }
       self.partBuffer = new AWS.util.Buffer(0);
     }
 
@@ -8010,8 +8021,10 @@ EventEmitter.prototype.emit = function(type) {
       er = arguments[1];
       if (er instanceof Error) {
         throw er; // Unhandled 'error' event
+      } else {
+        throw TypeError('Uncaught, unspecified "error" event.');
       }
-      throw TypeError('Uncaught, unspecified "error" event.');
+      return false;
     }
   }
 
