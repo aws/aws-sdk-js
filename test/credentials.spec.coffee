@@ -91,6 +91,9 @@ if AWS.util.isNode()
     beforeEach ->
       process.env = {}
 
+    afterEach ->
+      process.env = {}
+
     describe 'constructor', ->
       it 'should be able to read credentials from env with a prefix', ->
         process.env.AWS_ACCESS_KEY_ID = 'akid'
