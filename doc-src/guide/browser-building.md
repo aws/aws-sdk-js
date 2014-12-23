@@ -81,8 +81,9 @@ command:
 node dist-tools/browser-builder.js dynamodb-2011-12-05,dynamodb-2012-08-10
 ```
 
-Available service identifiers and API versions can be found by looking at the
-file list in https://github.com/aws/aws-sdk-js/tree/master/lib/services/api
+The available service identifiers and API versions can be found by viewing the
+service-specific configuration files at:
+<https://github.com/aws/aws-sdk-js/tree/master/apis>.
 
 #### Building All Services
 
