@@ -96,7 +96,7 @@ node dist-tools/browser-builder.js all > aws-sdk-full.js
 
 ### Building the SDK as a Dependency with Browserify
 
-The SDK can be built as library dependency to any application running
+The SDK can also be built as library dependency to any application running
 in the browser via [browserify](http://browserify.org). Consider the following
 small Node.js application (`index.js`) that uses the SDK:
 
