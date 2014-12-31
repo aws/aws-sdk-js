@@ -281,16 +281,9 @@ describe 'AWS.util.crypto', ->
           done()
 
     if AWS.util.isBrowser()
-      it 'handles ArrayBuffers', (done) ->
-        result = '01d448afd928065458cf670b60f5a594d735af0172c8d67f22a81680132681ca'
-        util.sha256 new ArrayBuffer(10), 'hex', (e, d) ->
-          expect(e).to.eql(null)
-          expect(d).to.equal(result)
-          done()
-
-      it 'handles large ArrayBuffers', (done) ->
-        result = 'fd2a4f95c056f31be0b80c8063950008563a700ebfb94c00aa62df90d6d62a03'
-        util.sha256 new ArrayBuffer(1024 * 1024 + 256), 'hex', (e, d) ->
+      it 'handles Blobs (no phantomjs)', (done) ->
+        result = 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
+        util.sha256 new Blob([1,2,3]), 'hex', (e, d) ->
           expect(e).to.eql(null)
           expect(d).to.equal(result)
           done()

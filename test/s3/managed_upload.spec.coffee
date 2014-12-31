@@ -58,12 +58,12 @@ describe 'AWS.S3.ManagedUpload', ->
         data: ETag: 'ETAG'
       ]
 
-      send Body: smallbody, ContentEncoding: 'encoding'
-      expect(err).not.to.exist
-      expect(data.ETag).to.equal('ETAG')
-      expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/key')
-      expect(helpers.operationsForRequests(reqs)).to.eql ['s3.putObject']
-      expect(reqs[0].params.ContentEncoding).to.equal('encoding')
+      send Body: smallbody, ContentEncoding: 'encoding', ->
+        expect(err).not.to.exist
+        expect(data.ETag).to.equal('ETAG')
+        expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/key')
+        expect(helpers.operationsForRequests(reqs)).to.eql ['s3.putObject']
+        expect(reqs[0].params.ContentEncoding).to.equal('encoding')
 
     it 'can fail a single part', ->
       reqs = helpers.mockResponses [
@@ -84,34 +84,34 @@ describe 'AWS.S3.ManagedUpload', ->
         { data: ETag: 'FINAL_ETAG', Location: 'FINAL_LOCATION' }
       ]
 
-      send Body: bigbody, ContentEncoding: 'encoding'
-      expect(helpers.operationsForRequests(reqs)).to.eql [
-        's3.createMultipartUpload'
-        's3.uploadPart'
-        's3.uploadPart'
-        's3.uploadPart'
-        's3.uploadPart'
-        's3.completeMultipartUpload'
-      ]
-      expect(err).not.to.exist
-      expect(data.ETag).to.equal('FINAL_ETAG')
-      expect(data.Location).to.equal('FINAL_LOCATION')
-      expect(reqs[0].params).to.eql(Bucket: 'bucket', Key: 'key', ContentEncoding: 'encoding')
-      expect(reqs[1].params.ContentLength).to.equal(10)
-      expect(reqs[1].params.UploadId).to.equal('uploadId')
-      expect(reqs[2].params.UploadId).to.equal('uploadId')
-      expect(reqs[2].params.ContentLength).to.equal(10)
-      expect(reqs[3].params.UploadId).to.equal('uploadId')
-      expect(reqs[3].params.ContentLength).to.equal(10)
-      expect(reqs[4].params.UploadId).to.equal('uploadId')
-      expect(reqs[4].params.ContentLength).to.equal(6)
-      expect(reqs[5].params.UploadId).to.equal('uploadId')
-      expect(reqs[5].params.MultipartUpload.Parts).to.eql [
-        { ETag: 'ETAG1', PartNumber: 1 }
-        { ETag: 'ETAG2', PartNumber: 2 }
-        { ETag: 'ETAG3', PartNumber: 3 }
-        { ETag: 'ETAG4', PartNumber: 4 }
-      ]
+      send Body: bigbody, ContentEncoding: 'encoding', ->
+        expect(helpers.operationsForRequests(reqs)).to.eql [
+          's3.createMultipartUpload'
+          's3.uploadPart'
+          's3.uploadPart'
+          's3.uploadPart'
+          's3.uploadPart'
+          's3.completeMultipartUpload'
+        ]
+        expect(err).not.to.exist
+        expect(data.ETag).to.equal('FINAL_ETAG')
+        expect(data.Location).to.equal('FINAL_LOCATION')
+        expect(reqs[0].params).to.eql(Bucket: 'bucket', Key: 'key', ContentEncoding: 'encoding')
+        expect(reqs[1].params.ContentLength).to.equal(10)
+        expect(reqs[1].params.UploadId).to.equal('uploadId')
+        expect(reqs[2].params.UploadId).to.equal('uploadId')
+        expect(reqs[2].params.ContentLength).to.equal(10)
+        expect(reqs[3].params.UploadId).to.equal('uploadId')
+        expect(reqs[3].params.ContentLength).to.equal(10)
+        expect(reqs[4].params.UploadId).to.equal('uploadId')
+        expect(reqs[4].params.ContentLength).to.equal(6)
+        expect(reqs[5].params.UploadId).to.equal('uploadId')
+        expect(reqs[5].params.MultipartUpload.Parts).to.eql [
+          { ETag: 'ETAG1', PartNumber: 1 }
+          { ETag: 'ETAG2', PartNumber: 2 }
+          { ETag: 'ETAG3', PartNumber: 3 }
+          { ETag: 'ETAG4', PartNumber: 4 }
+        ]
 
     it 'aborts if ETag is not in response', ->
       helpers.spyOn(AWS.util, 'isBrowser').andReturn true
@@ -121,14 +121,14 @@ describe 'AWS.S3.ManagedUpload', ->
         { data: {} }
       ]
 
-      send Body: bigbody
-      expect(helpers.operationsForRequests(reqs)).to.eql [
-        's3.createMultipartUpload'
-        's3.uploadPart'
-        's3.abortMultipartUpload'
-      ]
-      expect(err).to.exist
-      expect(err.message).to.equal('No access to ETag property on response. Check CORS configuration to expose ETag header.')
+      send Body: bigbody, ->
+        expect(helpers.operationsForRequests(reqs)).to.eql [
+          's3.createMultipartUpload'
+          's3.uploadPart'
+          's3.abortMultipartUpload'
+        ]
+        expect(err).to.exist
+        expect(err.message).to.equal('No access to ETag property on response. Check CORS configuration to expose ETag header.')
 
     it 'allows changing part size', ->
       reqs = helpers.mockResponses [
@@ -141,18 +141,18 @@ describe 'AWS.S3.ManagedUpload', ->
       size = 18
       opts = partSize: size, queueSize: 1, service: s3, params: {Body: bigbody}
       upload = new AWS.S3.ManagedUpload(opts)
-      send()
-      expect(helpers.operationsForRequests(reqs)).to.eql [
-        's3.createMultipartUpload'
-        's3.uploadPart'
-        's3.uploadPart'
-        's3.completeMultipartUpload'
-      ]
-      expect(err).not.to.exist
-      expect(data.ETag).to.equal('FINAL_ETAG')
-      expect(data.Location).to.equal('FINAL_LOCATION')
-      expect(reqs[1].params.ContentLength).to.equal(size)
-      expect(reqs[2].params.ContentLength).to.equal(size)
+      send {}, ->
+        expect(helpers.operationsForRequests(reqs)).to.eql [
+          's3.createMultipartUpload'
+          's3.uploadPart'
+          's3.uploadPart'
+          's3.completeMultipartUpload'
+        ]
+        expect(err).not.to.exist
+        expect(data.ETag).to.equal('FINAL_ETAG')
+        expect(data.Location).to.equal('FINAL_LOCATION')
+        expect(reqs[1].params.ContentLength).to.equal(size)
+        expect(reqs[2].params.ContentLength).to.equal(size)
 
     it 'errors if partSize is smaller than minPartSize', ->
       expect(-> new AWS.S3.ManagedUpload(partSize: 5)).to.throw(
@@ -167,16 +167,16 @@ describe 'AWS.S3.ManagedUpload', ->
       ]
 
       upload = new AWS.S3.ManagedUpload(queueSize: 1, params: {Body: bigbody})
-      send()
-      expect(helpers.operationsForRequests(reqs)).to.eql [
-        's3.createMultipartUpload'
-        's3.uploadPart'
-        's3.uploadPart'
-        's3.abortMultipartUpload'
-      ]
-      expect(err).to.exist
-      expect(data).not.to.exist
-      expect(reqs[3].params.UploadId).to.equal('uploadId')
+      send {}, ->
+        expect(helpers.operationsForRequests(reqs)).to.eql [
+          's3.createMultipartUpload'
+          's3.uploadPart'
+          's3.uploadPart'
+          's3.abortMultipartUpload'
+        ]
+        expect(err).to.exist
+        expect(data).not.to.exist
+        expect(reqs[3].params.UploadId).to.equal('uploadId')
 
     it 'aborts if complete call fails', ->
       reqs = helpers.mockResponses [
@@ -188,19 +188,19 @@ describe 'AWS.S3.ManagedUpload', ->
         { error: { code: 'CompleteFailed' }, data: null }
       ]
 
-      send Body: bigbody
-      expect(helpers.operationsForRequests(reqs)).to.eql [
-        's3.createMultipartUpload'
-        's3.uploadPart'
-        's3.uploadPart'
-        's3.uploadPart'
-        's3.uploadPart'
-        's3.completeMultipartUpload'
-        's3.abortMultipartUpload'
-      ]
-      expect(err).to.exist
-      expect(err.code).to.equal('CompleteFailed')
-      expect(data).not.to.exist
+      send Body: bigbody, ->
+        expect(helpers.operationsForRequests(reqs)).to.eql [
+          's3.createMultipartUpload'
+          's3.uploadPart'
+          's3.uploadPart'
+          's3.uploadPart'
+          's3.uploadPart'
+          's3.completeMultipartUpload'
+          's3.abortMultipartUpload'
+        ]
+        expect(err).to.exist
+        expect(err.code).to.equal('CompleteFailed')
+        expect(data).not.to.exist
 
     it 'leaves parts if leavePartsOnError is set', ->
       reqs = helpers.mockResponses [
@@ -214,15 +214,15 @@ describe 'AWS.S3.ManagedUpload', ->
         queueSize: 1
         leavePartsOnError: true
         params: { Body: bigbody }
-      send()
-      expect(helpers.operationsForRequests(reqs)).to.eql [
-        's3.createMultipartUpload'
-        's3.uploadPart'
-        's3.uploadPart'
-      ]
-      expect(err).to.exist
-      expect(err.code).to.equal('UploadPartFailed')
-      expect(data).not.to.exist
+      send {}, ->
+        expect(helpers.operationsForRequests(reqs)).to.eql [
+          's3.createMultipartUpload'
+          's3.uploadPart'
+          's3.uploadPart'
+        ]
+        expect(err).to.exist
+        expect(err.code).to.equal('UploadPartFailed')
+        expect(data).not.to.exist
 
     if AWS.util.isNode()
       describe 'streaming', ->
