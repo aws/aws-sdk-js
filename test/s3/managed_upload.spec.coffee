@@ -2,10 +2,10 @@ helpers = require('../helpers')
 AWS = helpers.AWS
 
 body = (size) ->
-  if AWS.util.isNode() || navigator && navigator.userAgent.match(/phantomjs/i)
-    new AWS.util.Buffer(size)
-  else
-    new Blob([new Uint8Array(size)])
+  try
+    return new Blob((0 for i in [0..size]))
+  catch e
+    return new AWS.util.Buffer(size)
 
 smallbody = body(5)
 bigbody = body(36)
