@@ -98,10 +98,12 @@ The following example lists all buckets associated with your AWS account:
 var s3 = new AWS.S3();
 s3.listBuckets(function(err, data) {
   if (err) { return console.log(err); }
-  else if (!data) { return console.log('no buckets'); }
-  for (var index in data.Buckets) {
-    var bucket = data.Buckets[index];
-    console.log("Bucket: ", bucket.Name, ' : ', bucket.CreationDate);
+
+  else {
+    for (var index in data.Buckets) {
+      var bucket = data.Buckets[index];
+      console.log("Bucket: ", bucket.Name, ' : ', bucket.CreationDate);
+    }
   }
 });
 ```
