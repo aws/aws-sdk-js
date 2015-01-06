@@ -13,14 +13,16 @@ module.exports = function () {
 
   this.AfterAll(function (callback) {
     var self = this;
-    this.s3.listObjects({Bucket:this.mgrBucket}, function(err, data) {
-      data.Contents.forEach(function(object) {
-        self.s3.deleteObject({Bucket:self.mgrBucket,Key:object.Key}).send();
+    if (this.mgrBucket) {
+      this.s3.listObjects({Bucket:this.mgrBucket}, function(err, data) {
+        data.Contents.forEach(function(object) {
+          self.s3.deleteObject({Bucket:self.mgrBucket,Key:object.Key}).send();
+        });
+        setTimeout(function() {
+          self.s3.deleteBucket({Bucket:self.mgrBucket}, callback);
+        }, 1000);
       });
-      setTimeout(function() {
-        self.s3.deleteBucket({Bucket:self.mgrBucket}, callback);
-      }, 1000);
-    });
+    }
   });
 
   this.When(/^I use S3 managed upload to upload a large buffer$/, function (callback) {
