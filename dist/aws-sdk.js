@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.1.4
+// AWS SDK for JavaScript v2.1.5
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -43,6 +43,10 @@ AWS.apiLoader.services['kinesis'] = {};
 AWS.Kinesis = AWS.Service.defineService('kinesis', [ '2013-12-02' ]);
 
 AWS.apiLoader.services['kinesis']['2013-12-02'] = {"metadata":{"apiVersion":"2013-12-02","endpointPrefix":"kinesis","jsonVersion":"1.1","serviceAbbreviation":"Kinesis","serviceFullName":"Amazon Kinesis","signatureVersion":"v4","targetPrefix":"Kinesis_20131202","protocol":"json"},"operations":{"AddTagsToStream":{"input":{"type":"structure","required":["StreamName","Tags"],"members":{"StreamName":{},"Tags":{"type":"map","key":{},"value":{}}}},"http":{}},"CreateStream":{"input":{"type":"structure","required":["StreamName","ShardCount"],"members":{"StreamName":{},"ShardCount":{"type":"integer"}}},"http":{}},"DeleteStream":{"input":{"type":"structure","required":["StreamName"],"members":{"StreamName":{}}},"http":{}},"DescribeStream":{"input":{"type":"structure","required":["StreamName"],"members":{"StreamName":{},"Limit":{"type":"integer"},"ExclusiveStartShardId":{}}},"output":{"type":"structure","required":["StreamDescription"],"members":{"StreamDescription":{"type":"structure","required":["StreamName","StreamARN","StreamStatus","Shards","HasMoreShards"],"members":{"StreamName":{},"StreamARN":{},"StreamStatus":{},"Shards":{"type":"list","member":{"type":"structure","required":["ShardId","HashKeyRange","SequenceNumberRange"],"members":{"ShardId":{},"ParentShardId":{},"AdjacentParentShardId":{},"HashKeyRange":{"type":"structure","required":["StartingHashKey","EndingHashKey"],"members":{"StartingHashKey":{},"EndingHashKey":{}}},"SequenceNumberRange":{"type":"structure","required":["StartingSequenceNumber"],"members":{"StartingSequenceNumber":{},"EndingSequenceNumber":{}}}}}},"HasMoreShards":{"type":"boolean"}}}}},"http":{}},"GetRecords":{"input":{"type":"structure","required":["ShardIterator"],"members":{"ShardIterator":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","required":["Records"],"members":{"Records":{"type":"list","member":{"type":"structure","required":["SequenceNumber","Data","PartitionKey"],"members":{"SequenceNumber":{},"Data":{"type":"blob"},"PartitionKey":{}}}},"NextShardIterator":{}}},"http":{}},"GetShardIterator":{"input":{"type":"structure","required":["StreamName","ShardId","ShardIteratorType"],"members":{"StreamName":{},"ShardId":{},"ShardIteratorType":{},"StartingSequenceNumber":{}}},"output":{"type":"structure","members":{"ShardIterator":{}}},"http":{}},"ListStreams":{"input":{"type":"structure","members":{"Limit":{"type":"integer"},"ExclusiveStartStreamName":{}}},"output":{"type":"structure","required":["StreamNames","HasMoreStreams"],"members":{"StreamNames":{"type":"list","member":{}},"HasMoreStreams":{"type":"boolean"}}},"http":{}},"ListTagsForStream":{"input":{"type":"structure","required":["StreamName"],"members":{"StreamName":{},"ExclusiveStartTagKey":{},"Limit":{"type":"integer"}}},"output":{"type":"structure","required":["Tags","HasMoreTags"],"members":{"Tags":{"type":"list","member":{"type":"structure","required":["Key"],"members":{"Key":{},"Value":{}}}},"HasMoreTags":{"type":"boolean"}}},"http":{}},"MergeShards":{"input":{"type":"structure","required":["StreamName","ShardToMerge","AdjacentShardToMerge"],"members":{"StreamName":{},"ShardToMerge":{},"AdjacentShardToMerge":{}}},"http":{}},"PutRecord":{"input":{"type":"structure","required":["StreamName","Data","PartitionKey"],"members":{"StreamName":{},"Data":{"type":"blob"},"PartitionKey":{},"ExplicitHashKey":{},"SequenceNumberForOrdering":{}}},"output":{"type":"structure","required":["ShardId","SequenceNumber"],"members":{"ShardId":{},"SequenceNumber":{}}},"http":{}},"PutRecords":{"input":{"type":"structure","required":["Records","StreamName"],"members":{"Records":{"type":"list","member":{"type":"structure","required":["Data","PartitionKey"],"members":{"Data":{"type":"blob"},"ExplicitHashKey":{},"PartitionKey":{}}}},"StreamName":{}}},"output":{"type":"structure","required":["Records"],"members":{"FailedRecordCount":{"type":"integer"},"Records":{"type":"list","member":{"type":"structure","members":{"SequenceNumber":{},"ShardId":{},"ErrorCode":{},"ErrorMessage":{}}}}}},"http":{}},"RemoveTagsFromStream":{"input":{"type":"structure","required":["StreamName","TagKeys"],"members":{"StreamName":{},"TagKeys":{"type":"list","member":{}}}},"http":{}},"SplitShard":{"input":{"type":"structure","required":["StreamName","ShardToSplit","NewStartingHashKey"],"members":{"StreamName":{},"ShardToSplit":{},"NewStartingHashKey":{}}},"http":{}}},"shapes":{},"paginators":{"DescribeStream":{"input_token":"ExclusiveStartShardId","limit_key":"Limit","more_results":"StreamDescription.HasMoreShards","output_token":"StreamDescription.Shards[-1].ShardId","result_key":"StreamDescription.Shards"},"ListStreams":{"input_token":"ExclusiveStartStreamName","limit_key":"Limit","more_results":"HasMoreStreams","output_token":"StreamNames[-1]","result_key":"StreamNames"}}};
+AWS.apiLoader.services['lambda'] = {};
+AWS.Lambda = AWS.Service.defineService('lambda', [ '2014-11-11' ]);
+
+AWS.apiLoader.services['lambda']['2014-11-11'] = {"metadata":{"apiVersion":"2014-11-11","endpointPrefix":"lambda","serviceFullName":"AWS Lambda","signatureVersion":"v4","protocol":"rest-json"},"operations":{"AddEventSource":{"http":{"requestUri":"/2014-11-13/event-source-mappings/"},"input":{"type":"structure","required":["EventSource","FunctionName","Role"],"members":{"EventSource":{},"FunctionName":{},"Role":{},"BatchSize":{"type":"integer"},"Parameters":{"shape":"S6"}}},"output":{"shape":"S7"}},"DeleteFunction":{"http":{"method":"DELETE","requestUri":"/2014-11-13/functions/{FunctionName}","responseCode":204},"input":{"type":"structure","required":["FunctionName"],"members":{"FunctionName":{"location":"uri","locationName":"FunctionName"}}}},"GetEventSource":{"http":{"method":"GET","requestUri":"/2014-11-13/event-source-mappings/{UUID}","responseCode":200},"input":{"type":"structure","required":["UUID"],"members":{"UUID":{"location":"uri","locationName":"UUID"}}},"output":{"shape":"S7"}},"GetFunction":{"http":{"method":"GET","requestUri":"/2014-11-13/functions/{FunctionName}","responseCode":200},"input":{"type":"structure","required":["FunctionName"],"members":{"FunctionName":{"location":"uri","locationName":"FunctionName"}}},"output":{"type":"structure","members":{"Configuration":{"shape":"Se"},"Code":{"type":"structure","members":{"RepositoryType":{},"Location":{}}}}}},"GetFunctionConfiguration":{"http":{"method":"GET","requestUri":"/2014-11-13/functions/{FunctionName}/configuration","responseCode":200},"input":{"type":"structure","required":["FunctionName"],"members":{"FunctionName":{"location":"uri","locationName":"FunctionName"}}},"output":{"shape":"Se"}},"InvokeAsync":{"http":{"requestUri":"/2014-11-13/functions/{FunctionName}/invoke-async/","responseCode":202},"input":{"type":"structure","required":["FunctionName","InvokeArgs"],"members":{"FunctionName":{"location":"uri","locationName":"FunctionName"},"InvokeArgs":{"shape":"Sq"}},"payload":"InvokeArgs"},"output":{"type":"structure","members":{"Status":{"location":"statusCode","type":"integer"}}}},"ListEventSources":{"http":{"method":"GET","requestUri":"/2014-11-13/event-source-mappings/","responseCode":200},"input":{"type":"structure","members":{"EventSourceArn":{"location":"querystring","locationName":"EventSource"},"FunctionName":{"location":"querystring","locationName":"FunctionName"},"Marker":{"location":"querystring","locationName":"Marker"},"MaxItems":{"location":"querystring","locationName":"MaxItems","type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"EventSources":{"type":"list","member":{"shape":"S7"}}}}},"ListFunctions":{"http":{"method":"GET","requestUri":"/2014-11-13/functions/","responseCode":200},"input":{"type":"structure","members":{"Marker":{"location":"querystring","locationName":"Marker"},"MaxItems":{"location":"querystring","locationName":"MaxItems","type":"integer"}}},"output":{"type":"structure","members":{"NextMarker":{},"Functions":{"type":"list","member":{"shape":"Se"}}}}},"RemoveEventSource":{"http":{"method":"DELETE","requestUri":"/2014-11-13/event-source-mappings/{UUID}","responseCode":204},"input":{"type":"structure","required":["UUID"],"members":{"UUID":{"location":"uri","locationName":"UUID"}}}},"UpdateFunctionConfiguration":{"http":{"method":"PUT","requestUri":"/2014-11-13/functions/{FunctionName}/configuration","responseCode":200},"input":{"type":"structure","required":["FunctionName"],"members":{"FunctionName":{"location":"uri","locationName":"FunctionName"},"Role":{"location":"querystring","locationName":"Role"},"Handler":{"location":"querystring","locationName":"Handler"},"Description":{"location":"querystring","locationName":"Description"},"Timeout":{"location":"querystring","locationName":"Timeout","type":"integer"},"MemorySize":{"location":"querystring","locationName":"MemorySize","type":"integer"}}},"output":{"shape":"Se"}},"UploadFunction":{"http":{"method":"PUT","requestUri":"/2014-11-13/functions/{FunctionName}","responseCode":201},"input":{"type":"structure","required":["FunctionName","FunctionZip","Runtime","Role","Handler","Mode"],"members":{"FunctionName":{"location":"uri","locationName":"FunctionName"},"FunctionZip":{"shape":"Sq"},"Runtime":{"location":"querystring","locationName":"Runtime"},"Role":{"location":"querystring","locationName":"Role"},"Handler":{"location":"querystring","locationName":"Handler"},"Mode":{"location":"querystring","locationName":"Mode"},"Description":{"location":"querystring","locationName":"Description"},"Timeout":{"location":"querystring","locationName":"Timeout","type":"integer"},"MemorySize":{"location":"querystring","locationName":"MemorySize","type":"integer"}},"payload":"FunctionZip"},"output":{"shape":"Se"}}},"shapes":{"S6":{"type":"map","key":{},"value":{}},"S7":{"type":"structure","members":{"UUID":{},"BatchSize":{"type":"integer"},"EventSource":{},"FunctionName":{},"Parameters":{"shape":"S6"},"Role":{},"LastModified":{"type":"timestamp"},"IsActive":{"type":"boolean"},"Status":{}}},"Se":{"type":"structure","members":{"FunctionName":{},"FunctionARN":{},"ConfigurationId":{},"Runtime":{},"Role":{},"Handler":{},"Mode":{},"CodeSize":{"type":"long"},"Description":{},"Timeout":{"type":"integer"},"MemorySize":{"type":"integer"},"LastModified":{"type":"timestamp"}}},"Sq":{"type":"blob","streaming":true}}};
 AWS.apiLoader.services['s3'] = {};
 AWS.S3 = AWS.Service.defineService('s3', [ '2006-03-01' ]);
 require('./services/s3');
@@ -247,7 +251,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.1.4',
+  VERSION: '2.1.5',
 
 
   Signers: {},
@@ -545,8 +549,8 @@ AWS.CredentialProviderChain = AWS.util.inherit(AWS.Credentials, {
       }
 
       if (creds.get) {
-        creds.get(function(err) {
-          resolveNext(err, err ? null : creds);
+        creds.get(function(getErr) {
+          resolveNext(getErr, getErr ? null : creds);
         });
       } else {
         resolveNext(null, creds);
@@ -795,12 +799,12 @@ AWS.EventListeners = {
       }
 
       function progress(httpResp) {
-        httpResp.on('sendProgress', function onSendProgress(progress) {
-          resp.request.emit('httpUploadProgress', [progress, resp]);
+        httpResp.on('sendProgress', function onSendProgress(value) {
+          resp.request.emit('httpUploadProgress', [value, resp]);
         });
 
-        httpResp.on('receiveProgress', function onReceiveProgress(progress) {
-          resp.request.emit('httpDownloadProgress', [progress, resp]);
+        httpResp.on('receiveProgress', function onReceiveProgress(value) {
+          resp.request.emit('httpDownloadProgress', [value, resp]);
         });
       }
 
@@ -2292,8 +2296,8 @@ function populateHeaders(req) {
     if (value === null || value === undefined) return;
 
     if (member.location === 'headers' && member.type === 'map') {
-      util.each(value, function(key, value) {
-        req.httpRequest.headers[member.name + key] = value;
+      util.each(value, function(key, memberValue) {
+        req.httpRequest.headers[member.name + key] = memberValue;
       });
     } else if (member.location === 'header') {
       value = member.toWireFormat(value).toString();
@@ -2908,7 +2912,7 @@ AWS.Request = inherit({
       if (statusCode < 300) {
         req.removeListener('httpData', AWS.EventListeners.Core.HTTP_DATA);
         req.removeListener('httpError', AWS.EventListeners.Core.HTTP_ERROR);
-        req.on('httpError', function streamHttpError(error, resp) {
+        req.on('httpError', function streamHttpError(error) {
           resp.error = error;
           resp.error.retryable = false;
         });
@@ -4327,8 +4331,8 @@ AWS.util.update(AWS.S3.prototype, {
         var charset = '; charset=UTF-8';
         httpRequest.headers['Content-Type'] += charset;
       } else {
-        var replaceFn = function(_, prefix, charset) {
-          return prefix + charset.toUpperCase();
+        var replaceFn = function(_, prefix, charsetName) {
+          return prefix + charsetName.toUpperCase();
         };
 
         httpRequest.headers['Content-Type'] =
@@ -4947,11 +4951,11 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
       if (resources.length) {
 
         querystring = [];
-        AWS.util.arrayEach(resources, function (resource) {
-          if (resource.value === undefined)
-            querystring.push(resource.name);
+        AWS.util.arrayEach(resources, function (res) {
+          if (res.value === undefined)
+            querystring.push(res.name);
           else
-            querystring.push(resource.name + '=' + resource.value);
+            querystring.push(res.name + '=' + res.value);
         });
 
         resource += '?' + querystring.join('&');
@@ -7332,12 +7336,16 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	var NUMBER = '0'.charCodeAt(0)
 	var LOWER  = 'a'.charCodeAt(0)
 	var UPPER  = 'A'.charCodeAt(0)
+	var PLUS_URL_SAFE = '-'.charCodeAt(0)
+	var SLASH_URL_SAFE = '_'.charCodeAt(0)
 
 	function decode (elt) {
 		var code = elt.charCodeAt(0)
-		if (code === PLUS)
+		if (code === PLUS ||
+		    code === PLUS_URL_SAFE)
 			return 62 // '+'
-		if (code === SLASH)
+		if (code === SLASH ||
+		    code === SLASH_URL_SAFE)
 			return 63 // '/'
 		if (code < NUMBER)
 			return -1 //no match
@@ -8021,10 +8029,8 @@ EventEmitter.prototype.emit = function(type) {
       er = arguments[1];
       if (er instanceof Error) {
         throw er; // Unhandled 'error' event
-      } else {
-        throw TypeError('Uncaught, unspecified "error" event.');
       }
-      return false;
+      throw TypeError('Uncaught, unspecified "error" event.');
     }
   }
 
