@@ -10,7 +10,7 @@ respective AWS service. The full list of methods and their parameters are
 documented in the complete API reference documentation (linked from each
 service name in the list below).
 
-The 5 services that come with the default hosted package of the SDK are:
+The 11 services that come with the default hosted package of the SDK are:
 
 * [AWS.CloudWatch](/AWSJavaScriptSDK/latest/AWS/CloudWatch.html)
 * [AWS.CognitoIdentity](/AWSJavaScriptSDK/latest/AWS/CognitoIdentity.html)
@@ -18,6 +18,7 @@ The 5 services that come with the default hosted package of the SDK are:
 * [AWS.DynamoDB](/AWSJavaScriptSDK/latest/AWS/DynamoDB.html)
 * [AWS.ElasticTranscoder](/AWSJavaScriptSDK/latest/AWS/ElasticTranscoder.html)
 * [AWS.Kinesis](/AWSJavaScriptSDK/latest/AWS/Kinesis.html)
+* [AWS.Lambda](/AWSJavaScriptSDK/latest/AWS/Lambda.html)
 * [AWS.S3](/AWSJavaScriptSDK/latest/AWS/S3.html)
 * [AWS.SNS](/AWSJavaScriptSDK/latest/AWS/SNS.html)
 * [AWS.SQS](/AWSJavaScriptSDK/latest/AWS/SQS.html)
