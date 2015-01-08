@@ -68,6 +68,16 @@
       "output":{"shape":"AssociateRouteTableResult"},
       "documentation":"<p>Associates a subnet with a route table. The subnet and route table must be in the same VPC. This association causes traffic originating from the subnet to be routed according to the routes in the route table. The action returns an association ID, which you need in order to disassociate the route table from the subnet later. A route table can be associated with multiple subnets.</p> <p>For more information about route tables, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
+    "AttachClassicLinkVpc":{
+      "name":"AttachClassicLinkVpc",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AttachClassicLinkVpcRequest"},
+      "output":{"shape":"AttachClassicLinkVpcResult"},
+      "documentation":"<p>Links an EC2-Classic instance to a ClassicLink-enabled VPC through one or more of the VPC's security groups. You cannot link an EC2-Classic instance to more than one VPC at a time. You can only link an instance that's in the <code>running</code> state. An instance is automatically unlinked from a VPC when it's stopped - you can link it to the VPC again when you restart it.</p> <p>After you've linked an instance, you cannot change the VPC security groups that are associated with it. To change the security groups, you must first unlink the instance, and then link it again. </p> <p>Linking your instance to a VPC is sometimes referred to as <i>attaching</i> your instance.</p>"
+    },
     "AttachInternetGateway":{
       "name":"AttachInternetGateway",
       "http":{
@@ -136,7 +146,7 @@
       },
       "input":{"shape":"BundleInstanceRequest"},
       "output":{"shape":"BundleInstanceResult"},
-      "documentation":"<p>Bundles an Amazon instance store-backed Windows instance.</p> <p>During bundling, only the root device volume (C:\\) is bundled. Data on other instance store volumes is not preserved.</p> <note> <p>This procedure is not applicable for Linux/Unix instances or Windows instances that are backed by Amazon EBS.</p> </note> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/Creating_InstanceStoreBacked_WinAMI.html\">Creating an Instance Store-Backed Windows AMI</a>.</p>"
+      "documentation":"<p>Bundles an Amazon instance store-backed Windows instance.</p> <p>During bundling, only the root device volume (C:\\) is bundled. Data on other instance store volumes is not preserved.</p> <note> <p>This action is not applicable for Linux/Unix instances or Windows instances that are backed by Amazon EBS.</p> </note> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/Creating_InstanceStoreBacked_WinAMI.html\">Creating an Instance Store-Backed Windows AMI</a>.</p>"
     },
     "CancelBundleTask":{
       "name":"CancelBundleTask",
@@ -204,7 +214,7 @@
       },
       "input":{"shape":"CopyImageRequest"},
       "output":{"shape":"CopyImageResult"},
-      "documentation":"<p>Initiates the copy of an AMI from the specified source region to the region in which the request was made. You specify the destination region by using its endpoint when making the request. AMIs that use encrypted Amazon EBS snapshots cannot be copied with this method.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html\">Copying AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Initiates the copy of an AMI from the specified source region to the current region. You specify the destination region by using its endpoint when making the request. AMIs that use encrypted Amazon EBS snapshots cannot be copied with this method.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html\">Copying AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CopySnapshot":{
       "name":"CopySnapshot",
@@ -214,7 +224,7 @@
       },
       "input":{"shape":"CopySnapshotRequest"},
       "output":{"shape":"CopySnapshotResult"},
-      "documentation":"<p>Copies a point-in-time snapshot of an Amazon EBS volume and stores it in Amazon S3. You can copy the snapshot within the same region or from one region to another. You can use the snapshot to create Amazon EBS volumes or Amazon Machine Images (AMIs). The snapshot is copied to the regional endpoint that you send the HTTP request to.</p> <p>Copies of encrypted Amazon EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html\">Copying an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Copies a point-in-time snapshot of an Amazon EBS volume and stores it in Amazon S3. You can copy the snapshot within the same region or from one region to another. You can use the snapshot to create Amazon EBS volumes or Amazon Machine Images (AMIs). The snapshot is copied to the regional endpoint that you send the HTTP request to.</p> <p>Copies of encrypted Amazon EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted.</p> <note> <p>Copying snapshots that were encrypted with non-default AWS Key Management Service (KMS) master keys is not supported at this time. </p> </note> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html\">Copying an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateCustomerGateway":{
       "name":"CreateCustomerGateway",
@@ -234,7 +244,7 @@
       },
       "input":{"shape":"CreateDhcpOptionsRequest"},
       "output":{"shape":"CreateDhcpOptionsResult"},
-      "documentation":"<p>Creates a set of DHCP options for your VPC. After creating the set, you must associate it with the VPC, causing all existing and new instances that you launch in the VPC to use this set of DHCP options. The following are the individual DHCP options you can specify. For more information about the options, see <a href=\"http://www.ietf.org/rfc/rfc2132.txt\">RFC 2132</a>.</p> <ul> <li> <code>domain-name-servers</code> - The IP addresses of up to four domain name servers, or <code>AmazonProvidedDNS</code>. The default DHCP option set specifies <code>AmazonProvidedDNS</code>. If specifying more than one domain name server, specify the IP addresses in a single parameter, separated by commas.</li> <li> <code>domain-name</code> - If you're using AmazonProvidedDNS in <code>us-east-1</code>, specify <code>ec2.internal</code>. If you're using AmazonProvidedDNS in another region, specify <code>region.compute.internal</code> (for example, <code>ap-northeast-1.compute.internal</code>). Otherwise, specify a domain name (for example, <code>MyCompany.com</code>). If specifying more than one domain name, separate them with spaces.</li> <li> <code>ntp-servers</code> - The IP addresses of up to four Network Time Protocol (NTP) servers.</li> <li> <code>netbios-name-servers</code> - The IP addresses of up to four NetBIOS name servers.</li> <li> <code>netbios-node-type</code> - The NetBIOS node type (1, 2, 4, or 8). We recommend that you specify 2 (broadcast and multicast are not currently supported). For more information about these node types, see <a href=\"http://www.ietf.org/rfc/rfc2132.txt\">RFC 2132</a>. </li> </ul> <p>Your VPC automatically starts out with a set of DHCP options that includes only a DNS server that we provide (AmazonProvidedDNS). If you create a set of options, and if your VPC has an Internet gateway, make sure to set the <code>domain-name-servers</code> option either to <code>AmazonProvidedDNS</code> or to a domain name server of your choice. For more information about DHCP options, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html\">DHCP Options Sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation":"<p>Creates a set of DHCP options for your VPC. After creating the set, you must associate it with the VPC, causing all existing and new instances that you launch in the VPC to use this set of DHCP options. The following are the individual DHCP options you can specify. For more information about the options, see <a href=\"http://www.ietf.org/rfc/rfc2132.txt\">RFC 2132</a>.</p> <ul> <li> <code>domain-name-servers</code> - The IP addresses of up to four domain name servers, or <code>AmazonProvidedDNS</code>. The default DHCP option set specifies <code>AmazonProvidedDNS</code>. If specifying more than one domain name server, specify the IP addresses in a single parameter, separated by commas.</li> <li> <code>domain-name</code> - If you're using AmazonProvidedDNS in <code>us-east-1</code>, specify <code>ec2.internal</code>. If you're using AmazonProvidedDNS in another region, specify <code>region.compute.internal</code> (for example, <code>ap-northeast-1.compute.internal</code>). Otherwise, specify a domain name (for example, <code>MyCompany.com</code>). <b>Important</b>: Some Linux operating systems accept multiple domain names separated by spaces. However, Windows and other Linux operating systems treat the value as a single domain, which results in unexpected behavior. If your DHCP options set is associated with a VPC that has instances with multiple operating systems, specify only one domain name.</li> <li> <code>ntp-servers</code> - The IP addresses of up to four Network Time Protocol (NTP) servers.</li> <li> <code>netbios-name-servers</code> - The IP addresses of up to four NetBIOS name servers.</li> <li> <code>netbios-node-type</code> - The NetBIOS node type (1, 2, 4, or 8). We recommend that you specify 2 (broadcast and multicast are not currently supported). For more information about these node types, see <a href=\"http://www.ietf.org/rfc/rfc2132.txt\">RFC 2132</a>. </li> </ul> <p>Your VPC automatically starts out with a set of DHCP options that includes only a DNS server that we provide (AmazonProvidedDNS). If you create a set of options, and if your VPC has an Internet gateway, make sure to set the <code>domain-name-servers</code> option either to <code>AmazonProvidedDNS</code> or to a domain name server of your choice. For more information about DHCP options, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html\">DHCP Options Sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "CreateImage":{
       "name":"CreateImage",
@@ -397,7 +407,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"CreateTagsRequest"},
-      "documentation":"<p>Adds or overwrites one or more tags for the specified EC2 resource or resources. Each resource can have a maximum of 10 tags. Each tag consists of a key and optional value. Tag keys must be unique per resource.</p> <p>For more information about tags, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging Your Resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Adds or overwrites one or more tags for the specified Amazon EC2 resource or resources. Each resource can have a maximum of 10 tags. Each tag consists of a key and optional value. Tag keys must be unique per resource.</p> <p>For more information about tags, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging Your Resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateVolume":{
       "name":"CreateVolume",
@@ -410,7 +420,7 @@
         "shape":"Volume",
         "locationName":"volume"
       },
-      "documentation":"<p>Creates an Amazon EBS volume that can be attached to an instance in the same Availability Zone. The volume is created in the specified region.</p> <p>You can create a new empty volume or restore a volume from an Amazon EBS snapshot. Any AWS Marketplace product codes from the snapshot are propagated to the volume.</p> <p>You can create encrypted volumes with the <code>Encrypted</code> parameter. Encrypted volumes may only be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are also automatically encrypted. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html\">Creating or Restoring an Amazon EBS Volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Creates an Amazon EBS volume that can be attached to an instance in the same Availability Zone. The volume is created in the regional endpoint that you send the HTTP request to. For more information see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html\">Regions and Endpoints</a>.</p> <p>You can create a new empty volume or restore a volume from an Amazon EBS snapshot. Any AWS Marketplace product codes from the snapshot are propagated to the volume.</p> <p>You can create encrypted volumes with the <code>Encrypted</code> parameter. Encrypted volumes may only be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are also automatically encrypted. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html\">Creating or Restoring an Amazon EBS Volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateVpc":{
       "name":"CreateVpc",
@@ -668,7 +678,7 @@
       },
       "input":{"shape":"DescribeAccountAttributesRequest"},
       "output":{"shape":"DescribeAccountAttributesResult"},
-      "documentation":"<p>Describes the specified attribute of your AWS account.</p>"
+      "documentation":"<p>Describes attributes of your AWS account. The following are the supported account attributes:</p> <ul> <li> <p><code>supported-platforms</code>: Indicates whether your account can launch instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.</p> </li> <li> <p><code>default-vpc</code>: The ID of the default VPC for your account, or <code>none</code>.</p> </li> <li> <p><code>max-instances</code>: The maximum number of On-Demand instances that you can run.</p> </li> <li> <p><code>vpc-max-security-groups-per-interface</code>: The maximum number of security groups that you can assign to a network interface.</p> </li> <li> <p><code>max-elastic-ips</code>: The maximum number of Elastic IP addresses that you can allocate for use with EC2-Classic. </p> </li> <li> <p><code>vpc-max-elastic-ips</code>: The maximum number of Elastic IP addresses that you can allocate for use with EC2-VPC.</p> </li> </ul>"
     },
     "DescribeAddresses":{
       "name":"DescribeAddresses",
@@ -699,6 +709,16 @@
       "input":{"shape":"DescribeBundleTasksRequest"},
       "output":{"shape":"DescribeBundleTasksResult"},
       "documentation":"<p>Describes one or more of your bundling tasks.</p> <note><p>Completed bundle tasks are listed for only a limited time. If your bundle task is no longer in the list, you can still register an AMI from it. Just use <code>RegisterImage</code> with the Amazon S3 bucket name and image manifest name you provided to the bundle task.</p></note>"
+    },
+    "DescribeClassicLinkInstances":{
+      "name":"DescribeClassicLinkInstances",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeClassicLinkInstancesRequest"},
+      "output":{"shape":"DescribeClassicLinkInstancesResult"},
+      "documentation":"<p>Describes one or more of your linked EC2-Classic instances. This request only returns information about EC2-Classic instances linked to a VPC through ClassicLink; you cannot use this request to return information about other instances.</p>"
     },
     "DescribeConversionTasks":{
       "name":"DescribeConversionTasks",
@@ -1034,6 +1054,16 @@
       "output":{"shape":"DescribeVpcAttributeResult"},
       "documentation":"<p>Describes the specified attribute of the specified VPC. You can specify only one attribute at a time.</p>"
     },
+    "DescribeVpcClassicLink":{
+      "name":"DescribeVpcClassicLink",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeVpcClassicLinkRequest"},
+      "output":{"shape":"DescribeVpcClassicLinkResult"},
+      "documentation":"<p>Describes the ClassicLink status of one or more VPCs. </p>"
+    },
     "DescribeVpcPeeringConnections":{
       "name":"DescribeVpcPeeringConnections",
       "http":{
@@ -1073,6 +1103,16 @@
       "input":{"shape":"DescribeVpnGatewaysRequest"},
       "output":{"shape":"DescribeVpnGatewaysResult"},
       "documentation":"<p>Describes one or more of your virtual private gateways.</p> <p>For more information about virtual private gateways, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html\">Adding an IPsec Hardware VPN to Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+    },
+    "DetachClassicLinkVpc":{
+      "name":"DetachClassicLinkVpc",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DetachClassicLinkVpcRequest"},
+      "output":{"shape":"DetachClassicLinkVpcResult"},
+      "documentation":"<p>Unlinks (detaches) a linked EC2-Classic instance from a VPC. After the instance has been unlinked, the VPC security groups are no longer associated with it. An instance is automatically unlinked from a VPC when it's stopped.</p>"
     },
     "DetachInternetGateway":{
       "name":"DetachInternetGateway",
@@ -1123,6 +1163,16 @@
       "input":{"shape":"DisableVgwRoutePropagationRequest"},
       "documentation":"<p>Disables a virtual private gateway (VGW) from propagating routes to a specified route table of a VPC.</p>"
     },
+    "DisableVpcClassicLink":{
+      "name":"DisableVpcClassicLink",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisableVpcClassicLinkRequest"},
+      "output":{"shape":"DisableVpcClassicLinkResult"},
+      "documentation":"<p>Disables ClassicLink for a VPC. You cannot disable ClassicLink for a VPC that has EC2-Classic instances linked to it.</p>"
+    },
     "DisassociateAddress":{
       "name":"DisassociateAddress",
       "http":{
@@ -1158,6 +1208,16 @@
       },
       "input":{"shape":"EnableVolumeIORequest"},
       "documentation":"<p>Enables I/O operations for a volume that had I/O operations disabled because the data on the volume was potentially inconsistent.</p>"
+    },
+    "EnableVpcClassicLink":{
+      "name":"EnableVpcClassicLink",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"EnableVpcClassicLinkRequest"},
+      "output":{"shape":"EnableVpcClassicLinkResult"},
+      "documentation":"<p>Enables a VPC for ClassicLink. You can then link EC2-Classic instances to your ClassicLink-enabled VPC to allow communication over private IP addresses. You cannot enable your VPC for ClassicLink if any of your VPC's route tables have existing routes for address ranges within the <code>10.0.0.0/8</code> IP address range, excluding local routes for VPCs in the <code>10.0.0.0/16</code> and <code>10.1.0.0/16</code> IP address ranges. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html\">ClassicLink</a> in the Amazon Elastic Compute Cloud User Guide.</p>"
     },
     "GetConsoleOutput":{
       "name":"GetConsoleOutput",
@@ -1404,7 +1464,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"ResetImageAttributeRequest"},
-      "documentation":"<p>Resets an attribute of an AMI to its default value.</p>"
+      "documentation":"<p>Resets an attribute of an AMI to its default value.</p> <note><p> The productCodes attribute can't be reset. </p></note>"
     },
     "ResetInstanceAttribute":{
       "name":"ResetInstanceAttribute",
@@ -1821,6 +1881,45 @@
         }
       }
     },
+    "AttachClassicLinkVpcRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "VpcId",
+        "Groups"
+      ],
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "locationName":"dryRun"
+        },
+        "InstanceId":{
+          "shape":"String",
+          "documentation":"<p>The ID of an EC2-Classic instance to link to the ClassicLink-enabled VPC.</p>",
+          "locationName":"instanceId"
+        },
+        "VpcId":{
+          "shape":"String",
+          "documentation":"<p>The ID of a ClassicLink-enabled VPC.</p>",
+          "locationName":"vpcId"
+        },
+        "Groups":{
+          "shape":"GroupIdStringList",
+          "documentation":"<p>The ID of one or more of the VPC's security groups. You cannot specify security groups from a different VPC.</p>",
+          "locationName":"SecurityGroupId"
+        }
+      }
+    },
+    "AttachClassicLinkVpcResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "documentation":"<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+          "locationName":"return"
+        }
+      }
+    },
     "AttachInternetGatewayRequest":{
       "type":"structure",
       "required":[
@@ -2182,7 +2281,7 @@
         },
         "InstanceId":{
           "shape":"String",
-          "documentation":"<p>The ID of the instance to bundle.</p>"
+          "documentation":"<p>The ID of the instance to bundle.</p> <p>Type: String</p> <p>Default: None</p> <p>Required: Yes</p>"
         },
         "Storage":{
           "shape":"Storage",
@@ -2210,7 +2309,7 @@
         },
         "BundleId":{
           "shape":"String",
-          "documentation":"<p>The ID for this bundle task.</p>",
+          "documentation":"<p>The ID of the bundle task.</p>",
           "locationName":"bundleId"
         },
         "State":{
@@ -2411,6 +2510,39 @@
       "type":"list",
       "member":{
         "shape":"CancelledSpotInstanceRequest",
+        "locationName":"item"
+      }
+    },
+    "ClassicLinkInstance":{
+      "type":"structure",
+      "members":{
+        "InstanceId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the instance.</p>",
+          "locationName":"instanceId"
+        },
+        "VpcId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the VPC.</p>",
+          "locationName":"vpcId"
+        },
+        "Groups":{
+          "shape":"GroupIdentifierList",
+          "documentation":"<p>A list of security groups.</p>",
+          "locationName":"groupSet"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>Any tags assigned to the instance.</p>",
+          "locationName":"tagSet"
+        }
+      },
+      "documentation":"<p>Describes a linked EC2-Classic instance.</p>"
+    },
+    "ClassicLinkInstanceList":{
+      "type":"list",
+      "member":{
+        "shape":"ClassicLinkInstance",
         "locationName":"item"
       }
     },
@@ -3246,12 +3378,12 @@
         },
         "Encrypted":{
           "shape":"Boolean",
-          "documentation":"<p>Specifies whether the volume should be encrypted.</p>",
+          "documentation":"<p>Specifies whether the volume should be encrypted. Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are automatically encrypted. There is no way to create an encrypted volume from an unencrypted snapshot or vice versa. If your AMI uses encrypted volumes, you can only launch it on supported instance types. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p>",
           "locationName":"encrypted"
         },
         "KmsKeyId":{
           "shape":"String",
-          "documentation":"<p>The full ARN of the AWS Key Management Service (KMS) Customer Master Key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK is used. The ARN contains the <code>arn:aws:kms</code> namespace, followed by the region of the CMK, the AWS account ID of the CMK owner, the <code>key</code> namespace, and then the CMK ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>.</p>"
+          "documentation":"<p>The full ARN of the AWS Key Management Service (KMS) master key to use when creating the encrypted volume. This parameter is only required if you want to use a non-default master key; if this parameter is not specified, the default master key is used. The ARN contains the <code>arn:aws:kms</code> namespace, followed by the region of the master key, the AWS account ID of the master key owner, the <code>key</code> namespace, and then the master key ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>.</p>"
         }
       }
     },
@@ -3937,6 +4069,50 @@
         }
       }
     },
+    "DescribeClassicLinkInstancesRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "locationName":"dryRun"
+        },
+        "InstanceIds":{
+          "shape":"InstanceIdStringList",
+          "documentation":"<p>One or more instance IDs. Must be instances linked to a VPC through ClassicLink.</p>",
+          "locationName":"InstanceId"
+        },
+        "Filters":{
+          "shape":"FilterList",
+          "documentation":"<p>One or more filters.</p> <ul> <li><p><code>group-id</code> - The ID of a VPC security group that's associated with the instance.</p></li> <li> <p><code>instance-id</code> - The ID of the instance.</p> </li> <li> <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p><code>vpc-id</code> - The ID of the VPC that the instance is linked to.</p> </li> </ul>",
+          "locationName":"Filter"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token for the next set of items to return. (You received this token from a prior call.)</p>",
+          "locationName":"nextToken"
+        },
+        "MaxResults":{
+          "shape":"Integer",
+          "documentation":"<p> The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p> <p>Constraint: If the value is greater than 1000, we return only 1000 items.</p>",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "DescribeClassicLinkInstancesResult":{
+      "type":"structure",
+      "members":{
+        "Instances":{
+          "shape":"ClassicLinkInstanceList",
+          "documentation":"<p>Information about one or more linked EC2-Classic instances.</p>",
+          "locationName":"instancesSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>",
+          "locationName":"nextToken"
+        }
+      }
+    },
     "DescribeConversionTaskList":{
       "type":"list",
       "member":{
@@ -4192,7 +4368,7 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>architecture</code> - The instance architecture (<code>i386</code> | <code>x86_64</code>).</p> </li> <li> <p><code>availability-zone</code> - The Availability Zone of the instance.</p> </li> <li> <p><code>block-device-mapping.attach-time</code> - The attach time for an Amazon EBS volume mapped to the instance, for example, <code>2010-09-15T17:15:20.000Z</code>.</p> </li> <li> <p><code>block-device-mapping.delete-on-termination</code> - A Boolean that indicates whether the Amazon EBS volume is deleted on instance termination.</p> </li> <li> <p><code>block-device-mapping.device-name</code> - The device name for the Amazon EBS volume (for example, <code>/dev/sdh</code>).</p> </li> <li> <p><code>block-device-mapping.status</code> - The status for the Amazon EBS volume (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p><code>block-device-mapping.volume-id</code> - The volume ID of the Amazon EBS volume.</p> </li> <li> <p><code>client-token</code> - The idempotency token you provided when you launched the instance.</p> </li> <li> <p><code>dns-name</code> - The public DNS name of the instance.</p> </li> <li> <p><code>group-id</code> - The ID of the security group for the instance. If the instance is in EC2-Classic or a default VPC, you can use <code>group-name</code> instead.</p> </li> <li> <p><code>group-name</code> - The name of the security group for the instance. If the instance is in a nondefault VPC, you must use <code>group-id</code> instead.</p> </li> <li> <p><code>hypervisor</code> - The hypervisor type of the instance (<code>ovm</code> | <code>xen</code>).</p> </li> <li> <p><code>iam-instance-profile.arn</code> - The instance profile associated with the instance. Specified as an ARN.</p> </li> <li> <p><code>image-id</code> - The ID of the image used to launch the instance.</p> </li> <li> <p><code>instance-id</code> - The ID of the instance.</p> </li> <li> <p><code>instance-lifecycle</code> - Indicates whether this is a Spot Instance (<code>spot</code>).</p> </li> <li> <p><code>instance-state-code</code> - The state of the instance, as a 16-bit unsigned integer. The high byte is an opaque internal value and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).</p> </li> <li> <p><code>instance-state-name</code> - The state of the instance (<code>pending</code> | <code>running</code> | <code>shutting-down</code> | <code>terminated</code> | <code>stopping</code> | <code>stopped</code>).</p> </li> <li> <p><code>instance-type</code> - The type of instance (for example, <code>m1.small</code>).</p> </li> <li> <p><code>instance.group-id</code> - The ID of the security group for the instance. If the instance is in EC2-Classic or a default VPC, you can use <code>instance.group-name</code> instead.</p> </li> <li> <p><code>instance.group-name</code> - The name of the security group for the instance. If the instance is in a nondefault VPC, you must use <code>instance.group-id</code> instead.</p> </li> <li> <p><code>ip-address</code> - The public IP address of the instance.</p> </li> <li> <p><code>kernel-id</code> - The kernel ID.</p> </li> <li> <p><code>key-name</code> - The name of the key pair used when the instance was launched.</p> </li> <li> <p><code>launch-index</code> - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on). </p> </li> <li> <p><code>launch-time</code> - The time when the instance was launched.</p> </li> <li> <p><code>monitoring-state</code> - Indicates whether monitoring is enabled for the instance (<code>disabled</code> | <code>enabled</code>).</p> </li> <li> <p><code>owner-id</code> - The AWS account ID of the instance owner.</p> </li> <li> <p><code>placement-group-name</code> - The name of the placement group for the instance.</p> </li> <li> <p><code>platform</code> - The platform. Use <code>windows</code> if you have Windows instances; otherwise, leave blank.</p> </li> <li> <p><code>private-dns-name</code> - The private DNS name of the instance.</p> </li> <li> <p><code>private-ip-address</code> - The private IP address of the instance.</p> </li> <li> <p><code>product-code</code> - The product code associated with the AMI used to launch the instance.</p> </li> <li> <p><code>product-code.type</code> - The type of product code (<code>devpay</code> | <code>marketplace</code>).</p> </li> <li> <p><code>ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p><code>reason</code> - The reason for the current state of the instance (for example, shows \"User Initiated [date]\" when you stop or terminate the instance). Similar to the state-reason-code filter.</p> </li> <li> <p><code>requester-id</code> - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).</p> </li> <li> <p><code>reservation-id</code> - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you'll get one reservation ID. If you launch ten instances using the same launch request, you'll also get one reservation ID.</p> </li> <li> <p><code>root-device-name</code> - The name of the root device for the instance (for example, <code>/dev/sda1</code>).</p> </li> <li> <p><code>root-device-type</code> - The type of root device that the instance uses (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p><code>source-dest-check</code> - Indicates whether the instance performs source/destination checking. A value of <code>true</code> means that checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the instance to perform network address translation (NAT) in your VPC. </p> </li> <li> <p><code>spot-instance-request-id</code> - The ID of the Spot Instance request.</p> </li> <li> <p><code>state-reason-code</code> - The reason code for the state change.</p> </li> <li> <p><code>state-reason-message</code> - A message that describes the state change.</p> </li> <li> <p><code>subnet-id</code> - The ID of the subnet for the instance.</p> </li> <li> <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource, where <code>tag</code>:<i>key</i> is the tag's key. </p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p><code>tenancy</code> - The tenancy of an instance (<code>dedicated</code> | <code>default</code>).</p> </li> <li> <p><code>virtualization-type</code> - The virtualization type of the instance (<code>paravirtual</code> | <code>hvm</code>).</p> </li> <li> <p><code>vpc-id</code> - The ID of the VPC that the instance is running in.</p> </li> <li> <p><code>network-interface.description</code> - The description of the network interface.</p> </li> <li> <p><code>network-interface.subnet-id</code> - The ID of the subnet for the network interface.</p> </li> <li> <p><code>network-interface.vpc-id</code> - The ID of the VPC for the network interface.</p> </li> <li> <p><code>network-interface.network-interface.id</code> - The ID of the network interface.</p> </li> <li> <p><code>network-interface.owner-id</code> - The ID of the owner of the network interface.</p> </li> <li> <p><code>network-interface.availability-zone</code> - The Availability Zone for the network interface.</p> </li> <li> <p><code>network-interface.requester-id</code> - The requester ID for the network interface.</p> </li> <li> <p><code>network-interface.requester-managed</code> - Indicates whether the network interface is being managed by AWS.</p> </li> <li> <p><code>network-interface.status</code> - The status of the network interface (<code>available</code>) | <code>in-use</code>).</p> </li> <li> <p><code>network-interface.mac-address</code> - The MAC address of the network interface.</p> </li> <li> <p><code>network-interface-private-dns-name</code> - The private DNS name of the network interface.</p> </li> <li> <p><code>network-interface.source-destination-check</code> - Whether the network interface performs source/destination checking. A value of <code>true</code> means checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the network interface to perform network address translation (NAT) in your VPC.</p> </li> <li> <p><code>network-interface.group-id</code> - The ID of a security group associated with the network interface.</p> </li> <li> <p><code>network-interface.group-name</code> - The name of a security group associated with the network interface.</p> </li> <li> <p><code>network-interface.attachment.attachment-id</code> - The ID of the interface attachment.</p> </li> <li> <p><code>network-interface.attachment.instance-id</code> - The ID of the instance to which the network interface is attached.</p> </li> <li> <p><code>network-interface.attachment.instance-owner-id</code> - The owner ID of the instance to which the network interface is attached.</p> </li> <li> <p><code>network-interface.addresses.private-ip-address</code> - The private IP address associated with the network interface.</p> </li> <li> <p><code>network-interface.attachment.device-index</code> - The device index to which the network interface is attached.</p> </li> <li> <p><code>network-interface.attachment.status</code> - The status of the attachment (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p><code>network-interface.attachment.attach-time</code> - The time that the network interface was attached to an instance.</p> </li> <li> <p><code>network-interface.attachment.delete-on-termination</code> - Specifies whether the attachment is deleted when an instance is terminated.</p> </li> <li> <p><code>network-interface.addresses.primary</code> - Specifies whether the IP address of the network interface is the primary private IP address.</p> </li> <li> <p><code>network-interface.addresses.association.public-ip</code> - The ID of the association of an Elastic IP address with a network interface.</p> </li> <li> <p><code>network-interface.addresses.association.ip-owner-id</code> - The owner ID of the private IP address associated with the network interface.</p> </li> <li> <p><code>association.public-ip</code> - The address of the Elastic IP address bound to the network interface.</p> </li> <li> <p><code>association.ip-owner-id</code> - The owner of the Elastic IP address associated with the network interface.</p> </li> <li> <p><code>association.allocation-id</code> - The allocation ID returned when you allocated the Elastic IP address for your network interface.</p> </li> <li> <p><code>association.association-id</code> - The association ID returned when the network interface was associated with an IP address.</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>architecture</code> - The instance architecture (<code>i386</code> | <code>x86_64</code>).</p> </li> <li> <p><code>availability-zone</code> - The Availability Zone of the instance.</p> </li> <li> <p><code>block-device-mapping.attach-time</code> - The attach time for an Amazon EBS volume mapped to the instance, for example, <code>2010-09-15T17:15:20.000Z</code>.</p> </li> <li> <p><code>block-device-mapping.delete-on-termination</code> - A Boolean that indicates whether the Amazon EBS volume is deleted on instance termination.</p> </li> <li> <p><code>block-device-mapping.device-name</code> - The device name for the Amazon EBS volume (for example, <code>/dev/sdh</code>).</p> </li> <li> <p><code>block-device-mapping.status</code> - The status for the Amazon EBS volume (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p><code>block-device-mapping.volume-id</code> - The volume ID of the Amazon EBS volume.</p> </li> <li> <p><code>client-token</code> - The idempotency token you provided when you launched the instance.</p> </li> <li> <p><code>dns-name</code> - The public DNS name of the instance.</p> </li> <li> <p><code>group-id</code> - The ID of the security group for the instance. EC2-Classic only.</p> </li> <li> <p><code>group-name</code> - The name of the security group for the instance. EC2-Classic only.</p> </li> <li> <p><code>hypervisor</code> - The hypervisor type of the instance (<code>ovm</code> | <code>xen</code>).</p> </li> <li> <p><code>iam-instance-profile.arn</code> - The instance profile associated with the instance. Specified as an ARN.</p> </li> <li> <p><code>image-id</code> - The ID of the image used to launch the instance.</p> </li> <li> <p><code>instance-id</code> - The ID of the instance.</p> </li> <li> <p><code>instance-lifecycle</code> - Indicates whether this is a Spot Instance (<code>spot</code>).</p> </li> <li> <p><code>instance-state-code</code> - The state of the instance, as a 16-bit unsigned integer. The high byte is an opaque internal value and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).</p> </li> <li> <p><code>instance-state-name</code> - The state of the instance (<code>pending</code> | <code>running</code> | <code>shutting-down</code> | <code>terminated</code> | <code>stopping</code> | <code>stopped</code>).</p> </li> <li> <p><code>instance-type</code> - The type of instance (for example, <code>m1.small</code>).</p> </li> <li> <p><code>instance.group-id</code> - The ID of the security group for the instance. </p> </li> <li> <p><code>instance.group-name</code> - The name of the security group for the instance. </p> </li> <li> <p><code>ip-address</code> - The public IP address of the instance.</p> </li> <li> <p><code>kernel-id</code> - The kernel ID.</p> </li> <li> <p><code>key-name</code> - The name of the key pair used when the instance was launched.</p> </li> <li> <p><code>launch-index</code> - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on). </p> </li> <li> <p><code>launch-time</code> - The time when the instance was launched.</p> </li> <li> <p><code>monitoring-state</code> - Indicates whether monitoring is enabled for the instance (<code>disabled</code> | <code>enabled</code>).</p> </li> <li> <p><code>owner-id</code> - The AWS account ID of the instance owner.</p> </li> <li> <p><code>placement-group-name</code> - The name of the placement group for the instance.</p> </li> <li> <p><code>platform</code> - The platform. Use <code>windows</code> if you have Windows instances; otherwise, leave blank.</p> </li> <li> <p><code>private-dns-name</code> - The private DNS name of the instance.</p> </li> <li> <p><code>private-ip-address</code> - The private IP address of the instance.</p> </li> <li> <p><code>product-code</code> - The product code associated with the AMI used to launch the instance.</p> </li> <li> <p><code>product-code.type</code> - The type of product code (<code>devpay</code> | <code>marketplace</code>).</p> </li> <li> <p><code>ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p><code>reason</code> - The reason for the current state of the instance (for example, shows \"User Initiated [date]\" when you stop or terminate the instance). Similar to the state-reason-code filter.</p> </li> <li> <p><code>requester-id</code> - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).</p> </li> <li> <p><code>reservation-id</code> - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you'll get one reservation ID. If you launch ten instances using the same launch request, you'll also get one reservation ID.</p> </li> <li> <p><code>root-device-name</code> - The name of the root device for the instance (for example, <code>/dev/sda1</code>).</p> </li> <li> <p><code>root-device-type</code> - The type of root device that the instance uses (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p><code>source-dest-check</code> - Indicates whether the instance performs source/destination checking. A value of <code>true</code> means that checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the instance to perform network address translation (NAT) in your VPC. </p> </li> <li> <p><code>spot-instance-request-id</code> - The ID of the Spot Instance request.</p> </li> <li> <p><code>state-reason-code</code> - The reason code for the state change.</p> </li> <li> <p><code>state-reason-message</code> - A message that describes the state change.</p> </li> <li> <p><code>subnet-id</code> - The ID of the subnet for the instance.</p> </li> <li> <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource, where <code>tag</code>:<i>key</i> is the tag's key. </p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p><code>tenancy</code> - The tenancy of an instance (<code>dedicated</code> | <code>default</code>).</p> </li> <li> <p><code>virtualization-type</code> - The virtualization type of the instance (<code>paravirtual</code> | <code>hvm</code>).</p> </li> <li> <p><code>vpc-id</code> - The ID of the VPC that the instance is running in.</p> </li> <li> <p><code>network-interface.description</code> - The description of the network interface.</p> </li> <li> <p><code>network-interface.subnet-id</code> - The ID of the subnet for the network interface.</p> </li> <li> <p><code>network-interface.vpc-id</code> - The ID of the VPC for the network interface.</p> </li> <li> <p><code>network-interface.network-interface.id</code> - The ID of the network interface.</p> </li> <li> <p><code>network-interface.owner-id</code> - The ID of the owner of the network interface.</p> </li> <li> <p><code>network-interface.availability-zone</code> - The Availability Zone for the network interface.</p> </li> <li> <p><code>network-interface.requester-id</code> - The requester ID for the network interface.</p> </li> <li> <p><code>network-interface.requester-managed</code> - Indicates whether the network interface is being managed by AWS.</p> </li> <li> <p><code>network-interface.status</code> - The status of the network interface (<code>available</code>) | <code>in-use</code>).</p> </li> <li> <p><code>network-interface.mac-address</code> - The MAC address of the network interface.</p> </li> <li> <p><code>network-interface-private-dns-name</code> - The private DNS name of the network interface.</p> </li> <li> <p><code>network-interface.source-destination-check</code> - Whether the network interface performs source/destination checking. A value of <code>true</code> means checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the network interface to perform network address translation (NAT) in your VPC.</p> </li> <li> <p><code>network-interface.group-id</code> - The ID of a security group associated with the network interface.</p> </li> <li> <p><code>network-interface.group-name</code> - The name of a security group associated with the network interface.</p> </li> <li> <p><code>network-interface.attachment.attachment-id</code> - The ID of the interface attachment.</p> </li> <li> <p><code>network-interface.attachment.instance-id</code> - The ID of the instance to which the network interface is attached.</p> </li> <li> <p><code>network-interface.attachment.instance-owner-id</code> - The owner ID of the instance to which the network interface is attached.</p> </li> <li> <p><code>network-interface.addresses.private-ip-address</code> - The private IP address associated with the network interface.</p> </li> <li> <p><code>network-interface.attachment.device-index</code> - The device index to which the network interface is attached.</p> </li> <li> <p><code>network-interface.attachment.status</code> - The status of the attachment (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p><code>network-interface.attachment.attach-time</code> - The time that the network interface was attached to an instance.</p> </li> <li> <p><code>network-interface.attachment.delete-on-termination</code> - Specifies whether the attachment is deleted when an instance is terminated.</p> </li> <li> <p><code>network-interface.addresses.primary</code> - Specifies whether the IP address of the network interface is the primary private IP address.</p> </li> <li> <p><code>network-interface.addresses.association.public-ip</code> - The ID of the association of an Elastic IP address with a network interface.</p> </li> <li> <p><code>network-interface.addresses.association.ip-owner-id</code> - The owner ID of the private IP address associated with the network interface.</p> </li> <li> <p><code>association.public-ip</code> - The address of the Elastic IP address bound to the network interface.</p> </li> <li> <p><code>association.ip-owner-id</code> - The owner of the Elastic IP address associated with the network interface.</p> </li> <li> <p><code>association.allocation-id</code> - The allocation ID returned when you allocated the Elastic IP address for your network interface.</p> </li> <li> <p><code>association.association-id</code> - The association ID returned when the network interface was associated with an IP address.</p> </li> </ul>",
           "locationName":"Filter"
         },
         "NextToken":{
@@ -5110,6 +5286,35 @@
         }
       }
     },
+    "DescribeVpcClassicLinkRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "locationName":"dryRun"
+        },
+        "VpcIds":{
+          "shape":"VpcClassicLinkIdList",
+          "documentation":"<p>One or more VPCs for which you want to describe the ClassicLink status.</p>",
+          "locationName":"VpcId"
+        },
+        "Filters":{
+          "shape":"FilterList",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>is-classic-link-enabled</code> - Whether the VPC is enabled for ClassicLink (<code>true</code> | <code>false</code>).</p> </li> <li> <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> </ul>",
+          "locationName":"Filter"
+        }
+      }
+    },
+    "DescribeVpcClassicLinkResult":{
+      "type":"structure",
+      "members":{
+        "Vpcs":{
+          "shape":"VpcClassicLinkList",
+          "documentation":"<p>The ClassicLink status of one or more VPCs.</p>",
+          "locationName":"vpcSet"
+        }
+      }
+    },
     "DescribeVpcPeeringConnectionsRequest":{
       "type":"structure",
       "members":{
@@ -5223,6 +5428,39 @@
           "shape":"VpnGatewayList",
           "documentation":"<p>Information about one or more virtual private gateways.</p>",
           "locationName":"vpnGatewaySet"
+        }
+      }
+    },
+    "DetachClassicLinkVpcRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "VpcId"
+      ],
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "locationName":"dryRun"
+        },
+        "InstanceId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the instance to unlink from the VPC.</p>",
+          "locationName":"instanceId"
+        },
+        "VpcId":{
+          "shape":"String",
+          "documentation":"<p> The ID of the VPC to which the instance is linked.</p>",
+          "locationName":"vpcId"
+        }
+      }
+    },
+    "DetachClassicLinkVpcResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "documentation":"<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+          "locationName":"return"
         }
       }
     },
@@ -5398,6 +5636,31 @@
         }
       }
     },
+    "DisableVpcClassicLinkRequest":{
+      "type":"structure",
+      "required":["VpcId"],
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "locationName":"dryRun"
+        },
+        "VpcId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the VPC.</p>",
+          "locationName":"vpcId"
+        }
+      }
+    },
+    "DisableVpcClassicLinkResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "documentation":"<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+          "locationName":"return"
+        }
+      }
+    },
     "DisassociateAddressRequest":{
       "type":"structure",
       "members":{
@@ -5488,7 +5751,7 @@
         },
         "ImportManifestUrl":{
           "shape":"String",
-          "documentation":"<p>A presigned URL for the import manifest stored in Amazon S3. For information about creating a presigned URL for an Amazon S3 object, read the \"Query String Request Authentication Alternative\" section of the <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html\">Authenticating REST Requests</a> topic in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>",
+          "documentation":"<p>A presigned URL for the import manifest stored in Amazon S3 and presented here as an Amazon S3 presigned URL. For information about creating a presigned URL for an Amazon S3 object, read the \"Query String Request Authentication Alternative\" section of the <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html\">Authenticating REST Requests</a> topic in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>",
           "locationName":"importManifestUrl"
         }
       }
@@ -5635,6 +5898,31 @@
           "shape":"String",
           "documentation":"<p>The ID of the volume.</p>",
           "locationName":"volumeId"
+        }
+      }
+    },
+    "EnableVpcClassicLinkRequest":{
+      "type":"structure",
+      "required":["VpcId"],
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "locationName":"dryRun"
+        },
+        "VpcId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the VPC.</p>",
+          "locationName":"vpcId"
+        }
+      }
+    },
+    "EnableVpcClassicLinkResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "documentation":"<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+          "locationName":"return"
         }
       }
     },
@@ -5977,6 +6265,10 @@
           "documentation":"<p>The AWS account ID of the image owner.</p>",
           "locationName":"imageOwnerId"
         },
+        "CreationDate":{
+          "shape":"String",
+          "locationName":"creationDate"
+        },
         "Public":{
           "shape":"Boolean",
           "documentation":"<p>Indicates whether the image has public launch permissions. The value is <code>true</code> if this image has public launch permissions or <code>false</code> if it has only implicit and explicit launch permissions.</p>",
@@ -6177,13 +6469,13 @@
           "locationName":"additionalInfo"
         },
         "UserData":{
-          "shape":"String",
+          "shape":"UserData",
           "documentation":"<p>User data to be made available to the instance.</p>",
           "locationName":"userData"
         },
         "InstanceType":{
           "shape":"InstanceType",
-          "documentation":"<p>The instance type. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+          "documentation":"<p>The instance type. This is not supported for VMs imported into a VPC, which are assigned the default security group. After a VM is imported into a VPC, you can specify another security group using the AWS Management Console. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about the Linux instance types you can import, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/VMImportPrerequisites.html\">Before You Get Started</a> in the Amazon Elastic Compute Cloud User Guide.</p>",
           "locationName":"instanceType"
         },
         "Placement":{
@@ -10077,7 +10369,7 @@
           "locationName":"uploadPolicySignature"
         }
       },
-      "documentation":"<p>Describes the S3 bucket for an instance store-backed AMI.</p>"
+      "documentation":"<p>Describes the storage parameters for S3 and S3 buckets for an instance store-backed AMI.</p>"
     },
     "SecurityGroup":{
       "type":"structure",
@@ -10213,7 +10505,7 @@
         },
         "KmsKeyId":{
           "shape":"String",
-          "documentation":"<p>The full ARN of the AWS Key Management Service (KMS) Customer Master Key (CMK) that was used to protect the volume encryption key for the parent volume.</p>",
+          "documentation":"<p>The full ARN of the AWS Key Management Service (KMS) master key that was used to protect the volume encryption key for the parent volume.</p>",
           "locationName":"kmsKeyId"
         }
       },
@@ -10693,17 +10985,17 @@
         },
         "ResourceType":{
           "shape":"ResourceType",
-          "documentation":"<p>The type of resource.</p>",
+          "documentation":"<p>The resource type.</p>",
           "locationName":"resourceType"
         },
         "Key":{
           "shape":"String",
-          "documentation":"<p>The key of the tag.</p>",
+          "documentation":"<p>The tag key.</p>",
           "locationName":"key"
         },
         "Value":{
           "shape":"String",
-          "documentation":"<p>The value of the tag.</p>",
+          "documentation":"<p>The tag value.</p>",
           "locationName":"value"
         }
       },
@@ -10803,6 +11095,15 @@
           "shape":"InstanceMonitoringList",
           "documentation":"<p>Monitoring information for one or more instances.</p>",
           "locationName":"instancesSet"
+        }
+      }
+    },
+    "UserData":{
+      "type":"structure",
+      "members":{
+        "Data":{
+          "shape":"String",
+          "locationName":"data"
         }
       }
     },
@@ -10954,12 +11255,12 @@
         },
         "Encrypted":{
           "shape":"Boolean",
-          "documentation":"<p>Indicates whether the volume is encrypted.</p>",
+          "documentation":"<p>Indicates whether the volume will be encrypted.</p>",
           "locationName":"encrypted"
         },
         "KmsKeyId":{
           "shape":"String",
-          "documentation":"<p>The full ARN of the AWS Key Management Service (KMS) Customer Master Key (CMK) that was used to protect the volume encryption key for the volume.</p>",
+          "documentation":"<p>The full ARN of the AWS Key Management Service (KMS) master key that was used to protect the volume encryption key for the volume.</p>",
           "locationName":"kmsKeyId"
         }
       },
@@ -11302,6 +11603,41 @@
         "enableDnsSupport",
         "enableDnsHostnames"
       ]
+    },
+    "VpcClassicLink":{
+      "type":"structure",
+      "members":{
+        "VpcId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the VPC.</p>",
+          "locationName":"vpcId"
+        },
+        "ClassicLinkEnabled":{
+          "shape":"Boolean",
+          "documentation":"<p>Indicates whether the VPC is enabled for ClassicLink.</p>",
+          "locationName":"classicLinkEnabled"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>Any tags assigned to the VPC.</p>",
+          "locationName":"tagSet"
+        }
+      },
+      "documentation":"<p>Describes whether a VPC is enabled for ClassicLink.</p>"
+    },
+    "VpcClassicLinkIdList":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"VpcId"
+      }
+    },
+    "VpcClassicLinkList":{
+      "type":"list",
+      "member":{
+        "shape":"VpcClassicLink",
+        "locationName":"item"
+      }
     },
     "VpcIdStringList":{
       "type":"list",
