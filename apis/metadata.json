@@ -97,7 +97,8 @@
     "name": "OpsWorks"
   },
   "rds": {
-    "name": "RDS"
+    "name": "RDS",
+    "versions": ["2014-09-01*"]
   },
   "redshift": {
     "name": "Redshift"
