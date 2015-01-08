@@ -25,14 +25,41 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<p>Creates a new Amazon ECS cluster. By default, your account will receive a <code>default</code> cluster when you launch your first container instance. However, you can create your own cluster with a unique name with the <code>CreateCluster</code> action.</p> <important> <p>During the preview, each account is limited to two clusters.</p> </important>"
+    },
+    "DeleteCluster":{
+      "name":"DeleteCluster",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteClusterRequest"},
+      "output":{
+        "shape":"DeleteClusterResponse",
+        "resultWrapper":"DeleteClusterResult"
+      },
+      "errors":[
+        {
+          "shape":"ServerException",
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+        },
+        {
+          "shape":"ClientException",
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+        }
+      ],
+      "documentation":"<p>Deletes the specified cluster. You must deregister all container instances from this cluster before you may delete it. You can list the container instances in a cluster with <a>ListContainerInstances</a> and deregister them with <a>DeregisterContainerInstance</a>.</p>"
     },
     "DeregisterContainerInstance":{
       "name":"DeregisterContainerInstance",
@@ -48,11 +75,13 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<p>Deregisters an Amazon ECS container instance from the specified cluster. This instance will no longer be available to run tasks.</p>"
@@ -71,11 +100,13 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<p>Deregisters the specified task definition. You will no longer be able to run tasks from this definition after deregistration.</p>"
@@ -94,11 +125,13 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<p>Describes one or more of your clusters.</p>"
@@ -117,11 +150,13 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<p>Describes Amazon EC2 Container Service container instances. Returns metadata about registered and remaining resources on each container instance requested.</p>"
@@ -140,11 +175,13 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<p>Describes a task definition.</p>"
@@ -163,11 +200,13 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<p>Describes a specified task or tasks.</p>"
@@ -186,11 +225,13 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<note><p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p></note> <p>Returns an endpoint for the Amazon EC2 Container Service agent to poll for updates.</p>"
@@ -209,11 +250,13 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<p>Returns a list of existing clusters.</p>"
@@ -232,11 +275,13 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<p>Returns a list of container instances in a specified cluster.</p>"
@@ -255,11 +300,13 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<p>Returns a list of task definitions that are registered to your account. You can filter the results by family name with the <code>familyPrefix</code> parameter.</p>"
@@ -278,11 +325,13 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<p>Returns a list of tasks for a specified cluster. You can filter the results by family name or by a particular container instance with the <code>family</code> and <code>containerInstance</code> parameters.</p>"
@@ -301,11 +350,13 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<note><p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p></note> <p>Registers an Amazon EC2 instance into the specified cluster. This instance will become available to place containers on.</p>"
@@ -324,11 +375,13 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<p>Registers a new task definition from the supplied <code>family</code> and <code>containerDefinitions</code>.</p>"
@@ -347,11 +400,13 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<p>Start a task using random placement and the default Amazon ECS scheduler. If you want to use your own scheduler or place a task on a specific container instance, use <code>StartTask</code> instead.</p>"
@@ -370,11 +425,13 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<p>Starts a new task from the specified task definition on the specified container instance or instances. If you want to use the default Amazon ECS scheduler to place your task, use <code>RunTask</code> instead.</p>"
@@ -393,11 +450,13 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<p>Stops a running task.</p>"
@@ -416,11 +475,13 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<note><p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p></note> <p>Sent to acknowledge that a container changed states.</p>"
@@ -439,11 +500,13 @@
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
           "shape":"ClientException",
-          "exception":true
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
       "documentation":"<note><p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p></note> <p>Sent to acknowledge that a task changed states.</p>"
@@ -462,12 +525,10 @@
     "ClientException":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"String",
-          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
-        }
+        "message":{"shape":"String"}
       },
-      "exception":true
+      "exception":true,
+      "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
     },
     "Cluster":{
       "type":"structure",
@@ -641,6 +702,25 @@
         "cluster":{
           "shape":"Cluster",
           "documentation":"<p>The full description of your new cluster.</p>"
+        }
+      }
+    },
+    "DeleteClusterRequest":{
+      "type":"structure",
+      "required":["cluster"],
+      "members":{
+        "cluster":{
+          "shape":"String",
+          "documentation":"<p>The cluster you want to delete.</p>"
+        }
+      }
+    },
+    "DeleteClusterResponse":{
+      "type":"structure",
+      "members":{
+        "cluster":{
+          "shape":"Cluster",
+          "documentation":"<p>The full description of the deleted cluster.</p>"
         }
       }
     },
@@ -1091,18 +1171,20 @@
         "tasks":{
           "shape":"Tasks",
           "documentation":"<p>A full description of the tasks that were run. Each task that was successfully placed on your cluster will be described here.</p>"
+        },
+        "failures":{
+          "shape":"Failures",
+          "documentation":"<p>Any failed tasks from your <code>RunTask</code> action are listed here.</p>"
         }
       }
     },
     "ServerException":{
       "type":"structure",
       "members":{
-        "message":{
-          "shape":"String",
-          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
-        }
+        "message":{"shape":"String"}
       },
-      "exception":true
+      "exception":true,
+      "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
     },
     "StartTaskRequest":{
       "type":"structure",
@@ -1129,8 +1211,14 @@
     "StartTaskResponse":{
       "type":"structure",
       "members":{
-        "tasks":{"shape":"Tasks"},
-        "failures":{"shape":"Failures"}
+        "tasks":{
+          "shape":"Tasks",
+          "documentation":"<p>A full description of the tasks that were started. Each task that was successfully placed on your container instances will be described here.</p>"
+        },
+        "failures":{
+          "shape":"Failures",
+          "documentation":"<p>Any failed tasks from your <code>StartTask</code> action are listed here.</p>"
+        }
       }
     },
     "StopTaskRequest":{
