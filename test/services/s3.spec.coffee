@@ -645,3 +645,7 @@ describe 'AWS.S3', ->
         expect(err.message).to.equal(error)
         #expect(-> s3.getSignedUrl('getObject', params)).to.throw(error) # sync mode
         done()
+
+    it 'errors if ContentLength is passed as parameter', ->
+      expect(-> s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', ContentLength: 5)).to.
+        throw(/ContentLength is not supported in pre-signed URLs/)
