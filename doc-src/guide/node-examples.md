@@ -4,7 +4,7 @@
 
 All of these examples assume that the AWS library is required,
 credentials are loaded via environment variables (`AWS_ACCESS_KEY_ID`
-and `AWS_SECRET_ACCESS_KEY`), and the region is set via 
+and `AWS_SECRET_ACCESS_KEY`), and the region is set via
 `AWS.config.update({region: 'us-west-2'});` or the `AWS_REGION` environment
 variable.
 
@@ -97,9 +97,13 @@ The following example lists all buckets associated with your AWS account:
 ```javascript
 var s3 = new AWS.S3();
 s3.listBuckets(function(err, data) {
-  for (var index in data.Buckets) {
-    var bucket = data.Buckets[index];
-    console.log("Bucket: ", bucket.Name, ' : ', bucket.CreationDate);
+  if (err) { return console.log(err); }
+
+  else {
+    for (var index in data.Buckets) {
+      var bucket = data.Buckets[index];
+      console.log("Bucket: ", bucket.Name, ' : ', bucket.CreationDate);
+    }
   }
 });
 ```
