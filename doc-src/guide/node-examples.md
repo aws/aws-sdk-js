@@ -97,7 +97,7 @@ The following example lists all buckets associated with your AWS account:
 ```javascript
 var s3 = new AWS.S3();
 s3.listBuckets(function(err, data) {
-  if (err) { return console.log(err); }
+  if (err) { console.log("Error:", err); }
   else {
     for (var index in data.Buckets) {
       var bucket = data.Buckets[index];
@@ -114,10 +114,13 @@ object 'myKey' of bucket 'myBucket':
 
 ```javascript
 var s3 = new AWS.S3({params: {Bucket: 'myBucket', Key: 'myKey'}});
-s3.createBucket(function() {
-  s3.upload({Body: 'Hello!'}, function() {
-    console.log("Successfully uploaded data to myBucket/myKey");
-  });
+s3.createBucket(function(err) {
+  if (err) { console.log("Error:", err); }
+  else {
+    s3.upload({Body: 'Hello!'}, function() {
+      console.log("Successfully uploaded data to myBucket/myKey");
+    });
+  }
 });
 ```
 
