@@ -42,6 +42,11 @@ describe 'AWS.S3', ->
       expect(s3.dnsCompatibleBucketName('1.2.3.4')).to.equal(false)
       expect(s3.dnsCompatibleBucketName('a.b.c.d')).to.equal(true)
 
+  describe 'constructor', ->
+    it 'requires endpoint if s3BucketEndpoint is passed', ->
+      expect(-> new AWS.S3(s3BucketEndpoint: true)).to.throw(
+        /An endpoint must be provided/)
+
   describe 'endpoint', ->
 
     it 'sets hostname to s3.amazonaws.com when region is un-specified', ->
@@ -72,6 +77,24 @@ describe 'AWS.S3', ->
       expect(req.endpoint.hostname).to.equal('s3.amazonaws.com')
       expect(req.path).to.equal('/bucket/key')
 
+    it 'does not enable path style if endpoint is a bucket', ->
+      s3 = new AWS.S3(endpoint: 'foo.bar', s3BucketEndpoint: true)
+      req = build('listObjects', Bucket: 'bucket')
+      expect(req.endpoint.hostname).to.equal('foo.bar')
+      expect(req.path).to.equal('/')
+      expect(req.virtualHostedBucket).to.equal('bucket')
+
+    it 'allows user override if an endpoint is specified', ->
+      s3 = new AWS.S3(endpoint: 'foo.bar', s3ForcePathStyle: true)
+      req = build('listObjects', Bucket: 'bucket')
+      expect(req.endpoint.hostname).to.equal('foo.bar')
+      expect(req.path).to.equal('/bucket')
+
+    it 'does not allow non-bucket operations with s3BucketEndpoint set', ->
+      s3 = new AWS.S3(endpoint: 'foo.bar', s3BucketEndpoint: true, paramValidation: true)
+      req = s3.listBuckets().build()
+      expect(req.response.error.code).to.equal('ConfigError')
+
     describe 'uri escaped params', ->
       it 'uri-escapes path and querystring params', ->
         # bucket param ends up as part of the hostname
@@ -90,6 +113,23 @@ describe 'AWS.S3', ->
 
         req = build('listObjects', { Bucket: 'bucket', MaxKeys:123 })
         expect(req.path).to.equal('/?max-keys=123')
+
+    describe 'adding Expect: 100-continue', ->
+      if AWS.util.isNode()
+        it 'does not add expect header to payloads less than 1MB', ->
+          req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024 * 1024 - 1))
+          expect(req.headers['Expect']).not.to.exist
+
+        it 'adds expect header to payloads greater than 1MB', ->
+          req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024 * 1024 + 1))
+          expect(req.headers['Expect']).to.equal('100-continue')
+
+      if AWS.util.isBrowser()
+        beforeEach -> helpers.spyOn(AWS.util, 'isBrowser').andReturn(true)
+
+        it 'does not add expect header in the browser', ->
+          req = build('putObject', Bucket: 'bucket', Key: 'key', Body: new Buffer(1024 * 1024 + 1))
+          expect(req.headers['Expect']).not.to.exist
 
     describe 'adding Content-Type', ->
       beforeEach -> helpers.spyOn(AWS.util, 'isBrowser').andReturn(true)
@@ -217,6 +257,22 @@ describe 'AWS.S3', ->
         '<xml><Code>RequestTimeout</Code><Message>message</Message></xml>'
       s3.putObject (err, data) ->
         expect(@retryCount).to.equal(s3.config.maxRetries)
+
+  # Managed Upload integration point
+  describe 'upload', ->
+    it 'accepts parameters in upload() call', ->
+      helpers.mockResponses [ { data: { ETag: 'ETAG' } } ]
+      done = false
+      s3.upload({Bucket: 'bucket', Key: 'key', Body: 'body'}, -> done = true)
+      expect(done).to.equal(true)
+
+    it 'accepts options as a second parameter', ->
+      helpers.mockResponses [ { data: { ETag: 'ETAG' } } ]
+      upload = s3.upload({Bucket: 'bucket', Key: 'key', Body: 'body'}, {queueSize: 2}, ->)
+      expect(upload.queueSize).to.equal(2)
+
+    it 'does not send if no callback is supplied', ->
+      s3.upload(Bucket: 'bucket', Key: 'key', Body: 'body')
 
   # S3 returns a handful of errors without xml bodies (to match the
   # http spec) these tests ensure we give meaningful codes/messages for these.
@@ -589,3 +645,7 @@ describe 'AWS.S3', ->
         expect(err.message).to.equal(error)
         #expect(-> s3.getSignedUrl('getObject', params)).to.throw(error) # sync mode
         done()
+
+    it 'errors if ContentLength is passed as parameter', ->
+      expect(-> s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', ContentLength: 5)).to.
+        throw(/ContentLength is not supported in pre-signed URLs/)

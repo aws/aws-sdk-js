@@ -2,8 +2,10 @@
 
 # Configuring the SDK in the Browser
 
-The SDK requires two settings to be configured in order to make requests,
-a region for the service(s) being used, and credentials to access the resources.
+The SDK requires two settings to be configured in order to make requests:
+
+1. a **region** for the service(s) being used,
+2. and **credentials** to access the resources.
 
 In addition to configuring these settings in the application, you may also have
 to configure permissions on the resources you control on AWS. We will discuss
@@ -14,10 +16,11 @@ the basics of this at the end of this chapter.
 By default, you can set global configuration by updating the `AWS.config` object with
 new settings. The most common settings are:
 
-1. `credentials` &mdash; the credentials object that contains authentication keys.
-2. `region` &mdash; to set the region for requests
-3. `sslEnabled` &mdash; whether SSL is enabled or not
-4. `maxRetries` &mdash; to control the number of retries for a request
+1. `credentials` &mdash; **required** &mdash; the credentials object that
+   contains authentication keys.
+2. `region` &mdash; **required** &mdash; to set the region for requests.
+3. `sslEnabled` &mdash; whether SSL is enabled or not.
+4. `maxRetries` &mdash; to control the number of retries for a request.
 5. `logger` &mdash; a logger object to write debug information to. Set to `console`
    to get logging information about service requests.
 

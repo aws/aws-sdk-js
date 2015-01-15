@@ -1312,6 +1312,20 @@
       ],
       "documentation":"<p> Generates a credential report for the AWS account. For more information about the credential report, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html\">Getting Credential Reports</a> in the <i>Using IAM</i> guide. </p>"
     },
+    "GetAccountAuthorizationDetails":{
+      "name":"GetAccountAuthorizationDetails",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetAccountAuthorizationDetailsRequest"},
+      "output":{
+        "shape":"GetAccountAuthorizationDetailsResponse",
+        "documentation":"<p>Contains the result of a successful invocation of the <a>GetAccountAuthorizationDetails</a> action.</p>",
+        "resultWrapper":"GetAccountAuthorizationDetailsResult"
+      },
+      "documentation":"<p>Retrieves information about all IAM users, groups, and roles in your account, including their relationships to one another and their attached policies. Use this API to obtain a snapshot of the configuration of IAM permissions (users, groups, roles, and policies) in your account.</p> <p>You can optionally filter the results using the <code>Filter</code> parameter. You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters.</p>"
+    },
     "GetAccountPasswordPolicy":{
       "name":"GetAccountPasswordPolicy",
       "http":{
@@ -3522,6 +3536,14 @@
       "exception":true,
       "documentation":"<p> The request was rejected because it referenced an entity that is temporarily unmodifiable, such as a user name that was deleted and then recreated. The error indicates that the request is likely to succeed if you try again after waiting several minutes. The error message describes the entity. </p>"
     },
+    "EntityType":{
+      "type":"string",
+      "enum":[
+        "User",
+        "Role",
+        "Group"
+      ]
+    },
     "GenerateCredentialReportResponse":{
       "type":"structure",
       "members":{
@@ -3535,6 +3557,49 @@
         }
       },
       "documentation":"<p>Contains the result of a successful invocation of the <a>GenerateCredentialReport</a> action.</p>"
+    },
+    "GetAccountAuthorizationDetailsRequest":{
+      "type":"structure",
+      "members":{
+        "Filter":{
+          "shape":"entityListType",
+          "documentation":"<p>A list of entity types (user, group, or role) for filtering the results.</p>"
+        },
+        "MaxItems":{
+          "shape":"maxItemsType",
+          "documentation":"<p>Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the <code>IsTruncated</code> response element is <code>true</code>. This parameter is optional. If you do not include it, it defaults to 100.</p>"
+        },
+        "Marker":{
+          "shape":"markerType",
+          "documentation":"<p>Use this only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the <code>Marker</code> element in the response you just received.</p>"
+        }
+      }
+    },
+    "GetAccountAuthorizationDetailsResponse":{
+      "type":"structure",
+      "members":{
+        "UserDetailList":{
+          "shape":"userDetailListType",
+          "documentation":"<p>A list containing information about IAM users.</p>"
+        },
+        "GroupDetailList":{
+          "shape":"groupDetailListType",
+          "documentation":"<p>A list containing information about IAM groups.</p>"
+        },
+        "RoleDetailList":{
+          "shape":"roleDetailListType",
+          "documentation":"<p>A list containing information about IAM roles.</p>"
+        },
+        "IsTruncated":{
+          "shape":"booleanType",
+          "documentation":"<p>A flag that indicates whether there are more items to return. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+        },
+        "Marker":{
+          "shape":"markerType",
+          "documentation":"<p>If <code>IsTruncated</code> is <code>true</code>, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>"
+        }
+      },
+      "documentation":"<p>Contains the result of a successful invocation of the <a>GetAccountAuthorizationDetails</a> action.</p>"
     },
     "GetAccountPasswordPolicyResponse":{
       "type":"structure",
@@ -3567,7 +3632,7 @@
         },
         "GeneratedTime":{
           "shape":"dateType",
-          "documentation":"<p> The time and date when the credential report was created, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time format</a>. </p>"
+          "documentation":"<p> The date and time when the credential report was created, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time format</a>. </p>"
         }
       },
       "documentation":"<p>Contains the result of a successful invocation of the <a>GetCredentialReport</a> action.</p>"
@@ -3916,7 +3981,7 @@
         },
         "GroupName":{
           "shape":"groupNameType",
-          "documentation":"<p>The name that identifies the group.</p>"
+          "documentation":"<p>The friendly name that identifies the group.</p>"
         },
         "GroupId":{
           "shape":"idType",
@@ -3928,10 +3993,37 @@
         },
         "CreateDate":{
           "shape":"dateType",
-          "documentation":"<p>The date when the group was created.</p>"
+          "documentation":"<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time format</a>, when the group was created.</p>"
         }
       },
       "documentation":"<p>Contains information about an IAM group entity.</p> <p> This data type is used as a response element in the following actions:</p> <ul> <li><a>CreateGroup</a></li> <li><a>GetGroup</a></li> <li><a>ListGroups</a></li> </ul>"
+    },
+    "GroupDetail":{
+      "type":"structure",
+      "members":{
+        "Path":{
+          "shape":"pathType",
+          "documentation":"<p>The path to the group. For more information about paths, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide.</p>"
+        },
+        "GroupName":{
+          "shape":"groupNameType",
+          "documentation":"<p>The friendly name that identifies the group.</p>"
+        },
+        "GroupId":{
+          "shape":"idType",
+          "documentation":"<p>The stable and unique string identifying the group. For more information about IDs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide.</p>"
+        },
+        "Arn":{"shape":"arnType"},
+        "CreateDate":{
+          "shape":"dateType",
+          "documentation":"<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time format</a>, when the group was created.</p>"
+        },
+        "GroupPolicyList":{
+          "shape":"policyDetailListType",
+          "documentation":"<p>A list of the policies attached to the group.</p>"
+        }
+      },
+      "documentation":"<p>Contains information about an IAM group, including all of the policies attached to the group. </p> <p>The data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p>"
     },
     "InstanceProfile":{
       "type":"structure",
@@ -4781,6 +4873,20 @@
       "exception":true,
       "documentation":"<p> The request was rejected because the provided password did not meet the requirements imposed by the account password policy. </p>"
     },
+    "PolicyDetail":{
+      "type":"structure",
+      "members":{
+        "PolicyName":{
+          "shape":"policyNameType",
+          "documentation":"<p>The name of the policy.</p>"
+        },
+        "PolicyDocument":{
+          "shape":"policyDocumentType",
+          "documentation":"<p>The policy document.</p> <p>The returned policy is URL-encoded according to <a href=\"http://www.faqs.org/rfcs/rfc3986.html\">RFC 3986</a>. </p>"
+        }
+      },
+      "documentation":"<p>Contains information about an IAM policy, including the policy document.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p>"
+    },
     "PutGroupPolicyRequest":{
       "type":"structure",
       "required":[
@@ -4955,7 +5061,7 @@
         },
         "RoleName":{
           "shape":"roleNameType",
-          "documentation":"<p>The name that identifies the role.</p>"
+          "documentation":"<p>The friendly name that identifies the role.</p>"
         },
         "RoleId":{
           "shape":"idType",
@@ -4967,14 +5073,46 @@
         },
         "CreateDate":{
           "shape":"dateType",
-          "documentation":"<p>The date when the role was created.</p>"
+          "documentation":"<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time format</a>, when the role was created.</p>"
         },
         "AssumeRolePolicyDocument":{
           "shape":"policyDocumentType",
-          "documentation":"<p>The policy that grants an entity permission to assume the role.</p> <p> The returned policy is URL-encoded according to RFC 3986. For more information about RFC 3986, go to <a href=\"http://www.faqs.org/rfcs/rfc3986.html\">http://www.faqs.org/rfcs/rfc3986.html</a>. </p>"
+          "documentation":"<p>The policy that grants an entity permission to assume the role.</p> <p> The returned policy is URL-encoded according to <a href=\"http://www.faqs.org/rfcs/rfc3986.html\">RFC 3986</a>. </p>"
         }
       },
       "documentation":"<p>Contains information about an IAM role.</p> <p> This data type is used as a response element in the following actions:</p> <ul> <li><p><a>CreateRole</a></p></li> <li><p><a>GetRole</a></p></li> <li><p><a>ListRoles</a></p></li> </ul>"
+    },
+    "RoleDetail":{
+      "type":"structure",
+      "members":{
+        "Path":{
+          "shape":"pathType",
+          "documentation":"<p>The path to the role. For more information about paths, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide.</p>"
+        },
+        "RoleName":{
+          "shape":"roleNameType",
+          "documentation":"<p>The friendly name that identifies the role.</p>"
+        },
+        "RoleId":{
+          "shape":"idType",
+          "documentation":"<p>The stable and unique string identifying the role. For more information about IDs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide.</p>"
+        },
+        "Arn":{"shape":"arnType"},
+        "CreateDate":{
+          "shape":"dateType",
+          "documentation":"<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time format</a>, when the role was created.</p>"
+        },
+        "AssumeRolePolicyDocument":{
+          "shape":"policyDocumentType",
+          "documentation":"<p>The trust policy that grants an entity permission to assume the role.</p> <p> The returned policy is URL-encoded according to <a href=\"http://www.faqs.org/rfcs/rfc3986.html\">RFC 3986</a>. </p>"
+        },
+        "InstanceProfileList":{"shape":"instanceProfileListType"},
+        "RolePolicyList":{
+          "shape":"policyDetailListType",
+          "documentation":"<p>A list of the access (permissions) policies attached to the role. </p>"
+        }
+      },
+      "documentation":"<p>Contains information about an IAM role, including all of the access policies attached to the role.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p>"
     },
     "SAMLMetadataDocumentType":{
       "type":"string",
@@ -5417,6 +5555,37 @@
       },
       "documentation":"<p>Contains information about an IAM user entity.</p> <p> This data type is used as a response element in the following actions:</p> <ul> <li><p><a>CreateUser</a></p></li> <li><p><a>GetUser</a></p></li> <li><p><a>ListUsers</a></p></li> </ul>"
     },
+    "UserDetail":{
+      "type":"structure",
+      "members":{
+        "Path":{
+          "shape":"pathType",
+          "documentation":"<p>The path to the user. For more information about paths, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide.</p>"
+        },
+        "UserName":{
+          "shape":"userNameType",
+          "documentation":"<p>The friendly name identifying the user.</p>"
+        },
+        "UserId":{
+          "shape":"idType",
+          "documentation":"<p>The stable and unique string identifying the user. For more information about IDs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide.</p>"
+        },
+        "Arn":{"shape":"arnType"},
+        "CreateDate":{
+          "shape":"dateType",
+          "documentation":"<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time format</a>, when the user was created.</p>"
+        },
+        "UserPolicyList":{
+          "shape":"policyDetailListType",
+          "documentation":"<p>A list of the policies attached to the user.</p>"
+        },
+        "GroupList":{
+          "shape":"groupNameListType",
+          "documentation":"<p>A list of the IAM groups that the user is in.</p>"
+        }
+      },
+      "documentation":"<p>Contains information about an IAM user, including all the policies attached to the user and all the IAM groups the user is in.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p>"
+    },
     "VirtualMFADevice":{
       "type":"structure",
       "required":["SerialNumber"],
@@ -5470,7 +5639,7 @@
       "type":"string",
       "min":20,
       "max":2048,
-      "documentation":"<p>An Amazon Resource Name (ARN) for an IAM OpenID Connect provider. The ARNs are in the following format (strings in ALL-CAPS are replaceable):</p> <p><code>arn:aws:iam::ACCOUNT-ID:oidc/PROVIDER-URL-WITHOUT-HTTPS://</code></p> <p>The following example shows an ARN that might be returned by <a>CreateOpenIDConnectProvider</a>:</p> <p><code>arn:aws:iam::123456789012:oidc/server.example.com</code></p>"
+      "documentation":"<p>The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources. </p> <p>For more information about ARNs, go to <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>. </p>"
     },
     "assignmentStatusType":{
       "type":"string",
@@ -5530,6 +5699,10 @@
     "deleteConflictMessage":{"type":"string"},
     "duplicateCertificateMessage":{"type":"string"},
     "entityAlreadyExistsMessage":{"type":"string"},
+    "entityListType":{
+      "type":"list",
+      "member":{"shape":"EntityType"}
+    },
     "entityTemporarilyUnmodifiableMessage":{"type":"string"},
     "existingUserNameType":{
       "type":"string",
@@ -5537,10 +5710,18 @@
       "max":128,
       "pattern":"[\\w+=,.@-]*"
     },
+    "groupDetailListType":{
+      "type":"list",
+      "member":{"shape":"GroupDetail"}
+    },
     "groupListType":{
       "type":"list",
       "member":{"shape":"Group"},
       "documentation":"<p>Contains a list of IAM groups.</p> <p>This data type is used as a response element in the <a>ListGroups</a> action.</p>"
+    },
+    "groupNameListType":{
+      "type":"list",
+      "member":{"shape":"groupNameType"}
     },
     "groupNameType":{
       "type":"string",
@@ -5557,7 +5738,7 @@
     "instanceProfileListType":{
       "type":"list",
       "member":{"shape":"InstanceProfile"},
-      "documentation":"<p>Contains a list of instance profiles.</p> <p> This data type is used as a response element in the <a>ListInstanceProfiles</a> and <a>ListInstanceProfilesForRole</a> actions. </p>"
+      "documentation":"<p>Contains a list of instance profiles.</p>"
     },
     "instanceProfileNameType":{
       "type":"string",
@@ -5627,6 +5808,10 @@
       "max":512,
       "pattern":"(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)"
     },
+    "policyDetailListType":{
+      "type":"list",
+      "member":{"shape":"PolicyDetail"}
+    },
     "policyDocumentType":{
       "type":"string",
       "min":1,
@@ -5650,6 +5835,10 @@
       "max":16384,
       "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u00FF]*",
       "sensitive":true
+    },
+    "roleDetailListType":{
+      "type":"list",
+      "member":{"shape":"RoleDetail"}
     },
     "roleListType":{
       "type":"list",
@@ -5720,6 +5909,10 @@
       "min":40,
       "max":40,
       "documentation":"<p>Contains a thumbprint for an identity provider's server certificate.</p> <p>The identity provider's server certificate thumbprint is the hex-encoded SHA-1 hash value of the self-signed X.509 certificate used by the domain where the OpenID Connect provider makes its keys available. It is always a 40-character string. </p>"
+    },
+    "userDetailListType":{
+      "type":"list",
+      "member":{"shape":"UserDetail"}
     },
     "userListType":{
       "type":"list",

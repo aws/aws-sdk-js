@@ -1,7 +1,7 @@
 {
     "name": "aws-sdk",
     "description": "AWS SDK for JavaScript",
-    "version": "2.0.29",
+    "version": "2.1.5",
     "author": {
       "name":"Amazon Web Services",
       "email":"",
@@ -59,7 +59,7 @@
     ],
     "scripts" : {
       "test" : "npm -s run-script lint && npm -s run-script unit && npm -s run-script buildertest && npm -s run-script browsertest && ([ -f configuration ] && npm -s run-script integration || true)",
-      "unit" : "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'` -- test test/json test/model test/protocol test/query test/services test/signers test/xml",
+      "unit" : "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'` -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3",
       "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test test/json test/model test/protocol test/query test/services test/signers test/xml",
       "browsertest": "rake browser:test",
       "buildertest": "mocha --compilers coffee:coffee-script -s 1000 -t 10000 dist-tools/test",

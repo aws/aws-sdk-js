@@ -84,7 +84,8 @@ integrationTests ->
       done()
 
   describe 'AWS.S3', ->
-    testWrite = (done, body, compareFn) ->
+    testWrite = (done, body, compareFn, svc) ->
+      svc = svc || s3
       key = uniqueName('test')
       s3.putObject {Key: key, Body: body}, (err, data) ->
         noError(err)
@@ -98,6 +99,10 @@ integrationTests ->
 
     it 'GETs and PUTs objects to a bucket', (done) ->
       testWrite done, 'ƒoo'
+
+    it 'GETs and PUTs objects to a bucket with signature version 4', (done) ->
+      svc = new AWS.S3(AWS.util.merge({signatureVersion: 'v4'}, config.s3))
+      testWrite done, 'ƒoo', null, svc
 
     it 'writes typed array data (no phantomjs)', (done) ->
       testWrite done, new Uint8Array([2, 4, 8]), (data) ->
@@ -121,12 +126,23 @@ integrationTests ->
             noError(err)
             s3.deleteObject(Key: key).send(done)
 
+    describe 'upload()', ->
+      it 'supports blobs using upload() (no phantomjs)', (done) ->
+        key = uniqueName('test')
+        size = 100
+        u = s3.upload(Key: key, Body: new Blob([new Uint8Array(size)]))
+        u.send (err, data) ->
+          expect(err).not.to.exist
+          expect(typeof data.ETag).to.equal('string')
+          expect(typeof data.Location).to.equal('string')
+          done()
+
     describe 'progress events', ->
       it 'emits http(Upload|Download)Progress events (no phantomjs)', (done) ->
         data = []
         progress = []
         key = uniqueName('test')
-        body = new Blob([new Array(512 * 1024).join('x')])
+        body = new Blob([new Uint8Array(512 * 1024)])
         req = s3.putObject(Key: key, Body: body)
         req.on 'httpUploadProgress', (p) -> progress.push(p)
         req.send (err, data) ->

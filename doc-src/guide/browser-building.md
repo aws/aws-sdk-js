@@ -22,7 +22,7 @@ First, clone the repository from GitHub and cd into the directory:
 ```bash
 git clone git://github.com/aws/aws-sdk-js
 cd aws-sdk-js
-git checkout v2.0.29
+git checkout v2.1.5
 ```
 
 After you have cloned the repository, you need to download the dependency modules
@@ -81,8 +81,9 @@ command:
 node dist-tools/browser-builder.js dynamodb-2011-12-05,dynamodb-2012-08-10
 ```
 
-Available service identifiers and API versions can be found by looking at the
-file list in https://github.com/aws/aws-sdk-js/tree/master/lib/services/api
+The available service identifiers and API versions can be found by viewing the
+service-specific configuration files at:
+<https://github.com/aws/aws-sdk-js/tree/master/apis>.
 
 #### Building All Services
 
@@ -95,7 +96,7 @@ node dist-tools/browser-builder.js all > aws-sdk-full.js
 
 ### Building the SDK as a Dependency with Browserify
 
-The SDK can be built as library dependency to any application running
+The SDK can also be built as library dependency to any application running
 in the browser via [browserify](http://browserify.org). Consider the following
 small Node.js application (`index.js`) that uses the SDK:
 

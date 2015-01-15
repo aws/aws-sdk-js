@@ -38,6 +38,21 @@ if AWS.util.isNode()
           expect(data.Token).to.equal('TOKEN')
           done()
 
+
+      it 'should load credentials from metadata service', (done) ->
+        concurrency = countdown = 10
+        for x in [1..concurrency]
+          service.loadCredentials (err, data) ->
+            expect(err).to.equal(null)
+            expect(data.Code).to.equal('Success')
+            expect(data.AccessKeyId).to.equal('KEY')
+            expect(data.SecretAccessKey).to.equal('SECRET')
+            expect(data.Token).to.equal('TOKEN')
+            countdown--
+            if countdown == 0
+              done()
+
+
       it 'should fail if server is not up', (done) ->
         server.close(); server = null
         service = new AWS.MetadataService(host: '255.255.255.255')

@@ -81,6 +81,16 @@ describe 'AWS.Protocol.Rest', ->
         input.members.Id = location: 'querystring', locationName: 'id-param'
         expect(build().httpRequest.path).to.equal('/path?id-param=abc')
 
+      it 'performs querystring param replacements on lists', ->
+        request.params = Id: ['abc', 'def', 'ghi']
+        defop input: input, http: requestUri: '/path'
+        input.members.Id =
+          type: 'list'
+          location: 'querystring'
+          locationName: 'a'
+          member: type: 'string'
+        expect(build().httpRequest.path).to.equal('/path?a=abc&a=def&a=ghi')
+
       it 'omits querystring when param is not provided', ->
         defop input: input, http: requestUri: '/path'
         input.members.Id = location: 'querystring', locationName: 'id-param'

@@ -5,7 +5,7 @@ var path = require('path');
 var AWS = require('../');
 var apis = require('../lib/api_loader');
 
-var defaultServices = 'cloudwatch,cognitoidentity,cognitosync,dynamodb,kinesis,elastictranscoder,s3,sqs,sns,sts';
+var defaultServices = 'cloudwatch,cognitoidentity,cognitosync,dynamodb,kinesis,elastictranscoder,lambda,s3,sqs,sns,sts';
 var sanitizeRegex = /[^a-zA-Z0-9,-]/;
 
 var serviceClasses = {};
@@ -17,8 +17,8 @@ Object.keys(AWS).forEach(function(name) {
 
 function getServiceHeader(service) {
   if (service === 'all') {
-    return Object.keys(serviceClasses).map(function(service) {
-      return getServiceHeader(service);
+    return Object.keys(serviceClasses).map(function(name) {
+      return getServiceHeader(name);
     }).join('\n');
   }
 
@@ -41,10 +41,10 @@ function getServiceHeader(service) {
 
 function getService(service, version) {
   if (service === 'all') {
-    return Object.keys(serviceClasses).map(function(service) {
-      var out = serviceClasses[service].apiVersions.map(function(version) {
-        if (version.indexOf('*') >= 0) return null;
-        return getService(service, version);
+    return Object.keys(serviceClasses).map(function(name) {
+      var out = serviceClasses[name].apiVersions.map(function(svcVersion) {
+        if (svcVersion.indexOf('*') >= 0) return null;
+        return getService(name, svcVersion);
       }).filter(function(c) { return c !== null; }).join('\n');
 
       return out;
@@ -114,9 +114,9 @@ function ServiceCollector(services) {
   }
 
   var serviceCode = '';
-  var usingDefaultServices = false;
+  var usingDefaultServicesToggle = false;
   if (!services) {
-    usingDefaultServices = true;
+    usingDefaultServicesToggle = true;
     services = defaultServices;
   }
   if (services.match(sanitizeRegex)) {
@@ -128,7 +128,7 @@ function ServiceCollector(services) {
   services.split(',').sort().forEach(function(name) {
     if (name.match(/^sts\b/) || name === 'all') stsIncluded = true;
     try {
-      serviceCode += buildService(name, usingDefaultServices) + '\n';
+      serviceCode += buildService(name, usingDefaultServicesToggle) + '\n';
     } catch (e) {
       if (e.name === 'InvalidModuleError') invalidModules.push(name);
       else throw e;

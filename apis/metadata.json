@@ -9,6 +9,9 @@
     "name": "CloudFront",
     "versions": ["2013-05-12*", "2013-11-11*", "2014-05-31*"]
   },
+  "cloudhsm": {
+    "name": "CloudHSM"
+  },
   "cloudsearch": {
     "name": "CloudSearch"
   },
@@ -54,6 +57,9 @@
     "name": "EC2",
     "versions": ["2013-06-15*", "2013-10-15*", "2014-02-01*", "2014-05-01*", "2014-06-15*", "2014-09-01*"]
   },
+  "ecs": {
+    "name": "ECS"
+  },
   "elasticache": {
     "name": "ElastiCache",
     "versions": ["2012-11-15*", "2014-03-24*", "2014-07-15*"]
@@ -94,7 +100,8 @@
     "name": "OpsWorks"
   },
   "rds": {
-    "name": "RDS"
+    "name": "RDS",
+    "versions": ["2014-09-01*"]
   },
   "redshift": {
     "name": "Redshift"

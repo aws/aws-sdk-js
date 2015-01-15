@@ -57,7 +57,7 @@ describe 'AWS.util.queryParamsToString', ->
     expect(spy.calls.length).to.equal(6)
 
   it 'handles values as lists', ->
-    expect(qpts(a: ['1', '2', '3'], b: '4')).to.equal('a=1&a=2&a=3&b=4')
+    expect(qpts(a: ['c', 'b', 'a'], b: '4')).to.equal('a=a&a=b&a=c&b=4')
 
   it 'escapes list values', ->
     expect(qpts(a: ['+', '&', '*'], b: '4')).to.equal('a=%26&a=%2A&a=%2B&b=4')
@@ -277,6 +277,21 @@ describe 'AWS.util.crypto', ->
         tr.push(new AWS.util.Buffer(input))
         tr.end()
         util.sha256 tr, 'hex', (e, d) ->
+          expect(d).to.equal(result)
+          done()
+
+    if AWS.util.isBrowser()
+      it 'handles Blobs (no phantomjs)', (done) ->
+        result = 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'
+        util.sha256 new Blob([1,2,3]), 'hex', (e, d) ->
+          expect(e).to.eql(null)
+          expect(d).to.equal(result)
+          done()
+
+      it 'handles Uint8Array objects directly', (done) ->
+        result = '039058c6f2c0cb492c533b0a4d14ef77cc0f78abccced5287d84a1a2011cfb81'
+        util.sha256 new Uint8Array([1,2,3]), 'hex', (e, d) ->
+          expect(e).to.eql(null)
           expect(d).to.equal(result)
           done()
 

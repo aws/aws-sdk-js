@@ -21,7 +21,6 @@ describe 'AWS.EC2', ->
       ec2.copySnapshot params, ->
         parts = @request.httpRequest.body.split('&').sort()
         [
-          'AWSAccessKeyId=akid',
           'Action=CopySnapshot',
           'DestinationRegion=mock-region',
           'PresignedUrl=https%3A%2F%2Fec2.src-region.amazonaws.com%2F%3F' +
@@ -42,8 +41,6 @@ describe 'AWS.EC2', ->
       req = ec2.describeTags(Filters: [{Name: 'filter', Values: ['v1', 'v2']}])
       req.build()
       expect(req.httpRequest.params).to.eql
-        AWSAccessKeyId: 'akid'
-        SecurityToken: 'session'
         Action: 'DescribeTags'
         Version: ec2.api.apiVersion
         'Filter.1.Name': 'filter'
