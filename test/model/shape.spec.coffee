@@ -2,6 +2,13 @@ helpers = require('../helpers')
 AWS = helpers.AWS
 
 describe 'AWS.Model.Shape', ->
+
+  describe 'Traits', ->
+    it 'inherits streaming trait', ->
+      api = new AWS.Model.Api shapes: S1: { 'type': 'blob', 'streaming': true }
+      shape = AWS.Model.Shape.create { members: { body: { shape: 'S1' } } }, { api: api }
+      expect(shape.members.body.isStreaming).to.eql(true)
+
   describe 'TimestampShape', ->
     describe 'toType()', ->
       it 'converts unix timestamps', ->
