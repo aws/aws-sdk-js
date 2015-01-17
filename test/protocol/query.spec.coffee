@@ -189,3 +189,16 @@ describe 'AWS.Protocol.Query', ->
       """
       expect(response.error).to.equal(null)
       expect(response.data).to.eql({Data:{Name:'abc',Count:12345.5}})
+
+    it 'extracts requestId from the response', ->
+      extractData """
+      <xml>
+        <requestId>12345-abcde</requestId>
+        <Data>
+          <Name>abc</Name>
+          <Count>123</Count>
+        </Data>
+      </xml>
+      """
+      expect(response.requestId).to.equal('12345-abcde')
+      expect(response.data).to.eql({Data:{Name:'abc',Count:123}})
