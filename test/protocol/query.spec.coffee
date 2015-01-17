@@ -166,14 +166,14 @@ describe 'AWS.Protocol.Query', ->
       delete service.api.operations.operationName.output
       extractData """
       <xml>
-        <Data>
-          <Name>abc</Name>
-          <Count>123</Count>
-        </Data>
+        <data>
+          <name>abc</name>
+          <count>123</count>
+        </data>
       </xml>
       """
       expect(response.error).to.equal(null)
-      expect(response.data).to.eql({Data:{Name:'abc',Count:'123'}})
+      expect(response.data).to.eql({data:{name:'abc',count:'123'}})
 
     it 'removes wrapping result element if resultWrapper is set', ->
       service.api.operations.operationName.output.resultWrapper = 'OperationNameResult'
@@ -202,3 +202,31 @@ describe 'AWS.Protocol.Query', ->
       """
       expect(response.requestId).to.equal('12345-abcde')
       expect(response.data).to.eql({Data:{Name:'abc',Count:123}})
+
+    it 'extracts requestId even if output members are absent', ->
+      delete service.api.operations.operationName.output
+      extractData """
+      <xml>
+        <requestId>12345-abcde</requestId>
+      </xml>
+      """
+      expect(response.requestId).to.equal('12345-abcde')
+      expect(response.data).to.eql({})
+
+    it 'retains data.RequestId if RequestId is a modeled output', ->
+      shape = AWS.Model.Shape.create(
+        { type: 'string' },
+        { api: {protocol: 'query'}},
+        'requestId')
+      service.api.operations.operationName.output.members.RequestId = shape
+      extractData """
+      <xml>
+        <requestId>12345-abcde</requestId>
+        <Data>
+          <Name>abc</Name>
+          <Count>123</Count>
+        </Data>
+      </xml>
+      """
+      expect(response.requestId).to.equal('12345-abcde')
+      expect(response.data).to.eql({Data:{Name:'abc',Count:123},RequestId:'12345-abcde'})
