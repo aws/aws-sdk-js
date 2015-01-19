@@ -211,22 +211,40 @@ describe 'AWS.Protocol.Query', ->
       </xml>
       """
       expect(response.requestId).to.equal('12345-abcde')
-      expect(response.data).to.eql({})
+      expect(response.data).to.eql({requestId: '12345-abcde'})
 
-    it 'retains data.RequestId if RequestId is a modeled output', ->
+    it 'does not override RequestId if it is modeled', ->
       shape = AWS.Model.Shape.create(
         { type: 'string' },
         { api: {protocol: 'query'}},
-        'requestId')
+        'foo')
       service.api.operations.operationName.output.members.RequestId = shape
       extractData """
       <xml>
         <requestId>12345-abcde</requestId>
+        <foo>foo-bar</foo>
         <Data>
           <Name>abc</Name>
           <Count>123</Count>
         </Data>
       </xml>
       """
-      expect(response.requestId).to.equal('12345-abcde')
-      expect(response.data).to.eql({Data:{Name:'abc',Count:123},RequestId:'12345-abcde'})
+      expect(response.data).to.eql({Data:{Name:'abc',Count:123},RequestId:'foo-bar'})
+
+    it 'does not override requestId if it is modeled', ->
+      shape = AWS.Model.Shape.create(
+        { type: 'string' },
+        { api: {protocol: 'query'}},
+        'foo')
+      service.api.operations.operationName.output.members.requestId = shape
+      extractData """
+      <xml>
+        <requestId>12345-abcde</requestId>
+        <foo>foo-bar</foo>
+        <Data>
+          <Name>abc</Name>
+          <Count>123</Count>
+        </Data>
+      </xml>
+      """
+      expect(response.data).to.eql({Data:{Name:'abc',Count:123},requestId:'foo-bar'})
