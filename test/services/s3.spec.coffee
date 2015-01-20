@@ -238,7 +238,7 @@ describe 'AWS.S3', ->
       expect(req.httpRequest.headers['x-amz-server-side-encryption-customer-key']).
         to.equal('S0VZ')
       expect(req.httpRequest.headers['x-amz-server-side-encryption-customer-key-MD5']).
-        to.equal('TzFsSjRNSnJoM1o2UjFLaWR0NlZjQT09')
+        to.equal('O1lJ4MJrh3Z6R1Kidt6VcA==')
 
     it 'encodes CopySourceSSECustomerKey and fills in MD5', ->
       req = s3.copyObject
@@ -248,7 +248,7 @@ describe 'AWS.S3', ->
       expect(req.httpRequest.headers['x-amz-copy-source-server-side-encryption-customer-key']).
         to.equal('S0VZ')
       expect(req.httpRequest.headers['x-amz-copy-source-server-side-encryption-customer-key-MD5']).
-        to.equal('TzFsSjRNSnJoM1o2UjFLaWR0NlZjQT09')
+        to.equal('O1lJ4MJrh3Z6R1Kidt6VcA==')
 
   describe 'retry behavior', ->
     it 'retries RequestTimeout errors', ->
