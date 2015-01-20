@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.1.6
+// AWS SDK for JavaScript v2.1.7
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -25,7 +25,7 @@ AWS.apiLoader.services['cognitoidentity'] = {};
 AWS.CognitoIdentity = AWS.Service.defineService('cognitoidentity', [ '2014-06-30' ]);
 require('./services/cognitoidentity');
 
-AWS.apiLoader.services['cognitoidentity']['2014-06-30'] = {"metadata":{"apiVersion":"2014-06-30","endpointPrefix":"cognito-identity","jsonVersion":"1.1","serviceFullName":"Amazon Cognito Identity","signatureVersion":"v4","targetPrefix":"AWSCognitoIdentityService","protocol":"json"},"operations":{"CreateIdentityPool":{"input":{"type":"structure","required":["IdentityPoolName","AllowUnauthenticatedIdentities"],"members":{"IdentityPoolName":{},"AllowUnauthenticatedIdentities":{"type":"boolean"},"SupportedLoginProviders":{"shape":"S4"},"DeveloperProviderName":{},"OpenIdConnectProviderARNs":{"shape":"S8"}}},"output":{"shape":"Sa"},"http":{}},"DeleteIdentityPool":{"input":{"type":"structure","required":["IdentityPoolId"],"members":{"IdentityPoolId":{}}},"http":{}},"DescribeIdentityPool":{"input":{"type":"structure","required":["IdentityPoolId"],"members":{"IdentityPoolId":{}}},"output":{"shape":"Sa"},"http":{}},"GetId":{"input":{"type":"structure","required":["AccountId","IdentityPoolId"],"members":{"AccountId":{},"IdentityPoolId":{},"Logins":{"shape":"Sg"}}},"output":{"type":"structure","members":{"IdentityId":{}}},"http":{}},"GetOpenIdToken":{"input":{"type":"structure","required":["IdentityId"],"members":{"IdentityId":{},"Logins":{"shape":"Sg"}}},"output":{"type":"structure","members":{"IdentityId":{},"Token":{}}},"http":{}},"GetOpenIdTokenForDeveloperIdentity":{"input":{"type":"structure","required":["IdentityPoolId","Logins"],"members":{"IdentityPoolId":{},"IdentityId":{},"Logins":{"shape":"Sg"},"TokenDuration":{"type":"long"}}},"output":{"type":"structure","members":{"IdentityId":{},"Token":{}}},"http":{}},"ListIdentities":{"input":{"type":"structure","required":["IdentityPoolId","MaxResults"],"members":{"IdentityPoolId":{},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"IdentityPoolId":{},"Identities":{"type":"list","member":{"type":"structure","members":{"IdentityId":{},"Logins":{"shape":"Sw"}}}},"NextToken":{}}},"http":{}},"ListIdentityPools":{"input":{"type":"structure","required":["MaxResults"],"members":{"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"IdentityPools":{"type":"list","member":{"type":"structure","members":{"IdentityPoolId":{},"IdentityPoolName":{}}}},"NextToken":{}}},"http":{}},"LookupDeveloperIdentity":{"input":{"type":"structure","required":["IdentityPoolId"],"members":{"IdentityPoolId":{},"IdentityId":{},"DeveloperUserIdentifier":{},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"IdentityId":{},"DeveloperUserIdentifierList":{"type":"list","member":{}},"NextToken":{}}},"http":{}},"MergeDeveloperIdentities":{"input":{"type":"structure","required":["SourceUserIdentifier","DestinationUserIdentifier","DeveloperProviderName","IdentityPoolId"],"members":{"SourceUserIdentifier":{},"DestinationUserIdentifier":{},"DeveloperProviderName":{},"IdentityPoolId":{}}},"output":{"type":"structure","members":{"IdentityId":{}}},"http":{}},"UnlinkDeveloperIdentity":{"input":{"type":"structure","required":["IdentityId","IdentityPoolId","DeveloperProviderName","DeveloperUserIdentifier"],"members":{"IdentityId":{},"IdentityPoolId":{},"DeveloperProviderName":{},"DeveloperUserIdentifier":{}}},"http":{}},"UnlinkIdentity":{"input":{"type":"structure","required":["IdentityId","Logins","LoginsToRemove"],"members":{"IdentityId":{},"Logins":{"shape":"Sg"},"LoginsToRemove":{"shape":"Sw"}}},"http":{}},"UpdateIdentityPool":{"input":{"shape":"Sa"},"output":{"shape":"Sa"},"http":{}}},"shapes":{"S4":{"type":"map","key":{},"value":{}},"S8":{"type":"list","member":{}},"Sa":{"type":"structure","required":["IdentityPoolId","IdentityPoolName","AllowUnauthenticatedIdentities"],"members":{"IdentityPoolId":{},"IdentityPoolName":{},"AllowUnauthenticatedIdentities":{"type":"boolean"},"SupportedLoginProviders":{"shape":"S4"},"DeveloperProviderName":{},"OpenIdConnectProviderARNs":{"shape":"S8"}}},"Sg":{"type":"map","key":{},"value":{}},"Sw":{"type":"list","member":{}}}};
+AWS.apiLoader.services['cognitoidentity']['2014-06-30'] = {"metadata":{"apiVersion":"2014-06-30","endpointPrefix":"cognito-identity","jsonVersion":"1.1","serviceFullName":"Amazon Cognito Identity","signatureVersion":"v4","targetPrefix":"AWSCognitoIdentityService","protocol":"json"},"operations":{"CreateIdentityPool":{"input":{"type":"structure","required":["IdentityPoolName","AllowUnauthenticatedIdentities"],"members":{"IdentityPoolName":{},"AllowUnauthenticatedIdentities":{"type":"boolean"},"SupportedLoginProviders":{"shape":"S4"},"DeveloperProviderName":{},"OpenIdConnectProviderARNs":{"shape":"S8"}}},"output":{"shape":"Sa"},"http":{}},"DeleteIdentityPool":{"input":{"type":"structure","required":["IdentityPoolId"],"members":{"IdentityPoolId":{}}},"http":{}},"DescribeIdentity":{"input":{"type":"structure","required":["IdentityId"],"members":{"IdentityId":{}}},"output":{"shape":"Sf"},"http":{}},"DescribeIdentityPool":{"input":{"type":"structure","required":["IdentityPoolId"],"members":{"IdentityPoolId":{}}},"output":{"shape":"Sa"},"http":{}},"GetCredentialsForIdentity":{"input":{"type":"structure","required":["IdentityId"],"members":{"IdentityId":{},"Logins":{"shape":"Sk"}}},"output":{"type":"structure","members":{"IdentityId":{},"Credentials":{"type":"structure","members":{"AccessKeyId":{},"SecretKey":{},"SessionToken":{},"Expiration":{"type":"timestamp"}}}}},"http":{}},"GetId":{"input":{"type":"structure","required":["IdentityPoolId"],"members":{"AccountId":{},"IdentityPoolId":{},"Logins":{"shape":"Sk"}}},"output":{"type":"structure","members":{"IdentityId":{}}},"http":{}},"GetIdentityPoolRoles":{"input":{"type":"structure","members":{"IdentityPoolId":{}}},"output":{"type":"structure","members":{"IdentityPoolId":{},"Roles":{"shape":"Sw"}}},"http":{}},"GetOpenIdToken":{"input":{"type":"structure","required":["IdentityId"],"members":{"IdentityId":{},"Logins":{"shape":"Sk"}}},"output":{"type":"structure","members":{"IdentityId":{},"Token":{}}},"http":{}},"GetOpenIdTokenForDeveloperIdentity":{"input":{"type":"structure","required":["IdentityPoolId","Logins"],"members":{"IdentityPoolId":{},"IdentityId":{},"Logins":{"shape":"Sk"},"TokenDuration":{"type":"long"}}},"output":{"type":"structure","members":{"IdentityId":{},"Token":{}}},"http":{}},"ListIdentities":{"input":{"type":"structure","required":["IdentityPoolId","MaxResults"],"members":{"IdentityPoolId":{},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"IdentityPoolId":{},"Identities":{"type":"list","member":{"shape":"Sf"}},"NextToken":{}}},"http":{}},"ListIdentityPools":{"input":{"type":"structure","required":["MaxResults"],"members":{"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"IdentityPools":{"type":"list","member":{"type":"structure","members":{"IdentityPoolId":{},"IdentityPoolName":{}}}},"NextToken":{}}},"http":{}},"LookupDeveloperIdentity":{"input":{"type":"structure","required":["IdentityPoolId"],"members":{"IdentityPoolId":{},"IdentityId":{},"DeveloperUserIdentifier":{},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"IdentityId":{},"DeveloperUserIdentifierList":{"type":"list","member":{}},"NextToken":{}}},"http":{}},"MergeDeveloperIdentities":{"input":{"type":"structure","required":["SourceUserIdentifier","DestinationUserIdentifier","DeveloperProviderName","IdentityPoolId"],"members":{"SourceUserIdentifier":{},"DestinationUserIdentifier":{},"DeveloperProviderName":{},"IdentityPoolId":{}}},"output":{"type":"structure","members":{"IdentityId":{}}},"http":{}},"SetIdentityPoolRoles":{"input":{"type":"structure","required":["IdentityPoolId","Roles"],"members":{"IdentityPoolId":{},"Roles":{"shape":"Sw"}}},"http":{}},"UnlinkDeveloperIdentity":{"input":{"type":"structure","required":["IdentityId","IdentityPoolId","DeveloperProviderName","DeveloperUserIdentifier"],"members":{"IdentityId":{},"IdentityPoolId":{},"DeveloperProviderName":{},"DeveloperUserIdentifier":{}}},"http":{}},"UnlinkIdentity":{"input":{"type":"structure","required":["IdentityId","Logins","LoginsToRemove"],"members":{"IdentityId":{},"Logins":{"shape":"Sk"},"LoginsToRemove":{"shape":"Sg"}}},"http":{}},"UpdateIdentityPool":{"input":{"shape":"Sa"},"output":{"shape":"Sa"},"http":{}}},"shapes":{"S4":{"type":"map","key":{},"value":{}},"S8":{"type":"list","member":{}},"Sa":{"type":"structure","required":["IdentityPoolId","IdentityPoolName","AllowUnauthenticatedIdentities"],"members":{"IdentityPoolId":{},"IdentityPoolName":{},"AllowUnauthenticatedIdentities":{"type":"boolean"},"SupportedLoginProviders":{"shape":"S4"},"DeveloperProviderName":{},"OpenIdConnectProviderARNs":{"shape":"S8"}}},"Sf":{"type":"structure","members":{"IdentityId":{},"Logins":{"shape":"Sg"},"CreationDate":{"type":"timestamp"},"LastModifiedDate":{"type":"timestamp"}}},"Sg":{"type":"list","member":{}},"Sk":{"type":"map","key":{},"value":{}},"Sw":{"type":"map","key":{},"value":{}}}};
 AWS.apiLoader.services['cognitosync'] = {};
 AWS.CognitoSync = AWS.Service.defineService('cognitosync', [ '2014-06-30' ]);
 
@@ -251,7 +251,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.1.6',
+  VERSION: '2.1.7',
 
 
   Signers: {},
@@ -952,8 +952,11 @@ AWS.EventListeners = {
 
   CorePost: new SequentialExecutor().addNamedListeners(function(add) {
     add('EXTRACT_REQUEST_ID', 'extractData', function EXTRACT_REQUEST_ID(resp) {
-      resp.requestId = resp.httpResponse.headers['x-amz-request-id'] ||
-                       resp.httpResponse.headers['x-amzn-requestid'];
+
+      if (!resp.requestId) {
+        resp.requestId = resp.httpResponse.headers['x-amz-request-id'] ||
+                          resp.httpResponse.headers['x-amzn-requestid'];
+      }
 
       if (!resp.requestId && resp.data && resp.data.ResponseMetadata) {
         resp.requestId = resp.data.ResponseMetadata.RequestId;
@@ -2188,6 +2191,7 @@ function extractError(resp) {
     data = new AWS.XML.Parser().parse(body);
   }
 
+  if (data.requestId && !resp.requestId) resp.requestId = data.requestId;
   if (data.Errors) data = data.Errors;
   if (data.Error) data = data.Error;
   if (data.Code) {
@@ -2218,7 +2222,20 @@ function extractData(resp) {
   }
 
   var parser = new AWS.XML.Parser();
+
+  if (shape && shape.members && !shape.members._XAMZRequestId) {
+    var requestIdShape = Shape.create(
+      { type: 'string' },
+      { api: { protocol: 'query' } },
+      'requestId'
+    );
+    shape.members._XAMZRequestId = requestIdShape;
+  }
+
   var data = parser.parse(resp.httpResponse.body.toString(), shape);
+  resp.requestId = data._XAMZRequestId || data.requestId;
+
+  if (data._XAMZRequestId) delete data._XAMZRequestId;
 
   if (origRules.resultWrapper) {
     if (data[origRules.resultWrapper]) {
@@ -3452,7 +3469,7 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     var self = this;
     var bodyLen = byteLength(self.body);
     while (self.activeParts < self.queueSize && self.partPos < bodyLen) {
-      var endPos = self.partPos + self.partSize;
+      var endPos = Math.min(self.partPos + self.partSize, bodyLen);
       var buf = self.sliceFn.call(self.body, self.partPos, endPos);
       self.partPos += self.partSize;
 
@@ -4423,7 +4440,7 @@ AWS.util.update(AWS.S3.prototype, {
         req.httpRequest.headers[header] = AWS.util.base64.encode(key);
         if (!req.httpRequest.headers[md5header]) {
           var value = AWS.util.crypto.md5(key, 'base64');
-          req.httpRequest.headers[md5header] = AWS.util.base64.encode(value);
+          req.httpRequest.headers[md5header] = value;
         }
 
       }
