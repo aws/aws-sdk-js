@@ -537,7 +537,30 @@ describe 'AWS.CognitoIdentityCredentials', ->
   describe 'refresh', ->
     beforeEach -> setupCreds()
 
-    it 'runs getId, getOpenIdToken, assumeRoleWithWebIdentity', ->
+    it 'runs getId, getCredentialsForIdentity when no role is passed in', ->
+      delete creds.cognito.config.params.RoleArn
+      helpers.mockResponses [
+        { data: { IdentityId: 'IDENTITY-ID1' }, error: null },
+        { data:
+            IdentityId: 'IDENTITY-ID2',
+            Credentials:
+              AccessKeyId: 'KEY',
+              SecretKey: 'SECRET',
+              SessionToken: 'TOKEN'
+          error: null }
+      ]
+      helpers.spyOn(creds.cognito, 'getCredentialsForIdentity').andCallThrough()
+      creds.refresh(->)
+      expect(creds.cognito.getCredentialsForIdentity.calls.length).to.eql(1);
+      expect(creds.identityId).to.equal('IDENTITY-ID2')
+      expect(creds.accessKeyId).to.equal('KEY')
+      expect(creds.secretAccessKey).to.equal('SECRET')
+      expect(creds.sessionToken).to.equal('TOKEN')
+      expect(creds.needsRefresh()).to.equal(false)
+      expect(creds.cacheId.calls.length).to.equal(1)
+
+
+    it 'runs getId, getOpenIdToken, assumeRoleWithWebIdentity when a role is passed in', ->
       helpers.mockResponses [
         {data: {IdentityId: 'IDENTITY-ID'}, error: null},
         {data: {Token: 'TOKEN', IdentityId: 'IDENTITY-ID2'}, error: null}
@@ -601,6 +624,16 @@ describe 'AWS.CognitoIdentityCredentials', ->
       expect(creds.cacheId.calls.length).to.equal(0)
       expect(creds.getStorage('id')).not.to.exist
 
+    it 'fails if getCredentialsForIdentity fails', ->
+      delete creds.cognito.config.params.RoleArn
+      helpers.mockResponses [
+        {data: {IdentityId: 'IDENTITY-ID'}, error: null},
+        {data: null, error: new Error('INVALID SERVICE')}
+      ]
+      creds.refresh (err) -> expect(err.message).to.equal('INVALID SERVICE')
+      expect(creds.cacheId.calls.length).to.equal(0)
+      expect(creds.getStorage('id')).not.to.exist
+
     it 'clears cache if getId fails', ->
       creds.setStorage('id', 'MYID')
       helpers.mockResponses [
@@ -619,6 +652,17 @@ describe 'AWS.CognitoIdentityCredentials', ->
         {data: null, error: new Error('INVALID SERVICE')}
       ]
       helpers.spyOn(creds.webIdentityCredentials, 'refresh').andCallFake(->)
+      creds.refresh (err) -> expect(err.message).to.equal('INVALID SERVICE')
+      expect(creds.cacheId.calls.length).to.equal(0)
+      expect(creds.getStorage('id')).not.to.exist
+
+    it 'clears cache if getCredentialsForIdentity fails', ->
+      delete creds.cognito.config.params.RoleArn
+      creds.setStorage('id', 'MYID')
+      helpers.mockResponses [
+        {data: {IdentityId: 'IDENTITY-ID'}, error: null},
+        {data: null, error: new Error('INVALID SERVICE')}
+      ]
       creds.refresh (err) -> expect(err.message).to.equal('INVALID SERVICE')
       expect(creds.cacheId.calls.length).to.equal(0)
       expect(creds.getStorage('id')).not.to.exist
