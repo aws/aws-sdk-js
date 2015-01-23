@@ -73,29 +73,30 @@ these identities are not credentials; instead, they are *exchanged* for
 credentials using [web identity federation support][wif] in [AWS Security
 Token Service][sts] (AWS STS).
 
-In short, Cognito helps to manage the
-abstraction of identities across multiple identity providers, and the SDK's
-`AWS.CognitoIdentityCredentials` object helps to manage the authentication
-flow of loading an identity and exchanging that identity token for
-credentials in STS.
+In short, Cognito helps to manage the abstraction of identities across
+multiple identity providers, and the SDK's `AWS.CognitoIdentityCredentials`
+object helps to manage the authentication flow of loading an identity and
+exchanging that identity token for credentials in STS.
 
 To read more about configuring an identity pool, see the
 [Cognito developer guide][cognito-devguide].
 
 ##### Configuring AWS.CognitoIdentityCredentials
 
-Once you have an identity pool configured with identity providers attached,
-you can use the [AWS.CognitoIdentityCredentials][ci-creds] object to
+Begin by creating a new identity pool using the
+[Amazon Cognito Console][cognito-console]. Make sure to create and associate
+an "authenticated" and "unauthenticated" IAM role with your identity pool. These are
+the roles that Cognito will use to grant access to your resources, so scope them
+appropriately. Once you have an identity pool configured with identity providers
+attached, you can use the [AWS.CognitoIdentityCredentials][ci-creds] object to
 authenticate users. To configure your credentials to use the
-CognitoIdentityCredentials object, simply set the `credentials` property
+`AWS.CognitoIdentityCredentials` object, simply set the `credentials` property
 of your config object (either globally or per-service) to be the following
 (using the global config):
 
 ```javascript
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-  AccountId: '1234567890',
   IdentityPoolId: 'us-east-1:1699ebc0-7900-4099-b910-2df94f52a030',
-  RoleArn: 'arn:aws:iam::1234567890:role/MYAPP-CognitoIdentity',
   Logins: { // optional tokens, used for authenticated login
     'graph.facebook.com': 'FBTOKEN',
     'www.amazon.com': 'AMAZONTOKEN',
@@ -114,9 +115,7 @@ the [Facebook SDK][fb-sdk] to get an identity provider token:
 FB.login(function (response) {
   if (response.authResponse) { // logged in
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-      AccountId: '1234567890',
       IdentityPoolId: 'us-east-1:1699ebc0-7900-4099-b910-2df94f52a030',
-      RoleArn: 'arn:aws:iam::1234567890:role/MYAPP-CognitoIdentity',
       Logins: {
         'graph.facebook.com': response.authResponse.accessToken
       }
@@ -144,36 +143,26 @@ if you want to display content to users prior to their logging in. Note that
 each unauthenticated user will also have a unique identity in Cognito.
 
 Users of your website would typically start in the "unauthenticated" role,
-which, using the above configuration, would simply omit a `Logins` property,
-and would set the `RoleArn` to the unauthenticated role in your configured
-IAM roles for the Cognito identity pool. In other words, your default
-configuration might look something like this:
+which, using the above configuration, would simply omit a `Logins` property.
+
+In other words, your default configuration might look something like this:
 
 ```javascript
 // set the default config object
 var creds = new AWS.CognitoIdentityCredentials({
- AccountId: '1234567890',
  IdentityPoolId: 'us-east-1:1699ebc0-7900-4099-b910-2df94f52a030'
- RoleArn: 'arn:aws:iam::1234567890:role/MYAPP-CognitoIdentity-GUEST',
 });
 AWS.config.credentials = creds;
 ```
 
-<p class="note">
-The "GUEST" suffix on our role ARN to indicate it is in the "unautheticated"
-role.
-</p>
-
 Now, once your user logs into an identity provider and you have a token, you
-can switch the role by simply updating the `RoleArn` parameter on the
-credentials object and adding the `Logins`:
+can switch the role by simply updating the credentials object and adding the
+`Logins` token:
 
 ```javascript
 // Called when an identity provider (providerName) has a token
 // for a logged in user.
 function userLoggedIn(providerName, token) {
-  // update RoleArn to authenticated role and set token
-  creds.params.RoleArn = 'arn:aws:iam::1234567890:role/MYAPP-CognitoIdentity-AUTH',
   creds.params.Logins = {};
   creds.params.Logins[providerName] = token;
 
