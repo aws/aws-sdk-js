@@ -200,6 +200,19 @@ describe 'AWS.util.ini', ->
       expect(map.section1.key2).to.equal('value2;value3')
       expect(map.emptysection).to.equal(undefined)
 
+    it 'ignores leading and trailing white space', ->
+      ini = '''
+      [section1] ; comment at end of line
+      \r\tkey1=\t\rvalue1\t\r
+      \v\f\tkey2=value2\f\v
+      \u00a0key3   =  \u00a0value3\u3000
+      [emptysection]
+      '''
+      map = AWS.util.ini.parse(ini)
+      expect(map.section1.key1).to.equal('value1')
+      expect(map.section1.key2).to.equal('value2')
+      expect(map.section1.key3).to.equal('value3')
+
 describe 'AWS.util.buffer', ->
   describe 'concat', ->
     it 'concatenates a list of buffers', ->
