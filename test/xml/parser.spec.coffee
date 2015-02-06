@@ -272,6 +272,22 @@ describe 'AWS.XML.Parser', ->
   describe 'maps', ->
 
     describe 'non-flattened', ->
+      it 'returns empty maps as {}', ->
+        xml = """
+        <xml>
+          <DomainMap/>
+        </xml>
+        """
+        rules =
+          type: 'structure'
+          members:
+            DomainMap:
+              type: 'map'
+              value:
+                type: 'string'
+        parse xml, rules, (data) ->
+          expect(data).to.eql(DomainMap: {})
+
       it 'expects entry, key, and value elements by default', ->
         # example from IAM GetAccountSummary (output)
         xml = """
