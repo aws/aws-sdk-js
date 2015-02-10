@@ -28,6 +28,12 @@ describe 'AWS.Protocol.RestJson', ->
             members:
               a: type: 'string'
               b: type: 'string'
+      shapes:
+        structureshape:
+          type: 'structure'
+          members:
+            a: type: 'string'
+            b: type: 'string'
 
     AWS.Service.defineMethods(MockJSONRESTService)
 
@@ -234,7 +240,7 @@ describe 'AWS.Protocol.RestJson', ->
       expect(response.error).to.equal(null)
       expect(response.data.Title).to.equal('The title')
 
-    it 'pulls body out into data key if body is payload', ->
+    it 'pulls body out into data key if body is a scalar payload', ->
       defop output:
         type: 'structure'
         payload: 'Body'
@@ -244,6 +250,18 @@ describe 'AWS.Protocol.RestJson', ->
       extractData 'foobar'
       expect(response.error).to.equal(null)
       expect(response.data.Body).to.equal('foobar')
+
+    it 'pulls body out into data key if body is a structure payload', ->
+      defop output:
+        type: 'structure'
+        payload: 'Body'
+        members:
+          Body:
+            shape: 'structureshape'
+
+      extractData '{"a": "foo", "b": "bar"}'
+      expect(response.error).to.equal(null)
+      expect(response.data.Body).to.eql({a: 'foo', b: 'bar'})
 
     it 'pulls body out as Buffer if body is streaming payload', ->
       defop output:
