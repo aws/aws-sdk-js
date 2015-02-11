@@ -78,6 +78,8 @@ outputCase = (svc, _case, i, done) ->
   for k, v of _case.result
     if k.match('Blob')
       expect(req.response.data[k].toString()).to.equal(v.toString())
+    else if k.match('Timestamp')
+      expect(req.response.data[k]).to.eql(AWS.util.date.parseTimestamp(v))
     else
       expect(req.response.data[k]).to.eql(v)
 
