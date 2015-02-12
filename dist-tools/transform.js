@@ -8,7 +8,7 @@ module.exports = function(file) {
     callback(null, data);
   };
 
-  if (file.match(/\/lib\/browser\.js$/)) {
+  if (file.match(/[\/\\]lib[\/\\]browser\.js$/)) {
     stream.push(license);
 
     var src = collector(process.env.AWS_SERVICES);
