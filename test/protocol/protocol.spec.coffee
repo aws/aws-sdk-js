@@ -75,14 +75,43 @@ outputCase = (svc, _case, i, done) ->
 
   req = svc[_case.op](_case.params)
   req.send()
-  for k, v of _case.result
-    if k.match('Blob')
-      expect(req.response.data[k].toString()).to.equal(v.toString())
-    else if k.match('Timestamp')
-      expect(req.response.data[k]).to.eql(AWS.util.date.parseTimestamp(v))
-    else
-      expect(req.response.data[k]).to.eql(v)
+  expectedData = formatData(_case.result, svc.api.operations[_case.op].output)
+  resultData = formatData(req.response.data, svc.api.operations[_case.op].output)
+  for k, v of expectedData 
+    expect(resultData[k]).to.eql(v)
+
+formatData = (data, shape) ->
+  if shape.type == 'structure'
+    params = {}
+    for key,value of data
+      member = shape.members[key]
+      if member
+        result = formatData(value, member)
+        if result != undefined
+          params[key] = result
+    return params
+  else if shape.type == 'list'
+    params = []
+    for item in data
+      result = formatData(shape.member, item)
+      if result != undefined
+        params.push result
+    return params
+  else if shape.type == 'map'
+    params = {}
+    for key of data
+      result = formatData(data[key], shape.value)
+      if result != undefined
+        params[key] = result
+    return params
+  else if shape.type == 'binary'
+    return data.toString()
+  else if shape.type == 'timestamp'
+    return shape.toType(data)
+  else 
+    return data
 
 describe 'AWS protocol support', ->
   tests 'ec2'
   tests 'query'
+  tests 'json'

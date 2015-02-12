@@ -43,5 +43,259 @@
         }
       }
     ]
+  },
+  {
+    "description": "Timestamp values",
+    "metadata": {
+      "protocol": "json",
+      "jsonVersion": 1.1,
+      "targetPrefix": "com.amazonaws.foo"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "TimeArg": {
+            "shape": "TimestampType"
+          }
+        }
+      },
+      "TimestampType": {
+        "type": "timestamp"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "TimeArg": 1422172800
+        },
+        "serialized": {
+          "body": "{\"TimeArg\": 1422172800}",
+          "headers": {
+            "X-Amz-Target": "com.amazonaws.foo.OperationName",
+            "Content-Type": "application/x-amz-json-1.1"
+          },
+          "uri": "/"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Recursive shapes",
+    "metadata": {
+      "protocol": "json",
+      "jsonVersion": 1.1,
+      "targetPrefix": "com.amazonaws.foo"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "RecursiveStruct": {
+            "shape": "RecursiveStructType"
+          }
+        }
+      },
+      "RecursiveStructType": {
+        "type": "structure",
+        "members": {
+          "NoRecurse": {
+            "shape": "StringType"
+          },
+          "RecursiveStruct": {
+            "shape": "RecursiveStructType"
+          },
+          "RecursiveList": {
+            "shape": "RecursiveListType"
+          },
+          "RecursiveMap": {
+            "shape": "RecursiveMapType"
+          }
+        }
+      },
+      "RecursiveListType": {
+        "type": "list",
+        "member": {
+          "shape": "RecursiveStructType"
+        }
+      },
+      "RecursiveMapType": {
+        "type": "map",
+        "key": {
+          "shape": "StringType"
+        },
+        "value": {
+          "shape": "RecursiveStructType"
+        }
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "RecursiveStruct": {
+            "NoRecurse": "foo"
+          }
+        },
+        "serialized": {
+          "uri": "/",
+          "headers": {
+            "X-Amz-Target": "com.amazonaws.foo.OperationName",
+            "Content-Type": "application/x-amz-json-1.1"
+          },
+          "body": "{\"RecursiveStruct\": {\"NoRecurse\": \"foo\"}}"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "RecursiveStruct": {
+            "RecursiveStruct": {
+              "NoRecurse": "foo"
+            }
+          }
+        },
+        "serialized": {
+          "uri": "/",
+          "headers": {
+            "X-Amz-Target": "com.amazonaws.foo.OperationName",
+            "Content-Type": "application/x-amz-json-1.1"
+          },
+          "body": "{\"RecursiveStruct\": {\"RecursiveStruct\": {\"NoRecurse\": \"foo\"}}}"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "RecursiveStruct": {
+            "RecursiveStruct": {
+              "RecursiveStruct": {
+                "RecursiveStruct": {
+                  "NoRecurse": "foo"
+                }
+              }
+            }
+          }
+        },
+        "serialized": {
+          "uri": "/",
+          "headers": {
+            "X-Amz-Target": "com.amazonaws.foo.OperationName",
+            "Content-Type": "application/x-amz-json-1.1"
+          },
+          "body": "{\"RecursiveStruct\": {\"RecursiveStruct\": {\"RecursiveStruct\": {\"RecursiveStruct\": {\"NoRecurse\": \"foo\"}}}}}"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "RecursiveStruct": {
+            "RecursiveList": [
+              {
+                "NoRecurse": "foo"
+              },
+              {
+                "NoRecurse": "bar"
+              }
+            ]
+          }
+        },
+        "serialized": {
+          "uri": "/",
+          "headers": {
+            "X-Amz-Target": "com.amazonaws.foo.OperationName",
+            "Content-Type": "application/x-amz-json-1.1"
+          },
+          "body": "{\"RecursiveStruct\": {\"RecursiveList\": [{\"NoRecurse\": \"foo\"}, {\"NoRecurse\": \"bar\"}]}}"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "RecursiveStruct": {
+            "RecursiveList": [
+              {
+                "NoRecurse": "foo"
+              },
+              {
+                "RecursiveStruct": {
+                  "NoRecurse": "bar"
+                }
+              }
+            ]
+          }
+        },
+        "serialized": {
+          "uri": "/",
+          "headers": {
+            "X-Amz-Target": "com.amazonaws.foo.OperationName",
+            "Content-Type": "application/x-amz-json-1.1"
+          },
+          "body": "{\"RecursiveStruct\": {\"RecursiveList\": [{\"NoRecurse\": \"foo\"}, {\"RecursiveStruct\": {\"NoRecurse\": \"bar\"}}]}}"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "RecursiveStruct": {
+            "RecursiveMap": {
+              "foo": {
+                "NoRecurse": "foo"
+              },
+              "bar": {
+                "NoRecurse": "bar"
+              }
+            }
+          }
+        },
+        "serialized": {
+          "uri": "/",
+          "headers": {
+            "X-Amz-Target": "com.amazonaws.foo.OperationName",
+            "Content-Type": "application/x-amz-json-1.1"
+          },
+          "body": "{\"RecursiveStruct\": {\"RecursiveMap\": {\"foo\": {\"NoRecurse\": \"foo\"}, \"bar\": {\"NoRecurse\": \"bar\"}}}}"
+        }
+      }
+    ]
   }
 ]
