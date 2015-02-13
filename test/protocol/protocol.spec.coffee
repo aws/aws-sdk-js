@@ -51,7 +51,8 @@ setupTests = (svcName, type) ->
                 outputCase(svc, _case, i)
 
 inputCase = (svc, _case, i, done) ->
-  req = svc[_case.op](_case.params)
+  params = formatData(_case.params, svc.api.operations[_case.op].input)
+  req = svc[_case.op](params)
   req.build()
 
   data = _case.serialized
@@ -60,14 +61,16 @@ inputCase = (svc, _case, i, done) ->
   if svc.api.protocol == 'query' or svc.api.protocol == 'ec2'
     expect(sortQS(req.httpRequest.body)).to.equal(sortQS(data.body))
   else if svc.api.protocol.match(/json/)
-    expect(req.httpRequest.body.replace(/\s+/g, '')).to.equal(
-      data.body.replace(/\s+/g, ''))
+    if req.httpRequest.body == '{}' then req.httpRequest.body = ''
+    expect(req.httpRequest.body.replace(/\s+/g, '')).to
+      .equal(data.body.replace(/\s+/g, ''))
   else
     expect(req.httpRequest.body).to.equal(data.body)
 
   if data.headers
     for k, v of data.headers
       expect(req.httpRequest.headers[k]).to.eql(v)
+
 
 outputCase = (svc, _case, i, done) ->
   resp = _case.response
@@ -77,7 +80,7 @@ outputCase = (svc, _case, i, done) ->
   req.send()
   expectedData = formatData(_case.result, svc.api.operations[_case.op].output)
   resultData = formatData(req.response.data, svc.api.operations[_case.op].output)
-  for k, v of expectedData 
+  for k, v of expectedData
     expect(resultData[k]).to.eql(v)
 
 formatData = (data, shape) ->
@@ -93,9 +96,9 @@ formatData = (data, shape) ->
   else if shape.type == 'list'
     params = []
     for item in data
-      result = formatData(shape.member, item)
+      result = formatData(item, shape.member)
       if result != undefined
-        params.push result
+        params.push(result)
     return params
   else if shape.type == 'map'
     params = {}
@@ -108,10 +111,12 @@ formatData = (data, shape) ->
     return data.toString()
   else if shape.type == 'timestamp'
     return shape.toType(data)
-  else 
+  else
     return data
 
+   
 describe 'AWS protocol support', ->
   tests 'ec2'
   tests 'query'
   tests 'json'
+  tests 'rest-json'
