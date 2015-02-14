@@ -111,6 +111,12 @@ formatData = (data, shape) ->
     return data.toString()
   else if shape.type == 'timestamp'
     return shape.toType(data)
+  else if shape.type == 'integer'
+    return shape.toType(data)
+  else if shape.type == 'float'
+    return shape.toType(data)
+  else if shape.type == 'boolean'
+    return shape.toType(data)
   else
     return data
 

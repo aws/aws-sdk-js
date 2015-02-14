@@ -623,7 +623,6 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
-        "resultWrapper": "OperationNameResult",
         "members": {
           "Map": {
             "shape": "StringMap",
@@ -648,6 +647,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -662,6 +662,60 @@
           "status_code": 200,
           "headers": {},
           "body": "<OperationNameResponse><OperationNameResult><Map><key>qux</key><value>bar</value></Map><Map><key>baz</key><value>bam</value></Map></OperationNameResult><ResponseMetadata><RequestId>requestid</RequestId></ResponseMetadata></OperationNameResponse>"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Flattened map in shape definition",
+    "metadata": {
+      "protocol": "query"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "Map": {
+            "shape": "StringMap",
+            "locationName": "Attribute"
+          }
+        }
+      },
+      "StringMap": {
+        "type": "map",
+        "key": {
+            "shape": "StringType",
+            "locationName": "Name"
+        },
+        "value": {
+            "shape": "StringType",
+            "locationName": "Value"
+        },
+        "flattened": true,
+        "locationName": "Attribute"
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "resultWrapper": "OperationNameResult",
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Map": {
+            "qux": "bar"
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "<OperationNameResponse><OperationNameResult><Attribute><Name>qux</Name><Value>bar</Value></Attribute></OperationNameResult><ResponseMetadata><RequestId>requestid</RequestId></ResponseMetadata></OperationNameResponse>"
         }
       }
     ]

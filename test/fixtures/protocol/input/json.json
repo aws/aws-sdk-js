@@ -87,6 +87,130 @@
     ]
   },
   {
+    "description": "Base64 encoded Blobs",
+    "metadata": {
+      "protocol": "json",
+      "jsonVersion": 1.1,
+      "targetPrefix": "com.amazonaws.foo"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "BlobArg": {
+            "shape": "BlobType"
+          },
+          "BlobMap": {
+              "shape": "BlobMapType"
+          }
+        }
+      },
+      "BlobType": {
+        "type": "blob"
+      },
+      "BlobMapType": {
+        "type": "map",
+        "key": {"shape": "StringType"},
+        "value": {"shape": "BlobType"}
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "BlobArg": "foo"
+        },
+        "serialized": {
+          "body": "{\"BlobArg\": \"Zm9v\"}",
+          "headers": {
+            "X-Amz-Target": "com.amazonaws.foo.OperationName",
+            "Content-Type": "application/x-amz-json-1.1"
+          },
+          "uri": "/"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "BlobMap": {
+              "key1": "foo",
+              "key2": "bar"
+          }
+        },
+        "serialized": {
+          "body": "{\"BlobMap\": {\"key1\": \"Zm9v\", \"key2\": \"YmFy\"}}",
+          "headers": {
+            "X-Amz-Target": "com.amazonaws.foo.OperationName",
+            "Content-Type": "application/x-amz-json-1.1"
+          },
+          "uri": "/"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Nested blobs",
+    "metadata": {
+      "protocol": "json",
+      "jsonVersion": 1.1,
+      "targetPrefix": "com.amazonaws.foo"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "ListParam": {
+            "shape": "ListOfStructures"
+          }
+        }
+      },
+      "ListOfStructures": {
+        "type": "list",
+        "member": {
+            "shape": "BlobType"
+        }
+      },
+      "BlobType": {
+        "type": "blob"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "POST"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "ListParam": ["foo", "bar"]
+        },
+        "serialized": {
+          "body": "{\"ListParam\": [\"Zm9v\", \"YmFy\"]}",
+          "uri": "/",
+          "headers": {"X-Amz-Target": "com.amazonaws.foo.OperationName",
+                      "Content-Type": "application/x-amz-json-1.1"}
+        }
+      }
+    ]
+  },
+  {
     "description": "Recursive shapes",
     "metadata": {
       "protocol": "json",
