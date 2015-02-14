@@ -60,7 +60,7 @@ inputCase = (svc, _case, i, done) ->
 
   if svc.api.protocol == 'query' or svc.api.protocol == 'ec2'
     expect(sortQS(req.httpRequest.body)).to.equal(sortQS(data.body))
-  else if svc.api.protocol.match(/json/)
+  else if svc.api.protocol.match(/(json|xml)/)
     if req.httpRequest.body == '{}' then req.httpRequest.body = ''
     expect(req.httpRequest.body.replace(/\s+/g, '')).to
       .equal(data.body.replace(/\s+/g, ''))
@@ -120,3 +120,4 @@ describe 'AWS protocol support', ->
   tests 'query'
   tests 'json'
   tests 'rest-json'
+  tests 'rest-xml'
