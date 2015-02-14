@@ -70,7 +70,7 @@ module.exports = function() {
     var start = this.partCounter;
     var end = Math.min(start + this.partSize, this.uploadData.length);
     var buf = this.uploadData.slice(start, end);
-    var range = 'bytes ' + start + '-' + (end-1) + '/*';
+    var range = 'bytes ' + start + '-' + (end - 1) + '/*';
     var params = {
       vaultName: this.vaultName,
       uploadId: this.uploadId,
@@ -86,7 +86,7 @@ module.exports = function() {
     for (var i = 0; i < this.uploadData.length; i += this.partSize) {
       var end = Math.min(i + this.partSize, this.uploadData.length);
       var buf = this.uploadData.slice(i, end);
-      var range = 'bytes ' + i + '-' + (end-1) + '/*';
+      var range = 'bytes ' + i + '-' + (end - 1) + '/*';
       var params = {
         vaultName: this.vaultName,
         uploadId: this.uploadId,
@@ -94,7 +94,7 @@ module.exports = function() {
         body: buf
       };
       this.service.uploadMultipartPart(params, function() {
-        if (--numPartsLeft == 0) callback();
+        if (--numPartsLeft === 0) callback();
       });
     }
   });
@@ -105,7 +105,7 @@ module.exports = function() {
       uploadId: this.uploadId,
       archiveSize: this.uploadData.length.toString(),
       checksum: this.checksums.treeHash
-    }
+    };
     this.request(null, 'completeMultipartUpload', params, callback);
   });
 
