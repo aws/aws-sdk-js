@@ -338,4 +338,4 @@ describe 'AWS.Protocol.RestXml', ->
               Baz: type: 'string'
       extractData '<Bar><Baz>Buffer data</Baz></Bar>'
       expect(response.data.Foo).to.equal('foo')
-      expect(response.data.Baz).to.equal('Buffer data')
+      expect(response.data.Bar.Baz).to.equal('Buffer data')
