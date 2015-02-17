@@ -1,6 +1,7 @@
 {
+  "version":"2.0",
   "metadata":{
-    "apiVersion":"2014-10-21",
+    "apiVersion":"2014-11-06",
     "endpointPrefix":"cloudfront",
     "globalEndpoint":"cloudfront.amazonaws.com",
     "serviceAbbreviation":"CloudFront",
@@ -10,10 +11,10 @@
   },
   "operations":{
     "CreateCloudFrontOriginAccessIdentity":{
-      "name":"CreateCloudFrontOriginAccessIdentity2014_10_21",
+      "name":"CreateCloudFrontOriginAccessIdentity2014_11_06",
       "http":{
         "method":"POST",
-        "requestUri":"/2014-10-21/origin-access-identity/cloudfront",
+        "requestUri":"/2014-11-06/origin-access-identity/cloudfront",
         "responseCode":201
       },
       "input":{
@@ -59,10 +60,10 @@
       "documentation":"Create a new origin access identity."
     },
     "CreateDistribution":{
-      "name":"CreateDistribution2014_10_21",
+      "name":"CreateDistribution2014_11_06",
       "http":{
         "method":"POST",
-        "requestUri":"/2014-10-21/distribution",
+        "requestUri":"/2014-11-06/distribution",
         "responseCode":201
       },
       "input":{
@@ -244,10 +245,10 @@
       "documentation":"Create a new distribution."
     },
     "CreateInvalidation":{
-      "name":"CreateInvalidation2014_10_21",
+      "name":"CreateInvalidation2014_11_06",
       "http":{
         "method":"POST",
-        "requestUri":"/2014-10-21/distribution/{DistributionId}/invalidation",
+        "requestUri":"/2014-11-06/distribution/{DistributionId}/invalidation",
         "responseCode":201
       },
       "input":{
@@ -304,10 +305,10 @@
       "documentation":"Create a new invalidation."
     },
     "CreateStreamingDistribution":{
-      "name":"CreateStreamingDistribution2014_10_21",
+      "name":"CreateStreamingDistribution2014_11_06",
       "http":{
         "method":"POST",
-        "requestUri":"/2014-10-21/streaming-distribution",
+        "requestUri":"/2014-11-06/streaming-distribution",
         "responseCode":201
       },
       "input":{
@@ -392,10 +393,10 @@
       "documentation":"Create a new streaming distribution."
     },
     "DeleteCloudFrontOriginAccessIdentity":{
-      "name":"DeleteCloudFrontOriginAccessIdentity2014_10_21",
+      "name":"DeleteCloudFrontOriginAccessIdentity2014_11_06",
       "http":{
         "method":"DELETE",
-        "requestUri":"/2014-10-21/origin-access-identity/cloudfront/{Id}",
+        "requestUri":"/2014-11-06/origin-access-identity/cloudfront/{Id}",
         "responseCode":204
       },
       "input":{
@@ -436,10 +437,10 @@
       "documentation":"Delete an origin access identity."
     },
     "DeleteDistribution":{
-      "name":"DeleteDistribution2014_10_21",
+      "name":"DeleteDistribution2014_11_06",
       "http":{
         "method":"DELETE",
-        "requestUri":"/2014-10-21/distribution/{Id}",
+        "requestUri":"/2014-11-06/distribution/{Id}",
         "responseCode":204
       },
       "input":{
@@ -480,10 +481,10 @@
       "documentation":"Delete a distribution."
     },
     "DeleteStreamingDistribution":{
-      "name":"DeleteStreamingDistribution2014_10_21",
+      "name":"DeleteStreamingDistribution2014_11_06",
       "http":{
         "method":"DELETE",
-        "requestUri":"/2014-10-21/streaming-distribution/{Id}",
+        "requestUri":"/2014-11-06/streaming-distribution/{Id}",
         "responseCode":204
       },
       "input":{
@@ -524,10 +525,10 @@
       "documentation":"Delete a streaming distribution."
     },
     "GetCloudFrontOriginAccessIdentity":{
-      "name":"GetCloudFrontOriginAccessIdentity2014_10_21",
+      "name":"GetCloudFrontOriginAccessIdentity2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/origin-access-identity/cloudfront/{Id}"
+        "requestUri":"/2014-11-06/origin-access-identity/cloudfront/{Id}"
       },
       "input":{
         "shape":"GetCloudFrontOriginAccessIdentityRequest",
@@ -554,10 +555,10 @@
       "documentation":"Get the information about an origin access identity."
     },
     "GetCloudFrontOriginAccessIdentityConfig":{
-      "name":"GetCloudFrontOriginAccessIdentityConfig2014_10_21",
+      "name":"GetCloudFrontOriginAccessIdentityConfig2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/origin-access-identity/cloudfront/{Id}/config"
+        "requestUri":"/2014-11-06/origin-access-identity/cloudfront/{Id}/config"
       },
       "input":{
         "shape":"GetCloudFrontOriginAccessIdentityConfigRequest",
@@ -584,10 +585,10 @@
       "documentation":"Get the configuration information about an origin access identity."
     },
     "GetDistribution":{
-      "name":"GetDistribution2014_10_21",
+      "name":"GetDistribution2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/distribution/{Id}"
+        "requestUri":"/2014-11-06/distribution/{Id}"
       },
       "input":{
         "shape":"GetDistributionRequest",
@@ -614,10 +615,10 @@
       "documentation":"Get the information about a distribution."
     },
     "GetDistributionConfig":{
-      "name":"GetDistributionConfig2014_10_21",
+      "name":"GetDistributionConfig2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/distribution/{Id}/config"
+        "requestUri":"/2014-11-06/distribution/{Id}/config"
       },
       "input":{
         "shape":"GetDistributionConfigRequest",
@@ -644,10 +645,10 @@
       "documentation":"Get the configuration information about a distribution."
     },
     "GetInvalidation":{
-      "name":"GetInvalidation2014_10_21",
+      "name":"GetInvalidation2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/distribution/{DistributionId}/invalidation/{Id}"
+        "requestUri":"/2014-11-06/distribution/{DistributionId}/invalidation/{Id}"
       },
       "input":{
         "shape":"GetInvalidationRequest",
@@ -680,10 +681,10 @@
       "documentation":"Get the information about an invalidation."
     },
     "GetStreamingDistribution":{
-      "name":"GetStreamingDistribution2014_10_21",
+      "name":"GetStreamingDistribution2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/streaming-distribution/{Id}"
+        "requestUri":"/2014-11-06/streaming-distribution/{Id}"
       },
       "input":{
         "shape":"GetStreamingDistributionRequest",
@@ -710,10 +711,10 @@
       "documentation":"Get the information about a streaming distribution."
     },
     "GetStreamingDistributionConfig":{
-      "name":"GetStreamingDistributionConfig2014_10_21",
+      "name":"GetStreamingDistributionConfig2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/streaming-distribution/{Id}/config"
+        "requestUri":"/2014-11-06/streaming-distribution/{Id}/config"
       },
       "input":{
         "shape":"GetStreamingDistributionConfigRequest",
@@ -740,10 +741,10 @@
       "documentation":"Get the configuration information about a streaming distribution."
     },
     "ListCloudFrontOriginAccessIdentities":{
-      "name":"ListCloudFrontOriginAccessIdentities2014_10_21",
+      "name":"ListCloudFrontOriginAccessIdentities2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/origin-access-identity/cloudfront"
+        "requestUri":"/2014-11-06/origin-access-identity/cloudfront"
       },
       "input":{
         "shape":"ListCloudFrontOriginAccessIdentitiesRequest",
@@ -764,10 +765,10 @@
       "documentation":"List origin access identities."
     },
     "ListDistributions":{
-      "name":"ListDistributions2014_10_21",
+      "name":"ListDistributions2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/distribution"
+        "requestUri":"/2014-11-06/distribution"
       },
       "input":{
         "shape":"ListDistributionsRequest",
@@ -788,10 +789,10 @@
       "documentation":"List distributions."
     },
     "ListInvalidations":{
-      "name":"ListInvalidations2014_10_21",
+      "name":"ListInvalidations2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/distribution/{DistributionId}/invalidation"
+        "requestUri":"/2014-11-06/distribution/{DistributionId}/invalidation"
       },
       "input":{
         "shape":"ListInvalidationsRequest",
@@ -824,10 +825,10 @@
       "documentation":"List invalidation batches."
     },
     "ListStreamingDistributions":{
-      "name":"ListStreamingDistributions2014_10_21",
+      "name":"ListStreamingDistributions2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/streaming-distribution"
+        "requestUri":"/2014-11-06/streaming-distribution"
       },
       "input":{
         "shape":"ListStreamingDistributionsRequest",
@@ -848,10 +849,10 @@
       "documentation":"List streaming distributions."
     },
     "UpdateCloudFrontOriginAccessIdentity":{
-      "name":"UpdateCloudFrontOriginAccessIdentity2014_10_21",
+      "name":"UpdateCloudFrontOriginAccessIdentity2014_11_06",
       "http":{
         "method":"PUT",
-        "requestUri":"/2014-10-21/origin-access-identity/cloudfront/{Id}/config"
+        "requestUri":"/2014-11-06/origin-access-identity/cloudfront/{Id}/config"
       },
       "input":{
         "shape":"UpdateCloudFrontOriginAccessIdentityRequest",
@@ -914,10 +915,10 @@
       "documentation":"Update an origin access identity."
     },
     "UpdateDistribution":{
-      "name":"UpdateDistribution2014_10_21",
+      "name":"UpdateDistribution2014_11_06",
       "http":{
         "method":"PUT",
-        "requestUri":"/2014-10-21/distribution/{Id}/config"
+        "requestUri":"/2014-11-06/distribution/{Id}/config"
       },
       "input":{
         "shape":"UpdateDistributionRequest",
@@ -1098,10 +1099,10 @@
       "documentation":"Update a distribution."
     },
     "UpdateStreamingDistribution":{
-      "name":"UpdateStreamingDistribution2014_10_21",
+      "name":"UpdateStreamingDistribution2014_11_06",
       "http":{
         "method":"PUT",
-        "requestUri":"/2014-10-21/streaming-distribution/{Id}/config"
+        "requestUri":"/2014-11-06/streaming-distribution/{Id}/config"
       },
       "input":{
         "shape":"UpdateStreamingDistributionRequest",
@@ -1538,7 +1539,7 @@
         "CloudFrontOriginAccessIdentityConfig":{
           "shape":"CloudFrontOriginAccessIdentityConfig",
           "documentation":"The origin access identity's configuration information.",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
           "locationName":"CloudFrontOriginAccessIdentityConfig"
         }
       },
@@ -1575,7 +1576,7 @@
         "DistributionConfig":{
           "shape":"DistributionConfig",
           "documentation":"The distribution's configuration information.",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
           "locationName":"DistributionConfig"
         }
       },
@@ -1621,7 +1622,7 @@
         "InvalidationBatch":{
           "shape":"InvalidationBatch",
           "documentation":"The batch information for the invalidation.",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
           "locationName":"InvalidationBatch"
         }
       },
@@ -1652,7 +1653,7 @@
         "StreamingDistributionConfig":{
           "shape":"StreamingDistributionConfig",
           "documentation":"The streaming distribution's configuration information.",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
           "locationName":"StreamingDistributionConfig"
         }
       },
@@ -1901,14 +1902,9 @@
       "type":"structure",
       "required":[
         "CallerReference",
-        "Aliases",
-        "DefaultRootObject",
         "Origins",
         "DefaultCacheBehavior",
-        "CacheBehaviors",
         "Comment",
-        "Logging",
-        "PriceClass",
         "Enabled"
       ],
       "members":{
@@ -2907,6 +2903,10 @@
           "shape":"string",
           "documentation":"Amazon S3 origins: The DNS name of the Amazon S3 bucket from which you want CloudFront to get objects for this origin, for example, myawsbucket.s3.amazonaws.com. Custom origins: The DNS domain name for the HTTP server from which you want CloudFront to get objects for this origin, for example, www.example.com."
         },
+        "OriginPath":{
+          "shape":"string",
+          "documentation":"An optional element that causes CloudFront to request your content from a directory in your Amazon S3 bucket or your custom origin. When you include the OriginPath element, specify the directory name, beginning with a /. CloudFront appends the directory name to the value of DomainName."
+        },
         "S3OriginConfig":{
           "shape":"S3OriginConfig",
           "documentation":"A complex type that contains information about the Amazon S3 origin. If the origin is a custom origin, use the CustomOriginConfig element instead."
@@ -3102,11 +3102,8 @@
       "required":[
         "CallerReference",
         "S3Origin",
-        "Aliases",
         "Comment",
-        "Logging",
         "TrustedSigners",
-        "PriceClass",
         "Enabled"
       ],
       "members":{
@@ -3421,7 +3418,7 @@
         "CloudFrontOriginAccessIdentityConfig":{
           "shape":"CloudFrontOriginAccessIdentityConfig",
           "documentation":"The identity's configuration information.",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
           "locationName":"CloudFrontOriginAccessIdentityConfig"
         },
         "Id":{
@@ -3467,7 +3464,7 @@
         "DistributionConfig":{
           "shape":"DistributionConfig",
           "documentation":"The distribution's configuration information.",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
           "locationName":"DistributionConfig"
         },
         "Id":{
@@ -3513,7 +3510,7 @@
         "StreamingDistributionConfig":{
           "shape":"StreamingDistributionConfig",
           "documentation":"The streaming distribution's configuration information.",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
           "locationName":"StreamingDistributionConfig"
         },
         "Id":{
