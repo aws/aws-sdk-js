@@ -129,6 +129,9 @@
   "sqs": {
     "name": "SQS"
   },
+  "ssm": {
+    "name": "SSM"
+  },
   "storagegateway": {
     "name": "StorageGateway"
   },
