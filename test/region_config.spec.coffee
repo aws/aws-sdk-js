@@ -58,10 +58,15 @@ describe 'region_config.js', ->
     expect(service.config.signatureVersion).to.equal('v4')
     expect(service.endpoint.host).to.equal('s3.xx-west-1.amazonaws.com')
 
-  it 'uses us-gov endpoints for IAM in GovCloud', ->
+  it 'uses us-gov endpoint for IAM in GovCloud', ->
     service = new AWS.IAM(region: 'us-gov-west-1')
     expect(service.isGlobalEndpoint).to.equal(false)
     expect(service.endpoint.host).to.equal('iam.us-gov.amazonaws.com')
+
+  it 'uses us-gov-west-1 endpoint for STS in GovCloud', ->
+    service = new AWS.STS(region: 'us-gov-west-1')
+    expect(service.isGlobalEndpoint).to.equal(false)
+    expect(service.endpoint.host).to.equal('sts.us-gov-west-1.amazonaws.com')
 
 describe 'region_config.json', ->
   it 'does not reference undefined patterns', ->
