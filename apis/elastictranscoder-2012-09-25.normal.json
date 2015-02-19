@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2012-09-25",
     "endpointPrefix":"elastictranscoder",
@@ -1278,6 +1279,10 @@
         "Pipeline":{
           "shape":"Pipeline",
           "documentation":"<p>A section of the response body that provides information about the pipeline that is created.</p>"
+        },
+        "Warnings":{
+          "shape":"Warnings",
+          "documentation":"<p>Elastic Transcoder returns a warning if the resources used by your pipeline are not in the same region as the pipeline.</p> <p>Using resources in the same region, such as your Amazon S3 buckets, Amazon SNS notification topics, and AWS KMS key, reduces processing time and prevents cross-regional charges.</p>"
         }
       },
       "documentation":"<p>When you create a pipeline, Elastic Transcoder returns the values that you specified in the request.</p>"
@@ -2218,6 +2223,10 @@
         "Pipeline":{
           "shape":"Pipeline",
           "documentation":"<p>A section of the response body that provides information about the pipeline.</p>"
+        },
+        "Warnings":{
+          "shape":"Warnings",
+          "documentation":"<p>Elastic Transcoder returns a warning if the resources used by your pipeline are not in the same region as the pipeline.</p> <p>Using resources in the same region, such as your Amazon S3 buckets, Amazon SNS notification topics, and AWS KMS key, reduces processing time and prevents cross-regional charges.</p>"
         }
       },
       "documentation":"<p>The <code>ReadPipelineResponse</code> structure.</p>"
@@ -2480,7 +2489,11 @@
     "UpdatePipelineResponse":{
       "type":"structure",
       "members":{
-        "Pipeline":{"shape":"Pipeline"}
+        "Pipeline":{"shape":"Pipeline"},
+        "Warnings":{
+          "shape":"Warnings",
+          "documentation":"<p>Elastic Transcoder returns a warning if the resources used by your pipeline are not in the same region as the pipeline.</p> <p>Using resources in the same region, such as your Amazon S3 buckets, Amazon SNS notification topics, and AWS KMS key, reduces processing time and prevents cross-regional charges.</p>"
+        }
       },
       "documentation":"<p>When you update a pipeline, Elastic Transcoder returns the values that you specified in the request. </p>"
     },
@@ -2604,6 +2617,24 @@
         }
       },
       "documentation":"<p>The <code>VideoParameters</code> structure.</p>"
+    },
+    "Warning":{
+      "type":"structure",
+      "members":{
+        "Code":{
+          "shape":"String",
+          "documentation":"<p>The code of the cross-regional warning.</p>"
+        },
+        "Message":{
+          "shape":"String",
+          "documentation":"<p>The message explaining what resources are in a different region from the pipeline.</p> <p><b>Note:</b> AWS KMS keys must be in the same region as the pipeline.</p>"
+        }
+      },
+      "documentation":"<p>Elastic Transcoder returns a warning if the resources used by your pipeline are not in the same region as the pipeline.</p> <p>Using resources in the same region, such as your Amazon S3 buckets, Amazon SNS notification topics, and AWS KMS key, reduces processing time and prevents cross-regional charges.</p>"
+    },
+    "Warnings":{
+      "type":"list",
+      "member":{"shape":"Warning"}
     },
     "WatermarkKey":{
       "type":"string",
