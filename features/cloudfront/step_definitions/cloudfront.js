@@ -10,12 +10,4 @@ module.exports = function() {
     this.request(null, 'listDistributions', {}, callback);
   });
 
-  this.Then(/^the result should contain a property (\w+) with an? (\w+)$/, function(property, type, callback) {
-    if (type === 'Array' || type === 'Date') {
-      this.assert.equal(this.AWS.util.isType(this.data[property], type), true);
-    } else {
-      this.assert.equal(typeof this.data[property], type);
-    }
-    callback();
-  });
 };

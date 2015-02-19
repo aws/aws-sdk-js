@@ -2,8 +2,8 @@ var util = require('util');
 var realExit = process.exit;
 
 module.exports = function () {
-  var world = require("./world.js").WorldInstance;
-  this.World = require("./world.js").World;
+  var world = require('./world.js').WorldInstance;
+  this.World = require('./world.js').World;
 
   world.cleanupTasks = new world.AWS.SequentialExecutor();
 
@@ -14,7 +14,7 @@ module.exports = function () {
 
   this.AfterAll = function(callback) {
     world.cleanupTasks.onAsync('cleanup', callback.bind(world));
-  }
+  };
 
   this.Before(function(callback) {
     this.params = {};
@@ -38,19 +38,19 @@ module.exports = function () {
 
   this.Then(/^the value at "([^"]*)" should be a list$/, function (path, callback) {
     var value = this.AWS.util.jamespath.find(path, this.data);
-    this.assert.ok(Array.isArray(value), "expected " + util.inspect(value) + " to be a list");
+    this.assert.ok(Array.isArray(value), 'expected ' + util.inspect(value) + ' to be a list');
     callback();
   });
 
   this.Then(/^the value at "([^"]*)" should be a number$/, function (path, callback) {
     var value = this.AWS.util.jamespath.find(path, this.data);
-    this.assert.ok(typeof value === 'number', "expected " + util.inspect(value) + " to be a number");
+    this.assert.ok(typeof value === 'number', 'expected ' + util.inspect(value) + ' to be a number');
     callback();
   });
 
   this.Then(/^the value at "([^"]*)" should be a string$/, function (path, callback) {
     var value = this.AWS.util.jamespath.find(path, this.data);
-    this.assert.ok(typeof value === 'string', "expected " + util.inspect(value) + " to be a string");
+    this.assert.ok(typeof value === 'string', 'expected ' + util.inspect(value) + ' to be a string');
     callback();
   });
 
@@ -74,7 +74,7 @@ module.exports = function () {
   });
 
   this.Then(/^I should get the error:$/, function(table, callback) {
-    var err = table.hashes()[0]
+    var err = table.hashes()[0];
     this.assert.equal(this.error.code, err.code);
     this.assert.equal(this.error.message, err.message);
     callback();
@@ -91,7 +91,7 @@ module.exports = function () {
 
     var world = this;
     this.numPages = 0;
-    this.numMarkers = 0
+    this.numMarkers = 0;
     this.operation = operation;
     this.paginationConfig = this.service.paginationConfig(operation);
     this.params = this.params || {};
@@ -133,6 +133,25 @@ module.exports = function () {
   this.Then(/^the last page should not contain a marker$/, function(callback) {
     var marker = this.paginationConfig.outputToken;
     this.assert.equal(this.data[marker], null);
+    callback();
+  });
+
+
+  this.Then(/^the result at (\w+) should contain a property (\w+) with an? (\w+)$/, function(wrapper, property, type, callback) {
+    if (type === 'Array' || type === 'Date') {
+      this.assert.equal(this.AWS.util.isType(this.data[wrapper][property], type), true);
+    } else {
+      this.assert.equal(typeof this.data[wrapper][property], type);
+    }
+    callback();
+  });
+
+  this.Then(/^the result should contain a property (\w+) with an? (\w+)$/, function(property, type, callback) {
+    if (type === 'Array' || type === 'Date') {
+      this.assert.equal(this.AWS.util.isType(this.data[property], type), true);
+    } else {
+      this.assert.equal(typeof this.data[property], type);
+    }
     callback();
   });
 
