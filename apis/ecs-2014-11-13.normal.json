@@ -1,13 +1,14 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2014-11-13",
     "endpointPrefix":"ecs",
+    "jsonVersion":"1.1",
     "serviceAbbreviation":"Amazon ECS",
     "serviceFullName":"Amazon EC2 Container Service",
     "signatureVersion":"v4",
-    "signingName":"ecs",
-    "xmlNamespace":"http://ecs.amazonaws.com/doc/2014-11-13/",
-    "protocol":"query"
+    "targetPrefix":"AmazonEC2ContainerServiceV20141113",
+    "protocol":"json"
   },
   "documentation":"<p></p> <p>Amazon EC2 Container Service (Amazon ECS) is a highly scalable, fast, container management service that makes it easy to run, stop, and manage Docker containers on a cluster of Amazon EC2 instances. Amazon ECS lets you launch and stop container-enabled applications with simple API calls, allows you to get the state of your cluster from a centralized service, and gives you access to many familiar Amazon EC2 features like security groups, Amazon EBS volumes, and IAM roles.</p> <p>You can use Amazon ECS to schedule the placement of containers across your cluster based on your resource needs, isolation policies, and availability requirements. Amazon EC2 Container Service eliminates the need for you to operate your own cluster management and configuration management systems or worry about scaling your management infrastructure.</p>",
   "operations":{
@@ -18,14 +19,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"CreateClusterRequest"},
-      "output":{
-        "shape":"CreateClusterResponse",
-        "resultWrapper":"CreateClusterResult"
-      },
+      "output":{"shape":"CreateClusterResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -43,14 +42,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"DeleteClusterRequest"},
-      "output":{
-        "shape":"DeleteClusterResponse",
-        "resultWrapper":"DeleteClusterResult"
-      },
+      "output":{"shape":"DeleteClusterResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -68,14 +65,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"DeregisterContainerInstanceRequest"},
-      "output":{
-        "shape":"DeregisterContainerInstanceResponse",
-        "resultWrapper":"DeregisterContainerInstanceResult"
-      },
+      "output":{"shape":"DeregisterContainerInstanceResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -93,14 +88,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"DeregisterTaskDefinitionRequest"},
-      "output":{
-        "shape":"DeregisterTaskDefinitionResponse",
-        "resultWrapper":"DeregisterTaskDefinitionResult"
-      },
+      "output":{"shape":"DeregisterTaskDefinitionResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -118,14 +111,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"DescribeClustersRequest"},
-      "output":{
-        "shape":"DescribeClustersResponse",
-        "resultWrapper":"DescribeClustersResult"
-      },
+      "output":{"shape":"DescribeClustersResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -143,14 +134,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"DescribeContainerInstancesRequest"},
-      "output":{
-        "shape":"DescribeContainerInstancesResponse",
-        "resultWrapper":"DescribeContainerInstancesResult"
-      },
+      "output":{"shape":"DescribeContainerInstancesResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -168,14 +157,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"DescribeTaskDefinitionRequest"},
-      "output":{
-        "shape":"DescribeTaskDefinitionResponse",
-        "resultWrapper":"DescribeTaskDefinitionResult"
-      },
+      "output":{"shape":"DescribeTaskDefinitionResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -193,14 +180,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"DescribeTasksRequest"},
-      "output":{
-        "shape":"DescribeTasksResponse",
-        "resultWrapper":"DescribeTasksResult"
-      },
+      "output":{"shape":"DescribeTasksResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -218,14 +203,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"DiscoverPollEndpointRequest"},
-      "output":{
-        "shape":"DiscoverPollEndpointResponse",
-        "resultWrapper":"DiscoverPollEndpointResult"
-      },
+      "output":{"shape":"DiscoverPollEndpointResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -243,14 +226,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"ListClustersRequest"},
-      "output":{
-        "shape":"ListClustersResponse",
-        "resultWrapper":"ListClustersResult"
-      },
+      "output":{"shape":"ListClustersResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -268,14 +249,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"ListContainerInstancesRequest"},
-      "output":{
-        "shape":"ListContainerInstancesResponse",
-        "resultWrapper":"ListContainerInstancesResult"
-      },
+      "output":{"shape":"ListContainerInstancesResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -286,6 +265,29 @@
       ],
       "documentation":"<p>Returns a list of container instances in a specified cluster.</p>"
     },
+    "ListTaskDefinitionFamilies":{
+      "name":"ListTaskDefinitionFamilies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTaskDefinitionFamiliesRequest"},
+      "output":{"shape":"ListTaskDefinitionFamiliesResponse"},
+      "errors":[
+        {
+          "shape":"ServerException",
+          "exception":true,
+          "fault":true,
+          "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
+        },
+        {
+          "shape":"ClientException",
+          "exception":true,
+          "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
+        }
+      ],
+      "documentation":"<p>Returns a list of task definition families that are registered to your account. You can filter the results with the <code>familyPrefix</code> parameter.</p>"
+    },
     "ListTaskDefinitions":{
       "name":"ListTaskDefinitions",
       "http":{
@@ -293,14 +295,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"ListTaskDefinitionsRequest"},
-      "output":{
-        "shape":"ListTaskDefinitionsResponse",
-        "resultWrapper":"ListTaskDefinitionsResult"
-      },
+      "output":{"shape":"ListTaskDefinitionsResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -318,14 +318,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"ListTasksRequest"},
-      "output":{
-        "shape":"ListTasksResponse",
-        "resultWrapper":"ListTasksResult"
-      },
+      "output":{"shape":"ListTasksResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -343,14 +341,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"RegisterContainerInstanceRequest"},
-      "output":{
-        "shape":"RegisterContainerInstanceResponse",
-        "resultWrapper":"RegisterContainerInstanceResult"
-      },
+      "output":{"shape":"RegisterContainerInstanceResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -368,14 +364,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"RegisterTaskDefinitionRequest"},
-      "output":{
-        "shape":"RegisterTaskDefinitionResponse",
-        "resultWrapper":"RegisterTaskDefinitionResult"
-      },
+      "output":{"shape":"RegisterTaskDefinitionResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -384,7 +378,7 @@
           "documentation":"<p>These errors are usually caused by something the client did, such as use an action or resource on behalf of a user that doesn't have permission to use the action or resource, or specify an identifier that is not valid.</p>"
         }
       ],
-      "documentation":"<p>Registers a new task definition from the supplied <code>family</code> and <code>containerDefinitions</code>.</p>"
+      "documentation":"<p>Registers a new task definition from the supplied <code>family</code> and <code>containerDefinitions</code>. Optionally, you can add data volumes to your containers with the <code>volumes</code> parameter. For more information on task definition parameters and defaults, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html\">Amazon ECS Task Definitions</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
     },
     "RunTask":{
       "name":"RunTask",
@@ -393,14 +387,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"RunTaskRequest"},
-      "output":{
-        "shape":"RunTaskResponse",
-        "resultWrapper":"RunTaskResult"
-      },
+      "output":{"shape":"RunTaskResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -418,14 +410,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"StartTaskRequest"},
-      "output":{
-        "shape":"StartTaskResponse",
-        "resultWrapper":"StartTaskResult"
-      },
+      "output":{"shape":"StartTaskResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -443,14 +433,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"StopTaskRequest"},
-      "output":{
-        "shape":"StopTaskResponse",
-        "resultWrapper":"StopTaskResult"
-      },
+      "output":{"shape":"StopTaskResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -468,14 +456,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"SubmitContainerStateChangeRequest"},
-      "output":{
-        "shape":"SubmitContainerStateChangeResponse",
-        "resultWrapper":"SubmitContainerStateChangeResult"
-      },
+      "output":{"shape":"SubmitContainerStateChangeResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -493,14 +479,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"SubmitTaskStateChangeRequest"},
-      "output":{
-        "shape":"SubmitTaskStateChangeResponse",
-        "resultWrapper":"SubmitTaskStateChangeResult"
-      },
+      "output":{"shape":"SubmitTaskStateChangeResponse"},
       "errors":[
         {
           "shape":"ServerException",
           "exception":true,
+          "fault":true,
           "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
         },
         {
@@ -615,7 +599,7 @@
         },
         "entryPoint":{
           "shape":"StringList",
-          "documentation":"<p>The <code>ENTRYPOINT</code> that is passed to the container. For more information on the Docker <code>ENTRYPOINT</code> parameter, see <a href=\"https://docs.docker.com/reference/builder/#entrypoint\">https://docs.docker.com/reference/builder/#entrypoint</a>.</p>"
+          "documentation":"<important> <p>Early versions of the Amazon ECS container agent do not properly handle <code>entryPoint</code> parameters. If you have problems using <code>entryPoint</code>, update your container agent or enter your commands and arguments as <code>command</code> array items instead.</p> </important> <p>The <code>ENTRYPOINT</code> that is passed to the container. For more information on the Docker <code>ENTRYPOINT</code> parameter, see <a href=\"https://docs.docker.com/reference/builder/#entrypoint\">https://docs.docker.com/reference/builder/#entrypoint</a>.</p>"
         },
         "command":{
           "shape":"StringList",
@@ -624,6 +608,14 @@
         "environment":{
           "shape":"EnvironmentVariables",
           "documentation":"<p>The environment variables to pass to a container.</p>"
+        },
+        "mountPoints":{
+          "shape":"MountPointList",
+          "documentation":"<p>The mount points for data volumes in your container.</p>"
+        },
+        "volumesFrom":{
+          "shape":"VolumeFromList",
+          "documentation":"<p>Data volumes to mount from another container.</p>"
         }
       },
       "documentation":"<p>Container definitions are used in task definitions to describe the different containers that are launched as part of a task.</p>"
@@ -897,6 +889,15 @@
       "type":"list",
       "member":{"shape":"Failure"}
     },
+    "HostVolumeProperties":{
+      "type":"structure",
+      "members":{
+        "sourcePath":{
+          "shape":"String",
+          "documentation":"<p>The path on the host container instance that is presented to the container. If this parameter is empty, then the Docker daemon has assigned a host path for you.</p>"
+        }
+      }
+    },
     "Integer":{"type":"integer"},
     "KeyValuePair":{
       "type":"structure",
@@ -967,12 +968,42 @@
         }
       }
     },
+    "ListTaskDefinitionFamiliesRequest":{
+      "type":"structure",
+      "members":{
+        "familyPrefix":{
+          "shape":"String",
+          "documentation":"<p>The <code>familyPrefix</code> is a string that is used to filter the results of <code>ListTaskDefinitionFamilies</code>. If you specify a <code>familyPrefix</code>, only task definition family names that begin with the <code>familyPrefix</code> string are returned.</p>"
+        },
+        "nextToken":{
+          "shape":"String",
+          "documentation":"<p>The <code>nextToken</code> value returned from a previous paginated <code>ListTaskDefinitionFamilies</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p>"
+        },
+        "maxResults":{
+          "shape":"BoxedInteger",
+          "documentation":"<p>The maximum number of task definition family results returned by <code>ListTaskDefinitionFamilies</code> in paginated output. When this parameter is used, <code>ListTaskDefinitions</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListTaskDefinitionFamilies</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListTaskDefinitionFamilies</code> returns up to 100 results and a <code>nextToken</code> value if applicable.</p>"
+        }
+      }
+    },
+    "ListTaskDefinitionFamiliesResponse":{
+      "type":"structure",
+      "members":{
+        "families":{
+          "shape":"StringList",
+          "documentation":"<p>The list of task definition family names that match the <code>ListTaskDefinitionFamilies</code> request.</p>"
+        },
+        "nextToken":{
+          "shape":"String",
+          "documentation":"<p>The <code>nextToken</code> value to include in a future <code>ListTaskDefinitionFamilies</code> request. When the results of a <code>ListTaskDefinitionFamilies</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+        }
+      }
+    },
     "ListTaskDefinitionsRequest":{
       "type":"structure",
       "members":{
         "familyPrefix":{
           "shape":"String",
-          "documentation":"<p>The name of the family that you want to filter the <code>ListTaskDefinitions</code> results with. Specifying a <code>familyPrefix</code> will limit the listed task definitions to definitions that belong to that family.</p>"
+          "documentation":"<p>The full family name that you want to filter the <code>ListTaskDefinitions</code> results with. Specifying a <code>familyPrefix</code> will limit the listed task definitions to task definition revisions that belong to that family.</p>"
         },
         "nextToken":{
           "shape":"String",
@@ -1036,6 +1067,27 @@
       }
     },
     "Long":{"type":"long"},
+    "MountPoint":{
+      "type":"structure",
+      "members":{
+        "sourceVolume":{
+          "shape":"String",
+          "documentation":"<p>The name of the volume to mount.</p>"
+        },
+        "containerPath":{
+          "shape":"String",
+          "documentation":"<p>The path on the container to mount the host volume at.</p>"
+        },
+        "readOnly":{
+          "shape":"BoxedBoolean",
+          "documentation":"<p>If this value is <code>true</code>, the container has read-only access to the volume. If this value is <code>false</code>, then the container can write to the volume. The default value is <code>false</code>.</p>"
+        }
+      }
+    },
+    "MountPointList":{
+      "type":"list",
+      "member":{"shape":"MountPoint"}
+    },
     "NetworkBinding":{
       "type":"structure",
       "members":{
@@ -1102,11 +1154,15 @@
       "members":{
         "family":{
           "shape":"String",
-          "documentation":"<p>You can specify a <code>family</code> for a task definition, which allows you to track multiple versions of the same task definition. You can think of the <code>family</code> as a name for your task definition.</p>"
+          "documentation":"<p>You must specify a <code>family</code> for a task definition, which allows you to track multiple versions of the same task definition. You can think of the <code>family</code> as a name for your task definition.</p>"
         },
         "containerDefinitions":{
           "shape":"ContainerDefinitions",
           "documentation":"<p>A list of container definitions in JSON format that describe the different containers that make up your task.</p>"
+        },
+        "volumes":{
+          "shape":"VolumeList",
+          "documentation":"<p>A list of volume definitions in JSON format that containers in your task may use.</p>"
         }
       }
     },
@@ -1188,6 +1244,7 @@
         "message":{"shape":"String"}
       },
       "exception":true,
+      "fault":true,
       "documentation":"<p>These errors are usually caused by a server-side issue.</p>"
     },
     "StartTaskRequest":{
@@ -1368,7 +1425,7 @@
         },
         "containerDefinitions":{
           "shape":"ContainerDefinitions",
-          "documentation":"<p>A list of container definitions in JSON format that describe the different containers that make up your task.</p>"
+          "documentation":"<p>A list of container definitions in JSON format that describe the different containers that make up your task. For more information on container definition parameters and defaults, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html\">Amazon ECS Task Definitions</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
         },
         "family":{
           "shape":"String",
@@ -1377,6 +1434,10 @@
         "revision":{
           "shape":"Integer",
           "documentation":"<p>The revision of the task in a particular family. You can think of the revision as a version number of a task definition in a family. When you register a task definition for the first time, the revision is <code>1</code>, and each time you register a task definition in the same family, the revision value increases by one.</p>"
+        },
+        "volumes":{
+          "shape":"VolumeList",
+          "documentation":"<p>The list of volumes in a task. For more information on volume definition parameters and defaults, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html\">Amazon ECS Task Definitions</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
         }
       }
     },
@@ -1392,6 +1453,40 @@
     "Tasks":{
       "type":"list",
       "member":{"shape":"Task"}
+    },
+    "Volume":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"String",
+          "documentation":"<p>The name of the volume. This name is referenced in the <code>sourceVolume</code> parameter of container definition <code>mountPoints</code>.</p>"
+        },
+        "host":{
+          "shape":"HostVolumeProperties",
+          "documentation":"<p>The path on the host container instance that is presented to the containers which access the volume. If this parameter is empty, then the Docker daemon assigns a host path for you.</p>"
+        }
+      }
+    },
+    "VolumeFrom":{
+      "type":"structure",
+      "members":{
+        "sourceContainer":{
+          "shape":"String",
+          "documentation":"<p>The name of the container to mount volumes from.</p>"
+        },
+        "readOnly":{
+          "shape":"BoxedBoolean",
+          "documentation":"<p>If this value is <code>true</code>, the container has read-only access to the volume. If this value is <code>false</code>, then the container can write to the volume. The default value is <code>false</code>.</p>"
+        }
+      }
+    },
+    "VolumeFromList":{
+      "type":"list",
+      "member":{"shape":"VolumeFrom"}
+    },
+    "VolumeList":{
+      "type":"list",
+      "member":{"shape":"Volume"}
     }
   }
 }
