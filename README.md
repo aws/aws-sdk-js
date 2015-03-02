@@ -38,6 +38,15 @@ into a terminal window:
 npm install aws-sdk
 ```
 
+### Using Bower
+
+You can also use [Bower](http://bower.io) to install the SDK by typing the
+following into a terminal window:
+
+```sh
+bower install aws-sdk-js
+```
+
 ## Usage and Getting Started
 
 You can find a getting started guide at:
