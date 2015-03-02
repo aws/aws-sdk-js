@@ -14,7 +14,8 @@ You can also download this package by clicking the following link:
 [aws-sdk-2.1.14.min.js](https://sdk.amazonaws.com/js/aws-sdk-2.1.14.min.js)
 
 ## Using Bower
-You can also use [Bower](http://bower.io/) to install the SDK.
+You can also use [Bower](http://bower.io/) to install the SDK by typing the
+following into a terminal window:
 
 ```sh
 bower install aws-sdk-js

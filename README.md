@@ -39,7 +39,8 @@ npm install aws-sdk
 ```
 
 ### Using Bower
-You can also use Bower to install the AWS SDK for JavaScript.
+You can also use [Bower](http://bower.io) to install the SDK by typing the
+following into a terminal window:
 
 ```sh
 bower install aws-sdk-js
