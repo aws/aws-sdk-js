@@ -39,6 +39,7 @@ npm install aws-sdk
 ```
 
 ### Using Bower
+
 You can also use [Bower](http://bower.io) to install the SDK by typing the
 following into a terminal window:
 
