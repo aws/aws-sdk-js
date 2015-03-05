@@ -596,3 +596,59 @@ describe 'AWS.util.jamespath', ->
 
     it 'returns null if no match is found', ->
       expect(find('invalid.*', foo: bar: 1, baz: 2)).not.to.exist
+
+describe 'AWS.util.hoistPayloadMember', ->
+  hoist = AWS.util.hoistPayloadMember
+
+  service = null
+  buildService = (api) ->
+    service = new AWS.Service endpoint: 'http://localhost', apiConfig: api
+
+  it 'hoists structure payload members', ->
+    api =
+      'metadata': 'protocol': 'rest-xml'
+      'operations': 'sample': 'output': 'shape': 'OutputShape'
+      'shapes':
+        'OutputShape':
+          'type': 'structure'
+          'payload': 'Data'
+          'members':
+            'Data': 'shape': 'SingleStructure'
+        'StringType': 'type': 'string'
+        'SingleStructure':
+          'type': 'structure'
+          'members': 'Foo': 'shape': 'StringType'
+    httpResp =
+      'status_code': 200
+      'headers': 'X-Foo': 'baz'
+      'body': '<OperationNameResponse><Foo>abc</Foo></OperationNameResponse>'
+    buildService(api)
+    helpers.mockHttpResponse httpResp.status_code, httpResp.headers, httpResp.body
+    req = service.sample()
+    req.send()
+    hoist(req.response)
+    expect(req.response.data.Foo).to.eql('abc')
+    expect(req.response.data.Data.Foo).to.eql('abc')
+
+  it 'does not hoist streaming payload members', ->
+    api =
+      'metadata': 'protocol': 'rest-xml'
+      'operations': 'sample': 'output': 'shape': 'OutputShape'
+      'shapes':
+        'OutputShape':
+          'type': 'structure'
+          'payload': 'Stream'
+          'members': 'Stream': 'shape': 'BlobStream'
+        'BlobStream':
+          'type': 'blob'
+          'streaming': true
+    httpResp =
+      'status_code': 200
+      'headers': {}
+      'body': 'abc'
+    buildService(api)
+    helpers.mockHttpResponse httpResp.status_code, httpResp.headers, httpResp.body
+    req = service.sample()
+    req.send()
+    hoist(req.response)
+    expect(req.response.data.Stream.toString()).to.eql('abc')
