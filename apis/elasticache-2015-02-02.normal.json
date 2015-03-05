@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2015-02-02",
     "endpointPrefix":"elasticache",
@@ -2491,7 +2492,7 @@
       "members":{
         "ResourceName":{
           "shape":"String",
-          "documentation":"<p>The name of the resource to which the tags are to be added, for example <code>myCluster01</code>.</p>"
+          "documentation":"<p>The name of the resource to which the tags are to be added, for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code>.</p>"
         },
         "Tags":{
           "shape":"TagList",
@@ -2591,7 +2592,7 @@
         },
         "CacheNodeType":{
           "shape":"String",
-          "documentation":"<p>The name of the compute and memory capacity node type for the cache cluster.</p>"
+          "documentation":"<p>The name of the compute and memory capacity node type for the cache cluster.</p> <p>Valid node types are as follows:</p> <ul> <li>General purpose: <ul> <li>Current generation: <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code>, <code>cache.m3.medium</code>, <code>cache.m3.large</code>, <code>cache.m3.xlarge</code>, <code>cache.m3.2xlarge</code></li> <li>Previous generation: <code>cache.t1.micro</code>, <code>cache.m1.small</code>, <code>cache.m1.medium</code>, <code>cache.m1.large</code>, <code>cache.m1.xlarge</code></li> </ul></li> <li>Compute optimized: <code>cache.c1.xlarge</code></li> <li>Memory optimized <ul> <li>Current generation: <code>cache.r3.large</code>, <code>cache.r3.xlarge</code>, <code>cache.r3.2xlarge</code>, <code>cache.r3.4xlarge</code>, <code>cache.r3.8xlarge</code></li> <li>Previous generation: <code>cache.m2.xlarge</code>, <code>cache.m2.2xlarge</code>, <code>cache.m2.4xlarge</code></li> </ul></li> </ul> <p><b>Notes:</b></p> <ul> <li>All t2 instances are created in an Amazon Virtual Private Cloud (VPC).</li> <li>Redis backup/restore is not supported for t2 instances.</li> <li>Redis Append-only files (AOF) functionality is not supported for t1 or t2 instances.</li> </ul> <p>For a complete listing of cache node types and specifications, see <a href=\"http://aws.amazon.com/elasticache/details\">Amazon ElastiCache Product Features and Details</a> and <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific\">Cache Node Type-Specific Parameters for Memcached</a> or <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific\">Cache Node Type-Specific Parameters for Redis</a>. </p>"
         },
         "Engine":{
           "shape":"String",
@@ -2607,11 +2608,11 @@
         },
         "NumCacheNodes":{
           "shape":"IntegerOptional",
-          "documentation":"<p>The number of cache nodes in the cache cluster.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 50.</p>"
+          "documentation":"<p>The number of cache nodes in the cache cluster.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20.</p>"
         },
         "PreferredAvailabilityZone":{
           "shape":"String",
-          "documentation":"<p>The name of the Availability Zone in which the cache cluster is located or \"Multiple\"if the cache nodes are located in different Availability Zones.</p>"
+          "documentation":"<p>The name of the Availability Zone in which the cache cluster is located or \"Multiple\" if the cache nodes are located in different Availability Zones.</p>"
         },
         "CacheClusterCreateTime":{
           "shape":"TStamp",
@@ -2619,7 +2620,7 @@
         },
         "PreferredMaintenanceWindow":{
           "shape":"String",
-          "documentation":"<p>The time range (in UTC) during which weekly system maintenance can occur.</p>"
+          "documentation":"<p>Specifies the weekly time range during which maintenance on the cache cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for <code>ddd</code> are:</p> <ul> <li><code>sun</code></li> <li><code>mon</code></li> <li><code>tue</code></li> <li><code>wed</code></li> <li><code>thu</code></li> <li><code>fri</code></li> <li><code>sat</code></li> </ul> <p>Example: <code>sun:05:00-sun:09:00</code></p>"
         },
         "PendingModifiedValues":{"shape":"PendingModifiedValues"},
         "NotificationConfiguration":{"shape":"NotificationConfiguration"},
@@ -2784,7 +2785,7 @@
           "documentation":"<p>The Availability Zone where this node was created and now resides.</p>"
         }
       },
-      "documentation":"<p>Represents an individual cache node within a cache cluster. Each cache node runs its own instance of the cluster's protocol-compliant caching software - either Memcached or Redis.</p>"
+      "documentation":"<p>Represents an individual cache node within a cache cluster. Each cache node runs its own instance of the cluster's protocol-compliant caching software - either Memcached or Redis.</p> <p>Valid node types are as follows:</p> <ul> <li>General purpose: <ul> <li>Current generation: <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code>, <code>cache.m3.medium</code>, <code>cache.m3.large</code>, <code>cache.m3.xlarge</code>, <code>cache.m3.2xlarge</code></li> <li>Previous generation: <code>cache.t1.micro</code>, <code>cache.m1.small</code>, <code>cache.m1.medium</code>, <code>cache.m1.large</code>, <code>cache.m1.xlarge</code></li> </ul></li> <li>Compute optimized: <code>cache.c1.xlarge</code></li> <li>Memory optimized <ul> <li>Current generation: <code>cache.r3.large</code>, <code>cache.r3.xlarge</code>, <code>cache.r3.2xlarge</code>, <code>cache.r3.4xlarge</code>, <code>cache.r3.8xlarge</code></li> <li>Previous generation: <code>cache.m2.xlarge</code>, <code>cache.m2.2xlarge</code>, <code>cache.m2.4xlarge</code></li> </ul></li> </ul> <p><b>Notes:</b></p> <ul> <li>All t2 instances are created in an Amazon Virtual Private Cloud (VPC).</li> <li>Redis backup/restore is not supported for t2 instances.</li> <li>Redis Append-only files (AOF) functionality is not supported for t1 or t2 instances.</li> </ul> <p>For a complete listing of cache node types and specifications, see <a href=\"http://aws.amazon.com/elasticache/details\">Amazon ElastiCache Product Features and Details</a> and <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific\">Cache Node Type-Specific Parameters for Memcached</a> or <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific\">Cache Node Type-Specific Parameters for Redis</a>. </p>"
     },
     "CacheNodeIdsList":{
       "type":"list",
@@ -3263,7 +3264,7 @@
         },
         "NumCacheNodes":{
           "shape":"IntegerOptional",
-          "documentation":"<p>The initial number of cache nodes that the cache cluster will have.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 50.</p> <p>If you need more than 50 nodes for your Memcached cluster, please fill out the ElastiCache Limit Increase Request form at <a href=\"http://aws.amazon.com/contact-us/elasticache-node-limit-request/\">http://aws.amazon.com/contact-us/elasticache-node-limit-request/</a>.</p>"
+          "documentation":"<p>The initial number of cache nodes that the cache cluster will have.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20.</p> <p>If you need more than 20 nodes for your Memcached cluster, please fill out the ElastiCache Limit Increase Request form at <a href=\"http://aws.amazon.com/contact-us/elasticache-node-limit-request/\">http://aws.amazon.com/contact-us/elasticache-node-limit-request/</a>.</p>"
         },
         "CacheNodeType":{
           "shape":"String",
@@ -3307,7 +3308,7 @@
         },
         "PreferredMaintenanceWindow":{
           "shape":"String",
-          "documentation":"<p>The weekly time range (in UTC) during which system maintenance can occur.</p> <p>Example: <code>sun:05:00-sun:09:00</code></p>"
+          "documentation":"<p>Specifies the weekly time range during which maintenance on the cache cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for <code>ddd</code> are:</p> <ul> <li><code>sun</code></li> <li><code>mon</code></li> <li><code>tue</code></li> <li><code>wed</code></li> <li><code>thu</code></li> <li><code>fri</code></li> <li><code>sat</code></li> </ul> <p>Example: <code>sun:05:00-sun:09:00</code></p>"
         },
         "Port":{
           "shape":"IntegerOptional",
@@ -3421,7 +3422,7 @@
         },
         "NumCacheClusters":{
           "shape":"IntegerOptional",
-          "documentation":"<p>The number of cache clusters this replication group will initially have.</p> <p>If <i>Multi-AZ</i> is <code>enabled</code>, the value of this parameter must be at least 2.</p> <p>The maximum permitted value for <i>NumCacheClusters</i> is 6 (primary plus 5 replicas). If you need to exceed this limit, please fill out the ElastiCache Limit Increase Request forrm at <a href=\"http://aws.amazon.com/contact-us/elasticache-node-limit-request\">http://aws.amazon.com/contact-us/elasticache-node-limit-request</a>.</p>"
+          "documentation":"<p>The number of cache clusters this replication group will initially have.</p> <p>If <i>Multi-AZ</i> is <code>enabled</code>, the value of this parameter must be at least 2.</p> <p>The maximum permitted value for <i>NumCacheClusters</i> is 6 (primary plus 5 replicas). If you need to exceed this limit, please fill out the ElastiCache Limit Increase Request form at <a href=\"http://aws.amazon.com/contact-us/elasticache-node-limit-request\">http://aws.amazon.com/contact-us/elasticache-node-limit-request</a>.</p>"
         },
         "PreferredCacheClusterAZs":{
           "shape":"AvailabilityZonesList",
@@ -3437,7 +3438,7 @@
         },
         "EngineVersion":{
           "shape":"String",
-          "documentation":"<p>The version number of the cach engine to be used for the cache clusters in this replication group. To view the supported cache engine versions, use the <i>DescribeCacheEngineVersions</i> action.</p>"
+          "documentation":"<p>The version number of the cache engine to be used for the cache clusters in this replication group. To view the supported cache engine versions, use the <i>DescribeCacheEngineVersions</i> action.</p>"
         },
         "CacheParameterGroupName":{
           "shape":"String",
@@ -3469,7 +3470,7 @@
         },
         "PreferredMaintenanceWindow":{
           "shape":"String",
-          "documentation":"<p>The weekly time range (in UTC) during which system maintenance can occur.</p> <p>Example: <code>sun:05:00-sun:09:00</code></p>"
+          "documentation":"<p>Specifies the weekly time range during which maintenance on the cache cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for <code>ddd</code> are:</p> <ul> <li><code>sun</code></li> <li><code>mon</code></li> <li><code>tue</code></li> <li><code>wed</code></li> <li><code>thu</code></li> <li><code>fri</code></li> <li><code>sat</code></li> </ul> <p>Example: <code>sun:05:00-sun:09:00</code></p>"
         },
         "Port":{
           "shape":"IntegerOptional",
@@ -3803,7 +3804,7 @@
         },
         "CacheNodeType":{
           "shape":"String",
-          "documentation":"<p>The cache node type filter value. Use this parameter to show only those reservations matching the specified cache node type.</p>"
+          "documentation":"<p>The cache node type filter value. Use this parameter to show only those reservations matching the specified cache node type.</p> <p>Valid node types are as follows:</p> <ul> <li>General purpose: <ul> <li>Current generation: <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code>, <code>cache.m3.medium</code>, <code>cache.m3.large</code>, <code>cache.m3.xlarge</code>, <code>cache.m3.2xlarge</code></li> <li>Previous generation: <code>cache.t1.micro</code>, <code>cache.m1.small</code>, <code>cache.m1.medium</code>, <code>cache.m1.large</code>, <code>cache.m1.xlarge</code></li> </ul></li> <li>Compute optimized: <code>cache.c1.xlarge</code></li> <li>Memory optimized <ul> <li>Current generation: <code>cache.r3.large</code>, <code>cache.r3.xlarge</code>, <code>cache.r3.2xlarge</code>, <code>cache.r3.4xlarge</code>, <code>cache.r3.8xlarge</code></li> <li>Previous generation: <code>cache.m2.xlarge</code>, <code>cache.m2.2xlarge</code>, <code>cache.m2.4xlarge</code></li> </ul></li> </ul> <p><b>Notes:</b></p> <ul> <li>All t2 instances are created in an Amazon Virtual Private Cloud (VPC).</li> <li>Redis backup/restore is not supported for t2 instances.</li> <li>Redis Append-only files (AOF) functionality is not supported for t1 or t2 instances.</li> </ul> <p>For a complete listing of cache node types and specifications, see <a href=\"http://aws.amazon.com/elasticache/details\">Amazon ElastiCache Product Features and Details</a> and <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific\">Cache Node Type-Specific Parameters for Memcached</a> or <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific\">Cache Node Type-Specific Parameters for Redis</a>. </p>"
         },
         "Duration":{
           "shape":"String",
@@ -3837,7 +3838,7 @@
         },
         "CacheNodeType":{
           "shape":"String",
-          "documentation":"<p>The cache node type filter value. Use this parameter to show only the available offerings matching the specified cache node type.</p>"
+          "documentation":"<p>The cache node type filter value. Use this parameter to show only the available offerings matching the specified cache node type.</p> <p>Valid node types are as follows:</p> <ul> <li>General purpose: <ul> <li>Current generation: <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code>, <code>cache.m3.medium</code>, <code>cache.m3.large</code>, <code>cache.m3.xlarge</code>, <code>cache.m3.2xlarge</code></li> <li>Previous generation: <code>cache.t1.micro</code>, <code>cache.m1.small</code>, <code>cache.m1.medium</code>, <code>cache.m1.large</code>, <code>cache.m1.xlarge</code></li> </ul></li> <li>Compute optimized: <code>cache.c1.xlarge</code></li> <li>Memory optimized <ul> <li>Current generation: <code>cache.r3.large</code>, <code>cache.r3.xlarge</code>, <code>cache.r3.2xlarge</code>, <code>cache.r3.4xlarge</code>, <code>cache.r3.8xlarge</code></li> <li>Previous generation: <code>cache.m2.xlarge</code>, <code>cache.m2.2xlarge</code>, <code>cache.m2.4xlarge</code></li> </ul></li> </ul> <p><b>Notes:</b></p> <ul> <li>All t2 instances are created in an Amazon Virtual Private Cloud (VPC).</li> <li>Redis backup/restore is not supported for t2 instances.</li> <li>Redis Append-only files (AOF) functionality is not supported for t1 or t2 instances.</li> </ul> <p>For a complete listing of cache node types and specifications, see <a href=\"http://aws.amazon.com/elasticache/details\">Amazon ElastiCache Product Features and Details</a> and <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific\">Cache Node Type-Specific Parameters for Memcached</a> or <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific\">Cache Node Type-Specific Parameters for Redis</a>. </p>"
         },
         "Duration":{
           "shape":"String",
@@ -4160,7 +4161,7 @@
       "members":{
         "ResourceName":{
           "shape":"String",
-          "documentation":"<p>The name of the resource for which you want the list of tags, for example <code>myCluster01</code>.</p>"
+          "documentation":"<p>The name of the resource for which you want the list of tags, for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code>.</p>"
         }
       },
       "documentation":"<p>The input parameters for the <i>ListTagsForResource</i> action.</p>"
@@ -4175,7 +4176,7 @@
         },
         "NumCacheNodes":{
           "shape":"IntegerOptional",
-          "documentation":"<p>The number of cache nodes that the cache cluster should have. If the value for <code>NumCacheNodes</code> is greater than the sum of the number of current cache nodes and the number of cache nodes pending creation (which may be zero), then more nodes will be added. If the value is less than the number of existing cache nodes, then nodes will be removed. If the value is equal to the number of current cache nodes, then any pending add or remove requests are canceled.</p> <p>If you are removing cache nodes, you must use the <code>CacheNodeIdsToRemove</code> parameter to provide the IDs of the specific cache nodes to remove.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 50.</p> <p><b>Note:</b><br>Adding or removing Memcached cache nodes can be applied immediately or as a pending action. See <code>ApplyImmediately</code>.<br> A pending action to modify the number of cache nodes in a cluster during its maintenance window, whether by adding or removing nodes in accordance with the scale out architecture, is not queued. The customer's latest request to add or remove nodes to the cluster overrides any previous pending actions to modify the number of cache nodes in the cluster. For example, a request to remove 2 nodes would override a previous pending action to remove 3 nodes. Similarly, a request to add 2 nodes would override a previous pending action to remove 3 nodes and vice versa. As Memcached cache nodes may now be provisioned in different Availability Zones with flexible cache node placement, a request to add nodes does not automatically override a previous pending action to add nodes. The customer can modify the previous pending action to add more nodes or explicitly cancel the pending request and retry the new request. To cancel pending actions to modify the number of cache nodes in a cluster, use the <code>ModifyCacheCluster</code> request and set <i>NumCacheNodes</i> equal to the number of cache nodes currently in the cache cluster.</p>"
+          "documentation":"<p>The number of cache nodes that the cache cluster should have. If the value for <code>NumCacheNodes</code> is greater than the sum of the number of current cache nodes and the number of cache nodes pending creation (which may be zero), then more nodes will be added. If the value is less than the number of existing cache nodes, then nodes will be removed. If the value is equal to the number of current cache nodes, then any pending add or remove requests are canceled.</p> <p>If you are removing cache nodes, you must use the <code>CacheNodeIdsToRemove</code> parameter to provide the IDs of the specific cache nodes to remove.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20.</p> <p><b>Note:</b><br>Adding or removing Memcached cache nodes can be applied immediately or as a pending action. See <code>ApplyImmediately</code>.<br> A pending action to modify the number of cache nodes in a cluster during its maintenance window, whether by adding or removing nodes in accordance with the scale out architecture, is not queued. The customer's latest request to add or remove nodes to the cluster overrides any previous pending actions to modify the number of cache nodes in the cluster. For example, a request to remove 2 nodes would override a previous pending action to remove 3 nodes. Similarly, a request to add 2 nodes would override a previous pending action to remove 3 nodes and vice versa. As Memcached cache nodes may now be provisioned in different Availability Zones with flexible cache node placement, a request to add nodes does not automatically override a previous pending action to add nodes. The customer can modify the previous pending action to add more nodes or explicitly cancel the pending request and retry the new request. To cancel pending actions to modify the number of cache nodes in a cluster, use the <code>ModifyCacheCluster</code> request and set <i>NumCacheNodes</i> equal to the number of cache nodes currently in the cache cluster.</p>"
         },
         "CacheNodeIdsToRemove":{
           "shape":"CacheNodeIdsList",
@@ -4199,7 +4200,7 @@
         },
         "PreferredMaintenanceWindow":{
           "shape":"String",
-          "documentation":"<p>The weekly time range (in UTC) during which system maintenance can occur. Note that system maintenance may result in an outage. This change is made immediately. If you are moving this window to the current time, there must be at least 120 minutes between the current time and end of the window to ensure that pending changes are applied.</p>"
+          "documentation":"<p>Specifies the weekly time range during which maintenance on the cache cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for <code>ddd</code> are:</p> <ul> <li><code>sun</code></li> <li><code>mon</code></li> <li><code>tue</code></li> <li><code>wed</code></li> <li><code>thu</code></li> <li><code>fri</code></li> <li><code>sat</code></li> </ul> <p>Example: <code>sun:05:00-sun:09:00</code></p>"
         },
         "NotificationTopicArn":{
           "shape":"String",
@@ -4307,7 +4308,7 @@
         },
         "PreferredMaintenanceWindow":{
           "shape":"String",
-          "documentation":"<p>The weekly time range (in UTC) during which replication group system maintenance can occur. Note that system maintenance may result in an outage. This change is made immediately. If you are moving this window to the current time, there must be at least 120 minutes between the current time and end of the window to ensure that pending changes are applied.</p>"
+          "documentation":"<p>Specifies the weekly time range during which maintenance on the cache cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for <code>ddd</code> are:</p> <ul> <li><code>sun</code></li> <li><code>mon</code></li> <li><code>tue</code></li> <li><code>wed</code></li> <li><code>thu</code></li> <li><code>fri</code></li> <li><code>sat</code></li> </ul> <p>Example: <code>sun:05:00-sun:09:00</code></p>"
         },
         "NotificationTopicArn":{
           "shape":"String",
@@ -4546,7 +4547,7 @@
       "members":{
         "NumCacheNodes":{
           "shape":"IntegerOptional",
-          "documentation":"<p>The new number of cache nodes for the cache cluster.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 50.</p>"
+          "documentation":"<p>The new number of cache nodes for the cache cluster.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20.</p>"
         },
         "CacheNodeIdsToRemove":{
           "shape":"CacheNodeIdsList",
@@ -4634,7 +4635,7 @@
       "members":{
         "ResourceName":{
           "shape":"String",
-          "documentation":"<p>The name of the ElastiCache resource from which you want the listed tags removed, for example <code>myCluster01</code>.</p>"
+          "documentation":"<p>The name of the ElastiCache resource from which you want the listed tags removed, for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code>.</p>"
         },
         "TagKeys":{
           "shape":"KeyList",
@@ -4754,7 +4755,7 @@
         },
         "CacheNodeType":{
           "shape":"String",
-          "documentation":"<p>The cache node type for the reserved cache nodes.</p>"
+          "documentation":"<p>The cache node type for the reserved cache nodes.</p> <p>Valid node types are as follows:</p> <ul> <li>General purpose: <ul> <li>Current generation: <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code>, <code>cache.m3.medium</code>, <code>cache.m3.large</code>, <code>cache.m3.xlarge</code>, <code>cache.m3.2xlarge</code></li> <li>Previous generation: <code>cache.t1.micro</code>, <code>cache.m1.small</code>, <code>cache.m1.medium</code>, <code>cache.m1.large</code>, <code>cache.m1.xlarge</code></li> </ul></li> <li>Compute optimized: <code>cache.c1.xlarge</code></li> <li>Memory optimized <ul> <li>Current generation: <code>cache.r3.large</code>, <code>cache.r3.xlarge</code>, <code>cache.r3.2xlarge</code>, <code>cache.r3.4xlarge</code>, <code>cache.r3.8xlarge</code></li> <li>Previous generation: <code>cache.m2.xlarge</code>, <code>cache.m2.2xlarge</code>, <code>cache.m2.4xlarge</code></li> </ul></li> </ul> <p><b>Notes:</b></p> <ul> <li>All t2 instances are created in an Amazon Virtual Private Cloud (VPC).</li> <li>Redis backup/restore is not supported for t2 instances.</li> <li>Redis Append-only files (AOF) functionality is not supported for t1 or t2 instances.</li> </ul> <p>For a complete listing of cache node types and specifications, see <a href=\"http://aws.amazon.com/elasticache/details\">Amazon ElastiCache Product Features and Details</a> and <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific\">Cache Node Type-Specific Parameters for Memcached</a> or <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific\">Cache Node Type-Specific Parameters for Redis</a>. </p>"
         },
         "StartTime":{
           "shape":"TStamp",
@@ -4862,7 +4863,7 @@
         },
         "CacheNodeType":{
           "shape":"String",
-          "documentation":"<p>The cache node type for the reserved cache node.</p>"
+          "documentation":"<p>The cache node type for the reserved cache node.</p> <p>Valid node types are as follows:</p> <ul> <li>General purpose: <ul> <li>Current generation: <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code>, <code>cache.m3.medium</code>, <code>cache.m3.large</code>, <code>cache.m3.xlarge</code>, <code>cache.m3.2xlarge</code></li> <li>Previous generation: <code>cache.t1.micro</code>, <code>cache.m1.small</code>, <code>cache.m1.medium</code>, <code>cache.m1.large</code>, <code>cache.m1.xlarge</code></li> </ul></li> <li>Compute optimized: <code>cache.c1.xlarge</code></li> <li>Memory optimized <ul> <li>Current generation: <code>cache.r3.large</code>, <code>cache.r3.xlarge</code>, <code>cache.r3.2xlarge</code>, <code>cache.r3.4xlarge</code>, <code>cache.r3.8xlarge</code></li> <li>Previous generation: <code>cache.m2.xlarge</code>, <code>cache.m2.2xlarge</code>, <code>cache.m2.4xlarge</code></li> </ul></li> </ul> <p><b>Notes:</b></p> <ul> <li>All t2 instances are created in an Amazon Virtual Private Cloud (VPC).</li> <li>Redis backup/restore is not supported for t2 instances.</li> <li>Redis Append-only files (AOF) functionality is not supported for t1 or t2 instances.</li> </ul> <p>For a complete listing of cache node types and specifications, see <a href=\"http://aws.amazon.com/elasticache/details\">Amazon ElastiCache Product Features and Details</a> and <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific\">Cache Node Type-Specific Parameters for Memcached</a> or <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific\">Cache Node Type-Specific Parameters for Redis</a>. </p>"
         },
         "Duration":{
           "shape":"Integer",
@@ -4989,7 +4990,7 @@
           "documentation":"<p>The status of the cache security group membership. The status changes whenever a cache security group is modified, or when the cache security groups assigned to a cache cluster are modified.</p>"
         }
       },
-      "documentation":"<p>Represents a single cache security group and its status..</p>"
+      "documentation":"<p>Represents a single cache security group and its status.</p>"
     },
     "SecurityGroupMembershipList":{
       "type":"list",
@@ -5016,7 +5017,7 @@
         },
         "CacheNodeType":{
           "shape":"String",
-          "documentation":"<p>The name of the compute and memory capacity node type for the source cache cluster.</p>"
+          "documentation":"<p>The name of the compute and memory capacity node type for the source cache cluster.</p> <p>Valid node types are as follows:</p> <ul> <li>General purpose: <ul> <li>Current generation: <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code>, <code>cache.m3.medium</code>, <code>cache.m3.large</code>, <code>cache.m3.xlarge</code>, <code>cache.m3.2xlarge</code></li> <li>Previous generation: <code>cache.t1.micro</code>, <code>cache.m1.small</code>, <code>cache.m1.medium</code>, <code>cache.m1.large</code>, <code>cache.m1.xlarge</code></li> </ul></li> <li>Compute optimized: <code>cache.c1.xlarge</code></li> <li>Memory optimized <ul> <li>Current generation: <code>cache.r3.large</code>, <code>cache.r3.xlarge</code>, <code>cache.r3.2xlarge</code>, <code>cache.r3.4xlarge</code>, <code>cache.r3.8xlarge</code></li> <li>Previous generation: <code>cache.m2.xlarge</code>, <code>cache.m2.2xlarge</code>, <code>cache.m2.4xlarge</code></li> </ul></li> </ul> <p><b>Notes:</b></p> <ul> <li>All t2 instances are created in an Amazon Virtual Private Cloud (VPC).</li> <li>Redis backup/restore is not supported for t2 instances.</li> <li>Redis Append-only files (AOF) functionality is not supported for t1 or t2 instances.</li> </ul> <p>For a complete listing of cache node types and specifications, see <a href=\"http://aws.amazon.com/elasticache/details\">Amazon ElastiCache Product Features and Details</a> and <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific\">Cache Node Type-Specific Parameters for Memcached</a> or <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific\">Cache Node Type-Specific Parameters for Redis</a>. </p>"
         },
         "Engine":{
           "shape":"String",
@@ -5028,7 +5029,7 @@
         },
         "NumCacheNodes":{
           "shape":"IntegerOptional",
-          "documentation":"<p>The number of cache nodes in the source cache cluster.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 50.</p>"
+          "documentation":"<p>The number of cache nodes in the source cache cluster.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20.</p>"
         },
         "PreferredAvailabilityZone":{
           "shape":"String",
@@ -5040,7 +5041,7 @@
         },
         "PreferredMaintenanceWindow":{
           "shape":"String",
-          "documentation":"<p> The time range (in UTC) during which weekly system maintenance can occur on the source cache cluster.</p>"
+          "documentation":"<p>Specifies the weekly time range during which maintenance on the cache cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for <code>ddd</code> are:</p> <ul> <li><code>sun</code></li> <li><code>mon</code></li> <li><code>tue</code></li> <li><code>wed</code></li> <li><code>thu</code></li> <li><code>fri</code></li> <li><code>sat</code></li> </ul> <p>Example: <code>sun:05:00-sun:09:00</code></p>"
         },
         "TopicArn":{
           "shape":"String",
@@ -5204,7 +5205,7 @@
         },
         "Value":{
           "shape":"String",
-          "documentation":"<p>The tag's value. May be null.</p>"
+          "documentation":"<p>The tag's value. May not be null.</p>"
         }
       },
       "documentation":"<p>A cost allocation Tag that can be added to an ElastiCache cluster or replication group. Tags are composed of a Key/Value pair. A tag with a null Value is permitted.</p>"
@@ -5221,7 +5222,7 @@
       "members":{
         "TagList":{
           "shape":"TagList",
-          "documentation":"<p>A list of cost allocation tags as a key-value pair.</p>"
+          "documentation":"<p>A list of cost allocation tags as key-value pairs. </p>"
         }
       },
       "documentation":"<p>Represents the output from the <i>AddTagsToResource</i>, <i>ListTagsOnResource</i>, and <i>RemoveTagsFromResource</i> actions.</p>"
