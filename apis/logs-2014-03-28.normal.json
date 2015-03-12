@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2014-03-28",
     "endpointPrefix":"logs",
@@ -256,7 +257,7 @@
           "documentation":"<p>Returned if the service cannot complete the request.</p>"
         }
       ],
-      "documentation":"<p> Returns all the log streams that are associated with the specified log group. The list returned in the response is ASCII-sorted by log stream name. </p> <p> By default, this operation returns up to 50 log streams. If there are more log streams to list, the response would contain a <code class=\"code\">nextToken</code> value in the response body. You can also limit the number of log streams returned in the response by specifying the <code class=\"code\">limit</code> parameter in the request. </p>"
+      "documentation":"<p> Returns all the log streams that are associated with the specified log group. The list returned in the response is ASCII-sorted by log stream name. </p> <p> By default, this operation returns up to 50 log streams. If there are more log streams to list, the response would contain a <code class=\"code\">nextToken</code> value in the response body. You can also limit the number of log streams returned in the response by specifying the <code class=\"code\">limit</code> parameter in the request. This operation has a limit of five transactions per second, after which transactions are throttled. </p>"
     },
     "DescribeMetricFilters":{
       "name":"DescribeMetricFilters",
@@ -353,7 +354,7 @@
           "documentation":"<p>Returned if the service cannot complete the request.</p>"
         }
       ],
-      "documentation":"<p> Uploads a batch of log events to the specified log stream. </p> <p> Every PutLogEvents request must include the <code class=\"code\">sequenceToken</code> obtained from the response of the previous request. An upload in a newly created log stream does not require a <code class=\"code\">sequenceToken</code>. </p> <p> The batch of events must satisfy the following constraints: <ul> <li>The maximum batch size is 32,768 bytes, and this size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for each log event.</li> <li>None of the log events in the batch can be more than 2 hours in the future.</li> <li>None of the log events in the batch can be older than 14 days or the retention period of the log group.</li> <li>The log events in the batch must be in chronological ordered by their <code class=\"code\">timestamp</code>.</li> <li>The maximum number of log events in a batch is 1,000.</li> </ul> </p>"
+      "documentation":"<p> Uploads a batch of log events to the specified log stream. </p> <p> Every PutLogEvents request must include the <code class=\"code\">sequenceToken</code> obtained from the response of the previous request. An upload in a newly created log stream does not require a <code class=\"code\">sequenceToken</code>. </p> <p> The batch of events must satisfy the following constraints: <ul> <li>The maximum batch size is 1,048,576 bytes, and this size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for each log event.</li> <li>None of the log events in the batch can be more than 2 hours in the future.</li> <li>None of the log events in the batch can be older than 14 days or the retention period of the log group.</li> <li>The log events in the batch must be in chronological ordered by their <code class=\"code\">timestamp</code>.</li> <li>The maximum number of log events in a batch is 10,000.</li> </ul> </p>"
     },
     "PutMetricFilter":{
       "name":"PutMetricFilter",
@@ -515,6 +516,7 @@
         "logGroupName":{"shape":"LogGroupName"}
       }
     },
+    "Descending":{"type":"boolean"},
     "DescribeLimit":{
       "type":"integer",
       "min":1,
@@ -547,7 +549,18 @@
       "required":["logGroupName"],
       "members":{
         "logGroupName":{"shape":"LogGroupName"},
-        "logStreamNamePrefix":{"shape":"LogStreamName"},
+        "logStreamNamePrefix":{
+          "shape":"LogStreamName",
+          "documentation":"<p> Will only return log streams that match the provided logStreamNamePrefix. If you don't specify a value, no prefix filter is applied. </p>"
+        },
+        "orderBy":{
+          "shape":"OrderBy",
+          "documentation":"<p> Specifies what to order the returned log streams by. Valid arguments are 'LogStreamName' or 'LastEventTime'. If you don't specify a value, results are ordered by LogStreamName. If 'LastEventTime' is chosen, the request cannot also contain a logStreamNamePrefix. </p>"
+        },
+        "descending":{
+          "shape":"Descending",
+          "documentation":"<p> If set to true, results are returned in descending order. If you don't specify a value or set it to false, results are returned in ascending order. </p>"
+        },
         "nextToken":{
           "shape":"NextToken",
           "documentation":"<p> A string token used for pagination that points to the next page of results. It must be a value obtained from the response of the previous <code class=\"code\">DescribeLogStreams</code> request. </p>"
@@ -590,8 +603,7 @@
     },
     "EventMessage":{
       "type":"string",
-      "min":1,
-      "max":32768
+      "min":1
     },
     "EventNumber":{"type":"long"},
     "EventsLimit":{
@@ -671,7 +683,7 @@
       "type":"list",
       "member":{"shape":"InputLogEvent"},
       "min":1,
-      "max":1000,
+      "max":10000,
       "documentation":"A list of events belonging to a log stream."
     },
     "InvalidParameterException":{
@@ -695,6 +707,7 @@
       "exception":true,
       "documentation":"<p>Returned if you have reached the maximum number of resources that can be created.</p>"
     },
+    "LogEventIndex":{"type":"integer"},
     "LogGroup":{
       "type":"structure",
       "members":{
@@ -806,6 +819,7 @@
     },
     "NextToken":{
       "type":"string",
+      "min":1,
       "documentation":"A string token used for pagination that points to the next page of results. It must be a value obtained from the response of the previous request. The token expires after 24 hours."
     },
     "OperationAbortedException":{
@@ -814,6 +828,13 @@
       },
       "exception":true,
       "documentation":"<p>Returned if multiple requests to update the same resource were in conflict.</p>"
+    },
+    "OrderBy":{
+      "type":"string",
+      "enum":[
+        "LogStreamName",
+        "LastEventTime"
+      ]
     },
     "OutputLogEvent":{
       "type":"structure",
@@ -847,7 +868,8 @@
     "PutLogEventsResponse":{
       "type":"structure",
       "members":{
-        "nextSequenceToken":{"shape":"SequenceToken"}
+        "nextSequenceToken":{"shape":"SequenceToken"},
+        "rejectedLogEventsInfo":{"shape":"RejectedLogEventsInfo"}
       }
     },
     "PutMetricFilterRequest":{
@@ -874,6 +896,14 @@
       "members":{
         "logGroupName":{"shape":"LogGroupName"},
         "retentionInDays":{"shape":"Days"}
+      }
+    },
+    "RejectedLogEventsInfo":{
+      "type":"structure",
+      "members":{
+        "tooNewLogEventStartIndex":{"shape":"LogEventIndex"},
+        "tooOldLogEventEndIndex":{"shape":"LogEventIndex"},
+        "expiredLogEventEndIndex":{"shape":"LogEventIndex"}
       }
     },
     "ResourceAlreadyExistsException":{
