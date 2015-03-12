@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2013-11-01",
     "endpointPrefix":"cloudtrail",
@@ -34,7 +35,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the maximum number of trails is reached."
+          "documentation":"<p>This exception is thrown when the maximum number of trails is reached.</p>"
         },
         {
           "shape":"TrailAlreadyExistsException",
@@ -44,7 +45,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the specified trail already exists."
+          "documentation":"<p>This exception is thrown when the specified trail already exists.</p>"
         },
         {
           "shape":"S3BucketDoesNotExistException",
@@ -54,7 +55,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the specified S3 bucket does not exist."
+          "documentation":"<p>This exception is thrown when the specified S3 bucket does not exist.</p>"
         },
         {
           "shape":"InsufficientS3BucketPolicyException",
@@ -64,7 +65,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the policy on the S3 bucket is not sufficient."
+          "documentation":"<p>This exception is thrown when the policy on the S3 bucket is not sufficient.</p>"
         },
         {
           "shape":"InsufficientSnsTopicPolicyException",
@@ -74,7 +75,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the policy on the SNS topic is not sufficient."
+          "documentation":"<p>This exception is thrown when the policy on the SNS topic is not sufficient.</p>"
         },
         {
           "shape":"InvalidS3BucketNameException",
@@ -84,7 +85,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the provided S3 bucket name is not valid."
+          "documentation":"<p>This exception is thrown when the provided S3 bucket name is not valid.</p>"
         },
         {
           "shape":"InvalidS3PrefixException",
@@ -94,7 +95,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the provided S3 prefix is not valid."
+          "documentation":"<p>This exception is thrown when the provided S3 prefix is not valid.</p>"
         },
         {
           "shape":"InvalidSnsTopicNameException",
@@ -104,7 +105,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the provided SNS topic name is not valid."
+          "documentation":"<p>This exception is thrown when the provided SNS topic name is not valid. </p>"
         },
         {
           "shape":"InvalidTrailNameException",
@@ -114,7 +115,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the provided trail name is not valid."
+          "documentation":"<p>This exception is thrown when the provided trail name is not valid.</p>"
         },
         {
           "shape":"InvalidCloudWatchLogsLogGroupArnException",
@@ -124,7 +125,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the provided CloudWatch log group is not valid."
+          "documentation":"<p>This exception is thrown when the provided CloudWatch log group is not valid.</p>"
         },
         {
           "shape":"InvalidCloudWatchLogsRoleArnException",
@@ -134,7 +135,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the provided role is not valid."
+          "documentation":"<p>This exception is thrown when the provided role is not valid.</p>"
         },
         {
           "shape":"CloudWatchLogsDeliveryUnavailableException",
@@ -144,7 +145,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"Cannot set a CloudWatch Logs delivery for this region."
+          "documentation":"<p>Cannot set a CloudWatch Logs delivery for this region.</p>"
         }
       ],
       "documentation":"<p>From the command line, use <code>create-subscription</code>. </p> <p>Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. </p>"
@@ -172,7 +173,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the trail with the given name is not found."
+          "documentation":"<p>This exception is thrown when the trail with the given name is not found.</p>"
         },
         {
           "shape":"InvalidTrailNameException",
@@ -182,7 +183,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the provided trail name is not valid."
+          "documentation":"<p>This exception is thrown when the provided trail name is not valid.</p>"
         }
       ],
       "documentation":"<p>Deletes a trail.</p>"
@@ -226,7 +227,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the trail with the given name is not found."
+          "documentation":"<p>This exception is thrown when the trail with the given name is not found.</p>"
         },
         {
           "shape":"InvalidTrailNameException",
@@ -236,10 +237,68 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the provided trail name is not valid."
+          "documentation":"<p>This exception is thrown when the provided trail name is not valid.</p>"
         }
       ],
       "documentation":"<p>Returns a JSON-formatted list of information about the specified trail. Fields include information on delivery errors, Amazon SNS and Amazon S3 errors, and start and stop logging times for each trail. </p>"
+    },
+    "LookupEvents":{
+      "name":"LookupEvents",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{
+        "shape":"LookupEventsRequest",
+        "documentation":"<p>Contains a request for LookupEvents.</p>"
+      },
+      "output":{
+        "shape":"LookupEventsResponse",
+        "documentation":"<p>Contains a response to a LookupEvents action.</p>"
+      },
+      "errors":[
+        {
+          "shape":"InvalidLookupAttributesException",
+          "error":{
+            "code":"InvalidLookupAttributes",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>Occurs when an invalid lookup attribute is specified.</p>"
+        },
+        {
+          "shape":"InvalidTimeRangeException",
+          "error":{
+            "code":"InvalidTimeRange",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>Occurs if the timestamp values are invalid. Either the start time occurs after the end time or the time range is outside the range of possible values. </p>"
+        },
+        {
+          "shape":"InvalidMaxResultsException",
+          "error":{
+            "code":"InvalidMaxResults",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>This exception is thrown if the limit specified is invalid. </p>"
+        },
+        {
+          "shape":"InvalidNextTokenException",
+          "error":{
+            "code":"InvalidNextToken",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true,
+          "documentation":"<p>Invalid token or token that was previously used in a request with different parameters. This exception is thrown if the token is invalid. </p>"
+        }
+      ],
+      "documentation":"<p>Looks up API activity events captured by CloudTrail that create, update, or delete resources in your account. Events for a region can be looked up for the times in which you had CloudTrail turned on in that region during the last seven days. Lookup supports five different attributes: time range (defined by a start time and end time), user name, event name, resource type, and resource name. All attributes are optional. The maximum number of attributes that can be specified in any one lookup request are time range and one other attribute. The default number of results returned is 10, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results. The rate of lookup requests is limited to one per second per account.</p> <important>Events that occurred during the selected time range will not be available for lookup if CloudTrail logging was not enabled when the events occurred.</important>"
     },
     "StartLogging":{
       "name":"StartLogging",
@@ -264,7 +323,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the trail with the given name is not found."
+          "documentation":"<p>This exception is thrown when the trail with the given name is not found.</p>"
         },
         {
           "shape":"InvalidTrailNameException",
@@ -274,7 +333,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the provided trail name is not valid."
+          "documentation":"<p>This exception is thrown when the provided trail name is not valid.</p>"
         }
       ],
       "documentation":"<p>Starts the recording of AWS API calls and log file delivery for a trail.</p>"
@@ -302,7 +361,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the trail with the given name is not found."
+          "documentation":"<p>This exception is thrown when the trail with the given name is not found.</p>"
         },
         {
           "shape":"InvalidTrailNameException",
@@ -312,7 +371,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the provided trail name is not valid."
+          "documentation":"<p>This exception is thrown when the provided trail name is not valid.</p>"
         }
       ],
       "documentation":"<p>Suspends the recording of AWS API calls and log file delivery for the specified trail. Under most circumstances, there is no need to use this action. You can update a trail without stopping it first. This action is the only way to stop recording.</p>"
@@ -340,7 +399,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the specified S3 bucket does not exist."
+          "documentation":"<p>This exception is thrown when the specified S3 bucket does not exist.</p>"
         },
         {
           "shape":"InsufficientS3BucketPolicyException",
@@ -350,7 +409,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the policy on the S3 bucket is not sufficient."
+          "documentation":"<p>This exception is thrown when the policy on the S3 bucket is not sufficient.</p>"
         },
         {
           "shape":"InsufficientSnsTopicPolicyException",
@@ -360,7 +419,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the policy on the SNS topic is not sufficient."
+          "documentation":"<p>This exception is thrown when the policy on the SNS topic is not sufficient.</p>"
         },
         {
           "shape":"TrailNotFoundException",
@@ -370,7 +429,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the trail with the given name is not found."
+          "documentation":"<p>This exception is thrown when the trail with the given name is not found.</p>"
         },
         {
           "shape":"InvalidS3BucketNameException",
@@ -380,7 +439,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the provided S3 bucket name is not valid."
+          "documentation":"<p>This exception is thrown when the provided S3 bucket name is not valid.</p>"
         },
         {
           "shape":"InvalidS3PrefixException",
@@ -390,7 +449,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the provided S3 prefix is not valid."
+          "documentation":"<p>This exception is thrown when the provided S3 prefix is not valid.</p>"
         },
         {
           "shape":"InvalidSnsTopicNameException",
@@ -400,7 +459,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the provided SNS topic name is not valid."
+          "documentation":"<p>This exception is thrown when the provided SNS topic name is not valid. </p>"
         },
         {
           "shape":"InvalidTrailNameException",
@@ -410,7 +469,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the provided trail name is not valid."
+          "documentation":"<p>This exception is thrown when the provided trail name is not valid.</p>"
         },
         {
           "shape":"InvalidCloudWatchLogsLogGroupArnException",
@@ -420,7 +479,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the provided CloudWatch log group is not valid."
+          "documentation":"<p>This exception is thrown when the provided CloudWatch log group is not valid.</p>"
         },
         {
           "shape":"InvalidCloudWatchLogsRoleArnException",
@@ -430,7 +489,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"This exception is thrown when the provided role is not valid."
+          "documentation":"<p>This exception is thrown when the provided role is not valid.</p>"
         },
         {
           "shape":"CloudWatchLogsDeliveryUnavailableException",
@@ -440,7 +499,7 @@
             "senderFault":true
           },
           "exception":true,
-          "documentation":"Cannot set a CloudWatch Logs delivery for this region."
+          "documentation":"<p>Cannot set a CloudWatch Logs delivery for this region.</p>"
         }
       ],
       "documentation":"<p>From the command line, use <code>update-subscription</code>.</p> <p>Updates the settings that specify delivery of log files. Changes to a trail do not require stopping the CloudTrail service. Use this action to designate an existing bucket for log delivery. If the existing bucket has previously been a target for CloudTrail log files, an IAM policy exists for the bucket. </p>"
@@ -458,7 +517,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"Cannot set a CloudWatch Logs delivery for this region."
+      "documentation":"<p>Cannot set a CloudWatch Logs delivery for this region.</p>"
     },
     "CreateTrailRequest":{
       "type":"structure",
@@ -570,6 +629,40 @@
       },
       "documentation":"<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
     },
+    "Event":{
+      "type":"structure",
+      "members":{
+        "EventId":{
+          "shape":"String",
+          "documentation":"<p>The CloudTrail ID of the event returned.</p>"
+        },
+        "EventName":{
+          "shape":"String",
+          "documentation":"<p>The name of the event returned.</p>"
+        },
+        "EventTime":{
+          "shape":"Date",
+          "documentation":"<p>The date and time of the event returned.</p>"
+        },
+        "Username":{
+          "shape":"String",
+          "documentation":"<p>A user name or role name of the requester that called the API in the event returned.</p>"
+        },
+        "Resources":{
+          "shape":"ResourceList",
+          "documentation":"<p>A list of resources referenced by the event returned.</p>"
+        },
+        "CloudTrailEvent":{
+          "shape":"String",
+          "documentation":"<p>A JSON string that contains a representation of the event returned.</p>"
+        }
+      },
+      "documentation":"<p>Contains information about an event that was returned by a lookup request. The result includes a representation of a CloudTrail event. </p>"
+    },
+    "EventsList":{
+      "type":"list",
+      "member":{"shape":"Event"}
+    },
     "GetTrailStatusRequest":{
       "type":"structure",
       "required":["Name"],
@@ -633,7 +726,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"This exception is thrown when the policy on the S3 bucket is not sufficient."
+      "documentation":"<p>This exception is thrown when the policy on the S3 bucket is not sufficient.</p>"
     },
     "InsufficientSnsTopicPolicyException":{
       "type":"structure",
@@ -645,7 +738,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"This exception is thrown when the policy on the SNS topic is not sufficient."
+      "documentation":"<p>This exception is thrown when the policy on the SNS topic is not sufficient.</p>"
     },
     "InvalidCloudWatchLogsLogGroupArnException":{
       "type":"structure",
@@ -657,7 +750,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"This exception is thrown when the provided CloudWatch log group is not valid."
+      "documentation":"<p>This exception is thrown when the provided CloudWatch log group is not valid.</p>"
     },
     "InvalidCloudWatchLogsRoleArnException":{
       "type":"structure",
@@ -669,7 +762,43 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"This exception is thrown when the provided role is not valid."
+      "documentation":"<p>This exception is thrown when the provided role is not valid.</p>"
+    },
+    "InvalidLookupAttributesException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidLookupAttributes",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>Occurs when an invalid lookup attribute is specified.</p>"
+    },
+    "InvalidMaxResultsException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidMaxResults",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>This exception is thrown if the limit specified is invalid. </p>"
+    },
+    "InvalidNextTokenException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidNextToken",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>Invalid token or token that was previously used in a request with different parameters. This exception is thrown if the token is invalid. </p>"
     },
     "InvalidS3BucketNameException":{
       "type":"structure",
@@ -681,7 +810,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"This exception is thrown when the provided S3 bucket name is not valid."
+      "documentation":"<p>This exception is thrown when the provided S3 bucket name is not valid.</p>"
     },
     "InvalidS3PrefixException":{
       "type":"structure",
@@ -693,7 +822,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"This exception is thrown when the provided S3 prefix is not valid."
+      "documentation":"<p>This exception is thrown when the provided S3 prefix is not valid.</p>"
     },
     "InvalidSnsTopicNameException":{
       "type":"structure",
@@ -705,7 +834,19 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"This exception is thrown when the provided SNS topic name is not valid."
+      "documentation":"<p>This exception is thrown when the provided SNS topic name is not valid. </p>"
+    },
+    "InvalidTimeRangeException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidTimeRange",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true,
+      "documentation":"<p>Occurs if the timestamp values are invalid. Either the start time occurs after the end time or the time range is outside the range of possible values. </p>"
     },
     "InvalidTrailNameException":{
       "type":"structure",
@@ -717,7 +858,84 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"This exception is thrown when the provided trail name is not valid."
+      "documentation":"<p>This exception is thrown when the provided trail name is not valid.</p>"
+    },
+    "LookupAttribute":{
+      "type":"structure",
+      "required":[
+        "AttributeKey",
+        "AttributeValue"
+      ],
+      "members":{
+        "AttributeKey":{
+          "shape":"LookupAttributeKey",
+          "documentation":"<p>Specifies an attribute on which to filter the events returned.</p>"
+        },
+        "AttributeValue":{
+          "shape":"String",
+          "documentation":"<p>Specifies a value for the specified AttributeKey.</p>"
+        }
+      },
+      "documentation":"<p>Specifies an attribute and value that filter the events returned.</p>"
+    },
+    "LookupAttributeKey":{
+      "type":"string",
+      "enum":[
+        "EventId",
+        "EventName",
+        "Username",
+        "ResourceType",
+        "ResourceName"
+      ]
+    },
+    "LookupAttributesList":{
+      "type":"list",
+      "member":{"shape":"LookupAttribute"}
+    },
+    "LookupEventsRequest":{
+      "type":"structure",
+      "members":{
+        "LookupAttributes":{
+          "shape":"LookupAttributesList",
+          "documentation":"<p>Contains a list of lookup attributes. Currently the list can contain only one item.</p>"
+        },
+        "StartTime":{
+          "shape":"Date",
+          "documentation":"<p>Specifies that only events that occur after or at the specified time are returned. If the specified start time is after the specified end time, an error is returned.</p>"
+        },
+        "EndTime":{
+          "shape":"Date",
+          "documentation":"<p>Specifies that only events that occur before or at the specified time are returned. If the specified end time is before the specified start time, an error is returned.</p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The number of events to return. Possible values are 1 through 50. The default is 10.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the the original call. For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.</p>"
+        }
+      },
+      "documentation":"<p>Contains a request for LookupEvents.</p>"
+    },
+    "LookupEventsResponse":{
+      "type":"structure",
+      "members":{
+        "Events":{
+          "shape":"EventsList",
+          "documentation":"<p>A list of events returned based on the lookup attributes specified and the CloudTrail event. The events list is sorted by time. The most recent event is listed first.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to use to get the next page of results after a previous API call. If the token does not appear, there are no more results to return. The token must be passed in with the same parameters as the previous call. For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.</p>"
+        }
+      },
+      "documentation":"<p>Contains a response to a LookupEvents action.</p>"
+    },
+    "MaxResults":{
+      "type":"integer",
+      "min":1,
+      "max":50
     },
     "MaximumNumberOfTrailsExceededException":{
       "type":"structure",
@@ -729,7 +947,27 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"This exception is thrown when the maximum number of trails is reached."
+      "documentation":"<p>This exception is thrown when the maximum number of trails is reached.</p>"
+    },
+    "NextToken":{"type":"string"},
+    "Resource":{
+      "type":"structure",
+      "members":{
+        "ResourceType":{
+          "shape":"String",
+          "documentation":"<p>The type of a resource referenced by the event returned. When the resource type cannot be determined, null is returned. Some examples of resource types are: <b>Instance</b> for EC2, <b>Trail</b> for CloudTrail, <b>DBInstance</b> for RDS, and <b>AccessKey</b> for IAM. For a list of resource types supported for event lookup, see <a href=\"http://docs.aws.amazon.com/awscloudtrail/latest/userguide/lookup_supported_resourcetypes.html\">Resource Types Supported for Event Lookup</a>.</p>"
+        },
+        "ResourceName":{
+          "shape":"String",
+          "documentation":"<p>The name of the resource referenced by the event returned. These are user-created names whose values will depend on the environment. For example, the resource name might be \"auto-scaling-test-group\" for an Auto Scaling Group or \"i-1234567\" for an EC2 Instance.</p>"
+        }
+      },
+      "documentation":"<p>Specifies the type and name of a resource referenced by an event.</p>"
+    },
+    "ResourceList":{
+      "type":"list",
+      "member":{"shape":"Resource"},
+      "documentation":"<p>A list of resources referenced by the event returned.</p>"
     },
     "S3BucketDoesNotExistException":{
       "type":"structure",
@@ -741,7 +979,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"This exception is thrown when the specified S3 bucket does not exist."
+      "documentation":"<p>This exception is thrown when the specified S3 bucket does not exist.</p>"
     },
     "StartLoggingRequest":{
       "type":"structure",
@@ -822,7 +1060,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"This exception is thrown when the specified trail already exists."
+      "documentation":"<p>This exception is thrown when the specified trail already exists.</p>"
     },
     "TrailList":{
       "type":"list",
@@ -842,7 +1080,7 @@
         "senderFault":true
       },
       "exception":true,
-      "documentation":"This exception is thrown when the trail with the given name is not found."
+      "documentation":"<p>This exception is thrown when the trail with the given name is not found.</p>"
     },
     "UpdateTrailRequest":{
       "type":"structure",
