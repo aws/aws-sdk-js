@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2014-10-01",
     "endpointPrefix":"ec2",
@@ -962,7 +963,7 @@
       },
       "input":{"shape":"DescribeSnapshotsRequest"},
       "output":{"shape":"DescribeSnapshotsResult"},
-      "documentation":"<p>Describes one or more of the Amazon EBS snapshots available to you. Available snapshots include public snapshots available for any AWS account to launch, private snapshots that you own, and private snapshots owned by another AWS account but for which you've been given explicit create volume permissions.</p> <p>The create volume permissions fall into the following categories:</p> <ul> <li> <i>public</i>: The owner of the snapshot granted create volume permissions for the snapshot to the <code>all</code> group. All AWS accounts have create volume permissions for these snapshots.</li> <li> <i>explicit</i>: The owner of the snapshot granted create volume permissions to a specific AWS account.</li> <li> <i>implicit</i>: An AWS account has implicit create volume permissions for all snapshots it owns.</li> </ul> <p>The list of snapshots returned can be modified by specifying snapshot IDs, snapshot owners, or AWS accounts with create volume permissions. If no options are specified, Amazon EC2 returns all snapshots for which you have create volume permissions.</p> <p>If you specify one or more snapshot IDs, only snapshots that have the specified IDs are returned. If you specify an invalid snapshot ID, an error is returned. If you specify a snapshot ID for which you do not have access, it is not included in the returned results.</p> <p>If you specify one or more snapshot owners, only snapshots from the specified owners and for which you have access are returned. The results can include the AWS account IDs of the specified owners, <code>amazon</code> for snapshots owned by Amazon, or <code>self</code> for snapshots that you own.</p> <p>If you specify a list of restorable users, only snapshots with create snapshot permissions for those users are returned. You can specify AWS account IDs (if you own the snapshots), <code>self</code> for snapshots for which you own or have explicit permissions, or <code>all</code> for public snapshots.</p> <p>For more information about Amazon EBS snapshots, see <a href='http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html'>Amazon EBS Snapshots</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation":"<p>Describes one or more of the Amazon EBS snapshots available to you. Available snapshots include public snapshots available for any AWS account to launch, private snapshots that you own, and private snapshots owned by another AWS account but for which you've been given explicit create volume permissions.</p> <p>The create volume permissions fall into the following categories:</p> <ul> <li> <i>public</i>: The owner of the snapshot granted create volume permissions for the snapshot to the <code>all</code> group. All AWS accounts have create volume permissions for these snapshots.</li> <li> <i>explicit</i>: The owner of the snapshot granted create volume permissions to a specific AWS account.</li> <li> <i>implicit</i>: An AWS account has implicit create volume permissions for all snapshots it owns.</li> </ul> <p>The list of snapshots returned can be modified by specifying snapshot IDs, snapshot owners, or AWS accounts with create volume permissions. If no options are specified, Amazon EC2 returns all snapshots for which you have create volume permissions.</p> <p>If you specify one or more snapshot IDs, only snapshots that have the specified IDs are returned. If you specify an invalid snapshot ID, an error is returned. If you specify a snapshot ID for which you do not have access, it is not included in the returned results.</p> <p>If you specify one or more snapshot owners, only snapshots from the specified owners and for which you have access are returned. The results can include the AWS account IDs of the specified owners, <code>amazon</code> for snapshots owned by Amazon, or <code>self</code> for snapshots that you own.</p> <p>If you specify a list of restorable users, only snapshots with create snapshot permissions for those users are returned. You can specify AWS account IDs (if you own the snapshots), <code>self</code> for snapshots for which you own or have explicit permissions, or <code>all</code> for public snapshots.</p> <p>If you are describing a long list of snapshots, you can paginate the output to make the list more manageable. The <code>MaxResults</code> parameter sets the maximum number of results returned in a single page. If the list of results exceeds your <code>MaxResults</code> value, then that number of results is returned along with a <code>NextToken</code> value that can be passed to a subsequent <code>DescribeSnapshots</code> request to retrieve the remaining results.</p> <p>For more information about Amazon EBS snapshots, see <a href='http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html'>Amazon EBS Snapshots</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeSpotDatafeedSubscription":{
       "name":"DescribeSpotDatafeedSubscription",
@@ -1227,7 +1228,7 @@
       },
       "input":{"shape":"GetConsoleOutputRequest"},
       "output":{"shape":"GetConsoleOutputResult"},
-      "documentation":"<p>Gets the console output for the specified instance.</p> <p>Instances do not have a physical monitor through which you can view their console output. They also lack physical controls that allow you to power up, reboot, or shut them down. To allow these actions, we provide them through the Amazon EC2 API and command line interface.</p> <p>Instance console output is buffered and posted shortly after instance boot, reboot, and termination. Amazon EC2 preserves the most recent 64 KB output which is available for at least one hour after the most recent post.</p> <p>For Linux/Unix instances, the instance console output displays the exact console output that would normally be displayed on a physical monitor attached to a machine. This output is buffered because the instance produces it and then posts it to a store where the instance's owner can retrieve it.</p> <p>For Windows instances, the instance console output displays the last three system event log errors.</p>"
+      "documentation":"<p>Gets the console output for the specified instance.</p> <p>Instances do not have a physical monitor through which you can view their console output. They also lack physical controls that allow you to power up, reboot, or shut them down. To allow these actions, we provide them through the Amazon EC2 API and command line interface.</p> <p>Instance console output is buffered and posted shortly after instance boot, reboot, and termination. Amazon EC2 preserves the most recent 64 KB output which is available for at least one hour after the most recent post.</p> <p>For Linux instances, the instance console output displays the exact console output that would normally be displayed on a physical monitor attached to a computer. This output is buffered because the instance produces it and then posts it to a store where the instance's owner can retrieve it.</p> <p>For Windows instances, the instance console output includes output from the EC2Config service.</p>"
     },
     "GetPasswordData":{
       "name":"GetPasswordData",
@@ -2133,7 +2134,7 @@
         },
         "GroupId":{
           "shape":"String",
-          "documentation":"<p>The ID of the security group.</p>"
+          "documentation":"<p>The ID of the security group. Required for a nondefault VPC.</p>"
         },
         "SourceSecurityGroupName":{
           "shape":"String",
@@ -2161,7 +2162,7 @@
         },
         "IpPermissions":{
           "shape":"IpPermissionList",
-          "documentation":"<p>A set of IP permissions. You can't specify a source security group and a CIDR IP address range.</p>"
+          "documentation":"<p>A set of IP permissions. Can be used to specify multiple rules in a single command. </p>"
         }
       }
     },
@@ -4093,7 +4094,7 @@
         },
         "MaxResults":{
           "shape":"Integer",
-          "documentation":"<p> The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p> <p>Constraint: If the value is greater than 1000, we return only 1000 items.</p>",
+          "documentation":"<p> The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results. You cannot specify this parameter and the instance IDs parameter in the same request.</p> <p>Constraint: If the value is greater than 1000, we return only 1000 items.</p>",
           "locationName":"maxResults"
         }
       }
@@ -4241,7 +4242,7 @@
         },
         "Attribute":{
           "shape":"ImageAttributeName",
-          "documentation":"<p>The AMI attribute.</p>"
+          "documentation":"<p>The AMI attribute.</p> <p><b>Note</b>: Depending on your account privileges, the <code>blockDeviceMapping</code> attribute may return a <code>Client.AuthFailure</code> error. If this happens, use <a>DescribeImages</a> to get information about the block device mapping for the AMI.</p>"
         }
       }
     },
@@ -4330,7 +4331,7 @@
         },
         "MaxResults":{
           "shape":"Integer",
-          "documentation":"<p>The maximum number of paginated instance items per response. The call also returns a token that you can specify in a subsequent call to get the next set of results. If the value is greater than 1000, we return only 1000 items.</p> <p>Default: 1000</p>"
+          "documentation":"<p>The maximum number of paginated instance items per response. The call also returns a token that you can specify in a subsequent call to get the next set of results. If the value is greater than 1000, we return only 1000 items. You cannot specify this parameter and the instance IDs parameter in the same request.</p> <p>Default: 1000</p>"
         },
         "IncludeAllInstances":{
           "shape":"Boolean",
@@ -4378,7 +4379,7 @@
         },
         "MaxResults":{
           "shape":"Integer",
-          "documentation":"<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results. If the value is greater than 1000, we return only 1000 items.</p>",
+          "documentation":"<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results. If the value is greater than 1000, we return only 1000 items. You cannot specify this parameter and the instance IDs parameter in the same request.</p>",
           "locationName":"maxResults"
         }
       }
@@ -4841,17 +4842,17 @@
         },
         "GroupNames":{
           "shape":"GroupNameStringList",
-          "documentation":"<p>[EC2-Classic, default VPC] One or more security group names. You can specify either the security group name or the security group ID.</p> <p>Default: Describes all your security groups.</p>",
+          "documentation":"<p>[EC2-Classic and default VPC only] One or more security group names. You can specify either the security group name or the security group ID. For security groups in a nondefault VPC, use the <code>group-name</code> filter to describe security groups by name.</p> <p>Default: Describes all your security groups.</p>",
           "locationName":"GroupName"
         },
         "GroupIds":{
           "shape":"GroupIdStringList",
-          "documentation":"<p>One or more security group IDs. Required for nondefault VPCs.</p> <p>Default: Describes all your security groups.</p>",
+          "documentation":"<p>One or more security group IDs. Required for security groups in a nondefault VPC.</p> <p>Default: Describes all your security groups.</p>",
           "locationName":"GroupId"
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>description</code> - The description of the security group.</p> </li> <li> <p><code>group-id</code> - The ID of the security group.</p> </li> <li> <p><code>group-name</code> - The name of the security group.</p> </li> <li> <p><code>ip-permission.cidr</code> - A CIDR range that has been granted permission.</p> </li> <li> <p><code>ip-permission.from-port</code> - The start of port range for the TCP and UDP protocols, or an ICMP type number.</p> </li> <li> <p><code>ip-permission.group-id</code> - The ID of a security group that has been granted permission.</p> </li> <li> <p><code>ip-permission.group-name</code> - The name of a security group that has been granted permission.</p> </li> <li> <p><code>ip-permission.protocol</code> - The IP protocol for the permission (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p><code>ip-permission.to-port</code> - The end of port range for the TCP and UDP protocols, or an ICMP code.</p> </li> <li> <p><code>ip-permission.user-id</code> - The ID of an AWS account that has been granted permission.</p> </li> <li> <p><code>owner-id</code> - The AWS account ID of the owner of the security group.</p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the security group.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the security group.</p> </li> <li> <p><code>vpc-id</code> - The ID of the VPC specified when the security group was created.</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>description</code> - The description of the security group.</p> </li> <li> <p><code>group-id</code> - The ID of the security group. </p> </li> <li> <p><code>group-name</code> - The name of the security group.</p> </li> <li> <p><code>ip-permission.cidr</code> - A CIDR range that has been granted permission.</p> </li> <li> <p><code>ip-permission.from-port</code> - The start of port range for the TCP and UDP protocols, or an ICMP type number.</p> </li> <li> <p><code>ip-permission.group-id</code> - The ID of a security group that has been granted permission.</p> </li> <li> <p><code>ip-permission.group-name</code> - The name of a security group that has been granted permission.</p> </li> <li> <p><code>ip-permission.protocol</code> - The IP protocol for the permission (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p><code>ip-permission.to-port</code> - The end of port range for the TCP and UDP protocols, or an ICMP code.</p> </li> <li> <p><code>ip-permission.user-id</code> - The ID of an AWS account that has been granted permission.</p> </li> <li> <p><code>owner-id</code> - The AWS account ID of the owner of the security group.</p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the security group.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the security group.</p> </li> <li> <p><code>vpc-id</code> - The ID of the VPC specified when the security group was created.</p> </li> </ul>",
           "locationName":"Filter"
         }
       }
@@ -4933,6 +4934,14 @@
           "shape":"FilterList",
           "documentation":"<p>One or more filters.</p> <ul> <li> <p><code>description</code> - A description of the snapshot.</p> </li> <li> <p><code>owner-alias</code> - The AWS account alias (for example, <code>amazon</code>) that owns the snapshot.</p> </li> <li> <p><code>owner-id</code> - The ID of the AWS account that owns the snapshot.</p> </li> <li> <p><code>progress</code> - The progress of the snapshot, as a percentage (for example, 80%).</p> </li> <li> <p><code>snapshot-id</code> - The snapshot ID.</p> </li> <li> <p><code>start-time</code> - The time stamp when the snapshot was initiated.</p> </li> <li> <p><code>status</code> - The status of the snapshot (<code>pending</code> | <code>completed</code> | <code>error</code>).</p> </li> <li> <p><code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource.</p> </li> <li> <p><code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p><code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p><code>volume-id</code> - The ID of the volume the snapshot is for.</p> </li> <li> <p><code>volume-size</code> - The size of the volume, in GiB.</p> </li> </ul>",
           "locationName":"Filter"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The <code>NextToken</code> value returned from a previous paginated <code>DescribeSnapshots</code> request where <code>MaxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>NextToken</code> value. This value is <code>null</code> when there are no more results to return.</p>"
+        },
+        "MaxResults":{
+          "shape":"Integer",
+          "documentation":"<p>The maximum number of snapshot results returned by <code>DescribeSnapshots</code> in paginated output. When this parameter is used, <code>DescribeSnapshots</code> only returns <code>MaxResults</code> results in a single page along with a <code>NextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeSnapshots</code> request with the returned <code>NextToken</code> value. This value can be between 5 and 1000; if <code>MaxResults</code> is given a value larger than 1000, only 1000 results are returned. If this parameter is not used, then <code>DescribeSnapshots</code> returns all results. You cannot specify this parameter and the snapshot IDs parameter in the same request.</p>"
         }
       }
     },
@@ -4942,6 +4951,11 @@
         "Snapshots":{
           "shape":"SnapshotList",
           "locationName":"snapshotSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The <code>NextToken</code> value to include in a future <code>DescribeSnapshots</code> request. When the results of a <code>DescribeSnapshots</code> request exceed <code>MaxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName":"nextToken"
         }
       }
     },
@@ -5186,7 +5200,7 @@
         },
         "MaxResults":{
           "shape":"Integer",
-          "documentation":"<p>The maximum number of paginated volume items per response.</p>"
+          "documentation":"<p>The maximum number of paginated volume items per response. You cannot specify this parameter and the volume IDs parameter in the same request.</p>"
         }
       }
     },
@@ -5229,7 +5243,7 @@
         },
         "MaxResults":{
           "shape":"Integer",
-          "documentation":"<p>The maximum number of volume results returned by <code>DescribeVolumes</code> in paginated output. When this parameter is used, <code>DescribeVolumes</code> only returns <code>MaxResults</code> results in a single page along with a <code>NextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeVolumes</code> request with the returned <code>NextToken</code> value. This value can be between 5 and 1000; if <code>MaxResults</code> is given a value larger than 1000, only 1000 results are returned. If this parameter is not used, then <code>DescribeVolumes</code> returns all results.</p>",
+          "documentation":"<p>The maximum number of volume results returned by <code>DescribeVolumes</code> in paginated output. When this parameter is used, <code>DescribeVolumes</code> only returns <code>MaxResults</code> results in a single page along with a <code>NextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeVolumes</code> request with the returned <code>NextToken</code> value. This value can be between 5 and 1000; if <code>MaxResults</code> is given a value larger than 1000, only 1000 results are returned. If this parameter is not used, then <code>DescribeVolumes</code> returns all results. You cannot specify this parameter and the volume IDs parameter in the same request.</p>",
           "locationName":"maxResults"
         }
       }
@@ -7342,7 +7356,7 @@
         },
         "AssociatePublicIpAddress":{
           "shape":"Boolean",
-          "documentation":"<p>Indicates whether to assign a public IP address to an instance you launch in a VPC. The public IP address can only be assigned to a network interface for eth0, and can only be assigned to a new network interface, not an existing one. You cannot specify more than one network interface in the request. If luanching into a default subnet, the default value is <code>true</code>.</p>",
+          "documentation":"<p>Indicates whether to assign a public IP address to an instance you launch in a VPC. The public IP address can only be assigned to a network interface for eth0, and can only be assigned to a new network interface, not an existing one. You cannot specify more than one network interface in the request. If launching into a default subnet, the default value is <code>true</code>.</p>",
           "locationName":"associatePublicIpAddress"
         }
       },
@@ -7672,7 +7686,7 @@
       "members":{
         "IpProtocol":{
           "shape":"String",
-          "documentation":"<p>The protocol.</p> <p>When you call <a>DescribeSecurityGroups</a>, the protocol value returned is the number. Exception: For TCP, UDP, and ICMP, the value returned is the name (for example, <code>tcp</code>, <code>udp</code>, or <code>icmp</code>). For a list of protocol numbers, see <a href=\"http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml\">Protocol Numbers</a>.</p>",
+          "documentation":"<p>The protocol.</p> <p>When you call <a>DescribeSecurityGroups</a>, the protocol value returned is the number. Exception: For TCP, UDP, and ICMP, the value returned is the name (for example, <code>tcp</code>, <code>udp</code>, or <code>icmp</code>). For a list of protocol numbers, see <a href=\"http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml\">Protocol Numbers</a>. (VPC only) When you call <a>AuthorizeSecurityGroupIngress</a>, you can use <code>-1</code> to specify all.</p>",
           "locationName":"ipProtocol"
         },
         "FromPort":{
@@ -11129,21 +11143,21 @@
       "members":{
         "UserId":{
           "shape":"String",
-          "documentation":"<p>The ID of an AWS account.</p>",
+          "documentation":"<p>The ID of an AWS account. EC2-Classic only.</p>",
           "locationName":"userId"
         },
         "GroupName":{
           "shape":"String",
-          "documentation":"<p>The ID of the security group owned by the specified AWS account.</p>",
+          "documentation":"<p>The name of the security group. In a request, use this parameter for a security group in EC2-Classic or a default VPC only. For a security group in a nondefault VPC, use <code>GroupId</code>.</p>",
           "locationName":"groupName"
         },
         "GroupId":{
           "shape":"String",
-          "documentation":"<p>The name of the security group in the specified AWS account.</p>",
+          "documentation":"<p>The ID of the security group.</p>",
           "locationName":"groupId"
         }
       },
-      "documentation":"<p>Describes a security group and AWS account ID pair for EC2-Classic.</p>"
+      "documentation":"<p>Describes a security group and AWS account ID pair. </p>"
     },
     "UserIdGroupPairList":{
       "type":"list",
