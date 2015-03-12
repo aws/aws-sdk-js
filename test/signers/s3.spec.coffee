@@ -273,7 +273,7 @@ describe 'AWS.Signers.S3', ->
 
 
       x-amz-date:DATE-STRING
-      /?versionId=a%2Bb
+      /?versionId=a+b
       """)
 
     it 'includes the non-encoded query string get header overrides', ->
