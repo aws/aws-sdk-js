@@ -270,6 +270,25 @@ describe 'AWS.EventListeners', ->
       expect(request.response.error.code).to.equal('UnknownEndpoint')
       expect(request.response.error.message).to.contain(
         'This service may not be available in the `mock-region\' region.')
+    it 'retries ENOTFOUND errors', ->
+      helpers.mockHttpResponse
+        code: 'NetworkingError'
+        errno: 'ENOTFOUND'
+        region: 'mock-region'
+        hostname: 'svc.mock-region.example.com'
+        retryable: true
+      service.config.maxRetries = 10
+      sendHandler = helpers.createSpy('send')
+      request = makeRequest()
+      request.on('send', sendHandler)
+      response = request.send()
+
+      expect(retryHandler.calls.length).not.to.equal(0)
+      expect(errorHandler.calls.length).not.to.equal(0)
+      expect(completeHandler.calls.length).not.to.equal(0)
+      expect(successHandler.calls.length).to.equal(0)
+      expect(response.retryCount).to.equal(service.config.maxRetries)
+      expect(sendHandler.calls.length).to.equal(service.config.maxRetries + 1)
 
   describe 'retry', ->
     it 'retries a request with a set maximum retries', ->
