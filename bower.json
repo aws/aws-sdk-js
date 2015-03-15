@@ -3,7 +3,7 @@
   "ignore": [
     "doc-src", "dist-tools", "eslint-rules", "features", "lib", 
     "scripts", "tasks", "test", "Gemfile*", "configuration*",
-    "Rakefile", "*.json", ".*"
+    "Rakefile", "package.json", "testem.json", ".*"
   ],
   "main": "dist/aws-sdk.js"
 }
