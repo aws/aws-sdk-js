@@ -19,7 +19,6 @@ global.it = (label, fn) ->
 
 EventEmitter = require('events').EventEmitter
 Buffer = AWS.util.Buffer
-semver = require('semver')
 
 require('util').print = (data) ->
   process.stdout.write(data)
@@ -125,7 +124,7 @@ mockHttpSuccessfulResponse = (status, headers, data, cb) ->
         null
 
   AWS.util.arrayEach data.slice(), (str) ->
-    if AWS.util.isNode() && (httpResp._events.readable || semver.gt(process.version, 'v0.11.3'))
+    if AWS.util.isNode() && httpResp._events.readable
       httpResp.emit('readable')
     else
       httpResp.emit('data', new Buffer(str))
