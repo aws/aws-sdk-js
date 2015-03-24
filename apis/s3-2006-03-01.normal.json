@@ -750,7 +750,6 @@
         "ap-southeast-2",
         "ap-northeast-1",
         "sa-east-1",
-        "",
         "cn-north-1",
         "eu-central-1"
       ]
@@ -1262,7 +1261,7 @@
       "members":{
         "LocationConstraint":{
           "shape":"BucketLocationConstraint",
-          "documentation":"Specifies the region where the bucket will be created."
+          "documentation":"Specifies the region where the bucket will be created. If you don't specify a region, the bucket will be created in US Standard."
         }
       }
     },
