@@ -428,8 +428,12 @@ describe 'AWS.TemporaryCredentials', ->
 describe 'AWS.WebIdentityCredentials', ->
   creds = null
 
-  beforeEach ->
+  setupCreds = () ->
     creds = new AWS.WebIdentityCredentials(WebIdentityToken: 'token', RoleArn: 'arn')
+
+  setupClients = () ->
+    setupCreds()
+    creds.createClients()
 
   mockSTS = (expireTime) ->
     helpers.spyOn(creds.service, 'assumeRoleWithWebIdentity').andCallFake (cb) ->
@@ -444,7 +448,28 @@ describe 'AWS.WebIdentityCredentials', ->
           Expiration: expireTime
         OtherProperty: true
 
+  describe 'constructor', ->
+    it 'lazily constructs service clients', ->
+      setupCreds()
+      expect(creds.service).not.to.exist
+
+  describe 'createClients', ->
+    beforeEach -> setupCreds()
+
+    it 'constructs service clients if not present', ->
+      expect(creds.service).not.to.exist
+      creds.createClients()
+      expect(creds.service).to.exist
+
+    it 'does not construct service clients if present', ->
+      creds.createClients()
+      service = creds.service
+      creds.createClients()
+      expect(service).to.eql(creds.service)
+
   describe 'refresh', ->
+    beforeEach -> setupClients()
+
     it 'loads federated credentials from STS', ->
       mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000))
       creds.refresh(->)
