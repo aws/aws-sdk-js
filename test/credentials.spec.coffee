@@ -325,8 +325,12 @@ if AWS.util.isNode()
 describe 'AWS.TemporaryCredentials', ->
   creds = null
 
-  beforeEach ->
+  setupCreds = () ->
     creds = new AWS.TemporaryCredentials(DurationSeconds: 1200)
+
+  setupClients = () ->
+    setupCreds()
+    creds.createClients()
 
   mockSTS = (expireTime, inParams) ->
     if !inParams
@@ -342,6 +346,25 @@ describe 'AWS.TemporaryCredentials', ->
         SecretAccessKey: 'SECRET'
         SessionToken: 'TOKEN'
         Expiration: expireTime
+
+  describe 'constructor', ->
+    setupCreds()
+    it 'constructs service clients lazily', ->
+      expect(creds.service).not.to.exist
+
+  describe 'createClients', ->
+    beforeEach -> setupCreds()
+
+    it 'constructs clients if not present', ->
+      expect(creds.service).not.to.exist
+      creds.createClients()
+      expect(creds.service).to.exist
+
+    it 'does not construct clients if already present', ->
+      creds.createClients()
+      service = creds.service
+      creds.createClients()
+      expect(service).to.eql(creds.service)
 
   describe 'masterCredentials', ->
     it 'seeds masterCredentials from global credentials', ->
@@ -364,11 +387,14 @@ describe 'AWS.TemporaryCredentials', ->
 
   describe 'needsRefresh', ->
     it 'can be expired based on expire time from STS response', ->
+      setupClients()
       mockSTS(new Date(0))
       creds.refresh(->)
       expect(creds.needsRefresh()).to.equal(true)
 
   describe 'refresh', ->
+    beforeEach -> setupClients()
+
     it 'loads temporary credentials from STS using getSessionToken', ->
       mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000))
       creds.refresh(->)
@@ -379,6 +405,7 @@ describe 'AWS.TemporaryCredentials', ->
 
     it 'loads temporary credentials from STS using assumeRole if RoleArn is provided', ->
       creds = new AWS.TemporaryCredentials(RoleArn: 'ARN')
+      creds.createClients()
       mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000),
         RoleArn: 'ARN', RoleSessionName: 'temporary-credentials')
       creds.refresh(->)
