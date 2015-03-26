@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2013-02-18",
     "endpointPrefix":"opsworks",
@@ -50,7 +51,7 @@
           "documentation":"<p>Indicates that a resource was not found.</p>"
         }
       ],
-      "documentation":"<p>Assigns one of the stack's registered Amazon EBS volumes to a specified instance. The volume must first be registered with the stack by calling <a>RegisterVolume</a>. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html\">Resource Management</a>.</p> <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>"
+      "documentation":"<p>Assigns one of the stack's registered Amazon EBS volumes to a specified instance. The volume must first be registered with the stack by calling <a>RegisterVolume</a>. After you register the volume, you must call <a>UpdateVolume</a> to specify a mount point before calling <code>AssignVolume</code>. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html\">Resource Management</a>.</p> <p><b>Required Permissions</b>: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html\">Managing User Permissions</a>.</p>"
     },
     "AssociateElasticIp":{
       "name":"AssociateElasticIp",
@@ -1521,7 +1522,7 @@
         },
         "Environment":{
           "shape":"EnvironmentVariables",
-          "documentation":"<p>An array of <code>EnvironmentVariable</code> objects that specify environment variables to be associated with the app. You can specify up to ten environment variables. After you deploy the app, these variables are defined on the associated app server instances.</p>"
+          "documentation":"<p>An array of <code>EnvironmentVariable</code> objects that specify environment variables to be associated with the app. After you deploy the app, these variables are defined on the associated app server instances. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment\"> Environment Variables</a>. </p> <note> There is no specific limit on the number of environment variables. However, the size of the associated data structure - which includes the variables' names, values, and protected flag values - cannot exceed 10 KB (10240 Bytes). This limit should accommodate most if not all use cases, but if you do exceed it, you will cause an exception (API) with an \"Environment: is too large (maximum is 10KB)\" message. </note>"
         }
       },
       "documentation":"<p>A description of the app.</p>"
@@ -1660,6 +1661,32 @@
         "timer"
       ]
     },
+    "BlockDeviceMapping":{
+      "type":"structure",
+      "members":{
+        "DeviceName":{
+          "shape":"String",
+          "documentation":"<p>The device name that is exposed to the instance, such as <code>/dev/sdh</code>. For the root device, you can use the explicit device name or you can set this parameter to <code>ROOT_DEVICE</code> and AWS OpsWorks will provide the correct device name.</p>"
+        },
+        "NoDevice":{
+          "shape":"String",
+          "documentation":"<p>Suppresses the specified device included in the AMI's block device mapping.</p>"
+        },
+        "VirtualName":{
+          "shape":"String",
+          "documentation":"<p>The virtual device name. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html\">BlockDeviceMapping</a>.</p>"
+        },
+        "Ebs":{
+          "shape":"EbsBlockDevice",
+          "documentation":"<p>An <code>EBSBlockDevice</code> that defines how to configure an Amazon EBS volume when the instance is launched.</p>"
+        }
+      },
+      "documentation":"<p>Describes a block device mapping. This data type maps directly to the Amazon EC2 <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html\">BlockDeviceMapping</a> data type. </p>"
+    },
+    "BlockDeviceMappings":{
+      "type":"list",
+      "member":{"shape":"BlockDeviceMapping"}
+    },
     "Boolean":{
       "type":"boolean",
       "box":true
@@ -1715,11 +1742,11 @@
         },
         "DefaultOs":{
           "shape":"String",
-          "documentation":"<p>The stacks's operating system, which must be set to one of the following.</p> <ul> <li>Standard operating systems: an Amazon Linux version such as <code>Amazon Linux 2014.09</code>, <code>Ubuntu 12.04 LTS</code>, or <code>Ubuntu 14.04 LTS</code>.</li> <li>Custom AMIs: <code>Custom</code>. You specify the custom AMI you want to use when you create instances.</li> </ul> <p> The default option is the current Amazon Linux version.</p>"
+          "documentation":"<p>The stack's operating system, which must be set to one of the following.</p> <ul> <li>Standard operating systems: an Amazon Linux version such as <code>Amazon Linux 2014.09</code>, <code>Ubuntu 12.04 LTS</code>, or <code>Ubuntu 14.04 LTS</code>.</li> <li>Custom AMIs: <code>Custom</code>. You specify the custom AMI you want to use when you create instances.</li> </ul> <p> The default option is the current Amazon Linux version.</p>"
         },
         "HostnameTheme":{
           "shape":"String",
-          "documentation":"<p>The stack's host name theme, with spaces are replaced by underscores. The theme is used to generate host names for the stack's instances. By default, <code>HostnameTheme</code> is set to <code>Layer_Dependent</code>, which creates host names by appending integers to the layer's short name. The other themes are:</p> <ul> <li><code>Baked_Goods</code></li> <li><code>Clouds</code></li> <li><code>European_Cities</code></li> <li><code>Fruits</code></li> <li><code>Greek_Deities</code></li> <li><code>Legendary_Creatures_from_Japan</code></li> <li><code>Planets_and_Moons</code></li> <li><code>Roman_Deities</code></li> <li><code>Scottish_Islands</code></li> <li><code>US_Cities</code></li> <li><code>Wild_Cats</code></li> </ul> <p>To obtain a generated host name, call <code>GetHostNameSuggestion</code>, which returns a host name based on the current theme.</p>"
+          "documentation":"<p>The stack's host name theme, with spaces are replaced by underscores. The theme is used to generate host names for the stack's instances. By default, <code>HostnameTheme</code> is set to <code>Layer_Dependent</code>, which creates host names by appending integers to the layer's short name. The other themes are:</p> <ul> <li><code>Baked_Goods</code></li> <li><code>Clouds</code></li> <li><code>Europe_Cities</code></li> <li><code>Fruits</code></li> <li><code>Greek_Deities</code></li> <li><code>Legendary_creatures_from_Japan</code></li> <li><code>Planets_and_Moons</code></li> <li><code>Roman_Deities</code></li> <li><code>Scottish_Islands</code></li> <li><code>US_Cities</code></li> <li><code>Wild_Cats</code></li> </ul> <p>To obtain a generated host name, call <code>GetHostNameSuggestion</code>, which returns a host name based on the current theme.</p>"
         },
         "DefaultAvailabilityZone":{
           "shape":"String",
@@ -1752,7 +1779,7 @@
         "CustomCookbooksSource":{"shape":"Source"},
         "DefaultSshKeyName":{
           "shape":"String",
-          "documentation":"<p>A default SSH key for the stack instances. You can override this value when you create or update an instance.</p>"
+          "documentation":"<p>A default Amazon EC2 key pair name. The default value is none. If you specify a key pair name, AWS OpsWorks installs the public key on the instance and you can use the private key with an SSH client to log in to the instance. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html\"> Using SSH to Communicate with an Instance</a> and <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html\"> Managing SSH Access</a>. You can override this setting by specifying a different key pair, or no key pair, when you <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html\"> create an instance</a>. </p>"
         },
         "ClonePermissions":{
           "shape":"Boolean",
@@ -1882,7 +1909,7 @@
         },
         "Environment":{
           "shape":"EnvironmentVariables",
-          "documentation":"<p>An array of <code>EnvironmentVariable</code> objects that specify environment variables to be associated with the app. You can specify up to ten environment variables. After you deploy the app, these variables are defined on the associated app server instance.</p> <note>This parameter is supported only by Chef 11.10 stacks. If you have specified one or more environment variables, you cannot modify the stack's Chef version.</note>"
+          "documentation":"<p>An array of <code>EnvironmentVariable</code> objects that specify environment variables to be associated with the app. After you deploy the app, these variables are defined on the associated app server instance. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment\"> Environment Variables</a>.</p> <p> There is no specific limit on the number of environment variables. However, the size of the associated data structure - which includes the variables' names, values, and protected flag values - cannot exceed 10 KB (10240 Bytes). This limit should accommodate most if not all use cases. Exceeding it will cause an exception with the message, \"Environment: is too large (maximum is 10KB).\" </p> <note>This parameter is supported only by Chef 11.10 stacks. If you have specified one or more environment variables, you cannot modify the stack's Chef version.</note>"
         }
       }
     },
@@ -1977,7 +2004,7 @@
         },
         "SshKeyName":{
           "shape":"String",
-          "documentation":"<p>The instance SSH key name.</p>"
+          "documentation":"<p>The instance's Amazon EC2 key pair name.</p>"
         },
         "AvailabilityZone":{
           "shape":"String",
@@ -1998,6 +2025,10 @@
         "RootDeviceType":{
           "shape":"RootDeviceType",
           "documentation":"<p>The instance root device type. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device\">Storage for the Root Device</a>.</p>"
+        },
+        "BlockDeviceMappings":{
+          "shape":"BlockDeviceMappings",
+          "documentation":"<p>An array of <code>BlockDeviceMapping</code> objects that specify the instance's block devices. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html\">Block Device Mapping</a>.</p>"
         },
         "InstallUpdatesOnBoot":{
           "shape":"Boolean",
@@ -2042,7 +2073,7 @@
         },
         "Shortname":{
           "shape":"String",
-          "documentation":"<p>The layer short name, which is used internally by AWS OpsWorks and by Chef recipes. The short name is also used as the name for the directory where your app files are installed. It can have a maximum of 200 characters, which are limited to the alphanumeric characters, '-', '_', and '.'.</p>"
+          "documentation":"<p>For custom layers only, use this parameter to specify the layer's short name, which is used internally by AWS OpsWorks and by Chef recipes. The short name is also used as the name for the directory where your app files are installed. It can have a maximum of 200 characters, which are limited to the alphanumeric characters, '-', '_', and '.'.</p> <p>The built-in layers' short names are defined by AWS OpsWorks. For more information, see the <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/layers.html\">Layer Reference</a></p>"
         },
         "Attributes":{
           "shape":"LayerAttributes",
@@ -2143,7 +2174,7 @@
         },
         "HostnameTheme":{
           "shape":"String",
-          "documentation":"<p>The stack's host name theme, with spaces are replaced by underscores. The theme is used to generate host names for the stack's instances. By default, <code>HostnameTheme</code> is set to <code>Layer_Dependent</code>, which creates host names by appending integers to the layer's short name. The other themes are:</p> <ul> <li><code>Baked_Goods</code></li> <li><code>Clouds</code></li> <li><code>European_Cities</code></li> <li><code>Fruits</code></li> <li><code>Greek_Deities</code></li> <li><code>Legendary_Creatures_from_Japan</code></li> <li><code>Planets_and_Moons</code></li> <li><code>Roman_Deities</code></li> <li><code>Scottish_Islands</code></li> <li><code>US_Cities</code></li> <li><code>Wild_Cats</code></li> </ul> <p>To obtain a generated host name, call <code>GetHostNameSuggestion</code>, which returns a host name based on the current theme.</p>"
+          "documentation":"<p>The stack's host name theme, with spaces are replaced by underscores. The theme is used to generate host names for the stack's instances. By default, <code>HostnameTheme</code> is set to <code>Layer_Dependent</code>, which creates host names by appending integers to the layer's short name. The other themes are:</p> <ul> <li><code>Baked_Goods</code></li> <li><code>Clouds</code></li> <li><code>Europe_Cities</code></li> <li><code>Fruits</code></li> <li><code>Greek_Deities</code></li> <li><code>Legendary_creatures_from_Japan</code></li> <li><code>Planets_and_Moons</code></li> <li><code>Roman_Deities</code></li> <li><code>Scottish_Islands</code></li> <li><code>US_Cities</code></li> <li><code>Wild_Cats</code></li> </ul> <p>To obtain a generated host name, call <code>GetHostNameSuggestion</code>, which returns a host name based on the current theme.</p>"
         },
         "DefaultAvailabilityZone":{
           "shape":"String",
@@ -2176,7 +2207,7 @@
         "CustomCookbooksSource":{"shape":"Source"},
         "DefaultSshKeyName":{
           "shape":"String",
-          "documentation":"<p>A default SSH key for the stack instances. You can override this value when you create or update an instance.</p>"
+          "documentation":"<p>A default Amazon EC2 key pair name. The default value is none. If you specify a key pair name, AWS OpsWorks installs the public key on the instance and you can use the private key with an SSH client to log in to the instance. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html\"> Using SSH to Communicate with an Instance</a> and <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html\"> Managing SSH Access</a>. You can override this setting by specifying a different key pair, or no key pair, when you <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html\"> create an instance</a>. </p>"
         },
         "DefaultRootDeviceType":{
           "shape":"RootDeviceType",
@@ -2438,7 +2469,7 @@
       "members":{
         "VolumeId":{
           "shape":"String",
-          "documentation":"<p>The volume ID.</p>"
+          "documentation":"<p>The AWS OpsWorks volume ID, which is the GUID that AWS OpsWorks assigned to the instance when you registered the volume with the stack, not the Amazon EC2 volume ID.</p>"
         }
       }
     },
@@ -2914,6 +2945,32 @@
       "type":"double",
       "box":true
     },
+    "EbsBlockDevice":{
+      "type":"structure",
+      "members":{
+        "SnapshotId":{
+          "shape":"String",
+          "documentation":"<p>The snapshot ID.</p>"
+        },
+        "Iops":{
+          "shape":"Integer",
+          "documentation":"<p>The number of I/O operations per second (IOPS) that the volume supports. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html\">EbsBlockDevice</a>.</p>"
+        },
+        "VolumeSize":{
+          "shape":"Integer",
+          "documentation":"<p>The volume size, in GiB. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html\">EbsBlockDevice</a>.</p>"
+        },
+        "VolumeType":{
+          "shape":"VolumeType",
+          "documentation":"<p>The volume type. <code>gp2</code> for General Purpose (SSD) volumes, <code>io1</code> for Provisioned IOPS (SSD) volumes, and <code>standard</code> for Magnetic volumes.</p>"
+        },
+        "DeleteOnTermination":{
+          "shape":"Boolean",
+          "documentation":"<p>Whether the volume is deleted on instance termination.</p>"
+        }
+      },
+      "documentation":"<p>Describes an Amazon EBS volume. This data type maps directly to the Amazon EC2 <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html\">EbsBlockDevice</a> data type.</p>"
+    },
     "ElasticIp":{
       "type":"structure",
       "members":{
@@ -3126,7 +3183,7 @@
         },
         "SshKeyName":{
           "shape":"String",
-          "documentation":"<p>The instance SSH key name.</p>"
+          "documentation":"<p>The instance's Amazon EC2 key pair name.</p>"
         },
         "SshHostRsaKeyFingerprint":{
           "shape":"String",
@@ -3150,11 +3207,15 @@
         },
         "RootDeviceType":{
           "shape":"RootDeviceType",
-          "documentation":"<p>The instance root device type. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device\">Storage for the Root Device</a>.</p>"
+          "documentation":"<p>The instance's root device type. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device\">Storage for the Root Device</a>.</p>"
         },
         "RootDeviceVolumeId":{
           "shape":"String",
           "documentation":"<p>The root device volume ID.</p>"
+        },
+        "BlockDeviceMappings":{
+          "shape":"BlockDeviceMappings",
+          "documentation":"<p>An array of <code>BlockDeviceMapping</code> objects that specify the instance's block device mappings.</p>"
         },
         "InstallUpdatesOnBoot":{
           "shape":"Boolean",
@@ -3163,6 +3224,10 @@
         "EbsOptimized":{
           "shape":"Boolean",
           "documentation":"<p>Whether this is an Amazon EBS-optimized instance.</p>"
+        },
+        "ReportedAgentVersion":{
+          "shape":"String",
+          "documentation":"<p>The instance's reported AWS OpsWorks agent version.</p>"
         },
         "ReportedOs":{
           "shape":"ReportedOs",
@@ -4068,7 +4133,7 @@
         "CustomCookbooksSource":{"shape":"Source"},
         "DefaultSshKeyName":{
           "shape":"String",
-          "documentation":"<p>A default SSH key for the stack's instances. You can override this value when you create or update an instance.</p>"
+          "documentation":"<p>A default Amazon EC2 key pair for the stack's instances. You can override this value when you create or update an instance.</p>"
         },
         "CreatedAt":{
           "shape":"DateTime",
@@ -4268,7 +4333,7 @@
         },
         "Environment":{
           "shape":"EnvironmentVariables",
-          "documentation":"<p>An array of <code>EnvironmentVariable</code> objects that specify environment variables to be associated with the app. You can specify up to ten environment variables. After you deploy the app, these variables are defined on the associated app server instances.</p> <note>This parameter is supported only by Chef 11.10 stacks. If you have specified one or more environment variables, you cannot modify the stack's Chef version.</note>"
+          "documentation":"<p>An array of <code>EnvironmentVariable</code> objects that specify environment variables to be associated with the app. After you deploy the app, these variables are defined on the associated app server instances.For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment\"> Environment Variables</a>.</p> <p> There is no specific limit on the number of environment variables. However, the size of the associated data structure - which includes the variables' names, values, and protected flag values - cannot exceed 10 KB (10240 Bytes). This limit should accommodate most if not all use cases. Exceeding it will cause an exception with the message, \"Environment: is too large (maximum is 10KB).\" </p> <note>This parameter is supported only by Chef 11.10 stacks. If you have specified one or more environment variables, you cannot modify the stack's Chef version. </note>"
         }
       }
     },
@@ -4320,7 +4385,7 @@
         },
         "SshKeyName":{
           "shape":"String",
-          "documentation":"<p>The instance SSH key name.</p>"
+          "documentation":"<p>The instance's Amazon EC2 key name.</p>"
         },
         "Architecture":{
           "shape":"Architecture",
@@ -4350,7 +4415,7 @@
         },
         "Shortname":{
           "shape":"String",
-          "documentation":"<p>The layer short name, which is used internally by AWS OpsWorksand by Chef. The short name is also used as the name for the directory where your app files are installed. It can have a maximum of 200 characters and must be in the following format: /\\A[a-z0-9\\-\\_\\.]+\\Z/.</p>"
+          "documentation":"<p>For custom layers only, use this parameter to specify the layer's short name, which is used internally by AWS OpsWorksand by Chef. The short name is also used as the name for the directory where your app files are installed. It can have a maximum of 200 characters and must be in the following format: /\\A[a-z0-9\\-\\_\\.]+\\Z/.</p> <p>The built-in layers' short names are defined by AWS OpsWorks. For more information, see the <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/layers.html\">Layer Reference</a></p>"
         },
         "Attributes":{
           "shape":"LayerAttributes",
@@ -4459,7 +4524,7 @@
         },
         "HostnameTheme":{
           "shape":"String",
-          "documentation":"<p>The stack's new host name theme, with spaces are replaced by underscores. The theme is used to generate host names for the stack's instances. By default, <code>HostnameTheme</code> is set to <code>Layer_Dependent</code>, which creates host names by appending integers to the layer's short name. The other themes are:</p> <ul> <li><code>Baked_Goods</code></li> <li><code>Clouds</code></li> <li><code>European_Cities</code></li> <li><code>Fruits</code></li> <li><code>Greek_Deities</code></li> <li><code>Legendary_Creatures_from_Japan</code></li> <li><code>Planets_and_Moons</code></li> <li><code>Roman_Deities</code></li> <li><code>Scottish_Islands</code></li> <li><code>US_Cities</code></li> <li><code>Wild_Cats</code></li> </ul> <p>To obtain a generated host name, call <code>GetHostNameSuggestion</code>, which returns a host name based on the current theme.</p>"
+          "documentation":"<p>The stack's new host name theme, with spaces are replaced by underscores. The theme is used to generate host names for the stack's instances. By default, <code>HostnameTheme</code> is set to <code>Layer_Dependent</code>, which creates host names by appending integers to the layer's short name. The other themes are:</p> <ul> <li><code>Baked_Goods</code></li> <li><code>Clouds</code></li> <li><code>Europe_Cities</code></li> <li><code>Fruits</code></li> <li><code>Greek_Deities</code></li> <li><code>Legendary_creatures_from_Japan</code></li> <li><code>Planets_and_Moons</code></li> <li><code>Roman_Deities</code></li> <li><code>Scottish_Islands</code></li> <li><code>US_Cities</code></li> <li><code>Wild_Cats</code></li> </ul> <p>To obtain a generated host name, call <code>GetHostNameSuggestion</code>, which returns a host name based on the current theme.</p>"
         },
         "DefaultAvailabilityZone":{
           "shape":"String",
@@ -4488,7 +4553,7 @@
         "CustomCookbooksSource":{"shape":"Source"},
         "DefaultSshKeyName":{
           "shape":"String",
-          "documentation":"<p>A default SSH key for the stack instances. You can override this value when you create or update an instance.</p>"
+          "documentation":"<p>A default Amazon EC2 key pair name. The default value is none. If you specify a key pair name, AWS OpsWorks installs the public key on the instance and you can use the private key with an SSH client to log in to the instance. For more information, see <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html\"> Using SSH to Communicate with an Instance</a> and <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html\"> Managing SSH Access</a>. You can override this setting by specifying a different key pair, or no key pair, when you <a href=\"http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html\"> create an instance</a>. </p>"
         },
         "DefaultRootDeviceType":{
           "shape":"RootDeviceType",
@@ -4684,6 +4749,14 @@
     "VolumeConfigurations":{
       "type":"list",
       "member":{"shape":"VolumeConfiguration"}
+    },
+    "VolumeType":{
+      "type":"string",
+      "enum":[
+        "gp2",
+        "io1",
+        "standard"
+      ]
     },
     "Volumes":{
       "type":"list",
