@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.1.19
+// AWS SDK for JavaScript v2.1.20
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -38,7 +38,7 @@ AWS.apiLoader.services['dynamodb']['2012-08-10'] = {"metadata":{"apiVersion":"20
 AWS.apiLoader.services['elastictranscoder'] = {};
 AWS.ElasticTranscoder = AWS.Service.defineService('elastictranscoder', [ '2012-09-25' ]);
 
-AWS.apiLoader.services['elastictranscoder']['2012-09-25'] = {"version":"2.0","metadata":{"apiVersion":"2012-09-25","endpointPrefix":"elastictranscoder","serviceFullName":"Amazon Elastic Transcoder","signatureVersion":"v4","protocol":"rest-json"},"operations":{"CancelJob":{"http":{"method":"DELETE","requestUri":"/2012-09-25/jobs/{Id}","responseCode":202},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","members":{}}},"CreateJob":{"http":{"requestUri":"/2012-09-25/jobs","responseCode":201},"input":{"type":"structure","required":["PipelineId","Input"],"members":{"PipelineId":{},"Input":{"shape":"S5"},"Output":{"shape":"Sg"},"Outputs":{"type":"list","member":{"shape":"Sg"}},"OutputKeyPrefix":{},"Playlists":{"type":"list","member":{"type":"structure","members":{"Name":{},"Format":{},"OutputKeys":{"shape":"S1f"},"HlsContentProtection":{"shape":"S1g"}}}},"UserMetadata":{"shape":"S1k"}}},"output":{"type":"structure","members":{"Job":{"shape":"S1n"}}}},"CreatePipeline":{"http":{"requestUri":"/2012-09-25/pipelines","responseCode":201},"input":{"type":"structure","required":["Name","InputBucket","Role"],"members":{"Name":{},"InputBucket":{},"OutputBucket":{},"Role":{},"AwsKmsKeyArn":{},"Notifications":{"shape":"S20"},"ContentConfig":{"shape":"S22"},"ThumbnailConfig":{"shape":"S22"}}},"output":{"type":"structure","members":{"Pipeline":{"shape":"S2b"},"Warnings":{"shape":"S2d"}}}},"CreatePreset":{"http":{"requestUri":"/2012-09-25/presets","responseCode":201},"input":{"type":"structure","required":["Name","Container"],"members":{"Name":{},"Description":{},"Container":{},"Video":{"shape":"S2h"},"Audio":{"shape":"S2x"},"Thumbnails":{"shape":"S34"}}},"output":{"type":"structure","members":{"Preset":{"shape":"S38"},"Warning":{}}}},"DeletePipeline":{"http":{"method":"DELETE","requestUri":"/2012-09-25/pipelines/{Id}","responseCode":202},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","members":{}}},"DeletePreset":{"http":{"method":"DELETE","requestUri":"/2012-09-25/presets/{Id}","responseCode":202},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","members":{}}},"ListJobsByPipeline":{"http":{"method":"GET","requestUri":"/2012-09-25/jobsByPipeline/{PipelineId}"},"input":{"type":"structure","required":["PipelineId"],"members":{"PipelineId":{"location":"uri","locationName":"PipelineId"},"Ascending":{"location":"querystring","locationName":"Ascending"},"PageToken":{"location":"querystring","locationName":"PageToken"}}},"output":{"type":"structure","members":{"Jobs":{"shape":"S3h"},"NextPageToken":{}}}},"ListJobsByStatus":{"http":{"method":"GET","requestUri":"/2012-09-25/jobsByStatus/{Status}"},"input":{"type":"structure","required":["Status"],"members":{"Status":{"location":"uri","locationName":"Status"},"Ascending":{"location":"querystring","locationName":"Ascending"},"PageToken":{"location":"querystring","locationName":"PageToken"}}},"output":{"type":"structure","members":{"Jobs":{"shape":"S3h"},"NextPageToken":{}}}},"ListPipelines":{"http":{"method":"GET","requestUri":"/2012-09-25/pipelines"},"input":{"type":"structure","members":{"Ascending":{"location":"querystring","locationName":"Ascending"},"PageToken":{"location":"querystring","locationName":"PageToken"}}},"output":{"type":"structure","members":{"Pipelines":{"type":"list","member":{"shape":"S2b"}},"NextPageToken":{}}}},"ListPresets":{"http":{"method":"GET","requestUri":"/2012-09-25/presets"},"input":{"type":"structure","members":{"Ascending":{"location":"querystring","locationName":"Ascending"},"PageToken":{"location":"querystring","locationName":"PageToken"}}},"output":{"type":"structure","members":{"Presets":{"type":"list","member":{"shape":"S38"}},"NextPageToken":{}}}},"ReadJob":{"http":{"method":"GET","requestUri":"/2012-09-25/jobs/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","members":{"Job":{"shape":"S1n"}}}},"ReadPipeline":{"http":{"method":"GET","requestUri":"/2012-09-25/pipelines/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","members":{"Pipeline":{"shape":"S2b"},"Warnings":{"shape":"S2d"}}}},"ReadPreset":{"http":{"method":"GET","requestUri":"/2012-09-25/presets/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","members":{"Preset":{"shape":"S38"}}}},"TestRole":{"http":{"requestUri":"/2012-09-25/roleTests","responseCode":200},"input":{"type":"structure","required":["Role","InputBucket","OutputBucket","Topics"],"members":{"Role":{},"InputBucket":{},"OutputBucket":{},"Topics":{"type":"list","member":{}}}},"output":{"type":"structure","members":{"Success":{},"Messages":{"type":"list","member":{}}}}},"UpdatePipeline":{"http":{"method":"PUT","requestUri":"/2012-09-25/pipelines/{Id}","responseCode":200},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"},"Name":{},"InputBucket":{},"Role":{},"AwsKmsKeyArn":{},"Notifications":{"shape":"S20"},"ContentConfig":{"shape":"S22"},"ThumbnailConfig":{"shape":"S22"}}},"output":{"type":"structure","members":{"Pipeline":{"shape":"S2b"},"Warnings":{"shape":"S2d"}}}},"UpdatePipelineNotifications":{"http":{"requestUri":"/2012-09-25/pipelines/{Id}/notifications"},"input":{"type":"structure","required":["Id","Notifications"],"members":{"Id":{"location":"uri","locationName":"Id"},"Notifications":{"shape":"S20"}}},"output":{"type":"structure","members":{"Pipeline":{"shape":"S2b"}}}},"UpdatePipelineStatus":{"http":{"requestUri":"/2012-09-25/pipelines/{Id}/status"},"input":{"type":"structure","required":["Id","Status"],"members":{"Id":{"location":"uri","locationName":"Id"},"Status":{}}},"output":{"type":"structure","members":{"Pipeline":{"shape":"S2b"}}}}},"shapes":{"S5":{"type":"structure","members":{"Key":{},"FrameRate":{},"Resolution":{},"AspectRatio":{},"Interlaced":{},"Container":{},"Encryption":{"shape":"Sc"}}},"Sc":{"type":"structure","members":{"Mode":{},"Key":{},"KeyMd5":{},"InitializationVector":{}}},"Sg":{"type":"structure","members":{"Key":{},"ThumbnailPattern":{},"ThumbnailEncryption":{"shape":"Sc"},"Rotate":{},"PresetId":{},"SegmentDuration":{},"Watermarks":{"shape":"Sk"},"AlbumArt":{"shape":"So"},"Composition":{"shape":"Sw"},"Captions":{"shape":"S10"},"Encryption":{"shape":"Sc"}}},"Sk":{"type":"list","member":{"type":"structure","members":{"PresetWatermarkId":{},"InputKey":{},"Encryption":{"shape":"Sc"}}}},"So":{"type":"structure","members":{"MergePolicy":{},"Artwork":{"type":"list","member":{"type":"structure","members":{"InputKey":{},"MaxWidth":{},"MaxHeight":{},"SizingPolicy":{},"PaddingPolicy":{},"AlbumArtFormat":{},"Encryption":{"shape":"Sc"}}}}}},"Sw":{"type":"list","member":{"type":"structure","members":{"TimeSpan":{"type":"structure","members":{"StartTime":{},"Duration":{}}}}}},"S10":{"type":"structure","members":{"MergePolicy":{},"CaptionSources":{"type":"list","member":{"type":"structure","members":{"Key":{},"Language":{},"TimeOffset":{},"Label":{},"Encryption":{"shape":"Sc"}}}},"CaptionFormats":{"type":"list","member":{"type":"structure","members":{"Format":{},"Pattern":{},"Encryption":{"shape":"Sc"}}}}}},"S1f":{"type":"list","member":{}},"S1g":{"type":"structure","members":{"Method":{},"Key":{},"KeyMd5":{},"InitializationVector":{},"LicenseAcquisitionUrl":{},"KeyStoragePolicy":{}}},"S1k":{"type":"map","key":{},"value":{}},"S1n":{"type":"structure","members":{"Id":{},"Arn":{},"PipelineId":{},"Input":{"shape":"S5"},"Output":{"shape":"S1o"},"Outputs":{"type":"list","member":{"shape":"S1o"}},"OutputKeyPrefix":{},"Playlists":{"type":"list","member":{"type":"structure","members":{"Name":{},"Format":{},"OutputKeys":{"shape":"S1f"},"HlsContentProtection":{"shape":"S1g"},"Status":{},"StatusDetail":{}}}},"Status":{},"UserMetadata":{"shape":"S1k"}}},"S1o":{"type":"structure","members":{"Id":{},"Key":{},"ThumbnailPattern":{},"ThumbnailEncryption":{"shape":"Sc"},"Rotate":{},"PresetId":{},"SegmentDuration":{},"Status":{},"StatusDetail":{},"Duration":{"type":"long"},"Width":{"type":"integer"},"Height":{"type":"integer"},"Watermarks":{"shape":"Sk"},"AlbumArt":{"shape":"So"},"Composition":{"shape":"Sw"},"Captions":{"shape":"S10"},"Encryption":{"shape":"Sc"},"AppliedColorSpaceConversion":{}}},"S20":{"type":"structure","members":{"Progressing":{},"Completed":{},"Warning":{},"Error":{}}},"S22":{"type":"structure","members":{"Bucket":{},"StorageClass":{},"Permissions":{"type":"list","member":{"type":"structure","members":{"GranteeType":{},"Grantee":{},"Access":{"type":"list","member":{}}}}}}},"S2b":{"type":"structure","members":{"Id":{},"Arn":{},"Name":{},"Status":{},"InputBucket":{},"OutputBucket":{},"Role":{},"AwsKmsKeyArn":{},"Notifications":{"shape":"S20"},"ContentConfig":{"shape":"S22"},"ThumbnailConfig":{"shape":"S22"}}},"S2d":{"type":"list","member":{"type":"structure","members":{"Code":{},"Message":{}}}},"S2h":{"type":"structure","members":{"Codec":{},"CodecOptions":{"type":"map","key":{},"value":{}},"KeyframesMaxDist":{},"FixedGOP":{},"BitRate":{},"FrameRate":{},"MaxFrameRate":{},"Resolution":{},"AspectRatio":{},"MaxWidth":{},"MaxHeight":{},"DisplayAspectRatio":{},"SizingPolicy":{},"PaddingPolicy":{},"Watermarks":{"type":"list","member":{"type":"structure","members":{"Id":{},"MaxWidth":{},"MaxHeight":{},"SizingPolicy":{},"HorizontalAlign":{},"HorizontalOffset":{},"VerticalAlign":{},"VerticalOffset":{},"Opacity":{},"Target":{}}}}}},"S2x":{"type":"structure","members":{"Codec":{},"SampleRate":{},"BitRate":{},"Channels":{},"CodecOptions":{"type":"structure","members":{"Profile":{}}}}},"S34":{"type":"structure","members":{"Format":{},"Interval":{},"Resolution":{},"AspectRatio":{},"MaxWidth":{},"MaxHeight":{},"SizingPolicy":{},"PaddingPolicy":{}}},"S38":{"type":"structure","members":{"Id":{},"Arn":{},"Name":{},"Description":{},"Container":{},"Audio":{"shape":"S2x"},"Video":{"shape":"S2h"},"Thumbnails":{"shape":"S34"},"Type":{}}},"S3h":{"type":"list","member":{"shape":"S1n"}}},"paginators":{"ListJobsByPipeline":{"input_token":"PageToken","output_token":"NextPageToken","result_key":"Jobs"},"ListJobsByStatus":{"input_token":"PageToken","output_token":"NextPageToken","result_key":"Jobs"},"ListPipelines":{"input_token":"PageToken","output_token":"NextPageToken","result_key":"Pipelines"},"ListPresets":{"input_token":"PageToken","output_token":"NextPageToken","result_key":"Presets"}},"waiters":{"JobComplete":{"operation":"ReadJob","success_type":"output","success_path":"Job.Status","interval":30,"max_attempts":120,"success_value":"Complete","failure_value":["Canceled","Error"]}}};
+AWS.apiLoader.services['elastictranscoder']['2012-09-25'] = {"version":"2.0","metadata":{"apiVersion":"2012-09-25","endpointPrefix":"elastictranscoder","serviceFullName":"Amazon Elastic Transcoder","signatureVersion":"v4","protocol":"rest-json"},"operations":{"CancelJob":{"http":{"method":"DELETE","requestUri":"/2012-09-25/jobs/{Id}","responseCode":202},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","members":{}}},"CreateJob":{"http":{"requestUri":"/2012-09-25/jobs","responseCode":201},"input":{"type":"structure","required":["PipelineId","Input"],"members":{"PipelineId":{},"Input":{"shape":"S5"},"Output":{"shape":"Sk"},"Outputs":{"type":"list","member":{"shape":"Sk"}},"OutputKeyPrefix":{},"Playlists":{"type":"list","member":{"type":"structure","members":{"Name":{},"Format":{},"OutputKeys":{"shape":"S1i"},"HlsContentProtection":{"shape":"S1j"}}}},"UserMetadata":{"shape":"S1n"}}},"output":{"type":"structure","members":{"Job":{"shape":"S1q"}}}},"CreatePipeline":{"http":{"requestUri":"/2012-09-25/pipelines","responseCode":201},"input":{"type":"structure","required":["Name","InputBucket","Role"],"members":{"Name":{},"InputBucket":{},"OutputBucket":{},"Role":{},"AwsKmsKeyArn":{},"Notifications":{"shape":"S22"},"ContentConfig":{"shape":"S24"},"ThumbnailConfig":{"shape":"S24"}}},"output":{"type":"structure","members":{"Pipeline":{"shape":"S2d"},"Warnings":{"shape":"S2f"}}}},"CreatePreset":{"http":{"requestUri":"/2012-09-25/presets","responseCode":201},"input":{"type":"structure","required":["Name","Container"],"members":{"Name":{},"Description":{},"Container":{},"Video":{"shape":"S2j"},"Audio":{"shape":"S2z"},"Thumbnails":{"shape":"S36"}}},"output":{"type":"structure","members":{"Preset":{"shape":"S3a"},"Warning":{}}}},"DeletePipeline":{"http":{"method":"DELETE","requestUri":"/2012-09-25/pipelines/{Id}","responseCode":202},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","members":{}}},"DeletePreset":{"http":{"method":"DELETE","requestUri":"/2012-09-25/presets/{Id}","responseCode":202},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","members":{}}},"ListJobsByPipeline":{"http":{"method":"GET","requestUri":"/2012-09-25/jobsByPipeline/{PipelineId}"},"input":{"type":"structure","required":["PipelineId"],"members":{"PipelineId":{"location":"uri","locationName":"PipelineId"},"Ascending":{"location":"querystring","locationName":"Ascending"},"PageToken":{"location":"querystring","locationName":"PageToken"}}},"output":{"type":"structure","members":{"Jobs":{"shape":"S3j"},"NextPageToken":{}}}},"ListJobsByStatus":{"http":{"method":"GET","requestUri":"/2012-09-25/jobsByStatus/{Status}"},"input":{"type":"structure","required":["Status"],"members":{"Status":{"location":"uri","locationName":"Status"},"Ascending":{"location":"querystring","locationName":"Ascending"},"PageToken":{"location":"querystring","locationName":"PageToken"}}},"output":{"type":"structure","members":{"Jobs":{"shape":"S3j"},"NextPageToken":{}}}},"ListPipelines":{"http":{"method":"GET","requestUri":"/2012-09-25/pipelines"},"input":{"type":"structure","members":{"Ascending":{"location":"querystring","locationName":"Ascending"},"PageToken":{"location":"querystring","locationName":"PageToken"}}},"output":{"type":"structure","members":{"Pipelines":{"type":"list","member":{"shape":"S2d"}},"NextPageToken":{}}}},"ListPresets":{"http":{"method":"GET","requestUri":"/2012-09-25/presets"},"input":{"type":"structure","members":{"Ascending":{"location":"querystring","locationName":"Ascending"},"PageToken":{"location":"querystring","locationName":"PageToken"}}},"output":{"type":"structure","members":{"Presets":{"type":"list","member":{"shape":"S3a"}},"NextPageToken":{}}}},"ReadJob":{"http":{"method":"GET","requestUri":"/2012-09-25/jobs/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","members":{"Job":{"shape":"S1q"}}}},"ReadPipeline":{"http":{"method":"GET","requestUri":"/2012-09-25/pipelines/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","members":{"Pipeline":{"shape":"S2d"},"Warnings":{"shape":"S2f"}}}},"ReadPreset":{"http":{"method":"GET","requestUri":"/2012-09-25/presets/{Id}"},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"}}},"output":{"type":"structure","members":{"Preset":{"shape":"S3a"}}}},"TestRole":{"http":{"requestUri":"/2012-09-25/roleTests","responseCode":200},"input":{"type":"structure","required":["Role","InputBucket","OutputBucket","Topics"],"members":{"Role":{},"InputBucket":{},"OutputBucket":{},"Topics":{"type":"list","member":{}}}},"output":{"type":"structure","members":{"Success":{},"Messages":{"type":"list","member":{}}}}},"UpdatePipeline":{"http":{"method":"PUT","requestUri":"/2012-09-25/pipelines/{Id}","responseCode":200},"input":{"type":"structure","required":["Id"],"members":{"Id":{"location":"uri","locationName":"Id"},"Name":{},"InputBucket":{},"Role":{},"AwsKmsKeyArn":{},"Notifications":{"shape":"S22"},"ContentConfig":{"shape":"S24"},"ThumbnailConfig":{"shape":"S24"}}},"output":{"type":"structure","members":{"Pipeline":{"shape":"S2d"},"Warnings":{"shape":"S2f"}}}},"UpdatePipelineNotifications":{"http":{"requestUri":"/2012-09-25/pipelines/{Id}/notifications"},"input":{"type":"structure","required":["Id","Notifications"],"members":{"Id":{"location":"uri","locationName":"Id"},"Notifications":{"shape":"S22"}}},"output":{"type":"structure","members":{"Pipeline":{"shape":"S2d"}}}},"UpdatePipelineStatus":{"http":{"requestUri":"/2012-09-25/pipelines/{Id}/status"},"input":{"type":"structure","required":["Id","Status"],"members":{"Id":{"location":"uri","locationName":"Id"},"Status":{}}},"output":{"type":"structure","members":{"Pipeline":{"shape":"S2d"}}}}},"shapes":{"S5":{"type":"structure","members":{"Key":{},"FrameRate":{},"Resolution":{},"AspectRatio":{},"Interlaced":{},"Container":{},"Encryption":{"shape":"Sc"},"DetectedProperties":{"type":"structure","members":{"Width":{"type":"integer"},"Height":{"type":"integer"},"FrameRate":{},"FileSize":{"type":"long"},"DurationMillis":{"type":"long"}}}}},"Sc":{"type":"structure","members":{"Mode":{},"Key":{},"KeyMd5":{},"InitializationVector":{}}},"Sk":{"type":"structure","members":{"Key":{},"ThumbnailPattern":{},"ThumbnailEncryption":{"shape":"Sc"},"Rotate":{},"PresetId":{},"SegmentDuration":{},"Watermarks":{"shape":"Sn"},"AlbumArt":{"shape":"Sr"},"Composition":{"shape":"Sz"},"Captions":{"shape":"S13"},"Encryption":{"shape":"Sc"}}},"Sn":{"type":"list","member":{"type":"structure","members":{"PresetWatermarkId":{},"InputKey":{},"Encryption":{"shape":"Sc"}}}},"Sr":{"type":"structure","members":{"MergePolicy":{},"Artwork":{"type":"list","member":{"type":"structure","members":{"InputKey":{},"MaxWidth":{},"MaxHeight":{},"SizingPolicy":{},"PaddingPolicy":{},"AlbumArtFormat":{},"Encryption":{"shape":"Sc"}}}}}},"Sz":{"type":"list","member":{"type":"structure","members":{"TimeSpan":{"type":"structure","members":{"StartTime":{},"Duration":{}}}}}},"S13":{"type":"structure","members":{"MergePolicy":{},"CaptionSources":{"type":"list","member":{"type":"structure","members":{"Key":{},"Language":{},"TimeOffset":{},"Label":{},"Encryption":{"shape":"Sc"}}}},"CaptionFormats":{"type":"list","member":{"type":"structure","members":{"Format":{},"Pattern":{},"Encryption":{"shape":"Sc"}}}}}},"S1i":{"type":"list","member":{}},"S1j":{"type":"structure","members":{"Method":{},"Key":{},"KeyMd5":{},"InitializationVector":{},"LicenseAcquisitionUrl":{},"KeyStoragePolicy":{}}},"S1n":{"type":"map","key":{},"value":{}},"S1q":{"type":"structure","members":{"Id":{},"Arn":{},"PipelineId":{},"Input":{"shape":"S5"},"Output":{"shape":"S1r"},"Outputs":{"type":"list","member":{"shape":"S1r"}},"OutputKeyPrefix":{},"Playlists":{"type":"list","member":{"type":"structure","members":{"Name":{},"Format":{},"OutputKeys":{"shape":"S1i"},"HlsContentProtection":{"shape":"S1j"},"Status":{},"StatusDetail":{}}}},"Status":{},"UserMetadata":{"shape":"S1n"},"Timing":{"type":"structure","members":{"SubmitTimeMillis":{"type":"long"},"StartTimeMillis":{"type":"long"},"FinishTimeMillis":{"type":"long"}}}}},"S1r":{"type":"structure","members":{"Id":{},"Key":{},"ThumbnailPattern":{},"ThumbnailEncryption":{"shape":"Sc"},"Rotate":{},"PresetId":{},"SegmentDuration":{},"Status":{},"StatusDetail":{},"Duration":{"type":"long"},"Width":{"type":"integer"},"Height":{"type":"integer"},"FrameRate":{},"FileSize":{"type":"long"},"DurationMillis":{"type":"long"},"Watermarks":{"shape":"Sn"},"AlbumArt":{"shape":"Sr"},"Composition":{"shape":"Sz"},"Captions":{"shape":"S13"},"Encryption":{"shape":"Sc"},"AppliedColorSpaceConversion":{}}},"S22":{"type":"structure","members":{"Progressing":{},"Completed":{},"Warning":{},"Error":{}}},"S24":{"type":"structure","members":{"Bucket":{},"StorageClass":{},"Permissions":{"type":"list","member":{"type":"structure","members":{"GranteeType":{},"Grantee":{},"Access":{"type":"list","member":{}}}}}}},"S2d":{"type":"structure","members":{"Id":{},"Arn":{},"Name":{},"Status":{},"InputBucket":{},"OutputBucket":{},"Role":{},"AwsKmsKeyArn":{},"Notifications":{"shape":"S22"},"ContentConfig":{"shape":"S24"},"ThumbnailConfig":{"shape":"S24"}}},"S2f":{"type":"list","member":{"type":"structure","members":{"Code":{},"Message":{}}}},"S2j":{"type":"structure","members":{"Codec":{},"CodecOptions":{"type":"map","key":{},"value":{}},"KeyframesMaxDist":{},"FixedGOP":{},"BitRate":{},"FrameRate":{},"MaxFrameRate":{},"Resolution":{},"AspectRatio":{},"MaxWidth":{},"MaxHeight":{},"DisplayAspectRatio":{},"SizingPolicy":{},"PaddingPolicy":{},"Watermarks":{"type":"list","member":{"type":"structure","members":{"Id":{},"MaxWidth":{},"MaxHeight":{},"SizingPolicy":{},"HorizontalAlign":{},"HorizontalOffset":{},"VerticalAlign":{},"VerticalOffset":{},"Opacity":{},"Target":{}}}}}},"S2z":{"type":"structure","members":{"Codec":{},"SampleRate":{},"BitRate":{},"Channels":{},"CodecOptions":{"type":"structure","members":{"Profile":{}}}}},"S36":{"type":"structure","members":{"Format":{},"Interval":{},"Resolution":{},"AspectRatio":{},"MaxWidth":{},"MaxHeight":{},"SizingPolicy":{},"PaddingPolicy":{}}},"S3a":{"type":"structure","members":{"Id":{},"Arn":{},"Name":{},"Description":{},"Container":{},"Audio":{"shape":"S2z"},"Video":{"shape":"S2j"},"Thumbnails":{"shape":"S36"},"Type":{}}},"S3j":{"type":"list","member":{"shape":"S1q"}}},"paginators":{"ListJobsByPipeline":{"input_token":"PageToken","output_token":"NextPageToken","result_key":"Jobs"},"ListJobsByStatus":{"input_token":"PageToken","output_token":"NextPageToken","result_key":"Jobs"},"ListPipelines":{"input_token":"PageToken","output_token":"NextPageToken","result_key":"Pipelines"},"ListPresets":{"input_token":"PageToken","output_token":"NextPageToken","result_key":"Presets"}},"waiters":{"JobComplete":{"operation":"ReadJob","success_type":"output","success_path":"Job.Status","interval":30,"max_attempts":120,"success_value":"Complete","failure_value":["Canceled","Error"]}}};
 AWS.apiLoader.services['kinesis'] = {};
 AWS.Kinesis = AWS.Service.defineService('kinesis', [ '2013-12-02' ]);
 
@@ -255,7 +255,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.1.19',
+  VERSION: '2.1.20',
 
 
   Signers: {},
@@ -391,9 +391,6 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
   constructor: function CognitoIdentityCredentials(params) {
     AWS.Credentials.call(this);
     this.expired = true;
-    this.webIdentityCredentials = new AWS.WebIdentityCredentials(params);
-    this.cognito = new AWS.CognitoIdentity({params: params});
-    this.sts = new AWS.STS();
     this.params = params;
     this.data = null;
     this.identityId = null;
@@ -403,6 +400,7 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
 
   refresh: function refresh(callback) {
     var self = this;
+    self.createClients();
     self.data = null;
     self.identityId = null;
     self.getId(function(err) {
@@ -516,6 +514,15 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
   },
 
 
+  createClients: function() {
+    this.webIdentityCredentials = this.webIdentityCredentials ||
+      new AWS.WebIdentityCredentials(this.params);
+    this.cognito = this.cognito ||
+      new AWS.CognitoIdentity({params: this.params});
+    this.sts = this.sts || new AWS.STS();
+  },
+
+
   cacheId: function cacheId(data) {
     this.identityId = data.IdentityId;
     this.params.IdentityId = this.identityId;
@@ -618,12 +625,12 @@ AWS.SAMLCredentials = AWS.util.inherit(AWS.Credentials, {
     AWS.Credentials.call(this);
     this.expired = true;
     this.params = params;
-    this.service = new AWS.STS({params: this.params});
   },
 
 
   refresh: function refresh(callback) {
     var self = this;
+    self.createClients();
     if (!callback) callback = function(err) { if (err) throw err; };
 
     self.service.assumeRoleWithSAML(function (err, data) {
@@ -632,7 +639,13 @@ AWS.SAMLCredentials = AWS.util.inherit(AWS.Credentials, {
       }
       callback(err);
     });
+  },
+
+
+  createClients: function() {
+    this.service = this.service || new AWS.STS({params: this.params});
   }
+
 });
 
 },{"../core":3}],8:[function(require,module,exports){
@@ -651,12 +664,12 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
       this.params.RoleSessionName =
         this.params.RoleSessionName || 'temporary-credentials';
     }
-    this.service = new AWS.STS({params: this.params});
   },
 
 
   refresh: function refresh(callback) {
     var self = this;
+    self.createClients();
     if (!callback) callback = function(err) { if (err) throw err; };
 
     self.service.config.credentials = self.masterCredentials;
@@ -676,7 +689,13 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
     while (this.masterCredentials.masterCredentials) {
       this.masterCredentials = this.masterCredentials.masterCredentials;
     }
+  },
+
+
+  createClients: function() {
+    this.service = this.service || new AWS.STS({params: this.params});
   }
+
 });
 
 },{"../core":3}],9:[function(require,module,exports){
@@ -690,13 +709,13 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
     this.expired = true;
     this.params = params;
     this.params.RoleSessionName = this.params.RoleSessionName || 'web-identity';
-    this.service = new AWS.STS({params: this.params});
     this.data = null;
   },
 
 
   refresh: function refresh(callback) {
     var self = this;
+    self.createClients();
     if (!callback) callback = function(err) { if (err) throw err; };
 
     self.service.assumeRoleWithWebIdentity(function (err, data) {
@@ -707,7 +726,13 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
       }
       callback(err);
     });
+  },
+
+
+  createClients: function() {
+    this.service = this.service || new AWS.STS({params: this.params});
   }
+
 });
 
 },{"../core":3}],10:[function(require,module,exports){
