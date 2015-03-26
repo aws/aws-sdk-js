@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2010-05-08",
     "endpointPrefix":"iam",
@@ -2182,7 +2183,7 @@
           "documentation":"<p> The request processing has failed because of an unknown error, exception or failure. </p>"
         }
       ],
-      "documentation":"<p>Retrieves information about all IAM users, groups, and roles in your account, including their relationships to one another and their policies. Use this API to obtain a snapshot of the configuration of IAM permissions (users, groups, roles, and their policies) in your account.</p> <p>You can optionally filter the results using the <code>Filter</code> parameter. You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters.</p>"
+      "documentation":"<p>Retrieves information about all IAM users, groups, and roles in your account, including their relationships to one another and their policies. Use this API to obtain a snapshot of the configuration of IAM permissions (users, groups, roles, and policies) in your account.</p> <p>You can optionally filter the results using the <code>Filter</code> parameter. You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters.</p>"
     },
     "GetAccountPasswordPolicy":{
       "name":"GetAccountPasswordPolicy",
@@ -4708,7 +4709,7 @@
         },
         "PolicyArn":{"shape":"arnType"}
       },
-      "documentation":"<p>Contains information about an attached policy.</p> <p>An attached policy is a managed policy that has been attached to a user, group, or role. This data type is used as a response element in the <a>ListAttachedGroupPolicies</a>, <a>ListAttachedRolePolicies</a>, and <a>ListAttachedUserPolicies</a> actions. </p> <p>For more information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Contains information about an attached policy.</p> <p>An attached policy is a managed policy that has been attached to a user, group, or role. This data type is used as a response element in the <a>ListAttachedGroupPolicies</a>, <a>ListAttachedRolePolicies</a>, <a>ListAttachedUserPolicies</a>, and <a>GetAccountAuthorizationDetails</a> actions. </p> <p>For more information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
     },
     "BootstrapDatum":{
       "type":"blob",
@@ -5427,7 +5428,9 @@
       "enum":[
         "User",
         "Role",
-        "Group"
+        "Group",
+        "LocalManagedPolicy",
+        "AWSManagedPolicy"
       ]
     },
     "GenerateCredentialReportResponse":{
@@ -5449,7 +5452,7 @@
       "members":{
         "Filter":{
           "shape":"entityListType",
-          "documentation":"<p>A list of entity types (user, group, or role) for filtering the results.</p>"
+          "documentation":"<p>A list of entity types (user, group, role, local managed policy, or AWS managed policy) for filtering the results.</p>"
         },
         "MaxItems":{
           "shape":"maxItemsType",
@@ -5475,6 +5478,10 @@
         "RoleDetailList":{
           "shape":"roleDetailListType",
           "documentation":"<p>A list containing information about IAM roles.</p>"
+        },
+        "Policies":{
+          "shape":"ManagedPolicyDetailListType",
+          "documentation":"<p>A list containing information about managed policies.</p>"
         },
         "IsTruncated":{
           "shape":"booleanType",
@@ -5947,7 +5954,11 @@
         },
         "GroupPolicyList":{
           "shape":"policyDetailListType",
-          "documentation":"<p>A list of the group's policies.</p>"
+          "documentation":"<p>A list of the inline policies embedded in the group.</p>"
+        },
+        "AttachedManagedPolicies":{
+          "shape":"attachedPoliciesListType",
+          "documentation":"<p>A list of the managed policies attached to the group.</p>"
         }
       },
       "documentation":"<p>Contains information about an IAM group, including all of the group's policies. </p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p>"
@@ -6955,6 +6966,57 @@
       "exception":true,
       "documentation":"<p> The request was rejected because the policy document was malformed. The error message describes the specific error. </p>"
     },
+    "ManagedPolicyDetail":{
+      "type":"structure",
+      "members":{
+        "PolicyName":{
+          "shape":"policyNameType",
+          "documentation":"<p>The friendly name (not ARN) identifying the policy.</p>"
+        },
+        "PolicyId":{
+          "shape":"idType",
+          "documentation":"<p>The stable and unique string identifying the policy. </p> <p>For more information about IDs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide.</p>"
+        },
+        "Arn":{"shape":"arnType"},
+        "Path":{
+          "shape":"policyPathType",
+          "documentation":"<p>The path to the policy.</p> <p>For more information about paths, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide.</p>"
+        },
+        "DefaultVersionId":{
+          "shape":"policyVersionIdType",
+          "documentation":"<p>The identifier for the version of the policy that is set as the default (operative) version. </p> <p>For more information about policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>Using IAM</i> guide. </p>"
+        },
+        "AttachmentCount":{
+          "shape":"attachmentCountType",
+          "documentation":"<p>The number of principal entities (users, groups, and roles) that the policy is attached to.</p>"
+        },
+        "IsAttachable":{
+          "shape":"booleanType",
+          "documentation":"<p>Specifies whether the policy can be attached to an IAM user, group, or role. </p>"
+        },
+        "Description":{
+          "shape":"policyDescriptionType",
+          "documentation":"<p>A friendly description of the policy.</p>"
+        },
+        "CreateDate":{
+          "shape":"dateType",
+          "documentation":"<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time format</a>, when the policy was created.</p>"
+        },
+        "UpdateDate":{
+          "shape":"dateType",
+          "documentation":"<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time format</a>, when the policy was last updated.</p> <p>When a policy has only one version, this field contains the date and time when the policy was created. When a policy has more than one version, this field contains the date and time when the most recent policy version was created. </p>"
+        },
+        "PolicyVersionList":{
+          "shape":"policyDocumentVersionListType",
+          "documentation":"<p>A list containing information about the versions of the policy.</p>"
+        }
+      },
+      "documentation":"<p>Contains information about a managed policy, including the policy's ARN, versions, and the number of principal entities (users, groups, and roles) that the policy is attached to.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p> <p>For more information about managed policies, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+    },
+    "ManagedPolicyDetailListType":{
+      "type":"list",
+      "member":{"shape":"ManagedPolicyDetail"}
+    },
     "NoSuchEntityException":{
       "type":"structure",
       "members":{
@@ -7149,7 +7211,7 @@
       "members":{
         "Document":{
           "shape":"policyDocumentType",
-          "documentation":"<p>The policy document.</p> <p>The policy document is returned in the response to the <a>GetPolicyVersion</a> operation. It is not included in the response to the <a>ListPolicyVersions</a> operation. </p>"
+          "documentation":"<p>The policy document.</p> <p>The policy document is returned in the response to the <a>GetPolicyVersion</a> operation. It is not included in the response to the <a>ListPolicyVersions</a> or <a>GetAccountAuthorizationDetails</a> operations. </p>"
         },
         "VersionId":{
           "shape":"policyVersionIdType",
@@ -7164,7 +7226,7 @@
           "documentation":"<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time format</a>, when the policy version was created.</p>"
         }
       },
-      "documentation":"<p>Contains information about a version of a managed policy.</p> <p>This data type is used as a response element in the <a>CreatePolicyVersion</a>, <a>GetPolicyVersion</a>, and <a>ListPolicyVersions</a> actions. </p> <p>For more information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
+      "documentation":"<p>Contains information about a version of a managed policy.</p> <p>This data type is used as a response element in the <a>CreatePolicyVersion</a>, <a>GetPolicyVersion</a>, <a>ListPolicyVersions</a>, and <a>GetAccountAuthorizationDetails</a> actions. </p> <p>For more information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>"
     },
     "PutGroupPolicyRequest":{
       "type":"structure",
@@ -7388,7 +7450,11 @@
         "InstanceProfileList":{"shape":"instanceProfileListType"},
         "RolePolicyList":{
           "shape":"policyDetailListType",
-          "documentation":"<p>A list of the role's access (permissions) policies. </p>"
+          "documentation":"<p>A list of inline policies embedded in the role. These policies are the role's access (permissions) policies.</p>"
+        },
+        "AttachedManagedPolicies":{
+          "shape":"attachedPoliciesListType",
+          "documentation":"<p>A list of managed policies attached to the role. These policies are the role's access (permissions) policies.</p>"
         }
       },
       "documentation":"<p>Contains information about an IAM role, including all of the role's policies.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p>"
@@ -7882,11 +7948,15 @@
         },
         "UserPolicyList":{
           "shape":"policyDetailListType",
-          "documentation":"<p>A list of the user's policies.</p>"
+          "documentation":"<p>A list of the inline policies embedded in the user.</p>"
         },
         "GroupList":{
           "shape":"groupNameListType",
           "documentation":"<p>A list of IAM groups that the user is in.</p>"
+        },
+        "AttachedManagedPolicies":{
+          "shape":"attachedPoliciesListType",
+          "documentation":"<p>A list of the managed policies attached to the user.</p>"
         }
       },
       "documentation":"<p>Contains information about an IAM user, including all the user's policies and all the IAM groups the user is in.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p>"
