@@ -1127,7 +1127,7 @@
           "documentation":"<p> The <code>Id</code> of the preset to use for this job. The preset determines the audio, video, and thumbnail settings that Elastic Transcoder uses for transcoding. </p>"
         },
         "SegmentDuration":{
-          "shape":"Float",
+          "shape":"FloatString",
           "documentation":"<p><important>(Outputs in Fragmented MP4 or MPEG-TS format only.</important>If you specify a preset in <code>PresetId</code> for which the value of <code>Container</code> is <code>fmp4</code> (Fragmented MP4) or <code>ts</code> (MPEG-TS), <code>SegmentDuration</code> is the target maximum duration of each segment in seconds. For <code>HLSv3</code> format playlists, each media segment is stored in a separate <code>.ts</code> file. For <code>HLSv4</code> and <code>Smooth</code> playlists, all media segments for an output are stored in a single file. Each segment is approximately the length of the <code>SegmentDuration</code>, though individual segments might be shorter or longer.</p> <p>The range of valid values is 1 to 60 seconds. If the duration of the video is not evenly divisible by <code>SegmentDuration</code>, the duration of the last segment is the remainder of total length/SegmentDuration.</p> <p>Elastic Transcoder creates an output-specific playlist for each output <code>HLS</code> output that you specify in OutputKeys. To add an output to the master playlist for this job, include it in the <code>OutputKeys</code> of the associated playlist.</p>"
         },
         "Watermarks":{
@@ -1378,6 +1378,32 @@
       "min":0,
       "max":255
     },
+    "DetectedProperties":{
+      "type":"structure",
+      "members":{
+        "Width":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The detected width of the input file, in pixels.</p>"
+        },
+        "Height":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The detected height of the input file, in pixels.</p>"
+        },
+        "FrameRate":{
+          "shape":"FloatString",
+          "documentation":"<p>The detected frame rate of the input file, in frames per second.</p>"
+        },
+        "FileSize":{
+          "shape":"NullableLong",
+          "documentation":"<p>The detected file size of the input file, in bytes.</p>"
+        },
+        "DurationMillis":{
+          "shape":"NullableLong",
+          "documentation":"<p>The detected duration of the input file, in milliseconds.</p>"
+        }
+      },
+      "documentation":"<p>The detected properties of the input file. Elastic Transcoder identifies these values from the input file.</p>"
+    },
     "Digits":{
       "type":"string",
       "pattern":"^\\d{1,5}$"
@@ -1425,7 +1451,7 @@
       "type":"string",
       "pattern":"(^true$)|(^false$)"
     },
-    "Float":{
+    "FloatString":{
       "type":"string",
       "pattern":"^\\d{1,5}(\\.\\d{0,5})?$"
     },
@@ -1545,6 +1571,10 @@
         "UserMetadata":{
           "shape":"UserMetadata",
           "documentation":"<p>User-defined metadata that you want to associate with an Elastic Transcoder job. You specify metadata in <code>key/value</code> pairs, and you can add up to 10 <code>key/value</code> pairs per job. Elastic Transcoder does not guarantee that <code>key/value</code> pairs will be returned in the same order in which you specify them.</p> <p>Metadata <code>keys</code> and <code>values</code> must use characters from the following list:</p> <ul> <li><p><code>0-9</code></p></li> <li><p><code>A-Z</code> and <code>a-z</code></p></li> <li><p><code>Space</code></p></li> <li><p>The following symbols: <code>_.:/=+-%@</code></p></li> </ul>"
+        },
+        "Timing":{
+          "shape":"Timing",
+          "documentation":"<p>Details about the timing of a job.</p>"
         }
       },
       "documentation":"<p>A section of the response body that provides information about the job that is created.</p>"
@@ -1597,6 +1627,10 @@
         "Encryption":{
           "shape":"Encryption",
           "documentation":"<p>The encryption settings, if any, that are used for decrypting your input files. If your input file is encrypted, you must specify the mode that Elastic Transcoder will use to decrypt your file.</p>"
+        },
+        "DetectedProperties":{
+          "shape":"DetectedProperties",
+          "documentation":"<p>The detected properties of the input file.</p>"
         }
       },
       "documentation":"<p>Information about the file that you're transcoding.</p>"
@@ -1629,7 +1663,7 @@
           "documentation":"<p>The value of the <code>Id</code> object for the preset that you want to use for this job. The preset determines the audio, video, and thumbnail settings that Elastic Transcoder uses for transcoding. To use a preset that you created, specify the preset ID that Elastic Transcoder returned in the response when you created the preset. You can also use the Elastic Transcoder system presets, which you can get with <code>ListPresets</code>.</p>"
         },
         "SegmentDuration":{
-          "shape":"Float",
+          "shape":"FloatString",
           "documentation":"<p><important>(Outputs in Fragmented MP4 or MPEG-TS format only.</important>If you specify a preset in <code>PresetId</code> for which the value of <code>Container</code> is <code>fmp4</code> (Fragmented MP4) or <code>ts</code> (MPEG-TS), <code>SegmentDuration</code> is the target maximum duration of each segment in seconds. For <code>HLSv3</code> format playlists, each media segment is stored in a separate <code>.ts</code> file. For <code>HLSv4</code> and <code>Smooth</code> playlists, all media segments for an output are stored in a single file. Each segment is approximately the length of the <code>SegmentDuration</code>, though individual segments might be shorter or longer.</p> <p>The range of valid values is 1 to 60 seconds. If the duration of the video is not evenly divisible by <code>SegmentDuration</code>, the duration of the last segment is the remainder of total length/SegmentDuration.</p> <p>Elastic Transcoder creates an output-specific playlist for each output <code>HLS</code> output that you specify in OutputKeys. To add an output to the master playlist for this job, include it in the <code>OutputKeys</code> of the associated playlist.</p>"
         },
         "Status":{
@@ -1651,6 +1685,18 @@
         "Height":{
           "shape":"NullableInteger",
           "documentation":"<p>Height of the output file, in pixels.</p>"
+        },
+        "FrameRate":{
+          "shape":"FloatString",
+          "documentation":"<p>Frame rate of the output file, in frames per second.</p>"
+        },
+        "FileSize":{
+          "shape":"NullableLong",
+          "documentation":"<p>File size of the output file, in bytes.</p>"
+        },
+        "DurationMillis":{
+          "shape":"NullableLong",
+          "documentation":"<p>Duration of the output file, in milliseconds.</p>"
         },
         "Watermarks":{
           "shape":"JobWatermarks",
@@ -2421,6 +2467,24 @@
         }
       },
       "documentation":"<p>Settings that determine when a clip begins and how long it lasts.</p>"
+    },
+    "Timing":{
+      "type":"structure",
+      "members":{
+        "SubmitTimeMillis":{
+          "shape":"NullableLong",
+          "documentation":"<p>The time the job was submitted to Elastic Transcoder, in epoch milliseconds.</p>"
+        },
+        "StartTimeMillis":{
+          "shape":"NullableLong",
+          "documentation":"<p>The time the job began transcoding, in epoch milliseconds.</p>"
+        },
+        "FinishTimeMillis":{
+          "shape":"NullableLong",
+          "documentation":"<p>The time the job finished transcoding, in epoch milliseconds.</p>"
+        }
+      },
+      "documentation":"<p>Details about the timing of a job.</p>"
     },
     "UpdatePipelineNotificationsRequest":{
       "type":"structure",
