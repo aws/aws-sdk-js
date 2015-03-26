@@ -325,8 +325,12 @@ if AWS.util.isNode()
 describe 'AWS.TemporaryCredentials', ->
   creds = null
 
-  beforeEach ->
+  setupCreds = () ->
     creds = new AWS.TemporaryCredentials(DurationSeconds: 1200)
+
+  setupClients = () ->
+    setupCreds()
+    creds.createClients()
 
   mockSTS = (expireTime, inParams) ->
     if !inParams
@@ -342,6 +346,25 @@ describe 'AWS.TemporaryCredentials', ->
         SecretAccessKey: 'SECRET'
         SessionToken: 'TOKEN'
         Expiration: expireTime
+
+  describe 'constructor', ->
+    setupCreds()
+    it 'constructs service clients lazily', ->
+      expect(creds.service).not.to.exist
+
+  describe 'createClients', ->
+    beforeEach -> setupCreds()
+
+    it 'constructs clients if not present', ->
+      expect(creds.service).not.to.exist
+      creds.createClients()
+      expect(creds.service).to.exist
+
+    it 'does not construct clients if already present', ->
+      creds.createClients()
+      service = creds.service
+      creds.createClients()
+      expect(service).to.eql(creds.service)
 
   describe 'masterCredentials', ->
     it 'seeds masterCredentials from global credentials', ->
@@ -364,11 +387,14 @@ describe 'AWS.TemporaryCredentials', ->
 
   describe 'needsRefresh', ->
     it 'can be expired based on expire time from STS response', ->
+      setupClients()
       mockSTS(new Date(0))
       creds.refresh(->)
       expect(creds.needsRefresh()).to.equal(true)
 
   describe 'refresh', ->
+    beforeEach -> setupClients()
+
     it 'loads temporary credentials from STS using getSessionToken', ->
       mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000))
       creds.refresh(->)
@@ -379,6 +405,7 @@ describe 'AWS.TemporaryCredentials', ->
 
     it 'loads temporary credentials from STS using assumeRole if RoleArn is provided', ->
       creds = new AWS.TemporaryCredentials(RoleArn: 'ARN')
+      creds.createClients()
       mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000),
         RoleArn: 'ARN', RoleSessionName: 'temporary-credentials')
       creds.refresh(->)
@@ -401,8 +428,12 @@ describe 'AWS.TemporaryCredentials', ->
 describe 'AWS.WebIdentityCredentials', ->
   creds = null
 
-  beforeEach ->
+  setupCreds = () ->
     creds = new AWS.WebIdentityCredentials(WebIdentityToken: 'token', RoleArn: 'arn')
+
+  setupClients = () ->
+    setupCreds()
+    creds.createClients()
 
   mockSTS = (expireTime) ->
     helpers.spyOn(creds.service, 'assumeRoleWithWebIdentity').andCallFake (cb) ->
@@ -417,7 +448,28 @@ describe 'AWS.WebIdentityCredentials', ->
           Expiration: expireTime
         OtherProperty: true
 
+  describe 'constructor', ->
+    it 'lazily constructs service clients', ->
+      setupCreds()
+      expect(creds.service).not.to.exist
+
+  describe 'createClients', ->
+    beforeEach -> setupCreds()
+
+    it 'constructs service clients if not present', ->
+      expect(creds.service).not.to.exist
+      creds.createClients()
+      expect(creds.service).to.exist
+
+    it 'does not construct service clients if present', ->
+      creds.createClients()
+      service = creds.service
+      creds.createClients()
+      expect(service).to.eql(creds.service)
+
   describe 'refresh', ->
+    beforeEach -> setupClients()
+
     it 'loads federated credentials from STS', ->
       mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000))
       creds.refresh(->)
@@ -441,8 +493,12 @@ describe 'AWS.WebIdentityCredentials', ->
 describe 'AWS.SAMLCredentials', ->
   creds = null
 
-  beforeEach ->
+  setupCreds = () ->
     creds = new AWS.SAMLCredentials(SAMLAssertion: 'token', RoleArn: 'arn', PrincipalArn: 'arn')
+
+  setupClients = () ->
+    setupCreds()
+    creds.createClients()
 
   mockSTS = (expireTime) ->
     helpers.spyOn(creds.service, 'assumeRoleWithSAML').andCallFake (cb) ->
@@ -454,7 +510,27 @@ describe 'AWS.SAMLCredentials', ->
         SessionToken: 'TOKEN'
         Expiration: expireTime
 
+  describe 'constructor', ->
+    setupCreds()
+    it 'constructs service clients lazily', ->
+      expect(creds.service).not.to.exist
+
+  describe 'createClients', ->
+    setupCreds()
+    it 'constructs clients if not present', ->
+      expect(creds.service).not.to.exist
+      creds.createClients()
+      expect(creds.service).to.exist
+
+    it 'does not construct clients if already present', ->
+      creds.createClients()
+      service = creds.service
+      creds.createClients()
+      expect(service).to.eql(creds.service)
+
   describe 'refresh', ->
+    beforeEach -> setupClients()
+
     it 'loads federated credentials from STS', ->
       mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000))
       creds.refresh(->)
@@ -492,6 +568,10 @@ describe 'AWS.CognitoIdentityCredentials', ->
     creds = new AWS.CognitoIdentityCredentials(params)
     helpers.spyOn(creds, 'cacheId').andCallThrough()
 
+  setupClients = (params) ->
+    setupCreds(params)
+    creds.createClients()
+
   describe 'constructor (browser)', ->
     beforeEach -> helpers.spyOn(AWS.util, 'isBrowser').andReturn(true)
 
@@ -526,6 +606,11 @@ describe 'AWS.CognitoIdentityCredentials', ->
       setupCreds(Logins: {provider1: 'Token'})
       expect(creds.params.IdentityId).not.to.exist
 
+    it 'constructs service clients lazily', ->
+      expect(creds.cognito).not.to.exist
+      expect(creds.sts).not.to.exist
+      expect(creds.webIdentityCredentials).not.to.exist
+
   describe 'clearCachedId', ->
     it 'should clear cache information', ->
       creds.setStorage('id', 'MYID')
@@ -534,8 +619,30 @@ describe 'AWS.CognitoIdentityCredentials', ->
       expect(creds.getStorage('id')).not.to.exist
       expect(creds.getStorage('providers')).not.to.exist
 
-  describe 'refresh', ->
+  describe 'createClients', ->
     beforeEach -> setupCreds()
+
+    it 'constructs service clients if not present', ->
+      expect(creds.cognito).not.to.exist
+      expect(creds.sts).not.to.exist
+      expect(creds.webIdentityCredentials).not.to.exist
+      creds.createClients()
+      expect(creds.cognito).to.exist
+      expect(creds.sts).to.exist
+      expect(creds.webIdentityCredentials).to.exist
+
+    it 'does not construct clients if already present', ->
+      creds.createClients()
+      cognito = creds.cognito
+      sts = creds.sts
+      webIdentityCredentials = creds.webIdentityCredentials
+      creds.createClients()
+      expect(creds.cognito).to.eql(cognito)
+      expect(creds.sts).to.eql(sts)
+      expect(creds.webIdentityCredentials).to.eql(webIdentityCredentials)
+
+  describe 'refresh', ->
+    beforeEach -> setupClients()
 
     it 'runs getId, getCredentialsForIdentity when no role is passed in', ->
       delete creds.cognito.config.params.RoleArn
@@ -551,7 +658,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
       ]
       helpers.spyOn(creds.cognito, 'getCredentialsForIdentity').andCallThrough()
       creds.refresh(->)
-      expect(creds.cognito.getCredentialsForIdentity.calls.length).to.eql(1);
+      expect(creds.cognito.getCredentialsForIdentity.calls.length).to.eql(1)
       expect(creds.identityId).to.equal('IDENTITY-ID2')
       expect(creds.accessKeyId).to.equal('KEY')
       expect(creds.secretAccessKey).to.equal('SECRET')
@@ -583,7 +690,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
       expect(creds.cacheId.calls.length).to.equal(1)
 
     it 'does not call getId if IdentityId is passed in', ->
-      setupCreds IdentityId: 'MYID'
+      setupClients IdentityId: 'MYID'
       helpers.mockResponses [
         {data: {Token: 'TOKEN', IdentityId: 'MYID2'}, error: null}
       ]
@@ -685,7 +792,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
       beforeEach -> helpers.spyOn(AWS.util, 'isBrowser').andReturn(true)
 
       it 'caches IdentityId into localStorage on successful handshake', ->
-        setupCreds Logins: provider1: 'TOKEN1', provider2: 'TOKEN2'
+        setupClients Logins: provider1: 'TOKEN1', provider2: 'TOKEN2'
         helpers.mockResponses [
           {data: {IdentityId: 'IDENTITY-ID1'}, error: null},
           {data: {Token: 'TOKEN', IdentityId: 'IDENTITY-ID2'}, error: null}
@@ -702,7 +809,7 @@ describe 'AWS.CognitoIdentityCredentials', ->
         expect(creds.getStorage('providers')).to.equal('provider1,provider2')
 
       it 'returns cached id in getId call', ->
-        setupCreds Logins: provider1: 'TOKEN1', provider2: 'TOKEN2'
+        setupClients Logins: provider1: 'TOKEN1', provider2: 'TOKEN2'
         helpers.mockResponses [
           {data: {IdentityId: 'IDENTITY-ID1'}, error: null},
           {data: {Token: 'TOKEN', IdentityId: 'IDENTITY-ID2'}, error: null}
