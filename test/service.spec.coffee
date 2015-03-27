@@ -226,7 +226,7 @@ describe 'AWS.Service', ->
 
     it 'should retry on throttle error', ->
       retryableError({code: 'ProvisionedThroughputExceededException', statusCode:400}, true)
-      retryableError({code: 'ThrottlingException', statusCode:400}, true)
+      retryableError({code: 'Throttling', statusCode:400}, true)
 
     it 'should retry on expired credentials error', ->
       retryableError({code: 'ExpiredTokenException', statusCode:400}, true)
