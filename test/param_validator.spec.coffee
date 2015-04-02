@@ -5,19 +5,23 @@ Buffer = AWS.util.Buffer
 describe 'AWS.ParamValidator', ->
   [members, input] = [{}, {}]
 
-  validate = (params) ->
+  validate = (params, callback) ->
     r = input
     if r && !r.xml && !r.payload
       r = AWS.Model.Shape.create(input, {api: {}})
-    new AWS.ParamValidator().validate(r, params)
+    new AWS.ParamValidator().validate r, params, callback
 
   expectValid = (params) ->
-    expect(validate(params)).to.equal(true)
+    callback = (err) ->
+      expect(err).not.to.exist
+    validate params, callback
 
   expectError = (message, params) ->
     if params == undefined
       [message, params] = [undefined, message]
-    expect(-> validate(params)).to.throw(message)
+    callback = (err) ->
+      expect(err).to.exist
+    validate params, callback
 
   # empty input (nil or {}) means no arguments are accepted
   describe 'empty input', ->
