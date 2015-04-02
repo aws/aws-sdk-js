@@ -1176,6 +1176,10 @@
         "HlsContentProtection":{
           "shape":"HlsContentProtection",
           "documentation":"<p>The HLS content protection settings, if any, that you want Elastic Transcoder to apply to the output files associated with this playlist.</p>"
+        },
+        "PlayReadyDrm":{
+          "shape":"PlayReadyDrm",
+          "documentation":"<p>The DRM settings, if any, that you want Elastic Transcoder to apply to the output files associated with this playlist.</p>"
         }
       },
       "documentation":"<p>Information about the master playlist.</p>"
@@ -1773,6 +1777,10 @@
       "min":0,
       "max":255
     },
+    "KeyIdGuid":{
+      "type":"string",
+      "pattern":"(^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$)|(^[0-9A-Fa-f]{32}$)"
+    },
     "KeyStoragePolicy":{
       "type":"string",
       "pattern":"(^NoStore$)|(^WithVariantPlaylists$)"
@@ -1944,6 +1952,10 @@
       "min":1,
       "max":40
     },
+    "NonEmptyBase64EncodedString":{
+      "type":"string",
+      "pattern":"(^(?:[A-Za-z0-9\\+/]{4})*(?:[A-Za-z0-9\\+/]{2}==|[A-Za-z0-9\\+/]{3}=)?$)"
+    },
     "Notifications":{
       "type":"structure",
       "members":{
@@ -1968,6 +1980,11 @@
     },
     "NullableInteger":{"type":"integer"},
     "NullableLong":{"type":"long"},
+    "OneTo512String":{
+      "type":"string",
+      "min":1,
+      "max":512
+    },
     "Opacity":{
       "type":"string",
       "pattern":"^\\d{1,3}(\\.\\d{0,20})?$"
@@ -2084,6 +2101,40 @@
       "type":"string",
       "pattern":"(^\\d{1,3}(\\.\\d{0,5})?%$)|(^\\d{1,4}?px$)"
     },
+    "PlayReadyDrm":{
+      "type":"structure",
+      "members":{
+        "Format":{
+          "shape":"PlayReadyDrmFormatString",
+          "documentation":"<p>The type of DRM, if any, that you want Elastic Transcoder to apply to the output files associated with this playlist.</p>"
+        },
+        "Key":{
+          "shape":"NonEmptyBase64EncodedString",
+          "documentation":"<p>The DRM key for your file, provided by your DRM license provider. The key must be base64-encoded, and it must be one of the following bit lengths before being base64-encoded:</p> <p><code>128</code>, <code>192</code>, or <code>256</code>. </p> <p>The key must also be encrypted by using AWS KMS.</p>"
+        },
+        "KeyMd5":{
+          "shape":"NonEmptyBase64EncodedString",
+          "documentation":"<p>The MD5 digest of the key used for DRM on your file, and that you want Elastic Transcoder to use as a checksum to make sure your key was not corrupted in transit. The key MD5 must be base64-encoded, and it must be exactly 16 bytes before being base64-encoded.</p>"
+        },
+        "KeyId":{
+          "shape":"KeyIdGuid",
+          "documentation":"<p>The ID for your DRM key, so that your DRM license provider knows which key to provide.</p> <p>The key ID must be provided in big endian, and Elastic Transcoder will convert it to little endian before inserting it into the PlayReady DRM headers. If you are unsure whether your license server provides your key ID in big or little endian, check with your DRM provider.</p>"
+        },
+        "InitializationVector":{
+          "shape":"ZeroTo255String",
+          "documentation":"<p>The series of random bits created by a random bit generator, unique for every encryption operation, that you want Elastic Transcoder to use to encrypt your files. The initialization vector must be base64-encoded, and it must be exactly 8 bytes long before being base64-encoded. If no initialization vector is provided, Elastic Transcoder generates one for you.</p>"
+        },
+        "LicenseAcquisitionUrl":{
+          "shape":"OneTo512String",
+          "documentation":"<p>The location of the license key required to play DRM content. The URL must be an absolute path, and is referenced by the PlayReady header. The PlayReady header is referenced in the protection header of the client manifest for Smooth Streaming outputs, and in the EXT-X-DXDRM and EXT-XDXDRMINFO metadata tags for HLS playlist outputs. An example URL looks like this: <programlisting>https://www.example.com/exampleKey/</programlisting></p>"
+        }
+      },
+      "documentation":"<p>The PlayReady DRM settings, if any, that you want Elastic Transcoder to apply to the output files associated with this playlist.</p> <p>PlayReady DRM encrypts your media files using <code>AES-CTR</code> encryption.</p> <p>If you use DRM for an <code>HLSv3</code> playlist, your outputs must have a master playlist.</p>"
+    },
+    "PlayReadyDrmFormatString":{
+      "type":"string",
+      "pattern":"(^microsoft$)|(^discretix-3.0$)"
+    },
     "Playlist":{
       "type":"structure",
       "members":{
@@ -2102,6 +2153,10 @@
         "HlsContentProtection":{
           "shape":"HlsContentProtection",
           "documentation":"<p>The HLS content protection settings, if any, that you want Elastic Transcoder to apply to the output files associated with this playlist.</p>"
+        },
+        "PlayReadyDrm":{
+          "shape":"PlayReadyDrm",
+          "documentation":"<p>The DRM settings, if any, that you want Elastic Transcoder to apply to the output files associated with this playlist.</p>"
         },
         "Status":{
           "shape":"JobStatus",
