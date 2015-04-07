@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.1.21
+// AWS SDK for JavaScript v2.1.22
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -255,7 +255,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.1.21',
+  VERSION: '2.1.22',
 
 
   Signers: {},
@@ -769,6 +769,24 @@ AWS.EventListeners = {
     add('VALIDATE_PARAMETERS', 'validate', function VALIDATE_PARAMETERS(req) {
       var rules = req.service.api.operations[req.operation].input;
       new AWS.ParamValidator().validate(rules, req.params);
+    });
+
+    addAsync('COMPUTE_SHA256', 'afterBuild', function COMPUTE_SHA256(req, done) {
+      if (!req.service.api.signatureVersion) return done(); // none
+      if (req.service.getSignerClass(req) === AWS.Signers.V4) {
+        var body = req.httpRequest.body || '';
+        AWS.util.computeSha256(body, function(err, sha) {
+          if (err) {
+            done(err);
+          }
+          else {
+            req.httpRequest.headers['X-Amz-Content-Sha256'] = sha;
+            done();
+          }
+        });
+      } else {
+        done();
+      }
     });
 
     add('SET_CONTENT_LENGTH', 'afterBuild', function SET_CONTENT_LENGTH(req) {
@@ -3445,7 +3463,6 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
           });
       }
     }
-
     if (runFill) self.fillQueue.call(self);
   },
 
@@ -3460,7 +3477,9 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
   validateBody: function validateBody() {
     var self = this;
     self.body = self.service.config.params.Body;
-    if (!self.body) throw new Error('params.Body is required');
+    if (self.body === null || self.body === undefined) {
+      throw new Error('params.Body is required');
+    }
     if (typeof self.body === 'string') {
       self.body = new AWS.util.Buffer(self.body);
     }
@@ -3489,7 +3508,7 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
       self.totalBytes = byteLength(self.body);
     } catch (e) { }
 
-    if (self.totalBytes) {
+    if (typeof self.totalBytes === 'number') {
       var newPartSize = Math.ceil(self.totalBytes / self.maxTotalParts);
       if (newPartSize > self.partSize) self.partSize = newPartSize;
     } else {
@@ -3543,7 +3562,8 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
   fillBuffer: function fillBuffer() {
     var self = this;
     var bodyLen = byteLength(self.body);
-    while (self.activeParts < self.queueSize && self.partPos < bodyLen) {
+    while (!self.isDoneChunking && self.activeParts < self.queueSize
+           && self.partPos <= bodyLen) {
       var endPos = Math.min(self.partPos + self.partSize, bodyLen);
       var buf = self.sliceFn.call(self.body, self.partPos, endPos);
       self.partPos += self.partSize;
@@ -3567,20 +3587,19 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
       self.partBuffer = AWS.util.Buffer.concat([self.partBuffer, buf]);
       self.totalChunkedBytes += buf.length;
     }
-
     if (self.partBuffer.length >= self.partSize) {
       self.nextChunk(self.partBuffer.slice(0, self.partSize));
       self.partBuffer = self.partBuffer.slice(self.partSize);
     } else if (self.isDoneChunking) {
       self.totalBytes = self.totalChunkedBytes;
-      if (self.partBuffer.length > 0) {
+      if (self.partBuffer.length >= 0) {
         self.numParts++;
         self.nextChunk(self.partBuffer);
       }
       self.partBuffer = new AWS.util.Buffer(0);
     }
 
-    self.body.read(0);
+    if (!self.isDoneChunking) self.body.read(0);
   },
 
 
@@ -4348,7 +4367,6 @@ AWS.util.update(AWS.S3.prototype, {
     request.addListener('build', this.addContentType);
     request.addListener('build', this.populateURI);
     request.addListener('build', this.computeContentMd5);
-    request.onAsync('build', this.computeSha256);
     request.addListener('build', this.computeSseCustomerKeyMd5);
     request.addListener('afterBuild', this.addExpect100Continue);
     request.removeListener('validate',
@@ -4482,36 +4500,6 @@ AWS.util.update(AWS.S3.prototype, {
   },
 
 
-  computeSha256: function computeSha256(req, done) {
-    if (req.service.getSignerClass(req) === AWS.Signers.V4) {
-      var body = req.httpRequest.body || '';
-
-      if (AWS.util.isNode()) {
-        var Stream = AWS.util.nodeRequire('stream').Stream;
-        var fs = AWS.util.nodeRequire('fs');
-        if (body instanceof Stream) {
-          if (typeof body.path === 'string') { // assume file object
-            body = fs.createReadStream(body.path);
-          } else { // TODO support other stream types
-            done(new Error('Non-file stream objects are ' +
-                           'not supported with SigV4 in AWS.S3'));
-            return;
-          }
-        }
-      }
-
-      AWS.util.crypto.sha256(body, 'hex', function(err, sha) {
-        if (!err) {
-          req.httpRequest.headers['X-Amz-Content-Sha256'] = sha;
-        }
-        done(err);
-      });
-    } else {
-      done();
-    }
-  },
-
-
   computeSseCustomerKeyMd5: function computeSseCustomerKeyMd5(req) {
     var headers = [
       'x-amz-server-side-encryption-customer-key',
@@ -4629,7 +4617,7 @@ AWS.util.update(AWS.S3.prototype, {
     request.removeListener('build', request.service.addContentType);
     if (!request.params.Body) {
       request.removeListener('build', request.service.computeContentMd5);
-      request.removeListener('build', request.service.computeSha256);
+      request.removeListener('afterBuild', AWS.EventListeners.Core.COMPUTE_SHA256);
     }
   },
 
@@ -4883,6 +4871,8 @@ AWS.Signers.Presign = inherit({
     request.on('sign', signedUrlSigner);
     request.removeListener('afterBuild',
       AWS.EventListeners.Core.SET_CONTENT_LENGTH);
+    request.removeListener('afterBuild',
+      AWS.EventListeners.Core.COMPUTE_SHA256);
 
     request.emit('beforePresign', [request]);
 
@@ -6138,6 +6128,27 @@ var util = {
         });
       }
     }
+  },
+
+
+  computeSha256: function computeSha256(body, done) {
+    if (AWS.util.isNode()) {
+      var Stream = AWS.util.nodeRequire('stream').Stream;
+      var fs = AWS.util.nodeRequire('fs');
+      if (body instanceof Stream) {
+        if (typeof body.path === 'string') { // assume file object
+          body = fs.createReadStream(body.path);
+        } else { // TODO support other stream types
+          return done(new Error('Non-file stream objects are ' +
+                                'not supported with SigV4'));
+        }
+      }
+    }
+
+    AWS.util.crypto.sha256(body, 'hex', function(err, sha) {
+      if (err) done(err);
+      else done(null, sha);
+    });
   }
 
 };
