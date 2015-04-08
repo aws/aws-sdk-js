@@ -8,7 +8,7 @@ before_install:
   - "if [[ `node -v` == v0.8.* ]]; then npm install -g npm || exit 0; fi"
 
 script:
-  - "if [ $INTEGRATION ]; then cucumber.js -f pretty; else npm test; fi"
+    - "if [ $INTEGRATION ]; then cucumber.js -f pretty; else npm -s run-script unit; fi"
   - "cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
 
 env:
