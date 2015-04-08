@@ -8,7 +8,8 @@ before_install:
   - "if [[ `node -v` == v0.8.* ]]; then npm install -g npm || exit 0; fi"
 
 script:
-  - "mocha -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3"
+  - "if [ $INTEGRATION ]; then cucumber.js -f pretty; else npm test; fi"
+  - "cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
 
 env:
   matrix:
