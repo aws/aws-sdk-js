@@ -7,7 +7,6 @@ body = (size) ->
   catch e
     return new AWS.util.Buffer(size)
 
-zerobody = body(0)
 smallbody = body(5)
 bigbody = body(36)
 
@@ -53,18 +52,6 @@ describe 'AWS.S3.ManagedUpload', ->
 
     it 'uses a default service object if none provided', ->
       expect(-> new AWS.S3.ManagedUpload()).to.throw('params.Body is required')
-
-    it 'uploads a zero byte body', ->
-      reqs = helpers.mockResponses [
-        data: ETag: 'ETAG'
-      ]
-
-      send Body: zerobody, ContentEncoding: 'encoding', ->
-        expect(err).not.to.exist
-        expect(data.ETag).to.equal('ETAG')
-        expect(data.Location).to.equal('https://bucket.s3.mock-region.amazonaws.com/key')
-        expect(helpers.operationsForRequests(reqs)).to.eql ['s3.putObject']
-        expect(reqs[0].params.ContentEncoding).to.equal('encoding')
 
     it 'uploads a single part if size is less than min multipart size', ->
       reqs = helpers.mockResponses [
@@ -239,16 +226,6 @@ describe 'AWS.S3.ManagedUpload', ->
 
     if AWS.util.isNode()
       describe 'streaming', ->
-
-        it 'sends a zero length stream in a single putObject', (done) ->
-          stream = AWS.util.buffer.toStream(zerobody)
-          reqs = helpers.mockResponses [data: ETag: 'ETAG']
-          upload = new AWS.S3.ManagedUpload params: { Body: stream }
-          upload.send ->
-            expect(helpers.operationsForRequests(reqs)).to.eql ['s3.putObject']
-            expect(err).not.to.exist
-            done()
-
         it 'sends a small stream in a single putObject', (done) ->
           stream = AWS.util.buffer.toStream(smallbody)
           reqs = helpers.mockResponses [data: ETag: 'ETAG']
