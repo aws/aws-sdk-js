@@ -149,5 +149,8 @@
   },
   "swf": {
     "name": "SWF"
+  },
+  "workspaces": {
+    "name": "WorkSpaces"
   }
 }
