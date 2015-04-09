@@ -10,8 +10,8 @@ Feature: Amazon Lambda
     And the value at "Functions" should be a list
 
   Scenario: Error handling
-    Given I run the "invokeAsync" operation with params:
+    Given I run the "invoke" operation with params:
     """
-    { "FunctionName": "non-exist", "InvokeArgs": "{}" }
+    { "FunctionName": "non-exist" }
     """
     Then the error code should be "ResourceNotFoundException"
