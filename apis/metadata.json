@@ -96,6 +96,9 @@
   "lambda": {
     "name": "Lambda"
   },
+  "machinelearning": {
+    "name": "MachineLearning"
+  },
   "mobileanalytics": {
     "name": "MobileAnalytics"
   },
