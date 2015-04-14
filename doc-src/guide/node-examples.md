@@ -77,7 +77,7 @@ ec2.runInstances(params, function(err, data) {
 
   // Add tags to the instance
   params = {Resources: [instanceId], Tags: [
-    {Key: 'Name', Value: instanceName}
+    {Key: 'Name', Value: 'instanceName'}
   ]};
   ec2.createTags(params, function(err) {
     console.log("Tagging instance", err ? "failure" : "success");
