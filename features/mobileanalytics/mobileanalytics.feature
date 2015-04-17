@@ -21,7 +21,7 @@ Feature: Amazon Mobile Analytics
                 "metrics":{}
             }
         ],
-        "clientContext": "{\"client\":{\"client_id\":\"b4a5edf7-fbd4-6e8f-e0ba-8a5632c76191\"},\"env\":{\"platform\":\"\"},\"services\":{\"mobile_analytics\":{\"app_id\":\"84ed05e7e2044d6699959628557fc2d1\",\"sdk_name\":\"aws-sdk-mobile-analytics-js\",\"sdk_version\":\"0.9.0\"}},\"custom\":{}}"
+        "clientContext": "{\"client\":{\"client_id\":\"b4a5edf7-fbd4-6e8f-e0ba-8a5632c76191\"},\"env\":{\"platform\":\"\"},\"services\":{\"mobile_analytics\":{\"app_id\":\"f94b9f4fd5004f94a31b66187a227610\",\"sdk_name\":\"aws-sdk-mobile-analytics-js\",\"sdk_version\":\"0.9.0\"}},\"custom\":{}}"
     }
     """
     Then the request should be successful
