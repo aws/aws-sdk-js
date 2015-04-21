@@ -1,20 +1,4 @@
 module.exports = function () {
-  /**
-   * Create a single bucket that will be shared by all s3 object scenarios.
-   */
-  this.Before("@s3", "@objects", function (callback) {
-
-    // execute only once
-    if (this.sharedBucket) {
-      callback();
-      return;
-    }
-
-    this.sharedBucket = this.uniqueName('aws-sdk-js-integration');
-    this.s3.createBucket({Bucket:this.sharedBucket}, function(err, data) {
-      callback();
-    });
-  });
 
   this.When(/^I write (buffer )?"([^"]*)" to the key "([^"]*)"$/, function(buffer, contents, key, next) {
     var params = {Bucket: this.sharedBucket, Key: key, Body: buffer ? new Buffer(contents) : contents};
@@ -38,28 +22,28 @@ module.exports = function () {
   });
 
   this.Then(/^the object with the key "([^"]*)" should contain "([^"]*)"$/, function(key, contents, next) {
-    this.assert.equal(this.data.Body.toString().replace("\n", ""), contents);
+    this.assert.equal(this.data.Body.toString().replace('\n', ''), contents);
     next();
   });
 
   this.When(/^I copy an object with the key "([^"]*)" to "([^"]*)"$/, function(key1, key2, next) {
     var params = {
       Bucket: this.sharedBucket, Key: key2, CopySource: '/' + this.sharedBucket + '/' + key1
-    }
+    };
     this.request('s3', 'copyObject', params, next);
   });
 
   this.When(/^I delete the object with the key "([^"]*)"$/, function(key, next) {
-    var params = {Bucket:this.sharedBucket,Key:key};
+    var params = {Bucket: this.sharedBucket, Key: key};
     this.request('s3', 'deleteObject', params, next);
   });
 
   this.Then(/^the object with the key "([^"]*)" should (not )?exist$/, function(key, shouldNotExist, next) {
-    var params = { Bucket:this.sharedBucket, Key:key };
+    var params = { Bucket: this.sharedBucket, Key: key };
     this.eventually(next, function (retry) {
       retry.condition = function() {
         if (shouldNotExist) {
-          return this.error && this.error.code == 'NoSuchKey';
+          return this.error && this.error.code === 'NoSuchKey';
         } else {
           return !this.error;
         }
@@ -70,8 +54,9 @@ module.exports = function () {
 
   this.When(/^I write file "([^"]*)" to the key "([^"]*)"$/, function(filename, key, next) {
     var fs = require('fs');
+    var path = require('path');
     var params = {Bucket: this.sharedBucket, Key: key, Body:
-      fs.createReadStream(__dirname + '/../../extra/fixtures/' + filename)};
+      fs.createReadStream(path.resolve('./features/extra/fixtures/' + filename))};
     this.request('s3', 'putObject', params, next);
   });
 
@@ -132,7 +117,7 @@ module.exports = function () {
     options.method = 'PUT';
     options.headers = {'Content-Length': data.length};
 
-    var req = require('https').request(options, function (res) {
+    require('https').request(options, function (res) {
       res.on('data', function (chunk) {
         world.data += chunk.toString();
       }).on('end', callback);
@@ -161,7 +146,7 @@ module.exports = function () {
     var body = new Buffer(new Array(kb * 1024 + 1).join('x'));
     this.progress = [];
     var req = this.s3.putObject({Bucket: this.sharedBucket, Key: key, Body: body});
-    req.on('httpUploadProgress', function (p) { self.progress.push(p) });
+    req.on('httpUploadProgress', function (p) { self.progress.push(p); });
     req.send(callback);
   });
 
@@ -184,7 +169,7 @@ module.exports = function () {
     var self = this;
     this.progress = [];
     var req = this.s3.getObject({Bucket: this.sharedBucket, Key: key});
-    req.on('httpDownloadProgress', function (p) { self.progress.push(p) });
+    req.on('httpDownloadProgress', function (p) { self.progress.push(p); });
     req.send(callback);
   });
 

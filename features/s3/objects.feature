@@ -5,6 +5,7 @@ Feature: Working with Objects in S3
   As a user of S3
   I need to be able to work with objects in a bucket.
 
+  @setup-bucket
   Scenario: CRUD objects
     When I write "world" to the key "hello"
     Then the object with the key "hello" should exist
@@ -98,7 +99,7 @@ Feature: Working with Objects in S3
 
     And I teardown the local proxy server
 
-  @pagination
+  @pagination @teardown-bucket
   Scenario: Paginating responses
     Given I delete the object with the key "hello"
     And I write "data" to the key "obj0"

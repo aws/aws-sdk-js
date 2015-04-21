@@ -7,7 +7,7 @@ module.exports = function () {
     var deleteBucket = function() {
       delete params.Delete;
       world.request('s3', 'deleteBucket', params, callback, false);
-    }
+    };
 
     world.s3.listObjects(params, function (err, data) {
       if (err) { deleteBucket(); return; }
@@ -23,16 +23,20 @@ module.exports = function () {
     });
   }
 
-  this.Before("@s3", function (callback) {
+  this.Before('@s3', function (callback) {
     this.service = this.s3 = new this.AWS.S3({maxRetries: 100});
     callback();
   });
 
-  this.After("@s3", function (callback) {
-    cleanBucket(this, this.bucket, callback);
+  this.Before('@s3', '@setup-bucket', function (callback) {
+    this.sharedBucket = this.uniqueName('aws-sdk-js-integration');
+    this.s3.createBucket({Bucket: this.sharedBucket}, function(err, data) {
+      if (err) callback.fail(err);
+      callback();
+    });
   });
 
-  this.AfterAll(function(callback) {
+  this.After('@s3', '@teardown-bucket', function(callback) {
     cleanBucket(this, this.sharedBucket, callback);
   });
 

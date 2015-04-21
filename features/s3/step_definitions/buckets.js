@@ -2,7 +2,7 @@ module.exports = function() {
 
   this.When(/^I create a bucket$/, function(next) {
     this.bucket = this.uniqueName('aws-sdk-js-integration');
-    this.request('s3', 'createBucket', {Bucket:this.bucket}, next);
+    this.request('s3', 'createBucket', {Bucket: this.bucket}, next);
   });
 
   this.When(/^I create a bucket with the location constraint "([^"]*)"$/, function(loc, next) {
@@ -12,27 +12,28 @@ module.exports = function() {
   });
 
   this.Then(/^the bucket should exist$/, function(next) {
-    this.s3.waitFor('bucketExists', {Bucket:this.bucket}, next);
+    this.s3.waitFor('bucketExists', {Bucket: this.bucket}, next);
   });
 
   this.When(/^I delete the bucket$/, function(next) {
-    this.request('s3', 'deleteBucket', {Bucket:this.bucket}, next);
+    this.request('s3', 'deleteBucket', {Bucket: this.bucket}, next);
   });
 
   this.Then(/^the bucket should not exist$/, function(next) {
-    this.s3.waitFor('bucketNotExists', {Bucket:this.bucket}, next);
+    this.s3.waitFor('bucketNotExists', {Bucket: this.bucket}, next);
   });
 
   this.Then(/^the bucket should have a location constraint of "([^"]*)"$/, function(loc, next) {
     var self = this;
-    self.s3.getBucketLocation({Bucket:self.bucket}, function(err, data) {
+    self.s3.getBucketLocation({Bucket: self.bucket}, function(err, data) {
+      if (err) next.fail(err);
       self.assert.equal(data.LocationConstraint, loc);
       next();
     });
   });
 
   this.Then(/^I delete the bucket$/, function(next) {
-    this.request('s3', 'deleteBucket', {Bucket:this.bucket}, next);
+    this.request('s3', 'deleteBucket', {Bucket: this.bucket}, next);
   });
 
   this.When(/^I put a transition lifecycle configuration on the bucket with prefix "([^"]*)"$/, function(prefix, callback) {
@@ -78,7 +79,7 @@ module.exports = function() {
           MaxAgeSeconds: 5000
         }]
       }
-    }
+    };
     this.request('s3', 'putBucketCors', params, callback);
   });
 
@@ -87,7 +88,7 @@ module.exports = function() {
   });
 
   this.Then(/^the AllowedMethods list should inclue "([^"]*)"$/, function(value, callback) {
-    this.assert.equal(this.data.CORSRules[0].AllowedMethods.sort().join(" "), "DELETE POST PUT");
+    this.assert.equal(this.data.CORSRules[0].AllowedMethods.sort().join(' '), 'DELETE POST PUT');
     callback();
   });
 
