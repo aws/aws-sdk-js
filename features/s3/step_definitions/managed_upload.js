@@ -1,34 +1,9 @@
 module.exports = function () {
-  this.Before("@s3", "@managed_upload", function (callback) {
-
-    // execute only once
-    if (this.mgrBucket) {
-      callback();
-      return;
-    }
-
-    this.mgrBucket = this.uniqueName('aws-sdk-js-integration');
-    this.s3.createBucket({Bucket:this.mgrBucket}, callback);
-  });
-
-  this.AfterAll(function (callback) {
-    var self = this;
-    if (this.mgrBucket) {
-      this.s3.listObjects({Bucket:this.mgrBucket}, function(err, data) {
-        data.Contents.forEach(function(object) {
-          self.s3.deleteObject({Bucket:self.mgrBucket,Key:object.Key}).send();
-        });
-        setTimeout(function() {
-          self.s3.deleteBucket({Bucket:self.mgrBucket}, callback);
-        }, 1000);
-      });
-    }
-  });
 
   this.When(/^I use S3 managed upload to upload a large buffer$/, function (callback) {
     var self = this;
     var buffer = new Buffer(1024 * 1024 * 12);
-    var params = {Bucket: self.mgrBucket, Key: 'largebuffer', Body: buffer};
+    var params = {Bucket: self.sharedBucket, Key: 'largebuffer', Body: buffer};
     self.s3.upload(params, function (err, data) {
       self.error = err;
       self.data = data;
@@ -45,12 +20,12 @@ module.exports = function () {
   this.When(/^I use S3 managed upload to upload a large stream$/, function (callback) {
     var self = this;
     var stream = this.AWS.util.buffer.toStream(new Buffer(1024 * 1024 * 10));
-    var params = {Bucket: self.mgrBucket, Key: 'largestream', Body: stream};
+    var params = {Bucket: self.sharedBucket, Key: 'largestream', Body: stream};
 
     self.progressEvents = [];
     var progress = function(info) {
       self.progressEvents.push(info);
-    }
+    };
 
     self.s3.upload(params).on('httpUploadProgress', progress).send(function (err, data) {
       self.error = err;
@@ -65,7 +40,7 @@ module.exports = function () {
   });
 
   this.Then(/^I should head the managed upload object$/, function (callback) {
-    var params = {Bucket: this.mgrBucket, Key: 'largestream'};
+    var params = {Bucket: this.sharedBucket, Key: 'largestream'};
     this.request('s3', 'headObject', params, callback);
   });
 

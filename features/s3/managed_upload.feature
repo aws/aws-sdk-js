@@ -2,10 +2,12 @@
 @s3 @managed_upload
 Feature: S3 Managed Upload
 
+  @setup-bucket
   Scenario: Uploading a large buffer
     When I use S3 managed upload to upload a large buffer
     Then the multipart upload should succeed
 
+  @teardown-bucket
   Scenario: Uploading a large stream
     When I use S3 managed upload to upload a large stream
     Then the multipart upload should succeed
