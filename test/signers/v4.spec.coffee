@@ -60,6 +60,11 @@ describe 'AWS.Signers.V4', ->
     it 'should generate proper signature', ->
       expect(signer.signature(creds, datetime)).to.equal(signature)
 
+    it 'should not compute SHA 256 checksum more than once', ->
+      spy = helpers.spyOn(AWS.util.crypto, 'sha256').andCallThrough()
+      signer.signature(creds, datetime)
+      expect(spy.calls.length).to.eql(1)
+
     describe 'caching', ->
       callCount = null
       calls = null

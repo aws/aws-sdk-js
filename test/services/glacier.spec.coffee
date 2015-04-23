@@ -6,6 +6,12 @@ if AWS.util.isNode()
   describe 'AWS.Glacier', ->
 
     glacier = null
+    agentHeader = null
+    if AWS.util.isBrowser()
+      agentHeader = 'X-Amz-User-Agent'
+    else
+      agentHeader = 'User-Agent'
+
     beforeEach ->
       glacier = new AWS.Glacier()
 
@@ -21,6 +27,28 @@ if AWS.util.isNode()
         req.emit('validate', [req])
         req.emit('build', [req])
         expect(req.httpRequest.path).to.equal('/ABC123/vaults')
+
+      it 'computes the SHA 256 checksum header only once', ->
+        spy = helpers.spyOn(AWS.util.crypto, 'sha256').andCallThrough()
+        # Compute checksum of <= 1 megabyte buffer
+        # This will invoke AWS.util.crypto.sha256() only once
+        req = glacier.uploadArchive(vaultName: 'foo', body: 'bar')
+        req.removeAllListeners('sign')
+        req.build()
+        expect(spy.calls.length).to.eql(1)
+
+      it 'adds linear and tree hash headers to payload requests', ->
+        headers =
+          'x-amz-glacier-version': '2012-06-01'
+          'X-Amz-Content-Sha256': 'fcde2b2edba56bf408601fb721fe9b5c338d10ee429ea04fae5511b68fbf8fb9'
+          'x-amz-sha256-tree-hash': 'fcde2b2edba56bf408601fb721fe9b5c338d10ee429ea04fae5511b68fbf8fb9'
+          'Content-Length': 3
+          Host: 'glacier.mock-region.amazonaws.com'
+        headers[agentHeader] = AWS.util.userAgent()
+        req = glacier.uploadArchive(vaultName: 'foo', body: 'bar')
+        req.removeAllListeners('sign')
+        req.build()
+        expect(req.httpRequest.headers).to.eql(headers)
 
     describe 'computeChecksums', ->
       it 'returns correct linear and tree hash for buffer data', ->
