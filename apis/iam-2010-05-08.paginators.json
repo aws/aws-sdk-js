@@ -114,6 +114,12 @@
       "more_results": "IsTruncated",
       "limit_key": "MaxItems",
       "result_key": "VirtualMFADevices"
+    },
+    "GetAccountAuthorizationDetails": {
+      "input_token": "Marker",
+      "output_token": "Marker",
+      "more_results": "IsTruncated",
+      "limit_key": "MaxItems"
     }
   }
 }
