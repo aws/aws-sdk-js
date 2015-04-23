@@ -22,7 +22,7 @@ First, clone the repository from GitHub and cd into the directory:
 ```bash
 git clone git://github.com/aws/aws-sdk-js
 cd aws-sdk-js
-git checkout v2.1.24
+git checkout v2.1.25
 ```
 
 After you have cloned the repository, you need to download the dependency modules
