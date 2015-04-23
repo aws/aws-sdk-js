@@ -1,20 +1,7 @@
 var util = require('util');
-var realExit = process.exit;
 
 module.exports = function () {
-  var world = require('./world.js').WorldInstance;
   this.World = require('./world.js').World;
-
-  world.cleanupTasks = new world.AWS.SequentialExecutor();
-
-  process.exit = function(code) {
-    var finalCallback = function() { realExit(code); };
-    world.cleanupTasks.emit('cleanup', [], finalCallback);
-  };
-
-  this.AfterAll = function(callback) {
-    world.cleanupTasks.onAsync('cleanup', callback.bind(world));
-  };
 
   this.Before(function(callback) {
     this.params = {};
@@ -85,7 +72,7 @@ module.exports = function () {
     callback();
   });
 
-  this.Given(/^I paginate the "([^"]*)" operation with limit (\d+)(?: and max pages (\d+))?$/, function(operation, limit, maxPages, callback) {
+  this.Given(/^I paginate the "([^"]*)" operation(?: with limit (\d+))?(?: and max pages (\d+))?$/, function(operation, limit, maxPages, callback) {
     limit = parseInt(limit);
     if (maxPages) maxPages = parseInt(maxPages);
 

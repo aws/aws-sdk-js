@@ -4,31 +4,35 @@ module.exports = function() {
     callback();
   });
 
-  this.Given(/^I create a ElastiCache security group with prefix name "([^"]*)"$/, function(prefix, callback) {
+  this.Given(/^I create a cache parameter group with name prefix "([^"]*)"$/, function(prefix, callback) {
     this.cacheGroupName = this.uniqueName(prefix);
-    var params = { Description: 'Description', CacheSecurityGroupName: this.cacheGroupName };
-    this.request(null, 'createCacheSecurityGroup', params, callback, false);
+    var params = {
+      Description: 'Description',
+      CacheParameterGroupName: this.cacheGroupName,
+      CacheParameterGroupFamily: 'memcached1.4'
+    };
+    this.request(null, 'createCacheParameterGroup', params, callback, false);
   });
 
-  this.Given(/^the ElastiCache security group name is in the result$/, function(callback) {
-    var name = this.data.CacheSecurityGroup.CacheSecurityGroupName;
+  this.Given(/^the cache parameter group name is in the result$/, function(callback) {
+    var name = this.data.CacheParameterGroup.CacheParameterGroupName;
     this.assert.equal(name, this.cacheGroupName);
     callback();
   });
 
-  this.Given(/^I describe the ElastiCache security group$/, function(callback) {
-    var params = {CacheSecurityGroupName: this.cacheGroupName};
-    this.request(null, 'describeCacheSecurityGroups', params, callback);
+  this.Given(/^I describe the cache parameter groups$/, function(callback) {
+    var params = {CacheParameterGroupName: this.cacheGroupName};
+    this.request(null, 'describeCacheParameterGroups', params, callback);
   });
 
-  this.Then(/^the ElastiCache security group should be described$/, function(callback) {
-    var item = this.data.CacheSecurityGroups[0];
-    this.assert.equal(item.CacheSecurityGroupName, this.cacheGroupName);
+  this.Then(/^the cache parameter group should be described$/, function(callback) {
+    var item = this.data.CacheParameterGroups[0];
+    this.assert.equal(item.CacheParameterGroupName, this.cacheGroupName);
     callback();
   });
 
-  this.Then(/^I delete the ElastiCache security group$/, function(callback) {
-    var params = {CacheSecurityGroupName: this.cacheGroupName};
-    this.request(null, 'deleteCacheSecurityGroup', params, callback);
+  this.Then(/^I delete the cache parameter group$/, function(callback) {
+    var params = {CacheParameterGroupName: this.cacheGroupName};
+    this.request(null, 'deleteCacheParameterGroup', params, callback);
   });
 };
